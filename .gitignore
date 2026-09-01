@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*
+secrets*
+token*
+
+# Satellite source data and derived rasters
+data/raw/
+data/interim/
+data/processed/
+data/licensed/
+*.SAFE/
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.tif
+*.tiff
+*.jp2
+*.img
+*.vrt
+*.nc
+*.hdf
+*.h5
+
+# GIS databases, caches, and packages
+*.gdb/
+*.geodatabase/
+*.gpkg
+*.shp
+*.shx
+*.dbf
+*.sbn
+*.sbx
+*.ppkx
+*.mpkx
+*.lpkx
+*.slpk
+*.crf/
+*.ovr
+*.aux.xml
+
+# ArcGIS local state
+Index/
+scratch/
+Temp/
+*.lock
+
+# Generated exports
+outputs/
+exports/
+deliverables/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

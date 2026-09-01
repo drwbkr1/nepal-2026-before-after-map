@@ -1,0 +1,142 @@
+{
+  "catalog": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+  "query_mode": "exact product Name with .SAFE suffix",
+  "records": [
+    {
+      "stem": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057",
+      "found": true,
+      "catalog": {
+        "@odata.mediaContentType": "application/octet-stream",
+        "Id": "227d0869-e2a2-4258-9624-ffaea31c4058",
+        "Name": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE",
+        "ContentDate": {
+          "Start": "2026-08-16T12:21:16.058226Z",
+          "End": "2026-08-16T12:21:41.056809Z"
+        }
+      }
+    },
+    {
+      "stem": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB",
+      "found": true,
+      "catalog": {
+        "@odata.mediaContentType": "application/octet-stream",
+        "Id": "844b9a32-9aa2-4611-83f6-ae6501c01955",
+        "Name": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE",
+        "ContentDate": {
+          "Start": "2026-08-16T12:21:41.058298Z",
+          "End": "2026-08-16T12:22:06.056880Z"
+        }
+      }
+    },
+    {
+      "stem": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16",
+      "found": true,
+      "catalog": {
+        "@odata.mediaContentType": "application/octet-stream",
+        "Id": "f2682536-f9b8-4b5b-b9eb-5b52417820fa",
+        "Name": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE",
+        "ContentDate": {
+          "Start": "2026-08-19T00:10:36.889384Z",
+          "End": "2026-08-19T00:11:01.887958Z"
+        }
+      }
+    },
+    {
+      "stem": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523",
+      "found": true,
+      "catalog": {
+        "@odata.mediaContentType": "application/octet-stream",
+        "Id": "641ccb0b-5d88-4c44-b558-93b488cd2453",
+        "Name": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+        "ContentDate": {
+          "Start": "2026-08-28T12:21:16.762016Z",
+          "End": "2026-08-28T12:21:41.760540Z"
+        }
+      }
+    },
+    {
+      "stem": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4",
+      "found": true,
+      "catalog": {
+        "@odata.mediaContentType": "application/octet-stream",
+        "Id": "9cb3c885-cfb8-40cc-a44a-8673e772c794",
+        "Name": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE",
+        "ContentDate": {
+          "Start": "2026-08-28T12:21:41.762029Z",
+          "End": "2026-08-28T12:22:06.760553Z"
+        }
+      }
+    },
+    {
+      "stem": "S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B",
+      "found": true,
+      "catalog": {
+        "@odata.mediaContentType": "application/octet-stream",
+        "Id": "36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4",
+        "Name": "S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE",
+        "ContentDate": {
+          "Start": "2026-08-31T00:10:37.647071Z",
+          "End": "2026-08-31T00:11:02.644291Z"
+        }
+      }
+    },
+    {
+      "stem": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUL_20260827T084453",
+      "found": true,
+      "catalog": {
+        "@odata.mediaContentType": "application/octet-stream",
+        "Id": "2f35c992-1ea6-42f9-965c-011ea770d334",
+        "Name": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUL_20260827T084453.SAFE",
+        "ContentDate": {
+          "Start": "2026-08-27T04:56:59.024000Z",
+          "End": "2026-08-27T04:56:59.024000Z"
+        }
+      }
+    },
+    {
+      "stem": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453",
+      "found": true,
+      "catalog": {
+        "@odata.mediaContentType": "application/octet-stream",
+        "Id": "76de2c15-9281-45e3-8f0b-e97085fa6d69",
+        "Name": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE",
+        "ContentDate": {
+          "Start": "2026-08-27T04:56:59.024000Z",
+          "End": "2026-08-27T04:56:59.024000Z"
+        }
+      }
+    },
+    {
+      "stem": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUL_20260812T100317",
+      "found": true,
+      "catalog": {
+        "@odata.mediaContentType": "application/octet-stream",
+        "Id": "d5883e5c-6124-4672-8e68-dd7c84307c8c",
+        "Name": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUL_20260812T100317.SAFE",
+        "ContentDate": {
+          "Start": "2026-08-12T04:57:01.025000Z",
+          "End": "2026-08-12T04:57:01.025000Z"
+        }
+      }
+    },
+    {
+      "stem": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317",
+      "found": true,
+      "catalog": {
+        "@odata.mediaContentType": "application/octet-stream",
+        "Id": "25faa527-2502-4f7d-a703-cfff3e99d483",
+        "Name": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE",
+        "ContentDate": {
+          "Start": "2026-08-12T04:57:01.025000Z",
+          "End": "2026-08-12T04:57:01.025000Z"
+        }
+      }
+    }
+  ],
+  "verified_at_utc": "2026-09-01T03:27:29Z",
+  "result": {
+    "candidate_count": 10,
+    "found_count": 10,
+    "claim_boundary": "Catalog identity only; no pixels downloaded or inspected."
+  }
+}

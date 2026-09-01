@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-MAP-M001",
+  "milestone": "M1_EVENT_GEOMETRY_AND_SOURCE_MANIFEST",
+  "status": "proposed",
+  "objective": "Review event geometry and lock a candidate source manifest using metadata and quicklooks before any full-scene acquisition.",
+  "project_root": ".",
+  "authority": {
+    "mode": "not_granted",
+    "authorized_actions": [],
+    "prohibited_actions": [
+      "download_full_satellite_products",
+      "accept_provider_terms",
+      "use_credentials",
+      "incur_cost",
+      "publish_scientific_conclusions"
+    ]
+  },
+  "units": [
+    {
+      "unit_id": "M1-ACTIVATE",
+      "action": "approve_goal_and_milestone_boundary",
+      "human_gate": true,
+      "action_class": "normative_decision",
+      "status": "pending"
+    },
+    {
+      "unit_id": "M1-AOI",
+      "action": "review_and_lock_aoi_geometry",
+      "human_gate": true,
+      "action_class": "normative_decision",
+      "status": "pending"
+    },
+    {
+      "unit_id": "M1-METADATA",
+      "action": "query_and_record_catalog_metadata",
+      "human_gate": false,
+      "action_class": "metadata_capture",
+      "status": "pending"
+    },
+    {
+      "unit_id": "M1-QUICKLOOK",
+      "action": "inspect_footprints_metadata_and_quicklooks",
+      "human_gate": false,
+      "action_class": "routine_qa",
+      "status": "pending"
+    },
+    {
+      "unit_id": "M1-MANIFEST",
+      "action": "lock_candidate_source_manifest",
+      "human_gate": true,
+      "action_class": "normative_decision",
+      "status": "pending"
+    }
+  ],
+  "exit_criteria": [
+    "AOIs are exact, reviewed, and projected consistently",
+    "Every candidate has provider identity, acquisition time, rights, access path, coverage disposition, and pixel-inspection status",
+    "Accepted, rejected, and deferred products are preserved",
+    "The approved manifest explicitly identifies any authorized acquisition",
+    "No source imagery or credentials are committed to Git"
+  ]
+}
