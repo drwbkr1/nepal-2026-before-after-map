@@ -44,7 +44,7 @@ Public visibility does not grant reuse rights to third-party data. No repository
 
 ## Current checkpoint
 
-Milestone 0 bootstraps the public project and validates its control records. The next proposed milestone is to confirm the event geometry and create a locked source manifest using metadata and quicklooks before downloading full scenes.
+Milestone 0 is complete: the public repository, default branch, initial remote commit, and control records were verified. The next proposed milestone is to confirm the event geometry and create a locked source manifest using metadata and quicklooks before downloading full scenes.
 
 See:
 

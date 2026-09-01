@@ -1,12 +1,12 @@
 # Current status
 
-- **State:** Bootstrap candidate
-- **Milestone:** M0 — Public project bootstrap
+- **State:** Bootstrap published
+- **Milestone:** M0 — Public project bootstrap complete
 - **Scientific result:** None
 - **Imagery custody:** None
 - **Long-term goal:** Proposed, not activated
 
-## Completed locally
+## Completed
 
 - comprehensive project charter and roadmap drafted;
 - initial AOIs, coordinate system, and candidate Sentinel product identities recorded;
@@ -14,10 +14,11 @@
 - ArcGIS delivery and validation plans drafted;
 - project control profile and proposed M1 contract created;
 - Git exclusions and repository checks defined.
+- public repository `drwbkr1/nepal-2026-before-after-map` created and verified as public;
+- remote `main` verified against initial commit `c73c28c873d3e98f4e6f20bd0a4ddf0e68076fc9`.
 
 ## Not yet completed
 
-- public GitHub repository verification;
 - owner activation of the proposed long-term goal;
 - event-geometry reconciliation;
 - footprint, rights, quicklook, pixel, mask, and locked acquisition-manifest review;

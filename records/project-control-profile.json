@@ -102,9 +102,9 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "BOOTSTRAP-CANDIDATE",
+    "checkpoint_id": "BOOTSTRAP-PUBLISHED",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Create and verify the public repository, then seek owner decision on M1 activation."
+    "next_action": "Seek owner decision on the proposed long-term goal and M1 activation boundary."
   }
 }
