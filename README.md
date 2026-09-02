@@ -2,7 +2,7 @@
 
 An evidence-first geospatial project to produce a reproducible, ArcGIS-ready before-and-after map of the 26 August 2026 debris avalanche and flash flood in Nepal's Langtang–Bhote Koshi–Trishuli corridor.
 
-## Proposed long-term goal
+## Active long-term goal
 
 Build and maintain a defensible geospatial evidence package that shows where the event altered the landscape, distinguishes direct satellite observations from interpretation, and can be opened, reviewed, updated, and exported in ArcGIS Pro without relying on undocumented analyst state.
 
@@ -15,7 +15,7 @@ The project should ultimately deliver:
 - portable ArcGIS layer and project packages plus GeoTIFF, GeoPackage/File Geodatabase, PDF, and PNG exports;
 - a public, reproducible method record that preserves limitations and failed or inconclusive analytical routes.
 
-This goal is **active as of 1 September 2026**. Milestone 1 begins with draft AOIs, public metadata, footprints, and quicklook evidence. Full imagery acquisition, terms acceptance, restricted high-resolution imagery, and publication of scientific conclusions remain gated.
+This goal is **active as of 1 September 2026**. The M1 search and review AOIs are now owner-approved, projected to EPSG:32645, and validated through ArcGIS Pro. The next gate is the exact candidate source manifest. Full imagery acquisition, terms acceptance, restricted high-resolution imagery, and publication of scientific conclusions remain separately gated.
 
 ## Why this is useful
 
@@ -44,7 +44,7 @@ Public visibility does not grant reuse rights to third-party data. No repository
 
 ## Current checkpoint
 
-Milestone 0 is complete and Milestone 1 is active. Current work confirms event geometry and builds a decision-ready source manifest using metadata, footprints, and quicklooks before any full-scene acquisition.
+Milestone 0 is complete and Milestone 1 is active. The exact AOI review is complete. A decision-ready manifest proposes eight Sentinel sources for later controlled acquisition planning and defers two cloud-limited regional-context tiles; it does not claim usable pixels or authorize downloads.
 
 See:
 
@@ -53,6 +53,7 @@ See:
 - [Data and methods plan](docs/DATA_AND_METHODS_PLAN.md)
 - [Source register](docs/SOURCES.md)
 - [M1 AOI review bundle](docs/M1_AOI_REVIEW.md)
+- [M1 source-manifest review](docs/M1_SOURCE_MANIFEST_REVIEW.md)
 - [ArcGIS delivery plan](docs/ARCGIS_DELIVERY_PLAN.md)
 - [Validation plan](docs/VALIDATION.md)
 - [Current status](docs/STATUS.md)

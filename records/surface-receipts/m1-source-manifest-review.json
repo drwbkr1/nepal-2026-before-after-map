@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "M1-SOURCE-MANIFEST-REVIEW-SURFACE-001",
+  "status": "pass",
+  "verified_at_utc": "2026-09-02T03:54:41Z",
+  "surface": "docs/assets/m1-source-manifest-review.png",
+  "surface_sha256": "0dd0279a22681bd4df9209295b5f4457c6a41d03f0b9cb72920788f5edfbad99",
+  "source_manifest": "records/source-manifest.json",
+  "source_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+  "renderer": "scripts/render_manifest_review_surface.py",
+  "renderer_sha256": "bb3a30bbe382412d6cfa8ffa5bc596489ccbe2522a4e7cf55db136d5ca3bfc64",
+  "dimensions_pixels": {
+    "width": 1800,
+    "height": 1540
+  },
+  "checks": {
+    "render_completed": "pass",
+    "exact_manifest_hash_visible": "pass",
+    "all_ten_candidates_visible": "pass",
+    "accepted_and_deferred_dispositions_distinguishable": "pass",
+    "decision_boundary_visible": "pass",
+    "limitations_visible": "pass",
+    "text_clipping": "none_observed",
+    "visual_inspection": "pass"
+  },
+  "blank_state_verified": true,
+  "completion_controls_verified": true,
+  "export_verified": true,
+  "limitations": [
+    "The surface summarizes the manifest; exact product IDs and all provenance fields remain in the bound JSON manifest.",
+    "The image is a review aid and contains no satellite pixels or scientific conclusion."
+  ]
+}

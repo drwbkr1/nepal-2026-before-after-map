@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "M1-APPROVED-AOI-ARCGIS-VALIDATION-001",
+  "status": "pass",
+  "validated_at_utc": "2026-09-02T03:52:09Z",
+  "input": "config/aoi/approved-study-areas-epsg32645.json",
+  "input_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+  "arcgis_version": "3.7.1",
+  "method": "ArcGIS JSON To Features plus Describe and geometry cursor checks",
+  "spatial_reference": {
+    "factory_code": 32645,
+    "name": "WGS_1984_UTM_Zone_45N"
+  },
+  "feature_count": 3,
+  "extent": {
+    "xmin": 273303.7060330454,
+    "ymin": 3070238.9980253503,
+    "xmax": 367813.3612417707,
+    "ymax": 3149207.1487340955
+  },
+  "features": [
+    {
+      "aoi_id": "AOI-OVERVIEW",
+      "area_square_metres": 7242178563.375755,
+      "is_empty": false
+    },
+    {
+      "aoi_id": "AOI-SOURCE",
+      "area_square_metres": 143470831.1551202,
+      "is_empty": false
+    },
+    {
+      "aoi_id": "AOI-UPPER-CORRIDOR",
+      "area_square_metres": 517636995.8695006,
+      "is_empty": false
+    }
+  ],
+  "checks": {
+    "json_to_features": "pass",
+    "feature_count_3": "pass",
+    "spatial_reference_epsg_32645": "pass",
+    "nonempty_positive_area": "pass"
+  },
+  "retained_failures": [
+    {
+      "attempt": 1,
+      "status": "failed_after_json_import",
+      "reason": "ArcGIS Pro 3.7.1 Polygon objects do not expose the attempted isEmpty property.",
+      "remediation": "Use a null-or-pointCount geometry emptiness check and rerun the full import validation."
+    }
+  ],
+  "limitations": [
+    "This validates ArcGIS import, CRS, geometry count, and nonzero projected area only.",
+    "The geometries are approved search and review extents, not event-change polygons."
+  ]
+}

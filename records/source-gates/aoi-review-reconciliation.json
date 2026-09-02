@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m1-aoi-review-001",
+  "contract_sha256": "6d6c86aa6d28442b301f4a8ff9e131029a88f0b21f03e9fc8c2154044d5d0360",
+  "response_sha256": "3e7198c5919fde579bc7864ceba6ce44d5fc91b9920fb0608a6857af54174bb9",
+  "receipt_sha256": "0abaebdebe1bf304bb5f230f79728b64993378d943e159333879c27cbcc814a7",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "user-instruction:2026-09-01:activate-charter-and-begin-project",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

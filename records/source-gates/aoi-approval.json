@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "M1-AOI-APPROVAL-001",
+  "status": "approved",
+  "approved_at_utc": "2026-09-02T03:41:01Z",
+  "scope": "M1 source discovery, review, and ArcGIS organization",
+  "review_id": "m1-aoi-review-001",
+  "review_bundle_id": "m1-aoi-review-bundle-001",
+  "review_bundle_manifest_sha256": "7b8c4b1f5d86f44dc5425aee46ad813d3248c47054b48a815d877c264dfa252a",
+  "reviewed_aoi_sha256": "68c406f7f41c301c339e200ccdd75194183c483c65156ab3949e64236072ccde",
+  "reconciliation_ref": "records/source-gates/aoi-review-reconciliation.json",
+  "reconciliation_sha256": "39bca71bce92a75239f8d5daedc2a5a92a2e016c1a5e46748d5acfc0951a8c2c",
+  "locked_response_sha256": "3e7198c5919fde579bc7864ceba6ce44d5fc91b9920fb0608a6857af54174bb9",
+  "lock_receipt_sha256": "0abaebdebe1bf304bb5f230f79728b64993378d943e159333879c27cbcc814a7",
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "human_decisions_fabricated": false,
+  "outputs": [
+    {
+      "path": "config/aoi/approved-study-areas.geojson",
+      "sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98",
+      "crs": "EPSG:4326",
+      "format": "RFC 7946 GeoJSON",
+      "geometry_equivalence_to_reviewed_source": "pass"
+    },
+    {
+      "path": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+      "crs": "EPSG:32645",
+      "format": "ArcGIS FeatureSet JSON",
+      "projection_engine": "ArcGIS Pro arcpy Geometry.projectAs",
+      "arcgis_version": "3.7.1"
+    }
+  ],
+  "lock_attempts": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "reason": "candidate filename did not match its exact response-byte hash",
+      "response_locked": false,
+      "decision_values_read": false
+    },
+    {
+      "attempt": 2,
+      "status": "locked_before_reveal",
+      "response_sha256": "3e7198c5919fde579bc7864ceba6ce44d5fc91b9920fb0608a6857af54174bb9",
+      "response_locked": true,
+      "decision_values_read_before_lock": false
+    }
+  ],
+  "limitations": [
+    "Approval covers search and review extents, not mapped change polygons.",
+    "Approval does not authorize credentials, terms acceptance, full-product downloads, or scientific publication.",
+    "The EPSG:32645 artifact is a projected derivative; the exact reviewed geometry remains hash-bound in EPSG:4326."
+  ]
+}

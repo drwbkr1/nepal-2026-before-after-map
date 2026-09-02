@@ -1,0 +1,1310 @@
+{
+  "schema_version": "1.0",
+  "manifest_id": "NEPAL-M1-CANDIDATE-SOURCE-MANIFEST-001",
+  "status": "candidate_for_owner_review",
+  "generated_at_utc": "2026-09-02T03:52:24Z",
+  "event_date": "2026-08-26",
+  "analysis_crs": "EPSG:32645",
+  "aoi_approval_ref": "records/source-gates/aoi-approval.json",
+  "aoi_approval_sha256": "92ce0094460968ae37c1687cc0dde5e5db439b0dd968a3161d7d4feb3a6e93aa",
+  "input_evidence": [
+    {
+      "path": "records/source-gates/catalog-metadata.json",
+      "sha256": "0e7d57f007933844b927f08569de03097ac60f1f5f1edda212e2027aef332c7c"
+    },
+    {
+      "path": "records/source-gates/quicklook-review.json",
+      "sha256": "f6dd95475cb515c6748173d3c84561c7fd19dcf8a118982d9b8957ade236a619"
+    },
+    {
+      "path": "records/source-gates/copernicus-source-gate.json",
+      "sha256": "0cf564f590817c89e6a72e0d9d8e9f206f45cc4275e51fa6d939af78cc895bfe"
+    }
+  ],
+  "decision_scope": {
+    "requested": "Lock proposed accepted and deferred candidates for later controlled acquisition planning.",
+    "does_not_authorize": [
+      "credentials or account-session use",
+      "terms acceptance",
+      "full-product downloads",
+      "pixel-usability claims",
+      "scientific conclusions or public emergency guidance"
+    ]
+  },
+  "summary": {
+    "candidate_count": 10,
+    "proposed_accept_count": 8,
+    "proposed_defer_count": 2,
+    "proposed_reject_count": 0,
+    "proposed_acquisition_catalog_bytes": 12451940706,
+    "proposed_acquisition_catalog_gib": 11.597,
+    "pixel_usability_established_count": 0
+  },
+  "records": [
+    {
+      "source_id": "M1-SRC-001",
+      "provider": "Copernicus Data Space Ecosystem",
+      "collection": "Sentinel-1 IW GRD",
+      "sensor_route": "radar",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE",
+      "provider_product_id": "227d0869-e2a2-4258-9624-ffaea31c4058",
+      "event_role": "before",
+      "acquisition_start_utc": "2026-08-16T12:21:16.058226Z",
+      "acquisition_end_utc": "2026-08-16T12:21:41.056809Z",
+      "processing_level": "LEVEL1",
+      "orbit_or_tile": {
+        "tile_id": null,
+        "orbit_direction": "ASCENDING",
+        "relative_orbit_number": 85,
+        "operational_mode": "IW"
+      },
+      "catalog_cloud_cover_percent": null,
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              84.177147,
+              27.591404
+            ],
+            [
+              84.498421,
+              26.082024
+            ],
+            [
+              87.035492,
+              26.502077
+            ],
+            [
+              86.748665,
+              28.008406
+            ],
+            [
+              84.177147,
+              27.591404
+            ]
+          ]
+        ]
+      },
+      "coverage_status": {
+        "method": "catalog footprint bounding-box intersection only",
+        "approved_aoi_intersections": {
+          "AOI-OVERVIEW": true,
+          "AOI-SOURCE": false,
+          "AOI-UPPER-CORRIDOR": false
+        },
+        "usable_pixels": "not_established"
+      },
+      "query": {
+        "catalog_endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+        "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE%27&%24expand=Attributes&%24top=2",
+        "queried_at_utc": "2026-09-02T03:05:45Z",
+        "result_count": 1,
+        "authentication": "none"
+      },
+      "access": {
+        "metadata": "public_no_authentication",
+        "full_product": "authenticated_flow_requires_separate_authority",
+        "download_status": "not_authorized"
+      },
+      "rights": {
+        "status": "source_gate_pass_for_sentinel_data_with_required_notice",
+        "notice": "Sentinel Data Legal Notice and required Copernicus/Sentinel source notices",
+        "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "quicklook_redistribution": "not_authorized"
+      },
+      "catalog_content_length_bytes": 1732333216,
+      "provider_checksums": [
+        {
+          "Value": "06dd5fdf5ea889a32f7dbb5fa41df029",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-16T15:10:01.768113Z"
+        },
+        {
+          "Value": "75be94e2f483d59a59060919fdf98e8519fe1118eff98be881030916d987f091",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-16T15:10:04.613231Z"
+        }
+      ],
+      "local_custody": {
+        "path": null,
+        "byte_size": null,
+        "sha256": null,
+        "status": "not_acquired"
+      },
+      "quality": {
+        "quicklook_review_status": "reviewed_coarse_only",
+        "quicklook_disposition": "retain_candidate_for_product_level_radar_qa",
+        "pixel_inspection_status": "not_established",
+        "mask_status": "not_started",
+        "limitations": [
+          "Quicklook decodes and shows the expected terrain-scale swath.",
+          "Browse rendering is strongly terrain-textured; event-scale change cannot be resolved reliably at this size."
+        ]
+      },
+      "proposed_disposition": {
+        "disposition": "accept_for_controlled_acquisition_planning",
+        "acquisition_priority": "supporting",
+        "analysis_role": "regional_context_and_swath_continuity",
+        "reason": "Exact orbit-paired GRD candidate retained for product-level terrain, coverage, and backscatter QA."
+      },
+      "rejection_reason": null,
+      "reviewer": "owner_review_pending",
+      "review_status": "candidate_manifest_not_approved"
+    },
+    {
+      "source_id": "M1-SRC-002",
+      "provider": "Copernicus Data Space Ecosystem",
+      "collection": "Sentinel-1 IW GRD",
+      "sensor_route": "radar",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE",
+      "provider_product_id": "844b9a32-9aa2-4611-83f6-ae6501c01955",
+      "event_role": "before",
+      "acquisition_start_utc": "2026-08-16T12:21:41.058298Z",
+      "acquisition_end_utc": "2026-08-16T12:22:06.056880Z",
+      "processing_level": "LEVEL1",
+      "orbit_or_tile": {
+        "tile_id": null,
+        "orbit_direction": "ASCENDING",
+        "relative_orbit_number": 85,
+        "operational_mode": "IW"
+      },
+      "catalog_cloud_cover_percent": null,
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.9244,
+              29.112411
+            ],
+            [
+              84.177124,
+              27.591494
+            ],
+            [
+              86.749352,
+              28.008602
+            ],
+            [
+              86.532738,
+              29.524935
+            ],
+            [
+              83.9244,
+              29.112411
+            ]
+          ]
+        ]
+      },
+      "coverage_status": {
+        "method": "catalog footprint bounding-box intersection only",
+        "approved_aoi_intersections": {
+          "AOI-OVERVIEW": true,
+          "AOI-SOURCE": true,
+          "AOI-UPPER-CORRIDOR": true
+        },
+        "usable_pixels": "not_established"
+      },
+      "query": {
+        "catalog_endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+        "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE%27&%24expand=Attributes&%24top=2",
+        "queried_at_utc": "2026-09-02T03:05:45Z",
+        "result_count": 1,
+        "authentication": "none"
+      },
+      "access": {
+        "metadata": "public_no_authentication",
+        "full_product": "authenticated_flow_requires_separate_authority",
+        "download_status": "not_authorized"
+      },
+      "rights": {
+        "status": "source_gate_pass_for_sentinel_data_with_required_notice",
+        "notice": "Sentinel Data Legal Notice and required Copernicus/Sentinel source notices",
+        "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "quicklook_redistribution": "not_authorized"
+      },
+      "catalog_content_length_bytes": 1732874277,
+      "provider_checksums": [
+        {
+          "Value": "227b5ae1aa6a79f8cb851efbde52fdce",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-16T15:05:53.078623Z"
+        },
+        {
+          "Value": "531b052a638342f922d34f1d56e086eb18d7b723fb6210e801a743b4d766b886",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-16T15:05:55.717963Z"
+        }
+      ],
+      "local_custody": {
+        "path": null,
+        "byte_size": null,
+        "sha256": null,
+        "status": "not_acquired"
+      },
+      "quality": {
+        "quicklook_review_status": "reviewed_coarse_only",
+        "quicklook_disposition": "retain_candidate_for_product_level_radar_qa",
+        "pixel_inspection_status": "not_established",
+        "mask_status": "not_started",
+        "limitations": [
+          "Quicklook decodes and shows the expected terrain-scale swath.",
+          "Browse rendering is strongly terrain-textured; event-scale change cannot be resolved reliably at this size."
+        ]
+      },
+      "proposed_disposition": {
+        "disposition": "accept_for_controlled_acquisition_planning",
+        "acquisition_priority": "primary",
+        "analysis_role": "event_aoi_radar_pair",
+        "reason": "Exact orbit-paired GRD candidate retained for product-level terrain, coverage, and backscatter QA."
+      },
+      "rejection_reason": null,
+      "reviewer": "owner_review_pending",
+      "review_status": "candidate_manifest_not_approved"
+    },
+    {
+      "source_id": "M1-SRC-003",
+      "provider": "Copernicus Data Space Ecosystem",
+      "collection": "Sentinel-1 IW GRD",
+      "sensor_route": "radar",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE",
+      "provider_product_id": "f2682536-f9b8-4b5b-b9eb-5b52417820fa",
+      "event_role": "before",
+      "acquisition_start_utc": "2026-08-19T00:10:36.889384Z",
+      "acquisition_end_utc": "2026-08-19T00:11:01.887958Z",
+      "processing_level": "LEVEL1",
+      "orbit_or_tile": {
+        "tile_id": null,
+        "orbit_direction": "DESCENDING",
+        "relative_orbit_number": 121,
+        "operational_mode": "IW"
+      },
+      "catalog_cloud_cover_percent": null,
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              87.76828,
+              27.070326
+            ],
+            [
+              88.040062,
+              28.588068
+            ],
+            [
+              85.468857,
+              28.997923
+            ],
+            [
+              85.232002,
+              27.484329
+            ],
+            [
+              87.76828,
+              27.070326
+            ]
+          ]
+        ]
+      },
+      "coverage_status": {
+        "method": "catalog footprint bounding-box intersection only",
+        "approved_aoi_intersections": {
+          "AOI-OVERVIEW": true,
+          "AOI-SOURCE": true,
+          "AOI-UPPER-CORRIDOR": true
+        },
+        "usable_pixels": "not_established"
+      },
+      "query": {
+        "catalog_endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+        "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE%27&%24expand=Attributes&%24top=2",
+        "queried_at_utc": "2026-09-02T03:05:45Z",
+        "result_count": 1,
+        "authentication": "none"
+      },
+      "access": {
+        "metadata": "public_no_authentication",
+        "full_product": "authenticated_flow_requires_separate_authority",
+        "download_status": "not_authorized"
+      },
+      "rights": {
+        "status": "source_gate_pass_for_sentinel_data_with_required_notice",
+        "notice": "Sentinel Data Legal Notice and required Copernicus/Sentinel source notices",
+        "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "quicklook_redistribution": "not_authorized"
+      },
+      "catalog_content_length_bytes": 1718369620,
+      "provider_checksums": [
+        {
+          "Value": "47c51035a3191a85b6e1d7865f55690b",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-19T02:22:00.292016Z"
+        },
+        {
+          "Value": "ac4fadc73812792f7fad2da5e38bbd80a7f714be270fdf7eff3e94705b957dd6",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-19T02:22:03.103995Z"
+        }
+      ],
+      "local_custody": {
+        "path": null,
+        "byte_size": null,
+        "sha256": null,
+        "status": "not_acquired"
+      },
+      "quality": {
+        "quicklook_review_status": "reviewed_coarse_only",
+        "quicklook_disposition": "retain_candidate_for_product_level_radar_qa",
+        "pixel_inspection_status": "not_established",
+        "mask_status": "not_started",
+        "limitations": [
+          "Quicklook decodes and shows the expected terrain-scale swath.",
+          "Browse rendering is strongly terrain-textured; event-scale change cannot be resolved reliably at this size."
+        ]
+      },
+      "proposed_disposition": {
+        "disposition": "accept_for_controlled_acquisition_planning",
+        "acquisition_priority": "primary",
+        "analysis_role": "event_aoi_radar_pair",
+        "reason": "Exact orbit-paired GRD candidate retained for product-level terrain, coverage, and backscatter QA."
+      },
+      "rejection_reason": null,
+      "reviewer": "owner_review_pending",
+      "review_status": "candidate_manifest_not_approved"
+    },
+    {
+      "source_id": "M1-SRC-004",
+      "provider": "Copernicus Data Space Ecosystem",
+      "collection": "Sentinel-1 IW GRD",
+      "sensor_route": "radar",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+      "provider_product_id": "641ccb0b-5d88-4c44-b558-93b488cd2453",
+      "event_role": "after",
+      "acquisition_start_utc": "2026-08-28T12:21:16.762016Z",
+      "acquisition_end_utc": "2026-08-28T12:21:41.760540Z",
+      "processing_level": "LEVEL1",
+      "orbit_or_tile": {
+        "tile_id": null,
+        "orbit_direction": "ASCENDING",
+        "relative_orbit_number": 85,
+        "operational_mode": "IW"
+      },
+      "catalog_cloud_cover_percent": null,
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              84.177376,
+              27.591463
+            ],
+            [
+              84.498627,
+              26.082081
+            ],
+            [
+              87.035706,
+              26.502094
+            ],
+            [
+              86.748901,
+              28.008425
+            ],
+            [
+              84.177376,
+              27.591463
+            ]
+          ]
+        ]
+      },
+      "coverage_status": {
+        "method": "catalog footprint bounding-box intersection only",
+        "approved_aoi_intersections": {
+          "AOI-OVERVIEW": true,
+          "AOI-SOURCE": false,
+          "AOI-UPPER-CORRIDOR": false
+        },
+        "usable_pixels": "not_established"
+      },
+      "query": {
+        "catalog_endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+        "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE%27&%24expand=Attributes&%24top=2",
+        "queried_at_utc": "2026-09-02T03:05:45Z",
+        "result_count": 1,
+        "authentication": "none"
+      },
+      "access": {
+        "metadata": "public_no_authentication",
+        "full_product": "authenticated_flow_requires_separate_authority",
+        "download_status": "not_authorized"
+      },
+      "rights": {
+        "status": "source_gate_pass_for_sentinel_data_with_required_notice",
+        "notice": "Sentinel Data Legal Notice and required Copernicus/Sentinel source notices",
+        "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "quicklook_redistribution": "not_authorized"
+      },
+      "catalog_content_length_bytes": 1732332897,
+      "provider_checksums": [
+        {
+          "Value": "25c895490c9b786507152513cc701911",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-28T15:08:04.177988Z"
+        },
+        {
+          "Value": "314087e342f011c95ec9b8b520d0baae5272396bd3e2e16b9525bd1c5eba0920",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-28T15:08:07.660734Z"
+        }
+      ],
+      "local_custody": {
+        "path": null,
+        "byte_size": null,
+        "sha256": null,
+        "status": "not_acquired"
+      },
+      "quality": {
+        "quicklook_review_status": "reviewed_coarse_only",
+        "quicklook_disposition": "retain_candidate_for_product_level_radar_qa",
+        "pixel_inspection_status": "not_established",
+        "mask_status": "not_started",
+        "limitations": [
+          "Quicklook decodes and shows the expected terrain-scale swath.",
+          "Browse rendering is strongly terrain-textured; event-scale change cannot be resolved reliably at this size."
+        ]
+      },
+      "proposed_disposition": {
+        "disposition": "accept_for_controlled_acquisition_planning",
+        "acquisition_priority": "supporting",
+        "analysis_role": "regional_context_and_swath_continuity",
+        "reason": "Exact orbit-paired GRD candidate retained for product-level terrain, coverage, and backscatter QA."
+      },
+      "rejection_reason": null,
+      "reviewer": "owner_review_pending",
+      "review_status": "candidate_manifest_not_approved"
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "provider": "Copernicus Data Space Ecosystem",
+      "collection": "Sentinel-1 IW GRD",
+      "sensor_route": "radar",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE",
+      "provider_product_id": "9cb3c885-cfb8-40cc-a44a-8673e772c794",
+      "event_role": "after",
+      "acquisition_start_utc": "2026-08-28T12:21:41.762029Z",
+      "acquisition_end_utc": "2026-08-28T12:22:06.760553Z",
+      "processing_level": "LEVEL1",
+      "orbit_or_tile": {
+        "tile_id": null,
+        "orbit_direction": "ASCENDING",
+        "relative_orbit_number": 85,
+        "operational_mode": "IW"
+      },
+      "catalog_cloud_cover_percent": null,
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.924644,
+              29.112471
+            ],
+            [
+              84.177353,
+              27.591553
+            ],
+            [
+              86.749588,
+              28.008621
+            ],
+            [
+              86.532997,
+              29.524954
+            ],
+            [
+              83.924644,
+              29.112471
+            ]
+          ]
+        ]
+      },
+      "coverage_status": {
+        "method": "catalog footprint bounding-box intersection only",
+        "approved_aoi_intersections": {
+          "AOI-OVERVIEW": true,
+          "AOI-SOURCE": true,
+          "AOI-UPPER-CORRIDOR": true
+        },
+        "usable_pixels": "not_established"
+      },
+      "query": {
+        "catalog_endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+        "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE%27&%24expand=Attributes&%24top=2",
+        "queried_at_utc": "2026-09-02T03:05:45Z",
+        "result_count": 1,
+        "authentication": "none"
+      },
+      "access": {
+        "metadata": "public_no_authentication",
+        "full_product": "authenticated_flow_requires_separate_authority",
+        "download_status": "not_authorized"
+      },
+      "rights": {
+        "status": "source_gate_pass_for_sentinel_data_with_required_notice",
+        "notice": "Sentinel Data Legal Notice and required Copernicus/Sentinel source notices",
+        "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "quicklook_redistribution": "not_authorized"
+      },
+      "catalog_content_length_bytes": 1732898724,
+      "provider_checksums": [
+        {
+          "Value": "7b48f33e171138afcaa7f72063c37eda",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-28T15:11:10.537868Z"
+        },
+        {
+          "Value": "6b039f66fefa156d4f2b1969b3ec27b74f0e6b2f58b76aa30d5b36f690865c6e",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-28T15:11:13.990681Z"
+        }
+      ],
+      "local_custody": {
+        "path": null,
+        "byte_size": null,
+        "sha256": null,
+        "status": "not_acquired"
+      },
+      "quality": {
+        "quicklook_review_status": "reviewed_coarse_only",
+        "quicklook_disposition": "retain_candidate_for_product_level_radar_qa",
+        "pixel_inspection_status": "not_established",
+        "mask_status": "not_started",
+        "limitations": [
+          "Quicklook decodes and shows the expected terrain-scale swath.",
+          "Browse rendering is strongly terrain-textured; event-scale change cannot be resolved reliably at this size."
+        ]
+      },
+      "proposed_disposition": {
+        "disposition": "accept_for_controlled_acquisition_planning",
+        "acquisition_priority": "primary",
+        "analysis_role": "event_aoi_radar_pair",
+        "reason": "Exact orbit-paired GRD candidate retained for product-level terrain, coverage, and backscatter QA."
+      },
+      "rejection_reason": null,
+      "reviewer": "owner_review_pending",
+      "review_status": "candidate_manifest_not_approved"
+    },
+    {
+      "source_id": "M1-SRC-006",
+      "provider": "Copernicus Data Space Ecosystem",
+      "collection": "Sentinel-1 IW GRD",
+      "sensor_route": "radar",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE",
+      "provider_product_id": "36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4",
+      "event_role": "after",
+      "acquisition_start_utc": "2026-08-31T00:10:37.647071Z",
+      "acquisition_end_utc": "2026-08-31T00:11:02.644291Z",
+      "processing_level": "LEVEL1",
+      "orbit_or_tile": {
+        "tile_id": null,
+        "orbit_direction": "DESCENDING",
+        "relative_orbit_number": 121,
+        "operational_mode": "IW"
+      },
+      "catalog_cloud_cover_percent": null,
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              87.767586,
+              27.070356
+            ],
+            [
+              88.039307,
+              28.588013
+            ],
+            [
+              85.467896,
+              28.997856
+            ],
+            [
+              85.231094,
+              27.48435
+            ],
+            [
+              87.767586,
+              27.070356
+            ]
+          ]
+        ]
+      },
+      "coverage_status": {
+        "method": "catalog footprint bounding-box intersection only",
+        "approved_aoi_intersections": {
+          "AOI-OVERVIEW": true,
+          "AOI-SOURCE": true,
+          "AOI-UPPER-CORRIDOR": true
+        },
+        "usable_pixels": "not_established"
+      },
+      "query": {
+        "catalog_endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+        "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE%27&%24expand=Attributes&%24top=2",
+        "queried_at_utc": "2026-09-02T03:05:45Z",
+        "result_count": 1,
+        "authentication": "none"
+      },
+      "access": {
+        "metadata": "public_no_authentication",
+        "full_product": "authenticated_flow_requires_separate_authority",
+        "download_status": "not_authorized"
+      },
+      "rights": {
+        "status": "source_gate_pass_for_sentinel_data_with_required_notice",
+        "notice": "Sentinel Data Legal Notice and required Copernicus/Sentinel source notices",
+        "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "quicklook_redistribution": "not_authorized"
+      },
+      "catalog_content_length_bytes": 1718402708,
+      "provider_checksums": [
+        {
+          "Value": "85555c9a5463a3ffaf6f54552c9095e3",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-31T02:15:41.017059Z"
+        },
+        {
+          "Value": "47b42338b85c454de0a303790963a6b152c14cea9f6feb3ee6dc9434ecb567f3",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-31T02:15:44.069258Z"
+        }
+      ],
+      "local_custody": {
+        "path": null,
+        "byte_size": null,
+        "sha256": null,
+        "status": "not_acquired"
+      },
+      "quality": {
+        "quicklook_review_status": "reviewed_coarse_only",
+        "quicklook_disposition": "retain_candidate_for_product_level_radar_qa",
+        "pixel_inspection_status": "not_established",
+        "mask_status": "not_started",
+        "limitations": [
+          "Quicklook decodes and shows the expected terrain-scale swath.",
+          "Browse rendering is strongly terrain-textured; event-scale change cannot be resolved reliably at this size."
+        ]
+      },
+      "proposed_disposition": {
+        "disposition": "accept_for_controlled_acquisition_planning",
+        "acquisition_priority": "primary",
+        "analysis_role": "event_aoi_radar_pair",
+        "reason": "Exact orbit-paired GRD candidate retained for product-level terrain, coverage, and backscatter QA."
+      },
+      "rejection_reason": null,
+      "reviewer": "owner_review_pending",
+      "review_status": "candidate_manifest_not_approved"
+    },
+    {
+      "source_id": "M1-SRC-007",
+      "provider": "Copernicus Data Space Ecosystem",
+      "collection": "Sentinel-2 MSI Level-2A",
+      "sensor_route": "optical",
+      "exact_product_id": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUL_20260827T084453.SAFE",
+      "provider_product_id": "2f35c992-1ea6-42f9-965c-011ea770d334",
+      "event_role": "after",
+      "acquisition_start_utc": "2026-08-27T04:56:59.024000Z",
+      "acquisition_end_utc": "2026-08-27T04:56:59.024000Z",
+      "processing_level": "S2MSI2A",
+      "orbit_or_tile": {
+        "tile_id": "45RUL",
+        "orbit_direction": null,
+        "relative_orbit_number": 119,
+        "operational_mode": "INS-NOBS"
+      },
+      "catalog_cloud_cover_percent": 54.286689,
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87659957738256,
+              28.020161411950266
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.61166133848934,
+              27.0262567412524
+            ],
+            [
+              85.62538457335674,
+              27.07655523095373
+            ],
+            [
+              85.66543816597073,
+              27.224235701877745
+            ],
+            [
+              85.70399634961379,
+              27.37237609402516
+            ],
+            [
+              85.74401426383886,
+              27.520168008862484
+            ],
+            [
+              85.7859866603375,
+              27.66753620012581
+            ],
+            [
+              85.82453192440458,
+              27.81591334224957
+            ],
+            [
+              85.86263108044032,
+              27.96444800801939
+            ],
+            [
+              85.87659957738256,
+              28.020161411950266
+            ]
+          ]
+        ]
+      },
+      "coverage_status": {
+        "method": "catalog footprint bounding-box intersection only",
+        "approved_aoi_intersections": {
+          "AOI-OVERVIEW": true,
+          "AOI-SOURCE": false,
+          "AOI-UPPER-CORRIDOR": false
+        },
+        "usable_pixels": "not_established"
+      },
+      "query": {
+        "catalog_endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+        "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S2B_MSIL2A_20260827T045659_N0512_R119_T45RUL_20260827T084453.SAFE%27&%24expand=Attributes&%24top=2",
+        "queried_at_utc": "2026-09-02T03:05:45Z",
+        "result_count": 1,
+        "authentication": "none"
+      },
+      "access": {
+        "metadata": "public_no_authentication",
+        "full_product": "authenticated_flow_requires_separate_authority",
+        "download_status": "not_authorized"
+      },
+      "rights": {
+        "status": "source_gate_pass_for_sentinel_data_with_required_notice",
+        "notice": "Sentinel Data Legal Notice and required Copernicus/Sentinel source notices",
+        "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "quicklook_redistribution": "not_authorized"
+      },
+      "catalog_content_length_bytes": 873013807,
+      "provider_checksums": [
+        {
+          "Value": "d3735496bbc1742a3639f689f204442f",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-27T09:31:28.536690Z"
+        },
+        {
+          "Value": "f41af6a3f4c2c5ccc69d67f16964d17064b330152364af0b730f46c0cdeeb451",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-27T09:31:30.432679Z"
+        }
+      ],
+      "local_custody": {
+        "path": null,
+        "byte_size": null,
+        "sha256": null,
+        "status": "not_acquired"
+      },
+      "quality": {
+        "quicklook_review_status": "reviewed_coarse_only",
+        "quicklook_disposition": "retain_context_candidate_cloud_limited",
+        "pixel_inspection_status": "not_established",
+        "mask_status": "not_started",
+        "limitations": [
+          "Post-event RUL browse image has extensive bright cloud or snow-like cover and a no-data edge.",
+          "Catalog cloud cover is 54.286689 percent; its footprint bounding box does not intersect the draft source or upper-corridor boxes."
+        ]
+      },
+      "proposed_disposition": {
+        "disposition": "defer_context_only",
+        "acquisition_priority": "deferred",
+        "analysis_role": "regional_context_optical",
+        "reason": "Tile intersects only the regional overview bounding box and is cloud limited; retain evidence without acquiring in the initial route."
+      },
+      "rejection_reason": null,
+      "reviewer": "owner_review_pending",
+      "review_status": "candidate_manifest_not_approved"
+    },
+    {
+      "source_id": "M1-SRC-008",
+      "provider": "Copernicus Data Space Ecosystem",
+      "collection": "Sentinel-2 MSI Level-2A",
+      "sensor_route": "optical",
+      "exact_product_id": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE",
+      "provider_product_id": "76de2c15-9281-45e3-8f0b-e97085fa6d69",
+      "event_role": "after",
+      "acquisition_start_utc": "2026-08-27T04:56:59.024000Z",
+      "acquisition_end_utc": "2026-08-27T04:56:59.024000Z",
+      "processing_level": "S2MSI2A",
+      "orbit_or_tile": {
+        "tile_id": "45RUM",
+        "orbit_direction": null,
+        "relative_orbit_number": 119,
+        "operational_mode": "INS-NOBS"
+      },
+      "catalog_cloud_cover_percent": 78.471315,
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07620966099518,
+              28.74027219497689
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.85421690035542,
+              27.931644199308657
+            ],
+            [
+              85.86263108044032,
+              27.96444800801939
+            ],
+            [
+              85.8999286249787,
+              28.113209408267966
+            ],
+            [
+              85.94191454032125,
+              28.260718047903893
+            ],
+            [
+              85.98499093002968,
+              28.407804555528468
+            ],
+            [
+              86.02529434713477,
+              28.55554567271025
+            ],
+            [
+              86.0655079376437,
+              28.703302426571373
+            ],
+            [
+              86.07620966099518,
+              28.74027219497689
+            ]
+          ]
+        ]
+      },
+      "coverage_status": {
+        "method": "catalog footprint bounding-box intersection only",
+        "approved_aoi_intersections": {
+          "AOI-OVERVIEW": true,
+          "AOI-SOURCE": true,
+          "AOI-UPPER-CORRIDOR": true
+        },
+        "usable_pixels": "not_established"
+      },
+      "query": {
+        "catalog_endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+        "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE%27&%24expand=Attributes&%24top=2",
+        "queried_at_utc": "2026-09-02T03:05:45Z",
+        "result_count": 1,
+        "authentication": "none"
+      },
+      "access": {
+        "metadata": "public_no_authentication",
+        "full_product": "authenticated_flow_requires_separate_authority",
+        "download_status": "not_authorized"
+      },
+      "rights": {
+        "status": "source_gate_pass_for_sentinel_data_with_required_notice",
+        "notice": "Sentinel Data Legal Notice and required Copernicus/Sentinel source notices",
+        "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "quicklook_redistribution": "not_authorized"
+      },
+      "catalog_content_length_bytes": 941822565,
+      "provider_checksums": [
+        {
+          "Value": "f943a32c322a2186955de966b718eccb",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-27T09:33:37.021205Z"
+        },
+        {
+          "Value": "7587745f330d9d70adfbc321326bcaec5a8be457348f1e3dfbd2528ce3615e5a",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-27T09:33:38.560309Z"
+        }
+      ],
+      "local_custody": {
+        "path": null,
+        "byte_size": null,
+        "sha256": null,
+        "status": "not_acquired"
+      },
+      "quality": {
+        "quicklook_review_status": "reviewed_coarse_only",
+        "quicklook_disposition": "retain_candidate_high_cloud_risk",
+        "pixel_inspection_status": "not_established",
+        "mask_status": "not_started",
+        "limitations": [
+          "Post-event RUM browse image has extensive bright cloud or snow-like cover and a no-data edge.",
+          "Catalog cloud cover is 78.471315 percent; this tile intersects the draft source and upper-corridor bounding boxes."
+        ]
+      },
+      "proposed_disposition": {
+        "disposition": "accept_for_controlled_acquisition_planning",
+        "acquisition_priority": "primary",
+        "analysis_role": "event_aoi_optical_pair",
+        "reason": "Tile intersects the approved source and upper-corridor AOIs; pixel masks must determine actual usability."
+      },
+      "rejection_reason": null,
+      "reviewer": "owner_review_pending",
+      "review_status": "candidate_manifest_not_approved"
+    },
+    {
+      "source_id": "M1-SRC-009",
+      "provider": "Copernicus Data Space Ecosystem",
+      "collection": "Sentinel-2 MSI Level-2A",
+      "sensor_route": "optical",
+      "exact_product_id": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUL_20260812T100317.SAFE",
+      "provider_product_id": "d5883e5c-6124-4672-8e68-dd7c84307c8c",
+      "event_role": "before",
+      "acquisition_start_utc": "2026-08-12T04:57:01.025000Z",
+      "acquisition_end_utc": "2026-08-12T04:57:01.025000Z",
+      "processing_level": "S2MSI2A",
+      "orbit_or_tile": {
+        "tile_id": "45RUL",
+        "orbit_direction": null,
+        "relative_orbit_number": 119,
+        "operational_mode": "INS-NOBS"
+      },
+      "catalog_cloud_cover_percent": 27.947062,
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87095740659909,
+              28.020100814573386
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.60556087134167,
+              27.026193352359225
+            ],
+            [
+              85.61839575800268,
+              27.073209393031128
+            ],
+            [
+              85.6497397191664,
+              27.188382854687248
+            ],
+            [
+              85.6594077371371,
+              27.224060618309338
+            ],
+            [
+              85.6985401373765,
+              27.37216447034669
+            ],
+            [
+              85.72521161135603,
+              27.47300573052601
+            ],
+            [
+              85.7367997103997,
+              27.517379699549032
+            ],
+            [
+              85.77888056426282,
+              27.66463549819693
+            ],
+            [
+              85.80439421787534,
+              27.760695427156897
+            ],
+            [
+              85.81878849823764,
+              27.8157939683146
+            ],
+            [
+              85.8569692544807,
+              27.964245323992664
+            ],
+            [
+              85.86629555517366,
+              28.001409104559695
+            ],
+            [
+              85.87095740659909,
+              28.020100814573386
+            ]
+          ]
+        ]
+      },
+      "coverage_status": {
+        "method": "catalog footprint bounding-box intersection only",
+        "approved_aoi_intersections": {
+          "AOI-OVERVIEW": true,
+          "AOI-SOURCE": false,
+          "AOI-UPPER-CORRIDOR": false
+        },
+        "usable_pixels": "not_established"
+      },
+      "query": {
+        "catalog_endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+        "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S2C_MSIL2A_20260812T045701_N0512_R119_T45RUL_20260812T100317.SAFE%27&%24expand=Attributes&%24top=2",
+        "queried_at_utc": "2026-09-02T03:05:45Z",
+        "result_count": 1,
+        "authentication": "none"
+      },
+      "access": {
+        "metadata": "public_no_authentication",
+        "full_product": "authenticated_flow_requires_separate_authority",
+        "download_status": "not_authorized"
+      },
+      "rights": {
+        "status": "source_gate_pass_for_sentinel_data_with_required_notice",
+        "notice": "Sentinel Data Legal Notice and required Copernicus/Sentinel source notices",
+        "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "quicklook_redistribution": "not_authorized"
+      },
+      "catalog_content_length_bytes": 917254527,
+      "provider_checksums": [
+        {
+          "Value": "d17330d2320b84d0a138bde30308fcf2",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-12T11:07:27.177479Z"
+        },
+        {
+          "Value": "a6cfc60239baa6de921d0ff384d6fe0e78f6bd6ca58fe780f6a14a4dd043cb9c",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-12T11:07:29.050890Z"
+        }
+      ],
+      "local_custody": {
+        "path": null,
+        "byte_size": null,
+        "sha256": null,
+        "status": "not_acquired"
+      },
+      "quality": {
+        "quicklook_review_status": "reviewed_coarse_only",
+        "quicklook_disposition": "retain_context_candidate_mask_review_required",
+        "pixel_inspection_status": "not_established",
+        "mask_status": "not_started",
+        "limitations": [
+          "Pre-event RUL browse image shows patchy cloud or snow-like bright cover and a no-data edge.",
+          "Catalog cloud cover is 27.947062 percent; its footprint bounding box does not intersect the draft source or upper-corridor boxes."
+        ]
+      },
+      "proposed_disposition": {
+        "disposition": "defer_context_only",
+        "acquisition_priority": "deferred",
+        "analysis_role": "regional_context_optical",
+        "reason": "Tile intersects only the regional overview bounding box and is cloud limited; retain evidence without acquiring in the initial route."
+      },
+      "rejection_reason": null,
+      "reviewer": "owner_review_pending",
+      "review_status": "candidate_manifest_not_approved"
+    },
+    {
+      "source_id": "M1-SRC-010",
+      "provider": "Copernicus Data Space Ecosystem",
+      "collection": "Sentinel-2 MSI Level-2A",
+      "sensor_route": "optical",
+      "exact_product_id": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE",
+      "provider_product_id": "25faa527-2502-4f7d-a703-cfff3e99d483",
+      "event_role": "before",
+      "acquisition_start_utc": "2026-08-12T04:57:01.025000Z",
+      "acquisition_end_utc": "2026-08-12T04:57:01.025000Z",
+      "processing_level": "S2MSI2A",
+      "orbit_or_tile": {
+        "tile_id": "45RUM",
+        "orbit_direction": null,
+        "relative_orbit_number": 119,
+        "operational_mode": "INS-NOBS"
+      },
+      "catalog_cloud_cover_percent": 18.746611,
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07604033874381,
+              28.759826739022365
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.84856889358903,
+              27.93158371418551
+            ],
+            [
+              85.8569692544807,
+              27.964245323992664
+            ],
+            [
+              85.86629555517366,
+              28.001409104559695
+            ],
+            [
+              85.8934599034619,
+              28.110324656468123
+            ],
+            [
+              85.93122662803566,
+              28.245795298991247
+            ],
+            [
+              85.93536068405822,
+              28.26066227241861
+            ],
+            [
+              85.9503570205109,
+              28.311424182498495
+            ],
+            [
+              85.9778960012283,
+              28.404970168354108
+            ],
+            [
+              86.01811647852264,
+              28.55291024012904
+            ],
+            [
+              86.05589230244709,
+              28.68905629574412
+            ],
+            [
+              86.05982409329533,
+              28.703344958967968
+            ],
+            [
+              86.075641188383,
+              28.75843159425008
+            ],
+            [
+              86.07604033874381,
+              28.759826739022365
+            ]
+          ]
+        ]
+      },
+      "coverage_status": {
+        "method": "catalog footprint bounding-box intersection only",
+        "approved_aoi_intersections": {
+          "AOI-OVERVIEW": true,
+          "AOI-SOURCE": true,
+          "AOI-UPPER-CORRIDOR": true
+        },
+        "usable_pixels": "not_established"
+      },
+      "query": {
+        "catalog_endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+        "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE%27&%24expand=Attributes&%24top=2",
+        "queried_at_utc": "2026-09-02T03:05:45Z",
+        "result_count": 1,
+        "authentication": "none"
+      },
+      "access": {
+        "metadata": "public_no_authentication",
+        "full_product": "authenticated_flow_requires_separate_authority",
+        "download_status": "not_authorized"
+      },
+      "rights": {
+        "status": "source_gate_pass_for_sentinel_data_with_required_notice",
+        "notice": "Sentinel Data Legal Notice and required Copernicus/Sentinel source notices",
+        "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "quicklook_redistribution": "not_authorized"
+      },
+      "catalog_content_length_bytes": 1142906699,
+      "provider_checksums": [
+        {
+          "Value": "089c5eecb582a9fab5c93a74b90a7736",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-12T11:08:17.015771Z"
+        },
+        {
+          "Value": "1fa6926dad3f0b95f90c0f6234d4fc018d218c0d2854cfcb17162064c4b3a054",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-12T11:08:18.748698Z"
+        }
+      ],
+      "local_custody": {
+        "path": null,
+        "byte_size": null,
+        "sha256": null,
+        "status": "not_acquired"
+      },
+      "quality": {
+        "quicklook_review_status": "reviewed_coarse_only",
+        "quicklook_disposition": "retain_candidate_mask_review_required",
+        "pixel_inspection_status": "not_established",
+        "mask_status": "not_started",
+        "limitations": [
+          "Pre-event RUM browse image shows mountainous terrain with scattered cloud or snow-like bright cover and a no-data edge.",
+          "Catalog cloud cover is 18.746611 percent; product-level masks are still required."
+        ]
+      },
+      "proposed_disposition": {
+        "disposition": "accept_for_controlled_acquisition_planning",
+        "acquisition_priority": "primary",
+        "analysis_role": "event_aoi_optical_pair",
+        "reason": "Tile intersects the approved source and upper-corridor AOIs; pixel masks must determine actual usability."
+      },
+      "rejection_reason": null,
+      "reviewer": "owner_review_pending",
+      "review_status": "candidate_manifest_not_approved"
+    }
+  ],
+  "manifest_limitations": [
+    "Catalog footprint intersections do not establish usable pixels.",
+    "Post-event Sentinel-2 RUM is high-cloud-risk and may be inconclusive after mask review.",
+    "Sentinel-1 terrain effects, layover, shadow, speckle, and registration remain untested.",
+    "Deferred RUL optical records remain preserved and may be reconsidered with a documented later decision.",
+    "No source has entered local full-product custody."
+  ]
+}

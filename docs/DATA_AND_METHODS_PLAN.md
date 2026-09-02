@@ -4,9 +4,9 @@
 
 All measured outputs will use **EPSG:32645, WGS 1984 UTM Zone 45N**. Source data will retain native metadata, and every reprojection or resampling step will be recorded.
 
-### Draft areas of interest
+### Approved M1 search and review areas
 
-These are planning bounds, not approved event geometry:
+The owner approved these exact planning bounds for M1 source discovery, review, and ArcGIS organization. They are not mapped change polygons or proof of event geometry:
 
 | AOI | Longitude | Latitude | Purpose |
 |---|---:|---:|---|
@@ -14,7 +14,9 @@ These are planning bounds, not approved event geometry:
 | Source area | 85.46–85.58 E | 28.23–28.34 N | Debris-avalanche source and immediate path |
 | Upper corridor | 85.28–85.45 E | 28.10–28.38 N | Bhote Koshi–Trishuli change corridor |
 
-The AOIs must be reviewed against independent event-location evidence before acquisition.
+The reviewed EPSG:4326 geometry is retained in `config/aoi/draft-study-areas.geojson` with its original SHA-256. The promoted interchange artifact is `config/aoi/approved-study-areas.geojson`, and the ArcGIS FeatureSet derivative is `config/aoi/approved-study-areas-epsg32645.json`. ArcGIS Pro 3.7.1 imported the projected artifact as three nonempty polygons in EPSG:32645.
+
+Independent event-location evidence and later pixel coverage still must be reconciled before interpreting any satellite-observed change.
 
 ## Candidate Sentinel-2 Level-2A products
 
@@ -26,6 +28,8 @@ The AOIs must be reviewed against independent event-location evidence before acq
 | After | 45RUL | `S2B_MSIL2A_20260827T045659_N0512_R119_T45RUL_20260827T084453` | 54.29% |
 
 Catalog cloud percentage applies to an entire tile. It does not establish usable coverage over an AOI. Pixel masks and visual inspection are mandatory.
+
+The M1 candidate manifest proposes the RUM pair for later controlled acquisition planning and defers the two RUL tiles as regional context. This proposal remains at the owner manifest gate.
 
 ### Optical processing candidates
 

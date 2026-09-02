@@ -146,9 +146,9 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M1-OWNER-AOI-GATE",
+    "checkpoint_id": "M1-OWNER-MANIFEST-GATE",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Owner reviews the exact draft AOI bundle; do not begin full-product acquisition."
+    "next_action": "Owner reviews the exact candidate source-manifest bundle; do not authenticate or download full products."
   }
 }

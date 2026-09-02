@@ -96,8 +96,14 @@
   "exit_conditions": [
     {
       "id": "EXIT-001-AOI-LOCKED",
-      "status": "pending",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "records/source-gates/aoi-approval.json",
+        "records/source-gates/aoi-review-reconciliation.json",
+        "config/aoi/approved-study-areas.geojson",
+        "config/aoi/approved-study-areas-epsg32645.json",
+        "records/surface-receipts/m1-approved-aoi-arcgis-validation.json"
+      ]
     },
     {
       "id": "EXIT-002-SOURCE-EVIDENCE",
@@ -193,7 +199,7 @@
       ],
       "action_class": "normative_decision",
       "human_gate": true,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "config/aoi/draft-study-areas.geojson",
         "records/source-gates/aoi-draft-receipt.json",
@@ -205,18 +211,33 @@
         "reviews/m1-aoi/blank-response.json"
       ],
       "outputs": [
-        "records/source-gates/aoi-approval.json"
+        "records/source-gates/aoi-approval.json",
+        "config/aoi/approved-study-areas.geojson",
+        "config/aoi/approved-study-areas-epsg32645.json",
+        "records/surface-receipts/m1-approved-aoi-arcgis-validation.json"
       ],
-      "gates": {},
-      "disposition": null,
-      "retained_failures": [],
+      "gates": {
+        "exact_human_response_reconciled": "pass",
+        "owner_approval": "pass",
+        "reviewed_aoi_sha256": "68c406f7f41c301c339e200ccdd75194183c483c65156ab3949e64236072ccde",
+        "geometry_equivalence": "pass",
+        "arcgis_json_to_features": "pass",
+        "projected_crs": "EPSG:32645"
+      },
+      "disposition": "pass",
+      "retained_failures": [
+        "Initial response lock attempt rejected the non-hash-bound candidate filename; no response was locked and decision values were not read.",
+        "Initial ArcGIS validation attempt imported the JSON but failed on an unsupported Polygon.isEmpty property; the pointCount remediation passed on rerun."
+      ],
       "exit_condition_delta": {
         "expected": [
           "EXIT-001-AOI-LOCKED"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "Exact AOI selection is a normative owner decision."
+        "observed": [
+          "EXIT-001-AOI-LOCKED"
+        ],
+        "decision_value": "advances_exit",
+        "rationale": "The owner approved the exact reviewed geometry, the response was locked and reconciled, and ArcGIS Pro imported the projected EPSG:32645 derivative successfully."
       },
       "next_dependency": "M1-MANIFEST"
     },
@@ -312,15 +333,31 @@
       ],
       "action_class": "normative_decision",
       "human_gate": true,
-      "status": "planned",
+      "status": "ready",
       "inputs": [
         "records/source-gates/aoi-approval.json",
-        "records/source-gates/quicklook-review.json"
+        "records/source-gates/quicklook-review.json",
+        "records/source-manifest.json",
+        "docs/M1_SOURCE_MANIFEST_REVIEW.md",
+        "docs/assets/m1-source-manifest-review.png",
+        "records/surface-receipts/m1-source-manifest-review.json",
+        "reviews/m1-manifest/review-bundle.json",
+        "reviews/m1-manifest/review-contract.json",
+        "reviews/m1-manifest/blank-response.json"
       ],
       "outputs": [
-        "records/source-manifest.json"
+        "records/source-gates/source-manifest-approval.json"
       ],
-      "gates": {},
+      "gates": {
+        "candidate_count": 10,
+        "proposed_accept_count": 8,
+        "proposed_defer_count": 2,
+        "proposed_reject_count": 0,
+        "candidate_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+        "review_bundle_manifest_sha256": "dd7d85562134e2c0cc2115eabdf329de56763209918dc65c872ceed911900544",
+        "review_surface": "verified",
+        "human_decision": "pending"
+      },
       "disposition": null,
       "retained_failures": [],
       "exit_condition_delta": {
@@ -329,7 +366,7 @@
         ],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "Source acceptance and acquisition scope remain owner decisions."
+        "rationale": "The exact candidate manifest is decision-ready, but accepted and deferred source dispositions remain an owner decision."
       },
       "next_dependency": null
     }
@@ -358,18 +395,22 @@
       "Copernicus source gate valid and ready",
       "10/10 exact catalog records captured",
       "10/10 quicklooks decoded and visually screened",
-      "review map rendered with ArcGIS Pro Python and visually inspected",
-      "scratch quicklook assets excluded from Git"
+      "owner approved the exact M1 AOI review bundle",
+      "approved AOIs projected and imported in ArcGIS Pro 3.7.1 as EPSG:32645",
+      "candidate source manifest generated with 8 proposed accept, 2 proposed defer, and 0 proposed reject records",
+      "source-manifest review surface visually inspected and bundle validated",
+      "scratch and private human-response assets excluded from Git"
     ]
   },
   "handoff": {
-    "current_checkpoint": "M1-OWNER-AOI-GATE",
-    "next_action": "Owner decides approve, revise, or defer for review bundle m1-aoi-review-bundle-001, manifest SHA-256 7b8c4b1f5d86f44dc5425aee46ad813d3248c47054b48a815d877c264dfa252a.",
+    "current_checkpoint": "M1-OWNER-MANIFEST-GATE",
+    "next_action": "Owner decides approve, revise, or defer for bundle m1-source-manifest-review-bundle-001, manifest SHA-256 dd7d85562134e2c0cc2115eabdf329de56763209918dc65c872ceed911900544.",
     "do_not_carry_forward": [
       "Catalog presence and quicklooks are not pixel usability.",
-      "Draft AOIs are not approved AOIs.",
+      "Approved AOIs are search and review extents, not mapped change polygons.",
       "No full satellite product acquisition is authorized.",
       "Do not redistribute portal quicklook assets.",
+      "The post-event RUM optical candidate is high-cloud-risk and may be inconclusive.",
       "No scientific conclusion has been produced."
     ]
   }

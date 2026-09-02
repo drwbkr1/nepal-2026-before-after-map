@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m1-source-manifest-review-bundle-001",
+  "review_id": "m1-source-manifest-review-001",
+  "authority_ref": "user-instruction:2026-09-01:activate-charter-and-begin-project",
+  "candidate_identity": "SOURCE-MANIFEST-SHA256:6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m1-source-manifest-review.png",
+      "sha256": "0dd0279a22681bd4df9209295b5f4457c6a41d03f0b9cb72920788f5edfbad99",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m1-source-manifest-review.json",
+          "sha256": "7e12b1e4a7404415f950aca22691fe026268c4b5d7edbc728548179ea093afc3"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M1_SOURCE_MANIFEST_REVIEW.md",
+      "sha256": "4eab209b0f5a0f96680d5bd3d6e33f4dec72056d99a30b3877627fc70ad04c4f",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "candidate-source-manifest",
+      "path": "records/source-manifest.json",
+      "sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+      "role": "candidate_identity_and_provenance",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "aoi-approval",
+      "path": "records/source-gates/aoi-approval.json",
+      "sha256": "92ce0094460968ae37c1687cc0dde5e5db439b0dd968a3161d7d4feb3a6e93aa",
+      "role": "upstream_human_gate",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "quicklook-review",
+      "path": "records/source-gates/quicklook-review.json",
+      "sha256": "f6dd95475cb515c6748173d3c84561c7fd19dcf8a118982d9b8957ade236a619",
+      "role": "candidate_quality_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "source-gate",
+      "path": "records/source-gates/copernicus-source-gate.json",
+      "sha256": "0cf564f590817c89e6a72e0d9d8e9f206f45cc4275e51fa6d939af78cc895bfe",
+      "role": "rights_and_access_boundary",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "arcgis-aoi-validation",
+      "path": "records/surface-receipts/m1-approved-aoi-arcgis-validation.json",
+      "sha256": "419502ca0bdfbb24f1017eab0350123f0c1b0bb00813e23bcd48edcba45ccb45",
+      "role": "projected_geometry_validation",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "The proposed manifest has no established usable pixels and no full products in custody.",
+    "Post-event optical coverage is high-cloud-risk and may remain inconclusive.",
+    "Approval locks candidate dispositions for later controlled planning but does not authorize authentication, terms acceptance, or downloads.",
+    "No scientific change or event attribution is asserted."
+  ]
+}

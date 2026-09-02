@@ -1,0 +1,18 @@
+{
+  "response_schema_version": "nepal-m1-source-manifest-response-v1",
+  "review_id": "m1-source-manifest-review-001",
+  "completed": false,
+  "review_started_at_utc": null,
+  "review_completed_at_utc": null,
+  "reviewer": {
+    "attestation": false
+  },
+  "responses": [
+    {
+      "item_id": "M1-SOURCE-MANIFEST-EXACT-CANDIDATES",
+      "evidence_sha256": "dd7d85562134e2c0cc2115eabdf329de56763209918dc65c872ceed911900544",
+      "decision": null,
+      "notes": ""
+    }
+  ]
+}

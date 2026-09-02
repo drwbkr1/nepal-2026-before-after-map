@@ -1,0 +1,183 @@
+{
+  "objectIdFieldName": "",
+  "uniqueIdField": {
+    "name": "AOI_ID",
+    "isSystemMaintained": false
+  },
+  "globalIdFieldName": "",
+  "geometryType": "esriGeometryPolygon",
+  "spatialReference": {
+    "wkid": 32645,
+    "latestWkid": 32645
+  },
+  "fields": [
+    {
+      "name": "AOI_ID",
+      "type": "esriFieldTypeString",
+      "alias": "AOI ID",
+      "length": 40
+    },
+    {
+      "name": "NAME",
+      "type": "esriFieldTypeString",
+      "alias": "Name",
+      "length": 80
+    },
+    {
+      "name": "PURPOSE",
+      "type": "esriFieldTypeString",
+      "alias": "Purpose",
+      "length": 160
+    },
+    {
+      "name": "STATUS",
+      "type": "esriFieldTypeString",
+      "alias": "Status",
+      "length": 40
+    },
+    {
+      "name": "SOURCE_REF",
+      "type": "esriFieldTypeString",
+      "alias": "Source reference",
+      "length": 160
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "AOI_ID": "AOI-OVERVIEW",
+        "NAME": "Regional overview",
+        "PURPOSE": "Regional source-to-downstream context",
+        "STATUS": "approved_m1_search_review",
+        "SOURCE_REF": "records/source-gates/aoi-approval.json"
+      },
+      "geometry": {
+        "rings": [
+          [
+            [
+              273303.7060330451,
+              3071628.417606323
+            ],
+            [
+              274771.3250860701,
+              3149207.1487340922
+            ],
+            [
+              367813.36124176905,
+              3147794.780816337
+            ],
+            [
+              366952.49450121284,
+              3070238.9980253475
+            ],
+            [
+              273303.7060330451,
+              3071628.417606323
+            ]
+          ]
+        ],
+        "spatialReference": {
+          "wkid": 32645,
+          "latestWkid": 32645
+        }
+      }
+    },
+    {
+      "attributes": {
+        "AOI_ID": "AOI-SOURCE",
+        "NAME": "Source area",
+        "PURPOSE": "Candidate debris-avalanche source and immediate path",
+        "STATUS": "approved_m1_search_review",
+        "SOURCE_REF": "records/source-gates/aoi-approval.json"
+      },
+      "geometry": {
+        "rings": [
+          [
+            [
+              348895.9042574165,
+              3123641.7679454773
+            ],
+            [
+              349051.175802986,
+              3135829.9813008904
+            ],
+            [
+              360814.8106658969,
+              3135685.703196282
+            ],
+            [
+              360671.64772760903,
+              3123497.8556990214
+            ],
+            [
+              348895.9042574165,
+              3123641.7679454773
+            ]
+          ]
+        ],
+        "spatialReference": {
+          "wkid": 32645,
+          "latestWkid": 32645
+        }
+      }
+    },
+    {
+      "attributes": {
+        "AOI_ID": "AOI-UPPER-CORRIDOR",
+        "NAME": "Upper corridor",
+        "PURPOSE": "Candidate Bhote Koshi\u2013Trishuli change corridor",
+        "STATUS": "approved_m1_search_review",
+        "SOURCE_REF": "records/source-gates/aoi-approval.json"
+      },
+      "geometry": {
+        "rings": [
+          [
+            [
+              331027.416290457,
+              3109474.799487982
+            ],
+            [
+              331468.25046959193,
+              3140500.6953381915
+            ],
+            [
+              348127.82488362904,
+              3140274.667294039
+            ],
+            [
+              347730.60293514596,
+              3109250.232363998
+            ],
+            [
+              331027.416290457,
+              3109474.799487982
+            ]
+          ]
+        ],
+        "spatialReference": {
+          "wkid": 32645,
+          "latestWkid": 32645
+        }
+      }
+    }
+  ],
+  "projectMetadata": {
+    "source": "config/aoi/approved-study-areas.geojson",
+    "sourceSha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98",
+    "sourceCrs": "EPSG:4326",
+    "analysisCrs": "EPSG:32645",
+    "projectionEngine": "ArcGIS Pro arcpy Geometry.projectAs",
+    "arcgisVersion": "3.7.1",
+    "extent": {
+      "xmin": 273303.7060330451,
+      "ymin": 3070238.9980253475,
+      "xmax": 367813.36124176905,
+      "ymax": 3149207.1487340922,
+      "spatialReference": {
+        "wkid": 32645,
+        "latestWkid": 32645
+      }
+    },
+    "claimBoundary": "Projected search and review extents; not change polygons or event attribution."
+  }
+}
