@@ -1,63 +1,376 @@
 {
   "schema_version": "1.0",
-  "contract_id": "NEPAL-MAP-M001",
-  "milestone": "M1_EVENT_GEOMETRY_AND_SOURCE_MANIFEST",
-  "status": "proposed",
-  "objective": "Review event geometry and lock a candidate source manifest using metadata and quicklooks before any full-scene acquisition.",
-  "project_root": ".",
+  "milestone_id": "NEPAL-MAP-M001",
+  "project_profile_ref": "records/project-control-profile.json",
+  "status": "active",
   "authority": {
-    "mode": "not_granted",
-    "authorized_actions": [],
-    "prohibited_actions": [
-      "download_full_satellite_products",
-      "accept_provider_terms",
-      "use_credentials",
-      "incur_cost",
-      "publish_scientific_conclusions"
+    "mode": "inherited",
+    "authority_ref": "user-instruction:2026-09-01:activate-charter-and-begin-project",
+    "authorized_action_classes": [
+      "read_only_inspection",
+      "deterministic_validation",
+      "metadata_capture",
+      "routine_qa",
+      "evidence_recording",
+      "project_control",
+      "update_project_records",
+      "reversible_remediation",
+      "external_publication"
+    ],
+    "user_instruction": "Turn the charter into a long-term goal and begin the project.",
+    "repository_controls": [
+      "AGENTS.md",
+      "records/project-control-profile.json",
+      "docs/VALIDATION.md"
+    ],
+    "active_contract": "contracts/milestone-001.json",
+    "verified_at_utc": "2026-09-02T02:59:36Z",
+    "expires_at_utc": null
+  },
+  "scope": {
+    "objective": "Review event geometry and build a decision-ready candidate source manifest from exact metadata, footprints, rights, and quicklook evidence before any full-scene acquisition.",
+    "allowed_paths": [
+      "AGENTS.md",
+      "README.md",
+      "config/",
+      "contracts/",
+      "docs/",
+      "records/",
+      "scripts/"
+    ],
+    "forbidden_work": [
+      "download full satellite products",
+      "accept provider terms",
+      "use credentials or private account sessions",
+      "incur cost",
+      "select a repository license",
+      "use or redistribute restricted high-resolution imagery",
+      "publish scientific conclusions or operational emergency guidance",
+      "store raw imagery, rasters, geodatabases, or ArcGIS packages in Git"
+    ],
+    "reversible_actions": [
+      "query public metadata APIs",
+      "record source identities and footprints",
+      "create draft AOI GeoJSON",
+      "inspect public quicklooks",
+      "run deterministic validation",
+      "update project records and publish non-scientific M1 progress"
+    ],
+    "stop_conditions": [
+      "credential or terms acceptance is required",
+      "a requested source has unclear redistribution or use rights",
+      "AOI locking or final source selection requires owner judgment",
+      "full-product acquisition would begin",
+      "scientific attribution or public emergency claims would be published",
+      "source evidence is ambiguous or inconsistent"
     ]
   },
-  "units": [
+  "entry_conditions": [
     {
-      "unit_id": "M1-ACTIVATE",
-      "action": "approve_goal_and_milestone_boundary",
-      "human_gate": true,
-      "action_class": "normative_decision",
-      "status": "pending"
+      "id": "ENTRY-001-GOAL-ACTIVATED",
+      "status": "pass",
+      "evidence": [
+        "user-instruction:2026-09-01:activate-charter-and-begin-project",
+        "records/long-term-goal.json"
+      ]
     },
     {
-      "unit_id": "M1-AOI",
-      "action": "review_and_lock_aoi_geometry",
-      "human_gate": true,
-      "action_class": "normative_decision",
-      "status": "pending"
+      "id": "ENTRY-002-BOOTSTRAP-VERIFIED",
+      "status": "pass",
+      "evidence": [
+        "docs/STATUS.md",
+        "records/evidence-ledger.jsonl#EVID-0003",
+        "git:700a792c9da7bc18ab4455361dead2083ef9b5ed"
+      ]
     },
     {
-      "unit_id": "M1-METADATA",
-      "action": "query_and_record_catalog_metadata",
-      "human_gate": false,
-      "action_class": "metadata_capture",
-      "status": "pending"
-    },
-    {
-      "unit_id": "M1-QUICKLOOK",
-      "action": "inspect_footprints_metadata_and_quicklooks",
-      "human_gate": false,
-      "action_class": "routine_qa",
-      "status": "pending"
-    },
-    {
-      "unit_id": "M1-MANIFEST",
-      "action": "lock_candidate_source_manifest",
-      "human_gate": true,
-      "action_class": "normative_decision",
-      "status": "pending"
+      "id": "ENTRY-003-CUSTODY-BOUNDARY",
+      "status": "pass",
+      "evidence": [
+        ".gitignore",
+        "scripts/check_project.py",
+        "AGENTS.md"
+      ]
     }
   ],
-  "exit_criteria": [
-    "AOIs are exact, reviewed, and projected consistently",
-    "Every candidate has provider identity, acquisition time, rights, access path, coverage disposition, and pixel-inspection status",
-    "Accepted, rejected, and deferred products are preserved",
-    "The approved manifest explicitly identifies any authorized acquisition",
-    "No source imagery or credentials are committed to Git"
-  ]
+  "exit_conditions": [
+    {
+      "id": "EXIT-001-AOI-LOCKED",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "EXIT-002-SOURCE-EVIDENCE",
+      "status": "pass",
+      "evidence": [
+        "records/source-gates/catalog-metadata-receipt.json",
+        "records/source-gates/quicklook-review.json",
+        "records/source-gates/copernicus-source-gate.json"
+      ]
+    },
+    {
+      "id": "EXIT-003-MANIFEST-APPROVED",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "EXIT-004-CUSTODY-PRESERVED",
+      "status": "pass",
+      "evidence": [
+        ".gitignore",
+        "scripts/check_project.py"
+      ]
+    }
+  ],
+  "units": [
+    {
+      "id": "M1-ACTIVATE",
+      "purpose": "Bind the approved charter objective and activate the bounded M1 authority envelope.",
+      "depends_on": [],
+      "action_class": "normative_decision",
+      "human_gate": true,
+      "status": "complete",
+      "inputs": [
+        "docs/PROJECT_CHARTER.md",
+        "user instruction 2026-09-01"
+      ],
+      "outputs": [
+        "records/long-term-goal.json",
+        "records/project-control-profile.json"
+      ],
+      "gates": {
+        "owner_activation": "pass"
+      },
+      "disposition": "pass",
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "enables_dependency",
+        "rationale": "The owner explicitly activated the charter as the long-term goal and asked work to begin."
+      },
+      "next_dependency": "M1-AOI-DRAFT"
+    },
+    {
+      "id": "M1-AOI-DRAFT",
+      "purpose": "Create inspectable draft AOI geometry from the charter bounds in WGS84 with EPSG:32645 processing intent.",
+      "depends_on": [
+        "M1-ACTIVATE"
+      ],
+      "action_class": "metadata_capture",
+      "human_gate": false,
+      "status": "complete",
+      "inputs": [
+        "docs/DATA_AND_METHODS_PLAN.md"
+      ],
+      "outputs": [
+        "config/aoi/draft-study-areas.geojson",
+        "records/source-gates/aoi-draft-receipt.json"
+      ],
+      "gates": {
+        "geometry_parse": "pass",
+        "rings_closed": "pass",
+        "bounds_match_planning_table": "pass",
+        "output_sha256": "68c406f7f41c301c339e200ccdd75194183c483c65156ab3949e64236072ccde"
+      },
+      "disposition": "pass",
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-001-AOI-LOCKED"
+        ],
+        "observed": [],
+        "decision_value": "enables_dependency",
+        "rationale": "The draft geometry is inspectable and hash-bound, enabling owner AOI review without treating the bounds as approved."
+      },
+      "next_dependency": "M1-AOI"
+    },
+    {
+      "id": "M1-AOI",
+      "purpose": "Owner reviews and locks the exact study geometry.",
+      "depends_on": [
+        "M1-AOI-DRAFT"
+      ],
+      "action_class": "normative_decision",
+      "human_gate": true,
+      "status": "ready",
+      "inputs": [
+        "config/aoi/draft-study-areas.geojson",
+        "records/source-gates/aoi-draft-receipt.json",
+        "docs/M1_AOI_REVIEW.md",
+        "docs/assets/m1-aoi-footprint-review.png",
+        "records/surface-receipts/m1-aoi-review-map.json",
+        "reviews/m1-aoi/review-bundle.json",
+        "reviews/m1-aoi/review-contract.json",
+        "reviews/m1-aoi/blank-response.json"
+      ],
+      "outputs": [
+        "records/source-gates/aoi-approval.json"
+      ],
+      "gates": {},
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-001-AOI-LOCKED"
+        ],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "Exact AOI selection is a normative owner decision."
+      },
+      "next_dependency": "M1-MANIFEST"
+    },
+    {
+      "id": "M1-METADATA",
+      "purpose": "Query and record exact public Copernicus catalog metadata, footprints, attributes, and access identity.",
+      "depends_on": [
+        "M1-ACTIVATE"
+      ],
+      "action_class": "metadata_capture",
+      "human_gate": false,
+      "status": "complete",
+      "inputs": [
+        "docs/DATA_AND_METHODS_PLAN.md",
+        "records/source-gates/catalog-candidate-verification.json"
+      ],
+      "outputs": [
+        "records/source-gates/catalog-metadata.json",
+        "records/source-gates/candidate-footprints.geojson",
+        "records/source-gates/catalog-metadata-receipt.json"
+      ],
+      "gates": {
+        "exact_name_unique": "pass",
+        "provider_id_matches_seed": "pass",
+        "content_date_present": "pass",
+        "footprint_present": "pass",
+        "no_authentication_used": "pass",
+        "no_product_download": "pass",
+        "metadata_sha256": "0e7d57f007933844b927f08569de03097ac60f1f5f1edda212e2027aef332c7c",
+        "footprint_sha256": "4a0ecec9d76c4d4d7585442cdb193142621a911929b8588ef37fc5a6d9b20ff1"
+      },
+      "disposition": "pass",
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-002-SOURCE-EVIDENCE"
+        ],
+        "observed": [],
+        "decision_value": "enables_dependency",
+        "rationale": "Ten exact records and provider footprints were captured without authentication or product download; quicklook and rights review remain."
+      },
+      "next_dependency": "M1-QUICKLOOK"
+    },
+    {
+      "id": "M1-QUICKLOOK",
+      "purpose": "Inspect available public footprints and quicklooks for AOI coverage and obvious usability limitations.",
+      "depends_on": [
+        "M1-METADATA"
+      ],
+      "action_class": "routine_qa",
+      "human_gate": false,
+      "status": "complete",
+      "inputs": [
+        "records/source-gates/catalog-metadata.json",
+        "records/source-gates/candidate-footprints.geojson"
+      ],
+      "outputs": [
+        "records/source-gates/quicklook-review.json",
+        "records/source-gates/copernicus-source-gate.json",
+        "docs/M1_AOI_REVIEW.md",
+        "docs/assets/m1-aoi-footprint-review.png"
+      ],
+      "gates": {
+        "quicklook_assets_available": "10/10 pass",
+        "image_decode": "10/10 pass",
+        "visual_review": "complete_with_limitations",
+        "source_gate": "ready",
+        "authentication": "not_used",
+        "full_product_download": "not_performed",
+        "quicklook_review_sha256": "f6dd95475cb515c6748173d3c84561c7fd19dcf8a118982d9b8957ade236a619",
+        "review_map_sha256": "dea0f27e4fb9440a72ff11dc2da046f16e0aa1ebf46cb02b3095c2805432ce0d"
+      },
+      "disposition": "pass",
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-002-SOURCE-EVIDENCE"
+        ],
+        "observed": [
+          "EXIT-002-SOURCE-EVIDENCE"
+        ],
+        "decision_value": "advances_exit",
+        "rationale": "Every exact candidate now has catalog identity, attributes, footprint, quicklook availability, coarse visual limitations, access evidence, rights boundaries, and explicit pixel-inspection status."
+      },
+      "next_dependency": "M1-MANIFEST"
+    },
+    {
+      "id": "M1-MANIFEST",
+      "purpose": "Owner reviews and locks accepted, rejected, and deferred candidates and any later acquisition boundary.",
+      "depends_on": [
+        "M1-AOI",
+        "M1-QUICKLOOK"
+      ],
+      "action_class": "normative_decision",
+      "human_gate": true,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/aoi-approval.json",
+        "records/source-gates/quicklook-review.json"
+      ],
+      "outputs": [
+        "records/source-manifest.json"
+      ],
+      "gates": {},
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-003-MANIFEST-APPROVED"
+        ],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "Source acceptance and acquisition scope remain owner decisions."
+      },
+      "next_dependency": null
+    }
+  ],
+  "path_efficiency": {
+    "max_consecutive_no_progress_units": 2,
+    "review_action_class": "project_control",
+    "review_human_gate": false
+  },
+  "verification": {
+    "changed_risks": [
+      "documentation",
+      "data",
+      "external",
+      "public"
+    ],
+    "required_checks": [
+      "python scripts/check_project.py",
+      "validate project control profile",
+      "validate milestone contract against project profile",
+      "inspect source metadata receipts",
+      "git diff --check",
+      "verify public branch if progress is pushed"
+    ],
+    "completed_checks": [
+      "Copernicus source gate valid and ready",
+      "10/10 exact catalog records captured",
+      "10/10 quicklooks decoded and visually screened",
+      "review map rendered with ArcGIS Pro Python and visually inspected",
+      "scratch quicklook assets excluded from Git"
+    ]
+  },
+  "handoff": {
+    "current_checkpoint": "M1-OWNER-AOI-GATE",
+    "next_action": "Owner decides approve, revise, or defer for review bundle m1-aoi-review-bundle-001, manifest SHA-256 7b8c4b1f5d86f44dc5425aee46ad813d3248c47054b48a815d877c264dfa252a.",
+    "do_not_carry_forward": [
+      "Catalog presence and quicklooks are not pixel usability.",
+      "Draft AOIs are not approved AOIs.",
+      "No full satellite product acquisition is authorized.",
+      "Do not redistribute portal quicklook assets.",
+      "No scientific conclusion has been produced."
+    ]
+  }
 }

@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "CATALOG-METADATA-001",
+  "status": "pass",
+  "retrieved_at_utc": "2026-09-02T03:05:45Z",
+  "catalog_endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+  "candidate_count": 10,
+  "exact_match_count": 10,
+  "footprint_count": 10,
+  "metadata_output": "records/source-gates/catalog-metadata.json",
+  "metadata_sha256": "0e7d57f007933844b927f08569de03097ac60f1f5f1edda212e2027aef332c7c",
+  "footprint_output": "records/source-gates/candidate-footprints.geojson",
+  "footprint_sha256": "4a0ecec9d76c4d4d7585442cdb193142621a911929b8588ef37fc5a6d9b20ff1",
+  "checks": {
+    "exact_name_unique": "pass",
+    "provider_id_matches_seed": "pass",
+    "content_date_present": "pass",
+    "footprint_present": "pass",
+    "no_authentication_used": "pass",
+    "no_product_download": "pass"
+  },
+  "limitations": [
+    "Bounding-box intersection is not exact footprint or usable-pixel coverage.",
+    "Provider checksums describe remote products; no local product bytes exist.",
+    "Rights, masks, pixels, and event relevance remain unreviewed."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "AOI-DRAFT-001",
+  "status": "pass",
+  "generated_at_utc": "2026-09-02T03:03:46Z",
+  "source_ref": "docs/DATA_AND_METHODS_PLAN.md#draft-areas-of-interest",
+  "output": "config/aoi/draft-study-areas.geojson",
+  "sha256": "68c406f7f41c301c339e200ccdd75194183c483c65156ab3949e64236072ccde",
+  "feature_count": 3,
+  "storage_crs": "EPSG:4326",
+  "analysis_crs": "EPSG:32645",
+  "checks": {
+    "geometry_type_polygon": "pass",
+    "rings_closed": "pass",
+    "longitude_latitude_order": "pass",
+    "bounds_match_planning_table": "pass"
+  },
+  "disposition": "draft_for_owner_review",
+  "limitations": [
+    "Rectangular planning bounds are not approved event geometry.",
+    "GeoJSON stores RFC 7946 longitude/latitude; ArcGIS analysis must project to EPSG:32645.",
+    "No source footprint or pixel coverage was used to modify these bounds."
+  ]
+}

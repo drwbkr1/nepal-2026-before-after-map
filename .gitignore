@@ -61,6 +61,10 @@ outputs/
 exports/
 deliverables/
 
+# Human-review response custody
+reviews/**/private/
+reviews/**/locked/
+
 # OS/editor
 .DS_Store
 Thumbs.db

@@ -1,0 +1,660 @@
+{
+  "type": "FeatureCollection",
+  "name": "Copernicus candidate product footprints",
+  "properties": {
+    "retrieved_at_utc": "2026-09-02T03:05:45Z",
+    "storage_crs": "EPSG:4326",
+    "status": "catalog_candidate",
+    "claim_boundary": "Provider footprints are not proof of usable AOI pixels."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "227d0869-e2a2-4258-9624-ffaea31c4058",
+      "bbox": [
+        84.177147,
+        26.082024,
+        87.035492,
+        28.008406
+      ],
+      "properties": {
+        "product_stem": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057",
+        "provider_product_id": "227d0869-e2a2-4258-9624-ffaea31c4058",
+        "platform": "SENTINEL-1",
+        "instrument": "SAR",
+        "product_type": "IW_GRDH_1S",
+        "acquisition_start": "2026-08-16T12:21:16.058226Z",
+        "cloud_cover": null,
+        "relative_orbit_number": 85,
+        "orbit_direction": "ASCENDING",
+        "status": "candidate",
+        "claim_boundary": "Catalog footprint; not verified pixel coverage."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              84.177147,
+              27.591404
+            ],
+            [
+              84.498421,
+              26.082024
+            ],
+            [
+              87.035492,
+              26.502077
+            ],
+            [
+              86.748665,
+              28.008406
+            ],
+            [
+              84.177147,
+              27.591404
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "844b9a32-9aa2-4611-83f6-ae6501c01955",
+      "bbox": [
+        83.9244,
+        27.591494,
+        86.749352,
+        29.524935
+      ],
+      "properties": {
+        "product_stem": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB",
+        "provider_product_id": "844b9a32-9aa2-4611-83f6-ae6501c01955",
+        "platform": "SENTINEL-1",
+        "instrument": "SAR",
+        "product_type": "IW_GRDH_1S",
+        "acquisition_start": "2026-08-16T12:21:41.058298Z",
+        "cloud_cover": null,
+        "relative_orbit_number": 85,
+        "orbit_direction": "ASCENDING",
+        "status": "candidate",
+        "claim_boundary": "Catalog footprint; not verified pixel coverage."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.9244,
+              29.112411
+            ],
+            [
+              84.177124,
+              27.591494
+            ],
+            [
+              86.749352,
+              28.008602
+            ],
+            [
+              86.532738,
+              29.524935
+            ],
+            [
+              83.9244,
+              29.112411
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "f2682536-f9b8-4b5b-b9eb-5b52417820fa",
+      "bbox": [
+        85.232002,
+        27.070326,
+        88.040062,
+        28.997923
+      ],
+      "properties": {
+        "product_stem": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16",
+        "provider_product_id": "f2682536-f9b8-4b5b-b9eb-5b52417820fa",
+        "platform": "SENTINEL-1",
+        "instrument": "SAR",
+        "product_type": "IW_GRDH_1S",
+        "acquisition_start": "2026-08-19T00:10:36.889384Z",
+        "cloud_cover": null,
+        "relative_orbit_number": 121,
+        "orbit_direction": "DESCENDING",
+        "status": "candidate",
+        "claim_boundary": "Catalog footprint; not verified pixel coverage."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              87.76828,
+              27.070326
+            ],
+            [
+              88.040062,
+              28.588068
+            ],
+            [
+              85.468857,
+              28.997923
+            ],
+            [
+              85.232002,
+              27.484329
+            ],
+            [
+              87.76828,
+              27.070326
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "641ccb0b-5d88-4c44-b558-93b488cd2453",
+      "bbox": [
+        84.177376,
+        26.082081,
+        87.035706,
+        28.008425
+      ],
+      "properties": {
+        "product_stem": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523",
+        "provider_product_id": "641ccb0b-5d88-4c44-b558-93b488cd2453",
+        "platform": "SENTINEL-1",
+        "instrument": "SAR",
+        "product_type": "IW_GRDH_1S",
+        "acquisition_start": "2026-08-28T12:21:16.762016Z",
+        "cloud_cover": null,
+        "relative_orbit_number": 85,
+        "orbit_direction": "ASCENDING",
+        "status": "candidate",
+        "claim_boundary": "Catalog footprint; not verified pixel coverage."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              84.177376,
+              27.591463
+            ],
+            [
+              84.498627,
+              26.082081
+            ],
+            [
+              87.035706,
+              26.502094
+            ],
+            [
+              86.748901,
+              28.008425
+            ],
+            [
+              84.177376,
+              27.591463
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "9cb3c885-cfb8-40cc-a44a-8673e772c794",
+      "bbox": [
+        83.924644,
+        27.591553,
+        86.749588,
+        29.524954
+      ],
+      "properties": {
+        "product_stem": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4",
+        "provider_product_id": "9cb3c885-cfb8-40cc-a44a-8673e772c794",
+        "platform": "SENTINEL-1",
+        "instrument": "SAR",
+        "product_type": "IW_GRDH_1S",
+        "acquisition_start": "2026-08-28T12:21:41.762029Z",
+        "cloud_cover": null,
+        "relative_orbit_number": 85,
+        "orbit_direction": "ASCENDING",
+        "status": "candidate",
+        "claim_boundary": "Catalog footprint; not verified pixel coverage."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.924644,
+              29.112471
+            ],
+            [
+              84.177353,
+              27.591553
+            ],
+            [
+              86.749588,
+              28.008621
+            ],
+            [
+              86.532997,
+              29.524954
+            ],
+            [
+              83.924644,
+              29.112471
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4",
+      "bbox": [
+        85.231094,
+        27.070356,
+        88.039307,
+        28.997856
+      ],
+      "properties": {
+        "product_stem": "S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B",
+        "provider_product_id": "36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4",
+        "platform": "SENTINEL-1",
+        "instrument": "SAR",
+        "product_type": "IW_GRDH_1S",
+        "acquisition_start": "2026-08-31T00:10:37.647071Z",
+        "cloud_cover": null,
+        "relative_orbit_number": 121,
+        "orbit_direction": "DESCENDING",
+        "status": "candidate",
+        "claim_boundary": "Catalog footprint; not verified pixel coverage."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              87.767586,
+              27.070356
+            ],
+            [
+              88.039307,
+              28.588013
+            ],
+            [
+              85.467896,
+              28.997856
+            ],
+            [
+              85.231094,
+              27.48435
+            ],
+            [
+              87.767586,
+              27.070356
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "2f35c992-1ea6-42f9-965c-011ea770d334",
+      "bbox": [
+        84.96592364373934,
+        27.019735585570864,
+        85.87659957738256,
+        28.020161411950266
+      ],
+      "properties": {
+        "product_stem": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUL_20260827T084453",
+        "provider_product_id": "2f35c992-1ea6-42f9-965c-011ea770d334",
+        "platform": "SENTINEL-2",
+        "instrument": "MSI",
+        "product_type": "S2MSI2A",
+        "acquisition_start": "2026-08-27T04:56:59.024000Z",
+        "cloud_cover": 54.286689,
+        "relative_orbit_number": 119,
+        "orbit_direction": null,
+        "status": "candidate",
+        "claim_boundary": "Catalog footprint; not verified pixel coverage."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87659957738256,
+              28.020161411950266
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.61166133848934,
+              27.0262567412524
+            ],
+            [
+              85.62538457335674,
+              27.07655523095373
+            ],
+            [
+              85.66543816597073,
+              27.224235701877745
+            ],
+            [
+              85.70399634961379,
+              27.37237609402516
+            ],
+            [
+              85.74401426383886,
+              27.520168008862484
+            ],
+            [
+              85.7859866603375,
+              27.66753620012581
+            ],
+            [
+              85.82453192440458,
+              27.81591334224957
+            ],
+            [
+              85.86263108044032,
+              27.96444800801939
+            ],
+            [
+              85.87659957738256,
+              28.020161411950266
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "76de2c15-9281-45e3-8f0b-e97085fa6d69",
+      "bbox": [
+        84.94856806237455,
+        27.92214908733191,
+        86.07620966099518,
+        28.92510258614215
+      ],
+      "properties": {
+        "product_stem": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453",
+        "provider_product_id": "76de2c15-9281-45e3-8f0b-e97085fa6d69",
+        "platform": "SENTINEL-2",
+        "instrument": "MSI",
+        "product_type": "S2MSI2A",
+        "acquisition_start": "2026-08-27T04:56:59.024000Z",
+        "cloud_cover": 78.471315,
+        "relative_orbit_number": 119,
+        "orbit_direction": null,
+        "status": "candidate",
+        "claim_boundary": "Catalog footprint; not verified pixel coverage."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07620966099518,
+              28.74027219497689
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.85421690035542,
+              27.931644199308657
+            ],
+            [
+              85.86263108044032,
+              27.96444800801939
+            ],
+            [
+              85.8999286249787,
+              28.113209408267966
+            ],
+            [
+              85.94191454032125,
+              28.260718047903893
+            ],
+            [
+              85.98499093002968,
+              28.407804555528468
+            ],
+            [
+              86.02529434713477,
+              28.55554567271025
+            ],
+            [
+              86.0655079376437,
+              28.703302426571373
+            ],
+            [
+              86.07620966099518,
+              28.74027219497689
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "d5883e5c-6124-4672-8e68-dd7c84307c8c",
+      "bbox": [
+        84.96592364373934,
+        27.019735585570864,
+        85.87095740659909,
+        28.020100814573386
+      ],
+      "properties": {
+        "product_stem": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUL_20260812T100317",
+        "provider_product_id": "d5883e5c-6124-4672-8e68-dd7c84307c8c",
+        "platform": "SENTINEL-2",
+        "instrument": "MSI",
+        "product_type": "S2MSI2A",
+        "acquisition_start": "2026-08-12T04:57:01.025000Z",
+        "cloud_cover": 27.947062,
+        "relative_orbit_number": 119,
+        "orbit_direction": null,
+        "status": "candidate",
+        "claim_boundary": "Catalog footprint; not verified pixel coverage."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87095740659909,
+              28.020100814573386
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.60556087134167,
+              27.026193352359225
+            ],
+            [
+              85.61839575800268,
+              27.073209393031128
+            ],
+            [
+              85.6497397191664,
+              27.188382854687248
+            ],
+            [
+              85.6594077371371,
+              27.224060618309338
+            ],
+            [
+              85.6985401373765,
+              27.37216447034669
+            ],
+            [
+              85.72521161135603,
+              27.47300573052601
+            ],
+            [
+              85.7367997103997,
+              27.517379699549032
+            ],
+            [
+              85.77888056426282,
+              27.66463549819693
+            ],
+            [
+              85.80439421787534,
+              27.760695427156897
+            ],
+            [
+              85.81878849823764,
+              27.8157939683146
+            ],
+            [
+              85.8569692544807,
+              27.964245323992664
+            ],
+            [
+              85.86629555517366,
+              28.001409104559695
+            ],
+            [
+              85.87095740659909,
+              28.020100814573386
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "25faa527-2502-4f7d-a703-cfff3e99d483",
+      "bbox": [
+        84.94856806237455,
+        27.92214908733191,
+        86.07604033874381,
+        28.92510258614215
+      ],
+      "properties": {
+        "product_stem": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317",
+        "provider_product_id": "25faa527-2502-4f7d-a703-cfff3e99d483",
+        "platform": "SENTINEL-2",
+        "instrument": "MSI",
+        "product_type": "S2MSI2A",
+        "acquisition_start": "2026-08-12T04:57:01.025000Z",
+        "cloud_cover": 18.746611,
+        "relative_orbit_number": 119,
+        "orbit_direction": null,
+        "status": "candidate",
+        "claim_boundary": "Catalog footprint; not verified pixel coverage."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07604033874381,
+              28.759826739022365
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.84856889358903,
+              27.93158371418551
+            ],
+            [
+              85.8569692544807,
+              27.964245323992664
+            ],
+            [
+              85.86629555517366,
+              28.001409104559695
+            ],
+            [
+              85.8934599034619,
+              28.110324656468123
+            ],
+            [
+              85.93122662803566,
+              28.245795298991247
+            ],
+            [
+              85.93536068405822,
+              28.26066227241861
+            ],
+            [
+              85.9503570205109,
+              28.311424182498495
+            ],
+            [
+              85.9778960012283,
+              28.404970168354108
+            ],
+            [
+              86.01811647852264,
+              28.55291024012904
+            ],
+            [
+              86.05589230244709,
+              28.68905629574412
+            ],
+            [
+              86.05982409329533,
+              28.703344958967968
+            ],
+            [
+              86.075641188383,
+              28.75843159425008
+            ],
+            [
+              86.07604033874381,
+              28.759826739022365
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

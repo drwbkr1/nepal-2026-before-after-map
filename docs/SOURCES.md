@@ -20,6 +20,10 @@ The project uses **26 August 2026 debris avalanche and flash flood** as its work
 - [Sentinel-2 Level-2A API documentation](https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/S2L2A.html)
 - [Copernicus Data Space OData documentation](https://documentation.dataspace.copernicus.eu/APIs/OData.html)
 - [Copernicus Browser documentation](https://documentation.dataspace.copernicus.eu/Applications/Browser.html)
+- [Copernicus Data Space terms and conditions](https://dataspace.copernicus.eu/terms-and-conditions)
+- [Copernicus Data Space citation guidance](https://documentation.dataspace.copernicus.eu/FAQ.html)
+
+Copernicus Sentinel data is described by CDSE as free, full, and open under the Sentinel Data Legal Notice. Public or modified outputs must use the applicable Copernicus Sentinel source notice. Portal materials outside the Sentinel data grant can have narrower noncommercial and redistribution terms, so downloaded quicklooks remain in Git-ignored scratch custody and are not redistributed from this repository.
 
 ## Exact product-name check
 

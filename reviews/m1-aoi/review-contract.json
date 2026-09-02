@@ -1,0 +1,45 @@
+{
+  "contract_version": "human-review-contract-v1",
+  "template": false,
+  "review_id": "m1-aoi-review-001",
+  "response_schema_version": "nepal-m1-aoi-response-v1",
+  "workflow_authority": {
+    "mode": "inherited",
+    "authority_ref": "user-instruction:2026-09-01:activate-charter-and-begin-project",
+    "authorized_action_classes": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ],
+    "verified_at_utc": "2026-09-02T03:21:45Z",
+    "expires_at_utc": null,
+    "review_required": true,
+    "lock_authorized": true,
+    "reconcile_authorized": true,
+    "post_review_actions": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ]
+  },
+  "review_bundle": {
+    "bundle_id": "m1-aoi-review-bundle-001",
+    "manifest_sha256": "7b8c4b1f5d86f44dc5425aee46ad813d3248c47054b48a815d877c264dfa252a",
+    "candidate_identity": "AOI-SHA256:68c406f7f41c301c339e200ccdd75194183c483c65156ab3949e64236072ccde",
+    "rendered_surface_verified": true
+  },
+  "allowed_decisions": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "required_attestation": true,
+  "max_notes_length": 2000,
+  "hash_prefix_length": 16,
+  "items": [
+    {
+      "item_id": "M1-AOI-EXACT-GEOMETRY",
+      "evidence_sha256": "7b8c4b1f5d86f44dc5425aee46ad813d3248c47054b48a815d877c264dfa252a"
+    }
+  ]
+}

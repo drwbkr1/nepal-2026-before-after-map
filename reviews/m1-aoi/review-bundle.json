@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m1-aoi-review-bundle-001",
+  "review_id": "m1-aoi-review-001",
+  "authority_ref": "user-instruction:2026-09-01:activate-charter-and-begin-project",
+  "candidate_identity": "AOI-SHA256:68c406f7f41c301c339e200ccdd75194183c483c65156ab3949e64236072ccde",
+  "artifacts": [
+    {
+      "artifact_id": "review-map",
+      "path": "docs/assets/m1-aoi-footprint-review.png",
+      "sha256": "dea0f27e4fb9440a72ff11dc2da046f16e0aa1ebf46cb02b3095c2805432ce0d",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m1-aoi-review-map.json",
+          "sha256": "b9b6cdc545a56ead3d1f237ab52aac899f675867e0fa4bcd6078561a554abf01"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M1_AOI_REVIEW.md",
+      "sha256": "2166b787a52e88fc48e4611a2b721fe015023ce526b4fb57c525e72b72bfe594",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "aoi-geojson",
+      "path": "config/aoi/draft-study-areas.geojson",
+      "sha256": "68c406f7f41c301c339e200ccdd75194183c483c65156ab3949e64236072ccde",
+      "role": "candidate_geometry",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "aoi-receipt",
+      "path": "records/source-gates/aoi-draft-receipt.json",
+      "sha256": "68633671efcfa532a5ebea521071b5a1369005fc62ddebe211c976019f4e51fb",
+      "role": "geometry_receipt",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "catalog-receipt",
+      "path": "records/source-gates/catalog-metadata-receipt.json",
+      "sha256": "6c5dbfb7c2befaf94393da032e416da653d8a2d8bac7a5e12b007658652b56f4",
+      "role": "catalog_receipt",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "quicklook-review",
+      "path": "records/source-gates/quicklook-review.json",
+      "sha256": "f6dd95475cb515c6748173d3c84561c7fd19dcf8a118982d9b8957ade236a619",
+      "role": "quality_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "source-gate",
+      "path": "records/source-gates/copernicus-source-gate.json",
+      "sha256": "0cf564f590817c89e6a72e0d9d8e9f206f45cc4275e51fa6d939af78cc895bfe",
+      "role": "rights_access_gate",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-map",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "The review surface maps catalog footprints, not usable pixels.",
+    "The decision covers search and review AOIs, not final change polygons.",
+    "Approval does not authorize full-product acquisition or scientific publication."
+  ]
+}

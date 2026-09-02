@@ -8,23 +8,44 @@
       "expected_remote": "https://github.com/drwbkr1/nepal-2026-before-after-map.git",
       "default_branch": "main"
     },
-    "custody_roots": ["records", "contracts"],
-    "forbidden_roots": ["data/raw", "data/licensed", "deliverables"]
+    "custody_roots": [
+      "records",
+      "contracts"
+    ],
+    "forbidden_roots": [
+      "data/raw",
+      "data/licensed",
+      "deliverables"
+    ]
   },
   "authority": {
-    "mode": "not_granted",
-    "authority_ref": null,
-    "authorized_action_classes": [],
-    "verified_at_utc": null,
+    "mode": "inherited",
+    "authority_ref": "user-instruction:2026-09-01:activate-charter-and-begin-project",
+    "authorized_action_classes": [
+      "read_only_inspection",
+      "deterministic_validation",
+      "metadata_capture",
+      "routine_qa",
+      "evidence_recording",
+      "project_control",
+      "update_project_records",
+      "reversible_remediation",
+      "external_publication"
+    ],
+    "verified_at_utc": "2026-09-02T02:59:36Z",
     "expires_at_utc": null
   },
   "control_surfaces": {
-    "instructions": ["AGENTS.md"],
+    "instructions": [
+      "AGENTS.md"
+    ],
     "status": "docs/STATUS.md",
     "roadmap": "docs/ROADMAP.md",
     "active_contract": "contracts/milestone-001.json",
     "evidence_ledger": "records/evidence-ledger.jsonl",
-    "history": ["docs/DECISIONS.md"]
+    "history": [
+      "docs/DECISIONS.md"
+    ]
   },
   "cycle": {
     "canonical_probe": {
@@ -35,26 +56,39 @@
   },
   "evaluation": {
     "procedure_ref": "docs/VALIDATION.md",
-    "evidence_roots": ["records/surface-receipts", "records/source-gates"]
+    "evidence_roots": [
+      "records/surface-receipts",
+      "records/source-gates"
+    ]
   },
   "real_surfaces": [
     {
       "id": "source",
-      "risk_classes": ["documentation", "public"],
+      "risk_classes": [
+        "documentation",
+        "public"
+      ],
       "procedure_ref": "command:python scripts/check_project.py",
       "receipt_root": "records/surface-receipts",
       "external": false
     },
     {
       "id": "arcgis-package",
-      "risk_classes": ["data", "package", "public"],
+      "risk_classes": [
+        "data",
+        "package",
+        "public"
+      ],
       "procedure_ref": "docs/ARCGIS_DELIVERY_PLAN.md",
       "receipt_root": "records/surface-receipts",
       "external": true
     },
     {
       "id": "external-data",
-      "risk_classes": ["data", "external"],
+      "risk_classes": [
+        "data",
+        "external"
+      ],
       "procedure_ref": "docs/DATA_AND_METHODS_PLAN.md",
       "receipt_root": "records/source-gates",
       "external": true
@@ -97,14 +131,24 @@
         "unit_id": "HIGHRES-USE",
         "reason": "Accepts asset-specific terms or noncommercial restrictions.",
         "authority_ref": "docs/DECISIONS.md#d-004--high-resolution-imagery"
+      },
+      {
+        "unit_id": "M1-AOI",
+        "reason": "Locks the normative study geometry used for acquisition and analysis.",
+        "authority_ref": "contracts/milestone-001.json"
+      },
+      {
+        "unit_id": "M1-MANIFEST",
+        "reason": "Approves the exact source manifest and any later acquisition boundary.",
+        "authority_ref": "contracts/milestone-001.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "BOOTSTRAP-PUBLISHED",
+    "checkpoint_id": "M1-OWNER-AOI-GATE",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Seek owner decision on the proposed long-term goal and M1 activation boundary."
+    "next_action": "Owner reviews the exact draft AOI bundle; do not begin full-product acquisition."
   }
 }

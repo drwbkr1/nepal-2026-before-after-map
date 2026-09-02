@@ -1,0 +1,225 @@
+{
+  "contract_version": "source-gate/v1",
+  "assessment_id": "CDSE-SENTINEL-M1-001",
+  "assessed_at": "2026-09-02T03:11:51Z",
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "user-instruction:2026-09-01:activate-charter-and-begin-project",
+    "authorized_actions": [
+      "metadata review",
+      "download public quicklook",
+      "retain private scratch quicklook for review",
+      "record source evidence"
+    ],
+    "expires_at_utc": null
+  },
+  "intended_use": {
+    "summary": "Use exact public Copernicus metadata and reduced-resolution quicklooks to prepare the M1 candidate manifest and identify obvious limitations without downloading full products.",
+    "planned_actions": [
+      "metadata review",
+      "download public quicklook",
+      "retain private scratch quicklook for review",
+      "record source evidence"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "CDSE-SENTINEL-CORE-001",
+      "name": "Copernicus Data Space Sentinel catalog and quicklook assets",
+      "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+              "note": "Ten exact Sentinel product names returned unique provider IDs, dates, attributes, and footprints.",
+              "observed_at": "2026-09-02T03:05:45Z"
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/catalog-metadata-receipt.json",
+              "note": "Hash-bound receipt records all ten exact matches."
+            }
+          ],
+          "note": "Official OData records identify the exact Sentinel-1 GRD and Sentinel-2 L2A candidates."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/about",
+              "note": "CDSE identifies itself as the Copernicus Sentinel data access ecosystem operated under ESA guidance.",
+              "observed_at": "2026-09-02T03:11:51Z"
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/catalog-metadata.json",
+              "note": "Product attributes identify ESA origin and Sentinel platforms."
+            }
+          ],
+          "note": "CDSE is authoritative for official product discovery and access metadata."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+              "note": "Official documentation distinguishes public catalog and node access from authenticated full-product download.",
+              "observed_at": "2026-09-02T03:11:51Z"
+            },
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+              "note": "All exact metadata and public quicklook requests succeeded without authentication.",
+              "observed_at": "2026-09-02T03:09:38Z"
+            }
+          ],
+          "note": "M1 metadata and quicklooks are publicly accessible; full-product access remains separately gated."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "note": "Sentinel data is free, full, and open under the Sentinel legal notice; other portal materials have narrower terms.",
+              "observed_at": "2026-09-02T03:11:51Z"
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/FAQ.html",
+              "note": "Official FAQ specifies Sentinel source notices for public and modified data.",
+              "observed_at": "2026-09-02T03:11:51Z"
+            },
+            {
+              "type": "static",
+              "locator": ".gitignore",
+              "note": "Quicklooks remain in Git-ignored scratch custody."
+            }
+          ],
+          "note": "Private quicklook screening may proceed. Do not redistribute portal quicklooks; later derived outputs need the prescribed Sentinel notice."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/catalog-metadata.json",
+              "note": "Records retain exact names, provider UUIDs, query URLs, dates, attributes, checksums, and footprints."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/quicklook-review.json",
+              "note": "Quicklook records retain asset UUIDs, links, hashes, dimensions, and dispositions."
+            }
+          ],
+          "note": "No intermediary full-resolution data entered custody."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/catalog-metadata-receipt.json",
+              "note": "Metadata and footprint outputs have SHA-256 receipts and remote products expose provider checksums."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/quicklook-review.json",
+              "note": "All ten quicklooks have local SHA-256 values and decoded successfully."
+            }
+          ],
+          "note": "Sufficient for M1; any later full product needs post-acquisition hash verification."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/quicklook-review.json",
+              "note": "Quicklooks support coarse coverage and limitation screening and record optical cloud and radar browse limits."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/catalog-metadata.json",
+              "note": "Dates, product types, orbits, cloud attributes, and footprints support candidate preparation."
+            }
+          ],
+          "note": "Fit only for M1 screening, not pixel analysis or attribution."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "AGENTS.md",
+              "note": "Project instructions prohibit credential exposure and keep heavy or restricted assets outside Git."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/quicklook-review.json",
+              "note": "Requests used no authentication and scratch assets are Git-ignored."
+            }
+          ],
+          "note": "Public Earth-observation data; no project personal data or secrets are involved."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "ready",
+    "blocking_reasons": [],
+    "live_verification_pending": [],
+    "approved_actions": [
+      "metadata review",
+      "download public quicklook",
+      "retain private scratch quicklook for review",
+      "record source evidence"
+    ]
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": [
+      "metadata review",
+      "download public quicklook",
+      "retain private scratch quicklook for review",
+      "record source evidence"
+    ],
+    "requires_explicit_authorization": [
+      "authenticate",
+      "accept terms",
+      "download full satellite product",
+      "publish or redistribute quicklook assets",
+      "approve AOI geometry",
+      "approve the source manifest",
+      "publish scientific conclusions"
+    ]
+  }
+}

@@ -23,6 +23,7 @@ REQUIRED = [
     "docs/DECISIONS.md",
     "contracts/milestone-001.json",
     "records/project-control-profile.json",
+    "records/long-term-goal.json",
     "records/evidence-ledger.jsonl",
 ]
 
@@ -61,15 +62,27 @@ def main() -> None:
 
     profile = json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))
     contract = json.loads((ROOT / "contracts/milestone-001.json").read_text(encoding="utf-8"))
+    goal = json.loads((ROOT / "records/long-term-goal.json").read_text(encoding="utf-8"))
 
     if profile["project"]["name"] != ROOT.name:
         fail("project name does not match repository directory")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if contract["project_root"] != ".":
-        fail("milestone project_root must be project-relative")
-    if contract["authority"]["mode"] != "not_granted":
-        fail("proposed M1 must not carry acquisition authority")
+    if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
+        fail("AGENTS.md must contain controlling project instructions")
+    if goal["status"] != "active":
+        fail("long-term goal record must be active")
+    if contract["project_profile_ref"] != "records/project-control-profile.json":
+        fail("milestone must reference the project control profile")
+    if contract["status"] != "active":
+        fail("M1 must be active after goal activation")
+    if contract["authority"]["mode"] != "inherited":
+        fail("active M1 must inherit the exact user authority")
+    if profile["authority"]["authority_ref"] != contract["authority"]["authority_ref"]:
+        fail("profile and milestone authority references must agree")
+    prohibited = set(contract["scope"]["forbidden_work"])
+    if "download full satellite products" not in prohibited:
+        fail("full satellite-product acquisition must remain prohibited in M1")
 
     for number, line in enumerate(
         (ROOT / "records/evidence-ledger.jsonl").read_text(encoding="utf-8").splitlines(), 1

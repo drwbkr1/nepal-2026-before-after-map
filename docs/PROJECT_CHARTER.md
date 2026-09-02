@@ -86,4 +86,4 @@ Scientific success requires more than a polished map. Each published feature mus
 
 ## Governance state
 
-This charter proposes the project. It does not activate the long-term goal or authorize data acquisition. Milestone contracts and [records/project-control-profile.json](../records/project-control-profile.json) define the current boundary.
+The owner activated this charter as the long-term goal on 1 September 2026. Activation begins the bounded M1 metadata, AOI-drafting, quicklook, validation, and evidence-recording work; it does not authorize full-product acquisition, restricted imagery, terms acceptance, or scientific publication. Milestone contracts and [records/project-control-profile.json](../records/project-control-profile.json) define the current boundary.

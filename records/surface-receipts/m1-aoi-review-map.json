@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "M1-AOI-REVIEW-MAP-001",
+  "status": "pass_after_remediation",
+  "verified_at_utc": "2026-09-02T03:17:46Z",
+  "input_refs": [
+    "config/aoi/draft-study-areas.geojson",
+    "records/source-gates/candidate-footprints.geojson"
+  ],
+  "script": "scripts/render_aoi_review_map.py",
+  "output": "docs/assets/m1-aoi-footprint-review.png",
+  "sha256": "dea0f27e4fb9440a72ff11dc2da046f16e0aa1ebf46cb02b3095c2805432ce0d",
+  "width": 2179,
+  "height": 1310,
+  "runtime": {
+    "failed_attempt": {
+      "command": "python scripts/render_aoi_review_map.py",
+      "status": "failed",
+      "error": "ModuleNotFoundError: No module named 'matplotlib'",
+      "retained": true
+    },
+    "successful_attempt": {
+      "command": "ArcGIS Pro Python scripts/render_aoi_review_map.py",
+      "status": "pass"
+    }
+  },
+  "visual_qa": {
+    "title_and_claim_boundary_visible": "pass",
+    "aoi_labels_visible": "pass",
+    "legend_visible": "pass",
+    "axes_visible": "pass",
+    "no_overlap_after_remediation": "pass"
+  },
+  "limitations": [
+    "No basemap or administrative context is included.",
+    "Footprints are catalog geometry, not usable-pixel coverage.",
+    "Draft AOIs remain unapproved."
+  ]
+}

@@ -1,0 +1,308 @@
+{
+  "schema_version": "1.0",
+  "review_id": "QUICKLOOK-REVIEW-001",
+  "status": "complete_with_limitations",
+  "retrieved_at_utc": "2026-09-02T03:09:38Z",
+  "source": "Copernicus Data Space OData product Assets expansion",
+  "candidate_count": 10,
+  "available_quicklook_count": 10,
+  "contact_sheet_scratch_path": "scratch/quicklooks/candidate-contact-sheet.jpg",
+  "contact_sheet_sha256": "7fc879356ff590f1dd9c27958ec402391b7aaec85004e70d64b0f915cffb6e1c",
+  "authentication": "none",
+  "product_download": "not_performed",
+  "claim_boundary": "Quicklooks support coarse visual screening only and cannot establish AOI pixel usability, quantitative change, or event causation.",
+  "records": [
+    {
+      "product_stem": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057",
+      "provider_product_id": "227d0869-e2a2-4258-9624-ffaea31c4058",
+      "asset_query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE%27&%24expand=Assets&%24top=1",
+      "quicklook_asset_count": 1,
+      "availability": "available",
+      "automated_checks": {
+        "asset_unique": "pass",
+        "image_decode": "pass",
+        "nonzero_dimensions": "pass",
+        "full_product_download": "not_performed"
+      },
+      "visual_review_status": "reviewed_coarse_only",
+      "visual_observations": [
+        "Quicklook decodes and shows the expected terrain-scale swath.",
+        "Browse rendering is strongly terrain-textured; event-scale change cannot be resolved reliably at this size."
+      ],
+      "pixel_usability_status": "not_established",
+      "disposition": "retain_candidate_for_product_level_radar_qa",
+      "quicklook_asset_id": "2a07a099-2b50-47b0-a736-288b8339b6e4",
+      "download_link": "https://catalogue.dataspace.copernicus.eu/odata/v1/Assets(2a07a099-2b50-47b0-a736-288b8339b6e4)/$value",
+      "content_type": "application/octet-stream",
+      "byte_size": 120192,
+      "sha256": "5847795391faf876ccf22cf21b427aea730ab5fcac9d3df3f5305b64aacbf299",
+      "width": 297,
+      "height": 198,
+      "local_scratch_path": "scratch/quicklooks/S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.jpg"
+    },
+    {
+      "product_stem": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB",
+      "provider_product_id": "844b9a32-9aa2-4611-83f6-ae6501c01955",
+      "asset_query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE%27&%24expand=Assets&%24top=1",
+      "quicklook_asset_count": 1,
+      "availability": "available",
+      "automated_checks": {
+        "asset_unique": "pass",
+        "image_decode": "pass",
+        "nonzero_dimensions": "pass",
+        "full_product_download": "not_performed"
+      },
+      "visual_review_status": "reviewed_coarse_only",
+      "visual_observations": [
+        "Quicklook decodes and shows the expected terrain-scale swath.",
+        "Browse rendering is strongly terrain-textured; event-scale change cannot be resolved reliably at this size."
+      ],
+      "pixel_usability_status": "not_established",
+      "disposition": "retain_candidate_for_product_level_radar_qa",
+      "quicklook_asset_id": "be50c21c-2441-4041-8200-4f548286d062",
+      "download_link": "https://catalogue.dataspace.copernicus.eu/odata/v1/Assets(be50c21c-2441-4041-8200-4f548286d062)/$value",
+      "content_type": "application/octet-stream",
+      "byte_size": 136137,
+      "sha256": "28c0b52f9c00e33d8b1fd1b79676663d9ebe5f08854599c92aa3d75d65fcbf02",
+      "width": 297,
+      "height": 198,
+      "local_scratch_path": "scratch/quicklooks/S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.jpg"
+    },
+    {
+      "product_stem": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16",
+      "provider_product_id": "f2682536-f9b8-4b5b-b9eb-5b52417820fa",
+      "asset_query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE%27&%24expand=Assets&%24top=1",
+      "quicklook_asset_count": 1,
+      "availability": "available",
+      "automated_checks": {
+        "asset_unique": "pass",
+        "image_decode": "pass",
+        "nonzero_dimensions": "pass",
+        "full_product_download": "not_performed"
+      },
+      "visual_review_status": "reviewed_coarse_only",
+      "visual_observations": [
+        "Quicklook decodes and shows the expected terrain-scale swath.",
+        "Browse rendering is strongly terrain-textured; event-scale change cannot be resolved reliably at this size."
+      ],
+      "pixel_usability_status": "not_established",
+      "disposition": "retain_candidate_for_product_level_radar_qa",
+      "quicklook_asset_id": "347dd403-e625-422c-87bd-a3fe1e651d35",
+      "download_link": "https://catalogue.dataspace.copernicus.eu/odata/v1/Assets(347dd403-e625-422c-87bd-a3fe1e651d35)/$value",
+      "content_type": "application/octet-stream",
+      "byte_size": 138295,
+      "sha256": "f48ab38b2bec37511f584825cd09790b67e8f21e5fc198c9c053fadfe532f652",
+      "width": 297,
+      "height": 200,
+      "local_scratch_path": "scratch/quicklooks/S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.jpg"
+    },
+    {
+      "product_stem": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523",
+      "provider_product_id": "641ccb0b-5d88-4c44-b558-93b488cd2453",
+      "asset_query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE%27&%24expand=Assets&%24top=1",
+      "quicklook_asset_count": 1,
+      "availability": "available",
+      "automated_checks": {
+        "asset_unique": "pass",
+        "image_decode": "pass",
+        "nonzero_dimensions": "pass",
+        "full_product_download": "not_performed"
+      },
+      "visual_review_status": "reviewed_coarse_only",
+      "visual_observations": [
+        "Quicklook decodes and shows the expected terrain-scale swath.",
+        "Browse rendering is strongly terrain-textured; event-scale change cannot be resolved reliably at this size."
+      ],
+      "pixel_usability_status": "not_established",
+      "disposition": "retain_candidate_for_product_level_radar_qa",
+      "quicklook_asset_id": "0dcac8df-95c2-4b2e-9d94-37bec181ce52",
+      "download_link": "https://catalogue.dataspace.copernicus.eu/odata/v1/Assets(0dcac8df-95c2-4b2e-9d94-37bec181ce52)/$value",
+      "content_type": "application/octet-stream",
+      "byte_size": 118833,
+      "sha256": "907b3d8ad573d46661bad19932050f905dbfd0679c1aa96c76c6dc99f8daecd6",
+      "width": 297,
+      "height": 198,
+      "local_scratch_path": "scratch/quicklooks/S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.jpg"
+    },
+    {
+      "product_stem": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4",
+      "provider_product_id": "9cb3c885-cfb8-40cc-a44a-8673e772c794",
+      "asset_query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE%27&%24expand=Assets&%24top=1",
+      "quicklook_asset_count": 1,
+      "availability": "available",
+      "automated_checks": {
+        "asset_unique": "pass",
+        "image_decode": "pass",
+        "nonzero_dimensions": "pass",
+        "full_product_download": "not_performed"
+      },
+      "visual_review_status": "reviewed_coarse_only",
+      "visual_observations": [
+        "Quicklook decodes and shows the expected terrain-scale swath.",
+        "Browse rendering is strongly terrain-textured; event-scale change cannot be resolved reliably at this size."
+      ],
+      "pixel_usability_status": "not_established",
+      "disposition": "retain_candidate_for_product_level_radar_qa",
+      "quicklook_asset_id": "554f7c6b-8fc8-47da-ad92-d0b24fbeba80",
+      "download_link": "https://catalogue.dataspace.copernicus.eu/odata/v1/Assets(554f7c6b-8fc8-47da-ad92-d0b24fbeba80)/$value",
+      "content_type": "application/octet-stream",
+      "byte_size": 135859,
+      "sha256": "2fac18f0b3e3308542ff55c4d44716d95ba239bda22e5daf46a87fe35afa0db7",
+      "width": 297,
+      "height": 198,
+      "local_scratch_path": "scratch/quicklooks/S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.jpg"
+    },
+    {
+      "product_stem": "S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B",
+      "provider_product_id": "36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4",
+      "asset_query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE%27&%24expand=Assets&%24top=1",
+      "quicklook_asset_count": 1,
+      "availability": "available",
+      "automated_checks": {
+        "asset_unique": "pass",
+        "image_decode": "pass",
+        "nonzero_dimensions": "pass",
+        "full_product_download": "not_performed"
+      },
+      "visual_review_status": "reviewed_coarse_only",
+      "visual_observations": [
+        "Quicklook decodes and shows the expected terrain-scale swath.",
+        "Browse rendering is strongly terrain-textured; event-scale change cannot be resolved reliably at this size."
+      ],
+      "pixel_usability_status": "not_established",
+      "disposition": "retain_candidate_for_product_level_radar_qa",
+      "quicklook_asset_id": "05a54166-3438-4381-8ae6-70c378c1bb5b",
+      "download_link": "https://catalogue.dataspace.copernicus.eu/odata/v1/Assets(05a54166-3438-4381-8ae6-70c378c1bb5b)/$value",
+      "content_type": "application/octet-stream",
+      "byte_size": 138349,
+      "sha256": "9a51f33696acd73f9d0bd1d119f0aa4ace95c0ce4997b5b89250e30aed624191",
+      "width": 297,
+      "height": 200,
+      "local_scratch_path": "scratch/quicklooks/S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.jpg"
+    },
+    {
+      "product_stem": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUL_20260827T084453",
+      "provider_product_id": "2f35c992-1ea6-42f9-965c-011ea770d334",
+      "asset_query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S2B_MSIL2A_20260827T045659_N0512_R119_T45RUL_20260827T084453.SAFE%27&%24expand=Assets&%24top=1",
+      "quicklook_asset_count": 1,
+      "availability": "available",
+      "automated_checks": {
+        "asset_unique": "pass",
+        "image_decode": "pass",
+        "nonzero_dimensions": "pass",
+        "full_product_download": "not_performed"
+      },
+      "visual_review_status": "reviewed_coarse_only",
+      "visual_observations": [
+        "Post-event RUL browse image has extensive bright cloud or snow-like cover and a no-data edge.",
+        "Catalog cloud cover is 54.286689 percent; its footprint bounding box does not intersect the draft source or upper-corridor boxes."
+      ],
+      "pixel_usability_status": "not_established",
+      "disposition": "retain_context_candidate_cloud_limited",
+      "quicklook_asset_id": "5059ff8a-2df3-49bb-90b4-db359e3406fb",
+      "download_link": "https://catalogue.dataspace.copernicus.eu/odata/v1/Assets(5059ff8a-2df3-49bb-90b4-db359e3406fb)/$value",
+      "content_type": "application/octet-stream",
+      "byte_size": 31489,
+      "sha256": "2825dd1038e4f67be56299988b3600b8f3e76cc449e0d75c42751b3392fcb708",
+      "width": 343,
+      "height": 343,
+      "local_scratch_path": "scratch/quicklooks/S2B_MSIL2A_20260827T045659_N0512_R119_T45RUL_20260827T084453.jpg"
+    },
+    {
+      "product_stem": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453",
+      "provider_product_id": "76de2c15-9281-45e3-8f0b-e97085fa6d69",
+      "asset_query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE%27&%24expand=Assets&%24top=1",
+      "quicklook_asset_count": 1,
+      "availability": "available",
+      "automated_checks": {
+        "asset_unique": "pass",
+        "image_decode": "pass",
+        "nonzero_dimensions": "pass",
+        "full_product_download": "not_performed"
+      },
+      "visual_review_status": "reviewed_coarse_only",
+      "visual_observations": [
+        "Post-event RUM browse image has extensive bright cloud or snow-like cover and a no-data edge.",
+        "Catalog cloud cover is 78.471315 percent; this tile intersects the draft source and upper-corridor bounding boxes."
+      ],
+      "pixel_usability_status": "not_established",
+      "disposition": "retain_candidate_high_cloud_risk",
+      "quicklook_asset_id": "948f6be4-b93f-4ce7-acee-6e82780e420a",
+      "download_link": "https://catalogue.dataspace.copernicus.eu/odata/v1/Assets(948f6be4-b93f-4ce7-acee-6e82780e420a)/$value",
+      "content_type": "application/octet-stream",
+      "byte_size": 27378,
+      "sha256": "f13e05efa1104733e3a99a6f9a2c996849932f210a09fe1e8aac9e5ff1a86344",
+      "width": 343,
+      "height": 343,
+      "local_scratch_path": "scratch/quicklooks/S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.jpg"
+    },
+    {
+      "product_stem": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUL_20260812T100317",
+      "provider_product_id": "d5883e5c-6124-4672-8e68-dd7c84307c8c",
+      "asset_query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S2C_MSIL2A_20260812T045701_N0512_R119_T45RUL_20260812T100317.SAFE%27&%24expand=Assets&%24top=1",
+      "quicklook_asset_count": 1,
+      "availability": "available",
+      "automated_checks": {
+        "asset_unique": "pass",
+        "image_decode": "pass",
+        "nonzero_dimensions": "pass",
+        "full_product_download": "not_performed"
+      },
+      "visual_review_status": "reviewed_coarse_only",
+      "visual_observations": [
+        "Pre-event RUL browse image shows patchy cloud or snow-like bright cover and a no-data edge.",
+        "Catalog cloud cover is 27.947062 percent; its footprint bounding box does not intersect the draft source or upper-corridor boxes."
+      ],
+      "pixel_usability_status": "not_established",
+      "disposition": "retain_context_candidate_mask_review_required",
+      "quicklook_asset_id": "500ca2de-1e0e-49ac-81af-da721aa3669f",
+      "download_link": "https://catalogue.dataspace.copernicus.eu/odata/v1/Assets(500ca2de-1e0e-49ac-81af-da721aa3669f)/$value",
+      "content_type": "application/octet-stream",
+      "byte_size": 31568,
+      "sha256": "fa64f07d4db57420c2d1171b7fedfa37e4238e5e75247303954692826e374191",
+      "width": 343,
+      "height": 343,
+      "local_scratch_path": "scratch/quicklooks/S2C_MSIL2A_20260812T045701_N0512_R119_T45RUL_20260812T100317.jpg"
+    },
+    {
+      "product_stem": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317",
+      "provider_product_id": "25faa527-2502-4f7d-a703-cfff3e99d483",
+      "asset_query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Name+eq+%27S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE%27&%24expand=Assets&%24top=1",
+      "quicklook_asset_count": 1,
+      "availability": "available",
+      "automated_checks": {
+        "asset_unique": "pass",
+        "image_decode": "pass",
+        "nonzero_dimensions": "pass",
+        "full_product_download": "not_performed"
+      },
+      "visual_review_status": "reviewed_coarse_only",
+      "visual_observations": [
+        "Pre-event RUM browse image shows mountainous terrain with scattered cloud or snow-like bright cover and a no-data edge.",
+        "Catalog cloud cover is 18.746611 percent; product-level masks are still required."
+      ],
+      "pixel_usability_status": "not_established",
+      "disposition": "retain_candidate_mask_review_required",
+      "quicklook_asset_id": "02ec1128-cde6-470d-9d23-f21c8d1179d7",
+      "download_link": "https://catalogue.dataspace.copernicus.eu/odata/v1/Assets(02ec1128-cde6-470d-9d23-f21c8d1179d7)/$value",
+      "content_type": "application/octet-stream",
+      "byte_size": 39304,
+      "sha256": "c312f1976e675d6b185c8481de3d3e39fb9cb0d44936ff461d7a78e793361d6d",
+      "width": 343,
+      "height": 343,
+      "local_scratch_path": "scratch/quicklooks/S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.jpg"
+    }
+  ],
+  "overall_observations": [
+    "All ten quicklook assets were available, decoded, and retained only in Git-ignored scratch custody.",
+    "The post-event Sentinel-2 candidates are visibly cloud or bright-cover limited, especially tile 45RUM over the draft source and corridor.",
+    "Sentinel-1 browse images support swath and coverage screening but are too coarse and terrain-dominated for event-scale interpretation.",
+    "No quicklook establishes usable pixels, quantitative change, or event causation."
+  ],
+  "limitations": [
+    "Quicklooks are reduced-resolution browse assets.",
+    "Scratch images are excluded from Git and are not approved source custody.",
+    "Cloud, snow, terrain, radar geometry, masks, and co-registration still require product-level review."
+  ],
+  "visual_reviewed_at_utc": "2026-09-02T03:11:13Z"
+}

@@ -15,7 +15,7 @@ The project should ultimately deliver:
 - portable ArcGIS layer and project packages plus GeoTIFF, GeoPackage/File Geodatabase, PDF, and PNG exports;
 - a public, reproducible method record that preserves limitations and failed or inconclusive analytical routes.
 
-This goal is **proposed, not activated**. The repository bootstrap does not authorize imagery acquisition, terms acceptance, high-resolution commercial imagery use, or publication of scientific conclusions.
+This goal is **active as of 1 September 2026**. Milestone 1 begins with draft AOIs, public metadata, footprints, and quicklook evidence. Full imagery acquisition, terms acceptance, restricted high-resolution imagery, and publication of scientific conclusions remain gated.
 
 ## Why this is useful
 
@@ -44,7 +44,7 @@ Public visibility does not grant reuse rights to third-party data. No repository
 
 ## Current checkpoint
 
-Milestone 0 is complete: the public repository, default branch, initial remote commit, and control records were verified. The next proposed milestone is to confirm the event geometry and create a locked source manifest using metadata and quicklooks before downloading full scenes.
+Milestone 0 is complete and Milestone 1 is active. Current work confirms event geometry and builds a decision-ready source manifest using metadata, footprints, and quicklooks before any full-scene acquisition.
 
 See:
 
@@ -52,6 +52,7 @@ See:
 - [Roadmap](docs/ROADMAP.md)
 - [Data and methods plan](docs/DATA_AND_METHODS_PLAN.md)
 - [Source register](docs/SOURCES.md)
+- [M1 AOI review bundle](docs/M1_AOI_REVIEW.md)
 - [ArcGIS delivery plan](docs/ARCGIS_DELIVERY_PLAN.md)
 - [Validation plan](docs/VALIDATION.md)
 - [Current status](docs/STATUS.md)
