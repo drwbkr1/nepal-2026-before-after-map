@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-activation-review-bundle-001",
+  "review_id": "m2-activation-review-001",
+  "authority_ref": "user-instruction:2026-09-01:activate-charter-and-begin-project",
+  "candidate_identity": "ACQUISITION-PLAN-SHA256:6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-controlled-acquisition-review.png",
+      "sha256": "1c1187e1861030f9744060c77790a12c7b0f78d9bf2c85729d0ab660fc814ffb",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-activation-review.json",
+          "sha256": "547e257bc494a5a65fcbd61e47d83ddcf7967957c55e2f58e636c9d2c8e1f841"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_CONTROLLED_ACQUISITION_REVIEW.md",
+      "sha256": "4ac5eb1b4d12351ae7cad7688948c032b96aa8580948117f4f514d2e2ddc1f51",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "candidate-acquisition-plan",
+      "path": "records/acquisition-plan.json",
+      "sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+      "role": "candidate_identity_and_custody_boundary",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "m2-proposal",
+      "path": "contracts/milestone-002-proposal.json",
+      "sha256": "a71f36fd667a26ff3cfabb12828ce719f566ba9c39db4b3c82adfad84c7b853c",
+      "role": "proposed_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "m1-source-manifest-approval",
+      "path": "records/source-gates/source-manifest-approval.json",
+      "sha256": "c6df8c24adc96439e8b8ef00c733db8fc3cd3ffb229b333b1d8a63933f3aa04e",
+      "role": "upstream_human_gate",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "decision_effect_if_approved": [
+    "activate M2 only within the exact proposed authority envelope",
+    "allow a fresh custody preflight and external custody-root creation",
+    "allow use of an owner-controlled existing Copernicus account or authenticated session",
+    "allow downloads of only the eight exact approved products",
+    "allow checksum, archive, band, pixel, coverage, rights, baseline, and registration QA"
+  ],
+  "limitations": [
+    "The bundle itself grants no acquisition authority.",
+    "Approval does not accept new or changed provider terms, create or recover an account, disclose credentials, or incur cost.",
+    "No product has entered custody and no usable pixels or scientific change are established.",
+    "The post-event optical route remains high-cloud-risk and may be inconclusive."
+  ]
+}

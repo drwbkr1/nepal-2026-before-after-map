@@ -7,6 +7,9 @@
   "user_instruction": "Alright, turn the charter into a long-term goal and begin the project.",
   "objective": "Build and maintain a reproducible, ArcGIS-ready geospatial evidence package for the 26 August 2026 Nepal debris avalanche and flash flood that identifies credible before/after satellite observations, maps observable change in EPSG:32645, separates observation from interpretation and attribution, preserves source identity and uncertainty, and produces reviewable ArcGIS maps and exportable deliverables without obscuring failed or inconclusive evidence.",
   "source_charter": "docs/PROJECT_CHARTER.md",
-  "active_milestone": "contracts/milestone-001.json",
-  "completion_rule": "Complete only when the reproducible ArcGIS evidence package, reviewed change evidence, exportable deliverables, validation, and final release boundary are all satisfied."
+  "active_milestone": null,
+  "completion_rule": "Complete only when the reproducible ArcGIS evidence package, reviewed change evidence, exportable deliverables, validation, and final release boundary are all satisfied.",
+  "last_completed_milestone": "contracts/milestone-001.json",
+  "proposed_milestone": "contracts/milestone-002-proposal.json",
+  "current_checkpoint": "M1-COMPLETE-M2-AUTHORITY-GATE"
 }

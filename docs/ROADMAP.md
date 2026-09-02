@@ -17,6 +17,8 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Outcome:** Reviewed areas of interest and a locked candidate-source manifest.
 
+**Status:** Complete. The owner approved the exact AOI and source-manifest review bundles; eight sources are accepted for controlled acquisition planning and two are retained as deferred context.
+
 **Work:**
 
 - reconcile reported event location and date against authoritative or independent sources;
@@ -31,6 +33,8 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 ## M2 — Controlled acquisition and baseline
 
 **Outcome:** Verified local custody of approved data and a reproducible pre-event baseline.
+
+**Status:** Proposed, not active. The exact acquisition plan is prepared for owner review; no authentication, custody-root creation, download, extraction, or baseline processing is authorized.
 
 **Work:**
 

@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "milestone_id": "NEPAL-MAP-M001",
   "project_profile_ref": "records/project-control-profile.json",
-  "status": "active",
+  "status": "complete",
   "authority": {
     "mode": "inherited",
     "authority_ref": "user-instruction:2026-09-01:activate-charter-and-begin-project",
@@ -116,8 +116,12 @@
     },
     {
       "id": "EXIT-003-MANIFEST-APPROVED",
-      "status": "pending",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "records/source-gates/source-manifest-approval.json",
+        "records/source-gates/source-manifest-review-reconciliation.json",
+        "records/source-manifest.json"
+      ]
     },
     {
       "id": "EXIT-004-CUSTODY-PRESERVED",
@@ -333,7 +337,7 @@
       ],
       "action_class": "normative_decision",
       "human_gate": true,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "records/source-gates/aoi-approval.json",
         "records/source-gates/quicklook-review.json",
@@ -346,7 +350,8 @@
         "reviews/m1-manifest/blank-response.json"
       ],
       "outputs": [
-        "records/source-gates/source-manifest-approval.json"
+        "records/source-gates/source-manifest-approval.json",
+        "records/source-gates/source-manifest-review-reconciliation.json"
       ],
       "gates": {
         "candidate_count": 10,
@@ -356,17 +361,23 @@
         "candidate_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
         "review_bundle_manifest_sha256": "dd7d85562134e2c0cc2115eabdf329de56763209918dc65c872ceed911900544",
         "review_surface": "verified",
-        "human_decision": "pending"
+        "human_decision": "approve",
+        "exact_human_response_reconciled": "pass",
+        "owner_approval": "pass",
+        "locked_response_sha256": "9f5e5f019e8538060fd88eaab06e0885f2afc9c9bce60dbc6ad5d84d668e4e13",
+        "lock_receipt_sha256": "9741cf49e8b546aba56630277bf32692f7955c3107735b4e2533ba4096f21e77"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [],
       "exit_condition_delta": {
         "expected": [
           "EXIT-003-MANIFEST-APPROVED"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "The exact candidate manifest is decision-ready, but accepted and deferred source dispositions remain an owner decision."
+        "observed": [
+          "EXIT-003-MANIFEST-APPROVED"
+        ],
+        "decision_value": "advances_exit",
+        "rationale": "The owner approved the exact source-manifest review bundle and candidate manifest through a completed, attested response that was locked and reconciled before project-control updates."
       },
       "next_dependency": null
     }
@@ -399,16 +410,19 @@
       "approved AOIs projected and imported in ArcGIS Pro 3.7.1 as EPSG:32645",
       "candidate source manifest generated with 8 proposed accept, 2 proposed defer, and 0 proposed reject records",
       "source-manifest review surface visually inspected and bundle validated",
-      "scratch and private human-response assets excluded from Git"
+      "scratch and private human-response assets excluded from Git",
+      "owner approved the exact candidate source manifest with 8 accepted-for-planning and 2 deferred records",
+      "human response locked before reveal and reconciled without fabricated decisions",
+      "M1 exit conditions satisfied without acquiring full satellite products"
     ]
   },
   "handoff": {
-    "current_checkpoint": "M1-OWNER-MANIFEST-GATE",
-    "next_action": "Owner decides approve, revise, or defer for bundle m1-source-manifest-review-bundle-001, manifest SHA-256 dd7d85562134e2c0cc2115eabdf329de56763209918dc65c872ceed911900544.",
+    "current_checkpoint": "M1-COMPLETE-M2-AUTHORITY-GATE",
+    "next_action": "Owner reviews the proposed M2 controlled-acquisition plan SHA-256 6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d; M2 remains proposed and non-authorizing.",
     "do_not_carry_forward": [
+      "Approved candidate dispositions authorize planning only, not credentials, terms acceptance, or downloads.",
       "Catalog presence and quicklooks are not pixel usability.",
       "Approved AOIs are search and review extents, not mapped change polygons.",
-      "No full satellite product acquisition is authorized.",
       "Do not redistribute portal quicklook assets.",
       "The post-event RUM optical candidate is high-cloud-risk and may be inconclusive.",
       "No scientific conclusion has been produced."

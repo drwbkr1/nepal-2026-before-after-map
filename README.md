@@ -15,7 +15,7 @@ The project should ultimately deliver:
 - portable ArcGIS layer and project packages plus GeoTIFF, GeoPackage/File Geodatabase, PDF, and PNG exports;
 - a public, reproducible method record that preserves limitations and failed or inconclusive analytical routes.
 
-This goal is **active as of 1 September 2026**. The M1 search and review AOIs are now owner-approved, projected to EPSG:32645, and validated through ArcGIS Pro. The next gate is the exact candidate source manifest. Full imagery acquisition, terms acceptance, restricted high-resolution imagery, and publication of scientific conclusions remain separately gated.
+This goal is **active as of 1 September 2026**. M1 is complete: the search and review AOIs are owner-approved, projected to EPSG:32645, and validated through ArcGIS Pro, and the exact source manifest is approved with eight sources accepted for controlled acquisition planning and two preserved as deferred context. M2 is proposed but not active. Full imagery acquisition, authenticated-session use, terms acceptance, restricted high-resolution imagery, and publication of scientific conclusions remain separately gated.
 
 ## Why this is useful
 
@@ -44,7 +44,7 @@ Public visibility does not grant reuse rights to third-party data. No repository
 
 ## Current checkpoint
 
-Milestone 0 is complete and Milestone 1 is active. The exact AOI review is complete. A decision-ready manifest proposes eight Sentinel sources for later controlled acquisition planning and defers two cloud-limited regional-context tiles; it does not claim usable pixels or authorize downloads.
+Milestones 0 and 1 are complete. The exact AOI and source-manifest decisions are locked and reconciled. The current gate is owner review of a proposed M2 plan covering eight exact Sentinel downloads into non-Git custody. The proposal does not authorize authentication, custody-root creation, downloads, or terms acceptance, and no usable pixels or scientific change have been established.
 
 See:
 
@@ -54,6 +54,7 @@ See:
 - [Source register](docs/SOURCES.md)
 - [M1 AOI review bundle](docs/M1_AOI_REVIEW.md)
 - [M1 source-manifest review](docs/M1_SOURCE_MANIFEST_REVIEW.md)
+- [M2 controlled-acquisition review](docs/M2_CONTROLLED_ACQUISITION_REVIEW.md)
 - [ArcGIS delivery plan](docs/ARCGIS_DELIVERY_PLAN.md)
 - [Validation plan](docs/VALIDATION.md)
 - [Current status](docs/STATUS.md)

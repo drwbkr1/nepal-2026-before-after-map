@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0",
+  "milestone_id": "NEPAL-MAP-M002",
+  "project_profile_ref": "records/project-control-profile.json",
+  "status": "proposed",
+  "authority": {
+    "mode": "not_granted",
+    "authority_ref": null,
+    "authorized_action_classes": [],
+    "required_human_gate": "M2-ACTIVATE",
+    "candidate_plan_ref": "records/acquisition-plan.json",
+    "candidate_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+    "review_required": true
+  },
+  "scope": {
+    "objective": "Acquire the eight approved Sentinel products into verified non-Git custody and build a reproducible pre-event optical and radar baseline in EPSG:32645.",
+    "planned_actions_after_exact_activation": [
+      "perform a fresh storage and path preflight",
+      "create the external custody root and append-only intake records",
+      "use an owner-controlled existing Copernicus Data Space account or authenticated session",
+      "download only the eight exact approved products",
+      "compute local SHA-256 and verify available provider checksums",
+      "validate archive integrity, bands, AOI pixels, rights, and coverage",
+      "build and QA pre-event optical and radar reference layers",
+      "quantify alignment after projection to EPSG:32645"
+    ],
+    "forbidden_until_exact_activation": [
+      "use credentials or private account sessions",
+      "create the external custody root",
+      "download or extract full satellite products",
+      "begin baseline raster preprocessing"
+    ],
+    "always_separately_gated": [
+      "accept provider terms",
+      "create or recover an account",
+      "incur cost",
+      "select a repository license",
+      "use or redistribute restricted high-resolution imagery",
+      "publish scientific conclusions, event attribution, or emergency guidance",
+      "store raw imagery, rasters, geodatabases, or ArcGIS packages in Git"
+    ],
+    "stop_conditions": [
+      "login, multi-factor authentication, or account recovery requires owner action",
+      "new or changed terms require acceptance",
+      "any product identity, size, checksum, entitlement, or access route differs from this plan",
+      "available free space falls below the recorded planning minimum",
+      "a download redirects to an unapproved provider or paid route"
+    ]
+  },
+  "entry_conditions": [
+    {
+      "id": "ENTRY-201-M1-COMPLETE",
+      "status": "pass",
+      "evidence": [
+        "contracts/milestone-001.json",
+        "records/source-gates/source-manifest-approval.json"
+      ]
+    },
+    {
+      "id": "ENTRY-202-PLAN-HASH-BOUND",
+      "status": "pass",
+      "evidence": [
+        "records/acquisition-plan.json"
+      ]
+    },
+    {
+      "id": "ENTRY-203-OWNER-ACTIVATION",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "ENTRY-204-FRESH-CUSTODY-PREFLIGHT",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "exit_conditions": [
+    {
+      "id": "EXIT-201-VERIFIED-CUSTODY",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "EXIT-202-PIXEL-AND-RIGHTS-QA",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "EXIT-203-PRE-EVENT-BASELINE",
+      "status": "pending",
+      "evidence": []
+    },
+    {
+      "id": "EXIT-204-REGISTRATION-QA",
+      "status": "pending",
+      "evidence": []
+    }
+  ],
+  "units": [
+    {
+      "id": "M2-ACTIVATE",
+      "human_gate": true,
+      "action_class": "authority_broadening",
+      "status": "ready",
+      "depends_on": [],
+      "outputs": [
+        "records/source-gates/m2-activation-approval.json"
+      ]
+    },
+    {
+      "id": "M2-CUSTODY-PREFLIGHT",
+      "human_gate": false,
+      "action_class": "data_acquisition",
+      "status": "blocked_on_M2-ACTIVATE",
+      "depends_on": [
+        "M2-ACTIVATE"
+      ],
+      "outputs": [
+        "records/acquisition/preflight.json"
+      ]
+    },
+    {
+      "id": "M2-ACQUIRE",
+      "human_gate": false,
+      "action_class": "data_acquisition",
+      "status": "blocked_on_M2-ACTIVATE",
+      "depends_on": [
+        "M2-CUSTODY-PREFLIGHT"
+      ],
+      "outputs": [
+        "external custody products",
+        "records/acquisition/product receipts"
+      ]
+    },
+    {
+      "id": "M2-VERIFY",
+      "human_gate": false,
+      "action_class": "routine_qa",
+      "status": "blocked_on_M2-ACTIVATE",
+      "depends_on": [
+        "M2-ACQUIRE"
+      ],
+      "outputs": [
+        "records/acquisition/verification summary"
+      ]
+    },
+    {
+      "id": "M2-BASELINE",
+      "human_gate": false,
+      "action_class": "data_processing",
+      "status": "blocked_on_M2-ACTIVATE",
+      "depends_on": [
+        "M2-VERIFY"
+      ],
+      "outputs": [
+        "external baseline rasters",
+        "records/baseline receipts"
+      ]
+    }
+  ],
+  "handoff": {
+    "current_checkpoint": "M2-OWNER-ACTIVATION-GATE",
+    "next_action": "Owner reviews the exact M2 activation bundle. No M2 data action is authorized while this contract remains proposed.",
+    "do_not_carry_forward": [
+      "Catalog byte counts are provider metadata and may differ from transferred or extracted sizes.",
+      "The 60 GiB minimum is a conservative planning estimate, not a scientific requirement or capacity guarantee.",
+      "No full-product bytes are in custody and no acquisition has begun.",
+      "The approved source dispositions do not establish pixel usability, co-registration, radar geometry, or event change.",
+      "The post-event optical route remains high-cloud-risk and may be inconclusive after mask review."
+    ]
+  }
+}

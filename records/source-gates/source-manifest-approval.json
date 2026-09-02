@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M1-SOURCE-MANIFEST-APPROVAL-001",
+  "status": "approved",
+  "approved_at_utc": "2026-09-02T04:27:55Z",
+  "review_id": "m1-source-manifest-review-001",
+  "review_bundle_id": "m1-source-manifest-review-bundle-001",
+  "review_bundle_manifest_sha256": "dd7d85562134e2c0cc2115eabdf329de56763209918dc65c872ceed911900544",
+  "reviewed_manifest_ref": "records/source-manifest.json",
+  "reviewed_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+  "review_reconciliation_ref": "records/source-gates/source-manifest-review-reconciliation.json",
+  "review_reconciliation_sha256": "b8b348c59ba5310a11338a72ea9e77be63e82b0be6e1eead5686241eccf2a868",
+  "locked_response_sha256": "9f5e5f019e8538060fd88eaab06e0885f2afc9c9bce60dbc6ad5d84d668e4e13",
+  "lock_receipt_sha256": "9741cf49e8b546aba56630277bf32692f7955c3107735b4e2533ba4096f21e77",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "approved_dispositions": {
+    "accept_for_controlled_acquisition_planning": 8,
+    "defer_context_only": 2,
+    "reject": 0
+  },
+  "approval_scope": "Lock the exact candidate-source dispositions for later controlled acquisition planning.",
+  "authorized_next_actions": [
+    "record this approval",
+    "close M1 project-control records",
+    "prepare a non-authorizing M2 controlled-acquisition proposal and review bundle"
+  ],
+  "does_not_authorize": [
+    "credential or account-session use",
+    "provider terms acceptance",
+    "full-product download or other data acquisition",
+    "spending",
+    "redistribution of portal quicklooks",
+    "pixel-usability claims",
+    "scientific conclusions, event attribution, or public emergency guidance"
+  ],
+  "limitations": [
+    "The reviewed manifest retains candidate status so its exact approved bytes remain immutable; this approval record carries the normative decision.",
+    "No candidate has entered local full-product custody.",
+    "Catalog metadata and coarse quicklooks do not establish usable pixels, masks, registration quality, radar geometry, or observable event change.",
+    "The post-event RUM optical candidate remains high-cloud-risk and may be inconclusive."
+  ],
+  "human_decisions_fabricated": false
+}

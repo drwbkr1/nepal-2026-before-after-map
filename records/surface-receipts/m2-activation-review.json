@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "M2-ACTIVATION-REVIEW-SURFACE-001",
+  "status": "pass_with_retained_failure",
+  "verified_at_utc": "2026-09-02T04:31:35Z",
+  "surface": "docs/assets/m2-controlled-acquisition-review.png",
+  "surface_sha256": "1c1187e1861030f9744060c77790a12c7b0f78d9bf2c85729d0ab660fc814ffb",
+  "acquisition_plan": "records/acquisition-plan.json",
+  "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+  "renderer": "scripts/render_m2_activation_review.py",
+  "renderer_sha256": "ae4e2ec35058c198a3bfc83a1d9d4d941299fa89f1ada4ff775010850116e8cb",
+  "dimensions_pixels": {
+    "width": 1800,
+    "height": 1676
+  },
+  "checks": {
+    "render_completed": "pass",
+    "exact_plan_hash_visible": "pass",
+    "all_eight_products_visible": "pass",
+    "no_download_authority_visible": "pass",
+    "approval_boundary_visible": "pass",
+    "stop_conditions_visible": "pass",
+    "text_clipping": "none_observed",
+    "visual_inspection": "pass"
+  },
+  "retained_failures": [
+    {
+      "attempt": 1,
+      "surface_sha256": "33951d849b197454b33d4bf314761094f5e713854a803c47c4f6fc84563e20a4",
+      "status": "fail",
+      "finding": "Full provider UUID text collided with the catalog-size column.",
+      "remediation": "Display unambiguous abbreviated provider IDs on the surface; retain full IDs in the bound acquisition plan and review document."
+    }
+  ],
+  "blank_state_verified": true,
+  "completion_controls_verified": true,
+  "export_verified": true,
+  "limitations": [
+    "The surface abbreviates provider UUIDs; the exact full IDs and product names remain in the bound plan and Markdown review.",
+    "The image contains no satellite pixels or scientific conclusion."
+  ]
+}

@@ -41,11 +41,13 @@
     ],
     "status": "docs/STATUS.md",
     "roadmap": "docs/ROADMAP.md",
-    "active_contract": "contracts/milestone-001.json",
+    "active_contract": null,
     "evidence_ledger": "records/evidence-ledger.jsonl",
     "history": [
       "docs/DECISIONS.md"
-    ]
+    ],
+    "last_completed_contract": "contracts/milestone-001.json",
+    "proposed_contract": "contracts/milestone-002-proposal.json"
   },
   "cycle": {
     "canonical_probe": {
@@ -141,14 +143,19 @@
         "unit_id": "M1-MANIFEST",
         "reason": "Approves the exact source manifest and any later acquisition boundary.",
         "authority_ref": "contracts/milestone-001.json"
+      },
+      {
+        "unit_id": "M2-ACTIVATE",
+        "reason": "Authorizes the exact external custody, existing authenticated-session use, eight-product download boundary, and M2 verification route without accepting terms or incurring cost.",
+        "authority_ref": "contracts/milestone-002-proposal.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M1-OWNER-MANIFEST-GATE",
+    "checkpoint_id": "M1-COMPLETE-M2-AUTHORITY-GATE",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Owner reviews the exact candidate source-manifest bundle; do not authenticate or download full products."
+    "next_action": "Owner reviews M2 activation bundle e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d; do not authenticate, create custody directories, or download products."
   }
 }

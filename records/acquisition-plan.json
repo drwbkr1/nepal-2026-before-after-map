@@ -1,0 +1,290 @@
+{
+  "schema_version": "1.0",
+  "plan_id": "NEPAL-M2-CONTROLLED-ACQUISITION-PLAN-001",
+  "status": "candidate_for_owner_review",
+  "generated_at_utc": "2026-09-02T04:31:35Z",
+  "source_manifest_ref": "records/source-manifest.json",
+  "source_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+  "source_manifest_approval_ref": "records/source-gates/source-manifest-approval.json",
+  "source_manifest_approval_sha256": "c6df8c24adc96439e8b8ef00c733db8fc3cd3ffb229b333b1d8a63933f3aa04e",
+  "selection": {
+    "approved_candidate_count": 8,
+    "deferred_candidate_count": 2,
+    "rejected_candidate_count": 0,
+    "planned_download_count": 8,
+    "catalog_content_length_bytes": 12451940706,
+    "catalog_content_length_gib": 11.597
+  },
+  "custody": {
+    "planned_external_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "inside_git_repository": false,
+    "root_creation_status": "not_authorized",
+    "minimum_free_space_gib_before_start": 60,
+    "minimum_is_planning_estimate": true,
+    "observed_c_drive_free_gib": 512.93,
+    "observed_at_utc": "2026-09-02T04:31:35Z",
+    "preflight_status": "informational_only_not_an_acquisition_authorization",
+    "required_controls": [
+      "create an append-only acquisition receipt per product",
+      "preserve provider product identity and checksums",
+      "compute local SHA-256 before promotion from intake",
+      "verify provider checksum when the declared algorithm is locally available",
+      "keep archives, extracted SAFE products, rasters, and GIS databases outside Git",
+      "retain failed, partial, corrupt, and superseded attempts with status"
+    ]
+  },
+  "access_boundary": {
+    "provider": "Copernicus Data Space Ecosystem",
+    "metadata_access": "public_no_authentication_already_completed",
+    "full_product_access": "authenticated_and_not_authorized",
+    "requested_later_authority": [
+      "use an owner-controlled existing Copernicus Data Space account or authenticated session",
+      "download only the eight exact approved provider product IDs into the planned external custody root",
+      "resume interrupted transfers without changing product identity",
+      "verify bytes, checksums, archive integrity, coverage, and band availability"
+    ],
+    "never_implied_by_activation": [
+      "accept new or changed provider terms",
+      "create an account or change account security settings",
+      "disclose, copy, or commit credentials or tokens",
+      "incur a fee or purchase data"
+    ],
+    "stop_conditions": [
+      "login, multi-factor authentication, or account recovery requires owner action",
+      "new or changed terms require acceptance",
+      "any product identity, size, checksum, entitlement, or access route differs from this plan",
+      "available free space falls below the recorded planning minimum",
+      "a download redirects to an unapproved provider or paid route"
+    ]
+  },
+  "records": [
+    {
+      "source_id": "M1-SRC-001",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE",
+      "provider_product_id": "227d0869-e2a2-4258-9624-ffaea31c4058",
+      "collection": "Sentinel-1 IW GRD",
+      "sensor_route": "radar",
+      "event_role": "before",
+      "catalog_content_length_bytes": 1732333216,
+      "provider_checksums": [
+        {
+          "Value": "06dd5fdf5ea889a32f7dbb5fa41df029",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-16T15:10:01.768113Z"
+        },
+        {
+          "Value": "75be94e2f483d59a59060919fdf98e8519fe1118eff98be881030916d987f091",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-16T15:10:04.613231Z"
+        }
+      ],
+      "planned_custody_subdirectory": "products/M1-SRC-001",
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "provider_checksum_verification": "not_started",
+      "archive_integrity": "not_started",
+      "pixel_inspection": "not_started"
+    },
+    {
+      "source_id": "M1-SRC-002",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE",
+      "provider_product_id": "844b9a32-9aa2-4611-83f6-ae6501c01955",
+      "collection": "Sentinel-1 IW GRD",
+      "sensor_route": "radar",
+      "event_role": "before",
+      "catalog_content_length_bytes": 1732874277,
+      "provider_checksums": [
+        {
+          "Value": "227b5ae1aa6a79f8cb851efbde52fdce",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-16T15:05:53.078623Z"
+        },
+        {
+          "Value": "531b052a638342f922d34f1d56e086eb18d7b723fb6210e801a743b4d766b886",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-16T15:05:55.717963Z"
+        }
+      ],
+      "planned_custody_subdirectory": "products/M1-SRC-002",
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "provider_checksum_verification": "not_started",
+      "archive_integrity": "not_started",
+      "pixel_inspection": "not_started"
+    },
+    {
+      "source_id": "M1-SRC-003",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE",
+      "provider_product_id": "f2682536-f9b8-4b5b-b9eb-5b52417820fa",
+      "collection": "Sentinel-1 IW GRD",
+      "sensor_route": "radar",
+      "event_role": "before",
+      "catalog_content_length_bytes": 1718369620,
+      "provider_checksums": [
+        {
+          "Value": "47c51035a3191a85b6e1d7865f55690b",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-19T02:22:00.292016Z"
+        },
+        {
+          "Value": "ac4fadc73812792f7fad2da5e38bbd80a7f714be270fdf7eff3e94705b957dd6",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-19T02:22:03.103995Z"
+        }
+      ],
+      "planned_custody_subdirectory": "products/M1-SRC-003",
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "provider_checksum_verification": "not_started",
+      "archive_integrity": "not_started",
+      "pixel_inspection": "not_started"
+    },
+    {
+      "source_id": "M1-SRC-004",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+      "provider_product_id": "641ccb0b-5d88-4c44-b558-93b488cd2453",
+      "collection": "Sentinel-1 IW GRD",
+      "sensor_route": "radar",
+      "event_role": "after",
+      "catalog_content_length_bytes": 1732332897,
+      "provider_checksums": [
+        {
+          "Value": "25c895490c9b786507152513cc701911",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-28T15:08:04.177988Z"
+        },
+        {
+          "Value": "314087e342f011c95ec9b8b520d0baae5272396bd3e2e16b9525bd1c5eba0920",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-28T15:08:07.660734Z"
+        }
+      ],
+      "planned_custody_subdirectory": "products/M1-SRC-004",
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "provider_checksum_verification": "not_started",
+      "archive_integrity": "not_started",
+      "pixel_inspection": "not_started"
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE",
+      "provider_product_id": "9cb3c885-cfb8-40cc-a44a-8673e772c794",
+      "collection": "Sentinel-1 IW GRD",
+      "sensor_route": "radar",
+      "event_role": "after",
+      "catalog_content_length_bytes": 1732898724,
+      "provider_checksums": [
+        {
+          "Value": "7b48f33e171138afcaa7f72063c37eda",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-28T15:11:10.537868Z"
+        },
+        {
+          "Value": "6b039f66fefa156d4f2b1969b3ec27b74f0e6b2f58b76aa30d5b36f690865c6e",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-28T15:11:13.990681Z"
+        }
+      ],
+      "planned_custody_subdirectory": "products/M1-SRC-005",
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "provider_checksum_verification": "not_started",
+      "archive_integrity": "not_started",
+      "pixel_inspection": "not_started"
+    },
+    {
+      "source_id": "M1-SRC-006",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE",
+      "provider_product_id": "36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4",
+      "collection": "Sentinel-1 IW GRD",
+      "sensor_route": "radar",
+      "event_role": "after",
+      "catalog_content_length_bytes": 1718402708,
+      "provider_checksums": [
+        {
+          "Value": "85555c9a5463a3ffaf6f54552c9095e3",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-31T02:15:41.017059Z"
+        },
+        {
+          "Value": "47b42338b85c454de0a303790963a6b152c14cea9f6feb3ee6dc9434ecb567f3",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-31T02:15:44.069258Z"
+        }
+      ],
+      "planned_custody_subdirectory": "products/M1-SRC-006",
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "provider_checksum_verification": "not_started",
+      "archive_integrity": "not_started",
+      "pixel_inspection": "not_started"
+    },
+    {
+      "source_id": "M1-SRC-008",
+      "exact_product_id": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE",
+      "provider_product_id": "76de2c15-9281-45e3-8f0b-e97085fa6d69",
+      "collection": "Sentinel-2 MSI Level-2A",
+      "sensor_route": "optical",
+      "event_role": "after",
+      "catalog_content_length_bytes": 941822565,
+      "provider_checksums": [
+        {
+          "Value": "f943a32c322a2186955de966b718eccb",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-27T09:33:37.021205Z"
+        },
+        {
+          "Value": "7587745f330d9d70adfbc321326bcaec5a8be457348f1e3dfbd2528ce3615e5a",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-27T09:33:38.560309Z"
+        }
+      ],
+      "planned_custody_subdirectory": "products/M1-SRC-008",
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "provider_checksum_verification": "not_started",
+      "archive_integrity": "not_started",
+      "pixel_inspection": "not_started"
+    },
+    {
+      "source_id": "M1-SRC-010",
+      "exact_product_id": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE",
+      "provider_product_id": "25faa527-2502-4f7d-a703-cfff3e99d483",
+      "collection": "Sentinel-2 MSI Level-2A",
+      "sensor_route": "optical",
+      "event_role": "before",
+      "catalog_content_length_bytes": 1142906699,
+      "provider_checksums": [
+        {
+          "Value": "089c5eecb582a9fab5c93a74b90a7736",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-12T11:08:17.015771Z"
+        },
+        {
+          "Value": "1fa6926dad3f0b95f90c0f6234d4fc018d218c0d2854cfcb17162064c4b3a054",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-12T11:08:18.748698Z"
+        }
+      ],
+      "planned_custody_subdirectory": "products/M1-SRC-010",
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "provider_checksum_verification": "not_started",
+      "archive_integrity": "not_started",
+      "pixel_inspection": "not_started"
+    }
+  ],
+  "decision_requested": {
+    "gate_id": "M2-ACTIVATE",
+    "decision": "Approve, revise, or defer this exact plan before any credential use, custody-root creation, or full-product acquisition.",
+    "approval_effect": "An exact approval would activate only the bounded actions listed under requested_later_authority; it would not accept terms or establish usable pixels."
+  },
+  "limitations": [
+    "Catalog byte counts are provider metadata and may differ from transferred or extracted sizes.",
+    "The 60 GiB minimum is a conservative planning estimate, not a scientific requirement or capacity guarantee.",
+    "No full-product bytes are in custody and no acquisition has begun.",
+    "The approved source dispositions do not establish pixel usability, co-registration, radar geometry, or event change.",
+    "The post-event optical route remains high-cloud-risk and may be inconclusive after mask review."
+  ]
+}

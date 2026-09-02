@@ -6,7 +6,9 @@ Maintain an evidence-bound, ArcGIS-ready before/after map of the 26 August 2026 
 
 ## Current authority
 
-The long-term goal is active. The active milestone contract is `contracts/milestone-001.json` and the routing manifest is `records/project-control-profile.json`. Consume only the action classes in those records.
+The long-term goal is active and M1 is complete. There is no active acquisition milestone. `contracts/milestone-001.json` is the last completed contract, `contracts/milestone-002-proposal.json` is a non-authorizing proposal, and `records/project-control-profile.json` is the routing manifest.
+
+Until the owner approves the exact M2 activation review bundle, do not create the proposed external custody root, use credentials or authenticated sessions, download or extract full satellite products, or begin baseline raster processing. Preparing and validating public control records does not activate M2.
 
 Full satellite-product downloads, credential use, provider terms acceptance, spending, repository-license selection, high-resolution restricted imagery, scientific-claim publication, and irreversible external actions remain human gates unless a later exact contract grants them.
 

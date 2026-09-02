@@ -1,45 +1,49 @@
 # Current status
 
-- **State:** M1 active
-- **Milestone:** M1 — Event geometry and source manifest
+- **State:** M1 complete; M2 proposed and not active
+- **Last completed milestone:** M1 — Event geometry and source manifest
 - **Scientific result:** None
 - **Imagery custody:** None
 - **Long-term goal:** Active
-- **Checkpoint:** Owner review of the exact M1 candidate source manifest
+- **Checkpoint:** M1 complete; owner review of the exact M2 activation proposal
 
 ## Completed
 
-- comprehensive project charter and roadmap drafted;
-- initial AOIs, coordinate system, and candidate Sentinel product identities recorded;
-- all ten exact candidate names returned records from the public Copernicus Data Space catalog;
-- three AOIs approved as M1 search and review extents through a locked, reconciled human response;
-- approved AOIs promoted as GeoJSON and projected to EPSG:32645 as ArcGIS FeatureSet JSON;
-- ArcGIS Pro 3.7.1 JSON To Features validation passed for three nonempty projected polygons;
-- all ten candidates enriched with provider attributes, checksums, and footprints;
-- all ten public quicklooks decoded and screened without credentials;
-- Copernicus source gate validated as ready for M1 metadata and private scratch quicklook use;
-- M1 AOI review map rendered with ArcGIS Pro Python and visually checked;
-- candidate source manifest prepared with eight proposed accepts, two proposed deferrals, and no erased or rejected candidates;
-- source-manifest review surface rendered, visually checked, and bound into a validated human-review bundle;
-- ArcGIS delivery and validation plans drafted;
-- project control profile and proposed M1 contract created;
-- Git exclusions and repository checks defined.
-- public repository `drwbkr1/nepal-2026-before-after-map` created and verified as public;
-- remote `main` verified against initial commit `c73c28c873d3e98f4e6f20bd0a4ddf0e68076fc9`.
-
-## Activated on 1 September 2026
-
 - the charter objective is bound as the active long-term goal;
-- M1 authorizes public metadata queries, draft AOI construction, quicklook QA, evidence recording, and reversible project updates;
-- full-product acquisition, credentials, terms acceptance, restricted imagery, and scientific publication remain gated.
+- all ten candidate Sentinel products have exact public Copernicus catalog identities, attributes, checksums, footprints, and coarse quicklook evidence;
+- three AOIs were approved as M1 search and review extents through a locked, reconciled human response;
+- approved AOIs were promoted as GeoJSON and projected to EPSG:32645 as ArcGIS FeatureSet JSON;
+- ArcGIS Pro 3.7.1 imported three nonempty projected polygons;
+- the owner approved source-manifest review bundle SHA-256 `dd7d85562134e2c0cc2115eabdf329de56763209918dc65c872ceed911900544` and candidate manifest SHA-256 `6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef`;
+- the exact manifest response was locked before reveal and reconciled without fabricated decisions;
+- eight exact sources are accepted for controlled acquisition planning, two RUL optical context records remain deferred, and none were erased or rejected;
+- all M1 exit conditions pass without any full-product acquisition;
+- the public repository preserves exact review evidence and validates clean-checkout portability.
 
-## Not yet completed
+## Proposed M2 package
 
-- owner approval, revision, or deferral of the exact candidate source manifest;
-- product-level pixel, mask, co-registration, and acquisition review after a later controlled-custody authorization;
-- imagery download, checksum, preprocessing, change analysis, or map creation;
-- selection of a repository license.
+- candidate acquisition plan SHA-256: `6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d`;
+- review bundle SHA-256: `e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d`;
+- eight exact Sentinel products totaling 11.597 GiB by provider catalog metadata;
+- proposed external non-Git custody root: `C:\Projects\Active\nepal-2026-before-after-map-data`;
+- conservative planning minimum: 60 GiB free before acquisition;
+- review surface rendered and visually checked after retaining and correcting an initial text-collision failure.
+
+The proposal would allow a fresh custody preflight, creation of the external data root, use of an owner-controlled existing Copernicus account or authenticated session, downloads of only the eight exact products, and checksum, archive, band, pixel, coverage, rights, baseline, and registration QA.
+
+## Not authorized or completed
+
+- M2 activation;
+- credential or authenticated-session use;
+- creation of the proposed external custody root;
+- full-product download, extraction, or preprocessing;
+- acceptance of new or changed provider terms, account creation or recovery, or spending;
+- usable-pixel, mask, co-registration, radar-geometry, change, interpretation, or attribution conclusions;
+- repository-license selection;
+- public scientific conclusions or emergency guidance.
 
 ## Current owner gate
 
-Review [M1_SOURCE_MANIFEST_REVIEW.md](M1_SOURCE_MANIFEST_REVIEW.md) and approve, revise, or defer review bundle `m1-source-manifest-review-bundle-001`, SHA-256 `dd7d85562134e2c0cc2115eabdf329de56763209918dc65c872ceed911900544`. Approval locks the proposed candidate dispositions for later planning but does not authorize credentials, terms acceptance, or full-product acquisition.
+Review [M2_CONTROLLED_ACQUISITION_REVIEW.md](M2_CONTROLLED_ACQUISITION_REVIEW.md) and choose approve, revise, or defer for review bundle SHA-256 `e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d` and acquisition plan SHA-256 `6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d`.
+
+An approval would activate only the bounded M2 actions stated in that exact bundle. It would not accept provider terms, create or recover an account, disclose credentials, incur cost, authorize restricted imagery, or publish scientific conclusions.

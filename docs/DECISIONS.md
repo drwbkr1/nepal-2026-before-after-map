@@ -52,4 +52,10 @@
 
 **Decision:** Propose all six Sentinel-1 GRD records and the two Sentinel-2 RUM records for controlled acquisition planning; defer both Sentinel-2 RUL context records; reject none at metadata/quicklook stage.
 **Reason:** RUM and the detailed radar slices intersect the approved event-area AOIs, while RUL contributes only cloud-limited regional context. Inconclusive candidates remain preserved until pixel QA.
-**Status:** Proposed and bound for owner review; not yet approved and no download is authorized.
+**Status:** Approved by the owner for controlled acquisition planning through source-manifest review bundle SHA-256 `dd7d85562134e2c0cc2115eabdf329de56763209918dc65c872ceed911900544` and candidate manifest SHA-256 `6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef`. The approval does not authorize authentication, terms acceptance, or downloads.
+
+## D-010 — Proposed M2 controlled-acquisition boundary
+
+**Decision:** Propose a bounded M2 route for a fresh storage preflight, external non-Git custody, use of an owner-controlled existing Copernicus account or authenticated session, and download and verification of only the eight exact M1-approved products.
+**Reason:** M1 has fixed source identities and dispositions, but product custody, pixels, masks, rights at access time, checksums, and baseline quality remain untested.
+**Status:** Proposed for owner review in bundle SHA-256 `e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d`. No M2 authority exists until an exact completed decision is locked and reconciled. New or changed terms, account changes, spending, and scientific publication remain outside the proposal.

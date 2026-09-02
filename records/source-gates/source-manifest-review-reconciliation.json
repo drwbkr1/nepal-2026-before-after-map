@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m1-source-manifest-review-001",
+  "contract_sha256": "19c02283a664194750987c5a6de058eaa5d81c09d9b6c33de3d5cf2927eb2a9b",
+  "response_sha256": "9f5e5f019e8538060fd88eaab06e0885f2afc9c9bce60dbc6ad5d84d668e4e13",
+  "receipt_sha256": "9741cf49e8b546aba56630277bf32692f7955c3107735b4e2533ba4096f21e77",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "user-instruction:2026-09-01:activate-charter-and-begin-project",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}
