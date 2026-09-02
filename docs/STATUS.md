@@ -28,8 +28,13 @@
 - proposed external non-Git custody root: `C:\Projects\Active\nepal-2026-before-after-map-data`;
 - conservative planning minimum: 60 GiB free before acquisition;
 - review surface rendered and visually checked after retaining and correcting an initial text-collision failure.
+- deterministic static intake contract SHA-256 `c4927e5a162aa925bcffbeb7bd2248474bedbc4c88c2e8094fb6e25a27f75b9c`;
+- network-free static dry-run receipt SHA-256 `1469785b6509e7aa6f7d8673b7e15f7543914ceca958e7c63af95f4bb7c370e9`;
+- nine passing mutation and reproducibility tests for exact identity, authority, paths, collision behavior, and secret-free routes.
 
 The proposal would allow a fresh custody preflight, creation of the external data root, use of an owner-controlled existing Copernicus account or authenticated session, downloads of only the eight exact products, and checksum, archive, band, pixel, coverage, rights, baseline, and registration QA.
+
+The static intake packet is derived tooling, not an M2 preflight or approval. It made no network request or filesystem probe, created no external directory, and left the reviewed M2 plan and bundle hashes unchanged.
 
 ## Not authorized or completed
 

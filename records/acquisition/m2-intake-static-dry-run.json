@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0",
+  "dry_run_id": "NEPAL-M2-INTAKE-STATIC-DRY-RUN-001",
+  "status": "pass_static_only_no_authority",
+  "generated_at_utc": "2026-09-02T04:46:03Z",
+  "inputs": {
+    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+    "m2_proposal_sha256": "a71f36fd667a26ff3cfabb12828ce719f566ba9c39db4b3c82adfad84c7b853c",
+    "activation_review_bundle_sha256": "e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d",
+    "intake_contract_sha256": "c4927e5a162aa925bcffbeb7bd2248474bedbc4c88c2e8094fb6e25a27f75b9c"
+  },
+  "authority": {
+    "m2_status": "proposed",
+    "mode": "not_granted",
+    "acquisition_authorized": false,
+    "external_directory_creation_authorized": false,
+    "network_or_authentication_performed": false
+  },
+  "path_model": {
+    "project_root_basis": "parent_of_repository",
+    "custody_root": "nepal-2026-before-after-map-data/custody",
+    "staging_root": "nepal-2026-before-after-map-data/.intake-staging/nepal-m2-intake-001",
+    "roots_outside_one_another": true,
+    "roots_outside_git_repository": true,
+    "filesystem_probe_performed": false,
+    "directories_created": false
+  },
+  "selection": {
+    "approved_candidate_count": 8,
+    "deferred_candidate_count": 2,
+    "rejected_candidate_count": 0,
+    "planned_download_count": 8,
+    "catalog_content_length_bytes": 12451940706,
+    "catalog_content_length_gib": 11.597
+  },
+  "assets": [
+    {
+      "asset_id": "m1-src-001",
+      "source_id": "M1-SRC-001",
+      "provider_product_id": "227d0869-e2a2-4258-9624-ffaea31c4058",
+      "source_uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(227d0869-e2a2-4258-9624-ffaea31c4058)/$value",
+      "staging_relative_path": "m1-src-001/S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE.zip.part",
+      "destination_relative_path": "products/m1-src-001/S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE.zip",
+      "state": "planned",
+      "network_request": "not_performed",
+      "filesystem_mutation": "not_performed"
+    },
+    {
+      "asset_id": "m1-src-002",
+      "source_id": "M1-SRC-002",
+      "provider_product_id": "844b9a32-9aa2-4611-83f6-ae6501c01955",
+      "source_uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(844b9a32-9aa2-4611-83f6-ae6501c01955)/$value",
+      "staging_relative_path": "m1-src-002/S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE.zip.part",
+      "destination_relative_path": "products/m1-src-002/S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE.zip",
+      "state": "planned",
+      "network_request": "not_performed",
+      "filesystem_mutation": "not_performed"
+    },
+    {
+      "asset_id": "m1-src-003",
+      "source_id": "M1-SRC-003",
+      "provider_product_id": "f2682536-f9b8-4b5b-b9eb-5b52417820fa",
+      "source_uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(f2682536-f9b8-4b5b-b9eb-5b52417820fa)/$value",
+      "staging_relative_path": "m1-src-003/S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE.zip.part",
+      "destination_relative_path": "products/m1-src-003/S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE.zip",
+      "state": "planned",
+      "network_request": "not_performed",
+      "filesystem_mutation": "not_performed"
+    },
+    {
+      "asset_id": "m1-src-004",
+      "source_id": "M1-SRC-004",
+      "provider_product_id": "641ccb0b-5d88-4c44-b558-93b488cd2453",
+      "source_uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(641ccb0b-5d88-4c44-b558-93b488cd2453)/$value",
+      "staging_relative_path": "m1-src-004/S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip.part",
+      "destination_relative_path": "products/m1-src-004/S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip",
+      "state": "planned",
+      "network_request": "not_performed",
+      "filesystem_mutation": "not_performed"
+    },
+    {
+      "asset_id": "m1-src-005",
+      "source_id": "M1-SRC-005",
+      "provider_product_id": "9cb3c885-cfb8-40cc-a44a-8673e772c794",
+      "source_uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(9cb3c885-cfb8-40cc-a44a-8673e772c794)/$value",
+      "staging_relative_path": "m1-src-005/S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE.zip.part",
+      "destination_relative_path": "products/m1-src-005/S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE.zip",
+      "state": "planned",
+      "network_request": "not_performed",
+      "filesystem_mutation": "not_performed"
+    },
+    {
+      "asset_id": "m1-src-006",
+      "source_id": "M1-SRC-006",
+      "provider_product_id": "36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4",
+      "source_uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4)/$value",
+      "staging_relative_path": "m1-src-006/S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE.zip.part",
+      "destination_relative_path": "products/m1-src-006/S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE.zip",
+      "state": "planned",
+      "network_request": "not_performed",
+      "filesystem_mutation": "not_performed"
+    },
+    {
+      "asset_id": "m1-src-008",
+      "source_id": "M1-SRC-008",
+      "provider_product_id": "76de2c15-9281-45e3-8f0b-e97085fa6d69",
+      "source_uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(76de2c15-9281-45e3-8f0b-e97085fa6d69)/$value",
+      "staging_relative_path": "m1-src-008/S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE.zip.part",
+      "destination_relative_path": "products/m1-src-008/S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE.zip",
+      "state": "planned",
+      "network_request": "not_performed",
+      "filesystem_mutation": "not_performed"
+    },
+    {
+      "asset_id": "m1-src-010",
+      "source_id": "M1-SRC-010",
+      "provider_product_id": "25faa527-2502-4f7d-a703-cfff3e99d483",
+      "source_uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(25faa527-2502-4f7d-a703-cfff3e99d483)/$value",
+      "staging_relative_path": "m1-src-010/S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE.zip.part",
+      "destination_relative_path": "products/m1-src-010/S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE.zip",
+      "state": "planned",
+      "network_request": "not_performed",
+      "filesystem_mutation": "not_performed"
+    }
+  ],
+  "checks": {
+    "exact_plan_binding": "pass",
+    "exact_eight_product_set": "pass",
+    "https_download_routes": "pass",
+    "no_secret_values": "pass",
+    "collision_policy": "pass",
+    "staging_separate_from_custody": "pass",
+    "atomic_no_replace_promotion": "pass",
+    "failed_and_superseded_attempt_retention": "required",
+    "resume_disabled_without_range_and_identity_evidence": "pass"
+  },
+  "limitations": [
+    "This is a static control derivation, not the M2 custody preflight required after activation.",
+    "No account, authenticated session, external path, remote headers, transfer length, or payload bytes were accessed.",
+    "Catalog content length and provider MD5/BLAKE3 values are retained as metadata but do not substitute for local SHA-256 and verified transfer identity.",
+    "The existing M2 activation review bundle remains the only pending authority gate and is unchanged by this dry run."
+  ]
+}

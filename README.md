@@ -46,6 +46,8 @@ Public visibility does not grant reuse rights to third-party data. No repository
 
 Milestones 0 and 1 are complete. The exact AOI and source-manifest decisions are locked and reconciled. The current gate is owner review of a proposed M2 plan covering eight exact Sentinel downloads into non-Git custody. The proposal does not authorize authentication, custody-root creation, downloads, or terms acceptance, and no usable pixels or scientific change have been established.
 
+A deterministic, network-free M2 intake packet is prepared for the eight exact products. It fixes sibling staging and custody paths, fail-on-collision and no-replace promotion rules, secret references, and attempt retention without changing the pending review bundle or creating acquisition authority.
+
 See:
 
 - [Project charter](docs/PROJECT_CHARTER.md)
@@ -55,6 +57,7 @@ See:
 - [M1 AOI review bundle](docs/M1_AOI_REVIEW.md)
 - [M1 source-manifest review](docs/M1_SOURCE_MANIFEST_REVIEW.md)
 - [M2 controlled-acquisition review](docs/M2_CONTROLLED_ACQUISITION_REVIEW.md)
+- [M2 controlled-intake execution runbook](docs/M2_EXECUTION_RUNBOOK.md)
 - [ArcGIS delivery plan](docs/ARCGIS_DELIVERY_PLAN.md)
 - [Validation plan](docs/VALIDATION.md)
 - [Current status](docs/STATUS.md)

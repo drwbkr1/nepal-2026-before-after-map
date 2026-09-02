@@ -13,6 +13,25 @@ Validation is staged. Passing repository checks does not validate pixels or scie
 
 GitHub Actions runs the same check on pushes and pull requests.
 
+## M2 static intake-control validation
+
+Before any activation or data transfer, the repository also verifies that:
+
+- the candidate intake contract binds the exact reviewed acquisition plan, proposed M2 contract, and pending activation bundle;
+- all eight assets remain `planned` with no attempts and pending authorization;
+- staging and final destinations are distinct, relative, collision-safe, and outside Git;
+- download routes use the exact approved provider UUIDs over the documented CDSE HTTPS host without secret-bearing query values;
+- catalog sizes and provider checksums are preserved as metadata without being mislabeled as authenticated transfer identity or local SHA-256;
+- the dry-run record claims no network request, authenticated session, filesystem probe, directory creation, or acquisition authority;
+- mutation tests reject authority drift, traversal, overwrite behavior, and product-set changes.
+
+Run:
+
+```powershell
+python scripts/prepare_m2_intake.py --created-at 2026-09-02T04:46:03Z --verify-only
+python -m unittest discover -s tests -v
+```
+
 ## Source validation
 
 For each external product:

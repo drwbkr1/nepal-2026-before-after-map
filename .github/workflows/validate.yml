@@ -17,3 +17,5 @@ jobs:
           python-version: "3.12"
       - name: Validate repository
         run: python scripts/check_project.py
+      - name: Test M2 intake controls
+        run: python -m unittest discover -s tests -v

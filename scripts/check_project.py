@@ -25,6 +25,7 @@ REQUIRED = [
     "docs/DECISIONS.md",
     "contracts/milestone-001.json",
     "contracts/milestone-002-proposal.json",
+    "contracts/m2-intake-candidate.json",
     "records/project-control-profile.json",
     "records/long-term-goal.json",
     "records/evidence-ledger.jsonl",
@@ -35,6 +36,7 @@ REQUIRED = [
     "records/surface-receipts/m1-approved-aoi-arcgis-validation.json",
     "records/source-manifest.json",
     "records/acquisition-plan.json",
+    "records/acquisition/m2-intake-static-dry-run.json",
     "records/source-gates/source-manifest-approval.json",
     "records/source-gates/source-manifest-review-reconciliation.json",
     "docs/M1_SOURCE_MANIFEST_REVIEW.md",
@@ -45,12 +47,16 @@ REQUIRED = [
     "reviews/m1-manifest/review-contract.json",
     "reviews/m1-manifest/blank-response.json",
     "docs/M2_CONTROLLED_ACQUISITION_REVIEW.md",
+    "docs/M2_EXECUTION_RUNBOOK.md",
     "docs/assets/m2-controlled-acquisition-review.png",
     "scripts/render_m2_activation_review.py",
+    "scripts/prepare_m2_intake.py",
     "records/surface-receipts/m2-activation-review.json",
     "reviews/m2-activation/review-bundle.json",
     "reviews/m2-activation/review-contract.json",
     "reviews/m2-activation/blank-response.json",
+    "tests/test_m2_intake.py",
+    ".github/workflows/validate.yml",
 ]
 
 FORBIDDEN_SUFFIXES = {
@@ -154,6 +160,8 @@ def main() -> None:
     m2_contract = json.loads((ROOT / "reviews/m2-activation/review-contract.json").read_text(encoding="utf-8"))
     m2_response = json.loads((ROOT / "reviews/m2-activation/blank-response.json").read_text(encoding="utf-8"))
     m2_surface_receipt = json.loads((ROOT / "records/surface-receipts/m2-activation-review.json").read_text(encoding="utf-8"))
+    intake_contract = json.loads((ROOT / "contracts/m2-intake-candidate.json").read_text(encoding="utf-8"))
+    intake_dry_run = json.loads((ROOT / "records/acquisition/m2-intake-static-dry-run.json").read_text(encoding="utf-8"))
     reproducibility = json.loads((ROOT / "records/surface-receipts/m1-control-reproducibility.json").read_text(encoding="utf-8"))
     aoi_reconciliation = json.loads((ROOT / "records/source-gates/aoi-review-reconciliation.json").read_text(encoding="utf-8"))
     units = {unit["id"]: unit for unit in contract["units"]}
@@ -243,6 +251,54 @@ def main() -> None:
         fail("M2 surface receipt does not bind the exact rendered review surface")
     if m2_surface_receipt["renderer_sha256"] != sha256("scripts/render_m2_activation_review.py"):
         fail("M2 surface receipt does not bind the exact renderer")
+    intake_extensions = intake_contract.get("extensions", {})
+    if intake_extensions.get("status") != "candidate_static_control_not_authorized":
+        fail("M2 intake contract must remain a non-authorizing candidate")
+    if intake_extensions.get("source_plan_sha256") != sha256("records/acquisition-plan.json"):
+        fail("M2 intake contract does not bind the exact acquisition plan")
+    if intake_extensions.get("m2_proposal_sha256") != sha256("contracts/milestone-002-proposal.json"):
+        fail("M2 intake contract does not bind the exact proposal")
+    if intake_extensions.get("activation_review_bundle_sha256") != sha256("reviews/m2-activation/review-bundle.json"):
+        fail("M2 intake contract does not bind the exact pending review bundle")
+    if intake_contract.get("collision_policy") != "fail" or intake_contract.get("promotion_mode") != "atomic-no-replace":
+        fail("M2 intake contract must fail on collision and use atomic no-replace promotion")
+    if intake_contract.get("secret_policy") != "references-only":
+        fail("M2 intake contract must keep secret values out of custody records")
+    if len(intake_contract.get("assets", [])) != 8:
+        fail("M2 intake contract must contain exactly eight approved assets")
+    intake_source_ids = set()
+    for asset in intake_contract["assets"]:
+        if asset.get("state") != "planned" or asset.get("attempts") != []:
+            fail("M2 intake assets must remain planned with no attempts before activation")
+        if asset.get("expected", {}).get("sha256") is not None or asset.get("expected", {}).get("size_bytes") is not None:
+            fail("M2 intake must not mistake catalog metadata for authenticated transfer identity")
+        extensions = asset.get("extensions", {})
+        source_id = extensions.get("source_id")
+        intake_source_ids.add(source_id)
+        provider_id = extensions.get("provider_product_id")
+        expected_uri = f"https://download.dataspace.copernicus.eu/odata/v1/Products({provider_id})/$value"
+        if asset.get("source", {}).get("uri") != expected_uri:
+            fail(f"M2 intake route differs for {source_id}")
+        if asset.get("source", {}).get("authorization_ref", "").split(":", 1)[0] != "pending":
+            fail(f"M2 intake asset {source_id} must preserve pending authorization")
+    if intake_source_ids != {record["source_id"] for record in acquisition_plan["records"]}:
+        fail("M2 intake source set differs from the exact approved acquisition plan")
+    if intake_dry_run.get("status") != "pass_static_only_no_authority":
+        fail("M2 static dry run must remain explicitly non-authorizing")
+    dry_inputs = intake_dry_run.get("inputs", {})
+    expected_dry_inputs = {
+        "acquisition_plan_sha256": sha256("records/acquisition-plan.json"),
+        "m2_proposal_sha256": sha256("contracts/milestone-002-proposal.json"),
+        "activation_review_bundle_sha256": sha256("reviews/m2-activation/review-bundle.json"),
+        "intake_contract_sha256": sha256("contracts/m2-intake-candidate.json"),
+    }
+    if dry_inputs != expected_dry_inputs:
+        fail("M2 static dry run does not bind its exact inputs")
+    dry_authority = intake_dry_run.get("authority", {})
+    if dry_authority.get("acquisition_authorized") is not False or dry_authority.get("network_or_authentication_performed") is not False:
+        fail("M2 static dry run must not claim acquisition, network, or authentication activity")
+    if intake_dry_run.get("path_model", {}).get("directories_created") is not False:
+        fail("M2 static dry run must not claim external directory creation")
     if reproducibility["status"] != "pass_with_retained_failures":
         fail("M1 reproducibility receipt is not in a passing state")
     for check in reproducibility["checks"]:
