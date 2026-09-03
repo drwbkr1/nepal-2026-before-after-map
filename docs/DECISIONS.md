@@ -131,3 +131,9 @@
 **Decision:** Model `MSK_CLASSI_B00.jp2` as its specified three-band 60 m Boolean mask, with opaque cloud, cirrus, and snow/ice bands kept distinct from the single-band 20 m SCL layer.
 **Reason:** Official Sentinel-2 documentation contradicted the first published fixture's one-band 20 m assumption. Keeping that assumption would cause the header gate to reject a structurally valid PB 05.12 product before pixel QA.
 **Status:** The `df3e93a` checkpoint and its ArcGIS attempt are retained as superseded evidence. The corrected contract and twelve portable tests pass, and ArcGIS Pro 3.7.1 opens the three-band 60 m mask by reading its `Band_1` through `Band_3` child descriptions. The deliberate full-grid shift blocks with sixteen extent mismatches. No real SAFE was read.
+
+## D-023 — Preserve the initial intake while validating append-only acquisition progress
+
+**Decision:** Retain the activation-time active intake as an immutable snapshot and validate the mutable active intake against it through the authorized, staging, failed, and promoted states. Require exact approved product identity, one append-only attempt at most under the current no-retry control, terminal receipt consistency, secret exclusion, and optional local reconciliation of external paths and promoted bytes.
+**Reason:** The transfer runner must mutate `contracts/m2-intake.json` after a real attempt. Comparing every later state to the initial file hash would make the repository validator fail on the first legitimate transfer and would blur an activation-time binding with current operational truth.
+**Status:** Implemented with nine focused tests and a passing read-only external check. All eight products remain authorized and unattempted; no credential value or product byte was read.

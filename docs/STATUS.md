@@ -38,6 +38,8 @@ The approved structure at `C:\Projects\Active\nepal-2026-before-after-map-data` 
 
 The one-product transfer runner is prepared and locally verified. Eleven tests pass for secret-reference refusal before mutation, exclusive staging, streamed SHA-256 and provider-MD5 checks, size/checksum failure preservation, redirect refusal, path containment, receipt no-replacement, terminal failed-attempt history, and atomic hard-link promotion. Readiness receipt `records/acquisition/transfer-runner-readiness.json` explicitly records zero network requests, zero authentication, zero product bytes, and no active-intake mutation.
 
+The activation-time active intake is now retained at `records/acquisition/active-intake-initial-snapshot.json` with SHA-256 `a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c`. The repository no longer mistakes that historical identity for the permanently current mutable intake. A separate read-only validator and nine tests verify exact immutable product identity, append-only authorized/staging/failed/promoted transitions, terminal receipt bindings, secret exclusion, and optional external-path and promoted-byte reconciliation. The live external check passes with eight authorized products, zero attempts, and no custody files.
+
 The exact eight-product offline verification contract is now active under the same M2 approval. Its wrapper requires a promoted active-intake identity and successful-transfer receipt before it reads an archive. It performs no network request or extraction and cannot establish pixel usability. Five active-contract and wrapper tests pass; activation read zero product bytes.
 
 ## Current gate

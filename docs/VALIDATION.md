@@ -43,6 +43,16 @@ python -m unittest tests.test_m2_transfer_core -v
 
 The suite verifies missing-reference refusal without intake mutation, exclusive staging, streamed hashes, mismatch retention, redirect refusal, path containment, receipt no-replacement, failed-attempt history, destination collision preservation, and atomic no-replace promotion. The passing readiness receipt is synthetic/local evidence only and does not establish real CDSE behavior or product integrity.
 
+The mutable active intake has a separate progress validator:
+
+```powershell
+python -m unittest tests.test_m2_acquisition_progress -v
+python scripts/validate_m2_acquisition_progress.py
+python scripts/validate_m2_acquisition_progress.py --verify-external
+```
+
+The first command exercises authorized, staging, failed, and promoted states plus identity drift, missing receipt, and secret-bearing-key failures. The repository-only command validates portable state and receipt evidence without touching the sibling data root. The external command additionally reconciles the controlled staging and custody paths; for promoted products it re-hashes the retained archive, so it may be slow after acquisition. Neither command reads the credential environment variable or performs a network request.
+
 The active offline-verification binding and wrapper stop are tested separately:
 
 ```powershell

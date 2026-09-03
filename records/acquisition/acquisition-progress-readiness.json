@@ -1,0 +1,87 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-ACQUISITION-PROGRESS-READINESS-001",
+  "verified_at_utc": "2026-09-03T20:00:47Z",
+  "status": "pass_preacquisition_dynamic_progress_validation",
+  "bindings": {
+    "initial_snapshot_ref": "records/acquisition/active-intake-initial-snapshot.json",
+    "initial_snapshot_sha256": "a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c",
+    "acquisition_plan_ref": "records/acquisition-plan.json",
+    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+    "validator_ref": "scripts/validate_m2_acquisition_progress.py",
+    "validator_sha256": "fc90a85e111135133a64249151086d7032c924148bcf5cc29cbee473703a9051",
+    "test_ref": "tests/test_m2_acquisition_progress.py",
+    "test_sha256": "5d1c59520d803daa05ba1bfef1ddcfbdbe894566a9cfb0c50f3c7dba00e2f191",
+    "project_checker_ref": "scripts/check_project.py",
+    "project_checker_sha256": "0811375064b8d2681690012d82234270f00022e23e94c82649c43f28ec5b7395",
+    "runbook_ref": "docs/M2_EXECUTION_RUNBOOK.md",
+    "runbook_sha256": "abd658d18a80f86bb3d8c4446eac9dfde7e268ffee44ee0841421838292d66ed"
+  },
+  "historical_binding_corrections": [
+    {
+      "record_ref": "records/acquisition/transfer-runner-readiness.json",
+      "field": "bindings.active_intake_sha256",
+      "interpretation": "activation-time active-intake identity",
+      "sha256": "a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c"
+    },
+    {
+      "record_ref": "contracts/m2-offline-verification.json",
+      "field": "inputs.active_intake_sha256_at_activation",
+      "interpretation": "activation-time active-intake identity",
+      "sha256": "a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c"
+    }
+  ],
+  "validation": {
+    "focused_test_count": 9,
+    "focused_test_status": "pass",
+    "initial_repository_state": "pass",
+    "initial_external_state": "pass",
+    "initial_state_counts": {
+      "authorized": 8
+    },
+    "synthetic_states_covered": [
+      "authorized",
+      "staging",
+      "failed",
+      "promoted"
+    ]
+  },
+  "external_state": {
+    "root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "custody_file_count": 0,
+    "active_attempt_count": 0,
+    "materialization_root_exists": false
+  },
+  "activity": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "external_files_mutated": false,
+    "active_intake_mutated": false
+  },
+  "assertions": {
+    "initial_active_intake_identity_preserved": true,
+    "current_active_intake_valid": true,
+    "authorized_state_representable": true,
+    "staging_state_representable": true,
+    "failed_state_representable_without_erasure": true,
+    "promoted_state_requires_bound_byte_identity": true,
+    "secret_bearing_fields_rejected": true,
+    "external_state_reconciled_read_only": true,
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "product_bytes_read": false,
+    "external_files_mutated": false,
+    "active_intake_mutated": false,
+    "scientific_fitness_established": false,
+    "authority_created": false
+  },
+  "limitations": [
+    "Synthetic state tests establish validator behavior, not CDSE transfer behavior or product integrity.",
+    "The current external check contains no promoted archive and therefore hashes no product bytes.",
+    "A promoted transfer still requires the separate offline container, materialization, raster-header, pixel, mask, coverage, and registration gates.",
+    "A failed attempt remains terminal under the current no-automatic-retry control and requires explicit review before any retry."
+  ],
+  "next_gate": "M2-AUTHENTICATION-REFERENCE"
+}

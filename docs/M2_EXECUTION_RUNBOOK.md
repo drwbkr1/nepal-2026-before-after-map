@@ -37,6 +37,8 @@ python scripts/acquire_m2_product.py --source-id M1-SRC-001
 
 This command has not been run against CDSE. `records/acquisition/transfer-runner-readiness.json` binds the current runner and eleven passing local fixture tests; it records no authentication or product transfer.
 
+`records/acquisition/active-intake-initial-snapshot.json` preserves the exact activation-time state at SHA-256 `a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c`. `scripts/validate_m2_acquisition_progress.py` treats that hash as historical identity and validates the current mutable intake separately. It accepts only the runner's authorized, staging, failed, and promoted states, requires immutable product identity and append-only attempt evidence, checks terminal receipts, and rejects secret-bearing fields. Add `--verify-external` to reconcile the local staging/custody paths and re-hash promoted bytes. The validator performs no network request and never reads `CDSE_ACCESS_TOKEN`.
+
 `contracts/m2-offline-verification.json` is the active read-only verification contract. After a transfer reaches `promoted`, run its exact wrapper with a new timestamp:
 
 ```powershell
@@ -58,6 +60,7 @@ Regenerate or verify these bytes with:
 ```powershell
 python scripts/prepare_m2_intake.py --created-at 2026-09-02T04:46:03Z --verify-only
 python scripts/prepare_m2_verification.py --created-at 2026-09-03T16:43:33Z --verify-only
+python scripts/validate_m2_acquisition_progress.py --verify-external
 python -m unittest discover -s tests -v
 python scripts/check_project.py
 ```
