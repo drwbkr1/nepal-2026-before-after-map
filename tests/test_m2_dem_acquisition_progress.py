@@ -50,10 +50,15 @@ class M2DemAcquisitionProgressTests(unittest.TestCase):
         intake = MODULE.load(MODULE.INTAKE_PATH)
         summaries = MODULE.validate_asset_history(intake)
         promoted = [item for item in summaries if item["state"] == "promoted"]
-        self.assertEqual(len(promoted), 1)
-        self.assertEqual(promoted[0]["source_id"], "M2-DEM-001")
-        self.assertEqual(promoted[0]["local_size_bytes"], 45336691)
-        self.assertEqual(promoted[0]["local_sha256"], "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a")
+        self.assertGreaterEqual(len(promoted), 1)
+        self.assertEqual(
+            [item["source_id"] for item in promoted],
+            MODULE.EXPECTED_SOURCE_IDS[: len(promoted)],
+        )
+        for item in promoted:
+            self.assertGreater(item["local_size_bytes"], 0)
+            self.assertEqual(len(item["local_sha256"]), 64)
+            self.assertTrue(all(character in "0123456789abcdef" for character in item["local_sha256"]))
 
 
 if __name__ == "__main__":

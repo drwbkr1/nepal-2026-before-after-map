@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "event": "dem_transfer_succeeded",
+  "attempt_id": "m2-dem-002-20260903T211011Z-0c71d865",
+  "asset_id": "m2-dem-002",
+  "source_id": "M2-DEM-002",
+  "started_at": "2026-09-03T21:10:11Z",
+  "completed_at": "2026-09-03T21:10:37Z",
+  "source_uri": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E085_00_DEM/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+  "preflight_sha256": "18ca15363d92f6f04d672ddb3e97fef33524c94bcb54915d83c82dae77af38f1",
+  "remote_head": {
+    "status_code": 200,
+    "resolved_url": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E085_00_DEM/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+    "content_length_bytes": 44874244,
+    "content_type": "image/tiff",
+    "etag": "4789613b867d5924d886e7c947255c5b",
+    "last_modified": "Mon, 09 May 2022 14:12:20 GMT",
+    "accept_ranges": "bytes",
+    "response_body_bytes": 0,
+    "checks": {
+      "http_200": true,
+      "exact_url_no_redirect": true,
+      "head_body_empty": true,
+      "content_length_match": true,
+      "content_type_tiff": true,
+      "etag_match": true,
+      "last_modified_match": true,
+      "accept_ranges_bytes": true,
+      "no_requester_charge": true
+    }
+  },
+  "local_sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194",
+  "local_size_bytes": 44874244,
+  "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+  "anonymous_access": true,
+  "credential_or_account_used": false,
+  "provider_checksum_available": false,
+  "geotiff_verification_status": "pending"
+}

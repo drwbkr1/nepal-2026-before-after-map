@@ -206,7 +206,7 @@
     {
       "checkpoint_id": "M2-DEM-ACQUISITION",
       "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
-      "next_action": "Acquire M2-DEM-002 only through append-only staging, exact size and local SHA-256, and no-replace promotion."
+      "next_action": "Acquire M2-DEM-003 only through append-only staging, exact size and local SHA-256, and no-replace promotion."
     }
   ]
 }
