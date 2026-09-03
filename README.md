@@ -62,6 +62,8 @@ Pixel-readiness thresholds are now fixed before product access in `config/qa/pix
 
 ArcGIS Pro's installed Sentinel-1 terrain-correction tools also expose a required DEM input. The active M2 approval contains no elevation source, so a separate non-authorizing amendment review now binds four exact public Copernicus DEM GLO-30 COG tiles, their live metadata, the anonymous access route, and the exact license document. No DEM payload was requested and the license has not been accepted. The original eight-product acquisition remains independently paused at the secure authentication handoff.
 
+The four-tile intake and ArcGIS GeoTIFF verification controls are now predeclared without activation. The Sentinel-1 baseline contract also fixes independent ascending and descending processing routes, beta-nought calibration, gamma-nought terrain flattening, retained terrain-distortion masks, linear quantitative outputs, and EPSG:32645 delivery. It deliberately defers production processing because the Copernicus DEM uses EGM2008 orthometric heights while ArcGIS's built-in geoid correction is documented as EGM96, and because updated Sentinel orbit files would be additional products outside the active acquisition boundary.
+
 See:
 
 - [Project charter](docs/PROJECT_CHARTER.md)
@@ -74,6 +76,8 @@ See:
 - [M2 controlled-intake execution runbook](docs/M2_EXECUTION_RUNBOOK.md)
 - [M2 offline product verification](docs/M2_OFFLINE_VERIFICATION.md)
 - [M2 DEM dependency amendment review](docs/M2_DEM_AMENDMENT_REVIEW.md)
+- [M2 DEM intake and offline verification](docs/M2_DEM_OFFLINE_VERIFICATION.md)
+- [ArcGIS Sentinel-1 baseline processing protocol](docs/RADAR_BASELINE_PROCESSING_PROTOCOL.md)
 - [ArcGIS delivery plan](docs/ARCGIS_DELIVERY_PLAN.md)
 - [ArcGIS evidence model](docs/ARCGIS_EVIDENCE_MODEL.md)
 - [Validation plan](docs/VALIDATION.md)

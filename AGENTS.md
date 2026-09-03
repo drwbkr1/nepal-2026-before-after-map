@@ -14,6 +14,8 @@ The active contract permits acquisition and verification of only the eight exact
 
 ArcGIS Pro terrain correction has a separate pending dependency gate. `contracts/milestone-002-dem-amendment-proposal.json` and `reviews/m2-dem-amendment/review-bundle.json` identify four exact Copernicus DEM GLO-30 tiles and a license requiring owner acceptance. They are non-authorizing. Do not request DEM payload bytes, accept the license, register for CCM access, generate S3 credentials, or process DEM pixels until the exact amendment is approved and reconciled. This pending gate does not replace the current eight-product CDSE authentication checkpoint.
 
+`contracts/m2-dem-intake-candidate.json`, `contracts/m2-dem-offline-verification-candidate.json`, and `config/qa/radar-baseline-processing-contract.json` are predeclared controls only. The candidate verifier must refuse execution. Do not silently choose `GEOID` or `NONE` for the EGM2008 orthometric DEM, and do not download updated orbit vectors: both require their recorded dependency conditions to be resolved first.
+
 ## Source and custody rules
 
 - Treat catalog results as availability evidence, not proof of usable pixels, valid coverage, or event causation.

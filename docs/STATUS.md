@@ -54,6 +54,8 @@ A metadata-only review found four exact Copernicus DEM GLO-30 COG tiles whose 1Â
 
 The Copernicus WorldDEM-30 license grants broad free use rights but explicitly requires user acceptance and carries attribution, no-liability, non-endorsement, and downstream obligations. The source gate is therefore **blocked** on exact license acceptance and authority to add four products. Review bundle SHA-256 `caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e` and amendment proposal SHA-256 `92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69` are prepared for owner decision. This does not alter the separate CDSE authentication checkpoint.
 
+Non-authorizing candidate controls now derive one collision-safe intake entry and one ArcGIS-readable GeoTIFF verification profile for each exact tile. Thirteen new local tests cover deterministic derivation, authority refusal, no-replace receipts, structural pass/fail examples, exact route preservation, and radar readiness defer conditions. The production radar chain is predeclared, but it remains deferred on two explicit dependencies: EGM2008 orthometric DEM heights do not exactly match ArcGIS's documented EGM96 geoid correction, and updated Sentinel orbit files are separate auxiliary products outside current authority. No DEM or Sentinel pixel was read or processed by this preparation.
+
 ## Authorized but not completed
 
 - authenticate through an existing owner-controlled CDSE credential or session reference;

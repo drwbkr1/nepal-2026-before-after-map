@@ -1,0 +1,317 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-S1-BASELINE-PROCESSING-001",
+  "status": "predeclared_no_real_processing",
+  "created_at_utc": "2026-09-03T18:20:50Z",
+  "analysis_crs": {
+    "wkid": 32645,
+    "name": "WGS 1984 UTM Zone 45N",
+    "target_cell_size_m": 10.0
+  },
+  "bindings": {
+    "pair_plan_ref": "config/qa/candidate-pair-plan.json",
+    "pair_plan_sha256": "c346af2e575a21e4931991935c0acc21ba70083c4613255456ced77b71bb1560",
+    "pixel_readiness_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_readiness_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "arcgis_capability_ref": "records/surface-receipts/arcgis-sar-processing-capability.json",
+    "arcgis_capability_sha256": "c7a0319662159e00b927a27a8d7c122e7cd18443a952decdb2fb86f1cc414e20",
+    "dem_manifest_ref": "records/source-gates/m2-dem-candidate-manifest.json",
+    "dem_manifest_sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243",
+    "dem_intake_candidate_ref": "contracts/m2-dem-intake-candidate.json",
+    "dem_intake_candidate_sha256": "d1296906b2b41625f7bd2d2a2496336dec1063ec5acd06ec2b0fc2f9ab398c2d",
+    "dem_verification_candidate_ref": "contracts/m2-dem-offline-verification-candidate.json",
+    "dem_verification_candidate_sha256": "ec738e080394a62a20d6e34e1b893018219ed9c3fcb6beb2eccf474d71d2ad67",
+    "dem_amendment_proposal_ref": "contracts/milestone-002-dem-amendment-proposal.json",
+    "dem_amendment_proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+    "dem_review_bundle_ref": "reviews/m2-dem-amendment/review-bundle.json",
+    "dem_review_bundle_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e"
+  },
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced",
+    "extension": "Image Analyst",
+    "capability_status": "available_not_executed_on_product_pixels"
+  },
+  "authority": {
+    "active_m2_authority_ref": "records/source-gates/m2-activation-approval.json",
+    "sentinel_processing_after_verified_custody": true,
+    "dem_amendment_status": "pending_exact_owner_decision",
+    "dem_download_or_pixel_use_authorized": false,
+    "auxiliary_orbit_download_authorized": false,
+    "credential_parameters_authorized_for_processing_tool": false,
+    "scientific_publication_authorized": false,
+    "this_contract_creates_authority": false
+  },
+  "routes": [
+    {
+      "pair_id": "PAIR-S1-ASC-R085-IW",
+      "before_source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002"
+      ],
+      "after_source_ids": [
+        "M1-SRC-004",
+        "M1-SRC-005"
+      ],
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "polarizations": [
+        "VV",
+        "VH"
+      ],
+      "date_mosaic_policy": "assemble same-date slices only after independent slice verification; retain seam and coverage QA",
+      "route_independence": "do not combine ascending and descending evidence before independent QA dispositions"
+    },
+    {
+      "pair_id": "PAIR-S1-DESC-R121-IW",
+      "before_source_ids": [
+        "M1-SRC-003"
+      ],
+      "after_source_ids": [
+        "M1-SRC-006"
+      ],
+      "orbit_direction": "DESCENDING",
+      "relative_orbit_number": 121,
+      "polarizations": [
+        "VV",
+        "VH"
+      ],
+      "date_mosaic_policy": "single product per date; do not merge with the other orbit route",
+      "route_independence": "do not combine ascending and descending evidence before independent QA dispositions"
+    }
+  ],
+  "input_requirements": {
+    "sentinel_assets": {
+      "state": "promoted_and_offline_verification_passed",
+      "exact_source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002",
+        "M1-SRC-003",
+        "M1-SRC-004",
+        "M1-SRC-005",
+        "M1-SRC-006"
+      ],
+      "manifest_safe_readable": true,
+      "embedded_orbit_metadata_captured": true
+    },
+    "dem_assets": {
+      "state": "promoted_and_structural_verification_passed",
+      "exact_source_ids": [
+        "M2-DEM-001",
+        "M2-DEM-002",
+        "M2-DEM-003",
+        "M2-DEM-004"
+      ],
+      "source_crs_wkid": 4326,
+      "must_span_entire_processed_sar_extent": true,
+      "valid_pixel_coverage_required": true
+    }
+  },
+  "orbit_policy": {
+    "inspect_embedded_osv_first": true,
+    "preferred_types": [
+      "precise",
+      "restituted"
+    ],
+    "predicted_only_disposition": "defer",
+    "missing_or_unreadable_disposition": "block",
+    "external_osv_download_under_current_authority": false,
+    "username_parameter": null,
+    "password_parameter": null,
+    "cloud_storage_connection_parameter": null,
+    "reason": "Updated orbit files are separate auxiliary products and are not part of the current eight-product acquisition boundary."
+  },
+  "vertical_datum": {
+    "source_dem_height_type": "orthometric",
+    "source_dem_model": "EGM2008",
+    "source_dem_vertical_crs": "EPSG:3855",
+    "arcgis_builtin_geoid_model": "EGM96",
+    "status": "defer_pending_empirical_check_or_explicit_method_decision",
+    "production_geoid_parameter": null,
+    "allowed_evaluation_routes": [
+      {
+        "id": "validated_egm2008_to_ellipsoidal_preconversion",
+        "arcgis_geoid_parameter_after_conversion": "NONE",
+        "requirements": [
+          "validated EGM2008 geoid grid or transformation source",
+          "source gate and custody record for any added external grid",
+          "reproducible conversion receipt and spot checks"
+        ]
+      },
+      {
+        "id": "documented_egm96_sensitivity_route",
+        "arcgis_geoid_parameter": "GEOID",
+        "requirements": [
+          "retain the EGM2008-to-EGM96 model mismatch as a limitation",
+          "quantify sensitivity on stable terrain",
+          "do not admit the route if registration or stable-control thresholds fail"
+        ]
+      }
+    ],
+    "prohibited_shortcuts": [
+      "silently treat EGM2008 orthometric heights as ellipsoidal with NONE",
+      "silently label ArcGIS EGM96 correction as exact EGM2008 handling"
+    ]
+  },
+  "processing_chain": [
+    {
+      "step": 1,
+      "operation": "validate source identity and embedded orbit metadata",
+      "output": "read-only inspection receipt"
+    },
+    {
+      "step": 2,
+      "operation": "remove thermal noise",
+      "arcgis_tool": "RemoveThermalNoise",
+      "output": "per-source per-date intermediate"
+    },
+    {
+      "step": 3,
+      "operation": "radiometric calibration",
+      "arcgis_tool": "ApplyRadiometricCalibration",
+      "calibration_type": "BETA_NOUGHT",
+      "output": "linear beta nought"
+    },
+    {
+      "step": 4,
+      "operation": "radiometric terrain flattening",
+      "arcgis_tool": "ApplyRadiometricTerrainFlattening",
+      "calibration_type": "GAMMA_NOUGHT",
+      "polarizations": [
+        "VV",
+        "VH"
+      ],
+      "geoid_parameter": null,
+      "outputs": [
+        "linear gamma nought",
+        "scattering area",
+        "native geometric distortion layers",
+        "native geometric distortion mask"
+      ],
+      "blocked_until": "vertical_datum.status is resolved"
+    },
+    {
+      "step": 5,
+      "operation": "geometric terrain correction",
+      "arcgis_tool": "ApplyGeometricTerrainCorrection",
+      "output_crs_wkid": 32645,
+      "output_cell_size_m": 10.0,
+      "continuous_resampling": "BILINEAR",
+      "categorical_mask_resampling": "NEAREST"
+    },
+    {
+      "step": 6,
+      "operation": "derive decibel display and difference layers from positive linear gamma nought",
+      "arcgis_tool": "ConvertSARUnits",
+      "master_quantitative_units": "LINEAR",
+      "derived_display_units": "DECIBEL",
+      "nonpositive_policy": "set to NoData and record count"
+    }
+  ],
+  "speckle_policy": {
+    "primary_quantitative_route": "no despeckle",
+    "reason": "Avoid unreviewed filter tuning and preserve the native quantitative route.",
+    "optional_sensitivity_route": {
+      "status": "not_selected_for_production",
+      "filter": "REFINED_LEE",
+      "filter_size": "7x7",
+      "may_replace_primary": false,
+      "required_label": "filtered sensitivity or display only"
+    }
+  },
+  "geometric_distortion_translation": {
+    "retain_native_mask": true,
+    "native_to_project_qa": {
+      "0": {
+        "native": "undetermined",
+        "project_class": 0,
+        "action": "exclude"
+      },
+      "1": {
+        "native": "foreshortening",
+        "project_class": 1,
+        "action": "retain_with_native_flag"
+      },
+      "2": {
+        "native": "lengthening",
+        "project_class": 1,
+        "action": "retain_with_native_flag"
+      },
+      "3": {
+        "native": "shadow",
+        "project_class": 3,
+        "action": "exclude"
+      },
+      "4": {
+        "native": "layover",
+        "project_class": 2,
+        "action": "exclude"
+      },
+      "5": {
+        "native": "layover_and_shadow",
+        "project_class": 2,
+        "action": "exclude_and_retain_combined_reason"
+      }
+    },
+    "additional_project_exclusions": [
+      "border noise",
+      "residual speckle or unstable background",
+      "water variability",
+      "registration exclusion"
+    ]
+  },
+  "qa_and_admission": {
+    "apply_pixel_readiness_contract": true,
+    "minimum_stable_control_pairs": 30,
+    "pass_max_registration_rmse_pixels": 0.5,
+    "defer_max_registration_rmse_pixels": 1.0,
+    "pass_max_absolute_bias_pixels": 0.5,
+    "slice_seam_and_date_mosaic_qa_required": true,
+    "route_dispositions": [
+      "invalid",
+      "block",
+      "defer",
+      "pass_qa_only"
+    ],
+    "pass_qa_only_creates_scientific_admission": false
+  },
+  "output_boundary": {
+    "root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "versioned_attempt_paths": true,
+    "raw_and_derived_rasters_in_git": false,
+    "processing_receipts_in_git": true,
+    "overwrite_existing_outputs": false
+  },
+  "source_references": [
+    {
+      "role": "arcgis_rtc_tool",
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/generate-radiometric-terrain-corrected-data.html",
+      "checked_at_utc": "2026-09-03T18:20:50Z"
+    },
+    {
+      "role": "arcgis_radiometric_terrain_flattening",
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-radiometric-terrain-flattening.html",
+      "checked_at_utc": "2026-09-03T18:20:50Z"
+    },
+    {
+      "role": "arcgis_sentinel1_grd_workflow",
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/help/analysis/image-analyst/analysis-ready-sentinel-1-grd-data-generation.html",
+      "checked_at_utc": "2026-09-03T18:20:50Z"
+    },
+    {
+      "role": "copernicus_dem_vertical_reference",
+      "url": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM.html",
+      "checked_at_utc": "2026-09-03T18:20:50Z"
+    }
+  ],
+  "claim_boundary": {
+    "processing_parameters_predeclared": true,
+    "dem_amendment_approved": false,
+    "dem_pixels_examined": false,
+    "sentinel_pixels_processed": false,
+    "baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  }
+}

@@ -42,6 +42,8 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Pending dependency amendment:** ArcGIS Pro's terrain-correction tools require a DEM that is absent from the exact eight-product approval. A separate, non-authorizing review bundle identifies four exact public Copernicus DEM GLO-30 COG tiles covering the approved AOIs and binds the license that requires owner acceptance. No DEM payload was requested; the amendment must be approved before DEM acquisition or terrain correction.
 
+**Prepared DEM and radar controls:** A four-tile intake candidate, offline ArcGIS GeoTIFF verifier, and two-route Sentinel-1 processing contract are fixed without activation. The primary radar route keeps linear gamma-nought data, retains native terrain-distortion evidence, and defers rather than guessing when only predicted orbit vectors are available or the EGM2008-to-ArcGIS-EGM96 vertical-datum mismatch is unresolved.
+
 **Work:**
 
 - download approved products into non-Git custody;

@@ -32,6 +32,8 @@ REQUIRED = [
     "contracts/m2-intake.json",
     "contracts/m2-offline-verification.json",
     "contracts/milestone-002-dem-amendment-proposal.json",
+    "contracts/m2-dem-intake-candidate.json",
+    "contracts/m2-dem-offline-verification-candidate.json",
     "records/project-control-profile.json",
     "records/long-term-goal.json",
     "records/evidence-ledger.jsonl",
@@ -67,6 +69,8 @@ REQUIRED = [
     "docs/M2_EXECUTION_RUNBOOK.md",
     "docs/M2_OFFLINE_VERIFICATION.md",
     "docs/M2_DEM_AMENDMENT_REVIEW.md",
+    "docs/M2_DEM_OFFLINE_VERIFICATION.md",
+    "docs/RADAR_BASELINE_PROCESSING_PROTOCOL.md",
     "docs/assets/m2-dem-amendment-review.png",
     "docs/assets/m2-controlled-acquisition-review.png",
     "scripts/render_m2_activation_review.py",
@@ -79,10 +83,12 @@ REQUIRED = [
     "config/arcgis/evidence-workspace-schema.json",
     "config/qa/pixel-readiness-contract.json",
     "config/qa/candidate-pair-plan.json",
+    "config/qa/radar-baseline-processing-contract.json",
     "docs/assets/arcgis-evidence-workspace-preview.png",
     "records/surface-receipts/m2-activation-review.json",
     "records/surface-receipts/arcgis-sar-processing-capability.json",
     "records/surface-receipts/m2-dem-amendment-review.json",
+    "records/surface-receipts/m2-dem-radar-control-readiness.json",
     "contracts/m2-offline-verification-candidate.json",
     "records/readiness/m2-readiness-audit-input.json",
     "records/readiness/m2-readiness-decision.json",
@@ -109,10 +115,15 @@ REQUIRED = [
     "tests/test_m2_transfer_core.py",
     "tests/test_m2_active_verification.py",
     "tests/test_m2_dem_amendment.py",
+    "tests/test_m2_dem_controls.py",
+    "tests/test_radar_processing_contract.py",
     "scripts/activate_m2_verification.py",
     "scripts/verify_m2_product_container.py",
     "scripts/inspect_arcgis_sar_capability.py",
     "scripts/prepare_m2_dem_amendment.py",
+    "scripts/prepare_m2_dem_controls.py",
+    "scripts/verify_m2_dem_geotiff.py",
+    "scripts/prepare_radar_processing_contract.py",
     "scripts/render_m2_dem_amendment_review.py",
     ".github/workflows/validate.yml",
 ]
@@ -181,6 +192,10 @@ def main() -> None:
     dem_contract = json.loads((ROOT / "reviews/m2-dem-amendment/review-contract.json").read_text(encoding="utf-8"))
     dem_blank = json.loads((ROOT / "reviews/m2-dem-amendment/blank-response.json").read_text(encoding="utf-8"))
     sar_capability = json.loads((ROOT / "records/surface-receipts/arcgis-sar-processing-capability.json").read_text(encoding="utf-8"))
+    dem_intake_candidate = json.loads((ROOT / "contracts/m2-dem-intake-candidate.json").read_text(encoding="utf-8"))
+    dem_verification_candidate = json.loads((ROOT / "contracts/m2-dem-offline-verification-candidate.json").read_text(encoding="utf-8"))
+    radar_processing_contract = json.loads((ROOT / "config/qa/radar-baseline-processing-contract.json").read_text(encoding="utf-8"))
+    dem_radar_readiness = json.loads((ROOT / "records/surface-receipts/m2-dem-radar-control-readiness.json").read_text(encoding="utf-8"))
     goal = json.loads((ROOT / "records/long-term-goal.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
@@ -309,6 +324,129 @@ def main() -> None:
     sar_checks = sar_capability.get("checks", {})
     if sar_checks.get("all_named_tools_available") is not True or sar_checks.get("processing_executed") is not False:
         fail("ArcGIS SAR capability receipt does not preserve capability-only semantics")
+    if dem_intake_candidate.get("intake_id") != "nepal-m2-dem-intake-001" or len(dem_intake_candidate.get("assets", [])) != 4:
+        fail("M2 DEM intake candidate identity or asset count differs")
+    if dem_intake_candidate.get("extensions", {}).get("status") != "candidate_static_control_not_authorized":
+        fail("M2 DEM intake must remain a non-authorizing static candidate")
+    if dem_intake_candidate.get("extensions", {}).get("candidate_manifest_sha256") != sha256("records/source-gates/m2-dem-candidate-manifest.json"):
+        fail("M2 DEM intake candidate does not bind the exact DEM manifest")
+    dem_intake_assets = dem_intake_candidate.get("assets", [])
+    if {item.get("extensions", {}).get("source_id") for item in dem_intake_assets} != {
+        "M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"
+    }:
+        fail("M2 DEM intake candidate source set differs")
+    if sum(item.get("expected", {}).get("size_bytes", 0) for item in dem_intake_assets) != 170302058:
+        fail("M2 DEM intake candidate total byte count differs")
+    if any(
+        item.get("state") != "planned"
+        or item.get("attempts") != []
+        or item.get("expected", {}).get("sha256") is not None
+        for item in dem_intake_assets
+    ):
+        fail("M2 DEM intake candidate invents authority, attempts, or upstream SHA-256")
+    if dem_verification_candidate.get("verification_id") != "NEPAL-M2-DEM-OFFLINE-VERIFICATION-001":
+        fail("M2 DEM offline verification identity differs")
+    if dem_verification_candidate.get("status") != "candidate_static_control_not_authorized":
+        fail("M2 DEM offline verification must remain a non-authorizing candidate")
+    dem_verification_authority = dem_verification_candidate.get("authority", {})
+    if dem_verification_authority.get("dem_amendment_status") != "not_granted":
+        fail("M2 DEM verification must retain the unapproved amendment state")
+    if any(value is True for key, value in dem_verification_authority.items() if key != "dem_amendment_status"):
+        fail("M2 DEM verification candidate must not authorize execution")
+    dem_verification_inputs = dem_verification_candidate.get("inputs", {})
+    for ref_key, hash_key in (
+        ("candidate_manifest_ref", "candidate_manifest_sha256"),
+        ("intake_contract_ref", "intake_contract_sha256"),
+        ("amendment_proposal_ref", "amendment_proposal_sha256"),
+        ("review_bundle_ref", "review_bundle_sha256"),
+        ("approved_aoi_ref", "approved_aoi_sha256"),
+    ):
+        relative = dem_verification_inputs.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"M2 DEM verification is missing {ref_key}")
+        if dem_verification_inputs.get(hash_key) != sha256(relative):
+            fail(f"M2 DEM verification does not bind {ref_key}")
+    if radar_processing_contract.get("contract_id") != "NEPAL-S1-BASELINE-PROCESSING-001":
+        fail("radar processing contract identity differs")
+    if radar_processing_contract.get("status") != "predeclared_no_real_processing":
+        fail("radar processing contract must remain a predeclaration")
+    if radar_processing_contract.get("analysis_crs", {}).get("wkid") != 32645:
+        fail("radar processing contract must target EPSG:32645")
+    if {item.get("pair_id") for item in radar_processing_contract.get("routes", [])} != {
+        "PAIR-S1-ASC-R085-IW", "PAIR-S1-DESC-R121-IW"
+    }:
+        fail("radar processing contract route set differs")
+    radar_bindings = radar_processing_contract.get("bindings", {})
+    for ref_key, hash_key in (
+        ("pair_plan_ref", "pair_plan_sha256"),
+        ("pixel_readiness_ref", "pixel_readiness_sha256"),
+        ("arcgis_capability_ref", "arcgis_capability_sha256"),
+        ("dem_manifest_ref", "dem_manifest_sha256"),
+        ("dem_intake_candidate_ref", "dem_intake_candidate_sha256"),
+        ("dem_verification_candidate_ref", "dem_verification_candidate_sha256"),
+        ("dem_amendment_proposal_ref", "dem_amendment_proposal_sha256"),
+        ("dem_review_bundle_ref", "dem_review_bundle_sha256"),
+    ):
+        relative = radar_bindings.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"radar processing contract is missing {ref_key}")
+        if radar_bindings.get(hash_key) != sha256(relative):
+            fail(f"radar processing contract does not bind {ref_key}")
+    radar_authority = radar_processing_contract.get("authority", {})
+    if radar_authority.get("dem_download_or_pixel_use_authorized") is not False or radar_authority.get("auxiliary_orbit_download_authorized") is not False:
+        fail("radar processing contract must not authorize DEM or orbit-file acquisition")
+    if radar_processing_contract.get("vertical_datum", {}).get("status") != "defer_pending_empirical_check_or_explicit_method_decision":
+        fail("radar processing contract must defer the EGM2008 and EGM96 mismatch")
+    radar_chain = {item.get("operation"): item for item in radar_processing_contract.get("processing_chain", [])}
+    if radar_chain.get("radiometric calibration", {}).get("calibration_type") != "BETA_NOUGHT":
+        fail("radar processing contract must calibrate to beta nought")
+    if radar_chain.get("radiometric terrain flattening", {}).get("calibration_type") != "GAMMA_NOUGHT":
+        fail("radar processing contract must terrain-flatten to gamma nought")
+    if radar_processing_contract.get("speckle_policy", {}).get("primary_quantitative_route") != "no despeckle":
+        fail("radar primary quantitative speckle policy differs")
+    if radar_processing_contract.get("claim_boundary", {}).get("sentinel_pixels_processed") is not False:
+        fail("radar processing predeclaration invents real processing")
+    if dem_radar_readiness.get("status") != "pass_static_controls_only_dependencies_deferred":
+        fail("DEM and radar control-readiness receipt status differs")
+    readiness_bindings = dem_radar_readiness.get("bindings", {})
+    for ref_key, hash_key in (
+        ("dem_candidate_manifest_ref", "dem_candidate_manifest_sha256"),
+        ("dem_amendment_proposal_ref", "dem_amendment_proposal_sha256"),
+        ("dem_review_bundle_ref", "dem_review_bundle_sha256"),
+        ("dem_intake_candidate_ref", "dem_intake_candidate_sha256"),
+        ("dem_verification_candidate_ref", "dem_verification_candidate_sha256"),
+        ("radar_processing_contract_ref", "radar_processing_contract_sha256"),
+        ("dem_control_builder_ref", "dem_control_builder_sha256"),
+        ("dem_geotiff_verifier_ref", "dem_geotiff_verifier_sha256"),
+        ("radar_contract_builder_ref", "radar_contract_builder_sha256"),
+        ("dem_control_tests_ref", "dem_control_tests_sha256"),
+        ("radar_contract_tests_ref", "radar_contract_tests_sha256"),
+        ("dem_verification_protocol_ref", "dem_verification_protocol_sha256"),
+        ("radar_processing_protocol_ref", "radar_processing_protocol_sha256"),
+        ("arcgis_capability_ref", "arcgis_capability_sha256"),
+    ):
+        relative = readiness_bindings.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"DEM and radar readiness receipt is missing {ref_key}")
+        if readiness_bindings.get(hash_key) != sha256(relative):
+            fail(f"DEM and radar readiness receipt does not bind {ref_key}")
+    if dem_radar_readiness.get("checks", {}).get("full_unit_suite") != {"status": "pass", "test_count": 82}:
+        fail("DEM and radar readiness receipt must preserve 82 passing tests")
+    readiness_assertions = dem_radar_readiness.get("assertions", {})
+    if readiness_assertions.get("sentinel_product_bytes_transferred") != 0 or any(
+        readiness_assertions.get(key) is not False
+        for key in (
+            "dem_payload_bytes_requested",
+            "dem_license_accepted",
+            "external_custody_mutated",
+            "dem_pixels_examined",
+            "sentinel_pixels_processed",
+            "baseline_established",
+            "scientific_result_established",
+            "existing_dem_review_bundle_mutated",
+        )
+    ):
+        fail("DEM and radar readiness receipt violates its no-payload claim boundary")
     if aoi_reconciliation["contract_sha256"] != sha256("reviews/m1-aoi/review-contract.json"):
         fail("AOI reconciliation does not bind the exact historical review contract")
     if approval["status"] != "approved" or approval["reviewed_aoi_sha256"] != sha256("config/aoi/draft-study-areas.geojson"):
@@ -876,6 +1014,30 @@ def main() -> None:
         "authority_created": False,
     }:
         fail("EVID-0022 claim boundary differs")
+    dem_radar_evidence = ledger_by_id.get("EVID-0023")
+    if not isinstance(dem_radar_evidence, dict):
+        fail("evidence ledger is missing EVID-0023 DEM and radar control evidence")
+    for ref_key, hash_key in (
+        ("receipt_ref", "receipt_sha256"),
+        ("dem_intake_ref", "dem_intake_sha256"),
+        ("dem_verification_ref", "dem_verification_sha256"),
+        ("radar_contract_ref", "radar_contract_sha256"),
+        ("dem_protocol_ref", "dem_protocol_sha256"),
+        ("radar_protocol_ref", "radar_protocol_sha256"),
+        ("dem_test_ref", "dem_test_sha256"),
+        ("radar_test_ref", "radar_test_sha256"),
+    ):
+        relative = dem_radar_evidence.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"EVID-0023 is missing {ref_key}")
+        if dem_radar_evidence.get(hash_key) != sha256(relative):
+            fail(f"EVID-0023 does not bind {ref_key}")
+    if dem_radar_evidence.get("status") != "pass_static_controls_only_dependencies_deferred":
+        fail("EVID-0023 must preserve its static-only deferred status")
+    if dem_radar_evidence.get("validation", {}).get("full_unit_test_count") != 82:
+        fail("EVID-0023 must preserve 82 passing tests")
+    if dem_radar_evidence.get("assertions") != dem_radar_readiness.get("assertions"):
+        fail("EVID-0023 and its readiness receipt have different claim boundaries")
 
     violations = []
     for relative in tracked_files():

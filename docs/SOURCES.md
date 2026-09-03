@@ -22,6 +22,10 @@ The project uses **26 August 2026 debris avalanche and flash flood** as its work
 - [Copernicus Browser documentation](https://documentation.dataspace.copernicus.eu/Applications/Browser.html)
 - [Copernicus Data Space terms and conditions](https://dataspace.copernicus.eu/terms-and-conditions)
 - [Copernicus Data Space citation guidance](https://documentation.dataspace.copernicus.eu/FAQ.html)
+- [Copernicus DEM documentation](https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM.html)
+- [Copernicus DEM Product Handbook, version 5.0](https://dataspace.copernicus.eu/sites/default/files/media/files/2024-06/geo1988-copernicusdem-spe-002_producthandbook_i5.0.pdf)
+- [ArcGIS Pro Sentinel-1 GRD workflow](https://doc.esri.com/en/arcgis-pro/latest/help/analysis/image-analyst/analysis-ready-sentinel-1-grd-data-generation.html)
+- [ArcGIS Pro radiometric terrain flattening](https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-radiometric-terrain-flattening.html)
 
 Copernicus Sentinel data is described by CDSE as free, full, and open under the Sentinel Data Legal Notice. Public or modified outputs must use the applicable Copernicus Sentinel source notice. Portal materials outside the Sentinel data grant can have narrower noncommercial and redistribution terms, so downloaded quicklooks remain in Git-ignored scratch custody and are not redistributed from this repository.
 
@@ -44,3 +48,5 @@ This establishes catalog identity only. It does not establish:
 ## Retrieval date
 
 Event and documentation pages were reviewed on 31 August 2026 local time. The exact product-name query was run on 1 September 2026 UTC.
+
+The four-tile DEM metadata, license, and anonymous-object route were reviewed on 3 September 2026 UTC. ArcGIS Pro's published Sentinel-1 workflow, terrain-flattening inputs, orbit-vector guidance, and EGM96 geoid behavior were rechecked on 3 September 2026 UTC. These documentation checks do not establish acquired bytes or usable pixels.

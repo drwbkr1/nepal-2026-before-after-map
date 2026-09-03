@@ -1,0 +1,215 @@
+{
+  "contract_version": "1.0",
+  "intake_id": "nepal-m2-dem-intake-001",
+  "created_at": "2026-09-03T18:03:08Z",
+  "collision_policy": "fail",
+  "promotion_mode": "atomic-no-replace",
+  "secret_policy": "references-only",
+  "custody_root": "nepal-2026-before-after-map-data/custody",
+  "staging_root": "nepal-2026-before-after-map-data/.intake-staging/nepal-m2-dem-intake-001",
+  "assets": [
+    {
+      "asset_id": "m2-dem-001",
+      "source": {
+        "kind": "https",
+        "uri": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E084_00_DEM/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+        "authorization_ref": "pending:contracts/milestone-002-dem-amendment-proposal.json",
+        "terms_ref": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+        "transport_exception_ref": null
+      },
+      "destination_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+      "staging_relative_path": "m2-dem-001/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": 45336691,
+        "unavailable_reason": "The publisher route exposes a byte length and ETag but no upstream SHA-256. Revalidate the remote identity and compute SHA-256 locally before promotion."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "planned",
+      "attempts": [],
+      "failure": null,
+      "superseded_by": null,
+      "extensions": {
+        "source_id": "M2-DEM-001",
+        "item_id": "Copernicus_DSM_COG_10_N27_00_E084_00_DEM",
+        "collection": "cop-dem-glo-30-dged-cog",
+        "remote_etag_metadata": "0d5ffaef0d04a1a2c10a15ba9dd7b04a",
+        "remote_last_modified_metadata": "Mon, 09 May 2022 14:12:20 GMT",
+        "remote_accept_ranges_metadata": "bytes",
+        "expected_bbox_wgs84": [
+          84.0,
+          27.0,
+          85.0,
+          28.0
+        ],
+        "expected_shape": [
+          3600,
+          3600
+        ],
+        "expected_data_type": "float32",
+        "intended_use": "Sentinel-1 terrain correction and terrain-geometry screening only"
+      }
+    },
+    {
+      "asset_id": "m2-dem-002",
+      "source": {
+        "kind": "https",
+        "uri": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E085_00_DEM/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+        "authorization_ref": "pending:contracts/milestone-002-dem-amendment-proposal.json",
+        "terms_ref": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+        "transport_exception_ref": null
+      },
+      "destination_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+      "staging_relative_path": "m2-dem-002/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": 44874244,
+        "unavailable_reason": "The publisher route exposes a byte length and ETag but no upstream SHA-256. Revalidate the remote identity and compute SHA-256 locally before promotion."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "planned",
+      "attempts": [],
+      "failure": null,
+      "superseded_by": null,
+      "extensions": {
+        "source_id": "M2-DEM-002",
+        "item_id": "Copernicus_DSM_COG_10_N27_00_E085_00_DEM",
+        "collection": "cop-dem-glo-30-dged-cog",
+        "remote_etag_metadata": "4789613b867d5924d886e7c947255c5b",
+        "remote_last_modified_metadata": "Mon, 09 May 2022 14:12:20 GMT",
+        "remote_accept_ranges_metadata": "bytes",
+        "expected_bbox_wgs84": [
+          85.0,
+          27.0,
+          86.0,
+          28.0
+        ],
+        "expected_shape": [
+          3600,
+          3600
+        ],
+        "expected_data_type": "float32",
+        "intended_use": "Sentinel-1 terrain correction and terrain-geometry screening only"
+      }
+    },
+    {
+      "asset_id": "m2-dem-003",
+      "source": {
+        "kind": "https",
+        "uri": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E084_00_DEM/Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+        "authorization_ref": "pending:contracts/milestone-002-dem-amendment-proposal.json",
+        "terms_ref": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+        "transport_exception_ref": null
+      },
+      "destination_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+      "staging_relative_path": "m2-dem-003/Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": 41688284,
+        "unavailable_reason": "The publisher route exposes a byte length and ETag but no upstream SHA-256. Revalidate the remote identity and compute SHA-256 locally before promotion."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "planned",
+      "attempts": [],
+      "failure": null,
+      "superseded_by": null,
+      "extensions": {
+        "source_id": "M2-DEM-003",
+        "item_id": "Copernicus_DSM_COG_10_N28_00_E084_00_DEM",
+        "collection": "cop-dem-glo-30-dged-cog",
+        "remote_etag_metadata": "f6f936f5ef1c5d4bbc51c47f1c43becb",
+        "remote_last_modified_metadata": "Mon, 09 May 2022 14:13:13 GMT",
+        "remote_accept_ranges_metadata": "bytes",
+        "expected_bbox_wgs84": [
+          84.0,
+          28.0,
+          85.0,
+          29.0
+        ],
+        "expected_shape": [
+          3600,
+          3600
+        ],
+        "expected_data_type": "float32",
+        "intended_use": "Sentinel-1 terrain correction and terrain-geometry screening only"
+      }
+    },
+    {
+      "asset_id": "m2-dem-004",
+      "source": {
+        "kind": "https",
+        "uri": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E085_00_DEM/Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+        "authorization_ref": "pending:contracts/milestone-002-dem-amendment-proposal.json",
+        "terms_ref": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+        "transport_exception_ref": null
+      },
+      "destination_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+      "staging_relative_path": "m2-dem-004/Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": 38402839,
+        "unavailable_reason": "The publisher route exposes a byte length and ETag but no upstream SHA-256. Revalidate the remote identity and compute SHA-256 locally before promotion."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "planned",
+      "attempts": [],
+      "failure": null,
+      "superseded_by": null,
+      "extensions": {
+        "source_id": "M2-DEM-004",
+        "item_id": "Copernicus_DSM_COG_10_N28_00_E085_00_DEM",
+        "collection": "cop-dem-glo-30-dged-cog",
+        "remote_etag_metadata": "0e1522e26e1a768bdaa827aa64436a0b",
+        "remote_last_modified_metadata": "Mon, 09 May 2022 14:13:13 GMT",
+        "remote_accept_ranges_metadata": "bytes",
+        "expected_bbox_wgs84": [
+          85.0,
+          28.0,
+          86.0,
+          29.0
+        ],
+        "expected_shape": [
+          3600,
+          3600
+        ],
+        "expected_data_type": "float32",
+        "intended_use": "Sentinel-1 terrain correction and terrain-geometry screening only"
+      }
+    }
+  ],
+  "extensions": {
+    "status": "candidate_static_control_not_authorized",
+    "project_root_basis": "parent_of_repository",
+    "candidate_manifest_ref": "records/source-gates/m2-dem-candidate-manifest.json",
+    "candidate_manifest_sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243",
+    "amendment_proposal_ref": "contracts/milestone-002-dem-amendment-proposal.json",
+    "amendment_proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+    "review_bundle_ref": "reviews/m2-dem-amendment/review-bundle.json",
+    "review_bundle_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e",
+    "license_document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd",
+    "authority_status": "not_granted",
+    "resume_policy": "disabled_until_fresh_accept_ranges_and_unchanged_remote_etag_and_length_are_verified",
+    "redirect_policy": "refuse",
+    "static_only_no_network_or_external_filesystem_mutation": true
+  }
+}

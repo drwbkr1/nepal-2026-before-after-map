@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-RADAR-CONTROL-READINESS-001",
+  "created_at_utc": "2026-09-03T18:25:27Z",
+  "status": "pass_static_controls_only_dependencies_deferred",
+  "bindings": {
+    "dem_candidate_manifest_ref": "records/source-gates/m2-dem-candidate-manifest.json",
+    "dem_candidate_manifest_sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243",
+    "dem_amendment_proposal_ref": "contracts/milestone-002-dem-amendment-proposal.json",
+    "dem_amendment_proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+    "dem_review_bundle_ref": "reviews/m2-dem-amendment/review-bundle.json",
+    "dem_review_bundle_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e",
+    "dem_intake_candidate_ref": "contracts/m2-dem-intake-candidate.json",
+    "dem_intake_candidate_sha256": "d1296906b2b41625f7bd2d2a2496336dec1063ec5acd06ec2b0fc2f9ab398c2d",
+    "dem_verification_candidate_ref": "contracts/m2-dem-offline-verification-candidate.json",
+    "dem_verification_candidate_sha256": "ec738e080394a62a20d6e34e1b893018219ed9c3fcb6beb2eccf474d71d2ad67",
+    "radar_processing_contract_ref": "config/qa/radar-baseline-processing-contract.json",
+    "radar_processing_contract_sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f",
+    "dem_control_builder_ref": "scripts/prepare_m2_dem_controls.py",
+    "dem_control_builder_sha256": "bad0b1562ee8237298945d8b73223c653ede8036505d6108895adde5b4edb36b",
+    "dem_geotiff_verifier_ref": "scripts/verify_m2_dem_geotiff.py",
+    "dem_geotiff_verifier_sha256": "64315e9d1747682890a594320b27190cd009f03d45312bd1b015c883a9b479c6",
+    "radar_contract_builder_ref": "scripts/prepare_radar_processing_contract.py",
+    "radar_contract_builder_sha256": "05d9e80da4d1189f931dea8cc9b5483b36f0bcf2e14e687d81c52893121b82f8",
+    "dem_control_tests_ref": "tests/test_m2_dem_controls.py",
+    "dem_control_tests_sha256": "97a97657ade6b0d696ccd173ff31d222015ab00973cef937fbcbb3c1d53e6503",
+    "radar_contract_tests_ref": "tests/test_radar_processing_contract.py",
+    "radar_contract_tests_sha256": "db77cef3abff8e6f1f394a332b04948699feaa04e98f14dd5a528eb6fbf5e071",
+    "dem_verification_protocol_ref": "docs/M2_DEM_OFFLINE_VERIFICATION.md",
+    "dem_verification_protocol_sha256": "2b4cfbc388ef236214760dfdc205d694b2e105ba7d1e92c9b350d4818c4ccc0f",
+    "radar_processing_protocol_ref": "docs/RADAR_BASELINE_PROCESSING_PROTOCOL.md",
+    "radar_processing_protocol_sha256": "f48953c85ceb21dbdda8b9ae17c24d0b6a0e0f5379597c0abaf1d957fd879454",
+    "arcgis_capability_ref": "records/surface-receipts/arcgis-sar-processing-capability.json",
+    "arcgis_capability_sha256": "c7a0319662159e00b927a27a8d7c122e7cd18443a952decdb2fb86f1cc414e20"
+  },
+  "runtime": {
+    "portable_python": "3.12.10",
+    "arcgis_product": "ArcGISPro",
+    "arcgis_version": "3.7.1",
+    "arcgis_license_level": "Advanced",
+    "image_analyst": "available_not_used_on_product_pixels"
+  },
+  "checks": {
+    "controlled_intake_schema": {
+      "status": "pass",
+      "asset_count": 4,
+      "project_root": "C:\\Projects\\Active"
+    },
+    "deterministic_control_derivation": {
+      "status": "pass",
+      "payload_bytes_requested": false,
+      "authority_created": false
+    },
+    "targeted_unit_tests": {
+      "status": "pass",
+      "test_count": 13
+    },
+    "full_unit_suite": {
+      "status": "pass",
+      "test_count": 82
+    },
+    "candidate_verifier_execution": {
+      "status": "refused_as_expected"
+    },
+    "real_product_processing": {
+      "status": "not_run"
+    }
+  },
+  "dependency_dispositions": [
+    {
+      "dependency": "M2 DEM amendment and exact license acceptance",
+      "status": "defer",
+      "reason": "No completed owner decision has been reconciled for the DEM review bundle."
+    },
+    {
+      "dependency": "DEM vertical datum route",
+      "status": "defer",
+      "reason": "Copernicus GLO-30 EGM2008 orthometric heights do not exactly match the ArcGIS EGM96 built-in geoid correction."
+    },
+    {
+      "dependency": "updated Sentinel-1 orbit state vectors",
+      "status": "defer_if_predicted_only",
+      "reason": "Restituted or precise OSV files are separate auxiliary products outside the current eight-product authority."
+    }
+  ],
+  "assertions": {
+    "sentinel_product_bytes_transferred": 0,
+    "dem_payload_bytes_requested": false,
+    "dem_license_accepted": false,
+    "external_custody_mutated": false,
+    "dem_pixels_examined": false,
+    "sentinel_pixels_processed": false,
+    "baseline_established": false,
+    "scientific_result_established": false,
+    "existing_dem_review_bundle_mutated": false
+  },
+  "official_method_sources": [
+    "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/generate-radiometric-terrain-corrected-data.html",
+    "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-radiometric-terrain-flattening.html",
+    "https://doc.esri.com/en/arcgis-pro/latest/help/analysis/image-analyst/analysis-ready-sentinel-1-grd-data-generation.html",
+    "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM.html"
+  ],
+  "next_action": "Continue waiting for the existing CDSE token reference for the original eight products; independently await exact owner approval before activating any DEM action."
+}

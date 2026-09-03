@@ -101,3 +101,9 @@
 **Decision:** Prepare, but do not activate, an M2 amendment for the exact four Copernicus DEM GLO-30 COG tiles that cover the approved AOIs and for explicit acceptance of the exact hash-bound Copernicus WorldDEM-30 license.
 **Reason:** The installed ArcGIS Pro Sentinel-1 terrain-correction tools accept or require a DEM, while the active M2 approval covers only eight Sentinel products and forbids new terms acceptance or extra products. The anonymous AWS route avoids a new account but does not remove the license-acceptance requirement.
 **Status:** Awaiting owner decision through review bundle SHA-256 `caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e` and amendment proposal SHA-256 `92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69`. Metadata-only probes confirmed four exact objects totaling 170,302,058 bytes; no DEM payload, acceptance, authentication, or processing occurred.
+
+## D-018 — Predeclared DEM verification and Sentinel-1 processing boundaries
+
+**Decision:** Derive non-authorizing intake and ArcGIS GeoTIFF verification controls for the exact four proposed DEM tiles, and fix the two independent Sentinel-1 processing routes before real pixels are available.
+**Reason:** A reviewed source list does not define safe custody or raster acceptance, and ArcGIS processing defaults could otherwise hide consequential choices about orbit vectors, despeckling, terrain masks, units, or vertical datum.
+**Status:** Static controls and thirteen local tests pass. Production processing remains deferred because the DEM amendment is unapproved, the source heights are EGM2008 orthometric while ArcGIS documents EGM96 for its built-in geoid option, and updated orbit files are not authorized auxiliary products. No payload byte, external custody path, or scientific result was created.
