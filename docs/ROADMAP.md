@@ -36,6 +36,8 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Status:** Proposed, not active. The exact acquisition plan is prepared for owner review; no authentication, custody-root creation, download, extraction, or baseline processing is authorized.
 
+**Prepared verification:** Deterministic offline controls now define exact container identity, checksum, ZIP safety, SAFE structure, required radar/optical members, and the later pixel-readiness gates. The current readiness decision is `defer`; no external custody was inspected.
+
 **Work:**
 
 - download approved products into non-Git custody;

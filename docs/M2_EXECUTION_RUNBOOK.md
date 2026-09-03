@@ -25,10 +25,15 @@ The static controls added after that bundle do not change either reviewed artifa
 
 `records/acquisition/m2-intake-static-dry-run.json` proves only that the reviewed product set can be converted into those static controls. It performs no filesystem probe and makes no network request.
 
+`contracts/m2-offline-verification-candidate.json` defines the read-only post-download checks for the same eight exact archives. It requires local SHA-256, provider-MD5 agreement, exact size, safe ZIP membership, CRC, exact SAFE root identity, and analysis-critical band, polarization, calibration, noise, and quality members. It does not access custody until a later explicit scan invocation.
+
+`records/readiness/m2-readiness-decision.json` is currently `defer`: no full products, access-time terms evidence, pixel coverage, masks, or registration evidence exist. See [M2_OFFLINE_VERIFICATION.md](M2_OFFLINE_VERIFICATION.md).
+
 Regenerate or verify these bytes with:
 
 ```powershell
 python scripts/prepare_m2_intake.py --created-at 2026-09-02T04:46:03Z --verify-only
+python scripts/prepare_m2_verification.py --created-at 2026-09-03T16:43:33Z --verify-only
 python -m unittest discover -s tests -v
 python scripts/check_project.py
 ```
@@ -43,10 +48,10 @@ python scripts/check_project.py
 6. Use an owner-controlled existing authenticated session or account reference. Keep usernames, passwords, access tokens, refresh values, cookies, and authorization headers out of files, commands captured as evidence, logs, and Git.
 7. Intake one product at a time. Append an attempt record before transfer and write only to its unique `.part` staging path.
 8. Resume only if the server proves range support and the remote length plus strong identity are unchanged. Otherwise preserve the partial attempt and start a distinct attempt.
-9. Flush and close staged bytes. Compute local SHA-256, compare available provider MD5 and BLAKE3 values with suitable verified tools, and run a deterministic ZIP/container test. A successful HTTP response is insufficient.
+9. Flush and close staged bytes. Compute local SHA-256, compare available provider MD5 and BLAKE3 values with suitable verified tools, and run the fail-closed offline ZIP/container verifier. A successful HTTP response is insufficient.
 10. Promote with a same-filesystem no-replace operation. Stop if the destination exists or the platform cannot guarantee non-replacement. Re-hash the promoted file and require equality with staged bytes.
 11. Preserve failed, partial, corrupt, superseded, and inconclusive attempts. Never rewrite them into passing history.
-12. Only verified products can advance to band/polarization inventory, pixel-level AOI coverage, rights confirmation, baseline creation, EPSG:32645 registration, and optical/radar QA.
+12. Only `pass_container_only` products can advance to raster readability, pixel-level AOI coverage, rights confirmation, baseline creation, EPSG:32645 registration, and optical/radar QA. The container result itself is not a usable-pixel decision.
 
 ## Scientific boundary
 

@@ -34,10 +34,13 @@
 - deterministic static intake contract SHA-256 `c4927e5a162aa925bcffbeb7bd2248474bedbc4c88c2e8094fb6e25a27f75b9c`;
 - network-free static dry-run receipt SHA-256 `1469785b6509e7aa6f7d8673b7e15f7543914ceca958e7c63af95f4bb7c370e9`;
 - nine passing mutation and reproducibility tests for exact identity, authority, paths, collision behavior, and secret-free routes.
+- deterministic offline container-verification contract for the same eight exact products, including local SHA-256, provider MD5, ZIP safety and CRC, exact SAFE root, required VV/VH radar members, and required optical bands and SCL;
+- synthetic fixture and mutation tests that exercise container pass, missing-product defer, unsafe-member block, and non-authority behavior without accessing external custody;
+- independent dataset-readiness decision **DEFER** across nine required gates; eight approved product identities alone do not establish data readiness.
 
 The proposal would allow a fresh custody preflight, creation of the external data root, use of an owner-controlled existing Copernicus account or authenticated session, downloads of only the eight exact products, and checksum, archive, band, pixel, coverage, rights, baseline, and registration QA.
 
-The static intake packet is derived tooling, not an M2 preflight or approval. It made no network request or filesystem probe, created no external directory, and left the reviewed M2 plan and bundle hashes unchanged.
+The static intake and offline verification packets are derived tooling, not an M2 preflight or approval. They made no network request or external custody probe, created no external directory, and left the reviewed M2 plan and bundle hashes unchanged.
 
 The ArcGIS evidence workspace is also preparatory structure, not M2 execution. It uses approved AOIs and source metadata only and did not authenticate, create the proposed external data root, download products, or process pixels.
 

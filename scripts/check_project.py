@@ -50,18 +50,24 @@ REQUIRED = [
     "reviews/m1-manifest/blank-response.json",
     "docs/M2_CONTROLLED_ACQUISITION_REVIEW.md",
     "docs/M2_EXECUTION_RUNBOOK.md",
+    "docs/M2_OFFLINE_VERIFICATION.md",
     "docs/assets/m2-controlled-acquisition-review.png",
     "scripts/render_m2_activation_review.py",
     "scripts/prepare_m2_intake.py",
+    "scripts/prepare_m2_verification.py",
     "scripts/build_arcgis_evidence_workspace.py",
     "scripts/validate_arcgis_evidence_workspace.py",
     "config/arcgis/evidence-workspace-schema.json",
     "docs/assets/arcgis-evidence-workspace-preview.png",
     "records/surface-receipts/m2-activation-review.json",
+    "contracts/m2-offline-verification-candidate.json",
+    "records/readiness/m2-readiness-audit-input.json",
+    "records/readiness/m2-readiness-decision.json",
     "reviews/m2-activation/review-bundle.json",
     "reviews/m2-activation/review-contract.json",
     "reviews/m2-activation/blank-response.json",
     "tests/test_m2_intake.py",
+    "tests/test_m2_verification.py",
     "tests/test_arcgis_evidence_schema.py",
     ".github/workflows/validate.yml",
 ]
@@ -169,6 +175,9 @@ def main() -> None:
     m2_surface_receipt = json.loads((ROOT / "records/surface-receipts/m2-activation-review.json").read_text(encoding="utf-8"))
     intake_contract = json.loads((ROOT / "contracts/m2-intake-candidate.json").read_text(encoding="utf-8"))
     intake_dry_run = json.loads((ROOT / "records/acquisition/m2-intake-static-dry-run.json").read_text(encoding="utf-8"))
+    offline_verification = json.loads((ROOT / "contracts/m2-offline-verification-candidate.json").read_text(encoding="utf-8"))
+    readiness_input = json.loads((ROOT / "records/readiness/m2-readiness-audit-input.json").read_text(encoding="utf-8"))
+    readiness_decision = json.loads((ROOT / "records/readiness/m2-readiness-decision.json").read_text(encoding="utf-8"))
     reproducibility = json.loads((ROOT / "records/surface-receipts/m1-control-reproducibility.json").read_text(encoding="utf-8"))
     evidence_schema = json.loads((ROOT / "config/arcgis/evidence-workspace-schema.json").read_text(encoding="utf-8"))
     evidence_workspace = json.loads((ROOT / "records/surface-receipts/arcgis-evidence-workspace.json").read_text(encoding="utf-8"))
@@ -308,6 +317,94 @@ def main() -> None:
         fail("M2 static dry run must not claim acquisition, network, or authentication activity")
     if intake_dry_run.get("path_model", {}).get("directories_created") is not False:
         fail("M2 static dry run must not claim external directory creation")
+
+    if offline_verification.get("status") != "candidate_static_control_not_authorized":
+        fail("M2 offline verification contract must remain non-authorizing")
+    offline_inputs = offline_verification.get("inputs", {})
+    expected_offline_inputs = {
+        "acquisition_plan_ref": "records/acquisition-plan.json",
+        "acquisition_plan_sha256": sha256("records/acquisition-plan.json"),
+        "intake_contract_ref": "contracts/m2-intake-candidate.json",
+        "intake_contract_sha256": sha256("contracts/m2-intake-candidate.json"),
+        "manifest_approval_ref": "records/source-gates/source-manifest-approval.json",
+        "manifest_approval_sha256": sha256("records/source-gates/source-manifest-approval.json"),
+        "m2_review_bundle_ref": "reviews/m2-activation/review-bundle.json",
+        "m2_review_bundle_sha256": sha256("reviews/m2-activation/review-bundle.json"),
+    }
+    if offline_inputs != expected_offline_inputs:
+        fail("M2 offline verification contract does not bind its exact approved inputs")
+    offline_authority = offline_verification.get("authority", {})
+    if offline_authority.get("m2_activation_status") != "not_granted":
+        fail("M2 offline verification contract must preserve the pending activation gate")
+    if any(value for key, value in offline_authority.items() if key != "m2_activation_status"):
+        fail("M2 offline verification contract must not create operational authority")
+    boundary = offline_verification.get("execution_boundary", {})
+    if boundary.get("network_requests") != "prohibited" or boundary.get("archive_extraction") != "prohibited":
+        fail("M2 offline verification must prohibit network requests and archive extraction")
+    if boundary.get("custody_root_must_already_exist") is not True or boundary.get("overwrite_existing_receipt") is not False:
+        fail("M2 offline verification must refuse root creation and receipt replacement")
+    offline_assets = offline_verification.get("assets", [])
+    if len(offline_assets) != 8:
+        fail("M2 offline verification contract must contain exactly eight assets")
+    offline_by_source = {item.get("source_id"): item for item in offline_assets}
+    plan_by_source = {item["source_id"]: item for item in acquisition_plan["records"]}
+    intake_by_source = {item["extensions"]["source_id"]: item for item in intake_contract["assets"]}
+    if set(offline_by_source) != set(plan_by_source):
+        fail("M2 offline verification source set differs from the approved plan")
+    required_radar_patterns = {
+        "measurement/*-vv-*.tiff",
+        "measurement/*-vh-*.tiff",
+        "annotation/calibration/calibration-*-vv-*.xml",
+        "annotation/calibration/noise-*-vh-*.xml",
+    }
+    required_optical_patterns = {
+        "GRANULE/*/IMG_DATA/R10m/*_B02_10m.jp2",
+        "GRANULE/*/IMG_DATA/R10m/*_B08_10m.jp2",
+        "GRANULE/*/IMG_DATA/R20m/*_B11_20m.jp2",
+        "GRANULE/*/IMG_DATA/R20m/*_B12_20m.jp2",
+        "GRANULE/*/IMG_DATA/R20m/*_SCL_20m.jp2",
+    }
+    for source_id, offline_asset in offline_by_source.items():
+        plan_asset = plan_by_source[source_id]
+        intake_asset = intake_by_source[source_id]
+        if offline_asset.get("exact_product_id") != plan_asset["exact_product_id"]:
+            fail(f"M2 offline verification product identity differs for {source_id}")
+        if offline_asset.get("archive_relative_path") != intake_asset["destination_relative_path"]:
+            fail(f"M2 offline verification custody path differs for {source_id}")
+        checksums = {item["Algorithm"].casefold(): item["Value"].casefold() for item in plan_asset["provider_checksums"]}
+        if offline_asset.get("provider_md5") != checksums.get("md5"):
+            fail(f"M2 offline verification provider MD5 differs for {source_id}")
+        if offline_asset.get("provider_blake3_metadata") != checksums.get("blake3"):
+            fail(f"M2 offline verification provider BLAKE3 metadata differs for {source_id}")
+        patterns = {item.get("pattern") for item in offline_asset.get("required_members", [])}
+        required = required_radar_patterns if plan_asset["sensor_route"] == "radar" else required_optical_patterns
+        if not required.issubset(patterns):
+            fail(f"M2 offline verification structural profile is incomplete for {source_id}")
+    if readiness_input.get("candidate_manifest_sha256") != sha256("records/source-manifest.json"):
+        fail("M2 readiness audit does not bind the approved source manifest")
+    required_gate_ids = set(readiness_input.get("required_gate_ids", []))
+    if len(required_gate_ids) != 9:
+        fail("M2 readiness audit must preserve nine required non-count gates")
+    if {gate.get("gate_id") for gate in readiness_input.get("gates", [])} != required_gate_ids:
+        fail("M2 readiness audit gate inventory differs")
+    if any(gate.get("status") != "defer" for gate in readiness_input.get("gates", [])):
+        fail("M2 pre-acquisition readiness gates must remain deferred")
+    if readiness_input.get("next_step_authority") != {
+        "mode": "not_granted",
+        "authority_ref": "reviews/m2-activation/review-bundle.json",
+        "authorized_actions": [],
+    }:
+        fail("M2 readiness audit must not create next-step authority")
+    if readiness_decision.get("audit_input_sha256") != sha256("records/readiness/m2-readiness-audit-input.json"):
+        fail("M2 readiness decision does not bind its exact audit input")
+    if readiness_decision.get("decision") != "defer":
+        fail("M2 readiness decision must remain defer before acquisition and pixel evidence")
+    if set(readiness_decision.get("deferred_required_gate_ids", [])) != required_gate_ids:
+        fail("M2 readiness decision does not retain every unresolved required gate")
+    if readiness_decision.get("blocking_required_gate_ids") != [] or readiness_decision.get("pass_evidence") != []:
+        fail("M2 readiness decision must not invent blocking or passing gate evidence")
+    if readiness_decision.get("authorized_next_actions") != [] or readiness_decision.get("training_authorized_by_this_audit") is not False:
+        fail("M2 readiness decision must not authorize downstream work")
     if reproducibility["status"] != "pass_with_retained_failures":
         fail("M1 reproducibility receipt is not in a passing state")
     for check in reproducibility["checks"]:
@@ -373,14 +470,38 @@ def main() -> None:
     if not any("No satellite pixels" in item for item in evidence_workspace.get("limitations", [])):
         fail("ArcGIS evidence workspace must preserve its no-pixels claim boundary")
 
+    ledger_records = []
     for number, line in enumerate(
         (ROOT / "records/evidence-ledger.jsonl").read_text(encoding="utf-8").splitlines(), 1
     ):
         if line.strip():
             try:
-                json.loads(line)
+                ledger_records.append(json.loads(line))
             except json.JSONDecodeError as exc:
                 fail(f"invalid evidence ledger JSON on line {number}: {exc}")
+    ledger_by_id = {record.get("record_id"): record for record in ledger_records}
+    offline_evidence = ledger_by_id.get("EVID-0020")
+    if not isinstance(offline_evidence, dict):
+        fail("evidence ledger is missing EVID-0020 offline verification evidence")
+    for ref_key, hash_key in (
+        ("verification_contract_ref", "verification_contract_sha256"),
+        ("readiness_input_ref", "readiness_input_sha256"),
+        ("readiness_decision_ref", "readiness_decision_sha256"),
+        ("generator_ref", "generator_sha256"),
+        ("test_ref", "test_sha256"),
+    ):
+        relative = offline_evidence.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"EVID-0020 is missing {ref_key}")
+        if offline_evidence.get(hash_key) != sha256(relative):
+            fail(f"EVID-0020 does not bind {ref_key}")
+    if offline_evidence.get("independent_readiness_audit", {}).get("decision") != "defer":
+        fail("EVID-0020 must preserve the independent DEFER readiness decision")
+    if offline_evidence.get("preserved_review_bindings") != {
+        "acquisition_plan_sha256": sha256("records/acquisition-plan.json"),
+        "m2_activation_review_bundle_sha256": sha256("reviews/m2-activation/review-bundle.json"),
+    }:
+        fail("EVID-0020 does not preserve the exact M2 review bindings")
 
     violations = []
     for relative in tracked_files():

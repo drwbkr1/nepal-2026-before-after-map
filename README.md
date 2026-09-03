@@ -48,6 +48,8 @@ Milestones 0 and 1 are complete. The exact AOI and source-manifest decisions are
 
 A deterministic, network-free M2 intake packet is prepared for the eight exact products. It fixes sibling staging and custody paths, fail-on-collision and no-replace promotion rules, secret references, and attempt retention without changing the pending review bundle or creating acquisition authority.
 
+A deterministic offline verification packet now defines exact archive, checksum, ZIP-safety, SAFE-structure, band, polarization, and post-container pixel-readiness checks for the same eight products. Its independent dataset-readiness result is **DEFER** because no product bytes, access-time rights evidence, AOI pixel coverage, masks, or registration results exist. The packet made no external-custody access or network request.
+
 A metadata-only ArcGIS evidence workspace has also been built and validated in ArcGIS Pro 3.7.1 Advanced. Its EPSG:32645 File Geodatabase contains nine datasets, fourteen coded-value domains, eight relationship classes, three approved AOIs, and ten source-product metadata rows. The observation, interpretation, attribution, exclusion, stable-control, and QA structures are empty by design. The retained APRX, geodatabase, and PDF remain outside Git; the repository contains the schema, builder, validator, receipt, and a reviewed PNG preview.
 
 See:
@@ -60,6 +62,7 @@ See:
 - [M1 source-manifest review](docs/M1_SOURCE_MANIFEST_REVIEW.md)
 - [M2 controlled-acquisition review](docs/M2_CONTROLLED_ACQUISITION_REVIEW.md)
 - [M2 controlled-intake execution runbook](docs/M2_EXECUTION_RUNBOOK.md)
+- [M2 offline product verification](docs/M2_OFFLINE_VERIFICATION.md)
 - [ArcGIS delivery plan](docs/ARCGIS_DELIVERY_PLAN.md)
 - [ArcGIS evidence model](docs/ARCGIS_EVIDENCE_MODEL.md)
 - [Validation plan](docs/VALIDATION.md)

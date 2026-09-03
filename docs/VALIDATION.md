@@ -38,6 +38,19 @@ python scripts/prepare_m2_intake.py --created-at 2026-09-02T04:46:03Z --verify-o
 python -m unittest discover -s tests -v
 ```
 
+## M2 offline container and readiness validation
+
+Before activation, static verification confirms that the offline contract remains an exact derivation of the approved product set and that all data-readiness gates remain deferred:
+
+```powershell
+python scripts/prepare_m2_verification.py --created-at 2026-09-03T16:43:33Z --verify-only
+python -m unittest tests.test_m2_verification -v
+```
+
+Synthetic fixtures test a valid Sentinel-1 member inventory, unsafe ZIP paths, missing custody files, authority drift, exact-byte regeneration, required Sentinel-2 bands and SCL, and the `defer` readiness result. Fixture success proves the checker behaves as specified; it is not evidence about the real products.
+
+A later real scan must require an already-existing approved custody root and a new receipt path. It computes local SHA-256 and provider MD5, checks exact size, rejects unsafe or encrypted members, validates analysis-critical SAFE members, and runs CRC without extracting the archive. Even a container pass does not establish raster readability, AOI coverage, valid pixels, masks, registration, or scientific fitness.
+
 ## Source validation
 
 For each external product:

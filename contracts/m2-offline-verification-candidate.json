@@ -1,0 +1,633 @@
+{
+  "contract_version": "1.0",
+  "verification_id": "NEPAL-M2-OFFLINE-VERIFICATION-001",
+  "created_at": "2026-09-03T16:43:33Z",
+  "status": "candidate_static_control_not_authorized",
+  "inputs": {
+    "acquisition_plan_ref": "records/acquisition-plan.json",
+    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+    "intake_contract_ref": "contracts/m2-intake-candidate.json",
+    "intake_contract_sha256": "c4927e5a162aa925bcffbeb7bd2248474bedbc4c88c2e8094fb6e25a27f75b9c",
+    "manifest_approval_ref": "records/source-gates/source-manifest-approval.json",
+    "manifest_approval_sha256": "c6df8c24adc96439e8b8ef00c733db8fc3cd3ffb229b333b1d8a63933f3aa04e",
+    "m2_review_bundle_ref": "reviews/m2-activation/review-bundle.json",
+    "m2_review_bundle_sha256": "e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d"
+  },
+  "authority": {
+    "m2_activation_status": "not_granted",
+    "network_access_authorized": false,
+    "authentication_authorized": false,
+    "custody_root_creation_authorized": false,
+    "product_download_authorized": false,
+    "this_contract_creates_authority": false
+  },
+  "execution_boundary": {
+    "custody_root_from_plan": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody",
+    "custody_root_must_already_exist": true,
+    "source_archives_are_read_only": true,
+    "output_parent_must_already_exist": true,
+    "overwrite_existing_receipt": false,
+    "network_requests": "prohibited",
+    "archive_extraction": "prohibited"
+  },
+  "archive_controls": {
+    "required_format": "zip",
+    "local_identity_algorithm": "SHA-256",
+    "provider_comparison_algorithm": "MD5",
+    "require_exact_catalog_size": true,
+    "require_crc_test": true,
+    "reject_encrypted_entries": true,
+    "reject_symbolic_links": true,
+    "reject_unsafe_or_duplicate_member_paths": true,
+    "maximum_member_count": 100000,
+    "maximum_single_uncompressed_bytes": 8589934592,
+    "maximum_total_uncompressed_bytes_floor": 2147483648,
+    "maximum_total_uncompressed_to_archive_ratio": 6.0
+  },
+  "assets": [
+    {
+      "source_id": "M1-SRC-001",
+      "asset_id": "m1-src-001",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE",
+      "provider_product_id": "227d0869-e2a2-4258-9624-ffaea31c4058",
+      "sensor_route": "radar",
+      "event_role": "before",
+      "archive_relative_path": "products/m1-src-001/S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE.zip",
+      "catalog_content_length_bytes": 1732333216,
+      "provider_md5": "06dd5fdf5ea889a32f7dbb5fa41df029",
+      "provider_blake3_metadata": "75be94e2f483d59a59060919fdf98e8519fe1118eff98be881030916d987f091",
+      "structural_profile": "sentinel1_iw_grd_dual_vv_vh",
+      "required_members": [
+        {
+          "pattern": "manifest.safe",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/calibration-*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/calibration-*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/noise-*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/noise-*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "measurement/*-vv-*.tiff",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "measurement/*-vh-*.tiff",
+          "minimum_count": 1,
+          "nonempty": true
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-002",
+      "asset_id": "m1-src-002",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE",
+      "provider_product_id": "844b9a32-9aa2-4611-83f6-ae6501c01955",
+      "sensor_route": "radar",
+      "event_role": "before",
+      "archive_relative_path": "products/m1-src-002/S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE.zip",
+      "catalog_content_length_bytes": 1732874277,
+      "provider_md5": "227b5ae1aa6a79f8cb851efbde52fdce",
+      "provider_blake3_metadata": "531b052a638342f922d34f1d56e086eb18d7b723fb6210e801a743b4d766b886",
+      "structural_profile": "sentinel1_iw_grd_dual_vv_vh",
+      "required_members": [
+        {
+          "pattern": "manifest.safe",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/calibration-*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/calibration-*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/noise-*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/noise-*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "measurement/*-vv-*.tiff",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "measurement/*-vh-*.tiff",
+          "minimum_count": 1,
+          "nonempty": true
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-003",
+      "asset_id": "m1-src-003",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE",
+      "provider_product_id": "f2682536-f9b8-4b5b-b9eb-5b52417820fa",
+      "sensor_route": "radar",
+      "event_role": "before",
+      "archive_relative_path": "products/m1-src-003/S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE.zip",
+      "catalog_content_length_bytes": 1718369620,
+      "provider_md5": "47c51035a3191a85b6e1d7865f55690b",
+      "provider_blake3_metadata": "ac4fadc73812792f7fad2da5e38bbd80a7f714be270fdf7eff3e94705b957dd6",
+      "structural_profile": "sentinel1_iw_grd_dual_vv_vh",
+      "required_members": [
+        {
+          "pattern": "manifest.safe",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/calibration-*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/calibration-*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/noise-*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/noise-*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "measurement/*-vv-*.tiff",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "measurement/*-vh-*.tiff",
+          "minimum_count": 1,
+          "nonempty": true
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-004",
+      "asset_id": "m1-src-004",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+      "provider_product_id": "641ccb0b-5d88-4c44-b558-93b488cd2453",
+      "sensor_route": "radar",
+      "event_role": "after",
+      "archive_relative_path": "products/m1-src-004/S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip",
+      "catalog_content_length_bytes": 1732332897,
+      "provider_md5": "25c895490c9b786507152513cc701911",
+      "provider_blake3_metadata": "314087e342f011c95ec9b8b520d0baae5272396bd3e2e16b9525bd1c5eba0920",
+      "structural_profile": "sentinel1_iw_grd_dual_vv_vh",
+      "required_members": [
+        {
+          "pattern": "manifest.safe",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/calibration-*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/calibration-*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/noise-*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/noise-*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "measurement/*-vv-*.tiff",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "measurement/*-vh-*.tiff",
+          "minimum_count": 1,
+          "nonempty": true
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "asset_id": "m1-src-005",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE",
+      "provider_product_id": "9cb3c885-cfb8-40cc-a44a-8673e772c794",
+      "sensor_route": "radar",
+      "event_role": "after",
+      "archive_relative_path": "products/m1-src-005/S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE.zip",
+      "catalog_content_length_bytes": 1732898724,
+      "provider_md5": "7b48f33e171138afcaa7f72063c37eda",
+      "provider_blake3_metadata": "6b039f66fefa156d4f2b1969b3ec27b74f0e6b2f58b76aa30d5b36f690865c6e",
+      "structural_profile": "sentinel1_iw_grd_dual_vv_vh",
+      "required_members": [
+        {
+          "pattern": "manifest.safe",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/calibration-*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/calibration-*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/noise-*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/noise-*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "measurement/*-vv-*.tiff",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "measurement/*-vh-*.tiff",
+          "minimum_count": 1,
+          "nonempty": true
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-006",
+      "asset_id": "m1-src-006",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE",
+      "provider_product_id": "36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4",
+      "sensor_route": "radar",
+      "event_role": "after",
+      "archive_relative_path": "products/m1-src-006/S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE.zip",
+      "catalog_content_length_bytes": 1718402708,
+      "provider_md5": "85555c9a5463a3ffaf6f54552c9095e3",
+      "provider_blake3_metadata": "47b42338b85c454de0a303790963a6b152c14cea9f6feb3ee6dc9434ecb567f3",
+      "structural_profile": "sentinel1_iw_grd_dual_vv_vh",
+      "required_members": [
+        {
+          "pattern": "manifest.safe",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/calibration-*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/calibration-*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/noise-*-vv-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "annotation/calibration/noise-*-vh-*.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "measurement/*-vv-*.tiff",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "measurement/*-vh-*.tiff",
+          "minimum_count": 1,
+          "nonempty": true
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-008",
+      "asset_id": "m1-src-008",
+      "exact_product_id": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE",
+      "provider_product_id": "76de2c15-9281-45e3-8f0b-e97085fa6d69",
+      "sensor_route": "optical",
+      "event_role": "after",
+      "archive_relative_path": "products/m1-src-008/S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE.zip",
+      "catalog_content_length_bytes": 941822565,
+      "provider_md5": "f943a32c322a2186955de966b718eccb",
+      "provider_blake3_metadata": "7587745f330d9d70adfbc321326bcaec5a8be457348f1e3dfbd2528ce3615e5a",
+      "structural_profile": "sentinel2_l2a_optical_change_core",
+      "required_members": [
+        {
+          "pattern": "manifest.safe",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "MTD_MSIL2A.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "DATASTRIP/*/MTD_DS.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/MTD_TL.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R10m/*_B02_10m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R10m/*_B03_10m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R10m/*_B04_10m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R10m/*_B08_10m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_B05_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_B06_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_B07_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_B8A_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_B11_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_B12_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_SCL_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/QI_DATA/*",
+          "minimum_count": 1,
+          "nonempty": true
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-010",
+      "asset_id": "m1-src-010",
+      "exact_product_id": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE",
+      "provider_product_id": "25faa527-2502-4f7d-a703-cfff3e99d483",
+      "sensor_route": "optical",
+      "event_role": "before",
+      "archive_relative_path": "products/m1-src-010/S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE.zip",
+      "catalog_content_length_bytes": 1142906699,
+      "provider_md5": "089c5eecb582a9fab5c93a74b90a7736",
+      "provider_blake3_metadata": "1fa6926dad3f0b95f90c0f6234d4fc018d218c0d2854cfcb17162064c4b3a054",
+      "structural_profile": "sentinel2_l2a_optical_change_core",
+      "required_members": [
+        {
+          "pattern": "manifest.safe",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "MTD_MSIL2A.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "DATASTRIP/*/MTD_DS.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/MTD_TL.xml",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R10m/*_B02_10m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R10m/*_B03_10m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R10m/*_B04_10m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R10m/*_B08_10m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_B05_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_B06_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_B07_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_B8A_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_B11_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_B12_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/IMG_DATA/R20m/*_SCL_20m.jp2",
+          "minimum_count": 1,
+          "nonempty": true
+        },
+        {
+          "pattern": "GRANULE/*/QI_DATA/*",
+          "minimum_count": 1,
+          "nonempty": true
+        }
+      ]
+    }
+  ],
+  "post_container_gates": [
+    "current access terms and intended-use rights",
+    "raster readability and internal metadata identity",
+    "AOI intersection and coverage fraction",
+    "Sentinel-2 processing baseline, quantification value, BOA_ADD_OFFSET parsing, and reflectance scaling",
+    "valid-pixel, nodata, cloud, cirrus, shadow, snow, saturation, and SCL inspection for optical data",
+    "orbit, polarization, calibration, border-noise, layover, shadow, and terrain-correction fitness for radar data",
+    "before/after grid, extent, resolution, and co-registration QA in EPSG:32645",
+    "stable-reference behavior and quantitative registration residual",
+    "human review of exclusions, uncertainty, baseline admission, and any scientific use"
+  ],
+  "source_references": [
+    {
+      "role": "sentinel_safe_format",
+      "url": "https://sentiwiki.copernicus.eu/web/safe-format",
+      "checked_at_utc": "2026-09-03T16:43:33Z"
+    },
+    {
+      "role": "sentinel1_product_structure",
+      "url": "https://sentiwiki.copernicus.eu/web/s1-products",
+      "checked_at_utc": "2026-09-03T16:43:33Z"
+    },
+    {
+      "role": "sentinel2_l2a_bands_and_scl",
+      "url": "https://sentiwiki.copernicus.eu/web/s2-products",
+      "checked_at_utc": "2026-09-03T16:43:33Z"
+    }
+  ],
+  "limitations": [
+    "A container pass establishes exact archive identity, provider-MD5 agreement, ZIP integrity, and required member presence only.",
+    "MD5 comparison is retained for provider consistency and does not replace the computed local SHA-256 identity.",
+    "Member names and nonzero sizes do not establish readable rasters, valid pixels, AOI coverage, masks, registration, or scientific fitness.",
+    "No scan may begin until M2 is activated and the exact external custody root already exists under that authority."
+  ]
+}

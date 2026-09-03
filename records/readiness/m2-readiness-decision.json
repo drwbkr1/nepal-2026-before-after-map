@@ -1,0 +1,142 @@
+{
+  "audit_result_version": "dataset-readiness-result-v1",
+  "audit_id": "nepal-m2-product-readiness-001",
+  "candidate_id": "nepal-m2-approved-product-set-001",
+  "candidate_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+  "audit_input_sha256": "8eb2f78ef6642be72236395460f7cf7d34bc1c89ec0504c27d8b1d1f276b9018",
+  "decision": "defer",
+  "pass_evidence": [],
+  "block_evidence": [],
+  "defer_evidence": [
+    {
+      "gate_id": "coverage-and-balance",
+      "category": "coverage_and_balance",
+      "required": true,
+      "evidence_refs": [
+        "config/aoi/approved-study-areas.geojson",
+        "records/source-manifest.json"
+      ],
+      "finding": "Catalog footprints do not establish usable coverage of each approved AOI or balanced before/after evidence routes.",
+      "remediation": "Measure AOI intersection, valid-pixel fractions, and before/after optical and radar coverage after opening the rasters."
+    },
+    {
+      "gate_id": "evaluation-design",
+      "category": "evaluation_design",
+      "required": true,
+      "evidence_refs": [
+        "docs/VALIDATION.md",
+        "docs/ARCGIS_EVIDENCE_MODEL.md"
+      ],
+      "finding": "Required QA families are documented, but scene-specific thresholds, stable-reference results, and acceptance criteria are not complete.",
+      "remediation": "Fix scene-specific QA thresholds before change classification and preserve failed or inconclusive routes."
+    },
+    {
+      "gate_id": "human-review",
+      "category": "human_review",
+      "required": true,
+      "evidence_refs": [
+        "reviews/m2-activation/review-bundle.json",
+        "docs/M2_CONTROLLED_ACQUISITION_REVIEW.md"
+      ],
+      "finding": "The exact M2 acquisition proposal has not received a completed owner decision.",
+      "remediation": "Obtain and lock an exact M2 activation decision before authentication, custody creation, or download."
+    },
+    {
+      "gate_id": "provenance-and-custody",
+      "category": "provenance_and_custody",
+      "required": true,
+      "evidence_refs": [
+        "records/acquisition-plan.json",
+        "contracts/m2-intake-candidate.json"
+      ],
+      "finding": "No full-product archive, transfer receipt, local SHA-256, or immutable custody chain exists.",
+      "remediation": "Acquire only the exact approved products under M2 authority and retain transfer, checksum, failure, and promotion evidence."
+    },
+    {
+      "gate_id": "reproducibility",
+      "category": "reproducibility",
+      "required": true,
+      "evidence_refs": [
+        "scripts/prepare_m2_intake.py",
+        "scripts/prepare_m2_verification.py"
+      ],
+      "finding": "Static controls are reproducible, but no acquired product or analysis-ready derivative can yet be rebuilt from local custody.",
+      "remediation": "Bind acquired bytes, environment, processing parameters, intermediate hashes, and rerun evidence after M2 activation."
+    },
+    {
+      "gate_id": "schema-and-quality",
+      "category": "schema_and_quality",
+      "required": true,
+      "evidence_refs": [
+        "contracts/m2-offline-verification-candidate.json"
+      ],
+      "finding": "Archive integrity, SAFE structure, required bands or polarizations, and raster readability have not been tested on product bytes.",
+      "remediation": "Run the offline container verifier, then inspect every required raster and internal metadata identity."
+    },
+    {
+      "gate_id": "source-and-terms",
+      "category": "source_and_terms",
+      "required": true,
+      "evidence_refs": [
+        "records/source-manifest.json",
+        "records/source-gates/source-manifest-approval.json"
+      ],
+      "finding": "Exact sources are approved for planning, but current access-time terms and intended-use rights have not been verified.",
+      "remediation": "After M2 activation, record the current provider terms and rights assessment without accepting changed terms automatically."
+    },
+    {
+      "gate_id": "temporal-and-pair-fitness",
+      "category": "leakage_and_split_fitness",
+      "required": true,
+      "evidence_refs": [
+        "records/acquisition-plan.json",
+        "docs/DATA_AND_METHODS_PLAN.md"
+      ],
+      "finding": "Product dates and roles are fixed, but orbit geometry, comparable grids, stable controls, and before/after pair fitness remain unverified.",
+      "remediation": "Evaluate optical and radar pairs independently and quantify registration on stable terrain before change analysis."
+    },
+    {
+      "gate_id": "uncertainty-and-exclusions",
+      "category": "uncertainty_and_exclusions",
+      "required": true,
+      "evidence_refs": [
+        "config/arcgis/evidence-workspace-schema.json"
+      ],
+      "finding": "The schema can retain exclusions and adverse states, but no product-level cloud, terrain, radar, nodata, or uncertainty evidence exists.",
+      "remediation": "Populate explicit exclusion and QA records without coercing unresolved pixels or products into accepted evidence."
+    }
+  ],
+  "blocking_required_gate_ids": [],
+  "deferred_required_gate_ids": [
+    "coverage-and-balance",
+    "evaluation-design",
+    "human-review",
+    "provenance-and-custody",
+    "reproducibility",
+    "schema-and-quality",
+    "source-and-terms",
+    "temporal-and-pair-fitness",
+    "uncertainty-and-exclusions"
+  ],
+  "count_results": [
+    {
+      "check_id": "approved-product-count",
+      "observed": 8,
+      "operator": ">=",
+      "threshold": 8,
+      "on_failure": "defer",
+      "satisfied": true,
+      "can_authorize_training": false
+    }
+  ],
+  "failed_blocking_count_checks": [],
+  "failed_deferred_count_checks": [],
+  "count_thresholds_can_establish_readiness_alone": false,
+  "training_authority": "not_granted",
+  "authority_ref": "reviews/m2-activation/review-bundle.json",
+  "authorized_next_actions": [],
+  "training_authorized": false,
+  "training_authorized_by_this_audit": false,
+  "training_authorization_reason": "Dataset-readiness evidence did not create training authority.",
+  "next_action": "Gather the named missing evidence or authority, then rerun the audit."
+}

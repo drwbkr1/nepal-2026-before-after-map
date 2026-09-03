@@ -29,7 +29,7 @@ Independent event-location evidence and later pixel coverage still must be recon
 
 Catalog cloud percentage applies to an entire tile. It does not establish usable coverage over an AOI. Pixel masks and visual inspection are mandatory.
 
-The M1 candidate manifest proposes the RUM pair for later controlled acquisition planning and defers the two RUL tiles as regional context. This proposal remains at the owner manifest gate.
+The owner-approved M1 manifest accepts the RUM pair for controlled acquisition planning and defers the two RUL tiles as regional context. M2 acquisition remains at its separate owner activation gate.
 
 ### Optical processing candidates
 

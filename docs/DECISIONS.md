@@ -65,3 +65,9 @@
 **Decision:** Store direct satellite observations, analyst interpretations, and event-attribution assessments in distinct related datasets, with separate exclusion, stable-control, source-link, and QA structures.
 **Reason:** A projected map must preserve the difference between measured change, possible geomorphic meaning, and causal support while retaining failed, rejected, deferred, inconclusive, invalid, and superseded evidence states.
 **Status:** Implemented and validated as a metadata-only EPSG:32645 ArcGIS Pro 3.7.1 workspace. Scientific datasets remain empty; no acquisition or scientific claim is implied.
+
+## D-012 — Offline container verification before pixel admission
+
+**Decision:** Require exact local SHA-256, provider-MD5 agreement, catalog-size review, safe ZIP structure, CRC, exact SAFE root identity, and analysis-critical Sentinel-1 or Sentinel-2 members before any acquired product advances to raster and AOI pixel QA.
+**Reason:** A successful transfer or present filename does not establish a complete, untampered, analysis-capable product; a complete container still does not establish usable pixels or scientific fitness.
+**Status:** Implemented as deterministic, non-authorizing controls with synthetic tests. The product-readiness audit remains `defer` because M2 is not active and no product bytes have been examined.
