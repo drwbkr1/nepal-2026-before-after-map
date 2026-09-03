@@ -34,7 +34,7 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Outcome:** Verified local custody of approved data and a reproducible pre-event baseline.
 
-**Status:** Active with two independent checkpoints. The exact eight-product Sentinel plan remains at `M2-AUTHENTICATION-REFERENCE`: its live source and storage preflight passed and empty custody is initialized, but no product bytes have been transferred. The approved four-tile DEM amendment is at `M2-DEM-FRESH-PREFLIGHT`; activation made no network request or DEM custody mutation.
+**Status:** Active with two independent checkpoints. The exact eight-product Sentinel plan remains at `M2-AUTHENTICATION-REFERENCE`: its live source and storage preflight passed and empty custody is initialized, but no product bytes have been transferred. The approved four-tile DEM amendment is at `M2-DEM-ACQUISITION`: its fresh source and custody preflight passed and empty DEM custody is initialized, but no tile payload byte has been requested.
 
 **Prepared verification:** Deterministic offline controls define exact container identity, checksum, ZIP safety, SAFE structure, required radar/optical members, and the later pixel-readiness gates. The active wrapper refuses archive access until a promoted intake identity and successful-transfer receipt exist. The real-data readiness decision remains `defer` because custody contains no product bytes.
 
@@ -42,7 +42,7 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Approved dependency amendment:** ArcGIS Pro's terrain-correction tools require a DEM that is absent from the exact eight-product Sentinel approval. The owner approved the separate hash-bound review bundle, accepted the exact Copernicus WorldDEM-30 license, and authorized only four named public Copernicus DEM GLO-30 COG tiles covering the approved AOIs. Fresh source and custody preflight remains mandatory before any DEM payload request.
 
-**Active DEM and prepared radar controls:** The four-tile intake and offline ArcGIS GeoTIFF verifier are active but have no transferred rasters. Their immutable candidates remain historical evidence. The two-route Sentinel-1 contract keeps linear gamma-nought data, retains native terrain-distortion evidence, and defers rather than guessing when only predicted orbit vectors are available or the EGM2008-to-ArcGIS-EGM96 vertical-datum mismatch is unresolved.
+**Active DEM and prepared radar controls:** The four-tile intake and offline ArcGIS GeoTIFF verifier are active but have no transferred rasters. The fresh license, object-identity, storage, path, and collision preflight passed; exact empty custody paths now exist outside Git. Their immutable candidates remain historical evidence. The two-route Sentinel-1 contract keeps linear gamma-nought data, retains native terrain-distortion evidence, and defers rather than guessing when only predicted orbit vectors are available or the EGM2008-to-ArcGIS-EGM96 vertical-datum mismatch is unresolved.
 
 **Prepared optical controls:** The exact RUM pair has fixed Level-2A metadata parsing, BOA reflectance scaling, conservative SCL masking, 20 m EPSG:32645 alignment, index formulas, and cross-platform safeguards. Portable tests and ArcGIS synthetic processing pass, while the real high-cloud-risk route remains deferred until acquired pixels prove coverage and registration.
 

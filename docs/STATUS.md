@@ -1,12 +1,12 @@
 # Current status
 
-- **State:** M1 complete; M2 active with independent Sentinel authentication and DEM preflight checkpoints
+- **State:** M1 complete; M2 active with independent Sentinel authentication and DEM acquisition checkpoints
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
 - **Imagery custody:** Empty external custody structure initialized; zero products downloaded
 - **Long-term goal:** Active
-- **Checkpoints:** `M2-AUTHENTICATION-REFERENCE`; parallel `M2-DEM-FRESH-PREFLIGHT`
+- **Checkpoints:** `M2-AUTHENTICATION-REFERENCE`; parallel `M2-DEM-ACQUISITION`
 
 ## Purpose
 
@@ -58,7 +58,9 @@ A metadata-only review found four exact Copernicus DEM GLO-30 COG tiles whose 1�
 
 The owner approved review bundle SHA-256 `caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e`, amendment proposal SHA-256 `92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69`, and accepted license document SHA-256 `9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd`. The exact completed response was locked and reconciled before the amendment was activated. Approval is limited to the four named tiles, their fresh anonymous no-cost preflight and acquisition, non-Git custody, verification, and the already bounded radar-processing use.
 
-`contracts/m2-dem-intake.json` has four authorized, unattempted assets. `contracts/m2-dem-offline-verification.json` is active but gate-deferred until promoted rasters exist. Activation made no network request, created no external DEM path, and requested or read no DEM payload. The next parallel checkpoint is `M2-DEM-FRESH-PREFLIGHT`, which must revalidate the exact license bytes, four object identities, anonymous access, redirects, storage, paths, and collisions before any transfer. The separate Sentinel CDSE checkpoint remains unchanged.
+At `2026-09-03T20:48:10Z`, the fresh preflight re-fetched the license and matched its exact approved SHA-256, revalidated all four official STAC identities, and matched all four anonymous object byte lengths, ETags, Last-Modified values, content types, and `Accept-Ranges` headers without redirects, accounts, credentials, requester charges, or payload bytes. Its source gate passes 40 required criteria with 76 evidence items. The path check found 519.029 GiB free, no reparse points, and no destination or staging collisions.
+
+The empty DEM custody and staging directories were initialized outside Git at `2026-09-03T20:50:33Z`, with matching local/external receipt SHA-256 `31d1b814d8da753dd2335f3110a49107df3f7a6c75875154a0fff0338b7e80a0`. `contracts/m2-dem-intake.json` still has four authorized, unattempted assets, and `contracts/m2-dem-offline-verification.json` remains gate-deferred until promoted rasters exist. The next parallel checkpoint is `M2-DEM-ACQUISITION`; only one exact tile may be staged, hashed, and promoted per attempt. The separate Sentinel CDSE checkpoint remains unchanged.
 
 The candidate controls remain immutable historical evidence. The production radar chain remains deferred on two explicit dependencies: EGM2008 orthometric DEM heights do not exactly match ArcGIS's documented EGM96 geoid correction, and updated Sentinel orbit files are separate auxiliary products outside current authority. Approval does not resolve either scientific dependency.
 
@@ -91,7 +93,7 @@ Checkpoint derivation is also portable. Repository-only tests do not require the
 - preserve append-only attempts and use collision-safe staging and promotion;
 - verify exact bytes, provider checksums, ZIP safety, SAFE identity, and required content;
 - inspect real pixels, masks, AOI coverage, baselines, and EPSG:32645 registration.
-- run the fresh DEM source and custody preflight, then acquire and verify only the four exact approved GLO-30 tiles if every preflight condition passes.
+- acquire and verify only the four exact approved GLO-30 tiles, one at a time, under the passing DEM preflight and empty-custody receipt.
 
 ## Outside the active authority or still unproven
 

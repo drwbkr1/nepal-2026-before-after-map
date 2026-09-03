@@ -204,9 +204,9 @@
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-DEM-FRESH-PREFLIGHT",
+      "checkpoint_id": "M2-DEM-ACQUISITION",
       "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
-      "next_action": "Run the fresh anonymous DEM preflight before requesting any tile bytes."
+      "next_action": "Acquire M2-DEM-001 only through append-only staging, verify its exact length and local SHA-256, and promote without replacement; stop on any route or identity drift."
     }
   ]
 }

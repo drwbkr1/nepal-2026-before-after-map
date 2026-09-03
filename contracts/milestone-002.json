@@ -359,7 +359,7 @@
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-dem-candidate-manifest.json",
@@ -367,16 +367,26 @@
       ],
       "outputs": [
         "records/source-gates/m2-dem-live-source-gate.json",
-        "records/acquisition/dem-preflight.json"
+        "records/acquisition/dem-preflight.json",
+        "records/acquisition/dem-custody-initialization.json"
       ],
-      "gates": {},
-      "disposition": null,
+      "gates": {
+        "preflight_status": "pass_no_payload_no_external_mutation",
+        "source_gate_status": "ready",
+        "exact_tiles_online_and_unchanged": 4,
+        "exact_license_sha256_match": true,
+        "free_space_gib": 519.029,
+        "path_and_collision_safety": "pass",
+        "custody_initialization": "created_and_verified_empty",
+        "custody_initialization_sha256": "31d1b814d8da753dd2335f3110a49107df3f7a6c75875154a0fff0338b7e80a0"
+      },
+      "disposition": "pass",
       "retained_failures": [],
       "exit_condition_delta": {
         "expected": [],
         "observed": [],
-        "decision_value": "unknown",
-        "rationale": "The amendment makes a fresh non-mutating DEM preflight eligible; it has not run."
+        "decision_value": "enables_dependency",
+        "rationale": "The exact license, four anonymous objects, storage, paths, collisions, and empty custody initialization passed under the approved DEM amendment."
       },
       "next_dependency": "M2-DEM-ACQUIRE"
     },
@@ -388,17 +398,22 @@
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
-      "status": "planned",
+      "status": "ready",
       "inputs": [
         "records/source-gates/m2-dem-live-source-gate.json",
         "records/acquisition/dem-preflight.json",
+        "records/acquisition/dem-custody-initialization.json",
         "contracts/m2-dem-intake.json"
       ],
       "outputs": [
         "external DEM custody",
         "records/acquisition DEM transfer receipts"
       ],
-      "gates": {},
+      "gates": {
+        "source_and_custody_preflight": "pass",
+        "anonymous_no_account_route": "pass",
+        "new_terms_route_or_cost": "stop"
+      },
       "disposition": null,
       "retained_failures": [],
       "exit_condition_delta": {
@@ -407,7 +422,7 @@
         ],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "DEM transfer cannot begin until fresh source and custody controls pass."
+        "rationale": "The empty DEM custody structure is initialized; no tile bytes have been requested and acquisition may proceed one exact tile at a time."
       },
       "next_dependency": "M2-DEM-VERIFY"
     },
@@ -474,7 +489,9 @@
       "fresh terms and availability review",
       "60 GiB free-space minimum",
       "path and collision safety",
-      "exact DEM amendment and license binding"
+      "exact DEM amendment and license binding",
+      "fresh anonymous four-tile source preflight",
+      "DEM storage path and collision safety"
     ]
   },
   "activation_evidence": {
@@ -494,7 +511,7 @@
       "No full-product bytes are yet in custody and no pixel usability or scientific change is established.",
       "The post-event optical route remains high-cloud-risk and may be inconclusive."
     ],
-    "parallel_checkpoint": "M2-DEM-FRESH-PREFLIGHT",
-    "parallel_next_action": "Run the fresh anonymous DEM source, license, storage, path, collision, and redirect preflight."
+    "parallel_checkpoint": "M2-DEM-ACQUISITION",
+    "parallel_next_action": "Acquire M2-DEM-001 only through append-only staging, verify its exact length and local SHA-256, and promote without replacement; stop on any route or identity drift."
   }
 }
