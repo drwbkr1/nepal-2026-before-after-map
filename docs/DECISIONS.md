@@ -137,3 +137,9 @@
 **Decision:** Retain the activation-time active intake as an immutable snapshot and validate the mutable active intake against it through the authorized, staging, failed, and promoted states. Require exact approved product identity, one append-only attempt at most under the current no-retry control, terminal receipt consistency, secret exclusion, and optional local reconciliation of external paths and promoted bytes.
 **Reason:** The transfer runner must mutate `contracts/m2-intake.json` after a real attempt. Comparing every later state to the initial file hash would make the repository validator fail on the first legitimate transfer and would blur an activation-time binding with current operational truth.
 **Status:** Implemented with nine focused tests and a passing read-only external check. All eight products remain authorized and unattempted; no credential value or product byte was read.
+
+## D-024 — Derive acquisition checkpoints without silently changing project truth
+
+**Decision:** Derive the current M2 acquisition checkpoint only from a passing append-only intake validation. Map eight authorized products to the authentication handoff, partial or active nonfailed progress to acquisition in progress, any retained transfer failure to review, and eight promoted products to container verification. Emit proposed profile and goal updates only as exclusive scratch candidates.
+**Reason:** A real attempt changes operational state before a Git checkpoint can be committed. Deterministic derivation prevents stale status while keeping multi-file control updates reviewable and reversible.
+**Status:** Implemented with nine focused tests. The live state derives `M2-AUTHENTICATION-REFERENCE`; tracked profile and goal controls already match, and no candidate or tracked file was written by the verification run.

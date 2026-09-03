@@ -9,6 +9,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+from derive_m2_acquisition_checkpoint import derive_checkpoint
 from validate_m2_acquisition_progress import (
     INITIAL_ACTIVE_INTAKE_SHA256,
     validate_progress as validate_acquisition_progress,
@@ -59,6 +60,7 @@ REQUIRED = [
     "records/acquisition/active-intake-initial-snapshot.json",
     "records/acquisition/transfer-runner-readiness.json",
     "records/acquisition/acquisition-progress-readiness.json",
+    "records/acquisition/acquisition-checkpoint-readiness.json",
     "records/source-gates/source-manifest-approval.json",
     "records/source-gates/source-manifest-review-reconciliation.json",
     "records/source-gates/m2-activation-approval.json",
@@ -130,9 +132,11 @@ REQUIRED = [
     "scripts/acquire_m2_product.py",
     "scripts/record_m2_transfer_readiness.py",
     "scripts/validate_m2_acquisition_progress.py",
+    "scripts/derive_m2_acquisition_checkpoint.py",
     "scripts/validate_pair_plan.py",
     "tests/test_m2_transfer_core.py",
     "tests/test_m2_acquisition_progress.py",
+    "tests/test_m2_checkpoint_reconciliation.py",
     "tests/test_m2_active_verification.py",
     "tests/test_m2_dem_amendment.py",
     "tests/test_m2_dem_controls.py",
@@ -310,6 +314,7 @@ def main() -> None:
     custody_receipt = json.loads((ROOT / "records/acquisition/custody-initialization.json").read_text(encoding="utf-8"))
     transfer_readiness = json.loads((ROOT / "records/acquisition/transfer-runner-readiness.json").read_text(encoding="utf-8"))
     acquisition_progress_readiness = json.loads((ROOT / "records/acquisition/acquisition-progress-readiness.json").read_text(encoding="utf-8"))
+    acquisition_checkpoint_readiness = json.loads((ROOT / "records/acquisition/acquisition-checkpoint-readiness.json").read_text(encoding="utf-8"))
     pair_plan = json.loads((ROOT / "config/qa/candidate-pair-plan.json").read_text(encoding="utf-8"))
     offline_verification = json.loads((ROOT / "contracts/m2-offline-verification-candidate.json").read_text(encoding="utf-8"))
     active_offline_verification = json.loads((ROOT / "contracts/m2-offline-verification.json").read_text(encoding="utf-8"))
@@ -1028,28 +1033,16 @@ def main() -> None:
     if acquisition_progress.get("status") != "pass":
         fail("active M2 acquisition progress is invalid: " + "; ".join(acquisition_progress.get("errors", [])))
     state_counts = acquisition_progress.get("state_counts", {})
-    if state_counts == {"authorized": 8}:
-        expected_checkpoint = "M2-AUTHENTICATION-REFERENCE"
-        expected_acquire_status = "ready"
-        expected_authentication_gate = "waiting_for_secret_safe_existing_owner_credential_reference"
-    elif state_counts.get("failed", 0):
-        expected_checkpoint = "M2-ACQUISITION-REVIEW"
-        expected_acquire_status = "in_progress"
-        expected_authentication_gate = "existing_owner_credential_reference_used_secret_not_recorded"
-    elif state_counts.get("promoted", 0):
-        expected_checkpoint = "M2-CONTAINER-VERIFICATION"
-        expected_acquire_status = "in_progress"
-        expected_authentication_gate = "existing_owner_credential_reference_used_secret_not_recorded"
-    else:
-        expected_checkpoint = "M2-ACQUISITION-IN-PROGRESS"
-        expected_acquire_status = "in_progress"
-        expected_authentication_gate = "existing_owner_credential_reference_used_secret_not_recorded"
+    try:
+        expected_checkpoint = derive_checkpoint(state_counts)["checkpoint_id"]
+    except ValueError as exc:
+        fail(f"active M2 acquisition checkpoint is ambiguous: {exc}")
     if profile["current_checkpoint"]["checkpoint_id"] != expected_checkpoint or goal.get("current_checkpoint") != expected_checkpoint:
         fail(f"profile and goal checkpoint must reconcile to {expected_checkpoint}")
-    if m2_units.get("M2-ACQUIRE", {}).get("status") != expected_acquire_status:
-        fail("M2 acquisition unit status differs from the active intake")
-    if m2_units["M2-ACQUIRE"].get("gates", {}).get("authentication") != expected_authentication_gate:
-        fail("M2 acquisition authentication gate differs from the active intake")
+    if m2_units.get("M2-ACQUIRE", {}).get("status") != "ready":
+        fail("M2 acquisition unit must remain ready while one-product intake is incomplete")
+    if m2_units["M2-ACQUIRE"].get("gates", {}).get("authentication") != "waiting_for_secret_safe_existing_owner_credential_reference":
+        fail("each M2 acquisition invocation must still require a current secret-safe credential reference")
     if custody_receipt.get("status") != "created_and_verified":
         fail("M2 custody initialization receipt is not passing")
     if custody_receipt.get("bindings", {}).get("preflight_sha256") != sha256("records/acquisition/preflight.json") or custody_receipt.get("bindings", {}).get("source_gate_sha256") != sha256("records/source-gates/m2-live-source-gate.json"):
@@ -1084,16 +1077,22 @@ def main() -> None:
     if acquisition_progress_readiness.get("status") != "pass_preacquisition_dynamic_progress_validation":
         fail("M2 acquisition-progress readiness receipt status differs")
     progress_bindings = acquisition_progress_readiness.get("bindings", {})
-    for ref_key, hash_key in (
-        ("initial_snapshot_ref", "initial_snapshot_sha256"),
-        ("acquisition_plan_ref", "acquisition_plan_sha256"),
-        ("validator_ref", "validator_sha256"),
-        ("test_ref", "test_sha256"),
-        ("project_checker_ref", "project_checker_sha256"),
-    ):
-        relative = progress_bindings.get(ref_key)
-        if not isinstance(relative, str) or not (ROOT / relative).is_file() or progress_bindings.get(hash_key) != sha256(relative):
-            fail(f"M2 acquisition-progress readiness receipt does not bind {ref_key}")
+    expected_historical_progress_bindings = {
+        "initial_snapshot_ref": "records/acquisition/active-intake-initial-snapshot.json",
+        "initial_snapshot_sha256": "a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c",
+        "acquisition_plan_ref": "records/acquisition-plan.json",
+        "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+        "validator_ref": "scripts/validate_m2_acquisition_progress.py",
+        "validator_sha256": "fc90a85e111135133a64249151086d7032c924148bcf5cc29cbee473703a9051",
+        "test_ref": "tests/test_m2_acquisition_progress.py",
+        "test_sha256": "5d1c59520d803daa05ba1bfef1ddcfbdbe894566a9cfb0c50f3c7dba00e2f191",
+        "project_checker_ref": "scripts/check_project.py",
+        "project_checker_sha256": "0811375064b8d2681690012d82234270f00022e23e94c82649c43f28ec5b7395",
+        "runbook_ref": "docs/M2_EXECUTION_RUNBOOK.md",
+        "runbook_sha256": "abd658d18a80f86bb3d8c4446eac9dfde7e268ffee44ee0841421838292d66ed",
+    }
+    if progress_bindings != expected_historical_progress_bindings:
+        fail("M2 acquisition-progress readiness no longer preserves its published bindings")
     if acquisition_progress_readiness.get("validation") != {
         "focused_test_count": 9,
         "focused_test_status": "pass",
@@ -1111,6 +1110,29 @@ def main() -> None:
         "active_intake_mutated": False,
     }:
         fail("M2 acquisition-progress readiness invents external activity")
+    if acquisition_checkpoint_readiness.get("status") != "pass_preacquisition_checkpoint_derivation":
+        fail("M2 acquisition-checkpoint readiness receipt status differs")
+    checkpoint_bindings = acquisition_checkpoint_readiness.get("bindings", {})
+    for ref_key, hash_key in (
+        ("initial_snapshot_ref", "initial_snapshot_sha256"),
+        ("progress_validator_ref", "progress_validator_sha256"),
+        ("derivation_ref", "derivation_sha256"),
+        ("test_ref", "test_sha256"),
+        ("project_checker_ref", "project_checker_sha256"),
+        ("runbook_ref", "runbook_sha256"),
+    ):
+        relative = checkpoint_bindings.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file() or checkpoint_bindings.get(hash_key) != sha256(relative):
+            fail(f"M2 acquisition-checkpoint readiness receipt does not bind {ref_key}")
+    if acquisition_checkpoint_readiness.get("validation") != {
+        "focused_test_count": 9,
+        "focused_test_status": "pass",
+        "repository_checkpoint_derivation": "pass",
+        "external_state_reconciliation": "pass",
+        "current_checkpoint": "M2-AUTHENTICATION-REFERENCE",
+        "candidate_output_policy": "scratch_only_exclusive_no_replace",
+    }:
+        fail("M2 acquisition-checkpoint readiness validation differs")
     if pair_plan.get("authority", {}).get("mode") != "not_granted" or pair_plan.get("authority", {}).get("authorized_actions") != [] or len(pair_plan.get("pairs", [])) != 3:
         fail("candidate pair plan must remain non-authorizing with three independent routes")
     if intake_dry_run.get("status") != "pass_static_only_no_authority":
@@ -1614,21 +1636,44 @@ def main() -> None:
     acquisition_progress_evidence = ledger_by_id.get("EVID-0028")
     if not isinstance(acquisition_progress_evidence, dict):
         fail("evidence ledger is missing EVID-0028 acquisition-progress readiness evidence")
-    for ref_key, hash_key in (
-        ("readiness_receipt_ref", "readiness_receipt_sha256"),
-        ("initial_snapshot_ref", "initial_snapshot_sha256"),
-        ("validator_ref", "validator_sha256"),
-        ("test_ref", "test_sha256"),
-        ("project_checker_ref", "project_checker_sha256"),
-        ("runbook_ref", "runbook_sha256"),
-    ):
-        relative = acquisition_progress_evidence.get(ref_key)
-        if not isinstance(relative, str) or not (ROOT / relative).is_file() or acquisition_progress_evidence.get(hash_key) != sha256(relative):
-            fail(f"EVID-0028 does not bind {ref_key}")
+    expected_evid_0028_bindings = {
+        "readiness_receipt_ref": "records/acquisition/acquisition-progress-readiness.json",
+        "readiness_receipt_sha256": "a9ea7828c7cf48c28bbe7a3370334134eeadb7d0ab891c74d0fbb49deafe0708",
+        "initial_snapshot_ref": "records/acquisition/active-intake-initial-snapshot.json",
+        "initial_snapshot_sha256": "a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c",
+        "validator_ref": "scripts/validate_m2_acquisition_progress.py",
+        "validator_sha256": "fc90a85e111135133a64249151086d7032c924148bcf5cc29cbee473703a9051",
+        "test_ref": "tests/test_m2_acquisition_progress.py",
+        "test_sha256": "5d1c59520d803daa05ba1bfef1ddcfbdbe894566a9cfb0c50f3c7dba00e2f191",
+        "project_checker_ref": "scripts/check_project.py",
+        "project_checker_sha256": "0811375064b8d2681690012d82234270f00022e23e94c82649c43f28ec5b7395",
+        "runbook_ref": "docs/M2_EXECUTION_RUNBOOK.md",
+        "runbook_sha256": "abd658d18a80f86bb3d8c4446eac9dfde7e268ffee44ee0841421838292d66ed",
+    }
+    for key, expected in expected_evid_0028_bindings.items():
+        if acquisition_progress_evidence.get(key) != expected:
+            fail(f"EVID-0028 no longer preserves published {key}")
     if acquisition_progress_evidence.get("status") != "pass_preacquisition_dynamic_progress_validation":
         fail("EVID-0028 status differs")
     if acquisition_progress_evidence.get("assertions") != acquisition_progress_readiness.get("assertions"):
         fail("EVID-0028 and acquisition-progress readiness have different claim boundaries")
+    acquisition_checkpoint_evidence = ledger_by_id.get("EVID-0029")
+    if not isinstance(acquisition_checkpoint_evidence, dict):
+        fail("evidence ledger is missing EVID-0029 acquisition-checkpoint readiness evidence")
+    for ref_key, hash_key in (
+        ("readiness_receipt_ref", "readiness_receipt_sha256"),
+        ("derivation_ref", "derivation_sha256"),
+        ("test_ref", "test_sha256"),
+        ("project_checker_ref", "project_checker_sha256"),
+        ("runbook_ref", "runbook_sha256"),
+    ):
+        relative = acquisition_checkpoint_evidence.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file() or acquisition_checkpoint_evidence.get(hash_key) != sha256(relative):
+            fail(f"EVID-0029 does not bind {ref_key}")
+    if acquisition_checkpoint_evidence.get("status") != "pass_preacquisition_checkpoint_derivation":
+        fail("EVID-0029 status differs")
+    if acquisition_checkpoint_evidence.get("assertions") != acquisition_checkpoint_readiness.get("assertions"):
+        fail("EVID-0029 and acquisition-checkpoint readiness have different claim boundaries")
 
     violations = []
     for relative in tracked_files():

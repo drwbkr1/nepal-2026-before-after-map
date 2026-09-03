@@ -40,6 +40,8 @@ The one-product transfer runner is prepared and locally verified. Eleven tests p
 
 The activation-time active intake is now retained at `records/acquisition/active-intake-initial-snapshot.json` with SHA-256 `a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c`. The repository no longer mistakes that historical identity for the permanently current mutable intake. A separate read-only validator and nine tests verify exact immutable product identity, append-only authorized/staging/failed/promoted transitions, terminal receipt bindings, secret exclusion, and optional external-path and promoted-byte reconciliation. The live external check passes with eight authorized products, zero attempts, and no custody files.
 
+Checkpoint derivation is also explicit and read-only. Validated state counts map to `M2-AUTHENTICATION-REFERENCE`, `M2-ACQUISITION-IN-PROGRESS`, `M2-ACQUISITION-REVIEW`, or `M2-CONTAINER-VERIFICATION`; inconsistent counts stop. The tool can write review candidates only beneath ignored `scratch/`, refuses replacement, and does not change tracked controls. Nine focused tests and the current live external derivation pass at the authentication-reference checkpoint.
+
 The exact eight-product offline verification contract is now active under the same M2 approval. Its wrapper requires a promoted active-intake identity and successful-transfer receipt before it reads an archive. It performs no network request or extraction and cannot establish pixel usability. Five active-contract and wrapper tests pass; activation read zero product bytes.
 
 ## Current gate

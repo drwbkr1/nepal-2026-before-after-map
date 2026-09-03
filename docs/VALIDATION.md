@@ -53,6 +53,15 @@ python scripts/validate_m2_acquisition_progress.py --verify-external
 
 The first command exercises authorized, staging, failed, and promoted states plus identity drift, missing receipt, and secret-bearing-key failures. The repository-only command validates portable state and receipt evidence without touching the sibling data root. The external command additionally reconciles the controlled staging and custody paths; for promoted products it re-hashes the retained archive, so it may be slow after acquisition. Neither command reads the credential environment variable or performs a network request.
 
+Checkpoint reconciliation remains a separate read-only derivation:
+
+```powershell
+python -m unittest tests.test_m2_checkpoint_reconciliation -v
+python scripts/derive_m2_acquisition_checkpoint.py --verify-external
+```
+
+The derivation must match both `records/project-control-profile.json` and `records/long-term-goal.json` to pass. When they differ after a real attempt, use a new `--candidate-output-root scratch/<unique-attempt>` to emit exclusive candidate controls for review; the tool never overwrites tracked truth.
+
 The active offline-verification binding and wrapper stop are tested separately:
 
 ```powershell

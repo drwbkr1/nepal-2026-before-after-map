@@ -1,0 +1,75 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-ACQUISITION-CHECKPOINT-READINESS-001",
+  "verified_at_utc": "2026-09-03T20:09:02Z",
+  "status": "pass_preacquisition_checkpoint_derivation",
+  "bindings": {
+    "initial_snapshot_ref": "records/acquisition/active-intake-initial-snapshot.json",
+    "initial_snapshot_sha256": "a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c",
+    "progress_validator_ref": "scripts/validate_m2_acquisition_progress.py",
+    "progress_validator_sha256": "fc90a85e111135133a64249151086d7032c924148bcf5cc29cbee473703a9051",
+    "derivation_ref": "scripts/derive_m2_acquisition_checkpoint.py",
+    "derivation_sha256": "4d78913210978495b320dd70ace7d9e0ef3b7e9f7bf4f2804fbe444691b728a8",
+    "test_ref": "tests/test_m2_checkpoint_reconciliation.py",
+    "test_sha256": "41288357950546dc5d047dc24b8a699cb8ad4afe31c6adfa6ac28e55b0065798",
+    "project_checker_ref": "scripts/check_project.py",
+    "project_checker_sha256": "907bc0c3591e1f3c1e1e32c3651d3919c3f8ecfc83ac7f72f4ead92ca4d9498d",
+    "runbook_ref": "docs/M2_EXECUTION_RUNBOOK.md",
+    "runbook_sha256": "8b1aa06c0e4da9d56a9634c09822a8116aa23ed4db5c6c6aad66c9fb619201f3"
+  },
+  "supersedes_current_binding_semantics": {
+    "evidence_record_id": "EVID-0028",
+    "published_commit": "0e4be40965db82a2583416345d6685d8a7c2c373",
+    "scope": "EVID-0028 remains the immutable append-only state-validator checkpoint; this receipt adds checkpoint derivation and treats its project-checker hash as historical."
+  },
+  "validation": {
+    "focused_test_count": 9,
+    "focused_test_status": "pass",
+    "repository_checkpoint_derivation": "pass",
+    "external_state_reconciliation": "pass",
+    "current_checkpoint": "M2-AUTHENTICATION-REFERENCE",
+    "candidate_output_policy": "scratch_only_exclusive_no_replace"
+  },
+  "current_state": {
+    "authorized_product_count": 8,
+    "attempt_count": 0,
+    "custody_file_count": 0,
+    "profile_and_goal_match_derived_checkpoint": true
+  },
+  "activity": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "product_bytes_read": false,
+    "external_files_mutated": false,
+    "tracked_project_controls_mutated": false
+  },
+  "assertions": {
+    "checkpoint_derived_from_validated_acquisition_state": true,
+    "partial_progress_remains_representable": true,
+    "failed_transfer_requires_review": true,
+    "all_promoted_products_advance_to_container_verification": true,
+    "ambiguous_state_counts_rejected": true,
+    "candidate_outputs_restricted_to_scratch": true,
+    "candidate_output_replacement_refused": true,
+    "tracked_project_controls_mutated": false,
+    "external_files_mutated": false,
+    "network_requests_performed": false,
+    "credential_values_read_or_recorded": false,
+    "product_bytes_read": false,
+    "authority_created": false
+  },
+  "limitations": [
+    "Checkpoint derivation validates control-state consistency; it does not perform acquisition, container verification, materialization, or pixel QA.",
+    "Scratch candidates require review and exact application before they become canonical project truth.",
+    "The current result covers only the unattempted eight-product state and does not prove future CDSE behavior."
+  ],
+  "next_gate": "M2-AUTHENTICATION-REFERENCE",
+  "retained_validation_failures": [
+    {
+      "status": "command_not_run",
+      "reason": "The first combined independent-validator invocation used the malformed path C:\\Usersocha for the intake validator after the other three validators passed.",
+      "remediation": "The exact intake-controlled-data validator path was rerun separately and returned valid with no errors."
+    }
+  ]
+}
