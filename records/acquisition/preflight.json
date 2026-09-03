@@ -1,0 +1,296 @@
+{
+  "schema_version": "1.0",
+  "preflight_id": "NEPAL-M2-CUSTODY-PREFLIGHT-001",
+  "status": "pass_no_external_mutation",
+  "assessed_at_utc": "2026-09-03T17:31:17Z",
+  "authority": {
+    "approval_ref": "records/source-gates/m2-activation-approval.json",
+    "approval_sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
+    "active_contract_ref": "contracts/milestone-002.json",
+    "active_contract_sha256": "707e0de989e7b93c67cd1261a339b4b252f2eb39b9d73ad458ad12ffc608fbf2"
+  },
+  "source_gate": {
+    "ref": "records/source-gates/m2-live-source-gate.json",
+    "sha256": "913919d86d78ec2b03b5e8d20db9aef039938faa2437a6c906fcd93cb9dcc9a2",
+    "decision": "ready",
+    "exact_product_count": 8
+  },
+  "official_page_checks": [
+    {
+      "status_code": 200,
+      "resolved_url": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+      "content_type": "text/html",
+      "content_length_bytes": 403095,
+      "sha256": "bc178f27ebcaa8033696bb89d2c86b18385d2cd40997d4eb09233b7143857594",
+      "etag": "\"6a9152fd-62697\"",
+      "last_modified": "Fri, 28 Aug 2026 09:21:01 GMT",
+      "page_id": "odata-download-documentation",
+      "url": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+      "required_content_check": true
+    },
+    {
+      "status_code": 200,
+      "resolved_url": "https://documentation.dataspace.copernicus.eu/APIs/Token.html",
+      "content_type": "text/html",
+      "content_length_bytes": 181178,
+      "sha256": "70931ccfcd68a1bf9a607687aa13e138f599db0ef840e1bccfaa0f34a9ca6ae3",
+      "etag": "\"6a8ed69b-2c3ba\"",
+      "last_modified": "Wed, 26 Aug 2026 12:05:47 GMT",
+      "page_id": "token-documentation",
+      "url": "https://documentation.dataspace.copernicus.eu/APIs/Token.html",
+      "required_content_check": true
+    },
+    {
+      "status_code": 200,
+      "resolved_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+      "content_type": "text/html; charset=UTF-8",
+      "content_length_bytes": 77747,
+      "sha256": "17ebc07dc1fe685b6a3ef0ec64fd376dc1bf4b500e2d583aded19a53fdd55674",
+      "etag": "\"1788448690\"",
+      "last_modified": "Thu, 03 Sep 2026 15:18:10 GMT",
+      "page_id": "terms-and-conditions",
+      "url": "https://dataspace.copernicus.eu/terms-and-conditions",
+      "required_content_check": true
+    },
+    {
+      "status_code": 200,
+      "resolved_url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "content_type": "application/pdf",
+      "content_length_bytes": 115881,
+      "sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64",
+      "etag": null,
+      "last_modified": "Thu, 28 Apr 2016 14:32:37 GMT",
+      "page_id": "sentinel-data-legal-notice",
+      "url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "required_content_check": true
+    }
+  ],
+  "product_checks": [
+    {
+      "source_id": "M1-SRC-001",
+      "provider_product_id": "227d0869-e2a2-4258-9624-ffaea31c4058",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE",
+      "catalog_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(227d0869-e2a2-4258-9624-ffaea31c4058)?%24expand=Attributes",
+      "observed_at_utc": "2026-09-03T17:31:17Z",
+      "catalog_response_sha256": "258367e1f46826d6c060ca106dff7ef61697a3a95cade83312e0ae87a7fa8683",
+      "publication_date": "2026-08-16T15:10:06.950255Z",
+      "modification_date": "2026-08-16T15:10:06.950255Z",
+      "content_length_bytes": 1732333216,
+      "checks": {
+        "provider_id_match": true,
+        "product_name_match": true,
+        "content_length_match": true,
+        "provider_checksums_match": true,
+        "online": true
+      },
+      "status": "pass"
+    },
+    {
+      "source_id": "M1-SRC-002",
+      "provider_product_id": "844b9a32-9aa2-4611-83f6-ae6501c01955",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE",
+      "catalog_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(844b9a32-9aa2-4611-83f6-ae6501c01955)?%24expand=Attributes",
+      "observed_at_utc": "2026-09-03T17:31:17Z",
+      "catalog_response_sha256": "2a3a34ffc9ec1273352d17aaf83537adbf17d49c20e1f5a2edb2cca5303423af",
+      "publication_date": "2026-08-16T15:05:57.322005Z",
+      "modification_date": "2026-08-16T15:05:57.322005Z",
+      "content_length_bytes": 1732874277,
+      "checks": {
+        "provider_id_match": true,
+        "product_name_match": true,
+        "content_length_match": true,
+        "provider_checksums_match": true,
+        "online": true
+      },
+      "status": "pass"
+    },
+    {
+      "source_id": "M1-SRC-003",
+      "provider_product_id": "f2682536-f9b8-4b5b-b9eb-5b52417820fa",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE",
+      "catalog_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(f2682536-f9b8-4b5b-b9eb-5b52417820fa)?%24expand=Attributes",
+      "observed_at_utc": "2026-09-03T17:31:17Z",
+      "catalog_response_sha256": "2ebc33981108cc1227ebb57810a77b3717cfb957571f3d77afc374ea6ddd061f",
+      "publication_date": "2026-08-19T02:22:06.569177Z",
+      "modification_date": "2026-08-19T02:22:06.569177Z",
+      "content_length_bytes": 1718369620,
+      "checks": {
+        "provider_id_match": true,
+        "product_name_match": true,
+        "content_length_match": true,
+        "provider_checksums_match": true,
+        "online": true
+      },
+      "status": "pass"
+    },
+    {
+      "source_id": "M1-SRC-004",
+      "provider_product_id": "641ccb0b-5d88-4c44-b558-93b488cd2453",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+      "catalog_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(641ccb0b-5d88-4c44-b558-93b488cd2453)?%24expand=Attributes",
+      "observed_at_utc": "2026-09-03T17:31:17Z",
+      "catalog_response_sha256": "be211b4b3624521742a13bc62fa761f80d45af3baf94809779583684c136605e",
+      "publication_date": "2026-08-28T15:08:08.876850Z",
+      "modification_date": "2026-08-28T15:08:08.876850Z",
+      "content_length_bytes": 1732332897,
+      "checks": {
+        "provider_id_match": true,
+        "product_name_match": true,
+        "content_length_match": true,
+        "provider_checksums_match": true,
+        "online": true
+      },
+      "status": "pass"
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "provider_product_id": "9cb3c885-cfb8-40cc-a44a-8673e772c794",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE",
+      "catalog_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(9cb3c885-cfb8-40cc-a44a-8673e772c794)?%24expand=Attributes",
+      "observed_at_utc": "2026-09-03T17:31:17Z",
+      "catalog_response_sha256": "e38a25a0182bb4bd8a677c007a421812532597d4afc5e291485c3cc0d409c6ab",
+      "publication_date": "2026-08-28T15:11:15.229392Z",
+      "modification_date": "2026-08-28T15:11:15.229392Z",
+      "content_length_bytes": 1732898724,
+      "checks": {
+        "provider_id_match": true,
+        "product_name_match": true,
+        "content_length_match": true,
+        "provider_checksums_match": true,
+        "online": true
+      },
+      "status": "pass"
+    },
+    {
+      "source_id": "M1-SRC-006",
+      "provider_product_id": "36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE",
+      "catalog_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4)?%24expand=Attributes",
+      "observed_at_utc": "2026-09-03T17:31:17Z",
+      "catalog_response_sha256": "0d750ce8857c58756d38524f7a5a196afd4115a718de771cc95c350822aa908f",
+      "publication_date": "2026-08-31T02:15:45.404825Z",
+      "modification_date": "2026-08-31T02:15:45.404825Z",
+      "content_length_bytes": 1718402708,
+      "checks": {
+        "provider_id_match": true,
+        "product_name_match": true,
+        "content_length_match": true,
+        "provider_checksums_match": true,
+        "online": true
+      },
+      "status": "pass"
+    },
+    {
+      "source_id": "M1-SRC-008",
+      "provider_product_id": "76de2c15-9281-45e3-8f0b-e97085fa6d69",
+      "exact_product_id": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE",
+      "catalog_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(76de2c15-9281-45e3-8f0b-e97085fa6d69)?%24expand=Attributes",
+      "observed_at_utc": "2026-09-03T17:31:17Z",
+      "catalog_response_sha256": "613b36210e7122a538773eda62fae9ac9a162122ed333b79dcc5fb8f939b6a06",
+      "publication_date": "2026-08-27T09:33:39.699540Z",
+      "modification_date": "2026-08-27T09:33:39.699540Z",
+      "content_length_bytes": 941822565,
+      "checks": {
+        "provider_id_match": true,
+        "product_name_match": true,
+        "content_length_match": true,
+        "provider_checksums_match": true,
+        "online": true
+      },
+      "status": "pass"
+    },
+    {
+      "source_id": "M1-SRC-010",
+      "provider_product_id": "25faa527-2502-4f7d-a703-cfff3e99d483",
+      "exact_product_id": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE",
+      "catalog_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(25faa527-2502-4f7d-a703-cfff3e99d483)?%24expand=Attributes",
+      "observed_at_utc": "2026-09-03T17:31:17Z",
+      "catalog_response_sha256": "8b7c1190374c814a4f903934292bd5b60cdb716e7223a817912bd3411685bb19",
+      "publication_date": "2026-08-12T11:08:22.630923Z",
+      "modification_date": "2026-08-12T11:08:22.630923Z",
+      "content_length_bytes": 1142906699,
+      "checks": {
+        "provider_id_match": true,
+        "product_name_match": true,
+        "content_length_match": true,
+        "provider_checksums_match": true,
+        "online": true
+      },
+      "status": "pass"
+    }
+  ],
+  "paths": {
+    "project_root": "C:\\Projects\\Active",
+    "repository_root": "C:\\Projects\\Active\\nepal-2026-before-after-map",
+    "planned_external_data_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "custody_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody",
+    "staging_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001",
+    "external_data_root_exists_before_preflight": false,
+    "external_data_root_outside_git": true,
+    "existing_ancestors": [
+      {
+        "path": "C:\\Projects\\Active",
+        "exists": true,
+        "is_reparse_point": false
+      },
+      {
+        "path": "C:\\Projects",
+        "exists": true,
+        "is_reparse_point": false
+      },
+      {
+        "path": "C:\\",
+        "exists": true,
+        "is_reparse_point": false
+      }
+    ],
+    "existing_destination_or_staging_paths": [],
+    "case_insensitive_path_collision": false,
+    "resolved_asset_path_count": 16
+  },
+  "storage": {
+    "volume": "C:",
+    "free_bytes": 552914313216,
+    "free_gib": 514.942,
+    "minimum_free_gib": 60.0,
+    "status": "pass"
+  },
+  "access": {
+    "token_required": true,
+    "existing_owner_controlled_account_or_session_authorized": true,
+    "credential_reference_presence": {
+      "CDSE_ACCESS_TOKEN": false,
+      "CDSE_USERNAME": false,
+      "CDSE_PASSWORD": false
+    },
+    "credential_values_read_or_recorded": false,
+    "authentication_performed": false,
+    "account_clickthrough_or_terms_acceptance_encountered": false
+  },
+  "checks": {
+    "exact_activation": "pass",
+    "current_primary_source_pages": "pass",
+    "eight_exact_products_online_and_unchanged": "pass",
+    "sentinel_rights_route": "pass_for_controlled_acquisition_and_analysis",
+    "free_space": "pass",
+    "external_root_absent": "pass",
+    "path_containment_and_ancestor_safety": "pass",
+    "destination_and_staging_collisions": "pass",
+    "secret_handling": "pass_no_values_read"
+  },
+  "eligible_next_actions": [
+    "create the approved external data, custody, and staging roots",
+    "attempt authentication only through a secret-safe owner-controlled reference",
+    "download the first exact product after authentication succeeds without new terms or account action"
+  ],
+  "mutations_performed": {
+    "external_directory_created": false,
+    "authentication": false,
+    "download": false
+  },
+  "limitations": [
+    "The source gate establishes fitness for controlled acquisition, not pixel usability or scientific use.",
+    "No account session was tested; interactive login, MFA, recovery, or any terms-acceptance prompt remains a stop condition.",
+    "Provider content lengths and checksums remain metadata until transferred bytes are independently verified."
+  ]
+}

@@ -1,67 +1,64 @@
 # Current status
 
-- **State:** M1 complete; M2 proposed and not active
+- **State:** M1 complete; M2 active at the authentication-reference boundary
 - **Last completed milestone:** M1 — Event geometry and source manifest
+- **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
-- **Imagery custody:** None
+- **Imagery custody:** Empty external custody structure initialized; zero products downloaded
 - **Long-term goal:** Active
-- **Checkpoint:** M1 complete; owner review of the exact M2 activation proposal
+- **Checkpoint:** `M2-AUTHENTICATION-REFERENCE`
 
-## Completed
+## Purpose
 
-- the charter objective is bound as the active long-term goal;
-- all ten candidate Sentinel products have exact public Copernicus catalog identities, attributes, checksums, footprints, and coarse quicklook evidence;
-- three AOIs were approved as M1 search and review extents through a locked, reconciled human response;
-- approved AOIs were promoted as GeoJSON and projected to EPSG:32645 as ArcGIS FeatureSet JSON;
-- ArcGIS Pro 3.7.1 imported three nonempty projected polygons;
-- the owner approved source-manifest review bundle SHA-256 `dd7d85562134e2c0cc2115eabdf329de56763209918dc65c872ceed911900544` and candidate manifest SHA-256 `6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef`;
-- the exact manifest response was locked before reveal and reconciled without fabricated decisions;
-- eight exact sources are accepted for controlled acquisition planning, two RUL optical context records remain deferred, and none were erased or rejected;
-- all M1 exit conditions pass without any full-product acquisition;
-- the public repository preserves exact review evidence and validates clean-checkout portability.
-- ArcGIS Pro 3.7.1 Advanced created and reopened a metadata-only EPSG:32645 evidence workspace with nine datasets, fourteen domains, eight relationship classes, three approved AOIs, and ten source-product metadata rows;
-- direct-observation, interpretation, attribution, exclusion, stable-control, and QA datasets remain empty, so the workspace makes no landscape-change or causal claim;
-- the ArcGIS builder, independent ArcGIS-native validator, portable schema tests, visually approved PNG preview, and retained-failure receipt are prepared for publication; the APRX, File Geodatabase, and PDF remain in ignored scratch custody.
-- a predeclared pixel-readiness contract now fixes EPSG:32645 AOI coverage, optical SCL, radar-mask, grid-alignment, and registration thresholds before real product pixels are accessed;
-- eleven portable decision-core tests pass, and ArcGIS Pro 3.7.1 Advanced with Spatial Analyst has exercised deterministic 20 m synthetic rasters over all three approved AOIs;
-- the synthetic ArcGIS run passed approximately 90% usable coverage for each AOI, passed an aligned before/after grid, blocked an intentional 0.6-pixel shift, and deferred unmeasured registration without creating scientific admission.
+This project is building a reproducible, ArcGIS-ready before/after evidence package for the 26 August 2026 Nepal debris avalanche and flash flood. Its public repository preserves source identity, authority, methods, decisions, and lightweight receipts. Heavy imagery and derived geospatial data remain outside Git.
 
-## Proposed M2 package
+## Completed foundations
 
-- candidate acquisition plan SHA-256: `6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d`;
-- review bundle SHA-256: `e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d`;
-- eight exact Sentinel products totaling 11.597 GiB by provider catalog metadata;
-- proposed external non-Git custody root: `C:\Projects\Active\nepal-2026-before-after-map-data`;
-- conservative planning minimum: 60 GiB free before acquisition;
-- review surface rendered and visually checked after retaining and correcting an initial text-collision failure.
-- deterministic static intake contract SHA-256 `c4927e5a162aa925bcffbeb7bd2248474bedbc4c88c2e8094fb6e25a27f75b9c`;
-- network-free static dry-run receipt SHA-256 `1469785b6509e7aa6f7d8673b7e15f7543914ceca958e7c63af95f4bb7c370e9`;
-- nine passing mutation and reproducibility tests for exact identity, authority, paths, collision behavior, and secret-free routes.
-- deterministic offline container-verification contract for the same eight exact products, including local SHA-256, provider MD5, ZIP safety and CRC, exact SAFE root, required VV/VH radar members, and required optical bands and SCL;
-- synthetic fixture and mutation tests that exercise container pass, missing-product defer, unsafe-member block, and non-authority behavior without accessing external custody;
-- independent dataset-readiness decision **DEFER** across nine required gates; eight approved product identities alone do not establish data readiness.
+- three owner-approved study areas are projected to EPSG:32645 and validated in ArcGIS Pro 3.7.1;
+- the owner-approved source manifest preserves ten exact Sentinel candidates, with eight accepted for controlled acquisition and two optical context products deferred;
+- the ArcGIS evidence workspace separates observation, interpretation, attribution, exclusions, controls, and QA, with scientific layers empty by design;
+- fixed pixel-readiness rules cover AOI coverage, optical masks, radar masks, grid alignment, and registration before real product access;
+- portable and ArcGIS-native synthetic tests exercise pass, block, and defer outcomes without creating a real-pixel claim;
+- three independent candidate pair routes are predeclared: ascending radar, descending radar, and RUM optical.
 
-The proposal would allow a fresh custody preflight, creation of the external data root, use of an owner-controlled existing Copernicus account or authenticated session, downloads of only the eight exact products, and checksum, archive, band, pixel, coverage, rights, baseline, and registration QA.
+## M2 activation and live preflight
 
-The static intake and offline verification packets are derived tooling, not an M2 preflight or approval. They made no network request or external custody probe, created no external directory, and left the reviewed M2 plan and bundle hashes unchanged.
+The owner approved review bundle SHA-256 `e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d` and acquisition-plan SHA-256 `6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d`. The exact completed response was locked and reconciled before `contracts/milestone-002.json` became active.
 
-The ArcGIS evidence workspace is also preparatory structure, not M2 execution. It uses approved AOIs and source metadata only and did not authenticate, create the proposed external data root, download products, or process pixels.
+At `2026-09-03T17:31:17Z`, the non-mutating live preflight:
 
-The pixel-readiness contract and synthetic ArcGIS receipt are preparatory QA controls. All exercised rasters are generated fixtures in ignored scratch storage; no real Sentinel pixels or external custody paths were accessed.
+- re-fetched the official CDSE OData, token, terms, and Sentinel Legal Notice pages;
+- confirmed all eight exact product UUIDs, names, catalog sizes, provider MD5/BLAKE3 values, and online states;
+- passed all 64 required source criteria using 120 evidence items, including 80 live items;
+- found 514.942 GiB free against the 60 GiB minimum;
+- verified that the approved external root was absent, outside Git, collision-free, and free of reparse-point ancestors;
+- read no credential values, performed no authentication, and transferred no product bytes.
 
-## Not authorized or completed
+The approved structure at `C:\Projects\Active\nepal-2026-before-after-map-data` was then created with custody and staging children. The repository and external initialization receipts match at SHA-256 `12812d1c53e13ec287425f74a1988f5c0be7d0638f856c9606fddf1c1431fb09`.
 
-- M2 activation;
-- credential or authenticated-session use;
-- creation of the proposed external custody root;
-- full-product download, extraction, or preprocessing;
-- acceptance of new or changed provider terms, account creation or recovery, or spending;
-- usable-pixel, mask, co-registration, radar-geometry, change, interpretation, or attribution conclusions;
+## Current gate
+
+Preflight found no `CDSE_ACCESS_TOKEN`, username, or password reference in the process environment. No login was attempted. Before the first exact-product transfer, the workflow requires a secret-safe reference to an existing owner-controlled CDSE access token or authenticated session.
+
+Do not place a token, password, cookie, refresh value, or authorization header in chat, Git, a filename, a receipt, or captured command output. Stop if login, MFA, recovery, or terms acceptance needs owner action.
+
+## Authorized but not completed
+
+- authenticate through an existing owner-controlled CDSE credential or session reference;
+- download only the eight exact approved products, one at a time;
+- preserve append-only attempts and use collision-safe staging and promotion;
+- verify exact bytes, provider checksums, ZIP safety, SAFE identity, and required content;
+- inspect real pixels, masks, AOI coverage, baselines, and EPSG:32645 registration.
+
+## Outside the active authority or still unproven
+
+- accepting new or changed provider terms;
+- creating or recovering an account or changing account security;
+- disclosing credentials or using a paid route;
+- downloading products outside the exact eight;
+- using or redistributing restricted high-resolution imagery;
 - repository-license selection;
-- public scientific conclusions or emergency guidance.
+- usable-pixel, change, interpretation, attribution, or emergency-guidance conclusions;
+- storing archives, SAFE products, rasters, geodatabases, or ArcGIS packages in Git.
 
-## Current owner gate
-
-Review [M2_CONTROLLED_ACQUISITION_REVIEW.md](M2_CONTROLLED_ACQUISITION_REVIEW.md) and choose approve, revise, or defer for review bundle SHA-256 `e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d` and acquisition plan SHA-256 `6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d`.
-
-An approval would activate only the bounded M2 actions stated in that exact bundle. It would not accept provider terms, create or recover an account, disclose credentials, incur cost, authorize restricted imagery, or publish scientific conclusions.
+Catalog metadata and the live source gate establish eligibility for controlled acquisition only. They do not establish transferred-byte integrity, pixel usability, scientific fitness, or event causation.

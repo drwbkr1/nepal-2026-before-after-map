@@ -28,6 +28,8 @@ REQUIRED = [
     "contracts/milestone-001.json",
     "contracts/milestone-002-proposal.json",
     "contracts/m2-intake-candidate.json",
+    "contracts/milestone-002.json",
+    "contracts/m2-intake.json",
     "records/project-control-profile.json",
     "records/long-term-goal.json",
     "records/evidence-ledger.jsonl",
@@ -39,8 +41,13 @@ REQUIRED = [
     "records/source-manifest.json",
     "records/acquisition-plan.json",
     "records/acquisition/m2-intake-static-dry-run.json",
+    "records/acquisition/preflight.json",
+    "records/acquisition/custody-initialization.json",
     "records/source-gates/source-manifest-approval.json",
     "records/source-gates/source-manifest-review-reconciliation.json",
+    "records/source-gates/m2-activation-approval.json",
+    "records/source-gates/m2-activation-review-reconciliation.json",
+    "records/source-gates/m2-live-source-gate.json",
     "docs/M1_SOURCE_MANIFEST_REVIEW.md",
     "docs/assets/m1-source-manifest-review.png",
     "records/surface-receipts/m1-source-manifest-review.json",
@@ -63,6 +70,7 @@ REQUIRED = [
     "scripts/validate_pixel_qa_arcgis.py",
     "config/arcgis/evidence-workspace-schema.json",
     "config/qa/pixel-readiness-contract.json",
+    "config/qa/candidate-pair-plan.json",
     "docs/assets/arcgis-evidence-workspace-preview.png",
     "records/surface-receipts/m2-activation-review.json",
     "contracts/m2-offline-verification-candidate.json",
@@ -75,6 +83,13 @@ REQUIRED = [
     "tests/test_m2_verification.py",
     "tests/test_arcgis_evidence_schema.py",
     "tests/test_pixel_qa_core.py",
+    "tests/test_pair_plan.py",
+    "scripts/activate_m2.py",
+    "scripts/run_m2_preflight.py",
+    "scripts/complete_m2_preflight.py",
+    "scripts/initialize_m2_custody.py",
+    "scripts/record_m2_custody_checkpoint.py",
+    "scripts/validate_pair_plan.py",
     ".github/workflows/validate.yml",
 ]
 
@@ -133,6 +148,7 @@ def main() -> None:
     profile = json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))
     contract = json.loads((ROOT / "contracts/milestone-001.json").read_text(encoding="utf-8"))
     m2_proposal = json.loads((ROOT / "contracts/milestone-002-proposal.json").read_text(encoding="utf-8"))
+    active_m2 = json.loads((ROOT / "contracts/milestone-002.json").read_text(encoding="utf-8"))
     goal = json.loads((ROOT / "records/long-term-goal.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
@@ -154,19 +170,23 @@ def main() -> None:
         fail("M1 must be complete after exact source-manifest approval")
     if contract["authority"]["mode"] != "inherited":
         fail("completed M1 must preserve the exact user authority")
-    if profile["authority"]["authority_ref"] != contract["authority"]["authority_ref"]:
-        fail("profile and milestone authority references must agree")
+    if profile["authority"]["authority_ref"] != active_m2["authority"]["authority_ref"]:
+        fail("profile and active M2 authority references must agree")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
-    if profile["control_surfaces"].get("active_contract") is not None:
-        fail("no acquisition contract may be active at the M2 owner gate")
+    if profile["control_surfaces"].get("active_contract") != "contracts/milestone-002.json":
+        fail("project profile must identify the active M2 contract")
     if profile["control_surfaces"].get("last_completed_contract") != "contracts/milestone-001.json":
         fail("project profile must identify M1 as the last completed contract")
-    if profile["control_surfaces"].get("proposed_contract") != "contracts/milestone-002-proposal.json":
-        fail("project profile must identify the exact M2 proposal")
-    if goal.get("active_milestone") is not None or goal.get("proposed_milestone") != "contracts/milestone-002-proposal.json":
-        fail("long-term goal must show no active milestone and the proposed M2 contract")
+    if profile["control_surfaces"].get("proposed_contract") is not None:
+        fail("project profile must clear the proposed-contract pointer after activation")
+    if profile["control_surfaces"].get("activated_from_contract") != "contracts/milestone-002-proposal.json":
+        fail("project profile must retain the exact proposal lineage")
+    if goal.get("active_milestone") != "contracts/milestone-002.json" or goal.get("proposed_milestone") is not None:
+        fail("long-term goal must identify active M2 and no pending proposal")
+    if profile["current_checkpoint"]["checkpoint_id"] != "M2-AUTHENTICATION-REFERENCE" or goal.get("current_checkpoint") != "M2-AUTHENTICATION-REFERENCE":
+        fail("profile and goal must stop at the owner-controlled authentication-reference boundary")
 
     approval = json.loads((ROOT / "records/source-gates/aoi-approval.json").read_text(encoding="utf-8"))
     projected_aoi = json.loads((ROOT / "config/aoi/approved-study-areas-epsg32645.json").read_text(encoding="utf-8"))
@@ -183,7 +203,14 @@ def main() -> None:
     m2_response = json.loads((ROOT / "reviews/m2-activation/blank-response.json").read_text(encoding="utf-8"))
     m2_surface_receipt = json.loads((ROOT / "records/surface-receipts/m2-activation-review.json").read_text(encoding="utf-8"))
     intake_contract = json.loads((ROOT / "contracts/m2-intake-candidate.json").read_text(encoding="utf-8"))
+    active_intake = json.loads((ROOT / "contracts/m2-intake.json").read_text(encoding="utf-8"))
     intake_dry_run = json.loads((ROOT / "records/acquisition/m2-intake-static-dry-run.json").read_text(encoding="utf-8"))
+    m2_activation = json.loads((ROOT / "records/source-gates/m2-activation-approval.json").read_text(encoding="utf-8"))
+    m2_reconciliation = json.loads((ROOT / "records/source-gates/m2-activation-review-reconciliation.json").read_text(encoding="utf-8"))
+    m2_source_gate = json.loads((ROOT / "records/source-gates/m2-live-source-gate.json").read_text(encoding="utf-8"))
+    m2_preflight = json.loads((ROOT / "records/acquisition/preflight.json").read_text(encoding="utf-8"))
+    custody_receipt = json.loads((ROOT / "records/acquisition/custody-initialization.json").read_text(encoding="utf-8"))
+    pair_plan = json.loads((ROOT / "config/qa/candidate-pair-plan.json").read_text(encoding="utf-8"))
     offline_verification = json.loads((ROOT / "contracts/m2-offline-verification-candidate.json").read_text(encoding="utf-8"))
     readiness_input = json.loads((ROOT / "records/readiness/m2-readiness-audit-input.json").read_text(encoding="utf-8"))
     readiness_decision = json.loads((ROOT / "records/readiness/m2-readiness-decision.json").read_text(encoding="utf-8"))
@@ -273,7 +300,7 @@ def main() -> None:
     if m2_bundle["candidate_identity"] != f"ACQUISITION-PLAN-SHA256:{sha256('records/acquisition-plan.json')}":
         fail("M2 review bundle does not bind the exact acquisition plan")
     if m2_response["completed"] is not False or m2_response["reviewer"]["attestation"] is not False:
-        fail("M2 public response must remain blank before owner activation")
+        fail("M2 public blank response must remain an unchanged historical review template")
     if m2_surface_receipt["status"] != "pass_with_retained_failure":
         fail("M2 review surface receipt must preserve its remediated visual failure")
     if m2_surface_receipt["surface_sha256"] != sha256("docs/assets/m2-controlled-acquisition-review.png"):
@@ -312,6 +339,68 @@ def main() -> None:
             fail(f"M2 intake asset {source_id} must preserve pending authorization")
     if intake_source_ids != {record["source_id"] for record in acquisition_plan["records"]}:
         fail("M2 intake source set differs from the exact approved acquisition plan")
+
+    if m2_activation.get("status") != "approved" or m2_activation.get("review_bundle_manifest_sha256") != sha256("reviews/m2-activation/review-bundle.json"):
+        fail("M2 activation approval does not bind the exact reviewed bundle")
+    if m2_activation.get("acquisition_plan_sha256") != sha256("records/acquisition-plan.json"):
+        fail("M2 activation approval does not bind the exact acquisition plan")
+    if m2_activation.get("locked_response_sha256") != m2_reconciliation.get("response_sha256"):
+        fail("M2 activation and reconciliation response hashes differ")
+    if m2_reconciliation.get("status") != "reconciled_exact_human_response" or m2_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}:
+        fail("M2 activation response is not one exact reconciled approval")
+    if m2_reconciliation.get("human_decisions_fabricated") is not False:
+        fail("M2 activation reconciliation must reject fabricated decisions")
+    if active_m2.get("status") != "active" or active_m2.get("authority", {}).get("mode") != "inherited":
+        fail("M2 active contract state or authority mode is invalid")
+    if active_m2.get("authority", {}).get("authority_ref") != "records/source-gates/m2-activation-approval.json":
+        fail("M2 active contract does not cite the exact activation approval")
+    if active_m2.get("authority", {}).get("approval_sha256") != sha256("records/source-gates/m2-activation-approval.json"):
+        fail("M2 active contract approval hash differs")
+    m2_units = {unit["id"]: unit for unit in active_m2.get("units", [])}
+    if m2_units.get("M2-CUSTODY-PREFLIGHT", {}).get("disposition") != "pass" or m2_units.get("M2-ACQUIRE", {}).get("status") != "ready":
+        fail("M2 units do not preserve the passing preflight and ready acquisition checkpoint")
+    if m2_units["M2-ACQUIRE"].get("gates", {}).get("custody_initialization") != "pass":
+        fail("M2 acquisition unit does not bind verified custody initialization")
+    if m2_units["M2-ACQUIRE"].get("gates", {}).get("authentication") != "waiting_for_secret_safe_existing_owner_credential_reference":
+        fail("M2 acquisition unit must stop at the secret-safe authentication-reference boundary")
+
+    if m2_source_gate.get("decision", {}).get("status") != "ready" or len(m2_source_gate.get("sources", [])) != 8:
+        fail("M2 live source gate must be ready for exactly eight products")
+    if m2_source_gate.get("authority", {}).get("authority_ref") != "records/source-gates/m2-activation-approval.json":
+        fail("M2 live source gate does not inherit the exact activation approval")
+    if any(criterion.get("status") != "pass" for source in m2_source_gate["sources"] for criterion in source.get("criteria", [])):
+        fail("M2 live source gate contains a non-passing criterion")
+    if m2_preflight.get("status") != "pass_no_external_mutation":
+        fail("M2 preflight did not preserve its non-mutating passing state")
+    if m2_preflight.get("source_gate", {}).get("sha256") != sha256("records/source-gates/m2-live-source-gate.json"):
+        fail("M2 preflight does not bind the exact live source gate")
+    if len(m2_preflight.get("product_checks", [])) != 8 or any(item.get("status") != "pass" for item in m2_preflight["product_checks"]):
+        fail("M2 preflight must preserve eight passing exact-product checks")
+    if m2_preflight.get("paths", {}).get("external_data_root_exists_before_preflight") is not False:
+        fail("M2 preflight must establish that the external root was absent before mutation")
+    if m2_preflight.get("access", {}).get("credential_values_read_or_recorded") is not False or m2_preflight.get("access", {}).get("authentication_performed") is not False:
+        fail("M2 preflight must not read credentials or authenticate")
+
+    active_extensions = active_intake.get("extensions", {})
+    if active_extensions.get("status") != "active_authorized_preflight_passed_custody_initialized" or active_extensions.get("custody_initialized") is not True:
+        fail("active M2 intake must record initialized custody")
+    if active_extensions.get("source_gate_sha256") != sha256("records/source-gates/m2-live-source-gate.json") or active_extensions.get("preflight_sha256") != sha256("records/acquisition/preflight.json"):
+        fail("active M2 intake does not bind the live gate and preflight")
+    if active_extensions.get("custody_initialization_sha256") != sha256("records/acquisition/custody-initialization.json"):
+        fail("active M2 intake does not bind the custody receipt")
+    if active_intake.get("collision_policy") != "fail" or active_intake.get("promotion_mode") != "atomic-no-replace" or active_intake.get("secret_policy") != "references-only":
+        fail("active M2 intake weakens collision, promotion, or secret controls")
+    if len(active_intake.get("assets", [])) != 8 or any(asset.get("state") != "authorized" or asset.get("attempts") != [] for asset in active_intake["assets"]):
+        fail("active M2 intake must contain eight authorized, unattempted assets at this checkpoint")
+    if custody_receipt.get("status") != "created_and_verified":
+        fail("M2 custody initialization receipt is not passing")
+    if custody_receipt.get("bindings", {}).get("preflight_sha256") != sha256("records/acquisition/preflight.json") or custody_receipt.get("bindings", {}).get("source_gate_sha256") != sha256("records/source-gates/m2-live-source-gate.json"):
+        fail("M2 custody receipt does not bind the preflight and source gate")
+    receipt_verification = custody_receipt.get("verification", {})
+    if receipt_verification.get("files_downloaded") != 0 or receipt_verification.get("authentication_performed") is not False or receipt_verification.get("credential_values_read_or_recorded") is not False:
+        fail("M2 custody initialization must not claim authentication or product transfer")
+    if pair_plan.get("authority", {}).get("mode") != "not_granted" or pair_plan.get("authority", {}).get("authorized_actions") != [] or len(pair_plan.get("pairs", [])) != 3:
+        fail("candidate pair plan must remain non-authorizing with three independent routes")
     if intake_dry_run.get("status") != "pass_static_only_no_authority":
         fail("M2 static dry run must remain explicitly non-authorizing")
     dry_inputs = intake_dry_run.get("inputs", {})

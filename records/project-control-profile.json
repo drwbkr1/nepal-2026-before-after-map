@@ -20,7 +20,7 @@
   },
   "authority": {
     "mode": "inherited",
-    "authority_ref": "user-instruction:2026-09-01:activate-charter-and-begin-project",
+    "authority_ref": "records/source-gates/m2-activation-approval.json",
     "authorized_action_classes": [
       "read_only_inspection",
       "deterministic_validation",
@@ -30,10 +30,14 @@
       "project_control",
       "update_project_records",
       "reversible_remediation",
-      "external_publication"
+      "external_publication",
+      "credential_or_identity",
+      "data_acquisition",
+      "data_processing"
     ],
-    "verified_at_utc": "2026-09-02T02:59:36Z",
-    "expires_at_utc": null
+    "verified_at_utc": "2026-09-03T17:24:06Z",
+    "expires_at_utc": null,
+    "scope_ref": "contracts/milestone-002.json"
   },
   "control_surfaces": {
     "instructions": [
@@ -41,13 +45,14 @@
     ],
     "status": "docs/STATUS.md",
     "roadmap": "docs/ROADMAP.md",
-    "active_contract": null,
+    "active_contract": "contracts/milestone-002.json",
     "evidence_ledger": "records/evidence-ledger.jsonl",
     "history": [
       "docs/DECISIONS.md"
     ],
     "last_completed_contract": "contracts/milestone-001.json",
-    "proposed_contract": "contracts/milestone-002-proposal.json"
+    "proposed_contract": null,
+    "activated_from_contract": "contracts/milestone-002-proposal.json"
   },
   "cycle": {
     "canonical_probe": {
@@ -153,9 +158,9 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M1-COMPLETE-M2-AUTHORITY-GATE",
+    "checkpoint_id": "M2-AUTHENTICATION-REFERENCE",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Owner reviews M2 activation bundle e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d; do not authenticate, create custody directories, or download products."
+    "next_action": "Provide a secret-safe reference to an existing owner-controlled CDSE access token or authenticated session; then revalidate the exact first product before transfer. Do not place a token, password, cookie, or header in Git or chat."
   }
 }

@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-activation-review-001",
+  "contract_sha256": "e6c29834c7f435f6ba1f6a26e8e5212658f39605d12e9940547137b642432f46",
+  "response_sha256": "be9c62a9e5e49ddff371254369c7936360f45e87e44ea5c6b3f09ac69c4c06be",
+  "receipt_sha256": "b0554b9c0cb115165fb4857ee5b7b8f993a2136910940e9379a0f8dd7e7a556c",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "user-instruction:2026-09-01:activate-charter-and-begin-project",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

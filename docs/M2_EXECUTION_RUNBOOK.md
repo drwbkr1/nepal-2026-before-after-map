@@ -2,18 +2,20 @@
 
 ## Current boundary
 
-M2 is proposed and not active. This runbook and the static intake packet do not authorize account use, authentication, external-directory creation, product transfer, extraction, or raster processing.
+M2 is active under `contracts/milestone-002.json`. The exact approval covers only the bounded actions in the reviewed plan. The live preflight passed at `2026-09-03T17:31:17Z`, and the approved empty external custody structure was initialized with receipt SHA-256 `12812d1c53e13ec287425f74a1988f5c0be7d0638f856c9606fddf1c1431fb09`.
 
-The pending owner decision remains bound to:
+The activation remains bound to:
 
 - activation review bundle SHA-256 `e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d`;
 - acquisition plan SHA-256 `6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d`.
 
-The static controls added after that bundle do not change either reviewed artifact or broaden its scope.
+The reviewed artifacts remain unchanged. Active intake, preflight, and custody records inherit that exact scope and do not broaden it.
+
+The current checkpoint is `M2-AUTHENTICATION-REFERENCE`. No credential reference was present at preflight, no authentication occurred, and no product bytes were downloaded. Continue only through a secret-safe reference to an existing owner-controlled CDSE access token or authenticated session. Never place secret values in a command argument, chat message, repository file, receipt, URL, or captured output.
 
 ## Prepared controls
 
-`contracts/m2-intake-candidate.json` is a plan-derived controlled-intake contract for eight exact products. It uses:
+`contracts/m2-intake-candidate.json` preserves the plan-derived pre-activation control. `contracts/m2-intake.json` is the active intake contract for the same eight exact products. It uses:
 
 - sibling, non-Git custody and staging roots under `C:\Projects\Active\nepal-2026-before-after-map-data`;
 - one unique staging path and final destination per product;
@@ -27,7 +29,7 @@ The static controls added after that bundle do not change either reviewed artifa
 
 `contracts/m2-offline-verification-candidate.json` defines the read-only post-download checks for the same eight exact archives. It requires local SHA-256, provider-MD5 agreement, exact size, safe ZIP membership, CRC, exact SAFE root identity, and analysis-critical band, polarization, calibration, noise, and quality members. It does not access custody until a later explicit scan invocation.
 
-`records/readiness/m2-readiness-decision.json` is currently `defer`: no full products, access-time terms evidence, pixel coverage, masks, or registration evidence exist. See [M2_OFFLINE_VERIFICATION.md](M2_OFFLINE_VERIFICATION.md).
+`records/readiness/m2-readiness-decision.json` preserves the historical pre-acquisition `defer`: no full products, pixel coverage, masks, or registration evidence existed. The later live source gate resolves only access-time source and rights checks; it does not alter the remaining data-readiness gates. See [M2_OFFLINE_VERIFICATION.md](M2_OFFLINE_VERIFICATION.md).
 
 Regenerate or verify these bytes with:
 
@@ -38,13 +40,13 @@ python -m unittest discover -s tests -v
 python scripts/check_project.py
 ```
 
-## Required sequence after an exact M2 activation
+## Required sequence under the exact M2 activation
 
-1. Lock and reconcile the exact completed owner response. Do not infer activation from conversation, a blank form, or filenames.
-2. Recheck the current [CDSE OData product-download documentation](https://documentation.dataspace.copernicus.eu/APIs/OData.html#product-download), [token guidance](https://documentation.dataspace.copernicus.eu/APIs/Token.html), and [terms](https://dataspace.copernicus.eu/terms-and-conditions). Stop if terms are new, changed, or require acceptance.
-3. Re-query all eight provider UUIDs. Require exact product names, online status, catalog identity, and compatible access routes.
-4. Perform the formal M2 storage and path preflight against `C:\Projects\Active`. Reject traversal, symlinks, case-insensitive collisions, existing destinations, inadequate free space, or unexpected roots.
-5. Create custody and staging directories only after the activation and fresh preflight pass.
+1. Lock and reconcile the exact completed owner response. **Completed.**
+2. Recheck the current [CDSE OData product-download documentation](https://documentation.dataspace.copernicus.eu/APIs/OData.html#product-download), [token guidance](https://documentation.dataspace.copernicus.eu/APIs/Token.html), and [terms](https://dataspace.copernicus.eu/terms-and-conditions). **Completed for the recorded preflight timestamp.** Stop if later terms are new, changed, or require acceptance.
+3. Re-query all eight provider UUIDs. Require exact product names, online status, catalog identity, and compatible access routes. **Completed for the recorded preflight timestamp.**
+4. Perform the formal M2 storage and path preflight against `C:\Projects\Active`. Reject traversal, symlinks, case-insensitive collisions, existing destinations, inadequate free space, or unexpected roots. **Completed.**
+5. Create custody and staging directories only after the activation and fresh preflight pass. **Completed with an append-only receipt.**
 6. Use an owner-controlled existing authenticated session or account reference. Keep usernames, passwords, access tokens, refresh values, cookies, and authorization headers out of files, commands captured as evidence, logs, and Git.
 7. Intake one product at a time. Append an attempt record before transfer and write only to its unique `.part` staging path.
 8. Resume only if the server proves range support and the remote length plus strong identity are unchanged. Otherwise preserve the partial attempt and start a distinct attempt.

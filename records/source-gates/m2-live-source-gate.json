@@ -1,0 +1,1367 @@
+{
+  "contract_version": "source-gate/v1",
+  "assessment_id": "NEPAL-M2-LIVE-SOURCE-GATE-001",
+  "assessed_at": "2026-09-03T17:31:17Z",
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-activation-approval.json",
+    "authorized_actions": [
+      "create approved external custody root",
+      "authenticate with an owner-controlled existing CDSE account or session",
+      "download the eight exact approved products",
+      "verify transferred bytes and product containers",
+      "inspect product pixels for baseline fitness"
+    ],
+    "expires_at_utc": null
+  },
+  "intended_use": {
+    "summary": "Acquire only the eight exact owner-approved Sentinel products into controlled non-Git custody for integrity, pixel, baseline, and registration evaluation.",
+    "planned_actions": [
+      "create approved external custody root",
+      "authenticate with an owner-controlled existing CDSE account or session",
+      "download the eight exact approved products",
+      "verify transferred bytes and product containers",
+      "inspect product pixels for baseline fitness"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "M1-SRC-001",
+      "name": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(227d0869-e2a2-4258-9624-ffaea31c4058)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(227d0869-e2a2-4258-9624-ffaea31c4058)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Exact provider UUID, product name, size, and checksums matched; catalog response SHA-256 258367e1f46826d6c060ca106dff7ef61697a3a95cade83312e0ae87a7fa8683."
+            }
+          ],
+          "note": "Identity matches the exact owner-approved acquisition record."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(227d0869-e2a2-4258-9624-ffaea31c4058)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The primary Copernicus catalogue returned the product record directly."
+            }
+          ],
+          "note": "Copernicus Data Space Ecosystem is the primary delivery service for this product."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(227d0869-e2a2-4258-9624-ffaea31c4058)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Product Online was true."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "OData download documentation passed content check; page SHA-256 bc178f27ebcaa8033696bb89d2c86b18385d2cd40997d4eb09233b7143857594 and Last-Modified Fri, 28 Aug 2026 09:21:01 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/Token.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Token documentation confirms access-token use; page SHA-256 70931ccfcd68a1bf9a607687aa13e138f599db0ef840e1bccfaa0f34a9ca6ae3 and Last-Modified Wed, 26 Aug 2026 12:05:47 GMT."
+            }
+          ],
+          "note": "The product is online; download requires an access token. Any interactive login, MFA, recovery, or terms prompt remains a stop."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms state Sentinel data are available free, full, and open under the Sentinel Data Legal Notice; page SHA-256 17ebc07dc1fe685b6a3ef0ec64fd376dc1bf4b500e2d583aded19a53fdd55674, Last-Modified Thu, 03 Sep 2026 15:18:10 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Official Sentinel Data Legal Notice PDF fetched successfully; SHA-256 fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            }
+          ],
+          "note": "Sentinel data may be acquired and analyzed with required source notice. Portal images and other portal material retain narrower noncommercial and redistribution restrictions."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/acquisition-plan.json",
+              "note": "The owner-approved acquisition plan binds the provider UUID, exact product name, source role, and source-manifest lineage."
+            }
+          ],
+          "note": "No full-product custody or transformation has yet occurred."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(227d0869-e2a2-4258-9624-ffaea31c4058)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Live provider MD5 and BLAKE3 values and catalog size match the approved record."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-offline-verification-candidate.json",
+              "note": "The post-transfer route requires local SHA-256, provider MD5, exact size, safe ZIP structure, CRC, SAFE identity, and analysis-critical members before promotion or pixel use."
+            }
+          ],
+          "note": "Integrity has a fail-closed post-transfer plan; this preflight does not claim local bytes."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(227d0869-e2a2-4258-9624-ffaea31c4058)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The exact approved acquisition date, collection identity, content length, and online status remain available."
+            },
+            {
+              "type": "static",
+              "locator": "config/qa/pixel-readiness-contract.json",
+              "note": "Pixel coverage, masks, grid, and registration remain separately predeclared and untested."
+            }
+          ],
+          "note": "Fit for controlled acquisition and later evaluation only; scientific and pixel fitness remain unknown."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms disclose service-side access logging and EU data-center processing."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-activation-approval.json",
+              "note": "The owner approval forbids credential disclosure, logging, or committing and permits only an existing owner-controlled account or session."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-intake-candidate.json",
+              "note": "Secret policy is references-only and all downloaded archives remain untrusted until offline verification."
+            }
+          ],
+          "note": "No personal study data are present; account telemetry and credential secrecy remain controlled."
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-002",
+      "name": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(844b9a32-9aa2-4611-83f6-ae6501c01955)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(844b9a32-9aa2-4611-83f6-ae6501c01955)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Exact provider UUID, product name, size, and checksums matched; catalog response SHA-256 2a3a34ffc9ec1273352d17aaf83537adbf17d49c20e1f5a2edb2cca5303423af."
+            }
+          ],
+          "note": "Identity matches the exact owner-approved acquisition record."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(844b9a32-9aa2-4611-83f6-ae6501c01955)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The primary Copernicus catalogue returned the product record directly."
+            }
+          ],
+          "note": "Copernicus Data Space Ecosystem is the primary delivery service for this product."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(844b9a32-9aa2-4611-83f6-ae6501c01955)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Product Online was true."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "OData download documentation passed content check; page SHA-256 bc178f27ebcaa8033696bb89d2c86b18385d2cd40997d4eb09233b7143857594 and Last-Modified Fri, 28 Aug 2026 09:21:01 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/Token.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Token documentation confirms access-token use; page SHA-256 70931ccfcd68a1bf9a607687aa13e138f599db0ef840e1bccfaa0f34a9ca6ae3 and Last-Modified Wed, 26 Aug 2026 12:05:47 GMT."
+            }
+          ],
+          "note": "The product is online; download requires an access token. Any interactive login, MFA, recovery, or terms prompt remains a stop."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms state Sentinel data are available free, full, and open under the Sentinel Data Legal Notice; page SHA-256 17ebc07dc1fe685b6a3ef0ec64fd376dc1bf4b500e2d583aded19a53fdd55674, Last-Modified Thu, 03 Sep 2026 15:18:10 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Official Sentinel Data Legal Notice PDF fetched successfully; SHA-256 fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            }
+          ],
+          "note": "Sentinel data may be acquired and analyzed with required source notice. Portal images and other portal material retain narrower noncommercial and redistribution restrictions."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/acquisition-plan.json",
+              "note": "The owner-approved acquisition plan binds the provider UUID, exact product name, source role, and source-manifest lineage."
+            }
+          ],
+          "note": "No full-product custody or transformation has yet occurred."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(844b9a32-9aa2-4611-83f6-ae6501c01955)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Live provider MD5 and BLAKE3 values and catalog size match the approved record."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-offline-verification-candidate.json",
+              "note": "The post-transfer route requires local SHA-256, provider MD5, exact size, safe ZIP structure, CRC, SAFE identity, and analysis-critical members before promotion or pixel use."
+            }
+          ],
+          "note": "Integrity has a fail-closed post-transfer plan; this preflight does not claim local bytes."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(844b9a32-9aa2-4611-83f6-ae6501c01955)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The exact approved acquisition date, collection identity, content length, and online status remain available."
+            },
+            {
+              "type": "static",
+              "locator": "config/qa/pixel-readiness-contract.json",
+              "note": "Pixel coverage, masks, grid, and registration remain separately predeclared and untested."
+            }
+          ],
+          "note": "Fit for controlled acquisition and later evaluation only; scientific and pixel fitness remain unknown."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms disclose service-side access logging and EU data-center processing."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-activation-approval.json",
+              "note": "The owner approval forbids credential disclosure, logging, or committing and permits only an existing owner-controlled account or session."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-intake-candidate.json",
+              "note": "Secret policy is references-only and all downloaded archives remain untrusted until offline verification."
+            }
+          ],
+          "note": "No personal study data are present; account telemetry and credential secrecy remain controlled."
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-003",
+      "name": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(f2682536-f9b8-4b5b-b9eb-5b52417820fa)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(f2682536-f9b8-4b5b-b9eb-5b52417820fa)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Exact provider UUID, product name, size, and checksums matched; catalog response SHA-256 2ebc33981108cc1227ebb57810a77b3717cfb957571f3d77afc374ea6ddd061f."
+            }
+          ],
+          "note": "Identity matches the exact owner-approved acquisition record."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(f2682536-f9b8-4b5b-b9eb-5b52417820fa)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The primary Copernicus catalogue returned the product record directly."
+            }
+          ],
+          "note": "Copernicus Data Space Ecosystem is the primary delivery service for this product."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(f2682536-f9b8-4b5b-b9eb-5b52417820fa)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Product Online was true."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "OData download documentation passed content check; page SHA-256 bc178f27ebcaa8033696bb89d2c86b18385d2cd40997d4eb09233b7143857594 and Last-Modified Fri, 28 Aug 2026 09:21:01 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/Token.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Token documentation confirms access-token use; page SHA-256 70931ccfcd68a1bf9a607687aa13e138f599db0ef840e1bccfaa0f34a9ca6ae3 and Last-Modified Wed, 26 Aug 2026 12:05:47 GMT."
+            }
+          ],
+          "note": "The product is online; download requires an access token. Any interactive login, MFA, recovery, or terms prompt remains a stop."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms state Sentinel data are available free, full, and open under the Sentinel Data Legal Notice; page SHA-256 17ebc07dc1fe685b6a3ef0ec64fd376dc1bf4b500e2d583aded19a53fdd55674, Last-Modified Thu, 03 Sep 2026 15:18:10 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Official Sentinel Data Legal Notice PDF fetched successfully; SHA-256 fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            }
+          ],
+          "note": "Sentinel data may be acquired and analyzed with required source notice. Portal images and other portal material retain narrower noncommercial and redistribution restrictions."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/acquisition-plan.json",
+              "note": "The owner-approved acquisition plan binds the provider UUID, exact product name, source role, and source-manifest lineage."
+            }
+          ],
+          "note": "No full-product custody or transformation has yet occurred."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(f2682536-f9b8-4b5b-b9eb-5b52417820fa)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Live provider MD5 and BLAKE3 values and catalog size match the approved record."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-offline-verification-candidate.json",
+              "note": "The post-transfer route requires local SHA-256, provider MD5, exact size, safe ZIP structure, CRC, SAFE identity, and analysis-critical members before promotion or pixel use."
+            }
+          ],
+          "note": "Integrity has a fail-closed post-transfer plan; this preflight does not claim local bytes."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(f2682536-f9b8-4b5b-b9eb-5b52417820fa)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The exact approved acquisition date, collection identity, content length, and online status remain available."
+            },
+            {
+              "type": "static",
+              "locator": "config/qa/pixel-readiness-contract.json",
+              "note": "Pixel coverage, masks, grid, and registration remain separately predeclared and untested."
+            }
+          ],
+          "note": "Fit for controlled acquisition and later evaluation only; scientific and pixel fitness remain unknown."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms disclose service-side access logging and EU data-center processing."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-activation-approval.json",
+              "note": "The owner approval forbids credential disclosure, logging, or committing and permits only an existing owner-controlled account or session."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-intake-candidate.json",
+              "note": "Secret policy is references-only and all downloaded archives remain untrusted until offline verification."
+            }
+          ],
+          "note": "No personal study data are present; account telemetry and credential secrecy remain controlled."
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-004",
+      "name": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(641ccb0b-5d88-4c44-b558-93b488cd2453)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(641ccb0b-5d88-4c44-b558-93b488cd2453)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Exact provider UUID, product name, size, and checksums matched; catalog response SHA-256 be211b4b3624521742a13bc62fa761f80d45af3baf94809779583684c136605e."
+            }
+          ],
+          "note": "Identity matches the exact owner-approved acquisition record."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(641ccb0b-5d88-4c44-b558-93b488cd2453)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The primary Copernicus catalogue returned the product record directly."
+            }
+          ],
+          "note": "Copernicus Data Space Ecosystem is the primary delivery service for this product."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(641ccb0b-5d88-4c44-b558-93b488cd2453)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Product Online was true."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "OData download documentation passed content check; page SHA-256 bc178f27ebcaa8033696bb89d2c86b18385d2cd40997d4eb09233b7143857594 and Last-Modified Fri, 28 Aug 2026 09:21:01 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/Token.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Token documentation confirms access-token use; page SHA-256 70931ccfcd68a1bf9a607687aa13e138f599db0ef840e1bccfaa0f34a9ca6ae3 and Last-Modified Wed, 26 Aug 2026 12:05:47 GMT."
+            }
+          ],
+          "note": "The product is online; download requires an access token. Any interactive login, MFA, recovery, or terms prompt remains a stop."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms state Sentinel data are available free, full, and open under the Sentinel Data Legal Notice; page SHA-256 17ebc07dc1fe685b6a3ef0ec64fd376dc1bf4b500e2d583aded19a53fdd55674, Last-Modified Thu, 03 Sep 2026 15:18:10 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Official Sentinel Data Legal Notice PDF fetched successfully; SHA-256 fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            }
+          ],
+          "note": "Sentinel data may be acquired and analyzed with required source notice. Portal images and other portal material retain narrower noncommercial and redistribution restrictions."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/acquisition-plan.json",
+              "note": "The owner-approved acquisition plan binds the provider UUID, exact product name, source role, and source-manifest lineage."
+            }
+          ],
+          "note": "No full-product custody or transformation has yet occurred."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(641ccb0b-5d88-4c44-b558-93b488cd2453)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Live provider MD5 and BLAKE3 values and catalog size match the approved record."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-offline-verification-candidate.json",
+              "note": "The post-transfer route requires local SHA-256, provider MD5, exact size, safe ZIP structure, CRC, SAFE identity, and analysis-critical members before promotion or pixel use."
+            }
+          ],
+          "note": "Integrity has a fail-closed post-transfer plan; this preflight does not claim local bytes."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(641ccb0b-5d88-4c44-b558-93b488cd2453)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The exact approved acquisition date, collection identity, content length, and online status remain available."
+            },
+            {
+              "type": "static",
+              "locator": "config/qa/pixel-readiness-contract.json",
+              "note": "Pixel coverage, masks, grid, and registration remain separately predeclared and untested."
+            }
+          ],
+          "note": "Fit for controlled acquisition and later evaluation only; scientific and pixel fitness remain unknown."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms disclose service-side access logging and EU data-center processing."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-activation-approval.json",
+              "note": "The owner approval forbids credential disclosure, logging, or committing and permits only an existing owner-controlled account or session."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-intake-candidate.json",
+              "note": "Secret policy is references-only and all downloaded archives remain untrusted until offline verification."
+            }
+          ],
+          "note": "No personal study data are present; account telemetry and credential secrecy remain controlled."
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "name": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(9cb3c885-cfb8-40cc-a44a-8673e772c794)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(9cb3c885-cfb8-40cc-a44a-8673e772c794)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Exact provider UUID, product name, size, and checksums matched; catalog response SHA-256 e38a25a0182bb4bd8a677c007a421812532597d4afc5e291485c3cc0d409c6ab."
+            }
+          ],
+          "note": "Identity matches the exact owner-approved acquisition record."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(9cb3c885-cfb8-40cc-a44a-8673e772c794)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The primary Copernicus catalogue returned the product record directly."
+            }
+          ],
+          "note": "Copernicus Data Space Ecosystem is the primary delivery service for this product."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(9cb3c885-cfb8-40cc-a44a-8673e772c794)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Product Online was true."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "OData download documentation passed content check; page SHA-256 bc178f27ebcaa8033696bb89d2c86b18385d2cd40997d4eb09233b7143857594 and Last-Modified Fri, 28 Aug 2026 09:21:01 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/Token.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Token documentation confirms access-token use; page SHA-256 70931ccfcd68a1bf9a607687aa13e138f599db0ef840e1bccfaa0f34a9ca6ae3 and Last-Modified Wed, 26 Aug 2026 12:05:47 GMT."
+            }
+          ],
+          "note": "The product is online; download requires an access token. Any interactive login, MFA, recovery, or terms prompt remains a stop."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms state Sentinel data are available free, full, and open under the Sentinel Data Legal Notice; page SHA-256 17ebc07dc1fe685b6a3ef0ec64fd376dc1bf4b500e2d583aded19a53fdd55674, Last-Modified Thu, 03 Sep 2026 15:18:10 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Official Sentinel Data Legal Notice PDF fetched successfully; SHA-256 fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            }
+          ],
+          "note": "Sentinel data may be acquired and analyzed with required source notice. Portal images and other portal material retain narrower noncommercial and redistribution restrictions."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/acquisition-plan.json",
+              "note": "The owner-approved acquisition plan binds the provider UUID, exact product name, source role, and source-manifest lineage."
+            }
+          ],
+          "note": "No full-product custody or transformation has yet occurred."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(9cb3c885-cfb8-40cc-a44a-8673e772c794)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Live provider MD5 and BLAKE3 values and catalog size match the approved record."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-offline-verification-candidate.json",
+              "note": "The post-transfer route requires local SHA-256, provider MD5, exact size, safe ZIP structure, CRC, SAFE identity, and analysis-critical members before promotion or pixel use."
+            }
+          ],
+          "note": "Integrity has a fail-closed post-transfer plan; this preflight does not claim local bytes."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(9cb3c885-cfb8-40cc-a44a-8673e772c794)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The exact approved acquisition date, collection identity, content length, and online status remain available."
+            },
+            {
+              "type": "static",
+              "locator": "config/qa/pixel-readiness-contract.json",
+              "note": "Pixel coverage, masks, grid, and registration remain separately predeclared and untested."
+            }
+          ],
+          "note": "Fit for controlled acquisition and later evaluation only; scientific and pixel fitness remain unknown."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms disclose service-side access logging and EU data-center processing."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-activation-approval.json",
+              "note": "The owner approval forbids credential disclosure, logging, or committing and permits only an existing owner-controlled account or session."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-intake-candidate.json",
+              "note": "Secret policy is references-only and all downloaded archives remain untrusted until offline verification."
+            }
+          ],
+          "note": "No personal study data are present; account telemetry and credential secrecy remain controlled."
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-006",
+      "name": "S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Exact provider UUID, product name, size, and checksums matched; catalog response SHA-256 0d750ce8857c58756d38524f7a5a196afd4115a718de771cc95c350822aa908f."
+            }
+          ],
+          "note": "Identity matches the exact owner-approved acquisition record."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The primary Copernicus catalogue returned the product record directly."
+            }
+          ],
+          "note": "Copernicus Data Space Ecosystem is the primary delivery service for this product."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Product Online was true."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "OData download documentation passed content check; page SHA-256 bc178f27ebcaa8033696bb89d2c86b18385d2cd40997d4eb09233b7143857594 and Last-Modified Fri, 28 Aug 2026 09:21:01 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/Token.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Token documentation confirms access-token use; page SHA-256 70931ccfcd68a1bf9a607687aa13e138f599db0ef840e1bccfaa0f34a9ca6ae3 and Last-Modified Wed, 26 Aug 2026 12:05:47 GMT."
+            }
+          ],
+          "note": "The product is online; download requires an access token. Any interactive login, MFA, recovery, or terms prompt remains a stop."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms state Sentinel data are available free, full, and open under the Sentinel Data Legal Notice; page SHA-256 17ebc07dc1fe685b6a3ef0ec64fd376dc1bf4b500e2d583aded19a53fdd55674, Last-Modified Thu, 03 Sep 2026 15:18:10 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Official Sentinel Data Legal Notice PDF fetched successfully; SHA-256 fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            }
+          ],
+          "note": "Sentinel data may be acquired and analyzed with required source notice. Portal images and other portal material retain narrower noncommercial and redistribution restrictions."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/acquisition-plan.json",
+              "note": "The owner-approved acquisition plan binds the provider UUID, exact product name, source role, and source-manifest lineage."
+            }
+          ],
+          "note": "No full-product custody or transformation has yet occurred."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Live provider MD5 and BLAKE3 values and catalog size match the approved record."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-offline-verification-candidate.json",
+              "note": "The post-transfer route requires local SHA-256, provider MD5, exact size, safe ZIP structure, CRC, SAFE identity, and analysis-critical members before promotion or pixel use."
+            }
+          ],
+          "note": "Integrity has a fail-closed post-transfer plan; this preflight does not claim local bytes."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(36b14dd0-2f5e-459c-bac0-0fb5eb2cccf4)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The exact approved acquisition date, collection identity, content length, and online status remain available."
+            },
+            {
+              "type": "static",
+              "locator": "config/qa/pixel-readiness-contract.json",
+              "note": "Pixel coverage, masks, grid, and registration remain separately predeclared and untested."
+            }
+          ],
+          "note": "Fit for controlled acquisition and later evaluation only; scientific and pixel fitness remain unknown."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms disclose service-side access logging and EU data-center processing."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-activation-approval.json",
+              "note": "The owner approval forbids credential disclosure, logging, or committing and permits only an existing owner-controlled account or session."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-intake-candidate.json",
+              "note": "Secret policy is references-only and all downloaded archives remain untrusted until offline verification."
+            }
+          ],
+          "note": "No personal study data are present; account telemetry and credential secrecy remain controlled."
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-008",
+      "name": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(76de2c15-9281-45e3-8f0b-e97085fa6d69)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(76de2c15-9281-45e3-8f0b-e97085fa6d69)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Exact provider UUID, product name, size, and checksums matched; catalog response SHA-256 613b36210e7122a538773eda62fae9ac9a162122ed333b79dcc5fb8f939b6a06."
+            }
+          ],
+          "note": "Identity matches the exact owner-approved acquisition record."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(76de2c15-9281-45e3-8f0b-e97085fa6d69)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The primary Copernicus catalogue returned the product record directly."
+            }
+          ],
+          "note": "Copernicus Data Space Ecosystem is the primary delivery service for this product."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(76de2c15-9281-45e3-8f0b-e97085fa6d69)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Product Online was true."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "OData download documentation passed content check; page SHA-256 bc178f27ebcaa8033696bb89d2c86b18385d2cd40997d4eb09233b7143857594 and Last-Modified Fri, 28 Aug 2026 09:21:01 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/Token.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Token documentation confirms access-token use; page SHA-256 70931ccfcd68a1bf9a607687aa13e138f599db0ef840e1bccfaa0f34a9ca6ae3 and Last-Modified Wed, 26 Aug 2026 12:05:47 GMT."
+            }
+          ],
+          "note": "The product is online; download requires an access token. Any interactive login, MFA, recovery, or terms prompt remains a stop."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms state Sentinel data are available free, full, and open under the Sentinel Data Legal Notice; page SHA-256 17ebc07dc1fe685b6a3ef0ec64fd376dc1bf4b500e2d583aded19a53fdd55674, Last-Modified Thu, 03 Sep 2026 15:18:10 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Official Sentinel Data Legal Notice PDF fetched successfully; SHA-256 fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            }
+          ],
+          "note": "Sentinel data may be acquired and analyzed with required source notice. Portal images and other portal material retain narrower noncommercial and redistribution restrictions."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/acquisition-plan.json",
+              "note": "The owner-approved acquisition plan binds the provider UUID, exact product name, source role, and source-manifest lineage."
+            }
+          ],
+          "note": "No full-product custody or transformation has yet occurred."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(76de2c15-9281-45e3-8f0b-e97085fa6d69)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Live provider MD5 and BLAKE3 values and catalog size match the approved record."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-offline-verification-candidate.json",
+              "note": "The post-transfer route requires local SHA-256, provider MD5, exact size, safe ZIP structure, CRC, SAFE identity, and analysis-critical members before promotion or pixel use."
+            }
+          ],
+          "note": "Integrity has a fail-closed post-transfer plan; this preflight does not claim local bytes."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(76de2c15-9281-45e3-8f0b-e97085fa6d69)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The exact approved acquisition date, collection identity, content length, and online status remain available."
+            },
+            {
+              "type": "static",
+              "locator": "config/qa/pixel-readiness-contract.json",
+              "note": "Pixel coverage, masks, grid, and registration remain separately predeclared and untested."
+            }
+          ],
+          "note": "Fit for controlled acquisition and later evaluation only; scientific and pixel fitness remain unknown."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms disclose service-side access logging and EU data-center processing."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-activation-approval.json",
+              "note": "The owner approval forbids credential disclosure, logging, or committing and permits only an existing owner-controlled account or session."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-intake-candidate.json",
+              "note": "Secret policy is references-only and all downloaded archives remain untrusted until offline verification."
+            }
+          ],
+          "note": "No personal study data are present; account telemetry and credential secrecy remain controlled."
+        }
+      ]
+    },
+    {
+      "source_id": "M1-SRC-010",
+      "name": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(25faa527-2502-4f7d-a703-cfff3e99d483)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(25faa527-2502-4f7d-a703-cfff3e99d483)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Exact provider UUID, product name, size, and checksums matched; catalog response SHA-256 8b7c1190374c814a4f903934292bd5b60cdb716e7223a817912bd3411685bb19."
+            }
+          ],
+          "note": "Identity matches the exact owner-approved acquisition record."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(25faa527-2502-4f7d-a703-cfff3e99d483)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The primary Copernicus catalogue returned the product record directly."
+            }
+          ],
+          "note": "Copernicus Data Space Ecosystem is the primary delivery service for this product."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(25faa527-2502-4f7d-a703-cfff3e99d483)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Product Online was true."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "OData download documentation passed content check; page SHA-256 bc178f27ebcaa8033696bb89d2c86b18385d2cd40997d4eb09233b7143857594 and Last-Modified Fri, 28 Aug 2026 09:21:01 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/Token.html",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Token documentation confirms access-token use; page SHA-256 70931ccfcd68a1bf9a607687aa13e138f599db0ef840e1bccfaa0f34a9ca6ae3 and Last-Modified Wed, 26 Aug 2026 12:05:47 GMT."
+            }
+          ],
+          "note": "The product is online; download requires an access token. Any interactive login, MFA, recovery, or terms prompt remains a stop."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms state Sentinel data are available free, full, and open under the Sentinel Data Legal Notice; page SHA-256 17ebc07dc1fe685b6a3ef0ec64fd376dc1bf4b500e2d583aded19a53fdd55674, Last-Modified Thu, 03 Sep 2026 15:18:10 GMT."
+            },
+            {
+              "type": "live",
+              "locator": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Official Sentinel Data Legal Notice PDF fetched successfully; SHA-256 fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            }
+          ],
+          "note": "Sentinel data may be acquired and analyzed with required source notice. Portal images and other portal material retain narrower noncommercial and redistribution restrictions."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/acquisition-plan.json",
+              "note": "The owner-approved acquisition plan binds the provider UUID, exact product name, source role, and source-manifest lineage."
+            }
+          ],
+          "note": "No full-product custody or transformation has yet occurred."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(25faa527-2502-4f7d-a703-cfff3e99d483)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Live provider MD5 and BLAKE3 values and catalog size match the approved record."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-offline-verification-candidate.json",
+              "note": "The post-transfer route requires local SHA-256, provider MD5, exact size, safe ZIP structure, CRC, SAFE identity, and analysis-critical members before promotion or pixel use."
+            }
+          ],
+          "note": "Integrity has a fail-closed post-transfer plan; this preflight does not claim local bytes."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(25faa527-2502-4f7d-a703-cfff3e99d483)?%24expand=Attributes",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "The exact approved acquisition date, collection identity, content length, and online status remain available."
+            },
+            {
+              "type": "static",
+              "locator": "config/qa/pixel-readiness-contract.json",
+              "note": "Pixel coverage, masks, grid, and registration remain separately predeclared and untested."
+            }
+          ],
+          "note": "Fit for controlled acquisition and later evaluation only; scientific and pixel fitness remain unknown."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-03T17:31:17Z",
+              "note": "Current terms disclose service-side access logging and EU data-center processing."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-activation-approval.json",
+              "note": "The owner approval forbids credential disclosure, logging, or committing and permits only an existing owner-controlled account or session."
+            },
+            {
+              "type": "static",
+              "locator": "contracts/m2-intake-candidate.json",
+              "note": "Secret policy is references-only and all downloaded archives remain untrusted until offline verification."
+            }
+          ],
+          "note": "No personal study data are present; account telemetry and credential secrecy remain controlled."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "ready",
+    "blocking_reasons": [],
+    "live_verification_pending": [],
+    "approved_actions": [
+      "create approved external custody root",
+      "authenticate with an owner-controlled existing CDSE account or session",
+      "download the eight exact approved products",
+      "verify transferred bytes and product containers",
+      "inspect product pixels for baseline fitness"
+    ]
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": [
+      "record live source evidence",
+      "create the exact approved external custody root after this fresh preflight",
+      "download and verify only the eight exact products under the active M2 contract"
+    ],
+    "requires_explicit_authorization": [
+      "authenticate",
+      "accept terms",
+      "purchase",
+      "download content",
+      "publish or redistribute"
+    ]
+  }
+}

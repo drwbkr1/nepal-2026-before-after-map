@@ -13,15 +13,30 @@ Validation is staged. Passing repository checks does not validate pixels or scie
 
 GitHub Actions runs the same check on pushes and pull requests.
 
+The current repository check also validates the exact M2 approval and reconciliation, active contract, live source gate, non-mutating preflight, initialized-custody receipt, active intake contract, authentication stop, and three independent candidate before/after routes. It does not access the external custody root in CI or treat the public receipt as proof that another machine has the local data directory.
+
 Portable unit tests also verify the ArcGIS evidence schema, the separation of observation, interpretation, and attribution, required adverse states, initial empty scientific state, receipt bindings, preview hash, and retained failures:
 
 ```powershell
 python -m unittest tests.test_arcgis_evidence_schema -v
 ```
 
-## M2 static intake-control validation
+## M2 activation, preflight, and intake validation
 
-Before any activation or data transfer, the repository also verifies that:
+The active M2 records can be checked with the project and skill validators:
+
+```powershell
+python scripts/check_project.py
+python C:\Users\drewb\.codex\skills\gate-external-sources\scripts\validate_source_gate.py records/source-gates/m2-live-source-gate.json --as-of 2026-09-03T17:31:17Z
+python C:\Users\drewb\.codex\skills\intake-controlled-data\scripts\validate_intake_contract.py contracts/m2-intake.json --project-root C:\Projects\Active --json
+python C:\Users\drewb\.codex\skills\run-controlled-milestone\scripts\validate_milestone.py contracts/milestone-002.json --project-profile records/project-control-profile.json --as-of 2026-09-03T17:35:43Z
+```
+
+The live record proves only the source and custody preflight at its stated timestamp. It does not prove an authenticated transfer, current future availability, local bytes, valid product containers, usable pixels, or scientific fitness.
+
+## Historical static intake-control validation
+
+Before activation or data transfer, the repository established that:
 
 - the candidate intake contract binds the exact reviewed acquisition plan, proposed M2 contract, and pending activation bundle;
 - all eight assets remain `planned` with no attempts and pending authorization;

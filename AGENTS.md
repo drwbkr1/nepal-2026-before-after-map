@@ -6,11 +6,11 @@ Maintain an evidence-bound, ArcGIS-ready before/after map of the 26 August 2026 
 
 ## Current authority
 
-The long-term goal is active and M1 is complete. There is no active acquisition milestone. `contracts/milestone-001.json` is the last completed contract, `contracts/milestone-002-proposal.json` is a non-authorizing proposal, and `records/project-control-profile.json` is the routing manifest.
+The long-term goal is active, M1 is complete, and `contracts/milestone-002.json` is the active acquisition milestone. `contracts/milestone-002-proposal.json` remains immutable proposal evidence, while `records/project-control-profile.json` is the routing manifest.
 
-Until the owner approves the exact M2 activation review bundle, do not create the proposed external custody root, use credentials or authenticated sessions, download or extract full satellite products, or begin baseline raster processing. Preparing and validating public control records does not activate M2.
+The exact M2 activation was approved and reconciled on 3 September 2026. The live source/path/storage preflight passed, and the empty external custody structure was initialized at `C:\Projects\Active\nepal-2026-before-after-map-data`. The current checkpoint is `M2-AUTHENTICATION-REFERENCE`: do not attempt a product transfer until a secret-safe reference to an existing owner-controlled CDSE credential or authenticated session is available. Stop on interactive login, MFA, recovery, new terms, identity drift, a paid route, unsafe paths, or collision.
 
-Full satellite-product downloads, credential use, provider terms acceptance, spending, repository-license selection, high-resolution restricted imagery, scientific-claim publication, and irreversible external actions remain human gates unless a later exact contract grants them.
+The active contract permits acquisition and verification of only the eight exact reviewed products. It does not permit provider-terms acceptance, account creation or recovery, credential disclosure, spending, repository-license selection, high-resolution restricted imagery, scientific-claim publication, or irreversible external actions outside its exact boundary.
 
 ## Source and custody rules
 

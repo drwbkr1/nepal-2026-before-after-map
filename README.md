@@ -15,7 +15,7 @@ The project should ultimately deliver:
 - portable ArcGIS layer and project packages plus GeoTIFF, GeoPackage/File Geodatabase, PDF, and PNG exports;
 - a public, reproducible method record that preserves limitations and failed or inconclusive analytical routes.
 
-This goal is **active as of 1 September 2026**. M1 is complete: the search and review AOIs are owner-approved, projected to EPSG:32645, and validated through ArcGIS Pro, and the exact source manifest is approved with eight sources accepted for controlled acquisition planning and two preserved as deferred context. M2 is proposed but not active. Full imagery acquisition, authenticated-session use, terms acceptance, restricted high-resolution imagery, and publication of scientific conclusions remain separately gated.
+This goal is **active as of 1 September 2026**. M1 is complete: the search and review AOIs are owner-approved, projected to EPSG:32645, and validated through ArcGIS Pro, and the exact source manifest is approved with eight sources accepted for controlled acquisition and two preserved as deferred context. M2 was activated by an exact owner decision on 3 September 2026. Its live source and custody preflight passed, and the approved empty external custody structure was initialized. No product bytes have been downloaded, no authentication occurred, and no usable pixels or scientific change have been established.
 
 ## Why this is useful
 
@@ -44,9 +44,11 @@ Public visibility does not grant reuse rights to third-party data. No repository
 
 ## Current checkpoint
 
-Milestones 0 and 1 are complete. The exact AOI and source-manifest decisions are locked and reconciled. The current gate is owner review of a proposed M2 plan covering eight exact Sentinel downloads into non-Git custody. The proposal does not authorize authentication, custody-root creation, downloads, or terms acceptance, and no usable pixels or scientific change have been established.
+Milestones 0 and 1 are complete, and the exact M2 activation decision is locked and reconciled. The active M2 contract covers only the eight reviewed Sentinel products. At `2026-09-03T17:31:17Z`, the live preflight revalidated the official access and rights pages, confirmed that all eight product identities, catalog sizes, checksums, and online states were unchanged, found 514.942 GiB free, and verified an absent collision-free external root outside Git. The empty root, custody directory, and staging directory were then created with matching append-only receipts.
 
-A deterministic, network-free M2 intake packet is prepared for the eight exact products. It fixes sibling staging and custody paths, fail-on-collision and no-replace promotion rules, secret references, and attempt retention without changing the pending review bundle or creating acquisition authority.
+The current checkpoint is `M2-AUTHENTICATION-REFERENCE`. Preflight found no credential reference in the process environment, so no login or transfer was attempted. Continuation requires a secret-safe reference to an existing owner-controlled CDSE access token or authenticated session. Tokens, passwords, cookies, and authorization headers must not be placed in Git, chat, filenames, receipts, or captured command output.
+
+The active intake contract fixes sibling staging and custody paths, fail-on-collision and atomic no-replace promotion rules, secret references, and attempt retention. The reviewed proposal, acquisition plan, review bundle, and public blank response remain unchanged historical evidence.
 
 A deterministic offline verification packet now defines exact archive, checksum, ZIP-safety, SAFE-structure, band, polarization, and post-container pixel-readiness checks for the same eight products. Its independent dataset-readiness result is **DEFER** because no product bytes, access-time rights evidence, AOI pixel coverage, masks, or registration results exist. The packet made no external-custody access or network request.
 

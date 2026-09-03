@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "plan_id": "NEPAL-PAIR-PLAN-001",
+  "status": "predeclared_candidate_routes_no_pixel_or_acquisition_authority",
+  "created_at_utc": "2026-09-03T17:30:00Z",
+  "source_bindings": {
+    "source_manifest": "records/source-manifest.json",
+    "source_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+    "source_manifest_approval": "records/source-gates/source-manifest-approval.json",
+    "source_manifest_approval_sha256": "c6df8c24adc96439e8b8ef00c733db8fc3cd3ffb229b333b1d8a63933f3aa04e",
+    "pixel_readiness_contract": "config/qa/pixel-readiness-contract.json",
+    "pixel_readiness_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"
+  },
+  "pairs": [
+    {
+      "pair_id": "PAIR-S1-ASC-R085-IW",
+      "sensor_route": "radar",
+      "mask_profile": "radar_mask",
+      "before_source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002"
+      ],
+      "after_source_ids": [
+        "M1-SRC-004",
+        "M1-SRC-005"
+      ],
+      "comparability": {
+        "orbit_direction": "ASCENDING",
+        "relative_orbit_number": 85,
+        "operational_mode": "IW",
+        "nominal_gap_days": 12
+      },
+      "target_cell_size_m": 10.0,
+      "analysis_role": "independent_ascending_radar_mosaic_route",
+      "approved_aoi_scope": [
+        "AOI-OVERVIEW",
+        "AOI-SOURCE",
+        "AOI-UPPER-CORRIDOR"
+      ],
+      "pixel_status": "not_evaluated_no_pixels",
+      "limitations": [
+        "The two slices must be assembled independently by date without hiding seam or coverage failures.",
+        "Terrain correction, layover, shadow, water variability, speckle, and registration remain untested."
+      ]
+    },
+    {
+      "pair_id": "PAIR-S1-DESC-R121-IW",
+      "sensor_route": "radar",
+      "mask_profile": "radar_mask",
+      "before_source_ids": [
+        "M1-SRC-003"
+      ],
+      "after_source_ids": [
+        "M1-SRC-006"
+      ],
+      "comparability": {
+        "orbit_direction": "DESCENDING",
+        "relative_orbit_number": 121,
+        "operational_mode": "IW",
+        "nominal_gap_days": 12
+      },
+      "target_cell_size_m": 10.0,
+      "analysis_role": "independent_descending_radar_route",
+      "approved_aoi_scope": [
+        "AOI-OVERVIEW",
+        "AOI-SOURCE",
+        "AOI-UPPER-CORRIDOR"
+      ],
+      "pixel_status": "not_evaluated_no_pixels",
+      "limitations": [
+        "This route must remain separate from the ascending route until both have independent QA outcomes.",
+        "Terrain correction, layover, shadow, water variability, speckle, and registration remain untested."
+      ]
+    },
+    {
+      "pair_id": "PAIR-S2-RUM-R119",
+      "sensor_route": "optical",
+      "mask_profile": "optical_scl",
+      "before_source_ids": [
+        "M1-SRC-010"
+      ],
+      "after_source_ids": [
+        "M1-SRC-008"
+      ],
+      "comparability": {
+        "tile_id": "45RUM",
+        "relative_orbit_number": 119,
+        "operational_mode": "INS-NOBS",
+        "nominal_gap_days": 15
+      },
+      "target_cell_size_m": 20.0,
+      "analysis_role": "independent_optical_multispectral_route",
+      "approved_aoi_scope": [
+        "AOI-OVERVIEW",
+        "AOI-SOURCE",
+        "AOI-UPPER-CORRIDOR"
+      ],
+      "pixel_status": "not_evaluated_no_pixels",
+      "limitations": [
+        "The post-event catalog cloud estimate is 78.471315 percent and may leave this route partial or unusable.",
+        "SCL, saturation, nodata, snow, shadow, cirrus, scaling, and registration remain untested."
+      ]
+    }
+  ],
+  "decision_semantics": {
+    "evaluate_routes_independently": true,
+    "preserve_failed_and_inconclusive_routes": true,
+    "synthetic_inputs_create_source_association": false,
+    "qa_pass_creates_scientific_admission": false,
+    "cross_route_synthesis_requires_later_review": true
+  },
+  "authority": {
+    "mode": "not_granted",
+    "authorized_actions": [],
+    "m2_activation_review_bundle_sha256": "e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d",
+    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d"
+  },
+  "claim_boundary": "This plan fixes candidate comparison routes from approved source identities. It does not establish custody, raster lineage, pixel usability, change, interpretation, attribution, or acquisition authority."
+}

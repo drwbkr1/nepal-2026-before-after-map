@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-ACTIVATION-APPROVAL-001",
+  "status": "approved",
+  "approved_at_utc": "2026-09-03T17:24:06Z",
+  "review_id": "m2-activation-review-001",
+  "review_bundle_id": "m2-activation-review-bundle-001",
+  "review_bundle_manifest_sha256": "e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d",
+  "acquisition_plan_ref": "records/acquisition-plan.json",
+  "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+  "review_reconciliation_ref": "records/source-gates/m2-activation-review-reconciliation.json",
+  "review_reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0",
+  "locked_response_sha256": "be9c62a9e5e49ddff371254369c7936360f45e87e44ea5c6b3f09ac69c4c06be",
+  "lock_receipt_sha256": "b0554b9c0cb115165fb4857ee5b7b8f993a2136910940e9379a0f8dd7e7a556c",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "approval_scope": "Activate only the bounded M2 actions stated in the exact reviewed acquisition plan and proposal.",
+  "authorized_next_actions": [
+    "perform a fresh storage and path preflight",
+    "create the exact external non-Git custody root after that preflight passes",
+    "use an owner-controlled existing Copernicus account or authenticated session",
+    "download only the eight exact approved provider products",
+    "verify checksums, archive structure, bands, pixels, coverage, access-time rights, baseline fitness, and registration",
+    "preserve failed, partial, corrupt, deferred, inconclusive, and superseded attempts"
+  ],
+  "does_not_authorize": [
+    "accept new or changed provider terms",
+    "create or recover an account or change account security",
+    "disclose, copy, log, or commit credentials, tokens, cookies, or authorization headers",
+    "incur cost or use a paid route",
+    "download any product outside the eight exact approved identities",
+    "use or redistribute restricted high-resolution imagery",
+    "select a repository license",
+    "publish scientific conclusions, event attribution, or emergency guidance",
+    "store imagery, rasters, geodatabases, or ArcGIS packages in Git"
+  ],
+  "human_decisions_fabricated": false
+}

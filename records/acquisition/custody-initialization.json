@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-CUSTODY-INITIALIZATION-001",
+  "status": "created_and_verified",
+  "created_at_utc": "2026-09-03T17:34:04Z",
+  "authority": {
+    "approval_ref": "records/source-gates/m2-activation-approval.json",
+    "approval_sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
+    "active_contract_ref": "contracts/milestone-002.json",
+    "active_contract_sha256_at_initialization": "f2887de09adb82875051921ddde4c1715a48a8aa1cfc1cf4988ea11f82cd37f4"
+  },
+  "bindings": {
+    "preflight_ref": "records/acquisition/preflight.json",
+    "preflight_sha256": "58b21c8b49df9e667d3b4fe168cced7ec9f113f9adf82ed8e9fd698b4b3545da",
+    "source_gate_ref": "records/source-gates/m2-live-source-gate.json",
+    "source_gate_sha256": "913919d86d78ec2b03b5e8d20db9aef039938faa2437a6c906fcd93cb9dcc9a2",
+    "active_intake_ref": "contracts/m2-intake.json",
+    "active_intake_sha256_before_initialization": "288b40a0fa161326c27630f406fb464a6c601114c3ff07b04abe0c60c26397d2"
+  },
+  "paths": {
+    "external_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "custody_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody",
+    "staging_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001",
+    "external_receipt": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody-initialization-receipt.json"
+  },
+  "created_paths": [
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001"
+  ],
+  "verification": {
+    "all_paths_exist": true,
+    "all_paths_not_reparse_points": true,
+    "external_root_outside_git": true,
+    "free_bytes_before": 552865984512,
+    "minimum_free_gib": 60.0,
+    "files_downloaded": 0,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false
+  },
+  "next_gate": "A secret-safe reference to an existing owner-controlled CDSE credential or authenticated session is required before the first exact-product transfer."
+}

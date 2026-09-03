@@ -58,7 +58,7 @@
 
 **Decision:** Propose a bounded M2 route for a fresh storage preflight, external non-Git custody, use of an owner-controlled existing Copernicus account or authenticated session, and download and verification of only the eight exact M1-approved products.
 **Reason:** M1 has fixed source identities and dispositions, but product custody, pixels, masks, rights at access time, checksums, and baseline quality remain untested.
-**Status:** Proposed for owner review in bundle SHA-256 `e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d`. No M2 authority exists until an exact completed decision is locked and reconciled. New or changed terms, account changes, spending, and scientific publication remain outside the proposal.
+**Status:** Approved by the owner on 3 September 2026 through the exact review bundle SHA-256 `e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d` and acquisition-plan SHA-256 `6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d`. The completed response was locked and reconciled before activation. New or changed terms, account changes, credential disclosure, spending, products outside the exact eight, and scientific publication remain outside the approval.
 
 ## D-011 — ArcGIS evidence model
 
@@ -70,10 +70,16 @@
 
 **Decision:** Require exact local SHA-256, provider-MD5 agreement, catalog-size review, safe ZIP structure, CRC, exact SAFE root identity, and analysis-critical Sentinel-1 or Sentinel-2 members before any acquired product advances to raster and AOI pixel QA.
 **Reason:** A successful transfer or present filename does not establish a complete, untampered, analysis-capable product; a complete container still does not establish usable pixels or scientific fitness.
-**Status:** Implemented as deterministic, non-authorizing controls with synthetic tests. The product-readiness audit remains `defer` because M2 is not active and no product bytes have been examined.
+**Status:** Implemented as deterministic controls with synthetic tests. M2 is now active, but the historical pre-acquisition readiness audit remains `defer` because no product bytes have been examined.
 
 ## D-013 — Predeclared projected pixel-readiness thresholds
 
 **Decision:** Judge each real-product route against fixed EPSG:32645 AOI-coverage, mask, grid-alignment, and registration rules before admitting satellite observations. Treat a QA pass as fitness evidence only; retain route-level `block`, `defer`, and `invalid` outcomes without automatically rejecting the source identity.
 **Reason:** Pixel usability cannot be inferred from catalog coverage or container structure, and thresholds chosen after viewing change could bias the result. A portable core keeps decisions reproducible while an ArcGIS-native adapter proves projected area and raster-grid behavior on the target platform.
 **Status:** Contract and core implemented before product access. ArcGIS Pro 3.7.1 Advanced and Spatial Analyst passed deterministic 20 m synthetic coverage for all three approved AOIs, passed an aligned pair, blocked an intentional 0.6-pixel shift, and deferred unmeasured registration. No real pixels or scientific evidence were admitted.
+
+## D-014 — Activated M2 source gate and empty custody initialization
+
+**Decision:** Execute only the approved non-mutating live preflight, then create the exact empty external custody and staging structure after every source, rights, identity, path, collision, and storage check passes.
+**Reason:** Catalog approval alone does not establish current availability or a safe destination, and authentication must remain separate from public records and filesystem initialization.
+**Status:** Completed on 3 September 2026. All eight exact products were online with unchanged names, UUIDs, sizes, and provider checksums; the source gate passed 64 required criteria; 514.942 GiB was free; and matching repository/external custody receipts have SHA-256 `12812d1c53e13ec287425f74a1988f5c0be7d0638f856c9606fddf1c1431fb09`. No authentication or product transfer occurred. Work stops at `M2-AUTHENTICATION-REFERENCE` pending a secret-safe existing owner-controlled credential or session reference.
