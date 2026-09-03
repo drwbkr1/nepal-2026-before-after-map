@@ -71,7 +71,9 @@
         "successful_attempt_receipt": "records/acquisition/dem-attempts/m2-dem-001-20260903T210105Z-59f7dbc0.json",
         "successful_attempt_receipt_sha256": "a9905f749b288cfc2d4b98e7fd9ed64e91ea4b5b5e0b256f469d879908dca02e",
         "provider_checksum_available": false,
-        "geotiff_verification_status": "pending"
+        "geotiff_verification_status": "pass_structural_and_full_tile_finite",
+        "geotiff_verification_receipt": "records/acquisition/dem-verification/m2-dem-001-attempt-003.json",
+        "geotiff_verification_receipt_sha256": "7105f4ac4519ef0727795476d0dc48c30677e759c49b70eba34c4cc496f2ef66"
       }
     },
     {
@@ -137,7 +139,9 @@
         "successful_attempt_receipt": "records/acquisition/dem-attempts/m2-dem-002-20260903T211011Z-0c71d865.json",
         "successful_attempt_receipt_sha256": "f196825ca028df92165622548e3f26be25bd1a732898aba3d898b899992c04e0",
         "provider_checksum_available": false,
-        "geotiff_verification_status": "pending"
+        "geotiff_verification_status": "pass_structural_and_full_tile_finite",
+        "geotiff_verification_receipt": "records/acquisition/dem-verification/m2-dem-002-attempt-001.json",
+        "geotiff_verification_receipt_sha256": "f34d966de72e3848e4654ed7fdb25c27adf43053e69c79b98b57acfdb455c588"
       }
     },
     {
@@ -203,7 +207,9 @@
         "successful_attempt_receipt": "records/acquisition/dem-attempts/m2-dem-003-20260903T211120Z-76afbee1.json",
         "successful_attempt_receipt_sha256": "4f97e9be6e3b191a4b2ddc427010461bf3488d8ae363c25003837296b1f758bd",
         "provider_checksum_available": false,
-        "geotiff_verification_status": "pending"
+        "geotiff_verification_status": "pass_structural_and_full_tile_finite",
+        "geotiff_verification_receipt": "records/acquisition/dem-verification/m2-dem-003-attempt-001.json",
+        "geotiff_verification_receipt_sha256": "7de7861dab0a2342075abcfb5661d3e225491dc869d2efc096a424a6594adf8e"
       }
     },
     {
@@ -269,12 +275,14 @@
         "successful_attempt_receipt": "records/acquisition/dem-attempts/m2-dem-004-20260903T211203Z-fea29d6d.json",
         "successful_attempt_receipt_sha256": "c12edbbe6a9f0dcbba73e0cf7ad128b80567df51f540a3ce291c41d334209ea5",
         "provider_checksum_available": false,
-        "geotiff_verification_status": "pending"
+        "geotiff_verification_status": "pass_structural_and_full_tile_finite",
+        "geotiff_verification_receipt": "records/acquisition/dem-verification/m2-dem-004-attempt-001.json",
+        "geotiff_verification_receipt_sha256": "8ebce71e1d4219567b7236409357d8b1d43951e9fe05d3e83b783df36252ffdc"
       }
     }
   ],
   "extensions": {
-    "status": "active_all_promoted_pending_geotiff_verification",
+    "status": "active_geotiff_verified_vertical_datum_deferred",
     "project_root_basis": "parent_of_repository",
     "candidate_manifest_ref": "records/source-gates/m2-dem-candidate-manifest.json",
     "candidate_manifest_sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243",
@@ -304,6 +312,8 @@
     "last_reconciled_attempt_id": "m2-dem-004-20260903T211203Z-fea29d6d",
     "last_reconciled_at_utc": "2026-09-03T21:12:43Z",
     "last_checkpoint_ref": "records/acquisition/dem-checkpoints/m2-dem-004-20260903T211203Z-fea29d6d.json",
-    "last_checkpoint_sha256": "43e9bf7d20ebb74501a45f1582120fbe51c965835afb5d1e8ac07a2388339870"
+    "last_checkpoint_sha256": "43e9bf7d20ebb74501a45f1582120fbe51c965835afb5d1e8ac07a2388339870",
+    "dem_verification_summary_ref": "records/acquisition/dem-verification-summary.json",
+    "dem_verification_summary_sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef"
   }
 }

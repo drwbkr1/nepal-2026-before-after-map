@@ -441,7 +441,7 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "external DEM custody",
         "contracts/m2-dem-offline-verification.json"
@@ -449,17 +449,26 @@
       "outputs": [
         "records/acquisition/dem-verification-summary.json"
       ],
-      "gates": {},
-      "disposition": null,
+      "gates": {
+        "passing_tile_count": 4,
+        "retained_failed_attempt_count": 2,
+        "approved_aoi_valid_coverage": true,
+        "summary_ref": "records/acquisition/dem-verification-summary.json",
+        "summary_sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef"
+      },
+      "disposition": "pass",
       "retained_failures": [],
       "exit_condition_delta": {
         "expected": [
           "EXIT-201-VERIFIED-CUSTODY",
           "EXIT-202-PIXEL-AND-RIGHTS-QA"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "No DEM bytes have been transferred or inspected."
+        "observed": [
+          "EXIT-201-VERIFIED-CUSTODY",
+          "EXIT-202-PIXEL-AND-RIGHTS-QA"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "Four exact ArcGIS structural passes and full-tile finite scans cover every approved AOI; vertical-datum and radar-processing fitness remain separate."
       },
       "next_dependency": "M2-BASELINE"
     }
@@ -518,7 +527,7 @@
       "No full-product bytes are yet in custody and no pixel usability or scientific change is established.",
       "The post-event optical route remains high-cloud-risk and may be inconclusive."
     ],
-    "parallel_checkpoint": "M2-DEM-GEOTIFF-VERIFICATION",
-    "parallel_next_action": "Run the active offline ArcGIS GeoTIFF verifier for each of the four promoted DEM tiles; do not infer pixel or vertical-datum fitness from transfer success."
+    "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
+    "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
   }
 }

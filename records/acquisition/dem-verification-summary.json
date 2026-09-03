@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "summary_id": "NEPAL-M2-DEM-GEOTIFF-VERIFICATION-SUMMARY-001",
+  "status": "pass_structural_and_valid_aoi_coverage_vertical_datum_deferred",
+  "completed_at_utc": "2026-09-03T21:32:49Z",
+  "bindings": {
+    "active_verification_ref": "contracts/m2-dem-offline-verification.json",
+    "active_verification_sha256_before_completion": "6534eda0c3dc11d5bedfd3d9b0c8cbb1b1df3a0638faa7becd904e6843326dac",
+    "active_intake_ref": "contracts/m2-dem-intake.json",
+    "active_intake_sha256_before_completion": "0c41f0c6028b09140f0107f97702f346d92242a74aa67e07037027120891fc64",
+    "approved_aoi_ref": "config/aoi/approved-study-areas.geojson",
+    "approved_aoi_sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98",
+    "completion_script_ref": "scripts/complete_m2_dem_verification.py",
+    "completion_script_sha256": "5ffce6ec5bb026431320dc81b6837b926d73531619ce4b2bec3122749ffd6f09"
+  },
+  "passing_assets": [
+    {
+      "source_id": "M2-DEM-001",
+      "asset_id": "m2-dem-001",
+      "receipt_ref": "records/acquisition/dem-verification/m2-dem-001-attempt-003.json",
+      "receipt_sha256": "7105f4ac4519ef0727795476d0dc48c30677e759c49b70eba34c4cc496f2ef66",
+      "local_size_bytes": 45336691,
+      "local_sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a",
+      "shape": [
+        3600,
+        3600
+      ],
+      "crs_wkid": 4326,
+      "minimum": 69.10433959960938,
+      "maximum": 2344.464111328125,
+      "valid_cell_count": 12960000,
+      "nodata_or_nonfinite_cell_count": 0
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "asset_id": "m2-dem-002",
+      "receipt_ref": "records/acquisition/dem-verification/m2-dem-002-attempt-001.json",
+      "receipt_sha256": "f34d966de72e3848e4654ed7fdb25c27adf43053e69c79b98b57acfdb455c588",
+      "local_size_bytes": 44874244,
+      "local_sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194",
+      "shape": [
+        3600,
+        3600
+      ],
+      "crs_wkid": 4326,
+      "minimum": 86.5,
+      "maximum": 4461.53857421875,
+      "valid_cell_count": 12960000,
+      "nodata_or_nonfinite_cell_count": 0
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "asset_id": "m2-dem-003",
+      "receipt_ref": "records/acquisition/dem-verification/m2-dem-003-attempt-001.json",
+      "receipt_sha256": "7de7861dab0a2342075abcfb5661d3e225491dc869d2efc096a424a6594adf8e",
+      "local_size_bytes": 41688284,
+      "local_sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc",
+      "shape": [
+        3600,
+        3600
+      ],
+      "crs_wkid": 4326,
+      "minimum": 319.23883056640625,
+      "maximum": 8043.81494140625,
+      "valid_cell_count": 12960000,
+      "nodata_or_nonfinite_cell_count": 0
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "asset_id": "m2-dem-004",
+      "receipt_ref": "records/acquisition/dem-verification/m2-dem-004-attempt-001.json",
+      "receipt_sha256": "8ebce71e1d4219567b7236409357d8b1d43951e9fe05d3e83b783df36252ffdc",
+      "local_size_bytes": 38402839,
+      "local_sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7",
+      "shape": [
+        3600,
+        3600
+      ],
+      "crs_wkid": 4326,
+      "minimum": 656.4984130859375,
+      "maximum": 7920.26953125,
+      "valid_cell_count": 12960000,
+      "nodata_or_nonfinite_cell_count": 0
+    }
+  ],
+  "retained_failed_attempts": [
+    {
+      "source_id": "M2-DEM-001",
+      "receipt_ref": "records/acquisition/dem-verification/m2-dem-001-attempt-002.json",
+      "receipt_sha256": "aec85a69c3568ec08c9ac19da75b43ec3ab6ab0bdd4371228b8f63f9318ac08b",
+      "status": "fail_retained_superseded_as_data_result"
+    },
+    {
+      "source_id": "M2-DEM-001",
+      "receipt_ref": "records/acquisition/dem-verification/m2-dem-001.json",
+      "receipt_sha256": "7a6a28023723a7505ea0e88afb2d7b760a4ee63e9f8c23c57db6d2b4152f0bef",
+      "status": "fail_retained_superseded_as_data_result"
+    }
+  ],
+  "aoi_coverage": [
+    {
+      "aoi_id": "AOI-OVERVIEW",
+      "bbox_wgs84": [
+        84.7,
+        27.75,
+        85.65,
+        28.45
+      ],
+      "within_verified_four_tile_footprint": true,
+      "all_footprint_tiles_full_finite_non_nodata": true,
+      "status": "pass_valid_coverage"
+    },
+    {
+      "aoi_id": "AOI-SOURCE",
+      "bbox_wgs84": [
+        85.46,
+        28.23,
+        85.58,
+        28.34
+      ],
+      "within_verified_four_tile_footprint": true,
+      "all_footprint_tiles_full_finite_non_nodata": true,
+      "status": "pass_valid_coverage"
+    },
+    {
+      "aoi_id": "AOI-UPPER-CORRIDOR",
+      "bbox_wgs84": [
+        85.28,
+        28.1,
+        85.45,
+        28.38
+      ],
+      "within_verified_four_tile_footprint": true,
+      "all_footprint_tiles_full_finite_non_nodata": true,
+      "status": "pass_valid_coverage"
+    }
+  ],
+  "totals": {
+    "passing_tile_count": 4,
+    "retained_failed_attempt_count": 2,
+    "verified_bytes": 170302058,
+    "finite_non_nodata_cells": 51840000,
+    "nodata_or_nonfinite_cells": 0
+  },
+  "claim_boundary": {
+    "exact_local_byte_identity_established": true,
+    "arcgis_geotiff_structural_fitness_established": true,
+    "approved_aoi_valid_pixel_coverage_established": true,
+    "void_seam_artifact_review_established": false,
+    "vertical_datum_route_established": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  },
+  "next_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW"
+}

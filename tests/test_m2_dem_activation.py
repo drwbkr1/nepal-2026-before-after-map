@@ -68,6 +68,7 @@ class M2DemActivationTests(unittest.TestCase):
                 "active_acquisition_in_progress",
                 "active_acquisition_review_required",
                 "active_all_promoted_pending_geotiff_verification",
+                "active_geotiff_verified_vertical_datum_deferred",
             },
         )
         self.assertEqual(len(self.active_intake["assets"]), 4)
@@ -99,6 +100,7 @@ class M2DemActivationTests(unittest.TestCase):
                 "active_gate_deferred_incomplete_acquisition",
                 "active_gate_blocked_acquisition_review",
                 "active_gate_ready_for_geotiff_verification",
+                "complete_structural_and_valid_coverage_vertical_datum_deferred",
             },
         )
         authority = self.active_verification["authority"]
@@ -114,11 +116,15 @@ class M2DemActivationTests(unittest.TestCase):
     def test_milestone_and_profile_preserve_parallel_dem_route(self) -> None:
         units = {unit["id"]: unit for unit in self.milestone["units"]}
         all_promoted = all(asset["state"] == "promoted" for asset in self.active_intake["assets"])
-        expected_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION" if all_promoted else "M2-DEM-ACQUISITION"
+        all_verified = all(
+            asset["extensions"].get("geotiff_verification_status") == "pass_structural_and_full_tile_finite"
+            for asset in self.active_intake["assets"]
+        )
+        expected_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW" if all_verified else ("M2-DEM-GEOTIFF-VERIFICATION" if all_promoted else "M2-DEM-ACQUISITION")
         self.assertEqual(units["M2-DEM-AMEND"]["status"], "complete")
         self.assertEqual(units["M2-DEM-PREFLIGHT"]["status"], "complete")
         self.assertEqual(units["M2-DEM-ACQUIRE"]["status"], "complete" if all_promoted else "ready")
-        self.assertEqual(units["M2-DEM-VERIFY"]["status"], "ready" if all_promoted else "planned")
+        self.assertEqual(units["M2-DEM-VERIFY"]["status"], "complete" if all_verified else ("ready" if all_promoted else "planned"))
         self.assertEqual(set(units["M2-BASELINE"]["depends_on"]), {"M2-VERIFY", "M2-DEM-VERIFY"})
         self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], [])
         self.assertEqual(

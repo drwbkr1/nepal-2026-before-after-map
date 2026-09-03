@@ -2,12 +2,12 @@
   "contract_version": "1.0",
   "verification_id": "NEPAL-M2-DEM-OFFLINE-VERIFICATION-001",
   "created_at": "2026-09-03T20:27:26Z",
-  "status": "active_gate_ready_for_geotiff_verification",
+  "status": "complete_structural_and_valid_coverage_vertical_datum_deferred",
   "inputs": {
     "candidate_manifest_ref": "records/source-gates/m2-dem-candidate-manifest.json",
     "candidate_manifest_sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243",
     "intake_contract_ref": "contracts/m2-dem-intake.json",
-    "intake_contract_sha256": "0c41f0c6028b09140f0107f97702f346d92242a74aa67e07037027120891fc64",
+    "intake_contract_sha256": "db4329c6b10492d2c6985be528c5dceca13585736ee9f82fbf96e7f190ba92fa",
     "amendment_proposal_ref": "contracts/milestone-002-dem-amendment-proposal.json",
     "amendment_proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
     "review_bundle_ref": "reviews/m2-dem-amendment/review-bundle.json",
@@ -233,5 +233,10 @@
     "Geometric AOI coverage does not establish valid DEM pixels inside an AOI.",
     "Copernicus GLO-30 orthometric heights use EGM2008, while ArcGIS built-in GEOID handling is documented as EGM96; production terrain correction remains deferred until that mismatch is resolved and recorded.",
     "No scan may run against the candidate contract and no output receipt may replace an existing file."
-  ]
+  ],
+  "result": {
+    "summary_ref": "records/acquisition/dem-verification-summary.json",
+    "summary_sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef",
+    "next_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW"
+  }
 }

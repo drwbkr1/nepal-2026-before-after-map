@@ -62,9 +62,15 @@ def feature_bbox(feature: dict[str, Any]) -> list[float]:
     return [min(xs), min(ys), max(xs), max(ys)]
 
 
-def validate_pass_receipts(contract: dict[str, Any], intake: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    contract_sha = sha256_file(VERIFICATION_PATH)
-    intake_sha = sha256_file(INTAKE_PATH)
+def validate_pass_receipts(
+    contract: dict[str, Any],
+    intake: dict[str, Any],
+    *,
+    contract_sha: str | None = None,
+    intake_sha: str | None = None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    contract_sha = contract_sha or sha256_file(VERIFICATION_PATH)
+    intake_sha = intake_sha or sha256_file(INTAKE_PATH)
     all_receipts = [load(path) | {"_path": path} for path in sorted(RECEIPT_ROOT.glob("*.json"))]
     passes = [receipt for receipt in all_receipts if receipt.get("status") == "pass_structural_only"]
     failures = [receipt for receipt in all_receipts if receipt.get("status") == "fail"]

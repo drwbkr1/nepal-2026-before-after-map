@@ -79,6 +79,7 @@ REQUIRED = [
     "records/acquisition/dem-verification/m2-dem-003-attempt-001.json",
     "records/acquisition/dem-verification/m2-dem-004-attempt-001.json",
     "records/acquisition/dem-verification-completion-readiness.json",
+    "records/acquisition/dem-verification-summary.json",
     "records/source-gates/source-manifest-approval.json",
     "records/source-gates/source-manifest-review-reconciliation.json",
     "records/source-gates/m2-activation-approval.json",
@@ -282,24 +283,38 @@ def main() -> None:
     if len(dem_current_assets) != 4 or any(state not in {"authorized", "promoted", "failed"} for state in dem_current_states):
         fail("active M2 DEM intake has an unsupported or unreconciled state")
     dem_state_counts = {state: dem_current_states.count(state) for state in ("authorized", "promoted", "failed")}
+    dem_all_geotiff_verified = all(
+        asset.get("extensions", {}).get("geotiff_verification_status") == "pass_structural_and_full_tile_finite"
+        for asset in dem_current_assets
+    )
     if dem_state_counts["failed"]:
-        expected_dem_checkpoint = "M2-DEM-ACQUISITION-REVIEW"
+        expected_dem_transfer_checkpoint = "M2-DEM-ACQUISITION-REVIEW"
+        expected_dem_checkpoint = expected_dem_transfer_checkpoint
         expected_dem_intake_status = "active_acquisition_review_required"
         expected_dem_verification_status = "active_gate_blocked_acquisition_review"
         expected_dem_next_action = "Review the retained DEM transfer failure; do not retry or advance to GeoTIFF verification without a new bounded decision."
     elif dem_state_counts["promoted"] == 4:
-        expected_dem_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
-        expected_dem_intake_status = "active_all_promoted_pending_geotiff_verification"
-        expected_dem_verification_status = "active_gate_ready_for_geotiff_verification"
-        expected_dem_next_action = "Run the active offline ArcGIS GeoTIFF verifier for each of the four promoted DEM tiles; do not infer pixel or vertical-datum fitness from transfer success."
+        expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
+        if dem_all_geotiff_verified:
+            expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
+            expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
+            expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
+            expected_dem_next_action = "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
+        else:
+            expected_dem_checkpoint = expected_dem_transfer_checkpoint
+            expected_dem_intake_status = "active_all_promoted_pending_geotiff_verification"
+            expected_dem_verification_status = "active_gate_ready_for_geotiff_verification"
+            expected_dem_next_action = "Run the active offline ArcGIS GeoTIFF verifier for each of the four promoted DEM tiles; do not infer pixel or vertical-datum fitness from transfer success."
     elif dem_state_counts["promoted"]:
-        expected_dem_checkpoint = "M2-DEM-ACQUISITION"
+        expected_dem_transfer_checkpoint = "M2-DEM-ACQUISITION"
+        expected_dem_checkpoint = expected_dem_transfer_checkpoint
         expected_dem_intake_status = "active_acquisition_in_progress"
         expected_dem_verification_status = "active_gate_deferred_incomplete_acquisition"
         next_dem_source = next(asset["extensions"]["source_id"] for asset in dem_current_assets if asset["state"] == "authorized")
         expected_dem_next_action = f"Acquire {next_dem_source} only through append-only staging, exact size and local SHA-256, and no-replace promotion."
     else:
-        expected_dem_checkpoint = "M2-DEM-ACQUISITION"
+        expected_dem_transfer_checkpoint = "M2-DEM-ACQUISITION"
+        expected_dem_checkpoint = expected_dem_transfer_checkpoint
         expected_dem_intake_status = "active_authorized_preflight_passed_custody_initialized"
         expected_dem_verification_status = "active_gate_deferred_no_promoted_rasters"
         expected_dem_next_action = "Acquire M2-DEM-001 only through append-only staging, verify its exact length and local SHA-256, and promote without replacement; stop on any route or identity drift."
@@ -529,6 +544,20 @@ def main() -> None:
                 or observed.get("staged_size_bytes") != observed.get("promoted_size_bytes")
             ):
                 fail(f"promoted DEM asset identity or receipt differs for {source_id}")
+            if dem_all_geotiff_verified:
+                verification_ref = asset["extensions"].get("geotiff_verification_receipt")
+                if not isinstance(verification_ref, str) or not (ROOT / verification_ref).is_file():
+                    fail(f"verified DEM asset receipt is absent for {source_id}")
+                verification_receipt = json.loads((ROOT / verification_ref).read_text(encoding="utf-8"))
+                if (
+                    asset["extensions"].get("geotiff_verification_receipt_sha256") != sha256(verification_ref)
+                    or verification_receipt.get("status") != "pass_structural_only"
+                    or verification_receipt.get("source_id") != source_id
+                    or verification_receipt.get("observed", {}).get("sha256") != observed.get("promoted_sha256")
+                    or verification_receipt.get("evaluation", {}).get("failures") != []
+                    or verification_receipt.get("custody_inventory_before") != verification_receipt.get("custody_inventory_after")
+                ):
+                    fail(f"verified DEM asset receipt differs for {source_id}")
         elif attempts[0].get("outcome") != "failed" or not asset.get("failure", {}).get("code"):
             fail(f"failed DEM asset does not preserve its terminal failure for {source_id}")
     if dem_intake_active.get("extensions", {}).get("license_acceptance_status") != "accepted_exact_hash_bound_document":
@@ -555,7 +584,7 @@ def main() -> None:
         if (
             checkpoint_receipt.get("attempt_id") != dem_extensions.get("last_reconciled_attempt_id")
             or checkpoint_receipt.get("progress", {}).get("counts") != dem_state_counts
-            or checkpoint_receipt.get("progress", {}).get("checkpoint") != expected_dem_checkpoint
+            or checkpoint_receipt.get("progress", {}).get("checkpoint") != expected_dem_transfer_checkpoint
             or checkpoint_receipt.get("bindings", {}).get("approval_sha256") != sha256("records/source-gates/m2-dem-amendment-approval.json")
             or checkpoint_receipt.get("bindings", {}).get("preflight_sha256") != sha256("records/acquisition/dem-preflight.json")
         ):
@@ -585,8 +614,38 @@ def main() -> None:
         fail("active M2 DEM verification authority differs")
     if dem_verification_active.get("inputs", {}).get("intake_contract_ref") != "contracts/m2-dem-intake.json" or dem_verification_active.get("inputs", {}).get("intake_contract_sha256") != sha256("contracts/m2-dem-intake.json"):
         fail("active M2 DEM verification does not bind the active intake")
+    if dem_all_geotiff_verified:
+        dem_verification_summary = json.loads((ROOT / "records/acquisition/dem-verification-summary.json").read_text(encoding="utf-8"))
+        summary_sha = sha256("records/acquisition/dem-verification-summary.json")
+        if (
+            dem_verification_summary.get("status") != "pass_structural_and_valid_aoi_coverage_vertical_datum_deferred"
+            or dem_verification_summary.get("totals") != {"passing_tile_count": 4, "retained_failed_attempt_count": 2, "verified_bytes": 170302058, "finite_non_nodata_cells": 51840000, "nodata_or_nonfinite_cells": 0}
+            or dem_verification_summary.get("next_checkpoint") != "M2-DEM-VERTICAL-DATUM-REVIEW"
+            or dem_intake_active.get("extensions", {}).get("dem_verification_summary_sha256") != summary_sha
+            or dem_verification_active.get("result", {}).get("summary_sha256") != summary_sha
+        ):
+            fail("completed M2 DEM verification summary or active bindings differ")
+        if [item.get("source_id") for item in dem_verification_summary.get("passing_assets", [])] != expected_dem_source_order:
+            fail("completed M2 DEM verification summary source order differs")
+        for item in dem_verification_summary.get("passing_assets", []) + dem_verification_summary.get("retained_failed_attempts", []):
+            relative = item.get("receipt_ref")
+            if not isinstance(relative, str) or not (ROOT / relative).is_file() or item.get("receipt_sha256") != sha256(relative):
+                fail("completed M2 DEM verification summary has a stale receipt binding")
+        if [item.get("aoi_id") for item in dem_verification_summary.get("aoi_coverage", [])] != ["AOI-OVERVIEW", "AOI-SOURCE", "AOI-UPPER-CORRIDOR"] or any(item.get("status") != "pass_valid_coverage" for item in dem_verification_summary.get("aoi_coverage", [])):
+            fail("completed M2 DEM verification AOI coverage differs")
+        expected_completed_dem_claims = {
+            "exact_local_byte_identity_established": True,
+            "arcgis_geotiff_structural_fitness_established": True,
+            "approved_aoi_valid_pixel_coverage_established": True,
+            "void_seam_artifact_review_established": False,
+            "vertical_datum_route_established": False,
+            "radar_processing_executed": False,
+            "scientific_result_established": False,
+        }
+        if dem_verification_summary.get("claim_boundary") != expected_completed_dem_claims:
+            fail("completed M2 DEM verification claim boundary differs")
     expected_dem_acquire_status = "complete" if dem_state_counts["promoted"] == 4 and not dem_state_counts["failed"] else "ready"
-    expected_dem_verify_status = "ready" if expected_dem_acquire_status == "complete" else "planned"
+    expected_dem_verify_status = "complete" if dem_all_geotiff_verified else ("ready" if expected_dem_acquire_status == "complete" else "planned")
     for unit_id, expected_status in (
         ("M2-DEM-AMEND", "complete"),
         ("M2-DEM-PREFLIGHT", "complete"),
@@ -2275,6 +2334,59 @@ def main() -> None:
         fail("DEM verification completion readiness receipt counts differ")
     if dem_verification_completion_readiness_evidence.get("assertions") != completion_readiness.get("assertions"):
         fail("EVID-0038 and DEM verification completion readiness have different claim boundaries")
+    dem_verification_completion_evidence = ledger_by_id.get("EVID-0039")
+    if not isinstance(dem_verification_completion_evidence, dict):
+        fail("evidence ledger is missing EVID-0039 four-tile ArcGIS verification completion")
+    expected_evid_0039_bindings = {
+        "summary_ref": "records/acquisition/dem-verification-summary.json",
+        "summary_sha256": sha256("records/acquisition/dem-verification-summary.json"),
+        "active_intake_ref": "contracts/m2-dem-intake.json",
+        "active_intake_sha256": sha256("contracts/m2-dem-intake.json"),
+        "active_verification_ref": "contracts/m2-dem-offline-verification.json",
+        "active_verification_sha256": sha256("contracts/m2-dem-offline-verification.json"),
+        "active_milestone_ref": "contracts/milestone-002.json",
+        "active_milestone_sha256": sha256("contracts/milestone-002.json"),
+        "project_profile_ref": "records/project-control-profile.json",
+        "project_profile_sha256": sha256("records/project-control-profile.json"),
+        "long_term_goal_ref": "records/long-term-goal.json",
+        "long_term_goal_sha256": sha256("records/long-term-goal.json"),
+        "completion_script_ref": "scripts/complete_m2_dem_verification.py",
+        "completion_script_sha256": sha256("scripts/complete_m2_dem_verification.py"),
+        "test_ref": "tests/test_m2_dem_verification_completion.py",
+        "test_sha256": sha256("tests/test_m2_dem_verification_completion.py"),
+    }
+    if any(dem_verification_completion_evidence.get(key) != value for key, value in expected_evid_0039_bindings.items()):
+        fail("EVID-0039 four-tile ArcGIS completion bindings differ")
+    expected_evid_0039_assertions = {
+        "passing_tile_count": 4,
+        "retained_failed_attempt_count": 2,
+        "verified_byte_count": 170302058,
+        "finite_non_nodata_cell_count": 51840000,
+        "nodata_or_nonfinite_cell_count": 0,
+        "exact_local_byte_identity_established": True,
+        "arcgis_geotiff_structural_fitness_established": True,
+        "approved_aoi_valid_pixel_coverage_established": True,
+        "void_seam_artifact_review_established": False,
+        "vertical_datum_route_established": False,
+        "radar_processing_executed": False,
+        "scientific_result_established": False,
+    }
+    if (
+        dem_verification_completion_evidence.get("status") != "pass_structural_and_valid_aoi_coverage_vertical_datum_deferred"
+        or dem_verification_completion_evidence.get("next_checkpoint") != "M2-DEM-VERTICAL-DATUM-REVIEW"
+        or dem_verification_completion_evidence.get("assertions") != expected_evid_0039_assertions
+        or len(dem_verification_completion_evidence.get("retained_validation_failures", [])) != 2
+    ):
+        fail("EVID-0039 four-tile ArcGIS completion claim boundary differs")
+    for item in dem_verification_completion_evidence.get("retained_validation_failures", []):
+        relative = item.get("receipt_ref")
+        if (
+            not isinstance(relative, str)
+            or not (ROOT / relative).is_file()
+            or item.get("receipt_sha256") != sha256(relative)
+            or item.get("status") != "fail_retained_superseded_as_data_result"
+        ):
+            fail("EVID-0039 retained DEM failure binding differs")
 
     violations = []
     for relative in tracked_files():

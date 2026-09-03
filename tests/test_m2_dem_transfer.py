@@ -53,6 +53,7 @@ class M2DemTransferTests(unittest.TestCase):
                 "active_acquisition_in_progress",
                 "active_acquisition_review_required",
                 "active_all_promoted_pending_geotiff_verification",
+                "active_geotiff_verified_vertical_datum_deferred",
             },
         )
 

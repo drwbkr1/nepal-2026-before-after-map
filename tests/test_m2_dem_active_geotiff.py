@@ -25,8 +25,9 @@ class M2DemActiveGeoTiffTests(unittest.TestCase):
         cls.contract = load("contracts/m2-dem-offline-verification.json")
         cls.intake = load("contracts/m2-dem-intake.json")
 
-    def test_exact_active_contract_is_ready_and_current(self):
-        self.assertEqual(MODULE.validate_active_contract(self.contract), [])
+    def test_completed_active_contract_refuses_additional_verifier_runs(self):
+        self.assertEqual(self.contract["status"], "complete_structural_and_valid_coverage_vertical_datum_deferred")
+        self.assertIn("verification contract is not active", MODULE.validate_active_contract(self.contract))
 
     def test_each_contract_asset_has_one_promoted_receipt_binding(self):
         for asset in self.contract["assets"]:
