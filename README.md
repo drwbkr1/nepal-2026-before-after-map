@@ -64,6 +64,8 @@ ArcGIS Pro's installed Sentinel-1 terrain-correction tools also expose a require
 
 The four-tile intake and ArcGIS GeoTIFF verification controls are now predeclared without activation. The Sentinel-1 baseline contract also fixes independent ascending and descending processing routes, beta-nought calibration, gamma-nought terrain flattening, retained terrain-distortion masks, linear quantitative outputs, and EPSG:32645 delivery. It deliberately defers production processing because the Copernicus DEM uses EGM2008 orthometric heights while ArcGIS's built-in geoid correction is documented as EGM96, and because updated Sentinel orbit files would be additional products outside the active acquisition boundary.
 
+The Sentinel-2 RUM route now has an equally explicit optical-processing contract. It reads processing baseline 05.12, per-band BOA offsets, and the quantification value from product metadata; keeps DN zero as NoData; applies the conservative SCL and quality masks; and produces a fixed 20 m EPSG:32645 grid. ArcGIS Pro 3.7.1 passed a synthetic runtime exercise of the reflectance and NDVI/MNDWI/NBR calculations. The real route remains deferred because product bytes, AOI usability, registration, and Sentinel-2C-to-2B stable-control behavior are still unmeasured, and the post-event scene remains high-cloud-risk.
+
 See:
 
 - [Project charter](docs/PROJECT_CHARTER.md)
@@ -78,6 +80,7 @@ See:
 - [M2 DEM dependency amendment review](docs/M2_DEM_AMENDMENT_REVIEW.md)
 - [M2 DEM intake and offline verification](docs/M2_DEM_OFFLINE_VERIFICATION.md)
 - [ArcGIS Sentinel-1 baseline processing protocol](docs/RADAR_BASELINE_PROCESSING_PROTOCOL.md)
+- [ArcGIS Sentinel-2 optical baseline processing protocol](docs/OPTICAL_BASELINE_PROCESSING_PROTOCOL.md)
 - [ArcGIS delivery plan](docs/ARCGIS_DELIVERY_PLAN.md)
 - [ArcGIS evidence model](docs/ARCGIS_EVIDENCE_MODEL.md)
 - [Validation plan](docs/VALIDATION.md)

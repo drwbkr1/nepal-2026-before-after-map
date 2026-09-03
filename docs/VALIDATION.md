@@ -104,6 +104,8 @@ python -m unittest tests.test_pixel_qa_core -v
 
 ArcGIS Pro 3.7.1 Advanced and Spatial Analyst have also exercised the same core with deterministic 20 m synthetic rasters and all three approved AOIs. The native adapter verifies `TabulateArea` class-area accounting, an aligned before/after pair, a deliberately blocked 0.6-pixel origin shift, and the required `defer` state when registration has not been measured. See `docs/PIXEL_QA_PROTOCOL.md` for thresholds, class semantics, rerun commands, and the scientific claim boundary.
 
+The Sentinel-2 processing contract also has a separate portable core and ArcGIS-native synthetic exercise. The adapter parses baseline 05.12 scaling metadata, preserves DN zero as NoData, applies the declared SCL exclusions, scales five bands to BOA reflectance, and checks NDVI, MNDWI, and NBR. Run the portable checks with `python -m unittest tests.test_optical_processing_core -v`; run the ArcGIS adapter using the new-attempt command in `docs/OPTICAL_BASELINE_PROCESSING_PROTOCOL.md`. Neither result is real-pixel evidence.
+
 ## Source validation
 
 For each external product:

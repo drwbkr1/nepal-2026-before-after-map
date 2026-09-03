@@ -1,0 +1,254 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-S2-BASELINE-PROCESSING-001",
+  "status": "predeclared_no_real_processing",
+  "created_at_utc": "2026-09-03T18:34:36Z",
+  "bindings": {
+    "source_manifest_ref": "records/source-manifest.json",
+    "source_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+    "source_manifest_approval_ref": "records/source-gates/source-manifest-approval.json",
+    "source_manifest_approval_sha256": "c6df8c24adc96439e8b8ef00c733db8fc3cd3ffb229b333b1d8a63933f3aa04e",
+    "acquisition_plan_ref": "records/acquisition-plan.json",
+    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+    "active_verification_ref": "contracts/m2-offline-verification.json",
+    "active_verification_sha256": "f3fa9d6911469ce072e76781d28ba012be31b59a1033a0553bca9b43b97b0643",
+    "pair_plan_ref": "config/qa/candidate-pair-plan.json",
+    "pair_plan_sha256": "c346af2e575a21e4931991935c0acc21ba70083c4613255456ced77b71bb1560",
+    "pixel_readiness_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_readiness_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"
+  },
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced",
+    "spatial_analyst": "required"
+  },
+  "authority": {
+    "authority_ref": "records/source-gates/m2-activation-approval.json",
+    "processing_permitted_only_after_verified_custody": true,
+    "real_pixel_processing_started": false,
+    "additional_product_acquisition_authorized": false,
+    "threshold_tuning_to_strengthen_visual_result_authorized": false,
+    "scientific_publication_authorized": false,
+    "this_contract_creates_authority": false
+  },
+  "route": {
+    "pair_id": "PAIR-S2-RUM-R119",
+    "before_source_id": "M1-SRC-010",
+    "before_product_id": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE",
+    "before_platform": "Sentinel-2C",
+    "before_acquisition_start_utc": "2026-08-12T04:57:01.025000Z",
+    "before_catalog_cloud_cover_percent": 18.746611,
+    "after_source_id": "M1-SRC-008",
+    "after_product_id": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE",
+    "after_platform": "Sentinel-2B",
+    "after_acquisition_start_utc": "2026-08-27T04:56:59.024000Z",
+    "after_catalog_cloud_cover_percent": 78.471315,
+    "tile_id": "45RUM",
+    "relative_orbit_number": 119,
+    "processing_baseline_from_product_name": "05.12",
+    "pixel_status": "not_evaluated_no_pixels"
+  },
+  "input_requirements": {
+    "custody_state": "promoted_and_offline_verification_passed",
+    "internal_product_identity_matches_manifest": true,
+    "internal_processing_baseline_matches_product_name": true,
+    "required_metadata": [
+      "MTD_MSIL2A.xml",
+      "GRANULE/*/MTD_TL.xml",
+      "PROCESSING_BASELINE",
+      "BOA_QUANTIFICATION_VALUE",
+      "BOA_ADD_OFFSET for every used band",
+      "Special_Values including NoData"
+    ],
+    "required_quality_inputs": [
+      "GRANULE/*/IMG_DATA/R20m/*_SCL_20m.jp2",
+      "GRANULE/*/QI_DATA/*"
+    ],
+    "source_crs_wkid": 32645
+  },
+  "reflectance_scaling": {
+    "processing_baseline_minimum_for_offset_rule": "04.00",
+    "formula": "(DN + BOA_ADD_OFFSET_band) / BOA_QUANTIFICATION_VALUE",
+    "dn_zero_policy": "NoData_before_offset_or_scaling",
+    "offset_source": "MTD_MSIL2A.xml per-band metadata",
+    "quantification_source": "MTD_MSIL2A.xml product metadata",
+    "hardcoded_offset_prohibited": true,
+    "hardcoded_divide_by_10000_without_metadata_check_prohibited": true,
+    "output_pixel_type": "F32",
+    "unit": "unitless_bottom_of_atmosphere_surface_reflectance",
+    "negative_reflectance_policy": "retain_if_valid_and_unmasked; do not clamp silently",
+    "above_one_policy": "retain_if valid_and_unmasked; do not clamp silently"
+  },
+  "bands": {
+    "change_core": [
+      "B02",
+      "B03",
+      "B04",
+      "B08",
+      "B11",
+      "B12"
+    ],
+    "native_10m": [
+      "B02",
+      "B03",
+      "B04",
+      "B08"
+    ],
+    "native_20m": [
+      "B11",
+      "B12",
+      "SCL"
+    ],
+    "true_color_display": [
+      "B04",
+      "B03",
+      "B02"
+    ],
+    "false_color_display": [
+      "B08",
+      "B04",
+      "B03"
+    ],
+    "resample_10m_to_20m": "BILINEAR",
+    "categorical_resampling": "NEAREST"
+  },
+  "analysis_grid": {
+    "wkid": 32645,
+    "name": "WGS 1984 UTM Zone 45N",
+    "cell_size_m": 20.0,
+    "snap_basis": "approved AOI union extent snapped outward to 20 metre multiples",
+    "extent": {
+      "xmin": 273300.0,
+      "ymin": 3070220.0,
+      "xmax": 367820.0,
+      "ymax": 3149220.0
+    },
+    "columns": 4726,
+    "rows": 3950,
+    "continuous_resampling": "BILINEAR",
+    "categorical_resampling": "NEAREST",
+    "grid_drift_disposition": "block"
+  },
+  "mask": {
+    "profile_ref": "config/qa/pixel-readiness-contract.json#optical_scl",
+    "valid_scl_classes": {
+      "4": "vegetation",
+      "5": "non-vegetated",
+      "6": "water"
+    },
+    "excluded_scl_classes": {
+      "0": "nodata",
+      "1": "saturated_or_defective",
+      "2": "topographic_cast_shadow_or_dark_feature",
+      "3": "cloud_shadow",
+      "7": "unclassified",
+      "8": "cloud_medium_probability",
+      "9": "cloud_high_probability",
+      "10": "thin_cirrus",
+      "11": "snow_or_ice"
+    },
+    "unknown_class_policy": "exclude_and_defer_review",
+    "apply_before_index_calculation": true,
+    "dn_zero_always_excluded": true,
+    "saturation_and_quality_masks_required": true,
+    "primary_cloud_edge_dilation_pixels": 0,
+    "cloud_edge_sensitivity_dilation_pixels": [
+      1,
+      3
+    ],
+    "sensitivity_outputs_may_replace_primary": false,
+    "record_excluded_area_by_reason": true
+  },
+  "indices": {
+    "NDVI": {
+      "formula": "(B08 - B04) / (B08 + B04)",
+      "role": "vegetation response context"
+    },
+    "MNDWI": {
+      "formula": "(B03 - B11) / (B03 + B11)",
+      "role": "open water and wet-surface context"
+    },
+    "NBR": {
+      "formula": "(B08 - B12) / (B08 + B12)",
+      "role": "disturbance context; not a fire-specific claim here"
+    },
+    "denominator_absolute_minimum": 1e-06,
+    "invalid_denominator_policy": "NoData_and_record_count",
+    "index_range_check": [
+      -1.0,
+      1.0
+    ]
+  },
+  "cross_platform": {
+    "before_platform": "Sentinel-2C",
+    "after_platform": "Sentinel-2B",
+    "spectral_response_review_required": true,
+    "stable_control_bias_measurement_required": true,
+    "unmeasured_harmonization": "prohibited",
+    "histogram_matching_over_event_aoi": "prohibited",
+    "normalization_if_later_admitted": "derive on stable controls only; retain raw and normalized routes separately"
+  },
+  "processing_chain": [
+    "verify promoted product and internal metadata identity",
+    "parse processing baseline, quantification, offsets, and special values",
+    "set DN zero and required quality exclusions to NoData",
+    "scale each used band to float32 BOA reflectance",
+    "resample continuous 10 metre bands to the fixed 20 metre grid",
+    "project or copy native EPSG:32645 inputs to the exact grid without changing the mask semantics",
+    "apply the conservative SCL and quality mask",
+    "derive NDVI, MNDWI, and NBR only where both operands are valid",
+    "measure AOI coverage, grid compatibility, and stable-control registration",
+    "retain raw, masked, index, exclusion, and QA outputs in versioned external custody"
+  ],
+  "qa_and_admission": {
+    "aoi_coverage_contract_ref": "config/qa/pixel-readiness-contract.json",
+    "full_coverage_pass_minimum": 0.99,
+    "usable_fraction_pass_minimum": 0.8,
+    "minimum_stable_control_pairs": 30,
+    "pass_max_registration_rmse_pixels": 0.5,
+    "pass_max_absolute_bias_pixels": 0.5,
+    "post_event_high_cloud_risk": true,
+    "inconclusive_route_must_be_preserved": true,
+    "qa_pass_creates_scientific_admission": false
+  },
+  "output_boundary": {
+    "root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "versioned_attempt_paths": true,
+    "analysis_raster_format": "GeoTIFF",
+    "compression": "LZW",
+    "build_pyramids_for_display_copy": true,
+    "raw_and_derived_rasters_in_git": false,
+    "processing_receipts_in_git": true,
+    "overwrite_existing_outputs": false
+  },
+  "source_references": [
+    {
+      "role": "sentinel2_l2a_products_and_scaling",
+      "url": "https://sentiwiki.copernicus.eu/web/s2-products",
+      "checked_at_utc": "2026-09-03T18:34:36Z"
+    },
+    {
+      "role": "sentinel2_product_specification_v15_1",
+      "url": "https://sentinels.copernicus.eu/documents/d/sentinel/sentinel-2-products-specification-document-15_1",
+      "checked_at_utc": "2026-09-03T18:34:36Z"
+    },
+    {
+      "role": "cdse_sentinel2_l2a_bands_and_scl",
+      "url": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/S2L2A.html",
+      "checked_at_utc": "2026-09-03T18:34:36Z"
+    }
+  ],
+  "claim_boundary": {
+    "parameters_predeclared": true,
+    "real_product_metadata_parsed": false,
+    "real_product_pixels_examined": false,
+    "usable_aoi_coverage_established": false,
+    "registration_established": false,
+    "optical_baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  }
+}

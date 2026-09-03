@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-S2-OPTICAL-BASELINE-CONTROL-READINESS-001",
+  "verified_at_utc": "2026-09-03T18:43:44Z",
+  "status": "pass_predeclared_and_synthetic_only_real_route_deferred",
+  "bindings": {
+    "optical_contract_ref": "config/qa/optical-baseline-processing-contract.json",
+    "optical_contract_sha256": "8321b7d3bd6a4a4304ed111f67b9b3ec372204823e495fbabd434ba9463e6eb5",
+    "optical_core_ref": "scripts/optical_processing_core.py",
+    "optical_core_sha256": "8fd8d088d1f49b6aeeccee874419f1a18b452ebeaab21ca58cf2a07e13b96d47",
+    "contract_builder_ref": "scripts/prepare_optical_processing_contract.py",
+    "contract_builder_sha256": "7bc3a52821953561b847c912b1eda12254c8893182c0d48511bba81306274f42",
+    "arcgis_adapter_ref": "scripts/validate_optical_processing_arcgis.py",
+    "arcgis_adapter_sha256": "be8615b21f87cc461e68b612cf250cbb908bacd3aeb839d6a72e238e20298509",
+    "arcgis_receipt_ref": "records/surface-receipts/optical-processing-synthetic-arcgis.json",
+    "arcgis_receipt_sha256": "616cb9c26ba6cff7f2352ca68936cc99a7f003c083a4763a78e072baef4694f8",
+    "portable_tests_ref": "tests/test_optical_processing_core.py",
+    "portable_tests_sha256": "88cbdeb0b02c2abacb40c9d9a9cbeb3ad1b1214f8527bb793323e7007aca1263",
+    "protocol_ref": "docs/OPTICAL_BASELINE_PROCESSING_PROTOCOL.md",
+    "protocol_sha256": "a635bbb2596d9e7cc253984555032f05478d6a6007f4a45dfed3d8b7ca745c69",
+    "pair_plan_ref": "config/qa/candidate-pair-plan.json",
+    "pair_plan_sha256": "c346af2e575a21e4931991935c0acc21ba70083c4613255456ced77b71bb1560",
+    "pixel_readiness_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_readiness_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "source_manifest_ref": "records/source-manifest.json",
+    "source_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+    "active_m2_ref": "contracts/milestone-002.json",
+    "active_m2_sha256": "188af4575401473bb464dff84b83a90a41751b176c6a5e63a76f62acbe4e6bfb"
+  },
+  "validation": {
+    "portable_python": "3.12.10",
+    "portable_test_count": 15,
+    "portable_tests_status": "pass",
+    "full_repository_test_count": 97,
+    "full_repository_tests_status": "pass",
+    "arcgis_runtime": {
+      "product": "ArcGISPro",
+      "version": "3.7.1",
+      "license_level": "Advanced",
+      "spatial_analyst": "available_and_used"
+    },
+    "arcgis_check_count": 8,
+    "arcgis_check_statuses": {
+      "B03": "pass",
+      "B04": "pass",
+      "B08": "pass",
+      "B11": "pass",
+      "B12": "pass",
+      "NDVI": "pass",
+      "MNDWI": "pass",
+      "NBR": "pass"
+    },
+    "deterministic_contract_derivation": "pass"
+  },
+  "retained_prepublication_attempt": {
+    "path": "scratch/optical-processing-synthetic-arcgis-001",
+    "status": "superseded_before_publication",
+    "reason": "Parser review added explicit duplicate BOA_ADD_OFFSET rejection before the final ArcGIS run.",
+    "real_product_data_used": false
+  },
+  "current_route_disposition": {
+    "status": "defer",
+    "reasons": [
+      "The exact before and after product archives have not entered verified custody.",
+      "Real Level-2A metadata, SCL, quality masks, and reflectance pixels have not been read.",
+      "The post-event catalog cloud estimate is 78.471315 percent, so usable AOI coverage is unknown and high risk.",
+      "Before and after registration and Sentinel-2C to Sentinel-2B stable-control behavior are unmeasured."
+    ]
+  },
+  "assertions": {
+    "synthetic_processing_passed": true,
+    "real_product_bytes_read": false,
+    "real_product_metadata_parsed": false,
+    "real_product_pixels_examined": false,
+    "external_custody_accessed": false,
+    "optical_baseline_established": false,
+    "change_established": false,
+    "interpretation_established": false,
+    "attribution_established": false,
+    "scientific_admission_authorized": false,
+    "authority_created": false
+  },
+  "next_action": "After authenticated acquisition and offline container verification, parse each exact MTD_MSIL2A.xml, run the fixed mask and scaling pipeline, and measure AOI usability and registration without changing the predeclared thresholds."
+}

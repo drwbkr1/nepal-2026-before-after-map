@@ -16,6 +16,8 @@ ArcGIS Pro terrain correction has a separate pending dependency gate. `contracts
 
 `contracts/m2-dem-intake-candidate.json`, `contracts/m2-dem-offline-verification-candidate.json`, and `config/qa/radar-baseline-processing-contract.json` are predeclared controls only. The candidate verifier must refuse execution. Do not silently choose `GEOID` or `NONE` for the EGM2008 orthometric DEM, and do not download updated orbit vectors: both require their recorded dependency conditions to be resolved first.
 
+`config/qa/optical-baseline-processing-contract.json` is the predeclared Sentinel-2 route. Do not replace metadata-derived BOA offsets with an unchecked divide-by-10,000 rule, clamp valid reflectance values, change the conservative SCL classes, harmonize over event pixels, or tune cloud masks to recover a stronger result. Preserve an inconclusive optical route.
+
 ## Source and custody rules
 
 - Treat catalog results as availability evidence, not proof of usable pixels, valid coverage, or event causation.

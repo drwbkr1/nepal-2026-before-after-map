@@ -44,6 +44,8 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Prepared DEM and radar controls:** A four-tile intake candidate, offline ArcGIS GeoTIFF verifier, and two-route Sentinel-1 processing contract are fixed without activation. The primary radar route keeps linear gamma-nought data, retains native terrain-distortion evidence, and defers rather than guessing when only predicted orbit vectors are available or the EGM2008-to-ArcGIS-EGM96 vertical-datum mismatch is unresolved.
 
+**Prepared optical controls:** The exact RUM pair has fixed Level-2A metadata parsing, BOA reflectance scaling, conservative SCL masking, 20 m EPSG:32645 alignment, index formulas, and cross-platform safeguards. Portable tests and ArcGIS synthetic processing pass, while the real high-cloud-risk route remains deferred until acquired pixels prove coverage and registration.
+
 **Work:**
 
 - download approved products into non-Git custody;

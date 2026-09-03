@@ -56,6 +56,12 @@ The Copernicus WorldDEM-30 license grants broad free use rights but explicitly r
 
 Non-authorizing candidate controls now derive one collision-safe intake entry and one ArcGIS-readable GeoTIFF verification profile for each exact tile. Thirteen new local tests cover deterministic derivation, authority refusal, no-replace receipts, structural pass/fail examples, exact route preservation, and radar readiness defer conditions. The production radar chain is predeclared, but it remains deferred on two explicit dependencies: EGM2008 orthometric DEM heights do not exactly match ArcGIS's documented EGM96 geoid correction, and updated Sentinel orbit files are separate auxiliary products outside current authority. No DEM or Sentinel pixel was read or processed by this preparation.
 
+## Prepared optical baseline controls
+
+The exact Sentinel-2C-before and Sentinel-2B-after RUM route now has a deterministic processing contract. It requires internal baseline 05.12 metadata, band-specific BOA offsets, the product quantification value, DN-zero handling, conservative SCL and quality exclusions, a fixed 20 m EPSG:32645 grid, and independent stable-control measurement before any cross-platform normalization. Fifteen portable tests and an ArcGIS Pro 3.7.1 Spatial Analyst run pass. The ArcGIS run used only a 16-by-16 synthetic fixture and passed five reflectance-band plus three index checks. It did not access external custody or read real metadata or pixels.
+
+The real optical route remains **DEFER**. Neither archive is in verified custody; AOI coverage, masks, registration, and cross-platform bias are unmeasured; and the post-event catalog cloud estimate is 78.471315 percent. An inconclusive optical route must be retained rather than tuned or silently replaced.
+
 ## Authorized but not completed
 
 - authenticate through an existing owner-controlled CDSE credential or session reference;

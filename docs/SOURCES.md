@@ -18,6 +18,8 @@ The project uses **26 August 2026 debris avalanche and flash flood** as its work
 - [Copernicus Data Space Ecosystem: Sentinel-2](https://dataspace.copernicus.eu/data-collections/copernicus-sentinel-missions/sentinel-2)
 - [Sentinel-1 GRD API documentation](https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/S1GRD.html)
 - [Sentinel-2 Level-2A API documentation](https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/S2L2A.html)
+- [SentiWiki Sentinel-2 Level-2A products and BOA scaling](https://sentiwiki.copernicus.eu/web/s2-products)
+- [Sentinel-2 Product Specification Document 15.1](https://sentinels.copernicus.eu/documents/d/sentinel/sentinel-2-products-specification-document-15_1)
 - [Copernicus Data Space OData documentation](https://documentation.dataspace.copernicus.eu/APIs/OData.html)
 - [Copernicus Browser documentation](https://documentation.dataspace.copernicus.eu/Applications/Browser.html)
 - [Copernicus Data Space terms and conditions](https://dataspace.copernicus.eu/terms-and-conditions)
@@ -50,3 +52,5 @@ This establishes catalog identity only. It does not establish:
 Event and documentation pages were reviewed on 31 August 2026 local time. The exact product-name query was run on 1 September 2026 UTC.
 
 The four-tile DEM metadata, license, and anonymous-object route were reviewed on 3 September 2026 UTC. ArcGIS Pro's published Sentinel-1 workflow, terrain-flattening inputs, orbit-vector guidance, and EGM96 geoid behavior were rechecked on 3 September 2026 UTC. These documentation checks do not establish acquired bytes or usable pixels.
+
+Sentinel-2 Level-2A scaling, processing-baseline, band, and SCL documentation was rechecked on 3 September 2026 UTC. The synthetic ArcGIS exercise proves only the local implementation of those declared rules.

@@ -107,3 +107,9 @@
 **Decision:** Derive non-authorizing intake and ArcGIS GeoTIFF verification controls for the exact four proposed DEM tiles, and fix the two independent Sentinel-1 processing routes before real pixels are available.
 **Reason:** A reviewed source list does not define safe custody or raster acceptance, and ArcGIS processing defaults could otherwise hide consequential choices about orbit vectors, despeckling, terrain masks, units, or vertical datum.
 **Status:** Static controls and thirteen local tests pass. Production processing remains deferred because the DEM amendment is unapproved, the source heights are EGM2008 orthometric while ArcGIS documents EGM96 for its built-in geoid option, and updated orbit files are not authorized auxiliary products. No payload byte, external custody path, or scientific result was created.
+
+## D-019 — Predeclared Sentinel-2 Level-2A processing
+
+**Decision:** Fix the exact RUM pair, metadata-derived BOA scaling, DN-zero treatment, conservative SCL mask, 20 m EPSG:32645 grid, contextual indices, and cross-platform comparison controls before reading product pixels.
+**Reason:** Processing baseline 05.12 requires band-specific offsets and metadata verification, while a high-cloud post-event scene and an S2C-to-S2B comparison could otherwise invite hidden mask, scaling, or harmonization changes.
+**Status:** Fifteen portable tests and one ArcGIS Pro 3.7.1 synthetic run pass. Five scaled bands and NDVI, MNDWI, and NBR matched declared values with DN-zero and SCL exclusions preserved. Missing and duplicate offset controls are covered. Real metadata, pixels, AOI coverage, registration, optical change, and scientific admission remain unestablished.

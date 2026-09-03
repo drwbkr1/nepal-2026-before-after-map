@@ -1,0 +1,167 @@
+{
+  "receipt_id": "NEPAL-S2-OPTICAL-PROCESSING-SYNTHETIC-ARCGIS-001",
+  "status": "pass_synthetic_only",
+  "verified_at_utc": "2026-09-03T18:43:15Z",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced",
+    "spatial_analyst": "available_and_used"
+  },
+  "inputs": {
+    "contract": "config/qa/optical-baseline-processing-contract.json",
+    "contract_sha256": "8321b7d3bd6a4a4304ed111f67b9b3ec372204823e495fbabd434ba9463e6eb5",
+    "core": "scripts/optical_processing_core.py",
+    "core_sha256": "8fd8d088d1f49b6aeeccee874419f1a18b452ebeaab21ca58cf2a07e13b96d47",
+    "arcgis_adapter": "scripts/validate_optical_processing_arcgis.py",
+    "arcgis_adapter_sha256": "be8615b21f87cc461e68b612cf250cbb908bacd3aeb839d6a72e238e20298509"
+  },
+  "synthetic_fixture": {
+    "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\optical-processing-synthetic-arcgis-002",
+    "wkid": 32645,
+    "cell_size_m": 20.0,
+    "rows": 16,
+    "columns": 16,
+    "processing_baseline": "05.12",
+    "quantification_value": 10000.0,
+    "offsets_by_used_band": {
+      "B03": -1000.0,
+      "B04": -1000.0,
+      "B08": -1000.0,
+      "B11": -1000.0,
+      "B12": -1000.0
+    },
+    "raw_dn_by_band": {
+      "B03": 2500,
+      "B04": 3000,
+      "B08": 5000,
+      "B11": 2000,
+      "B12": 1500
+    },
+    "scl_pattern": "class 9 in every fourth column; class 4 elsewhere",
+    "b04_dn_zero_location": [
+      0,
+      1
+    ],
+    "input_sha256": {
+      "synthetic_B03_dn.tif": "ca62603e18b09979c2f7e2c1288811a8267a17e8cb61a33c45378d722a6cf69b",
+      "synthetic_B04_dn.tif": "c63d92902609c194439b9af820985752268e43e4a75933b4a667de1156a6af8b",
+      "synthetic_B08_dn.tif": "54b7db26d9658961d51fc866155a6fa489fa118c92b3cfade937af87b7edef07",
+      "synthetic_B11_dn.tif": "dc02c65990a254a0dd86f7748d272d5b014bd3df29057e3cbc729ba2f4f30dda",
+      "synthetic_B12_dn.tif": "c67be1e734ac52bd43c30b47092622906315313d544024945d645969b4a7ba1d",
+      "synthetic_SCL.tif": "9a075bd2e0116e833276d68054ddc9cc579996b0238f8064c4f902a2f43ec69a",
+      "synthetic_MTD_MSIL2A.xml": "cfb04d56834dc0c8dd06eca4e602ac5fc01630cf086f5c9da5a06b51c5063209"
+    },
+    "output_sha256": {
+      "synthetic_B03_reflectance.tif": "9fa84ddfeb943031b3ba1ab494f062ca5689e07af77e0711a5c03bab1757a86b",
+      "synthetic_B04_reflectance.tif": "66c0d0a9725549442133c89093be84501fc101c0bfe250bc86b31831e6555bf9",
+      "synthetic_B08_reflectance.tif": "657352db7da1d15166ea81a0690338b1762f43de620f4e90483fd633fb7e3015",
+      "synthetic_B11_reflectance.tif": "ebdf0f2e00affa0d89952d3f8a59da02360e8705161da0037bd3ff1da44c163e",
+      "synthetic_B12_reflectance.tif": "e2c0c74e7efadfa07366fda431a1b86697a30b9a24c02b5e17c8910c6eb2dd0f",
+      "synthetic_NDVI.tif": "a61294673d4e889bd49e5790d2f92f2d43bec7e6e0042219c9bc9036690ecc19",
+      "synthetic_MNDWI.tif": "30b4a243d12ebb08999b121dd13bbdc747ebc6b31c69104da842cc8099391537",
+      "synthetic_NBR.tif": "f3ebfb37e82decfdf9c5dca4f3383015aeea992ad21a22c7b3475e73b5b4736a"
+    }
+  },
+  "checks": {
+    "B03": {
+      "status": "pass",
+      "expected_value": 0.15,
+      "observed_min": 0.15000000596046448,
+      "observed_max": 0.15000000596046448,
+      "expected_valid_cell_count": 192,
+      "observed_valid_cell_count": 192
+    },
+    "B04": {
+      "status": "pass",
+      "expected_value": 0.2,
+      "observed_min": 0.20000000298023224,
+      "observed_max": 0.20000000298023224,
+      "expected_valid_cell_count": 191,
+      "observed_valid_cell_count": 191
+    },
+    "B08": {
+      "status": "pass",
+      "expected_value": 0.4,
+      "observed_min": 0.4000000059604645,
+      "observed_max": 0.4000000059604645,
+      "expected_valid_cell_count": 192,
+      "observed_valid_cell_count": 192
+    },
+    "B11": {
+      "status": "pass",
+      "expected_value": 0.1,
+      "observed_min": 0.10000000149011612,
+      "observed_max": 0.10000000149011612,
+      "expected_valid_cell_count": 192,
+      "observed_valid_cell_count": 192
+    },
+    "B12": {
+      "status": "pass",
+      "expected_value": 0.05,
+      "observed_min": 0.05000000074505806,
+      "observed_max": 0.05000000074505806,
+      "expected_valid_cell_count": 192,
+      "observed_valid_cell_count": 192
+    },
+    "NDVI": {
+      "status": "pass",
+      "expected_value": 0.3333333333333333,
+      "observed_min": 0.3333333134651184,
+      "observed_max": 0.3333333134651184,
+      "expected_valid_cell_count": 191,
+      "observed_valid_cell_count": 191
+    },
+    "MNDWI": {
+      "status": "pass",
+      "expected_value": 0.19999999999999996,
+      "observed_min": 0.20000001788139343,
+      "observed_max": 0.20000001788139343,
+      "expected_valid_cell_count": 192,
+      "observed_valid_cell_count": 192
+    },
+    "NBR": {
+      "status": "pass",
+      "expected_value": 0.7777777777777778,
+      "observed_min": 0.7777777314186096,
+      "observed_max": 0.7777777314186096,
+      "expected_valid_cell_count": 192,
+      "observed_valid_cell_count": 192
+    }
+  },
+  "assertions": {
+    "metadata_baseline_quantification_and_offsets_parsed": true,
+    "dn_zero_preserved_as_nodata": true,
+    "excluded_scl_preserved_as_nodata": true,
+    "reflectance_scaling_matches_predeclared_formula": true,
+    "normalized_indices_match_predeclared_formulas": true,
+    "real_product_metadata_parsed": false,
+    "real_product_pixels_examined": false,
+    "external_custody_accessed": false,
+    "source_association_created": false,
+    "optical_baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  },
+  "claim_boundary": {
+    "parameters_predeclared": true,
+    "real_product_metadata_parsed": false,
+    "real_product_pixels_examined": false,
+    "usable_aoi_coverage_established": false,
+    "registration_established": false,
+    "optical_baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  },
+  "limitations": [
+    "All raster and metadata inputs are deterministic synthetic fixtures.",
+    "The check proves ArcGIS raster algebra, NoData handling, SCL exclusion, scaling, and index formulas only.",
+    "It does not establish real-product identity, usable AOI coverage, registration, cross-platform comparability, optical change, interpretation, or attribution.",
+    "The post-event optical product remains high-cloud-risk and may be inconclusive."
+  ],
+  "preserved_review_bindings": {
+    "source_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+    "m2_activation_review_bundle_sha256": "e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d",
+    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d"
+  }
+}

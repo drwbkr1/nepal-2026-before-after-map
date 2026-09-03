@@ -22,6 +22,7 @@ REQUIRED = [
     "docs/ARCGIS_DELIVERY_PLAN.md",
     "docs/ARCGIS_EVIDENCE_MODEL.md",
     "docs/PIXEL_QA_PROTOCOL.md",
+    "docs/OPTICAL_BASELINE_PROCESSING_PROTOCOL.md",
     "docs/VALIDATION.md",
     "docs/STATUS.md",
     "docs/DECISIONS.md",
@@ -84,11 +85,14 @@ REQUIRED = [
     "config/qa/pixel-readiness-contract.json",
     "config/qa/candidate-pair-plan.json",
     "config/qa/radar-baseline-processing-contract.json",
+    "config/qa/optical-baseline-processing-contract.json",
     "docs/assets/arcgis-evidence-workspace-preview.png",
     "records/surface-receipts/m2-activation-review.json",
     "records/surface-receipts/arcgis-sar-processing-capability.json",
     "records/surface-receipts/m2-dem-amendment-review.json",
     "records/surface-receipts/m2-dem-radar-control-readiness.json",
+    "records/surface-receipts/optical-processing-synthetic-arcgis.json",
+    "records/surface-receipts/optical-baseline-control-readiness.json",
     "contracts/m2-offline-verification-candidate.json",
     "records/readiness/m2-readiness-audit-input.json",
     "records/readiness/m2-readiness-decision.json",
@@ -117,6 +121,7 @@ REQUIRED = [
     "tests/test_m2_dem_amendment.py",
     "tests/test_m2_dem_controls.py",
     "tests/test_radar_processing_contract.py",
+    "tests/test_optical_processing_core.py",
     "scripts/activate_m2_verification.py",
     "scripts/verify_m2_product_container.py",
     "scripts/inspect_arcgis_sar_capability.py",
@@ -124,6 +129,9 @@ REQUIRED = [
     "scripts/prepare_m2_dem_controls.py",
     "scripts/verify_m2_dem_geotiff.py",
     "scripts/prepare_radar_processing_contract.py",
+    "scripts/optical_processing_core.py",
+    "scripts/prepare_optical_processing_contract.py",
+    "scripts/validate_optical_processing_arcgis.py",
     "scripts/render_m2_dem_amendment_review.py",
     ".github/workflows/validate.yml",
 ]
@@ -196,6 +204,9 @@ def main() -> None:
     dem_verification_candidate = json.loads((ROOT / "contracts/m2-dem-offline-verification-candidate.json").read_text(encoding="utf-8"))
     radar_processing_contract = json.loads((ROOT / "config/qa/radar-baseline-processing-contract.json").read_text(encoding="utf-8"))
     dem_radar_readiness = json.loads((ROOT / "records/surface-receipts/m2-dem-radar-control-readiness.json").read_text(encoding="utf-8"))
+    optical_processing_contract = json.loads((ROOT / "config/qa/optical-baseline-processing-contract.json").read_text(encoding="utf-8"))
+    optical_arcgis_receipt = json.loads((ROOT / "records/surface-receipts/optical-processing-synthetic-arcgis.json").read_text(encoding="utf-8"))
+    optical_readiness = json.loads((ROOT / "records/surface-receipts/optical-baseline-control-readiness.json").read_text(encoding="utf-8"))
     goal = json.loads((ROOT / "records/long-term-goal.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
@@ -447,6 +458,114 @@ def main() -> None:
         )
     ):
         fail("DEM and radar readiness receipt violates its no-payload claim boundary")
+    if optical_processing_contract.get("contract_id") != "NEPAL-S2-BASELINE-PROCESSING-001":
+        fail("optical processing contract identity differs")
+    if optical_processing_contract.get("status") != "predeclared_no_real_processing":
+        fail("optical processing contract must remain a predeclaration")
+    optical_route = optical_processing_contract.get("route", {})
+    if optical_route.get("pair_id") != "PAIR-S2-RUM-R119" or optical_route.get("before_source_id") != "M1-SRC-010" or optical_route.get("after_source_id") != "M1-SRC-008":
+        fail("optical processing contract exact pair differs")
+    if optical_route.get("processing_baseline_from_product_name") != "05.12":
+        fail("optical processing contract baseline differs")
+    optical_grid = optical_processing_contract.get("analysis_grid", {})
+    if optical_grid.get("wkid") != 32645 or optical_grid.get("cell_size_m") != 20.0:
+        fail("optical processing contract grid must use EPSG:32645 at 20 metres")
+    if optical_grid.get("extent") != {"xmin": 273300.0, "ymin": 3070220.0, "xmax": 367820.0, "ymax": 3149220.0}:
+        fail("optical processing contract grid extent differs")
+    if optical_grid.get("columns") != 4726 or optical_grid.get("rows") != 3950:
+        fail("optical processing contract grid dimensions differ")
+    if optical_processing_contract.get("reflectance_scaling", {}).get("formula") != "(DN + BOA_ADD_OFFSET_band) / BOA_QUANTIFICATION_VALUE":
+        fail("optical processing contract reflectance formula differs")
+    if optical_processing_contract.get("reflectance_scaling", {}).get("dn_zero_policy") != "NoData_before_offset_or_scaling":
+        fail("optical processing contract DN-zero policy differs")
+    if set(optical_processing_contract.get("bands", {}).get("change_core", [])) != {"B02", "B03", "B04", "B08", "B11", "B12"}:
+        fail("optical processing contract change-band set differs")
+    if set(optical_processing_contract.get("mask", {}).get("valid_scl_classes", {})) != {"4", "5", "6"}:
+        fail("optical processing contract valid SCL classes differ")
+    if optical_processing_contract.get("cross_platform", {}).get("unmeasured_harmonization") != "prohibited":
+        fail("optical processing contract must prohibit unmeasured harmonization")
+    if optical_processing_contract.get("authority", {}).get("real_pixel_processing_started") is not False:
+        fail("optical processing contract invents real processing")
+    optical_bindings = optical_processing_contract.get("bindings", {})
+    for ref_key, hash_key in (
+        ("source_manifest_ref", "source_manifest_sha256"),
+        ("source_manifest_approval_ref", "source_manifest_approval_sha256"),
+        ("acquisition_plan_ref", "acquisition_plan_sha256"),
+        ("active_verification_ref", "active_verification_sha256"),
+        ("pair_plan_ref", "pair_plan_sha256"),
+        ("pixel_readiness_ref", "pixel_readiness_sha256"),
+        ("approved_aoi_ref", "approved_aoi_sha256"),
+    ):
+        relative = optical_bindings.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"optical processing contract is missing {ref_key}")
+        if optical_bindings.get(hash_key) != sha256(relative):
+            fail(f"optical processing contract does not bind {ref_key}")
+    if optical_arcgis_receipt.get("status") != "pass_synthetic_only":
+        fail("optical ArcGIS receipt status differs")
+    if optical_arcgis_receipt.get("runtime") != {
+        "product": "ArcGISPro",
+        "version": "3.7.1",
+        "license_level": "Advanced",
+        "spatial_analyst": "available_and_used",
+    }:
+        fail("optical ArcGIS receipt runtime differs")
+    optical_arcgis_inputs = optical_arcgis_receipt.get("inputs", {})
+    for ref_key, hash_key in (
+        ("contract", "contract_sha256"),
+        ("core", "core_sha256"),
+        ("arcgis_adapter", "arcgis_adapter_sha256"),
+    ):
+        relative = optical_arcgis_inputs.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"optical ArcGIS receipt is missing {ref_key}")
+        if optical_arcgis_inputs.get(hash_key) != sha256(relative):
+            fail(f"optical ArcGIS receipt does not bind {ref_key}")
+    if set(optical_arcgis_receipt.get("checks", {})) != {"B03", "B04", "B08", "B11", "B12", "NDVI", "MNDWI", "NBR"}:
+        fail("optical ArcGIS receipt check set differs")
+    if any(item.get("status") != "pass" for item in optical_arcgis_receipt.get("checks", {}).values()):
+        fail("optical ArcGIS receipt contains a failed check")
+    optical_assertions = optical_arcgis_receipt.get("assertions", {})
+    if optical_assertions.get("dn_zero_preserved_as_nodata") is not True or optical_assertions.get("excluded_scl_preserved_as_nodata") is not True:
+        fail("optical ArcGIS receipt did not preserve NoData or SCL exclusions")
+    if any(
+        optical_assertions.get(key) is not False
+        for key in (
+            "real_product_metadata_parsed",
+            "real_product_pixels_examined",
+            "external_custody_accessed",
+            "source_association_created",
+            "optical_baseline_established",
+            "change_established",
+            "scientific_admission_authorized",
+        )
+    ):
+        fail("optical ArcGIS receipt violates its synthetic-only claim boundary")
+    if optical_readiness.get("status") != "pass_predeclared_and_synthetic_only_real_route_deferred":
+        fail("optical control-readiness receipt status differs")
+    optical_readiness_bindings = optical_readiness.get("bindings", {})
+    for ref_key, hash_key in (
+        ("optical_contract_ref", "optical_contract_sha256"),
+        ("optical_core_ref", "optical_core_sha256"),
+        ("contract_builder_ref", "contract_builder_sha256"),
+        ("arcgis_adapter_ref", "arcgis_adapter_sha256"),
+        ("arcgis_receipt_ref", "arcgis_receipt_sha256"),
+        ("portable_tests_ref", "portable_tests_sha256"),
+        ("protocol_ref", "protocol_sha256"),
+        ("pair_plan_ref", "pair_plan_sha256"),
+        ("pixel_readiness_ref", "pixel_readiness_sha256"),
+        ("source_manifest_ref", "source_manifest_sha256"),
+        ("active_m2_ref", "active_m2_sha256"),
+    ):
+        relative = optical_readiness_bindings.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"optical readiness receipt is missing {ref_key}")
+        if optical_readiness_bindings.get(hash_key) != sha256(relative):
+            fail(f"optical readiness receipt does not bind {ref_key}")
+    if optical_readiness.get("validation", {}).get("portable_test_count") != 15 or optical_readiness.get("validation", {}).get("full_repository_test_count") != 97:
+        fail("optical readiness receipt test counts differ")
+    if optical_readiness.get("current_route_disposition", {}).get("status") != "defer":
+        fail("optical real-data route must remain deferred")
     if aoi_reconciliation["contract_sha256"] != sha256("reviews/m1-aoi/review-contract.json"):
         fail("AOI reconciliation does not bind the exact historical review contract")
     if approval["status"] != "approved" or approval["reviewed_aoi_sha256"] != sha256("config/aoi/draft-study-areas.geojson"):
@@ -1038,6 +1157,30 @@ def main() -> None:
         fail("EVID-0023 must preserve 82 passing tests")
     if dem_radar_evidence.get("assertions") != dem_radar_readiness.get("assertions"):
         fail("EVID-0023 and its readiness receipt have different claim boundaries")
+    optical_evidence = ledger_by_id.get("EVID-0024")
+    if not isinstance(optical_evidence, dict):
+        fail("evidence ledger is missing EVID-0024 optical processing evidence")
+    for ref_key, hash_key in (
+        ("readiness_receipt_ref", "readiness_receipt_sha256"),
+        ("arcgis_receipt_ref", "arcgis_receipt_sha256"),
+        ("contract_ref", "contract_sha256"),
+        ("core_ref", "core_sha256"),
+        ("builder_ref", "builder_sha256"),
+        ("arcgis_adapter_ref", "arcgis_adapter_sha256"),
+        ("test_ref", "test_sha256"),
+        ("protocol_ref", "protocol_sha256"),
+    ):
+        relative = optical_evidence.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"EVID-0024 is missing {ref_key}")
+        if optical_evidence.get(hash_key) != sha256(relative):
+            fail(f"EVID-0024 does not bind {ref_key}")
+    if optical_evidence.get("status") != "pass_synthetic_only_real_route_deferred":
+        fail("EVID-0024 must preserve its synthetic-only deferred status")
+    if optical_evidence.get("route_disposition", {}).get("status") != "defer":
+        fail("EVID-0024 real optical route must remain deferred")
+    if optical_evidence.get("assertions") != optical_readiness.get("assertions"):
+        fail("EVID-0024 and optical readiness receipt have different claim boundaries")
 
     violations = []
     for relative in tracked_files():
