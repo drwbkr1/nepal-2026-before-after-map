@@ -168,13 +168,21 @@ def evaluate_metadata(
 
 def inspect_with_arcpy(path: Path) -> dict[str, Any]:
     import arcpy  # type: ignore
+    import numpy as np
 
     description = arcpy.Describe(str(path))
     raster = arcpy.Raster(str(path))
     install = arcpy.GetInstallInfo()
-
-    def raster_property(name: str) -> str:
-        return str(arcpy.management.GetRasterProperties(str(path), name).getOutput(0))
+    values = np.asarray(arcpy.RasterToNumPyArray(raster))
+    nodata_value = raster.noDataValue
+    valid = np.isfinite(values)
+    if nodata_value is not None:
+        valid &= values != nodata_value
+    valid_count = int(np.count_nonzero(valid))
+    total_count = int(values.size)
+    if valid_count == 0:
+        raise ValueError("DEM raster contains no finite non-NoData cells")
+    valid_values = values[valid]
 
     return {
         "size_bytes": path.stat().st_size,
@@ -192,13 +200,17 @@ def inspect_with_arcpy(path: Path) -> dict[str, Any]:
             float(description.extent.YMax),
         ],
         "nodata": {
-            "any_nodata": raster_property("ANYNODATA"),
-            "all_nodata": raster_property("ALLNODATA"),
-            "nodata_value": raster.noDataValue,
+            "any_nodata": valid_count < total_count,
+            "all_nodata": valid_count == 0,
+            "nodata_value": nodata_value,
         },
         "statistics": {
-            "minimum": float(raster_property("MINIMUM")),
-            "maximum": float(raster_property("MAXIMUM")),
+            "minimum": float(np.min(valid_values)),
+            "maximum": float(np.max(valid_values)),
+            "valid_cell_count": valid_count,
+            "nodata_or_nonfinite_cell_count": total_count - valid_count,
+            "total_cell_count": total_count,
+            "source": "arcpy.RasterToNumPyArray_read_only_full_raster",
         },
         "runtime": {
             "product": install.get("ProductName"),
@@ -364,6 +376,7 @@ def main() -> None:
         "evaluation": evaluation,
         "claim_boundary": {
             "structural_raster_fitness_established": evaluation["status"] == "pass_structural_only",
+            "full_raster_pixel_statistics_captured": runtime_error is None and observed.get("statistics", {}).get("source") == "arcpy.RasterToNumPyArray_read_only_full_raster",
             "valid_pixel_coverage_established": False,
             "vertical_datum_route_established": False,
             "sentinel_processing_executed": False,

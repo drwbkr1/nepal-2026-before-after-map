@@ -79,6 +79,13 @@ class M2DemActiveGeoTiffTests(unittest.TestCase):
         self.assertNotIn('raster_property("NODATAVALUE")', source)
         self.assertIn("raster.noDataValue", source)
 
+    def test_statistics_route_does_not_require_precomputed_arcgis_statistics(self):
+        source = SCRIPT.read_text(encoding="utf-8")
+        self.assertNotIn('raster_property("MINIMUM")', source)
+        self.assertNotIn('raster_property("MAXIMUM")', source)
+        self.assertIn("arcpy.RasterToNumPyArray", source)
+        self.assertIn("arcpy.RasterToNumPyArray_read_only_full_raster", source)
+
 
 if __name__ == "__main__":
     unittest.main()

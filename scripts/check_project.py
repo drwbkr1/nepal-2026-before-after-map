@@ -72,6 +72,8 @@ REQUIRED = [
     "records/acquisition/dem-geotiff-verifier-readiness.json",
     "records/acquisition/dem-verification/m2-dem-001.json",
     "records/acquisition/dem-geotiff-verifier-correction-001.json",
+    "records/acquisition/dem-verification/m2-dem-001-attempt-002.json",
+    "records/acquisition/dem-geotiff-verifier-correction-002.json",
     "records/source-gates/source-manifest-approval.json",
     "records/source-gates/source-manifest-review-reconciliation.json",
     "records/source-gates/m2-activation-approval.json",
@@ -2225,6 +2227,27 @@ def main() -> None:
         fail("retained DEM GeoTIFF wrapper failure or correction binding differs")
     if dem_geotiff_correction_evidence.get("assertions") != geotiff_correction.get("assertions"):
         fail("EVID-0036 and DEM GeoTIFF correction have different claim boundaries")
+    dem_statistics_correction_evidence = ledger_by_id.get("EVID-0037")
+    if not isinstance(dem_statistics_correction_evidence, dict):
+        fail("evidence ledger is missing EVID-0037 DEM statistics correction")
+    if (
+        dem_statistics_correction_evidence.get("status") != "pass_read_only_statistics_correction_rerun_pending"
+        or dem_statistics_correction_evidence.get("correction_ref") != "records/acquisition/dem-geotiff-verifier-correction-002.json"
+        or dem_statistics_correction_evidence.get("correction_sha256") != sha256("records/acquisition/dem-geotiff-verifier-correction-002.json")
+    ):
+        fail("EVID-0037 DEM statistics correction differs")
+    statistics_correction = json.loads((ROOT / "records/acquisition/dem-geotiff-verifier-correction-002.json").read_text(encoding="utf-8"))
+    second_failed_geotiff_attempt = json.loads((ROOT / "records/acquisition/dem-verification/m2-dem-001-attempt-002.json").read_text(encoding="utf-8"))
+    if (
+        statistics_correction.get("status") != "pass_read_only_statistics_correction_rerun_pending"
+        or statistics_correction.get("supersedes_execution_result", {}).get("failure_sha256") != sha256("records/acquisition/dem-verification/m2-dem-001-attempt-002.json")
+        or second_failed_geotiff_attempt.get("status") != "fail"
+        or second_failed_geotiff_attempt.get("custody_inventory_before") != second_failed_geotiff_attempt.get("custody_inventory_after")
+        or "no statistics are available" not in second_failed_geotiff_attempt.get("evaluation", {}).get("checks", {}).get("arcgis_runtime", {}).get("actual", {}).get("message", "")
+    ):
+        fail("retained DEM statistics failure or correction binding differs")
+    if dem_statistics_correction_evidence.get("assertions") != statistics_correction.get("assertions"):
+        fail("EVID-0037 and DEM statistics correction have different claim boundaries")
 
     violations = []
     for relative in tracked_files():

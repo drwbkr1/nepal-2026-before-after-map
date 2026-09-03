@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "correction_id": "NEPAL-M2-DEM-GEOTIFF-VERIFIER-CORRECTION-002",
+  "status": "pass_read_only_statistics_correction_rerun_pending",
+  "recorded_at_utc": "2026-09-03T21:25:36Z",
+  "supersedes_execution_result": {
+    "failure_ref": "records/acquisition/dem-verification/m2-dem-001-attempt-002.json",
+    "failure_sha256": "aec85a69c3568ec08c9ac19da75b43ec3ab6ab0bdd4371228b8f63f9318ac08b",
+    "superseded_as_data_result": true,
+    "retained_as_runtime_evidence": true,
+    "reason": "The exact COG has no precomputed ArcGIS statistics, so GetRasterProperties(MINIMUM) stopped. The contract requires statistics capture, not preexisting statistics. The corrected authorized route reads the raster into NumPy through ArcPy and computes finite non-NoData counts and extrema without writing statistics or sidecars."
+  },
+  "bindings": {
+    "previous_correction_ref": "records/acquisition/dem-geotiff-verifier-correction-001.json",
+    "previous_correction_sha256": "1f44c6fd2c021498095f9c94b2d0a7fcc5f2c6d768d372fc8d23187ec3780f6d",
+    "corrected_verifier_ref": "scripts/verify_m2_dem_geotiff.py",
+    "corrected_verifier_sha256": "fe02389c904307b9690b3958e12bfb760a708898ddc15f8e0ca97dda551f3674",
+    "test_ref": "tests/test_m2_dem_active_geotiff.py",
+    "test_sha256": "8c2741b327af35ec01851f5e8e332389b569e8e4d3f12729716f293727e31104"
+  },
+  "validation": {
+    "focused_test_count": 14,
+    "full_test_count": 177,
+    "project_checker": "pass"
+  },
+  "assertions": {
+    "second_attempt_byte_identity_passed": true,
+    "second_attempt_custody_unchanged": true,
+    "second_attempt_runtime_completed": false,
+    "second_attempt_establishes_data_failure": false,
+    "real_dem_raster_opened": true,
+    "pixel_statistics_absent_in_source": true,
+    "corrected_route_writes_source_statistics": false,
+    "corrected_rerun_performed": false,
+    "geotiff_fitness_established": false,
+    "valid_aoi_pixel_coverage_established": false,
+    "vertical_datum_route_established": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Publish the second targeted correction, then rerun M2-DEM-001 to a new append-only receipt and stop again on any failure or custody mutation."
+}
