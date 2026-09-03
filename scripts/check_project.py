@@ -139,6 +139,9 @@ def main() -> None:
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
         fail("long-term goal record must be active")
+    workflow_text = (ROOT / ".github/workflows/validate.yml").read_text(encoding="utf-8")
+    if "actions/checkout@v6" not in workflow_text or "actions/setup-python@v7" not in workflow_text:
+        fail("GitHub Actions must use the confirmed Node.js 24 action majors")
     if contract["project_profile_ref"] != "records/project-control-profile.json":
         fail("milestone must reference the project control profile")
     if contract["status"] != "complete":
