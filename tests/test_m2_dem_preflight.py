@@ -62,9 +62,11 @@ class M2DemPreflightTests(unittest.TestCase):
         intake = load(MODULE.INTAKE_REF)
         self.assertEqual(approval["authorized_source_ids"], [f"M2-DEM-{index:03d}" for index in range(1, 5)])
         units = {unit["id"]: unit for unit in milestone["units"]}
+        all_promoted = all(asset["state"] == "promoted" for asset in intake["assets"])
+        expected_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION" if all_promoted else "M2-DEM-ACQUISITION"
         self.assertEqual(units["M2-DEM-PREFLIGHT"]["status"], "complete")
-        self.assertEqual(units["M2-DEM-ACQUIRE"]["status"], "ready")
-        self.assertIn("M2-DEM-ACQUISITION", {item["checkpoint_id"] for item in profile["parallel_checkpoints"]})
+        self.assertEqual(units["M2-DEM-ACQUIRE"]["status"], "complete" if all_promoted else "ready")
+        self.assertIn(expected_checkpoint, {item["checkpoint_id"] for item in profile["parallel_checkpoints"]})
         self.assertEqual(
             [asset["extensions"]["source_id"] for asset in intake["assets"]],
             [f"M2-DEM-{index:03d}" for index in range(1, 5)],

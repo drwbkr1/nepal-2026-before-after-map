@@ -223,13 +223,28 @@
         "unavailable_reason": "The publisher route exposes a byte length and ETag but no upstream SHA-256. Revalidate the remote identity and compute SHA-256 locally before promotion."
       },
       "observed": {
-        "staged_sha256": null,
-        "staged_size_bytes": null,
-        "promoted_sha256": null,
-        "promoted_size_bytes": null
+        "staged_sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7",
+        "staged_size_bytes": 38402839,
+        "promoted_sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7",
+        "promoted_size_bytes": 38402839
       },
-      "state": "authorized",
-      "attempts": [],
+      "state": "promoted",
+      "attempts": [
+        {
+          "attempt_id": "m2-dem-004-20260903T211203Z-fea29d6d",
+          "started_at": "2026-09-03T21:12:03Z",
+          "completed_at": "2026-09-03T21:12:31Z",
+          "outcome": "succeeded",
+          "extensions": {
+            "source_id": "M2-DEM-004",
+            "preflight_sha256": "18ca15363d92f6f04d672ddb3e97fef33524c94bcb54915d83c82dae77af38f1",
+            "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-dem-intake-001\\attempt-events\\m2-dem-004\\m2-dem-004-20260903T211203Z-fea29d6d-started.json",
+            "anonymous_access": true,
+            "credential_or_account_used": false,
+            "resume": false
+          }
+        }
+      ],
       "failure": null,
       "superseded_by": null,
       "extensions": {
@@ -250,12 +265,16 @@
           3600
         ],
         "expected_data_type": "float32",
-        "intended_use": "Sentinel-1 terrain correction and terrain-geometry screening only"
+        "intended_use": "Sentinel-1 terrain correction and terrain-geometry screening only",
+        "successful_attempt_receipt": "records/acquisition/dem-attempts/m2-dem-004-20260903T211203Z-fea29d6d.json",
+        "successful_attempt_receipt_sha256": "c12edbbe6a9f0dcbba73e0cf7ad128b80567df51f540a3ce291c41d334209ea5",
+        "provider_checksum_available": false,
+        "geotiff_verification_status": "pending"
       }
     }
   ],
   "extensions": {
-    "status": "active_acquisition_in_progress",
+    "status": "active_all_promoted_pending_geotiff_verification",
     "project_root_basis": "parent_of_repository",
     "candidate_manifest_ref": "records/source-gates/m2-dem-candidate-manifest.json",
     "candidate_manifest_sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243",
@@ -282,9 +301,9 @@
     "custody_initialization_ref": "records/acquisition/dem-custody-initialization.json",
     "custody_initialization_sha256": "31d1b814d8da753dd2335f3110a49107df3f7a6c75875154a0fff0338b7e80a0",
     "external_custody_initialization_receipt": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\dem-custody-initialization-receipt.json",
-    "last_reconciled_attempt_id": "m2-dem-003-20260903T211120Z-76afbee1",
-    "last_reconciled_at_utc": "2026-09-03T21:11:51Z",
-    "last_checkpoint_ref": "records/acquisition/dem-checkpoints/m2-dem-003-20260903T211120Z-76afbee1.json",
-    "last_checkpoint_sha256": "da7f169b0dc2ff28fd73493cc37167a6917be9448f1a0d7258669654e7081774"
+    "last_reconciled_attempt_id": "m2-dem-004-20260903T211203Z-fea29d6d",
+    "last_reconciled_at_utc": "2026-09-03T21:12:43Z",
+    "last_checkpoint_ref": "records/acquisition/dem-checkpoints/m2-dem-004-20260903T211203Z-fea29d6d.json",
+    "last_checkpoint_sha256": "43e9bf7d20ebb74501a45f1582120fbe51c965835afb5d1e8ac07a2388339870"
   }
 }

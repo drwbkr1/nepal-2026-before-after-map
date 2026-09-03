@@ -398,7 +398,7 @@
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-dem-live-source-gate.json",
         "records/acquisition/dem-preflight.json",
@@ -413,21 +413,23 @@
         "source_and_custody_preflight": "pass",
         "anonymous_no_account_route": "pass",
         "new_terms_route_or_cost": "stop",
-        "authorized_count": 1,
-        "promoted_count": 3,
+        "authorized_count": 0,
+        "promoted_count": 4,
         "failed_count": 0,
-        "last_checkpoint_ref": "records/acquisition/dem-checkpoints/m2-dem-003-20260903T211120Z-76afbee1.json",
-        "last_checkpoint_sha256": "da7f169b0dc2ff28fd73493cc37167a6917be9448f1a0d7258669654e7081774"
+        "last_checkpoint_ref": "records/acquisition/dem-checkpoints/m2-dem-004-20260903T211203Z-fea29d6d.json",
+        "last_checkpoint_sha256": "43e9bf7d20ebb74501a45f1582120fbe51c965835afb5d1e8ac07a2388339870"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [],
       "exit_condition_delta": {
         "expected": [
           "EXIT-201-VERIFIED-CUSTODY"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "3 exact DEM files are promoted with reconciled SHA-256 and size receipts; continue one exact unattempted tile at a time."
+        "observed": [
+          "EXIT-201-VERIFIED-CUSTODY"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "All four exact tiles are promoted with reconciled byte identity; GeoTIFF verification remains next."
       },
       "next_dependency": "M2-DEM-VERIFY"
     },
@@ -439,7 +441,7 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "planned",
+      "status": "ready",
       "inputs": [
         "external DEM custody",
         "contracts/m2-dem-offline-verification.json"
@@ -516,7 +518,7 @@
       "No full-product bytes are yet in custody and no pixel usability or scientific change is established.",
       "The post-event optical route remains high-cloud-risk and may be inconclusive."
     ],
-    "parallel_checkpoint": "M2-DEM-ACQUISITION",
-    "parallel_next_action": "Acquire M2-DEM-004 only through append-only staging, exact size and local SHA-256, and no-replace promotion."
+    "parallel_checkpoint": "M2-DEM-GEOTIFF-VERIFICATION",
+    "parallel_next_action": "Run the active offline ArcGIS GeoTIFF verifier for each of the four promoted DEM tiles; do not infer pixel or vertical-datum fitness from transfer success."
   }
 }

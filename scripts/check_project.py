@@ -68,6 +68,7 @@ REQUIRED = [
     "records/acquisition/dem-preflight.json",
     "records/acquisition/dem-custody-initialization.json",
     "records/acquisition/dem-transfer-runner-readiness.json",
+    "records/acquisition/dem-acquisition-summary.json",
     "records/source-gates/source-manifest-approval.json",
     "records/source-gates/source-manifest-review-reconciliation.json",
     "records/source-gates/m2-activation-approval.json",
@@ -259,6 +260,7 @@ def main() -> None:
     dem_preflight = json.loads((ROOT / "records/acquisition/dem-preflight.json").read_text(encoding="utf-8"))
     dem_custody_receipt = json.loads((ROOT / "records/acquisition/dem-custody-initialization.json").read_text(encoding="utf-8"))
     dem_transfer_readiness = json.loads((ROOT / "records/acquisition/dem-transfer-runner-readiness.json").read_text(encoding="utf-8"))
+    dem_acquisition_summary = json.loads((ROOT / "records/acquisition/dem-acquisition-summary.json").read_text(encoding="utf-8"))
     expected_dem_source_order = ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
     dem_current_assets = dem_intake_active.get("assets", [])
     if [asset.get("extensions", {}).get("source_id") for asset in dem_current_assets] != expected_dem_source_order:
@@ -698,6 +700,22 @@ def main() -> None:
     readiness_assertions = dem_transfer_readiness.get("assertions", {})
     if readiness_assertions.get("tests_passed") is not True or any(readiness_assertions.get(key) is not False for key in ("network_requests_performed", "dem_payload_bytes_requested", "active_intake_mutated", "external_custody_mutated", "scientific_result_established")):
         fail("M2 DEM transfer-runner readiness invents execution or scientific evidence")
+    if dem_acquisition_summary.get("status") != "pass_exact_four_tile_acquisition" or dem_acquisition_summary.get("totals") != {"approved": 4, "promoted": 4, "failed": 0, "bytes": 170302058}:
+        fail("M2 DEM acquisition summary status or totals differ")
+    if [asset.get("source_id") for asset in dem_acquisition_summary.get("assets", [])] != expected_dem_source_order:
+        fail("M2 DEM acquisition summary source order differs")
+    for asset in dem_acquisition_summary["assets"]:
+        for ref_key, hash_key in (("attempt_receipt_ref", "attempt_receipt_sha256"), ("checkpoint_receipt_ref", "checkpoint_receipt_sha256")):
+            relative = asset.get(ref_key)
+            if not isinstance(relative, str) or not (ROOT / relative).is_file() or asset.get(hash_key) != sha256(relative):
+                fail(f"M2 DEM acquisition summary does not bind {ref_key} for {asset.get('source_id')}")
+        if asset.get("anonymous_access") is not True or asset.get("credential_or_account_used") is not False:
+            fail(f"M2 DEM acquisition summary access boundary differs for {asset.get('source_id')}")
+    dem_summary_assertions = dem_acquisition_summary.get("assertions", {})
+    if any(dem_summary_assertions.get(key) is not True for key in ("exact_approved_source_order_preserved", "all_attempts_terminal_succeeded", "all_promoted_bytes_locally_sha256_bound", "anonymous_access_only")):
+        fail("M2 DEM acquisition summary does not establish its bounded transfer claims")
+    if any(dem_summary_assertions.get(key) is not False for key in ("geotiff_readability_established", "valid_pixel_coverage_established", "vertical_datum_route_established", "radar_processing_executed", "scientific_result_established")):
+        fail("M2 DEM acquisition summary overclaims raster or scientific evidence")
     if sar_capability.get("status") != "pass_capability_only_dem_dependency_unresolved":
         fail("ArcGIS SAR capability receipt status differs")
     sar_checks = sar_capability.get("checks", {})
@@ -2148,6 +2166,21 @@ def main() -> None:
         "scientific_result_established": False,
     }:
         fail("EVID-0033 claim boundary differs")
+    dem_acquisition_evidence = ledger_by_id.get("EVID-0034")
+    if not isinstance(dem_acquisition_evidence, dict):
+        fail("evidence ledger is missing EVID-0034 DEM acquisition evidence")
+    if (
+        dem_acquisition_evidence.get("status") != "pass_exact_four_tiles_promoted_geotiff_verification_pending"
+        or dem_acquisition_evidence.get("summary_ref") != "records/acquisition/dem-acquisition-summary.json"
+        or dem_acquisition_evidence.get("summary_sha256") != sha256("records/acquisition/dem-acquisition-summary.json")
+        or dem_acquisition_evidence.get("promoted_tile_count") != 4
+        or dem_acquisition_evidence.get("promoted_byte_count") != 170302058
+        or dem_acquisition_evidence.get("failed_attempt_count") != 0
+        or dem_acquisition_evidence.get("next_checkpoint") != "M2-DEM-GEOTIFF-VERIFICATION"
+    ):
+        fail("EVID-0034 DEM acquisition evidence differs")
+    if dem_acquisition_evidence.get("assertions") != dem_acquisition_summary.get("assertions"):
+        fail("EVID-0034 and DEM acquisition summary have different claim boundaries")
 
     violations = []
     for relative in tracked_files():

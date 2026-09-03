@@ -113,10 +113,12 @@ class M2DemActivationTests(unittest.TestCase):
 
     def test_milestone_and_profile_preserve_parallel_dem_route(self) -> None:
         units = {unit["id"]: unit for unit in self.milestone["units"]}
+        all_promoted = all(asset["state"] == "promoted" for asset in self.active_intake["assets"])
+        expected_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION" if all_promoted else "M2-DEM-ACQUISITION"
         self.assertEqual(units["M2-DEM-AMEND"]["status"], "complete")
         self.assertEqual(units["M2-DEM-PREFLIGHT"]["status"], "complete")
-        self.assertEqual(units["M2-DEM-ACQUIRE"]["status"], "ready")
-        self.assertEqual(units["M2-DEM-VERIFY"]["status"], "planned")
+        self.assertEqual(units["M2-DEM-ACQUIRE"]["status"], "complete" if all_promoted else "ready")
+        self.assertEqual(units["M2-DEM-VERIFY"]["status"], "ready" if all_promoted else "planned")
         self.assertEqual(set(units["M2-BASELINE"]["depends_on"]), {"M2-VERIFY", "M2-DEM-VERIFY"})
         self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], [])
         self.assertEqual(
@@ -124,8 +126,8 @@ class M2DemActivationTests(unittest.TestCase):
             ["records/source-gates/m2-dem-amendment-approval.json"],
         )
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-AUTHENTICATION-REFERENCE")
-        self.assertEqual(self.profile["parallel_checkpoints"][0]["checkpoint_id"], "M2-DEM-ACQUISITION")
-        self.assertEqual(self.goal["parallel_checkpoints"], ["M2-DEM-ACQUISITION"])
+        self.assertEqual(self.profile["parallel_checkpoints"][0]["checkpoint_id"], expected_checkpoint)
+        self.assertEqual(self.goal["parallel_checkpoints"], [expected_checkpoint])
 
     def test_activation_receipt_preserves_published_outputs_and_claim_boundary(self) -> None:
         self.assertEqual(self.receipt["status"], "pass_exact_dem_amendment_activated_preflight_pending")

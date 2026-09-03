@@ -1,12 +1,12 @@
 # Current status
 
-- **State:** M1 complete; M2 active with independent Sentinel authentication and DEM acquisition checkpoints
+- **State:** M1 complete; M2 active with independent Sentinel authentication and DEM GeoTIFF-verification checkpoints
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
-- **Imagery custody:** Empty external custody structure initialized; zero products downloaded
+- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles promoted outside Git; the eight Sentinel products remain unattempted
 - **Long-term goal:** Active
-- **Checkpoints:** `M2-AUTHENTICATION-REFERENCE`; parallel `M2-DEM-ACQUISITION`
+- **Checkpoints:** `M2-AUTHENTICATION-REFERENCE`; parallel `M2-DEM-GEOTIFF-VERIFICATION`
 
 ## Purpose
 
@@ -60,7 +60,7 @@ The owner approved review bundle SHA-256 `caecbdfe69ec1a6c8c39401b63756005820a72
 
 At `2026-09-03T20:48:10Z`, the fresh preflight re-fetched the license and matched its exact approved SHA-256, revalidated all four official STAC identities, and matched all four anonymous object byte lengths, ETags, Last-Modified values, content types, and `Accept-Ranges` headers without redirects, accounts, credentials, requester charges, or payload bytes. Its source gate passes 40 required criteria with 76 evidence items. The path check found 519.029 GiB free, no reparse points, and no destination or staging collisions.
 
-The empty DEM custody and staging directories were initialized outside Git at `2026-09-03T20:50:33Z`, with matching local/external receipt SHA-256 `31d1b814d8da753dd2335f3110a49107df3f7a6c75875154a0fff0338b7e80a0`. `contracts/m2-dem-intake.json` still has four authorized, unattempted assets, and `contracts/m2-dem-offline-verification.json` remains gate-deferred until promoted rasters exist. The next parallel checkpoint is `M2-DEM-ACQUISITION`; only one exact tile may be staged, hashed, and promoted per attempt. The separate Sentinel CDSE checkpoint remains unchanged.
+The empty DEM custody and staging directories were initialized outside Git at `2026-09-03T20:50:33Z`, with matching local/external receipt SHA-256 `31d1b814d8da753dd2335f3110a49107df3f7a6c75875154a0fff0338b7e80a0`. The four approved tiles were then acquired sequentially with a fresh anonymous `HEAD` check before each transfer, exclusive staging, exact-length verification, local SHA-256, and atomic no-replace promotion. The promoted hashes are `66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a`, `5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194`, `4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc`, and `1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7`. No credential or account was used. All four append-only attempts and reconciliation checkpoints are retained, no transfer failed, and the next parallel checkpoint is `M2-DEM-GEOTIFF-VERIFICATION`. Structural raster, valid-pixel, vertical-datum, radar-processing, and scientific fitness remain unestablished. The separate Sentinel CDSE checkpoint remains unchanged.
 
 The anonymous one-tile transfer runner passes seven local fixture tests for exact remote identity, redirects and requester charges, exclusive staging, streamed SHA-256 and size, partial retention, and the absence of credential handling. Readiness receipt SHA-256 `515b692ac4717540d5347a518a6f8ea47625939c11ca92fc264133d960b92337` records no network request, intake mutation, external custody mutation, or payload byte during that validation.
 
@@ -95,7 +95,7 @@ Checkpoint derivation is also portable. Repository-only tests do not require the
 - preserve append-only attempts and use collision-safe staging and promotion;
 - verify exact bytes, provider checksums, ZIP safety, SAFE identity, and required content;
 - inspect real pixels, masks, AOI coverage, baselines, and EPSG:32645 registration.
-- acquire and verify only the four exact approved GLO-30 tiles, one at a time, under the passing DEM preflight and empty-custody receipt.
+- verify the four promoted GLO-30 tiles under the active ArcGIS GeoTIFF gate, then keep valid-pixel and vertical-datum decisions separate.
 
 ## Outside the active authority or still unproven
 

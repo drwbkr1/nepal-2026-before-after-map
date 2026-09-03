@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "summary_id": "NEPAL-M2-DEM-ACQUISITION-SUMMARY-001",
+  "status": "pass_exact_four_tile_acquisition",
+  "completed_at_utc": "2026-09-03T21:12:43Z",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "approval_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+    "preflight_ref": "records/acquisition/dem-preflight.json",
+    "preflight_sha256": "18ca15363d92f6f04d672ddb3e97fef33524c94bcb54915d83c82dae77af38f1",
+    "active_intake_ref": "contracts/m2-dem-intake.json",
+    "active_intake_sha256": "0c41f0c6028b09140f0107f97702f346d92242a74aa67e07037027120891fc64",
+    "active_verification_ref": "contracts/m2-dem-offline-verification.json",
+    "active_verification_sha256": "6534eda0c3dc11d5bedfd3d9b0c8cbb1b1df3a0638faa7becd904e6843326dac",
+    "transfer_runner_ref": "scripts/acquire_m2_dem_tile.py",
+    "transfer_runner_sha256": "2d4323754609853b5b350a9e81ecc4e66db2f1bcb91656e3ecaa36e6cf7b91b3",
+    "reconciliation_script_ref": "scripts/reconcile_m2_dem_acquisition.py",
+    "reconciliation_script_sha256": "8f48e97c6217cf9406d7f6b1c597d466be283bd9dc2ee262e7c70f7a5bf9b8bf"
+  },
+  "assets": [
+    {
+      "source_id": "M2-DEM-001",
+      "attempt_id": "m2-dem-001-20260903T210105Z-59f7dbc0",
+      "attempt_receipt_ref": "records/acquisition/dem-attempts/m2-dem-001-20260903T210105Z-59f7dbc0.json",
+      "attempt_receipt_sha256": "a9905f749b288cfc2d4b98e7fd9ed64e91ea4b5b5e0b256f469d879908dca02e",
+      "checkpoint_receipt_ref": "records/acquisition/dem-checkpoints/m2-dem-001-20260903T210105Z-59f7dbc0.json",
+      "checkpoint_receipt_sha256": "740c32b1087226c4f3f634d91e9325d15f07a6e46e2cd6234fe6eabe4aa397e6",
+      "local_size_bytes": 45336691,
+      "local_sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a",
+      "anonymous_access": true,
+      "credential_or_account_used": false
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "attempt_id": "m2-dem-002-20260903T211011Z-0c71d865",
+      "attempt_receipt_ref": "records/acquisition/dem-attempts/m2-dem-002-20260903T211011Z-0c71d865.json",
+      "attempt_receipt_sha256": "f196825ca028df92165622548e3f26be25bd1a732898aba3d898b899992c04e0",
+      "checkpoint_receipt_ref": "records/acquisition/dem-checkpoints/m2-dem-002-20260903T211011Z-0c71d865.json",
+      "checkpoint_receipt_sha256": "71bcdefc183cebfc73ac3b2808e8f75904613b1af840ff4178d126403a5664f0",
+      "local_size_bytes": 44874244,
+      "local_sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194",
+      "anonymous_access": true,
+      "credential_or_account_used": false
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "attempt_id": "m2-dem-003-20260903T211120Z-76afbee1",
+      "attempt_receipt_ref": "records/acquisition/dem-attempts/m2-dem-003-20260903T211120Z-76afbee1.json",
+      "attempt_receipt_sha256": "4f97e9be6e3b191a4b2ddc427010461bf3488d8ae363c25003837296b1f758bd",
+      "checkpoint_receipt_ref": "records/acquisition/dem-checkpoints/m2-dem-003-20260903T211120Z-76afbee1.json",
+      "checkpoint_receipt_sha256": "da7f169b0dc2ff28fd73493cc37167a6917be9448f1a0d7258669654e7081774",
+      "local_size_bytes": 41688284,
+      "local_sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc",
+      "anonymous_access": true,
+      "credential_or_account_used": false
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "attempt_id": "m2-dem-004-20260903T211203Z-fea29d6d",
+      "attempt_receipt_ref": "records/acquisition/dem-attempts/m2-dem-004-20260903T211203Z-fea29d6d.json",
+      "attempt_receipt_sha256": "c12edbbe6a9f0dcbba73e0cf7ad128b80567df51f540a3ce291c41d334209ea5",
+      "checkpoint_receipt_ref": "records/acquisition/dem-checkpoints/m2-dem-004-20260903T211203Z-fea29d6d.json",
+      "checkpoint_receipt_sha256": "43e9bf7d20ebb74501a45f1582120fbe51c965835afb5d1e8ac07a2388339870",
+      "local_size_bytes": 38402839,
+      "local_sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7",
+      "anonymous_access": true,
+      "credential_or_account_used": false
+    }
+  ],
+  "totals": {
+    "approved": 4,
+    "promoted": 4,
+    "failed": 0,
+    "bytes": 170302058
+  },
+  "assertions": {
+    "exact_approved_source_order_preserved": true,
+    "all_attempts_terminal_succeeded": true,
+    "all_promoted_bytes_locally_sha256_bound": true,
+    "anonymous_access_only": true,
+    "geotiff_readability_established": false,
+    "valid_pixel_coverage_established": false,
+    "vertical_datum_route_established": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  },
+  "next_checkpoint": "M2-DEM-GEOTIFF-VERIFICATION",
+  "limitations": [
+    "Transfer success and local SHA-256 establish custody identity, not GeoTIFF readability or valid pixels.",
+    "The EGM2008 to ArcGIS EGM96 vertical-datum mismatch remains unresolved.",
+    "The separate Sentinel acquisition remains at its owner-controlled authentication-reference checkpoint."
+  ]
+}
