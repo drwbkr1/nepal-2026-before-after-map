@@ -20,6 +20,8 @@ ArcGIS Pro terrain correction has a separate pending dependency gate. `contracts
 
 `contracts/m2-materialization.json` is the active but gate-deferred SAFE extraction control for the same eight products. It may run only after an exact promoted intake identity and matching `pass_container_only` receipt. Keep every complete, partial, and failed attempt outside Git; never reuse an attempt path or treat materialization as raster or pixel fitness.
 
+`config/qa/optical-input-readiness-contract.json` is the next Sentinel-2 gate. It may inspect only the exact materialized RUM pair after two passing materialization receipts. Header and metadata readiness permits later pixel QA only; do not treat a readable JP2, matching grid, or parsed scaling field as usable-pixel or change evidence.
+
 ## Source and custody rules
 
 - Treat catalog results as availability evidence, not proof of usable pixels, valid coverage, or event causation.

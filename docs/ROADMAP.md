@@ -48,6 +48,8 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Prepared materialization controls:** Each exact promoted archive must first pass the offline container gate, after which a collision-safe runner can create one append-only external SAFE attempt with a per-file SHA-256 manifest. Unsafe Windows paths, ambiguous paths, links, collisions, and archive drift fail closed. Synthetic tests pass; no real archive has been extracted.
 
+**Prepared optical input gate:** Two exact passing materialization receipts can feed an ArcGIS-native header-readiness runner. It re-hashes ten required members per SAFE, parses Level-2A scaling metadata, opens sixteen JP2 rasters, verifies EPSG:32645 10 m/20 m grids, and compares before/after headers before pixel access. Portable and ArcGIS synthetic tests pass; real input readiness remains deferred.
+
 **Work:**
 
 - download approved products into non-Git custody;

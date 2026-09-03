@@ -1,0 +1,131 @@
+{
+  "contract_version": "1.0",
+  "contract_id": "NEPAL-S2-MATERIALIZED-INPUT-READINESS-001",
+  "created_at_utc": "2026-09-03T19:10:40Z",
+  "status": "predeclared_gate_deferred_no_real_safe",
+  "inputs": {
+    "materialization_contract_ref": "contracts/m2-materialization.json",
+    "materialization_contract_sha256": "9ba8154a36fff562decede04de660e731ce2401f893cecbd90c2d8563ce43d7b",
+    "optical_processing_contract_ref": "config/qa/optical-baseline-processing-contract.json",
+    "optical_processing_contract_sha256": "8321b7d3bd6a4a4304ed111f67b9b3ec372204823e495fbabd434ba9463e6eb5",
+    "pixel_readiness_contract_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_readiness_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "source_manifest_ref": "records/source-manifest.json",
+    "source_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+    "core_ref": "scripts/optical_input_readiness_core.py",
+    "core_sha256": "0055e653404a0cfc98748491dc05349f8892986cb17efdd32cf7fb1be452551c",
+    "runner_ref": "scripts/inspect_optical_inputs_arcgis.py",
+    "runner_sha256": "5bc717da9095db3390ead46f5c066ffbde9f25e896dd2581db624f4b4f632db0",
+    "arcgis_adapter_ref": "scripts/validate_optical_input_readiness_arcgis.py",
+    "arcgis_adapter_sha256": "7a10c2ae11fcdff14be4229dd4a0bff78b3dcc99352aced72f3a06e305b6831f"
+  },
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-activation-approval.json",
+    "required_action_class": "data_processing",
+    "this_contract_creates_authority": false,
+    "network_access_authorized": false,
+    "dem_products_authorized": false
+  },
+  "route": {
+    "pair_id": "PAIR-S2-RUM-R119",
+    "before_source_id": "M1-SRC-010",
+    "before_product_id": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE",
+    "after_source_id": "M1-SRC-008",
+    "after_product_id": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE",
+    "processing_baseline": "05.12",
+    "tile": "45RUM",
+    "relative_orbit": 119
+  },
+  "analysis_crs": {
+    "wkid": 32645,
+    "name": "WGS 1984 UTM Zone 45N"
+  },
+  "execution_boundary": {
+    "external_data_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "receipt_root": "records/readiness/optical-input",
+    "network_requests": "prohibited",
+    "authentication": "prohibited",
+    "external_data_mutation": "prohibited",
+    "pixel_value_reads": "prohibited_header_and_identity_reads_only",
+    "receipt_replacement": "prohibited"
+  },
+  "prerequisites": {
+    "materialization_receipt_status": "pass_materialization_only",
+    "external_manifest_status": "complete",
+    "external_complete_marker_required": true,
+    "selected_member_size_and_sha256_reverification_required": true,
+    "exact_source_pair_required": true
+  },
+  "required_members": {
+    "exactly_one_per_role": true,
+    "role_patterns": {
+      "metadata_product": "MTD_MSIL2A.xml",
+      "metadata_tile": "GRANULE/*/MTD_TL.xml",
+      "B02": "GRANULE/*/IMG_DATA/R10m/*_B02_10m.jp2",
+      "B03": "GRANULE/*/IMG_DATA/R10m/*_B03_10m.jp2",
+      "B04": "GRANULE/*/IMG_DATA/R10m/*_B04_10m.jp2",
+      "B08": "GRANULE/*/IMG_DATA/R10m/*_B08_10m.jp2",
+      "B11": "GRANULE/*/IMG_DATA/R20m/*_B11_20m.jp2",
+      "B12": "GRANULE/*/IMG_DATA/R20m/*_B12_20m.jp2",
+      "SCL": "GRANULE/*/IMG_DATA/R20m/*_SCL_20m.jp2",
+      "quality_classification": "GRANULE/*/QI_DATA/MSK_CLASSI_B00.jp2"
+    }
+  },
+  "header_checks": {
+    "format": "JP2",
+    "band_count": 1,
+    "reflectance_pixel_types": [
+      "U12",
+      "U16"
+    ],
+    "scl_pixel_types": [
+      "U8",
+      "U16"
+    ],
+    "ten_metre_roles": [
+      "B02",
+      "B03",
+      "B04",
+      "B08"
+    ],
+    "twenty_metre_roles": [
+      "B11",
+      "B12",
+      "SCL"
+    ],
+    "cell_size_tolerance_m": 1e-06,
+    "extent_tolerance_m": 0.001,
+    "extent_must_equal_dimensions_times_cell_size": true,
+    "same_extent_within_product_required": true,
+    "same_role_grid_across_pair_required": true
+  },
+  "metadata_checks": {
+    "product_name_baseline_matches_internal_metadata": true,
+    "processing_baseline": "05.12",
+    "boa_quantification_value_exactly_once": true,
+    "all_used_band_offsets_exactly_once": true,
+    "dn_zero_identified_as_nodata": true
+  },
+  "decision_semantics": {
+    "pass": "pass_header_readability_only",
+    "failure": "block",
+    "pass_allows_pixel_qa_only": true,
+    "pass_creates_scientific_admission": false
+  },
+  "claim_boundary": {
+    "member_inventory_established": false,
+    "raster_headers_readable": false,
+    "pixel_values_examined": false,
+    "pixel_usability_established": false,
+    "baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  },
+  "limitations": [
+    "A header-readiness pass establishes selected file identity, required inventory, metadata scaling fields, JP2 readability, CRS, dimensions, cell size, and pair grid compatibility only.",
+    "It does not inspect pixel values, masks, AOI coverage, saturation, registration residuals, cross-platform bias, or observable change.",
+    "The post-event optical scene remains high-cloud-risk and may be unusable after pixel-level mask review.",
+    "A blocked or inconclusive optical route must be retained and cannot be rescued by substituting unapproved dates or products."
+  ]
+}

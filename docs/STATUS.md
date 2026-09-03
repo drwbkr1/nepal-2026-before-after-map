@@ -23,7 +23,7 @@ This project is building a reproducible, ArcGIS-ready before/after evidence pack
 
 ## M2 activation and live preflight
 
-The owner approved review bundle SHA-256 `e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d` and acquisition-plan SHA-256 `6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d`. The exact completed response was locked and reconciled before `contracts/milestone-002.json` became active.
+The owner approved review bundle SHA-256 `e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d` and acquisition-plan SHA-256 `6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d`. The exact completed response was locked and reconciled before `contracts/milestone-002.json` became active. The control profile now maps the approved custody preflight and eight-product acquisition units directly to that exact activation record, eliminating the generic under-gating lint without broadening authority.
 
 At `2026-09-03T17:31:17Z`, the non-mutating live preflight:
 
@@ -67,6 +67,12 @@ The real optical route remains **DEFER**. Neither archive is in verified custody
 The exact eight-product route now has an offline, gate-deferred materialization contract and runner. A product must be promoted in the active intake and have one matching `pass_container_only` container receipt before the runner reads custody. The archive is re-hashed, its full member namespace is revalidated for Windows and cross-platform safety, and every extracted file is recorded in an external SHA-256 manifest under one exclusive append-only attempt.
 
 Fourteen synthetic tests pass, including traversal, ambiguous components, backslash, Windows reserved-name and alternate-data-stream, case-collision, file/directory-collision, symbolic-link, attempt-collision, receipt-collision, and production pre-custody refusal checks. No external materialization directory exists, no real archive was read, and no raster or pixel claim was created.
+
+## Prepared optical input-readiness gate
+
+The exact materialized RUM pair now has a separate gate before pixel processing. It requires two passing materialization receipts, revalidates each external manifest and complete marker, re-hashes the ten selected SAFE members, parses the Level-2A baseline and scaling fields, and uses ArcGIS to inspect native JP2 headers. A pass is limited to header readability and can advance only to pixel, mask, coverage, and registration QA.
+
+Twelve portable tests and a final ArcGIS Pro 3.7.1 Advanced run pass. ArcGIS opened sixteen synthetic JP2 rasters with matching EPSG:32645 10 m and 20 m grids; a deliberate 10 m shift of the complete after grid blocked with fourteen extent mismatches. Two failed direct `CopyRaster` JP2-generation attempts and five superseded prepublication passing receipts remain recorded. No real materialization receipt, SAFE metadata, raster header, or pixel was accessed.
 
 ## Authorized but not completed
 

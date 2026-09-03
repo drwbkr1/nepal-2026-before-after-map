@@ -1,0 +1,101 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-S2-MATERIALIZED-INPUT-READINESS-CONTROL-001",
+  "verified_at_utc": "2026-09-03T19:31:50Z",
+  "status": "pass_synthetic_arcgis_real_input_deferred",
+  "bindings": {
+    "contract_ref": "config/qa/optical-input-readiness-contract.json",
+    "contract_sha256": "7cbcedef168a7e052ea44a8cd9b838281ace5c6b3d196a3ecd8d642ac3605427",
+    "core_ref": "scripts/optical_input_readiness_core.py",
+    "core_sha256": "0055e653404a0cfc98748491dc05349f8892986cb17efdd32cf7fb1be452551c",
+    "generator_ref": "scripts/prepare_optical_input_readiness_contract.py",
+    "generator_sha256": "c9974e80364d867bed5735be8cbda58931d92e33fb688e29c64cae58f741deb2",
+    "runner_ref": "scripts/inspect_optical_inputs_arcgis.py",
+    "runner_sha256": "5bc717da9095db3390ead46f5c066ffbde9f25e896dd2581db624f4b4f632db0",
+    "arcgis_adapter_ref": "scripts/validate_optical_input_readiness_arcgis.py",
+    "arcgis_adapter_sha256": "7a10c2ae11fcdff14be4229dd4a0bff78b3dcc99352aced72f3a06e305b6831f",
+    "test_ref": "tests/test_optical_input_readiness.py",
+    "test_sha256": "9b6182cc536df0feda762fbe83b0c8e87e056157d2e37b10d6823be556e3fa06",
+    "protocol_ref": "docs/OPTICAL_INPUT_READINESS_PROTOCOL.md",
+    "protocol_sha256": "35f77b2f2693ff2b1cf3211ca2546cd7a1479b99f7646601c88b1b4cbb235679",
+    "arcgis_receipt_ref": "records/surface-receipts/optical-input-readiness-synthetic-arcgis.json",
+    "arcgis_receipt_sha256": "3910aa085534a8721c0f70d50603950fe709cd0b6f084a5b7eb0b8c16b97836c",
+    "materialization_contract_ref": "contracts/m2-materialization.json",
+    "materialization_contract_sha256": "9ba8154a36fff562decede04de660e731ce2401f893cecbd90c2d8563ce43d7b",
+    "optical_processing_contract_ref": "config/qa/optical-baseline-processing-contract.json",
+    "optical_processing_contract_sha256": "8321b7d3bd6a4a4304ed111f67b9b3ec372204823e495fbabd434ba9463e6eb5",
+    "active_m2_ref": "contracts/milestone-002.json",
+    "active_m2_sha256_at_validation": "188af4575401473bb464dff84b83a90a41751b176c6a5e63a76f62acbe4e6bfb",
+    "activation_approval_ref": "records/source-gates/m2-activation-approval.json",
+    "activation_approval_sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
+    "acquisition_plan_ref": "records/acquisition-plan.json",
+    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d"
+  },
+  "validation": {
+    "portable_test_count": 12,
+    "portable_test_status": "pass",
+    "full_repository_test_count": 123,
+    "full_repository_test_status": "pass",
+    "deterministic_contract_derivation": "pass",
+    "arcgis_runtime": {
+      "product": "ArcGISPro",
+      "version": "3.7.1",
+      "license_level": "Advanced",
+      "gdal_version": "3120210",
+      "jp2_driver": "JP2OpenJPEG"
+    },
+    "synthetic_jp2_raster_count": 16,
+    "required_member_role_count_per_product": 10,
+    "aligned_pair_status": "pass_header_readability_only",
+    "intentional_after_grid_shift_status": "block",
+    "intentional_after_grid_shift_error_count": 14,
+    "production_wrapper_current_disposition": "stopped_missing_materialization_receipts_before_arcpy"
+  },
+  "retained_prepublication_control_failures": [
+    {
+      "status": "fail_generator",
+      "reason": "The first contract build used tile and orbit aliases not present in the upstream optical contract and stopped with KeyError before writing output.",
+      "remediation": "The generator now reads tile_id and relative_orbit_number from the bound upstream contract."
+    },
+    {
+      "status": "fail_test_expectation",
+      "reason": "The first pair-shift fixture changed only B02, so the valid earlier within-product extent gate blocked before the intended cross-date comparison.",
+      "remediation": "The final fixture shifts every quantitative and SCL role together, preserving within-product alignment and isolating the pair-grid block."
+    },
+    {
+      "status": "fail_test_expectation",
+      "reason": "After dimension-to-extent consistency was added, the first within-product mismatch fixture changed only B12 xmax and correctly failed at the earlier dimension rule rather than the intended cross-band extent rule.",
+      "remediation": "The final fixture shifts both B12 xmin and xmax, keeping dimensions consistent while isolating the cross-band extent block."
+    }
+  ],
+  "retained_arcgis_attempts_ref": "records/surface-receipts/optical-input-readiness-synthetic-arcgis.json#retained_failures_and_prepublication_attempts",
+  "external_state": {
+    "custody_file_count": 0,
+    "materialization_root_exists": false,
+    "real_materialization_receipts_available": 0,
+    "real_safe_metadata_read": false,
+    "real_raster_headers_opened": false,
+    "real_pixel_values_examined": false
+  },
+  "current_disposition": {
+    "status": "defer",
+    "checkpoint": "M2-AUTHENTICATION-REFERENCE",
+    "reason": "The exact before and after archives have not been transferred, container-verified, or materialized."
+  },
+  "assertions": {
+    "synthetic_jp2_opened_by_arcgis": true,
+    "synthetic_aligned_pair_passed_header_readiness_only": true,
+    "synthetic_shifted_pair_blocked": true,
+    "real_materialization_receipt_used": false,
+    "external_custody_accessed": false,
+    "real_product_metadata_read": false,
+    "real_product_raster_header_opened": false,
+    "real_product_pixels_examined": false,
+    "pixel_usability_established": false,
+    "baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false,
+    "authority_created": false
+  },
+  "next_action": "After both exact optical products have passing materialization receipts, run the ArcGIS production inspector to create a new header-readiness receipt before pixel QA."
+}

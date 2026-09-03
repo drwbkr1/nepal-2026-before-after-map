@@ -119,3 +119,9 @@
 **Decision:** Permit offline materialization of only the eight exact M2 products after one promoted intake identity and its matching `pass_container_only` receipt, using an exclusive external attempt and a SHA-256 manifest for every extracted file.
 **Reason:** ArcGIS needs ordinary SAFE files, but generic ZIP extraction can introduce traversal, Windows path aliasing, overwrite, symlink, archive-drift, and incomplete-attempt ambiguity after a container check.
 **Status:** The gate-deferred contract, portable core, and production wrapper are implemented with fourteen passing synthetic tests. The production wrapper currently stops on `asset_not_promoted`; no real archive, external materialization path, raster, or scientific evidence was accessed or created.
+
+## D-021 — Separate native JP2 header readiness from pixel fitness
+
+**Decision:** Require the exact materialized Sentinel-2 pair to pass member identity, Level-2A metadata, native JPEG2000 readability, EPSG:32645, resolution, extent, and cross-date header checks before any pixel, mask, or change processing.
+**Reason:** A complete SAFE extraction does not prove that ArcGIS can open its rasters, that the selected granule and bands are unique, or that before/after grids are comparable. Keeping header readiness separate prevents a structural pass from becoming a pixel or scientific claim.
+**Status:** Twelve portable tests and an ArcGIS Pro 3.7.1 synthetic run pass; a deliberate full-grid shift blocks. Two direct ArcGIS JP2-write failures and five superseded prepublication passing receipts remain recorded. The production runner still stops before ArcPy because no real materialization receipts exist.

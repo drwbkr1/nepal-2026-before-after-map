@@ -49,6 +49,8 @@ The wrapper refuses unpromoted assets, missing or ambiguous successful-attempt e
 
 `contracts/m2-materialization.json` defines the next offline step. `scripts/materialize_m2_product.py` refuses any asset without one exact promoted intake attempt and its matching `pass_container_only` receipt. It re-hashes the archive, rejects unsafe Windows and cross-platform member paths, and extracts into a new append-only external attempt while hashing every file. Partial or failed attempts remain visible. See [M2_SAFE_MATERIALIZATION.md](M2_SAFE_MATERIALIZATION.md). No real archive has reached this gate.
 
+`config/qa/optical-input-readiness-contract.json` then keeps native raster-header readiness separate from pixel fitness. `scripts/inspect_optical_inputs_arcgis.py` requires both exact optical materialization receipts, re-hashes ten selected members per SAFE, parses baseline 05.12 scaling metadata, and checks sixteen JP2 headers and pair grids in ArcGIS Pro. A pass advances only to the existing pixel-readiness contract. See [OPTICAL_INPUT_READINESS_PROTOCOL.md](OPTICAL_INPUT_READINESS_PROTOCOL.md).
+
 `records/readiness/m2-readiness-decision.json` preserves the historical pre-acquisition `defer`: no full products, pixel coverage, masks, or registration evidence existed. The later live source gate resolves only access-time source and rights checks; it does not alter the remaining data-readiness gates. See [M2_OFFLINE_VERIFICATION.md](M2_OFFLINE_VERIFICATION.md).
 
 Regenerate or verify these bytes with:

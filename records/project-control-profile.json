@@ -158,6 +158,16 @@
         "authority_ref": "contracts/milestone-002-proposal.json"
       },
       {
+        "unit_id": "M2-CUSTODY-PREFLIGHT",
+        "reason": "The exact M2 activation decision authorizes the fresh source, storage, path, and collision preflight plus empty custody initialization.",
+        "authority_ref": "records/source-gates/m2-activation-approval.json"
+      },
+      {
+        "unit_id": "M2-ACQUIRE",
+        "reason": "The exact M2 activation decision authorizes acquisition of only the eight reviewed products through an existing owner-controlled credential or session.",
+        "authority_ref": "records/source-gates/m2-activation-approval.json"
+      },
+      {
         "unit_id": "M2-DEM-AMEND",
         "reason": "Would accept the exact Copernicus WorldDEM-30 license and add only four exact public DEM tiles needed for radar terrain correction.",
         "authority_ref": "contracts/milestone-002-dem-amendment-proposal.json"

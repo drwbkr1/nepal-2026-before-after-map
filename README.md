@@ -56,6 +56,8 @@ The offline verification contract is also active for the exact eight products. I
 
 The next offline transition is also prepared. A gate-deferred materialization runner requires the exact promoted intake and passing container receipt, rechecks archive identity and the complete ZIP namespace, and writes one immutable external SAFE attempt plus a per-file hash manifest. Fourteen synthetic tests cover Windows-safe paths, collision refusal, retained attempts, and pre-custody refusal. It has not created a materialization directory or read a real archive.
 
+The materialized optical pair now has a separate ArcGIS header-readiness gate. It requires exact materialization receipts and per-file hashes, selects ten required SAFE members, parses baseline 05.12 scaling metadata, and checks native JP2 format, EPSG:32645, dimensions, cell sizes, and pair alignment. Twelve portable tests and an ArcGIS Pro 3.7.1 run on sixteen synthetic JPEG2000 rasters pass, including an expected block for a shifted after grid. No real materialization or pixel value was read.
+
 A deterministic offline verification packet now defines exact archive, checksum, ZIP-safety, SAFE-structure, band, polarization, and post-container pixel-readiness checks for the same eight products. Its independent dataset-readiness result is **DEFER** because no product bytes, access-time rights evidence, AOI pixel coverage, masks, or registration results exist. The packet made no external-custody access or network request.
 
 A metadata-only ArcGIS evidence workspace has also been built and validated in ArcGIS Pro 3.7.1 Advanced. Its EPSG:32645 File Geodatabase contains nine datasets, fourteen coded-value domains, eight relationship classes, three approved AOIs, and ten source-product metadata rows. The observation, interpretation, attribution, exclusion, stable-control, and QA structures are empty by design. The retained APRX, geodatabase, and PDF remain outside Git; the repository contains the schema, builder, validator, receipt, and a reviewed PNG preview.
@@ -84,6 +86,7 @@ See:
 - [M2 DEM intake and offline verification](docs/M2_DEM_OFFLINE_VERIFICATION.md)
 - [ArcGIS Sentinel-1 baseline processing protocol](docs/RADAR_BASELINE_PROCESSING_PROTOCOL.md)
 - [ArcGIS Sentinel-2 optical baseline processing protocol](docs/OPTICAL_BASELINE_PROCESSING_PROTOCOL.md)
+- [ArcGIS Sentinel-2 materialized-input readiness](docs/OPTICAL_INPUT_READINESS_PROTOCOL.md)
 - [ArcGIS delivery plan](docs/ARCGIS_DELIVERY_PLAN.md)
 - [ArcGIS evidence model](docs/ARCGIS_EVIDENCE_MODEL.md)
 - [Validation plan](docs/VALIDATION.md)

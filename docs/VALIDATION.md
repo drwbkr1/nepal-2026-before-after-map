@@ -27,12 +27,13 @@ The active M2 records can be checked with the project and skill validators:
 
 ```powershell
 python scripts/check_project.py
+python C:\Users\drewb\.codex\skills\standardize-project-control-plane\scripts\validate_project_control.py records/project-control-profile.json --project-root . --verify-paths --milestone-contract contracts/milestone-002.json --as-of 2026-09-03T19:25:32Z
 python C:\Users\drewb\.codex\skills\gate-external-sources\scripts\validate_source_gate.py records/source-gates/m2-live-source-gate.json --as-of 2026-09-03T17:31:17Z
 python C:\Users\drewb\.codex\skills\intake-controlled-data\scripts\validate_intake_contract.py contracts/m2-intake.json --project-root C:\Projects\Active --json
 python C:\Users\drewb\.codex\skills\run-controlled-milestone\scripts\validate_milestone.py contracts/milestone-002.json --project-profile records/project-control-profile.json --as-of 2026-09-03T17:35:43Z
 ```
 
-The live record proves only the source and custody preflight at its stated timestamp. It does not prove an authenticated transfer, current future availability, local bytes, valid product containers, usable pixels, or scientific fitness.
+The profile binds `M2-CUSTODY-PREFLIGHT` and `M2-ACQUIRE` directly to the exact completed M2 activation approval, so the combined profile/milestone lint has no gate findings. Its advisory that `data_processing` has no blanket default classification is intentional; the active milestone supplies only its bounded processing authority. The live record proves only the source and custody preflight at its stated timestamp. It does not prove an authenticated transfer, current future availability, local bytes, valid product containers, usable pixels, or scientific fitness.
 
 The transfer state machine has a separate network-free suite:
 
@@ -114,6 +115,15 @@ python scripts/prepare_m2_materialization.py --created-at-utc 2026-09-03T18:55:0
 ```
 
 It checks exact-product derivation, executable bindings, synthetic per-file extraction hashes, cross-platform and Windows path hazards, collision refusal, and the production wrapper's stop before custody access when a product is not promoted. The tests do not establish that any real archive has been extracted or that any raster is readable or usable.
+
+The optical input-readiness gate has portable and ArcGIS-native validation:
+
+```powershell
+python -m unittest tests.test_optical_input_readiness -v
+python scripts/prepare_optical_input_readiness_contract.py --created-at-utc 2026-09-03T19:10:40Z --verify-only
+```
+
+The tracked ArcGIS receipt binds the final synthetic adapter run. ArcGIS Pro 3.7.1 opens sixteen JP2 rasters, records each format, CRS, band count, dimension, cell size, pixel type, and extent, and blocks a deliberately shifted after grid. The production runner stops before importing ArcPy when either exact materialization receipt is absent. This is header-readiness evidence only and does not establish real pixel access or usability.
 
 ## Source validation
 
