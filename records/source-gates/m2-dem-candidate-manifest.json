@@ -1,0 +1,264 @@
+{
+  "schema_version": "1.0",
+  "manifest_id": "NEPAL-M2-DEM-CANDIDATE-MANIFEST-001",
+  "status": "candidate_not_approved",
+  "generated_at_utc": "2026-09-03T18:03:08Z",
+  "intended_use": "Terrain correction and terrain-geometry screening for the approved Sentinel-1 route; no elevation-change analysis.",
+  "selection_rule": "Include every 1 degree GLO-30 COG tile whose STAC bbox intersects any approved AOI bbox.",
+  "approved_aoi_ref": "config/aoi/approved-study-areas.geojson",
+  "approved_aoi_sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98",
+  "metadata_receipt_ref": "records/source-gates/m2-dem-metadata-receipt.json",
+  "metadata_receipt_sha256": "0c1a1209b2f8d8d5404dfbedaeb8a4f916fea9b16db946c9af303d6e21f04fb2",
+  "collection": "cop-dem-glo-30-dged-cog",
+  "distribution_route": {
+    "provider": "AWS Registry of Open Data mirror managed by Sinergise",
+    "method": "anonymous HTTPS GET after approval and fresh preflight",
+    "account_required": false,
+    "cost_expected": false,
+    "redirect_policy": "refuse"
+  },
+  "license": {
+    "name": "Licence for Copernicus DEM instance COP-DEM-GLO-30-F Global 30m Full, Free & Open",
+    "url": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+    "document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd",
+    "acceptance_required": true,
+    "acceptance_status": "not_accepted_by_this_workflow",
+    "rights_summary": [
+      "reproduction",
+      "distribution",
+      "communication to the general public",
+      "adaptation, modification, and combination"
+    ],
+    "obligations_summary": [
+      "Use the prescribed source notice when distributing or communicating unmodified data.",
+      "Use the prescribed produced-using notice for adapted or modified data.",
+      "Include the prescribed no-liability notice for public distribution or communication.",
+      "Do not imply official endorsement and bind downstream distributors to the same obligations."
+    ]
+  },
+  "records": [
+    {
+      "source_id": "M2-DEM-001",
+      "item_id": "Copernicus_DSM_COG_10_N27_00_E084_00_DEM",
+      "collection": "cop-dem-glo-30-dged-cog",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E084_00_DEM",
+      "stac_http_status": 200,
+      "stac_response_sha256": "b751a8fd87022ef2b72240f7b28ef3f7add6862ff584ac48a7f9b9e2385abafd",
+      "stac_last_modified": null,
+      "bbox_wgs84": [
+        84.0,
+        27.0,
+        85.0,
+        28.0
+      ],
+      "intersects_approved_aois": [
+        "AOI-OVERVIEW"
+      ],
+      "grid_code": "CDEM-N27E084",
+      "gsd_m": 30,
+      "source_crs": "EPSG:4326",
+      "shape": [
+        3600,
+        3600
+      ],
+      "transform": [
+        83.99986111111112,
+        0.0002777777777778,
+        0.0,
+        28.000138888888888,
+        0.0,
+        -0.0002777777777778
+      ],
+      "data_type": "float32",
+      "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "cdse_s3_href": "s3://eodata/auxdata/CopDEM_COG/copernicus-dem-30m/Copernicus_DSM_COG_10_N27_00_E084_00_DEM/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+      "anonymous_https_url": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E084_00_DEM/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+      "anonymous_head": {
+        "http_status": 200,
+        "content_length_bytes": 45336691,
+        "content_type": "image/tiff",
+        "etag": "0d5ffaef0d04a1a2c10a15ba9dd7b04a",
+        "last_modified": "Mon, 09 May 2022 14:12:20 GMT",
+        "accept_ranges": "bytes",
+        "version_id": "null",
+        "observed_at_utc": "2026-09-03T18:03:08Z"
+      },
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "geotiff_validation": "not_started",
+      "pixel_fitness": "unknown"
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "item_id": "Copernicus_DSM_COG_10_N27_00_E085_00_DEM",
+      "collection": "cop-dem-glo-30-dged-cog",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E085_00_DEM",
+      "stac_http_status": 200,
+      "stac_response_sha256": "29dd16cfad2dce24471ebe985aa6dfa78682afc84b04a65a8c5b67fe67193d5c",
+      "stac_last_modified": null,
+      "bbox_wgs84": [
+        85.0,
+        27.0,
+        86.0,
+        28.0
+      ],
+      "intersects_approved_aois": [
+        "AOI-OVERVIEW"
+      ],
+      "grid_code": "CDEM-N27E085",
+      "gsd_m": 30,
+      "source_crs": "EPSG:4326",
+      "shape": [
+        3600,
+        3600
+      ],
+      "transform": [
+        84.99986111111112,
+        0.0002777777777778,
+        0.0,
+        28.000138888888888,
+        0.0,
+        -0.0002777777777778
+      ],
+      "data_type": "float32",
+      "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "cdse_s3_href": "s3://eodata/auxdata/CopDEM_COG/copernicus-dem-30m/Copernicus_DSM_COG_10_N27_00_E085_00_DEM/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+      "anonymous_https_url": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E085_00_DEM/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+      "anonymous_head": {
+        "http_status": 200,
+        "content_length_bytes": 44874244,
+        "content_type": "image/tiff",
+        "etag": "4789613b867d5924d886e7c947255c5b",
+        "last_modified": "Mon, 09 May 2022 14:12:20 GMT",
+        "accept_ranges": "bytes",
+        "version_id": "null",
+        "observed_at_utc": "2026-09-03T18:03:08Z"
+      },
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "geotiff_validation": "not_started",
+      "pixel_fitness": "unknown"
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "item_id": "Copernicus_DSM_COG_10_N28_00_E084_00_DEM",
+      "collection": "cop-dem-glo-30-dged-cog",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E084_00_DEM",
+      "stac_http_status": 200,
+      "stac_response_sha256": "055e5f655a652492faf83b3032b136703afa47686ccf9c6892cde7f1257f0345",
+      "stac_last_modified": null,
+      "bbox_wgs84": [
+        84.0,
+        28.0,
+        85.0,
+        29.0
+      ],
+      "intersects_approved_aois": [
+        "AOI-OVERVIEW"
+      ],
+      "grid_code": "CDEM-N28E084",
+      "gsd_m": 30,
+      "source_crs": "EPSG:4326",
+      "shape": [
+        3600,
+        3600
+      ],
+      "transform": [
+        83.99986111111112,
+        0.0002777777777778,
+        0.0,
+        29.000138888888888,
+        0.0,
+        -0.0002777777777778
+      ],
+      "data_type": "float32",
+      "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "cdse_s3_href": "s3://eodata/auxdata/CopDEM_COG/copernicus-dem-30m/Copernicus_DSM_COG_10_N28_00_E084_00_DEM/Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+      "anonymous_https_url": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E084_00_DEM/Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+      "anonymous_head": {
+        "http_status": 200,
+        "content_length_bytes": 41688284,
+        "content_type": "image/tiff",
+        "etag": "f6f936f5ef1c5d4bbc51c47f1c43becb",
+        "last_modified": "Mon, 09 May 2022 14:13:13 GMT",
+        "accept_ranges": "bytes",
+        "version_id": "null",
+        "observed_at_utc": "2026-09-03T18:03:08Z"
+      },
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "geotiff_validation": "not_started",
+      "pixel_fitness": "unknown"
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "item_id": "Copernicus_DSM_COG_10_N28_00_E085_00_DEM",
+      "collection": "cop-dem-glo-30-dged-cog",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E085_00_DEM",
+      "stac_http_status": 200,
+      "stac_response_sha256": "7504b2e4433c057e35a71cef38f187e8cef3702ed3cbf4e56949a341d1c48ef1",
+      "stac_last_modified": null,
+      "bbox_wgs84": [
+        85.0,
+        28.0,
+        86.0,
+        29.0
+      ],
+      "intersects_approved_aois": [
+        "AOI-OVERVIEW",
+        "AOI-SOURCE",
+        "AOI-UPPER-CORRIDOR"
+      ],
+      "grid_code": "CDEM-N28E085",
+      "gsd_m": 30,
+      "source_crs": "EPSG:4326",
+      "shape": [
+        3600,
+        3600
+      ],
+      "transform": [
+        84.99986111111112,
+        0.0002777777777778,
+        0.0,
+        29.000138888888888,
+        0.0,
+        -0.0002777777777778
+      ],
+      "data_type": "float32",
+      "media_type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "cdse_s3_href": "s3://eodata/auxdata/CopDEM_COG/copernicus-dem-30m/Copernicus_DSM_COG_10_N28_00_E085_00_DEM/Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+      "anonymous_https_url": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E085_00_DEM/Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+      "anonymous_head": {
+        "http_status": 200,
+        "content_length_bytes": 38402839,
+        "content_type": "image/tiff",
+        "etag": "0e1522e26e1a768bdaa827aa64436a0b",
+        "last_modified": "Mon, 09 May 2022 14:13:13 GMT",
+        "accept_ranges": "bytes",
+        "version_id": "null",
+        "observed_at_utc": "2026-09-03T18:03:08Z"
+      },
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "geotiff_validation": "not_started",
+      "pixel_fitness": "unknown"
+    }
+  ],
+  "summary": {
+    "tile_count": 4,
+    "combined_content_length_bytes": 170302058,
+    "combined_content_length_mib": 162.413,
+    "source_crs": [
+      "EPSG:4326"
+    ],
+    "target_analysis_crs": "EPSG:32645"
+  },
+  "claim_boundary": {
+    "availability_established": true,
+    "license_acceptance_established": false,
+    "transferred_bytes_verified": false,
+    "dem_pixels_examined": false,
+    "sentinel_terrain_correction_executed": false,
+    "scientific_result_established": false
+  }
+}

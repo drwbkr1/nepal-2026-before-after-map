@@ -60,6 +60,8 @@ A metadata-only ArcGIS evidence workspace has also been built and validated in A
 
 Pixel-readiness thresholds are now fixed before product access in `config/qa/pixel-readiness-contract.json`. A dependency-free decision core and ArcGIS Pro 3.7.1 Spatial Analyst adapter have passed synthetic validation for all three approved AOIs, including an expected block for a 0.6-pixel grid shift and a required defer for unmeasured registration. These are control and runtime tests only; no real satellite pixels or scientific observations were admitted.
 
+ArcGIS Pro's installed Sentinel-1 terrain-correction tools also expose a required DEM input. The active M2 approval contains no elevation source, so a separate non-authorizing amendment review now binds four exact public Copernicus DEM GLO-30 COG tiles, their live metadata, the anonymous access route, and the exact license document. No DEM payload was requested and the license has not been accepted. The original eight-product acquisition remains independently paused at the secure authentication handoff.
+
 See:
 
 - [Project charter](docs/PROJECT_CHARTER.md)
@@ -71,6 +73,7 @@ See:
 - [M2 controlled-acquisition review](docs/M2_CONTROLLED_ACQUISITION_REVIEW.md)
 - [M2 controlled-intake execution runbook](docs/M2_EXECUTION_RUNBOOK.md)
 - [M2 offline product verification](docs/M2_OFFLINE_VERIFICATION.md)
+- [M2 DEM dependency amendment review](docs/M2_DEM_AMENDMENT_REVIEW.md)
 - [ArcGIS delivery plan](docs/ARCGIS_DELIVERY_PLAN.md)
 - [ArcGIS evidence model](docs/ARCGIS_EVIDENCE_MODEL.md)
 - [Validation plan](docs/VALIDATION.md)

@@ -12,6 +12,8 @@ The exact M2 activation was approved and reconciled on 3 September 2026. The liv
 
 The active contract permits acquisition and verification of only the eight exact reviewed products. It does not permit provider-terms acceptance, account creation or recovery, credential disclosure, spending, repository-license selection, high-resolution restricted imagery, scientific-claim publication, or irreversible external actions outside its exact boundary.
 
+ArcGIS Pro terrain correction has a separate pending dependency gate. `contracts/milestone-002-dem-amendment-proposal.json` and `reviews/m2-dem-amendment/review-bundle.json` identify four exact Copernicus DEM GLO-30 tiles and a license requiring owner acceptance. They are non-authorizing. Do not request DEM payload bytes, accept the license, register for CCM access, generate S3 credentials, or process DEM pixels until the exact amendment is approved and reconciled. This pending gate does not replace the current eight-product CDSE authentication checkpoint.
+
 ## Source and custody rules
 
 - Treat catalog results as availability evidence, not proof of usable pixels, valid coverage, or event causation.

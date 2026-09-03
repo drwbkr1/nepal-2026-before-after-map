@@ -31,6 +31,7 @@ REQUIRED = [
     "contracts/milestone-002.json",
     "contracts/m2-intake.json",
     "contracts/m2-offline-verification.json",
+    "contracts/milestone-002-dem-amendment-proposal.json",
     "records/project-control-profile.json",
     "records/long-term-goal.json",
     "records/evidence-ledger.jsonl",
@@ -50,6 +51,9 @@ REQUIRED = [
     "records/source-gates/m2-activation-approval.json",
     "records/source-gates/m2-activation-review-reconciliation.json",
     "records/source-gates/m2-live-source-gate.json",
+    "records/source-gates/m2-dem-metadata-receipt.json",
+    "records/source-gates/m2-dem-candidate-manifest.json",
+    "records/source-gates/m2-dem-source-gate.json",
     "docs/M1_SOURCE_MANIFEST_REVIEW.md",
     "docs/assets/m1-source-manifest-review.png",
     "records/surface-receipts/m1-source-manifest-review.json",
@@ -62,6 +66,8 @@ REQUIRED = [
     "docs/M2_CONTROLLED_ACQUISITION_REVIEW.md",
     "docs/M2_EXECUTION_RUNBOOK.md",
     "docs/M2_OFFLINE_VERIFICATION.md",
+    "docs/M2_DEM_AMENDMENT_REVIEW.md",
+    "docs/assets/m2-dem-amendment-review.png",
     "docs/assets/m2-controlled-acquisition-review.png",
     "scripts/render_m2_activation_review.py",
     "scripts/prepare_m2_intake.py",
@@ -75,12 +81,17 @@ REQUIRED = [
     "config/qa/candidate-pair-plan.json",
     "docs/assets/arcgis-evidence-workspace-preview.png",
     "records/surface-receipts/m2-activation-review.json",
+    "records/surface-receipts/arcgis-sar-processing-capability.json",
+    "records/surface-receipts/m2-dem-amendment-review.json",
     "contracts/m2-offline-verification-candidate.json",
     "records/readiness/m2-readiness-audit-input.json",
     "records/readiness/m2-readiness-decision.json",
     "reviews/m2-activation/review-bundle.json",
     "reviews/m2-activation/review-contract.json",
     "reviews/m2-activation/blank-response.json",
+    "reviews/m2-dem-amendment/review-bundle.json",
+    "reviews/m2-dem-amendment/review-contract.json",
+    "reviews/m2-dem-amendment/blank-response.json",
     "tests/test_m2_intake.py",
     "tests/test_m2_verification.py",
     "tests/test_arcgis_evidence_schema.py",
@@ -97,8 +108,12 @@ REQUIRED = [
     "scripts/validate_pair_plan.py",
     "tests/test_m2_transfer_core.py",
     "tests/test_m2_active_verification.py",
+    "tests/test_m2_dem_amendment.py",
     "scripts/activate_m2_verification.py",
     "scripts/verify_m2_product_container.py",
+    "scripts/inspect_arcgis_sar_capability.py",
+    "scripts/prepare_m2_dem_amendment.py",
+    "scripts/render_m2_dem_amendment_review.py",
     ".github/workflows/validate.yml",
 ]
 
@@ -158,6 +173,14 @@ def main() -> None:
     contract = json.loads((ROOT / "contracts/milestone-001.json").read_text(encoding="utf-8"))
     m2_proposal = json.loads((ROOT / "contracts/milestone-002-proposal.json").read_text(encoding="utf-8"))
     active_m2 = json.loads((ROOT / "contracts/milestone-002.json").read_text(encoding="utf-8"))
+    dem_proposal = json.loads((ROOT / "contracts/milestone-002-dem-amendment-proposal.json").read_text(encoding="utf-8"))
+    dem_receipt = json.loads((ROOT / "records/source-gates/m2-dem-metadata-receipt.json").read_text(encoding="utf-8"))
+    dem_manifest = json.loads((ROOT / "records/source-gates/m2-dem-candidate-manifest.json").read_text(encoding="utf-8"))
+    dem_gate = json.loads((ROOT / "records/source-gates/m2-dem-source-gate.json").read_text(encoding="utf-8"))
+    dem_bundle = json.loads((ROOT / "reviews/m2-dem-amendment/review-bundle.json").read_text(encoding="utf-8"))
+    dem_contract = json.loads((ROOT / "reviews/m2-dem-amendment/review-contract.json").read_text(encoding="utf-8"))
+    dem_blank = json.loads((ROOT / "reviews/m2-dem-amendment/blank-response.json").read_text(encoding="utf-8"))
+    sar_capability = json.loads((ROOT / "records/surface-receipts/arcgis-sar-processing-capability.json").read_text(encoding="utf-8"))
     goal = json.loads((ROOT / "records/long-term-goal.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
@@ -166,6 +189,10 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
+        "contracts/milestone-002-dem-amendment-proposal.json"
+    ]:
+        fail("project profile must expose the exact pending M2 DEM amendment")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -235,6 +262,53 @@ def main() -> None:
     validate_review_bundle("reviews/m1-aoi/review-bundle.json", "reviews/m1-aoi/review-contract.json")
     validate_review_bundle("reviews/m1-manifest/review-bundle.json", "reviews/m1-manifest/review-contract.json")
     validate_review_bundle("reviews/m2-activation/review-bundle.json", "reviews/m2-activation/review-contract.json")
+    validate_review_bundle("reviews/m2-dem-amendment/review-bundle.json", "reviews/m2-dem-amendment/review-contract.json")
+    if dem_manifest.get("status") != "candidate_not_approved" or len(dem_manifest.get("records", [])) != 4:
+        fail("M2 DEM candidate manifest must remain an unapproved exact four-tile set")
+    expected_dem_ids = {
+        "Copernicus_DSM_COG_10_N27_00_E084_00_DEM",
+        "Copernicus_DSM_COG_10_N27_00_E085_00_DEM",
+        "Copernicus_DSM_COG_10_N28_00_E084_00_DEM",
+        "Copernicus_DSM_COG_10_N28_00_E085_00_DEM",
+    }
+    if {record.get("item_id") for record in dem_manifest["records"]} != expected_dem_ids:
+        fail("M2 DEM candidate tile identities differ")
+    if dem_manifest.get("summary", {}).get("combined_content_length_bytes") != 170302058:
+        fail("M2 DEM candidate total byte count differs")
+    dem_assertions = dem_receipt.get("assertions", {})
+    if dem_assertions.get("payload_bytes_requested") is not False or dem_assertions.get("license_accepted") is not False:
+        fail("M2 DEM metadata receipt must preserve its no-payload and no-acceptance boundary")
+    if dem_gate.get("decision", {}).get("status") != "blocked" or len(dem_gate.get("sources", [])) != 4:
+        fail("M2 DEM source gate must remain blocked for exactly four sources")
+    for source in dem_gate["sources"]:
+        criteria = {criterion.get("id"): criterion for criterion in source.get("criteria", [])}
+        if criteria.get("terms-acceptance", {}).get("status") != "unknown":
+            fail("M2 DEM source gate must retain pending exact license acceptance")
+        if criteria.get("scope-authority", {}).get("status") != "unknown":
+            fail("M2 DEM source gate must retain pending scope authority")
+    if dem_proposal.get("status") != "proposed_not_active" or dem_proposal.get("authority", {}).get("mode") != "not_granted":
+        fail("M2 DEM amendment must remain proposed and non-authorizing")
+    expected_dem_bindings = {
+        "candidate_manifest_sha256": sha256("records/source-gates/m2-dem-candidate-manifest.json"),
+        "metadata_receipt_sha256": sha256("records/source-gates/m2-dem-metadata-receipt.json"),
+        "source_gate_sha256": sha256("records/source-gates/m2-dem-source-gate.json"),
+        "arcgis_capability_sha256": sha256("records/surface-receipts/arcgis-sar-processing-capability.json"),
+    }
+    if any(dem_proposal.get(key) != value for key, value in expected_dem_bindings.items()):
+        fail("M2 DEM amendment has stale evidence bindings")
+    if dem_bundle.get("candidate_identity") != f"M2-DEM-AMENDMENT-PROPOSAL-SHA256:{sha256('contracts/milestone-002-dem-amendment-proposal.json')}":
+        fail("M2 DEM review bundle does not bind the exact amendment proposal")
+    if dem_contract.get("items", [{}])[0].get("evidence_sha256") != sha256("reviews/m2-dem-amendment/review-bundle.json"):
+        fail("M2 DEM review item does not bind the exact review bundle")
+    if dem_blank.get("completed") is not False or dem_blank.get("reviewer", {}).get("attestation") is not False:
+        fail("M2 DEM blank response must contain no human decision")
+    if any(response.get("decision") is not None for response in dem_blank.get("responses", [])):
+        fail("M2 DEM blank response contains a fabricated decision")
+    if sar_capability.get("status") != "pass_capability_only_dem_dependency_unresolved":
+        fail("ArcGIS SAR capability receipt status differs")
+    sar_checks = sar_capability.get("checks", {})
+    if sar_checks.get("all_named_tools_available") is not True or sar_checks.get("processing_executed") is not False:
+        fail("ArcGIS SAR capability receipt does not preserve capability-only semantics")
     if aoi_reconciliation["contract_sha256"] != sha256("reviews/m1-aoi/review-contract.json"):
         fail("AOI reconciliation does not bind the exact historical review contract")
     if approval["status"] != "approved" or approval["reviewed_aoi_sha256"] != sha256("config/aoi/draft-study-areas.geojson"):
@@ -774,6 +848,34 @@ def main() -> None:
         "m2_activation_review_bundle_sha256": sha256("reviews/m2-activation/review-bundle.json"),
     }:
         fail("EVID-0021 does not preserve the exact M2 review bindings")
+    dem_evidence = ledger_by_id.get("EVID-0022")
+    if not isinstance(dem_evidence, dict):
+        fail("evidence ledger is missing EVID-0022 DEM dependency review evidence")
+    for ref_key, hash_key in (
+        ("arcgis_capability_ref", "arcgis_capability_sha256"),
+        ("metadata_receipt_ref", "metadata_receipt_sha256"),
+        ("candidate_manifest_ref", "candidate_manifest_sha256"),
+        ("source_gate_ref", "source_gate_sha256"),
+        ("amendment_proposal_ref", "amendment_proposal_sha256"),
+        ("review_bundle_ref", "review_bundle_manifest_sha256"),
+        ("review_surface_ref", "review_surface_sha256"),
+        ("test_ref", "test_sha256"),
+    ):
+        relative = dem_evidence.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"EVID-0022 is missing {ref_key}")
+        if dem_evidence.get(hash_key) != sha256(relative):
+            fail(f"EVID-0022 does not bind {ref_key}")
+    if dem_evidence.get("status") != "ready_for_human_review_source_gate_blocked":
+        fail("EVID-0022 must preserve the blocked DEM source gate")
+    if dem_evidence.get("assertions") != {
+        "dem_payload_bytes_requested": False,
+        "account_or_authentication_used": False,
+        "dem_pixels_examined": False,
+        "sentinel_processing_executed": False,
+        "authority_created": False,
+    }:
+        fail("EVID-0022 claim boundary differs")
 
     violations = []
     for relative in tracked_files():

@@ -34,11 +34,13 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Outcome:** Verified local custody of approved data and a reproducible pre-event baseline.
 
-**Status:** Proposed, not active. The exact acquisition plan is prepared for owner review; no authentication, custody-root creation, download, extraction, or baseline processing is authorized.
+**Status:** Active at `M2-AUTHENTICATION-REFERENCE`. The exact eight-product acquisition plan is owner-approved, the live source and storage preflight passed, and the empty external custody structure is initialized. No product bytes have been transferred because the secret-safe existing CDSE authentication reference is still pending.
 
-**Prepared verification:** Deterministic offline controls now define exact container identity, checksum, ZIP safety, SAFE structure, required radar/optical members, and the later pixel-readiness gates. The current readiness decision is `defer`; no external custody was inspected.
+**Prepared verification:** Deterministic offline controls define exact container identity, checksum, ZIP safety, SAFE structure, required radar/optical members, and the later pixel-readiness gates. The active wrapper refuses archive access until a promoted intake identity and successful-transfer receipt exist. The real-data readiness decision remains `defer` because custody contains no product bytes.
 
 **Prepared pixel QA:** The EPSG:32645 coverage, mask, grid-alignment, and registration thresholds are fixed before product access. The portable core and ArcGIS Pro 3.7.1 Spatial Analyst adapter pass synthetic validation only; real-product readiness remains `defer`.
+
+**Pending dependency amendment:** ArcGIS Pro's terrain-correction tools require a DEM that is absent from the exact eight-product approval. A separate, non-authorizing review bundle identifies four exact public Copernicus DEM GLO-30 COG tiles covering the approved AOIs and binds the license that requires owner acceptance. No DEM payload was requested; the amendment must be approved before DEM acquisition or terrain correction.
 
 **Work:**
 

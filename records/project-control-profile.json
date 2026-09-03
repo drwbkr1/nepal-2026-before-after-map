@@ -52,6 +52,9 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
+    "proposed_amendments": [
+      "contracts/milestone-002-dem-amendment-proposal.json"
+    ],
     "activated_from_contract": "contracts/milestone-002-proposal.json"
   },
   "cycle": {
@@ -153,6 +156,11 @@
         "unit_id": "M2-ACTIVATE",
         "reason": "Authorizes the exact external custody, existing authenticated-session use, eight-product download boundary, and M2 verification route without accepting terms or incurring cost.",
         "authority_ref": "contracts/milestone-002-proposal.json"
+      },
+      {
+        "unit_id": "M2-DEM-AMEND",
+        "reason": "Would accept the exact Copernicus WorldDEM-30 license and add only four exact public DEM tiles needed for radar terrain correction.",
+        "authority_ref": "contracts/milestone-002-dem-amendment-proposal.json"
       }
     ],
     "amendment_required_to_change_active_gate": true

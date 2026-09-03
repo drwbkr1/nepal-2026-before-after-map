@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ARCGIS-SAR-CAPABILITY-001",
+  "status": "pass_capability_only_dem_dependency_unresolved",
+  "observed_at_utc": "2026-09-03T18:02:58Z",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "build_number": "1901",
+    "license_level": "ArcInfo",
+    "image_analyst": "Available",
+    "spatial_analyst": "Available",
+    "python_version": null
+  },
+  "tools": [
+    {
+      "name": "ComputeSARIndices_ia",
+      "available": true,
+      "usage": "ComputeSARIndices_ia(in_radar_data, out_raster, {Radar Vegetation Index (RVI) | Radar Forest Degradation Index (RFDI) | Canopy Structure Index (CSI)}, {polarization_bands})",
+      "mentions_dem_parameter": false
+    },
+    {
+      "name": "ConvertSARUnits_ia",
+      "available": true,
+      "usage": "ConvertSARUnits_ia(in_radar_data, out_radar_data, {Linear to dB | dB to linear | Amplitude to intensity | Intensity to amplitude | Complex to intensity | Unwrapped phase to displacement})",
+      "mentions_dem_parameter": false
+    },
+    {
+      "name": "GenerateMaskedSARRaster_ia",
+      "available": true,
+      "usage": "GenerateMaskedSARRaster_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...}, {in_mask_features}, {Inside | Outside}, {in_dem_raster}, {GEOID | NONE})",
+      "mentions_dem_parameter": true
+    },
+    {
+      "name": "ApplyRadiometricCalibration_ia",
+      "available": true,
+      "usage": "ApplyRadiometricCalibration_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...}, {Beta nought | Sigma nought | Gamma nought})",
+      "mentions_dem_parameter": false
+    },
+    {
+      "name": "ApplyRadiometricTerrainFlattening_ia",
+      "available": true,
+      "usage": "ApplyRadiometricTerrainFlattening_ia(in_radar_data, out_radar_data, in_dem_raster, {GEOID | NONE}, {polarization_bands;polarization_bands...}, {Gamma nought | Sigma nought}, {out_scattering_area}, {out_geometric_distortion}, {out_geometric_distortion_mask})",
+      "mentions_dem_parameter": true
+    },
+    {
+      "name": "GenerateRadiometricTerrainCorrectedData_ia",
+      "available": true,
+      "usage": "GenerateRadiometricTerrainCorrectedData_ia(in_radar_data, out_radar_data, in_dem_raster, {GEOID | NONE}, {polarization_bands;polarization_bands...}, {Linear | Decibel (dB)}, {Remove Thermal Noise | Apply Radiometric Calibration | Deburst | Multilook | Apply Radiometric Terrain Flattening | Despeckle | Apply Geometric Terrain Correction}, {out_folder}, {username}, {password}, {cloud_storage_connection})",
+      "mentions_dem_parameter": true
+    },
+    {
+      "name": "ApplyGeometricTerrainCorrection_ia",
+      "available": true,
+      "usage": "ApplyGeometricTerrainCorrection_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...}, {in_dem_raster}, {GEOID | NONE})",
+      "mentions_dem_parameter": true
+    },
+    {
+      "name": "Despeckle_ia",
+      "available": true,
+      "usage": "Despeckle_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...}, {Refined Lee | Lee | Enhanced Lee | Frost | Kuan | Gamma MAP}, {7 x 7 | 3 x 3 | 5 x 5 | 9 x 9 | 11 x 11}, {Multiplicative noise | Additive noise | Additive and multiplicative noise}, {noise_variance}, {add_noise_mean}, {mult_noise_mean}, {number_of_looks}, {damp_factor})",
+      "mentions_dem_parameter": false
+    }
+  ],
+  "checks": {
+    "all_named_tools_available": true,
+    "radiometric_terrain_flattening_requires_dem": true,
+    "radiometric_terrain_corrected_data_requires_dem": true,
+    "geometric_terrain_correction_requires_dem": true,
+    "satellite_or_dem_pixels_read": false,
+    "processing_executed": false
+  },
+  "dependency_decision": {
+    "status": "defer_pending_exact_dem_source_and_rights_gate",
+    "reason": "The installed terrain-correction tools accept or require a DEM, while the active M2 acquisition approval contains only eight Sentinel products and no approved elevation source.",
+    "authority_created": false
+  },
+  "limitations": [
+    "Tool presence and usage signatures do not prove successful processing of the approved Sentinel products.",
+    "No DEM, Sentinel archive, raster, credential, authenticated session, or external custody file was read.",
+    "A DEM source must pass exact identity, rights, custody, integrity, and fitness gates before terrain correction begins."
+  ]
+}

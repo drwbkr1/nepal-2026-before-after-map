@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "amendment_id": "NEPAL-M2-DEM-AMENDMENT-001",
+  "status": "proposed_not_active",
+  "prepared_at_utc": "2026-09-03T18:03:08Z",
+  "parent_contract_ref": "contracts/milestone-002.json",
+  "parent_contract_sha256": "188af4575401473bb464dff84b83a90a41751b176c6a5e63a76f62acbe4e6bfb",
+  "parent_approval_ref": "records/source-gates/m2-activation-approval.json",
+  "parent_approval_sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
+  "candidate_manifest_ref": "records/source-gates/m2-dem-candidate-manifest.json",
+  "candidate_manifest_sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243",
+  "metadata_receipt_ref": "records/source-gates/m2-dem-metadata-receipt.json",
+  "metadata_receipt_sha256": "0c1a1209b2f8d8d5404dfbedaeb8a4f916fea9b16db946c9af303d6e21f04fb2",
+  "source_gate_ref": "records/source-gates/m2-dem-source-gate.json",
+  "source_gate_sha256": "a7c93bbfc029504cddeb89210ed8e5b583d835e8fb4d6b1f49b350b03254b001",
+  "arcgis_capability_ref": "records/surface-receipts/arcgis-sar-processing-capability.json",
+  "arcgis_capability_sha256": "c7a0319662159e00b927a27a8d7c122e7cd18443a952decdb2fb86f1cc414e20",
+  "authority": {
+    "mode": "not_granted",
+    "review_required": true,
+    "human_gate_id": "M2-DEM-AMEND",
+    "requested_actions": [
+      "accept only the exact hash-bound Copernicus WorldDEM-30 license",
+      "download only the four exact public GLO-30 COG tiles from their anonymous HTTPS URLs",
+      "verify content length, remote identity metadata, local SHA-256, GeoTIFF readability, CRS, dimensions, nodata, and AOI coverage",
+      "store raw and derived DEM files only in versioned non-Git custody",
+      "use verified DEM pixels only for Sentinel-1 terrain correction and terrain-geometry exclusion masks",
+      "record all failed, partial, corrupt, superseded, and inconclusive attempts"
+    ],
+    "not_requested": [
+      "create, register, recover, or modify any account",
+      "use CDSE CCM credentials or generated S3 secrets",
+      "incur any charge or use a requester-pays route",
+      "download any DEM tile other than the exact four",
+      "redistribute raw DEM tiles or commit them to Git",
+      "publish scientific conclusions, attribution, or emergency guidance",
+      "select a repository license or authorize unrelated products"
+    ]
+  },
+  "planned_intake": {
+    "route": "anonymous HTTPS from the AWS Registry of Open Data GLO-30 bucket",
+    "tile_count": 4,
+    "combined_content_length_bytes": 170302058,
+    "planned_external_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "collision_policy": "fail",
+    "promotion_mode": "atomic_no_replace_after_verification",
+    "redirect_policy": "refuse"
+  },
+  "license_decision": {
+    "license_name": "Licence for Copernicus DEM instance COP-DEM-GLO-30-F Global 30m Full, Free & Open",
+    "license_url": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+    "license_document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd",
+    "acceptance_required": true,
+    "acceptance_status": "pending_exact_owner_decision",
+    "obligations_summary": [
+      "Use the prescribed source notice when distributing or communicating unmodified data.",
+      "Use the prescribed produced-using notice for adapted or modified data.",
+      "Include the prescribed no-liability notice for public distribution or communication.",
+      "Do not imply official endorsement and bind downstream distributors to the same obligations."
+    ]
+  },
+  "stop_conditions": [
+    "license bytes or published obligations differ from the reviewed hash",
+    "any tile URL, identity, bbox, byte length, ETag, last-modified value, access mode, or cost differs at preflight",
+    "an account, authentication, generated secret, paid route, redirect, or requester-pays mode appears",
+    "a staging or destination collision, unsafe path, symlink, or non-atomic promotion risk appears",
+    "a downloaded file fails size, local SHA-256 capture, GeoTIFF readability, CRS, dimension, nodata, or AOI-coverage checks"
+  ],
+  "activation_effect": "If exactly approved and reconciled, this amendment adds only the four named DEM assets and exact license acceptance to M2. It does not replace or weaken the original eight-product controls.",
+  "claim_boundary": {
+    "availability_established": true,
+    "license_acceptance_established": false,
+    "transferred_bytes_verified": false,
+    "dem_pixels_examined": false,
+    "sentinel_terrain_correction_executed": false,
+    "scientific_result_established": false
+  }
+}

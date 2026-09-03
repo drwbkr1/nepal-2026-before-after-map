@@ -95,3 +95,9 @@
 **Decision:** Activate the predeclared container controls for the exact eight M2 products and require a promoted active-intake identity plus successful-transfer receipt before any archive scan.
 **Reason:** Candidate checks built before activation must be bound to the current approval and custody, while archive access must remain offline, read-only, non-extracting, and separate from pixel or scientific admission.
 **Status:** Active contract and per-product wrapper implemented. Five tests verify authority, exact product controls, custody bindings, offline behavior, and refusal of an unpromoted asset. No real archive bytes were read during activation or testing.
+
+## D-017 — Proposed exact DEM dependency amendment
+
+**Decision:** Prepare, but do not activate, an M2 amendment for the exact four Copernicus DEM GLO-30 COG tiles that cover the approved AOIs and for explicit acceptance of the exact hash-bound Copernicus WorldDEM-30 license.
+**Reason:** The installed ArcGIS Pro Sentinel-1 terrain-correction tools accept or require a DEM, while the active M2 approval covers only eight Sentinel products and forbids new terms acceptance or extra products. The anonymous AWS route avoids a new account but does not remove the license-acceptance requirement.
+**Status:** Awaiting owner decision through review bundle SHA-256 `caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e` and amendment proposal SHA-256 `92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69`. Metadata-only probes confirmed four exact objects totaling 170,302,058 bytes; no DEM payload, acceptance, authentication, or processing occurred.

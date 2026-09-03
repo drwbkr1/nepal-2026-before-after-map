@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-dem-amendment-review-bundle-001",
+  "review_id": "m2-dem-amendment-review-001",
+  "authority_ref": "records/source-gates/m2-activation-approval.json",
+  "candidate_identity": "M2-DEM-AMENDMENT-PROPOSAL-SHA256:92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-dem-amendment-review.png",
+      "sha256": "9d36bc9e307838bfd8f9c711beb6234a0e81fc005a1ea03a0cd6f3d493b3d5bd",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-dem-amendment-review.json",
+          "sha256": "ddf27a329cc3deb4f433287de6d33611a65b13e4e0631b5c4796744cf3241053"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_DEM_AMENDMENT_REVIEW.md",
+      "sha256": "cc5383a929fb37958fe453787f7f84c19c5f2c1b6d85d6714f687f87e1edb3b8",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "amendment-proposal",
+      "path": "contracts/milestone-002-dem-amendment-proposal.json",
+      "sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+      "role": "candidate_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "dem-candidate-manifest",
+      "path": "records/source-gates/m2-dem-candidate-manifest.json",
+      "sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243",
+      "role": "exact_four_tile_identity",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "live-metadata-receipt",
+      "path": "records/source-gates/m2-dem-metadata-receipt.json",
+      "sha256": "0c1a1209b2f8d8d5404dfbedaeb8a4f916fea9b16db946c9af303d6e21f04fb2",
+      "role": "live_identity_and_availability_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "dem-source-gate",
+      "path": "records/source-gates/m2-dem-source-gate.json",
+      "sha256": "a7c93bbfc029504cddeb89210ed8e5b583d835e8fb4d6b1f49b350b03254b001",
+      "role": "blocked_source_and_rights_gate",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "arcgis-sar-capability",
+      "path": "records/surface-receipts/arcgis-sar-processing-capability.json",
+      "sha256": "c7a0319662159e00b927a27a8d7c122e7cd18443a952decdb2fb86f1cc414e20",
+      "role": "local_processing_dependency_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "active-m2-approval",
+      "path": "records/source-gates/m2-activation-approval.json",
+      "sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
+      "role": "current_owner_authority",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "decision_effect_if_approved": [
+    "record owner acceptance of only the exact hash-bound Copernicus WorldDEM-30 license",
+    "add only the four exact GLO-30 COG tiles to the active M2 acquisition boundary",
+    "allow anonymous no-cost acquisition with redirect refusal and fail-closed non-Git custody",
+    "allow verified DEM use only for approved Sentinel-1 terrain correction and terrain-geometry masks"
+  ],
+  "limitations": [
+    "This bundle itself accepts no license and grants no acquisition or processing authority.",
+    "No DEM payload byte was requested, stored, inspected, or processed.",
+    "Approval would not permit accounts, credentials, costs, requester-pays access, other tiles, raw DEM redistribution, scientific publication, attribution, or emergency guidance.",
+    "Metadata identity and availability do not establish transferred-byte integrity, DEM pixel fitness, terrain-correction success, or scientific change."
+  ]
+}

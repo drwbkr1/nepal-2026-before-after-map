@@ -1,0 +1,808 @@
+{
+  "contract_version": "source-gate/v1",
+  "assessment_id": "NEPAL-M2-DEM-SOURCE-GATE-001",
+  "assessed_at": "2026-09-03T18:03:08Z",
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-activation-approval.json",
+    "authorized_actions": [
+      "inspect DEM metadata",
+      "record DEM candidate evidence",
+      "prepare bounded M2 DEM amendment review"
+    ],
+    "expires_at_utc": null
+  },
+  "intended_use": {
+    "summary": "Evaluate and, only after a separate exact owner amendment, acquire four public Copernicus DEM GLO-30 COG tiles for Sentinel-1 terrain correction and terrain-geometry screening.",
+    "planned_actions": [
+      "inspect DEM metadata",
+      "record DEM candidate evidence",
+      "prepare bounded M2 DEM amendment review",
+      "accept the exact Copernicus WorldDEM-30 license",
+      "acquire the four exact DEM tiles",
+      "verify DEM bytes and GeoTIFF structure",
+      "use the verified DEM only for approved radar preprocessing"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "M2-DEM-001",
+      "name": "Copernicus_DSM_COG_10_N27_00_E084_00_DEM",
+      "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E084_00_DEM/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E084_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 b751a8fd87022ef2b72240f7b28ef3f7add6862ff584ac48a7f9b9e2385abafd."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "Exact item, collection, bbox, grid code, COG asset name, and dimensions are bound."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E084_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 b751a8fd87022ef2b72240f7b28ef3f7add6862ff584ac48a7f9b9e2385abafd."
+            },
+            {
+              "type": "live",
+              "locator": "https://registry.opendata.aws/copernicus-dem/",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "AWS Registry response SHA-256 c9215f2e18745ffcb33a2ed16c3f2ef5fab4dce70babace9132afe402c149320 identifies the public GLO-30 bucket and manager."
+            }
+          ],
+          "note": "CDSE is the primary catalog and the AWS Registry documents the public mirror."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E084_00_DEM/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Anonymous HEAD returned HTTP 200, 45336691 bytes, ETag 0d5ffaef0d04a1a2c10a15ba9dd7b04a, and Accept-Ranges bytes."
+            }
+          ],
+          "note": "The exact object is currently reachable without an AWS account; acquisition remains unauthorized."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "The exact three-page license was fetched for review with SHA-256 9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd; Article 1 requires user acceptance."
+            }
+          ],
+          "note": "The license grants the needed use rights without charge but imposes acceptance, notices, non-endorsement, and downstream obligations."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E084_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 b751a8fd87022ef2b72240f7b28ef3f7add6862ff584ac48a7f9b9e2385abafd."
+            },
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E084_00_DEM/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Anonymous HEAD returned HTTP 200, 45336691 bytes, ETag 0d5ffaef0d04a1a2c10a15ba9dd7b04a, and Accept-Ranges bytes."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "The CDSE item and AWS object share the exact tile identity; byte equivalence remains for post-transfer verification."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E084_00_DEM/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Anonymous HEAD returned HTTP 200, 45336691 bytes, ETag 0d5ffaef0d04a1a2c10a15ba9dd7b04a, and Accept-Ranges bytes."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "Content length, ETag, and last-modified metadata are captured; local SHA-256 and GeoTIFF checks are mandatory after acquisition."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E084_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 b751a8fd87022ef2b72240f7b28ef3f7add6862ff584ac48a7f9b9e2385abafd."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM.html",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official DEM documentation response SHA-256 a36d82ec7243cd8368820c45f75d599427e56186ce87b5d7ac637b3db8f3c378 identifies the dataset as a 30 m DSM usable for Sentinel-1 orthorectification."
+            }
+          ],
+          "note": "Fit for controlled acquisition and terrain-correction evaluation only; vertical datum, voids, artifacts, and result quality remain untested."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "Public terrain data contain no project personal data; payloads remain untrusted and outside Git until verified."
+        },
+        {
+          "id": "terms-acceptance",
+          "required": true,
+          "requires_live": false,
+          "status": "unknown",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "The exact three-page license was fetched for review with SHA-256 9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd; Article 1 requires user acceptance."
+            }
+          ],
+          "note": "No person accepted the exact license in this metadata-only preparation stage."
+        },
+        {
+          "id": "scope-authority",
+          "required": true,
+          "requires_live": false,
+          "status": "unknown",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "contracts/milestone-002.json",
+              "note": "The active M2 contract permits only the eight exact reviewed Sentinel products and forbids new terms acceptance or additional products."
+            }
+          ],
+          "note": "A hash-bound owner amendment is required before any DEM payload request or license acceptance."
+        }
+      ]
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "name": "Copernicus_DSM_COG_10_N27_00_E085_00_DEM",
+      "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E085_00_DEM/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E085_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 29dd16cfad2dce24471ebe985aa6dfa78682afc84b04a65a8c5b67fe67193d5c."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "Exact item, collection, bbox, grid code, COG asset name, and dimensions are bound."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E085_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 29dd16cfad2dce24471ebe985aa6dfa78682afc84b04a65a8c5b67fe67193d5c."
+            },
+            {
+              "type": "live",
+              "locator": "https://registry.opendata.aws/copernicus-dem/",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "AWS Registry response SHA-256 c9215f2e18745ffcb33a2ed16c3f2ef5fab4dce70babace9132afe402c149320 identifies the public GLO-30 bucket and manager."
+            }
+          ],
+          "note": "CDSE is the primary catalog and the AWS Registry documents the public mirror."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E085_00_DEM/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Anonymous HEAD returned HTTP 200, 44874244 bytes, ETag 4789613b867d5924d886e7c947255c5b, and Accept-Ranges bytes."
+            }
+          ],
+          "note": "The exact object is currently reachable without an AWS account; acquisition remains unauthorized."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "The exact three-page license was fetched for review with SHA-256 9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd; Article 1 requires user acceptance."
+            }
+          ],
+          "note": "The license grants the needed use rights without charge but imposes acceptance, notices, non-endorsement, and downstream obligations."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E085_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 29dd16cfad2dce24471ebe985aa6dfa78682afc84b04a65a8c5b67fe67193d5c."
+            },
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E085_00_DEM/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Anonymous HEAD returned HTTP 200, 44874244 bytes, ETag 4789613b867d5924d886e7c947255c5b, and Accept-Ranges bytes."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "The CDSE item and AWS object share the exact tile identity; byte equivalence remains for post-transfer verification."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E085_00_DEM/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Anonymous HEAD returned HTTP 200, 44874244 bytes, ETag 4789613b867d5924d886e7c947255c5b, and Accept-Ranges bytes."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "Content length, ETag, and last-modified metadata are captured; local SHA-256 and GeoTIFF checks are mandatory after acquisition."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E085_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 29dd16cfad2dce24471ebe985aa6dfa78682afc84b04a65a8c5b67fe67193d5c."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM.html",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official DEM documentation response SHA-256 a36d82ec7243cd8368820c45f75d599427e56186ce87b5d7ac637b3db8f3c378 identifies the dataset as a 30 m DSM usable for Sentinel-1 orthorectification."
+            }
+          ],
+          "note": "Fit for controlled acquisition and terrain-correction evaluation only; vertical datum, voids, artifacts, and result quality remain untested."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "Public terrain data contain no project personal data; payloads remain untrusted and outside Git until verified."
+        },
+        {
+          "id": "terms-acceptance",
+          "required": true,
+          "requires_live": false,
+          "status": "unknown",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "The exact three-page license was fetched for review with SHA-256 9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd; Article 1 requires user acceptance."
+            }
+          ],
+          "note": "No person accepted the exact license in this metadata-only preparation stage."
+        },
+        {
+          "id": "scope-authority",
+          "required": true,
+          "requires_live": false,
+          "status": "unknown",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "contracts/milestone-002.json",
+              "note": "The active M2 contract permits only the eight exact reviewed Sentinel products and forbids new terms acceptance or additional products."
+            }
+          ],
+          "note": "A hash-bound owner amendment is required before any DEM payload request or license acceptance."
+        }
+      ]
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "name": "Copernicus_DSM_COG_10_N28_00_E084_00_DEM",
+      "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E084_00_DEM/Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E084_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 055e5f655a652492faf83b3032b136703afa47686ccf9c6892cde7f1257f0345."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "Exact item, collection, bbox, grid code, COG asset name, and dimensions are bound."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E084_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 055e5f655a652492faf83b3032b136703afa47686ccf9c6892cde7f1257f0345."
+            },
+            {
+              "type": "live",
+              "locator": "https://registry.opendata.aws/copernicus-dem/",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "AWS Registry response SHA-256 c9215f2e18745ffcb33a2ed16c3f2ef5fab4dce70babace9132afe402c149320 identifies the public GLO-30 bucket and manager."
+            }
+          ],
+          "note": "CDSE is the primary catalog and the AWS Registry documents the public mirror."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E084_00_DEM/Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Anonymous HEAD returned HTTP 200, 41688284 bytes, ETag f6f936f5ef1c5d4bbc51c47f1c43becb, and Accept-Ranges bytes."
+            }
+          ],
+          "note": "The exact object is currently reachable without an AWS account; acquisition remains unauthorized."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "The exact three-page license was fetched for review with SHA-256 9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd; Article 1 requires user acceptance."
+            }
+          ],
+          "note": "The license grants the needed use rights without charge but imposes acceptance, notices, non-endorsement, and downstream obligations."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E084_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 055e5f655a652492faf83b3032b136703afa47686ccf9c6892cde7f1257f0345."
+            },
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E084_00_DEM/Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Anonymous HEAD returned HTTP 200, 41688284 bytes, ETag f6f936f5ef1c5d4bbc51c47f1c43becb, and Accept-Ranges bytes."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "The CDSE item and AWS object share the exact tile identity; byte equivalence remains for post-transfer verification."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E084_00_DEM/Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Anonymous HEAD returned HTTP 200, 41688284 bytes, ETag f6f936f5ef1c5d4bbc51c47f1c43becb, and Accept-Ranges bytes."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "Content length, ETag, and last-modified metadata are captured; local SHA-256 and GeoTIFF checks are mandatory after acquisition."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E084_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 055e5f655a652492faf83b3032b136703afa47686ccf9c6892cde7f1257f0345."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM.html",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official DEM documentation response SHA-256 a36d82ec7243cd8368820c45f75d599427e56186ce87b5d7ac637b3db8f3c378 identifies the dataset as a 30 m DSM usable for Sentinel-1 orthorectification."
+            }
+          ],
+          "note": "Fit for controlled acquisition and terrain-correction evaluation only; vertical datum, voids, artifacts, and result quality remain untested."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "Public terrain data contain no project personal data; payloads remain untrusted and outside Git until verified."
+        },
+        {
+          "id": "terms-acceptance",
+          "required": true,
+          "requires_live": false,
+          "status": "unknown",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "The exact three-page license was fetched for review with SHA-256 9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd; Article 1 requires user acceptance."
+            }
+          ],
+          "note": "No person accepted the exact license in this metadata-only preparation stage."
+        },
+        {
+          "id": "scope-authority",
+          "required": true,
+          "requires_live": false,
+          "status": "unknown",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "contracts/milestone-002.json",
+              "note": "The active M2 contract permits only the eight exact reviewed Sentinel products and forbids new terms acceptance or additional products."
+            }
+          ],
+          "note": "A hash-bound owner amendment is required before any DEM payload request or license acceptance."
+        }
+      ]
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "name": "Copernicus_DSM_COG_10_N28_00_E085_00_DEM",
+      "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E085_00_DEM/Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E085_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 7504b2e4433c057e35a71cef38f187e8cef3702ed3cbf4e56949a341d1c48ef1."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "Exact item, collection, bbox, grid code, COG asset name, and dimensions are bound."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E085_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 7504b2e4433c057e35a71cef38f187e8cef3702ed3cbf4e56949a341d1c48ef1."
+            },
+            {
+              "type": "live",
+              "locator": "https://registry.opendata.aws/copernicus-dem/",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "AWS Registry response SHA-256 c9215f2e18745ffcb33a2ed16c3f2ef5fab4dce70babace9132afe402c149320 identifies the public GLO-30 bucket and manager."
+            }
+          ],
+          "note": "CDSE is the primary catalog and the AWS Registry documents the public mirror."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E085_00_DEM/Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Anonymous HEAD returned HTTP 200, 38402839 bytes, ETag 0e1522e26e1a768bdaa827aa64436a0b, and Accept-Ranges bytes."
+            }
+          ],
+          "note": "The exact object is currently reachable without an AWS account; acquisition remains unauthorized."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "The exact three-page license was fetched for review with SHA-256 9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd; Article 1 requires user acceptance."
+            }
+          ],
+          "note": "The license grants the needed use rights without charge but imposes acceptance, notices, non-endorsement, and downstream obligations."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E085_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 7504b2e4433c057e35a71cef38f187e8cef3702ed3cbf4e56949a341d1c48ef1."
+            },
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E085_00_DEM/Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Anonymous HEAD returned HTTP 200, 38402839 bytes, ETag 0e1522e26e1a768bdaa827aa64436a0b, and Accept-Ranges bytes."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "The CDSE item and AWS object share the exact tile identity; byte equivalence remains for post-transfer verification."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E085_00_DEM/Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Anonymous HEAD returned HTTP 200, 38402839 bytes, ETag 0e1522e26e1a768bdaa827aa64436a0b, and Accept-Ranges bytes."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "Content length, ETag, and last-modified metadata are captured; local SHA-256 and GeoTIFF checks are mandatory after acquisition."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E085_00_DEM",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official STAC item returned HTTP 200 with response SHA-256 7504b2e4433c057e35a71cef38f187e8cef3702ed3cbf4e56949a341d1c48ef1."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM.html",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "Official DEM documentation response SHA-256 a36d82ec7243cd8368820c45f75d599427e56186ce87b5d7ac637b3db8f3c378 identifies the dataset as a 30 m DSM usable for Sentinel-1 orthorectification."
+            }
+          ],
+          "note": "Fit for controlled acquisition and terrain-correction evaluation only; vertical datum, voids, artifacts, and result quality remain untested."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243 binds the four exact tile records and AOI intersections."
+            }
+          ],
+          "note": "Public terrain data contain no project personal data; payloads remain untrusted and outside Git until verified."
+        },
+        {
+          "id": "terms-acceptance",
+          "required": true,
+          "requires_live": false,
+          "status": "unknown",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+              "observed_at": "2026-09-03T18:03:08Z",
+              "note": "The exact three-page license was fetched for review with SHA-256 9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd; Article 1 requires user acceptance."
+            }
+          ],
+          "note": "No person accepted the exact license in this metadata-only preparation stage."
+        },
+        {
+          "id": "scope-authority",
+          "required": true,
+          "requires_live": false,
+          "status": "unknown",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "contracts/milestone-002.json",
+              "note": "The active M2 contract permits only the eight exact reviewed Sentinel products and forbids new terms acceptance or additional products."
+            }
+          ],
+          "note": "A hash-bound owner amendment is required before any DEM payload request or license acceptance."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "blocked",
+    "blocking_reasons": [
+      "The exact license requires user acceptance, and no acceptance is recorded.",
+      "The four DEM tiles are additional products outside the active eight-product M2 approval."
+    ],
+    "live_verification_pending": [],
+    "approved_actions": [
+      "inspect DEM metadata",
+      "record DEM candidate evidence",
+      "prepare bounded M2 DEM amendment review"
+    ]
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": [
+      "inspect DEM metadata",
+      "record DEM candidate evidence",
+      "prepare bounded M2 DEM amendment review"
+    ],
+    "requires_explicit_authorization": [
+      "accept the exact Copernicus WorldDEM-30 license",
+      "acquire the four exact DEM tiles",
+      "verify DEM bytes and GeoTIFF structure",
+      "use the verified DEM only for approved radar preprocessing",
+      "publish or redistribute DEM data or derived scientific claims"
+    ]
+  }
+}

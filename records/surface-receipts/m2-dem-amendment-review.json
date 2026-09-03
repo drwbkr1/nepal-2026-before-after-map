@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "M2-DEM-AMENDMENT-REVIEW-SURFACE-001",
+  "status": "pass",
+  "verified_at_utc": "2026-09-03T18:03:08Z",
+  "surface": "docs/assets/m2-dem-amendment-review.png",
+  "surface_sha256": "9d36bc9e307838bfd8f9c711beb6234a0e81fc005a1ea03a0cd6f3d493b3d5bd",
+  "candidate_manifest": "records/source-gates/m2-dem-candidate-manifest.json",
+  "candidate_manifest_sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243",
+  "amendment_proposal": "contracts/milestone-002-dem-amendment-proposal.json",
+  "amendment_proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+  "renderer": "scripts/render_m2_dem_amendment_review.py",
+  "renderer_sha256": "becd39dd0f5a7a4fca0f3caf102c9ad57e5f2f9ab19a841ea432f0fcdb68dded",
+  "dimensions_pixels": {
+    "width": 1800,
+    "height": 1580
+  },
+  "checks": {
+    "render_completed": "pass",
+    "exact_proposal_hash_visible": "pass",
+    "exact_license_hash_visible": "pass",
+    "all_four_tiles_visible": "pass",
+    "approved_aoi_tile_coverage_visible": "pass",
+    "license_acceptance_gate_visible": "pass",
+    "approval_boundary_visible": "pass",
+    "text_clipping": "none_observed",
+    "visual_inspection": "pass"
+  },
+  "blank_state_verified": true,
+  "completion_controls_verified": true,
+  "export_verified": true,
+  "limitations": [
+    "The map is a schematic bbox review surface, not a satellite raster or terrain model.",
+    "Remote object sizes and availability are metadata until payload bytes are acquired and verified.",
+    "The surface itself does not accept the license or authorize acquisition."
+  ]
+}

@@ -46,6 +46,14 @@ Preflight found no `CDSE_ACCESS_TOKEN`, username, or password reference in the p
 
 Do not place a token, password, cookie, refresh value, or authorization header in chat, Git, a filename, a receipt, or captured command output. Stop if login, MFA, recovery, or terms acceptance needs owner action.
 
+## Parallel DEM dependency gate
+
+ArcGIS Pro 3.7.1 Image Analyst exposes the intended Sentinel-1 radiometric and geometric terrain-correction tools, and their installed usage signatures accept or require a DEM. The active M2 approval contains only the eight exact Sentinel products, so elevation data cannot be added silently.
+
+A metadata-only review found four exact Copernicus DEM GLO-30 COG tiles whose 1° footprints cover the approved AOI union. All four official STAC items and anonymous AWS object HEAD requests returned successfully; the remote total is 170,302,058 bytes (162.413 MiB). No payload byte was requested, no account or authentication was used, and no DEM pixel was examined.
+
+The Copernicus WorldDEM-30 license grants broad free use rights but explicitly requires user acceptance and carries attribution, no-liability, non-endorsement, and downstream obligations. The source gate is therefore **blocked** on exact license acceptance and authority to add four products. Review bundle SHA-256 `caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e` and amendment proposal SHA-256 `92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69` are prepared for owner decision. This does not alter the separate CDSE authentication checkpoint.
+
 ## Authorized but not completed
 
 - authenticate through an existing owner-controlled CDSE credential or session reference;
@@ -60,6 +68,7 @@ Do not place a token, password, cookie, refresh value, or authorization header i
 - creating or recovering an account or changing account security;
 - disclosing credentials or using a paid route;
 - downloading products outside the exact eight;
+- accepting the Copernicus WorldDEM-30 license or acquiring the four proposed DEM tiles before the exact amendment is approved;
 - using or redistributing restricted high-resolution imagery;
 - repository-license selection;
 - usable-pixel, change, interpretation, attribution, or emergency-guidance conclusions;

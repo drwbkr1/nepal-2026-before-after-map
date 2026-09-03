@@ -50,6 +50,18 @@ python -m unittest tests.test_m2_active_verification -v
 
 These tests verify exact inheritance from the M2 approval, preservation of all eight candidate container profiles, offline/read-only behavior, and refusal before custody access when an asset has not been promoted.
 
+## M2 DEM amendment preparation validation
+
+The DEM amendment remains non-authorizing and can be validated without requesting a DEM payload:
+
+```powershell
+python C:\Users\drewb\.codex\skills\gate-external-sources\scripts\validate_source_gate.py records/source-gates/m2-dem-source-gate.json --validate-only
+python C:\Users\drewb\.codex\skills\conduct-human-review\scripts\prepare_review_bundle.py reviews/m2-dem-amendment/review-bundle.json --project-root .
+python -m unittest tests.test_m2_dem_amendment -v
+```
+
+The source-gate validator must report a structurally valid **blocked** result with exact license acceptance and scope authority still unresolved for all four tiles. The tests require the exact four-item set, the 170,302,058-byte remote total, live metadata-only claim boundary, immutable proposal bindings, blank human response, and exact review-bundle hashes. ArcGIS tool presence proves only local capability; no DEM or Sentinel processing has run.
+
 ## Historical static intake-control validation
 
 Before activation or data transfer, the repository established that:

@@ -1,0 +1,45 @@
+{
+  "contract_version": "human-review-contract-v1",
+  "template": false,
+  "review_id": "m2-dem-amendment-review-001",
+  "response_schema_version": "nepal-m2-dem-amendment-response-v1",
+  "workflow_authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-activation-approval.json",
+    "authorized_action_classes": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ],
+    "verified_at_utc": "2026-09-03T18:03:08Z",
+    "expires_at_utc": null,
+    "review_required": true,
+    "lock_authorized": true,
+    "reconcile_authorized": true,
+    "post_review_actions": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ]
+  },
+  "review_bundle": {
+    "bundle_id": "m2-dem-amendment-review-bundle-001",
+    "manifest_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e",
+    "candidate_identity": "M2-DEM-AMENDMENT-PROPOSAL-SHA256:92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+    "rendered_surface_verified": true
+  },
+  "allowed_decisions": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "required_attestation": true,
+  "max_notes_length": 2000,
+  "hash_prefix_length": 16,
+  "items": [
+    {
+      "item_id": "M2-DEM-AMEND-EXACT-LICENSE-AND-FOUR-TILE-PLAN",
+      "evidence_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e"
+    }
+  ]
+}
