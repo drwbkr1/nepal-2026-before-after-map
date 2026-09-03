@@ -413,11 +413,11 @@
         "source_and_custody_preflight": "pass",
         "anonymous_no_account_route": "pass",
         "new_terms_route_or_cost": "stop",
-        "authorized_count": 2,
-        "promoted_count": 2,
+        "authorized_count": 1,
+        "promoted_count": 3,
         "failed_count": 0,
-        "last_checkpoint_ref": "records/acquisition/dem-checkpoints/m2-dem-002-20260903T211011Z-0c71d865.json",
-        "last_checkpoint_sha256": "71bcdefc183cebfc73ac3b2808e8f75904613b1af840ff4178d126403a5664f0"
+        "last_checkpoint_ref": "records/acquisition/dem-checkpoints/m2-dem-003-20260903T211120Z-76afbee1.json",
+        "last_checkpoint_sha256": "da7f169b0dc2ff28fd73493cc37167a6917be9448f1a0d7258669654e7081774"
       },
       "disposition": null,
       "retained_failures": [],
@@ -427,7 +427,7 @@
         ],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "2 exact DEM files are promoted with reconciled SHA-256 and size receipts; continue one exact unattempted tile at a time."
+        "rationale": "3 exact DEM files are promoted with reconciled SHA-256 and size receipts; continue one exact unattempted tile at a time."
       },
       "next_dependency": "M2-DEM-VERIFY"
     },
@@ -517,6 +517,6 @@
       "The post-event optical route remains high-cloud-risk and may be inconclusive."
     ],
     "parallel_checkpoint": "M2-DEM-ACQUISITION",
-    "parallel_next_action": "Acquire M2-DEM-003 only through append-only staging, exact size and local SHA-256, and no-replace promotion."
+    "parallel_next_action": "Acquire M2-DEM-004 only through append-only staging, exact size and local SHA-256, and no-replace promotion."
   }
 }

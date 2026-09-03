@@ -7,7 +7,7 @@
     "candidate_manifest_ref": "records/source-gates/m2-dem-candidate-manifest.json",
     "candidate_manifest_sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243",
     "intake_contract_ref": "contracts/m2-dem-intake.json",
-    "intake_contract_sha256": "6a281980fcba28cdbbd87b0e88e12529cf1732c1172eb52025ada56bc4bb4752",
+    "intake_contract_sha256": "1f28c7f57cfe90e540f42f7ab358df6ee0d1944f2a5ca7e1ba74159bdc4d6ab9",
     "amendment_proposal_ref": "contracts/milestone-002-dem-amendment-proposal.json",
     "amendment_proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
     "review_bundle_ref": "reviews/m2-dem-amendment/review-bundle.json",
