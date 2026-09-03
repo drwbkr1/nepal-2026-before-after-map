@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-DEM-AMENDMENT-APPROVAL-001",
+  "status": "approved",
+  "approved_at_utc": "2026-09-03T20:27:26Z",
+  "review_id": "m2-dem-amendment-review-001",
+  "review_bundle_id": "m2-dem-amendment-review-bundle-001",
+  "review_bundle_manifest_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e",
+  "amendment_proposal_ref": "contracts/milestone-002-dem-amendment-proposal.json",
+  "amendment_proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+  "review_reconciliation_ref": "records/source-gates/m2-dem-amendment-review-reconciliation.json",
+  "review_reconciliation_sha256": "9d72c9786440da0c9149340cd69361b12e55f0d7dff88972bfd02ee0da5460e1",
+  "locked_response_sha256": "4d877e1b667116a58950b0f567cbb300a3b59a84de65446647c9e760bdfc8193",
+  "lock_receipt_sha256": "5db1f3d13f02095e28f796372aea8b54fd6f6b4f1c57ba2d890fb4dcf7ddac55",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "license": {
+    "name": "Licence for Copernicus DEM instance COP-DEM-GLO-30-F Global 30m Full, Free & Open",
+    "url": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+    "document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd",
+    "acceptance_status": "accepted_exact_hash_bound_document"
+  },
+  "authorized_source_ids": [
+    "M2-DEM-001",
+    "M2-DEM-002",
+    "M2-DEM-003",
+    "M2-DEM-004"
+  ],
+  "authorized_next_actions": [
+    "accept only the exact hash-bound Copernicus WorldDEM-30 license",
+    "download only the four exact public GLO-30 COG tiles from their anonymous HTTPS URLs",
+    "verify content length, remote identity metadata, local SHA-256, GeoTIFF readability, CRS, dimensions, nodata, and AOI coverage",
+    "store raw and derived DEM files only in versioned non-Git custody",
+    "use verified DEM pixels only for Sentinel-1 terrain correction and terrain-geometry exclusion masks",
+    "record all failed, partial, corrupt, superseded, and inconclusive attempts"
+  ],
+  "does_not_authorize": [
+    "create, register, recover, or modify any account",
+    "use CDSE CCM credentials or generated S3 secrets",
+    "incur any charge or use a requester-pays route",
+    "download any DEM tile other than the exact four",
+    "redistribute raw DEM tiles or commit them to Git",
+    "publish scientific conclusions, attribution, or emergency guidance",
+    "select a repository license or authorize unrelated products"
+  ],
+  "human_decisions_fabricated": false
+}

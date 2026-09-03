@@ -34,15 +34,15 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Outcome:** Verified local custody of approved data and a reproducible pre-event baseline.
 
-**Status:** Active at `M2-AUTHENTICATION-REFERENCE`. The exact eight-product acquisition plan is owner-approved, the live source and storage preflight passed, and the empty external custody structure is initialized. No product bytes have been transferred because the secret-safe existing CDSE authentication reference is still pending.
+**Status:** Active with two independent checkpoints. The exact eight-product Sentinel plan remains at `M2-AUTHENTICATION-REFERENCE`: its live source and storage preflight passed and empty custody is initialized, but no product bytes have been transferred. The approved four-tile DEM amendment is at `M2-DEM-FRESH-PREFLIGHT`; activation made no network request or DEM custody mutation.
 
 **Prepared verification:** Deterministic offline controls define exact container identity, checksum, ZIP safety, SAFE structure, required radar/optical members, and the later pixel-readiness gates. The active wrapper refuses archive access until a promoted intake identity and successful-transfer receipt exist. The real-data readiness decision remains `defer` because custody contains no product bytes.
 
 **Prepared pixel QA:** The EPSG:32645 coverage, mask, grid-alignment, and registration thresholds are fixed before product access. The portable core and ArcGIS Pro 3.7.1 Spatial Analyst adapter pass synthetic validation only; real-product readiness remains `defer`.
 
-**Pending dependency amendment:** ArcGIS Pro's terrain-correction tools require a DEM that is absent from the exact eight-product approval. A separate, non-authorizing review bundle identifies four exact public Copernicus DEM GLO-30 COG tiles covering the approved AOIs and binds the license that requires owner acceptance. No DEM payload was requested; the amendment must be approved before DEM acquisition or terrain correction.
+**Approved dependency amendment:** ArcGIS Pro's terrain-correction tools require a DEM that is absent from the exact eight-product Sentinel approval. The owner approved the separate hash-bound review bundle, accepted the exact Copernicus WorldDEM-30 license, and authorized only four named public Copernicus DEM GLO-30 COG tiles covering the approved AOIs. Fresh source and custody preflight remains mandatory before any DEM payload request.
 
-**Prepared DEM and radar controls:** A four-tile intake candidate, offline ArcGIS GeoTIFF verifier, and two-route Sentinel-1 processing contract are fixed without activation. The primary radar route keeps linear gamma-nought data, retains native terrain-distortion evidence, and defers rather than guessing when only predicted orbit vectors are available or the EGM2008-to-ArcGIS-EGM96 vertical-datum mismatch is unresolved.
+**Active DEM and prepared radar controls:** The four-tile intake and offline ArcGIS GeoTIFF verifier are active but have no transferred rasters. Their immutable candidates remain historical evidence. The two-route Sentinel-1 contract keeps linear gamma-nought data, retains native terrain-distortion evidence, and defers rather than guessing when only predicted orbit vectors are available or the EGM2008-to-ArcGIS-EGM96 vertical-datum mismatch is unresolved.
 
 **Prepared optical controls:** The exact RUM pair has fixed Level-2A metadata parsing, BOA reflectance scaling, conservative SCL masking, 20 m EPSG:32645 alignment, index formulas, and cross-platform safeguards. Portable tests and ArcGIS synthetic processing pass, while the real high-cloud-risk route remains deferred until acquired pixels prove coverage and registration.
 

@@ -31,7 +31,17 @@
     "expires_at_utc": null,
     "approval_sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
     "review_bundle_sha256": "e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d",
-    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d"
+    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+    "amendments": [
+      {
+        "approval_ref": "records/source-gates/m2-dem-amendment-approval.json",
+        "approval_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+        "proposal_ref": "contracts/milestone-002-dem-amendment-proposal.json",
+        "proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+        "review_bundle_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e",
+        "license_document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd"
+      }
+    ]
   },
   "scope": {
     "objective": "Acquire the eight approved Sentinel products into verified non-Git custody and build a reproducible pre-event optical and radar baseline in EPSG:32645.",
@@ -52,18 +62,21 @@
       "create or recover an account or change account security",
       "disclose, copy, log, or commit credentials, tokens, cookies, or authorization headers",
       "incur cost or use a paid route",
-      "download any product outside the eight exact approved identities",
       "use or redistribute restricted high-resolution imagery",
       "select a repository license",
       "publish scientific conclusions, event attribution, or emergency guidance",
-      "store imagery, rasters, geodatabases, or ArcGIS packages in Git"
+      "store imagery, rasters, geodatabases, or ArcGIS packages in Git",
+      "download any Sentinel product outside the eight exact approved identities or any DEM tile outside the four exact amendment identities"
     ],
     "reversible_actions": [
       "create the approved external custody structure after a passing fresh preflight",
       "write append-only transfer attempts to unique staging paths",
       "resume only when server range and remote identity controls pass",
       "build derived baseline rasters in external versioned attempt paths",
-      "update public control records and validation tooling"
+      "update public control records and validation tooling",
+      "write append-only DEM transfer attempts for only the four exact approved tiles",
+      "verify and promote exact DEM GeoTIFFs without replacement",
+      "use verified DEM pixels only for approved radar terrain correction and terrain-geometry masks"
     ],
     "stop_conditions": [
       "login, multi-factor authentication, or account recovery requires owner action",
@@ -71,7 +84,15 @@
       "any product identity, size, checksum, entitlement, online state, or access route differs from the approved plan",
       "available free space is below 60 GiB before acquisition begins",
       "a transfer redirects to an unapproved provider or paid route",
-      "a destination collision, symlink, traversal, or non-atomic promotion risk is detected"
+      "a destination collision, symlink, traversal, or non-atomic promotion risk is detected",
+      "license bytes or published obligations differ from the reviewed hash",
+      "any tile URL, identity, bbox, byte length, ETag, last-modified value, access mode, or cost differs at preflight",
+      "an account, authentication, generated secret, paid route, redirect, or requester-pays mode appears",
+      "a staging or destination collision, unsafe path, symlink, or non-atomic promotion risk appears",
+      "a downloaded file fails size, local SHA-256 capture, GeoTIFF readability, CRS, dimension, nodata, or AOI-coverage checks"
+    ],
+    "active_amendments": [
+      "records/source-gates/m2-dem-amendment-approval.json"
     ]
   },
   "entry_conditions": [
@@ -266,14 +287,16 @@
       "id": "M2-BASELINE",
       "purpose": "Create and validate independent pre-event optical and radar reference layers in EPSG:32645.",
       "depends_on": [
-        "M2-VERIFY"
+        "M2-VERIFY",
+        "M2-DEM-VERIFY"
       ],
       "action_class": "data_processing",
       "human_gate": false,
       "status": "planned",
       "inputs": [
         "records/acquisition/verification-summary.json",
-        "config/qa/pixel-readiness-contract.json"
+        "config/qa/pixel-readiness-contract.json",
+        "contracts/m2-dem-offline-verification.json"
       ],
       "outputs": [
         "external baseline rasters",
@@ -293,6 +316,130 @@
         "rationale": "Baseline processing awaits verified product custody."
       },
       "next_dependency": null
+    },
+    {
+      "id": "M2-DEM-AMEND",
+      "purpose": "Lock and reconcile the exact owner license and four-tile amendment decision.",
+      "depends_on": [
+        "M2-ACTIVATE"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "complete",
+      "inputs": [
+        "reviews/m2-dem-amendment/review-bundle.json",
+        "reviews/m2-dem-amendment/review-contract.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-dem-amendment-approval.json",
+        "records/source-gates/m2-dem-amendment-review-reconciliation.json"
+      ],
+      "gates": {
+        "owner_decision": "approve",
+        "attestation": true,
+        "review_bundle_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e",
+        "proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+        "license_document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd"
+      },
+      "disposition": "pass",
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "enables_dependency",
+        "rationale": "One exact completed approval was locked and reconciled; license acceptance and tile scope are hash-bound."
+      },
+      "next_dependency": "M2-DEM-PREFLIGHT"
+    },
+    {
+      "id": "M2-DEM-PREFLIGHT",
+      "purpose": "Revalidate license bytes, four object identities, anonymous access, paths, collisions, and storage before DEM transfer.",
+      "depends_on": [
+        "M2-DEM-AMEND"
+      ],
+      "action_class": "data_acquisition",
+      "human_gate": false,
+      "status": "ready",
+      "inputs": [
+        "records/source-gates/m2-dem-amendment-approval.json",
+        "records/source-gates/m2-dem-candidate-manifest.json",
+        "contracts/m2-dem-intake.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-dem-live-source-gate.json",
+        "records/acquisition/dem-preflight.json"
+      ],
+      "gates": {},
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "The amendment makes a fresh non-mutating DEM preflight eligible; it has not run."
+      },
+      "next_dependency": "M2-DEM-ACQUIRE"
+    },
+    {
+      "id": "M2-DEM-ACQUIRE",
+      "purpose": "Acquire only the four exact anonymous GLO-30 tiles into append-only non-Git custody.",
+      "depends_on": [
+        "M2-DEM-PREFLIGHT"
+      ],
+      "action_class": "data_acquisition",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-dem-live-source-gate.json",
+        "records/acquisition/dem-preflight.json",
+        "contracts/m2-dem-intake.json"
+      ],
+      "outputs": [
+        "external DEM custody",
+        "records/acquisition DEM transfer receipts"
+      ],
+      "gates": {},
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-201-VERIFIED-CUSTODY"
+        ],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "DEM transfer cannot begin until fresh source and custody controls pass."
+      },
+      "next_dependency": "M2-DEM-VERIFY"
+    },
+    {
+      "id": "M2-DEM-VERIFY",
+      "purpose": "Verify exact DEM bytes, GeoTIFF structure, CRS, dimensions, nodata, and approved-AOI coverage.",
+      "depends_on": [
+        "M2-DEM-ACQUIRE"
+      ],
+      "action_class": "routine_qa",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "external DEM custody",
+        "contracts/m2-dem-offline-verification.json"
+      ],
+      "outputs": [
+        "records/acquisition/dem-verification-summary.json"
+      ],
+      "gates": {},
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-201-VERIFIED-CUSTODY",
+          "EXIT-202-PIXEL-AND-RIGHTS-QA"
+        ],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "No DEM bytes have been transferred or inspected."
+      },
+      "next_dependency": "M2-BASELINE"
     }
   ],
   "path_efficiency": {
@@ -317,13 +464,17 @@
       "local SHA-256 and provider checksum",
       "ZIP and SAFE verification",
       "AOI pixel and mask QA",
-      "EPSG:32645 baseline and registration QA"
+      "EPSG:32645 baseline and registration QA",
+      "exact DEM amendment and license binding",
+      "fresh anonymous four-tile source preflight",
+      "per-tile SHA-256 and GeoTIFF verification"
     ],
     "completed_checks": [
       "exact activation binding",
       "fresh terms and availability review",
       "60 GiB free-space minimum",
-      "path and collision safety"
+      "path and collision safety",
+      "exact DEM amendment and license binding"
     ]
   },
   "activation_evidence": {
@@ -342,6 +493,8 @@
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
       "No full-product bytes are yet in custody and no pixel usability or scientific change is established.",
       "The post-event optical route remains high-cloud-risk and may be inconclusive."
-    ]
+    ],
+    "parallel_checkpoint": "M2-DEM-FRESH-PREFLIGHT",
+    "parallel_next_action": "Run the fresh anonymous DEM source, license, storage, path, collision, and redirect preflight."
   }
 }

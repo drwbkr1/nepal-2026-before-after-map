@@ -1,0 +1,237 @@
+{
+  "contract_version": "1.0",
+  "verification_id": "NEPAL-M2-DEM-OFFLINE-VERIFICATION-001",
+  "created_at": "2026-09-03T20:27:26Z",
+  "status": "active_gate_deferred_no_promoted_rasters",
+  "inputs": {
+    "candidate_manifest_ref": "records/source-gates/m2-dem-candidate-manifest.json",
+    "candidate_manifest_sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243",
+    "intake_contract_ref": "contracts/m2-dem-intake.json",
+    "intake_contract_sha256": "0fa00a4be01d3caddac28088d2d3d714040d1258b33497ebee50cbb0b8b3b5b6",
+    "amendment_proposal_ref": "contracts/milestone-002-dem-amendment-proposal.json",
+    "amendment_proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+    "review_bundle_ref": "reviews/m2-dem-amendment/review-bundle.json",
+    "review_bundle_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e",
+    "approved_aoi_ref": "config/aoi/approved-study-areas.geojson",
+    "approved_aoi_sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98",
+    "amendment_approval_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "amendment_approval_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+    "review_reconciliation_ref": "records/source-gates/m2-dem-amendment-review-reconciliation.json",
+    "review_reconciliation_sha256": "9d72c9786440da0c9149340cd69361b12e55f0d7dff88972bfd02ee0da5460e1"
+  },
+  "authority": {
+    "dem_amendment_status": "approved",
+    "license_acceptance_established": true,
+    "network_access_authorized": false,
+    "custody_mutation_authorized": false,
+    "dem_download_authorized": false,
+    "dem_pixel_processing_authorized": true,
+    "this_contract_creates_authority": false
+  },
+  "execution_boundary": {
+    "runtime": "ArcGIS Pro 3.7.1 Python with ArcPy",
+    "custody_root_from_proposal": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody",
+    "custody_root_must_already_exist": true,
+    "source_rasters_are_read_only": true,
+    "network_requests": "prohibited",
+    "archive_extraction": "not_applicable_direct_geotiff",
+    "output_parent_must_already_exist": true,
+    "overwrite_existing_receipt": false
+  },
+  "raster_controls": {
+    "required_container": "GeoTIFF",
+    "tiff_signatures": [
+      "49492a00",
+      "4d4d002a"
+    ],
+    "local_identity_algorithm": "SHA-256",
+    "require_exact_remote_metadata_size": true,
+    "require_single_band": true,
+    "require_float32": true,
+    "require_epsg_4326": true,
+    "shape_tolerance_pixels": 0,
+    "cell_size_absolute_tolerance_degrees": 1e-12,
+    "extent_absolute_tolerance_degrees": 1e-09,
+    "require_nodata_property_inspection": true,
+    "require_statistics_capture": true,
+    "require_each_approved_aoi_geometrically_covered": true,
+    "valid_pixel_coverage_is_a_separate_later_gate": true
+  },
+  "assets": [
+    {
+      "source_id": "M2-DEM-001",
+      "asset_id": "m2-dem-001",
+      "item_id": "Copernicus_DSM_COG_10_N27_00_E084_00_DEM",
+      "raster_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+      "expected_size_bytes": 45336691,
+      "expected_shape": [
+        3600,
+        3600
+      ],
+      "expected_band_count": 1,
+      "expected_pixel_type": "F32",
+      "expected_crs_wkid": 4326,
+      "expected_bbox_wgs84": [
+        84.0,
+        27.0,
+        85.0,
+        28.0
+      ],
+      "expected_transform": [
+        83.99986111111112,
+        0.0002777777777778,
+        0.0,
+        28.000138888888888,
+        0.0,
+        -0.0002777777777778
+      ],
+      "expected_cell_size_degrees": [
+        0.0002777777777778,
+        0.0002777777777778
+      ],
+      "intersects_approved_aois": [
+        "AOI-OVERVIEW"
+      ]
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "asset_id": "m2-dem-002",
+      "item_id": "Copernicus_DSM_COG_10_N27_00_E085_00_DEM",
+      "raster_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+      "expected_size_bytes": 44874244,
+      "expected_shape": [
+        3600,
+        3600
+      ],
+      "expected_band_count": 1,
+      "expected_pixel_type": "F32",
+      "expected_crs_wkid": 4326,
+      "expected_bbox_wgs84": [
+        85.0,
+        27.0,
+        86.0,
+        28.0
+      ],
+      "expected_transform": [
+        84.99986111111112,
+        0.0002777777777778,
+        0.0,
+        28.000138888888888,
+        0.0,
+        -0.0002777777777778
+      ],
+      "expected_cell_size_degrees": [
+        0.0002777777777778,
+        0.0002777777777778
+      ],
+      "intersects_approved_aois": [
+        "AOI-OVERVIEW"
+      ]
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "asset_id": "m2-dem-003",
+      "item_id": "Copernicus_DSM_COG_10_N28_00_E084_00_DEM",
+      "raster_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+      "expected_size_bytes": 41688284,
+      "expected_shape": [
+        3600,
+        3600
+      ],
+      "expected_band_count": 1,
+      "expected_pixel_type": "F32",
+      "expected_crs_wkid": 4326,
+      "expected_bbox_wgs84": [
+        84.0,
+        28.0,
+        85.0,
+        29.0
+      ],
+      "expected_transform": [
+        83.99986111111112,
+        0.0002777777777778,
+        0.0,
+        29.000138888888888,
+        0.0,
+        -0.0002777777777778
+      ],
+      "expected_cell_size_degrees": [
+        0.0002777777777778,
+        0.0002777777777778
+      ],
+      "intersects_approved_aois": [
+        "AOI-OVERVIEW"
+      ]
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "asset_id": "m2-dem-004",
+      "item_id": "Copernicus_DSM_COG_10_N28_00_E085_00_DEM",
+      "raster_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+      "expected_size_bytes": 38402839,
+      "expected_shape": [
+        3600,
+        3600
+      ],
+      "expected_band_count": 1,
+      "expected_pixel_type": "F32",
+      "expected_crs_wkid": 4326,
+      "expected_bbox_wgs84": [
+        85.0,
+        28.0,
+        86.0,
+        29.0
+      ],
+      "expected_transform": [
+        84.99986111111112,
+        0.0002777777777778,
+        0.0,
+        29.000138888888888,
+        0.0,
+        -0.0002777777777778
+      ],
+      "expected_cell_size_degrees": [
+        0.0002777777777778,
+        0.0002777777777778
+      ],
+      "intersects_approved_aois": [
+        "AOI-OVERVIEW",
+        "AOI-SOURCE",
+        "AOI-UPPER-CORRIDOR"
+      ]
+    }
+  ],
+  "mosaic_controls": {
+    "required_source_ids": [
+      "M2-DEM-001",
+      "M2-DEM-002",
+      "M2-DEM-003",
+      "M2-DEM-004"
+    ],
+    "expected_union_bbox_wgs84": [
+      84.0,
+      27.0,
+      86.0,
+      29.0
+    ],
+    "required_aoi_ids": [
+      "AOI-OVERVIEW",
+      "AOI-SOURCE",
+      "AOI-UPPER-CORRIDOR"
+    ],
+    "mosaic_creation_during_offline_verification": false
+  },
+  "post_container_gates": [
+    "valid and nodata pixel fraction within each approved AOI",
+    "void, seam, artifact, and terrain plausibility review",
+    "vertical datum treatment for ArcGIS terrain flattening",
+    "sensitivity of radar outputs to any accepted vertical datum route",
+    "scientific fitness and admission review"
+  ],
+  "limitations": [
+    "A pass establishes local identity and structural raster fitness only.",
+    "Geometric AOI coverage does not establish valid DEM pixels inside an AOI.",
+    "Copernicus GLO-30 orthometric heights use EGM2008, while ArcGIS built-in GEOID handling is documented as EGM96; production terrain correction remains deferred until that mismatch is resolved and recorded.",
+    "No scan may run against the candidate contract and no output receipt may replace an existing file."
+  ]
+}

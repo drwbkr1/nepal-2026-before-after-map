@@ -13,6 +13,8 @@ The reviewed artifacts remain unchanged. Active intake, preflight, and custody r
 
 The current checkpoint is `M2-AUTHENTICATION-REFERENCE`. No credential reference was present at preflight, no authentication occurred, and no product bytes were downloaded. Continue only through a secret-safe reference to an existing owner-controlled CDSE access token or authenticated session. Never place secret values in a command argument, chat message, repository file, receipt, URL, or captured output.
 
+A separate DEM amendment was approved on 3 September 2026 through review bundle SHA-256 `caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e`, proposal SHA-256 `92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69`, and license SHA-256 `9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd`. Its independent checkpoint is `M2-DEM-FRESH-PREFLIGHT`. It does not change the Sentinel authentication handoff.
+
 ## Prepared controls
 
 `contracts/m2-intake-candidate.json` preserves the plan-derived pre-activation control. `contracts/m2-intake.json` is the active intake contract for the same eight exact products. It uses:
@@ -57,6 +59,19 @@ The wrapper refuses unpromoted assets, missing or ambiguous successful-attempt e
 
 `records/readiness/m2-readiness-decision.json` preserves the historical pre-acquisition `defer`: no full products, pixel coverage, masks, or registration evidence existed. The later live source gate resolves only access-time source and rights checks; it does not alter the remaining data-readiness gates. See [M2_OFFLINE_VERIFICATION.md](M2_OFFLINE_VERIFICATION.md).
 
+## Parallel DEM sequence
+
+`contracts/m2-dem-intake.json` authorizes only `M2-DEM-001` through `M2-DEM-004`; all remain unattempted. `contracts/m2-dem-offline-verification.json` is active and offline but refuses raster access until a matching intake asset is promoted. Before any tile bytes are requested:
+
+1. Re-fetch the exact license URL and require SHA-256 `9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd`.
+2. Revalidate each exact anonymous HTTPS object without redirects, authentication, requester-pays behavior, cost, or identity drift. Require the reviewed content length, ETag, last-modified value, and byte-range behavior.
+3. Revalidate free space, path containment, absent destination and staging collisions, and no reparse-point ancestors under the approved external root.
+4. Write append-only live-source and preflight receipts. Only a complete pass may advance `M2-DEM-ACQUIRE`.
+5. Acquire one tile at a time through exclusive staging, compute local SHA-256, preserve all failures, and promote without replacement.
+6. Run the active ArcGIS GeoTIFF verifier offline for each promoted tile. Structural readability is not valid-pixel or radar fitness.
+
+Stop if the license bytes, object identity, route, access mode, cost, paths, or custody conditions differ. Do not infer a vertical-datum conversion or download orbit auxiliaries.
+
 Regenerate or verify these bytes with:
 
 ```powershell
@@ -64,6 +79,7 @@ python scripts/prepare_m2_intake.py --created-at 2026-09-02T04:46:03Z --verify-o
 python scripts/prepare_m2_verification.py --created-at 2026-09-03T16:43:33Z --verify-only
 python scripts/validate_m2_acquisition_progress.py --verify-external
 python scripts/derive_m2_acquisition_checkpoint.py --verify-external
+python C:\Users\drewb\.codex\skills\intake-controlled-data\scripts\validate_intake_contract.py contracts/m2-dem-intake.json --project-root C:\Projects\Active --json
 python -m unittest discover -s tests -v
 python scripts/check_project.py
 ```

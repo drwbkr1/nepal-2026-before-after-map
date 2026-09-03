@@ -37,7 +37,17 @@
     ],
     "verified_at_utc": "2026-09-03T17:24:06Z",
     "expires_at_utc": null,
-    "scope_ref": "contracts/milestone-002.json"
+    "scope_ref": "contracts/milestone-002.json",
+    "amendments": [
+      {
+        "approval_ref": "records/source-gates/m2-dem-amendment-approval.json",
+        "approval_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+        "proposal_ref": "contracts/milestone-002-dem-amendment-proposal.json",
+        "proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+        "review_bundle_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e",
+        "license_document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd"
+      }
+    ]
   },
   "control_surfaces": {
     "instructions": [
@@ -52,10 +62,11 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [
-      "contracts/milestone-002-dem-amendment-proposal.json"
-    ],
-    "activated_from_contract": "contracts/milestone-002-proposal.json"
+    "proposed_amendments": [],
+    "activated_from_contract": "contracts/milestone-002-proposal.json",
+    "activated_amendments": [
+      "records/source-gates/m2-dem-amendment-approval.json"
+    ]
   },
   "cycle": {
     "canonical_probe": {
@@ -170,7 +181,17 @@
       {
         "unit_id": "M2-DEM-AMEND",
         "reason": "Would accept the exact Copernicus WorldDEM-30 license and add only four exact public DEM tiles needed for radar terrain correction.",
-        "authority_ref": "contracts/milestone-002-dem-amendment-proposal.json"
+        "authority_ref": "records/source-gates/m2-dem-amendment-approval.json"
+      },
+      {
+        "unit_id": "M2-DEM-PREFLIGHT",
+        "reason": "The exact DEM amendment authorizes fresh non-mutating preflight for four named tiles.",
+        "authority_ref": "records/source-gates/m2-dem-amendment-approval.json"
+      },
+      {
+        "unit_id": "M2-DEM-ACQUIRE",
+        "reason": "The exact DEM amendment authorizes anonymous acquisition of only four named tiles.",
+        "authority_ref": "records/source-gates/m2-dem-amendment-approval.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
@@ -180,5 +201,12 @@
     "expected_branch": "main",
     "expected_head": null,
     "next_action": "Provide a secret-safe reference to an existing owner-controlled CDSE access token or authenticated session; then revalidate the exact first product before transfer. Do not place a token, password, cookie, or header in Git or chat."
-  }
+  },
+  "parallel_checkpoints": [
+    {
+      "checkpoint_id": "M2-DEM-FRESH-PREFLIGHT",
+      "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+      "next_action": "Run the fresh anonymous DEM preflight before requesting any tile bytes."
+    }
+  ]
 }

@@ -43,7 +43,9 @@ REQUIRED = [
     "contracts/m2-materialization.json",
     "contracts/milestone-002-dem-amendment-proposal.json",
     "contracts/m2-dem-intake-candidate.json",
+    "contracts/m2-dem-intake.json",
     "contracts/m2-dem-offline-verification-candidate.json",
+    "contracts/m2-dem-offline-verification.json",
     "records/project-control-profile.json",
     "records/long-term-goal.json",
     "records/evidence-ledger.jsonl",
@@ -62,6 +64,7 @@ REQUIRED = [
     "records/acquisition/acquisition-progress-readiness.json",
     "records/acquisition/acquisition-checkpoint-readiness.json",
     "records/acquisition/acquisition-checkpoint-portability-correction.json",
+    "records/acquisition/dem-amendment-activation.json",
     "records/source-gates/source-manifest-approval.json",
     "records/source-gates/source-manifest-review-reconciliation.json",
     "records/source-gates/m2-activation-approval.json",
@@ -70,6 +73,8 @@ REQUIRED = [
     "records/source-gates/m2-dem-metadata-receipt.json",
     "records/source-gates/m2-dem-candidate-manifest.json",
     "records/source-gates/m2-dem-source-gate.json",
+    "records/source-gates/m2-dem-amendment-approval.json",
+    "records/source-gates/m2-dem-amendment-review-reconciliation.json",
     "docs/M1_SOURCE_MANIFEST_REVIEW.md",
     "docs/assets/m1-source-manifest-review.png",
     "records/surface-receipts/m1-source-manifest-review.json",
@@ -141,6 +146,7 @@ REQUIRED = [
     "tests/test_m2_active_verification.py",
     "tests/test_m2_dem_amendment.py",
     "tests/test_m2_dem_controls.py",
+    "tests/test_m2_dem_activation.py",
     "tests/test_radar_processing_contract.py",
     "tests/test_optical_processing_core.py",
     "tests/test_m2_materialization.py",
@@ -150,6 +156,7 @@ REQUIRED = [
     "scripts/inspect_arcgis_sar_capability.py",
     "scripts/prepare_m2_dem_amendment.py",
     "scripts/prepare_m2_dem_controls.py",
+    "scripts/activate_m2_dem_amendment.py",
     "scripts/verify_m2_dem_geotiff.py",
     "scripts/prepare_radar_processing_contract.py",
     "scripts/optical_processing_core.py",
@@ -229,9 +236,14 @@ def main() -> None:
     dem_bundle = json.loads((ROOT / "reviews/m2-dem-amendment/review-bundle.json").read_text(encoding="utf-8"))
     dem_contract = json.loads((ROOT / "reviews/m2-dem-amendment/review-contract.json").read_text(encoding="utf-8"))
     dem_blank = json.loads((ROOT / "reviews/m2-dem-amendment/blank-response.json").read_text(encoding="utf-8"))
+    dem_reconciliation = json.loads((ROOT / "records/source-gates/m2-dem-amendment-review-reconciliation.json").read_text(encoding="utf-8"))
+    dem_approval = json.loads((ROOT / "records/source-gates/m2-dem-amendment-approval.json").read_text(encoding="utf-8"))
     sar_capability = json.loads((ROOT / "records/surface-receipts/arcgis-sar-processing-capability.json").read_text(encoding="utf-8"))
     dem_intake_candidate = json.loads((ROOT / "contracts/m2-dem-intake-candidate.json").read_text(encoding="utf-8"))
+    dem_intake_active = json.loads((ROOT / "contracts/m2-dem-intake.json").read_text(encoding="utf-8"))
     dem_verification_candidate = json.loads((ROOT / "contracts/m2-dem-offline-verification-candidate.json").read_text(encoding="utf-8"))
+    dem_verification_active = json.loads((ROOT / "contracts/m2-dem-offline-verification.json").read_text(encoding="utf-8"))
+    dem_activation_receipt = json.loads((ROOT / "records/acquisition/dem-amendment-activation.json").read_text(encoding="utf-8"))
     radar_processing_contract = json.loads((ROOT / "config/qa/radar-baseline-processing-contract.json").read_text(encoding="utf-8"))
     dem_radar_readiness = json.loads((ROOT / "records/surface-receipts/m2-dem-radar-control-readiness.json").read_text(encoding="utf-8"))
     optical_processing_contract = json.loads((ROOT / "config/qa/optical-baseline-processing-contract.json").read_text(encoding="utf-8"))
@@ -250,10 +262,12 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-dem-amendment-proposal.json"
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must clear the DEM proposal after exact activation")
+    if profile.get("control_surfaces", {}).get("activated_amendments") != [
+        "records/source-gates/m2-dem-amendment-approval.json"
     ]:
-        fail("project profile must expose the exact pending M2 DEM amendment")
+        fail("project profile must expose the exact active M2 DEM amendment")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -269,6 +283,18 @@ def main() -> None:
         fail("completed M1 must preserve the exact user authority")
     if profile["authority"]["authority_ref"] != active_m2["authority"]["authority_ref"]:
         fail("profile and active M2 authority references must agree")
+    expected_dem_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-dem-amendment-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-dem-amendment-approval.json"),
+        "proposal_ref": "contracts/milestone-002-dem-amendment-proposal.json",
+        "proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+        "review_bundle_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e",
+        "license_document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd",
+    }
+    if profile["authority"].get("amendments") != [expected_dem_amendment_binding]:
+        fail("profile authority does not bind the exact DEM amendment")
+    if active_m2["authority"].get("amendments") != [expected_dem_amendment_binding]:
+        fail("active M2 authority does not bind the exact DEM amendment")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -277,6 +303,19 @@ def main() -> None:
     for approved_unit in ("M2-CUSTODY-PREFLIGHT", "M2-ACQUIRE"):
         if profile_gates.get(approved_unit, {}).get("authority_ref") != "records/source-gates/m2-activation-approval.json":
             fail(f"project profile must bind {approved_unit} to the exact M2 activation approval")
+    for approved_unit in ("M2-DEM-AMEND", "M2-DEM-PREFLIGHT", "M2-DEM-ACQUIRE"):
+        if profile_gates.get(approved_unit, {}).get("authority_ref") != "records/source-gates/m2-dem-amendment-approval.json":
+            fail(f"project profile must bind {approved_unit} to the exact DEM amendment approval")
+    if profile.get("parallel_checkpoints") != [
+        {
+            "checkpoint_id": "M2-DEM-FRESH-PREFLIGHT",
+            "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+            "next_action": "Run the fresh anonymous DEM preflight before requesting any tile bytes.",
+        }
+    ]:
+        fail("project profile DEM parallel checkpoint differs")
+    if goal.get("active_amendments") != ["records/source-gates/m2-dem-amendment-approval.json"] or goal.get("parallel_checkpoints") != ["M2-DEM-FRESH-PREFLIGHT"]:
+        fail("long-term goal does not expose the active DEM amendment checkpoint")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -329,6 +368,7 @@ def main() -> None:
     pixel_receipt = json.loads((ROOT / "records/surface-receipts/pixel-qa-synthetic-arcgis.json").read_text(encoding="utf-8"))
     aoi_reconciliation = json.loads((ROOT / "records/source-gates/aoi-review-reconciliation.json").read_text(encoding="utf-8"))
     units = {unit["id"]: unit for unit in contract["units"]}
+    active_m2_units = {unit["id"]: unit for unit in active_m2["units"]}
     validate_review_bundle("reviews/m1-aoi/review-bundle.json", "reviews/m1-aoi/review-contract.json")
     validate_review_bundle("reviews/m1-manifest/review-bundle.json", "reviews/m1-manifest/review-contract.json")
     validate_review_bundle("reviews/m2-activation/review-bundle.json", "reviews/m2-activation/review-contract.json")
@@ -374,6 +414,91 @@ def main() -> None:
         fail("M2 DEM blank response must contain no human decision")
     if any(response.get("decision") is not None for response in dem_blank.get("responses", [])):
         fail("M2 DEM blank response contains a fabricated decision")
+    if dem_reconciliation.get("status") != "reconciled_exact_human_response" or dem_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}:
+        fail("M2 DEM amendment response is not one exact reconciled approval")
+    if dem_reconciliation.get("contract_sha256") != sha256("reviews/m2-dem-amendment/review-contract.json") or dem_reconciliation.get("human_decisions_fabricated") is not False:
+        fail("M2 DEM amendment reconciliation binding or fabrication flag differs")
+    if dem_approval.get("status") != "approved":
+        fail("M2 DEM amendment approval is not active")
+    expected_dem_approval_bindings = {
+        "review_bundle_manifest_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e",
+        "amendment_proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-dem-amendment-review-reconciliation.json"),
+        "locked_response_sha256": dem_reconciliation.get("response_sha256"),
+        "lock_receipt_sha256": dem_reconciliation.get("receipt_sha256"),
+    }
+    if any(dem_approval.get(key) != value for key, value in expected_dem_approval_bindings.items()):
+        fail("M2 DEM amendment approval bindings differ")
+    if dem_approval.get("license") != {
+        "name": "Licence for Copernicus DEM instance COP-DEM-GLO-30-F Global 30m Full, Free & Open",
+        "url": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+        "document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd",
+        "acceptance_status": "accepted_exact_hash_bound_document",
+    }:
+        fail("M2 DEM amendment approval license binding differs")
+    expected_dem_source_ids = {"M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"}
+    if set(dem_approval.get("authorized_source_ids", [])) != expected_dem_source_ids:
+        fail("M2 DEM amendment approval source set differs")
+    if dem_approval.get("human_decisions_fabricated") is not False:
+        fail("M2 DEM amendment approval must not report fabricated decisions")
+    if dem_intake_active.get("extensions", {}).get("status") != "active_authorized_unattempted" or len(dem_intake_active.get("assets", [])) != 4:
+        fail("active M2 DEM intake identity or state differs")
+    if {asset.get("extensions", {}).get("source_id") for asset in dem_intake_active["assets"]} != expected_dem_source_ids:
+        fail("active M2 DEM intake source set differs")
+    if any(
+        asset.get("state") != "authorized"
+        or asset.get("attempts") != []
+        or asset.get("source", {}).get("authorization_ref") != "records/source-gates/m2-dem-amendment-approval.json"
+        for asset in dem_intake_active["assets"]
+    ):
+        fail("active M2 DEM intake invents transfer progress or loses approval binding")
+    if dem_intake_active.get("extensions", {}).get("license_acceptance_status") != "accepted_exact_hash_bound_document":
+        fail("active M2 DEM intake does not preserve exact license acceptance")
+    if dem_verification_active.get("status") != "active_gate_deferred_no_promoted_rasters":
+        fail("active M2 DEM verification must remain data-deferred")
+    active_dem_verification_authority = dem_verification_active.get("authority", {})
+    if active_dem_verification_authority != {
+        "dem_amendment_status": "approved",
+        "license_acceptance_established": True,
+        "network_access_authorized": False,
+        "custody_mutation_authorized": False,
+        "dem_download_authorized": False,
+        "dem_pixel_processing_authorized": True,
+        "this_contract_creates_authority": False,
+    }:
+        fail("active M2 DEM verification authority differs")
+    if dem_verification_active.get("inputs", {}).get("intake_contract_ref") != "contracts/m2-dem-intake.json" or dem_verification_active.get("inputs", {}).get("intake_contract_sha256") != sha256("contracts/m2-dem-intake.json"):
+        fail("active M2 DEM verification does not bind the active intake")
+    for unit_id, expected_status in (
+        ("M2-DEM-AMEND", "complete"),
+        ("M2-DEM-PREFLIGHT", "ready"),
+        ("M2-DEM-ACQUIRE", "planned"),
+        ("M2-DEM-VERIFY", "planned"),
+    ):
+        if active_m2_units.get(unit_id, {}).get("status") != expected_status:
+            fail(f"active M2 unit {unit_id} status differs")
+    if set(active_m2_units["M2-BASELINE"].get("depends_on", [])) != {"M2-VERIFY", "M2-DEM-VERIFY"}:
+        fail("M2 baseline does not preserve both Sentinel and DEM dependencies")
+    if dem_activation_receipt.get("status") != "pass_exact_dem_amendment_activated_preflight_pending":
+        fail("M2 DEM activation receipt status differs")
+    for ref_key, hash_key in (
+        ("reconciliation_ref", "reconciliation_sha256"),
+        ("approval_ref", "approval_sha256"),
+        ("active_intake_ref", "active_intake_sha256"),
+        ("active_verification_ref", "active_verification_sha256"),
+        ("active_milestone_ref", "active_milestone_sha256"),
+        ("project_profile_ref", "project_profile_sha256"),
+        ("long_term_goal_ref", "long_term_goal_sha256"),
+        ("activation_script_ref", "activation_script_sha256"),
+    ):
+        relative = dem_activation_receipt.get("bindings", {}).get(ref_key)
+        if not isinstance(relative, str) or dem_activation_receipt["bindings"].get(hash_key) != sha256(relative):
+            fail(f"M2 DEM activation receipt does not bind {ref_key}")
+    activation_assertions = dem_activation_receipt.get("assertions", {})
+    if activation_assertions.get("exact_license_accepted") is not True or activation_assertions.get("authorized_dem_tile_count") != 4:
+        fail("M2 DEM activation receipt does not preserve exact approved scope")
+    if any(activation_assertions.get(key) is not False for key in ("network_requests_performed", "dem_payload_bytes_requested", "dem_pixels_examined", "scientific_result_established")):
+        fail("M2 DEM activation receipt invents preflight, payload, pixel, or science evidence")
     if sar_capability.get("status") != "pass_capability_only_dem_dependency_unresolved":
         fail("ArcGIS SAR capability receipt status differs")
     sar_checks = sar_capability.get("checks", {})
@@ -604,7 +729,12 @@ def main() -> None:
         relative = optical_readiness_bindings.get(ref_key)
         if not isinstance(relative, str) or not (ROOT / relative).is_file():
             fail(f"optical readiness receipt is missing {ref_key}")
-        if optical_readiness_bindings.get(hash_key) != sha256(relative):
+        expected_hash = (
+            "188af4575401473bb464dff84b83a90a41751b176c6a5e63a76f62acbe4e6bfb"
+            if ref_key == "active_m2_ref"
+            else sha256(relative)
+        )
+        if optical_readiness_bindings.get(hash_key) != expected_hash:
             fail(f"optical readiness receipt does not bind {ref_key}")
     if optical_readiness.get("validation", {}).get("portable_test_count") != 15 or optical_readiness.get("validation", {}).get("full_repository_test_count") != 97:
         fail("optical readiness receipt test counts differ")
@@ -669,7 +799,12 @@ def main() -> None:
         relative = materialization_bindings.get(ref_key)
         if not isinstance(relative, str) or not (ROOT / relative).is_file():
             fail(f"M2 materialization readiness is missing {ref_key}")
-        if materialization_bindings.get(hash_key) != sha256(relative):
+        expected_hash = (
+            "188af4575401473bb464dff84b83a90a41751b176c6a5e63a76f62acbe4e6bfb"
+            if ref_key == "active_m2_ref"
+            else sha256(relative)
+        )
+        if materialization_bindings.get(hash_key) != expected_hash:
             fail(f"M2 materialization readiness does not bind {ref_key}")
     materialization_validation = materialization_readiness.get("validation", {})
     if materialization_validation.get("targeted_test_count") != 14 or materialization_validation.get("full_repository_test_count") != 111:
@@ -830,7 +965,12 @@ def main() -> None:
         ("acquisition_plan_ref", "acquisition_plan_sha256"),
     ):
         relative = control_bindings.get(ref_key)
-        if not isinstance(relative, str) or not (ROOT / relative).is_file() or control_bindings.get(hash_key) != sha256(relative):
+        expected_hash = (
+            "188af4575401473bb464dff84b83a90a41751b176c6a5e63a76f62acbe4e6bfb"
+            if ref_key == "active_m2_ref"
+            else sha256(relative) if isinstance(relative, str) and (ROOT / relative).is_file() else None
+        )
+        if not isinstance(relative, str) or not (ROOT / relative).is_file() or control_bindings.get(hash_key) != expected_hash:
             fail(f"optical input-readiness control receipt does not bind {ref_key}")
     input_validation = optical_input_readiness.get("validation", {})
     if (
@@ -1056,7 +1196,7 @@ def main() -> None:
         fail("M2 transfer-runner readiness receipt has an invalid status")
     readiness_bindings = transfer_readiness.get("bindings", {})
     expected_transfer_bindings = {
-        "active_contract_sha256": sha256("contracts/milestone-002.json"),
+        "active_contract_sha256": "188af4575401473bb464dff84b83a90a41751b176c6a5e63a76f62acbe4e6bfb",
         "active_intake_sha256": INITIAL_ACTIVE_INTAKE_SHA256,
         "activation_approval_sha256": sha256("records/source-gates/m2-activation-approval.json"),
         "transfer_core_sha256": sha256("scripts/m2_transfer_core.py"),
@@ -1143,15 +1283,18 @@ def main() -> None:
     if acquisition_checkpoint_portability.get("status") != "pass_portable_repository_test_external_verification_separated":
         fail("M2 acquisition-checkpoint portability correction status differs")
     portability_bindings = acquisition_checkpoint_portability.get("bindings", {})
-    for ref_key, hash_key in (
-        ("published_readiness_ref", "published_readiness_sha256"),
-        ("derivation_ref", "derivation_sha256"),
-        ("test_ref", "test_sha256"),
-        ("project_checker_ref", "project_checker_sha256"),
-    ):
-        relative = portability_bindings.get(ref_key)
-        if not isinstance(relative, str) or not (ROOT / relative).is_file() or portability_bindings.get(hash_key) != sha256(relative):
-            fail(f"M2 acquisition-checkpoint portability correction does not bind {ref_key}")
+    expected_historical_portability_bindings = {
+        "published_readiness_ref": "records/acquisition/acquisition-checkpoint-readiness.json",
+        "published_readiness_sha256": "1a4439702be6ad448ec9eafc095d4bd25b692100b73dd19429fb20a1fde7eca9",
+        "derivation_ref": "scripts/derive_m2_acquisition_checkpoint.py",
+        "derivation_sha256": "4d78913210978495b320dd70ace7d9e0ef3b7e9f7bf4f2804fbe444691b728a8",
+        "test_ref": "tests/test_m2_checkpoint_reconciliation.py",
+        "test_sha256": "53e7e5d98b6e11a1ad3c4f3b9b6523e766bf74765d98f7a35b8e7ffeed2662a3",
+        "project_checker_ref": "scripts/check_project.py",
+        "project_checker_sha256": "0ea6c6cc5bcc32db19105dfd2cc2ca27bdf96e38f361f3c0a131b64ef64f6801",
+    }
+    if portability_bindings != expected_historical_portability_bindings:
+        fail("M2 acquisition-checkpoint portability correction no longer preserves its published bindings")
     if acquisition_checkpoint_portability.get("validation") != {
         "focused_test_count": 9,
         "focused_test_status": "pass",
@@ -1216,7 +1359,7 @@ def main() -> None:
     expected_active_verification_hashes = {
         "candidate_contract_sha256": sha256("contracts/m2-offline-verification-candidate.json"),
         "acquisition_plan_sha256": sha256("records/acquisition-plan.json"),
-        "active_milestone_sha256_at_activation": sha256("contracts/milestone-002.json"),
+        "active_milestone_sha256_at_activation": "188af4575401473bb464dff84b83a90a41751b176c6a5e63a76f62acbe4e6bfb",
         "activation_approval_sha256": sha256("records/source-gates/m2-activation-approval.json"),
         "active_intake_sha256_at_activation": INITIAL_ACTIVE_INTAKE_SHA256,
         "source_gate_sha256": sha256("records/source-gates/m2-live-source-gate.json"),
@@ -1714,19 +1857,41 @@ def main() -> None:
     acquisition_checkpoint_portability_evidence = ledger_by_id.get("EVID-0030")
     if not isinstance(acquisition_checkpoint_portability_evidence, dict):
         fail("evidence ledger is missing EVID-0030 acquisition-checkpoint portability correction")
-    for ref_key, hash_key in (
-        ("correction_receipt_ref", "correction_receipt_sha256"),
-        ("derivation_ref", "derivation_sha256"),
-        ("test_ref", "test_sha256"),
-        ("project_checker_ref", "project_checker_sha256"),
-    ):
-        relative = acquisition_checkpoint_portability_evidence.get(ref_key)
-        if not isinstance(relative, str) or not (ROOT / relative).is_file() or acquisition_checkpoint_portability_evidence.get(hash_key) != sha256(relative):
-            fail(f"EVID-0030 does not bind {ref_key}")
+    expected_evid_0030_bindings = {
+        "correction_receipt_ref": "records/acquisition/acquisition-checkpoint-portability-correction.json",
+        "correction_receipt_sha256": "f69c8b9944a048bb8645f8852281319ac8fa87e3aecce3fe39cc332f63caa352",
+        "derivation_ref": "scripts/derive_m2_acquisition_checkpoint.py",
+        "derivation_sha256": "4d78913210978495b320dd70ace7d9e0ef3b7e9f7bf4f2804fbe444691b728a8",
+        "test_ref": "tests/test_m2_checkpoint_reconciliation.py",
+        "test_sha256": "53e7e5d98b6e11a1ad3c4f3b9b6523e766bf74765d98f7a35b8e7ffeed2662a3",
+        "project_checker_ref": "scripts/check_project.py",
+        "project_checker_sha256": "0ea6c6cc5bcc32db19105dfd2cc2ca27bdf96e38f361f3c0a131b64ef64f6801",
+    }
+    for key, expected in expected_evid_0030_bindings.items():
+        if acquisition_checkpoint_portability_evidence.get(key) != expected:
+            fail(f"EVID-0030 no longer preserves published {key}")
     if acquisition_checkpoint_portability_evidence.get("status") != "pass_portable_repository_test_external_verification_separated":
         fail("EVID-0030 status differs")
     if acquisition_checkpoint_portability_evidence.get("assertions") != acquisition_checkpoint_portability.get("assertions"):
         fail("EVID-0030 and acquisition-checkpoint portability correction have different claim boundaries")
+    dem_activation_evidence = ledger_by_id.get("EVID-0031")
+    if not isinstance(dem_activation_evidence, dict):
+        fail("evidence ledger is missing EVID-0031 DEM amendment activation evidence")
+    for ref_key, hash_key in (
+        ("activation_receipt_ref", "activation_receipt_sha256"),
+        ("approval_ref", "approval_sha256"),
+        ("active_intake_ref", "active_intake_sha256"),
+        ("active_verification_ref", "active_verification_sha256"),
+        ("reconciliation_ref", "reconciliation_sha256"),
+        ("activation_script_ref", "activation_script_sha256"),
+    ):
+        relative = dem_activation_evidence.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file() or dem_activation_evidence.get(hash_key) != sha256(relative):
+            fail(f"EVID-0031 does not bind {ref_key}")
+    if dem_activation_evidence.get("status") != "pass_exact_dem_amendment_activated_preflight_pending":
+        fail("EVID-0031 status differs")
+    if dem_activation_evidence.get("assertions") != dem_activation_receipt.get("assertions"):
+        fail("EVID-0031 and DEM amendment activation receipt have different claim boundaries")
 
     violations = []
     for relative in tracked_files():

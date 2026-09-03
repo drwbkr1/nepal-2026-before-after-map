@@ -100,13 +100,13 @@
 
 **Decision:** Prepare, but do not activate, an M2 amendment for the exact four Copernicus DEM GLO-30 COG tiles that cover the approved AOIs and for explicit acceptance of the exact hash-bound Copernicus WorldDEM-30 license.
 **Reason:** The installed ArcGIS Pro Sentinel-1 terrain-correction tools accept or require a DEM, while the active M2 approval covers only eight Sentinel products and forbids new terms acceptance or extra products. The anonymous AWS route avoids a new account but does not remove the license-acceptance requirement.
-**Status:** Awaiting owner decision through review bundle SHA-256 `caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e` and amendment proposal SHA-256 `92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69`. Metadata-only probes confirmed four exact objects totaling 170,302,058 bytes; no DEM payload, acceptance, authentication, or processing occurred.
+**Status:** Approved on 3 September 2026 through review bundle SHA-256 `caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e`, amendment proposal SHA-256 `92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69`, and exact license SHA-256 `9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd`. See D-025 for activation evidence and the current boundary.
 
 ## D-018 — Predeclared DEM verification and Sentinel-1 processing boundaries
 
 **Decision:** Derive non-authorizing intake and ArcGIS GeoTIFF verification controls for the exact four proposed DEM tiles, and fix the two independent Sentinel-1 processing routes before real pixels are available.
 **Reason:** A reviewed source list does not define safe custody or raster acceptance, and ArcGIS processing defaults could otherwise hide consequential choices about orbit vectors, despeckling, terrain masks, units, or vertical datum.
-**Status:** Static controls and thirteen local tests pass. Production processing remains deferred because the DEM amendment is unapproved, the source heights are EGM2008 orthometric while ArcGIS documents EGM96 for its built-in geoid option, and updated orbit files are not authorized auxiliary products. No payload byte, external custody path, or scientific result was created.
+**Status:** The active intake and verification controls inherit the exact approved amendment. Production processing remains deferred because no DEM raster has passed acquisition and verification, the source heights are EGM2008 orthometric while ArcGIS documents EGM96 for its built-in geoid option, and updated orbit files are not authorized auxiliary products. No payload byte, external DEM custody path, or scientific result was created during activation.
 
 ## D-019 — Predeclared Sentinel-2 Level-2A processing
 
@@ -143,3 +143,9 @@
 **Decision:** Derive the current M2 acquisition checkpoint only from a passing append-only intake validation. Map eight authorized products to the authentication handoff, partial or active nonfailed progress to acquisition in progress, any retained transfer failure to review, and eight promoted products to container verification. Emit proposed profile and goal updates only as exclusive scratch candidates.
 **Reason:** A real attempt changes operational state before a Git checkpoint can be committed. Deterministic derivation prevents stale status while keeping multi-file control updates reviewable and reversible.
 **Status:** Implemented with nine focused tests. The live state derives `M2-AUTHENTICATION-REFERENCE`; tracked profile and goal controls already match, and no candidate or tracked file was written by the verification run.
+
+## D-025 — Activate the exact four-tile DEM amendment
+
+**Decision:** Bind the owner's exact completed approval to the four named Copernicus DEM GLO-30 tiles and the accepted WorldDEM-30 license document, then activate only their fresh preflight, anonymous no-cost acquisition, non-Git custody, verification, and bounded Sentinel-1 terrain-processing use.
+**Reason:** The human review closed the legal and acquisition-scope gate without changing the independent Sentinel credential checkpoint or authorizing accounts, credentials, cost, extra products, redistribution, scientific publication, vertical-datum assumptions, or orbit auxiliaries.
+**Status:** Activated on 3 September 2026 after locking response SHA-256 `4d877e1b667116a58950b0f567cbb300a3b59a84de65446647c9e760bdfc8193` and reconciling one approval with no fabricated decisions. The active intake contains four authorized, unattempted assets, and the active verifier is gate-deferred. Activation made no network request, external DEM custody mutation, payload request, raster read, or scientific claim. The next parallel checkpoint is `M2-DEM-FRESH-PREFLIGHT`.

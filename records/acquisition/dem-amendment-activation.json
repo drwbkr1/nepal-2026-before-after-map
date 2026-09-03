@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-AMENDMENT-ACTIVATION-001",
+  "activated_at_utc": "2026-09-03T20:27:26Z",
+  "status": "pass_exact_dem_amendment_activated_preflight_pending",
+  "bindings": {
+    "reconciliation_ref": "records/source-gates/m2-dem-amendment-review-reconciliation.json",
+    "reconciliation_sha256": "9d72c9786440da0c9149340cd69361b12e55f0d7dff88972bfd02ee0da5460e1",
+    "approval_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "approval_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+    "active_intake_ref": "contracts/m2-dem-intake.json",
+    "active_intake_sha256": "0fa00a4be01d3caddac28088d2d3d714040d1258b33497ebee50cbb0b8b3b5b6",
+    "active_verification_ref": "contracts/m2-dem-offline-verification.json",
+    "active_verification_sha256": "755bdb1fd1916d68289f5266912f8bb7f25462b512ce7cfc27a49feb44bcef42",
+    "active_milestone_ref": "contracts/milestone-002.json",
+    "active_milestone_sha256": "fc764ba8513c05e518096e8864ba0ec49507ca924f2474637adccef31275a6cf",
+    "project_profile_ref": "records/project-control-profile.json",
+    "project_profile_sha256": "dd07dec7c68fbd9e486ad96e1a34dbd66266409609db05419a6eb78d723bc844",
+    "long_term_goal_ref": "records/long-term-goal.json",
+    "long_term_goal_sha256": "81f5b742b8aa3e829253317faa9c6017c8c93a6deb1d10a3f6cb96c7b55c44e8",
+    "activation_script_ref": "scripts/activate_m2_dem_amendment.py",
+    "activation_script_sha256": "a4cc4f86b0beb81f151ccdc0bc4a4ab5d674823d7c7a5879f0e223efcd36d256"
+  },
+  "assertions": {
+    "exact_owner_approval_reconciled": true,
+    "exact_license_accepted": true,
+    "authorized_dem_tile_count": 4,
+    "candidate_proposal_mutated": false,
+    "candidate_intake_mutated": false,
+    "candidate_verification_mutated": false,
+    "network_requests_performed": false,
+    "dem_payload_bytes_requested": false,
+    "dem_pixels_examined": false,
+    "sentinel_checkpoint_preserved": true,
+    "scientific_result_established": false
+  },
+  "next_gate": "M2-DEM-FRESH-PREFLIGHT"
+}

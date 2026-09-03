@@ -72,17 +72,22 @@ python -m unittest tests.test_m2_active_verification -v
 
 These tests verify exact inheritance from the M2 approval, preservation of all eight candidate container profiles, offline/read-only behavior, and refusal before custody access when an asset has not been promoted.
 
-## M2 DEM amendment preparation validation
+## M2 DEM amendment activation validation
 
-The DEM amendment remains non-authorizing and can be validated without requesting a DEM payload:
+The exact review artifacts remain immutable and the active amendment can be validated without requesting a DEM payload:
 
 ```powershell
 python C:\Users\drewb\.codex\skills\gate-external-sources\scripts\validate_source_gate.py records/source-gates/m2-dem-source-gate.json --validate-only
 python C:\Users\drewb\.codex\skills\conduct-human-review\scripts\prepare_review_bundle.py reviews/m2-dem-amendment/review-bundle.json --project-root .
 python -m unittest tests.test_m2_dem_amendment -v
+python -m unittest tests.test_m2_dem_activation -v
+python C:\Users\drewb\.codex\skills\intake-controlled-data\scripts\validate_intake_contract.py contracts/m2-dem-intake.json --project-root C:\Projects\Active --json
+python C:\Users\drewb\.codex\skills\run-controlled-milestone\scripts\validate_milestone.py contracts/milestone-002.json --project-profile records/project-control-profile.json --as-of 2026-09-03T20:27:26Z
 ```
 
-The source-gate validator must report a structurally valid **blocked** result with exact license acceptance and scope authority still unresolved for all four tiles. The tests require the exact four-item set, the 170,302,058-byte remote total, live metadata-only claim boundary, immutable proposal bindings, blank human response, and exact review-bundle hashes. ArcGIS tool presence proves only local capability; no DEM or Sentinel processing has run.
+The historical source-gate validator must still report its immutable pre-decision **blocked** result; activation does not rewrite it. Before activation, `scripts/activate_m2_dem_amendment.py --activated-at-utc 2026-09-03T20:27:26Z --verify-only` passed against the then-pending control profile. That one-way derivation command is not rerunnable against the already activated profile. Current-state validation uses the activation suite and repository checker. They require the exact review bundle, proposal, accepted license, locked response, and one-decision reconciliation; preserve the four-item, 170,302,058-byte set; require four authorized unattempted intake entries; and keep verification gate-deferred. The activation suite covers exact current bindings and the no-network/no-payload boundary.
+
+The full repository suite currently passes 148 tests, and `scripts/check_project.py` validates 153 required files. Eight fail-closed results are retained in `EVID-0031`. Four exposed checker integration errors: a DEM-unit lookup used the M1 unit map; historical Sentinel readiness records and the transfer verifier were compared to the newly amended M2 hash; and the published portability correction was compared to the current checker instead of its immutable checker hash. Four more protected immutable controls: attempted status edits changed the bound review and DEM protocol files, one validation command used the wrong timestamp flag, and the one-way activation generator was rerun against an already active profile. Every issue was corrected before publication and changed no external data, approval evidence, or payload state.
 
 ## Historical static intake-control validation
 

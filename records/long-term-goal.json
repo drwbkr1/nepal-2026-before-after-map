@@ -11,5 +11,11 @@
   "completion_rule": "Complete only when the reproducible ArcGIS evidence package, reviewed change evidence, exportable deliverables, validation, and final release boundary are all satisfied.",
   "last_completed_milestone": "contracts/milestone-001.json",
   "proposed_milestone": null,
-  "current_checkpoint": "M2-AUTHENTICATION-REFERENCE"
+  "current_checkpoint": "M2-AUTHENTICATION-REFERENCE",
+  "active_amendments": [
+    "records/source-gates/m2-dem-amendment-approval.json"
+  ],
+  "parallel_checkpoints": [
+    "M2-DEM-FRESH-PREFLIGHT"
+  ]
 }
