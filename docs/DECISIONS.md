@@ -191,3 +191,9 @@
 **Decision:** Lowercase the transfer attempt identifier derived from asset ID, timestamp, and nonce, while preserving the separate RFC 3339 event timestamps and every existing source, authority, collision, checksum, and custody gate.
 **Reason:** The DEM validation finding showed that uppercase `T` and `Z` timestamp fragments violate the generic intake-contract identifier grammar. The Sentinel route is still unattempted, so its generator can be corrected before it creates any historical identifier.
 **Status:** Eleven focused tests pass and the unchanged active Sentinel intake passes the generic validator. The historical readiness receipt remains immutable and is supplemented by a current correction receipt. No secret prompt, credential, network request, external file, active intake, or product byte was read or changed.
+
+## D-033 — Predeclare DEM terrain-quality evidence before real metrics
+
+**Decision:** Fix the four source identities, four native seam pairs, terrain and slope thresholds, EPSG:32645 processing, exclusive external output, required visual criteria, and decision semantics before reading real DEM values.
+**Reason:** Full finite coverage does not establish absence of void-fill artifacts, boundary steps, or implausible terrain. Predeclaration prevents result-driven threshold changes and keeps terrain quality independent from the unresolved vertical-datum decision.
+**Status:** Static controls and five synthetic tests pass. The first synthetic north-south seam fixture failure is retained in the readiness record and was corrected only by fixing reversed fixture row indices. No real DEM pixel, output, vertical conversion, Sentinel processing, or scientific result was created by readiness.

@@ -93,7 +93,7 @@ The full repository suite currently passes 164 tests, and `scripts/check_project
 
 The live preflight test suite validates exact STAC and object-header comparisons, redirect refusal, remote-identity drift, no-payload evidence, empty-custody binding, and the transition to `M2-DEM-ACQUISITION`. `EVID-0032` retains the initial checker failure caused by its old preflight-checkpoint expectation; updating that expectation did not change the live evidence or external custody.
 
-The current full repository suite passes 185 tests, and `scripts/check_project.py` validates 192 required files. Project-control and milestone validators pass, and the M2 DEM vertical-datum bundle validator reports `ready_for_handoff` for all seven exact artifacts. Local reconciliation re-hashed all four promoted DEM files totaling 170,302,058 bytes. GitHub Actions run `33809208304` remains a failed historical result because its Linux runner lacked the external Windows custody root; the corrected portable test validates repository receipts without external access while production reconciliation still defaults to strict external checking.
+The current full repository suite passes 190 tests, and `scripts/check_project.py` validates 199 required files. Project-control and milestone validators pass, and the M2 DEM vertical-datum bundle validator reports `ready_for_handoff` for all seven exact artifacts. Local reconciliation re-hashed all four promoted DEM files totaling 170,302,058 bytes. GitHub Actions run `33809208304` remains a failed historical result because its Linux runner lacked the external Windows custody root; the corrected portable test validates repository receipts without external access while production reconciliation still defaults to strict external checking.
 
 The generic intake-contract validator separately reports four invalid attempt identifiers because the completed DEM transfer IDs contain uppercase RFC 3339 `T` and `Z` characters and its identifier grammar is lowercase-only. The immutable attempt receipts, checkpoint paths, and external event history are not rewritten. This retained schema-validation failure does not change the project-specific byte and custody passes or approve downstream processing; future transfer runners must correct identifier generation before use.
 
@@ -144,6 +144,17 @@ python -m unittest tests.test_pixel_qa_core -v
 ArcGIS Pro 3.7.1 Advanced and Spatial Analyst have also exercised the same core with deterministic 20 m synthetic rasters and all three approved AOIs. The native adapter verifies `TabulateArea` class-area accounting, an aligned before/after pair, a deliberately blocked 0.6-pixel origin shift, and the required `defer` state when registration has not been measured. See `docs/PIXEL_QA_PROTOCOL.md` for thresholds, class semantics, rerun commands, and the scientific claim boundary.
 
 The Sentinel-2 processing contract also has a separate portable core and ArcGIS-native synthetic exercise. The adapter parses baseline 05.12 scaling metadata, preserves DN zero as NoData, applies the declared SCL exclusions, scales five bands to BOA reflectance, and checks NDVI, MNDWI, and NBR. Run the portable checks with `python -m unittest tests.test_optical_processing_core -v`; run the ArcGIS adapter using the new-attempt command in `docs/OPTICAL_BASELINE_PROCESSING_PROTOCOL.md`. Neither result is real-pixel evidence.
+
+## DEM terrain-quality predeclaration validation
+
+The four exact promoted DEM hashes, four native seams, quantitative thresholds, EPSG:32645 processing, external-only outputs, and mandatory visual review are fixed before the first real terrain-quality run:
+
+```powershell
+python -m unittest tests.test_dem_terrain_quality_core -v
+python scripts/check_project.py
+```
+
+Five portable tests cover continuous terrain, a moderate systematic seam offset, a gross seam and impossible elevation, nonfinite cells, decision precedence, and unsupported seam orientation. The first failed synthetic fixture remains recorded. Passing tests establish control behavior only; the predeclaration receipt records no real DEM read, ArcGIS execution, terrain-quality conclusion, vertical conversion, Sentinel processing, or scientific claim.
 
 The SAFE materialization control has a separate portable suite:
 

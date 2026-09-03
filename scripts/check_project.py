@@ -108,6 +108,7 @@ REQUIRED = [
     "docs/M2_DEM_AMENDMENT_REVIEW.md",
     "docs/M2_DEM_OFFLINE_VERIFICATION.md",
     "docs/M2_DEM_VERTICAL_DATUM_REVIEW.md",
+    "docs/DEM_TERRAIN_QUALITY_PROTOCOL.md",
     "docs/RADAR_BASELINE_PROCESSING_PROTOCOL.md",
     "docs/assets/m2-dem-amendment-review.png",
     "docs/assets/m2-dem-vertical-datum-review.png",
@@ -123,6 +124,7 @@ REQUIRED = [
     "config/qa/pixel-readiness-contract.json",
     "config/qa/candidate-pair-plan.json",
     "config/qa/radar-baseline-processing-contract.json",
+    "config/qa/dem-terrain-quality-contract.json",
     "config/qa/optical-baseline-processing-contract.json",
     "config/qa/optical-input-readiness-contract.json",
     "docs/assets/arcgis-evidence-workspace-preview.png",
@@ -140,6 +142,7 @@ REQUIRED = [
     "contracts/m2-offline-verification-candidate.json",
     "records/readiness/m2-readiness-audit-input.json",
     "records/readiness/m2-readiness-decision.json",
+    "records/readiness/m2-dem-terrain-quality-readiness.json",
     "reviews/m2-activation/review-bundle.json",
     "reviews/m2-activation/review-contract.json",
     "reviews/m2-activation/blank-response.json",
@@ -178,6 +181,7 @@ REQUIRED = [
     "tests/test_m2_dem_verification_completion.py",
     "tests/test_m2_dem_active_geotiff.py",
     "tests/test_m2_dem_vertical_datum_review.py",
+    "tests/test_dem_terrain_quality_core.py",
     "tests/test_radar_processing_contract.py",
     "tests/test_optical_processing_core.py",
     "tests/test_m2_materialization.py",
@@ -196,6 +200,8 @@ REQUIRED = [
     "scripts/complete_m2_dem_verification.py",
     "scripts/inspect_m2_dem_vertical_datum_arcgis.py",
     "scripts/render_m2_dem_vertical_datum_review.py",
+    "scripts/dem_terrain_quality_core.py",
+    "scripts/inspect_m2_dem_terrain_quality_arcgis.py",
     "scripts/prepare_radar_processing_contract.py",
     "scripts/optical_processing_core.py",
     "scripts/prepare_optical_processing_contract.py",
@@ -296,6 +302,8 @@ def main() -> None:
     dem_vertical_bundle = json.loads((ROOT / "reviews/m2-dem-vertical-datum/review-bundle.json").read_text(encoding="utf-8"))
     dem_vertical_contract = json.loads((ROOT / "reviews/m2-dem-vertical-datum/review-contract.json").read_text(encoding="utf-8"))
     dem_vertical_blank = json.loads((ROOT / "reviews/m2-dem-vertical-datum/blank-response.json").read_text(encoding="utf-8"))
+    dem_terrain_contract = json.loads((ROOT / "config/qa/dem-terrain-quality-contract.json").read_text(encoding="utf-8"))
+    dem_terrain_readiness = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-readiness.json").read_text(encoding="utf-8"))
     expected_dem_source_order = ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
     dem_current_assets = dem_intake_active.get("assets", [])
     if [asset.get("extensions", {}).get("source_id") for asset in dem_current_assets] != expected_dem_source_order:
@@ -737,6 +745,144 @@ def main() -> None:
         }
         if dem_verification_summary.get("claim_boundary") != expected_completed_dem_claims:
             fail("completed M2 DEM verification claim boundary differs")
+
+    if (
+        dem_terrain_contract.get("contract_id") != "NEPAL-M2-DEM-TERRAIN-QUALITY-001"
+        or dem_terrain_contract.get("status") != "predeclared_not_executed"
+    ):
+        fail("DEM terrain-quality contract identity or pre-execution status differs")
+    expected_dem_terrain_bindings = {
+        "active_intake_ref": "contracts/m2-dem-intake.json",
+        "active_intake_sha256": sha256("contracts/m2-dem-intake.json"),
+        "dem_verification_summary_ref": "records/acquisition/dem-verification-summary.json",
+        "dem_verification_summary_sha256": sha256("records/acquisition/dem-verification-summary.json"),
+        "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+        "approved_aoi_sha256": sha256("config/aoi/approved-study-areas-epsg32645.json"),
+        "vertical_datum_proposal_ref": "contracts/m2-dem-vertical-datum-proposal.json",
+        "vertical_datum_proposal_sha256": sha256("contracts/m2-dem-vertical-datum-proposal.json"),
+        "implementation_ref": "scripts/inspect_m2_dem_terrain_quality_arcgis.py",
+        "implementation_sha256": sha256("scripts/inspect_m2_dem_terrain_quality_arcgis.py"),
+        "core_ref": "scripts/dem_terrain_quality_core.py",
+        "core_sha256": sha256("scripts/dem_terrain_quality_core.py"),
+        "test_ref": "tests/test_dem_terrain_quality_core.py",
+        "test_sha256": sha256("tests/test_dem_terrain_quality_core.py"),
+    }
+    if dem_terrain_contract.get("bindings") != expected_dem_terrain_bindings:
+        fail("DEM terrain-quality contract bindings differ")
+    terrain_assets = dem_terrain_contract.get("inputs", {}).get("assets", [])
+    if [item.get("source_id") for item in terrain_assets] != expected_dem_source_order:
+        fail("DEM terrain-quality source order differs")
+    for terrain_asset, intake_asset in zip(terrain_assets, dem_current_assets):
+        observed = intake_asset.get("observed", {})
+        if (
+            terrain_asset.get("source_id") != intake_asset.get("extensions", {}).get("source_id")
+            or terrain_asset.get("asset_id") != intake_asset.get("asset_id")
+            or terrain_asset.get("custody_relative_path") != intake_asset.get("destination_relative_path")
+            or terrain_asset.get("sha256") != observed.get("promoted_sha256")
+            or terrain_asset.get("size_bytes") != observed.get("promoted_size_bytes")
+            or terrain_asset.get("expected_bbox_wgs84") != intake_asset.get("extensions", {}).get("expected_bbox_wgs84")
+        ):
+            fail(f"DEM terrain-quality source binding differs for {terrain_asset.get('source_id')}")
+    expected_dem_terrain_seams = [
+        {"seam_id": "SEAM-E85-N27", "orientation": "west_east", "first_source_id": "M2-DEM-001", "second_source_id": "M2-DEM-002", "boundary": "longitude 85 degrees east"},
+        {"seam_id": "SEAM-E85-N28", "orientation": "west_east", "first_source_id": "M2-DEM-003", "second_source_id": "M2-DEM-004", "boundary": "longitude 85 degrees east"},
+        {"seam_id": "SEAM-N28-E84", "orientation": "south_north", "first_source_id": "M2-DEM-001", "second_source_id": "M2-DEM-003", "boundary": "latitude 28 degrees north"},
+        {"seam_id": "SEAM-N28-E85", "orientation": "south_north", "first_source_id": "M2-DEM-002", "second_source_id": "M2-DEM-004", "boundary": "latitude 28 degrees north"},
+    ]
+    if dem_terrain_contract.get("seam_pairs") != expected_dem_terrain_seams:
+        fail("DEM terrain-quality seam pairs differ")
+    expected_dem_terrain_thresholds = {
+        "tile": {
+            "block_nodata_or_nonfinite_count": 0,
+            "block_minimum_elevation_m": -500.0,
+            "block_maximum_elevation_m": 9000.0,
+            "block_max_abs_local_curvature_m": 2000.0,
+            "defer_abs_local_curvature_m": 1000.0,
+            "defer_local_curvature_fraction": 0.0001,
+            "defer_exact_2x2_plateau_fraction": 0.5,
+        },
+        "seam": {
+            "block_residual_abs_max_m": 2000.0,
+            "defer_signed_median_abs_m": 25.0,
+            "defer_residual_abs_median_m": 30.0,
+            "defer_residual_abs_p95_m": 150.0,
+            "defer_residual_abs_p99_m": 300.0,
+            "defer_residual_level_m": 100.0,
+            "defer_residual_above_level_fraction": 0.05,
+        },
+        "slope": {
+            "block_maximum_degrees": 90.0,
+            "defer_level_degrees": 85.0,
+            "defer_fraction_above_level": 0.001,
+        },
+    }
+    if dem_terrain_contract.get("thresholds") != expected_dem_terrain_thresholds:
+        fail("DEM terrain-quality thresholds differ")
+    terrain_processing = dem_terrain_contract.get("processing", {})
+    if (
+        terrain_processing.get("analysis_crs", {}).get("wkid") != 32645
+        or terrain_processing.get("target_cell_size_m") != 30.0
+        or terrain_processing.get("horizontal_projection_resampling") != "BILINEAR"
+        or terrain_processing.get("vertical_transformation") is not None
+        or terrain_processing.get("output_root") != r"C:\Projects\Active\nepal-2026-before-after-map-data\derived\dem-terrain-quality\attempt-001"
+        or terrain_processing.get("output_collision_policy") != "refuse"
+        or terrain_processing.get("source_mutation") != "prohibited"
+    ):
+        fail("DEM terrain-quality processing boundary differs")
+    terrain_prohibitions = set(dem_terrain_contract.get("authority", {}).get("not_authorized", []))
+    required_terrain_prohibitions = {
+        "alter or overwrite source DEM tiles",
+        "select or execute a vertical-datum conversion",
+        "process Sentinel pixels",
+        "publish DEM-derived raster imagery",
+    }
+    if not required_terrain_prohibitions.issubset(terrain_prohibitions):
+        fail("DEM terrain-quality contract loses a required prohibition")
+    expected_dem_terrain_readiness_bindings = {
+        "contract_ref": "config/qa/dem-terrain-quality-contract.json",
+        "contract_sha256": sha256("config/qa/dem-terrain-quality-contract.json"),
+        "implementation_ref": "scripts/inspect_m2_dem_terrain_quality_arcgis.py",
+        "implementation_sha256": sha256("scripts/inspect_m2_dem_terrain_quality_arcgis.py"),
+        "core_ref": "scripts/dem_terrain_quality_core.py",
+        "core_sha256": sha256("scripts/dem_terrain_quality_core.py"),
+        "test_ref": "tests/test_dem_terrain_quality_core.py",
+        "test_sha256": sha256("tests/test_dem_terrain_quality_core.py"),
+        "protocol_ref": "docs/DEM_TERRAIN_QUALITY_PROTOCOL.md",
+        "protocol_sha256": sha256("docs/DEM_TERRAIN_QUALITY_PROTOCOL.md"),
+    }
+    expected_dem_terrain_validation = {
+        "focused_test_count": 5,
+        "focused_test_status": "pass",
+        "full_repository_test_count": 190,
+        "full_repository_test_status": "pass",
+        "repository_required_file_count": 199,
+        "repository_validation_status": "pass",
+        "arcgis_runtime_execution": "not_started",
+        "output_root_exists": False,
+        "candidate_receipt_exists": False,
+    }
+    expected_dem_terrain_assertions = {
+        "thresholds_fixed_before_real_metrics": True,
+        "four_exact_sources_bound": True,
+        "four_native_seams_bound": True,
+        "analysis_crs_wkid": 32645,
+        "vertical_transformation_selected": False,
+        "source_dem_pixels_read_by_readiness": False,
+        "derived_outputs_created_by_readiness": False,
+        "external_custody_mutated_by_readiness": False,
+        "network_requests_performed": False,
+        "scientific_result_established": False,
+        "authority_created": False,
+    }
+    if (
+        dem_terrain_readiness.get("readiness_id") != "NEPAL-M2-DEM-TERRAIN-QUALITY-READINESS-001"
+        or dem_terrain_readiness.get("status") != "pass_static_controls_real_execution_not_started"
+        or dem_terrain_readiness.get("bindings") != expected_dem_terrain_readiness_bindings
+        or dem_terrain_readiness.get("validation") != expected_dem_terrain_validation
+        or dem_terrain_readiness.get("assertions") != expected_dem_terrain_assertions
+        or not dem_terrain_readiness.get("retained_validation_failures")
+    ):
+        fail("DEM terrain-quality readiness receipt differs")
     expected_dem_acquire_status = "complete" if dem_state_counts["promoted"] == 4 and not dem_state_counts["failed"] else "ready"
     expected_dem_verify_status = "complete" if dem_all_geotiff_verified else ("ready" if expected_dem_acquire_status == "complete" else "planned")
     for unit_id, expected_status in (
@@ -2655,6 +2801,18 @@ def main() -> None:
         or transfer_id_evidence.get("assertions") != transfer_runner_correction.get("assertions")
     ):
         fail("EVID-0042 transfer-runner attempt-ID correction differs")
+    dem_terrain_readiness_evidence = ledger_by_id.get("EVID-0043")
+    if not isinstance(dem_terrain_readiness_evidence, dict):
+        fail("evidence ledger is missing EVID-0043 DEM terrain-quality predeclaration readiness")
+    if (
+        dem_terrain_readiness_evidence.get("status") != dem_terrain_readiness.get("status")
+        or dem_terrain_readiness_evidence.get("readiness_ref") != "records/readiness/m2-dem-terrain-quality-readiness.json"
+        or dem_terrain_readiness_evidence.get("readiness_sha256") != sha256("records/readiness/m2-dem-terrain-quality-readiness.json")
+        or dem_terrain_readiness_evidence.get("contract_ref") != "config/qa/dem-terrain-quality-contract.json"
+        or dem_terrain_readiness_evidence.get("contract_sha256") != sha256("config/qa/dem-terrain-quality-contract.json")
+        or dem_terrain_readiness_evidence.get("assertions") != dem_terrain_readiness.get("assertions")
+    ):
+        fail("EVID-0043 DEM terrain-quality predeclaration readiness differs")
 
     violations = []
     for relative in tracked_files():

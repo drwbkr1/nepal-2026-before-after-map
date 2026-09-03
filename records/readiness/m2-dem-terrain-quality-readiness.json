@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "readiness_id": "NEPAL-M2-DEM-TERRAIN-QUALITY-READINESS-001",
+  "status": "pass_static_controls_real_execution_not_started",
+  "verified_at_utc": "2026-09-03T23:37:34Z",
+  "claim": "Terrain-quality metrics, thresholds, source identities, output custody, ArcGIS deliverables, and decision semantics are fixed before the first real terrain-quality run.",
+  "bindings": {
+    "contract_ref": "config/qa/dem-terrain-quality-contract.json",
+    "contract_sha256": "fdee6dbaaafee7c010c7ef77fe6d7121164686f4b26edcb8ca8f0d150d1d1fa2",
+    "implementation_ref": "scripts/inspect_m2_dem_terrain_quality_arcgis.py",
+    "implementation_sha256": "b394fbb60f549b2e6e3b1f5f69fb00eb38a306838561a7a78d8be9bb689aaeb3",
+    "core_ref": "scripts/dem_terrain_quality_core.py",
+    "core_sha256": "58747b0c62b5ab66e3eeb932635e7a54ae5ead41b8ffa737a1897590ce33777d",
+    "test_ref": "tests/test_dem_terrain_quality_core.py",
+    "test_sha256": "a2fe1f598058a49cff4c05100aac249af5d95e6fcab42cd92c7205e7274924e5",
+    "protocol_ref": "docs/DEM_TERRAIN_QUALITY_PROTOCOL.md",
+    "protocol_sha256": "d4e8a3e3f6e315d94a9903f6bdd9128ec529317f9adefa5f3c2adc2cc276a9ac"
+  },
+  "validation": {
+    "focused_test_count": 5,
+    "focused_test_status": "pass",
+    "full_repository_test_count": 190,
+    "full_repository_test_status": "pass",
+    "repository_required_file_count": 199,
+    "repository_validation_status": "pass",
+    "arcgis_runtime_execution": "not_started",
+    "output_root_exists": false,
+    "candidate_receipt_exists": false
+  },
+  "assertions": {
+    "thresholds_fixed_before_real_metrics": true,
+    "four_exact_sources_bound": true,
+    "four_native_seams_bound": true,
+    "analysis_crs_wkid": 32645,
+    "vertical_transformation_selected": false,
+    "source_dem_pixels_read_by_readiness": false,
+    "derived_outputs_created_by_readiness": false,
+    "external_custody_mutated_by_readiness": false,
+    "network_requests_performed": false,
+    "scientific_result_established": false,
+    "authority_created": false
+  },
+  "retained_validation_failures": [
+    {
+      "attempt": "synthetic-test-001",
+      "status": "fail",
+      "finding": "The first continuous north-south plane fixture used reversed global row indices and incorrectly deferred a mathematically discontinuous test seam.",
+      "remediation": "Corrected only the synthetic fixture coordinates, reran all five tests, and retained the metric implementation and predeclared thresholds unchanged."
+    }
+  ],
+  "limitations": [
+    "Synthetic arrays prove decision behavior, not real DEM terrain quality or ArcGIS runtime behavior.",
+    "The planned review has no independent ground-control or alternate-DEM accuracy comparison.",
+    "The pending vertical-datum decision remains a separate required gate even if terrain QA passes."
+  ],
+  "next_action": "Publish the fixed contract and implementation, then run exactly one no-overwrite ArcGIS terrain-quality attempt against the four verified custody files."
+}
