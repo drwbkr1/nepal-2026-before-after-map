@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "correction_id": "NEPAL-M2-DEM-GEOTIFF-VERIFIER-CORRECTION-001",
+  "status": "pass_targeted_wrapper_correction_rerun_pending",
+  "recorded_at_utc": "2026-09-03T21:22:43Z",
+  "supersedes_execution_result": {
+    "failure_ref": "records/acquisition/dem-verification/m2-dem-001.json",
+    "failure_sha256": "7a6a28023723a7505ea0e88afb2d7b760a4ee63e9f8c23c57db6d2b4152f0bef",
+    "superseded_as_data_result": true,
+    "retained_as_runtime_evidence": true,
+    "reason": "The installed ArcGIS Pro 3.7.1 GetRasterProperties domain rejects NODATAVALUE. The failure occurred in the wrapper after byte identity passed and does not establish a GeoTIFF data defect."
+  },
+  "bindings": {
+    "published_readiness_ref": "records/acquisition/dem-geotiff-verifier-readiness.json",
+    "published_readiness_sha256": "ec6a69f1523ff29136c3f6c98744bc653c554c306ceae3804aaf6072ad051b7d",
+    "corrected_verifier_ref": "scripts/verify_m2_dem_geotiff.py",
+    "corrected_verifier_sha256": "1b8fb56fb74585fd3e413b276d95212b0eb12e8086f40cd56a0e99b236e87b92",
+    "test_ref": "tests/test_m2_dem_active_geotiff.py",
+    "test_sha256": "49fd488491a93183936f8f4d1d5f707dc961fc7715ef9247fa932884a8b64665"
+  },
+  "installed_runtime_evidence": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced",
+    "get_raster_properties_rejected_value": "NODATAVALUE",
+    "supported_nodata_route": "arcpy.Raster.noDataValue"
+  },
+  "validation": {
+    "focused_test_count": 13,
+    "full_test_count": 176,
+    "project_checker": "pass"
+  },
+  "assertions": {
+    "first_attempt_byte_identity_passed": true,
+    "first_attempt_custody_unchanged": true,
+    "first_attempt_runtime_completed": false,
+    "first_attempt_establishes_data_failure": false,
+    "real_dem_raster_opened": true,
+    "corrected_rerun_performed": false,
+    "geotiff_fitness_established": false,
+    "valid_pixel_coverage_established": false,
+    "vertical_datum_route_established": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Publish the targeted correction, then rerun M2-DEM-001 to a new append-only receipt and stop again on any failure or custody mutation."
+}

@@ -170,6 +170,8 @@ def inspect_with_arcpy(path: Path) -> dict[str, Any]:
     import arcpy  # type: ignore
 
     description = arcpy.Describe(str(path))
+    raster = arcpy.Raster(str(path))
+    install = arcpy.GetInstallInfo()
 
     def raster_property(name: str) -> str:
         return str(arcpy.management.GetRasterProperties(str(path), name).getOutput(0))
@@ -192,11 +194,16 @@ def inspect_with_arcpy(path: Path) -> dict[str, Any]:
         "nodata": {
             "any_nodata": raster_property("ANYNODATA"),
             "all_nodata": raster_property("ALLNODATA"),
-            "nodata_value": raster_property("NODATAVALUE"),
+            "nodata_value": raster.noDataValue,
         },
         "statistics": {
             "minimum": float(raster_property("MINIMUM")),
             "maximum": float(raster_property("MAXIMUM")),
+        },
+        "runtime": {
+            "product": install.get("ProductName"),
+            "version": install.get("Version"),
+            "license_level": install.get("LicenseLevel"),
         },
     }
 

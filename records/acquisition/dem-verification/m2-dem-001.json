@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0",
+  "status": "fail",
+  "verified_at_utc": "2026-09-03T21:20:54Z",
+  "verification_id": "NEPAL-M2-DEM-OFFLINE-VERIFICATION-001",
+  "asset_id": "m2-dem-001",
+  "source_id": "M2-DEM-001",
+  "contract_sha256": "6534eda0c3dc11d5bedfd3d9b0c8cbb1b1df3a0638faa7becd904e6843326dac",
+  "active_intake_sha256": "0c41f0c6028b09140f0107f97702f346d92242a74aa67e07037027120891fc64",
+  "transfer_receipt_ref": "records/acquisition/dem-attempts/m2-dem-001-20260903T210105Z-59f7dbc0.json",
+  "transfer_receipt_sha256": "a9905f749b288cfc2d4b98e7fd9ed64e91ea4b5b5e0b256f469d879908dca02e",
+  "raster_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+  "custody_inventory_before": [
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+      "size_bytes": 45336691,
+      "sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a"
+    },
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+      "size_bytes": 44874244,
+      "sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194"
+    },
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+      "size_bytes": 41688284,
+      "sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc"
+    },
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+      "size_bytes": 38402839,
+      "sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7"
+    }
+  ],
+  "custody_inventory_after": [
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+      "size_bytes": 45336691,
+      "sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a"
+    },
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+      "size_bytes": 44874244,
+      "sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194"
+    },
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+      "size_bytes": 41688284,
+      "sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc"
+    },
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+      "size_bytes": 38402839,
+      "sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7"
+    }
+  ],
+  "observed": {
+    "size_bytes": 45336691,
+    "sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a",
+    "tiff_signature": "49492a00"
+  },
+  "evaluation": {
+    "status": "fail",
+    "checks": {
+      "size_bytes": {
+        "status": "pass",
+        "expected": 45336691,
+        "actual": 45336691
+      },
+      "sha256": {
+        "status": "pass",
+        "expected": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a",
+        "actual": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a"
+      },
+      "tiff_signature": {
+        "status": "pass",
+        "expected": [
+          "49492a00",
+          "4d4d002a"
+        ],
+        "actual": "49492a00"
+      },
+      "shape": {
+        "status": "fail",
+        "expected": [
+          3600,
+          3600
+        ],
+        "actual": null
+      },
+      "band_count": {
+        "status": "fail",
+        "expected": 1,
+        "actual": null
+      },
+      "pixel_type": {
+        "status": "fail",
+        "expected": "F32",
+        "actual": null
+      },
+      "crs_wkid": {
+        "status": "fail",
+        "expected": 4326,
+        "actual": null
+      },
+      "cell_size": {
+        "status": "fail",
+        "expected": [
+          0.0002777777777778,
+          0.0002777777777778
+        ],
+        "actual": null
+      },
+      "raster_extent": {
+        "status": "fail",
+        "expected": [
+          83.99986111111112,
+          27.000138888888806,
+          84.9998611111112,
+          28.000138888888888
+        ],
+        "actual": null
+      },
+      "nodata_property_inspection": {
+        "status": "fail",
+        "expected": "captured",
+        "actual": null
+      },
+      "statistics_capture": {
+        "status": "fail",
+        "expected": "finite minimum <= maximum",
+        "actual": null
+      },
+      "custody_unchanged": {
+        "status": "pass",
+        "expected": true,
+        "actual": true
+      },
+      "arcgis_runtime": {
+        "status": "fail",
+        "expected": "successful read-only inspection",
+        "actual": {
+          "type": "ExecuteError",
+          "message": "Failed to execute. Parameters are not valid.\nERROR 000864: Property type: The input is not within the defined domain.\r\nERROR 000800: The value is not a member of MAXIMUM | MINIMUM | MEAN | STD | TOP | LEFT | RIGHT | BOTTOM | CELLSIZEX | CELLSIZEY | VALUETYPE | COLUMNCOUNT | ROWCOUNT | BANDCOUNT | ALLNODATA | ANYNODATA | SENSORNAME | PRODUCTNAME | ACQUISITIONDATE | SOURCETYPE | CLOUDCOVER | SUNAZIMUTH | SUNELEVATION | SENSORAZIMUTH | SENSORELEVATION | OFFNADIR | WAVELENGTH.\nFailed to execute (GetRasterProperties).\n"
+        }
+      }
+    },
+    "failures": [
+      "shape",
+      "band_count",
+      "pixel_type",
+      "crs_wkid",
+      "cell_size",
+      "raster_extent",
+      "nodata_property_inspection",
+      "statistics_capture",
+      "arcgis_runtime"
+    ],
+    "valid_pixel_coverage_established": false,
+    "vertical_datum_route_established": false,
+    "scientific_fitness_established": false
+  },
+  "claim_boundary": {
+    "structural_raster_fitness_established": false,
+    "valid_pixel_coverage_established": false,
+    "vertical_datum_route_established": false,
+    "sentinel_processing_executed": false,
+    "scientific_result_established": false
+  }
+}

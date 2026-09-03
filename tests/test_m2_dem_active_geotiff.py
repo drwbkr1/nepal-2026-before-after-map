@@ -74,6 +74,11 @@ class M2DemActiveGeoTiffTests(unittest.TestCase):
         self.assertEqual(result["status"], "fail")
         self.assertIn("sha256", result["failures"])
 
+    def test_installed_arcgis_nodata_route_avoids_unsupported_property(self):
+        source = SCRIPT.read_text(encoding="utf-8")
+        self.assertNotIn('raster_property("NODATAVALUE")', source)
+        self.assertIn("raster.noDataValue", source)
+
 
 if __name__ == "__main__":
     unittest.main()

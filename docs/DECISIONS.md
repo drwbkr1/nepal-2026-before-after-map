@@ -161,3 +161,9 @@
 **Decision:** Acquire one exact tile per invocation only after a matching anonymous `HEAD` check, then write an external started event before streaming to exclusive staging, compute local SHA-256 and exact size, preserve all failed or partial bytes, and promote by atomic hard-link without replacement.
 **Reason:** A public object and passing preflight still do not establish transferred-byte identity. One-at-a-time append-only custody prevents concurrent ambiguity, hidden redirects, overwrite, or silent retry.
 **Status:** The runner and seven local tests pass with readiness receipt SHA-256 `515b692ac4717540d5347a518a6f8ea47625939c11ca92fc264133d960b92337`. All four approved tiles were subsequently transferred in order and promoted with exact size and local SHA-256 receipts; no transfer failed, no credential or account was used, and each terminal attempt was reconciled before the next began. The current checkpoint is `M2-DEM-GEOTIFF-VERIFICATION`.
+
+## D-028 — Retain and correct the first ArcGIS GeoTIFF wrapper failure
+
+**Decision:** Preserve the first `M2-DEM-001` verification receipt as a failed runtime attempt, classify it separately from data fitness, and replace the unsupported `GetRasterProperties("NODATAVALUE")` call with the installed `arcpy.Raster.noDataValue` property before any rerun.
+**Reason:** ArcGIS Pro 3.7.1 rejected `NODATAVALUE` as outside the tool's property domain after local byte identity passed. Treating that wrapper error as a raster defect or silently overwriting the failed attempt would corrupt the evidence trail.
+**Status:** The failed receipt and unchanged before/after custody inventories are hash-bound in correction record `NEPAL-M2-DEM-GEOTIFF-VERIFIER-CORRECTION-001`. Thirteen focused tests, 176 repository tests, and the project checker pass for the targeted correction. A corrected rerun remains pending; valid-pixel, vertical-datum, radar-processing, and scientific fitness remain unestablished.
