@@ -67,6 +67,7 @@ REQUIRED = [
     "records/acquisition/dem-amendment-activation.json",
     "records/acquisition/dem-preflight.json",
     "records/acquisition/dem-custody-initialization.json",
+    "records/acquisition/dem-transfer-runner-readiness.json",
     "records/source-gates/source-manifest-approval.json",
     "records/source-gates/source-manifest-review-reconciliation.json",
     "records/source-gates/m2-activation-approval.json",
@@ -151,6 +152,7 @@ REQUIRED = [
     "tests/test_m2_dem_controls.py",
     "tests/test_m2_dem_activation.py",
     "tests/test_m2_dem_preflight.py",
+    "tests/test_m2_dem_transfer.py",
     "tests/test_radar_processing_contract.py",
     "tests/test_optical_processing_core.py",
     "tests/test_m2_materialization.py",
@@ -163,6 +165,7 @@ REQUIRED = [
     "scripts/activate_m2_dem_amendment.py",
     "scripts/run_m2_dem_preflight.py",
     "scripts/complete_m2_dem_preflight.py",
+    "scripts/acquire_m2_dem_tile.py",
     "scripts/verify_m2_dem_geotiff.py",
     "scripts/prepare_radar_processing_contract.py",
     "scripts/optical_processing_core.py",
@@ -253,6 +256,7 @@ def main() -> None:
     dem_live_source_gate = json.loads((ROOT / "records/source-gates/m2-dem-live-source-gate.json").read_text(encoding="utf-8"))
     dem_preflight = json.loads((ROOT / "records/acquisition/dem-preflight.json").read_text(encoding="utf-8"))
     dem_custody_receipt = json.loads((ROOT / "records/acquisition/dem-custody-initialization.json").read_text(encoding="utf-8"))
+    dem_transfer_readiness = json.loads((ROOT / "records/acquisition/dem-transfer-runner-readiness.json").read_text(encoding="utf-8"))
     radar_processing_contract = json.loads((ROOT / "config/qa/radar-baseline-processing-contract.json").read_text(encoding="utf-8"))
     dem_radar_readiness = json.loads((ROOT / "records/surface-receipts/m2-dem-radar-control-readiness.json").read_text(encoding="utf-8"))
     optical_processing_contract = json.loads((ROOT / "config/qa/optical-baseline-processing-contract.json").read_text(encoding="utf-8"))
@@ -600,6 +604,22 @@ def main() -> None:
         fail("M2 DEM acquisition inputs differ")
     if active_m2.get("handoff", {}).get("parallel_checkpoint") != "M2-DEM-ACQUISITION":
         fail("active M2 DEM handoff did not advance to acquisition")
+    if dem_transfer_readiness.get("status") != "pass_local_controls_no_network_or_payload" or dem_transfer_readiness.get("test_count") != 7:
+        fail("M2 DEM transfer-runner readiness status differs")
+    for ref_key, hash_key in (
+        ("approval_ref", "approval_sha256"),
+        ("preflight_ref", "preflight_sha256"),
+        ("intake_ref", "intake_sha256"),
+        ("runner_ref", "runner_sha256"),
+        ("shared_transfer_core_ref", "shared_transfer_core_sha256"),
+        ("test_ref", "test_sha256"),
+    ):
+        relative = dem_transfer_readiness.get("bindings", {}).get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file() or dem_transfer_readiness["bindings"].get(hash_key) != sha256(relative):
+            fail(f"M2 DEM transfer-runner readiness does not bind {ref_key}")
+    readiness_assertions = dem_transfer_readiness.get("assertions", {})
+    if readiness_assertions.get("tests_passed") is not True or any(readiness_assertions.get(key) is not False for key in ("network_requests_performed", "dem_payload_bytes_requested", "active_intake_mutated", "external_custody_mutated", "scientific_result_established")):
+        fail("M2 DEM transfer-runner readiness invents execution or scientific evidence")
     if sar_capability.get("status") != "pass_capability_only_dem_dependency_unresolved":
         fail("ArcGIS SAR capability receipt status differs")
     sar_checks = sar_capability.get("checks", {})
@@ -2028,6 +2048,30 @@ def main() -> None:
         "scientific_result_established": False,
     }:
         fail("EVID-0032 claim boundary differs")
+    dem_transfer_readiness_evidence = ledger_by_id.get("EVID-0033")
+    if not isinstance(dem_transfer_readiness_evidence, dict):
+        fail("evidence ledger is missing EVID-0033 DEM transfer-runner readiness")
+    for ref_key, hash_key in (
+        ("readiness_ref", "readiness_sha256"),
+        ("runner_ref", "runner_sha256"),
+        ("test_ref", "test_sha256"),
+        ("shared_transfer_core_ref", "shared_transfer_core_sha256"),
+    ):
+        relative = dem_transfer_readiness_evidence.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file() or dem_transfer_readiness_evidence.get(hash_key) != sha256(relative):
+            fail(f"EVID-0033 does not bind {ref_key}")
+    if dem_transfer_readiness_evidence.get("status") != "pass_local_controls_no_network_or_payload":
+        fail("EVID-0033 status differs")
+    if dem_transfer_readiness_evidence.get("assertions") != {
+        "tests_passed": True,
+        "test_count": 7,
+        "network_requests_performed": False,
+        "dem_payload_bytes_requested": False,
+        "active_intake_mutated": False,
+        "external_custody_mutated": False,
+        "scientific_result_established": False,
+    }:
+        fail("EVID-0033 claim boundary differs")
 
     violations = []
     for relative in tracked_files():

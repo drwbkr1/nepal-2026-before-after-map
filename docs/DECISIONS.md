@@ -155,3 +155,9 @@
 **Decision:** Advance the approved DEM workstream only after the exact license bytes, four official STAC items, four anonymous object identities, storage, paths, redirects, and collisions pass a fresh no-payload check; then create only the missing empty DEM custody and staging directories.
 **Reason:** The earlier metadata review established candidate availability, not current identity or safe local custody. Separating `HEAD` and catalog checks from payload transfer preserves a clean stop before any external data bytes arrive.
 **Status:** Passed at `2026-09-03T20:48:10Z`. The exact license hash and all four object lengths, ETags, Last-Modified values, content types, and byte-range headers matched; 519.029 GiB was free; and no redirects, account action, charge, path hazard, collision, or payload occurred. Empty custody was initialized at `2026-09-03T20:50:33Z` with matching receipt SHA-256 `31d1b814d8da753dd2335f3110a49107df3f7a6c75875154a0fff0338b7e80a0`. The next checkpoint is `M2-DEM-ACQUISITION`; GeoTIFF, pixel, vertical-datum, radar, and scientific fitness remain unestablished.
+
+## D-027 — Use a one-tile anonymous DEM transfer state machine
+
+**Decision:** Acquire one exact tile per invocation only after a matching anonymous `HEAD` check, then write an external started event before streaming to exclusive staging, compute local SHA-256 and exact size, preserve all failed or partial bytes, and promote by atomic hard-link without replacement.
+**Reason:** A public object and passing preflight still do not establish transferred-byte identity. One-at-a-time append-only custody prevents concurrent ambiguity, hidden redirects, overwrite, or silent retry.
+**Status:** The runner and seven local tests pass with readiness receipt SHA-256 `515b692ac4717540d5347a518a6f8ea47625939c11ca92fc264133d960b92337`. The readiness run made no network request, requested no payload, and changed no intake or external custody. Live transfer remains next.

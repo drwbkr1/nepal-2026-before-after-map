@@ -62,6 +62,8 @@ At `2026-09-03T20:48:10Z`, the fresh preflight re-fetched the license and matche
 
 The empty DEM custody and staging directories were initialized outside Git at `2026-09-03T20:50:33Z`, with matching local/external receipt SHA-256 `31d1b814d8da753dd2335f3110a49107df3f7a6c75875154a0fff0338b7e80a0`. `contracts/m2-dem-intake.json` still has four authorized, unattempted assets, and `contracts/m2-dem-offline-verification.json` remains gate-deferred until promoted rasters exist. The next parallel checkpoint is `M2-DEM-ACQUISITION`; only one exact tile may be staged, hashed, and promoted per attempt. The separate Sentinel CDSE checkpoint remains unchanged.
 
+The anonymous one-tile transfer runner passes seven local fixture tests for exact remote identity, redirects and requester charges, exclusive staging, streamed SHA-256 and size, partial retention, and the absence of credential handling. Readiness receipt SHA-256 `515b692ac4717540d5347a518a6f8ea47625939c11ca92fc264133d960b92337` records no network request, intake mutation, external custody mutation, or payload byte during that validation.
+
 The candidate controls remain immutable historical evidence. The production radar chain remains deferred on two explicit dependencies: EGM2008 orthometric DEM heights do not exactly match ArcGIS's documented EGM96 geoid correction, and updated Sentinel orbit files are separate auxiliary products outside current authority. Approval does not resolve either scientific dependency.
 
 ## Prepared optical baseline controls

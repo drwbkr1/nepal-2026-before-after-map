@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-TRANSFER-RUNNER-READINESS-001",
+  "status": "pass_local_controls_no_network_or_payload",
+  "verified_at_utc": "2026-09-03T20:59:24Z",
+  "published_preflight_head": "722e8eae6a4f0566b86d1a23dfd806904e0f2793",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "approval_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+    "preflight_ref": "records/acquisition/dem-preflight.json",
+    "preflight_sha256": "18ca15363d92f6f04d672ddb3e97fef33524c94bcb54915d83c82dae77af38f1",
+    "intake_ref": "contracts/m2-dem-intake.json",
+    "intake_sha256": "2ae511c70303f15de590daf3eef4aac1e9dab1b7e0f85544c049ef69a60caa36",
+    "runner_ref": "scripts/acquire_m2_dem_tile.py",
+    "runner_sha256": "2d4323754609853b5b350a9e81ecc4e66db2f1bcb91656e3ecaa36e6cf7b91b3",
+    "shared_transfer_core_ref": "scripts/m2_transfer_core.py",
+    "shared_transfer_core_sha256": "a858756a063148800be418bb7329ba148bcdce71b7812abafee6f7c9c62d8da9",
+    "test_ref": "tests/test_m2_dem_transfer.py",
+    "test_sha256": "68432df023f64801709ea4d7c3cfde392d8f1875688c250680b3c229364a5764"
+  },
+  "test_count": 7,
+  "controls": [
+    "one exact source per invocation",
+    "anonymous HTTPS only",
+    "redirect refusal",
+    "fresh HEAD identity check",
+    "exclusive staging",
+    "streamed SHA-256 and exact size",
+    "retained partial and failed attempts",
+    "atomic hard-link no-replace promotion",
+    "no credentials or accounts"
+  ],
+  "assertions": {
+    "tests_passed": true,
+    "network_requests_performed": false,
+    "dem_payload_bytes_requested": false,
+    "active_intake_mutated": false,
+    "external_custody_mutated": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "Fixture tests do not establish live transfer behavior, local tile integrity, GeoTIFF readability, pixel fitness, vertical-datum fitness, radar-processing success, or scientific change."
+  ]
+}

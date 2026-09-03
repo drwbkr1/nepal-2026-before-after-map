@@ -72,6 +72,14 @@ The wrapper refuses unpromoted assets, missing or ambiguous successful-attempt e
 
 Stop if the license bytes, object identity, route, access mode, cost, paths, or custody conditions differ. Do not infer a vertical-datum conversion or download orbit auxiliaries.
 
+The first exact transfer command is:
+
+```powershell
+python scripts/acquire_m2_dem_tile.py --source-id M2-DEM-001
+```
+
+Run only one invocation at a time. A failure is terminal under the current no-retry control and must be reviewed before another attempt for that tile.
+
 Regenerate or verify these bytes with:
 
 ```powershell
@@ -81,6 +89,7 @@ python scripts/validate_m2_acquisition_progress.py --verify-external
 python scripts/derive_m2_acquisition_checkpoint.py --verify-external
 python C:\Users\drewb\.codex\skills\intake-controlled-data\scripts\validate_intake_contract.py contracts/m2-dem-intake.json --project-root C:\Projects\Active --json
 python -m unittest tests.test_m2_dem_preflight -v
+python -m unittest tests.test_m2_dem_transfer -v
 python -m unittest discover -s tests -v
 python scripts/check_project.py
 ```
