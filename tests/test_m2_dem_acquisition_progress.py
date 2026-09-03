@@ -1,0 +1,60 @@
+import importlib.util
+import json
+import sys
+import unittest
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = ROOT / "scripts" / "reconcile_m2_dem_acquisition.py"
+SPEC = importlib.util.spec_from_file_location("reconcile_m2_dem_acquisition", SCRIPT)
+MODULE = importlib.util.module_from_spec(SPEC)
+assert SPEC and SPEC.loader
+sys.path.insert(0, str(ROOT / "scripts"))
+sys.modules[SPEC.name] = MODULE
+SPEC.loader.exec_module(MODULE)
+
+
+def assets(*states):
+    return [{"state": state} for state in states]
+
+
+class M2DemAcquisitionProgressTests(unittest.TestCase):
+    def test_all_authorized_remains_acquisition(self):
+        result = MODULE.evaluate_progress(assets("authorized", "authorized", "authorized", "authorized"))
+        self.assertEqual(result["checkpoint"], "M2-DEM-ACQUISITION")
+        self.assertEqual(result["disposition"], "in_progress")
+
+    def test_partial_promotion_remains_acquisition(self):
+        result = MODULE.evaluate_progress(assets("promoted", "authorized", "authorized", "authorized"))
+        self.assertEqual(result["counts"], {"authorized": 3, "failed": 0, "promoted": 1})
+        self.assertEqual(result["checkpoint"], "M2-DEM-ACQUISITION")
+
+    def test_all_promoted_advances_to_geotiff_verification(self):
+        result = MODULE.evaluate_progress(assets("promoted", "promoted", "promoted", "promoted"))
+        self.assertEqual(result["checkpoint"], "M2-DEM-GEOTIFF-VERIFICATION")
+        self.assertEqual(result["disposition"], "complete")
+
+    def test_any_failure_requires_review(self):
+        result = MODULE.evaluate_progress(assets("promoted", "failed", "authorized", "authorized"))
+        self.assertEqual(result["checkpoint"], "M2-DEM-ACQUISITION-REVIEW")
+        self.assertEqual(result["disposition"], "review")
+
+    def test_staging_or_wrong_count_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "unsupported DEM acquisition state"):
+            MODULE.evaluate_progress(assets("staging", "authorized", "authorized", "authorized"))
+        with self.assertRaisesRegex(ValueError, "unsupported DEM acquisition state"):
+            MODULE.evaluate_progress(assets("authorized"))
+
+    def test_current_promoted_byte_identity_and_receipt_reconcile(self):
+        intake = MODULE.load(MODULE.INTAKE_PATH)
+        summaries = MODULE.validate_asset_history(intake)
+        promoted = [item for item in summaries if item["state"] == "promoted"]
+        self.assertEqual(len(promoted), 1)
+        self.assertEqual(promoted[0]["source_id"], "M2-DEM-001")
+        self.assertEqual(promoted[0]["local_size_bytes"], 45336691)
+        self.assertEqual(promoted[0]["local_sha256"], "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a")
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -36,10 +36,25 @@ class M2DemTransferTests(unittest.TestCase):
             "accept-ranges": "bytes",
         }
 
-    def test_active_intake_has_exact_four_fresh_assets(self):
+    def test_active_intake_has_exact_four_reconciled_assets(self):
         self.assertEqual([asset["extensions"]["source_id"] for asset in self.intake["assets"]], MODULE.EXPECTED_SOURCE_IDS)
-        self.assertTrue(all(asset["state"] == "authorized" and asset["attempts"] == [] for asset in self.intake["assets"]))
-        self.assertEqual(self.intake["extensions"]["status"], "active_authorized_preflight_passed_custody_initialized")
+        self.assertTrue(all(asset["state"] in {"authorized", "promoted", "failed"} for asset in self.intake["assets"]))
+        self.assertFalse(any(asset["state"] == "staging" for asset in self.intake["assets"]))
+        for asset in self.intake["assets"]:
+            if asset["state"] == "authorized":
+                self.assertEqual(asset["attempts"], [])
+            else:
+                self.assertEqual(len(asset["attempts"]), 1)
+                self.assertIn(asset["attempts"][0]["outcome"], {"succeeded", "failed"})
+        self.assertIn(
+            self.intake["extensions"]["status"],
+            {
+                "active_authorized_preflight_passed_custody_initialized",
+                "active_acquisition_in_progress",
+                "active_acquisition_review_required",
+                "active_all_promoted_pending_geotiff_verification",
+            },
+        )
 
     def test_exact_remote_identity_passes(self):
         checks = MODULE.remote_identity_checks(self.asset, status=200, resolved_url=self.asset["source"]["uri"], headers=self.headers(), body_size=0)

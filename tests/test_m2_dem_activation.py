@@ -60,15 +60,29 @@ class M2DemActivationTests(unittest.TestCase):
         self.assertEqual(self.candidate_verification["status"], "candidate_static_control_not_authorized")
         self.assertEqual(self.candidate_verification["authority"]["dem_amendment_status"], "not_granted")
 
-    def test_active_intake_preserves_four_authorized_unattempted_tiles(self) -> None:
-        self.assertEqual(self.active_intake["extensions"]["status"], "active_authorized_preflight_passed_custody_initialized")
+    def test_active_intake_preserves_four_approved_tiles_during_progress(self) -> None:
+        self.assertIn(
+            self.active_intake["extensions"]["status"],
+            {
+                "active_authorized_preflight_passed_custody_initialized",
+                "active_acquisition_in_progress",
+                "active_acquisition_review_required",
+                "active_all_promoted_pending_geotiff_verification",
+            },
+        )
         self.assertEqual(len(self.active_intake["assets"]), 4)
         self.assertEqual(
             {asset["extensions"]["source_id"] for asset in self.active_intake["assets"]},
             {"M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"},
         )
-        self.assertTrue(all(asset["state"] == "authorized" for asset in self.active_intake["assets"]))
-        self.assertTrue(all(asset["attempts"] == [] for asset in self.active_intake["assets"]))
+        self.assertTrue(all(asset["state"] in {"authorized", "promoted", "failed"} for asset in self.active_intake["assets"]))
+        self.assertFalse(any(asset["state"] == "staging" for asset in self.active_intake["assets"]))
+        for asset in self.active_intake["assets"]:
+            if asset["state"] == "authorized":
+                self.assertEqual(asset["attempts"], [])
+            else:
+                self.assertEqual(len(asset["attempts"]), 1)
+                self.assertIn(asset["attempts"][0]["outcome"], {"succeeded", "failed"})
         self.assertTrue(
             all(
                 asset["source"]["authorization_ref"]
@@ -78,7 +92,15 @@ class M2DemActivationTests(unittest.TestCase):
         )
 
     def test_active_offline_verification_is_authorized_but_data_deferred(self) -> None:
-        self.assertEqual(self.active_verification["status"], "active_gate_deferred_no_promoted_rasters")
+        self.assertIn(
+            self.active_verification["status"],
+            {
+                "active_gate_deferred_no_promoted_rasters",
+                "active_gate_deferred_incomplete_acquisition",
+                "active_gate_blocked_acquisition_review",
+                "active_gate_ready_for_geotiff_verification",
+            },
+        )
         authority = self.active_verification["authority"]
         self.assertEqual(authority["dem_amendment_status"], "approved")
         self.assertTrue(authority["license_acceptance_established"])

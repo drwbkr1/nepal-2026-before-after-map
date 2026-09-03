@@ -153,6 +153,7 @@ REQUIRED = [
     "tests/test_m2_dem_activation.py",
     "tests/test_m2_dem_preflight.py",
     "tests/test_m2_dem_transfer.py",
+    "tests/test_m2_dem_acquisition_progress.py",
     "tests/test_radar_processing_contract.py",
     "tests/test_optical_processing_core.py",
     "tests/test_m2_materialization.py",
@@ -166,6 +167,7 @@ REQUIRED = [
     "scripts/run_m2_dem_preflight.py",
     "scripts/complete_m2_dem_preflight.py",
     "scripts/acquire_m2_dem_tile.py",
+    "scripts/reconcile_m2_dem_acquisition.py",
     "scripts/verify_m2_dem_geotiff.py",
     "scripts/prepare_radar_processing_contract.py",
     "scripts/optical_processing_core.py",
@@ -257,6 +259,35 @@ def main() -> None:
     dem_preflight = json.loads((ROOT / "records/acquisition/dem-preflight.json").read_text(encoding="utf-8"))
     dem_custody_receipt = json.loads((ROOT / "records/acquisition/dem-custody-initialization.json").read_text(encoding="utf-8"))
     dem_transfer_readiness = json.loads((ROOT / "records/acquisition/dem-transfer-runner-readiness.json").read_text(encoding="utf-8"))
+    expected_dem_source_order = ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
+    dem_current_assets = dem_intake_active.get("assets", [])
+    if [asset.get("extensions", {}).get("source_id") for asset in dem_current_assets] != expected_dem_source_order:
+        fail("active M2 DEM intake source order or identity differs")
+    dem_current_states = [asset.get("state") for asset in dem_current_assets]
+    if len(dem_current_assets) != 4 or any(state not in {"authorized", "promoted", "failed"} for state in dem_current_states):
+        fail("active M2 DEM intake has an unsupported or unreconciled state")
+    dem_state_counts = {state: dem_current_states.count(state) for state in ("authorized", "promoted", "failed")}
+    if dem_state_counts["failed"]:
+        expected_dem_checkpoint = "M2-DEM-ACQUISITION-REVIEW"
+        expected_dem_intake_status = "active_acquisition_review_required"
+        expected_dem_verification_status = "active_gate_blocked_acquisition_review"
+        expected_dem_next_action = "Review the retained DEM transfer failure; do not retry or advance to GeoTIFF verification without a new bounded decision."
+    elif dem_state_counts["promoted"] == 4:
+        expected_dem_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
+        expected_dem_intake_status = "active_all_promoted_pending_geotiff_verification"
+        expected_dem_verification_status = "active_gate_ready_for_geotiff_verification"
+        expected_dem_next_action = "Run the active offline ArcGIS GeoTIFF verifier for each of the four promoted DEM tiles; do not infer pixel or vertical-datum fitness from transfer success."
+    elif dem_state_counts["promoted"]:
+        expected_dem_checkpoint = "M2-DEM-ACQUISITION"
+        expected_dem_intake_status = "active_acquisition_in_progress"
+        expected_dem_verification_status = "active_gate_deferred_incomplete_acquisition"
+        next_dem_source = next(asset["extensions"]["source_id"] for asset in dem_current_assets if asset["state"] == "authorized")
+        expected_dem_next_action = f"Acquire {next_dem_source} only through append-only staging, exact size and local SHA-256, and no-replace promotion."
+    else:
+        expected_dem_checkpoint = "M2-DEM-ACQUISITION"
+        expected_dem_intake_status = "active_authorized_preflight_passed_custody_initialized"
+        expected_dem_verification_status = "active_gate_deferred_no_promoted_rasters"
+        expected_dem_next_action = "Acquire M2-DEM-001 only through append-only staging, verify its exact length and local SHA-256, and promote without replacement; stop on any route or identity drift."
     radar_processing_contract = json.loads((ROOT / "config/qa/radar-baseline-processing-contract.json").read_text(encoding="utf-8"))
     dem_radar_readiness = json.loads((ROOT / "records/surface-receipts/m2-dem-radar-control-readiness.json").read_text(encoding="utf-8"))
     optical_processing_contract = json.loads((ROOT / "config/qa/optical-baseline-processing-contract.json").read_text(encoding="utf-8"))
@@ -319,15 +350,13 @@ def main() -> None:
     for approved_unit in ("M2-DEM-AMEND", "M2-DEM-PREFLIGHT", "M2-DEM-ACQUIRE"):
         if profile_gates.get(approved_unit, {}).get("authority_ref") != "records/source-gates/m2-dem-amendment-approval.json":
             fail(f"project profile must bind {approved_unit} to the exact DEM amendment approval")
-    if profile.get("parallel_checkpoints") != [
-        {
-            "checkpoint_id": "M2-DEM-ACQUISITION",
-            "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
-            "next_action": "Acquire M2-DEM-001 only through append-only staging, verify its exact length and local SHA-256, and promote without replacement; stop on any route or identity drift.",
-        }
-    ]:
+    if profile.get("parallel_checkpoints") != [{
+        "checkpoint_id": expected_dem_checkpoint,
+        "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+        "next_action": expected_dem_next_action,
+    }]:
         fail("project profile DEM parallel checkpoint differs")
-    if goal.get("active_amendments") != ["records/source-gates/m2-dem-amendment-approval.json"] or goal.get("parallel_checkpoints") != ["M2-DEM-ACQUISITION"]:
+    if goal.get("active_amendments") != ["records/source-gates/m2-dem-amendment-approval.json"] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active DEM amendment checkpoint")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
@@ -449,22 +478,44 @@ def main() -> None:
         "acceptance_status": "accepted_exact_hash_bound_document",
     }:
         fail("M2 DEM amendment approval license binding differs")
-    expected_dem_source_ids = {"M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"}
+    expected_dem_source_ids = set(expected_dem_source_order)
     if set(dem_approval.get("authorized_source_ids", [])) != expected_dem_source_ids:
         fail("M2 DEM amendment approval source set differs")
     if dem_approval.get("human_decisions_fabricated") is not False:
         fail("M2 DEM amendment approval must not report fabricated decisions")
-    if dem_intake_active.get("extensions", {}).get("status") != "active_authorized_preflight_passed_custody_initialized" or len(dem_intake_active.get("assets", [])) != 4:
+    if dem_intake_active.get("extensions", {}).get("status") != expected_dem_intake_status:
         fail("active M2 DEM intake identity or state differs")
-    if {asset.get("extensions", {}).get("source_id") for asset in dem_intake_active["assets"]} != expected_dem_source_ids:
-        fail("active M2 DEM intake source set differs")
-    if any(
-        asset.get("state") != "authorized"
-        or asset.get("attempts") != []
-        or asset.get("source", {}).get("authorization_ref") != "records/source-gates/m2-dem-amendment-approval.json"
-        for asset in dem_intake_active["assets"]
-    ):
-        fail("active M2 DEM intake invents transfer progress or loses approval binding")
+    for asset in dem_current_assets:
+        source_id = asset["extensions"]["source_id"]
+        state = asset["state"]
+        attempts = asset.get("attempts", [])
+        if asset.get("source", {}).get("authorization_ref") != "records/source-gates/m2-dem-amendment-approval.json":
+            fail(f"active M2 DEM intake loses approval binding for {source_id}")
+        if state == "authorized":
+            if attempts or any(value is not None for value in asset.get("observed", {}).values()):
+                fail(f"authorized DEM asset invents transfer progress for {source_id}")
+            continue
+        if len(attempts) != 1 or attempts[0].get("outcome") not in {"succeeded", "failed"} or not attempts[0].get("completed_at"):
+            fail(f"terminal DEM attempt history differs for {source_id}")
+        if state == "promoted":
+            receipt_ref = asset.get("extensions", {}).get("successful_attempt_receipt")
+            if not isinstance(receipt_ref, str) or not receipt_ref.startswith("records/acquisition/dem-attempts/") or not (ROOT / receipt_ref).is_file():
+                fail(f"promoted DEM asset receipt is absent for {source_id}")
+            receipt = json.loads((ROOT / receipt_ref).read_text(encoding="utf-8"))
+            observed = asset.get("observed", {})
+            if (
+                asset["extensions"].get("successful_attempt_receipt_sha256") != sha256(receipt_ref)
+                or receipt.get("event") != "dem_transfer_succeeded"
+                or receipt.get("attempt_id") != attempts[0].get("attempt_id")
+                or receipt.get("source_id") != source_id
+                or receipt.get("local_sha256") != observed.get("promoted_sha256")
+                or receipt.get("local_size_bytes") != observed.get("promoted_size_bytes")
+                or observed.get("staged_sha256") != observed.get("promoted_sha256")
+                or observed.get("staged_size_bytes") != observed.get("promoted_size_bytes")
+            ):
+                fail(f"promoted DEM asset identity or receipt differs for {source_id}")
+        elif attempts[0].get("outcome") != "failed" or not asset.get("failure", {}).get("code"):
+            fail(f"failed DEM asset does not preserve its terminal failure for {source_id}")
     if dem_intake_active.get("extensions", {}).get("license_acceptance_status") != "accepted_exact_hash_bound_document":
         fail("active M2 DEM intake does not preserve exact license acceptance")
     expected_dem_intake_progress_bindings = {
@@ -478,8 +529,34 @@ def main() -> None:
     }
     if any(dem_intake_active.get("extensions", {}).get(key) != value for key, value in expected_dem_intake_progress_bindings.items()):
         fail("active M2 DEM intake preflight or custody bindings differ")
-    if dem_verification_active.get("status") != "active_gate_deferred_no_promoted_rasters":
-        fail("active M2 DEM verification must remain data-deferred")
+    if dem_state_counts["promoted"] or dem_state_counts["failed"]:
+        dem_extensions = dem_intake_active.get("extensions", {})
+        checkpoint_ref = dem_extensions.get("last_checkpoint_ref")
+        if not isinstance(checkpoint_ref, str) or not checkpoint_ref.startswith("records/acquisition/dem-checkpoints/") or not (ROOT / checkpoint_ref).is_file():
+            fail("active M2 DEM intake is missing its latest reconciliation checkpoint")
+        if dem_extensions.get("last_checkpoint_sha256") != sha256(checkpoint_ref):
+            fail("active M2 DEM intake latest reconciliation checkpoint hash differs")
+        checkpoint_receipt = json.loads((ROOT / checkpoint_ref).read_text(encoding="utf-8"))
+        if (
+            checkpoint_receipt.get("attempt_id") != dem_extensions.get("last_reconciled_attempt_id")
+            or checkpoint_receipt.get("progress", {}).get("counts") != dem_state_counts
+            or checkpoint_receipt.get("progress", {}).get("checkpoint") != expected_dem_checkpoint
+            or checkpoint_receipt.get("bindings", {}).get("approval_sha256") != sha256("records/source-gates/m2-dem-amendment-approval.json")
+            or checkpoint_receipt.get("bindings", {}).get("preflight_sha256") != sha256("records/acquisition/dem-preflight.json")
+        ):
+            fail("active M2 DEM reconciliation checkpoint differs from current progress")
+        expected_dem_claim_boundary = {
+            "transferred_byte_identity_established_for_promoted_assets": True,
+            "geotiff_readability_established": False,
+            "valid_pixel_coverage_established": False,
+            "vertical_datum_route_established": False,
+            "radar_processing_executed": False,
+            "scientific_result_established": False,
+        }
+        if checkpoint_receipt.get("claim_boundary") != expected_dem_claim_boundary:
+            fail("active M2 DEM reconciliation checkpoint claim boundary differs")
+    if dem_verification_active.get("status") != expected_dem_verification_status:
+        fail("active M2 DEM verification status differs from acquisition progress")
     active_dem_verification_authority = dem_verification_active.get("authority", {})
     if active_dem_verification_authority != {
         "dem_amendment_status": "approved",
@@ -493,11 +570,13 @@ def main() -> None:
         fail("active M2 DEM verification authority differs")
     if dem_verification_active.get("inputs", {}).get("intake_contract_ref") != "contracts/m2-dem-intake.json" or dem_verification_active.get("inputs", {}).get("intake_contract_sha256") != sha256("contracts/m2-dem-intake.json"):
         fail("active M2 DEM verification does not bind the active intake")
+    expected_dem_acquire_status = "complete" if dem_state_counts["promoted"] == 4 and not dem_state_counts["failed"] else "ready"
+    expected_dem_verify_status = "ready" if expected_dem_acquire_status == "complete" else "planned"
     for unit_id, expected_status in (
         ("M2-DEM-AMEND", "complete"),
         ("M2-DEM-PREFLIGHT", "complete"),
-        ("M2-DEM-ACQUIRE", "ready"),
-        ("M2-DEM-VERIFY", "planned"),
+        ("M2-DEM-ACQUIRE", expected_dem_acquire_status),
+        ("M2-DEM-VERIFY", expected_dem_verify_status),
     ):
         if active_m2_units.get(unit_id, {}).get("status") != expected_status:
             fail(f"active M2 unit {unit_id} status differs")
@@ -602,21 +681,20 @@ def main() -> None:
         fail("M2 DEM preflight milestone evidence differs")
     if dem_acquire_unit.get("inputs") != ["records/source-gates/m2-dem-live-source-gate.json", "records/acquisition/dem-preflight.json", "records/acquisition/dem-custody-initialization.json", "contracts/m2-dem-intake.json"]:
         fail("M2 DEM acquisition inputs differ")
-    if active_m2.get("handoff", {}).get("parallel_checkpoint") != "M2-DEM-ACQUISITION":
-        fail("active M2 DEM handoff did not advance to acquisition")
+    if active_m2.get("handoff", {}).get("parallel_checkpoint") != expected_dem_checkpoint or active_m2.get("handoff", {}).get("parallel_next_action") != expected_dem_next_action:
+        fail("active M2 DEM handoff differs from acquisition progress")
     if dem_transfer_readiness.get("status") != "pass_local_controls_no_network_or_payload" or dem_transfer_readiness.get("test_count") != 7:
         fail("M2 DEM transfer-runner readiness status differs")
-    for ref_key, hash_key in (
-        ("approval_ref", "approval_sha256"),
-        ("preflight_ref", "preflight_sha256"),
-        ("intake_ref", "intake_sha256"),
-        ("runner_ref", "runner_sha256"),
-        ("shared_transfer_core_ref", "shared_transfer_core_sha256"),
-        ("test_ref", "test_sha256"),
-    ):
-        relative = dem_transfer_readiness.get("bindings", {}).get(ref_key)
-        if not isinstance(relative, str) or not (ROOT / relative).is_file() or dem_transfer_readiness["bindings"].get(hash_key) != sha256(relative):
-            fail(f"M2 DEM transfer-runner readiness does not bind {ref_key}")
+    expected_historical_dem_transfer_bindings = {
+        "approval_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+        "preflight_sha256": "18ca15363d92f6f04d672ddb3e97fef33524c94bcb54915d83c82dae77af38f1",
+        "intake_sha256": "2ae511c70303f15de590daf3eef4aac1e9dab1b7e0f85544c049ef69a60caa36",
+        "runner_sha256": "2d4323754609853b5b350a9e81ecc4e66db2f1bcb91656e3ecaa36e6cf7b91b3",
+        "shared_transfer_core_sha256": "a858756a063148800be418bb7329ba148bcdce71b7812abafee6f7c9c62d8da9",
+        "test_sha256": "68432df023f64801709ea4d7c3cfde392d8f1875688c250680b3c229364a5764",
+    }
+    if any(dem_transfer_readiness.get("bindings", {}).get(key) != value for key, value in expected_historical_dem_transfer_bindings.items()):
+        fail("M2 DEM transfer-runner readiness no longer preserves its published bindings")
     readiness_assertions = dem_transfer_readiness.get("assertions", {})
     if readiness_assertions.get("tests_passed") is not True or any(readiness_assertions.get(key) is not False for key in ("network_requests_performed", "dem_payload_bytes_requested", "active_intake_mutated", "external_custody_mutated", "scientific_result_established")):
         fail("M2 DEM transfer-runner readiness invents execution or scientific evidence")
@@ -2021,18 +2099,17 @@ def main() -> None:
     dem_preflight_evidence = ledger_by_id.get("EVID-0032")
     if not isinstance(dem_preflight_evidence, dict):
         fail("evidence ledger is missing EVID-0032 DEM preflight evidence")
-    for ref_key, hash_key in (
-        ("source_gate_ref", "source_gate_sha256"),
-        ("preflight_ref", "preflight_sha256"),
-        ("custody_initialization_ref", "custody_initialization_sha256"),
-        ("active_intake_ref", "active_intake_sha256"),
-        ("active_verification_ref", "active_verification_sha256"),
-        ("completion_script_ref", "completion_script_sha256"),
-        ("preflight_script_ref", "preflight_script_sha256"),
-    ):
-        relative = dem_preflight_evidence.get(ref_key)
-        if not isinstance(relative, str) or not (ROOT / relative).is_file() or dem_preflight_evidence.get(hash_key) != sha256(relative):
-            fail(f"EVID-0032 does not bind {ref_key}")
+    expected_evid_0032_bindings = {
+        "source_gate_sha256": "5baac05a9e1ede4fa3ada02e4e2cd3bac9c3032164d280ef6886e0d519ae603e",
+        "preflight_sha256": "18ca15363d92f6f04d672ddb3e97fef33524c94bcb54915d83c82dae77af38f1",
+        "custody_initialization_sha256": "31d1b814d8da753dd2335f3110a49107df3f7a6c75875154a0fff0338b7e80a0",
+        "active_intake_sha256": "2ae511c70303f15de590daf3eef4aac1e9dab1b7e0f85544c049ef69a60caa36",
+        "active_verification_sha256": "6d7ee4aa05a6ead58d56ebc11d60f4aeb71489e02201f8b0462247b63f3cd27a",
+        "completion_script_sha256": "9f83e8bf33373e665fdf50cce3e37a2e4bdf4d839338df07a0e31d6aef1c1767",
+        "preflight_script_sha256": "c837997f9ec37daff6644089dae234a7bfdecf11401fb7f5cb9745993c91cfc2",
+    }
+    if any(dem_preflight_evidence.get(key) != value for key, value in expected_evid_0032_bindings.items()):
+        fail("EVID-0032 no longer preserves its published preflight bindings")
     if dem_preflight_evidence.get("status") != "pass_exact_source_and_path_controls_no_payload":
         fail("EVID-0032 status differs")
     preflight_assertions = dem_preflight_evidence.get("assertions", {})
@@ -2051,15 +2128,14 @@ def main() -> None:
     dem_transfer_readiness_evidence = ledger_by_id.get("EVID-0033")
     if not isinstance(dem_transfer_readiness_evidence, dict):
         fail("evidence ledger is missing EVID-0033 DEM transfer-runner readiness")
-    for ref_key, hash_key in (
-        ("readiness_ref", "readiness_sha256"),
-        ("runner_ref", "runner_sha256"),
-        ("test_ref", "test_sha256"),
-        ("shared_transfer_core_ref", "shared_transfer_core_sha256"),
-    ):
-        relative = dem_transfer_readiness_evidence.get(ref_key)
-        if not isinstance(relative, str) or not (ROOT / relative).is_file() or dem_transfer_readiness_evidence.get(hash_key) != sha256(relative):
-            fail(f"EVID-0033 does not bind {ref_key}")
+    expected_evid_0033_bindings = {
+        "readiness_sha256": "515b692ac4717540d5347a518a6f8ea47625939c11ca92fc264133d960b92337",
+        "runner_sha256": "2d4323754609853b5b350a9e81ecc4e66db2f1bcb91656e3ecaa36e6cf7b91b3",
+        "test_sha256": "68432df023f64801709ea4d7c3cfde392d8f1875688c250680b3c229364a5764",
+        "shared_transfer_core_sha256": "a858756a063148800be418bb7329ba148bcdce71b7812abafee6f7c9c62d8da9",
+    }
+    if any(dem_transfer_readiness_evidence.get(key) != value for key, value in expected_evid_0033_bindings.items()):
+        fail("EVID-0033 no longer preserves its published readiness bindings")
     if dem_transfer_readiness_evidence.get("status") != "pass_local_controls_no_network_or_payload":
         fail("EVID-0033 status differs")
     if dem_transfer_readiness_evidence.get("assertions") != {

@@ -65,7 +65,12 @@ class M2DemPreflightTests(unittest.TestCase):
         self.assertEqual(units["M2-DEM-PREFLIGHT"]["status"], "complete")
         self.assertEqual(units["M2-DEM-ACQUIRE"]["status"], "ready")
         self.assertIn("M2-DEM-ACQUISITION", {item["checkpoint_id"] for item in profile["parallel_checkpoints"]})
-        self.assertTrue(all(asset["state"] == "authorized" and asset["attempts"] == [] for asset in intake["assets"]))
+        self.assertEqual(
+            [asset["extensions"]["source_id"] for asset in intake["assets"]],
+            [f"M2-DEM-{index:03d}" for index in range(1, 5)],
+        )
+        self.assertTrue(all(asset["state"] in {"authorized", "promoted", "failed"} for asset in intake["assets"]))
+        self.assertFalse(any(asset["state"] == "staging" for asset in intake["assets"]))
 
     def test_live_preflight_preserves_no_payload_boundary(self):
         source_gate = load("records/source-gates/m2-dem-live-source-gate.json")
@@ -81,30 +86,30 @@ class M2DemPreflightTests(unittest.TestCase):
         self.assertEqual(preflight["mutations_performed"]["dem_payload_bytes_received"], 0)
         self.assertFalse(preflight["mutations_performed"]["dem_payload_requested"])
 
-    def test_empty_custody_receipt_and_active_bindings_match(self):
+    def test_empty_custody_receipt_remains_historical_and_active_bindings_match(self):
         receipt = load("records/acquisition/dem-custody-initialization.json")
         intake = load(MODULE.INTAKE_REF)
         verification = load("contracts/m2-dem-offline-verification.json")
         self.assertEqual(receipt["status"], "created_and_verified_empty")
         self.assertEqual(receipt["verification"]["files_downloaded"], 0)
         self.assertEqual(receipt["verification"]["dem_payload_bytes_present"], 0)
-        self.assertEqual(intake["extensions"]["status"], "active_authorized_preflight_passed_custody_initialized")
         self.assertEqual(intake["extensions"]["preflight_sha256"], MODULE.sha256_file(MODULE.PREFLIGHT_REF))
         self.assertEqual(verification["inputs"]["intake_contract_sha256"], MODULE.sha256_file(MODULE.INTAKE_REF))
 
-    def test_evidence_0032_binds_current_preflight_state(self):
+    def test_evidence_0032_preserves_historical_preflight_state(self):
         ledger = [json.loads(line) for line in (ROOT / "records/evidence-ledger.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
         evidence = next(item for item in ledger if item.get("record_id") == "EVID-0032")
-        for ref_key, hash_key in (
-            ("source_gate_ref", "source_gate_sha256"),
-            ("preflight_ref", "preflight_sha256"),
-            ("custody_initialization_ref", "custody_initialization_sha256"),
-            ("active_intake_ref", "active_intake_sha256"),
-            ("active_verification_ref", "active_verification_sha256"),
-            ("completion_script_ref", "completion_script_sha256"),
-            ("preflight_script_ref", "preflight_script_sha256"),
-        ):
-            self.assertEqual(evidence[hash_key], MODULE.sha256_file(evidence[ref_key]))
+        expected_hashes = {
+            "source_gate_sha256": "5baac05a9e1ede4fa3ada02e4e2cd3bac9c3032164d280ef6886e0d519ae603e",
+            "preflight_sha256": "18ca15363d92f6f04d672ddb3e97fef33524c94bcb54915d83c82dae77af38f1",
+            "custody_initialization_sha256": "31d1b814d8da753dd2335f3110a49107df3f7a6c75875154a0fff0338b7e80a0",
+            "active_intake_sha256": "2ae511c70303f15de590daf3eef4aac1e9dab1b7e0f85544c049ef69a60caa36",
+            "active_verification_sha256": "6d7ee4aa05a6ead58d56ebc11d60f4aeb71489e02201f8b0462247b63f3cd27a",
+            "completion_script_sha256": "9f83e8bf33373e665fdf50cce3e37a2e4bdf4d839338df07a0e31d6aef1c1767",
+            "preflight_script_sha256": "c837997f9ec37daff6644089dae234a7bfdecf11401fb7f5cb9745993c91cfc2",
+        }
+        for hash_key, expected in expected_hashes.items():
+            self.assertEqual(evidence[hash_key], expected)
         self.assertFalse(evidence["assertions"]["dem_payload_bytes_requested"])
         self.assertEqual(evidence["assertions"]["dem_payload_bytes_present"], 0)
 
