@@ -56,7 +56,7 @@ class M2CheckpointReconciliationTests(unittest.TestCase):
 
     def test_current_repository_checkpoint_is_reconciled_read_only(self) -> None:
         result = subprocess.run(
-            [sys.executable, str(ROOT / "scripts/derive_m2_acquisition_checkpoint.py"), "--verify-external"],
+            [sys.executable, str(ROOT / "scripts/derive_m2_acquisition_checkpoint.py")],
             cwd=ROOT,
             capture_output=True,
             text=True,
@@ -65,6 +65,8 @@ class M2CheckpointReconciliationTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         payload = json.loads(result.stdout)
         self.assertEqual(payload["status"], "pass")
+        self.assertTrue(payload["current_controls_match"])
+        self.assertFalse(payload["credential_values_read"])
         self.assertFalse(payload["tracked_files_mutated"])
 
     def test_candidate_output_is_scratch_only_and_no_replace(self) -> None:

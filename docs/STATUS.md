@@ -80,6 +80,8 @@ The first published input-readiness checkpoint was superseded after official Sen
 
 Twelve portable tests and the corrected ArcGIS Pro 3.7.1 Advanced run pass. ArcGIS opens sixteen synthetic JP2 rasters with matching EPSG:32645 10 m and 20 m scientific grids plus a three-band 60 m classification-quality grid; a deliberate 10 m shift of the complete after grid blocks with sixteen extent mismatches. Two failed direct `CopyRaster` JP2-generation attempts, five superseded prepublication passes, and the superseded published pass remain recorded. No real materialization receipt, SAFE metadata, raster header, or pixel was accessed.
 
+Checkpoint derivation is also portable. Repository-only tests do not require the operator's external Windows custody roots; external custody reconciliation remains an explicit local, read-only validation. Failed GitHub Actions run `33800916326` is retained in the append-only portability-correction evidence that records this boundary fix.
+
 ## Authorized but not completed
 
 - authenticate through an existing owner-controlled CDSE credential or session reference;

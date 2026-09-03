@@ -62,6 +62,8 @@ python scripts/derive_m2_acquisition_checkpoint.py --verify-external
 
 The derivation must match both `records/project-control-profile.json` and `records/long-term-goal.json` to pass. When they differ after a real attempt, use a new `--candidate-output-root scratch/<unique-attempt>` to emit exclusive candidate controls for review; the tool never overwrites tracked truth.
 
+The portable unit test invokes the derivation without `--verify-external`, because CI does not own the operator's external custody roots. The separate local command above performs the read-only external reconciliation when those roots exist. Failed GitHub Actions run `33800916326` is retained in the portability-correction receipt as the evidence that exposed this boundary error.
+
 The active offline-verification binding and wrapper stop are tested separately:
 
 ```powershell

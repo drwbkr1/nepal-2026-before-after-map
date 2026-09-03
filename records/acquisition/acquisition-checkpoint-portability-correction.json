@@ -1,0 +1,69 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-ACQUISITION-CHECKPOINT-PORTABILITY-CORRECTION-001",
+  "verified_at_utc": "2026-09-03T20:13:49Z",
+  "status": "pass_portable_repository_test_external_verification_separated",
+  "claim": "The checkpoint reconciliation test now validates repository-only state on portable runners, while external custody-root reconciliation remains a separate explicit local check.",
+  "supersedes": {
+    "evidence_record_id": "EVID-0029",
+    "published_commit": "5f6dced5673cf23f5320d253f2f60a24497013d5",
+    "scope": "Corrects only the portable-test boundary; the published derivation logic, receipt, limitations, and failed CI result remain preserved."
+  },
+  "bindings": {
+    "published_readiness_ref": "records/acquisition/acquisition-checkpoint-readiness.json",
+    "published_readiness_sha256": "1a4439702be6ad448ec9eafc095d4bd25b692100b73dd19429fb20a1fde7eca9",
+    "derivation_ref": "scripts/derive_m2_acquisition_checkpoint.py",
+    "derivation_sha256": "4d78913210978495b320dd70ace7d9e0ef3b7e9f7bf4f2804fbe444691b728a8",
+    "test_ref": "tests/test_m2_checkpoint_reconciliation.py",
+    "test_sha256": "53e7e5d98b6e11a1ad3c4f3b9b6523e766bf74765d98f7a35b8e7ffeed2662a3",
+    "project_checker_ref": "scripts/check_project.py",
+    "project_checker_sha256": "0ea6c6cc5bcc32db19105dfd2cc2ca27bdf96e38f361f3c0a131b64ef64f6801"
+  },
+  "validation": {
+    "focused_test_count": 9,
+    "focused_test_status": "pass",
+    "full_repository_test_count": 141,
+    "full_repository_test_status": "pass",
+    "repository_required_file_count": 146,
+    "repository_validation_status": "pass",
+    "portable_repository_derivation": "pass",
+    "local_external_state_reconciliation": "pass",
+    "failed_ci_run_id": 33800916326,
+    "failed_ci_run_status": "failure"
+  },
+  "current_state": {
+    "checkpoint": "M2-AUTHENTICATION-REFERENCE",
+    "authorized_product_count": 8,
+    "attempt_count": 0,
+    "custody_file_count": 0
+  },
+  "assertions": {
+    "portable_repository_test_requires_external_custody_roots": false,
+    "external_reconciliation_remains_explicit_local_validation": true,
+    "published_evidence_preserved": true,
+    "failed_ci_run_preserved": true,
+    "tracked_project_controls_mutated": false,
+    "external_files_mutated": false,
+    "network_requests_performed": false,
+    "credential_values_read_or_recorded": false,
+    "product_bytes_read": false,
+    "scientific_fitness_established": false,
+    "authority_created": false
+  },
+  "limitations": [
+    "The correction establishes a portable control test; it does not prove CDSE transfer behavior, product integrity, or pixel usability.",
+    "External reconciliation still depends on the operator-controlled local custody and staging roots.",
+    "The failed workflow run remains part of the project history and is not reclassified as a pass."
+  ],
+  "retained_validation_failures": [
+    {
+      "run_id": 33800916326,
+      "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33800916326",
+      "status": "failure",
+      "failed_step": "Test project controls",
+      "failed_test": "test_current_repository_checkpoint_is_reconciled_read_only",
+      "cause": "The portable test incorrectly requested external validation on an ephemeral Linux runner where the operator's Windows external custody roots do not exist.",
+      "remediation": "Run repository-only derivation in the portable suite and retain --verify-external as a separate explicit local check."
+    }
+  ]
+}
