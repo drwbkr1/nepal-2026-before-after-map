@@ -83,3 +83,9 @@
 **Decision:** Execute only the approved non-mutating live preflight, then create the exact empty external custody and staging structure after every source, rights, identity, path, collision, and storage check passes.
 **Reason:** Catalog approval alone does not establish current availability or a safe destination, and authentication must remain separate from public records and filesystem initialization.
 **Status:** Completed on 3 September 2026. All eight exact products were online with unchanged names, UUIDs, sizes, and provider checksums; the source gate passed 64 required criteria; 514.942 GiB was free; and matching repository/external custody receipts have SHA-256 `12812d1c53e13ec287425f74a1988f5c0be7d0638f856c9606fddf1c1431fb09`. No authentication or product transfer occurred. Work stops at `M2-AUTHENTICATION-REFERENCE` pending a secret-safe existing owner-controlled credential or session reference.
+
+## D-015 — Fail-closed one-product transfer state machine
+
+**Decision:** Transfer only one exact approved product per invocation through exclusive staging, append-before-transfer evidence, streamed SHA-256 and provider-MD5 verification, redirect refusal, retained failures, and atomic hard-link no-replace promotion.
+**Reason:** An authenticated HTTP response is not custody evidence, and a collision, changed page, changed catalog identity, partial file, or checksum mismatch must remain visible without overwriting existing bytes.
+**Status:** Implemented and covered by eleven local fixture tests. The readiness receipt records no network request, authentication, active-intake mutation, or product bytes. Real execution remains at the secret-safe authentication-reference gate.

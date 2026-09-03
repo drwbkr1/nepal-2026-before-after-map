@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-TRANSFER-RUNNER-READINESS-001",
+  "status": "pass_synthetic_only_no_authentication_or_product_transfer",
+  "verified_at_utc": "2026-09-03T17:47:21Z",
+  "bindings": {
+    "active_contract_ref": "contracts/milestone-002.json",
+    "active_contract_sha256": "188af4575401473bb464dff84b83a90a41751b176c6a5e63a76f62acbe4e6bfb",
+    "active_intake_ref": "contracts/m2-intake.json",
+    "active_intake_sha256": "a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c",
+    "activation_approval_ref": "records/source-gates/m2-activation-approval.json",
+    "activation_approval_sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
+    "transfer_core_ref": "scripts/m2_transfer_core.py",
+    "transfer_core_sha256": "a858756a063148800be418bb7329ba148bcdce71b7812abafee6f7c9c62d8da9",
+    "transfer_runner_ref": "scripts/acquire_m2_product.py",
+    "transfer_runner_sha256": "bf02f27d90f3ef66b713763ef62e60bf66e83d5a77ca10a10f30075f4454b7ba",
+    "tests_ref": "tests/test_m2_transfer_core.py",
+    "tests_sha256": "a7dfdfedbc7170fa51a6815f1f243f860d437245ec4f7c23cf05591b15822084"
+  },
+  "test": {
+    "command": "python -m unittest tests.test_m2_transfer_core -v",
+    "test_count": 11,
+    "status": "pass",
+    "covered_controls": [
+      "missing credential reference stops before mutation",
+      "exclusive staging and collision refusal",
+      "streamed SHA-256 and provider-MD5 verification",
+      "size and checksum failure retention",
+      "atomic hard-link no-replace promotion",
+      "destination collision preservation",
+      "path-containment rejection",
+      "redirect refusal",
+      "receipt replacement refusal",
+      "terminal failed-attempt preservation"
+    ]
+  },
+  "external_state": {
+    "root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "product_or_attempt_file_count_before": 0,
+    "product_or_attempt_file_count_after": 0
+  },
+  "activity": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "product_bytes_transferred": 0,
+    "active_intake_mutated": false
+  },
+  "limitations": [
+    "Local fixture tests do not prove the current CDSE authenticated response, content length, redirect behavior, or transfer performance.",
+    "A real attempt must revalidate unchanged official pages and the exact product catalogue record before writing an append-only started event.",
+    "A promoted archive still requires the separate offline ZIP, SAFE, band, polarization, and CRC checks before pixel use."
+  ],
+  "next_gate": "Provide a secret-safe reference to an existing owner-controlled CDSE access token or authenticated session; do not place credential values in Git, chat, receipts, URLs, or captured output."
+}

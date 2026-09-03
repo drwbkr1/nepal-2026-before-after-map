@@ -43,6 +43,7 @@ REQUIRED = [
     "records/acquisition/m2-intake-static-dry-run.json",
     "records/acquisition/preflight.json",
     "records/acquisition/custody-initialization.json",
+    "records/acquisition/transfer-runner-readiness.json",
     "records/source-gates/source-manifest-approval.json",
     "records/source-gates/source-manifest-review-reconciliation.json",
     "records/source-gates/m2-activation-approval.json",
@@ -89,7 +90,11 @@ REQUIRED = [
     "scripts/complete_m2_preflight.py",
     "scripts/initialize_m2_custody.py",
     "scripts/record_m2_custody_checkpoint.py",
+    "scripts/m2_transfer_core.py",
+    "scripts/acquire_m2_product.py",
+    "scripts/record_m2_transfer_readiness.py",
     "scripts/validate_pair_plan.py",
+    "tests/test_m2_transfer_core.py",
     ".github/workflows/validate.yml",
 ]
 
@@ -210,6 +215,7 @@ def main() -> None:
     m2_source_gate = json.loads((ROOT / "records/source-gates/m2-live-source-gate.json").read_text(encoding="utf-8"))
     m2_preflight = json.loads((ROOT / "records/acquisition/preflight.json").read_text(encoding="utf-8"))
     custody_receipt = json.loads((ROOT / "records/acquisition/custody-initialization.json").read_text(encoding="utf-8"))
+    transfer_readiness = json.loads((ROOT / "records/acquisition/transfer-runner-readiness.json").read_text(encoding="utf-8"))
     pair_plan = json.loads((ROOT / "config/qa/candidate-pair-plan.json").read_text(encoding="utf-8"))
     offline_verification = json.loads((ROOT / "contracts/m2-offline-verification-candidate.json").read_text(encoding="utf-8"))
     readiness_input = json.loads((ROOT / "records/readiness/m2-readiness-audit-input.json").read_text(encoding="utf-8"))
@@ -399,6 +405,30 @@ def main() -> None:
     receipt_verification = custody_receipt.get("verification", {})
     if receipt_verification.get("files_downloaded") != 0 or receipt_verification.get("authentication_performed") is not False or receipt_verification.get("credential_values_read_or_recorded") is not False:
         fail("M2 custody initialization must not claim authentication or product transfer")
+    if transfer_readiness.get("status") != "pass_synthetic_only_no_authentication_or_product_transfer":
+        fail("M2 transfer-runner readiness receipt has an invalid status")
+    readiness_bindings = transfer_readiness.get("bindings", {})
+    expected_transfer_bindings = {
+        "active_contract_sha256": sha256("contracts/milestone-002.json"),
+        "active_intake_sha256": sha256("contracts/m2-intake.json"),
+        "activation_approval_sha256": sha256("records/source-gates/m2-activation-approval.json"),
+        "transfer_core_sha256": sha256("scripts/m2_transfer_core.py"),
+        "transfer_runner_sha256": sha256("scripts/acquire_m2_product.py"),
+        "tests_sha256": sha256("tests/test_m2_transfer_core.py"),
+    }
+    if any(readiness_bindings.get(key) != value for key, value in expected_transfer_bindings.items()):
+        fail("M2 transfer-runner readiness receipt has a stale artifact binding")
+    if transfer_readiness.get("test", {}).get("status") != "pass" or transfer_readiness.get("test", {}).get("test_count") != 11:
+        fail("M2 transfer-runner readiness receipt must preserve eleven passing local tests")
+    readiness_activity = transfer_readiness.get("activity", {})
+    if readiness_activity != {
+        "network_requests_performed": False,
+        "authentication_performed": False,
+        "credential_values_read_or_recorded": False,
+        "product_bytes_transferred": 0,
+        "active_intake_mutated": False,
+    }:
+        fail("M2 transfer-runner readiness must not claim network, authentication, credential, data, or intake mutation")
     if pair_plan.get("authority", {}).get("mode") != "not_granted" or pair_plan.get("authority", {}).get("authorized_actions") != [] or len(pair_plan.get("pairs", [])) != 3:
         fail("candidate pair plan must remain non-authorizing with three independent routes")
     if intake_dry_run.get("status") != "pass_static_only_no_authority":

@@ -27,6 +27,16 @@ The current checkpoint is `M2-AUTHENTICATION-REFERENCE`. No credential reference
 
 `records/acquisition/m2-intake-static-dry-run.json` proves only that the reviewed product set can be converted into those static controls. It performs no filesystem probe and makes no network request.
 
+`scripts/acquire_m2_product.py` handles one exact approved source ID per invocation. It requires `CDSE_ACCESS_TOKEN` to exist only in the process environment and stops before mutation when that reference is absent. It revalidates unchanged official access/terms page bytes and the exact live catalog identity, then writes an exclusive external started-event before payload transfer. It refuses redirects, existing staging or destination files, path escapes, reparse points, inadequate storage, unexpected HTML, and response-length drift. It streams directly to a unique `.part` path while computing SHA-256 and provider-MD5, preserves failures, and uses a same-volume hard link for atomic no-replace promotion.
+
+The runner must never be invoked with a token on its command line. Once a secure environment reference exists, the first exact attempt is:
+
+```powershell
+python scripts/acquire_m2_product.py --source-id M1-SRC-001
+```
+
+This command has not been run against CDSE. `records/acquisition/transfer-runner-readiness.json` binds the current runner and eleven passing local fixture tests; it records no authentication or product transfer.
+
 `contracts/m2-offline-verification-candidate.json` defines the read-only post-download checks for the same eight exact archives. It requires local SHA-256, provider-MD5 agreement, exact size, safe ZIP membership, CRC, exact SAFE root identity, and analysis-critical band, polarization, calibration, noise, and quality members. It does not access custody until a later explicit scan invocation.
 
 `records/readiness/m2-readiness-decision.json` preserves the historical pre-acquisition `defer`: no full products, pixel coverage, masks, or registration evidence existed. The later live source gate resolves only access-time source and rights checks; it does not alter the remaining data-readiness gates. See [M2_OFFLINE_VERIFICATION.md](M2_OFFLINE_VERIFICATION.md).

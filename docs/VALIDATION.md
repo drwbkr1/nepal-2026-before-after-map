@@ -34,6 +34,14 @@ python C:\Users\drewb\.codex\skills\run-controlled-milestone\scripts\validate_mi
 
 The live record proves only the source and custody preflight at its stated timestamp. It does not prove an authenticated transfer, current future availability, local bytes, valid product containers, usable pixels, or scientific fitness.
 
+The transfer state machine has a separate network-free suite:
+
+```powershell
+python -m unittest tests.test_m2_transfer_core -v
+```
+
+The suite verifies missing-reference refusal without intake mutation, exclusive staging, streamed hashes, mismatch retention, redirect refusal, path containment, receipt no-replacement, failed-attempt history, destination collision preservation, and atomic no-replace promotion. The passing readiness receipt is synthetic/local evidence only and does not establish real CDSE behavior or product integrity.
+
 ## Historical static intake-control validation
 
 Before activation or data transfer, the repository established that:
