@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import argparse
+import copy
+import datetime as dt
 import hashlib
 import json
 import math
@@ -12,6 +14,8 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
+ACTIVE_CONTRACT_PATH = ROOT / "contracts/m2-dem-offline-verification.json"
+ACTIVE_INTAKE_PATH = ROOT / "contracts/m2-dem-intake.json"
 
 
 def sha256_file(path: Path) -> str:
@@ -32,6 +36,17 @@ def load_json(path: Path) -> dict[str, Any]:
 def tiff_signature(path: Path) -> str:
     with path.open("rb") as handle:
         return handle.read(4).hex()
+
+
+def file_inventory(root: Path) -> list[dict[str, Any]]:
+    return [
+        {
+            "relative_path": path.relative_to(root).as_posix(),
+            "size_bytes": path.stat().st_size,
+            "sha256": sha256_file(path),
+        }
+        for path in sorted(item for item in root.rglob("*") if item.is_file())
+    ]
 
 
 def expected_extent(asset: dict[str, Any]) -> list[float]:
@@ -62,6 +77,13 @@ def evaluate_metadata(
         asset["expected_size_bytes"],
         observed.get("size_bytes"),
     )
+    if asset.get("expected_sha256") is not None:
+        check(
+            "sha256",
+            observed.get("sha256") == asset["expected_sha256"],
+            asset["expected_sha256"],
+            observed.get("sha256"),
+        )
     check(
         "tiff_signature",
         observed.get("tiff_signature") in controls["tiff_signatures"],
@@ -181,7 +203,7 @@ def inspect_with_arcpy(path: Path) -> dict[str, Any]:
 
 def validate_active_contract(contract: dict[str, Any]) -> list[str]:
     errors: list[str] = []
-    if contract.get("status") != "active":
+    if contract.get("status") != "active_gate_ready_for_geotiff_verification":
         errors.append("verification contract is not active")
     authority = contract.get("authority", {})
     if authority.get("dem_amendment_status") != "approved":
@@ -190,7 +212,64 @@ def validate_active_contract(contract: dict[str, Any]) -> list[str]:
         errors.append("DEM pixel processing is not authorized")
     if authority.get("this_contract_creates_authority") is not False:
         errors.append("verification contract must not create authority")
+    if authority.get("network_access_authorized") is not False or authority.get("custody_mutation_authorized") is not False:
+        errors.append("verification contract weakens network or custody-mutation boundaries")
+    inputs = contract.get("inputs", {})
+    if inputs.get("intake_contract_ref") != "contracts/m2-dem-intake.json":
+        errors.append("verification contract does not reference the active intake")
+    elif inputs.get("intake_contract_sha256") != sha256_file(ACTIVE_INTAKE_PATH):
+        errors.append("verification contract active-intake hash differs")
     return errors
+
+
+def promoted_asset_binding(asset: dict[str, Any], intake: dict[str, Any]) -> tuple[dict[str, Any] | None, dict[str, Any] | None, list[str]]:
+    errors: list[str] = []
+    matches = [
+        item
+        for item in intake.get("assets", [])
+        if item.get("asset_id") == asset.get("asset_id")
+        and item.get("extensions", {}).get("source_id") == asset.get("source_id")
+    ]
+    if len(matches) != 1:
+        return None, None, ["promoted intake asset identity is absent or ambiguous"]
+    intake_asset = matches[0]
+    attempts = intake_asset.get("attempts", [])
+    if intake_asset.get("state") != "promoted":
+        errors.append("intake asset is not promoted")
+    if len(attempts) != 1 or attempts[0].get("outcome") != "succeeded" or not attempts[0].get("completed_at"):
+        errors.append("intake asset does not have one terminal successful attempt")
+    receipt_ref = intake_asset.get("extensions", {}).get("successful_attempt_receipt")
+    receipt: dict[str, Any] | None = None
+    if not isinstance(receipt_ref, str) or not receipt_ref.startswith("records/acquisition/dem-attempts/"):
+        errors.append("successful transfer receipt reference is absent or unsafe")
+    else:
+        receipt_path = (ROOT / receipt_ref).resolve()
+        try:
+            receipt_path.relative_to(ROOT.resolve())
+        except ValueError:
+            errors.append("successful transfer receipt escapes the repository")
+        else:
+            if not receipt_path.is_file():
+                errors.append("successful transfer receipt is missing")
+            elif intake_asset["extensions"].get("successful_attempt_receipt_sha256") != sha256_file(receipt_path):
+                errors.append("successful transfer receipt hash differs")
+            else:
+                receipt = load_json(receipt_path)
+    if receipt is not None:
+        observed = intake_asset.get("observed", {})
+        if (
+            receipt.get("event") != "dem_transfer_succeeded"
+            or receipt.get("asset_id") != asset.get("asset_id")
+            or receipt.get("source_id") != asset.get("source_id")
+            or not attempts
+            or receipt.get("attempt_id") != attempts[0].get("attempt_id")
+            or receipt.get("local_size_bytes") != observed.get("promoted_size_bytes")
+            or receipt.get("local_sha256") != observed.get("promoted_sha256")
+            or observed.get("staged_size_bytes") != observed.get("promoted_size_bytes")
+            or observed.get("staged_sha256") != observed.get("promoted_sha256")
+        ):
+            errors.append("successful transfer receipt and promoted identity differ")
+    return intake_asset, receipt, errors
 
 
 def write_new(path: Path, value: object) -> None:
@@ -210,6 +289,8 @@ def main() -> None:
     args = parser.parse_args()
 
     contract_path = args.contract if args.contract.is_absolute() else ROOT / args.contract
+    if contract_path.resolve() != ACTIVE_CONTRACT_PATH.resolve():
+        raise SystemExit("REFUSED: only the exact active DEM verification contract may execute")
     contract = load_json(contract_path)
     errors = validate_active_contract(contract)
     if errors:
@@ -218,22 +299,60 @@ def main() -> None:
     if len(matches) != 1:
         raise SystemExit(f"REFUSED: asset identity is not unique in contract: {args.asset_id}")
     asset = matches[0]
-    raster = (args.custody_root.resolve() / asset["raster_relative_path"]).resolve()
+    intake = load_json(ACTIVE_INTAKE_PATH)
+    intake_asset, transfer_receipt, binding_errors = promoted_asset_binding(asset, intake)
+    if binding_errors or intake_asset is None or transfer_receipt is None:
+        raise SystemExit("REFUSED: " + "; ".join(binding_errors))
+    custody_root = args.custody_root.resolve(strict=True)
+    expected_custody_root = Path(contract["execution_boundary"]["custody_root_from_proposal"]).resolve(strict=True)
+    if custody_root != expected_custody_root:
+        raise SystemExit("REFUSED: custody root differs from the exact approved root")
+    raster = (custody_root / asset["raster_relative_path"]).resolve()
     try:
-        raster.relative_to(args.custody_root.resolve())
+        raster.relative_to(custody_root)
     except ValueError as exc:
         raise SystemExit("REFUSED: raster path escapes custody root") from exc
     if not raster.is_file():
         raise SystemExit(f"REFUSED: promoted DEM raster is missing: {raster}")
-
-    observed = inspect_with_arcpy(raster)
-    evaluation = evaluate_metadata(asset, observed, contract["raster_controls"])
+    if raster.as_posix().casefold() != transfer_receipt.get("destination_path", "").replace("\\", "/").casefold():
+        raise SystemExit("REFUSED: promoted raster path differs from its transfer receipt")
+    promoted_sha256 = intake_asset["observed"]["promoted_sha256"]
+    promoted_size = intake_asset["observed"]["promoted_size_bytes"]
+    before_identity = {"size_bytes": raster.stat().st_size, "sha256": sha256_file(raster)}
+    if before_identity != {"size_bytes": promoted_size, "sha256": promoted_sha256}:
+        raise SystemExit("REFUSED: promoted raster byte identity differs before ArcGIS access")
+    custody_tile_root = raster.parent
+    before_inventory = file_inventory(custody_tile_root)
+    runtime_error = None
+    try:
+        observed = inspect_with_arcpy(raster)
+    except BaseException as exc:
+        runtime_error = {"type": type(exc).__name__, "message": str(exc)}
+        observed = {"size_bytes": raster.stat().st_size, "sha256": sha256_file(raster), "tiff_signature": tiff_signature(raster)}
+    after_inventory = file_inventory(custody_tile_root)
+    custody_unchanged = before_inventory == after_inventory
+    evaluated_asset = copy.deepcopy(asset)
+    evaluated_asset["expected_sha256"] = promoted_sha256
+    evaluation = evaluate_metadata(evaluated_asset, observed, contract["raster_controls"])
+    evaluation["checks"]["custody_unchanged"] = {"status": "pass" if custody_unchanged else "fail", "expected": True, "actual": custody_unchanged}
+    if runtime_error is not None:
+        evaluation["checks"]["arcgis_runtime"] = {"status": "fail", "expected": "successful read-only inspection", "actual": runtime_error}
+    evaluation["failures"] = [name for name, result in evaluation["checks"].items() if result["status"] != "pass"]
+    evaluation["status"] = "pass_structural_only" if not evaluation["failures"] else "fail"
     receipt = {
+        "schema_version": "1.0",
+        "status": evaluation["status"],
+        "verified_at_utc": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "verification_id": contract["verification_id"],
         "asset_id": asset["asset_id"],
         "source_id": asset["source_id"],
         "contract_sha256": sha256_file(contract_path),
+        "active_intake_sha256": sha256_file(ACTIVE_INTAKE_PATH),
+        "transfer_receipt_ref": intake_asset["extensions"]["successful_attempt_receipt"],
+        "transfer_receipt_sha256": intake_asset["extensions"]["successful_attempt_receipt_sha256"],
         "raster_relative_path": asset["raster_relative_path"],
+        "custody_inventory_before": before_inventory,
+        "custody_inventory_after": after_inventory,
         "observed": observed,
         "evaluation": evaluation,
         "claim_boundary": {

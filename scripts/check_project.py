@@ -69,6 +69,7 @@ REQUIRED = [
     "records/acquisition/dem-custody-initialization.json",
     "records/acquisition/dem-transfer-runner-readiness.json",
     "records/acquisition/dem-acquisition-summary.json",
+    "records/acquisition/dem-geotiff-verifier-readiness.json",
     "records/source-gates/source-manifest-approval.json",
     "records/source-gates/source-manifest-review-reconciliation.json",
     "records/source-gates/m2-activation-approval.json",
@@ -155,6 +156,7 @@ REQUIRED = [
     "tests/test_m2_dem_preflight.py",
     "tests/test_m2_dem_transfer.py",
     "tests/test_m2_dem_acquisition_progress.py",
+    "tests/test_m2_dem_active_geotiff.py",
     "tests/test_radar_processing_contract.py",
     "tests/test_optical_processing_core.py",
     "tests/test_m2_materialization.py",
@@ -825,7 +827,12 @@ def main() -> None:
         relative = readiness_bindings.get(ref_key)
         if not isinstance(relative, str) or not (ROOT / relative).is_file():
             fail(f"DEM and radar readiness receipt is missing {ref_key}")
-        if readiness_bindings.get(hash_key) != sha256(relative):
+        expected_hash = (
+            "64315e9d1747682890a594320b27190cd009f03d45312bd1b015c883a9b479c6"
+            if ref_key == "dem_geotiff_verifier_ref"
+            else sha256(relative)
+        )
+        if readiness_bindings.get(hash_key) != expected_hash:
             fail(f"DEM and radar readiness receipt does not bind {ref_key}")
     if dem_radar_readiness.get("checks", {}).get("full_unit_suite") != {"status": "pass", "test_count": 82}:
         fail("DEM and radar readiness receipt must preserve 82 passing tests")
@@ -2181,6 +2188,20 @@ def main() -> None:
         fail("EVID-0034 DEM acquisition evidence differs")
     if dem_acquisition_evidence.get("assertions") != dem_acquisition_summary.get("assertions"):
         fail("EVID-0034 and DEM acquisition summary have different claim boundaries")
+    dem_geotiff_readiness_evidence = ledger_by_id.get("EVID-0035")
+    if not isinstance(dem_geotiff_readiness_evidence, dict):
+        fail("evidence ledger is missing EVID-0035 DEM GeoTIFF verifier readiness")
+    if (
+        dem_geotiff_readiness_evidence.get("status") != "pass_fail_closed_wrapper_no_real_raster_read"
+        or dem_geotiff_readiness_evidence.get("readiness_ref") != "records/acquisition/dem-geotiff-verifier-readiness.json"
+        or dem_geotiff_readiness_evidence.get("readiness_sha256") != sha256("records/acquisition/dem-geotiff-verifier-readiness.json")
+    ):
+        fail("EVID-0035 DEM GeoTIFF verifier readiness differs")
+    geotiff_readiness = json.loads((ROOT / "records/acquisition/dem-geotiff-verifier-readiness.json").read_text(encoding="utf-8"))
+    if geotiff_readiness.get("status") != "pass_fail_closed_wrapper_no_real_raster_read" or geotiff_readiness.get("validation") != {"focused_test_count": 12, "full_test_count": 175, "project_checker": "pass"}:
+        fail("DEM GeoTIFF verifier readiness validation differs")
+    if dem_geotiff_readiness_evidence.get("assertions") != geotiff_readiness.get("assertions"):
+        fail("EVID-0035 and DEM GeoTIFF verifier readiness have different claim boundaries")
 
     violations = []
     for relative in tracked_files():

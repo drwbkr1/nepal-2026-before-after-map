@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-GEOTIFF-VERIFIER-READINESS-001",
+  "status": "pass_fail_closed_wrapper_no_real_raster_read",
+  "verified_at_utc": "2026-09-03T21:19:32Z",
+  "bindings": {
+    "acquisition_summary_ref": "records/acquisition/dem-acquisition-summary.json",
+    "acquisition_summary_sha256": "db9b7694e40fc836020757fc2ba2879b29fff4eed3c299af9a977eeb8d494a86",
+    "active_intake_ref": "contracts/m2-dem-intake.json",
+    "active_intake_sha256": "0c41f0c6028b09140f0107f97702f346d92242a74aa67e07037027120891fc64",
+    "active_verification_ref": "contracts/m2-dem-offline-verification.json",
+    "active_verification_sha256": "6534eda0c3dc11d5bedfd3d9b0c8cbb1b1df3a0638faa7becd904e6843326dac",
+    "verifier_ref": "scripts/verify_m2_dem_geotiff.py",
+    "verifier_sha256": "b0f479de66f8d70a1ee5464d0a5519c9b54ecec74ddc33dc220e1a3dfd451f32",
+    "active_test_ref": "tests/test_m2_dem_active_geotiff.py",
+    "active_test_sha256": "d52e3244ae88db0d084ebe7bdf8be7c7a4f0401d2218f074c8b72d1253e6d651",
+    "candidate_test_ref": "tests/test_m2_dem_controls.py",
+    "candidate_test_sha256": "97a97657ade6b0d696ccd173ff31d222015ab00973cef937fbcbb3c1d53e6503"
+  },
+  "validation": {
+    "focused_test_count": 12,
+    "full_test_count": 175,
+    "project_checker": "pass"
+  },
+  "controls": [
+    "exact active contract only",
+    "exact approved custody root only",
+    "current active-intake hash",
+    "one promoted successful attempt receipt",
+    "pre-ArcGIS local SHA-256 and size match",
+    "read-only ArcGIS metadata and statistics inspection",
+    "pre/post custody inventory equality",
+    "append-only verification receipt"
+  ],
+  "assertions": {
+    "real_dem_raster_opened": false,
+    "dem_pixels_examined": false,
+    "external_custody_mutated": false,
+    "network_requests_performed": false,
+    "geotiff_fitness_established": false,
+    "valid_pixel_coverage_established": false,
+    "vertical_datum_route_established": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Run the exact published verifier against one promoted tile at a time under ArcGIS Pro 3.7.1; preserve every pass or failure receipt and stop on custody mutation or structural failure."
+}
