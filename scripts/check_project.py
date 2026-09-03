@@ -23,6 +23,7 @@ REQUIRED = [
     "docs/ARCGIS_EVIDENCE_MODEL.md",
     "docs/PIXEL_QA_PROTOCOL.md",
     "docs/OPTICAL_BASELINE_PROCESSING_PROTOCOL.md",
+    "docs/M2_SAFE_MATERIALIZATION.md",
     "docs/VALIDATION.md",
     "docs/STATUS.md",
     "docs/DECISIONS.md",
@@ -32,6 +33,7 @@ REQUIRED = [
     "contracts/milestone-002.json",
     "contracts/m2-intake.json",
     "contracts/m2-offline-verification.json",
+    "contracts/m2-materialization.json",
     "contracts/milestone-002-dem-amendment-proposal.json",
     "contracts/m2-dem-intake-candidate.json",
     "contracts/m2-dem-offline-verification-candidate.json",
@@ -93,6 +95,7 @@ REQUIRED = [
     "records/surface-receipts/m2-dem-radar-control-readiness.json",
     "records/surface-receipts/optical-processing-synthetic-arcgis.json",
     "records/surface-receipts/optical-baseline-control-readiness.json",
+    "records/surface-receipts/m2-materialization-readiness.json",
     "contracts/m2-offline-verification-candidate.json",
     "records/readiness/m2-readiness-audit-input.json",
     "records/readiness/m2-readiness-decision.json",
@@ -122,6 +125,7 @@ REQUIRED = [
     "tests/test_m2_dem_controls.py",
     "tests/test_radar_processing_contract.py",
     "tests/test_optical_processing_core.py",
+    "tests/test_m2_materialization.py",
     "scripts/activate_m2_verification.py",
     "scripts/verify_m2_product_container.py",
     "scripts/inspect_arcgis_sar_capability.py",
@@ -132,6 +136,9 @@ REQUIRED = [
     "scripts/optical_processing_core.py",
     "scripts/prepare_optical_processing_contract.py",
     "scripts/validate_optical_processing_arcgis.py",
+    "scripts/m2_materialization_core.py",
+    "scripts/prepare_m2_materialization.py",
+    "scripts/materialize_m2_product.py",
     "scripts/render_m2_dem_amendment_review.py",
     ".github/workflows/validate.yml",
 ]
@@ -207,6 +214,8 @@ def main() -> None:
     optical_processing_contract = json.loads((ROOT / "config/qa/optical-baseline-processing-contract.json").read_text(encoding="utf-8"))
     optical_arcgis_receipt = json.loads((ROOT / "records/surface-receipts/optical-processing-synthetic-arcgis.json").read_text(encoding="utf-8"))
     optical_readiness = json.loads((ROOT / "records/surface-receipts/optical-baseline-control-readiness.json").read_text(encoding="utf-8"))
+    materialization_contract = json.loads((ROOT / "contracts/m2-materialization.json").read_text(encoding="utf-8"))
+    materialization_readiness = json.loads((ROOT / "records/surface-receipts/m2-materialization-readiness.json").read_text(encoding="utf-8"))
     goal = json.loads((ROOT / "records/long-term-goal.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
@@ -566,6 +575,79 @@ def main() -> None:
         fail("optical readiness receipt test counts differ")
     if optical_readiness.get("current_route_disposition", {}).get("status") != "defer":
         fail("optical real-data route must remain deferred")
+    if materialization_contract.get("materialization_id") != "NEPAL-M2-SAFE-MATERIALIZATION-001" or materialization_contract.get("status") != "active_authorized_gate_deferred":
+        fail("M2 materialization contract identity or gate-deferred status differs")
+    materialization_inputs = materialization_contract.get("inputs", {})
+    for ref_key, hash_key in (
+        ("acquisition_plan_ref", "acquisition_plan_sha256"),
+        ("activation_approval_ref", "activation_approval_sha256"),
+        ("active_verification_ref", "active_verification_sha256"),
+        ("materialization_core_ref", "materialization_core_sha256"),
+        ("runner_ref", "runner_sha256"),
+    ):
+        relative = materialization_inputs.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"M2 materialization contract is missing {ref_key}")
+        if materialization_inputs.get(hash_key) != sha256(relative):
+            fail(f"M2 materialization contract does not bind {ref_key}")
+    materialization_authority = materialization_contract.get("authority", {})
+    if materialization_authority.get("mode") != "inherited" or materialization_authority.get("authority_ref") != "records/source-gates/m2-activation-approval.json":
+        fail("M2 materialization does not inherit the exact active authority")
+    if materialization_authority.get("this_contract_creates_authority") is not False or materialization_authority.get("dem_products_authorized") is not False or materialization_authority.get("network_access_authorized") is not False:
+        fail("M2 materialization broadens authority")
+    materialization_boundary = materialization_contract.get("execution_boundary", {})
+    if materialization_boundary.get("external_data_root") != r"C:\Projects\Active\nepal-2026-before-after-map-data" or materialization_boundary.get("materialization_root") != r"C:\Projects\Active\nepal-2026-before-after-map-data\materialized":
+        fail("M2 materialization external boundary differs")
+    if materialization_boundary.get("network_requests") != "prohibited" or materialization_boundary.get("authentication") != "prohibited" or materialization_boundary.get("source_archive_mutation") != "prohibited":
+        fail("M2 materialization must remain offline and read-only with respect to source archives")
+    materialization_assets = materialization_contract.get("assets", [])
+    expected_materialization_sources = {item["source_id"] for item in acquisition_plan["records"]}
+    if len(materialization_assets) != 8 or {item.get("source_id") for item in materialization_assets} != expected_materialization_sources:
+        fail("M2 materialization source set differs from the exact approved eight")
+    verification_by_source = {item["source_id"]: item for item in active_offline_verification["assets"]}
+    for item in materialization_assets:
+        source = verification_by_source.get(item["source_id"])
+        if not source or item.get("exact_product_id") != source.get("exact_product_id") or item.get("archive_relative_path") != source.get("archive_relative_path"):
+            fail(f"M2 materialization asset differs from active verification for {item.get('source_id')}")
+    if any(materialization_contract.get("claim_boundary", {}).get(key) is not False for key in (
+        "raster_readability_established",
+        "pixel_usability_established",
+        "baseline_established",
+        "change_established",
+        "scientific_admission_authorized",
+    )):
+        fail("M2 materialization contract invents downstream evidence")
+    if materialization_readiness.get("status") != "pass_synthetic_only_real_materialization_deferred":
+        fail("M2 materialization readiness status differs")
+    materialization_bindings = materialization_readiness.get("bindings", {})
+    for ref_key, hash_key in (
+        ("contract_ref", "contract_sha256"),
+        ("core_ref", "core_sha256"),
+        ("generator_ref", "generator_sha256"),
+        ("runner_ref", "runner_sha256"),
+        ("test_ref", "test_sha256"),
+        ("protocol_ref", "protocol_sha256"),
+        ("active_m2_ref", "active_m2_sha256_at_validation"),
+        ("activation_approval_ref", "activation_approval_sha256"),
+        ("acquisition_plan_ref", "acquisition_plan_sha256"),
+    ):
+        relative = materialization_bindings.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"M2 materialization readiness is missing {ref_key}")
+        if materialization_bindings.get(hash_key) != sha256(relative):
+            fail(f"M2 materialization readiness does not bind {ref_key}")
+    materialization_validation = materialization_readiness.get("validation", {})
+    if materialization_validation.get("targeted_test_count") != 14 or materialization_validation.get("full_repository_test_count") != 111:
+        fail("M2 materialization readiness test counts differ")
+    if materialization_readiness.get("current_disposition", {}).get("status") != "defer":
+        fail("real M2 materialization must remain deferred at this checkpoint")
+    if materialization_readiness.get("external_state") != {
+        "custody_file_count": 0,
+        "materialization_root_exists": False,
+        "real_archive_bytes_read": 0,
+        "real_archives_materialized": 0,
+    }:
+        fail("M2 materialization readiness historical external-state boundary differs")
     if aoi_reconciliation["contract_sha256"] != sha256("reviews/m1-aoi/review-contract.json"):
         fail("AOI reconciliation does not bind the exact historical review contract")
     if approval["status"] != "approved" or approval["reviewed_aoi_sha256"] != sha256("config/aoi/draft-study-areas.geojson"):
@@ -1181,6 +1263,44 @@ def main() -> None:
         fail("EVID-0024 real optical route must remain deferred")
     if optical_evidence.get("assertions") != optical_readiness.get("assertions"):
         fail("EVID-0024 and optical readiness receipt have different claim boundaries")
+    materialization_evidence = ledger_by_id.get("EVID-0025")
+    if not isinstance(materialization_evidence, dict):
+        fail("evidence ledger is missing EVID-0025 materialization preparation evidence")
+    for ref_key, hash_key in (
+        ("readiness_receipt_ref", "readiness_receipt_sha256"),
+        ("contract_ref", "contract_sha256"),
+        ("core_ref", "core_sha256"),
+        ("generator_ref", "generator_sha256"),
+        ("runner_ref", "runner_sha256"),
+        ("test_ref", "test_sha256"),
+        ("protocol_ref", "protocol_sha256"),
+    ):
+        relative = materialization_evidence.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"EVID-0025 is missing {ref_key}")
+        if materialization_evidence.get(hash_key) != sha256(relative):
+            fail(f"EVID-0025 does not bind {ref_key}")
+    if materialization_evidence.get("status") != "pass_synthetic_only_real_materialization_deferred":
+        fail("EVID-0025 must preserve its synthetic-only deferred status")
+    if materialization_evidence.get("current_disposition", {}).get("status") != "defer":
+        fail("EVID-0025 real materialization route must remain deferred")
+    evidence_assertions = materialization_evidence.get("assertions", {})
+    readiness_assertions = materialization_readiness.get("assertions", {})
+    for key in (
+        "synthetic_materialization_passed",
+        "external_materialization_directory_created",
+        "real_archive_read",
+        "real_safe_materialized",
+        "raster_readability_established",
+        "pixel_usability_established",
+        "baseline_established",
+        "change_established",
+        "scientific_admission_authorized",
+    ):
+        if evidence_assertions.get(key) != readiness_assertions.get(key):
+            fail(f"EVID-0025 and materialization readiness differ for {key}")
+    if evidence_assertions.get("authority_created") is not False:
+        fail("EVID-0025 must not create authority")
 
     violations = []
     for relative in tracked_files():

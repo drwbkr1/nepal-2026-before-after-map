@@ -46,6 +46,8 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Prepared optical controls:** The exact RUM pair has fixed Level-2A metadata parsing, BOA reflectance scaling, conservative SCL masking, 20 m EPSG:32645 alignment, index formulas, and cross-platform safeguards. Portable tests and ArcGIS synthetic processing pass, while the real high-cloud-risk route remains deferred until acquired pixels prove coverage and registration.
 
+**Prepared materialization controls:** Each exact promoted archive must first pass the offline container gate, after which a collision-safe runner can create one append-only external SAFE attempt with a per-file SHA-256 manifest. Unsafe Windows paths, ambiguous paths, links, collisions, and archive drift fail closed. Synthetic tests pass; no real archive has been extracted.
+
 **Work:**
 
 - download approved products into non-Git custody;

@@ -18,6 +18,8 @@ ArcGIS Pro terrain correction has a separate pending dependency gate. `contracts
 
 `config/qa/optical-baseline-processing-contract.json` is the predeclared Sentinel-2 route. Do not replace metadata-derived BOA offsets with an unchecked divide-by-10,000 rule, clamp valid reflectance values, change the conservative SCL classes, harmonize over event pixels, or tune cloud masks to recover a stronger result. Preserve an inconclusive optical route.
 
+`contracts/m2-materialization.json` is the active but gate-deferred SAFE extraction control for the same eight products. It may run only after an exact promoted intake identity and matching `pass_container_only` receipt. Keep every complete, partial, and failed attempt outside Git; never reuse an attempt path or treat materialization as raster or pixel fitness.
+
 ## Source and custody rules
 
 - Treat catalog results as availability evidence, not proof of usable pixels, valid coverage, or event causation.

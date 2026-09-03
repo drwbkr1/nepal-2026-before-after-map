@@ -62,6 +62,12 @@ The exact Sentinel-2C-before and Sentinel-2B-after RUM route now has a determini
 
 The real optical route remains **DEFER**. Neither archive is in verified custody; AOI coverage, masks, registration, and cross-platform bias are unmeasured; and the post-event catalog cloud estimate is 78.471315 percent. An inconclusive optical route must be retained rather than tuned or silently replaced.
 
+## Prepared SAFE materialization controls
+
+The exact eight-product route now has an offline, gate-deferred materialization contract and runner. A product must be promoted in the active intake and have one matching `pass_container_only` container receipt before the runner reads custody. The archive is re-hashed, its full member namespace is revalidated for Windows and cross-platform safety, and every extracted file is recorded in an external SHA-256 manifest under one exclusive append-only attempt.
+
+Fourteen synthetic tests pass, including traversal, ambiguous components, backslash, Windows reserved-name and alternate-data-stream, case-collision, file/directory-collision, symbolic-link, attempt-collision, receipt-collision, and production pre-custody refusal checks. No external materialization directory exists, no real archive was read, and no raster or pixel claim was created.
+
 ## Authorized but not completed
 
 - authenticate through an existing owner-controlled CDSE credential or session reference;

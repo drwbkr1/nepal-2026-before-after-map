@@ -106,6 +106,15 @@ ArcGIS Pro 3.7.1 Advanced and Spatial Analyst have also exercised the same core 
 
 The Sentinel-2 processing contract also has a separate portable core and ArcGIS-native synthetic exercise. The adapter parses baseline 05.12 scaling metadata, preserves DN zero as NoData, applies the declared SCL exclusions, scales five bands to BOA reflectance, and checks NDVI, MNDWI, and NBR. Run the portable checks with `python -m unittest tests.test_optical_processing_core -v`; run the ArcGIS adapter using the new-attempt command in `docs/OPTICAL_BASELINE_PROCESSING_PROTOCOL.md`. Neither result is real-pixel evidence.
 
+The SAFE materialization control has a separate portable suite:
+
+```powershell
+python -m unittest tests.test_m2_materialization -v
+python scripts/prepare_m2_materialization.py --created-at-utc 2026-09-03T18:55:04Z --verify-only
+```
+
+It checks exact-product derivation, executable bindings, synthetic per-file extraction hashes, cross-platform and Windows path hazards, collision refusal, and the production wrapper's stop before custody access when a product is not promoted. The tests do not establish that any real archive has been extracted or that any raster is readable or usable.
+
 ## Source validation
 
 For each external product:

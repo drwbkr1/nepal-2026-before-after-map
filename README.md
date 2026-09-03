@@ -54,6 +54,8 @@ A one-product transfer runner is prepared but has not contacted the authenticate
 
 The offline verification contract is also active for the exact eight products. Its per-product wrapper requires a promoted intake record and matching successful-transfer receipt, reads the archive without extraction, and checks catalog size, local SHA-256, provider MD5, ZIP safety and CRC, exact SAFE root, and the required radar or optical members. Five active-wrapper tests pass; no real archive has been read.
 
+The next offline transition is also prepared. A gate-deferred materialization runner requires the exact promoted intake and passing container receipt, rechecks archive identity and the complete ZIP namespace, and writes one immutable external SAFE attempt plus a per-file hash manifest. Fourteen synthetic tests cover Windows-safe paths, collision refusal, retained attempts, and pre-custody refusal. It has not created a materialization directory or read a real archive.
+
 A deterministic offline verification packet now defines exact archive, checksum, ZIP-safety, SAFE-structure, band, polarization, and post-container pixel-readiness checks for the same eight products. Its independent dataset-readiness result is **DEFER** because no product bytes, access-time rights evidence, AOI pixel coverage, masks, or registration results exist. The packet made no external-custody access or network request.
 
 A metadata-only ArcGIS evidence workspace has also been built and validated in ArcGIS Pro 3.7.1 Advanced. Its EPSG:32645 File Geodatabase contains nine datasets, fourteen coded-value domains, eight relationship classes, three approved AOIs, and ten source-product metadata rows. The observation, interpretation, attribution, exclusion, stable-control, and QA structures are empty by design. The retained APRX, geodatabase, and PDF remain outside Git; the repository contains the schema, builder, validator, receipt, and a reviewed PNG preview.
@@ -77,6 +79,7 @@ See:
 - [M2 controlled-acquisition review](docs/M2_CONTROLLED_ACQUISITION_REVIEW.md)
 - [M2 controlled-intake execution runbook](docs/M2_EXECUTION_RUNBOOK.md)
 - [M2 offline product verification](docs/M2_OFFLINE_VERIFICATION.md)
+- [M2 controlled SAFE materialization](docs/M2_SAFE_MATERIALIZATION.md)
 - [M2 DEM dependency amendment review](docs/M2_DEM_AMENDMENT_REVIEW.md)
 - [M2 DEM intake and offline verification](docs/M2_DEM_OFFLINE_VERIFICATION.md)
 - [ArcGIS Sentinel-1 baseline processing protocol](docs/RADAR_BASELINE_PROCESSING_PROTOCOL.md)

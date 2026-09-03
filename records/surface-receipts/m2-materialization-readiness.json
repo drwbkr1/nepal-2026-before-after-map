@@ -1,0 +1,72 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-SAFE-MATERIALIZATION-READINESS-001",
+  "verified_at_utc": "2026-09-03T18:59:26Z",
+  "status": "pass_synthetic_only_real_materialization_deferred",
+  "bindings": {
+    "contract_ref": "contracts/m2-materialization.json",
+    "contract_sha256": "9ba8154a36fff562decede04de660e731ce2401f893cecbd90c2d8563ce43d7b",
+    "core_ref": "scripts/m2_materialization_core.py",
+    "core_sha256": "387a6984b7d30ea709c9c55befdafd2920d802b19cb90a964069ddfa46922778",
+    "generator_ref": "scripts/prepare_m2_materialization.py",
+    "generator_sha256": "73272a4009baadc747a2c0f1925b17b8b7118c6b58909d0bf050580e7e3bce3b",
+    "runner_ref": "scripts/materialize_m2_product.py",
+    "runner_sha256": "e14718eaa9e5d3d3caa52b59b3e259f6928fad3e9bed9924cf04c49796c6f09b",
+    "test_ref": "tests/test_m2_materialization.py",
+    "test_sha256": "be2287d52730aeaeed2bb7b670e9596f229e0cf1aa3afd80ba72c1a6e37a267f",
+    "protocol_ref": "docs/M2_SAFE_MATERIALIZATION.md",
+    "protocol_sha256": "5974621c19bac5452a17e11c6026c38ec2a1728fa0a861f36f55edea7233d50e",
+    "active_m2_ref": "contracts/milestone-002.json",
+    "active_m2_sha256_at_validation": "188af4575401473bb464dff84b83a90a41751b176c6a5e63a76f62acbe4e6bfb",
+    "activation_approval_ref": "records/source-gates/m2-activation-approval.json",
+    "activation_approval_sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
+    "acquisition_plan_ref": "records/acquisition-plan.json",
+    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d"
+  },
+  "validation": {
+    "targeted_test_count": 14,
+    "targeted_test_status": "pass",
+    "full_repository_test_count": 111,
+    "full_repository_test_status": "pass",
+    "deterministic_contract_derivation": "pass",
+    "production_wrapper_current_disposition": "stopped_asset_not_promoted_before_custody_read",
+    "synthetic_complete_manifest_file_hashes": "pass",
+    "path_hazard_and_collision_checks": "pass"
+  },
+  "retained_prepublication_fixture_failures": [
+    {
+      "attempt_count": 2,
+      "status": "fail_fixture",
+      "reason": "The initial backslash-path fixtures were normalized by Python ZipInfo on Windows before reaching the validator.",
+      "remediation": "The final fixture patches the raw local and central ZIP filename bytes and now proves rejection of a preserved backslash member.",
+      "production_data_used": false
+    }
+  ],
+  "external_state": {
+    "custody_file_count": 0,
+    "materialization_root_exists": false,
+    "real_archive_bytes_read": 0,
+    "real_archives_materialized": 0
+  },
+  "current_disposition": {
+    "status": "defer",
+    "checkpoint": "M2-AUTHENTICATION-REFERENCE",
+    "reason": "No approved Sentinel product has been transferred, promoted, or given a passing container receipt."
+  },
+  "assertions": {
+    "synthetic_materialization_passed": true,
+    "exact_eight_product_boundary_preserved": true,
+    "dem_authority_created": false,
+    "network_request_performed": false,
+    "authentication_performed": false,
+    "external_materialization_directory_created": false,
+    "real_archive_read": false,
+    "real_safe_materialized": false,
+    "raster_readability_established": false,
+    "pixel_usability_established": false,
+    "baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  },
+  "next_action": "After one exact product is promoted and its matching container receipt passes, invoke a new materialization attempt and retain either its complete per-file manifest or its failed partial state."
+}

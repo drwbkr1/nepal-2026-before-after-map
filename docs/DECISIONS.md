@@ -113,3 +113,9 @@
 **Decision:** Fix the exact RUM pair, metadata-derived BOA scaling, DN-zero treatment, conservative SCL mask, 20 m EPSG:32645 grid, contextual indices, and cross-platform comparison controls before reading product pixels.
 **Reason:** Processing baseline 05.12 requires band-specific offsets and metadata verification, while a high-cloud post-event scene and an S2C-to-S2B comparison could otherwise invite hidden mask, scaling, or harmonization changes.
 **Status:** Fifteen portable tests and one ArcGIS Pro 3.7.1 synthetic run pass. Five scaled bands and NDVI, MNDWI, and NBR matched declared values with DN-zero and SCL exclusions preserved. Missing and duplicate offset controls are covered. Real metadata, pixels, AOI coverage, registration, optical change, and scientific admission remain unestablished.
+
+## D-020 — Append-only SAFE materialization after container verification
+
+**Decision:** Permit offline materialization of only the eight exact M2 products after one promoted intake identity and its matching `pass_container_only` receipt, using an exclusive external attempt and a SHA-256 manifest for every extracted file.
+**Reason:** ArcGIS needs ordinary SAFE files, but generic ZIP extraction can introduce traversal, Windows path aliasing, overwrite, symlink, archive-drift, and incomplete-attempt ambiguity after a container check.
+**Status:** The gate-deferred contract, portable core, and production wrapper are implemented with fourteen passing synthetic tests. The production wrapper currently stops on `asset_not_promoted`; no real archive, external materialization path, raster, or scientific evidence was accessed or created.

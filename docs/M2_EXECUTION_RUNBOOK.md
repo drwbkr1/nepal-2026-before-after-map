@@ -47,6 +47,8 @@ The wrapper refuses unpromoted assets, missing or ambiguous successful-attempt e
 
 `contracts/m2-offline-verification-candidate.json` defines the read-only post-download checks for the same eight exact archives. It requires local SHA-256, provider-MD5 agreement, exact size, safe ZIP membership, CRC, exact SAFE root identity, and analysis-critical band, polarization, calibration, noise, and quality members. It does not access custody until a later explicit scan invocation.
 
+`contracts/m2-materialization.json` defines the next offline step. `scripts/materialize_m2_product.py` refuses any asset without one exact promoted intake attempt and its matching `pass_container_only` receipt. It re-hashes the archive, rejects unsafe Windows and cross-platform member paths, and extracts into a new append-only external attempt while hashing every file. Partial or failed attempts remain visible. See [M2_SAFE_MATERIALIZATION.md](M2_SAFE_MATERIALIZATION.md). No real archive has reached this gate.
+
 `records/readiness/m2-readiness-decision.json` preserves the historical pre-acquisition `defer`: no full products, pixel coverage, masks, or registration evidence existed. The later live source gate resolves only access-time source and rights checks; it does not alter the remaining data-readiness gates. See [M2_OFFLINE_VERIFICATION.md](M2_OFFLINE_VERIFICATION.md).
 
 Regenerate or verify these bytes with:
@@ -72,6 +74,7 @@ python scripts/check_project.py
 10. Promote with a same-filesystem no-replace operation. Stop if the destination exists or the platform cannot guarantee non-replacement. Re-hash the promoted file and require equality with staged bytes.
 11. Preserve failed, partial, corrupt, superseded, and inconclusive attempts. Never rewrite them into passing history.
 12. Only `pass_container_only` products can advance to raster readability, pixel-level AOI coverage, rights confirmation, baseline creation, EPSG:32645 registration, and optical/radar QA. The container result itself is not a usable-pixel decision.
+13. Materialize one passing archive into a new append-only external SAFE attempt. Require the complete marker and externally bound per-file manifest before ArcGIS raster access; retain any partial or failed attempt.
 
 ## Scientific boundary
 
