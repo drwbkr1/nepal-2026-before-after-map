@@ -72,7 +72,9 @@ Fourteen synthetic tests pass, including traversal, ambiguous components, backsl
 
 The exact materialized RUM pair now has a separate gate before pixel processing. It requires two passing materialization receipts, revalidates each external manifest and complete marker, re-hashes the ten selected SAFE members, parses the Level-2A baseline and scaling fields, and uses ArcGIS to inspect native JP2 headers. A pass is limited to header readability and can advance only to pixel, mask, coverage, and registration QA.
 
-Twelve portable tests and a final ArcGIS Pro 3.7.1 Advanced run pass. ArcGIS opened sixteen synthetic JP2 rasters with matching EPSG:32645 10 m and 20 m grids; a deliberate 10 m shift of the complete after grid blocked with fourteen extent mismatches. Two failed direct `CopyRaster` JP2-generation attempts and five superseded prepublication passing receipts remain recorded. No real materialization receipt, SAFE metadata, raster header, or pixel was accessed.
+The first published input-readiness checkpoint was superseded after official Sentinel-2 documentation showed that PB 05.12 `MSK_CLASSI_B00.jp2` is a three-band 60 m Boolean mask, not the one-band 20 m mask used in that fixture. The correction preserves the published attempt and does not claim anything about real product bytes.
+
+Twelve portable tests and the corrected ArcGIS Pro 3.7.1 Advanced run pass. ArcGIS opens sixteen synthetic JP2 rasters with matching EPSG:32645 10 m and 20 m scientific grids plus a three-band 60 m classification-quality grid; a deliberate 10 m shift of the complete after grid blocks with sixteen extent mismatches. Two failed direct `CopyRaster` JP2-generation attempts, five superseded prepublication passes, and the superseded published pass remain recorded. No real materialization receipt, SAFE metadata, raster header, or pixel was accessed.
 
 ## Authorized but not completed
 

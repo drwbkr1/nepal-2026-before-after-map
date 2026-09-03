@@ -125,3 +125,9 @@
 **Decision:** Require the exact materialized Sentinel-2 pair to pass member identity, Level-2A metadata, native JPEG2000 readability, EPSG:32645, resolution, extent, and cross-date header checks before any pixel, mask, or change processing.
 **Reason:** A complete SAFE extraction does not prove that ArcGIS can open its rasters, that the selected granule and bands are unique, or that before/after grids are comparable. Keeping header readiness separate prevents a structural pass from becoming a pixel or scientific claim.
 **Status:** Twelve portable tests and an ArcGIS Pro 3.7.1 synthetic run pass; a deliberate full-grid shift blocks. Two direct ArcGIS JP2-write failures and five superseded prepublication passing receipts remain recorded. The production runner still stops before ArcPy because no real materialization receipts exist.
+
+## D-022 — Correct the PB 05.12 classification-quality mask model
+
+**Decision:** Model `MSK_CLASSI_B00.jp2` as its specified three-band 60 m Boolean mask, with opaque cloud, cirrus, and snow/ice bands kept distinct from the single-band 20 m SCL layer.
+**Reason:** Official Sentinel-2 documentation contradicted the first published fixture's one-band 20 m assumption. Keeping that assumption would cause the header gate to reject a structurally valid PB 05.12 product before pixel QA.
+**Status:** The `df3e93a` checkpoint and its ArcGIS attempt are retained as superseded evidence. The corrected contract and twelve portable tests pass, and ArcGIS Pro 3.7.1 opens the three-band 60 m mask by reading its `Band_1` through `Band_3` child descriptions. The deliberate full-grid shift blocks with sixteen extent mismatches. No real SAFE was read.

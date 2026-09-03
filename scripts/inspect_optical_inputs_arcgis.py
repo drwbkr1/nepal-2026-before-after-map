@@ -50,20 +50,38 @@ def repository_receipt_path(value: str, *, output: bool = False) -> tuple[str, P
 def describe_raster(arcpy: Any, path: Path) -> dict[str, Any]:
     description = arcpy.Describe(str(path))
     extent = description.extent
-    return {
+    children = sorted(
+        list(getattr(description, "children", []) or []),
+        key=lambda item: str(getattr(item, "name", "")),
+    )
+    header_source = children[0] if children else description
+    result = {
         "format": getattr(description, "format", None),
         "wkid": getattr(description.spatialReference, "factoryCode", None),
         "band_count": getattr(description, "bandCount", None),
-        "width": getattr(description, "width", None),
-        "height": getattr(description, "height", None),
-        "cell_width": getattr(description, "meanCellWidth", None),
-        "cell_height": getattr(description, "meanCellHeight", None),
-        "pixel_type": getattr(description, "pixelType", None),
+        "width": getattr(header_source, "width", None),
+        "height": getattr(header_source, "height", None),
+        "cell_width": getattr(header_source, "meanCellWidth", None),
+        "cell_height": getattr(header_source, "meanCellHeight", None),
+        "pixel_type": getattr(header_source, "pixelType", None),
         "xmin": extent.XMin,
         "ymin": extent.YMin,
         "xmax": extent.XMax,
         "ymax": extent.YMax,
     }
+    if children:
+        result["band_details"] = [
+            {
+                "name": getattr(child, "name", None),
+                "width": getattr(child, "width", None),
+                "height": getattr(child, "height", None),
+                "cell_width": getattr(child, "meanCellWidth", None),
+                "cell_height": getattr(child, "meanCellHeight", None),
+                "pixel_type": getattr(child, "pixelType", None),
+            }
+            for child in children
+        ]
+    return result
 
 
 def inspect_one(

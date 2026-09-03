@@ -120,10 +120,10 @@ The optical input-readiness gate has portable and ArcGIS-native validation:
 
 ```powershell
 python -m unittest tests.test_optical_input_readiness -v
-python scripts/prepare_optical_input_readiness_contract.py --created-at-utc 2026-09-03T19:10:40Z --verify-only
+python scripts/prepare_optical_input_readiness_contract.py --created-at-utc 2026-09-03T19:37:30Z --verify-only
 ```
 
-The tracked ArcGIS receipt binds the final synthetic adapter run. ArcGIS Pro 3.7.1 opens sixteen JP2 rasters, records each format, CRS, band count, dimension, cell size, pixel type, and extent, and blocks a deliberately shifted after grid. The production runner stops before importing ArcPy when either exact materialization receipt is absent. This is header-readiness evidence only and does not establish real pixel access or usability.
+The tracked ArcGIS receipt binds the corrected synthetic adapter run. ArcGIS Pro 3.7.1 opens sixteen JP2 rasters, records each format, CRS, band count, dimension, cell size, pixel type, and extent, and reads the three-band 60 m `MSK_CLASSI_B00.jp2` header from its `Band_1` through `Band_3` child descriptions. It blocks a deliberately shifted after grid with sixteen extent mismatches. The production runner stops before importing ArcPy when either exact materialization receipt is absent. This is header-readiness evidence only and does not establish real pixel access or usability. The earlier published one-band 20 m fixture and the first corrected ArcGIS attempt remain preserved as superseded and failed evidence.
 
 ## Source validation
 

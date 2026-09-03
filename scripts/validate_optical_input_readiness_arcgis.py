@@ -49,9 +49,18 @@ def metadata_xml() -> str:
 </Level2A_User_Product>"""
 
 
-def create_jp2(path: Path, *, width: int, height: int, cell: float, pixel_type: int, value: int) -> None:
+def create_jp2(
+    path: Path,
+    *,
+    width: int,
+    height: int,
+    cell: float,
+    pixel_type: int,
+    value: int,
+    band_count: int = 1,
+) -> None:
     temporary = path.with_suffix(".source.tif")
-    dataset = gdal.GetDriverByName("GTiff").Create(str(temporary), width, height, 1, pixel_type)
+    dataset = gdal.GetDriverByName("GTiff").Create(str(temporary), width, height, band_count, pixel_type)
     if dataset is None:
         raise RuntimeError("GDAL could not create the synthetic GeoTIFF")
     dataset.SetGeoTransform((273300.0, cell, 0.0, 3070380.0, 0.0, -cell))
@@ -59,7 +68,10 @@ def create_jp2(path: Path, *, width: int, height: int, cell: float, pixel_type: 
     spatial_reference.ImportFromEPSG(32645)
     dataset.SetProjection(spatial_reference.ExportToWkt())
     dtype = np.uint8 if pixel_type == gdal.GDT_Byte else np.uint16
-    dataset.GetRasterBand(1).WriteArray(np.full((height, width), value, dtype=dtype))
+    for band_index in range(1, band_count + 1):
+        dataset.GetRasterBand(band_index).WriteArray(
+            np.full((height, width), value if band_index == 1 else 0, dtype=dtype)
+        )
     dataset = None
     source = gdal.Open(str(temporary))
     target = gdal.GetDriverByName("JP2OpenJPEG").CreateCopy(str(path), source, strict=1, options=["REVERSIBLE=YES"])
@@ -72,20 +84,38 @@ def create_jp2(path: Path, *, width: int, height: int, cell: float, pixel_type: 
 def describe(path: Path) -> dict[str, Any]:
     item = arcpy.Describe(str(path))
     extent = item.extent
-    return {
+    children = sorted(
+        list(getattr(item, "children", []) or []),
+        key=lambda child: str(getattr(child, "name", "")),
+    )
+    header_source = children[0] if children else item
+    result = {
         "format": getattr(item, "format", None),
         "wkid": getattr(item.spatialReference, "factoryCode", None),
         "band_count": getattr(item, "bandCount", None),
-        "width": getattr(item, "width", None),
-        "height": getattr(item, "height", None),
-        "cell_width": getattr(item, "meanCellWidth", None),
-        "cell_height": getattr(item, "meanCellHeight", None),
-        "pixel_type": getattr(item, "pixelType", None),
+        "width": getattr(header_source, "width", None),
+        "height": getattr(header_source, "height", None),
+        "cell_width": getattr(header_source, "meanCellWidth", None),
+        "cell_height": getattr(header_source, "meanCellHeight", None),
+        "pixel_type": getattr(header_source, "pixelType", None),
         "xmin": extent.XMin,
         "ymin": extent.YMin,
         "xmax": extent.XMax,
         "ymax": extent.YMax,
     }
+    if children:
+        result["band_details"] = [
+            {
+                "name": getattr(child, "name", None),
+                "width": getattr(child, "width", None),
+                "height": getattr(child, "height", None),
+                "cell_width": getattr(child, "meanCellWidth", None),
+                "cell_height": getattr(child, "meanCellHeight", None),
+                "pixel_type": getattr(child, "pixelType", None),
+            }
+            for child in children
+        ]
+    return result
 
 
 def create_safe(root: Path, product_id: str) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
@@ -107,11 +137,19 @@ def create_safe(root: Path, product_id: str) -> tuple[dict[str, Any], dict[str, 
     files["metadata_product"].write_text(metadata_xml(), encoding="utf-8")
     files["metadata_tile"].write_text("<Synthetic_Tile_Metadata/>", encoding="utf-8")
     for role in ("B02", "B03", "B04", "B08"):
-        create_jp2(files[role], width=16, height=16, cell=10.0, pixel_type=gdal.GDT_UInt16, value=3000)
+        create_jp2(files[role], width=12, height=12, cell=10.0, pixel_type=gdal.GDT_UInt16, value=3000)
     for role in ("B11", "B12"):
-        create_jp2(files[role], width=8, height=8, cell=20.0, pixel_type=gdal.GDT_UInt16, value=2000)
-    for role in ("SCL", "quality_classification"):
-        create_jp2(files[role], width=8, height=8, cell=20.0, pixel_type=gdal.GDT_Byte, value=4)
+        create_jp2(files[role], width=6, height=6, cell=20.0, pixel_type=gdal.GDT_UInt16, value=2000)
+    create_jp2(files["SCL"], width=6, height=6, cell=20.0, pixel_type=gdal.GDT_Byte, value=4)
+    create_jp2(
+        files["quality_classification"],
+        width=2,
+        height=2,
+        cell=60.0,
+        pixel_type=gdal.GDT_Byte,
+        value=1,
+        band_count=3,
+    )
     manifest_files = []
     for path in sorted((item for item in safe.rglob("*") if item.is_file() and not item.name.endswith(".source.tif"))):
         manifest_files.append(
@@ -164,7 +202,7 @@ def main() -> None:
         grid_errors,
     )
     shifted = json.loads(json.dumps(after_descriptions))
-    for role in ("B02", "B03", "B04", "B08", "B11", "B12", "SCL"):
+    for role in RASTER_ROLES:
         shifted[role]["xmin"] += 10.0
         shifted[role]["xmax"] += 10.0
     shifted_errors = validate_pair_grids(before_descriptions, shifted, contract)
@@ -197,8 +235,11 @@ def main() -> None:
             "after_inventory_status": after_inventory["status"],
             "jp2_raster_count": len(RASTER_ROLES) * 2,
             "wkid": 32645,
-            "ten_metre_dimensions": [16, 16],
-            "twenty_metre_dimensions": [8, 8],
+            "ten_metre_dimensions": [12, 12],
+            "twenty_metre_dimensions": [6, 6],
+            "quality_classification_dimensions": [2, 2],
+            "quality_classification_band_count": 3,
+            "quality_classification_cell_size_m": 60.0,
             "metadata_checks": {
                 role: {
                     "processing_baseline": value["processing_baseline"],
@@ -230,6 +271,12 @@ def main() -> None:
                 "method": "ArcGIS CopyRaster to JP2 with U8",
                 "error": "No raster store is configurated.",
             },
+            {
+                "attempt": "scratch/optical-input-readiness-arcgis-007",
+                "status": "fail",
+                "method": "ArcGIS dataset-level Describe for a three-band JP2",
+                "error": "ArcGIS exposed width, height, cell size, and pixel type only on the Band_1 through Band_3 child descriptions.",
+            },
         ],
         "retained_prepublication_attempts": [
             {
@@ -260,6 +307,15 @@ def main() -> None:
                 "attempt": "scratch/optical-input-readiness-arcgis-005",
                 "status": "superseded_before_publication",
                 "reason": "The production receipt activity fields were made explicit about attempted versus complete ArcGIS header opening before the final contract was frozen.",
+                "real_product_data_used": False,
+            },
+        ],
+        "retained_published_attempts": [
+            {
+                "attempt": "scratch/optical-input-readiness-arcgis-006",
+                "published_commit": "df3e93aadef064129c928463cc1f5eec562e3950",
+                "status": "superseded_after_publication",
+                "reason": "Official Sentinel-2 documentation confirms that PB 05.12 MSK_CLASSI_B00.jp2 is a three-band 60 m Boolean mask; the published fixture incorrectly modeled it as one-band 20 m.",
                 "real_product_data_used": False,
             },
         ],

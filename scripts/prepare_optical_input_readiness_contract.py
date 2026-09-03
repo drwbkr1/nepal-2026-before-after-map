@@ -92,7 +92,7 @@ def build_contract(created_at_utc: str) -> dict[str, Any]:
         },
         "header_checks": {
             "format": "JP2",
-            "band_count": 1,
+            "single_band_roles": sorted({"B02", "B03", "B04", "B08", "B11", "B12", "SCL"}),
             "reflectance_pixel_types": ["U12", "U16"],
             "scl_pixel_types": ["U8", "U16"],
             "ten_metre_roles": ["B02", "B03", "B04", "B08"],
@@ -102,6 +102,17 @@ def build_contract(created_at_utc: str) -> dict[str, Any]:
             "extent_must_equal_dimensions_times_cell_size": True,
             "same_extent_within_product_required": True,
             "same_role_grid_across_pair_required": True,
+            "quality_classification": {
+                "product_member": "MSK_CLASSI_B00.jp2",
+                "band_count": 3,
+                "cell_size_m": 60.0,
+                "pixel_types": ["U1", "U8"],
+                "band_semantics": {
+                    "1": "opaque_cloud",
+                    "2": "cirrus_cloud",
+                    "3": "snow_or_ice",
+                },
+            },
         },
         "metadata_checks": {
             "product_name_baseline_matches_internal_metadata": True,
@@ -110,6 +121,18 @@ def build_contract(created_at_utc: str) -> dict[str, Any]:
             "all_used_band_offsets_exactly_once": True,
             "dn_zero_identified_as_nodata": True,
         },
+        "source_references": [
+            {
+                "role": "sentinel2_multiband_mask_encoding",
+                "url": "https://sentiwiki.copernicus.eu/web/s2-processing",
+                "checked_at_utc": created_at_utc,
+            },
+            {
+                "role": "sentinel2_product_specification_v15_1",
+                "url": "https://sentinels.copernicus.eu/documents/d/sentinel/sentinel-2-products-specification-document-15_1",
+                "checked_at_utc": created_at_utc,
+            },
+        ],
         "decision_semantics": {
             "pass": "pass_header_readability_only",
             "failure": "block",

@@ -680,6 +680,31 @@ def main() -> None:
     }
     if set(optical_input_contract.get("required_members", {}).get("role_patterns", {})) != expected_input_roles:
         fail("optical input-readiness member roles differ")
+    input_header_rules = optical_input_contract.get("header_checks", {})
+    if input_header_rules.get("single_band_roles") != ["B02", "B03", "B04", "B08", "B11", "B12", "SCL"]:
+        fail("optical input-readiness single-band role declaration differs")
+    if input_header_rules.get("quality_classification") != {
+        "product_member": "MSK_CLASSI_B00.jp2",
+        "band_count": 3,
+        "cell_size_m": 60.0,
+        "pixel_types": ["U1", "U8"],
+        "band_semantics": {"1": "opaque_cloud", "2": "cirrus_cloud", "3": "snow_or_ice"},
+    }:
+        fail("optical input-readiness MSK_CLASSI model differs from the PB 05.12 specification")
+    expected_input_source_references = [
+        {
+            "role": "sentinel2_multiband_mask_encoding",
+            "url": "https://sentiwiki.copernicus.eu/web/s2-processing",
+            "checked_at_utc": "2026-09-03T19:37:30Z",
+        },
+        {
+            "role": "sentinel2_product_specification_v15_1",
+            "url": "https://sentinels.copernicus.eu/documents/d/sentinel/sentinel-2-products-specification-document-15_1",
+            "checked_at_utc": "2026-09-03T19:37:30Z",
+        },
+    ]
+    if optical_input_contract.get("source_references") != expected_input_source_references:
+        fail("optical input-readiness official source references differ")
     optical_input_contract_bindings = optical_input_contract.get("inputs", {})
     for ref_key, hash_key in (
         ("materialization_contract_ref", "materialization_contract_sha256"),
@@ -728,15 +753,33 @@ def main() -> None:
         descriptions = fixture.get("header_descriptions", {}).get(pair_role, {})
         if set(descriptions) != expected_input_roles - {"metadata_product", "metadata_tile"}:
             fail(f"optical input-readiness {pair_role} header inventory differs")
-        if any(item.get("format") != "JP2" or item.get("wkid") != 32645 or item.get("band_count") != 1 for item in descriptions.values()):
+        if any(
+            item.get("format") != "JP2"
+            or item.get("wkid") != 32645
+            or item.get("band_count") != (3 if role == "quality_classification" else 1)
+            for role, item in descriptions.items()
+        ):
             fail(f"optical input-readiness {pair_role} contains a nonpassing JP2 header")
+        quality_header = descriptions.get("quality_classification", {})
+        if quality_header.get("cell_width") != 60.0 or quality_header.get("cell_height") != 60.0 or quality_header.get("pixel_type") not in {"U1", "U8"}:
+            fail(f"optical input-readiness {pair_role} MSK_CLASSI header differs")
+        quality_bands = quality_header.get("band_details", [])
+        if [item.get("name") for item in quality_bands] != ["Band_1", "Band_2", "Band_3"] or any(
+            item.get("width") != 2
+            or item.get("height") != 2
+            or item.get("cell_width") != 60.0
+            or item.get("cell_height") != 60.0
+            or item.get("pixel_type") != "U8"
+            for item in quality_bands
+        ):
+            fail(f"optical input-readiness {pair_role} MSK_CLASSI band headers differ")
         metadata_check = fixture.get("metadata_checks", {}).get(pair_role, {})
         if metadata_check.get("processing_baseline") != "05.12" or metadata_check.get("quantification_value") != 10000.0 or metadata_check.get("used_band_offset_count") != 6 or metadata_check.get("errors") != []:
             fail(f"optical input-readiness {pair_role} metadata check differs")
     if optical_input_arcgis.get("checks", {}).get("aligned_pair", {}).get("status") != "pass_header_readability_only":
         fail("optical input-readiness aligned synthetic pair did not pass")
     shifted_header = optical_input_arcgis.get("checks", {}).get("intentional_after_grid_shift", {})
-    if shifted_header.get("status") != "block" or len(shifted_header.get("errors", [])) != 14:
+    if shifted_header.get("status") != "block" or len(shifted_header.get("errors", [])) != 16:
         fail("optical input-readiness intentional grid shift did not retain its expected block")
     input_assertions = optical_input_arcgis.get("assertions", {})
     if input_assertions.get("synthetic_jp2_opened_by_arcgis") is not True or input_assertions.get("intentional_grid_shift_blocked") is not True:
@@ -747,9 +790,13 @@ def main() -> None:
         fail("optical input-readiness ArcGIS receipt violates its synthetic-only boundary")
     if optical_input_contract.get("header_checks", {}).get("extent_must_equal_dimensions_times_cell_size") is not True:
         fail("optical input-readiness contract must reconcile dimensions, cell sizes, and extents")
-    if len(optical_input_arcgis.get("retained_failures", [])) != 2 or len(optical_input_arcgis.get("retained_prepublication_attempts", [])) != 5:
+    if (
+        len(optical_input_arcgis.get("retained_failures", [])) != 3
+        or len(optical_input_arcgis.get("retained_prepublication_attempts", [])) != 5
+        or len(optical_input_arcgis.get("retained_published_attempts", [])) != 1
+    ):
         fail("optical input-readiness ArcGIS receipt did not retain every failed or superseded attempt")
-    if optical_input_readiness.get("status") != "pass_synthetic_arcgis_real_input_deferred":
+    if optical_input_readiness.get("status") != "pass_corrected_synthetic_arcgis_real_input_deferred":
         fail("optical input-readiness control receipt status differs")
     control_bindings = optical_input_readiness.get("bindings", {})
     for ref_key, hash_key in (
@@ -771,8 +818,26 @@ def main() -> None:
         if not isinstance(relative, str) or not (ROOT / relative).is_file() or control_bindings.get(hash_key) != sha256(relative):
             fail(f"optical input-readiness control receipt does not bind {ref_key}")
     input_validation = optical_input_readiness.get("validation", {})
-    if input_validation.get("portable_test_count") != 12 or input_validation.get("full_repository_test_count") != 123 or input_validation.get("synthetic_jp2_raster_count") != 16:
+    if (
+        input_validation.get("portable_test_count") != 12
+        or input_validation.get("full_repository_test_count") != 123
+        or input_validation.get("synthetic_jp2_raster_count") != 16
+        or input_validation.get("quality_classification_band_count") != 3
+        or input_validation.get("quality_classification_cell_size_m") != 60.0
+        or input_validation.get("intentional_after_grid_shift_error_count") != 16
+    ):
         fail("optical input-readiness validation counts differ")
+    if optical_input_readiness.get("supersedes") != {
+        "evidence_record_id": "EVID-0026",
+        "published_commit": "df3e93aadef064129c928463cc1f5eec562e3950",
+        "reason": "Official Sentinel-2 documentation identifies PB 05.12 MSK_CLASSI_B00.jp2 as a three-band 60 m Boolean mask, not the one-band 20 m mask used by the published fixture.",
+    }:
+        fail("optical input-readiness correction does not preserve the exact superseded checkpoint")
+    if optical_input_readiness.get("source_references") != expected_input_source_references:
+        fail("optical input-readiness control receipt does not preserve its official sources")
+    retained_published_corrections = optical_input_readiness.get("retained_published_control_corrections", [])
+    if len(retained_published_corrections) != 1 or retained_published_corrections[0].get("status") != "superseded_after_publication":
+        fail("optical input-readiness control receipt does not retain the published correction")
     if optical_input_readiness.get("current_disposition", {}).get("status") != "defer" or optical_input_readiness.get("external_state", {}).get("custody_file_count") != 0 or optical_input_readiness.get("external_state", {}).get("materialization_root_exists") is not False:
         fail("optical input-readiness real route must remain historically deferred with empty custody")
     if aoi_reconciliation["contract_sha256"] != sha256("reviews/m1-aoi/review-contract.json"):
@@ -1428,9 +1493,28 @@ def main() -> None:
             fail(f"EVID-0025 and materialization readiness differ for {key}")
     if evidence_assertions.get("authority_created") is not False:
         fail("EVID-0025 must not create authority")
-    optical_input_evidence = ledger_by_id.get("EVID-0026")
-    if not isinstance(optical_input_evidence, dict):
+    historical_input_evidence = ledger_by_id.get("EVID-0026")
+    if not isinstance(historical_input_evidence, dict):
         fail("evidence ledger is missing EVID-0026 optical input-readiness evidence")
+    historical_input_bindings = (
+        ("readiness_receipt_ref", "records/surface-receipts/optical-input-readiness-control.json", "readiness_receipt_sha256", "16b16e2dfebd829940340ff1ebfb9e19a038b162b9435efe5c064453cc61b55f"),
+        ("arcgis_receipt_ref", "records/surface-receipts/optical-input-readiness-synthetic-arcgis.json", "arcgis_receipt_sha256", "3910aa085534a8721c0f70d50603950fe709cd0b6f084a5b7eb0b8c16b97836c"),
+        ("contract_ref", "config/qa/optical-input-readiness-contract.json", "contract_sha256", "7cbcedef168a7e052ea44a8cd9b838281ace5c6b3d196a3ecd8d642ac3605427"),
+        ("core_ref", "scripts/optical_input_readiness_core.py", "core_sha256", "0055e653404a0cfc98748491dc05349f8892986cb17efdd32cf7fb1be452551c"),
+        ("generator_ref", "scripts/prepare_optical_input_readiness_contract.py", "generator_sha256", "c9974e80364d867bed5735be8cbda58931d92e33fb688e29c64cae58f741deb2"),
+        ("runner_ref", "scripts/inspect_optical_inputs_arcgis.py", "runner_sha256", "5bc717da9095db3390ead46f5c066ffbde9f25e896dd2581db624f4b4f632db0"),
+        ("arcgis_adapter_ref", "scripts/validate_optical_input_readiness_arcgis.py", "arcgis_adapter_sha256", "7a10c2ae11fcdff14be4229dd4a0bff78b3dcc99352aced72f3a06e305b6831f"),
+        ("test_ref", "tests/test_optical_input_readiness.py", "test_sha256", "9b6182cc536df0feda762fbe83b0c8e87e056157d2e37b10d6823be556e3fa06"),
+        ("protocol_ref", "docs/OPTICAL_INPUT_READINESS_PROTOCOL.md", "protocol_sha256", "35f77b2f2693ff2b1cf3211ca2546cd7a1479b99f7646601c88b1b4cbb235679"),
+    )
+    for ref_key, expected_ref, hash_key, expected_hash in historical_input_bindings:
+        if historical_input_evidence.get(ref_key) != expected_ref or historical_input_evidence.get(hash_key) != expected_hash:
+            fail(f"EVID-0026 no longer preserves its published {ref_key}")
+    if historical_input_evidence.get("status") != "pass_synthetic_arcgis_real_input_deferred" or historical_input_evidence.get("current_disposition", {}).get("status") != "defer":
+        fail("EVID-0026 must preserve its synthetic-only deferred state")
+    corrected_input_evidence = ledger_by_id.get("EVID-0027")
+    if not isinstance(corrected_input_evidence, dict):
+        fail("evidence ledger is missing EVID-0027 corrected optical input-readiness evidence")
     for ref_key, hash_key in (
         ("readiness_receipt_ref", "readiness_receipt_sha256"),
         ("arcgis_receipt_ref", "arcgis_receipt_sha256"),
@@ -1442,15 +1526,19 @@ def main() -> None:
         ("test_ref", "test_sha256"),
         ("protocol_ref", "protocol_sha256"),
     ):
-        relative = optical_input_evidence.get(ref_key)
-        if not isinstance(relative, str) or not (ROOT / relative).is_file() or optical_input_evidence.get(hash_key) != sha256(relative):
-            fail(f"EVID-0026 does not bind {ref_key}")
-    if optical_input_evidence.get("status") != "pass_synthetic_arcgis_real_input_deferred" or optical_input_evidence.get("current_disposition", {}).get("status") != "defer":
-        fail("EVID-0026 must preserve its synthetic-only deferred state")
-    evidence_input_assertions = optical_input_evidence.get("assertions", {})
+        relative = corrected_input_evidence.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file() or corrected_input_evidence.get(hash_key) != sha256(relative):
+            fail(f"EVID-0027 does not bind {ref_key}")
+    if corrected_input_evidence.get("status") != "pass_corrected_synthetic_arcgis_real_input_deferred" or corrected_input_evidence.get("current_disposition", {}).get("status") != "defer":
+        fail("EVID-0027 must preserve its corrected synthetic-only deferred state")
+    if corrected_input_evidence.get("supersedes") != optical_input_readiness.get("supersedes"):
+        fail("EVID-0027 and the current control receipt identify different superseded evidence")
+    if corrected_input_evidence.get("source_references") != expected_input_source_references:
+        fail("EVID-0027 does not preserve the official correction sources")
+    evidence_input_assertions = corrected_input_evidence.get("assertions", {})
     readiness_input_assertions = optical_input_readiness.get("assertions", {})
     if evidence_input_assertions != readiness_input_assertions:
-        fail("EVID-0026 and optical input-readiness receipt have different claim boundaries")
+        fail("EVID-0027 and optical input-readiness receipt have different claim boundaries")
 
     violations = []
     for relative in tracked_files():

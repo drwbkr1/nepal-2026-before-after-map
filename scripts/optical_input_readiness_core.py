@@ -26,7 +26,8 @@ ROLE_PATTERNS = {
 }
 TEN_METRE_ROLES = {"B02", "B03", "B04", "B08"}
 TWENTY_METRE_ROLES = {"B11", "B12", "SCL"}
-RASTER_ROLES = TEN_METRE_ROLES | TWENTY_METRE_ROLES | {"quality_classification"}
+QUALITY_CLASSIFICATION_ROLES = {"quality_classification"}
+RASTER_ROLES = TEN_METRE_ROLES | TWENTY_METRE_ROLES | QUALITY_CLASSIFICATION_ROLES
 HEX64 = re.compile(r"[0-9a-f]{64}")
 
 
@@ -55,6 +56,18 @@ def validate_contract(contract: dict[str, Any]) -> list[str]:
         errors.append("optical route identity differs")
     if contract.get("prerequisites", {}).get("materialization_receipt_status") != "pass_materialization_only":
         errors.append("materialization prerequisite differs")
+    headers = contract.get("header_checks", {})
+    if headers.get("single_band_roles") != sorted(TEN_METRE_ROLES | TWENTY_METRE_ROLES):
+        errors.append("single-band raster roles differ")
+    quality = headers.get("quality_classification", {})
+    if quality.get("band_count") != 3 or quality.get("cell_size_m") != 60.0:
+        errors.append("MSK_CLASSI must remain a three-band 60 m mask")
+    if quality.get("band_semantics") != {
+        "1": "opaque_cloud",
+        "2": "cirrus_cloud",
+        "3": "snow_or_ice",
+    }:
+        errors.append("MSK_CLASSI band semantics differ")
     if contract.get("execution_boundary", {}).get("network_requests") != "prohibited":
         errors.append("input readiness must remain offline")
     claim = contract.get("claim_boundary", {})
@@ -121,8 +134,9 @@ def validate_raster_description(
         errors.append(f"{role} format is not JP2")
     if description.get("wkid") != contract["analysis_crs"]["wkid"]:
         errors.append(f"{role} CRS is not EPSG:32645")
-    if description.get("band_count") != 1:
-        errors.append(f"{role} is not single-band")
+    expected_band_count = 3 if role in QUALITY_CLASSIFICATION_ROLES else 1
+    if description.get("band_count") != expected_band_count:
+        errors.append(f"{role} band count differs from {expected_band_count}")
     if not isinstance(description.get("width"), int) or description["width"] <= 0:
         errors.append(f"{role} width is invalid")
     if not isinstance(description.get("height"), int) or description["height"] <= 0:
@@ -139,6 +153,8 @@ def validate_raster_description(
         expected_cell = 10.0
     elif role in TWENTY_METRE_ROLES:
         expected_cell = 20.0
+    elif role in QUALITY_CLASSIFICATION_ROLES:
+        expected_cell = 60.0
     else:
         expected_cell = None
     tolerance = float(contract["header_checks"]["cell_size_tolerance_m"])
@@ -152,6 +168,18 @@ def validate_raster_description(
         errors.append(f"{role} pixel type is not unsigned Sentinel-2 reflectance DN")
     if role == "SCL" and pixel_type not in {"U8", "U16"}:
         errors.append("SCL pixel type is not unsigned categorical data")
+    if role in QUALITY_CLASSIFICATION_ROLES and pixel_type not in {"U1", "U8"}:
+        errors.append("quality_classification pixel type is not a one-bit or byte Boolean mask")
+    if role in QUALITY_CLASSIFICATION_ROLES:
+        band_details = description.get("band_details")
+        expected_names = ["Band_1", "Band_2", "Band_3"]
+        if not isinstance(band_details, list) or [item.get("name") for item in band_details if isinstance(item, dict)] != expected_names:
+            errors.append("quality_classification band child inventory differs")
+        else:
+            for band in band_details:
+                for key in ("width", "height", "cell_width", "cell_height", "pixel_type"):
+                    if band.get(key) != description.get(key):
+                        errors.append(f"quality_classification {band['name']} differs from the shared {key}")
     for key in ("xmin", "ymin", "xmax", "ymax"):
         value = description.get(key)
         if not isinstance(value, (int, float)) or not math.isfinite(value):
@@ -184,7 +212,7 @@ def validate_product_grid(
         return errors
     reference = descriptions["B02"]
     tolerance = float(contract["header_checks"]["extent_tolerance_m"])
-    for role in TEN_METRE_ROLES | TWENTY_METRE_ROLES:
+    for role in RASTER_ROLES:
         item = descriptions[role]
         for key in ("xmin", "ymin", "xmax", "ymax"):
             if not math.isclose(float(item[key]), float(reference[key]), abs_tol=tolerance):
@@ -201,7 +229,7 @@ def validate_pair_grids(
     if errors:
         return errors
     tolerance = float(contract["header_checks"]["extent_tolerance_m"])
-    for role in sorted(TEN_METRE_ROLES | TWENTY_METRE_ROLES):
+    for role in sorted(RASTER_ROLES):
         left, right = before[role], after[role]
         for key in ("width", "height", "band_count", "wkid", "pixel_type"):
             if left[key] != right[key]:

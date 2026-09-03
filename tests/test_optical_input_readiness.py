@@ -29,7 +29,7 @@ assert PREP_SPEC and PREP_SPEC.loader
 PREP = importlib.util.module_from_spec(PREP_SPEC)
 PREP_SPEC.loader.exec_module(PREP)
 
-CREATED_AT = "2026-09-03T19:10:40Z"
+CREATED_AT = "2026-09-03T19:37:30Z"
 CONTRACT_PATH = ROOT / "config/qa/optical-input-readiness-contract.json"
 
 
@@ -62,21 +62,33 @@ def complete_manifest() -> dict:
 def complete_descriptions() -> dict[str, dict]:
     descriptions = {}
     for role in CORE.RASTER_ROLES:
-        cell = 10.0 if role in CORE.TEN_METRE_ROLES else 20.0
+        cell = 10.0 if role in CORE.TEN_METRE_ROLES else (20.0 if role in CORE.TWENTY_METRE_ROLES else 60.0)
         descriptions[role] = {
             "format": "JP2",
             "wkid": 32645,
-            "band_count": 1,
-            "width": 16 if cell == 10 else 8,
-            "height": 16 if cell == 10 else 8,
+            "band_count": 3 if role == "quality_classification" else 1,
+            "width": int(120 / cell),
+            "height": int(120 / cell),
             "cell_width": cell,
             "cell_height": cell,
             "pixel_type": "U8" if role in {"SCL", "quality_classification"} else "U16",
             "xmin": 273300.0,
             "ymin": 3070220.0,
-            "xmax": 273460.0,
-            "ymax": 3070380.0,
+            "xmax": 273420.0,
+            "ymax": 3070340.0,
         }
+        if role == "quality_classification":
+            descriptions[role]["band_details"] = [
+                {
+                    "name": f"Band_{index}",
+                    "width": 2,
+                    "height": 2,
+                    "cell_width": 60.0,
+                    "cell_height": 60.0,
+                    "pixel_type": "U8",
+                }
+                for index in (1, 2, 3)
+            ]
     return descriptions
 
 
@@ -95,6 +107,8 @@ class OpticalInputReadinessTests(unittest.TestCase):
         self.assertEqual(self.contract["route"]["processing_baseline"], "05.12")
         self.assertEqual(self.contract["analysis_crs"]["wkid"], 32645)
         self.assertTrue(self.contract["header_checks"]["extent_must_equal_dimensions_times_cell_size"])
+        self.assertEqual(self.contract["header_checks"]["quality_classification"]["band_count"], 3)
+        self.assertEqual(self.contract["header_checks"]["quality_classification"]["cell_size_m"], 60.0)
         self.assertFalse(self.contract["claim_boundary"]["pixel_values_examined"])
         self.assertFalse(self.contract["claim_boundary"]["change_established"])
 
@@ -142,12 +156,16 @@ class OpticalInputReadinessTests(unittest.TestCase):
         descriptions["B08"]["cell_width"] = None
         descriptions["B11"]["pixel_type"] = "F32"
         descriptions["B03"]["xmax"] += 1
+        descriptions["quality_classification"]["band_count"] = 1
+        descriptions["quality_classification"]["band_details"][1]["cell_width"] = 20.0
         descriptions["quality_classification"]["cell_height"] = -20
         errors = CORE.validate_product_grid(descriptions, self.contract)
         self.assertTrue(any("B04 CRS" in error for error in errors))
         self.assertTrue(any("B08 cell width" in error for error in errors))
         self.assertTrue(any("B11 pixel type" in error for error in errors))
         self.assertTrue(any("B03 width, cell size, and x extent are inconsistent" in error for error in errors))
+        self.assertTrue(any("quality_classification band count differs from 3" in error for error in errors))
+        self.assertTrue(any("Band_2 differs from the shared cell_width" in error for error in errors))
         self.assertTrue(any("quality_classification cell height is invalid" in error for error in errors))
 
     def test_within_product_extent_mismatch_blocks(self) -> None:
@@ -161,7 +179,7 @@ class OpticalInputReadinessTests(unittest.TestCase):
         before = complete_descriptions()
         after = copy.deepcopy(before)
         self.assertEqual(CORE.validate_pair_grids(before, after, self.contract), [])
-        for role in CORE.TEN_METRE_ROLES | CORE.TWENTY_METRE_ROLES:
+        for role in CORE.RASTER_ROLES:
             after[role]["xmin"] += 10
             after[role]["xmax"] += 10
         errors = CORE.validate_pair_grids(before, after, self.contract)

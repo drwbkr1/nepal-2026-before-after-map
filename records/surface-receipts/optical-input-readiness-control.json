@@ -1,25 +1,42 @@
 {
-  "receipt_version": "1.0",
-  "receipt_id": "NEPAL-S2-MATERIALIZED-INPUT-READINESS-CONTROL-001",
-  "verified_at_utc": "2026-09-03T19:31:50Z",
-  "status": "pass_synthetic_arcgis_real_input_deferred",
+  "receipt_version": "1.1",
+  "receipt_id": "NEPAL-S2-MATERIALIZED-INPUT-READINESS-CONTROL-002",
+  "verified_at_utc": "2026-09-03T19:45:50Z",
+  "status": "pass_corrected_synthetic_arcgis_real_input_deferred",
+  "supersedes": {
+    "evidence_record_id": "EVID-0026",
+    "published_commit": "df3e93aadef064129c928463cc1f5eec562e3950",
+    "reason": "Official Sentinel-2 documentation identifies PB 05.12 MSK_CLASSI_B00.jp2 as a three-band 60 m Boolean mask, not the one-band 20 m mask used by the published fixture."
+  },
+  "source_references": [
+    {
+      "role": "sentinel2_multiband_mask_encoding",
+      "url": "https://sentiwiki.copernicus.eu/web/s2-processing",
+      "checked_at_utc": "2026-09-03T19:37:30Z"
+    },
+    {
+      "role": "sentinel2_product_specification_v15_1",
+      "url": "https://sentinels.copernicus.eu/documents/d/sentinel/sentinel-2-products-specification-document-15_1",
+      "checked_at_utc": "2026-09-03T19:37:30Z"
+    }
+  ],
   "bindings": {
     "contract_ref": "config/qa/optical-input-readiness-contract.json",
-    "contract_sha256": "7cbcedef168a7e052ea44a8cd9b838281ace5c6b3d196a3ecd8d642ac3605427",
+    "contract_sha256": "83327ebc03fb5a7b66152a77717354e4b88450b6f63a2734b5b4ceea6550f3b0",
     "core_ref": "scripts/optical_input_readiness_core.py",
-    "core_sha256": "0055e653404a0cfc98748491dc05349f8892986cb17efdd32cf7fb1be452551c",
+    "core_sha256": "9a83887b521157988f531b3e25bf159ab468638c2eda3daba21ae778deaf08ad",
     "generator_ref": "scripts/prepare_optical_input_readiness_contract.py",
-    "generator_sha256": "c9974e80364d867bed5735be8cbda58931d92e33fb688e29c64cae58f741deb2",
+    "generator_sha256": "66544b1b29f83255def33918191795ba7b01af01e5a6b3a55771bcf722134dfb",
     "runner_ref": "scripts/inspect_optical_inputs_arcgis.py",
-    "runner_sha256": "5bc717da9095db3390ead46f5c066ffbde9f25e896dd2581db624f4b4f632db0",
+    "runner_sha256": "d0add67afd289f972be3532c2344d8b4b9cf0d31c3aa71c98035a333c488d490",
     "arcgis_adapter_ref": "scripts/validate_optical_input_readiness_arcgis.py",
-    "arcgis_adapter_sha256": "7a10c2ae11fcdff14be4229dd4a0bff78b3dcc99352aced72f3a06e305b6831f",
+    "arcgis_adapter_sha256": "62aa93c3ec5dfcbfbc66f615788e7e25cd219a0f6b0140589162775487d40946",
     "test_ref": "tests/test_optical_input_readiness.py",
-    "test_sha256": "9b6182cc536df0feda762fbe83b0c8e87e056157d2e37b10d6823be556e3fa06",
+    "test_sha256": "c3ba04b873927e92abdb500119c8d9c5901a69c87bf7c35cdde9b6877ec96695",
     "protocol_ref": "docs/OPTICAL_INPUT_READINESS_PROTOCOL.md",
-    "protocol_sha256": "35f77b2f2693ff2b1cf3211ca2546cd7a1479b99f7646601c88b1b4cbb235679",
+    "protocol_sha256": "b9405d2cba53746c9cef5d63d7c63ddeedfe45f1c60c06ba5dcb242cbb8316ad",
     "arcgis_receipt_ref": "records/surface-receipts/optical-input-readiness-synthetic-arcgis.json",
-    "arcgis_receipt_sha256": "3910aa085534a8721c0f70d50603950fe709cd0b6f084a5b7eb0b8c16b97836c",
+    "arcgis_receipt_sha256": "a1139079a6c4edb18a1dbace06b246d5053f520b0444c897b482a4ec011414b2",
     "materialization_contract_ref": "contracts/m2-materialization.json",
     "materialization_contract_sha256": "9ba8154a36fff562decede04de660e731ce2401f893cecbd90c2d8563ce43d7b",
     "optical_processing_contract_ref": "config/qa/optical-baseline-processing-contract.json",
@@ -46,9 +63,16 @@
     },
     "synthetic_jp2_raster_count": 16,
     "required_member_role_count_per_product": 10,
+    "quality_classification_band_count": 3,
+    "quality_classification_cell_size_m": 60.0,
+    "quality_classification_band_semantics": {
+      "1": "opaque_cloud",
+      "2": "cirrus_cloud",
+      "3": "snow_or_ice"
+    },
     "aligned_pair_status": "pass_header_readability_only",
     "intentional_after_grid_shift_status": "block",
-    "intentional_after_grid_shift_error_count": 14,
+    "intentional_after_grid_shift_error_count": 16,
     "production_wrapper_current_disposition": "stopped_missing_materialization_receipts_before_arcpy"
   },
   "retained_prepublication_control_failures": [
@@ -60,7 +84,7 @@
     {
       "status": "fail_test_expectation",
       "reason": "The first pair-shift fixture changed only B02, so the valid earlier within-product extent gate blocked before the intended cross-date comparison.",
-      "remediation": "The final fixture shifts every quantitative and SCL role together, preserving within-product alignment and isolating the pair-grid block."
+      "remediation": "The final fixture shifts every raster role together, preserving within-product alignment and isolating the pair-grid block."
     },
     {
       "status": "fail_test_expectation",
@@ -68,7 +92,16 @@
       "remediation": "The final fixture shifts both B12 xmin and xmax, keeping dimensions consistent while isolating the cross-band extent block."
     }
   ],
-  "retained_arcgis_attempts_ref": "records/surface-receipts/optical-input-readiness-synthetic-arcgis.json#retained_failures_and_prepublication_attempts",
+  "retained_published_control_corrections": [
+    {
+      "status": "superseded_after_publication",
+      "evidence_record_id": "EVID-0026",
+      "published_commit": "df3e93aadef064129c928463cc1f5eec562e3950",
+      "reason": "Official Sentinel-2 documentation identifies PB 05.12 MSK_CLASSI_B00.jp2 as a three-band 60 m Boolean mask, not the one-band 20 m mask used by the published fixture.",
+      "real_product_data_used": false
+    }
+  ],
+  "retained_arcgis_attempts_ref": "records/surface-receipts/optical-input-readiness-synthetic-arcgis.json#retained_failures_prepublication_and_published_attempts",
   "external_state": {
     "custody_file_count": 0,
     "materialization_root_exists": false,

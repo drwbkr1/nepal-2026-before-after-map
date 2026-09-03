@@ -1,7 +1,7 @@
 {
   "contract_version": "1.0",
   "contract_id": "NEPAL-S2-MATERIALIZED-INPUT-READINESS-001",
-  "created_at_utc": "2026-09-03T19:10:40Z",
+  "created_at_utc": "2026-09-03T19:37:30Z",
   "status": "predeclared_gate_deferred_no_real_safe",
   "inputs": {
     "materialization_contract_ref": "contracts/m2-materialization.json",
@@ -13,11 +13,11 @@
     "source_manifest_ref": "records/source-manifest.json",
     "source_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
     "core_ref": "scripts/optical_input_readiness_core.py",
-    "core_sha256": "0055e653404a0cfc98748491dc05349f8892986cb17efdd32cf7fb1be452551c",
+    "core_sha256": "9a83887b521157988f531b3e25bf159ab468638c2eda3daba21ae778deaf08ad",
     "runner_ref": "scripts/inspect_optical_inputs_arcgis.py",
-    "runner_sha256": "5bc717da9095db3390ead46f5c066ffbde9f25e896dd2581db624f4b4f632db0",
+    "runner_sha256": "d0add67afd289f972be3532c2344d8b4b9cf0d31c3aa71c98035a333c488d490",
     "arcgis_adapter_ref": "scripts/validate_optical_input_readiness_arcgis.py",
-    "arcgis_adapter_sha256": "7a10c2ae11fcdff14be4229dd4a0bff78b3dcc99352aced72f3a06e305b6831f"
+    "arcgis_adapter_sha256": "62aa93c3ec5dfcbfbc66f615788e7e25cd219a0f6b0140589162775487d40946"
   },
   "authority": {
     "mode": "inherited",
@@ -74,7 +74,15 @@
   },
   "header_checks": {
     "format": "JP2",
-    "band_count": 1,
+    "single_band_roles": [
+      "B02",
+      "B03",
+      "B04",
+      "B08",
+      "B11",
+      "B12",
+      "SCL"
+    ],
     "reflectance_pixel_types": [
       "U12",
       "U16"
@@ -98,7 +106,21 @@
     "extent_tolerance_m": 0.001,
     "extent_must_equal_dimensions_times_cell_size": true,
     "same_extent_within_product_required": true,
-    "same_role_grid_across_pair_required": true
+    "same_role_grid_across_pair_required": true,
+    "quality_classification": {
+      "product_member": "MSK_CLASSI_B00.jp2",
+      "band_count": 3,
+      "cell_size_m": 60.0,
+      "pixel_types": [
+        "U1",
+        "U8"
+      ],
+      "band_semantics": {
+        "1": "opaque_cloud",
+        "2": "cirrus_cloud",
+        "3": "snow_or_ice"
+      }
+    }
   },
   "metadata_checks": {
     "product_name_baseline_matches_internal_metadata": true,
@@ -107,6 +129,18 @@
     "all_used_band_offsets_exactly_once": true,
     "dn_zero_identified_as_nodata": true
   },
+  "source_references": [
+    {
+      "role": "sentinel2_multiband_mask_encoding",
+      "url": "https://sentiwiki.copernicus.eu/web/s2-processing",
+      "checked_at_utc": "2026-09-03T19:37:30Z"
+    },
+    {
+      "role": "sentinel2_product_specification_v15_1",
+      "url": "https://sentinels.copernicus.eu/documents/d/sentinel/sentinel-2-products-specification-document-15_1",
+      "checked_at_utc": "2026-09-03T19:37:30Z"
+    }
+  ],
   "decision_semantics": {
     "pass": "pass_header_readability_only",
     "failure": "block",

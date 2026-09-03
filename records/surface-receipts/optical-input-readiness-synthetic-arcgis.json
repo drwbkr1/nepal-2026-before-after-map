@@ -1,7 +1,7 @@
 {
   "receipt_version": "1.0",
   "receipt_id": "NEPAL-S2-MATERIALIZED-INPUT-READINESS-SYNTHETIC-ARCGIS-001",
-  "verified_at_utc": "2026-09-03T19:30:16Z",
+  "verified_at_utc": "2026-09-03T19:42:24Z",
   "status": "pass_synthetic_only_with_expected_misalignment_block",
   "runtime": {
     "product": "ArcGISPro",
@@ -12,27 +12,33 @@
   },
   "bindings": {
     "contract_ref": "config/qa/optical-input-readiness-contract.json",
-    "contract_sha256": "7cbcedef168a7e052ea44a8cd9b838281ace5c6b3d196a3ecd8d642ac3605427",
+    "contract_sha256": "83327ebc03fb5a7b66152a77717354e4b88450b6f63a2734b5b4ceea6550f3b0",
     "core_ref": "scripts/optical_input_readiness_core.py",
-    "core_sha256": "0055e653404a0cfc98748491dc05349f8892986cb17efdd32cf7fb1be452551c",
+    "core_sha256": "9a83887b521157988f531b3e25bf159ab468638c2eda3daba21ae778deaf08ad",
     "adapter_ref": "scripts/validate_optical_input_readiness_arcgis.py",
-    "adapter_sha256": "7a10c2ae11fcdff14be4229dd4a0bff78b3dcc99352aced72f3a06e305b6831f"
+    "adapter_sha256": "62aa93c3ec5dfcbfbc66f615788e7e25cd219a0f6b0140589162775487d40946"
   },
   "fixture": {
-    "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\optical-input-readiness-arcgis-006",
+    "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\optical-input-readiness-arcgis-008",
     "source_association": "synthetic_none",
     "before_inventory_status": "pass_inventory_only",
     "after_inventory_status": "pass_inventory_only",
     "jp2_raster_count": 16,
     "wkid": 32645,
     "ten_metre_dimensions": [
-      16,
-      16
+      12,
+      12
     ],
     "twenty_metre_dimensions": [
-      8,
-      8
+      6,
+      6
     ],
+    "quality_classification_dimensions": [
+      2,
+      2
+    ],
+    "quality_classification_band_count": 3,
+    "quality_classification_cell_size_m": 60.0,
     "metadata_checks": {
       "before": {
         "processing_baseline": "05.12",
@@ -53,113 +59,209 @@
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 16,
-          "height": 16,
+          "width": 12,
+          "height": 12,
           "cell_width": 10.0,
           "cell_height": 10.0,
           "pixel_type": "U16",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 12,
+              "height": 12,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
         },
         "B03": {
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 16,
-          "height": 16,
+          "width": 12,
+          "height": 12,
           "cell_width": 10.0,
           "cell_height": 10.0,
           "pixel_type": "U16",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 12,
+              "height": 12,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
         },
         "B04": {
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 16,
-          "height": 16,
+          "width": 12,
+          "height": 12,
           "cell_width": 10.0,
           "cell_height": 10.0,
           "pixel_type": "U16",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 12,
+              "height": 12,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
         },
         "B08": {
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 16,
-          "height": 16,
+          "width": 12,
+          "height": 12,
           "cell_width": 10.0,
           "cell_height": 10.0,
           "pixel_type": "U16",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 12,
+              "height": 12,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
         },
         "B11": {
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 8,
-          "height": 8,
+          "width": 6,
+          "height": 6,
           "cell_width": 20.0,
           "cell_height": 20.0,
           "pixel_type": "U16",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 6,
+              "height": 6,
+              "cell_width": 20.0,
+              "cell_height": 20.0,
+              "pixel_type": "U16"
+            }
+          ]
         },
         "B12": {
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 8,
-          "height": 8,
+          "width": 6,
+          "height": 6,
           "cell_width": 20.0,
           "cell_height": 20.0,
           "pixel_type": "U16",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 6,
+              "height": 6,
+              "cell_width": 20.0,
+              "cell_height": 20.0,
+              "pixel_type": "U16"
+            }
+          ]
         },
         "SCL": {
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 8,
-          "height": 8,
+          "width": 6,
+          "height": 6,
           "cell_width": 20.0,
           "cell_height": 20.0,
           "pixel_type": "U8",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 6,
+              "height": 6,
+              "cell_width": 20.0,
+              "cell_height": 20.0,
+              "pixel_type": "U8"
+            }
+          ]
         },
         "quality_classification": {
           "format": "JP2",
           "wkid": 32645,
-          "band_count": 1,
-          "width": 8,
-          "height": 8,
-          "cell_width": 20.0,
-          "cell_height": 20.0,
+          "band_count": 3,
+          "width": 2,
+          "height": 2,
+          "cell_width": 60.0,
+          "cell_height": 60.0,
           "pixel_type": "U8",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 2,
+              "height": 2,
+              "cell_width": 60.0,
+              "cell_height": 60.0,
+              "pixel_type": "U8"
+            },
+            {
+              "name": "Band_2",
+              "width": 2,
+              "height": 2,
+              "cell_width": 60.0,
+              "cell_height": 60.0,
+              "pixel_type": "U8"
+            },
+            {
+              "name": "Band_3",
+              "width": 2,
+              "height": 2,
+              "cell_width": 60.0,
+              "cell_height": 60.0,
+              "pixel_type": "U8"
+            }
+          ]
         }
       },
       "after": {
@@ -167,113 +269,209 @@
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 16,
-          "height": 16,
+          "width": 12,
+          "height": 12,
           "cell_width": 10.0,
           "cell_height": 10.0,
           "pixel_type": "U16",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 12,
+              "height": 12,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
         },
         "B03": {
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 16,
-          "height": 16,
+          "width": 12,
+          "height": 12,
           "cell_width": 10.0,
           "cell_height": 10.0,
           "pixel_type": "U16",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 12,
+              "height": 12,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
         },
         "B04": {
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 16,
-          "height": 16,
+          "width": 12,
+          "height": 12,
           "cell_width": 10.0,
           "cell_height": 10.0,
           "pixel_type": "U16",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 12,
+              "height": 12,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
         },
         "B08": {
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 16,
-          "height": 16,
+          "width": 12,
+          "height": 12,
           "cell_width": 10.0,
           "cell_height": 10.0,
           "pixel_type": "U16",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 12,
+              "height": 12,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
         },
         "B11": {
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 8,
-          "height": 8,
+          "width": 6,
+          "height": 6,
           "cell_width": 20.0,
           "cell_height": 20.0,
           "pixel_type": "U16",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 6,
+              "height": 6,
+              "cell_width": 20.0,
+              "cell_height": 20.0,
+              "pixel_type": "U16"
+            }
+          ]
         },
         "B12": {
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 8,
-          "height": 8,
+          "width": 6,
+          "height": 6,
           "cell_width": 20.0,
           "cell_height": 20.0,
           "pixel_type": "U16",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 6,
+              "height": 6,
+              "cell_width": 20.0,
+              "cell_height": 20.0,
+              "pixel_type": "U16"
+            }
+          ]
         },
         "SCL": {
           "format": "JP2",
           "wkid": 32645,
           "band_count": 1,
-          "width": 8,
-          "height": 8,
+          "width": 6,
+          "height": 6,
           "cell_width": 20.0,
           "cell_height": 20.0,
           "pixel_type": "U8",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 6,
+              "height": 6,
+              "cell_width": 20.0,
+              "cell_height": 20.0,
+              "pixel_type": "U8"
+            }
+          ]
         },
         "quality_classification": {
           "format": "JP2",
           "wkid": 32645,
-          "band_count": 1,
-          "width": 8,
-          "height": 8,
-          "cell_width": 20.0,
-          "cell_height": 20.0,
+          "band_count": 3,
+          "width": 2,
+          "height": 2,
+          "cell_width": 60.0,
+          "cell_height": 60.0,
           "pixel_type": "U8",
           "xmin": 273300.0,
-          "ymin": 3070220.0,
-          "xmax": 273460.0,
-          "ymax": 3070380.0
+          "ymin": 3070260.0,
+          "xmax": 273420.0,
+          "ymax": 3070380.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 2,
+              "height": 2,
+              "cell_width": 60.0,
+              "cell_height": 60.0,
+              "pixel_type": "U8"
+            },
+            {
+              "name": "Band_2",
+              "width": 2,
+              "height": 2,
+              "cell_width": 60.0,
+              "cell_height": 60.0,
+              "pixel_type": "U8"
+            },
+            {
+              "name": "Band_3",
+              "width": 2,
+              "height": 2,
+              "cell_width": 60.0,
+              "cell_height": 60.0,
+              "pixel_type": "U8"
+            }
+          ]
         }
       }
     }
@@ -304,7 +502,9 @@
         "before/after B12 differs at xmin",
         "before/after B12 differs at xmax",
         "before/after SCL differs at xmin",
-        "before/after SCL differs at xmax"
+        "before/after SCL differs at xmax",
+        "before/after quality_classification differs at xmin",
+        "before/after quality_classification differs at xmax"
       ]
     }
   },
@@ -320,6 +520,12 @@
       "status": "fail",
       "method": "ArcGIS CopyRaster to JP2 with U8",
       "error": "No raster store is configurated."
+    },
+    {
+      "attempt": "scratch/optical-input-readiness-arcgis-007",
+      "status": "fail",
+      "method": "ArcGIS dataset-level Describe for a three-band JP2",
+      "error": "ArcGIS exposed width, height, cell size, and pixel type only on the Band_1 through Band_3 child descriptions."
     }
   ],
   "retained_prepublication_attempts": [
@@ -351,6 +557,15 @@
       "attempt": "scratch/optical-input-readiness-arcgis-005",
       "status": "superseded_before_publication",
       "reason": "The production receipt activity fields were made explicit about attempted versus complete ArcGIS header opening before the final contract was frozen.",
+      "real_product_data_used": false
+    }
+  ],
+  "retained_published_attempts": [
+    {
+      "attempt": "scratch/optical-input-readiness-arcgis-006",
+      "published_commit": "df3e93aadef064129c928463cc1f5eec562e3950",
+      "status": "superseded_after_publication",
+      "reason": "Official Sentinel-2 documentation confirms that PB 05.12 MSK_CLASSI_B00.jp2 is a three-band 60 m Boolean mask; the published fixture incorrectly modeled it as one-band 20 m.",
       "real_product_data_used": false
     }
   ],
