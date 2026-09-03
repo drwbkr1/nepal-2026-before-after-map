@@ -20,6 +20,7 @@ REQUIRED = [
     "docs/DATA_AND_METHODS_PLAN.md",
     "docs/SOURCES.md",
     "docs/ARCGIS_DELIVERY_PLAN.md",
+    "docs/ARCGIS_EVIDENCE_MODEL.md",
     "docs/VALIDATION.md",
     "docs/STATUS.md",
     "docs/DECISIONS.md",
@@ -43,6 +44,7 @@ REQUIRED = [
     "docs/assets/m1-source-manifest-review.png",
     "records/surface-receipts/m1-source-manifest-review.json",
     "records/surface-receipts/m1-control-reproducibility.json",
+    "records/surface-receipts/arcgis-evidence-workspace.json",
     "reviews/m1-manifest/review-bundle.json",
     "reviews/m1-manifest/review-contract.json",
     "reviews/m1-manifest/blank-response.json",
@@ -51,11 +53,16 @@ REQUIRED = [
     "docs/assets/m2-controlled-acquisition-review.png",
     "scripts/render_m2_activation_review.py",
     "scripts/prepare_m2_intake.py",
+    "scripts/build_arcgis_evidence_workspace.py",
+    "scripts/validate_arcgis_evidence_workspace.py",
+    "config/arcgis/evidence-workspace-schema.json",
+    "docs/assets/arcgis-evidence-workspace-preview.png",
     "records/surface-receipts/m2-activation-review.json",
     "reviews/m2-activation/review-bundle.json",
     "reviews/m2-activation/review-contract.json",
     "reviews/m2-activation/blank-response.json",
     "tests/test_m2_intake.py",
+    "tests/test_arcgis_evidence_schema.py",
     ".github/workflows/validate.yml",
 ]
 
@@ -163,6 +170,8 @@ def main() -> None:
     intake_contract = json.loads((ROOT / "contracts/m2-intake-candidate.json").read_text(encoding="utf-8"))
     intake_dry_run = json.loads((ROOT / "records/acquisition/m2-intake-static-dry-run.json").read_text(encoding="utf-8"))
     reproducibility = json.loads((ROOT / "records/surface-receipts/m1-control-reproducibility.json").read_text(encoding="utf-8"))
+    evidence_schema = json.loads((ROOT / "config/arcgis/evidence-workspace-schema.json").read_text(encoding="utf-8"))
+    evidence_workspace = json.loads((ROOT / "records/surface-receipts/arcgis-evidence-workspace.json").read_text(encoding="utf-8"))
     aoi_reconciliation = json.loads((ROOT / "records/source-gates/aoi-review-reconciliation.json").read_text(encoding="utf-8"))
     units = {unit["id"]: unit for unit in contract["units"]}
     validate_review_bundle("reviews/m1-aoi/review-bundle.json", "reviews/m1-aoi/review-contract.json")
@@ -304,6 +313,65 @@ def main() -> None:
     for check in reproducibility["checks"]:
         if check["status"] != "pass" or check["sha256"] != sha256(check["artifact"]):
             fail(f"reproducibility receipt does not bind {check['artifact']}")
+
+    if evidence_workspace.get("status") != "pass_with_retained_failures":
+        fail("ArcGIS evidence workspace receipt is not in a passing state")
+    if evidence_workspace.get("runtime") != {"product": "ArcGISPro", "version": "3.7.1", "license_level": "Advanced"}:
+        fail("ArcGIS evidence workspace runtime differs from the validated environment")
+    evidence_inputs = evidence_workspace.get("inputs", {})
+    for path_key, hash_key in (
+        ("schema", "schema_sha256"),
+        ("approved_aoi", "approved_aoi_sha256"),
+        ("source_manifest", "source_manifest_sha256"),
+        ("manifest_approval", "manifest_approval_sha256"),
+        ("builder", "builder_sha256"),
+    ):
+        relative = evidence_inputs.get(path_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"ArcGIS evidence workspace receipt is missing {path_key}")
+        if evidence_inputs.get(hash_key) != sha256(relative):
+            fail(f"ArcGIS evidence workspace receipt does not bind {path_key}")
+    preview = evidence_workspace.get("public_preview", {})
+    preview_relative = preview.get("path")
+    if not isinstance(preview_relative, str) or not (ROOT / preview_relative).is_file():
+        fail("ArcGIS evidence workspace preview is missing")
+    if preview.get("sha256") != sha256(preview_relative) or preview.get("visual_inspection") != "pass":
+        fail("ArcGIS evidence workspace preview is unbound or not visually approved")
+    if len(evidence_schema.get("datasets", [])) != 9 or len(evidence_schema.get("domains", {})) != 14:
+        fail("ArcGIS evidence schema must contain nine datasets and fourteen domains")
+    if len(evidence_schema.get("relationships", [])) != 8:
+        fail("ArcGIS evidence schema must contain eight relationship classes")
+    dataset_names = {item["name"] for item in evidence_schema["datasets"]}
+    if not {"ObservedChange", "Interpretations", "AttributionAssessments"}.issubset(dataset_names):
+        fail("ArcGIS evidence schema must separate observation, interpretation, and attribution")
+    relationship_names = {item["name"] for item in evidence_schema["relationships"]}
+    if not {"ObservedChange_Interpretations", "Interpretations_Attribution"}.issubset(relationship_names):
+        fail("ArcGIS evidence schema must link observation to interpretation and attribution")
+    expected_workspace_counts = evidence_schema.get("initial_counts", {})
+    actual_workspace_counts = {
+        name: details.get("row_count")
+        for name, details in evidence_workspace.get("workspace", {}).get("datasets", {}).items()
+    }
+    if expected_workspace_counts != actual_workspace_counts:
+        fail("ArcGIS evidence workspace row counts differ from the declared empty scientific state")
+    feature_wkids = {
+        name: details.get("spatial_reference_wkid")
+        for name, details in evidence_workspace["workspace"]["datasets"].items()
+        if name in {"StudyAreas", "ObservedChange", "AnalysisExclusions", "StableControls"}
+    }
+    if set(feature_wkids.values()) != {32645}:
+        fail("ArcGIS evidence feature classes must use EPSG:32645")
+    record_states = set(evidence_schema["domains"]["DOM_RECORD_STATUS"]["coded_values"])
+    if not {"rejected", "deferred", "inconclusive", "invalid", "superseded"}.issubset(record_states):
+        fail("ArcGIS evidence schema does not preserve required adverse record states")
+    if len(evidence_workspace.get("retained_failures", [])) != 6:
+        fail("ArcGIS evidence workspace must retain all six failed attempts")
+    if {item.get("status") for item in evidence_workspace["retained_failures"]} != {"fail", "fail_visual"}:
+        fail("ArcGIS evidence workspace retained failure types differ")
+    if evidence_workspace.get("checks", {}).get("visual_inspection") != "pass":
+        fail("ArcGIS evidence workspace visual inspection did not pass")
+    if not any("No satellite pixels" in item for item in evidence_workspace.get("limitations", [])):
+        fail("ArcGIS evidence workspace must preserve its no-pixels claim boundary")
 
     for number, line in enumerate(
         (ROOT / "records/evidence-ledger.jsonl").read_text(encoding="utf-8").splitlines(), 1

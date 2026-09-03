@@ -13,6 +13,12 @@ Validation is staged. Passing repository checks does not validate pixels or scie
 
 GitHub Actions runs the same check on pushes and pull requests.
 
+Portable unit tests also verify the ArcGIS evidence schema, the separation of observation, interpretation, and attribution, required adverse states, initial empty scientific state, receipt bindings, preview hash, and retained failures:
+
+```powershell
+python -m unittest tests.test_arcgis_evidence_schema -v
+```
+
 ## M2 static intake-control validation
 
 Before any activation or data transfer, the repository also verifies that:
@@ -76,6 +82,14 @@ For each external product:
 - causal wording requires a separate review decision.
 
 ## ArcGIS package QA
+
+The current metadata-only evidence workspace has a separate ArcGIS-native validator:
+
+```powershell
+& "C:\Program Files\ArcGIS\Pro\bin\Python\Scripts\propy.bat" scripts\validate_arcgis_evidence_workspace.py
+```
+
+It opens the retained File Geodatabase and APRX, checks all declared datasets, fields, domain assignments, row counts, relationship classes, EPSG:32645 feature classes, map and layout identity, required layout elements, and bound APRX/PDF hashes. A clean Git checkout can run the portable checks but cannot repeat this native check without the ignored retained scratch outputs and ArcGIS Pro.
 
 - open and export tests succeed from a clean directory;
 - no broken sources or undocumented network paths remain;

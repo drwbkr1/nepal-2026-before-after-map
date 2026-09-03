@@ -85,6 +85,8 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Outcome:** An ArcGIS Pro package that opens without undocumented local dependencies.
 
+**Preparatory status:** A metadata-only EPSG:32645 evidence schema, File Geodatabase, APRX, and overview export have passed local ArcGIS Pro 3.7.1 validation. Heavy outputs remain in ignored scratch custody, scientific layers are empty, and this does not satisfy M6 packaging or clean-machine exit evidence.
+
 **Deliverables:** `.aprx`, `.gdb`, `.lyrx`, GeoTIFF, PDF/PNG layouts, metadata, and optionally `.ppkx` after size and license review.
 
 **Exit gate:** Clean-machine/package validation and export test.

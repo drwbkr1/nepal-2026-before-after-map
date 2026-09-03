@@ -19,6 +19,9 @@
 - eight exact sources are accepted for controlled acquisition planning, two RUL optical context records remain deferred, and none were erased or rejected;
 - all M1 exit conditions pass without any full-product acquisition;
 - the public repository preserves exact review evidence and validates clean-checkout portability.
+- ArcGIS Pro 3.7.1 Advanced created and reopened a metadata-only EPSG:32645 evidence workspace with nine datasets, fourteen domains, eight relationship classes, three approved AOIs, and ten source-product metadata rows;
+- direct-observation, interpretation, attribution, exclusion, stable-control, and QA datasets remain empty, so the workspace makes no landscape-change or causal claim;
+- the ArcGIS builder, independent ArcGIS-native validator, portable schema tests, visually approved PNG preview, and retained-failure receipt are prepared for publication; the APRX, File Geodatabase, and PDF remain in ignored scratch custody.
 
 ## Proposed M2 package
 
@@ -35,6 +38,8 @@
 The proposal would allow a fresh custody preflight, creation of the external data root, use of an owner-controlled existing Copernicus account or authenticated session, downloads of only the eight exact products, and checksum, archive, band, pixel, coverage, rights, baseline, and registration QA.
 
 The static intake packet is derived tooling, not an M2 preflight or approval. It made no network request or filesystem probe, created no external directory, and left the reviewed M2 plan and bundle hashes unchanged.
+
+The ArcGIS evidence workspace is also preparatory structure, not M2 execution. It uses approved AOIs and source metadata only and did not authenticate, create the proposed external data root, download products, or process pixels.
 
 ## Not authorized or completed
 

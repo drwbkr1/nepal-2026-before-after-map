@@ -1,0 +1,252 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "ARCGIS-EVIDENCE-WORKSPACE-001",
+  "status": "pass_with_retained_failures",
+  "verified_at_utc": "2026-09-02T05:20:43Z",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced"
+  },
+  "inputs": {
+    "schema": "config/arcgis/evidence-workspace-schema.json",
+    "schema_sha256": "4b592ba928c0c532856f91be49a1f44349ba13d3fa783be20bdb9fab6d20dafb",
+    "approved_aoi": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "source_manifest": "records/source-manifest.json",
+    "source_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+    "manifest_approval": "records/source-gates/source-manifest-approval.json",
+    "manifest_approval_sha256": "c6df8c24adc96439e8b8ef00c733db8fc3cd3ffb229b333b1d8a63933f3aa04e",
+    "builder": "scripts/build_arcgis_evidence_workspace.py",
+    "builder_sha256": "912aecaafef991045d8561a7121633ee81d8bdcdf49596568d5ebf77e0ab01af"
+  },
+  "external_outputs": {
+    "root": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\arcgis-evidence-workspace-attempt-006",
+    "file_geodatabase": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\arcgis-evidence-workspace-attempt-006\\Nepal_2026_Evidence.gdb",
+    "arcgis_project": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\arcgis-evidence-workspace-attempt-006\\Nepal_2026_Evidence.aprx",
+    "arcgis_project_sha256": "a565a9b95402d29df02e0a046e42cb7f5a85f1e1daeb83c5fbb3f54badc170e0",
+    "pdf_export": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\arcgis-evidence-workspace-attempt-006\\Evidence_Workspace_Overview.pdf",
+    "pdf_export_sha256": "73c9cb55ad41f7377db431b90e1e4886d2901550e95e7af9542e1ee167137d04"
+  },
+  "public_preview": {
+    "path": "docs/assets/arcgis-evidence-workspace-preview.png",
+    "sha256": "c5e67dbd890da6c3304b70c3734075a3970992aef75f21380f3d28197d219dd6",
+    "visual_inspection": "pass",
+    "visual_findings": [
+      "Title, subtitle, AOI labels, north arrow, legend, numeric map scale, and claim boundary are visible and unclipped.",
+      "Approved search and review extents are visually distinct from the empty observation and exclusion layers.",
+      "No satellite pixels, mapped change, interpretation, attribution, or emergency guidance appears.",
+      "The defective native scale bar is absent; the verified numeric scale and projected map units are shown instead."
+    ]
+  },
+  "workspace": {
+    "datasets": {
+      "StudyAreas": {
+        "row_count": 3,
+        "missing_declared_fields": [],
+        "domain_bindings": {},
+        "spatial_reference_wkid": 32645
+      },
+      "SourceProducts": {
+        "row_count": 10,
+        "missing_declared_fields": [],
+        "domain_bindings": {
+          "EVID_ROUTE": "DOM_EVIDENCE_ROUTE",
+          "RECORD_STAT": "DOM_RECORD_STATUS",
+          "REVIEW_STAT": "DOM_REVIEW_STATUS"
+        },
+        "spatial_reference_wkid": null
+      },
+      "ObservedChange": {
+        "row_count": 0,
+        "missing_declared_fields": [],
+        "domain_bindings": {
+          "OBS_CLASS": "DOM_OBSERVATION_CLASS",
+          "EVID_ROUTE": "DOM_EVIDENCE_ROUTE",
+          "CONFIDENCE": "DOM_CONFIDENCE",
+          "RECORD_STAT": "DOM_RECORD_STATUS",
+          "REVIEW_STAT": "DOM_REVIEW_STATUS"
+        },
+        "spatial_reference_wkid": 32645
+      },
+      "AnalysisExclusions": {
+        "row_count": 0,
+        "missing_declared_fields": [],
+        "domain_bindings": {
+          "REASON": "DOM_EXCLUSION_REASON",
+          "EVID_ROUTE": "DOM_EVIDENCE_ROUTE",
+          "RECORD_STAT": "DOM_RECORD_STATUS",
+          "REVIEW_STAT": "DOM_REVIEW_STATUS"
+        },
+        "spatial_reference_wkid": 32645
+      },
+      "StableControls": {
+        "row_count": 0,
+        "missing_declared_fields": [],
+        "domain_bindings": {
+          "CTRL_TYPE": "DOM_CONTROL_TYPE",
+          "RECORD_STAT": "DOM_RECORD_STATUS",
+          "REVIEW_STAT": "DOM_REVIEW_STATUS"
+        },
+        "spatial_reference_wkid": 32645
+      },
+      "ObservationSources": {
+        "row_count": 0,
+        "missing_declared_fields": [],
+        "domain_bindings": {
+          "EVID_ROLE": "DOM_EVIDENCE_ROLE",
+          "USAGE_STAT": "DOM_USAGE_STATUS"
+        },
+        "spatial_reference_wkid": null
+      },
+      "Interpretations": {
+        "row_count": 0,
+        "missing_declared_fields": [],
+        "domain_bindings": {
+          "INTERP": "DOM_INTERPRETATION_CLASS",
+          "CONFIDENCE": "DOM_CONFIDENCE",
+          "RECORD_STAT": "DOM_RECORD_STATUS",
+          "REVIEW_STAT": "DOM_REVIEW_STATUS"
+        },
+        "spatial_reference_wkid": null
+      },
+      "AttributionAssessments": {
+        "row_count": 0,
+        "missing_declared_fields": [],
+        "domain_bindings": {
+          "ATTRIB_STAT": "DOM_ATTRIBUTION_STATUS",
+          "TIMING_OK": "DOM_BINARY_ASSESSMENT",
+          "GEOM_OK": "DOM_BINARY_ASSESSMENT",
+          "RECORD_STAT": "DOM_RECORD_STATUS",
+          "REVIEW_STAT": "DOM_REVIEW_STATUS"
+        },
+        "spatial_reference_wkid": null
+      },
+      "AnalysisQA": {
+        "row_count": 0,
+        "missing_declared_fields": [],
+        "domain_bindings": {
+          "QA_TYPE": "DOM_QA_TYPE",
+          "QA_STATUS": "DOM_QA_STATUS"
+        },
+        "spatial_reference_wkid": null
+      }
+    },
+    "domains": {
+      "DOM_USAGE_STATUS": 4,
+      "DOM_INTERPRETATION_CLASS": 7,
+      "DOM_RECORD_STATUS": 7,
+      "DOM_REVIEW_STATUS": 4,
+      "DOM_CONFIDENCE": 5,
+      "DOM_EVIDENCE_ROUTE": 4,
+      "DOM_OBSERVATION_CLASS": 5,
+      "DOM_ATTRIBUTION_STATUS": 5,
+      "DOM_CONTROL_TYPE": 4,
+      "DOM_EXCLUSION_REASON": 14,
+      "DOM_BINARY_ASSESSMENT": 3,
+      "DOM_QA_STATUS": 5,
+      "DOM_EVIDENCE_ROLE": 4,
+      "DOM_QA_TYPE": 7
+    },
+    "relationship_classes": [
+      "Interpretations_Attribution",
+      "ObservedChange_AnalysisQA",
+      "ObservedChange_Interpretations",
+      "ObservedChange_ObservationSources",
+      "SourceProducts_Exclusions",
+      "SourceProducts_ObservationSources",
+      "StudyAreas_ObservedChange",
+      "StudyAreas_StableControls"
+    ]
+  },
+  "project": {
+    "map_name": "Evidence Workspace",
+    "layout_name": "Evidence Workspace Overview",
+    "map_spatial_reference_wkid": 32645,
+    "layer_names": [
+      "ANALYSIS EXCLUSIONS — EMPTY",
+      "DIRECT SATELLITE OBSERVATIONS — EMPTY",
+      "APPROVED SEARCH AND REVIEW AREAS"
+    ],
+    "table_names": [
+      "SourceProducts",
+      "ObservationSources",
+      "Interpretations",
+      "AttributionAssessments",
+      "AnalysisQA"
+    ],
+    "layout_elements": [
+      "Legend",
+      "Verified Numeric Scale",
+      "North Arrow",
+      "Claim Boundary",
+      "Subtitle",
+      "Title",
+      "Evidence Map Frame"
+    ]
+  },
+  "checks": {
+    "analysis_crs_epsg_32645": "pass",
+    "approved_aoi_count_3": "pass",
+    "source_product_count_10": "pass",
+    "direct_observation_count_0": "pass",
+    "interpretation_count_0": "pass",
+    "attribution_count_0": "pass",
+    "exclusion_count_0": "pass",
+    "declared_fields_present": "pass",
+    "domains_assigned": "pass",
+    "relationship_classes_created": "pass",
+    "arcgis_project_saved": "pass",
+    "png_exported": "pass",
+    "pdf_exported": "pass",
+    "visual_inspection": "pass",
+    "numeric_scale_and_crs_units_visible": "pass",
+    "misleading_native_scale_bar_withheld": "pass"
+  },
+  "retained_failures": [
+    {
+      "attempt": "runtime-probe-001",
+      "status": "fail",
+      "finding": "Initial introspection used arcpy.mp.Layout as a module attribute and raised AttributeError after confirming ArcGIS Pro installation and ArcGISProject methods.",
+      "remediation": "Inspected Layout and Map through ArcGISProject instances before implementing the builder."
+    },
+    {
+      "attempt": "arcgis-evidence-workspace-attempt-001",
+      "status": "fail",
+      "finding": "The first workspace build created the empty schema but stopped before source-row insertion because the ArcGIS Python environment resolved the imported datetime symbol as a module without fromisoformat.",
+      "remediation": "Used an explicit datetime_module.datetime reference and started a distinct no-overwrite attempt; the failed scratch workspace remains retained."
+    },
+    {
+      "attempt": "arcgis-evidence-workspace-launch-002",
+      "status": "fail",
+      "finding": "The second direct Python launch stopped during arcpy import because the named-user product license was not initialized; no output directory or public artifact was created.",
+      "remediation": "Switched to the ArcGIS Pro supported propy launcher and rechecked output collisions before the next attempt."
+    },
+    {
+      "attempt": "arcgis-evidence-workspace-attempt-003",
+      "status": "fail",
+      "finding": "The third attempt created the geodatabase, populated source metadata, and created relationships, then ArcGIS addDataFromPath treated relative geodatabase paths as automatic web-service paths and stopped before APRX or export creation.",
+      "remediation": "Resolved every geodatabase dataset to an absolute local path before adding it to the ArcGIS map; the failed scratch workspace remains retained."
+    },
+    {
+      "attempt": "arcgis-evidence-workspace-attempt-004",
+      "status": "fail_visual",
+      "finding": "Structural validation passed and APRX, PDF, and PNG were created, but the default unitless scale bar displayed overlapping multi-digit labels during visual inspection.",
+      "remediation": "Configured the scale bar explicitly in kilometers with 25 km divisions, zero decimal places, one subdivision, and a bounded element width; the failed exports and candidate receipt remain retained in scratch custody."
+    },
+    {
+      "attempt": "arcgis-evidence-workspace-attempt-005",
+      "status": "fail_visual",
+      "finding": "ArcGIS ignored the requested kilometer division and still rendered overlapping, implausibly large native scale-bar labels; the empty stable-control point layer also produced an unexplained map symbol artifact.",
+      "remediation": "Removed the defective scale surround and the empty control layer from the preview map, retained the StableControls feature class in the geodatabase, and displayed the verified numeric map scale plus CRS units. A true scale bar remains required and separately testable on later scientific layouts."
+    }
+  ],
+  "limitations": [
+    "Workspace structure and approved metadata only. No satellite pixels, mapped change, interpretation, attribution, or emergency guidance.",
+    "The File Geodatabase, APRX, and PDF are validation outputs in ignored scratch custody and are not public release artifacts.",
+    "The preview contains approved AOI geometry and empty evidence layers only; it does not establish data availability, pixel usability, landscape change, interpretation, or attribution.",
+    "A clean repository checkout can validate the receipt and schema but cannot reproduce ArcGIS runtime behavior without ArcGIS Pro 3.7.1 or later.",
+    "A true cartographic scale bar is still required on later scientific layouts and must be verified against each final map-frame extent before release."
+  ],
+  "visual_inspected_at_utc": "2026-09-02T05:24:03Z"
+}

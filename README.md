@@ -48,6 +48,8 @@ Milestones 0 and 1 are complete. The exact AOI and source-manifest decisions are
 
 A deterministic, network-free M2 intake packet is prepared for the eight exact products. It fixes sibling staging and custody paths, fail-on-collision and no-replace promotion rules, secret references, and attempt retention without changing the pending review bundle or creating acquisition authority.
 
+A metadata-only ArcGIS evidence workspace has also been built and validated in ArcGIS Pro 3.7.1 Advanced. Its EPSG:32645 File Geodatabase contains nine datasets, fourteen coded-value domains, eight relationship classes, three approved AOIs, and ten source-product metadata rows. The observation, interpretation, attribution, exclusion, stable-control, and QA structures are empty by design. The retained APRX, geodatabase, and PDF remain outside Git; the repository contains the schema, builder, validator, receipt, and a reviewed PNG preview.
+
 See:
 
 - [Project charter](docs/PROJECT_CHARTER.md)
@@ -59,6 +61,7 @@ See:
 - [M2 controlled-acquisition review](docs/M2_CONTROLLED_ACQUISITION_REVIEW.md)
 - [M2 controlled-intake execution runbook](docs/M2_EXECUTION_RUNBOOK.md)
 - [ArcGIS delivery plan](docs/ARCGIS_DELIVERY_PLAN.md)
+- [ArcGIS evidence model](docs/ARCGIS_EVIDENCE_MODEL.md)
 - [Validation plan](docs/VALIDATION.md)
 - [Current status](docs/STATUS.md)
 - [Decision log](docs/DECISIONS.md)
@@ -71,4 +74,4 @@ From the repository root:
 python scripts/check_project.py
 ```
 
-The check verifies required control files, parses the JSON records, and rejects tracked secrets and large geospatial artifacts.
+The check verifies required control files, parses the JSON records, validates the portable ArcGIS schema and receipt bindings, and rejects tracked secrets and large geospatial artifacts.

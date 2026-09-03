@@ -1,0 +1,964 @@
+{
+  "schema_version": "1.0",
+  "schema_id": "NEPAL-ARCGIS-EVIDENCE-WORKSPACE-001",
+  "status": "approved_structure_empty_scientific_content",
+  "analysis_crs": {
+    "wkid": 32645,
+    "name": "WGS 1984 UTM Zone 45N"
+  },
+  "workspace_name": "Nepal_2026_Evidence.gdb",
+  "project_name": "Nepal_2026_Evidence.aprx",
+  "map_name": "Evidence Workspace",
+  "layout_name": "Evidence Workspace Overview",
+  "principles": [
+    "Direct satellite observations are stored separately from analyst interpretations and event attribution assessments.",
+    "Source identity and observation-to-source joins are explicit and many-to-many.",
+    "Failed, rejected, invalid, superseded, deferred, and inconclusive states remain representable.",
+    "Exclusions and registration controls are first-class evidence rather than hidden processing state.",
+    "Empty scientific layers do not imply absence of change; they mean no reviewed observation has been admitted."
+  ],
+  "domains": {
+    "DOM_RECORD_STATUS": {
+      "field_type": "TEXT",
+      "description": "Evidence record lifecycle status",
+      "coded_values": {
+        "candidate": "Candidate",
+        "accepted": "Accepted",
+        "rejected": "Rejected",
+        "deferred": "Deferred",
+        "inconclusive": "Inconclusive",
+        "invalid": "Invalid",
+        "superseded": "Superseded"
+      }
+    },
+    "DOM_REVIEW_STATUS": {
+      "field_type": "TEXT",
+      "description": "Human review state",
+      "coded_values": {
+        "unreviewed": "Unreviewed",
+        "analyst_reviewed": "Analyst reviewed",
+        "owner_reviewed": "Owner reviewed",
+        "deferred": "Deferred"
+      }
+    },
+    "DOM_CONFIDENCE": {
+      "field_type": "TEXT",
+      "description": "Evidence confidence without causal meaning",
+      "coded_values": {
+        "not_assessed": "Not assessed",
+        "low": "Low",
+        "moderate": "Moderate",
+        "high": "High",
+        "inconclusive": "Inconclusive"
+      }
+    },
+    "DOM_EVIDENCE_ROUTE": {
+      "field_type": "TEXT",
+      "description": "Sensor or evidence route",
+      "coded_values": {
+        "optical": "Optical",
+        "radar": "Radar",
+        "multisensor": "Multisensor",
+        "other": "Other"
+      }
+    },
+    "DOM_OBSERVATION_CLASS": {
+      "field_type": "TEXT",
+      "description": "Directly measurable satellite observation class",
+      "coded_values": {
+        "surface_reflectance_change": "Surface reflectance change",
+        "radar_backscatter_change": "Radar backscatter change",
+        "water_extent_change": "Water extent change",
+        "multisensor_spatial_coincidence": "Multisensor spatial coincidence",
+        "unclassified_visual_change": "Unclassified visible change"
+      }
+    },
+    "DOM_EXCLUSION_REASON": {
+      "field_type": "TEXT",
+      "description": "Reason an area or source is excluded or qualified",
+      "coded_values": {
+        "cloud": "Cloud",
+        "cirrus": "Cirrus",
+        "shadow": "Optical terrain or cloud shadow",
+        "snow_ice": "Snow or ice",
+        "saturation": "Saturation",
+        "nodata": "No data",
+        "radar_layover": "Radar layover",
+        "radar_shadow": "Radar shadow",
+        "border_noise": "Radar border noise",
+        "residual_speckle": "Residual radar speckle",
+        "misregistration": "Misregistration",
+        "missing_coverage": "Missing coverage",
+        "rights": "Rights or access exclusion",
+        "other": "Other"
+      }
+    },
+    "DOM_INTERPRETATION_CLASS": {
+      "field_type": "TEXT",
+      "description": "Analyst interpretation kept separate from observation",
+      "coded_values": {
+        "possible_source_scar": "Possible source scar",
+        "possible_debris_deposition": "Possible debris deposition",
+        "possible_channel_change": "Possible channel change",
+        "possible_inundation": "Possible inundation",
+        "possible_bank_erosion": "Possible bank erosion",
+        "other": "Other",
+        "unresolved": "Unresolved"
+      }
+    },
+    "DOM_ATTRIBUTION_STATUS": {
+      "field_type": "TEXT",
+      "description": "Event-attribution assessment",
+      "coded_values": {
+        "not_assessed": "Not assessed",
+        "timing_consistent_only": "Timing consistent only",
+        "supported_multi_evidence": "Supported by multiple evidence lines",
+        "insufficient_evidence": "Insufficient evidence",
+        "contradicted": "Contradicted"
+      }
+    },
+    "DOM_BINARY_ASSESSMENT": {
+      "field_type": "TEXT",
+      "description": "Three-state assessment",
+      "coded_values": {
+        "unknown": "Unknown",
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "DOM_EVIDENCE_ROLE": {
+      "field_type": "TEXT",
+      "description": "Product role in an observation",
+      "coded_values": {
+        "before": "Before",
+        "after": "After",
+        "support": "Supporting evidence",
+        "contradiction": "Contradicting evidence"
+      }
+    },
+    "DOM_USAGE_STATUS": {
+      "field_type": "TEXT",
+      "description": "Disposition of a source for a specific observation",
+      "coded_values": {
+        "used": "Used",
+        "excluded": "Excluded",
+        "inconclusive": "Inconclusive",
+        "rejected": "Rejected"
+      }
+    },
+    "DOM_QA_TYPE": {
+      "field_type": "TEXT",
+      "description": "Quality-assurance measurement type",
+      "coded_values": {
+        "registration": "Registration",
+        "mask": "Mask",
+        "stable_reference": "Stable reference",
+        "coverage": "Coverage",
+        "container": "Container integrity",
+        "rights": "Rights",
+        "other": "Other"
+      }
+    },
+    "DOM_QA_STATUS": {
+      "field_type": "TEXT",
+      "description": "Quality-assurance outcome",
+      "coded_values": {
+        "not_run": "Not run",
+        "pass": "Pass",
+        "fail": "Fail",
+        "inconclusive": "Inconclusive",
+        "invalid": "Invalid"
+      }
+    },
+    "DOM_CONTROL_TYPE": {
+      "field_type": "TEXT",
+      "description": "Registration or stability control type",
+      "coded_values": {
+        "stable_terrain": "Stable terrain",
+        "infrastructure": "Infrastructure",
+        "water_edge": "Water edge",
+        "other": "Other"
+      }
+    }
+  },
+  "datasets": [
+    {
+      "name": "StudyAreas",
+      "kind": "feature_class",
+      "geometry_type": "POLYGON",
+      "source": "approved_aoi",
+      "fields": [
+        {
+          "name": "AOI_ID",
+          "alias": "AOI ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "NAME",
+          "alias": "Name",
+          "type": "TEXT",
+          "length": 80,
+          "nullable": false
+        },
+        {
+          "name": "PURPOSE",
+          "alias": "Purpose",
+          "type": "TEXT",
+          "length": 160,
+          "nullable": false
+        },
+        {
+          "name": "STATUS",
+          "alias": "Status",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "SOURCE_REF",
+          "alias": "Source reference",
+          "type": "TEXT",
+          "length": 160,
+          "nullable": false
+        }
+      ],
+      "unique_index": "AOI_ID"
+    },
+    {
+      "name": "SourceProducts",
+      "kind": "table",
+      "source": "approved_source_manifest",
+      "fields": [
+        {
+          "name": "SOURCE_ID",
+          "alias": "Source ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "PRODUCT_ID",
+          "alias": "Exact product ID",
+          "type": "TEXT",
+          "length": 200,
+          "nullable": false
+        },
+        {
+          "name": "PROVIDER_ID",
+          "alias": "Provider product ID",
+          "type": "TEXT",
+          "length": 64,
+          "nullable": false
+        },
+        {
+          "name": "COLLECTION",
+          "alias": "Collection",
+          "type": "TEXT",
+          "length": 80,
+          "nullable": false
+        },
+        {
+          "name": "EVID_ROUTE",
+          "alias": "Evidence route",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false,
+          "domain": "DOM_EVIDENCE_ROUTE"
+        },
+        {
+          "name": "EVENT_ROLE",
+          "alias": "Event role",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false
+        },
+        {
+          "name": "ACQ_START",
+          "alias": "Acquisition start UTC",
+          "type": "DATE",
+          "nullable": false
+        },
+        {
+          "name": "ACQ_END",
+          "alias": "Acquisition end UTC",
+          "type": "DATE",
+          "nullable": false
+        },
+        {
+          "name": "PLAN_DISP",
+          "alias": "Approved planning disposition",
+          "type": "TEXT",
+          "length": 64,
+          "nullable": false
+        },
+        {
+          "name": "RECORD_STAT",
+          "alias": "Record status",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false,
+          "domain": "DOM_RECORD_STATUS"
+        },
+        {
+          "name": "CUSTODY",
+          "alias": "Custody status",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "PIXEL_STAT",
+          "alias": "Pixel usability status",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "RIGHTS",
+          "alias": "Rights status",
+          "type": "TEXT",
+          "length": 160,
+          "nullable": false
+        },
+        {
+          "name": "LOCAL_SHA",
+          "alias": "Local SHA-256",
+          "type": "TEXT",
+          "length": 64,
+          "nullable": true
+        },
+        {
+          "name": "REVIEW_STAT",
+          "alias": "Review status",
+          "type": "TEXT",
+          "length": 24,
+          "nullable": false,
+          "domain": "DOM_REVIEW_STATUS"
+        },
+        {
+          "name": "APPROVAL",
+          "alias": "Approval reference",
+          "type": "TEXT",
+          "length": 160,
+          "nullable": false
+        },
+        {
+          "name": "LIMITATION",
+          "alias": "Principal limitation",
+          "type": "TEXT",
+          "length": 500,
+          "nullable": true
+        }
+      ],
+      "unique_index": "SOURCE_ID"
+    },
+    {
+      "name": "ObservedChange",
+      "kind": "feature_class",
+      "geometry_type": "POLYGON",
+      "source": "empty",
+      "fields": [
+        {
+          "name": "OBS_ID",
+          "alias": "Observation ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "AOI_ID",
+          "alias": "AOI ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "OBS_CLASS",
+          "alias": "Observed change class",
+          "type": "TEXT",
+          "length": 48,
+          "nullable": false,
+          "domain": "DOM_OBSERVATION_CLASS"
+        },
+        {
+          "name": "EVID_ROUTE",
+          "alias": "Evidence route",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false,
+          "domain": "DOM_EVIDENCE_ROUTE"
+        },
+        {
+          "name": "BEFORE_DT",
+          "alias": "Before UTC",
+          "type": "DATE",
+          "nullable": false
+        },
+        {
+          "name": "AFTER_DT",
+          "alias": "After UTC",
+          "type": "DATE",
+          "nullable": false
+        },
+        {
+          "name": "METHOD",
+          "alias": "Measurement method",
+          "type": "TEXT",
+          "length": 120,
+          "nullable": false
+        },
+        {
+          "name": "MEASURE",
+          "alias": "Measured value",
+          "type": "DOUBLE",
+          "nullable": true
+        },
+        {
+          "name": "UNIT",
+          "alias": "Measurement unit",
+          "type": "TEXT",
+          "length": 32,
+          "nullable": true
+        },
+        {
+          "name": "VALID_FRAC",
+          "alias": "Valid pixel fraction",
+          "type": "DOUBLE",
+          "nullable": true
+        },
+        {
+          "name": "ALIGN_RMSE",
+          "alias": "Alignment RMSE meters",
+          "type": "DOUBLE",
+          "nullable": true
+        },
+        {
+          "name": "UNCERT_M",
+          "alias": "Positional uncertainty meters",
+          "type": "DOUBLE",
+          "nullable": true
+        },
+        {
+          "name": "CONFIDENCE",
+          "alias": "Observation confidence",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false,
+          "domain": "DOM_CONFIDENCE"
+        },
+        {
+          "name": "RECORD_STAT",
+          "alias": "Record status",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false,
+          "domain": "DOM_RECORD_STATUS"
+        },
+        {
+          "name": "REVIEW_STAT",
+          "alias": "Review status",
+          "type": "TEXT",
+          "length": 24,
+          "nullable": false,
+          "domain": "DOM_REVIEW_STATUS"
+        },
+        {
+          "name": "LIMITATION",
+          "alias": "Principal limitation",
+          "type": "TEXT",
+          "length": 500,
+          "nullable": true
+        },
+        {
+          "name": "CREATED_UTC",
+          "alias": "Created UTC",
+          "type": "DATE",
+          "nullable": false
+        }
+      ],
+      "unique_index": "OBS_ID"
+    },
+    {
+      "name": "AnalysisExclusions",
+      "kind": "feature_class",
+      "geometry_type": "POLYGON",
+      "source": "empty",
+      "fields": [
+        {
+          "name": "EXCL_ID",
+          "alias": "Exclusion ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "SOURCE_ID",
+          "alias": "Source ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": true
+        },
+        {
+          "name": "REASON",
+          "alias": "Exclusion reason",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false,
+          "domain": "DOM_EXCLUSION_REASON"
+        },
+        {
+          "name": "EVID_ROUTE",
+          "alias": "Evidence route",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false,
+          "domain": "DOM_EVIDENCE_ROUTE"
+        },
+        {
+          "name": "METHOD",
+          "alias": "Derivation method",
+          "type": "TEXT",
+          "length": 120,
+          "nullable": false
+        },
+        {
+          "name": "RECORD_STAT",
+          "alias": "Record status",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false,
+          "domain": "DOM_RECORD_STATUS"
+        },
+        {
+          "name": "REVIEW_STAT",
+          "alias": "Review status",
+          "type": "TEXT",
+          "length": 24,
+          "nullable": false,
+          "domain": "DOM_REVIEW_STATUS"
+        },
+        {
+          "name": "LIMITATION",
+          "alias": "Limitation",
+          "type": "TEXT",
+          "length": 500,
+          "nullable": true
+        }
+      ],
+      "unique_index": "EXCL_ID"
+    },
+    {
+      "name": "StableControls",
+      "kind": "feature_class",
+      "geometry_type": "POINT",
+      "source": "empty",
+      "fields": [
+        {
+          "name": "CTRL_ID",
+          "alias": "Control ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "AOI_ID",
+          "alias": "AOI ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "CTRL_TYPE",
+          "alias": "Control type",
+          "type": "TEXT",
+          "length": 32,
+          "nullable": false,
+          "domain": "DOM_CONTROL_TYPE"
+        },
+        {
+          "name": "METHOD",
+          "alias": "Selection method",
+          "type": "TEXT",
+          "length": 120,
+          "nullable": false
+        },
+        {
+          "name": "RECORD_STAT",
+          "alias": "Record status",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false,
+          "domain": "DOM_RECORD_STATUS"
+        },
+        {
+          "name": "REVIEW_STAT",
+          "alias": "Review status",
+          "type": "TEXT",
+          "length": 24,
+          "nullable": false,
+          "domain": "DOM_REVIEW_STATUS"
+        },
+        {
+          "name": "NOTES",
+          "alias": "Notes",
+          "type": "TEXT",
+          "length": 500,
+          "nullable": true
+        }
+      ],
+      "unique_index": "CTRL_ID"
+    },
+    {
+      "name": "ObservationSources",
+      "kind": "table",
+      "source": "empty",
+      "fields": [
+        {
+          "name": "OBS_SRC_ID",
+          "alias": "Observation-source ID",
+          "type": "TEXT",
+          "length": 48,
+          "nullable": false
+        },
+        {
+          "name": "OBS_ID",
+          "alias": "Observation ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "SOURCE_ID",
+          "alias": "Source ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "EVID_ROLE",
+          "alias": "Evidence role",
+          "type": "TEXT",
+          "length": 24,
+          "nullable": false,
+          "domain": "DOM_EVIDENCE_ROLE"
+        },
+        {
+          "name": "USAGE_STAT",
+          "alias": "Usage status",
+          "type": "TEXT",
+          "length": 24,
+          "nullable": false,
+          "domain": "DOM_USAGE_STATUS"
+        },
+        {
+          "name": "NOTES",
+          "alias": "Notes",
+          "type": "TEXT",
+          "length": 500,
+          "nullable": true
+        }
+      ],
+      "unique_index": "OBS_SRC_ID"
+    },
+    {
+      "name": "Interpretations",
+      "kind": "table",
+      "source": "empty",
+      "fields": [
+        {
+          "name": "INTERP_ID",
+          "alias": "Interpretation ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "OBS_ID",
+          "alias": "Observation ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "INTERP",
+          "alias": "Interpretation class",
+          "type": "TEXT",
+          "length": 48,
+          "nullable": false,
+          "domain": "DOM_INTERPRETATION_CLASS"
+        },
+        {
+          "name": "CONFIDENCE",
+          "alias": "Interpretation confidence",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false,
+          "domain": "DOM_CONFIDENCE"
+        },
+        {
+          "name": "RATIONALE",
+          "alias": "Rationale",
+          "type": "TEXT",
+          "length": 1000,
+          "nullable": false
+        },
+        {
+          "name": "RECORD_STAT",
+          "alias": "Record status",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false,
+          "domain": "DOM_RECORD_STATUS"
+        },
+        {
+          "name": "REVIEW_STAT",
+          "alias": "Review status",
+          "type": "TEXT",
+          "length": 24,
+          "nullable": false,
+          "domain": "DOM_REVIEW_STATUS"
+        },
+        {
+          "name": "CREATED_UTC",
+          "alias": "Created UTC",
+          "type": "DATE",
+          "nullable": false
+        }
+      ],
+      "unique_index": "INTERP_ID"
+    },
+    {
+      "name": "AttributionAssessments",
+      "kind": "table",
+      "source": "empty",
+      "fields": [
+        {
+          "name": "ATTRIB_ID",
+          "alias": "Attribution assessment ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "INTERP_ID",
+          "alias": "Interpretation ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "EVENT_ID",
+          "alias": "Event ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "ATTRIB_STAT",
+          "alias": "Attribution status",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false,
+          "domain": "DOM_ATTRIBUTION_STATUS"
+        },
+        {
+          "name": "TIMING_OK",
+          "alias": "Timing consistent",
+          "type": "TEXT",
+          "length": 12,
+          "nullable": false,
+          "domain": "DOM_BINARY_ASSESSMENT"
+        },
+        {
+          "name": "GEOM_OK",
+          "alias": "Geometry consistent",
+          "type": "TEXT",
+          "length": 12,
+          "nullable": false,
+          "domain": "DOM_BINARY_ASSESSMENT"
+        },
+        {
+          "name": "INDEP_EVID",
+          "alias": "Independent evidence",
+          "type": "TEXT",
+          "length": 500,
+          "nullable": true
+        },
+        {
+          "name": "STATEMENT",
+          "alias": "Bounded causal statement",
+          "type": "TEXT",
+          "length": 1000,
+          "nullable": false
+        },
+        {
+          "name": "LIMITATION",
+          "alias": "Attribution limitation",
+          "type": "TEXT",
+          "length": 1000,
+          "nullable": true
+        },
+        {
+          "name": "RECORD_STAT",
+          "alias": "Record status",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false,
+          "domain": "DOM_RECORD_STATUS"
+        },
+        {
+          "name": "REVIEW_STAT",
+          "alias": "Review status",
+          "type": "TEXT",
+          "length": 24,
+          "nullable": false,
+          "domain": "DOM_REVIEW_STATUS"
+        }
+      ],
+      "unique_index": "ATTRIB_ID"
+    },
+    {
+      "name": "AnalysisQA",
+      "kind": "table",
+      "source": "empty",
+      "fields": [
+        {
+          "name": "QA_ID",
+          "alias": "QA ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": false
+        },
+        {
+          "name": "OBS_ID",
+          "alias": "Observation ID",
+          "type": "TEXT",
+          "length": 40,
+          "nullable": true
+        },
+        {
+          "name": "QA_TYPE",
+          "alias": "QA type",
+          "type": "TEXT",
+          "length": 32,
+          "nullable": false,
+          "domain": "DOM_QA_TYPE"
+        },
+        {
+          "name": "QA_STATUS",
+          "alias": "QA status",
+          "type": "TEXT",
+          "length": 20,
+          "nullable": false,
+          "domain": "DOM_QA_STATUS"
+        },
+        {
+          "name": "VALUE",
+          "alias": "Measured value",
+          "type": "DOUBLE",
+          "nullable": true
+        },
+        {
+          "name": "UNIT",
+          "alias": "Unit",
+          "type": "TEXT",
+          "length": 32,
+          "nullable": true
+        },
+        {
+          "name": "THRESHOLD",
+          "alias": "Predeclared threshold",
+          "type": "DOUBLE",
+          "nullable": true
+        },
+        {
+          "name": "SOURCE_REF",
+          "alias": "Evidence reference",
+          "type": "TEXT",
+          "length": 240,
+          "nullable": false
+        },
+        {
+          "name": "NOTES",
+          "alias": "Notes",
+          "type": "TEXT",
+          "length": 1000,
+          "nullable": true
+        }
+      ],
+      "unique_index": "QA_ID"
+    }
+  ],
+  "relationships": [
+    {
+      "name": "StudyAreas_ObservedChange",
+      "origin": "StudyAreas",
+      "destination": "ObservedChange",
+      "origin_key": "AOI_ID",
+      "destination_key": "AOI_ID"
+    },
+    {
+      "name": "StudyAreas_StableControls",
+      "origin": "StudyAreas",
+      "destination": "StableControls",
+      "origin_key": "AOI_ID",
+      "destination_key": "AOI_ID"
+    },
+    {
+      "name": "ObservedChange_ObservationSources",
+      "origin": "ObservedChange",
+      "destination": "ObservationSources",
+      "origin_key": "OBS_ID",
+      "destination_key": "OBS_ID"
+    },
+    {
+      "name": "SourceProducts_ObservationSources",
+      "origin": "SourceProducts",
+      "destination": "ObservationSources",
+      "origin_key": "SOURCE_ID",
+      "destination_key": "SOURCE_ID"
+    },
+    {
+      "name": "ObservedChange_Interpretations",
+      "origin": "ObservedChange",
+      "destination": "Interpretations",
+      "origin_key": "OBS_ID",
+      "destination_key": "OBS_ID"
+    },
+    {
+      "name": "Interpretations_Attribution",
+      "origin": "Interpretations",
+      "destination": "AttributionAssessments",
+      "origin_key": "INTERP_ID",
+      "destination_key": "INTERP_ID"
+    },
+    {
+      "name": "ObservedChange_AnalysisQA",
+      "origin": "ObservedChange",
+      "destination": "AnalysisQA",
+      "origin_key": "OBS_ID",
+      "destination_key": "OBS_ID"
+    },
+    {
+      "name": "SourceProducts_Exclusions",
+      "origin": "SourceProducts",
+      "destination": "AnalysisExclusions",
+      "origin_key": "SOURCE_ID",
+      "destination_key": "SOURCE_ID"
+    }
+  ],
+  "initial_counts": {
+    "StudyAreas": 3,
+    "SourceProducts": 10,
+    "ObservedChange": 0,
+    "AnalysisExclusions": 0,
+    "StableControls": 0,
+    "ObservationSources": 0,
+    "Interpretations": 0,
+    "AttributionAssessments": 0,
+    "AnalysisQA": 0
+  },
+  "claim_boundary": "Workspace structure and approved metadata only. No satellite pixels, mapped change, interpretation, attribution, or emergency guidance."
+}

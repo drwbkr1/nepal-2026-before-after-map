@@ -27,6 +27,19 @@ workspace/
 
 Only small, redistribution-safe layer definitions, scripts, metadata, and manifest records may later be copied into this repository.
 
+## Current verified evidence-workspace scaffold
+
+ArcGIS Pro 3.7.1 Advanced has created and reopened a metadata-only scaffold in ignored scratch custody. The validated surface contains:
+
+- an EPSG:32645 File Geodatabase with nine datasets, fourteen coded-value domains, and eight relationship classes;
+- three approved search and review AOIs and ten exact source-product metadata rows;
+- distinct empty structures for direct observations, interpretations, attribution assessments, exclusions, stable controls, source links, and QA;
+- an editable APRX plus PDF and PNG exports from one overview layout.
+
+The repository retains the declarative schema, ArcGIS builder, independent validator, public PNG preview, and validation receipt. It does not retain the File Geodatabase, APRX, or PDF. See [ARCGIS_EVIDENCE_MODEL.md](ARCGIS_EVIDENCE_MODEL.md).
+
+This scaffold establishes editable GIS structure and export behavior only. No product pixels have been acquired or admitted, and no change feature or event attribution has been mapped.
+
 ## Planned maps
 
 1. **Regional overview** — source area, main corridor, settlements, roads, drainage, and event context.
@@ -85,3 +98,5 @@ Before delivery:
 - inspect output visually for clipped text and misleading layer order;
 - unpack any project package in a separate directory and repeat the open/export test;
 - compare packaged source manifests and hashes with the approved records.
+
+The scaffold overview intentionally uses a verified numeric map scale because two retained attempts showed defective native scale-bar labels. Every later scientific layout still requires a true scale bar that passes visual inspection at its final extent.
