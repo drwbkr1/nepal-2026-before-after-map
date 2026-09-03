@@ -173,3 +173,21 @@
 **Decision:** Reconcile exactly one passing ArcGIS receipt for each approved DEM tile, preserve the two earlier failed wrapper attempts, and advance only to explicit vertical-datum review.
 **Reason:** Exact local bytes, ArcGIS-readable structure, and finite coverage across the approved AOIs are prerequisites for terrain processing, but they do not establish void/seam/artifact quality, terrain plausibility, vertical-datum fitness, radar-processing success, or a scientific result.
 **Status:** Completed at `2026-09-03T21:32:49Z`. ArcGIS Pro 3.7.1 verified four 3600-by-3600, single-band F32 EPSG:4326 rasters, 170,302,058 exact bytes, 51,840,000 finite non-NoData cells, zero NoData or nonfinite cells, and coverage of all three approved AOI bounds. Summary SHA-256 `97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef` is bound to the active controls. The next checkpoint is `M2-DEM-VERTICAL-DATUM-REVIEW`; no `GEOID` or `NONE` route has been selected.
+
+## D-030 — Prepare an exact EGM2008 preconversion method review
+
+**Decision:** Present an exact, bundle-bound proposal for EGM2008 one-minute preconversion before using `NONE` in the ArcGIS SAR tools; retain the built-in EGM96 `GEOID` route as sensitivity-only and keep raw orthometric input with `NONE` prohibited.
+**Reason:** Copernicus identifies the source heights as EGM2008 orthometric, ArcGIS identifies its SAR `GEOID` option as EGM96, and the installed runtime lacks the optional EGM2008 grid. Selecting a production route changes scientific method and requires an explicit human decision plus an owner-controlled component installation.
+**Status:** Review-ready with proposal SHA-256 `bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065` and bundle SHA-256 `9b40e81df766ea866c5bff51cdbc4d83e7e7da6a554fb1709fc553d8221bebbc`. The blank response contains zero decisions. No sign-in, terms acceptance, software download or installation, UAC action, DEM conversion, radar processing, or scientific claim occurred.
+
+## D-031 — Separate portable DEM receipt validation from external custody verification
+
+**Decision:** Let repository tests validate exact tracked receipts and recorded promoted identities without resolving the operator's external data root, while retaining strict external path and byte verification as the production reconciliation default and as an explicit local check.
+**Reason:** GitHub Actions run `33809208304` failed because the Linux runner does not contain the operator's Windows custody directory. Requiring that directory in a portable repository test conflated two evidence surfaces without strengthening custody verification.
+**Status:** Corrected with six focused tests, 185 full repository tests, a 192-file project check, and a separate local re-hash of four promoted files totaling 170,302,058 bytes. The failed run remains retained evidence. A separate generic intake-validator failure is also retained because the four immutable completed attempt IDs contain uppercase `T` and `Z`; those historical identities were not rewritten. The correction creates no raster, vertical-datum, radar, or scientific claim.
+
+## D-032 — Correct future Sentinel attempt identifiers before acquisition
+
+**Decision:** Lowercase the transfer attempt identifier derived from asset ID, timestamp, and nonce, while preserving the separate RFC 3339 event timestamps and every existing source, authority, collision, checksum, and custody gate.
+**Reason:** The DEM validation finding showed that uppercase `T` and `Z` timestamp fragments violate the generic intake-contract identifier grammar. The Sentinel route is still unattempted, so its generator can be corrected before it creates any historical identifier.
+**Status:** Eleven focused tests pass and the unchanged active Sentinel intake passes the generic validator. The historical readiness receipt remains immutable and is supplemented by a current correction receipt. No secret prompt, credential, network request, external file, active intake, or product byte was read or changed.

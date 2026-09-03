@@ -46,6 +46,11 @@ def now_utc() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
+def build_attempt_id(asset_id: str, started_at: str, nonce: str) -> str:
+    """Return a lowercase identifier compatible with the intake schema."""
+    return f"{asset_id}-{started_at.replace(':', '').replace('-', '')}-{nonce}".lower()
+
+
 def load(path: Path) -> dict[str, Any]:
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
@@ -200,7 +205,7 @@ def main() -> int:
     events_root = staging_root / "attempt-events" / asset["asset_id"]
     ensure_directory(events_root, staging_root)
     started_at = now_utc()
-    attempt_id = f"{asset['asset_id']}-{started_at.replace(':', '').replace('-', '')}-{uuid.uuid4().hex[:8]}"
+    attempt_id = build_attempt_id(asset["asset_id"], started_at, uuid.uuid4().hex[:8])
     started_event_path = events_root / f"{attempt_id}-started.json"
     started_event = {
         "schema_version": "1.0",

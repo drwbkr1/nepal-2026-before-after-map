@@ -1,0 +1,47 @@
+{
+  "contract_version": "human-review-contract-v1",
+  "template": false,
+  "review_id": "m2-dem-vertical-datum-review-001",
+  "response_schema_version": "nepal-m2-dem-vertical-datum-response-v1",
+  "workflow_authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "authorized_action_classes": [
+      "evidence_recording",
+      "project_control",
+      "routine_qa",
+      "data_processing",
+      "update_project_records"
+    ],
+    "verified_at_utc": "2026-09-03T21:46:14Z",
+    "expires_at_utc": null,
+    "review_required": true,
+    "lock_authorized": true,
+    "reconcile_authorized": true,
+    "post_review_actions": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ]
+  },
+  "review_bundle": {
+    "bundle_id": "m2-dem-vertical-datum-review-bundle-001",
+    "manifest_sha256": "9b40e81df766ea866c5bff51cdbc4d83e7e7da6a554fb1709fc553d8221bebbc",
+    "candidate_identity": "M2-DEM-VERTICAL-DATUM-PROPOSAL-SHA256:bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+    "rendered_surface_verified": true
+  },
+  "allowed_decisions": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "required_attestation": true,
+  "max_notes_length": 2000,
+  "hash_prefix_length": 16,
+  "items": [
+    {
+      "item_id": "M2-DEM-VERTICAL-DATUM-EXACT-EGM2008-PRECONVERSION",
+      "evidence_sha256": "9b40e81df766ea866c5bff51cdbc4d83e7e7da6a554fb1709fc553d8221bebbc"
+    }
+  ]
+}

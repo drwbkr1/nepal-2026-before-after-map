@@ -1,0 +1,84 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-ACQUISITION-PORTABILITY-CORRECTION-001",
+  "verified_at_utc": "2026-09-03T22:01:16Z",
+  "status": "pass_portable_repository_receipt_validation_external_custody_separated",
+  "claim": "The DEM acquisition reconciliation test now validates exact repository receipts and recorded promoted-byte identities without requiring the operator's external Windows custody root on portable runners. Production reconciliation still defaults to strict external-path and byte verification, and a separate local check reverified all four promoted files.",
+  "supersedes": {
+    "published_commit": "64fb554f1ed3db5f3f7188814ffb7e8eb133de1a",
+    "scope": "Corrects only the portable test boundary. The four-tile acquisition and ArcGIS verification evidence, its limitations, and the failed GitHub Actions result remain preserved."
+  },
+  "bindings": {
+    "active_intake_ref": "contracts/m2-dem-intake.json",
+    "active_intake_sha256": "db4329c6b10492d2c6985be528c5dceca13585736ee9f82fbf96e7f190ba92fa",
+    "acquisition_summary_ref": "records/acquisition/dem-acquisition-summary.json",
+    "acquisition_summary_sha256": "db9b7694e40fc836020757fc2ba2879b29fff4eed3c299af9a977eeb8d494a86",
+    "verification_summary_ref": "records/acquisition/dem-verification-summary.json",
+    "verification_summary_sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef",
+    "reconciliation_script_ref": "scripts/reconcile_m2_dem_acquisition.py",
+    "reconciliation_script_sha256": "574b2b2e408d500c07e71b9ef9d2390a061860c56ec0457325ecdad6f714901f",
+    "test_ref": "tests/test_m2_dem_acquisition_progress.py",
+    "test_sha256": "42a975e9d43c86843f9b3dbf25720fd5b05b0909b0d73d777f503ba427a418a0"
+  },
+  "validation": {
+    "focused_test_count": 6,
+    "focused_test_status": "pass",
+    "full_repository_test_count": 185,
+    "full_repository_test_status": "pass",
+    "repository_required_file_count": 192,
+    "repository_validation_status": "pass",
+    "portable_repository_receipt_validation": "pass",
+    "generic_intake_contract_validator": "fail_retained_historical_attempt_identifier_case",
+    "local_external_custody_reconciliation": {
+      "status": "pass",
+      "promoted_count": 4,
+      "verified_bytes": 170302058
+    }
+  },
+  "assertions": {
+    "portable_repository_test_requires_external_custody_root": false,
+    "repository_receipt_identity_revalidated": true,
+    "production_reconciliation_verify_external_default": true,
+    "local_external_custody_reverified": true,
+    "failed_ci_run_preserved": true,
+    "generic_intake_validator_failure_preserved": true,
+    "historical_attempt_identifiers_rewritten": false,
+    "tracked_project_controls_mutated_by_validation": false,
+    "external_files_mutated": false,
+    "network_requests_performed": false,
+    "credential_values_read_or_recorded": false,
+    "dem_pixels_processed": false,
+    "vertical_datum_route_established": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "Repository-only validation checks the tracked receipts and recorded SHA-256 and size fields; it does not read external DEM files.",
+    "The separate local check reads and hashes the four current custody files but does not establish raster, terrain, vertical-datum, radar, or scientific fitness.",
+    "The failed workflow run remains part of project history and is not reclassified as a pass."
+  ],
+  "retained_validation_failures": [
+    {
+      "run_id": 33809208304,
+      "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33809208304",
+      "status": "failure",
+      "head_sha": "64fb554f1ed3db5f3f7188814ffb7e8eb133de1a",
+      "failed_step": "Test project controls",
+      "failed_test": "test_current_promoted_byte_identity_and_receipt_reconcile",
+      "cause": "The portable test requested strict external verification on an ephemeral Linux runner where the operator's Windows custody root does not exist.",
+      "remediation": "Validate tracked receipts and recorded promoted identities in the portable suite while preserving strict external verification as the production default and as a separate explicit local check."
+    },
+    {
+      "validator": "intake-controlled-data/validate_intake_contract.py",
+      "status": "failure",
+      "failed_fields": [
+        "assets[0].attempts[0].attempt_id",
+        "assets[1].attempts[0].attempt_id",
+        "assets[2].attempts[0].attempt_id",
+        "assets[3].attempts[0].attempt_id"
+      ],
+      "cause": "The completed attempt identifiers preserve uppercase RFC 3339 T and Z characters, while the generic validator's identifier grammar permits lowercase characters only.",
+      "disposition": "Retain the immutable completed attempt identifiers and the failed validator result. Do not rewrite transfer receipts, checkpoint paths, or external event history. Correct identifier generation before any future transfer runner is used."
+    }
+  ]
+}

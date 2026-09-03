@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "M2-DEM-VERTICAL-DATUM-REVIEW-SURFACE-001",
+  "status": "pass",
+  "verified_at_utc": "2026-09-03T21:46:14Z",
+  "surface": "docs/assets/m2-dem-vertical-datum-review.png",
+  "surface_sha256": "f29a6f5bb7d194deecfe7ff734cafb72ffa31fcef0043c702c8aa69137c9b33c",
+  "proposal": "contracts/m2-dem-vertical-datum-proposal.json",
+  "proposal_sha256": "bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+  "source_review": "records/source-gates/m2-dem-vertical-datum-source-review.json",
+  "source_review_sha256": "e2b30472848627ddf050f05355442817bdddfd8910727116e89f8b5ab4d0ff96",
+  "local_capability": "records/surface-receipts/m2-dem-vertical-datum-capability.json",
+  "local_capability_sha256": "85b977c5b05057823e5e9bb956a82b36b2fab3ea798bd6a1b22782046edb0870",
+  "instructions": "docs/M2_DEM_VERTICAL_DATUM_REVIEW.md",
+  "instructions_sha256": "a21e397ef6eaeabc9dd5371cc3893fe38f03f5ec981e4d048bb2c9eb1427bb98",
+  "renderer": "scripts/render_m2_dem_vertical_datum_review.py",
+  "renderer_sha256": "af3eaf64b44fdfc64baabe330edbd32e72417ccd1cfc294de8cceff74861f244",
+  "dimensions_pixels": {
+    "width": 1800,
+    "height": 1520
+  },
+  "checks": {
+    "render_completed": "pass",
+    "exact_proposal_hash_visible": "pass",
+    "three_vertical_reference_facts_visible": "pass",
+    "recommended_route_visible": "pass",
+    "current_machine_deferral_visible": "pass",
+    "owner_control_boundary_visible": "pass",
+    "decision_domain_visible": "pass",
+    "text_clipping": "none_observed",
+    "visual_inspection": "pass"
+  },
+  "blank_state_verified": true,
+  "completion_controls_verified": true,
+  "export_verified": true,
+  "limitations": [
+    "The surface summarizes a proposed processing method; it is not a completed human response.",
+    "The surface does not authorize My Esri access, license acceptance, installation, DEM conversion, radar processing, or scientific publication.",
+    "The exact EGM2008 component remains absent from the inspected machine."
+  ]
+}

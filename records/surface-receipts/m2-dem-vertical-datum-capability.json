@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-VERTICAL-DATUM-CAPABILITY-001",
+  "status": "defer_exact_egm2008_grid_not_installed",
+  "inspected_at_utc": "2026-09-03T21:46:14Z",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced"
+  },
+  "inspection": {
+    "source_horizontal_wkid": 4326,
+    "source_vertical_wkid": 3855,
+    "source_vertical_name": "EGM2008_height",
+    "target_horizontal_wkid": 4326,
+    "target_vertical_wkid": 115700,
+    "target_vertical_name": "WGS_1984",
+    "aoi_extent_wgs84": [
+      84.7,
+      27.75,
+      85.65,
+      28.45
+    ],
+    "listed_transformations": [],
+    "expected_transformation": "WGS_1984_To_WGS_1984_EGM2008_1x1_Height",
+    "expected_transformation_available": false,
+    "expected_grid_name": "Dataset_egm2008-1.grd",
+    "fallback_grid_name": "Dataset_egm2008-25.grd",
+    "matching_egm2008_grids": [],
+    "builtin_egm96_grid": {
+      "path": "c:\\program files\\arcgis\\pro\\Resources\\pedata\\geoid\\WGS84.img",
+      "present": true,
+      "size_bytes": 2082065,
+      "sha256": "f9952bf41000ac6f1b75a4f42e5401e00b394220ec25eb89c5b7f2d36a5b033c"
+    },
+    "inventory_unchanged": true
+  },
+  "decision": {
+    "exact_egm2008_preconversion_available_now": false,
+    "arcgis_builtin_egm96_sensitivity_available_now": true,
+    "required_next_action": "Owner installs the matching ArcGIS Coordinate Systems Data world1x1_vert component before exact EGM2008 preconversion can be validated."
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "credentials_read": false,
+    "software_installed_or_modified": false,
+    "dem_files_read": false,
+    "radar_processing_executed": false,
+    "vertical_datum_route_selected": false,
+    "scientific_result_established": false
+  }
+}

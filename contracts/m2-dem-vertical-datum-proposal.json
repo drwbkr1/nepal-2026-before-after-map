@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-DEM-VERTICAL-DATUM-001",
+  "status": "proposed_not_active",
+  "prepared_at_utc": "2026-09-03T21:46:14Z",
+  "parent_commit": "64fb554f1ed3db5f3f7188814ffb7e8eb133de1a",
+  "bindings": {
+    "active_milestone_ref": "contracts/milestone-002.json",
+    "active_milestone_sha256": "fb85eb26d3143cd23cf96598a0447b9d5e6f3a3b70e8bdc35693bf52f7b1cbca",
+    "project_profile_ref": "records/project-control-profile.json",
+    "project_profile_sha256": "a4504c2d438b9932a2d36eb5cf62fc86ca278156056689b8a4bb8c115551a7bd",
+    "dem_approval_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "dem_approval_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+    "dem_verification_summary_ref": "records/acquisition/dem-verification-summary.json",
+    "dem_verification_summary_sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef",
+    "radar_processing_contract_ref": "config/qa/radar-baseline-processing-contract.json",
+    "radar_processing_contract_sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f",
+    "source_review_ref": "records/source-gates/m2-dem-vertical-datum-source-review.json",
+    "source_review_sha256": "e2b30472848627ddf050f05355442817bdddfd8910727116e89f8b5ab4d0ff96",
+    "local_capability_ref": "records/surface-receipts/m2-dem-vertical-datum-capability.json",
+    "local_capability_sha256": "85b977c5b05057823e5e9bb956a82b36b2fab3ea798bd6a1b22782046edb0870"
+  },
+  "decision_requested": {
+    "item_id": "M2-DEM-VERTICAL-DATUM-EXACT-EGM2008-PRECONVERSION",
+    "recommended_route": "arcgis_egm2008_1x1_preconversion_then_none",
+    "decision_domain": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "reason": "Copernicus DEM uses EGM2008 orthometric heights, while the ArcGIS SAR GEOID switch uses EGM96 and NONE is valid only for an ellipsoidal-height DEM."
+  },
+  "selected_if_approved": {
+    "source_height": {
+      "horizontal_crs": "EPSG:4326",
+      "vertical_crs": "EPSG:3855",
+      "height_type": "orthometric",
+      "geoid_model": "EGM2008"
+    },
+    "required_arcgis_component": {
+      "product": "ArcGIS Coordinate Systems Data for ArcGIS Pro",
+      "version_compatibility": "must match the installed ArcGIS Pro 3.7.x release",
+      "feature": "world1x1_vert",
+      "expected_grid": "Dataset_egm2008-1.grd",
+      "expected_transformation": "WGS_1984_To_WGS_1984_EGM2008_1x1_Height",
+      "expected_wkid": 110018,
+      "installation_status": "not_installed",
+      "owner_action_required": true
+    },
+    "preconversion": {
+      "tool": "ArcGIS Project Raster with vertical transformation enabled",
+      "input_vertical_crs": "EPSG:3855",
+      "output_vertical_crs": "WGS 1984 ellipsoidal height, ArcGIS VCS WKID 115700",
+      "transformation_direction": "EGM2008 orthometric to WGS84 ellipsoidal; require ArcGIS runtime to list and record the exact reverse-direction transformation before execution",
+      "height_relation": "h = H + N",
+      "horizontal_crs_policy": "retain EPSG:4326 during vertical conversion; project later processing outputs to EPSG:32645 under the radar contract",
+      "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal",
+      "attempt_policy": "versioned append-only attempt; refuse any existing destination",
+      "source_mutation": "prohibited"
+    },
+    "radar_tool_parameter_after_conversion": "NONE",
+    "egm96_builtin_route": {
+      "production_status": "not_selected",
+      "permitted_role": "labeled sensitivity only after Sentinel inputs pass all earlier gates",
+      "must_not_replace_primary": true
+    }
+  },
+  "post_install_validation": {
+    "required_before_conversion": [
+      "ArcGIS Pro version and license still match the reviewed runtime",
+      "Dataset_egm2008-1.grd exists and is locally SHA-256 bound",
+      "ArcGIS lists the expected EGM2008 transformation over the exact approved AOI extent",
+      "the exact transformation direction is recorded as EGM2008 orthometric to WGS84 ellipsoidal",
+      "all four source DEM hashes still match their promoted custody receipts",
+      "the output attempt path is absent and remains outside Git"
+    ],
+    "required_after_conversion": [
+      "all four derived rasters have append-only receipts and local SHA-256",
+      "source custody inventories are unchanged",
+      "output vertical CRS is WGS84 ellipsoidal and horizontal CRS remains EPSG:4326",
+      "all approved AOIs retain finite non-NoData coverage",
+      "spot checks satisfy h = H + N within a declared numeric tolerance",
+      "void-fill, seam, artifact, and terrain-plausibility review is recorded",
+      "the radar processing contract is updated to select NONE only for the verified ellipsoidal derivatives"
+    ],
+    "stop_on": [
+      "component, grid, transformation name, direction, extent, license, or installed ArcGIS version differs",
+      "interactive My Esri sign-in, license acceptance, UAC, or installer action requires owner control",
+      "source hash or custody inventory differs",
+      "output collision, source write, untracked sidecar, or path escape",
+      "invalid AOI coverage, implausible height correction, seam/artifact failure, or missing verification receipt"
+    ]
+  },
+  "actions_authorized_if_approved_and_reconciled": [
+    "record the exact EGM2008 preconversion route as the selected production method",
+    "after the owner separately installs the reviewed ArcGIS Coordinate Systems Data feature, re-run the local capability inspection",
+    "prepare and validate no-overwrite conversion controls bound to the installed grid and four verified DEM hashes",
+    "create derived ellipsoidal DEM copies only in the declared external non-Git root",
+    "set ArcGIS SAR geoid parameters to NONE only when those verified ellipsoidal copies are used",
+    "retain EGM96 GEOID processing only as a labeled sensitivity route"
+  ],
+  "actions_not_authorized": [
+    "sign in to My Esri or another account",
+    "accept or modify any Esri license or provider terms",
+    "download or install software or coordinate-system data",
+    "approve or dismiss UAC or another privileged prompt",
+    "acquire an NGA, PROJ, Sentinel Hub, or other alternate geoid grid",
+    "alter or overwrite any promoted Copernicus DEM tile",
+    "use raw EGM2008 orthometric tiles with NONE",
+    "call the ArcGIS EGM96 GEOID route exact EGM2008 handling",
+    "run radar processing before Sentinel custody, container, materialization, pixel, orbit, and registration gates pass",
+    "download updated orbit vectors",
+    "publish a scientific change, interpretation, attribution, or emergency-guidance claim"
+  ],
+  "activation_effect": "Approval selects the exact EGM2008 one-minute preconversion method and permits its controlled implementation only after the owner separately installs the matching ArcGIS component. It does not authorize installation, terms acceptance, Sentinel transfer, orbit acquisition, radar execution before prerequisites, or a scientific claim.",
+  "claim_boundary": {
+    "method_decision_proposed": true,
+    "method_decision_approved": false,
+    "arcgis_coordinate_systems_data_installed": false,
+    "egm2008_grid_in_custody": false,
+    "dem_preconversion_executed": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-dem-vertical-datum-review-bundle-001",
+  "review_id": "m2-dem-vertical-datum-review-001",
+  "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+  "candidate_identity": "M2-DEM-VERTICAL-DATUM-PROPOSAL-SHA256:bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-dem-vertical-datum-review.png",
+      "sha256": "f29a6f5bb7d194deecfe7ff734cafb72ffa31fcef0043c702c8aa69137c9b33c",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-dem-vertical-datum-review.json",
+          "sha256": "07b19527016a26a9937fc84e72dbe1fa51bc7a113671497a70644371a0f9ed80"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_DEM_VERTICAL_DATUM_REVIEW.md",
+      "sha256": "a21e397ef6eaeabc9dd5371cc3893fe38f03f5ec981e4d048bb2c9eb1427bb98",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "method-proposal",
+      "path": "contracts/m2-dem-vertical-datum-proposal.json",
+      "sha256": "bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+      "role": "candidate_method_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "official-source-review",
+      "path": "records/source-gates/m2-dem-vertical-datum-source-review.json",
+      "sha256": "e2b30472848627ddf050f05355442817bdddfd8910727116e89f8b5ab4d0ff96",
+      "role": "official_method_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "local-capability",
+      "path": "records/surface-receipts/m2-dem-vertical-datum-capability.json",
+      "sha256": "85b977c5b05057823e5e9bb956a82b36b2fab3ea798bd6a1b22782046edb0870",
+      "role": "installed_runtime_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "dem-verification-summary",
+      "path": "records/acquisition/dem-verification-summary.json",
+      "sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef",
+      "role": "verified_input_dependency",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "active-dem-approval",
+      "path": "records/source-gates/m2-dem-amendment-approval.json",
+      "sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+      "role": "current_bounded_authority",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "decision_effect_if_approved": [
+    "select the exact EGM2008 one-minute preconversion route as the production vertical-datum method",
+    "permit controlled conversion only after owner installation and successful local capability reinspection",
+    "use NONE only with verified WGS84 ellipsoidal DEM derivatives",
+    "retain ArcGIS EGM96 GEOID processing only as a labeled sensitivity route"
+  ],
+  "owner_actions_not_delegated": [
+    "My Esri sign-in",
+    "license review or acceptance",
+    "software or coordinate-system data download and installation",
+    "UAC or other privileged confirmation"
+  ],
+  "limitations": [
+    "This bundle proposes a method and contains no completed human decision.",
+    "The exact EGM2008 grid is not installed on the inspected machine.",
+    "Approval does not authorize credentials, terms acceptance, installation, alternate geoid acquisition, source overwrite, orbit download, premature radar processing, or scientific publication.",
+    "DEM verification does not by itself establish void-fill, seam, artifact, terrain-plausibility, radar-processing, or scientific fitness."
+  ]
+}

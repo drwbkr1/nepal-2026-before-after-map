@@ -59,18 +59,33 @@ def evaluate_progress(assets: list[dict[str, Any]]) -> dict[str, Any]:
     return {"counts": counts, "checkpoint": checkpoint, "disposition": disposition}
 
 
-def validate_asset_history(intake: dict[str, Any]) -> list[dict[str, Any]]:
-    custody_root = (PROJECT_ROOT / Path(*PurePosixPath(intake["custody_root"]).parts)).resolve(strict=True)
-    staging_root = (PROJECT_ROOT / Path(*PurePosixPath(intake["staging_root"]).parts)).resolve(strict=True)
+def validate_asset_history(intake: dict[str, Any], *, verify_external: bool = True) -> list[dict[str, Any]]:
+    custody_relative = PurePosixPath(intake["custody_root"])
+    staging_relative = PurePosixPath(intake["staging_root"])
+    for label, relative in (("custody", custody_relative), ("staging", staging_relative)):
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError(f"{label} root escapes the project parent")
+    custody_root = PROJECT_ROOT / Path(*custody_relative.parts)
+    staging_root = PROJECT_ROOT / Path(*staging_relative.parts)
+    if verify_external:
+        custody_root = custody_root.resolve(strict=True)
+        staging_root = staging_root.resolve(strict=True)
     summaries: list[dict[str, Any]] = []
     for asset in intake["assets"]:
         source_id = asset["extensions"]["source_id"]
         state = asset["state"]
         attempts = asset.get("attempts", [])
-        destination = require_safe_child(custody_root, custody_root / Path(*PurePosixPath(asset["destination_relative_path"]).parts))
-        staging = require_safe_child(staging_root, staging_root / Path(*PurePosixPath(asset["staging_relative_path"]).parts))
+        destination_relative = PurePosixPath(asset["destination_relative_path"])
+        staging_asset_relative = PurePosixPath(asset["staging_relative_path"])
+        if destination_relative.is_absolute() or ".." in destination_relative.parts or staging_asset_relative.is_absolute() or ".." in staging_asset_relative.parts:
+            raise ValueError(f"asset path escapes the controlled root: {source_id}")
+        destination = custody_root / Path(*destination_relative.parts)
+        staging = staging_root / Path(*staging_asset_relative.parts)
+        if verify_external:
+            destination = require_safe_child(custody_root, destination)
+            staging = require_safe_child(staging_root, staging)
         if state == "authorized":
-            if attempts or destination.exists() or staging.exists():
+            if attempts or (verify_external and (destination.exists() or staging.exists())):
                 raise ValueError(f"authorized asset has attempt or bytes: {source_id}")
             summaries.append({"source_id": source_id, "state": state, "attempt_id": None})
             continue
@@ -78,11 +93,11 @@ def validate_asset_history(intake: dict[str, Any]) -> list[dict[str, Any]]:
             raise ValueError(f"terminal asset history is incomplete: {source_id}")
         attempt = attempts[0]
         if state == "failed":
-            if attempt["outcome"] != "failed" or asset.get("failure", {}).get("code") is None or destination.exists():
+            if attempt["outcome"] != "failed" or asset.get("failure", {}).get("code") is None or (verify_external and destination.exists()):
                 raise ValueError(f"failed asset history differs: {source_id}")
             summaries.append({"source_id": source_id, "state": state, "attempt_id": attempt["attempt_id"]})
             continue
-        if attempt["outcome"] != "succeeded" or not destination.is_file() or staging.exists():
+        if attempt["outcome"] != "succeeded" or (verify_external and (not destination.is_file() or staging.exists())):
             raise ValueError(f"promoted asset paths or history differ: {source_id}")
         receipt_ref = asset["extensions"].get("successful_attempt_receipt")
         if not isinstance(receipt_ref, str):
@@ -92,8 +107,8 @@ def validate_asset_history(intake: dict[str, Any]) -> list[dict[str, Any]]:
             raise ValueError(f"promoted asset receipt binding differs: {source_id}")
         receipt = load(receipt_path)
         observed = asset["observed"]
-        actual_size = destination.stat().st_size
-        actual_sha = sha256_file(destination)
+        actual_size = destination.stat().st_size if verify_external else observed.get("promoted_size_bytes")
+        actual_sha = sha256_file(destination) if verify_external else observed.get("promoted_sha256")
         if (
             receipt.get("event") != "dem_transfer_succeeded"
             or receipt.get("attempt_id") != attempt["attempt_id"]
@@ -104,6 +119,10 @@ def validate_asset_history(intake: dict[str, Any]) -> list[dict[str, Any]]:
             or observed.get("promoted_sha256") != actual_sha
             or observed.get("staged_size_bytes") != actual_size
             or observed.get("staged_sha256") != actual_sha
+            or not isinstance(actual_size, int)
+            or actual_size <= 0
+            or not isinstance(actual_sha, str)
+            or len(actual_sha) != 64
         ):
             raise ValueError(f"promoted asset byte identity differs: {source_id}")
         summaries.append({"source_id": source_id, "state": state, "attempt_id": attempt["attempt_id"], "receipt_ref": receipt_ref, "receipt_sha256": sha256_file(receipt_path), "local_size_bytes": actual_size, "local_sha256": actual_sha})

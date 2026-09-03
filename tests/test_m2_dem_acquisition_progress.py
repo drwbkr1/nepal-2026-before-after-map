@@ -1,4 +1,5 @@
 import importlib.util
+import inspect
 import json
 import sys
 import unittest
@@ -46,9 +47,11 @@ class M2DemAcquisitionProgressTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unsupported DEM acquisition state"):
             MODULE.evaluate_progress(assets("authorized"))
 
-    def test_current_promoted_byte_identity_and_receipt_reconcile(self):
+    def test_current_promoted_receipt_identity_reconciles_without_external_access(self):
+        verify_external_parameter = inspect.signature(MODULE.validate_asset_history).parameters["verify_external"]
+        self.assertIs(verify_external_parameter.default, True)
         intake = MODULE.load(MODULE.INTAKE_PATH)
-        summaries = MODULE.validate_asset_history(intake)
+        summaries = MODULE.validate_asset_history(intake, verify_external=False)
         promoted = [item for item in summaries if item["state"] == "promoted"]
         self.assertGreaterEqual(len(promoted), 1)
         self.assertEqual(

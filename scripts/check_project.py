@@ -61,6 +61,7 @@ REQUIRED = [
     "records/acquisition/custody-initialization.json",
     "records/acquisition/active-intake-initial-snapshot.json",
     "records/acquisition/transfer-runner-readiness.json",
+    "records/acquisition/transfer-runner-attempt-id-correction.json",
     "records/acquisition/acquisition-progress-readiness.json",
     "records/acquisition/acquisition-checkpoint-readiness.json",
     "records/acquisition/acquisition-checkpoint-portability-correction.json",
@@ -69,6 +70,7 @@ REQUIRED = [
     "records/acquisition/dem-custody-initialization.json",
     "records/acquisition/dem-transfer-runner-readiness.json",
     "records/acquisition/dem-acquisition-summary.json",
+    "records/acquisition/dem-acquisition-portability-correction.json",
     "records/acquisition/dem-geotiff-verifier-readiness.json",
     "records/acquisition/dem-verification/m2-dem-001.json",
     "records/acquisition/dem-geotiff-verifier-correction-001.json",
@@ -105,8 +107,10 @@ REQUIRED = [
     "docs/M2_OFFLINE_VERIFICATION.md",
     "docs/M2_DEM_AMENDMENT_REVIEW.md",
     "docs/M2_DEM_OFFLINE_VERIFICATION.md",
+    "docs/M2_DEM_VERTICAL_DATUM_REVIEW.md",
     "docs/RADAR_BASELINE_PROCESSING_PROTOCOL.md",
     "docs/assets/m2-dem-amendment-review.png",
+    "docs/assets/m2-dem-vertical-datum-review.png",
     "docs/assets/m2-controlled-acquisition-review.png",
     "scripts/render_m2_activation_review.py",
     "scripts/prepare_m2_intake.py",
@@ -126,6 +130,8 @@ REQUIRED = [
     "records/surface-receipts/arcgis-sar-processing-capability.json",
     "records/surface-receipts/m2-dem-amendment-review.json",
     "records/surface-receipts/m2-dem-radar-control-readiness.json",
+    "records/surface-receipts/m2-dem-vertical-datum-capability.json",
+    "records/surface-receipts/m2-dem-vertical-datum-review.json",
     "records/surface-receipts/optical-processing-synthetic-arcgis.json",
     "records/surface-receipts/optical-baseline-control-readiness.json",
     "records/surface-receipts/m2-materialization-readiness.json",
@@ -140,6 +146,9 @@ REQUIRED = [
     "reviews/m2-dem-amendment/review-bundle.json",
     "reviews/m2-dem-amendment/review-contract.json",
     "reviews/m2-dem-amendment/blank-response.json",
+    "reviews/m2-dem-vertical-datum/review-bundle.json",
+    "reviews/m2-dem-vertical-datum/review-contract.json",
+    "reviews/m2-dem-vertical-datum/blank-response.json",
     "tests/test_m2_intake.py",
     "tests/test_m2_verification.py",
     "tests/test_arcgis_evidence_schema.py",
@@ -168,6 +177,7 @@ REQUIRED = [
     "tests/test_m2_dem_acquisition_progress.py",
     "tests/test_m2_dem_verification_completion.py",
     "tests/test_m2_dem_active_geotiff.py",
+    "tests/test_m2_dem_vertical_datum_review.py",
     "tests/test_radar_processing_contract.py",
     "tests/test_optical_processing_core.py",
     "tests/test_m2_materialization.py",
@@ -184,6 +194,8 @@ REQUIRED = [
     "scripts/reconcile_m2_dem_acquisition.py",
     "scripts/verify_m2_dem_geotiff.py",
     "scripts/complete_m2_dem_verification.py",
+    "scripts/inspect_m2_dem_vertical_datum_arcgis.py",
+    "scripts/render_m2_dem_vertical_datum_review.py",
     "scripts/prepare_radar_processing_contract.py",
     "scripts/optical_processing_core.py",
     "scripts/prepare_optical_processing_contract.py",
@@ -196,6 +208,8 @@ REQUIRED = [
     "scripts/inspect_optical_inputs_arcgis.py",
     "scripts/validate_optical_input_readiness_arcgis.py",
     "scripts/render_m2_dem_amendment_review.py",
+    "contracts/m2-dem-vertical-datum-proposal.json",
+    "records/source-gates/m2-dem-vertical-datum-source-review.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -275,6 +289,13 @@ def main() -> None:
     dem_custody_receipt = json.loads((ROOT / "records/acquisition/dem-custody-initialization.json").read_text(encoding="utf-8"))
     dem_transfer_readiness = json.loads((ROOT / "records/acquisition/dem-transfer-runner-readiness.json").read_text(encoding="utf-8"))
     dem_acquisition_summary = json.loads((ROOT / "records/acquisition/dem-acquisition-summary.json").read_text(encoding="utf-8"))
+    dem_acquisition_portability = json.loads((ROOT / "records/acquisition/dem-acquisition-portability-correction.json").read_text(encoding="utf-8"))
+    dem_vertical_proposal = json.loads((ROOT / "contracts/m2-dem-vertical-datum-proposal.json").read_text(encoding="utf-8"))
+    dem_vertical_sources = json.loads((ROOT / "records/source-gates/m2-dem-vertical-datum-source-review.json").read_text(encoding="utf-8"))
+    dem_vertical_capability = json.loads((ROOT / "records/surface-receipts/m2-dem-vertical-datum-capability.json").read_text(encoding="utf-8"))
+    dem_vertical_bundle = json.loads((ROOT / "reviews/m2-dem-vertical-datum/review-bundle.json").read_text(encoding="utf-8"))
+    dem_vertical_contract = json.loads((ROOT / "reviews/m2-dem-vertical-datum/review-contract.json").read_text(encoding="utf-8"))
+    dem_vertical_blank = json.loads((ROOT / "reviews/m2-dem-vertical-datum/blank-response.json").read_text(encoding="utf-8"))
     expected_dem_source_order = ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
     dem_current_assets = dem_intake_active.get("assets", [])
     if [asset.get("extensions", {}).get("source_id") for asset in dem_current_assets] != expected_dem_source_order:
@@ -425,6 +446,7 @@ def main() -> None:
     m2_preflight = json.loads((ROOT / "records/acquisition/preflight.json").read_text(encoding="utf-8"))
     custody_receipt = json.loads((ROOT / "records/acquisition/custody-initialization.json").read_text(encoding="utf-8"))
     transfer_readiness = json.loads((ROOT / "records/acquisition/transfer-runner-readiness.json").read_text(encoding="utf-8"))
+    transfer_runner_correction = json.loads((ROOT / "records/acquisition/transfer-runner-attempt-id-correction.json").read_text(encoding="utf-8"))
     acquisition_progress_readiness = json.loads((ROOT / "records/acquisition/acquisition-progress-readiness.json").read_text(encoding="utf-8"))
     acquisition_checkpoint_readiness = json.loads((ROOT / "records/acquisition/acquisition-checkpoint-readiness.json").read_text(encoding="utf-8"))
     acquisition_checkpoint_portability = json.loads((ROOT / "records/acquisition/acquisition-checkpoint-portability-correction.json").read_text(encoding="utf-8"))
@@ -445,6 +467,77 @@ def main() -> None:
     validate_review_bundle("reviews/m1-manifest/review-bundle.json", "reviews/m1-manifest/review-contract.json")
     validate_review_bundle("reviews/m2-activation/review-bundle.json", "reviews/m2-activation/review-contract.json")
     validate_review_bundle("reviews/m2-dem-amendment/review-bundle.json", "reviews/m2-dem-amendment/review-contract.json")
+    validate_review_bundle("reviews/m2-dem-vertical-datum/review-bundle.json", "reviews/m2-dem-vertical-datum/review-contract.json")
+
+    expected_vertical_candidate = "M2-DEM-VERTICAL-DATUM-PROPOSAL-SHA256:" + sha256("contracts/m2-dem-vertical-datum-proposal.json")
+    if (
+        dem_vertical_proposal.get("status") != "proposed_not_active"
+        or dem_vertical_bundle.get("candidate_identity") != expected_vertical_candidate
+        or dem_vertical_contract.get("review_bundle", {}).get("candidate_identity") != expected_vertical_candidate
+        or dem_vertical_contract.get("review_bundle", {}).get("manifest_sha256") != sha256("reviews/m2-dem-vertical-datum/review-bundle.json")
+    ):
+        fail("M2 DEM vertical-datum proposal or review-bundle identity differs")
+    expected_vertical_proposal_bindings = {
+        "dem_approval_sha256": sha256("records/source-gates/m2-dem-amendment-approval.json"),
+        "dem_verification_summary_sha256": sha256("records/acquisition/dem-verification-summary.json"),
+        "radar_processing_contract_sha256": sha256("config/qa/radar-baseline-processing-contract.json"),
+        "source_review_sha256": sha256("records/source-gates/m2-dem-vertical-datum-source-review.json"),
+        "local_capability_sha256": sha256("records/surface-receipts/m2-dem-vertical-datum-capability.json"),
+    }
+    if any(dem_vertical_proposal.get("bindings", {}).get(key) != value for key, value in expected_vertical_proposal_bindings.items()):
+        fail("M2 DEM vertical-datum proposal bindings differ")
+    selected_vertical_route = dem_vertical_proposal.get("selected_if_approved", {})
+    if (
+        dem_vertical_proposal.get("decision_requested", {}).get("recommended_route") != "arcgis_egm2008_1x1_preconversion_then_none"
+        or selected_vertical_route.get("required_arcgis_component", {}).get("feature") != "world1x1_vert"
+        or selected_vertical_route.get("required_arcgis_component", {}).get("expected_grid") != "Dataset_egm2008-1.grd"
+        or selected_vertical_route.get("required_arcgis_component", {}).get("expected_wkid") != 110018
+        or selected_vertical_route.get("radar_tool_parameter_after_conversion") != "NONE"
+        or selected_vertical_route.get("egm96_builtin_route", {}).get("production_status") != "not_selected"
+    ):
+        fail("M2 DEM vertical-datum proposed method differs")
+    prohibited_vertical_actions = set(dem_vertical_proposal.get("actions_not_authorized", []))
+    if not {
+        "download or install software or coordinate-system data",
+        "approve or dismiss UAC or another privileged prompt",
+        "use raw EGM2008 orthometric tiles with NONE",
+        "download updated orbit vectors",
+    } <= prohibited_vertical_actions:
+        fail("M2 DEM vertical-datum proposal no longer preserves owner-control or scientific boundaries")
+    if (
+        dem_vertical_capability.get("status") != "defer_exact_egm2008_grid_not_installed"
+        or dem_vertical_capability.get("runtime") != {"product": "ArcGISPro", "version": "3.7.1", "license_level": "Advanced"}
+        or dem_vertical_capability.get("inspection", {}).get("matching_egm2008_grids") != []
+        or dem_vertical_capability.get("inspection", {}).get("listed_transformations") != []
+        or dem_vertical_capability.get("inspection", {}).get("builtin_egm96_grid", {}).get("present") is not True
+        or dem_vertical_capability.get("decision", {}).get("exact_egm2008_preconversion_available_now") is not False
+    ):
+        fail("M2 DEM vertical-datum local capability differs")
+    expected_vertical_source_roles = {
+        "arcgis_radiometric_terrain_flattening",
+        "copernicus_dem_vertical_reference",
+        "epsg_vertical_crs",
+        "arcgis_coordinate_systems_data_install",
+        "arcgis_coordinate_systems_data_feature",
+        "arcgis_project_raster_vertical_transform",
+        "arcgis_supported_vertical_transformations",
+        "nga_egm2008_authority",
+    }
+    if (
+        dem_vertical_sources.get("status") != "pass_official_sources_exact_route_requires_owner_installed_component"
+        or {item.get("role") for item in dem_vertical_sources.get("official_sources", [])} != expected_vertical_source_roles
+        or dem_vertical_sources.get("route_assessment", {}).get("recommended_route") != "arcgis_egm2008_1x1_preconversion_then_none"
+        or dem_vertical_sources.get("assertions", {}).get("vertical_datum_route_activated") is not False
+    ):
+        fail("M2 DEM vertical-datum official source review differs")
+    if (
+        dem_vertical_blank.get("completed") is not False
+        or dem_vertical_blank.get("reviewer") != {"attestation": False}
+        or len(dem_vertical_blank.get("responses", [])) != 1
+        or dem_vertical_blank["responses"][0].get("decision") is not None
+        or dem_vertical_blank["responses"][0].get("evidence_sha256") != sha256("reviews/m2-dem-vertical-datum/review-bundle.json")
+    ):
+        fail("M2 DEM vertical-datum blank response is not blank and exactly bound")
     if dem_manifest.get("status") != "candidate_not_approved" or len(dem_manifest.get("records", [])) != 4:
         fail("M2 DEM candidate manifest must remain an unapproved exact four-tile set")
     expected_dem_ids = {
@@ -788,6 +881,62 @@ def main() -> None:
         fail("M2 DEM acquisition summary does not establish its bounded transfer claims")
     if any(dem_summary_assertions.get(key) is not False for key in ("geotiff_readability_established", "valid_pixel_coverage_established", "vertical_datum_route_established", "radar_processing_executed", "scientific_result_established")):
         fail("M2 DEM acquisition summary overclaims raster or scientific evidence")
+    expected_dem_portability_bindings = {
+        "active_intake_ref": "contracts/m2-dem-intake.json",
+        "active_intake_sha256": "db4329c6b10492d2c6985be528c5dceca13585736ee9f82fbf96e7f190ba92fa",
+        "acquisition_summary_ref": "records/acquisition/dem-acquisition-summary.json",
+        "acquisition_summary_sha256": "db9b7694e40fc836020757fc2ba2879b29fff4eed3c299af9a977eeb8d494a86",
+        "verification_summary_ref": "records/acquisition/dem-verification-summary.json",
+        "verification_summary_sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef",
+        "reconciliation_script_ref": "scripts/reconcile_m2_dem_acquisition.py",
+        "reconciliation_script_sha256": sha256("scripts/reconcile_m2_dem_acquisition.py"),
+        "test_ref": "tests/test_m2_dem_acquisition_progress.py",
+        "test_sha256": sha256("tests/test_m2_dem_acquisition_progress.py"),
+    }
+    if (
+        dem_acquisition_portability.get("status") != "pass_portable_repository_receipt_validation_external_custody_separated"
+        or dem_acquisition_portability.get("bindings") != expected_dem_portability_bindings
+        or dem_acquisition_portability.get("validation") != {
+            "focused_test_count": 6,
+            "focused_test_status": "pass",
+            "full_repository_test_count": 185,
+            "full_repository_test_status": "pass",
+            "repository_required_file_count": 192,
+            "repository_validation_status": "pass",
+            "portable_repository_receipt_validation": "pass",
+            "generic_intake_contract_validator": "fail_retained_historical_attempt_identifier_case",
+            "local_external_custody_reconciliation": {"status": "pass", "promoted_count": 4, "verified_bytes": 170302058},
+        }
+    ):
+        fail("M2 DEM acquisition portability correction differs")
+    if dem_acquisition_portability.get("assertions") != {
+        "portable_repository_test_requires_external_custody_root": False,
+        "repository_receipt_identity_revalidated": True,
+        "production_reconciliation_verify_external_default": True,
+        "local_external_custody_reverified": True,
+        "failed_ci_run_preserved": True,
+        "generic_intake_validator_failure_preserved": True,
+        "historical_attempt_identifiers_rewritten": False,
+        "tracked_project_controls_mutated_by_validation": False,
+        "external_files_mutated": False,
+        "network_requests_performed": False,
+        "credential_values_read_or_recorded": False,
+        "dem_pixels_processed": False,
+        "vertical_datum_route_established": False,
+        "radar_processing_executed": False,
+        "scientific_result_established": False,
+    }:
+        fail("M2 DEM acquisition portability correction claim boundary differs")
+    retained_dem_ci = dem_acquisition_portability.get("retained_validation_failures", [])
+    if (
+        len(retained_dem_ci) != 2
+        or retained_dem_ci[0].get("run_id") != 33809208304
+        or retained_dem_ci[0].get("status") != "failure"
+        or retained_dem_ci[1].get("validator") != "intake-controlled-data/validate_intake_contract.py"
+        or retained_dem_ci[1].get("status") != "failure"
+        or len(retained_dem_ci[1].get("failed_fields", [])) != 4
+    ):
+        fail("M2 DEM acquisition portability correction does not retain its failed validation results")
     if sar_capability.get("status") != "pass_capability_only_dem_dependency_unresolved":
         fail("ArcGIS SAR capability receipt status differs")
     sar_checks = sar_capability.get("checks", {})
@@ -1494,13 +1643,60 @@ def main() -> None:
         "active_intake_sha256": INITIAL_ACTIVE_INTAKE_SHA256,
         "activation_approval_sha256": sha256("records/source-gates/m2-activation-approval.json"),
         "transfer_core_sha256": sha256("scripts/m2_transfer_core.py"),
-        "transfer_runner_sha256": sha256("scripts/acquire_m2_product.py"),
-        "tests_sha256": sha256("tests/test_m2_transfer_core.py"),
+        "transfer_runner_sha256": "bf02f27d90f3ef66b713763ef62e60bf66e83d5a77ca10a10f30075f4454b7ba",
+        "tests_sha256": "a7dfdfedbc7170fa51a6815f1f243f860d437245ec4f7c23cf05591b15822084",
     }
     if any(readiness_bindings.get(key) != value for key, value in expected_transfer_bindings.items()):
         fail("M2 transfer-runner readiness receipt has a stale artifact binding")
     if transfer_readiness.get("test", {}).get("status") != "pass" or transfer_readiness.get("test", {}).get("test_count") != 11:
         fail("M2 transfer-runner readiness receipt must preserve eleven passing local tests")
+    expected_transfer_correction_bindings = {
+        "active_intake_ref": "contracts/m2-intake.json",
+        "active_intake_sha256": sha256("contracts/m2-intake.json"),
+        "initial_intake_snapshot_ref": "records/acquisition/active-intake-initial-snapshot.json",
+        "initial_intake_snapshot_sha256": sha256("records/acquisition/active-intake-initial-snapshot.json"),
+        "activation_approval_ref": "records/source-gates/m2-activation-approval.json",
+        "activation_approval_sha256": sha256("records/source-gates/m2-activation-approval.json"),
+        "transfer_core_ref": "scripts/m2_transfer_core.py",
+        "transfer_core_sha256": sha256("scripts/m2_transfer_core.py"),
+        "transfer_runner_ref": "scripts/acquire_m2_product.py",
+        "transfer_runner_sha256": sha256("scripts/acquire_m2_product.py"),
+        "test_ref": "tests/test_m2_transfer_core.py",
+        "test_sha256": sha256("tests/test_m2_transfer_core.py"),
+        "discovery_ref": "records/acquisition/dem-acquisition-portability-correction.json",
+        "discovery_sha256": sha256("records/acquisition/dem-acquisition-portability-correction.json"),
+    }
+    if (
+        transfer_runner_correction.get("status") != "pass_future_attempt_ids_lowercase_schema_compatible"
+        or transfer_runner_correction.get("bindings") != expected_transfer_correction_bindings
+        or transfer_runner_correction.get("validation") != {
+            "focused_test_count": 11,
+            "focused_test_status": "pass",
+            "full_repository_test_count": 185,
+            "full_repository_test_status": "pass",
+            "repository_required_file_count": 193,
+            "repository_validation_status": "pass",
+            "active_sentinel_intake_generic_validator": "pass",
+            "example_attempt_id": "m1-src-001-20260903t170000z-abc123ef",
+            "identifier_pattern": "^[a-z0-9][a-z0-9._-]{0,127}$",
+        }
+    ):
+        fail("M2 transfer-runner attempt-ID correction differs")
+    if transfer_runner_correction.get("assertions") != {
+        "future_attempt_identifier_is_lowercase": True,
+        "future_attempt_identifier_is_schema_compatible": True,
+        "rfc3339_event_timestamps_remain_unchanged": True,
+        "active_sentinel_intake_mutated": False,
+        "completed_dem_attempt_identifiers_rewritten": False,
+        "external_files_mutated": False,
+        "network_requests_performed": False,
+        "authentication_performed": False,
+        "credential_values_read_or_recorded": False,
+        "product_bytes_transferred": 0,
+        "authority_created": False,
+        "scientific_result_established": False,
+    }:
+        fail("M2 transfer-runner attempt-ID correction claim boundary differs")
     readiness_activity = transfer_readiness.get("activity", {})
     if readiness_activity != {
         "network_requests_performed": False,
@@ -2339,21 +2535,21 @@ def main() -> None:
         fail("evidence ledger is missing EVID-0039 four-tile ArcGIS verification completion")
     expected_evid_0039_bindings = {
         "summary_ref": "records/acquisition/dem-verification-summary.json",
-        "summary_sha256": sha256("records/acquisition/dem-verification-summary.json"),
+        "summary_sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef",
         "active_intake_ref": "contracts/m2-dem-intake.json",
-        "active_intake_sha256": sha256("contracts/m2-dem-intake.json"),
+        "active_intake_sha256": "db4329c6b10492d2c6985be528c5dceca13585736ee9f82fbf96e7f190ba92fa",
         "active_verification_ref": "contracts/m2-dem-offline-verification.json",
-        "active_verification_sha256": sha256("contracts/m2-dem-offline-verification.json"),
+        "active_verification_sha256": "0c2d4208ce1e2f545eb5a442ea07ed15e07c749c9a02730362e7701352f061a8",
         "active_milestone_ref": "contracts/milestone-002.json",
-        "active_milestone_sha256": sha256("contracts/milestone-002.json"),
+        "active_milestone_sha256": "fb85eb26d3143cd23cf96598a0447b9d5e6f3a3b70e8bdc35693bf52f7b1cbca",
         "project_profile_ref": "records/project-control-profile.json",
-        "project_profile_sha256": sha256("records/project-control-profile.json"),
+        "project_profile_sha256": "a4504c2d438b9932a2d36eb5cf62fc86ca278156056689b8a4bb8c115551a7bd",
         "long_term_goal_ref": "records/long-term-goal.json",
-        "long_term_goal_sha256": sha256("records/long-term-goal.json"),
+        "long_term_goal_sha256": "ec695221ec99789e817108e4e7baa5aa3c65206dcd71a39bdf64c55b7c303ee6",
         "completion_script_ref": "scripts/complete_m2_dem_verification.py",
-        "completion_script_sha256": sha256("scripts/complete_m2_dem_verification.py"),
+        "completion_script_sha256": "7e6fb424dfca69bd64075dc7799cfe9bae7b6cdbbcad60a458a9dee8a7ba9925",
         "test_ref": "tests/test_m2_dem_verification_completion.py",
-        "test_sha256": sha256("tests/test_m2_dem_verification_completion.py"),
+        "test_sha256": "252e3ad97ba7a76a52dbd20f22fbea809a411f26bcdf2d413d3d9ffcd7213f5c",
     }
     if any(dem_verification_completion_evidence.get(key) != value for key, value in expected_evid_0039_bindings.items()):
         fail("EVID-0039 four-tile ArcGIS completion bindings differ")
@@ -2387,6 +2583,78 @@ def main() -> None:
             or item.get("status") != "fail_retained_superseded_as_data_result"
         ):
             fail("EVID-0039 retained DEM failure binding differs")
+    dem_vertical_review_evidence = ledger_by_id.get("EVID-0040")
+    if not isinstance(dem_vertical_review_evidence, dict):
+        fail("evidence ledger is missing EVID-0040 DEM vertical-datum review readiness")
+    expected_evid_0040_bindings = {
+        "proposal_ref": "contracts/m2-dem-vertical-datum-proposal.json",
+        "proposal_sha256": sha256("contracts/m2-dem-vertical-datum-proposal.json"),
+        "review_bundle_ref": "reviews/m2-dem-vertical-datum/review-bundle.json",
+        "review_bundle_sha256": sha256("reviews/m2-dem-vertical-datum/review-bundle.json"),
+        "review_contract_ref": "reviews/m2-dem-vertical-datum/review-contract.json",
+        "review_contract_sha256": sha256("reviews/m2-dem-vertical-datum/review-contract.json"),
+        "blank_response_ref": "reviews/m2-dem-vertical-datum/blank-response.json",
+        "blank_response_sha256": sha256("reviews/m2-dem-vertical-datum/blank-response.json"),
+        "source_review_ref": "records/source-gates/m2-dem-vertical-datum-source-review.json",
+        "source_review_sha256": sha256("records/source-gates/m2-dem-vertical-datum-source-review.json"),
+        "local_capability_ref": "records/surface-receipts/m2-dem-vertical-datum-capability.json",
+        "local_capability_sha256": sha256("records/surface-receipts/m2-dem-vertical-datum-capability.json"),
+        "review_surface_ref": "docs/assets/m2-dem-vertical-datum-review.png",
+        "review_surface_sha256": sha256("docs/assets/m2-dem-vertical-datum-review.png"),
+        "render_receipt_ref": "records/surface-receipts/m2-dem-vertical-datum-review.json",
+        "render_receipt_sha256": sha256("records/surface-receipts/m2-dem-vertical-datum-review.json"),
+    }
+    if any(dem_vertical_review_evidence.get(key) != value for key, value in expected_evid_0040_bindings.items()):
+        fail("EVID-0040 DEM vertical-datum review bindings differ")
+    expected_evid_0040_assertions = {
+        "official_source_count": 8,
+        "arcgis_version": "3.7.1",
+        "builtin_egm96_grid_present": True,
+        "egm2008_one_minute_grid_present": False,
+        "usable_exact_egm2008_transform_count": 0,
+        "human_decisions_present": 0,
+        "method_route_approved": False,
+        "license_or_terms_accepted": False,
+        "software_downloaded_or_installed": False,
+        "dem_preconversion_executed": False,
+        "radar_processing_executed": False,
+        "scientific_result_established": False,
+    }
+    if (
+        dem_vertical_review_evidence.get("status") != "pass_review_ready_exact_egm2008_route_owner_install_pending"
+        or dem_vertical_review_evidence.get("next_checkpoint") != "M2-DEM-VERTICAL-DATUM-REVIEW"
+        or dem_vertical_review_evidence.get("assertions") != expected_evid_0040_assertions
+    ):
+        fail("EVID-0040 DEM vertical-datum review claim boundary differs")
+    dem_portability_evidence = ledger_by_id.get("EVID-0041")
+    if not isinstance(dem_portability_evidence, dict):
+        fail("evidence ledger is missing EVID-0041 DEM acquisition portability correction")
+    if (
+        dem_portability_evidence.get("status") != dem_acquisition_portability.get("status")
+        or dem_portability_evidence.get("correction_ref") != "records/acquisition/dem-acquisition-portability-correction.json"
+        or dem_portability_evidence.get("correction_sha256") != sha256("records/acquisition/dem-acquisition-portability-correction.json")
+        or dem_portability_evidence.get("reconciliation_script_ref") != "scripts/reconcile_m2_dem_acquisition.py"
+        or dem_portability_evidence.get("reconciliation_script_sha256") != sha256("scripts/reconcile_m2_dem_acquisition.py")
+        or dem_portability_evidence.get("test_ref") != "tests/test_m2_dem_acquisition_progress.py"
+        or dem_portability_evidence.get("test_sha256") != sha256("tests/test_m2_dem_acquisition_progress.py")
+        or dem_portability_evidence.get("failed_ci_run_id") != 33809208304
+        or dem_portability_evidence.get("assertions") != dem_acquisition_portability.get("assertions")
+    ):
+        fail("EVID-0041 DEM acquisition portability correction differs")
+    transfer_id_evidence = ledger_by_id.get("EVID-0042")
+    if not isinstance(transfer_id_evidence, dict):
+        fail("evidence ledger is missing EVID-0042 transfer-runner attempt-ID correction")
+    if (
+        transfer_id_evidence.get("status") != transfer_runner_correction.get("status")
+        or transfer_id_evidence.get("correction_ref") != "records/acquisition/transfer-runner-attempt-id-correction.json"
+        or transfer_id_evidence.get("correction_sha256") != sha256("records/acquisition/transfer-runner-attempt-id-correction.json")
+        or transfer_id_evidence.get("transfer_runner_ref") != "scripts/acquire_m2_product.py"
+        or transfer_id_evidence.get("transfer_runner_sha256") != sha256("scripts/acquire_m2_product.py")
+        or transfer_id_evidence.get("test_ref") != "tests/test_m2_transfer_core.py"
+        or transfer_id_evidence.get("test_sha256") != sha256("tests/test_m2_transfer_core.py")
+        or transfer_id_evidence.get("assertions") != transfer_runner_correction.get("assertions")
+    ):
+        fail("EVID-0042 transfer-runner attempt-ID correction differs")
 
     violations = []
     for relative in tracked_files():

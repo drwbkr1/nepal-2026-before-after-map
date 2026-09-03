@@ -93,6 +93,12 @@ The full repository suite currently passes 164 tests, and `scripts/check_project
 
 The live preflight test suite validates exact STAC and object-header comparisons, redirect refusal, remote-identity drift, no-payload evidence, empty-custody binding, and the transition to `M2-DEM-ACQUISITION`. `EVID-0032` retains the initial checker failure caused by its old preflight-checkpoint expectation; updating that expectation did not change the live evidence or external custody.
 
+The current full repository suite passes 185 tests, and `scripts/check_project.py` validates 192 required files. Project-control and milestone validators pass, and the M2 DEM vertical-datum bundle validator reports `ready_for_handoff` for all seven exact artifacts. Local reconciliation re-hashed all four promoted DEM files totaling 170,302,058 bytes. GitHub Actions run `33809208304` remains a failed historical result because its Linux runner lacked the external Windows custody root; the corrected portable test validates repository receipts without external access while production reconciliation still defaults to strict external checking.
+
+The generic intake-contract validator separately reports four invalid attempt identifiers because the completed DEM transfer IDs contain uppercase RFC 3339 `T` and `Z` characters and its identifier grammar is lowercase-only. The immutable attempt receipts, checkpoint paths, and external event history are not rewritten. This retained schema-validation failure does not change the project-specific byte and custody passes or approve downstream processing; future transfer runners must correct identifier generation before use.
+
+Before any Sentinel transfer, the unattempted runner was corrected to lowercase its generated attempt identifier while leaving RFC 3339 event timestamps unchanged. Eleven focused tests cover the generator and existing transfer controls, and the unchanged active Sentinel intake passes the generic validator. Receipt `records/acquisition/transfer-runner-attempt-id-correction.json` binds the current runner and tests without claiming authentication, network access, external mutation, or transfer.
+
 The transfer-runner suite validates exact header matching, redirect and requester-charge failure, exclusive staging, streamed size and SHA-256, partial retention, and absence of any credential or authorization-header route. `EVID-0033` and the readiness receipt bind the exact runner and seven passing tests without claiming a live transfer.
 
 ## Historical static intake-control validation

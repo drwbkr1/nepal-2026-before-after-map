@@ -22,11 +22,14 @@ from m2_transfer_core import (  # noqa: E402
     stream_to_exclusive_staging,
     write_new_json,
 )
-from acquire_m2_product import set_attempt_terminal  # noqa: E402
+from acquire_m2_product import build_attempt_id, set_attempt_terminal  # noqa: E402
 
 
 class M2TransferCoreTests(unittest.TestCase):
     def test_missing_access_reference_stops_without_mutating_active_intake(self) -> None:
+        attempt_id = build_attempt_id("m1-src-001", "2026-09-03T17:00:00Z", "ABC123ef")
+        self.assertEqual(attempt_id, "m1-src-001-20260903t170000z-abc123ef")
+        self.assertRegex(attempt_id, r"^[a-z0-9][a-z0-9._-]{0,127}$")
         intake_path = ROOT / "contracts" / "m2-intake.json"
         before = hashlib.sha256(intake_path.read_bytes()).hexdigest()
         environment = dict(os.environ)

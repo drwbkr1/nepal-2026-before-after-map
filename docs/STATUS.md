@@ -70,6 +70,14 @@ ArcGIS Pro 3.7.1 then passed one append-only receipt for each exact tile: the co
 
 The candidate controls remain immutable historical evidence. Full-tile finite coverage does not establish freedom from void-fill artifacts, seams, anomalous terrain, or suitability for terrain correction. The production radar chain remains deferred on two explicit dependencies: EGM2008 orthometric DEM heights do not exactly match ArcGIS's documented EGM96 geoid correction, and updated Sentinel orbit files are separate auxiliary products outside current authority. Approval does not resolve either scientific dependency.
 
+An exact vertical-datum review packet is ready. Official ArcGIS documentation supports an EGM2008 one-minute transformation through the optional ArcGIS Coordinate Systems Data `world1x1_vert` component. Local ArcGIS Pro 3.7.1 inspection found the built-in EGM96 grid but no `Dataset_egm2008-1.grd` or usable EGM2008 transformation over the approved AOIs. Proposal SHA-256 `bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065` recommends converting verified copies to WGS 84 ellipsoidal height and then using `NONE`; bundle SHA-256 `9b40e81df766ea866c5bff51cdbc4d83e7e7da6a554fb1709fc553d8221bebbc` contains zero human decisions. My Esri sign-in, license acceptance, component download or installation, and UAC remain owner-controlled and are not authorized by the packet.
+
+GitHub Actions run `33809208304` for the published DEM verification commit remains a **FAIL**. Its Linux test runner could not resolve the operator's external Windows custody root. The correction keeps strict external path and byte validation as the production default, lets the portable suite verify tracked receipts and recorded promoted identities without external access, and separately reverified all four custody files locally (170,302,058 bytes). The failed run is retained rather than reclassified; no DEM pixel, vertical datum, radar output, or scientific result was established by the correction.
+
+The generic intake-contract validator also returns **FAIL** for the four immutable DEM attempt IDs because their RFC 3339 timestamp fragments preserve uppercase `T` and `Z`, while its identifier grammar is lowercase-only. The project-specific receipt, byte, and custody validators pass. Rewriting completed receipt identities would damage the audit trail, so the mismatch is retained; it prompted the prospective Sentinel correction below.
+
+The still-unattempted Sentinel transfer runner has now been corrected prospectively: attempt identifiers lowercase only the identifier copy of the timestamp while preserving the RFC 3339 event timestamps themselves. Eleven focused tests pass, the active Sentinel intake remains unchanged and passes the generic intake validator, and no network, authentication, credential, custody, or product-byte action occurred. The completed DEM identifiers remain unchanged.
+
 ## Prepared optical baseline controls
 
 The exact Sentinel-2C-before and Sentinel-2B-after RUM route now has a deterministic processing contract. It requires internal baseline 05.12 metadata, band-specific BOA offsets, the product quantification value, DN-zero handling, conservative SCL and quality exclusions, a fixed 20 m EPSG:32645 grid, and independent stable-control measurement before any cross-platform normalization. Fifteen portable tests and an ArcGIS Pro 3.7.1 Spatial Analyst run pass. The ArcGIS run used only a 16-by-16 synthetic fixture and passed five reflectance-band plus three index checks. It did not access external custody or read real metadata or pixels.
@@ -100,6 +108,7 @@ Checkpoint derivation is also portable. Repository-only tests do not require the
 - verify exact bytes, provider checksums, ZIP safety, SAFE identity, and required content;
 - inspect real pixels, masks, AOI coverage, baselines, and EPSG:32645 registration.
 - review and explicitly resolve the DEM vertical-datum route before Sentinel-1 terrain correction, without silently selecting `GEOID` or `NONE`;
+- if the exact EGM2008 route is approved, wait for the owner to install the matching ArcGIS Coordinate Systems Data component before any conversion attempt;
 - review void-fill, seam, artifact, and terrain plausibility before treating the structurally valid DEM as processing-fit.
 
 ## Outside the active authority or still unproven

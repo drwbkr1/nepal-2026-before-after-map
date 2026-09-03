@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "review_id": "NEPAL-M2-DEM-VERTICAL-DATUM-SOURCE-REVIEW-001",
+  "status": "pass_official_sources_exact_route_requires_owner_installed_component",
+  "checked_at_utc": "2026-09-03T21:46:14Z",
+  "parent_commit": "64fb554f1ed3db5f3f7188814ffb7e8eb133de1a",
+  "bindings": {
+    "dem_verification_summary_ref": "records/acquisition/dem-verification-summary.json",
+    "dem_verification_summary_sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef",
+    "dem_approval_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "dem_approval_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+    "radar_contract_ref": "config/qa/radar-baseline-processing-contract.json",
+    "radar_contract_sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f",
+    "local_capability_ref": "records/surface-receipts/m2-dem-vertical-datum-capability.json",
+    "local_capability_sha256": "85b977c5b05057823e5e9bb956a82b36b2fab3ea798bd6a1b22782046edb0870",
+    "local_inspector_ref": "scripts/inspect_m2_dem_vertical_datum_arcgis.py",
+    "local_inspector_sha256": "e5282d71adcff8f70d1b00dcb2ff4ac3670cddec6298a16e4b2a558aade101bf"
+  },
+  "official_sources": [
+    {
+      "role": "arcgis_radiometric_terrain_flattening",
+      "requested_url": "https://pro.arcgis.com/en/pro-app/latest/tool-reference/image-analyst/apply-radiometric-terrain-flattening.htm",
+      "final_url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-radiometric-terrain-flattening.html",
+      "http_status": 200,
+      "content_type": "text/html",
+      "content_length_bytes": 27460,
+      "response_sha256": "e9fc0cc55db15110a439756bd0cc0762632ed1a0baa39ef41476e84b143e76fd",
+      "finding": "GEOID converts orthometric to ellipsoidal height using EGM96; NONE is for a DEM already in ellipsoidal height."
+    },
+    {
+      "role": "copernicus_dem_vertical_reference",
+      "requested_url": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM.html",
+      "final_url": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM.html",
+      "http_status": 200,
+      "content_type": "text/html",
+      "content_length_bytes": 199643,
+      "response_sha256": "a36d82ec7243cd8368820c45f75d599427e56186ce87b5d7ac637b3db8f3c378",
+      "finding": "Copernicus DEM values are orthometric by default and use EGM2008 when geoid heights are added to return WGS84 ellipsoidal values."
+    },
+    {
+      "role": "epsg_vertical_crs",
+      "requested_url": "https://epsg.org/crs_3855/EGM2008-height.html",
+      "final_url": "https://epsg.org/crs_3855/EGM2008-height.html",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "content_length_bytes": 23473,
+      "response_sha256": "b525e4e99ca3804cdccf8f704d2d6f2607567025c27c67e7c51468593adc5b42",
+      "finding": "EPSG:3855 identifies the EGM2008 gravity-related height system used to label the source DEM."
+    },
+    {
+      "role": "arcgis_coordinate_systems_data_install",
+      "requested_url": "https://pro.arcgis.com/en/pro-app/latest/help/mapping/properties/arcgis-coordinate-systems-data.htm",
+      "final_url": "https://doc.esri.com/en/arcgis-pro/latest/help/mapping/properties/arcgis-coordinate-systems-data.html",
+      "http_status": 200,
+      "content_type": "text/html",
+      "content_length_bytes": 14736,
+      "response_sha256": "6f8f497e048082925103987862d4d1594443f502db909a879bd31f597fcaab2e",
+      "finding": "Grid-based EGM vertical transformations require the separate ArcGIS Coordinate Systems Data component, obtained through My Esri and installed after license review."
+    },
+    {
+      "role": "arcgis_coordinate_systems_data_feature",
+      "requested_url": "https://pro.arcgis.com/en/pro-app/latest/get-started/arcgis-pro-installation-administration.htm",
+      "final_url": "https://doc.esri.com/en/arcgis-pro/latest/get-started/arcgis-pro-installation-administration.html",
+      "http_status": 200,
+      "content_type": "text/html",
+      "content_length_bytes": 22806,
+      "response_sha256": "c85d7b3e6a4fffe0aae6ecbf190c1a0c0062e101b92b19a67d2aea3a1c93c985",
+      "finding": "The world1x1_vert feature contains the EGM2008 one-minute world geoid model; world_vert contains the EGM84 and EGM2008 2.5-minute world grids."
+    },
+    {
+      "role": "arcgis_project_raster_vertical_transform",
+      "requested_url": "https://pro.arcgis.com/en/pro-app/latest/tool-reference/data-management/project-raster.htm",
+      "final_url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/data-management/project-raster.html",
+      "http_status": 200,
+      "content_type": "text/html",
+      "content_length_bytes": 35513,
+      "response_sha256": "2547bcb9d50ccd02c442f949fa48b12b92a5bba0079c00de7e4be7e5b9a542f2",
+      "finding": "Project Raster supports an explicit vertical transformation when input and output spatial references include vertical coordinate systems and supplementary coordinate-system data is installed."
+    },
+    {
+      "role": "arcgis_supported_vertical_transformations",
+      "requested_url": "https://pro.arcgis.com/en/pro-app/latest/help/mapping/properties/pdf/geographic_transformations.pdf",
+      "final_url": "https://doc.esri.com/en/pro-app/latest/help/mapping/properties/pdf/geographic_transformations.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "content_length_bytes": 2233767,
+      "response_sha256": "2ddfa72d0993de94bd553274ac262516bd56e02d857addb3e11b6eaa8f23ee7f",
+      "finding": "ArcGIS lists WGS_1984_To_WGS_1984_EGM2008_1x1_Height (WKID 110018) using Dataset_egm2008-1.grd and a 2.5-minute alternative (WKID 110019)."
+    },
+    {
+      "role": "nga_egm2008_authority",
+      "requested_url": "https://earth-info.nga.mil/",
+      "final_url": "https://earth-info.nga.mil/",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "content_length_bytes": 91314,
+      "response_sha256": "9be7b3d27575dcd5688b724a10236a87e673fb5a21e9873802de2eecb8440f46",
+      "finding": "NGA publishes EGM2008 model data, interpolation grids, documentation, and an EGM96/EGM2008 calculator; this source was reviewed as an independent authority, not selected for acquisition."
+    }
+  ],
+  "route_assessment": {
+    "recommended_route": "arcgis_egm2008_1x1_preconversion_then_none",
+    "recommended_reason": "It preserves the Copernicus EGM2008 vertical reference and uses NONE only after creating and verifying an ellipsoidal-height DEM.",
+    "current_local_availability": "defer_missing_world1x1_vert_component",
+    "egm96_route": "sensitivity_only_not_production",
+    "raw_orthometric_with_none": "prohibited"
+  },
+  "assertions": {
+    "official_sources_only": true,
+    "external_grid_or_installer_downloaded": false,
+    "license_or_terms_accepted": false,
+    "account_or_credential_used": false,
+    "software_installed_or_modified": false,
+    "dem_pixels_processed": false,
+    "radar_processing_executed": false,
+    "vertical_datum_route_activated": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "HTTP response hashes identify the fetched documentation snapshots; they are not publisher version identifiers.",
+    "The exact EGM2008 grid is not installed, so the transformation name and direction must be revalidated at runtime after owner installation.",
+    "The review does not authorize My Esri sign-in, license acceptance, software installation, elevation conversion, or radar processing."
+  ]
+}

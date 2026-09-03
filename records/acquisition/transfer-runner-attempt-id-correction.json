@@ -1,0 +1,58 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-TRANSFER-RUNNER-ATTEMPT-ID-CORRECTION-001",
+  "verified_at_utc": "2026-09-03T23:23:00Z",
+  "status": "pass_future_attempt_ids_lowercase_schema_compatible",
+  "claim": "The unattempted Sentinel transfer runner now generates lowercase attempt identifiers that satisfy the generic intake-contract identifier grammar while preserving RFC 3339 timestamps separately in the started_at and completed_at fields.",
+  "supplements": {
+    "readiness_ref": "records/acquisition/transfer-runner-readiness.json",
+    "readiness_sha256": "d75671b2934ac36d6c74341d125392c874007946fb4c7259166ba7da056edcb3",
+    "scope": "The original readiness receipt remains immutable historical evidence. This correction binds the current runner and test bytes before the first Sentinel transfer."
+  },
+  "bindings": {
+    "active_intake_ref": "contracts/m2-intake.json",
+    "active_intake_sha256": "a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c",
+    "initial_intake_snapshot_ref": "records/acquisition/active-intake-initial-snapshot.json",
+    "initial_intake_snapshot_sha256": "a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c",
+    "activation_approval_ref": "records/source-gates/m2-activation-approval.json",
+    "activation_approval_sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
+    "transfer_core_ref": "scripts/m2_transfer_core.py",
+    "transfer_core_sha256": "a858756a063148800be418bb7329ba148bcdce71b7812abafee6f7c9c62d8da9",
+    "transfer_runner_ref": "scripts/acquire_m2_product.py",
+    "transfer_runner_sha256": "8a48b3bda9d729bceebf50e237f5671c967275d8203111aa8f8972aaddc3b645",
+    "test_ref": "tests/test_m2_transfer_core.py",
+    "test_sha256": "545730ff32488e1e84a888da021991707a428b68b0b01c3b6bf6232514447843",
+    "discovery_ref": "records/acquisition/dem-acquisition-portability-correction.json",
+    "discovery_sha256": "e49580755e6d6e45b177a60971f012160155ab4a0eaeadba32159758d93e4969"
+  },
+  "validation": {
+    "focused_test_count": 11,
+    "focused_test_status": "pass",
+    "full_repository_test_count": 185,
+    "full_repository_test_status": "pass",
+    "repository_required_file_count": 193,
+    "repository_validation_status": "pass",
+    "active_sentinel_intake_generic_validator": "pass",
+    "example_attempt_id": "m1-src-001-20260903t170000z-abc123ef",
+    "identifier_pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"
+  },
+  "assertions": {
+    "future_attempt_identifier_is_lowercase": true,
+    "future_attempt_identifier_is_schema_compatible": true,
+    "rfc3339_event_timestamps_remain_unchanged": true,
+    "active_sentinel_intake_mutated": false,
+    "completed_dem_attempt_identifiers_rewritten": false,
+    "external_files_mutated": false,
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "product_bytes_transferred": 0,
+    "authority_created": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "The identifier test does not prove live CDSE authentication, product availability, response identity, transfer performance, or product integrity.",
+    "The completed DEM attempt identifiers remain immutable and continue to fail the generic lowercase identifier check; project-specific receipt and byte verification is preserved.",
+    "The existing secret-safe credential checkpoint and all source, collision, storage, checksum, and offline-verification gates remain in force."
+  ]
+}
