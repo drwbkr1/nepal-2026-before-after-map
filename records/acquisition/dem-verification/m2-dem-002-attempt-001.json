@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0",
+  "status": "pass_structural_only",
+  "verified_at_utc": "2026-09-03T21:27:20Z",
+  "verification_id": "NEPAL-M2-DEM-OFFLINE-VERIFICATION-001",
+  "asset_id": "m2-dem-002",
+  "source_id": "M2-DEM-002",
+  "contract_sha256": "6534eda0c3dc11d5bedfd3d9b0c8cbb1b1df3a0638faa7becd904e6843326dac",
+  "active_intake_sha256": "0c41f0c6028b09140f0107f97702f346d92242a74aa67e07037027120891fc64",
+  "transfer_receipt_ref": "records/acquisition/dem-attempts/m2-dem-002-20260903T211011Z-0c71d865.json",
+  "transfer_receipt_sha256": "f196825ca028df92165622548e3f26be25bd1a732898aba3d898b899992c04e0",
+  "raster_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+  "custody_inventory_before": [
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+      "size_bytes": 45336691,
+      "sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a"
+    },
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+      "size_bytes": 44874244,
+      "sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194"
+    },
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+      "size_bytes": 41688284,
+      "sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc"
+    },
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+      "size_bytes": 38402839,
+      "sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7"
+    }
+  ],
+  "custody_inventory_after": [
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+      "size_bytes": 45336691,
+      "sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a"
+    },
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+      "size_bytes": 44874244,
+      "sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194"
+    },
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+      "size_bytes": 41688284,
+      "sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc"
+    },
+    {
+      "relative_path": "Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+      "size_bytes": 38402839,
+      "sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7"
+    }
+  ],
+  "observed": {
+    "size_bytes": 44874244,
+    "sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194",
+    "tiff_signature": "49492a00",
+    "shape": [
+      3600,
+      3600
+    ],
+    "band_count": 1,
+    "pixel_type": "F32",
+    "crs_wkid": 4326,
+    "cell_size_degrees": [
+      0.0002777777777777778,
+      0.0002777777777777778
+    ],
+    "extent_wgs84": [
+      84.99986111111112,
+      27.000138888888888,
+      85.99986111111112,
+      28.000138888888888
+    ],
+    "nodata": {
+      "any_nodata": false,
+      "all_nodata": false,
+      "nodata_value": null
+    },
+    "statistics": {
+      "minimum": 86.5,
+      "maximum": 4461.53857421875,
+      "valid_cell_count": 12960000,
+      "nodata_or_nonfinite_cell_count": 0,
+      "total_cell_count": 12960000,
+      "source": "arcpy.RasterToNumPyArray_read_only_full_raster"
+    },
+    "runtime": {
+      "product": "ArcGISPro",
+      "version": "3.7.1",
+      "license_level": "Advanced"
+    }
+  },
+  "evaluation": {
+    "status": "pass_structural_only",
+    "checks": {
+      "size_bytes": {
+        "status": "pass",
+        "expected": 44874244,
+        "actual": 44874244
+      },
+      "sha256": {
+        "status": "pass",
+        "expected": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194",
+        "actual": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194"
+      },
+      "tiff_signature": {
+        "status": "pass",
+        "expected": [
+          "49492a00",
+          "4d4d002a"
+        ],
+        "actual": "49492a00"
+      },
+      "shape": {
+        "status": "pass",
+        "expected": [
+          3600,
+          3600
+        ],
+        "actual": [
+          3600,
+          3600
+        ]
+      },
+      "band_count": {
+        "status": "pass",
+        "expected": 1,
+        "actual": 1
+      },
+      "pixel_type": {
+        "status": "pass",
+        "expected": "F32",
+        "actual": "F32"
+      },
+      "crs_wkid": {
+        "status": "pass",
+        "expected": 4326,
+        "actual": 4326
+      },
+      "cell_size": {
+        "status": "pass",
+        "expected": [
+          0.0002777777777778,
+          0.0002777777777778
+        ],
+        "actual": [
+          0.0002777777777777778,
+          0.0002777777777777778
+        ]
+      },
+      "raster_extent": {
+        "status": "pass",
+        "expected": [
+          84.99986111111112,
+          27.000138888888806,
+          85.9998611111112,
+          28.000138888888888
+        ],
+        "actual": [
+          84.99986111111112,
+          27.000138888888888,
+          85.99986111111112,
+          28.000138888888888
+        ]
+      },
+      "nodata_property_inspection": {
+        "status": "pass",
+        "expected": "captured",
+        "actual": {
+          "any_nodata": false,
+          "all_nodata": false,
+          "nodata_value": null
+        }
+      },
+      "statistics_capture": {
+        "status": "pass",
+        "expected": "finite minimum <= maximum",
+        "actual": {
+          "minimum": 86.5,
+          "maximum": 4461.53857421875,
+          "valid_cell_count": 12960000,
+          "nodata_or_nonfinite_cell_count": 0,
+          "total_cell_count": 12960000,
+          "source": "arcpy.RasterToNumPyArray_read_only_full_raster"
+        }
+      },
+      "custody_unchanged": {
+        "status": "pass",
+        "expected": true,
+        "actual": true
+      }
+    },
+    "failures": [],
+    "valid_pixel_coverage_established": false,
+    "vertical_datum_route_established": false,
+    "scientific_fitness_established": false
+  },
+  "claim_boundary": {
+    "structural_raster_fitness_established": true,
+    "full_raster_pixel_statistics_captured": true,
+    "valid_pixel_coverage_established": false,
+    "vertical_datum_route_established": false,
+    "sentinel_processing_executed": false,
+    "scientific_result_established": false
+  }
+}

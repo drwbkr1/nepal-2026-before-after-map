@@ -74,6 +74,11 @@ REQUIRED = [
     "records/acquisition/dem-geotiff-verifier-correction-001.json",
     "records/acquisition/dem-verification/m2-dem-001-attempt-002.json",
     "records/acquisition/dem-geotiff-verifier-correction-002.json",
+    "records/acquisition/dem-verification/m2-dem-001-attempt-003.json",
+    "records/acquisition/dem-verification/m2-dem-002-attempt-001.json",
+    "records/acquisition/dem-verification/m2-dem-003-attempt-001.json",
+    "records/acquisition/dem-verification/m2-dem-004-attempt-001.json",
+    "records/acquisition/dem-verification-completion-readiness.json",
     "records/source-gates/source-manifest-approval.json",
     "records/source-gates/source-manifest-review-reconciliation.json",
     "records/source-gates/m2-activation-approval.json",
@@ -160,6 +165,7 @@ REQUIRED = [
     "tests/test_m2_dem_preflight.py",
     "tests/test_m2_dem_transfer.py",
     "tests/test_m2_dem_acquisition_progress.py",
+    "tests/test_m2_dem_verification_completion.py",
     "tests/test_m2_dem_active_geotiff.py",
     "tests/test_radar_processing_contract.py",
     "tests/test_optical_processing_core.py",
@@ -176,6 +182,7 @@ REQUIRED = [
     "scripts/acquire_m2_dem_tile.py",
     "scripts/reconcile_m2_dem_acquisition.py",
     "scripts/verify_m2_dem_geotiff.py",
+    "scripts/complete_m2_dem_verification.py",
     "scripts/prepare_radar_processing_contract.py",
     "scripts/optical_processing_core.py",
     "scripts/prepare_optical_processing_contract.py",
@@ -2248,6 +2255,26 @@ def main() -> None:
         fail("retained DEM statistics failure or correction binding differs")
     if dem_statistics_correction_evidence.get("assertions") != statistics_correction.get("assertions"):
         fail("EVID-0037 and DEM statistics correction have different claim boundaries")
+    dem_verification_completion_readiness_evidence = ledger_by_id.get("EVID-0038")
+    if not isinstance(dem_verification_completion_readiness_evidence, dict):
+        fail("evidence ledger is missing EVID-0038 four-tile ArcGIS readiness")
+    if (
+        dem_verification_completion_readiness_evidence.get("status") != "pass_four_structural_receipts_ready_for_reconciliation"
+        or dem_verification_completion_readiness_evidence.get("readiness_ref") != "records/acquisition/dem-verification-completion-readiness.json"
+        or dem_verification_completion_readiness_evidence.get("readiness_sha256") != sha256("records/acquisition/dem-verification-completion-readiness.json")
+    ):
+        fail("EVID-0038 four-tile ArcGIS readiness differs")
+    completion_readiness = json.loads((ROOT / "records/acquisition/dem-verification-completion-readiness.json").read_text(encoding="utf-8"))
+    if completion_readiness.get("status") != "pass_four_structural_receipts_ready_for_reconciliation" or completion_readiness.get("validation") != {"focused_test_count": 3, "full_test_count": 180, "project_checker": "pass"}:
+        fail("DEM four-tile verification completion readiness differs")
+    for item in completion_readiness.get("passing_receipts", []) + completion_readiness.get("retained_failed_receipts", []):
+        relative = item.get("ref")
+        if not isinstance(relative, str) or not (ROOT / relative).is_file() or item.get("sha256") != sha256(relative):
+            fail("DEM verification completion readiness has a stale receipt binding")
+    if len(completion_readiness.get("passing_receipts", [])) != 4 or len(completion_readiness.get("retained_failed_receipts", [])) != 2:
+        fail("DEM verification completion readiness receipt counts differ")
+    if dem_verification_completion_readiness_evidence.get("assertions") != completion_readiness.get("assertions"):
+        fail("EVID-0038 and DEM verification completion readiness have different claim boundaries")
 
     violations = []
     for relative in tracked_files():

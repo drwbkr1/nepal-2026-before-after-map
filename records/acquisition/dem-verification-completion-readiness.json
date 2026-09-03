@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-VERIFICATION-COMPLETION-READINESS-001",
+  "status": "pass_four_structural_receipts_ready_for_reconciliation",
+  "verified_at_utc": "2026-09-03T21:32:14Z",
+  "bindings": {
+    "active_intake_ref": "contracts/m2-dem-intake.json",
+    "active_intake_sha256": "0c41f0c6028b09140f0107f97702f346d92242a74aa67e07037027120891fc64",
+    "active_verification_ref": "contracts/m2-dem-offline-verification.json",
+    "active_verification_sha256": "6534eda0c3dc11d5bedfd3d9b0c8cbb1b1df3a0638faa7becd904e6843326dac",
+    "approved_aoi_ref": "config/aoi/approved-study-areas.geojson",
+    "approved_aoi_sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98",
+    "completion_script_ref": "scripts/complete_m2_dem_verification.py",
+    "completion_script_sha256": "5ffce6ec5bb026431320dc81b6837b926d73531619ce4b2bec3122749ffd6f09",
+    "test_ref": "tests/test_m2_dem_verification_completion.py",
+    "test_sha256": "43556f5fabe46d09cd0c7eb526573a9744c3931aaef057517ea9b5415c53f73e",
+    "latest_correction_ref": "records/acquisition/dem-geotiff-verifier-correction-002.json",
+    "latest_correction_sha256": "984a0b58dac419fff9ae3b8efabc8b8b64e6f0b5335e1f0092050a8c5f841e69"
+  },
+  "passing_receipts": [
+    {
+      "ref": "records/acquisition/dem-verification/m2-dem-001-attempt-003.json",
+      "sha256": "7105f4ac4519ef0727795476d0dc48c30677e759c49b70eba34c4cc496f2ef66"
+    },
+    {
+      "ref": "records/acquisition/dem-verification/m2-dem-002-attempt-001.json",
+      "sha256": "f34d966de72e3848e4654ed7fdb25c27adf43053e69c79b98b57acfdb455c588"
+    },
+    {
+      "ref": "records/acquisition/dem-verification/m2-dem-003-attempt-001.json",
+      "sha256": "7de7861dab0a2342075abcfb5661d3e225491dc869d2efc096a424a6594adf8e"
+    },
+    {
+      "ref": "records/acquisition/dem-verification/m2-dem-004-attempt-001.json",
+      "sha256": "8ebce71e1d4219567b7236409357d8b1d43951e9fe05d3e83b783df36252ffdc"
+    }
+  ],
+  "retained_failed_receipts": [
+    {
+      "ref": "records/acquisition/dem-verification/m2-dem-001.json",
+      "sha256": "7a6a28023723a7505ea0e88afb2d7b760a4ee63e9f8c23c57db6d2b4152f0bef"
+    },
+    {
+      "ref": "records/acquisition/dem-verification/m2-dem-001-attempt-002.json",
+      "sha256": "aec85a69c3568ec08c9ac19da75b43ec3ab6ab0bdd4371228b8f63f9318ac08b"
+    }
+  ],
+  "validation": {
+    "focused_test_count": 3,
+    "full_test_count": 180,
+    "project_checker": "pass"
+  },
+  "assertions": {
+    "passing_tile_count": 4,
+    "retained_failed_attempt_count": 2,
+    "verified_byte_count": 170302058,
+    "finite_non_nodata_cell_count": 51840000,
+    "nodata_or_nonfinite_cell_count": 0,
+    "approved_aoi_footprint_coverage_passed": true,
+    "current_controls_mutated_by_readiness": false,
+    "vertical_datum_route_established": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Publish the four passing receipts and this completion control, then reconcile the exact set once and advance only to vertical-datum review."
+}
