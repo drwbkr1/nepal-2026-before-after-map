@@ -37,6 +37,14 @@ python scripts/acquire_m2_product.py --source-id M1-SRC-001
 
 This command has not been run against CDSE. `records/acquisition/transfer-runner-readiness.json` binds the current runner and eleven passing local fixture tests; it records no authentication or product transfer.
 
+`contracts/m2-offline-verification.json` is the active read-only verification contract. After a transfer reaches `promoted`, run its exact wrapper with a new timestamp:
+
+```powershell
+python scripts/verify_m2_product_container.py --source-id M1-SRC-001 --scanned-at-utc <RFC-3339-UTC>
+```
+
+The wrapper refuses unpromoted assets, missing or ambiguous successful-attempt evidence, unexpected custody paths, and existing receipt names. A passing `pass_container_only` result remains ineligible for scientific use until the later raster, AOI, mask, baseline, and registration gates pass.
+
 `contracts/m2-offline-verification-candidate.json` defines the read-only post-download checks for the same eight exact archives. It requires local SHA-256, provider-MD5 agreement, exact size, safe ZIP membership, CRC, exact SAFE root identity, and analysis-critical band, polarization, calibration, noise, and quality members. It does not access custody until a later explicit scan invocation.
 
 `records/readiness/m2-readiness-decision.json` preserves the historical pre-acquisition `defer`: no full products, pixel coverage, masks, or registration evidence existed. The later live source gate resolves only access-time source and rights checks; it does not alter the remaining data-readiness gates. See [M2_OFFLINE_VERIFICATION.md](M2_OFFLINE_VERIFICATION.md).

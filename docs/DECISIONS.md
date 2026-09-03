@@ -89,3 +89,9 @@
 **Decision:** Transfer only one exact approved product per invocation through exclusive staging, append-before-transfer evidence, streamed SHA-256 and provider-MD5 verification, redirect refusal, retained failures, and atomic hard-link no-replace promotion.
 **Reason:** An authenticated HTTP response is not custody evidence, and a collision, changed page, changed catalog identity, partial file, or checksum mismatch must remain visible without overwriting existing bytes.
 **Status:** Implemented and covered by eleven local fixture tests. The readiness receipt records no network request, authentication, active-intake mutation, or product bytes. Real execution remains at the secret-safe authentication-reference gate.
+
+## D-016 — Active per-product offline container verification
+
+**Decision:** Activate the predeclared container controls for the exact eight M2 products and require a promoted active-intake identity plus successful-transfer receipt before any archive scan.
+**Reason:** Candidate checks built before activation must be bound to the current approval and custody, while archive access must remain offline, read-only, non-extracting, and separate from pixel or scientific admission.
+**Status:** Active contract and per-product wrapper implemented. Five tests verify authority, exact product controls, custody bindings, offline behavior, and refusal of an unpromoted asset. No real archive bytes were read during activation or testing.

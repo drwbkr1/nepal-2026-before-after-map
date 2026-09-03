@@ -42,6 +42,14 @@ python -m unittest tests.test_m2_transfer_core -v
 
 The suite verifies missing-reference refusal without intake mutation, exclusive staging, streamed hashes, mismatch retention, redirect refusal, path containment, receipt no-replacement, failed-attempt history, destination collision preservation, and atomic no-replace promotion. The passing readiness receipt is synthetic/local evidence only and does not establish real CDSE behavior or product integrity.
 
+The active offline-verification binding and wrapper stop are tested separately:
+
+```powershell
+python -m unittest tests.test_m2_active_verification -v
+```
+
+These tests verify exact inheritance from the M2 approval, preservation of all eight candidate container profiles, offline/read-only behavior, and refusal before custody access when an asset has not been promoted.
+
 ## Historical static intake-control validation
 
 Before activation or data transfer, the repository established that:

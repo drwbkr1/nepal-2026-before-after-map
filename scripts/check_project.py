@@ -30,6 +30,7 @@ REQUIRED = [
     "contracts/m2-intake-candidate.json",
     "contracts/milestone-002.json",
     "contracts/m2-intake.json",
+    "contracts/m2-offline-verification.json",
     "records/project-control-profile.json",
     "records/long-term-goal.json",
     "records/evidence-ledger.jsonl",
@@ -95,6 +96,9 @@ REQUIRED = [
     "scripts/record_m2_transfer_readiness.py",
     "scripts/validate_pair_plan.py",
     "tests/test_m2_transfer_core.py",
+    "tests/test_m2_active_verification.py",
+    "scripts/activate_m2_verification.py",
+    "scripts/verify_m2_product_container.py",
     ".github/workflows/validate.yml",
 ]
 
@@ -218,6 +222,7 @@ def main() -> None:
     transfer_readiness = json.loads((ROOT / "records/acquisition/transfer-runner-readiness.json").read_text(encoding="utf-8"))
     pair_plan = json.loads((ROOT / "config/qa/candidate-pair-plan.json").read_text(encoding="utf-8"))
     offline_verification = json.loads((ROOT / "contracts/m2-offline-verification-candidate.json").read_text(encoding="utf-8"))
+    active_offline_verification = json.loads((ROOT / "contracts/m2-offline-verification.json").read_text(encoding="utf-8"))
     readiness_input = json.loads((ROOT / "records/readiness/m2-readiness-audit-input.json").read_text(encoding="utf-8"))
     readiness_decision = json.loads((ROOT / "records/readiness/m2-readiness-decision.json").read_text(encoding="utf-8"))
     reproducibility = json.loads((ROOT / "records/surface-receipts/m1-control-reproducibility.json").read_text(encoding="utf-8"))
@@ -473,6 +478,33 @@ def main() -> None:
         fail("M2 offline verification must prohibit network requests and archive extraction")
     if boundary.get("custody_root_must_already_exist") is not True or boundary.get("overwrite_existing_receipt") is not False:
         fail("M2 offline verification must refuse root creation and receipt replacement")
+
+    if active_offline_verification.get("status") != "active_authorized_offline_verification":
+        fail("active M2 offline verification contract has an invalid status")
+    active_verification_inputs = active_offline_verification.get("inputs", {})
+    expected_active_verification_hashes = {
+        "candidate_contract_sha256": sha256("contracts/m2-offline-verification-candidate.json"),
+        "acquisition_plan_sha256": sha256("records/acquisition-plan.json"),
+        "active_milestone_sha256_at_activation": sha256("contracts/milestone-002.json"),
+        "activation_approval_sha256": sha256("records/source-gates/m2-activation-approval.json"),
+        "active_intake_sha256_at_activation": sha256("contracts/m2-intake.json"),
+        "source_gate_sha256": sha256("records/source-gates/m2-live-source-gate.json"),
+        "custody_initialization_sha256": sha256("records/acquisition/custody-initialization.json"),
+    }
+    if any(active_verification_inputs.get(key) != value for key, value in expected_active_verification_hashes.items()):
+        fail("active M2 offline verification contract has a stale evidence binding")
+    active_verification_authority = active_offline_verification.get("authority", {})
+    if active_verification_authority.get("mode") != "inherited" or active_verification_authority.get("authority_ref") != "records/source-gates/m2-activation-approval.json":
+        fail("active M2 offline verification does not inherit exact M2 authority")
+    if active_verification_authority.get("offline_verification_authorized") is not True or active_verification_authority.get("this_contract_creates_authority") is not False:
+        fail("active M2 offline verification authority semantics are invalid")
+    if active_offline_verification.get("assets") != offline_verification.get("assets"):
+        fail("active M2 offline verification changed the exact candidate product controls")
+    active_boundary = active_offline_verification.get("execution_boundary", {})
+    if active_boundary.get("network_requests") != "prohibited" or active_boundary.get("archive_extraction") != "prohibited" or active_boundary.get("source_archive_mutation") != "prohibited":
+        fail("active M2 offline verification must remain offline, non-extracting, and read-only")
+    if active_offline_verification.get("activation_boundary", {}).get("product_bytes_read") != 0:
+        fail("activating M2 offline verification must not claim product-byte access")
     offline_assets = offline_verification.get("assets", [])
     if len(offline_assets) != 8:
         fail("M2 offline verification contract must contain exactly eight assets")
