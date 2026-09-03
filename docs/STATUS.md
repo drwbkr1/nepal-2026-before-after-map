@@ -22,6 +22,9 @@
 - ArcGIS Pro 3.7.1 Advanced created and reopened a metadata-only EPSG:32645 evidence workspace with nine datasets, fourteen domains, eight relationship classes, three approved AOIs, and ten source-product metadata rows;
 - direct-observation, interpretation, attribution, exclusion, stable-control, and QA datasets remain empty, so the workspace makes no landscape-change or causal claim;
 - the ArcGIS builder, independent ArcGIS-native validator, portable schema tests, visually approved PNG preview, and retained-failure receipt are prepared for publication; the APRX, File Geodatabase, and PDF remain in ignored scratch custody.
+- a predeclared pixel-readiness contract now fixes EPSG:32645 AOI coverage, optical SCL, radar-mask, grid-alignment, and registration thresholds before real product pixels are accessed;
+- eleven portable decision-core tests pass, and ArcGIS Pro 3.7.1 Advanced with Spatial Analyst has exercised deterministic 20 m synthetic rasters over all three approved AOIs;
+- the synthetic ArcGIS run passed approximately 90% usable coverage for each AOI, passed an aligned before/after grid, blocked an intentional 0.6-pixel shift, and deferred unmeasured registration without creating scientific admission.
 
 ## Proposed M2 package
 
@@ -43,6 +46,8 @@ The proposal would allow a fresh custody preflight, creation of the external dat
 The static intake and offline verification packets are derived tooling, not an M2 preflight or approval. They made no network request or external custody probe, created no external directory, and left the reviewed M2 plan and bundle hashes unchanged.
 
 The ArcGIS evidence workspace is also preparatory structure, not M2 execution. It uses approved AOIs and source metadata only and did not authenticate, create the proposed external data root, download products, or process pixels.
+
+The pixel-readiness contract and synthetic ArcGIS receipt are preparatory QA controls. All exercised rasters are generated fixtures in ignored scratch storage; no real Sentinel pixels or external custody paths were accessed.
 
 ## Not authorized or completed
 

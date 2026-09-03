@@ -51,6 +51,16 @@ Synthetic fixtures test a valid Sentinel-1 member inventory, unsafe ZIP paths, m
 
 A later real scan must require an already-existing approved custody root and a new receipt path. It computes local SHA-256 and provider MD5, checks exact size, rejects unsafe or encrypted members, validates analysis-critical SAFE members, and runs CRC without extracting the archive. Even a container pass does not establish raster readability, AOI coverage, valid pixels, masks, registration, or scientific fitness.
 
+## Pixel-readiness contract validation
+
+The predeclared EPSG:32645 coverage, mask, grid, and registration decisions are implemented in a dependency-free core:
+
+```powershell
+python -m unittest tests.test_pixel_qa_core -v
+```
+
+ArcGIS Pro 3.7.1 Advanced and Spatial Analyst have also exercised the same core with deterministic 20 m synthetic rasters and all three approved AOIs. The native adapter verifies `TabulateArea` class-area accounting, an aligned before/after pair, a deliberately blocked 0.6-pixel origin shift, and the required `defer` state when registration has not been measured. See `docs/PIXEL_QA_PROTOCOL.md` for thresholds, class semantics, rerun commands, and the scientific claim boundary.
+
 ## Source validation
 
 For each external product:

@@ -1,0 +1,160 @@
+{
+  "receipt_id": "NEPAL-PIXEL-QA-SYNTHETIC-ARCGIS-001",
+  "status": "pass_synthetic_only_with_expected_block_and_defer",
+  "verified_at_utc": "2026-09-03T17:11:44Z",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced",
+    "spatial_analyst": "available_and_used"
+  },
+  "inputs": {
+    "contract": "config/qa/pixel-readiness-contract.json",
+    "contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "approved_aoi": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "core": "scripts/pixel_qa_core.py",
+    "core_sha256": "8d7c5ece8b2245006612be5c8ea8ec9dc007c41cac0c763419f586922850a1b4",
+    "arcgis_adapter": "scripts/validate_pixel_qa_arcgis.py",
+    "arcgis_adapter_sha256": "85cd85f2f8678670957c3ac7813fad6d50cb963f4dc31f1f8e12c16ce66a54d9"
+  },
+  "synthetic_fixture": {
+    "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\pixel-qa-synthetic-arcgis-002",
+    "file_geodatabase": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\pixel-qa-synthetic-arcgis-002\\pixel_qa.gdb",
+    "wkid": 32645,
+    "cell_size_m": 20.0,
+    "rows": 3954,
+    "columns": 4730,
+    "scl_pattern": "nine columns class 4 vegetation followed by one column class 9 high-probability cloud",
+    "raster_sha256": {
+      "synthetic_before.tif": "826114ef86aa75efbca65f370a8ac4672aa4e606b8ed83f0bb734870496286a8",
+      "synthetic_after.tif": "baa7c47142a22d915eba2f09fa8cc59765d2b957c903eafa0fdf5660bf175587",
+      "synthetic_scl.tif": "ddcb9e071c4033e1f64414092443788fa72ded382f37dcc6f824bc126ea47000",
+      "synthetic_misaligned.tif": "c8ac4a4697f2c41f22e152fcdbafef7b67c38894ef0129ecc721cd328452fa66"
+    }
+  },
+  "aoi_import": {
+    "feature_count": 3,
+    "spatial_reference_wkid": 32645
+  },
+  "checks": {
+    "aoi_scl_coverage": [
+      {
+        "aoi_id": "AOI-OVERVIEW",
+        "aoi_area_m2": 7242178563.375755,
+        "covered_area_m2": 7242182400.0,
+        "valid_area_m2": 6517982400.0,
+        "coverage_fraction": 1.0,
+        "usable_fraction_of_aoi": 0.900003,
+        "valid_fraction_within_coverage": 0.900003,
+        "excluded_area_by_reason_m2": {
+          "cloud_high_probability": 724200000.0
+        },
+        "coverage_status": "pass_qa_only",
+        "usability_status": "pass_qa_only",
+        "status": "pass_qa_only",
+        "limitations": [
+          "Coverage and mask QA passed; change, interpretation, and attribution remain untested."
+        ],
+        "errors": [],
+        "scientific_admission_authorized": false,
+        "scl_class_area_m2": {
+          "4": 6517982400.0,
+          "9": 724200000.0
+        },
+        "unknown_scl_classes": []
+      },
+      {
+        "aoi_id": "AOI-SOURCE",
+        "aoi_area_m2": 143470831.1551202,
+        "covered_area_m2": 143472000.0,
+        "valid_area_m2": 129088400.0,
+        "coverage_fraction": 1.0,
+        "usable_fraction_of_aoi": 0.899754,
+        "valid_fraction_within_coverage": 0.899746,
+        "excluded_area_by_reason_m2": {
+          "cloud_high_probability": 14383600.0
+        },
+        "coverage_status": "pass_qa_only",
+        "usability_status": "pass_qa_only",
+        "status": "pass_qa_only",
+        "limitations": [
+          "Coverage and mask QA passed; change, interpretation, and attribution remain untested."
+        ],
+        "errors": [],
+        "scientific_admission_authorized": false,
+        "scl_class_area_m2": {
+          "4": 129088400.0,
+          "9": 14383600.0
+        },
+        "unknown_scl_classes": []
+      },
+      {
+        "aoi_id": "AOI-UPPER-CORRIDOR",
+        "aoi_area_m2": 517636995.8695006,
+        "covered_area_m2": 517636800.0,
+        "valid_area_m2": 465852000.0,
+        "coverage_fraction": 1.0,
+        "usable_fraction_of_aoi": 0.899959,
+        "valid_fraction_within_coverage": 0.899959,
+        "excluded_area_by_reason_m2": {
+          "cloud_high_probability": 51784800.0
+        },
+        "coverage_status": "pass_qa_only",
+        "usability_status": "pass_qa_only",
+        "status": "pass_qa_only",
+        "limitations": [
+          "Coverage and mask QA passed; change, interpretation, and attribution remain untested."
+        ],
+        "errors": [],
+        "scientific_admission_authorized": false,
+        "scl_class_area_m2": {
+          "4": 465852000.0,
+          "9": 51784800.0
+        },
+        "unknown_scl_classes": []
+      }
+    ],
+    "aligned_grid_pair": {
+      "status": "pass_qa_only",
+      "errors": [],
+      "scientific_admission_authorized": false
+    },
+    "deliberately_misaligned_grid_pair": {
+      "status": "block",
+      "errors": [
+        "before and after x-origins are not grid aligned",
+        "before and after y-origins are not grid aligned"
+      ],
+      "scientific_admission_authorized": false
+    },
+    "registration_not_measured": {
+      "status": "defer",
+      "finding": "Registration evidence has not been measured.",
+      "scientific_admission_authorized": false
+    }
+  },
+  "assertions": {
+    "all_three_aoi_coverage_results_pass_qa_only": true,
+    "aligned_grid_pair_passes_qa_only": true,
+    "subpixel_shift_is_blocked": true,
+    "unmeasured_registration_is_deferred": true,
+    "real_product_pixels_examined": false,
+    "scientific_admission_authorized": false,
+    "m2_activated": false
+  },
+  "retained_failures": [],
+  "claim_boundary": "Pixel QA can establish measured coverage, mask, grid, and registration fitness only. It cannot by itself establish landscape change, geomorphic interpretation, event attribution, or emergency guidance.",
+  "limitations": [
+    "All rasters are deterministic synthetic fixtures; results establish adapter behavior only.",
+    "No external custody root was probed or created and no Sentinel product, credential, network route, or authenticated session was accessed.",
+    "Synthetic coverage and grid passes are not evidence of real-product coverage, masks, registration, change, interpretation, or attribution.",
+    "Registration intentionally remains DEFER because no stable-control measurement was performed.",
+    "The deliberately shifted raster is an expected BLOCK test and does not reject any approved source identity.",
+    "M2 remains proposed and not active."
+  ],
+  "preserved_review_bindings": {
+    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+    "m2_activation_review_bundle_sha256": "e8d105970d64c43d955ff459ba9e5d5a3a1e4fb4f95874aa67f384e6b293a35d"
+  }
+}

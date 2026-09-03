@@ -21,6 +21,7 @@ REQUIRED = [
     "docs/SOURCES.md",
     "docs/ARCGIS_DELIVERY_PLAN.md",
     "docs/ARCGIS_EVIDENCE_MODEL.md",
+    "docs/PIXEL_QA_PROTOCOL.md",
     "docs/VALIDATION.md",
     "docs/STATUS.md",
     "docs/DECISIONS.md",
@@ -45,6 +46,7 @@ REQUIRED = [
     "records/surface-receipts/m1-source-manifest-review.json",
     "records/surface-receipts/m1-control-reproducibility.json",
     "records/surface-receipts/arcgis-evidence-workspace.json",
+    "records/surface-receipts/pixel-qa-synthetic-arcgis.json",
     "reviews/m1-manifest/review-bundle.json",
     "reviews/m1-manifest/review-contract.json",
     "reviews/m1-manifest/blank-response.json",
@@ -57,7 +59,10 @@ REQUIRED = [
     "scripts/prepare_m2_verification.py",
     "scripts/build_arcgis_evidence_workspace.py",
     "scripts/validate_arcgis_evidence_workspace.py",
+    "scripts/pixel_qa_core.py",
+    "scripts/validate_pixel_qa_arcgis.py",
     "config/arcgis/evidence-workspace-schema.json",
+    "config/qa/pixel-readiness-contract.json",
     "docs/assets/arcgis-evidence-workspace-preview.png",
     "records/surface-receipts/m2-activation-review.json",
     "contracts/m2-offline-verification-candidate.json",
@@ -69,6 +74,7 @@ REQUIRED = [
     "tests/test_m2_intake.py",
     "tests/test_m2_verification.py",
     "tests/test_arcgis_evidence_schema.py",
+    "tests/test_pixel_qa_core.py",
     ".github/workflows/validate.yml",
 ]
 
@@ -184,6 +190,8 @@ def main() -> None:
     reproducibility = json.loads((ROOT / "records/surface-receipts/m1-control-reproducibility.json").read_text(encoding="utf-8"))
     evidence_schema = json.loads((ROOT / "config/arcgis/evidence-workspace-schema.json").read_text(encoding="utf-8"))
     evidence_workspace = json.loads((ROOT / "records/surface-receipts/arcgis-evidence-workspace.json").read_text(encoding="utf-8"))
+    pixel_contract = json.loads((ROOT / "config/qa/pixel-readiness-contract.json").read_text(encoding="utf-8"))
+    pixel_receipt = json.loads((ROOT / "records/surface-receipts/pixel-qa-synthetic-arcgis.json").read_text(encoding="utf-8"))
     aoi_reconciliation = json.loads((ROOT / "records/source-gates/aoi-review-reconciliation.json").read_text(encoding="utf-8"))
     units = {unit["id"]: unit for unit in contract["units"]}
     validate_review_bundle("reviews/m1-aoi/review-bundle.json", "reviews/m1-aoi/review-contract.json")
@@ -473,6 +481,88 @@ def main() -> None:
     if not any("No satellite pixels" in item for item in evidence_workspace.get("limitations", [])):
         fail("ArcGIS evidence workspace must preserve its no-pixels claim boundary")
 
+    if pixel_contract.get("contract_id") != "NEPAL-PIXEL-QA-001" or pixel_contract.get("status") != "predeclared_before_product_pixels":
+        fail("pixel-readiness contract identity or predeclaration status differs")
+    if pixel_contract.get("analysis_crs", {}).get("wkid") != 32645:
+        fail("pixel-readiness contract must use EPSG:32645")
+    if pixel_contract.get("decision_semantics", {}).get("precedence") != ["invalid", "block", "defer", "pass_qa_only"]:
+        fail("pixel-readiness decision precedence differs")
+    if pixel_contract.get("decision_semantics", {}).get("pass_qa_only_creates_scientific_admission") is not False:
+        fail("pixel-readiness pass must not create scientific admission")
+    if pixel_contract.get("aoi_coverage", {}) != {
+        "full_coverage_pass_minimum": 0.99,
+        "usable_fraction_pass_minimum": 0.8,
+        "partial_evidence_defer_minimum": 0.2,
+        "area_consistency_tolerance_fraction": 0.02,
+        "fraction_precision": 6,
+        "rules": pixel_contract.get("aoi_coverage", {}).get("rules"),
+    }:
+        fail("pixel-readiness AOI thresholds differ")
+    if set(pixel_contract.get("optical_scl", {}).get("valid_surface_classes", {})) != {"4", "5", "6"}:
+        fail("pixel-readiness optical valid classes differ")
+    if pixel_receipt.get("status") != "pass_synthetic_only_with_expected_block_and_defer":
+        fail("synthetic ArcGIS pixel-QA receipt status differs")
+    if pixel_receipt.get("runtime") != {
+        "product": "ArcGISPro",
+        "version": "3.7.1",
+        "license_level": "Advanced",
+        "spatial_analyst": "available_and_used",
+    }:
+        fail("synthetic ArcGIS pixel-QA runtime differs")
+    pixel_inputs = pixel_receipt.get("inputs", {})
+    for path_key, hash_key in (
+        ("contract", "contract_sha256"),
+        ("approved_aoi", "approved_aoi_sha256"),
+        ("core", "core_sha256"),
+        ("arcgis_adapter", "arcgis_adapter_sha256"),
+    ):
+        relative = pixel_inputs.get(path_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"synthetic ArcGIS pixel-QA receipt is missing {path_key}")
+        if pixel_inputs.get(hash_key) != sha256(relative):
+            fail(f"synthetic ArcGIS pixel-QA receipt does not bind {path_key}")
+    fixture = pixel_receipt.get("synthetic_fixture", {})
+    if fixture.get("wkid") != 32645 or fixture.get("cell_size_m") != 20.0:
+        fail("synthetic ArcGIS pixel-QA fixture grid differs")
+    if not isinstance(fixture.get("rows"), int) or fixture["rows"] <= 0 or not isinstance(fixture.get("columns"), int) or fixture["columns"] <= 0:
+        fail("synthetic ArcGIS pixel-QA fixture dimensions are invalid")
+    pixel_checks = pixel_receipt.get("checks", {})
+    aoi_pixel_results = pixel_checks.get("aoi_scl_coverage", [])
+    if {item.get("aoi_id") for item in aoi_pixel_results} != {"AOI-OVERVIEW", "AOI-SOURCE", "AOI-UPPER-CORRIDOR"}:
+        fail("synthetic ArcGIS pixel-QA AOI inventory differs")
+    if any(
+        item.get("status") != "pass_qa_only"
+        or item.get("coverage_fraction", 0) < 0.99
+        or item.get("usable_fraction_of_aoi", 0) < 0.8
+        or item.get("unknown_scl_classes") != []
+        or item.get("scientific_admission_authorized") is not False
+        for item in aoi_pixel_results
+    ):
+        fail("synthetic ArcGIS pixel-QA AOI result differs from the predeclared pass-only boundary")
+    if pixel_checks.get("aligned_grid_pair", {}).get("status") != "pass_qa_only":
+        fail("synthetic aligned raster pair did not pass grid QA")
+    shifted = pixel_checks.get("deliberately_misaligned_grid_pair", {})
+    if shifted.get("status") != "block" or not any("origins" in item for item in shifted.get("errors", [])):
+        fail("synthetic shifted raster did not preserve the expected grid block")
+    if pixel_checks.get("registration_not_measured", {}).get("status") != "defer":
+        fail("synthetic unmeasured registration did not remain deferred")
+    expected_pixel_assertions = {
+        "all_three_aoi_coverage_results_pass_qa_only": True,
+        "aligned_grid_pair_passes_qa_only": True,
+        "subpixel_shift_is_blocked": True,
+        "unmeasured_registration_is_deferred": True,
+        "real_product_pixels_examined": False,
+        "scientific_admission_authorized": False,
+        "m2_activated": False,
+    }
+    if pixel_receipt.get("assertions") != expected_pixel_assertions:
+        fail("synthetic ArcGIS pixel-QA assertions differ")
+    if pixel_receipt.get("preserved_review_bindings") != {
+        "acquisition_plan_sha256": sha256("records/acquisition-plan.json"),
+        "m2_activation_review_bundle_sha256": sha256("reviews/m2-activation/review-bundle.json"),
+    }:
+        fail("synthetic ArcGIS pixel-QA receipt does not preserve M2 review bindings")
+
     ledger_records = []
     for number, line in enumerate(
         (ROOT / "records/evidence-ledger.jsonl").read_text(encoding="utf-8").splitlines(), 1
@@ -505,6 +595,34 @@ def main() -> None:
         "m2_activation_review_bundle_sha256": sha256("reviews/m2-activation/review-bundle.json"),
     }:
         fail("EVID-0020 does not preserve the exact M2 review bindings")
+    pixel_evidence = ledger_by_id.get("EVID-0021")
+    if not isinstance(pixel_evidence, dict):
+        fail("evidence ledger is missing EVID-0021 pixel-readiness evidence")
+    for ref_key, hash_key in (
+        ("contract_ref", "contract_sha256"),
+        ("core_ref", "core_sha256"),
+        ("arcgis_adapter_ref", "arcgis_adapter_sha256"),
+        ("portable_test_ref", "portable_test_sha256"),
+        ("protocol_ref", "protocol_sha256"),
+        ("receipt_ref", "receipt_sha256"),
+    ):
+        relative = pixel_evidence.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file():
+            fail(f"EVID-0021 is missing {ref_key}")
+        if pixel_evidence.get(hash_key) != sha256(relative):
+            fail(f"EVID-0021 does not bind {ref_key}")
+    if pixel_evidence.get("portable_test_count") != 11 or pixel_evidence.get("arcgis_native_result") != {
+        "aoi_pass_qa_only_count": 3,
+        "aligned_grid_status": "pass_qa_only",
+        "misaligned_grid_status": "block",
+        "registration_not_measured_status": "defer",
+    }:
+        fail("EVID-0021 validation summary differs")
+    if pixel_evidence.get("preserved_review_bindings") != {
+        "acquisition_plan_sha256": sha256("records/acquisition-plan.json"),
+        "m2_activation_review_bundle_sha256": sha256("reviews/m2-activation/review-bundle.json"),
+    }:
+        fail("EVID-0021 does not preserve the exact M2 review bindings")
 
     violations = []
     for relative in tracked_files():

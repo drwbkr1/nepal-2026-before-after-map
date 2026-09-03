@@ -1,0 +1,119 @@
+{
+  "contract_version": "1.0",
+  "contract_id": "NEPAL-PIXEL-QA-001",
+  "status": "predeclared_before_product_pixels",
+  "analysis_crs": {
+    "wkid": 32645,
+    "name": "WGS 1984 UTM Zone 45N",
+    "linear_unit": "Meter"
+  },
+  "decision_semantics": {
+    "precedence": [
+      "invalid",
+      "block",
+      "defer",
+      "pass_qa_only"
+    ],
+    "pass_qa_only_creates_scientific_admission": false,
+    "block_rejects_source_identity": false,
+    "defer_is_not_failure": true
+  },
+  "aoi_coverage": {
+    "full_coverage_pass_minimum": 0.99,
+    "usable_fraction_pass_minimum": 0.8,
+    "partial_evidence_defer_minimum": 0.2,
+    "area_consistency_tolerance_fraction": 0.02,
+    "fraction_precision": 6,
+    "rules": {
+      "pass_qa_only": "Coverage is at least 0.99 and usable AOI fraction is at least 0.80.",
+      "defer": "Coverage or usable AOI fraction is below pass but at least 0.20; only explicitly bounded partial evidence may proceed to review.",
+      "block": "Coverage or usable AOI fraction is below 0.20, or proven invalid pixels prevent this route from supporting the AOI.",
+      "invalid": "Areas are negative, non-finite, inconsistent beyond tolerance, or the AOI area is zero."
+    }
+  },
+  "grid_compatibility": {
+    "required_wkid": 32645,
+    "require_square_cells": true,
+    "require_zero_rotation": true,
+    "cell_size_absolute_tolerance_m": 0.000001,
+    "origin_alignment_tolerance_pixels": 0.000001,
+    "require_positive_extent_overlap": true,
+    "optical_multispectral_change_cell_size_m": 20.0,
+    "optical_10m_display_is_separate_from_20m_change_grid": true,
+    "radar_candidate_cell_size_m": 10.0,
+    "radar_cell_size_requires_post_terrain_correction_confirmation": true
+  },
+  "registration": {
+    "minimum_stable_control_pairs": 30,
+    "pass_max_rmse_pixels": 0.5,
+    "defer_max_rmse_pixels": 1.0,
+    "pass_max_absolute_bias_pixels": 0.5,
+    "not_run_status": "defer",
+    "above_defer_max_status": "block"
+  },
+  "optical_scl": {
+    "profile": "Sentinel-2 Level-2A SCL conservative surface-change mask",
+    "valid_surface_classes": {
+      "4": "vegetation",
+      "5": "non-vegetated",
+      "6": "water"
+    },
+    "excluded_classes": {
+      "0": "nodata",
+      "1": "saturated_or_defective",
+      "2": "topographic_cast_shadow_or_dark_feature",
+      "3": "cloud_shadow",
+      "7": "unclassified",
+      "8": "cloud_medium_probability",
+      "9": "cloud_high_probability",
+      "10": "thin_cirrus",
+      "11": "snow_or_ice"
+    },
+    "unknown_class_policy": "exclude_and_defer_review",
+    "require_processing_baseline": true,
+    "require_quantification_value": true,
+    "require_boa_add_offset": true,
+    "require_saturation_and_quality_masks": true
+  },
+  "radar_mask": {
+    "profile": "Sentinel-1 terrain-corrected analysis exclusion mask",
+    "valid_class": 1,
+    "excluded_classes": {
+      "0": "nodata",
+      "2": "layover",
+      "3": "radar_shadow",
+      "4": "border_noise",
+      "5": "residual_speckle_or_unstable_background",
+      "6": "water_variability",
+      "7": "registration_exclusion"
+    },
+    "unknown_class_policy": "exclude_and_defer_review",
+    "require_orbit_direction": true,
+    "require_relative_orbit": true,
+    "require_calibration_record": true,
+    "require_terrain_correction_record": true,
+    "require_layover_shadow_assessment": true
+  },
+  "required_aoi_metrics": [
+    "aoi_area_m2",
+    "covered_area_m2",
+    "valid_area_m2",
+    "coverage_fraction",
+    "usable_fraction_of_aoi",
+    "valid_fraction_within_coverage",
+    "excluded_area_by_reason_m2",
+    "status",
+    "limitations"
+  ],
+  "required_pair_metrics": [
+    "before_source_id",
+    "after_source_id",
+    "grid_compatibility",
+    "stable_control_pair_count",
+    "registration_rmse_pixels",
+    "registration_bias_x_pixels",
+    "registration_bias_y_pixels",
+    "registration_status"
+  ],
+  "claim_boundary": "Pixel QA can establish measured coverage, mask, grid, and registration fitness only. It cannot by itself establish landscape change, geomorphic interpretation, event attribution, or emergency guidance."
+}

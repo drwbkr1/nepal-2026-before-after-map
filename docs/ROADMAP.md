@@ -38,6 +38,8 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Prepared verification:** Deterministic offline controls now define exact container identity, checksum, ZIP safety, SAFE structure, required radar/optical members, and the later pixel-readiness gates. The current readiness decision is `defer`; no external custody was inspected.
 
+**Prepared pixel QA:** The EPSG:32645 coverage, mask, grid-alignment, and registration thresholds are fixed before product access. The portable core and ArcGIS Pro 3.7.1 Spatial Analyst adapter pass synthetic validation only; real-product readiness remains `defer`.
+
 **Work:**
 
 - download approved products into non-Git custody;
