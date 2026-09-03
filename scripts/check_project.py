@@ -143,6 +143,7 @@ REQUIRED = [
     "records/readiness/m2-readiness-audit-input.json",
     "records/readiness/m2-readiness-decision.json",
     "records/readiness/m2-dem-terrain-quality-readiness.json",
+    "records/readiness/m2-dem-terrain-quality-ci-correction.json",
     "reviews/m2-activation/review-bundle.json",
     "reviews/m2-activation/review-contract.json",
     "reviews/m2-activation/blank-response.json",
@@ -304,6 +305,7 @@ def main() -> None:
     dem_vertical_blank = json.loads((ROOT / "reviews/m2-dem-vertical-datum/blank-response.json").read_text(encoding="utf-8"))
     dem_terrain_contract = json.loads((ROOT / "config/qa/dem-terrain-quality-contract.json").read_text(encoding="utf-8"))
     dem_terrain_readiness = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-readiness.json").read_text(encoding="utf-8"))
+    dem_terrain_ci_correction = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-ci-correction.json").read_text(encoding="utf-8"))
     expected_dem_source_order = ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
     dem_current_assets = dem_intake_active.get("assets", [])
     if [asset.get("extensions", {}).get("source_id") for asset in dem_current_assets] != expected_dem_source_order:
@@ -883,6 +885,43 @@ def main() -> None:
         or not dem_terrain_readiness.get("retained_validation_failures")
     ):
         fail("DEM terrain-quality readiness receipt differs")
+    expected_dem_terrain_ci_assertions = {
+        "failed_runs_preserved": True,
+        "dependency_version_pinned": True,
+        "remote_repository_check_passed": True,
+        "remote_full_suite_passed": True,
+        "real_dem_metrics_observed": False,
+        "arcgis_terrain_execution_started": False,
+        "terrain_thresholds_changed": False,
+        "source_dem_files_mutated": False,
+        "vertical_datum_route_established": False,
+        "sentinel_processing_executed": False,
+        "scientific_result_established": False,
+        "authority_created": False,
+    }
+    failed_terrain_ci_runs = dem_terrain_ci_correction.get("failed_runs", [])
+    passing_terrain_ci = dem_terrain_ci_correction.get("passing_validation", {})
+    terrain_ci_change = dem_terrain_ci_correction.get("correction", {})
+    if (
+        dem_terrain_ci_correction.get("correction_id") != "NEPAL-M2-DEM-TERRAIN-QUALITY-CI-CORRECTION-001"
+        or dem_terrain_ci_correction.get("status") != "pass_pinned_numpy_dependency_and_workflow_syntax_corrected"
+        or [item.get("run_id") for item in failed_terrain_ci_runs] != [33819299553, 33819378562]
+        or failed_terrain_ci_runs[0].get("error") != "ModuleNotFoundError: No module named 'numpy'"
+        or failed_terrain_ci_runs[1].get("status") != "failure_no_jobs"
+        or terrain_ci_change.get("workflow_ref") != ".github/workflows/validate.yml"
+        or terrain_ci_change.get("workflow_sha256") != sha256(".github/workflows/validate.yml")
+        or terrain_ci_change.get("pinned_dependency") != "numpy==2.5.1"
+        or terrain_ci_change.get("threshold_contract_changed") is not False
+        or terrain_ci_change.get("terrain_core_changed") is not False
+        or terrain_ci_change.get("terrain_test_changed") is not False
+        or passing_terrain_ci.get("run_id") != 33819458096
+        or passing_terrain_ci.get("commit") != "d52ee5a0f1ad51062ccfe3426a759cea91fcdbcb"
+        or passing_terrain_ci.get("conclusion") != "success"
+        or passing_terrain_ci.get("repository_required_file_count_before_correction_receipt") != 199
+        or passing_terrain_ci.get("full_repository_test_count") != 190
+        or dem_terrain_ci_correction.get("assertions") != expected_dem_terrain_ci_assertions
+    ):
+        fail("DEM terrain-quality CI dependency correction differs")
     expected_dem_acquire_status = "complete" if dem_state_counts["promoted"] == 4 and not dem_state_counts["failed"] else "ready"
     expected_dem_verify_status = "complete" if dem_all_geotiff_verified else ("ready" if expected_dem_acquire_status == "complete" else "planned")
     for unit_id, expected_status in (
@@ -2813,6 +2852,18 @@ def main() -> None:
         or dem_terrain_readiness_evidence.get("assertions") != dem_terrain_readiness.get("assertions")
     ):
         fail("EVID-0043 DEM terrain-quality predeclaration readiness differs")
+    dem_terrain_ci_evidence = ledger_by_id.get("EVID-0044")
+    if not isinstance(dem_terrain_ci_evidence, dict):
+        fail("evidence ledger is missing EVID-0044 DEM terrain-quality CI correction")
+    if (
+        dem_terrain_ci_evidence.get("status") != dem_terrain_ci_correction.get("status")
+        or dem_terrain_ci_evidence.get("correction_ref") != "records/readiness/m2-dem-terrain-quality-ci-correction.json"
+        or dem_terrain_ci_evidence.get("correction_sha256") != sha256("records/readiness/m2-dem-terrain-quality-ci-correction.json")
+        or dem_terrain_ci_evidence.get("failed_run_ids") != [33819299553, 33819378562]
+        or dem_terrain_ci_evidence.get("passing_run_id") != 33819458096
+        or dem_terrain_ci_evidence.get("assertions") != dem_terrain_ci_correction.get("assertions")
+    ):
+        fail("EVID-0044 DEM terrain-quality CI correction differs")
 
     violations = []
     for relative in tracked_files():

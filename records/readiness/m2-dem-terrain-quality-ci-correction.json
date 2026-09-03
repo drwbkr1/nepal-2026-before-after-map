@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "correction_id": "NEPAL-M2-DEM-TERRAIN-QUALITY-CI-CORRECTION-001",
+  "status": "pass_pinned_numpy_dependency_and_workflow_syntax_corrected",
+  "verified_at_utc": "2026-09-03T23:53:25Z",
+  "claim": "The portable terrain-quality tests now run in GitHub Actions with an exact NumPy version, and both failed publication attempts remain explicit evidence.",
+  "affected_checkpoint": "pre_metrics_control_publication",
+  "failed_runs": [
+    {
+      "run_id": 33819299553,
+      "commit": "62a535d4bec4c9ae0e8d6bad13dd8e355ec27eb1",
+      "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33819299553",
+      "status": "failure",
+      "observed": "Repository checker passed; the test step failed to import test_dem_terrain_quality_core because NumPy was absent from the Linux runner.",
+      "error": "ModuleNotFoundError: No module named 'numpy'"
+    },
+    {
+      "run_id": 33819378562,
+      "commit": "b4af077f86f241189d55a6d216a120551dfe3a7e",
+      "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33819378562",
+      "status": "failure_no_jobs",
+      "observed": "GitHub recorded a workflow-level failure with zero jobs after the first dependency-install line was added.",
+      "interpretation": "Consistent with workflow parsing or validation failure; GitHub exposed no job log, so a more specific cause is not claimed."
+    }
+  ],
+  "correction": {
+    "workflow_ref": ".github/workflows/validate.yml",
+    "workflow_sha256": "330de5934a82ae1998973ff5cf5b97360cd72e6b8f926e51a409178036932029",
+    "pinned_dependency": "numpy==2.5.1",
+    "final_install_command": "python -m pip install --disable-pip-version-check --no-deps numpy==2.5.1",
+    "threshold_contract_changed": false,
+    "terrain_core_changed": false,
+    "terrain_test_changed": false
+  },
+  "passing_validation": {
+    "run_id": 33819458096,
+    "commit": "d52ee5a0f1ad51062ccfe3426a759cea91fcdbcb",
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33819458096",
+    "conclusion": "success",
+    "installed_dependency": "numpy-2.5.1",
+    "repository_required_file_count_before_correction_receipt": 199,
+    "full_repository_test_count": 190,
+    "local_focused_test_count": 5
+  },
+  "assertions": {
+    "failed_runs_preserved": true,
+    "dependency_version_pinned": true,
+    "remote_repository_check_passed": true,
+    "remote_full_suite_passed": true,
+    "real_dem_metrics_observed": false,
+    "arcgis_terrain_execution_started": false,
+    "terrain_thresholds_changed": false,
+    "source_dem_files_mutated": false,
+    "vertical_datum_route_established": false,
+    "sentinel_processing_executed": false,
+    "scientific_result_established": false,
+    "authority_created": false
+  },
+  "limitations": [
+    "A passing Linux suite does not prove ArcGIS Pro runtime behavior or real DEM terrain quality.",
+    "The no-job failure exposes no job log; its specific parser failure is not asserted beyond the observed workflow-level result.",
+    "The independent vertical-datum and terrain-accuracy gates remain unresolved."
+  ],
+  "next_action": "Publish this correction evidence, verify the resulting repository run, and only then start the single predeclared ArcGIS terrain-quality attempt."
+}

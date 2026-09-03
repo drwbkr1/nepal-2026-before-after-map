@@ -197,3 +197,9 @@
 **Decision:** Fix the four source identities, four native seam pairs, terrain and slope thresholds, EPSG:32645 processing, exclusive external output, required visual criteria, and decision semantics before reading real DEM values.
 **Reason:** Full finite coverage does not establish absence of void-fill artifacts, boundary steps, or implausible terrain. Predeclaration prevents result-driven threshold changes and keeps terrain quality independent from the unresolved vertical-datum decision.
 **Status:** Static controls and five synthetic tests pass. The first synthetic north-south seam fixture failure is retained in the readiness record and was corrected only by fixing reversed fixture row indices. No real DEM pixel, output, vertical conversion, Sentinel processing, or scientific result was created by readiness.
+
+## D-034 — Pin the portable terrain-QA dependency without changing the method
+
+**Decision:** Install exact `numpy==2.5.1` in GitHub Actions before the portable tests, while leaving the bound terrain contract, core, tests, input identities, seams, and thresholds unchanged.
+**Reason:** The first public checkpoint passed the repository checker but the Linux test runner lacked NumPy. The next workflow edit failed with zero jobs and no available job log; retaining both results distinguishes CI integration failure from terrain or ArcGIS evidence.
+**Status:** Failed runs `33819299553` and `33819378562` remain public. Corrected run `33819458096` installed NumPy 2.5.1, passed the 199-file checker, and passed all 190 tests before any real DEM terrain metrics were observed.
