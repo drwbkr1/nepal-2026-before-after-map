@@ -17,7 +17,7 @@ This project is building a reproducible, ArcGIS-ready before/after evidence pack
 - three owner-approved study areas are projected to EPSG:32645 and validated in ArcGIS Pro 3.7.1;
 - the owner-approved source manifest preserves ten exact Sentinel candidates, with eight accepted for controlled acquisition and two optical context products deferred;
 - the ArcGIS evidence workspace separates observation, interpretation, attribution, exclusions, controls, and QA, with scientific layers empty by design;
-- a same-machine `.ppkx` round-trip fixture is predeclared against that exact empty workspace; seven portable tests and source revalidation pass, but the real external package attempt awaits public CI and cannot complete M6;
+- one publication-gated same-machine `.ppkx` round trip passed against the exact empty workspace with self-contained operational layers and pixel-identical export; an unplanned post-run second extraction is retained as a process failure, and clean-machine M6 evidence remains open;
 - fixed pixel-readiness rules cover AOI coverage, optical masks, radar masks, grid alignment, and registration before real product access;
 - portable and ArcGIS-native synthetic tests exercise pass, block, and defer outcomes without creating a real-pixel claim;
 - three independent candidate pair routes are predeclared: ascending radar, descending radar, and RUM optical.

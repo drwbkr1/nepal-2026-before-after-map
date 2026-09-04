@@ -350,6 +350,8 @@ REQUIRED = [
     "scripts/run_arcgis_package_portability_arcgis.py",
     "tests/test_arcgis_package_portability.py",
     "records/readiness/arcgis-package-portability-control.json",
+    "records/surface-receipts/arcgis-package-portability-postrun-boundary-deviation.json",
+    "records/surface-receipts/arcgis-package-portability.json",
     "scripts/render_m2_dem_amendment_review.py",
     "contracts/m2-dem-vertical-datum-proposal.json",
     "contracts/m2-dem-terrain-result-review-proposal.json",
@@ -5308,6 +5310,102 @@ def main() -> None:
         ))
     ):
         fail("EVID-0071 ArcGIS package portability predeclaration differs or overclaims")
+
+    arcgis_package_deviation = json.loads(
+        (ROOT / "records/surface-receipts/arcgis-package-portability-postrun-boundary-deviation.json").read_text(encoding="utf-8")
+    )
+    arcgis_package_result = json.loads(
+        (ROOT / "records/surface-receipts/arcgis-package-portability.json").read_text(encoding="utf-8")
+    )
+    if (
+        arcgis_package_deviation.get("status")
+        != "fail_retained_unplanned_second_extraction_no_source_or_attempt_mutation"
+        or arcgis_package_deviation.get("bindings", {}).get("contract_sha256")
+        != sha256("config/qa/arcgis-package-portability-contract.json")
+        or arcgis_package_deviation.get("unplanned_output_inventory") != {
+            "file_count": 107,
+            "total_bytes": 544361,
+            "inventory_sha256": "e1b54effd6268740d08e6d349e3d6dd7c142dbd1aeba7b85f2cd5940d99d0672",
+            "forbidden_raster_files": [],
+            "lock_count": 0,
+            "symbolic_link_count": 0,
+            "matches_attempt_001_preopen_extraction_inventory": True,
+        }
+        or arcgis_package_deviation.get("disposition", {}).get("preserve_unplanned_output") is not True
+        or arcgis_package_deviation.get("disposition", {}).get("automatic_cleanup_authorized") is not False
+        or arcgis_package_deviation.get("disposition", {}).get("attempt_001_runtime_result_invalidated") is not False
+        or any(arcgis_package_deviation.get("activity", {}).get(key) is not False for key in (
+            "network_requests_performed", "authentication_performed", "credential_values_read_or_recorded",
+            "source_workspace_mutated", "attempt_001_mutated", "satellite_or_dem_pixels_read_or_written",
+        ))
+    ):
+        fail("ArcGIS package post-run boundary deviation differs or is not preserved")
+    result_bindings = arcgis_package_result.get("bindings", {})
+    result_assertions = arcgis_package_result.get("assertions", {})
+    if (
+        arcgis_package_result.get("status")
+        != "pass_same_machine_round_trip_with_visual_review_and_retained_postrun_boundary_deviation"
+        or result_bindings.get("contract_sha256") != sha256("config/qa/arcgis-package-portability-contract.json")
+        or result_bindings.get("control_receipt_sha256") != sha256("records/readiness/arcgis-package-portability-control.json")
+        or result_bindings.get("source_receipt_sha256") != sha256("records/surface-receipts/arcgis-evidence-workspace.json")
+        or result_bindings.get("postrun_boundary_deviation_sha256")
+        != sha256("records/surface-receipts/arcgis-package-portability-postrun-boundary-deviation.json")
+        or arcgis_package_result.get("publication_gate", {}).get("commit_sha")
+        != "b21edbcc93067139b99c389f6d0fc181cf8cd8f8"
+        or arcgis_package_result.get("publication_gate", {}).get("github_actions_run_id") != 33908130118
+        or arcgis_package_result.get("publication_gate", {}).get("github_actions_conclusion") != "success"
+        or arcgis_package_result.get("source_reconciliation", {}).get("unchanged") is not True
+        or arcgis_package_result.get("package", {}).get("sha256")
+        != "9d469ac98a8fd378baee3f0e22216bd8594f638c70ba7bb217cafc9c5464fa78"
+        or arcgis_package_result.get("external_manifest_reconciliation", {}).get("inventory_sha256")
+        != "dcb6f21abb6f84814f4e76b9175bbd7355fb6b661b8b27d9c6c7e4c8561fbfac"
+        or any(arcgis_package_result.get("external_manifest_reconciliation", {}).get(key) != 0 for key in (
+            "missing_file_count", "unexpected_file_count", "changed_file_count", "remaining_lock_count",
+            "symbolic_link_count", "forbidden_raster_file_count",
+        ))
+        or arcgis_package_result.get("extracted_project", {}).get("scientific_record_count") != 0
+        or arcgis_package_result.get("round_trip_exports", {}).get("exact_pixel_match") is not True
+        or arcgis_package_result.get("visual_inspection", {}).get("status") != "pass"
+        or result_assertions.get("same_machine_arcgis_3_7_1_round_trip_established") is not True
+        or result_assertions.get("operational_layers_self_contained_in_extraction") is not True
+        or any(result_assertions.get(key) is not False for key in (
+            "source_workspace_mutated", "network_requests_performed_by_attempt", "authentication_performed_by_attempt",
+            "credential_values_read_or_recorded", "scientific_pixels_packaged", "scientific_evidence_created",
+            "full_process_conformance_established", "clean_machine_portability_established",
+            "cross_version_portability_established", "m6_complete", "current_checkpoint_changed",
+            "scientific_admission_authorized",
+        ))
+    ):
+        fail("ArcGIS package portability result differs or overclaims")
+
+    arcgis_package_deviation_evidence = ledger_by_id.get("EVID-0072")
+    if (
+        not isinstance(arcgis_package_deviation_evidence, dict)
+        or arcgis_package_deviation_evidence.get("status") != arcgis_package_deviation.get("status")
+        or arcgis_package_deviation_evidence.get("failure_sha256")
+        != sha256("records/surface-receipts/arcgis-package-portability-postrun-boundary-deviation.json")
+        or arcgis_package_deviation_evidence.get("unplanned_output_inventory", {}).get("inventory_sha256")
+        != arcgis_package_deviation["unplanned_output_inventory"]["inventory_sha256"]
+        or arcgis_package_deviation_evidence.get("assertions", {}).get("process_conformance_passed") is not False
+        or arcgis_package_deviation_evidence.get("assertions", {}).get("automatic_cleanup_authorized") is not False
+    ):
+        fail("EVID-0072 ArcGIS package boundary deviation differs or is hidden")
+    arcgis_package_result_evidence = ledger_by_id.get("EVID-0073")
+    if (
+        not isinstance(arcgis_package_result_evidence, dict)
+        or arcgis_package_result_evidence.get("status") != arcgis_package_result.get("status")
+        or arcgis_package_result_evidence.get("result_sha256")
+        != sha256("records/surface-receipts/arcgis-package-portability.json")
+        or arcgis_package_result_evidence.get("publication_gate", {}).get("github_actions_run_id") != 33908130118
+        or arcgis_package_result_evidence.get("validation", {}).get("retained_postrun_boundary_deviation_count") != 1
+        or arcgis_package_result_evidence.get("assertions", {}).get("same_machine_arcgis_3_7_1_round_trip_established") is not True
+        or any(arcgis_package_result_evidence.get("assertions", {}).get(key) is not False for key in (
+            "clean_machine_portability_established", "cross_version_portability_established",
+            "scientific_pixels_packaged", "scientific_evidence_created", "full_process_conformance_established",
+            "m6_complete", "current_checkpoint_changed", "scientific_admission_authorized",
+        ))
+    ):
+        fail("EVID-0073 ArcGIS package portability result differs or overclaims")
 
     violations = []
     for relative in tracked_files():

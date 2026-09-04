@@ -1,0 +1,159 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M6-ARCGIS-PACKAGE-PORTABILITY-RECONCILIATION-001",
+  "verified_at_utc": "2026-09-04T18:55:42Z",
+  "status": "pass_same_machine_round_trip_with_visual_review_and_retained_postrun_boundary_deviation",
+  "bindings": {
+    "contract_ref": "config/qa/arcgis-package-portability-contract.json",
+    "contract_sha256": "80e4df2a71e56969927b918ee79da68a25b7c8cdc19ed3bcef67ec865c812526",
+    "control_receipt_ref": "records/readiness/arcgis-package-portability-control.json",
+    "control_receipt_sha256": "29293e80c41db8ce02d74aa0f4487e4e37e3e4faa56bf40d60c3187aebc9cb92",
+    "source_receipt_ref": "records/surface-receipts/arcgis-evidence-workspace.json",
+    "source_receipt_sha256": "029ad79092319d20ade51354fcce8fd220f3cb0587ebc5826b74fbf85dc67b6b",
+    "external_runtime_receipt_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\arcgis-package-portability\\attempt-001\\receipt.json",
+    "external_runtime_receipt_sha256": "c36a843b265d6822c75856ebb3086d08688ce428c1690f713c73f8191410d92a",
+    "external_manifest_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\arcgis-package-portability\\attempt-001\\stable-manifest.json",
+    "external_manifest_sha256": "62adad562836bdfdaa357aaa03d94264f07c28138811bf5b37f67c6b7cda50a8",
+    "postrun_boundary_deviation_ref": "records/surface-receipts/arcgis-package-portability-postrun-boundary-deviation.json",
+    "postrun_boundary_deviation_sha256": "7af730e846ae84f92698a6c37e7123a36c828261788ba0047b6a772f59f511c4"
+  },
+  "publication_gate": {
+    "commit_sha": "b21edbcc93067139b99c389f6d0fc181cf8cd8f8",
+    "remote_ref": "refs/heads/main",
+    "remote_commit_verified": true,
+    "github_actions_run_id": 33908130118,
+    "github_actions_workflow": "Validate project controls",
+    "github_actions_conclusion": "success",
+    "github_actions_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33908130118"
+  },
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced",
+    "attempt_started_at_utc": "2026-09-04T18:52:06Z",
+    "attempt_id": "arcgis-package-portability-attempt-001"
+  },
+  "source_reconciliation": {
+    "before": {
+      "file_count": 110,
+      "total_bytes": 1171536,
+      "inventory_sha256": "f8f3c94f77c904954d729c7340d82a09183ad52671736e3d1d80f6609b67617a"
+    },
+    "after": {
+      "file_count": 110,
+      "total_bytes": 1171536,
+      "inventory_sha256": "f8f3c94f77c904954d729c7340d82a09183ad52671736e3d1d80f6609b67617a"
+    },
+    "unchanged": true,
+    "postrun_arcgis_source_validator": "pass"
+  },
+  "package": {
+    "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\arcgis-package-portability\\attempt-001\\Nepal_2026_Evidence.ppkx",
+    "size_bytes": 60334,
+    "sha256": "9d469ac98a8fd378baee3f0e22216bd8594f638c70ba7bb217cafc9c5464fa78",
+    "container_signature": "7z",
+    "stored_in_git": false
+  },
+  "extracted_project": {
+    "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\arcgis-package-portability\\attempt-001\\extracted\\p30\\Nepal_2026_Evidence.aprx",
+    "sha256": "46eeb9d5f104b08ded46929e96392807627b7733c54b29ec5959de6394ce2bb0",
+    "home_folder_inside_extract_root": true,
+    "operational_layer_count": 3,
+    "operational_sources_inside_extract_root": 3,
+    "broken_layer_count": 0,
+    "basemap_layer_count": 0,
+    "operational_geodatabase_count": 1,
+    "analysis_crs_wkid": 32645,
+    "dataset_counts": {
+      "StudyAreas": 3,
+      "SourceProducts": 10,
+      "ObservedChange": 0,
+      "AnalysisExclusions": 0,
+      "StableControls": 0,
+      "ObservationSources": 0,
+      "Interpretations": 0,
+      "AttributionAssessments": 0,
+      "AnalysisQA": 0
+    },
+    "scientific_record_count": 0,
+    "relationship_count": 8,
+    "domain_count": 14,
+    "residual_standard_arcgis_defaults": {
+      "default_geodatabase": "C:\\Program Files\\ArcGIS\\Pro\\Resources\\ArcToolBox\\Services\\routingservices\\data\\Blank.gdb",
+      "default_toolbox": "C:\\Program Files\\ArcGIS\\Pro\\Resources\\ArcToolBox\\Services\\routingservices\\data\\Blank.atbx",
+      "used_by_operational_layers": false
+    }
+  },
+  "external_manifest_reconciliation": {
+    "file_count": 111,
+    "total_bytes": 1208250,
+    "inventory_sha256": "dcb6f21abb6f84814f4e76b9175bbd7355fb6b661b8b27d9c6c7e4c8561fbfac",
+    "missing_file_count": 0,
+    "unexpected_file_count": 0,
+    "changed_file_count": 0,
+    "remaining_lock_count": 0,
+    "symbolic_link_count": 0,
+    "forbidden_raster_file_count": 0
+  },
+  "round_trip_exports": {
+    "png_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\arcgis-package-portability\\attempt-001\\reexport\\Evidence_Workspace_Overview.png",
+    "png_size_bytes": 93678,
+    "png_sha256": "c5e67dbd890da6c3304b70c3734075a3970992aef75f21380f3d28197d219dd6",
+    "png_dimensions": [
+      1760,
+      1360
+    ],
+    "source_and_output_rgb_pixel_sha256": "4b71d2b7eebcb1c8beb95ee42425bb7f59b14b8151989fa570d63fb0b67ed4e8",
+    "exact_pixel_match": true,
+    "pdf_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\arcgis-package-portability\\attempt-001\\reexport\\Evidence_Workspace_Overview.pdf",
+    "pdf_size_bytes": 509477,
+    "pdf_sha256": "bfbc1d38de5219613dcb3ca52432b4d96143a40b0c675c7cf63b2be7ce6ccf93",
+    "pdf_page_count": 1,
+    "pdf_page_size_points": [
+      792,
+      612
+    ]
+  },
+  "visual_inspection": {
+    "status": "pass",
+    "inspected_at_utc": "2026-09-04T18:54:50Z",
+    "findings": [
+      "Title, subtitle, three AOI labels, north arrow, legend, numeric scale, CRS units, and claim boundary are visible and unclipped.",
+      "Approved AOI outlines remain distinct from the empty observation and exclusion layers.",
+      "No satellite pixels, mapped change, interpretation, attribution, or emergency guidance appears.",
+      "The decoded RGB pixels match the retained source overview exactly."
+    ]
+  },
+  "retained_failures": [
+    {
+      "ref": "records/surface-receipts/arcgis-package-portability-postrun-boundary-deviation.json",
+      "status": "fail_retained_unplanned_second_extraction_no_source_or_attempt_mutation",
+      "automatic_cleanup_authorized": false,
+      "invalidates_attempt_001_result": false
+    }
+  ],
+  "assertions": {
+    "same_machine_arcgis_3_7_1_round_trip_established": true,
+    "operational_layers_self_contained_in_extraction": true,
+    "source_workspace_mutated": false,
+    "network_requests_performed_by_attempt": false,
+    "authentication_performed_by_attempt": false,
+    "credential_values_read_or_recorded": false,
+    "scientific_pixels_packaged": false,
+    "scientific_evidence_created": false,
+    "full_process_conformance_established": false,
+    "clean_machine_portability_established": false,
+    "cross_version_portability_established": false,
+    "m6_complete": false,
+    "current_checkpoint_changed": false,
+    "scientific_admission_authorized": false
+  },
+  "limitations": [
+    "The pass is limited to one same-machine ArcGIS Pro 3.7.1 metadata-only round trip.",
+    "The extracted project retains unused standard ArcGIS installation defaults for Blank.gdb and Blank.atbx; operational layers do not use them.",
+    "An unplanned post-run second extraction is retained as a process-conformance failure and prevents an unqualified process pass.",
+    "No clean-machine, alternate-user, alternate-version, offline-installation, final scale-bar, scientific-data, or release-package claim is established.",
+    "M6 remains open and the project checkpoint remains M2-ACQUISITION-REVIEW."
+  ],
+  "next_action": "Use the qualified package-mechanics result when designing final M6 delivery, preserve the post-run boundary deviation, and continue to wait for exact owner decisions on the gated scientific routes."
+}

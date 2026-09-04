@@ -1,0 +1,62 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M6-ARCGIS-PACKAGE-PORTABILITY-POSTRUN-BOUNDARY-DEVIATION-001",
+  "recorded_at_utc": "2026-09-04T18:55:42Z",
+  "status": "fail_retained_unplanned_second_extraction_no_source_or_attempt_mutation",
+  "activity": {
+    "intended_check": "Independently confirm the completed PPKX container after the predeclared attempt.",
+    "first_probe": "Python zipfile rejected the package because ArcGIS PPKX uses a 7z container signature rather than ZIP.",
+    "operator_error": "ArcGIS ExtractPackage was then invoked with a second external output folder, which necessarily created an unplanned extraction outside the predeclared attempt-001 root.",
+    "command_effect": "one additional extraction directory created",
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "source_workspace_mutated": false,
+    "attempt_001_mutated": false,
+    "satellite_or_dem_pixels_read_or_written": false
+  },
+  "bindings": {
+    "contract_ref": "config/qa/arcgis-package-portability-contract.json",
+    "contract_sha256": "80e4df2a71e56969927b918ee79da68a25b7c8cdc19ed3bcef67ec865c812526",
+    "package_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\arcgis-package-portability\\attempt-001\\Nepal_2026_Evidence.ppkx",
+    "package_sha256": "9d469ac98a8fd378baee3f0e22216bd8594f638c70ba7bb217cafc9c5464fa78",
+    "unplanned_output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\arcgis-package-portability\\validation-probe-should-not-exist"
+  },
+  "container_observation": {
+    "leading_bytes_hex": "377abcaf271c",
+    "identified_signature": "7z",
+    "python_zipfile_applicable": false,
+    "arcgis_extract_package_completed": true
+  },
+  "unplanned_output_inventory": {
+    "file_count": 107,
+    "total_bytes": 544361,
+    "inventory_sha256": "e1b54effd6268740d08e6d349e3d6dd7c142dbd1aeba7b85f2cd5940d99d0672",
+    "forbidden_raster_files": [],
+    "lock_count": 0,
+    "symbolic_link_count": 0,
+    "matches_attempt_001_preopen_extraction_inventory": true
+  },
+  "post_error_reverification": {
+    "source_project_sha256": "a565a9b95402d29df02e0a046e42cb7f5a85f1e1daeb83c5fbb3f54badc170e0",
+    "source_png_sha256": "c5e67dbd890da6c3304b70c3734075a3970992aef75f21380f3d28197d219dd6",
+    "source_pdf_sha256": "73c9cb55ad41f7377db431b90e1e4886d2901550e95e7af9542e1ee167137d04",
+    "attempt_001_package_sha256": "9d469ac98a8fd378baee3f0e22216bd8594f638c70ba7bb217cafc9c5464fa78",
+    "attempt_001_manifest_sha256": "62adad562836bdfdaa357aaa03d94264f07c28138811bf5b37f67c6b7cda50a8",
+    "attempt_001_receipt_sha256": "c36a843b265d6822c75856ebb3086d08688ce428c1690f713c73f8191410d92a",
+    "repository_clean": true
+  },
+  "disposition": {
+    "preserve_unplanned_output": true,
+    "automatic_cleanup_authorized": false,
+    "automatic_retry_authorized": false,
+    "reclassify_as_predeclared_attempt": false,
+    "attempt_001_runtime_result_invalidated": false,
+    "overall_process_conformance": "fail_with_retained_boundary_deviation"
+  },
+  "limitations": [
+    "The second extraction was not authorized by the exact attempt-001 contract and must not be hidden or treated as part of the passing attempt.",
+    "It used the already created metadata-only package and added no scientific evidence.",
+    "The directory remains external and preserved; deletion would require a separate explicit cleanup decision."
+  ]
+}
