@@ -276,10 +276,17 @@
         "new_terms_or_account_action": "stop",
         "custody_initialization_ref": "records/acquisition/custody-initialization.json",
         "custody_initialization_sha256": "12812d1c53e13ec287425f74a1988f5c0be7d0638f856c9606fddf1c1431fb09",
-        "retained_failure_review": "required",
+        "retained_failure_review": "completed_approved_attempt_failed",
         "retained_failure_review_ref": "reviews/m2-sentinel-recovery/review-contract.json",
         "retained_failure_review_bundle_sha256": "dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7",
-        "retained_failure_recovery_proposal_sha256": "7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013"
+        "retained_failure_recovery_proposal_sha256": "7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013",
+        "recovery_approval_ref": "records/source-gates/m2-sentinel-recovery-approval.json",
+        "recovery_approval_sha256": "80e09933799b54c9002f1cd8ae8c86d75ab4550dc9ef8b1f7e0d3bc89bb36c04",
+        "recovery_attempt_receipt_ref": "records/acquisition/recovery-attempts/m1-src-004-recovery-001-20260904t201220z-e4388c64.json",
+        "recovery_attempt_receipt_sha256": "65ac02cd197024da8293fbbacc5f608d880f139dfb6c033a91274ff879db0886",
+        "recovery_interruption_reconciliation_ref": "records/acquisition/sentinel-recovery-interruption-reconciliation-001.json",
+        "recovery_interruption_reconciliation_sha256": "743e049abf53f117006c9e9313f0c14be4172e6f1b48d0d9453ed2941abd5ab9",
+        "automatic_retry_authorized": false
       },
       "disposition": "review_required",
       "retained_failures": [
@@ -299,12 +306,26 @@
         ],
         "observed": [
           "3 of 8 exact products promoted and passed offline container verification",
-          "M1-SRC-004 retained a 561593598-byte truncated transfer"
+          "M1-SRC-004 retains its original 561593598-byte truncated transfer",
+          "The approved byte-zero recovery retains a distinct 1333788672-byte terminal-failure partial"
         ],
         "decision_value": "review_required",
-        "rationale": "Three exact products are promoted and container-verified. M1-SRC-004 failed exact-length verification; its partial and append-only failure evidence are preserved, and no automatic retry or further product transfer is permitted before review."
+        "rationale": "Three exact products are promoted and container-verified. The original M1-SRC-004 failure and the separately approved recovery failure are both preserved. The one-attempt recovery authority is consumed, and no retry or further Sentinel transfer is permitted before a new exact review."
       },
-      "next_dependency": "M2-VERIFY"
+      "next_dependency": "M2-VERIFY",
+      "recovery_failures": [
+        {
+          "source_id": "M1-SRC-004",
+          "attempt_id": "m1-src-004-recovery-001-20260904t201220z-e4388c64",
+          "failure_code": "external_process_terminated_before_terminal_event",
+          "failure_cause_established": false,
+          "partial_bytes_preserved": 1333788672,
+          "partial_sha256": "c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac",
+          "receipt_ref": "records/acquisition/recovery-attempts/m1-src-004-recovery-001-20260904t201220z-e4388c64.json",
+          "receipt_sha256": "65ac02cd197024da8293fbbacc5f608d880f139dfb6c033a91274ff879db0886",
+          "retry_automatically_authorized": false
+        }
+      ]
     },
     {
       "id": "M2-VERIFY",
@@ -846,7 +867,7 @@
   },
   "handoff": {
     "current_checkpoint": "M2-ACQUISITION-REVIEW",
-    "next_action": "Review M2 Sentinel recovery bundle SHA-256 dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7 and proposal SHA-256 7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013; approve, revise, or defer the single fresh byte-zero M1-SRC-004 recovery. No automatic retry or further Sentinel transfer is released before a completed decision.",
+    "next_action": "Review the terminal M1-SRC-004 recovery failure recorded in records/acquisition/sentinel-recovery-interruption-reconciliation-001.json; the approved one-attempt authority is consumed, and no retry or further Sentinel transfer is authorized. Prepare a new exact proposal and human review before any further Sentinel acquisition.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -854,7 +875,8 @@
       "The post-event optical route remains high-cloud-risk and may be inconclusive.",
       "A test-induced M1-SRC-001 SAFE materialization passed exact offline extraction controls and is retained with explicit unintended-test provenance; it establishes no readable pixels or scientific result.",
       "A test-induced M2-ORB-001 attempt used a tracked nonsecret test literal, made a catalogue and rejected download request, received zero payload bytes, and is retained as a terminal failure requiring review.",
-      "The one post-observation radar label amendment run passed only three-source pre-event member, annotation, vector, and header readiness; real-001 remains BLOCK and no pixel or baseline action is released."
+      "The one post-observation radar label amendment run passed only three-source pre-event member, annotation, vector, and header readiness; real-001 remains BLOCK and no pixel or baseline action is released.",
+      "The approved M1-SRC-004 byte-zero recovery terminated after 1333788672 bytes without promotion; its partial and post-process terminal reconciliation are retained, the cause is unknown, and the one-attempt authority is consumed."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."

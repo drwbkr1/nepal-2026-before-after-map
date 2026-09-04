@@ -252,8 +252,8 @@
       },
       {
         "unit_id": "M2-SENTINEL-RECOVERY",
-        "reason": "A retained terminal transfer failure has retry_automatically_authorized false; recovery requires an exact fresh-attempt decision that preserves the partial and source boundary.",
-        "authority_ref": "reviews/m2-sentinel-recovery/review-contract.json"
+        "reason": "The exact approved one-attempt recovery ended in a terminal failure; another recovery requires a new exact review that preserves both partials and the consumed authority.",
+        "authority_ref": "records/acquisition/sentinel-recovery-interruption-reconciliation-001.json"
       },
       {
         "unit_id": "M2-ORBIT-RECOVERY",
@@ -272,7 +272,7 @@
     "checkpoint_id": "M2-ACQUISITION-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Review M2 Sentinel recovery bundle SHA-256 dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7 and proposal SHA-256 7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013; approve, revise, or defer the single fresh byte-zero M1-SRC-004 recovery. No automatic retry or further Sentinel transfer is released before a completed decision."
+    "next_action": "Review the terminal M1-SRC-004 recovery failure recorded in records/acquisition/sentinel-recovery-interruption-reconciliation-001.json; the approved one-attempt authority is consumed, and no retry or further Sentinel transfer is authorized. Prepare a new exact proposal and human review before any further Sentinel acquisition."
   },
   "parallel_checkpoints": [
     {

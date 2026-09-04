@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-SENTINEL-RECOVERY-INTERRUPTION-RECONCILIATION-001",
+  "status": "reconciled_terminal_failure_no_retry_authorized",
+  "observed_at_utc": "2026-09-04T20:17:30Z",
+  "source_id": "M1-SRC-004",
+  "recovery_asset_id": "m1-src-004-recovery-001",
+  "attempt_id": "m1-src-004-recovery-001-20260904t201220z-e4388c64",
+  "failure_code": "external_process_terminated_before_terminal_event",
+  "failure_cause_established": false,
+  "observations": {
+    "recovery_process_running": false,
+    "prompt_process_running": false,
+    "terminal_event_present_before_reconciliation": false,
+    "destination_exists": false,
+    "new_partial_size_bytes": 1333788672,
+    "new_partial_sha256": "c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac",
+    "new_partial_last_write_at_utc": "2026-09-04T20:15:12.4507764Z",
+    "original_failed_partial_size_bytes": 561593598,
+    "original_failed_partial_sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66",
+    "original_failed_partial_unchanged": true
+  },
+  "bindings": {
+    "recovery_contract_sha256_before_reconciliation": "467e6b42b963f068587427884e8357eb60b9b7c52f2fd4cc35c2f8c4746599d4",
+    "recovery_contract_sha256_after_reconciliation": "a6b9240b2f5dd401ba44c9061751370ac90afae31f304677f3088f32d1fd8a20",
+    "started_event_sha256": "f7b5e68d1ed52cb8f383347243d88fefdcf47b8c8092c5175029ee12464c80ea",
+    "failed_event_sha256": "65ac02cd197024da8293fbbacc5f608d880f139dfb6c033a91274ff879db0886",
+    "public_receipt_ref": "records/acquisition/recovery-attempts/m1-src-004-recovery-001-20260904t201220z-e4388c64.json",
+    "public_receipt_sha256": "65ac02cd197024da8293fbbacc5f608d880f139dfb6c033a91274ff879db0886",
+    "recovery_approval_ref": "records/source-gates/m2-sentinel-recovery-approval.json",
+    "recovery_proposal_ref": "contracts/milestone-002-sentinel-recovery-proposal.json"
+  },
+  "authority_and_disposition": {
+    "approved_maximum_real_transfer_attempts": 1,
+    "approved_attempt_consumed": true,
+    "automatic_retry_authorized": false,
+    "further_sentinel_transfer_authorized_now": false,
+    "next_required_action": "Prepare and complete a new exact human review before any retry or further Sentinel transfer."
+  },
+  "limitations": [
+    "The operating-system process exit code was not captured.",
+    "No causal explanation is assigned to the process termination.",
+    "The preserved recovery partial is not a valid or admissible product.",
+    "No container, raster, pixel, registration, or scientific fitness is established."
+  ]
+}

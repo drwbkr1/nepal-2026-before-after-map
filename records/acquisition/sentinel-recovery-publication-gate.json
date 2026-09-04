@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-RECOVERY-PUBLICATION-GATE-001",
+  "verified_at_utc": "2026-09-04T19:46:19Z",
+  "status": "pass_public_controls_verified_before_real_recovery",
+  "bindings": {
+    "activation_script_sha256": "0ba6ec3cfc5e6032849731af0df6c1016017830271bfe810fa4c8035686f9c91",
+    "recovery_core_sha256": "8a83f5fbb52857f41e6a676fc616df14b5e8fe2d5fe18324174e90f7cfd7a3e1",
+    "recovery_runner_sha256": "43ad10cd593b1ca02decad9efef4b7c1e07dc60e8a85dc65e786e6fa2cbd41fc",
+    "container_verifier_sha256": "789d555cfffac7aae08ee31f177ff0e6bfdf56322d43b4f8d8a5e3e646bbf4b0",
+    "tests_sha256": "dbb02daf1cee26475ac310e620bb403152158417c1d1dfd01df44a4730c6117c"
+  },
+  "github_actions": {
+    "workflow": "Validate project controls",
+    "run_id": 33912826977,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33912826977",
+    "head_sha": "c1bf493b8677fbb0d375cb14be2b84c32322c431",
+    "conclusion": "success"
+  },
+  "assertions": {
+    "remote_ref_verified": true,
+    "public_ci_passed": true,
+    "real_recovery_started": false,
+    "network_requests_performed_by_this_record": false,
+    "credential_values_read_or_recorded": false,
+    "authority_created": false
+  },
+  "next_gate": "activate the exact approved recovery contract, then run at most one real M1-SRC-004 recovery"
+}

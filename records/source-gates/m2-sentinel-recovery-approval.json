@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-SENTINEL-RECOVERY-APPROVAL-001",
+  "status": "approved_exact_bounded_fresh_byte_zero_recovery",
+  "approved_at_utc": "2026-09-04T19:46:19Z",
+  "review_id": "m2-sentinel-recovery-review-001",
+  "review_bundle_id": "m2-sentinel-recovery-review-bundle-001",
+  "review_bundle_manifest_sha256": "dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7",
+  "recovery_proposal_ref": "contracts/milestone-002-sentinel-recovery-proposal.json",
+  "recovery_proposal_sha256": "7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013",
+  "review_reconciliation_ref": "records/source-gates/m2-sentinel-recovery-review-reconciliation.json",
+  "review_reconciliation_sha256": "e77a1b78327ad197dd2f71fa408230df98f8600b05f43f71fc60230bc03bdae8",
+  "locked_response_sha256": "4859735c516f3959ed9e904c7b365d08352925ef05ebdf676ec6243513ad4817",
+  "lock_receipt_sha256": "cbd2297d86fe16e9a8c59108cdb60a1d7f1577922d020c864a13b30b818bf344",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "recovery_identity": {
+    "source_id": "M1-SRC-004",
+    "recovery_asset_id": "m1-src-004-recovery-001",
+    "mode": "fresh_full_restart_distinct_attempt",
+    "restart_offset_bytes": 0,
+    "retained_failed_attempt_id": "m1-src-004-20260904t043930z-ac125c11",
+    "retained_partial_bytes": 561593598,
+    "retained_partial_sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66"
+  },
+  "authorized_next_actions": [
+    "implement and validate the exact separate recovery control described here",
+    "perform one fresh full M1-SRC-004 transfer from byte zero through a new exclusive staging path",
+    "verify and promote only that exact product if every existing identity, rights, length, checksum, path, and container control passes",
+    "after a passing recovery, continue only M1-SRC-005, M1-SRC-006, M1-SRC-008, and M1-SRC-010 under the original approval"
+  ],
+  "does_not_authorize": [
+    "resume, delete, truncate, rename, overwrite, or otherwise modify the retained failed partial or its events",
+    "reuse the failed staging path or hide the failed attempt",
+    "change the provider UUID, product name, observation time, role, sensor route, destination, or source manifest",
+    "accept terms, recover or modify an account, change MFA, incur cost, or expose credentials",
+    "acquire substitute imagery, additional products, or precise orbit files",
+    "perform radar terrain correction, pixel admission, change mapping, attribution, or scientific publication"
+  ],
+  "human_decisions_fabricated": false
+}

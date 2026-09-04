@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "event": "recovery_transfer_failed",
+  "attempt_id": "m1-src-004-recovery-001-20260904t201220z-e4388c64",
+  "asset_id": "m1-src-004-recovery-001",
+  "source_id": "M1-SRC-004",
+  "started_at": "2026-09-04T20:12:20Z",
+  "completed_at": "2026-09-04T20:17:30Z",
+  "failure_code": "external_process_terminated_before_terminal_event",
+  "failure_cause_established": false,
+  "terminalization_mode": "post_process_observation_reconciliation",
+  "partial_bytes_preserved": 1333788672,
+  "partial_sha256": "c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac",
+  "original_failed_partial_preserved": true,
+  "original_failed_partial_size_bytes": 561593598,
+  "original_failed_partial_sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66",
+  "original_failed_partial_sha256_unchanged": true,
+  "destination_exists": false,
+  "credential_value_recorded": false,
+  "process_exit_code_observed": null,
+  "retry_automatically_authorized": false
+}

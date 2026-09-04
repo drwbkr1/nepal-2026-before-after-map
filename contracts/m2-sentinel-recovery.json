@@ -1,0 +1,110 @@
+{
+  "contract_version": "1.0",
+  "intake_id": "nepal-m2-sentinel-recovery-001",
+  "created_at": "2026-09-04T19:46:19Z",
+  "collision_policy": "fail",
+  "promotion_mode": "atomic-no-replace",
+  "secret_policy": "references-only",
+  "custody_root": "nepal-2026-before-after-map-data/custody",
+  "staging_root": "nepal-2026-before-after-map-data/.intake-staging/nepal-m2-sentinel-recovery-001",
+  "assets": [
+    {
+      "asset_id": "m1-src-004-recovery-001",
+      "source": {
+        "kind": "https",
+        "uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(641ccb0b-5d88-4c44-b558-93b488cd2453)/$value",
+        "authorization_ref": "records/source-gates/m2-sentinel-recovery-approval.json",
+        "terms_ref": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "transport_exception_ref": null
+      },
+      "destination_relative_path": "products/m1-src-004/S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip",
+      "staging_relative_path": "m1-src-004-recovery-001/S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": null,
+        "unavailable_reason": "CDSE catalog metadata records content length plus MD5 and BLAKE3, not an upstream SHA-256 or an authenticated transfer length. Capture transfer identity after activation and compute local SHA-256 before promotion."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "failed",
+      "attempts": [
+        {
+          "attempt_id": "m1-src-004-recovery-001-20260904t201220z-e4388c64",
+          "started_at": "2026-09-04T20:12:20Z",
+          "completed_at": "2026-09-04T20:17:30Z",
+          "outcome": "failed",
+          "extensions": {
+            "source_id": "M1-SRC-004",
+            "catalog_response_sha256": "be211b4b3624521742a13bc62fa761f80d45af3baf94809779583684c136605e",
+            "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-sentinel-recovery-001\\attempt-events\\m1-src-004-recovery-001\\m1-src-004-recovery-001-20260904t201220z-e4388c64-started.json",
+            "credential_reference": "CDSE_ACCESS_TOKEN",
+            "credential_value_recorded": false,
+            "restart_offset_bytes": 0,
+            "range_or_resume_used": false,
+            "external_failed_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-sentinel-recovery-001\\attempt-events\\m1-src-004-recovery-001\\m1-src-004-recovery-001-20260904t201220z-e4388c64-failed.json",
+            "terminalization_mode": "post_process_observation_reconciliation",
+            "partial_size_bytes": 1333788672,
+            "partial_sha256": "c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac",
+            "process_exit_code_observed": null
+          }
+        }
+      ],
+      "failure": {
+        "code": "external_process_terminated_before_terminal_event",
+        "recorded_at": "2026-09-04T20:17:30Z"
+      },
+      "superseded_by": null,
+      "extensions": {
+        "source_id": "M1-SRC-004",
+        "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+        "provider_product_id": "641ccb0b-5d88-4c44-b558-93b488cd2453",
+        "catalog_content_length_bytes": 1732332897,
+        "provider_checksums": [
+          {
+            "Value": "25c895490c9b786507152513cc701911",
+            "Algorithm": "MD5",
+            "ChecksumDate": "2026-08-28T15:08:04.177988Z"
+          },
+          {
+            "Value": "314087e342f011c95ec9b8b520d0baae5272396bd3e2e16b9525bd1c5eba0920",
+            "Algorithm": "BLAKE3",
+            "ChecksumDate": "2026-08-28T15:08:07.660734Z"
+          }
+        ],
+        "event_role": "after",
+        "sensor_route": "radar",
+        "recovery_of_asset_id": "m1-src-004",
+        "retained_failed_attempt_id": "m1-src-004-20260904t043930z-ac125c11",
+        "retained_failed_receipt_ref": "records/acquisition/attempts/m1-src-004-20260904t043930z-ac125c11.json",
+        "retained_failed_receipt_sha256": "8cbaf911e5a3329c5aa00a7288e237fa71987a2d4f03cea8c630c7dd28b9e7e9",
+        "retained_partial_external_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\m1-src-004\\S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip.part",
+        "retained_partial_size_bytes": 561593598,
+        "retained_partial_sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66"
+      }
+    }
+  ],
+  "extensions": {
+    "status": "terminal_recovery_failure_new_review_required",
+    "recovery_approval_ref": "records/source-gates/m2-sentinel-recovery-approval.json",
+    "recovery_approval_sha256": "80e09933799b54c9002f1cd8ae8c86d75ab4550dc9ef8b1f7e0d3bc89bb36c04",
+    "review_bundle_ref": "reviews/m2-sentinel-recovery/review-bundle.json",
+    "review_bundle_sha256": "dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7",
+    "review_reconciliation_ref": "records/source-gates/m2-sentinel-recovery-review-reconciliation.json",
+    "review_reconciliation_sha256": "e77a1b78327ad197dd2f71fa408230df98f8600b05f43f71fc60230bc03bdae8",
+    "recovery_proposal_ref": "contracts/milestone-002-sentinel-recovery-proposal.json",
+    "recovery_proposal_sha256": "7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013",
+    "active_intake_ref": "contracts/m2-intake.json",
+    "active_intake_sha256_at_activation": "734455b7c0e772aa22253a81f944dc685e4c73cf73490ca2f821d12d7e2b5ca0",
+    "acquisition_reconciliation_ref": "records/acquisition/sentinel-acquisition-reconciliation-001.json",
+    "acquisition_reconciliation_sha256": "37dea3830d7b08724f61b16634f04daf30e0f2d7633aa608c2b5655d0683fd87",
+    "restart_offset_bytes": 0,
+    "resume_partial": false,
+    "delete_or_modify_failed_partial": false,
+    "reuse_failed_staging_path": false,
+    "maximum_real_transfer_attempts": 1
+  }
+}
