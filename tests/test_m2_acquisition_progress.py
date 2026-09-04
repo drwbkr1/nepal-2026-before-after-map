@@ -80,6 +80,15 @@ class M2AcquisitionProgressTests(unittest.TestCase):
         self.assertEqual(result["status"], "pass")
         self.assertEqual(result["state_counts"], {"authorized": 7, "staging": 1})
 
+    def test_windows_started_event_reference_is_portable(self) -> None:
+        current = copy.deepcopy(BASELINE)
+        asset, attempt_id = started_asset(current, state="staging")
+        asset["attempts"][0]["extensions"]["external_started_event"] = (
+            rf"C:\controlled\attempt-events\{asset['asset_id']}\{attempt_id}-started.json"
+        )
+        result = validate_progress(current, BASELINE, PLAN, root=ROOT)
+        self.assertEqual(result["status"], "pass", result["errors"])
+
     def test_valid_failed_state_preserves_terminal_receipt(self) -> None:
         current = copy.deepcopy(BASELINE)
         asset, attempt_id = started_asset(current, state="failed")

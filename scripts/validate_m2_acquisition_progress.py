@@ -9,7 +9,7 @@ import json
 import os
 import re
 from collections import Counter
-from pathlib import Path, PurePosixPath
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
 
@@ -139,7 +139,7 @@ def validate_attempt(
     if not isinstance(extensions.get("catalog_response_sha256"), str) or not HEX64.fullmatch(extensions["catalog_response_sha256"]):
         errors.append(f"{source_id} attempt catalog response identity is invalid")
     started_event = extensions.get("external_started_event")
-    if not isinstance(started_event, str) or Path(started_event).name != f"{attempt_id}-started.json":
+    if not isinstance(started_event, str) or PureWindowsPath(started_event).name != f"{attempt_id}-started.json":
         errors.append(f"{source_id} external started-event reference differs")
     state = asset.get("state")
     expected_outcome = {"staging": "started", "failed": "failed", "promoted": "succeeded"}.get(state)

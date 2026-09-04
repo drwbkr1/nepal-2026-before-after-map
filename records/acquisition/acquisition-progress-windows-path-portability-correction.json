@@ -1,0 +1,48 @@
+{
+  "record_version": "1.0",
+  "record_id": "NEPAL-M2-ACQUISITION-PROGRESS-WINDOWS-PATH-PORTABILITY-CORRECTION-001",
+  "verified_at_utc": "2026-09-04T17:23:53Z",
+  "status": "pass_windows_started_event_basename_portable",
+  "trigger": {
+    "failed_ci_run_id": 33900195532,
+    "failed_ci_run_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33900195532",
+    "failed_job": "Validate repository",
+    "failed_commit": "226157b187b0475c6ee3a8849b95b76e1d02c8c1",
+    "failure": "The Linux runner treated each absolute Windows external_started_event reference as one filename because pathlib.Path uses the host path flavor.",
+    "affected_source_ids": [
+      "M1-SRC-001",
+      "M1-SRC-002",
+      "M1-SRC-003",
+      "M1-SRC-004"
+    ]
+  },
+  "correction": {
+    "validator_ref": "scripts/validate_m2_acquisition_progress.py",
+    "validator_sha256_before": "fc90a85e111135133a64249151086d7032c924148bcf5cc29cbee473703a9051",
+    "validator_sha256_after": "b54301d9f690b178b75995a29ad84598b6f3555ddc2e0eff735d96c331572545",
+    "test_ref": "tests/test_m2_acquisition_progress.py",
+    "test_sha256_before": "5d1c59520d803daa05ba1bfef1ddcfbdbe894566a9cfb0c50f3c7dba00e2f191",
+    "test_sha256_after": "286f02a8cd023faabcd9c61e198679f1b0e5dc566e15586beddeb6e95e44b9f0",
+    "change": "Interpret the recorded external event reference with PureWindowsPath for basename validation on every host and add an explicit backslash-path regression test."
+  },
+  "validation": {
+    "focused_acquisition_progress_test_count": 10,
+    "focused_acquisition_progress_tests": "pass",
+    "repository_checker": "pass_294_required_files",
+    "external_state_verified_by_correction": false
+  },
+  "assertions": {
+    "source_identity_changed": false,
+    "attempt_or_receipt_record_changed": false,
+    "external_custody_mutated": false,
+    "credential_values_read_or_recorded": false,
+    "network_requests_performed_by_correction": false,
+    "product_bytes_requested_by_correction": 0,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "The local test proves host-independent basename parsing but does not itself prove the next GitHub Actions run.",
+    "The failed CI run remains immutable remote evidence and is not reclassified as passing."
+  ],
+  "next_action": "Commit and push the portability correction, then verify a new GitHub Actions run separately."
+}

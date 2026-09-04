@@ -72,6 +72,7 @@ REQUIRED = [
     "records/acquisition/transfer-runner-readiness.json",
     "records/acquisition/transfer-runner-attempt-id-correction.json",
     "records/acquisition/acquisition-progress-readiness.json",
+    "records/acquisition/acquisition-progress-windows-path-portability-correction.json",
     "records/acquisition/acquisition-checkpoint-readiness.json",
     "records/acquisition/acquisition-checkpoint-portability-correction.json",
     "records/acquisition/sentinel-acquisition-reconciliation-001.json",
@@ -658,6 +659,7 @@ def main() -> None:
     transfer_readiness = json.loads((ROOT / "records/acquisition/transfer-runner-readiness.json").read_text(encoding="utf-8"))
     transfer_runner_correction = json.loads((ROOT / "records/acquisition/transfer-runner-attempt-id-correction.json").read_text(encoding="utf-8"))
     acquisition_progress_readiness = json.loads((ROOT / "records/acquisition/acquisition-progress-readiness.json").read_text(encoding="utf-8"))
+    acquisition_progress_portability = json.loads((ROOT / "records/acquisition/acquisition-progress-windows-path-portability-correction.json").read_text(encoding="utf-8"))
     acquisition_checkpoint_readiness = json.loads((ROOT / "records/acquisition/acquisition-checkpoint-readiness.json").read_text(encoding="utf-8"))
     acquisition_checkpoint_portability = json.loads((ROOT / "records/acquisition/acquisition-checkpoint-portability-correction.json").read_text(encoding="utf-8"))
     pair_plan = json.loads((ROOT / "config/qa/candidate-pair-plan.json").read_text(encoding="utf-8"))
@@ -3298,6 +3300,26 @@ def main() -> None:
         "active_intake_mutated": False,
     }:
         fail("M2 acquisition-progress readiness invents external activity")
+    if (
+        acquisition_progress_portability.get("status") != "pass_windows_started_event_basename_portable"
+        or acquisition_progress_portability.get("trigger", {}).get("failed_ci_run_id") != 33900195532
+        or acquisition_progress_portability.get("trigger", {}).get("failed_commit") != "226157b187b0475c6ee3a8849b95b76e1d02c8c1"
+        or acquisition_progress_portability.get("trigger", {}).get("affected_source_ids") != [
+            "M1-SRC-001", "M1-SRC-002", "M1-SRC-003", "M1-SRC-004"
+        ]
+        or acquisition_progress_portability.get("correction", {}).get("validator_sha256_before") != "fc90a85e111135133a64249151086d7032c924148bcf5cc29cbee473703a9051"
+        or acquisition_progress_portability.get("correction", {}).get("validator_sha256_after") != sha256("scripts/validate_m2_acquisition_progress.py")
+        or acquisition_progress_portability.get("correction", {}).get("test_sha256_before") != "5d1c59520d803daa05ba1bfef1ddcfbdbe894566a9cfb0c50f3c7dba00e2f191"
+        or acquisition_progress_portability.get("correction", {}).get("test_sha256_after") != sha256("tests/test_m2_acquisition_progress.py")
+        or acquisition_progress_portability.get("validation", {}).get("focused_acquisition_progress_test_count") != 10
+        or acquisition_progress_portability.get("validation", {}).get("focused_acquisition_progress_tests") != "pass"
+        or acquisition_progress_portability.get("assertions", {}).get("external_custody_mutated") is not False
+        or acquisition_progress_portability.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or acquisition_progress_portability.get("assertions", {}).get("network_requests_performed_by_correction") is not False
+        or acquisition_progress_portability.get("assertions", {}).get("product_bytes_requested_by_correction") != 0
+        or acquisition_progress_portability.get("assertions", {}).get("scientific_result_established") is not False
+    ):
+        fail("M2 acquisition-progress Windows-path portability correction differs")
     if acquisition_checkpoint_readiness.get("status") != "pass_preacquisition_checkpoint_derivation":
         fail("M2 acquisition-checkpoint readiness receipt status differs")
     checkpoint_bindings = acquisition_checkpoint_readiness.get("bindings", {})
@@ -4558,6 +4580,26 @@ def main() -> None:
         or orbit_boundary_evidence.get("assertions", {}).get("scientific_result_established") is not False
     ):
         fail("EVID-0064 orbit boundary correction and recovery review differs")
+
+    acquisition_progress_portability_evidence = ledger_by_id.get("EVID-0065")
+    if (
+        not isinstance(acquisition_progress_portability_evidence, dict)
+        or acquisition_progress_portability_evidence.get("status") != "pass_windows_started_event_basename_portable_local_ci_reverification_pending"
+        or acquisition_progress_portability_evidence.get("correction_ref") != "records/acquisition/acquisition-progress-windows-path-portability-correction.json"
+        or acquisition_progress_portability_evidence.get("correction_sha256") != sha256("records/acquisition/acquisition-progress-windows-path-portability-correction.json")
+        or acquisition_progress_portability_evidence.get("failed_ci_run_id") != 33900195532
+        or acquisition_progress_portability_evidence.get("failed_commit") != "226157b187b0475c6ee3a8849b95b76e1d02c8c1"
+        or acquisition_progress_portability_evidence.get("validator_sha256") != sha256("scripts/validate_m2_acquisition_progress.py")
+        or acquisition_progress_portability_evidence.get("test_sha256") != sha256("tests/test_m2_acquisition_progress.py")
+        or acquisition_progress_portability_evidence.get("validation", {}).get("focused_acquisition_progress_test_count") != 10
+        or acquisition_progress_portability_evidence.get("validation", {}).get("focused_acquisition_progress_tests") != "pass"
+        or acquisition_progress_portability_evidence.get("validation", {}).get("new_ci_run") != "pending"
+        or acquisition_progress_portability_evidence.get("assertions", {}).get("external_custody_mutated") is not False
+        or acquisition_progress_portability_evidence.get("assertions", {}).get("network_requests_performed_by_correction") is not False
+        or acquisition_progress_portability_evidence.get("assertions", {}).get("product_bytes_requested_by_correction") != 0
+        or acquisition_progress_portability_evidence.get("assertions", {}).get("scientific_result_established") is not False
+    ):
+        fail("EVID-0065 acquisition-progress portability correction differs")
 
     violations = []
     for relative in tracked_files():
