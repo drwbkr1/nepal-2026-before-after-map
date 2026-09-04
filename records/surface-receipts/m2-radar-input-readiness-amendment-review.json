@@ -1,0 +1,47 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-INPUT-LABEL-AMENDMENT-REVIEW-SURFACE-001",
+  "verified_at_utc": "2026-09-04T18:29:01Z",
+  "status": "pass_blank_review_surface",
+  "artifact": {
+    "path": "docs/assets/m2-radar-input-readiness-amendment-review.png",
+    "sha256": "bd913320875c0dbb78002681397f2e09e7bc217fd01e13049ebee5f2ee5675ac",
+    "width_px": 1800,
+    "height_px": 1760,
+    "format": "PNG",
+    "contains_third_party_pixels": false
+  },
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-radar-input-readiness-amendment-proposal.json",
+    "proposal_sha256": "ebdcb763afd99ea23090c9bd83fd9e9cb6cb8dfbb2b5fed60edb80f1fa61c731",
+    "source_gate_ref": "records/source-gates/m2-radar-input-label-specification-source-gate.json",
+    "source_gate_sha256": "0bf61ef4d72444bcba3bd753fe15511cdebc87288d0d4dfeda9a9bbaeaeb2daf",
+    "failed_real_receipt_ref": "records/readiness/radar-input/m2-s1-input-readiness-real-001.json",
+    "failed_real_receipt_sha256": "feab3645709df16306c81dae959a8693925a7c6f919f2a1e414cf3765c3a5b0c",
+    "render_script_ref": "scripts/render_m2_radar_input_readiness_amendment_review.py",
+    "render_script_sha256": "bf6e38d90908bf4528ce71539e775de9a4f47f4ae3482b631cdb3817e16f120a"
+  },
+  "validation": {
+    "visual_inspection": "pass",
+    "title_and_proposal_hash_visible": true,
+    "retained_block_and_exact_mismatch_visible": true,
+    "official_schema_and_physical_interpretation_visible": true,
+    "approval_scope_visible": true,
+    "prohibited_scope_visible": true,
+    "post_observation_bias_visible": true,
+    "decision_options_visible": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "blank_state_verified": true,
+    "human_decision_count": 0,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "This text-only surface contains no completed human decision.",
+    "Visual inspection verifies layout and blank state, not a future reviewer decision.",
+    "The surface contains no Sentinel, orbit, DEM, derived, or third-party document pixels."
+  ]
+}

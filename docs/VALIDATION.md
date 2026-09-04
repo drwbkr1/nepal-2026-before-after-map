@@ -217,6 +217,16 @@ Fourteen portable tests cover exact source narrowing, member selection, unsafe a
 
 After commit `87aa2610f1a89fe2d612f9cdd6cb88e63e833c8d` passed public CI run `33905019294`, the production runner was invoked once. Exact member identity, six annotation parses, embedded vectors, and six TIFF headers passed, but the frozen contract blocked all sources because the observed `pixelValue` was `Detected`, not `AMPLITUDE`. Independent post-run verification rehashed all 78 SAFE files totaling 5,183,550,209 bytes and found exact 29-file attempt inventories with no added sidecars. Preserve `records/readiness/radar-input/m2-s1-input-readiness-real-001.json`; do not rerun it under the current contract.
 
+The review-only label amendment uses the general source-gate validator and the human-review bundle utilities:
+
+```powershell
+python C:\Users\drewb\.codex\skills\gate-external-sources\scripts\validate_source_gate.py records/source-gates/m2-radar-input-label-specification-source-gate.json
+python C:\Users\drewb\.codex\skills\conduct-human-review\scripts\prepare_review_bundle.py reviews/m2-radar-input-readiness-amendment/review-bundle.json --project-root .
+python C:\Users\drewb\.codex\skills\conduct-human-review\scripts\review_response.py self-test
+```
+
+The source gate is structurally ready for metadata capture and review preparation only. The bundle binds seven exact artifacts and the review utility verifies an unattested blank response with one item and zero human decisions. These checks create no amendment or rerun authority.
+
 The optical input-readiness gate has portable and ArcGIS-native validation:
 
 ```powershell

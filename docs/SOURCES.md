@@ -17,6 +17,8 @@ The project uses **26 August 2026 debris avalanche and flash flood** as its work
 - [Copernicus Data Space Ecosystem: Sentinel-1](https://dataspace.copernicus.eu/data-collections/copernicus-sentinel-missions/sentinel-1)
 - [Copernicus Data Space Ecosystem: Sentinel-2](https://dataspace.copernicus.eu/data-collections/copernicus-sentinel-missions/sentinel-2)
 - [Sentinel-1 GRD API documentation](https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/S1GRD.html)
+- [Sentinel-1 Product Specification, S1-RS-MDA-52-7441](https://sentiwiki.copernicus.eu/__attachments/1673968/S1-RS-MDA-52-7441-Sentinel-1-Product-Specification-2025-3.16.3.pdf)
+- [SentiWiki Sentinel-1 processing and GRD interpretation](https://sentiwiki.copernicus.eu/web/s1-processing)
 - [Sentinel-2 Level-2A API documentation](https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/S2L2A.html)
 - [SentiWiki Sentinel-2 Level-2A products and BOA scaling](https://sentiwiki.copernicus.eu/web/s2-products)
 - [Sentinel-2 Product Specification Document 15.1](https://sentinels.copernicus.eu/documents/d/sentinel/sentinel-2-products-specification-document-15_1)
@@ -54,3 +56,5 @@ Event and documentation pages were reviewed on 31 August 2026 local time. The ex
 The four-tile DEM metadata, license, and anonymous-object route were reviewed on 3 September 2026 UTC. ArcGIS Pro's published Sentinel-1 workflow, terrain-flattening inputs, orbit-vector guidance, and EGM96 geoid behavior were rechecked on 3 September 2026 UTC. These documentation checks do not establish acquired bytes or usable pixels.
 
 Sentinel-2 Level-2A scaling, processing-baseline, band, and SCL documentation was rechecked on 3 September 2026 UTC. The synthetic ArcGIS exercise proves only the local implementation of those declared rules.
+
+The Sentinel-1 Product Specification and processing page were rechecked on 4 September 2026 UTC after the real input-readiness gate retained an `AMPLITUDE` versus `Detected` label block. They establish the XML value domain and GRD physical interpretation for amendment review only; they do not alter the failed result or authorize a corrected run.

@@ -56,6 +56,8 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Radar input gate result:** The fixed offline contract passed portable, synthetic ArcGIS, publication, and public-CI preconditions before one real invocation. All exact inventories, annotation structures, embedded vectors, and six ArcGIS U16 TIFF-header reads passed, but the aggregate result is **BLOCK** because the six real annotations use `Detected` where the frozen contract required `AMPLITUDE`. The receipt and unchanged custody are retained without retry or post-observation tuning. Any correction requires a separately reviewed amendment, and the missing post-event scenes still prevent a radar pair or baseline.
 
+**Radar input amendment review:** Current official Sentinel-1 documentation resolves the schema semantics in favor of `Detected`, while describing the physical values as detected amplitude. A review-only proposal changes only that label and makes the validator contract-driven, then requires new synthetic identities, public CI, and at most one real-002 read-only inspection. The exact bundle is ready with zero human decisions. Until owner approval, real-001 remains the terminal result and no correction runs.
+
 **Prepared optical input gate:** Two exact passing materialization receipts can feed an ArcGIS-native header-readiness runner. It re-hashes ten required members per SAFE, parses Level-2A scaling metadata, opens sixteen JP2 rasters, verifies EPSG:32645 10 m/20 m grids, and compares before/after headers before pixel access. Portable and ArcGIS synthetic tests pass; real input readiness remains deferred.
 
 **Work:**

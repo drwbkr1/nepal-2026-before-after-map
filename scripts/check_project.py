@@ -322,6 +322,15 @@ REQUIRED = [
     "records/surface-receipts/radar-input-readiness-synthetic-arcgis.json",
     "records/readiness/radar-input/m2-s1-input-readiness-real-001.json",
     "records/surface-receipts/radar-input-readiness-real-reconciliation.json",
+    "records/source-gates/m2-radar-input-label-specification-source-gate.json",
+    "contracts/milestone-002-radar-input-readiness-amendment-proposal.json",
+    "docs/M2_RADAR_INPUT_READINESS_AMENDMENT_REVIEW.md",
+    "docs/assets/m2-radar-input-readiness-amendment-review.png",
+    "scripts/render_m2_radar_input_readiness_amendment_review.py",
+    "records/surface-receipts/m2-radar-input-readiness-amendment-review.json",
+    "reviews/m2-radar-input-readiness-amendment/review-bundle.json",
+    "reviews/m2-radar-input-readiness-amendment/review-contract.json",
+    "reviews/m2-radar-input-readiness-amendment/blank-response.json",
     "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-001.json",
     "records/surface-receipts/radar-input-readiness-synthetic-arcgis-attempt-002-failure.json",
     "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-003.json",
@@ -553,6 +562,12 @@ def main() -> None:
     radar_input_failure = json.loads((ROOT / "records/surface-receipts/radar-input-readiness-synthetic-arcgis-attempt-002-failure.json").read_text(encoding="utf-8"))
     radar_input_real = json.loads((ROOT / "records/readiness/radar-input/m2-s1-input-readiness-real-001.json").read_text(encoding="utf-8"))
     radar_input_real_reconciliation = json.loads((ROOT / "records/surface-receipts/radar-input-readiness-real-reconciliation.json").read_text(encoding="utf-8"))
+    radar_label_source_gate = json.loads((ROOT / "records/source-gates/m2-radar-input-label-specification-source-gate.json").read_text(encoding="utf-8"))
+    radar_label_amendment = json.loads((ROOT / "contracts/milestone-002-radar-input-readiness-amendment-proposal.json").read_text(encoding="utf-8"))
+    radar_label_review_surface = json.loads((ROOT / "records/surface-receipts/m2-radar-input-readiness-amendment-review.json").read_text(encoding="utf-8"))
+    radar_label_review_bundle = json.loads((ROOT / "reviews/m2-radar-input-readiness-amendment/review-bundle.json").read_text(encoding="utf-8"))
+    radar_label_review_contract = json.loads((ROOT / "reviews/m2-radar-input-readiness-amendment/review-contract.json").read_text(encoding="utf-8"))
+    radar_label_blank_response = json.loads((ROOT / "reviews/m2-radar-input-readiness-amendment/blank-response.json").read_text(encoding="utf-8"))
     goal = json.loads((ROOT / "records/long-term-goal.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
@@ -3262,6 +3277,100 @@ def main() -> None:
         ))
     ):
         fail("Sentinel-1 real input-readiness reconciliation result or boundary differs")
+    if (
+        sha256("records/source-gates/m2-radar-input-label-specification-source-gate.json") != "0bf61ef4d72444bcba3bd753fe15511cdebc87288d0d4dfeda9a9bbaeaeb2daf"
+        or radar_label_source_gate.get("contract_version") != "source-gate/v1"
+        or radar_label_source_gate.get("decision", {}).get("status") != "ready"
+        or radar_label_source_gate.get("decision", {}).get("approved_actions") != ["metadata_capture", "update_project_records"]
+        or radar_label_source_gate.get("findings", {}).get("schema_value_domain") != ["Complex", "Detected"]
+        or radar_label_source_gate.get("findings", {}).get("image_information_pixel_value_domain") != ["Detected", "Complex"]
+        or radar_label_source_gate.get("findings", {}).get("failed_contract_value") != "AMPLITUDE"
+        or radar_label_source_gate.get("findings", {}).get("observed_real_value") != "Detected"
+        or [item.get("source_id") for item in radar_label_source_gate.get("sources", [])] != ["S1-PSD-2025", "S1-PROCESSING-LIVE"]
+        or any(
+            criterion.get("required") is not True or criterion.get("status") != "pass" or not criterion.get("evidence")
+            for source in radar_label_source_gate.get("sources", [])
+            for criterion in source.get("criteria", [])
+        )
+    ):
+        fail("Sentinel-1 annotation-label official source gate differs")
+    expected_label_proposal_sha = "ebdcb763afd99ea23090c9bd83fd9e9cb6cb8dfbb2b5fed60edb80f1fa61c731"
+    label_proposal_bindings = radar_label_amendment.get("bindings", {})
+    if (
+        sha256("contracts/milestone-002-radar-input-readiness-amendment-proposal.json") != expected_label_proposal_sha
+        or radar_label_amendment.get("status") != "proposed_inactive_owner_review_required"
+        or radar_label_amendment.get("authority", {}).get("human_review_required") is not True
+        or radar_label_amendment.get("authority", {}).get("this_proposal_creates_authority") is not False
+        or label_proposal_bindings.get("failed_contract_sha256") != sha256("config/qa/radar-input-readiness-contract.json")
+        or label_proposal_bindings.get("failed_real_receipt_sha256") != sha256("records/readiness/radar-input/m2-s1-input-readiness-real-001.json")
+        or label_proposal_bindings.get("failed_result_reconciliation_sha256") != sha256("records/surface-receipts/radar-input-readiness-real-reconciliation.json")
+        or label_proposal_bindings.get("official_source_gate_sha256") != sha256("records/source-gates/m2-radar-input-label-specification-source-gate.json")
+        or radar_label_amendment.get("proposed_exact_change", {}).get("from") != "AMPLITUDE"
+        or radar_label_amendment.get("proposed_exact_change", {}).get("to") != "Detected"
+        or radar_label_amendment.get("decision_semantics", {}).get("baseline_processing_released_by_pass") is not False
+        or radar_label_amendment.get("claim_boundary", {}).get("amendment_active") is not False
+        or radar_label_amendment.get("claim_boundary", {}).get("corrected_real_run_executed") is not False
+    ):
+        fail("Sentinel-1 input-readiness label amendment proposal differs or is active")
+    if (
+        radar_label_review_surface.get("status") != "pass_blank_review_surface"
+        or radar_label_review_surface.get("artifact", {}).get("sha256") != sha256("docs/assets/m2-radar-input-readiness-amendment-review.png")
+        or radar_label_review_surface.get("bindings", {}).get("proposal_sha256") != expected_label_proposal_sha
+        or radar_label_review_surface.get("bindings", {}).get("source_gate_sha256") != sha256("records/source-gates/m2-radar-input-label-specification-source-gate.json")
+        or radar_label_review_surface.get("bindings", {}).get("failed_real_receipt_sha256") != sha256("records/readiness/radar-input/m2-s1-input-readiness-real-001.json")
+        or radar_label_review_surface.get("bindings", {}).get("render_script_sha256") != sha256("scripts/render_m2_radar_input_readiness_amendment_review.py")
+        or radar_label_review_surface.get("validation", {}).get("visual_inspection") != "pass"
+        or radar_label_review_surface.get("validation", {}).get("blank_state_verified") is not True
+        or radar_label_review_surface.get("validation", {}).get("human_decision_count") != 0
+    ):
+        fail("Sentinel-1 label-amendment review surface differs or is not blank")
+    expected_label_bundle_sha = "831df5d5aae06862514667ad861c815154085fa3c546039e60f517d38ee442ff"
+    if (
+        sha256("reviews/m2-radar-input-readiness-amendment/review-bundle.json") != expected_label_bundle_sha
+        or radar_label_review_bundle.get("template") is not False
+        or radar_label_review_bundle.get("candidate_identity") != f"M2-RADAR-INPUT-READINESS-AMENDMENT-PROPOSAL-SHA256:{expected_label_proposal_sha}"
+        or radar_label_review_bundle.get("review_surface") != {
+            "artifact_id": "review-surface",
+            "blank_state_verified": True,
+            "completion_controls_verified": True,
+            "export_verified": True,
+        }
+    ):
+        fail("Sentinel-1 label-amendment review bundle identity differs")
+    for artifact in radar_label_review_bundle.get("artifacts", []):
+        relative = artifact.get("path")
+        if not isinstance(relative, str) or not (ROOT / relative).is_file() or artifact.get("sha256") != sha256(relative):
+            fail(f"Sentinel-1 label-amendment bundle artifact differs: {relative}")
+        for receipt in artifact.get("render_receipts", []):
+            receipt_ref = receipt.get("path")
+            if not isinstance(receipt_ref, str) or not (ROOT / receipt_ref).is_file() or receipt.get("sha256") != sha256(receipt_ref):
+                fail(f"Sentinel-1 label-amendment bundle render receipt differs: {receipt_ref}")
+    if (
+        radar_label_review_contract.get("template") is not False
+        or radar_label_review_contract.get("review_bundle", {}).get("manifest_sha256") != expected_label_bundle_sha
+        or radar_label_review_contract.get("review_bundle", {}).get("rendered_surface_verified") is not True
+        or radar_label_review_contract.get("allowed_decisions") != ["approve", "revise", "defer"]
+        or radar_label_review_contract.get("required_attestation") is not True
+        or radar_label_review_contract.get("items") != [{
+            "item_id": "M2-RADAR-INPUT-LABEL-AMENDMENT-001",
+            "evidence_sha256": expected_label_bundle_sha,
+        }]
+    ):
+        fail("Sentinel-1 label-amendment review contract differs")
+    if (
+        radar_label_blank_response.get("review_id") != "m2-radar-input-readiness-amendment-review-001"
+        or radar_label_blank_response.get("completed") is not False
+        or radar_label_blank_response.get("reviewer", {}).get("attestation") is not False
+        or radar_label_blank_response.get("review_started_at_utc") is not None
+        or radar_label_blank_response.get("review_completed_at_utc") is not None
+        or radar_label_blank_response.get("responses") != [{
+            "item_id": "M2-RADAR-INPUT-LABEL-AMENDMENT-001",
+            "evidence_sha256": expected_label_bundle_sha,
+            "decision": None,
+            "notes": "",
+        }]
+    ):
+        fail("Sentinel-1 label-amendment blank response contains a decision or differs")
     if aoi_reconciliation["contract_sha256"] != sha256("reviews/m1-aoi/review-contract.json"):
         fail("AOI reconciliation does not bind the exact historical review contract")
     if approval["status"] != "approved" or approval["reviewed_aoi_sha256"] != sha256("config/aoi/draft-study-areas.geojson"):
@@ -5100,6 +5209,34 @@ def main() -> None:
         }
     ):
         fail("EVID-0069 Sentinel-1 real input-readiness result differs or overclaims")
+
+    radar_label_review_evidence = ledger_by_id.get("EVID-0070")
+    if (
+        not isinstance(radar_label_review_evidence, dict)
+        or radar_label_review_evidence.get("status") != "review_ready_zero_human_decisions"
+        or radar_label_review_evidence.get("source_gate_sha256") != sha256("records/source-gates/m2-radar-input-label-specification-source-gate.json")
+        or radar_label_review_evidence.get("proposal_sha256") != sha256("contracts/milestone-002-radar-input-readiness-amendment-proposal.json")
+        or radar_label_review_evidence.get("review_bundle_sha256") != sha256("reviews/m2-radar-input-readiness-amendment/review-bundle.json")
+        or radar_label_review_evidence.get("review_contract_sha256") != sha256("reviews/m2-radar-input-readiness-amendment/review-contract.json")
+        or radar_label_review_evidence.get("blank_response_sha256") != sha256("reviews/m2-radar-input-readiness-amendment/blank-response.json")
+        or radar_label_review_evidence.get("surface_receipt_sha256") != sha256("records/surface-receipts/m2-radar-input-readiness-amendment-review.json")
+        or radar_label_review_evidence.get("source_findings") != radar_label_source_gate.get("findings")
+        or radar_label_review_evidence.get("review_state") != {
+            "item_count": 1,
+            "human_decision_count": 0,
+            "completed": False,
+            "attestation": False,
+            "allowed_decisions": ["approve", "revise", "defer"],
+        }
+        or any(radar_label_review_evidence.get("assertions", {}).get(key) is not False for key in (
+            "third_party_document_downloaded_to_project", "failed_contract_or_receipt_modified",
+            "amendment_active", "corrected_contract_created", "synthetic_amendment_run_executed",
+            "real_002_executed", "real_product_pixel_values_examined", "baseline_processing_released",
+            "scientific_admission_authorized", "current_checkpoint_changed",
+            "sentinel_recovery_authority_created", "orbit_recovery_authority_created",
+        ))
+    ):
+        fail("EVID-0070 Sentinel-1 label-amendment review readiness differs or overclaims")
 
     violations = []
     for relative in tracked_files():

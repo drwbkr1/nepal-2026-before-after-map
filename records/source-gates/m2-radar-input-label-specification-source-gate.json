@@ -1,0 +1,322 @@
+{
+  "contract_version": "source-gate/v1",
+  "assessment_id": "NEPAL-M2-RADAR-INPUT-LABEL-SPECIFICATION-SOURCE-GATE-001",
+  "assessed_at": "2026-09-04T18:25:47Z",
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-activation-approval.json",
+    "authorized_actions": [
+      "metadata_capture",
+      "update_project_records"
+    ],
+    "expires_at_utc": null
+  },
+  "intended_use": {
+    "summary": "Use current official Sentinel-1 documentation only to determine the valid GRD annotation pixelValue label and prepare a review-only one-field contract amendment.",
+    "planned_actions": [
+      "metadata_capture",
+      "update_project_records"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "S1-PSD-2025",
+      "name": "Sentinel-1 Product Specification, S1-RS-MDA-52-7441",
+      "locator": "https://sentiwiki.copernicus.eu/__attachments/1673968/S1-RS-MDA-52-7441-Sentinel-1-Product-Specification-2025-3.16.3.pdf",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://sentiwiki.copernicus.eu/__attachments/1673968/S1-RS-MDA-52-7441-Sentinel-1-Product-Specification-2025-3.16.3.pdf",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "Official SentiWiki PDF, ref S1-RS-MDA-52-7441; file locator says 3.16.3 while the PDF body reports issue/revision 3/16/2 dated 2025-10-01. Both identifiers are retained."
+            }
+          ],
+          "note": "Official SentiWiki PDF, ref S1-RS-MDA-52-7441; file locator says 3.16.3 while the PDF body reports issue/revision 3/16/2 dated 2025-10-01. Both identifiers are retained."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://sentiwiki.copernicus.eu/__attachments/1673968/S1-RS-MDA-52-7441-Sentinel-1-Product-Specification-2025-3.16.3.pdf",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "The Copernicus Sentinel-1 SentiWiki document library publishes this mission product specification as the detailed format authority for Level-1 and Level-2 products."
+            }
+          ],
+          "note": "The Copernicus Sentinel-1 SentiWiki document library publishes this mission product specification as the detailed format authority for Level-1 and Level-2 products."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://sentiwiki.copernicus.eu/__attachments/1673968/S1-RS-MDA-52-7441-Sentinel-1-Product-Specification-2025-3.16.3.pdf",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "The official HTTPS PDF was readable without an account, payment, or interactive terms action during this assessment."
+            }
+          ],
+          "note": "The official HTTPS PDF was readable without an account, payment, or interactive terms action during this assessment."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://sentiwiki.copernicus.eu/__attachments/1673968/S1-RS-MDA-52-7441-Sentinel-1-Product-Specification-2025-3.16.3.pdf",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "Use is limited to reading, factual schema extraction, short attributed review text, and linking. The PDF will not be copied into Git or redistributed."
+            }
+          ],
+          "note": "Use is limited to reading, factual schema extraction, short attributed review text, and linking. The PDF will not be copied into Git or redistributed."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "https://sentiwiki.copernicus.eu/__attachments/1673968/S1-RS-MDA-52-7441-Sentinel-1-Product-Specification-2025-3.16.3.pdf",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "The source is publisher-hosted on SentiWiki and identifies ref S1-RS-MDA-52-7441 and MPC ref MPC-0240 in its body."
+            }
+          ],
+          "note": "The source is publisher-hosted on SentiWiki and identifies ref S1-RS-MDA-52-7441 and MPC ref MPC-0240 in its body."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "https://sentiwiki.copernicus.eu/__attachments/1673968/S1-RS-MDA-52-7441-Sentinel-1-Product-Specification-2025-3.16.3.pdf",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "The assessment binds the official locator, internal document reference, internal issue/date, and exact field/table locations rather than a local unverified copy."
+            }
+          ],
+          "note": "The assessment binds the official locator, internal document reference, internal issue/date, and exact field/table locations rather than a local unverified copy."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "https://sentiwiki.copernicus.eu/__attachments/1673968/S1-RS-MDA-52-7441-Sentinel-1-Product-Specification-2025-3.16.3.pdf",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "The specification defines pixelValueType as Complex or Detected and the imageInformation pixelValue field as Detected or Complex; it directly resolves the failed label check."
+            }
+          ],
+          "note": "The specification defines pixelValueType as Complex or Detected and the imageInformation pixelValue field as Detected or Complex; it directly resolves the failed label check."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "https://sentiwiki.copernicus.eu/__attachments/1673968/S1-RS-MDA-52-7441-Sentinel-1-Product-Specification-2025-3.16.3.pdf",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "The public technical specification contains no project secret, personal data, executable payload, or required authentication; no local content acquisition is planned."
+            }
+          ],
+          "note": "The public technical specification contains no project secret, personal data, executable payload, or required authentication; no local content acquisition is planned."
+        }
+      ]
+    },
+    {
+      "source_id": "S1-PROCESSING-LIVE",
+      "name": "Copernicus Sentinel-1 Processing page",
+      "locator": "https://sentiwiki.copernicus.eu/web/s1-processing",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://sentiwiki.copernicus.eu/web/s1-processing",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "Current official SentiWiki Sentinel-1 processing page, Ground Range Detected subsection."
+            }
+          ],
+          "note": "Current official SentiWiki Sentinel-1 processing page, Ground Range Detected subsection."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://sentiwiki.copernicus.eu/web/s1-processing",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "The Copernicus Sentinel-1 technical portal publishes the mission processing description and links its statements to the product specification and definition."
+            }
+          ],
+          "note": "The Copernicus Sentinel-1 technical portal publishes the mission processing description and links its statements to the product specification and definition."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://sentiwiki.copernicus.eu/web/s1-processing",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "The official HTTPS page was readable without an account, payment, or interactive terms action during this assessment."
+            }
+          ],
+          "note": "The official HTTPS page was readable without an account, payment, or interactive terms action during this assessment."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://sentiwiki.copernicus.eu/web/s1-processing",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "Use is limited to factual paraphrase, short attributed review text, and linking; no page copy or third-party media will be redistributed."
+            }
+          ],
+          "note": "Use is limited to factual paraphrase, short attributed review text, and linking; no page copy or third-party media will be redistributed."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "https://sentiwiki.copernicus.eu/web/s1-processing",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "The page is hosted by the Copernicus Sentinel-1 SentiWiki and describes the current Level-1 processing chain."
+            }
+          ],
+          "note": "The page is hosted by the Copernicus Sentinel-1 SentiWiki and describes the current Level-1 processing chain."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "https://sentiwiki.copernicus.eu/web/s1-processing",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "The assessment records the canonical official URL and live observation time; this page is corroborating evidence rather than the schema authority."
+            }
+          ],
+          "note": "The assessment records the canonical official URL and live observation time; this page is corroborating evidence rather than the schema authority."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "https://sentiwiki.copernicus.eu/web/s1-processing",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "The GRD subsection states that the product is detected and that pixel values represent detected amplitude, distinguishing schema label from physical interpretation."
+            }
+          ],
+          "note": "The GRD subsection states that the product is detected and that pixel values represent detected amplitude, distinguishing schema label from physical interpretation."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "https://sentiwiki.copernicus.eu/web/s1-processing",
+              "observed_at": "2026-09-04T18:25:47Z",
+              "note": "The public documentation contains no project secret, personal data, executable payload, or required authentication."
+            }
+          ],
+          "note": "The public documentation contains no project secret, personal data, executable payload, or required authentication."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "ready",
+    "blocking_reasons": [],
+    "live_verification_pending": [],
+    "approved_actions": [
+      "metadata_capture",
+      "update_project_records"
+    ]
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": [
+      "record official source metadata",
+      "prepare a review-only contract amendment",
+      "prepare a blank owner-review bundle"
+    ],
+    "requires_explicit_authorization": [
+      "activate an amended contract",
+      "rerun real input readiness",
+      "authenticate",
+      "accept terms",
+      "purchase",
+      "download content",
+      "upload content",
+      "publish or redistribute third-party content"
+    ]
+  },
+  "findings": {
+    "schema_value_domain": [
+      "Complex",
+      "Detected"
+    ],
+    "image_information_pixel_value_domain": [
+      "Detected",
+      "Complex"
+    ],
+    "grd_physical_interpretation": "detected amplitude",
+    "failed_contract_value": "AMPLITUDE",
+    "observed_real_value": "Detected",
+    "conclusion": "The failed gate used a physical interpretation word where the official XML schema requires the Detected label for this GRD product."
+  },
+  "limitations": [
+    "The official PDF locator filename and the internal issue/revision text differ; both are disclosed rather than normalized.",
+    "No third-party document was downloaded into project custody or Git, so no local PDF checksum is claimed.",
+    "Source readiness authorizes only metadata recording and review preparation, not contract activation or another real-data run."
+  ]
+}

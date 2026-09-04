@@ -319,3 +319,11 @@
 **Reason:** All three source inventories, all six annotation structures and embedded-vector checks, and all six ArcGIS TIFF-header reads passed, but every real annotation reported `pixelValue` as `Detected`; the frozen contract required `AMPLITUDE`. Changing the rule after observing the data would erase the failed route rather than evaluate it.
 
 **Status:** Receipt SHA-256 `feab3645709df16306c81dae959a8693925a7c6f919f2a1e414cf3765c3a5b0c` is retained. Independent post-run verification found all three 29-file attempt inventories exact, all 78 SAFE files and 5,183,550,209 bytes unchanged, and no added sidecar. No pixel, baseline, change, or scientific claim is released. Any proposed correction must first cite an authoritative Sentinel-1 product specification and undergo separate review.
+
+## D-054 — Prepare a source-bound one-field amendment without activating it
+
+**Decision:** Use the official Sentinel-1 Product Specification and processing page to prepare a review-only proposal that replaces the failed contract's `AMPLITUDE` schema label with `Detected`, while preserving the physical interpretation as detected amplitude and leaving every other gate rule unchanged.
+
+**Reason:** The specification's `pixelValueType` domain is `Complex` or `Detected`, and the image-information field uses those same labels. The processing description separately explains that GRD values represent detected amplitude. The original contract conflated those two layers, but changing a rule after seeing real inputs requires explicit owner review and a clear post-observation limitation.
+
+**Status:** The source gate is ready for metadata and review preparation only. Proposal SHA-256 `ebdcb763afd99ea23090c9bd83fd9e9cb6cb8dfbb2b5fed60edb80f1fa61c731` and review bundle SHA-256 `831df5d5aae06862514667ad861c815154085fa3c546039e60f517d38ee442ff` are exact. The blank response contains one item, zero decisions, and no attestation. No corrected contract, test run, publication, real-002 inspection, pixel use, or baseline action is authorized.

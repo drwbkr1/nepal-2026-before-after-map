@@ -1,0 +1,119 @@
+{
+  "proposal_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-INPUT-READINESS-AMENDMENT-001",
+  "created_at_utc": "2026-09-04T18:27:02Z",
+  "status": "proposed_inactive_owner_review_required",
+  "purpose": "Correct one predeclared Sentinel-1 GRD annotation-label requirement after preserving the exact failed real run.",
+  "authority": {
+    "mode": "proposed_only",
+    "parent_authority_ref": "records/source-gates/m2-activation-approval.json",
+    "human_review_required": true,
+    "this_proposal_creates_authority": false,
+    "activation_before_exact_owner_approval": false
+  },
+  "bindings": {
+    "failed_contract_ref": "config/qa/radar-input-readiness-contract.json",
+    "failed_contract_sha256": "ad478b8abd4e4a47c8d16012fffc2b67770681538bddc23b500ce5b32b17428a",
+    "failed_real_receipt_ref": "records/readiness/radar-input/m2-s1-input-readiness-real-001.json",
+    "failed_real_receipt_sha256": "feab3645709df16306c81dae959a8693925a7c6f919f2a1e414cf3765c3a5b0c",
+    "failed_result_reconciliation_ref": "records/surface-receipts/radar-input-readiness-real-reconciliation.json",
+    "failed_result_reconciliation_sha256": "5e4f703b938f9adaf10a6f37ec5195d1e1fc426197ffa1fa6a712ba0cb4de0a6",
+    "official_source_gate_ref": "records/source-gates/m2-radar-input-label-specification-source-gate.json",
+    "official_source_gate_sha256": "0bf61ef4d72444bcba3bd753fe15511cdebc87288d0d4dfeda9a9bbaeaeb2daf",
+    "published_gate_commit_sha": "87aa2610f1a89fe2d612f9cdd6cb88e63e833c8d",
+    "published_gate_ci_run_id": 33905019294,
+    "result_reconciliation_commit_sha": "05202620b96bd0f712949246dc89bb8ef42b9542",
+    "result_reconciliation_ci_run_id": 33905584334
+  },
+  "authoritative_findings": [
+    {
+      "source_id": "S1-PSD-2025",
+      "locator": "https://sentiwiki.copernicus.eu/__attachments/1673968/S1-RS-MDA-52-7441-Sentinel-1-Product-Specification-2025-3.16.3.pdf",
+      "finding": "The official product specification defines pixelValueType as Complex or Detected and the imageInformation pixelValue field as Detected or Complex."
+    },
+    {
+      "source_id": "S1-PROCESSING-LIVE",
+      "locator": "https://sentiwiki.copernicus.eu/web/s1-processing",
+      "finding": "The official GRD processing description states that GRD products are detected and their pixel values represent detected amplitude."
+    }
+  ],
+  "preserved_failure": {
+    "status": "block",
+    "source_block_count": 3,
+    "blocking_error_count": 6,
+    "failed_requirement": {
+      "field": "imageAnnotation/imageInformation/pixelValue",
+      "required_value": "AMPLITUDE"
+    },
+    "observed_value": "Detected",
+    "all_other_bound_inventory_annotation_orbit_and_header_checks_passed": true,
+    "real_product_pixel_values_examined": false,
+    "external_custody_unchanged": true,
+    "failed_receipt_remains_immutable": true
+  },
+  "proposed_exact_change": {
+    "field": "metadata_checks.pixel_value",
+    "from": "AMPLITUDE",
+    "to": "Detected",
+    "physical_interpretation_note": "For these GRD products, the schema label is Detected and the physical pixel interpretation is detected amplitude.",
+    "implementation_change": "Read the expected pixelValue from the amended contract instead of hard-coding AMPLITUDE in portable validation.",
+    "unchanged_checks": [
+      "three exact pre-event source identities and receipt and manifest hashes",
+      "nine required SAFE member roles per source and selected-member rehashing",
+      "DTD and entity refusal and exact mission, GRD, IW, polarization, acquisition, absolute-orbit, and direction checks",
+      "finite strictly increasing embedded orbit vectors bracketing acquisition",
+      "16 bit unsigned integer outputPixels requirement",
+      "ArcGIS TIFF, one-band U16, dimension, and VV/VH consistency checks",
+      "complete before and after external attempt inventories",
+      "network, authentication, credential, mutation, pixel-decoding, and derived-raster prohibitions"
+    ]
+  },
+  "bounded_actions_if_approved": [
+    "preserve the current contract, real BLOCK receipt, reconciliation, prepublication attempts, commits, and CI runs unchanged",
+    "create a new versioned contract whose only observed-data semantic correction is pixelValue Detected instead of AMPLITUDE and whose source citations bind this proposal",
+    "update the portable validator to compare pixelValue with the new contract value and add focused tests for Detected acceptance and AMPLITUDE refusal",
+    "run synthetic ArcGIS validation only to a new identity and preserve every attempt",
+    "publish the amended gate and require successful public CI for its exact commit",
+    "after that CI succeeds, run one read-only inspection of the same three exact materialized sources to a new no-replace real-002 receipt",
+    "reconcile the exact pass or block without retry, threshold changes, or downstream release"
+  ],
+  "stop_rules": [
+    "Stop if the amended implementation changes any requirement outside the exact pixelValue label and contract-driven comparison.",
+    "Stop if a bound source, receipt, manifest, file, or publication identity differs.",
+    "Stop and preserve the result if synthetic or real validation blocks or any external file changes.",
+    "Do not retry real-002 under the approved amendment."
+  ],
+  "decision_semantics": {
+    "approval_effect": "authorizes only the bounded amendment implementation, validation, publication, one real-002 read-only inspection, and exact reconciliation",
+    "known_observation_contamination": "The correction is post-observation and expected to clear the already observed label mismatch; it is not a blind or independent validation.",
+    "possible_real_pass": "partial_pre_event_header_readiness_only",
+    "possible_real_block": "retained_terminal_amendment_attempt",
+    "baseline_processing_released_by_pass": false,
+    "scientific_admission_created_by_pass": false
+  },
+  "explicitly_not_authorized": [
+    "deleting, rewriting, superseding away, or reclassifying the failed real-001 receipt",
+    "any further Sentinel acquisition or recovery action",
+    "any orbit acquisition, application, or substitution",
+    "DEM vertical transformation or terrain-result approval",
+    "measurement-pixel decoding, calibration, terrain correction, registration, baseline generation, or change analysis",
+    "new data sources, product substitution, account action, terms acceptance, credential disclosure, cost, or third-party document redistribution"
+  ],
+  "owner_decision_options": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "claim_boundary": {
+    "current_contract_result_remains_block": true,
+    "amendment_active": false,
+    "corrected_real_run_executed": false,
+    "pixel_values_examined": false,
+    "pixel_usability_established": false,
+    "complete_pair_established": false,
+    "baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  },
+  "next_action": "Prepare and verify a blank exact-bundle owner review. No amendment action is released before a completed hash-bound approval."
+}
