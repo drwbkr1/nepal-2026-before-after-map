@@ -49,6 +49,8 @@ REQUIRED = [
     "contracts/milestone-002-orbit-amendment-proposal.json",
     "contracts/m2-orbit-intake-candidate.json",
     "contracts/m2-orbit-offline-verification-candidate.json",
+    "contracts/m2-orbit-intake.json",
+    "contracts/m2-orbit-offline-verification.json",
     "records/project-control-profile.json",
     "records/long-term-goal.json",
     "records/evidence-ledger.jsonl",
@@ -99,6 +101,19 @@ REQUIRED = [
     "records/source-gates/m2-orbit-metadata-receipt.json",
     "records/source-gates/m2-orbit-candidate-manifest.json",
     "records/source-gates/m2-orbit-source-gate.json",
+    "records/source-gates/m2-orbit-amendment-review-reconciliation.json",
+    "records/source-gates/m2-orbit-amendment-approval.json",
+    "records/source-gates/m2-orbit-live-source-gate.json",
+    "records/acquisition/orbit-amendment-activation.json",
+    "records/acquisition/orbit-preflight.json",
+    "records/acquisition/orbit-custody-initialization-attempt-001-failure.json",
+    "records/acquisition/orbit-custody-initialization-attempt-002-readiness.json",
+    "records/acquisition/orbit-custody-initialization.json",
+    "records/acquisition/orbit-runner-readiness.json",
+    "records/acquisition/orbit-intake-schema-validation-failure.json",
+    "records/acquisition/orbit-intake-schema-correction.json",
+    "records/acquisition/orbit-intake-activation-label-inconsistency.json",
+    "records/acquisition/orbit-intake-activation-label-correction.json",
     "docs/M1_SOURCE_MANIFEST_REVIEW.md",
     "docs/assets/m1-source-manifest-review.png",
     "records/surface-receipts/m1-source-manifest-review.json",
@@ -210,6 +225,9 @@ REQUIRED = [
     "tests/test_m2_dem_active_geotiff.py",
     "tests/test_m2_dem_vertical_datum_review.py",
     "tests/test_m2_orbit_amendment.py",
+    "tests/test_m2_orbit_activation.py",
+    "tests/test_m2_orbit_preflight.py",
+    "tests/test_m2_orbit_io.py",
     "tests/test_dem_terrain_quality_core.py",
     "tests/test_radar_processing_contract.py",
     "tests/test_optical_processing_core.py",
@@ -233,6 +251,12 @@ REQUIRED = [
     "scripts/prepare_m2_orbit_amendment.py",
     "scripts/prepare_m2_orbit_controls.py",
     "scripts/render_m2_orbit_amendment_review.py",
+    "scripts/activate_m2_orbit_amendment.py",
+    "scripts/run_m2_orbit_preflight.py",
+    "scripts/initialize_m2_orbit_custody.py",
+    "scripts/m2_orbit_io_core.py",
+    "scripts/acquire_m2_orbit_file.py",
+    "scripts/verify_m2_orbit_eof.py",
     "scripts/dem_terrain_quality_core.py",
     "scripts/inspect_m2_dem_terrain_quality_arcgis.py",
     "scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py",
@@ -286,19 +310,25 @@ def sha256(relative: str) -> str:
     return hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
 
 
-def validate_review_bundle(bundle_relative: str, contract_relative: str) -> None:
+def validate_review_bundle(
+    bundle_relative: str,
+    contract_relative: str,
+    *,
+    verify_current_artifacts: bool = True,
+) -> None:
     bundle = json.loads((ROOT / bundle_relative).read_text(encoding="utf-8"))
     review_contract = json.loads((ROOT / contract_relative).read_text(encoding="utf-8"))
     if review_contract["review_bundle"]["manifest_sha256"] != sha256(bundle_relative):
         fail(f"review contract does not bind exact bundle bytes: {bundle_relative}")
     if review_contract["review_bundle"]["candidate_identity"] != bundle["candidate_identity"]:
         fail(f"review contract candidate differs from bundle: {bundle_relative}")
-    for artifact in bundle["artifacts"]:
-        if artifact["sha256"] != sha256(artifact["path"]):
-            fail(f"review bundle artifact hash differs: {artifact['path']}")
-        for receipt in artifact["render_receipts"]:
-            if receipt["sha256"] != sha256(receipt["path"]):
-                fail(f"review bundle render receipt hash differs: {receipt['path']}")
+    if verify_current_artifacts:
+        for artifact in bundle["artifacts"]:
+            if artifact["sha256"] != sha256(artifact["path"]):
+                fail(f"review bundle artifact hash differs: {artifact['path']}")
+            for receipt in artifact["render_receipts"]:
+                if receipt["sha256"] != sha256(receipt["path"]):
+                    fail(f"review bundle render receipt hash differs: {receipt['path']}")
 
 
 def main() -> None:
@@ -364,6 +394,21 @@ def main() -> None:
     orbit_bundle = json.loads((ROOT / "reviews/m2-orbit-amendment/review-bundle.json").read_text(encoding="utf-8"))
     orbit_contract = json.loads((ROOT / "reviews/m2-orbit-amendment/review-contract.json").read_text(encoding="utf-8"))
     orbit_blank = json.loads((ROOT / "reviews/m2-orbit-amendment/blank-response.json").read_text(encoding="utf-8"))
+    orbit_reconciliation = json.loads((ROOT / "records/source-gates/m2-orbit-amendment-review-reconciliation.json").read_text(encoding="utf-8"))
+    orbit_approval = json.loads((ROOT / "records/source-gates/m2-orbit-amendment-approval.json").read_text(encoding="utf-8"))
+    orbit_active_intake = json.loads((ROOT / "contracts/m2-orbit-intake.json").read_text(encoding="utf-8"))
+    orbit_active_verification = json.loads((ROOT / "contracts/m2-orbit-offline-verification.json").read_text(encoding="utf-8"))
+    orbit_activation = json.loads((ROOT / "records/acquisition/orbit-amendment-activation.json").read_text(encoding="utf-8"))
+    orbit_live_gate = json.loads((ROOT / "records/source-gates/m2-orbit-live-source-gate.json").read_text(encoding="utf-8"))
+    orbit_preflight = json.loads((ROOT / "records/acquisition/orbit-preflight.json").read_text(encoding="utf-8"))
+    orbit_custody_failure = json.loads((ROOT / "records/acquisition/orbit-custody-initialization-attempt-001-failure.json").read_text(encoding="utf-8"))
+    orbit_custody_readiness = json.loads((ROOT / "records/acquisition/orbit-custody-initialization-attempt-002-readiness.json").read_text(encoding="utf-8"))
+    orbit_custody = json.loads((ROOT / "records/acquisition/orbit-custody-initialization.json").read_text(encoding="utf-8"))
+    orbit_runner_readiness = json.loads((ROOT / "records/acquisition/orbit-runner-readiness.json").read_text(encoding="utf-8"))
+    orbit_intake_schema_failure = json.loads((ROOT / "records/acquisition/orbit-intake-schema-validation-failure.json").read_text(encoding="utf-8"))
+    orbit_intake_schema_correction = json.loads((ROOT / "records/acquisition/orbit-intake-schema-correction.json").read_text(encoding="utf-8"))
+    orbit_intake_label_inconsistency = json.loads((ROOT / "records/acquisition/orbit-intake-activation-label-inconsistency.json").read_text(encoding="utf-8"))
+    orbit_intake_label_correction = json.loads((ROOT / "records/acquisition/orbit-intake-activation-label-correction.json").read_text(encoding="utf-8"))
     expected_dem_source_order = ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
     dem_current_assets = dem_intake_active.get("assets", [])
     if [asset.get("extensions", {}).get("source_id") for asset in dem_current_assets] != expected_dem_source_order:
@@ -425,14 +470,13 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-orbit-amendment-proposal.json"
-    ]:
-        fail("project profile must expose only the pending orbit amendment proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must clear the consumed orbit amendment proposal")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
-        "records/source-gates/m2-dem-amendment-approval.json"
+        "records/source-gates/m2-dem-amendment-approval.json",
+        "records/source-gates/m2-orbit-amendment-approval.json",
     ]:
-        fail("project profile must expose the exact active M2 DEM amendment")
+        fail("project profile must expose the exact active DEM and orbit amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -456,10 +500,26 @@ def main() -> None:
         "review_bundle_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e",
         "license_document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd",
     }
-    if profile["authority"].get("amendments") != [expected_dem_amendment_binding]:
-        fail("profile authority does not bind the exact DEM amendment")
-    if active_m2["authority"].get("amendments") != [expected_dem_amendment_binding]:
-        fail("active M2 authority does not bind the exact DEM amendment")
+    expected_orbit_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-orbit-amendment-approval.json"),
+        "proposal_ref": "contracts/milestone-002-orbit-amendment-proposal.json",
+        "proposal_sha256": "b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292",
+        "review_bundle_sha256": "ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1",
+        "authorized_orbit_type": "AUX_RESORB",
+        "authorized_source_count": 4,
+        "precise_substitution_authorized": False,
+    }
+    expected_amendments = [expected_dem_amendment_binding, expected_orbit_amendment_binding]
+    if profile["authority"].get("amendments") != expected_amendments:
+        fail("profile authority does not bind the exact DEM and orbit amendments")
+    if active_m2["authority"].get("amendments") != expected_amendments:
+        fail("active M2 authority does not bind the exact DEM and orbit amendments")
+    if active_m2.get("scope", {}).get("active_amendments") != [
+        "records/source-gates/m2-dem-amendment-approval.json",
+        "records/source-gates/m2-orbit-amendment-approval.json",
+    ]:
+        fail("active M2 scope does not expose both exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -473,8 +533,9 @@ def main() -> None:
             fail(f"project profile must bind {approved_unit} to the exact DEM amendment approval")
     if profile_gates.get("M2-DEM-TERRAIN-RESULT-REVIEW", {}).get("authority_ref") != "reviews/m2-dem-terrain-result/review-contract.json":
         fail("project profile must expose the exact terrain-result human-review gate")
-    if profile_gates.get("M2-ORBIT-AMEND", {}).get("authority_ref") != "reviews/m2-orbit-amendment/review-contract.json":
-        fail("project profile must expose the exact orbit-amendment human-review gate")
+    for approved_unit in ("M2-ORBIT-AMEND", "M2-ORBIT-PREFLIGHT", "M2-ORBIT-ACQUIRE", "M2-ORBIT-VERIFY", "M2-ORBIT-APPLY"):
+        if profile_gates.get(approved_unit, {}).get("authority_ref") != "records/source-gates/m2-orbit-amendment-approval.json":
+            fail(f"project profile must bind {approved_unit} to the exact orbit amendment approval")
     if profile.get("parallel_checkpoints") != [
         {
             "checkpoint_id": expected_dem_checkpoint,
@@ -487,14 +548,17 @@ def main() -> None:
             "next_action": "Review bundle SHA-256 834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5 and approve, revise, or defer the terrain-only result; approval releases no vertical, radar, or scientific action.",
         },
         {
-            "checkpoint_id": "M2-ORBIT-AMENDMENT-REVIEW",
-            "authority_ref": "reviews/m2-orbit-amendment/review-contract.json",
-            "next_action": "Review bundle SHA-256 ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1 and approve, revise, or defer the exact four-file restituted-orbit proposal; no orbit payload or precise substitution is authorized before exact lock and reconciliation.",
+            "checkpoint_id": "M2-ORBIT-SENTINEL-CUSTODY",
+            "authority_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+            "next_action": "Resume the original Sentinel acquisition through its existing secret-safe session; orbit transfer remains blocked until each bound radar source is promoted and offline container-verified.",
         },
     ]:
         fail("project profile DEM parallel checkpoint differs")
-    if goal.get("active_amendments") != ["records/source-gates/m2-dem-amendment-approval.json"] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-AMENDMENT-REVIEW"]:
-        fail("long-term goal does not expose the active DEM and pending orbit checkpoints")
+    if goal.get("active_amendments") != [
+        "records/source-gates/m2-dem-amendment-approval.json",
+        "records/source-gates/m2-orbit-amendment-approval.json",
+    ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-SENTINEL-CUSTODY"]:
+        fail("long-term goal does not expose the active DEM and orbit checkpoints")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -554,14 +618,18 @@ def main() -> None:
     validate_review_bundle("reviews/m2-activation/review-bundle.json", "reviews/m2-activation/review-contract.json")
     validate_review_bundle("reviews/m2-dem-amendment/review-bundle.json", "reviews/m2-dem-amendment/review-contract.json")
     validate_review_bundle("reviews/m2-dem-vertical-datum/review-bundle.json", "reviews/m2-dem-vertical-datum/review-contract.json")
-    validate_review_bundle("reviews/m2-orbit-amendment/review-bundle.json", "reviews/m2-orbit-amendment/review-contract.json")
+    validate_review_bundle(
+        "reviews/m2-orbit-amendment/review-bundle.json",
+        "reviews/m2-orbit-amendment/review-contract.json",
+        verify_current_artifacts=False,
+    )
 
     expected_orbit_proposal_sha = "b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292"
     expected_orbit_bundle_sha = "ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1"
     if (
         orbit_proposal.get("status") != "proposed_not_active"
         or sha256("contracts/milestone-002-orbit-amendment-proposal.json") != expected_orbit_proposal_sha
-        or orbit_proposal.get("parent_contract_sha256") != sha256("contracts/milestone-002.json")
+        or orbit_proposal.get("parent_contract_sha256") != "fb85eb26d3143cd23cf96598a0447b9d5e6f3a3b70e8bdc35693bf52f7b1cbca"
         or orbit_proposal.get("parent_approval_sha256") != sha256("records/source-gates/m2-activation-approval.json")
         or orbit_proposal.get("candidate_manifest_sha256") != sha256("records/source-gates/m2-orbit-candidate-manifest.json")
         or orbit_proposal.get("metadata_receipt_sha256") != sha256("records/source-gates/m2-orbit-metadata-receipt.json")
@@ -635,6 +703,230 @@ def main() -> None:
         }
     ):
         fail("M2 orbit review surface, bundle, contract, or blank response differs")
+
+    if (
+        orbit_reconciliation.get("status") != "reconciled_exact_human_response"
+        or orbit_reconciliation.get("review_id") != "m2-orbit-amendment-review-001"
+        or orbit_reconciliation.get("contract_sha256") != sha256("reviews/m2-orbit-amendment/review-contract.json")
+        or orbit_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+        or orbit_reconciliation.get("human_decisions_fabricated") is not False
+        or orbit_reconciliation.get("downstream_authorization_created") is not False
+    ):
+        fail("M2 orbit amendment human response is not exactly reconciled")
+    if (
+        orbit_approval.get("status") != "approved"
+        or orbit_approval.get("review_bundle_manifest_sha256") != expected_orbit_bundle_sha
+        or orbit_approval.get("amendment_proposal_sha256") != expected_orbit_proposal_sha
+        or orbit_approval.get("review_reconciliation_sha256") != sha256("records/source-gates/m2-orbit-amendment-review-reconciliation.json")
+        or orbit_approval.get("locked_response_sha256") != orbit_reconciliation.get("response_sha256")
+        or orbit_approval.get("lock_receipt_sha256") != orbit_reconciliation.get("receipt_sha256")
+        or orbit_approval.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+        or orbit_approval.get("authorized_source_ids") != [f"M2-ORB-{index:03d}" for index in range(1, 5)]
+        or orbit_approval.get("authorized_sentinel_source_ids") != [f"M1-SRC-{index:03d}" for index in range(1, 7)]
+        or orbit_approval.get("authorized_orbit_type") != "AUX_RESORB"
+        or orbit_approval.get("orbit_quality", {}).get("selected_type") != "restituted"
+        or orbit_approval.get("orbit_quality", {}).get("later_precise_substitution_status") != "separately_gated_not_authorized"
+        or orbit_approval.get("credential_policy", {}).get("value_recorded") is not False
+        or orbit_approval.get("human_decisions_fabricated") is not False
+    ):
+        fail("M2 orbit amendment approval identity or bounded scope differs")
+    active_orbit_assets = orbit_active_intake.get("assets", [])
+    if (
+        orbit_active_intake.get("status") != "active"
+        or orbit_active_intake.get("extensions", {}).get("status") != "active_authorized_preflight_passed_custody_initialized"
+        or orbit_active_intake.get("extensions", {}).get("scope_authority") != "granted_exact_four_resorb_files"
+        or orbit_active_intake.get("extensions", {}).get("amendment_approval_sha256") != sha256("records/source-gates/m2-orbit-amendment-approval.json")
+        or orbit_active_intake.get("extensions", {}).get("preflight_sha256") != sha256("records/acquisition/orbit-preflight.json")
+        or orbit_active_intake.get("extensions", {}).get("source_gate_sha256") != sha256("records/source-gates/m2-orbit-live-source-gate.json")
+        or orbit_active_intake.get("extensions", {}).get("custody_initialization_sha256") != sha256("records/acquisition/orbit-custody-initialization.json")
+        or orbit_active_intake.get("extensions", {}).get("sentinel_custody_prerequisite_status") != "pending_zero_of_six_promoted_and_verified"
+        or [asset.get("extensions", {}).get("source_id") for asset in active_orbit_assets] != [f"M2-ORB-{index:03d}" for index in range(1, 5)]
+        or any(asset.get("state") != "authorized" or asset.get("attempts") != [] for asset in active_orbit_assets)
+    ):
+        fail("active M2 orbit intake identity, custody, or pending-prerequisite state differs")
+    if (
+        orbit_active_verification.get("status") != "active_gate_deferred_no_promoted_orbits"
+        or orbit_active_verification.get("authority", {}).get("orbit_payload_acquisition_authorized") is not True
+        or orbit_active_verification.get("authority", {}).get("orbit_input_verification_authorized") is not True
+        or orbit_active_verification.get("authority", {}).get("exact_source_orbit_application_authorized") is not True
+        or orbit_active_verification.get("authority", {}).get("radar_pixel_processing_authorized_by_this_contract") is not False
+        or orbit_active_verification.get("authority", {}).get("precise_orbit_substitution_authorized") is not False
+        or orbit_active_verification.get("bindings", {}).get("amendment_approval_sha256") != sha256("records/source-gates/m2-orbit-amendment-approval.json")
+        or orbit_active_verification.get("application_boundary", {}).get("overwrite_safe_source") is not False
+    ):
+        fail("active M2 orbit offline-verification boundary differs")
+    if (
+        orbit_activation.get("status") != "pass_exact_orbit_amendment_activated_preflight_and_sentinel_custody_pending"
+        or orbit_activation.get("bindings", {}).get("approval_sha256") != sha256("records/source-gates/m2-orbit-amendment-approval.json")
+        or orbit_activation.get("bindings", {}).get("reconciliation_sha256") != sha256("records/source-gates/m2-orbit-amendment-review-reconciliation.json")
+        or orbit_activation.get("bindings", {}).get("active_verification_sha256") != sha256("contracts/m2-orbit-offline-verification.json")
+        or orbit_activation.get("bindings", {}).get("activation_script_sha256") != sha256("scripts/activate_m2_orbit_amendment.py")
+        or orbit_activation.get("assertions", {}).get("orbit_payload_bytes_requested") != 0
+        or orbit_activation.get("assertions", {}).get("matching_sentinel_sources_promoted_at_activation") != 0
+        or orbit_activation.get("assertions", {}).get("precise_substitution_authorized") is not False
+    ):
+        fail("M2 orbit activation receipt or claim boundary differs")
+    if (
+        orbit_live_gate.get("decision", {}).get("status") != "ready"
+        or orbit_live_gate.get("decision", {}).get("downstream_prerequisite_status") != "blocked_on_matching_verified_sentinel_custody"
+        or [source.get("source_id") for source in orbit_live_gate.get("sources", [])] != [f"M2-ORB-{index:03d}" for index in range(1, 5)]
+        or any(criterion.get("status") != "pass" for source in orbit_live_gate.get("sources", []) for criterion in source.get("criteria", []))
+    ):
+        fail("M2 orbit live source gate differs")
+    orbit_preflight_assertions = orbit_preflight.get("assertions", {})
+    if (
+        orbit_preflight.get("status") != "pass_no_payload_no_external_mutation_sentinel_custody_pending"
+        or orbit_preflight.get("approval_sha256") != sha256("records/source-gates/m2-orbit-amendment-approval.json")
+        or orbit_preflight.get("source_gate_sha256") != sha256("records/source-gates/m2-orbit-live-source-gate.json")
+        or len(orbit_preflight.get("live_products", [])) != 4
+        or any(item.get("status") != "pass_exact_identity_online_unchanged" for item in orbit_preflight.get("live_products", []))
+        or len(orbit_preflight.get("live_rights_pages", [])) != 2
+        or any(item.get("status") != "pass_exact_reviewed_bytes" for item in orbit_preflight.get("live_rights_pages", []))
+        or orbit_preflight.get("sentinel_custody_prerequisite", {}).get("promoted_and_verified_count") != 0
+        or orbit_preflight_assertions.get("authentication_performed") is not False
+        or orbit_preflight_assertions.get("credential_values_read_or_recorded") is not False
+        or orbit_preflight_assertions.get("orbit_payload_bytes_requested") != 0
+        or orbit_preflight_assertions.get("precise_substitution_authorized") is not False
+    ):
+        fail("M2 orbit fresh preflight or no-payload boundary differs")
+    if (
+        orbit_custody_failure.get("status") != "failed_missing_attempt_events_parent_after_partial_empty_directory_creation"
+        or len(orbit_custody_failure.get("observed_partial_directories", [])) != 7
+        or orbit_custody_failure.get("observed_files") != []
+        or orbit_custody_failure.get("assertions", {}).get("retry_in_attempt_001_authorized") is not False
+        or orbit_custody_readiness.get("status") != "pass_exact_empty_partial_inventory_continuation_predeclared"
+        or orbit_custody_readiness.get("failure_sha256") != sha256("records/acquisition/orbit-custody-initialization-attempt-001-failure.json")
+        or orbit_custody_readiness.get("implementation_sha256") != sha256("scripts/initialize_m2_orbit_custody.py")
+        or orbit_custody.get("status") != "created_and_verified_empty"
+        or orbit_custody.get("attempt_001_failure_sha256") != sha256("records/acquisition/orbit-custody-initialization-attempt-001-failure.json")
+        or orbit_custody.get("attempt_002_readiness_sha256") != sha256("records/acquisition/orbit-custody-initialization-attempt-002-readiness.json")
+        or orbit_custody.get("verification", {}).get("preserved_partial_directory_count") != 7
+        or orbit_custody.get("verification", {}).get("created_directory_count_attempt_002") != 10
+        or orbit_custody.get("verification", {}).get("files_downloaded") != 0
+        or orbit_custody.get("verification", {}).get("authentication_performed") is not False
+        or orbit_custody.get("credential_values_read_or_recorded") is not False
+    ):
+        fail("M2 orbit custody failure, correction, or empty-success evidence differs")
+    expected_orbit_runner_bindings = {
+        "approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-orbit-amendment-approval.json"),
+        "active_intake_ref": "contracts/m2-orbit-intake.json",
+        "active_intake_sha256": "d82f062a59c256a53c658dfe3c138fa2ea7de01c076339d111413e0bd99a4c9c",
+        "active_verification_ref": "contracts/m2-orbit-offline-verification.json",
+        "active_verification_sha256": sha256("contracts/m2-orbit-offline-verification.json"),
+        "preflight_ref": "records/acquisition/orbit-preflight.json",
+        "preflight_sha256": sha256("records/acquisition/orbit-preflight.json"),
+        "custody_initialization_ref": "records/acquisition/orbit-custody-initialization.json",
+        "custody_initialization_sha256": sha256("records/acquisition/orbit-custody-initialization.json"),
+        "scripts_m2_orbit_io_core_py_sha256": sha256("scripts/m2_orbit_io_core.py"),
+        "scripts_acquire_m2_orbit_file_py_sha256": sha256("scripts/acquire_m2_orbit_file.py"),
+        "scripts_verify_m2_orbit_eof_py_sha256": sha256("scripts/verify_m2_orbit_eof.py"),
+        "tests_test_m2_orbit_activation_py_sha256": sha256("tests/test_m2_orbit_activation.py"),
+        "tests_test_m2_orbit_preflight_py_sha256": sha256("tests/test_m2_orbit_preflight.py"),
+        "tests_test_m2_orbit_io_py_sha256": sha256("tests/test_m2_orbit_io.py"),
+        "_github_workflows_validate_yml_sha256": sha256(".github/workflows/validate.yml"),
+    }
+    if (
+        orbit_runner_readiness.get("status") != "pass_static_synthetic_and_guard_probe_transfer_blocked_on_sentinel_custody"
+        or orbit_runner_readiness.get("bindings") != expected_orbit_runner_bindings
+        or orbit_runner_readiness.get("dependency", {}).get("required_version") != "1.0.9"
+        or orbit_runner_readiness.get("dependency", {}).get("observed_version") != "1.0.9"
+        or orbit_runner_readiness.get("dependency", {}).get("known_abc_digest") != "6437b3ac38465133ffb63b75273a8db548c558465d79db03fd359c6cd5bd9d85"
+        or orbit_runner_readiness.get("dependency", {}).get("ci_install_pinned") is not True
+        or orbit_runner_readiness.get("verification", {}).get("full_repository_test_count") != 219
+        or orbit_runner_readiness.get("verification", {}).get("full_repository_tests") != "pass"
+        or orbit_runner_readiness.get("verification", {}).get("focused_orbit_test_count") != 29
+        or orbit_runner_readiness.get("verification", {}).get("focused_orbit_tests") != "pass"
+        or orbit_runner_readiness.get("verification", {}).get("guard_probe_exit_code") != 12
+        or orbit_runner_readiness.get("verification", {}).get("guard_probe_stop_code") != "bound_sentinel_source_not_promoted"
+        or orbit_runner_readiness.get("verification", {}).get("active_control_hashes_unchanged") is not True
+        or orbit_runner_readiness.get("verification", {}).get("orbit_payload_file_count") != 0
+        or orbit_runner_readiness.get("assertions", {}).get("sentinel_promoted_and_verified_count") != 0
+        or orbit_runner_readiness.get("assertions", {}).get("runner_checks_sentinel_custody_before_catalogue_and_token_read") is not True
+        or orbit_runner_readiness.get("assertions", {}).get("network_requests_performed_by_readiness") is not False
+        or orbit_runner_readiness.get("assertions", {}).get("authentication_performed_by_readiness") is not False
+        or orbit_runner_readiness.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or orbit_runner_readiness.get("assertions", {}).get("orbit_payload_bytes_requested") != 0
+        or orbit_runner_readiness.get("assertions", {}).get("precise_substitution_authorized") is not False
+        or orbit_runner_readiness.get("assertions", {}).get("scientific_result_established") is not False
+    ):
+        fail("M2 orbit runner readiness or custody guard differs")
+    expected_orbit_unavailable_reason = (
+        "CDSE catalogue metadata records exact content length plus provider MD5 and BLAKE3, but no upstream SHA-256. "
+        "Revalidate the catalogue identity and compute SHA-256 locally before promotion."
+    )
+    if (
+        orbit_intake_schema_failure.get("status") != "failed_missing_unavailable_reason_for_unknown_pretransfer_sha256"
+        or orbit_intake_schema_failure.get("intake_sha256_at_failure") != expected_orbit_runner_bindings["active_intake_sha256"]
+        or orbit_intake_schema_failure.get("errors") != [
+            f"assets[{index}].expected.unavailable_reason: required when expected identity is incomplete"
+            for index in range(4)
+        ]
+        or orbit_intake_schema_failure.get("assertions", {}).get("orbit_payload_bytes_requested") != 0
+        or orbit_intake_schema_failure.get("assertions", {}).get("silent_correction_authorized") is not False
+    ):
+        fail("M2 orbit intake generic-schema validation failure differs")
+    if (
+        any(asset.get("expected", {}).get("unavailable_reason") != expected_orbit_unavailable_reason for asset in active_orbit_assets)
+        or orbit_intake_schema_correction.get("status") != "pass_required_unavailable_reason_added_active_intake_valid_transfer_still_blocked"
+        or orbit_intake_schema_correction.get("failure_sha256") != sha256("records/acquisition/orbit-intake-schema-validation-failure.json")
+        or orbit_intake_schema_correction.get("intake_sha256_before_correction") != expected_orbit_runner_bindings["active_intake_sha256"]
+        or orbit_intake_schema_correction.get("intake_sha256_after_correction") != "b52512ecf86a7d85f99f5cff932219bc29620f08871e3b3242b76b645b0e2604"
+        or orbit_intake_schema_correction.get("correction", {}).get("asset_ids") != [f"M2-ORB-{index:03d}" for index in range(1, 5)]
+        or orbit_intake_schema_correction.get("correction", {}).get("field") != "expected.unavailable_reason"
+        or orbit_intake_schema_correction.get("correction", {}).get("value") != expected_orbit_unavailable_reason
+        or orbit_intake_schema_correction.get("correction", {}).get("fields_added") != 4
+        or orbit_intake_schema_correction.get("correction", {}).get("other_fields_changed") != 0
+        or orbit_intake_schema_correction.get("validator", {}).get("status") != "pass"
+        or orbit_intake_schema_correction.get("validator", {}).get("errors") != []
+        or orbit_intake_schema_correction.get("historical_runner_readiness_sha256") != sha256("records/acquisition/orbit-runner-readiness.json")
+        or orbit_intake_schema_correction.get("verification", {}).get("guard_probe_exit_code") != 12
+        or orbit_intake_schema_correction.get("verification", {}).get("guard_probe_stop_code") != "bound_sentinel_source_not_promoted"
+        or orbit_intake_schema_correction.get("verification", {}).get("orbit_payload_file_count") != 0
+        or orbit_intake_schema_correction.get("assertions", {}).get("authorization_changed") is not False
+        or orbit_intake_schema_correction.get("assertions", {}).get("network_requests_performed_by_correction") is not False
+        or orbit_intake_schema_correction.get("assertions", {}).get("authentication_performed_by_correction") is not False
+        or orbit_intake_schema_correction.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or orbit_intake_schema_correction.get("assertions", {}).get("orbit_payload_bytes_requested") != 0
+        or orbit_intake_schema_correction.get("assertions", {}).get("precise_substitution_authorized") is not False
+        or orbit_intake_schema_correction.get("assertions", {}).get("scientific_result_established") is not False
+    ):
+        fail("M2 orbit active-intake schema correction differs")
+    if (
+        orbit_intake_label_inconsistency.get("status") != "failed_stale_candidate_status_on_activated_intake"
+        or orbit_intake_label_inconsistency.get("intake_sha256_at_finding") != "b52512ecf86a7d85f99f5cff932219bc29620f08871e3b3242b76b645b0e2604"
+        or orbit_intake_label_inconsistency.get("observed_root_status") != "candidate_not_active"
+        or orbit_intake_label_inconsistency.get("expected_root_status") != "active"
+        or orbit_intake_label_inconsistency.get("assertions", {}).get("asset_attempt_count") != 0
+        or orbit_intake_label_inconsistency.get("assertions", {}).get("orbit_payload_bytes_requested") != 0
+        or orbit_intake_label_inconsistency.get("assertions", {}).get("silent_correction_authorized") is not False
+    ):
+        fail("M2 orbit active-intake stale activation label finding differs")
+    if (
+        orbit_intake_label_correction.get("status") != "pass_root_status_corrected_active_transfer_still_blocked"
+        or orbit_intake_label_correction.get("finding_sha256") != sha256("records/acquisition/orbit-intake-activation-label-inconsistency.json")
+        or orbit_intake_label_correction.get("intake_sha256_before_correction") != "b52512ecf86a7d85f99f5cff932219bc29620f08871e3b3242b76b645b0e2604"
+        or orbit_intake_label_correction.get("intake_sha256_after_correction") != sha256("contracts/m2-orbit-intake.json")
+        or orbit_intake_label_correction.get("correction") != {
+            "field": "status",
+            "before": "candidate_not_active",
+            "after": "active",
+            "other_fields_changed": 0,
+        }
+        or orbit_intake_label_correction.get("validation", {}).get("generic_intake_validator_status") != "pass"
+        or orbit_intake_label_correction.get("validation", {}).get("generic_intake_validator_errors") != []
+        or orbit_intake_label_correction.get("validation", {}).get("guard_probe_exit_code") != 12
+        or orbit_intake_label_correction.get("validation", {}).get("guard_probe_stop_code") != "bound_sentinel_source_not_promoted"
+        or orbit_intake_label_correction.get("validation", {}).get("orbit_payload_file_count") != 0
+        or orbit_intake_label_correction.get("assertions", {}).get("authorization_changed") is not False
+        or orbit_intake_label_correction.get("assertions", {}).get("network_requests_performed_by_correction") is not False
+        or orbit_intake_label_correction.get("assertions", {}).get("authentication_performed_by_correction") is not False
+        or orbit_intake_label_correction.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or orbit_intake_label_correction.get("assertions", {}).get("orbit_payload_bytes_requested") != 0
+        or orbit_intake_label_correction.get("assertions", {}).get("precise_substitution_authorized") is not False
+        or orbit_intake_label_correction.get("assertions", {}).get("scientific_result_established") is not False
+    ):
+        fail("M2 orbit active-intake activation label correction differs")
 
     expected_vertical_candidate = "M2-DEM-VERTICAL-DATUM-PROPOSAL-SHA256:" + sha256("contracts/m2-dem-vertical-datum-proposal.json")
     if (
@@ -1069,7 +1361,7 @@ def main() -> None:
         or failed_terrain_ci_runs[1].get("status") != "failure_no_jobs"
         or failed_terrain_ci_runs[2].get("error") != "FAIL: EVID-0044 DEM terrain-quality CI correction differs"
         or terrain_ci_change.get("workflow_ref") != ".github/workflows/validate.yml"
-        or terrain_ci_change.get("workflow_sha256") != sha256(".github/workflows/validate.yml")
+        or terrain_ci_change.get("workflow_sha256") != "330de5934a82ae1998973ff5cf5b97360cd72e6b8f926e51a409178036932029"
         or terrain_ci_change.get("pinned_dependency") != "numpy==2.5.1"
         or terrain_ci_change.get("threshold_contract_changed") is not False
         or terrain_ci_change.get("terrain_core_changed") is not False
@@ -1550,11 +1842,16 @@ def main() -> None:
         ("M2-DEM-PREFLIGHT", "complete"),
         ("M2-DEM-ACQUIRE", expected_dem_acquire_status),
         ("M2-DEM-VERIFY", expected_dem_verify_status),
+        ("M2-ORBIT-AMEND", "complete"),
+        ("M2-ORBIT-PREFLIGHT", "complete"),
+        ("M2-ORBIT-ACQUIRE", "planned"),
+        ("M2-ORBIT-VERIFY", "planned"),
+        ("M2-ORBIT-APPLY", "planned"),
     ):
         if active_m2_units.get(unit_id, {}).get("status") != expected_status:
             fail(f"active M2 unit {unit_id} status differs")
-    if set(active_m2_units["M2-BASELINE"].get("depends_on", [])) != {"M2-VERIFY", "M2-DEM-VERIFY"}:
-        fail("M2 baseline does not preserve both Sentinel and DEM dependencies")
+    if set(active_m2_units["M2-BASELINE"].get("depends_on", [])) != {"M2-VERIFY", "M2-DEM-VERIFY", "M2-ORBIT-APPLY"}:
+        fail("M2 baseline does not preserve Sentinel, DEM, and orbit dependencies")
     if dem_activation_receipt.get("status") != "pass_exact_dem_amendment_activated_preflight_pending":
         fail("M2 DEM activation receipt status differs")
     expected_historical_dem_activation_bindings = {
@@ -3600,6 +3897,107 @@ def main() -> None:
         or terrain_review_evidence.get("assertions") != expected_terrain_review_assertions
     ):
         fail("EVID-0051 DEM terrain-result review preparation differs")
+
+    orbit_review_evidence = ledger_by_id.get("EVID-0052")
+    if (
+        not isinstance(orbit_review_evidence, dict)
+        or orbit_review_evidence.get("status") != "ready_for_human_review_source_gate_blocked"
+        or orbit_review_evidence.get("proposal_sha256") != sha256("contracts/milestone-002-orbit-amendment-proposal.json")
+        or orbit_review_evidence.get("bundle_sha256") != sha256("reviews/m2-orbit-amendment/review-bundle.json")
+        or orbit_review_evidence.get("contract_sha256") != sha256("reviews/m2-orbit-amendment/review-contract.json")
+        or orbit_review_evidence.get("human_decision_count") != 0
+        or orbit_review_evidence.get("assertions", {}).get("authority_created") is not False
+    ):
+        fail("EVID-0052 orbit amendment review preparation differs")
+    orbit_activation_evidence = ledger_by_id.get("EVID-0053")
+    if (
+        not isinstance(orbit_activation_evidence, dict)
+        or orbit_activation_evidence.get("status") != "pass_exact_orbit_amendment_activated_preflight_and_sentinel_custody_pending"
+        or orbit_activation_evidence.get("activation_receipt_sha256") != sha256("records/acquisition/orbit-amendment-activation.json")
+        or orbit_activation_evidence.get("approval_sha256") != sha256("records/source-gates/m2-orbit-amendment-approval.json")
+        or orbit_activation_evidence.get("reconciliation_sha256") != sha256("records/source-gates/m2-orbit-amendment-review-reconciliation.json")
+        or orbit_activation_evidence.get("assertions") != orbit_activation.get("assertions")
+    ):
+        fail("EVID-0053 orbit amendment activation differs")
+    orbit_preflight_evidence = ledger_by_id.get("EVID-0054")
+    if (
+        not isinstance(orbit_preflight_evidence, dict)
+        or orbit_preflight_evidence.get("status") != "pass_no_payload_no_external_mutation_sentinel_custody_pending"
+        or orbit_preflight_evidence.get("preflight_sha256") != sha256("records/acquisition/orbit-preflight.json")
+        or orbit_preflight_evidence.get("source_gate_sha256") != sha256("records/source-gates/m2-orbit-live-source-gate.json")
+        or orbit_preflight_evidence.get("assertions") != orbit_preflight.get("assertions")
+    ):
+        fail("EVID-0054 orbit fresh preflight differs")
+    orbit_custody_failure_evidence = ledger_by_id.get("EVID-0055")
+    if (
+        not isinstance(orbit_custody_failure_evidence, dict)
+        or orbit_custody_failure_evidence.get("status") != orbit_custody_failure.get("status")
+        or orbit_custody_failure_evidence.get("failure_sha256") != sha256("records/acquisition/orbit-custody-initialization-attempt-001-failure.json")
+        or orbit_custody_failure_evidence.get("assertions") != orbit_custody_failure.get("assertions")
+    ):
+        fail("EVID-0055 orbit custody initialization failure differs")
+    orbit_custody_readiness_evidence = ledger_by_id.get("EVID-0056")
+    if (
+        not isinstance(orbit_custody_readiness_evidence, dict)
+        or orbit_custody_readiness_evidence.get("status") != orbit_custody_readiness.get("status")
+        or orbit_custody_readiness_evidence.get("readiness_sha256") != sha256("records/acquisition/orbit-custody-initialization-attempt-002-readiness.json")
+        or orbit_custody_readiness_evidence.get("failure_sha256") != sha256("records/acquisition/orbit-custody-initialization-attempt-001-failure.json")
+        or orbit_custody_readiness_evidence.get("implementation_sha256") != sha256("scripts/initialize_m2_orbit_custody.py")
+    ):
+        fail("EVID-0056 orbit custody attempt-002 readiness differs")
+    orbit_custody_evidence = ledger_by_id.get("EVID-0057")
+    if (
+        not isinstance(orbit_custody_evidence, dict)
+        or orbit_custody_evidence.get("status") != "pass_empty_custody_initialized_sentinel_custody_pending"
+        or orbit_custody_evidence.get("custody_receipt_sha256") != sha256("records/acquisition/orbit-custody-initialization.json")
+        or orbit_custody_evidence.get("attempt_001_failure_sha256") != sha256("records/acquisition/orbit-custody-initialization-attempt-001-failure.json")
+        or orbit_custody_evidence.get("attempt_002_readiness_sha256") != sha256("records/acquisition/orbit-custody-initialization-attempt-002-readiness.json")
+        or orbit_custody_evidence.get("initialization_script_sha256") != sha256("scripts/initialize_m2_orbit_custody.py")
+        or orbit_custody_evidence.get("assertions", {}).get("orbit_payload_bytes_requested") != 0
+        or orbit_custody_evidence.get("assertions", {}).get("sentinel_promoted_and_verified_count") != 0
+    ):
+        fail("EVID-0057 orbit empty custody initialization differs")
+    orbit_runner_evidence = ledger_by_id.get("EVID-0058")
+    if (
+        not isinstance(orbit_runner_evidence, dict)
+        or orbit_runner_evidence.get("status") != orbit_runner_readiness.get("status")
+        or orbit_runner_evidence.get("readiness_ref") != "records/acquisition/orbit-runner-readiness.json"
+        or orbit_runner_evidence.get("readiness_sha256") != sha256("records/acquisition/orbit-runner-readiness.json")
+        or orbit_runner_evidence.get("execution_bindings") != {
+            key: value
+            for key, value in expected_orbit_runner_bindings.items()
+            if key.startswith(("scripts_", "tests_", "_github_"))
+        }
+        or orbit_runner_evidence.get("dependency") != orbit_runner_readiness.get("dependency")
+        or orbit_runner_evidence.get("verification") != orbit_runner_readiness.get("verification")
+        or orbit_runner_evidence.get("assertions") != orbit_runner_readiness.get("assertions")
+    ):
+        fail("EVID-0058 orbit runner readiness differs")
+    orbit_schema_correction_evidence = ledger_by_id.get("EVID-0059")
+    if (
+        not isinstance(orbit_schema_correction_evidence, dict)
+        or orbit_schema_correction_evidence.get("status") != orbit_intake_schema_correction.get("status")
+        or orbit_schema_correction_evidence.get("failure_sha256") != sha256("records/acquisition/orbit-intake-schema-validation-failure.json")
+        or orbit_schema_correction_evidence.get("correction_ref") != "records/acquisition/orbit-intake-schema-correction.json"
+        or orbit_schema_correction_evidence.get("correction_sha256") != sha256("records/acquisition/orbit-intake-schema-correction.json")
+        or orbit_schema_correction_evidence.get("active_intake_sha256") != "b52512ecf86a7d85f99f5cff932219bc29620f08871e3b3242b76b645b0e2604"
+        or orbit_schema_correction_evidence.get("historical_runner_readiness_sha256") != sha256("records/acquisition/orbit-runner-readiness.json")
+        or orbit_schema_correction_evidence.get("verification") != orbit_intake_schema_correction.get("verification")
+        or orbit_schema_correction_evidence.get("assertions") != orbit_intake_schema_correction.get("assertions")
+    ):
+        fail("EVID-0059 orbit active-intake schema correction differs")
+    orbit_label_correction_evidence = ledger_by_id.get("EVID-0060")
+    if (
+        not isinstance(orbit_label_correction_evidence, dict)
+        or orbit_label_correction_evidence.get("status") != orbit_intake_label_correction.get("status")
+        or orbit_label_correction_evidence.get("finding_sha256") != sha256("records/acquisition/orbit-intake-activation-label-inconsistency.json")
+        or orbit_label_correction_evidence.get("correction_ref") != "records/acquisition/orbit-intake-activation-label-correction.json"
+        or orbit_label_correction_evidence.get("correction_sha256") != sha256("records/acquisition/orbit-intake-activation-label-correction.json")
+        or orbit_label_correction_evidence.get("active_intake_sha256") != sha256("contracts/m2-orbit-intake.json")
+        or orbit_label_correction_evidence.get("validation") != orbit_intake_label_correction.get("validation")
+        or orbit_label_correction_evidence.get("assertions") != orbit_intake_label_correction.get("assertions")
+    ):
+        fail("EVID-0060 orbit active-intake activation label correction differs")
 
     violations = []
     for relative in tracked_files():

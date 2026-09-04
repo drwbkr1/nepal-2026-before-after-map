@@ -125,22 +125,25 @@ class M2DemActivationTests(unittest.TestCase):
         self.assertEqual(units["M2-DEM-PREFLIGHT"]["status"], "complete")
         self.assertEqual(units["M2-DEM-ACQUIRE"]["status"], "complete" if all_promoted else "ready")
         self.assertEqual(units["M2-DEM-VERIFY"]["status"], "complete" if all_verified else ("ready" if all_promoted else "planned"))
-        self.assertEqual(set(units["M2-BASELINE"]["depends_on"]), {"M2-VERIFY", "M2-DEM-VERIFY"})
+        self.assertEqual(set(units["M2-BASELINE"]["depends_on"]), {"M2-VERIFY", "M2-DEM-VERIFY", "M2-ORBIT-APPLY"})
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            ["contracts/milestone-002-orbit-amendment-proposal.json"],
+            [],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
-            ["records/source-gates/m2-dem-amendment-approval.json"],
+            [
+                "records/source-gates/m2-dem-amendment-approval.json",
+                "records/source-gates/m2-orbit-amendment-approval.json",
+            ],
         )
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-AUTHENTICATION-REFERENCE")
         self.assertEqual(self.profile["parallel_checkpoints"][0]["checkpoint_id"], expected_checkpoint)
         self.assertEqual(self.profile["parallel_checkpoints"][1]["checkpoint_id"], "M2-DEM-TERRAIN-RESULT-REVIEW")
-        self.assertEqual(self.profile["parallel_checkpoints"][2]["checkpoint_id"], "M2-ORBIT-AMENDMENT-REVIEW")
+        self.assertEqual(self.profile["parallel_checkpoints"][2]["checkpoint_id"], "M2-ORBIT-SENTINEL-CUSTODY")
         self.assertEqual(
             self.goal["parallel_checkpoints"],
-            [expected_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-AMENDMENT-REVIEW"],
+            [expected_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-SENTINEL-CUSTODY"],
         )
 
     def test_activation_receipt_preserves_published_outputs_and_claim_boundary(self) -> None:

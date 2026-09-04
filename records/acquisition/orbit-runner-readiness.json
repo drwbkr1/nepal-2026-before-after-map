@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "readiness_id": "NEPAL-M2-ORBIT-RUNNER-READINESS-001",
+  "status": "pass_static_synthetic_and_guard_probe_transfer_blocked_on_sentinel_custody",
+  "verified_at_utc": "2026-09-04T02:22:04Z",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+    "approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+    "active_intake_ref": "contracts/m2-orbit-intake.json",
+    "active_intake_sha256": "d82f062a59c256a53c658dfe3c138fa2ea7de01c076339d111413e0bd99a4c9c",
+    "active_verification_ref": "contracts/m2-orbit-offline-verification.json",
+    "active_verification_sha256": "bac1154aebf34858fd82d9f42934a5a2d7bfd21a25917df1355f0f9f68682303",
+    "preflight_ref": "records/acquisition/orbit-preflight.json",
+    "preflight_sha256": "bf5e06069c386b4242fee306fcfea38b815813a72d7a028c1f4a3b1b5fe69681",
+    "custody_initialization_ref": "records/acquisition/orbit-custody-initialization.json",
+    "custody_initialization_sha256": "1ea8bef201ad72cc695d9332400561edacacdc93e704916ed7b1a4b28efa1723",
+    "scripts_m2_orbit_io_core_py_sha256": "09a2c3579a89b223e8ed1d74a120bf74f1ff7c79d4be979eb30fc0d679e9596d",
+    "scripts_acquire_m2_orbit_file_py_sha256": "eaa21a82a6eb38a471e05b1fa9df2f5aa6378d087b6da0dfe5377abfab3b7248",
+    "scripts_verify_m2_orbit_eof_py_sha256": "f043ffacdad9f0cc135f91a0a46e4a19e92303bf9bc48b04ca96968a641ec30c",
+    "tests_test_m2_orbit_activation_py_sha256": "da1e9e82aa38e10b0ba9fb6d3e68548d8ea80f2b3a6c91c0de54615c886728fe",
+    "tests_test_m2_orbit_preflight_py_sha256": "888c73e84c665c2318739ed95d0e65799d51a67181c67b57eb6660635c8344f0",
+    "tests_test_m2_orbit_io_py_sha256": "607e48fb0ad36d1f150c843add471aa6b0991a57e9933184eec18d05cd167937",
+    "_github_workflows_validate_yml_sha256": "885df3ee211dc31b2ea96b81a1df25ca7f474a09f73beeef73cd72b969f73bd1"
+  },
+  "dependency": {
+    "package": "blake3",
+    "required_version": "1.0.9",
+    "observed_version": "1.0.9",
+    "known_abc_digest": "6437b3ac38465133ffb63b75273a8db548c558465d79db03fd359c6cd5bd9d85",
+    "ci_install_pinned": true
+  },
+  "verification": {
+    "full_repository_test_count": 219,
+    "full_repository_tests": "pass",
+    "focused_orbit_test_count": 29,
+    "focused_orbit_tests": "pass",
+    "guard_probe_source_id": "M2-ORB-001",
+    "guard_probe_exit_code": 12,
+    "guard_probe_stop_code": "bound_sentinel_source_not_promoted",
+    "active_control_hashes_unchanged": true,
+    "orbit_payload_file_count": 0
+  },
+  "assertions": {
+    "exact_source_count": 4,
+    "authorized_orbit_type": "AUX_RESORB",
+    "sentinel_promoted_and_verified_count": 0,
+    "runner_checks_sentinel_custody_before_catalogue_and_token_read": true,
+    "provider_md5_and_blake3_required": true,
+    "local_sha256_required": true,
+    "xml_external_entities_rejected": true,
+    "ordered_unique_finite_osvs_required": true,
+    "exact_validity_and_scene_binding_required": true,
+    "atomic_no_replace_promotion_required": true,
+    "failed_and_partial_bytes_preserved": true,
+    "precise_substitution_authorized": false,
+    "network_requests_performed_by_readiness": false,
+    "authentication_performed_by_readiness": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_bytes_requested": 0,
+    "active_controls_mutated_by_readiness": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "Synthetic EOF and stream tests do not prove provider transfer behavior or the contents of the four real files.",
+    "The guard probe stops before public catalogue access and token lookup because matching Sentinel custody is absent.",
+    "No orbit payload, XML, correction output, geolocation accuracy, or scientific result is established."
+  ],
+  "next_action": "Publish and verify these controls, then resume the original Sentinel acquisition; do not run an orbit transfer until every source bound to that orbit is promoted and offline container-verified."
+}

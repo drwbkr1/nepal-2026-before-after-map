@@ -1,0 +1,268 @@
+{
+  "contract_version": "1.0",
+  "intake_id": "nepal-m2-orbit-intake-001",
+  "status": "active",
+  "created_at": "2026-09-04T01:16:42Z",
+  "collision_policy": "fail",
+  "promotion_mode": "atomic-no-replace",
+  "secret_policy": "references-only",
+  "custody_root": "nepal-2026-before-after-map-data/custody/orbits/s1d/resorb",
+  "staging_root": "nepal-2026-before-after-map-data/.intake-staging/nepal-m2-orbit-intake-001",
+  "assets": [
+    {
+      "asset_id": "m2-orb-001",
+      "source": {
+        "kind": "https",
+        "uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)/$value",
+        "authorization_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+        "terms_ref": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "credential_reference": "existing owner-controlled CDSE bearer token supplied only through the live secret-safe session after exact approval"
+      },
+      "destination_relative_path": "m2-orb-001/S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+      "staging_relative_path": "m2-orb-001/S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": 639533,
+        "provider_checksums": [
+          {
+            "algorithm": "BLAKE3",
+            "value": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b",
+            "checksum_date": "2026-08-16T14:34:32.604858Z"
+          },
+          {
+            "algorithm": "MD5",
+            "value": "ca7f36b1892073c883c4cff5c0517b9c",
+            "checksum_date": "2026-08-16T14:34:32.563327Z"
+          }
+        ],
+        "unavailable_reason": "CDSE catalogue metadata records exact content length plus provider MD5 and BLAKE3, but no upstream SHA-256. Revalidate the catalogue identity and compute SHA-256 locally before promotion."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "authorized",
+      "attempts": [],
+      "failure": null,
+      "superseded_by": null,
+      "extensions": {
+        "source_id": "M2-ORB-001",
+        "group_id": "ASC-BEFORE-20260816",
+        "sentinel_source_ids": [
+          "M1-SRC-001",
+          "M1-SRC-002"
+        ],
+        "provider_product_id": "d4fdc474-0069-459b-9534-b5999dec5aab",
+        "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+        "orbit_type": "AUX_RESORB",
+        "validity_start_utc": "2026-08-16T10:35:26.000000Z",
+        "validity_end_utc": "2026-08-16T14:09:56.000000Z",
+        "minimum_scene_margin_seconds": 6350,
+        "eviction_date_utc": "2026-11-16T14:34:08.080856Z",
+        "sentinel_custody_prerequisite": "not_satisfied_at_activation",
+        "fresh_catalogue_response_sha256": "ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c"
+      }
+    },
+    {
+      "asset_id": "m2-orb-002",
+      "source": {
+        "kind": "https",
+        "uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)/$value",
+        "authorization_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+        "terms_ref": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "credential_reference": "existing owner-controlled CDSE bearer token supplied only through the live secret-safe session after exact approval"
+      },
+      "destination_relative_path": "m2-orb-002/S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "staging_relative_path": "m2-orb-002/S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": 631254,
+        "provider_checksums": [
+          {
+            "algorithm": "BLAKE3",
+            "value": "7f69b4ae261fe43ea758ab3d1f0c290706aa4b8308a55c49b510badcf3fca49d",
+            "checksum_date": "2026-08-19T01:48:38.433669Z"
+          },
+          {
+            "algorithm": "MD5",
+            "value": "4752bc958d3a65a14100e96f4e6489b2",
+            "checksum_date": "2026-08-19T01:48:38.391461Z"
+          }
+        ],
+        "unavailable_reason": "CDSE catalogue metadata records exact content length plus provider MD5 and BLAKE3, but no upstream SHA-256. Revalidate the catalogue identity and compute SHA-256 locally before promotion."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "authorized",
+      "attempts": [],
+      "failure": null,
+      "superseded_by": null,
+      "extensions": {
+        "source_id": "M2-ORB-002",
+        "group_id": "DESC-BEFORE-20260819",
+        "sentinel_source_ids": [
+          "M1-SRC-003"
+        ],
+        "provider_product_id": "ec7dd79b-0588-456a-9d17-6324d5affcb5",
+        "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+        "orbit_type": "AUX_RESORB",
+        "validity_start_utc": "2026-08-18T21:50:10.000000Z",
+        "validity_end_utc": "2026-08-19T01:21:20.000000Z",
+        "minimum_scene_margin_seconds": 4219,
+        "eviction_date_utc": "2026-11-19T01:48:27.107300Z",
+        "sentinel_custody_prerequisite": "not_satisfied_at_activation",
+        "fresh_catalogue_response_sha256": "23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e"
+      }
+    },
+    {
+      "asset_id": "m2-orb-003",
+      "source": {
+        "kind": "https",
+        "uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)/$value",
+        "authorization_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+        "terms_ref": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "credential_reference": "existing owner-controlled CDSE bearer token supplied only through the live secret-safe session after exact approval"
+      },
+      "destination_relative_path": "m2-orb-003/S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+      "staging_relative_path": "m2-orb-003/S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": 639533,
+        "provider_checksums": [
+          {
+            "algorithm": "BLAKE3",
+            "value": "9138c6cc9e26483b67cfedb69475cb08dcce6170dab24beac53319583a52835d",
+            "checksum_date": "2026-08-28T14:33:57.910399Z"
+          },
+          {
+            "algorithm": "MD5",
+            "value": "c7aa9da84a4bd1b8113275e7bbe3d3f7",
+            "checksum_date": "2026-08-28T14:33:57.869015Z"
+          }
+        ],
+        "unavailable_reason": "CDSE catalogue metadata records exact content length plus provider MD5 and BLAKE3, but no upstream SHA-256. Revalidate the catalogue identity and compute SHA-256 locally before promotion."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "authorized",
+      "attempts": [],
+      "failure": null,
+      "superseded_by": null,
+      "extensions": {
+        "source_id": "M2-ORB-003",
+        "group_id": "ASC-AFTER-20260828",
+        "sentinel_source_ids": [
+          "M1-SRC-004",
+          "M1-SRC-005"
+        ],
+        "provider_product_id": "182fec80-86b8-46b4-bc76-43be0ab70ba5",
+        "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+        "orbit_type": "AUX_RESORB",
+        "validity_start_utc": "2026-08-28T10:35:27.000000Z",
+        "validity_end_utc": "2026-08-28T14:09:57.000000Z",
+        "minimum_scene_margin_seconds": 6349,
+        "eviction_date_utc": "2026-11-28T14:33:37.358606Z",
+        "sentinel_custody_prerequisite": "not_satisfied_at_activation",
+        "fresh_catalogue_response_sha256": "75562f7c63668569a538a208b2b86db7f05eff17b4fa7e14555a948a84535132"
+      }
+    },
+    {
+      "asset_id": "m2-orb-004",
+      "source": {
+        "kind": "https",
+        "uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)/$value",
+        "authorization_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+        "terms_ref": "https://dataspace.copernicus.eu/terms-and-conditions",
+        "credential_reference": "existing owner-controlled CDSE bearer token supplied only through the live secret-safe session after exact approval"
+      },
+      "destination_relative_path": "m2-orb-004/S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+      "staging_relative_path": "m2-orb-004/S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": 629395,
+        "provider_checksums": [
+          {
+            "algorithm": "BLAKE3",
+            "value": "0fe6a53b52f3caf11aa8e685a6367f673c69a8a580d90b398148dda772e56d12",
+            "checksum_date": "2026-08-31T01:50:21.470965Z"
+          },
+          {
+            "algorithm": "MD5",
+            "value": "1eebe30919f50a31dd04f854ee1c813d",
+            "checksum_date": "2026-08-31T01:50:21.424393Z"
+          }
+        ],
+        "unavailable_reason": "CDSE catalogue metadata records exact content length plus provider MD5 and BLAKE3, but no upstream SHA-256. Revalidate the catalogue identity and compute SHA-256 locally before promotion."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "authorized",
+      "attempts": [],
+      "failure": null,
+      "superseded_by": null,
+      "extensions": {
+        "source_id": "M2-ORB-004",
+        "group_id": "DESC-AFTER-20260831",
+        "sentinel_source_ids": [
+          "M1-SRC-006"
+        ],
+        "provider_product_id": "af27071d-df96-4850-af40-e09aedcd68a3",
+        "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+        "orbit_type": "AUX_RESORB",
+        "validity_start_utc": "2026-08-30T21:50:11.000000Z",
+        "validity_end_utc": "2026-08-31T01:21:11.000000Z",
+        "minimum_scene_margin_seconds": 4209,
+        "eviction_date_utc": "2026-12-01T01:50:08.131473Z",
+        "sentinel_custody_prerequisite": "not_satisfied_at_activation",
+        "fresh_catalogue_response_sha256": "4fa0be02fabc3b74b920374e40d470a7e0acec4505e768e13e6a82875a20b448"
+      }
+    }
+  ],
+  "extensions": {
+    "manifest_ref": "records/source-gates/m2-orbit-candidate-manifest.json",
+    "manifest_sha256": "e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736",
+    "proposal_ref": "contracts/milestone-002-orbit-amendment-proposal.json",
+    "proposal_sha256": "b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292",
+    "parent_approval_ref": "records/source-gates/m2-activation-approval.json",
+    "parent_approval_sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
+    "scope_authority": "granted_exact_four_resorb_files",
+    "allowed_download_hosts": [
+      "download.dataspace.copernicus.eu"
+    ],
+    "resume_policy": "disabled_until_range_support_and_unchanged_remote_identity_are verified",
+    "payload_bytes_transferred": 0,
+    "this_contract_creates_authority": false,
+    "status": "active_authorized_preflight_passed_custody_initialized",
+    "authority_status": "inherited_exact_orbit_amendment_approval",
+    "amendment_approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+    "amendment_approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+    "review_reconciliation_ref": "records/source-gates/m2-orbit-amendment-review-reconciliation.json",
+    "review_reconciliation_sha256": "d421acb9e343531f5eb595d69d2414c30e4ef5717d7614a5a1696546c6cd866c",
+    "sentinel_custody_prerequisite_status": "pending_zero_of_six_promoted_and_verified",
+    "static_only_no_network_or_external_filesystem_mutation": false,
+    "approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+    "preflight_ref": "records/acquisition/orbit-preflight.json",
+    "preflight_sha256": "bf5e06069c386b4242fee306fcfea38b815813a72d7a028c1f4a3b1b5fe69681",
+    "source_gate_ref": "records/source-gates/m2-orbit-live-source-gate.json",
+    "source_gate_sha256": "26c9f7315a8ce15befdcc56f906706016d106ac2eebd91935d7e8f51cdcf86c6",
+    "custody_initialized": true,
+    "custody_initialized_at_utc": "2026-09-04T02:12:14Z",
+    "custody_initialization_ref": "records/acquisition/orbit-custody-initialization.json",
+    "custody_initialization_sha256": "1ea8bef201ad72cc695d9332400561edacacdc93e704916ed7b1a4b28efa1723",
+    "external_custody_initialization_receipt": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\orbit-custody-initialization-receipt.json"
+  }
+}

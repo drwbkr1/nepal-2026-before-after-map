@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-INTAKE-SCHEMA-CORRECTION-001",
+  "status": "pass_required_unavailable_reason_added_active_intake_valid_transfer_still_blocked",
+  "corrected_at_utc": "2026-09-04T02:32:58Z",
+  "failure_ref": "records/acquisition/orbit-intake-schema-validation-failure.json",
+  "failure_sha256": "05c4a67fe863c171e40d7ed9b1e08fe802d20a008f61b8a4ba3148b37278fecf",
+  "intake_ref": "contracts/m2-orbit-intake.json",
+  "intake_sha256_before_correction": "d82f062a59c256a53c658dfe3c138fa2ea7de01c076339d111413e0bd99a4c9c",
+  "intake_sha256_after_correction": "b52512ecf86a7d85f99f5cff932219bc29620f08871e3b3242b76b645b0e2604",
+  "correction": {
+    "asset_ids": [
+      "M2-ORB-001",
+      "M2-ORB-002",
+      "M2-ORB-003",
+      "M2-ORB-004"
+    ],
+    "field": "expected.unavailable_reason",
+    "value": "CDSE catalogue metadata records exact content length plus provider MD5 and BLAKE3, but no upstream SHA-256. Revalidate the catalogue identity and compute SHA-256 locally before promotion.",
+    "fields_added": 4,
+    "other_fields_changed": 0
+  },
+  "validator": {
+    "ref": "intake-controlled-data/scripts/validate_intake_contract.py",
+    "sha256": "6acf6558e2ef0d67423314b074e30ef96b1fe1f825b21a7caea7aedaa83014b9",
+    "status": "pass",
+    "errors": [],
+    "project_root": "C:\\Projects\\Active"
+  },
+  "historical_runner_readiness_ref": "records/acquisition/orbit-runner-readiness.json",
+  "historical_runner_readiness_sha256": "7db7f160229299ab6e5a9302dd76546191855c8259c6f3757294c44dea30f9c0",
+  "verification": {
+    "full_repository_test_count": 219,
+    "full_repository_tests": "pass",
+    "focused_orbit_test_count": 29,
+    "focused_orbit_tests": "pass",
+    "guard_probe_source_id": "M2-ORB-001",
+    "guard_probe_exit_code": 12,
+    "guard_probe_stop_code": "bound_sentinel_source_not_promoted",
+    "active_control_hashes_unchanged_by_guard_probe": true,
+    "orbit_payload_file_count": 0
+  },
+  "assertions": {
+    "candidate_intake_mutated": false,
+    "source_identities_changed": false,
+    "provider_checksums_changed": false,
+    "expected_sizes_changed": false,
+    "authorization_changed": false,
+    "custody_paths_changed": false,
+    "network_requests_performed_by_correction": false,
+    "authentication_performed_by_correction": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_bytes_requested": 0,
+    "sentinel_promoted_and_verified_count": 0,
+    "precise_substitution_authorized": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "The correction makes the active intake schema-valid; it does not verify provider payload bytes or EOF contents.",
+    "The historical runner-readiness receipt remains bound to the pre-correction active-intake hash and is not rewritten.",
+    "Transfer remains blocked until the bound Sentinel sources are promoted and offline container-verified."
+  ],
+  "next_action": "Publish and verify the corrected controls, then resume the original Sentinel acquisition without requesting orbit payload bytes."
+}

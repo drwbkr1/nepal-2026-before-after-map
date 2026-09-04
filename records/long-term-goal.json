@@ -13,11 +13,12 @@
   "proposed_milestone": null,
   "current_checkpoint": "M2-AUTHENTICATION-REFERENCE",
   "active_amendments": [
-    "records/source-gates/m2-dem-amendment-approval.json"
+    "records/source-gates/m2-dem-amendment-approval.json",
+    "records/source-gates/m2-orbit-amendment-approval.json"
   ],
   "parallel_checkpoints": [
     "M2-DEM-VERTICAL-DATUM-REVIEW",
     "M2-DEM-TERRAIN-RESULT-REVIEW",
-    "M2-ORBIT-AMENDMENT-REVIEW"
+    "M2-ORBIT-SENTINEL-CUSTODY"
   ]
 }

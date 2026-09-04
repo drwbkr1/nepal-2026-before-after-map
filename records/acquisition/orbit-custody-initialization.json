@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-CUSTODY-INITIALIZATION-001",
+  "status": "created_and_verified_empty",
+  "created_at_utc": "2026-09-04T02:12:14Z",
+  "approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+  "approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+  "preflight_ref": "records/acquisition/orbit-preflight.json",
+  "preflight_sha256": "bf5e06069c386b4242fee306fcfea38b815813a72d7a028c1f4a3b1b5fe69681",
+  "source_gate_ref": "records/source-gates/m2-orbit-live-source-gate.json",
+  "source_gate_sha256": "26c9f7315a8ce15befdcc56f906706016d106ac2eebd91935d7e8f51cdcf86c6",
+  "active_intake_ref": "contracts/m2-orbit-intake.json",
+  "active_intake_sha256_before_initialization": "bfe7c76c5baa4bddb77939fcf76a98cdb759e99bcde2414f391a86171a744d96",
+  "attempt_001_failure_ref": "records/acquisition/orbit-custody-initialization-attempt-001-failure.json",
+  "attempt_001_failure_sha256": "a8d70ea0b63307962545078f4a578f696cc2255d9fd322d9a187128a8d79ebf7",
+  "attempt_002_readiness_ref": "records/acquisition/orbit-custody-initialization-attempt-002-readiness.json",
+  "attempt_002_readiness_sha256": "b7025e1efae74b2f18adf2ee6fbbfabd58316fd767ac56df491dcd752a20f4a0",
+  "paths": {
+    "data_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "custody_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb",
+    "staging_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001",
+    "external_receipt": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\orbit-custody-initialization-receipt.json"
+  },
+  "preserved_partial_paths": [
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-001",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-002",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-003",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-004",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d"
+  ],
+  "created_paths_attempt_002": [
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\attempt-events",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\attempt-events\\m2-orb-001",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\attempt-events\\m2-orb-002",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\attempt-events\\m2-orb-003",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\attempt-events\\m2-orb-004",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-001",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-002",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-003",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-004"
+  ],
+  "verification": {
+    "preserved_partial_directory_count": 7,
+    "created_directory_count_attempt_002": 10,
+    "all_paths_exist": true,
+    "all_paths_not_reparse_points": true,
+    "all_asset_destination_parents_exist": true,
+    "all_asset_staging_parents_exist": true,
+    "all_attempt_event_directories_exist": true,
+    "free_bytes_before": 554371874816,
+    "files_downloaded": 0,
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false
+  },
+  "credential_values_read_or_recorded": false,
+  "next_gate": "M2-ORBIT-SENTINEL-CUSTODY"
+}

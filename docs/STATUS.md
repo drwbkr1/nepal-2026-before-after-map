@@ -1,12 +1,12 @@
 # Current status
 
-- **State:** M1 complete; M2 active with one Sentinel checkpoint and two independent DEM review checkpoints
+- **State:** M1 complete; M2 active with one Sentinel checkpoint, one dependent orbit checkpoint, and two independent DEM review checkpoints
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
-- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; the eight Sentinel products remain unattempted
+- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; the eight Sentinel products and four orbit payloads remain unattempted
 - **Long-term goal:** Active
-- **Checkpoints:** `M2-AUTHENTICATION-REFERENCE`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
+- **Checkpoints:** `M2-AUTHENTICATION-REFERENCE`; dependent `M2-ORBIT-SENTINEL-CUSTODY`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
 
 ## Purpose
 
@@ -85,15 +85,17 @@ The formal readiness audit remains **DEFER**. Source/terms, custody, structure, 
 
 The exact terrain-result owner-review packet is now ready under bundle SHA-256 `834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5`. Its public review surface is text-only; the external APRX, PDF, PNG, and manifest are bound through the terrain receipt and listed with full local paths and hashes in `docs/M2_DEM_TERRAIN_RESULT_REVIEW.md`. The blank response has one undecided item and zero human decisions. Approval can resolve only the owner terrain-result review gate after exact response lock and reconciliation; it cannot make the overall readiness audit pass or release vertical, radar, Sentinel, or scientific work.
 
-## Parallel Sentinel-1 orbit amendment review
+## Activated Sentinel-1 orbit amendment
 
 Official CDSE OData metadata captured at `2026-09-04T01:16:42Z` found multiple full-coverage S1D `AUX_RESORB` candidates for each of the four unique approved radar acquisition windows, but zero covering `AUX_POEORB` candidates. The fixed project rule selected the full-coverage file with the greatest minimum time margin around each complete scene window, then would break ties by latest publication and provider UUID. This is a project rule, not an ESA rule.
 
 The exact selected objects are `d4fdc474-0069-459b-9534-b5999dec5aab` for `M1-SRC-001` and `M1-SRC-002`, `ec7dd79b-0588-456a-9d17-6324d5affcb5` for `M1-SRC-003`, `182fec80-86b8-46b4-bc76-43be0ab70ba5` for `M1-SRC-004` and `M1-SRC-005`, and `af27071d-df96-4850-af40-e09aedcd68a3` for `M1-SRC-006`. Together they total 2,539,715 bytes. The candidate manifest binds their exact filenames, validity intervals, minimum margins, publication and eviction times, S3 paths, provider BLAKE3 and MD5 values, and download URLs.
 
-The source gate is structurally valid but **blocked** only on exact scope authority. Review bundle SHA-256 `ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1` binds proposal SHA-256 `b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292`, the official live metadata, the exact four-file manifest, and non-active intake and offline-verification controls. Its blank response has one undecided item, false attestation, no timestamps, and zero human decisions. No credential was used or read, no payload was requested, and no orbit XML was parsed or applied.
+The owner approved review bundle SHA-256 `ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1` and proposal SHA-256 `b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292`. The exact response was locked at SHA-256 `6f6af42f1fbf7525d8fceddf6c9f9f2f49d3f14f3fd725f5d34c2f7aa98819ee`, reconciled, and activated without broadening the four-file scope. The active controls authorize acquisition, verification, non-Git custody, and exact-source application only after each bound Sentinel source is promoted and passes offline container verification. Later precise substitution remains separately gated.
 
-Approval can authorize only the four exact restituted acquisitions, existing secret-safe token-reference use, exact verification, non-Git custody, and explicit application to the six bound sources after their own custody prerequisites pass. It cannot authorize a later precise file, account action, new terms, S3-secret generation, payment, premature radar processing, payload publication, or a scientific result. A later `AUX_POEORB` substitution requires a fresh exact manifest and review.
+At `2026-09-04T02:07:51Z`, fresh preflight found all four exact CDSE catalogue identities online and unchanged, matched the reviewed terms and legal-notice bytes, and passed storage, path, and collision checks. It performed no authentication, read no token value, and requested no payload byte. Empty custody initialization attempt-001 then failed after creating seven empty directories because the `attempt-events` parent had been omitted. That failure and exact empty partial inventory are retained. A narrowly predeclared attempt-002 added the missing parent and completed ten remaining approved directories without network access, authentication, or payload transfer.
+
+The four-file runner now passes 29 focused tests. It requires exact provider MD5 and BLAKE3, local SHA-256, exclusive staging, failure preservation, atomic no-replace promotion, safe XML parsing, ordered finite state vectors, exact validity windows, and scene bindings. The generic intake validator first failed because each unknown pre-transfer SHA-256 lacked the required explanatory field. That failure is retained; a metadata-only correction added the same `expected.unavailable_reason` to all four active assets without changing source identity, checksums, size, authority, or custody. A later consistency check also found that the activated intake retained its candidate root label; that finding is retained, and only the root status was changed to `active`. The corrected active intake passes. A fake-reference guard probe returned exit 12 with `bound_sentinel_source_not_promoted` before catalogue or token access; active controls remained unchanged and orbit custody contains zero payload files. The checkpoint is `M2-ORBIT-SENTINEL-CUSTODY`: resume the original eight-product Sentinel route first, and do not transfer an orbit file until all of its bound Sentinel sources are promoted and offline container-verified.
 
 The first public terrain-control run failed because NumPy was absent from the Linux runner; the next workflow edit failed before creating any job. A later correction-evidence commit failed because its receipt hash was computed from Windows CRLF bytes before Git normalized the committed blob to LF. All three runs are retained. The corrected workflow pins `numpy==2.5.1`, and GitHub Actions run `33819458096` passed the 199-file repository check and all 190 tests. The LF-normalized additive correction receipt does not change the terrain thresholds or any DEM input.
 
@@ -132,10 +134,10 @@ Checkpoint derivation is also portable. Repository-only tests do not require the
 - preserve append-only attempts and use collision-safe staging and promotion;
 - verify exact bytes, provider checksums, ZIP safety, SAFE identity, and required content;
 - inspect real pixels, masks, AOI coverage, baselines, and EPSG:32645 registration.
+- after the six radar sources are promoted and offline container-verified, acquire and verify only the four exact approved `AUX_RESORB` files and apply each only to its bound source IDs;
 - review and explicitly resolve the DEM vertical-datum route before Sentinel-1 terrain correction, without silently selecting `GEOID` or `NONE`;
 - if the exact EGM2008 route is approved, wait for the owner to install the matching ArcGIS Coordinate Systems Data component before any conversion attempt;
 - review bundle SHA-256 `834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5` and explicitly approve, revise, or defer the terrain-only owner review.
-- review orbit-amendment bundle SHA-256 `ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1` and explicitly approve, revise, or defer the exact four-file restituted route.
 
 ## Outside the active authority or still unproven
 
@@ -143,7 +145,7 @@ Checkpoint derivation is also portable. Repository-only tests do not require the
 - creating or recovering an account or changing account security;
 - disclosing credentials or using a paid route;
 - downloading products outside the exact eight;
-- downloading or applying any orbit file before exact orbit-amendment approval, lock, and reconciliation, or silently substituting a later precise orbit file;
+- downloading or applying an approved orbit file before its bound Sentinel custody prerequisite passes, acquiring any unapproved orbit identity, or silently substituting a later precise orbit file;
 - changing the accepted Copernicus WorldDEM-30 license, using a different route, or acquiring any DEM tile outside the exact approved four;
 - using or redistributing restricted high-resolution imagery;
 - repository-license selection;

@@ -13,7 +13,9 @@ The reviewed artifacts remain unchanged. Active intake, preflight, and custody r
 
 The current checkpoint is `M2-AUTHENTICATION-REFERENCE`. No credential reference was present at preflight, no authentication occurred, and no product bytes were downloaded. Continue only through a secret-safe reference to an existing owner-controlled CDSE access token or authenticated session. Never place secret values in a command argument, chat message, repository file, receipt, URL, or captured output.
 
-A separate DEM amendment was approved on 3 September 2026 through review bundle SHA-256 `caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e`, proposal SHA-256 `92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69`, and license SHA-256 `9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd`. Its fresh no-payload preflight and empty custody initialization passed, so its independent checkpoint is `M2-DEM-ACQUISITION`. It does not change the Sentinel authentication handoff.
+A separate DEM amendment was approved on 3 September 2026 through review bundle SHA-256 `caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e`, proposal SHA-256 `92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69`, and license SHA-256 `9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd`. Its four exact tiles are now promoted and structurally verified, and its independent checkpoint is `M2-DEM-VERTICAL-DATUM-REVIEW`. It does not change the Sentinel authentication handoff.
+
+The exact four-file Sentinel-1 orbit amendment was approved on 4 September 2026 through review bundle SHA-256 `ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1` and proposal SHA-256 `b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292`. Its fresh source-and-rights preflight and corrected empty-custody initialization pass. Its dependent checkpoint is `M2-ORBIT-SENTINEL-CUSTODY`: no orbit transfer is eligible until every Sentinel source bound to that orbit is promoted and offline container-verified. Later precise substitution remains separately gated.
 
 ## Prepared controls
 
@@ -61,14 +63,14 @@ The wrapper refuses unpromoted assets, missing or ambiguous successful-attempt e
 
 ## Parallel DEM sequence
 
-`contracts/m2-dem-intake.json` authorizes only `M2-DEM-001` through `M2-DEM-004`; all remain unattempted. `contracts/m2-dem-offline-verification.json` is active and offline but refuses raster access until a matching intake asset is promoted. The required pre-transfer sequence is:
+`contracts/m2-dem-intake.json` authorizes only `M2-DEM-001` through `M2-DEM-004`; all four are promoted. `contracts/m2-dem-offline-verification.json` is active, and all four exact rasters passed the bounded ArcGIS structural and finite-AOI-coverage verification. The governed sequence was:
 
 1. Re-fetch the exact license URL and require SHA-256 `9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd`. **Completed at `2026-09-03T20:48:10Z`.**
 2. Revalidate each exact anonymous HTTPS object without redirects, authentication, requester-pays behavior, cost, or identity drift. Require the reviewed content length, ETag, last-modified value, and byte-range behavior. **Completed.**
 3. Revalidate free space, path containment, absent destination and staging collisions, and no reparse-point ancestors under the approved external root. **Completed with 519.029 GiB free.**
 4. Write the live-source and preflight records and initialize only the empty DEM custody paths. **Completed; receipt SHA-256 `31d1b814d8da753dd2335f3110a49107df3f7a6c75875154a0fff0338b7e80a0`.**
-5. Acquire one tile at a time through exclusive staging, compute local SHA-256, preserve all failures, and promote without replacement.
-6. Run the active ArcGIS GeoTIFF verifier offline for each promoted tile. Structural readability is not valid-pixel or radar fitness.
+5. Acquire one tile at a time through exclusive staging, compute local SHA-256, preserve all failures, and promote without replacement. **Completed for all four tiles.**
+6. Run the active ArcGIS GeoTIFF verifier offline for each promoted tile. **Completed; structural and finite-coverage checks pass, without establishing vertical or radar fitness.**
 
 Stop if the license bytes, object identity, route, access mode, cost, paths, or custody conditions differ. Do not infer a vertical-datum conversion or download orbit auxiliaries.
 
@@ -79,6 +81,20 @@ python scripts/acquire_m2_dem_tile.py --source-id M2-DEM-001
 ```
 
 Run only one invocation at a time. A failure is terminal under the current no-retry control and must be reviewed before another attempt for that tile.
+
+## Dependent Sentinel-1 orbit sequence
+
+`contracts/m2-orbit-intake.json` authorizes only `M2-ORB-001` through `M2-ORB-004`, all S1D `AUX_RESORB`. `contracts/m2-orbit-offline-verification.json` authorizes exact-file verification and exact-source application, but not radar pixel processing or a later precise-orbit substitution.
+
+Before any orbit transfer, require every Sentinel source named in that orbit asset's `bound_source_ids` to be `promoted` in `contracts/m2-intake.json` and to have its exact passing offline container receipt. The runner checks this prerequisite before public catalogue access and before reading the `CDSE_ACCESS_TOKEN` environment reference. The current guard result is exit 12, `bound_sentinel_source_not_promoted`, with zero orbit payload files.
+
+When the prerequisite eventually passes, transfer only one exact orbit at a time:
+
+```powershell
+python scripts/acquire_m2_orbit_file.py --source-id M2-ORB-001
+```
+
+The runner requires an unchanged exact CDSE identity, provider MD5 and BLAKE3, local SHA-256, exclusive staging, preserved failures, and atomic no-replace promotion. The active intake's unknown pre-transfer SHA-256 fields include the schema-required reason, its root status is `active`, and the generic intake validator passes; the earlier missing-field failure and stale-label finding remain recorded. After promotion, `scripts/verify_m2_orbit_eof.py` must reject external XML entities and require exact mission, file type, validity window, scene binding, and ordered finite state vectors. Do not invoke either route now; the Sentinel custody prerequisite remains unmet.
 
 Regenerate or verify these bytes with:
 

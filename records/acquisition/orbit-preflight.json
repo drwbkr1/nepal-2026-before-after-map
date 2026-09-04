@@ -1,0 +1,257 @@
+{
+  "schema_version": "1.0",
+  "preflight_id": "NEPAL-M2-ORBIT-PREFLIGHT-001",
+  "assessed_at_utc": "2026-09-04T02:07:51Z",
+  "status": "pass_no_payload_no_external_mutation_sentinel_custody_pending",
+  "review_bundle_sha256": "ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1",
+  "proposal_ref": "contracts/milestone-002-orbit-amendment-proposal.json",
+  "proposal_sha256": "b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292",
+  "approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+  "approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+  "candidate_manifest_ref": "records/source-gates/m2-orbit-candidate-manifest.json",
+  "candidate_manifest_sha256": "e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736",
+  "historical_source_gate_ref": "records/source-gates/m2-orbit-source-gate.json",
+  "historical_source_gate_sha256": "53a9806df53e0a576fb3c70a035a44b983c951ca8cc830d2c721f2c41d18b2af",
+  "source_gate_ref": "records/source-gates/m2-orbit-live-source-gate.json",
+  "source_gate_sha256": "26c9f7315a8ce15befdcc56f906706016d106ac2eebd91935d7e8f51cdcf86c6",
+  "live_products": [
+    {
+      "source_id": "M2-ORB-001",
+      "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)?$expand=Locations",
+      "observed_at_utc": "2026-09-04T02:07:51Z",
+      "response_sha256": "ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c",
+      "identity": {
+        "provider_product_id": "d4fdc474-0069-459b-9534-b5999dec5aab",
+        "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+        "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/16/S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+        "content_length_bytes": 639533,
+        "validity_start_utc": "2026-08-16T10:35:26.000000Z",
+        "validity_end_utc": "2026-08-16T14:09:56.000000Z",
+        "publication_date_utc": "2026-08-16T14:34:34.134896Z",
+        "modification_date_utc": "2026-08-16T14:34:34.134896Z",
+        "online": true,
+        "eviction_date_utc": "2026-11-16T14:34:08.080856Z",
+        "provider_checksums": {
+          "MD5": "ca7f36b1892073c883c4cff5c0517b9c",
+          "BLAKE3": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b"
+        }
+      },
+      "status": "pass_exact_identity_online_unchanged"
+    },
+    {
+      "source_id": "M2-ORB-002",
+      "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)?$expand=Locations",
+      "observed_at_utc": "2026-09-04T02:07:51Z",
+      "response_sha256": "23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e",
+      "identity": {
+        "provider_product_id": "ec7dd79b-0588-456a-9d17-6324d5affcb5",
+        "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+        "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/18/S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+        "content_length_bytes": 631254,
+        "validity_start_utc": "2026-08-18T21:50:10.000000Z",
+        "validity_end_utc": "2026-08-19T01:21:20.000000Z",
+        "publication_date_utc": "2026-08-19T01:48:40.266889Z",
+        "modification_date_utc": "2026-08-19T01:48:40.266889Z",
+        "online": true,
+        "eviction_date_utc": "2026-11-19T01:48:27.107300Z",
+        "provider_checksums": {
+          "MD5": "4752bc958d3a65a14100e96f4e6489b2",
+          "BLAKE3": "7f69b4ae261fe43ea758ab3d1f0c290706aa4b8308a55c49b510badcf3fca49d"
+        }
+      },
+      "status": "pass_exact_identity_online_unchanged"
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)?$expand=Locations",
+      "observed_at_utc": "2026-09-04T02:07:51Z",
+      "response_sha256": "75562f7c63668569a538a208b2b86db7f05eff17b4fa7e14555a948a84535132",
+      "identity": {
+        "provider_product_id": "182fec80-86b8-46b4-bc76-43be0ab70ba5",
+        "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+        "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/28/S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+        "content_length_bytes": 639533,
+        "validity_start_utc": "2026-08-28T10:35:27.000000Z",
+        "validity_end_utc": "2026-08-28T14:09:57.000000Z",
+        "publication_date_utc": "2026-08-28T14:33:59.504081Z",
+        "modification_date_utc": "2026-08-28T14:33:59.504081Z",
+        "online": true,
+        "eviction_date_utc": "2026-11-28T14:33:37.358606Z",
+        "provider_checksums": {
+          "MD5": "c7aa9da84a4bd1b8113275e7bbe3d3f7",
+          "BLAKE3": "9138c6cc9e26483b67cfedb69475cb08dcce6170dab24beac53319583a52835d"
+        }
+      },
+      "status": "pass_exact_identity_online_unchanged"
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)?$expand=Locations",
+      "observed_at_utc": "2026-09-04T02:07:51Z",
+      "response_sha256": "4fa0be02fabc3b74b920374e40d470a7e0acec4505e768e13e6a82875a20b448",
+      "identity": {
+        "provider_product_id": "af27071d-df96-4850-af40-e09aedcd68a3",
+        "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+        "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/30/S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+        "content_length_bytes": 629395,
+        "validity_start_utc": "2026-08-30T21:50:11.000000Z",
+        "validity_end_utc": "2026-08-31T01:21:11.000000Z",
+        "publication_date_utc": "2026-08-31T01:50:22.594002Z",
+        "modification_date_utc": "2026-08-31T01:50:22.594002Z",
+        "online": true,
+        "eviction_date_utc": "2026-12-01T01:50:08.131473Z",
+        "provider_checksums": {
+          "MD5": "1eebe30919f50a31dd04f854ee1c813d",
+          "BLAKE3": "0fe6a53b52f3caf11aa8e685a6367f673c69a8a580d90b398148dda772e56d12"
+        }
+      },
+      "status": "pass_exact_identity_online_unchanged"
+    }
+  ],
+  "live_rights_pages": [
+    {
+      "page_id": "cdse_terms",
+      "url": "https://dataspace.copernicus.eu/terms-and-conditions",
+      "observed_at_utc": "2026-09-04T02:07:51Z",
+      "http_status": 200,
+      "response_sha256": "97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0",
+      "content_length_bytes": 77747,
+      "content_type": "text/html; charset=UTF-8",
+      "status": "pass_exact_reviewed_bytes"
+    },
+    {
+      "page_id": "sentinel_legal_notice",
+      "url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "observed_at_utc": "2026-09-04T02:07:51Z",
+      "http_status": 200,
+      "response_sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64",
+      "content_length_bytes": 115881,
+      "content_type": "application/pdf",
+      "status": "pass_exact_reviewed_bytes"
+    }
+  ],
+  "path_checks": {
+    "project_root": "C:\\Projects\\Active",
+    "external_data_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "custody_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb",
+    "staging_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001",
+    "asset_paths": [
+      {
+        "source_id": "M2-ORB-001",
+        "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-001\\S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+        "staging_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-001\\S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF.part",
+        "destination_exists": false,
+        "staging_exists": false,
+        "path_contained": true,
+        "reparse_component_present": false
+      },
+      {
+        "source_id": "M2-ORB-002",
+        "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-002\\S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+        "staging_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-002\\S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF.part",
+        "destination_exists": false,
+        "staging_exists": false,
+        "path_contained": true,
+        "reparse_component_present": false
+      },
+      {
+        "source_id": "M2-ORB-003",
+        "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-003\\S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+        "staging_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-003\\S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF.part",
+        "destination_exists": false,
+        "staging_exists": false,
+        "path_contained": true,
+        "reparse_component_present": false
+      },
+      {
+        "source_id": "M2-ORB-004",
+        "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-004\\S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+        "staging_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-004\\S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF.part",
+        "destination_exists": false,
+        "staging_exists": false,
+        "path_contained": true,
+        "reparse_component_present": false
+      }
+    ],
+    "collision_policy": "fail",
+    "promotion_mode": "atomic-no-replace",
+    "status": "pass"
+  },
+  "storage_check": {
+    "minimum_free_bytes": 64424509440,
+    "observed_free_bytes": 554496991232,
+    "observed_free_gib": 516.416,
+    "status": "pass"
+  },
+  "sentinel_custody_prerequisite": {
+    "required_source_ids": [
+      "M1-SRC-001",
+      "M1-SRC-002",
+      "M1-SRC-003",
+      "M1-SRC-004",
+      "M1-SRC-005",
+      "M1-SRC-006"
+    ],
+    "sources": [
+      {
+        "source_id": "M1-SRC-001",
+        "state": "authorized",
+        "promoted": false,
+        "offline_container_verification_passed": false
+      },
+      {
+        "source_id": "M1-SRC-002",
+        "state": "authorized",
+        "promoted": false,
+        "offline_container_verification_passed": false
+      },
+      {
+        "source_id": "M1-SRC-003",
+        "state": "authorized",
+        "promoted": false,
+        "offline_container_verification_passed": false
+      },
+      {
+        "source_id": "M1-SRC-004",
+        "state": "authorized",
+        "promoted": false,
+        "offline_container_verification_passed": false
+      },
+      {
+        "source_id": "M1-SRC-005",
+        "state": "authorized",
+        "promoted": false,
+        "offline_container_verification_passed": false
+      },
+      {
+        "source_id": "M1-SRC-006",
+        "state": "authorized",
+        "promoted": false,
+        "offline_container_verification_passed": false
+      }
+    ],
+    "promoted_and_verified_count": 0,
+    "required_count": 6,
+    "status": "pending_blocks_orbit_payload_transfer"
+  },
+  "assertions": {
+    "exact_approved_orbit_count": 4,
+    "exact_live_unchanged_online_count": 4,
+    "terms_hash_match": true,
+    "legal_notice_hash_match": true,
+    "path_and_collision_safety": "pass",
+    "free_space_floor": "pass",
+    "network_requests_performed": true,
+    "authentication_performed": false,
+    "credential_reference_checked": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_bytes_requested": 0,
+    "external_directories_created": 0,
+    "sentinel_custody_prerequisite_satisfied": false,
+    "precise_substitution_authorized": false,
+    "orbit_xml_verified": false,
+    "orbit_correction_applied": false,
+    "scientific_result_established": false
+  },
+  "next_gate": "M2-ORBIT-CUSTODY-INITIALIZATION"
+}

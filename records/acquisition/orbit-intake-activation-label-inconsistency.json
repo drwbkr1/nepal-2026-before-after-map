@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-INTAKE-ACTIVATION-LABEL-INCONSISTENCY-001",
+  "status": "failed_stale_candidate_status_on_activated_intake",
+  "observed_at_utc": "2026-09-04T02:36:17Z",
+  "intake_ref": "contracts/m2-orbit-intake.json",
+  "intake_sha256_at_finding": "b52512ecf86a7d85f99f5cff932219bc29620f08871e3b3242b76b645b0e2604",
+  "observed_root_status": "candidate_not_active",
+  "expected_root_status": "active",
+  "active_evidence": {
+    "asset_states": [
+      "authorized",
+      "authorized",
+      "authorized",
+      "authorized"
+    ],
+    "extension_status": "active_authorized_preflight_passed_custody_initialized",
+    "amendment_approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+    "amendment_approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1"
+  },
+  "assessment": "The activation derivation retained the candidate-only root label while activating every asset and the authority extension. The stale label can misroute consumers even though it did not broaden authority or enable transfer.",
+  "assertions": {
+    "asset_count": 4,
+    "all_asset_states_authorized": true,
+    "asset_attempt_count": 0,
+    "source_identities_changed": false,
+    "authorization_changed": false,
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_bytes_requested": 0,
+    "scientific_result_established": false,
+    "silent_correction_authorized": false
+  },
+  "next_action": "Change only the active intake root status from candidate_not_active to active, then rerun schema validation, the custody guard, and all tests."
+}

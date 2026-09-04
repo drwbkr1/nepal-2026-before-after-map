@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-ORBIT-AMENDMENT-APPROVAL-001",
+  "status": "approved",
+  "approved_at_utc": "2026-09-04T02:01:22Z",
+  "review_id": "m2-orbit-amendment-review-001",
+  "review_bundle_id": "m2-orbit-amendment-review-bundle-001",
+  "review_bundle_manifest_sha256": "ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1",
+  "amendment_proposal_ref": "contracts/milestone-002-orbit-amendment-proposal.json",
+  "amendment_proposal_sha256": "b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292",
+  "review_reconciliation_ref": "records/source-gates/m2-orbit-amendment-review-reconciliation.json",
+  "review_reconciliation_sha256": "d421acb9e343531f5eb595d69d2414c30e4ef5717d7614a5a1696546c6cd866c",
+  "locked_response_sha256": "6f6af42f1fbf7525d8fceddf6c9f9f2f49d3f14f3fd725f5d34c2f7aa98819ee",
+  "lock_receipt_sha256": "74a3c70c9c7efcb6c4025461f1e8792f679e80332d17e3f30288ffa25081aa5d",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "authorized_source_ids": [
+    "M2-ORB-001",
+    "M2-ORB-002",
+    "M2-ORB-003",
+    "M2-ORB-004"
+  ],
+  "authorized_provider_product_ids": [
+    "d4fdc474-0069-459b-9534-b5999dec5aab",
+    "ec7dd79b-0588-456a-9d17-6324d5affcb5",
+    "182fec80-86b8-46b4-bc76-43be0ab70ba5",
+    "af27071d-df96-4850-af40-e09aedcd68a3"
+  ],
+  "authorized_sentinel_source_ids": [
+    "M1-SRC-001",
+    "M1-SRC-002",
+    "M1-SRC-003",
+    "M1-SRC-004",
+    "M1-SRC-005",
+    "M1-SRC-006"
+  ],
+  "authorized_orbit_type": "AUX_RESORB",
+  "orbit_quality": {
+    "selected_type": "restituted",
+    "precise_equivalence_established": false,
+    "later_precise_substitution_status": "separately_gated_not_authorized"
+  },
+  "credential_policy": {
+    "reference": "existing secret-safe owner-controlled CDSE token reference",
+    "value_recorded": false,
+    "may_be_read_only_after_all_nonsecret_prerequisites_pass": true
+  },
+  "authorized_next_actions": [
+    "use the existing secret-safe owner-controlled CDSE token reference only after the original Sentinel acquisition begins",
+    "download only the four exact AUX_RESORB provider UUIDs in the bound candidate manifest",
+    "verify provider size and checksums, local SHA-256, XML identity, ordered finite OSVs, validity coverage, and exact scene binding",
+    "store orbit payloads and corrected SAFE metadata only in versioned non-Git custody",
+    "apply each passing orbit file only to the exact approved Sentinel-1 source IDs listed in its record",
+    "preserve embedded predicted metadata plus all failed, partial, corrupt, superseded, and inconclusive attempts"
+  ],
+  "does_not_authorize": [
+    "create, recover, or modify an account or expose a token, password, cookie, header, S3 key, or cloud connection file",
+    "accept new or changed terms, incur a charge, or use an unapproved host",
+    "download any orbit product other than the four exact restituted objects",
+    "silently substitute later precise orbit files",
+    "resolve the separate DEM vertical-datum gate or terrain-result review",
+    "begin radar processing before all Sentinel, DEM, vertical, orbit, and pixel-readiness prerequisites pass",
+    "publish payloads, scientific conclusions, attribution, or emergency guidance"
+  ],
+  "human_decisions_fabricated": false
+}

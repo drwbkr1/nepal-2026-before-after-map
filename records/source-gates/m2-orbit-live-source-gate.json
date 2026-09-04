@@ -1,0 +1,770 @@
+{
+  "contract_version": "source-gate/v1",
+  "assessment_id": "NEPAL-M2-ORBIT-LIVE-SOURCE-GATE-001",
+  "assessed_at": "2026-09-04T02:07:51Z",
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+    "authority_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+    "authorized_actions": [
+      "use the existing secret-safe owner-controlled CDSE token reference only after the original Sentinel acquisition begins",
+      "download only the four exact AUX_RESORB provider UUIDs in the bound candidate manifest",
+      "verify provider size and checksums, local SHA-256, XML identity, ordered finite OSVs, validity coverage, and exact scene binding",
+      "store orbit payloads and corrected SAFE metadata only in versioned non-Git custody",
+      "apply each passing orbit file only to the exact approved Sentinel-1 source IDs listed in its record",
+      "preserve embedded predicted metadata plus all failed, partial, corrupt, superseded, and inconclusive attempts"
+    ],
+    "expires_at_utc": null
+  },
+  "intended_use": {
+    "summary": "Acquire, verify, and conditionally apply four exact S1D AUX_RESORB files only to their six bound approved radar sources.",
+    "planned_actions": [
+      "use the existing secret-safe owner-controlled CDSE token reference only after the original Sentinel acquisition begins",
+      "download only the four exact AUX_RESORB provider UUIDs in the bound candidate manifest",
+      "verify provider size and checksums, local SHA-256, XML identity, ordered finite OSVs, validity coverage, and exact scene binding",
+      "store orbit payloads and corrected SAFE metadata only in versioned non-Git custody",
+      "apply each passing orbit file only to the exact approved Sentinel-1 source IDs listed in its record",
+      "preserve embedded predicted metadata plus all failed, partial, corrupt, superseded, and inconclusive attempts"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "M2-ORB-001",
+      "name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Exact provider identity is unchanged."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "Primary provider and exact owner scope are bound."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "Object is online; only the existing secret-safe token reference may be used later."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "CDSE terms and Sentinel legal notice match the reviewed hashes 97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0 and fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "Reviewed terms and legal-notice bytes remain unchanged."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Orbit-to-scene bindings remain exact."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Provider MD5, BLAKE3, and length are fixed for later byte verification."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Validity coverage and restituted quality remain explicit."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "No credential value was read or recorded and payloads remain outside Git."
+        },
+        {
+          "id": "scope-authority",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "The exact four-file amendment is approved; later precise substitution is excluded."
+        }
+      ]
+    },
+    {
+      "source_id": "M2-ORB-002",
+      "name": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Exact provider identity is unchanged."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "Primary provider and exact owner scope are bound."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "Object is online; only the existing secret-safe token reference may be used later."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "CDSE terms and Sentinel legal notice match the reviewed hashes 97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0 and fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "Reviewed terms and legal-notice bytes remain unchanged."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Orbit-to-scene bindings remain exact."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Provider MD5, BLAKE3, and length are fixed for later byte verification."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Validity coverage and restituted quality remain explicit."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "No credential value was read or recorded and payloads remain outside Git."
+        },
+        {
+          "id": "scope-authority",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "The exact four-file amendment is approved; later precise substitution is excluded."
+        }
+      ]
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "name": "S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 75562f7c63668569a538a208b2b86db7f05eff17b4fa7e14555a948a84535132 confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Exact provider identity is unchanged."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 75562f7c63668569a538a208b2b86db7f05eff17b4fa7e14555a948a84535132 confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "Primary provider and exact owner scope are bound."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 75562f7c63668569a538a208b2b86db7f05eff17b4fa7e14555a948a84535132 confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "Object is online; only the existing secret-safe token reference may be used later."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "CDSE terms and Sentinel legal notice match the reviewed hashes 97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0 and fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "Reviewed terms and legal-notice bytes remain unchanged."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 75562f7c63668569a538a208b2b86db7f05eff17b4fa7e14555a948a84535132 confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Orbit-to-scene bindings remain exact."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 75562f7c63668569a538a208b2b86db7f05eff17b4fa7e14555a948a84535132 confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Provider MD5, BLAKE3, and length are fixed for later byte verification."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 75562f7c63668569a538a208b2b86db7f05eff17b4fa7e14555a948a84535132 confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Validity coverage and restituted quality remain explicit."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "No credential value was read or recorded and payloads remain outside Git."
+        },
+        {
+          "id": "scope-authority",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "The exact four-file amendment is approved; later precise substitution is excluded."
+        }
+      ]
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "name": "S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 4fa0be02fabc3b74b920374e40d470a7e0acec4505e768e13e6a82875a20b448 confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Exact provider identity is unchanged."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 4fa0be02fabc3b74b920374e40d470a7e0acec4505e768e13e6a82875a20b448 confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "Primary provider and exact owner scope are bound."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 4fa0be02fabc3b74b920374e40d470a7e0acec4505e768e13e6a82875a20b448 confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "Object is online; only the existing secret-safe token reference may be used later."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "CDSE terms and Sentinel legal notice match the reviewed hashes 97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0 and fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "Reviewed terms and legal-notice bytes remain unchanged."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 4fa0be02fabc3b74b920374e40d470a7e0acec4505e768e13e6a82875a20b448 confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Orbit-to-scene bindings remain exact."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 4fa0be02fabc3b74b920374e40d470a7e0acec4505e768e13e6a82875a20b448 confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Provider MD5, BLAKE3, and length are fixed for later byte verification."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)?$expand=Locations",
+              "observed_at": "2026-09-04T02:07:51Z",
+              "note": "Exact OData response SHA-256 4fa0be02fabc3b74b920374e40d470a7e0acec4505e768e13e6a82875a20b448 confirms unchanged identity, checksums, size, validity, and online state."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact files to six approved Sentinel sources."
+            }
+          ],
+          "note": "Validity coverage and restituted quality remain explicit."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "No credential value was read or recorded and payloads remain outside Git."
+        },
+        {
+          "id": "scope-authority",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-amendment-approval.json",
+              "note": "Exact owner amendment approval SHA-256 6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1 authorizes only four named AUX_RESORB files and forbids precise substitution."
+            }
+          ],
+          "note": "The exact four-file amendment is approved; later precise substitution is excluded."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "ready",
+    "blocking_reasons": [],
+    "live_verification_pending": [],
+    "approved_actions": [
+      "use the existing secret-safe owner-controlled CDSE token reference only after the original Sentinel acquisition begins",
+      "download only the four exact AUX_RESORB provider UUIDs in the bound candidate manifest",
+      "verify provider size and checksums, local SHA-256, XML identity, ordered finite OSVs, validity coverage, and exact scene binding",
+      "store orbit payloads and corrected SAFE metadata only in versioned non-Git custody",
+      "apply each passing orbit file only to the exact approved Sentinel-1 source IDs listed in its record",
+      "preserve embedded predicted metadata plus all failed, partial, corrupt, superseded, and inconclusive attempts"
+    ],
+    "downstream_prerequisite_status": "blocked_on_matching_verified_sentinel_custody"
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": [
+      "use the existing secret-safe owner-controlled CDSE token reference only after the original Sentinel acquisition begins",
+      "download only the four exact AUX_RESORB provider UUIDs in the bound candidate manifest",
+      "verify provider size and checksums, local SHA-256, XML identity, ordered finite OSVs, validity coverage, and exact scene binding",
+      "store orbit payloads and corrected SAFE metadata only in versioned non-Git custody",
+      "apply each passing orbit file only to the exact approved Sentinel-1 source IDs listed in its record",
+      "preserve embedded predicted metadata plus all failed, partial, corrupt, superseded, and inconclusive attempts"
+    ],
+    "still_prohibited": [
+      "create, recover, or modify an account or expose a token, password, cookie, header, S3 key, or cloud connection file",
+      "accept new or changed terms, incur a charge, or use an unapproved host",
+      "download any orbit product other than the four exact restituted objects",
+      "silently substitute later precise orbit files",
+      "resolve the separate DEM vertical-datum gate or terrain-result review",
+      "begin radar processing before all Sentinel, DEM, vertical, orbit, and pixel-readiness prerequisites pass",
+      "publish payloads, scientific conclusions, attribution, or emergency guidance"
+    ]
+  },
+  "limitations": [
+    "Source readiness does not establish transferred-byte integrity, XML fitness, or correction quality.",
+    "The files are restituted rather than precise; later precise substitution remains separately gated.",
+    "Payload transfer remains blocked until every Sentinel source bound to the selected orbit is promoted and offline container-verified."
+  ]
+}

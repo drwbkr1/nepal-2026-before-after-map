@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-INTAKE-SCHEMA-VALIDATION-FAILURE-001",
+  "status": "failed_missing_unavailable_reason_for_unknown_pretransfer_sha256",
+  "observed_at_utc": "2026-09-04T02:31:26Z",
+  "intake_ref": "contracts/m2-orbit-intake.json",
+  "intake_sha256_at_failure": "d82f062a59c256a53c658dfe3c138fa2ea7de01c076339d111413e0bd99a4c9c",
+  "validator_ref": "intake-controlled-data/scripts/validate_intake_contract.py",
+  "validator_sha256": "6acf6558e2ef0d67423314b074e30ef96b1fe1f825b21a7caea7aedaa83014b9",
+  "errors": [
+    "assets[0].expected.unavailable_reason: required when expected identity is incomplete",
+    "assets[1].expected.unavailable_reason: required when expected identity is incomplete",
+    "assets[2].expected.unavailable_reason: required when expected identity is incomplete",
+    "assets[3].expected.unavailable_reason: required when expected identity is incomplete"
+  ],
+  "assessment": "The four assets have exact provider length, MD5, and BLAKE3 values, but local SHA-256 is unavailable until transfer. The missing reason is a schema metadata defect, not source-identity drift or payload evidence.",
+  "assertions": {
+    "asset_count": 4,
+    "source_identities_changed": false,
+    "provider_checksums_changed": false,
+    "expected_sizes_changed": false,
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_bytes_requested": 0,
+    "scientific_result_established": false,
+    "silent_correction_authorized": false
+  },
+  "next_action": "Add only the required unavailable_reason to each active asset, validate the current contract, rerun the custody guard and tests, and preserve this failure."
+}

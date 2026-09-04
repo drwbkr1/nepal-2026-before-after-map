@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "readiness_id": "NEPAL-M2-ORBIT-CUSTODY-INITIALIZATION-ATTEMPT-002-READINESS",
+  "status": "pass_exact_empty_partial_inventory_continuation_predeclared",
+  "recorded_at_utc": "2026-09-04T02:12:08Z",
+  "failure_ref": "records/acquisition/orbit-custody-initialization-attempt-001-failure.json",
+  "failure_sha256": "a8d70ea0b63307962545078f4a578f696cc2255d9fd322d9a187128a8d79ebf7",
+  "implementation_ref": "scripts/initialize_m2_orbit_custody.py",
+  "implementation_sha256": "22773990ee34a648d0f037d9939c20a2feea69a390eb01ed49e383e1af7f2b78",
+  "allowed_partial_directories": [
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-001",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-002",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-003",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-004",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d"
+  ],
+  "required_partial_file_count": 0,
+  "correction": "Include the missing attempt-events parent, require the exact seven-directory empty and no-reparse partial inventory, preserve it, and create only the remaining approved directories with no overwrite.",
+  "unchanged_boundaries": [
+    "four exact AUX_RESORB source identities",
+    "reviewed custody and staging roots",
+    "fail-on-file-collision and no-reparse controls",
+    "zero token reads and zero payload requests",
+    "Sentinel promoted-and-verified prerequisite",
+    "precise-substitution prohibition"
+  ],
+  "assertions": {
+    "attempt_001_failure_preserved": true,
+    "exact_partial_inventory_bound": true,
+    "partial_file_count_required": 0,
+    "source_identities_changed": false,
+    "custody_roots_changed": false,
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_bytes_requested": 0,
+    "scientific_result_established": false
+  },
+  "next_action": "Run one attempt-002 empty-directory continuation with the exact bound implementation and stop on any inventory drift."
+}

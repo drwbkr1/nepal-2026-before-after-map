@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "failure_id": "NEPAL-M2-ORBIT-CUSTODY-INITIALIZATION-ATTEMPT-001-FAILURE",
+  "status": "failed_missing_attempt_events_parent_after_partial_empty_directory_creation",
+  "failed_at_utc": "2026-09-04T02:11:14Z",
+  "error": "unsafe or absent parent before directory creation: C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\attempt-events",
+  "approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+  "approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+  "preflight_ref": "records/acquisition/orbit-preflight.json",
+  "preflight_sha256": "bf5e06069c386b4242fee306fcfea38b815813a72d7a028c1f4a3b1b5fe69681",
+  "implementation_ref": "scripts/initialize_m2_orbit_custody.py",
+  "implementation_sha256_at_failure": "83c7fa4b3702a1e47f3eb676a3a1a688572fca5fd2f1c8e69889db9e3e7728cd",
+  "observed_partial_directories": [
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-001",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-002",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-003",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\m2-orb-004",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits",
+    "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d"
+  ],
+  "observed_files": [],
+  "assertions": {
+    "partial_directory_count": 7,
+    "file_count": 0,
+    "custody_receipt_created": false,
+    "active_intake_mutated": false,
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_bytes_requested": 0,
+    "scientific_result_established": false,
+    "retry_in_attempt_001_authorized": false
+  },
+  "limitations": [
+    "This is initialization-wrapper failure evidence, not source, byte, XML, or orbit-correction evidence.",
+    "The partial empty directories must remain preserved and may be continued only after an exact-inventory correction is predeclared."
+  ],
+  "next_action": "Predeclare an attempt-002 correction that adds the missing attempt-events parent and accepts only this exact empty partial inventory."
+}

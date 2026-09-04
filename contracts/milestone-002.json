@@ -40,6 +40,16 @@
         "proposal_sha256": "92f48680c0b779398d8bbebd872a60bc3850f008f5c9b68d5bf45a2448abdd69",
         "review_bundle_sha256": "caecbdfe69ec1a6c8c39401b63756005820a727cb8f9e7e0084753e2d6afb39e",
         "license_document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd"
+      },
+      {
+        "approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+        "approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+        "proposal_ref": "contracts/milestone-002-orbit-amendment-proposal.json",
+        "proposal_sha256": "b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292",
+        "review_bundle_sha256": "ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1",
+        "authorized_orbit_type": "AUX_RESORB",
+        "authorized_source_count": 4,
+        "precise_substitution_authorized": false
       }
     ]
   },
@@ -66,7 +76,7 @@
       "select a repository license",
       "publish scientific conclusions, event attribution, or emergency guidance",
       "store imagery, rasters, geodatabases, or ArcGIS packages in Git",
-      "download any Sentinel product outside the eight exact approved identities or any DEM tile outside the four exact amendment identities"
+      "download any Sentinel product outside the eight exact approved identities, any DEM tile outside the four exact DEM amendment identities, or any orbit file outside the four exact AUX_RESORB amendment identities"
     ],
     "reversible_actions": [
       "create the approved external custody structure after a passing fresh preflight",
@@ -76,7 +86,10 @@
       "update public control records and validation tooling",
       "write append-only DEM transfer attempts for only the four exact approved tiles",
       "verify and promote exact DEM GeoTIFFs without replacement",
-      "use verified DEM pixels only for approved radar terrain correction and terrain-geometry masks"
+      "use verified DEM pixels only for approved radar terrain correction and terrain-geometry masks",
+      "write append-only orbit transfer attempts for only the four exact approved AUX_RESORB files after fresh preflight and matching Sentinel custody",
+      "verify and promote exact orbit EOF files without replacement",
+      "apply each verified orbit file only to its bound verified Sentinel source in a new versioned non-Git attempt"
     ],
     "stop_conditions": [
       "login, multi-factor authentication, or account recovery requires owner action",
@@ -89,10 +102,17 @@
       "any tile URL, identity, bbox, byte length, ETag, last-modified value, access mode, or cost differs at preflight",
       "an account, authentication, generated secret, paid route, redirect, or requester-pays mode appears",
       "a staging or destination collision, unsafe path, symlink, or non-atomic promotion risk appears",
-      "a downloaded file fails size, local SHA-256 capture, GeoTIFF readability, CRS, dimension, nodata, or AOI-coverage checks"
+      "a downloaded file fails size, local SHA-256 capture, GeoTIFF readability, CRS, dimension, nodata, or AOI-coverage checks",
+      "any provider UUID, filename, validity interval, byte length, checksum, online state, eviction date, access host, or terms hash differs at fresh preflight",
+      "the existing token reference is unavailable, expired, invalid, or would need to be disclosed or logged",
+      "login, MFA, account recovery, terms acceptance, generated S3 credentials, payment, or an unapproved redirect is required",
+      "a staging or destination collision, unsafe path, link, or non-atomic promotion risk appears",
+      "a file fails size, provider checksum, local SHA-256, XML parse, mission or file-type identity, finite ordered OSVs, validity coverage, or scene binding",
+      "the exact Sentinel source group is not already in verified promoted custody"
     ],
     "active_amendments": [
-      "records/source-gates/m2-dem-amendment-approval.json"
+      "records/source-gates/m2-dem-amendment-approval.json",
+      "records/source-gates/m2-orbit-amendment-approval.json"
     ]
   },
   "entry_conditions": [
@@ -288,7 +308,8 @@
       "purpose": "Create and validate independent pre-event optical and radar reference layers in EPSG:32645.",
       "depends_on": [
         "M2-VERIFY",
-        "M2-DEM-VERIFY"
+        "M2-DEM-VERIFY",
+        "M2-ORBIT-APPLY"
       ],
       "action_class": "data_processing",
       "human_gate": false,
@@ -296,7 +317,8 @@
       "inputs": [
         "records/acquisition/verification-summary.json",
         "config/qa/pixel-readiness-contract.json",
-        "contracts/m2-dem-offline-verification.json"
+        "contracts/m2-dem-offline-verification.json",
+        "contracts/m2-orbit-offline-verification.json"
       ],
       "outputs": [
         "external baseline rasters",
@@ -471,6 +493,185 @@
         "rationale": "Four exact ArcGIS structural passes and full-tile finite scans cover every approved AOI; vertical-datum and radar-processing fitness remain separate."
       },
       "next_dependency": "M2-BASELINE"
+    },
+    {
+      "id": "M2-ORBIT-AMEND",
+      "purpose": "Lock and reconcile the exact owner four-file restituted-orbit amendment decision.",
+      "depends_on": [
+        "M2-ACTIVATE"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "complete",
+      "inputs": [
+        "reviews/m2-orbit-amendment/review-bundle.json",
+        "reviews/m2-orbit-amendment/review-contract.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-orbit-amendment-approval.json",
+        "records/source-gates/m2-orbit-amendment-review-reconciliation.json"
+      ],
+      "gates": {
+        "owner_decision": "approve",
+        "attestation": true,
+        "review_bundle_sha256": "ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1",
+        "proposal_sha256": "b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292",
+        "authorized_orbit_type": "AUX_RESORB",
+        "authorized_source_count": 4,
+        "precise_substitution_authorized": false
+      },
+      "disposition": "pass",
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "enables_dependency",
+        "rationale": "One exact completed approval was locked and reconciled; four restituted identities and their limits are hash-bound."
+      },
+      "next_dependency": "M2-ORBIT-PREFLIGHT"
+    },
+    {
+      "id": "M2-ORBIT-PREFLIGHT",
+      "purpose": "Revalidate four exact orbit identities, checksums, availability, terms, paths, collisions, storage, and prerequisite custody without payload transfer.",
+      "depends_on": [
+        "M2-ORBIT-AMEND"
+      ],
+      "action_class": "data_acquisition",
+      "human_gate": false,
+      "status": "complete",
+      "inputs": [
+        "records/source-gates/m2-orbit-amendment-approval.json",
+        "records/source-gates/m2-orbit-candidate-manifest.json",
+        "contracts/m2-orbit-intake.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-orbit-live-source-gate.json",
+        "records/acquisition/orbit-preflight.json"
+      ],
+      "gates": {
+        "preflight_status": "pass_no_payload_no_external_mutation_sentinel_custody_pending",
+        "source_gate_status": "ready",
+        "exact_files_online_and_unchanged": 4,
+        "terms_and_legal_notice_hashes": "pass",
+        "free_space_gib": 516.416,
+        "path_and_collision_safety": "pass",
+        "sentinel_custody_prerequisite": "pending_zero_of_six"
+      },
+      "disposition": "pass",
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "enables_dependency",
+        "rationale": "The four exact sources, rights bytes, storage, and paths pass; payload transfer remains blocked on matching Sentinel custody."
+      },
+      "next_dependency": "M2-ORBIT-ACQUIRE"
+    },
+    {
+      "id": "M2-ORBIT-ACQUIRE",
+      "purpose": "Acquire only the four exact S1D AUX_RESORB files into append-only non-Git custody.",
+      "depends_on": [
+        "M2-ORBIT-PREFLIGHT",
+        "M2-VERIFY"
+      ],
+      "action_class": "data_acquisition",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-orbit-live-source-gate.json",
+        "records/acquisition/orbit-preflight.json",
+        "contracts/m2-orbit-intake.json"
+      ],
+      "outputs": [
+        "external orbit custody",
+        "records/acquisition orbit transfer receipts"
+      ],
+      "gates": {
+        "matching_sentinel_promoted_and_verified": false,
+        "fresh_source_preflight": "pass",
+        "orbit_custody_initialized": true,
+        "token_presence_checked": false
+      },
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-201-VERIFIED-CUSTODY"
+        ],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "Orbit transfer remains blocked until fresh preflight passes and each bound Sentinel source is promoted and verified."
+      },
+      "next_dependency": "M2-ORBIT-VERIFY",
+      "rationale": "Empty orbit custody is verified; payload transfer remains blocked on matching verified Sentinel custody."
+    },
+    {
+      "id": "M2-ORBIT-VERIFY",
+      "purpose": "Verify exact orbit bytes, provider checksums, EOF XML identity, OSVs, validity, and scene binding.",
+      "depends_on": [
+        "M2-ORBIT-ACQUIRE"
+      ],
+      "action_class": "routine_qa",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "external orbit custody",
+        "contracts/m2-orbit-offline-verification.json"
+      ],
+      "outputs": [
+        "records/acquisition orbit verification receipts"
+      ],
+      "gates": {},
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-201-VERIFIED-CUSTODY",
+          "EXIT-202-PIXEL-AND-RIGHTS-QA"
+        ],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "No orbit payload has been transferred or structurally verified."
+      },
+      "next_dependency": "M2-ORBIT-APPLY"
+    },
+    {
+      "id": "M2-ORBIT-APPLY",
+      "purpose": "Apply each verified restituted orbit only to its exact bound Sentinel source in new versioned non-Git output.",
+      "depends_on": [
+        "M2-ORBIT-VERIFY",
+        "M2-DEM-VERIFY"
+      ],
+      "action_class": "data_processing",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "verified Sentinel custody",
+        "verified orbit custody",
+        "contracts/m2-orbit-offline-verification.json"
+      ],
+      "outputs": [
+        "external corrected SAFE metadata attempts",
+        "records/baseline orbit-application receipts"
+      ],
+      "gates": {
+        "dem_vertical_datum_gate": "pending",
+        "terrain_result_review": "pending",
+        "radar_pixel_readiness": "pending",
+        "precise_substitution_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-203-PRE-EVENT-BASELINE",
+          "EXIT-204-REGISTRATION-QA"
+        ],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "Application cannot begin until Sentinel, DEM, vertical, orbit, terrain-review, and radar-readiness prerequisites pass."
+      },
+      "next_dependency": "M2-BASELINE"
     }
   ],
   "path_efficiency": {
@@ -498,7 +699,11 @@
       "EPSG:32645 baseline and registration QA",
       "exact DEM amendment and license binding",
       "fresh anonymous four-tile source preflight",
-      "per-tile SHA-256 and GeoTIFF verification"
+      "per-tile SHA-256 and GeoTIFF verification",
+      "exact Sentinel-1 orbit amendment binding",
+      "fresh four-file orbit source preflight",
+      "per-file provider checksum and EOF XML verification",
+      "exact-source orbit application without SAFE overwrite"
     ],
     "completed_checks": [
       "exact activation binding",
@@ -507,7 +712,8 @@
       "path and collision safety",
       "exact DEM amendment and license binding",
       "fresh anonymous four-tile source preflight",
-      "DEM storage path and collision safety"
+      "DEM storage path and collision safety",
+      "exact Sentinel-1 orbit amendment binding"
     ]
   },
   "activation_evidence": {
