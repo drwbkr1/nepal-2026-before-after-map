@@ -1,0 +1,145 @@
+{
+  "proposal_version": "1.0",
+  "proposal_id": "NEPAL-M2-SENTINEL-RECOVERY-PROPOSAL-002",
+  "prepared_at_utc": "2026-09-04T20:30:32Z",
+  "status": "proposed_not_authorized",
+  "trigger": {
+    "checkpoint": "M2-ACQUISITION-REVIEW",
+    "interruption_reconciliation_ref": "records/acquisition/sentinel-recovery-interruption-reconciliation-001.json",
+    "source_id": "M1-SRC-004",
+    "expected_size_bytes": 1732332897,
+    "original_failed_attempt": {
+      "attempt_id": "m1-src-004-20260904t043930z-ac125c11",
+      "failure_code": "transferred_size_mismatch",
+      "partial_bytes_preserved": 561593598,
+      "partial_sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66"
+    },
+    "approved_recovery_failed_attempt": {
+      "attempt_id": "m1-src-004-recovery-001-20260904t201220z-e4388c64",
+      "failure_code": "external_process_terminated_before_terminal_event",
+      "partial_bytes_preserved": 1333788672,
+      "partial_sha256": "c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac",
+      "failure_cause_established": false,
+      "approved_attempt_consumed": true
+    },
+    "destination_promoted": false,
+    "automatic_retry_authorized": false
+  },
+  "current_verified_state": {
+    "promoted_and_container_verified_source_ids": [
+      "M1-SRC-001",
+      "M1-SRC-002",
+      "M1-SRC-003"
+    ],
+    "failed_source_ids": [
+      "M1-SRC-004"
+    ],
+    "authorized_unattempted_source_ids": [
+      "M1-SRC-005",
+      "M1-SRC-006",
+      "M1-SRC-008",
+      "M1-SRC-010"
+    ],
+    "retained_partial_count": 2,
+    "credential_value_recorded": false,
+    "pixel_usability_established": false,
+    "scientific_fitness_established": false
+  },
+  "proposed_recovery": {
+    "mode": "fresh_full_restart_detached_supervised_worker",
+    "source_id": "M1-SRC-004",
+    "provider_product_id": "641ccb0b-5d88-4c44-b558-93b488cd2453",
+    "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+    "restart_offset_bytes": 0,
+    "resume_any_partial": false,
+    "delete_or_modify_any_partial": false,
+    "reuse_any_prior_staging_path": false,
+    "required_new_asset_or_attempt_namespace": "m1-src-004-recovery-002",
+    "required_new_intake_namespace": "nepal-m2-sentinel-recovery-002",
+    "destination_policy": "same_exact_absent_destination_atomic_no_replace",
+    "maximum_real_transfer_attempts": 1,
+    "broker_worker_boundary": {
+      "console_role": "secret_entry_and_one_way_handoff_only",
+      "transfer_owner": "separate_detached_supervisor_process",
+      "secret_transport": "single_use_anonymous_pipe_or_equivalent_in_memory_process_channel",
+      "secret_forbidden_locations": [
+        "command_line",
+        "environment_variable",
+        "disk_file",
+        "repository_record",
+        "stdout_or_stderr",
+        "event_or_heartbeat_record"
+      ],
+      "console_exit_must_not_end_worker": true,
+      "worker_must_close_secret_channel_after_read": true,
+      "worker_must_emit_nonsecret_started_heartbeat_and_terminal_evidence": true
+    },
+    "implementation_and_test_controls": [
+      "implement the broker, detached supervisor, exclusive recovery contract, and terminal evidence path without reading a real credential",
+      "preserve both prior partials, their staging paths, attempts, receipts, and reconciliations byte-for-byte",
+      "prove with synthetic credentials and a local fixture that the token is absent from process command lines, environment, files, logs, events, and repository changes",
+      "prove with a synthetic forced broker-console termination that the detached supervisor remains alive and reaches a terminal success or failure record",
+      "prove that every ordinary child exit produces a terminal record and that absence of a worker is independently reconcilable from heartbeat and process-state evidence",
+      "prove exclusive staging, byte-zero requests without Range, exact length and checksum failure preservation, redirect refusal, path containment, and atomic no-replace promotion",
+      "publish the exact implementation and synthetic tests, verify the remote commit, and require a successful public CI run before activating a real attempt",
+      "perform a final deterministic no-payload preflight that rehashes both retained partials and confirms the destination remains absent"
+    ],
+    "real_attempt_preconditions": [
+      "the exact proposal and review bundle have a completed approving owner response that is locked and reconciled",
+      "the exact implementation commit has passed the public-CI publication gate",
+      "the current normalized CDSE legal section, structured modification date, OData documentation, token documentation, and Sentinel Legal Notice match their accepted controls",
+      "the provider UUID, product name, online state, catalog length, and provider checksums match the accepted source identity",
+      "both retained partials match their recorded lengths and SHA-256 values",
+      "the final destination remains absent and the recovery-002 staging namespace is new and exclusive",
+      "a fresh owner-controlled access token is supplied only through the tested in-memory broker channel"
+    ],
+    "transfer_controls": [
+      "request the complete exact product from byte zero without Range or resume semantics",
+      "stream only to the new exclusive recovery-002 staging path while computing local SHA-256 and provider MD5",
+      "write nonsecret started and periodic heartbeat evidence outside Git so interruption state remains inspectable",
+      "require exact catalog length and provider MD5 before promotion",
+      "promote with atomic no-replace semantics and rehash the promoted file",
+      "run the existing offline ZIP and SAFE container verification without extraction"
+    ],
+    "post_success_release": [
+      "reconcile M1-SRC-004 as satisfied only through the separately approved successful recovery-002 identity",
+      "resume only M1-SRC-005, M1-SRC-006, M1-SRC-008, and M1-SRC-010 under the original eight-product approval",
+      "run one product at a time and stop with preserved evidence on any later transfer or verification failure"
+    ],
+    "failure_policy": "Any recovery-002 failure is terminal for that identity, preserves all prior and new evidence, stops all further Sentinel transfer, and requires another exact human review; no automatic retry is authorized."
+  },
+  "approval_would_authorize": [
+    "implement and validate only the exact secret-safe detached-worker recovery design and synthetic interruption tests described here",
+    "publish and independently verify the exact implementation and public-CI gate before any real transfer",
+    "perform at most one fresh full M1-SRC-004 recovery-002 transfer from byte zero through a new exclusive staging path",
+    "verify and promote only that exact product if every identity, rights, secret-custody, length, checksum, path, interruption, and container control passes",
+    "after a passing recovery, continue only the four still-unattempted products under the original eight-product approval"
+  ],
+  "approval_would_not_authorize": [
+    "resume, delete, truncate, rename, overwrite, or otherwise modify either retained partial or any prior event or receipt",
+    "reuse either prior staging path, hide either failure, or reinterpret either partial as an admissible product",
+    "place a token in a command line, environment variable, file, repository record, log, event, or heartbeat",
+    "run more than one recovery-002 attempt or automatically retry any failure",
+    "change the provider UUID, product name, observation time, role, sensor route, destination, or source manifest",
+    "accept terms, create, recover, or modify an account, change MFA, incur cost, or disclose credentials",
+    "acquire substitute imagery, additional products, or precise orbit files",
+    "perform radar terrain correction, pixel admission, change mapping, attribution, or scientific publication"
+  ],
+  "human_gate": {
+    "review_required": true,
+    "item_id": "M2-SENTINEL-RECOVERY-002",
+    "allowed_decisions": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "required_attestation": true
+  },
+  "limitations": [
+    "The cause of the recovery-001 process termination is unknown; this design addresses console ownership and evidence durability but does not claim to eliminate every possible external process termination.",
+    "The detached-worker design is proposed, not yet implemented or validated; approval would release its bounded implementation and synthetic tests before any real transfer.",
+    "A fresh transfer may fail again and has no automatic second attempt.",
+    "Container success would not establish raster readability, AOI coverage, usable pixels, registration, or scientific change.",
+    "This proposal creates no authority until the exact review bundle is approved, locked, and reconciled."
+  ]
+}

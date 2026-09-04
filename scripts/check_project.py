@@ -41,6 +41,7 @@ REQUIRED = [
     "contracts/milestone-002.json",
     "contracts/m2-intake.json",
     "contracts/milestone-002-sentinel-recovery-proposal.json",
+    "contracts/milestone-002-sentinel-recovery-002-proposal.json",
     "contracts/m2-sentinel-recovery.json",
     "contracts/milestone-002-orbit-recovery-proposal.json",
     "contracts/m2-offline-verification.json",
@@ -157,6 +158,7 @@ REQUIRED = [
     "docs/M2_CONTROLLED_ACQUISITION_REVIEW.md",
     "docs/M2_EXECUTION_RUNBOOK.md",
     "docs/M2_SENTINEL_RECOVERY_REVIEW.md",
+    "docs/M2_SENTINEL_RECOVERY_002_REVIEW.md",
     "docs/M2_ORBIT_RECOVERY_REVIEW.md",
     "docs/M2_OFFLINE_VERIFICATION.md",
     "docs/M2_DEM_AMENDMENT_REVIEW.md",
@@ -172,6 +174,7 @@ REQUIRED = [
     "docs/assets/m2-controlled-acquisition-review.png",
     "docs/assets/m2-orbit-amendment-review.png",
     "docs/assets/m2-sentinel-recovery-review.png",
+    "docs/assets/m2-sentinel-recovery-002-review.png",
     "docs/assets/m2-orbit-recovery-review.png",
     "scripts/render_m2_activation_review.py",
     "scripts/prepare_m2_intake.py",
@@ -202,6 +205,7 @@ REQUIRED = [
     "records/surface-receipts/m2-dem-terrain-result-review.json",
     "records/surface-receipts/m2-orbit-amendment-review.json",
     "records/surface-receipts/m2-sentinel-recovery-review.json",
+    "records/surface-receipts/m2-sentinel-recovery-002-review.json",
     "records/surface-receipts/m2-orbit-recovery-review.json",
     "records/surface-receipts/optical-processing-synthetic-arcgis.json",
     "records/surface-receipts/optical-baseline-control-readiness.json",
@@ -235,6 +239,9 @@ REQUIRED = [
     "reviews/m2-sentinel-recovery/review-bundle.json",
     "reviews/m2-sentinel-recovery/review-contract.json",
     "reviews/m2-sentinel-recovery/blank-response.json",
+    "reviews/m2-sentinel-recovery-002/review-bundle.json",
+    "reviews/m2-sentinel-recovery-002/review-contract.json",
+    "reviews/m2-sentinel-recovery-002/blank-response.json",
     "reviews/m2-orbit-recovery/review-bundle.json",
     "reviews/m2-orbit-recovery/review-contract.json",
     "reviews/m2-orbit-recovery/blank-response.json",
@@ -253,6 +260,7 @@ REQUIRED = [
     "scripts/m2_transfer_core.py",
     "scripts/acquire_m2_product.py",
     "scripts/m2_sentinel_recovery_core.py",
+    "scripts/render_m2_sentinel_recovery_002_review.py",
     "scripts/acquire_m2_sentinel_recovery.py",
     "scripts/verify_m2_sentinel_recovery_container.py",
     "scripts/activate_m2_sentinel_recovery.py",
@@ -530,6 +538,11 @@ def main() -> None:
     sentinel_recovery_activation = json.loads((ROOT / "records/acquisition/sentinel-recovery-activation.json").read_text(encoding="utf-8"))
     sentinel_recovery_attempt = json.loads((ROOT / "records/acquisition/recovery-attempts/m1-src-004-recovery-001-20260904t201220z-e4388c64.json").read_text(encoding="utf-8"))
     sentinel_recovery_interruption = json.loads((ROOT / "records/acquisition/sentinel-recovery-interruption-reconciliation-001.json").read_text(encoding="utf-8"))
+    sentinel_recovery_002_proposal = json.loads((ROOT / "contracts/milestone-002-sentinel-recovery-002-proposal.json").read_text(encoding="utf-8"))
+    sentinel_recovery_002_surface = json.loads((ROOT / "records/surface-receipts/m2-sentinel-recovery-002-review.json").read_text(encoding="utf-8"))
+    sentinel_recovery_002_bundle = json.loads((ROOT / "reviews/m2-sentinel-recovery-002/review-bundle.json").read_text(encoding="utf-8"))
+    sentinel_recovery_002_contract = json.loads((ROOT / "reviews/m2-sentinel-recovery-002/review-contract.json").read_text(encoding="utf-8"))
+    sentinel_recovery_002_blank = json.loads((ROOT / "reviews/m2-sentinel-recovery-002/blank-response.json").read_text(encoding="utf-8"))
     materialization_boundary_reconciliation = json.loads((ROOT / "records/acquisition/materialization-test-boundary-reconciliation-001.json").read_text(encoding="utf-8"))
     materialization_receipt = json.loads((ROOT / "records/acquisition/materialization/m1-src-001-fixture-must-not-run.json").read_text(encoding="utf-8"))
     sentinel_materialization_reconciliation = json.loads((ROOT / "records/acquisition/sentinel-materialization-reconciliation-001.json").read_text(encoding="utf-8"))
@@ -626,8 +639,8 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must clear the consumed orbit amendment proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != ["contracts/milestone-002-sentinel-recovery-002-proposal.json"]:
+        fail("project profile must expose only the current Sentinel recovery-002 proposal")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -710,8 +723,14 @@ def main() -> None:
             fail(f"project profile must bind {approved_unit} to the exact DEM amendment approval")
     if profile_gates.get("M2-DEM-TERRAIN-RESULT-REVIEW", {}).get("authority_ref") != "reviews/m2-dem-terrain-result/review-contract.json":
         fail("project profile must expose the exact terrain-result human-review gate")
-    if profile_gates.get("M2-SENTINEL-RECOVERY", {}).get("authority_ref") != "records/acquisition/sentinel-recovery-interruption-reconciliation-001.json":
-        fail("project profile must expose the consumed Sentinel recovery and renewed human-review gate")
+    sentinel_recovery_gate = profile_gates.get("M2-SENTINEL-RECOVERY", {})
+    if (
+        sentinel_recovery_gate.get("authority_ref") != "reviews/m2-sentinel-recovery-002/review-contract.json"
+        or "zero action is released" not in sentinel_recovery_gate.get("reason", "")
+    ):
+        fail("project profile must expose the blank Sentinel recovery-002 human-review gate")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != ["contracts/milestone-002-sentinel-recovery-002-proposal.json"]:
+        fail("project profile must expose the exact proposed Sentinel recovery-002 amendment")
     if profile_gates.get("M2-ORBIT-RECOVERY", {}).get("authority_ref") != "reviews/m2-orbit-recovery/review-contract.json":
         fail("project profile must expose the exact orbit recovery human-review gate")
     for approved_unit in ("M2-ORBIT-AMEND", "M2-ORBIT-PREFLIGHT", "M2-ORBIT-ACQUIRE", "M2-ORBIT-VERIFY", "M2-ORBIT-APPLY"):
@@ -815,6 +834,10 @@ def main() -> None:
     validate_review_bundle(
         "reviews/m2-sentinel-recovery/review-bundle.json",
         "reviews/m2-sentinel-recovery/review-contract.json",
+    )
+    validate_review_bundle(
+        "reviews/m2-sentinel-recovery-002/review-bundle.json",
+        "reviews/m2-sentinel-recovery-002/review-contract.json",
     )
 
     expected_recovery_proposal_sha = "7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013"
@@ -932,6 +955,95 @@ def main() -> None:
         }],
     }:
         fail("M2 Sentinel recovery blank response differs or contains a human decision")
+
+    expected_recovery_002_proposal_sha = "1ec77963e1171f60c2a4571306797077eb65206f5a4aacff6dd9cae33b0c0f6e"
+    expected_recovery_002_bundle_sha = "30d0f72c4c62b3c5450a08459a1c6024d442b8f718fa11f0fb650719437e9a30"
+    expected_recovery_002_surface_sha = "3561bc50e90adaba31248c1ddbc02d83669697fb6ad64f2883fb7a740dbdbe5a"
+    recovery_002 = sentinel_recovery_002_proposal.get("proposed_recovery", {})
+    recovery_002_boundary = recovery_002.get("broker_worker_boundary", {})
+    recovery_002_trigger = sentinel_recovery_002_proposal.get("trigger", {})
+    if (
+        sentinel_recovery_002_proposal.get("status") != "proposed_not_authorized"
+        or sha256("contracts/milestone-002-sentinel-recovery-002-proposal.json") != expected_recovery_002_proposal_sha
+        or recovery_002_trigger.get("source_id") != "M1-SRC-004"
+        or recovery_002_trigger.get("destination_promoted") is not False
+        or recovery_002_trigger.get("automatic_retry_authorized") is not False
+        or recovery_002_trigger.get("original_failed_attempt", {}).get("partial_sha256") != "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66"
+        or recovery_002_trigger.get("approved_recovery_failed_attempt", {}).get("partial_sha256") != "c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac"
+        or recovery_002_trigger.get("approved_recovery_failed_attempt", {}).get("failure_cause_established") is not False
+        or recovery_002_trigger.get("approved_recovery_failed_attempt", {}).get("approved_attempt_consumed") is not True
+        or recovery_002.get("mode") != "fresh_full_restart_detached_supervised_worker"
+        or recovery_002.get("restart_offset_bytes") != 0
+        or recovery_002.get("resume_any_partial") is not False
+        or recovery_002.get("delete_or_modify_any_partial") is not False
+        or recovery_002.get("reuse_any_prior_staging_path") is not False
+        or recovery_002.get("required_new_asset_or_attempt_namespace") != "m1-src-004-recovery-002"
+        or recovery_002.get("required_new_intake_namespace") != "nepal-m2-sentinel-recovery-002"
+        or recovery_002.get("maximum_real_transfer_attempts") != 1
+        or recovery_002_boundary.get("transfer_owner") != "separate_detached_supervisor_process"
+        or recovery_002_boundary.get("console_exit_must_not_end_worker") is not True
+        or recovery_002_boundary.get("worker_must_close_secret_channel_after_read") is not True
+        or recovery_002_boundary.get("secret_forbidden_locations") != [
+            "command_line", "environment_variable", "disk_file", "repository_record",
+            "stdout_or_stderr", "event_or_heartbeat_record",
+        ]
+    ):
+        fail("M2 Sentinel recovery-002 proposal weakens retained-evidence, one-attempt, or secret-safe detached-worker controls")
+    if sentinel_recovery_002_proposal.get("human_gate") != {
+        "review_required": True,
+        "item_id": "M2-SENTINEL-RECOVERY-002",
+        "allowed_decisions": ["approve", "revise", "defer"],
+        "required_attestation": True,
+    }:
+        fail("M2 Sentinel recovery-002 proposal human gate differs")
+    if (
+        sentinel_recovery_002_surface.get("status") != "pass_blank_review_surface"
+        or sentinel_recovery_002_surface.get("artifact", {}).get("sha256") != expected_recovery_002_surface_sha
+        or sentinel_recovery_002_surface.get("artifact", {}).get("sha256") != sha256("docs/assets/m2-sentinel-recovery-002-review.png")
+        or sentinel_recovery_002_surface.get("bindings", {}).get("proposal_sha256") != expected_recovery_002_proposal_sha
+        or sentinel_recovery_002_surface.get("bindings", {}).get("render_script_sha256") != sha256("scripts/render_m2_sentinel_recovery_002_review.py")
+        or sentinel_recovery_002_surface.get("validation", {}).get("blank_state_verified") is not True
+        or sentinel_recovery_002_surface.get("validation", {}).get("human_decision_count") != 0
+    ):
+        fail("M2 Sentinel recovery-002 review surface or blank-state receipt differs")
+    expected_recovery_002_candidate = "M2-SENTINEL-RECOVERY-002-PROPOSAL-SHA256:" + expected_recovery_002_proposal_sha
+    if (
+        sentinel_recovery_002_bundle.get("bundle_id") != "m2-sentinel-recovery-002-review-bundle-001"
+        or sentinel_recovery_002_bundle.get("review_id") != "m2-sentinel-recovery-002-review-001"
+        or sentinel_recovery_002_bundle.get("candidate_identity") != expected_recovery_002_candidate
+        or sha256("reviews/m2-sentinel-recovery-002/review-bundle.json") != expected_recovery_002_bundle_sha
+    ):
+        fail("M2 Sentinel recovery-002 review bundle identity differs")
+    recovery_002_authority = sentinel_recovery_002_contract.get("workflow_authority", {})
+    if (
+        sentinel_recovery_002_contract.get("review_bundle", {}).get("manifest_sha256") != expected_recovery_002_bundle_sha
+        or sentinel_recovery_002_contract.get("review_bundle", {}).get("candidate_identity") != expected_recovery_002_candidate
+        or sentinel_recovery_002_contract.get("review_bundle", {}).get("rendered_surface_verified") is not True
+        or sentinel_recovery_002_contract.get("allowed_decisions") != ["approve", "revise", "defer"]
+        or sentinel_recovery_002_contract.get("required_attestation") is not True
+        or recovery_002_authority.get("review_required") is not True
+        or recovery_002_authority.get("lock_authorized") is not True
+        or recovery_002_authority.get("reconcile_authorized") is not True
+        or "data_acquisition" in recovery_002_authority.get("authorized_action_classes", [])
+        or "credential_or_identity" in recovery_002_authority.get("authorized_action_classes", [])
+        or sentinel_recovery_002_contract.get("items") != [{"item_id": "M2-SENTINEL-RECOVERY-002", "evidence_sha256": expected_recovery_002_bundle_sha}]
+    ):
+        fail("M2 Sentinel recovery-002 review contract authority or exact-bundle binding differs")
+    if sentinel_recovery_002_blank != {
+        "response_schema_version": "nepal-m2-sentinel-recovery-002-response-v1",
+        "review_id": "m2-sentinel-recovery-002-review-001",
+        "completed": False,
+        "review_started_at_utc": None,
+        "review_completed_at_utc": None,
+        "reviewer": {"attestation": False},
+        "responses": [{
+            "item_id": "M2-SENTINEL-RECOVERY-002",
+            "evidence_sha256": expected_recovery_002_bundle_sha,
+            "decision": None,
+            "notes": "",
+        }],
+    }:
+        fail("M2 Sentinel recovery-002 blank response differs or contains a human decision")
 
     if (
         sentinel_recovery_approval.get("status") != "approved_exact_bounded_fresh_byte_zero_recovery"
@@ -4002,7 +4114,7 @@ def main() -> None:
         or active_m2.get("handoff", {}).get("current_checkpoint") != expected_checkpoint
     ):
         fail(f"profile, goal, and milestone handoff must reconcile to {expected_checkpoint}")
-    expected_recovery_next_action = "Review the terminal M1-SRC-004 recovery failure recorded in records/acquisition/sentinel-recovery-interruption-reconciliation-001.json; the approved one-attempt authority is consumed, and no retry or further Sentinel transfer is authorized. Prepare a new exact proposal and human review before any further Sentinel acquisition."
+    expected_recovery_next_action = "Review M2 Sentinel recovery-002 bundle SHA-256 30d0f72c4c62b3c5450a08459a1c6024d442b8f718fa11f0fb650719437e9a30 and proposal SHA-256 1ec77963e1171f60c2a4571306797077eb65206f5a4aacff6dd9cae33b0c0f6e; approve, revise, or defer the secret-safe detached-worker implementation, synthetic interruption tests, publication gate, one fresh byte-zero attempt, and success-only continuation. No implementation or Sentinel transfer is authorized before that decision."
     acquire_unit = m2_units.get("M2-ACQUIRE", {})
     if state_counts.get("failed", 0):
         if acquire_unit.get("status") != "blocked_retained_failure_review":
@@ -4021,6 +4133,14 @@ def main() -> None:
             or acquire_unit.get("gates", {}).get("recovery_attempt_receipt_sha256") != sha256(recovery_receipt_ref)
             or acquire_unit.get("gates", {}).get("recovery_interruption_reconciliation_sha256") != sha256("records/acquisition/sentinel-recovery-interruption-reconciliation-001.json")
             or acquire_unit.get("gates", {}).get("automatic_retry_authorized") is not False
+            or acquire_unit.get("gates", {}).get("recovery_002_review") != "prepared_zero_decisions_no_authority"
+            or acquire_unit.get("gates", {}).get("recovery_002_review_ref") != "reviews/m2-sentinel-recovery-002/review-contract.json"
+            or acquire_unit.get("gates", {}).get("recovery_002_review_bundle_sha256") != expected_recovery_002_bundle_sha
+            or acquire_unit.get("gates", {}).get("recovery_002_proposal_ref") != "contracts/milestone-002-sentinel-recovery-002-proposal.json"
+            or acquire_unit.get("gates", {}).get("recovery_002_proposal_sha256") != expected_recovery_002_proposal_sha
+            or acquire_unit.get("gates", {}).get("recovery_002_human_decision_count") != 0
+            or acquire_unit.get("gates", {}).get("recovery_002_implementation_authorized") is not False
+            or acquire_unit.get("gates", {}).get("recovery_002_transfer_authorized") is not False
             or profile.get("current_checkpoint", {}).get("next_action") != expected_recovery_next_action
             or active_m2.get("handoff", {}).get("next_action") != expected_recovery_next_action
         ):
@@ -5855,6 +5975,28 @@ def main() -> None:
         or sentinel_recovery_failure_evidence.get("assertions", {}).get("scientific_result_established") is not False
     ):
         fail("EVID-0076 Sentinel recovery terminal interruption differs or overclaims")
+
+    sentinel_recovery_002_evidence = ledger_by_id.get("EVID-0077")
+    if (
+        not isinstance(sentinel_recovery_002_evidence, dict)
+        or sentinel_recovery_002_evidence.get("status") != "pass_blank_exact_review_no_authority"
+        or sentinel_recovery_002_evidence.get("proposal_sha256") != expected_recovery_002_proposal_sha
+        or sentinel_recovery_002_evidence.get("review_bundle_sha256") != expected_recovery_002_bundle_sha
+        or sentinel_recovery_002_evidence.get("review_contract_sha256") != sha256("reviews/m2-sentinel-recovery-002/review-contract.json")
+        or sentinel_recovery_002_evidence.get("blank_response_sha256") != sha256("reviews/m2-sentinel-recovery-002/blank-response.json")
+        or sentinel_recovery_002_evidence.get("review_surface_sha256") != expected_recovery_002_surface_sha
+        or sentinel_recovery_002_evidence.get("interruption_reconciliation_sha256") != sha256("records/acquisition/sentinel-recovery-interruption-reconciliation-001.json")
+        or sentinel_recovery_002_evidence.get("assertions", {}).get("retained_partial_count") != 2
+        or sentinel_recovery_002_evidence.get("assertions", {}).get("prior_approved_attempt_consumed") is not True
+        or sentinel_recovery_002_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or sentinel_recovery_002_evidence.get("assertions", {}).get("implementation_authorized") is not False
+        or sentinel_recovery_002_evidence.get("assertions", {}).get("credential_access_authorized") is not False
+        or sentinel_recovery_002_evidence.get("assertions", {}).get("recovery_002_transfer_authorized") is not False
+        or sentinel_recovery_002_evidence.get("assertions", {}).get("automatic_retry_authorized") is not False
+        or sentinel_recovery_002_evidence.get("assertions", {}).get("pixel_usability_established") is not False
+        or sentinel_recovery_002_evidence.get("assertions", {}).get("scientific_result_established") is not False
+    ):
+        fail("EVID-0077 Sentinel recovery-002 review readiness differs or overclaims")
 
     violations = []
     for relative in tracked_files():

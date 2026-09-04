@@ -87,7 +87,9 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [],
+    "proposed_amendments": [
+      "contracts/milestone-002-sentinel-recovery-002-proposal.json"
+    ],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json",
@@ -252,8 +254,8 @@
       },
       {
         "unit_id": "M2-SENTINEL-RECOVERY",
-        "reason": "The exact approved one-attempt recovery ended in a terminal failure; another recovery requires a new exact review that preserves both partials and the consumed authority.",
-        "authority_ref": "records/acquisition/sentinel-recovery-interruption-reconciliation-001.json"
+        "reason": "A blank exact-bundle review now gates the proposed secret-safe detached-worker implementation, synthetic interruption tests, public-CI gate, one fresh byte-zero M1-SRC-004 recovery-002 attempt, and success-only continuation; zero action is released until a completed owner decision.",
+        "authority_ref": "reviews/m2-sentinel-recovery-002/review-contract.json"
       },
       {
         "unit_id": "M2-ORBIT-RECOVERY",
@@ -272,7 +274,7 @@
     "checkpoint_id": "M2-ACQUISITION-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Review the terminal M1-SRC-004 recovery failure recorded in records/acquisition/sentinel-recovery-interruption-reconciliation-001.json; the approved one-attempt authority is consumed, and no retry or further Sentinel transfer is authorized. Prepare a new exact proposal and human review before any further Sentinel acquisition."
+    "next_action": "Review M2 Sentinel recovery-002 bundle SHA-256 30d0f72c4c62b3c5450a08459a1c6024d442b8f718fa11f0fb650719437e9a30 and proposal SHA-256 1ec77963e1171f60c2a4571306797077eb65206f5a4aacff6dd9cae33b0c0f6e; approve, revise, or defer the secret-safe detached-worker implementation, synthetic interruption tests, publication gate, one fresh byte-zero attempt, and success-only continuation. No implementation or Sentinel transfer is authorized before that decision."
   },
   "parallel_checkpoints": [
     {

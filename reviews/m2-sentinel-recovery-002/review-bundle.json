@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-sentinel-recovery-002-review-bundle-001",
+  "review_id": "m2-sentinel-recovery-002-review-001",
+  "authority_ref": "records/acquisition/sentinel-recovery-interruption-reconciliation-001.json",
+  "candidate_identity": "M2-SENTINEL-RECOVERY-002-PROPOSAL-SHA256:1ec77963e1171f60c2a4571306797077eb65206f5a4aacff6dd9cae33b0c0f6e",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-sentinel-recovery-002-review.png",
+      "sha256": "3561bc50e90adaba31248c1ddbc02d83669697fb6ad64f2883fb7a740dbdbe5a",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-sentinel-recovery-002-review.json",
+          "sha256": "e6d51e466c871075cfa498490e4e1e8bc93e77f9660510f2ad2f21f41c1ff158"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_SENTINEL_RECOVERY_002_REVIEW.md",
+      "sha256": "0183e77a325bda3e94b77c0debf9f95ef279922bd9e01e97b1e9c99b72efb188",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "recovery-002-proposal",
+      "path": "contracts/milestone-002-sentinel-recovery-002-proposal.json",
+      "sha256": "1ec77963e1171f60c2a4571306797077eb65206f5a4aacff6dd9cae33b0c0f6e",
+      "role": "candidate_recovery_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "interruption-reconciliation",
+      "path": "records/acquisition/sentinel-recovery-interruption-reconciliation-001.json",
+      "sha256": "743e049abf53f117006c9e9313f0c14be4172e6f1b48d0d9453ed2941abd5ab9",
+      "role": "current_terminal_failure_and_consumed_authority_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "original-failed-transfer-receipt",
+      "path": "records/acquisition/attempts/m1-src-004-20260904t043930z-ac125c11.json",
+      "sha256": "8cbaf911e5a3329c5aa00a7288e237fa71987a2d4f03cea8c630c7dd28b9e7e9",
+      "role": "append_only_original_terminal_failure",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "recovery-001-failed-attempt-receipt",
+      "path": "records/acquisition/recovery-attempts/m1-src-004-recovery-001-20260904t201220z-e4388c64.json",
+      "sha256": "65ac02cd197024da8293fbbacc5f608d880f139dfb6c033a91274ff879db0886",
+      "role": "append_only_approved_recovery_terminal_failure",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "consumed-recovery-contract",
+      "path": "contracts/m2-sentinel-recovery.json",
+      "sha256": "a6b9240b2f5dd401ba44c9061751370ac90afae31f304677f3088f32d1fd8a20",
+      "role": "failed_recovery_contract_and_consumed_attempt_boundary",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "prior-recovery-approval",
+      "path": "records/source-gates/m2-sentinel-recovery-approval.json",
+      "sha256": "80e09933799b54c9002f1cd8ae8c86d75ab4550dc9ef8b1f7e0d3bc89bb36c04",
+      "role": "one_attempt_authority_that_is_now_consumed",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "prior-publication-gate",
+      "path": "records/acquisition/sentinel-recovery-publication-gate.json",
+      "sha256": "c6150fa0e3cea86074712a05fcdc16d4aeaf7f1ebbe1dcd3cedc2daa0fb69552",
+      "role": "historical_controls_verified_before_failed_recovery",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "active-intake",
+      "path": "contracts/m2-intake.json",
+      "sha256": "734455b7c0e772aa22253a81f944dc685e4c73cf73490ca2f821d12d7e2b5ca0",
+      "role": "current_four_authorized_one_failed_three_promoted_state",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "decision_effect_if_approved": [
+    "implement and validate the secret-safe broker and detached-supervisor design with synthetic interruption and secret-exposure tests",
+    "publish and verify the exact implementation through a matching remote commit and successful public CI before any real transfer",
+    "perform one fresh full M1-SRC-004 transfer from byte zero into a new exclusive recovery-002 staging namespace",
+    "promote only after exact current rights, identity, secret, path, interruption, length, checksum, and container controls pass",
+    "after a passing recovery, continue only the four still-unattempted products under the original M2 approval"
+  ],
+  "limitations": [
+    "This bundle creates no authority and contains zero human decisions.",
+    "The recovery-001 termination cause is unknown; the proposed design reduces console dependency but does not claim to prevent every external process termination.",
+    "Approval does not permit partial resume or deletion, repeated retry, token storage, product substitution, source-scope change, terms or account action, credential disclosure, cost, orbit or radar processing, pixel admission, or scientific publication.",
+    "Container verification does not establish raster readability, AOI coverage, usable pixels, registration, or scientific change."
+  ]
+}

@@ -286,7 +286,15 @@
         "recovery_attempt_receipt_sha256": "65ac02cd197024da8293fbbacc5f608d880f139dfb6c033a91274ff879db0886",
         "recovery_interruption_reconciliation_ref": "records/acquisition/sentinel-recovery-interruption-reconciliation-001.json",
         "recovery_interruption_reconciliation_sha256": "743e049abf53f117006c9e9313f0c14be4172e6f1b48d0d9453ed2941abd5ab9",
-        "automatic_retry_authorized": false
+        "automatic_retry_authorized": false,
+        "recovery_002_review": "prepared_zero_decisions_no_authority",
+        "recovery_002_review_ref": "reviews/m2-sentinel-recovery-002/review-contract.json",
+        "recovery_002_review_bundle_sha256": "30d0f72c4c62b3c5450a08459a1c6024d442b8f718fa11f0fb650719437e9a30",
+        "recovery_002_proposal_ref": "contracts/milestone-002-sentinel-recovery-002-proposal.json",
+        "recovery_002_proposal_sha256": "1ec77963e1171f60c2a4571306797077eb65206f5a4aacff6dd9cae33b0c0f6e",
+        "recovery_002_human_decision_count": 0,
+        "recovery_002_implementation_authorized": false,
+        "recovery_002_transfer_authorized": false
       },
       "disposition": "review_required",
       "retained_failures": [
@@ -310,7 +318,7 @@
           "The approved byte-zero recovery retains a distinct 1333788672-byte terminal-failure partial"
         ],
         "decision_value": "review_required",
-        "rationale": "Three exact products are promoted and container-verified. The original M1-SRC-004 failure and the separately approved recovery failure are both preserved. The one-attempt recovery authority is consumed, and no retry or further Sentinel transfer is permitted before a new exact review."
+        "rationale": "Three exact products are promoted and container-verified. The original M1-SRC-004 failure and the separately approved recovery failure are both preserved. The consumed authority remains closed. A blank exact-bundle review now presents a detached-supervisor recovery-002 design but releases no implementation, credential access, or transfer before a completed owner decision."
       },
       "next_dependency": "M2-VERIFY",
       "recovery_failures": [
@@ -867,7 +875,7 @@
   },
   "handoff": {
     "current_checkpoint": "M2-ACQUISITION-REVIEW",
-    "next_action": "Review the terminal M1-SRC-004 recovery failure recorded in records/acquisition/sentinel-recovery-interruption-reconciliation-001.json; the approved one-attempt authority is consumed, and no retry or further Sentinel transfer is authorized. Prepare a new exact proposal and human review before any further Sentinel acquisition.",
+    "next_action": "Review M2 Sentinel recovery-002 bundle SHA-256 30d0f72c4c62b3c5450a08459a1c6024d442b8f718fa11f0fb650719437e9a30 and proposal SHA-256 1ec77963e1171f60c2a4571306797077eb65206f5a4aacff6dd9cae33b0c0f6e; approve, revise, or defer the secret-safe detached-worker implementation, synthetic interruption tests, publication gate, one fresh byte-zero attempt, and success-only continuation. No implementation or Sentinel transfer is authorized before that decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",

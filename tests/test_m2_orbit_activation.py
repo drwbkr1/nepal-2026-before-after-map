@@ -87,7 +87,10 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["milestone_dependency_m2_verify"], "not_satisfied")
         self.assertTrue(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["orbit_custody_initialized"])
         self.assertEqual(unit_by_id["M2-ORBIT-APPLY"]["gates"]["dem_vertical_datum_gate"], "pending")
-        self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], [])
+        self.assertEqual(
+            self.profile["control_surfaces"]["proposed_amendments"],
+            ["contracts/milestone-002-sentinel-recovery-002-proposal.json"],
+        )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
             [
