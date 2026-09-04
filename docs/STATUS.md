@@ -4,7 +4,7 @@
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
-- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; three exact Sentinel-1 archives are promoted and container-verified, one Sentinel-1 partial is retained after an exact-length failure, four Sentinel products remain unattempted, one exact Sentinel-1 SAFE materialization is retained with unintended-test provenance, and no orbit payload byte is in custody
+- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; three exact Sentinel-1 archives are promoted, container-verified, and materialized into 78 manifest-verified SAFE files, one Sentinel-1 partial is retained after an exact-length failure, four Sentinel products remain unattempted, and no orbit payload byte is in custody
 - **Long-term goal:** Active
 - **Checkpoints:** `M2-ACQUISITION-REVIEW`; dependent `M2-ORBIT-ACQUISITION-REVIEW`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
 
@@ -57,7 +57,7 @@ The current checkpoint is `M2-ACQUISITION-REVIEW`. Do not delete or resume the p
 
 The blank recovery package is ready for owner review. Bundle SHA-256 `dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7` binds proposal SHA-256 `7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013`. The proposed action is one fresh byte-zero transfer of the same exact `M1-SRC-004` through a distinct exclusive staging path, leaving the original partial untouched. The response remains blank with zero human decisions, so no recovery or further acquisition is authorized yet.
 
-A stale production-wrapper test also materialized exact `M1-SRC-001` under attempt ID `fixture-must-not-run`. The retained attempt contains 26 files and 1,732,324,248 extracted bytes; all per-file hashes independently match its manifest. It is classified as valid materialization only with unintended-test provenance. It establishes no raster readability, pixel usability, baseline, change, or scientific admission, and it releases no next processing. The test now selects only an unpromoted source, skips when no safe refusal probe exists, and checks that repository and external materialization inventories remain unchanged.
+A stale production-wrapper test materialized exact `M1-SRC-001` under attempt ID `fixture-must-not-run`; its unintended-test provenance remains explicit. The other two promoted and container-verified archives, `M1-SRC-002` and `M1-SRC-003`, were then materialized deliberately one at a time under the active offline contract. The three append-only attempts contain 78 files and 5,183,550,209 extracted bytes, all independently verified against their external manifests. No network request, authentication, credential read, or source-archive mutation occurred. This establishes materialization only, not raster readability, pixel usability, baseline, change, or scientific admission.
 
 ## Parallel DEM amendment
 
@@ -125,7 +125,7 @@ The real optical route remains **DEFER**. Neither archive is in verified custody
 
 The exact eight-product route now has an offline, gate-deferred materialization contract and runner. A product must be promoted in the active intake and have one matching `pass_container_only` container receipt before the runner reads custody. The archive is re-hashed, its full member namespace is revalidated for Windows and cross-platform safety, and every extracted file is recorded in an external SHA-256 manifest under one exclusive append-only attempt.
 
-Fourteen synthetic tests pass, including traversal, ambiguous components, backslash, Windows reserved-name and alternate-data-stream, case-collision, file/directory-collision, symbolic-link, attempt-collision, receipt-collision, and production pre-custody refusal checks. No external materialization directory exists, no real archive was read, and no raster or pixel claim was created.
+Fourteen synthetic tests pass, including traversal, ambiguous components, backslash, Windows reserved-name and alternate-data-stream, case-collision, file/directory-collision, symbolic-link, attempt-collision, receipt-collision, and production pre-custody refusal checks. Three real radar archives now have append-only materializations and repository receipts; all 78 extracted files match their external manifests. No raster or pixel claim was created.
 
 ## Prepared optical input-readiness gate
 
@@ -133,18 +133,18 @@ The exact materialized RUM pair now has a separate gate before pixel processing.
 
 The first published input-readiness checkpoint was superseded after official Sentinel-2 documentation showed that PB 05.12 `MSK_CLASSI_B00.jp2` is a three-band 60 m Boolean mask, not the one-band 20 m mask used in that fixture. The correction preserves the published attempt and does not claim anything about real product bytes.
 
-Twelve portable tests and the corrected ArcGIS Pro 3.7.1 Advanced run pass. ArcGIS opens sixteen synthetic JP2 rasters with matching EPSG:32645 10 m and 20 m scientific grids plus a three-band 60 m classification-quality grid; a deliberate 10 m shift of the complete after grid blocks with sixteen extent mismatches. Two failed direct `CopyRaster` JP2-generation attempts, five superseded prepublication passes, and the superseded published pass remain recorded. No real materialization receipt, SAFE metadata, raster header, or pixel was accessed.
+Twelve portable tests and the corrected ArcGIS Pro 3.7.1 Advanced run pass. ArcGIS opens sixteen synthetic JP2 rasters with matching EPSG:32645 10 m and 20 m scientific grids plus a three-band 60 m classification-quality grid; a deliberate 10 m shift of the complete after grid blocks with sixteen extent mismatches. Two failed direct `CopyRaster` JP2-generation attempts, five superseded prepublication passes, and the superseded published pass remain recorded. No real optical materialization receipt, SAFE metadata, raster header, or pixel was accessed; the three real materializations are radar products outside this optical gate.
 
 Checkpoint derivation is also portable. Repository-only tests do not require the operator's external Windows custody roots; external custody reconciliation remains an explicit local, read-only validation. Failed GitHub Actions run `33800916326` is retained in the append-only portability-correction evidence that records this boundary fix.
 
 ## Authorized but not completed
 
-- authenticate through an existing owner-controlled CDSE credential or session reference;
-- download only the eight exact approved products, one at a time;
+- review and reconcile the exact Sentinel recovery before one fresh byte-zero `M1-SRC-004` attempt; then use only the existing protected owner-controlled CDSE credential reference;
+- after a passing recovery, download only the four still-unattempted exact products, one at a time, stopping on any failure;
 - preserve append-only attempts and use collision-safe staging and promotion;
 - verify exact bytes, provider checksums, ZIP safety, SAFE identity, and required content;
 - inspect real pixels, masks, AOI coverage, baselines, and EPSG:32645 registration.
-- after the six radar sources are promoted and offline container-verified, acquire and verify only the four exact approved `AUX_RESORB` files and apply each only to its bound source IDs;
+- review and reconcile the exact orbit recovery, but do not run it until the full `M2-VERIFY` unit is complete; after a passing `M2-ORB-001` recovery, acquire and verify only the three still-unattempted approved `AUX_RESORB` files and apply each only after every independent gate passes;
 - review and explicitly resolve the DEM vertical-datum route before Sentinel-1 terrain correction, without silently selecting `GEOID` or `NONE`;
 - if the exact EGM2008 route is approved, wait for the owner to install the matching ArcGIS Coordinate Systems Data component before any conversion attempt;
 - review bundle SHA-256 `834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5` and explicitly approve, revise, or defer the terrain-only owner review.

@@ -77,6 +77,7 @@ REQUIRED = [
     "records/acquisition/acquisition-checkpoint-portability-correction.json",
     "records/acquisition/sentinel-acquisition-reconciliation-001.json",
     "records/acquisition/materialization-test-boundary-reconciliation-001.json",
+    "records/acquisition/sentinel-materialization-reconciliation-001.json",
     "records/acquisition/orbit-test-boundary-reconciliation-001.json",
     "records/acquisition/orbit-runner-production-boundary-correction-001.json",
     "records/acquisition/attempts/m1-src-001-20260904t041621z-fe412d8d.json",
@@ -87,6 +88,8 @@ REQUIRED = [
     "records/acquisition/container-verification/m1-src-002-m1-src-002-20260904t042408z-b31b162b.json",
     "records/acquisition/container-verification/m1-src-003-m1-src-003-20260904t043000z-d1b78c08.json",
     "records/acquisition/materialization/m1-src-001-fixture-must-not-run.json",
+    "records/acquisition/materialization/m1-src-002-m1-src-002-materialization-001.json",
+    "records/acquisition/materialization/m1-src-003-m1-src-003-materialization-001.json",
     "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
     "records/acquisition/dem-amendment-activation.json",
     "records/acquisition/dem-preflight.json",
@@ -454,6 +457,12 @@ def main() -> None:
     sentinel_recovery_blank = json.loads((ROOT / "reviews/m2-sentinel-recovery/blank-response.json").read_text(encoding="utf-8"))
     materialization_boundary_reconciliation = json.loads((ROOT / "records/acquisition/materialization-test-boundary-reconciliation-001.json").read_text(encoding="utf-8"))
     materialization_receipt = json.loads((ROOT / "records/acquisition/materialization/m1-src-001-fixture-must-not-run.json").read_text(encoding="utf-8"))
+    sentinel_materialization_reconciliation = json.loads((ROOT / "records/acquisition/sentinel-materialization-reconciliation-001.json").read_text(encoding="utf-8"))
+    sentinel_materialization_receipts = {
+        "M1-SRC-001": materialization_receipt,
+        "M1-SRC-002": json.loads((ROOT / "records/acquisition/materialization/m1-src-002-m1-src-002-materialization-001.json").read_text(encoding="utf-8")),
+        "M1-SRC-003": json.loads((ROOT / "records/acquisition/materialization/m1-src-003-m1-src-003-materialization-001.json").read_text(encoding="utf-8")),
+    }
     orbit_boundary_reconciliation = json.loads((ROOT / "records/acquisition/orbit-test-boundary-reconciliation-001.json").read_text(encoding="utf-8"))
     orbit_boundary_correction = json.loads((ROOT / "records/acquisition/orbit-runner-production-boundary-correction-001.json").read_text(encoding="utf-8"))
     orbit_failed_attempt = json.loads((ROOT / "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json").read_text(encoding="utf-8"))
@@ -869,6 +878,103 @@ def main() -> None:
         or materialization_boundary_reconciliation.get("disposition", {}).get("next_processing_released") is not False
     ):
         fail("test-induced materialization reconciliation differs")
+
+    materialization_records = sentinel_materialization_reconciliation.get("materializations", [])
+    materialization_expected = {
+        "M1-SRC-001": {
+            "attempt_id": "fixture-must-not-run",
+            "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE",
+            "container_receipt_ref": "records/acquisition/container-verification/m1-src-001-m1-src-001-20260904t041621z-fe412d8d.json",
+            "archive_sha256": "55b19242652e79887f00bb312d7fab1d7f8879f4e9eb996ca15be1268de1e79a",
+            "archive_size_bytes": 1732333216,
+        },
+        "M1-SRC-002": {
+            "attempt_id": "m1-src-002-materialization-001",
+            "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE",
+            "container_receipt_ref": "records/acquisition/container-verification/m1-src-002-m1-src-002-20260904t042408z-b31b162b.json",
+            "archive_sha256": "4df9ecdd0ad7f562bdf743b70b9061b9af3885dcbdcaf7f45c1875f2cd838790",
+            "archive_size_bytes": 1732874277,
+        },
+        "M1-SRC-003": {
+            "attempt_id": "m1-src-003-materialization-001",
+            "exact_product_id": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE",
+            "container_receipt_ref": "records/acquisition/container-verification/m1-src-003-m1-src-003-20260904t043000z-d1b78c08.json",
+            "archive_sha256": "fa9250c3433065c7f3045352bee938b31d140771320e875f1088156094eedf01",
+            "archive_size_bytes": 1718369620,
+        },
+    }
+    if (
+        sentinel_materialization_reconciliation.get("status") != "pass_three_materialized_all_file_hashes_verified_mixed_provenance"
+        or sentinel_materialization_reconciliation.get("authority", {}).get("contract_sha256") != sha256("contracts/m2-materialization.json")
+        or sentinel_materialization_reconciliation.get("authority", {}).get("authority_sha256") != sha256("records/source-gates/m2-activation-approval.json")
+        or [item.get("source_id") for item in materialization_records] != ["M1-SRC-001", "M1-SRC-002", "M1-SRC-003"]
+        or [item.get("provenance") for item in materialization_records] != [
+            "retained_unintended_test_execution",
+            "planned_authorized_offline_materialization",
+            "planned_authorized_offline_materialization",
+        ]
+        or sentinel_materialization_reconciliation.get("summary") != {
+            "materialized_source_count": 3,
+            "planned_materialization_count": 2,
+            "retained_unintended_test_materialization_count": 1,
+            "verified_file_count": 78,
+            "total_extracted_bytes": 5183550209,
+            "promoted_container_verified_sources_not_materialized": [],
+            "failed_or_unattempted_sources_not_materialized": [
+                "M1-SRC-004", "M1-SRC-005", "M1-SRC-006", "M1-SRC-008", "M1-SRC-010"
+            ],
+        }
+        or sentinel_materialization_reconciliation.get("activity") != {
+            "network_requests_performed": False,
+            "authentication_performed": False,
+            "credential_values_read_or_recorded": False,
+            "source_archives_mutated": False,
+        }
+        or sentinel_materialization_reconciliation.get("claim_boundary", {}).get("materialization_only") is not True
+        or any(sentinel_materialization_reconciliation.get("claim_boundary", {}).get(key) is not False for key in (
+            "raster_readability_established",
+            "pixel_usability_established",
+            "baseline_established",
+            "change_established",
+            "scientific_admission_authorized",
+            "current_checkpoint_changed",
+            "recovery_authority_created",
+        ))
+    ):
+        fail("three-source Sentinel materialization reconciliation differs or overclaims")
+    for item in materialization_records:
+        source_id = item["source_id"]
+        receipt = sentinel_materialization_receipts[source_id]
+        expected = materialization_expected[source_id]
+        bindings = receipt.get("bindings", {})
+        if (
+            item.get("receipt_sha256") != sha256(item.get("receipt_ref", ""))
+            or item.get("receipt_sha256") != hashlib.sha256((ROOT / item["receipt_ref"]).read_bytes()).hexdigest()
+            or item.get("external_manifest_sha256") != receipt.get("bindings", {}).get("external_manifest_sha256")
+            or item.get("file_count") != receipt.get("file_count")
+            or item.get("total_extracted_bytes") != receipt.get("total_extracted_bytes")
+            or item.get("independent_file_hash_verification") != "pass"
+            or receipt.get("status") != "pass_materialization_only"
+            or receipt.get("source_id") != source_id
+            or receipt.get("attempt_id") != expected["attempt_id"]
+            or receipt.get("exact_product_id") != expected["exact_product_id"]
+            or bindings.get("contract_ref") != "contracts/m2-materialization.json"
+            or bindings.get("contract_sha256") != sha256("contracts/m2-materialization.json")
+            or bindings.get("active_intake_ref") != "contracts/m2-intake.json"
+            or bindings.get("container_receipt_ref") != expected["container_receipt_ref"]
+            or bindings.get("container_receipt_sha256") != sha256(expected["container_receipt_ref"])
+            or bindings.get("archive_sha256") != expected["archive_sha256"]
+            or bindings.get("archive_size_bytes") != expected["archive_size_bytes"]
+            or receipt.get("activity", {}).get("network_requests_performed") is not False
+            or receipt.get("activity", {}).get("authentication_performed") is not False
+            or receipt.get("activity", {}).get("source_archive_mutated") is not False
+            or receipt.get("raster_readability_established") is not False
+            or receipt.get("pixel_usability_established") is not False
+            or receipt.get("baseline_established") is not False
+            or receipt.get("change_established") is not False
+            or receipt.get("scientific_admission_authorized") is not False
+        ):
+            fail(f"Sentinel materialization receipt or reconciliation differs for {source_id}")
 
     if (
         orbit_failed_attempt.get("event") != "orbit_transfer_failed"
@@ -4622,6 +4728,38 @@ def main() -> None:
         or acquisition_progress_ci_evidence.get("assertions", {}).get("scientific_result_established") is not False
     ):
         fail("EVID-0066 acquisition-progress Linux CI reverification differs")
+
+    sentinel_materialization_evidence = ledger_by_id.get("EVID-0067")
+    if (
+        not isinstance(sentinel_materialization_evidence, dict)
+        or sentinel_materialization_evidence.get("status") != sentinel_materialization_reconciliation.get("status")
+        or sentinel_materialization_evidence.get("reconciliation_ref") != "records/acquisition/sentinel-materialization-reconciliation-001.json"
+        or sentinel_materialization_evidence.get("reconciliation_sha256") != sha256("records/acquisition/sentinel-materialization-reconciliation-001.json")
+        or sentinel_materialization_evidence.get("receipt_sha256") != {
+            item["source_id"]: item["receipt_sha256"] for item in materialization_records
+        }
+        or sentinel_materialization_evidence.get("external_manifest_sha256") != {
+            item["source_id"]: item["external_manifest_sha256"] for item in materialization_records
+        }
+        or sentinel_materialization_evidence.get("summary") != {
+            "materialized_source_count": 3,
+            "planned_materialization_count": 2,
+            "retained_unintended_test_materialization_count": 1,
+            "verified_file_count": 78,
+            "total_extracted_bytes": 5183550209,
+        }
+        or sentinel_materialization_evidence.get("assertions", {}).get("network_requests_performed") is not False
+        or sentinel_materialization_evidence.get("assertions", {}).get("authentication_performed") is not False
+        or sentinel_materialization_evidence.get("assertions", {}).get("source_archives_mutated") is not False
+        or sentinel_materialization_evidence.get("assertions", {}).get("raster_readability_established") is not False
+        or sentinel_materialization_evidence.get("assertions", {}).get("pixel_usability_established") is not False
+        or sentinel_materialization_evidence.get("assertions", {}).get("baseline_established") is not False
+        or sentinel_materialization_evidence.get("assertions", {}).get("change_established") is not False
+        or sentinel_materialization_evidence.get("assertions", {}).get("scientific_admission_authorized") is not False
+        or sentinel_materialization_evidence.get("assertions", {}).get("current_checkpoint_changed") is not False
+        or sentinel_materialization_evidence.get("assertions", {}).get("recovery_authority_created") is not False
+    ):
+        fail("EVID-0067 Sentinel materialization continuation differs or overclaims")
 
     violations = []
     for relative in tracked_files():
