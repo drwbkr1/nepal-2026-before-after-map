@@ -1,0 +1,179 @@
+{
+  "contract_version": "1.0",
+  "contract_id": "NEPAL-M6-ARCGIS-FINAL-DELIVERY-001",
+  "status": "predeclared_not_executed",
+  "prepared_at_utc": "2026-09-04T20:41:40Z",
+  "applies_at_milestone": "M6",
+  "analysis_crs": {
+    "wkid": 32645,
+    "name": "WGS 1984 UTM Zone 45N",
+    "linear_unit": "Meter"
+  },
+  "authoritative_inputs": {
+    "evidence_workspace_schema": {
+      "ref": "config/arcgis/evidence-workspace-schema.json",
+      "sha256": "4b592ba928c0c532856f91be49a1f44349ba13d3fa783be20bdb9fab6d20dafb"
+    },
+    "pixel_qa_contract": {
+      "ref": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"
+    },
+    "source_manifest": {
+      "ref": "records/source-manifest.json",
+      "sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef"
+    },
+    "metadata_package_control": {
+      "ref": "config/qa/arcgis-package-portability-contract.json",
+      "sha256": "80e4df2a71e56969927b918ee79da68a25b7c8cdc19ed3bcef67ec865c812526"
+    }
+  },
+  "required_artifacts": [
+    {
+      "artifact_class": "arcgis_project",
+      "suffix": ".aprx",
+      "minimum_count": 1
+    },
+    {
+      "artifact_class": "file_geodatabase",
+      "suffix": ".gdb",
+      "minimum_count": 1
+    },
+    {
+      "artifact_class": "layer_file",
+      "suffix": ".lyrx",
+      "minimum_count": 5
+    },
+    {
+      "artifact_class": "analysis_geotiff",
+      "suffix": ".tif",
+      "minimum_count": 1
+    },
+    {
+      "artifact_class": "interoperable_geopackage",
+      "suffix": ".gpkg",
+      "minimum_count": 1
+    },
+    {
+      "artifact_class": "project_package",
+      "suffix": ".ppkx",
+      "minimum_count": 1
+    },
+    {
+      "artifact_class": "map_png",
+      "suffix": ".png",
+      "minimum_count": 5
+    },
+    {
+      "artifact_class": "map_pdf",
+      "suffix": ".pdf",
+      "minimum_count": 5
+    },
+    {
+      "artifact_class": "artifact_manifest",
+      "suffix": ".json",
+      "minimum_count": 1
+    },
+    {
+      "artifact_class": "delivery_readme",
+      "suffix": ".md",
+      "minimum_count": 1
+    }
+  ],
+  "required_maps": [
+    "regional_overview",
+    "source_area_comparison",
+    "upper_corridor_comparison",
+    "evidence_map",
+    "limitations_map"
+  ],
+  "required_layout_elements": [
+    "title",
+    "before_after_dates",
+    "legend",
+    "scale_bar",
+    "north_arrow",
+    "crs_statement",
+    "source_credits",
+    "limitations_statement",
+    "review_status",
+    "attribution_disclaimer"
+  ],
+  "required_dataset_names": [
+    "StudyAreas",
+    "SourceProducts",
+    "ObservedChange",
+    "AnalysisExclusions",
+    "StableControls",
+    "ObservationSources",
+    "Interpretations",
+    "AttributionAssessments",
+    "AnalysisQA"
+  ],
+  "required_relationship_names": [
+    "StudyAreas_ObservedChange",
+    "StudyAreas_StableControls",
+    "ObservedChange_ObservationSources",
+    "SourceProducts_ObservationSources",
+    "ObservedChange_Interpretations",
+    "Interpretations_Attribution",
+    "ObservedChange_AnalysisQA",
+    "SourceProducts_Exclusions"
+  ],
+  "evidence_integrity": {
+    "minimum_scientific_record_count": 1,
+    "minimum_preserved_non_success_records": 2,
+    "require_before_and_after_source_per_observation": true,
+    "require_exact_source_identity_and_acquisition_dates": true,
+    "require_uncertainty_and_limitation_per_observation": true,
+    "require_interpretation_links": true,
+    "require_attribution_links_and_status": true,
+    "require_observation_interpretation_attribution_separation": true,
+    "require_failed_deferred_inconclusive_reconciliation": true,
+    "require_qa_records": true,
+    "require_owner_review": true,
+    "require_completed_m5_review": true
+  },
+  "spatial_acceptance": {
+    "required_vector_wkid": 32645,
+    "required_raster_wkid": 32645,
+    "require_grid_metadata": true,
+    "require_passing_registration_qa": true,
+    "require_visible_exclusion_masks": true
+  },
+  "package_acceptance": {
+    "independent_environment_required": true,
+    "allowed_independent_environment_types": [
+      "clean_machine",
+      "clean_local_profile"
+    ],
+    "original_workspace_must_be_absent": true,
+    "package_extract_reopen_and_reexport_required": true,
+    "broken_source_maximum": 0,
+    "external_operational_source_maximum": 0,
+    "unsafe_path_maximum": 0,
+    "missing_artifact_maximum": 0,
+    "rights_conflict_maximum": 0,
+    "artifact_sha256_verification_required": true,
+    "visual_review_required_for_every_map": true
+  },
+  "decision_semantics": {
+    "precedence": [
+      "invalid",
+      "block",
+      "defer",
+      "pass_m6_delivery_only"
+    ],
+    "pass_does_not_authorize_publication": true,
+    "pass_does_not_replace_m5_scientific_review": true,
+    "defer_is_not_failure": true
+  },
+  "claim_boundary": {
+    "current_m6_complete": false,
+    "scientific_evidence_currently_packaged": false,
+    "clean_environment_test_currently_complete": false,
+    "public_release_authorized": false,
+    "emergency_guidance_authorized": false,
+    "current_checkpoint_changed": false,
+    "statement": "This contract predeclares final ArcGIS delivery acceptance. Synthetic validation can establish control behavior only; it cannot establish mapped change, scientific fitness, clean-environment portability, M6 completion, public release, or emergency guidance."
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M6-ARCGIS-FINAL-DELIVERY-CONTROL-READINESS-001",
+  "verified_at_utc": "2026-09-04T20:45:00Z",
+  "status": "pass_synthetic_control_only_m6_not_executed",
+  "purpose": "Predeclare and test final ArcGIS delivery acceptance before real change features or final maps exist.",
+  "bindings": {
+    "contract_ref": "config/qa/arcgis-final-delivery-contract.json",
+    "contract_sha256": "a3eda86374e77e4c8dbc48ff7a37b0f3766119878a65b95ff137477ba497527d",
+    "portable_core_ref": "scripts/arcgis_final_delivery_core.py",
+    "portable_core_sha256": "c11a99929dedcd9b086d037b28b6c7980ba47d713dff4e890a741931600ac866",
+    "tests_ref": "tests/test_arcgis_final_delivery.py",
+    "tests_sha256": "f916d73811074005ba0eae313e0b59dd1e7a05ce0b351f9982a80b6ce3b1ad26",
+    "protocol_ref": "docs/ARCGIS_FINAL_DELIVERY_ACCEPTANCE.md",
+    "protocol_sha256": "7a51460f74dceb3113acd3102de8e529f14c18376c8bd643b3556417f737575a"
+  },
+  "validation": {
+    "focused_test_command": "python -m unittest tests.test_arcgis_final_delivery -v",
+    "focused_test_count": 8,
+    "focused_test_status": "pass",
+    "tracked_contract_valid": true,
+    "synthetic_pass_exercised": true,
+    "empty_scientific_workspace_defer_exercised": true,
+    "external_source_and_wrong_crs_block_exercised": true,
+    "missing_map_block_exercised": true,
+    "hidden_failure_and_merged_claim_layer_block_exercised": true,
+    "pending_visual_and_clean_environment_defer_exercised": true,
+    "publication_overclaim_invalid_exercised": true
+  },
+  "required_future_evidence": [
+    "reviewed nonempty scientific observation records with exact before and after source links",
+    "separate linked interpretation and attribution records with uncertainty and limitations",
+    "reconciled failed, deferred, and inconclusive source and method history",
+    "EPSG:32645 scientific vectors and analysis GeoTIFFs with passing registration QA and visible exclusions",
+    "five complete and visually reviewed ArcGIS layouts with paired PNG and PDF exports",
+    "SHA-256 verified project, geodatabase, layer files, GeoTIFFs, GeoPackage, PPKX, exports, manifest, and README",
+    "successful package extraction, project reopen, and re-export in a clean machine or clean local profile where the original workspace is absent",
+    "completed M5 scientific review before M6 delivery acceptance"
+  ],
+  "assertions": {
+    "external_data_read": false,
+    "arcgis_runtime_invoked": false,
+    "scientific_pixels_read_or_written": false,
+    "scientific_evidence_admitted": false,
+    "final_maps_created": false,
+    "clean_environment_test_performed": false,
+    "m6_complete": false,
+    "public_release_authorized": false,
+    "emergency_guidance_authorized": false,
+    "current_checkpoint_changed": false
+  },
+  "limitations": [
+    "The passing tests use synthetic report objects and establish only portable decision-logic behavior.",
+    "No ArcGIS Pro runtime, project package, real raster, final export, or clean environment was tested by this receipt.",
+    "The final ArcGIS adapter and real acceptance report remain future M6 work after M2 through M5 evidence gates complete."
+  ],
+  "next_action": "Retain this contract as the final delivery acceptance boundary while M2 remains at its exact human review gates; do not claim M6 completion from synthetic control readiness."
+}

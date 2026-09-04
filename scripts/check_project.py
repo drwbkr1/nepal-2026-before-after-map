@@ -9,6 +9,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+from arcgis_final_delivery_core import validate_contract as validate_arcgis_final_delivery_contract
 from arcgis_package_portability_core import validate_contract as validate_arcgis_package_portability_contract
 from derive_m2_acquisition_checkpoint import derive_checkpoint
 from validate_m2_acquisition_progress import (
@@ -387,6 +388,11 @@ REQUIRED = [
     "records/readiness/arcgis-package-portability-control.json",
     "records/surface-receipts/arcgis-package-portability-postrun-boundary-deviation.json",
     "records/surface-receipts/arcgis-package-portability.json",
+    "config/qa/arcgis-final-delivery-contract.json",
+    "docs/ARCGIS_FINAL_DELIVERY_ACCEPTANCE.md",
+    "scripts/arcgis_final_delivery_core.py",
+    "tests/test_arcgis_final_delivery.py",
+    "records/readiness/m6-arcgis-final-delivery-control-readiness.json",
     "scripts/render_m2_dem_amendment_review.py",
     "contracts/m2-dem-vertical-datum-proposal.json",
     "contracts/m2-dem-terrain-result-review-proposal.json",
@@ -5997,6 +6003,67 @@ def main() -> None:
         or sentinel_recovery_002_evidence.get("assertions", {}).get("scientific_result_established") is not False
     ):
         fail("EVID-0077 Sentinel recovery-002 review readiness differs or overclaims")
+
+    final_delivery_contract = json.loads(
+        (ROOT / "config/qa/arcgis-final-delivery-contract.json").read_text(encoding="utf-8")
+    )
+    final_delivery_readiness = json.loads(
+        (ROOT / "records/readiness/m6-arcgis-final-delivery-control-readiness.json").read_text(encoding="utf-8")
+    )
+    final_delivery_errors = validate_arcgis_final_delivery_contract(final_delivery_contract)
+    if final_delivery_errors:
+        fail("ArcGIS final delivery contract differs: " + "; ".join(final_delivery_errors))
+    expected_final_delivery_bindings = {
+        "contract_ref": "config/qa/arcgis-final-delivery-contract.json",
+        "contract_sha256": "a3eda86374e77e4c8dbc48ff7a37b0f3766119878a65b95ff137477ba497527d",
+        "portable_core_ref": "scripts/arcgis_final_delivery_core.py",
+        "portable_core_sha256": "c11a99929dedcd9b086d037b28b6c7980ba47d713dff4e890a741931600ac866",
+        "tests_ref": "tests/test_arcgis_final_delivery.py",
+        "tests_sha256": "f916d73811074005ba0eae313e0b59dd1e7a05ce0b351f9982a80b6ce3b1ad26",
+        "protocol_ref": "docs/ARCGIS_FINAL_DELIVERY_ACCEPTANCE.md",
+        "protocol_sha256": "7a51460f74dceb3113acd3102de8e529f14c18376c8bd643b3556417f737575a",
+    }
+    if (
+        final_delivery_readiness.get("status") != "pass_synthetic_control_only_m6_not_executed"
+        or final_delivery_readiness.get("bindings") != expected_final_delivery_bindings
+        or final_delivery_readiness.get("validation", {}).get("focused_test_count") != 8
+        or final_delivery_readiness.get("validation", {}).get("focused_test_status") != "pass"
+        or any(final_delivery_readiness.get("assertions", {}).get(key) is not False for key in (
+            "external_data_read", "arcgis_runtime_invoked", "scientific_pixels_read_or_written",
+            "scientific_evidence_admitted", "final_maps_created", "clean_environment_test_performed",
+            "m6_complete", "public_release_authorized", "emergency_guidance_authorized",
+            "current_checkpoint_changed",
+        ))
+    ):
+        fail("ArcGIS final delivery readiness differs or overclaims")
+    for binding in final_delivery_contract.get("authoritative_inputs", {}).values():
+        if binding.get("sha256") != sha256(binding.get("ref", "")):
+            fail("ArcGIS final delivery authoritative input binding is stale")
+    if expected_final_delivery_bindings["contract_sha256"] != sha256(expected_final_delivery_bindings["contract_ref"]):
+        fail("ArcGIS final delivery contract hash differs")
+    if expected_final_delivery_bindings["portable_core_sha256"] != sha256(expected_final_delivery_bindings["portable_core_ref"]):
+        fail("ArcGIS final delivery core hash differs")
+    if expected_final_delivery_bindings["tests_sha256"] != sha256(expected_final_delivery_bindings["tests_ref"]):
+        fail("ArcGIS final delivery tests hash differs")
+    if expected_final_delivery_bindings["protocol_sha256"] != sha256(expected_final_delivery_bindings["protocol_ref"]):
+        fail("ArcGIS final delivery protocol hash differs")
+
+    final_delivery_evidence = ledger_by_id.get("EVID-0078")
+    if (
+        not isinstance(final_delivery_evidence, dict)
+        or final_delivery_evidence.get("status") != "pass_synthetic_control_only_m6_not_executed"
+        or final_delivery_evidence.get("contract_sha256") != sha256("config/qa/arcgis-final-delivery-contract.json")
+        or final_delivery_evidence.get("portable_core_sha256") != sha256("scripts/arcgis_final_delivery_core.py")
+        or final_delivery_evidence.get("tests_sha256") != sha256("tests/test_arcgis_final_delivery.py")
+        or final_delivery_evidence.get("readiness_sha256") != sha256("records/readiness/m6-arcgis-final-delivery-control-readiness.json")
+        or final_delivery_evidence.get("assertions", {}).get("focused_test_count") != 8
+        or any(final_delivery_evidence.get("assertions", {}).get(key) is not False for key in (
+            "external_data_read", "arcgis_runtime_invoked", "scientific_pixels_read_or_written",
+            "final_maps_created", "clean_environment_test_performed", "m6_complete",
+            "public_release_authorized", "current_checkpoint_changed",
+        ))
+    ):
+        fail("EVID-0078 ArcGIS final delivery control readiness differs or overclaims")
 
     violations = []
     for relative in tracked_files():

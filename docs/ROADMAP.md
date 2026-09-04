@@ -109,9 +109,9 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Outcome:** An ArcGIS Pro package that opens without undocumented local dependencies.
 
-**Preparatory status:** A metadata-only EPSG:32645 evidence schema, File Geodatabase, APRX, and overview export have passed local ArcGIS Pro 3.7.1 validation. One bounded, publication-gated `.ppkx` package, extraction, reopen, and re-export attempt also passed with all operational sources inside the extraction tree and an exact pixel match. A post-run verification mistake created a second unplanned extraction; it is preserved as a process-conformance failure. Heavy outputs remain outside Git, scientific layers are empty, and this qualified same-machine result does not satisfy M6 clean-machine exit evidence.
+**Preparatory status:** A metadata-only EPSG:32645 evidence schema, File Geodatabase, APRX, and overview export have passed local ArcGIS Pro 3.7.1 validation. One bounded, publication-gated `.ppkx` package, extraction, reopen, and re-export attempt also passed with all operational sources inside the extraction tree and an exact pixel match. A post-run verification mistake created a second unplanned extraction; it is preserved as a process-conformance failure. A distinct final-delivery contract now requires five complete maps, nonempty reviewed scientific evidence, source and uncertainty links, preserved failed/deferred/inconclusive history, projected vectors and GeoTIFFs, visible exclusions, hashes, and a clean-environment package reopen. Eight synthetic evaluator tests pass, but heavy outputs remain outside Git, scientific layers are empty, and neither the same-machine fixture nor synthetic control readiness satisfies M6.
 
-**Deliverables:** `.aprx`, `.gdb`, `.lyrx`, GeoTIFF, PDF/PNG layouts, metadata, and optionally `.ppkx` after size and license review.
+**Deliverables:** `.aprx`, `.gdb`, `.lyrx`, GeoTIFF, GeoPackage, PDF/PNG layouts, metadata, and a `.ppkx` after size and license review.
 
 **Exit gate:** Clean-machine/package validation and export test.
 
