@@ -1,0 +1,274 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-DEM-TERRAIN-QUALITY-001",
+  "status": "predeclared_not_executed",
+  "created_at_utc": "2026-09-04T00:17:35Z",
+  "purpose": "Correct only the stable-output inventory failure exposed by attempt-002, then assess the same four exact DEM tiles under the unchanged terrain-quality method at a new exclusive attempt-003 path.",
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "authority_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+    "authorized_actions": [
+      "read the four exact verified DEM rasters",
+      "compute deterministic terrain-quality metrics",
+      "write versioned derived QA rasters, a geodatabase, an ArcGIS project, and exports outside Git",
+      "record pass, block, defer, failed, and inconclusive evidence"
+    ],
+    "not_authorized": [
+      "alter or overwrite source DEM tiles",
+      "select or execute a vertical-datum conversion",
+      "use GEOID or NONE in Sentinel-1 terrain tools",
+      "download orbit auxiliaries",
+      "process Sentinel pixels",
+      "publish DEM-derived raster imagery",
+      "publish a scientific conclusion or emergency guidance"
+    ],
+    "this_contract_creates_authority": false
+  },
+  "bindings": {
+    "active_intake_ref": "contracts/m2-dem-intake.json",
+    "active_intake_sha256": "db4329c6b10492d2c6985be528c5dceca13585736ee9f82fbf96e7f190ba92fa",
+    "dem_verification_summary_ref": "records/acquisition/dem-verification-summary.json",
+    "dem_verification_summary_sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef",
+    "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "vertical_datum_proposal_ref": "contracts/m2-dem-vertical-datum-proposal.json",
+    "vertical_datum_proposal_sha256": "bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+    "implementation_ref": "scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py",
+    "implementation_sha256": "819e62d9e55f8926565109d7958e147799deb3c214aca2c8009de8d3cd5ca32b",
+    "core_ref": "scripts/dem_terrain_quality_core.py",
+    "core_sha256": "58747b0c62b5ab66e3eeb932635e7a54ae5ead41b8ffa737a1897590ce33777d",
+    "test_ref": "tests/test_dem_terrain_quality_core.py",
+    "test_sha256": "a2fe1f598058a49cff4c05100aac249af5d95e6fcab42cd92c7205e7274924e5",
+    "base_contract_ref": "config/qa/dem-terrain-quality-contract.json",
+    "base_contract_sha256": "fdee6dbaaafee7c010c7ef77fe6d7121164686f4b26edcb8ca8f0d150d1d1fa2",
+    "failed_attempt_ref": "records/surface-receipts/m2-dem-terrain-quality-attempt-001-failure.json",
+    "failed_attempt_sha256": "f5b3d6ddd244aaee66128ba874c821a03ca5ded2ba8b4c4768d46f27380c0740",
+    "prior_contract_ref": "config/qa/dem-terrain-quality-contract-attempt-002.json",
+    "prior_contract_sha256": "434f8ff1d73a1d726e6aca47db78c2ef969fe9f395f03a3673d9564d569f9553",
+    "failed_attempt_002_ref": "records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json",
+    "failed_attempt_002_sha256": "858413f1e88c6d25640738e49723c8562fc3fabea952adccd08b8d0a9ff89e63"
+  },
+  "inputs": {
+    "external_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody",
+    "assets": [
+      {
+        "source_id": "M2-DEM-001",
+        "asset_id": "m2-dem-001",
+        "custody_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+        "sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a",
+        "size_bytes": 45336691,
+        "expected_bbox_wgs84": [
+          84.0,
+          27.0,
+          85.0,
+          28.0
+        ]
+      },
+      {
+        "source_id": "M2-DEM-002",
+        "asset_id": "m2-dem-002",
+        "custody_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+        "sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194",
+        "size_bytes": 44874244,
+        "expected_bbox_wgs84": [
+          85.0,
+          27.0,
+          86.0,
+          28.0
+        ]
+      },
+      {
+        "source_id": "M2-DEM-003",
+        "asset_id": "m2-dem-003",
+        "custody_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+        "sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc",
+        "size_bytes": 41688284,
+        "expected_bbox_wgs84": [
+          84.0,
+          28.0,
+          85.0,
+          29.0
+        ]
+      },
+      {
+        "source_id": "M2-DEM-004",
+        "asset_id": "m2-dem-004",
+        "custody_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+        "sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7",
+        "size_bytes": 38402839,
+        "expected_bbox_wgs84": [
+          85.0,
+          28.0,
+          86.0,
+          29.0
+        ]
+      }
+    ]
+  },
+  "seam_pairs": [
+    {
+      "seam_id": "SEAM-E85-N27",
+      "orientation": "west_east",
+      "first_source_id": "M2-DEM-001",
+      "second_source_id": "M2-DEM-002",
+      "boundary": "longitude 85 degrees east"
+    },
+    {
+      "seam_id": "SEAM-E85-N28",
+      "orientation": "west_east",
+      "first_source_id": "M2-DEM-003",
+      "second_source_id": "M2-DEM-004",
+      "boundary": "longitude 85 degrees east"
+    },
+    {
+      "seam_id": "SEAM-N28-E84",
+      "orientation": "south_north",
+      "first_source_id": "M2-DEM-001",
+      "second_source_id": "M2-DEM-003",
+      "boundary": "latitude 28 degrees north"
+    },
+    {
+      "seam_id": "SEAM-N28-E85",
+      "orientation": "south_north",
+      "first_source_id": "M2-DEM-002",
+      "second_source_id": "M2-DEM-004",
+      "boundary": "latitude 28 degrees north"
+    }
+  ],
+  "predeclared_metrics": {
+    "tile_metrics": [
+      "finite and nonfinite counts",
+      "minimum, maximum, mean, and standard deviation",
+      "exact zero and -32768 counts",
+      "four-neighbor local-curvature maximum and 99.9th percentile",
+      "fraction above the curvature review level",
+      "exact 2x2 plateau fraction"
+    ],
+    "seam_metrics": [
+      "signed median seam residual",
+      "absolute median, p95, p99, and maximum residual",
+      "fraction of residuals above 100 metres"
+    ],
+    "arcgis_metrics": [
+      "EPSG:32645 output CRS and 30 metre cell size",
+      "AOI slope distribution in degrees",
+      "derived-output inventory and SHA-256",
+      "source custody inventory before and after"
+    ]
+  },
+  "thresholds": {
+    "tile": {
+      "block_nodata_or_nonfinite_count": 0,
+      "block_minimum_elevation_m": -500.0,
+      "block_maximum_elevation_m": 9000.0,
+      "block_max_abs_local_curvature_m": 2000.0,
+      "defer_abs_local_curvature_m": 1000.0,
+      "defer_local_curvature_fraction": 0.0001,
+      "defer_exact_2x2_plateau_fraction": 0.5
+    },
+    "seam": {
+      "block_residual_abs_max_m": 2000.0,
+      "defer_signed_median_abs_m": 25.0,
+      "defer_residual_abs_median_m": 30.0,
+      "defer_residual_abs_p95_m": 150.0,
+      "defer_residual_abs_p99_m": 300.0,
+      "defer_residual_level_m": 100.0,
+      "defer_residual_above_level_fraction": 0.05
+    },
+    "slope": {
+      "block_maximum_degrees": 90.0,
+      "defer_level_degrees": 85.0,
+      "defer_fraction_above_level": 0.001
+    }
+  },
+  "processing": {
+    "analysis_crs": {
+      "wkid": 32645,
+      "name": "WGS 1984 UTM Zone 45N"
+    },
+    "target_cell_size_m": 30.0,
+    "native_mosaic_method": "LAST with exact nonoverlapping tile order M2-DEM-001 through M2-DEM-004",
+    "horizontal_projection_resampling": "BILINEAR",
+    "vertical_transformation": null,
+    "elevation_value_semantics": "EGM2008 orthometric metres remain unchanged; horizontal reprojection is not vertical conversion",
+    "slope_method": "PLANAR in projected metres with z factor 1",
+    "hillshade": {
+      "azimuth_degrees": 315,
+      "altitude_degrees": 45,
+      "model_shadows": false,
+      "z_factor": 1
+    },
+    "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003",
+    "output_collision_policy": "refuse",
+    "source_mutation": "prohibited"
+  },
+  "visual_review": {
+    "required": true,
+    "review_surface": "external PNG and PDF only; do not commit DEM-derived raster imagery to Git",
+    "criteria": [
+      "no blank or clipped AOI",
+      "no checkerboard, stripe, or rectangular fill artifact",
+      "no visible step aligned to a native tile boundary within the mapped AOI",
+      "terrain morphology is spatially coherent at the map scale",
+      "AOI outlines, seam lines, EPSG:32645, source-height semantics, and claim boundary are legible"
+    ],
+    "automated_metrics_cannot_substitute": true
+  },
+  "decision_policy": {
+    "block": "any source identity, custody, CRS, output-collision, nonfinite, impossible-elevation, gross-curvature, or gross-seam condition fails",
+    "defer": "no block is proven but a quantitative review threshold, visual criterion, vertical-datum decision, or independent terrain reference remains unresolved",
+    "pass_terrain_qa_only": "all quantitative and visual checks pass; this does not resolve vertical datum, radar readiness, or scientific fitness"
+  },
+  "output_boundary": {
+    "derived_files_in_git": false,
+    "repository_records_allowed": [
+      "contract",
+      "scripts",
+      "tests",
+      "metrics and receipts without raster pixels"
+    ],
+    "arcgis_project_exportable": true,
+    "scientific_claim_created": false
+  },
+  "next_step_authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "authorized_actions": [
+      "retain attempt-001 and attempt-002 failure evidence",
+      "execute one attempt at the corrected exclusive attempt-003 path",
+      "retain terrain-quality evidence",
+      "use a passing terrain-quality result as one prerequisite for later approved radar terrain processing"
+    ]
+  },
+  "claim_boundary": {
+    "thresholds_predeclared": true,
+    "dem_pixels_examined_by_this_contract": false,
+    "terrain_quality_established": false,
+    "vertical_datum_route_established": false,
+    "sentinel_processing_executed": false,
+    "scientific_result_established": false,
+    "failed_attempt_001_preserved": true,
+    "failed_attempt_002_preserved": true
+  },
+  "control_revision": 3,
+  "correction_id": "NEPAL-M2-DEM-TERRAIN-QUALITY-LOCK-INVENTORY-CORRECTION-001",
+  "attempt_id": "attempt-003",
+  "correction": {
+    "scope": "stable_inventory_lock_exclusion_and_exclusive_attempt_only",
+    "prior_output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-002",
+    "corrected_output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003",
+    "transient_arcgis_lock_files_excluded_from_manifest": true,
+    "stable_output_files_still_hashed": true,
+    "prior_output_path_reused": false,
+    "source_identities_changed": false,
+    "source_paths_changed": false,
+    "source_hashes_changed": false,
+    "source_sizes_changed": false,
+    "seam_pairs_changed": false,
+    "metrics_changed": false,
+    "thresholds_changed": false,
+    "raster_processing_method_changed": false,
+    "vertical_transformation_changed": false
+  }
+}

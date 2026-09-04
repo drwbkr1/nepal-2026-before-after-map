@@ -126,6 +126,7 @@ REQUIRED = [
     "config/qa/radar-baseline-processing-contract.json",
     "config/qa/dem-terrain-quality-contract.json",
     "config/qa/dem-terrain-quality-contract-attempt-002.json",
+    "config/qa/dem-terrain-quality-contract-attempt-003.json",
     "config/qa/optical-baseline-processing-contract.json",
     "config/qa/optical-input-readiness-contract.json",
     "docs/assets/arcgis-evidence-workspace-preview.png",
@@ -136,6 +137,7 @@ REQUIRED = [
     "records/surface-receipts/m2-dem-vertical-datum-capability.json",
     "records/surface-receipts/m2-dem-vertical-datum-review.json",
     "records/surface-receipts/m2-dem-terrain-quality-attempt-001-failure.json",
+    "records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json",
     "records/surface-receipts/optical-processing-synthetic-arcgis.json",
     "records/surface-receipts/optical-baseline-control-readiness.json",
     "records/surface-receipts/m2-materialization-readiness.json",
@@ -147,6 +149,7 @@ REQUIRED = [
     "records/readiness/m2-dem-terrain-quality-readiness.json",
     "records/readiness/m2-dem-terrain-quality-ci-correction.json",
     "records/readiness/m2-dem-terrain-quality-attempt-002-readiness.json",
+    "records/readiness/m2-dem-terrain-quality-attempt-003-readiness.json",
     "reviews/m2-activation/review-bundle.json",
     "reviews/m2-activation/review-contract.json",
     "reviews/m2-activation/blank-response.json",
@@ -206,6 +209,7 @@ REQUIRED = [
     "scripts/render_m2_dem_vertical_datum_review.py",
     "scripts/dem_terrain_quality_core.py",
     "scripts/inspect_m2_dem_terrain_quality_arcgis.py",
+    "scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py",
     "scripts/prepare_radar_processing_contract.py",
     "scripts/optical_processing_core.py",
     "scripts/prepare_optical_processing_contract.py",
@@ -312,6 +316,9 @@ def main() -> None:
     dem_terrain_attempt_001_failure = json.loads((ROOT / "records/surface-receipts/m2-dem-terrain-quality-attempt-001-failure.json").read_text(encoding="utf-8"))
     dem_terrain_attempt_002_contract = json.loads((ROOT / "config/qa/dem-terrain-quality-contract-attempt-002.json").read_text(encoding="utf-8"))
     dem_terrain_attempt_002_readiness = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-attempt-002-readiness.json").read_text(encoding="utf-8"))
+    dem_terrain_attempt_002_failure = json.loads((ROOT / "records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json").read_text(encoding="utf-8"))
+    dem_terrain_attempt_003_contract = json.loads((ROOT / "config/qa/dem-terrain-quality-contract-attempt-003.json").read_text(encoding="utf-8"))
+    dem_terrain_attempt_003_readiness = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-attempt-003-readiness.json").read_text(encoding="utf-8"))
     expected_dem_source_order = ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
     dem_current_assets = dem_intake_active.get("assets", [])
     if [asset.get("extensions", {}).get("source_id") for asset in dem_current_assets] != expected_dem_source_order:
@@ -1055,6 +1062,147 @@ def main() -> None:
         or dem_terrain_attempt_002_readiness.get("assertions") != expected_attempt_002_assertions
     ):
         fail("DEM terrain-quality attempt-002 readiness differs")
+    expected_terrain_attempt_002_assertions = {
+        "all_four_source_bytes_opened_and_read": True,
+        "source_custody_unchanged_before_failure": True,
+        "source_custody_independently_reverified_after_failure": True,
+        "terrain_metrics_computed_transiently": True,
+        "terrain_metrics_persisted": False,
+        "derived_output_created": True,
+        "manifest_created": False,
+        "candidate_receipt_created": False,
+        "visual_review_completed": False,
+        "terrain_quality_result_established": False,
+        "network_requests_performed": False,
+        "vertical_transformation_applied": False,
+        "sentinel_processing_executed": False,
+        "scientific_result_established": False,
+        "authority_created": False,
+        "retry_in_attempt_002_authorized": False,
+    }
+    expected_attempt_002_source_reverification = [
+        {"source_id": item["source_id"], "size_bytes": item["size_bytes"], "sha256": item["sha256"]}
+        for item in terrain_assets
+    ]
+    attempt_002_outputs = dem_terrain_attempt_002_failure.get("post_failure_output", {})
+    if (
+        dem_terrain_attempt_002_failure.get("receipt_id") != "NEPAL-M2-DEM-TERRAIN-QUALITY-ATTEMPT-002-FAILURE"
+        or dem_terrain_attempt_002_failure.get("status") != "failed_transient_arcgis_lock_during_output_inventory"
+        or dem_terrain_attempt_002_failure.get("bindings", {}).get("contract_sha256") != sha256("config/qa/dem-terrain-quality-contract-attempt-002.json")
+        or dem_terrain_attempt_002_failure.get("bindings", {}).get("implementation_sha256") != sha256("scripts/inspect_m2_dem_terrain_quality_arcgis.py")
+        or dem_terrain_attempt_002_failure.get("failure", {}).get("stage") != "stable_output_inventory_before_manifest_or_receipt"
+        or dem_terrain_attempt_002_failure.get("failure", {}).get("classification") != "wrapper_transient_lock_inventory_failure_not_data_fitness"
+        or attempt_002_outputs.get("attempt_output_root_exists") is not True
+        or attempt_002_outputs.get("candidate_receipt_exists") is not False
+        or attempt_002_outputs.get("transient_lock_present_after_process_exit") is not False
+        or attempt_002_outputs.get("stable_file_count") != 189
+        or attempt_002_outputs.get("stable_total_bytes") != 520653986
+        or attempt_002_outputs.get("stable_inventory_sha256") != "986ad7fb2f71e496fcd0bc323712f09cf0a120ed6ba1c4b6f2793aae0dea3d91"
+        or dem_terrain_attempt_002_failure.get("source_reverification_after_failure") != expected_attempt_002_source_reverification
+        or dem_terrain_attempt_002_failure.get("assertions") != expected_terrain_attempt_002_assertions
+    ):
+        fail("DEM terrain-quality attempt-002 failure receipt differs")
+    attempt_003_bindings = dem_terrain_attempt_003_contract.get("bindings", {})
+    for key, value in corrected_terrain_bindings.items():
+        if key not in {"implementation_ref", "implementation_sha256"} and attempt_003_bindings.get(key) != value:
+            fail(f"DEM terrain-quality attempt-003 changed prior binding {key}")
+    if (
+        dem_terrain_attempt_003_contract.get("contract_id") != dem_terrain_contract.get("contract_id")
+        or dem_terrain_attempt_003_contract.get("status") != "predeclared_not_executed"
+        or dem_terrain_attempt_003_contract.get("control_revision") != 3
+        or dem_terrain_attempt_003_contract.get("correction_id") != "NEPAL-M2-DEM-TERRAIN-QUALITY-LOCK-INVENTORY-CORRECTION-001"
+        or dem_terrain_attempt_003_contract.get("attempt_id") != "attempt-003"
+        or attempt_003_bindings.get("implementation_ref") != "scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py"
+        or attempt_003_bindings.get("implementation_sha256") != sha256("scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py")
+        or attempt_003_bindings.get("prior_contract_ref") != "config/qa/dem-terrain-quality-contract-attempt-002.json"
+        or attempt_003_bindings.get("prior_contract_sha256") != sha256("config/qa/dem-terrain-quality-contract-attempt-002.json")
+        or attempt_003_bindings.get("failed_attempt_002_ref") != "records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json"
+        or attempt_003_bindings.get("failed_attempt_002_sha256") != sha256("records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json")
+        or dem_terrain_attempt_003_contract.get("inputs") != dem_terrain_attempt_002_contract.get("inputs")
+        or dem_terrain_attempt_003_contract.get("seam_pairs") != dem_terrain_attempt_002_contract.get("seam_pairs")
+        or dem_terrain_attempt_003_contract.get("predeclared_metrics") != dem_terrain_attempt_002_contract.get("predeclared_metrics")
+        or dem_terrain_attempt_003_contract.get("thresholds") != dem_terrain_attempt_002_contract.get("thresholds")
+        or dem_terrain_attempt_003_contract.get("visual_review") != dem_terrain_attempt_002_contract.get("visual_review")
+        or dem_terrain_attempt_003_contract.get("decision_policy") != dem_terrain_attempt_002_contract.get("decision_policy")
+        or dem_terrain_attempt_003_contract.get("output_boundary") != dem_terrain_attempt_002_contract.get("output_boundary")
+        or dem_terrain_attempt_003_contract.get("authority") != dem_terrain_attempt_002_contract.get("authority")
+    ):
+        fail("DEM terrain-quality attempt-003 correction changed a protected control")
+    attempt_002_processing = dict(dem_terrain_attempt_002_contract.get("processing", {}))
+    attempt_003_processing = dict(dem_terrain_attempt_003_contract.get("processing", {}))
+    if attempt_003_processing.pop("output_root", None) != r"C:\Projects\Active\nepal-2026-before-after-map-data\derived\dem-terrain-quality\attempt-003":
+        fail("DEM terrain-quality attempt-003 output root differs")
+    attempt_002_processing.pop("output_root", None)
+    if attempt_003_processing != attempt_002_processing:
+        fail("DEM terrain-quality attempt-003 raster processing changed")
+    expected_attempt_003_correction = {
+        "scope": "stable_inventory_lock_exclusion_and_exclusive_attempt_only",
+        "prior_output_root": r"C:\Projects\Active\nepal-2026-before-after-map-data\derived\dem-terrain-quality\attempt-002",
+        "corrected_output_root": r"C:\Projects\Active\nepal-2026-before-after-map-data\derived\dem-terrain-quality\attempt-003",
+        "transient_arcgis_lock_files_excluded_from_manifest": True,
+        "stable_output_files_still_hashed": True,
+        "prior_output_path_reused": False,
+        "source_identities_changed": False,
+        "source_paths_changed": False,
+        "source_hashes_changed": False,
+        "source_sizes_changed": False,
+        "seam_pairs_changed": False,
+        "metrics_changed": False,
+        "thresholds_changed": False,
+        "raster_processing_method_changed": False,
+        "vertical_transformation_changed": False,
+    }
+    if dem_terrain_attempt_003_contract.get("correction") != expected_attempt_003_correction:
+        fail("DEM terrain-quality attempt-003 correction boundary differs")
+    expected_attempt_003_readiness_bindings = {
+        "original_contract_ref": "config/qa/dem-terrain-quality-contract.json",
+        "original_contract_sha256": sha256("config/qa/dem-terrain-quality-contract.json"),
+        "prior_contract_ref": "config/qa/dem-terrain-quality-contract-attempt-002.json",
+        "prior_contract_sha256": sha256("config/qa/dem-terrain-quality-contract-attempt-002.json"),
+        "corrected_contract_ref": "config/qa/dem-terrain-quality-contract-attempt-003.json",
+        "corrected_contract_sha256": sha256("config/qa/dem-terrain-quality-contract-attempt-003.json"),
+        "failed_attempt_002_ref": "records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json",
+        "failed_attempt_002_sha256": sha256("records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json"),
+        "implementation_ref": "scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py",
+        "implementation_sha256": sha256("scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py"),
+        "core_ref": "scripts/dem_terrain_quality_core.py",
+        "core_sha256": sha256("scripts/dem_terrain_quality_core.py"),
+        "test_ref": "tests/test_dem_terrain_quality_core.py",
+        "test_sha256": sha256("tests/test_dem_terrain_quality_core.py"),
+    }
+    expected_attempt_003_assertions = {
+        "attempt_002_failure_preserved": True,
+        "attempt_002_output_preserved": True,
+        "attempt_002_path_reused": False,
+        "transient_lock_files_excluded_from_stable_manifest": True,
+        "stable_output_files_remain_hashed": True,
+        "exact_source_identities_unchanged": True,
+        "exact_source_paths_unchanged": True,
+        "exact_source_hashes_unchanged": True,
+        "exact_source_sizes_unchanged": True,
+        "seam_pairs_unchanged": True,
+        "metrics_unchanged": True,
+        "thresholds_unchanged": True,
+        "raster_processing_method_unchanged": True,
+        "vertical_transformation_selected": False,
+        "real_dem_metrics_observed_by_correction": False,
+        "attempt_003_outputs_created_by_correction": False,
+        "source_custody_mutated": False,
+        "network_requests_performed": False,
+        "sentinel_processing_executed": False,
+        "scientific_result_established": False,
+        "authority_created": False,
+    }
+    if (
+        dem_terrain_attempt_003_readiness.get("readiness_id") != "NEPAL-M2-DEM-TERRAIN-QUALITY-ATTEMPT-003-READINESS-001"
+        or dem_terrain_attempt_003_readiness.get("status") != "pass_lock_exclusion_correction_predeclared_real_execution_not_started"
+        or dem_terrain_attempt_003_readiness.get("bindings") != expected_attempt_003_readiness_bindings
+        or dem_terrain_attempt_003_readiness.get("validation", {}).get("focused_test_count") != 5
+        or dem_terrain_attempt_003_readiness.get("validation", {}).get("full_repository_test_count") != 190
+        or dem_terrain_attempt_003_readiness.get("validation", {}).get("repository_required_file_count_after_integration") != 207
+        or dem_terrain_attempt_003_readiness.get("assertions") != expected_attempt_003_assertions
+    ):
+        fail("DEM terrain-quality attempt-003 readiness differs")
     expected_dem_acquire_status = "complete" if dem_state_counts["promoted"] == 4 and not dem_state_counts["failed"] else "ready"
     expected_dem_verify_status = "complete" if dem_all_geotiff_verified else ("ready" if expected_dem_acquire_status == "complete" else "planned")
     for unit_id, expected_status in (
@@ -3021,6 +3169,31 @@ def main() -> None:
         or terrain_attempt_002_evidence.get("assertions") != dem_terrain_attempt_002_readiness.get("assertions")
     ):
         fail("EVID-0046 DEM terrain-quality attempt-002 predeclaration differs")
+    terrain_attempt_002_failure_evidence = ledger_by_id.get("EVID-0047")
+    if not isinstance(terrain_attempt_002_failure_evidence, dict):
+        fail("evidence ledger is missing EVID-0047 DEM terrain-quality attempt-002 failure")
+    if (
+        terrain_attempt_002_failure_evidence.get("status") != dem_terrain_attempt_002_failure.get("status")
+        or terrain_attempt_002_failure_evidence.get("failure_ref") != "records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json"
+        or terrain_attempt_002_failure_evidence.get("failure_sha256") != sha256("records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json")
+        or terrain_attempt_002_failure_evidence.get("contract_sha256") != sha256("config/qa/dem-terrain-quality-contract-attempt-002.json")
+        or terrain_attempt_002_failure_evidence.get("assertions") != dem_terrain_attempt_002_failure.get("assertions")
+    ):
+        fail("EVID-0047 DEM terrain-quality attempt-002 failure differs")
+    terrain_attempt_003_evidence = ledger_by_id.get("EVID-0048")
+    if not isinstance(terrain_attempt_003_evidence, dict):
+        fail("evidence ledger is missing EVID-0048 DEM terrain-quality attempt-003 predeclaration")
+    if (
+        terrain_attempt_003_evidence.get("status") != dem_terrain_attempt_003_readiness.get("status")
+        or terrain_attempt_003_evidence.get("corrected_contract_ref") != "config/qa/dem-terrain-quality-contract-attempt-003.json"
+        or terrain_attempt_003_evidence.get("corrected_contract_sha256") != sha256("config/qa/dem-terrain-quality-contract-attempt-003.json")
+        or terrain_attempt_003_evidence.get("readiness_ref") != "records/readiness/m2-dem-terrain-quality-attempt-003-readiness.json"
+        or terrain_attempt_003_evidence.get("readiness_sha256") != sha256("records/readiness/m2-dem-terrain-quality-attempt-003-readiness.json")
+        or terrain_attempt_003_evidence.get("failed_attempt_sha256") != sha256("records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json")
+        or terrain_attempt_003_evidence.get("implementation_sha256") != sha256("scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py")
+        or terrain_attempt_003_evidence.get("assertions") != dem_terrain_attempt_003_readiness.get("assertions")
+    ):
+        fail("EVID-0048 DEM terrain-quality attempt-003 predeclaration differs")
 
     violations = []
     for relative in tracked_files():

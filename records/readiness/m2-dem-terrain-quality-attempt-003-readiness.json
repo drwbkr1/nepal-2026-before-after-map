@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "readiness_id": "NEPAL-M2-DEM-TERRAIN-QUALITY-ATTEMPT-003-READINESS-001",
+  "status": "pass_lock_exclusion_correction_predeclared_real_execution_not_started",
+  "verified_at_utc": "2026-09-04T00:18:00Z",
+  "claim": "Attempt-002 is retained as a late wrapper failure, and attempt-003 excludes only transient ArcGIS .lock files from the stable manifest while preserving all sources, metrics, thresholds, raster operations, and vertical semantics.",
+  "bindings": {
+    "original_contract_ref": "config/qa/dem-terrain-quality-contract.json",
+    "original_contract_sha256": "fdee6dbaaafee7c010c7ef77fe6d7121164686f4b26edcb8ca8f0d150d1d1fa2",
+    "prior_contract_ref": "config/qa/dem-terrain-quality-contract-attempt-002.json",
+    "prior_contract_sha256": "434f8ff1d73a1d726e6aca47db78c2ef969fe9f395f03a3673d9564d569f9553",
+    "corrected_contract_ref": "config/qa/dem-terrain-quality-contract-attempt-003.json",
+    "corrected_contract_sha256": "e903117aba56e07c83e4b314ec613019f9e0d2b35f60222c03ca74a7c0a66f88",
+    "failed_attempt_002_ref": "records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json",
+    "failed_attempt_002_sha256": "858413f1e88c6d25640738e49723c8562fc3fabea952adccd08b8d0a9ff89e63",
+    "implementation_ref": "scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py",
+    "implementation_sha256": "819e62d9e55f8926565109d7958e147799deb3c214aca2c8009de8d3cd5ca32b",
+    "core_ref": "scripts/dem_terrain_quality_core.py",
+    "core_sha256": "58747b0c62b5ab66e3eeb932635e7a54ae5ead41b8ffa737a1897590ce33777d",
+    "test_ref": "tests/test_dem_terrain_quality_core.py",
+    "test_sha256": "a2fe1f598058a49cff4c05100aac249af5d95e6fcab42cd92c7205e7274924e5"
+  },
+  "correction": {
+    "prior_output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-002",
+    "corrected_output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003",
+    "candidate_receipt": "scratch/dem-terrain-quality-attempt-003/candidate-receipt.json",
+    "stable_manifest_exclusion": "files whose basename ends with .lock, case-insensitive"
+  },
+  "validation": {
+    "focused_test_count": 5,
+    "focused_test_status": "pass",
+    "full_repository_test_count": 190,
+    "full_repository_test_status": "pass",
+    "repository_required_file_count_after_integration": 207,
+    "repository_validation_status": "pass",
+    "corrected_wrapper_syntax_status": "pass",
+    "attempt_002_output_root_exists": true,
+    "attempt_002_candidate_receipt_exists": false,
+    "attempt_003_output_root_exists": false,
+    "attempt_003_candidate_receipt_exists": false
+  },
+  "assertions": {
+    "attempt_002_failure_preserved": true,
+    "attempt_002_output_preserved": true,
+    "attempt_002_path_reused": false,
+    "transient_lock_files_excluded_from_stable_manifest": true,
+    "stable_output_files_remain_hashed": true,
+    "exact_source_identities_unchanged": true,
+    "exact_source_paths_unchanged": true,
+    "exact_source_hashes_unchanged": true,
+    "exact_source_sizes_unchanged": true,
+    "seam_pairs_unchanged": true,
+    "metrics_unchanged": true,
+    "thresholds_unchanged": true,
+    "raster_processing_method_unchanged": true,
+    "vertical_transformation_selected": false,
+    "real_dem_metrics_observed_by_correction": false,
+    "attempt_003_outputs_created_by_correction": false,
+    "source_custody_mutated": false,
+    "network_requests_performed": false,
+    "sentinel_processing_executed": false,
+    "scientific_result_established": false,
+    "authority_created": false
+  },
+  "limitations": [
+    "Excluding transient lock files repairs artifact inventory only; it does not change or validate the terrain calculation.",
+    "Attempt-002 derived files remain failed-attempt artifacts because no quantitative receipt was persisted.",
+    "Attempt-003 must still run successfully and pass visual review; vertical datum and independent elevation accuracy remain separate gates."
+  ],
+  "next_action": "Publish and verify the attempt-003 inventory correction, then execute exactly one ArcGIS run at the new no-overwrite path."
+}

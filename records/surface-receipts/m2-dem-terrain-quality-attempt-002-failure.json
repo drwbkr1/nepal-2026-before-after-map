@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-TERRAIN-QUALITY-ATTEMPT-002-FAILURE",
+  "status": "failed_transient_arcgis_lock_during_output_inventory",
+  "executed_at_utc": "2026-09-04T00:11:30Z",
+  "recorded_at_utc": "2026-09-04T00:15:20Z",
+  "claim": "Attempt-002 created its ArcGIS outputs and reverified unchanged source custody, but failed before manifest and candidate-receipt creation when the inventory tried to open a transient geodatabase lock file.",
+  "bindings": {
+    "published_control_commit": "86280c8dca3a25b9a11fa21d99fb58a48c422067",
+    "contract_ref": "config/qa/dem-terrain-quality-contract-attempt-002.json",
+    "contract_sha256": "434f8ff1d73a1d726e6aca47db78c2ef969fe9f395f03a3673d9564d569f9553",
+    "implementation_ref": "scripts/inspect_m2_dem_terrain_quality_arcgis.py",
+    "implementation_sha256": "b394fbb60f549b2e6e3b1f5f69fb00eb38a306838561a7a78d8be9bb689aaeb3",
+    "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "authority_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0"
+  },
+  "attempted": {
+    "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-002",
+    "candidate_receipt": "scratch/dem-terrain-quality-attempt-002/candidate-receipt.json"
+  },
+  "failure": {
+    "stage": "stable_output_inventory_before_manifest_or_receipt",
+    "exception_type": "PermissionError",
+    "error": "[Errno 13] Permission denied: C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-002\\Nepal_2026_DEM_Terrain_QA.gdb\\_gdb.PROFESSIONAL.20888.25996.sr.lock",
+    "exit_code": 1,
+    "classification": "wrapper_transient_lock_inventory_failure_not_data_fitness"
+  },
+  "post_failure_output": {
+    "attempt_output_root_exists": true,
+    "candidate_receipt_exists": false,
+    "transient_lock_present_after_process_exit": false,
+    "stable_file_count": 189,
+    "stable_total_bytes": 520653986,
+    "stable_inventory_canonicalization": "relative POSIX path code-point sort; compact JSON array UTF-8 without trailing newline",
+    "stable_inventory_sha256": "986ad7fb2f71e496fcd0bc323712f09cf0a120ed6ba1c4b6f2793aae0dea3d91",
+    "key_exports": [
+      {
+        "name": "Nepal_2026_DEM_Terrain_QA.aprx",
+        "size_bytes": 22835,
+        "sha256": "6b10c2be60de128f7cb9b58f020ebb8232882d627224f9af4dfbbaf259c28dc9"
+      },
+      {
+        "name": "Nepal_2026_DEM_Terrain_QA.pdf",
+        "size_bytes": 1653829,
+        "sha256": "6220d92a287e4a08c88dc8e4d38acf454855264a598e71e7ec8fb661fdf1b557"
+      },
+      {
+        "name": "Nepal_2026_DEM_Terrain_QA.png",
+        "size_bytes": 1923513,
+        "sha256": "39c63525171ae7cd24b540577079467c7efbaedb4aae959086e3f4d1a38ad811"
+      }
+    ]
+  },
+  "source_reverification_after_failure": [
+    {
+      "source_id": "M2-DEM-001",
+      "size_bytes": 45336691,
+      "sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a"
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "size_bytes": 44874244,
+      "sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194"
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "size_bytes": 41688284,
+      "sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc"
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "size_bytes": 38402839,
+      "sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7"
+    }
+  ],
+  "assertions": {
+    "all_four_source_bytes_opened_and_read": true,
+    "source_custody_unchanged_before_failure": true,
+    "source_custody_independently_reverified_after_failure": true,
+    "terrain_metrics_computed_transiently": true,
+    "terrain_metrics_persisted": false,
+    "derived_output_created": true,
+    "manifest_created": false,
+    "candidate_receipt_created": false,
+    "visual_review_completed": false,
+    "terrain_quality_result_established": false,
+    "network_requests_performed": false,
+    "vertical_transformation_applied": false,
+    "sentinel_processing_executed": false,
+    "scientific_result_established": false,
+    "authority_created": false,
+    "retry_in_attempt_002_authorized": false
+  },
+  "limitations": [
+    "The failed process did not persist the quantitative values, so no terrain-quality decision can be recovered from this receipt.",
+    "The 189 post-exit files are retained as failed-attempt artifacts and must not be promoted as the final ArcGIS package.",
+    "Transient geodatabase lock files are runtime coordination files and are not stable artifacts for a reproducibility manifest.",
+    "Any new run requires an exclusive attempt-003 path and a predeclared inventory correction."
+  ],
+  "next_action": "Create an attempt-003 wrapper and control that exclude transient .lock files from the stable manifest without changing any DEM metric, threshold, raster operation, or vertical boundary."
+}
