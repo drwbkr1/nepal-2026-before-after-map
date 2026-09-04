@@ -1,0 +1,556 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-S1-MATERIALIZED-INPUT-READINESS-REAL-001",
+  "checked_at_utc": "2026-09-04T18:17:14Z",
+  "status": "block",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced"
+  },
+  "bindings": {
+    "contract_ref": "config/qa/radar-input-readiness-contract.json",
+    "contract_sha256": "ad478b8abd4e4a47c8d16012fffc2b67770681538bddc23b500ce5b32b17428a",
+    "materialization_receipt_sha256": {
+      "M1-SRC-001": "8c1d0c33eee7ab9d562aa9d6273b3188354c4c15be58d6faf7f0b86368b241e9",
+      "M1-SRC-002": "eb647c2b1eee541503c2f2595f4de8c1370975918e7f716970aea79e4199efa8",
+      "M1-SRC-003": "027128fce548203274c4dee23c309d3297d9ade6bb307eb6c615e2e4620bb9be"
+    },
+    "external_manifest_sha256": {
+      "M1-SRC-001": "3756a702efb9a7d1c1f61e284fabf017702e34073b82c44a3571f213d01295e9",
+      "M1-SRC-002": "f1b92efcfeaae2c55b016ada4ce76485595c4e0cd980cd5419c5a4b34d9de849",
+      "M1-SRC-003": "ed982516cfc2cef55c522675e095cfef0f979f4c0632c2bfbc692cbe5ad082ba"
+    }
+  },
+  "products": {
+    "M1-SRC-001": {
+      "source_id": "M1-SRC-001",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-001-fixture-must-not-run.json",
+      "materialization_receipt_sha256": "8c1d0c33eee7ab9d562aa9d6273b3188354c4c15be58d6faf7f0b86368b241e9",
+      "external_manifest_sha256": "3756a702efb9a7d1c1f61e284fabf017702e34073b82c44a3571f213d01295e9",
+      "inventory": {
+        "status": "pass_inventory_only",
+        "members": {
+          "manifest_safe": {
+            "relative_path": "manifest.safe",
+            "size_bytes": 24488,
+            "zip_crc32": "47b175d5",
+            "sha256": "98e2674ba10c0f1447390ea9d47ccdd695a6abc2ea7dde1214d45543c6488e90"
+          },
+          "annotation_vv": {
+            "relative_path": "annotation/s1d-iw-grd-vv-20260816t122116-20260816t122141-004151-007980-001.xml",
+            "size_bytes": 1687019,
+            "zip_crc32": "41880397",
+            "sha256": "fe16d8e3c91435bbb60de94f600e5fd942ebe38095b1f9eefeb29c50f7e20268"
+          },
+          "annotation_vh": {
+            "relative_path": "annotation/s1d-iw-grd-vh-20260816t122116-20260816t122141-004151-007980-002.xml",
+            "size_bytes": 1687866,
+            "zip_crc32": "2fe38432",
+            "sha256": "cd406e752f508f51357e45a267f15f3ec170f3da9997d1397dd746eaa48648d9"
+          },
+          "calibration_vv": {
+            "relative_path": "annotation/calibration/calibration-s1d-iw-grd-vv-20260816t122116-20260816t122141-004151-007980-001.xml",
+            "size_bytes": 1013267,
+            "zip_crc32": "74f432be",
+            "sha256": "9caa0c15c560fbde85ff683b7010990862d3c5f46198c9f2d10383c56db16151"
+          },
+          "calibration_vh": {
+            "relative_path": "annotation/calibration/calibration-s1d-iw-grd-vh-20260816t122116-20260816t122141-004151-007980-002.xml",
+            "size_bytes": 1013267,
+            "zip_crc32": "a212c0fc",
+            "sha256": "09d59c4d70808eaa34308506d25a41d0727ba64284ec9e0a44a420fd286f51d7"
+          },
+          "noise_vv": {
+            "relative_path": "annotation/calibration/noise-s1d-iw-grd-vv-20260816t122116-20260816t122141-004151-007980-001.xml",
+            "size_bytes": 425262,
+            "zip_crc32": "5a81b32b",
+            "sha256": "ae44632c4709aaea2bf812a45d847a5af71454c881d31c0d5119fcf3a81f00f1"
+          },
+          "noise_vh": {
+            "relative_path": "annotation/calibration/noise-s1d-iw-grd-vh-20260816t122116-20260816t122141-004151-007980-002.xml",
+            "size_bytes": 425262,
+            "zip_crc32": "7a977ecc",
+            "sha256": "c80e5b7dedeee79c59706fa4b879d739b949735d82d6015867e4a88b48ce14f8"
+          },
+          "measurement_vv": {
+            "relative_path": "measurement/s1d-iw-grd-vv-20260816t122116-20260816t122141-004151-007980-001.tiff",
+            "size_bytes": 862378140,
+            "zip_crc32": "61ece812",
+            "sha256": "c2e9a926dd6aba4a629f2127fbf4f3e2ccdf93b853687eec17cef281be13e821"
+          },
+          "measurement_vh": {
+            "relative_path": "measurement/s1d-iw-grd-vh-20260816t122116-20260816t122141-004151-007980-002.tiff",
+            "size_bytes": 862378140,
+            "zip_crc32": "76bf4790",
+            "sha256": "aa88cce68ba5f200eec613e13498ede3a52af71e3b972d1fade4dde10f5a483c"
+          }
+        },
+        "errors": []
+      },
+      "annotations": {
+        "vv": {
+          "mission_id": "S1D",
+          "product_type": "GRD",
+          "polarization": "VV",
+          "mode": "IW",
+          "swath": "IW",
+          "start_time": "2026-08-16T12:21:16.058226",
+          "stop_time": "2026-08-16T12:21:41.056809",
+          "absolute_orbit_number": 4151,
+          "orbit_direction": "Ascending",
+          "number_of_samples": 25762,
+          "number_of_lines": 16732,
+          "pixel_value": "Detected",
+          "output_pixels": "16 bit Unsigned Integer",
+          "range_pixel_spacing": 10.0,
+          "azimuth_pixel_spacing": 10.0,
+          "orbit_vector_count_declared": 16,
+          "orbit_vector_count_observed": 16,
+          "orbit_time_start": "2026-08-16T12:20:15.968170Z",
+          "orbit_time_end": "2026-08-16T12:22:45.968170Z",
+          "orbit_times_strictly_increasing": true,
+          "orbit_vectors_finite": true,
+          "errors": []
+        },
+        "vh": {
+          "mission_id": "S1D",
+          "product_type": "GRD",
+          "polarization": "VH",
+          "mode": "IW",
+          "swath": "IW",
+          "start_time": "2026-08-16T12:21:16.058226",
+          "stop_time": "2026-08-16T12:21:41.056809",
+          "absolute_orbit_number": 4151,
+          "orbit_direction": "Ascending",
+          "number_of_samples": 25762,
+          "number_of_lines": 16732,
+          "pixel_value": "Detected",
+          "output_pixels": "16 bit Unsigned Integer",
+          "range_pixel_spacing": 10.0,
+          "azimuth_pixel_spacing": 10.0,
+          "orbit_vector_count_declared": 16,
+          "orbit_vector_count_observed": 16,
+          "orbit_time_start": "2026-08-16T12:20:15.968170Z",
+          "orbit_time_end": "2026-08-16T12:22:45.968170Z",
+          "orbit_times_strictly_increasing": true,
+          "orbit_vectors_finite": true,
+          "errors": []
+        }
+      },
+      "raster_headers": {
+        "vv": {
+          "format": "TIFF",
+          "band_count": 1,
+          "width": 25762,
+          "height": 16732,
+          "pixel_type": "U16",
+          "cell_width": 0.00011120829025725597,
+          "cell_height": 0.00011565241011357691,
+          "spatial_reference_wkid": 4326,
+          "spatial_reference_name": "GCS_WGS_1984",
+          "extent": {
+            "xmin": 84.1722983049362,
+            "ymin": 26.08223636906558,
+            "xmax": 87.03724627854363,
+            "ymax": 28.01733249508595
+          }
+        },
+        "vh": {
+          "format": "TIFF",
+          "band_count": 1,
+          "width": 25762,
+          "height": 16732,
+          "pixel_type": "U16",
+          "cell_width": 0.00011120829025725597,
+          "cell_height": 0.00011565241011357691,
+          "spatial_reference_wkid": 4326,
+          "spatial_reference_name": "GCS_WGS_1984",
+          "extent": {
+            "xmin": 84.1722983049362,
+            "ymin": 26.08223636906558,
+            "xmax": 87.03724627854363,
+            "ymax": 28.01733249508595
+          }
+        }
+      },
+      "decision": {
+        "status": "block",
+        "errors": [
+          "VV annotation pixel value is not AMPLITUDE",
+          "VH annotation pixel value is not AMPLITUDE"
+        ],
+        "pixel_values_examined": false,
+        "baseline_processing_released": false,
+        "scientific_admission_authorized": false
+      }
+    },
+    "M1-SRC-002": {
+      "source_id": "M1-SRC-002",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-002-m1-src-002-materialization-001.json",
+      "materialization_receipt_sha256": "eb647c2b1eee541503c2f2595f4de8c1370975918e7f716970aea79e4199efa8",
+      "external_manifest_sha256": "f1b92efcfeaae2c55b016ada4ce76485595c4e0cd980cd5419c5a4b34d9de849",
+      "inventory": {
+        "status": "pass_inventory_only",
+        "members": {
+          "manifest_safe": {
+            "relative_path": "manifest.safe",
+            "size_bytes": 24488,
+            "zip_crc32": "130a4f44",
+            "sha256": "dd13c0e5b2136a0416152d5ee9d91f274dfc3ab1003551e507347e5efb6d5013"
+          },
+          "annotation_vv": {
+            "relative_path": "annotation/s1d-iw-grd-vv-20260816t122141-20260816t122206-004151-007980-001.xml",
+            "size_bytes": 1700329,
+            "zip_crc32": "9c43760e",
+            "sha256": "c25c6540386b642af0f7bfa6648f1940da472da74f01d3784b06e745f32427fa"
+          },
+          "annotation_vh": {
+            "relative_path": "annotation/s1d-iw-grd-vh-20260816t122141-20260816t122206-004151-007980-002.xml",
+            "size_bytes": 1702117,
+            "zip_crc32": "172cbe3d",
+            "sha256": "81af45f0ee524947a8ba742fada7df869845ceef444243747b7d2a27ce431a77"
+          },
+          "calibration_vv": {
+            "relative_path": "annotation/calibration/calibration-s1d-iw-grd-vv-20260816t122141-20260816t122206-004151-007980-001.xml",
+            "size_bytes": 1013267,
+            "zip_crc32": "468a29b5",
+            "sha256": "7db2760a0770df0d7cb2b0ae07343848c0461a079fc6188aa4c3bc663fc7bda0"
+          },
+          "calibration_vh": {
+            "relative_path": "annotation/calibration/calibration-s1d-iw-grd-vh-20260816t122141-20260816t122206-004151-007980-002.xml",
+            "size_bytes": 1013267,
+            "zip_crc32": "906cdbf7",
+            "sha256": "80f6fcab7b0eb7be5bf13f6373c4dee562bf16e081528d88bbfaa1e274c71a40"
+          },
+          "noise_vv": {
+            "relative_path": "annotation/calibration/noise-s1d-iw-grd-vv-20260816t122141-20260816t122206-004151-007980-001.xml",
+            "size_bytes": 426884,
+            "zip_crc32": "569165ed",
+            "sha256": "045d123ef247eff3fedb6bf6ca18ca64194717bc7a034725abb38eea48b7e1cb"
+          },
+          "noise_vh": {
+            "relative_path": "annotation/calibration/noise-s1d-iw-grd-vh-20260816t122141-20260816t122206-004151-007980-002.xml",
+            "size_bytes": 426884,
+            "zip_crc32": "7554c771",
+            "sha256": "e5d0987f53915117d4c70fc918a57c548cb199306f96c3715a7b4a5196b41c59"
+          },
+          "measurement_vv": {
+            "relative_path": "measurement/s1d-iw-grd-vv-20260816t122141-20260816t122206-004151-007980-001.tiff",
+            "size_bytes": 862612388,
+            "zip_crc32": "d541921a",
+            "sha256": "963288351a9568c007b452e9356310ee6d587577e6d89dc0b5a961f2e056f0d6"
+          },
+          "measurement_vh": {
+            "relative_path": "measurement/s1d-iw-grd-vh-20260816t122141-20260816t122206-004151-007980-002.tiff",
+            "size_bytes": 862612388,
+            "zip_crc32": "283eda08",
+            "sha256": "f7038ac585be64766616ceab6440432a5c49d14c6b2bcd014c96ee9edf9f3b8f"
+          }
+        },
+        "errors": []
+      },
+      "annotations": {
+        "vv": {
+          "mission_id": "S1D",
+          "product_type": "GRD",
+          "polarization": "VV",
+          "mode": "IW",
+          "swath": "IW",
+          "start_time": "2026-08-16T12:21:41.058298",
+          "stop_time": "2026-08-16T12:22:06.056880",
+          "absolute_orbit_number": 4151,
+          "orbit_direction": "Ascending",
+          "number_of_samples": 25769,
+          "number_of_lines": 16732,
+          "pixel_value": "Detected",
+          "output_pixels": "16 bit Unsigned Integer",
+          "range_pixel_spacing": 10.0,
+          "azimuth_pixel_spacing": 10.0,
+          "orbit_vector_count_declared": 17,
+          "orbit_vector_count_observed": 17,
+          "orbit_time_start": "2026-08-16T12:20:35.968170Z",
+          "orbit_time_end": "2026-08-16T12:23:15.968170Z",
+          "orbit_times_strictly_increasing": true,
+          "orbit_vectors_finite": true,
+          "errors": []
+        },
+        "vh": {
+          "mission_id": "S1D",
+          "product_type": "GRD",
+          "polarization": "VH",
+          "mode": "IW",
+          "swath": "IW",
+          "start_time": "2026-08-16T12:21:41.058298",
+          "stop_time": "2026-08-16T12:22:06.056880",
+          "absolute_orbit_number": 4151,
+          "orbit_direction": "Ascending",
+          "number_of_samples": 25769,
+          "number_of_lines": 16732,
+          "pixel_value": "Detected",
+          "output_pixels": "16 bit Unsigned Integer",
+          "range_pixel_spacing": 10.0,
+          "azimuth_pixel_spacing": 10.0,
+          "orbit_vector_count_declared": 17,
+          "orbit_vector_count_observed": 17,
+          "orbit_time_start": "2026-08-16T12:20:35.968170Z",
+          "orbit_time_end": "2026-08-16T12:23:15.968170Z",
+          "orbit_times_strictly_increasing": true,
+          "orbit_vectors_finite": true,
+          "errors": []
+        }
+      },
+      "raster_headers": {
+        "vv": {
+          "format": "TIFF",
+          "band_count": 1,
+          "width": 25769,
+          "height": 16732,
+          "pixel_type": "U16",
+          "cell_width": 0.00011201118558746153,
+          "cell_height": 0.00011570297739791842,
+          "spatial_reference_wkid": 4326,
+          "spatial_reference_name": "GCS_WGS_1984",
+          "extent": {
+            "xmin": 83.91505423222421,
+            "ymin": 27.586768007977046,
+            "xmax": 86.8014704736275,
+            "ymax": 29.522710225799017
+          }
+        },
+        "vh": {
+          "format": "TIFF",
+          "band_count": 1,
+          "width": 25769,
+          "height": 16732,
+          "pixel_type": "U16",
+          "cell_width": 0.00011201118558746153,
+          "cell_height": 0.00011570297739791842,
+          "spatial_reference_wkid": 4326,
+          "spatial_reference_name": "GCS_WGS_1984",
+          "extent": {
+            "xmin": 83.91505423222421,
+            "ymin": 27.586768007977046,
+            "xmax": 86.8014704736275,
+            "ymax": 29.522710225799017
+          }
+        }
+      },
+      "decision": {
+        "status": "block",
+        "errors": [
+          "VV annotation pixel value is not AMPLITUDE",
+          "VH annotation pixel value is not AMPLITUDE"
+        ],
+        "pixel_values_examined": false,
+        "baseline_processing_released": false,
+        "scientific_admission_authorized": false
+      }
+    },
+    "M1-SRC-003": {
+      "source_id": "M1-SRC-003",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-003-m1-src-003-materialization-001.json",
+      "materialization_receipt_sha256": "027128fce548203274c4dee23c309d3297d9ade6bb307eb6c615e2e4620bb9be",
+      "external_manifest_sha256": "ed982516cfc2cef55c522675e095cfef0f979f4c0632c2bfbc692cbe5ad082ba",
+      "inventory": {
+        "status": "pass_inventory_only",
+        "members": {
+          "manifest_safe": {
+            "relative_path": "manifest.safe",
+            "size_bytes": 24491,
+            "zip_crc32": "95a43975",
+            "sha256": "566e0e31cff454fb391ef6b84a09068409e938542962987ca7f7e43e324be84a"
+          },
+          "annotation_vv": {
+            "relative_path": "annotation/s1d-iw-grd-vv-20260819t001036-20260819t001101-004187-007abd-001.xml",
+            "size_bytes": 1604918,
+            "zip_crc32": "4a1d201c",
+            "sha256": "0b6699e0ff43fa8389d439e026d3b6952a640ea51a2c14393c48987f3e50233b"
+          },
+          "annotation_vh": {
+            "relative_path": "annotation/s1d-iw-grd-vh-20260819t001036-20260819t001101-004187-007abd-002.xml",
+            "size_bytes": 1606933,
+            "zip_crc32": "72ce06ad",
+            "sha256": "0759e15d6a385896dfb1a8b91b7b7ef13bce5879086cf9502c08fef543b44a17"
+          },
+          "calibration_vv": {
+            "relative_path": "annotation/calibration/calibration-s1d-iw-grd-vv-20260819t001036-20260819t001101-004187-007abd-001.xml",
+            "size_bytes": 1003871,
+            "zip_crc32": "dae19b59",
+            "sha256": "d2a5d137b815f820cb8cb4a14531ac6dd9beed1c8bbade7a8b07954e6752ff96"
+          },
+          "calibration_vh": {
+            "relative_path": "annotation/calibration/calibration-s1d-iw-grd-vh-20260819t001036-20260819t001101-004187-007abd-002.xml",
+            "size_bytes": 1003871,
+            "zip_crc32": "94f1d32a",
+            "sha256": "61be8dd1a4f470721f0478a6861b87f2ad2385636e77ea92dbddf260f3176ce3"
+          },
+          "noise_vv": {
+            "relative_path": "annotation/calibration/noise-s1d-iw-grd-vv-20260819t001036-20260819t001101-004187-007abd-001.xml",
+            "size_bytes": 410105,
+            "zip_crc32": "3d6fdf1a",
+            "sha256": "18dca2047c8071cf9ebc839815a5ee9427839fd4c77a553f204efea3847e6e2d"
+          },
+          "noise_vh": {
+            "relative_path": "annotation/calibration/noise-s1d-iw-grd-vh-20260819t001036-20260819t001101-004187-007abd-002.xml",
+            "size_bytes": 410105,
+            "zip_crc32": "3cceb994",
+            "sha256": "8f0fc18fdfbf497e01f551a3e94a31e87ea6fa1e41f66a882084c628245b1d06"
+          },
+          "measurement_vv": {
+            "relative_path": "measurement/s1d-iw-grd-vv-20260819t001036-20260819t001101-004187-007abd-001.tiff",
+            "size_bytes": 855481114,
+            "zip_crc32": "6e23b35e",
+            "sha256": "2ea6a7e83ddef24a96f7ec8c13cd17dc5bbcf1033d1ed7a5fdd2af5bffb23313"
+          },
+          "measurement_vh": {
+            "relative_path": "measurement/s1d-iw-grd-vh-20260819t001036-20260819t001101-004187-007abd-002.tiff",
+            "size_bytes": 855481114,
+            "zip_crc32": "1a4f3673",
+            "sha256": "237d78c1a7113ae5d6424f0bf396d1fe678daddbb62fca816d6f80c36c8c10a2"
+          }
+        },
+        "errors": []
+      },
+      "annotations": {
+        "vv": {
+          "mission_id": "S1D",
+          "product_type": "GRD",
+          "polarization": "VV",
+          "mode": "IW",
+          "swath": "IW",
+          "start_time": "2026-08-19T00:10:36.889384",
+          "stop_time": "2026-08-19T00:11:01.887958",
+          "absolute_orbit_number": 4187,
+          "orbit_direction": "Descending",
+          "number_of_samples": 25533,
+          "number_of_lines": 16747,
+          "pixel_value": "Detected",
+          "output_pixels": "16 bit Unsigned Integer",
+          "range_pixel_spacing": 10.0,
+          "azimuth_pixel_spacing": 10.0,
+          "orbit_vector_count_declared": 17,
+          "orbit_vector_count_observed": 17,
+          "orbit_time_start": "2026-08-19T00:09:30.439577Z",
+          "orbit_time_end": "2026-08-19T00:12:10.439577Z",
+          "orbit_times_strictly_increasing": true,
+          "orbit_vectors_finite": true,
+          "errors": []
+        },
+        "vh": {
+          "mission_id": "S1D",
+          "product_type": "GRD",
+          "polarization": "VH",
+          "mode": "IW",
+          "swath": "IW",
+          "start_time": "2026-08-19T00:10:36.889384",
+          "stop_time": "2026-08-19T00:11:01.887958",
+          "absolute_orbit_number": 4187,
+          "orbit_direction": "Descending",
+          "number_of_samples": 25533,
+          "number_of_lines": 16747,
+          "pixel_value": "Detected",
+          "output_pixels": "16 bit Unsigned Integer",
+          "range_pixel_spacing": 10.0,
+          "azimuth_pixel_spacing": 10.0,
+          "orbit_vector_count_declared": 17,
+          "orbit_vector_count_observed": 17,
+          "orbit_time_start": "2026-08-19T00:09:30.439577Z",
+          "orbit_time_end": "2026-08-19T00:12:10.439577Z",
+          "orbit_times_strictly_increasing": true,
+          "orbit_vectors_finite": true,
+          "errors": []
+        }
+      },
+      "raster_headers": {
+        "vv": {
+          "format": "TIFF",
+          "band_count": 1,
+          "width": 25533,
+          "height": 16747,
+          "pixel_type": "U16",
+          "cell_width": 0.00011000605730848111,
+          "cell_height": 0.0001151999080889047,
+          "spatial_reference_wkid": 4326,
+          "spatial_reference_name": "GCS_WGS_1984",
+          "extent": {
+            "xmin": 85.24531802124707,
+            "ymin": 27.068698740296202,
+            "xmax": 88.05410268250452,
+            "ymax": 28.99795160106109
+          }
+        },
+        "vh": {
+          "format": "TIFF",
+          "band_count": 1,
+          "width": 25533,
+          "height": 16747,
+          "pixel_type": "U16",
+          "cell_width": 0.00011000605730848111,
+          "cell_height": 0.0001151999080889047,
+          "spatial_reference_wkid": 4326,
+          "spatial_reference_name": "GCS_WGS_1984",
+          "extent": {
+            "xmin": 85.24531802124707,
+            "ymin": 27.068698740296202,
+            "xmax": 88.05410268250452,
+            "ymax": 28.99795160106109
+          }
+        }
+      },
+      "decision": {
+        "status": "block",
+        "errors": [
+          "VV annotation pixel value is not AMPLITUDE",
+          "VH annotation pixel value is not AMPLITUDE"
+        ],
+        "pixel_values_examined": false,
+        "baseline_processing_released": false,
+        "scientific_admission_authorized": false
+      }
+    }
+  },
+  "decision": {
+    "status": "block",
+    "errors": [
+      "M1-SRC-001 did not pass header readiness",
+      "M1-SRC-002 did not pass header readiness",
+      "M1-SRC-003 did not pass header readiness"
+    ],
+    "ready_source_count": 0,
+    "complete_before_after_pair": false,
+    "baseline_processing_released": false,
+    "pixel_usability_established": false,
+    "scientific_admission_authorized": false
+  },
+  "activity": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "external_materialization_inventory_unchanged": true,
+    "selected_materialized_files_rehashed": true,
+    "real_annotation_metadata_parse_attempted": true,
+    "all_real_annotation_metadata_parsed": true,
+    "real_measurement_raster_header_open_attempted_with_arcgis": true,
+    "all_real_measurement_raster_headers_opened_with_arcgis": true,
+    "real_product_pixel_values_examined": false,
+    "derived_raster_written": false
+  },
+  "claim_boundary": {
+    "exact_three_source_member_and_header_readiness_established": false,
+    "pixel_values_examined": false,
+    "pixel_usability_established": false,
+    "complete_pair_established": false,
+    "baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  },
+  "limitations": [
+    "A pass establishes exact selected-member identity, SAFE annotation consistency, embedded state-vector structure, and ArcGIS measurement-header readability for only the three available pre-event radar sources.",
+    "It does not decode measurement pixels, establish AOI coverage, apply updated orbit data, terrain-correct a raster, evaluate layover or shadow, or establish registration.",
+    "No before-after radar route is complete because M1-SRC-004 through M1-SRC-006 are not in promoted verified custody.",
+    "M1-SRC-001 retains unintended-test materialization provenance even if its metadata and headers pass.",
+    "The Sentinel recovery, orbit recovery, DEM vertical-datum, terrain-result, pixel-readiness, baseline, change, and scientific gates remain independent."
+  ],
+  "next_gate": "complete exact Sentinel acquisition and all independent orbit, vertical-datum, terrain-result, and pixel gates"
+}

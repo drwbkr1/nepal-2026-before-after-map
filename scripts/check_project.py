@@ -320,6 +320,8 @@ REQUIRED = [
     "docs/RADAR_INPUT_READINESS_PROTOCOL.md",
     "records/surface-receipts/radar-input-readiness-control.json",
     "records/surface-receipts/radar-input-readiness-synthetic-arcgis.json",
+    "records/readiness/radar-input/m2-s1-input-readiness-real-001.json",
+    "records/surface-receipts/radar-input-readiness-real-reconciliation.json",
     "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-001.json",
     "records/surface-receipts/radar-input-readiness-synthetic-arcgis-attempt-002-failure.json",
     "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-003.json",
@@ -549,6 +551,8 @@ def main() -> None:
     radar_input_arcgis = json.loads((ROOT / "records/surface-receipts/radar-input-readiness-synthetic-arcgis.json").read_text(encoding="utf-8"))
     radar_input_readiness = json.loads((ROOT / "records/surface-receipts/radar-input-readiness-control.json").read_text(encoding="utf-8"))
     radar_input_failure = json.loads((ROOT / "records/surface-receipts/radar-input-readiness-synthetic-arcgis-attempt-002-failure.json").read_text(encoding="utf-8"))
+    radar_input_real = json.loads((ROOT / "records/readiness/radar-input/m2-s1-input-readiness-real-001.json").read_text(encoding="utf-8"))
+    radar_input_real_reconciliation = json.loads((ROOT / "records/surface-receipts/radar-input-readiness-real-reconciliation.json").read_text(encoding="utf-8"))
     goal = json.loads((ROOT / "records/long-term-goal.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
@@ -3168,6 +3172,96 @@ def main() -> None:
         ))
     ):
         fail("Sentinel-1 input-readiness control validation or boundary differs")
+    if (
+        radar_input_real.get("status") != "block"
+        or radar_input_real.get("bindings", {}).get("contract_sha256") != sha256("config/qa/radar-input-readiness-contract.json")
+        or radar_input_real.get("runtime") != {"product": "ArcGISPro", "version": "3.7.1", "license_level": "Advanced"}
+        or radar_input_real.get("decision", {}).get("ready_source_count") != 0
+        or radar_input_real.get("decision", {}).get("complete_before_after_pair") is not False
+    ):
+        fail("Sentinel-1 real input-readiness receipt identity or aggregate block differs")
+    if set(radar_input_real.get("products", {})) != {"M1-SRC-001", "M1-SRC-002", "M1-SRC-003"}:
+        fail("Sentinel-1 real input-readiness source set differs")
+    for source_id, product in radar_input_real.get("products", {}).items():
+        annotations = product.get("annotations", {})
+        headers = product.get("raster_headers", {})
+        if (
+            product.get("inventory", {}).get("status") != "pass_inventory_only"
+            or product.get("inventory", {}).get("errors") != []
+            or set(annotations) != {"vv", "vh"}
+            or set(headers) != {"vv", "vh"}
+            or product.get("decision", {}).get("status") != "block"
+            or product.get("decision", {}).get("errors") != [
+                "VV annotation pixel value is not AMPLITUDE",
+                "VH annotation pixel value is not AMPLITUDE",
+            ]
+        ):
+            fail(f"Sentinel-1 real input-readiness decision differs for {source_id}")
+        for polarization in ("vv", "vh"):
+            annotation = annotations[polarization]
+            header = headers[polarization]
+            if (
+                annotation.get("pixel_value") != "Detected"
+                or annotation.get("errors") != []
+                or annotation.get("orbit_times_strictly_increasing") is not True
+                or annotation.get("orbit_vectors_finite") is not True
+                or header.get("format") != "TIFF"
+                or header.get("band_count") != 1
+                or header.get("pixel_type") != "U16"
+                or header.get("width") != annotation.get("number_of_samples")
+                or header.get("height") != annotation.get("number_of_lines")
+            ):
+                fail(f"Sentinel-1 real annotation or header evidence differs for {source_id} {polarization}")
+    radar_real_activity = radar_input_real.get("activity", {})
+    if (
+        radar_real_activity.get("external_materialization_inventory_unchanged") is not True
+        or radar_real_activity.get("selected_materialized_files_rehashed") is not True
+        or radar_real_activity.get("all_real_annotation_metadata_parsed") is not True
+        or radar_real_activity.get("all_real_measurement_raster_headers_opened_with_arcgis") is not True
+        or any(radar_real_activity.get(key) is not False for key in (
+            "network_requests_performed", "authentication_performed", "credential_values_read_or_recorded",
+            "real_product_pixel_values_examined", "derived_raster_written",
+        ))
+    ):
+        fail("Sentinel-1 real input-readiness activity boundary differs")
+    real_reconciliation_bindings = radar_input_real_reconciliation.get("bindings", {})
+    if (
+        radar_input_real_reconciliation.get("status") != "block_predeclared_annotation_pixel_value_mismatch_no_retry"
+        or real_reconciliation_bindings.get("contract_sha256") != sha256("config/qa/radar-input-readiness-contract.json")
+        or real_reconciliation_bindings.get("real_receipt_sha256") != sha256("records/readiness/radar-input/m2-s1-input-readiness-real-001.json")
+        or real_reconciliation_bindings.get("control_receipt_sha256") != sha256("records/surface-receipts/radar-input-readiness-control.json")
+        or radar_input_real_reconciliation.get("publication_gate", {}).get("commit_sha") != "87aa2610f1a89fe2d612f9cdd6cb88e63e833c8d"
+        or radar_input_real_reconciliation.get("publication_gate", {}).get("github_actions_run_id") != 33905019294
+        or radar_input_real_reconciliation.get("publication_gate", {}).get("github_actions_conclusion") != "success"
+    ):
+        fail("Sentinel-1 real input-readiness reconciliation bindings or publication gate differ")
+    real_observed = radar_input_real_reconciliation.get("observed_result", {})
+    real_external = radar_input_real_reconciliation.get("external_custody_reverification", {})
+    real_disposition = radar_input_real_reconciliation.get("disposition", {})
+    real_assertions = radar_input_real_reconciliation.get("assertions", {})
+    if (
+        real_observed.get("source_count") != 3
+        or real_observed.get("annotation_parse_count") != 6
+        or real_observed.get("measurement_header_open_count") != 6
+        or real_observed.get("annotation_pixel_value_observed_set") != ["Detected"]
+        or real_observed.get("source_pass_count") != 0
+        or real_observed.get("source_block_count") != 3
+        or real_external.get("status") != "pass_exact_attempt_inventories_and_all_safe_hashes_unchanged"
+        or real_external.get("attempt_file_count") != 87
+        or real_external.get("safe_file_count") != 78
+        or real_external.get("safe_total_bytes") != 5183550209
+        or real_external.get("added_sidecar_count") != 0
+        or real_disposition.get("automatic_retry_authorized") is not False
+        or real_disposition.get("contract_threshold_or_label_change_authorized") is not False
+        or any(real_assertions.get(key) is not False for key in (
+            "network_requests_performed", "authentication_performed", "credential_values_read_or_recorded",
+            "real_product_pixel_values_examined", "derived_raster_written", "pixel_usability_established",
+            "complete_pair_established", "baseline_processing_released", "change_established",
+            "scientific_admission_authorized", "current_checkpoint_changed",
+            "sentinel_recovery_authority_created", "orbit_recovery_authority_created",
+        ))
+    ):
+        fail("Sentinel-1 real input-readiness reconciliation result or boundary differs")
     if aoi_reconciliation["contract_sha256"] != sha256("reviews/m1-aoi/review-contract.json"):
         fail("AOI reconciliation does not bind the exact historical review contract")
     if approval["status"] != "approved" or approval["reviewed_aoi_sha256"] != sha256("config/aoi/draft-study-areas.geojson"):
@@ -4979,6 +5073,33 @@ def main() -> None:
         ))
     ):
         fail("EVID-0068 Sentinel-1 input-readiness predeclaration differs or overclaims")
+
+    radar_input_real_evidence = ledger_by_id.get("EVID-0069")
+    if (
+        not isinstance(radar_input_real_evidence, dict)
+        or radar_input_real_evidence.get("status") != radar_input_real_reconciliation.get("status")
+        or radar_input_real_evidence.get("contract_sha256") != sha256("config/qa/radar-input-readiness-contract.json")
+        or radar_input_real_evidence.get("real_receipt_ref") != "records/readiness/radar-input/m2-s1-input-readiness-real-001.json"
+        or radar_input_real_evidence.get("real_receipt_sha256") != sha256("records/readiness/radar-input/m2-s1-input-readiness-real-001.json")
+        or radar_input_real_evidence.get("reconciliation_ref") != "records/surface-receipts/radar-input-readiness-real-reconciliation.json"
+        or radar_input_real_evidence.get("reconciliation_sha256") != sha256("records/surface-receipts/radar-input-readiness-real-reconciliation.json")
+        or radar_input_real_evidence.get("publication_gate") != radar_input_real_reconciliation.get("publication_gate")
+        or radar_input_real_evidence.get("external_custody_reverification") != radar_input_real_reconciliation.get("external_custody_reverification")
+        or radar_input_real_evidence.get("disposition") != radar_input_real_reconciliation.get("disposition")
+        or radar_input_real_evidence.get("assertions") != radar_input_real_reconciliation.get("assertions")
+        or radar_input_real_evidence.get("observed_result") != {
+            "source_count": 3,
+            "source_pass_count": 0,
+            "source_block_count": 3,
+            "required_member_inventory_pass_count": 3,
+            "annotation_parse_count": 6,
+            "annotation_pixel_value_observed_set": ["Detected"],
+            "measurement_header_open_count": 6,
+            "all_measurement_headers_one_band_u16": True,
+            "blocking_error_count": 6,
+        }
+    ):
+        fail("EVID-0069 Sentinel-1 real input-readiness result differs or overclaims")
 
     violations = []
     for relative in tracked_files():

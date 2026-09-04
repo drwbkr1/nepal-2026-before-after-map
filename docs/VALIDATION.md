@@ -215,6 +215,8 @@ python -c "import json,subprocess,sys; d=json.load(open('config/qa/radar-input-r
 
 Fourteen portable tests cover exact source narrowing, member selection, unsafe and duplicate paths, complete-payload DTD/entity refusal, source and acquisition identity, finite ordered orbit vectors that bracket acquisition, U16 TIFF headers, annotation-to-raster dimensions, VV/VH metadata and header consistency, and the partial pre-event decision. The final ArcGIS Pro 3.7.1 synthetic receipt opens six U16 TIFFs and blocks a deliberate VH width mismatch. Earlier prepublication passes and the failed `datetime` collision remain recorded. Control validation reads no real SAFE, and a synthetic pass cannot establish a complete pair, pixels, baseline, or change.
 
+After commit `87aa2610f1a89fe2d612f9cdd6cb88e63e833c8d` passed public CI run `33905019294`, the production runner was invoked once. Exact member identity, six annotation parses, embedded vectors, and six TIFF headers passed, but the frozen contract blocked all sources because the observed `pixelValue` was `Detected`, not `AMPLITUDE`. Independent post-run verification rehashed all 78 SAFE files totaling 5,183,550,209 bytes and found exact 29-file attempt inventories with no added sidecars. Preserve `records/readiness/radar-input/m2-s1-input-readiness-real-001.json`; do not rerun it under the current contract.
+
 The optical input-readiness gate has portable and ArcGIS-native validation:
 
 ```powershell

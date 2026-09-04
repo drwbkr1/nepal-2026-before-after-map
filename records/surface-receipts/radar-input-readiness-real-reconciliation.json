@@ -1,0 +1,179 @@
+{
+  "record_version": "1.0",
+  "record_id": "NEPAL-S1-MATERIALIZED-INPUT-READINESS-REAL-RECONCILIATION-001",
+  "reconciled_at_utc": "2026-09-04T18:19:33Z",
+  "status": "block_predeclared_annotation_pixel_value_mismatch_no_retry",
+  "bindings": {
+    "contract_ref": "config/qa/radar-input-readiness-contract.json",
+    "contract_sha256": "ad478b8abd4e4a47c8d16012fffc2b67770681538bddc23b500ce5b32b17428a",
+    "real_receipt_ref": "records/readiness/radar-input/m2-s1-input-readiness-real-001.json",
+    "real_receipt_sha256": "feab3645709df16306c81dae959a8693925a7c6f919f2a1e414cf3765c3a5b0c",
+    "control_receipt_ref": "records/surface-receipts/radar-input-readiness-control.json",
+    "control_receipt_sha256": "25b539530c01f15b138d6f77c16f2bae96067917b2747f622298326beabe0354"
+  },
+  "publication_gate": {
+    "commit_sha": "87aa2610f1a89fe2d612f9cdd6cb88e63e833c8d",
+    "remote_ref": "refs/heads/main",
+    "remote_commit_verified": true,
+    "github_actions_run_id": 33905019294,
+    "github_actions_workflow": "Validate project controls",
+    "github_actions_conclusion": "success",
+    "github_actions_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33905019294"
+  },
+  "observed_result": {
+    "source_count": 3,
+    "required_member_inventory_pass_count": 3,
+    "annotation_parse_count": 6,
+    "annotation_pixel_value_observed_set": [
+      "Detected"
+    ],
+    "measurement_header_open_count": 6,
+    "all_measurement_headers_opened": true,
+    "all_measurement_headers_one_band_u16": true,
+    "all_header_dimensions_match_annotations": true,
+    "all_embedded_orbit_structures_passed": true,
+    "source_pass_count": 0,
+    "source_block_count": 3,
+    "blocking_errors": [
+      "M1-SRC-001: VV annotation pixel value is not AMPLITUDE",
+      "M1-SRC-001: VH annotation pixel value is not AMPLITUDE",
+      "M1-SRC-002: VV annotation pixel value is not AMPLITUDE",
+      "M1-SRC-002: VH annotation pixel value is not AMPLITUDE",
+      "M1-SRC-003: VV annotation pixel value is not AMPLITUDE",
+      "M1-SRC-003: VH annotation pixel value is not AMPLITUDE"
+    ],
+    "per_source": {
+      "M1-SRC-001": {
+        "inventory_status": "pass_inventory_only",
+        "annotation_pixel_values": {
+          "vv": "Detected",
+          "vh": "Detected"
+        },
+        "annotation_orbit_vector_counts": {
+          "vv": 16,
+          "vh": 16
+        },
+        "raster_header_status": "opened_both_vv_vh",
+        "raster_dimensions": {
+          "vv": [
+            25762,
+            16732
+          ],
+          "vh": [
+            25762,
+            16732
+          ]
+        },
+        "raster_pixel_types": {
+          "vv": "U16",
+          "vh": "U16"
+        },
+        "decision_status": "block",
+        "blocking_errors": [
+          "VV annotation pixel value is not AMPLITUDE",
+          "VH annotation pixel value is not AMPLITUDE"
+        ]
+      },
+      "M1-SRC-002": {
+        "inventory_status": "pass_inventory_only",
+        "annotation_pixel_values": {
+          "vv": "Detected",
+          "vh": "Detected"
+        },
+        "annotation_orbit_vector_counts": {
+          "vv": 17,
+          "vh": 17
+        },
+        "raster_header_status": "opened_both_vv_vh",
+        "raster_dimensions": {
+          "vv": [
+            25769,
+            16732
+          ],
+          "vh": [
+            25769,
+            16732
+          ]
+        },
+        "raster_pixel_types": {
+          "vv": "U16",
+          "vh": "U16"
+        },
+        "decision_status": "block",
+        "blocking_errors": [
+          "VV annotation pixel value is not AMPLITUDE",
+          "VH annotation pixel value is not AMPLITUDE"
+        ]
+      },
+      "M1-SRC-003": {
+        "inventory_status": "pass_inventory_only",
+        "annotation_pixel_values": {
+          "vv": "Detected",
+          "vh": "Detected"
+        },
+        "annotation_orbit_vector_counts": {
+          "vv": 17,
+          "vh": 17
+        },
+        "raster_header_status": "opened_both_vv_vh",
+        "raster_dimensions": {
+          "vv": [
+            25533,
+            16747
+          ],
+          "vh": [
+            25533,
+            16747
+          ]
+        },
+        "raster_pixel_types": {
+          "vv": "U16",
+          "vh": "U16"
+        },
+        "decision_status": "block",
+        "blocking_errors": [
+          "VV annotation pixel value is not AMPLITUDE",
+          "VH annotation pixel value is not AMPLITUDE"
+        ]
+      }
+    }
+  },
+  "external_custody_reverification": {
+    "status": "pass_exact_attempt_inventories_and_all_safe_hashes_unchanged",
+    "verified_at_utc": "2026-09-04T18:19:33Z",
+    "attempt_count": 3,
+    "attempt_file_count": 87,
+    "safe_file_count": 78,
+    "safe_total_bytes": 5183550209,
+    "added_sidecar_count": 0
+  },
+  "disposition": {
+    "current_gate_result": "block",
+    "current_contract_may_not_be_reinterpreted_as_pass": true,
+    "automatic_retry_authorized": false,
+    "contract_threshold_or_label_change_authorized": false,
+    "separate_authoritative_specification_review_required_before_amendment": true
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "external_materialization_inventory_unchanged": true,
+    "real_product_pixel_values_examined": false,
+    "derived_raster_written": false,
+    "pixel_usability_established": false,
+    "complete_pair_established": false,
+    "baseline_processing_released": false,
+    "change_established": false,
+    "scientific_admission_authorized": false,
+    "current_checkpoint_changed": false,
+    "sentinel_recovery_authority_created": false,
+    "orbit_recovery_authority_created": false
+  },
+  "limitations": [
+    "The result is a block under the exact published contract even though all six TIFF headers opened and matched their annotations.",
+    "The observed Detected annotation label has not yet been reconciled against an authoritative Sentinel-1 product specification in a separately reviewed amendment.",
+    "Only three pre-event sources were inspected; no before-after radar pair is complete."
+  ],
+  "next_action": "Preserve this no-retry block, evaluate the exact annotation label against an authoritative Sentinel-1 specification, and prepare a separately reviewed contract amendment if warranted."
+}
