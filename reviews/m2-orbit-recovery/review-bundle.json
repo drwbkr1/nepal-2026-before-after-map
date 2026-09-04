@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-orbit-recovery-review-bundle-001",
+  "review_id": "m2-orbit-recovery-review-001",
+  "authority_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+  "candidate_identity": "M2-ORBIT-RECOVERY-PROPOSAL-SHA256:ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-orbit-recovery-review.png",
+      "sha256": "63dc1df8aff522a9ffdf8a77f24b600d4efcfaf0342aed8ec914d5372821edd8",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-orbit-recovery-review.json",
+          "sha256": "48c563013a6b12b7389db3c90470432b60e1c0d616774d57bf2867b68d4bc916"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_ORBIT_RECOVERY_REVIEW.md",
+      "sha256": "c6b614d012a89a22ca9d6772b879e939819e0b13c361cc4cd6f282b1b5d12e87",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "recovery-proposal",
+      "path": "contracts/milestone-002-orbit-recovery-proposal.json",
+      "sha256": "ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a",
+      "role": "candidate_recovery_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "test-boundary-reconciliation",
+      "path": "records/acquisition/orbit-test-boundary-reconciliation-001.json",
+      "sha256": "40dae0623dcc142cec17ff2108752e5e60bd736a241fe4b83e8f04c5de690025",
+      "role": "retained_attempt_dependency_and_provenance_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "runner-boundary-correction",
+      "path": "records/acquisition/orbit-runner-production-boundary-correction-001.json",
+      "sha256": "6411b96593bb9dc5888fff38e12c005f6ec89749223bc1a2520e81c6f5ab94d6",
+      "role": "corrected_pre_mutation_full_m2_verify_guard",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "failed-orbit-receipt",
+      "path": "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
+      "sha256": "a7057479f4dfb867ead6c9622d684c07df51af9db6c39a6fa2dc6d94ae7afc9c",
+      "role": "append_only_terminal_failure",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "active-orbit-intake",
+      "path": "contracts/m2-orbit-intake.json",
+      "sha256": "40f4b35549760c766afe8762e766d5f9d6cf14e4064258b09331f0f209cd20a3",
+      "role": "current_three_authorized_one_failed_zero_promoted_state",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "active-sentinel-intake",
+      "path": "contracts/m2-intake.json",
+      "sha256": "734455b7c0e772aa22253a81f944dc685e4c73cf73490ca2f821d12d7e2b5ca0",
+      "role": "current_full_m2_verify_dependency_state",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "original-orbit-approval",
+      "path": "records/source-gates/m2-orbit-amendment-approval.json",
+      "sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+      "role": "existing_exact_four_file_authority_boundary",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "decision_effect_if_approved": [
+    "implement and validate a separate M2-ORB-001 recovery control that preserves the failed test-induced attempt and events",
+    "wait until the full M2-VERIFY unit is complete, then perform one fresh byte-zero transfer of the same exact approved AUX_RESORB file through a distinct attempt path",
+    "promote only after current rights, identity, path, size, MD5, BLAKE3, SHA-256, XML, OSV, validity, and scene-binding checks pass",
+    "after passing recovery, continue only the three still-unattempted orbit files under the original approval and existing prerequisites"
+  ],
+  "limitations": [
+    "This bundle creates no authority and contains zero human decisions.",
+    "Approval does not permit recovery before M2-VERIFY completes, failed-event deletion or reuse, repeated retry, source or orbit-type substitution, terms or account action, credential disclosure, cost, precise-orbit substitution, orbit application, radar processing, pixel admission, or scientific publication.",
+    "The rejected response used a tracked nonsecret test literal and established no AUX_RESORB payload property.",
+    "Even a passing orbit file would not establish corrected imagery, geolocation accuracy, usable pixels, change, attribution, or scientific fitness."
+  ]
+}

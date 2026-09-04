@@ -1,0 +1,45 @@
+{
+  "contract_version": "human-review-contract-v1",
+  "template": false,
+  "review_id": "m2-sentinel-recovery-review-001",
+  "response_schema_version": "nepal-m2-sentinel-recovery-response-v1",
+  "workflow_authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-activation-approval.json",
+    "authorized_action_classes": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ],
+    "verified_at_utc": "2026-09-04T04:57:04Z",
+    "expires_at_utc": null,
+    "review_required": true,
+    "lock_authorized": true,
+    "reconcile_authorized": true,
+    "post_review_actions": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ]
+  },
+  "review_bundle": {
+    "bundle_id": "m2-sentinel-recovery-review-bundle-001",
+    "manifest_sha256": "dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7",
+    "candidate_identity": "M2-SENTINEL-RECOVERY-PROPOSAL-SHA256:7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013",
+    "rendered_surface_verified": true
+  },
+  "allowed_decisions": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "required_attestation": true,
+  "max_notes_length": 2000,
+  "hash_prefix_length": 16,
+  "items": [
+    {
+      "item_id": "M2-SENTINEL-RECOVERY-001",
+      "evidence_sha256": "dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7"
+    }
+  ]
+}

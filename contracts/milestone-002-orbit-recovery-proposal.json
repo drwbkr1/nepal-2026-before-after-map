@@ -1,0 +1,103 @@
+{
+  "proposal_version": "1.0",
+  "proposal_id": "NEPAL-M2-ORBIT-RECOVERY-PROPOSAL-001",
+  "prepared_at_utc": "2026-09-04T16:59:29Z",
+  "status": "proposed_not_authorized",
+  "authority_context": {
+    "original_orbit_approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+    "original_orbit_approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+    "original_review_bundle_sha256": "ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1",
+    "authorized_orbit_type": "AUX_RESORB",
+    "precise_substitution_authorized": false
+  },
+  "trigger": {
+    "checkpoint": "M2-ORBIT-ACQUISITION-REVIEW",
+    "reconciliation_ref": "records/acquisition/orbit-test-boundary-reconciliation-001.json",
+    "reconciliation_sha256": "40dae0623dcc142cec17ff2108752e5e60bd736a241fe4b83e8f04c5de690025",
+    "failed_source_id": "M2-ORB-001",
+    "failed_attempt_id": "m2-orb-001-20260904t050937z-8ed21d05",
+    "failure_code": "orbit_redirect_or_http_status_rejected",
+    "partial_bytes_preserved": 0,
+    "repository_receipt_ref": "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
+    "repository_receipt_sha256": "a7057479f4dfb867ead6c9622d684c07df51af9db6c39a6fa2dc6d94ae7afc9c"
+  },
+  "current_verified_state": {
+    "active_orbit_intake_ref": "contracts/m2-orbit-intake.json",
+    "active_orbit_intake_sha256": "40f4b35549760c766afe8762e766d5f9d6cf14e4064258b09331f0f209cd20a3",
+    "orbit_state_counts": {
+      "authorized": 3,
+      "failed": 1,
+      "promoted": 0
+    },
+    "sentinel_state_counts": {
+      "authorized": 4,
+      "failed": 1,
+      "promoted": 3
+    },
+    "m2_verify_status": "blocked_retained_failure_review",
+    "orbit_payload_bytes_in_custody": 0,
+    "owner_credential_used_in_failed_attempt": false,
+    "failed_attempt_used_tracked_nonsecret_test_literal": true,
+    "runner_correction_ref": "records/acquisition/orbit-runner-production-boundary-correction-001.json",
+    "runner_correction_sha256": "6411b96593bb9dc5888fff38e12c005f6ec89749223bc1a2520e81c6f5ab94d6"
+  },
+  "proposed_recovery": {
+    "mode": "fresh_full_restart_distinct_attempt",
+    "source_id": "M2-ORB-001",
+    "provider_product_id": "d4fdc474-0069-459b-9534-b5999dec5aab",
+    "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+    "restart_offset_bytes": 0,
+    "resume_partial": false,
+    "delete_or_modify_failed_events": false,
+    "reuse_failed_attempt_id": false,
+    "required_new_attempt_namespace": "m2-orb-001-recovery-001",
+    "prerequisites": [
+      "the full M2-VERIFY unit is complete after the exact eight-product Sentinel acquisition and verification route is reconciled",
+      "the corrected runner guard remains exact and passing before catalogue or token access",
+      "the original failed receipt and both external events remain unchanged",
+      "the current CDSE legal section, structured modification date, linked legal notice, exact orbit catalogue identity, size, checksums, online state, paths, collisions, and storage are revalidated",
+      "a fresh access token is obtained only through the existing owner-controlled protected credential reference"
+    ],
+    "transfer_controls": [
+      "request the complete exact AUX_RESORB file from byte zero without Range or resume semantics",
+      "use a distinct exclusive staging path and preserve every event",
+      "require exact catalogue length, provider MD5, provider BLAKE3, and local SHA-256 before no-replace promotion",
+      "verify safe XML, mission and filename identity, ordered finite OSVs, exact validity coverage, and exact scene binding"
+    ],
+    "post_success_release": [
+      "reconcile M2-ORB-001 only through its separately approved successful recovery identity",
+      "continue only M2-ORB-002 through M2-ORB-004 under the original approval as each prerequisite passes",
+      "stop and preserve evidence on any later transfer or verification failure"
+    ],
+    "failure_policy": "Any recovery failure is terminal for the new recovery identity and requires another explicit review; no automatic retry is authorized."
+  },
+  "approval_would_authorize": [
+    "implement and validate the exact separate M2-ORB-001 recovery control described here",
+    "after M2-VERIFY is complete, perform one fresh full transfer of only the exact approved M2-ORB-001 AUX_RESORB file through a new exclusive attempt path",
+    "verify and promote only that file if every authority, dependency, rights, identity, size, checksum, XML, OSV, validity, path, and custody control passes",
+    "after a passing recovery, continue only the three still-unattempted orbit files under the original approval and their existing prerequisites"
+  ],
+  "approval_would_not_authorize": [
+    "run recovery before M2-VERIFY is complete",
+    "delete, rewrite, hide, or reuse the retained failed attempt or events",
+    "use a synthetic token value, expose any owner credential, accept terms, change an account or MFA, or incur cost",
+    "change an orbit provider UUID, filename, type, validity interval, scene binding, destination, or approved manifest",
+    "perform repeated retry, substitute AUX_POEORB, add orbit files, apply orbit data, process radar pixels, admit scientific evidence, or publish a scientific result"
+  ],
+  "human_gate": {
+    "review_required": true,
+    "item_id": "M2-ORBIT-RECOVERY-001",
+    "allowed_decisions": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "required_attestation": true
+  },
+  "limitations": [
+    "The rejected provider response does not test the exact AUX_RESORB payload because the failed attempt used a nonsecret test literal and received zero bytes.",
+    "A future owner-credential transfer may still fail and has no automatic second retry.",
+    "Even a passing orbit file would not establish corrected imagery, geolocation accuracy, pixel usability, change, attribution, or scientific fitness.",
+    "This proposal creates no authority until the exact review bundle is approved and reconciled."
+  ]
+}

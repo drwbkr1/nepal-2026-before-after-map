@@ -1,0 +1,139 @@
+{
+  "record_version": "1.0",
+  "record_id": "NEPAL-M2-SENTINEL-ACQUISITION-RECONCILIATION-001",
+  "verified_at_utc": "2026-09-04T04:50:25Z",
+  "status": "review_required_retained_failure",
+  "repository": {
+    "canonical_root": "C:\\Projects\\Active\\nepal-2026-before-after-map",
+    "branch": "main",
+    "head_before_reconciliation_commit": "daf2aa8bb063b07d9995905e9b47ccf48d3360f0"
+  },
+  "authority": {
+    "active_contract_ref": "contracts/milestone-002.json",
+    "activation_approval_ref": "records/source-gates/m2-activation-approval.json",
+    "acquisition_plan_ref": "records/acquisition-plan.json",
+    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+    "authorized_product_count": 8,
+    "credential_reference_class": "existing_owner_controlled_windows_dpapi_pscredential",
+    "credential_value_recorded": false,
+    "terms_acceptance_performed": false
+  },
+  "bindings": {
+    "active_intake_ref": "contracts/m2-intake.json",
+    "active_intake_sha256": "734455b7c0e772aa22253a81f944dc685e4c73cf73490ca2f821d12d7e2b5ca0",
+    "initial_intake_snapshot_ref": "records/acquisition/active-intake-initial-snapshot.json",
+    "initial_intake_snapshot_sha256": "a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c",
+    "preflight_refresh_ref": "records/acquisition/preflight-refresh.json",
+    "preflight_refresh_sha256": "0eba97d9a9c3988b0fdf74223f198cf32b63f02a46c55ebd248535313cc83ba7"
+  },
+  "state_counts": {
+    "authorized": 4,
+    "failed": 1,
+    "promoted": 3
+  },
+  "successful_products": [
+    {
+      "source_id": "M1-SRC-001",
+      "attempt_id": "m1-src-001-20260904t041621z-fe412d8d",
+      "role": "before",
+      "sensor_route": "radar",
+      "promoted_size_bytes": 1732333216,
+      "promoted_sha256": "55b19242652e79887f00bb312d7fab1d7f8879f4e9eb996ca15be1268de1e79a",
+      "provider_md5_verified": true,
+      "transfer_receipt_ref": "records/acquisition/attempts/m1-src-001-20260904t041621z-fe412d8d.json",
+      "transfer_receipt_sha256": "fb77a8f330ac30643a6d4d92647339ff17a76e4e3e7c49e64baeee114c7d913c",
+      "container_receipt_ref": "records/acquisition/container-verification/m1-src-001-m1-src-001-20260904t041621z-fe412d8d.json",
+      "container_receipt_sha256": "5f237ec95ca9f5f169a364db30649b5f8187354fea697757bb43e01b5f89b38e",
+      "container_status": "pass_container_only",
+      "pixel_usability_established": false
+    },
+    {
+      "source_id": "M1-SRC-002",
+      "attempt_id": "m1-src-002-20260904t042408z-b31b162b",
+      "role": "before",
+      "sensor_route": "radar",
+      "promoted_size_bytes": 1732874277,
+      "promoted_sha256": "4df9ecdd0ad7f562bdf743b70b9061b9af3885dcbdcaf7f45c1875f2cd838790",
+      "provider_md5_verified": true,
+      "transfer_receipt_ref": "records/acquisition/attempts/m1-src-002-20260904t042408z-b31b162b.json",
+      "transfer_receipt_sha256": "faf3edd43084367fcc00de675190910eea9276b7addad73df9642bd8810f4ea0",
+      "container_receipt_ref": "records/acquisition/container-verification/m1-src-002-m1-src-002-20260904t042408z-b31b162b.json",
+      "container_receipt_sha256": "bc9532282fb7146f1d5e8e05cb022518dba2161c48afdb243f48bac35eb75ebf",
+      "container_status": "pass_container_only",
+      "pixel_usability_established": false
+    },
+    {
+      "source_id": "M1-SRC-003",
+      "attempt_id": "m1-src-003-20260904t043000z-d1b78c08",
+      "role": "before",
+      "sensor_route": "radar",
+      "promoted_size_bytes": 1718369620,
+      "promoted_sha256": "fa9250c3433065c7f3045352bee938b31d140771320e875f1088156094eedf01",
+      "provider_md5_verified": true,
+      "transfer_receipt_ref": "records/acquisition/attempts/m1-src-003-20260904t043000z-d1b78c08.json",
+      "transfer_receipt_sha256": "b5c9b2fe5882e4574f62e80a797fd66bcfb0b3daf0c80e7485d92184618d60f0",
+      "container_receipt_ref": "records/acquisition/container-verification/m1-src-003-m1-src-003-20260904t043000z-d1b78c08.json",
+      "container_receipt_sha256": "a7f65ee4938b3b2749fa711b59c3af14b71dc3f02cbb6b3b6123161d388ae44a",
+      "container_status": "pass_container_only",
+      "pixel_usability_established": false
+    }
+  ],
+  "retained_failure": {
+    "source_id": "M1-SRC-004",
+    "attempt_id": "m1-src-004-20260904t043930z-ac125c11",
+    "failure_code": "transferred_size_mismatch",
+    "expected_size_bytes": 1732332897,
+    "partial_bytes_preserved": 561593598,
+    "partial_sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66",
+    "partial_path_class": "external_non_git_unique_staging_path",
+    "transfer_receipt_ref": "records/acquisition/attempts/m1-src-004-20260904t043930z-ac125c11.json",
+    "transfer_receipt_sha256": "8cbaf911e5a3329c5aa00a7288e237fa71987a2d4f03cea8c630c7dd28b9e7e9",
+    "external_started_event_sha256": "a6499b9c0843604a7b88acb60d40a1c20800145ad14117384e4edc65ff138329",
+    "external_failed_event_sha256": "8cbaf911e5a3329c5aa00a7288e237fa71987a2d4f03cea8c630c7dd28b9e7e9",
+    "resume_evidence_sufficient": false,
+    "resume_evidence_gap": "The attempt did not record both verified byte-range support and an unchanged strong remote object identity.",
+    "retry_automatically_authorized": false,
+    "partial_deleted": false
+  },
+  "remaining_products": [
+    {
+      "source_id": "M1-SRC-005",
+      "state": "authorized",
+      "attempt_count": 0
+    },
+    {
+      "source_id": "M1-SRC-006",
+      "state": "authorized",
+      "attempt_count": 0
+    },
+    {
+      "source_id": "M1-SRC-008",
+      "state": "authorized",
+      "attempt_count": 0
+    },
+    {
+      "source_id": "M1-SRC-010",
+      "state": "authorized",
+      "attempt_count": 0
+    }
+  ],
+  "validation": {
+    "acquisition_progress_validator": "pass_with_external_state_verified",
+    "promoted_product_count": 3,
+    "passing_container_receipt_count": 3,
+    "failed_product_count": 1,
+    "credential_values_read_or_recorded_by_project_evidence": false,
+    "scientific_fitness_established": false,
+    "pixel_usability_established": false
+  },
+  "checkpoint": {
+    "checkpoint_id": "M2-ACQUISITION-REVIEW",
+    "next_action": "Review the retained M1-SRC-004 failure. Do not delete or resume the partial and do not retry or continue other Sentinel acquisitions until an exact recovery decision is approved."
+  },
+  "limitations": [
+    "Container-only verification does not establish raster readability, AOI coverage, usable pixels, registration, or scientific change.",
+    "The M1-SRC-004 partial is retained failure evidence and is not an admissible product.",
+    "No automatic retry or resume is authorized by this record.",
+    "The four remaining authorized products were not attempted after the failure."
+  ]
+}

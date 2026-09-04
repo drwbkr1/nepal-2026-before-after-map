@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-sentinel-recovery-review-bundle-001",
+  "review_id": "m2-sentinel-recovery-review-001",
+  "authority_ref": "records/source-gates/m2-activation-approval.json",
+  "candidate_identity": "M2-SENTINEL-RECOVERY-PROPOSAL-SHA256:7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-sentinel-recovery-review.png",
+      "sha256": "9d643d42aaa9d279cfa5690363ade3e3f065411231239ae51bf77a4b4bc30307",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-sentinel-recovery-review.json",
+          "sha256": "2e9d879344b290f999f321e1d2cba36ab7fafe97b03c9901b91dfb2f22f2e560"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_SENTINEL_RECOVERY_REVIEW.md",
+      "sha256": "fc20ca541ec69f36a34e502570d45a72d68f6a3b6e4d06082dfd680fc8c333b8",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "recovery-proposal",
+      "path": "contracts/milestone-002-sentinel-recovery-proposal.json",
+      "sha256": "7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013",
+      "role": "candidate_recovery_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "acquisition-reconciliation",
+      "path": "records/acquisition/sentinel-acquisition-reconciliation-001.json",
+      "sha256": "37dea3830d7b08724f61b16634f04daf30e0f2d7633aa608c2b5655d0683fd87",
+      "role": "current_validated_success_failure_and_partial_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "failed-transfer-receipt",
+      "path": "records/acquisition/attempts/m1-src-004-20260904t043930z-ac125c11.json",
+      "sha256": "8cbaf911e5a3329c5aa00a7288e237fa71987a2d4f03cea8c630c7dd28b9e7e9",
+      "role": "append_only_terminal_failure",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "active-intake",
+      "path": "contracts/m2-intake.json",
+      "sha256": "734455b7c0e772aa22253a81f944dc685e4c73cf73490ca2f821d12d7e2b5ca0",
+      "role": "current_four_authorized_one_failed_three_promoted_state",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "active-m2-approval",
+      "path": "records/source-gates/m2-activation-approval.json",
+      "sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
+      "role": "existing_eight_product_authority_boundary",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "decision_effect_if_approved": [
+    "implement and validate a separate recovery control that preserves the original failed attempt and partial",
+    "perform one fresh full M1-SRC-004 transfer from byte zero into a distinct exclusive staging path",
+    "promote only after exact current rights, identity, path, length, checksum, and container controls pass",
+    "after a passing recovery, continue only the four still-unattempted products under the original M2 approval"
+  ],
+  "limitations": [
+    "This bundle creates no authority and contains zero human decisions.",
+    "Approval does not permit partial resume or deletion, repeated retry, product substitution, source-scope change, terms or account action, credential disclosure, cost, orbit or radar processing, pixel admission, or scientific publication.",
+    "The cause of the truncated CDSE response is unknown.",
+    "Container verification does not establish raster readability, AOI coverage, usable pixels, registration, or scientific change."
+  ]
+}

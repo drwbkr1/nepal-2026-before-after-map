@@ -1,0 +1,44 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-REVIEW-SURFACE-001",
+  "verified_at_utc": "2026-09-04T17:01:02Z",
+  "status": "pass_blank_review_surface",
+  "artifact": {
+    "path": "docs/assets/m2-orbit-recovery-review.png",
+    "sha256": "63dc1df8aff522a9ffdf8a77f24b600d4efcfaf0342aed8ec914d5372821edd8",
+    "width_px": 1800,
+    "height_px": 1760,
+    "format": "PNG",
+    "contains_third_party_pixels": false
+  },
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-orbit-recovery-proposal.json",
+    "proposal_sha256": "ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a",
+    "render_script_ref": "scripts/render_m2_orbit_recovery_review.py",
+    "render_script_sha256": "57a3dc2bb18c76b3988f12271fe188ad569948f1b12075f97eb5950f7d752d2b"
+  },
+  "validation": {
+    "visual_inspection": "pass",
+    "title_and_proposal_hash_visible": true,
+    "failure_identity_and_zero_byte_boundary_visible": true,
+    "missing_milestone_dependency_visible": true,
+    "corrective_guard_visible": true,
+    "approval_scope_visible": true,
+    "prohibited_scope_visible": true,
+    "stop_rule_visible": true,
+    "decision_options_visible": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "blank_state_verified": true,
+    "human_decision_count": 0,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "This text-only surface contains no completed human decision.",
+    "Visual inspection verifies layout and blank state, not a future reviewer decision.",
+    "The surface contains no Sentinel, orbit, DEM, or derived pixels."
+  ]
+}

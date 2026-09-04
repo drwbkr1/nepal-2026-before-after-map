@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import subprocess
 import sys
@@ -13,6 +14,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from derive_m2_acquisition_checkpoint import candidate_controls, derive_checkpoint  # noqa: E402
+
+
+def load_json(relative: str) -> dict:
+    return json.loads((ROOT / relative).read_text(encoding="utf-8"))
+
+
+def sha256(relative: str) -> str:
+    return hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
 
 
 class M2CheckpointReconciliationTests(unittest.TestCase):
@@ -85,6 +94,35 @@ class M2CheckpointReconciliationTests(unittest.TestCase):
             self.assertEqual(first.returncode, 0, first.stdout + first.stderr)
             self.assertEqual(second.returncode, 12)
             self.assertEqual(json.loads(second.stdout)["code"], "candidate_output_collision")
+
+    def test_current_recovery_proposal_preserves_failure_and_requires_fresh_transfer(self) -> None:
+        proposal = load_json("contracts/milestone-002-sentinel-recovery-proposal.json")
+        reconciliation = load_json("records/acquisition/sentinel-acquisition-reconciliation-001.json")
+        recovery = proposal["proposed_recovery"]
+        self.assertEqual(proposal["status"], "proposed_not_authorized")
+        self.assertEqual(proposal["trigger"]["failed_source_id"], "M1-SRC-004")
+        self.assertEqual(proposal["trigger"]["partial_sha256"], reconciliation["retained_failure"]["partial_sha256"])
+        self.assertFalse(reconciliation["retained_failure"]["retry_automatically_authorized"])
+        self.assertEqual(recovery["mode"], "fresh_full_restart_distinct_attempt")
+        self.assertEqual(recovery["restart_offset_bytes"], 0)
+        self.assertFalse(recovery["resume_partial"])
+        self.assertFalse(recovery["delete_or_modify_failed_partial"])
+        self.assertFalse(recovery["reuse_failed_staging_path"])
+
+    def test_recovery_review_is_exactly_bound_and_blank(self) -> None:
+        proposal_sha = sha256("contracts/milestone-002-sentinel-recovery-proposal.json")
+        bundle_sha = sha256("reviews/m2-sentinel-recovery/review-bundle.json")
+        bundle = load_json("reviews/m2-sentinel-recovery/review-bundle.json")
+        contract = load_json("reviews/m2-sentinel-recovery/review-contract.json")
+        blank = load_json("reviews/m2-sentinel-recovery/blank-response.json")
+        self.assertEqual(bundle["candidate_identity"], f"M2-SENTINEL-RECOVERY-PROPOSAL-SHA256:{proposal_sha}")
+        self.assertEqual(contract["review_bundle"]["manifest_sha256"], bundle_sha)
+        self.assertEqual(contract["allowed_decisions"], ["approve", "revise", "defer"])
+        self.assertNotIn("data_acquisition", contract["workflow_authority"]["authorized_action_classes"])
+        self.assertFalse(blank["completed"])
+        self.assertFalse(blank["reviewer"]["attestation"])
+        self.assertEqual(blank["responses"][0]["evidence_sha256"], bundle_sha)
+        self.assertIsNone(blank["responses"][0]["decision"])
 
 
 if __name__ == "__main__":

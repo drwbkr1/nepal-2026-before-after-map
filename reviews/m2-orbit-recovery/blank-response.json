@@ -1,0 +1,18 @@
+{
+  "response_schema_version": "nepal-m2-orbit-recovery-response-v1",
+  "review_id": "m2-orbit-recovery-review-001",
+  "completed": false,
+  "review_started_at_utc": null,
+  "review_completed_at_utc": null,
+  "reviewer": {
+    "attestation": false
+  },
+  "responses": [
+    {
+      "item_id": "M2-ORBIT-RECOVERY-001",
+      "evidence_sha256": "df5aa9d0d03f8ee30a5cd74b91f74a88c83a525e762c22b0bd2b6773ccb5bc6b",
+      "decision": null,
+      "notes": ""
+    }
+  ]
+}

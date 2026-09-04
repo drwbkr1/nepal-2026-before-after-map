@@ -1,0 +1,72 @@
+{
+  "record_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-TEST-BOUNDARY-RECONCILIATION-001",
+  "verified_at_utc": "2026-09-04T16:54:21Z",
+  "status": "review_required_retained_zero_byte_failed_test_execution",
+  "trigger": {
+    "command_class": "full_repository_unittest_discovery",
+    "test_ref": "tests/test_m2_orbit_io.py",
+    "pre_correction_test_sha256": "607e48fb0ad36d1f150c843add471aa6b0991a57e9933184eec18d05cd167937",
+    "corrected_test_sha256": "ffb08d99f55e911dbf6172115821f3672dee21153b752d277c2fd9be1fa28bc4",
+    "failed_assumption": "M2-ORB-001 would still have unmet Sentinel custody prerequisites when the production refusal test ran",
+    "synthetic_environment_value_class": "tracked_nonsecret_test_literal",
+    "owner_credential_used": false
+  },
+  "outcome": {
+    "source_id": "M2-ORB-001",
+    "attempt_id": "m2-orb-001-20260904t050937z-8ed21d05",
+    "provider_product_id": "d4fdc474-0069-459b-9534-b5999dec5aab",
+    "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+    "bound_verified_sentinel_source_ids": [
+      "M1-SRC-001",
+      "M1-SRC-002"
+    ],
+    "failure_code": "orbit_redirect_or_http_status_rejected",
+    "partial_bytes_preserved": 0,
+    "staging_payload_exists": false,
+    "destination_payload_exists": false,
+    "repository_receipt_ref": "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
+    "repository_receipt_sha256": "a7057479f4dfb867ead6c9622d684c07df51af9db6c39a6fa2dc6d94ae7afc9c",
+    "external_started_event_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\attempt-events\\m2-orb-001\\m2-orb-001-20260904t050937z-8ed21d05-started.json",
+    "external_started_event_sha256": "b63706769d5b9b741ca6831f404ed42eb8eaac4db2168f22d3ff3430cb6ff15a",
+    "external_failed_event_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\attempt-events\\m2-orb-001\\m2-orb-001-20260904t050937z-8ed21d05-failed.json",
+    "external_failed_event_sha256": "a7057479f4dfb867ead6c9622d684c07df51af9db6c39a6fa2dc6d94ae7afc9c",
+    "public_catalog_request_performed": true,
+    "authenticated_download_request_attempted_with_synthetic_literal": true,
+    "credential_value_recorded": false
+  },
+  "authority_assessment": {
+    "orbit_approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+    "orbit_approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+    "exact_source_within_approved_four": true,
+    "matching_per_orbit_sentinel_prerequisites_passed": true,
+    "active_milestone_m2_verify_status_at_attempt": "planned",
+    "active_milestone_dependency_satisfied": false,
+    "execution_within_full_active_milestone_gate": false,
+    "precise_orbit_substitution_performed": false,
+    "terms_or_account_action_performed": false,
+    "cost_incurred": false
+  },
+  "disposition": {
+    "preserve_events_and_receipt": true,
+    "delete_or_rewrite_attempt": false,
+    "retry_automatically_authorized": false,
+    "checkpoint": "M2-ORBIT-ACQUISITION-REVIEW",
+    "next_action": "Review a fresh exact M2-ORB-001 recovery; do not retry this orbit or continue another orbit transfer until the retained failure is reconciled."
+  },
+  "assertions": {
+    "orbit_payload_bytes_received": 0,
+    "orbit_payload_promoted": false,
+    "orbit_xml_verified": false,
+    "orbit_applied": false,
+    "radar_processing_performed": false,
+    "scientific_result_established": false
+  },
+  "corrective_action": "The production runner now checks the active milestone and requires M2-VERIFY complete before catalogue or token access. The regression test exercises that pre-mutation guard only while M2-VERIFY is incomplete, skips after completion, and proves repository-attempt and external-event inventories remain unchanged.",
+  "bindings": {
+    "active_orbit_intake_ref": "contracts/m2-orbit-intake.json",
+    "active_orbit_intake_sha256": "40f4b35549760c766afe8762e766d5f9d6cf14e4064258b09331f0f209cd20a3",
+    "pre_correction_runner_sha256": "eaa21a82a6eb38a471e05b1fa9df2f5aa6378d087b6da0dfe5377abfab3b7248",
+    "corrected_runner_sha256": "773d101e1f3fac173eae4d72109c459c13646dc0726444ea230e7cf6ec590f2f"
+  }
+}

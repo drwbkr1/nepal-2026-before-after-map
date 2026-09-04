@@ -1,0 +1,43 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-RECOVERY-REVIEW-SURFACE-001",
+  "verified_at_utc": "2026-09-04T04:56:35Z",
+  "status": "pass_blank_review_surface",
+  "artifact": {
+    "path": "docs/assets/m2-sentinel-recovery-review.png",
+    "sha256": "9d643d42aaa9d279cfa5690363ade3e3f065411231239ae51bf77a4b4bc30307",
+    "width_px": 1800,
+    "height_px": 1720,
+    "format": "PNG",
+    "contains_third_party_pixels": false
+  },
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-sentinel-recovery-proposal.json",
+    "proposal_sha256": "7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013",
+    "render_script_ref": "scripts/render_m2_sentinel_recovery_review.py",
+    "render_script_sha256": "f103e3b3542a798944963fa5621ccfa2b551387595115d21bbc4704f730b372d"
+  },
+  "validation": {
+    "visual_inspection": "pass",
+    "title_and_proposal_hash_visible": true,
+    "failure_identity_and_exact_counts_visible": true,
+    "no_resume_rationale_visible": true,
+    "approval_scope_visible": true,
+    "prohibited_scope_visible": true,
+    "stop_rule_visible": true,
+    "decision_options_visible": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "blank_state_verified": true,
+    "human_decision_count": 0,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "This text-only surface contains no completed human decision.",
+    "Visual inspection verifies layout and blank state, not the correctness of a future reviewer decision.",
+    "The surface contains no Sentinel or DEM pixels."
+  ]
+}

@@ -98,8 +98,13 @@ def main() -> int:
     profile = load(ROOT / "records/project-control-profile.json")
     goal = load(ROOT / "records/long-term-goal.json")
     candidate_profile, candidate_goal = candidate_controls(profile, goal, checkpoint)
+    current_profile_checkpoint = profile.get("current_checkpoint", {})
     matches = (
-        profile.get("current_checkpoint") == candidate_profile["current_checkpoint"]
+        current_profile_checkpoint.get("checkpoint_id") == checkpoint["checkpoint_id"]
+        and current_profile_checkpoint.get("expected_branch") == "main"
+        and current_profile_checkpoint.get("expected_head") is None
+        and isinstance(current_profile_checkpoint.get("next_action"), str)
+        and bool(current_profile_checkpoint["next_action"].strip())
         and goal.get("current_checkpoint") == candidate_goal["current_checkpoint"]
     )
     output_refs: dict[str, str] = {}

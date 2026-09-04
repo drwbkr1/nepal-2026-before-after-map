@@ -43,9 +43,41 @@
         "promoted_sha256": null,
         "promoted_size_bytes": null
       },
-      "state": "authorized",
-      "attempts": [],
-      "failure": null,
+      "state": "failed",
+      "attempts": [
+        {
+          "attempt_id": "m2-orb-001-20260904t050937z-8ed21d05",
+          "started_at": "2026-09-04T05:09:37Z",
+          "completed_at": "2026-09-04T05:09:38Z",
+          "outcome": "failed",
+          "extensions": {
+            "source_id": "M2-ORB-001",
+            "catalog_response_sha256": "ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c",
+            "verified_sentinel_custody": [
+              {
+                "source_id": "M1-SRC-001",
+                "transfer_receipt_sha256": "fb77a8f330ac30643a6d4d92647339ff17a76e4e3e7c49e64baeee114c7d913c",
+                "container_verification_ref": "records/acquisition/container-verification/m1-src-001-m1-src-001-20260904t041621z-fe412d8d.json",
+                "container_verification_sha256": "5f237ec95ca9f5f169a364db30649b5f8187354fea697757bb43e01b5f89b38e"
+              },
+              {
+                "source_id": "M1-SRC-002",
+                "transfer_receipt_sha256": "faf3edd43084367fcc00de675190910eea9276b7addad73df9642bd8810f4ea0",
+                "container_verification_ref": "records/acquisition/container-verification/m1-src-002-m1-src-002-20260904t042408z-b31b162b.json",
+                "container_verification_sha256": "bc9532282fb7146f1d5e8e05cb022518dba2161c48afdb243f48bac35eb75ebf"
+              }
+            ],
+            "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-intake-001\\attempt-events\\m2-orb-001\\m2-orb-001-20260904t050937z-8ed21d05-started.json",
+            "credential_reference": "CDSE_ACCESS_TOKEN",
+            "credential_value_recorded": false,
+            "resume": false
+          }
+        }
+      ],
+      "failure": {
+        "code": "orbit_redirect_or_http_status_rejected",
+        "recorded_at": "2026-09-04T05:09:38Z"
+      },
       "superseded_by": null,
       "extensions": {
         "source_id": "M2-ORB-001",
@@ -246,13 +278,13 @@
     "resume_policy": "disabled_until_range_support_and_unchanged_remote_identity_are verified",
     "payload_bytes_transferred": 0,
     "this_contract_creates_authority": false,
-    "status": "active_authorized_preflight_passed_custody_initialized",
+    "status": "active_acquisition_review_required",
     "authority_status": "inherited_exact_orbit_amendment_approval",
     "amendment_approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
     "amendment_approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
     "review_reconciliation_ref": "records/source-gates/m2-orbit-amendment-review-reconciliation.json",
     "review_reconciliation_sha256": "d421acb9e343531f5eb595d69d2414c30e4ef5717d7614a5a1696546c6cd866c",
-    "sentinel_custody_prerequisite_status": "pending_zero_of_six_promoted_and_verified",
+    "sentinel_custody_prerequisite_status": "partial_three_of_six_promoted_and_verified_one_failed_two_unattempted",
     "static_only_no_network_or_external_filesystem_mutation": false,
     "approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
     "preflight_ref": "records/acquisition/orbit-preflight.json",
@@ -263,6 +295,16 @@
     "custody_initialized_at_utc": "2026-09-04T02:12:14Z",
     "custody_initialization_ref": "records/acquisition/orbit-custody-initialization.json",
     "custody_initialization_sha256": "1ea8bef201ad72cc695d9332400561edacacdc93e704916ed7b1a4b28efa1723",
-    "external_custody_initialization_receipt": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\orbit-custody-initialization-receipt.json"
+    "external_custody_initialization_receipt": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\orbit-custody-initialization-receipt.json",
+    "current_orbit_state_counts": {
+      "authorized": 3,
+      "failed": 1,
+      "promoted": 0
+    },
+    "current_sentinel_state_counts": {
+      "authorized": 4,
+      "failed": 1,
+      "promoted": 3
+    }
   }
 }

@@ -186,15 +186,25 @@ class M2MaterializationTests(unittest.TestCase):
     def test_production_wrapper_refuses_before_any_custody_read_or_output(self) -> None:
         data_root = Path(r"C:\Projects\Active\nepal-2026-before-after-map-data")
         materialized = data_root / "materialized"
-        before = materialized.exists()
+        intake = json.loads((ROOT / "contracts/m2-intake.json").read_text(encoding="utf-8"))
+        unpromoted = [
+            asset["extensions"]["source_id"]
+            for asset in intake["assets"]
+            if asset.get("state") != "promoted"
+        ]
+        if not unpromoted:
+            self.skipTest("all live assets are promoted; no safe production-wrapper refusal probe remains")
+        repository_receipts = ROOT / "records" / "acquisition" / "materialization"
+        before_external = sorted(str(path.relative_to(materialized)) for path in materialized.rglob("*") if path.is_file()) if materialized.exists() else []
+        before_receipts = sorted(path.name for path in repository_receipts.glob("*.json")) if repository_receipts.exists() else []
         result = subprocess.run(
             [
                 sys.executable,
                 str(ROOT / "scripts/materialize_m2_product.py"),
                 "--source-id",
-                "M1-SRC-001",
+                unpromoted[0],
                 "--attempt-id",
-                "fixture-must-not-run",
+                "fixture-unpromoted-must-not-run",
                 "--started-at-utc",
                 "2026-09-03T19:01:00Z",
             ],
@@ -206,7 +216,10 @@ class M2MaterializationTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 12)
         self.assertEqual(json.loads(result.stdout)["code"], "asset_not_promoted")
-        self.assertEqual(materialized.exists(), before)
+        after_external = sorted(str(path.relative_to(materialized)) for path in materialized.rglob("*") if path.is_file()) if materialized.exists() else []
+        after_receipts = sorted(path.name for path in repository_receipts.glob("*.json")) if repository_receipts.exists() else []
+        self.assertEqual(after_external, before_external)
+        self.assertEqual(after_receipts, before_receipts)
 
 
 if __name__ == "__main__":

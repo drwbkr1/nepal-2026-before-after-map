@@ -233,15 +233,25 @@
         "unit_id": "M2-ORBIT-APPLY",
         "reason": "The exact orbit amendment authorizes exact-source application only after all independent radar prerequisites pass.",
         "authority_ref": "records/source-gates/m2-orbit-amendment-approval.json"
+      },
+      {
+        "unit_id": "M2-SENTINEL-RECOVERY",
+        "reason": "A retained terminal transfer failure has retry_automatically_authorized false; recovery requires an exact fresh-attempt decision that preserves the partial and source boundary.",
+        "authority_ref": "reviews/m2-sentinel-recovery/review-contract.json"
+      },
+      {
+        "unit_id": "M2-ORBIT-RECOVERY",
+        "reason": "The retained M2-ORB-001 attempt is terminal, automatic retry is false, and the attempt crossed the active milestone dependency under a stale regression-test assumption.",
+        "authority_ref": "reviews/m2-orbit-recovery/review-contract.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-AUTHENTICATION-REFERENCE",
+    "checkpoint_id": "M2-ACQUISITION-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Provide a secret-safe reference to an existing owner-controlled CDSE access token or authenticated session; then revalidate the exact first product before transfer. Do not place a token, password, cookie, or header in Git or chat."
+    "next_action": "Review M2 Sentinel recovery bundle SHA-256 dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7 and proposal SHA-256 7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013; approve, revise, or defer the single fresh byte-zero M1-SRC-004 recovery. No automatic retry or further Sentinel transfer is released before a completed decision."
   },
   "parallel_checkpoints": [
     {
@@ -255,9 +265,9 @@
       "next_action": "Review bundle SHA-256 834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5 and approve, revise, or defer the terrain-only result; approval releases no vertical, radar, or scientific action."
     },
     {
-      "checkpoint_id": "M2-ORBIT-SENTINEL-CUSTODY",
-      "authority_ref": "records/source-gates/m2-orbit-amendment-approval.json",
-      "next_action": "Resume the original Sentinel acquisition through its existing secret-safe session; orbit transfer remains blocked until each bound radar source is promoted and offline container-verified."
+      "checkpoint_id": "M2-ORBIT-ACQUISITION-REVIEW",
+      "authority_ref": "reviews/m2-orbit-recovery/review-contract.json",
+      "next_action": "Review M2 orbit recovery bundle SHA-256 df5aa9d0d03f8ee30a5cd74b91f74a88c83a525e762c22b0bd2b6773ccb5bc6b and proposal SHA-256 ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a; approve, revise, or defer one fresh M2-ORB-001 recovery that remains blocked until the full M2-VERIFY unit is complete."
     }
   ]
 }

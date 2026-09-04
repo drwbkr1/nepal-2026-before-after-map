@@ -78,7 +78,7 @@ class M2OrbitPreflightTests(unittest.TestCase):
             sha256_path(ROOT / "scripts/initialize_m2_orbit_custody.py"),
         )
 
-    def test_empty_external_custody_is_exact_and_contains_no_payloads(self) -> None:
+    def test_initialized_external_custody_contains_no_orbit_payloads(self) -> None:
         self.assertEqual(self.custody["status"], "created_and_verified_empty")
         self.assertEqual(self.custody["verification"]["preserved_partial_directory_count"], 7)
         self.assertEqual(self.custody["verification"]["created_directory_count_attempt_002"], 10)
@@ -90,9 +90,18 @@ class M2OrbitPreflightTests(unittest.TestCase):
             custody_root = Path(self.custody["paths"]["custody_root"])
             staging_root = Path(self.custody["paths"]["staging_root"])
             self.assertEqual([path for path in custody_root.rglob("*") if path.is_file()], [])
-            self.assertEqual([path for path in staging_root.rglob("*") if path.is_file()], [])
-        self.assertEqual(self.intake["extensions"]["status"], "active_authorized_preflight_passed_custody_initialized")
-        self.assertEqual(self.intake["extensions"]["sentinel_custody_prerequisite_status"], "pending_zero_of_six_promoted_and_verified")
+            staging_files = [path for path in staging_root.rglob("*") if path.is_file()]
+            unexpected = [
+                path
+                for path in staging_files
+                if "attempt-events" not in path.relative_to(staging_root).parts or path.suffix.casefold() != ".json"
+            ]
+            self.assertEqual(unexpected, [])
+        self.assertEqual(self.intake["extensions"]["status"], "active_acquisition_review_required")
+        self.assertEqual(
+            self.intake["extensions"]["sentinel_custody_prerequisite_status"],
+            "partial_three_of_six_promoted_and_verified_one_failed_two_unattempted",
+        )
 
     def test_evidence_ledger_contains_preflight_failure_correction_and_success(self) -> None:
         ledger = [json.loads(line) for line in (ROOT / "records/evidence-ledger.jsonl").read_text(encoding="utf-8").splitlines()]

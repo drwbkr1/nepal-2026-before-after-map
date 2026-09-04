@@ -1,0 +1,59 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-CONTAINER-M1-SRC-001-m1-src-001-20260904t041621z-fe412d8d",
+  "scanned_at_utc": "2026-09-04T04:22:41Z",
+  "status": "pass_container_only",
+  "source_id": "M1-SRC-001",
+  "attempt_id": "m1-src-001-20260904t041621z-fe412d8d",
+  "bindings": {
+    "verification_contract_ref": "contracts/m2-offline-verification.json",
+    "verification_contract_sha256": "f3fa9d6911469ce072e76781d28ba012be31b59a1033a0553bca9b43b97b0643",
+    "active_intake_ref": "contracts/m2-intake.json",
+    "active_intake_sha256_at_scan": "64ac8cc24012456a3606b4c169c2792d626bac5aad6c4bd44b6edabe0736793a",
+    "transfer_receipt_ref": "records/acquisition/attempts/m1-src-001-20260904t041621z-fe412d8d.json",
+    "transfer_receipt_sha256": "fb77a8f330ac30643a6d4d92647339ff17a76e4e3e7c49e64baeee114c7d913c"
+  },
+  "activity": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "archive_extraction_performed": false,
+    "source_archive_mutation_performed": false
+  },
+  "result": {
+    "source_id": "M1-SRC-001",
+    "archive_relative_path": "products/m1-src-001/S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE.zip",
+    "status": "pass_container_only",
+    "local_size_bytes": 1732333216,
+    "local_sha256": "55b19242652e79887f00bb312d7fab1d7f8879f4e9eb996ca15be1268de1e79a",
+    "local_md5": "06dd5fdf5ea889a32f7dbb5fa41df029",
+    "member_count": 26,
+    "total_uncompressed_bytes": 1732324248,
+    "checks": {
+      "catalog_size": "pass",
+      "provider_md5": "pass",
+      "local_sha256": "pass",
+      "member:manifest.safe": "pass",
+      "member:annotation/*-vv-*.xml": "pass",
+      "member:annotation/*-vh-*.xml": "pass",
+      "member:annotation/calibration/calibration-*-vv-*.xml": "pass",
+      "member:annotation/calibration/calibration-*-vh-*.xml": "pass",
+      "member:annotation/calibration/noise-*-vv-*.xml": "pass",
+      "member:annotation/calibration/noise-*-vh-*.xml": "pass",
+      "member:measurement/*-vv-*.tiff": "pass",
+      "member:measurement/*-vh-*.tiff": "pass",
+      "zip_crc": "pass"
+    },
+    "errors": [],
+    "pixel_usability_established": false,
+    "eligible_for_post_container_qa": true
+  },
+  "pixel_usability_established": false,
+  "scientific_fitness_established": false,
+  "next_gate": "post_container_gates",
+  "limitations": [
+    "A passing receipt establishes exact local archive identity, provider-MD5 agreement, ZIP integrity, SAFE-root identity, and required member presence only.",
+    "Provider BLAKE3 remains catalog metadata unless a separately verified local BLAKE3 implementation is introduced and bound.",
+    "Member names and CRC do not establish readable rasters, valid pixels, AOI coverage, masks, registration, or scientific fitness.",
+    "Each product receipt must bind the current promoted intake identity and may not replace an existing receipt."
+  ]
+}

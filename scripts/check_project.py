@@ -39,6 +39,8 @@ REQUIRED = [
     "contracts/m2-intake-candidate.json",
     "contracts/milestone-002.json",
     "contracts/m2-intake.json",
+    "contracts/milestone-002-sentinel-recovery-proposal.json",
+    "contracts/milestone-002-orbit-recovery-proposal.json",
     "contracts/m2-offline-verification.json",
     "contracts/m2-materialization.json",
     "contracts/milestone-002-dem-amendment-proposal.json",
@@ -72,6 +74,19 @@ REQUIRED = [
     "records/acquisition/acquisition-progress-readiness.json",
     "records/acquisition/acquisition-checkpoint-readiness.json",
     "records/acquisition/acquisition-checkpoint-portability-correction.json",
+    "records/acquisition/sentinel-acquisition-reconciliation-001.json",
+    "records/acquisition/materialization-test-boundary-reconciliation-001.json",
+    "records/acquisition/orbit-test-boundary-reconciliation-001.json",
+    "records/acquisition/orbit-runner-production-boundary-correction-001.json",
+    "records/acquisition/attempts/m1-src-001-20260904t041621z-fe412d8d.json",
+    "records/acquisition/attempts/m1-src-002-20260904t042408z-b31b162b.json",
+    "records/acquisition/attempts/m1-src-003-20260904t043000z-d1b78c08.json",
+    "records/acquisition/attempts/m1-src-004-20260904t043930z-ac125c11.json",
+    "records/acquisition/container-verification/m1-src-001-m1-src-001-20260904t041621z-fe412d8d.json",
+    "records/acquisition/container-verification/m1-src-002-m1-src-002-20260904t042408z-b31b162b.json",
+    "records/acquisition/container-verification/m1-src-003-m1-src-003-20260904t043000z-d1b78c08.json",
+    "records/acquisition/materialization/m1-src-001-fixture-must-not-run.json",
+    "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
     "records/acquisition/dem-amendment-activation.json",
     "records/acquisition/dem-preflight.json",
     "records/acquisition/dem-custody-initialization.json",
@@ -129,6 +144,8 @@ REQUIRED = [
     "reviews/m1-manifest/blank-response.json",
     "docs/M2_CONTROLLED_ACQUISITION_REVIEW.md",
     "docs/M2_EXECUTION_RUNBOOK.md",
+    "docs/M2_SENTINEL_RECOVERY_REVIEW.md",
+    "docs/M2_ORBIT_RECOVERY_REVIEW.md",
     "docs/M2_OFFLINE_VERIFICATION.md",
     "docs/M2_DEM_AMENDMENT_REVIEW.md",
     "docs/M2_DEM_OFFLINE_VERIFICATION.md",
@@ -142,6 +159,8 @@ REQUIRED = [
     "docs/assets/m2-dem-terrain-result-review.png",
     "docs/assets/m2-controlled-acquisition-review.png",
     "docs/assets/m2-orbit-amendment-review.png",
+    "docs/assets/m2-sentinel-recovery-review.png",
+    "docs/assets/m2-orbit-recovery-review.png",
     "scripts/render_m2_activation_review.py",
     "scripts/prepare_m2_intake.py",
     "scripts/prepare_m2_verification.py",
@@ -170,6 +189,8 @@ REQUIRED = [
     "records/surface-receipts/m2-dem-terrain-quality.json",
     "records/surface-receipts/m2-dem-terrain-result-review.json",
     "records/surface-receipts/m2-orbit-amendment-review.json",
+    "records/surface-receipts/m2-sentinel-recovery-review.json",
+    "records/surface-receipts/m2-orbit-recovery-review.json",
     "records/surface-receipts/optical-processing-synthetic-arcgis.json",
     "records/surface-receipts/optical-baseline-control-readiness.json",
     "records/surface-receipts/m2-materialization-readiness.json",
@@ -199,6 +220,12 @@ REQUIRED = [
     "reviews/m2-orbit-amendment/review-bundle.json",
     "reviews/m2-orbit-amendment/review-contract.json",
     "reviews/m2-orbit-amendment/blank-response.json",
+    "reviews/m2-sentinel-recovery/review-bundle.json",
+    "reviews/m2-sentinel-recovery/review-contract.json",
+    "reviews/m2-sentinel-recovery/blank-response.json",
+    "reviews/m2-orbit-recovery/review-bundle.json",
+    "reviews/m2-orbit-recovery/review-contract.json",
+    "reviews/m2-orbit-recovery/blank-response.json",
     "tests/test_m2_intake.py",
     "tests/test_m2_verification.py",
     "tests/test_arcgis_evidence_schema.py",
@@ -258,6 +285,8 @@ REQUIRED = [
     "scripts/prepare_m2_orbit_amendment.py",
     "scripts/prepare_m2_orbit_controls.py",
     "scripts/render_m2_orbit_amendment_review.py",
+    "scripts/render_m2_sentinel_recovery_review.py",
+    "scripts/render_m2_orbit_recovery_review.py",
     "scripts/activate_m2_orbit_amendment.py",
     "scripts/run_m2_orbit_preflight.py",
     "scripts/initialize_m2_orbit_custody.py",
@@ -416,6 +445,22 @@ def main() -> None:
     orbit_intake_schema_correction = json.loads((ROOT / "records/acquisition/orbit-intake-schema-correction.json").read_text(encoding="utf-8"))
     orbit_intake_label_inconsistency = json.loads((ROOT / "records/acquisition/orbit-intake-activation-label-inconsistency.json").read_text(encoding="utf-8"))
     orbit_intake_label_correction = json.loads((ROOT / "records/acquisition/orbit-intake-activation-label-correction.json").read_text(encoding="utf-8"))
+    sentinel_recovery_proposal = json.loads((ROOT / "contracts/milestone-002-sentinel-recovery-proposal.json").read_text(encoding="utf-8"))
+    sentinel_acquisition_reconciliation = json.loads((ROOT / "records/acquisition/sentinel-acquisition-reconciliation-001.json").read_text(encoding="utf-8"))
+    sentinel_recovery_surface = json.loads((ROOT / "records/surface-receipts/m2-sentinel-recovery-review.json").read_text(encoding="utf-8"))
+    sentinel_recovery_bundle = json.loads((ROOT / "reviews/m2-sentinel-recovery/review-bundle.json").read_text(encoding="utf-8"))
+    sentinel_recovery_contract = json.loads((ROOT / "reviews/m2-sentinel-recovery/review-contract.json").read_text(encoding="utf-8"))
+    sentinel_recovery_blank = json.loads((ROOT / "reviews/m2-sentinel-recovery/blank-response.json").read_text(encoding="utf-8"))
+    materialization_boundary_reconciliation = json.loads((ROOT / "records/acquisition/materialization-test-boundary-reconciliation-001.json").read_text(encoding="utf-8"))
+    materialization_receipt = json.loads((ROOT / "records/acquisition/materialization/m1-src-001-fixture-must-not-run.json").read_text(encoding="utf-8"))
+    orbit_boundary_reconciliation = json.loads((ROOT / "records/acquisition/orbit-test-boundary-reconciliation-001.json").read_text(encoding="utf-8"))
+    orbit_boundary_correction = json.loads((ROOT / "records/acquisition/orbit-runner-production-boundary-correction-001.json").read_text(encoding="utf-8"))
+    orbit_failed_attempt = json.loads((ROOT / "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json").read_text(encoding="utf-8"))
+    orbit_recovery_proposal = json.loads((ROOT / "contracts/milestone-002-orbit-recovery-proposal.json").read_text(encoding="utf-8"))
+    orbit_recovery_surface = json.loads((ROOT / "records/surface-receipts/m2-orbit-recovery-review.json").read_text(encoding="utf-8"))
+    orbit_recovery_bundle = json.loads((ROOT / "reviews/m2-orbit-recovery/review-bundle.json").read_text(encoding="utf-8"))
+    orbit_recovery_contract = json.loads((ROOT / "reviews/m2-orbit-recovery/review-contract.json").read_text(encoding="utf-8"))
+    orbit_recovery_blank = json.loads((ROOT / "reviews/m2-orbit-recovery/blank-response.json").read_text(encoding="utf-8"))
     expected_dem_source_order = ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
     dem_current_assets = dem_intake_active.get("assets", [])
     if [asset.get("extensions", {}).get("source_id") for asset in dem_current_assets] != expected_dem_source_order:
@@ -540,6 +585,10 @@ def main() -> None:
             fail(f"project profile must bind {approved_unit} to the exact DEM amendment approval")
     if profile_gates.get("M2-DEM-TERRAIN-RESULT-REVIEW", {}).get("authority_ref") != "reviews/m2-dem-terrain-result/review-contract.json":
         fail("project profile must expose the exact terrain-result human-review gate")
+    if profile_gates.get("M2-SENTINEL-RECOVERY", {}).get("authority_ref") != "reviews/m2-sentinel-recovery/review-contract.json":
+        fail("project profile must expose the exact Sentinel recovery human-review gate")
+    if profile_gates.get("M2-ORBIT-RECOVERY", {}).get("authority_ref") != "reviews/m2-orbit-recovery/review-contract.json":
+        fail("project profile must expose the exact orbit recovery human-review gate")
     for approved_unit in ("M2-ORBIT-AMEND", "M2-ORBIT-PREFLIGHT", "M2-ORBIT-ACQUIRE", "M2-ORBIT-VERIFY", "M2-ORBIT-APPLY"):
         if profile_gates.get(approved_unit, {}).get("authority_ref") != "records/source-gates/m2-orbit-amendment-approval.json":
             fail(f"project profile must bind {approved_unit} to the exact orbit amendment approval")
@@ -555,16 +604,16 @@ def main() -> None:
             "next_action": "Review bundle SHA-256 834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5 and approve, revise, or defer the terrain-only result; approval releases no vertical, radar, or scientific action.",
         },
         {
-            "checkpoint_id": "M2-ORBIT-SENTINEL-CUSTODY",
-            "authority_ref": "records/source-gates/m2-orbit-amendment-approval.json",
-            "next_action": "Resume the original Sentinel acquisition through its existing secret-safe session; orbit transfer remains blocked until each bound radar source is promoted and offline container-verified.",
+            "checkpoint_id": "M2-ORBIT-ACQUISITION-REVIEW",
+            "authority_ref": "reviews/m2-orbit-recovery/review-contract.json",
+            "next_action": "Review M2 orbit recovery bundle SHA-256 df5aa9d0d03f8ee30a5cd74b91f74a88c83a525e762c22b0bd2b6773ccb5bc6b and proposal SHA-256 ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a; approve, revise, or defer one fresh M2-ORB-001 recovery that remains blocked until the full M2-VERIFY unit is complete.",
         },
     ]:
         fail("project profile DEM parallel checkpoint differs")
     if goal.get("active_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
-    ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-SENTINEL-CUSTODY"]:
+    ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-ACQUISITION-REVIEW"]:
         fail("long-term goal does not expose the active DEM and orbit checkpoints")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
@@ -634,6 +683,269 @@ def main() -> None:
         "reviews/m2-orbit-amendment/review-contract.json",
         verify_current_artifacts=False,
     )
+    validate_review_bundle(
+        "reviews/m2-sentinel-recovery/review-bundle.json",
+        "reviews/m2-sentinel-recovery/review-contract.json",
+    )
+
+    expected_recovery_proposal_sha = "7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013"
+    expected_recovery_bundle_sha = "dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7"
+    expected_recovery_surface_sha = "9d643d42aaa9d279cfa5690363ade3e3f065411231239ae51bf77a4b4bc30307"
+    failed_attempt_ref = "records/acquisition/attempts/m1-src-004-20260904t043930z-ac125c11.json"
+    failed_attempt_sha = "8cbaf911e5a3329c5aa00a7288e237fa71987a2d4f03cea8c630c7dd28b9e7e9"
+    if (
+        sentinel_recovery_proposal.get("status") != "proposed_not_authorized"
+        or sha256("contracts/milestone-002-sentinel-recovery-proposal.json") != expected_recovery_proposal_sha
+        or sentinel_recovery_proposal.get("trigger") != {
+            "checkpoint": "M2-ACQUISITION-REVIEW",
+            "reconciliation_ref": "records/acquisition/sentinel-acquisition-reconciliation-001.json",
+            "failed_source_id": "M1-SRC-004",
+            "failed_attempt_id": "m1-src-004-20260904t043930z-ac125c11",
+            "failure_code": "transferred_size_mismatch",
+            "expected_size_bytes": 1732332897,
+            "partial_bytes_preserved": 561593598,
+            "partial_sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66",
+        }
+    ):
+        fail("M2 Sentinel recovery proposal identity or retained-failure trigger differs")
+    recovery = sentinel_recovery_proposal.get("proposed_recovery", {})
+    if (
+        recovery.get("mode") != "fresh_full_restart_distinct_attempt"
+        or recovery.get("source_id") != "M1-SRC-004"
+        or recovery.get("restart_offset_bytes") != 0
+        or recovery.get("resume_partial") is not False
+        or recovery.get("delete_or_modify_failed_partial") is not False
+        or recovery.get("reuse_failed_staging_path") is not False
+        or recovery.get("required_new_asset_or_attempt_namespace") != "m1-src-004-recovery-001"
+        or recovery.get("failure_policy") != "Any recovery failure is terminal for that recovery identity and requires another explicit review; no automatic retry is authorized."
+    ):
+        fail("M2 Sentinel recovery proposal weakens fresh-attempt or retained-evidence controls")
+    if sentinel_recovery_proposal.get("human_gate") != {
+        "review_required": True,
+        "item_id": "M2-SENTINEL-RECOVERY-001",
+        "allowed_decisions": ["approve", "revise", "defer"],
+        "required_attestation": True,
+    }:
+        fail("M2 Sentinel recovery proposal human gate differs")
+
+    if (
+        sentinel_acquisition_reconciliation.get("status") != "review_required_retained_failure"
+        or sentinel_acquisition_reconciliation.get("state_counts") != {"authorized": 4, "failed": 1, "promoted": 3}
+        or sentinel_acquisition_reconciliation.get("bindings", {}).get("active_intake_sha256") != sha256("contracts/m2-intake.json")
+        or sentinel_acquisition_reconciliation.get("retained_failure", {}).get("transfer_receipt_ref") != failed_attempt_ref
+        or sentinel_acquisition_reconciliation.get("retained_failure", {}).get("transfer_receipt_sha256") != failed_attempt_sha
+        or sentinel_acquisition_reconciliation.get("retained_failure", {}).get("partial_sha256") != "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66"
+        or sentinel_acquisition_reconciliation.get("retained_failure", {}).get("resume_evidence_sufficient") is not False
+        or sentinel_acquisition_reconciliation.get("retained_failure", {}).get("retry_automatically_authorized") is not False
+        or sentinel_acquisition_reconciliation.get("validation", {}).get("pixel_usability_established") is not False
+        or sentinel_acquisition_reconciliation.get("validation", {}).get("scientific_fitness_established") is not False
+    ):
+        fail("M2 Sentinel acquisition reconciliation differs")
+    successful_reconciliation = sentinel_acquisition_reconciliation.get("successful_products", [])
+    if [item.get("source_id") for item in successful_reconciliation] != ["M1-SRC-001", "M1-SRC-002", "M1-SRC-003"]:
+        fail("M2 Sentinel acquisition reconciliation successful-product order differs")
+    for item in successful_reconciliation:
+        if (
+            item.get("transfer_receipt_sha256") != sha256(item.get("transfer_receipt_ref", ""))
+            or item.get("container_receipt_sha256") != sha256(item.get("container_receipt_ref", ""))
+            or item.get("provider_md5_verified") is not True
+            or item.get("container_status") != "pass_container_only"
+            or item.get("pixel_usability_established") is not False
+        ):
+            fail(f"M2 Sentinel acquisition reconciliation success binding differs for {item.get('source_id')}")
+    if sha256(failed_attempt_ref) != failed_attempt_sha:
+        fail("M2 Sentinel retained failure receipt identity differs")
+
+    if (
+        sentinel_recovery_surface.get("status") != "pass_blank_review_surface"
+        or sentinel_recovery_surface.get("artifact", {}).get("sha256") != expected_recovery_surface_sha
+        or sentinel_recovery_surface.get("artifact", {}).get("sha256") != sha256("docs/assets/m2-sentinel-recovery-review.png")
+        or sentinel_recovery_surface.get("bindings", {}).get("proposal_sha256") != expected_recovery_proposal_sha
+        or sentinel_recovery_surface.get("bindings", {}).get("render_script_sha256") != sha256("scripts/render_m2_sentinel_recovery_review.py")
+        or sentinel_recovery_surface.get("validation", {}).get("blank_state_verified") is not True
+        or sentinel_recovery_surface.get("validation", {}).get("human_decision_count") != 0
+    ):
+        fail("M2 Sentinel recovery review surface or blank-state receipt differs")
+    expected_recovery_candidate = "M2-SENTINEL-RECOVERY-PROPOSAL-SHA256:" + expected_recovery_proposal_sha
+    if (
+        sentinel_recovery_bundle.get("bundle_id") != "m2-sentinel-recovery-review-bundle-001"
+        or sentinel_recovery_bundle.get("review_id") != "m2-sentinel-recovery-review-001"
+        or sentinel_recovery_bundle.get("candidate_identity") != expected_recovery_candidate
+        or sha256("reviews/m2-sentinel-recovery/review-bundle.json") != expected_recovery_bundle_sha
+    ):
+        fail("M2 Sentinel recovery review bundle identity differs")
+    recovery_authority = sentinel_recovery_contract.get("workflow_authority", {})
+    if (
+        sentinel_recovery_contract.get("review_bundle", {}).get("manifest_sha256") != expected_recovery_bundle_sha
+        or sentinel_recovery_contract.get("review_bundle", {}).get("candidate_identity") != expected_recovery_candidate
+        or sentinel_recovery_contract.get("review_bundle", {}).get("rendered_surface_verified") is not True
+        or sentinel_recovery_contract.get("allowed_decisions") != ["approve", "revise", "defer"]
+        or sentinel_recovery_contract.get("required_attestation") is not True
+        or recovery_authority.get("review_required") is not True
+        or recovery_authority.get("lock_authorized") is not True
+        or recovery_authority.get("reconcile_authorized") is not True
+        or "data_acquisition" in recovery_authority.get("authorized_action_classes", [])
+        or sentinel_recovery_contract.get("items") != [{"item_id": "M2-SENTINEL-RECOVERY-001", "evidence_sha256": expected_recovery_bundle_sha}]
+    ):
+        fail("M2 Sentinel recovery review contract authority or exact-bundle binding differs")
+    if sentinel_recovery_blank != {
+        "response_schema_version": "nepal-m2-sentinel-recovery-response-v1",
+        "review_id": "m2-sentinel-recovery-review-001",
+        "completed": False,
+        "review_started_at_utc": None,
+        "review_completed_at_utc": None,
+        "reviewer": {"attestation": False},
+        "responses": [{
+            "item_id": "M2-SENTINEL-RECOVERY-001",
+            "evidence_sha256": expected_recovery_bundle_sha,
+            "decision": None,
+            "notes": "",
+        }],
+    }:
+        fail("M2 Sentinel recovery blank response differs or contains a human decision")
+
+    validate_review_bundle(
+        "reviews/m2-orbit-recovery/review-bundle.json",
+        "reviews/m2-orbit-recovery/review-contract.json",
+    )
+    expected_orbit_recovery_proposal_sha = "ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a"
+    expected_orbit_recovery_bundle_sha = "df5aa9d0d03f8ee30a5cd74b91f74a88c83a525e762c22b0bd2b6773ccb5bc6b"
+    expected_orbit_recovery_surface_sha = "63dc1df8aff522a9ffdf8a77f24b600d4efcfaf0342aed8ec914d5372821edd8"
+    if (
+        orbit_recovery_proposal.get("status") != "proposed_not_authorized"
+        or sha256("contracts/milestone-002-orbit-recovery-proposal.json") != expected_orbit_recovery_proposal_sha
+        or orbit_recovery_proposal.get("trigger", {}).get("checkpoint") != "M2-ORBIT-ACQUISITION-REVIEW"
+        or orbit_recovery_proposal.get("trigger", {}).get("failed_source_id") != "M2-ORB-001"
+        or orbit_recovery_proposal.get("trigger", {}).get("failed_attempt_id") != "m2-orb-001-20260904t050937z-8ed21d05"
+        or orbit_recovery_proposal.get("trigger", {}).get("failure_code") != "orbit_redirect_or_http_status_rejected"
+        or orbit_recovery_proposal.get("trigger", {}).get("partial_bytes_preserved") != 0
+        or orbit_recovery_proposal.get("current_verified_state", {}).get("orbit_state_counts") != {"authorized": 3, "failed": 1, "promoted": 0}
+        or orbit_recovery_proposal.get("current_verified_state", {}).get("sentinel_state_counts") != {"authorized": 4, "failed": 1, "promoted": 3}
+        or orbit_recovery_proposal.get("current_verified_state", {}).get("m2_verify_status") != "blocked_retained_failure_review"
+        or orbit_recovery_proposal.get("current_verified_state", {}).get("orbit_payload_bytes_in_custody") != 0
+    ):
+        fail("M2 orbit recovery proposal trigger or current-state boundary differs")
+    orbit_recovery = orbit_recovery_proposal.get("proposed_recovery", {})
+    if (
+        orbit_recovery.get("mode") != "fresh_full_restart_distinct_attempt"
+        or orbit_recovery.get("source_id") != "M2-ORB-001"
+        or orbit_recovery.get("restart_offset_bytes") != 0
+        or orbit_recovery.get("resume_partial") is not False
+        or orbit_recovery.get("delete_or_modify_failed_events") is not False
+        or orbit_recovery.get("reuse_failed_attempt_id") is not False
+        or orbit_recovery.get("required_new_attempt_namespace") != "m2-orb-001-recovery-001"
+        or not any("full M2-VERIFY unit is complete" in item for item in orbit_recovery.get("prerequisites", []))
+        or orbit_recovery.get("failure_policy") != "Any recovery failure is terminal for the new recovery identity and requires another explicit review; no automatic retry is authorized."
+        or orbit_recovery_proposal.get("human_gate") != {
+            "review_required": True,
+            "item_id": "M2-ORBIT-RECOVERY-001",
+            "allowed_decisions": ["approve", "revise", "defer"],
+            "required_attestation": True,
+        }
+    ):
+        fail("M2 orbit recovery proposal weakens dependency, fresh-attempt, or retained-evidence controls")
+
+    if (
+        materialization_receipt.get("status") != "pass_materialization_only"
+        or materialization_receipt.get("source_id") != "M1-SRC-001"
+        or materialization_receipt.get("attempt_id") != "fixture-must-not-run"
+        or materialization_receipt.get("file_count") != 26
+        or materialization_receipt.get("total_extracted_bytes") != 1732324248
+        or materialization_receipt.get("raster_readability_established") is not False
+        or materialization_receipt.get("pixel_usability_established") is not False
+        or materialization_receipt.get("scientific_admission_authorized") is not False
+    ):
+        fail("retained test-induced materialization receipt differs or overclaims")
+    if (
+        materialization_boundary_reconciliation.get("status") != "retained_pass_materialization_only_unintended_test_execution"
+        or materialization_boundary_reconciliation.get("trigger", {}).get("corrected_test_sha256") != sha256("tests/test_m2_materialization.py")
+        or materialization_boundary_reconciliation.get("outcome", {}).get("materialization_receipt_sha256") != sha256("records/acquisition/materialization/m1-src-001-fixture-must-not-run.json")
+        or materialization_boundary_reconciliation.get("outcome", {}).get("full_manifest_file_hash_verification") != "pass"
+        or materialization_boundary_reconciliation.get("outcome", {}).get("verified_file_count") != 26
+        or materialization_boundary_reconciliation.get("disposition", {}).get("preserve_external_attempt") is not True
+        or materialization_boundary_reconciliation.get("disposition", {}).get("repeat_automatically_authorized") is not False
+        or materialization_boundary_reconciliation.get("disposition", {}).get("next_processing_released") is not False
+    ):
+        fail("test-induced materialization reconciliation differs")
+
+    if (
+        orbit_failed_attempt.get("event") != "orbit_transfer_failed"
+        or orbit_failed_attempt.get("source_id") != "M2-ORB-001"
+        or orbit_failed_attempt.get("attempt_id") != "m2-orb-001-20260904t050937z-8ed21d05"
+        or orbit_failed_attempt.get("failure_code") != "orbit_redirect_or_http_status_rejected"
+        or orbit_failed_attempt.get("partial_bytes_preserved") != 0
+        or orbit_failed_attempt.get("credential_value_recorded") is not False
+        or orbit_failed_attempt.get("retry_automatically_authorized") is not False
+    ):
+        fail("retained test-induced orbit attempt differs")
+    if (
+        orbit_boundary_reconciliation.get("status") != "review_required_retained_zero_byte_failed_test_execution"
+        or orbit_boundary_reconciliation.get("trigger", {}).get("corrected_test_sha256") != sha256("tests/test_m2_orbit_io.py")
+        or orbit_boundary_reconciliation.get("outcome", {}).get("repository_receipt_sha256") != sha256("records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json")
+        or orbit_boundary_reconciliation.get("outcome", {}).get("partial_bytes_preserved") != 0
+        or orbit_boundary_reconciliation.get("outcome", {}).get("staging_payload_exists") is not False
+        or orbit_boundary_reconciliation.get("outcome", {}).get("destination_payload_exists") is not False
+        or orbit_boundary_reconciliation.get("authority_assessment", {}).get("active_milestone_dependency_satisfied") is not False
+        or orbit_boundary_reconciliation.get("disposition", {}).get("retry_automatically_authorized") is not False
+        or orbit_boundary_reconciliation.get("assertions", {}).get("orbit_payload_bytes_received") != 0
+    ):
+        fail("test-induced orbit attempt reconciliation differs")
+    if (
+        orbit_boundary_correction.get("status") != "pass_full_m2_verify_guard_before_catalogue_token_or_mutation"
+        or orbit_boundary_correction.get("finding_sha256") != sha256("records/acquisition/orbit-test-boundary-reconciliation-001.json")
+        or orbit_boundary_correction.get("correction", {}).get("runner_sha256") != sha256("scripts/acquire_m2_orbit_file.py")
+        or orbit_boundary_correction.get("correction", {}).get("test_refs", {}).get("tests/test_m2_orbit_io.py") != sha256("tests/test_m2_orbit_io.py")
+        or orbit_boundary_correction.get("validation", {}).get("focused_orbit_test_count") != 29
+        or orbit_boundary_correction.get("validation", {}).get("focused_orbit_tests") != "pass"
+        or orbit_boundary_correction.get("validation", {}).get("production_guard_probe_stop_code") != "sentinel_verification_unit_not_complete"
+        or orbit_boundary_correction.get("assertions", {}).get("runner_requires_full_m2_verify_dependency") is not True
+        or orbit_boundary_correction.get("assertions", {}).get("network_requests_performed_by_correction_or_guard_probe") is not False
+        or orbit_boundary_correction.get("assertions", {}).get("orbit_payload_bytes_requested_by_correction_or_guard_probe") != 0
+    ):
+        fail("orbit runner production-boundary correction differs")
+
+    if (
+        orbit_recovery_surface.get("status") != "pass_blank_review_surface"
+        or orbit_recovery_surface.get("artifact", {}).get("sha256") != expected_orbit_recovery_surface_sha
+        or orbit_recovery_surface.get("artifact", {}).get("sha256") != sha256("docs/assets/m2-orbit-recovery-review.png")
+        or orbit_recovery_surface.get("bindings", {}).get("proposal_sha256") != expected_orbit_recovery_proposal_sha
+        or orbit_recovery_surface.get("bindings", {}).get("render_script_sha256") != sha256("scripts/render_m2_orbit_recovery_review.py")
+        or orbit_recovery_surface.get("validation", {}).get("blank_state_verified") is not True
+        or orbit_recovery_surface.get("validation", {}).get("human_decision_count") != 0
+    ):
+        fail("M2 orbit recovery review surface or blank-state receipt differs")
+    expected_orbit_recovery_candidate = "M2-ORBIT-RECOVERY-PROPOSAL-SHA256:" + expected_orbit_recovery_proposal_sha
+    if (
+        orbit_recovery_bundle.get("bundle_id") != "m2-orbit-recovery-review-bundle-001"
+        or orbit_recovery_bundle.get("review_id") != "m2-orbit-recovery-review-001"
+        or orbit_recovery_bundle.get("candidate_identity") != expected_orbit_recovery_candidate
+        or sha256("reviews/m2-orbit-recovery/review-bundle.json") != expected_orbit_recovery_bundle_sha
+        or orbit_recovery_contract.get("review_bundle", {}).get("manifest_sha256") != expected_orbit_recovery_bundle_sha
+        or orbit_recovery_contract.get("review_bundle", {}).get("candidate_identity") != expected_orbit_recovery_candidate
+        or orbit_recovery_contract.get("allowed_decisions") != ["approve", "revise", "defer"]
+        or orbit_recovery_contract.get("required_attestation") is not True
+        or orbit_recovery_contract.get("workflow_authority", {}).get("review_required") is not True
+        or orbit_recovery_contract.get("workflow_authority", {}).get("lock_authorized") is not True
+        or orbit_recovery_contract.get("workflow_authority", {}).get("reconcile_authorized") is not True
+        or "data_acquisition" in orbit_recovery_contract.get("workflow_authority", {}).get("authorized_action_classes", [])
+        or orbit_recovery_contract.get("items") != [{"item_id": "M2-ORBIT-RECOVERY-001", "evidence_sha256": expected_orbit_recovery_bundle_sha}]
+    ):
+        fail("M2 orbit recovery review bundle or contract differs")
+    if orbit_recovery_blank != {
+        "response_schema_version": "nepal-m2-orbit-recovery-response-v1",
+        "review_id": "m2-orbit-recovery-review-001",
+        "completed": False,
+        "review_started_at_utc": None,
+        "review_completed_at_utc": None,
+        "reviewer": {"attestation": False},
+        "responses": [{
+            "item_id": "M2-ORBIT-RECOVERY-001",
+            "evidence_sha256": expected_orbit_recovery_bundle_sha,
+            "decision": None,
+            "notes": "",
+        }],
+    }:
+        fail("M2 orbit recovery blank response differs or contains a human decision")
 
     expected_orbit_proposal_sha = "b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292"
     expected_orbit_bundle_sha = "ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1"
@@ -744,15 +1056,22 @@ def main() -> None:
     active_orbit_assets = orbit_active_intake.get("assets", [])
     if (
         orbit_active_intake.get("status") != "active"
-        or orbit_active_intake.get("extensions", {}).get("status") != "active_authorized_preflight_passed_custody_initialized"
+        or orbit_active_intake.get("extensions", {}).get("status") != "active_acquisition_review_required"
         or orbit_active_intake.get("extensions", {}).get("scope_authority") != "granted_exact_four_resorb_files"
         or orbit_active_intake.get("extensions", {}).get("amendment_approval_sha256") != sha256("records/source-gates/m2-orbit-amendment-approval.json")
         or orbit_active_intake.get("extensions", {}).get("preflight_sha256") != sha256("records/acquisition/orbit-preflight.json")
         or orbit_active_intake.get("extensions", {}).get("source_gate_sha256") != sha256("records/source-gates/m2-orbit-live-source-gate.json")
         or orbit_active_intake.get("extensions", {}).get("custody_initialization_sha256") != sha256("records/acquisition/orbit-custody-initialization.json")
-        or orbit_active_intake.get("extensions", {}).get("sentinel_custody_prerequisite_status") != "pending_zero_of_six_promoted_and_verified"
+        or orbit_active_intake.get("extensions", {}).get("sentinel_custody_prerequisite_status") != "partial_three_of_six_promoted_and_verified_one_failed_two_unattempted"
+        or orbit_active_intake.get("extensions", {}).get("current_orbit_state_counts") != {"authorized": 3, "failed": 1, "promoted": 0}
+        or orbit_active_intake.get("extensions", {}).get("current_sentinel_state_counts") != {"authorized": 4, "failed": 1, "promoted": 3}
         or [asset.get("extensions", {}).get("source_id") for asset in active_orbit_assets] != [f"M2-ORB-{index:03d}" for index in range(1, 5)]
-        or any(asset.get("state") != "authorized" or asset.get("attempts") != [] for asset in active_orbit_assets)
+        or active_orbit_assets[0].get("state") != "failed"
+        or len(active_orbit_assets[0].get("attempts", [])) != 1
+        or active_orbit_assets[0].get("attempts", [{}])[0].get("attempt_id") != "m2-orb-001-20260904t050937z-8ed21d05"
+        or active_orbit_assets[0].get("attempts", [{}])[0].get("outcome") != "failed"
+        or active_orbit_assets[0].get("failure", {}).get("code") != "orbit_redirect_or_http_status_rejected"
+        or any(asset.get("state") != "authorized" or asset.get("attempts") != [] for asset in active_orbit_assets[1:])
     ):
         fail("active M2 orbit intake identity, custody, or pending-prerequisite state differs")
     if (
@@ -829,13 +1148,13 @@ def main() -> None:
         "preflight_sha256": sha256("records/acquisition/orbit-preflight.json"),
         "custody_initialization_ref": "records/acquisition/orbit-custody-initialization.json",
         "custody_initialization_sha256": sha256("records/acquisition/orbit-custody-initialization.json"),
-        "scripts_m2_orbit_io_core_py_sha256": sha256("scripts/m2_orbit_io_core.py"),
-        "scripts_acquire_m2_orbit_file_py_sha256": sha256("scripts/acquire_m2_orbit_file.py"),
-        "scripts_verify_m2_orbit_eof_py_sha256": sha256("scripts/verify_m2_orbit_eof.py"),
-        "tests_test_m2_orbit_activation_py_sha256": sha256("tests/test_m2_orbit_activation.py"),
-        "tests_test_m2_orbit_preflight_py_sha256": sha256("tests/test_m2_orbit_preflight.py"),
-        "tests_test_m2_orbit_io_py_sha256": sha256("tests/test_m2_orbit_io.py"),
-        "_github_workflows_validate_yml_sha256": sha256(".github/workflows/validate.yml"),
+        "scripts_m2_orbit_io_core_py_sha256": "09a2c3579a89b223e8ed1d74a120bf74f1ff7c79d4be979eb30fc0d679e9596d",
+        "scripts_acquire_m2_orbit_file_py_sha256": "eaa21a82a6eb38a471e05b1fa9df2f5aa6378d087b6da0dfe5377abfab3b7248",
+        "scripts_verify_m2_orbit_eof_py_sha256": "f043ffacdad9f0cc135f91a0a46e4a19e92303bf9bc48b04ca96968a641ec30c",
+        "tests_test_m2_orbit_activation_py_sha256": "da1e9e82aa38e10b0ba9fb6d3e68548d8ea80f2b3a6c91c0de54615c886728fe",
+        "tests_test_m2_orbit_preflight_py_sha256": "888c73e84c665c2318739ed95d0e65799d51a67181c67b57eb6660635c8344f0",
+        "tests_test_m2_orbit_io_py_sha256": "607e48fb0ad36d1f150c843add471aa6b0991a57e9933184eec18d05cd167937",
+        "_github_workflows_validate_yml_sha256": "885df3ee211dc31b2ea96b81a1df25ca7f474a09f73beeef73cd72b969f73bd1",
     }
     if (
         orbit_runner_readiness.get("status") != "pass_static_synthetic_and_guard_probe_transfer_blocked_on_sentinel_custody"
@@ -917,7 +1236,7 @@ def main() -> None:
         orbit_intake_label_correction.get("status") != "pass_root_status_corrected_active_transfer_still_blocked"
         or orbit_intake_label_correction.get("finding_sha256") != sha256("records/acquisition/orbit-intake-activation-label-inconsistency.json")
         or orbit_intake_label_correction.get("intake_sha256_before_correction") != "b52512ecf86a7d85f99f5cff932219bc29620f08871e3b3242b76b645b0e2604"
-        or orbit_intake_label_correction.get("intake_sha256_after_correction") != sha256("contracts/m2-orbit-intake.json")
+        or orbit_intake_label_correction.get("intake_sha256_after_correction") != "9e1c2675b4716ec78fbca8c3c2e9cf0bd3df20cf6362b5bba0db4de582a27539"
         or orbit_intake_label_correction.get("correction") != {
             "field": "status",
             "before": "candidate_not_active",
@@ -1855,7 +2174,7 @@ def main() -> None:
         ("M2-DEM-VERIFY", expected_dem_verify_status),
         ("M2-ORBIT-AMEND", "complete"),
         ("M2-ORBIT-PREFLIGHT", "complete"),
-        ("M2-ORBIT-ACQUIRE", "planned"),
+        ("M2-ORBIT-ACQUIRE", "blocked_retained_failure_review"),
         ("M2-ORBIT-VERIFY", "planned"),
         ("M2-ORBIT-APPLY", "planned"),
     ):
@@ -2342,6 +2661,10 @@ def main() -> None:
     if materialization_readiness.get("status") != "pass_synthetic_only_real_materialization_deferred":
         fail("M2 materialization readiness status differs")
     materialization_bindings = materialization_readiness.get("bindings", {})
+    historical_materialization_hashes = {
+        "active_m2_ref": "188af4575401473bb464dff84b83a90a41751b176c6a5e63a76f62acbe4e6bfb",
+        "test_ref": "be2287d52730aeaeed2bb7b670e9596f229e0cf1aa3afd80ba72c1a6e37a267f",
+    }
     for ref_key, hash_key in (
         ("contract_ref", "contract_sha256"),
         ("core_ref", "core_sha256"),
@@ -2356,11 +2679,7 @@ def main() -> None:
         relative = materialization_bindings.get(ref_key)
         if not isinstance(relative, str) or not (ROOT / relative).is_file():
             fail(f"M2 materialization readiness is missing {ref_key}")
-        expected_hash = (
-            "188af4575401473bb464dff84b83a90a41751b176c6a5e63a76f62acbe4e6bfb"
-            if ref_key == "active_m2_ref"
-            else sha256(relative)
-        )
+        expected_hash = historical_materialization_hashes.get(ref_key, sha256(relative))
         if materialization_bindings.get(hash_key) != expected_hash:
             fail(f"M2 materialization readiness does not bind {ref_key}")
     materialization_validation = materialization_readiness.get("validation", {})
@@ -2820,12 +3139,51 @@ def main() -> None:
         expected_checkpoint = derive_checkpoint(state_counts)["checkpoint_id"]
     except ValueError as exc:
         fail(f"active M2 acquisition checkpoint is ambiguous: {exc}")
-    if profile["current_checkpoint"]["checkpoint_id"] != expected_checkpoint or goal.get("current_checkpoint") != expected_checkpoint:
-        fail(f"profile and goal checkpoint must reconcile to {expected_checkpoint}")
-    if m2_units.get("M2-ACQUIRE", {}).get("status") != "ready":
-        fail("M2 acquisition unit must remain ready while one-product intake is incomplete")
-    if m2_units["M2-ACQUIRE"].get("gates", {}).get("authentication") != "waiting_for_secret_safe_existing_owner_credential_reference":
-        fail("each M2 acquisition invocation must still require a current secret-safe credential reference")
+    if (
+        profile["current_checkpoint"]["checkpoint_id"] != expected_checkpoint
+        or goal.get("current_checkpoint") != expected_checkpoint
+        or active_m2.get("handoff", {}).get("current_checkpoint") != expected_checkpoint
+    ):
+        fail(f"profile, goal, and milestone handoff must reconcile to {expected_checkpoint}")
+    expected_recovery_next_action = "Review M2 Sentinel recovery bundle SHA-256 dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7 and proposal SHA-256 7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013; approve, revise, or defer the single fresh byte-zero M1-SRC-004 recovery. No automatic retry or further Sentinel transfer is released before a completed decision."
+    acquire_unit = m2_units.get("M2-ACQUIRE", {})
+    if state_counts.get("failed", 0):
+        if acquire_unit.get("status") != "blocked_retained_failure_review":
+            fail("M2 acquisition unit must fail closed while a retained transfer failure awaits review")
+        if acquire_unit.get("disposition") != "review_required":
+            fail("M2 acquisition unit must expose the retained-failure review disposition")
+        if acquire_unit.get("gates", {}).get("authentication") != "existing_owner_controlled_credential_reference_confirmed":
+            fail("M2 acquisition unit must preserve the confirmed secret-safe credential-reference boundary")
+        if acquire_unit.get("gates", {}).get("retained_failure_review") != "required":
+            fail("M2 acquisition unit must require retained-failure review")
+        if (
+            acquire_unit.get("gates", {}).get("retained_failure_review_ref") != "reviews/m2-sentinel-recovery/review-contract.json"
+            or acquire_unit.get("gates", {}).get("retained_failure_review_bundle_sha256") != expected_recovery_bundle_sha
+            or acquire_unit.get("gates", {}).get("retained_failure_recovery_proposal_sha256") != expected_recovery_proposal_sha
+            or profile.get("current_checkpoint", {}).get("next_action") != expected_recovery_next_action
+            or active_m2.get("handoff", {}).get("next_action") != expected_recovery_next_action
+        ):
+            fail("M2 acquisition unit and current handoff do not bind the exact recovery review")
+        retained_failures = acquire_unit.get("retained_failures", [])
+        failed_assets = [asset for asset in active_intake.get("assets", []) if asset.get("state") == "failed"]
+        if len(retained_failures) != len(failed_assets):
+            fail("M2 acquisition unit retained-failure count differs from active intake")
+        retained_by_source = {item.get("source_id"): item for item in retained_failures if isinstance(item, dict)}
+        for asset in failed_assets:
+            source_id = asset.get("extensions", {}).get("source_id")
+            attempt = asset.get("attempts", [{}])[0]
+            retained = retained_by_source.get(source_id, {})
+            if (
+                retained.get("attempt_id") != attempt.get("attempt_id")
+                or retained.get("failure_code") != asset.get("failure", {}).get("code")
+                or retained.get("retry_automatically_authorized") is not False
+            ):
+                fail(f"M2 acquisition unit retained-failure binding differs for {source_id}")
+    else:
+        if acquire_unit.get("status") != "ready":
+            fail("M2 acquisition unit must remain ready while one-product intake is incomplete and no failure is retained")
+        if acquire_unit.get("gates", {}).get("authentication") != "waiting_for_secret_safe_existing_owner_credential_reference":
+            fail("each M2 acquisition invocation must still require a current secret-safe credential reference")
     if custody_receipt.get("status") != "created_and_verified":
         fail("M2 custody initialization receipt is not passing")
     if custody_receipt.get("bindings", {}).get("preflight_sha256") != sha256("records/acquisition/preflight.json") or custody_receipt.get("bindings", {}).get("source_gate_sha256") != sha256("records/source-gates/m2-live-source-gate.json"):
@@ -2850,7 +3208,7 @@ def main() -> None:
         fail("M2 transfer-runner readiness receipt must preserve eleven passing local tests")
     expected_transfer_correction_bindings = {
         "active_intake_ref": "contracts/m2-intake.json",
-        "active_intake_sha256": sha256("contracts/m2-intake.json"),
+        "active_intake_sha256": INITIAL_ACTIVE_INTAKE_SHA256,
         "initial_intake_snapshot_ref": "records/acquisition/active-intake-initial-snapshot.json",
         "initial_intake_snapshot_sha256": sha256("records/acquisition/active-intake-initial-snapshot.json"),
         "activation_approval_ref": "records/source-gates/m2-activation-approval.json",
@@ -3427,7 +3785,12 @@ def main() -> None:
         relative = materialization_evidence.get(ref_key)
         if not isinstance(relative, str) or not (ROOT / relative).is_file():
             fail(f"EVID-0025 is missing {ref_key}")
-        if materialization_evidence.get(hash_key) != sha256(relative):
+        expected_hash = (
+            "be2287d52730aeaeed2bb7b670e9596f229e0cf1aa3afd80ba72c1a6e37a267f"
+            if ref_key == "test_ref"
+            else sha256(relative)
+        )
+        if materialization_evidence.get(hash_key) != expected_hash:
             fail(f"EVID-0025 does not bind {ref_key}")
     if materialization_evidence.get("status") != "pass_synthetic_only_real_materialization_deferred":
         fail("EVID-0025 must preserve its synthetic-only deferred status")
@@ -4088,7 +4451,7 @@ def main() -> None:
         or orbit_label_correction_evidence.get("finding_sha256") != sha256("records/acquisition/orbit-intake-activation-label-inconsistency.json")
         or orbit_label_correction_evidence.get("correction_ref") != "records/acquisition/orbit-intake-activation-label-correction.json"
         or orbit_label_correction_evidence.get("correction_sha256") != sha256("records/acquisition/orbit-intake-activation-label-correction.json")
-        or orbit_label_correction_evidence.get("active_intake_sha256") != sha256("contracts/m2-orbit-intake.json")
+        or orbit_label_correction_evidence.get("active_intake_sha256") != "9e1c2675b4716ec78fbca8c3c2e9cf0bd3df20cf6362b5bba0db4de582a27539"
         or orbit_label_correction_evidence.get("validation") != orbit_intake_label_correction.get("validation")
         or orbit_label_correction_evidence.get("assertions") != orbit_intake_label_correction.get("assertions")
     ):
@@ -4117,6 +4480,84 @@ def main() -> None:
         or sentinel_refresh_evidence.get("assertions") != sentinel_refresh_readiness.get("assertions")
     ):
         fail("EVID-0061 Sentinel terms reconciliation and preflight refresh differ")
+
+    sentinel_acquisition_evidence = ledger_by_id.get("EVID-0062")
+    expected_attempt_receipts = {
+        item["source_id"]: item["transfer_receipt_sha256"]
+        for item in successful_reconciliation
+    }
+    expected_attempt_receipts["M1-SRC-004"] = failed_attempt_sha
+    expected_container_receipts = {
+        item["source_id"]: item["container_receipt_sha256"]
+        for item in successful_reconciliation
+    }
+    if (
+        not isinstance(sentinel_acquisition_evidence, dict)
+        or sentinel_acquisition_evidence.get("status") != "pass_three_promoted_one_retained_failure_recovery_review_ready"
+        or sentinel_acquisition_evidence.get("reconciliation_sha256") != sha256("records/acquisition/sentinel-acquisition-reconciliation-001.json")
+        or sentinel_acquisition_evidence.get("active_intake_sha256") != sha256("contracts/m2-intake.json")
+        or sentinel_acquisition_evidence.get("recovery_proposal_sha256") != expected_recovery_proposal_sha
+        or sentinel_acquisition_evidence.get("review_bundle_sha256") != expected_recovery_bundle_sha
+        or sentinel_acquisition_evidence.get("review_contract_sha256") != sha256("reviews/m2-sentinel-recovery/review-contract.json")
+        or sentinel_acquisition_evidence.get("blank_response_sha256") != sha256("reviews/m2-sentinel-recovery/blank-response.json")
+        or sentinel_acquisition_evidence.get("review_surface_sha256") != expected_recovery_surface_sha
+        or sentinel_acquisition_evidence.get("attempt_receipt_sha256") != expected_attempt_receipts
+        or sentinel_acquisition_evidence.get("container_receipt_sha256") != expected_container_receipts
+        or sentinel_acquisition_evidence.get("state_counts") != {"authorized": 4, "failed": 1, "promoted": 3}
+        or sentinel_acquisition_evidence.get("assertions", {}).get("recovery_transfers_performed") != 0
+        or sentinel_acquisition_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or sentinel_acquisition_evidence.get("assertions", {}).get("retry_automatically_authorized") is not False
+        or sentinel_acquisition_evidence.get("assertions", {}).get("credential_values_recorded") is not False
+        or sentinel_acquisition_evidence.get("assertions", {}).get("pixel_usability_established") is not False
+        or sentinel_acquisition_evidence.get("assertions", {}).get("scientific_fitness_established") is not False
+    ):
+        fail("EVID-0062 Sentinel acquisition and recovery review differs")
+
+    materialization_boundary_evidence = ledger_by_id.get("EVID-0063")
+    if (
+        not isinstance(materialization_boundary_evidence, dict)
+        or materialization_boundary_evidence.get("status") != materialization_boundary_reconciliation.get("status")
+        or materialization_boundary_evidence.get("reconciliation_ref") != "records/acquisition/materialization-test-boundary-reconciliation-001.json"
+        or materialization_boundary_evidence.get("reconciliation_sha256") != sha256("records/acquisition/materialization-test-boundary-reconciliation-001.json")
+        or materialization_boundary_evidence.get("materialization_receipt_ref") != "records/acquisition/materialization/m1-src-001-fixture-must-not-run.json"
+        or materialization_boundary_evidence.get("materialization_receipt_sha256") != sha256("records/acquisition/materialization/m1-src-001-fixture-must-not-run.json")
+        or materialization_boundary_evidence.get("external_manifest_sha256") != materialization_boundary_reconciliation.get("outcome", {}).get("external_manifest_sha256")
+        or materialization_boundary_evidence.get("file_count") != 26
+        or materialization_boundary_evidence.get("total_extracted_bytes") != 1732324248
+        or materialization_boundary_evidence.get("assertions", {}).get("full_manifest_file_hash_verification") != "pass"
+        or materialization_boundary_evidence.get("assertions", {}).get("repeat_automatically_authorized") is not False
+        or materialization_boundary_evidence.get("assertions", {}).get("next_processing_released") is not False
+        or materialization_boundary_evidence.get("assertions", {}).get("pixel_usability_established") is not False
+        or materialization_boundary_evidence.get("assertions", {}).get("scientific_admission_authorized") is not False
+    ):
+        fail("EVID-0063 test-induced materialization reconciliation differs")
+
+    orbit_boundary_evidence = ledger_by_id.get("EVID-0064")
+    if (
+        not isinstance(orbit_boundary_evidence, dict)
+        or orbit_boundary_evidence.get("status") != "review_required_zero_byte_failure_preserved_full_m2_verify_guard_pass_orbit_recovery_review_ready"
+        or orbit_boundary_evidence.get("reconciliation_sha256") != sha256("records/acquisition/orbit-test-boundary-reconciliation-001.json")
+        or orbit_boundary_evidence.get("runner_correction_sha256") != sha256("records/acquisition/orbit-runner-production-boundary-correction-001.json")
+        or orbit_boundary_evidence.get("failed_attempt_sha256") != sha256("records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json")
+        or orbit_boundary_evidence.get("recovery_proposal_sha256") != expected_orbit_recovery_proposal_sha
+        or orbit_boundary_evidence.get("review_bundle_sha256") != expected_orbit_recovery_bundle_sha
+        or orbit_boundary_evidence.get("review_contract_sha256") != sha256("reviews/m2-orbit-recovery/review-contract.json")
+        or orbit_boundary_evidence.get("blank_response_sha256") != sha256("reviews/m2-orbit-recovery/blank-response.json")
+        or orbit_boundary_evidence.get("review_surface_sha256") != expected_orbit_recovery_surface_sha
+        or orbit_boundary_evidence.get("state_counts") != {
+            "orbit": {"authorized": 3, "failed": 1, "promoted": 0},
+            "sentinel": {"authorized": 4, "failed": 1, "promoted": 3},
+        }
+        or orbit_boundary_evidence.get("assertions", {}).get("owner_credential_used_in_failed_attempt") is not False
+        or orbit_boundary_evidence.get("assertions", {}).get("orbit_payload_bytes_received") != 0
+        or orbit_boundary_evidence.get("assertions", {}).get("runner_requires_full_m2_verify_dependency") is not True
+        or orbit_boundary_evidence.get("assertions", {}).get("guard_precedes_catalogue_and_token_access") is not True
+        or orbit_boundary_evidence.get("assertions", {}).get("retry_automatically_authorized") is not False
+        or orbit_boundary_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or orbit_boundary_evidence.get("assertions", {}).get("radar_processing_performed") is not False
+        or orbit_boundary_evidence.get("assertions", {}).get("scientific_result_established") is not False
+    ):
+        fail("EVID-0064 orbit boundary correction and recovery review differs")
 
     violations = []
     for relative in tracked_files():

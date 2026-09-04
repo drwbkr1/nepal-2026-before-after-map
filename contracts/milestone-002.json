@@ -242,7 +242,7 @@
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
-      "status": "ready",
+      "status": "blocked_retained_failure_review",
       "inputs": [
         "records/acquisition/preflight.json",
         "records/source-gates/m2-live-source-gate.json",
@@ -256,20 +256,37 @@
       ],
       "gates": {
         "custody_initialization": "pass",
-        "authentication": "waiting_for_secret_safe_existing_owner_credential_reference",
+        "authentication": "existing_owner_controlled_credential_reference_confirmed",
         "new_terms_or_account_action": "stop",
         "custody_initialization_ref": "records/acquisition/custody-initialization.json",
-        "custody_initialization_sha256": "12812d1c53e13ec287425f74a1988f5c0be7d0638f856c9606fddf1c1431fb09"
+        "custody_initialization_sha256": "12812d1c53e13ec287425f74a1988f5c0be7d0638f856c9606fddf1c1431fb09",
+        "retained_failure_review": "required",
+        "retained_failure_review_ref": "reviews/m2-sentinel-recovery/review-contract.json",
+        "retained_failure_review_bundle_sha256": "dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7",
+        "retained_failure_recovery_proposal_sha256": "7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013"
       },
-      "disposition": null,
-      "retained_failures": [],
+      "disposition": "review_required",
+      "retained_failures": [
+        {
+          "source_id": "M1-SRC-004",
+          "attempt_id": "m1-src-004-20260904t043930z-ac125c11",
+          "failure_code": "transferred_size_mismatch",
+          "partial_bytes_preserved": 561593598,
+          "receipt_ref": "records/acquisition/attempts/m1-src-004-20260904t043930z-ac125c11.json",
+          "receipt_sha256": "8cbaf911e5a3329c5aa00a7288e237fa71987a2d4f03cea8c630c7dd28b9e7e9",
+          "retry_automatically_authorized": false
+        }
+      ],
       "exit_condition_delta": {
         "expected": [
           "EXIT-201-VERIFIED-CUSTODY"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "The approved empty custody structure is verified. No product transfer can begin until a secret-safe reference to an existing owner-controlled CDSE credential or authenticated session is available."
+        "observed": [
+          "3 of 8 exact products promoted and passed offline container verification",
+          "M1-SRC-004 retained a 561593598-byte truncated transfer"
+        ],
+        "decision_value": "review_required",
+        "rationale": "Three exact products are promoted and container-verified. M1-SRC-004 failed exact-length verification; its partial and append-only failure evidence are preserved, and no automatic retry or further product transfer is permitted before review."
       },
       "next_dependency": "M2-VERIFY"
     },
@@ -281,25 +298,40 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "planned",
+      "status": "blocked_retained_failure_review",
       "inputs": [
         "external custody products",
-        "contracts/m2-offline-verification-candidate.json"
+        "contracts/m2-offline-verification.json"
       ],
       "outputs": [
-        "records/acquisition/verification-summary.json"
+        "three passing container-only receipts",
+        "retained M1-SRC-004 transfer failure"
       ],
-      "gates": {},
-      "disposition": null,
-      "retained_failures": [],
+      "gates": {
+        "container_verified_count": 3,
+        "retained_failed_transfer_count": 1,
+        "authorized_unattempted_count": 4,
+        "sentinel_recovery_review": "required"
+      },
+      "disposition": "partial_container_only_review_required",
+      "retained_failures": [
+        {
+          "source_id": "M1-SRC-004",
+          "failure_code": "transferred_size_mismatch",
+          "recovery_review": "required"
+        }
+      ],
       "exit_condition_delta": {
         "expected": [
           "EXIT-201-VERIFIED-CUSTODY",
           "EXIT-202-PIXEL-AND-RIGHTS-QA"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "No acquired bytes are available for verification yet."
+        "observed": [
+          "three exact archives passed container-only verification",
+          "one exact transfer remains a retained failure"
+        ],
+        "decision_value": "review_required",
+        "rationale": "The eight-product unit is incomplete. Container-only passes do not establish pixel or rights QA, and the retained M1-SRC-004 failure blocks unit completion."
       },
       "next_dependency": "M2-BASELINE"
     },
@@ -576,7 +608,7 @@
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
-      "status": "planned",
+      "status": "blocked_retained_failure_review",
       "inputs": [
         "records/source-gates/m2-orbit-live-source-gate.json",
         "records/acquisition/orbit-preflight.json",
@@ -587,23 +619,43 @@
         "records/acquisition orbit transfer receipts"
       ],
       "gates": {
-        "matching_sentinel_promoted_and_verified": false,
+        "matching_sentinel_promoted_and_verified": "partial_two_of_two_for_failed_orbit_but_m2_verify_incomplete",
+        "milestone_dependency_m2_verify": "not_satisfied",
         "fresh_source_preflight": "pass",
         "orbit_custody_initialized": true,
-        "token_presence_checked": false
+        "token_presence_checked": "synthetic_test_literal_only",
+        "retained_failure_review": "required",
+        "retained_failure_reconciliation_ref": "records/acquisition/orbit-test-boundary-reconciliation-001.json",
+        "retained_failure_reconciliation_sha256": "40dae0623dcc142cec17ff2108752e5e60bd736a241fe4b83e8f04c5de690025",
+        "retained_failure_review_ref": "reviews/m2-orbit-recovery/review-contract.json",
+        "retained_failure_review_bundle_sha256": "df5aa9d0d03f8ee30a5cd74b91f74a88c83a525e762c22b0bd2b6773ccb5bc6b",
+        "retained_failure_recovery_proposal_sha256": "ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a"
       },
-      "disposition": null,
-      "retained_failures": [],
+      "disposition": "review_required",
+      "retained_failures": [
+        {
+          "source_id": "M2-ORB-001",
+          "attempt_id": "m2-orb-001-20260904t050937z-8ed21d05",
+          "failure_code": "orbit_redirect_or_http_status_rejected",
+          "partial_bytes_preserved": 0,
+          "receipt_ref": "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
+          "receipt_sha256": "a7057479f4dfb867ead6c9622d684c07df51af9db6c39a6fa2dc6d94ae7afc9c",
+          "retry_automatically_authorized": false
+        }
+      ],
       "exit_condition_delta": {
         "expected": [
           "EXIT-201-VERIFIED-CUSTODY"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "Orbit transfer remains blocked until fresh preflight passes and each bound Sentinel source is promoted and verified."
+        "observed": [
+          "one test-induced M2-ORB-001 request failed before receiving payload bytes",
+          "zero orbit products promoted"
+        ],
+        "decision_value": "review_required",
+        "rationale": "A stale production-wrapper test crossed its expected guard after two bound Sentinel products became eligible. The exact attempt is retained, automatic retry is false, and the runner now requires the full M2-VERIFY dependency before catalogue or token access."
       },
       "next_dependency": "M2-ORBIT-VERIFY",
-      "rationale": "Empty orbit custody is verified; payload transfer remains blocked on matching verified Sentinel custody."
+      "rationale": "Orbit acquisition is blocked on the incomplete full Sentinel verification unit and on explicit review of the retained zero-byte M2-ORB-001 failure."
     },
     {
       "id": "M2-ORBIT-VERIFY",
@@ -725,13 +777,15 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-AUTHENTICATION-REFERENCE",
-    "next_action": "Provide a secret-safe reference to an existing owner-controlled CDSE access token or authenticated session; then revalidate the exact first product before transfer. Do not place a token, password, cookie, or header in Git or chat.",
+    "current_checkpoint": "M2-ACQUISITION-REVIEW",
+    "next_action": "Review M2 Sentinel recovery bundle SHA-256 dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7 and proposal SHA-256 7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013; approve, revise, or defer the single fresh byte-zero M1-SRC-004 recovery. No automatic retry or further Sentinel transfer is released before a completed decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
-      "No full-product bytes are yet in custody and no pixel usability or scientific change is established.",
-      "The post-event optical route remains high-cloud-risk and may be inconclusive."
+      "Three exact Sentinel-1 products are promoted and container-verified; M1-SRC-004 remains a retained truncated transfer, and four products remain unattempted.",
+      "The post-event optical route remains high-cloud-risk and may be inconclusive.",
+      "A test-induced M1-SRC-001 SAFE materialization passed exact offline extraction controls and is retained with explicit unintended-test provenance; it establishes no readable pixels or scientific result.",
+      "A test-induced M2-ORB-001 attempt used a tracked nonsecret test literal, made a catalogue and rejected download request, received zero payload bytes, and is retained as a terminal failure requiring review."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."

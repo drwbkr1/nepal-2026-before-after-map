@@ -137,13 +137,19 @@ class M2DemActivationTests(unittest.TestCase):
                 "records/source-gates/m2-orbit-amendment-approval.json",
             ],
         )
-        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-AUTHENTICATION-REFERENCE")
+        primary_intake = load("contracts/m2-intake.json")
+        expected_primary_checkpoint = (
+            "M2-ACQUISITION-REVIEW"
+            if any(asset.get("state") == "failed" for asset in primary_intake["assets"])
+            else "M2-ACQUISITION-IN-PROGRESS"
+        )
+        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], expected_primary_checkpoint)
         self.assertEqual(self.profile["parallel_checkpoints"][0]["checkpoint_id"], expected_checkpoint)
         self.assertEqual(self.profile["parallel_checkpoints"][1]["checkpoint_id"], "M2-DEM-TERRAIN-RESULT-REVIEW")
-        self.assertEqual(self.profile["parallel_checkpoints"][2]["checkpoint_id"], "M2-ORBIT-SENTINEL-CUSTODY")
+        self.assertEqual(self.profile["parallel_checkpoints"][2]["checkpoint_id"], "M2-ORBIT-ACQUISITION-REVIEW")
         self.assertEqual(
             self.goal["parallel_checkpoints"],
-            [expected_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-SENTINEL-CUSTODY"],
+            [expected_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-ACQUISITION-REVIEW"],
         )
 
     def test_activation_receipt_preserves_published_outputs_and_claim_boundary(self) -> None:

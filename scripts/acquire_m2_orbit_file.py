@@ -46,6 +46,7 @@ LIVE_SOURCE_GATE_PATH = ROOT / "records/source-gates/m2-orbit-live-source-gate.j
 MANIFEST_PATH = ROOT / "records/source-gates/m2-orbit-candidate-manifest.json"
 PROPOSAL_PATH = ROOT / "contracts/milestone-002-orbit-amendment-proposal.json"
 REVIEW_BUNDLE_PATH = ROOT / "reviews/m2-orbit-amendment/review-bundle.json"
+MILESTONE_PATH = ROOT / "contracts/milestone-002.json"
 DOWNLOAD_HOST = "download.dataspace.copernicus.eu"
 CATALOGUE_BASE = "https://catalogue.dataspace.copernicus.eu/odata/v1/Products"
 TOKEN_ENVIRONMENT_REFERENCE = "CDSE_ACCESS_TOKEN"
@@ -89,6 +90,7 @@ def authority_and_activation_guard() -> dict[str, dict[str, Any]]:
     ):
         raise TransferControlError("orbit_approval_identity_or_scope_drift")
     required = {
+        "milestone": MILESTONE_PATH,
         "intake": ACTIVE_INTAKE_PATH,
         "verification": ACTIVE_VERIFICATION_PATH,
         "preflight": PREFLIGHT_PATH,
@@ -100,6 +102,16 @@ def authority_and_activation_guard() -> dict[str, dict[str, Any]]:
     controls = {name: load(path) for name, path in required.items()}
     controls["approval"] = approval
     controls["manifest"] = load(MANIFEST_PATH)
+
+    milestone = controls["milestone"]
+    verification_units = [unit for unit in milestone.get("units", []) if unit.get("id") == "M2-VERIFY"]
+    if (
+        milestone.get("status") != "active"
+        or milestone.get("authority", {}).get("authority_ref") != "records/source-gates/m2-activation-approval.json"
+        or len(verification_units) != 1
+        or verification_units[0].get("status") != "complete"
+    ):
+        raise TransferControlError("sentinel_verification_unit_not_complete")
 
     intake = controls["intake"]
     verification = controls["verification"]

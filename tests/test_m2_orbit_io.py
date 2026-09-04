@@ -211,7 +211,7 @@ class M2OrbitIOTests(unittest.TestCase):
         with self.assertRaisesRegex(OrbitControlError, "provider_checksum_set_incomplete"):
             provider_checksum_map([{"algorithm": "MD5", "value": "bb"}])
 
-    def test_production_entrypoints_refuse_before_sentinel_custody_without_reading_token(self) -> None:
+    def test_production_entrypoints_refuse_before_m2_verification_without_reading_token(self) -> None:
         candidate_paths = [
             ROOT / "contracts/m2-orbit-intake-candidate.json",
             ROOT / "contracts/m2-orbit-offline-verification-candidate.json",
@@ -220,6 +220,14 @@ class M2OrbitIOTests(unittest.TestCase):
             ROOT / "contracts/m2-orbit-offline-verification.json",
         ]
         before = {path: hashlib.sha256(path.read_bytes()).hexdigest() for path in candidate_paths}
+        milestone = json.loads((ROOT / "contracts/milestone-002.json").read_text(encoding="utf-8"))
+        verification_unit = next(unit for unit in milestone["units"] if unit["id"] == "M2-VERIFY")
+        if verification_unit["status"] == "complete":
+            self.skipTest("M2-VERIFY is complete; no safe production-wrapper refusal probe remains")
+        orbit_attempt_root = ROOT / "records" / "acquisition" / "orbit-attempts"
+        external_event_root = ROOT.parent / f"{ROOT.name}-data" / ".intake-staging" / "nepal-m2-orbit-intake-001" / "attempt-events"
+        before_attempts = sorted(str(path.relative_to(orbit_attempt_root)) for path in orbit_attempt_root.rglob("*") if path.is_file()) if orbit_attempt_root.exists() else []
+        before_events = sorted(str(path.relative_to(external_event_root)) for path in external_event_root.rglob("*") if path.is_file()) if external_event_root.exists() else []
         environment = dict(os.environ)
         environment["CDSE_ACCESS_TOKEN"] = "fixture-secret-must-not-be-read"
         transfer = subprocess.run(
@@ -231,8 +239,12 @@ class M2OrbitIOTests(unittest.TestCase):
             check=False,
         )
         self.assertEqual(transfer.returncode, 12)
-        self.assertEqual(json.loads(transfer.stdout)["code"], "bound_sentinel_source_not_promoted")
+        self.assertEqual(json.loads(transfer.stdout)["code"], "sentinel_verification_unit_not_complete")
         self.assertNotIn("fixture-secret", transfer.stdout + transfer.stderr)
+        after_attempts = sorted(str(path.relative_to(orbit_attempt_root)) for path in orbit_attempt_root.rglob("*") if path.is_file()) if orbit_attempt_root.exists() else []
+        after_events = sorted(str(path.relative_to(external_event_root)) for path in external_event_root.rglob("*") if path.is_file()) if external_event_root.exists() else []
+        self.assertEqual(after_attempts, before_attempts)
+        self.assertEqual(after_events, before_events)
         with tempfile.TemporaryDirectory() as temporary:
             verification = subprocess.run(
                 [

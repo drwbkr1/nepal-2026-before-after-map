@@ -1,0 +1,56 @@
+{
+  "record_version": "1.0",
+  "record_id": "NEPAL-M2-MATERIALIZATION-TEST-BOUNDARY-RECONCILIATION-001",
+  "verified_at_utc": "2026-09-04T16:54:21Z",
+  "status": "retained_pass_materialization_only_unintended_test_execution",
+  "trigger": {
+    "command_class": "full_repository_unittest_discovery",
+    "test_ref": "tests/test_m2_materialization.py",
+    "pre_correction_test_sha256": "be2287d52730aeaeed2bb7b670e9596f229e0cf1aa3afd80ba72c1a6e37a267f",
+    "corrected_test_sha256": "092d7912d3ccc4bd113964b432e5afa975e78bab1ac2c749fb932020f18d8058",
+    "failed_assumption": "M1-SRC-001 would still be unpromoted when the production-wrapper refusal test ran"
+  },
+  "outcome": {
+    "source_id": "M1-SRC-001",
+    "attempt_id": "fixture-must-not-run",
+    "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE",
+    "materialization_receipt_ref": "records/acquisition/materialization/m1-src-001-fixture-must-not-run.json",
+    "materialization_receipt_sha256": "8c1d0c33eee7ab9d562aa9d6273b3188354c4c15be58d6faf7f0b86368b241e9",
+    "external_attempt_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-001\\fixture-must-not-run",
+    "external_manifest_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-001\\fixture-must-not-run\\materialization-manifest.json",
+    "external_manifest_sha256": "3756a702efb9a7d1c1f61e284fabf017702e34073b82c44a3571f213d01295e9",
+    "started_event_sha256": "19931ad4f5bb9c2b127b7b640f3b34714743e0cba9ab3ee669c55afd4ba6274f",
+    "completed_event_sha256": "8236c0e2a1b24cd228cb1ec7aa53e429d459cd21ace872263bcf7149841f58c3",
+    "file_count": 26,
+    "total_extracted_bytes": 1732324248,
+    "full_manifest_file_hash_verification": "pass",
+    "verified_file_count": 26,
+    "verification_errors": []
+  },
+  "authority_assessment": {
+    "active_materialization_contract_ref": "contracts/m2-materialization.json",
+    "active_materialization_contract_sha256": "9ba8154a36fff562decede04de660e731ce2401f893cecbd90c2d8563ce43d7b",
+    "authority_ref": "records/source-gates/m2-activation-approval.json",
+    "required_action_class": "data_processing",
+    "exact_product_was_approved": true,
+    "promoted_transfer_and_container_prerequisites_passed": true,
+    "network_or_authentication_performed": false,
+    "source_archive_mutated": false
+  },
+  "disposition": {
+    "preserve_external_attempt": true,
+    "preserve_repository_receipt": true,
+    "delete_or_rename_attempt": false,
+    "classification": "valid_materialization_only_with_unintended_test_provenance",
+    "repeat_automatically_authorized": false,
+    "next_processing_released": false
+  },
+  "assertions": {
+    "raster_readability_established": false,
+    "pixel_usability_established": false,
+    "baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  },
+  "corrective_action": "The regression test now selects only a currently unpromoted source, skips when no safe refusal probe exists, and verifies both repository-receipt and external materialization inventories remain unchanged."
+}

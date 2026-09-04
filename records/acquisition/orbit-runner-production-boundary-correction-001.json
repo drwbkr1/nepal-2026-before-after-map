@@ -1,0 +1,48 @@
+{
+  "record_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-RUNNER-PRODUCTION-BOUNDARY-CORRECTION-001",
+  "verified_at_utc": "2026-09-04T16:58:50Z",
+  "status": "pass_full_m2_verify_guard_before_catalogue_token_or_mutation",
+  "finding_ref": "records/acquisition/orbit-test-boundary-reconciliation-001.json",
+  "finding_sha256": "40dae0623dcc142cec17ff2108752e5e60bd736a241fe4b83e8f04c5de690025",
+  "correction": {
+    "runner_ref": "scripts/acquire_m2_orbit_file.py",
+    "runner_sha256": "773d101e1f3fac173eae4d72109c459c13646dc0726444ea230e7cf6ec590f2f",
+    "guard": "Require active contracts/milestone-002.json with exactly one M2-VERIFY unit in complete state before any orbit catalogue request, token lookup, attempt event, or payload request.",
+    "guard_stop_code": "sentinel_verification_unit_not_complete",
+    "test_refs": {
+      "tests/test_m2_orbit_amendment.py": "40b935f7eab01b6a38e292cde47a2febfba818d767fd033477bb286044fc3965",
+      "tests/test_m2_orbit_activation.py": "3900e9206452b849544780460901183545d620acb24edf50e5bec2fcbe28e4c9",
+      "tests/test_m2_orbit_preflight.py": "f9a9813bdf77ce8a60348c51b94a033c508c1ae40d631687ff5b50376b0ea14c",
+      "tests/test_m2_orbit_io.py": "ffb08d99f55e911dbf6172115821f3672dee21153b752d277c2fd9be1fa28bc4"
+    }
+  },
+  "validation": {
+    "focused_orbit_test_count": 29,
+    "focused_orbit_tests": "pass",
+    "production_guard_probe_exit_code": 12,
+    "production_guard_probe_stop_code": "sentinel_verification_unit_not_complete",
+    "repository_orbit_attempt_inventory_unchanged": true,
+    "external_orbit_event_inventory_unchanged": true,
+    "orbit_custody_payload_file_count": 0
+  },
+  "assertions": {
+    "prior_failed_attempt_preserved": true,
+    "runner_requires_full_m2_verify_dependency": true,
+    "guard_precedes_catalogue_access": true,
+    "guard_precedes_token_lookup": true,
+    "guard_precedes_event_or_payload_mutation": true,
+    "network_requests_performed_by_correction_or_guard_probe": false,
+    "credential_values_read_or_recorded_by_correction_or_guard_probe": false,
+    "orbit_payload_bytes_requested_by_correction_or_guard_probe": 0,
+    "precise_orbit_substitution_authorized": false,
+    "scientific_result_established": false,
+    "authority_created": false
+  },
+  "limitations": [
+    "The correction validates the fail-closed dependency guard; it does not retry the retained M2-ORB-001 attempt or validate provider payload bytes.",
+    "The historical runner-readiness receipt remains bound to its earlier implementation and is not rewritten.",
+    "A future recovery still requires an exact human decision and a completed M2-VERIFY unit."
+  ],
+  "next_action": "Prepare an exact owner review for one fresh M2-ORB-001 recovery that remains blocked until M2-VERIFY is complete."
+}

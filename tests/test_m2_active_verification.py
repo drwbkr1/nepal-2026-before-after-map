@@ -61,6 +61,14 @@ class M2ActiveVerificationTests(unittest.TestCase):
 
     def test_wrapper_stops_before_custody_read_when_asset_is_not_promoted(self) -> None:
         intake = ROOT / "contracts" / "m2-intake.json"
+        intake_value = json.loads(intake.read_text(encoding="utf-8"))
+        unpromoted = [
+            asset["extensions"]["source_id"]
+            for asset in intake_value["assets"]
+            if asset.get("state") != "promoted"
+        ]
+        if not unpromoted:
+            self.skipTest("all live assets are promoted; no safe production-wrapper refusal probe remains")
         before = self.digest(intake)
         output_root = ROOT / "records" / "acquisition" / "container-verification"
         before_outputs = sorted(path.name for path in output_root.glob("*.json")) if output_root.exists() else []
@@ -69,7 +77,7 @@ class M2ActiveVerificationTests(unittest.TestCase):
                 sys.executable,
                 str(ROOT / "scripts" / "verify_m2_product_container.py"),
                 "--source-id",
-                "M1-SRC-001",
+                unpromoted[0],
                 "--scanned-at-utc",
                 "2026-09-03T18:00:00Z",
             ],

@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "event": "transfer_failed",
+  "attempt_id": "m1-src-004-20260904t043930z-ac125c11",
+  "asset_id": "m1-src-004",
+  "source_id": "M1-SRC-004",
+  "started_at": "2026-09-04T04:39:30Z",
+  "completed_at": "2026-09-04T04:42:29Z",
+  "failure_code": "transferred_size_mismatch",
+  "partial_bytes_preserved": 561593598,
+  "credential_value_recorded": false,
+  "retry_automatically_authorized": false
+}

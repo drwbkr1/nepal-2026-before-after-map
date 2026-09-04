@@ -25,13 +25,28 @@
         "unavailable_reason": "CDSE catalog metadata records content length plus MD5 and BLAKE3, not an upstream SHA-256 or an authenticated transfer length. Capture transfer identity after activation and compute local SHA-256 before promotion."
       },
       "observed": {
-        "staged_sha256": null,
-        "staged_size_bytes": null,
-        "promoted_sha256": null,
-        "promoted_size_bytes": null
+        "staged_sha256": "55b19242652e79887f00bb312d7fab1d7f8879f4e9eb996ca15be1268de1e79a",
+        "staged_size_bytes": 1732333216,
+        "promoted_sha256": "55b19242652e79887f00bb312d7fab1d7f8879f4e9eb996ca15be1268de1e79a",
+        "promoted_size_bytes": 1732333216
       },
-      "state": "authorized",
-      "attempts": [],
+      "state": "promoted",
+      "attempts": [
+        {
+          "attempt_id": "m1-src-001-20260904t041621z-fe412d8d",
+          "started_at": "2026-09-04T04:16:21Z",
+          "completed_at": "2026-09-04T04:22:17Z",
+          "outcome": "succeeded",
+          "extensions": {
+            "source_id": "M1-SRC-001",
+            "catalog_response_sha256": "258367e1f46826d6c060ca106dff7ef61697a3a95cade83312e0ae87a7fa8683",
+            "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\attempt-events\\m1-src-001\\m1-src-001-20260904t041621z-fe412d8d-started.json",
+            "credential_reference": "CDSE_ACCESS_TOKEN",
+            "credential_value_recorded": false,
+            "resume": false
+          }
+        }
+      ],
       "failure": null,
       "superseded_by": null,
       "extensions": {
@@ -52,7 +67,11 @@
           }
         ],
         "event_role": "before",
-        "sensor_route": "radar"
+        "sensor_route": "radar",
+        "successful_attempt_receipt": "records/acquisition/attempts/m1-src-001-20260904t041621z-fe412d8d.json",
+        "successful_attempt_receipt_sha256": "fb77a8f330ac30643a6d4d92647339ff17a76e4e3e7c49e64baeee114c7d913c",
+        "provider_md5_verified": true,
+        "provider_blake3_locally_verified": false
       }
     },
     {
@@ -72,13 +91,28 @@
         "unavailable_reason": "CDSE catalog metadata records content length plus MD5 and BLAKE3, not an upstream SHA-256 or an authenticated transfer length. Capture transfer identity after activation and compute local SHA-256 before promotion."
       },
       "observed": {
-        "staged_sha256": null,
-        "staged_size_bytes": null,
-        "promoted_sha256": null,
-        "promoted_size_bytes": null
+        "staged_sha256": "4df9ecdd0ad7f562bdf743b70b9061b9af3885dcbdcaf7f45c1875f2cd838790",
+        "staged_size_bytes": 1732874277,
+        "promoted_sha256": "4df9ecdd0ad7f562bdf743b70b9061b9af3885dcbdcaf7f45c1875f2cd838790",
+        "promoted_size_bytes": 1732874277
       },
-      "state": "authorized",
-      "attempts": [],
+      "state": "promoted",
+      "attempts": [
+        {
+          "attempt_id": "m1-src-002-20260904t042408z-b31b162b",
+          "started_at": "2026-09-04T04:24:08Z",
+          "completed_at": "2026-09-04T04:29:48Z",
+          "outcome": "succeeded",
+          "extensions": {
+            "source_id": "M1-SRC-002",
+            "catalog_response_sha256": "2a3a34ffc9ec1273352d17aaf83537adbf17d49c20e1f5a2edb2cca5303423af",
+            "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\attempt-events\\m1-src-002\\m1-src-002-20260904t042408z-b31b162b-started.json",
+            "credential_reference": "CDSE_ACCESS_TOKEN",
+            "credential_value_recorded": false,
+            "resume": false
+          }
+        }
+      ],
       "failure": null,
       "superseded_by": null,
       "extensions": {
@@ -99,7 +133,11 @@
           }
         ],
         "event_role": "before",
-        "sensor_route": "radar"
+        "sensor_route": "radar",
+        "successful_attempt_receipt": "records/acquisition/attempts/m1-src-002-20260904t042408z-b31b162b.json",
+        "successful_attempt_receipt_sha256": "faf3edd43084367fcc00de675190910eea9276b7addad73df9642bd8810f4ea0",
+        "provider_md5_verified": true,
+        "provider_blake3_locally_verified": false
       }
     },
     {
@@ -119,13 +157,28 @@
         "unavailable_reason": "CDSE catalog metadata records content length plus MD5 and BLAKE3, not an upstream SHA-256 or an authenticated transfer length. Capture transfer identity after activation and compute local SHA-256 before promotion."
       },
       "observed": {
-        "staged_sha256": null,
-        "staged_size_bytes": null,
-        "promoted_sha256": null,
-        "promoted_size_bytes": null
+        "staged_sha256": "fa9250c3433065c7f3045352bee938b31d140771320e875f1088156094eedf01",
+        "staged_size_bytes": 1718369620,
+        "promoted_sha256": "fa9250c3433065c7f3045352bee938b31d140771320e875f1088156094eedf01",
+        "promoted_size_bytes": 1718369620
       },
-      "state": "authorized",
-      "attempts": [],
+      "state": "promoted",
+      "attempts": [
+        {
+          "attempt_id": "m1-src-003-20260904t043000z-d1b78c08",
+          "started_at": "2026-09-04T04:30:00Z",
+          "completed_at": "2026-09-04T04:39:18Z",
+          "outcome": "succeeded",
+          "extensions": {
+            "source_id": "M1-SRC-003",
+            "catalog_response_sha256": "2ebc33981108cc1227ebb57810a77b3717cfb957571f3d77afc374ea6ddd061f",
+            "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\attempt-events\\m1-src-003\\m1-src-003-20260904t043000z-d1b78c08-started.json",
+            "credential_reference": "CDSE_ACCESS_TOKEN",
+            "credential_value_recorded": false,
+            "resume": false
+          }
+        }
+      ],
       "failure": null,
       "superseded_by": null,
       "extensions": {
@@ -146,7 +199,11 @@
           }
         ],
         "event_role": "before",
-        "sensor_route": "radar"
+        "sensor_route": "radar",
+        "successful_attempt_receipt": "records/acquisition/attempts/m1-src-003-20260904t043000z-d1b78c08.json",
+        "successful_attempt_receipt_sha256": "b5c9b2fe5882e4574f62e80a797fd66bcfb0b3daf0c80e7485d92184618d60f0",
+        "provider_md5_verified": true,
+        "provider_blake3_locally_verified": false
       }
     },
     {
@@ -171,9 +228,27 @@
         "promoted_sha256": null,
         "promoted_size_bytes": null
       },
-      "state": "authorized",
-      "attempts": [],
-      "failure": null,
+      "state": "failed",
+      "attempts": [
+        {
+          "attempt_id": "m1-src-004-20260904t043930z-ac125c11",
+          "started_at": "2026-09-04T04:39:30Z",
+          "completed_at": "2026-09-04T04:42:29Z",
+          "outcome": "failed",
+          "extensions": {
+            "source_id": "M1-SRC-004",
+            "catalog_response_sha256": "be211b4b3624521742a13bc62fa761f80d45af3baf94809779583684c136605e",
+            "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\attempt-events\\m1-src-004\\m1-src-004-20260904t043930z-ac125c11-started.json",
+            "credential_reference": "CDSE_ACCESS_TOKEN",
+            "credential_value_recorded": false,
+            "resume": false
+          }
+        }
+      ],
+      "failure": {
+        "code": "transferred_size_mismatch",
+        "recorded_at": "2026-09-04T04:42:29Z"
+      },
       "superseded_by": null,
       "extensions": {
         "source_id": "M1-SRC-004",

@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "event": "orbit_transfer_failed",
+  "attempt_id": "m2-orb-001-20260904t050937z-8ed21d05",
+  "asset_id": "m2-orb-001",
+  "source_id": "M2-ORB-001",
+  "started_at": "2026-09-04T05:09:37Z",
+  "completed_at": "2026-09-04T05:09:38Z",
+  "failure_code": "orbit_redirect_or_http_status_rejected",
+  "partial_bytes_preserved": 0,
+  "credential_reference": "CDSE_ACCESS_TOKEN",
+  "credential_value_recorded": false,
+  "retry_automatically_authorized": false
+}
