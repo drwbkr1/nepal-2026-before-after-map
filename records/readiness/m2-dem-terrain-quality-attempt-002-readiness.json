@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "readiness_id": "NEPAL-M2-DEM-TERRAIN-QUALITY-ATTEMPT-002-READINESS-001",
+  "status": "pass_path_only_correction_predeclared_real_execution_not_started",
+  "verified_at_utc": "2026-09-04T00:04:30Z",
+  "claim": "Attempt-001 is retained as a pre-pixel path-binding failure, and attempt-002 changes only the external custody root and exclusive output path while preserving the exact method and thresholds.",
+  "bindings": {
+    "base_contract_ref": "config/qa/dem-terrain-quality-contract.json",
+    "base_contract_sha256": "fdee6dbaaafee7c010c7ef77fe6d7121164686f4b26edcb8ca8f0d150d1d1fa2",
+    "corrected_contract_ref": "config/qa/dem-terrain-quality-contract-attempt-002.json",
+    "corrected_contract_sha256": "434f8ff1d73a1d726e6aca47db78c2ef969fe9f395f03a3673d9564d569f9553",
+    "failed_attempt_ref": "records/surface-receipts/m2-dem-terrain-quality-attempt-001-failure.json",
+    "failed_attempt_sha256": "f5b3d6ddd244aaee66128ba874c821a03ca5ded2ba8b4c4768d46f27380c0740",
+    "implementation_ref": "scripts/inspect_m2_dem_terrain_quality_arcgis.py",
+    "implementation_sha256": "b394fbb60f549b2e6e3b1f5f69fb00eb38a306838561a7a78d8be9bb689aaeb3",
+    "core_ref": "scripts/dem_terrain_quality_core.py",
+    "core_sha256": "58747b0c62b5ab66e3eeb932635e7a54ae5ead41b8ffa737a1897590ce33777d",
+    "test_ref": "tests/test_dem_terrain_quality_core.py",
+    "test_sha256": "a2fe1f598058a49cff4c05100aac249af5d95e6fcab42cd92c7205e7274924e5"
+  },
+  "correction": {
+    "prior_external_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "corrected_external_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody",
+    "prior_output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-001",
+    "corrected_output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-002",
+    "candidate_receipt": "scratch/dem-terrain-quality-attempt-002/candidate-receipt.json"
+  },
+  "validation": {
+    "focused_test_count": 5,
+    "focused_test_status": "pass",
+    "full_repository_test_count": 190,
+    "full_repository_test_status": "pass",
+    "repository_required_file_count_after_integration": 203,
+    "repository_validation_status": "pass",
+    "corrected_first_source_path_exists": true,
+    "corrected_first_source_sha256_matches": true,
+    "attempt_001_output_root_exists": false,
+    "attempt_002_output_root_exists": false,
+    "attempt_002_candidate_receipt_exists": false
+  },
+  "assertions": {
+    "attempt_001_failure_preserved": true,
+    "attempt_001_path_reused": false,
+    "custody_root_segment_corrected": true,
+    "exact_source_identities_unchanged": true,
+    "exact_source_hashes_unchanged": true,
+    "exact_source_sizes_unchanged": true,
+    "seam_pairs_unchanged": true,
+    "metrics_unchanged": true,
+    "thresholds_unchanged": true,
+    "processing_method_unchanged": true,
+    "vertical_transformation_selected": false,
+    "real_dem_metrics_observed_by_correction": false,
+    "derived_outputs_created_by_correction": false,
+    "source_custody_mutated": false,
+    "network_requests_performed": false,
+    "sentinel_processing_executed": false,
+    "scientific_result_established": false,
+    "authority_created": false
+  },
+  "limitations": [
+    "The corrected path has been verified only for existence and exact first-tile SHA-256 at this checkpoint; ArcGIS terrain execution is still unstarted.",
+    "Attempt-001 created no derived directory, but its failed invocation remains immutable evidence and its path will not be reused.",
+    "A later terrain-only pass cannot resolve vertical datum or independent elevation accuracy."
+  ],
+  "next_action": "Publish and verify the attempt-002 correction controls, then execute exactly one ArcGIS run at the corrected no-overwrite path."
+}

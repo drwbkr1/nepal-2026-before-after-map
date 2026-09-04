@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-TERRAIN-QUALITY-ATTEMPT-001-FAILURE",
+  "status": "failed_source_path_resolution_before_source_open",
+  "executed_at_utc": "2026-09-04T00:01:33Z",
+  "recorded_at_utc": "2026-09-04T00:02:59Z",
+  "claim": "The first ArcGIS terrain-quality attempt stopped before opening any DEM because the predeclared external root omitted the active custody directory segment.",
+  "bindings": {
+    "published_control_commit": "4448f7d0deb8a934dae854ce733fa32032115251",
+    "contract_ref": "config/qa/dem-terrain-quality-contract.json",
+    "contract_sha256": "fdee6dbaaafee7c010c7ef77fe6d7121164686f4b26edcb8ca8f0d150d1d1fa2",
+    "implementation_ref": "scripts/inspect_m2_dem_terrain_quality_arcgis.py",
+    "implementation_sha256": "b394fbb60f549b2e6e3b1f5f69fb00eb38a306838561a7a78d8be9bb689aaeb3",
+    "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "authority_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0"
+  },
+  "attempted": {
+    "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-001",
+    "candidate_receipt": "scratch/dem-terrain-quality-attempt-001/candidate-receipt.json",
+    "declared_external_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "declared_relative_path": "dem/copernicus-glo30/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+    "resolved_missing_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+    "actual_bound_custody_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody"
+  },
+  "failure": {
+    "stage": "source_path_resolution_before_source_open",
+    "exception_type": "FileNotFoundError",
+    "error": "[WinError 3] The system cannot find the path specified: C:\\Projects\\Active\\nepal-2026-before-after-map-data\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+    "exit_code": 1,
+    "classification": "wrapper_path_binding_failure_not_data_fitness"
+  },
+  "post_failure_observation": {
+    "attempt_output_root_exists": false,
+    "candidate_receipt_exists": false,
+    "exact_tile_found_at": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif"
+  },
+  "assertions": {
+    "dem_source_opened": false,
+    "dem_bytes_hashed_by_attempt": false,
+    "dem_pixels_read": false,
+    "terrain_metrics_observed": false,
+    "derived_output_created": false,
+    "source_custody_mutated": false,
+    "network_requests_performed": false,
+    "vertical_transformation_applied": false,
+    "sentinel_processing_executed": false,
+    "scientific_result_established": false,
+    "authority_created": false,
+    "retry_in_attempt_001_authorized": false
+  },
+  "limitations": [
+    "This receipt classifies only the observed wrapper failure; it says nothing about terrain quality.",
+    "The absent attempt directory means there are no derived artifacts to inspect, but the failed invocation remains retained in repository evidence.",
+    "Any retry requires a separately predeclared attempt-002 path and corrected custody-root binding."
+  ],
+  "next_action": "Predeclare an attempt-002 correction that adds the active custody segment without changing inputs, metrics, thresholds, vertical semantics, or scientific boundaries."
+}
