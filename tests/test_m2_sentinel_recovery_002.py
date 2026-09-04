@@ -255,7 +255,7 @@ class Recovery002Tests(unittest.TestCase):
             ROOT / "scripts/m2_sentinel_recovery_002_broker.py",
             ROOT / "scripts/m2_sentinel_recovery_002_supervisor.py",
             ROOT / "scripts/acquire_m2_sentinel_recovery_002.py",
-            ROOT / "scripts/acquire_m2_product_secret_pipe.py",
+            ROOT / "scripts/acquire_m2_product_pipe.py",
         ]
         bodies = "\n".join(path.read_text(encoding="utf-8") for path in paths)
         self.assertNotIn('os.environ.get("CDSE_ACCESS_TOKEN")', bodies)

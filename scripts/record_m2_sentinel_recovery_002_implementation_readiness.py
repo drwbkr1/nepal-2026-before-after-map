@@ -19,7 +19,7 @@ IMPLEMENTATION_FILES = {
     "broker_sha256": ROOT / "scripts/m2_sentinel_recovery_002_broker.py",
     "supervisor_sha256": ROOT / "scripts/m2_sentinel_recovery_002_supervisor.py",
     "recovery_runner_sha256": ROOT / "scripts/acquire_m2_sentinel_recovery_002.py",
-    "continuation_runner_sha256": ROOT / "scripts/acquire_m2_product_secret_pipe.py",
+    "continuation_runner_sha256": ROOT / "scripts/acquire_m2_product_pipe.py",
     "container_verifier_sha256": ROOT / "scripts/verify_m2_sentinel_recovery_002_container.py",
     "supervisor_reconciler_sha256": ROOT / "scripts/reconcile_m2_sentinel_recovery_002_supervisor.py",
     "success_reconciler_sha256": ROOT / "scripts/reconcile_m2_sentinel_recovery_002_success.py",

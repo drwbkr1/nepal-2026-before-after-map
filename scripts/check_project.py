@@ -89,6 +89,7 @@ REQUIRED = [
     "records/acquisition/recovery-attempts/m1-src-004-recovery-001-20260904t201220z-e4388c64.json",
     "records/acquisition/sentinel-recovery-interruption-reconciliation-001.json",
     "records/acquisition/sentinel-recovery-002-implementation-readiness.json",
+    "records/acquisition/sentinel-recovery-002-publication-attempt-001-failure.json",
     "records/acquisition/materialization-test-boundary-reconciliation-001.json",
     "records/acquisition/sentinel-materialization-reconciliation-001.json",
     "records/acquisition/orbit-test-boundary-reconciliation-001.json",
@@ -271,7 +272,7 @@ REQUIRED = [
     "scripts/m2_sentinel_recovery_002_broker.py",
     "scripts/m2_sentinel_recovery_002_supervisor.py",
     "scripts/acquire_m2_sentinel_recovery_002.py",
-    "scripts/acquire_m2_product_secret_pipe.py",
+    "scripts/acquire_m2_product_pipe.py",
     "scripts/verify_m2_sentinel_recovery_002_container.py",
     "scripts/reconcile_m2_sentinel_recovery_002_supervisor.py",
     "scripts/reconcile_m2_sentinel_recovery_002_success.py",
@@ -4194,7 +4195,9 @@ def main() -> None:
             or acquire_unit.get("gates", {}).get("recovery_002_review_reconciliation_sha256") != sha256("records/source-gates/m2-sentinel-recovery-002-review-reconciliation.json")
             or acquire_unit.get("gates", {}).get("recovery_002_human_decision_count") != 1
             or acquire_unit.get("gates", {}).get("recovery_002_implementation_authorized") is not True
-            or acquire_unit.get("gates", {}).get("recovery_002_publication_gate") != "pending"
+            or acquire_unit.get("gates", {}).get("recovery_002_publication_gate") != "pending_after_failed_ci_attempt_001"
+            or acquire_unit.get("gates", {}).get("recovery_002_publication_attempt_001_ref") != "records/acquisition/sentinel-recovery-002-publication-attempt-001-failure.json"
+            or acquire_unit.get("gates", {}).get("recovery_002_publication_attempt_001_sha256") != sha256("records/acquisition/sentinel-recovery-002-publication-attempt-001-failure.json")
             or acquire_unit.get("gates", {}).get("recovery_002_transfer_authorized_after_public_ci_and_final_preflight") is not True
             or acquire_unit.get("gates", {}).get("recovery_002_transfer_authorized_now") is not False
             or profile.get("current_checkpoint", {}).get("next_action") != expected_recovery_next_action
@@ -6087,6 +6090,20 @@ def main() -> None:
         or sentinel_recovery_002_readiness.get("assertions", {}).get("real_recovery_started") is not False
     ):
         fail("recovery-002 implementation readiness receipt differs or overclaims")
+    sentinel_recovery_002_publication_failure = ledger_by_id.get("EVID-0081")
+    if (
+        not isinstance(sentinel_recovery_002_publication_failure, dict)
+        or sentinel_recovery_002_publication_failure.get("status") != "fail_public_ci_no_gate_no_activation"
+        or sentinel_recovery_002_publication_failure.get("failure_receipt_sha256") != sha256("records/acquisition/sentinel-recovery-002-publication-attempt-001-failure.json")
+        or sentinel_recovery_002_publication_failure.get("implementation_commit") != "7e772f6c45d2a24490e080fa4dfc2a92a4ca1bcb"
+        or sentinel_recovery_002_publication_failure.get("github_actions_run_id") != 33921807360
+        or sentinel_recovery_002_publication_failure.get("github_actions_conclusion") != "failure"
+        or any(sentinel_recovery_002_publication_failure.get("assertions", {}).get(key) is not False for key in (
+            "publication_gate_created", "activation_performed", "credential_values_read_or_recorded",
+            "product_payload_requested", "external_data_mutated", "data_transfer_retry_performed",
+        ))
+    ):
+        fail("EVID-0081 recovery-002 failed publication attempt differs or overclaims")
 
     final_delivery_contract = json.loads(
         (ROOT / "config/qa/arcgis-final-delivery-contract.json").read_text(encoding="utf-8")

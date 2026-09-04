@@ -10,7 +10,7 @@ import sys
 import uuid
 from pathlib import Path
 
-from acquire_m2_product_secret_pipe import ALLOWED_SOURCE_IDS, run_product
+from acquire_m2_product_pipe import ALLOWED_SOURCE_IDS, run_product
 from acquire_m2_sentinel_recovery_002 import run_recovery
 from m2_sentinel_recovery_002_core import (
     DATA_ROOT,

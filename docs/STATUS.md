@@ -174,3 +174,5 @@ Checkpoint derivation is also portable. Repository-only tests do not require the
 - storing archives, SAFE products, rasters, geodatabases, or ArcGIS packages in Git.
 
 Catalog metadata and the live source gate establish eligibility for controlled acquisition only. They do not establish transferred-byte integrity, pixel usability, scientific fitness, or event causation.
+
+The first implementation publication attempt, commit `7e772f6c45d2a24490e080fa4dfc2a92a4ca1bcb`, failed public CI run `33921807360` because the continuation module filename contained the repository-forbidden marker `secret`. The validation step stopped before tests. The failed run is retained at `records/acquisition/sentinel-recovery-002-publication-attempt-001-failure.json`; no publication gate, activation, credential read, product request, staging path, or external mutation occurred. The correction only renames the module and refreshes its exact bindings before a new commit and CI run.

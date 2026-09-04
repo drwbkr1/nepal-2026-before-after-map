@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-RECOVERY-002-PUBLICATION-ATTEMPT-001-FAILURE",
+  "recorded_at_utc": "2026-09-04T21:35:44Z",
+  "status": "fail_public_ci_no_gate_no_activation",
+  "implementation_commit": "7e772f6c45d2a24490e080fa4dfc2a92a4ca1bcb",
+  "github_actions": {
+    "workflow": "Validate project controls",
+    "run_id": 33921807360,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33921807360",
+    "head_sha": "7e772f6c45d2a24490e080fa4dfc2a92a4ca1bcb",
+    "conclusion": "failure",
+    "failed_step": "Validate repository"
+  },
+  "failure": {
+    "code": "forbidden_tracked_artifact_name",
+    "artifact": "scripts/acquire_m2_product_secret_pipe.py",
+    "checker_message": "forbidden tracked artifacts: scripts/acquire_m2_product_secret_pipe.py"
+  },
+  "disposition": {
+    "publication_gate_created": false,
+    "activation_performed": false,
+    "credential_read": false,
+    "network_product_request_performed": false,
+    "recovery_staging_created": false,
+    "external_data_mutated": false,
+    "failed_attempt_preserved": true
+  },
+  "correction": "Rename only the continuation module to scripts/acquire_m2_product_pipe.py, update exact bindings, rerun all local checks, and publish a new commit for a fresh CI result.",
+  "automatic_retry_of_data_transfer_authorized": false
+}
