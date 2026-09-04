@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-sentinel-recovery-002-review-001",
+  "contract_sha256": "3c8c1fc9350c05a90a70a4b16d7025ed3bb887a00c7f15d2f33d0c1a397b3948",
+  "response_sha256": "8033a825dfc58f4e684e753536f99b4e761f76d77cacd760da9d182d9ae23f46",
+  "receipt_sha256": "4d88b713a8d0f5fea1f920a9154d928aecd7c252e9a1b823789622ce032618da",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/source-gates/m2-activation-approval.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-SENTINEL-RECOVERY-002-APPROVAL-001",
+  "status": "approved_exact_bounded_secret_safe_detached_recovery",
+  "approved_at_utc": "2026-09-04T21:06:12Z",
+  "review_id": "m2-sentinel-recovery-002-review-001",
+  "review_bundle_id": "m2-sentinel-recovery-002-review-bundle-001",
+  "review_bundle_manifest_sha256": "30d0f72c4c62b3c5450a08459a1c6024d442b8f718fa11f0fb650719437e9a30",
+  "recovery_proposal_ref": "contracts/milestone-002-sentinel-recovery-002-proposal.json",
+  "recovery_proposal_sha256": "1ec77963e1171f60c2a4571306797077eb65206f5a4aacff6dd9cae33b0c0f6e",
+  "review_reconciliation_ref": "records/source-gates/m2-sentinel-recovery-002-review-reconciliation.json",
+  "review_reconciliation_sha256": "1ab8ebe5ea62da89d8d0ca2d80c9614a80a05a020295f4ec978e6f380be526d9",
+  "locked_response_sha256": "8033a825dfc58f4e684e753536f99b4e761f76d77cacd760da9d182d9ae23f46",
+  "lock_receipt_sha256": "4d88b713a8d0f5fea1f920a9154d928aecd7c252e9a1b823789622ce032618da",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "recovery_identity": {
+    "source_id": "M1-SRC-004",
+    "recovery_asset_id": "m1-src-004-recovery-002",
+    "mode": "fresh_full_restart_detached_supervised_worker",
+    "restart_offset_bytes": 0,
+    "retained_failures": [
+      {
+        "attempt_id": "m1-src-004-20260904t043930z-ac125c11",
+        "partial_bytes": 561593598,
+        "partial_sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66"
+      },
+      {
+        "attempt_id": "m1-src-004-recovery-001-20260904t201220z-e4388c64",
+        "partial_bytes": 1333788672,
+        "partial_sha256": "c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac"
+      }
+    ]
+  },
+  "lock_process": {
+    "rejected_candidate_attempt_count": 2,
+    "rejected_reason": "response_filename_did_not_match_required_review_id_plus_hash_prefix",
+    "rejected_candidates_byte_identical_to_locked_response": true,
+    "ambiguous_distinct_valid_finals": false,
+    "locked_response_count": 1
+  },
+  "authorized_next_actions": [
+    "implement and validate only the exact secret-safe detached-worker recovery design and synthetic interruption tests described here",
+    "publish and independently verify the exact implementation and public-CI gate before any real transfer",
+    "perform at most one fresh full M1-SRC-004 recovery-002 transfer from byte zero through a new exclusive staging path",
+    "verify and promote only that exact product if every identity, rights, secret-custody, length, checksum, path, interruption, and container control passes",
+    "after a passing recovery, continue only the four still-unattempted products under the original eight-product approval"
+  ],
+  "does_not_authorize": [
+    "resume, delete, truncate, rename, overwrite, or otherwise modify either retained partial or any prior event or receipt",
+    "reuse either prior staging path, hide either failure, or reinterpret either partial as an admissible product",
+    "place a token in a command line, environment variable, file, repository record, log, event, or heartbeat",
+    "run more than one recovery-002 attempt or automatically retry any failure",
+    "change the provider UUID, product name, observation time, role, sensor route, destination, or source manifest",
+    "accept terms, create, recover, or modify an account, change MFA, incur cost, or disclose credentials",
+    "acquire substitute imagery, additional products, or precise orbit files",
+    "perform radar terrain correction, pixel admission, change mapping, attribution, or scientific publication"
+  ],
+  "human_decisions_fabricated": false
+}

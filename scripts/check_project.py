@@ -13,6 +13,7 @@ from arcgis_final_delivery_core import validate_contract as validate_arcgis_fina
 from arcgis_package_portability_core import validate_contract as validate_arcgis_package_portability_contract
 from change_evidence_core import validate_contract as validate_change_evidence_contract
 from derive_m2_acquisition_checkpoint import derive_checkpoint
+from record_m2_sentinel_recovery_002_implementation_readiness import IMPLEMENTATION_FILES as RECOVERY_002_IMPLEMENTATION_FILES
 from validate_m2_acquisition_progress import (
     INITIAL_ACTIVE_INTAKE_SHA256,
     validate_progress as validate_acquisition_progress,
@@ -44,6 +45,8 @@ REQUIRED = [
     "contracts/m2-intake.json",
     "contracts/milestone-002-sentinel-recovery-proposal.json",
     "contracts/milestone-002-sentinel-recovery-002-proposal.json",
+    "records/source-gates/m2-sentinel-recovery-002-approval.json",
+    "records/source-gates/m2-sentinel-recovery-002-review-reconciliation.json",
     "contracts/m2-sentinel-recovery.json",
     "contracts/milestone-002-orbit-recovery-proposal.json",
     "contracts/m2-offline-verification.json",
@@ -85,6 +88,7 @@ REQUIRED = [
     "records/acquisition/sentinel-recovery-activation.json",
     "records/acquisition/recovery-attempts/m1-src-004-recovery-001-20260904t201220z-e4388c64.json",
     "records/acquisition/sentinel-recovery-interruption-reconciliation-001.json",
+    "records/acquisition/sentinel-recovery-002-implementation-readiness.json",
     "records/acquisition/materialization-test-boundary-reconciliation-001.json",
     "records/acquisition/sentinel-materialization-reconciliation-001.json",
     "records/acquisition/orbit-test-boundary-reconciliation-001.json",
@@ -263,6 +267,18 @@ REQUIRED = [
     "scripts/acquire_m2_product.py",
     "scripts/m2_sentinel_recovery_core.py",
     "scripts/render_m2_sentinel_recovery_002_review.py",
+    "scripts/m2_sentinel_recovery_002_core.py",
+    "scripts/m2_sentinel_recovery_002_broker.py",
+    "scripts/m2_sentinel_recovery_002_supervisor.py",
+    "scripts/acquire_m2_sentinel_recovery_002.py",
+    "scripts/acquire_m2_product_secret_pipe.py",
+    "scripts/verify_m2_sentinel_recovery_002_container.py",
+    "scripts/reconcile_m2_sentinel_recovery_002_supervisor.py",
+    "scripts/reconcile_m2_sentinel_recovery_002_success.py",
+    "scripts/activate_m2_sentinel_recovery_002.py",
+    "scripts/preflight_m2_sentinel_recovery_002.py",
+    "scripts/record_m2_sentinel_recovery_002_publication_gate.py",
+    "scripts/record_m2_sentinel_recovery_002_implementation_readiness.py",
     "scripts/acquire_m2_sentinel_recovery.py",
     "scripts/verify_m2_sentinel_recovery_container.py",
     "scripts/activate_m2_sentinel_recovery.py",
@@ -276,6 +292,7 @@ REQUIRED = [
     "tests/test_m2_acquisition_progress.py",
     "tests/test_m2_checkpoint_reconciliation.py",
     "tests/test_m2_sentinel_recovery.py",
+    "tests/test_m2_sentinel_recovery_002.py",
     "tests/test_m2_active_verification.py",
     "tests/test_m2_dem_amendment.py",
     "tests/test_m2_dem_controls.py",
@@ -555,6 +572,9 @@ def main() -> None:
     sentinel_recovery_002_bundle = json.loads((ROOT / "reviews/m2-sentinel-recovery-002/review-bundle.json").read_text(encoding="utf-8"))
     sentinel_recovery_002_contract = json.loads((ROOT / "reviews/m2-sentinel-recovery-002/review-contract.json").read_text(encoding="utf-8"))
     sentinel_recovery_002_blank = json.loads((ROOT / "reviews/m2-sentinel-recovery-002/blank-response.json").read_text(encoding="utf-8"))
+    sentinel_recovery_002_approval = json.loads((ROOT / "records/source-gates/m2-sentinel-recovery-002-approval.json").read_text(encoding="utf-8"))
+    sentinel_recovery_002_reconciliation = json.loads((ROOT / "records/source-gates/m2-sentinel-recovery-002-review-reconciliation.json").read_text(encoding="utf-8"))
+    sentinel_recovery_002_readiness = json.loads((ROOT / "records/acquisition/sentinel-recovery-002-implementation-readiness.json").read_text(encoding="utf-8"))
     materialization_boundary_reconciliation = json.loads((ROOT / "records/acquisition/materialization-test-boundary-reconciliation-001.json").read_text(encoding="utf-8"))
     materialization_receipt = json.loads((ROOT / "records/acquisition/materialization/m1-src-001-fixture-must-not-run.json").read_text(encoding="utf-8"))
     sentinel_materialization_reconciliation = json.loads((ROOT / "records/acquisition/sentinel-materialization-reconciliation-001.json").read_text(encoding="utf-8"))
@@ -651,14 +671,15 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != ["contracts/milestone-002-sentinel-recovery-002-proposal.json"]:
-        fail("project profile must expose only the current Sentinel recovery-002 proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must clear the approved Sentinel recovery-002 proposal")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
         "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
+        "records/source-gates/m2-sentinel-recovery-002-approval.json",
     ]:
-        fail("project profile must expose the exact active DEM, orbit, and radar-label amendments")
+        fail("project profile must expose the exact active DEM, orbit, radar-label, and recovery-002 amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -707,10 +728,25 @@ def main() -> None:
         "post_observation": True,
         "baseline_processing_released": False,
     }
+    expected_recovery_002_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-sentinel-recovery-002-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-sentinel-recovery-002-approval.json"),
+        "proposal_ref": "contracts/milestone-002-sentinel-recovery-002-proposal.json",
+        "proposal_sha256": "1ec77963e1171f60c2a4571306797077eb65206f5a4aacff6dd9cae33b0c0f6e",
+        "review_bundle_sha256": "30d0f72c4c62b3c5450a08459a1c6024d442b8f718fa11f0fb650719437e9a30",
+        "review_reconciliation_ref": "records/source-gates/m2-sentinel-recovery-002-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-sentinel-recovery-002-review-reconciliation.json"),
+        "maximum_real_transfer_attempts": 1,
+        "secret_transport": "anonymous_pipe_single_use_memory_only",
+        "automatic_retry_authorized": False,
+        "post_success_continuation_source_ids": ["M1-SRC-005", "M1-SRC-006", "M1-SRC-008", "M1-SRC-010"],
+        "pixel_processing_released": False,
+    }
     expected_amendments = [
         expected_dem_amendment_binding,
         expected_orbit_amendment_binding,
         expected_radar_label_amendment_binding,
+        expected_recovery_002_amendment_binding,
     ]
     if profile["authority"].get("amendments") != expected_amendments:
         fail("profile authority does not bind the exact active amendments")
@@ -720,8 +756,9 @@ def main() -> None:
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
         "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
+        "records/source-gates/m2-sentinel-recovery-002-approval.json",
     ]:
-        fail("active M2 scope does not expose the three exact amendment approvals")
+        fail("active M2 scope does not expose the four exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -737,12 +774,12 @@ def main() -> None:
         fail("project profile must expose the exact terrain-result human-review gate")
     sentinel_recovery_gate = profile_gates.get("M2-SENTINEL-RECOVERY", {})
     if (
-        sentinel_recovery_gate.get("authority_ref") != "reviews/m2-sentinel-recovery-002/review-contract.json"
-        or "zero action is released" not in sentinel_recovery_gate.get("reason", "")
+        sentinel_recovery_gate.get("authority_ref") != "records/source-gates/m2-sentinel-recovery-002-approval.json"
+        or "bounded recovery-002" not in sentinel_recovery_gate.get("reason", "")
     ):
-        fail("project profile must expose the blank Sentinel recovery-002 human-review gate")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != ["contracts/milestone-002-sentinel-recovery-002-proposal.json"]:
-        fail("project profile must expose the exact proposed Sentinel recovery-002 amendment")
+        fail("project profile must bind Sentinel recovery-002 to the exact approval")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must not retain the approved recovery-002 proposal as pending")
     if profile_gates.get("M2-ORBIT-RECOVERY", {}).get("authority_ref") != "reviews/m2-orbit-recovery/review-contract.json":
         fail("project profile must expose the exact orbit recovery human-review gate")
     for approved_unit in ("M2-ORBIT-AMEND", "M2-ORBIT-PREFLIGHT", "M2-ORBIT-ACQUIRE", "M2-ORBIT-VERIFY", "M2-ORBIT-APPLY"):
@@ -772,6 +809,7 @@ def main() -> None:
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
         "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
+        "records/source-gates/m2-sentinel-recovery-002-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-ACQUISITION-REVIEW"]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
     prohibited = set(contract["scope"]["forbidden_work"])
@@ -4126,13 +4164,13 @@ def main() -> None:
         or active_m2.get("handoff", {}).get("current_checkpoint") != expected_checkpoint
     ):
         fail(f"profile, goal, and milestone handoff must reconcile to {expected_checkpoint}")
-    expected_recovery_next_action = "Review M2 Sentinel recovery-002 bundle SHA-256 30d0f72c4c62b3c5450a08459a1c6024d442b8f718fa11f0fb650719437e9a30 and proposal SHA-256 1ec77963e1171f60c2a4571306797077eb65206f5a4aacff6dd9cae33b0c0f6e; approve, revise, or defer the secret-safe detached-worker implementation, synthetic interruption tests, publication gate, one fresh byte-zero attempt, and success-only continuation. No implementation or Sentinel transfer is authorized before that decision."
+    expected_recovery_next_action = "Complete and locally validate the exact recovery-002 implementation, publish the exact commit, and require successful public CI before activation, no-payload preflight, credential access, or transfer."
     acquire_unit = m2_units.get("M2-ACQUIRE", {})
     if state_counts.get("failed", 0):
-        if acquire_unit.get("status") != "blocked_retained_failure_review":
-            fail("M2 acquisition unit must fail closed while a retained transfer failure awaits review")
-        if acquire_unit.get("disposition") != "review_required":
-            fail("M2 acquisition unit must expose the retained-failure review disposition")
+        if acquire_unit.get("status") != "in_progress":
+            fail("M2 acquisition unit must remain blocked on the recovery-002 publication gate")
+        if acquire_unit.get("disposition") != "authorized_implementation_pending_publication_gate":
+            fail("M2 acquisition unit must expose the approved implementation and pending publication gate")
         if acquire_unit.get("gates", {}).get("authentication") != "existing_owner_controlled_credential_reference_confirmed":
             fail("M2 acquisition unit must preserve the confirmed secret-safe credential-reference boundary")
         if acquire_unit.get("gates", {}).get("retained_failure_review") != "completed_approved_attempt_failed":
@@ -4145,18 +4183,24 @@ def main() -> None:
             or acquire_unit.get("gates", {}).get("recovery_attempt_receipt_sha256") != sha256(recovery_receipt_ref)
             or acquire_unit.get("gates", {}).get("recovery_interruption_reconciliation_sha256") != sha256("records/acquisition/sentinel-recovery-interruption-reconciliation-001.json")
             or acquire_unit.get("gates", {}).get("automatic_retry_authorized") is not False
-            or acquire_unit.get("gates", {}).get("recovery_002_review") != "prepared_zero_decisions_no_authority"
+            or acquire_unit.get("gates", {}).get("recovery_002_review") != "completed_approved_exact"
             or acquire_unit.get("gates", {}).get("recovery_002_review_ref") != "reviews/m2-sentinel-recovery-002/review-contract.json"
             or acquire_unit.get("gates", {}).get("recovery_002_review_bundle_sha256") != expected_recovery_002_bundle_sha
             or acquire_unit.get("gates", {}).get("recovery_002_proposal_ref") != "contracts/milestone-002-sentinel-recovery-002-proposal.json"
             or acquire_unit.get("gates", {}).get("recovery_002_proposal_sha256") != expected_recovery_002_proposal_sha
-            or acquire_unit.get("gates", {}).get("recovery_002_human_decision_count") != 0
-            or acquire_unit.get("gates", {}).get("recovery_002_implementation_authorized") is not False
-            or acquire_unit.get("gates", {}).get("recovery_002_transfer_authorized") is not False
+            or acquire_unit.get("gates", {}).get("recovery_002_approval_ref") != "records/source-gates/m2-sentinel-recovery-002-approval.json"
+            or acquire_unit.get("gates", {}).get("recovery_002_approval_sha256") != sha256("records/source-gates/m2-sentinel-recovery-002-approval.json")
+            or acquire_unit.get("gates", {}).get("recovery_002_review_reconciliation_ref") != "records/source-gates/m2-sentinel-recovery-002-review-reconciliation.json"
+            or acquire_unit.get("gates", {}).get("recovery_002_review_reconciliation_sha256") != sha256("records/source-gates/m2-sentinel-recovery-002-review-reconciliation.json")
+            or acquire_unit.get("gates", {}).get("recovery_002_human_decision_count") != 1
+            or acquire_unit.get("gates", {}).get("recovery_002_implementation_authorized") is not True
+            or acquire_unit.get("gates", {}).get("recovery_002_publication_gate") != "pending"
+            or acquire_unit.get("gates", {}).get("recovery_002_transfer_authorized_after_public_ci_and_final_preflight") is not True
+            or acquire_unit.get("gates", {}).get("recovery_002_transfer_authorized_now") is not False
             or profile.get("current_checkpoint", {}).get("next_action") != expected_recovery_next_action
             or active_m2.get("handoff", {}).get("next_action") != expected_recovery_next_action
         ):
-            fail("M2 acquisition unit and current handoff do not bind the terminal recovery failure")
+            fail("M2 acquisition unit and current handoff do not bind the approved recovery-002 implementation gate")
         retained_failures = acquire_unit.get("retained_failures", [])
         failed_assets = [asset for asset in active_intake.get("assets", []) if asset.get("state") == "failed"]
         if len(retained_failures) != len(failed_assets):
@@ -6009,6 +6053,40 @@ def main() -> None:
         or sentinel_recovery_002_evidence.get("assertions", {}).get("scientific_result_established") is not False
     ):
         fail("EVID-0077 Sentinel recovery-002 review readiness differs or overclaims")
+
+    sentinel_recovery_002_approval_evidence = ledger_by_id.get("EVID-0080")
+    if (
+        not isinstance(sentinel_recovery_002_approval_evidence, dict)
+        or sentinel_recovery_002_approval_evidence.get("status") != "approved_implementation_only_pending_publication_gate"
+        or sentinel_recovery_002_approval_evidence.get("approval_sha256") != sha256("records/source-gates/m2-sentinel-recovery-002-approval.json")
+        or sentinel_recovery_002_approval_evidence.get("review_reconciliation_sha256") != sha256("records/source-gates/m2-sentinel-recovery-002-review-reconciliation.json")
+        or sentinel_recovery_002_approval_evidence.get("proposal_sha256") != expected_recovery_002_proposal_sha
+        or sentinel_recovery_002_approval_evidence.get("review_bundle_sha256") != expected_recovery_002_bundle_sha
+        or sentinel_recovery_002_approval_evidence.get("assertions", {}).get("human_decision_count") != 1
+        or sentinel_recovery_002_approval_evidence.get("assertions", {}).get("implementation_authorized") is not True
+        or sentinel_recovery_002_approval_evidence.get("assertions", {}).get("real_recovery_started") is not False
+        or sentinel_recovery_002_approval_evidence.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or sentinel_recovery_002_approval_evidence.get("assertions", {}).get("pixel_processing_released") is not False
+        or sentinel_recovery_002_approval_evidence.get("assertions", {}).get("automatic_retry_authorized") is not False
+    ):
+        fail("EVID-0080 recovery-002 approval custody differs or overclaims")
+    expected_recovery_002_implementation_bindings = {
+        key: sha256(str(path.relative_to(ROOT)).replace("\\", "/"))
+        for key, path in RECOVERY_002_IMPLEMENTATION_FILES.items()
+    }
+    if (
+        sentinel_recovery_002_readiness.get("status") != "pass_local_synthetic_ready_public_ci_pending"
+        or sentinel_recovery_002_readiness.get("bindings") != expected_recovery_002_implementation_bindings
+        or sentinel_recovery_002_readiness.get("tests", {}).get("focused_test_count") != 12
+        or sentinel_recovery_002_readiness.get("tests", {}).get("full_repository_test_count") != 293
+        or sentinel_recovery_002_readiness.get("tests", {}).get("focused_result") != "pass"
+        or sentinel_recovery_002_readiness.get("tests", {}).get("full_repository_result") != "pass"
+        or sentinel_recovery_002_readiness.get("assertions", {}).get("real_credential_read") is not False
+        or sentinel_recovery_002_readiness.get("assertions", {}).get("network_requests_performed") is not False
+        or sentinel_recovery_002_readiness.get("assertions", {}).get("external_data_mutated") is not False
+        or sentinel_recovery_002_readiness.get("assertions", {}).get("real_recovery_started") is not False
+    ):
+        fail("recovery-002 implementation readiness receipt differs or overclaims")
 
     final_delivery_contract = json.loads(
         (ROOT / "config/qa/arcgis-final-delivery-contract.json").read_text(encoding="utf-8")

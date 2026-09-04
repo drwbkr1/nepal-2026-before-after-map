@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-RECOVERY-002-IMPLEMENTATION-READINESS-001",
+  "verified_at_utc": "2026-09-04T21:34:00Z",
+  "status": "pass_local_synthetic_ready_public_ci_pending",
+  "bindings": {
+    "approval_sha256": "ab0333e6a7f460c150de7f064faac617082f4a627034932fd4ad187f164dde34",
+    "review_reconciliation_sha256": "1ab8ebe5ea62da89d8d0ca2d80c9614a80a05a020295f4ec978e6f380be526d9",
+    "core_sha256": "d3fb0d42e806da2f44f00f26181cb994dd6a3f0ea9422761f75c0205f124a387",
+    "broker_sha256": "255748ab0b04a0ad855dec0d265a337f42e9ea6263bb28ed78490fe3eae5baf7",
+    "supervisor_sha256": "f6d9df61769638fdfbc043856a748e5f24753ae362b260704ac6f9b6997aff3d",
+    "recovery_runner_sha256": "1e4f8bbe89488d8e12ad18cb826ae9c21bfc7cb9b15b8ac3e29375eac812d38d",
+    "continuation_runner_sha256": "f0746020f7fe87b9b578fcb32548ff442ca47a8c72cf1fdb5ddbb163b3abbc78",
+    "container_verifier_sha256": "4acbb0a07823fa18d59ae22f32c58d941f4033d1403a2f99f4fb136a710f1700",
+    "supervisor_reconciler_sha256": "ceb3a3bc07e5fe05e160f1839df651371d97b9ad3baad9610b8ce661ffbfdf03",
+    "success_reconciler_sha256": "8a78772314600df510e0b91d694bf948cb3834904a1c860d91c9647a71a12ca9",
+    "activation_script_sha256": "a0b20bc7a804e74503a3f60a4ccadd0988e43cb64ef687fda0ef39464e5124f9",
+    "final_preflight_sha256": "d6e56fc9c9335f4dfa9d705b4143d6a35847e9c0fbc160fad50dc77e4260d57d",
+    "publication_gate_recorder_sha256": "299b380254a83c2ea71bf38788f87db3fbf1d4e605e5c7ab668cc973069530f8",
+    "focused_tests_sha256": "30a3fb33eb03472d75e1f0be66f515d10098f6b2a341449f9365a79598ff3a4e"
+  },
+  "tests": {
+    "focused_test_count": 12,
+    "full_repository_test_count": 293,
+    "focused_result": "pass",
+    "full_repository_result": "pass",
+    "forced_broker_termination_tested_on_windows": true
+  },
+  "assertions": {
+    "secret_absent_from_child_command_and_environment": true,
+    "secret_transport_anonymous_pipe_only": true,
+    "broker_termination_does_not_end_synthetic_worker": true,
+    "nonsecret_started_heartbeat_terminal_evidence_tested": true,
+    "absent_worker_reconciliation_tested": true,
+    "byte_zero_no_range_request_fixed": true,
+    "exclusive_staging_and_atomic_no_replace_tested": true,
+    "size_and_md5_failure_bytes_preserved": true,
+    "redirect_refusal_and_path_containment_tested": true,
+    "real_credential_read": false,
+    "network_requests_performed": false,
+    "external_data_mutated": false,
+    "real_recovery_started": false
+  },
+  "next_gate": "publish exact commit and require successful public CI before activation or credential entry"
+}

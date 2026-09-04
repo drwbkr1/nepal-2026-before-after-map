@@ -89,7 +89,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertEqual(unit_by_id["M2-ORBIT-APPLY"]["gates"]["dem_vertical_datum_gate"], "pending")
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            ["contracts/milestone-002-sentinel-recovery-002-proposal.json"],
+            [],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -97,6 +97,7 @@ class M2OrbitActivationTests(unittest.TestCase):
                 "records/source-gates/m2-dem-amendment-approval.json",
                 "records/source-gates/m2-orbit-amendment-approval.json",
                 "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
+                "records/source-gates/m2-sentinel-recovery-002-approval.json",
             ],
         )
         checkpoints = [item["checkpoint_id"] for item in self.profile["parallel_checkpoints"]]

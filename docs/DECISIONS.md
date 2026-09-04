@@ -335,3 +335,11 @@
 **Reason:** The project had fixed inputs, preprocessing, and pixel QA but no immutable boundary for turning continuous deltas into mapped candidates. Choosing controls after seeing a dramatic event could bias the map, while merging missing coverage with disagreement or candidate agreement with attribution would overstate the evidence.
 
 **Status:** The contract and protocol are prepared with no real-processing authority. Twelve portable synthetic tests pass. No satellite pixels were read, no candidate feature was created, and interpretation, attribution, scientific admission, and publication remain separate later gates.
+
+## D-056 — Approve one secret-safe detached Sentinel recovery-002 route
+
+**Decision:** Accept the exact recovery-002 bundle and proposal and release only their bounded detached-worker implementation, synthetic interruption and secret-exposure tests, public-CI gate, one fresh byte-zero `M1-SRC-004` attempt, and passing-recovery continuation of the four named unattempted products.
+
+**Reason:** The recovery-001 process disappeared before terminal evidence, leaving a second incomplete partial and an unknown cause. A detached supervisor with nonsecret heartbeat and terminal records makes console closure survivable and absent-worker state independently reconcilable while keeping the token out of command lines, environment variables, files, logs, and repository evidence.
+
+**Status:** The exact response is locked and reconciled. Local implementation validation is passing. A real token handoff and transfer remain blocked until the exact commit passes public CI, the publication gate is recorded, activation succeeds, and the final no-payload preflight passes. Any recovery-002 failure is terminal and cannot be retried automatically.
