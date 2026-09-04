@@ -63,6 +63,8 @@ REQUIRED = [
     "records/acquisition-plan.json",
     "records/acquisition/m2-intake-static-dry-run.json",
     "records/acquisition/preflight.json",
+    "records/acquisition/preflight-refresh.json",
+    "records/acquisition/sentinel-preflight-refresh-readiness.json",
     "records/acquisition/custody-initialization.json",
     "records/acquisition/active-intake-initial-snapshot.json",
     "records/acquisition/transfer-runner-readiness.json",
@@ -92,6 +94,8 @@ REQUIRED = [
     "records/source-gates/m2-activation-approval.json",
     "records/source-gates/m2-activation-review-reconciliation.json",
     "records/source-gates/m2-live-source-gate.json",
+    "records/source-gates/m2-live-source-gate-refresh.json",
+    "records/source-gates/m2-terms-page-reconciliation.json",
     "records/source-gates/m2-dem-metadata-receipt.json",
     "records/source-gates/m2-dem-candidate-manifest.json",
     "records/source-gates/m2-dem-source-gate.json",
@@ -202,6 +206,8 @@ REQUIRED = [
     "tests/test_pair_plan.py",
     "scripts/activate_m2.py",
     "scripts/run_m2_preflight.py",
+    "scripts/refresh_m2_preflight.py",
+    "scripts/m2_page_identity.py",
     "scripts/complete_m2_preflight.py",
     "scripts/initialize_m2_custody.py",
     "scripts/record_m2_custody_checkpoint.py",
@@ -212,6 +218,7 @@ REQUIRED = [
     "scripts/derive_m2_acquisition_checkpoint.py",
     "scripts/validate_pair_plan.py",
     "tests/test_m2_transfer_core.py",
+    "tests/test_m2_page_identity.py",
     "tests/test_m2_acquisition_progress.py",
     "tests/test_m2_checkpoint_reconciliation.py",
     "tests/test_m2_active_verification.py",
@@ -594,6 +601,10 @@ def main() -> None:
     m2_reconciliation = json.loads((ROOT / "records/source-gates/m2-activation-review-reconciliation.json").read_text(encoding="utf-8"))
     m2_source_gate = json.loads((ROOT / "records/source-gates/m2-live-source-gate.json").read_text(encoding="utf-8"))
     m2_preflight = json.loads((ROOT / "records/acquisition/preflight.json").read_text(encoding="utf-8"))
+    m2_source_gate_refresh = json.loads((ROOT / "records/source-gates/m2-live-source-gate-refresh.json").read_text(encoding="utf-8"))
+    m2_terms_reconciliation = json.loads((ROOT / "records/source-gates/m2-terms-page-reconciliation.json").read_text(encoding="utf-8"))
+    m2_preflight_refresh = json.loads((ROOT / "records/acquisition/preflight-refresh.json").read_text(encoding="utf-8"))
+    sentinel_refresh_readiness = json.loads((ROOT / "records/acquisition/sentinel-preflight-refresh-readiness.json").read_text(encoding="utf-8"))
     custody_receipt = json.loads((ROOT / "records/acquisition/custody-initialization.json").read_text(encoding="utf-8"))
     transfer_readiness = json.loads((ROOT / "records/acquisition/transfer-runner-readiness.json").read_text(encoding="utf-8"))
     transfer_runner_correction = json.loads((ROOT / "records/acquisition/transfer-runner-attempt-id-correction.json").read_text(encoding="utf-8"))
@@ -2695,6 +2706,90 @@ def main() -> None:
     if m2_preflight.get("access", {}).get("credential_values_read_or_recorded") is not False or m2_preflight.get("access", {}).get("authentication_performed") is not False:
         fail("M2 preflight must not read credentials or authenticate")
 
+    if m2_terms_reconciliation.get("status") != "pass_scope_relevant_terms_identity_preserved_no_acceptance":
+        fail("M2 terms-page reconciliation is not passing")
+    initial_terms = m2_terms_reconciliation.get("initial_evidence", {})
+    if (
+        initial_terms.get("source_gate_sha256") != sha256("records/source-gates/m2-live-source-gate.json")
+        or initial_terms.get("preflight_sha256") != sha256("records/acquisition/preflight.json")
+        or initial_terms.get("terms_rendered_page_sha256") != "17ebc07dc1fe685b6a3ef0ec64fd376dc1bf4b500e2d583aded19a53fdd55674"
+        or initial_terms.get("sentinel_legal_notice_sha256") != "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64"
+    ):
+        fail("M2 terms-page reconciliation no longer binds the initial evidence")
+    current_terms = m2_terms_reconciliation.get("current_evidence", {})
+    terms_decision = m2_terms_reconciliation.get("decision", {})
+    terms_mutations = m2_terms_reconciliation.get("mutations_performed", {})
+    if (
+        current_terms.get("terms_rendered_page_sha256") != "97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0"
+        or current_terms.get("terms_normalized_text_sha256") != "22cf55ad3949e8eaee715780654be9eb0e8648a2808d6ba007b47c9849ab2b01"
+        or current_terms.get("terms_structured_date_modified") != "2026-05-05T08:04:39+0200"
+        or current_terms.get("sentinel_legal_notice_sha256") != "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64"
+        or len(current_terms.get("required_phrases_present", [])) != 6
+    ):
+        fail("M2 terms-page current legal identity differs")
+    if (
+        terms_decision.get("rendered_page_bytes_changed") is not True
+        or terms_decision.get("scope_relevant_legal_section_current") is not True
+        or terms_decision.get("official_structured_terms_document_modified_after_initial_preflight") is not False
+        or terms_decision.get("exact_linked_sentinel_legal_notice_unchanged") is not True
+        or terms_decision.get("terms_or_account_action_performed") is not False
+        or terms_mutations.get("credential_values_read_or_recorded") is not False
+        or terms_mutations.get("terms_acceptance") is not False
+        or terms_mutations.get("product_payload_bytes_received") != 0
+        or terms_mutations.get("external_custody_mutated") is not False
+    ):
+        fail("M2 terms-page reconciliation weakens the no-mutation or no-acceptance boundary")
+
+    if (
+        m2_source_gate_refresh.get("decision", {}).get("status") != "ready"
+        or len(m2_source_gate_refresh.get("sources", [])) != 8
+        or any(criterion.get("status") != "pass" for source in m2_source_gate_refresh.get("sources", []) for criterion in source.get("criteria", []))
+        or m2_source_gate_refresh.get("authority", {}).get("authority_ref") != "records/source-gates/m2-activation-approval.json"
+    ):
+        fail("M2 refreshed live source gate is not ready for exactly eight passing products")
+    refresh_extensions = m2_source_gate_refresh.get("extensions", {})
+    if (
+        refresh_extensions.get("refresh_of_sha256") != sha256("records/source-gates/m2-live-source-gate.json")
+        or refresh_extensions.get("terms_reconciliation_sha256") != sha256("records/source-gates/m2-terms-page-reconciliation.json")
+        or refresh_extensions.get("terms_acceptance_performed") is not False
+        or refresh_extensions.get("product_payload_bytes_received") != 0
+    ):
+        fail("M2 refreshed source gate bindings or no-mutation boundary differ")
+
+    if (
+        m2_preflight_refresh.get("status") != "pass_no_external_mutation"
+        or m2_preflight_refresh.get("base_preflight", {}).get("sha256") != sha256("records/acquisition/preflight.json")
+        or m2_preflight_refresh.get("source_gate", {}).get("sha256") != sha256("records/source-gates/m2-live-source-gate-refresh.json")
+        or m2_preflight_refresh.get("terms_reconciliation", {}).get("sha256") != sha256("records/source-gates/m2-terms-page-reconciliation.json")
+        or len(m2_preflight_refresh.get("product_checks", [])) != 8
+        or any(item.get("status") != "pass" for item in m2_preflight_refresh.get("product_checks", []))
+        or m2_preflight_refresh.get("intake_state") != {"authorized_count": 8, "attempt_count": 0, "promoted_count": 0, "failed_count": 0}
+    ):
+        fail("M2 Sentinel preflight refresh or exact-product state differs")
+    refresh_pages = {item.get("page_id"): item for item in m2_preflight_refresh.get("official_page_checks", [])}
+    if set(refresh_pages) != {"odata-download-documentation", "token-documentation", "terms-and-conditions", "sentinel-data-legal-notice"}:
+        fail("M2 Sentinel preflight refresh does not contain four exact official pages")
+    refreshed_terms_page = refresh_pages.get("terms-and-conditions", {})
+    if (
+        refreshed_terms_page.get("comparison_mode") != "normalized_terms_section_sha256"
+        or refreshed_terms_page.get("terms_identity", {}).get("normalized_text_sha256") != current_terms.get("terms_normalized_text_sha256")
+        or refreshed_terms_page.get("terms_identity", {}).get("structured_date_modified") != current_terms.get("terms_structured_date_modified")
+        or refreshed_terms_page.get("rendered_page_changed_from_initial") is not True
+    ):
+        fail("M2 Sentinel transfer does not bind the reconciled legal-section identity")
+    if any(refresh_pages[page_id].get("comparison_mode") != "raw_sha256" for page_id in ("odata-download-documentation", "token-documentation", "sentinel-data-legal-notice")):
+        fail("unchanged official access and legal-notice pages must retain exact-byte binding")
+    if (
+        m2_preflight_refresh.get("paths", {}).get("custody_initialized") is not True
+        or m2_preflight_refresh.get("paths", {}).get("existing_destination_or_staging_paths") != []
+        or m2_preflight_refresh.get("storage", {}).get("status") != "pass"
+        or m2_preflight_refresh.get("access", {}).get("credential_values_read_or_recorded") is not False
+        or m2_preflight_refresh.get("access", {}).get("authentication_performed") is not False
+        or m2_preflight_refresh.get("mutations_performed", {}).get("product_payload_bytes_received") != 0
+        or m2_preflight_refresh.get("mutations_performed", {}).get("external_custody") is not False
+    ):
+        fail("M2 Sentinel preflight refresh invents access, mutation, or nonempty custody")
+
     active_extensions = active_intake.get("extensions", {})
     if active_extensions.get("status") != "active_authorized_preflight_passed_custody_initialized" or active_extensions.get("custody_initialized") is not True:
         fail("active M2 intake must record initialized custody")
@@ -2763,7 +2858,7 @@ def main() -> None:
         "transfer_core_ref": "scripts/m2_transfer_core.py",
         "transfer_core_sha256": sha256("scripts/m2_transfer_core.py"),
         "transfer_runner_ref": "scripts/acquire_m2_product.py",
-        "transfer_runner_sha256": sha256("scripts/acquire_m2_product.py"),
+        "transfer_runner_sha256": "8a48b3bda9d729bceebf50e237f5671c967275d8203111aa8f8972aaddc3b645",
         "test_ref": "tests/test_m2_transfer_core.py",
         "test_sha256": sha256("tests/test_m2_transfer_core.py"),
         "discovery_ref": "records/acquisition/dem-acquisition-portability-correction.json",
@@ -3752,7 +3847,7 @@ def main() -> None:
         or transfer_id_evidence.get("correction_ref") != "records/acquisition/transfer-runner-attempt-id-correction.json"
         or transfer_id_evidence.get("correction_sha256") != sha256("records/acquisition/transfer-runner-attempt-id-correction.json")
         or transfer_id_evidence.get("transfer_runner_ref") != "scripts/acquire_m2_product.py"
-        or transfer_id_evidence.get("transfer_runner_sha256") != sha256("scripts/acquire_m2_product.py")
+        or transfer_id_evidence.get("transfer_runner_sha256") != "8a48b3bda9d729bceebf50e237f5671c967275d8203111aa8f8972aaddc3b645"
         or transfer_id_evidence.get("test_ref") != "tests/test_m2_transfer_core.py"
         or transfer_id_evidence.get("test_sha256") != sha256("tests/test_m2_transfer_core.py")
         or transfer_id_evidence.get("assertions") != transfer_runner_correction.get("assertions")
@@ -3998,6 +4093,30 @@ def main() -> None:
         or orbit_label_correction_evidence.get("assertions") != orbit_intake_label_correction.get("assertions")
     ):
         fail("EVID-0060 orbit active-intake activation label correction differs")
+
+    sentinel_refresh_evidence = ledger_by_id.get("EVID-0061")
+    expected_sentinel_refresh_bindings = {
+        "terms_reconciliation_sha256": sha256("records/source-gates/m2-terms-page-reconciliation.json"),
+        "source_gate_refresh_sha256": sha256("records/source-gates/m2-live-source-gate-refresh.json"),
+        "preflight_refresh_sha256": sha256("records/acquisition/preflight-refresh.json"),
+        "page_identity_sha256": sha256("scripts/m2_page_identity.py"),
+        "preflight_refresh_script_sha256": sha256("scripts/refresh_m2_preflight.py"),
+        "transfer_runner_sha256": sha256("scripts/acquire_m2_product.py"),
+        "test_sha256": sha256("tests/test_m2_page_identity.py"),
+    }
+    if (
+        sentinel_refresh_readiness.get("status") != "pass_refreshed_preflight_ready_secret_safe_token_reference_pending"
+        or sentinel_refresh_readiness.get("bindings") != expected_sentinel_refresh_bindings
+        or sentinel_refresh_readiness.get("assertions", {}).get("sentinel_payload_bytes_received") != 0
+        or sentinel_refresh_readiness.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or sentinel_refresh_readiness.get("assertions", {}).get("external_custody_mutated") is not False
+        or not isinstance(sentinel_refresh_evidence, dict)
+        or sentinel_refresh_evidence.get("status") != sentinel_refresh_readiness.get("status")
+        or sentinel_refresh_evidence.get("readiness_sha256") != sha256("records/acquisition/sentinel-preflight-refresh-readiness.json")
+        or sentinel_refresh_evidence.get("bindings") != expected_sentinel_refresh_bindings
+        or sentinel_refresh_evidence.get("assertions") != sentinel_refresh_readiness.get("assertions")
+    ):
+        fail("EVID-0061 Sentinel terms reconciliation and preflight refresh differ")
 
     violations = []
     for relative in tracked_files():

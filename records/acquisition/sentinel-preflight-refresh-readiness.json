@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-PREFLIGHT-REFRESH-READINESS-001",
+  "verified_at_utc": "2026-09-04T03:41:36Z",
+  "status": "pass_refreshed_preflight_ready_secret_safe_token_reference_pending",
+  "claim": "The stopped M1-SRC-001 invocation is reconciled as a pre-mutation terms-page guard stop. A fresh eight-product source and custody preflight passes with a semantic identity for the scope-relevant CDSE legal section and exact-byte identities for the three unchanged official resources.",
+  "bindings": {
+    "terms_reconciliation_sha256": "113828e782e47e3335a4b5701f1cedcb51f7416a53c0e71bad0124403f7cac2c",
+    "source_gate_refresh_sha256": "799e23ee6bba16184c692d6ce2ed91af6e8e6c697b2171838e9ea1c08410ddfe",
+    "preflight_refresh_sha256": "0eba97d9a9c3988b0fdf74223f198cf32b63f02a46c55ebd248535313cc83ba7",
+    "page_identity_sha256": "2e56c952b984edaad5eed19930072e8e5b7e17771e7e6d1d728cfd27ad7f0b3a",
+    "preflight_refresh_script_sha256": "ecba941a1caae32dd8a17fb2e826484d238f5bb48a97a6f6c45ba6f9a249c43f",
+    "transfer_runner_sha256": "ea1671f698445e48d26047cc2de9f45c01880e3fc3dda7be9970101f054a82c8",
+    "test_sha256": "340ef5995b81b6167ad924c129d32acf9676b21ab68034c5877660ecc0c08610"
+  },
+  "verification": {
+    "terms_reconciliation": "pass_scope_relevant_terms_identity_preserved_no_acceptance",
+    "source_gate_validator": "valid_ready_64_of_64_required_criteria",
+    "fresh_product_count": 8,
+    "live_page_revalidation_count": 4,
+    "focused_page_identity_test_count": 4,
+    "focused_page_identity_tests": "pass",
+    "active_intake_generic_validator": "pass",
+    "repository_checker_before_record_integration": "pass_258_required_files",
+    "full_repository_test_count": 223,
+    "full_repository_tests": "pass"
+  },
+  "assertions": {
+    "stopped_attempt_reconciled_as_pre_mutation": true,
+    "active_sentinel_authorized_count": 8,
+    "active_sentinel_attempt_count": 0,
+    "sentinel_custody_file_count": 0,
+    "changed_rendered_page_count": 1,
+    "changed_rendered_page_id": "terms-and-conditions",
+    "scope_relevant_terms_section_bound_semantically": true,
+    "unchanged_official_page_count_bound_by_raw_sha256": 3,
+    "exact_sentinel_products_refreshed": 8,
+    "fresh_source_gate_criteria_passed": 64,
+    "credential_reference_presence_checked_by_refresh": false,
+    "credential_values_read_or_recorded": false,
+    "authentication_performed": false,
+    "terms_or_account_action_performed": false,
+    "sentinel_payload_requested": false,
+    "sentinel_payload_bytes_received": 0,
+    "external_custody_mutated": false,
+    "scientific_result_established": false,
+    "authority_created": false
+  },
+  "limitations": [
+    "The initial full terms HTML was not retained, so the exact byte location of the rendered-page delta is not claimed.",
+    "The refresh does not test token validity or authenticated CDSE transfer behavior.",
+    "Any later legal-section, structured modification-date, linked legal-notice, account, terms-acceptance, product-identity, path, storage, or payload-response drift remains a pre-mutation stop.",
+    "Pixel usability, container integrity, materialization, registration, and scientific fitness remain untested."
+  ],
+  "current_checkpoint": "M2-AUTHENTICATION-REFERENCE",
+  "next_action": "Provide the existing owner-controlled CDSE access token only through the attached secret-safe terminal and run one exact M1-SRC-001 transfer attempt; never place the token in Git, chat, a command argument, or captured output."
+}

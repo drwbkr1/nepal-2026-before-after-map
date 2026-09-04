@@ -28,6 +28,7 @@ from m2_transfer_core import (
     stream_to_exclusive_staging,
     write_new_json,
 )
+from m2_page_identity import evaluate_page_body
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,6 +37,9 @@ INTAKE_PATH = ROOT / "contracts/m2-intake.json"
 CONTRACT_PATH = ROOT / "contracts/milestone-002.json"
 APPROVAL_PATH = ROOT / "records/source-gates/m2-activation-approval.json"
 PREFLIGHT_PATH = ROOT / "records/acquisition/preflight.json"
+PREFLIGHT_REFRESH_PATH = ROOT / "records/acquisition/preflight-refresh.json"
+SOURCE_GATE_REFRESH_PATH = ROOT / "records/source-gates/m2-live-source-gate-refresh.json"
+TERMS_RECONCILIATION_PATH = ROOT / "records/source-gates/m2-terms-page-reconciliation.json"
 PLAN_PATH = ROOT / "records/acquisition-plan.json"
 CATALOG_BASE = "https://catalogue.dataspace.copernicus.eu/odata/v1/Products"
 DOWNLOAD_HOST = "download.dataspace.copernicus.eu"
@@ -66,8 +70,7 @@ def live_page_consistency_check(preflight: dict[str, Any]) -> list[dict[str, Any
     observations: list[dict[str, Any]] = []
     for expected in preflight.get("official_page_checks", []):
         url = expected.get("url")
-        expected_sha = expected.get("sha256")
-        if not isinstance(url, str) or not isinstance(expected_sha, str):
+        if not isinstance(url, str):
             raise TransferControlError("preflight_page_binding_incomplete")
         request = urllib.request.Request(url, headers={"User-Agent": "nepal-2026-controlled-intake/1.0"})
         try:
@@ -75,15 +78,10 @@ def live_page_consistency_check(preflight: dict[str, Any]) -> list[dict[str, Any
                 body = response.read()
         except (urllib.error.URLError, TimeoutError, OSError) as exc:
             raise TransferControlError("official_page_revalidation_unavailable") from exc
-        observed_sha = hashlib.sha256(body).hexdigest()
-        if observed_sha != expected_sha:
-            raise TransferControlError("official_access_or_terms_page_changed")
-        observations.append({
-            "page_id": expected.get("page_id"),
-            "url": url,
-            "sha256": observed_sha,
-            "unchanged_from_preflight": True,
-        })
+        try:
+            observations.append(evaluate_page_body(expected, body))
+        except (UnicodeError, ValueError) as exc:
+            raise TransferControlError(str(exc)) from exc
     if len(observations) != 4:
         raise TransferControlError("preflight_page_binding_count_invalid")
     return observations
@@ -158,6 +156,7 @@ def main() -> int:
     contract = load(CONTRACT_PATH)
     approval = load(APPROVAL_PATH)
     preflight = load(PREFLIGHT_PATH)
+    preflight_refresh = load(PREFLIGHT_REFRESH_PATH)
     plan = load(PLAN_PATH)
     if approval.get("status") != "approved" or contract.get("status") != "active":
         raise TransferControlError("m2_authority_inactive")
@@ -167,6 +166,14 @@ def main() -> int:
         raise TransferControlError("active_contract_approval_hash_drift")
     if preflight.get("source_gate", {}).get("sha256") != intake.get("extensions", {}).get("source_gate_sha256"):
         raise TransferControlError("preflight_source_gate_binding_drift")
+    if (
+        preflight_refresh.get("status") != "pass_no_external_mutation"
+        or preflight_refresh.get("base_preflight", {}).get("sha256") != sha256_file(PREFLIGHT_PATH)
+        or preflight_refresh.get("source_gate", {}).get("sha256") != sha256_file(SOURCE_GATE_REFRESH_PATH)
+        or preflight_refresh.get("terms_reconciliation", {}).get("sha256") != sha256_file(TERMS_RECONCILIATION_PATH)
+        or preflight_refresh.get("authority", {}).get("approval_sha256") != sha256_file(APPROVAL_PATH)
+    ):
+        raise TransferControlError("m2_preflight_refresh_binding_drift")
     units = {unit["id"]: unit for unit in contract["units"]}
     acquire = units.get("M2-ACQUIRE", {})
     if acquire.get("status") != "ready" or acquire.get("gates", {}).get("custody_initialization") != "pass":
@@ -198,7 +205,7 @@ def main() -> int:
     if free_gib < float(preflight["storage"]["minimum_free_gib"]):
         raise TransferControlError("free_space_below_approved_minimum")
 
-    page_observations = live_page_consistency_check(preflight)
+    page_observations = live_page_consistency_check(preflight_refresh)
     catalog = public_catalog_check(asset, plan_record)
     ensure_directory(staging.parent, staging_root)
     ensure_directory(destination.parent, custody_root)

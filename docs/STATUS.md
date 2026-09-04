@@ -4,7 +4,7 @@
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
-- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; the eight Sentinel products and four orbit payloads remain unattempted
+- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; the eight Sentinel products have zero recorded transfer attempts and zero payload files, and the four orbit payloads remain unattempted
 - **Long-term goal:** Active
 - **Checkpoints:** `M2-AUTHENTICATION-REFERENCE`; dependent `M2-ORBIT-SENTINEL-CUSTODY`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
 
@@ -37,6 +37,10 @@ At `2026-09-03T17:31:17Z`, the non-mutating live preflight:
 
 The approved structure at `C:\Projects\Active\nepal-2026-before-after-map-data` was then created with custody and staging children. The repository and external initialization receipts match at SHA-256 `12812d1c53e13ec287425f74a1988f5c0be7d0638f856c9606fddf1c1431fb09`.
 
+An owner-run `M1-SRC-001` invocation later stopped at the runner's official-page guard because the rendered CDSE terms HTML changed from SHA-256 `17ebc07dc1fe685b6a3ef0ec64fd376dc1bf4b500e2d583aded19a53fdd55674` to `97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0`. The stop occurred before the runner created a started event, staging path, intake attempt, or payload request; current state remains eight authorized products, zero attempts, and zero Sentinel custody files.
+
+At `2026-09-04T03:41:36Z`, the refreshed source gate passed all 64 required criteria and all eight exact catalogue identities remained online and unchanged. The official terms node still reports `dateModified` `2026-05-05T08:04:39+0200`, all six scope-relevant legal statements remain present, and the linked Sentinel Data Legal Notice remains exact at SHA-256 `fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64`. Because the initial full HTML was not retained, the exact rendered-byte delta is not claimed. The transfer guard now binds normalized legal-section SHA-256 `22cf55ad3949e8eaee715780654be9eb0e8648a2808d6ba007b47c9849ab2b01` and the structured modification date, while the other three official resources remain exact-byte-bound. No authentication, credential read, terms action, custody mutation, or product payload occurred during reconciliation or refresh.
+
 The one-product transfer runner is prepared and locally verified. Eleven tests pass for secret-reference refusal before mutation, exclusive staging, streamed SHA-256 and provider-MD5 checks, size/checksum failure preservation, redirect refusal, path containment, receipt no-replacement, terminal failed-attempt history, and atomic hard-link promotion. Readiness receipt `records/acquisition/transfer-runner-readiness.json` explicitly records zero network requests, zero authentication, zero product bytes, and no active-intake mutation.
 
 The activation-time active intake is now retained at `records/acquisition/active-intake-initial-snapshot.json` with SHA-256 `a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c`. The repository no longer mistakes that historical identity for the permanently current mutable intake. A separate read-only validator and nine tests verify exact immutable product identity, append-only authorized/staging/failed/promoted transitions, terminal receipt bindings, secret exclusion, and optional external-path and promoted-byte reconciliation. The live external check passes with eight authorized products, zero attempts, and no custody files.
@@ -47,7 +51,7 @@ The exact eight-product offline verification contract is now active under the sa
 
 ## Current gate
 
-Preflight found no `CDSE_ACCESS_TOKEN`, username, or password reference in the process environment. No login was attempted. Before the first exact-product transfer, the workflow requires a secret-safe reference to an existing owner-controlled CDSE access token or authenticated session.
+The refreshed preflight deliberately did not inspect `CDSE_ACCESS_TOKEN`, username, or password references. Before the first exact-product transfer, the workflow still requires a secret-safe reference to an existing owner-controlled CDSE access token or authenticated session.
 
 Do not place a token, password, cookie, refresh value, or authorization header in chat, Git, a filename, a receipt, or captured command output. Stop if login, MFA, recovery, or terms acceptance needs owner action.
 

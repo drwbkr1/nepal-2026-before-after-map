@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "reconciliation_id": "NEPAL-M2-CDSE-TERMS-PAGE-RECONCILIATION-001",
+  "assessed_at_utc": "2026-09-04T03:41:36Z",
+  "status": "pass_scope_relevant_terms_identity_preserved_no_acceptance",
+  "authority": {
+    "approval_ref": "records/source-gates/m2-activation-approval.json",
+    "approval_sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
+    "authorized_action": "reconcile current source evidence and resume only the already approved exact-product acquisition",
+    "terms_acceptance_authorized": false
+  },
+  "initial_evidence": {
+    "source_gate_ref": "records/source-gates/m2-live-source-gate.json",
+    "source_gate_sha256": "913919d86d78ec2b03b5e8d20db9aef039938faa2437a6c906fcd93cb9dcc9a2",
+    "preflight_ref": "records/acquisition/preflight.json",
+    "preflight_sha256": "58b21c8b49df9e667d3b4fe168cced7ec9f113f9adf82ed8e9fd698b4b3545da",
+    "terms_rendered_page_sha256": "17ebc07dc1fe685b6a3ef0ec64fd376dc1bf4b500e2d583aded19a53fdd55674",
+    "terms_last_modified": "Thu, 03 Sep 2026 15:18:10 GMT",
+    "sentinel_legal_notice_sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64"
+  },
+  "current_evidence": {
+    "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+    "terms_rendered_page_sha256": "97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0",
+    "terms_rendered_page_length_bytes": 77747,
+    "terms_http_last_modified": "Thu, 03 Sep 2026 17:48:00 GMT",
+    "terms_http_etag": "\"1788457680\"",
+    "terms_section_id": "paragraph--1",
+    "terms_normalized_text_length": 11412,
+    "terms_normalized_text_sha256": "22cf55ad3949e8eaee715780654be9eb0e8648a2808d6ba007b47c9849ab2b01",
+    "terms_structured_date_modified": "2026-05-05T08:04:39+0200",
+    "required_phrases_present": [
+      "free, full and open basis",
+      "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "need to register as a user",
+      "data downloaded, pages visited, software used and time spent",
+      "All data processing facilities and data centers are based in the European Union.",
+      "shall act in good faith and shall not misuse or interfere the service"
+    ],
+    "sentinel_legal_notice_url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+    "sentinel_legal_notice_sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64"
+  },
+  "decision": {
+    "rendered_page_bytes_changed": true,
+    "scope_relevant_legal_section_current": true,
+    "official_structured_terms_document_modified_after_initial_preflight": false,
+    "exact_linked_sentinel_legal_notice_unchanged": true,
+    "interactive_terms_prompt_observed": false,
+    "terms_or_account_action_performed": false,
+    "classification": "rendered_page_change_does_not_change_the_approved_Sentinel_data_rights_or_access_scope",
+    "authorized_next_action": "refresh the non-mutating Sentinel acquisition preflight and retain the existing stop on any legal-section, legal-notice, account, or terms-acceptance change"
+  },
+  "limitations": [
+    "The initial full HTML body was not retained, so this record does not claim a byte-level location for the rendered-page delta.",
+    "The decision is limited to the approved Sentinel acquisition use and relies on the current official legal section, its structured modification date, the initial captured scope-relevant statements, and the unchanged linked Sentinel Data Legal Notice.",
+    "Any interactive terms prompt or later change to the normalized legal section, its structured modification date, or the linked legal notice remains a stop."
+  ],
+  "mutations_performed": {
+    "authentication": false,
+    "credential_values_read_or_recorded": false,
+    "terms_acceptance": false,
+    "account_action": false,
+    "product_payload_requested": false,
+    "product_payload_bytes_received": 0,
+    "external_custody_mutated": false
+  }
+}
