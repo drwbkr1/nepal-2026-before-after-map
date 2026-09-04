@@ -87,6 +87,8 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Outcome:** Candidate change layers from independent optical and radar routes.
 
+**Preparatory status:** `config/qa/change-evidence-contract.json` freezes candidate-screening behavior before real post-event processing. It requires 30 locked stable-control zones and 10,000 valid control pixels per route, median/MAD normalization, two-sided 1.5 dB and robust-z 3.5 radar thresholds, fixed NDVI/NBR/MNDWI delta and robust-z thresholds, a 5,000-square-metre mapping unit, complete accounting for all three routes, and a 25% overlap rule for spatial coincidence. Twelve synthetic tests distinguish candidate, zero-candidate, defer, block, disagreement, and inconclusive outcomes without creating interpretation or attribution. No real M4 processing is authorized or complete.
+
 **Candidate methods:**
 
 - true- and false-color visual comparison;

@@ -81,6 +81,14 @@ Planet or Vantor event imagery may improve visual interpretation, but candidate 
 
 The preferred core remains reproducible Copernicus data.
 
+## Predeclared candidate-change logic
+
+The three candidate pair routes must pass their independent pixel, mask, grid, and registration gates before change screening. `config/qa/change-evidence-contract.json` fixes stable-reference selection, robust normalization, optical and radar thresholds, minimum mapping area, route outcomes, and cross-route synthesis before real post-event pixels are processed.
+
+Radar VV and VH retain separate two-sided `after dB minus before dB` observations. Optical NDVI, NBR, and MNDWI deltas retain separate observation classes. Continuous deltas, exclusions, subthreshold summaries, zero-candidate outcomes, and every blocked or deferred route remain evidence. A route may produce a candidate polygon only; labels such as possible source scar, debris deposition, channel change, or inundation belong to later interpretation records.
+
+Cross-route overlap is recorded as spatial coincidence. Missing or masked evidence remains untestable rather than disagreement, and even multisensor coincidence does not establish event attribution. See [CHANGE_EVIDENCE_PROTOCOL.md](CHANGE_EVIDENCE_PROTOCOL.md).
+
 ## Required source-manifest fields
 
 `source_id`, provider, collection, exact product ID, acquisition start/end, processing level, orbit/tile, footprint, query and query time, catalog URL/API, access method, rights/license, local custody path, byte size, checksum, coverage status, pixel-inspection status, mask status, disposition, rejection reason, and reviewer.

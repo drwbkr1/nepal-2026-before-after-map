@@ -327,3 +327,11 @@
 **Reason:** The specification's `pixelValueType` domain is `Complex` or `Detected`, and the image-information field uses those same labels. The processing description separately explains that GRD values represent detected amplitude. The original contract conflated those two layers, but changing a rule after seeing real inputs requires explicit owner review and a clear post-observation limitation.
 
 **Status:** The source gate is ready for metadata and review preparation only. Proposal SHA-256 `ebdcb763afd99ea23090c9bd83fd9e9cb6cb8dfbb2b5fed60edb80f1fa61c731` and review bundle SHA-256 `831df5d5aae06862514667ad861c815154085fa3c546039e60f517d38ee442ff` are exact. The blank response contains one item, zero decisions, and no attestation. No corrected contract, test run, publication, real-002 inspection, pixel use, or baseline action is authorized.
+
+## D-055 — Freeze candidate-change and cross-route semantics before post-event pixels
+
+**Decision:** Predeclare separate optical and radar candidate thresholds using locked stable-reference zones, median/MAD normalization, existing coverage and registration gates, a 5,000-square-metre minimum mapping unit, and complete dispositions for all three routes. Treat overlap as spatial coincidence, preserve disagreement and untestable routes distinctly, and keep every automated class at the observation-candidate level.
+
+**Reason:** The project had fixed inputs, preprocessing, and pixel QA but no immutable boundary for turning continuous deltas into mapped candidates. Choosing controls after seeing a dramatic event could bias the map, while merging missing coverage with disagreement or candidate agreement with attribution would overstate the evidence.
+
+**Status:** The contract and protocol are prepared with no real-processing authority. Twelve portable synthetic tests pass. No satellite pixels were read, no candidate feature was created, and interpretation, attribution, scientific admission, and publication remain separate later gates.

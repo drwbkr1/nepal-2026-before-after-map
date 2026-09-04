@@ -1,0 +1,69 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M4-CHANGE-EVIDENCE-CONTROL-READINESS-001",
+  "verified_at_utc": "2026-09-04T20:53:50Z",
+  "status": "pass_synthetic_control_only_no_real_change_processing",
+  "purpose": "Freeze candidate-change, route-disposition, and cross-route synthesis logic before any real post-event pixel processing.",
+  "bindings": {
+    "contract_ref": "config/qa/change-evidence-contract.json",
+    "contract_sha256": "fc2d18fa758d25b212361110ec9dba2611ba447611a2f7a284f5d1859b0ad33e",
+    "portable_core_ref": "scripts/change_evidence_core.py",
+    "portable_core_sha256": "0b9660a8f8717d3190473de72e6c566b320ff086d208140faf2ed61a8fa25903",
+    "tests_ref": "tests/test_change_evidence_core.py",
+    "tests_sha256": "aad916113d5d77c44e974af6c4816901f68af4e1ab063b17794e47d523ef67e4",
+    "protocol_ref": "docs/CHANGE_EVIDENCE_PROTOCOL.md",
+    "protocol_sha256": "62c3d0462d8b84dfe0fb14f19e17c21d76323e495ae24186c2514f465b5f3c13"
+  },
+  "validation": {
+    "focused_test_command": "python -m unittest tests.test_change_evidence_core -v",
+    "focused_test_count": 12,
+    "focused_test_status": "pass",
+    "tracked_contract_valid": true,
+    "optical_observation_classes_remain_separate": true,
+    "radar_two_sided_and_polarization_direction_exercised": true,
+    "zero_stable_scale_defer_exercised": true,
+    "candidate_only_claim_boundary_exercised": true,
+    "zero_candidate_nonfailure_exercised": true,
+    "stable_reference_and_minimum_mapping_unit_defer_exercised": true,
+    "registration_and_failure_history_block_exercised": true,
+    "candidate_area_consistency_invalid_exercised": true,
+    "cross_sensor_coincidence_without_attribution_exercised": true,
+    "disagreement_and_inconclusive_distinction_exercised": true,
+    "missing_route_disposition_invalid_exercised": true
+  },
+  "fixed_controls": {
+    "minimum_control_zones": 30,
+    "minimum_valid_control_pixels": 10000,
+    "stable_location": "median",
+    "stable_scale": "MAD_x_1.4826",
+    "minimum_absolute_radar_delta_db": 1.5,
+    "minimum_absolute_radar_robust_z": 3.5,
+    "optical_delta_thresholds": {
+      "dndvi_pre_minus_post": 0.2,
+      "dnbr_pre_minus_post": 0.15,
+      "dmndwi_post_minus_pre": 0.2
+    },
+    "minimum_optical_robust_z": 3.5,
+    "minimum_mapping_unit_m2": 5000.0,
+    "minimum_cross_route_overlap_fraction_of_smaller": 0.25
+  },
+  "assertions": {
+    "external_data_read": false,
+    "arcgis_runtime_invoked": false,
+    "satellite_pixels_read_or_written": false,
+    "real_route_evaluated": false,
+    "candidate_change_created": false,
+    "interpretation_created": false,
+    "attribution_created": false,
+    "scientific_admission_authorized": false,
+    "threshold_change_after_observation_authorized": false,
+    "publication_authorized": false,
+    "current_checkpoint_changed": false
+  },
+  "limitations": [
+    "The focused tests use synthetic scalar signals and route summaries rather than real rasters or polygons.",
+    "The thresholds are predeclared candidate-screening rules and have not been shown suitable for the actual Nepal pixels.",
+    "Real change processing remains dependent on complete verified custody, preprocessing, masks, registration, and separate human scientific review."
+  ],
+  "next_action": "Retain these thresholds and route semantics unchanged until authorized real M4 processing; preserve any route that blocks, defers, finds zero candidates, or disagrees with another route."
+}

@@ -21,6 +21,7 @@ This project is building a reproducible, ArcGIS-ready before/after evidence pack
 - a separate final M6 acceptance contract now requires five complete maps, projected scientific vectors and GeoTIFFs, exact source and uncertainty links, preserved non-success history, visible exclusions, artifact hashes, and a clean-environment PPKX reopen; eight synthetic tests pass, but no final artifact or M6 result exists;
 - fixed pixel-readiness rules cover AOI coverage, optical masks, radar masks, grid alignment, and registration before real product access;
 - portable and ArcGIS-native synthetic tests exercise pass, block, and defer outcomes without creating a real-pixel claim;
+- M4 candidate-change rules now fix stable-reference normalization, radar and optical thresholds, minimum mapping area, all-route accounting, agreement/disagreement semantics, and candidate-only wording before real post-event pixels; twelve synthetic tests pass with no scientific output;
 - three independent candidate pair routes are predeclared: ascending radar, descending radar, and RUM optical.
 - the four-tile terrain surface passed the fixed tile, seam, slope, projection, stable-manifest, and exported-map screens without resolving vertical datum or elevation accuracy.
 

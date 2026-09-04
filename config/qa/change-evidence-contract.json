@@ -1,0 +1,198 @@
+{
+  "contract_version": "1.0",
+  "contract_id": "NEPAL-M4-CHANGE-EVIDENCE-001",
+  "status": "predeclared_no_real_change_processing",
+  "prepared_at_utc": "2026-09-04T20:49:30Z",
+  "analysis_crs": {
+    "wkid": 32645,
+    "name": "WGS 1984 UTM Zone 45N",
+    "linear_unit": "Meter"
+  },
+  "bindings": {
+    "pair_plan": {
+      "ref": "config/qa/candidate-pair-plan.json",
+      "sha256": "c346af2e575a21e4931991935c0acc21ba70083c4613255456ced77b71bb1560"
+    },
+    "pixel_readiness": {
+      "ref": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"
+    },
+    "radar_processing": {
+      "ref": "config/qa/radar-baseline-processing-contract.json",
+      "sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f"
+    },
+    "optical_processing": {
+      "ref": "config/qa/optical-baseline-processing-contract.json",
+      "sha256": "8321b7d3bd6a4a4304ed111f67b9b3ec372204823e495fbabd434ba9463e6eb5"
+    },
+    "evidence_workspace_schema": {
+      "ref": "config/arcgis/evidence-workspace-schema.json",
+      "sha256": "4b592ba928c0c532856f91be49a1f44349ba13d3fa783be20bdb9fab6d20dafb"
+    }
+  },
+  "routes": [
+    {
+      "route_id": "PAIR-S1-ASC-R085-IW",
+      "route_kind": "radar",
+      "independence_group": "radar_ascending_r085",
+      "before_source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002"
+      ],
+      "after_source_ids": [
+        "M1-SRC-004",
+        "M1-SRC-005"
+      ],
+      "cell_size_m": 10.0,
+      "threshold_profile": "RADAR-ROBUST-DELTA-DB-001"
+    },
+    {
+      "route_id": "PAIR-S1-DESC-R121-IW",
+      "route_kind": "radar",
+      "independence_group": "radar_descending_r121",
+      "before_source_ids": [
+        "M1-SRC-003"
+      ],
+      "after_source_ids": [
+        "M1-SRC-006"
+      ],
+      "cell_size_m": 10.0,
+      "threshold_profile": "RADAR-ROBUST-DELTA-DB-001"
+    },
+    {
+      "route_id": "PAIR-S2-RUM-R119",
+      "route_kind": "optical",
+      "independence_group": "optical_rum_r119",
+      "before_source_ids": [
+        "M1-SRC-010"
+      ],
+      "after_source_ids": [
+        "M1-SRC-008"
+      ],
+      "cell_size_m": 20.0,
+      "threshold_profile": "OPTICAL-ROBUST-INDEX-DELTA-001"
+    }
+  ],
+  "stable_reference": {
+    "selection_must_be_locked_before_change_metrics": true,
+    "event_corridor_excluded": true,
+    "minimum_control_zones": 30,
+    "minimum_valid_pixels_per_route": 10000,
+    "location_estimator": "median",
+    "scale_estimator": "MAD",
+    "mad_consistency_factor": 1.4826,
+    "nonfinite_policy": "invalid",
+    "zero_or_nonfinite_scale_policy": "defer",
+    "date_shopping_authorized": false,
+    "post_observation_control_reselection_authorized": false
+  },
+  "input_qa": {
+    "required_status": "pass_qa_only",
+    "minimum_coverage_fraction": 0.99,
+    "minimum_usable_fraction": 0.8,
+    "maximum_registration_rmse_pixels": 0.5,
+    "maximum_absolute_registration_bias_pixels": 0.5,
+    "partial_or_deferred_input_policy": "retain_route_as_inconclusive_without_candidate_admission"
+  },
+  "threshold_profiles": {
+    "RADAR-ROBUST-DELTA-DB-001": {
+      "signal": "after_db_minus_before_db",
+      "polarizations": [
+        "VV",
+        "VH"
+      ],
+      "minimum_absolute_delta_db": 1.5,
+      "minimum_absolute_robust_z": 3.5,
+      "two_sided": true,
+      "classes": {
+        "positive": "radar_backscatter_increase",
+        "negative": "radar_backscatter_decrease"
+      },
+      "single_polarization_candidate_allowed": true,
+      "dual_polarization_same_direction_flag": "stronger_internal_route_support",
+      "opposite_direction_policy": "retain_both_measurements_and_flag_for_review"
+    },
+    "OPTICAL-ROBUST-INDEX-DELTA-001": {
+      "metrics": {
+        "dndvi_pre_minus_post": {
+          "minimum_delta": 0.2,
+          "minimum_robust_z": 3.5,
+          "class": "vegetation_index_decrease"
+        },
+        "dnbr_pre_minus_post": {
+          "minimum_delta": 0.15,
+          "minimum_robust_z": 3.5,
+          "class": "normalized_burn_ratio_decrease"
+        },
+        "dmndwi_post_minus_pre": {
+          "minimum_delta": 0.2,
+          "minimum_robust_z": 3.5,
+          "class": "modified_water_index_increase"
+        }
+      },
+      "individual_metrics_remain_separate": true,
+      "any_single_metric_candidate_allowed": true,
+      "class_names_are_observations_not_interpretations": true
+    }
+  },
+  "object_formation": {
+    "connectivity": 8,
+    "minimum_mapping_unit_m2": 5000.0,
+    "candidate_raster_area_consistency_tolerance_fraction": 0.01,
+    "minimum_hole_m2": 400.0,
+    "simplification_tolerance_m": 10.0,
+    "threshold_tuning_after_observation_authorized": false,
+    "manual_rescue_of_subthreshold_objects_authorized": false,
+    "continuous_delta_rasters_must_be_retained": true,
+    "subthreshold_summary_must_be_retained": true
+  },
+  "cross_route_synthesis": {
+    "independent_route_disposition_required_first": true,
+    "require_all_route_dispositions": true,
+    "minimum_overlap_fraction_of_smaller_polygon": 0.25,
+    "agreement_label": "spatially_coincident_candidates",
+    "single_route_label": "single_route_candidate",
+    "disagreement_label": "disagreement_retained",
+    "all_testable_no_candidate_label": "no_candidate_observed",
+    "untestable_label": "inconclusive",
+    "missing_or_masked_route_is_not_disagreement": true,
+    "radar_orbit_routes_remain_distinct": true,
+    "multisensor_agreement_requires_optical_and_radar": true,
+    "agreement_does_not_establish_attribution": true
+  },
+  "required_outputs_per_route": [
+    "continuous_delta_rasters",
+    "validity_and_exclusion_mask",
+    "stable_reference_statistics",
+    "registration_and_coverage_qa",
+    "candidate_polygon_layer_or_explicit_zero_candidate_record",
+    "subthreshold_object_summary",
+    "source_and_processing_manifest",
+    "route_disposition_and_limitations"
+  ],
+  "decision_semantics": {
+    "route_precedence": [
+      "invalid",
+      "block",
+      "defer",
+      "pass_no_candidate_observed",
+      "pass_candidate_only"
+    ],
+    "candidate_is_not_interpretation": true,
+    "candidate_is_not_attribution": true,
+    "zero_candidate_is_not_failure": true,
+    "defer_is_not_failure": true,
+    "failed_and_inconclusive_routes_must_remain_visible": true,
+    "scientific_admission_requires_later_human_review": true
+  },
+  "authority": {
+    "this_contract_creates_authority": false,
+    "real_pixel_processing_authorized_now": false,
+    "threshold_change_after_observation_authorized": false,
+    "source_substitution_authorized": false,
+    "interpretation_authorized": false,
+    "attribution_authorized": false,
+    "publication_authorized": false
+  },
+  "claim_boundary": "This contract fixes candidate-change logic before real post-event processing. Synthetic checks establish control behavior only. A route pass can create candidate observation evidence for later review; it cannot establish geomorphic interpretation, event attribution, emergency guidance, or publication fitness."
+}

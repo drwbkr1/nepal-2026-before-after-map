@@ -11,6 +11,7 @@ from pathlib import Path
 
 from arcgis_final_delivery_core import validate_contract as validate_arcgis_final_delivery_contract
 from arcgis_package_portability_core import validate_contract as validate_arcgis_package_portability_contract
+from change_evidence_core import validate_contract as validate_change_evidence_contract
 from derive_m2_acquisition_checkpoint import derive_checkpoint
 from validate_m2_acquisition_progress import (
     INITIAL_ACTIVE_INTAKE_SHA256,
@@ -393,6 +394,11 @@ REQUIRED = [
     "scripts/arcgis_final_delivery_core.py",
     "tests/test_arcgis_final_delivery.py",
     "records/readiness/m6-arcgis-final-delivery-control-readiness.json",
+    "config/qa/change-evidence-contract.json",
+    "docs/CHANGE_EVIDENCE_PROTOCOL.md",
+    "scripts/change_evidence_core.py",
+    "tests/test_change_evidence_core.py",
+    "records/readiness/m4-change-evidence-control-readiness.json",
     "scripts/render_m2_dem_amendment_review.py",
     "contracts/m2-dem-vertical-datum-proposal.json",
     "contracts/m2-dem-terrain-result-review-proposal.json",
@@ -6064,6 +6070,68 @@ def main() -> None:
         ))
     ):
         fail("EVID-0078 ArcGIS final delivery control readiness differs or overclaims")
+
+    change_evidence_contract = json.loads(
+        (ROOT / "config/qa/change-evidence-contract.json").read_text(encoding="utf-8")
+    )
+    change_evidence_readiness = json.loads(
+        (ROOT / "records/readiness/m4-change-evidence-control-readiness.json").read_text(encoding="utf-8")
+    )
+    change_evidence_errors = validate_change_evidence_contract(change_evidence_contract)
+    if change_evidence_errors:
+        fail("M4 change-evidence contract differs: " + "; ".join(change_evidence_errors))
+    expected_change_evidence_bindings = {
+        "contract_ref": "config/qa/change-evidence-contract.json",
+        "contract_sha256": "fc2d18fa758d25b212361110ec9dba2611ba447611a2f7a284f5d1859b0ad33e",
+        "portable_core_ref": "scripts/change_evidence_core.py",
+        "portable_core_sha256": "0b9660a8f8717d3190473de72e6c566b320ff086d208140faf2ed61a8fa25903",
+        "tests_ref": "tests/test_change_evidence_core.py",
+        "tests_sha256": "aad916113d5d77c44e974af6c4816901f68af4e1ab063b17794e47d523ef67e4",
+        "protocol_ref": "docs/CHANGE_EVIDENCE_PROTOCOL.md",
+        "protocol_sha256": "62c3d0462d8b84dfe0fb14f19e17c21d76323e495ae24186c2514f465b5f3c13",
+    }
+    if (
+        change_evidence_readiness.get("status") != "pass_synthetic_control_only_no_real_change_processing"
+        or change_evidence_readiness.get("bindings") != expected_change_evidence_bindings
+        or change_evidence_readiness.get("validation", {}).get("focused_test_count") != 12
+        or change_evidence_readiness.get("validation", {}).get("focused_test_status") != "pass"
+        or any(change_evidence_readiness.get("assertions", {}).get(key) is not False for key in (
+            "external_data_read", "arcgis_runtime_invoked", "satellite_pixels_read_or_written",
+            "real_route_evaluated", "candidate_change_created", "interpretation_created",
+            "attribution_created", "scientific_admission_authorized",
+            "threshold_change_after_observation_authorized", "publication_authorized",
+            "current_checkpoint_changed",
+        ))
+    ):
+        fail("M4 change-evidence control readiness differs or overclaims")
+    for binding in change_evidence_contract.get("bindings", {}).values():
+        if binding.get("sha256") != sha256(binding.get("ref", "")):
+            fail("M4 change-evidence source binding is stale")
+    for ref_key, sha_key in (
+        ("contract_ref", "contract_sha256"), ("portable_core_ref", "portable_core_sha256"),
+        ("tests_ref", "tests_sha256"), ("protocol_ref", "protocol_sha256"),
+    ):
+        if expected_change_evidence_bindings[sha_key] != sha256(expected_change_evidence_bindings[ref_key]):
+            fail(f"M4 change-evidence {sha_key} differs")
+
+    change_evidence_ledger = ledger_by_id.get("EVID-0079")
+    if (
+        not isinstance(change_evidence_ledger, dict)
+        or change_evidence_ledger.get("status") != "pass_synthetic_control_only_no_real_change_processing"
+        or change_evidence_ledger.get("contract_sha256") != sha256("config/qa/change-evidence-contract.json")
+        or change_evidence_ledger.get("portable_core_sha256") != sha256("scripts/change_evidence_core.py")
+        or change_evidence_ledger.get("tests_sha256") != sha256("tests/test_change_evidence_core.py")
+        or change_evidence_ledger.get("readiness_sha256") != sha256("records/readiness/m4-change-evidence-control-readiness.json")
+        or change_evidence_ledger.get("assertions", {}).get("focused_test_count") != 12
+        or any(change_evidence_ledger.get("assertions", {}).get(key) is not False for key in (
+            "external_data_read", "arcgis_runtime_invoked", "satellite_pixels_read_or_written",
+            "real_route_evaluated", "candidate_change_created", "interpretation_created",
+            "attribution_created", "scientific_admission_authorized",
+            "threshold_change_after_observation_authorized", "publication_authorized",
+            "current_checkpoint_changed",
+        ))
+    ):
+        fail("EVID-0079 M4 change-evidence readiness differs or overclaims")
 
     violations = []
     for relative in tracked_files():

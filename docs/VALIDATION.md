@@ -236,6 +236,17 @@ python scripts/prepare_optical_input_readiness_contract.py --created-at-utc 2026
 
 The tracked ArcGIS receipt binds the corrected synthetic adapter run. ArcGIS Pro 3.7.1 opens sixteen JP2 rasters, records each format, CRS, band count, dimension, cell size, pixel type, and extent, and reads the three-band 60 m `MSK_CLASSI_B00.jp2` header from its `Band_1` through `Band_3` child descriptions. It blocks a deliberately shifted after grid with sixteen extent mismatches. The production runner stops before importing ArcPy when either exact materialization receipt is absent. This is header-readiness evidence only and does not establish real pixel access or usability. The earlier published one-band 20 m fixture and the first corrected ArcGIS attempt remain preserved as superseded and failed evidence.
 
+## Candidate change-evidence control validation
+
+The future M4 route logic is portable and predeclared:
+
+```powershell
+python -m unittest tests.test_change_evidence_core -v
+python scripts/check_project.py
+```
+
+Twelve focused tests cover separate optical index observations, two-sided VV/VH radar changes, zero-MAD defer behavior, exact input-QA and stable-reference requirements, minimum mapping area, candidate-area consistency, failure-history retention, zero-candidate nonfailure, all-route accounting, multisensor spatial coincidence without attribution, disagreement, and untestable-route inconclusiveness. These tests use synthetic scalar signals and route summaries. They read no satellite pixel and create no candidate feature, interpretation, attribution, or processing authority.
+
 ## Source validation
 
 For each external product:
