@@ -133,7 +133,8 @@ class M2DemActivationTests(unittest.TestCase):
         )
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-AUTHENTICATION-REFERENCE")
         self.assertEqual(self.profile["parallel_checkpoints"][0]["checkpoint_id"], expected_checkpoint)
-        self.assertEqual(self.goal["parallel_checkpoints"], [expected_checkpoint])
+        self.assertEqual(self.profile["parallel_checkpoints"][1]["checkpoint_id"], "M2-DEM-TERRAIN-RESULT-REVIEW")
+        self.assertEqual(self.goal["parallel_checkpoints"], [expected_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW"])
 
     def test_activation_receipt_preserves_published_outputs_and_claim_boundary(self) -> None:
         self.assertEqual(self.receipt["status"], "pass_exact_dem_amendment_activated_preflight_pending")

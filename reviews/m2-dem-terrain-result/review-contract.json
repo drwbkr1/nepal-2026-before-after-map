@@ -1,0 +1,46 @@
+{
+  "contract_version": "human-review-contract-v1",
+  "template": false,
+  "review_id": "m2-dem-terrain-result-review-001",
+  "response_schema_version": "nepal-m2-dem-terrain-result-response-v1",
+  "workflow_authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "authorized_action_classes": [
+      "evidence_recording",
+      "project_control",
+      "routine_qa",
+      "update_project_records"
+    ],
+    "verified_at_utc": "2026-09-04T00:53:31Z",
+    "expires_at_utc": null,
+    "review_required": true,
+    "lock_authorized": true,
+    "reconcile_authorized": true,
+    "post_review_actions": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ]
+  },
+  "review_bundle": {
+    "bundle_id": "m2-dem-terrain-result-review-bundle-001",
+    "manifest_sha256": "834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5",
+    "candidate_identity": "M2-DEM-TERRAIN-RESULT-SHA256:9663c261de37c77fd96896d1fbb37c4c3a970c47966661908673db880e640dd7",
+    "rendered_surface_verified": true
+  },
+  "allowed_decisions": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "required_attestation": true,
+  "max_notes_length": 2000,
+  "hash_prefix_length": 16,
+  "items": [
+    {
+      "item_id": "M2-DEM-TERRAIN-SCREEN-RESULT-001",
+      "evidence_sha256": "834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5"
+    }
+  ]
+}

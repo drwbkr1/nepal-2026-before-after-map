@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-DEM-TERRAIN-RESULT-REVIEW-001",
+  "status": "review_ready_no_human_decision",
+  "created_at_utc": "2026-09-04T00:48:30Z",
+  "purpose": "Request a bounded owner review of the exact attempt-003 terrain-screen result without converting that review into vertical-datum, radar-processing, or scientific authority.",
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "authority_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+    "review_required_by": "records/readiness/m2-dem-terrain-readiness-decision.json",
+    "review_required_by_sha256": "7af1eadf1af934c1bfe1f65b54d7af5b98549bbc9c53a9d212106b0099dea9d2",
+    "this_proposal_creates_authority": false
+  },
+  "candidate": {
+    "receipt_ref": "records/surface-receipts/m2-dem-terrain-quality.json",
+    "receipt_sha256": "9663c261de37c77fd96896d1fbb37c4c3a970c47966661908673db880e640dd7",
+    "attempt_id": "attempt-003",
+    "status": "pass_terrain_qa_only_vertical_datum_and_independent_accuracy_deferred",
+    "external_manifest_sha256": "6baf1ec47f4bc27c9dc2ab3501637690d717673e63d9e0f5036e1b2dc2ed1620",
+    "stable_file_count": 189,
+    "stable_total_bytes": 520668653,
+    "analysis_crs_wkid": 32645,
+    "cell_size_m": 30.0,
+    "vertical_transformation_applied": false,
+    "elevation_value_semantics": "EGM2008 orthometric metres"
+  },
+  "external_review_artifacts": [
+    {
+      "artifact_id": "arcgis-project",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.aprx",
+      "sha256": "08829c97eeb831758573fbfc0146f09e5d1a39d342f313f5adab4ba2c6facc83",
+      "role": "editable ArcGIS Pro terrain-QA project"
+    },
+    {
+      "artifact_id": "pdf-map",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.pdf",
+      "sha256": "139e4a4f0f5a02018c824cbfc2f85ddcf3b1d1c4b8d477dd7936efc4d0f74d0b",
+      "role": "one-page exported review map"
+    },
+    {
+      "artifact_id": "png-map",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.png",
+      "sha256": "39c63525171ae7cd24b540577079467c7efbaedb4aae959086e3f4d1a38ad811",
+      "role": "original exported review image"
+    },
+    {
+      "artifact_id": "derived-manifest",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\derived-output-manifest.json",
+      "sha256": "6baf1ec47f4bc27c9dc2ab3501637690d717673e63d9e0f5036e1b2dc2ed1620",
+      "role": "external stable-output identity manifest"
+    }
+  ],
+  "established_by_attempt_003": {
+    "source_tile_checks": {
+      "passed": 4,
+      "evaluated": 4
+    },
+    "native_seam_checks": {
+      "passed": 4,
+      "evaluated": 4,
+      "largest_absolute_residual_m": 58.1905517578125,
+      "samples_above_100_m": 0
+    },
+    "slope_check": {
+      "status": "pass",
+      "maximum_degrees": 88.2261734008789,
+      "fraction_above_85_degrees": 1.8079732342821135e-05,
+      "defer_fraction_threshold": 0.001
+    },
+    "projection_check": "pass_epsg_32645_30_m_no_vertical_transform",
+    "stable_output_reconciliation": "pass_189_of_189",
+    "model_visual_inspection": "pass_five_predeclared_criteria"
+  },
+  "decision_request": {
+    "question": "Does the reviewer accept the exact attempt-003 evidence as satisfying the bounded owner terrain-result review while preserving every stated limitation and deferred gate?",
+    "allowed_decisions": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "approval_effect": [
+      "record that the owner reviewed and accepted the exact terrain-screen result and its limitations",
+      "permit only the human-review gate in the terrain-readiness audit to be reassessed from defer to pass after exact response lock and reconciliation",
+      "retain the attempt-003 terrain result as gross-artifact and map-surface evidence only"
+    ],
+    "revision_effect": "Return the exact requested revision without changing observed metrics, thresholds, failed attempts, or external artifacts.",
+    "deferral_effect": "Keep the owner terrain-result review unresolved and release no action."
+  },
+  "does_not_authorize": [
+    "approve or execute a vertical-datum method",
+    "sign in, accept terms, install software, or approve a privileged prompt",
+    "use GEOID or NONE in Sentinel-1 processing",
+    "acquire an independent DEM, orbit auxiliary, or additional satellite product",
+    "process Sentinel pixels or promote the DEM to radar-ready",
+    "publish DEM-derived raster imagery, scientific change, interpretation, attribution, or emergency guidance",
+    "erase or reclassify attempt-001, attempt-002, or any deferred audit gate"
+  ],
+  "remaining_deferred_gates": [
+    "vertical-datum and independent elevation uncertainty",
+    "pair-specific radar-input fitness",
+    "independent elevation accuracy",
+    "Sentinel acquisition and pixel usability",
+    "satellite-observed change, interpretation, and attribution"
+  ],
+  "limitations": [
+    "The tracked review bundle cannot contain the external DEM-derived map pixels; it binds their paths and hashes through the result receipt.",
+    "Model visual inspection does not substitute for this human review or independent elevation validation.",
+    "A completed approval can close only the owner terrain-result review; every other deferred gate remains separate."
+  ]
+}

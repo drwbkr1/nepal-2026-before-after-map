@@ -16,6 +16,7 @@
     "records/source-gates/m2-dem-amendment-approval.json"
   ],
   "parallel_checkpoints": [
-    "M2-DEM-VERTICAL-DATUM-REVIEW"
+    "M2-DEM-VERTICAL-DATUM-REVIEW",
+    "M2-DEM-TERRAIN-RESULT-REVIEW"
   ]
 }

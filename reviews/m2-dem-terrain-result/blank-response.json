@@ -1,0 +1,18 @@
+{
+  "response_schema_version": "nepal-m2-dem-terrain-result-response-v1",
+  "review_id": "m2-dem-terrain-result-review-001",
+  "completed": false,
+  "review_started_at_utc": null,
+  "review_completed_at_utc": null,
+  "reviewer": {
+    "attestation": false
+  },
+  "responses": [
+    {
+      "item_id": "M2-DEM-TERRAIN-SCREEN-RESULT-001",
+      "evidence_sha256": "834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5",
+      "decision": null,
+      "notes": ""
+    }
+  ]
+}

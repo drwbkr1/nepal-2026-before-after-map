@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-dem-terrain-result-review-bundle-001",
+  "review_id": "m2-dem-terrain-result-review-001",
+  "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+  "candidate_identity": "M2-DEM-TERRAIN-RESULT-SHA256:9663c261de37c77fd96896d1fbb37c4c3a970c47966661908673db880e640dd7",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-dem-terrain-result-review.png",
+      "sha256": "f5382e7dde4b3c6794895386eb8cad084cf6efbd8fb48d76976679ef13bd9a62",
+      "role": "text_only_review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-dem-terrain-result-review.json",
+          "sha256": "a02fdb98953887bc2ccfa99536a5455e3d670d8d76b9416d31d91f05d4298917"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_DEM_TERRAIN_RESULT_REVIEW.md",
+      "sha256": "d58dc68b691b32d3d4f2d80f849d8bbd8e8348ed16f6b7d381f50f2e02d2fb8b",
+      "role": "decision_instructions_and_external_artifact_paths",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "review-proposal",
+      "path": "contracts/m2-dem-terrain-result-review-proposal.json",
+      "sha256": "80855c6859a6a78de5712883f604c4f6f7816e459b44638054c3f6a1e848a90c",
+      "role": "candidate_review_scope_and_non_authorizing_boundary",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "terrain-result",
+      "path": "records/surface-receipts/m2-dem-terrain-quality.json",
+      "sha256": "9663c261de37c77fd96896d1fbb37c4c3a970c47966661908673db880e640dd7",
+      "role": "candidate_terrain_result_and_external_output_bindings",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "readiness-decision",
+      "path": "records/readiness/m2-dem-terrain-readiness-decision.json",
+      "sha256": "7af1eadf1af934c1bfe1f65b54d7af5b98549bbc9c53a9d212106b0099dea9d2",
+      "role": "deferred_gate_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "attempt-003-contract",
+      "path": "config/qa/dem-terrain-quality-contract-attempt-003.json",
+      "sha256": "e903117aba56e07c83e4b314ec613019f9e0d2b35f60222c03ca74a7c0a66f88",
+      "role": "predeclared_method_and_thresholds",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "active-dem-approval",
+      "path": "records/source-gates/m2-dem-amendment-approval.json",
+      "sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+      "role": "current_bounded_authority",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "decision_effect_if_approved": [
+    "record completed owner review of the exact attempt-003 terrain result and limitations",
+    "permit reassessment of only the terrain-readiness human-review gate after exact response lock and reconciliation",
+    "retain all other deferred gates and the terrain-only claim boundary"
+  ],
+  "limitations": [
+    "This bundle contains no completed human decision.",
+    "The public review surface contains no DEM-derived map pixels; external APRX, PDF, PNG, and manifest identity is bound through the terrain receipt and instructions.",
+    "Approval cannot establish vertical datum, independent elevation accuracy, radar-pair fitness, Sentinel pixel usability, satellite change, interpretation, attribution, or emergency guidance.",
+    "Approval creates no acquisition, installation, processing, or publication authority."
+  ]
+}

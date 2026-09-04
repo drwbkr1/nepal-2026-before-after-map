@@ -1,12 +1,12 @@
 # Current status
 
-- **State:** M1 complete; M2 active with independent Sentinel authentication and DEM vertical-datum review checkpoints
+- **State:** M1 complete; M2 active with one Sentinel checkpoint and two independent DEM review checkpoints
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; the eight Sentinel products remain unattempted
 - **Long-term goal:** Active
-- **Checkpoints:** `M2-AUTHENTICATION-REFERENCE`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW`
+- **Checkpoints:** `M2-AUTHENTICATION-REFERENCE`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
 
 ## Purpose
 
@@ -83,6 +83,8 @@ Attempt-003 completed at `2026-09-04T00:24:00Z`. All four tiles, all four native
 
 The formal readiness audit remains **DEFER**. Source/terms, custody, structure, AOI coverage, and reproducibility pass. Vertical and independent elevation uncertainty, pair-specific radar fitness, and completed owner or independent expert review remain deferred. The audit created no authority and released no downstream action; the checkpoint remains `M2-DEM-VERTICAL-DATUM-REVIEW`.
 
+The exact terrain-result owner-review packet is now ready under bundle SHA-256 `834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5`. Its public review surface is text-only; the external APRX, PDF, PNG, and manifest are bound through the terrain receipt and listed with full local paths and hashes in `docs/M2_DEM_TERRAIN_RESULT_REVIEW.md`. The blank response has one undecided item and zero human decisions. Approval can resolve only the owner terrain-result review gate after exact response lock and reconciliation; it cannot make the overall readiness audit pass or release vertical, radar, Sentinel, or scientific work.
+
 The first public terrain-control run failed because NumPy was absent from the Linux runner; the next workflow edit failed before creating any job. A later correction-evidence commit failed because its receipt hash was computed from Windows CRLF bytes before Git normalized the committed blob to LF. All three runs are retained. The corrected workflow pins `numpy==2.5.1`, and GitHub Actions run `33819458096` passed the 199-file repository check and all 190 tests. The LF-normalized additive correction receipt does not change the terrain thresholds or any DEM input.
 
 GitHub Actions run `33809208304` for the published DEM verification commit remains a **FAIL**. Its Linux test runner could not resolve the operator's external Windows custody root. The correction keeps strict external path and byte validation as the production default, lets the portable suite verify tracked receipts and recorded promoted identities without external access, and separately reverified all four custody files locally (170,302,058 bytes). The failed run is retained rather than reclassified; no DEM pixel, vertical datum, radar output, or scientific result was established by the correction.
@@ -122,6 +124,7 @@ Checkpoint derivation is also portable. Repository-only tests do not require the
 - inspect real pixels, masks, AOI coverage, baselines, and EPSG:32645 registration.
 - review and explicitly resolve the DEM vertical-datum route before Sentinel-1 terrain correction, without silently selecting `GEOID` or `NONE`;
 - if the exact EGM2008 route is approved, wait for the owner to install the matching ArcGIS Coordinate Systems Data component before any conversion attempt;
+- review bundle SHA-256 `834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5` and explicitly approve, revise, or defer the terrain-only owner review.
 
 ## Outside the active authority or still unproven
 

@@ -93,7 +93,7 @@ The full repository suite currently passes 164 tests, and `scripts/check_project
 
 The live preflight test suite validates exact STAC and object-header comparisons, redirect refusal, remote-identity drift, no-payload evidence, empty-custody binding, and the transition to `M2-DEM-ACQUISITION`. `EVID-0032` retains the initial checker failure caused by its old preflight-checkpoint expectation; updating that expectation did not change the live evidence or external custody.
 
-The current full repository suite passes 190 tests, and `scripts/check_project.py` validates 210 required files after adding the successful attempt-003 terrain receipt and its readiness input and decision. Project-control and milestone validators pass, and the M2 DEM vertical-datum bundle validator reports `ready_for_handoff` for all seven exact artifacts. Local reconciliation re-hashed all four promoted DEM files totaling 170,302,058 bytes. GitHub Actions run `33809208304` remains a failed historical result because its Linux runner lacked the external Windows custody root; the corrected portable test validates repository receipts without external access while production reconciliation still defaults to strict external checking.
+The current full repository suite passes 190 tests, and `scripts/check_project.py` validates 218 required files after adding the successful attempt-003 terrain receipt, its readiness audit, and the exact terrain-result review packet. Project-control and milestone validators pass. Both the M2 DEM vertical-datum bundle and the terrain-result bundle report `ready_for_handoff` for their exact tracked artifacts. Local reconciliation re-hashed all four promoted DEM files totaling 170,302,058 bytes. GitHub Actions run `33809208304` remains a failed historical result because its Linux runner lacked the external Windows custody root; the corrected portable test validates repository receipts without external access while production reconciliation still defaults to strict external checking.
 
 The generic intake-contract validator separately reports four invalid attempt identifiers because the completed DEM transfer IDs contain uppercase RFC 3339 `T` and `Z` characters and its identifier grammar is lowercase-only. The immutable attempt receipts, checkpoint paths, and external event history are not rewritten. This retained schema-validation failure does not change the project-specific byte and custody passes or approve downstream processing; future transfer runners must correct identifier generation before use.
 
@@ -171,6 +171,15 @@ python C:\Users\drewb\.codex\skills\audit-dataset-readiness\scripts\audit_readin
 ```
 
 The retained decision is `defer`, not `pass`: source/terms, custody, structure, coverage, and reproducibility pass, while vertical and independent elevation uncertainty, pair-specific radar fitness, and owner or independent expert result review remain unresolved. The audit created no authority and released no downstream action. Do not overwrite the retained decision file when independently rerunning the utility.
+
+The owner terrain-result review packet is validated separately:
+
+```powershell
+python C:\Users\drewb\.codex\skills\conduct-human-review\scripts\prepare_review_bundle.py reviews\m2-dem-terrain-result\review-bundle.json --project-root .
+python C:\Users\drewb\.codex\skills\conduct-human-review\scripts\review_response.py prepare --contract reviews\m2-dem-terrain-result\review-contract.json --output <new-exclusive-blank-response>.json
+```
+
+The bundle must report manifest SHA-256 `834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5`, seven verified tracked artifacts, and `ready_for_handoff`. Its text-only PNG was visually inspected at 1800 by 1680 pixels with no observed clipping, no selected decision, and no DEM-derived map pixels. The retained blank response contains one exact item, no decision, no timestamps, and a false attestation. Approval can close only the owner terrain-result review after exact lock and reconciliation; the other readiness deferrals remain.
 
 The SAFE materialization control has a separate portable suite:
 

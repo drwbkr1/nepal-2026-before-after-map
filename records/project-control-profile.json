@@ -192,6 +192,11 @@
         "unit_id": "M2-DEM-ACQUIRE",
         "reason": "The exact DEM amendment authorizes anonymous acquisition of only four named tiles.",
         "authority_ref": "records/source-gates/m2-dem-amendment-approval.json"
+      },
+      {
+        "unit_id": "M2-DEM-TERRAIN-RESULT-REVIEW",
+        "reason": "Records a normative owner review of the exact terrain-screen result and limitations without releasing any other deferred gate.",
+        "authority_ref": "reviews/m2-dem-terrain-result/review-contract.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
@@ -207,6 +212,11 @@
       "checkpoint_id": "M2-DEM-VERTICAL-DATUM-REVIEW",
       "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
       "next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
+    },
+    {
+      "checkpoint_id": "M2-DEM-TERRAIN-RESULT-REVIEW",
+      "authority_ref": "reviews/m2-dem-terrain-result/review-contract.json",
+      "next_action": "Review bundle SHA-256 834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5 and approve, revise, or defer the terrain-only result; approval releases no vertical, radar, or scientific action."
     }
   ]
 }

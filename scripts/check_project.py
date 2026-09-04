@@ -108,10 +108,12 @@ REQUIRED = [
     "docs/M2_DEM_AMENDMENT_REVIEW.md",
     "docs/M2_DEM_OFFLINE_VERIFICATION.md",
     "docs/M2_DEM_VERTICAL_DATUM_REVIEW.md",
+    "docs/M2_DEM_TERRAIN_RESULT_REVIEW.md",
     "docs/DEM_TERRAIN_QUALITY_PROTOCOL.md",
     "docs/RADAR_BASELINE_PROCESSING_PROTOCOL.md",
     "docs/assets/m2-dem-amendment-review.png",
     "docs/assets/m2-dem-vertical-datum-review.png",
+    "docs/assets/m2-dem-terrain-result-review.png",
     "docs/assets/m2-controlled-acquisition-review.png",
     "scripts/render_m2_activation_review.py",
     "scripts/prepare_m2_intake.py",
@@ -139,6 +141,7 @@ REQUIRED = [
     "records/surface-receipts/m2-dem-terrain-quality-attempt-001-failure.json",
     "records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json",
     "records/surface-receipts/m2-dem-terrain-quality.json",
+    "records/surface-receipts/m2-dem-terrain-result-review.json",
     "records/surface-receipts/optical-processing-synthetic-arcgis.json",
     "records/surface-receipts/optical-baseline-control-readiness.json",
     "records/surface-receipts/m2-materialization-readiness.json",
@@ -162,6 +165,9 @@ REQUIRED = [
     "reviews/m2-dem-vertical-datum/review-bundle.json",
     "reviews/m2-dem-vertical-datum/review-contract.json",
     "reviews/m2-dem-vertical-datum/blank-response.json",
+    "reviews/m2-dem-terrain-result/review-bundle.json",
+    "reviews/m2-dem-terrain-result/review-contract.json",
+    "reviews/m2-dem-terrain-result/blank-response.json",
     "tests/test_m2_intake.py",
     "tests/test_m2_verification.py",
     "tests/test_arcgis_evidence_schema.py",
@@ -210,6 +216,7 @@ REQUIRED = [
     "scripts/complete_m2_dem_verification.py",
     "scripts/inspect_m2_dem_vertical_datum_arcgis.py",
     "scripts/render_m2_dem_vertical_datum_review.py",
+    "scripts/render_m2_dem_terrain_result_review.py",
     "scripts/dem_terrain_quality_core.py",
     "scripts/inspect_m2_dem_terrain_quality_arcgis.py",
     "scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py",
@@ -226,6 +233,7 @@ REQUIRED = [
     "scripts/validate_optical_input_readiness_arcgis.py",
     "scripts/render_m2_dem_amendment_review.py",
     "contracts/m2-dem-vertical-datum-proposal.json",
+    "contracts/m2-dem-terrain-result-review-proposal.json",
     "records/source-gates/m2-dem-vertical-datum-source-review.json",
     ".github/workflows/validate.yml",
 ]
@@ -325,6 +333,11 @@ def main() -> None:
     dem_terrain_result = json.loads((ROOT / "records/surface-receipts/m2-dem-terrain-quality.json").read_text(encoding="utf-8"))
     dem_terrain_audit_input = json.loads((ROOT / "records/readiness/m2-dem-terrain-readiness-input.json").read_text(encoding="utf-8"))
     dem_terrain_audit_decision = json.loads((ROOT / "records/readiness/m2-dem-terrain-readiness-decision.json").read_text(encoding="utf-8"))
+    dem_terrain_review_proposal = json.loads((ROOT / "contracts/m2-dem-terrain-result-review-proposal.json").read_text(encoding="utf-8"))
+    dem_terrain_review_surface = json.loads((ROOT / "records/surface-receipts/m2-dem-terrain-result-review.json").read_text(encoding="utf-8"))
+    dem_terrain_review_bundle = json.loads((ROOT / "reviews/m2-dem-terrain-result/review-bundle.json").read_text(encoding="utf-8"))
+    dem_terrain_review_contract = json.loads((ROOT / "reviews/m2-dem-terrain-result/review-contract.json").read_text(encoding="utf-8"))
+    dem_terrain_review_blank = json.loads((ROOT / "reviews/m2-dem-terrain-result/blank-response.json").read_text(encoding="utf-8"))
     expected_dem_source_order = ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
     dem_current_assets = dem_intake_active.get("assets", [])
     if [asset.get("extensions", {}).get("source_id") for asset in dem_current_assets] != expected_dem_source_order:
@@ -430,13 +443,22 @@ def main() -> None:
     for approved_unit in ("M2-DEM-AMEND", "M2-DEM-PREFLIGHT", "M2-DEM-ACQUIRE"):
         if profile_gates.get(approved_unit, {}).get("authority_ref") != "records/source-gates/m2-dem-amendment-approval.json":
             fail(f"project profile must bind {approved_unit} to the exact DEM amendment approval")
-    if profile.get("parallel_checkpoints") != [{
-        "checkpoint_id": expected_dem_checkpoint,
-        "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
-        "next_action": expected_dem_next_action,
-    }]:
+    if profile_gates.get("M2-DEM-TERRAIN-RESULT-REVIEW", {}).get("authority_ref") != "reviews/m2-dem-terrain-result/review-contract.json":
+        fail("project profile must expose the exact terrain-result human-review gate")
+    if profile.get("parallel_checkpoints") != [
+        {
+            "checkpoint_id": expected_dem_checkpoint,
+            "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+            "next_action": expected_dem_next_action,
+        },
+        {
+            "checkpoint_id": "M2-DEM-TERRAIN-RESULT-REVIEW",
+            "authority_ref": "reviews/m2-dem-terrain-result/review-contract.json",
+            "next_action": "Review bundle SHA-256 834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5 and approve, revise, or defer the terrain-only result; approval releases no vertical, radar, or scientific action.",
+        },
+    ]:
         fail("project profile DEM parallel checkpoint differs")
-    if goal.get("active_amendments") != ["records/source-gates/m2-dem-amendment-approval.json"] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
+    if goal.get("active_amendments") != ["records/source-gates/m2-dem-amendment-approval.json"] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW"]:
         fail("long-term goal does not expose the active DEM amendment checkpoint")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
@@ -1314,6 +1336,97 @@ def main() -> None:
         or dem_terrain_audit_decision.get("training_authorized_by_this_audit") is not False
     ):
         fail("DEM terrain readiness audit or non-authorizing defer boundary differs")
+    if (
+        dem_terrain_review_proposal.get("proposal_id") != "NEPAL-M2-DEM-TERRAIN-RESULT-REVIEW-001"
+        or dem_terrain_review_proposal.get("status") != "review_ready_no_human_decision"
+        or dem_terrain_review_proposal.get("authority", {}).get("authority_sha256") != sha256("records/source-gates/m2-dem-amendment-approval.json")
+        or dem_terrain_review_proposal.get("authority", {}).get("review_required_by_sha256") != sha256("records/readiness/m2-dem-terrain-readiness-decision.json")
+        or dem_terrain_review_proposal.get("authority", {}).get("this_proposal_creates_authority") is not False
+        or dem_terrain_review_proposal.get("candidate", {}).get("receipt_sha256") != sha256("records/surface-receipts/m2-dem-terrain-quality.json")
+        or dem_terrain_review_proposal.get("candidate", {}).get("external_manifest_sha256") != dem_terrain_result.get("output_manifest_reconciliation", {}).get("manifest_sha256")
+        or dem_terrain_review_proposal.get("candidate", {}).get("stable_file_count") != 189
+        or dem_terrain_review_proposal.get("candidate", {}).get("vertical_transformation_applied") is not False
+        or dem_terrain_review_proposal.get("decision_request", {}).get("allowed_decisions") != ["approve", "revise", "defer"]
+    ):
+        fail("DEM terrain-result review proposal differs")
+    terrain_external_by_id = {
+        item.get("artifact_id"): item
+        for item in dem_terrain_review_proposal.get("external_review_artifacts", [])
+        if isinstance(item, dict)
+    }
+    if (
+        set(terrain_external_by_id) != {"arcgis-project", "pdf-map", "png-map", "derived-manifest"}
+        or terrain_external_by_id["arcgis-project"].get("sha256") != dem_terrain_result.get("key_exports", {}).get("arcgis_project", {}).get("sha256")
+        or terrain_external_by_id["pdf-map"].get("sha256") != dem_terrain_result.get("key_exports", {}).get("pdf", {}).get("sha256")
+        or terrain_external_by_id["png-map"].get("sha256") != dem_terrain_result.get("key_exports", {}).get("png", {}).get("sha256")
+        or terrain_external_by_id["derived-manifest"].get("sha256") != dem_terrain_result.get("output_manifest_reconciliation", {}).get("manifest_sha256")
+    ):
+        fail("DEM terrain-result external review identities differ")
+    expected_terrain_review_surface_bindings = {
+        "surface_sha256": sha256("docs/assets/m2-dem-terrain-result-review.png"),
+        "proposal_sha256": sha256("contracts/m2-dem-terrain-result-review-proposal.json"),
+        "terrain_result_sha256": sha256("records/surface-receipts/m2-dem-terrain-quality.json"),
+        "readiness_decision_sha256": sha256("records/readiness/m2-dem-terrain-readiness-decision.json"),
+        "instructions_sha256": sha256("docs/M2_DEM_TERRAIN_RESULT_REVIEW.md"),
+        "renderer_sha256": sha256("scripts/render_m2_dem_terrain_result_review.py"),
+    }
+    if (
+        dem_terrain_review_surface.get("receipt_id") != "M2-DEM-TERRAIN-RESULT-REVIEW-SURFACE-001"
+        or dem_terrain_review_surface.get("status") != "pass_text_only_review_surface_no_human_decision"
+        or any(dem_terrain_review_surface.get(key) != value for key, value in expected_terrain_review_surface_bindings.items())
+        or dem_terrain_review_surface.get("dimensions_pixels") != {"width": 1800, "height": 1680}
+        or dem_terrain_review_surface.get("checks", {}).get("visual_inspection") != "pass"
+        or dem_terrain_review_surface.get("checks", {}).get("dem_derived_map_pixels_embedded") is not False
+        or dem_terrain_review_surface.get("blank_state_verified") is not True
+        or dem_terrain_review_surface.get("completion_controls_verified") is not True
+        or dem_terrain_review_surface.get("export_verified") is not True
+        or dem_terrain_review_surface.get("human_decision_count") != 0
+    ):
+        fail("DEM terrain-result review surface receipt differs")
+    terrain_review_artifacts = dem_terrain_review_bundle.get("artifacts", [])
+    if (
+        dem_terrain_review_bundle.get("bundle_id") != "m2-dem-terrain-result-review-bundle-001"
+        or dem_terrain_review_bundle.get("review_id") != "m2-dem-terrain-result-review-001"
+        or dem_terrain_review_bundle.get("candidate_identity") != "M2-DEM-TERRAIN-RESULT-SHA256:" + sha256("records/surface-receipts/m2-dem-terrain-quality.json")
+        or len(terrain_review_artifacts) != 7
+    ):
+        fail("DEM terrain-result review bundle identity differs")
+    for artifact in terrain_review_artifacts:
+        if artifact.get("sha256") != sha256(artifact.get("path", "")):
+            fail(f"DEM terrain-result review artifact differs: {artifact.get('artifact_id')}")
+        for render_receipt in artifact.get("render_receipts", []):
+            if render_receipt.get("sha256") != sha256(render_receipt.get("path", "")):
+                fail(f"DEM terrain-result review render receipt differs: {artifact.get('artifact_id')}")
+    if (
+        dem_terrain_review_contract.get("review_id") != dem_terrain_review_bundle.get("review_id")
+        or dem_terrain_review_contract.get("review_bundle", {}).get("manifest_sha256") != sha256("reviews/m2-dem-terrain-result/review-bundle.json")
+        or dem_terrain_review_contract.get("review_bundle", {}).get("candidate_identity") != dem_terrain_review_bundle.get("candidate_identity")
+        or dem_terrain_review_contract.get("review_bundle", {}).get("rendered_surface_verified") is not True
+        or dem_terrain_review_contract.get("workflow_authority", {}).get("review_required") is not True
+        or dem_terrain_review_contract.get("workflow_authority", {}).get("lock_authorized") is not True
+        or dem_terrain_review_contract.get("workflow_authority", {}).get("reconcile_authorized") is not True
+        or dem_terrain_review_contract.get("allowed_decisions") != ["approve", "revise", "defer"]
+        or dem_terrain_review_contract.get("items") != [{
+            "item_id": "M2-DEM-TERRAIN-SCREEN-RESULT-001",
+            "evidence_sha256": sha256("reviews/m2-dem-terrain-result/review-bundle.json"),
+        }]
+    ):
+        fail("DEM terrain-result review contract differs")
+    if dem_terrain_review_blank != {
+        "response_schema_version": "nepal-m2-dem-terrain-result-response-v1",
+        "review_id": "m2-dem-terrain-result-review-001",
+        "completed": False,
+        "review_started_at_utc": None,
+        "review_completed_at_utc": None,
+        "reviewer": {"attestation": False},
+        "responses": [{
+            "item_id": "M2-DEM-TERRAIN-SCREEN-RESULT-001",
+            "evidence_sha256": sha256("reviews/m2-dem-terrain-result/review-bundle.json"),
+            "decision": None,
+            "notes": "",
+        }],
+    }:
+        fail("DEM terrain-result blank response differs or contains a human decision")
     expected_dem_acquire_status = "complete" if dem_state_counts["promoted"] == 4 and not dem_state_counts["failed"] else "ready"
     expected_dem_verify_status = "complete" if dem_all_geotiff_verified else ("ready" if expected_dem_acquire_status == "complete" else "planned")
     for unit_id, expected_status in (
@@ -3343,6 +3456,34 @@ def main() -> None:
         or terrain_audit_evidence.get("authority_created") is not False
     ):
         fail("EVID-0050 DEM terrain readiness audit differs")
+    terrain_review_evidence = ledger_by_id.get("EVID-0051")
+    if not isinstance(terrain_review_evidence, dict):
+        fail("evidence ledger is missing EVID-0051 DEM terrain-result review preparation")
+    expected_terrain_review_assertions = {
+        "review_bundle_ready_for_handoff": True,
+        "blank_state_verified": True,
+        "completion_controls_verified": True,
+        "export_verified": True,
+        "dem_derived_map_pixels_embedded": False,
+        "vertical_datum_resolved": False,
+        "radar_processing_authorized_by_review": False,
+        "scientific_result_established": False,
+        "authority_created": False,
+    }
+    if (
+        terrain_review_evidence.get("status") != "pass_review_ready_zero_human_decisions"
+        or terrain_review_evidence.get("proposal_sha256") != sha256("contracts/m2-dem-terrain-result-review-proposal.json")
+        or terrain_review_evidence.get("bundle_sha256") != sha256("reviews/m2-dem-terrain-result/review-bundle.json")
+        or terrain_review_evidence.get("contract_sha256") != sha256("reviews/m2-dem-terrain-result/review-contract.json")
+        or terrain_review_evidence.get("blank_response_sha256") != sha256("reviews/m2-dem-terrain-result/blank-response.json")
+        or terrain_review_evidence.get("review_surface_sha256") != sha256("docs/assets/m2-dem-terrain-result-review.png")
+        or terrain_review_evidence.get("render_receipt_sha256") != sha256("records/surface-receipts/m2-dem-terrain-result-review.json")
+        or terrain_review_evidence.get("candidate_receipt_sha256") != sha256("records/surface-receipts/m2-dem-terrain-quality.json")
+        or terrain_review_evidence.get("external_review_artifact_count") != 4
+        or terrain_review_evidence.get("human_decision_count") != 0
+        or terrain_review_evidence.get("assertions") != expected_terrain_review_assertions
+    ):
+        fail("EVID-0051 DEM terrain-result review preparation differs")
 
     violations = []
     for relative in tracked_files():

@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "M2-DEM-TERRAIN-RESULT-REVIEW-SURFACE-001",
+  "status": "pass_text_only_review_surface_no_human_decision",
+  "verified_at_utc": "2026-09-04T00:51:45Z",
+  "surface": "docs/assets/m2-dem-terrain-result-review.png",
+  "surface_sha256": "f5382e7dde4b3c6794895386eb8cad084cf6efbd8fb48d76976679ef13bd9a62",
+  "proposal": "contracts/m2-dem-terrain-result-review-proposal.json",
+  "proposal_sha256": "80855c6859a6a78de5712883f604c4f6f7816e459b44638054c3f6a1e848a90c",
+  "terrain_result": "records/surface-receipts/m2-dem-terrain-quality.json",
+  "terrain_result_sha256": "9663c261de37c77fd96896d1fbb37c4c3a970c47966661908673db880e640dd7",
+  "readiness_decision": "records/readiness/m2-dem-terrain-readiness-decision.json",
+  "readiness_decision_sha256": "7af1eadf1af934c1bfe1f65b54d7af5b98549bbc9c53a9d212106b0099dea9d2",
+  "instructions": "docs/M2_DEM_TERRAIN_RESULT_REVIEW.md",
+  "instructions_sha256": "d58dc68b691b32d3d4f2d80f849d8bbd8e8348ed16f6b7d381f50f2e02d2fb8b",
+  "renderer": "scripts/render_m2_dem_terrain_result_review.py",
+  "renderer_sha256": "59a61b95fac5dbbe2bf3dae6f6a64566267f605e65e932af91f070c14c12b157",
+  "dimensions_pixels": {
+    "width": 1800,
+    "height": 1680
+  },
+  "checks": {
+    "render_completed": "pass",
+    "exact_proposal_hash_visible": "pass",
+    "terrain_pass_scope_visible": "pass",
+    "remaining_deferred_gates_visible": "pass",
+    "approval_effect_visible": "pass",
+    "non_authorizing_boundary_visible": "pass",
+    "decision_domain_visible": "pass",
+    "external_artifact_inspection_instruction_visible": "pass",
+    "dem_derived_map_pixels_embedded": false,
+    "text_clipping": "none_observed",
+    "visual_inspection": "pass"
+  },
+  "blank_state_verified": true,
+  "completion_controls_verified": true,
+  "export_verified": true,
+  "human_decision_count": 0,
+  "limitations": [
+    "The public review surface is a text-only summary and contains no DEM-derived map pixels.",
+    "The exact external APRX, PDF, PNG, and manifest must be inspected at the paths and hashes in the instructions.",
+    "The surface is not a completed human response and does not resolve vertical datum, elevation accuracy, radar fitness, or scientific interpretation."
+  ]
+}
