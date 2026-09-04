@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-radar-input-readiness-amendment-review-001",
+  "contract_sha256": "daad33610c07bc947e9c484143515ee581d554e16c4fea996d9051ff4af143f6",
+  "response_sha256": "671b296ee45817b20e5244897f0b23b1f2ffd4aa03f73cda104401640cb45358",
+  "receipt_sha256": "260b44d00ec8efeb1dc56eb56406f6581586e39eb4c7e275f1a0bfb6ca34608d",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/source-gates/m2-activation-approval.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

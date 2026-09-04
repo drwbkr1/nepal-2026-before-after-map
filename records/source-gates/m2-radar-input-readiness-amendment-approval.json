@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-INPUT-READINESS-AMENDMENT-APPROVAL-001",
+  "status": "approved_exact_bounded_post_observation_correction",
+  "approved_at_utc": "2026-09-04T19:11:09Z",
+  "review_id": "m2-radar-input-readiness-amendment-review-001",
+  "review_bundle_id": "m2-radar-input-readiness-amendment-review-bundle-001",
+  "review_bundle_manifest_sha256": "831df5d5aae06862514667ad861c815154085fa3c546039e60f517d38ee442ff",
+  "amendment_proposal_ref": "contracts/milestone-002-radar-input-readiness-amendment-proposal.json",
+  "amendment_proposal_sha256": "ebdcb763afd99ea23090c9bd83fd9e9cb6cb8dfbb2b5fed60edb80f1fa61c731",
+  "review_reconciliation_ref": "records/source-gates/m2-radar-input-readiness-amendment-review-reconciliation.json",
+  "review_reconciliation_sha256": "9b6d4a2b1b51b08659cf562aba49b1fb591bb1605b5d9037cdaf2ae49d67f99e",
+  "locked_response_sha256": "671b296ee45817b20e5244897f0b23b1f2ffd4aa03f73cda104401640cb45358",
+  "lock_receipt_sha256": "260b44d00ec8efeb1dc56eb56406f6581586e39eb4c7e275f1a0bfb6ca34608d",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "exact_correction": {
+    "field": "metadata_checks.pixel_value",
+    "from": "AMPLITUDE",
+    "to": "Detected",
+    "post_observation": true
+  },
+  "authorized_next_actions": [
+    "preserve the current contract, real BLOCK receipt, reconciliation, prepublication attempts, commits, and CI runs unchanged",
+    "create a new versioned contract whose only observed-data semantic correction is pixelValue Detected instead of AMPLITUDE and whose source citations bind this proposal",
+    "update the portable validator to compare pixelValue with the new contract value and add focused tests for Detected acceptance and AMPLITUDE refusal",
+    "run synthetic ArcGIS validation only to a new identity and preserve every attempt",
+    "publish the amended gate and require successful public CI for its exact commit",
+    "after that CI succeeds, run one read-only inspection of the same three exact materialized sources to a new no-replace real-002 receipt",
+    "reconcile the exact pass or block without retry, threshold changes, or downstream release"
+  ],
+  "does_not_authorize": [
+    "deleting, rewriting, superseding away, or reclassifying the failed real-001 receipt",
+    "any further Sentinel acquisition or recovery action",
+    "any orbit acquisition, application, or substitution",
+    "DEM vertical transformation or terrain-result approval",
+    "measurement-pixel decoding, calibration, terrain correction, registration, baseline generation, or change analysis",
+    "new data sources, product substitution, account action, terms acceptance, credential disclosure, cost, or third-party document redistribution"
+  ],
+  "human_decisions_fabricated": false
+}
