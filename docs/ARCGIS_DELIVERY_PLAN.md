@@ -100,3 +100,5 @@ Before delivery:
 - compare packaged source manifests and hashes with the approved records.
 
 The scaffold overview intentionally uses a verified numeric map scale because two retained attempts showed defective native scale-bar labels. Every later scientific layout still requires a true scale bar that passes visual inspection at its final extent.
+
+The first package-portability control is deliberately narrower than final delivery. `config/qa/arcgis-package-portability-contract.json` binds the validated metadata-only workspace to one fresh external `.ppkx` attempt, extraction, reopen, and 160 dpi re-export. It prohibits network and credential access, source mutation, scientific raster inclusion, and Git custody. A passing result can establish only same-machine ArcGIS Pro 3.7.1 mechanics and still requires visual inspection; clean-machine and final scientific-package verification remain open.

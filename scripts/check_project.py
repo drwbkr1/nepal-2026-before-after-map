@@ -9,6 +9,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+from arcgis_package_portability_core import validate_contract as validate_arcgis_package_portability_contract
 from derive_m2_acquisition_checkpoint import derive_checkpoint
 from validate_m2_acquisition_progress import (
     INITIAL_ACTIVE_INTAKE_SHA256,
@@ -343,6 +344,12 @@ REQUIRED = [
     "records/readiness/radar-input/prepublication-contract-004.json",
     "records/readiness/radar-input/prepublication-contract-005.json",
     "records/readiness/radar-input/prepublication-contract-006.json",
+    "config/qa/arcgis-package-portability-contract.json",
+    "docs/ARCGIS_PACKAGE_PORTABILITY_PROTOCOL.md",
+    "scripts/arcgis_package_portability_core.py",
+    "scripts/run_arcgis_package_portability_arcgis.py",
+    "tests/test_arcgis_package_portability.py",
+    "records/readiness/arcgis-package-portability-control.json",
     "scripts/render_m2_dem_amendment_review.py",
     "contracts/m2-dem-vertical-datum-proposal.json",
     "contracts/m2-dem-terrain-result-review-proposal.json",
@@ -5237,6 +5244,70 @@ def main() -> None:
         ))
     ):
         fail("EVID-0070 Sentinel-1 label-amendment review readiness differs or overclaims")
+
+    arcgis_package_contract = json.loads(
+        (ROOT / "config/qa/arcgis-package-portability-contract.json").read_text(encoding="utf-8")
+    )
+    arcgis_package_control = json.loads(
+        (ROOT / "records/readiness/arcgis-package-portability-control.json").read_text(encoding="utf-8")
+    )
+    portability_errors = validate_arcgis_package_portability_contract(arcgis_package_contract)
+    if portability_errors:
+        fail("ArcGIS package portability contract differs: " + "; ".join(portability_errors))
+    portability_bindings = arcgis_package_control.get("bindings", {})
+    expected_portability_bindings = {
+        "contract_ref": "config/qa/arcgis-package-portability-contract.json",
+        "portable_core_ref": "scripts/arcgis_package_portability_core.py",
+        "arcgis_runner_ref": "scripts/run_arcgis_package_portability_arcgis.py",
+        "test_ref": "tests/test_arcgis_package_portability.py",
+        "protocol_ref": "docs/ARCGIS_PACKAGE_PORTABILITY_PROTOCOL.md",
+        "source_receipt_ref": "records/surface-receipts/arcgis-evidence-workspace.json",
+    }
+    if (
+        arcgis_package_control.get("status") != "pass_predeclared_source_revalidated_real_package_not_run"
+        or arcgis_package_control.get("validation", {}).get("portable_test_count") != 7
+        or arcgis_package_control.get("validation", {}).get("portable_test_status") != "pass"
+        or arcgis_package_control.get("validation", {}).get("source_stable_inventory")
+        != arcgis_package_contract["source_workspace"]["expected_inventory"]
+        or arcgis_package_control.get("validation", {}).get("prepublication_guard_probe")
+        != "stopped_repository_not_clean_before_external_output"
+        or arcgis_package_control.get("external_state") != {
+            "attempt_001_exists": False,
+            "project_package_created": False,
+            "package_extracted": False,
+            "round_trip_export_created": False,
+            "source_workspace_mutated": False,
+        }
+        or any(portability_bindings.get(ref_key) != ref for ref_key, ref in expected_portability_bindings.items())
+        or any(
+            portability_bindings.get(ref_key.replace("_ref", "_sha256")) != sha256(ref)
+            for ref_key, ref in expected_portability_bindings.items()
+        )
+        or any(arcgis_package_control.get("assertions", {}).get(key) is not False for key in (
+            "network_requests_performed", "authentication_performed", "credential_values_read_or_recorded",
+            "satellite_or_dem_pixels_read", "scientific_evidence_created", "clean_machine_portability_established",
+            "m6_complete", "current_checkpoint_changed", "authority_created",
+        ))
+    ):
+        fail("ArcGIS package portability predeclaration receipt differs or overclaims")
+
+    arcgis_package_evidence = ledger_by_id.get("EVID-0071")
+    if (
+        not isinstance(arcgis_package_evidence, dict)
+        or arcgis_package_evidence.get("status") != arcgis_package_control.get("status")
+        or arcgis_package_evidence.get("contract_sha256") != sha256("config/qa/arcgis-package-portability-contract.json")
+        or arcgis_package_evidence.get("control_receipt_sha256") != sha256("records/readiness/arcgis-package-portability-control.json")
+        or arcgis_package_evidence.get("protocol_sha256") != sha256("docs/ARCGIS_PACKAGE_PORTABILITY_PROTOCOL.md")
+        or arcgis_package_evidence.get("source_inventory") != arcgis_package_contract["source_workspace"]["expected_inventory"]
+        or arcgis_package_evidence.get("validation", {}).get("portable_test_count") != 7
+        or arcgis_package_evidence.get("validation", {}).get("real_package_attempted") is not False
+        or any(arcgis_package_evidence.get("assertions", {}).get(key) is not False for key in (
+            "network_requests_performed", "authentication_performed", "credential_values_read_or_recorded",
+            "source_workspace_mutated", "satellite_or_dem_pixels_read", "scientific_evidence_created",
+            "clean_machine_portability_established", "m6_complete", "current_checkpoint_changed", "authority_created",
+        ))
+    ):
+        fail("EVID-0071 ArcGIS package portability predeclaration differs or overclaims")
 
     violations = []
     for relative in tracked_files():

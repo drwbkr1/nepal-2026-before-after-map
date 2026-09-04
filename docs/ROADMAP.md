@@ -109,7 +109,7 @@ The roadmap is milestone-based. A later milestone cannot repair missing source o
 
 **Outcome:** An ArcGIS Pro package that opens without undocumented local dependencies.
 
-**Preparatory status:** A metadata-only EPSG:32645 evidence schema, File Geodatabase, APRX, and overview export have passed local ArcGIS Pro 3.7.1 validation. Heavy outputs remain in ignored scratch custody, scientific layers are empty, and this does not satisfy M6 packaging or clean-machine exit evidence.
+**Preparatory status:** A metadata-only EPSG:32645 evidence schema, File Geodatabase, APRX, and overview export have passed local ArcGIS Pro 3.7.1 validation. A bounded `.ppkx` package, extraction, reopen, and re-export fixture is predeclared for that exact empty workspace and awaits public-CI gating before its one real external attempt. Heavy outputs remain outside Git, scientific layers are empty, and neither a fixture pass nor its current predeclaration satisfies M6 clean-machine exit evidence.
 
 **Deliverables:** `.aprx`, `.gdb`, `.lyrx`, GeoTIFF, PDF/PNG layouts, metadata, and optionally `.ppkx` after size and license review.
 

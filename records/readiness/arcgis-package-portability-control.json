@@ -1,0 +1,64 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M6-ARCGIS-PACKAGE-PORTABILITY-CONTROL-001",
+  "verified_at_utc": "2026-09-04T18:46:28Z",
+  "status": "pass_predeclared_source_revalidated_real_package_not_run",
+  "bindings": {
+    "contract_ref": "config/qa/arcgis-package-portability-contract.json",
+    "contract_sha256": "80e4df2a71e56969927b918ee79da68a25b7c8cdc19ed3bcef67ec865c812526",
+    "portable_core_ref": "scripts/arcgis_package_portability_core.py",
+    "portable_core_sha256": "21aedbe577088720f3090fd7df7adf7ca775dedc10a2eefad1f45f24fe2ecc34",
+    "arcgis_runner_ref": "scripts/run_arcgis_package_portability_arcgis.py",
+    "arcgis_runner_sha256": "a00f0123a1e0d5b2e0beecc156a677516480d4ca3eeb8232a35c6b850f30e6a6",
+    "test_ref": "tests/test_arcgis_package_portability.py",
+    "test_sha256": "193e1e86bdc2180637fc357dc9dda7d54f6ce14fa6f9f0bcfc9fdca0fa6923cb",
+    "protocol_ref": "docs/ARCGIS_PACKAGE_PORTABILITY_PROTOCOL.md",
+    "protocol_sha256": "9854a5ba48231a7721a7c8b3ada94da7d1cef753a7cca7a89707a5d1fa2fe72d",
+    "source_receipt_ref": "records/surface-receipts/arcgis-evidence-workspace.json",
+    "source_receipt_sha256": "029ad79092319d20ade51354fcce8fd220f3cb0587ebc5826b74fbf85dc67b6b"
+  },
+  "validation": {
+    "portable_test_count": 7,
+    "portable_test_status": "pass",
+    "tracked_contract_status": "pass",
+    "arcgis_source_revalidation": {
+      "status": "pass",
+      "runtime_version": "3.7.1",
+      "dataset_count": 9,
+      "relationship_count": 8,
+      "retained_failure_count": 6
+    },
+    "source_stable_inventory": {
+      "file_count": 110,
+      "total_bytes": 1171536,
+      "inventory_sha256": "f8f3c94f77c904954d729c7340d82a09183ad52671736e3d1d80f6609b67617a"
+    },
+    "arcgis_package_project_tool_available": true,
+    "arcgis_extract_package_tool_available": true,
+    "prepublication_guard_probe": "stopped_repository_not_clean_before_external_output"
+  },
+  "external_state": {
+    "attempt_001_exists": false,
+    "project_package_created": false,
+    "package_extracted": false,
+    "round_trip_export_created": false,
+    "source_workspace_mutated": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "satellite_or_dem_pixels_read": false,
+    "scientific_evidence_created": false,
+    "clean_machine_portability_established": false,
+    "m6_complete": false,
+    "current_checkpoint_changed": false,
+    "authority_created": false
+  },
+  "limitations": [
+    "Tool availability and source revalidation do not establish that the real package round trip will pass.",
+    "The planned attempt is same-machine and ArcGIS Pro 3.7.1 only.",
+    "A structural runtime pass will still require visual inspection and tracked reconciliation."
+  ],
+  "next_action": "Publish and reverify the exact contract and runner in public CI, then run one no-overwrite metadata-only external package attempt."
+}

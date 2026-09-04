@@ -1,0 +1,171 @@
+{
+  "contract_version": "1.0",
+  "contract_id": "NEPAL-M6-ARCGIS-PACKAGE-PORTABILITY-001",
+  "created_at_utc": "2026-09-04T18:44:49Z",
+  "status": "predeclared_not_executed",
+  "purpose": "Test one metadata-only ArcGIS Pro project-package round trip before scientific evidence exists, without modifying the retained source workspace or claiming clean-machine portability.",
+  "inputs": {
+    "source_receipt": {
+      "ref": "records/surface-receipts/arcgis-evidence-workspace.json",
+      "sha256": "029ad79092319d20ade51354fcce8fd220f3cb0587ebc5826b74fbf85dc67b6b"
+    },
+    "evidence_schema": {
+      "ref": "config/arcgis/evidence-workspace-schema.json",
+      "sha256": "4b592ba928c0c532856f91be49a1f44349ba13d3fa783be20bdb9fab6d20dafb"
+    },
+    "active_milestone": {
+      "ref": "contracts/milestone-002.json",
+      "sha256": "411429f0d31d438a0e4d409e880c1dbac595361a155ce1a3eeaab3513f82f8c8"
+    },
+    "long_term_goal": {
+      "ref": "records/long-term-goal.json",
+      "sha256": "ef413e4a259a4eee5331d8098f279f302f5f30e9cd3457a122be0ba3742e9de3"
+    },
+    "portable_core": {
+      "ref": "scripts/arcgis_package_portability_core.py",
+      "sha256": "21aedbe577088720f3090fd7df7adf7ca775dedc10a2eefad1f45f24fe2ecc34"
+    },
+    "arcgis_runner": {
+      "ref": "scripts/run_arcgis_package_portability_arcgis.py",
+      "sha256": "a00f0123a1e0d5b2e0beecc156a677516480d4ca3eeb8232a35c6b850f30e6a6"
+    },
+    "protocol": {
+      "ref": "docs/ARCGIS_PACKAGE_PORTABILITY_PROTOCOL.md",
+      "sha256": "9854a5ba48231a7721a7c8b3ada94da7d1cef753a7cca7a89707a5d1fa2fe72d"
+    }
+  },
+  "authority": {
+    "mode": "inherited",
+    "active_milestone_ref": "contracts/milestone-002.json",
+    "required_action_classes": [
+      "routine_qa",
+      "metadata_capture",
+      "evidence_recording",
+      "data_processing"
+    ],
+    "this_contract_creates_authority": false,
+    "scientific_processing_authorized_by_this_contract": false,
+    "external_publication_authorized_by_this_contract": false
+  },
+  "analysis_crs": {
+    "wkid": 32645,
+    "name": "WGS 1984 UTM Zone 45N"
+  },
+  "source_workspace": {
+    "root": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\arcgis-evidence-workspace-attempt-006",
+    "project": "Nepal_2026_Evidence.aprx",
+    "geodatabase": "Nepal_2026_Evidence.gdb",
+    "overview_png": "Evidence_Workspace_Overview.png",
+    "overview_pdf": "Evidence_Workspace_Overview.pdf",
+    "project_sha256": "a565a9b95402d29df02e0a046e42cb7f5a85f1e1daeb83c5fbb3f54badc170e0",
+    "overview_png_sha256": "c5e67dbd890da6c3304b70c3734075a3970992aef75f21380f3d28197d219dd6",
+    "overview_pdf_sha256": "73c9cb55ad41f7377db431b90e1e4886d2901550e95e7af9542e1ee167137d04",
+    "expected_inventory": {
+      "file_count": 110,
+      "total_bytes": 1171536,
+      "inventory_sha256": "f8f3c94f77c904954d729c7340d82a09183ad52671736e3d1d80f6609b67617a"
+    },
+    "expected_dataset_counts": {
+      "StudyAreas": 3,
+      "SourceProducts": 10,
+      "ObservedChange": 0,
+      "AnalysisExclusions": 0,
+      "StableControls": 0,
+      "ObservationSources": 0,
+      "Interpretations": 0,
+      "AttributionAssessments": 0,
+      "AnalysisQA": 0
+    }
+  },
+  "external_output": {
+    "root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\arcgis-package-portability\\attempt-001",
+    "package": "Nepal_2026_Evidence.ppkx",
+    "extract_root": "extracted",
+    "reexport_png": "reexport/Evidence_Workspace_Overview.png",
+    "reexport_pdf": "reexport/Evidence_Workspace_Overview.pdf",
+    "manifest": "stable-manifest.json",
+    "receipt": "receipt.json",
+    "failure_receipt": "failure.json"
+  },
+  "operation": {
+    "sharing_internal": "EXTERNAL",
+    "package_as_template": "PROJECT_PACKAGE",
+    "version": "3.7",
+    "include_toolboxes": "NO_TOOLBOXES",
+    "include_history_items": "NO_HISTORY_ITEMS",
+    "read_only": "READ_WRITE",
+    "select_related_rows": "KEEP_ALL_RELATED_ROWS",
+    "preserve_sqlite": "CONVERT_SQLITE",
+    "extract_cache": "NO_CACHE"
+  },
+  "execution_boundary": {
+    "network_requests": "prohibited",
+    "authentication": "prohibited",
+    "credential_access": "prohibited",
+    "source_workspace_mutation": "prohibited",
+    "scientific_data_inclusion": "prohibited_metadata_only",
+    "output_collision": "stop",
+    "output_location": "external_non_git_append_only"
+  },
+  "required_checks": {
+    "source_inventory_before_and_after_exact": true,
+    "publication_commit_must_equal_clean_head_and_origin_main": true,
+    "successful_public_ci_must_be_verified_before_execution": true,
+    "expected_dataset_counts": {
+      "StudyAreas": 3,
+      "SourceProducts": 10,
+      "ObservedChange": 0,
+      "AnalysisExclusions": 0,
+      "StableControls": 0,
+      "ObservationSources": 0,
+      "Interpretations": 0,
+      "AttributionAssessments": 0,
+      "AnalysisQA": 0
+    },
+    "expected_domain_count": 14,
+    "expected_relationship_count": 8,
+    "required_map_name": "Evidence Workspace",
+    "required_layout_name": "Evidence Workspace Overview",
+    "required_operational_layer_count": 3,
+    "required_basemap_layer_count": 0,
+    "operational_sources_must_resolve_beneath_extract_root": true,
+    "forbidden_extracted_suffixes": [
+      ".crf",
+      ".h5",
+      ".hdf",
+      ".img",
+      ".jp2",
+      ".nc",
+      ".tif",
+      ".tiff",
+      ".vrt"
+    ],
+    "maximum_package_bytes": 50000000,
+    "maximum_extracted_stable_files": 500,
+    "reexport_resolution_dpi": 160,
+    "expected_png_dimensions": [
+      1760,
+      1360
+    ],
+    "decoded_rgb_pixel_digest_must_match_source": true,
+    "manual_visual_review_required": true
+  },
+  "claim_boundary": {
+    "clean_machine_portability_established": false,
+    "cross_version_portability_established": false,
+    "satellite_pixels_packaged": false,
+    "dem_pixels_packaged": false,
+    "scientific_evidence_packaged": false,
+    "mapped_change_established": false,
+    "scientific_admission_authorized": false,
+    "m6_complete": false,
+    "current_checkpoint_changed": false
+  },
+  "limitations": [
+    "A pass can establish only a same-machine ArcGIS Pro 3.7.1 package, extraction, reopen, and layout-export round trip for the metadata-only evidence workspace.",
+    "The fixture contains no satellite or DEM pixels and cannot establish usable pixels, baseline, change, interpretation, attribution, or scientific admission.",
+    "The test is not a clean-machine, alternate-user, alternate-version, or offline-installation validation.",
+    "The retained overview uses a verified numeric scale; every later scientific layout still requires a true scale bar that passes final-extent visual inspection.",
+    "A structural runtime pass remains pending until the round-trip PNG receives explicit visual inspection and tracked reconciliation."
+  ]
+}
