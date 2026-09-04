@@ -1,0 +1,352 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-S1-MATERIALIZED-INPUT-READINESS-SYNTHETIC-001",
+  "verified_at_utc": "2026-09-04T18:08:43Z",
+  "status": "pass_synthetic_arcgis_real_input_deferred",
+  "bindings": {
+    "contract_ref": "config/qa/radar-input-readiness-contract.json",
+    "contract_sha256": "e9aeea85d3e33649e3b2beb7ff954d0b82852e4d8d4608b4aa36bbfc1c17788f",
+    "core_ref": "scripts/radar_input_readiness_core.py",
+    "core_sha256": "aeb635fb501f63fa9504f78803089f9de7e532c5cb4cfdcca37326a9e9e3613e",
+    "runner_ref": "scripts/inspect_radar_inputs_arcgis.py",
+    "runner_sha256": "04a47b2c35a337fd4cfca7e63c9ae46e61660cc4fb8e34522acab680e00594bb",
+    "adapter_ref": "scripts/validate_radar_input_readiness_arcgis.py",
+    "adapter_sha256": "ba51763e5ca3c0f4b7437fb99049884ef252474fcb9375ef615879ffb934f3dc"
+  },
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced"
+  },
+  "validation": {
+    "synthetic_source_count": 3,
+    "synthetic_measurement_raster_count": 6,
+    "required_member_role_count": 9,
+    "aligned_source_decisions": {
+      "M1-SRC-001": {
+        "status": "pass_header_readability_only",
+        "errors": [],
+        "pixel_values_examined": false,
+        "baseline_processing_released": false,
+        "scientific_admission_authorized": false
+      },
+      "M1-SRC-002": {
+        "status": "pass_header_readability_only",
+        "errors": [],
+        "pixel_values_examined": false,
+        "baseline_processing_released": false,
+        "scientific_admission_authorized": false
+      },
+      "M1-SRC-003": {
+        "status": "pass_header_readability_only",
+        "errors": [],
+        "pixel_values_examined": false,
+        "baseline_processing_released": false,
+        "scientific_admission_authorized": false
+      }
+    },
+    "aggregate_decision": {
+      "status": "pass_partial_pre_event_header_readiness_only",
+      "errors": [],
+      "ready_source_count": 3,
+      "complete_before_after_pair": false,
+      "baseline_processing_released": false,
+      "pixel_usability_established": false,
+      "scientific_admission_authorized": false
+    },
+    "intentional_cross_polarization_width_mismatch": {
+      "status": "block",
+      "errors": [
+        "VH raster width differs from annotation samples",
+        "VV and VH raster headers differ at width"
+      ],
+      "pixel_values_examined": false,
+      "baseline_processing_released": false,
+      "scientific_admission_authorized": false
+    },
+    "header_examples": {
+      "M1-SRC-001": {
+        "annotations": {
+          "vv": {
+            "mission_id": "S1D",
+            "product_type": "GRD",
+            "polarization": "VV",
+            "mode": "IW",
+            "swath": "IW",
+            "start_time": "2026-08-16T12:21:16.058226Z",
+            "stop_time": "2026-08-16T12:21:41.056809Z",
+            "absolute_orbit_number": 4151,
+            "orbit_direction": "Ascending",
+            "number_of_samples": 12,
+            "number_of_lines": 8,
+            "pixel_value": "AMPLITUDE",
+            "output_pixels": "16 bit Unsigned Integer",
+            "range_pixel_spacing": 10.0,
+            "azimuth_pixel_spacing": 10.0,
+            "orbit_vector_count_declared": 2,
+            "orbit_vector_count_observed": 2,
+            "orbit_time_start": "2026-08-16T12:20:16.058226Z",
+            "orbit_time_end": "2026-08-16T12:22:41.056809Z",
+            "orbit_times_strictly_increasing": true,
+            "orbit_vectors_finite": true,
+            "errors": []
+          },
+          "vh": {
+            "mission_id": "S1D",
+            "product_type": "GRD",
+            "polarization": "VH",
+            "mode": "IW",
+            "swath": "IW",
+            "start_time": "2026-08-16T12:21:16.058226Z",
+            "stop_time": "2026-08-16T12:21:41.056809Z",
+            "absolute_orbit_number": 4151,
+            "orbit_direction": "Ascending",
+            "number_of_samples": 12,
+            "number_of_lines": 8,
+            "pixel_value": "AMPLITUDE",
+            "output_pixels": "16 bit Unsigned Integer",
+            "range_pixel_spacing": 10.0,
+            "azimuth_pixel_spacing": 10.0,
+            "orbit_vector_count_declared": 2,
+            "orbit_vector_count_observed": 2,
+            "orbit_time_start": "2026-08-16T12:20:16.058226Z",
+            "orbit_time_end": "2026-08-16T12:22:41.056809Z",
+            "orbit_times_strictly_increasing": true,
+            "orbit_vectors_finite": true,
+            "errors": []
+          }
+        },
+        "raster_headers": {
+          "vv": {
+            "format": "TIFF",
+            "band_count": 1,
+            "width": 12,
+            "height": 8,
+            "pixel_type": "U16",
+            "cell_width": 1.0,
+            "cell_height": 1.0,
+            "spatial_reference_wkid": 0,
+            "spatial_reference_name": "Unknown",
+            "extent": {
+              "xmin": 0.0,
+              "ymin": 0.0,
+              "xmax": 12.0,
+              "ymax": 8.0
+            }
+          },
+          "vh": {
+            "format": "TIFF",
+            "band_count": 1,
+            "width": 12,
+            "height": 8,
+            "pixel_type": "U16",
+            "cell_width": 1.0,
+            "cell_height": 1.0,
+            "spatial_reference_wkid": 0,
+            "spatial_reference_name": "Unknown",
+            "extent": {
+              "xmin": 0.0,
+              "ymin": 0.0,
+              "xmax": 12.0,
+              "ymax": 8.0
+            }
+          }
+        }
+      },
+      "M1-SRC-002": {
+        "annotations": {
+          "vv": {
+            "mission_id": "S1D",
+            "product_type": "GRD",
+            "polarization": "VV",
+            "mode": "IW",
+            "swath": "IW",
+            "start_time": "2026-08-16T12:21:41.058298Z",
+            "stop_time": "2026-08-16T12:22:06.056880Z",
+            "absolute_orbit_number": 4151,
+            "orbit_direction": "Ascending",
+            "number_of_samples": 13,
+            "number_of_lines": 9,
+            "pixel_value": "AMPLITUDE",
+            "output_pixels": "16 bit Unsigned Integer",
+            "range_pixel_spacing": 10.0,
+            "azimuth_pixel_spacing": 10.0,
+            "orbit_vector_count_declared": 2,
+            "orbit_vector_count_observed": 2,
+            "orbit_time_start": "2026-08-16T12:20:41.058298Z",
+            "orbit_time_end": "2026-08-16T12:23:06.056880Z",
+            "orbit_times_strictly_increasing": true,
+            "orbit_vectors_finite": true,
+            "errors": []
+          },
+          "vh": {
+            "mission_id": "S1D",
+            "product_type": "GRD",
+            "polarization": "VH",
+            "mode": "IW",
+            "swath": "IW",
+            "start_time": "2026-08-16T12:21:41.058298Z",
+            "stop_time": "2026-08-16T12:22:06.056880Z",
+            "absolute_orbit_number": 4151,
+            "orbit_direction": "Ascending",
+            "number_of_samples": 13,
+            "number_of_lines": 9,
+            "pixel_value": "AMPLITUDE",
+            "output_pixels": "16 bit Unsigned Integer",
+            "range_pixel_spacing": 10.0,
+            "azimuth_pixel_spacing": 10.0,
+            "orbit_vector_count_declared": 2,
+            "orbit_vector_count_observed": 2,
+            "orbit_time_start": "2026-08-16T12:20:41.058298Z",
+            "orbit_time_end": "2026-08-16T12:23:06.056880Z",
+            "orbit_times_strictly_increasing": true,
+            "orbit_vectors_finite": true,
+            "errors": []
+          }
+        },
+        "raster_headers": {
+          "vv": {
+            "format": "TIFF",
+            "band_count": 1,
+            "width": 13,
+            "height": 9,
+            "pixel_type": "U16",
+            "cell_width": 1.0,
+            "cell_height": 1.0,
+            "spatial_reference_wkid": 0,
+            "spatial_reference_name": "Unknown",
+            "extent": {
+              "xmin": 0.0,
+              "ymin": 0.0,
+              "xmax": 13.0,
+              "ymax": 9.0
+            }
+          },
+          "vh": {
+            "format": "TIFF",
+            "band_count": 1,
+            "width": 13,
+            "height": 9,
+            "pixel_type": "U16",
+            "cell_width": 1.0,
+            "cell_height": 1.0,
+            "spatial_reference_wkid": 0,
+            "spatial_reference_name": "Unknown",
+            "extent": {
+              "xmin": 0.0,
+              "ymin": 0.0,
+              "xmax": 13.0,
+              "ymax": 9.0
+            }
+          }
+        }
+      },
+      "M1-SRC-003": {
+        "annotations": {
+          "vv": {
+            "mission_id": "S1D",
+            "product_type": "GRD",
+            "polarization": "VV",
+            "mode": "IW",
+            "swath": "IW",
+            "start_time": "2026-08-19T00:10:36.889384Z",
+            "stop_time": "2026-08-19T00:11:01.887958Z",
+            "absolute_orbit_number": 4187,
+            "orbit_direction": "Descending",
+            "number_of_samples": 14,
+            "number_of_lines": 10,
+            "pixel_value": "AMPLITUDE",
+            "output_pixels": "16 bit Unsigned Integer",
+            "range_pixel_spacing": 10.0,
+            "azimuth_pixel_spacing": 10.0,
+            "orbit_vector_count_declared": 2,
+            "orbit_vector_count_observed": 2,
+            "orbit_time_start": "2026-08-19T00:09:36.889384Z",
+            "orbit_time_end": "2026-08-19T00:12:01.887958Z",
+            "orbit_times_strictly_increasing": true,
+            "orbit_vectors_finite": true,
+            "errors": []
+          },
+          "vh": {
+            "mission_id": "S1D",
+            "product_type": "GRD",
+            "polarization": "VH",
+            "mode": "IW",
+            "swath": "IW",
+            "start_time": "2026-08-19T00:10:36.889384Z",
+            "stop_time": "2026-08-19T00:11:01.887958Z",
+            "absolute_orbit_number": 4187,
+            "orbit_direction": "Descending",
+            "number_of_samples": 14,
+            "number_of_lines": 10,
+            "pixel_value": "AMPLITUDE",
+            "output_pixels": "16 bit Unsigned Integer",
+            "range_pixel_spacing": 10.0,
+            "azimuth_pixel_spacing": 10.0,
+            "orbit_vector_count_declared": 2,
+            "orbit_vector_count_observed": 2,
+            "orbit_time_start": "2026-08-19T00:09:36.889384Z",
+            "orbit_time_end": "2026-08-19T00:12:01.887958Z",
+            "orbit_times_strictly_increasing": true,
+            "orbit_vectors_finite": true,
+            "errors": []
+          }
+        },
+        "raster_headers": {
+          "vv": {
+            "format": "TIFF",
+            "band_count": 1,
+            "width": 14,
+            "height": 10,
+            "pixel_type": "U16",
+            "cell_width": 1.0,
+            "cell_height": 1.0,
+            "spatial_reference_wkid": 0,
+            "spatial_reference_name": "Unknown",
+            "extent": {
+              "xmin": 0.0,
+              "ymin": 0.0,
+              "xmax": 14.0,
+              "ymax": 10.0
+            }
+          },
+          "vh": {
+            "format": "TIFF",
+            "band_count": 1,
+            "width": 14,
+            "height": 10,
+            "pixel_type": "U16",
+            "cell_width": 1.0,
+            "cell_height": 1.0,
+            "spatial_reference_wkid": 0,
+            "spatial_reference_name": "Unknown",
+            "extent": {
+              "xmin": 0.0,
+              "ymin": 0.0,
+              "xmax": 14.0,
+              "ymax": 10.0
+            }
+          }
+        }
+      }
+    }
+  },
+  "activity": {
+    "external_custody_accessed": false,
+    "real_materialization_receipt_used": false,
+    "real_product_metadata_read": false,
+    "real_product_raster_header_opened": false,
+    "synthetic_pixel_values_created": true,
+    "real_product_pixel_values_examined": false,
+    "network_requests_performed": false,
+    "authentication_performed": false
+  },
+  "limitations": [
+    "A pass establishes exact selected-member identity, SAFE annotation consistency, embedded state-vector structure, and ArcGIS measurement-header readability for only the three available pre-event radar sources.",
+    "It does not decode measurement pixels, establish AOI coverage, apply updated orbit data, terrain-correct a raster, evaluate layover or shadow, or establish registration.",
+    "No before-after radar route is complete because M1-SRC-004 through M1-SRC-006 are not in promoted verified custody.",
+    "M1-SRC-001 retains unintended-test materialization provenance even if its metadata and headers pass.",
+    "The Sentinel recovery, orbit recovery, DEM vertical-datum, terrain-result, pixel-readiness, baseline, change, and scientific gates remain independent."
+  ],
+  "next_action": "Publish the immutable gate before any real Sentinel-1 SAFE metadata or measurement header inspection."
+}

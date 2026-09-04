@@ -1,0 +1,121 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-S1-MATERIALIZED-INPUT-READINESS-CONTROL-001",
+  "verified_at_utc": "2026-09-04T18:15:32Z",
+  "status": "pass_predeclared_and_synthetic_arcgis_real_input_not_run",
+  "bindings": {
+    "contract_ref": "config/qa/radar-input-readiness-contract.json",
+    "contract_sha256": "ad478b8abd4e4a47c8d16012fffc2b67770681538bddc23b500ce5b32b17428a",
+    "core_ref": "scripts/radar_input_readiness_core.py",
+    "core_sha256": "aeb635fb501f63fa9504f78803089f9de7e532c5cb4cfdcca37326a9e9e3613e",
+    "generator_ref": "scripts/prepare_radar_input_readiness_contract.py",
+    "generator_sha256": "dff70c8f71f113522fe516ba6ab06b7268828a13eccc805f5e32f24401581025",
+    "runner_ref": "scripts/inspect_radar_inputs_arcgis.py",
+    "runner_sha256": "92ee181612d5db358e0578929b04839ce775ef157be01510492a315d13499de5",
+    "arcgis_adapter_ref": "scripts/validate_radar_input_readiness_arcgis.py",
+    "arcgis_adapter_sha256": "ba51763e5ca3c0f4b7437fb99049884ef252474fcb9375ef615879ffb934f3dc",
+    "test_ref": "tests/test_radar_input_readiness.py",
+    "test_sha256": "033ce6a47888cf32d94de673dd3bf021d2116df40e76d14d7da81faa8c03437b",
+    "protocol_ref": "docs/RADAR_INPUT_READINESS_PROTOCOL.md",
+    "protocol_sha256": "c674d189ad400ddbaf0d88871ccee4634950fd54971231ff215a2c5abc92e323",
+    "synthetic_arcgis_receipt_ref": "records/surface-receipts/radar-input-readiness-synthetic-arcgis.json",
+    "synthetic_arcgis_receipt_sha256": "842fdea2aed6897e329444af8f8d93f240ed48141c2adfc0fe285c570b6886bc"
+  },
+  "validation": {
+    "portable_test_count": 14,
+    "portable_test_status": "pass",
+    "deterministic_contract_derivation": "pass_exact_bytes",
+    "arcgis_runtime": {
+      "product": "ArcGISPro",
+      "version": "3.7.1",
+      "license_level": "Advanced"
+    },
+    "synthetic_source_count": 3,
+    "synthetic_measurement_raster_count": 6,
+    "aligned_aggregate_status": "pass_partial_pre_event_header_readiness_only",
+    "intentional_cross_polarization_mismatch_status": "block"
+  },
+  "retained_prepublication_attempts": [
+    {
+      "attempt_id": "radar-input-readiness-arcgis-001",
+      "status": "superseded_before_publication",
+      "contract_ref": "records/readiness/radar-input/prepublication-contract-001.json",
+      "contract_sha256": "f765286d1c1cd320dde3faec0f76b9f31cf3254f8c3d73220125fc330d928bf0",
+      "reason": "The embedded orbit rule was strengthened to require the vectors to bracket the acquisition window.",
+      "real_product_data_used": false,
+      "receipt_ref": "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-001.json",
+      "receipt_sha256": "7e002eb055d86369fd59f9497e4dbf1dbda5ccadfb6d312b80b55fd8ce44b6ff"
+    },
+    {
+      "attempt_id": "radar-input-readiness-arcgis-002",
+      "status": "fail",
+      "contract_ref": "records/readiness/radar-input/prepublication-contract-002.json",
+      "contract_sha256": "05ac5bfd2309c9f3f62bc3567a4749086fe5734ec30bdfde53596e878f593665",
+      "reason": "The ArcGIS runtime exposed a datetime name collision after one synthetic TIFF was created; the output and failure are retained.",
+      "real_product_data_used": false,
+      "failure_receipt_ref": "records/surface-receipts/radar-input-readiness-synthetic-arcgis-attempt-002-failure.json",
+      "failure_receipt_sha256": "f0fd4397e4542e0ec9ac67005fc0cae65ce3e14d31365dfd43932aebf34bc7e6"
+    },
+    {
+      "attempt_id": "radar-input-readiness-arcgis-003",
+      "status": "superseded_before_publication",
+      "contract_ref": "records/readiness/radar-input/prepublication-contract-003.json",
+      "contract_sha256": "109f0a829133c5abfbb6ca7f290d702debeed07346c53fb9696dcf2f9649112b",
+      "reason": "The production receipt was clarified to distinguish attempted and complete metadata and header reads and to state the exact achieved claim boundary.",
+      "real_product_data_used": false,
+      "receipt_ref": "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-003.json",
+      "receipt_sha256": "258fbed2f97ee06466365311654d4fc5fe969e2937bef6e24fd6ed659594725b"
+    },
+    {
+      "attempt_id": "radar-input-readiness-arcgis-004",
+      "status": "superseded_before_publication",
+      "contract_ref": "records/readiness/radar-input/prepublication-contract-004.json",
+      "contract_sha256": "c96c6a45b403c57c9668562ec5a148c64adbb25015474de5bf1b4d3d6608afbb",
+      "reason": "The gate was hardened to scan the complete XML payload for prohibited declarations, compare VV and VH annotation identity and spacing, and disable GDAL PAM sidecar creation.",
+      "real_product_data_used": false,
+      "receipt_ref": "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-004.json",
+      "receipt_sha256": "96b91b1047a83cc5d8afb4071f48d32db58d6b52bfb7ab03fad20af69f703ac6"
+    },
+    {
+      "attempt_id": "radar-input-readiness-arcgis-005",
+      "status": "superseded_before_publication",
+      "contract_ref": "records/readiness/radar-input/prepublication-contract-005.json",
+      "contract_sha256": "be29730bb2e0b3ac06fb988d0a35e3fa6bbccf632327ee06e98743e517ebfb31",
+      "reason": "The production runner was refactored so exact receipt, manifest, selected-member, and annotation checks complete before ArcPy import.",
+      "real_product_data_used": false,
+      "receipt_ref": "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-005.json",
+      "receipt_sha256": "b638a6a5ff996f90874f47db6f80617f1e1e39bd39b5917d0ed755e65b822cde"
+    },
+    {
+      "attempt_id": "radar-input-readiness-arcgis-006",
+      "status": "superseded_before_publication",
+      "contract_ref": "records/readiness/radar-input/prepublication-contract-006.json",
+      "contract_sha256": "e9aeea85d3e33649e3b2beb7ff954d0b82852e4d8d4608b4aa36bbfc1c17788f",
+      "reason": "Publication review found that a pre-ArcGIS inventory block could evaluate an unavailable ArcPy license fallback while constructing its receipt; the runner was corrected before real access.",
+      "real_product_data_used": false,
+      "receipt_ref": "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-006.json",
+      "receipt_sha256": "54f65eb01e87bd1d7f615a6bdf0b9aa4ee78c7e46bb03f86372d8a0c6a61a7ea"
+    }
+  ],
+  "external_state": {
+    "materialized_source_count": 3,
+    "real_runner_executed": false,
+    "real_materialization_receipt_used_by_control_validation": false,
+    "external_custody_accessed_by_control_validation": false,
+    "real_product_metadata_read": false,
+    "real_product_raster_header_opened": false,
+    "real_product_pixel_values_examined": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "baseline_processing_released": false,
+    "pixel_usability_established": false,
+    "complete_pair_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false,
+    "authority_created": false
+  },
+  "next_action": "Publish and reverify this exact gate before one read-only ArcGIS inspection of the three bound materialized sources."
+}

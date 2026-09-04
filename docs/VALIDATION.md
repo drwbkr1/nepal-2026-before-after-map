@@ -206,6 +206,15 @@ python scripts/prepare_m2_materialization.py --created-at-utc 2026-09-03T18:55:0
 
 It checks exact-product derivation, executable bindings, synthetic per-file extraction hashes, cross-platform and Windows path hazards, collision refusal, and the production wrapper's stop before custody access when a product is not promoted. The tests do not establish that any real archive has been extracted or that any raster is readable or usable.
 
+The Sentinel-1 materialized-input gate is validated separately before real SAFE inspection:
+
+```powershell
+python -m unittest tests.test_radar_input_readiness -v
+python -c "import json,subprocess,sys; d=json.load(open('config/qa/radar-input-readiness-contract.json')); raise SystemExit(subprocess.call([sys.executable,'scripts/prepare_radar_input_readiness_contract.py','--created-at-utc',d['created_at_utc']]))"
+```
+
+Fourteen portable tests cover exact source narrowing, member selection, unsafe and duplicate paths, complete-payload DTD/entity refusal, source and acquisition identity, finite ordered orbit vectors that bracket acquisition, U16 TIFF headers, annotation-to-raster dimensions, VV/VH metadata and header consistency, and the partial pre-event decision. The final ArcGIS Pro 3.7.1 synthetic receipt opens six U16 TIFFs and blocks a deliberate VH width mismatch. Earlier prepublication passes and the failed `datetime` collision remain recorded. Control validation reads no real SAFE, and a synthetic pass cannot establish a complete pair, pixels, baseline, or change.
+
 The optical input-readiness gate has portable and ArcGIS-native validation:
 
 ```powershell

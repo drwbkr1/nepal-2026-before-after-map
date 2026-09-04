@@ -1,0 +1,60 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-S1-MATERIALIZED-INPUT-READINESS-SYNTHETIC-ATTEMPT-002-FAILURE",
+  "started_at_utc": "2026-09-04T17:56:34Z",
+  "failed_at_utc": "2026-09-04T17:56:40Z",
+  "status": "fail_synthetic_adapter_datetime_name_collision",
+  "bindings": {
+    "contract_ref": "records/readiness/radar-input/prepublication-contract-002.json",
+    "contract_sha256": "05ac5bfd2309c9f3f62bc3567a4749086fe5734ec30bdfde53596e878f593665",
+    "adapter_ref": "scripts/validate_radar_input_readiness_arcgis.py",
+    "adapter_sha256_at_failure": "41b4b2556d76a4268d7a1a7319c1b94b59b820d3ba178cf18b952fb7a49c16a3"
+  },
+  "failure": {
+    "exception_type": "AttributeError",
+    "message": "module datetime has no attribute fromisoformat",
+    "stage": "first synthetic source after VV TIFF creation and before annotation validation",
+    "cause": "ArcGIS runtime exposed datetime as a module under the unaliased imported name.",
+    "prospective_correction": "Use collision-resistant DateTime, TimeDelta, and Timezone aliases and a new output identity."
+  },
+  "retained_output": {
+    "root": "scratch/radar-input-readiness-arcgis-002",
+    "file_count": 5,
+    "total_bytes": 3370,
+    "files": [
+      {
+        "relative_path": "m1-src-001/synthetic-vv.tfw",
+        "size_bytes": 79,
+        "sha256": "756c3eec17514b623c81cb8795888e682bc2ec633b890331b9664c596eeeaa14"
+      },
+      {
+        "relative_path": "m1-src-001/synthetic-vv.tif",
+        "size_bytes": 2306,
+        "sha256": "3c584411fd0444908716be4f253823f4cfa61c1f7d8ee3621f13ed56b24c7a81"
+      },
+      {
+        "relative_path": "m1-src-001/synthetic-vv.tif.aux.xml",
+        "size_bytes": 852,
+        "sha256": "9fcf9f9f4a0a5ea6eb086390bc2a1603419b2c4f0cf362cc133f3511aa274cec"
+      },
+      {
+        "relative_path": "m1-src-001/synthetic-vv.tif.vat.cpg",
+        "size_bytes": 5,
+        "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+      },
+      {
+        "relative_path": "m1-src-001/synthetic-vv.tif.vat.dbf",
+        "size_bytes": 128,
+        "sha256": "ff40964d67db9583b0b8ff6df59436a3d9e832b00e94a6e37d6e4a20cf2f0136"
+      }
+    ]
+  },
+  "activity": {
+    "external_custody_accessed": false,
+    "real_product_data_read": false,
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "synthetic_output_deleted": false
+  },
+  "scientific_result_established": false
+}

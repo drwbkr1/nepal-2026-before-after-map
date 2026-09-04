@@ -271,6 +271,7 @@ REQUIRED = [
     "tests/test_optical_processing_core.py",
     "tests/test_m2_materialization.py",
     "tests/test_optical_input_readiness.py",
+    "tests/test_radar_input_readiness.py",
     "scripts/activate_m2_verification.py",
     "scripts/verify_m2_product_container.py",
     "scripts/inspect_arcgis_sar_capability.py",
@@ -311,6 +312,26 @@ REQUIRED = [
     "scripts/prepare_optical_input_readiness_contract.py",
     "scripts/inspect_optical_inputs_arcgis.py",
     "scripts/validate_optical_input_readiness_arcgis.py",
+    "scripts/radar_input_readiness_core.py",
+    "scripts/prepare_radar_input_readiness_contract.py",
+    "scripts/inspect_radar_inputs_arcgis.py",
+    "scripts/validate_radar_input_readiness_arcgis.py",
+    "config/qa/radar-input-readiness-contract.json",
+    "docs/RADAR_INPUT_READINESS_PROTOCOL.md",
+    "records/surface-receipts/radar-input-readiness-control.json",
+    "records/surface-receipts/radar-input-readiness-synthetic-arcgis.json",
+    "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-001.json",
+    "records/surface-receipts/radar-input-readiness-synthetic-arcgis-attempt-002-failure.json",
+    "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-003.json",
+    "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-004.json",
+    "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-005.json",
+    "records/surface-receipts/radar-input-readiness-synthetic-arcgis-prepublication-006.json",
+    "records/readiness/radar-input/prepublication-contract-001.json",
+    "records/readiness/radar-input/prepublication-contract-002.json",
+    "records/readiness/radar-input/prepublication-contract-003.json",
+    "records/readiness/radar-input/prepublication-contract-004.json",
+    "records/readiness/radar-input/prepublication-contract-005.json",
+    "records/readiness/radar-input/prepublication-contract-006.json",
     "scripts/render_m2_dem_amendment_review.py",
     "contracts/m2-dem-vertical-datum-proposal.json",
     "contracts/m2-dem-terrain-result-review-proposal.json",
@@ -524,6 +545,10 @@ def main() -> None:
     optical_input_contract = json.loads((ROOT / "config/qa/optical-input-readiness-contract.json").read_text(encoding="utf-8"))
     optical_input_arcgis = json.loads((ROOT / "records/surface-receipts/optical-input-readiness-synthetic-arcgis.json").read_text(encoding="utf-8"))
     optical_input_readiness = json.loads((ROOT / "records/surface-receipts/optical-input-readiness-control.json").read_text(encoding="utf-8"))
+    radar_input_contract = json.loads((ROOT / "config/qa/radar-input-readiness-contract.json").read_text(encoding="utf-8"))
+    radar_input_arcgis = json.loads((ROOT / "records/surface-receipts/radar-input-readiness-synthetic-arcgis.json").read_text(encoding="utf-8"))
+    radar_input_readiness = json.loads((ROOT / "records/surface-receipts/radar-input-readiness-control.json").read_text(encoding="utf-8"))
+    radar_input_failure = json.loads((ROOT / "records/surface-receipts/radar-input-readiness-synthetic-arcgis-attempt-002-failure.json").read_text(encoding="utf-8"))
     goal = json.loads((ROOT / "records/long-term-goal.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
@@ -2979,6 +3004,170 @@ def main() -> None:
         fail("optical input-readiness control receipt does not retain the published correction")
     if optical_input_readiness.get("current_disposition", {}).get("status") != "defer" or optical_input_readiness.get("external_state", {}).get("custody_file_count") != 0 or optical_input_readiness.get("external_state", {}).get("materialization_root_exists") is not False:
         fail("optical input-readiness real route must remain historically deferred with empty custody")
+
+    expected_radar_input_contract_sha = "ad478b8abd4e4a47c8d16012fffc2b67770681538bddc23b500ce5b32b17428a"
+    if (
+        sha256("config/qa/radar-input-readiness-contract.json") != expected_radar_input_contract_sha
+        or radar_input_contract.get("contract_id") != "NEPAL-S1-MATERIALIZED-INPUT-READINESS-001"
+        or radar_input_contract.get("status") != "predeclared_active_exact_three_pre_event_sources"
+        or radar_input_contract.get("analysis_crs", {}).get("wkid") != 32645
+    ):
+        fail("Sentinel-1 input-readiness contract identity or exact bytes differ")
+    expected_radar_input_sources = [
+        ("M1-SRC-001", "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE", "retained_unintended_test_execution"),
+        ("M1-SRC-002", "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE", "planned_authorized_offline_materialization"),
+        ("M1-SRC-003", "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE", "planned_authorized_offline_materialization"),
+    ]
+    radar_sources = radar_input_contract.get("sources", [])
+    if [
+        (item.get("source_id"), item.get("exact_product_id"), item.get("materialization_provenance"))
+        for item in radar_sources
+    ] != expected_radar_input_sources:
+        fail("Sentinel-1 input-readiness source boundary or provenance differs")
+    for item in radar_sources:
+        receipt_ref = item.get("materialization_receipt_ref")
+        if (
+            not isinstance(receipt_ref, str)
+            or not (ROOT / receipt_ref).is_file()
+            or item.get("materialization_receipt_sha256") != sha256(receipt_ref)
+        ):
+            fail(f"Sentinel-1 input-readiness receipt binding differs for {item.get('source_id')}")
+        materialization = sentinel_materialization_receipts[item["source_id"]]
+        if item.get("external_manifest_sha256") != materialization.get("bindings", {}).get("external_manifest_sha256"):
+            fail(f"Sentinel-1 input-readiness manifest binding differs for {item.get('source_id')}")
+    expected_radar_roles = {
+        "manifest_safe": "manifest.safe",
+        "annotation_vv": "annotation/*-vv-*.xml",
+        "annotation_vh": "annotation/*-vh-*.xml",
+        "calibration_vv": "annotation/calibration/calibration-*-vv-*.xml",
+        "calibration_vh": "annotation/calibration/calibration-*-vh-*.xml",
+        "noise_vv": "annotation/calibration/noise-*-vv-*.xml",
+        "noise_vh": "annotation/calibration/noise-*-vh-*.xml",
+        "measurement_vv": "measurement/*-vv-*.tiff",
+        "measurement_vh": "measurement/*-vh-*.tiff",
+    }
+    if radar_input_contract.get("required_members", {}).get("role_patterns") != expected_radar_roles:
+        fail("Sentinel-1 input-readiness required member roles differ")
+    radar_input_bindings = radar_input_contract.get("inputs", {})
+    for ref_key, hash_key in (
+        ("materialization_contract_ref", "materialization_contract_sha256"),
+        ("radar_processing_contract_ref", "radar_processing_contract_sha256"),
+        ("pixel_readiness_contract_ref", "pixel_readiness_contract_sha256"),
+        ("source_manifest_ref", "source_manifest_sha256"),
+        ("active_m2_ref", "active_m2_sha256"),
+        ("activation_approval_ref", "activation_approval_sha256"),
+        ("core_ref", "core_sha256"),
+        ("runner_ref", "runner_sha256"),
+        ("arcgis_adapter_ref", "arcgis_adapter_sha256"),
+    ):
+        relative = radar_input_bindings.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file() or radar_input_bindings.get(hash_key) != sha256(relative):
+            fail(f"Sentinel-1 input-readiness contract does not bind {ref_key}")
+    radar_execution = radar_input_contract.get("execution_boundary", {})
+    if (
+        radar_execution.get("network_requests") != "prohibited"
+        or radar_execution.get("authentication") != "prohibited"
+        or radar_execution.get("credential_access") != "prohibited"
+        or radar_execution.get("external_data_mutation") != "prohibited"
+        or radar_execution.get("pixel_value_decoding") != "prohibited_header_and_metadata_reads_only"
+        or radar_execution.get("derived_raster_writes") != "prohibited"
+        or radar_input_contract.get("metadata_checks", {}).get("embedded_orbit_vectors_must_bracket_acquisition") is not True
+        or radar_input_contract.get("decision_semantics", {}).get("pass_releases_baseline_processing") is not False
+        or any(radar_input_contract.get("claim_boundary", {}).get(key) is not False for key in (
+            "pixel_values_examined", "pixel_usability_established", "complete_pair_established",
+            "baseline_established", "change_established", "scientific_admission_authorized",
+        ))
+    ):
+        fail("Sentinel-1 input-readiness execution or claim boundary differs")
+    if radar_input_arcgis.get("status") != "pass_synthetic_arcgis_real_input_deferred":
+        fail("Sentinel-1 synthetic ArcGIS input-readiness status differs")
+    synthetic_bindings = radar_input_arcgis.get("bindings", {})
+    for ref_key, hash_key in (
+        ("contract_ref", "contract_sha256"),
+        ("core_ref", "core_sha256"),
+        ("runner_ref", "runner_sha256"),
+        ("adapter_ref", "adapter_sha256"),
+    ):
+        relative = synthetic_bindings.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file() or synthetic_bindings.get(hash_key) != sha256(relative):
+            fail(f"Sentinel-1 synthetic ArcGIS receipt does not bind {ref_key}")
+    radar_validation = radar_input_arcgis.get("validation", {})
+    if (
+        radar_input_arcgis.get("runtime", {}).get("product") != "ArcGISPro"
+        or radar_input_arcgis.get("runtime", {}).get("version") != "3.7.1"
+        or radar_validation.get("synthetic_source_count") != 3
+        or radar_validation.get("synthetic_measurement_raster_count") != 6
+        or radar_validation.get("required_member_role_count") != 9
+        or radar_validation.get("aggregate_decision", {}).get("status") != "pass_partial_pre_event_header_readiness_only"
+        or radar_validation.get("intentional_cross_polarization_width_mismatch", {}).get("status") != "block"
+        or any(value.get("status") != "pass_header_readability_only" for value in radar_validation.get("aligned_source_decisions", {}).values())
+    ):
+        fail("Sentinel-1 synthetic ArcGIS validation result differs")
+    radar_synthetic_activity = radar_input_arcgis.get("activity", {})
+    if any(radar_synthetic_activity.get(key) is not False for key in (
+        "external_custody_accessed", "real_materialization_receipt_used", "real_product_metadata_read",
+        "real_product_raster_header_opened", "real_product_pixel_values_examined", "network_requests_performed",
+        "authentication_performed",
+    )):
+        fail("Sentinel-1 synthetic ArcGIS receipt violates the real-data boundary")
+    if (
+        radar_input_failure.get("status") != "fail_synthetic_adapter_datetime_name_collision"
+        or radar_input_failure.get("bindings", {}).get("contract_sha256") != sha256(radar_input_failure["bindings"]["contract_ref"])
+        or radar_input_failure.get("retained_output", {}).get("file_count") != 5
+        or radar_input_failure.get("retained_output", {}).get("total_bytes") != 3370
+        or radar_input_failure.get("activity", {}).get("real_product_data_read") is not False
+        or radar_input_failure.get("activity", {}).get("synthetic_output_deleted") is not False
+    ):
+        fail("Sentinel-1 synthetic ArcGIS failed attempt differs or was obscured")
+    if radar_input_readiness.get("status") != "pass_predeclared_and_synthetic_arcgis_real_input_not_run":
+        fail("Sentinel-1 input-readiness control status differs")
+    radar_control_bindings = radar_input_readiness.get("bindings", {})
+    for ref_key, hash_key in (
+        ("contract_ref", "contract_sha256"),
+        ("core_ref", "core_sha256"),
+        ("generator_ref", "generator_sha256"),
+        ("runner_ref", "runner_sha256"),
+        ("arcgis_adapter_ref", "arcgis_adapter_sha256"),
+        ("test_ref", "test_sha256"),
+        ("protocol_ref", "protocol_sha256"),
+        ("synthetic_arcgis_receipt_ref", "synthetic_arcgis_receipt_sha256"),
+    ):
+        relative = radar_control_bindings.get(ref_key)
+        if not isinstance(relative, str) or not (ROOT / relative).is_file() or radar_control_bindings.get(hash_key) != sha256(relative):
+            fail(f"Sentinel-1 input-readiness control does not bind {ref_key}")
+    retained_radar_attempts = radar_input_readiness.get("retained_prepublication_attempts", [])
+    if len(retained_radar_attempts) != 6 or [item.get("status") for item in retained_radar_attempts] != [
+        "superseded_before_publication", "fail", "superseded_before_publication",
+        "superseded_before_publication", "superseded_before_publication", "superseded_before_publication"
+    ]:
+        fail("Sentinel-1 input-readiness control does not retain all prepublication attempts")
+    for item in retained_radar_attempts:
+        for ref_key, hash_key in (("contract_ref", "contract_sha256"), ("receipt_ref", "receipt_sha256"), ("failure_receipt_ref", "failure_receipt_sha256")):
+            if ref_key not in item:
+                continue
+            relative = item[ref_key]
+            if not (ROOT / relative).is_file() or item.get(hash_key) != sha256(relative):
+                fail(f"Sentinel-1 input-readiness retained attempt does not bind {ref_key}")
+    radar_control_validation = radar_input_readiness.get("validation", {})
+    radar_external_state = radar_input_readiness.get("external_state", {})
+    radar_assertions = radar_input_readiness.get("assertions", {})
+    if (
+        radar_control_validation.get("portable_test_count") != 14
+        or radar_control_validation.get("portable_test_status") != "pass"
+        or radar_control_validation.get("deterministic_contract_derivation") != "pass_exact_bytes"
+        or radar_external_state.get("materialized_source_count") != 3
+        or radar_external_state.get("real_runner_executed") is not False
+        or any(radar_external_state.get(key) is not False for key in (
+            "real_materialization_receipt_used_by_control_validation", "external_custody_accessed_by_control_validation",
+            "real_product_metadata_read", "real_product_raster_header_opened", "real_product_pixel_values_examined",
+        ))
+        or any(radar_assertions.get(key) is not False for key in (
+            "network_requests_performed", "authentication_performed", "credential_values_read_or_recorded",
+            "baseline_processing_released", "pixel_usability_established", "complete_pair_established",
+            "change_established", "scientific_admission_authorized", "authority_created",
+        ))
+    ):
+        fail("Sentinel-1 input-readiness control validation or boundary differs")
     if aoi_reconciliation["contract_sha256"] != sha256("reviews/m1-aoi/review-contract.json"):
         fail("AOI reconciliation does not bind the exact historical review contract")
     if approval["status"] != "approved" or approval["reviewed_aoi_sha256"] != sha256("config/aoi/draft-study-areas.geojson"):
@@ -4760,6 +4949,36 @@ def main() -> None:
         or sentinel_materialization_evidence.get("assertions", {}).get("recovery_authority_created") is not False
     ):
         fail("EVID-0067 Sentinel materialization continuation differs or overclaims")
+
+    radar_input_evidence = ledger_by_id.get("EVID-0068")
+    if (
+        not isinstance(radar_input_evidence, dict)
+        or radar_input_evidence.get("status") != radar_input_readiness.get("status")
+        or radar_input_evidence.get("contract_ref") != "config/qa/radar-input-readiness-contract.json"
+        or radar_input_evidence.get("contract_sha256") != sha256("config/qa/radar-input-readiness-contract.json")
+        or radar_input_evidence.get("control_receipt_ref") != "records/surface-receipts/radar-input-readiness-control.json"
+        or radar_input_evidence.get("control_receipt_sha256") != sha256("records/surface-receipts/radar-input-readiness-control.json")
+        or radar_input_evidence.get("synthetic_arcgis_receipt_sha256") != sha256("records/surface-receipts/radar-input-readiness-synthetic-arcgis.json")
+        or radar_input_evidence.get("protocol_sha256") != sha256("docs/RADAR_INPUT_READINESS_PROTOCOL.md")
+        or radar_input_evidence.get("validation") != {
+            "portable_test_count": 14,
+            "portable_tests": "pass",
+            "synthetic_arcgis_status": "pass_synthetic_arcgis_real_input_deferred",
+            "synthetic_source_count": 3,
+            "synthetic_measurement_raster_count": 6,
+            "intentional_header_mismatch": "block",
+            "deterministic_contract_derivation": "pass_exact_bytes",
+        }
+        or radar_input_evidence.get("retained_prepublication_attempt_count") != 6
+        or any(radar_input_evidence.get("assertions", {}).get(key) is not False for key in (
+            "external_custody_accessed", "real_materialization_receipt_used", "real_product_metadata_read",
+            "real_product_raster_header_opened", "real_product_pixel_values_examined", "network_requests_performed",
+            "authentication_performed", "credential_values_read_or_recorded", "complete_pair_established",
+            "baseline_processing_released", "change_established", "scientific_admission_authorized",
+            "current_checkpoint_changed", "recovery_authority_created",
+        ))
+    ):
+        fail("EVID-0068 Sentinel-1 input-readiness predeclaration differs or overclaims")
 
     violations = []
     for relative in tracked_files():
