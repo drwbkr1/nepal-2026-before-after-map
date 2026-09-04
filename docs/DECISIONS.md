@@ -202,4 +202,4 @@
 
 **Decision:** Install exact `numpy==2.5.1` in GitHub Actions before the portable tests, while leaving the bound terrain contract, core, tests, input identities, seams, and thresholds unchanged.
 **Reason:** The first public checkpoint passed the repository checker but the Linux test runner lacked NumPy. The next workflow edit failed with zero jobs and no available job log; retaining both results distinguishes CI integration failure from terrain or ArcGIS evidence.
-**Status:** Failed runs `33819299553` and `33819378562` remain public. Corrected run `33819458096` installed NumPy 2.5.1, passed the 199-file checker, and passed all 190 tests before any real DEM terrain metrics were observed.
+**Status:** Failed runs `33819299553` and `33819378562` remain public. Corrected run `33819458096` installed NumPy 2.5.1, passed the 199-file checker, and passed all 190 tests before any real DEM terrain metrics were observed. The additive evidence commit then failed as run `33819677224` because its hash bound Windows CRLF bytes instead of the LF-normalized Git blob; that failure is retained and the receipt is now explicitly serialized with LF.

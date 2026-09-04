@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "correction_id": "NEPAL-M2-DEM-TERRAIN-QUALITY-CI-CORRECTION-001",
-  "status": "pass_pinned_numpy_dependency_and_workflow_syntax_corrected",
+  "status": "pass_pinned_numpy_dependency_workflow_syntax_and_hash_portability_corrected",
   "verified_at_utc": "2026-09-03T23:53:25Z",
   "claim": "The portable terrain-quality tests now run in GitHub Actions with an exact NumPy version, and both failed publication attempts remain explicit evidence.",
   "affected_checkpoint": "pre_metrics_control_publication",
@@ -21,6 +21,14 @@
       "status": "failure_no_jobs",
       "observed": "GitHub recorded a workflow-level failure with zero jobs after the first dependency-install line was added.",
       "interpretation": "Consistent with workflow parsing or validation failure; GitHub exposed no job log, so a more specific cause is not claimed."
+    },
+    {
+      "run_id": 33819677224,
+      "commit": "db4f799a637336df933ce3169eff82385dabd44b",
+      "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33819677224",
+      "status": "failure_repository_check",
+      "observed": "The Linux repository checker rejected the EVID-0044 correction binding because the receipt hash had been computed from the CRLF working-tree serialization before Git normalized the committed blob to LF.",
+      "error": "FAIL: EVID-0044 DEM terrain-quality CI correction differs"
     }
   ],
   "correction": {
@@ -30,7 +38,8 @@
     "final_install_command": "python -m pip install --disable-pip-version-check --no-deps numpy==2.5.1",
     "threshold_contract_changed": false,
     "terrain_core_changed": false,
-    "terrain_test_changed": false
+    "terrain_test_changed": false,
+    "portable_text_serialization": "UTF-8 with LF newlines"
   },
   "passing_validation": {
     "run_id": 33819458096,
@@ -54,12 +63,20 @@
     "vertical_datum_route_established": false,
     "sentinel_processing_executed": false,
     "scientific_result_established": false,
-    "authority_created": false
+    "authority_created": false,
+    "newline_normalization_failure_preserved": true,
+    "portable_lf_hash_binding_required": true
   },
   "limitations": [
     "A passing Linux suite does not prove ArcGIS Pro runtime behavior or real DEM terrain quality.",
     "The no-job failure exposes no job log; its specific parser failure is not asserted beyond the observed workflow-level result.",
     "The independent vertical-datum and terrain-accuracy gates remain unresolved."
   ],
-  "next_action": "Publish this correction evidence, verify the resulting repository run, and only then start the single predeclared ArcGIS terrain-quality attempt."
+  "next_action": "Publish the LF-normalized correction binding, verify the resulting repository run, and only then start the single predeclared ArcGIS terrain-quality attempt.",
+  "hash_portability": {
+    "failed_run_id": 33819677224,
+    "precommit_windows_sha256": "cc092fc6ce7c1ae9e6db24f4c24da97311b0e84e77eb55aedb0cbea988afe06b",
+    "committed_lf_blob_sha256": "3127f09fb5dccf794d347e92abf59445941fbf7c34d52d82cb17dbae7e44914b",
+    "resolution": "Serialize the correction receipt with explicit LF newlines before hashing and update its ledger binding to those portable bytes."
+  }
 }

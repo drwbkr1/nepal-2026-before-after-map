@@ -898,22 +898,29 @@ def main() -> None:
         "sentinel_processing_executed": False,
         "scientific_result_established": False,
         "authority_created": False,
+        "newline_normalization_failure_preserved": True,
+        "portable_lf_hash_binding_required": True,
     }
     failed_terrain_ci_runs = dem_terrain_ci_correction.get("failed_runs", [])
     passing_terrain_ci = dem_terrain_ci_correction.get("passing_validation", {})
     terrain_ci_change = dem_terrain_ci_correction.get("correction", {})
     if (
         dem_terrain_ci_correction.get("correction_id") != "NEPAL-M2-DEM-TERRAIN-QUALITY-CI-CORRECTION-001"
-        or dem_terrain_ci_correction.get("status") != "pass_pinned_numpy_dependency_and_workflow_syntax_corrected"
-        or [item.get("run_id") for item in failed_terrain_ci_runs] != [33819299553, 33819378562]
+        or dem_terrain_ci_correction.get("status") != "pass_pinned_numpy_dependency_workflow_syntax_and_hash_portability_corrected"
+        or [item.get("run_id") for item in failed_terrain_ci_runs] != [33819299553, 33819378562, 33819677224]
         or failed_terrain_ci_runs[0].get("error") != "ModuleNotFoundError: No module named 'numpy'"
         or failed_terrain_ci_runs[1].get("status") != "failure_no_jobs"
+        or failed_terrain_ci_runs[2].get("error") != "FAIL: EVID-0044 DEM terrain-quality CI correction differs"
         or terrain_ci_change.get("workflow_ref") != ".github/workflows/validate.yml"
         or terrain_ci_change.get("workflow_sha256") != sha256(".github/workflows/validate.yml")
         or terrain_ci_change.get("pinned_dependency") != "numpy==2.5.1"
         or terrain_ci_change.get("threshold_contract_changed") is not False
         or terrain_ci_change.get("terrain_core_changed") is not False
         or terrain_ci_change.get("terrain_test_changed") is not False
+        or terrain_ci_change.get("portable_text_serialization") != "UTF-8 with LF newlines"
+        or dem_terrain_ci_correction.get("hash_portability", {}).get("failed_run_id") != 33819677224
+        or dem_terrain_ci_correction.get("hash_portability", {}).get("precommit_windows_sha256") != "cc092fc6ce7c1ae9e6db24f4c24da97311b0e84e77eb55aedb0cbea988afe06b"
+        or dem_terrain_ci_correction.get("hash_portability", {}).get("committed_lf_blob_sha256") != "3127f09fb5dccf794d347e92abf59445941fbf7c34d52d82cb17dbae7e44914b"
         or passing_terrain_ci.get("run_id") != 33819458096
         or passing_terrain_ci.get("commit") != "d52ee5a0f1ad51062ccfe3426a759cea91fcdbcb"
         or passing_terrain_ci.get("conclusion") != "success"
@@ -2859,7 +2866,7 @@ def main() -> None:
         dem_terrain_ci_evidence.get("status") != dem_terrain_ci_correction.get("status")
         or dem_terrain_ci_evidence.get("correction_ref") != "records/readiness/m2-dem-terrain-quality-ci-correction.json"
         or dem_terrain_ci_evidence.get("correction_sha256") != sha256("records/readiness/m2-dem-terrain-quality-ci-correction.json")
-        or dem_terrain_ci_evidence.get("failed_run_ids") != [33819299553, 33819378562]
+        or dem_terrain_ci_evidence.get("failed_run_ids") != [33819299553, 33819378562, 33819677224]
         or dem_terrain_ci_evidence.get("passing_run_id") != 33819458096
         or dem_terrain_ci_evidence.get("assertions") != dem_terrain_ci_correction.get("assertions")
     ):
