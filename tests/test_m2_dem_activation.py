@@ -135,6 +135,7 @@ class M2DemActivationTests(unittest.TestCase):
             [
                 "records/source-gates/m2-dem-amendment-approval.json",
                 "records/source-gates/m2-orbit-amendment-approval.json",
+                "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
             ],
         )
         primary_intake = load("contracts/m2-intake.json")

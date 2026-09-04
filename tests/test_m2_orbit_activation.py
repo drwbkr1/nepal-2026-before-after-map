@@ -93,6 +93,7 @@ class M2OrbitActivationTests(unittest.TestCase):
             [
                 "records/source-gates/m2-dem-amendment-approval.json",
                 "records/source-gates/m2-orbit-amendment-approval.json",
+                "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
             ],
         )
         checkpoints = [item["checkpoint_id"] for item in self.profile["parallel_checkpoints"]]

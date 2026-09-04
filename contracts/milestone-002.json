@@ -50,6 +50,21 @@
         "authorized_orbit_type": "AUX_RESORB",
         "authorized_source_count": 4,
         "precise_substitution_authorized": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
+        "approval_sha256": "41158f296e6ab464c2f21b24a1c8d253979490021c9e56da858ef1f9e1fdef4b",
+        "proposal_ref": "contracts/milestone-002-radar-input-readiness-amendment-proposal.json",
+        "proposal_sha256": "ebdcb763afd99ea23090c9bd83fd9e9cb6cb8dfbb2b5fed60edb80f1fa61c731",
+        "review_bundle_sha256": "831df5d5aae06862514667ad861c815154085fa3c546039e60f517d38ee442ff",
+        "amended_contract_ref": "config/qa/radar-input-readiness-contract-amendment-001.json",
+        "amended_contract_sha256": "d02a4344c755ac7b69e2b1bd2b66403fa2a68d204116a32220a03a6e4166e6bd",
+        "real_002_receipt_ref": "records/readiness/radar-input/m2-s1-input-readiness-real-002.json",
+        "real_002_receipt_sha256": "12fcf5442d049bf8d1353566f1cb3238b7f1b7998f6e5581e029e25ae3594ea2",
+        "reconciliation_ref": "records/surface-receipts/radar-input-readiness-amendment-real-002-reconciliation.json",
+        "reconciliation_sha256": "9b051f216c7483d2d63ec22147c51cb182de08bea754d06a598688a9b2e0f2b6",
+        "post_observation": true,
+        "baseline_processing_released": false
       }
     ]
   },
@@ -112,7 +127,8 @@
     ],
     "active_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json",
-      "records/source-gates/m2-orbit-amendment-approval.json"
+      "records/source-gates/m2-orbit-amendment-approval.json",
+      "records/source-gates/m2-radar-input-readiness-amendment-approval.json"
     ]
   },
   "entry_conditions": [
@@ -724,6 +740,55 @@
         "rationale": "Application cannot begin until Sentinel, DEM, vertical, orbit, terrain-review, and radar-readiness prerequisites pass."
       },
       "next_dependency": "M2-BASELINE"
+    },
+    {
+      "id": "M2-RADAR-INPUT-LABEL-AMEND",
+      "purpose": "Preserve real-001 and apply the exact owner-approved Detected-label correction through one publication-gated real-002 inspection.",
+      "depends_on": [
+        "M2-ACTIVATE"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "complete",
+      "inputs": [
+        "reviews/m2-radar-input-readiness-amendment/review-bundle.json",
+        "contracts/milestone-002-radar-input-readiness-amendment-proposal.json",
+        "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
+        "config/qa/radar-input-readiness-contract-amendment-001.json"
+      ],
+      "outputs": [
+        "records/readiness/radar-input/m2-s1-input-readiness-real-002.json",
+        "records/surface-receipts/radar-input-readiness-amendment-real-002-reconciliation.json"
+      ],
+      "gates": {
+        "owner_decision": "approve",
+        "attestation": true,
+        "review_bundle_sha256": "831df5d5aae06862514667ad861c815154085fa3c546039e60f517d38ee442ff",
+        "proposal_sha256": "ebdcb763afd99ea23090c9bd83fd9e9cb6cb8dfbb2b5fed60edb80f1fa61c731",
+        "publication_commit_sha": "c05e1e26c8ee8dd8755573524da90c2080de4bd7",
+        "publication_ci_run_id": 33910395201,
+        "real_002_invocation_count": 1
+      },
+      "disposition": "pass_partial_pre_event_header_readiness_only",
+      "retained_failures": [
+        {
+          "receipt_ref": "records/readiness/radar-input/m2-s1-input-readiness-real-001.json",
+          "receipt_sha256": "feab3645709df16306c81dae959a8693925a7c6f919f2a1e414cf3765c3a5b0c",
+          "status": "block",
+          "reclassified": false
+        }
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [
+          "three exact pre-event sources pass member, annotation, embedded-vector, and ArcGIS header readiness",
+          "no measurement pixels decoded and no complete before-after pair established"
+        ],
+        "decision_value": "no_downstream_release",
+        "rationale": "The post-observation correction clears only the exact label mismatch; every pixel, pair-completion, terrain, registration, baseline, and scientific gate remains independent."
+      },
+      "next_dependency": "M2-ACQUIRE",
+      "completed_at_utc": "2026-09-04T19:23:08Z"
     }
   ],
   "path_efficiency": {
@@ -755,7 +820,8 @@
       "exact Sentinel-1 orbit amendment binding",
       "fresh four-file orbit source preflight",
       "per-file provider checksum and EOF XML verification",
-      "exact-source orbit application without SAFE overwrite"
+      "exact-source orbit application without SAFE overwrite",
+      "exact radar input label amendment and public-CI binding"
     ],
     "completed_checks": [
       "exact activation binding",
@@ -765,7 +831,9 @@
       "exact DEM amendment and license binding",
       "fresh anonymous four-tile source preflight",
       "DEM storage path and collision safety",
-      "exact Sentinel-1 orbit amendment binding"
+      "exact Sentinel-1 orbit amendment binding",
+      "exact radar input label amendment and public-CI binding",
+      "three-source partial pre-event radar header readiness"
     ]
   },
   "activation_evidence": {
@@ -785,7 +853,8 @@
       "Three exact Sentinel-1 products are promoted and container-verified; M1-SRC-004 remains a retained truncated transfer, and four products remain unattempted.",
       "The post-event optical route remains high-cloud-risk and may be inconclusive.",
       "A test-induced M1-SRC-001 SAFE materialization passed exact offline extraction controls and is retained with explicit unintended-test provenance; it establishes no readable pixels or scientific result.",
-      "A test-induced M2-ORB-001 attempt used a tracked nonsecret test literal, made a catalogue and rejected download request, received zero payload bytes, and is retained as a terminal failure requiring review."
+      "A test-induced M2-ORB-001 attempt used a tracked nonsecret test literal, made a catalogue and rejected download request, received zero payload bytes, and is retained as a terminal failure requiring review.",
+      "The one post-observation radar label amendment run passed only three-source pre-event member, annotation, vector, and header readiness; real-001 remains BLOCK and no pixel or baseline action is released."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."

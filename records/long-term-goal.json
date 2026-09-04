@@ -14,7 +14,8 @@
   "current_checkpoint": "M2-ACQUISITION-REVIEW",
   "active_amendments": [
     "records/source-gates/m2-dem-amendment-approval.json",
-    "records/source-gates/m2-orbit-amendment-approval.json"
+    "records/source-gates/m2-orbit-amendment-approval.json",
+    "records/source-gates/m2-radar-input-readiness-amendment-approval.json"
   ],
   "parallel_checkpoints": [
     "M2-DEM-VERTICAL-DATUM-REVIEW",

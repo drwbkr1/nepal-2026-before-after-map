@@ -1,0 +1,186 @@
+{
+  "record_version": "1.0",
+  "record_id": "NEPAL-S1-MATERIALIZED-INPUT-READINESS-AMENDMENT-REAL-002-RECONCILIATION-001",
+  "reconciled_at_utc": "2026-09-04T19:20:30Z",
+  "status": "pass_partial_pre_event_header_readiness_only_post_observation_no_downstream_release",
+  "bindings": {
+    "amended_contract_ref": "config/qa/radar-input-readiness-contract-amendment-001.json",
+    "amended_contract_sha256": "d02a4344c755ac7b69e2b1bd2b66403fa2a68d204116a32220a03a6e4166e6bd",
+    "real_receipt_ref": "records/readiness/radar-input/m2-s1-input-readiness-real-002.json",
+    "real_receipt_sha256": "12fcf5442d049bf8d1353566f1cb3238b7f1b7998f6e5581e029e25ae3594ea2",
+    "approval_ref": "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
+    "approval_sha256": "41158f296e6ab464c2f21b24a1c8d253979490021c9e56da858ef1f9e1fdef4b",
+    "original_real_001_receipt_sha256": "feab3645709df16306c81dae959a8693925a7c6f919f2a1e414cf3765c3a5b0c"
+  },
+  "publication_gate": {
+    "commit_sha": "c05e1e26c8ee8dd8755573524da90c2080de4bd7",
+    "remote_ref": "refs/heads/main",
+    "remote_commit_verified": true,
+    "github_actions_run_id": 33910395201,
+    "github_actions_workflow": "Validate project controls",
+    "github_actions_conclusion": "success",
+    "github_actions_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33910395201"
+  },
+  "observed_result": {
+    "source_count": 3,
+    "required_member_inventory_pass_count": 3,
+    "annotation_parse_count": 6,
+    "annotation_pixel_value_observed_set": [
+      "Detected"
+    ],
+    "measurement_header_open_count": 6,
+    "all_measurement_headers_opened": true,
+    "all_measurement_headers_one_band_u16": true,
+    "all_header_dimensions_match_annotations": true,
+    "all_embedded_orbit_structures_passed": true,
+    "source_pass_count": 3,
+    "source_block_count": 0,
+    "blocking_errors": [],
+    "per_source": {
+      "M1-SRC-001": {
+        "inventory_status": "pass_inventory_only",
+        "annotation_pixel_values": {
+          "vv": "Detected",
+          "vh": "Detected"
+        },
+        "annotation_orbit_vector_counts": {
+          "vv": 16,
+          "vh": 16
+        },
+        "raster_dimensions": {
+          "vv": [
+            25762,
+            16732
+          ],
+          "vh": [
+            25762,
+            16732
+          ]
+        },
+        "raster_pixel_types": {
+          "vv": "U16",
+          "vh": "U16"
+        },
+        "decision_status": "pass_header_readability_only"
+      },
+      "M1-SRC-002": {
+        "inventory_status": "pass_inventory_only",
+        "annotation_pixel_values": {
+          "vv": "Detected",
+          "vh": "Detected"
+        },
+        "annotation_orbit_vector_counts": {
+          "vv": 17,
+          "vh": 17
+        },
+        "raster_dimensions": {
+          "vv": [
+            25769,
+            16732
+          ],
+          "vh": [
+            25769,
+            16732
+          ]
+        },
+        "raster_pixel_types": {
+          "vv": "U16",
+          "vh": "U16"
+        },
+        "decision_status": "pass_header_readability_only"
+      },
+      "M1-SRC-003": {
+        "inventory_status": "pass_inventory_only",
+        "annotation_pixel_values": {
+          "vv": "Detected",
+          "vh": "Detected"
+        },
+        "annotation_orbit_vector_counts": {
+          "vv": 17,
+          "vh": 17
+        },
+        "raster_dimensions": {
+          "vv": [
+            25533,
+            16747
+          ],
+          "vh": [
+            25533,
+            16747
+          ]
+        },
+        "raster_pixel_types": {
+          "vv": "U16",
+          "vh": "U16"
+        },
+        "decision_status": "pass_header_readability_only"
+      }
+    }
+  },
+  "external_custody_reverification": {
+    "status": "pass_exact_attempt_inventories_and_all_safe_hashes_unchanged",
+    "attempt_count": 3,
+    "attempt_file_count": 87,
+    "safe_file_count": 78,
+    "safe_total_bytes": 5183550209,
+    "added_sidecar_count": 0,
+    "per_source": {
+      "M1-SRC-001": {
+        "attempt_file_count": 29,
+        "safe_file_count": 26,
+        "safe_total_bytes": 1732324248,
+        "external_manifest_sha256": "3756a702efb9a7d1c1f61e284fabf017702e34073b82c44a3571f213d01295e9",
+        "manifest_match": true,
+        "added_sidecar_count": 0
+      },
+      "M1-SRC-002": {
+        "attempt_file_count": 29,
+        "safe_file_count": 26,
+        "safe_total_bytes": 1732865309,
+        "external_manifest_sha256": "f1b92efcfeaae2c55b016ada4ce76485595c4e0cd980cd5419c5a4b34d9de849",
+        "manifest_match": true,
+        "added_sidecar_count": 0
+      },
+      "M1-SRC-003": {
+        "attempt_file_count": 29,
+        "safe_file_count": 26,
+        "safe_total_bytes": 1718360652,
+        "external_manifest_sha256": "ed982516cfc2cef55c522675e095cfef0f979f4c0632c2bfbc692cbe5ad082ba",
+        "manifest_match": true,
+        "added_sidecar_count": 0
+      }
+    },
+    "verified_at_utc": "2026-09-04T19:20:30Z"
+  },
+  "disposition": {
+    "amended_gate_result": "pass_partial_pre_event_header_readiness_only",
+    "post_observation_correction": true,
+    "blind_or_independent_validation": false,
+    "real_001_remains_block": true,
+    "real_002_maximum_invocations_consumed": 1,
+    "automatic_retry_authorized": false,
+    "baseline_processing_released": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "external_materialization_inventory_unchanged": true,
+    "real_product_pixel_values_examined": false,
+    "derived_raster_written": false,
+    "pixel_usability_established": false,
+    "complete_pair_established": false,
+    "baseline_processing_released": false,
+    "change_established": false,
+    "scientific_admission_authorized": false,
+    "sentinel_recovery_authority_created": false,
+    "orbit_recovery_authority_created": false
+  },
+  "limitations": [
+    "The Detected correction followed observation of that label in real-001; real-002 is confirmatory and is not blind or independent.",
+    "The pass covers selected-member identity, annotation structure, embedded vectors, and ArcGIS header readability for only three pre-event sources.",
+    "No measurement pixels were decoded, and no usable-pixel, AOI-coverage, updated-orbit, terrain-correction, registration, baseline, change, or scientific result is established.",
+    "No before-after radar pair is complete because M1-SRC-004 through M1-SRC-006 are not in promoted verified custody."
+  ],
+  "next_action": "Return to the independent Sentinel recovery, orbit recovery, DEM vertical-datum, terrain-result, and later pixel-readiness gates; do not run real-002 again."
+}
