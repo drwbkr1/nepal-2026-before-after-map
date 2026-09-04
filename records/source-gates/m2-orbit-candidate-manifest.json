@@ -1,0 +1,222 @@
+{
+  "schema_version": "1.0",
+  "manifest_id": "NEPAL-M2-ORBIT-CANDIDATE-MANIFEST-001",
+  "status": "candidate_not_approved",
+  "generated_at_utc": "2026-09-04T01:16:42Z",
+  "intended_use": "Replace embedded predicted state vectors with exact ESA Copernicus restituted orbit files for the six approved Sentinel-1 GRD sources before controlled ArcGIS baseline processing.",
+  "selection_rule": "For each unique GRD acquisition window, select the full-coverage S1D AUX_RESORB object with the largest minimum time margin around the complete scene window; break ties by latest publication then provider UUID.",
+  "metadata_receipt_ref": "records/source-gates/m2-orbit-metadata-receipt.json",
+  "metadata_receipt_sha256": "59bb7f3b1266f56aeb2ab2a47d24a1eb1450f7d4e00e3dac2e516c8cf4ae1e78",
+  "distribution_route": {
+    "provider": "Copernicus Data Space Ecosystem",
+    "catalogue": "official public OData catalogue",
+    "download_method": "authenticated OData GET using the same secret-safe existing owner-controlled token reference as the approved Sentinel acquisition",
+    "new_account_or_terms_action_requested": false,
+    "cost_expected": false,
+    "allowed_hosts": [
+      "download.dataspace.copernicus.eu"
+    ]
+  },
+  "rights": {
+    "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+    "terms_page_sha256": "97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0",
+    "legal_notice_url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+    "legal_notice_sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64",
+    "summary": "Copernicus Sentinel data and service information are available on a free, full and open basis; public distribution requires the applicable source notice and carries no suitability warranty.",
+    "new_acceptance_requested": false
+  },
+  "records": [
+    {
+      "source_id": "M2-ORB-001",
+      "group_id": "ASC-BEFORE-20260816",
+      "pair_id": "PAIR-S1-ASC-R085-IW",
+      "event_role": "before",
+      "sentinel_source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002"
+      ],
+      "scene_start_utc": "2026-08-16T12:21:16Z",
+      "scene_end_utc": "2026-08-16T12:22:06Z",
+      "orbit_type": "AUX_RESORB",
+      "provider_product_id": "d4fdc474-0069-459b-9534-b5999dec5aab",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+      "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/16/S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+      "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)/$value",
+      "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)?$expand=Locations",
+      "content_length_bytes": 639533,
+      "validity_start_utc": "2026-08-16T10:35:26.000000Z",
+      "validity_end_utc": "2026-08-16T14:09:56.000000Z",
+      "publication_date_utc": "2026-08-16T14:34:34.134896Z",
+      "modification_date_utc": "2026-08-16T14:34:34.134896Z",
+      "online": true,
+      "eviction_date_utc": "2026-11-16T14:34:08.080856Z",
+      "provider_checksums": [
+        {
+          "algorithm": "BLAKE3",
+          "value": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b",
+          "checksum_date": "2026-08-16T14:34:32.604858Z"
+        },
+        {
+          "algorithm": "MD5",
+          "value": "ca7f36b1892073c883c4cff5c0517b9c",
+          "checksum_date": "2026-08-16T14:34:32.563327Z"
+        }
+      ],
+      "scene_margin_before_seconds": 6350,
+      "scene_margin_after_seconds": 6470,
+      "minimum_scene_margin_seconds": 6350,
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "xml_and_osv_verification": "not_started",
+      "application_status": "not_started"
+    },
+    {
+      "source_id": "M2-ORB-002",
+      "group_id": "DESC-BEFORE-20260819",
+      "pair_id": "PAIR-S1-DESC-R121-IW",
+      "event_role": "before",
+      "sentinel_source_ids": [
+        "M1-SRC-003"
+      ],
+      "scene_start_utc": "2026-08-19T00:10:36Z",
+      "scene_end_utc": "2026-08-19T00:11:01Z",
+      "orbit_type": "AUX_RESORB",
+      "provider_product_id": "ec7dd79b-0588-456a-9d17-6324d5affcb5",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/18/S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)/$value",
+      "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)?$expand=Locations",
+      "content_length_bytes": 631254,
+      "validity_start_utc": "2026-08-18T21:50:10.000000Z",
+      "validity_end_utc": "2026-08-19T01:21:20.000000Z",
+      "publication_date_utc": "2026-08-19T01:48:40.266889Z",
+      "modification_date_utc": "2026-08-19T01:48:40.266889Z",
+      "online": true,
+      "eviction_date_utc": "2026-11-19T01:48:27.107300Z",
+      "provider_checksums": [
+        {
+          "algorithm": "BLAKE3",
+          "value": "7f69b4ae261fe43ea758ab3d1f0c290706aa4b8308a55c49b510badcf3fca49d",
+          "checksum_date": "2026-08-19T01:48:38.433669Z"
+        },
+        {
+          "algorithm": "MD5",
+          "value": "4752bc958d3a65a14100e96f4e6489b2",
+          "checksum_date": "2026-08-19T01:48:38.391461Z"
+        }
+      ],
+      "scene_margin_before_seconds": 8426,
+      "scene_margin_after_seconds": 4219,
+      "minimum_scene_margin_seconds": 4219,
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "xml_and_osv_verification": "not_started",
+      "application_status": "not_started"
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "group_id": "ASC-AFTER-20260828",
+      "pair_id": "PAIR-S1-ASC-R085-IW",
+      "event_role": "after",
+      "sentinel_source_ids": [
+        "M1-SRC-004",
+        "M1-SRC-005"
+      ],
+      "scene_start_utc": "2026-08-28T12:21:16Z",
+      "scene_end_utc": "2026-08-28T12:22:06Z",
+      "orbit_type": "AUX_RESORB",
+      "provider_product_id": "182fec80-86b8-46b4-bc76-43be0ab70ba5",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+      "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/28/S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+      "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)/$value",
+      "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)?$expand=Locations",
+      "content_length_bytes": 639533,
+      "validity_start_utc": "2026-08-28T10:35:27.000000Z",
+      "validity_end_utc": "2026-08-28T14:09:57.000000Z",
+      "publication_date_utc": "2026-08-28T14:33:59.504081Z",
+      "modification_date_utc": "2026-08-28T14:33:59.504081Z",
+      "online": true,
+      "eviction_date_utc": "2026-11-28T14:33:37.358606Z",
+      "provider_checksums": [
+        {
+          "algorithm": "BLAKE3",
+          "value": "9138c6cc9e26483b67cfedb69475cb08dcce6170dab24beac53319583a52835d",
+          "checksum_date": "2026-08-28T14:33:57.910399Z"
+        },
+        {
+          "algorithm": "MD5",
+          "value": "c7aa9da84a4bd1b8113275e7bbe3d3f7",
+          "checksum_date": "2026-08-28T14:33:57.869015Z"
+        }
+      ],
+      "scene_margin_before_seconds": 6349,
+      "scene_margin_after_seconds": 6471,
+      "minimum_scene_margin_seconds": 6349,
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "xml_and_osv_verification": "not_started",
+      "application_status": "not_started"
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "group_id": "DESC-AFTER-20260831",
+      "pair_id": "PAIR-S1-DESC-R121-IW",
+      "event_role": "after",
+      "sentinel_source_ids": [
+        "M1-SRC-006"
+      ],
+      "scene_start_utc": "2026-08-31T00:10:37Z",
+      "scene_end_utc": "2026-08-31T00:11:02Z",
+      "orbit_type": "AUX_RESORB",
+      "provider_product_id": "af27071d-df96-4850-af40-e09aedcd68a3",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+      "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/30/S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+      "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)/$value",
+      "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)?$expand=Locations",
+      "content_length_bytes": 629395,
+      "validity_start_utc": "2026-08-30T21:50:11.000000Z",
+      "validity_end_utc": "2026-08-31T01:21:11.000000Z",
+      "publication_date_utc": "2026-08-31T01:50:22.594002Z",
+      "modification_date_utc": "2026-08-31T01:50:22.594002Z",
+      "online": true,
+      "eviction_date_utc": "2026-12-01T01:50:08.131473Z",
+      "provider_checksums": [
+        {
+          "algorithm": "BLAKE3",
+          "value": "0fe6a53b52f3caf11aa8e685a6367f673c69a8a580d90b398148dda772e56d12",
+          "checksum_date": "2026-08-31T01:50:21.470965Z"
+        },
+        {
+          "algorithm": "MD5",
+          "value": "1eebe30919f50a31dd04f854ee1c813d",
+          "checksum_date": "2026-08-31T01:50:21.424393Z"
+        }
+      ],
+      "scene_margin_before_seconds": 8426,
+      "scene_margin_after_seconds": 4209,
+      "minimum_scene_margin_seconds": 4209,
+      "acquisition_status": "not_authorized",
+      "local_sha256": null,
+      "xml_and_osv_verification": "not_started",
+      "application_status": "not_started"
+    }
+  ],
+  "summary": {
+    "selected_file_count": 4,
+    "covered_sentinel_source_count": 6,
+    "combined_content_length_bytes": 2539715,
+    "combined_content_length_mib": 2.422,
+    "orbit_type": "AUX_RESORB",
+    "precise_covering_file_count_at_assessment": 0
+  },
+  "claim_boundary": {
+    "catalogue_availability_established": true,
+    "scope_authority_established": false,
+    "payload_bytes_transferred": false,
+    "orbit_xml_verified": false,
+    "orbit_correction_applied": false,
+    "sentinel_pixels_processed": false,
+    "baseline_established": false,
+    "scientific_result_established": false
+  }
+}

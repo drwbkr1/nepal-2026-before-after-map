@@ -93,7 +93,7 @@ The full repository suite currently passes 164 tests, and `scripts/check_project
 
 The live preflight test suite validates exact STAC and object-header comparisons, redirect refusal, remote-identity drift, no-payload evidence, empty-custody binding, and the transition to `M2-DEM-ACQUISITION`. `EVID-0032` retains the initial checker failure caused by its old preflight-checkpoint expectation; updating that expectation did not change the live evidence or external custody.
 
-The current full repository suite passes 190 tests, and `scripts/check_project.py` validates 218 required files after adding the successful attempt-003 terrain receipt, its readiness audit, and the exact terrain-result review packet. Project-control and milestone validators pass. Both the M2 DEM vertical-datum bundle and the terrain-result bundle report `ready_for_handoff` for their exact tracked artifacts. Local reconciliation re-hashed all four promoted DEM files totaling 170,302,058 bytes. GitHub Actions run `33809208304` remains a failed historical result because its Linux runner lacked the external Windows custody root; the corrected portable test validates repository receipts without external access while production reconciliation still defaults to strict external checking.
+The current full repository suite passes 199 tests, and `scripts/check_project.py` validates 234 required files after adding the successful attempt-003 terrain receipt, its readiness audit, the exact terrain-result review packet, and the exact orbit-amendment review packet. Project-control and milestone validators pass. The M2 DEM vertical-datum, terrain-result, and orbit-amendment bundles report `ready_for_handoff` for their exact tracked artifacts. Local reconciliation re-hashed all four promoted DEM files totaling 170,302,058 bytes. GitHub Actions run `33809208304` remains a failed historical result because its Linux runner lacked the external Windows custody root; the corrected portable test validates repository receipts without external access while production reconciliation still defaults to strict external checking.
 
 The generic intake-contract validator separately reports four invalid attempt identifiers because the completed DEM transfer IDs contain uppercase RFC 3339 `T` and `Z` characters and its identifier grammar is lowercase-only. The immutable attempt receipts, checkpoint paths, and external event history are not rewritten. This retained schema-validation failure does not change the project-specific byte and custody passes or approve downstream processing; future transfer runners must correct identifier generation before use.
 
@@ -180,6 +180,22 @@ python C:\Users\drewb\.codex\skills\conduct-human-review\scripts\review_response
 ```
 
 The bundle must report manifest SHA-256 `834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5`, seven verified tracked artifacts, and `ready_for_handoff`. Its text-only PNG was visually inspected at 1800 by 1680 pixels with no observed clipping, no selected decision, and no DEM-derived map pixels. The retained blank response contains one exact item, no decision, no timestamps, and a false attestation. Approval can close only the owner terrain-result review after exact lock and reconciliation; the other readiness deferrals remain.
+
+## M2 Sentinel-1 orbit amendment validation
+
+The orbit review is reproducible without credentials or payload access:
+
+```powershell
+python -m unittest tests.test_m2_orbit_amendment -v
+python C:\Users\drewb\.codex\skills\gate-external-sources\scripts\validate_source_gate.py records\source-gates\m2-orbit-source-gate.json
+python C:\Users\drewb\.codex\skills\conduct-human-review\scripts\prepare_review_bundle.py reviews\m2-orbit-amendment\review-bundle.json --project-root .
+python C:\Users\drewb\.codex\skills\conduct-human-review\scripts\review_response.py prepare --contract reviews\m2-orbit-amendment\review-contract.json --output <new-exclusive-blank-response>.json
+python scripts\render_m2_orbit_amendment_review.py --manifest records\source-gates\m2-orbit-candidate-manifest.json --proposal contracts\milestone-002-orbit-amendment-proposal.json --output <new-exclusive-review-surface>.png
+```
+
+The source-gate validator must report a structurally valid **blocked** decision whose only unknown required criterion is scope authority for the four exact candidates. A nonzero ready-state exit is expected until exact owner approval; it must not be relabeled as an invalid gate. The review-bundle validator must report twelve verified artifacts, no errors or warnings, `ready_for_handoff`, and manifest SHA-256 `ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1`. A regenerated blank response must be byte-identical to the retained response and must contain one undecided item, no timestamps, and false attestation. A deterministic rerender must match PNG SHA-256 `70d698c94d97f68fa952e8a9404013af7da4616c28ff74645993bbcfdfd06abb` at 1800 by 2100 pixels.
+
+The public surface was visually inspected at native scale: all four full filenames and six scene bindings remain inside their table columns, the decision card is fully visible, no choice is selected, and no Sentinel or third-party raster pixels are embedded. The metadata capture asserts zero authentication, zero credential reads, zero payload requests, and zero authority creation. No orbit file may be acquired or applied until the exact response is locked and reconciled.
 
 The SAFE materialization control has a separate portable suite:
 

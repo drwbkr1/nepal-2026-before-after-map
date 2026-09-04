@@ -1,0 +1,177 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-001",
+  "status": "candidate_not_active",
+  "created_at_utc": "2026-09-04T01:16:42Z",
+  "authority": {
+    "mode": "not_granted",
+    "authority_ref": "contracts/milestone-002-orbit-amendment-proposal.json",
+    "this_contract_creates_authority": false
+  },
+  "bindings": {
+    "candidate_manifest_ref": "records/source-gates/m2-orbit-candidate-manifest.json",
+    "candidate_manifest_sha256": "e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736",
+    "candidate_intake_ref": "contracts/m2-orbit-intake-candidate.json",
+    "candidate_intake_sha256": "233db61c2639f8717de1ef7021bcbeb8d9067db00bc58cfb5bb743aca0e1b81a",
+    "radar_contract_ref": "config/qa/radar-baseline-processing-contract.json",
+    "radar_contract_sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f"
+  },
+  "asset_requirements": [
+    {
+      "source_id": "M2-ORB-001",
+      "provider_product_id": "d4fdc474-0069-459b-9534-b5999dec5aab",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002"
+      ],
+      "scene_start_utc": "2026-08-16T12:21:16Z",
+      "scene_end_utc": "2026-08-16T12:22:06Z",
+      "expected_size_bytes": 639533,
+      "expected_provider_checksums": [
+        {
+          "algorithm": "BLAKE3",
+          "value": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b",
+          "checksum_date": "2026-08-16T14:34:32.604858Z"
+        },
+        {
+          "algorithm": "MD5",
+          "value": "ca7f36b1892073c883c4cff5c0517b9c",
+          "checksum_date": "2026-08-16T14:34:32.563327Z"
+        }
+      ],
+      "expected_validity_start_utc": "2026-08-16T10:35:26.000000Z",
+      "expected_validity_end_utc": "2026-08-16T14:09:56.000000Z",
+      "minimum_required_scene_margin_seconds": 6350
+    },
+    {
+      "source_id": "M2-ORB-002",
+      "provider_product_id": "ec7dd79b-0588-456a-9d17-6324d5affcb5",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-003"
+      ],
+      "scene_start_utc": "2026-08-19T00:10:36Z",
+      "scene_end_utc": "2026-08-19T00:11:01Z",
+      "expected_size_bytes": 631254,
+      "expected_provider_checksums": [
+        {
+          "algorithm": "BLAKE3",
+          "value": "7f69b4ae261fe43ea758ab3d1f0c290706aa4b8308a55c49b510badcf3fca49d",
+          "checksum_date": "2026-08-19T01:48:38.433669Z"
+        },
+        {
+          "algorithm": "MD5",
+          "value": "4752bc958d3a65a14100e96f4e6489b2",
+          "checksum_date": "2026-08-19T01:48:38.391461Z"
+        }
+      ],
+      "expected_validity_start_utc": "2026-08-18T21:50:10.000000Z",
+      "expected_validity_end_utc": "2026-08-19T01:21:20.000000Z",
+      "minimum_required_scene_margin_seconds": 4219
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "provider_product_id": "182fec80-86b8-46b4-bc76-43be0ab70ba5",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-004",
+        "M1-SRC-005"
+      ],
+      "scene_start_utc": "2026-08-28T12:21:16Z",
+      "scene_end_utc": "2026-08-28T12:22:06Z",
+      "expected_size_bytes": 639533,
+      "expected_provider_checksums": [
+        {
+          "algorithm": "BLAKE3",
+          "value": "9138c6cc9e26483b67cfedb69475cb08dcce6170dab24beac53319583a52835d",
+          "checksum_date": "2026-08-28T14:33:57.910399Z"
+        },
+        {
+          "algorithm": "MD5",
+          "value": "c7aa9da84a4bd1b8113275e7bbe3d3f7",
+          "checksum_date": "2026-08-28T14:33:57.869015Z"
+        }
+      ],
+      "expected_validity_start_utc": "2026-08-28T10:35:27.000000Z",
+      "expected_validity_end_utc": "2026-08-28T14:09:57.000000Z",
+      "minimum_required_scene_margin_seconds": 6349
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "provider_product_id": "af27071d-df96-4850-af40-e09aedcd68a3",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-006"
+      ],
+      "scene_start_utc": "2026-08-31T00:10:37Z",
+      "scene_end_utc": "2026-08-31T00:11:02Z",
+      "expected_size_bytes": 629395,
+      "expected_provider_checksums": [
+        {
+          "algorithm": "BLAKE3",
+          "value": "0fe6a53b52f3caf11aa8e685a6367f673c69a8a580d90b398148dda772e56d12",
+          "checksum_date": "2026-08-31T01:50:21.470965Z"
+        },
+        {
+          "algorithm": "MD5",
+          "value": "1eebe30919f50a31dd04f854ee1c813d",
+          "checksum_date": "2026-08-31T01:50:21.424393Z"
+        }
+      ],
+      "expected_validity_start_utc": "2026-08-30T21:50:11.000000Z",
+      "expected_validity_end_utc": "2026-08-31T01:21:11.000000Z",
+      "minimum_required_scene_margin_seconds": 4209
+    }
+  ],
+  "verification_sequence": [
+    "recompute and compare exact byte length",
+    "verify provider MD5 and BLAKE3 values",
+    "compute and retain local SHA-256",
+    "parse the EOF as XML without network access or external entities",
+    "verify mission S1D, file type AUX_RESORB, and exact validity interval",
+    "verify the OSV list is nonempty, ordered by UTC, unique, and spans the declared validity interval",
+    "verify every position and velocity component is finite and has the declared physical unit",
+    "verify the complete bound Sentinel acquisition window lies within the EOF validity interval with the required temporal margins",
+    "promote only after every check passes and record a no-replace custody receipt"
+  ],
+  "application_boundary": {
+    "arcgis_tool": "ApplyOrbitCorrection",
+    "input_orbit_file_mode": "explicit exact file path",
+    "may_apply_only_after_verified_sentinel_custody": true,
+    "may_apply_only_to_bound_sentinel_source_ids": true,
+    "preserve_original_embedded_predicted_metadata": true,
+    "corrected_metadata_output": "new versioned non-Git attempt",
+    "overwrite_safe_source": false,
+    "radar_pixel_processing_authorized_by_this_contract": false
+  },
+  "dispositions": [
+    "invalid",
+    "fail",
+    "defer",
+    "pass_orbit_input_only"
+  ],
+  "stop_conditions": [
+    "identity, length, checksum, XML, mission, file type, validity, OSV ordering, finite-value, unit, or scene-binding mismatch",
+    "any source or destination path escapes the exact external custody roots",
+    "a collision, symlink, reparse point, overwrite, or ambiguous prior attempt exists",
+    "the matching Sentinel source has not passed exact custody and offline container verification",
+    "ArcGIS selects or downloads a different orbit file instead of the explicit verified path"
+  ],
+  "claim_boundary": {
+    "passing_verification_establishes": "exact orbit-input identity and structural fitness only",
+    "does_not_establish": [
+      "precise-orbit equivalence",
+      "geolocation or registration accuracy",
+      "vertical-datum fitness",
+      "radar pixel fitness",
+      "baseline quality",
+      "event change",
+      "scientific interpretation or attribution"
+    ]
+  }
+}

@@ -62,7 +62,9 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [],
+    "proposed_amendments": [
+      "contracts/milestone-002-orbit-amendment-proposal.json"
+    ],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json"
@@ -197,6 +199,11 @@
         "unit_id": "M2-DEM-TERRAIN-RESULT-REVIEW",
         "reason": "Records a normative owner review of the exact terrain-screen result and limitations without releasing any other deferred gate.",
         "authority_ref": "reviews/m2-dem-terrain-result/review-contract.json"
+      },
+      {
+        "unit_id": "M2-ORBIT-AMEND",
+        "reason": "Would add only four exact S1D AUX_RESORB files and their bounded verification and exact-source application route; later precise substitution remains separately gated.",
+        "authority_ref": "reviews/m2-orbit-amendment/review-contract.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
@@ -217,6 +224,11 @@
       "checkpoint_id": "M2-DEM-TERRAIN-RESULT-REVIEW",
       "authority_ref": "reviews/m2-dem-terrain-result/review-contract.json",
       "next_action": "Review bundle SHA-256 834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5 and approve, revise, or defer the terrain-only result; approval releases no vertical, radar, or scientific action."
+    },
+    {
+      "checkpoint_id": "M2-ORBIT-AMENDMENT-REVIEW",
+      "authority_ref": "reviews/m2-orbit-amendment/review-contract.json",
+      "next_action": "Review bundle SHA-256 ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1 and approve, revise, or defer the exact four-file restituted-orbit proposal; no orbit payload or precise substitution is authorized before exact lock and reconciliation."
     }
   ]
 }

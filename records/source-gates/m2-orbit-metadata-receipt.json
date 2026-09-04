@@ -1,0 +1,506 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-METADATA-001",
+  "status": "pass_metadata_only_restituted_candidates_precise_unavailable_no_acquisition_authority",
+  "assessed_at_utc": "2026-09-04T01:16:42Z",
+  "request_mode": "official_public_document_get_and_cdse_catalogue_get_only",
+  "bindings": {
+    "acquisition_plan_ref": "records/acquisition-plan.json",
+    "acquisition_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",
+    "radar_contract_ref": "config/qa/radar-baseline-processing-contract.json",
+    "radar_contract_sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f"
+  },
+  "official_pages": [
+    {
+      "page_id": "cdse_sentinel1_documentation",
+      "url": "https://documentation.dataspace.copernicus.eu/Data/SentinelMissions/Sentinel1.html",
+      "http_status": 200,
+      "response_sha256": "06351214c4eba4affde3742eba6583e3af09a000b5f1ca1ab3ec389e2a1f3bdb",
+      "content_length_bytes": 243000,
+      "content_type": "text/html",
+      "last_modified": "Wed, 26 Aug 2026 12:07:38 GMT",
+      "observed_at_utc": "2026-09-04T01:16:42Z"
+    },
+    {
+      "page_id": "cdse_odata_documentation",
+      "url": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+      "http_status": 200,
+      "response_sha256": "bc178f27ebcaa8033696bb89d2c86b18385d2cd40997d4eb09233b7143857594",
+      "content_length_bytes": 403095,
+      "content_type": "text/html",
+      "last_modified": "Fri, 28 Aug 2026 09:21:01 GMT",
+      "observed_at_utc": "2026-09-04T01:16:42Z"
+    },
+    {
+      "page_id": "cdse_terms",
+      "url": "https://dataspace.copernicus.eu/terms-and-conditions",
+      "http_status": 200,
+      "response_sha256": "97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0",
+      "content_length_bytes": 77747,
+      "content_type": "text/html; charset=UTF-8",
+      "last_modified": "Thu, 03 Sep 2026 17:48:00 GMT",
+      "observed_at_utc": "2026-09-04T01:16:42Z"
+    },
+    {
+      "page_id": "sentinel_data_legal_notice",
+      "url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "http_status": 200,
+      "response_sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64",
+      "content_length_bytes": 115881,
+      "content_type": "application/pdf",
+      "last_modified": "Thu, 28 Apr 2016 14:32:37 GMT",
+      "observed_at_utc": "2026-09-04T01:16:42Z"
+    },
+    {
+      "page_id": "arcgis_download_orbit_file",
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/download-orbit-file.html",
+      "http_status": 200,
+      "response_sha256": "0cca6f4a17aef19f423fe586c5a779adadccf1dbd142c735287418274a7c9e31",
+      "content_length_bytes": 21985,
+      "content_type": "text/html",
+      "last_modified": "Fri, 28 Aug 2026 18:46:19 GMT",
+      "observed_at_utc": "2026-09-04T01:16:42Z"
+    },
+    {
+      "page_id": "arcgis_apply_orbit_correction",
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-orbit-correction.html",
+      "http_status": 200,
+      "response_sha256": "bc140b78882e8b5eef315fcaae6f6fadd5c4f5fdc581773365583f4e6b6a768c",
+      "content_length_bytes": 16617,
+      "content_type": "text/html",
+      "last_modified": "Fri, 28 Aug 2026 18:46:17 GMT",
+      "observed_at_utc": "2026-09-04T01:16:42Z"
+    },
+    {
+      "page_id": "copernicus_s1_processing",
+      "url": "https://sentiwiki.copernicus.eu/web/s1-processing",
+      "http_status": 200,
+      "response_sha256": "f85c38d0f8c32fa7d7247c1db06e9fdcd93783119c464e4e46f5695fc7c5d26c",
+      "content_length_bytes": 160212,
+      "content_type": "text/html",
+      "last_modified": null,
+      "observed_at_utc": "2026-09-04T01:16:42Z"
+    }
+  ],
+  "searches": [
+    {
+      "group_id": "ASC-BEFORE-20260816",
+      "scene_start_utc": "2026-08-16T12:21:16Z",
+      "scene_end_utc": "2026-08-16T12:22:06Z",
+      "selection_rule": "select the full-coverage RESORB candidate with the largest minimum temporal margin around the scene; break ties by latest publication then provider UUID",
+      "selected_provider_product_id": "d4fdc474-0069-459b-9534-b5999dec5aab",
+      "searches": [
+        {
+          "orbit_type": "RESORB",
+          "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-16T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-16T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+          "http_status": 200,
+          "response_sha256": "8ecd013254e20231d07a1207031ba6656a35d8b40365c3e937d5f0d30165e50f",
+          "observed_at_utc": "2026-09-04T01:16:42Z",
+          "candidate_count": 3,
+          "candidates": [
+            {
+              "provider_product_id": "eaa94484-9fca-49fc-8668-1866971c2bb2",
+              "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T161113_V20260816T121411_20260816T155221.EOF",
+              "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/16/S1D_OPER_AUX_RESORB_OPOD_20260816T161113_V20260816T121411_20260816T155221.EOF",
+              "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(eaa94484-9fca-49fc-8668-1866971c2bb2)/$value",
+              "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(eaa94484-9fca-49fc-8668-1866971c2bb2)?$expand=Locations",
+              "content_length_bytes": 650840,
+              "validity_start_utc": "2026-08-16T12:14:11.000000Z",
+              "validity_end_utc": "2026-08-16T15:52:21.000000Z",
+              "publication_date_utc": "2026-08-16T16:13:12.273990Z",
+              "modification_date_utc": "2026-08-16T16:13:12.273990Z",
+              "online": true,
+              "eviction_date_utc": "2026-11-16T16:12:46.035024Z",
+              "provider_checksums": [
+                {
+                  "algorithm": "BLAKE3",
+                  "value": "f41b3a8799e0420c7607aba90b3a64787a641940b5cc6ebfa8c1c44026417b3b",
+                  "checksum_date": "2026-08-16T16:13:10.365797Z"
+                },
+                {
+                  "algorithm": "MD5",
+                  "value": "e7012ad7280520cf340296fc73e8a00f",
+                  "checksum_date": "2026-08-16T16:13:10.325611Z"
+                }
+              ],
+              "scene_margin_before_seconds": 425,
+              "scene_margin_after_seconds": 12615,
+              "minimum_scene_margin_seconds": 425
+            },
+            {
+              "provider_product_id": "d4fdc474-0069-459b-9534-b5999dec5aab",
+              "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+              "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/16/S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+              "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)/$value",
+              "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)?$expand=Locations",
+              "content_length_bytes": 639533,
+              "validity_start_utc": "2026-08-16T10:35:26.000000Z",
+              "validity_end_utc": "2026-08-16T14:09:56.000000Z",
+              "publication_date_utc": "2026-08-16T14:34:34.134896Z",
+              "modification_date_utc": "2026-08-16T14:34:34.134896Z",
+              "online": true,
+              "eviction_date_utc": "2026-11-16T14:34:08.080856Z",
+              "provider_checksums": [
+                {
+                  "algorithm": "BLAKE3",
+                  "value": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b",
+                  "checksum_date": "2026-08-16T14:34:32.604858Z"
+                },
+                {
+                  "algorithm": "MD5",
+                  "value": "ca7f36b1892073c883c4cff5c0517b9c",
+                  "checksum_date": "2026-08-16T14:34:32.563327Z"
+                }
+              ],
+              "scene_margin_before_seconds": 6350,
+              "scene_margin_after_seconds": 6470,
+              "minimum_scene_margin_seconds": 6350
+            },
+            {
+              "provider_product_id": "5e3399f1-02db-4061-8c45-212c5bb9c9c6",
+              "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T125416_V20260816T085641_20260816T123211.EOF",
+              "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/16/S1D_OPER_AUX_RESORB_OPOD_20260816T125416_V20260816T085641_20260816T123211.EOF",
+              "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(5e3399f1-02db-4061-8c45-212c5bb9c9c6)/$value",
+              "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(5e3399f1-02db-4061-8c45-212c5bb9c9c6)?$expand=Locations",
+              "content_length_bytes": 642585,
+              "validity_start_utc": "2026-08-16T08:56:41.000000Z",
+              "validity_end_utc": "2026-08-16T12:32:11.000000Z",
+              "publication_date_utc": "2026-08-16T12:55:56.607150Z",
+              "modification_date_utc": "2026-08-16T12:55:56.607150Z",
+              "online": true,
+              "eviction_date_utc": "2026-11-16T12:55:28.220414Z",
+              "provider_checksums": [
+                {
+                  "algorithm": "BLAKE3",
+                  "value": "6176e5898c0ac24a16da11b7374c158222ec6811786af427c755284191f76a32",
+                  "checksum_date": "2026-08-16T12:55:53.968281Z"
+                },
+                {
+                  "algorithm": "MD5",
+                  "value": "a099cf0f1754bd1d86ffacc856d791d1",
+                  "checksum_date": "2026-08-16T12:55:53.925544Z"
+                }
+              ],
+              "scene_margin_before_seconds": 12275,
+              "scene_margin_after_seconds": 605,
+              "minimum_scene_margin_seconds": 605
+            }
+          ]
+        },
+        {
+          "orbit_type": "POEORB",
+          "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_POEORB%27%29+and+ContentDate%2FStart+le+2026-08-16T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-16T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+          "http_status": 200,
+          "response_sha256": "4560b0684b2f82d97c0e87b684535a779f3fef522898e6f86a56c156d8bbd6df",
+          "observed_at_utc": "2026-09-04T01:16:42Z",
+          "candidate_count": 0,
+          "candidates": []
+        }
+      ]
+    },
+    {
+      "group_id": "DESC-BEFORE-20260819",
+      "scene_start_utc": "2026-08-19T00:10:36Z",
+      "scene_end_utc": "2026-08-19T00:11:01Z",
+      "selection_rule": "select the full-coverage RESORB candidate with the largest minimum temporal margin around the scene; break ties by latest publication then provider UUID",
+      "selected_provider_product_id": "ec7dd79b-0588-456a-9d17-6324d5affcb5",
+      "searches": [
+        {
+          "orbit_type": "RESORB",
+          "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-19T00%3A10%3A36.000Z+and+ContentDate%2FEnd+ge+2026-08-19T00%3A11%3A01.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+          "http_status": 200,
+          "response_sha256": "33fb7ea88e4cd3529d5ea5a3b267b217ae80a39d5002ad351251adaccd8617bc",
+          "observed_at_utc": "2026-09-04T01:16:42Z",
+          "candidate_count": 2,
+          "candidates": [
+            {
+              "provider_product_id": "e7e1378e-50d1-40be-9f2b-c01e00f2b095",
+              "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260819T032614_V20260818T232855_20260819T025955.EOF",
+              "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/18/S1D_OPER_AUX_RESORB_OPOD_20260819T032614_V20260818T232855_20260819T025955.EOF",
+              "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(e7e1378e-50d1-40be-9f2b-c01e00f2b095)/$value",
+              "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(e7e1378e-50d1-40be-9f2b-c01e00f2b095)?$expand=Locations",
+              "content_length_bytes": 630149,
+              "validity_start_utc": "2026-08-18T23:28:55.000000Z",
+              "validity_end_utc": "2026-08-19T02:59:55.000000Z",
+              "publication_date_utc": "2026-08-19T03:28:34.523166Z",
+              "modification_date_utc": "2026-08-19T03:28:34.523166Z",
+              "online": true,
+              "eviction_date_utc": "2026-11-19T03:28:06.474800Z",
+              "provider_checksums": [
+                {
+                  "algorithm": "BLAKE3",
+                  "value": "6270c059964d24c4ced9747b05e96d2390d0b4fb8a8fb9e1a9acc77444a287dc",
+                  "checksum_date": "2026-08-19T03:28:32.943939Z"
+                },
+                {
+                  "algorithm": "MD5",
+                  "value": "aba94e3005f3a3d20d3c250a0d72aabc",
+                  "checksum_date": "2026-08-19T03:28:32.900492Z"
+                }
+              ],
+              "scene_margin_before_seconds": 2501,
+              "scene_margin_after_seconds": 10134,
+              "minimum_scene_margin_seconds": 2501
+            },
+            {
+              "provider_product_id": "ec7dd79b-0588-456a-9d17-6324d5affcb5",
+              "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+              "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/18/S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+              "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)/$value",
+              "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)?$expand=Locations",
+              "content_length_bytes": 631254,
+              "validity_start_utc": "2026-08-18T21:50:10.000000Z",
+              "validity_end_utc": "2026-08-19T01:21:20.000000Z",
+              "publication_date_utc": "2026-08-19T01:48:40.266889Z",
+              "modification_date_utc": "2026-08-19T01:48:40.266889Z",
+              "online": true,
+              "eviction_date_utc": "2026-11-19T01:48:27.107300Z",
+              "provider_checksums": [
+                {
+                  "algorithm": "BLAKE3",
+                  "value": "7f69b4ae261fe43ea758ab3d1f0c290706aa4b8308a55c49b510badcf3fca49d",
+                  "checksum_date": "2026-08-19T01:48:38.433669Z"
+                },
+                {
+                  "algorithm": "MD5",
+                  "value": "4752bc958d3a65a14100e96f4e6489b2",
+                  "checksum_date": "2026-08-19T01:48:38.391461Z"
+                }
+              ],
+              "scene_margin_before_seconds": 8426,
+              "scene_margin_after_seconds": 4219,
+              "minimum_scene_margin_seconds": 4219
+            }
+          ]
+        },
+        {
+          "orbit_type": "POEORB",
+          "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_POEORB%27%29+and+ContentDate%2FStart+le+2026-08-19T00%3A10%3A36.000Z+and+ContentDate%2FEnd+ge+2026-08-19T00%3A11%3A01.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+          "http_status": 200,
+          "response_sha256": "4560b0684b2f82d97c0e87b684535a779f3fef522898e6f86a56c156d8bbd6df",
+          "observed_at_utc": "2026-09-04T01:16:42Z",
+          "candidate_count": 0,
+          "candidates": []
+        }
+      ]
+    },
+    {
+      "group_id": "ASC-AFTER-20260828",
+      "scene_start_utc": "2026-08-28T12:21:16Z",
+      "scene_end_utc": "2026-08-28T12:22:06Z",
+      "selection_rule": "select the full-coverage RESORB candidate with the largest minimum temporal margin around the scene; break ties by latest publication then provider UUID",
+      "selected_provider_product_id": "182fec80-86b8-46b4-bc76-43be0ab70ba5",
+      "searches": [
+        {
+          "orbit_type": "RESORB",
+          "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-28T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-28T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+          "http_status": 200,
+          "response_sha256": "7e7d67d21e80d2d63db10c58baf3832685cdc85aebf0daf2f4098d49f8312fcd",
+          "observed_at_utc": "2026-09-04T01:16:42Z",
+          "candidate_count": 3,
+          "candidates": [
+            {
+              "provider_product_id": "638b8b25-3ec8-4ce8-a9fd-6cbf25d74b5f",
+              "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260828T160518_V20260828T121411_20260828T155221.EOF",
+              "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/28/S1D_OPER_AUX_RESORB_OPOD_20260828T160518_V20260828T121411_20260828T155221.EOF",
+              "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(638b8b25-3ec8-4ce8-a9fd-6cbf25d74b5f)/$value",
+              "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(638b8b25-3ec8-4ce8-a9fd-6cbf25d74b5f)?$expand=Locations",
+              "content_length_bytes": 650841,
+              "validity_start_utc": "2026-08-28T12:14:11.000000Z",
+              "validity_end_utc": "2026-08-28T15:52:21.000000Z",
+              "publication_date_utc": "2026-08-28T16:06:37.676043Z",
+              "modification_date_utc": "2026-08-28T16:06:37.676043Z",
+              "online": true,
+              "eviction_date_utc": "2026-11-28T16:06:16.171570Z",
+              "provider_checksums": [
+                {
+                  "algorithm": "BLAKE3",
+                  "value": "a945cb5248d4dd026f7034f1000338c8c2830b88b0713bd046707d6e5e9914a3",
+                  "checksum_date": "2026-08-28T16:06:36.669828Z"
+                },
+                {
+                  "algorithm": "MD5",
+                  "value": "25f1878a7c6a1c2349d67735e981f111",
+                  "checksum_date": "2026-08-28T16:06:36.623553Z"
+                }
+              ],
+              "scene_margin_before_seconds": 425,
+              "scene_margin_after_seconds": 12615,
+              "minimum_scene_margin_seconds": 425
+            },
+            {
+              "provider_product_id": "182fec80-86b8-46b4-bc76-43be0ab70ba5",
+              "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+              "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/28/S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+              "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)/$value",
+              "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)?$expand=Locations",
+              "content_length_bytes": 639533,
+              "validity_start_utc": "2026-08-28T10:35:27.000000Z",
+              "validity_end_utc": "2026-08-28T14:09:57.000000Z",
+              "publication_date_utc": "2026-08-28T14:33:59.504081Z",
+              "modification_date_utc": "2026-08-28T14:33:59.504081Z",
+              "online": true,
+              "eviction_date_utc": "2026-11-28T14:33:37.358606Z",
+              "provider_checksums": [
+                {
+                  "algorithm": "BLAKE3",
+                  "value": "9138c6cc9e26483b67cfedb69475cb08dcce6170dab24beac53319583a52835d",
+                  "checksum_date": "2026-08-28T14:33:57.910399Z"
+                },
+                {
+                  "algorithm": "MD5",
+                  "value": "c7aa9da84a4bd1b8113275e7bbe3d3f7",
+                  "checksum_date": "2026-08-28T14:33:57.869015Z"
+                }
+              ],
+              "scene_margin_before_seconds": 6349,
+              "scene_margin_after_seconds": 6471,
+              "minimum_scene_margin_seconds": 6349
+            },
+            {
+              "provider_product_id": "5a7de794-bd73-4dce-bf5d-620fd116c46c",
+              "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260828T125328_V20260828T085642_20260828T123212.EOF",
+              "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/28/S1D_OPER_AUX_RESORB_OPOD_20260828T125328_V20260828T085642_20260828T123212.EOF",
+              "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(5a7de794-bd73-4dce-bf5d-620fd116c46c)/$value",
+              "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(5a7de794-bd73-4dce-bf5d-620fd116c46c)?$expand=Locations",
+              "content_length_bytes": 642586,
+              "validity_start_utc": "2026-08-28T08:56:42.000000Z",
+              "validity_end_utc": "2026-08-28T12:32:12.000000Z",
+              "publication_date_utc": "2026-08-28T12:55:18.704650Z",
+              "modification_date_utc": "2026-08-28T12:55:18.704650Z",
+              "online": true,
+              "eviction_date_utc": "2026-11-28T12:54:46.585083Z",
+              "provider_checksums": [
+                {
+                  "algorithm": "BLAKE3",
+                  "value": "5ce4fd77e299ddcdacf3ca1c362e3c2ba05dd052ff0f62cafaae2d2d6c199d99",
+                  "checksum_date": "2026-08-28T12:55:17.406011Z"
+                },
+                {
+                  "algorithm": "MD5",
+                  "value": "521bec74ab6ce1f5678020f3a262992a",
+                  "checksum_date": "2026-08-28T12:55:17.363798Z"
+                }
+              ],
+              "scene_margin_before_seconds": 12274,
+              "scene_margin_after_seconds": 606,
+              "minimum_scene_margin_seconds": 606
+            }
+          ]
+        },
+        {
+          "orbit_type": "POEORB",
+          "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_POEORB%27%29+and+ContentDate%2FStart+le+2026-08-28T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-28T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+          "http_status": 200,
+          "response_sha256": "4560b0684b2f82d97c0e87b684535a779f3fef522898e6f86a56c156d8bbd6df",
+          "observed_at_utc": "2026-09-04T01:16:42Z",
+          "candidate_count": 0,
+          "candidates": []
+        }
+      ]
+    },
+    {
+      "group_id": "DESC-AFTER-20260831",
+      "scene_start_utc": "2026-08-31T00:10:37Z",
+      "scene_end_utc": "2026-08-31T00:11:02Z",
+      "selection_rule": "select the full-coverage RESORB candidate with the largest minimum temporal margin around the scene; break ties by latest publication then provider UUID",
+      "selected_provider_product_id": "af27071d-df96-4850-af40-e09aedcd68a3",
+      "searches": [
+        {
+          "orbit_type": "RESORB",
+          "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-31T00%3A10%3A37.000Z+and+ContentDate%2FEnd+ge+2026-08-31T00%3A11%3A02.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+          "http_status": 200,
+          "response_sha256": "5fa552b87fa119715a548bc4dce8ca7a7d04b010121abf9b5480066b75fbd4d8",
+          "observed_at_utc": "2026-09-04T01:16:42Z",
+          "candidate_count": 2,
+          "candidates": [
+            {
+              "provider_product_id": "1c672e21-3a34-4766-b404-7132781674e7",
+              "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260831T032814_V20260830T232856_20260831T025956.EOF",
+              "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/30/S1D_OPER_AUX_RESORB_OPOD_20260831T032814_V20260830T232856_20260831T025956.EOF",
+              "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(1c672e21-3a34-4766-b404-7132781674e7)/$value",
+              "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(1c672e21-3a34-4766-b404-7132781674e7)?$expand=Locations",
+              "content_length_bytes": 629467,
+              "validity_start_utc": "2026-08-30T23:28:56.000000Z",
+              "validity_end_utc": "2026-08-31T02:59:56.000000Z",
+              "publication_date_utc": "2026-08-31T03:30:11.245718Z",
+              "modification_date_utc": "2026-08-31T03:30:11.245718Z",
+              "online": true,
+              "eviction_date_utc": "2026-12-01T03:29:49.810650Z",
+              "provider_checksums": [
+                {
+                  "algorithm": "BLAKE3",
+                  "value": "9368e17382464724397693f1b5bdf539be324324a579b5924f7a96dd0662ca9c",
+                  "checksum_date": "2026-08-31T03:30:07.586055Z"
+                },
+                {
+                  "algorithm": "MD5",
+                  "value": "4db4b60a2bbb3acc0b14e6c6e9bd0d65",
+                  "checksum_date": "2026-08-31T03:30:07.542647Z"
+                }
+              ],
+              "scene_margin_before_seconds": 2501,
+              "scene_margin_after_seconds": 10134,
+              "minimum_scene_margin_seconds": 2501
+            },
+            {
+              "provider_product_id": "af27071d-df96-4850-af40-e09aedcd68a3",
+              "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+              "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/30/S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+              "download_url": "https://download.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)/$value",
+              "catalogue_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)?$expand=Locations",
+              "content_length_bytes": 629395,
+              "validity_start_utc": "2026-08-30T21:50:11.000000Z",
+              "validity_end_utc": "2026-08-31T01:21:11.000000Z",
+              "publication_date_utc": "2026-08-31T01:50:22.594002Z",
+              "modification_date_utc": "2026-08-31T01:50:22.594002Z",
+              "online": true,
+              "eviction_date_utc": "2026-12-01T01:50:08.131473Z",
+              "provider_checksums": [
+                {
+                  "algorithm": "BLAKE3",
+                  "value": "0fe6a53b52f3caf11aa8e685a6367f673c69a8a580d90b398148dda772e56d12",
+                  "checksum_date": "2026-08-31T01:50:21.470965Z"
+                },
+                {
+                  "algorithm": "MD5",
+                  "value": "1eebe30919f50a31dd04f854ee1c813d",
+                  "checksum_date": "2026-08-31T01:50:21.424393Z"
+                }
+              ],
+              "scene_margin_before_seconds": 8426,
+              "scene_margin_after_seconds": 4209,
+              "minimum_scene_margin_seconds": 4209
+            }
+          ]
+        },
+        {
+          "orbit_type": "POEORB",
+          "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_POEORB%27%29+and+ContentDate%2FStart+le+2026-08-31T00%3A10%3A37.000Z+and+ContentDate%2FEnd+ge+2026-08-31T00%3A11%3A02.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+          "http_status": 200,
+          "response_sha256": "4560b0684b2f82d97c0e87b684535a779f3fef522898e6f86a56c156d8bbd6df",
+          "observed_at_utc": "2026-09-04T01:16:42Z",
+          "candidate_count": 0,
+          "candidates": []
+        }
+      ]
+    }
+  ],
+  "assertions": {
+    "unique_scene_window_count": 4,
+    "selected_restituted_file_count": 4,
+    "all_selected_online": true,
+    "all_selected_cover_full_scene_window": true,
+    "precise_covering_file_count": 0,
+    "payload_bytes_requested": false,
+    "authentication_used": false,
+    "credential_values_read_or_recorded": false,
+    "authority_created": false
+  },
+  "limitations": [
+    "Catalogue identity and online status do not establish transferred-byte integrity or valid OSV contents.",
+    "Multiple restituted products overlap each scene because POD NRT coverage overlaps; the project selection rule maximizes the minimum temporal margin and is not represented as an ESA selection rule.",
+    "No precise AUX_POEORB file covered any selected scene at assessment time; precise products normally arrive about 20 days after acquisition.",
+    "Restituted orbit files satisfy the predeclared radar contract for controlled processing, but a later precise substitution remains separately gated and preferable for the final offline route."
+  ]
+}

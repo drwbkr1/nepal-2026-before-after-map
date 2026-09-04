@@ -17,6 +17,7 @@
   ],
   "parallel_checkpoints": [
     "M2-DEM-VERTICAL-DATUM-REVIEW",
-    "M2-DEM-TERRAIN-RESULT-REVIEW"
+    "M2-DEM-TERRAIN-RESULT-REVIEW",
+    "M2-ORBIT-AMENDMENT-REVIEW"
   ]
 }

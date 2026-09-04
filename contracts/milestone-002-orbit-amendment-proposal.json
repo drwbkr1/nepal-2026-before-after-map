@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "amendment_id": "NEPAL-M2-ORBIT-AMENDMENT-001",
+  "status": "proposed_not_active",
+  "prepared_at_utc": "2026-09-04T01:16:42Z",
+  "parent_contract_ref": "contracts/milestone-002.json",
+  "parent_contract_sha256": "fb85eb26d3143cd23cf96598a0447b9d5e6f3a3b70e8bdc35693bf52f7b1cbca",
+  "parent_approval_ref": "records/source-gates/m2-activation-approval.json",
+  "parent_approval_sha256": "d07326ebee4824fab34afd6b520f72b2d8243b48e376493b44203488e1f5611b",
+  "candidate_manifest_ref": "records/source-gates/m2-orbit-candidate-manifest.json",
+  "candidate_manifest_sha256": "e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736",
+  "metadata_receipt_ref": "records/source-gates/m2-orbit-metadata-receipt.json",
+  "metadata_receipt_sha256": "59bb7f3b1266f56aeb2ab2a47d24a1eb1450f7d4e00e3dac2e516c8cf4ae1e78",
+  "source_gate_ref": "records/source-gates/m2-orbit-source-gate.json",
+  "source_gate_sha256": "53a9806df53e0a576fb3c70a035a44b983c951ca8cc830d2c721f2c41d18b2af",
+  "radar_contract_ref": "config/qa/radar-baseline-processing-contract.json",
+  "radar_contract_sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f",
+  "authority": {
+    "mode": "not_granted",
+    "review_required": true,
+    "human_gate_id": "M2-ORBIT-AMEND",
+    "requested_actions": [
+      "use the existing secret-safe owner-controlled CDSE token reference only after the original Sentinel acquisition begins",
+      "download only the four exact AUX_RESORB provider UUIDs in the bound candidate manifest",
+      "verify provider size and checksums, local SHA-256, XML identity, ordered finite OSVs, validity coverage, and exact scene binding",
+      "store orbit payloads and corrected SAFE metadata only in versioned non-Git custody",
+      "apply each passing orbit file only to the exact approved Sentinel-1 source IDs listed in its record",
+      "preserve embedded predicted metadata plus all failed, partial, corrupt, superseded, and inconclusive attempts"
+    ],
+    "not_requested": [
+      "create, recover, or modify an account or expose a token, password, cookie, header, S3 key, or cloud connection file",
+      "accept new or changed terms, incur a charge, or use an unapproved host",
+      "download any orbit product other than the four exact restituted objects",
+      "silently substitute later precise orbit files",
+      "resolve the separate DEM vertical-datum gate or terrain-result review",
+      "begin radar processing before all Sentinel, DEM, vertical, orbit, and pixel-readiness prerequisites pass",
+      "publish payloads, scientific conclusions, attribution, or emergency guidance"
+    ]
+  },
+  "planned_intake": {
+    "route": "authenticated CDSE OData GET with an existing secret-safe owner token reference",
+    "file_count": 4,
+    "covered_sentinel_source_count": 6,
+    "combined_content_length_bytes": 2539715,
+    "planned_external_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "collision_policy": "fail",
+    "promotion_mode": "atomic_no_replace_after_verification",
+    "allowed_hosts": [
+      "download.dataspace.copernicus.eu"
+    ]
+  },
+  "quality_decision": {
+    "selected_type": "AUX_RESORB",
+    "precise_files_covering_selected_scenes_at_assessment": 0,
+    "rationale": "ArcGIS recommends restituted OSVs for acquisitions less than three weeks old, and the active radar contract accepts restituted or precise OSVs while rejecting predicted-only processing.",
+    "limitation": "AUX_POEORB is the preferred final offline orbit source when available; any later precise substitution requires a fresh exact manifest and review."
+  },
+  "rights": {
+    "terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+    "terms_page_sha256": "97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0",
+    "legal_notice_url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+    "legal_notice_sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64",
+    "summary": "Copernicus Sentinel data and service information are available on a free, full and open basis; public distribution requires the applicable source notice and carries no suitability warranty.",
+    "new_acceptance_requested": false
+  },
+  "stop_conditions": [
+    "any provider UUID, filename, validity interval, byte length, checksum, online state, eviction date, access host, or terms hash differs at fresh preflight",
+    "the existing token reference is unavailable, expired, invalid, or would need to be disclosed or logged",
+    "login, MFA, account recovery, terms acceptance, generated S3 credentials, payment, or an unapproved redirect is required",
+    "a staging or destination collision, unsafe path, link, or non-atomic promotion risk appears",
+    "a file fails size, provider checksum, local SHA-256, XML parse, mission or file-type identity, finite ordered OSVs, validity coverage, or scene binding",
+    "the exact Sentinel source group is not already in verified promoted custody"
+  ],
+  "activation_effect": "Exact approval and reconciliation would add only four named S1D AUX_RESORB files and their bounded verification/application route to M2; all existing Sentinel, DEM, vertical-datum, terrain-result, pixel, and scientific gates remain independent.",
+  "claim_boundary": {
+    "catalogue_availability_established": true,
+    "scope_authority_established": false,
+    "payload_bytes_transferred": false,
+    "orbit_xml_verified": false,
+    "orbit_correction_applied": false,
+    "sentinel_pixels_processed": false,
+    "baseline_established": false,
+    "scientific_result_established": false
+  }
+}

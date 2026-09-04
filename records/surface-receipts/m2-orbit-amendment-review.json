@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "M2-ORBIT-AMENDMENT-REVIEW-SURFACE-001",
+  "status": "pass",
+  "verified_at_utc": "2026-09-04T01:28:57Z",
+  "surface": "docs/assets/m2-orbit-amendment-review.png",
+  "surface_sha256": "70d698c94d97f68fa952e8a9404013af7da4616c28ff74645993bbcfdfd06abb",
+  "candidate_manifest": "records/source-gates/m2-orbit-candidate-manifest.json",
+  "candidate_manifest_sha256": "e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736",
+  "metadata_receipt": "records/source-gates/m2-orbit-metadata-receipt.json",
+  "metadata_receipt_sha256": "59bb7f3b1266f56aeb2ab2a47d24a1eb1450f7d4e00e3dac2e516c8cf4ae1e78",
+  "source_gate": "records/source-gates/m2-orbit-source-gate.json",
+  "source_gate_sha256": "53a9806df53e0a576fb3c70a035a44b983c951ca8cc830d2c721f2c41d18b2af",
+  "amendment_proposal": "contracts/milestone-002-orbit-amendment-proposal.json",
+  "amendment_proposal_sha256": "b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292",
+  "candidate_intake": "contracts/m2-orbit-intake-candidate.json",
+  "candidate_intake_sha256": "233db61c2639f8717de1ef7021bcbeb8d9067db00bc58cfb5bb743aca0e1b81a",
+  "candidate_offline_verification": "contracts/m2-orbit-offline-verification-candidate.json",
+  "candidate_offline_verification_sha256": "44ef64fa193cb97e908d568043397350b95c596fa276a94d1bfa3cab057fd082",
+  "instructions": "docs/M2_ORBIT_AMENDMENT_REVIEW.md",
+  "instructions_sha256": "f7eaf2f6440ec4f64dca7b26059ef1c4bfac3e7e0a1855ebe32f94ce3eb6ed18",
+  "renderer": "scripts/render_m2_orbit_amendment_review.py",
+  "renderer_sha256": "2fe90318e572d8f5b7fb71ccdce910a530874a256df45b0b68771f5e1337af27",
+  "dimensions_pixels": {
+    "width": 1800,
+    "height": 2100
+  },
+  "checks": {
+    "render_completed": "pass",
+    "exact_proposal_hash_visible": "pass",
+    "all_four_exact_orbit_files_visible": "pass",
+    "six_scene_bindings_visible": "pass",
+    "restituted_not_precise_boundary_visible": "pass",
+    "approval_boundary_visible": "pass",
+    "decision_card_fully_visible": "pass",
+    "text_clipping": "none_observed",
+    "visual_inspection": "pass"
+  },
+  "blank_state_verified": true,
+  "completion_controls_verified": true,
+  "export_verified": true,
+  "human_decision_count": 0,
+  "limitations": [
+    "The surface contains text and official metadata only; it contains no Sentinel-1 or third-party raster pixels.",
+    "Remote identity, checksums, size, and availability do not establish transferred-byte integrity or orbit XML fitness.",
+    "The surface does not grant authority, use a credential, request a payload, or apply an orbit correction."
+  ]
+}

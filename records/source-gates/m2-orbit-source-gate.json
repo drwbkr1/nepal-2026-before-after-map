@@ -1,0 +1,770 @@
+{
+  "contract_version": "source-gate/v1",
+  "assessment_id": "NEPAL-M2-ORBIT-SOURCE-GATE-001",
+  "assessed_at": "2026-09-04T01:16:42Z",
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-activation-approval.json",
+    "authorized_actions": [
+      "inspect orbit metadata",
+      "record orbit candidate evidence",
+      "prepare a bounded orbit amendment review"
+    ],
+    "expires_at_utc": null
+  },
+  "intended_use": {
+    "summary": "Evaluate and, only after exact owner amendment, acquire four exact S1D AUX_RESORB files for the six approved Sentinel-1 GRD sources before ArcGIS baseline processing.",
+    "planned_actions": [
+      "inspect orbit metadata",
+      "record orbit candidate evidence",
+      "prepare a bounded orbit amendment review",
+      "download the four exact restituted orbit files with an existing secret-safe owner token reference",
+      "verify bytes, XML structure, state vectors, validity, and scene binding",
+      "apply each passing file only to its exact approved Sentinel-1 source group"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "M2-ORB-001",
+      "name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(d4fdc474-0069-459b-9534-b5999dec5aab)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-16T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-16T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 8ecd013254e20231d07a1207031ba6656a35d8b40365c3e937d5f0d30165e50f returned 3 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID d4fdc474-0069-459b-9534-b5999dec5aab."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "Exact ESA filename, provider UUID, validity interval, size, S3 path, publication time, and checksums are bound."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/Data/SentinelMissions/Sentinel1.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official Sentinel-1 collection documentation response SHA-256 06351214c4eba4affde3742eba6583e3af09a000b5f1ca1ab3ec389e2a1f3bdb lists AUX_RESORB, its OData catalogue route, and three-month rolling availability."
+            },
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-16T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-16T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 8ecd013254e20231d07a1207031ba6656a35d8b40365c3e937d5f0d30165e50f returned 3 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID d4fdc474-0069-459b-9534-b5999dec5aab."
+            }
+          ],
+          "note": "ESA Copernicus POD produced the orbit file and CDSE is its primary catalogue and delivery service."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-16T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-16T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 8ecd013254e20231d07a1207031ba6656a35d8b40365c3e937d5f0d30165e50f returned 3 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID d4fdc474-0069-459b-9534-b5999dec5aab."
+            },
+            {
+              "type": "live",
+              "locator": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/download-orbit-file.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "ArcGIS documentation response SHA-256 0cca6f4a17aef19f423fe586c5a779adadccf1dbd142c735287418274a7c9e31 recommends restituted OSVs for acquisitions within three weeks and identifies the authenticated CDSE route."
+            }
+          ],
+          "note": "The exact file is online; payload download requires an existing owner-controlled CDSE credential and no account action is proposed."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Current CDSE terms response SHA-256 97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0 points Sentinel data and service information to the legal notice SHA-256 fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            }
+          ],
+          "note": "The same public Sentinel legal notice supports controlled acquisition and analysis with source notice and no suitability warranty."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-16T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-16T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 8ecd013254e20231d07a1207031ba6656a35d8b40365c3e937d5f0d30165e50f returned 3 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID d4fdc474-0069-459b-9534-b5999dec5aab."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "The exact CDSE product identity is bound directly to the approved GRD acquisition window and source IDs."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-16T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-16T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 8ecd013254e20231d07a1207031ba6656a35d8b40365c3e937d5f0d30165e50f returned 3 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID d4fdc474-0069-459b-9534-b5999dec5aab."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "Provider MD5, BLAKE3, and byte length are recorded; local SHA-256 and XML/OSV validation are mandatory after transfer."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-16T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-16T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 8ecd013254e20231d07a1207031ba6656a35d8b40365c3e937d5f0d30165e50f returned 3 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID d4fdc474-0069-459b-9534-b5999dec5aab."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/Data/SentinelMissions/Sentinel1.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official Sentinel-1 collection documentation response SHA-256 06351214c4eba4affde3742eba6583e3af09a000b5f1ca1ab3ec389e2a1f3bdb lists AUX_RESORB, its OData catalogue route, and three-month rolling availability."
+            },
+            {
+              "type": "live",
+              "locator": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/download-orbit-file.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "ArcGIS documentation response SHA-256 0cca6f4a17aef19f423fe586c5a779adadccf1dbd142c735287418274a7c9e31 recommends restituted OSVs for acquisitions within three weeks and identifies the authenticated CDSE route."
+            }
+          ],
+          "note": "The validity interval covers the full scene with at least 6350 seconds on both sides; restituted rather than precise quality remains explicit."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "Orbit state vectors contain no project personal data; credentials remain references-only and payloads stay outside Git."
+        },
+        {
+          "id": "scope-authority",
+          "required": true,
+          "requires_live": false,
+          "status": "unknown",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-activation-approval.json",
+              "note": "The active approval is limited to eight exact Sentinel products and excludes any additional product identity."
+            }
+          ],
+          "note": "A hash-bound owner amendment is required before any orbit payload request."
+        }
+      ]
+    },
+    {
+      "source_id": "M2-ORB-002",
+      "name": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-19T00%3A10%3A36.000Z+and+ContentDate%2FEnd+ge+2026-08-19T00%3A11%3A01.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 33fb7ea88e4cd3529d5ea5a3b267b217ae80a39d5002ad351251adaccd8617bc returned 2 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID ec7dd79b-0588-456a-9d17-6324d5affcb5."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "Exact ESA filename, provider UUID, validity interval, size, S3 path, publication time, and checksums are bound."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/Data/SentinelMissions/Sentinel1.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official Sentinel-1 collection documentation response SHA-256 06351214c4eba4affde3742eba6583e3af09a000b5f1ca1ab3ec389e2a1f3bdb lists AUX_RESORB, its OData catalogue route, and three-month rolling availability."
+            },
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-19T00%3A10%3A36.000Z+and+ContentDate%2FEnd+ge+2026-08-19T00%3A11%3A01.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 33fb7ea88e4cd3529d5ea5a3b267b217ae80a39d5002ad351251adaccd8617bc returned 2 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID ec7dd79b-0588-456a-9d17-6324d5affcb5."
+            }
+          ],
+          "note": "ESA Copernicus POD produced the orbit file and CDSE is its primary catalogue and delivery service."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-19T00%3A10%3A36.000Z+and+ContentDate%2FEnd+ge+2026-08-19T00%3A11%3A01.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 33fb7ea88e4cd3529d5ea5a3b267b217ae80a39d5002ad351251adaccd8617bc returned 2 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID ec7dd79b-0588-456a-9d17-6324d5affcb5."
+            },
+            {
+              "type": "live",
+              "locator": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/download-orbit-file.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "ArcGIS documentation response SHA-256 0cca6f4a17aef19f423fe586c5a779adadccf1dbd142c735287418274a7c9e31 recommends restituted OSVs for acquisitions within three weeks and identifies the authenticated CDSE route."
+            }
+          ],
+          "note": "The exact file is online; payload download requires an existing owner-controlled CDSE credential and no account action is proposed."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Current CDSE terms response SHA-256 97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0 points Sentinel data and service information to the legal notice SHA-256 fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            }
+          ],
+          "note": "The same public Sentinel legal notice supports controlled acquisition and analysis with source notice and no suitability warranty."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-19T00%3A10%3A36.000Z+and+ContentDate%2FEnd+ge+2026-08-19T00%3A11%3A01.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 33fb7ea88e4cd3529d5ea5a3b267b217ae80a39d5002ad351251adaccd8617bc returned 2 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID ec7dd79b-0588-456a-9d17-6324d5affcb5."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "The exact CDSE product identity is bound directly to the approved GRD acquisition window and source IDs."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-19T00%3A10%3A36.000Z+and+ContentDate%2FEnd+ge+2026-08-19T00%3A11%3A01.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 33fb7ea88e4cd3529d5ea5a3b267b217ae80a39d5002ad351251adaccd8617bc returned 2 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID ec7dd79b-0588-456a-9d17-6324d5affcb5."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "Provider MD5, BLAKE3, and byte length are recorded; local SHA-256 and XML/OSV validation are mandatory after transfer."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-19T00%3A10%3A36.000Z+and+ContentDate%2FEnd+ge+2026-08-19T00%3A11%3A01.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 33fb7ea88e4cd3529d5ea5a3b267b217ae80a39d5002ad351251adaccd8617bc returned 2 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID ec7dd79b-0588-456a-9d17-6324d5affcb5."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/Data/SentinelMissions/Sentinel1.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official Sentinel-1 collection documentation response SHA-256 06351214c4eba4affde3742eba6583e3af09a000b5f1ca1ab3ec389e2a1f3bdb lists AUX_RESORB, its OData catalogue route, and three-month rolling availability."
+            },
+            {
+              "type": "live",
+              "locator": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/download-orbit-file.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "ArcGIS documentation response SHA-256 0cca6f4a17aef19f423fe586c5a779adadccf1dbd142c735287418274a7c9e31 recommends restituted OSVs for acquisitions within three weeks and identifies the authenticated CDSE route."
+            }
+          ],
+          "note": "The validity interval covers the full scene with at least 4219 seconds on both sides; restituted rather than precise quality remains explicit."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "Orbit state vectors contain no project personal data; credentials remain references-only and payloads stay outside Git."
+        },
+        {
+          "id": "scope-authority",
+          "required": true,
+          "requires_live": false,
+          "status": "unknown",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-activation-approval.json",
+              "note": "The active approval is limited to eight exact Sentinel products and excludes any additional product identity."
+            }
+          ],
+          "note": "A hash-bound owner amendment is required before any orbit payload request."
+        }
+      ]
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "name": "S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-28T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-28T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 7e7d67d21e80d2d63db10c58baf3832685cdc85aebf0daf2f4098d49f8312fcd returned 3 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID 182fec80-86b8-46b4-bc76-43be0ab70ba5."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "Exact ESA filename, provider UUID, validity interval, size, S3 path, publication time, and checksums are bound."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/Data/SentinelMissions/Sentinel1.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official Sentinel-1 collection documentation response SHA-256 06351214c4eba4affde3742eba6583e3af09a000b5f1ca1ab3ec389e2a1f3bdb lists AUX_RESORB, its OData catalogue route, and three-month rolling availability."
+            },
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-28T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-28T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 7e7d67d21e80d2d63db10c58baf3832685cdc85aebf0daf2f4098d49f8312fcd returned 3 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID 182fec80-86b8-46b4-bc76-43be0ab70ba5."
+            }
+          ],
+          "note": "ESA Copernicus POD produced the orbit file and CDSE is its primary catalogue and delivery service."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-28T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-28T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 7e7d67d21e80d2d63db10c58baf3832685cdc85aebf0daf2f4098d49f8312fcd returned 3 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID 182fec80-86b8-46b4-bc76-43be0ab70ba5."
+            },
+            {
+              "type": "live",
+              "locator": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/download-orbit-file.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "ArcGIS documentation response SHA-256 0cca6f4a17aef19f423fe586c5a779adadccf1dbd142c735287418274a7c9e31 recommends restituted OSVs for acquisitions within three weeks and identifies the authenticated CDSE route."
+            }
+          ],
+          "note": "The exact file is online; payload download requires an existing owner-controlled CDSE credential and no account action is proposed."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Current CDSE terms response SHA-256 97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0 points Sentinel data and service information to the legal notice SHA-256 fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            }
+          ],
+          "note": "The same public Sentinel legal notice supports controlled acquisition and analysis with source notice and no suitability warranty."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-28T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-28T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 7e7d67d21e80d2d63db10c58baf3832685cdc85aebf0daf2f4098d49f8312fcd returned 3 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID 182fec80-86b8-46b4-bc76-43be0ab70ba5."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "The exact CDSE product identity is bound directly to the approved GRD acquisition window and source IDs."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-28T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-28T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 7e7d67d21e80d2d63db10c58baf3832685cdc85aebf0daf2f4098d49f8312fcd returned 3 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID 182fec80-86b8-46b4-bc76-43be0ab70ba5."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "Provider MD5, BLAKE3, and byte length are recorded; local SHA-256 and XML/OSV validation are mandatory after transfer."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-28T12%3A21%3A16.000Z+and+ContentDate%2FEnd+ge+2026-08-28T12%3A22%3A06.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 7e7d67d21e80d2d63db10c58baf3832685cdc85aebf0daf2f4098d49f8312fcd returned 3 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID 182fec80-86b8-46b4-bc76-43be0ab70ba5."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/Data/SentinelMissions/Sentinel1.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official Sentinel-1 collection documentation response SHA-256 06351214c4eba4affde3742eba6583e3af09a000b5f1ca1ab3ec389e2a1f3bdb lists AUX_RESORB, its OData catalogue route, and three-month rolling availability."
+            },
+            {
+              "type": "live",
+              "locator": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/download-orbit-file.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "ArcGIS documentation response SHA-256 0cca6f4a17aef19f423fe586c5a779adadccf1dbd142c735287418274a7c9e31 recommends restituted OSVs for acquisitions within three weeks and identifies the authenticated CDSE route."
+            }
+          ],
+          "note": "The validity interval covers the full scene with at least 6349 seconds on both sides; restituted rather than precise quality remains explicit."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "Orbit state vectors contain no project personal data; credentials remain references-only and payloads stay outside Git."
+        },
+        {
+          "id": "scope-authority",
+          "required": true,
+          "requires_live": false,
+          "status": "unknown",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-activation-approval.json",
+              "note": "The active approval is limited to eight exact Sentinel products and excludes any additional product identity."
+            }
+          ],
+          "note": "A hash-bound owner amendment is required before any orbit payload request."
+        }
+      ]
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "name": "S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+      "locator": "https://download.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)/$value",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-31T00%3A10%3A37.000Z+and+ContentDate%2FEnd+ge+2026-08-31T00%3A11%3A02.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 5fa552b87fa119715a548bc4dce8ca7a7d04b010121abf9b5480066b75fbd4d8 returned 2 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID af27071d-df96-4850-af40-e09aedcd68a3."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "Exact ESA filename, provider UUID, validity interval, size, S3 path, publication time, and checksums are bound."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/Data/SentinelMissions/Sentinel1.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official Sentinel-1 collection documentation response SHA-256 06351214c4eba4affde3742eba6583e3af09a000b5f1ca1ab3ec389e2a1f3bdb lists AUX_RESORB, its OData catalogue route, and three-month rolling availability."
+            },
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-31T00%3A10%3A37.000Z+and+ContentDate%2FEnd+ge+2026-08-31T00%3A11%3A02.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 5fa552b87fa119715a548bc4dce8ca7a7d04b010121abf9b5480066b75fbd4d8 returned 2 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID af27071d-df96-4850-af40-e09aedcd68a3."
+            }
+          ],
+          "note": "ESA Copernicus POD produced the orbit file and CDSE is its primary catalogue and delivery service."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-31T00%3A10%3A37.000Z+and+ContentDate%2FEnd+ge+2026-08-31T00%3A11%3A02.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 5fa552b87fa119715a548bc4dce8ca7a7d04b010121abf9b5480066b75fbd4d8 returned 2 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID af27071d-df96-4850-af40-e09aedcd68a3."
+            },
+            {
+              "type": "live",
+              "locator": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/download-orbit-file.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "ArcGIS documentation response SHA-256 0cca6f4a17aef19f423fe586c5a779adadccf1dbd142c735287418274a7c9e31 recommends restituted OSVs for acquisitions within three weeks and identifies the authenticated CDSE route."
+            }
+          ],
+          "note": "The exact file is online; payload download requires an existing owner-controlled CDSE credential and no account action is proposed."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://dataspace.copernicus.eu/terms-and-conditions",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Current CDSE terms response SHA-256 97a8ca9a5ebe8eb5cc24dfdadb926d60de04efd30a1b23ea521da564ca5ab3f0 points Sentinel data and service information to the legal notice SHA-256 fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64."
+            }
+          ],
+          "note": "The same public Sentinel legal notice supports controlled acquisition and analysis with source notice and no suitability warranty."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-31T00%3A10%3A37.000Z+and+ContentDate%2FEnd+ge+2026-08-31T00%3A11%3A02.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 5fa552b87fa119715a548bc4dce8ca7a7d04b010121abf9b5480066b75fbd4d8 returned 2 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID af27071d-df96-4850-af40-e09aedcd68a3."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "The exact CDSE product identity is bound directly to the approved GRD acquisition window and source IDs."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-31T00%3A10%3A37.000Z+and+ContentDate%2FEnd+ge+2026-08-31T00%3A11%3A02.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 5fa552b87fa119715a548bc4dce8ca7a7d04b010121abf9b5480066b75fbd4d8 returned 2 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID af27071d-df96-4850-af40-e09aedcd68a3."
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "Provider MD5, BLAKE3, and byte length are recorded; local SHA-256 and XML/OSV validation are mandatory after transfer."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1%27+and+contains%28Name%2C%27S1D_OPER_AUX_RESORB%27%29+and+ContentDate%2FStart+le+2026-08-31T00%3A10%3A37.000Z+and+ContentDate%2FEnd+ge+2026-08-31T00%3A11%3A02.000Z&%24top=20&%24orderby=PublicationDate+desc&%24expand=Locations",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official OData response SHA-256 5fa552b87fa119715a548bc4dce8ca7a7d04b010121abf9b5480066b75fbd4d8 returned 2 full-coverage restituted candidates; deterministic temporal-margin selection chose provider UUID af27071d-df96-4850-af40-e09aedcd68a3."
+            },
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/Data/SentinelMissions/Sentinel1.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "Official Sentinel-1 collection documentation response SHA-256 06351214c4eba4affde3742eba6583e3af09a000b5f1ca1ab3ec389e2a1f3bdb lists AUX_RESORB, its OData catalogue route, and three-month rolling availability."
+            },
+            {
+              "type": "live",
+              "locator": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/download-orbit-file.html",
+              "observed_at": "2026-09-04T01:16:42Z",
+              "note": "ArcGIS documentation response SHA-256 0cca6f4a17aef19f423fe586c5a779adadccf1dbd142c735287418274a7c9e31 recommends restituted OSVs for acquisitions within three weeks and identifies the authenticated CDSE route."
+            }
+          ],
+          "note": "The validity interval covers the full scene with at least 4209 seconds on both sides; restituted rather than precise quality remains explicit."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-orbit-candidate-manifest.json",
+              "note": "Candidate manifest SHA-256 e5c0222213a0215cc600ac5e3ef402078b912fa87ff0f523ba362d73f84d3736 binds four exact provider objects to six approved Sentinel source IDs."
+            }
+          ],
+          "note": "Orbit state vectors contain no project personal data; credentials remain references-only and payloads stay outside Git."
+        },
+        {
+          "id": "scope-authority",
+          "required": true,
+          "requires_live": false,
+          "status": "unknown",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-activation-approval.json",
+              "note": "The active approval is limited to eight exact Sentinel products and excludes any additional product identity."
+            }
+          ],
+          "note": "A hash-bound owner amendment is required before any orbit payload request."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "blocked",
+    "blocking_reasons": [
+      "The four exact orbit files are additional products outside the active eight-product M2 approval."
+    ],
+    "live_verification_pending": [],
+    "approved_actions": [
+      "inspect orbit metadata",
+      "record orbit candidate evidence",
+      "prepare a bounded orbit amendment review"
+    ]
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": [
+      "inspect orbit metadata",
+      "record orbit candidate evidence",
+      "prepare a bounded orbit amendment review"
+    ],
+    "requires_explicit_authorization": [
+      "download the four exact restituted orbit files with an existing secret-safe owner token reference",
+      "verify bytes, XML structure, state vectors, validity, and scene binding",
+      "apply each passing file only to its exact approved Sentinel-1 source group",
+      "download or substitute any precise orbit file",
+      "publish or redistribute orbit payloads or derived scientific claims"
+    ]
+  }
+}

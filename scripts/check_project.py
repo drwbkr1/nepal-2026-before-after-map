@@ -46,6 +46,9 @@ REQUIRED = [
     "contracts/m2-dem-intake.json",
     "contracts/m2-dem-offline-verification-candidate.json",
     "contracts/m2-dem-offline-verification.json",
+    "contracts/milestone-002-orbit-amendment-proposal.json",
+    "contracts/m2-orbit-intake-candidate.json",
+    "contracts/m2-orbit-offline-verification-candidate.json",
     "records/project-control-profile.json",
     "records/long-term-goal.json",
     "records/evidence-ledger.jsonl",
@@ -93,6 +96,9 @@ REQUIRED = [
     "records/source-gates/m2-dem-amendment-approval.json",
     "records/source-gates/m2-dem-amendment-review-reconciliation.json",
     "records/source-gates/m2-dem-live-source-gate.json",
+    "records/source-gates/m2-orbit-metadata-receipt.json",
+    "records/source-gates/m2-orbit-candidate-manifest.json",
+    "records/source-gates/m2-orbit-source-gate.json",
     "docs/M1_SOURCE_MANIFEST_REVIEW.md",
     "docs/assets/m1-source-manifest-review.png",
     "records/surface-receipts/m1-source-manifest-review.json",
@@ -109,12 +115,14 @@ REQUIRED = [
     "docs/M2_DEM_OFFLINE_VERIFICATION.md",
     "docs/M2_DEM_VERTICAL_DATUM_REVIEW.md",
     "docs/M2_DEM_TERRAIN_RESULT_REVIEW.md",
+    "docs/M2_ORBIT_AMENDMENT_REVIEW.md",
     "docs/DEM_TERRAIN_QUALITY_PROTOCOL.md",
     "docs/RADAR_BASELINE_PROCESSING_PROTOCOL.md",
     "docs/assets/m2-dem-amendment-review.png",
     "docs/assets/m2-dem-vertical-datum-review.png",
     "docs/assets/m2-dem-terrain-result-review.png",
     "docs/assets/m2-controlled-acquisition-review.png",
+    "docs/assets/m2-orbit-amendment-review.png",
     "scripts/render_m2_activation_review.py",
     "scripts/prepare_m2_intake.py",
     "scripts/prepare_m2_verification.py",
@@ -142,6 +150,7 @@ REQUIRED = [
     "records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json",
     "records/surface-receipts/m2-dem-terrain-quality.json",
     "records/surface-receipts/m2-dem-terrain-result-review.json",
+    "records/surface-receipts/m2-orbit-amendment-review.json",
     "records/surface-receipts/optical-processing-synthetic-arcgis.json",
     "records/surface-receipts/optical-baseline-control-readiness.json",
     "records/surface-receipts/m2-materialization-readiness.json",
@@ -168,6 +177,9 @@ REQUIRED = [
     "reviews/m2-dem-terrain-result/review-bundle.json",
     "reviews/m2-dem-terrain-result/review-contract.json",
     "reviews/m2-dem-terrain-result/blank-response.json",
+    "reviews/m2-orbit-amendment/review-bundle.json",
+    "reviews/m2-orbit-amendment/review-contract.json",
+    "reviews/m2-orbit-amendment/blank-response.json",
     "tests/test_m2_intake.py",
     "tests/test_m2_verification.py",
     "tests/test_arcgis_evidence_schema.py",
@@ -197,6 +209,7 @@ REQUIRED = [
     "tests/test_m2_dem_verification_completion.py",
     "tests/test_m2_dem_active_geotiff.py",
     "tests/test_m2_dem_vertical_datum_review.py",
+    "tests/test_m2_orbit_amendment.py",
     "tests/test_dem_terrain_quality_core.py",
     "tests/test_radar_processing_contract.py",
     "tests/test_optical_processing_core.py",
@@ -217,6 +230,9 @@ REQUIRED = [
     "scripts/inspect_m2_dem_vertical_datum_arcgis.py",
     "scripts/render_m2_dem_vertical_datum_review.py",
     "scripts/render_m2_dem_terrain_result_review.py",
+    "scripts/prepare_m2_orbit_amendment.py",
+    "scripts/prepare_m2_orbit_controls.py",
+    "scripts/render_m2_orbit_amendment_review.py",
     "scripts/dem_terrain_quality_core.py",
     "scripts/inspect_m2_dem_terrain_quality_arcgis.py",
     "scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py",
@@ -338,6 +354,16 @@ def main() -> None:
     dem_terrain_review_bundle = json.loads((ROOT / "reviews/m2-dem-terrain-result/review-bundle.json").read_text(encoding="utf-8"))
     dem_terrain_review_contract = json.loads((ROOT / "reviews/m2-dem-terrain-result/review-contract.json").read_text(encoding="utf-8"))
     dem_terrain_review_blank = json.loads((ROOT / "reviews/m2-dem-terrain-result/blank-response.json").read_text(encoding="utf-8"))
+    orbit_proposal = json.loads((ROOT / "contracts/milestone-002-orbit-amendment-proposal.json").read_text(encoding="utf-8"))
+    orbit_receipt = json.loads((ROOT / "records/source-gates/m2-orbit-metadata-receipt.json").read_text(encoding="utf-8"))
+    orbit_manifest = json.loads((ROOT / "records/source-gates/m2-orbit-candidate-manifest.json").read_text(encoding="utf-8"))
+    orbit_gate = json.loads((ROOT / "records/source-gates/m2-orbit-source-gate.json").read_text(encoding="utf-8"))
+    orbit_intake = json.loads((ROOT / "contracts/m2-orbit-intake-candidate.json").read_text(encoding="utf-8"))
+    orbit_verification = json.loads((ROOT / "contracts/m2-orbit-offline-verification-candidate.json").read_text(encoding="utf-8"))
+    orbit_surface = json.loads((ROOT / "records/surface-receipts/m2-orbit-amendment-review.json").read_text(encoding="utf-8"))
+    orbit_bundle = json.loads((ROOT / "reviews/m2-orbit-amendment/review-bundle.json").read_text(encoding="utf-8"))
+    orbit_contract = json.loads((ROOT / "reviews/m2-orbit-amendment/review-contract.json").read_text(encoding="utf-8"))
+    orbit_blank = json.loads((ROOT / "reviews/m2-orbit-amendment/blank-response.json").read_text(encoding="utf-8"))
     expected_dem_source_order = ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
     dem_current_assets = dem_intake_active.get("assets", [])
     if [asset.get("extensions", {}).get("source_id") for asset in dem_current_assets] != expected_dem_source_order:
@@ -399,8 +425,10 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must clear the DEM proposal after exact activation")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
+        "contracts/milestone-002-orbit-amendment-proposal.json"
+    ]:
+        fail("project profile must expose only the pending orbit amendment proposal")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json"
     ]:
@@ -445,6 +473,8 @@ def main() -> None:
             fail(f"project profile must bind {approved_unit} to the exact DEM amendment approval")
     if profile_gates.get("M2-DEM-TERRAIN-RESULT-REVIEW", {}).get("authority_ref") != "reviews/m2-dem-terrain-result/review-contract.json":
         fail("project profile must expose the exact terrain-result human-review gate")
+    if profile_gates.get("M2-ORBIT-AMEND", {}).get("authority_ref") != "reviews/m2-orbit-amendment/review-contract.json":
+        fail("project profile must expose the exact orbit-amendment human-review gate")
     if profile.get("parallel_checkpoints") != [
         {
             "checkpoint_id": expected_dem_checkpoint,
@@ -456,10 +486,15 @@ def main() -> None:
             "authority_ref": "reviews/m2-dem-terrain-result/review-contract.json",
             "next_action": "Review bundle SHA-256 834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5 and approve, revise, or defer the terrain-only result; approval releases no vertical, radar, or scientific action.",
         },
+        {
+            "checkpoint_id": "M2-ORBIT-AMENDMENT-REVIEW",
+            "authority_ref": "reviews/m2-orbit-amendment/review-contract.json",
+            "next_action": "Review bundle SHA-256 ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1 and approve, revise, or defer the exact four-file restituted-orbit proposal; no orbit payload or precise substitution is authorized before exact lock and reconciliation.",
+        },
     ]:
         fail("project profile DEM parallel checkpoint differs")
-    if goal.get("active_amendments") != ["records/source-gates/m2-dem-amendment-approval.json"] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW"]:
-        fail("long-term goal does not expose the active DEM amendment checkpoint")
+    if goal.get("active_amendments") != ["records/source-gates/m2-dem-amendment-approval.json"] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-AMENDMENT-REVIEW"]:
+        fail("long-term goal does not expose the active DEM and pending orbit checkpoints")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -519,6 +554,87 @@ def main() -> None:
     validate_review_bundle("reviews/m2-activation/review-bundle.json", "reviews/m2-activation/review-contract.json")
     validate_review_bundle("reviews/m2-dem-amendment/review-bundle.json", "reviews/m2-dem-amendment/review-contract.json")
     validate_review_bundle("reviews/m2-dem-vertical-datum/review-bundle.json", "reviews/m2-dem-vertical-datum/review-contract.json")
+    validate_review_bundle("reviews/m2-orbit-amendment/review-bundle.json", "reviews/m2-orbit-amendment/review-contract.json")
+
+    expected_orbit_proposal_sha = "b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292"
+    expected_orbit_bundle_sha = "ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1"
+    if (
+        orbit_proposal.get("status") != "proposed_not_active"
+        or sha256("contracts/milestone-002-orbit-amendment-proposal.json") != expected_orbit_proposal_sha
+        or orbit_proposal.get("parent_contract_sha256") != sha256("contracts/milestone-002.json")
+        or orbit_proposal.get("parent_approval_sha256") != sha256("records/source-gates/m2-activation-approval.json")
+        or orbit_proposal.get("candidate_manifest_sha256") != sha256("records/source-gates/m2-orbit-candidate-manifest.json")
+        or orbit_proposal.get("metadata_receipt_sha256") != sha256("records/source-gates/m2-orbit-metadata-receipt.json")
+        or orbit_proposal.get("source_gate_sha256") != sha256("records/source-gates/m2-orbit-source-gate.json")
+        or orbit_proposal.get("authority", {}).get("mode") != "not_granted"
+    ):
+        fail("M2 orbit amendment proposal identity or non-authorizing boundary differs")
+    orbit_records = orbit_manifest.get("records", [])
+    orbit_source_ids = {item.get("source_id") for item in orbit_records}
+    orbit_bound_sentinel_ids = {
+        source_id for item in orbit_records for source_id in item.get("sentinel_source_ids", [])
+    }
+    if (
+        orbit_source_ids != {"M2-ORB-001", "M2-ORB-002", "M2-ORB-003", "M2-ORB-004"}
+        or orbit_bound_sentinel_ids != {f"M1-SRC-{index:03d}" for index in range(1, 7)}
+        or orbit_manifest.get("summary", {}).get("combined_content_length_bytes") != 2539715
+        or orbit_manifest.get("summary", {}).get("precise_covering_file_count_at_assessment") != 0
+        or any(item.get("orbit_type") != "AUX_RESORB" for item in orbit_records)
+    ):
+        fail("M2 orbit candidate manifest exact four-file boundary differs")
+    orbit_assertions = orbit_receipt.get("assertions", {})
+    if (
+        orbit_assertions.get("payload_bytes_requested") is not False
+        or orbit_assertions.get("authentication_used") is not False
+        or orbit_assertions.get("credential_values_read_or_recorded") is not False
+        or orbit_assertions.get("authority_created") is not False
+    ):
+        fail("M2 orbit metadata capture crossed its no-payload or no-authority boundary")
+    if orbit_gate.get("decision", {}).get("status") != "blocked" or any(
+        {criterion.get("id"): criterion.get("status") for criterion in source.get("criteria", [])}.get("scope-authority") != "unknown"
+        for source in orbit_gate.get("sources", [])
+    ):
+        fail("M2 orbit source gate must remain blocked only on exact scope authority")
+    if (
+        orbit_intake.get("status") != "candidate_not_active"
+        or orbit_intake.get("extensions", {}).get("scope_authority") != "not_granted"
+        or any(asset.get("state") != "not_authorized" for asset in orbit_intake.get("assets", []))
+        or orbit_verification.get("status") != "candidate_not_active"
+        or orbit_verification.get("authority", {}).get("mode") != "not_granted"
+        or orbit_verification.get("application_boundary", {}).get("arcgis_tool") != "ApplyOrbitCorrection"
+        or orbit_verification.get("application_boundary", {}).get("radar_pixel_processing_authorized_by_this_contract") is not False
+    ):
+        fail("M2 orbit candidate intake or verification controls are not safely gate-deferred")
+    expected_orbit_surface_bindings = {
+        "surface_sha256": sha256("docs/assets/m2-orbit-amendment-review.png"),
+        "candidate_manifest_sha256": sha256("records/source-gates/m2-orbit-candidate-manifest.json"),
+        "metadata_receipt_sha256": sha256("records/source-gates/m2-orbit-metadata-receipt.json"),
+        "source_gate_sha256": sha256("records/source-gates/m2-orbit-source-gate.json"),
+        "amendment_proposal_sha256": expected_orbit_proposal_sha,
+        "candidate_intake_sha256": sha256("contracts/m2-orbit-intake-candidate.json"),
+        "candidate_offline_verification_sha256": sha256("contracts/m2-orbit-offline-verification-candidate.json"),
+        "instructions_sha256": sha256("docs/M2_ORBIT_AMENDMENT_REVIEW.md"),
+        "renderer_sha256": sha256("scripts/render_m2_orbit_amendment_review.py"),
+    }
+    if (
+        orbit_surface.get("status") != "pass"
+        or orbit_surface.get("human_decision_count") != 0
+        or orbit_surface.get("dimensions_pixels") != {"width": 1800, "height": 2100}
+        or any(orbit_surface.get(key) != value for key, value in expected_orbit_surface_bindings.items())
+        or sha256("reviews/m2-orbit-amendment/review-bundle.json") != expected_orbit_bundle_sha
+        or orbit_bundle.get("candidate_identity") != "M2-ORBIT-AMENDMENT-PROPOSAL-SHA256:" + expected_orbit_proposal_sha
+        or orbit_contract.get("review_bundle", {}).get("manifest_sha256") != expected_orbit_bundle_sha
+        or orbit_blank.get("completed") is not False
+        or orbit_blank.get("reviewer") != {"attestation": False}
+        or len(orbit_blank.get("responses", [])) != 1
+        or orbit_blank["responses"][0] != {
+            "item_id": "M2-ORBIT-AMENDMENT-001",
+            "evidence_sha256": expected_orbit_bundle_sha,
+            "decision": None,
+            "notes": "",
+        }
+    ):
+        fail("M2 orbit review surface, bundle, contract, or blank response differs")
 
     expected_vertical_candidate = "M2-DEM-VERTICAL-DATUM-PROPOSAL-SHA256:" + sha256("contracts/m2-dem-vertical-datum-proposal.json")
     if (

@@ -1,0 +1,45 @@
+{
+  "contract_version": "human-review-contract-v1",
+  "template": false,
+  "review_id": "m2-orbit-amendment-review-001",
+  "response_schema_version": "nepal-m2-orbit-amendment-response-v1",
+  "workflow_authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-activation-approval.json",
+    "authorized_action_classes": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ],
+    "verified_at_utc": "2026-09-04T01:28:57Z",
+    "expires_at_utc": null,
+    "review_required": true,
+    "lock_authorized": true,
+    "reconcile_authorized": true,
+    "post_review_actions": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ]
+  },
+  "review_bundle": {
+    "bundle_id": "m2-orbit-amendment-review-bundle-001",
+    "manifest_sha256": "ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1",
+    "candidate_identity": "M2-ORBIT-AMENDMENT-PROPOSAL-SHA256:b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292",
+    "rendered_surface_verified": true
+  },
+  "allowed_decisions": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "required_attestation": true,
+  "max_notes_length": 2000,
+  "hash_prefix_length": 16,
+  "items": [
+    {
+      "item_id": "M2-ORBIT-AMENDMENT-001",
+      "evidence_sha256": "ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1"
+    }
+  ]
+}
