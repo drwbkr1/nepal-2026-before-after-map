@@ -4601,6 +4601,28 @@ def main() -> None:
     ):
         fail("EVID-0065 acquisition-progress portability correction differs")
 
+    acquisition_progress_ci_evidence = ledger_by_id.get("EVID-0066")
+    if (
+        not isinstance(acquisition_progress_ci_evidence, dict)
+        or acquisition_progress_ci_evidence.get("status") != "pass_repository_and_project_control_tests"
+        or acquisition_progress_ci_evidence.get("workflow") != "Validate project controls"
+        or acquisition_progress_ci_evidence.get("run_id") != 33900641522
+        or acquisition_progress_ci_evidence.get("head_sha") != "c73dab23bef6afd9a7b7afe3d78e265fd32c2196"
+        or acquisition_progress_ci_evidence.get("correction_sha256") != sha256("records/acquisition/acquisition-progress-windows-path-portability-correction.json")
+        or acquisition_progress_ci_evidence.get("verification") != {
+            "repository_validation": "pass",
+            "project_control_tests": "pass",
+            "workflow_conclusion": "success",
+        }
+        or acquisition_progress_ci_evidence.get("retained_failure", {}).get("run_id") != 33900195532
+        or acquisition_progress_ci_evidence.get("retained_failure", {}).get("conclusion") != "failure"
+        or acquisition_progress_ci_evidence.get("retained_failure", {}).get("reclassified") is not False
+        or acquisition_progress_ci_evidence.get("assertions", {}).get("external_custody_mutated_by_ci") is not False
+        or acquisition_progress_ci_evidence.get("assertions", {}).get("credential_values_available_to_ci") is not False
+        or acquisition_progress_ci_evidence.get("assertions", {}).get("scientific_result_established") is not False
+    ):
+        fail("EVID-0066 acquisition-progress Linux CI reverification differs")
+
     violations = []
     for relative in tracked_files():
         path = Path(relative)
