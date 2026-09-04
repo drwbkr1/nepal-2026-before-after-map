@@ -1,0 +1,502 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-TERRAIN-QUALITY-001",
+  "status": "pass_terrain_qa_only_vertical_datum_and_independent_accuracy_deferred",
+  "executed_at_utc": "2026-09-04T00:24:00Z",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced"
+  },
+  "bindings": {
+    "contract_ref": "config/qa/dem-terrain-quality-contract-attempt-003.json",
+    "contract_sha256": "e903117aba56e07c83e4b314ec613019f9e0d2b35f60222c03ca74a7c0a66f88",
+    "implementation_ref": "scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py",
+    "implementation_sha256": "819e62d9e55f8926565109d7958e147799deb3c214aca2c8009de8d3cd5ca32b",
+    "core_ref": "scripts/dem_terrain_quality_core.py",
+    "core_sha256": "58747b0c62b5ab66e3eeb932635e7a54ae5ead41b8ffa737a1897590ce33777d",
+    "active_intake_ref": "contracts/m2-dem-intake.json",
+    "active_intake_sha256": "db4329c6b10492d2c6985be528c5dceca13585736ee9f82fbf96e7f190ba92fa",
+    "dem_verification_summary_ref": "records/acquisition/dem-verification-summary.json",
+    "dem_verification_summary_sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef",
+    "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "published_control_commit": "439a750e2a4fb6318f4da063fa48eed748beddec",
+    "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+    "authority_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+    "candidate_receipt_ref": "scratch/dem-terrain-quality-attempt-003/candidate-receipt.json",
+    "candidate_receipt_sha256": "7fb0017e7b338ad86015b17bad78c7d4c86274718b367e2fcf50c86a2caf0f88",
+    "failed_attempt_001_ref": "records/surface-receipts/m2-dem-terrain-quality-attempt-001-failure.json",
+    "failed_attempt_001_sha256": "f5b3d6ddd244aaee66128ba874c821a03ca5ded2ba8b4c4768d46f27380c0740",
+    "failed_attempt_002_ref": "records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json",
+    "failed_attempt_002_sha256": "858413f1e88c6d25640738e49723c8562fc3fabea952adccd08b8d0a9ff89e63"
+  },
+  "source_inventory_before": [
+    {
+      "source_id": "M2-DEM-001",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+      "size_bytes": 45336691,
+      "sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a"
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+      "size_bytes": 44874244,
+      "sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194"
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+      "size_bytes": 41688284,
+      "sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc"
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+      "size_bytes": 38402839,
+      "sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7"
+    }
+  ],
+  "source_inventory_after": [
+    {
+      "source_id": "M2-DEM-001",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+      "size_bytes": 45336691,
+      "sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a"
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+      "size_bytes": 44874244,
+      "sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194"
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+      "size_bytes": 41688284,
+      "sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc"
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+      "size_bytes": 38402839,
+      "sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7"
+    }
+  ],
+  "tile_results": [
+    {
+      "source_id": "M2-DEM-001",
+      "evaluation": {
+        "status": "pass",
+        "failures": [],
+        "deferrals": [],
+        "metrics": {
+          "shape": [
+            3600,
+            3600
+          ],
+          "total_cell_count": 12960000,
+          "finite_cell_count": 12960000,
+          "nodata_or_nonfinite_cell_count": 0,
+          "minimum_m": 69.10433959960938,
+          "maximum_m": 2344.464111328125,
+          "mean_m": 422.0707610975107,
+          "standard_deviation_m": 380.3973711988985,
+          "zero_value_count": 0,
+          "exact_negative_32768_count": 0,
+          "local_curvature_max_abs_m": 28.929931640625,
+          "local_curvature_p999_abs_m": 10.43944660949731,
+          "local_curvature_above_defer_count": 0,
+          "local_curvature_above_defer_fraction": 0.0,
+          "exact_2x2_plateau_fraction": 0.007501311878411472
+        }
+      }
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "evaluation": {
+        "status": "pass",
+        "failures": [],
+        "deferrals": [],
+        "metrics": {
+          "shape": [
+            3600,
+            3600
+          ],
+          "total_cell_count": 12960000,
+          "finite_cell_count": 12960000,
+          "nodata_or_nonfinite_cell_count": 0,
+          "minimum_m": 86.5,
+          "maximum_m": 4461.53857421875,
+          "mean_m": 1096.3345799333167,
+          "standard_deviation_m": 748.506183375621,
+          "zero_value_count": 0,
+          "exact_negative_32768_count": 0,
+          "local_curvature_max_abs_m": 27.09394073486328,
+          "local_curvature_p999_abs_m": 11.214605438232581,
+          "local_curvature_above_defer_count": 0,
+          "local_curvature_above_defer_fraction": 0.0,
+          "exact_2x2_plateau_fraction": 0.0013495922619362406
+        }
+      }
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "evaluation": {
+        "status": "pass",
+        "failures": [],
+        "deferrals": [],
+        "metrics": {
+          "shape": [
+            3600,
+            3600
+          ],
+          "total_cell_count": 12960000,
+          "finite_cell_count": 12960000,
+          "nodata_or_nonfinite_cell_count": 0,
+          "minimum_m": 319.23883056640625,
+          "maximum_m": 8043.81494140625,
+          "mean_m": 3603.380856389453,
+          "standard_deviation_m": 1833.4499611740002,
+          "zero_value_count": 0,
+          "exact_negative_32768_count": 0,
+          "local_curvature_max_abs_m": 222.71160888671875,
+          "local_curvature_p999_abs_m": 12.672411743164275,
+          "local_curvature_above_defer_count": 0,
+          "local_curvature_above_defer_fraction": 0.0,
+          "exact_2x2_plateau_fraction": 0.0006723642245410858
+        }
+      }
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "evaluation": {
+        "status": "pass",
+        "failures": [],
+        "deferrals": [],
+        "metrics": {
+          "shape": [
+            3600,
+            3600
+          ],
+          "total_cell_count": 12960000,
+          "finite_cell_count": 12960000,
+          "nodata_or_nonfinite_cell_count": 0,
+          "minimum_m": 656.4984130859375,
+          "maximum_m": 7920.26953125,
+          "mean_m": 4594.101905229277,
+          "standard_deviation_m": 1014.2067300641613,
+          "zero_value_count": 0,
+          "exact_negative_32768_count": 0,
+          "local_curvature_max_abs_m": 539.9524230957031,
+          "local_curvature_p999_abs_m": 14.121789367675888,
+          "local_curvature_above_defer_count": 0,
+          "local_curvature_above_defer_fraction": 0.0,
+          "exact_2x2_plateau_fraction": 0.02719512173467345
+        }
+      }
+    }
+  ],
+  "seam_results": [
+    {
+      "seam_id": "SEAM-E85-N27",
+      "orientation": "west_east",
+      "first_source_id": "M2-DEM-001",
+      "second_source_id": "M2-DEM-002",
+      "boundary": "longitude 85 degrees east",
+      "evaluation": {
+        "status": "pass",
+        "failures": [],
+        "deferrals": [],
+        "metrics": {
+          "sample_count": 3600,
+          "seam_step_median_m": 0.13907623291015625,
+          "residual_signed_median_m": 0.07846450805664062,
+          "residual_abs_median_m": 1.394256591796875,
+          "residual_abs_p95_m": 7.7510498046874945,
+          "residual_abs_p99_m": 13.04629394531246,
+          "residual_abs_max_m": 20.65338134765625,
+          "residual_above_level_count": 0,
+          "residual_above_level_fraction": 0.0,
+          "defer_residual_level_m": 100.0
+        }
+      }
+    },
+    {
+      "seam_id": "SEAM-E85-N28",
+      "orientation": "west_east",
+      "first_source_id": "M2-DEM-003",
+      "second_source_id": "M2-DEM-004",
+      "boundary": "longitude 85 degrees east",
+      "evaluation": {
+        "status": "pass",
+        "failures": [],
+        "deferrals": [],
+        "metrics": {
+          "sample_count": 3600,
+          "seam_step_median_m": 1.48388671875,
+          "residual_signed_median_m": 0.0673828125,
+          "residual_abs_median_m": 2.05810546875,
+          "residual_abs_p95_m": 9.54964599609375,
+          "residual_abs_p99_m": 15.53531005859373,
+          "residual_abs_max_m": 58.1905517578125,
+          "residual_above_level_count": 0,
+          "residual_above_level_fraction": 0.0,
+          "defer_residual_level_m": 100.0
+        }
+      }
+    },
+    {
+      "seam_id": "SEAM-N28-E84",
+      "orientation": "south_north",
+      "first_source_id": "M2-DEM-001",
+      "second_source_id": "M2-DEM-003",
+      "boundary": "latitude 28 degrees north",
+      "evaluation": {
+        "status": "pass",
+        "failures": [],
+        "deferrals": [],
+        "metrics": {
+          "sample_count": 3600,
+          "seam_step_median_m": 1.222564697265625,
+          "residual_signed_median_m": -0.0332489013671875,
+          "residual_abs_median_m": 2.2829971313476562,
+          "residual_abs_p95_m": 10.047325134277344,
+          "residual_abs_p99_m": 15.780485534667964,
+          "residual_abs_max_m": 27.0535888671875,
+          "residual_above_level_count": 0,
+          "residual_above_level_fraction": 0.0,
+          "defer_residual_level_m": 100.0
+        }
+      }
+    },
+    {
+      "seam_id": "SEAM-N28-E85",
+      "orientation": "south_north",
+      "first_source_id": "M2-DEM-002",
+      "second_source_id": "M2-DEM-004",
+      "boundary": "latitude 28 degrees north",
+      "evaluation": {
+        "status": "pass",
+        "failures": [],
+        "deferrals": [],
+        "metrics": {
+          "sample_count": 3600,
+          "seam_step_median_m": 1.590850830078125,
+          "residual_signed_median_m": -0.095550537109375,
+          "residual_abs_median_m": 2.87115478515625,
+          "residual_abs_p95_m": 11.271810913085934,
+          "residual_abs_p99_m": 17.619587402343747,
+          "residual_abs_max_m": 42.086669921875,
+          "residual_above_level_count": 0,
+          "residual_above_level_fraction": 0.0,
+          "defer_residual_level_m": 100.0
+        }
+      }
+    }
+  ],
+  "slope_evaluation": {
+    "status": "pass",
+    "failures": [],
+    "deferrals": [],
+    "metrics": {
+      "finite_cell_count": 8296583,
+      "minimum_degrees": 0.0,
+      "maximum_degrees": 88.2261734008789,
+      "mean_degrees": 28.60236681296498,
+      "p50_degrees": 28.963844299316406,
+      "p95_degrees": 49.44488449096679,
+      "p99_degrees": 58.29256195068359,
+      "above_defer_level_count": 150,
+      "above_defer_level_fraction": 1.8079732342821135e-05
+    }
+  },
+  "quantitative_status": "pass",
+  "arcgis_outputs": {
+    "root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003",
+    "geodatabase": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.gdb",
+    "native_mosaic": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.gdb\\DEM_Native_Mosaic",
+    "projected_dem": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.gdb\\DEM_EGM2008_Orthometric_UTM45N",
+    "aoi_dem": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.gdb\\DEM_AOI_EGM2008_Orthometric",
+    "slope": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.gdb\\Slope_Degrees",
+    "hillshade": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.gdb\\Hillshade",
+    "study_areas": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.gdb\\StudyAreas",
+    "native_tile_seams": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.gdb\\NativeTileSeams",
+    "manifest": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\derived-output-manifest.json",
+    "manifest_sha256": "6baf1ec47f4bc27c9dc2ab3501637690d717673e63d9e0f5036e1b2dc2ed1620",
+    "excluded_transient_lock_files": [
+      "Nepal_2026_DEM_Terrain_QA.gdb/_gdb.PROFESSIONAL.24120.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/_gdb.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/fras_aux_Hillshade.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/fras_aux_Slope_Degrees.PROFESSIONAL.24120.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/fras_aux_Slope_Degrees.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/fras_blk_Hillshade.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/fras_blk_Slope_Degrees.PROFESSIONAL.24120.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/fras_blk_Slope_Degrees.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/fras_bnd_Hillshade.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/fras_bnd_Slope_Degrees.PROFESSIONAL.24120.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/fras_bnd_Slope_Degrees.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/fras_ras_Hillshade.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/fras_ras_Slope_Degrees.PROFESSIONAL.24120.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/fras_ras_Slope_Degrees.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/Hillshade.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/NativeTileSeams.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/Slope_Degrees.PROFESSIONAL.24120.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/Slope_Degrees.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/StudyAreas.PROFESSIONAL.9592.25876.sr.lock",
+      "Nepal_2026_DEM_Terrain_QA.gdb/VAT_Hillshade.PROFESSIONAL.9592.25876.sr.lock"
+    ],
+    "arcgis_project": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.aprx",
+    "png_export": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.png",
+    "pdf_export": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.pdf",
+    "map_name": "DEM Terrain QA",
+    "layout_name": "DEM Terrain QA",
+    "map_spatial_reference_wkid": 32645,
+    "layer_names": [
+      "NATIVE TILE SEAMS",
+      "APPROVED STUDY AREAS",
+      "AOI SLOPE DEGREES",
+      "AOI HILLSHADE \u2014 EGM2008 ORTHOMETRIC SOURCE"
+    ],
+    "layout_elements": [
+      "Legend",
+      "North Arrow",
+      "Verified Numeric Scale",
+      "Claim Boundary",
+      "Subtitle",
+      "Title",
+      "Terrain QA Map Frame"
+    ],
+    "map_scale": 530801.858044945
+  },
+  "projection_check": {
+    "wkid": 32645,
+    "mean_cell_width_m": 30.0,
+    "mean_cell_height_m": 30.0,
+    "vertical_transformation_applied": false,
+    "elevation_value_semantics": "EGM2008 orthometric metres"
+  },
+  "visual_review": {
+    "status": "pass",
+    "reviewed_at_utc": "2026-09-04T00:35:22Z",
+    "reviewer_role": "model_visual_inspection",
+    "review_surfaces": [
+      {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.png",
+        "sha256": "39c63525171ae7cd24b540577079467c7efbaedb4aae959086e3f4d1a38ad811",
+        "method": "original PNG inspected directly"
+      },
+      {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem-terrain-quality\\attempt-003\\Nepal_2026_DEM_Terrain_QA.pdf",
+        "sha256": "139e4a4f0f5a02018c824cbfc2f85ddcf3b1d1c4b8d477dd7936efc4d0f74d0b",
+        "method": "PDF rendered to one 180 dpi page and inspected"
+      }
+    ],
+    "criteria": [
+      {
+        "criterion": "no blank or clipped AOI",
+        "status": "pass"
+      },
+      {
+        "criterion": "no checkerboard, stripe, or rectangular fill artifact",
+        "status": "pass"
+      },
+      {
+        "criterion": "no visible step aligned to a native tile boundary within the mapped AOI",
+        "status": "pass"
+      },
+      {
+        "criterion": "terrain morphology is spatially coherent at the map scale",
+        "status": "pass"
+      },
+      {
+        "criterion": "AOI outlines, seam lines, EPSG:32645, source-height semantics, and claim boundary are legible",
+        "status": "pass"
+      }
+    ],
+    "findings": [
+      "The mapped AOI is present and unclipped in both exports.",
+      "No checkerboard, stripe, rectangular fill artifact, or visible seam-aligned terrain step is apparent at the review scale.",
+      "Terrain morphology is spatially coherent and the AOI outlines, seams, CRS, EGM2008 height semantics, and claim boundary are legible.",
+      "The legend is dense but remains legible.",
+      "This was model visual inspection of exported surfaces, not owner or independent expert review."
+    ]
+  },
+  "claim_boundary": {
+    "source_byte_identity_reverified": true,
+    "source_custody_unchanged": true,
+    "stable_output_manifest_reconciled": true,
+    "terrain_quantitative_screen_passed": true,
+    "terrain_visual_screen_passed": true,
+    "terrain_accuracy_against_ground_or_alternate_dem_established": false,
+    "vertical_datum_route_established": false,
+    "human_or_independent_expert_terrain_review_established": false,
+    "sentinel_processing_executed": false,
+    "satellite_change_established": false,
+    "scientific_result_established": false,
+    "authority_created": false
+  },
+  "limitations": [
+    "The projected DEM retains EGM2008 orthometric elevation values; horizontal reprojection is not vertical conversion.",
+    "The fixed thresholds screen for gross artifacts and seam discontinuities but do not validate elevation accuracy against ground control or an independent DEM.",
+    "Visual review at the exported map scale cannot establish local elevation accuracy or exclude every sub-map-scale artifact.",
+    "No completed owner or independent expert review of the derived terrain surface is recorded.",
+    "All DEM-derived rasters, the geodatabase, APRX, PNG, and PDF remain in external non-Git custody.",
+    "No Sentinel product was processed and no satellite-change, interpretation, attribution, or emergency-guidance claim was created."
+  ],
+  "recorded_at_utc": "2026-09-04T00:35:22Z",
+  "claim": "All four exact Copernicus GLO-30 source rasters, four native tile seams, the EPSG:32645 30 metre derivative, the AOI slope surface, and the ArcGIS PNG/PDF review surfaces passed the fixed terrain-quality screen. This establishes gross-artifact and map-surface fitness only; vertical-datum routing, independent elevation accuracy, radar readiness, satellite change, interpretation, and attribution remain unresolved.",
+  "output_manifest_reconciliation": {
+    "status": "pass",
+    "verified_at_utc": "2026-09-04T00:35:22Z",
+    "manifest_sha256": "6baf1ec47f4bc27c9dc2ab3501637690d717673e63d9e0f5036e1b2dc2ed1620",
+    "listed_stable_file_count": 189,
+    "post_exit_stable_file_count": 189,
+    "stable_total_bytes": 520668653,
+    "missing_file_count": 0,
+    "unexpected_file_count": 0,
+    "size_mismatch_count": 0,
+    "sha256_mismatch_count": 0,
+    "post_exit_lock_file_count": 0,
+    "source_inventory_before_equals_after": true,
+    "source_identities_independently_reverified": true
+  },
+  "key_exports": {
+    "arcgis_project": {
+      "relative_path": "Nepal_2026_DEM_Terrain_QA.aprx",
+      "size_bytes": 22836,
+      "sha256": "08829c97eeb831758573fbfc0146f09e5d1a39d342f313f5adab4ba2c6facc83"
+    },
+    "png": {
+      "relative_path": "Nepal_2026_DEM_Terrain_QA.png",
+      "size_bytes": 1923513,
+      "sha256": "39c63525171ae7cd24b540577079467c7efbaedb4aae959086e3f4d1a38ad811"
+    },
+    "pdf": {
+      "relative_path": "Nepal_2026_DEM_Terrain_QA.pdf",
+      "size_bytes": 1653824,
+      "sha256": "139e4a4f0f5a02018c824cbfc2f85ddcf3b1d1c4b8d477dd7936efc4d0f74d0b"
+    }
+  },
+  "retained_attempt_history": [
+    {
+      "attempt_id": "attempt-001",
+      "status": "failed_pre_source_open_bad_external_root",
+      "receipt_ref": "records/surface-receipts/m2-dem-terrain-quality-attempt-001-failure.json",
+      "receipt_sha256": "f5b3d6ddd244aaee66128ba874c821a03ca5ded2ba8b4c4768d46f27380c0740"
+    },
+    {
+      "attempt_id": "attempt-002",
+      "status": "failed_transient_arcgis_lock_during_output_inventory",
+      "receipt_ref": "records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json",
+      "receipt_sha256": "858413f1e88c6d25640738e49723c8562fc3fabea952adccd08b8d0a9ff89e63"
+    },
+    {
+      "attempt_id": "attempt-003",
+      "status": "pass_terrain_qa_only",
+      "candidate_receipt_ref": "scratch/dem-terrain-quality-attempt-003/candidate-receipt.json",
+      "candidate_receipt_sha256": "7fb0017e7b338ad86015b17bad78c7d4c86274718b367e2fcf50c86a2caf0f88"
+    }
+  ],
+  "next_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW"
+}

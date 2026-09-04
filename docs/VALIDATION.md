@@ -93,7 +93,7 @@ The full repository suite currently passes 164 tests, and `scripts/check_project
 
 The live preflight test suite validates exact STAC and object-header comparisons, redirect refusal, remote-identity drift, no-payload evidence, empty-custody binding, and the transition to `M2-DEM-ACQUISITION`. `EVID-0032` retains the initial checker failure caused by its old preflight-checkpoint expectation; updating that expectation did not change the live evidence or external custody.
 
-The current full repository suite passes 190 tests, and `scripts/check_project.py` validates 207 required files after adding the attempt-002 failure, attempt-003 wrapper and contract, and attempt-003 readiness receipt. Project-control and milestone validators pass, and the M2 DEM vertical-datum bundle validator reports `ready_for_handoff` for all seven exact artifacts. Local reconciliation re-hashed all four promoted DEM files totaling 170,302,058 bytes. GitHub Actions run `33809208304` remains a failed historical result because its Linux runner lacked the external Windows custody root; the corrected portable test validates repository receipts without external access while production reconciliation still defaults to strict external checking.
+The current full repository suite passes 190 tests, and `scripts/check_project.py` validates 210 required files after adding the successful attempt-003 terrain receipt and its readiness input and decision. Project-control and milestone validators pass, and the M2 DEM vertical-datum bundle validator reports `ready_for_handoff` for all seven exact artifacts. Local reconciliation re-hashed all four promoted DEM files totaling 170,302,058 bytes. GitHub Actions run `33809208304` remains a failed historical result because its Linux runner lacked the external Windows custody root; the corrected portable test validates repository receipts without external access while production reconciliation still defaults to strict external checking.
 
 The generic intake-contract validator separately reports four invalid attempt identifiers because the completed DEM transfer IDs contain uppercase RFC 3339 `T` and `Z` characters and its identifier grammar is lowercase-only. The immutable attempt receipts, checkpoint paths, and external event history are not rewritten. This retained schema-validation failure does not change the project-specific byte and custody passes or approve downstream processing; future transfer runners must correct identifier generation before use.
 
@@ -145,7 +145,7 @@ ArcGIS Pro 3.7.1 Advanced and Spatial Analyst have also exercised the same core 
 
 The Sentinel-2 processing contract also has a separate portable core and ArcGIS-native synthetic exercise. The adapter parses baseline 05.12 scaling metadata, preserves DN zero as NoData, applies the declared SCL exclusions, scales five bands to BOA reflectance, and checks NDVI, MNDWI, and NBR. Run the portable checks with `python -m unittest tests.test_optical_processing_core -v`; run the ArcGIS adapter using the new-attempt command in `docs/OPTICAL_BASELINE_PROCESSING_PROTOCOL.md`. Neither result is real-pixel evidence.
 
-## DEM terrain-quality predeclaration validation
+## DEM terrain-quality validation
 
 The four exact promoted DEM hashes, four native seams, quantitative thresholds, EPSG:32645 processing, external-only outputs, and mandatory visual review are fixed before the first real terrain-quality run:
 
@@ -161,6 +161,16 @@ The first public terrain-control run, `33819299553`, passed the repository check
 ArcGIS attempt-001 is also retained as a failed result. It stopped during strict resolution of the first source path before source open, byte hashing, pixel read, output-root creation, or metric calculation. The attempt-002 correction is validated as a path-only change: it adds the active `custody` segment, moves to a new exclusive output, and preserves the exact input assets, hashes, sizes, seams, metrics, thresholds, processing method, and no-vertical-transform boundary.
 
 Attempt-002 is retained as a second failed result. It read all four exact sources, completed the ArcGIS raster and map creation, reverified unchanged source custody, and then failed before manifest and receipt creation while trying to hash a transient `.lock` file. The post-exit failed directory contains 189 stable files totaling 520,653,986 bytes, but its in-process metrics were not persisted and no terrain decision is admitted. Attempt-003 changes only inventory handling: basename-suffixed `.lock` files are listed as transient exclusions while every stable file remains hashed at a new exclusive output path.
+
+Attempt-003 completed successfully under the published correction. All four tile evaluations, four native seam evaluations, the EPSG:32645 30 metre projection check, and the AOI slope evaluation passed. A separate post-exit pass re-hashed 189 of 189 stable files totaling 520,668,653 bytes, found no missing, unexpected, size-mismatched, hash-mismatched, or remaining `.lock` file, and independently reverified the four source hashes. The PNG and a 180 dpi rendering of the one-page PDF passed the five declared visual criteria. Key external identities are APRX `08829c97eeb831758573fbfc0146f09e5d1a39d342f313f5adab4ba2c6facc83`, PNG `39c63525171ae7cd24b540577079467c7efbaedb4aae959086e3f4d1a38ad811`, PDF `139e4a4f0f5a02018c824cbfc2f85ddcf3b1d1c4b8d477dd7936efc4d0f74d0b`, and manifest `6baf1ec47f4bc27c9dc2ab3501637690d717673e63d9e0f5036e1b2dc2ed1620`.
+
+The dataset-readiness audit can be reproduced with:
+
+```powershell
+python C:\Users\drewb\.codex\skills\audit-dataset-readiness\scripts\audit_readiness.py audit --input records\readiness\m2-dem-terrain-readiness-input.json --output <new-exclusive-output>.json
+```
+
+The retained decision is `defer`, not `pass`: source/terms, custody, structure, coverage, and reproducibility pass, while vertical and independent elevation uncertainty, pair-specific radar fitness, and owner or independent expert result review remain unresolved. The audit created no authority and released no downstream action. Do not overwrite the retained decision file when independently rerunning the utility.
 
 The SAFE materialization control has a separate portable suite:
 

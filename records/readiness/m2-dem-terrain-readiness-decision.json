@@ -1,0 +1,152 @@
+{
+  "audit_result_version": "dataset-readiness-result-v1",
+  "audit_id": "nepal-m2-dem-terrain-readiness-001",
+  "candidate_id": "nepal-m2-dem-terrain-attempt-003",
+  "candidate_manifest_sha256": "6baf1ec47f4bc27c9dc2ab3501637690d717673e63d9e0f5036e1b2dc2ed1620",
+  "audit_input_sha256": "701f195ee7c74780b0602a08e9f6553320780edd5194af8d3407b35b8bb289a4",
+  "decision": "defer",
+  "pass_evidence": [
+    {
+      "gate_id": "coverage-and-balance",
+      "category": "coverage_and_balance",
+      "required": true,
+      "evidence_refs": [
+        "records/acquisition/dem-verification-summary.json",
+        "config/aoi/approved-study-areas-epsg32645.json"
+      ],
+      "finding": "All three approved AOIs fall within the four-tile footprint and the source tiles contain 51,840,000 finite cells with no nodata or nonfinite cells.",
+      "remediation": ""
+    },
+    {
+      "gate_id": "provenance-and-custody",
+      "category": "provenance_and_custody",
+      "required": true,
+      "evidence_refs": [
+        "contracts/m2-dem-intake.json",
+        "records/acquisition/dem-verification-summary.json",
+        "records/surface-receipts/m2-dem-terrain-quality.json"
+      ],
+      "finding": "All source and derived identities are hash-bound, source inventories match before and after processing, 189 stable outputs reconcile to the external manifest, and source and derived custody remain outside Git.",
+      "remediation": ""
+    },
+    {
+      "gate_id": "reproducibility",
+      "category": "reproducibility",
+      "required": true,
+      "evidence_refs": [
+        "config/qa/dem-terrain-quality-contract-attempt-003.json",
+        "scripts/inspect_m2_dem_terrain_quality_arcgis_attempt_003.py",
+        "scripts/dem_terrain_quality_core.py",
+        "records/surface-receipts/m2-dem-terrain-quality.json"
+      ],
+      "finding": "The successful run is bound to exact sources, ArcGIS Pro 3.7.1, versioned processing code, fixed thresholds, an exclusive output path, and a complete stable-output manifest.",
+      "remediation": ""
+    },
+    {
+      "gate_id": "schema-and-quality",
+      "category": "schema_and_quality",
+      "required": true,
+      "evidence_refs": [
+        "records/acquisition/dem-verification-summary.json",
+        "records/surface-receipts/m2-dem-terrain-quality.json"
+      ],
+      "finding": "Each 3600 by 3600 float raster is readable and finite, all four fixed tile checks and four seam checks pass, and the projected 30 metre EPSG:32645 slope surface passes the fixed quantitative screen.",
+      "remediation": ""
+    },
+    {
+      "gate_id": "source-and-terms",
+      "category": "source_and_terms",
+      "required": true,
+      "evidence_refs": [
+        "records/source-gates/m2-dem-amendment-approval.json",
+        "contracts/m2-dem-intake.json"
+      ],
+      "finding": "The four exact public Copernicus GLO-30 tiles and the accepted hash-bound COP-DEM-GLO-30 license are bound to the approved terrain and radar-support purpose.",
+      "remediation": ""
+    }
+  ],
+  "block_evidence": [],
+  "defer_evidence": [
+    {
+      "gate_id": "evaluation-design",
+      "category": "evaluation_design",
+      "required": true,
+      "evidence_refs": [
+        "config/qa/dem-terrain-quality-contract-attempt-003.json",
+        "records/surface-receipts/m2-dem-terrain-quality.json"
+      ],
+      "finding": "The predeclared artifact screen passed, but no independent DEM or ground-control comparison establishes vertical accuracy for the intended radar use.",
+      "remediation": "Define and execute a fit-for-purpose independent accuracy assessment without tuning the already completed terrain screen."
+    },
+    {
+      "gate_id": "human-review",
+      "category": "human_review",
+      "required": true,
+      "evidence_refs": [
+        "records/source-gates/m2-dem-amendment-approval.json",
+        "records/surface-receipts/m2-dem-terrain-quality.json"
+      ],
+      "finding": "The owner approved the bounded acquisition and processing authority, and exported surfaces passed model visual inspection, but no completed owner or independent expert terrain-result review is recorded.",
+      "remediation": "Present the exact hash-bound APRX, PNG, PDF, metrics, limitations, and vertical-datum dependency for a completed owner or expert result review if promotion requires it."
+    },
+    {
+      "gate_id": "radar-input-fitness",
+      "category": "leakage_and_split_fitness",
+      "required": true,
+      "evidence_refs": [
+        "config/qa/radar-baseline-processing-contract.json",
+        "records/surface-receipts/m2-dem-terrain-quality.json"
+      ],
+      "finding": "The DEM has not been applied to either Sentinel-1 pair, so pair-specific terrain correction behavior, layover and shadow exclusions, and stable-reference registration are unknown.",
+      "remediation": "After the vertical gate and exact Sentinel input checks pass, process the approved radar pairs independently and retain pair-specific masks, registration metrics, and failures."
+    },
+    {
+      "gate_id": "uncertainty-and-exclusions",
+      "category": "uncertainty_and_exclusions",
+      "required": true,
+      "evidence_refs": [
+        "records/surface-receipts/m2-dem-terrain-quality.json",
+        "contracts/m2-dem-vertical-datum-proposal.json"
+      ],
+      "finding": "Failed attempts and transient-file exclusions are explicit, but the vertical-datum route and independent elevation uncertainty remain unresolved.",
+      "remediation": "Complete the separately hash-bound vertical-datum review and obtain fit-for-purpose independent elevation evidence before promoting the terrain candidate beyond the gross-artifact screen."
+    }
+  ],
+  "blocking_required_gate_ids": [],
+  "deferred_required_gate_ids": [
+    "evaluation-design",
+    "human-review",
+    "radar-input-fitness",
+    "uncertainty-and-exclusions"
+  ],
+  "count_results": [
+    {
+      "check_id": "verified-source-tile-count",
+      "observed": 4,
+      "operator": ">=",
+      "threshold": 4,
+      "on_failure": "defer",
+      "satisfied": true,
+      "can_authorize_training": false
+    },
+    {
+      "check_id": "passing-native-seam-count",
+      "observed": 4,
+      "operator": ">=",
+      "threshold": 4,
+      "on_failure": "defer",
+      "satisfied": true,
+      "can_authorize_training": false
+    }
+  ],
+  "failed_blocking_count_checks": [],
+  "failed_deferred_count_checks": [],
+  "count_thresholds_can_establish_readiness_alone": false,
+  "training_authority": "inherited",
+  "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+  "authorized_next_actions": [],
+  "training_authorized": false,
+  "training_authorized_by_this_audit": false,
+  "training_authorization_reason": "Dataset-readiness evidence did not create training authority.",
+  "next_action": "Gather the named missing evidence or authority, then rerun the audit."
+}

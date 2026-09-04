@@ -4,7 +4,7 @@
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
-- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles promoted and structurally verified outside Git; the eight Sentinel products remain unattempted
+- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; the eight Sentinel products remain unattempted
 - **Long-term goal:** Active
 - **Checkpoints:** `M2-AUTHENTICATION-REFERENCE`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW`
 
@@ -20,6 +20,7 @@ This project is building a reproducible, ArcGIS-ready before/after evidence pack
 - fixed pixel-readiness rules cover AOI coverage, optical masks, radar masks, grid alignment, and registration before real product access;
 - portable and ArcGIS-native synthetic tests exercise pass, block, and defer outcomes without creating a real-pixel claim;
 - three independent candidate pair routes are predeclared: ascending radar, descending radar, and RUM optical.
+- the four-tile terrain surface passed the fixed tile, seam, slope, projection, stable-manifest, and exported-map screens without resolving vertical datum or elevation accuracy.
 
 ## M2 activation and live preflight
 
@@ -68,15 +69,19 @@ Two ArcGIS GeoTIFF attempts for `M2-DEM-001` are retained as **FAIL** wrapper re
 
 ArcGIS Pro 3.7.1 then passed one append-only receipt for each exact tile: the corrected third attempt for `M2-DEM-001` and first attempts for `M2-DEM-002` through `M2-DEM-004`. Each is a 3600-by-3600, single-band F32 raster in EPSG:4326 with an exact promoted SHA-256 and unchanged custody inventory. Full-raster scanning found 51,840,000 finite non-NoData cells and zero NoData or nonfinite cells. Because every approved AOI bound lies within the continuous four-tile footprint, structural fitness and valid AOI coverage pass. Summary SHA-256 `97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef` advances the parallel checkpoint to `M2-DEM-VERTICAL-DATUM-REVIEW`.
 
-The candidate controls remain immutable historical evidence. Full-tile finite coverage does not establish freedom from void-fill artifacts, seams, anomalous terrain, or suitability for terrain correction. The production radar chain remains deferred on two explicit dependencies: EGM2008 orthometric DEM heights do not exactly match ArcGIS's documented EGM96 geoid correction, and updated Sentinel orbit files are separate auxiliary products outside current authority. Approval does not resolve either scientific dependency.
+The candidate controls remain immutable historical evidence. The later fixed terrain screen establishes no gross void-fill, seam, projection, or map-surface artifact at its declared thresholds and review scale, but does not establish independent elevation accuracy or vertical-datum fitness. The production radar chain remains deferred on two explicit dependencies: EGM2008 orthometric DEM heights do not exactly match ArcGIS's documented EGM96 geoid correction, and updated Sentinel orbit files are separate auxiliary products outside current authority. Approval does not resolve either scientific dependency.
 
 An exact vertical-datum review packet is ready. Official ArcGIS documentation supports an EGM2008 one-minute transformation through the optional ArcGIS Coordinate Systems Data `world1x1_vert` component. Local ArcGIS Pro 3.7.1 inspection found the built-in EGM96 grid but no `Dataset_egm2008-1.grd` or usable EGM2008 transformation over the approved AOIs. Proposal SHA-256 `bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065` recommends converting verified copies to WGS 84 ellipsoidal height and then using `NONE`; bundle SHA-256 `9b40e81df766ea866c5bff51cdbc4d83e7e7da6a554fb1709fc553d8221bebbc` contains zero human decisions. My Esri sign-in, license acceptance, component download or installation, and UAC remain owner-controlled and are not authorized by the packet.
 
 An independent terrain-quality gate is predeclared before real terrain metrics. Contract SHA-256 `fdee6dbaaafee7c010c7ef77fe6d7121164686f4b26edcb8ca8f0d150d1d1fa2` binds the four exact promoted hashes, four native seam pairs, fixed artifact and slope thresholds, a 30 metre EPSG:32645 map, one exclusive external output attempt, and mandatory visual review. The route preserves EGM2008 orthometric values with no vertical transform and permits no Sentinel processing or DEM-derived raster publication. Five synthetic decision tests pass; no real DEM pixel, derived output, terrain conclusion, vertical-datum decision, or scientific claim was created by readiness.
 
-ArcGIS attempt-001 began at `2026-09-04T00:01:33Z` and failed during strict path resolution before opening any DEM: the first control joined `dem/...` directly under the external project root instead of its active `custody` segment. No attempt directory or candidate receipt was created, but the failure is retained and that path will not be reused. Attempt-002 contract SHA-256 `434f8ff1d73a1d726e6aca47db78c2ef969fe9f395f03a3673d9564d569f9553` corrects only the custody root and declares a new exclusive output. It preserves every source hash, seam, metric, threshold, processing choice, vertical boundary, and scientific limitation; no real terrain metric has yet been observed under the corrected control.
+ArcGIS attempt-001 began at `2026-09-04T00:01:33Z` and failed during strict path resolution before opening any DEM: the first control joined `dem/...` directly under the external project root instead of its active `custody` segment. No attempt directory or candidate receipt was created, but the failure is retained and that path will not be reused. Attempt-002 contract SHA-256 `434f8ff1d73a1d726e6aca47db78c2ef969fe9f395f03a3673d9564d569f9553` corrected only the custody root and declared a new exclusive output. At that checkpoint it preserved every source hash, seam, metric, threshold, processing choice, vertical boundary, and scientific limitation without admitting a terrain result.
 
 Attempt-002 began at `2026-09-04T00:11:30Z`, read and rehashed all four sources, created 189 stable external files totaling 520,653,986 bytes, and then failed while the manifest inventory tried to open a transient ArcGIS geodatabase lock. The in-process metrics were not persisted, no candidate receipt exists, and no terrain result is admitted. Attempt-003 contract SHA-256 `e903117aba56e07c83e4b314ec613019f9e0d2b35f60222c03ca74a7c0a66f88` excludes only basename-suffixed `.lock` files from the stable manifest, hashes all stable files, and declares a new exclusive output while preserving the scientific method.
+
+Attempt-003 completed at `2026-09-04T00:24:00Z`. All four tiles, all four native seams, the EPSG:32645 30 metre output, and the AOI slope distribution passed the predeclared quantitative rules. Post-exit reconciliation matched all 189 stable files by path, size, and SHA-256 with no unexpected, missing, changed, or remaining lock file; the four custody rasters also re-hashed exactly. The ArcGIS Pro project and one-page PNG/PDF map passed model visual inspection for clipping, fill patterns, seam-aligned steps, terrain coherence, and required labels. The result receipt SHA-256 is `9663c261de37c77fd96896d1fbb37c4c3a970c47966661908673db880e640dd7`; the external manifest SHA-256 is `6baf1ec47f4bc27c9dc2ab3501637690d717673e63d9e0f5036e1b2dc2ed1620`.
+
+The formal readiness audit remains **DEFER**. Source/terms, custody, structure, AOI coverage, and reproducibility pass. Vertical and independent elevation uncertainty, pair-specific radar fitness, and completed owner or independent expert review remain deferred. The audit created no authority and released no downstream action; the checkpoint remains `M2-DEM-VERTICAL-DATUM-REVIEW`.
 
 The first public terrain-control run failed because NumPy was absent from the Linux runner; the next workflow edit failed before creating any job. A later correction-evidence commit failed because its receipt hash was computed from Windows CRLF bytes before Git normalized the committed blob to LF. All three runs are retained. The corrected workflow pins `numpy==2.5.1`, and GitHub Actions run `33819458096` passed the 199-file repository check and all 190 tests. The LF-normalized additive correction receipt does not change the terrain thresholds or any DEM input.
 
@@ -117,7 +122,6 @@ Checkpoint derivation is also portable. Repository-only tests do not require the
 - inspect real pixels, masks, AOI coverage, baselines, and EPSG:32645 registration.
 - review and explicitly resolve the DEM vertical-datum route before Sentinel-1 terrain correction, without silently selecting `GEOID` or `NONE`;
 - if the exact EGM2008 route is approved, wait for the owner to install the matching ArcGIS Coordinate Systems Data component before any conversion attempt;
-- review void-fill, seam, artifact, and terrain plausibility before treating the structurally valid DEM as processing-fit.
 
 ## Outside the active authority or still unproven
 
