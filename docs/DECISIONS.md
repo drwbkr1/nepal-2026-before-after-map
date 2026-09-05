@@ -343,3 +343,11 @@
 **Reason:** The recovery-001 process disappeared before terminal evidence, leaving a second incomplete partial and an unknown cause. A detached supervisor with nonsecret heartbeat and terminal records makes console closure survivable and absent-worker state independently reconcilable while keeping the token out of command lines, environment variables, files, logs, and repository evidence.
 
 **Status:** The exact response is locked and reconciled. Local implementation validation is passing. A real token handoff and transfer remain blocked until the exact commit passes public CI, the publication gate is recorded, activation succeeds, and the final no-payload preflight passes. Any recovery-002 failure is terminal and cannot be retried automatically.
+
+## D-057 — Reconcile the successful recovery separately from the stopped continuation
+
+**Decision:** Record `M1-SRC-004` as promoted and container-verified only through its successful recovery-002 identity, preserve both earlier failed partials, and retain the detached supervisor's later `continuation_live_preflight` terminal event as a separate failure. Do not restart the supervisor or request another product under the completed run. Prepare a new continuation-only owner review that explicitly forbids another `M1-SRC-004` request.
+
+**Reason:** The byte-zero recovery completed with exact length, local SHA-256, provider MD5, ZIP CRC, and required SAFE-member checks. The same supervisor then emitted a generic terminal failure before any `M1-SRC-005` attempt, event, staging path, destination, or payload request existed. Because its exception boundary did not retain a safe underlying category, the exact cause is unknown and cannot be reconstructed from later checks.
+
+**Status:** Outcome reconciliation SHA-256 `f806d86e6c956e648f4458f4710699d4480e2b0abfb2cf95e8777f3de281b3f4` updates the active intake to four promoted and four authorized products while preserving both failed partials and the failed supervisor terminal state. Continuation proposal SHA-256 `d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1` and review bundle SHA-256 `018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192` are ready with a blank, unattested response and zero decisions. No continuation implementation, token entry, payload request, retry, or pixel action is currently authorized.

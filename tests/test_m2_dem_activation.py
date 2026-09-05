@@ -140,9 +140,14 @@ class M2DemActivationTests(unittest.TestCase):
             ],
         )
         primary_intake = load("contracts/m2-intake.json")
+        continuation_review = next(
+            (unit for unit in self.milestone["units"] if unit["id"] == "M2-SENTINEL-CONTINUATION-001-REVIEW"),
+            None,
+        )
         expected_primary_checkpoint = (
             "M2-ACQUISITION-REVIEW"
             if any(asset.get("state") == "failed" for asset in primary_intake["assets"])
+            or continuation_review is not None and continuation_review.get("status") == "ready"
             else "M2-ACQUISITION-IN-PROGRESS"
         )
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], expected_primary_checkpoint)

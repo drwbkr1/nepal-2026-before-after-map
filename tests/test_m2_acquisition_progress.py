@@ -66,6 +66,13 @@ class M2AcquisitionProgressTests(unittest.TestCase):
         self.assertEqual(result["state_counts"], {"authorized": 8})
         self.assertFalse(result["external_state_verified"])
 
+    def test_current_recovery_002_reconciliation_state_passes(self) -> None:
+        current = json.loads((ROOT / "contracts/m2-intake.json").read_text(encoding="utf-8"))
+        result = validate_progress(current, BASELINE, PLAN, root=ROOT)
+        self.assertEqual(result["status"], "pass", result["errors"])
+        self.assertEqual(result["state_counts"], {"authorized": 4, "promoted": 4})
+        self.assertEqual(result["attempt_count"], 5)
+
     def test_immutable_product_identity_drift_fails(self) -> None:
         current = copy.deepcopy(BASELINE)
         current["assets"][0]["extensions"]["provider_product_id"] = "different"

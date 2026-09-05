@@ -1,0 +1,48 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-REVIEW-SURFACE-001",
+  "verified_at_utc": "2026-09-05T00:48:00Z",
+  "status": "pass_blank_review_surface",
+  "artifact": {
+    "path": "docs/assets/m2-sentinel-continuation-001-review.png",
+    "sha256": "91d7327cafdc0a2a403288616f339f4d4820f95dc18e37ab1f434537a8a1e139",
+    "width_px": 1800,
+    "height_px": 1900,
+    "format": "PNG",
+    "contains_third_party_pixels": false
+  },
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-sentinel-continuation-001-proposal.json",
+    "proposal_sha256": "d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1",
+    "outcome_reconciliation_ref": "records/acquisition/sentinel-recovery-002-supervisor-reconciliation-001.json",
+    "outcome_reconciliation_sha256": "f806d86e6c956e648f4458f4710699d4480e2b0abfb2cf95e8777f3de281b3f4",
+    "render_script_ref": "scripts/render_m2_sentinel_continuation_001_review.py",
+    "render_script_sha256": "d83a0e5a062144a48cc17872c5a4a0fe6f3f447b1b189714bf75f5ffe5a7a817"
+  },
+  "validation": {
+    "visual_inspection": "pass",
+    "title_and_proposal_hash_visible": true,
+    "recovery_success_identity_visible": true,
+    "continuation_stop_boundary_visible": true,
+    "zero_continuation_attempts_visible": true,
+    "unknown_cause_limitation_visible": true,
+    "continuation_only_scope_visible": true,
+    "proof_before_token_or_payload_visible": true,
+    "approval_scope_visible": true,
+    "prohibited_scope_visible": true,
+    "decision_options_visible": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "blank_state_verified": true,
+    "human_decision_count": 0,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "This text-only surface contains no completed human decision.",
+    "Visual inspection verifies layout and blank state, not the correctness of a future reviewer decision.",
+    "The surface contains no Sentinel or DEM pixels."
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-CONTAINER-RECOVERY-002-m1-src-004-recovery-002-20260905t002925z-cc1fe1e9",
+  "scanned_at_utc": "2026-09-05T00:36:05Z",
+  "status": "pass_container_only",
+  "source_id": "M1-SRC-004",
+  "attempt_id": "m1-src-004-recovery-002-20260905t002925z-cc1fe1e9",
+  "bindings": {
+    "verification_contract_ref": "contracts/m2-offline-verification.json",
+    "verification_contract_sha256": "f3fa9d6911469ce072e76781d28ba012be31b59a1033a0553bca9b43b97b0643",
+    "recovery_002_contract_ref": "contracts/m2-sentinel-recovery-002.json",
+    "recovery_002_contract_sha256_at_scan": "1ab7f2307d9ac3e5ffabf066e463a30c9eb984a1fdd32873890404119784869d",
+    "recovery_002_approval_ref": "records/source-gates/m2-sentinel-recovery-002-approval.json",
+    "recovery_002_approval_sha256": "ab0333e6a7f460c150de7f064faac617082f4a627034932fd4ad187f164dde34",
+    "transfer_receipt_ref": "records/acquisition/recovery-attempts/m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
+    "transfer_receipt_sha256": "bdba2d107d13150e9a050d2f558478fdca3fb58ad21c1003a364f702b491886f",
+    "original_failed_partial_sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66",
+    "recovery_001_failed_partial_sha256": "c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac"
+  },
+  "assertions": {
+    "original_failed_partial_unchanged": true,
+    "recovery_001_failed_partial_unchanged": true
+  },
+  "activity": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "archive_extraction_performed": false,
+    "source_archive_mutation_performed": false,
+    "retained_failed_partial_mutation_performed": false
+  },
+  "result": {
+    "source_id": "M1-SRC-004",
+    "archive_relative_path": "products/m1-src-004/S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip",
+    "status": "pass_container_only",
+    "local_size_bytes": 1732332897,
+    "local_sha256": "a606cac063cc23e60a623f020192fc097d327f3dafadf1115802b2a458eaceab",
+    "local_md5": "25c895490c9b786507152513cc701911",
+    "member_count": 26,
+    "total_uncompressed_bytes": 1732323929,
+    "checks": {
+      "catalog_size": "pass",
+      "provider_md5": "pass",
+      "local_sha256": "pass",
+      "member:manifest.safe": "pass",
+      "member:annotation/*-vv-*.xml": "pass",
+      "member:annotation/*-vh-*.xml": "pass",
+      "member:annotation/calibration/calibration-*-vv-*.xml": "pass",
+      "member:annotation/calibration/calibration-*-vh-*.xml": "pass",
+      "member:annotation/calibration/noise-*-vv-*.xml": "pass",
+      "member:annotation/calibration/noise-*-vh-*.xml": "pass",
+      "member:measurement/*-vv-*.tiff": "pass",
+      "member:measurement/*-vh-*.tiff": "pass",
+      "zip_crc": "pass"
+    },
+    "errors": [],
+    "pixel_usability_established": false,
+    "eligible_for_post_container_qa": true
+  },
+  "pixel_usability_established": false,
+  "scientific_fitness_established": false,
+  "next_gate": "success_only_original_product_continuation",
+  "limitations": [
+    "A passing receipt establishes exact local archive identity, provider-MD5 agreement, ZIP integrity, SAFE-root identity, and required member presence only.",
+    "Provider BLAKE3 remains catalog metadata unless a separately verified local BLAKE3 implementation is introduced and bound.",
+    "Member names and CRC do not establish readable rasters, valid pixels, AOI coverage, masks, registration, or scientific fitness.",
+    "Each product receipt must bind the current promoted intake identity and may not replace an existing receipt."
+  ]
+}

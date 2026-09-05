@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-RECOVERY-002-PUBLICATION-GATE-001",
+  "verified_at_utc": "2026-09-04T21:38:18Z",
+  "status": "pass_public_controls_verified_before_recovery_002",
+  "bindings": {
+    "approval_sha256": "ab0333e6a7f460c150de7f064faac617082f4a627034932fd4ad187f164dde34",
+    "review_reconciliation_sha256": "1ab8ebe5ea62da89d8d0ca2d80c9614a80a05a020295f4ec978e6f380be526d9",
+    "activation_script_sha256": "a0b20bc7a804e74503a3f60a4ccadd0988e43cb64ef687fda0ef39464e5124f9",
+    "core_sha256": "d3fb0d42e806da2f44f00f26181cb994dd6a3f0ea9422761f75c0205f124a387",
+    "broker_sha256": "255748ab0b04a0ad855dec0d265a337f42e9ea6263bb28ed78490fe3eae5baf7",
+    "supervisor_sha256": "7d35aa417269b4020163fd2b32e5edfca38eee93da3be502d737e4cfd444449f",
+    "recovery_runner_sha256": "5969add75cfa5cd6c1feec7fe9961f78cb33fd42eb1612b08436add8fc9866d7",
+    "continuation_runner_sha256": "f0746020f7fe87b9b578fcb32548ff442ca47a8c72cf1fdb5ddbb163b3abbc78",
+    "container_verifier_sha256": "4acbb0a07823fa18d59ae22f32c58d941f4033d1403a2f99f4fb136a710f1700",
+    "final_preflight_sha256": "d6e56fc9c9335f4dfa9d705b4143d6a35847e9c0fbc160fad50dc77e4260d57d",
+    "supervisor_reconciler_sha256": "ceb3a3bc07e5fe05e160f1839df651371d97b9ad3baad9610b8ce661ffbfdf03",
+    "success_reconciler_sha256": "8a78772314600df510e0b91d694bf948cb3834904a1c860d91c9647a71a12ca9",
+    "tests_sha256": "22742864d9619d90fe3bd976eb39e76d2212f55ca3ff22b700947814cae8fe71",
+    "implementation_readiness_sha256": "8b2844000c645d30b456a056ba9bb02ce9badcdb99141331528fc918aedfb1c7",
+    "implementation_readiness_recorder_sha256": "e5b75fbfd873d75ee12510c2f3369936dbc20a334a03204391a4e47b19777f7b"
+  },
+  "github_actions": {
+    "workflow": "Validate project controls",
+    "run_id": 33921973385,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33921973385",
+    "head_sha": "59fa8f0c298de2fab7f5e6747e70bec3b0ad1726",
+    "conclusion": "success"
+  },
+  "assertions": {
+    "remote_ref_verified": true,
+    "public_ci_passed": true,
+    "real_recovery_started": false,
+    "network_requests_performed_by_this_record": false,
+    "credential_values_read_or_recorded": false,
+    "authority_created": false
+  },
+  "next_gate": "activate recovery-002 and pass the deterministic no-payload preflight before opening the broker"
+}

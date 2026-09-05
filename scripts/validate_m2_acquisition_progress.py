@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 INITIAL_ACTIVE_INTAKE_SHA256 = "a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7ff9aff58ab3cb716c"
 INITIAL_SNAPSHOT_REF = "records/acquisition/active-intake-initial-snapshot.json"
 TOKEN_REFERENCE = "CDSE_ACCESS_TOKEN"
+RECOVERY_TOKEN_REFERENCE = "anonymous_pipe_single_use_memory_only"
 HEX64 = re.compile(r"[0-9a-f]{64}")
 UTC_TIMESTAMP = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
 STATIC_ASSET_KEYS = (
@@ -32,6 +33,12 @@ PROGRESS_EXTENSION_KEYS = {
     "successful_attempt_receipt_sha256",
     "provider_md5_verified",
     "provider_blake3_locally_verified",
+    "container_receipt",
+    "container_receipt_sha256",
+    "satisfied_by_recovery_002",
+    "recovery_002_contract_ref",
+    "recovery_002_contract_sha256_at_recovery_success",
+    "retained_failed_attempt_count",
 }
 
 
@@ -55,7 +62,10 @@ def safe_repository_receipt(root: Path, value: str) -> Path | None:
     if (
         posix.is_absolute()
         or any(part in {"", ".", ".."} for part in value.split("/"))
-        or posix.parent != PurePosixPath("records/acquisition/attempts")
+        or posix.parent not in {
+            PurePosixPath("records/acquisition/attempts"),
+            PurePosixPath("records/acquisition/recovery-attempts"),
+        }
         or posix.suffix.casefold() != ".json"
     ):
         return None
@@ -117,11 +127,21 @@ def validate_attempt(
 ) -> tuple[list[str], dict[str, Any] | None]:
     errors: list[str] = []
     attempts = asset.get("attempts")
-    if not isinstance(attempts, list) or len(attempts) != 1:
-        return [f"{source_id} must have exactly one append-only attempt after acquisition starts"], None
-    attempt = attempts[0]
+    recovery_promoted = asset.get("extensions", {}).get("satisfied_by_recovery_002") is True
+    expected_count = 2 if recovery_promoted else 1
+    if not isinstance(attempts, list) or len(attempts) != expected_count:
+        return [f"{source_id} must have exactly {expected_count} append-only attempt(s) for its current route"], None
+    for historical in attempts[:-1]:
+        if (
+            not isinstance(historical, dict)
+            or historical.get("outcome") != "failed"
+            or not isinstance(historical.get("completed_at"), str)
+            or not UTC_TIMESTAMP.fullmatch(historical["completed_at"])
+        ):
+            errors.append(f"{source_id} historical failed attempt differs")
+    attempt = attempts[-1]
     if not isinstance(attempt, dict):
-        return [f"{source_id} attempt is not an object"], None
+        return [f"{source_id} current attempt is not an object"], None
     attempt_id = attempt.get("attempt_id")
     if not isinstance(attempt_id, str) or not attempt_id.startswith(f"{asset['asset_id']}-"):
         errors.append(f"{source_id} attempt ID is outside its asset namespace")
@@ -130,11 +150,15 @@ def validate_attempt(
     extensions = attempt.get("extensions", {})
     if extensions.get("source_id") != source_id:
         errors.append(f"{source_id} attempt source identity differs")
-    if extensions.get("credential_reference") != TOKEN_REFERENCE:
+    expected_reference = RECOVERY_TOKEN_REFERENCE if recovery_promoted else TOKEN_REFERENCE
+    if extensions.get("credential_reference") != expected_reference:
         errors.append(f"{source_id} attempt credential reference differs")
     if extensions.get("credential_value_recorded") is not False:
         errors.append(f"{source_id} attempt records or ambiguously handles a credential value")
-    if extensions.get("resume") is not False:
+    if recovery_promoted:
+        if extensions.get("restart_offset_bytes") != 0 or extensions.get("range_or_resume_used") is not False:
+            errors.append(f"{source_id} recovery attempt invents transfer resumption")
+    elif extensions.get("resume") is not False:
         errors.append(f"{source_id} attempt invents transfer resumption")
     if not isinstance(extensions.get("catalog_response_sha256"), str) or not HEX64.fullmatch(extensions["catalog_response_sha256"]):
         errors.append(f"{source_id} attempt catalog response identity is invalid")
@@ -185,9 +209,13 @@ def validate_progress(
     verify_external: bool = False,
 ) -> dict[str, Any]:
     errors = forbidden_secret_keys(current)
-    if {key: value for key, value in current.items() if key != "assets"} != {
-        key: value for key, value in baseline.items() if key != "assets"
-    }:
+    current_root = {key: value for key, value in current.items() if key != "assets"}
+    baseline_root = {key: value for key, value in baseline.items() if key != "assets"}
+    current_status = current_root.get("extensions", {}).get("status")
+    if current_status == "active_four_promoted_four_authorized_continuation_review_required":
+        current_root = json.loads(json.dumps(current_root))
+        current_root["extensions"]["status"] = baseline_root.get("extensions", {}).get("status")
+    if current_root != baseline_root:
         errors.append("active intake root controls differ from the immutable initial snapshot")
     baseline_assets = baseline.get("assets", [])
     current_assets = current.get("assets", [])
@@ -262,8 +290,9 @@ def validate_progress(
             attempt_errors, receipt = validate_attempt(asset=asset, source_id=source_id, root=root)
             errors.extend(attempt_errors)
             attempts = asset.get("attempts", [])
-            if attempts and isinstance(attempts[0], dict) and isinstance(attempts[0].get("attempt_id"), str):
-                attempt_ids.append(attempts[0]["attempt_id"])
+            for attempt in attempts:
+                if isinstance(attempt, dict) and isinstance(attempt.get("attempt_id"), str):
+                    attempt_ids.append(attempt["attempt_id"])
 
         if state == "staging":
             if asset.get("failure") is not None or not null_observations(asset.get("observed")):
@@ -301,7 +330,7 @@ def validate_progress(
             if receipt is None:
                 errors.append(f"{source_id} promoted state lacks a readable successful receipt")
             elif (
-                receipt.get("event") != "transfer_succeeded"
+                receipt.get("event") not in {"transfer_succeeded", "recovery_002_transfer_succeeded"}
                 or receipt.get("local_sha256") != observed.get("promoted_sha256")
                 or receipt.get("local_size_bytes") != observed.get("promoted_size_bytes")
                 or receipt.get("provider_md5") != providers.get("MD5")
@@ -334,7 +363,9 @@ def validate_progress(
                     errors.append(f"{source_id} zero-byte failure has unexpected staging content")
             elif state == "promoted":
                 observed = asset.get("observed", {})
-                if staging.exists() or not destination.is_file():
+                recovered = extensions.get("satisfied_by_recovery_002") is True
+                retained_original = recovered and staging.is_file() and staging.stat().st_size == 561_593_598 and sha256_path(staging) == "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66"
+                if (staging.exists() and not retained_original) or not destination.is_file():
                     errors.append(f"{source_id} promoted state does not match external paths")
                 elif destination.stat().st_size != observed.get("promoted_size_bytes") or sha256_path(destination) != observed.get("promoted_sha256"):
                     errors.append(f"{source_id} promoted external bytes differ from the intake identity")

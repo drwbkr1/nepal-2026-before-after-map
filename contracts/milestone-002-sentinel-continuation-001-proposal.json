@@ -1,0 +1,128 @@
+{
+  "proposal_version": "1.0",
+  "proposal_id": "NEPAL-M2-SENTINEL-CONTINUATION-PROPOSAL-001",
+  "prepared_at_utc": "2026-09-05T00:46:00Z",
+  "status": "proposed_not_authorized",
+  "trigger": {
+    "checkpoint": "M2-ACQUISITION-REVIEW",
+    "recovery_outcome_reconciliation_ref": "records/acquisition/sentinel-recovery-002-supervisor-reconciliation-001.json",
+    "recovery_outcome_reconciliation_sha256": "f806d86e6c956e648f4458f4710699d4480e2b0abfb2cf95e8777f3de281b3f4",
+    "recovered_source_id": "M1-SRC-004",
+    "recovery_attempt_id": "m1-src-004-recovery-002-20260905t002925z-cc1fe1e9",
+    "recovery_transfer_status": "succeeded",
+    "recovery_container_status": "pass_container_only",
+    "supervisor_terminal_status": "failed",
+    "supervisor_terminal_phase": "continuation_live_preflight",
+    "supervisor_terminal_code": "unexpected_supervisor_failure",
+    "exact_failure_cause_established": false,
+    "continuation_attempt_count": 0,
+    "continuation_payload_request_count": 0,
+    "automatic_retry_authorized": false
+  },
+  "current_verified_state": {
+    "promoted_and_container_verified_source_ids": [
+      "M1-SRC-001",
+      "M1-SRC-002",
+      "M1-SRC-003",
+      "M1-SRC-004"
+    ],
+    "authorized_unattempted_source_ids": [
+      "M1-SRC-005",
+      "M1-SRC-006",
+      "M1-SRC-008",
+      "M1-SRC-010"
+    ],
+    "retained_failed_partial_count": 2,
+    "m1_src_004_recovery_reconciled": true,
+    "m1_src_005_staging_event_and_destination_paths_absent": true,
+    "credential_value_recorded": false,
+    "pixel_usability_established": false,
+    "scientific_fitness_established": false
+  },
+  "observed_control_gap": {
+    "description": "The detached supervisor caught a continuation-preflight exception outside the recovery-specific error class and reduced it to unexpected_supervisor_failure without preserving a sanitized exception category.",
+    "effect": "The exact cause cannot be reconstructed from the terminal evidence even though the stop boundary and absence of a continuation attempt are verifiable.",
+    "prohibited_inference": "A later passing read-only source check does not prove what failed at the recorded terminal time."
+  },
+  "proposed_continuation": {
+    "mode": "continuation_only_detached_supervised_worker",
+    "source_ids_in_exact_order": [
+      "M1-SRC-005",
+      "M1-SRC-006",
+      "M1-SRC-008",
+      "M1-SRC-010"
+    ],
+    "recovery_source_ids": [],
+    "m1_src_004_transfer_permitted": false,
+    "maximum_real_attempts_per_source": 1,
+    "stop_on_first_transfer_or_container_failure": true,
+    "secret_transport": "single_use_anonymous_pipe_memory_only",
+    "implementation_controls": [
+      "create a new continuation-only broker and detached-supervisor identity that cannot call the recovery-002 transfer path",
+      "classify approved acquisition-control exceptions by their existing nonsecret code and classify all other exceptions without recording exception messages, tracebacks, URLs containing credentials, or credential values",
+      "write append-only nonsecret supervisor start, heartbeat, per-source phase, and terminal evidence outside Git",
+      "prove synthetically that a continuation preflight failure produces its exact safe control code and no product attempt, staging payload, or destination",
+      "prove synthetically that an unexpected exception produces a generic terminal code without its message or synthetic credential",
+      "prove the source allowlist and order, one-attempt-per-source ceiling, stop-on-first-failure rule, no M1-SRC-004 request, exclusive staging, redirect refusal, path containment, exact length and checksum checks, and atomic no-replace promotion",
+      "publish the exact implementation and tests, verify the remote commit, and require successful public CI before activation, credential entry, or a payload request"
+    ],
+    "activation_and_real_run_preconditions": [
+      "the exact proposal and review bundle have one completed approving owner response that is locked and reconciled",
+      "the exact implementation commit exists on origin/main and its public CI run succeeds",
+      "the successful M1-SRC-004 recovery, its container receipt, both retained partials, and the stopped supervisor terminal evidence match their bound identities",
+      "all four continuation assets remain authorized with zero attempts and absent staging, event, and destination paths",
+      "the current normalized CDSE legal section, structured modification date, OData documentation, token documentation, and Sentinel Legal Notice match their accepted controls",
+      "each exact provider UUID, product name, online state, catalog length, and provider checksum matches the approved source manifest",
+      "a fresh owner-controlled access token is supplied only through the tested in-memory broker channel"
+    ],
+    "per_source_controls": [
+      "perform the live legal and exact catalog preflight before that source's payload request",
+      "stream only the complete exact product from byte zero without Range or resume semantics into a new exclusive staging path",
+      "compute local SHA-256 and provider MD5 while streaming",
+      "require exact catalog length and provider MD5 before atomic no-replace promotion",
+      "rehash the promoted archive and run the existing offline ZIP and SAFE container verification without extraction",
+      "proceed to the next exact source only after the current source has both a successful transfer receipt and pass_container_only receipt"
+    ],
+    "completion_release": [
+      "reconcile the four exact continuation assets into the active intake only from their successful attempt and container receipts",
+      "mark the eight-product transfer and container-verification cohort complete only if all eight exact products are promoted and container-verified",
+      "return to separately governed materialization and pixel-readiness gates; do not infer pixel usability or scientific fitness"
+    ],
+    "failure_policy": "Any continuation transfer, verification, identity, legal, credential-custody, path, or control failure is terminal for the run, preserves all evidence, stops before later products, and requires a new exact owner review. No automatic retry is authorized."
+  },
+  "approval_would_authorize": [
+    "implement and synthetically validate only the exact continuation-only detached-worker correction described here",
+    "publish and independently verify the exact implementation through a successful public-CI gate",
+    "perform a final no-payload preflight and one owner token handoff through the tested in-memory broker",
+    "attempt each of M1-SRC-005, M1-SRC-006, M1-SRC-008, and M1-SRC-010 at most once, in that order, stopping on the first failure",
+    "verify and promote each exact product only when every current rights, identity, secret-custody, length, checksum, path, interruption, and container control passes",
+    "reconcile successful continuation receipts into the existing eight-product intake"
+  ],
+  "approval_would_not_authorize": [
+    "transfer, retry, replace, delete, modify, or reverify M1-SRC-004 beyond read-only identity checks",
+    "resume or reuse any partial, staging path, attempt identity, event, receipt, or supervisor identity",
+    "place a token in a command line, environment variable, file, repository record, log, event, heartbeat, exception message, or traceback",
+    "retry any continuation source or continue to later sources after a failure",
+    "change product identity, order, observation time, event role, sensor route, destination, source manifest, or provider",
+    "accept terms, create, recover, or modify an account, change MFA, incur cost, or disclose credentials",
+    "acquire substitute imagery, additional products, DEM data, or orbit files",
+    "perform SAFE materialization, pixel decoding, baseline processing, terrain correction, registration, change mapping, attribution, or scientific publication"
+  ],
+  "human_gate": {
+    "review_required": true,
+    "item_id": "M2-SENTINEL-CONTINUATION-001",
+    "allowed_decisions": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "required_attestation": true
+  },
+  "limitations": [
+    "The exact cause of the stopped continuation preflight is unknown and this proposal does not retroactively infer it.",
+    "The corrected exception classification improves future evidence but cannot recover the missing exception category from the completed run.",
+    "A fresh token or transfer can fail; no automatic retry is included.",
+    "Container success would establish archive identity and structural integrity only, not readable or usable pixels.",
+    "This proposal creates no authority until the exact review bundle is approved, locked, and reconciled and the later publication and preflight gates pass."
+  ]
+}

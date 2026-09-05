@@ -82,7 +82,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         unit_by_id = {unit["id"]: unit for unit in self.milestone["units"]}
         self.assertEqual(unit_by_id["M2-ORBIT-AMEND"]["status"], "complete")
         self.assertEqual(unit_by_id["M2-ORBIT-PREFLIGHT"]["status"], "complete")
-        self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["status"], "blocked_retained_failure_review")
+        self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["status"], "deferred")
         self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"], "required")
         self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["milestone_dependency_m2_verify"], "not_satisfied")
         self.assertTrue(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["orbit_custody_initialized"])

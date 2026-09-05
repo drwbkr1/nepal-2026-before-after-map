@@ -30,6 +30,10 @@ CHECKPOINTS = {
         "next_action": "Run the offline container verifier for every promoted product and preserve any blocked archive. Do not treat promoted bytes as usable pixels.",
     },
 }
+CONTINUATION_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-ACQUISITION-REVIEW",
+    "next_action": "Review exact Sentinel continuation-001 bundle 018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192 and proposal d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1; do not implement, request a token, or acquire another product before a completed owner decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -45,6 +49,26 @@ def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
     if state_counts.get("promoted") == 8:
         return dict(CHECKPOINTS["container"])
     raise ValueError("acquisition state counts cannot determine a safe checkpoint")
+
+
+def current_continuation_review_required(root: Path, state_counts: dict[str, int]) -> bool:
+    if state_counts != {"authorized": 4, "promoted": 4}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        blank = load(root / "reviews/m2-sentinel-continuation-001/blank-response.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-SENTINEL-CONTINUATION-001-REVIEW", {})
+    return bool(
+        review.get("status") == "ready"
+        and review.get("human_gate") is True
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and review.get("gates", {}).get("continuation_authorized") is False
+        and blank.get("completed") is False
+        and blank.get("reviewer", {}).get("attestation") is False
+    )
 
 
 def candidate_controls(
@@ -91,7 +115,11 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        checkpoint = derive_checkpoint(progress["state_counts"])
+        checkpoint = (
+            dict(CONTINUATION_REVIEW_CHECKPOINT)
+            if current_continuation_review_required(ROOT, progress["state_counts"])
+            else derive_checkpoint(progress["state_counts"])
+        )
     except ValueError as exc:
         print(json.dumps({"status": "blocked_ambiguous_checkpoint", "error": str(exc), "progress": progress}, indent=2))
         return 12
@@ -103,8 +131,7 @@ def main() -> int:
         current_profile_checkpoint.get("checkpoint_id") == checkpoint["checkpoint_id"]
         and current_profile_checkpoint.get("expected_branch") == "main"
         and current_profile_checkpoint.get("expected_head") is None
-        and isinstance(current_profile_checkpoint.get("next_action"), str)
-        and bool(current_profile_checkpoint["next_action"].strip())
+        and current_profile_checkpoint.get("next_action") == checkpoint["next_action"]
         and goal.get("current_checkpoint") == candidate_goal["current_checkpoint"]
     )
     output_refs: dict[str, str] = {}

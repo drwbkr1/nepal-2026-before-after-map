@@ -223,12 +223,12 @@
         "unavailable_reason": "CDSE catalog metadata records content length plus MD5 and BLAKE3, not an upstream SHA-256 or an authenticated transfer length. Capture transfer identity after activation and compute local SHA-256 before promotion."
       },
       "observed": {
-        "staged_sha256": null,
-        "staged_size_bytes": null,
-        "promoted_sha256": null,
-        "promoted_size_bytes": null
+        "staged_sha256": "a606cac063cc23e60a623f020192fc097d327f3dafadf1115802b2a458eaceab",
+        "staged_size_bytes": 1732332897,
+        "promoted_sha256": "a606cac063cc23e60a623f020192fc097d327f3dafadf1115802b2a458eaceab",
+        "promoted_size_bytes": 1732332897
       },
-      "state": "failed",
+      "state": "promoted",
       "attempts": [
         {
           "attempt_id": "m1-src-004-20260904t043930z-ac125c11",
@@ -243,12 +243,24 @@
             "credential_value_recorded": false,
             "resume": false
           }
+        },
+        {
+          "attempt_id": "m1-src-004-recovery-002-20260905t002925z-cc1fe1e9",
+          "started_at": "2026-09-05T00:29:25Z",
+          "completed_at": "2026-09-05T00:36:05Z",
+          "outcome": "succeeded",
+          "extensions": {
+            "source_id": "M1-SRC-004",
+            "catalog_response_sha256": "be211b4b3624521742a13bc62fa761f80d45af3baf94809779583684c136605e",
+            "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-sentinel-recovery-002\\attempt-events\\m1-src-004-recovery-002\\m1-src-004-recovery-002-20260905t002925z-cc1fe1e9-started.json",
+            "credential_reference": "anonymous_pipe_single_use_memory_only",
+            "credential_value_recorded": false,
+            "restart_offset_bytes": 0,
+            "range_or_resume_used": false
+          }
         }
       ],
-      "failure": {
-        "code": "transferred_size_mismatch",
-        "recorded_at": "2026-09-04T04:42:29Z"
-      },
+      "failure": null,
       "superseded_by": null,
       "extensions": {
         "source_id": "M1-SRC-004",
@@ -268,7 +280,17 @@
           }
         ],
         "event_role": "after",
-        "sensor_route": "radar"
+        "sensor_route": "radar",
+        "successful_attempt_receipt": "records/acquisition/recovery-attempts/m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
+        "successful_attempt_receipt_sha256": "bdba2d107d13150e9a050d2f558478fdca3fb58ad21c1003a364f702b491886f",
+        "container_receipt": "records/acquisition/container-verification/m1-src-004-m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
+        "container_receipt_sha256": "3ce5c27a801bbc9ea4379faa8dcf382b63caa15841dc2a3b4aa1a0ec960db10d",
+        "provider_md5_verified": true,
+        "provider_blake3_locally_verified": false,
+        "satisfied_by_recovery_002": true,
+        "recovery_002_contract_ref": "contracts/m2-sentinel-recovery-002.json",
+        "recovery_002_contract_sha256_at_recovery_success": "1ab7f2307d9ac3e5ffabf066e463a30c9eb984a1fdd32873890404119784869d",
+        "retained_failed_attempt_count": 2
       }
     },
     {
@@ -461,7 +483,7 @@
     }
   ],
   "extensions": {
-    "status": "active_authorized_preflight_passed_custody_initialized",
+    "status": "active_four_promoted_four_authorized_continuation_review_required",
     "project_root_basis": "parent_of_repository",
     "source_plan_ref": "records/acquisition-plan.json",
     "source_plan_sha256": "6261dc61061cb962f22163755047f080e309ed2d746cdcdd61e6cf61d7ec2a8d",

@@ -95,6 +95,17 @@ The live preflight test suite validates exact STAC and object-header comparisons
 
 The current full repository suite passes 219 tests, and `scripts/check_project.py` validates 258 required files after adding the locked orbit approval, activation, fresh preflight, preserved custody-initialization failure and correction, completed empty custody, guarded transfer/EOF-verification controls, the retained active-intake schema failure and correction, and the retained stale activation-label finding and correction. Project-control and milestone validators pass. The two still-pending DEM review bundles report `ready_for_handoff`; the orbit bundle remains immutable historical review evidence whose exact decision has been locked, reconciled, and activated. Local reconciliation re-hashed all four promoted DEM files totaling 170,302,058 bytes. GitHub Actions run `33809208304` remains a failed historical result because its Linux runner lacked the external Windows custody root; the corrected portable test validates repository receipts without external access while production reconciliation still defaults to strict external checking.
 
+## Recovery-002 outcome and continuation review validation — 2026-09-05
+
+The single approved recovery-002 archive passed exact transfer and container checks, while the supervisor's later pre-attempt continuation failure remains separately retained. The active-intake validator now recognizes the versioned recovery receipt root, two-attempt append-only history, in-memory credential reference, and preserved original partial without weakening the original route. The checkpoint derivation also recognizes the exact blank continuation review instead of treating four promoted and four authorized assets as an unattended transfer state.
+
+- `python -m unittest discover -s tests -v`: 294 tests pass.
+- `python scripts/check_project.py`: 415 required files, JSON controls, and Git artifact boundaries pass.
+- `validate_project_control.py`: valid with active inherited authority.
+- `validate_milestone.py`: valid; `M2-SENTINEL-CONTINUATION-001-REVIEW` is the sole ready human gate.
+- `review_response.py self-test`: pass.
+- `prepare_review_bundle.py`: bundle `018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192` is valid and ready for handoff with zero decisions.
+
 The generic intake-contract validator separately reports four invalid attempt identifiers because the completed DEM transfer IDs contain uppercase RFC 3339 `T` and `Z` characters and its identifier grammar is lowercase-only. The immutable attempt receipts, checkpoint paths, and external event history are not rewritten. This retained schema-validation failure does not change the project-specific byte and custody passes or approve downstream processing; future transfer runners must correct identifier generation before use.
 
 Before any Sentinel transfer, the unattempted runner was corrected to lowercase its generated attempt identifier while leaving RFC 3339 event timestamps unchanged. Eleven focused tests cover the generator and existing transfer controls, and the unchanged active Sentinel intake passes the generic validator. Receipt `records/acquisition/transfer-runner-attempt-id-correction.json` binds the current runner and tests without claiming authentication, network access, external mutation, or transfer.

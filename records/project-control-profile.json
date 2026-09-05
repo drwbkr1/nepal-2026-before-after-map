@@ -292,7 +292,7 @@
     "checkpoint_id": "M2-ACQUISITION-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Complete and locally validate the exact recovery-002 implementation, publish the exact commit, and require successful public CI before activation, no-payload preflight, credential access, or transfer."
+    "next_action": "Review exact Sentinel continuation-001 bundle 018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192 and proposal d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1; do not implement, request a token, or acquire another product before a completed owner decision."
   },
   "parallel_checkpoints": [
     {

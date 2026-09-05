@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-RECOVERY-002-SUPERVISOR-RECONCILIATION-001",
+  "recorded_at_utc": "2026-09-05T00:36:32Z",
+  "status": "recovery_and_container_pass_continuation_stopped_before_attempt_cause_unknown",
+  "recovery": {
+    "source_id": "M1-SRC-004",
+    "attempt_id": "m1-src-004-recovery-002-20260905t002925z-cc1fe1e9",
+    "transfer_receipt_ref": "records/acquisition/recovery-attempts/m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
+    "transfer_receipt_sha256": "bdba2d107d13150e9a050d2f558478fdca3fb58ad21c1003a364f702b491886f",
+    "container_receipt_ref": "records/acquisition/container-verification/m1-src-004-m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
+    "container_receipt_sha256": "3ce5c27a801bbc9ea4379faa8dcf382b63caa15841dc2a3b4aa1a0ec960db10d",
+    "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-004\\S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip",
+    "destination_size_bytes": 1732332897,
+    "destination_sha256": "a606cac063cc23e60a623f020192fc097d327f3dafadf1115802b2a458eaceab",
+    "provider_md5_match": true,
+    "container_status": "pass_container_only"
+  },
+  "supervisor": {
+    "supervisor_id": "m2-sentinel-recovery-002-20260905t002910z-a5e736c9",
+    "started_event_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-sentinel-recovery-002-supervisor\\m2-sentinel-recovery-002-20260905t002910z-a5e736c9\\m2-sentinel-recovery-002-20260905t002910z-a5e736c9-started.json",
+    "started_event_sha256": "5cd96b42b2f86a2b8e3d5d36cd80bc69545fe990a86acf8070f013de1228a829",
+    "last_heartbeat_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-sentinel-recovery-002-supervisor\\m2-sentinel-recovery-002-20260905t002910z-a5e736c9\\m2-sentinel-recovery-002-20260905t002910z-a5e736c9-heartbeat.json",
+    "last_heartbeat_sha256": "26511b5b862298cf2621f303b99ef9a6bd10eafd8a91aa69b4d98057115b9a1b",
+    "terminal_event_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-sentinel-recovery-002-supervisor\\m2-sentinel-recovery-002-20260905t002910z-a5e736c9\\m2-sentinel-recovery-002-20260905t002910z-a5e736c9-failed.json",
+    "terminal_event_sha256": "90265362402f3057a033f785c47423867aa8306a9d36f71f4241636230cfd4ca",
+    "terminal_phase": "continuation_live_preflight",
+    "terminal_code": "unexpected_supervisor_failure",
+    "exact_cause_established": false,
+    "exception_message_recorded": false
+  },
+  "retained_failures": [
+    {
+      "attempt_id": "m1-src-004-20260904t043930z-ac125c11",
+      "partial_size_bytes": 561593598,
+      "partial_sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66"
+    },
+    {
+      "attempt_id": "m1-src-004-recovery-001-20260904t201220z-e4388c64",
+      "partial_size_bytes": 1333788672,
+      "partial_sha256": "c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac"
+    }
+  ],
+  "continuation_boundary": {
+    "source_ids": [
+      "M1-SRC-005",
+      "M1-SRC-006",
+      "M1-SRC-008",
+      "M1-SRC-010"
+    ],
+    "attempt_count": 0,
+    "payload_request_count": 0,
+    "staging_event_and_destination_paths_verified_absent": [
+      "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\m1-src-005",
+      "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\attempt-events\\m1-src-005",
+      "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-005",
+      "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\m1-src-006",
+      "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\attempt-events\\m1-src-006",
+      "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-006",
+      "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\m1-src-008",
+      "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\attempt-events\\m1-src-008",
+      "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-008",
+      "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\m1-src-010",
+      "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\attempt-events\\m1-src-010",
+      "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-010"
+    ],
+    "automatic_retry_authorized": false,
+    "new_exact_review_required": true
+  },
+  "contract_reconciliation": {
+    "active_intake_sha256_before": "734455b7c0e772aa22253a81f944dc685e4c73cf73490ca2f821d12d7e2b5ca0",
+    "active_intake_sha256_after": "a0ca968e5ae74a8b011262fa85509bfa4170e2897778665e4be527ce123dc1a1",
+    "recovery_002_contract_sha256_before": "1ab7f2307d9ac3e5ffabf066e463a30c9eb984a1fdd32873890404119784869d",
+    "recovery_002_contract_sha256_after": "d1c18c901cbdfa4fc83459cdfeececd4d134aedb6801d1b6ae05b00db9c6c12a",
+    "m1_src_004_satisfied_only_by_recovery_002": true,
+    "historical_failed_attempts_preserved": true
+  },
+  "assertions": {
+    "credential_value_recorded": false,
+    "recovery_retried": false,
+    "continuation_attempt_started": false,
+    "continuation_payload_request_performed": false,
+    "pixel_usability_established": false,
+    "scientific_fitness_established": false
+  },
+  "limitations": [
+    "The recovery transfer and container check passed; the overall supervisor terminal state is still a failure because continuation stopped.",
+    "The generic terminal code does not preserve the underlying exception type or message, so the exact continuation preflight cause is unknown.",
+    "A later successful read-only check would not prove what failed at the recorded terminal time.",
+    "Container verification establishes no raster readability, usable AOI pixels, registration, or scientific change."
+  ],
+  "next_gate": "M2-SENTINEL-CONTINUATION-001-REVIEW"
+}

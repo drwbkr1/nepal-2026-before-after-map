@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-RECOVERY-002-FINAL-PREFLIGHT-001",
+  "verified_at_utc": "2026-09-04T21:38:34Z",
+  "status": "pass_no_payload_ready_for_single_secret_pipe_handoff",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-sentinel-recovery-002-approval.json",
+    "approval_sha256": "ab0333e6a7f460c150de7f064faac617082f4a627034932fd4ad187f164dde34",
+    "publication_gate_ref": "records/acquisition/sentinel-recovery-002-publication-gate.json",
+    "publication_gate_sha256": "2dfd5b8430ea200fdb57f464f2ae33e90066d27642c3796a08736377174f78da",
+    "recovery_contract_ref": "contracts/m2-sentinel-recovery-002.json",
+    "recovery_contract_sha256": "917762a06c0985e7fe7041b7e492f44b1b5cf775f25e96c951cfcf31a9af2e32",
+    "active_intake_sha256": "734455b7c0e772aa22253a81f944dc685e4c73cf73490ca2f821d12d7e2b5ca0",
+    "recovery_001_contract_sha256": "a6b9240b2f5dd401ba44c9061751370ac90afae31f304677f3088f32d1fd8a20",
+    "public_commit": "59fa8f0c298de2fab7f5e6747e70bec3b0ad1726"
+  },
+  "retained_partials": [
+    {
+      "attempt_id": "m1-src-004-20260904t043930z-ac125c11",
+      "size_bytes": 561593598,
+      "sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66"
+    },
+    {
+      "attempt_id": "m1-src-004-recovery-001-20260904t201220z-e4388c64",
+      "size_bytes": 1333788672,
+      "sha256": "c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac"
+    }
+  ],
+  "path_and_storage": {
+    "destination_absent": true,
+    "recovery_002_staging_root_absent": true,
+    "free_gib": 499.9347801208496,
+    "minimum_free_gib": 60.0
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_presence_checked": false,
+    "credential_values_read_or_recorded": false,
+    "product_payload_requested": false,
+    "product_payload_bytes_received": 0,
+    "external_files_mutated": false,
+    "automatic_retry_authorized": false
+  },
+  "next_gate": "open the broker once, paste the token into the hidden prompt, and allow one detached recovery-002 attempt"
+}

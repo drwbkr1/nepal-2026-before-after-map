@@ -278,7 +278,7 @@
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "deferred",
       "inputs": [
         "records/acquisition/preflight.json",
         "records/source-gates/m2-live-source-gate.json",
@@ -319,13 +319,29 @@
         "recovery_002_approval_sha256": "ab0333e6a7f460c150de7f064faac617082f4a627034932fd4ad187f164dde34",
         "recovery_002_review_reconciliation_ref": "records/source-gates/m2-sentinel-recovery-002-review-reconciliation.json",
         "recovery_002_review_reconciliation_sha256": "1ab8ebe5ea62da89d8d0ca2d80c9614a80a05a020295f4ec978e6f380be526d9",
-        "recovery_002_publication_gate": "pending_after_failed_ci_attempt_001",
+        "recovery_002_publication_gate": "pass",
         "recovery_002_transfer_authorized_after_public_ci_and_final_preflight": true,
         "recovery_002_transfer_authorized_now": false,
         "recovery_002_publication_attempt_001_ref": "records/acquisition/sentinel-recovery-002-publication-attempt-001-failure.json",
-        "recovery_002_publication_attempt_001_sha256": "fa8ecce7df972addddecd1cf2a903d00af0692d7cb3378961b93391be5b0b38d"
+        "recovery_002_publication_attempt_001_sha256": "fa8ecce7df972addddecd1cf2a903d00af0692d7cb3378961b93391be5b0b38d",
+        "recovery_002_publication_commit": "59fa8f0c298de2fab7f5e6747e70bec3b0ad1726",
+        "recovery_002_public_ci_run_id": 33921973385,
+        "recovery_002_activation": "pass",
+        "recovery_002_final_preflight": "pass_no_payload",
+        "recovery_002_attempt_id": "m1-src-004-recovery-002-20260905t002925z-cc1fe1e9",
+        "recovery_002_transfer_status": "succeeded",
+        "recovery_002_container_status": "pass_container_only",
+        "recovery_002_outcome_reconciliation_ref": "records/acquisition/sentinel-recovery-002-supervisor-reconciliation-001.json",
+        "recovery_002_outcome_reconciliation_sha256": "f806d86e6c956e648f4458f4710699d4480e2b0abfb2cf95e8777f3de281b3f4",
+        "continuation_supervisor_status": "failed_before_first_continuation_attempt",
+        "continuation_attempt_count": 0,
+        "continuation_payload_request_count": 0,
+        "continuation_review": "prepared_zero_human_decisions",
+        "continuation_review_bundle_sha256": "018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192",
+        "continuation_proposal_sha256": "d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1",
+        "continuation_authorized_now": false
       },
-      "disposition": "authorized_implementation_pending_publication_gate",
+      "disposition": "defer",
       "retained_failures": [
         {
           "source_id": "M1-SRC-004",
@@ -341,15 +357,11 @@
         "expected": [
           "EXIT-201-VERIFIED-CUSTODY"
         ],
-        "observed": [
-          "3 of 8 exact products promoted and passed offline container verification",
-          "M1-SRC-004 retains its original 561593598-byte truncated transfer",
-          "The approved byte-zero recovery retains a distinct 1333788672-byte terminal-failure partial"
-        ],
-        "decision_value": "enables_dependency",
-        "rationale": "The exact owner approval is locked and reconciled. It releases only the bounded detached-worker implementation and synthetic tests now; a real byte-zero recovery remains blocked until the exact implementation commit passes public CI and the final no-payload preflight passes."
+        "observed": [],
+        "decision_value": "no_progress",
+        "rationale": "The approved recovery succeeded and is reconciled. The overall supervisor terminated before continuation with an unknown underlying exception category, so further Sentinel transfer requires the exact continuation-001 owner review."
       },
-      "next_dependency": "M2-SENTINEL-RECOVERY-002-PUBLICATION-GATE",
+      "next_dependency": "M2-SENTINEL-CONTINUATION-001-REVIEW",
       "recovery_failures": [
         {
           "source_id": "M1-SRC-004",
@@ -362,7 +374,55 @@
           "receipt_sha256": "65ac02cd197024da8293fbbacc5f608d880f139dfb6c033a91274ff879db0886",
           "retry_automatically_authorized": false
         }
+      ],
+      "supervisor_failures": [
+        {
+          "supervisor_id": "m2-sentinel-recovery-002-20260905t002910z-a5e736c9",
+          "phase": "continuation_live_preflight",
+          "terminal_code": "unexpected_supervisor_failure",
+          "exact_cause_established": false,
+          "continuation_attempt_started": false,
+          "retry_automatically_authorized": false,
+          "reconciliation_ref": "records/acquisition/sentinel-recovery-002-supervisor-reconciliation-001.json",
+          "reconciliation_sha256": "f806d86e6c956e648f4458f4710699d4480e2b0abfb2cf95e8777f3de281b3f4"
+        }
       ]
+    },
+    {
+      "id": "M2-SENTINEL-CONTINUATION-001-REVIEW",
+      "purpose": "Decide whether to authorize a corrected continuation-only detached worker for the four exact unattempted products after the successful recovery and stopped pre-attempt supervisor.",
+      "depends_on": [
+        "M2-CUSTODY-PREFLIGHT"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "ready",
+      "inputs": [
+        "records/acquisition/sentinel-recovery-002-supervisor-reconciliation-001.json",
+        "contracts/milestone-002-sentinel-continuation-001-proposal.json",
+        "reviews/m2-sentinel-continuation-001/review-bundle.json",
+        "reviews/m2-sentinel-continuation-001/review-contract.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-sentinel-continuation-001-approval.json",
+        "records/source-gates/m2-sentinel-continuation-001-review-reconciliation.json"
+      ],
+      "gates": {
+        "review_bundle_sha256": "018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192",
+        "proposal_sha256": "d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1",
+        "human_decision_count": 0,
+        "attestation": false,
+        "continuation_authorized": false
+      },
+      "disposition": "review_required",
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "The bundle is blank and exact; no implementation, token access, or continuation transfer is released until the owner decides."
+      },
+      "next_dependency": "M2-ACQUIRE"
     },
     {
       "id": "M2-VERIFY",
@@ -378,21 +438,24 @@
         "contracts/m2-offline-verification.json"
       ],
       "outputs": [
-        "three passing container-only receipts",
-        "retained M1-SRC-004 transfer failure"
+        "four passing container-only receipts",
+        "two retained M1-SRC-004 failed partial identities",
+        "stopped pre-attempt continuation evidence"
       ],
       "gates": {
-        "container_verified_count": 3,
-        "retained_failed_transfer_count": 1,
+        "container_verified_count": 4,
+        "retained_failed_partial_count": 2,
         "authorized_unattempted_count": 4,
-        "sentinel_recovery_review": "approved_implementation_pending_publication_gate"
+        "m1_src_004_satisfied_by_recovery_002": true,
+        "continuation_review": "required"
       },
-      "disposition": "partial_container_only_review_required",
+      "disposition": "partial_container_only_continuation_review_required",
       "retained_failures": [
         {
           "source_id": "M1-SRC-004",
-          "failure_code": "transferred_size_mismatch",
-          "recovery_review": "required"
+          "failure_code": "historical_failed_partials_preserved",
+          "recovery_002_status": "promoted_and_container_pass",
+          "continuation_review": "required"
         }
       ],
       "exit_condition_delta": {
@@ -400,12 +463,9 @@
           "EXIT-201-VERIFIED-CUSTODY",
           "EXIT-202-PIXEL-AND-RIGHTS-QA"
         ],
-        "observed": [
-          "three exact archives passed container-only verification",
-          "one exact transfer remains a retained failure"
-        ],
-        "decision_value": "review_required",
-        "rationale": "The eight-product unit is incomplete. Container-only passes do not establish pixel or rights QA, and the retained M1-SRC-004 failure blocks unit completion."
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "The eight-product unit remains incomplete. M1-SRC-004 is now satisfied by recovery-002, but the continuation supervisor stopped before the first remaining product attempt."
       },
       "next_dependency": "M2-BASELINE"
     },
@@ -682,7 +742,7 @@
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
-      "status": "blocked_retained_failure_review",
+      "status": "deferred",
       "inputs": [
         "records/source-gates/m2-orbit-live-source-gate.json",
         "records/acquisition/orbit-preflight.json",
@@ -705,7 +765,7 @@
         "retained_failure_review_bundle_sha256": "df5aa9d0d03f8ee30a5cd74b91f74a88c83a525e762c22b0bd2b6773ccb5bc6b",
         "retained_failure_recovery_proposal_sha256": "ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a"
       },
-      "disposition": "review_required",
+      "disposition": "defer",
       "retained_failures": [
         {
           "source_id": "M2-ORB-001",
@@ -721,11 +781,8 @@
         "expected": [
           "EXIT-201-VERIFIED-CUSTODY"
         ],
-        "observed": [
-          "one test-induced M2-ORB-001 request failed before receiving payload bytes",
-          "zero orbit products promoted"
-        ],
-        "decision_value": "review_required",
+        "observed": [],
+        "decision_value": "no_progress",
         "rationale": "A stale production-wrapper test crossed its expected guard after two bound Sentinel products became eligible. The exact attempt is retained, automatic retry is false, and the runner now requires the full M2-VERIFY dependency before catalogue or token access."
       },
       "next_dependency": "M2-ORBIT-VERIFY",
@@ -827,7 +884,7 @@
         "publication_ci_run_id": 33910395201,
         "real_002_invocation_count": 1
       },
-      "disposition": "pass_partial_pre_event_header_readiness_only",
+      "disposition": "pass",
       "retained_failures": [
         {
           "receipt_ref": "records/readiness/radar-input/m2-s1-input-readiness-real-001.json",
@@ -838,11 +895,8 @@
       ],
       "exit_condition_delta": {
         "expected": [],
-        "observed": [
-          "three exact pre-event sources pass member, annotation, embedded-vector, and ArcGIS header readiness",
-          "no measurement pixels decoded and no complete before-after pair established"
-        ],
-        "decision_value": "no_downstream_release",
+        "observed": [],
+        "decision_value": "risk_reduction",
         "rationale": "The post-observation correction clears only the exact label mismatch; every pixel, pair-completion, terrain, registration, baseline, and scientific gate remains independent."
       },
       "next_dependency": "M2-ACQUIRE",
@@ -904,16 +958,16 @@
   },
   "handoff": {
     "current_checkpoint": "M2-ACQUISITION-REVIEW",
-    "next_action": "Complete and locally validate the exact recovery-002 implementation, publish the exact commit, and require successful public CI before activation, no-payload preflight, credential access, or transfer.",
+    "next_action": "Review exact Sentinel continuation-001 bundle 018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192 and proposal d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1; do not implement, request a token, or acquire another product before a completed owner decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
-      "Three exact Sentinel-1 products are promoted and container-verified; M1-SRC-004 remains a retained truncated transfer, and four products remain unattempted.",
       "The post-event optical route remains high-cloud-risk and may be inconclusive.",
       "A test-induced M1-SRC-001 SAFE materialization passed exact offline extraction controls and is retained with explicit unintended-test provenance; it establishes no readable pixels or scientific result.",
       "A test-induced M2-ORB-001 attempt used a tracked nonsecret test literal, made a catalogue and rejected download request, received zero payload bytes, and is retained as a terminal failure requiring review.",
       "The one post-observation radar label amendment run passed only three-source pre-event member, annotation, vector, and header readiness; real-001 remains BLOCK and no pixel or baseline action is released.",
-      "The approved M1-SRC-004 byte-zero recovery terminated after 1333788672 bytes without promotion; its partial and post-process terminal reconciliation are retained, the cause is unknown, and the one-attempt authority is consumed."
+      "Four exact Sentinel products are promoted and container-verified; M1-SRC-004 is satisfied only through recovery-002, both earlier failed partials remain preserved, and four products remain unattempted.",
+      "The recovery-002 supervisor stopped in continuation live preflight before any M1-SRC-005 attempt or payload request; its exact underlying exception category is unknown and no continuation is currently authorized."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
