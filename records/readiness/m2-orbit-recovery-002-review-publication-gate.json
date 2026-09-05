@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-RECOVERY-002-REVIEW-PUBLICATION-GATE",
+  "verified_at_utc": "2026-09-05T22:19:41Z",
+  "status": "pass_exact_review_packet_public_ci",
+  "publication_commit": "45c914695ea3e3b16e309eb0cd1aa13227624599",
+  "github_actions": {
+    "workflow_name": "Validate project controls",
+    "run_id": 33995547794,
+    "run_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33995547794",
+    "head_sha": "45c914695ea3e3b16e309eb0cd1aa13227624599",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-orbit-recovery-002-proposal.json",
+    "proposal_sha256": "d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8",
+    "review_preflight_ref": "records/readiness/m2-orbit-recovery-002-review-preflight.json",
+    "review_preflight_sha256": "a73b879f02eb773a76cc84d84e1c65662899abf8c99de6f94f525aa64cb67488",
+    "review_bundle_ref": "reviews/m2-orbit-recovery-002/review-bundle.json",
+    "review_bundle_sha256": "6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5",
+    "review_contract_ref": "reviews/m2-orbit-recovery-002/review-contract.json",
+    "review_contract_sha256": "1b0da1577a24c9323e529ac5fd58cafb7f15ccefc96f97df1964ddd751dde261",
+    "blank_response_ref": "reviews/m2-orbit-recovery-002/blank-response.json",
+    "blank_response_sha256": "e21a2a66814c490391c5f1ba1b77bc1e00d7809dbeeca87bef297c96dfd33c9a",
+    "readiness_ref": "records/readiness/m2-orbit-recovery-002-review-readiness.json",
+    "readiness_sha256": "d37fe247782d86677ba9e99ccfa5355a68126ac8928707b20876c7eccbe40827",
+    "review_surface_receipt_ref": "records/surface-receipts/m2-orbit-recovery-002-review.json",
+    "review_surface_receipt_sha256": "20859f99734e7fb641876e10d5be8aaba29be131096067b2869af1647d06cb40"
+  },
+  "assertions": {
+    "public_repository": true,
+    "review_packet_present_at_exact_commit": true,
+    "repository_validation_passed": true,
+    "full_test_suite_passed": true,
+    "human_decision_count": 0,
+    "orbit_recovery_authorized": false,
+    "other_orbit_source_requests_authorized": false,
+    "token_or_credential_read_during_publication": false,
+    "orbit_payload_requested_during_publication": false,
+    "dem_action_authorized": false,
+    "radar_pixel_readiness_authorized": false,
+    "baseline_or_change_authorized": false,
+    "scientific_publication_authorized": false,
+    "external_data_mutated": false
+  },
+  "next_action": "Obtain one exact attested owner decision on the bound recovery-only review; do not implement or execute recovery before reconciliation."
+}

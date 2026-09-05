@@ -132,6 +132,7 @@ REQUIRED = [
     "reviews/m2-orbit-recovery-002/review-contract.json",
     "reviews/m2-orbit-recovery-002/blank-response.json",
     "records/readiness/m2-orbit-recovery-002-review-readiness.json",
+    "records/readiness/m2-orbit-recovery-002-review-publication-gate.json",
     "scripts/prepare_m2_radar_first_path_review.py",
     "scripts/activate_m2_radar_first_path_001.py",
     "scripts/prepare_m2_orbit_recovery_002_review.py",
@@ -957,6 +958,7 @@ def main() -> None:
     orbit_recovery_002_contract = json.loads((ROOT / "reviews/m2-orbit-recovery-002/review-contract.json").read_text(encoding="utf-8"))
     orbit_recovery_002_blank = json.loads((ROOT / "reviews/m2-orbit-recovery-002/blank-response.json").read_text(encoding="utf-8"))
     orbit_recovery_002_readiness = json.loads((ROOT / "records/readiness/m2-orbit-recovery-002-review-readiness.json").read_text(encoding="utf-8"))
+    orbit_recovery_002_publication = json.loads((ROOT / "records/readiness/m2-orbit-recovery-002-review-publication-gate.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
     remote_project_name = expected_remote.rstrip("/").rsplit("/", 1)[-1].removesuffix(".git")
@@ -5108,6 +5110,21 @@ def main() -> None:
                 or orbit_recovery_002_blank.get("responses") != [{"item_id": "M2-ORBIT-RECOVERY-002", "evidence_sha256": bundle_sha, "decision": None, "notes": ""}]
                 or orbit_recovery_002_readiness.get("status") != "pass_ready_owner_review_zero_decisions"
                 or orbit_recovery_002_readiness.get("review", {}).get("human_decision_count") != 0
+                or orbit_recovery_002_publication.get("status") != "pass_exact_review_packet_public_ci"
+                or orbit_recovery_002_publication.get("publication_commit") != "45c914695ea3e3b16e309eb0cd1aa13227624599"
+                or orbit_recovery_002_publication.get("github_actions", {}).get("run_id") != 33995547794
+                or orbit_recovery_002_publication.get("github_actions", {}).get("head_sha") != "45c914695ea3e3b16e309eb0cd1aa13227624599"
+                or orbit_recovery_002_publication.get("github_actions", {}).get("conclusion") != "success"
+                or any(
+                    orbit_recovery_002_publication.get("bindings", {}).get(f"{key}_sha256")
+                    != sha256(orbit_recovery_002_publication.get("bindings", {}).get(f"{key}_ref"))
+                    for key in ("proposal", "review_preflight", "review_bundle", "review_contract", "blank_response", "readiness", "review_surface_receipt")
+                )
+                or orbit_recovery_002_publication.get("assertions", {}).get("human_decision_count") != 0
+                or orbit_recovery_002_publication.get("assertions", {}).get("orbit_recovery_authorized") is not False
+                or orbit_recovery_002_publication.get("assertions", {}).get("token_or_credential_read_during_publication") is not False
+                or orbit_recovery_002_publication.get("assertions", {}).get("orbit_payload_requested_during_publication") is not False
+                or orbit_recovery_002_publication.get("assertions", {}).get("external_data_mutated") is not False
             ):
                 fail("M2 corrected orbit recovery-002 review packet differs or contains authority")
             if (
@@ -7863,6 +7880,58 @@ def main() -> None:
         or radar_first_path_publication_evidence.get("assertions", {}).get("external_data_mutated") is not False
     ):
         fail("EVID-0094 radar-first path review publication evidence differs or overclaims")
+    radar_first_path_activation_evidence = ledger_by_id.get("EVID-0095")
+    if (
+        not isinstance(radar_first_path_activation_evidence, dict)
+        or radar_first_path_activation_evidence.get("status") != "pass_exact_approval_route_split_only"
+        or radar_first_path_activation_evidence.get("review_reconciliation_sha256") != sha256("records/source-gates/m2-radar-first-path-001-review-reconciliation.json")
+        or radar_first_path_activation_evidence.get("approval_sha256") != sha256("records/source-gates/m2-radar-first-path-001-approval.json")
+        or radar_first_path_activation_evidence.get("activation_sha256") != sha256("records/readiness/m2-radar-first-path-001-activation.json")
+        or radar_first_path_activation_evidence.get("control_reconciliation_sha256") != sha256("records/readiness/m2-radar-first-path-001-control-reconciliation.json")
+        or radar_first_path_activation_evidence.get("radar_readiness_sha256") != sha256("records/readiness/m2-radar-source-readiness-001.json")
+        or radar_first_path_activation_evidence.get("stale_orbit_sha256") != sha256("records/readiness/m2-orbit-recovery-001-stale-evidence.json")
+        or radar_first_path_activation_evidence.get("assertions", {}).get("human_decision_count") != 1
+        or radar_first_path_activation_evidence.get("assertions", {}).get("measurement_pixels_decoded") is not False
+        or radar_first_path_activation_evidence.get("assertions", {}).get("orbit_access_or_download") is not False
+        or radar_first_path_activation_evidence.get("assertions", {}).get("dem_action") is not False
+        or radar_first_path_activation_evidence.get("assertions", {}).get("scientific_publication") is not False
+    ):
+        fail("EVID-0095 radar-first path activation evidence differs or overclaims")
+    orbit_recovery_002_review_evidence = ledger_by_id.get("EVID-0096")
+    if (
+        not isinstance(orbit_recovery_002_review_evidence, dict)
+        or orbit_recovery_002_review_evidence.get("status") != "pass_blank_corrected_one_file_review_no_authority"
+        or orbit_recovery_002_review_evidence.get("proposal_sha256") != sha256("contracts/milestone-002-orbit-recovery-002-proposal.json")
+        or orbit_recovery_002_review_evidence.get("review_preflight_sha256") != sha256("records/readiness/m2-orbit-recovery-002-review-preflight.json")
+        or orbit_recovery_002_review_evidence.get("review_bundle_sha256") != sha256("reviews/m2-orbit-recovery-002/review-bundle.json")
+        or orbit_recovery_002_review_evidence.get("review_contract_sha256") != sha256("reviews/m2-orbit-recovery-002/review-contract.json")
+        or orbit_recovery_002_review_evidence.get("blank_response_sha256") != sha256("reviews/m2-orbit-recovery-002/blank-response.json")
+        or orbit_recovery_002_review_evidence.get("readiness_sha256") != sha256("records/readiness/m2-orbit-recovery-002-review-readiness.json")
+        or orbit_recovery_002_review_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or orbit_recovery_002_review_evidence.get("assertions", {}).get("maximum_future_attempts_if_approved") != 1
+        or orbit_recovery_002_review_evidence.get("assertions", {}).get("other_orbit_source_requests_authorized") is not False
+        or orbit_recovery_002_review_evidence.get("assertions", {}).get("orbit_payload_requested") is not False
+        or orbit_recovery_002_review_evidence.get("assertions", {}).get("token_or_credential_read") is not False
+        or orbit_recovery_002_review_evidence.get("assertions", {}).get("radar_pixels_read") is not False
+    ):
+        fail("EVID-0096 corrected orbit recovery review evidence differs or overclaims")
+    orbit_recovery_002_publication_evidence = ledger_by_id.get("EVID-0097")
+    if (
+        not isinstance(orbit_recovery_002_publication_evidence, dict)
+        or orbit_recovery_002_publication_evidence.get("status") != "pass_exact_review_packet_public_ci"
+        or orbit_recovery_002_publication_evidence.get("publication_commit") != "45c914695ea3e3b16e309eb0cd1aa13227624599"
+        or orbit_recovery_002_publication_evidence.get("github_actions_run_id") != 33995547794
+        or orbit_recovery_002_publication_evidence.get("proposal_sha256") != sha256("contracts/milestone-002-orbit-recovery-002-proposal.json")
+        or orbit_recovery_002_publication_evidence.get("review_bundle_sha256") != sha256("reviews/m2-orbit-recovery-002/review-bundle.json")
+        or orbit_recovery_002_publication_evidence.get("assertions", {}).get("public_ci_conclusion") != "success"
+        or orbit_recovery_002_publication_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or orbit_recovery_002_publication_evidence.get("assertions", {}).get("orbit_recovery_authorized") is not False
+        or orbit_recovery_002_publication_evidence.get("assertions", {}).get("other_orbit_source_requests_authorized") is not False
+        or orbit_recovery_002_publication_evidence.get("assertions", {}).get("token_or_credential_read") is not False
+        or orbit_recovery_002_publication_evidence.get("assertions", {}).get("orbit_payload_requested") is not False
+        or orbit_recovery_002_publication_evidence.get("assertions", {}).get("external_data_mutated") is not False
+    ):
+        fail("EVID-0097 corrected orbit recovery review publication evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():

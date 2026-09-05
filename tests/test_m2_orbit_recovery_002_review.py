@@ -12,6 +12,7 @@ BUNDLE_REF = "reviews/m2-orbit-recovery-002/review-bundle.json"
 CONTRACT_REF = "reviews/m2-orbit-recovery-002/review-contract.json"
 BLANK_REF = "reviews/m2-orbit-recovery-002/blank-response.json"
 READINESS_REF = "records/readiness/m2-orbit-recovery-002-review-readiness.json"
+PUBLICATION_REF = "records/readiness/m2-orbit-recovery-002-review-publication-gate.json"
 PROPOSAL_SHA256 = "d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8"
 BUNDLE_SHA256 = "6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5"
 
@@ -32,6 +33,7 @@ class M2OrbitRecovery002ReviewTests(unittest.TestCase):
         cls.contract = load(CONTRACT_REF)
         cls.blank = load(BLANK_REF)
         cls.readiness = load(READINESS_REF)
+        cls.publication = load(PUBLICATION_REF)
         cls.milestone = load("contracts/milestone-002.json")
 
     def test_proposal_binds_exact_one_file_and_corrected_route(self) -> None:
@@ -77,6 +79,23 @@ class M2OrbitRecovery002ReviewTests(unittest.TestCase):
         self.assertEqual(units["M2-ORBIT-ACQUIRE"]["status"], "deferred")
         self.assertIn("M2-ORBIT-RECOVERY-002", units["M2-ORBIT-ACQUIRE"]["depends_on"])
         self.assertEqual(units["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"], "corrected_review_ready_zero_decisions")
+
+    def test_publication_gate_binds_exact_green_commit_without_authority(self) -> None:
+        self.assertEqual(self.publication["status"], "pass_exact_review_packet_public_ci")
+        self.assertEqual(self.publication["publication_commit"], "45c914695ea3e3b16e309eb0cd1aa13227624599")
+        self.assertEqual(self.publication["github_actions"]["run_id"], 33995547794)
+        self.assertEqual(self.publication["github_actions"]["head_sha"], self.publication["publication_commit"])
+        self.assertEqual(self.publication["github_actions"]["conclusion"], "success")
+        for key in ("proposal", "review_preflight", "review_bundle", "review_contract", "blank_response", "readiness", "review_surface_receipt"):
+            self.assertEqual(
+                self.publication["bindings"][f"{key}_sha256"],
+                sha256(self.publication["bindings"][f"{key}_ref"]),
+            )
+        self.assertEqual(self.publication["assertions"]["human_decision_count"], 0)
+        self.assertFalse(self.publication["assertions"]["orbit_recovery_authorized"])
+        self.assertFalse(self.publication["assertions"]["token_or_credential_read_during_publication"])
+        self.assertFalse(self.publication["assertions"]["orbit_payload_requested_during_publication"])
+        self.assertFalse(self.publication["assertions"]["external_data_mutated"])
 
 
 if __name__ == "__main__":
