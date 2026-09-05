@@ -20,6 +20,8 @@ from derive_m2_acquisition_checkpoint import (  # noqa: E402
     current_materialization_pixel_implementation_pending,
     current_materialization_pixel_review_required,
     current_optical_pixel_implementation_pending,
+    current_optical_pixel_recovery_execution_pending,
+    current_optical_pixel_recovery_implementation_pending,
     current_optical_pixel_recovery_review_required,
     derive_checkpoint,
 )
@@ -58,12 +60,14 @@ class M2CheckpointReconciliationTests(unittest.TestCase):
         self.assertTrue(current_container_verification_complete(ROOT, {"promoted": 8}))
         self.assertFalse(current_container_verification_complete(ROOT, {"authorized": 1, "promoted": 7}))
 
-    def test_exact_approval_advances_to_materialization_implementation(self) -> None:
+    def test_exact_recovery_approval_advances_to_recovery_implementation(self) -> None:
         self.assertFalse(current_materialization_pixel_review_required(ROOT, {"promoted": 8}))
         self.assertFalse(current_materialization_pixel_implementation_pending(ROOT, {"promoted": 8}))
         self.assertFalse(current_full_header_implementation_pending(ROOT, {"promoted": 8}))
         self.assertFalse(current_optical_pixel_implementation_pending(ROOT, {"promoted": 8}))
-        self.assertTrue(current_optical_pixel_recovery_review_required(ROOT, {"promoted": 8}))
+        self.assertFalse(current_optical_pixel_recovery_review_required(ROOT, {"promoted": 8}))
+        self.assertTrue(current_optical_pixel_recovery_implementation_pending(ROOT, {"promoted": 8}))
+        self.assertFalse(current_optical_pixel_recovery_execution_pending(ROOT, {"promoted": 8}))
         self.assertFalse(current_materialization_pixel_review_required(ROOT, {"authorized": 1, "promoted": 7}))
 
     def test_incomplete_or_unsupported_counts_are_rejected(self) -> None:

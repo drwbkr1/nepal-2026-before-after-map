@@ -58,6 +58,14 @@ OPTICAL_PIXEL_RECOVERY_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW",
     "next_action": "Review M2 optical pixel recovery-001 bundle SHA-256 d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2 and proposal SHA-256 96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da; approve, revise, or defer. No correction or second pixel attempt is authorized before an attested decision.",
 }
+OPTICAL_PIXEL_RECOVERY_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION",
+    "next_action": "Publish the exact optical pixel recovery-001 implementation and require fresh successful public CI; do not run the final no-pixel preflight or recovery attempt before the public gate passes.",
+}
+OPTICAL_PIXEL_RECOVERY_EXECUTION_CHECKPOINT = {
+    "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001",
+    "next_action": "Record the exact passing public-CI gate, run the final no-pixel preflight, and only if it passes invoke optical-pixel-readiness-recovery-001 once with no automatic retry.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -245,6 +253,55 @@ def current_optical_pixel_recovery_review_required(root: Path, state_counts: dic
     )
 
 
+def current_optical_pixel_recovery_implementation_pending(root: Path, state_counts: dict[str, int]) -> bool:
+    if not current_container_verification_complete(root, state_counts):
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        approval = load(root / "records/source-gates/m2-optical-pixel-recovery-001-approval.json")
+        activation = load(root / "records/readiness/m2-optical-pixel-recovery-001-activation.json")
+        readiness = load(root / "records/readiness/m2-optical-pixel-recovery-001-implementation-readiness.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW", {})
+    implementation = units.get("M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION", {})
+    recovery = units.get("M2-OPTICAL-PIXEL-RECOVERY-001", {})
+    return bool(
+        approval.get("status") == "approved_exact_post_observation_operational_correction_and_one_recovery"
+        and approval.get("human_decision_count") == 1
+        and approval.get("human_decisions_fabricated") is False
+        and activation.get("status") == "pass_exact_approval_activated_implementation_and_publication_only"
+        and readiness.get("status") == "pass_exact_shape_local_and_arcgis_synthetic_ready_public_ci_pending"
+        and review.get("status") == "complete"
+        and review.get("disposition") == "pass"
+        and review.get("gates", {}).get("recovery_authorized") is True
+        and implementation.get("status") == "in_progress"
+        and implementation.get("gates", {}).get("public_ci") == "pending"
+        and implementation.get("gates", {}).get("real_recovery_invocation_count") == 0
+        and recovery.get("status") == "planned"
+    )
+
+
+def current_optical_pixel_recovery_execution_pending(root: Path, state_counts: dict[str, int]) -> bool:
+    if not current_container_verification_complete(root, state_counts):
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    implementation = units.get("M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION", {})
+    recovery = units.get("M2-OPTICAL-PIXEL-RECOVERY-001", {})
+    return bool(
+        implementation.get("status") == "complete"
+        and implementation.get("gates", {}).get("public_ci") == "pass"
+        and recovery.get("status") == "in_progress"
+        and recovery.get("gates", {}).get("real_invocation_count") == 0
+        and recovery.get("gates", {}).get("automatic_retry_authorized") is False
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -289,7 +346,11 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_optical_pixel_recovery_review_required(ROOT, progress["state_counts"]):
+        if current_optical_pixel_recovery_execution_pending(ROOT, progress["state_counts"]):
+            checkpoint = dict(OPTICAL_PIXEL_RECOVERY_EXECUTION_CHECKPOINT)
+        elif current_optical_pixel_recovery_implementation_pending(ROOT, progress["state_counts"]):
+            checkpoint = dict(OPTICAL_PIXEL_RECOVERY_IMPLEMENTATION_CHECKPOINT)
+        elif current_optical_pixel_recovery_review_required(ROOT, progress["state_counts"]):
             checkpoint = dict(OPTICAL_PIXEL_RECOVERY_REVIEW_CHECKPOINT)
         elif current_optical_pixel_implementation_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(OPTICAL_PIXEL_IMPLEMENTATION_CHECKPOINT)

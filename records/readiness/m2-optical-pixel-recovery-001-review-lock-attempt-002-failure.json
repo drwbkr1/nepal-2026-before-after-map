@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW-LOCK-ATTEMPT-002-FAILURE",
+  "observed_at_utc": "2026-09-05T19:46:14Z",
+  "status": "failed_before_lock_utility_invocation",
+  "error_code": "powershell_invalid_select_object_parameter",
+  "error": "Select-Object does not support -Single",
+  "bindings": {
+    "corrected_contract_ref": "reviews/m2-optical-pixel-recovery-001/review-contract-lock-001.json",
+    "corrected_contract_sha256": "078e4d2a054c01153d1c1ad645709bfead69898d1fe1600662b888f3e9cfe6b6",
+    "candidate_response_sha256": "1b32db7bea09e6c926362c3af63e7a219c37cf38115fea58f6f8254ff5003109"
+  },
+  "assertions": {
+    "lock_utility_invoked": false,
+    "response_locked": false,
+    "response_decision_values_read_by_lock_tool": false,
+    "reconciliation_created": false,
+    "external_locked_file_count": 0
+  },
+  "next_gate": "invoke corrected lock after an explicit one-candidate count check"
+}

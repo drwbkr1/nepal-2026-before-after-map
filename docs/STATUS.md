@@ -6,7 +6,7 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts, both earlier incomplete `M1-SRC-004` partials remain retained, and no orbit payload byte is in custody
 - **Long-term goal:** Active
-- **Checkpoints:** `M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW`; dependent `M2-ORBIT-ACQUISITION-REVIEW`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
+- **Checkpoints:** `M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION`; dependent `M2-ORBIT-ACQUISITION-REVIEW`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
 
 ## Purpose
 
@@ -58,7 +58,7 @@ The approved materialization and input-readiness sequence is complete. All five 
 
 The only authorized optical pixel attempt, `optical-pixel-readiness-real-001`, read the first real SCL raster and stopped with `KeyError: 'xmin'` because the production grid stores bounds inside `analysis_grid.extent`. It created only `started.json` and `failure.json`; no QA raster, metrics, AOI result, mask result, registration result, baseline, or change evidence exists. Reconciliation SHA-256 `0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a` fixes the attempt count at one and keeps automatic retry false.
 
-Recovery proposal SHA-256 `96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da` and review bundle SHA-256 `d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2` contain zero human decisions. Approval would release only the nested-grid normalization correction, exact production-shape synthetic tests, fresh public CI, one no-pixel preflight, and one new append-only recovery attempt. No correction, second attempt, radar pixel processing, baseline, change analysis, or scientific publication is currently authorized.
+The owner approved recovery proposal SHA-256 `96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da` and review bundle SHA-256 `d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2`. Approval SHA-256 `983303532e95814828fd55d1f8c26c55d06d6785d579d236f8e5321072e8fcff` releases only the nested-grid normalization correction, exact production-shape portable and ArcGIS synthetic tests, fresh public CI, one no-pixel preflight, and one new append-only recovery attempt. Ten portable tests and ArcGIS Pro 3.7.1 synthetic receipt SHA-256 `34de82e63f7bb6b07f5925372cba69a7ca2aab5e129d6f8950852ffda23314a8` pass. Public CI is still pending, so no preflight or second real invocation has started; radar pixel processing, baseline, change analysis, and scientific publication remain unauthorized.
 
 ## Sentinel execution history
 
@@ -166,8 +166,8 @@ Checkpoint derivation is also portable. Repository-only tests do not require the
 
 ## Authorized but not completed
 
-- review bundle SHA-256 `d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2` and explicitly approve, revise, or defer the bounded optical pixel recovery proposal;
-- do not correct or rerun optical pixel readiness unless that exact recovery is approved and its public-CI and no-pixel gates pass;
+- publish the exact approved optical pixel recovery-001 implementation and require fresh successful public CI;
+- only after that public gate passes, run one final no-pixel preflight and at most one new append-only `optical-pixel-readiness-recovery-001` invocation with no automatic retry;
 - review and reconcile the exact orbit recovery, but do not run it until the full `M2-VERIFY` unit is complete; after a passing `M2-ORB-001` recovery, acquire and verify only the three still-unattempted approved `AUX_RESORB` files and apply each only after every independent gate passes;
 - review and explicitly resolve the DEM vertical-datum route before Sentinel-1 terrain correction, without silently selecting `GEOID` or `NONE`;
 - if the exact EGM2008 route is approved, wait for the owner to install the matching ArcGIS Coordinate Systems Data component before any conversion attempt;

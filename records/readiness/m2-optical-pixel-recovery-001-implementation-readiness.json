@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION-READINESS",
+  "verified_at_utc": "2026-09-05T19:57:20Z",
+  "status": "pass_exact_shape_local_and_arcgis_synthetic_ready_public_ci_pending",
+  "bindings": {
+    "activation_ref": "records/readiness/m2-optical-pixel-recovery-001-activation.json",
+    "activation_sha256": "fda93f4c5a2881efb28b86379a850da4db5b85b1b7c35d98abe9f4a4b02eaa3c",
+    "contract_ref": "config/qa/optical-pixel-readiness-contract-recovery-001.json",
+    "contract_sha256": "6fb4200f6d6ef5b0b77d5d49a278bd14cade062908b7d18197bf79265233c655",
+    "source_scientific_contract_ref": "config/qa/optical-pixel-readiness-contract-001.json",
+    "source_scientific_contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
+    "arcgis_receipt_ref": "records/surface-receipts/optical-pixel-readiness-recovery-001-synthetic-arcgis.json",
+    "arcgis_receipt_sha256": "34de82e63f7bb6b07f5925372cba69a7ca2aab5e129d6f8950852ffda23314a8"
+  },
+  "implementation": {
+    "core_ref": "scripts/optical_pixel_recovery_core_001.py",
+    "core_sha256": "1f1944ced8c5a868f86beba9c5240a84ffdd2a24fdae54602b208734da1edd4a",
+    "runner_ref": "scripts/run_m2_optical_pixel_readiness_recovery_001.py",
+    "runner_sha256": "0ec9c1964ee902adad3413f58c83e716591e6d566d0190743482bdaabd3e87c9",
+    "stage_gate_ref": "scripts/m2_optical_pixel_recovery_stage_gate.py",
+    "stage_gate_sha256": "4dac0bff0bc9d97ff0ddf1c1f17fe077b20047bcd7319b3d54ac3662c76dc64d",
+    "final_preflight_ref": "scripts/preflight_m2_optical_pixel_recovery_001.py",
+    "final_preflight_sha256": "a759c7bbca220589110240e15282cdf6ad2d91990f943826caa1e07548fd31e7",
+    "publication_gate_recorder_ref": "scripts/record_m2_optical_pixel_recovery_001_publication_gate.py",
+    "publication_gate_recorder_sha256": "7aa923d908a40b43d89e3736bb21aa898920f5863d31128ca08168e44ba356fb",
+    "arcgis_adapter_ref": "scripts/validate_optical_pixel_recovery_001_arcgis.py",
+    "arcgis_adapter_sha256": "914c65fc860898584a25f66a9b07f6f8a00b2dfec33d2e968d31abc9b5b2cb07",
+    "portable_tests_ref": "tests/test_m2_optical_pixel_recovery_001.py",
+    "portable_tests_sha256": "5ff0e964bc136052982d580c91f7eb9b3ef7172a66223581dbdd760e70573923",
+    "reconciler_ref": "scripts/reconcile_m2_optical_pixel_recovery_001.py",
+    "reconciler_sha256": "e44aa7ff815a8870431622bf83f33f1e31c181c65ed8fd50b34fd8bb9f63da3a"
+  },
+  "validation": {
+    "focused_portable_test_count": 10,
+    "focused_portable_test_status": "pass",
+    "arcgis_synthetic_status": "pass",
+    "exact_nested_production_shape_covered": true,
+    "conflicting_flat_bound_rejected": true
+  },
+  "assertions": {
+    "only_operational_grid_normalization_changed": true,
+    "scientific_contract_sections_unchanged": true,
+    "real_001_preserved": true,
+    "real_001_reused_or_retried": false,
+    "recovery_attempt_started": false,
+    "real_product_pixels_examined": false,
+    "thresholds_sources_or_aois_changed": false
+  },
+  "next_gate": "publish the exact implementation and require fresh successful public CI before the no-pixel preflight"
+}

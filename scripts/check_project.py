@@ -17,6 +17,8 @@ from derive_m2_acquisition_checkpoint import (
     current_full_header_implementation_pending,
     current_materialization_pixel_implementation_pending,
     current_optical_pixel_implementation_pending,
+    current_optical_pixel_recovery_execution_pending,
+    current_optical_pixel_recovery_implementation_pending,
     current_optical_pixel_recovery_review_required,
     derive_checkpoint,
 )
@@ -85,6 +87,28 @@ REQUIRED = [
     "reviews/m2-optical-pixel-recovery-001/review-contract.json",
     "reviews/m2-optical-pixel-recovery-001/blank-response.json",
     "records/readiness/m2-optical-pixel-recovery-001-review-readiness.json",
+    "reviews/m2-optical-pixel-recovery-001/review-contract-lock-001.json",
+    "reviews/m2-optical-pixel-recovery-001/review-contract-lock-002.json",
+    "records/readiness/m2-optical-pixel-recovery-001-review-lock-attempt-001-failure.json",
+    "records/readiness/m2-optical-pixel-recovery-001-review-lock-attempt-002-failure.json",
+    "records/readiness/m2-optical-pixel-recovery-001-review-lock-attempt-003-failure.json",
+    "records/source-gates/m2-optical-pixel-recovery-001-review-reconciliation.json",
+    "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
+    "records/readiness/m2-optical-pixel-recovery-001-activation.json",
+    "config/qa/optical-pixel-readiness-contract-recovery-001.json",
+    "records/surface-receipts/optical-pixel-readiness-recovery-001-synthetic-arcgis.json",
+    "records/readiness/m2-optical-pixel-recovery-001-implementation-readiness.json",
+    "scripts/activate_m2_optical_pixel_recovery_001.py",
+    "scripts/optical_pixel_recovery_core_001.py",
+    "scripts/run_m2_optical_pixel_readiness_recovery_001.py",
+    "scripts/m2_optical_pixel_recovery_stage_gate.py",
+    "scripts/preflight_m2_optical_pixel_recovery_001.py",
+    "scripts/record_m2_optical_pixel_recovery_001_publication_gate.py",
+    "scripts/record_m2_optical_pixel_recovery_001_implementation_readiness.py",
+    "scripts/prepare_m2_optical_pixel_recovery_001_contract.py",
+    "scripts/validate_optical_pixel_recovery_001_arcgis.py",
+    "scripts/reconcile_m2_optical_pixel_recovery_001.py",
+    "tests/test_m2_optical_pixel_recovery_001.py",
     "scripts/reconcile_m2_optical_pixel_real_001.py",
     "scripts/prepare_m2_optical_pixel_recovery_review.py",
     "config/qa/optical-pixel-readiness-contract-001-preflight-attempt-001-superseded.json",
@@ -855,6 +879,17 @@ def main() -> None:
     optical_pixel_recovery_contract = json.loads((ROOT / "reviews/m2-optical-pixel-recovery-001/review-contract.json").read_text(encoding="utf-8"))
     optical_pixel_recovery_blank = json.loads((ROOT / "reviews/m2-optical-pixel-recovery-001/blank-response.json").read_text(encoding="utf-8"))
     optical_pixel_recovery_readiness = json.loads((ROOT / "records/readiness/m2-optical-pixel-recovery-001-review-readiness.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_lock_001 = json.loads((ROOT / "reviews/m2-optical-pixel-recovery-001/review-contract-lock-001.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_lock_002 = json.loads((ROOT / "reviews/m2-optical-pixel-recovery-001/review-contract-lock-002.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_lock_failure_001 = json.loads((ROOT / "records/readiness/m2-optical-pixel-recovery-001-review-lock-attempt-001-failure.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_lock_failure_002 = json.loads((ROOT / "records/readiness/m2-optical-pixel-recovery-001-review-lock-attempt-002-failure.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_lock_failure_003 = json.loads((ROOT / "records/readiness/m2-optical-pixel-recovery-001-review-lock-attempt-003-failure.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_review_reconciliation = json.loads((ROOT / "records/source-gates/m2-optical-pixel-recovery-001-review-reconciliation.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_approval = json.loads((ROOT / "records/source-gates/m2-optical-pixel-recovery-001-approval.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_activation = json.loads((ROOT / "records/readiness/m2-optical-pixel-recovery-001-activation.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_runtime_contract = json.loads((ROOT / "config/qa/optical-pixel-readiness-contract-recovery-001.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_synthetic = json.loads((ROOT / "records/surface-receipts/optical-pixel-readiness-recovery-001-synthetic-arcgis.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_implementation_readiness = json.loads((ROOT / "records/readiness/m2-optical-pixel-recovery-001-implementation-readiness.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
     remote_project_name = expected_remote.rstrip("/").rsplit("/", 1)[-1].removesuffix(".git")
@@ -862,10 +897,8 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-optical-pixel-recovery-001-proposal.json"
-    ]:
-        fail("project profile must expose only the pending optical pixel recovery proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must expose no pending amendment after optical pixel recovery approval")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -873,8 +906,9 @@ def main() -> None:
         "records/source-gates/m2-sentinel-recovery-002-approval.json",
         "records/source-gates/m2-sentinel-continuation-001-approval.json",
         "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+        "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
     ]:
-        fail("project profile must expose the six exact active amendments")
+        fail("project profile must expose the seven exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -968,6 +1002,21 @@ def main() -> None:
         "radar_pixel_readiness_authorized": False,
         "baseline_or_change_authorized": False,
     }
+    expected_optical_pixel_recovery_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-optical-pixel-recovery-001-approval.json"),
+        "proposal_ref": "contracts/milestone-002-optical-pixel-recovery-001-proposal.json",
+        "proposal_sha256": "96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da",
+        "review_bundle_sha256": "d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2",
+        "review_reconciliation_ref": "records/source-gates/m2-optical-pixel-recovery-001-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-optical-pixel-recovery-001-review-reconciliation.json"),
+        "attempt_id": "optical-pixel-readiness-recovery-001",
+        "maximum_real_invocations": 1,
+        "automatic_retry_authorized": False,
+        "real_001_retry_authorized": False,
+        "radar_pixel_readiness_authorized": False,
+        "baseline_or_change_authorized": False,
+    }
     expected_amendments = [
         expected_dem_amendment_binding,
         expected_orbit_amendment_binding,
@@ -975,6 +1024,7 @@ def main() -> None:
         expected_recovery_002_amendment_binding,
         expected_continuation_001_amendment_binding,
         expected_materialization_pixel_amendment_binding,
+        expected_optical_pixel_recovery_amendment_binding,
     ]
     if profile["authority"].get("amendments") != expected_amendments:
         fail("profile authority does not bind the exact active amendments")
@@ -987,8 +1037,9 @@ def main() -> None:
         "records/source-gates/m2-sentinel-recovery-002-approval.json",
         "records/source-gates/m2-sentinel-continuation-001-approval.json",
         "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+        "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
     ]:
-        fail("active M2 scope does not expose the six exact amendment approvals")
+        fail("active M2 scope does not expose the seven exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -1022,14 +1073,12 @@ def main() -> None:
         fail("project profile must bind the materialization and pixel-readiness route to its exact approval")
     optical_pixel_recovery_review_gate = profile_gates.get("M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW", {})
     if (
-        optical_pixel_recovery_review_gate.get("authority_ref") != "reviews/m2-optical-pixel-recovery-001/review-contract.json"
-        or "new attested owner decision" not in optical_pixel_recovery_review_gate.get("reason", "")
+        optical_pixel_recovery_review_gate.get("authority_ref") != "records/source-gates/m2-optical-pixel-recovery-001-approval.json"
+        or "bounded nested-grid correction" not in optical_pixel_recovery_review_gate.get("reason", "")
     ):
-        fail("project profile must expose the optical pixel recovery human-review gate")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-optical-pixel-recovery-001-proposal.json"
-    ]:
-        fail("project profile pending-amendment list must contain only the unapproved optical pixel recovery proposal")
+        fail("project profile must bind optical pixel recovery to its exact approval")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile pending-amendment list must be empty after optical pixel recovery approval")
     if profile_gates.get("M2-ORBIT-RECOVERY", {}).get("authority_ref") != "reviews/m2-orbit-recovery/review-contract.json":
         fail("project profile must expose the exact orbit recovery human-review gate")
     for approved_unit in ("M2-ORBIT-AMEND", "M2-ORBIT-PREFLIGHT", "M2-ORBIT-ACQUIRE", "M2-ORBIT-VERIFY", "M2-ORBIT-APPLY"):
@@ -1062,6 +1111,7 @@ def main() -> None:
         "records/source-gates/m2-sentinel-recovery-002-approval.json",
         "records/source-gates/m2-sentinel-continuation-001-approval.json",
         "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+        "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-ACQUISITION-REVIEW"]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
     prohibited = set(contract["scope"]["forbidden_work"])
@@ -4473,7 +4523,24 @@ def main() -> None:
         materialization_pixel_review_approved
         and current_optical_pixel_recovery_review_required(ROOT, state_counts)
     )
-    if optical_pixel_recovery_review_ready:
+    optical_pixel_recovery_implementation_pending = bool(
+        materialization_pixel_review_approved
+        and current_optical_pixel_recovery_implementation_pending(ROOT, state_counts)
+    )
+    optical_pixel_recovery_execution_pending = bool(
+        materialization_pixel_review_approved
+        and current_optical_pixel_recovery_execution_pending(ROOT, state_counts)
+    )
+    optical_pixel_recovery_history_present = bool(
+        optical_pixel_recovery_review_ready
+        or optical_pixel_recovery_implementation_pending
+        or optical_pixel_recovery_execution_pending
+    )
+    if optical_pixel_recovery_execution_pending:
+        expected_checkpoint = "M2-OPTICAL-PIXEL-RECOVERY-001"
+    elif optical_pixel_recovery_implementation_pending:
+        expected_checkpoint = "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION"
+    elif optical_pixel_recovery_review_ready:
         expected_checkpoint = "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW"
     elif optical_pixel_implementation_pending:
         expected_checkpoint = "M2-OPTICAL-PIXEL-READINESS"
@@ -4502,6 +4569,8 @@ def main() -> None:
     expected_header_implementation_next_action = "Publish the exact six-source radar and two-source optical header-readiness implementation and require successful public CI before the final no-header preflight or either real inspection."
     expected_optical_pixel_implementation_next_action = "Publish the exact optical pixel-readiness implementation and require successful public CI before the final no-pixel preflight or the one real pixel attempt."
     expected_optical_pixel_recovery_review_next_action = "Review M2 optical pixel recovery-001 bundle SHA-256 d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2 and proposal SHA-256 96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da; approve, revise, or defer. No correction or second pixel attempt is authorized before an attested decision."
+    expected_optical_pixel_recovery_implementation_next_action = "Publish the exact optical pixel recovery-001 implementation and require fresh successful public CI; do not run the final no-pixel preflight or recovery attempt before the public gate passes."
+    expected_optical_pixel_recovery_execution_next_action = "Record the exact passing public-CI gate, run the final no-pixel preflight, and only if it passes invoke optical-pixel-readiness-recovery-001 once with no automatic retry."
     acquire_unit = m2_units.get("M2-ACQUIRE", {})
     if materialization_pixel_review_ready or materialization_pixel_review_approved:
         proposal_sha = "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c"
@@ -4660,7 +4729,7 @@ def main() -> None:
                 or materialization_stage_1_readiness.get("assertions", {}).get("measurement_pixels_read") is not False
             ):
                 fail("approved materialization stage-1 activation or readiness differs")
-        if full_header_implementation_pending or optical_pixel_implementation_pending or optical_pixel_recovery_review_ready:
+        if full_header_implementation_pending or optical_pixel_implementation_pending or optical_pixel_recovery_history_present:
             if (
                 materialization_stage_1_publication.get("status") != "pass_public_controls_verified_before_materialization"
                 or materialization_stage_1_publication.get("github_actions", {}).get("run_id") != 33984065216
@@ -4692,7 +4761,7 @@ def main() -> None:
                 or header_stage_readiness.get("assertions", {}).get("real_product_pixels_examined") is not False
             ):
                 fail("materialization completion or header Stage-2 implementation readiness differs")
-        if optical_pixel_implementation_pending or optical_pixel_recovery_review_ready:
+        if optical_pixel_implementation_pending or optical_pixel_recovery_history_present:
             if (
                 header_stage_publication.get("status") != "pass_public_controls_verified_before_real_header_inspections"
                 or header_stage_publication.get("github_actions", {}).get("run_id") != 33985362022
@@ -4731,8 +4800,11 @@ def main() -> None:
                 or m2_units.get("M2-OPTICAL-PIXEL-READINESS", {}).get("gates", {}).get("implementation_readiness_sha256") != sha256("records/readiness/m2-optical-pixel-implementation-readiness.json")
             ):
                 fail("header completion or optical pixel Stage-3 implementation readiness differs")
-        if optical_pixel_recovery_review_ready:
+        if optical_pixel_recovery_history_present:
             recovery_review_unit = m2_units.get("M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW", {})
+            recovery_implementation_unit = m2_units.get("M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION", {})
+            recovery_execution_unit = m2_units.get("M2-OPTICAL-PIXEL-RECOVERY-001", {})
+            recovery_is_approved = optical_pixel_recovery_implementation_pending or optical_pixel_recovery_execution_pending
             if (
                 optical_pixel_publication.get("status") != "pass_public_controls_verified_before_optical_pixel_attempt"
                 or optical_pixel_publication.get("github_actions", {}).get("run_id") != 33986585291
@@ -4756,36 +4828,90 @@ def main() -> None:
                 or optical_pixel_recovery_blank.get("completed") is not False
                 or optical_pixel_recovery_blank.get("human_decision_count") != 0
                 or optical_pixel_recovery_readiness.get("status") != "pass_ready_owner_review_zero_decisions"
-                or recovery_review_unit.get("status") != "ready"
-                or recovery_review_unit.get("gates", {}).get("human_decision_count") != 0
-                or recovery_review_unit.get("gates", {}).get("recovery_authorized") is not False
+                or recovery_review_unit.get("status") != ("complete" if recovery_is_approved else "ready")
+                or recovery_review_unit.get("disposition") != ("pass" if recovery_is_approved else None)
+                or recovery_review_unit.get("gates", {}).get("human_decision_count") != (1 if recovery_is_approved else 0)
+                or recovery_review_unit.get("gates", {}).get("attestation") is not recovery_is_approved
+                or recovery_review_unit.get("gates", {}).get("recovery_authorized") is not recovery_is_approved
+                or recovery_review_unit.get("gates", {}).get("real_001_retry_authorized") is not False
             ):
-                fail("terminal optical pixel result or zero-decision recovery review differs")
+                fail("terminal optical pixel result or recovery review state differs")
+            if recovery_is_approved:
+                recovery_impl = optical_pixel_recovery_runtime_contract.get("implementation", {})
+                if (
+                    sha256("reviews/m2-optical-pixel-recovery-001/review-contract-lock-001.json") != "078e4d2a054c01153d1c1ad645709bfead69898d1fe1600662b888f3e9cfe6b6"
+                    or sha256("reviews/m2-optical-pixel-recovery-001/review-contract-lock-002.json") != "552de54d12eca297ce94166453d697bea928a1b780803d8a111555bc29621761"
+                    or optical_pixel_recovery_lock_001.get("hash_prefix_length") != 16
+                    or optical_pixel_recovery_lock_002.get("workflow_authority", {}).get("post_review_actions") != ["evidence_recording", "project_control", "update_project_records"]
+                    or optical_pixel_recovery_lock_failure_001.get("status") != "failed_before_response_envelope_read"
+                    or optical_pixel_recovery_lock_failure_001.get("assertions", {}).get("response_locked") is not False
+                    or optical_pixel_recovery_lock_failure_002.get("status") != "failed_before_lock_utility_invocation"
+                    or optical_pixel_recovery_lock_failure_002.get("assertions", {}).get("lock_utility_invoked") is not False
+                    or optical_pixel_recovery_lock_failure_003.get("status") != "failed_before_response_envelope_read"
+                    or optical_pixel_recovery_lock_failure_003.get("assertions", {}).get("response_locked") is not False
+                    or optical_pixel_recovery_review_reconciliation.get("status") != "reconciled_exact_human_response"
+                    or optical_pixel_recovery_review_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+                    or optical_pixel_recovery_review_reconciliation.get("human_decisions_fabricated") is not False
+                    or optical_pixel_recovery_approval.get("status") != "approved_exact_post_observation_operational_correction_and_one_recovery"
+                    or optical_pixel_recovery_approval.get("review_bundle_manifest_sha256") != "d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2"
+                    or optical_pixel_recovery_approval.get("proposal_sha256") != "96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da"
+                    or optical_pixel_recovery_approval.get("human_decision_count") != 1
+                    or optical_pixel_recovery_approval.get("human_decisions_fabricated") is not False
+                    or optical_pixel_recovery_approval.get("authorized_recovery", {}).get("maximum_real_invocations") != 1
+                    or optical_pixel_recovery_approval.get("authorized_recovery", {}).get("automatic_retry_authorized") is not False
+                    or optical_pixel_recovery_activation.get("status") != "pass_exact_approval_activated_implementation_and_publication_only"
+                    or optical_pixel_recovery_activation.get("released_now", {}).get("real_recovery_attempt_before_public_ci_and_preflight") is not False
+                    or optical_pixel_recovery_runtime_contract.get("status") != "active_post_observation_operational_correction_one_attempt"
+                    or optical_pixel_recovery_runtime_contract.get("analysis_grid", {}).get("extent") != optical_pixel_contract.get("analysis_grid", {}).get("extent")
+                    or optical_pixel_recovery_runtime_contract.get("exact_pair") != optical_pixel_contract.get("exact_pair")
+                    or optical_pixel_recovery_runtime_contract.get("approved_aoi_ids") != optical_pixel_contract.get("approved_aoi_ids")
+                    or optical_pixel_recovery_runtime_contract.get("attempt", {}).get("attempt_id") != "optical-pixel-readiness-recovery-001"
+                    or optical_pixel_recovery_runtime_contract.get("attempt", {}).get("maximum_real_invocations") != 1
+                    or optical_pixel_recovery_runtime_contract.get("attempt", {}).get("automatic_retry_authorized") is not False
+                    or any(
+                        recovery_impl.get(f"{key}_sha256") != sha256(recovery_impl.get(f"{key}_ref"))
+                        for key in ("core", "runner", "stage_gate", "final_preflight", "publication_gate_recorder", "arcgis_adapter", "portable_tests", "reconciler")
+                    )
+                    or optical_pixel_recovery_synthetic.get("status") != "pass_exact_nested_production_shape_arcgis_synthetic"
+                    or optical_pixel_recovery_synthetic.get("assertions", {}).get("exact_production_object_shape_used") is not True
+                    or optical_pixel_recovery_synthetic.get("assertions", {}).get("real_product_pixels_examined") is not False
+                    or optical_pixel_recovery_implementation_readiness.get("status") != "pass_exact_shape_local_and_arcgis_synthetic_ready_public_ci_pending"
+                    or optical_pixel_recovery_implementation_readiness.get("validation", {}).get("focused_portable_test_count") != 10
+                    or optical_pixel_recovery_implementation_readiness.get("assertions", {}).get("recovery_attempt_started") is not False
+                    or optical_pixel_recovery_implementation_readiness.get("assertions", {}).get("real_product_pixels_examined") is not False
+                    or recovery_implementation_unit.get("status") != ("complete" if optical_pixel_recovery_execution_pending else "in_progress")
+                    or recovery_implementation_unit.get("gates", {}).get("public_ci") != ("pass" if optical_pixel_recovery_execution_pending else "pending")
+                    or recovery_implementation_unit.get("gates", {}).get("real_recovery_invocation_count") != 0
+                    or recovery_execution_unit.get("status") != ("in_progress" if optical_pixel_recovery_execution_pending else "planned")
+                    or recovery_execution_unit.get("gates", {}).get("maximum_real_invocations") != 1
+                    or recovery_execution_unit.get("gates", {}).get("automatic_retry_authorized") is not False
+                ):
+                    fail("approved optical pixel recovery implementation or preserved failure evidence differs")
         implementation_unit = m2_units.get("M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION", {})
         materialize_unit = m2_units.get("M2-MATERIALIZE-REMAINING", {})
         header_unit = m2_units.get("M2-FULL-INPUT-READINESS", {})
         pixel_unit = m2_units.get("M2-OPTICAL-PIXEL-READINESS", {})
         if (
-            implementation_unit.get("status") != ("complete" if optical_pixel_recovery_review_ready else "in_progress" if materialization_pixel_review_approved else "planned")
+            implementation_unit.get("status") != ("complete" if optical_pixel_recovery_history_present else "in_progress" if materialization_pixel_review_approved else "planned")
             or implementation_unit.get("depends_on") != ["M2-MATERIALIZATION-PIXEL-READINESS-REVIEW"]
-            or implementation_unit.get("gates", {}).get("public_ci") != ("stage_1_2_3_pass_real_001_invalid_review_required" if optical_pixel_recovery_review_ready else "stage_1_and_2_pass_stage_3_correction_pending" if optical_pixel_implementation_pending else "stage_1_pass_stage_2_pending" if full_header_implementation_pending else "pending_stage_1" if materialization_pixel_review_approved else "required_before_real_execution")
-            or implementation_unit.get("disposition") != ("pass_controls_published" if optical_pixel_recovery_review_ready else None)
-            or materialize_unit.get("status") != ("complete" if full_header_implementation_pending or optical_pixel_implementation_pending or optical_pixel_recovery_review_ready else "planned")
-            or materialize_unit.get("disposition") != ("pass_materialization_identity_only" if full_header_implementation_pending or optical_pixel_implementation_pending or optical_pixel_recovery_review_ready else None)
+            or implementation_unit.get("gates", {}).get("public_ci") != ("stage_1_2_3_pass_real_001_invalid_review_required" if optical_pixel_recovery_history_present else "stage_1_and_2_pass_stage_3_correction_pending" if optical_pixel_implementation_pending else "stage_1_pass_stage_2_pending" if full_header_implementation_pending else "pending_stage_1" if materialization_pixel_review_approved else "required_before_real_execution")
+            or implementation_unit.get("disposition") != ("pass_controls_published" if optical_pixel_recovery_history_present else None)
+            or materialize_unit.get("status") != ("complete" if full_header_implementation_pending or optical_pixel_implementation_pending or optical_pixel_recovery_history_present else "planned")
+            or materialize_unit.get("disposition") != ("pass_materialization_identity_only" if full_header_implementation_pending or optical_pixel_implementation_pending or optical_pixel_recovery_history_present else None)
             or materialize_unit.get("depends_on") != ["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]
             or materialize_unit.get("gates", {}).get("exact_source_order") != expected_materialization_order
             or materialize_unit.get("gates", {}).get("maximum_attempts_per_source") != 1
             or materialize_unit.get("gates", {}).get("stop_on_first_failure") is not True
             or materialize_unit.get("gates", {}).get("automatic_retry_authorized") is not False
-            or header_unit.get("status") != ("complete" if optical_pixel_implementation_pending or optical_pixel_recovery_review_ready else "in_progress" if full_header_implementation_pending else "planned")
-            or header_unit.get("disposition") != ("pass_header_readiness_only" if optical_pixel_implementation_pending or optical_pixel_recovery_review_ready else None)
+            or header_unit.get("status") != ("complete" if optical_pixel_implementation_pending or optical_pixel_recovery_history_present else "in_progress" if full_header_implementation_pending else "planned")
+            or header_unit.get("disposition") != ("pass_header_readiness_only" if optical_pixel_implementation_pending or optical_pixel_recovery_history_present else None)
             or header_unit.get("depends_on") != ["M2-MATERIALIZE-REMAINING"]
-            or header_unit.get("gates", {}).get("public_ci") != ("pass" if optical_pixel_implementation_pending or optical_pixel_recovery_review_ready else "pending" if full_header_implementation_pending else "required")
+            or header_unit.get("gates", {}).get("public_ci") != ("pass" if optical_pixel_implementation_pending or optical_pixel_recovery_history_present else "pending" if full_header_implementation_pending else "required")
             or header_unit.get("gates", {}).get("measurement_pixel_decoding") is not False
-            or pixel_unit.get("status") != ("complete" if optical_pixel_recovery_review_ready else "in_progress" if optical_pixel_implementation_pending else "planned")
-            or pixel_unit.get("disposition") != ("invalid" if optical_pixel_recovery_review_ready else None)
+            or pixel_unit.get("status") != ("complete" if optical_pixel_recovery_history_present else "in_progress" if optical_pixel_implementation_pending else "planned")
+            or pixel_unit.get("disposition") != ("invalid" if optical_pixel_recovery_history_present else None)
             or pixel_unit.get("depends_on") != ["M2-FULL-INPUT-READINESS"]
-            or pixel_unit.get("gates", {}).get("public_ci") != ("pass" if optical_pixel_recovery_review_ready else "pending_after_failed_preflight_001" if optical_pixel_implementation_pending else "required")
+            or pixel_unit.get("gates", {}).get("public_ci") != ("pass" if optical_pixel_recovery_history_present else "pending_after_failed_preflight_001" if optical_pixel_implementation_pending else "required")
             or pixel_unit.get("gates", {}).get("maximum_real_invocations") != 1
             or pixel_unit.get("gates", {}).get("radar_pixel_readiness_authorized") is not False
             or pixel_unit.get("gates", {}).get("baseline_or_change_authorized") is not False
@@ -4796,7 +4922,17 @@ def main() -> None:
         implementation_unit = m2_units.get("M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION", {})
         implementation_gates = implementation_unit.get("gates", {})
         verify_unit = m2_units.get("M2-VERIFY", {})
-        if optical_pixel_recovery_review_ready:
+        if optical_pixel_recovery_execution_pending:
+            expected_materialized_source_count = 8
+            expected_materialization_state = "optical_pixel_recovery_001_public_gate_pass_execution_pending"
+            expected_verify_next_dependency = "M2-OPTICAL-PIXEL-RECOVERY-001"
+            expected_primary_next_action = expected_optical_pixel_recovery_execution_next_action
+        elif optical_pixel_recovery_implementation_pending:
+            expected_materialized_source_count = 8
+            expected_materialization_state = "optical_pixel_recovery_001_implementation_publication_pending"
+            expected_verify_next_dependency = "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION"
+            expected_primary_next_action = expected_optical_pixel_recovery_implementation_next_action
+        elif optical_pixel_recovery_review_ready:
             expected_materialized_source_count = 8
             expected_materialization_state = "optical_pixel_real_001_invalid_recovery_review_required"
             expected_verify_next_dependency = "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW"

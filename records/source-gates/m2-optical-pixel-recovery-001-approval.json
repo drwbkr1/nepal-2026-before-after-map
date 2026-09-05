@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-OPTICAL-PIXEL-RECOVERY-001-APPROVAL",
+  "status": "approved_exact_post_observation_operational_correction_and_one_recovery",
+  "approved_at_utc": "2026-09-05T19:49:07Z",
+  "review_id": "m2-optical-pixel-recovery-001-review",
+  "review_bundle_id": "m2-optical-pixel-recovery-001-review-bundle",
+  "review_bundle_manifest_sha256": "d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2",
+  "proposal_ref": "contracts/milestone-002-optical-pixel-recovery-001-proposal.json",
+  "proposal_sha256": "96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da",
+  "review_contract_ref": "reviews/m2-optical-pixel-recovery-001/review-contract-lock-002.json",
+  "review_contract_sha256": "552de54d12eca297ce94166453d697bea928a1b780803d8a111555bc29621761",
+  "review_reconciliation_ref": "records/source-gates/m2-optical-pixel-recovery-001-review-reconciliation.json",
+  "review_reconciliation_sha256": "991e27df34606d672038f7ca2a55b9db1a0da820084e646e7bbc978aa0abf3e2",
+  "locked_response_sha256": "1b32db7bea09e6c926362c3af63e7a219c37cf38115fea58f6f8254ff5003109",
+  "lock_receipt_sha256": "8dde0088f66cdaaa273780f8284e9927df1a1c3c1c5ee56f22f57b74734f8d92",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "authorized_recovery": {
+    "attempt_id": "optical-pixel-readiness-recovery-001",
+    "external_attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\optical-pixel-readiness-recovery-001",
+    "public_receipt_ref": "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json",
+    "maximum_real_invocations": 1,
+    "automatic_retry_authorized": false
+  },
+  "authorized_next_actions": [
+    "preserve real-001 and never reuse its receipt or external attempt root",
+    "correct the runner to normalize the existing nested production grid extent without changing any scientific threshold, source, AOI, mask, or decision rule",
+    "add portable and ArcGIS synthetic coverage for the exact nested production grid shape",
+    "publish the exact corrected implementation and require successful public CI",
+    "run one final no-pixel preflight for a new append-only recovery identity",
+    "if and only if all gates pass, run optical-pixel-readiness-recovery-001 once and reconcile its terminal result"
+  ],
+  "unchanged_scientific_contract": {
+    "pair": [
+      "M1-SRC-010",
+      "M1-SRC-008"
+    ],
+    "aoi_ids": [
+      "AOI-OVERVIEW",
+      "AOI-SOURCE",
+      "AOI-UPPER-CORRIDOR"
+    ],
+    "pixel_contract_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "current_pixel_contract_ref": "config/qa/optical-pixel-readiness-contract-001.json",
+    "current_pixel_contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
+    "threshold_changes_authorized": false,
+    "source_or_date_substitution_authorized": false
+  },
+  "does_not_authorize": [
+    "reuse, resume, replacement, or retry of real-001",
+    "automatic retry after recovery-001",
+    "radar measurement pixels or unresolved orbit and DEM actions",
+    "spectral indices, baseline processing, change rasters or polygons",
+    "interpretation, attribution, emergency guidance, or scientific publication"
+  ],
+  "human_decisions_fabricated": false
+}

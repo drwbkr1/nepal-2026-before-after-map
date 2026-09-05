@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW-LOCK-ATTEMPT-001-FAILURE",
+  "observed_at_utc": "2026-09-05T19:45:43Z",
+  "status": "failed_before_response_envelope_read",
+  "error_code": "review_contract_missing_hash_prefix_length",
+  "error": "contract fields differ: required hash_prefix_length was absent",
+  "bindings": {
+    "original_contract_ref": "reviews/m2-optical-pixel-recovery-001/review-contract.json",
+    "original_contract_sha256": "da7b8e6e70cfb9837a2c53cde78939ad1f680bcf41a39a8b9f4fdf02ec39fd2f",
+    "corrected_contract_ref": "reviews/m2-optical-pixel-recovery-001/review-contract-lock-001.json",
+    "corrected_contract_sha256": "078e4d2a054c01153d1c1ad645709bfead69898d1fe1600662b888f3e9cfe6b6",
+    "candidate_response_sha256": "1b32db7bea09e6c926362c3af63e7a219c37cf38115fea58f6f8254ff5003109"
+  },
+  "assertions": {
+    "response_locked": false,
+    "response_decision_values_read_by_lock_tool": false,
+    "response_note_values_read_by_lock_tool": false,
+    "reconciliation_created": false,
+    "decision_scope_changed": false,
+    "bundle_or_proposal_changed": false,
+    "correction_only_adds_hash_prefix_length_16": true
+  },
+  "next_gate": "lock the same exact candidate against the versioned corrected operational contract"
+}

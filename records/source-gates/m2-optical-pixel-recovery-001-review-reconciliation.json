@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-optical-pixel-recovery-001-review",
+  "contract_sha256": "552de54d12eca297ce94166453d697bea928a1b780803d8a111555bc29621761",
+  "response_sha256": "1b32db7bea09e6c926362c3af63e7a219c37cf38115fea58f6f8254ff5003109",
+  "receipt_sha256": "8dde0088f66cdaaa273780f8284e9927df1a1c3c1c5ee56f22f57b74734f8d92",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

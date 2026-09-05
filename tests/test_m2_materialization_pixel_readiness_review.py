@@ -135,7 +135,7 @@ class MaterializationPixelReadinessReviewTests(unittest.TestCase):
         self.assertFalse(units["M2-FULL-INPUT-READINESS"]["gates"]["measurement_pixel_decoding"])
         self.assertEqual(units["M2-OPTICAL-PIXEL-READINESS"]["status"], "complete")
         self.assertFalse(units["M2-OPTICAL-PIXEL-READINESS"]["gates"]["radar_pixel_readiness_authorized"])
-        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW")
+        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW-LOCK-ATTEMPT-003-FAILURE",
+  "observed_at_utc": "2026-09-05T19:47:01Z",
+  "status": "failed_before_response_envelope_read",
+  "error_code": "review_contract_missing_post_review_actions",
+  "error": "workflow_authority fields differ: required post_review_actions was absent",
+  "bindings": {
+    "contract_attempt_ref": "reviews/m2-optical-pixel-recovery-001/review-contract-lock-001.json",
+    "contract_attempt_sha256": "078e4d2a054c01153d1c1ad645709bfead69898d1fe1600662b888f3e9cfe6b6",
+    "corrected_contract_ref": "reviews/m2-optical-pixel-recovery-001/review-contract-lock-002.json",
+    "corrected_contract_sha256": "552de54d12eca297ce94166453d697bea928a1b780803d8a111555bc29621761",
+    "candidate_response_sha256": "1b32db7bea09e6c926362c3af63e7a219c37cf38115fea58f6f8254ff5003109"
+  },
+  "assertions": {
+    "response_locked": false,
+    "response_decision_values_read_by_lock_tool": false,
+    "response_note_values_read_by_lock_tool": false,
+    "reconciliation_created": false,
+    "decision_scope_changed": false,
+    "bundle_or_proposal_changed": false,
+    "correction_adds_only_required_post_review_actions": true
+  },
+  "next_gate": "lock the same exact candidate against operational contract lock-002"
+}

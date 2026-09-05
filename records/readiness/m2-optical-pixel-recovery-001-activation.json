@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-OPTICAL-PIXEL-RECOVERY-001-ACTIVATION",
+  "activated_at_utc": "2026-09-05T19:49:07Z",
+  "status": "pass_exact_approval_activated_implementation_and_publication_only",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
+    "approval_sha256": "983303532e95814828fd55d1f8c26c55d06d6785d579d236f8e5321072e8fcff",
+    "proposal_ref": "contracts/milestone-002-optical-pixel-recovery-001-proposal.json",
+    "proposal_sha256": "96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da",
+    "review_bundle_ref": "reviews/m2-optical-pixel-recovery-001/review-bundle.json",
+    "review_bundle_sha256": "d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2",
+    "review_contract_ref": "reviews/m2-optical-pixel-recovery-001/review-contract-lock-002.json",
+    "review_contract_sha256": "552de54d12eca297ce94166453d697bea928a1b780803d8a111555bc29621761",
+    "review_reconciliation_ref": "records/source-gates/m2-optical-pixel-recovery-001-review-reconciliation.json",
+    "review_reconciliation_sha256": "991e27df34606d672038f7ca2a55b9db1a0da820084e646e7bbc978aa0abf3e2"
+  },
+  "released_now": {
+    "production_grid_normalization_correction": true,
+    "exact_shape_portable_tests": true,
+    "exact_shape_arcgis_synthetic_test": true,
+    "public_ci": true,
+    "final_no_pixel_preflight_before_public_ci": false,
+    "real_recovery_attempt_before_public_ci_and_preflight": false,
+    "real_001_reuse_or_retry": false,
+    "radar_pixels": false,
+    "baseline_or_change_analysis": false
+  },
+  "assertions": {
+    "real_001_preserved": true,
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "external_data_mutated": false,
+    "real_product_pixels_examined": false,
+    "recovery_attempt_started": false,
+    "scientific_publication_released": false
+  },
+  "next_gate": "implement the exact correction and tests, then publish and require successful public CI before any no-pixel preflight or real recovery attempt"
+}

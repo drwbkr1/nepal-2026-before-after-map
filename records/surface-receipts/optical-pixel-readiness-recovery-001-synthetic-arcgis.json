@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-S2-PIXEL-READINESS-RECOVERY-001-SYNTHETIC-ARCGIS",
+  "verified_at_utc": "2026-09-05T19:56:23Z",
+  "status": "pass_exact_nested_production_shape_arcgis_synthetic",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced"
+  },
+  "bindings": {
+    "contract_ref": "config/qa/optical-pixel-readiness-contract-recovery-001.json",
+    "contract_sha256": "6fb4200f6d6ef5b0b77d5d49a278bd14cade062908b7d18197bf79265233c655",
+    "source_scientific_contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
+    "pixel_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "adapter_sha256": "914c65fc860898584a25f66a9b07f6f8a00b2dfec33d2e968d31abc9b5b2cb07"
+  },
+  "checks": {
+    "nested_input_extent": {
+      "xmin": 300000.0,
+      "ymin": 3100000.0,
+      "xmax": 304800.0,
+      "ymax": 3104800.0
+    },
+    "normalized_bounds": {
+      "xmin": 300000.0,
+      "ymin": 3100000.0,
+      "xmax": 304800.0,
+      "ymax": 3104800.0
+    },
+    "aligned_registration": {
+      "status": "pass_qa_only",
+      "stable_control_pair_count": 900,
+      "rmse_pixels": 0.0055187762135337085,
+      "bias_x_pixels": 0.00017391102963231538,
+      "bias_y_pixels": -0.0001107017906183485,
+      "finding": "Registration metrics meet the predeclared QA thresholds.",
+      "scientific_admission_authorized": false,
+      "candidate_count": 900,
+      "accepted_control_count": 900,
+      "rejected_counts": {
+        "outside_overview": 0,
+        "event_exclusion": 0,
+        "insufficient_valid": 0,
+        "low_texture": 0,
+        "low_correlation": 0
+      },
+      "method": "deterministic B11 normalized local cross-correlation outside buffered event AOIs"
+    },
+    "two_pixel_shift": {
+      "status": "block",
+      "stable_control_pair_count": 780,
+      "rmse_pixels": 2.000004566870904,
+      "bias_x_pixels": 2.0,
+      "bias_y_pixels": -0.0002232751494970068,
+      "finding": "Registration RMSE exceeds the predeclared maximum.",
+      "scientific_admission_authorized": false,
+      "candidate_count": 900,
+      "accepted_control_count": 780,
+      "rejected_counts": {
+        "outside_overview": 0,
+        "event_exclusion": 0,
+        "insufficient_valid": 0,
+        "low_texture": 0,
+        "low_correlation": 120
+      },
+      "method": "deterministic B11 normalized local cross-correlation outside buffered event AOIs"
+    },
+    "valid_pixel_count": 51840,
+    "after_cloud_pixel_count": 5760
+  },
+  "assertions": {
+    "exact_production_object_shape_used": true,
+    "nested_extent_normalized": true,
+    "synthetic_rasters_only": true,
+    "real_materialization_receipts_used": false,
+    "external_custody_accessed": false,
+    "real_product_pixels_examined": false,
+    "scientific_thresholds_changed": false,
+    "spectral_indices_computed": false,
+    "candidate_change_polygons_created": false
+  },
+  "next_gate": "portable tests and fresh public CI before the recovery no-pixel preflight"
+}

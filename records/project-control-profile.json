@@ -135,6 +135,21 @@
         "stage_3_attempt_id": "optical-pixel-readiness-real-001",
         "radar_pixel_readiness_authorized": false,
         "baseline_or_change_authorized": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
+        "approval_sha256": "983303532e95814828fd55d1f8c26c55d06d6785d579d236f8e5321072e8fcff",
+        "proposal_ref": "contracts/milestone-002-optical-pixel-recovery-001-proposal.json",
+        "proposal_sha256": "96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da",
+        "review_bundle_sha256": "d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2",
+        "review_reconciliation_ref": "records/source-gates/m2-optical-pixel-recovery-001-review-reconciliation.json",
+        "review_reconciliation_sha256": "991e27df34606d672038f7ca2a55b9db1a0da820084e646e7bbc978aa0abf3e2",
+        "attempt_id": "optical-pixel-readiness-recovery-001",
+        "maximum_real_invocations": 1,
+        "automatic_retry_authorized": false,
+        "real_001_retry_authorized": false,
+        "radar_pixel_readiness_authorized": false,
+        "baseline_or_change_authorized": false
       }
     ]
   },
@@ -151,9 +166,7 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [
-      "contracts/milestone-002-optical-pixel-recovery-001-proposal.json"
-    ],
+    "proposed_amendments": [],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json",
@@ -161,7 +174,8 @@
       "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
       "records/source-gates/m2-sentinel-recovery-002-approval.json",
       "records/source-gates/m2-sentinel-continuation-001-approval.json",
-      "records/source-gates/m2-materialization-pixel-readiness-approval.json"
+      "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+      "records/source-gates/m2-optical-pixel-recovery-001-approval.json"
     ]
   },
   "cycle": {
@@ -346,17 +360,17 @@
       },
       {
         "unit_id": "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW",
-        "reason": "The terminal real-001 result cannot be retried; any separately identified correction and recovery attempt requires a new attested owner decision.",
-        "authority_ref": "reviews/m2-optical-pixel-recovery-001/review-contract.json"
+        "reason": "The exact owner decision authorizes only the bounded nested-grid correction, exact-shape tests, public-CI gate, final no-pixel preflight, and one append-only recovery attempt with no retry.",
+        "authority_ref": "records/source-gates/m2-optical-pixel-recovery-001-approval.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW",
+    "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Review M2 optical pixel recovery-001 bundle SHA-256 d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2 and proposal SHA-256 96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da; approve, revise, or defer. No correction or second pixel attempt is authorized before an attested decision."
+    "next_action": "Publish the exact optical pixel recovery-001 implementation and require fresh successful public CI; do not run the final no-pixel preflight or recovery attempt before the public gate passes."
   },
   "parallel_checkpoints": [
     {
