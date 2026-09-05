@@ -154,7 +154,14 @@ class M2DemActivationTests(unittest.TestCase):
             (unit for unit in self.milestone["units"] if unit["id"] == "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW"),
             None,
         )
+        full_header = next(
+            (unit for unit in self.milestone["units"] if unit["id"] == "M2-FULL-INPUT-READINESS"),
+            None,
+        )
         expected_primary_checkpoint = (
+            "M2-FULL-INPUT-READINESS"
+            if full_header is not None and full_header.get("status") == "in_progress"
+            else
             "M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"
             if all(asset.get("state") == "promoted" for asset in primary_intake["assets"])
             and materialization_review is not None

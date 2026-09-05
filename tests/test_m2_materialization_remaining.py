@@ -95,6 +95,7 @@ class MaterializationRemainingTests(unittest.TestCase):
             mock.patch.object(RUNNER, "load", return_value=preflight),
             mock.patch.object(RUNNER, "validate_preflight"),
             mock.patch.object(RUNNER, "observe_preflight", return_value=preflight),
+            mock.patch.object(RUNNER, "ROOT", Path("Z:/absent-repository")),
             mock.patch.object(RUNNER, "attempt_root", return_value=Path("Z:/absent")),
             mock.patch.object(RUNNER.subprocess, "run", return_value=failed) as invoked,
         ):
@@ -120,6 +121,7 @@ class MaterializationRemainingTests(unittest.TestCase):
             mock.patch.object(RUNNER, "load", side_effect=fake_load),
             mock.patch.object(RUNNER, "validate_preflight"),
             mock.patch.object(RUNNER, "observe_preflight", return_value=preflight),
+            mock.patch.object(RUNNER, "ROOT", Path("Z:/absent-repository")),
             mock.patch.object(RUNNER, "attempt_root", return_value=Path("Z:/absent")),
             mock.patch.object(RUNNER.subprocess, "run", return_value=completed) as invoked,
         ):

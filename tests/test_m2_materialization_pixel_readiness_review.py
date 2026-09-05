@@ -127,14 +127,14 @@ class MaterializationPixelReadinessReviewTests(unittest.TestCase):
         self.assertTrue(review["gates"]["execution_authorized"])
         self.assertFalse(review["gates"]["radar_pixel_access_authorized"])
         self.assertEqual(units["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]["status"], "in_progress")
-        self.assertEqual(units["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]["gates"]["public_ci"], "pending_stage_1")
-        self.assertEqual(units["M2-MATERIALIZE-REMAINING"]["status"], "planned")
+        self.assertEqual(units["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]["gates"]["public_ci"], "stage_1_pass_stage_2_pending")
+        self.assertEqual(units["M2-MATERIALIZE-REMAINING"]["status"], "complete")
         self.assertEqual(units["M2-MATERIALIZE-REMAINING"]["gates"]["exact_source_order"], MATERIALIZATION_ORDER)
-        self.assertEqual(units["M2-FULL-INPUT-READINESS"]["status"], "planned")
+        self.assertEqual(units["M2-FULL-INPUT-READINESS"]["status"], "in_progress")
         self.assertFalse(units["M2-FULL-INPUT-READINESS"]["gates"]["measurement_pixel_decoding"])
         self.assertEqual(units["M2-OPTICAL-PIXEL-READINESS"]["status"], "planned")
         self.assertFalse(units["M2-OPTICAL-PIXEL-READINESS"]["gates"]["radar_pixel_readiness_authorized"])
-        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION")
+        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-FULL-INPUT-READINESS")
 
 
 if __name__ == "__main__":

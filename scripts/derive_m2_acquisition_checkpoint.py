@@ -46,6 +46,10 @@ MATERIALIZATION_PIXEL_IMPLEMENTATION_CHECKPOINT = {
     "checkpoint_id": "M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION",
     "next_action": "Publish the exact approved stage-1 materialization controls and require successful public CI before the final no-mutation preflight or any SAFE extraction.",
 }
+FULL_HEADER_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-FULL-INPUT-READINESS",
+    "next_action": "Publish the exact six-source radar and two-source optical header-readiness implementation and require successful public CI before the final no-header preflight or either real inspection.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -169,6 +173,27 @@ def current_materialization_pixel_implementation_pending(root: Path, state_count
     )
 
 
+def current_full_header_implementation_pending(root: Path, state_counts: dict[str, int]) -> bool:
+    if not current_container_verification_complete(root, state_counts):
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        reconciliation = load(root / "records/acquisition/sentinel-materialization-reconciliation-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    materialize = units.get("M2-MATERIALIZE-REMAINING", {})
+    header = units.get("M2-FULL-INPUT-READINESS", {})
+    return bool(
+        reconciliation.get("status") == "pass_all_eight_materialized_identity_only"
+        and materialize.get("status") == "complete"
+        and materialize.get("disposition") == "pass_materialization_identity_only"
+        and header.get("status") == "in_progress"
+        and header.get("gates", {}).get("public_ci") == "pending"
+        and header.get("gates", {}).get("measurement_pixel_decoding") is False
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -213,7 +238,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_materialization_pixel_implementation_pending(ROOT, progress["state_counts"]):
+        if current_full_header_implementation_pending(ROOT, progress["state_counts"]):
+            checkpoint = dict(FULL_HEADER_IMPLEMENTATION_CHECKPOINT)
+        elif current_materialization_pixel_implementation_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(MATERIALIZATION_PIXEL_IMPLEMENTATION_CHECKPOINT)
         elif current_materialization_pixel_review_required(ROOT, progress["state_counts"]):
             checkpoint = dict(MATERIALIZATION_PIXEL_REVIEW_CHECKPOINT)

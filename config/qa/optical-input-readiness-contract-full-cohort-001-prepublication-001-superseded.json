@@ -1,0 +1,195 @@
+{
+  "contract_version": "2.0",
+  "contract_id": "NEPAL-S2-MATERIALIZED-INPUT-READINESS-002",
+  "created_at_utc": "2026-09-05T18:36:22Z",
+  "status": "active_full_cohort_001_exact_materialized_pair",
+  "inputs": {
+    "materialization_contract_ref": "contracts/m2-materialization.json",
+    "materialization_contract_sha256": "9ba8154a36fff562decede04de660e731ce2401f893cecbd90c2d8563ce43d7b",
+    "optical_processing_contract_ref": "config/qa/optical-baseline-processing-contract.json",
+    "optical_processing_contract_sha256": "8321b7d3bd6a4a4304ed111f67b9b3ec372204823e495fbabd434ba9463e6eb5",
+    "pixel_readiness_contract_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_readiness_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "source_manifest_ref": "records/source-manifest.json",
+    "source_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+    "approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+    "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+    "materialization_reconciliation_ref": "records/acquisition/sentinel-materialization-reconciliation-002.json",
+    "materialization_reconciliation_sha256": "71013b14363f941d41411dff24e5410a6f8682976f8ac9844ff2b2e9ec772d82",
+    "prior_contract_ref": "config/qa/optical-input-readiness-contract.json",
+    "prior_contract_sha256": "83327ebc03fb5a7b66152a77717354e4b88450b6f63a2734b5b4ceea6550f3b0",
+    "core_ref": "scripts/optical_input_readiness_core_full_cohort_001.py",
+    "core_sha256": "59ee619a6f54edc3263cfd1c29b68a678a98578e9a8ccee53a1379d883d2e7bc",
+    "runner_ref": "scripts/inspect_optical_inputs_arcgis_full_cohort_001.py",
+    "runner_sha256": "21049ecc14fdf2514b5ea62d7571fd1f7d070175e6a95565e082015fc284203b",
+    "arcgis_adapter_ref": "scripts/validate_optical_input_readiness_arcgis_full_cohort_001.py",
+    "arcgis_adapter_sha256": "2e10f73b4fd6a6d30f4b7d1471508520d813ac2bb62580345c851d56b75b5ac4"
+  },
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+    "required_action_classes": [
+      "read_only_inspection",
+      "routine_qa",
+      "metadata_capture",
+      "evidence_recording"
+    ],
+    "this_contract_creates_authority": false,
+    "network_access_authorized": false,
+    "measurement_pixel_decoding_authorized": false
+  },
+  "route": {
+    "pair_id": "PAIR-S2-RUM-R119",
+    "before_source_id": "M1-SRC-010",
+    "before_product_id": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE",
+    "after_source_id": "M1-SRC-008",
+    "after_product_id": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE",
+    "processing_baseline": "05.12",
+    "tile": "45RUM",
+    "relative_orbit": 119
+  },
+  "analysis_crs": {
+    "wkid": 32645,
+    "name": "WGS 1984 UTM Zone 45N"
+  },
+  "execution_boundary": {
+    "external_data_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "receipt_root": "records/readiness/optical-input",
+    "network_requests": "prohibited",
+    "authentication": "prohibited",
+    "external_data_mutation": "prohibited",
+    "pixel_value_reads": "prohibited_header_and_identity_reads_only",
+    "receipt_replacement": "prohibited"
+  },
+  "prerequisites": {
+    "materialization_receipt_status": "pass_materialization_only",
+    "external_manifest_status": "complete",
+    "external_complete_marker_required": true,
+    "selected_member_size_and_sha256_reverification_required": true,
+    "exact_source_pair_required": true
+  },
+  "required_members": {
+    "exactly_one_per_role": true,
+    "role_patterns": {
+      "metadata_product": "MTD_MSIL2A.xml",
+      "metadata_tile": "GRANULE/*/MTD_TL.xml",
+      "B02": "GRANULE/*/IMG_DATA/R10m/*_B02_10m.jp2",
+      "B03": "GRANULE/*/IMG_DATA/R10m/*_B03_10m.jp2",
+      "B04": "GRANULE/*/IMG_DATA/R10m/*_B04_10m.jp2",
+      "B08": "GRANULE/*/IMG_DATA/R10m/*_B08_10m.jp2",
+      "B11": "GRANULE/*/IMG_DATA/R20m/*_B11_20m.jp2",
+      "B12": "GRANULE/*/IMG_DATA/R20m/*_B12_20m.jp2",
+      "SCL": "GRANULE/*/IMG_DATA/R20m/*_SCL_20m.jp2",
+      "quality_classification": "GRANULE/*/QI_DATA/MSK_CLASSI_B00.jp2"
+    }
+  },
+  "header_checks": {
+    "format": "JP2",
+    "single_band_roles": [
+      "B02",
+      "B03",
+      "B04",
+      "B08",
+      "B11",
+      "B12",
+      "SCL"
+    ],
+    "reflectance_pixel_types": [
+      "U12",
+      "U16"
+    ],
+    "scl_pixel_types": [
+      "U8",
+      "U16"
+    ],
+    "ten_metre_roles": [
+      "B02",
+      "B03",
+      "B04",
+      "B08"
+    ],
+    "twenty_metre_roles": [
+      "B11",
+      "B12",
+      "SCL"
+    ],
+    "cell_size_tolerance_m": 1e-06,
+    "extent_tolerance_m": 0.001,
+    "extent_must_equal_dimensions_times_cell_size": true,
+    "same_extent_within_product_required": true,
+    "same_role_grid_across_pair_required": true,
+    "quality_classification": {
+      "product_member": "MSK_CLASSI_B00.jp2",
+      "band_count": 3,
+      "cell_size_m": 60.0,
+      "pixel_types": [
+        "U1",
+        "U8"
+      ],
+      "band_semantics": {
+        "1": "opaque_cloud",
+        "2": "cirrus_cloud",
+        "3": "snow_or_ice"
+      }
+    }
+  },
+  "metadata_checks": {
+    "product_name_baseline_matches_internal_metadata": true,
+    "processing_baseline": "05.12",
+    "boa_quantification_value_exactly_once": true,
+    "all_used_band_offsets_exactly_once": true,
+    "dn_zero_identified_as_nodata": true
+  },
+  "source_references": [
+    {
+      "role": "sentinel2_multiband_mask_encoding",
+      "url": "https://sentiwiki.copernicus.eu/web/s2-processing",
+      "checked_at_utc": "2026-09-03T19:37:30Z"
+    },
+    {
+      "role": "sentinel2_product_specification_v15_1",
+      "url": "https://sentinels.copernicus.eu/documents/d/sentinel/sentinel-2-products-specification-document-15_1",
+      "checked_at_utc": "2026-09-03T19:37:30Z"
+    }
+  ],
+  "decision_semantics": {
+    "pass": "pass_header_readability_only",
+    "failure": "block",
+    "pass_allows_pixel_qa_only": true,
+    "pass_creates_scientific_admission": false
+  },
+  "claim_boundary": {
+    "member_inventory_established": false,
+    "raster_headers_readable": false,
+    "pixel_values_examined": false,
+    "pixel_usability_established": false,
+    "baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  },
+  "limitations": [
+    "A header-readiness pass establishes selected file identity, required inventory, metadata scaling fields, JP2 readability, CRS, dimensions, cell size, and pair grid compatibility only.",
+    "It does not inspect pixel values, masks, AOI coverage, saturation, registration residuals, cross-platform bias, or observable change.",
+    "The post-event optical scene remains high-cloud-risk and may be unusable after pixel-level mask review.",
+    "A blocked or inconclusive optical route must be retained and cannot be rescued by substituting unapproved dates or products.",
+    "This version binds the two exact passing materialization receipts and the eight-source materialization reconciliation; it weakens no prior check."
+  ],
+  "materializations": {
+    "before": {
+      "source_id": "M1-SRC-010",
+      "receipt_ref": "records/acquisition/materialization/m1-src-010-m1-src-010-materialization-001.json",
+      "receipt_sha256": "033db54c20179dc279fa075715f204febbbf1ba199c2abef4e1db4869b47648a",
+      "external_manifest_sha256": "a49ded6ecc8d15dc73001cc01c21e96866535c64836c2000c235ba463d225ead"
+    },
+    "after": {
+      "source_id": "M1-SRC-008",
+      "receipt_ref": "records/acquisition/materialization/m1-src-008-m1-src-008-materialization-001.json",
+      "receipt_sha256": "740431367eec58652d0b1f6df929f34751c52ae3568e2483b91259b0358c52d0",
+      "external_manifest_sha256": "66f1e9a75d3d33ed01c521e9f46099ca137bd52ad13aa294c7276cef52c69fd4"
+    }
+  },
+  "history": {
+    "prior_contract_preserved": true,
+    "real_001_maximum_invocations": 1
+  }
+}

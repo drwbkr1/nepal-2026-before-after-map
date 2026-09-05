@@ -1,0 +1,33 @@
+{
+  "receipt_version": "1.0",
+  "status": "pass_materialization_only",
+  "source_id": "M1-SRC-004",
+  "attempt_id": "m1-src-004-materialization-001",
+  "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+  "bindings": {
+    "contract_ref": "contracts/m2-materialization.json",
+    "contract_sha256": "9ba8154a36fff562decede04de660e731ce2401f893cecbd90c2d8563ce43d7b",
+    "active_intake_ref": "contracts/m2-intake.json",
+    "active_intake_sha256_at_materialization": "53fac5c71d357bbad79266b4f7ba4a34b7ef601601f8355b9989299ae6ed6121",
+    "container_receipt_ref": "records/acquisition/container-verification/m1-src-004-m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
+    "container_receipt_sha256": "3ce5c27a801bbc9ea4379faa8dcf382b63caa15841dc2a3b4aa1a0ec960db10d",
+    "archive_sha256": "a606cac063cc23e60a623f020192fc097d327f3dafadf1115802b2a458eaceab",
+    "archive_size_bytes": 1732332897,
+    "external_manifest_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-004\\m1-src-004-materialization-001\\materialization-manifest.json",
+    "external_manifest_sha256": "adb07abdfc54329f90810987aec25f999809536c9e676279b61aa2270e864783"
+  },
+  "external_safe_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-004\\m1-src-004-materialization-001\\S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+  "file_count": 26,
+  "total_extracted_bytes": 1732323929,
+  "activity": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "source_archive_mutated": false
+  },
+  "raster_readability_established": false,
+  "pixel_usability_established": false,
+  "baseline_established": false,
+  "change_established": false,
+  "scientific_admission_authorized": false,
+  "next_gate": "raster_readability_and_pixel_qa"
+}

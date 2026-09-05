@@ -346,10 +346,10 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION",
+    "checkpoint_id": "M2-FULL-INPUT-READINESS",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish the exact approved stage-1 materialization controls and require successful public CI before the final no-mutation preflight or any SAFE extraction."
+    "next_action": "Publish the exact six-source radar and two-source optical header-readiness implementation and require successful public CI before the final no-header preflight or either real inspection."
   },
   "parallel_checkpoints": [
     {

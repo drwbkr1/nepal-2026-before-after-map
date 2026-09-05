@@ -1,0 +1,270 @@
+{
+  "contract_version": "2.0",
+  "contract_id": "NEPAL-S1-MATERIALIZED-INPUT-READINESS-003",
+  "created_at_utc": "2026-09-05T18:36:22Z",
+  "status": "active_full_cohort_001_exact_six_sources",
+  "inputs": {
+    "materialization_contract_ref": "contracts/m2-materialization.json",
+    "materialization_contract_sha256": "9ba8154a36fff562decede04de660e731ce2401f893cecbd90c2d8563ce43d7b",
+    "radar_processing_contract_ref": "config/qa/radar-baseline-processing-contract.json",
+    "radar_processing_contract_sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f",
+    "pixel_readiness_contract_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_readiness_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "source_manifest_ref": "records/source-manifest.json",
+    "source_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+    "approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+    "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+    "materialization_reconciliation_ref": "records/acquisition/sentinel-materialization-reconciliation-002.json",
+    "materialization_reconciliation_sha256": "71013b14363f941d41411dff24e5410a6f8682976f8ac9844ff2b2e9ec772d82",
+    "prior_amended_contract_ref": "config/qa/radar-input-readiness-contract-amendment-001.json",
+    "prior_amended_contract_sha256": "d02a4344c755ac7b69e2b1bd2b66403fa2a68d204116a32220a03a6e4166e6bd",
+    "prior_real_001_ref": "records/readiness/radar-input/m2-s1-input-readiness-real-001.json",
+    "prior_real_001_sha256": "feab3645709df16306c81dae959a8693925a7c6f919f2a1e414cf3765c3a5b0c",
+    "prior_real_002_ref": "records/readiness/radar-input/m2-s1-input-readiness-real-002.json",
+    "prior_real_002_sha256": "12fcf5442d049bf8d1353566f1cb3238b7f1b7998f6e5581e029e25ae3594ea2",
+    "official_label_source_gate_ref": "records/source-gates/m2-radar-input-label-specification-source-gate.json",
+    "official_label_source_gate_sha256": "0bf61ef4d72444bcba3bd753fe15511cdebc87288d0d4dfeda9a9bbaeaeb2daf",
+    "core_ref": "scripts/radar_input_readiness_core_full_cohort_001.py",
+    "core_sha256": "ec3654e3975ef53f23be8bea7e7969739db0f8b26466bff7a8359a0f1033d513",
+    "runner_ref": "scripts/inspect_radar_inputs_arcgis_full_cohort_001.py",
+    "runner_sha256": "15ac88dcbbdae3630f6db8c2f328bbaafc5954909ed783a9f578a07dbc6edbae",
+    "arcgis_adapter_ref": "scripts/validate_radar_input_readiness_arcgis_full_cohort_001.py",
+    "arcgis_adapter_sha256": "06f563cc6b6c0b7267d5d96169dbeb15e569e081d40119f2c1032694c7cd5e4a"
+  },
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+    "required_action_classes": [
+      "read_only_inspection",
+      "routine_qa",
+      "metadata_capture",
+      "evidence_recording"
+    ],
+    "this_contract_creates_authority": false,
+    "network_access_authorized": false,
+    "measurement_pixel_decoding_authorized": false,
+    "baseline_processing_authorized_by_this_contract": false
+  },
+  "sources": [
+    {
+      "source_id": "M1-SRC-001",
+      "event_role": "before",
+      "route_id": "PAIR-S1-ASC-R085-IW",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE",
+      "acquisition_start_utc": "2026-08-16T12:21:16.058226Z",
+      "acquisition_end_utc": "2026-08-16T12:21:41.056809Z",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "absolute_orbit_number": 4151,
+      "operational_mode": "IW",
+      "polarizations": [
+        "VV",
+        "VH"
+      ],
+      "materialization_provenance": "retained_unintended_test_execution",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-001-fixture-must-not-run.json",
+      "materialization_receipt_sha256": "8c1d0c33eee7ab9d562aa9d6273b3188354c4c15be58d6faf7f0b86368b241e9",
+      "external_manifest_sha256": "3756a702efb9a7d1c1f61e284fabf017702e34073b82c44a3571f213d01295e9"
+    },
+    {
+      "source_id": "M1-SRC-002",
+      "event_role": "before",
+      "route_id": "PAIR-S1-ASC-R085-IW",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE",
+      "acquisition_start_utc": "2026-08-16T12:21:41.058298Z",
+      "acquisition_end_utc": "2026-08-16T12:22:06.056880Z",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "absolute_orbit_number": 4151,
+      "operational_mode": "IW",
+      "polarizations": [
+        "VV",
+        "VH"
+      ],
+      "materialization_provenance": "approved_append_only_materialization",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-002-m1-src-002-materialization-001.json",
+      "materialization_receipt_sha256": "eb647c2b1eee541503c2f2595f4de8c1370975918e7f716970aea79e4199efa8",
+      "external_manifest_sha256": "f1b92efcfeaae2c55b016ada4ce76485595c4e0cd980cd5419c5a4b34d9de849"
+    },
+    {
+      "source_id": "M1-SRC-003",
+      "event_role": "before",
+      "route_id": "PAIR-S1-DESC-R121-IW",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE",
+      "acquisition_start_utc": "2026-08-19T00:10:36.889384Z",
+      "acquisition_end_utc": "2026-08-19T00:11:01.887958Z",
+      "orbit_direction": "DESCENDING",
+      "relative_orbit_number": 121,
+      "absolute_orbit_number": 4187,
+      "operational_mode": "IW",
+      "polarizations": [
+        "VV",
+        "VH"
+      ],
+      "materialization_provenance": "approved_append_only_materialization",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-003-m1-src-003-materialization-001.json",
+      "materialization_receipt_sha256": "027128fce548203274c4dee23c309d3297d9ade6bb307eb6c615e2e4620bb9be",
+      "external_manifest_sha256": "ed982516cfc2cef55c522675e095cfef0f979f4c0632c2bfbc692cbe5ad082ba"
+    },
+    {
+      "source_id": "M1-SRC-004",
+      "event_role": "after",
+      "route_id": "PAIR-S1-ASC-R085-IW",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+      "acquisition_start_utc": "2026-08-28T12:21:16.762016Z",
+      "acquisition_end_utc": "2026-08-28T12:21:41.760540Z",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "absolute_orbit_number": 4326,
+      "operational_mode": "IW",
+      "polarizations": [
+        "VV",
+        "VH"
+      ],
+      "materialization_provenance": "approved_append_only_materialization",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-004-m1-src-004-materialization-001.json",
+      "materialization_receipt_sha256": "e99d38428ceb23c820c0a8c3236a54488fe443097a9cf83e09c6555031645f42",
+      "external_manifest_sha256": "adb07abdfc54329f90810987aec25f999809536c9e676279b61aa2270e864783"
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "event_role": "after",
+      "route_id": "PAIR-S1-ASC-R085-IW",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE",
+      "acquisition_start_utc": "2026-08-28T12:21:41.762029Z",
+      "acquisition_end_utc": "2026-08-28T12:22:06.760553Z",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "absolute_orbit_number": 4326,
+      "operational_mode": "IW",
+      "polarizations": [
+        "VV",
+        "VH"
+      ],
+      "materialization_provenance": "approved_append_only_materialization",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-005-m1-src-005-materialization-001.json",
+      "materialization_receipt_sha256": "15646e151ae7c048ed552f4a80ab4ca3ba05d16f4ab92dec194fd471b8e2e1ae",
+      "external_manifest_sha256": "fdbf2ca2a60e1ef77f08a81deb7a8e4de9279546d07708c2901eaa9067dec041"
+    },
+    {
+      "source_id": "M1-SRC-006",
+      "event_role": "after",
+      "route_id": "PAIR-S1-DESC-R121-IW",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE",
+      "acquisition_start_utc": "2026-08-31T00:10:37.647071Z",
+      "acquisition_end_utc": "2026-08-31T00:11:02.644291Z",
+      "orbit_direction": "DESCENDING",
+      "relative_orbit_number": 121,
+      "absolute_orbit_number": 4362,
+      "operational_mode": "IW",
+      "polarizations": [
+        "VV",
+        "VH"
+      ],
+      "materialization_provenance": "approved_append_only_materialization",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-006-m1-src-006-materialization-001.json",
+      "materialization_receipt_sha256": "48992aac9a3d21799b6680f1fc9d0a81a26b184705288cb90ebb2bc75a764539",
+      "external_manifest_sha256": "15be94c2730f0285677dce72e661212ba9a800fce1dc6a578a0dc3025951c5a0"
+    }
+  ],
+  "analysis_crs": {
+    "wkid": 32645,
+    "name": "WGS 1984 UTM Zone 45N",
+    "note": "Raw GRD TIFF headers remain in native product form; analysis projection occurs only in separately gated processing."
+  },
+  "execution_boundary": {
+    "external_data_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "receipt_root": "records/readiness/radar-input",
+    "network_requests": "prohibited",
+    "authentication": "prohibited",
+    "credential_access": "prohibited",
+    "external_data_mutation": "prohibited",
+    "pixel_value_decoding": "prohibited_header_and_metadata_reads_only",
+    "derived_raster_writes": "prohibited",
+    "receipt_replacement": "prohibited"
+  },
+  "prerequisites": {
+    "exact_materialization_receipt_hash_required": true,
+    "materialization_receipt_status": "pass_materialization_only",
+    "external_manifest_status": "complete",
+    "external_complete_marker_required": true,
+    "selected_member_size_and_sha256_reverification_required": true,
+    "source_archive_mutation_prohibited": true
+  },
+  "required_members": {
+    "exactly_one_per_role": true,
+    "role_patterns": {
+      "manifest_safe": "manifest.safe",
+      "annotation_vv": "annotation/*-vv-*.xml",
+      "annotation_vh": "annotation/*-vh-*.xml",
+      "calibration_vv": "annotation/calibration/calibration-*-vv-*.xml",
+      "calibration_vh": "annotation/calibration/calibration-*-vh-*.xml",
+      "noise_vv": "annotation/calibration/noise-*-vv-*.xml",
+      "noise_vh": "annotation/calibration/noise-*-vh-*.xml",
+      "measurement_vv": "measurement/*-vv-*.tiff",
+      "measurement_vh": "measurement/*-vh-*.tiff"
+    }
+  },
+  "metadata_checks": {
+    "mission_id": "S1D",
+    "product_type": "GRD",
+    "mode": "IW",
+    "swath": "IW",
+    "polarizations": [
+      "VV",
+      "VH"
+    ],
+    "pixel_value": "Detected",
+    "output_pixels": "16 bit unsigned integer",
+    "minimum_embedded_orbit_vectors": 2,
+    "finite_embedded_position_and_velocity_required": true,
+    "strictly_increasing_embedded_orbit_times_required": true,
+    "embedded_orbit_vectors_must_bracket_acquisition": true,
+    "acquisition_time_tolerance_seconds": 1.0,
+    "absolute_orbit_and_direction_must_match_approved_source": true
+  },
+  "header_checks": {
+    "formats": [
+      "TIFF"
+    ],
+    "band_count": 1,
+    "pixel_types": [
+      "U16"
+    ],
+    "raster_dimensions_must_match_annotation": true,
+    "vv_vh_dimensions_and_pixel_type_must_match_within_source": true,
+    "vv_vh_annotation_identity_and_spacing_must_match_within_source": true,
+    "raw_measurement_spatial_reference_not_used_as_analysis_crs": true
+  },
+  "decision_semantics": {
+    "per_source_pass": "pass_header_readability_only",
+    "any_identity_inventory_metadata_or_header_failure": "block",
+    "all_six_pass_status": "pass_full_radar_header_readiness_only",
+    "all_six_pass_reconciles_exact_before_after_sources": true,
+    "pass_releases_baseline_processing": false,
+    "pass_creates_scientific_admission": false
+  },
+  "claim_boundary": {
+    "member_inventory_established": false,
+    "annotation_metadata_established": false,
+    "raster_headers_readable": false,
+    "pixel_values_examined": false,
+    "pixel_usability_established": false,
+    "complete_pair_established": false,
+    "baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  },
+  "history": {
+    "real_001_status": "block_preserved",
+    "real_002_status": "pass_partial_pre_event_header_readiness_only_preserved",
+    "detected_label_correction_preserved": true,
+    "real_003_maximum_invocations": 1
+  },
+  "limitations": [
+    "A pass establishes selected-member identity, annotation consistency, embedded state-vector structure, and ArcGIS TIFF header readability for the six exact radar sources only.",
+    "It does not decode measurement pixels, establish AOI coverage, apply external orbit data, terrain-correct a raster, evaluate layover or shadow, establish registration, or release a baseline.",
+    "Real-001 remains BLOCK and real-002 remains a post-observation three-source confirmation; neither is reclassified.",
+    "M1-SRC-001 retains unintended-test materialization provenance."
+  ]
+}

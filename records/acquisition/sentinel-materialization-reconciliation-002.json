@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-SENTINEL-MATERIALIZATION-RECONCILIATION-002",
+  "reconciled_at_utc": "2026-09-05T18:28:09Z",
+  "status": "pass_all_eight_materialized_identity_only",
+  "bindings": {
+    "final_preflight_ref": "records/readiness/m2-materialization-remaining-preflight.json",
+    "final_preflight_sha256": "638b1827cff4c12ab31f46b22bc934058b9d9b44f2e3039e3804cf1d535c9527",
+    "approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+    "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca"
+  },
+  "materializations": [
+    {
+      "source_id": "M1-SRC-001",
+      "attempt_id": "fixture-must-not-run",
+      "status": "pass_materialization_only",
+      "receipt_ref": "records/acquisition/materialization/m1-src-001-fixture-must-not-run.json",
+      "receipt_sha256": "8c1d0c33eee7ab9d562aa9d6273b3188354c4c15be58d6faf7f0b86368b241e9",
+      "external_manifest_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-001\\fixture-must-not-run\\materialization-manifest.json",
+      "external_manifest_sha256": "3756a702efb9a7d1c1f61e284fabf017702e34073b82c44a3571f213d01295e9",
+      "file_count": 26,
+      "total_extracted_bytes": 1732324248
+    },
+    {
+      "source_id": "M1-SRC-002",
+      "attempt_id": "m1-src-002-materialization-001",
+      "status": "pass_materialization_only",
+      "receipt_ref": "records/acquisition/materialization/m1-src-002-m1-src-002-materialization-001.json",
+      "receipt_sha256": "eb647c2b1eee541503c2f2595f4de8c1370975918e7f716970aea79e4199efa8",
+      "external_manifest_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-002\\m1-src-002-materialization-001\\materialization-manifest.json",
+      "external_manifest_sha256": "f1b92efcfeaae2c55b016ada4ce76485595c4e0cd980cd5419c5a4b34d9de849",
+      "file_count": 26,
+      "total_extracted_bytes": 1732865309
+    },
+    {
+      "source_id": "M1-SRC-003",
+      "attempt_id": "m1-src-003-materialization-001",
+      "status": "pass_materialization_only",
+      "receipt_ref": "records/acquisition/materialization/m1-src-003-m1-src-003-materialization-001.json",
+      "receipt_sha256": "027128fce548203274c4dee23c309d3297d9ade6bb307eb6c615e2e4620bb9be",
+      "external_manifest_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-003\\m1-src-003-materialization-001\\materialization-manifest.json",
+      "external_manifest_sha256": "ed982516cfc2cef55c522675e095cfef0f979f4c0632c2bfbc692cbe5ad082ba",
+      "file_count": 26,
+      "total_extracted_bytes": 1718360652
+    },
+    {
+      "source_id": "M1-SRC-004",
+      "attempt_id": "m1-src-004-materialization-001",
+      "status": "pass_materialization_only",
+      "receipt_ref": "records/acquisition/materialization/m1-src-004-m1-src-004-materialization-001.json",
+      "receipt_sha256": "e99d38428ceb23c820c0a8c3236a54488fe443097a9cf83e09c6555031645f42",
+      "external_manifest_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-004\\m1-src-004-materialization-001\\materialization-manifest.json",
+      "external_manifest_sha256": "adb07abdfc54329f90810987aec25f999809536c9e676279b61aa2270e864783",
+      "file_count": 26,
+      "total_extracted_bytes": 1732323929
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "attempt_id": "m1-src-005-materialization-001",
+      "status": "pass_materialization_only",
+      "receipt_ref": "records/acquisition/materialization/m1-src-005-m1-src-005-materialization-001.json",
+      "receipt_sha256": "15646e151ae7c048ed552f4a80ab4ca3ba05d16f4ab92dec194fd471b8e2e1ae",
+      "external_manifest_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-005\\m1-src-005-materialization-001\\materialization-manifest.json",
+      "external_manifest_sha256": "fdbf2ca2a60e1ef77f08a81deb7a8e4de9279546d07708c2901eaa9067dec041",
+      "file_count": 26,
+      "total_extracted_bytes": 1732889756
+    },
+    {
+      "source_id": "M1-SRC-006",
+      "attempt_id": "m1-src-006-materialization-001",
+      "status": "pass_materialization_only",
+      "receipt_ref": "records/acquisition/materialization/m1-src-006-m1-src-006-materialization-001.json",
+      "receipt_sha256": "48992aac9a3d21799b6680f1fc9d0a81a26b184705288cb90ebb2bc75a764539",
+      "external_manifest_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-006\\m1-src-006-materialization-001\\materialization-manifest.json",
+      "external_manifest_sha256": "15be94c2730f0285677dce72e661212ba9a800fce1dc6a578a0dc3025951c5a0",
+      "file_count": 26,
+      "total_extracted_bytes": 1718393740
+    },
+    {
+      "source_id": "M1-SRC-010",
+      "attempt_id": "m1-src-010-materialization-001",
+      "status": "pass_materialization_only",
+      "receipt_ref": "records/acquisition/materialization/m1-src-010-m1-src-010-materialization-001.json",
+      "receipt_sha256": "033db54c20179dc279fa075715f204febbbf1ba199c2abef4e1db4869b47648a",
+      "external_manifest_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-010\\m1-src-010-materialization-001\\materialization-manifest.json",
+      "external_manifest_sha256": "a49ded6ecc8d15dc73001cc01c21e96866535c64836c2000c235ba463d225ead",
+      "file_count": 95,
+      "total_extracted_bytes": 1142871713
+    },
+    {
+      "source_id": "M1-SRC-008",
+      "attempt_id": "m1-src-008-materialization-001",
+      "status": "pass_materialization_only",
+      "receipt_ref": "records/acquisition/materialization/m1-src-008-m1-src-008-materialization-001.json",
+      "receipt_sha256": "740431367eec58652d0b1f6df929f34751c52ae3568e2483b91259b0358c52d0",
+      "external_manifest_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-008\\m1-src-008-materialization-001\\materialization-manifest.json",
+      "external_manifest_sha256": "66f1e9a75d3d33ed01c521e9f46099ca137bd52ad13aa294c7276cef52c69fd4",
+      "file_count": 95,
+      "total_extracted_bytes": 941787579
+    }
+  ],
+  "summary": {
+    "source_count": 8,
+    "newly_materialized_source_count": 5,
+    "retained_materialized_source_count": 3,
+    "file_count": 346,
+    "total_extracted_bytes": 12451816926
+  },
+  "assertions": {
+    "every_receipt_passed": true,
+    "every_manifest_rehashed": true,
+    "every_materialized_file_rehashed": true,
+    "source_archives_mutated": false,
+    "network_requests_performed": false,
+    "measurement_pixels_decoded": false,
+    "raster_header_readiness_established": false,
+    "pixel_usability_established": false,
+    "baseline_or_change_established": false,
+    "scientific_admission_authorized": false
+  },
+  "next_gate": "implement and publish exact full-cohort radar and optical header-readiness controls before real header access"
+}

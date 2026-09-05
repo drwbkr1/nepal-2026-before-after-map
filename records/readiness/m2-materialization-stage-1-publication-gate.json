@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-MATERIALIZATION-STAGE-1-PUBLICATION-GATE-001",
+  "verified_at_utc": "2026-09-05T18:26:51Z",
+  "status": "pass_public_controls_verified_before_materialization",
+  "bindings": {
+    "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+    "activation_sha256": "c3f2fc5754a1b82649804821f5bf07f3c41b4a8d24123a11ebcd91c39d95e412",
+    "review_reconciliation_sha256": "aee7e7c3142189edd81079950daab38b08ef783ef1c38efc09ad8ab1cf38930f",
+    "implementation_readiness_sha256": "ee0905987ee863cc5f922fbb2518abce80d9fdb83b9aceee1e643090ddc6c240",
+    "remaining_core_sha256": "d08b933b2a4c55e8904e248a66356ec71ec2a0797ab873e936b9596962eebf22",
+    "remaining_preflight_sha256": "01d7b7250bdcbef205f623ab481c7be118a85654cdc8fc5bb4f8dab1dcee350b",
+    "remaining_runner_sha256": "c68fa10eeb97dcc2f65571f152a148a20375bd0fcde21aedf80d82613180f047",
+    "remaining_reconciler_sha256": "515a66e0553254525f8d4e42e0121720da0deb02d73620722407eb7d7c18c9b0",
+    "materialization_core_sha256": "387a6984b7d30ea709c9c55befdafd2920d802b19cb90a964069ddfa46922778",
+    "materialization_runner_sha256": "e14718eaa9e5d3d3caa52b59b3e259f6928fad3e9bed9924cf04c49796c6f09b",
+    "focused_tests_sha256": "d1f212906114bddd14c10d4ff413c827319edfae4322fd8c09b7a27e0a817b2d"
+  },
+  "github_actions": {
+    "workflow": "Validate project controls",
+    "run_id": 33984065216,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33984065216",
+    "head_sha": "4d4a0b63ed08274cf874d91ffc06292f0a352533",
+    "conclusion": "success"
+  },
+  "assertions": {
+    "remote_ref_verified": true,
+    "public_ci_passed": true,
+    "real_materialization_started": false,
+    "external_data_mutated": false,
+    "measurement_pixels_read": false,
+    "authority_created": false
+  },
+  "next_gate": "pass the final no-mutation preflight immediately before the fixed-order five-source materialization"
+}

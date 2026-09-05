@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-FULL-HEADER-STAGE-IMPLEMENTATION-READINESS-001",
+  "verified_at_utc": "2026-09-05T18:50:05Z",
+  "status": "pass_local_and_arcgis_synthetic_ready_public_ci_pending",
+  "bindings": {
+    "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+    "materialization_reconciliation_sha256": "71013b14363f941d41411dff24e5410a6f8682976f8ac9844ff2b2e9ec772d82",
+    "radar_contract_sha256": "1390b1635f8c04e5ba22f0f24a329fc4584cbc28c2c9e0489c133814d1ef229b",
+    "radar_core_sha256": "ec3654e3975ef53f23be8bea7e7969739db0f8b26466bff7a8359a0f1033d513",
+    "radar_runner_sha256": "d222c1d463ea8d4ce20e1fd2f432509bc08e2b785b30765ac30cf66ed0d8cb27",
+    "radar_adapter_sha256": "06f563cc6b6c0b7267d5d96169dbeb15e569e081d40119f2c1032694c7cd5e4a",
+    "radar_synthetic_receipt_sha256": "29c1aa6ade51dddc439c23a3a413fc6fb62be4ee9e2fec7bfb1c9468d1d9e055",
+    "optical_contract_sha256": "23f487dfd17bac016d1e3ac0f276f14b480f394f6ec20f3fbbe456340461878a",
+    "optical_core_sha256": "59ee619a6f54edc3263cfd1c29b68a678a98578e9a8ccee53a1379d883d2e7bc",
+    "optical_runner_sha256": "12bc1fbe37c8f34c3f350cc931d6e402aa469aeea27216c8e974ac30e366654d",
+    "optical_adapter_sha256": "2e10f73b4fd6a6d30f4b7d1471508520d813ac2bb62580345c851d56b75b5ac4",
+    "optical_synthetic_receipt_sha256": "43f97f5112895f739616676bea1b0e7ac7d1a9acd0d436040c02856fdbdfa77c",
+    "stage_gate_sha256": "1a8f539525bcce9eccc3614c79816f628a5259dafc431bbd66204f58018f87f7",
+    "final_preflight_sha256": "5442db2ab64c70d320da1e06e08e4d3a160149b75f203f0ecce9305f86416c6c",
+    "publication_gate_recorder_sha256": "2f513d60d3f647fca09bd258744c41badd29189f23986cca2c1334f3e9fa10f1",
+    "focused_tests_sha256": "f6090bc14da545a43046b7816f499eb33cf2abcb61675f78006ce06aaf7c52c3"
+  },
+  "tests": {
+    "focused_test_count": 12,
+    "full_repository_test_count": 349,
+    "portable_result": "pass",
+    "arcgis_radar_result": "pass",
+    "arcgis_optical_result": "pass",
+    "intentional_block_cases": "pass",
+    "no_replacement_cases": "pass"
+  },
+  "assertions": {
+    "external_custody_accessed_by_synthetic_tests": false,
+    "real_materialization_receipts_used_by_synthetic_tests": false,
+    "real_raster_headers_opened": false,
+    "real_product_pixels_examined": false,
+    "network_requests_performed": false,
+    "real_header_attempt_started": false
+  },
+  "next_gate": "publish this exact header implementation and require successful public CI before the final no-header preflight"
+}
