@@ -90,6 +90,26 @@
           "M1-SRC-010"
         ],
         "pixel_processing_released": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-sentinel-continuation-001-approval.json",
+        "approval_sha256": "93f451f458c5b4984f980049f5adadf73e52663c8a71ee9699939b7f85e727a1",
+        "proposal_ref": "contracts/milestone-002-sentinel-continuation-001-proposal.json",
+        "proposal_sha256": "d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1",
+        "review_bundle_sha256": "382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b",
+        "review_reconciliation_ref": "records/source-gates/m2-sentinel-continuation-001-review-reconciliation.json",
+        "review_reconciliation_sha256": "420f525d160a1b95f6784da06a0ca95ddf8e6e8e37d7947925f6c865157d28a6",
+        "source_ids_in_exact_order": [
+          "M1-SRC-005",
+          "M1-SRC-006",
+          "M1-SRC-008",
+          "M1-SRC-010"
+        ],
+        "maximum_real_attempts_per_source": 1,
+        "stop_on_first_failure": true,
+        "m1_src_004_request_permitted": false,
+        "secret_transport": "anonymous_pipe_single_use_memory_only",
+        "pixel_processing_released": false
       }
     ]
   },
@@ -112,7 +132,8 @@
       "records/source-gates/m2-dem-amendment-approval.json",
       "records/source-gates/m2-orbit-amendment-approval.json",
       "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
-      "records/source-gates/m2-sentinel-recovery-002-approval.json"
+      "records/source-gates/m2-sentinel-recovery-002-approval.json",
+      "records/source-gates/m2-sentinel-continuation-001-approval.json"
     ]
   },
   "cycle": {
@@ -284,6 +305,11 @@
         "unit_id": "M2-RADAR-INPUT-LABEL-AMEND",
         "reason": "The exact owner decision authorized only the post-observation Detected-label correction, publication gate, one real-002 inspection, and reconciliation.",
         "authority_ref": "records/source-gates/m2-radar-input-readiness-amendment-approval.json"
+      },
+      {
+        "unit_id": "M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION",
+        "reason": "The exact owner decision authorizes only the continuation-only implementation, synthetic proof, public-CI gate, final no-payload preflight, and fixed-order one-attempt sequence for four named unattempted products.",
+        "authority_ref": "records/source-gates/m2-sentinel-continuation-001-approval.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
@@ -292,7 +318,7 @@
     "checkpoint_id": "M2-ACQUISITION-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Review exact Sentinel continuation-001 bundle 382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b and proposal d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1; do not implement, request a token, or acquire another product before a completed owner decision."
+    "next_action": "Publish the exact continuation-001 implementation and verify successful public CI; do not activate, request a token, or access payload bytes before the publication gate and final no-payload preflight pass."
   },
   "parallel_checkpoints": [
     {

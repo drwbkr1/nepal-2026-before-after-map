@@ -32,7 +32,7 @@ CHECKPOINTS = {
 }
 CONTINUATION_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-ACQUISITION-REVIEW",
-    "next_action": "Review exact Sentinel continuation-001 bundle 382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b and proposal d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1; do not implement, request a token, or acquire another product before a completed owner decision.",
+    "next_action": "Publish the exact continuation-001 implementation and verify successful public CI; do not activate, request a token, or access payload bytes before the publication gate and final no-payload preflight pass.",
 }
 
 
@@ -61,14 +61,24 @@ def current_continuation_review_required(root: Path, state_counts: dict[str, int
         return False
     units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
     review = units.get("M2-SENTINEL-CONTINUATION-001-REVIEW", {})
-    return bool(
+    gates = review.get("gates", {})
+    blank_review = bool(
         review.get("status") == "ready"
         and review.get("human_gate") is True
-        and review.get("gates", {}).get("human_decision_count") == 0
-        and review.get("gates", {}).get("continuation_authorized") is False
+        and gates.get("human_decision_count") == 0
+        and gates.get("continuation_authorized") is False
         and blank.get("completed") is False
         and blank.get("reviewer", {}).get("attestation") is False
     )
+    approved_implementation_pending = bool(
+        review.get("status") == "complete"
+        and review.get("human_gate") is True
+        and gates.get("human_decision_count") == 1
+        and gates.get("attestation") is True
+        and gates.get("continuation_authorized") is True
+        and gates.get("implementation_authorized") is True
+    )
+    return blank_review or approved_implementation_pending
 
 
 def candidate_controls(

@@ -16,7 +16,8 @@
     "records/source-gates/m2-dem-amendment-approval.json",
     "records/source-gates/m2-orbit-amendment-approval.json",
     "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
-    "records/source-gates/m2-sentinel-recovery-002-approval.json"
+    "records/source-gates/m2-sentinel-recovery-002-approval.json",
+    "records/source-gates/m2-sentinel-continuation-001-approval.json"
   ],
   "parallel_checkpoints": [
     "M2-DEM-VERTICAL-DATUM-REVIEW",

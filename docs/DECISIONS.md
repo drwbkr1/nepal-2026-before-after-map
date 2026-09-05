@@ -359,3 +359,19 @@
 **Reason:** Git normalized three new review JSON files to LF on publication, so the first contract bound local CRLF bytes that did not exist in the public commit. Hash-bound review evidence must identify the public bytes exactly.
 
 **Status:** The corrected packet remains blank and unattested. This correction creates no implementation, credential, acquisition, retry, pixel, or scientific authority. Public CI must pass on the corrected commit before owner handoff.
+
+## D-059 — Approve the exact bounded Sentinel continuation
+
+**Decision:** Accept continuation-001 review bundle SHA-256 `382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b` and proposal SHA-256 `d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1`. Release only the reviewed continuation-only implementation and proof, public-CI gate, final no-payload preflight, fresh anonymous-pipe credential handoff, and at most one attempt per source for `M1-SRC-005`, `M1-SRC-006`, `M1-SRC-008`, and `M1-SRC-010` in that order with stop on first failure.
+
+**Reason:** Recovery-002 established a valid `M1-SRC-004` archive, but its supervisor then failed before any continuation attempt and retained no safe exact exception category. A separate exact decision was required to continue without treating that stopped process as reusable authority.
+
+**Status:** The completed response is locked at SHA-256 `add004d26f7a35ed1b657089dae1c1f68f01eba495c0c4edb35cee943a13cb39`. Approval record SHA-256 `93f451f458c5b4984f980049f5adadf73e52663c8a71ee9699939b7f85e727a1` and reconciliation SHA-256 `420f525d160a1b95f6784da06a0ca95ddf8e6e8e37d7947925f6c865157d28a6` preserve one approval, zero revise/defer decisions, and the attestation. No `M1-SRC-004` request, partial reuse, retry after failure, token storage, pixel action, or scientific action is authorized.
+
+## D-060 — Require public proof for the continuation-only worker
+
+**Decision:** Implement a separate broker, detached supervisor, exact-order source wrapper, activation recorder, no-payload preflight, and success reconciler bound to D-059. Require a clean exact public commit and passing CI before activation, token entry, or payload access.
+
+**Reason:** The earlier supervisor's generic failure erased the useful safe error category. The replacement must preserve nonsecret phase and terminal evidence, survive broker-console interruption on Windows, prevent secret propagation through arguments, environment, files, and errors, and prove the fixed one-attempt sequence before real use.
+
+**Status:** Twenty-three focused tests and 317 full repository tests pass locally. Current readiness receipt SHA-256 `f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad` supersedes retained attempt-001 SHA-256 `86af300807b6db28e97deb6b8188d609f02bf0bed3044741e1eb124eddc28c48` after adding the exact prelaunch Git-state boundary. Public CI, activation, final no-payload preflight, credential entry, and all four payload attempts remain pending.

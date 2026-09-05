@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION-READINESS-002",
+  "verified_at_utc": "2026-09-05T03:19:36Z",
+  "status": "pass_local_synthetic_ready_public_ci_pending",
+  "supersedes": {
+    "ref": "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-001-superseded.json",
+    "sha256": "86af300807b6db28e97deb6b8188d609f02bf0bed3044741e1eb124eddc28c48",
+    "reason": "prelaunch Git-state boundary was added after the first local pass and before publication"
+  },
+  "bindings": {
+    "approval_sha256": "93f451f458c5b4984f980049f5adadf73e52663c8a71ee9699939b7f85e727a1",
+    "review_reconciliation_sha256": "420f525d160a1b95f6784da06a0ca95ddf8e6e8e37d7947925f6c865157d28a6",
+    "core_sha256": "c8bd659d37e4a3a8b2fedc6346f86ee98e0c87d3f06fcc023c87c72c80f87a9e",
+    "broker_sha256": "000e9246345f43bf360fc47f4d46037742d2bcc96dcd35b1fb28fcdf79358cb9",
+    "supervisor_sha256": "256dbe9521b9cc26e1fe8979f4ec28e636c01fc201ed30fc43d03d1598ebfbdd",
+    "source_runner_sha256": "e99c1b510b5c724ef941bd350676e27a20f79c3a3ceb9b0036b8cc7db7cba039",
+    "exact_product_runner_sha256": "f0746020f7fe87b9b578fcb32548ff442ca47a8c72cf1fdb5ddbb163b3abbc78",
+    "transfer_core_sha256": "a858756a063148800be418bb7329ba148bcdce71b7812abafee6f7c9c62d8da9",
+    "container_verifier_sha256": "2320591bc56f2d1f601f264089adfb8ad55772d15b5661328488d1b2003ff777",
+    "success_reconciler_sha256": "d6372b05172600ef0beb97701759e60ec07974da9c76b658ebd5dffe0feb2c76",
+    "activation_script_sha256": "b745f549551768ab89dab96220c77fea9a1c26464eabf2030853803d3e2a1f51",
+    "final_preflight_sha256": "63d91c046579c8a64202c5fd7f8326e4bd91c690eb8d126aa718185045ec480d",
+    "publication_gate_recorder_sha256": "033b6ac5cd4608aeaf7d8f7649525c8bfcfdd26b694e2525b80e2be0327cea98",
+    "focused_tests_sha256": "b56ab5d83bb2fc9324fbfa4e2dd43e727bcc05603d3e74aacdcc33266f0a0c5b"
+  },
+  "tests": {
+    "focused_test_count": 23,
+    "full_repository_test_count": 317,
+    "focused_result": "pass",
+    "full_repository_result": "pass",
+    "windows_detached_process_tested": true,
+    "safe_known_control_code_tested": true,
+    "unexpected_exception_message_and_secret_exclusion_tested": true,
+    "fixed_source_order_tested": true,
+    "one_attempt_per_source_tested": true,
+    "stop_on_first_failure_tested": true,
+    "m1_src_004_request_refusal_tested": true,
+    "exclusive_staging_and_atomic_no_replace_tested": true,
+    "redirect_and_range_refusal_tested": true,
+    "container_gate_tested": true
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "external_product_bytes_mutated": false,
+    "product_payload_requested": false,
+    "real_continuation_attempt_started": false,
+    "m1_src_004_requested": false,
+    "automatic_retry_authorized": false,
+    "pixel_processing_released": false
+  },
+  "next_gate": "publish this exact implementation and require passing public CI before activation or token entry"
+}

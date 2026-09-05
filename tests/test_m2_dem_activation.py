@@ -137,6 +137,7 @@ class M2DemActivationTests(unittest.TestCase):
                 "records/source-gates/m2-orbit-amendment-approval.json",
                 "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
                 "records/source-gates/m2-sentinel-recovery-002-approval.json",
+                "records/source-gates/m2-sentinel-continuation-001-approval.json",
             ],
         )
         primary_intake = load("contracts/m2-intake.json")
@@ -147,7 +148,7 @@ class M2DemActivationTests(unittest.TestCase):
         expected_primary_checkpoint = (
             "M2-ACQUISITION-REVIEW"
             if any(asset.get("state") == "failed" for asset in primary_intake["assets"])
-            or continuation_review is not None and continuation_review.get("status") == "ready"
+            or continuation_review is not None and continuation_review.get("status") in {"ready", "complete"}
             else "M2-ACQUISITION-IN-PROGRESS"
         )
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], expected_primary_checkpoint)

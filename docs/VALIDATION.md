@@ -322,3 +322,13 @@ It opens the retained File Geodatabase and APRX, checks all declared datasets, f
 ## Public release QA
 
 Verify repository state, GitHub release assets, public map files, rights notices, scientific wording, and downloadable package independently. A local export or green script alone is not proof of public release.
+
+## Continuation-001 approval and local implementation validation — 2026-09-05
+
+The completed exact owner response was written to private custody, locked before reveal, and reconciled without ambiguity. Response SHA-256 `add004d26f7a35ed1b657089dae1c1f68f01eba495c0c4edb35cee943a13cb39`, approval SHA-256 `93f451f458c5b4984f980049f5adadf73e52663c8a71ee9699939b7f85e727a1`, and reconciliation SHA-256 `420f525d160a1b95f6784da06a0ca95ddf8e6e8e37d7947925f6c865157d28a6` bind one approval, zero revise/defer decisions, and the exact reviewed source order.
+
+- `python -m unittest tests.test_m2_sentinel_continuation_001 -v`: 23 tests pass.
+- `python -m unittest discover -s tests`: 317 tests pass after the final project-record reconciliation.
+- Readiness SHA-256 `f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad` binds the exact continuation implementation and retains superseded readiness SHA-256 `86af300807b6db28e97deb6b8188d609f02bf0bed3044741e1eb124eddc28c48`.
+
+The tests cover Windows broker interruption, anonymous single-use pipe custody, environment scrubbing, safe known and unknown failure codes without exception text, fixed order, one attempt per source, stop on first transfer or container failure, redirect and Range refusal, exclusive staging, atomic no-replace promotion, explicit `M1-SRC-004` refusal, and a failed exact live pre-attempt check with no intake or path mutation. No network request, authentication, token value, external product mutation, payload request, real continuation attempt, pixel processing, or scientific result occurred. Successful public CI, activation, and the final no-payload preflight remain required.
