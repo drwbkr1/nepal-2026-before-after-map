@@ -14,6 +14,13 @@ BLANK_REF = "reviews/m2-radar-first-path-001/blank-response.json"
 READINESS_REF = "records/readiness/m2-radar-first-path-001-review-readiness.json"
 PUBLICATION_REF = "records/readiness/m2-radar-first-path-001-review-publication-gate.json"
 ANALYSIS_REF = "records/readiness/m2-post-optical-route-analysis-001.json"
+RECONCILIATION_REF = "records/source-gates/m2-radar-first-path-001-review-reconciliation.json"
+APPROVAL_REF = "records/source-gates/m2-radar-first-path-001-approval.json"
+ACTIVATION_REF = "records/readiness/m2-radar-first-path-001-activation.json"
+OPTICAL_ROUTE_REF = "records/readiness/m2-optical-route-disposition-001.json"
+RADAR_ROUTE_REF = "records/readiness/m2-radar-source-readiness-001.json"
+STALE_ORBIT_REF = "records/readiness/m2-orbit-recovery-001-stale-evidence.json"
+CONTROL_REF = "records/readiness/m2-radar-first-path-001-control-reconciliation.json"
 
 
 def load(ref: str) -> dict:
@@ -34,6 +41,13 @@ class RadarFirstPathReview001Tests(unittest.TestCase):
         cls.blank = load(BLANK_REF)
         cls.readiness = load(READINESS_REF)
         cls.publication = load(PUBLICATION_REF)
+        cls.reconciliation = load(RECONCILIATION_REF)
+        cls.approval = load(APPROVAL_REF)
+        cls.activation = load(ACTIVATION_REF)
+        cls.optical_route = load(OPTICAL_ROUTE_REF)
+        cls.radar_route = load(RADAR_ROUTE_REF)
+        cls.stale_orbit = load(STALE_ORBIT_REF)
+        cls.control = load(CONTROL_REF)
         cls.milestone = load("contracts/milestone-002.json")
         cls.profile = load("records/project-control-profile.json")
         cls.goal = load("records/long-term-goal.json")
@@ -96,20 +110,51 @@ class RadarFirstPathReview001Tests(unittest.TestCase):
         self.assertFalse(self.publication["assertions"]["control_amendment_authorized"])
         self.assertFalse(self.publication["assertions"]["real_product_pixels_read_during_publication"])
 
-    def test_current_controls_point_to_review_without_activating_proposal(self) -> None:
+    def test_exact_approval_is_locked_and_activates_only_the_control_route(self) -> None:
+        self.assertEqual(self.reconciliation["status"], "reconciled_exact_human_response")
+        self.assertEqual(self.reconciliation["decision_counts"], {"approve": 1, "revise": 0, "defer": 0})
+        self.assertFalse(self.reconciliation["human_decisions_fabricated"])
+        self.assertEqual(self.approval["locked_response_sha256"], self.reconciliation["response_sha256"])
+        self.assertEqual(self.approval["lock_receipt_sha256"], self.reconciliation["receipt_sha256"])
+        self.assertEqual(self.activation["status"], "pass_control_route_split_and_corrected_review_preparation_only")
+        self.assertTrue(self.activation["released_now"]["control_graph_route_split"])
+        for key in ("orbit_access_or_download", "dem_action", "radar_pixel_decoding", "baseline_or_change_analysis", "scientific_publication"):
+            self.assertFalse(self.activation["released_now"][key])
+
+    def test_route_records_preserve_optical_block_and_bind_radar_headers_only(self) -> None:
+        self.assertEqual(self.optical_route["status"], "terminal_block_preserved_no_alternate_route_authorized")
+        self.assertEqual(self.optical_route["route"]["real_001_disposition"], "INVALID")
+        self.assertEqual(self.optical_route["route"]["recovery_001_disposition"], "BLOCK")
+        self.assertFalse(self.optical_route["route"]["retry_authorized"])
+        self.assertEqual(self.radar_route["status"], "pass_six_source_custody_materialization_and_header_readiness_only")
+        self.assertEqual(self.radar_route["source_ids"], [f"M1-SRC-{index:03d}" for index in range(1, 7)])
+        self.assertFalse(self.radar_route["assertions"]["measurement_pixels_decoded"])
+        self.assertFalse(self.radar_route["assertions"]["baseline_established"])
+        self.assertEqual(self.stale_orbit["status"], "stale_unapproved_preserved_not_actionable")
+        self.assertEqual(self.stale_orbit["bindings"]["proposal_sha256"], "ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a")
+        self.assertEqual(self.stale_orbit["bindings"]["review_bundle_sha256"], "df5aa9d0d03f8ee30a5cd74b91f74a88c83a525e762c22b0bd2b6773ccb5bc6b")
+
+    def test_current_controls_point_to_corrected_orbit_review(self) -> None:
         units = {unit["id"]: unit for unit in self.milestone["units"]}
         review = units["M2-RADAR-FIRST-PATH-001-REVIEW"]
-        self.assertEqual(review["status"], "ready")
+        self.assertEqual(review["status"], "complete")
         self.assertTrue(review["human_gate"])
-        self.assertEqual(review["gates"]["human_decision_count"], 0)
-        self.assertFalse(review["gates"]["control_amendment_authorized"])
-        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], review["id"])
-        self.assertEqual(self.goal["current_checkpoint"], review["id"])
+        self.assertEqual(review["gates"]["human_decision_count"], 1)
+        self.assertTrue(review["gates"]["control_amendment_authorized"])
+        self.assertEqual(units["M2-OPTICAL-ROUTE-DISPOSITION"]["disposition"], "block")
+        self.assertEqual(units["M2-RADAR-SOURCE-READINESS"]["status"], "complete")
+        self.assertEqual(units["M2-VERIFY"]["status"], "deferred")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-002-REVIEW"]["status"], "ready")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-002-REVIEW"]["gates"]["human_decision_count"], 0)
+        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-ORBIT-RECOVERY-002-REVIEW")
+        self.assertEqual(self.goal["current_checkpoint"], "M2-ORBIT-RECOVERY-002-REVIEW")
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            [PROPOSAL_REF],
+            ["contracts/milestone-002-orbit-recovery-002-proposal.json"],
         )
-        self.assertNotIn(PROPOSAL_REF, self.goal["active_amendments"])
+        self.assertIn(APPROVAL_REF, self.goal["active_amendments"])
+        self.assertEqual(self.control["status"], "pass_route_split_and_corrected_orbit_review_ready")
+        self.assertEqual(self.control["assertions"]["corrected_orbit_human_decision_count"], 0)
 
 
 if __name__ == "__main__":

@@ -83,16 +83,18 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertEqual(unit_by_id["M2-ORBIT-AMEND"]["status"], "complete")
         self.assertEqual(unit_by_id["M2-ORBIT-PREFLIGHT"]["status"], "complete")
         self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["status"], "deferred")
-        self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"], "required")
+        self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"], "corrected_review_ready_zero_decisions")
         self.assertEqual(
-            unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["milestone_dependency_m2_verify"],
-            "deferred_not_satisfied",
+            unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["superseded_milestone_dependency_m2_verify"],
+            "preserved_in_stale_unapproved_orbit_packet_only",
         )
+        self.assertEqual(unit_by_id["M2-RADAR-SOURCE-READINESS"]["status"], "complete")
+        self.assertEqual(unit_by_id["M2-ORBIT-RECOVERY-002-REVIEW"]["status"], "ready")
         self.assertTrue(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["orbit_custody_initialized"])
         self.assertEqual(unit_by_id["M2-ORBIT-APPLY"]["gates"]["dem_vertical_datum_gate"], "pending")
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            ["contracts/milestone-002-radar-first-path-001-proposal.json"],
+            ["contracts/milestone-002-orbit-recovery-002-proposal.json"],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -104,6 +106,7 @@ class M2OrbitActivationTests(unittest.TestCase):
                 "records/source-gates/m2-sentinel-continuation-001-approval.json",
                 "records/source-gates/m2-materialization-pixel-readiness-approval.json",
                 "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
+                "records/source-gates/m2-radar-first-path-001-approval.json",
             ],
         )
         checkpoints = [item["checkpoint_id"] for item in self.profile["parallel_checkpoints"]]
@@ -130,7 +133,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertFalse(self.activation["assertions"]["precise_substitution_authorized"])
         self.assertFalse(self.activation["assertions"]["scientific_result_established"])
 
-    def test_recovery_review_is_exact_blank_and_dependency_gated(self) -> None:
+    def test_old_recovery_review_is_exact_blank_and_preserved_as_stale(self) -> None:
         self.assertEqual(sha256("contracts/milestone-002-orbit-recovery-proposal.json"), RECOVERY_PROPOSAL_SHA256)
         self.assertEqual(sha256("reviews/m2-orbit-recovery/review-bundle.json"), RECOVERY_BUNDLE_SHA256)
         self.assertEqual(self.recovery_proposal["status"], "proposed_not_authorized")
@@ -148,6 +151,10 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertFalse(self.recovery_blank["reviewer"]["attestation"])
         self.assertEqual(self.recovery_blank["responses"][0]["evidence_sha256"], RECOVERY_BUNDLE_SHA256)
         self.assertIsNone(self.recovery_blank["responses"][0]["decision"])
+        stale = load("records/readiness/m2-orbit-recovery-001-stale-evidence.json")
+        self.assertEqual(stale["status"], "stale_unapproved_preserved_not_actionable")
+        self.assertEqual(stale["bindings"]["proposal_sha256"], RECOVERY_PROPOSAL_SHA256)
+        self.assertEqual(stale["bindings"]["review_bundle_sha256"], RECOVERY_BUNDLE_SHA256)
 
     def test_evidence_ledger_records_activation_once(self) -> None:
         ledger = [json.loads(line) for line in (ROOT / "records/evidence-ledger.jsonl").read_text(encoding="utf-8").splitlines()]

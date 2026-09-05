@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-FIRST-PATH-001-CONTROL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-05T22:03:08Z",
+  "status": "pass_route_split_and_corrected_orbit_review_ready",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-radar-first-path-001-approval.json",
+    "approval_sha256": "e017099532a681f6c7d39afa8b7ab94c25e3c51495381363eaefd67a4533bdb9",
+    "activation_ref": "records/readiness/m2-radar-first-path-001-activation.json",
+    "activation_sha256": "92792399aee69b69c076170693dda98461733e485af178df62a2f3bd48fab935",
+    "review_reconciliation_ref": "records/source-gates/m2-radar-first-path-001-review-reconciliation.json",
+    "review_reconciliation_sha256": "4dd7bb097f77c9eb013617f5370b40a112334d9964a20c5eab4be65e7f4306c5",
+    "optical_route_disposition_ref": "records/readiness/m2-optical-route-disposition-001.json",
+    "optical_route_disposition_sha256": "d51fa2408cac094205b6881222322ff67cd07b21386f58842d677f01c6061a63",
+    "radar_source_readiness_ref": "records/readiness/m2-radar-source-readiness-001.json",
+    "radar_source_readiness_sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
+    "stale_orbit_packet_ref": "records/readiness/m2-orbit-recovery-001-stale-evidence.json",
+    "stale_orbit_packet_sha256": "bf56645b5f18cb4bdf6fcaf0b7a279d6219e45080ecdabfc207f31ad95c4215d",
+    "corrected_orbit_proposal_ref": "contracts/milestone-002-orbit-recovery-002-proposal.json",
+    "corrected_orbit_proposal_sha256": "d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8",
+    "corrected_orbit_bundle_ref": "reviews/m2-orbit-recovery-002/review-bundle.json",
+    "corrected_orbit_bundle_sha256": "6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5",
+    "corrected_orbit_contract_ref": "reviews/m2-orbit-recovery-002/review-contract.json",
+    "corrected_orbit_contract_sha256": "1b0da1577a24c9323e529ac5fd58cafb7f15ccefc96f97df1964ddd751dde261",
+    "corrected_orbit_blank_response_ref": "reviews/m2-orbit-recovery-002/blank-response.json",
+    "corrected_orbit_blank_response_sha256": "e21a2a66814c490391c5f1ba1b77bc1e00d7809dbeeca87bef297c96dfd33c9a"
+  },
+  "route_states": {
+    "optical": "terminal_block_preserved",
+    "radar_source": "pass_custody_materialization_header_only",
+    "aggregate_m2_verify": "deferred"
+  },
+  "assertions": {
+    "old_orbit_proposal_and_bundle_preserved": true,
+    "corrected_orbit_human_decision_count": 0,
+    "orbit_recovery_authorized": false,
+    "dem_action_authorized": false,
+    "radar_pixel_readiness_authorized": false,
+    "optical_retry_or_alternate_route_authorized": false,
+    "network_requests_performed": false,
+    "credential_values_read_or_recorded": false,
+    "external_data_mutated": false,
+    "real_product_pixels_examined": false,
+    "baseline_or_change_analysis_performed": false
+  }
+}

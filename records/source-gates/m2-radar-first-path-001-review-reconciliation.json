@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-radar-first-path-001-review",
+  "contract_sha256": "872920524101856d3bcd1b964963ba9ad89118dc56a6be65849ef2432b226382",
+  "response_sha256": "6f571127b6c736aba227e699569f88fe7fc37401605d75222df1e956e3f44b55",
+  "receipt_sha256": "7e061929c93762f637e19e4bc93b8cdeac7138b33eeba30cb7869ec2363ff9b1",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

@@ -144,6 +144,18 @@
         "real_001_retry_authorized": false,
         "radar_pixel_readiness_authorized": false,
         "baseline_or_change_authorized": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-radar-first-path-001-approval.json",
+        "approval_sha256": "e017099532a681f6c7d39afa8b7ab94c25e3c51495381363eaefd67a4533bdb9",
+        "proposal_ref": "contracts/milestone-002-radar-first-path-001-proposal.json",
+        "proposal_sha256": "ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77",
+        "review_bundle_sha256": "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad",
+        "control_reconciliation_ref": "records/readiness/m2-radar-first-path-001-control-reconciliation.json",
+        "control_reconciliation_sha256": "9c2c6cbc2fec93498e37baa2e75cb333ee56b425b2581fba7e4a2fce289126ee",
+        "optical_route_status": "terminal_block_preserved",
+        "radar_source_status": "pass_header_readiness_only",
+        "orbit_recovery_authorized": false
       }
     ]
   },
@@ -211,7 +223,8 @@
       "records/source-gates/m2-sentinel-recovery-002-approval.json",
       "records/source-gates/m2-sentinel-continuation-001-approval.json",
       "records/source-gates/m2-materialization-pixel-readiness-approval.json",
-      "records/source-gates/m2-optical-pixel-recovery-001-approval.json"
+      "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
+      "records/source-gates/m2-radar-first-path-001-approval.json"
     ]
   },
   "entry_conditions": [
@@ -593,7 +606,9 @@
       "id": "M2-VERIFY",
       "purpose": "Verify exact bytes, provider checksum, archive safety, SAFE structure, access-time rights, and analysis-critical content.",
       "depends_on": [
-        "M2-ACQUIRE"
+        "M2-ACQUIRE",
+        "M2-OPTICAL-ROUTE-DISPOSITION",
+        "M2-RADAR-SOURCE-READINESS"
       ],
       "action_class": "routine_qa",
       "human_gate": false,
@@ -605,7 +620,9 @@
       "outputs": [
         "eight passing container-only receipts",
         "two retained M1-SRC-004 failed partial identities",
-        "records/acquisition/sentinel-continuation-001-postsuccess-reconciliation.json"
+        "records/acquisition/sentinel-continuation-001-postsuccess-reconciliation.json",
+        "records/readiness/m2-optical-route-disposition-001.json",
+        "records/readiness/m2-radar-source-readiness-001.json"
       ],
       "gates": {
         "container_verified_count": 8,
@@ -614,7 +631,7 @@
         "m1_src_004_satisfied_by_recovery_002": true,
         "continuation_status": "succeeded_all_four",
         "materialized_source_count": 8,
-        "materialization_and_pixel_readiness": "optical_pixel_recovery_001_terminal_block_radar_first_path_review_ready",
+        "materialization_and_pixel_readiness": "route_split_optical_terminal_block_radar_source_header_ready_aggregate_deferred",
         "materialization_pixel_review_ref": "reviews/m2-materialization-pixel-readiness/review-contract.json",
         "materialization_pixel_review_bundle_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a",
         "materialization_pixel_approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
@@ -629,7 +646,13 @@
         "optical_pixel_recovery_001_reconciliation_sha256": "445adfc716c97ef9122f699c28cb8193924c3863159cc91de511e56b72f7fb9f",
         "post_optical_route_analysis_ref": "records/readiness/m2-post-optical-route-analysis-001.json",
         "post_optical_route_analysis_sha256": "19672e1d646b5ee6131f57c99710c2483b9deb17743f833dd662edaa8afd128e",
-        "radar_first_path_review_bundle_sha256": "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad"
+        "radar_first_path_review_bundle_sha256": "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad",
+        "optical_route_disposition_ref": "records/readiness/m2-optical-route-disposition-001.json",
+        "optical_route_disposition_sha256": "d51fa2408cac094205b6881222322ff67cd07b21386f58842d677f01c6061a63",
+        "radar_source_readiness_ref": "records/readiness/m2-radar-source-readiness-001.json",
+        "radar_source_readiness_sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
+        "radar_first_control_reconciliation_ref": "records/readiness/m2-radar-first-path-001-control-reconciliation.json",
+        "radar_first_control_reconciliation_sha256": "9c2c6cbc2fec93498e37baa2e75cb333ee56b425b2581fba7e4a2fce289126ee"
       },
       "disposition": "defer",
       "retained_failures": [
@@ -651,7 +674,7 @@
         "decision_value": "block",
         "rationale": "All eight products and both header routes pass their limited gates, but the only approved optical recovery is terminal BLOCK for usable coverage and registration control sufficiency. A separately scoped owner decision is required before any alternate route."
       },
-      "next_dependency": "M2-RADAR-FIRST-PATH-001-REVIEW"
+      "next_dependency": null
     },
     {
       "id": "M2-BASELINE",
@@ -922,7 +945,8 @@
       "purpose": "Acquire only the four exact S1D AUX_RESORB files into append-only non-Git custody.",
       "depends_on": [
         "M2-ORBIT-PREFLIGHT",
-        "M2-VERIFY"
+        "M2-RADAR-SOURCE-READINESS",
+        "M2-ORBIT-RECOVERY-002"
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
@@ -937,17 +961,21 @@
         "records/acquisition orbit transfer receipts"
       ],
       "gates": {
-        "matching_sentinel_promoted_and_verified": "all_bound_sentinel_promoted_and_container_verified_but_full_m2_verify_incomplete",
-        "milestone_dependency_m2_verify": "deferred_not_satisfied",
+        "matching_sentinel_promoted_and_verified": "six_radar_sources_promoted_materialized_and_header_ready_only",
         "fresh_source_preflight": "pass",
         "orbit_custody_initialized": true,
         "token_presence_checked": "synthetic_test_literal_only",
-        "retained_failure_review": "required",
+        "retained_failure_review": "corrected_review_ready_zero_decisions",
         "retained_failure_reconciliation_ref": "records/acquisition/orbit-test-boundary-reconciliation-001.json",
         "retained_failure_reconciliation_sha256": "40dae0623dcc142cec17ff2108752e5e60bd736a241fe4b83e8f04c5de690025",
-        "retained_failure_review_ref": "reviews/m2-orbit-recovery/review-contract.json",
-        "retained_failure_review_bundle_sha256": "df5aa9d0d03f8ee30a5cd74b91f74a88c83a525e762c22b0bd2b6773ccb5bc6b",
-        "retained_failure_recovery_proposal_sha256": "ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a"
+        "retained_failure_review_ref": "reviews/m2-orbit-recovery-002/review-contract.json",
+        "retained_failure_review_bundle_sha256": "6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5",
+        "retained_failure_recovery_proposal_sha256": "d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8",
+        "radar_source_readiness": "complete",
+        "radar_source_readiness_ref": "records/readiness/m2-radar-source-readiness-001.json",
+        "radar_source_readiness_sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
+        "superseded_milestone_dependency_m2_verify": "preserved_in_stale_unapproved_orbit_packet_only",
+        "orbit_recovery_002_status": "planned_not_authorized"
       },
       "disposition": "defer",
       "retained_failures": [
@@ -967,10 +995,10 @@
         ],
         "observed": [],
         "decision_value": "no_progress",
-        "rationale": "A stale production-wrapper test crossed its expected guard after two bound Sentinel products became eligible. The exact attempt is retained, automatic retry is false, and the runner now requires the full M2-VERIFY dependency before catalogue or token access."
+        "rationale": "The route-specific Sentinel prerequisite now passes, but the corrected recovery review is blank and no orbit catalogue, token, or payload action is released."
       },
       "next_dependency": "M2-ORBIT-VERIFY",
-      "rationale": "Orbit acquisition is blocked on the incomplete full Sentinel verification unit and on explicit review of the retained zero-byte M2-ORB-001 failure."
+      "rationale": "Orbit acquisition remains deferred until the corrected M2-ORB-001 review, implementation, public CI, no-payload preflight, and one-attempt recovery all pass; DEM and radar-pixel gates remain separate."
     },
     {
       "id": "M2-ORBIT-VERIFY",
@@ -1560,17 +1588,17 @@
         "decision_value": "block",
         "rationale": "The exact recovery completed once. AOI-SOURCE usable fraction was 0.063252, AOI-UPPER-CORRIDOR was 0.256403, and registration deferred with 20 accepted control pairs; the route is terminal BLOCK with no retry."
       },
-      "next_dependency": "M2-RADAR-FIRST-PATH-001-REVIEW"
+      "next_dependency": "M2-OPTICAL-ROUTE-DISPOSITION"
     },
     {
       "id": "M2-RADAR-FIRST-PATH-001-REVIEW",
       "purpose": "Obtain an exact owner decision on the control-only route split after the terminal optical block.",
       "depends_on": [
-        "M2-OPTICAL-PIXEL-RECOVERY-001"
+        "M2-OPTICAL-ROUTE-DISPOSITION"
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "records/readiness/m2-post-optical-route-analysis-001.json",
         "contracts/milestone-002-radar-first-path-001-proposal.json",
@@ -1579,18 +1607,28 @@
       ],
       "outputs": [
         "records/source-gates/m2-radar-first-path-001-review-reconciliation.json",
-        "records/source-gates/m2-radar-first-path-001-approval.json"
+        "records/source-gates/m2-radar-first-path-001-approval.json",
+        "records/readiness/m2-radar-first-path-001-activation.json",
+        "records/readiness/m2-radar-first-path-001-control-reconciliation.json"
       ],
       "gates": {
         "proposal_sha256": "ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77",
         "review_bundle_sha256": "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad",
-        "human_decision_count": 0,
-        "attestation": false,
-        "control_amendment_authorized": false,
+        "human_decision_count": 1,
+        "attestation": true,
+        "control_amendment_authorized": true,
         "orbit_recovery_authorized": false,
         "dem_action_authorized": false,
         "radar_pixel_readiness_authorized": false,
-        "optical_alternate_route_authorized": false
+        "optical_alternate_route_authorized": false,
+        "approval_ref": "records/source-gates/m2-radar-first-path-001-approval.json",
+        "approval_sha256": "e017099532a681f6c7d39afa8b7ab94c25e3c51495381363eaefd67a4533bdb9",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-first-path-001-review-reconciliation.json",
+        "review_reconciliation_sha256": "4dd7bb097f77c9eb013617f5370b40a112334d9964a20c5eab4be65e7f4306c5",
+        "activation_ref": "records/readiness/m2-radar-first-path-001-activation.json",
+        "activation_sha256": "92792399aee69b69c076170693dda98461733e485af178df62a2f3bd48fab935",
+        "control_reconciliation_ref": "records/readiness/m2-radar-first-path-001-control-reconciliation.json",
+        "control_reconciliation_sha256": "9c2c6cbc2fec93498e37baa2e75cb333ee56b425b2581fba7e4a2fce289126ee"
       },
       "retained_failures": [
         "records/readiness/m2-optical-pixel-real-001-reconciliation.json",
@@ -1600,10 +1638,194 @@
       "exit_condition_delta": {
         "expected": [],
         "observed": [],
+        "decision_value": "enables_dependency",
+        "rationale": "One exact attested approval releases only the route-specific control correction and preparation of a corrected blank orbit-recovery review."
+      },
+      "next_dependency": "M2-RADAR-SOURCE-READINESS",
+      "disposition": "pass"
+    },
+    {
+      "id": "M2-OPTICAL-ROUTE-DISPOSITION",
+      "purpose": "Preserve the exact terminal optical INVALID and BLOCK outcomes without retry, tuning, date shopping, or source substitution.",
+      "depends_on": [
+        "M2-OPTICAL-PIXEL-RECOVERY-001"
+      ],
+      "action_class": "project_control",
+      "human_gate": false,
+      "status": "complete",
+      "inputs": [
+        "records/readiness/m2-optical-pixel-real-001-reconciliation.json",
+        "records/readiness/m2-optical-pixel-recovery-001-reconciliation.json",
+        "records/source-gates/m2-radar-first-path-001-approval.json"
+      ],
+      "outputs": [
+        "records/readiness/m2-optical-route-disposition-001.json"
+      ],
+      "gates": {
+        "disposition_ref": "records/readiness/m2-optical-route-disposition-001.json",
+        "disposition_sha256": "d51fa2408cac094205b6881222322ff67cd07b21386f58842d677f01c6061a63",
+        "retry_authorized": false,
+        "alternate_route_authorized": false
+      },
+      "disposition": "block",
+      "retained_failures": [
+        "records/readiness/m2-optical-pixel-real-001-reconciliation.json",
+        "records/readiness/m2-optical-pixel-recovery-001-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-202-PIXEL-AND-RIGHTS-QA",
+          "EXIT-204-REGISTRATION-QA"
+        ],
+        "observed": [],
+        "decision_value": "block",
+        "rationale": "The only approved optical recovery is consumed and terminal BLOCK; the branch remains evidence rather than being reclassified."
+      },
+      "next_dependency": "M2-VERIFY"
+    },
+    {
+      "id": "M2-RADAR-SOURCE-READINESS",
+      "purpose": "Bind the six exact Sentinel-1 sources to promoted custody, materialization identity, and passing header readiness without decoding measurement pixels.",
+      "depends_on": [
+        "M2-FULL-INPUT-READINESS",
+        "M2-RADAR-FIRST-PATH-001-REVIEW"
+      ],
+      "action_class": "project_control",
+      "human_gate": false,
+      "status": "complete",
+      "inputs": [
+        "records/acquisition/sentinel-continuation-001-postsuccess-reconciliation.json",
+        "records/acquisition/sentinel-materialization-reconciliation-002.json",
+        "records/readiness/m2-full-header-readiness-reconciliation.json",
+        "records/readiness/radar-input/m2-s1-input-readiness-real-003.json",
+        "records/source-gates/m2-radar-first-path-001-approval.json"
+      ],
+      "outputs": [
+        "records/readiness/m2-radar-source-readiness-001.json"
+      ],
+      "gates": {
+        "readiness_ref": "records/readiness/m2-radar-source-readiness-001.json",
+        "readiness_sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
+        "source_count": 6,
+        "measurement_pixels_decoded": false,
+        "orbit_amendment_approval": "active_exact"
+      },
+      "disposition": "pass",
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-201-VERIFIED-CUSTODY"
+        ],
+        "observed": [
+          "EXIT-201-VERIFIED-CUSTODY",
+          "six-source materialization identity",
+          "six-source header readiness"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "All six exact radar sources pass custody, materialization, and header-only readiness; pixel, orbit, DEM, and terrain fitness remain separate."
+      },
+      "next_dependency": "M2-ORBIT-RECOVERY-002-REVIEW"
+    },
+    {
+      "id": "M2-ORBIT-RECOVERY-002-REVIEW",
+      "purpose": "Obtain one exact owner decision on a corrected recovery-only implementation and at most one future byte-zero M2-ORB-001 attempt.",
+      "depends_on": [
+        "M2-RADAR-SOURCE-READINESS",
+        "M2-ORBIT-PREFLIGHT"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "ready",
+      "inputs": [
+        "contracts/milestone-002-orbit-recovery-002-proposal.json",
+        "reviews/m2-orbit-recovery-002/review-bundle.json",
+        "reviews/m2-orbit-recovery-002/review-contract.json",
+        "records/readiness/m2-radar-source-readiness-001.json",
+        "records/readiness/m2-orbit-recovery-001-stale-evidence.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-orbit-recovery-002-review-reconciliation.json",
+        "records/source-gates/m2-orbit-recovery-002-approval.json"
+      ],
+      "gates": {
+        "proposal_sha256": "d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8",
+        "review_bundle_sha256": "6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5",
+        "review_contract_sha256": "1b0da1577a24c9323e529ac5fd58cafb7f15ccefc96f97df1964ddd751dde261",
+        "blank_response_sha256": "e21a2a66814c490391c5f1ba1b77bc1e00d7809dbeeca87bef297c96dfd33c9a",
+        "human_decision_count": 0,
+        "attestation": false,
+        "recovery_authorized": false,
+        "maximum_future_attempts_if_approved": 1,
+        "other_orbit_source_requests_authorized_by_this_review": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
+        "records/readiness/m2-orbit-recovery-001-stale-evidence.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
         "decision_value": "awaiting_owner_decision",
-        "rationale": "Review preparation records the dependency conflict and creates no control amendment or downstream execution authority."
+        "rationale": "The corrected packet is blank and creates no recovery, credential, catalogue, or payload authority."
       },
       "next_dependency": null
+    },
+    {
+      "id": "M2-ORBIT-RECOVERY-002-IMPLEMENTATION",
+      "purpose": "If separately approved, implement and publicly validate the exact recovery-only worker before any real access.",
+      "depends_on": [
+        "M2-ORBIT-RECOVERY-002-REVIEW"
+      ],
+      "action_class": "external_publication",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [],
+      "outputs": [],
+      "gates": {
+        "public_ci": "required",
+        "final_no_payload_preflight": "required_after_public_ci"
+      },
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "No approval or recovery implementation exists."
+      },
+      "next_dependency": "M2-ORBIT-RECOVERY-002"
+    },
+    {
+      "id": "M2-ORBIT-RECOVERY-002",
+      "purpose": "If every later gate passes, perform at most one fresh byte-zero attempt for exact M2-ORB-001 under a distinct identity.",
+      "depends_on": [
+        "M2-ORBIT-RECOVERY-002-IMPLEMENTATION"
+      ],
+      "action_class": "data_acquisition",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [],
+      "outputs": [],
+      "gates": {
+        "maximum_real_attempts": 1,
+        "automatic_retry_authorized": false,
+        "source_id": "M2-ORB-001",
+        "other_orbit_source_requests_authorized_by_this_unit": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-201-VERIFIED-CUSTODY"
+        ],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "The corrected review has zero decisions and no recovery attempt is authorized."
+      },
+      "next_dependency": "M2-ORBIT-ACQUIRE"
     }
   ],
   "path_efficiency": {
@@ -1660,8 +1882,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-FIRST-PATH-001-REVIEW",
-    "next_action": "Review M2 radar-first path bundle SHA-256 5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad and proposal SHA-256 ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77; approve, revise, or defer the control-only route split. No pixel, orbit, DEM, source-substitution, baseline, change, or scientific action is authorized before an attested decision.",
+    "current_checkpoint": "M2-ORBIT-RECOVERY-002-REVIEW",
+    "next_action": "Review corrected M2 orbit recovery-002 bundle SHA-256 6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5 and proposal SHA-256 d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8; approve, revise, or defer one recovery-only implementation and at most one future byte-zero M2-ORB-001 attempt. No orbit, token, DEM, radar-pixel, baseline, change, or scientific action is authorized before an attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -1677,7 +1899,10 @@
       "Optical pixel real-001 is terminal INVALID after reading the first SCL raster; it produced no QA metrics or derived raster and cannot be retried under current authority.",
       "Recovery-001 approval does not authorize preflight or real pixel access until the exact implementation passes fresh public CI; real-001 remains terminal INVALID and cannot be reused or retried.",
       "Optical recovery-001 is terminal BLOCK after one invocation; its thresholds and exact pair cannot be tuned, retried, or substituted under the consumed authority.",
-      "The old orbit-recovery review remains preserved but is not actionable because its full-M2-VERIFY prerequisite deadlocks the independent radar route; the radar-first path review authorizes no replacement or orbit request by itself."
+      "The old orbit-recovery review remains preserved but is not actionable because its full-M2-VERIFY prerequisite deadlocks the independent radar route; the radar-first path review authorizes no replacement or orbit request by itself.",
+      "The approved radar-first amendment preserves optical real-001 as INVALID and recovery-001 as terminal BLOCK; it does not authorize retry, tuning, alternate dates, or source substitution.",
+      "The old orbit-recovery proposal and bundle remain immutable stale evidence and are not actionable.",
+      "The corrected orbit-recovery-002 review is blank and authorizes no catalogue access, token lookup, payload request, DEM action, radar pixel read, baseline, change analysis, or scientific publication."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."

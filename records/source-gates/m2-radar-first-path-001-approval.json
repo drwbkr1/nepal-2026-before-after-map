@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-FIRST-PATH-001-APPROVAL",
+  "status": "approved_control_route_split_and_corrected_review_preparation_only",
+  "approved_at_utc": "2026-09-05T21:51:51Z",
+  "review_id": "m2-radar-first-path-001-review",
+  "review_bundle_manifest_sha256": "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad",
+  "proposal_ref": "contracts/milestone-002-radar-first-path-001-proposal.json",
+  "proposal_sha256": "ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77",
+  "review_contract_ref": "reviews/m2-radar-first-path-001/review-contract.json",
+  "review_contract_sha256": "872920524101856d3bcd1b964963ba9ad89118dc56a6be65849ef2432b226382",
+  "review_reconciliation_ref": "records/source-gates/m2-radar-first-path-001-review-reconciliation.json",
+  "review_reconciliation_sha256": "4dd7bb097f77c9eb013617f5370b40a112334d9964a20c5eab4be65e7f4306c5",
+  "locked_response_sha256": "6f571127b6c736aba227e699569f88fe7fc37401605d75222df1e956e3f44b55",
+  "lock_receipt_sha256": "7e061929c93762f637e19e4bc93b8cdeac7138b33eeba30cb7869ec2363ff9b1",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "authorized_next_actions": [
+    "retain optical-pixel-readiness real-001 as terminal INVALID and recovery-001 as terminal BLOCK with no retry, tuning, date change, or source substitution",
+    "amend only the M2 control graph so optical and radar readiness are represented as separate evidence branches while aggregate M2-VERIFY remains deferred",
+    "replace the obsolete full-M2-VERIFY prerequisite for any future orbit recovery with exact radar source custody, radar header readiness, and existing orbit-amendment approval prerequisites",
+    "preserve the current unapproved orbit recovery proposal and bundle as stale evidence and prepare a new hash-bound corrected orbit recovery review with zero human decisions",
+    "retain the existing DEM terrain-result and vertical-datum reviews as independent unresolved human gates before any radar terrain correction",
+    "update project controls, documentation, tests, and public control-only CI evidence for this dependency correction"
+  ],
+  "does_not_authorize": [
+    "any optical retry, threshold change, alternate date search, date substitution, or source substitution",
+    "acceptance of terms, credential entry, token handling, software installation, UAC approval, or account action",
+    "DEM conversion, vertical transformation, or promotion to radar-ready",
+    "orbit catalogue access, download, verification, application, retry, or precise-orbit substitution",
+    "Sentinel-1 measurement-pixel decoding or any real radar pixel-readiness attempt",
+    "baseline processing, change rasters or polygons, interpretation, attribution, emergency guidance, or scientific publication"
+  ],
+  "human_decisions_fabricated": false
+}

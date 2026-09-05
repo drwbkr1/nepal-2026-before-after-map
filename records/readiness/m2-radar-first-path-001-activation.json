@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-FIRST-PATH-001-ACTIVATION",
+  "activated_at_utc": "2026-09-05T21:51:51Z",
+  "status": "pass_control_route_split_and_corrected_review_preparation_only",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-radar-first-path-001-approval.json",
+    "approval_sha256": "e017099532a681f6c7d39afa8b7ab94c25e3c51495381363eaefd67a4533bdb9",
+    "proposal_ref": "contracts/milestone-002-radar-first-path-001-proposal.json",
+    "proposal_sha256": "ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77",
+    "review_bundle_ref": "reviews/m2-radar-first-path-001/review-bundle.json",
+    "review_bundle_sha256": "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad",
+    "review_contract_ref": "reviews/m2-radar-first-path-001/review-contract.json",
+    "review_contract_sha256": "872920524101856d3bcd1b964963ba9ad89118dc56a6be65849ef2432b226382",
+    "review_reconciliation_ref": "records/source-gates/m2-radar-first-path-001-review-reconciliation.json",
+    "review_reconciliation_sha256": "4dd7bb097f77c9eb013617f5370b40a112334d9964a20c5eab4be65e7f4306c5",
+    "optical_route_disposition_ref": "records/readiness/m2-optical-route-disposition-001.json",
+    "optical_route_disposition_sha256": "d51fa2408cac094205b6881222322ff67cd07b21386f58842d677f01c6061a63",
+    "radar_source_readiness_ref": "records/readiness/m2-radar-source-readiness-001.json",
+    "radar_source_readiness_sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
+    "stale_orbit_packet_ref": "records/readiness/m2-orbit-recovery-001-stale-evidence.json",
+    "stale_orbit_packet_sha256": "bf56645b5f18cb4bdf6fcaf0b7a279d6219e45080ecdabfc207f31ad95c4215d"
+  },
+  "released_now": {
+    "control_graph_route_split": true,
+    "old_orbit_packet_stale_evidence_classification": true,
+    "corrected_zero_decision_orbit_review_preparation": true,
+    "optical_retry_or_alternate_search": false,
+    "dem_action": false,
+    "orbit_access_or_download": false,
+    "radar_pixel_decoding": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "external_data_mutated": false,
+    "real_product_pixels_examined": false
+  }
+}

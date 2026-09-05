@@ -47,6 +47,7 @@ MANIFEST_PATH = ROOT / "records/source-gates/m2-orbit-candidate-manifest.json"
 PROPOSAL_PATH = ROOT / "contracts/milestone-002-orbit-amendment-proposal.json"
 REVIEW_BUNDLE_PATH = ROOT / "reviews/m2-orbit-amendment/review-bundle.json"
 MILESTONE_PATH = ROOT / "contracts/milestone-002.json"
+RADAR_SOURCE_READINESS_PATH = ROOT / "records/readiness/m2-radar-source-readiness-001.json"
 DOWNLOAD_HOST = "download.dataspace.copernicus.eu"
 CATALOGUE_BASE = "https://catalogue.dataspace.copernicus.eu/odata/v1/Products"
 TOKEN_ENVIRONMENT_REFERENCE = "CDSE_ACCESS_TOKEN"
@@ -96,6 +97,7 @@ def authority_and_activation_guard() -> dict[str, dict[str, Any]]:
         "preflight": PREFLIGHT_PATH,
         "custody": CUSTODY_RECEIPT_PATH,
         "source_gate": LIVE_SOURCE_GATE_PATH,
+        "radar_source_readiness": RADAR_SOURCE_READINESS_PATH,
     }
     if any(not path.is_file() for path in required.values()):
         raise TransferControlError("orbit_activation_or_preflight_incomplete")
@@ -104,14 +106,26 @@ def authority_and_activation_guard() -> dict[str, dict[str, Any]]:
     controls["manifest"] = load(MANIFEST_PATH)
 
     milestone = controls["milestone"]
-    verification_units = [unit for unit in milestone.get("units", []) if unit.get("id") == "M2-VERIFY"]
+    radar_units = [unit for unit in milestone.get("units", []) if unit.get("id") == "M2-RADAR-SOURCE-READINESS"]
+    recovery_units = [unit for unit in milestone.get("units", []) if unit.get("id") == "M2-ORBIT-RECOVERY-002"]
     if (
         milestone.get("status") != "active"
         or milestone.get("authority", {}).get("authority_ref") != "records/source-gates/m2-activation-approval.json"
-        or len(verification_units) != 1
-        or verification_units[0].get("status") != "complete"
     ):
-        raise TransferControlError("sentinel_verification_unit_not_complete")
+        raise TransferControlError("active_milestone_identity_drift")
+    radar_readiness = controls["radar_source_readiness"]
+    if (
+        len(radar_units) != 1
+        or radar_units[0].get("status") != "complete"
+        or radar_units[0].get("disposition") != "pass"
+        or radar_units[0].get("gates", {}).get("readiness_sha256") != sha256_file(RADAR_SOURCE_READINESS_PATH)
+        or radar_readiness.get("status") != "pass_six_source_custody_materialization_and_header_readiness_only"
+        or radar_readiness.get("source_ids") != [f"M1-SRC-{index:03d}" for index in range(1, 7)]
+        or radar_readiness.get("assertions", {}).get("measurement_pixels_decoded") is not False
+    ):
+        raise TransferControlError("radar_source_readiness_unit_not_complete")
+    if len(recovery_units) != 1 or recovery_units[0].get("status") != "complete":
+        raise TransferControlError("orbit_recovery_002_unit_not_complete")
 
     intake = controls["intake"]
     verification = controls["verification"]

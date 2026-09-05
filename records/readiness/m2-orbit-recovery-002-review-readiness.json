@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-RECOVERY-002-REVIEW-READINESS",
+  "verified_at_utc": "2026-09-05T22:03:08Z",
+  "status": "pass_ready_owner_review_zero_decisions",
+  "bindings": {
+    "proposal_sha256": "d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8",
+    "preflight_sha256": "a73b879f02eb773a76cc84d84e1c65662899abf8c99de6f94f525aa64cb67488",
+    "review_surface_sha256": "77dfb42a6b2ae203517b5b35d1a5c413d52a86c9fa6d48a0d585379e2b8f52bc",
+    "surface_receipt_sha256": "20859f99734e7fb641876e10d5be8aaba29be131096067b2869af1647d06cb40",
+    "review_bundle_sha256": "6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5",
+    "review_contract_sha256": "1b0da1577a24c9323e529ac5fd58cafb7f15ccefc96f97df1964ddd751dde261",
+    "blank_response_sha256": "e21a2a66814c490391c5f1ba1b77bc1e00d7809dbeeca87bef297c96dfd33c9a"
+  },
+  "review": {
+    "human_decision_count": 0,
+    "attestation": false,
+    "ready_for_handoff": true
+  },
+  "assertions": {
+    "orbit_recovery_authorized": false,
+    "orbit_catalogue_accessed": false,
+    "token_or_credential_read": false,
+    "orbit_payload_requested": false,
+    "dem_action_performed": false,
+    "radar_pixels_read": false
+  }
+}

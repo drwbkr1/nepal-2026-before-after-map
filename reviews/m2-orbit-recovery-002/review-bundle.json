@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-orbit-recovery-002-review-bundle",
+  "review_id": "m2-orbit-recovery-002-review",
+  "authority_ref": "records/source-gates/m2-radar-first-path-001-approval.json",
+  "candidate_identity": "M2-ORBIT-RECOVERY-002-PROPOSAL-SHA256:d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-orbit-recovery-002-review.png",
+      "sha256": "77dfb42a6b2ae203517b5b35d1a5c413d52a86c9fa6d48a0d585379e2b8f52bc",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-orbit-recovery-002-review.json",
+          "sha256": "20859f99734e7fb641876e10d5be8aaba29be131096067b2869af1647d06cb40"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_ORBIT_RECOVERY_002_REVIEW.md",
+      "sha256": "dbbc7de5b23fda8f5365c1ab987df5de8b6726ed04e5914c1b7dcf2c7f8982f1",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "proposal",
+      "path": "contracts/milestone-002-orbit-recovery-002-proposal.json",
+      "sha256": "d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8",
+      "role": "candidate_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "review-preflight",
+      "path": "records/readiness/m2-orbit-recovery-002-review-preflight.json",
+      "sha256": "a73b879f02eb773a76cc84d84e1c65662899abf8c99de6f94f525aa64cb67488",
+      "role": "zero_authority_preflight",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "radar-first-approval",
+      "path": "records/source-gates/m2-radar-first-path-001-approval.json",
+      "sha256": "e017099532a681f6c7d39afa8b7ab94c25e3c51495381363eaefd67a4533bdb9",
+      "role": "active_control_authority",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "radar-first-activation",
+      "path": "records/readiness/m2-radar-first-path-001-activation.json",
+      "sha256": "92792399aee69b69c076170693dda98461733e485af178df62a2f3bd48fab935",
+      "role": "active_control_receipt",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "radar-source-readiness",
+      "path": "records/readiness/m2-radar-source-readiness-001.json",
+      "sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
+      "role": "corrected_route_prerequisite",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "stale-packet-classification",
+      "path": "records/readiness/m2-orbit-recovery-001-stale-evidence.json",
+      "sha256": "bf56645b5f18cb4bdf6fcaf0b7a279d6219e45080ecdabfc207f31ad95c4215d",
+      "role": "preserved_stale_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "old-orbit-proposal",
+      "path": "contracts/milestone-002-orbit-recovery-proposal.json",
+      "sha256": "ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a",
+      "role": "stale_unapproved_proposal",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "old-orbit-bundle",
+      "path": "reviews/m2-orbit-recovery/review-bundle.json",
+      "sha256": "df5aa9d0d03f8ee30a5cd74b91f74a88c83a525e762c22b0bd2b6773ccb5bc6b",
+      "role": "stale_unapproved_bundle",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "orbit-amendment-approval",
+      "path": "records/source-gates/m2-orbit-amendment-approval.json",
+      "sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+      "role": "original_exact_source_authority",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "failed-attempt-reconciliation",
+      "path": "records/acquisition/orbit-test-boundary-reconciliation-001.json",
+      "sha256": "40dae0623dcc142cec17ff2108752e5e60bd736a241fe4b83e8f04c5de690025",
+      "role": "retained_zero_byte_failure",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "failed-attempt-receipt",
+      "path": "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
+      "sha256": "a7057479f4dfb867ead6c9622d684c07df51af9db6c39a6fa2dc6d94ae7afc9c",
+      "role": "retained_zero_byte_attempt",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "dem-vertical-review-contract",
+      "path": "reviews/m2-dem-vertical-datum/review-contract.json",
+      "sha256": "1227dc4934d6ba22498f86283060f2674474f5ab969c50a507fc0729ebc3c8b6",
+      "role": "independent_pending_gate",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "dem-terrain-review-contract",
+      "path": "reviews/m2-dem-terrain-result/review-contract.json",
+      "sha256": "96da5c649ef64c7f595649ffbfd908744af34ccb9d2bf7ad24d4da33213f1075",
+      "role": "independent_pending_gate",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "request M2-ORB-002, M2-ORB-003, or M2-ORB-004",
+    "delete, rewrite, hide, or reuse the retained failed attempt or events",
+    "expose, log, file-store, or environment-store an owner credential or token",
+    "accept terms, change an account or MFA, incur cost, or use a paid route",
+    "change an orbit provider UUID, filename, type, validity interval, scene binding, destination, or approved manifest",
+    "perform automatic retry, substitute AUX_POEORB, apply orbit data, convert DEM data, decode radar pixels, create a baseline, analyze change, attribute cause, or publish a scientific result",
+    "The zero-byte rejected request did not test the exact AUX_RESORB payload and used no owner credential.",
+    "A future one-attempt owner-credential transfer may still fail and has no automatic retry.",
+    "Even a passing orbit file would not establish corrected imagery, geolocation accuracy, pixel usability, change, attribution, or scientific fitness.",
+    "This proposal creates no recovery authority until the exact review bundle receives a completed owner decision and that response is locked and reconciled."
+  ]
+}

@@ -345,3 +345,13 @@ The corrected test creates isolated temporary custody and staging roots and mock
 - Superseded published readiness SHA-256: `f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad`.
 
 A new exact public CI pass remains required before activation, final no-payload preflight, token entry, or acquisition.
+
+## Radar-first path activation and orbit recovery-002 review preparation — 2026-09-05
+
+The exact owner response to radar-first path bundle SHA-256 `5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad` and proposal SHA-256 `ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77` was locked in private non-Git custody before reconciliation. Response SHA-256 `6f571127b6c736aba227e699569f88fe7fc37401605d75222df1e956e3f44b55` reconciles to one approval and zero revise/defer decisions. Approval SHA-256 `e017099532a681f6c7d39afa8b7ab94c25e3c51495381363eaefd67a4533bdb9` activates only the route-specific control correction.
+
+- `python scripts/check_project.py`: 600 required files, JSON controls, and Git artifact boundaries pass.
+- `python -m unittest discover -s tests`: 382 tests pass; 2 tests are intentionally skipped.
+- `git diff --check`: passes, with only Git line-ending notices on two existing Markdown working-copy formats.
+
+The activated controls preserve optical real-001 as terminal `INVALID`, recovery-001 as terminal `BLOCK`, and aggregate `M2-VERIFY` as deferred. Six exact Sentinel-1 sources pass custody, materialization-identity, and header-readiness controls only; no measurement pixels were decoded. The prior orbit-recovery proposal and bundle remain immutable stale evidence. Corrected orbit recovery-002 bundle SHA-256 `6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5` binds proposal SHA-256 `d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8` with zero human decisions. The ordinary orbit runner stops at `orbit_recovery_002_unit_not_complete` before catalogue access, token lookup, event creation, or payload request. Public CI for this exact review preparation remains pending; no orbit, credential, DEM, radar-pixel, baseline, change-analysis, attribution, or publication action occurred.
