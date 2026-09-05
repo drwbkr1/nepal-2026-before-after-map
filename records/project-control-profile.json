@@ -367,10 +367,10 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION",
+    "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish the exact optical pixel recovery-001 implementation and require fresh successful public CI; do not run the final no-pixel preflight or recovery attempt before the public gate passes."
+    "next_action": "Review the reconciled terminal BLOCK from optical-pixel-readiness-recovery-001 and choose a separately scoped path forward. Do not retry, change thresholds, substitute dates or sources, or begin baseline or change analysis under the consumed recovery authority."
   },
   "parallel_checkpoints": [
     {

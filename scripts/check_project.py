@@ -20,6 +20,7 @@ from derive_m2_acquisition_checkpoint import (
     current_optical_pixel_recovery_execution_pending,
     current_optical_pixel_recovery_implementation_pending,
     current_optical_pixel_recovery_review_required,
+    current_optical_pixel_recovery_terminal,
     derive_checkpoint,
 )
 from record_m2_sentinel_continuation_001_implementation_readiness import IMPLEMENTATION_FILES as CONTINUATION_001_IMPLEMENTATION_FILES
@@ -98,6 +99,10 @@ REQUIRED = [
     "config/qa/optical-pixel-readiness-contract-recovery-001.json",
     "records/surface-receipts/optical-pixel-readiness-recovery-001-synthetic-arcgis.json",
     "records/readiness/m2-optical-pixel-recovery-001-implementation-readiness.json",
+    "records/readiness/m2-optical-pixel-recovery-001-publication-gate.json",
+    "records/readiness/m2-optical-pixel-recovery-001-final-preflight.json",
+    "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json",
+    "records/readiness/m2-optical-pixel-recovery-001-reconciliation.json",
     "scripts/activate_m2_optical_pixel_recovery_001.py",
     "scripts/optical_pixel_recovery_core_001.py",
     "scripts/run_m2_optical_pixel_readiness_recovery_001.py",
@@ -890,6 +895,10 @@ def main() -> None:
     optical_pixel_recovery_runtime_contract = json.loads((ROOT / "config/qa/optical-pixel-readiness-contract-recovery-001.json").read_text(encoding="utf-8"))
     optical_pixel_recovery_synthetic = json.loads((ROOT / "records/surface-receipts/optical-pixel-readiness-recovery-001-synthetic-arcgis.json").read_text(encoding="utf-8"))
     optical_pixel_recovery_implementation_readiness = json.loads((ROOT / "records/readiness/m2-optical-pixel-recovery-001-implementation-readiness.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_publication = json.loads((ROOT / "records/readiness/m2-optical-pixel-recovery-001-publication-gate.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_final_preflight = json.loads((ROOT / "records/readiness/m2-optical-pixel-recovery-001-final-preflight.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_real = json.loads((ROOT / "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json").read_text(encoding="utf-8"))
+    optical_pixel_recovery_reconciliation = json.loads((ROOT / "records/readiness/m2-optical-pixel-recovery-001-reconciliation.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
     remote_project_name = expected_remote.rstrip("/").rsplit("/", 1)[-1].removesuffix(".git")
@@ -4531,12 +4540,19 @@ def main() -> None:
         materialization_pixel_review_approved
         and current_optical_pixel_recovery_execution_pending(ROOT, state_counts)
     )
+    optical_pixel_recovery_terminal = bool(
+        materialization_pixel_review_approved
+        and current_optical_pixel_recovery_terminal(ROOT, state_counts)
+    )
     optical_pixel_recovery_history_present = bool(
         optical_pixel_recovery_review_ready
         or optical_pixel_recovery_implementation_pending
         or optical_pixel_recovery_execution_pending
+        or optical_pixel_recovery_terminal
     )
-    if optical_pixel_recovery_execution_pending:
+    if optical_pixel_recovery_terminal:
+        expected_checkpoint = "M2-OPTICAL-PIXEL-RECOVERY-001"
+    elif optical_pixel_recovery_execution_pending:
         expected_checkpoint = "M2-OPTICAL-PIXEL-RECOVERY-001"
     elif optical_pixel_recovery_implementation_pending:
         expected_checkpoint = "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION"
@@ -4571,6 +4587,7 @@ def main() -> None:
     expected_optical_pixel_recovery_review_next_action = "Review M2 optical pixel recovery-001 bundle SHA-256 d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2 and proposal SHA-256 96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da; approve, revise, or defer. No correction or second pixel attempt is authorized before an attested decision."
     expected_optical_pixel_recovery_implementation_next_action = "Publish the exact optical pixel recovery-001 implementation and require fresh successful public CI; do not run the final no-pixel preflight or recovery attempt before the public gate passes."
     expected_optical_pixel_recovery_execution_next_action = "Record the exact passing public-CI gate, run the final no-pixel preflight, and only if it passes invoke optical-pixel-readiness-recovery-001 once with no automatic retry."
+    expected_optical_pixel_recovery_terminal_next_action = "Review the reconciled terminal BLOCK from optical-pixel-readiness-recovery-001 and choose a separately scoped path forward. Do not retry, change thresholds, substitute dates or sources, or begin baseline or change analysis under the consumed recovery authority."
     acquire_unit = m2_units.get("M2-ACQUIRE", {})
     if materialization_pixel_review_ready or materialization_pixel_review_approved:
         proposal_sha = "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c"
@@ -4804,7 +4821,7 @@ def main() -> None:
             recovery_review_unit = m2_units.get("M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW", {})
             recovery_implementation_unit = m2_units.get("M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION", {})
             recovery_execution_unit = m2_units.get("M2-OPTICAL-PIXEL-RECOVERY-001", {})
-            recovery_is_approved = optical_pixel_recovery_implementation_pending or optical_pixel_recovery_execution_pending
+            recovery_is_approved = optical_pixel_recovery_implementation_pending or optical_pixel_recovery_execution_pending or optical_pixel_recovery_terminal
             if (
                 optical_pixel_publication.get("status") != "pass_public_controls_verified_before_optical_pixel_attempt"
                 or optical_pixel_publication.get("github_actions", {}).get("run_id") != 33986585291
@@ -4879,14 +4896,49 @@ def main() -> None:
                     or optical_pixel_recovery_implementation_readiness.get("validation", {}).get("focused_portable_test_count") != 10
                     or optical_pixel_recovery_implementation_readiness.get("assertions", {}).get("recovery_attempt_started") is not False
                     or optical_pixel_recovery_implementation_readiness.get("assertions", {}).get("real_product_pixels_examined") is not False
-                    or recovery_implementation_unit.get("status") != ("complete" if optical_pixel_recovery_execution_pending else "in_progress")
-                    or recovery_implementation_unit.get("gates", {}).get("public_ci") != ("pass" if optical_pixel_recovery_execution_pending else "pending")
-                    or recovery_implementation_unit.get("gates", {}).get("real_recovery_invocation_count") != 0
-                    or recovery_execution_unit.get("status") != ("in_progress" if optical_pixel_recovery_execution_pending else "planned")
+                    or recovery_implementation_unit.get("status") != ("complete" if optical_pixel_recovery_execution_pending or optical_pixel_recovery_terminal else "in_progress")
+                    or recovery_implementation_unit.get("gates", {}).get("public_ci") != ("pass" if optical_pixel_recovery_execution_pending or optical_pixel_recovery_terminal else "pending")
+                    or recovery_implementation_unit.get("gates", {}).get("real_recovery_invocation_count") != (1 if optical_pixel_recovery_terminal else 0)
+                    or recovery_execution_unit.get("status") != ("complete" if optical_pixel_recovery_terminal else "in_progress" if optical_pixel_recovery_execution_pending else "planned")
+                    or recovery_execution_unit.get("disposition") != ("block" if optical_pixel_recovery_terminal else None)
                     or recovery_execution_unit.get("gates", {}).get("maximum_real_invocations") != 1
                     or recovery_execution_unit.get("gates", {}).get("automatic_retry_authorized") is not False
                 ):
                     fail("approved optical pixel recovery implementation or preserved failure evidence differs")
+                if (optical_pixel_recovery_execution_pending or optical_pixel_recovery_terminal) and (
+                    optical_pixel_recovery_publication.get("status") != "pass_public_controls_verified_before_optical_pixel_recovery_001"
+                    or optical_pixel_recovery_publication.get("github_actions", {}).get("run_id") != 33989213698
+                    or optical_pixel_recovery_publication.get("github_actions", {}).get("head_sha") != "395b63e1bd5c53a39ca3e2601768ba5a00f4bcf4"
+                    or optical_pixel_recovery_publication.get("github_actions", {}).get("conclusion") != "success"
+                    or optical_pixel_recovery_publication.get("bindings", {}).get("contract_sha256") != sha256("config/qa/optical-pixel-readiness-contract-recovery-001.json")
+                    or optical_pixel_recovery_publication.get("bindings", {}).get("implementation_readiness_sha256") != sha256("records/readiness/m2-optical-pixel-recovery-001-implementation-readiness.json")
+                    or optical_pixel_recovery_publication.get("assertions", {}).get("recovery_attempt_started") is not False
+                ):
+                    fail("optical pixel recovery publication gate differs")
+                if optical_pixel_recovery_terminal and (
+                    optical_pixel_recovery_final_preflight.get("status") != "pass_exact_optical_pixel_recovery_001_inputs_ready_no_pixel_access"
+                    or optical_pixel_recovery_final_preflight.get("assertions", {}).get("real_product_pixels_examined") is not False
+                    or optical_pixel_recovery_final_preflight.get("assertions", {}).get("recovery_attempt_paths_absent") is not True
+                    or optical_pixel_recovery_real.get("attempt_id") != "optical-pixel-readiness-recovery-001"
+                    or optical_pixel_recovery_real.get("status") != "block"
+                    or optical_pixel_recovery_real.get("activity", {}).get("real_product_pixels_examined") is not True
+                    or optical_pixel_recovery_real.get("activity", {}).get("spectral_indices_computed") is not False
+                    or optical_pixel_recovery_real.get("claim_boundary", {}).get("baseline_established") is not False
+                    or optical_pixel_recovery_real.get("claim_boundary", {}).get("change_established") is not False
+                    or optical_pixel_recovery_real.get("registration", {}).get("status") != "defer"
+                    or optical_pixel_recovery_real.get("registration", {}).get("accepted_control_count") != 20
+                    or {item.get("aoi_id"): item.get("status") for item in optical_pixel_recovery_real.get("aoi_metrics", [])} != {"AOI-OVERVIEW": "block", "AOI-SOURCE": "block", "AOI-UPPER-CORRIDOR": "defer"}
+                    or optical_pixel_recovery_reconciliation.get("status") != "terminal_block_recovery_001_no_retry_released"
+                    or optical_pixel_recovery_reconciliation.get("assertions", {}).get("recovery_invocation_count") != 1
+                    or optical_pixel_recovery_reconciliation.get("assertions", {}).get("aoi_metrics_established") is not True
+                    or optical_pixel_recovery_reconciliation.get("assertions", {}).get("registration_established") is not True
+                    or optical_pixel_recovery_reconciliation.get("assertions", {}).get("baseline_established") is not False
+                    or optical_pixel_recovery_reconciliation.get("assertions", {}).get("automatic_retry_authorized") is not False
+                    or recovery_execution_unit.get("gates", {}).get("final_preflight_sha256") != sha256("records/readiness/m2-optical-pixel-recovery-001-final-preflight.json")
+                    or recovery_execution_unit.get("gates", {}).get("real_receipt_sha256") != sha256("records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json")
+                    or recovery_execution_unit.get("gates", {}).get("reconciliation_sha256") != sha256("records/readiness/m2-optical-pixel-recovery-001-reconciliation.json")
+                ):
+                    fail("terminal optical pixel recovery result or reconciliation differs")
         implementation_unit = m2_units.get("M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION", {})
         materialize_unit = m2_units.get("M2-MATERIALIZE-REMAINING", {})
         header_unit = m2_units.get("M2-FULL-INPUT-READINESS", {})
@@ -4922,7 +4974,12 @@ def main() -> None:
         implementation_unit = m2_units.get("M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION", {})
         implementation_gates = implementation_unit.get("gates", {})
         verify_unit = m2_units.get("M2-VERIFY", {})
-        if optical_pixel_recovery_execution_pending:
+        if optical_pixel_recovery_terminal:
+            expected_materialized_source_count = 8
+            expected_materialization_state = "optical_pixel_recovery_001_terminal_block_no_retry"
+            expected_verify_next_dependency = "M2-OPTICAL-PIXEL-RECOVERY-001"
+            expected_primary_next_action = expected_optical_pixel_recovery_terminal_next_action
+        elif optical_pixel_recovery_execution_pending:
             expected_materialized_source_count = 8
             expected_materialization_state = "optical_pixel_recovery_001_public_gate_pass_execution_pending"
             expected_verify_next_dependency = "M2-OPTICAL-PIXEL-RECOVERY-001"
@@ -7486,6 +7543,39 @@ def main() -> None:
         or continuation_portability_correction_evidence.get("assertions", {}).get("pixel_processing_released") is not False
     ):
         fail("EVID-0088 continuation-001 portable test correction differs")
+
+    optical_recovery_approval_evidence = ledger_by_id.get("EVID-0091")
+    optical_recovery_outcome_evidence = ledger_by_id.get("EVID-0092")
+    if (
+        not isinstance(optical_recovery_approval_evidence, dict)
+        or optical_recovery_approval_evidence.get("approval_sha256") != sha256("records/source-gates/m2-optical-pixel-recovery-001-approval.json")
+        or optical_recovery_approval_evidence.get("proposal_sha256") != "96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da"
+        or optical_recovery_approval_evidence.get("review_bundle_sha256") != "d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2"
+        or optical_recovery_approval_evidence.get("implementation_commit") != "395b63e1bd5c53a39ca3e2601768ba5a00f4bcf4"
+        or optical_recovery_approval_evidence.get("github_actions_run_id") != 33989213698
+        or optical_recovery_approval_evidence.get("publication_gate_sha256") != sha256("records/readiness/m2-optical-pixel-recovery-001-publication-gate.json")
+        or optical_recovery_approval_evidence.get("assertions", {}).get("human_decision_count") != 1
+        or optical_recovery_approval_evidence.get("assertions", {}).get("recovery_invocation_count_before_publication") != 0
+        or optical_recovery_approval_evidence.get("assertions", {}).get("automatic_retry_authorized") is not False
+        or optical_recovery_approval_evidence.get("assertions", {}).get("baseline_or_change_authorized") is not False
+    ):
+        fail("EVID-0091 optical recovery approval or publication evidence differs")
+    if (
+        not isinstance(optical_recovery_outcome_evidence, dict)
+        or optical_recovery_outcome_evidence.get("status") != "terminal_block_no_retry_no_scientific_release"
+        or optical_recovery_outcome_evidence.get("final_preflight_sha256") != sha256("records/readiness/m2-optical-pixel-recovery-001-final-preflight.json")
+        or optical_recovery_outcome_evidence.get("real_receipt_sha256") != sha256("records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json")
+        or optical_recovery_outcome_evidence.get("reconciliation_sha256") != sha256("records/readiness/m2-optical-pixel-recovery-001-reconciliation.json")
+        or optical_recovery_outcome_evidence.get("result", {}).get("decision_status") != "block"
+        or optical_recovery_outcome_evidence.get("result", {}).get("source_aoi_usable_fraction") != 0.063252
+        or optical_recovery_outcome_evidence.get("result", {}).get("accepted_control_count") != 20
+        or optical_recovery_outcome_evidence.get("assertions", {}).get("recovery_invocation_count") != 1
+        or optical_recovery_outcome_evidence.get("assertions", {}).get("source_custody_unchanged") is not True
+        or optical_recovery_outcome_evidence.get("assertions", {}).get("spectral_indices_computed") is not False
+        or optical_recovery_outcome_evidence.get("assertions", {}).get("change_established") is not False
+        or optical_recovery_outcome_evidence.get("assertions", {}).get("automatic_retry_authorized") is not False
+    ):
+        fail("EVID-0092 terminal optical recovery evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():

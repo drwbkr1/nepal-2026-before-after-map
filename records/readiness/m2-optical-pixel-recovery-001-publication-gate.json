@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PIXEL-RECOVERY-001-PUBLICATION-GATE",
+  "verified_at_utc": "2026-09-05T20:08:56Z",
+  "status": "pass_public_controls_verified_before_optical_pixel_recovery_001",
+  "github_actions": {
+    "run_id": 33989213698,
+    "run_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33989213698",
+    "head_sha": "395b63e1bd5c53a39ca3e2601768ba5a00f4bcf4",
+    "conclusion": "success"
+  },
+  "bindings": {
+    "approval_sha256": "983303532e95814828fd55d1f8c26c55d06d6785d579d236f8e5321072e8fcff",
+    "activation_sha256": "fda93f4c5a2881efb28b86379a850da4db5b85b1b7c35d98abe9f4a4b02eaa3c",
+    "real_001_reconciliation_sha256": "0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a",
+    "contract_sha256": "6fb4200f6d6ef5b0b77d5d49a278bd14cade062908b7d18197bf79265233c655",
+    "implementation_readiness_sha256": "4b32929c2346396b6980b7eb7b85d2f1c5264d5bb37c058352ea1a6f244ecff1"
+  },
+  "assertions": {
+    "real_001_reused_or_retried": false,
+    "recovery_attempt_started": false,
+    "real_product_pixels_examined_during_publication": false,
+    "thresholds_sources_or_aois_changed": false
+  },
+  "next_gate": "pass the final exact no-pixel recovery preflight before the single recovery-001 invocation"
+}

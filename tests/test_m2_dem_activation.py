@@ -171,8 +171,14 @@ class M2DemActivationTests(unittest.TestCase):
             (unit for unit in self.milestone["units"] if unit["id"] == "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION"),
             None,
         )
+        optical_recovery = next(
+            (unit for unit in self.milestone["units"] if unit["id"] == "M2-OPTICAL-PIXEL-RECOVERY-001"),
+            None,
+        )
         expected_primary_checkpoint = (
-            "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION"
+            "M2-OPTICAL-PIXEL-RECOVERY-001"
+            if optical_recovery is not None and optical_recovery.get("status") == "complete"
+            else "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION"
             if optical_recovery_implementation is not None and optical_recovery_implementation.get("status") == "in_progress"
             else "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW"
             if optical_recovery_review is not None and optical_recovery_review.get("status") == "ready"

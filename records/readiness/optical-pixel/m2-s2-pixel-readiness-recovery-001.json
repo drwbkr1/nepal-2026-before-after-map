@@ -1,0 +1,275 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-S2-PIXEL-READINESS-RECOVERY-001",
+  "attempt_id": "optical-pixel-readiness-recovery-001",
+  "started_at_utc": "2026-09-05T20:10:41Z",
+  "status": "block",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced",
+    "spatial_analyst": "available_and_used"
+  },
+  "bindings": {
+    "contract_ref": "config/qa/optical-pixel-readiness-contract-recovery-001.json",
+    "contract_sha256": "6fb4200f6d6ef5b0b77d5d49a278bd14cade062908b7d18197bf79265233c655",
+    "source_scientific_contract_ref": "config/qa/optical-pixel-readiness-contract-001.json",
+    "source_scientific_contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
+    "recovery_approval_ref": "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
+    "recovery_approval_sha256": "983303532e95814828fd55d1f8c26c55d06d6785d579d236f8e5321072e8fcff"
+  },
+  "pair": {
+    "before_source_id": "M1-SRC-010",
+    "after_source_id": "M1-SRC-008",
+    "pair_id": "PAIR-S2-RUM-R119"
+  },
+  "approved_aoi_ids": [
+    "AOI-OVERVIEW",
+    "AOI-SOURCE",
+    "AOI-UPPER-CORRIDOR"
+  ],
+  "aoi_metrics": [
+    {
+      "aoi_id": "AOI-OVERVIEW",
+      "aoi_area_m2": 7242178563.375755,
+      "covered_area_m2": 3919501600.0,
+      "valid_area_m2": 574974400.0,
+      "coverage_fraction": 0.541205,
+      "usable_fraction_of_aoi": 0.079392,
+      "valid_fraction_within_coverage": 0.146696,
+      "excluded_area_by_reason_m2": {
+        "before_scl_2": 144233600.0,
+        "before_scl_3": 27103600.0,
+        "before_scl_7": 12614000.0,
+        "before_scl_8": 143826400.0,
+        "before_scl_9": 176072800.0,
+        "before_scl_11": 221320400.0,
+        "after_scl_2": 28104400.0,
+        "after_scl_3": 36828400.0,
+        "after_scl_7": 65404800.0,
+        "after_scl_8": 479542800.0,
+        "after_scl_9": 1985899200.0,
+        "after_scl_11": 718800.0,
+        "before_quality_classification": 185600.0,
+        "after_quality_classification": 22672400.0
+      },
+      "coverage_status": "defer",
+      "usability_status": "block",
+      "status": "block",
+      "limitations": [
+        "AOI coverage is incomplete for a full-area quantitative route.",
+        "Usable AOI fraction is below the predeclared pass threshold."
+      ],
+      "errors": [],
+      "scientific_admission_authorized": false,
+      "classification_area_m2": {
+        "1": 574974400.0,
+        "102": 144233600.0,
+        "103": 27103600.0,
+        "107": 12614000.0,
+        "108": 143826400.0,
+        "109": 176072800.0,
+        "111": 221320400.0,
+        "202": 28104400.0,
+        "203": 36828400.0,
+        "207": 65404800.0,
+        "208": 479542800.0,
+        "209": 1985899200.0,
+        "211": 718800.0,
+        "300": 185600.0,
+        "301": 22672400.0
+      }
+    },
+    {
+      "aoi_id": "AOI-SOURCE",
+      "aoi_area_m2": 143470831.1551202,
+      "covered_area_m2": 143472000.0,
+      "valid_area_m2": 9074800.0,
+      "coverage_fraction": 1.0,
+      "usable_fraction_of_aoi": 0.063252,
+      "valid_fraction_within_coverage": 0.063251,
+      "excluded_area_by_reason_m2": {
+        "before_scl_2": 16133600.0,
+        "before_scl_3": 589200.0,
+        "before_scl_7": 570800.0,
+        "before_scl_8": 3766400.0,
+        "before_scl_9": 3985600.0,
+        "before_scl_11": 38622000.0,
+        "after_scl_2": 2678400.0,
+        "after_scl_3": 215200.0,
+        "after_scl_7": 3056000.0,
+        "after_scl_8": 14417600.0,
+        "after_scl_9": 49825200.0,
+        "after_scl_11": 256000.0,
+        "before_quality_classification": 2000.0,
+        "after_quality_classification": 279200.0
+      },
+      "coverage_status": "pass_qa_only",
+      "usability_status": "block",
+      "status": "block",
+      "limitations": [
+        "Usable AOI fraction is below the predeclared pass threshold."
+      ],
+      "errors": [],
+      "scientific_admission_authorized": false,
+      "classification_area_m2": {
+        "1": 9074800.0,
+        "102": 16133600.0,
+        "103": 589200.0,
+        "107": 570800.0,
+        "108": 3766400.0,
+        "109": 3985600.0,
+        "111": 38622000.0,
+        "202": 2678400.0,
+        "203": 215200.0,
+        "207": 3056000.0,
+        "208": 14417600.0,
+        "209": 49825200.0,
+        "211": 256000.0,
+        "300": 2000.0,
+        "301": 279200.0
+      }
+    },
+    {
+      "aoi_id": "AOI-UPPER-CORRIDOR",
+      "aoi_area_m2": 517636995.8695006,
+      "covered_area_m2": 517636800.0,
+      "valid_area_m2": 132723600.0,
+      "coverage_fraction": 1.0,
+      "usable_fraction_of_aoi": 0.256403,
+      "valid_fraction_within_coverage": 0.256403,
+      "excluded_area_by_reason_m2": {
+        "before_scl_2": 5048400.0,
+        "before_scl_3": 1600000.0,
+        "before_scl_7": 232400.0,
+        "before_scl_8": 7533600.0,
+        "before_scl_9": 8081200.0,
+        "before_scl_11": 936800.0,
+        "after_scl_2": 12557600.0,
+        "after_scl_3": 14937200.0,
+        "after_scl_7": 16503600.0,
+        "after_scl_8": 105019200.0,
+        "after_scl_9": 209286400.0,
+        "after_scl_11": 50400.0,
+        "after_quality_classification": 3126400.0
+      },
+      "coverage_status": "pass_qa_only",
+      "usability_status": "defer",
+      "status": "defer",
+      "limitations": [
+        "Usable AOI fraction is below the predeclared pass threshold."
+      ],
+      "errors": [],
+      "scientific_admission_authorized": false,
+      "classification_area_m2": {
+        "1": 132723600.0,
+        "102": 5048400.0,
+        "103": 1600000.0,
+        "107": 232400.0,
+        "108": 7533600.0,
+        "109": 8081200.0,
+        "111": 936800.0,
+        "202": 12557600.0,
+        "203": 14937200.0,
+        "207": 16503600.0,
+        "208": 105019200.0,
+        "209": 209286400.0,
+        "211": 50400.0,
+        "300": 0.0,
+        "301": 3126400.0
+      }
+    }
+  ],
+  "grid_compatibility": {
+    "status": "pass_qa_only",
+    "B11": {
+      "status": "pass_qa_only",
+      "errors": [],
+      "scientific_admission_authorized": false
+    },
+    "SCL": {
+      "status": "pass_qa_only",
+      "errors": [],
+      "scientific_admission_authorized": false
+    },
+    "fixed_target": {
+      "wkid": 32645,
+      "name": "WGS 1984 UTM Zone 45N",
+      "cell_size_m": 20.0,
+      "snap_basis": "approved AOI union extent snapped outward to 20 metre multiples",
+      "extent": {
+        "xmin": 273300.0,
+        "ymin": 3070220.0,
+        "xmax": 367820.0,
+        "ymax": 3149220.0
+      },
+      "columns": 4726,
+      "rows": 3950,
+      "continuous_resampling": "BILINEAR",
+      "categorical_resampling": "NEAREST",
+      "grid_drift_disposition": "block",
+      "xmin": 273300.0,
+      "ymin": 3070220.0,
+      "xmax": 367820.0,
+      "ymax": 3149220.0
+    }
+  },
+  "registration": {
+    "status": "defer",
+    "stable_control_pair_count": 20,
+    "rmse_pixels": 0.5087470343284738,
+    "bias_x_pixels": 0.09892092348586982,
+    "bias_y_pixels": 0.0805902015336605,
+    "finding": "Registration is measured but lacks controls or precision for a pass.",
+    "scientific_admission_authorized": false,
+    "candidate_count": 900,
+    "accepted_control_count": 20,
+    "rejected_counts": {
+      "outside_overview": 0,
+      "event_exclusion": 98,
+      "insufficient_valid": 773,
+      "low_texture": 0,
+      "low_correlation": 9
+    },
+    "method": "deterministic B11 normalized local cross-correlation outside buffered event AOIs"
+  },
+  "external_outputs": {
+    "classification_ref": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\optical-pixel-readiness-recovery-001\\pair_usability_classification_20m.tif",
+    "classification_sha256": "87c5df914c2ed8781beb123bad59dd6644453d70b5a73095b3eee542ffd1e52a",
+    "metrics_ref": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\optical-pixel-readiness-recovery-001\\metrics.json",
+    "metrics_sha256": "4f04b185f8ded1d60fb12386b2bec2bf3b2bc43936cee1b1a64d1e46eb910126"
+  },
+  "activity": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "source_materialization_inventories_unchanged": true,
+    "real_product_pixels_examined": true,
+    "spectral_indices_computed": false,
+    "candidate_change_polygons_created": false
+  },
+  "claim_boundary": {
+    "coverage_mask_grid_and_registration_qa_measured": false,
+    "spectral_indices_computed": false,
+    "candidate_change_polygons_created": false,
+    "baseline_established": false,
+    "change_established": false,
+    "event_attribution_established": false,
+    "scientific_admission_authorized": false
+  },
+  "limitations": [
+    "The attempt can establish QA fitness only for the exact Sentinel-2 pair and three approved AOIs.",
+    "The conservative pair mask requires valid SCL surface classes and clear three-band classification masks on both dates; high post-event cloud may defer or block the route.",
+    "Registration controls are deterministic B11 patches outside buffered event AOIs; the method does not prove radiometric comparability or landscape stability everywhere.",
+    "No threshold may be changed after real pixels are observed, and no retry, date shopping, or source substitution is authorized.",
+    "A pass does not release spectral indices, a baseline, change detection, interpretation, attribution, emergency guidance, or publication.",
+    "This is a post-observation operational correction; real-001 remains terminal INVALID and is not reclassified, reused, resumed, or retried.",
+    "Recovery-001 is the only new real invocation and has no automatic retry authority."
+  ],
+  "next_gate": "reconcile this terminal QA-only recovery result; do not retry or begin baseline, change, interpretation, attribution, or publication",
+  "operational_correction": {
+    "analysis_grid_extent_normalized": true,
+    "scientific_thresholds_changed": false,
+    "source_pair_or_aois_changed": false,
+    "real_001_reused_or_retried": false
+  }
+}

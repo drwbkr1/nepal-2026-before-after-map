@@ -66,6 +66,10 @@ OPTICAL_PIXEL_RECOVERY_EXECUTION_CHECKPOINT = {
     "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001",
     "next_action": "Record the exact passing public-CI gate, run the final no-pixel preflight, and only if it passes invoke optical-pixel-readiness-recovery-001 once with no automatic retry.",
 }
+OPTICAL_PIXEL_RECOVERY_TERMINAL_CHECKPOINT = {
+    "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001",
+    "next_action": "Review the reconciled terminal BLOCK from optical-pixel-readiness-recovery-001 and choose a separately scoped path forward. Do not retry, change thresholds, substitute dates or sources, or begin baseline or change analysis under the consumed recovery authority.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -302,6 +306,30 @@ def current_optical_pixel_recovery_execution_pending(root: Path, state_counts: d
     )
 
 
+def current_optical_pixel_recovery_terminal(root: Path, state_counts: dict[str, int]) -> bool:
+    if not current_container_verification_complete(root, state_counts):
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        receipt = load(root / "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json")
+        reconciliation = load(root / "records/readiness/m2-optical-pixel-recovery-001-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    recovery = units.get("M2-OPTICAL-PIXEL-RECOVERY-001", {})
+    return bool(
+        receipt.get("attempt_id") == "optical-pixel-readiness-recovery-001"
+        and receipt.get("status") == "block"
+        and reconciliation.get("status") == "terminal_block_recovery_001_no_retry_released"
+        and reconciliation.get("assertions", {}).get("recovery_invocation_count") == 1
+        and reconciliation.get("assertions", {}).get("automatic_retry_authorized") is False
+        and recovery.get("status") == "complete"
+        and recovery.get("disposition") == "block"
+        and recovery.get("gates", {}).get("real_invocation_count") == 1
+        and recovery.get("gates", {}).get("automatic_retry_authorized") is False
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -346,7 +374,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_optical_pixel_recovery_execution_pending(ROOT, progress["state_counts"]):
+        if current_optical_pixel_recovery_terminal(ROOT, progress["state_counts"]):
+            checkpoint = dict(OPTICAL_PIXEL_RECOVERY_TERMINAL_CHECKPOINT)
+        elif current_optical_pixel_recovery_execution_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(OPTICAL_PIXEL_RECOVERY_EXECUTION_CHECKPOINT)
         elif current_optical_pixel_recovery_implementation_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(OPTICAL_PIXEL_RECOVERY_IMPLEMENTATION_CHECKPOINT)

@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PIXEL-RECOVERY-001-FINAL-PREFLIGHT",
+  "observed_at_utc": "2026-09-05T20:10:23Z",
+  "status": "pass_exact_optical_pixel_recovery_001_inputs_ready_no_pixel_access",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
+    "approval_sha256": "983303532e95814828fd55d1f8c26c55d06d6785d579d236f8e5321072e8fcff",
+    "real_001_reconciliation_ref": "records/readiness/m2-optical-pixel-real-001-reconciliation.json",
+    "real_001_reconciliation_sha256": "0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a",
+    "contract_ref": "config/qa/optical-pixel-readiness-contract-recovery-001.json",
+    "contract_sha256": "6fb4200f6d6ef5b0b77d5d49a278bd14cade062908b7d18197bf79265233c655",
+    "publication_gate_ref": "records/readiness/m2-optical-pixel-recovery-001-publication-gate.json",
+    "publication_gate_sha256": "fe261a1b9d64b7b39f710f6ba88ed22edcabe5a4a0d8b6ca47ace077d71d9d0f"
+  },
+  "attempt": {
+    "attempt_id": "optical-pixel-readiness-recovery-001",
+    "external_attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\optical-pixel-readiness-recovery-001",
+    "public_receipt_ref": "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json"
+  },
+  "selected_inputs": [
+    {
+      "product_role": "before",
+      "member_role": "SCL",
+      "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R20m/T45RUM_20260812T045701_SCL_20m.jp2",
+      "size_bytes": 2895935,
+      "sha256": "9675bb91d769cc154d2a6c1887f315bc9e3f6def4596488d5a36c4e08419fade"
+    },
+    {
+      "product_role": "before",
+      "member_role": "B11",
+      "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R20m/T45RUM_20260812T045701_B11_20m.jp2",
+      "size_bytes": 32971809,
+      "sha256": "6b23ef671be43347dc712ff6af63848556c0ead7b8b51715384bcc0e4e21cd51"
+    },
+    {
+      "product_role": "before",
+      "member_role": "quality_classification",
+      "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/QI_DATA/MSK_CLASSI_B00.jp2",
+      "size_bytes": 65352,
+      "sha256": "1f9d4c4824a3fefc89e664e16389d965782c98703c89a7b34661d2f9a2aa19f8"
+    },
+    {
+      "product_role": "after",
+      "member_role": "SCL",
+      "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R20m/T45RUM_20260827T045659_SCL_20m.jp2",
+      "size_bytes": 2006086,
+      "sha256": "3cfa58c1f09ef7a32a3d1ef1d323a0c4e192fedecf9985a32f97fd21b3b4066f"
+    },
+    {
+      "product_role": "after",
+      "member_role": "B11",
+      "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R20m/T45RUM_20260827T045659_B11_20m.jp2",
+      "size_bytes": 30273799,
+      "sha256": "0a0782bd57d0da6d1c4442ca1a2e916a187568ac83dd141ae53a4a287550691b"
+    },
+    {
+      "product_role": "after",
+      "member_role": "quality_classification",
+      "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/QI_DATA/MSK_CLASSI_B00.jp2",
+      "size_bytes": 88448,
+      "sha256": "50a5258adefca649c9ccd1864961711169b8b0091066053f516bd39ddfbdca02"
+    }
+  ],
+  "retained_real_001_inventory": [
+    {
+      "relative_path": "failure.json",
+      "size_bytes": 210,
+      "sha256": "88ce767b106285fc48e60e9fafb23896c096a402d8d9c3af489bbb6401bee3b3"
+    },
+    {
+      "relative_path": "started.json",
+      "size_bytes": 211,
+      "sha256": "71709a3c78741ba090941ce3c1436fd29ea29e1e17223ae568b1d4113849aa67"
+    }
+  ],
+  "storage": {
+    "free_bytes": 526647078912,
+    "minimum_free_space_bytes": 2147483648,
+    "status": "pass"
+  },
+  "assertions": {
+    "exact_pair": [
+      "M1-SRC-010",
+      "M1-SRC-008"
+    ],
+    "approved_aoi_ids": [
+      "AOI-OVERVIEW",
+      "AOI-SOURCE",
+      "AOI-UPPER-CORRIDOR"
+    ],
+    "selected_files_rehashed": true,
+    "recovery_attempt_paths_absent": true,
+    "real_001_preserved_exact": true,
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "external_files_mutated": false,
+    "real_product_pixels_examined": false,
+    "thresholds_sources_or_aois_changed": false
+  },
+  "next_gate": "invoke optical-pixel-readiness-recovery-001 exactly once and preserve its terminal result without retry"
+}

@@ -614,7 +614,7 @@
         "m1_src_004_satisfied_by_recovery_002": true,
         "continuation_status": "succeeded_all_four",
         "materialized_source_count": 8,
-        "materialization_and_pixel_readiness": "optical_pixel_recovery_001_implementation_publication_pending",
+        "materialization_and_pixel_readiness": "optical_pixel_recovery_001_terminal_block_no_retry",
         "materialization_pixel_review_ref": "reviews/m2-materialization-pixel-readiness/review-contract.json",
         "materialization_pixel_review_bundle_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a",
         "materialization_pixel_approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
@@ -624,7 +624,9 @@
         "header_reconciliation_ref": "records/readiness/m2-full-header-readiness-reconciliation.json",
         "header_reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1",
         "optical_pixel_real_001_reconciliation_ref": "records/readiness/m2-optical-pixel-real-001-reconciliation.json",
-        "optical_pixel_real_001_reconciliation_sha256": "0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a"
+        "optical_pixel_real_001_reconciliation_sha256": "0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a",
+        "optical_pixel_recovery_001_reconciliation_ref": "records/readiness/m2-optical-pixel-recovery-001-reconciliation.json",
+        "optical_pixel_recovery_001_reconciliation_sha256": "445adfc716c97ef9122f699c28cb8193924c3863159cc91de511e56b72f7fb9f"
       },
       "disposition": "defer",
       "retained_failures": [
@@ -643,10 +645,10 @@
         "observed": [
           "EXIT-201-VERIFIED-CUSTODY"
         ],
-        "decision_value": "enables_dependency",
-        "rationale": "All eight products and both header routes pass their limited gates; optical real-001 is terminal INVALID and the separately approved recovery awaits public implementation proof."
+        "decision_value": "block",
+        "rationale": "All eight products and both header routes pass their limited gates, but the only approved optical recovery is terminal BLOCK for usable coverage and registration control sufficiency. A separately scoped owner decision is required before any alternate route."
       },
-      "next_dependency": "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION"
+      "next_dependency": "M2-OPTICAL-PIXEL-RECOVERY-001"
     },
     {
       "id": "M2-BASELINE",
@@ -1450,7 +1452,7 @@
       ],
       "action_class": "external_publication",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
         "records/readiness/m2-optical-pixel-recovery-001-activation.json",
@@ -1471,13 +1473,17 @@
         "arcgis_synthetic": "pass",
         "arcgis_synthetic_sha256": "34de82e63f7bb6b07f5925372cba69a7ca2aab5e129d6f8950852ffda23314a8",
         "implementation_readiness_sha256": "4b32929c2346396b6980b7eb7b85d2f1c5264d5bb37c058352ea1a6f244ecff1",
-        "public_ci": "pending",
+        "public_ci": "pass",
         "real_001_preserved": true,
-        "real_recovery_invocation_count": 0,
-        "final_no_pixel_preflight_passed": false,
-        "recovery_attempt_authorized_now": false
+        "real_recovery_invocation_count": 1,
+        "final_no_pixel_preflight_passed": true,
+        "recovery_attempt_authorized_now": false,
+        "public_commit": "395b63e1bd5c53a39ca3e2601768ba5a00f4bcf4",
+        "public_ci_run_id": 33989213698,
+        "publication_gate_sha256": "fe261a1b9d64b7b39f710f6ba88ed22edcabe5a4a0d8b6ca47ace077d71d9d0f",
+        "final_preflight_sha256": "d2d7eaf39ae67b0926de0c5e16d803eafcbdb0d076aab06c87d165d8f03ebb5e"
       },
-      "disposition": null,
+      "disposition": "pass_public_controls_verified",
       "retained_failures": [
         {
           "record_ref": "records/readiness/m2-optical-pixel-recovery-001-review-lock-attempt-001-failure.json",
@@ -1495,8 +1501,8 @@
       "exit_condition_delta": {
         "expected": [],
         "observed": [],
-        "decision_value": "unknown",
-        "rationale": "Local portable and ArcGIS synthetic proof pass; public CI is still required before any preflight or real recovery access."
+        "decision_value": "enables_dependency",
+        "rationale": "The exact implementation passed fresh public CI; only the final no-pixel preflight may now run before the single recovery invocation."
       },
       "next_dependency": "M2-OPTICAL-PIXEL-RECOVERY-001"
     },
@@ -1508,7 +1514,7 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "planned",
+      "status": "complete",
       "inputs": [
         "config/qa/optical-pixel-readiness-contract-recovery-001.json",
         "records/readiness/m2-optical-pixel-recovery-001-publication-gate.json",
@@ -1524,21 +1530,32 @@
         "maximum_real_invocations": 1,
         "automatic_retry_authorized": false,
         "real_001_reuse_or_retry_authorized": false,
-        "public_ci": "required",
-        "final_no_pixel_preflight": "required",
+        "public_ci": "pass",
+        "final_no_pixel_preflight": "pass",
         "radar_pixel_readiness_authorized": false,
-        "baseline_or_change_authorized": false
+        "baseline_or_change_authorized": false,
+        "public_commit": "395b63e1bd5c53a39ca3e2601768ba5a00f4bcf4",
+        "public_ci_run_id": 33989213698,
+        "publication_gate_sha256": "fe261a1b9d64b7b39f710f6ba88ed22edcabe5a4a0d8b6ca47ace077d71d9d0f",
+        "real_invocation_count": 1,
+        "final_preflight_sha256": "d2d7eaf39ae67b0926de0c5e16d803eafcbdb0d076aab06c87d165d8f03ebb5e",
+        "real_receipt_sha256": "9ffae2e589700adec07373325e3d35d6ee8ccf5bc3a5d66da5fe7e6639c406b5",
+        "reconciliation_sha256": "445adfc716c97ef9122f699c28cb8193924c3863159cc91de511e56b72f7fb9f",
+        "recovery_authority_consumed": true
       },
-      "disposition": null,
+      "disposition": "block",
       "retained_failures": [],
       "exit_condition_delta": {
         "expected": [
           "EXIT-202-PIXEL-AND-RIGHTS-QA",
           "EXIT-204-REGISTRATION-QA"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "The real recovery remains blocked until its exact public and no-pixel gates pass."
+        "observed": [
+          "exact-pair coverage and conservative mask metrics",
+          "registration measured with insufficient accepted controls for pass"
+        ],
+        "decision_value": "block",
+        "rationale": "The exact recovery completed once. AOI-SOURCE usable fraction was 0.063252, AOI-UPPER-CORRIDOR was 0.256403, and registration deferred with 20 accepted control pairs; the route is terminal BLOCK with no retry."
       },
       "next_dependency": "M2-VERIFY"
     }
@@ -1597,8 +1614,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION",
-    "next_action": "Publish the exact optical pixel recovery-001 implementation and require fresh successful public CI; do not run the final no-pixel preflight or recovery attempt before the public gate passes.",
+    "current_checkpoint": "M2-OPTICAL-PIXEL-RECOVERY-001",
+    "next_action": "Review the reconciled terminal BLOCK from optical-pixel-readiness-recovery-001 and choose a separately scoped path forward. Do not retry, change thresholds, substitute dates or sources, or begin baseline or change analysis under the consumed recovery authority.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -1612,7 +1629,8 @@
       "All eight SAFE products now pass materialization identity and per-file hash reconciliation; this establishes no raster header readiness, usable pixels, baseline, or scientific result.",
       "Both exact real header inspections passed once without pixel reads; only the conditional optical pixel-readiness implementation is released, while radar pixels and all baseline or change actions remain gated.",
       "Optical pixel real-001 is terminal INVALID after reading the first SCL raster; it produced no QA metrics or derived raster and cannot be retried under current authority.",
-      "Recovery-001 approval does not authorize preflight or real pixel access until the exact implementation passes fresh public CI; real-001 remains terminal INVALID and cannot be reused or retried."
+      "Recovery-001 approval does not authorize preflight or real pixel access until the exact implementation passes fresh public CI; real-001 remains terminal INVALID and cannot be reused or retried.",
+      "Optical recovery-001 is terminal BLOCK after one invocation; its thresholds and exact pair cannot be tuned, retried, or substituted under the consumed authority."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
