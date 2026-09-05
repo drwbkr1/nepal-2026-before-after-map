@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-MATERIALIZATION-PIXEL-READINESS-ACTIVATION-001",
+  "activated_at_utc": "2026-09-05T18:20:15Z",
+  "status": "pass_exact_approval_activated_stage_1_publication_pending",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+    "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+    "proposal_ref": "contracts/milestone-002-materialization-pixel-readiness-proposal.json",
+    "proposal_sha256": "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c",
+    "review_bundle_ref": "reviews/m2-materialization-pixel-readiness/review-bundle.json",
+    "review_bundle_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a",
+    "review_reconciliation_ref": "records/source-gates/m2-materialization-pixel-readiness-review-reconciliation.json",
+    "review_reconciliation_sha256": "aee7e7c3142189edd81079950daab38b08ef783ef1c38efc09ad8ab1cf38930f"
+  },
+  "released_now": {
+    "stage_1_control_implementation": true,
+    "stage_1_synthetic_validation": true,
+    "stage_1_publication": true,
+    "real_materialization_before_public_ci_and_final_preflight": false,
+    "real_header_inspection": false,
+    "optical_pixel_readiness": false,
+    "radar_measurement_pixels": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "external_data_mutated": false,
+    "archive_extraction_performed": false,
+    "measurement_pixels_read": false,
+    "baseline_or_change_analysis_released": false,
+    "scientific_publication_released": false
+  },
+  "next_gate": "publish and pass public CI for the exact stage-1 controls, then pass one final no-mutation preflight"
+}

@@ -12,7 +12,11 @@ from pathlib import Path
 from arcgis_final_delivery_core import validate_contract as validate_arcgis_final_delivery_contract
 from arcgis_package_portability_core import validate_contract as validate_arcgis_package_portability_contract
 from change_evidence_core import validate_contract as validate_change_evidence_contract
-from derive_m2_acquisition_checkpoint import current_container_verification_complete, derive_checkpoint
+from derive_m2_acquisition_checkpoint import (
+    current_container_verification_complete,
+    current_materialization_pixel_implementation_pending,
+    derive_checkpoint,
+)
 from record_m2_sentinel_continuation_001_implementation_readiness import IMPLEMENTATION_FILES as CONTINUATION_001_IMPLEMENTATION_FILES
 from record_m2_sentinel_recovery_002_implementation_readiness import IMPLEMENTATION_FILES as RECOVERY_002_IMPLEMENTATION_FILES
 from validate_m2_acquisition_progress import (
@@ -48,6 +52,11 @@ REQUIRED = [
     "contracts/milestone-002-sentinel-recovery-002-proposal.json",
     "contracts/milestone-002-sentinel-continuation-001-proposal.json",
     "contracts/milestone-002-materialization-pixel-readiness-proposal.json",
+    "records/source-gates/m2-materialization-pixel-readiness-review-reconciliation.json",
+    "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+    "records/readiness/m2-materialization-pixel-readiness-activation.json",
+    "records/readiness/m2-materialization-stage-1-implementation-readiness.json",
+    "records/readiness/m2-materialization-stage-1-implementation-readiness-attempt-001-superseded.json",
     "contracts/m2-sentinel-continuation-001.json",
     "records/source-gates/m2-sentinel-continuation-001-approval.json",
     "records/source-gates/m2-sentinel-continuation-001-review-reconciliation.json",
@@ -223,6 +232,13 @@ REQUIRED = [
     "docs/assets/m2-orbit-recovery-review.png",
     "scripts/render_m2_activation_review.py",
     "scripts/prepare_m2_materialization_pixel_readiness_review_preflight.py",
+    "scripts/activate_m2_materialization_pixel_readiness.py",
+    "scripts/m2_materialization_remaining_core.py",
+    "scripts/preflight_m2_materialization_remaining.py",
+    "scripts/run_m2_materialization_remaining.py",
+    "scripts/reconcile_m2_materialization_remaining.py",
+    "scripts/record_m2_materialization_stage_1_implementation_readiness.py",
+    "scripts/record_m2_materialization_stage_1_publication_gate.py",
     "scripts/render_m2_materialization_pixel_readiness_review.py",
     "scripts/prepare_m2_intake.py",
     "scripts/prepare_m2_verification.py",
@@ -305,6 +321,7 @@ REQUIRED = [
     "tests/test_arcgis_evidence_schema.py",
     "tests/test_pixel_qa_core.py",
     "tests/test_pair_plan.py",
+    "tests/test_m2_materialization_remaining.py",
     "scripts/activate_m2.py",
     "scripts/run_m2_preflight.py",
     "scripts/refresh_m2_preflight.py",
@@ -738,6 +755,10 @@ def main() -> None:
     materialization_pixel_contract = json.loads((ROOT / "reviews/m2-materialization-pixel-readiness/review-contract.json").read_text(encoding="utf-8"))
     materialization_pixel_blank = json.loads((ROOT / "reviews/m2-materialization-pixel-readiness/blank-response.json").read_text(encoding="utf-8"))
     materialization_pixel_readiness = json.loads((ROOT / "records/readiness/m2-materialization-pixel-readiness-review-readiness.json").read_text(encoding="utf-8"))
+    materialization_pixel_reconciliation = json.loads((ROOT / "records/source-gates/m2-materialization-pixel-readiness-review-reconciliation.json").read_text(encoding="utf-8"))
+    materialization_pixel_approval = json.loads((ROOT / "records/source-gates/m2-materialization-pixel-readiness-approval.json").read_text(encoding="utf-8"))
+    materialization_pixel_activation = json.loads((ROOT / "records/readiness/m2-materialization-pixel-readiness-activation.json").read_text(encoding="utf-8"))
+    materialization_stage_1_readiness = json.loads((ROOT / "records/readiness/m2-materialization-stage-1-implementation-readiness.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
     remote_project_name = expected_remote.rstrip("/").rsplit("/", 1)[-1].removesuffix(".git")
@@ -745,18 +766,17 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-materialization-pixel-readiness-proposal.json"
-    ]:
-        fail("project profile must expose only the pending materialization and pixel-readiness proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must not expose the activated materialization and pixel-readiness proposal as pending")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
         "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
         "records/source-gates/m2-sentinel-recovery-002-approval.json",
         "records/source-gates/m2-sentinel-continuation-001-approval.json",
+        "records/source-gates/m2-materialization-pixel-readiness-approval.json",
     ]:
-        fail("project profile must expose the exact active DEM, orbit, radar-label, recovery-002, and continuation-001 amendments")
+        fail("project profile must expose the six exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -834,12 +854,29 @@ def main() -> None:
         "secret_transport": "anonymous_pipe_single_use_memory_only",
         "pixel_processing_released": False,
     }
+    expected_materialization_pixel_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-materialization-pixel-readiness-approval.json"),
+        "proposal_ref": "contracts/milestone-002-materialization-pixel-readiness-proposal.json",
+        "proposal_sha256": "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c",
+        "review_bundle_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a",
+        "review_reconciliation_ref": "records/source-gates/m2-materialization-pixel-readiness-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-materialization-pixel-readiness-review-reconciliation.json"),
+        "stage_1_source_ids_in_exact_order": ["M1-SRC-004", "M1-SRC-005", "M1-SRC-006", "M1-SRC-010", "M1-SRC-008"],
+        "maximum_materialization_attempts_per_source": 1,
+        "stop_on_first_failure": True,
+        "stage_2_inspection_ids": ["radar-input-readiness-real-003", "optical-input-readiness-real-001"],
+        "stage_3_attempt_id": "optical-pixel-readiness-real-001",
+        "radar_pixel_readiness_authorized": False,
+        "baseline_or_change_authorized": False,
+    }
     expected_amendments = [
         expected_dem_amendment_binding,
         expected_orbit_amendment_binding,
         expected_radar_label_amendment_binding,
         expected_recovery_002_amendment_binding,
         expected_continuation_001_amendment_binding,
+        expected_materialization_pixel_amendment_binding,
     ]
     if profile["authority"].get("amendments") != expected_amendments:
         fail("profile authority does not bind the exact active amendments")
@@ -851,8 +888,9 @@ def main() -> None:
         "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
         "records/source-gates/m2-sentinel-recovery-002-approval.json",
         "records/source-gates/m2-sentinel-continuation-001-approval.json",
+        "records/source-gates/m2-materialization-pixel-readiness-approval.json",
     ]:
-        fail("active M2 scope does not expose the five exact amendment approvals")
+        fail("active M2 scope does not expose the six exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -880,14 +918,12 @@ def main() -> None:
         fail("project profile must bind Sentinel continuation-001 to the exact approval")
     materialization_pixel_review_gate = profile_gates.get("M2-MATERIALIZATION-PIXEL-READINESS-REVIEW", {})
     if (
-        materialization_pixel_review_gate.get("authority_ref") != "reviews/m2-materialization-pixel-readiness/review-contract.json"
-        or "new exact owner decision" not in materialization_pixel_review_gate.get("reason", "")
+        materialization_pixel_review_gate.get("authority_ref") != "records/source-gates/m2-materialization-pixel-readiness-approval.json"
+        or "dependency-ordered materialization" not in materialization_pixel_review_gate.get("reason", "")
     ):
-        fail("project profile must expose the exact materialization and pixel-readiness review gate")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-materialization-pixel-readiness-proposal.json"
-    ]:
-        fail("project profile pending-amendment identity differs")
+        fail("project profile must bind the materialization and pixel-readiness route to its exact approval")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile pending-amendment list must be empty after activation")
     if profile_gates.get("M2-ORBIT-RECOVERY", {}).get("authority_ref") != "reviews/m2-orbit-recovery/review-contract.json":
         fail("project profile must expose the exact orbit recovery human-review gate")
     for approved_unit in ("M2-ORBIT-AMEND", "M2-ORBIT-PREFLIGHT", "M2-ORBIT-ACQUIRE", "M2-ORBIT-VERIFY", "M2-ORBIT-APPLY"):
@@ -919,6 +955,7 @@ def main() -> None:
         "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
         "records/source-gates/m2-sentinel-recovery-002-approval.json",
         "records/source-gates/m2-sentinel-continuation-001-approval.json",
+        "records/source-gates/m2-materialization-pixel-readiness-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-ACQUISITION-REVIEW"]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
     prohibited = set(contract["scope"]["forbidden_work"])
@@ -4310,7 +4347,18 @@ def main() -> None:
         and materialization_pixel_review_unit.get("gates", {}).get("attestation") is False
         and materialization_pixel_review_unit.get("gates", {}).get("execution_authorized") is False
     )
-    if materialization_pixel_review_ready:
+    materialization_pixel_review_approved = bool(
+        continuation_completed
+        and current_materialization_pixel_implementation_pending(ROOT, state_counts)
+        and materialization_pixel_review_unit.get("status") == "complete"
+        and materialization_pixel_review_unit.get("disposition") == "pass"
+        and materialization_pixel_review_unit.get("gates", {}).get("human_decision_count") == 1
+        and materialization_pixel_review_unit.get("gates", {}).get("attestation") is True
+        and materialization_pixel_review_unit.get("gates", {}).get("execution_authorized") is True
+    )
+    if materialization_pixel_review_approved:
+        expected_checkpoint = "M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"
+    elif materialization_pixel_review_ready:
         expected_checkpoint = "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW"
     elif continuation_completed:
         expected_checkpoint = "M2-VERIFY"
@@ -4327,8 +4375,9 @@ def main() -> None:
     expected_continuation_implementation_next_action = "Publish the exact continuation-001 implementation and verify successful public CI; do not activate, request a token, or access payload bytes before the publication gate and final no-payload preflight pass."
     expected_post_container_next_action = "Prepare and review an exact bounded materialization and pixel-readiness plan for the five not-yet-materialized products. Do not materialize, decode pixels, run baselines, or start orbit recovery before the separate gates are satisfied."
     expected_materialization_review_next_action = "Review M2 materialization and pixel-readiness bundle SHA-256 8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a and proposal SHA-256 3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c; approve, revise, or defer the single bounded plan. No materialization, real header access, or pixel read is authorized before a completed decision."
+    expected_materialization_implementation_next_action = "Publish the exact approved stage-1 materialization controls and require successful public CI before the final no-mutation preflight or any SAFE extraction."
     acquire_unit = m2_units.get("M2-ACQUIRE", {})
-    if materialization_pixel_review_ready:
+    if materialization_pixel_review_ready or materialization_pixel_review_approved:
         proposal_sha = "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c"
         preflight_sha = "9a4ec0e286ab787194f76fa569293c67cc5db8529f96af9aba7e0959792af019"
         bundle_sha = "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a"
@@ -4444,28 +4493,55 @@ def main() -> None:
         ):
             fail("materialization and pixel-readiness review readiness or zero-authority boundary differs")
         review_gates = materialization_pixel_review_unit.get("gates", {})
+        expected_review_status = "complete" if materialization_pixel_review_approved else "ready"
+        expected_review_decisions = 1 if materialization_pixel_review_approved else 0
+        expected_review_attestation = materialization_pixel_review_approved
+        expected_review_authorized = materialization_pixel_review_approved
         if (
             materialization_pixel_review_unit.get("action_class") != "authority_broadening"
             or materialization_pixel_review_unit.get("depends_on") != ["M2-ACQUIRE"]
+            or materialization_pixel_review_unit.get("status") != expected_review_status
+            or materialization_pixel_review_unit.get("disposition") != ("pass" if materialization_pixel_review_approved else None)
             or review_gates.get("proposal_sha256") != proposal_sha
             or review_gates.get("review_bundle_sha256") != bundle_sha
             or review_gates.get("review_contract_sha256") != contract_sha
             or review_gates.get("blank_response_sha256") != blank_sha
             or review_gates.get("preflight_sha256") != preflight_sha
             or review_gates.get("surface_sha256") != surface_sha
-            or review_gates.get("materialization_authorized") is not False
-            or review_gates.get("real_header_access_authorized") is not False
-            or review_gates.get("optical_pixel_access_authorized") is not False
+            or review_gates.get("human_decision_count") != expected_review_decisions
+            or review_gates.get("attestation") is not expected_review_attestation
+            or review_gates.get("execution_authorized") is not expected_review_authorized
+            or review_gates.get("materialization_authorized") is not expected_review_authorized
+            or review_gates.get("real_header_access_authorized") is not expected_review_authorized
+            or review_gates.get("optical_pixel_access_authorized") is not expected_review_authorized
             or review_gates.get("radar_pixel_access_authorized") is not False
         ):
             fail("materialization and pixel-readiness milestone review unit differs")
+        if materialization_pixel_review_approved:
+            if (
+                materialization_pixel_reconciliation.get("status") != "reconciled_exact_human_response"
+                or materialization_pixel_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+                or materialization_pixel_reconciliation.get("human_decisions_fabricated") is not False
+                or materialization_pixel_approval.get("status") != "approved_exact_dependency_ordered_bounded_actions"
+                or materialization_pixel_approval.get("review_bundle_manifest_sha256") != bundle_sha
+                or materialization_pixel_approval.get("proposal_sha256") != proposal_sha
+                or materialization_pixel_approval.get("human_decision_count") != 1
+                or materialization_pixel_approval.get("human_decisions_fabricated") is not False
+                or materialization_pixel_activation.get("status") != "pass_exact_approval_activated_stage_1_publication_pending"
+                or materialization_pixel_activation.get("bindings", {}).get("approval_sha256") != sha256("records/source-gates/m2-materialization-pixel-readiness-approval.json")
+                or materialization_stage_1_readiness.get("status") != "pass_local_synthetic_ready_public_ci_pending"
+                or materialization_stage_1_readiness.get("assertions", {}).get("real_materialization_started") is not False
+                or materialization_stage_1_readiness.get("assertions", {}).get("measurement_pixels_read") is not False
+            ):
+                fail("approved materialization stage-1 activation or readiness differs")
         implementation_unit = m2_units.get("M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION", {})
         materialize_unit = m2_units.get("M2-MATERIALIZE-REMAINING", {})
         header_unit = m2_units.get("M2-FULL-INPUT-READINESS", {})
         pixel_unit = m2_units.get("M2-OPTICAL-PIXEL-READINESS", {})
         if (
-            implementation_unit.get("status") != "planned"
+            implementation_unit.get("status") != ("in_progress" if materialization_pixel_review_approved else "planned")
             or implementation_unit.get("depends_on") != ["M2-MATERIALIZATION-PIXEL-READINESS-REVIEW"]
+            or implementation_unit.get("gates", {}).get("public_ci") != ("pending_stage_1" if materialization_pixel_review_approved else "required_before_real_execution")
             or materialize_unit.get("status") != "planned"
             or materialize_unit.get("depends_on") != ["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]
             or materialize_unit.get("gates", {}).get("exact_source_order") != expected_materialization_order
@@ -4487,6 +4563,9 @@ def main() -> None:
         implementation_unit = m2_units.get("M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION", {})
         implementation_gates = implementation_unit.get("gates", {})
         verify_unit = m2_units.get("M2-VERIFY", {})
+        expected_materialization_state = "approved_stage_1_implementation_pending" if materialization_pixel_review_approved else "review_ready_zero_decisions"
+        expected_verify_next_dependency = "M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION" if materialization_pixel_review_approved else "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW"
+        expected_primary_next_action = expected_materialization_implementation_next_action if materialization_pixel_review_approved else expected_materialization_review_next_action
         if (
             implementation_unit.get("status") != "complete"
             or implementation_gates.get("public_ci") != "pass"
@@ -4505,13 +4584,13 @@ def main() -> None:
             or verify_unit.get("status") != "deferred"
             or verify_unit.get("gates", {}).get("container_verified_count") != 8
             or verify_unit.get("gates", {}).get("materialized_source_count") != 3
-            or verify_unit.get("gates", {}).get("materialization_and_pixel_readiness") != "review_ready_zero_decisions"
+            or verify_unit.get("gates", {}).get("materialization_and_pixel_readiness") != expected_materialization_state
             or verify_unit.get("gates", {}).get("materialization_pixel_review_ref") != "reviews/m2-materialization-pixel-readiness/review-contract.json"
             or verify_unit.get("gates", {}).get("materialization_pixel_review_bundle_sha256") != "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a"
             or verify_unit.get("disposition") != "defer"
-            or verify_unit.get("next_dependency") != "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW"
-            or profile.get("current_checkpoint", {}).get("next_action") != expected_materialization_review_next_action
-            or active_m2.get("handoff", {}).get("next_action") != expected_materialization_review_next_action
+            or verify_unit.get("next_dependency") != expected_verify_next_dependency
+            or profile.get("current_checkpoint", {}).get("next_action") != expected_primary_next_action
+            or active_m2.get("handoff", {}).get("next_action") != expected_primary_next_action
         ):
             fail("M2 continuation completion and post-container handoff differ")
     elif continuation_review_approved:

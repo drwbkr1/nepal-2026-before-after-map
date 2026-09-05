@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from derive_m2_acquisition_checkpoint import (  # noqa: E402
     candidate_controls,
     current_container_verification_complete,
+    current_materialization_pixel_implementation_pending,
     current_materialization_pixel_review_required,
     derive_checkpoint,
 )
@@ -54,8 +55,9 @@ class M2CheckpointReconciliationTests(unittest.TestCase):
         self.assertTrue(current_container_verification_complete(ROOT, {"promoted": 8}))
         self.assertFalse(current_container_verification_complete(ROOT, {"authorized": 1, "promoted": 7}))
 
-    def test_blank_exact_packet_advances_to_materialization_review(self) -> None:
-        self.assertTrue(current_materialization_pixel_review_required(ROOT, {"promoted": 8}))
+    def test_exact_approval_advances_to_materialization_implementation(self) -> None:
+        self.assertFalse(current_materialization_pixel_review_required(ROOT, {"promoted": 8}))
+        self.assertTrue(current_materialization_pixel_implementation_pending(ROOT, {"promoted": 8}))
         self.assertFalse(current_materialization_pixel_review_required(ROOT, {"authorized": 1, "promoted": 7}))
 
     def test_incomplete_or_unsupported_counts_are_rejected(self) -> None:

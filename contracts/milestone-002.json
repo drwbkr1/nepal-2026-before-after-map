@@ -104,6 +104,31 @@
         "m1_src_004_request_permitted": false,
         "secret_transport": "anonymous_pipe_single_use_memory_only",
         "pixel_processing_released": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+        "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+        "proposal_ref": "contracts/milestone-002-materialization-pixel-readiness-proposal.json",
+        "proposal_sha256": "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c",
+        "review_bundle_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a",
+        "review_reconciliation_ref": "records/source-gates/m2-materialization-pixel-readiness-review-reconciliation.json",
+        "review_reconciliation_sha256": "aee7e7c3142189edd81079950daab38b08ef783ef1c38efc09ad8ab1cf38930f",
+        "stage_1_source_ids_in_exact_order": [
+          "M1-SRC-004",
+          "M1-SRC-005",
+          "M1-SRC-006",
+          "M1-SRC-010",
+          "M1-SRC-008"
+        ],
+        "maximum_materialization_attempts_per_source": 1,
+        "stop_on_first_failure": true,
+        "stage_2_inspection_ids": [
+          "radar-input-readiness-real-003",
+          "optical-input-readiness-real-001"
+        ],
+        "stage_3_attempt_id": "optical-pixel-readiness-real-001",
+        "radar_pixel_readiness_authorized": false,
+        "baseline_or_change_authorized": false
       }
     ]
   },
@@ -169,7 +194,8 @@
       "records/source-gates/m2-orbit-amendment-approval.json",
       "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
       "records/source-gates/m2-sentinel-recovery-002-approval.json",
-      "records/source-gates/m2-sentinel-continuation-001-approval.json"
+      "records/source-gates/m2-sentinel-continuation-001-approval.json",
+      "records/source-gates/m2-materialization-pixel-readiness-approval.json"
     ]
   },
   "entry_conditions": [
@@ -572,9 +598,11 @@
         "m1_src_004_satisfied_by_recovery_002": true,
         "continuation_status": "succeeded_all_four",
         "materialized_source_count": 3,
-        "materialization_and_pixel_readiness": "review_ready_zero_decisions",
+        "materialization_and_pixel_readiness": "approved_stage_1_implementation_pending",
         "materialization_pixel_review_ref": "reviews/m2-materialization-pixel-readiness/review-contract.json",
-        "materialization_pixel_review_bundle_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a"
+        "materialization_pixel_review_bundle_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a",
+        "materialization_pixel_approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+        "materialization_pixel_approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca"
       },
       "disposition": "defer",
       "retained_failures": [
@@ -594,9 +622,9 @@
           "EXIT-201-VERIFIED-CUSTODY"
         ],
         "decision_value": "enables_dependency",
-        "rationale": "Transfer and container verification are complete for all eight products; a blank exact owner review now gates five materializations, full-cohort header readiness, and conditional optical pixel QA."
+        "rationale": "All eight transfers and containers pass; the approved dependency chain is at stage-1 implementation before the five remaining SAFE materializations."
       },
-      "next_dependency": "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW"
+      "next_dependency": "M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"
     },
     {
       "id": "M2-BASELINE",
@@ -1039,7 +1067,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "contracts/milestone-002-materialization-pixel-readiness-proposal.json",
         "records/readiness/m2-materialization-pixel-readiness-review-preflight.json",
@@ -1047,7 +1075,8 @@
         "reviews/m2-materialization-pixel-readiness/review-contract.json"
       ],
       "outputs": [
-        "reviews/m2-materialization-pixel-readiness/blank-response.json"
+        "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+        "records/source-gates/m2-materialization-pixel-readiness-review-reconciliation.json"
       ],
       "gates": {
         "proposal_sha256": "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c",
@@ -1056,23 +1085,28 @@
         "blank_response_sha256": "296916d31bdfbd248e27ca9fd03b7f6f0530269976fbf4accc3690bfb6965f0d",
         "preflight_sha256": "9a4ec0e286ab787194f76fa569293c67cc5db8529f96af9aba7e0959792af019",
         "surface_sha256": "d92f73e5e349207401b0b7bed4c307ffa835ae454281b006409450f5b773d527",
-        "human_decision_count": 0,
-        "attestation": false,
-        "execution_authorized": false,
-        "materialization_authorized": false,
-        "real_header_access_authorized": false,
-        "optical_pixel_access_authorized": false,
-        "radar_pixel_access_authorized": false
+        "human_decision_count": 1,
+        "attestation": true,
+        "execution_authorized": true,
+        "materialization_authorized": true,
+        "real_header_access_authorized": true,
+        "optical_pixel_access_authorized": true,
+        "radar_pixel_access_authorized": false,
+        "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+        "review_reconciliation_sha256": "aee7e7c3142189edd81079950daab38b08ef783ef1c38efc09ad8ab1cf38930f",
+        "locked_response_sha256": "ce237bc6fb75cd35c65e41afc60a1d97caa1865e32918c4c8affd1eb05457983"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [],
       "exit_condition_delta": {
         "expected": [
-          "EXIT-202-PIXEL-AND-RIGHTS-QA"
+          "EXACT-OWNER-DECISION"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "The exact blank review is ready, but no owner decision exists and no extraction, real header access, or pixel read is released."
+        "observed": [
+          "EXACT-OWNER-APPROVAL"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "One exact attested approval was locked and reconciled; only the proposal dependency chain is authorized."
       },
       "next_dependency": "M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"
     },
@@ -1084,20 +1118,24 @@
       ],
       "action_class": "external_publication",
       "human_gate": false,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "contracts/milestone-002-materialization-pixel-readiness-proposal.json",
-        "reviews/m2-materialization-pixel-readiness/review-contract.json"
+        "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+        "records/source-gates/m2-materialization-pixel-readiness-review-reconciliation.json"
       ],
       "outputs": [
-        "versioned execution contracts and runners",
-        "synthetic verification receipts",
-        "public CI publication gate"
+        "records/readiness/m2-materialization-stage-1-implementation-readiness.json",
+        "stage-specific public CI publication gates",
+        "versioned header and optical pixel-readiness controls after their prerequisites"
       ],
       "gates": {
-        "owner_approval": "pending",
-        "public_ci": "required_before_real_execution",
-        "real_data_access_during_implementation": false
+        "owner_approval": "pass",
+        "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+        "review_reconciliation_sha256": "aee7e7c3142189edd81079950daab38b08ef783ef1c38efc09ad8ab1cf38930f",
+        "public_ci": "pending_stage_1",
+        "real_data_access_during_implementation": false,
+        "radar_pixel_readiness_authorized": false
       },
       "disposition": null,
       "retained_failures": [],
@@ -1105,7 +1143,7 @@
         "expected": [],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "Implementation is blocked on the exact owner decision."
+        "rationale": "The exact owner approval releases implementation and publication only; real extraction remains gated by successful public CI and a final no-mutation preflight."
       },
       "next_dependency": "M2-MATERIALIZE-REMAINING"
     },
@@ -1137,7 +1175,8 @@
         ],
         "maximum_attempts_per_source": 1,
         "stop_on_first_failure": true,
-        "automatic_retry_authorized": false
+        "automatic_retry_authorized": false,
+        "authority_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json"
       },
       "disposition": null,
       "retained_failures": [],
@@ -1147,7 +1186,7 @@
         ],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "Five products remain unmaterialized and owner approval is pending."
+        "rationale": "The exact sequence is approved but remains blocked on implementation, public CI, and the final no-mutation preflight."
       },
       "next_dependency": "M2-FULL-INPUT-READINESS"
     },
@@ -1172,7 +1211,8 @@
         "public_ci": "required",
         "radar_real_invocation_limit": 1,
         "optical_real_invocation_limit": 1,
-        "measurement_pixel_decoding": false
+        "measurement_pixel_decoding": false,
+        "authority_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json"
       },
       "disposition": null,
       "retained_failures": [],
@@ -1182,7 +1222,7 @@
         ],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "The five required materializations and exact owner decision are pending."
+        "rationale": "Approved conditionally after all eight materializations reconcile and the exact header controls pass public CI."
       },
       "next_dependency": "M2-OPTICAL-PIXEL-READINESS"
     },
@@ -1208,7 +1248,8 @@
         "final_no_pixel_preflight": "required",
         "maximum_real_invocations": 1,
         "radar_pixel_readiness_authorized": false,
-        "baseline_or_change_authorized": false
+        "baseline_or_change_authorized": false,
+        "authority_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json"
       },
       "disposition": null,
       "retained_failures": [],
@@ -1219,7 +1260,7 @@
         ],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "Optical pixel readiness is conditional on exact approval, implementation proof, materialization, and optical header readiness."
+        "rationale": "Approved conditionally after optical header readiness, exact implementation proof, public CI, and a final no-pixel preflight."
       },
       "next_dependency": "M2-VERIFY"
     }
@@ -1278,8 +1319,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW",
-    "next_action": "Review M2 materialization and pixel-readiness bundle SHA-256 8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a and proposal SHA-256 3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c; approve, revise, or defer the single bounded plan. No materialization, real header access, or pixel read is authorized before a completed decision.",
+    "current_checkpoint": "M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION",
+    "next_action": "Publish the exact approved stage-1 materialization controls and require successful public CI before the final no-mutation preflight or any SAFE extraction.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -1289,7 +1330,7 @@
       "The one post-observation radar label amendment run passed only three-source pre-event member, annotation, vector, and header readiness; real-001 remains BLOCK and no pixel or baseline action is released.",
       "All eight exact Sentinel products are promoted and container-verified; this establishes archive custody and structure only, not usable pixels or scientific fitness.",
       "The recovery-002 supervisor failure remains historical evidence; continuation-001 later succeeded under a separate approved identity without retrying or requesting M1-SRC-004.",
-      "The blank materialization and pixel-readiness packet contains zero human decisions and releases no extraction, real header access, or pixel read."
+      "The exact materialization and pixel-readiness amendment is approved, but real SAFE extraction remains blocked until its exact stage-1 implementation passes public CI and the final no-mutation preflight passes."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."

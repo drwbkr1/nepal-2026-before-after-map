@@ -11,13 +11,14 @@
   "completion_rule": "Complete only when the reproducible ArcGIS evidence package, reviewed change evidence, exportable deliverables, validation, and final release boundary are all satisfied.",
   "last_completed_milestone": "contracts/milestone-001.json",
   "proposed_milestone": null,
-  "current_checkpoint": "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW",
+  "current_checkpoint": "M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION",
   "active_amendments": [
     "records/source-gates/m2-dem-amendment-approval.json",
     "records/source-gates/m2-orbit-amendment-approval.json",
     "records/source-gates/m2-radar-input-readiness-amendment-approval.json",
     "records/source-gates/m2-sentinel-recovery-002-approval.json",
-    "records/source-gates/m2-sentinel-continuation-001-approval.json"
+    "records/source-gates/m2-sentinel-continuation-001-approval.json",
+    "records/source-gates/m2-materialization-pixel-readiness-approval.json"
   ],
   "parallel_checkpoints": [
     "M2-DEM-VERTICAL-DATUM-REVIEW",

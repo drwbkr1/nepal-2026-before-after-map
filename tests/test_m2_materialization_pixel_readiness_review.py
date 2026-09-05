@@ -118,20 +118,23 @@ class MaterializationPixelReadinessReviewTests(unittest.TestCase):
         self.assertFalse(self.surface["assertions"]["real_header_access_authorized"])
         self.assertFalse(self.surface["assertions"]["pixel_access_authorized"])
 
-    def test_milestone_and_profile_stop_at_review(self):
+    def test_milestone_and_profile_record_exact_approval_and_stop_at_implementation(self):
         units = {item["id"]: item for item in self.milestone["units"]}
         review = units["M2-MATERIALIZATION-PIXEL-READINESS-REVIEW"]
-        self.assertEqual(review["status"], "ready")
+        self.assertEqual(review["status"], "complete")
         self.assertTrue(review["human_gate"])
-        self.assertEqual(review["gates"]["human_decision_count"], 0)
-        self.assertFalse(review["gates"]["execution_authorized"])
+        self.assertEqual(review["gates"]["human_decision_count"], 1)
+        self.assertTrue(review["gates"]["execution_authorized"])
+        self.assertFalse(review["gates"]["radar_pixel_access_authorized"])
+        self.assertEqual(units["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]["status"], "in_progress")
+        self.assertEqual(units["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]["gates"]["public_ci"], "pending_stage_1")
         self.assertEqual(units["M2-MATERIALIZE-REMAINING"]["status"], "planned")
         self.assertEqual(units["M2-MATERIALIZE-REMAINING"]["gates"]["exact_source_order"], MATERIALIZATION_ORDER)
         self.assertEqual(units["M2-FULL-INPUT-READINESS"]["status"], "planned")
         self.assertFalse(units["M2-FULL-INPUT-READINESS"]["gates"]["measurement_pixel_decoding"])
         self.assertEqual(units["M2-OPTICAL-PIXEL-READINESS"]["status"], "planned")
         self.assertFalse(units["M2-OPTICAL-PIXEL-READINESS"]["gates"]["radar_pixel_readiness_authorized"])
-        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW")
+        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION")
 
 
 if __name__ == "__main__":
