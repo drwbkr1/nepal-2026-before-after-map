@@ -18,6 +18,11 @@ INITIAL_ACTIVE_INTAKE_SHA256 = "a2816e9244a0141bf797c3a3fba00e2d492e272fb4886e7f
 INITIAL_SNAPSHOT_REF = "records/acquisition/active-intake-initial-snapshot.json"
 TOKEN_REFERENCE = "CDSE_ACCESS_TOKEN"
 RECOVERY_TOKEN_REFERENCE = "anonymous_pipe_single_use_memory_only"
+CONTINUATION_SOURCE_IDS = {"M1-SRC-005", "M1-SRC-006", "M1-SRC-008", "M1-SRC-010"}
+MUTABLE_STATUS_VALUES = {
+    "active_four_promoted_four_authorized_continuation_review_required",
+    "active_eight_promoted_container_verified_materialization_review_required",
+}
 HEX64 = re.compile(r"[0-9a-f]{64}")
 UTC_TIMESTAMP = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
 STATIC_ASSET_KEYS = (
@@ -150,7 +155,11 @@ def validate_attempt(
     extensions = attempt.get("extensions", {})
     if extensions.get("source_id") != source_id:
         errors.append(f"{source_id} attempt source identity differs")
-    expected_reference = RECOVERY_TOKEN_REFERENCE if recovery_promoted else TOKEN_REFERENCE
+    expected_reference = (
+        RECOVERY_TOKEN_REFERENCE
+        if recovery_promoted or source_id in CONTINUATION_SOURCE_IDS
+        else TOKEN_REFERENCE
+    )
     if extensions.get("credential_reference") != expected_reference:
         errors.append(f"{source_id} attempt credential reference differs")
     if extensions.get("credential_value_recorded") is not False:
@@ -212,7 +221,7 @@ def validate_progress(
     current_root = {key: value for key, value in current.items() if key != "assets"}
     baseline_root = {key: value for key, value in baseline.items() if key != "assets"}
     current_status = current_root.get("extensions", {}).get("status")
-    if current_status == "active_four_promoted_four_authorized_continuation_review_required":
+    if current_status in MUTABLE_STATUS_VALUES:
         current_root = json.loads(json.dumps(current_root))
         current_root["extensions"]["status"] = baseline_root.get("extensions", {}).get("status")
     if current_root != baseline_root:

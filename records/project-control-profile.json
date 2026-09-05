@@ -315,10 +315,10 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-ACQUISITION-REVIEW",
+    "checkpoint_id": "M2-VERIFY",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish the exact continuation-001 implementation and verify successful public CI; do not activate, request a token, or access payload bytes before the publication gate and final no-payload preflight pass."
+    "next_action": "Prepare and review an exact bounded materialization and pixel-readiness plan for the five not-yet-materialized products. Do not materialize, decode pixels, run baselines, or start orbit recovery before the separate gates are satisfied."
   },
   "parallel_checkpoints": [
     {

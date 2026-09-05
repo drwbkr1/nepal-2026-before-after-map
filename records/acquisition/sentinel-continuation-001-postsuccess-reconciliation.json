@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-POSTSUCCESS-RECONCILIATION-001",
+  "recorded_at_utc": "2026-09-05T05:00:01Z",
+  "status": "reconciled_eight_promoted_container_verified_transfer_cohort_complete",
+  "bindings": {
+    "success_reconciliation_ref": "records/acquisition/sentinel-continuation-001-success-reconciliation.json",
+    "success_reconciliation_sha256": "af8c2e1090ec2f2c203658321d109a2369d74c54ec743587dd2e261908d0cc3b",
+    "postsuccess_validation_failure_ref": "records/acquisition/sentinel-continuation-001-postsuccess-validation-attempt-001-failure.json",
+    "postsuccess_validation_failure_sha256": "f8679760165788c275ba09b00b6545aa591ecf3e34290a5dca2c48080e0b5c3d",
+    "active_intake_ref": "contracts/m2-intake.json",
+    "active_intake_sha256_after_status_reconciliation": "53fac5c71d357bbad79266b4f7ba4a34b7ef601601f8355b9989299ae6ed6121",
+    "terminal_event_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-sentinel-continuation-001-supervisor\\m2-sentinel-continuation-001-20260905t041158z-ca2f8e75\\m2-sentinel-continuation-001-20260905t041158z-ca2f8e75-000086-supervisor_succeeded.json",
+    "terminal_event_sha256": "375be1e2c97e96504ecdc074cda2d66adaea58e05d7f8dc5b933e72a580707e9",
+    "terminal_supervisor_id": "m2-sentinel-continuation-001-20260905t041158z-ca2f8e75",
+    "sources": {
+      "M1-SRC-001": {
+        "attempt_id": "m1-src-001-20260904t041621z-fe412d8d",
+        "attempt_receipt_ref": "records/acquisition/attempts/m1-src-001-20260904t041621z-fe412d8d.json",
+        "attempt_receipt_sha256": "fb77a8f330ac30643a6d4d92647339ff17a76e4e3e7c49e64baeee114c7d913c",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-001-m1-src-001-20260904t041621z-fe412d8d.json",
+        "container_receipt_sha256": "5f237ec95ca9f5f169a364db30649b5f8187354fea697757bb43e01b5f89b38e",
+        "promoted_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-001\\S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE.zip",
+        "promoted_size_bytes": 1732333216,
+        "promoted_sha256": "55b19242652e79887f00bb312d7fab1d7f8879f4e9eb996ca15be1268de1e79a"
+      },
+      "M1-SRC-002": {
+        "attempt_id": "m1-src-002-20260904t042408z-b31b162b",
+        "attempt_receipt_ref": "records/acquisition/attempts/m1-src-002-20260904t042408z-b31b162b.json",
+        "attempt_receipt_sha256": "faf3edd43084367fcc00de675190910eea9276b7addad73df9642bd8810f4ea0",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-002-m1-src-002-20260904t042408z-b31b162b.json",
+        "container_receipt_sha256": "bc9532282fb7146f1d5e8e05cb022518dba2161c48afdb243f48bac35eb75ebf",
+        "promoted_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-002\\S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE.zip",
+        "promoted_size_bytes": 1732874277,
+        "promoted_sha256": "4df9ecdd0ad7f562bdf743b70b9061b9af3885dcbdcaf7f45c1875f2cd838790"
+      },
+      "M1-SRC-003": {
+        "attempt_id": "m1-src-003-20260904t043000z-d1b78c08",
+        "attempt_receipt_ref": "records/acquisition/attempts/m1-src-003-20260904t043000z-d1b78c08.json",
+        "attempt_receipt_sha256": "b5c9b2fe5882e4574f62e80a797fd66bcfb0b3daf0c80e7485d92184618d60f0",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-003-m1-src-003-20260904t043000z-d1b78c08.json",
+        "container_receipt_sha256": "a7f65ee4938b3b2749fa711b59c3af14b71dc3f02cbb6b3b6123161d388ae44a",
+        "promoted_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-003\\S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE.zip",
+        "promoted_size_bytes": 1718369620,
+        "promoted_sha256": "fa9250c3433065c7f3045352bee938b31d140771320e875f1088156094eedf01"
+      },
+      "M1-SRC-004": {
+        "attempt_id": "m1-src-004-recovery-002-20260905t002925z-cc1fe1e9",
+        "attempt_receipt_ref": "records/acquisition/recovery-attempts/m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
+        "attempt_receipt_sha256": "bdba2d107d13150e9a050d2f558478fdca3fb58ad21c1003a364f702b491886f",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-004-m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
+        "container_receipt_sha256": "3ce5c27a801bbc9ea4379faa8dcf382b63caa15841dc2a3b4aa1a0ec960db10d",
+        "promoted_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-004\\S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip",
+        "promoted_size_bytes": 1732332897,
+        "promoted_sha256": "a606cac063cc23e60a623f020192fc097d327f3dafadf1115802b2a458eaceab"
+      },
+      "M1-SRC-005": {
+        "attempt_id": "m1-src-005-20260905t041205z-f34254c7",
+        "attempt_receipt_ref": "records/acquisition/attempts/m1-src-005-20260905t041205z-f34254c7.json",
+        "attempt_receipt_sha256": "a8de8cbc11e5b183a39ba5968b8ca6e2baad26f7cfb0ff5106e90beb92ed490b",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-005-m1-src-005-20260905t041205z-f34254c7.json",
+        "container_receipt_sha256": "a97577bca70657b347ed95d435f4b5f73cdb896628f0ced290d9f5dd8d545117",
+        "promoted_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-005\\S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE.zip",
+        "promoted_size_bytes": 1732898724,
+        "promoted_sha256": "f1bf132321ef6854d187e9da57ce5130daf2f57065630d8eabeed71c74d4bafe"
+      },
+      "M1-SRC-006": {
+        "attempt_id": "m1-src-006-20260905t041726z-da401f11",
+        "attempt_receipt_ref": "records/acquisition/attempts/m1-src-006-20260905t041726z-da401f11.json",
+        "attempt_receipt_sha256": "5ea3b107f102e0d7fc70a40b70d04068f36b3ab3a00ddc602db86a3c81d5a1ad",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-006-m1-src-006-20260905t041726z-da401f11.json",
+        "container_receipt_sha256": "e639ebe0c7559b9886710f6138d5bafef9744d8260a7efc64d65a8af24fba281",
+        "promoted_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-006\\S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE.zip",
+        "promoted_size_bytes": 1718402708,
+        "promoted_sha256": "825a8ab8079334c8c1bdc37d0f3ebab722a82a332cbfdfb14d7a992bca445f65"
+      },
+      "M1-SRC-008": {
+        "attempt_id": "m1-src-008-20260905t042500z-a5fff82c",
+        "attempt_receipt_ref": "records/acquisition/attempts/m1-src-008-20260905t042500z-a5fff82c.json",
+        "attempt_receipt_sha256": "39d596306f8bf8676e6e25199c9e73f1df3af1c31125f6a84fca9ec0bf05b62a",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-008-m1-src-008-20260905t042500z-a5fff82c.json",
+        "container_receipt_sha256": "1ba0ccc301e0d65490efe8b9afd6c21ee2a67ce1373cf15b3c01a4e70d342402",
+        "promoted_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-008\\S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE.zip",
+        "promoted_size_bytes": 941822565,
+        "promoted_sha256": "ab76cc683bb4b50ca091f80da829343efa493f6934e56e2cb374e2221d81aaaf"
+      },
+      "M1-SRC-010": {
+        "attempt_id": "m1-src-010-20260905t042938z-e6ca9230",
+        "attempt_receipt_ref": "records/acquisition/attempts/m1-src-010-20260905t042938z-e6ca9230.json",
+        "attempt_receipt_sha256": "d473ea3494300dac017e3c905afa615447c5f35e911ced45028b0a43b3575bf3",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-010-m1-src-010-20260905t042938z-e6ca9230.json",
+        "container_receipt_sha256": "dd3faffd6c48cf165e5994b5996477efc2ed8932345e3f7d709d9786b40574df",
+        "promoted_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-010\\S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE.zip",
+        "promoted_size_bytes": 1142906699,
+        "promoted_sha256": "80e2ee3f7be7113382f8e0457e03d68e5a0a58b56b3c98c8f8bbd54ca7f1c2af"
+      }
+    }
+  },
+  "retained_failures": [
+    {
+      "label": "original_partial",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\m1-src-004\\S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip.part",
+      "size_bytes": 561593598,
+      "sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66",
+      "classification": "retained_failed_partial_not_a_valid_product"
+    },
+    {
+      "label": "recovery_001_partial",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-sentinel-recovery-001\\m1-src-004-recovery-001\\S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip.part",
+      "size_bytes": 1333788672,
+      "sha256": "c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac",
+      "classification": "retained_failed_partial_not_a_valid_product"
+    }
+  ],
+  "assertions": {
+    "promoted_source_count": 8,
+    "container_pass_source_count": 8,
+    "continuation_source_order": [
+      "M1-SRC-005",
+      "M1-SRC-006",
+      "M1-SRC-008",
+      "M1-SRC-010"
+    ],
+    "continuation_attempt_count": 4,
+    "automatic_retry_performed": false,
+    "m1_src_004_requested_by_continuation": false,
+    "credential_values_read_or_recorded": false,
+    "archive_extraction_performed_by_continuation": false,
+    "materialization_source_count": 3,
+    "pixel_usability_established": false,
+    "scientific_fitness_established": false
+  },
+  "limitations": [
+    "All eight product archives have verified custody and SAFE-container structure only.",
+    "Five products remain unmaterialized, and no newly acquired raster pixels have been decoded.",
+    "Usable AOI pixels, masks, registration, baselines, change, interpretation, and attribution remain separate gates.",
+    "Both earlier incomplete M1-SRC-004 partials remain immutable failed evidence and are not valid products."
+  ],
+  "next_gate": "M2-VERIFY: separately governed materialization and pixel-readiness review"
+}

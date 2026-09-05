@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-POSTSUCCESS-VALIDATION-ATTEMPT-002-FAILURE",
+  "recorded_at_utc": "2026-09-05T05:11:43Z",
+  "status": "failed_preserved_stale_cross_workstream_assertions",
+  "acquisition_outcome_affected": false,
+  "command": "python scripts/check_project.py; python -m unittest discover -s tests -v",
+  "repository_checker_status": "pass_448_required_files",
+  "test_run": {
+    "tests_run": 319,
+    "failures": 2,
+    "errors": 0,
+    "skipped": 2
+  },
+  "observed_failures": [
+    {
+      "test": "test_m2_dem_activation.M2DemActivationTests.test_milestone_and_profile_preserve_parallel_dem_route",
+      "summary": "The cross-workstream DEM test still derived M2-ACQUISITION-REVIEW after the reconciled all-promoted Sentinel state advanced the primary checkpoint to M2-VERIFY."
+    },
+    {
+      "test": "test_m2_orbit_activation.M2OrbitActivationTests.test_project_control_surfaces_consume_review_without_releasing_other_gates",
+      "summary": "The orbit test still expected not_satisfied instead of the reconciled in_progress_not_satisfied label for the incomplete M2-VERIFY dependency."
+    }
+  ],
+  "classification": "post_success_cross_workstream_test_state_lag",
+  "credential_values_read_or_recorded": false,
+  "network_requests_performed": false,
+  "product_bytes_mutated": false,
+  "pixel_processing_performed": false,
+  "failure_preserved": true
+}

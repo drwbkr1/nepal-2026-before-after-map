@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "event": "transfer_succeeded",
+  "attempt_id": "m1-src-005-20260905t041205z-f34254c7",
+  "asset_id": "m1-src-005",
+  "source_id": "M1-SRC-005",
+  "started_at": "2026-09-05T04:12:05Z",
+  "completed_at": "2026-09-05T04:17:00Z",
+  "catalog_response_sha256": "e38a25a0182bb4bd8a677c007a421812532597d4afc5e291485c3cc0d409c6ab",
+  "local_sha256": "f1bf132321ef6854d187e9da57ce5130daf2f57065630d8eabeed71c74d4bafe",
+  "local_size_bytes": 1732898724,
+  "provider_md5": "7b48f33e171138afcaa7f72063c37eda",
+  "provider_md5_match": true,
+  "provider_blake3_metadata": "6b039f66fefa156d4f2b1969b3ec27b74f0e6b2f58b76aa30d5b36f690865c6e",
+  "provider_blake3_locally_verified": false,
+  "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-005\\S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE.zip",
+  "credential_value_recorded": false
+}

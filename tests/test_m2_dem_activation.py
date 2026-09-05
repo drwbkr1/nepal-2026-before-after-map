@@ -145,8 +145,16 @@ class M2DemActivationTests(unittest.TestCase):
             (unit for unit in self.milestone["units"] if unit["id"] == "M2-SENTINEL-CONTINUATION-001-REVIEW"),
             None,
         )
+        verify_unit = next(
+            (unit for unit in self.milestone["units"] if unit["id"] == "M2-VERIFY"),
+            None,
+        )
         expected_primary_checkpoint = (
-            "M2-ACQUISITION-REVIEW"
+            "M2-VERIFY"
+            if all(asset.get("state") == "promoted" for asset in primary_intake["assets"])
+            and verify_unit is not None
+            and verify_unit.get("status") == "in_progress"
+            else "M2-ACQUISITION-REVIEW"
             if any(asset.get("state") == "failed" for asset in primary_intake["assets"])
             or continuation_review is not None and continuation_review.get("status") in {"ready", "complete"}
             else "M2-ACQUISITION-IN-PROGRESS"

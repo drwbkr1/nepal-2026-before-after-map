@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-PUBLICATION-GATE-001",
+  "verified_at_utc": "2026-09-05T03:51:55Z",
+  "status": "pass_public_controls_verified_before_continuation_001",
+  "bindings": {
+    "approval_sha256": "93f451f458c5b4984f980049f5adadf73e52663c8a71ee9699939b7f85e727a1",
+    "review_reconciliation_sha256": "420f525d160a1b95f6784da06a0ca95ddf8e6e8e37d7947925f6c865157d28a6",
+    "core_sha256": "c8bd659d37e4a3a8b2fedc6346f86ee98e0c87d3f06fcc023c87c72c80f87a9e",
+    "broker_sha256": "000e9246345f43bf360fc47f4d46037742d2bcc96dcd35b1fb28fcdf79358cb9",
+    "supervisor_sha256": "256dbe9521b9cc26e1fe8979f4ec28e636c01fc201ed30fc43d03d1598ebfbdd",
+    "source_runner_sha256": "e99c1b510b5c724ef941bd350676e27a20f79c3a3ceb9b0036b8cc7db7cba039",
+    "exact_product_runner_sha256": "f0746020f7fe87b9b578fcb32548ff442ca47a8c72cf1fdb5ddbb163b3abbc78",
+    "transfer_core_sha256": "a858756a063148800be418bb7329ba148bcdce71b7812abafee6f7c9c62d8da9",
+    "container_verifier_sha256": "2320591bc56f2d1f601f264089adfb8ad55772d15b5661328488d1b2003ff777",
+    "success_reconciler_sha256": "d6372b05172600ef0beb97701759e60ec07974da9c76b658ebd5dffe0feb2c76",
+    "activation_script_sha256": "b745f549551768ab89dab96220c77fea9a1c26464eabf2030853803d3e2a1f51",
+    "final_preflight_sha256": "63d91c046579c8a64202c5fd7f8326e4bd91c690eb8d126aa718185045ec480d",
+    "implementation_readiness_recorder_sha256": "7478b946baf9d370dcde134d4c76513565b3cf6c64c4cbb33a323e9f1f400219",
+    "implementation_readiness_sha256": "35bb375543dc2add5e66e80019ee7bc4eb70cee2f2cc3a4c8cf542c97369919a",
+    "focused_tests_sha256": "7c7d1c9e68940bb65cde3ed2459b33323fe0f6d884f2c2e7dd3623a9ee45ef6c"
+  },
+  "github_actions": {
+    "workflow": "Validate project controls",
+    "run_id": 33942997642,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33942997642",
+    "head_sha": "68ac0484d598790cc8c47a8747a674b7d5d9de73",
+    "conclusion": "success"
+  },
+  "assertions": {
+    "remote_ref_verified": true,
+    "public_ci_passed": true,
+    "continuation_started": false,
+    "credential_values_read_or_recorded": false,
+    "payload_request_performed": false,
+    "authority_created": false
+  },
+  "next_gate": "activate continuation-001 and pass its final no-payload preflight before opening the broker"
+}

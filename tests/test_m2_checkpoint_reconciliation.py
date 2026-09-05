@@ -13,7 +13,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from derive_m2_acquisition_checkpoint import candidate_controls, derive_checkpoint  # noqa: E402
+from derive_m2_acquisition_checkpoint import (  # noqa: E402
+    candidate_controls,
+    current_container_verification_complete,
+    derive_checkpoint,
+)
 
 
 def load_json(relative: str) -> dict:
@@ -44,6 +48,10 @@ class M2CheckpointReconciliationTests(unittest.TestCase):
     def test_all_promoted_advance_to_container_verification(self) -> None:
         result = derive_checkpoint({"promoted": 8})
         self.assertEqual(result["checkpoint_id"], "M2-CONTAINER-VERIFICATION")
+
+    def test_current_all_pass_reconciliation_advances_to_m2_verify(self) -> None:
+        self.assertTrue(current_container_verification_complete(ROOT, {"promoted": 8}))
+        self.assertFalse(current_container_verification_complete(ROOT, {"authorized": 1, "promoted": 7}))
 
     def test_incomplete_or_unsupported_counts_are_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "exactly eight"):

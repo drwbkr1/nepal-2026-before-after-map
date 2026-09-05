@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "event": "transfer_succeeded",
+  "attempt_id": "m1-src-008-20260905t042500z-a5fff82c",
+  "asset_id": "m1-src-008",
+  "source_id": "M1-SRC-008",
+  "started_at": "2026-09-05T04:25:00Z",
+  "completed_at": "2026-09-05T04:29:14Z",
+  "catalog_response_sha256": "613b36210e7122a538773eda62fae9ac9a162122ed333b79dcc5fb8f939b6a06",
+  "local_sha256": "ab76cc683bb4b50ca091f80da829343efa493f6934e56e2cb374e2221d81aaaf",
+  "local_size_bytes": 941822565,
+  "provider_md5": "f943a32c322a2186955de966b718eccb",
+  "provider_md5_match": true,
+  "provider_blake3_metadata": "7587745f330d9d70adfbc321326bcaec5a8be457348f1e3dfbd2528ce3615e5a",
+  "provider_blake3_locally_verified": false,
+  "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-008\\S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE.zip",
+  "credential_value_recorded": false
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-ACTIVATION-001",
+  "activated_at_utc": "2026-09-05T03:52:00Z",
+  "status": "pass_exact_continuation_001_activated_final_no_payload_preflight_pending",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-sentinel-continuation-001-approval.json",
+    "approval_sha256": "93f451f458c5b4984f980049f5adadf73e52663c8a71ee9699939b7f85e727a1",
+    "publication_gate_ref": "records/acquisition/sentinel-continuation-001-publication-gate.json",
+    "publication_gate_sha256": "e77698d8c5d3b2a712219f4abbb1db81050486bf817f172b9c8be48f93067e4b",
+    "continuation_contract_ref": "contracts/m2-sentinel-continuation-001.json",
+    "continuation_contract_sha256": "e3265e8ffc102598b0a4ebba32b8a0bb8d08189d3afcd25dbd744833fc6d60f8",
+    "active_intake_ref": "contracts/m2-intake.json",
+    "active_intake_sha256": "a0ca968e5ae74a8b011262fa85509bfa4170e2897778665e4be527ce123dc1a1",
+    "public_commit": "68ac0484d598790cc8c47a8747a674b7d5d9de73"
+  },
+  "preflight": {
+    "source_ids_in_exact_order": [
+      "M1-SRC-005",
+      "M1-SRC-006",
+      "M1-SRC-008",
+      "M1-SRC-010"
+    ],
+    "fresh_authorized_source_count": 4,
+    "path_observations": [
+      {
+        "source_id": "M1-SRC-005",
+        "destination": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-005\\S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE.zip",
+        "staging": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\m1-src-005\\S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE.zip.part",
+        "event_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\attempt-events\\m1-src-005"
+      },
+      {
+        "source_id": "M1-SRC-006",
+        "destination": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-006\\S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE.zip",
+        "staging": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\m1-src-006\\S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE.zip.part",
+        "event_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\attempt-events\\m1-src-006"
+      },
+      {
+        "source_id": "M1-SRC-008",
+        "destination": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-008\\S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE.zip",
+        "staging": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\m1-src-008\\S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE.zip.part",
+        "event_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\attempt-events\\m1-src-008"
+      },
+      {
+        "source_id": "M1-SRC-010",
+        "destination": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-010\\S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE.zip",
+        "staging": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\m1-src-010\\S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE.zip.part",
+        "event_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\attempt-events\\m1-src-010"
+      }
+    ],
+    "retained_and_recovered_bytes": {
+      "original_partial": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-intake-001\\m1-src-004\\S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip.part",
+        "size_bytes": 561593598,
+        "sha256": "299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66"
+      },
+      "recovery_001_partial": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-sentinel-recovery-001\\m1-src-004-recovery-001\\S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip.part",
+        "size_bytes": 1333788672,
+        "sha256": "c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac"
+      },
+      "recovery_archive": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\products\\m1-src-004\\S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE.zip",
+        "size_bytes": 1732332897,
+        "sha256": "a606cac063cc23e60a623f020192fc097d327f3dafadf1115802b2a458eaceab"
+      },
+      "container_receipt_ref": "records/acquisition/container-verification/m1-src-004-m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
+      "container_receipt_sha256": "3ce5c27a801bbc9ea4379faa8dcf382b63caa15841dc2a3b4aa1a0ec960db10d"
+    },
+    "credential_presence_checked": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "external_files_mutated": false,
+    "staging_created": false,
+    "product_payload_requested": false,
+    "product_payload_bytes_received": 0,
+    "m1_src_004_requested": false,
+    "automatic_retry_authorized": false,
+    "pixel_or_scientific_action_released": false
+  },
+  "next_gate": "run the final deterministic no-payload preflight before opening the continuation broker"
+}

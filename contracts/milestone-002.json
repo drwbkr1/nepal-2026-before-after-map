@@ -201,8 +201,11 @@
   "exit_conditions": [
     {
       "id": "EXIT-201-VERIFIED-CUSTODY",
-      "status": "pending",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "records/acquisition/sentinel-continuation-001-success-reconciliation.json",
+        "records/acquisition/sentinel-continuation-001-postsuccess-reconciliation.json"
+      ]
     },
     {
       "id": "EXIT-202-PIXEL-AND-RIGHTS-QA",
@@ -300,7 +303,7 @@
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
-      "status": "deferred",
+      "status": "complete",
       "inputs": [
         "records/acquisition/preflight.json",
         "records/source-gates/m2-live-source-gate.json",
@@ -355,9 +358,9 @@
         "recovery_002_container_status": "pass_container_only",
         "recovery_002_outcome_reconciliation_ref": "records/acquisition/sentinel-recovery-002-supervisor-reconciliation-001.json",
         "recovery_002_outcome_reconciliation_sha256": "f806d86e6c956e648f4458f4710699d4480e2b0abfb2cf95e8777f3de281b3f4",
-        "continuation_supervisor_status": "failed_before_first_continuation_attempt",
-        "continuation_attempt_count": 0,
-        "continuation_payload_request_count": 0,
+        "continuation_supervisor_status": "succeeded_all_four",
+        "continuation_attempt_count": 4,
+        "continuation_payload_request_count": 4,
         "continuation_review": "completed_approved_exact",
         "continuation_review_bundle_sha256": "382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b",
         "continuation_proposal_sha256": "d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1",
@@ -368,11 +371,19 @@
         "continuation_review_reconciliation_sha256": "420f525d160a1b95f6784da06a0ca95ddf8e6e8e37d7947925f6c865157d28a6",
         "continuation_human_decision_count": 1,
         "continuation_implementation_authorized": true,
-        "continuation_publication_gate": "pending_after_failed_attempt_001",
+        "continuation_publication_gate": "pass",
         "continuation_transfer_authorized_after_public_ci_and_final_preflight": true,
-        "continuation_transfer_authorized_now": false
+        "continuation_transfer_authorized_now": false,
+        "continuation_publication_commit": "68ac0484d598790cc8c47a8747a674b7d5d9de73",
+        "continuation_public_ci_run_id": 33942997642,
+        "promoted_source_count": 8,
+        "container_verified_source_count": 8,
+        "success_reconciliation_ref": "records/acquisition/sentinel-continuation-001-success-reconciliation.json",
+        "success_reconciliation_sha256": "af8c2e1090ec2f2c203658321d109a2369d74c54ec743587dd2e261908d0cc3b",
+        "postsuccess_reconciliation_ref": "records/acquisition/sentinel-continuation-001-postsuccess-reconciliation.json",
+        "postsuccess_reconciliation_sha256": "ab11ba63fcd8765f7fbddd5b7601bb835446674f0f205a2d4ecba138ac27047e"
       },
-      "disposition": "defer",
+      "disposition": "complete_exact_eight_promoted_container_verified",
       "retained_failures": [
         {
           "source_id": "M1-SRC-004",
@@ -388,11 +399,13 @@
         "expected": [
           "EXIT-201-VERIFIED-CUSTODY"
         ],
-        "observed": [],
-        "decision_value": "risk_reduction",
-        "rationale": "The exact continuation is owner-approved and locally corrected after a retained failed public run, but a new passing public CI, activation, and final no-payload preflight still block credential entry and payload access."
+        "observed": [
+          "EXIT-201-VERIFIED-CUSTODY"
+        ],
+        "decision_value": "success",
+        "rationale": "All eight exact approved products are promoted and container-verified; failed M1-SRC-004 partials remain preserved separately."
       },
-      "next_dependency": "M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION",
+      "next_dependency": "M2-VERIFY",
       "recovery_failures": [
         {
           "source_id": "M1-SRC-004",
@@ -470,7 +483,7 @@
       ],
       "action_class": "external_publication",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-sentinel-continuation-001-approval.json",
         "records/source-gates/m2-sentinel-continuation-001-review-reconciliation.json",
@@ -491,9 +504,22 @@
         "windows_detached_process_tested": true,
         "safe_error_and_secret_exposure_tests": "pass",
         "m1_src_004_request_permitted": false,
-        "public_ci": "pending_after_failed_attempt_001",
+        "public_ci": "pass",
         "credential_entry_permitted_now": false,
-        "payload_request_permitted_now": false
+        "payload_request_permitted_now": false,
+        "public_commit": "68ac0484d598790cc8c47a8747a674b7d5d9de73",
+        "public_ci_run_id": 33942997642,
+        "publication_gate_ref": "records/acquisition/sentinel-continuation-001-publication-gate.json",
+        "publication_gate_sha256": "e77698d8c5d3b2a712219f4abbb1db81050486bf817f172b9c8be48f93067e4b",
+        "activation_ref": "records/acquisition/sentinel-continuation-001-activation.json",
+        "activation_sha256": "0f1f497e01baa2ac29e3de83b31db8b8a961cb17a571a1207017dde897d07ffe",
+        "final_preflight_ref": "records/acquisition/sentinel-continuation-001-final-preflight.json",
+        "final_preflight_sha256": "003ce2e45371ff2cf7aa8dd3c12e11f6b2e7fb75bcfa080b0fc15b0c876b4ef6",
+        "terminal_code": "continuation_001_all_four_succeeded",
+        "success_reconciliation_ref": "records/acquisition/sentinel-continuation-001-success-reconciliation.json",
+        "success_reconciliation_sha256": "af8c2e1090ec2f2c203658321d109a2369d74c54ec743587dd2e261908d0cc3b",
+        "postsuccess_reconciliation_ref": "records/acquisition/sentinel-continuation-001-postsuccess-reconciliation.json",
+        "postsuccess_reconciliation_sha256": "ab11ba63fcd8765f7fbddd5b7601bb835446674f0f205a2d4ecba138ac27047e"
       },
       "disposition": null,
       "retained_failures": [
@@ -516,8 +542,8 @@
       "exit_condition_delta": {
         "expected": [],
         "observed": [],
-        "decision_value": "risk_reduction",
-        "rationale": "The Linux-only synthetic-test portability defect is corrected under a new readiness identity; successful public CI remains required."
+        "decision_value": "success",
+        "rationale": "The corrected implementation passed public CI before activation, final preflight, the single credential handoff, and the exact four-source terminal success."
       },
       "next_dependency": "M2-ACQUIRE"
     },
@@ -529,24 +555,26 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "external custody products",
         "contracts/m2-offline-verification.json"
       ],
       "outputs": [
-        "four passing container-only receipts",
+        "eight passing container-only receipts",
         "two retained M1-SRC-004 failed partial identities",
-        "stopped pre-attempt continuation evidence"
+        "records/acquisition/sentinel-continuation-001-postsuccess-reconciliation.json"
       ],
       "gates": {
-        "container_verified_count": 4,
+        "container_verified_count": 8,
         "retained_failed_partial_count": 2,
-        "authorized_unattempted_count": 4,
+        "authorized_unattempted_count": 0,
         "m1_src_004_satisfied_by_recovery_002": true,
-        "continuation_review": "required"
+        "continuation_status": "succeeded_all_four",
+        "materialized_source_count": 3,
+        "materialization_and_pixel_readiness": "separately_gated_pending"
       },
-      "disposition": "partial_container_only_continuation_review_required",
+      "disposition": "container_only_complete_materialization_and_pixel_readiness_pending",
       "retained_failures": [
         {
           "source_id": "M1-SRC-004",
@@ -560,9 +588,11 @@
           "EXIT-201-VERIFIED-CUSTODY",
           "EXIT-202-PIXEL-AND-RIGHTS-QA"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "The eight-product unit remains incomplete. M1-SRC-004 is now satisfied by recovery-002, but the continuation supervisor stopped before the first remaining product attempt."
+        "observed": [
+          "EXIT-201-VERIFIED-CUSTODY"
+        ],
+        "decision_value": "partial_progress",
+        "rationale": "Transfer and container verification are complete for all eight products; five materializations and all real pixel, mask, AOI, and registration checks remain gated."
       },
       "next_dependency": "M2-BASELINE"
     },
@@ -850,8 +880,8 @@
         "records/acquisition orbit transfer receipts"
       ],
       "gates": {
-        "matching_sentinel_promoted_and_verified": "partial_two_of_two_for_failed_orbit_but_m2_verify_incomplete",
-        "milestone_dependency_m2_verify": "not_satisfied",
+        "matching_sentinel_promoted_and_verified": "all_bound_sentinel_promoted_and_container_verified_but_full_m2_verify_incomplete",
+        "milestone_dependency_m2_verify": "in_progress_not_satisfied",
         "fresh_source_preflight": "pass",
         "orbit_custody_initialized": true,
         "token_presence_checked": "synthetic_test_literal_only",
@@ -1054,8 +1084,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ACQUISITION-REVIEW",
-    "next_action": "Publish the exact continuation-001 implementation and verify successful public CI; do not activate, request a token, or access payload bytes before the publication gate and final no-payload preflight pass.",
+    "current_checkpoint": "M2-VERIFY",
+    "next_action": "Prepare and review an exact bounded materialization and pixel-readiness plan for the five not-yet-materialized products. Do not materialize, decode pixels, run baselines, or start orbit recovery before the separate gates are satisfied.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -1063,8 +1093,8 @@
       "A test-induced M1-SRC-001 SAFE materialization passed exact offline extraction controls and is retained with explicit unintended-test provenance; it establishes no readable pixels or scientific result.",
       "A test-induced M2-ORB-001 attempt used a tracked nonsecret test literal, made a catalogue and rejected download request, received zero payload bytes, and is retained as a terminal failure requiring review.",
       "The one post-observation radar label amendment run passed only three-source pre-event member, annotation, vector, and header readiness; real-001 remains BLOCK and no pixel or baseline action is released.",
-      "Four exact Sentinel products are promoted and container-verified; M1-SRC-004 is satisfied only through recovery-002, both earlier failed partials remain preserved, and four products remain unattempted.",
-      "The recovery-002 supervisor stopped in continuation live preflight before any M1-SRC-005 attempt or payload request; its exact underlying exception category is unknown and no continuation is currently authorized."
+      "All eight exact Sentinel products are promoted and container-verified; this establishes archive custody and structure only, not usable pixels or scientific fitness.",
+      "The recovery-002 supervisor failure remains historical evidence; continuation-001 later succeeded under a separate approved identity without retrying or requesting M1-SRC-004."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."

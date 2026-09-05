@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-SUCCESS-RECONCILIATION-001",
+  "recorded_at_utc": "2026-09-05T04:41:24Z",
+  "status": "reconciled_all_eight_promoted_container_pass",
+  "bindings": {
+    "active_intake_ref": "contracts/m2-intake.json",
+    "active_intake_sha256": "7d7d4452c4ad6435ccb62e3fcd79f2a3a237fc29f2759daedae8a6d8c1bb98e5",
+    "continuation_contract_ref": "contracts/m2-sentinel-continuation-001.json",
+    "continuation_contract_sha256": "e3265e8ffc102598b0a4ebba32b8a0bb8d08189d3afcd25dbd744833fc6d60f8",
+    "final_preflight_ref": "records/acquisition/sentinel-continuation-001-final-preflight.json",
+    "final_preflight_sha256": "003ce2e45371ff2cf7aa8dd3c12e11f6b2e7fb75bcfa080b0fc15b0c876b4ef6",
+    "sources": {
+      "M1-SRC-001": {
+        "attempt_id": "m1-src-001-20260904t041621z-fe412d8d",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-001-m1-src-001-20260904t041621z-fe412d8d.json",
+        "container_receipt_sha256": "5f237ec95ca9f5f169a364db30649b5f8187354fea697757bb43e01b5f89b38e",
+        "promoted_sha256": "55b19242652e79887f00bb312d7fab1d7f8879f4e9eb996ca15be1268de1e79a",
+        "promoted_size_bytes": 1732333216
+      },
+      "M1-SRC-002": {
+        "attempt_id": "m1-src-002-20260904t042408z-b31b162b",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-002-m1-src-002-20260904t042408z-b31b162b.json",
+        "container_receipt_sha256": "bc9532282fb7146f1d5e8e05cb022518dba2161c48afdb243f48bac35eb75ebf",
+        "promoted_sha256": "4df9ecdd0ad7f562bdf743b70b9061b9af3885dcbdcaf7f45c1875f2cd838790",
+        "promoted_size_bytes": 1732874277
+      },
+      "M1-SRC-003": {
+        "attempt_id": "m1-src-003-20260904t043000z-d1b78c08",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-003-m1-src-003-20260904t043000z-d1b78c08.json",
+        "container_receipt_sha256": "a7f65ee4938b3b2749fa711b59c3af14b71dc3f02cbb6b3b6123161d388ae44a",
+        "promoted_sha256": "fa9250c3433065c7f3045352bee938b31d140771320e875f1088156094eedf01",
+        "promoted_size_bytes": 1718369620
+      },
+      "M1-SRC-004": {
+        "attempt_id": "m1-src-004-recovery-002-20260905t002925z-cc1fe1e9",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-004-m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
+        "container_receipt_sha256": "3ce5c27a801bbc9ea4379faa8dcf382b63caa15841dc2a3b4aa1a0ec960db10d",
+        "promoted_sha256": "a606cac063cc23e60a623f020192fc097d327f3dafadf1115802b2a458eaceab",
+        "promoted_size_bytes": 1732332897
+      },
+      "M1-SRC-005": {
+        "attempt_id": "m1-src-005-20260905t041205z-f34254c7",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-005-m1-src-005-20260905t041205z-f34254c7.json",
+        "container_receipt_sha256": "a97577bca70657b347ed95d435f4b5f73cdb896628f0ced290d9f5dd8d545117",
+        "promoted_sha256": "f1bf132321ef6854d187e9da57ce5130daf2f57065630d8eabeed71c74d4bafe",
+        "promoted_size_bytes": 1732898724
+      },
+      "M1-SRC-006": {
+        "attempt_id": "m1-src-006-20260905t041726z-da401f11",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-006-m1-src-006-20260905t041726z-da401f11.json",
+        "container_receipt_sha256": "e639ebe0c7559b9886710f6138d5bafef9744d8260a7efc64d65a8af24fba281",
+        "promoted_sha256": "825a8ab8079334c8c1bdc37d0f3ebab722a82a332cbfdfb14d7a992bca445f65",
+        "promoted_size_bytes": 1718402708
+      },
+      "M1-SRC-008": {
+        "attempt_id": "m1-src-008-20260905t042500z-a5fff82c",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-008-m1-src-008-20260905t042500z-a5fff82c.json",
+        "container_receipt_sha256": "1ba0ccc301e0d65490efe8b9afd6c21ee2a67ce1373cf15b3c01a4e70d342402",
+        "promoted_sha256": "ab76cc683bb4b50ca091f80da829343efa493f6934e56e2cb374e2221d81aaaf",
+        "promoted_size_bytes": 941822565
+      },
+      "M1-SRC-010": {
+        "attempt_id": "m1-src-010-20260905t042938z-e6ca9230",
+        "container_receipt_ref": "records/acquisition/container-verification/m1-src-010-m1-src-010-20260905t042938z-e6ca9230.json",
+        "container_receipt_sha256": "dd3faffd6c48cf165e5994b5996477efc2ed8932345e3f7d709d9786b40574df",
+        "promoted_sha256": "80e2ee3f7be7113382f8e0457e03d68e5a0a58b56b3c98c8f8bbd54ca7f1c2af",
+        "promoted_size_bytes": 1142906699
+      }
+    }
+  },
+  "assertions": {
+    "promoted_container_verified_source_count": 8,
+    "continuation_source_order": [
+      "M1-SRC-005",
+      "M1-SRC-006",
+      "M1-SRC-008",
+      "M1-SRC-010"
+    ],
+    "m1_src_004_requested_by_continuation": false,
+    "automatic_retry_performed": false,
+    "credential_values_read_or_recorded": false,
+    "archive_extraction_performed": false,
+    "pixel_usability_established": false,
+    "scientific_fitness_established": false
+  },
+  "limitations": [
+    "Container success establishes archive identity and SAFE structure only.",
+    "Raster readability, usable AOI pixels, registration, and scientific change remain separate gates."
+  ],
+  "next_gate": "reconcile M2 transfer and container completion before separately governed materialization or pixel-readiness work"
+}

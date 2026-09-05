@@ -29,6 +29,10 @@ CHECKPOINTS = {
         "checkpoint_id": "M2-CONTAINER-VERIFICATION",
         "next_action": "Run the offline container verifier for every promoted product and preserve any blocked archive. Do not treat promoted bytes as usable pixels.",
     },
+    "post_container": {
+        "checkpoint_id": "M2-VERIFY",
+        "next_action": "Prepare and review an exact bounded materialization and pixel-readiness plan for the five not-yet-materialized products. Do not materialize, decode pixels, run baselines, or start orbit recovery before the separate gates are satisfied.",
+    },
 }
 CONTINUATION_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-ACQUISITION-REVIEW",
@@ -81,6 +85,27 @@ def current_continuation_review_required(root: Path, state_counts: dict[str, int
     return blank_review or approved_implementation_pending
 
 
+def current_container_verification_complete(root: Path, state_counts: dict[str, int]) -> bool:
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        reconciliation = load(root / "records/acquisition/sentinel-continuation-001-success-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    sources = reconciliation.get("bindings", {}).get("sources", {})
+    return bool(
+        reconciliation.get("status") == "reconciled_all_eight_promoted_container_pass"
+        and reconciliation.get("assertions", {}).get("promoted_container_verified_source_count") == 8
+        and set(sources) == {f"M1-SRC-{index:03d}" for index in (1, 2, 3, 4, 5, 6, 8, 10)}
+        and all(
+            isinstance(item, dict)
+            and isinstance(item.get("container_receipt_ref"), str)
+            and (root / item["container_receipt_ref"]).is_file()
+            for item in sources.values()
+        )
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -125,11 +150,12 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        checkpoint = (
-            dict(CONTINUATION_REVIEW_CHECKPOINT)
-            if current_continuation_review_required(ROOT, progress["state_counts"])
-            else derive_checkpoint(progress["state_counts"])
-        )
+        if current_container_verification_complete(ROOT, progress["state_counts"]):
+            checkpoint = dict(CHECKPOINTS["post_container"])
+        elif current_continuation_review_required(ROOT, progress["state_counts"]):
+            checkpoint = dict(CONTINUATION_REVIEW_CHECKPOINT)
+        else:
+            checkpoint = derive_checkpoint(progress["state_counts"])
     except ValueError as exc:
         print(json.dumps({"status": "blocked_ambiguous_checkpoint", "error": str(exc), "progress": progress}, indent=2))
         return 12

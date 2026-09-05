@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-POSTSUCCESS-VALIDATION-ATTEMPT-001-FAILURE",
+  "recorded_at_utc": "2026-09-05T05:00:01Z",
+  "status": "failed_preserved_control_state_lag",
+  "acquisition_outcome_affected": false,
+  "observed_failures": [
+    {
+      "command": "python -m unittest tests.test_m2_sentinel_continuation_001 tests.test_m2_acquisition_progress",
+      "exit_code": 1,
+      "summary": "34 tests ran with two failures and one error because three tests still assumed the pre-continuation intake state."
+    },
+    {
+      "command": "python scripts/validate_m2_acquisition_progress.py",
+      "exit_code": 1,
+      "summary": "The validator rejected the approved anonymous-pipe credential reference for M1-SRC-005, M1-SRC-006, M1-SRC-008, and M1-SRC-010."
+    },
+    {
+      "command": "python scripts/check_project.py",
+      "exit_code": 1,
+      "summary": "The checker treated the continuation review bundle's mutable active-intake snapshot as a current hash after authorized acquisition changed it."
+    }
+  ],
+  "classification": "post_success_control_and_test_state_lag",
+  "credential_values_read_or_recorded": false,
+  "product_bytes_mutated": false,
+  "pixel_processing_performed": false,
+  "failure_preserved": true
+}

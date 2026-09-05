@@ -1,0 +1,66 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-CONTAINER-M1-SRC-008-m1-src-008-20260905t042500z-a5fff82c",
+  "scanned_at_utc": "2026-09-05T04:29:14Z",
+  "status": "pass_container_only",
+  "source_id": "M1-SRC-008",
+  "attempt_id": "m1-src-008-20260905t042500z-a5fff82c",
+  "bindings": {
+    "verification_contract_ref": "contracts/m2-offline-verification.json",
+    "verification_contract_sha256": "f3fa9d6911469ce072e76781d28ba012be31b59a1033a0553bca9b43b97b0643",
+    "active_intake_ref": "contracts/m2-intake.json",
+    "active_intake_sha256_at_scan": "614ee925a274bf7e1fa4521afe47a564b9bfb5d756ca58cd9afa34469b1d4895",
+    "transfer_receipt_ref": "records/acquisition/attempts/m1-src-008-20260905t042500z-a5fff82c.json",
+    "transfer_receipt_sha256": "39d596306f8bf8676e6e25199c9e73f1df3af1c31125f6a84fca9ec0bf05b62a"
+  },
+  "activity": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "archive_extraction_performed": false,
+    "source_archive_mutation_performed": false
+  },
+  "result": {
+    "source_id": "M1-SRC-008",
+    "archive_relative_path": "products/m1-src-008/S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE.zip",
+    "status": "pass_container_only",
+    "local_size_bytes": 941822565,
+    "local_sha256": "ab76cc683bb4b50ca091f80da829343efa493f6934e56e2cb374e2221d81aaaf",
+    "local_md5": "f943a32c322a2186955de966b718eccb",
+    "member_count": 95,
+    "total_uncompressed_bytes": 941787579,
+    "checks": {
+      "catalog_size": "pass",
+      "provider_md5": "pass",
+      "local_sha256": "pass",
+      "member:manifest.safe": "pass",
+      "member:MTD_MSIL2A.xml": "pass",
+      "member:DATASTRIP/*/MTD_DS.xml": "pass",
+      "member:GRANULE/*/MTD_TL.xml": "pass",
+      "member:GRANULE/*/IMG_DATA/R10m/*_B02_10m.jp2": "pass",
+      "member:GRANULE/*/IMG_DATA/R10m/*_B03_10m.jp2": "pass",
+      "member:GRANULE/*/IMG_DATA/R10m/*_B04_10m.jp2": "pass",
+      "member:GRANULE/*/IMG_DATA/R10m/*_B08_10m.jp2": "pass",
+      "member:GRANULE/*/IMG_DATA/R20m/*_B05_20m.jp2": "pass",
+      "member:GRANULE/*/IMG_DATA/R20m/*_B06_20m.jp2": "pass",
+      "member:GRANULE/*/IMG_DATA/R20m/*_B07_20m.jp2": "pass",
+      "member:GRANULE/*/IMG_DATA/R20m/*_B8A_20m.jp2": "pass",
+      "member:GRANULE/*/IMG_DATA/R20m/*_B11_20m.jp2": "pass",
+      "member:GRANULE/*/IMG_DATA/R20m/*_B12_20m.jp2": "pass",
+      "member:GRANULE/*/IMG_DATA/R20m/*_SCL_20m.jp2": "pass",
+      "member:GRANULE/*/QI_DATA/*": "pass",
+      "zip_crc": "pass"
+    },
+    "errors": [],
+    "pixel_usability_established": false,
+    "eligible_for_post_container_qa": true
+  },
+  "pixel_usability_established": false,
+  "scientific_fitness_established": false,
+  "next_gate": "post_container_gates",
+  "limitations": [
+    "A passing receipt establishes exact local archive identity, provider-MD5 agreement, ZIP integrity, SAFE-root identity, and required member presence only.",
+    "Provider BLAKE3 remains catalog metadata unless a separately verified local BLAKE3 implementation is introduced and bound.",
+    "Member names and CRC do not establish readable rasters, valid pixels, AOI coverage, masks, registration, or scientific fitness.",
+    "Each product receipt must bind the current promoted intake identity and may not replace an existing receipt."
+  ]
+}

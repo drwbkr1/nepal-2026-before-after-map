@@ -73,6 +73,23 @@ class _FakeJournal:
         self.completed.append(source_id)
 
 
+def _pre_continuation_intake() -> dict[str, object]:
+    intake = load_object(ROOT / "contracts/m2-intake.json")
+    baseline = load_object(ROOT / "records/acquisition/active-intake-initial-snapshot.json")
+    baseline_by_source = {
+        item["extensions"]["source_id"]: item
+        for item in baseline["assets"]
+    }
+    fixture = copy.deepcopy(intake)
+    fixture["assets"] = [
+        copy.deepcopy(baseline_by_source[item["extensions"]["source_id"]])
+        if item["extensions"]["source_id"] in SOURCE_ORDER
+        else item
+        for item in fixture["assets"]
+    ]
+    return fixture
+
+
 class Continuation001Tests(unittest.TestCase):
     def test_exact_locked_approval_and_reconciliation_validate(self) -> None:
         approval_path = ROOT / APPROVAL_REF
@@ -86,15 +103,15 @@ class Continuation001Tests(unittest.TestCase):
         self.assertNotIn(RECOVERY_SOURCE_ID, SOURCE_ORDER)
         self.assertEqual(len(SOURCE_ORDER), len(set(SOURCE_ORDER)))
 
-    def test_current_initial_asset_state_is_four_fresh_authorized(self) -> None:
-        intake = load_object(ROOT / "contracts/m2-intake.json")
+    def test_historical_initial_asset_state_is_four_fresh_authorized(self) -> None:
+        intake = _pre_continuation_intake()
         snapshots = validate_initial_asset_state(intake)
         self.assertEqual([item["source_id"] for item in snapshots], list(SOURCE_ORDER))
         self.assertTrue(all(item["initial_state"] == "authorized" for item in snapshots))
         self.assertTrue(all(item["initial_attempt_count"] == 0 for item in snapshots))
 
     def test_initial_asset_state_rejects_prior_attempt(self) -> None:
-        intake = load_object(ROOT / "contracts/m2-intake.json")
+        intake = _pre_continuation_intake()
         fixture = copy.deepcopy(intake)
         asset = next(item for item in fixture["assets"] if item["extensions"]["source_id"] == SOURCE_ORDER[0])
         asset["attempts"].append({"attempt_id": "must-not-exist"})
@@ -259,12 +276,13 @@ class Continuation001Tests(unittest.TestCase):
         self.assertEqual(calls, [SOURCE_ORDER[0]])
 
     def test_live_preflight_control_failure_is_exact_and_pre_attempt(self) -> None:
-        intake_path = ROOT / "contracts/m2-intake.json"
-        before = intake_path.read_bytes()
-        intake = json.loads(before)
+        intake = _pre_continuation_intake()
         asset = next(item for item in intake["assets"] if item["extensions"]["source_id"] == SOURCE_ORDER[0])
         with tempfile.TemporaryDirectory() as temp_dir:
             project_root = Path(temp_dir)
+            intake_path = project_root / "m2-intake.json"
+            intake_path.write_text(json.dumps(intake, indent=2) + "\n", encoding="utf-8", newline="\n")
+            before = intake_path.read_bytes()
             custody_root = project_root / Path(*Path(intake["custody_root"]).parts)
             staging_root = project_root / Path(*Path(intake["staging_root"]).parts)
             custody_root.mkdir(parents=True)
@@ -277,6 +295,7 @@ class Continuation001Tests(unittest.TestCase):
             self.assertFalse(event_root.exists())
             with (
                 mock.patch.object(exact_product_runner, "PROJECT_ROOT", project_root),
+                mock.patch.object(exact_product_runner, "INTAKE_PATH", intake_path),
                 mock.patch.object(
                     exact_product_runner.shutil,
                     "disk_usage",
@@ -294,6 +313,23 @@ class Continuation001Tests(unittest.TestCase):
             self.assertFalse(destination.exists())
             self.assertFalse(staging.exists())
             self.assertFalse(event_root.exists())
+
+    def test_current_completion_has_exact_four_continuation_attempts(self) -> None:
+        intake = load_object(ROOT / "contracts/m2-intake.json")
+        success = load_object(ROOT / "records/acquisition/sentinel-continuation-001-success-reconciliation.json")
+        self.assertEqual(success["status"], "reconciled_all_eight_promoted_container_pass")
+        self.assertEqual(success["assertions"]["continuation_source_order"], list(SOURCE_ORDER))
+        for source_id in SOURCE_ORDER:
+            asset = next(item for item in intake["assets"] if item["extensions"]["source_id"] == source_id)
+            self.assertEqual(asset["state"], "promoted")
+            self.assertEqual(len(asset["attempts"]), 1)
+            self.assertEqual(
+                asset["attempts"][0]["extensions"]["credential_reference"],
+                SECRET_REFERENCE,
+            )
+            self.assertFalse(asset["attempts"][0]["extensions"]["credential_value_recorded"])
+            receipt_ref = success["bindings"]["sources"][source_id]["container_receipt_ref"]
+            self.assertEqual(load_object(ROOT / receipt_ref)["status"], "pass_container_only")
 
     def test_supervisor_success_runs_exact_order_once_and_reconciles(self) -> None:
         journal = _FakeJournal()
