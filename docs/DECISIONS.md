@@ -375,3 +375,11 @@
 **Reason:** The earlier supervisor's generic failure erased the useful safe error category. The replacement must preserve nonsecret phase and terminal evidence, survive broker-console interruption on Windows, prevent secret propagation through arguments, environment, files, and errors, and prove the fixed one-attempt sequence before real use.
 
 **Status:** Twenty-three focused tests and 317 full repository tests pass locally. Current readiness receipt SHA-256 `f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad` supersedes retained attempt-001 SHA-256 `86af300807b6db28e97deb6b8188d609f02bf0bed3044741e1eb124eddc28c48` after adding the exact prelaunch Git-state boundary. Public CI, activation, final no-payload preflight, credential entry, and all four payload attempts remain pending.
+
+## D-061 — Preserve failed implementation publication and isolate the synthetic test
+
+**Decision:** Retain exact commit `114cb663dbaf13bd286d26f92167ea4a9b7ec420`, failed public CI run `33942595168`, and readiness SHA-256 `f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad`. Change only the synthetic live-preflight failure test so it creates temporary custody and staging roots on every platform, then issue a new readiness identity and require a new public run.
+
+**Reason:** The public repository validator passed, but Linux could not resolve the Windows external custody root before the test reached its mocked legal-page failure. The test therefore depended on owner-machine external state even though it was intended to prove a fully synthetic pre-attempt boundary.
+
+**Status:** Failure record SHA-256 `17035284194fad3645f95d2162a6ff639f6743e2d849c67fce4e3505340cc2f0` preserves the failed run and confirms no activation, token request, payload request, or external product mutation. The isolated correction passes 23 focused and 317 full tests locally. Readiness SHA-256 `35bb375543dc2add5e66e80019ee7bc4eb70cee2f2cc3a4c8cf542c97369919a` is current; public CI remains pending.

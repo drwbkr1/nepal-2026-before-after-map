@@ -368,7 +368,7 @@
         "continuation_review_reconciliation_sha256": "420f525d160a1b95f6784da06a0ca95ddf8e6e8e37d7947925f6c865157d28a6",
         "continuation_human_decision_count": 1,
         "continuation_implementation_authorized": true,
-        "continuation_publication_gate": "pending",
+        "continuation_publication_gate": "pending_after_failed_attempt_001",
         "continuation_transfer_authorized_after_public_ci_and_final_preflight": true,
         "continuation_transfer_authorized_now": false
       },
@@ -390,7 +390,7 @@
         ],
         "observed": [],
         "decision_value": "risk_reduction",
-        "rationale": "The exact continuation is owner-approved and locally validated, but public CI, activation, and final no-payload preflight still block credential entry and payload access."
+        "rationale": "The exact continuation is owner-approved and locally corrected after a retained failed public run, but a new passing public CI, activation, and final no-payload preflight still block credential entry and payload access."
       },
       "next_dependency": "M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION",
       "recovery_failures": [
@@ -485,13 +485,13 @@
       "gates": {
         "approval_sha256": "93f451f458c5b4984f980049f5adadf73e52663c8a71ee9699939b7f85e727a1",
         "implementation_readiness_ref": "records/acquisition/sentinel-continuation-001-implementation-readiness.json",
-        "implementation_readiness_sha256": "f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad",
+        "implementation_readiness_sha256": "35bb375543dc2add5e66e80019ee7bc4eb70cee2f2cc3a4c8cf542c97369919a",
         "focused_test_count": 23,
         "full_repository_test_count": 317,
         "windows_detached_process_tested": true,
         "safe_error_and_secret_exposure_tests": "pass",
         "m1_src_004_request_permitted": false,
-        "public_ci": "pending",
+        "public_ci": "pending_after_failed_attempt_001",
         "credential_entry_permitted_now": false,
         "payload_request_permitted_now": false
       },
@@ -501,13 +501,23 @@
           "record_ref": "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-001-superseded.json",
           "record_sha256": "86af300807b6db28e97deb6b8188d609f02bf0bed3044741e1eb124eddc28c48",
           "reason": "Superseded before publication after adding the exact prelaunch Git-state boundary."
+        },
+        {
+          "record_ref": "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-002-superseded.json",
+          "record_sha256": "f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad",
+          "reason": "Superseded after public CI exposed a Linux synthetic-test dependency on the absent external Windows custody root."
+        },
+        {
+          "record_ref": "records/acquisition/sentinel-continuation-001-implementation-publication-attempt-001-failure.json",
+          "record_sha256": "17035284194fad3645f95d2162a6ff639f6743e2d849c67fce4e3505340cc2f0",
+          "reason": "Exact commit 114cb663dbaf13bd286d26f92167ea4a9b7ec420 failed public CI run 33942595168 in the synthetic pre-attempt portability test."
         }
       ],
       "exit_condition_delta": {
         "expected": [],
         "observed": [],
         "decision_value": "risk_reduction",
-        "rationale": "Local synthetic controls pass, including Windows broker interruption and exact pre-attempt failure preservation; successful public CI remains required."
+        "rationale": "The Linux-only synthetic-test portability defect is corrected under a new readiness identity; successful public CI remains required."
       },
       "next_dependency": "M2-ACQUIRE"
     },

@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION-PUBLICATION-ATTEMPT-001-FAILURE",
+  "status": "failed_preserved",
+  "verified_at_utc": "2026-09-05T03:42:37Z",
+  "repository": "https://github.com/drwbkr1/nepal-2026-before-after-map",
+  "branch": "main",
+  "commit_sha": "114cb663dbaf13bd286d26f92167ea4a9b7ec420",
+  "workflow": {
+    "name": "Validate project controls",
+    "run_id": 33942595168,
+    "run_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33942595168",
+    "conclusion": "failure",
+    "passing_step": "Validate repository",
+    "failing_step": "Test project controls",
+    "failure_test": "test_m2_sentinel_continuation_001.Continuation001Tests.test_live_preflight_control_failure_is_exact_and_pre_attempt",
+    "failure_type": "FileNotFoundError",
+    "failure_boundary": "synthetic test attempted to resolve the absent external custody root before reaching its mocked live-page failure"
+  },
+  "finding": {
+    "classification": "synthetic_test_external_root_portability_defect",
+    "windows_local_result": "pass",
+    "linux_public_ci_result": "error_before_mocked_failure",
+    "production_control_failure_established": false,
+    "source_or_custody_drift_established": false,
+    "scientific_effect": "none"
+  },
+  "preservation": {
+    "failed_run_retained": true,
+    "failed_commit_retained": true,
+    "implementation_readiness_sha256": "f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad",
+    "automatic_retry_performed": false,
+    "token_requested": false,
+    "credential_values_read_or_recorded": false,
+    "payload_requested": false,
+    "external_product_bytes_mutated": false
+  },
+  "next_action": "Isolate the synthetic pre-attempt test beneath a temporary custody root, issue a new readiness identity, publish a new commit, and require a new passing exact public CI run."
+}

@@ -12,8 +12,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "records/acquisition/sentinel-continuation-001-implementation-readiness.json"
-SUPERSEDED = ROOT / "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-001-superseded.json"
-SUPERSEDED_SHA256 = "86af300807b6db28e97deb6b8188d609f02bf0bed3044741e1eb124eddc28c48"
+SUPERSEDED = ROOT / "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-002-superseded.json"
+SUPERSEDED_SHA256 = "f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad"
 IMPLEMENTATION_FILES = {
     "approval_sha256": ROOT / "records/source-gates/m2-sentinel-continuation-001-approval.json",
     "review_reconciliation_sha256": ROOT / "records/source-gates/m2-sentinel-continuation-001-review-reconciliation.json",
@@ -46,7 +46,7 @@ def main() -> int:
     if OUTPUT.exists():
         raise SystemExit("refusing implementation-readiness output collision")
     if not SUPERSEDED.is_file() or sha256(SUPERSEDED) != SUPERSEDED_SHA256:
-        raise SystemExit("superseded attempt-001 readiness identity drift")
+        raise SystemExit("superseded attempt-002 readiness identity drift")
     if args.focused_test_count < 16 or args.full_test_count < args.focused_test_count:
         raise SystemExit("test counts do not satisfy continuation-001 readiness")
     if os.name == "nt" and not args.windows_detachment_tested:
@@ -56,13 +56,13 @@ def main() -> int:
         raise SystemExit("missing implementation files: " + ", ".join(missing))
     payload = {
         "schema_version": "1.0",
-        "receipt_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION-READINESS-002",
+        "receipt_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION-READINESS-003",
         "verified_at_utc": args.verified_at_utc,
         "status": "pass_local_synthetic_ready_public_ci_pending",
         "supersedes": {
             "ref": str(SUPERSEDED.relative_to(ROOT)).replace("\\", "/"),
             "sha256": SUPERSEDED_SHA256,
-            "reason": "prelaunch Git-state boundary was added after the first local pass and before publication",
+            "reason": "the first implementation publication failed because one synthetic test depended on the external Windows custody root",
         },
         "bindings": {key: sha256(path) for key, path in IMPLEMENTATION_FILES.items()},
         "tests": {

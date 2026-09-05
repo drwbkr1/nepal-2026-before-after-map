@@ -97,7 +97,9 @@ REQUIRED = [
     "records/acquisition/sentinel-recovery-002-publication-gate.json",
     "records/acquisition/sentinel-continuation-001-publication-attempt-001-failure.json",
     "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-001-superseded.json",
+    "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-002-superseded.json",
     "records/acquisition/sentinel-continuation-001-implementation-readiness.json",
+    "records/acquisition/sentinel-continuation-001-implementation-publication-attempt-001-failure.json",
     "records/acquisition/sentinel-recovery-002-activation.json",
     "records/acquisition/sentinel-recovery-002-final-preflight.json",
     "records/acquisition/recovery-attempts/m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
@@ -4275,9 +4277,26 @@ def main() -> None:
             or implementation_gates.get("windows_detached_process_tested") is not True
             or implementation_gates.get("safe_error_and_secret_exposure_tests") != "pass"
             or implementation_gates.get("m1_src_004_request_permitted") is not False
-            or implementation_gates.get("public_ci") != "pending"
+            or implementation_gates.get("public_ci") != "pending_after_failed_attempt_001"
             or implementation_gates.get("credential_entry_permitted_now") is not False
             or implementation_gates.get("payload_request_permitted_now") is not False
+            or implementation_unit.get("retained_failures") != [
+                {
+                    "record_ref": "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-001-superseded.json",
+                    "record_sha256": "86af300807b6db28e97deb6b8188d609f02bf0bed3044741e1eb124eddc28c48",
+                    "reason": "Superseded before publication after adding the exact prelaunch Git-state boundary.",
+                },
+                {
+                    "record_ref": "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-002-superseded.json",
+                    "record_sha256": "f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad",
+                    "reason": "Superseded after public CI exposed a Linux synthetic-test dependency on the absent external Windows custody root.",
+                },
+                {
+                    "record_ref": "records/acquisition/sentinel-continuation-001-implementation-publication-attempt-001-failure.json",
+                    "record_sha256": "17035284194fad3645f95d2162a6ff639f6743e2d849c67fce4e3505340cc2f0",
+                    "reason": "Exact commit 114cb663dbaf13bd286d26f92167ea4a9b7ec420 failed public CI run 33942595168 in the synthetic pre-attempt portability test.",
+                },
+            ]
             or acquire_unit.get("status") != "deferred"
             or acquire_unit.get("disposition") != "defer"
             or "M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION" not in acquire_unit.get("depends_on", [])
@@ -4286,7 +4305,7 @@ def main() -> None:
             or gates.get("continuation_review_reconciliation_sha256") != sha256("records/source-gates/m2-sentinel-continuation-001-review-reconciliation.json")
             or gates.get("continuation_human_decision_count") != 1
             or gates.get("continuation_implementation_authorized") is not True
-            or gates.get("continuation_publication_gate") != "pending"
+            or gates.get("continuation_publication_gate") != "pending_after_failed_attempt_001"
             or gates.get("continuation_transfer_authorized_after_public_ci_and_final_preflight") is not True
             or gates.get("continuation_transfer_authorized_now") is not False
             or gates.get("continuation_authorized_now") is not False
@@ -6453,21 +6472,28 @@ def main() -> None:
     continuation_approval_ref = "records/source-gates/m2-sentinel-continuation-001-approval.json"
     continuation_reconciliation_ref = "records/source-gates/m2-sentinel-continuation-001-review-reconciliation.json"
     continuation_readiness_ref = "records/acquisition/sentinel-continuation-001-implementation-readiness.json"
-    continuation_superseded_readiness_ref = "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-001-superseded.json"
+    continuation_first_superseded_readiness_ref = "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-001-superseded.json"
+    continuation_superseded_readiness_ref = "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-002-superseded.json"
+    continuation_publication_failure_ref = "records/acquisition/sentinel-continuation-001-implementation-publication-attempt-001-failure.json"
     continuation_approval_sha = "93f451f458c5b4984f980049f5adadf73e52663c8a71ee9699939b7f85e727a1"
     continuation_reconciliation_sha = "420f525d160a1b95f6784da06a0ca95ddf8e6e8e37d7947925f6c865157d28a6"
-    continuation_readiness_sha = "f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad"
-    continuation_superseded_readiness_sha = "86af300807b6db28e97deb6b8188d609f02bf0bed3044741e1eb124eddc28c48"
+    continuation_readiness_sha = "35bb375543dc2add5e66e80019ee7bc4eb70cee2f2cc3a4c8cf542c97369919a"
+    continuation_first_superseded_readiness_sha = "86af300807b6db28e97deb6b8188d609f02bf0bed3044741e1eb124eddc28c48"
+    continuation_superseded_readiness_sha = "f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad"
+    continuation_publication_failure_sha = "17035284194fad3645f95d2162a6ff639f6743e2d849c67fce4e3505340cc2f0"
     if (
         sha256(continuation_approval_ref) != continuation_approval_sha
         or sha256(continuation_reconciliation_ref) != continuation_reconciliation_sha
         or sha256(continuation_readiness_ref) != continuation_readiness_sha
+        or sha256(continuation_first_superseded_readiness_ref) != continuation_first_superseded_readiness_sha
         or sha256(continuation_superseded_readiness_ref) != continuation_superseded_readiness_sha
+        or sha256(continuation_publication_failure_ref) != continuation_publication_failure_sha
     ):
         fail("M2 continuation-001 approval, reconciliation, or readiness identity differs")
     continuation_approval = json.loads((ROOT / continuation_approval_ref).read_text(encoding="utf-8"))
     continuation_reconciliation = json.loads((ROOT / continuation_reconciliation_ref).read_text(encoding="utf-8"))
     continuation_readiness = json.loads((ROOT / continuation_readiness_ref).read_text(encoding="utf-8"))
+    continuation_publication_failure = json.loads((ROOT / continuation_publication_failure_ref).read_text(encoding="utf-8"))
     if (
         continuation_approval.get("status") != "approved_exact_bounded_continuation_only"
         or continuation_approval.get("review_bundle_manifest_sha256") != continuation_bundle_sha
@@ -6494,7 +6520,8 @@ def main() -> None:
     }
     continuation_assertions = continuation_readiness.get("assertions", {})
     if (
-        continuation_readiness.get("status") != "pass_local_synthetic_ready_public_ci_pending"
+        continuation_readiness.get("receipt_id") != "NEPAL-M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION-READINESS-003"
+        or continuation_readiness.get("status") != "pass_local_synthetic_ready_public_ci_pending"
         or continuation_readiness.get("supersedes", {}).get("sha256") != continuation_superseded_readiness_sha
         or continuation_readiness.get("bindings") != expected_continuation_bindings
         or continuation_readiness.get("tests", {}).get("focused_test_count") != 23
@@ -6511,6 +6538,21 @@ def main() -> None:
         or continuation_assertions.get("pixel_processing_released") is not False
     ):
         fail("M2 continuation-001 local implementation readiness differs")
+    if (
+        continuation_publication_failure.get("status") != "failed_preserved"
+        or continuation_publication_failure.get("commit_sha") != "114cb663dbaf13bd286d26f92167ea4a9b7ec420"
+        or continuation_publication_failure.get("workflow", {}).get("run_id") != 33942595168
+        or continuation_publication_failure.get("workflow", {}).get("conclusion") != "failure"
+        or continuation_publication_failure.get("finding", {}).get("classification") != "synthetic_test_external_root_portability_defect"
+        or continuation_publication_failure.get("finding", {}).get("production_control_failure_established") is not False
+        or continuation_publication_failure.get("preservation", {}).get("implementation_readiness_sha256") != continuation_superseded_readiness_sha
+        or continuation_publication_failure.get("preservation", {}).get("automatic_retry_performed") is not False
+        or continuation_publication_failure.get("preservation", {}).get("token_requested") is not False
+        or continuation_publication_failure.get("preservation", {}).get("credential_values_read_or_recorded") is not False
+        or continuation_publication_failure.get("preservation", {}).get("payload_requested") is not False
+        or continuation_publication_failure.get("preservation", {}).get("external_product_bytes_mutated") is not False
+    ):
+        fail("M2 continuation-001 failed implementation publication evidence differs")
     continuation_broker_text = (ROOT / "scripts/m2_sentinel_continuation_001_broker.py").read_text(encoding="utf-8")
     continuation_supervisor_text = (ROOT / "scripts/m2_sentinel_continuation_001_supervisor.py").read_text(encoding="utf-8")
     if (
@@ -6527,6 +6569,8 @@ def main() -> None:
     continuation_review_evidence = ledger_by_id.get("EVID-0084")
     continuation_approval_evidence = ledger_by_id.get("EVID-0085")
     continuation_readiness_evidence = ledger_by_id.get("EVID-0086")
+    continuation_publication_failure_evidence = ledger_by_id.get("EVID-0087")
+    continuation_portability_correction_evidence = ledger_by_id.get("EVID-0088")
     if (
         not isinstance(recovery_outcome_evidence, dict)
         or recovery_outcome_evidence.get("reconciliation_sha256") != sha256("records/acquisition/sentinel-recovery-002-supervisor-reconciliation-001.json")
@@ -6567,8 +6611,8 @@ def main() -> None:
         fail("EVID-0085 continuation-001 owner approval custody differs")
     if (
         not isinstance(continuation_readiness_evidence, dict)
-        or continuation_readiness_evidence.get("readiness_sha256") != continuation_readiness_sha
-        or continuation_readiness_evidence.get("superseded_readiness_sha256") != continuation_superseded_readiness_sha
+        or continuation_readiness_evidence.get("readiness_sha256") != continuation_superseded_readiness_sha
+        or continuation_readiness_evidence.get("superseded_readiness_sha256") != continuation_first_superseded_readiness_sha
         or continuation_readiness_evidence.get("assertions", {}).get("focused_test_count") != 23
         or continuation_readiness_evidence.get("assertions", {}).get("full_repository_test_count") != 317
         or continuation_readiness_evidence.get("assertions", {}).get("public_ci_passed") is True
@@ -6578,6 +6622,35 @@ def main() -> None:
         or continuation_readiness_evidence.get("assertions", {}).get("pixel_processing_released") is not False
     ):
         fail("EVID-0086 continuation-001 implementation readiness differs")
+    if (
+        not isinstance(continuation_publication_failure_evidence, dict)
+        or continuation_publication_failure_evidence.get("failure_record_sha256") != continuation_publication_failure_sha
+        or continuation_publication_failure_evidence.get("commit_sha") != "114cb663dbaf13bd286d26f92167ea4a9b7ec420"
+        or continuation_publication_failure_evidence.get("public_ci_run_id") != 33942595168
+        or continuation_publication_failure_evidence.get("assertions", {}).get("repository_validation_passed") is not True
+        or continuation_publication_failure_evidence.get("assertions", {}).get("full_public_ci_passed") is not False
+        or continuation_publication_failure_evidence.get("assertions", {}).get("activation_performed") is not False
+        or continuation_publication_failure_evidence.get("assertions", {}).get("token_requested") is not False
+        or continuation_publication_failure_evidence.get("assertions", {}).get("product_payload_requested") is not False
+        or continuation_publication_failure_evidence.get("assertions", {}).get("external_product_bytes_mutated") is not False
+    ):
+        fail("EVID-0087 continuation-001 failed public run differs")
+    if (
+        not isinstance(continuation_portability_correction_evidence, dict)
+        or continuation_portability_correction_evidence.get("readiness_sha256") != continuation_readiness_sha
+        or continuation_portability_correction_evidence.get("superseded_readiness_sha256") != continuation_superseded_readiness_sha
+        or continuation_portability_correction_evidence.get("failed_publication_sha256") != continuation_publication_failure_sha
+        or continuation_portability_correction_evidence.get("assertions", {}).get("focused_test_count") != 23
+        or continuation_portability_correction_evidence.get("assertions", {}).get("full_repository_test_count") != 317
+        or continuation_portability_correction_evidence.get("assertions", {}).get("temporary_external_root_isolation_tested") is not True
+        or continuation_portability_correction_evidence.get("assertions", {}).get("public_ci_passed") is not False
+        or continuation_portability_correction_evidence.get("assertions", {}).get("activation_performed") is not False
+        or continuation_portability_correction_evidence.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or continuation_portability_correction_evidence.get("assertions", {}).get("product_payload_requested") is not False
+        or continuation_portability_correction_evidence.get("assertions", {}).get("m1_src_004_requested") is not False
+        or continuation_portability_correction_evidence.get("assertions", {}).get("pixel_processing_released") is not False
+    ):
+        fail("EVID-0088 continuation-001 portable test correction differs")
 
     violations = []
     for relative in tracked_files():

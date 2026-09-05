@@ -332,3 +332,16 @@ The completed exact owner response was written to private custody, locked before
 - Readiness SHA-256 `f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad` binds the exact continuation implementation and retains superseded readiness SHA-256 `86af300807b6db28e97deb6b8188d609f02bf0bed3044741e1eb124eddc28c48`.
 
 The tests cover Windows broker interruption, anonymous single-use pipe custody, environment scrubbing, safe known and unknown failure codes without exception text, fixed order, one attempt per source, stop on first transfer or container failure, redirect and Range refusal, exclusive staging, atomic no-replace promotion, explicit `M1-SRC-004` refusal, and a failed exact live pre-attempt check with no intake or path mutation. No network request, authentication, token value, external product mutation, payload request, real continuation attempt, pixel processing, or scientific result occurred. Successful public CI, activation, and the final no-payload preflight remain required.
+
+## Continuation-001 implementation publication failure and correction — 2026-09-05
+
+Commit `114cb663dbaf13bd286d26f92167ea4a9b7ec420` matched `origin/main` and passed `scripts/check_project.py` in GitHub Actions, but run `33942595168` failed in `test_live_preflight_control_failure_is_exact_and_pre_attempt`. On Linux, the production runner tried to resolve the absent external custody root before the test reached its mocked legal-page failure. Failure record SHA-256 `17035284194fad3645f95d2162a6ff639f6743e2d849c67fce4e3505340cc2f0` preserves the terminal result. Activation, credential access, and payload access did not occur.
+
+The corrected test creates isolated temporary custody and staging roots and mocks free-space availability before invoking the exact production runner. It still requires the same legal-page failure code and proves no active-intake, destination, staging, or event-path mutation.
+
+- `python -m unittest tests.test_m2_sentinel_continuation_001 -v`: 23 tests pass.
+- `python -m unittest discover -s tests`: 317 tests pass.
+- Corrected readiness SHA-256: `35bb375543dc2add5e66e80019ee7bc4eb70cee2f2cc3a4c8cf542c97369919a`.
+- Superseded published readiness SHA-256: `f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad`.
+
+A new exact public CI pass remains required before activation, final no-payload preflight, token entry, or acquisition.

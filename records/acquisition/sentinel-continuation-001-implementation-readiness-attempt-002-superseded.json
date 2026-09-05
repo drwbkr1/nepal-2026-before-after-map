@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "receipt_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION-READINESS-003",
-  "verified_at_utc": "2026-09-05T03:45:14Z",
+  "receipt_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION-READINESS-002",
+  "verified_at_utc": "2026-09-05T03:19:36Z",
   "status": "pass_local_synthetic_ready_public_ci_pending",
   "supersedes": {
-    "ref": "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-002-superseded.json",
-    "sha256": "f52d989352541a1fb28dacf858fd14408de28bde84fcb9355154ea623df48fad",
-    "reason": "the first implementation publication failed because one synthetic test depended on the external Windows custody root"
+    "ref": "records/acquisition/sentinel-continuation-001-implementation-readiness-attempt-001-superseded.json",
+    "sha256": "86af300807b6db28e97deb6b8188d609f02bf0bed3044741e1eb124eddc28c48",
+    "reason": "prelaunch Git-state boundary was added after the first local pass and before publication"
   },
   "bindings": {
     "approval_sha256": "93f451f458c5b4984f980049f5adadf73e52663c8a71ee9699939b7f85e727a1",
@@ -22,7 +22,7 @@
     "activation_script_sha256": "b745f549551768ab89dab96220c77fea9a1c26464eabf2030853803d3e2a1f51",
     "final_preflight_sha256": "63d91c046579c8a64202c5fd7f8326e4bd91c690eb8d126aa718185045ec480d",
     "publication_gate_recorder_sha256": "033b6ac5cd4608aeaf7d8f7649525c8bfcfdd26b694e2525b80e2be0327cea98",
-    "focused_tests_sha256": "7c7d1c9e68940bb65cde3ed2459b33323fe0f6d884f2c2e7dd3623a9ee45ef6c"
+    "focused_tests_sha256": "b56ab5d83bb2fc9324fbfa4e2dd43e727bcc05603d3e74aacdcc33266f0a0c5b"
   },
   "tests": {
     "focused_test_count": 23,

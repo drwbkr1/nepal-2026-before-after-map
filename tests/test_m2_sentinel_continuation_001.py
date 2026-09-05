@@ -263,24 +263,37 @@ class Continuation001Tests(unittest.TestCase):
         before = intake_path.read_bytes()
         intake = json.loads(before)
         asset = next(item for item in intake["assets"] if item["extensions"]["source_id"] == SOURCE_ORDER[0])
-        project_root = ROOT.parent
-        destination = project_root / Path(*Path(intake["custody_root"]).parts) / Path(*Path(asset["destination_relative_path"]).parts)
-        staging = project_root / Path(*Path(intake["staging_root"]).parts) / Path(*Path(asset["staging_relative_path"]).parts)
-        event_root = project_root / Path(*Path(intake["staging_root"]).parts) / "attempt-events" / asset["asset_id"]
-        self.assertFalse(destination.exists())
-        self.assertFalse(staging.exists())
-        self.assertFalse(event_root.exists())
-        with mock.patch.object(
-            exact_product_runner,
-            "live_page_consistency_check",
-            side_effect=TransferControlError("official_page_revalidation_unavailable"),
-        ):
-            with self.assertRaisesRegex(TransferControlError, "official_page_revalidation_unavailable"):
-                exact_product_runner.run_product(SOURCE_ORDER[0], "fixture-secret")
-        self.assertEqual(intake_path.read_bytes(), before)
-        self.assertFalse(destination.exists())
-        self.assertFalse(staging.exists())
-        self.assertFalse(event_root.exists())
+        with tempfile.TemporaryDirectory() as temp_dir:
+            project_root = Path(temp_dir)
+            custody_root = project_root / Path(*Path(intake["custody_root"]).parts)
+            staging_root = project_root / Path(*Path(intake["staging_root"]).parts)
+            custody_root.mkdir(parents=True)
+            staging_root.mkdir(parents=True)
+            destination = custody_root / Path(*Path(asset["destination_relative_path"]).parts)
+            staging = staging_root / Path(*Path(asset["staging_relative_path"]).parts)
+            event_root = staging_root / "attempt-events" / asset["asset_id"]
+            self.assertFalse(destination.exists())
+            self.assertFalse(staging.exists())
+            self.assertFalse(event_root.exists())
+            with (
+                mock.patch.object(exact_product_runner, "PROJECT_ROOT", project_root),
+                mock.patch.object(
+                    exact_product_runner.shutil,
+                    "disk_usage",
+                    return_value=mock.Mock(free=100 * 1024 ** 3),
+                ),
+                mock.patch.object(
+                    exact_product_runner,
+                    "live_page_consistency_check",
+                    side_effect=TransferControlError("official_page_revalidation_unavailable"),
+                ),
+            ):
+                with self.assertRaisesRegex(TransferControlError, "official_page_revalidation_unavailable"):
+                    exact_product_runner.run_product(SOURCE_ORDER[0], "fixture-secret")
+            self.assertEqual(intake_path.read_bytes(), before)
+            self.assertFalse(destination.exists())
+            self.assertFalse(staging.exists())
+            self.assertFalse(event_root.exists())
 
     def test_supervisor_success_runs_exact_order_once_and_reconciles(self) -> None:
         journal = _FakeJournal()
