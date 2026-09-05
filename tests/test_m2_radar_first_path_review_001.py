@@ -12,6 +12,7 @@ BUNDLE_REF = "reviews/m2-radar-first-path-001/review-bundle.json"
 CONTRACT_REF = "reviews/m2-radar-first-path-001/review-contract.json"
 BLANK_REF = "reviews/m2-radar-first-path-001/blank-response.json"
 READINESS_REF = "records/readiness/m2-radar-first-path-001-review-readiness.json"
+PUBLICATION_REF = "records/readiness/m2-radar-first-path-001-review-publication-gate.json"
 ANALYSIS_REF = "records/readiness/m2-post-optical-route-analysis-001.json"
 
 
@@ -32,6 +33,7 @@ class RadarFirstPathReview001Tests(unittest.TestCase):
         cls.contract = load(CONTRACT_REF)
         cls.blank = load(BLANK_REF)
         cls.readiness = load(READINESS_REF)
+        cls.publication = load(PUBLICATION_REF)
         cls.milestone = load("contracts/milestone-002.json")
         cls.profile = load("records/project-control-profile.json")
         cls.goal = load("records/long-term-goal.json")
@@ -79,6 +81,20 @@ class RadarFirstPathReview001Tests(unittest.TestCase):
         self.assertEqual(self.readiness["review"]["human_decision_count"], 0)
         self.assertFalse(self.readiness["assertions"]["control_amendment_authorized"])
         self.assertFalse(self.readiness["assertions"]["radar_pixel_readiness_authorized"])
+
+    def test_publication_gate_binds_passing_public_commit_without_authority(self) -> None:
+        self.assertEqual(self.publication["status"], "pass_exact_review_packet_public_ci")
+        self.assertEqual(self.publication["publication_commit"], "b357e335cb1312c124384958ee5fd6512e184eeb")
+        self.assertEqual(self.publication["github_actions"]["run_id"], 33990934063)
+        self.assertEqual(self.publication["github_actions"]["conclusion"], "success")
+        for key in ("analysis", "proposal", "review_bundle", "review_contract", "blank_response", "readiness"):
+            self.assertEqual(
+                self.publication["bindings"][f"{key}_sha256"],
+                sha256(self.publication["bindings"][f"{key}_ref"]),
+            )
+        self.assertEqual(self.publication["assertions"]["human_decision_count"], 0)
+        self.assertFalse(self.publication["assertions"]["control_amendment_authorized"])
+        self.assertFalse(self.publication["assertions"]["real_product_pixels_read_during_publication"])
 
     def test_current_controls_point_to_review_without_activating_proposal(self) -> None:
         units = {unit["id"]: unit for unit in self.milestone["units"]}

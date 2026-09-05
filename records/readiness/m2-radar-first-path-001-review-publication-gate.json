@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-FIRST-PATH-001-REVIEW-PUBLICATION-GATE",
+  "verified_at_utc": "2026-09-05T20:43:50Z",
+  "status": "pass_exact_review_packet_public_ci",
+  "publication_commit": "b357e335cb1312c124384958ee5fd6512e184eeb",
+  "github_actions": {
+    "workflow_name": "Validate project controls",
+    "run_id": 33990934063,
+    "run_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33990934063",
+    "head_sha": "b357e335cb1312c124384958ee5fd6512e184eeb",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "bindings": {
+    "analysis_ref": "records/readiness/m2-post-optical-route-analysis-001.json",
+    "analysis_sha256": "19672e1d646b5ee6131f57c99710c2483b9deb17743f833dd662edaa8afd128e",
+    "proposal_ref": "contracts/milestone-002-radar-first-path-001-proposal.json",
+    "proposal_sha256": "ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77",
+    "review_bundle_ref": "reviews/m2-radar-first-path-001/review-bundle.json",
+    "review_bundle_sha256": "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad",
+    "review_contract_ref": "reviews/m2-radar-first-path-001/review-contract.json",
+    "review_contract_sha256": "872920524101856d3bcd1b964963ba9ad89118dc56a6be65849ef2432b226382",
+    "blank_response_ref": "reviews/m2-radar-first-path-001/blank-response.json",
+    "blank_response_sha256": "5e2a0610c110bdbf71ffc4f6e28f21728b1d27f3a1dc85b9286c2ce2fa164a15",
+    "readiness_ref": "records/readiness/m2-radar-first-path-001-review-readiness.json",
+    "readiness_sha256": "0d7ffe2f7726d5166519004cd6d29e72192cf3fcc37a073612314fd3f156755a"
+  },
+  "assertions": {
+    "public_repository": true,
+    "review_packet_present_at_exact_commit": true,
+    "repository_validation_passed": true,
+    "full_test_suite_passed": true,
+    "human_decision_count": 0,
+    "control_amendment_authorized": false,
+    "orbit_recovery_authorized": false,
+    "dem_action_authorized": false,
+    "radar_pixel_readiness_authorized": false,
+    "optical_alternate_route_authorized": false,
+    "real_product_pixels_read_during_publication": false,
+    "external_data_mutated": false
+  },
+  "next_action": "Obtain an exact attested owner decision on the bound radar-first path review; do not activate the amendment or execute any downstream data action before reconciliation."
+}

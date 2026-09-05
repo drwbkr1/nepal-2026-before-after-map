@@ -114,6 +114,7 @@ REQUIRED = [
     "reviews/m2-radar-first-path-001/review-contract.json",
     "reviews/m2-radar-first-path-001/blank-response.json",
     "records/readiness/m2-radar-first-path-001-review-readiness.json",
+    "records/readiness/m2-radar-first-path-001-review-publication-gate.json",
     "scripts/prepare_m2_radar_first_path_review.py",
     "tests/test_m2_radar_first_path_review_001.py",
     "scripts/activate_m2_optical_pixel_recovery_001.py",
@@ -920,6 +921,7 @@ def main() -> None:
     radar_first_path_contract = json.loads((ROOT / "reviews/m2-radar-first-path-001/review-contract.json").read_text(encoding="utf-8"))
     radar_first_path_blank = json.loads((ROOT / "reviews/m2-radar-first-path-001/blank-response.json").read_text(encoding="utf-8"))
     radar_first_path_readiness = json.loads((ROOT / "records/readiness/m2-radar-first-path-001-review-readiness.json").read_text(encoding="utf-8"))
+    radar_first_path_publication = json.loads((ROOT / "records/readiness/m2-radar-first-path-001-review-publication-gate.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
     remote_project_name = expected_remote.rstrip("/").rsplit("/", 1)[-1].removesuffix(".git")
@@ -5001,6 +5003,19 @@ def main() -> None:
                 or radar_first_path_surface.get("status") != "pass_blank_review_surface"
                 or radar_first_path_readiness.get("status") != "pass_ready_owner_review_zero_decisions"
                 or radar_first_path_readiness.get("review", {}).get("human_decision_count") != 0
+                or radar_first_path_publication.get("status") != "pass_exact_review_packet_public_ci"
+                or radar_first_path_publication.get("publication_commit") != "b357e335cb1312c124384958ee5fd6512e184eeb"
+                or radar_first_path_publication.get("github_actions", {}).get("run_id") != 33990934063
+                or radar_first_path_publication.get("github_actions", {}).get("head_sha") != "b357e335cb1312c124384958ee5fd6512e184eeb"
+                or radar_first_path_publication.get("github_actions", {}).get("conclusion") != "success"
+                or any(
+                    radar_first_path_publication.get("bindings", {}).get(f"{key}_sha256")
+                    != sha256(radar_first_path_publication.get("bindings", {}).get(f"{key}_ref"))
+                    for key in ("analysis", "proposal", "review_bundle", "review_contract", "blank_response", "readiness")
+                )
+                or radar_first_path_publication.get("assertions", {}).get("human_decision_count") != 0
+                or radar_first_path_publication.get("assertions", {}).get("control_amendment_authorized") is not False
+                or radar_first_path_publication.get("assertions", {}).get("real_product_pixels_read_during_publication") is not False
                 or path_review_unit.get("status") != "ready"
                 or path_review_unit.get("human_gate") is not True
                 or path_review_unit.get("gates", {}).get("proposal_sha256") != path_proposal_sha
@@ -7672,6 +7687,21 @@ def main() -> None:
         or radar_first_path_evidence.get("assertions", {}).get("real_product_pixels_read") is not False
     ):
         fail("EVID-0093 radar-first path review evidence differs or overclaims")
+    radar_first_path_publication_evidence = ledger_by_id.get("EVID-0094")
+    if (
+        not isinstance(radar_first_path_publication_evidence, dict)
+        or radar_first_path_publication_evidence.get("status") != "pass_exact_review_packet_public_ci"
+        or radar_first_path_publication_evidence.get("publication_commit") != "b357e335cb1312c124384958ee5fd6512e184eeb"
+        or radar_first_path_publication_evidence.get("github_actions_run_id") != 33990934063
+        or radar_first_path_publication_evidence.get("proposal_sha256") != sha256("contracts/milestone-002-radar-first-path-001-proposal.json")
+        or radar_first_path_publication_evidence.get("review_bundle_sha256") != sha256("reviews/m2-radar-first-path-001/review-bundle.json")
+        or radar_first_path_publication_evidence.get("assertions", {}).get("public_ci_conclusion") != "success"
+        or radar_first_path_publication_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or radar_first_path_publication_evidence.get("assertions", {}).get("control_amendment_authorized") is not False
+        or radar_first_path_publication_evidence.get("assertions", {}).get("real_product_pixels_read") is not False
+        or radar_first_path_publication_evidence.get("assertions", {}).get("external_data_mutated") is not False
+    ):
+        fail("EVID-0094 radar-first path review publication evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():
