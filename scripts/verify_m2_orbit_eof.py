@@ -96,8 +96,21 @@ def promoted_binding(
         raise OrbitControlError("promoted_orbit_asset_absent_or_ambiguous")
     asset = matches[0]
     attempts = asset.get("attempts", [])
-    if asset.get("state") != "promoted" or len(attempts) != 1 or attempts[0].get("outcome") != "succeeded":
-        raise OrbitControlError("orbit_asset_not_promoted_once")
+    succeeded = [attempt for attempt in attempts if attempt.get("outcome") == "succeeded"]
+    if asset.get("state") != "promoted" or len(succeeded) != 1:
+        raise OrbitControlError("orbit_asset_not_promoted_by_exactly_one_success")
+    successful_attempt = succeeded[0]
+    if source_id == "M2-ORB-001":
+        failed = [attempt for attempt in attempts if attempt.get("outcome") == "failed"]
+        if (
+            len(attempts) != 2
+            or len(failed) != 1
+            or failed[0].get("attempt_id") != "m2-orb-001-20260904t050937z-8ed21d05"
+            or successful_attempt.get("attempt_id", "").startswith("m2-orb-001-recovery-001-") is not True
+        ):
+            raise OrbitControlError("orbit_recovery_attempt_history_drift")
+    elif len(attempts) != 1:
+        raise OrbitControlError("orbit_asset_attempt_history_drift")
     receipt_ref = asset.get("extensions", {}).get("successful_attempt_receipt")
     receipt_sha = asset.get("extensions", {}).get("successful_attempt_receipt_sha256")
     if not isinstance(receipt_ref, str) or not receipt_ref.startswith("records/acquisition/orbit-attempts/"):
@@ -111,9 +124,14 @@ def promoted_binding(
         raise OrbitControlError("orbit_transfer_receipt_missing_or_drifted")
     receipt = load(receipt_path)
     observed = asset.get("observed", {})
+    expected_event = (
+        "orbit_recovery_002_succeeded"
+        if source_id == "M2-ORB-001" and successful_attempt.get("attempt_id", "").startswith("m2-orb-001-recovery-001-")
+        else "orbit_transfer_succeeded"
+    )
     if (
-        receipt.get("event") != "orbit_transfer_succeeded"
-        or receipt.get("attempt_id") != attempts[0].get("attempt_id")
+        receipt.get("event") != expected_event
+        or receipt.get("attempt_id") != successful_attempt.get("attempt_id")
         or receipt.get("source_id") != source_id
         or receipt.get("local_sha256") != observed.get("promoted_sha256")
         or receipt.get("local_size_bytes") != observed.get("promoted_size_bytes")

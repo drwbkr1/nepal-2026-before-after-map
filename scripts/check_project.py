@@ -27,6 +27,7 @@ from derive_m2_acquisition_checkpoint import (
 )
 from record_m2_sentinel_continuation_001_implementation_readiness import IMPLEMENTATION_FILES as CONTINUATION_001_IMPLEMENTATION_FILES
 from record_m2_sentinel_recovery_002_implementation_readiness import IMPLEMENTATION_FILES as RECOVERY_002_IMPLEMENTATION_FILES
+from record_m2_orbit_recovery_002_implementation_readiness import IMPLEMENTATION_FILES as ORBIT_RECOVERY_002_IMPLEMENTATION_FILES
 from validate_m2_acquisition_progress import (
     INITIAL_ACTIVE_INTAKE_SHA256,
     validate_progress as validate_acquisition_progress,
@@ -133,6 +134,23 @@ REQUIRED = [
     "reviews/m2-orbit-recovery-002/blank-response.json",
     "records/readiness/m2-orbit-recovery-002-review-readiness.json",
     "records/readiness/m2-orbit-recovery-002-review-publication-gate.json",
+    "records/source-gates/m2-orbit-recovery-002-review-reconciliation.json",
+    "records/source-gates/m2-orbit-recovery-002-approval.json",
+    "records/readiness/m2-orbit-recovery-002-approval-activation.json",
+    "records/acquisition/m2-orbit-recovery-002-implementation-readiness.json",
+    "scripts/activate_m2_orbit_recovery_002_approval.py",
+    "scripts/m2_orbit_recovery_002_core.py",
+    "scripts/m2_orbit_recovery_002_broker.py",
+    "scripts/m2_orbit_recovery_002_supervisor.py",
+    "scripts/acquire_m2_orbit_recovery_002.py",
+    "scripts/record_m2_orbit_recovery_002_implementation_readiness.py",
+    "scripts/record_m2_orbit_recovery_002_publication_gate.py",
+    "scripts/reconcile_m2_orbit_recovery_002_controls.py",
+    "scripts/activate_m2_orbit_recovery_002.py",
+    "scripts/preflight_m2_orbit_recovery_002.py",
+    "scripts/reconcile_m2_orbit_recovery_002_outcome.py",
+    "scripts/invoke_m2_orbit_recovery_002.ps1",
+    "tests/test_m2_orbit_recovery_002.py",
     "scripts/prepare_m2_radar_first_path_review.py",
     "scripts/activate_m2_radar_first_path_001.py",
     "scripts/prepare_m2_orbit_recovery_002_review.py",
@@ -959,6 +977,10 @@ def main() -> None:
     orbit_recovery_002_blank = json.loads((ROOT / "reviews/m2-orbit-recovery-002/blank-response.json").read_text(encoding="utf-8"))
     orbit_recovery_002_readiness = json.loads((ROOT / "records/readiness/m2-orbit-recovery-002-review-readiness.json").read_text(encoding="utf-8"))
     orbit_recovery_002_publication = json.loads((ROOT / "records/readiness/m2-orbit-recovery-002-review-publication-gate.json").read_text(encoding="utf-8"))
+    orbit_recovery_002_approval = json.loads((ROOT / "records/source-gates/m2-orbit-recovery-002-approval.json").read_text(encoding="utf-8"))
+    orbit_recovery_002_reconciliation = json.loads((ROOT / "records/source-gates/m2-orbit-recovery-002-review-reconciliation.json").read_text(encoding="utf-8"))
+    orbit_recovery_002_approval_activation = json.loads((ROOT / "records/readiness/m2-orbit-recovery-002-approval-activation.json").read_text(encoding="utf-8"))
+    orbit_recovery_002_implementation_readiness = json.loads((ROOT / "records/acquisition/m2-orbit-recovery-002-implementation-readiness.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
     remote_project_name = expected_remote.rstrip("/").rsplit("/", 1)[-1].removesuffix(".git")
@@ -5127,6 +5149,31 @@ def main() -> None:
                 or orbit_recovery_002_publication.get("assertions", {}).get("external_data_mutated") is not False
             ):
                 fail("M2 corrected orbit recovery-002 review packet differs or contains authority")
+            expected_orbit_recovery_002_implementation_bindings = {
+                key: sha256(str(path.relative_to(ROOT)).replace("\\", "/"))
+                for key, path in ORBIT_RECOVERY_002_IMPLEMENTATION_FILES.items()
+            }
+            if (
+                orbit_recovery_002_approval.get("status") != "approved_exact_recovery_only_implementation_and_one_future_attempt"
+                or orbit_recovery_002_approval.get("review_bundle_manifest_sha256") != bundle_sha
+                or orbit_recovery_002_approval.get("proposal_sha256") != proposal_sha
+                or orbit_recovery_002_approval.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+                or orbit_recovery_002_approval.get("human_decisions_fabricated") is not False
+                or orbit_recovery_002_reconciliation.get("status") != "reconciled_exact_human_response"
+                or orbit_recovery_002_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+                or orbit_recovery_002_reconciliation.get("human_decisions_fabricated") is not False
+                or orbit_recovery_002_approval_activation.get("status") != "pass_exact_approval_activated_implementation_and_publication_only"
+                or orbit_recovery_002_approval_activation.get("assertions", {}).get("orbit_payload_requested") is not False
+                or orbit_recovery_002_implementation_readiness.get("status") != "pass_local_synthetic_ready_public_ci_pending"
+                or orbit_recovery_002_implementation_readiness.get("bindings") != expected_orbit_recovery_002_implementation_bindings
+                or orbit_recovery_002_implementation_readiness.get("tests", {}).get("focused_test_count") != 12
+                or orbit_recovery_002_implementation_readiness.get("tests", {}).get("full_repository_test_count") != 395
+                or orbit_recovery_002_implementation_readiness.get("assertions", {}).get("real_credential_read") is not False
+                or orbit_recovery_002_implementation_readiness.get("assertions", {}).get("network_requests_performed") is not False
+                or orbit_recovery_002_implementation_readiness.get("assertions", {}).get("external_data_mutated") is not False
+                or orbit_recovery_002_implementation_readiness.get("assertions", {}).get("real_recovery_started") is not False
+            ):
+                fail("M2 orbit recovery-002 approval or implementation readiness differs or overclaims")
             if (
                 path_review_unit.get("status") != "complete"
                 or path_review_unit.get("gates", {}).get("human_decision_count") != 1

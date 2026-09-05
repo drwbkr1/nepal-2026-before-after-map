@@ -355,3 +355,15 @@ The exact owner response to radar-first path bundle SHA-256 `5a5bd80f724841f9558
 - `git diff --check`: passes, with only Git line-ending notices on two existing Markdown working-copy formats.
 
 The activated controls preserve optical real-001 as terminal `INVALID`, recovery-001 as terminal `BLOCK`, and aggregate `M2-VERIFY` as deferred. Six exact Sentinel-1 sources pass custody, materialization-identity, and header-readiness controls only; no measurement pixels were decoded. The prior orbit-recovery proposal and bundle remain immutable stale evidence. Corrected orbit recovery-002 bundle SHA-256 `6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5` binds proposal SHA-256 `d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8` with zero human decisions. Exact commit `45c914695ea3e3b16e309eb0cd1aa13227624599` passed public CI run `33995547794`; publication-gate evidence records that no authority was created. The ordinary orbit runner stops at `orbit_recovery_002_unit_not_complete` before catalogue access, token lookup, event creation, or payload request. No orbit, credential, DEM, radar-pixel, baseline, change-analysis, attribution, or scientific-publication action occurred.
+
+## Orbit recovery-002 approval and local implementation validation — 2026-09-05
+
+The exact completed owner response was locked in private non-Git review custody before reconciliation. Approval SHA-256 `ee5922426882b5620f2e90e6703d0eb7d5f5ab77ede3ed61acfb8616b2c22d07` and reconciliation SHA-256 `b289cd6486ea819c22823fba986702c6e3b353171bff87bc437a67c6bfa0e3ab` bind one approval, zero revise/defer decisions, exact `M2-ORB-001`, and at most one future attempt.
+
+- `python -m unittest tests.test_m2_orbit_recovery_002 -v`: 12 tests pass.
+- `python -m unittest tests.test_m2_orbit_io -v`: 9 tests pass.
+- `python -m unittest discover -s tests`: 395 tests pass; 2 historical production-state probes are intentionally skipped.
+- `python scripts/check_project.py`: 618 required files, JSON controls, and Git artifact boundaries pass.
+- `git diff --check`: passes.
+
+The focused controls cover anonymous pipe custody, environment scrubbing, detached worker survival after broker termination on Windows, generic nonsecret failures, PowerShell parser safety, byte-zero headers without Range, distinct exclusive staging, exact source scope, retained failure history, and exactly one later successful verifier binding. No credential was read, no CDSE or orbit endpoint was contacted, no orbit payload was requested, and no external data was mutated. Successful public CI remains required before activation or the final no-payload preflight.

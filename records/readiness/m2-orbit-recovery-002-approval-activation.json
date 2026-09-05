@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-002-APPROVAL-ACTIVATION",
+  "activated_at_utc": "2026-09-05T22:26:10Z",
+  "status": "pass_exact_approval_activated_implementation_and_publication_only",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-orbit-recovery-002-approval.json",
+    "approval_sha256": "ee5922426882b5620f2e90e6703d0eb7d5f5ab77ede3ed61acfb8616b2c22d07",
+    "proposal_ref": "contracts/milestone-002-orbit-recovery-002-proposal.json",
+    "proposal_sha256": "d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8",
+    "review_bundle_ref": "reviews/m2-orbit-recovery-002/review-bundle.json",
+    "review_bundle_sha256": "6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5",
+    "review_contract_ref": "reviews/m2-orbit-recovery-002/review-contract.json",
+    "review_contract_sha256": "1b0da1577a24c9323e529ac5fd58cafb7f15ccefc96f97df1964ddd751dde261",
+    "review_reconciliation_ref": "records/source-gates/m2-orbit-recovery-002-review-reconciliation.json",
+    "review_reconciliation_sha256": "b289cd6486ea819c22823fba986702c6e3b353171bff87bc437a67c6bfa0e3ab"
+  },
+  "released_now": {
+    "recovery_only_implementation": true,
+    "synthetic_secret_exposure_tests": true,
+    "public_ci": true,
+    "final_no_payload_preflight_before_public_ci": false,
+    "real_recovery_before_public_ci_and_preflight": false,
+    "other_orbit_source_requests": false,
+    "automatic_retry": false,
+    "orbit_application": false,
+    "dem_or_radar_pixel_action": false,
+    "baseline_or_change_analysis": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "external_data_mutated": false,
+    "orbit_payload_requested": false,
+    "recovery_attempt_started": false,
+    "scientific_publication_released": false
+  },
+  "next_gate": "implement and test the exact recovery-only worker, then require successful public CI before activation, final no-payload preflight, or credential entry"
+}

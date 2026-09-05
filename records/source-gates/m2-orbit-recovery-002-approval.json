@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-ORBIT-RECOVERY-002-APPROVAL",
+  "status": "approved_exact_recovery_only_implementation_and_one_future_attempt",
+  "approved_at_utc": "2026-09-05T22:26:10Z",
+  "review_id": "m2-orbit-recovery-002-review",
+  "review_bundle_id": "m2-orbit-recovery-002-review-bundle",
+  "review_bundle_manifest_sha256": "6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5",
+  "proposal_ref": "contracts/milestone-002-orbit-recovery-002-proposal.json",
+  "proposal_sha256": "d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8",
+  "review_contract_ref": "reviews/m2-orbit-recovery-002/review-contract.json",
+  "review_contract_sha256": "1b0da1577a24c9323e529ac5fd58cafb7f15ccefc96f97df1964ddd751dde261",
+  "review_reconciliation_ref": "records/source-gates/m2-orbit-recovery-002-review-reconciliation.json",
+  "review_reconciliation_sha256": "b289cd6486ea819c22823fba986702c6e3b353171bff87bc437a67c6bfa0e3ab",
+  "locked_response_sha256": "b55b78c387b5df39f1be62e5124e74a3050a906fac6f67e4e0228bfe6a0f21b6",
+  "lock_receipt_sha256": "d17c9ae04b50256b5d45f031a80ccc38014e9e3d7cf5a25b9c610ca974d108bc",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "authorized_recovery": {
+    "source_id": "M2-ORB-001",
+    "provider_product_id": "d4fdc474-0069-459b-9534-b5999dec5aab",
+    "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+    "required_new_attempt_namespace": "m2-orb-001-recovery-001",
+    "restart_offset_bytes": 0,
+    "resume_partial": false,
+    "maximum_real_attempts": 1,
+    "automatic_retry_authorized": false
+  },
+  "authorized_next_actions": [
+    "implement and validate a separate recovery-only worker for the exact M2-ORB-001 source",
+    "publish that implementation and require successful public CI before any real access",
+    "perform one fresh no-payload preflight, then one fresh byte-zero transfer attempt only for exact M2-ORB-001 through a new exclusive attempt path",
+    "verify and promote only that file if every authority, route-readiness, rights, identity, size, checksum, XML, OSV, validity, path, and custody control passes"
+  ],
+  "does_not_authorize": [
+    "request M2-ORB-002, M2-ORB-003, or M2-ORB-004",
+    "delete, rewrite, hide, or reuse the retained failed attempt or events",
+    "expose, log, file-store, or environment-store an owner credential or token",
+    "accept terms, change an account or MFA, incur cost, or use a paid route",
+    "change an orbit provider UUID, filename, type, validity interval, scene binding, destination, or approved manifest",
+    "perform automatic retry, substitute AUX_POEORB, apply orbit data, convert DEM data, decode radar pixels, create a baseline, analyze change, attribute cause, or publish a scientific result"
+  ],
+  "human_decisions_fabricated": false
+}

@@ -6,7 +6,7 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts, both earlier incomplete `M1-SRC-004` partials remain retained, and no orbit payload byte is in custody
 - **Long-term goal:** Active
-- **Checkpoints:** primary `M2-ORBIT-RECOVERY-002-REVIEW`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`; the old orbit-recovery packet remains stale, unapproved evidence
+- **Checkpoints:** primary orbit recovery-002 implementation publication pending; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`; the old orbit-recovery packet remains stale, unapproved evidence
 
 ## Purpose
 
