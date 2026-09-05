@@ -70,6 +70,10 @@ OPTICAL_PIXEL_RECOVERY_TERMINAL_CHECKPOINT = {
     "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001",
     "next_action": "Review the reconciled terminal BLOCK from optical-pixel-readiness-recovery-001 and choose a separately scoped path forward. Do not retry, change thresholds, substitute dates or sources, or begin baseline or change analysis under the consumed recovery authority.",
 }
+RADAR_FIRST_PATH_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-FIRST-PATH-001-REVIEW",
+    "next_action": "Review M2 radar-first path bundle SHA-256 5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad and proposal SHA-256 ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77; approve, revise, or defer the control-only route split. No pixel, orbit, DEM, source-substitution, baseline, change, or scientific action is authorized before an attested decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -330,6 +334,43 @@ def current_optical_pixel_recovery_terminal(root: Path, state_counts: dict[str, 
     )
 
 
+def current_radar_first_path_review_required(root: Path, state_counts: dict[str, int]) -> bool:
+    if not current_optical_pixel_recovery_terminal(root, state_counts):
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        proposal = load(root / "contracts/milestone-002-radar-first-path-001-proposal.json")
+        bundle = load(root / "reviews/m2-radar-first-path-001/review-bundle.json")
+        contract = load(root / "reviews/m2-radar-first-path-001/review-contract.json")
+        blank = load(root / "reviews/m2-radar-first-path-001/blank-response.json")
+        readiness = load(root / "records/readiness/m2-radar-first-path-001-review-readiness.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
+    bundle_sha = "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad"
+    proposal_sha = "ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77"
+    responses = blank.get("responses", [])
+    return bool(
+        proposal.get("status") == "proposed_not_authorized"
+        and proposal.get("recommended_decision") == "approve_radar_first_control_path"
+        and bundle.get("candidate_identity") == f"M2-RADAR-FIRST-PATH-001-PROPOSAL-SHA256:{proposal_sha}"
+        and contract.get("review_bundle", {}).get("manifest_sha256") == bundle_sha
+        and review.get("status") == "ready"
+        and review.get("human_gate") is True
+        and review.get("gates", {}).get("proposal_sha256") == proposal_sha
+        and review.get("gates", {}).get("review_bundle_sha256") == bundle_sha
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and review.get("gates", {}).get("control_amendment_authorized") is False
+        and blank.get("completed") is False
+        and blank.get("reviewer", {}).get("attestation") is False
+        and len(responses) == 1
+        and responses[0].get("decision") is None
+        and readiness.get("status") == "pass_ready_owner_review_zero_decisions"
+        and readiness.get("review", {}).get("ready_for_handoff") is True
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -374,7 +415,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_optical_pixel_recovery_terminal(ROOT, progress["state_counts"]):
+        if current_radar_first_path_review_required(ROOT, progress["state_counts"]):
+            checkpoint = dict(RADAR_FIRST_PATH_REVIEW_CHECKPOINT)
+        elif current_optical_pixel_recovery_terminal(ROOT, progress["state_counts"]):
             checkpoint = dict(OPTICAL_PIXEL_RECOVERY_TERMINAL_CHECKPOINT)
         elif current_optical_pixel_recovery_execution_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(OPTICAL_PIXEL_RECOVERY_EXECUTION_CHECKPOINT)

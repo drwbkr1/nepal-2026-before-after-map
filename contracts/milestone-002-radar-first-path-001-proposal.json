@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-FIRST-PATH-001-PROPOSAL",
+  "prepared_at_utc": "2026-09-05T20:31:25Z",
+  "status": "proposed_not_authorized",
+  "recommended_decision": "approve_radar_first_control_path",
+  "trigger": {
+    "analysis_ref": "records/readiness/m2-post-optical-route-analysis-001.json",
+    "analysis_sha256": "19672e1d646b5ee6131f57c99710c2483b9deb17743f833dd662edaa8afd128e",
+    "optical_terminal_status": "block",
+    "optical_recovery_authority_consumed": true
+  },
+  "proposed_bounded_actions": [
+    "retain optical-pixel-readiness real-001 as terminal INVALID and recovery-001 as terminal BLOCK with no retry, tuning, date change, or source substitution",
+    "amend only the M2 control graph so optical and radar readiness are represented as separate evidence branches while aggregate M2-VERIFY remains deferred",
+    "replace the obsolete full-M2-VERIFY prerequisite for any future orbit recovery with exact radar source custody, radar header readiness, and existing orbit-amendment approval prerequisites",
+    "preserve the current unapproved orbit recovery proposal and bundle as stale evidence and prepare a new hash-bound corrected orbit recovery review with zero human decisions",
+    "retain the existing DEM terrain-result and vertical-datum reviews as independent unresolved human gates before any radar terrain correction",
+    "update project controls, documentation, tests, and public control-only CI evidence for this dependency correction"
+  ],
+  "future_sequence_after_control_amendment": [
+    "obtain separate owner decisions on the existing DEM terrain-result and vertical-datum reviews",
+    "obtain a separate owner decision on the corrected one-file orbit recovery review",
+    "only after DEM and orbit prerequisites pass, prepare a separate radar pixel-readiness proposal and review"
+  ],
+  "does_not_authorize": [
+    "any optical retry, threshold change, alternate date search, date substitution, or source substitution",
+    "acceptance of terms, credential entry, token handling, software installation, UAC approval, or account action",
+    "DEM conversion, vertical transformation, or promotion to radar-ready",
+    "orbit catalogue access, download, verification, application, retry, or precise-orbit substitution",
+    "Sentinel-1 measurement-pixel decoding or any real radar pixel-readiness attempt",
+    "baseline processing, change rasters or polygons, interpretation, attribution, emergency guidance, or scientific publication"
+  ],
+  "decision_domain": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "attestation_required": true
+}

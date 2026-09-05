@@ -166,7 +166,9 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [],
+    "proposed_amendments": [
+      "contracts/milestone-002-radar-first-path-001-proposal.json"
+    ],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json",
@@ -339,9 +341,9 @@
         "authority_ref": "records/source-gates/m2-sentinel-recovery-002-approval.json"
       },
       {
-        "unit_id": "M2-ORBIT-RECOVERY",
-        "reason": "The retained M2-ORB-001 attempt is terminal, automatic retry is false, and the attempt crossed the active milestone dependency under a stale regression-test assumption.",
-        "authority_ref": "reviews/m2-orbit-recovery/review-contract.json"
+        "unit_id": "M2-RADAR-FIRST-PATH-001-REVIEW",
+        "reason": "Records the normative owner choice required to preserve the terminal optical block and correct the aggregate dependency without releasing radar execution.",
+        "authority_ref": "reviews/m2-radar-first-path-001/review-contract.json"
       },
       {
         "unit_id": "M2-RADAR-INPUT-LABEL-AMEND",
@@ -367,10 +369,10 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001",
+    "checkpoint_id": "M2-RADAR-FIRST-PATH-001-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Review the reconciled terminal BLOCK from optical-pixel-readiness-recovery-001 and choose a separately scoped path forward. Do not retry, change thresholds, substitute dates or sources, or begin baseline or change analysis under the consumed recovery authority."
+    "next_action": "Review M2 radar-first path bundle SHA-256 5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad and proposal SHA-256 ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77; approve, revise, or defer the control-only route split. No pixel, orbit, DEM, source-substitution, baseline, change, or scientific action is authorized before an attested decision."
   },
   "parallel_checkpoints": [
     {
@@ -382,11 +384,6 @@
       "checkpoint_id": "M2-DEM-TERRAIN-RESULT-REVIEW",
       "authority_ref": "reviews/m2-dem-terrain-result/review-contract.json",
       "next_action": "Review bundle SHA-256 834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5 and approve, revise, or defer the terrain-only result; approval releases no vertical, radar, or scientific action."
-    },
-    {
-      "checkpoint_id": "M2-ORBIT-ACQUISITION-REVIEW",
-      "authority_ref": "reviews/m2-orbit-recovery/review-contract.json",
-      "next_action": "Review M2 orbit recovery bundle SHA-256 df5aa9d0d03f8ee30a5cd74b91f74a88c83a525e762c22b0bd2b6773ccb5bc6b and proposal SHA-256 ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a; approve, revise, or defer one fresh M2-ORB-001 recovery that remains blocked until the full M2-VERIFY unit is complete."
     }
   ]
 }

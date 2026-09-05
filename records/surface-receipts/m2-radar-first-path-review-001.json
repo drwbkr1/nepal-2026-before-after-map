@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-FIRST-PATH-001-REVIEW-SURFACE",
+  "verified_at_utc": "2026-09-05T20:31:25Z",
+  "status": "pass_blank_review_surface",
+  "render": {
+    "path": "docs/assets/m2-radar-first-path-review-001.png",
+    "sha256": "8606209b8f88d4499c5d00ab489f8ca5721fa5d789a4c66fa15eb54ddf0833c1",
+    "human_decision_count": 0
+  },
+  "assertions": {
+    "proposal_sha256": "ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77",
+    "recommended_route_visible": true,
+    "control_amendment_authorized": false,
+    "radar_pixel_readiness_authorized": false,
+    "real_product_pixels_read": false
+  }
+}

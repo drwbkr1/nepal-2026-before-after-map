@@ -1,0 +1,45 @@
+{
+  "contract_version": "human-review-contract-v1",
+  "template": false,
+  "review_id": "m2-radar-first-path-001-review",
+  "response_schema_version": "nepal-m2-radar-first-path-001-response-v1",
+  "workflow_authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
+    "authorized_action_classes": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ],
+    "verified_at_utc": "2026-09-05T20:31:25Z",
+    "expires_at_utc": null,
+    "review_required": true,
+    "lock_authorized": true,
+    "reconcile_authorized": true,
+    "post_review_actions": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ]
+  },
+  "review_bundle": {
+    "bundle_id": "m2-radar-first-path-001-review-bundle",
+    "manifest_sha256": "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad",
+    "candidate_identity": "M2-RADAR-FIRST-PATH-001-PROPOSAL-SHA256:ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77",
+    "rendered_surface_verified": true
+  },
+  "allowed_decisions": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "required_attestation": true,
+  "max_notes_length": 2000,
+  "hash_prefix_length": 16,
+  "items": [
+    {
+      "item_id": "M2-RADAR-FIRST-PATH-001",
+      "evidence_sha256": "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad"
+    }
+  ]
+}

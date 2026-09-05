@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-radar-first-path-001-review-bundle",
+  "review_id": "m2-radar-first-path-001-review",
+  "authority_ref": "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
+  "candidate_identity": "M2-RADAR-FIRST-PATH-001-PROPOSAL-SHA256:ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-radar-first-path-review-001.png",
+      "sha256": "8606209b8f88d4499c5d00ab489f8ca5721fa5d789a4c66fa15eb54ddf0833c1",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-first-path-review-001.json",
+          "sha256": "5b7fff36c20407f56547ea217920b8eeb9dc1ae4eed3ddd3dee815efce16c975"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_RADAR_FIRST_PATH_REVIEW_001.md",
+      "sha256": "ee2100ed3ead9f14cb300a1343c03e2cbb616f0000f31e6435b771c703ef9abe",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "proposal",
+      "path": "contracts/milestone-002-radar-first-path-001-proposal.json",
+      "sha256": "ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77",
+      "role": "candidate_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "route-analysis",
+      "path": "records/readiness/m2-post-optical-route-analysis-001.json",
+      "sha256": "19672e1d646b5ee6131f57c99710c2483b9deb17743f833dd662edaa8afd128e",
+      "role": "live_fact_reconciliation",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "review-preflight",
+      "path": "records/readiness/m2-radar-first-path-001-review-preflight.json",
+      "sha256": "9d24714c7915ea2a1030f9eccc211b5d5ae90e186a5caa673f1957b26f335439",
+      "role": "zero_authority_preflight",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "optical-terminal-receipt",
+      "path": "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json",
+      "sha256": "9ffae2e589700adec07373325e3d35d6ee8ccf5bc3a5d66da5fe7e6639c406b5",
+      "role": "terminal_observation",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "optical-terminal-reconciliation",
+      "path": "records/readiness/m2-optical-pixel-recovery-001-reconciliation.json",
+      "sha256": "445adfc716c97ef9122f699c28cb8193924c3863159cc91de511e56b72f7fb9f",
+      "role": "terminal_custody_and_authority_reconciliation",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "full-header-reconciliation",
+      "path": "records/readiness/m2-full-header-readiness-reconciliation.json",
+      "sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1",
+      "role": "independent_route_input_readiness",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "route-independence-contract",
+      "path": "contracts/milestone-002-materialization-pixel-readiness-proposal.json",
+      "sha256": "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c",
+      "role": "predeclared_route_independence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "stale-orbit-recovery-proposal",
+      "path": "contracts/milestone-002-orbit-recovery-proposal.json",
+      "sha256": "ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a",
+      "role": "conflicting_unapproved_prerequisite",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "dem-vertical-review-contract",
+      "path": "reviews/m2-dem-vertical-datum/review-contract.json",
+      "sha256": "1227dc4934d6ba22498f86283060f2674474f5ab969c50a507fc0729ebc3c8b6",
+      "role": "independent_pending_human_gate",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "dem-terrain-review-contract",
+      "path": "reviews/m2-dem-terrain-result/review-contract.json",
+      "sha256": "96da5c649ef64c7f595649ffbfd908744af34ccb9d2bf7ad24d4da33213f1075",
+      "role": "independent_pending_human_gate",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "any optical retry, threshold change, alternate date search, date substitution, or source substitution",
+    "acceptance of terms, credential entry, token handling, software installation, UAC approval, or account action",
+    "DEM conversion, vertical transformation, or promotion to radar-ready",
+    "orbit catalogue access, download, verification, application, retry, or precise-orbit substitution",
+    "Sentinel-1 measurement-pixel decoding or any real radar pixel-readiness attempt",
+    "baseline processing, change rasters or polygons, interpretation, attribution, emergency guidance, or scientific publication"
+  ]
+}

@@ -1,12 +1,12 @@
 # Current status
 
-- **State:** M1 complete; M2 active with all eight exact Sentinel products materialized by identity, both full-cohort header routes passed, and the single optical pixel attempt terminal `INVALID` before metrics
+- **State:** M1 complete; M2 active with all eight exact Sentinel products materialized by identity, both full-cohort header routes passed, optical real-001 terminal `INVALID`, and optical recovery-001 terminal `BLOCK`
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts, both earlier incomplete `M1-SRC-004` partials remain retained, and no orbit payload byte is in custody
 - **Long-term goal:** Active
-- **Checkpoints:** terminal `M2-OPTICAL-PIXEL-RECOVERY-001` review; dependent `M2-ORBIT-ACQUISITION-REVIEW`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
+- **Checkpoints:** primary `M2-RADAR-FIRST-PATH-001-REVIEW`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`; the old orbit-recovery packet is preserved but no longer actionable
 
 ## Purpose
 
@@ -59,6 +59,8 @@ The approved materialization and input-readiness sequence is complete. All five 
 The only authorized optical pixel attempt, `optical-pixel-readiness-real-001`, read the first real SCL raster and stopped with `KeyError: 'xmin'` because the production grid stores bounds inside `analysis_grid.extent`. It created only `started.json` and `failure.json`; no QA raster, metrics, AOI result, mask result, registration result, baseline, or change evidence exists. Reconciliation SHA-256 `0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a` fixes the attempt count at one and keeps automatic retry false.
 
 The owner approved recovery proposal SHA-256 `96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da` and review bundle SHA-256 `d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2`. Ten portable tests, ArcGIS Pro 3.7.1 synthetic receipt SHA-256 `34de82e63f7bb6b07f5925372cba69a7ca2aab5e129d6f8950852ffda23314a8`, implementation commit `395b63e1bd5c53a39ca3e2601768ba5a00f4bcf4`, public CI run `33989213698`, and final no-pixel preflight all passed before one recovery invocation. The result is terminal `BLOCK`: source-AOI usable fraction is 0.063252, upper-corridor usable fraction is 0.256403, and registration is `DEFER` with 20 accepted control pairs. Receipt SHA-256 `9ffae2e589700adec07373325e3d35d6ee8ccf5bc3a5d66da5fe7e6639c406b5` and reconciliation SHA-256 `445adfc716c97ef9122f699c28cb8193924c3863159cc91de511e56b72f7fb9f` preserve the exact result. Radar pixel processing, retries, threshold or source changes, baseline, change analysis, and scientific publication remain unauthorized.
+
+The predeclared optical and radar routes are independent, but the old blank orbit-recovery proposal requires aggregate `M2-VERIFY` completion. That condition cannot pass while the optical branch is terminal `BLOCK`, so the orbit packet is preserved as stale rather than presented as executable. A control-only radar-first review is now ready: bundle SHA-256 `5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad` binds proposal SHA-256 `ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77`. It contains zero decisions and authorizes nothing. Approval would only split route-specific controls, retain the optical result, and prepare a corrected zero-decision orbit review; DEM decisions, orbit acquisition, radar pixels, baselines, and change analysis remain separately gated.
 
 ## Sentinel execution history
 

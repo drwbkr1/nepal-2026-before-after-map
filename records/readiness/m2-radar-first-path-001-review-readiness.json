@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-FIRST-PATH-001-REVIEW-READINESS",
+  "verified_at_utc": "2026-09-05T20:31:25Z",
+  "status": "pass_ready_owner_review_zero_decisions",
+  "bindings": {
+    "proposal_sha256": "ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77",
+    "analysis_sha256": "19672e1d646b5ee6131f57c99710c2483b9deb17743f833dd662edaa8afd128e",
+    "preflight_sha256": "9d24714c7915ea2a1030f9eccc211b5d5ae90e186a5caa673f1957b26f335439",
+    "review_surface_sha256": "8606209b8f88d4499c5d00ab489f8ca5721fa5d789a4c66fa15eb54ddf0833c1",
+    "surface_receipt_sha256": "5b7fff36c20407f56547ea217920b8eeb9dc1ae4eed3ddd3dee815efce16c975",
+    "review_bundle_sha256": "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad",
+    "review_contract_sha256": "872920524101856d3bcd1b964963ba9ad89118dc56a6be65849ef2432b226382",
+    "blank_response_sha256": "5e2a0610c110bdbf71ffc4f6e28f21728b1d27f3a1dc85b9286c2ce2fa164a15"
+  },
+  "review": {
+    "human_decision_count": 0,
+    "attestation": false,
+    "ready_for_handoff": true
+  },
+  "assertions": {
+    "control_amendment_authorized": false,
+    "orbit_recovery_authorized": false,
+    "dem_action_authorized": false,
+    "radar_pixel_readiness_authorized": false,
+    "real_product_pixels_read_during_preparation": false
+  }
+}

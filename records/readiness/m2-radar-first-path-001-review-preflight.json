@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-FIRST-PATH-001-REVIEW-PREFLIGHT",
+  "observed_at_utc": "2026-09-05T20:31:25Z",
+  "status": "pass_review_ready_no_control_amendment_authority",
+  "bindings": {
+    "proposal_sha256": "ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77",
+    "analysis_sha256": "19672e1d646b5ee6131f57c99710c2483b9deb17743f833dd662edaa8afd128e",
+    "optical_receipt_sha256": "9ffae2e589700adec07373325e3d35d6ee8ccf5bc3a5d66da5fe7e6639c406b5",
+    "optical_reconciliation_sha256": "445adfc716c97ef9122f699c28cb8193924c3863159cc91de511e56b72f7fb9f",
+    "full_header_reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1",
+    "stale_orbit_proposal_sha256": "ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a"
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "control_amendment_authorized": false,
+    "orbit_recovery_authorized": false,
+    "dem_action_authorized": false,
+    "radar_pixel_readiness_authorized": false,
+    "optical_alternate_route_authorized": false,
+    "real_product_pixels_read_during_preparation": false,
+    "network_requests_performed": false
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-POST-OPTICAL-ROUTE-ANALYSIS-001",
+  "observed_at_utc": "2026-09-05T20:31:25Z",
+  "status": "needs_owner_route_decision",
+  "live_facts": {
+    "active_milestone_ref": "contracts/milestone-002.json",
+    "active_milestone_sha256_at_observation": "eb0947e1335e5e58544b8afc9e6eea78f0eeb95e632f653916902d7942bfefc8",
+    "optical_recovery_receipt_ref": "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json",
+    "optical_recovery_receipt_sha256": "9ffae2e589700adec07373325e3d35d6ee8ccf5bc3a5d66da5fe7e6639c406b5",
+    "optical_recovery_reconciliation_ref": "records/readiness/m2-optical-pixel-recovery-001-reconciliation.json",
+    "optical_recovery_reconciliation_sha256": "445adfc716c97ef9122f699c28cb8193924c3863159cc91de511e56b72f7fb9f",
+    "full_header_reconciliation_ref": "records/readiness/m2-full-header-readiness-reconciliation.json",
+    "full_header_reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1",
+    "predeclared_route_independence_ref": "contracts/milestone-002-materialization-pixel-readiness-proposal.json",
+    "predeclared_route_independence_sha256": "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c",
+    "orbit_recovery_proposal_ref": "contracts/milestone-002-orbit-recovery-proposal.json",
+    "orbit_recovery_proposal_sha256": "ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a"
+  },
+  "findings": [
+    "the optical recovery is terminal BLOCK and its one-invocation authority is consumed",
+    "all eight exact Sentinel products are in verified materialized custody and both route header inspections passed",
+    "the approved materialization proposal declared optical and radar route independence",
+    "the unapproved orbit recovery proposal requires full M2-VERIFY completion",
+    "full M2-VERIFY cannot pass while the optical route is terminal BLOCK, so that prerequisite deadlocks the otherwise independent radar route"
+  ],
+  "reconciliation_outcome": "drift_requires_normative_path_choice",
+  "minimum_safe_delta": "retain optical BLOCK, split route-specific readiness controls, and supersede only the unapproved stale orbit recovery packet before any radar execution is considered",
+  "assertions": {
+    "human_decision_count": 0,
+    "credentials_read": false,
+    "network_requests_performed": false,
+    "real_product_pixels_read": false,
+    "external_data_mutated": false
+  }
+}

@@ -128,7 +128,7 @@ class M2DemActivationTests(unittest.TestCase):
         self.assertEqual(set(units["M2-BASELINE"]["depends_on"]), {"M2-VERIFY", "M2-DEM-VERIFY", "M2-ORBIT-APPLY"})
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            [],
+            ["contracts/milestone-002-radar-first-path-001-proposal.json"],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -175,8 +175,14 @@ class M2DemActivationTests(unittest.TestCase):
             (unit for unit in self.milestone["units"] if unit["id"] == "M2-OPTICAL-PIXEL-RECOVERY-001"),
             None,
         )
+        radar_first_path_review = next(
+            (unit for unit in self.milestone["units"] if unit["id"] == "M2-RADAR-FIRST-PATH-001-REVIEW"),
+            None,
+        )
         expected_primary_checkpoint = (
-            "M2-OPTICAL-PIXEL-RECOVERY-001"
+            "M2-RADAR-FIRST-PATH-001-REVIEW"
+            if radar_first_path_review is not None and radar_first_path_review.get("status") == "ready"
+            else "M2-OPTICAL-PIXEL-RECOVERY-001"
             if optical_recovery is not None and optical_recovery.get("status") == "complete"
             else "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION"
             if optical_recovery_implementation is not None and optical_recovery_implementation.get("status") == "in_progress"
@@ -210,10 +216,9 @@ class M2DemActivationTests(unittest.TestCase):
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], expected_primary_checkpoint)
         self.assertEqual(self.profile["parallel_checkpoints"][0]["checkpoint_id"], expected_checkpoint)
         self.assertEqual(self.profile["parallel_checkpoints"][1]["checkpoint_id"], "M2-DEM-TERRAIN-RESULT-REVIEW")
-        self.assertEqual(self.profile["parallel_checkpoints"][2]["checkpoint_id"], "M2-ORBIT-ACQUISITION-REVIEW")
         self.assertEqual(
             self.goal["parallel_checkpoints"],
-            [expected_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-ACQUISITION-REVIEW"],
+            [expected_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW"],
         )
 
     def test_activation_receipt_preserves_published_outputs_and_claim_boundary(self) -> None:

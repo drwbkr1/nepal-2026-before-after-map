@@ -21,6 +21,7 @@ from derive_m2_acquisition_checkpoint import (
     current_optical_pixel_recovery_implementation_pending,
     current_optical_pixel_recovery_review_required,
     current_optical_pixel_recovery_terminal,
+    current_radar_first_path_review_required,
     derive_checkpoint,
 )
 from record_m2_sentinel_continuation_001_implementation_readiness import IMPLEMENTATION_FILES as CONTINUATION_001_IMPLEMENTATION_FILES
@@ -103,6 +104,18 @@ REQUIRED = [
     "records/readiness/m2-optical-pixel-recovery-001-final-preflight.json",
     "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json",
     "records/readiness/m2-optical-pixel-recovery-001-reconciliation.json",
+    "records/readiness/m2-post-optical-route-analysis-001.json",
+    "contracts/milestone-002-radar-first-path-001-proposal.json",
+    "records/readiness/m2-radar-first-path-001-review-preflight.json",
+    "docs/M2_RADAR_FIRST_PATH_REVIEW_001.md",
+    "docs/assets/m2-radar-first-path-review-001.png",
+    "records/surface-receipts/m2-radar-first-path-review-001.json",
+    "reviews/m2-radar-first-path-001/review-bundle.json",
+    "reviews/m2-radar-first-path-001/review-contract.json",
+    "reviews/m2-radar-first-path-001/blank-response.json",
+    "records/readiness/m2-radar-first-path-001-review-readiness.json",
+    "scripts/prepare_m2_radar_first_path_review.py",
+    "tests/test_m2_radar_first_path_review_001.py",
     "scripts/activate_m2_optical_pixel_recovery_001.py",
     "scripts/optical_pixel_recovery_core_001.py",
     "scripts/run_m2_optical_pixel_readiness_recovery_001.py",
@@ -899,6 +912,14 @@ def main() -> None:
     optical_pixel_recovery_final_preflight = json.loads((ROOT / "records/readiness/m2-optical-pixel-recovery-001-final-preflight.json").read_text(encoding="utf-8"))
     optical_pixel_recovery_real = json.loads((ROOT / "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json").read_text(encoding="utf-8"))
     optical_pixel_recovery_reconciliation = json.loads((ROOT / "records/readiness/m2-optical-pixel-recovery-001-reconciliation.json").read_text(encoding="utf-8"))
+    radar_first_path_analysis = json.loads((ROOT / "records/readiness/m2-post-optical-route-analysis-001.json").read_text(encoding="utf-8"))
+    radar_first_path_proposal = json.loads((ROOT / "contracts/milestone-002-radar-first-path-001-proposal.json").read_text(encoding="utf-8"))
+    radar_first_path_preflight = json.loads((ROOT / "records/readiness/m2-radar-first-path-001-review-preflight.json").read_text(encoding="utf-8"))
+    radar_first_path_surface = json.loads((ROOT / "records/surface-receipts/m2-radar-first-path-review-001.json").read_text(encoding="utf-8"))
+    radar_first_path_bundle = json.loads((ROOT / "reviews/m2-radar-first-path-001/review-bundle.json").read_text(encoding="utf-8"))
+    radar_first_path_contract = json.loads((ROOT / "reviews/m2-radar-first-path-001/review-contract.json").read_text(encoding="utf-8"))
+    radar_first_path_blank = json.loads((ROOT / "reviews/m2-radar-first-path-001/blank-response.json").read_text(encoding="utf-8"))
+    radar_first_path_readiness = json.loads((ROOT / "records/readiness/m2-radar-first-path-001-review-readiness.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
     remote_project_name = expected_remote.rstrip("/").rsplit("/", 1)[-1].removesuffix(".git")
@@ -906,8 +927,10 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must expose no pending amendment after optical pixel recovery approval")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
+        "contracts/milestone-002-radar-first-path-001-proposal.json"
+    ]:
+        fail("project profile must expose only the pending radar-first path amendment")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -1086,10 +1109,18 @@ def main() -> None:
         or "bounded nested-grid correction" not in optical_pixel_recovery_review_gate.get("reason", "")
     ):
         fail("project profile must bind optical pixel recovery to its exact approval")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile pending-amendment list must be empty after optical pixel recovery approval")
-    if profile_gates.get("M2-ORBIT-RECOVERY", {}).get("authority_ref") != "reviews/m2-orbit-recovery/review-contract.json":
-        fail("project profile must expose the exact orbit recovery human-review gate")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
+        "contracts/milestone-002-radar-first-path-001-proposal.json"
+    ]:
+        fail("project profile must expose the exact pending radar-first path amendment")
+    radar_first_path_gate = profile_gates.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
+    if (
+        radar_first_path_gate.get("authority_ref") != "reviews/m2-radar-first-path-001/review-contract.json"
+        or "terminal optical block" not in radar_first_path_gate.get("reason", "")
+    ):
+        fail("project profile must expose the exact radar-first path human-review gate")
+    if "M2-ORBIT-RECOVERY" in profile_gates:
+        fail("stale orbit recovery review must not remain an actionable human gate")
     for approved_unit in ("M2-ORBIT-AMEND", "M2-ORBIT-PREFLIGHT", "M2-ORBIT-ACQUIRE", "M2-ORBIT-VERIFY", "M2-ORBIT-APPLY"):
         if profile_gates.get(approved_unit, {}).get("authority_ref") != "records/source-gates/m2-orbit-amendment-approval.json":
             fail(f"project profile must bind {approved_unit} to the exact orbit amendment approval")
@@ -1106,11 +1137,6 @@ def main() -> None:
             "authority_ref": "reviews/m2-dem-terrain-result/review-contract.json",
             "next_action": "Review bundle SHA-256 834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5 and approve, revise, or defer the terrain-only result; approval releases no vertical, radar, or scientific action.",
         },
-        {
-            "checkpoint_id": "M2-ORBIT-ACQUISITION-REVIEW",
-            "authority_ref": "reviews/m2-orbit-recovery/review-contract.json",
-            "next_action": "Review M2 orbit recovery bundle SHA-256 df5aa9d0d03f8ee30a5cd74b91f74a88c83a525e762c22b0bd2b6773ccb5bc6b and proposal SHA-256 ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a; approve, revise, or defer one fresh M2-ORB-001 recovery that remains blocked until the full M2-VERIFY unit is complete.",
-        },
     ]:
         fail("project profile DEM parallel checkpoint differs")
     if goal.get("active_amendments") != [
@@ -1121,8 +1147,10 @@ def main() -> None:
         "records/source-gates/m2-sentinel-continuation-001-approval.json",
         "records/source-gates/m2-materialization-pixel-readiness-approval.json",
         "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
-    ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW", "M2-ORBIT-ACQUISITION-REVIEW"]:
+    ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW"]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
+    if goal.get("proposed_amendments") != ["contracts/milestone-002-radar-first-path-001-proposal.json"]:
+        fail("long-term goal must expose the pending radar-first path amendment")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -4544,13 +4572,19 @@ def main() -> None:
         materialization_pixel_review_approved
         and current_optical_pixel_recovery_terminal(ROOT, state_counts)
     )
+    radar_first_path_review_ready = bool(
+        optical_pixel_recovery_terminal
+        and current_radar_first_path_review_required(ROOT, state_counts)
+    )
     optical_pixel_recovery_history_present = bool(
         optical_pixel_recovery_review_ready
         or optical_pixel_recovery_implementation_pending
         or optical_pixel_recovery_execution_pending
         or optical_pixel_recovery_terminal
     )
-    if optical_pixel_recovery_terminal:
+    if radar_first_path_review_ready:
+        expected_checkpoint = "M2-RADAR-FIRST-PATH-001-REVIEW"
+    elif optical_pixel_recovery_terminal:
         expected_checkpoint = "M2-OPTICAL-PIXEL-RECOVERY-001"
     elif optical_pixel_recovery_execution_pending:
         expected_checkpoint = "M2-OPTICAL-PIXEL-RECOVERY-001"
@@ -4588,6 +4622,7 @@ def main() -> None:
     expected_optical_pixel_recovery_implementation_next_action = "Publish the exact optical pixel recovery-001 implementation and require fresh successful public CI; do not run the final no-pixel preflight or recovery attempt before the public gate passes."
     expected_optical_pixel_recovery_execution_next_action = "Record the exact passing public-CI gate, run the final no-pixel preflight, and only if it passes invoke optical-pixel-readiness-recovery-001 once with no automatic retry."
     expected_optical_pixel_recovery_terminal_next_action = "Review the reconciled terminal BLOCK from optical-pixel-readiness-recovery-001 and choose a separately scoped path forward. Do not retry, change thresholds, substitute dates or sources, or begin baseline or change analysis under the consumed recovery authority."
+    expected_radar_first_path_review_next_action = "Review M2 radar-first path bundle SHA-256 5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad and proposal SHA-256 ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77; approve, revise, or defer the control-only route split. No pixel, orbit, DEM, source-substitution, baseline, change, or scientific action is authorized before an attested decision."
     acquire_unit = m2_units.get("M2-ACQUIRE", {})
     if materialization_pixel_review_ready or materialization_pixel_review_approved:
         proposal_sha = "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c"
@@ -4939,6 +4974,44 @@ def main() -> None:
                     or recovery_execution_unit.get("gates", {}).get("reconciliation_sha256") != sha256("records/readiness/m2-optical-pixel-recovery-001-reconciliation.json")
                 ):
                     fail("terminal optical pixel recovery result or reconciliation differs")
+        if radar_first_path_review_ready:
+            path_review_unit = m2_units.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
+            path_proposal_sha = "ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77"
+            path_bundle_sha = "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad"
+            if (
+                sha256("records/readiness/m2-post-optical-route-analysis-001.json") != "19672e1d646b5ee6131f57c99710c2483b9deb17743f833dd662edaa8afd128e"
+                or sha256("contracts/milestone-002-radar-first-path-001-proposal.json") != path_proposal_sha
+                or sha256("reviews/m2-radar-first-path-001/review-bundle.json") != path_bundle_sha
+                or radar_first_path_analysis.get("status") != "needs_owner_route_decision"
+                or radar_first_path_analysis.get("reconciliation_outcome") != "drift_requires_normative_path_choice"
+                or radar_first_path_analysis.get("assertions", {}).get("human_decision_count") != 0
+                or radar_first_path_analysis.get("assertions", {}).get("real_product_pixels_read") is not False
+                or radar_first_path_proposal.get("status") != "proposed_not_authorized"
+                or radar_first_path_proposal.get("recommended_decision") != "approve_radar_first_control_path"
+                or radar_first_path_bundle.get("candidate_identity") != f"M2-RADAR-FIRST-PATH-001-PROPOSAL-SHA256:{path_proposal_sha}"
+                or any(artifact.get("sha256") != sha256(artifact.get("path")) for artifact in radar_first_path_bundle.get("artifacts", []))
+                or radar_first_path_contract.get("review_bundle", {}).get("manifest_sha256") != path_bundle_sha
+                or radar_first_path_contract.get("items") != [{"item_id": "M2-RADAR-FIRST-PATH-001", "evidence_sha256": path_bundle_sha}]
+                or radar_first_path_blank.get("completed") is not False
+                or radar_first_path_blank.get("reviewer", {}).get("attestation") is not False
+                or radar_first_path_blank.get("responses") != [{"item_id": "M2-RADAR-FIRST-PATH-001", "evidence_sha256": path_bundle_sha, "decision": None, "notes": ""}]
+                or radar_first_path_preflight.get("status") != "pass_review_ready_no_control_amendment_authority"
+                or radar_first_path_preflight.get("assertions", {}).get("control_amendment_authorized") is not False
+                or radar_first_path_preflight.get("assertions", {}).get("radar_pixel_readiness_authorized") is not False
+                or radar_first_path_surface.get("status") != "pass_blank_review_surface"
+                or radar_first_path_readiness.get("status") != "pass_ready_owner_review_zero_decisions"
+                or radar_first_path_readiness.get("review", {}).get("human_decision_count") != 0
+                or path_review_unit.get("status") != "ready"
+                or path_review_unit.get("human_gate") is not True
+                or path_review_unit.get("gates", {}).get("proposal_sha256") != path_proposal_sha
+                or path_review_unit.get("gates", {}).get("review_bundle_sha256") != path_bundle_sha
+                or path_review_unit.get("gates", {}).get("human_decision_count") != 0
+                or path_review_unit.get("gates", {}).get("control_amendment_authorized") is not False
+                or path_review_unit.get("gates", {}).get("orbit_recovery_authorized") is not False
+                or path_review_unit.get("gates", {}).get("dem_action_authorized") is not False
+                or path_review_unit.get("gates", {}).get("radar_pixel_readiness_authorized") is not False
+            ):
+                fail("M2 radar-first path review packet differs or releases unauthorized work")
         implementation_unit = m2_units.get("M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION", {})
         materialize_unit = m2_units.get("M2-MATERIALIZE-REMAINING", {})
         header_unit = m2_units.get("M2-FULL-INPUT-READINESS", {})
@@ -4974,7 +5047,12 @@ def main() -> None:
         implementation_unit = m2_units.get("M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION", {})
         implementation_gates = implementation_unit.get("gates", {})
         verify_unit = m2_units.get("M2-VERIFY", {})
-        if optical_pixel_recovery_terminal:
+        if radar_first_path_review_ready:
+            expected_materialized_source_count = 8
+            expected_materialization_state = "optical_pixel_recovery_001_terminal_block_radar_first_path_review_ready"
+            expected_verify_next_dependency = "M2-RADAR-FIRST-PATH-001-REVIEW"
+            expected_primary_next_action = expected_radar_first_path_review_next_action
+        elif optical_pixel_recovery_terminal:
             expected_materialized_source_count = 8
             expected_materialization_state = "optical_pixel_recovery_001_terminal_block_no_retry"
             expected_verify_next_dependency = "M2-OPTICAL-PIXEL-RECOVERY-001"
@@ -7576,6 +7654,24 @@ def main() -> None:
         or optical_recovery_outcome_evidence.get("assertions", {}).get("automatic_retry_authorized") is not False
     ):
         fail("EVID-0092 terminal optical recovery evidence differs or overclaims")
+    radar_first_path_evidence = ledger_by_id.get("EVID-0093")
+    if (
+        not isinstance(radar_first_path_evidence, dict)
+        or radar_first_path_evidence.get("status") != "pass_blank_control_only_review_no_authority"
+        or radar_first_path_evidence.get("analysis_sha256") != sha256("records/readiness/m2-post-optical-route-analysis-001.json")
+        or radar_first_path_evidence.get("proposal_sha256") != sha256("contracts/milestone-002-radar-first-path-001-proposal.json")
+        or radar_first_path_evidence.get("review_bundle_sha256") != sha256("reviews/m2-radar-first-path-001/review-bundle.json")
+        or radar_first_path_evidence.get("review_contract_sha256") != sha256("reviews/m2-radar-first-path-001/review-contract.json")
+        or radar_first_path_evidence.get("blank_response_sha256") != sha256("reviews/m2-radar-first-path-001/blank-response.json")
+        or radar_first_path_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or radar_first_path_evidence.get("assertions", {}).get("control_amendment_authorized") is not False
+        or radar_first_path_evidence.get("assertions", {}).get("orbit_recovery_authorized") is not False
+        or radar_first_path_evidence.get("assertions", {}).get("dem_action_authorized") is not False
+        or radar_first_path_evidence.get("assertions", {}).get("radar_pixel_readiness_authorized") is not False
+        or radar_first_path_evidence.get("assertions", {}).get("optical_alternate_route_authorized") is not False
+        or radar_first_path_evidence.get("assertions", {}).get("real_product_pixels_read") is not False
+    ):
+        fail("EVID-0093 radar-first path review evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():

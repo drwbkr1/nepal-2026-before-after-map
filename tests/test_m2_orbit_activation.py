@@ -92,7 +92,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertEqual(unit_by_id["M2-ORBIT-APPLY"]["gates"]["dem_vertical_datum_gate"], "pending")
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            [],
+            ["contracts/milestone-002-radar-first-path-001-proposal.json"],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -109,7 +109,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         checkpoints = [item["checkpoint_id"] for item in self.profile["parallel_checkpoints"]]
         self.assertIn("M2-DEM-VERTICAL-DATUM-REVIEW", checkpoints)
         self.assertIn("M2-DEM-TERRAIN-RESULT-REVIEW", checkpoints)
-        self.assertIn("M2-ORBIT-ACQUISITION-REVIEW", checkpoints)
+        self.assertNotIn("M2-ORBIT-ACQUISITION-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-AMENDMENT-REVIEW", checkpoints)
         self.assertEqual(self.goal["parallel_checkpoints"], checkpoints)
 

@@ -614,7 +614,7 @@
         "m1_src_004_satisfied_by_recovery_002": true,
         "continuation_status": "succeeded_all_four",
         "materialized_source_count": 8,
-        "materialization_and_pixel_readiness": "optical_pixel_recovery_001_terminal_block_no_retry",
+        "materialization_and_pixel_readiness": "optical_pixel_recovery_001_terminal_block_radar_first_path_review_ready",
         "materialization_pixel_review_ref": "reviews/m2-materialization-pixel-readiness/review-contract.json",
         "materialization_pixel_review_bundle_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a",
         "materialization_pixel_approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
@@ -626,7 +626,10 @@
         "optical_pixel_real_001_reconciliation_ref": "records/readiness/m2-optical-pixel-real-001-reconciliation.json",
         "optical_pixel_real_001_reconciliation_sha256": "0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a",
         "optical_pixel_recovery_001_reconciliation_ref": "records/readiness/m2-optical-pixel-recovery-001-reconciliation.json",
-        "optical_pixel_recovery_001_reconciliation_sha256": "445adfc716c97ef9122f699c28cb8193924c3863159cc91de511e56b72f7fb9f"
+        "optical_pixel_recovery_001_reconciliation_sha256": "445adfc716c97ef9122f699c28cb8193924c3863159cc91de511e56b72f7fb9f",
+        "post_optical_route_analysis_ref": "records/readiness/m2-post-optical-route-analysis-001.json",
+        "post_optical_route_analysis_sha256": "19672e1d646b5ee6131f57c99710c2483b9deb17743f833dd662edaa8afd128e",
+        "radar_first_path_review_bundle_sha256": "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad"
       },
       "disposition": "defer",
       "retained_failures": [
@@ -648,7 +651,7 @@
         "decision_value": "block",
         "rationale": "All eight products and both header routes pass their limited gates, but the only approved optical recovery is terminal BLOCK for usable coverage and registration control sufficiency. A separately scoped owner decision is required before any alternate route."
       },
-      "next_dependency": "M2-OPTICAL-PIXEL-RECOVERY-001"
+      "next_dependency": "M2-RADAR-FIRST-PATH-001-REVIEW"
     },
     {
       "id": "M2-BASELINE",
@@ -1557,7 +1560,50 @@
         "decision_value": "block",
         "rationale": "The exact recovery completed once. AOI-SOURCE usable fraction was 0.063252, AOI-UPPER-CORRIDOR was 0.256403, and registration deferred with 20 accepted control pairs; the route is terminal BLOCK with no retry."
       },
-      "next_dependency": "M2-VERIFY"
+      "next_dependency": "M2-RADAR-FIRST-PATH-001-REVIEW"
+    },
+    {
+      "id": "M2-RADAR-FIRST-PATH-001-REVIEW",
+      "purpose": "Obtain an exact owner decision on the control-only route split after the terminal optical block.",
+      "depends_on": [
+        "M2-OPTICAL-PIXEL-RECOVERY-001"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "ready",
+      "inputs": [
+        "records/readiness/m2-post-optical-route-analysis-001.json",
+        "contracts/milestone-002-radar-first-path-001-proposal.json",
+        "reviews/m2-radar-first-path-001/review-bundle.json",
+        "reviews/m2-radar-first-path-001/review-contract.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-radar-first-path-001-review-reconciliation.json",
+        "records/source-gates/m2-radar-first-path-001-approval.json"
+      ],
+      "gates": {
+        "proposal_sha256": "ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77",
+        "review_bundle_sha256": "5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad",
+        "human_decision_count": 0,
+        "attestation": false,
+        "control_amendment_authorized": false,
+        "orbit_recovery_authorized": false,
+        "dem_action_authorized": false,
+        "radar_pixel_readiness_authorized": false,
+        "optical_alternate_route_authorized": false
+      },
+      "retained_failures": [
+        "records/readiness/m2-optical-pixel-real-001-reconciliation.json",
+        "records/readiness/m2-optical-pixel-recovery-001-reconciliation.json",
+        "contracts/milestone-002-orbit-recovery-proposal.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "awaiting_owner_decision",
+        "rationale": "Review preparation records the dependency conflict and creates no control amendment or downstream execution authority."
+      },
+      "next_dependency": null
     }
   ],
   "path_efficiency": {
@@ -1614,8 +1660,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-OPTICAL-PIXEL-RECOVERY-001",
-    "next_action": "Review the reconciled terminal BLOCK from optical-pixel-readiness-recovery-001 and choose a separately scoped path forward. Do not retry, change thresholds, substitute dates or sources, or begin baseline or change analysis under the consumed recovery authority.",
+    "current_checkpoint": "M2-RADAR-FIRST-PATH-001-REVIEW",
+    "next_action": "Review M2 radar-first path bundle SHA-256 5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad and proposal SHA-256 ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77; approve, revise, or defer the control-only route split. No pixel, orbit, DEM, source-substitution, baseline, change, or scientific action is authorized before an attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -1630,7 +1676,8 @@
       "Both exact real header inspections passed once without pixel reads; only the conditional optical pixel-readiness implementation is released, while radar pixels and all baseline or change actions remain gated.",
       "Optical pixel real-001 is terminal INVALID after reading the first SCL raster; it produced no QA metrics or derived raster and cannot be retried under current authority.",
       "Recovery-001 approval does not authorize preflight or real pixel access until the exact implementation passes fresh public CI; real-001 remains terminal INVALID and cannot be reused or retried.",
-      "Optical recovery-001 is terminal BLOCK after one invocation; its thresholds and exact pair cannot be tuned, retried, or substituted under the consumed authority."
+      "Optical recovery-001 is terminal BLOCK after one invocation; its thresholds and exact pair cannot be tuned, retried, or substituted under the consumed authority.",
+      "The old orbit-recovery review remains preserved but is not actionable because its full-M2-VERIFY prerequisite deadlocks the independent radar route; the radar-first path review authorizes no replacement or orbit request by itself."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
