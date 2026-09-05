@@ -337,7 +337,7 @@
         "continuation_attempt_count": 0,
         "continuation_payload_request_count": 0,
         "continuation_review": "prepared_zero_human_decisions",
-        "continuation_review_bundle_sha256": "018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192",
+        "continuation_review_bundle_sha256": "382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b",
         "continuation_proposal_sha256": "d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1",
         "continuation_authorized_now": false
       },
@@ -408,7 +408,7 @@
         "records/source-gates/m2-sentinel-continuation-001-review-reconciliation.json"
       ],
       "gates": {
-        "review_bundle_sha256": "018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192",
+        "review_bundle_sha256": "382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b",
         "proposal_sha256": "d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1",
         "human_decision_count": 0,
         "attestation": false,
@@ -958,7 +958,7 @@
   },
   "handoff": {
     "current_checkpoint": "M2-ACQUISITION-REVIEW",
-    "next_action": "Review exact Sentinel continuation-001 bundle 018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192 and proposal d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1; do not implement, request a token, or acquire another product before a completed owner decision.",
+    "next_action": "Review exact Sentinel continuation-001 bundle 382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b and proposal d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1; do not implement, request a token, or acquire another product before a completed owner decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",

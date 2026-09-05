@@ -92,6 +92,7 @@ REQUIRED = [
     "records/acquisition/sentinel-recovery-002-implementation-readiness.json",
     "records/acquisition/sentinel-recovery-002-publication-attempt-001-failure.json",
     "records/acquisition/sentinel-recovery-002-publication-gate.json",
+    "records/acquisition/sentinel-continuation-001-publication-attempt-001-failure.json",
     "records/acquisition/sentinel-recovery-002-activation.json",
     "records/acquisition/sentinel-recovery-002-final-preflight.json",
     "records/acquisition/recovery-attempts/m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
@@ -4197,7 +4198,7 @@ def main() -> None:
     ):
         fail(f"profile, goal, and milestone handoff must reconcile to {expected_checkpoint}")
     expected_recovery_next_action = "Complete and locally validate the exact recovery-002 implementation, publish the exact commit, and require successful public CI before activation, no-payload preflight, credential access, or transfer."
-    expected_continuation_next_action = "Review exact Sentinel continuation-001 bundle 018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192 and proposal d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1; do not implement, request a token, or acquire another product before a completed owner decision."
+    expected_continuation_next_action = "Review exact Sentinel continuation-001 bundle 382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b and proposal d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1; do not implement, request a token, or acquire another product before a completed owner decision."
     acquire_unit = m2_units.get("M2-ACQUIRE", {})
     if continuation_review_ready:
         gates = acquire_unit.get("gates", {})
@@ -4212,7 +4213,7 @@ def main() -> None:
             or gates.get("continuation_supervisor_status") != "failed_before_first_continuation_attempt"
             or gates.get("continuation_attempt_count") != 0
             or gates.get("continuation_payload_request_count") != 0
-            or gates.get("continuation_review_bundle_sha256") != "018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192"
+            or gates.get("continuation_review_bundle_sha256") != "382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b"
             or gates.get("continuation_proposal_sha256") != "d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1"
             or gates.get("continuation_authorized_now") is not False
             or gates.get("recovery_002_outcome_reconciliation_sha256") != sha256("records/acquisition/sentinel-recovery-002-supervisor-reconciliation-001.json")
@@ -6331,7 +6332,7 @@ def main() -> None:
     continuation_contract_ref = "reviews/m2-sentinel-continuation-001/review-contract.json"
     continuation_blank_ref = "reviews/m2-sentinel-continuation-001/blank-response.json"
     continuation_proposal_sha = "d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1"
-    continuation_bundle_sha = "018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192"
+    continuation_bundle_sha = "382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b"
     if sha256(continuation_proposal_ref) != continuation_proposal_sha or sha256(continuation_bundle_ref) != continuation_bundle_sha:
         fail("M2 continuation-001 proposal or review-bundle identity differs")
     continuation_contract = json.loads((ROOT / continuation_contract_ref).read_text(encoding="utf-8"))
@@ -6346,7 +6347,7 @@ def main() -> None:
         fail("M2 continuation-001 review contract or blank response differs")
 
     recovery_outcome_evidence = ledger_by_id.get("EVID-0082")
-    continuation_review_evidence = ledger_by_id.get("EVID-0083")
+    continuation_review_evidence = ledger_by_id.get("EVID-0084")
     if (
         not isinstance(recovery_outcome_evidence, dict)
         or recovery_outcome_evidence.get("reconciliation_sha256") != sha256("records/acquisition/sentinel-recovery-002-supervisor-reconciliation-001.json")
@@ -6367,7 +6368,7 @@ def main() -> None:
         or continuation_review_evidence.get("assertions", {}).get("continuation_transfer_authorized") is not False
         or continuation_review_evidence.get("assertions", {}).get("m1_src_004_transfer_authorized") is not False
     ):
-        fail("EVID-0083 continuation-001 review readiness differs or invents authority")
+        fail("EVID-0084 corrected continuation-001 review readiness differs or invents authority")
 
     violations = []
     for relative in tracked_files():

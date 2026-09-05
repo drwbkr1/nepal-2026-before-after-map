@@ -351,3 +351,11 @@
 **Reason:** The byte-zero recovery completed with exact length, local SHA-256, provider MD5, ZIP CRC, and required SAFE-member checks. The same supervisor then emitted a generic terminal failure before any `M1-SRC-005` attempt, event, staging path, destination, or payload request existed. Because its exception boundary did not retain a safe underlying category, the exact cause is unknown and cannot be reconstructed from later checks.
 
 **Status:** Outcome reconciliation SHA-256 `f806d86e6c956e648f4458f4710699d4480e2b0abfb2cf95e8777f3de281b3f4` updates the active intake to four promoted and four authorized products while preserving both failed partials and the failed supervisor terminal state. Continuation proposal SHA-256 `d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1` and review bundle SHA-256 `018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192` are ready with a blank, unattested response and zero decisions. No continuation implementation, token entry, payload request, retry, or pixel action is currently authorized.
+
+## D-058 - Preserve failed review publication and rebind canonical LF packet
+
+**Decision:** Retain failed public workflow run `33935109759` and commit `46aafc5249f7199308b46cb1d4c8375beecd84b5` as evidence. Supersede the unapproved CRLF-bound review identity from D-057 with canonical-LF review bundle SHA-256 `382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b`; proposal SHA-256 `d58706dc0961816191a76f420d993bdc28be8f140358dc1638f6cc937366e7b1` is unchanged.
+
+**Reason:** Git normalized three new review JSON files to LF on publication, so the first contract bound local CRLF bytes that did not exist in the public commit. Hash-bound review evidence must identify the public bytes exactly.
+
+**Status:** The corrected packet remains blank and unattested. This correction creates no implementation, credential, acquisition, retry, pixel, or scientific authority. Public CI must pass on the corrected commit before owner handoff.

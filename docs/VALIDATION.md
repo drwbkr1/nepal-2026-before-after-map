@@ -100,11 +100,13 @@ The current full repository suite passes 219 tests, and `scripts/check_project.p
 The single approved recovery-002 archive passed exact transfer and container checks, while the supervisor's later pre-attempt continuation failure remains separately retained. The active-intake validator now recognizes the versioned recovery receipt root, two-attempt append-only history, in-memory credential reference, and preserved original partial without weakening the original route. The checkpoint derivation also recognizes the exact blank continuation review instead of treating four promoted and four authorized assets as an unattended transfer state.
 
 - `python -m unittest discover -s tests -v`: 294 tests pass.
-- `python scripts/check_project.py`: 415 required files, JSON controls, and Git artifact boundaries pass.
+- `python scripts/check_project.py`: 416 required files, JSON controls, and Git artifact boundaries pass.
 - `validate_project_control.py`: valid with active inherited authority.
 - `validate_milestone.py`: valid; `M2-SENTINEL-CONTINUATION-001-REVIEW` is the sole ready human gate.
 - `review_response.py self-test`: pass.
-- `prepare_review_bundle.py`: bundle `018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192` is valid and ready for handoff with zero decisions.
+- `prepare_review_bundle.py`: bundle `382d2238b7d27269604cc07134edfa29c9a3464d2c7c3b65163ceccab35e3f9b` is valid and ready for handoff with zero decisions.
+
+Public workflow run `33935109759` for commit `46aafc5249f7199308b46cb1d4c8375beecd84b5` failed before tests because the first unapproved review packet hashed CRLF workspace bytes while Git published LF bytes. The failed run and original commit remain preserved. The active blank packet is rebound to canonical LF identities; this correction changes no proposal scope, decision state, acquisition state, or scientific claim.
 
 The generic intake-contract validator separately reports four invalid attempt identifiers because the completed DEM transfer IDs contain uppercase RFC 3339 `T` and `Z` characters and its identifier grammar is lowercase-only. The immutable attempt receipts, checkpoint paths, and external event history are not rewritten. This retained schema-validation failure does not change the project-specific byte and custody passes or approve downstream processing; future transfer runners must correct identifier generation before use.
 

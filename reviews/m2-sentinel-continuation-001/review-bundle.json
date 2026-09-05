@@ -15,7 +15,7 @@
       "render_receipts": [
         {
           "path": "records/surface-receipts/m2-sentinel-continuation-001-review.json",
-          "sha256": "0e0c69a2501c9c1f0ab7d0fabf710df0f1cbdd82f71a5e33b582c1f10d912f85"
+          "sha256": "ec48a29d6fa57a6a06b90285996b4a0e7f1762f13dbd80053a3e3d55af42db8f"
         }
       ]
     },
@@ -90,6 +90,14 @@
       "role": "historical_publication_gate_for_completed_supervisor_run",
       "render_required": false,
       "render_receipts": []
+    },
+    {
+      "artifact_id": "failed-publication-attempt-001",
+      "path": "records/acquisition/sentinel-continuation-001-publication-attempt-001-failure.json",
+      "sha256": "7933e9206b25986b1f07486931d134cc9bdd770a4122fa8a4963165c075ec59a",
+      "role": "preserved_cross_platform_review_packet_publication_failure",
+      "render_required": false,
+      "render_receipts": []
     }
   ],
   "review_surface": {
@@ -109,6 +117,7 @@
     "This bundle creates no authority and contains zero human decisions.",
     "The exact continuation-preflight failure cause is unknown; the proposal does not infer it from later checks.",
     "Approval does not permit another M1-SRC-004 transfer, resume, reuse, retry after failure, token storage, product changes, terms or account action, cost, pixels, processing, mapping, attribution, or scientific publication.",
-    "Container verification does not establish raster readability, AOI coverage, usable pixels, registration, or scientific change."
+    "Container verification does not establish raster readability, AOI coverage, usable pixels, registration, or scientific change.",
+    "Public CI run 33935109759 failed because the first unapproved packet bound CRLF workspace bytes that Git published as LF; the failure is preserved and this packet uses canonical LF identities."
   ]
 }

@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-SENTINEL-CONTINUATION-001-PUBLICATION-ATTEMPT-001-FAILURE",
+  "status": "failed_preserved",
+  "verified_at_utc": "2026-09-05T01:06:04Z",
+  "repository": "https://github.com/drwbkr1/nepal-2026-before-after-map",
+  "branch": "main",
+  "commit_sha": "46aafc5249f7199308b46cb1d4c8375beecd84b5",
+  "workflow": {
+    "name": "Validate project controls",
+    "run_id": 33935109759,
+    "run_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33935109759",
+    "conclusion": "failure",
+    "failing_step": "Validate repository",
+    "failure_message": "FAIL: review contract does not bind exact bundle bytes: reviews/m2-sentinel-continuation-001/review-bundle.json"
+  },
+  "finding": {
+    "classification": "cross_platform_line_ending_hash_mismatch",
+    "workspace_bundle_sha256_crlf": "018adc5c9edad48beb665f717c0c39fc5b63b93c0127c1f571df59d30c25f192",
+    "published_bundle_sha256_lf": "42dabaf5b146ebf9a3728ae46b3ea1dd723080ef809bd61bcb778af8861e9a45",
+    "affected_generated_text_artifacts": [
+      "records/surface-receipts/m2-sentinel-continuation-001-review.json",
+      "reviews/m2-sentinel-continuation-001/review-bundle.json",
+      "reviews/m2-sentinel-continuation-001/review-contract.json"
+    ],
+    "acquisition_or_scientific_effect": "none"
+  },
+  "preservation": {
+    "failed_run_retained": true,
+    "original_commit_retained": true,
+    "automatic_retry_performed": false,
+    "token_requested": false,
+    "payload_requested": false
+  },
+  "next_action": "Canonicalize the unapproved review packet to LF bytes, rebind all active hashes, publish a new commit, and require a passing public CI run before owner handoff."
+}
