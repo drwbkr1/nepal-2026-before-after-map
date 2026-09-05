@@ -151,7 +151,9 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [],
+    "proposed_amendments": [
+      "contracts/milestone-002-optical-pixel-recovery-001-proposal.json"
+    ],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json",
@@ -341,15 +343,20 @@
         "unit_id": "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW",
         "reason": "The exact owner decision authorizes only the dependency-ordered materialization, header, and conditional optical pixel-readiness sequence in the reviewed proposal.",
         "authority_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json"
+      },
+      {
+        "unit_id": "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW",
+        "reason": "The terminal real-001 result cannot be retried; any separately identified correction and recovery attempt requires a new attested owner decision.",
+        "authority_ref": "reviews/m2-optical-pixel-recovery-001/review-contract.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-OPTICAL-PIXEL-READINESS",
+    "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish the exact optical pixel-readiness implementation and require successful public CI before the final no-pixel preflight or the one real pixel attempt."
+    "next_action": "Review M2 optical pixel recovery-001 bundle SHA-256 d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2 and proposal SHA-256 96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da; approve, revise, or defer. No correction or second pixel attempt is authorized before an attested decision."
   },
   "parallel_checkpoints": [
     {

@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-OPTICAL-PIXEL-RECOVERY-001-PROPOSAL",
+  "prepared_at_utc": "2026-09-05T19:20:03Z",
+  "status": "proposed_not_authorized",
+  "trigger": {
+    "failure_ref": "records/readiness/optical-pixel/m2-s2-pixel-readiness-real-001.json",
+    "failure_sha256": "0f756c23ecaeaf017c196b0d79632960be5d249854d296f11fece639260d2164",
+    "reconciliation_ref": "records/readiness/m2-optical-pixel-real-001-reconciliation.json",
+    "reconciliation_sha256": "0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a",
+    "terminal_status": "invalid_terminal_real_001_no_retry_released"
+  },
+  "diagnosis": {
+    "failure_code": "production_grid_extent_shape_mismatch",
+    "observed_error": "KeyError: 'xmin'",
+    "pixel_access_before_failure": "first real SCL raster was read",
+    "metrics_established": false,
+    "cause": "production analysis_grid stores bounds in its extent object while the runner expected top-level bounds; synthetic tests supplied a flat target object"
+  },
+  "proposed_bounded_actions": [
+    "preserve real-001 and never reuse its receipt or external attempt root",
+    "correct the runner to normalize the existing nested production grid extent without changing any scientific threshold, source, AOI, mask, or decision rule",
+    "add portable and ArcGIS synthetic coverage for the exact nested production grid shape",
+    "publish the exact corrected implementation and require successful public CI",
+    "run one final no-pixel preflight for a new append-only recovery identity",
+    "if and only if all gates pass, run optical-pixel-readiness-recovery-001 once and reconcile its terminal result"
+  ],
+  "exact_recovery": {
+    "attempt_id": "optical-pixel-readiness-recovery-001",
+    "external_attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\optical-pixel-readiness-recovery-001",
+    "public_receipt_ref": "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json",
+    "maximum_real_invocations": 1,
+    "automatic_retry_authorized": false
+  },
+  "unchanged_scientific_contract": {
+    "pair": [
+      "M1-SRC-010",
+      "M1-SRC-008"
+    ],
+    "aoi_ids": [
+      "AOI-OVERVIEW",
+      "AOI-SOURCE",
+      "AOI-UPPER-CORRIDOR"
+    ],
+    "pixel_contract_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "current_pixel_contract_ref": "config/qa/optical-pixel-readiness-contract-001.json",
+    "current_pixel_contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
+    "threshold_changes_authorized": false,
+    "source_or_date_substitution_authorized": false
+  },
+  "does_not_authorize": [
+    "reuse, resume, replacement, or retry of real-001",
+    "automatic retry after recovery-001",
+    "radar measurement pixels or unresolved orbit and DEM actions",
+    "spectral indices, baseline processing, change rasters or polygons",
+    "interpretation, attribution, emergency guidance, or scientific publication"
+  ],
+  "decision_domain": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "attestation_required": true
+}

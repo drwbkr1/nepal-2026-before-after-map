@@ -1,0 +1,13 @@
+{
+  "status": "invalid",
+  "attempt_id": "optical-pixel-readiness-real-001",
+  "started_at_utc": "2026-09-05T19:16:29Z",
+  "error_type": "KeyError",
+  "error": "'xmin'",
+  "automatic_retry_authorized": false,
+  "receipt_id": "NEPAL-S2-PIXEL-READINESS-REAL-001",
+  "activity": {
+    "real_product_pixel_access_attempted": true
+  },
+  "next_gate": "retain terminal failure; a new attempt requires separate authority"
+}

@@ -128,7 +128,7 @@ class M2DemActivationTests(unittest.TestCase):
         self.assertEqual(set(units["M2-BASELINE"]["depends_on"]), {"M2-VERIFY", "M2-DEM-VERIFY", "M2-ORBIT-APPLY"})
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            [],
+            ["contracts/milestone-002-optical-pixel-recovery-001-proposal.json"],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -162,7 +162,14 @@ class M2DemActivationTests(unittest.TestCase):
             (unit for unit in self.milestone["units"] if unit["id"] == "M2-OPTICAL-PIXEL-READINESS"),
             None,
         )
+        optical_recovery_review = next(
+            (unit for unit in self.milestone["units"] if unit["id"] == "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW"),
+            None,
+        )
         expected_primary_checkpoint = (
+            "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW"
+            if optical_recovery_review is not None and optical_recovery_review.get("status") == "ready"
+            else
             "M2-OPTICAL-PIXEL-READINESS"
             if optical_pixel is not None and optical_pixel.get("status") == "in_progress"
             else

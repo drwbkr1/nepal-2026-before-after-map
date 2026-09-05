@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW-READINESS",
+  "verified_at_utc": "2026-09-05T19:20:03Z",
+  "status": "pass_ready_owner_review_zero_decisions",
+  "bindings": {
+    "proposal_sha256": "96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da",
+    "preflight_sha256": "d899bbb246d7795b4dc6456e703f37a1520bce68f1e88f066f94645b3384ec10",
+    "review_surface_sha256": "981269521d46acecd0bd3c9969e5a674f35208724f91d4dc1cc89d8fbab066a4",
+    "surface_receipt_sha256": "6f13c433c8dd61603020d347024be57b722ba3851c4becbe0381a010c28cbd73",
+    "review_bundle_sha256": "d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2",
+    "review_contract_sha256": "da7b8e6e70cfb9837a2c53cde78939ad1f680bcf41a39a8b9f4fdf02ec39fd2f",
+    "blank_response_sha256": "61995bc3dc9ec329c5c48b0aacd0c4d40337c5075868138ac2a9cd700ccc9871"
+  },
+  "review": {
+    "human_decision_count": 0,
+    "attestation": false,
+    "ready_for_handoff": true
+  },
+  "assertions": {
+    "recovery_authorized": false,
+    "real_product_pixels_read_during_preparation": false
+  }
+}

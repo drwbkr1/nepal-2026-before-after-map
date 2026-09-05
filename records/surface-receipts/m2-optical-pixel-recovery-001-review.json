@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW-SURFACE",
+  "verified_at_utc": "2026-09-05T19:20:03Z",
+  "status": "pass_blank_review_surface",
+  "render": {
+    "path": "docs/assets/m2-optical-pixel-recovery-001-review.png",
+    "sha256": "981269521d46acecd0bd3c9969e5a674f35208724f91d4dc1cc89d8fbab066a4",
+    "human_decision_count": 0
+  },
+  "assertions": {
+    "proposal_sha256": "96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da",
+    "recovery_authorized": false,
+    "real_product_pixels_read": false
+  }
+}

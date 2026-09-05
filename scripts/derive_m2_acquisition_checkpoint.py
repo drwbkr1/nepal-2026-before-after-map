@@ -54,6 +54,10 @@ OPTICAL_PIXEL_IMPLEMENTATION_CHECKPOINT = {
     "checkpoint_id": "M2-OPTICAL-PIXEL-READINESS",
     "next_action": "Publish the exact optical pixel-readiness implementation and require successful public CI before the final no-pixel preflight or the one real pixel attempt.",
 }
+OPTICAL_PIXEL_RECOVERY_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW",
+    "next_action": "Review M2 optical pixel recovery-001 bundle SHA-256 d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2 and proposal SHA-256 96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da; approve, revise, or defer. No correction or second pixel attempt is authorized before an attested decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -220,6 +224,27 @@ def current_optical_pixel_implementation_pending(root: Path, state_counts: dict[
     )
 
 
+def current_optical_pixel_recovery_review_required(root: Path, state_counts: dict[str, int]) -> bool:
+    if not current_container_verification_complete(root, state_counts):
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        reconciliation = load(root / "records/readiness/m2-optical-pixel-real-001-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    pixel = units.get("M2-OPTICAL-PIXEL-READINESS", {})
+    review = units.get("M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW", {})
+    return bool(
+        reconciliation.get("status") == "invalid_terminal_real_001_no_retry_released"
+        and pixel.get("status") == "complete"
+        and pixel.get("disposition") == "invalid"
+        and review.get("status") == "ready"
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and review.get("gates", {}).get("recovery_authorized") is False
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -264,7 +289,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_optical_pixel_implementation_pending(ROOT, progress["state_counts"]):
+        if current_optical_pixel_recovery_review_required(ROOT, progress["state_counts"]):
+            checkpoint = dict(OPTICAL_PIXEL_RECOVERY_REVIEW_CHECKPOINT)
+        elif current_optical_pixel_implementation_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(OPTICAL_PIXEL_IMPLEMENTATION_CHECKPOINT)
         elif current_full_header_implementation_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(FULL_HEADER_IMPLEMENTATION_CHECKPOINT)

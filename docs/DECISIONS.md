@@ -399,3 +399,19 @@
 **Reason:** All eight archives are now in verified container custody, but five lack ordinary SAFE materializations and the project has no complete real before/after header or pixel-readiness result. Binding the exact source order, attempt identities, prerequisites, QA scope, and stop rules before further access prevents container success from being mistaken for usable pixels and prevents the high-cloud optical route from being rescued by date shopping after observation.
 
 **Status:** Ready for review with zero human decisions. Review bundle SHA-256 `8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a` binds proposal SHA-256 `3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c`, no-mutation preflight SHA-256 `9a4ec0e286ab787194f76fa569293c67cc5db8529f96af9aba7e0959792af019`, and blank response SHA-256 `296916d31bdfbd248e27ca9fd03b7f6f0530269976fbf4accc3690bfb6965f0d`. No materialization, real header access, pixel read, network request, authentication, baseline, change result, or scientific action was performed or authorized by preparation.
+
+## D-064 — Execute the approved dependency-ordered materialization and input-readiness route
+
+**Decision:** Bind the owner's attested approval of review bundle SHA-256 `8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a` and proposal SHA-256 `3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c`, then execute only the released stages after each stage's implementation, synthetic, public-CI, and final-preflight gates pass.
+
+**Reason:** Container custody did not establish ordinary SAFE extraction, native raster readability, pixel coverage, masks, or registration. The approved order preserved those distinctions and limited every real action to one attempt.
+
+**Status:** Stage 1 public CI run `33984065216` passed before five exact one-attempt materializations succeeded in the approved order; reconciliation SHA-256 `71013b14363f941d41411dff24e5410a6f8682976f8ac9844ff2b2e9ec772d82` rehashed every materialized file. Stage 2 public CI run `33985362022` passed before the one six-source radar and one two-source optical header inspections both passed without measurement-pixel decoding; reconciliation SHA-256 `5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1` binds them. Stage 3 public CI run `33986585291` and preflight 002 passed before the single optical pixel attempt described in D-065. No radar pixel, baseline, change, attribution, or publication action was released.
+
+## D-065 — Preserve terminal optical real-001 and require a new recovery decision
+
+**Decision:** Classify `optical-pixel-readiness-real-001` as terminal `INVALID`, preserve its exclusive external root and repository receipt, prohibit retry under the completed authorization, and prepare a zero-decision review package for one separately identified correction and recovery attempt.
+
+**Reason:** The runner read the first real SCL raster, then raised `KeyError: 'xmin'` because the production analysis grid stores bounds inside `analysis_grid.extent` while the synthetic target used flat fields. The failure occurred before AOI mask, registration, or other metrics. Correcting code after observing a real input and running a second attempt requires a new owner decision even though the scientific thresholds and source pair would remain unchanged.
+
+**Status:** Real receipt SHA-256 `0f756c23ecaeaf017c196b0d79632960be5d249854d296f11fece639260d2164` and reconciliation SHA-256 `0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a` record one invocation, no derived raster, no metrics, and no automatic retry. Recovery proposal SHA-256 `96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da` and review bundle SHA-256 `d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2` contain zero human decisions. No code correction or recovery attempt is authorized.

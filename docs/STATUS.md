@@ -1,12 +1,12 @@
 # Current status
 
-- **State:** M1 complete; M2 active with all eight exact Sentinel products promoted and container-verified, and a blank exact owner review gating five materializations, two header inspections, and one conditional optical pixel-readiness attempt
+- **State:** M1 complete; M2 active with all eight exact Sentinel products materialized by identity, both full-cohort header routes passed, and the single optical pixel attempt terminal `INVALID` before metrics
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
-- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted and container-verified, the first three are materialized into 78 manifest-verified SAFE files, both earlier incomplete `M1-SRC-004` partials remain retained, five Sentinel products remain unmaterialized, and no orbit payload byte is in custody
+- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts, both earlier incomplete `M1-SRC-004` partials remain retained, and no orbit payload byte is in custody
 - **Long-term goal:** Active
-- **Checkpoints:** `M2-MATERIALIZATION-PIXEL-READINESS-REVIEW`; dependent `M2-ORBIT-ACQUISITION-REVIEW`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
+- **Checkpoints:** `M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW`; dependent `M2-ORBIT-ACQUISITION-REVIEW`; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
 
 ## Purpose
 
@@ -54,7 +54,15 @@ The exact eight-product offline verification contract is now active under the sa
 
 ## Current gate
 
-At `2026-09-04T04:50:25Z`, the current intake reconciled to three promoted products, one retained failure, and four unattempted products. `M1-SRC-001` through `M1-SRC-003` match catalog sizes and provider MD5 values, passed ZIP CRC and SAFE-member checks, and remain eligible only for later post-container QA. `M1-SRC-004` stopped after 561,593,598 of 1,732,332,897 bytes with `transferred_size_mismatch`; SHA-256 `299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66` identifies the retained partial. It is not a valid product.
+The approved materialization and input-readiness sequence is complete. All five remaining SAFE materializations passed once in the approved order, making all eight sources materialized by identity. Public CI runs `33984065216`, `33985362022`, and `33986585291` passed the three implementation stages. One six-source radar and one two-source optical header inspection then passed once without measurement-pixel decoding.
+
+The only authorized optical pixel attempt, `optical-pixel-readiness-real-001`, read the first real SCL raster and stopped with `KeyError: 'xmin'` because the production grid stores bounds inside `analysis_grid.extent`. It created only `started.json` and `failure.json`; no QA raster, metrics, AOI result, mask result, registration result, baseline, or change evidence exists. Reconciliation SHA-256 `0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a` fixes the attempt count at one and keeps automatic retry false.
+
+Recovery proposal SHA-256 `96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da` and review bundle SHA-256 `d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2` contain zero human decisions. Approval would release only the nested-grid normalization correction, exact production-shape synthetic tests, fresh public CI, one no-pixel preflight, and one new append-only recovery attempt. No correction, second attempt, radar pixel processing, baseline, change analysis, or scientific publication is currently authorized.
+
+## Sentinel execution history
+
+At `2026-09-04T04:50:25Z`, the intake reconciled to three promoted products, one retained failure, and four unattempted products. `M1-SRC-001` through `M1-SRC-003` match catalog sizes and provider MD5 values, passed ZIP CRC and SAFE-member checks, and remained eligible only for later post-container QA. `M1-SRC-004` stopped after 561,593,598 of 1,732,332,897 bytes with `transferred_size_mismatch`; SHA-256 `299b2d07ccb58747cce43ae3b18e6d25c1c6d72a5653831b50a44ca72677ea66` identifies the retained partial. It is not a valid product.
 
 At the earlier `M2-ACQUISITION-REVIEW` checkpoint, the owner approved bundle SHA-256 `dffa194cc91636a35b5f55af6ece32bb6eb90d77b65ea3d9865413f912d146e7` and proposal SHA-256 `7b8b5e83265b37962f879ca7dad85ab5f5c04ceb28ee0f15fa774a79df7fd013`, releasing exactly one fresh byte-zero recovery. Attempt `m1-src-004-recovery-001-20260904t201220z-e4388c64` began at `2026-09-04T20:12:20Z` and preserved 1,333,788,672 bytes with SHA-256 `c2d3a878f98615ddaa5e0bf21df5eb5f65c591719cb26b5f43b361aa4eac4cac`. The Python and prompt processes were later observed absent before a terminal event was written. The interruption reconciliation therefore records a terminal failure without assigning a cause, confirms no destination promotion, and re-verifies the original 561,593,598-byte partial unchanged.
 
@@ -138,29 +146,28 @@ Before the real Sentinel transfers, the transfer runner was corrected prospectiv
 
 The exact Sentinel-2C-before and Sentinel-2B-after RUM route now has a deterministic processing contract. It requires internal baseline 05.12 metadata, band-specific BOA offsets, the product quantification value, DN-zero handling, conservative SCL and quality exclusions, a fixed 20 m EPSG:32645 grid, and independent stable-control measurement before any cross-platform normalization. Fifteen portable tests and an ArcGIS Pro 3.7.1 Spatial Analyst run pass. The ArcGIS run used only a 16-by-16 synthetic fixture and passed five reflectance-band plus three index checks. It did not access external custody or read real metadata or pixels.
 
-The real optical route remains **DEFER**. Neither archive is in verified custody; AOI coverage, masks, registration, and cross-platform bias are unmeasured; and the post-event catalog cloud estimate is 78.471315 percent. An inconclusive optical route must be retained rather than tuned or silently replaced.
+The real optical route is currently **INVALID** at its first pixel-readiness attempt. Both archives are in verified custody and materialized, and their headers passed, but AOI coverage, masks, registration, and cross-platform bias remain unmeasured because the runner stopped on the production grid shape before classification. The post-event catalog cloud estimate remains 78.471315 percent. The failed route must be retained rather than tuned or silently replaced.
 
-## Prepared SAFE materialization controls
+## Completed SAFE materialization controls
 
-The exact eight-product route now has an offline, gate-deferred materialization contract and runner. A product must be promoted in the active intake and have one matching `pass_container_only` container receipt before the runner reads custody. The archive is re-hashed, its full member namespace is revalidated for Windows and cross-platform safety, and every extracted file is recorded in an external SHA-256 manifest under one exclusive append-only attempt.
+The exact eight-product route used the offline materialization contract and runner. Each product was promoted in the active intake and had one matching `pass_container_only` receipt before custody was read. Every archive was re-hashed, its full member namespace was revalidated for Windows and cross-platform safety, and every extracted file was recorded in an external SHA-256 manifest under one exclusive append-only attempt.
 
-Fourteen synthetic tests pass, including traversal, ambiguous components, backslash, Windows reserved-name and alternate-data-stream, case-collision, file/directory-collision, symbolic-link, attempt-collision, receipt-collision, and production pre-custody refusal checks. Three real radar archives now have append-only materializations and repository receipts; all 78 extracted files match their external manifests. No raster or pixel claim was created.
+Fourteen synthetic tests pass, including traversal, ambiguous components, backslash, Windows reserved-name and alternate-data-stream, case-collision, file/directory-collision, symbolic-link, attempt-collision, receipt-collision, and production pre-custody refusal checks. All eight real archives now have append-only materializations and repository receipts, and reconciliation SHA-256 `71013b14363f941d41411dff24e5410a6f8682976f8ac9844ff2b2e9ec772d82` rehashed every extracted file. Materialization alone creates no raster or pixel claim.
 
-## Prepared optical input-readiness gate
+## Completed optical header gate and terminal pixel attempt
 
-The exact materialized RUM pair now has a separate gate before pixel processing. It requires two passing materialization receipts, revalidates each external manifest and complete marker, re-hashes the ten selected SAFE members, parses the Level-2A baseline and scaling fields, and uses ArcGIS to inspect native JP2 headers. A pass is limited to header readability and can advance only to pixel, mask, coverage, and registration QA.
+The exact materialized RUM pair passed its separate header gate before pixel processing. The run revalidated both materialization receipts, external manifests, and complete markers; re-hashed the ten selected SAFE members; parsed Level-2A baseline and scaling fields; and used ArcGIS to inspect native JP2 headers. This establishes header readability only.
 
 The first published input-readiness checkpoint was superseded after official Sentinel-2 documentation showed that PB 05.12 `MSK_CLASSI_B00.jp2` is a three-band 60 m Boolean mask, not the one-band 20 m mask used in that fixture. The correction preserves the published attempt and does not claim anything about real product bytes.
 
-Twelve portable tests and the corrected ArcGIS Pro 3.7.1 Advanced run pass. ArcGIS opens sixteen synthetic JP2 rasters with matching EPSG:32645 10 m and 20 m scientific grids plus a three-band 60 m classification-quality grid; a deliberate 10 m shift of the complete after grid blocks with sixteen extent mismatches. Two failed direct `CopyRaster` JP2-generation attempts, five superseded prepublication passes, and the superseded published pass remain recorded. No real optical materialization receipt, SAFE metadata, raster header, or pixel was accessed; the three real materializations are radar products outside this optical gate.
+Twelve portable tests and the corrected ArcGIS Pro 3.7.1 Advanced synthetic run pass. ArcGIS opens sixteen synthetic JP2 rasters with matching EPSG:32645 10 m and 20 m scientific grids plus a three-band 60 m classification-quality grid; a deliberate 10 m shift of the complete after grid blocks with sixteen extent mismatches. Two failed direct `CopyRaster` JP2-generation attempts, five superseded prepublication passes, and the superseded published pass remain recorded. Real header receipt SHA-256 `d3ce00dcead178bcf0c7205933d2869063ed9b5a4bf6a8921ba2c2bcab586931` passed. The separate real pixel attempt is terminal `INVALID` before metrics and cannot be retried under current authority.
 
 Checkpoint derivation is also portable. Repository-only tests do not require the operator's external Windows custody roots; external custody reconciliation remains an explicit local, read-only validation. Failed GitHub Actions run `33800916326` is retained in the append-only portability-correction evidence that records this boundary fix.
 
 ## Authorized but not completed
 
-- prepare and review an exact bounded materialization and pixel-readiness plan for the five not-yet-materialized Sentinel products; no such action is released yet;
-- after a separate approval, preserve append-only attempts, collision-safe outputs, exact source hashes, and complete manifests while stopping on any failure;
-- inspect real pixels, masks, AOI coverage, baselines, and EPSG:32645 registration only after their separate gates are satisfied;
+- review bundle SHA-256 `d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2` and explicitly approve, revise, or defer the bounded optical pixel recovery proposal;
+- do not correct or rerun optical pixel readiness unless that exact recovery is approved and its public-CI and no-pixel gates pass;
 - review and reconcile the exact orbit recovery, but do not run it until the full `M2-VERIFY` unit is complete; after a passing `M2-ORB-001` recovery, acquire and verify only the three still-unattempted approved `AUX_RESORB` files and apply each only after every independent gate passes;
 - review and explicitly resolve the DEM vertical-datum route before Sentinel-1 terrain correction, without silently selecting `GEOID` or `NONE`;
 - if the exact EGM2008 route is approved, wait for the owner to install the matching ArcGIS Coordinate Systems Data component before any conversion attempt;

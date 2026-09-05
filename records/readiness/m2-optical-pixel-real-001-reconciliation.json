@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PIXEL-REAL-001-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-05T19:17:59Z",
+  "status": "invalid_terminal_real_001_no_retry_released",
+  "bindings": {
+    "contract_ref": "config/qa/optical-pixel-readiness-contract-001.json",
+    "publication_gate_ref": "records/readiness/m2-optical-pixel-publication-gate.json",
+    "final_preflight_ref": "records/readiness/m2-optical-pixel-final-preflight.json",
+    "real_receipt_ref": "records/readiness/optical-pixel/m2-s2-pixel-readiness-real-001.json",
+    "contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
+    "publication_gate_sha256": "84d396d12f640232f429d8f9c601d18fe6520ef78a6142383066369b3e50c0c9",
+    "final_preflight_sha256": "6edb1b0aaea790ddefb620e391afb893d6a6241c765e49f2a6cbf0b527c8363f",
+    "real_receipt_sha256": "0f756c23ecaeaf017c196b0d79632960be5d249854d296f11fece639260d2164"
+  },
+  "failure": {
+    "code": "production_grid_extent_shape_mismatch",
+    "observed_error": "KeyError: 'xmin'",
+    "stage": "first real SCL target-grid read returned before classification",
+    "thresholds_changed_after_observation": false
+  },
+  "external_attempt": {
+    "root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\optical-pixel-readiness-real-001",
+    "inventory": [
+      {
+        "relative_path": "failure.json",
+        "size_bytes": 210,
+        "sha256": "88ce767b106285fc48e60e9fafb23896c096a402d8d9c3af489bbb6401bee3b3"
+      },
+      {
+        "relative_path": "started.json",
+        "size_bytes": 211,
+        "sha256": "71709a3c78741ba090941ce3c1436fd29ea29e1e17223ae568b1d4113849aa67"
+      }
+    ],
+    "derived_raster_count": 0,
+    "metrics_file_created": false
+  },
+  "source_custody": [
+    {
+      "source_id": "M1-SRC-010",
+      "file_count": 95,
+      "status": "pass",
+      "errors": [],
+      "manifest_sha256": "a49ded6ecc8d15dc73001cc01c21e96866535c64836c2000c235ba463d225ead",
+      "receipt_sha256": "033db54c20179dc279fa075715f204febbbf1ba199c2abef4e1db4869b47648a"
+    },
+    {
+      "source_id": "M1-SRC-008",
+      "file_count": 95,
+      "status": "pass",
+      "errors": [],
+      "manifest_sha256": "66f1e9a75d3d33ed01c521e9f46099ca137bd52ad13aa294c7276cef52c69fd4",
+      "receipt_sha256": "740431367eec58652d0b1f6df929f34751c52ae3568e2483b91259b0358c52d0"
+    }
+  ],
+  "assertions": {
+    "real_invocation_count": 1,
+    "real_product_pixel_access_attempted": true,
+    "aoi_metrics_established": false,
+    "mask_metrics_established": false,
+    "registration_established": false,
+    "baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false,
+    "automatic_retry_authorized": false
+  },
+  "next_gate": "human review is required for any separately identified corrected recovery attempt"
+}

@@ -126,15 +126,16 @@ class MaterializationPixelReadinessReviewTests(unittest.TestCase):
         self.assertEqual(review["gates"]["human_decision_count"], 1)
         self.assertTrue(review["gates"]["execution_authorized"])
         self.assertFalse(review["gates"]["radar_pixel_access_authorized"])
-        self.assertEqual(units["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]["status"], "in_progress")
-        self.assertEqual(units["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]["gates"]["public_ci"], "stage_1_and_2_pass_stage_3_correction_pending")
+        self.assertEqual(units["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]["status"], "complete")
+        self.assertEqual(units["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]["disposition"], "pass_controls_published")
+        self.assertEqual(units["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]["gates"]["public_ci"], "stage_1_2_3_pass_real_001_invalid_review_required")
         self.assertEqual(units["M2-MATERIALIZE-REMAINING"]["status"], "complete")
         self.assertEqual(units["M2-MATERIALIZE-REMAINING"]["gates"]["exact_source_order"], MATERIALIZATION_ORDER)
         self.assertEqual(units["M2-FULL-INPUT-READINESS"]["status"], "complete")
         self.assertFalse(units["M2-FULL-INPUT-READINESS"]["gates"]["measurement_pixel_decoding"])
-        self.assertEqual(units["M2-OPTICAL-PIXEL-READINESS"]["status"], "in_progress")
+        self.assertEqual(units["M2-OPTICAL-PIXEL-READINESS"]["status"], "complete")
         self.assertFalse(units["M2-OPTICAL-PIXEL-READINESS"]["gates"]["radar_pixel_readiness_authorized"])
-        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-OPTICAL-PIXEL-READINESS")
+        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW")
 
 
 if __name__ == "__main__":

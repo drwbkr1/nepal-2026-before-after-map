@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PIXEL-PREFLIGHT-002",
+  "observed_at_utc": "2026-09-05T19:16:20Z",
+  "status": "pass_exact_optical_pixel_inputs_ready_no_pixel_access",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+    "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+    "header_reconciliation_ref": "records/readiness/m2-full-header-readiness-reconciliation.json",
+    "header_reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1",
+    "contract_ref": "config/qa/optical-pixel-readiness-contract-001.json",
+    "contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
+    "publication_gate_ref": "records/readiness/m2-optical-pixel-publication-gate.json",
+    "publication_gate_sha256": "84d396d12f640232f429d8f9c601d18fe6520ef78a6142383066369b3e50c0c9"
+  },
+  "attempt": {
+    "attempt_id": "optical-pixel-readiness-real-001",
+    "external_attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\optical-pixel-readiness-real-001",
+    "public_receipt_ref": "records/readiness/optical-pixel/m2-s2-pixel-readiness-real-001.json"
+  },
+  "selected_inputs": [
+    {
+      "product_role": "before",
+      "member_role": "SCL",
+      "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R20m/T45RUM_20260812T045701_SCL_20m.jp2",
+      "size_bytes": 2895935,
+      "sha256": "9675bb91d769cc154d2a6c1887f315bc9e3f6def4596488d5a36c4e08419fade"
+    },
+    {
+      "product_role": "before",
+      "member_role": "B11",
+      "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R20m/T45RUM_20260812T045701_B11_20m.jp2",
+      "size_bytes": 32971809,
+      "sha256": "6b23ef671be43347dc712ff6af63848556c0ead7b8b51715384bcc0e4e21cd51"
+    },
+    {
+      "product_role": "before",
+      "member_role": "quality_classification",
+      "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/QI_DATA/MSK_CLASSI_B00.jp2",
+      "size_bytes": 65352,
+      "sha256": "1f9d4c4824a3fefc89e664e16389d965782c98703c89a7b34661d2f9a2aa19f8"
+    },
+    {
+      "product_role": "after",
+      "member_role": "SCL",
+      "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R20m/T45RUM_20260827T045659_SCL_20m.jp2",
+      "size_bytes": 2006086,
+      "sha256": "3cfa58c1f09ef7a32a3d1ef1d323a0c4e192fedecf9985a32f97fd21b3b4066f"
+    },
+    {
+      "product_role": "after",
+      "member_role": "B11",
+      "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R20m/T45RUM_20260827T045659_B11_20m.jp2",
+      "size_bytes": 30273799,
+      "sha256": "0a0782bd57d0da6d1c4442ca1a2e916a187568ac83dd141ae53a4a287550691b"
+    },
+    {
+      "product_role": "after",
+      "member_role": "quality_classification",
+      "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/QI_DATA/MSK_CLASSI_B00.jp2",
+      "size_bytes": 88448,
+      "sha256": "50a5258adefca649c9ccd1864961711169b8b0091066053f516bd39ddfbdca02"
+    }
+  ],
+  "storage": {
+    "free_bytes": 525764632576,
+    "minimum_free_space_bytes": 2147483648,
+    "status": "pass"
+  },
+  "assertions": {
+    "exact_pair": [
+      "M1-SRC-010",
+      "M1-SRC-008"
+    ],
+    "approved_aoi_ids": [
+      "AOI-OVERVIEW",
+      "AOI-SOURCE",
+      "AOI-UPPER-CORRIDOR"
+    ],
+    "selected_files_rehashed": true,
+    "attempt_paths_absent": true,
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "external_files_mutated": false,
+    "real_product_pixels_examined": false
+  },
+  "next_gate": "invoke optical-pixel-readiness-real-001 exactly once and preserve its terminal result without retry or substitution"
+}

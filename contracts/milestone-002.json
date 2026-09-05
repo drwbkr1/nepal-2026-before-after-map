@@ -598,7 +598,7 @@
         "m1_src_004_satisfied_by_recovery_002": true,
         "continuation_status": "succeeded_all_four",
         "materialized_source_count": 8,
-        "materialization_and_pixel_readiness": "approved_optical_pixel_implementation_pending",
+        "materialization_and_pixel_readiness": "optical_pixel_real_001_invalid_recovery_review_required",
         "materialization_pixel_review_ref": "reviews/m2-materialization-pixel-readiness/review-contract.json",
         "materialization_pixel_review_bundle_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a",
         "materialization_pixel_approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
@@ -606,7 +606,9 @@
         "materialization_reconciliation_ref": "records/acquisition/sentinel-materialization-reconciliation-002.json",
         "materialization_reconciliation_sha256": "71013b14363f941d41411dff24e5410a6f8682976f8ac9844ff2b2e9ec772d82",
         "header_reconciliation_ref": "records/readiness/m2-full-header-readiness-reconciliation.json",
-        "header_reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1"
+        "header_reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1",
+        "optical_pixel_real_001_reconciliation_ref": "records/readiness/m2-optical-pixel-real-001-reconciliation.json",
+        "optical_pixel_real_001_reconciliation_sha256": "0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a"
       },
       "disposition": "defer",
       "retained_failures": [
@@ -626,9 +628,9 @@
           "EXIT-201-VERIFIED-CUSTODY"
         ],
         "decision_value": "enables_dependency",
-        "rationale": "All eight products are container-verified and materialized by identity; both header routes pass and exact optical pixel-readiness controls await public CI."
+        "rationale": "All eight products and both header routes pass their limited gates; optical real-001 is terminal INVALID before metrics and recovery requires owner review."
       },
-      "next_dependency": "M2-OPTICAL-PIXEL-READINESS"
+      "next_dependency": "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW"
     },
     {
       "id": "M2-BASELINE",
@@ -1122,7 +1124,7 @@
       ],
       "action_class": "external_publication",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "contracts/milestone-002-materialization-pixel-readiness-proposal.json",
         "records/source-gates/m2-materialization-pixel-readiness-approval.json",
@@ -1137,7 +1139,7 @@
         "owner_approval": "pass",
         "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
         "review_reconciliation_sha256": "aee7e7c3142189edd81079950daab38b08ef783ef1c38efc09ad8ab1cf38930f",
-        "public_ci": "stage_1_and_2_pass_stage_3_correction_pending",
+        "public_ci": "stage_1_2_3_pass_real_001_invalid_review_required",
         "real_data_access_during_implementation": false,
         "radar_pixel_readiness_authorized": false,
         "stage_1_public_commit": "4d4a0b63ed08274cf874d91ffc06292f0a352533",
@@ -1156,9 +1158,15 @@
         "stage_3_contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
         "stage_3_arcgis_synthetic_sha256": "87cfb12b8623a019fe5315faeb8416257c5893fd03813b7e528690f3d0eadae0",
         "stage_3_implementation_readiness_sha256": "df73bd37e316f1725d2550c0ecfd3e5fe9848f45279ca3f68d6fdf8c349f0979",
-        "stage_3_public_ci": "pending_after_failed_preflight_001"
+        "stage_3_public_ci": "pass",
+        "stage_3_public_commit": "14c0f01e1b4dd7d2ae0272abcb479002acd54202",
+        "stage_3_public_ci_run_id": 33986585291,
+        "stage_3_publication_gate_sha256": "84d396d12f640232f429d8f9c601d18fe6520ef78a6142383066369b3e50c0c9",
+        "stage_3_final_preflight_sha256": "6edb1b0aaea790ddefb620e391afb893d6a6241c765e49f2a6cbf0b527c8363f",
+        "stage_3_real_001_receipt_sha256": "0f756c23ecaeaf017c196b0d79632960be5d249854d296f11fece639260d2164",
+        "stage_3_real_001_reconciliation_sha256": "0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a"
       },
-      "disposition": null,
+      "disposition": "pass_controls_published",
       "retained_failures": [
         {
           "record_ref": "records/readiness/m2-optical-pixel-final-preflight-attempt-001-failure.json",
@@ -1170,7 +1178,7 @@
         "expected": [],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "Stages 1 and 2 passed. Stage 3 preflight attempt 001 stopped before pixels on a path-parent implementation mismatch; the bounded correction and synthetic proof await fresh public CI."
+        "rationale": "Stages 1 and 2 passed. Stage 3 controls passed fresh public CI and preflight 002, but the single real-001 attempt is terminal INVALID before metrics; recovery requires a new human decision."
       },
       "next_dependency": "M2-MATERIALIZE-REMAINING"
     },
@@ -1305,23 +1313,21 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "config/qa/pixel-readiness-contract.json",
         "config/qa/optical-pixel-readiness-contract-001.json",
         "records/readiness/optical-input/m2-s2-input-readiness-real-001.json"
       ],
       "outputs": [
-        "records/surface-receipts/optical-pixel-readiness-synthetic-arcgis-001.json",
-        "records/readiness/m2-optical-pixel-implementation-readiness.json",
-        "records/readiness/m2-optical-pixel-publication-gate.json",
-        "records/readiness/m2-optical-pixel-final-preflight.json",
         "records/readiness/optical-pixel/m2-s2-pixel-readiness-real-001.json",
-        "append-only external optical QA attempt"
+        "records/readiness/m2-optical-pixel-real-001-reconciliation.json",
+        "C:/Projects/Active/nepal-2026-before-after-map-data/derived/optical-pixel-readiness-real-001/started.json",
+        "C:/Projects/Active/nepal-2026-before-after-map-data/derived/optical-pixel-readiness-real-001/failure.json"
       ],
       "gates": {
-        "public_ci": "pending_after_failed_preflight_001",
-        "final_no_pixel_preflight": "failed_attempt_001_correction_pending",
+        "public_ci": "pass",
+        "final_no_pixel_preflight": "pass_attempt_002",
         "maximum_real_invocations": 1,
         "radar_pixel_readiness_authorized": false,
         "baseline_or_change_authorized": false,
@@ -1329,10 +1335,16 @@
         "contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
         "implementation_readiness_sha256": "df73bd37e316f1725d2550c0ecfd3e5fe9848f45279ca3f68d6fdf8c349f0979",
         "arcgis_synthetic_sha256": "87cfb12b8623a019fe5315faeb8416257c5893fd03813b7e528690f3d0eadae0",
-        "real_invocation_count": 0,
-        "failed_preflight_001_sha256": "02cfc771bf8414e20dd0d240b826bb59d10606fb6a9cc9fddc7f9870c5f1b8f0"
+        "real_invocation_count": 1,
+        "failed_preflight_001_sha256": "02cfc771bf8414e20dd0d240b826bb59d10606fb6a9cc9fddc7f9870c5f1b8f0",
+        "public_commit": "14c0f01e1b4dd7d2ae0272abcb479002acd54202",
+        "public_ci_run_id": 33986585291,
+        "publication_gate_sha256": "84d396d12f640232f429d8f9c601d18fe6520ef78a6142383066369b3e50c0c9",
+        "final_preflight_sha256": "6edb1b0aaea790ddefb620e391afb893d6a6241c765e49f2a6cbf0b527c8363f",
+        "real_001_receipt_sha256": "0f756c23ecaeaf017c196b0d79632960be5d249854d296f11fece639260d2164",
+        "real_001_reconciliation_sha256": "0e99672232d16208c77053e5343997c5dfc7ee4d4367ccaf68ee9eee13865e1a"
       },
-      "disposition": null,
+      "disposition": "invalid",
       "retained_failures": [
         {
           "record_ref": "records/readiness/m2-optical-pixel-final-preflight-attempt-001-failure.json",
@@ -1347,10 +1359,53 @@
           "EXIT-204-REGISTRATION-QA"
         ],
         "observed": [],
-        "decision_value": "unknown",
-        "rationale": "Preflight attempt 001 stopped before pixels or attempt creation on a path-parent implementation mismatch. The corrected exact controls and synthetic proof await fresh public CI."
+        "decision_value": "invalid",
+        "rationale": "The one real attempt read the first SCL raster then stopped on a production grid extent shape mismatch before AOI mask or registration metrics. No retry is released."
       },
-      "next_dependency": "M2-VERIFY"
+      "next_dependency": "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW"
+    },
+    {
+      "id": "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW",
+      "purpose": "Obtain one attested owner decision on a separately identified code correction and one append-only recovery attempt.",
+      "depends_on": [
+        "M2-OPTICAL-PIXEL-READINESS"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "ready",
+      "inputs": [
+        "contracts/milestone-002-optical-pixel-recovery-001-proposal.json",
+        "records/readiness/m2-optical-pixel-real-001-reconciliation.json",
+        "reviews/m2-optical-pixel-recovery-001/review-bundle.json",
+        "reviews/m2-optical-pixel-recovery-001/review-contract.json"
+      ],
+      "outputs": [
+        "owner decision or explicit defer"
+      ],
+      "gates": {
+        "proposal_sha256": "96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da",
+        "review_bundle_sha256": "d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2",
+        "review_contract_sha256": "da7b8e6e70cfb9837a2c53cde78939ad1f680bcf41a39a8b9f4fdf02ec39fd2f",
+        "blank_response_sha256": "61995bc3dc9ec329c5c48b0aacd0c4d40337c5075868138ac2a9cd700ccc9871",
+        "human_decision_count": 0,
+        "attestation": false,
+        "recovery_authorized": false,
+        "real_001_retry_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        {
+          "record_ref": "records/readiness/optical-pixel/m2-s2-pixel-readiness-real-001.json",
+          "record_sha256": "0f756c23ecaeaf017c196b0d79632960be5d249854d296f11fece639260d2164"
+        }
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "Review preparation creates no recovery authority and contains zero human decisions."
+      },
+      "next_dependency": "M2-OPTICAL-PIXEL-RECOVERY-001-IMPLEMENTATION"
     }
   ],
   "path_efficiency": {
@@ -1407,8 +1462,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-OPTICAL-PIXEL-READINESS",
-    "next_action": "Publish the exact optical pixel-readiness implementation and require successful public CI before the final no-pixel preflight or the one real pixel attempt.",
+    "current_checkpoint": "M2-OPTICAL-PIXEL-RECOVERY-001-REVIEW",
+    "next_action": "Review M2 optical pixel recovery-001 bundle SHA-256 d137b8ac1d46531ae42e7944955829eb2df37985428431b39863f4a157e83ac2 and proposal SHA-256 96f0125628e894061fc5da55faff94e92e51b0385293576177c1e15bd009b3da; approve, revise, or defer. No correction or second pixel attempt is authorized before an attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -1420,7 +1475,8 @@
       "The recovery-002 supervisor failure remains historical evidence; continuation-001 later succeeded under a separate approved identity without retrying or requesting M1-SRC-004.",
       "Stage 1 passed exact public CI and final preflight; its five one-attempt SAFE materializations and eight-source identity reconciliation are complete.",
       "All eight SAFE products now pass materialization identity and per-file hash reconciliation; this establishes no raster header readiness, usable pixels, baseline, or scientific result.",
-      "Both exact real header inspections passed once without pixel reads; only the conditional optical pixel-readiness implementation is released, while radar pixels and all baseline or change actions remain gated."
+      "Both exact real header inspections passed once without pixel reads; only the conditional optical pixel-readiness implementation is released, while radar pixels and all baseline or change actions remain gated.",
+      "Optical pixel real-001 is terminal INVALID after reading the first SCL raster; it produced no QA metrics or derived raster and cannot be retried under current authority."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
