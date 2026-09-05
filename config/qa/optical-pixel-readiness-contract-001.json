@@ -1,0 +1,217 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-S2-PIXEL-READINESS-REAL-001",
+  "created_at_utc": "2026-09-05T19:05:39Z",
+  "status": "active_preobservation_exact_pair_one_attempt",
+  "inputs": {
+    "approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+    "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+    "header_reconciliation_ref": "records/readiness/m2-full-header-readiness-reconciliation.json",
+    "header_reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1",
+    "optical_header_receipt_ref": "records/readiness/optical-input/m2-s2-input-readiness-real-001.json",
+    "optical_header_receipt_sha256": "d3ce00dcead178bcf0c7205933d2869063ed9b5a4bf6a8921ba2c2bcab586931",
+    "pixel_readiness_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_readiness_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "optical_processing_ref": "config/qa/optical-baseline-processing-contract.json",
+    "optical_processing_sha256": "8321b7d3bd6a4a4304ed111f67b9b3ec372204823e495fbabd434ba9463e6eb5",
+    "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"
+  },
+  "implementation": {
+    "core_ref": "scripts/optical_pixel_readiness_core_001.py",
+    "core_sha256": "56d8d5f7f3b04a5413d59f1907c5415d1e53b6f9be84121e2ef8decf10adf3e8",
+    "runner_ref": "scripts/run_m2_optical_pixel_readiness_001.py",
+    "runner_sha256": "5b59ecd54af7d13456a65a0f432023d822934b1e46497b7fd7cfd8538be8d7b8",
+    "stage_gate_ref": "scripts/m2_optical_pixel_stage_gate.py",
+    "stage_gate_sha256": "1f6462d9f83e95b76067edb64f99ccfe094df3e7da3c8729e5c7996ea561397c",
+    "final_preflight_ref": "scripts/preflight_m2_optical_pixel_readiness.py",
+    "final_preflight_sha256": "57be54b53cf725a99ec226afdae25440a4b6d2c00ba3bb35a1eaf67155ca7317",
+    "publication_gate_recorder_ref": "scripts/record_m2_optical_pixel_publication_gate.py",
+    "publication_gate_recorder_sha256": "a83c53a247a085263dcc713885c8fcf1cfd66d0543407c1355ca973e0a7ef79a",
+    "arcgis_adapter_ref": "scripts/validate_optical_pixel_readiness_arcgis_001.py",
+    "arcgis_adapter_sha256": "27c2cca5fb432374aee8648a4680ca90a76cbf55b9de685eea3e8188013e48fd",
+    "portable_tests_ref": "tests/test_m2_optical_pixel_readiness.py",
+    "portable_tests_sha256": "737216f963667781a6b11d9b8f65425529df170898989887038cb7acc681bc26"
+  },
+  "authority": {
+    "authority_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+    "conditional_optical_pixel_stage_released_by_header_pass": true,
+    "network_access_authorized": false,
+    "authentication_authorized": false,
+    "source_substitution_authorized": false,
+    "retry_authorized": false,
+    "radar_pixel_access_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "scientific_publication_authorized": false,
+    "this_contract_creates_authority": false
+  },
+  "exact_pair": {
+    "before_source_id": "M1-SRC-010",
+    "after_source_id": "M1-SRC-008",
+    "pair_id": "PAIR-S2-RUM-R119"
+  },
+  "approved_aoi_ids": [
+    "AOI-OVERVIEW",
+    "AOI-SOURCE",
+    "AOI-UPPER-CORRIDOR"
+  ],
+  "products": {
+    "before": {
+      "source_id": "M1-SRC-010",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-010-m1-src-010-materialization-001.json",
+      "materialization_receipt_sha256": "033db54c20179dc279fa075715f204febbbf1ba199c2abef4e1db4869b47648a",
+      "external_manifest_sha256": "a49ded6ecc8d15dc73001cc01c21e96866535c64836c2000c235ba463d225ead",
+      "selected_members": {
+        "SCL": {
+          "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R20m/T45RUM_20260812T045701_SCL_20m.jp2",
+          "size_bytes": 2895935,
+          "zip_crc32": "e5be347d",
+          "sha256": "9675bb91d769cc154d2a6c1887f315bc9e3f6def4596488d5a36c4e08419fade"
+        },
+        "B11": {
+          "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R20m/T45RUM_20260812T045701_B11_20m.jp2",
+          "size_bytes": 32971809,
+          "zip_crc32": "c1b8ea8a",
+          "sha256": "6b23ef671be43347dc712ff6af63848556c0ead7b8b51715384bcc0e4e21cd51"
+        },
+        "quality_classification": {
+          "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/QI_DATA/MSK_CLASSI_B00.jp2",
+          "size_bytes": 65352,
+          "zip_crc32": "fae8d74a",
+          "sha256": "1f9d4c4824a3fefc89e664e16389d965782c98703c89a7b34661d2f9a2aa19f8"
+        }
+      }
+    },
+    "after": {
+      "source_id": "M1-SRC-008",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-008-m1-src-008-materialization-001.json",
+      "materialization_receipt_sha256": "740431367eec58652d0b1f6df929f34751c52ae3568e2483b91259b0358c52d0",
+      "external_manifest_sha256": "66f1e9a75d3d33ed01c521e9f46099ca137bd52ad13aa294c7276cef52c69fd4",
+      "selected_members": {
+        "SCL": {
+          "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R20m/T45RUM_20260827T045659_SCL_20m.jp2",
+          "size_bytes": 2006086,
+          "zip_crc32": "4f47867b",
+          "sha256": "3cfa58c1f09ef7a32a3d1ef1d323a0c4e192fedecf9985a32f97fd21b3b4066f"
+        },
+        "B11": {
+          "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R20m/T45RUM_20260827T045659_B11_20m.jp2",
+          "size_bytes": 30273799,
+          "zip_crc32": "b7f5eb5e",
+          "sha256": "0a0782bd57d0da6d1c4442ca1a2e916a187568ac83dd141ae53a4a287550691b"
+        },
+        "quality_classification": {
+          "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/QI_DATA/MSK_CLASSI_B00.jp2",
+          "size_bytes": 88448,
+          "zip_crc32": "989bd49a",
+          "sha256": "50a5258adefca649c9ccd1864961711169b8b0091066053f516bd39ddfbdca02"
+        }
+      }
+    }
+  },
+  "analysis_grid": {
+    "wkid": 32645,
+    "name": "WGS 1984 UTM Zone 45N",
+    "cell_size_m": 20.0,
+    "snap_basis": "approved AOI union extent snapped outward to 20 metre multiples",
+    "extent": {
+      "xmin": 273300.0,
+      "ymin": 3070220.0,
+      "xmax": 367820.0,
+      "ymax": 3149220.0
+    },
+    "columns": 4726,
+    "rows": 3950,
+    "continuous_resampling": "BILINEAR",
+    "categorical_resampling": "NEAREST",
+    "grid_drift_disposition": "block"
+  },
+  "mask": {
+    "valid_scl_classes": [
+      4,
+      5,
+      6
+    ],
+    "scl_exclusion_classes": [
+      0,
+      1,
+      2,
+      3,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "quality_classification_role": "MSK_CLASSI_B00 three-band opaque-cloud, cirrus-cloud, snow-or-ice mask",
+    "quality_classification_clear_value": 0,
+    "dn_zero_excluded_for_registration": true,
+    "pair_valid_requires_both_dates_valid": true,
+    "exclusive_reason_precedence": [
+      "coverage",
+      "before_scl",
+      "after_scl",
+      "before_quality",
+      "after_quality",
+      "before_dn_zero",
+      "after_dn_zero",
+      "valid_pair"
+    ],
+    "unknown_scl_policy": "exclude_and_defer_review"
+  },
+  "registration": {
+    "band_role": "B11",
+    "candidate_grid_rows": 30,
+    "candidate_grid_columns": 30,
+    "patch_radius_pixels": 10,
+    "search_radius_pixels": 2,
+    "minimum_pair_valid_fraction": 0.8,
+    "minimum_patch_standard_deviation_dn": 20.0,
+    "minimum_correlation": 0.6,
+    "event_aoi_exclusion_buffer_m": 1000.0,
+    "selection_rule": "use every deterministic candidate meeting the frozen mask texture and correlation filters; do not rank or cherry-pick controls",
+    "subpixel_rule": "three-point parabolic refinement around the integer correlation maximum when both neighbors exist",
+    "decision_threshold_source": "config/qa/pixel-readiness-contract.json#registration"
+  },
+  "attempt": {
+    "attempt_id": "optical-pixel-readiness-real-001",
+    "maximum_real_invocations": 1,
+    "automatic_retry_authorized": false,
+    "external_attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\optical-pixel-readiness-real-001",
+    "public_receipt_ref": "records/readiness/optical-pixel/m2-s2-pixel-readiness-real-001.json",
+    "minimum_free_space_bytes": 2147483648,
+    "collision_policy": "fail"
+  },
+  "execution_boundary": {
+    "external_data_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "source_materializations": "read_only_and_inventory_compared_before_after",
+    "derived_outputs": "append_only_exact_attempt_root",
+    "network_requests": "prohibited",
+    "authentication": "prohibited",
+    "public_imagery": "prohibited",
+    "spectral_index_or_change_rasters": "prohibited",
+    "candidate_change_polygons": "prohibited"
+  },
+  "decision_domain": [
+    "pass_qa_only",
+    "defer",
+    "block",
+    "invalid"
+  ],
+  "claim_boundary": {
+    "coverage_mask_grid_and_registration_qa_measured": false,
+    "spectral_indices_computed": false,
+    "candidate_change_polygons_created": false,
+    "baseline_established": false,
+    "change_established": false,
+    "event_attribution_established": false,
+    "scientific_admission_authorized": false
+  },
+  "limitations": [
+    "The attempt can establish QA fitness only for the exact Sentinel-2 pair and three approved AOIs.",
+    "The conservative pair mask requires valid SCL surface classes and clear three-band classification masks on both dates; high post-event cloud may defer or block the route.",
+    "Registration controls are deterministic B11 patches outside buffered event AOIs; the method does not prove radiometric comparability or landscape stability everywhere.",
+    "No threshold may be changed after real pixels are observed, and no retry, date shopping, or source substitution is authorized.",
+    "A pass does not release spectral indices, a baseline, change detection, interpretation, attribution, emergency guidance, or publication."
+  ]
+}

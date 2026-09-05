@@ -158,7 +158,14 @@ class M2DemActivationTests(unittest.TestCase):
             (unit for unit in self.milestone["units"] if unit["id"] == "M2-FULL-INPUT-READINESS"),
             None,
         )
+        optical_pixel = next(
+            (unit for unit in self.milestone["units"] if unit["id"] == "M2-OPTICAL-PIXEL-READINESS"),
+            None,
+        )
         expected_primary_checkpoint = (
+            "M2-OPTICAL-PIXEL-READINESS"
+            if optical_pixel is not None and optical_pixel.get("status") == "in_progress"
+            else
             "M2-FULL-INPUT-READINESS"
             if full_header is not None and full_header.get("status") == "in_progress"
             else

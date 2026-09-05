@@ -346,10 +346,10 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-FULL-INPUT-READINESS",
+    "checkpoint_id": "M2-OPTICAL-PIXEL-READINESS",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish the exact six-source radar and two-source optical header-readiness implementation and require successful public CI before the final no-header preflight or either real inspection."
+    "next_action": "Publish the exact optical pixel-readiness implementation and require successful public CI before the final no-pixel preflight or the one real pixel attempt."
   },
   "parallel_checkpoints": [
     {

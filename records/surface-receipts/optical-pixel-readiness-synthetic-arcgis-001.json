@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-S2-PIXEL-READINESS-SYNTHETIC-ARCGIS-001",
+  "verified_at_utc": "2026-09-05T19:05:50Z",
+  "status": "pass_synthetic_arcgis_with_expected_shift_block",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced"
+  },
+  "bindings": {
+    "contract_ref": "config/qa/optical-pixel-readiness-contract-001.json",
+    "contract_sha256": "13e99ad4c158122e9c862c9247f85d4bfbca1b949469468a38c6c57905acd5b4",
+    "pixel_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "adapter_sha256": "27c2cca5fb432374aee8648a4680ca90a76cbf55b9de685eea3e8188013e48fd"
+  },
+  "checks": {
+    "aligned_registration": {
+      "status": "pass_qa_only",
+      "stable_control_pair_count": 900,
+      "rmse_pixels": 0.005432442325715306,
+      "bias_x_pixels": 0.00014809890572280106,
+      "bias_y_pixels": 9.813209993205524e-05,
+      "finding": "Registration metrics meet the predeclared QA thresholds.",
+      "scientific_admission_authorized": false,
+      "candidate_count": 900,
+      "accepted_control_count": 900,
+      "rejected_counts": {
+        "outside_overview": 0,
+        "event_exclusion": 0,
+        "insufficient_valid": 0,
+        "low_texture": 0,
+        "low_correlation": 0
+      },
+      "method": "deterministic B11 normalized local cross-correlation outside buffered event AOIs"
+    },
+    "two_pixel_shift": {
+      "status": "block",
+      "stable_control_pair_count": 780,
+      "rmse_pixels": 2.0000042936020974,
+      "bias_x_pixels": 2.0,
+      "bias_y_pixels": 0.00013735288393470463,
+      "finding": "Registration RMSE exceeds the predeclared maximum.",
+      "scientific_admission_authorized": false,
+      "candidate_count": 900,
+      "accepted_control_count": 780,
+      "rejected_counts": {
+        "outside_overview": 0,
+        "event_exclusion": 0,
+        "insufficient_valid": 0,
+        "low_texture": 0,
+        "low_correlation": 120
+      },
+      "method": "deterministic B11 normalized local cross-correlation outside buffered event AOIs"
+    },
+    "valid_pixel_count": 51840,
+    "after_cloud_pixel_count": 5760
+  },
+  "assertions": {
+    "synthetic_rasters_only": true,
+    "real_materialization_receipts_used": false,
+    "external_custody_accessed": false,
+    "real_product_pixels_examined": false,
+    "spectral_indices_computed": false,
+    "candidate_change_polygons_created": false
+  },
+  "next_gate": "portable tests and public CI before any real optical pixel access"
+}

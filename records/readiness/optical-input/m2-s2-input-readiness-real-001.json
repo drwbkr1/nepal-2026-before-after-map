@@ -1,0 +1,666 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-S2-MATERIALIZED-INPUT-READINESS-REAL-001",
+  "checked_at_utc": "2026-09-05T18:53:51Z",
+  "status": "pass_header_readability_only",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "Advanced"
+  },
+  "bindings": {
+    "contract_ref": "config/qa/optical-input-readiness-contract-full-cohort-001.json",
+    "contract_sha256": "23f487dfd17bac016d1e3ac0f276f14b480f394f6ec20f3fbbe456340461878a",
+    "before_materialization_receipt_ref": "records/acquisition/materialization/m1-src-010-m1-src-010-materialization-001.json",
+    "before_materialization_receipt_sha256": "033db54c20179dc279fa075715f204febbbf1ba199c2abef4e1db4869b47648a",
+    "after_materialization_receipt_ref": "records/acquisition/materialization/m1-src-008-m1-src-008-materialization-001.json",
+    "after_materialization_receipt_sha256": "740431367eec58652d0b1f6df929f34751c52ae3568e2483b91259b0358c52d0"
+  },
+  "products": {
+    "M1-SRC-010": {
+      "source_id": "M1-SRC-010",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-010-m1-src-010-materialization-001.json",
+      "materialization_receipt_sha256": "033db54c20179dc279fa075715f204febbbf1ba199c2abef4e1db4869b47648a",
+      "external_manifest_sha256": "a49ded6ecc8d15dc73001cc01c21e96866535c64836c2000c235ba463d225ead",
+      "inventory": {
+        "status": "pass_inventory_only",
+        "members": {
+          "metadata_product": {
+            "relative_path": "MTD_MSIL2A.xml",
+            "size_bytes": 58704,
+            "zip_crc32": "1f1ece39",
+            "sha256": "494578142cfc3cb6e68b4de2638182e014dd1c6f16e1ed149c54b328a1a5912b"
+          },
+          "metadata_tile": {
+            "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/MTD_TL.xml",
+            "size_bytes": 463098,
+            "zip_crc32": "994d055b",
+            "sha256": "84a92a91110d74797acdf52f733983bd9f7fb3fc42583399083fdd50bac67cba"
+          },
+          "B02": {
+            "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R10m/T45RUM_20260812T045701_B02_10m.jp2",
+            "size_bytes": 112928993,
+            "zip_crc32": "2bc95b64",
+            "sha256": "4f396fabefa15200a545c7effbec338418c599215e9e624e07c63a73ebba2a82"
+          },
+          "B03": {
+            "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R10m/T45RUM_20260812T045701_B03_10m.jp2",
+            "size_bytes": 117060697,
+            "zip_crc32": "19ed8c12",
+            "sha256": "b1bd1520f0202929453b1ef4e0d92e1f5c1134b5283888ed455aaf898b75a4cc"
+          },
+          "B04": {
+            "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R10m/T45RUM_20260812T045701_B04_10m.jp2",
+            "size_bytes": 114270376,
+            "zip_crc32": "b583e133",
+            "sha256": "5de2c01589e37bba551a45b0c158efe3a6684653aac44febe593dbe073c6e5da"
+          },
+          "B08": {
+            "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R10m/T45RUM_20260812T045701_B08_10m.jp2",
+            "size_bytes": 125522902,
+            "zip_crc32": "a8416b9a",
+            "sha256": "e8170bddf8f69ffb1a253f802166b5127fd6caac0180020d8b2d298574b3b948"
+          },
+          "B11": {
+            "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R20m/T45RUM_20260812T045701_B11_20m.jp2",
+            "size_bytes": 32971809,
+            "zip_crc32": "c1b8ea8a",
+            "sha256": "6b23ef671be43347dc712ff6af63848556c0ead7b8b51715384bcc0e4e21cd51"
+          },
+          "B12": {
+            "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R20m/T45RUM_20260812T045701_B12_20m.jp2",
+            "size_bytes": 32518793,
+            "zip_crc32": "950fa46d",
+            "sha256": "06efcee31af7067714fc6b2bd942e25342d4223dd8704068f3ce4bf740bbfe72"
+          },
+          "SCL": {
+            "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/IMG_DATA/R20m/T45RUM_20260812T045701_SCL_20m.jp2",
+            "size_bytes": 2895935,
+            "zip_crc32": "e5be347d",
+            "sha256": "9675bb91d769cc154d2a6c1887f315bc9e3f6def4596488d5a36c4e08419fade"
+          },
+          "quality_classification": {
+            "relative_path": "GRANULE/L2A_T45RUM_A010099_20260812T050239/QI_DATA/MSK_CLASSI_B00.jp2",
+            "size_bytes": 65352,
+            "zip_crc32": "fae8d74a",
+            "sha256": "1f9d4c4824a3fefc89e664e16389d965782c98703c89a7b34661d2f9a2aa19f8"
+          }
+        },
+        "errors": []
+      },
+      "metadata": {
+        "processing_baseline": "05.12",
+        "quantification_value": 10000.0,
+        "offsets_by_band": {
+          "B01": -1000.0,
+          "B02": -1000.0,
+          "B03": -1000.0,
+          "B04": -1000.0,
+          "B05": -1000.0,
+          "B06": -1000.0,
+          "B07": -1000.0,
+          "B08": -1000.0,
+          "B8A": -1000.0,
+          "B09": -1000.0,
+          "B10": -1000.0,
+          "B11": -1000.0,
+          "B12": -1000.0
+        },
+        "special_values": {
+          "NODATA": 0,
+          "SATURATED": 65535
+        },
+        "errors": []
+      },
+      "metadata_errors": [],
+      "descriptions": {
+        "B02": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 10980,
+          "height": 10980,
+          "cell_width": 10.0,
+          "cell_height": 10.0,
+          "pixel_type": "U16",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 10980,
+              "height": 10980,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
+        },
+        "B03": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 10980,
+          "height": 10980,
+          "cell_width": 10.0,
+          "cell_height": 10.0,
+          "pixel_type": "U16",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 10980,
+              "height": 10980,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
+        },
+        "B04": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 10980,
+          "height": 10980,
+          "cell_width": 10.0,
+          "cell_height": 10.0,
+          "pixel_type": "U16",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 10980,
+              "height": 10980,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
+        },
+        "B08": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 10980,
+          "height": 10980,
+          "cell_width": 10.0,
+          "cell_height": 10.0,
+          "pixel_type": "U16",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 10980,
+              "height": 10980,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
+        },
+        "B11": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 5490,
+          "height": 5490,
+          "cell_width": 20.0,
+          "cell_height": 20.0,
+          "pixel_type": "U16",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 5490,
+              "height": 5490,
+              "cell_width": 20.0,
+              "cell_height": 20.0,
+              "pixel_type": "U16"
+            }
+          ]
+        },
+        "B12": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 5490,
+          "height": 5490,
+          "cell_width": 20.0,
+          "cell_height": 20.0,
+          "pixel_type": "U16",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 5490,
+              "height": 5490,
+              "cell_width": 20.0,
+              "cell_height": 20.0,
+              "pixel_type": "U16"
+            }
+          ]
+        },
+        "SCL": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 5490,
+          "height": 5490,
+          "cell_width": 20.0,
+          "cell_height": 20.0,
+          "pixel_type": "U8",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 5490,
+              "height": 5490,
+              "cell_width": 20.0,
+              "cell_height": 20.0,
+              "pixel_type": "U8"
+            }
+          ]
+        },
+        "quality_classification": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 3,
+          "width": 1830,
+          "height": 1830,
+          "cell_width": 60.0,
+          "cell_height": 60.0,
+          "pixel_type": "U8",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 1830,
+              "height": 1830,
+              "cell_width": 60.0,
+              "cell_height": 60.0,
+              "pixel_type": "U8"
+            },
+            {
+              "name": "Band_2",
+              "width": 1830,
+              "height": 1830,
+              "cell_width": 60.0,
+              "cell_height": 60.0,
+              "pixel_type": "U8"
+            },
+            {
+              "name": "Band_3",
+              "width": 1830,
+              "height": 1830,
+              "cell_width": 60.0,
+              "cell_height": 60.0,
+              "pixel_type": "U8"
+            }
+          ]
+        }
+      },
+      "selected_member_count": 10,
+      "external_materialization_inventory_unchanged": true
+    },
+    "M1-SRC-008": {
+      "source_id": "M1-SRC-008",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-008-m1-src-008-materialization-001.json",
+      "materialization_receipt_sha256": "740431367eec58652d0b1f6df929f34751c52ae3568e2483b91259b0358c52d0",
+      "external_manifest_sha256": "66f1e9a75d3d33ed01c521e9f46099ca137bd52ad13aa294c7276cef52c69fd4",
+      "inventory": {
+        "status": "pass_inventory_only",
+        "members": {
+          "metadata_product": {
+            "relative_path": "MTD_MSIL2A.xml",
+            "size_bytes": 54899,
+            "zip_crc32": "a154c59d",
+            "sha256": "1a6ab0605bdf0eb24c459e35fcd26e42b90b98b503aeff08578e8253b98d7db9"
+          },
+          "metadata_tile": {
+            "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/MTD_TL.xml",
+            "size_bytes": 463379,
+            "zip_crc32": "78d072d4",
+            "sha256": "6507b248236385f415572db98195b52f863a6f3cec4aae82d6c7d2fc57e88949"
+          },
+          "B02": {
+            "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R10m/T45RUM_20260827T045659_B02_10m.jp2",
+            "size_bytes": 113670682,
+            "zip_crc32": "4dbb92ee",
+            "sha256": "da96bc26ce1fb7365365c8f99217cf74a15030b27d8783ced7c1f3d879551eff"
+          },
+          "B03": {
+            "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R10m/T45RUM_20260827T045659_B03_10m.jp2",
+            "size_bytes": 111784285,
+            "zip_crc32": "18994369",
+            "sha256": "343bac3de0e347641807bc484b7cf9ec0f02d5a9da6596e35aa6e64058f71142"
+          },
+          "B04": {
+            "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R10m/T45RUM_20260827T045659_B04_10m.jp2",
+            "size_bytes": 110005053,
+            "zip_crc32": "ef39206a",
+            "sha256": "afd8b748243e56370ff3f0c6de28e75f6792ba2aeff690c85bf50bc00a3179c6"
+          },
+          "B08": {
+            "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R10m/T45RUM_20260827T045659_B08_10m.jp2",
+            "size_bytes": 111526501,
+            "zip_crc32": "90dba1f9",
+            "sha256": "5cb5bef940b9bc0d0797352f1a523eea34dd889598abb10a455ca61da65c21e1"
+          },
+          "B11": {
+            "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R20m/T45RUM_20260827T045659_B11_20m.jp2",
+            "size_bytes": 30273799,
+            "zip_crc32": "b7f5eb5e",
+            "sha256": "0a0782bd57d0da6d1c4442ca1a2e916a187568ac83dd141ae53a4a287550691b"
+          },
+          "B12": {
+            "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R20m/T45RUM_20260827T045659_B12_20m.jp2",
+            "size_bytes": 29874280,
+            "zip_crc32": "4fccae9d",
+            "sha256": "e535c4c4c65c4ac879f3034fc977abaccb049e6235e9692856d32e2c5ff117e8"
+          },
+          "SCL": {
+            "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/IMG_DATA/R20m/T45RUM_20260827T045659_SCL_20m.jp2",
+            "size_bytes": 2006086,
+            "zip_crc32": "4f47867b",
+            "sha256": "3cfa58c1f09ef7a32a3d1ef1d323a0c4e192fedecf9985a32f97fd21b3b4066f"
+          },
+          "quality_classification": {
+            "relative_path": "GRANULE/L2A_T45RUM_A049480_20260827T051017/QI_DATA/MSK_CLASSI_B00.jp2",
+            "size_bytes": 88448,
+            "zip_crc32": "989bd49a",
+            "sha256": "50a5258adefca649c9ccd1864961711169b8b0091066053f516bd39ddfbdca02"
+          }
+        },
+        "errors": []
+      },
+      "metadata": {
+        "processing_baseline": "05.12",
+        "quantification_value": 10000.0,
+        "offsets_by_band": {
+          "B01": -1000.0,
+          "B02": -1000.0,
+          "B03": -1000.0,
+          "B04": -1000.0,
+          "B05": -1000.0,
+          "B06": -1000.0,
+          "B07": -1000.0,
+          "B08": -1000.0,
+          "B8A": -1000.0,
+          "B09": -1000.0,
+          "B10": -1000.0,
+          "B11": -1000.0,
+          "B12": -1000.0
+        },
+        "special_values": {
+          "NODATA": 0,
+          "SATURATED": 65535
+        },
+        "errors": []
+      },
+      "metadata_errors": [],
+      "descriptions": {
+        "B02": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 10980,
+          "height": 10980,
+          "cell_width": 10.0,
+          "cell_height": 10.0,
+          "pixel_type": "U16",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 10980,
+              "height": 10980,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
+        },
+        "B03": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 10980,
+          "height": 10980,
+          "cell_width": 10.0,
+          "cell_height": 10.0,
+          "pixel_type": "U16",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 10980,
+              "height": 10980,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
+        },
+        "B04": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 10980,
+          "height": 10980,
+          "cell_width": 10.0,
+          "cell_height": 10.0,
+          "pixel_type": "U16",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 10980,
+              "height": 10980,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
+        },
+        "B08": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 10980,
+          "height": 10980,
+          "cell_width": 10.0,
+          "cell_height": 10.0,
+          "pixel_type": "U16",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 10980,
+              "height": 10980,
+              "cell_width": 10.0,
+              "cell_height": 10.0,
+              "pixel_type": "U16"
+            }
+          ]
+        },
+        "B11": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 5490,
+          "height": 5490,
+          "cell_width": 20.0,
+          "cell_height": 20.0,
+          "pixel_type": "U16",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 5490,
+              "height": 5490,
+              "cell_width": 20.0,
+              "cell_height": 20.0,
+              "pixel_type": "U16"
+            }
+          ]
+        },
+        "B12": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 5490,
+          "height": 5490,
+          "cell_width": 20.0,
+          "cell_height": 20.0,
+          "pixel_type": "U16",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 5490,
+              "height": 5490,
+              "cell_width": 20.0,
+              "cell_height": 20.0,
+              "pixel_type": "U16"
+            }
+          ]
+        },
+        "SCL": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 1,
+          "width": 5490,
+          "height": 5490,
+          "cell_width": 20.0,
+          "cell_height": 20.0,
+          "pixel_type": "U8",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 5490,
+              "height": 5490,
+              "cell_width": 20.0,
+              "cell_height": 20.0,
+              "pixel_type": "U8"
+            }
+          ]
+        },
+        "quality_classification": {
+          "format": "JP2",
+          "wkid": 32645,
+          "band_count": 3,
+          "width": 1830,
+          "height": 1830,
+          "cell_width": 60.0,
+          "cell_height": 60.0,
+          "pixel_type": "U8",
+          "xmin": 300000.0,
+          "ymin": 3090240.0,
+          "xmax": 409800.0,
+          "ymax": 3200040.0,
+          "band_details": [
+            {
+              "name": "Band_1",
+              "width": 1830,
+              "height": 1830,
+              "cell_width": 60.0,
+              "cell_height": 60.0,
+              "pixel_type": "U8"
+            },
+            {
+              "name": "Band_2",
+              "width": 1830,
+              "height": 1830,
+              "cell_width": 60.0,
+              "cell_height": 60.0,
+              "pixel_type": "U8"
+            },
+            {
+              "name": "Band_3",
+              "width": 1830,
+              "height": 1830,
+              "cell_width": 60.0,
+              "cell_height": 60.0,
+              "pixel_type": "U8"
+            }
+          ]
+        }
+      },
+      "selected_member_count": 10,
+      "external_materialization_inventory_unchanged": true
+    }
+  },
+  "decision": {
+    "status": "pass_header_readability_only",
+    "reasons": [],
+    "pixel_values_examined": false,
+    "pixel_usability_established": false,
+    "baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  },
+  "activity": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "external_data_mutated": false,
+    "external_materialization_inventory_unchanged": true,
+    "selected_materialized_files_rehashed": true,
+    "raster_header_open_attempted_with_arcgis": true,
+    "all_selected_raster_headers_opened_with_arcgis": true,
+    "pixel_values_examined": false
+  },
+  "limitations": [
+    "A header-readiness pass establishes selected file identity, required inventory, metadata scaling fields, JP2 readability, CRS, dimensions, cell size, and pair grid compatibility only.",
+    "It does not inspect pixel values, masks, AOI coverage, saturation, registration residuals, cross-platform bias, or observable change.",
+    "The post-event optical scene remains high-cloud-risk and may be unusable after pixel-level mask review.",
+    "A blocked or inconclusive optical route must be retained and cannot be rescued by substituting unapproved dates or products.",
+    "This version binds the two exact passing materialization receipts and the eight-source materialization reconciliation; it weakens no prior check."
+  ],
+  "next_gate": "pixel_coverage_mask_and_registration_qa"
+}

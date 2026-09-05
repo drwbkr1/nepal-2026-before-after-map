@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-FULL-HEADER-READINESS-RECONCILIATION-001",
+  "reconciled_at_utc": "2026-09-05T18:57:48Z",
+  "status": "pass_both_exact_header_routes_only",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+    "publication_gate_ref": "records/readiness/m2-header-stage-publication-gate.json",
+    "final_preflight_ref": "records/readiness/m2-header-stage-final-preflight.json",
+    "radar_ref": "records/readiness/radar-input/m2-s1-input-readiness-real-003.json",
+    "optical_ref": "records/readiness/optical-input/m2-s2-input-readiness-real-001.json",
+    "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+    "publication_gate_sha256": "2770f3dff46c0c8bca8cc953017ec4446e92a17ab933fe396b4803a892c6ec2c",
+    "final_preflight_sha256": "15084ea42d8f64c2f2a0d6055615e8d38c2f4cd932f88c51335f03496924f5a0",
+    "radar_sha256": "3513098380204268c0fb9c1eb154db36df71f47a1a11fe05e577a12f915ad3da",
+    "optical_sha256": "d3ce00dcead178bcf0c7205933d2869063ed9b5a4bf6a8921ba2c2bcab586931"
+  },
+  "results": {
+    "radar": {
+      "status": "pass_full_radar_header_readiness_only",
+      "source_count": 6,
+      "real_invocation_count": 1
+    },
+    "optical": {
+      "status": "pass_header_readability_only",
+      "source_count": 2,
+      "real_invocation_count": 1
+    }
+  },
+  "assertions": {
+    "route_results_preserved_independently": true,
+    "external_materializations_unchanged": true,
+    "measurement_pixels_decoded": false,
+    "pixel_usability_established": false,
+    "baseline_established": false,
+    "change_established": false,
+    "scientific_admission_authorized": false
+  },
+  "next_gate": "implement and publish the exact conditional optical pixel-readiness attempt before any real pixel access"
+}

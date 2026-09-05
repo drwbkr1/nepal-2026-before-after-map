@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-OPTICAL-PIXEL-IMPLEMENTATION-READINESS-001",
+  "verified_at_utc": "2026-09-05T19:06:55Z",
+  "status": "pass_local_and_arcgis_synthetic_ready_public_ci_pending",
+  "bindings": {
+    "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+    "header_publication_gate_sha256": "2770f3dff46c0c8bca8cc953017ec4446e92a17ab933fe396b4803a892c6ec2c",
+    "header_final_preflight_sha256": "15084ea42d8f64c2f2a0d6055615e8d38c2f4cd932f88c51335f03496924f5a0",
+    "radar_header_receipt_sha256": "3513098380204268c0fb9c1eb154db36df71f47a1a11fe05e577a12f915ad3da",
+    "optical_header_receipt_sha256": "d3ce00dcead178bcf0c7205933d2869063ed9b5a4bf6a8921ba2c2bcab586931",
+    "header_reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1",
+    "contract_sha256": "13e99ad4c158122e9c862c9247f85d4bfbca1b949469468a38c6c57905acd5b4",
+    "core_sha256": "56d8d5f7f3b04a5413d59f1907c5415d1e53b6f9be84121e2ef8decf10adf3e8",
+    "runner_sha256": "5b59ecd54af7d13456a65a0f432023d822934b1e46497b7fd7cfd8538be8d7b8",
+    "stage_gate_sha256": "1f6462d9f83e95b76067edb64f99ccfe094df3e7da3c8729e5c7996ea561397c",
+    "final_preflight_sha256": "57be54b53cf725a99ec226afdae25440a4b6d2c00ba3bb35a1eaf67155ca7317",
+    "publication_gate_recorder_sha256": "a83c53a247a085263dcc713885c8fcf1cfd66d0543407c1355ca973e0a7ef79a",
+    "arcgis_adapter_sha256": "27c2cca5fb432374aee8648a4680ca90a76cbf55b9de685eea3e8188013e48fd",
+    "arcgis_synthetic_receipt_sha256": "0c9cca07737d0e8dbe0a6cf39dfba8290661e15e28e46b4acbe08707a3bbf76e",
+    "portable_tests_sha256": "737216f963667781a6b11d9b8f65425529df170898989887038cb7acc681bc26"
+  },
+  "tests": {
+    "focused_test_count": 11,
+    "full_repository_test_count": 360,
+    "portable_result": "pass",
+    "arcgis_result": "pass",
+    "intentional_two_pixel_shift": "block"
+  },
+  "assertions": {
+    "exact_pair_frozen": true,
+    "three_approved_aois_frozen": true,
+    "thresholds_frozen_before_real_pixels": true,
+    "external_custody_accessed_by_synthetic_tests": false,
+    "real_product_pixels_examined": false,
+    "real_attempt_started": false,
+    "radar_pixel_access_released": false,
+    "baseline_or_change_released": false
+  },
+  "next_gate": "publish this exact implementation and require successful public CI before the final no-pixel preflight"
+}

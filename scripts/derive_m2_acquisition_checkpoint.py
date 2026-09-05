@@ -50,6 +50,10 @@ FULL_HEADER_IMPLEMENTATION_CHECKPOINT = {
     "checkpoint_id": "M2-FULL-INPUT-READINESS",
     "next_action": "Publish the exact six-source radar and two-source optical header-readiness implementation and require successful public CI before the final no-header preflight or either real inspection.",
 }
+OPTICAL_PIXEL_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-OPTICAL-PIXEL-READINESS",
+    "next_action": "Publish the exact optical pixel-readiness implementation and require successful public CI before the final no-pixel preflight or the one real pixel attempt.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -194,6 +198,28 @@ def current_full_header_implementation_pending(root: Path, state_counts: dict[st
     )
 
 
+def current_optical_pixel_implementation_pending(root: Path, state_counts: dict[str, int]) -> bool:
+    if not current_container_verification_complete(root, state_counts):
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        reconciliation = load(root / "records/readiness/m2-full-header-readiness-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    header = units.get("M2-FULL-INPUT-READINESS", {})
+    pixel = units.get("M2-OPTICAL-PIXEL-READINESS", {})
+    return bool(
+        reconciliation.get("status") == "pass_both_exact_header_routes_only"
+        and header.get("status") == "complete"
+        and header.get("disposition") == "pass_header_readiness_only"
+        and pixel.get("status") == "in_progress"
+        and pixel.get("gates", {}).get("public_ci") == "pending"
+        and pixel.get("gates", {}).get("maximum_real_invocations") == 1
+        and pixel.get("gates", {}).get("radar_pixel_readiness_authorized") is False
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -238,7 +264,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_full_header_implementation_pending(ROOT, progress["state_counts"]):
+        if current_optical_pixel_implementation_pending(ROOT, progress["state_counts"]):
+            checkpoint = dict(OPTICAL_PIXEL_IMPLEMENTATION_CHECKPOINT)
+        elif current_full_header_implementation_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(FULL_HEADER_IMPLEMENTATION_CHECKPOINT)
         elif current_materialization_pixel_implementation_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(MATERIALIZATION_PIXEL_IMPLEMENTATION_CHECKPOINT)

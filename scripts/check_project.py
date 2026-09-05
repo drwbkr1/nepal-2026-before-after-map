@@ -16,6 +16,7 @@ from derive_m2_acquisition_checkpoint import (
     current_container_verification_complete,
     current_full_header_implementation_pending,
     current_materialization_pixel_implementation_pending,
+    current_optical_pixel_implementation_pending,
     derive_checkpoint,
 )
 from record_m2_sentinel_continuation_001_implementation_readiness import IMPLEMENTATION_FILES as CONTINUATION_001_IMPLEMENTATION_FILES
@@ -61,6 +62,24 @@ REQUIRED = [
     "records/readiness/m2-materialization-stage-1-publication-gate.json",
     "records/readiness/m2-materialization-remaining-preflight.json",
     "records/readiness/m2-header-stage-implementation-readiness.json",
+    "records/readiness/m2-header-stage-publication-gate.json",
+    "records/readiness/m2-header-stage-final-preflight.json",
+    "records/readiness/radar-input/m2-s1-input-readiness-real-003.json",
+    "records/readiness/optical-input/m2-s2-input-readiness-real-001.json",
+    "records/readiness/m2-full-header-readiness-reconciliation.json",
+    "config/qa/optical-pixel-readiness-contract-001.json",
+    "records/surface-receipts/optical-pixel-readiness-synthetic-arcgis-001.json",
+    "records/readiness/m2-optical-pixel-implementation-readiness.json",
+    "scripts/reconcile_m2_full_header_readiness.py",
+    "scripts/optical_pixel_readiness_core_001.py",
+    "scripts/run_m2_optical_pixel_readiness_001.py",
+    "scripts/m2_optical_pixel_stage_gate.py",
+    "scripts/preflight_m2_optical_pixel_readiness.py",
+    "scripts/record_m2_optical_pixel_publication_gate.py",
+    "scripts/record_m2_optical_pixel_implementation_readiness.py",
+    "scripts/prepare_m2_optical_pixel_readiness_contract.py",
+    "scripts/validate_optical_pixel_readiness_arcgis_001.py",
+    "tests/test_m2_optical_pixel_readiness.py",
     "records/acquisition/sentinel-materialization-reconciliation-002.json",
     "records/acquisition/materialization/m1-src-004-m1-src-004-materialization-001.json",
     "records/acquisition/materialization/m1-src-005-m1-src-005-materialization-001.json",
@@ -797,6 +816,14 @@ def main() -> None:
     radar_full_header_synthetic = json.loads((ROOT / "records/surface-receipts/radar-input-readiness-synthetic-full-cohort-001.json").read_text(encoding="utf-8"))
     optical_full_header_synthetic = json.loads((ROOT / "records/surface-receipts/optical-input-readiness-synthetic-full-cohort-001.json").read_text(encoding="utf-8"))
     header_stage_readiness = json.loads((ROOT / "records/readiness/m2-header-stage-implementation-readiness.json").read_text(encoding="utf-8"))
+    header_stage_publication = json.loads((ROOT / "records/readiness/m2-header-stage-publication-gate.json").read_text(encoding="utf-8"))
+    header_stage_final_preflight = json.loads((ROOT / "records/readiness/m2-header-stage-final-preflight.json").read_text(encoding="utf-8"))
+    radar_header_real_003 = json.loads((ROOT / "records/readiness/radar-input/m2-s1-input-readiness-real-003.json").read_text(encoding="utf-8"))
+    optical_header_real_001 = json.loads((ROOT / "records/readiness/optical-input/m2-s2-input-readiness-real-001.json").read_text(encoding="utf-8"))
+    full_header_reconciliation = json.loads((ROOT / "records/readiness/m2-full-header-readiness-reconciliation.json").read_text(encoding="utf-8"))
+    optical_pixel_contract = json.loads((ROOT / "config/qa/optical-pixel-readiness-contract-001.json").read_text(encoding="utf-8"))
+    optical_pixel_synthetic = json.loads((ROOT / "records/surface-receipts/optical-pixel-readiness-synthetic-arcgis-001.json").read_text(encoding="utf-8"))
+    optical_pixel_readiness = json.loads((ROOT / "records/readiness/m2-optical-pixel-implementation-readiness.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
     remote_project_name = expected_remote.rstrip("/").rsplit("/", 1)[-1].removesuffix(".git")
@@ -4397,7 +4424,13 @@ def main() -> None:
         materialization_pixel_review_approved
         and current_full_header_implementation_pending(ROOT, state_counts)
     )
-    if full_header_implementation_pending:
+    optical_pixel_implementation_pending = bool(
+        materialization_pixel_review_approved
+        and current_optical_pixel_implementation_pending(ROOT, state_counts)
+    )
+    if optical_pixel_implementation_pending:
+        expected_checkpoint = "M2-OPTICAL-PIXEL-READINESS"
+    elif full_header_implementation_pending:
         expected_checkpoint = "M2-FULL-INPUT-READINESS"
     elif materialization_pixel_review_approved:
         expected_checkpoint = "M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"
@@ -4420,6 +4453,7 @@ def main() -> None:
     expected_materialization_review_next_action = "Review M2 materialization and pixel-readiness bundle SHA-256 8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a and proposal SHA-256 3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c; approve, revise, or defer the single bounded plan. No materialization, real header access, or pixel read is authorized before a completed decision."
     expected_materialization_implementation_next_action = "Publish the exact approved stage-1 materialization controls and require successful public CI before the final no-mutation preflight or any SAFE extraction."
     expected_header_implementation_next_action = "Publish the exact six-source radar and two-source optical header-readiness implementation and require successful public CI before the final no-header preflight or either real inspection."
+    expected_optical_pixel_implementation_next_action = "Publish the exact optical pixel-readiness implementation and require successful public CI before the final no-pixel preflight or the one real pixel attempt."
     acquire_unit = m2_units.get("M2-ACQUIRE", {})
     if materialization_pixel_review_ready or materialization_pixel_review_approved:
         proposal_sha = "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c"
@@ -4578,7 +4612,7 @@ def main() -> None:
                 or materialization_stage_1_readiness.get("assertions", {}).get("measurement_pixels_read") is not False
             ):
                 fail("approved materialization stage-1 activation or readiness differs")
-        if full_header_implementation_pending:
+        if full_header_implementation_pending or optical_pixel_implementation_pending:
             if (
                 materialization_stage_1_publication.get("status") != "pass_public_controls_verified_before_materialization"
                 or materialization_stage_1_publication.get("github_actions", {}).get("run_id") != 33984065216
@@ -4610,6 +4644,40 @@ def main() -> None:
                 or header_stage_readiness.get("assertions", {}).get("real_product_pixels_examined") is not False
             ):
                 fail("materialization completion or header Stage-2 implementation readiness differs")
+        if optical_pixel_implementation_pending:
+            if (
+                header_stage_publication.get("status") != "pass_public_controls_verified_before_real_header_inspections"
+                or header_stage_publication.get("github_actions", {}).get("run_id") != 33985362022
+                or header_stage_publication.get("github_actions", {}).get("head_sha") != "a118538d0b62d411db89eb56f0e0b9630cced7d5"
+                or header_stage_final_preflight.get("status") != "pass_exact_header_inputs_ready_no_real_header_access"
+                or radar_header_real_003.get("status") != "pass_full_radar_header_readiness_only"
+                or radar_header_real_003.get("activity", {}).get("real_product_pixel_values_examined") is not False
+                or optical_header_real_001.get("status") != "pass_header_readability_only"
+                or optical_header_real_001.get("activity", {}).get("pixel_values_examined") is not False
+                or full_header_reconciliation.get("status") != "pass_both_exact_header_routes_only"
+                or full_header_reconciliation.get("assertions", {}).get("measurement_pixels_decoded") is not False
+                or optical_pixel_contract.get("status") != "active_preobservation_exact_pair_one_attempt"
+                or optical_pixel_contract.get("exact_pair") != {"before_source_id": "M1-SRC-010", "after_source_id": "M1-SRC-008", "pair_id": "PAIR-S2-RUM-R119"}
+                or optical_pixel_contract.get("approved_aoi_ids") != expected_aoi_ids
+                or optical_pixel_contract.get("attempt", {}).get("maximum_real_invocations") != 1
+                or optical_pixel_contract.get("attempt", {}).get("automatic_retry_authorized") is not False
+                or any(
+                    optical_pixel_contract.get("implementation", {}).get(f"{key}_sha256")
+                    != sha256(optical_pixel_contract.get("implementation", {}).get(f"{key}_ref"))
+                    for key in ("core", "runner", "stage_gate", "final_preflight", "publication_gate_recorder", "arcgis_adapter", "portable_tests")
+                )
+                or optical_pixel_synthetic.get("status") != "pass_synthetic_arcgis_with_expected_shift_block"
+                or optical_pixel_synthetic.get("assertions", {}).get("real_product_pixels_examined") is not False
+                or optical_pixel_readiness.get("status") != "pass_local_and_arcgis_synthetic_ready_public_ci_pending"
+                or optical_pixel_readiness.get("assertions", {}).get("thresholds_frozen_before_real_pixels") is not True
+                or optical_pixel_readiness.get("assertions", {}).get("real_attempt_started") is not False
+                or m2_units.get("M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION", {}).get("gates", {}).get("stage_3_contract_sha256") != sha256("config/qa/optical-pixel-readiness-contract-001.json")
+                or m2_units.get("M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION", {}).get("gates", {}).get("stage_3_implementation_readiness_sha256") != sha256("records/readiness/m2-optical-pixel-implementation-readiness.json")
+                or m2_units.get("M2-FULL-INPUT-READINESS", {}).get("gates", {}).get("reconciliation_sha256") != sha256("records/readiness/m2-full-header-readiness-reconciliation.json")
+                or m2_units.get("M2-OPTICAL-PIXEL-READINESS", {}).get("gates", {}).get("contract_sha256") != sha256("config/qa/optical-pixel-readiness-contract-001.json")
+                or m2_units.get("M2-OPTICAL-PIXEL-READINESS", {}).get("gates", {}).get("implementation_readiness_sha256") != sha256("records/readiness/m2-optical-pixel-implementation-readiness.json")
+            ):
+                fail("header completion or optical pixel Stage-3 implementation readiness differs")
         implementation_unit = m2_units.get("M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION", {})
         materialize_unit = m2_units.get("M2-MATERIALIZE-REMAINING", {})
         header_unit = m2_units.get("M2-FULL-INPUT-READINESS", {})
@@ -4617,20 +4685,22 @@ def main() -> None:
         if (
             implementation_unit.get("status") != ("in_progress" if materialization_pixel_review_approved else "planned")
             or implementation_unit.get("depends_on") != ["M2-MATERIALIZATION-PIXEL-READINESS-REVIEW"]
-            or implementation_unit.get("gates", {}).get("public_ci") != ("stage_1_pass_stage_2_pending" if full_header_implementation_pending else "pending_stage_1" if materialization_pixel_review_approved else "required_before_real_execution")
-            or materialize_unit.get("status") != ("complete" if full_header_implementation_pending else "planned")
-            or materialize_unit.get("disposition") != ("pass_materialization_identity_only" if full_header_implementation_pending else None)
+            or implementation_unit.get("gates", {}).get("public_ci") != ("stage_1_and_2_pass_stage_3_pending" if optical_pixel_implementation_pending else "stage_1_pass_stage_2_pending" if full_header_implementation_pending else "pending_stage_1" if materialization_pixel_review_approved else "required_before_real_execution")
+            or materialize_unit.get("status") != ("complete" if full_header_implementation_pending or optical_pixel_implementation_pending else "planned")
+            or materialize_unit.get("disposition") != ("pass_materialization_identity_only" if full_header_implementation_pending or optical_pixel_implementation_pending else None)
             or materialize_unit.get("depends_on") != ["M2-MATERIALIZATION-PIXEL-READINESS-IMPLEMENTATION"]
             or materialize_unit.get("gates", {}).get("exact_source_order") != expected_materialization_order
             or materialize_unit.get("gates", {}).get("maximum_attempts_per_source") != 1
             or materialize_unit.get("gates", {}).get("stop_on_first_failure") is not True
             or materialize_unit.get("gates", {}).get("automatic_retry_authorized") is not False
-            or header_unit.get("status") != ("in_progress" if full_header_implementation_pending else "planned")
+            or header_unit.get("status") != ("complete" if optical_pixel_implementation_pending else "in_progress" if full_header_implementation_pending else "planned")
+            or header_unit.get("disposition") != ("pass_header_readiness_only" if optical_pixel_implementation_pending else None)
             or header_unit.get("depends_on") != ["M2-MATERIALIZE-REMAINING"]
-            or header_unit.get("gates", {}).get("public_ci") != ("pending" if full_header_implementation_pending else "required")
+            or header_unit.get("gates", {}).get("public_ci") != ("pass" if optical_pixel_implementation_pending else "pending" if full_header_implementation_pending else "required")
             or header_unit.get("gates", {}).get("measurement_pixel_decoding") is not False
-            or pixel_unit.get("status") != "planned"
+            or pixel_unit.get("status") != ("in_progress" if optical_pixel_implementation_pending else "planned")
             or pixel_unit.get("depends_on") != ["M2-FULL-INPUT-READINESS"]
+            or pixel_unit.get("gates", {}).get("public_ci") != ("pending" if optical_pixel_implementation_pending else "required")
             or pixel_unit.get("gates", {}).get("maximum_real_invocations") != 1
             or pixel_unit.get("gates", {}).get("radar_pixel_readiness_authorized") is not False
             or pixel_unit.get("gates", {}).get("baseline_or_change_authorized") is not False
@@ -4641,7 +4711,12 @@ def main() -> None:
         implementation_unit = m2_units.get("M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION", {})
         implementation_gates = implementation_unit.get("gates", {})
         verify_unit = m2_units.get("M2-VERIFY", {})
-        if full_header_implementation_pending:
+        if optical_pixel_implementation_pending:
+            expected_materialized_source_count = 8
+            expected_materialization_state = "approved_optical_pixel_implementation_pending"
+            expected_verify_next_dependency = "M2-OPTICAL-PIXEL-READINESS"
+            expected_primary_next_action = expected_optical_pixel_implementation_next_action
+        elif full_header_implementation_pending:
             expected_materialized_source_count = 8
             expected_materialization_state = "approved_header_implementation_pending"
             expected_verify_next_dependency = "M2-FULL-INPUT-READINESS"

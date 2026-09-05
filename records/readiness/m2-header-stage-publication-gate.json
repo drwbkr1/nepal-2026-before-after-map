@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-FULL-HEADER-STAGE-PUBLICATION-GATE-001",
+  "verified_at_utc": "2026-09-05T18:52:29Z",
+  "status": "pass_public_controls_verified_before_real_header_inspections",
+  "bindings": {
+    "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+    "materialization_reconciliation_sha256": "71013b14363f941d41411dff24e5410a6f8682976f8ac9844ff2b2e9ec772d82",
+    "implementation_readiness_sha256": "2b2c6b2f3a1725b6643e4026e3a61a166eac6c520ba778da3ddbe79dbfd310e8",
+    "radar_contract_sha256": "1390b1635f8c04e5ba22f0f24a329fc4584cbc28c2c9e0489c133814d1ef229b",
+    "radar_core_sha256": "ec3654e3975ef53f23be8bea7e7969739db0f8b26466bff7a8359a0f1033d513",
+    "radar_runner_sha256": "d222c1d463ea8d4ce20e1fd2f432509bc08e2b785b30765ac30cf66ed0d8cb27",
+    "radar_adapter_sha256": "06f563cc6b6c0b7267d5d96169dbeb15e569e081d40119f2c1032694c7cd5e4a",
+    "optical_contract_sha256": "23f487dfd17bac016d1e3ac0f276f14b480f394f6ec20f3fbbe456340461878a",
+    "optical_core_sha256": "59ee619a6f54edc3263cfd1c29b68a678a98578e9a8ccee53a1379d883d2e7bc",
+    "optical_runner_sha256": "12bc1fbe37c8f34c3f350cc931d6e402aa469aeea27216c8e974ac30e366654d",
+    "optical_adapter_sha256": "2e10f73b4fd6a6d30f4b7d1471508520d813ac2bb62580345c851d56b75b5ac4"
+  },
+  "github_actions": {
+    "workflow": "Validate project controls",
+    "run_id": 33985362022,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33985362022",
+    "head_sha": "a118538d0b62d411db89eb56f0e0b9630cced7d5",
+    "conclusion": "success"
+  },
+  "assertions": {
+    "remote_ref_verified": true,
+    "public_ci_passed": true,
+    "real_header_attempt_started": false,
+    "measurement_pixels_read": false,
+    "external_data_mutated": false
+  },
+  "next_gate": "pass the final no-header preflight before the one radar real-003 and one optical real-001 inspection"
+}

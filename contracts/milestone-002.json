@@ -598,13 +598,15 @@
         "m1_src_004_satisfied_by_recovery_002": true,
         "continuation_status": "succeeded_all_four",
         "materialized_source_count": 8,
-        "materialization_and_pixel_readiness": "approved_header_implementation_pending",
+        "materialization_and_pixel_readiness": "approved_optical_pixel_implementation_pending",
         "materialization_pixel_review_ref": "reviews/m2-materialization-pixel-readiness/review-contract.json",
         "materialization_pixel_review_bundle_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a",
         "materialization_pixel_approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
         "materialization_pixel_approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
         "materialization_reconciliation_ref": "records/acquisition/sentinel-materialization-reconciliation-002.json",
-        "materialization_reconciliation_sha256": "71013b14363f941d41411dff24e5410a6f8682976f8ac9844ff2b2e9ec772d82"
+        "materialization_reconciliation_sha256": "71013b14363f941d41411dff24e5410a6f8682976f8ac9844ff2b2e9ec772d82",
+        "header_reconciliation_ref": "records/readiness/m2-full-header-readiness-reconciliation.json",
+        "header_reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1"
       },
       "disposition": "defer",
       "retained_failures": [
@@ -624,9 +626,9 @@
           "EXIT-201-VERIFIED-CUSTODY"
         ],
         "decision_value": "enables_dependency",
-        "rationale": "All eight products are container-verified and materialized by identity; exact full-cohort header controls await public CI before real header access."
+        "rationale": "All eight products are container-verified and materialized by identity; both header routes pass and exact optical pixel-readiness controls await public CI."
       },
-      "next_dependency": "M2-FULL-INPUT-READINESS"
+      "next_dependency": "M2-OPTICAL-PIXEL-READINESS"
     },
     {
       "id": "M2-BASELINE",
@@ -1135,7 +1137,7 @@
         "owner_approval": "pass",
         "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
         "review_reconciliation_sha256": "aee7e7c3142189edd81079950daab38b08ef783ef1c38efc09ad8ab1cf38930f",
-        "public_ci": "stage_1_pass_stage_2_pending",
+        "public_ci": "stage_1_and_2_pass_stage_3_pending",
         "real_data_access_during_implementation": false,
         "radar_pixel_readiness_authorized": false,
         "stage_1_public_commit": "4d4a0b63ed08274cf874d91ffc06292f0a352533",
@@ -1147,7 +1149,14 @@
         "stage_2_optical_contract_sha256": "23f487dfd17bac016d1e3ac0f276f14b480f394f6ec20f3fbbe456340461878a",
         "stage_2_arcgis_synthetic": "pass",
         "stage_2_implementation_readiness_sha256": "2b2c6b2f3a1725b6643e4026e3a61a166eac6c520ba778da3ddbe79dbfd310e8",
-        "stage_2_public_ci": "pending"
+        "stage_2_public_ci": "pass",
+        "stage_2_public_commit": "a118538d0b62d411db89eb56f0e0b9630cced7d5",
+        "stage_2_public_ci_run_id": 33985362022,
+        "stage_2_header_reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1",
+        "stage_3_contract_sha256": "13e99ad4c158122e9c862c9247f85d4bfbca1b949469468a38c6c57905acd5b4",
+        "stage_3_arcgis_synthetic_sha256": "0c9cca07737d0e8dbe0a6cf39dfba8290661e15e28e46b4acbe08707a3bbf76e",
+        "stage_3_implementation_readiness_sha256": "2644bebb1d85c33ffbaf80f769d0e3c35c6f5febbe31a98f67096b2146116002",
+        "stage_3_public_ci": "pending"
       },
       "disposition": null,
       "retained_failures": [],
@@ -1155,7 +1164,7 @@
         "expected": [],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "Stage 1 passed exact public CI, final preflight, five one-attempt materializations, and eight-source identity reconciliation. Stage 2 synthetic controls pass and await public CI."
+        "rationale": "Stages 1 and 2 passed their exact public gates and bounded real actions. Stage 3 has frozen preobservation controls and synthetic proof and awaits public CI."
       },
       "next_dependency": "M2-MATERIALIZE-REMAINING"
     },
@@ -1230,7 +1239,7 @@
       ],
       "action_class": "read_only_inspection",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/acquisition/sentinel-materialization-reconciliation-002.json",
         "config/qa/radar-input-readiness-contract-full-cohort-001.json",
@@ -1246,7 +1255,7 @@
         "records/readiness/optical-input/m2-s2-input-readiness-real-001.json"
       ],
       "gates": {
-        "public_ci": "pending",
+        "public_ci": "pass",
         "radar_real_invocation_limit": 1,
         "optical_real_invocation_limit": 1,
         "measurement_pixel_decoding": false,
@@ -1256,18 +1265,29 @@
         "radar_arcgis_synthetic_sha256": "29c1aa6ade51dddc439c23a3a413fc6fb62be4ee9e2fec7bfb1c9468d1d9e055",
         "optical_arcgis_synthetic_sha256": "43f97f5112895f739616676bea1b0e7ac7d1a9acd0d436040c02856fdbdfa77c",
         "implementation_readiness_sha256": "2b2c6b2f3a1725b6643e4026e3a61a166eac6c520ba778da3ddbe79dbfd310e8",
-        "radar_real_invocation_count": 0,
-        "optical_real_invocation_count": 0
+        "radar_real_invocation_count": 1,
+        "optical_real_invocation_count": 1,
+        "public_commit": "a118538d0b62d411db89eb56f0e0b9630cced7d5",
+        "public_ci_run_id": 33985362022,
+        "publication_gate_sha256": "2770f3dff46c0c8bca8cc953017ec4446e92a17ab933fe396b4803a892c6ec2c",
+        "final_preflight_sha256": "15084ea42d8f64c2f2a0d6055615e8d38c2f4cd932f88c51335f03496924f5a0",
+        "radar_real_receipt_sha256": "3513098380204268c0fb9c1eb154db36df71f47a1a11fe05e577a12f915ad3da",
+        "optical_real_receipt_sha256": "d3ce00dcead178bcf0c7205933d2869063ed9b5a4bf6a8921ba2c2bcab586931",
+        "reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1"
       },
-      "disposition": null,
+      "disposition": "pass_header_readiness_only",
       "retained_failures": [],
       "exit_condition_delta": {
         "expected": [
-          "EXIT-202-PIXEL-AND-RIGHTS-QA"
+          "exact six-source radar header inspection",
+          "exact two-source optical header inspection"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "Exact contracts and synthetic ArcGIS checks pass; real header access remains blocked on public CI and a final no-header preflight."
+        "observed": [
+          "six-source radar headers passed without pixel reads",
+          "two-source optical headers passed without pixel reads"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "Both independent header routes passed exactly once; this establishes header readability only and conditionally releases optical pixel-readiness implementation."
       },
       "next_dependency": "M2-OPTICAL-PIXEL-READINESS"
     },
@@ -1279,22 +1299,31 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "config/qa/pixel-readiness-contract.json",
-        "exact passing optical header-readiness receipt"
+        "config/qa/optical-pixel-readiness-contract-001.json",
+        "records/readiness/optical-input/m2-s2-input-readiness-real-001.json"
       ],
       "outputs": [
-        "append-only external optical QA attempt",
-        "lightweight per-AOI pixel-readiness receipt and reconciliation"
+        "records/surface-receipts/optical-pixel-readiness-synthetic-arcgis-001.json",
+        "records/readiness/m2-optical-pixel-implementation-readiness.json",
+        "records/readiness/m2-optical-pixel-publication-gate.json",
+        "records/readiness/m2-optical-pixel-final-preflight.json",
+        "records/readiness/optical-pixel/m2-s2-pixel-readiness-real-001.json",
+        "append-only external optical QA attempt"
       ],
       "gates": {
-        "public_ci": "required",
-        "final_no_pixel_preflight": "required",
+        "public_ci": "pending",
+        "final_no_pixel_preflight": "blocked_on_public_ci",
         "maximum_real_invocations": 1,
         "radar_pixel_readiness_authorized": false,
         "baseline_or_change_authorized": false,
-        "authority_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json"
+        "authority_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
+        "contract_sha256": "13e99ad4c158122e9c862c9247f85d4bfbca1b949469468a38c6c57905acd5b4",
+        "implementation_readiness_sha256": "2644bebb1d85c33ffbaf80f769d0e3c35c6f5febbe31a98f67096b2146116002",
+        "arcgis_synthetic_sha256": "0c9cca07737d0e8dbe0a6cf39dfba8290661e15e28e46b4acbe08707a3bbf76e",
+        "real_invocation_count": 0
       },
       "disposition": null,
       "retained_failures": [],
@@ -1305,7 +1334,7 @@
         ],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "Approved conditionally after optical header readiness, exact implementation proof, public CI, and a final no-pixel preflight."
+        "rationale": "The exact preobservation method and ArcGIS synthetic proof pass; real pixels remain blocked on public CI and the final no-pixel preflight."
       },
       "next_dependency": "M2-VERIFY"
     }
@@ -1364,8 +1393,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-FULL-INPUT-READINESS",
-    "next_action": "Publish the exact six-source radar and two-source optical header-readiness implementation and require successful public CI before the final no-header preflight or either real inspection.",
+    "current_checkpoint": "M2-OPTICAL-PIXEL-READINESS",
+    "next_action": "Publish the exact optical pixel-readiness implementation and require successful public CI before the final no-pixel preflight or the one real pixel attempt.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -1376,7 +1405,8 @@
       "All eight exact Sentinel products are promoted and container-verified; this establishes archive custody and structure only, not usable pixels or scientific fitness.",
       "The recovery-002 supervisor failure remains historical evidence; continuation-001 later succeeded under a separate approved identity without retrying or requesting M1-SRC-004.",
       "Stage 1 passed exact public CI and final preflight; its five one-attempt SAFE materializations and eight-source identity reconciliation are complete.",
-      "All eight SAFE products now pass materialization identity and per-file hash reconciliation; this establishes no raster header readiness, usable pixels, baseline, or scientific result."
+      "All eight SAFE products now pass materialization identity and per-file hash reconciliation; this establishes no raster header readiness, usable pixels, baseline, or scientific result.",
+      "Both exact real header inspections passed once without pixel reads; only the conditional optical pixel-readiness implementation is released, while radar pixels and all baseline or change actions remain gated."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
