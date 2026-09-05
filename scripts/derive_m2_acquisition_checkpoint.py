@@ -214,7 +214,7 @@ def current_optical_pixel_implementation_pending(root: Path, state_counts: dict[
         and header.get("status") == "complete"
         and header.get("disposition") == "pass_header_readiness_only"
         and pixel.get("status") == "in_progress"
-        and pixel.get("gates", {}).get("public_ci") == "pending"
+        and pixel.get("gates", {}).get("public_ci") in {"pending", "pending_after_failed_preflight_001"}
         and pixel.get("gates", {}).get("maximum_real_invocations") == 1
         and pixel.get("gates", {}).get("radar_pixel_readiness_authorized") is False
     )

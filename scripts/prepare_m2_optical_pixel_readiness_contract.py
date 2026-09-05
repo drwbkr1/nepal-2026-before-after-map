@@ -133,6 +133,19 @@ def main() -> int:
             "candidate_change_polygons": "prohibited",
         },
         "decision_domain": ["pass_qa_only", "defer", "block", "invalid"],
+        "history": {
+            "preflight_attempt_001_status": "fail_preflight_implementation_path_parent_mismatch",
+            "failure_ref": "records/readiness/m2-optical-pixel-final-preflight-attempt-001-failure.json",
+            "failure_sha256": "02cfc771bf8414e20dd0d240b826bb59d10606fb6a9cc9fddc7f9870c5f1b8f0",
+            "superseded_contract_ref": "config/qa/optical-pixel-readiness-contract-001-preflight-attempt-001-superseded.json",
+            "superseded_contract_sha256": "13e99ad4c158122e9c862c9247f85d4bfbca1b949469468a38c6c57905acd5b4",
+            "superseded_readiness_ref": "records/readiness/m2-optical-pixel-implementation-readiness-attempt-001-superseded.json",
+            "superseded_readiness_sha256": "2644bebb1d85c33ffbaf80f769d0e3c35c6f5febbe31a98f67096b2146116002",
+            "superseded_publication_gate_ref": "records/readiness/m2-optical-pixel-publication-gate-attempt-001-superseded.json",
+            "superseded_publication_gate_sha256": "c8e18232928477a7a171fb457939daabe6cd91da61b517c976e35aa48a9e7ba3",
+            "correction": "validate the frozen derived parent instead of a nonexistent processing parent; no scientific thresholds or source identities changed",
+            "real_attempt_started": False
+        },
         "claim_boundary": {
             "coverage_mask_grid_and_registration_qa_measured": False,
             "spectral_indices_computed": False,

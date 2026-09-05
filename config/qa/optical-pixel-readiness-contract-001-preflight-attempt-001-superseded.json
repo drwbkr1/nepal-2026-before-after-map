@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "contract_id": "NEPAL-S2-PIXEL-READINESS-REAL-001",
-  "created_at_utc": "2026-09-05T19:13:59Z",
+  "created_at_utc": "2026-09-05T19:05:39Z",
   "status": "active_preobservation_exact_pair_one_attempt",
   "inputs": {
     "approval_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
@@ -25,11 +25,11 @@
     "stage_gate_ref": "scripts/m2_optical_pixel_stage_gate.py",
     "stage_gate_sha256": "1f6462d9f83e95b76067edb64f99ccfe094df3e7da3c8729e5c7996ea561397c",
     "final_preflight_ref": "scripts/preflight_m2_optical_pixel_readiness.py",
-    "final_preflight_sha256": "925b9b0598b093f4658e9f219bb481dc203b38376e79d318f4682220ad221b5f",
+    "final_preflight_sha256": "57be54b53cf725a99ec226afdae25440a4b6d2c00ba3bb35a1eaf67155ca7317",
     "publication_gate_recorder_ref": "scripts/record_m2_optical_pixel_publication_gate.py",
-    "publication_gate_recorder_sha256": "cf68778d138d2f772320dc4232fe76a80d3f6b709ea200303b5171213b52b783",
+    "publication_gate_recorder_sha256": "a83c53a247a085263dcc713885c8fcf1cfd66d0543407c1355ca973e0a7ef79a",
     "arcgis_adapter_ref": "scripts/validate_optical_pixel_readiness_arcgis_001.py",
-    "arcgis_adapter_sha256": "568971d3bb5945ca3ae9c652a45cd74d8e6d915cde9611f7228cb8d5b449314c",
+    "arcgis_adapter_sha256": "27c2cca5fb432374aee8648a4680ca90a76cbf55b9de685eea3e8188013e48fd",
     "portable_tests_ref": "tests/test_m2_optical_pixel_readiness.py",
     "portable_tests_sha256": "737216f963667781a6b11d9b8f65425529df170898989887038cb7acc681bc26"
   },
@@ -198,19 +198,6 @@
     "block",
     "invalid"
   ],
-  "history": {
-    "preflight_attempt_001_status": "fail_preflight_implementation_path_parent_mismatch",
-    "failure_ref": "records/readiness/m2-optical-pixel-final-preflight-attempt-001-failure.json",
-    "failure_sha256": "02cfc771bf8414e20dd0d240b826bb59d10606fb6a9cc9fddc7f9870c5f1b8f0",
-    "superseded_contract_ref": "config/qa/optical-pixel-readiness-contract-001-preflight-attempt-001-superseded.json",
-    "superseded_contract_sha256": "13e99ad4c158122e9c862c9247f85d4bfbca1b949469468a38c6c57905acd5b4",
-    "superseded_readiness_ref": "records/readiness/m2-optical-pixel-implementation-readiness-attempt-001-superseded.json",
-    "superseded_readiness_sha256": "2644bebb1d85c33ffbaf80f769d0e3c35c6f5febbe31a98f67096b2146116002",
-    "superseded_publication_gate_ref": "records/readiness/m2-optical-pixel-publication-gate-attempt-001-superseded.json",
-    "superseded_publication_gate_sha256": "c8e18232928477a7a171fb457939daabe6cd91da61b517c976e35aa48a9e7ba3",
-    "correction": "validate the frozen derived parent instead of a nonexistent processing parent; no scientific thresholds or source identities changed",
-    "real_attempt_started": false
-  },
   "claim_boundary": {
     "coverage_mask_grid_and_registration_qa_measured": false,
     "spectral_indices_computed": false,

@@ -47,7 +47,7 @@ def main() -> int:
     receipt_path = ROOT / contract["attempt"]["public_receipt_ref"]
     if attempt_root.exists() or receipt_path.exists():
         raise SystemExit("optical pixel attempt path collision")
-    if attempt_root.parent.resolve(strict=True) != (data_root / "processing").resolve(strict=True):
+    if attempt_root.parent.resolve(strict=True) != (data_root / "derived").resolve(strict=True):
         raise SystemExit("optical pixel attempt root differs")
     selected = []
     for role in ("before", "after"):
@@ -70,7 +70,7 @@ def main() -> int:
         raise SystemExit("insufficient free space for exact optical pixel QA attempt")
     record = {
         "schema_version": "1.0",
-        "record_id": "NEPAL-M2-OPTICAL-PIXEL-PREFLIGHT-001",
+        "record_id": "NEPAL-M2-OPTICAL-PIXEL-PREFLIGHT-002",
         "observed_at_utc": args.observed_at_utc,
         "status": "pass_exact_optical_pixel_inputs_ready_no_pixel_access",
         "bindings": {

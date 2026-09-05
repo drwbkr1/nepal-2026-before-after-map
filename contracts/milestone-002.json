@@ -1137,7 +1137,7 @@
         "owner_approval": "pass",
         "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
         "review_reconciliation_sha256": "aee7e7c3142189edd81079950daab38b08ef783ef1c38efc09ad8ab1cf38930f",
-        "public_ci": "stage_1_and_2_pass_stage_3_pending",
+        "public_ci": "stage_1_and_2_pass_stage_3_correction_pending",
         "real_data_access_during_implementation": false,
         "radar_pixel_readiness_authorized": false,
         "stage_1_public_commit": "4d4a0b63ed08274cf874d91ffc06292f0a352533",
@@ -1153,18 +1153,24 @@
         "stage_2_public_commit": "a118538d0b62d411db89eb56f0e0b9630cced7d5",
         "stage_2_public_ci_run_id": 33985362022,
         "stage_2_header_reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1",
-        "stage_3_contract_sha256": "13e99ad4c158122e9c862c9247f85d4bfbca1b949469468a38c6c57905acd5b4",
-        "stage_3_arcgis_synthetic_sha256": "0c9cca07737d0e8dbe0a6cf39dfba8290661e15e28e46b4acbe08707a3bbf76e",
-        "stage_3_implementation_readiness_sha256": "2644bebb1d85c33ffbaf80f769d0e3c35c6f5febbe31a98f67096b2146116002",
-        "stage_3_public_ci": "pending"
+        "stage_3_contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
+        "stage_3_arcgis_synthetic_sha256": "87cfb12b8623a019fe5315faeb8416257c5893fd03813b7e528690f3d0eadae0",
+        "stage_3_implementation_readiness_sha256": "df73bd37e316f1725d2550c0ecfd3e5fe9848f45279ca3f68d6fdf8c349f0979",
+        "stage_3_public_ci": "pending_after_failed_preflight_001"
       },
       "disposition": null,
-      "retained_failures": [],
+      "retained_failures": [
+        {
+          "record_ref": "records/readiness/m2-optical-pixel-final-preflight-attempt-001-failure.json",
+          "record_sha256": "02cfc771bf8414e20dd0d240b826bb59d10606fb6a9cc9fddc7f9870c5f1b8f0",
+          "reason": "Published preflight checked a nonexistent processing parent instead of the frozen derived parent and stopped before pixels or attempt creation."
+        }
+      ],
       "exit_condition_delta": {
         "expected": [],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "Stages 1 and 2 passed their exact public gates and bounded real actions. Stage 3 has frozen preobservation controls and synthetic proof and awaits public CI."
+        "rationale": "Stages 1 and 2 passed. Stage 3 preflight attempt 001 stopped before pixels on a path-parent implementation mismatch; the bounded correction and synthetic proof await fresh public CI."
       },
       "next_dependency": "M2-MATERIALIZE-REMAINING"
     },
@@ -1314,19 +1320,27 @@
         "append-only external optical QA attempt"
       ],
       "gates": {
-        "public_ci": "pending",
-        "final_no_pixel_preflight": "blocked_on_public_ci",
+        "public_ci": "pending_after_failed_preflight_001",
+        "final_no_pixel_preflight": "failed_attempt_001_correction_pending",
         "maximum_real_invocations": 1,
         "radar_pixel_readiness_authorized": false,
         "baseline_or_change_authorized": false,
         "authority_ref": "records/source-gates/m2-materialization-pixel-readiness-approval.json",
-        "contract_sha256": "13e99ad4c158122e9c862c9247f85d4bfbca1b949469468a38c6c57905acd5b4",
-        "implementation_readiness_sha256": "2644bebb1d85c33ffbaf80f769d0e3c35c6f5febbe31a98f67096b2146116002",
-        "arcgis_synthetic_sha256": "0c9cca07737d0e8dbe0a6cf39dfba8290661e15e28e46b4acbe08707a3bbf76e",
-        "real_invocation_count": 0
+        "contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
+        "implementation_readiness_sha256": "df73bd37e316f1725d2550c0ecfd3e5fe9848f45279ca3f68d6fdf8c349f0979",
+        "arcgis_synthetic_sha256": "87cfb12b8623a019fe5315faeb8416257c5893fd03813b7e528690f3d0eadae0",
+        "real_invocation_count": 0,
+        "failed_preflight_001_sha256": "02cfc771bf8414e20dd0d240b826bb59d10606fb6a9cc9fddc7f9870c5f1b8f0"
       },
       "disposition": null,
-      "retained_failures": [],
+      "retained_failures": [
+        {
+          "record_ref": "records/readiness/m2-optical-pixel-final-preflight-attempt-001-failure.json",
+          "record_sha256": "02cfc771bf8414e20dd0d240b826bb59d10606fb6a9cc9fddc7f9870c5f1b8f0",
+          "real_product_pixels_examined": false,
+          "real_attempt_started": false
+        }
+      ],
       "exit_condition_delta": {
         "expected": [
           "EXIT-202-PIXEL-AND-RIGHTS-QA",
@@ -1334,7 +1348,7 @@
         ],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "The exact preobservation method and ArcGIS synthetic proof pass; real pixels remain blocked on public CI and the final no-pixel preflight."
+        "rationale": "Preflight attempt 001 stopped before pixels or attempt creation on a path-parent implementation mismatch. The corrected exact controls and synthetic proof await fresh public CI."
       },
       "next_dependency": "M2-VERIFY"
     }

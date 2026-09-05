@@ -52,7 +52,7 @@ def main() -> int:
         raise SystemExit("ArcGIS optical pixel synthetic evidence is not passing")
     record = {
         "schema_version": "1.0",
-        "receipt_id": "NEPAL-M2-OPTICAL-PIXEL-IMPLEMENTATION-READINESS-001",
+        "receipt_id": "NEPAL-M2-OPTICAL-PIXEL-IMPLEMENTATION-READINESS-002",
         "verified_at_utc": args.verified_at_utc,
         "status": "pass_local_and_arcgis_synthetic_ready_public_ci_pending",
         "bindings": {key: sha256(path) for key, path in FILES.items()},

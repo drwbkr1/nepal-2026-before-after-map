@@ -94,7 +94,7 @@ def main() -> int:
     install = arcpy.GetInstallInfo()
     record = {
         "schema_version": "1.0",
-        "receipt_id": "NEPAL-S2-PIXEL-READINESS-SYNTHETIC-ARCGIS-001",
+        "receipt_id": "NEPAL-S2-PIXEL-READINESS-SYNTHETIC-ARCGIS-002",
         "verified_at_utc": args.verified_at_utc,
         "status": "pass_synthetic_arcgis_with_expected_shift_block",
         "runtime": {"product": install.get("ProductName", "ArcGISPro"), "version": install.get("Version"), "license_level": install.get("LicenseLevel", arcpy.ProductInfo())},

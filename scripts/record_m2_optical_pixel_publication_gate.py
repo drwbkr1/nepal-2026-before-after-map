@@ -26,7 +26,7 @@ def main() -> int:
         raise SystemExit("public CI identity differs")
     record = {
         "schema_version": "1.0",
-        "record_id": "NEPAL-M2-OPTICAL-PIXEL-PUBLICATION-GATE-001",
+        "record_id": "NEPAL-M2-OPTICAL-PIXEL-PUBLICATION-GATE-002",
         "verified_at_utc": args.verified_at_utc,
         "status": "pass_public_controls_verified_before_optical_pixel_attempt",
         "github_actions": {"run_id": args.run_id, "run_url": args.run_url, "head_sha": args.commit_sha, "conclusion": "success"},

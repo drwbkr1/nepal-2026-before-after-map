@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "receipt_id": "NEPAL-S2-PIXEL-READINESS-SYNTHETIC-ARCGIS-002",
-  "verified_at_utc": "2026-09-05T19:14:06Z",
+  "receipt_id": "NEPAL-S2-PIXEL-READINESS-SYNTHETIC-ARCGIS-001",
+  "verified_at_utc": "2026-09-05T19:05:50Z",
   "status": "pass_synthetic_arcgis_with_expected_shift_block",
   "runtime": {
     "product": "ArcGISPro",
@@ -10,9 +10,9 @@
   },
   "bindings": {
     "contract_ref": "config/qa/optical-pixel-readiness-contract-001.json",
-    "contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
+    "contract_sha256": "13e99ad4c158122e9c862c9247f85d4bfbca1b949469468a38c6c57905acd5b4",
     "pixel_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
-    "adapter_sha256": "568971d3bb5945ca3ae9c652a45cd74d8e6d915cde9611f7228cb8d5b449314c"
+    "adapter_sha256": "27c2cca5fb432374aee8648a4680ca90a76cbf55b9de685eea3e8188013e48fd"
   },
   "checks": {
     "aligned_registration": {

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PIXEL-PUBLICATION-GATE-001",
+  "verified_at_utc": "2026-09-05T19:12:33Z",
+  "status": "pass_public_controls_verified_before_optical_pixel_attempt",
+  "github_actions": {
+    "run_id": 33986388131,
+    "run_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33986388131",
+    "head_sha": "a97917e31a0aed18db565d3ef256e656af8cb4d5",
+    "conclusion": "success"
+  },
+  "bindings": {
+    "approval_sha256": "aa8ce1d198601fce2e9fa7218d1c3c71fc8a5459f26acf5fcabe51ccf1a414ca",
+    "header_reconciliation_sha256": "5bde8c6997e3c61b524f088a87d5cb1e484223a853ae81730cd2493f95c741d1",
+    "contract_sha256": "13e99ad4c158122e9c862c9247f85d4bfbca1b949469468a38c6c57905acd5b4",
+    "implementation_readiness_sha256": "2644bebb1d85c33ffbaf80f769d0e3c35c6f5febbe31a98f67096b2146116002"
+  },
+  "assertions": {
+    "real_product_pixels_examined": false,
+    "real_attempt_started": false
+  },
+  "next_gate": "pass the final exact no-pixel preflight before the one real optical pixel-readiness attempt"
+}

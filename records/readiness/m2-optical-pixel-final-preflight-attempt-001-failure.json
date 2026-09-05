@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PIXEL-PREFLIGHT-ATTEMPT-001-FAILURE",
+  "recorded_at_utc": "2026-09-05T19:13:19Z",
+  "status": "fail_preflight_implementation_path_parent_mismatch",
+  "bindings": {
+    "public_commit": "a97917e31a0aed18db565d3ef256e656af8cb4d5",
+    "public_ci_run_id": 33986388131,
+    "contract_sha256": "13e99ad4c158122e9c862c9247f85d4bfbca1b949469468a38c6c57905acd5b4",
+    "preflight_script_sha256": "57be54b53cf725a99ec226afdae25440a4b6d2c00ba3bb35a1eaf67155ca7317",
+    "implementation_readiness_sha256": "2644bebb1d85c33ffbaf80f769d0e3c35c6f5febbe31a98f67096b2146116002",
+    "publication_gate_sha256": "c8e18232928477a7a171fb457939daabe6cd91da61b517c976e35aa48a9e7ba3"
+  },
+  "failure": {
+    "type": "FileNotFoundError",
+    "code": "preflight_checked_nonexistent_processing_parent_instead_of_frozen_derived_parent",
+    "message": "The contract fixed the attempt root under the existing derived directory, but the preflight attempted strict resolution of a nonexistent processing directory."
+  },
+  "assertions": {
+    "final_preflight_receipt_created": false,
+    "external_attempt_root_created": false,
+    "real_product_pixels_examined": false,
+    "external_files_mutated": false,
+    "real_attempt_started": false
+  },
+  "disposition": "preserve_and_require_corrected_contract_readiness_and_fresh_public_ci_before_preflight_002"
+}
