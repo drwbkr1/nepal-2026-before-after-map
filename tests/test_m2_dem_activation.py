@@ -128,7 +128,7 @@ class M2DemActivationTests(unittest.TestCase):
         self.assertEqual(set(units["M2-BASELINE"]["depends_on"]), {"M2-VERIFY", "M2-DEM-VERIFY", "M2-ORBIT-APPLY"})
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            [],
+            ["contracts/milestone-002-materialization-pixel-readiness-proposal.json"],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -149,11 +149,19 @@ class M2DemActivationTests(unittest.TestCase):
             (unit for unit in self.milestone["units"] if unit["id"] == "M2-VERIFY"),
             None,
         )
+        materialization_review = next(
+            (unit for unit in self.milestone["units"] if unit["id"] == "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW"),
+            None,
+        )
         expected_primary_checkpoint = (
-            "M2-VERIFY"
+            "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW"
+            if all(asset.get("state") == "promoted" for asset in primary_intake["assets"])
+            and materialization_review is not None
+            and materialization_review.get("status") == "ready"
+            else "M2-VERIFY"
             if all(asset.get("state") == "promoted" for asset in primary_intake["assets"])
             and verify_unit is not None
-            and verify_unit.get("status") == "in_progress"
+            and verify_unit.get("status") in {"in_progress", "deferred"}
             else "M2-ACQUISITION-REVIEW"
             if any(asset.get("state") == "failed" for asset in primary_intake["assets"])
             or continuation_review is not None and continuation_review.get("status") in {"ready", "complete"}

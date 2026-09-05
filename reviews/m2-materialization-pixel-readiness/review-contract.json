@@ -1,0 +1,45 @@
+{
+  "contract_version": "human-review-contract-v1",
+  "template": false,
+  "review_id": "m2-materialization-pixel-readiness-review-001",
+  "response_schema_version": "nepal-m2-materialization-pixel-readiness-response-v1",
+  "workflow_authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-activation-approval.json",
+    "authorized_action_classes": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ],
+    "verified_at_utc": "2026-09-05T17:46:18Z",
+    "expires_at_utc": null,
+    "review_required": true,
+    "lock_authorized": true,
+    "reconcile_authorized": true,
+    "post_review_actions": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ]
+  },
+  "review_bundle": {
+    "bundle_id": "m2-materialization-pixel-readiness-review-bundle-001",
+    "manifest_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a",
+    "candidate_identity": "M2-MATERIALIZATION-PIXEL-READINESS-PROPOSAL-SHA256:3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c",
+    "rendered_surface_verified": true
+  },
+  "allowed_decisions": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "required_attestation": true,
+  "max_notes_length": 2000,
+  "hash_prefix_length": 16,
+  "items": [
+    {
+      "item_id": "M2-MATERIALIZATION-PIXEL-READINESS-001",
+      "evidence_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a"
+    }
+  ]
+}

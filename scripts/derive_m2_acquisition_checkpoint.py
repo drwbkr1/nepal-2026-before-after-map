@@ -38,6 +38,10 @@ CONTINUATION_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-ACQUISITION-REVIEW",
     "next_action": "Publish the exact continuation-001 implementation and verify successful public CI; do not activate, request a token, or access payload bytes before the publication gate and final no-payload preflight pass.",
 }
+MATERIALIZATION_PIXEL_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW",
+    "next_action": "Review M2 materialization and pixel-readiness bundle SHA-256 8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a and proposal SHA-256 3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c; approve, revise, or defer the single bounded plan. No materialization, real header access, or pixel read is authorized before a completed decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -106,6 +110,36 @@ def current_container_verification_complete(root: Path, state_counts: dict[str, 
     )
 
 
+def current_materialization_pixel_review_required(root: Path, state_counts: dict[str, int]) -> bool:
+    if not current_container_verification_complete(root, state_counts):
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        blank = load(root / "reviews/m2-materialization-pixel-readiness/blank-response.json")
+        readiness = load(root / "records/readiness/m2-materialization-pixel-readiness-review-readiness.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-MATERIALIZATION-PIXEL-READINESS-REVIEW", {})
+    gates = review.get("gates", {})
+    responses = blank.get("responses", [])
+    return bool(
+        review.get("status") == "ready"
+        and review.get("human_gate") is True
+        and gates.get("review_bundle_sha256") == "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a"
+        and gates.get("proposal_sha256") == "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c"
+        and gates.get("human_decision_count") == 0
+        and gates.get("attestation") is False
+        and gates.get("execution_authorized") is False
+        and blank.get("completed") is False
+        and blank.get("reviewer", {}).get("attestation") is False
+        and len(responses) == 1
+        and responses[0].get("decision") is None
+        and readiness.get("status") == "pass_ready_owner_review_zero_decisions"
+        and readiness.get("review", {}).get("ready_for_handoff") is True
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -150,7 +184,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_container_verification_complete(ROOT, progress["state_counts"]):
+        if current_materialization_pixel_review_required(ROOT, progress["state_counts"]):
+            checkpoint = dict(MATERIALIZATION_PIXEL_REVIEW_CHECKPOINT)
+        elif current_container_verification_complete(ROOT, progress["state_counts"]):
             checkpoint = dict(CHECKPOINTS["post_container"])
         elif current_continuation_review_required(ROOT, progress["state_counts"]):
             checkpoint = dict(CONTINUATION_REVIEW_CHECKPOINT)

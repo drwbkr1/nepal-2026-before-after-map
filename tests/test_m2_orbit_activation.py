@@ -86,13 +86,13 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"], "required")
         self.assertEqual(
             unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["milestone_dependency_m2_verify"],
-            "in_progress_not_satisfied",
+            "deferred_not_satisfied",
         )
         self.assertTrue(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["orbit_custody_initialized"])
         self.assertEqual(unit_by_id["M2-ORBIT-APPLY"]["gates"]["dem_vertical_datum_gate"], "pending")
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            [],
+            ["contracts/milestone-002-materialization-pixel-readiness-proposal.json"],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],

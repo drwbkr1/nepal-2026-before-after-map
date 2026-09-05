@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-MATERIALIZATION-PIXEL-READINESS-REVIEW-READINESS-001",
+  "verified_at_utc": "2026-09-05T17:46:46Z",
+  "status": "pass_ready_owner_review_zero_decisions",
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-materialization-pixel-readiness-proposal.json",
+    "proposal_sha256": "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c",
+    "preflight_ref": "records/readiness/m2-materialization-pixel-readiness-review-preflight.json",
+    "preflight_sha256": "9a4ec0e286ab787194f76fa569293c67cc5db8529f96af9aba7e0959792af019",
+    "review_bundle_ref": "reviews/m2-materialization-pixel-readiness/review-bundle.json",
+    "review_bundle_sha256": "8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a",
+    "review_contract_ref": "reviews/m2-materialization-pixel-readiness/review-contract.json",
+    "review_contract_sha256": "d156eac1903c233dc087f33645596f55fd76ee8efbb51607a9303f8a3e1823b4",
+    "blank_response_ref": "reviews/m2-materialization-pixel-readiness/blank-response.json",
+    "blank_response_sha256": "296916d31bdfbd248e27ca9fd03b7f6f0530269976fbf4accc3690bfb6965f0d",
+    "surface_receipt_ref": "records/surface-receipts/m2-materialization-pixel-readiness-review.json",
+    "surface_receipt_sha256": "2b0a9290a587e8fdf9bce7f7b00603773c85cdca0303445372ed7eb5bfba07a8"
+  },
+  "review": {
+    "item_id": "M2-MATERIALIZATION-PIXEL-READINESS-001",
+    "allowed_decisions": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "human_decision_count": 0,
+    "attestation": false,
+    "ready_for_handoff": true
+  },
+  "scope": {
+    "planned_materialization_count": 5,
+    "real_header_inspection_count_if_prerequisites_pass": 2,
+    "conditional_optical_pixel_readiness_attempt_count": 1,
+    "radar_pixel_readiness_authorized": false,
+    "baseline_or_change_authorized": false
+  },
+  "assertions": {
+    "materialization_performed": false,
+    "real_header_access_performed": false,
+    "real_pixel_access_performed": false,
+    "network_request_performed": false,
+    "credential_value_read_or_recorded": false,
+    "human_decision_fabricated": false,
+    "scientific_claim_created": false
+  },
+  "next_action": "Review exact bundle SHA-256 8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a and proposal SHA-256 3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c; approve, revise, or defer the single bounded plan."
+}

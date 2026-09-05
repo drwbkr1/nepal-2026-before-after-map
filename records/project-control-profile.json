@@ -126,7 +126,9 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [],
+    "proposed_amendments": [
+      "contracts/milestone-002-materialization-pixel-readiness-proposal.json"
+    ],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json",
@@ -310,15 +312,20 @@
         "unit_id": "M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION",
         "reason": "The exact owner decision authorizes only the continuation-only implementation, synthetic proof, public-CI gate, final no-payload preflight, and fixed-order one-attempt sequence for four named unattempted products.",
         "authority_ref": "records/source-gates/m2-sentinel-continuation-001-approval.json"
+      },
+      {
+        "unit_id": "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW",
+        "reason": "A new exact owner decision is required before five materializations, full-cohort header inspection, or conditional optical pixel-readiness work.",
+        "authority_ref": "reviews/m2-materialization-pixel-readiness/review-contract.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-VERIFY",
+    "checkpoint_id": "M2-MATERIALIZATION-PIXEL-READINESS-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Prepare and review an exact bounded materialization and pixel-readiness plan for the five not-yet-materialized products. Do not materialize, decode pixels, run baselines, or start orbit recovery before the separate gates are satisfied."
+    "next_action": "Review M2 materialization and pixel-readiness bundle SHA-256 8da456e9e0a0e378210b3d9b017e88990f1711da334f27b4cd3886211a97369a and proposal SHA-256 3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c; approve, revise, or defer the single bounded plan. No materialization, real header access, or pixel read is authorized before a completed decision."
   },
   "parallel_checkpoints": [
     {

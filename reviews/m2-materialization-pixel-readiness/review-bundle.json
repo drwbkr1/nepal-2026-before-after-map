@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-materialization-pixel-readiness-review-bundle-001",
+  "review_id": "m2-materialization-pixel-readiness-review-001",
+  "authority_ref": "records/source-gates/m2-activation-approval.json",
+  "candidate_identity": "M2-MATERIALIZATION-PIXEL-READINESS-PROPOSAL-SHA256:3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-materialization-pixel-readiness-review.png",
+      "sha256": "d92f73e5e349207401b0b7bed4c307ffa835ae454281b006409450f5b773d527",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-materialization-pixel-readiness-review.json",
+          "sha256": "2b0a9290a587e8fdf9bce7f7b00603773c85cdca0303445372ed7eb5bfba07a8"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_MATERIALIZATION_PIXEL_READINESS_REVIEW.md",
+      "sha256": "d91b209d53a7abc86a8877d4b38ebe81870886d14664833833be5cfa835c6f51",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "proposal",
+      "path": "contracts/milestone-002-materialization-pixel-readiness-proposal.json",
+      "sha256": "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c",
+      "role": "candidate_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "review-preflight",
+      "path": "records/readiness/m2-materialization-pixel-readiness-review-preflight.json",
+      "sha256": "9a4ec0e286ab787194f76fa569293c67cc5db8529f96af9aba7e0959792af019",
+      "role": "read_only_current_custody_and_collision_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "active-intake",
+      "path": "contracts/m2-intake.json",
+      "sha256": "53fac5c71d357bbad79266b4f7ba4a34b7ef601601f8355b9989299ae6ed6121",
+      "role": "exact_eight_source_current_state",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "transfer-reconciliation",
+      "path": "records/acquisition/sentinel-continuation-001-postsuccess-reconciliation.json",
+      "sha256": "ab11ba63fcd8765f7fbddd5b7601bb835446674f0f205a2d4ecba138ac27047e",
+      "role": "exact_transfer_container_and_retained_failure_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "materialization-contract",
+      "path": "contracts/m2-materialization.json",
+      "sha256": "9ba8154a36fff562decede04de660e731ce2401f893cecbd90c2d8563ce43d7b",
+      "role": "active_append_only_extraction_control",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "existing-materialization-reconciliation",
+      "path": "records/acquisition/sentinel-materialization-reconciliation-001.json",
+      "sha256": "b646e39d1a85834f932fbfdffdfab8564e3ed58919a12ebbd8b00d4d22a85b28",
+      "role": "three_existing_materializations_and_provenance",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "optical-input-contract",
+      "path": "config/qa/optical-input-readiness-contract.json",
+      "sha256": "83327ebc03fb5a7b66152a77717354e4b88450b6f63a2734b5b4ceea6550f3b0",
+      "role": "exact_optical_header_gate_basis",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "radar-input-contract",
+      "path": "config/qa/radar-input-readiness-contract-amendment-001.json",
+      "sha256": "d02a4344c755ac7b69e2b1bd2b66403fa2a68d204116a32220a03a6e4166e6bd",
+      "role": "exact_radar_header_gate_and_detected_amendment_basis",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "pixel-readiness-contract",
+      "path": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+      "role": "predeclared_coverage_mask_grid_and_registration_thresholds",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "approved-aois",
+      "path": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+      "role": "exact_three_projected_review_areas",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "decision_effect_if_approved": [
+    "publish exact execution controls and require successful public CI before real work",
+    "materialize only M1-SRC-004, M1-SRC-005, M1-SRC-006, M1-SRC-010, and M1-SRC-008 once each in the stated order, stopping the sequence on first failure",
+    "after five passes, publish and run one full-cohort radar header inspection and one optical header inspection",
+    "only after optical header pass and a separate implementation, CI, and no-pixel preflight, run one optical pixel-readiness measurement for the exact RUM pair and three approved AOIs",
+    "preserve every pass, defer, block, invalid, failed, and superseded result without retry or post-observation tuning"
+  ],
+  "limitations": [
+    "This bundle creates no authority and contains zero human decisions.",
+    "Approval would authorize bounded extraction and conditional optical pixel QA, but would not prove any stage passes.",
+    "Radar pixel readiness remains outside this proposal until orbit and DEM vertical-datum dependencies are resolved.",
+    "No baseline, change map, interpretation, attribution, emergency guidance, or scientific publication is authorized.",
+    "The 27 August optical scene may defer or block because of cloud; no source or date substitution is authorized."
+  ]
+}

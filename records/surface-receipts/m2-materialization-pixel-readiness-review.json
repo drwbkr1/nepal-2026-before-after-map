@@ -1,0 +1,49 @@
+{
+  "receipt_version": "1.0",
+  "receipt_id": "NEPAL-M2-MATERIALIZATION-PIXEL-READINESS-REVIEW-SURFACE-001",
+  "verified_at_utc": "2026-09-05T17:45:36Z",
+  "status": "pass_blank_review_surface",
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-materialization-pixel-readiness-proposal.json",
+    "proposal_sha256": "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c",
+    "preflight_ref": "records/readiness/m2-materialization-pixel-readiness-review-preflight.json",
+    "preflight_sha256": "9a4ec0e286ab787194f76fa569293c67cc5db8529f96af9aba7e0959792af019",
+    "instructions_ref": "docs/M2_MATERIALIZATION_PIXEL_READINESS_REVIEW.md",
+    "instructions_sha256": "d91b209d53a7abc86a8877d4b38ebe81870886d14664833833be5cfa835c6f51",
+    "renderer_ref": "scripts/render_m2_materialization_pixel_readiness_review.py",
+    "renderer_sha256": "9e373e1d2978956079f126fa0c4ab218ada8db4c9076903456894904325bee34",
+    "surface_ref": "docs/assets/m2-materialization-pixel-readiness-review.png",
+    "surface_sha256": "d92f73e5e349207401b0b7bed4c307ffa835ae454281b006409450f5b773d527"
+  },
+  "render": {
+    "width_px": 1800,
+    "height_px": 2140,
+    "format": "PNG",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "decision_options": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "human_decision_count": 0
+  },
+  "visual_inspection": {
+    "status": "pass",
+    "clipping_detected": false,
+    "overlap_detected": false,
+    "unreadable_text_detected": false,
+    "unselected_decision_controls_visible": true,
+    "scope_and_prohibitions_visible": true,
+    "optical_risk_visible": true,
+    "claim_boundary_visible": true
+  },
+  "assertions": {
+    "response_prefilled": false,
+    "human_attestation_present": false,
+    "materialization_authorized": false,
+    "real_header_access_authorized": false,
+    "pixel_access_authorized": false,
+    "scientific_claim_created": false
+  }
+}
