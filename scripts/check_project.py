@@ -138,6 +138,8 @@ REQUIRED = [
     "records/source-gates/m2-orbit-recovery-002-approval.json",
     "records/readiness/m2-orbit-recovery-002-approval-activation.json",
     "records/acquisition/m2-orbit-recovery-002-implementation-readiness.json",
+    "records/acquisition/m2-orbit-recovery-002-implementation-readiness-attempt-001-superseded.json",
+    "records/acquisition/m2-orbit-recovery-002-publication-attempt-001-failure.json",
     "scripts/activate_m2_orbit_recovery_002_approval.py",
     "scripts/m2_orbit_recovery_002_core.py",
     "scripts/m2_orbit_recovery_002_broker.py",

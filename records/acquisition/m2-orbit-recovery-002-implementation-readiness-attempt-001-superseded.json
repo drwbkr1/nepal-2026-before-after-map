@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-002-IMPLEMENTATION-READINESS-001",
-  "verified_at_utc": "2026-09-05T22:50:04Z",
+  "verified_at_utc": "2026-09-05T22:44:53Z",
   "status": "pass_local_synthetic_ready_public_ci_pending",
   "bindings": {
     "approval_sha256": "ee5922426882b5620f2e90e6703d0eb7d5f5ab77ede3ed61acfb8616b2c22d07",
@@ -18,7 +18,7 @@
     "outcome_reconciler_sha256": "8d8b7acfa9c739049ba3912718e4dd0a5880fb93735599cc2375856c7865cfeb",
     "owner_handoff_sha256": "86bfcb3bde381babfb0148f972f927255c1c7bb4254befbe16e5e1b1b522d415",
     "publication_gate_recorder_sha256": "8d5f6a49edd21b0bb52897fd9dba285ed9a3587f49685af94d5a9831c55de79b",
-    "focused_tests_sha256": "0b9b6ea369681396a30b229b94909dc52815b55d4f1c3ec51393f06d3e87f98c",
+    "focused_tests_sha256": "b00b1bd79b4bf7b731aa3a8f0ae1cbb5d40af7fef35d176e2f7d75188ccebd7e",
     "orbit_io_tests_sha256": "69a76ad3ac0dedaf8fc0c437304786a77bce6f1148e958d55245298d4e63ea0c"
   },
   "tests": {

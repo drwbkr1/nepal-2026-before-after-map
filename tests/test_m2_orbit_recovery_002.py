@@ -189,6 +189,7 @@ class OrbitRecovery002Tests(unittest.TestCase):
         for source_id in ("M2-ORB-002", "M2-ORB-003", "M2-ORB-004"):
             self.assertNotIn(source_id, bodies)
 
+    @unittest.skipUnless(os.name == "nt", "PowerShell parser validation runs on the deployment platform")
     def test_powershell_handoff_parses_and_does_not_persist_token(self) -> None:
         script = ROOT / "scripts/invoke_m2_orbit_recovery_002.ps1"
         literal_path = str(script).replace("'", "''")

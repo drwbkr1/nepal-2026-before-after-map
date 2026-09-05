@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-002-PUBLICATION-ATTEMPT-001-FAILURE",
+  "recorded_at_utc": "2026-09-05T22:49:30Z",
+  "status": "fail_public_ci_no_gate_no_activation",
+  "implementation_commit": "b61673c26d1a96f5fd01c5adde0e050be374d8ba",
+  "github_actions": {
+    "run_id": 33996953195,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/33996953195",
+    "conclusion": "failure",
+    "failed_step": "Test project controls",
+    "failure": "PowerShell executable absent on Linux runner for a Windows-only parser test"
+  },
+  "bindings": {
+    "superseded_readiness_ref": "records/acquisition/m2-orbit-recovery-002-implementation-readiness-attempt-001-superseded.json",
+    "superseded_readiness_sha256": "0b9a66082794756ccc2b494fb9736273220bbf066d3cb18cbc68e16e2925229a",
+    "failed_test_sha256": "b00b1bd79b4bf7b731aa3a8f0ae1cbb5d40af7fef35d176e2f7d75188ccebd7e"
+  },
+  "assertions": {
+    "publication_gate_created": false,
+    "activation_performed": false,
+    "final_preflight_performed": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_requested": false,
+    "external_data_mutated": false,
+    "recovery_attempt_started": false
+  },
+  "correction": "Run the deployment-specific PowerShell parser test only on Windows while retaining portable static token-custody assertions on all platforms.",
+  "next_gate": "rerun local tests, create a new readiness receipt, publish the corrected exact commit, and require a new successful public CI run"
+}
