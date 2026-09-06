@@ -1012,7 +1012,7 @@
         "fresh_source_preflight": "pass",
         "orbit_custody_initialized": true,
         "token_presence_checked": "synthetic_test_literal_only",
-        "retained_failure_review": "m2_orb_001_promoted_remaining_sources_review_required",
+        "retained_failure_review": "m2_orb_001_promoted_continuation_001_owner_review_pending",
         "retained_failure_reconciliation_ref": "records/acquisition/orbit-test-boundary-reconciliation-001.json",
         "retained_failure_reconciliation_sha256": "40dae0623dcc142cec17ff2108752e5e60bd736a241fe4b83e8f04c5de690025",
         "retained_failure_review_ref": "reviews/m2-orbit-osv-precision-amendment-001/review-contract.json",
@@ -1033,7 +1033,11 @@
           "M2-ORB-003",
           "M2-ORB-004"
         ],
-        "remaining_source_requests_authorized_by_current_amendment": false
+        "remaining_source_requests_authorized_by_current_amendment": false,
+        "remaining_source_review_ref": "reviews/m2-orbit-continuation-001/review-contract.json",
+        "remaining_source_review_bundle_sha256": "f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6",
+        "remaining_source_proposal_sha256": "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
+        "remaining_source_requests_authorized_by_current_review": false
       },
       "disposition": "defer",
       "retained_failures": [
@@ -1080,7 +1084,7 @@
         "rationale": "M2-ORB-001 is promoted and input-only verified; no current bounded decision releases requests for M2-ORB-002 through M2-ORB-004."
       },
       "next_dependency": "M2-ORBIT-VERIFY",
-      "rationale": "One of four exact restituted orbit files is promoted and input-only verified. The other three remain unrequested pending a separate zero-decision review."
+      "rationale": "One exact restituted orbit file is promoted and input-only verified. The publicly validated continuation packet for the other three contains zero decisions and releases no request."
     },
     {
       "id": "M2-ORBIT-VERIFY",
@@ -2285,6 +2289,196 @@
         "rationale": "The single approved local action validated and promoted exact M2-ORB-001 without replacement or network access while preserving staging evidence."
       },
       "next_dependency": "M2-ORBIT-VERIFY"
+    },
+    {
+      "id": "M2-ORBIT-CONTINUATION-001-REVIEW-PUBLICATION",
+      "purpose": "Publish and publicly validate the exact zero-decision continuation packet for the three remaining orbit sources.",
+      "depends_on": [
+        "M2-ORBIT-OSV-PRECISION-AMENDMENT-001"
+      ],
+      "action_class": "external_publication",
+      "human_gate": false,
+      "status": "complete",
+      "inputs": [
+        "contracts/milestone-002-orbit-continuation-001-proposal.json",
+        "reviews/m2-orbit-continuation-001/review-bundle.json",
+        "reviews/m2-orbit-continuation-001/review-contract.json",
+        "records/readiness/m2-orbit-continuation-001-review-readiness.json",
+        "records/readiness/m2-orbit-continuation-001-review-publication-local-readiness.json",
+        "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json"
+      ],
+      "outputs": [
+        "records/readiness/m2-orbit-continuation-001-review-publication-gate.json",
+        "records/readiness/m2-orbit-continuation-001-review-publication-reconciliation.json"
+      ],
+      "gates": {
+        "public_ci": "pass",
+        "publication_commit": "998fb415a04e531c71d4ea49b554168bb99b2095",
+        "public_ci_run_id": 34062485694,
+        "publication_gate_sha256": "786fe4ebb5fbf15c357783ea7a58674b98320c25a526a055c74d91ab8c8ad07c",
+        "human_decision_count": 0,
+        "continuation_authorized": false
+      },
+      "disposition": "pass",
+      "retained_failures": [
+        "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
+        "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+        "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json",
+        "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [
+          "exact blank continuation packet passed public default-branch CI"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "Public validation passed without creating a human decision or source-access authority."
+      },
+      "next_dependency": "M2-ORBIT-CONTINUATION-001-REVIEW"
+    },
+    {
+      "id": "M2-ORBIT-CONTINUATION-001-REVIEW",
+      "purpose": "Obtain one exact owner decision on the fixed-order, one-attempt remaining-orbit continuation.",
+      "depends_on": [
+        "M2-ORBIT-CONTINUATION-001-REVIEW-PUBLICATION"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "ready",
+      "inputs": [
+        "contracts/milestone-002-orbit-continuation-001-proposal.json",
+        "reviews/m2-orbit-continuation-001/review-bundle.json",
+        "reviews/m2-orbit-continuation-001/review-contract.json",
+        "records/readiness/m2-orbit-continuation-001-review-publication-gate.json",
+        "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-orbit-continuation-001-review-reconciliation.json",
+        "records/source-gates/m2-orbit-continuation-001-approval.json"
+      ],
+      "gates": {
+        "proposal_sha256": "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
+        "review_bundle_sha256": "f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6",
+        "review_contract_sha256": "40c4a010e75306a3df997b55d0c68216f745a39622da48fc45566fc877936296",
+        "blank_response_sha256": "a027c25cbd0ab4f33eb62bd32daf94c62a66e682da08c4c8ecb7ab7b45e28d5f",
+        "publication_gate_sha256": "786fe4ebb5fbf15c357783ea7a58674b98320c25a526a055c74d91ab8c8ad07c",
+        "public_ci": "pass",
+        "source_ids_in_exact_order": [
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ],
+        "maximum_owner_handoffs_if_approved": 1,
+        "maximum_real_attempts_per_source_if_approved": 1,
+        "stop_on_first_failure_if_approved": true,
+        "maximum_endpoint_tolerance_seconds_if_approved": 1.0,
+        "human_decision_count": 0,
+        "attestation": false,
+        "continuation_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
+        "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+        "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json",
+        "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "The exact packet is publicly validated and awaits one owner decision."
+      },
+      "next_dependency": "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"
+    },
+    {
+      "id": "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION",
+      "purpose": "If approved, implement and publicly validate only the exact remaining-orbit continuation controls.",
+      "depends_on": [
+        "M2-ORBIT-CONTINUATION-001-REVIEW"
+      ],
+      "action_class": "external_publication",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-orbit-continuation-001-approval.json",
+        "contracts/milestone-002-orbit-continuation-001-proposal.json"
+      ],
+      "outputs": [
+        "bounded continuation implementation",
+        "records/readiness/m2-orbit-continuation-001-implementation-readiness.json",
+        "records/readiness/m2-orbit-continuation-001-publication-gate.json"
+      ],
+      "gates": {
+        "public_ci": "required",
+        "synthetic_interruption_and_secret_exposure_tests": "required",
+        "exact_order_and_stop_on_first_failure_tests": "required",
+        "credential_or_source_access_before_public_ci": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
+        "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+        "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json",
+        "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "No implementation is authorized before owner approval."
+      },
+      "next_dependency": "M2-ORBIT-CONTINUATION-001"
+    },
+    {
+      "id": "M2-ORBIT-CONTINUATION-001",
+      "purpose": "If every gate passes, request, verify, and conditionally promote the three exact remaining orbit files once each in fixed order.",
+      "depends_on": [
+        "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"
+      ],
+      "action_class": "data_acquisition",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-orbit-continuation-001-approval.json",
+        "contracts/m2-orbit-intake.json"
+      ],
+      "outputs": [
+        "external orbit attempt evidence",
+        "records/acquisition remaining-orbit receipts",
+        "terminal reconciliation"
+      ],
+      "gates": {
+        "source_ids_in_exact_order": [
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ],
+        "maximum_owner_handoffs": 1,
+        "maximum_real_attempts_per_source": 1,
+        "stop_on_first_failure": true,
+        "automatic_retry_authorized": false,
+        "m2_orb_001_request_authorized": false,
+        "maximum_endpoint_tolerance_seconds": 1.0,
+        "public_ci": "required",
+        "final_no_payload_preflight": "required"
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
+        "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+        "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json",
+        "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-201-VERIFIED-CUSTODY"
+        ],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "No source action has been authorized or attempted."
+      },
+      "next_dependency": "M2-ORBIT-VERIFY"
     }
   ],
   "path_efficiency": {
@@ -2341,8 +2535,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION",
-    "next_action": "Prepare a separately governed zero-decision review for exact M2-ORB-002 through M2-ORB-004. Do not request an orbit file, obtain or read a token, retry recovery-003, apply orbit data, read radar pixels, act on DEMs, or perform baseline, change, attribution, or scientific-publication work.",
+    "current_checkpoint": "M2-ORBIT-CONTINUATION-001-REVIEW",
+    "next_action": "Review M2 orbit continuation-001 bundle SHA-256 f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6 and proposal SHA-256 01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b; approve, revise, or defer the fixed-order one-attempt continuation. No implementation, credential, live query, payload request, custody mutation, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -2371,7 +2565,8 @@
       "The 0.031829-second validity-stop shortfall is an observation; a one-second tolerance is only a proposed inference from format precision and is not yet authorized.",
       "The OSV precision amendment packet has zero decisions and authorizes no token, network request, retry, promotion, other orbit source, processing, or scientific action.",
       "The OSV precision amendment permits no real staged-byte access before its implementation passes public CI and permits no token, network request, other orbit source, retry, orbit application, radar pixels, baseline, change, or scientific action.",
-      "The OSV precision amendment is consumed after one successful local validation and promotion of M2-ORB-001; it authorizes no request for M2-ORB-002 through M2-ORB-004 and no downstream processing."
+      "The OSV precision amendment is consumed after one successful local validation and promotion of M2-ORB-001; it authorizes no request for M2-ORB-002 through M2-ORB-004 and no downstream processing.",
+      "The continuation-001 packet is blank and publicly validated; it creates no implementation or source-access authority before an exact attested owner decision is locked and reconciled."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."

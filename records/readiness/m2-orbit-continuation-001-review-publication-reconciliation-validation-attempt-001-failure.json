@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-CONTINUATION-001-REVIEW-PUBLICATION-RECONCILIATION-VALIDATION-ATTEMPT-001-FAILURE",
+  "observed_at_utc": "2026-09-06T22:00:56Z",
+  "status": "failed_stale_current_state_test_expectations",
+  "command": "python -m unittest discover -s tests",
+  "result": {
+    "test_count": 446,
+    "intentional_skip_count": 3,
+    "failure_count": 7,
+    "error_count": 0,
+    "failed_tests": [
+      "test_m2_dem_activation.M2DemActivationTests.test_milestone_and_profile_preserve_parallel_dem_route",
+      "test_m2_materialization_pixel_readiness_review.MaterializationPixelReadinessReviewTests.test_milestone_and_profile_record_exact_approval_and_stop_at_implementation",
+      "test_m2_orbit_activation.M2OrbitActivationTests.test_project_control_surfaces_consume_review_without_releasing_other_gates",
+      "test_m2_orbit_osv_precision_amendment_001_publication.OrbitOsvPrecisionAmendmentPublicationTests.test_publication_reconciliation_history_remains_bound_after_approval",
+      "test_m2_orbit_osv_precision_amendment_001_success.OrbitOsvPrecisionAmendmentSuccessTests.test_control_plane_stops_before_other_orbit_requests",
+      "test_m2_orbit_recovery_002_review.M2OrbitRecovery002ReviewTests.test_recovery_002_history_is_terminal_and_routes_to_recovery_003_review",
+      "test_m2_radar_first_path_review_001.RadarFirstPathReview001Tests.test_current_controls_preserve_route_split_and_point_to_recovery_003_review"
+    ]
+  },
+  "assessment": {
+    "cause": "Historical tests asserted the immediately preceding M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION checkpoint or retained-failure label after the publication reconciliation had correctly advanced the current control plane to M2-ORBIT-CONTINUATION-001-REVIEW.",
+    "new_continuation_publication_tests_passed": true,
+    "checkpoint_derivation_passed": true,
+    "project_checker_passed": true,
+    "proposal_or_review_bundle_changed": false,
+    "human_decision_created": false,
+    "continuation_authorized": false
+  },
+  "assertions": {
+    "credential_values_read_or_recorded": false,
+    "orbit_network_or_payload_request_performed": false,
+    "external_data_mutated": false,
+    "m2_orb_001_mutated": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Patch only the seven stale current-state expectations, preserve this failed attempt, and rerun the complete suite."
+}

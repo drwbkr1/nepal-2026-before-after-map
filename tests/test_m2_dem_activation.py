@@ -215,8 +215,19 @@ class M2DemActivationTests(unittest.TestCase):
             ),
             None,
         )
+        orbit_continuation_review = next(
+            (
+                unit
+                for unit in self.milestone["units"]
+                if unit["id"] == "M2-ORBIT-CONTINUATION-001-REVIEW"
+            ),
+            None,
+        )
         expected_primary_checkpoint = (
-            "M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION"
+            "M2-ORBIT-CONTINUATION-001-REVIEW"
+            if orbit_continuation_review is not None
+            and orbit_continuation_review.get("status") == "ready"
+            else "M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION"
             if orbit_osv_precision_implementation is not None
             and orbit_osv_precision_implementation.get("status") == "complete"
             else "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION"

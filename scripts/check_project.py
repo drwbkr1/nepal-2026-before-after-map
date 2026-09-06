@@ -22,6 +22,7 @@ from derive_m2_acquisition_checkpoint import (
     current_optical_pixel_recovery_review_required,
     current_optical_pixel_recovery_terminal,
     current_orbit_osv_precision_implementation_publication_pending,
+    current_orbit_continuation_001_review_required,
     current_orbit_remaining_sources_review_preparation,
     current_orbit_osv_precision_review_publication_pending,
     current_orbit_osv_precision_review_required,
@@ -264,6 +265,11 @@ REQUIRED = [
     "records/readiness/m2-orbit-continuation-001-review-publication-local-readiness.json",
     "scripts/prepare_m2_orbit_continuation_001_review.py",
     "tests/test_m2_orbit_continuation_001_review.py",
+    "records/readiness/m2-orbit-continuation-001-review-publication-gate.json",
+    "records/readiness/m2-orbit-continuation-001-review-publication-reconciliation.json",
+    "records/readiness/m2-orbit-continuation-001-review-publication-reconciliation-validation-attempt-001-failure.json",
+    "scripts/reconcile_m2_orbit_continuation_001_review_publication.py",
+    "tests/test_m2_orbit_continuation_001_publication.py",
     "tests/test_m2_orbit_osv_precision_amendment_001.py",
     "scripts/activate_m2_orbit_recovery_002_approval.py",
     "scripts/m2_orbit_recovery_002_core.py",
@@ -5005,13 +5011,18 @@ def main() -> None:
     orbit_remaining_sources_review_preparation = bool(
         current_orbit_remaining_sources_review_preparation(ROOT, state_counts)
     )
+    orbit_continuation_001_review_ready = bool(
+        current_orbit_continuation_001_review_required(ROOT, state_counts)
+    )
     optical_pixel_recovery_history_present = bool(
         optical_pixel_recovery_review_ready
         or optical_pixel_recovery_implementation_pending
         or optical_pixel_recovery_execution_pending
         or optical_pixel_recovery_terminal
     )
-    if orbit_remaining_sources_review_preparation:
+    if orbit_continuation_001_review_ready:
+        expected_checkpoint = "M2-ORBIT-CONTINUATION-001-REVIEW"
+    elif orbit_remaining_sources_review_preparation:
         expected_checkpoint = "M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION"
     elif orbit_osv_precision_implementation_publication_pending:
         expected_checkpoint = "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION"
@@ -5070,6 +5081,7 @@ def main() -> None:
     expected_orbit_osv_precision_review_next_action = "Review M2 orbit OSV precision amendment-001 bundle SHA-256 71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7 and proposal SHA-256 0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4; approve, revise, or defer the exact one-second local-only endpoint rule. No token, network request, recovery retry, staged-byte promotion, other orbit source, processing, or scientific action is authorized before an attested decision."
     expected_orbit_osv_precision_implementation_publication_next_action = "Publish the exact approved one-second OSV endpoint implementation and require successful public default-branch CI. Do not read or mutate preserved staged bytes, run the local validation, promote an orbit file, request a token or network resource, or touch another orbit source before that gate passes."
     expected_orbit_remaining_sources_review_preparation_next_action = "Prepare a separately governed zero-decision review for exact M2-ORB-002 through M2-ORB-004. Do not request an orbit file, obtain or read a token, retry recovery-003, apply orbit data, read radar pixels, act on DEMs, or perform baseline, change, attribution, or scientific-publication work."
+    expected_orbit_continuation_001_review_next_action = "Review M2 orbit continuation-001 bundle SHA-256 f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6 and proposal SHA-256 01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b; approve, revise, or defer the fixed-order one-attempt continuation. No implementation, credential, live query, payload request, custody mutation, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision."
     acquire_unit = m2_units.get("M2-ACQUIRE", {})
     if materialization_pixel_review_ready or materialization_pixel_review_approved:
         proposal_sha = "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c"
@@ -5426,7 +5438,9 @@ def main() -> None:
             expected_materialization_state = "route_split_optical_terminal_block_radar_source_header_ready_aggregate_deferred"
             expected_verify_next_dependency = None
             expected_primary_next_action = (
-                expected_orbit_remaining_sources_review_preparation_next_action
+                expected_orbit_continuation_001_review_next_action
+                if orbit_continuation_001_review_ready
+                else expected_orbit_remaining_sources_review_preparation_next_action
                 if orbit_remaining_sources_review_preparation
                 else expected_orbit_osv_precision_implementation_publication_next_action
                 if orbit_osv_precision_implementation_publication_pending
@@ -5695,7 +5709,9 @@ def main() -> None:
                 or orbit_acquire_unit.get("status") != "deferred"
                 or orbit_acquire_unit.get("depends_on") != ["M2-ORBIT-PREFLIGHT", "M2-RADAR-SOURCE-READINESS", "M2-ORBIT-OSV-PRECISION-AMENDMENT-001"]
                 or orbit_acquire_unit.get("gates", {}).get("retained_failure_review") != (
-                    "m2_orb_001_promoted_remaining_sources_review_required"
+                    "m2_orb_001_promoted_continuation_001_owner_review_pending"
+                    if orbit_continuation_001_review_ready
+                    else "m2_orb_001_promoted_remaining_sources_review_required"
                     if orbit_remaining_sources_review_preparation
                     else
                     "approved_exact_one_second_implementation_public_ci_pending"
@@ -6041,7 +6057,9 @@ def main() -> None:
             expected_materialization_state = "route_split_optical_terminal_block_radar_source_header_ready_aggregate_deferred"
             expected_verify_next_dependency = None
             expected_primary_next_action = (
-                expected_orbit_remaining_sources_review_preparation_next_action
+                expected_orbit_continuation_001_review_next_action
+                if orbit_continuation_001_review_ready
+                else expected_orbit_remaining_sources_review_preparation_next_action
                 if orbit_remaining_sources_review_preparation
                 else expected_orbit_osv_precision_implementation_publication_next_action
                 if orbit_osv_precision_implementation_publication_pending

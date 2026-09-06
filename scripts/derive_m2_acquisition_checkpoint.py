@@ -98,6 +98,10 @@ ORBIT_REMAINING_SOURCES_REVIEW_PREPARATION_CHECKPOINT = {
     "checkpoint_id": "M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION",
     "next_action": "Prepare a separately governed zero-decision review for exact M2-ORB-002 through M2-ORB-004. Do not request an orbit file, obtain or read a token, retry recovery-003, apply orbit data, read radar pixels, act on DEMs, or perform baseline, change, attribution, or scientific-publication work.",
 }
+ORBIT_CONTINUATION_001_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-ORBIT-CONTINUATION-001-REVIEW",
+    "next_action": "Review M2 orbit continuation-001 bundle SHA-256 f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6 and proposal SHA-256 01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b; approve, revise, or defer the fixed-order one-attempt continuation. No implementation, credential, live query, payload request, custody mutation, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -644,6 +648,43 @@ def current_orbit_remaining_sources_review_preparation(
     )
 
 
+def current_orbit_continuation_001_review_required(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        intake = load(root / "contracts/m2-orbit-intake.json")
+        publication = load(root / "records/readiness/m2-orbit-continuation-001-review-publication-gate.json")
+        reconciliation = load(root / "records/readiness/m2-orbit-continuation-001-review-publication-reconciliation.json")
+        blank = load(root / "reviews/m2-orbit-continuation-001/blank-response.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    publication_unit = units.get("M2-ORBIT-CONTINUATION-001-REVIEW-PUBLICATION", {})
+    review_unit = units.get("M2-ORBIT-CONTINUATION-001-REVIEW", {})
+    assets = intake.get("assets", [])
+    return bool(
+        publication.get("status") == "pass_exact_blank_packet_public_ci_owner_review_ready"
+        and publication.get("github_actions", {}).get("conclusion") == "success"
+        and reconciliation.get("status") == "pass_exact_public_packet_owner_review_ready_zero_decisions"
+        and reconciliation.get("review", {}).get("human_decision_count") == 0
+        and reconciliation.get("review", {}).get("continuation_authorized") is False
+        and blank.get("completed") is False
+        and blank.get("responses", [{}])[0].get("decision") is None
+        and publication_unit.get("status") == "complete"
+        and publication_unit.get("disposition") == "pass"
+        and review_unit.get("status") == "ready"
+        and review_unit.get("human_gate") is True
+        and review_unit.get("gates", {}).get("human_decision_count") == 0
+        and review_unit.get("gates", {}).get("continuation_authorized") is False
+        and intake.get("extensions", {}).get("current_orbit_state_counts") == {"authorized": 3, "failed": 0, "promoted": 1}
+        and len(assets) == 4
+        and [item.get("state") for item in assets] == ["promoted", "authorized", "authorized", "authorized"]
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -688,7 +729,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_orbit_remaining_sources_review_preparation(ROOT, progress["state_counts"]):
+        if current_orbit_continuation_001_review_required(ROOT, progress["state_counts"]):
+            checkpoint = dict(ORBIT_CONTINUATION_001_REVIEW_CHECKPOINT)
+        elif current_orbit_remaining_sources_review_preparation(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_REMAINING_SOURCES_REVIEW_PREPARATION_CHECKPOINT)
         elif current_orbit_osv_precision_implementation_publication_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_OSV_PRECISION_IMPLEMENTATION_PUBLICATION_CHECKPOINT)
