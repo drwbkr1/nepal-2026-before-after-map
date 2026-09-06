@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-CONTINUATION-001-PUBLICATION-ATTEMPT-002-FAILURE",
+  "recorded_at_utc": "2026-09-06T22:58:50Z",
+  "status": "fail_public_ci_no_gate_no_activation",
+  "implementation_commit": "aec406019e0caf8056352bc675ffd02a487a8b9f",
+  "implementation_readiness_sha256": "707875a46ffccc5793829a3bf66e585d67b712ecf049c080f1520f0e69c799b5",
+  "github_actions": {
+    "workflow": "Validate project controls",
+    "run_id": 34065435604,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/34065435604",
+    "head_sha": "aec406019e0caf8056352bc675ffd02a487a8b9f",
+    "conclusion": "failure",
+    "failed_step": "Validate repository"
+  },
+  "failure": {
+    "code": "historical_receipt_git_normalization_mismatch",
+    "artifact": "records/readiness/m2-orbit-continuation-001-activation-attempt-001-failure.json",
+    "checker_message": "M2 orbit continuation-001 approval, projection correction, or implementation readiness differs",
+    "local_sha256": "ccc8a18f3ff70b16b6c4a31e5fab262e3a8eccf436082be9ab2230c16a311aa8",
+    "published_blob_sha256": "98d2a8f35f64f891e44e406ffced4924aaf02dded85b64639d816f96a634ed3d"
+  },
+  "disposition": {
+    "publication_gate_created": false,
+    "activation_performed": false,
+    "final_preflight_performed": false,
+    "credential_read": false,
+    "authentication_performed": false,
+    "orbit_catalog_request_performed": false,
+    "orbit_payload_request_performed": false,
+    "owner_handoff_performed": false,
+    "external_data_mutated": false,
+    "failed_attempt_preserved": true
+  },
+  "correction": "Mark only the exact historical activation-failure receipt as non-text custody, republish its original bytes, rerun local validation, and require a new successful public CI result before any gate or activation.",
+  "automatic_retry_of_orbit_transfer_authorized": false
+}

@@ -6,6 +6,7 @@
 *.jsonl text eol=lf
 *.geojson text eol=lf
 *.py text eol=lf
+*.ps1 text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf
 *.png binary
@@ -18,3 +19,4 @@
 /records/surface-receipts/m1-aoi-review-map.json -text -eol -diff whitespace=cr-at-eol
 /reviews/m1-aoi/review-bundle.json -text -eol -diff whitespace=cr-at-eol
 /reviews/m1-aoi/review-contract.json -text -eol -diff whitespace=cr-at-eol
+/records/readiness/m2-orbit-continuation-001-activation-attempt-001-failure.json -text -eol -diff whitespace=cr-at-eol

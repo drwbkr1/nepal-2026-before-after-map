@@ -295,6 +295,7 @@ REQUIRED = [
     "records/readiness/m2-orbit-continuation-001-implementation-readiness-002.json",
     "records/readiness/m2-orbit-continuation-001-publication-gate-attempt-001.json",
     "records/readiness/m2-orbit-continuation-001-activation-attempt-001-failure.json",
+    "records/readiness/m2-orbit-continuation-001-publication-attempt-002-failure.json",
     "scripts/invoke_m2_orbit_continuation_001.ps1",
     "tests/test_m2_orbit_continuation_001.py",
     "tests/test_m2_orbit_osv_precision_amendment_001.py",
@@ -889,6 +890,7 @@ def main() -> None:
     orbit_continuation_001_implementation_readiness_002 = json.loads((ROOT / "records/readiness/m2-orbit-continuation-001-implementation-readiness-002.json").read_text(encoding="utf-8"))
     orbit_continuation_001_publication_attempt_001 = json.loads((ROOT / "records/readiness/m2-orbit-continuation-001-publication-gate-attempt-001.json").read_text(encoding="utf-8"))
     orbit_continuation_001_activation_failure_001 = json.loads((ROOT / "records/readiness/m2-orbit-continuation-001-activation-attempt-001-failure.json").read_text(encoding="utf-8"))
+    orbit_continuation_001_publication_failure_002 = json.loads((ROOT / "records/readiness/m2-orbit-continuation-001-publication-attempt-002-failure.json").read_text(encoding="utf-8"))
     contract = json.loads((ROOT / "contracts/milestone-001.json").read_text(encoding="utf-8"))
     m2_proposal = json.loads((ROOT / "contracts/milestone-002-proposal.json").read_text(encoding="utf-8"))
     active_m2 = json.loads((ROOT / "contracts/milestone-002.json").read_text(encoding="utf-8"))
@@ -1124,6 +1126,16 @@ def main() -> None:
         or orbit_continuation_001_activation_failure_001.get("publication_gate_attempt_sha256") != "fb5b051daedda020e6a925ae67380ef06fa8b77f07b19b221568f22455501377"
         or orbit_continuation_001_activation_failure_001.get("failure", {}).get("code") != "continuation_publication_gate_not_passing"
         or any(orbit_continuation_001_activation_failure_001.get("assertions", {}).values())
+        or sha256("records/readiness/m2-orbit-continuation-001-publication-attempt-002-failure.json") != "25546f8192eb8a19ad1c778703e6a00ac7e31ffa1f8f94464e787bacf9fa6ffc"
+        or orbit_continuation_001_publication_failure_002.get("status") != "fail_public_ci_no_gate_no_activation"
+        or orbit_continuation_001_publication_failure_002.get("implementation_commit") != "aec406019e0caf8056352bc675ffd02a487a8b9f"
+        or orbit_continuation_001_publication_failure_002.get("github_actions", {}).get("run_id") != 34065435604
+        or orbit_continuation_001_publication_failure_002.get("failure", {}).get("code") != "historical_receipt_git_normalization_mismatch"
+        or orbit_continuation_001_publication_failure_002.get("failure", {}).get("local_sha256") != "ccc8a18f3ff70b16b6c4a31e5fab262e3a8eccf436082be9ab2230c16a311aa8"
+        or orbit_continuation_001_publication_failure_002.get("failure", {}).get("published_blob_sha256") != "98d2a8f35f64f891e44e406ffced4924aaf02dded85b64639d816f96a634ed3d"
+        or any(value for key, value in orbit_continuation_001_publication_failure_002.get("disposition", {}).items() if key != "failed_attempt_preserved")
+        or orbit_continuation_001_publication_failure_002.get("disposition", {}).get("failed_attempt_preserved") is not True
+        or orbit_continuation_001_publication_failure_002.get("automatic_retry_of_orbit_transfer_authorized") is not False
     ):
         fail("M2 orbit continuation-001 approval, projection correction, or implementation readiness differs")
     continuation_success = json.loads((ROOT / "records/acquisition/sentinel-continuation-001-success-reconciliation.json").read_text(encoding="utf-8"))
