@@ -1,0 +1,88 @@
+{
+  "proposal_version": "1.0",
+  "proposal_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-PROPOSAL",
+  "prepared_at_utc": "2026-09-06T18:48:14Z",
+  "status": "proposed_not_authorized",
+  "trigger": {
+    "outcome_ref": "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json",
+    "outcome_sha256": "f67b7307dfe82cb6f02a13003389f482c7c2a96342fab138f737a31c2ec2d503",
+    "terminal_control_reconciliation_ref": "records/acquisition/m2-orbit-recovery-003-terminal-failure-control-reconciliation.json",
+    "terminal_control_reconciliation_sha256": "d70fe44d5a5a1cb8fa2ac6d5bb4aa5362a5a1c7bb1e8729bf959879c4b56548c",
+    "failed_reconciliation_ref": "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation-attempt-001-failure.json",
+    "failed_reconciliation_sha256": "0f99de4d1bd7edf0a70487b36826879a857067a80a54573a4d50a2845ff1af93",
+    "source_evidence_ref": "records/source-gates/m2-orbit-osv-time-format-evidence.json",
+    "source_evidence_sha256": "0ffd9adebc0d2d0e3cfb8e4a52eeb7d52f63c9a83fafe1d8209803184990d6db",
+    "active_intake_ref": "contracts/m2-orbit-intake.json",
+    "active_intake_sha256": "74fa02b68e46bb0e2b7a6ad55fb306c2eb73589f5ea4e73f406ff087e29d3909",
+    "source_id": "M2-ORB-001",
+    "attempt_id": "m2-orb-001-recovery-002-20260906t183804z-e5883324",
+    "terminal_code": "osv_times_do_not_span_validity",
+    "recovery_003_authority_consumed": true
+  },
+  "proposed_amendment": {
+    "mode": "preserved_staged_bytes_validation_and_conditional_no_replace_promotion",
+    "source_id": "M2-ORB-001",
+    "product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+    "preserved_staged_sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+    "preserved_staged_size_bytes": 639533,
+    "expected_provider_md5": "ca7f36b1892073c883c4cff5c0517b9c",
+    "expected_provider_blake3": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b",
+    "maximum_osv_endpoint_tolerance_seconds": 1.0,
+    "endpoint_rule": "require first_osv_utc <= validity_start_utc + 1 second and last_osv_utc >= validity_stop_utc - 1 second",
+    "unchanged_checks": [
+      "exact source, provider UUID, filename, size, MD5, BLAKE3, and locally recorded SHA-256",
+      "safe XML without DTD or entity declarations",
+      "exact mission, AUX_RESORB type, filename/header identity, and header validity values",
+      "positive declared OSV count matching the actual list",
+      "strictly increasing unique OSV times and finite position and velocity values with exact units",
+      "exact scene binding and minimum 6,350-second scene margin",
+      "atomic no-replace promotion into the already approved M2-ORB-001 custody destination"
+    ],
+    "implementation_gates": [
+      "versioned contract and pure endpoint comparator",
+      "synthetic tests for exact endpoints, sub-second acceptance, one-second boundary acceptance, and greater-than-one-second rejection",
+      "full repository tests, secret-exposure scan, and successful public default-branch CI",
+      "final local no-network preflight binding the exact preserved staging bytes and absent destination"
+    ],
+    "single_real_action": "one read-only validation of the exact preserved staged file followed by conditional atomic no-replace promotion and offline input-only verification if every check passes",
+    "maximum_new_owner_handoffs": 0,
+    "maximum_new_catalog_requests": 0,
+    "maximum_new_download_requests": 0,
+    "maximum_local_validation_attempts": 1,
+    "automatic_retry_authorized": false,
+    "failure_policy": "Any failed local validation or promotion is terminal for this amendment and requires another explicit review."
+  },
+  "approval_would_authorize": [
+    "implement and test only the exact one-second OSV endpoint-consistency amendment",
+    "publish the exact implementation and require successful public CI before touching preserved staged bytes",
+    "perform one final no-network preflight and one read-only validation of the exact preserved M2-ORB-001 staged file",
+    "conditionally promote only those exact bytes without replacement and run the input-only offline verifier once if every amended check passes",
+    "reconcile the single terminal local outcome without requesting another orbit source"
+  ],
+  "approval_would_not_authorize": [
+    "retry, resume, or relaunch recovery-003",
+    "obtain a token or make any CDSE catalogue or payload request",
+    "change the tolerance above 1.0 second or change any other identity, checksum, XML, OSV, scene-margin, or destination rule",
+    "request M2-ORB-002, M2-ORB-003, or M2-ORB-004",
+    "delete, rewrite, hide, or replace the failed recovery-003 evidence or staged file",
+    "substitute AUX_POEORB, apply orbit data, convert DEM data, decode radar pixels, create a baseline, analyze change, attribute cause, or publish a scientific result"
+  ],
+  "human_gate": {
+    "review_required": true,
+    "item_id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001",
+    "allowed_decisions": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "required_attestation": true
+  },
+  "limitations": [
+    "The official specification describes precision and consistency but does not explicitly define rounding behavior or a numerical endpoint tolerance.",
+    "The source pages were inspected online and are not treated as locally archived authoritative document bytes.",
+    "Checksum agreement and format consistency do not establish orbit-application, radar-pixel, terrain-correction, or scientific fitness.",
+    "The exact file remains failed staging evidence until a separate approval, implementation, public-CI gate, final preflight, and one local validation succeed.",
+    "Even a passing promoted orbit file would establish input-only fitness, not corrected imagery, usable pixels, change, attribution, or scientific fitness.",
+    "This proposal creates no implementation, local promotion, credential, network, other-orbit, or processing authority until the exact review receives a completed owner decision."
+  ]
+}

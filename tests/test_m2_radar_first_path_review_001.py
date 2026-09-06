@@ -146,13 +146,20 @@ class RadarFirstPathReview001Tests(unittest.TestCase):
         self.assertEqual(units["M2-VERIFY"]["status"], "deferred")
         self.assertEqual(units["M2-ORBIT-RECOVERY-002-REVIEW"]["status"], "complete")
         self.assertEqual(units["M2-ORBIT-RECOVERY-002-REVIEW"]["gates"]["human_decision_count"], 1)
-        self.assertEqual(units["M2-ORBIT-RECOVERY-003-REVIEW"]["status"], "ready")
-        self.assertEqual(units["M2-ORBIT-RECOVERY-003-REVIEW"]["gates"]["human_decision_count"], 0)
-        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-ORBIT-RECOVERY-003-REVIEW")
-        self.assertEqual(self.goal["current_checkpoint"], "M2-ORBIT-RECOVERY-003-REVIEW")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-003-REVIEW"]["status"], "complete")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-003-REVIEW"]["gates"]["human_decision_count"], 1)
+        self.assertEqual(units["M2-ORBIT-RECOVERY-003"]["disposition"], "block")
+        self.assertEqual(
+            self.profile["current_checkpoint"]["checkpoint_id"],
+            "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION",
+        )
+        self.assertEqual(
+            self.goal["current_checkpoint"],
+            "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION",
+        )
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            ["contracts/milestone-002-orbit-recovery-003-proposal.json"],
+            ["contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json"],
         )
         self.assertIn(APPROVAL_REF, self.goal["active_amendments"])
         self.assertEqual(self.control["status"], "pass_route_split_and_corrected_orbit_review_ready")

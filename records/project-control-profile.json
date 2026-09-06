@@ -176,6 +176,21 @@
         "automatic_retry_authorized": false,
         "other_orbit_source_requests_authorized": false,
         "secret_transport": "anonymous_pipe_single_use_memory_only"
+      },
+      {
+        "approval_ref": "records/source-gates/m2-orbit-recovery-003-approval.json",
+        "approval_sha256": "63a01a7010a5cbd68cfa2dd35f1d24918c72a2e59ef956a98897ea62e005a278",
+        "proposal_ref": "contracts/milestone-002-orbit-recovery-003-proposal.json",
+        "proposal_sha256": "5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3",
+        "review_bundle_sha256": "bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d",
+        "review_reconciliation_ref": "records/source-gates/m2-orbit-recovery-003-review-reconciliation.json",
+        "review_reconciliation_sha256": "1883bf3ed498f3cb709d85bdc1bd52e48a6b27053986694efccd163f6b5bc11e",
+        "source_id": "M2-ORB-001",
+        "maximum_owner_handoffs": 1,
+        "maximum_real_attempts": 1,
+        "automatic_retry_authorized": false,
+        "other_orbit_source_requests_authorized": false,
+        "secret_transport": "anonymous_pipe_single_use_memory_only"
       }
     ]
   },
@@ -193,7 +208,7 @@
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
     "proposed_amendments": [
-      "contracts/milestone-002-orbit-recovery-003-proposal.json"
+      "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json"
     ],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
@@ -205,7 +220,8 @@
       "records/source-gates/m2-materialization-pixel-readiness-approval.json",
       "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
       "records/source-gates/m2-radar-first-path-001-approval.json",
-      "records/source-gates/m2-orbit-recovery-002-approval.json"
+      "records/source-gates/m2-orbit-recovery-002-approval.json",
+      "records/source-gates/m2-orbit-recovery-003-approval.json"
     ]
   },
   "cycle": {
@@ -394,18 +410,18 @@
         "authority_ref": "records/source-gates/m2-optical-pixel-recovery-001-approval.json"
       },
       {
-        "unit_id": "M2-ORBIT-RECOVERY-003-REVIEW",
-        "reason": "Would authorize only the exact evidence-first recovery-003 implementation, public-CI gate, final no-payload preflight, and one owner-selected M2-ORB-001 attempt.",
-        "authority_ref": "reviews/m2-orbit-recovery-003/review-contract.json"
+        "unit_id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW",
+        "reason": "Would authorize only the exact one-second OSV endpoint-consistency implementation, public-CI gate, final no-network preflight, and one local validation and conditional promotion of the already preserved M2-ORB-001 staged bytes.",
+        "authority_ref": "reviews/m2-orbit-osv-precision-amendment-001/review-contract.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-ORBIT-RECOVERY-003-REVIEW",
+    "checkpoint_id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Review M2 orbit recovery-003 bundle SHA-256 bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d and proposal SHA-256 5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3; approve, revise, or defer the evidence-first one-file recovery. No retry, credential, catalog, payload, DEM, radar-pixel, baseline, change, attribution, or scientific-publication action is authorized before an attested decision."
+    "next_action": "Publish the exact zero-decision OSV precision amendment packet at proposal SHA-256 0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4 and bundle SHA-256 71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7; require successful public CI before owner review. Do not retry recovery-003, touch credentials, request any orbit file, or promote staged bytes."
   },
   "parallel_checkpoints": [
     {

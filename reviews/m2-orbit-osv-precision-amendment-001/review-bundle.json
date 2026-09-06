@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-orbit-osv-precision-amendment-001-review-bundle",
+  "review_id": "m2-orbit-osv-precision-amendment-001-review",
+  "authority_ref": "records/source-gates/m2-radar-first-path-001-approval.json",
+  "candidate_identity": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-PROPOSAL-SHA256:0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-orbit-osv-precision-amendment-001-review.png",
+      "sha256": "d61da555ceaaa8b7d62f008abeaddf15338c5a40ff46d68ff0dc06dbb339cd90",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-orbit-osv-precision-amendment-001-review.json",
+          "sha256": "bcabd0e9a0c2b3768354c4abcf946f4bfcba68492c20e894c97220750ec3e2e7"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_ORBIT_OSV_PRECISION_AMENDMENT_001_REVIEW.md",
+      "sha256": "9857a5c1188ebff45a4764c54e19700e4f925e7a21e5917a099e6e5c1f0aba50",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "proposal",
+      "path": "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json",
+      "sha256": "0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4",
+      "role": "candidate_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "review-preflight",
+      "path": "records/readiness/m2-orbit-osv-precision-amendment-001-review-preflight.json",
+      "sha256": "14383a0a935b4ec27bcd38cd0616159f241ca74a142ef4bc09cb26ad91170fc5",
+      "role": "zero_authority_preflight",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "source-evidence",
+      "path": "records/source-gates/m2-orbit-osv-time-format-evidence.json",
+      "sha256": "0ffd9adebc0d2d0e3cfb8e4a52eeb7d52f63c9a83fafe1d8209803184990d6db",
+      "role": "authoritative_format_and_local_observation",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "recovery-003-outcome",
+      "path": "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json",
+      "sha256": "f67b7307dfe82cb6f02a13003389f482c7c2a96342fab138f737a31c2ec2d503",
+      "role": "terminal_failure_outcome",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "terminal-control-reconciliation",
+      "path": "records/acquisition/m2-orbit-recovery-003-terminal-failure-control-reconciliation.json",
+      "sha256": "d70fe44d5a5a1cb8fa2ac6d5bb4aa5362a5a1c7bb1e8729bf959879c4b56548c",
+      "role": "active_intake_truth_reconciliation",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "failed-outcome-reconciliation",
+      "path": "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation-attempt-001-failure.json",
+      "sha256": "0f99de4d1bd7edf0a70487b36826879a857067a80a54573a4d50a2845ff1af93",
+      "role": "preserved_control_failure",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "attempt-receipt",
+      "path": "records/acquisition/orbit-attempts/m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
+      "sha256": "fb6e9b100f6da3a54a1d6e554611c77c076675434d46ebb44eca8b0a40e9db4c",
+      "role": "terminal_attempt_receipt",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "active-orbit-intake",
+      "path": "contracts/m2-orbit-intake.json",
+      "sha256": "74fa02b68e46bb0e2b7a6ad55fb306c2eb73589f5ea4e73f406ff087e29d3909",
+      "role": "terminal_failed_source_state",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "offline-verification-contract",
+      "path": "contracts/m2-orbit-offline-verification.json",
+      "sha256": "bac1154aebf34858fd82d9f42934a5a2d7bfd21a25917df1355f0f9f68682303",
+      "role": "frozen_strict_rule_context",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "recovery-003-approval",
+      "path": "records/source-gates/m2-orbit-recovery-003-approval.json",
+      "sha256": "63a01a7010a5cbd68cfa2dd35f1d24918c72a2e59ef956a98897ea62e005a278",
+      "role": "consumed_recovery_authority",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "orbit-amendment-approval",
+      "path": "records/source-gates/m2-orbit-amendment-approval.json",
+      "sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+      "role": "original_exact_source_authority",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "radar-source-readiness",
+      "path": "records/readiness/m2-radar-source-readiness-001.json",
+      "sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
+      "role": "route_prerequisite",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "retry, resume, or relaunch recovery-003",
+    "obtain a token or make any CDSE catalogue or payload request",
+    "change the tolerance above 1.0 second or change any other identity, checksum, XML, OSV, scene-margin, or destination rule",
+    "request M2-ORB-002, M2-ORB-003, or M2-ORB-004",
+    "delete, rewrite, hide, or replace the failed recovery-003 evidence or staged file",
+    "substitute AUX_POEORB, apply orbit data, convert DEM data, decode radar pixels, create a baseline, analyze change, attribute cause, or publish a scientific result",
+    "The official specification describes precision and consistency but does not explicitly define rounding behavior or a numerical endpoint tolerance.",
+    "The source pages were inspected online and are not treated as locally archived authoritative document bytes.",
+    "Checksum agreement and format consistency do not establish orbit-application, radar-pixel, terrain-correction, or scientific fitness.",
+    "The exact file remains failed staging evidence until a separate approval, implementation, public-CI gate, final preflight, and one local validation succeed.",
+    "Even a passing promoted orbit file would establish input-only fitness, not corrected imagery, usable pixels, change, attribution, or scientific fitness.",
+    "This proposal creates no implementation, local promotion, credential, network, other-orbit, or processing authority until the exact review receives a completed owner decision."
+  ]
+}

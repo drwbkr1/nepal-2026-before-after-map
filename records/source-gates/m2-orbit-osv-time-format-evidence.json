@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OSV-TIME-FORMAT-EVIDENCE-001",
+  "observed_at_utc": "2026-09-06T18:48:14Z",
+  "status": "pass_authoritative_format_precision_observed_tolerance_is_explicit_inference",
+  "authoritative_sources": [
+    {
+      "publisher": "Copernicus POD Service / GMV",
+      "title": "Copernicus POD Service File Format Specification",
+      "document_code": "GMV-CPOD3-FFS-0001",
+      "version": "3.0",
+      "date": "2023-07-21",
+      "url": "https://sentiwiki.copernicus.eu/__attachments/1673407/GMV-CPOD3-FFS-0001%20-%20Copernicus%20POD%20Service%20File%20Format%20Specification%202023%20-%203.0.pdf",
+      "observed_statements": [
+        "Validity_Start and Validity_Stop use whole-second UTC formatting.",
+        "Each OSV UTC value uses microsecond UTC formatting.",
+        "The header validity values must be consistent with the file validity dates."
+      ]
+    },
+    {
+      "publisher": "Copernicus Data Space Ecosystem",
+      "title": "Sentinel-1 documentation",
+      "url": "https://documentation.dataspace.copernicus.eu/Data/Sentinel1.html",
+      "observed_statements": [
+        "AUX_RESORB is an offered Sentinel-1 POD orbit product in EOF form with a rolling archive policy."
+      ]
+    }
+  ],
+  "local_observation": {
+    "source_id": "M2-ORB-001",
+    "attempt_id": "m2-orb-001-recovery-002-20260906t183804z-e5883324",
+    "product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+    "size_bytes": 639533,
+    "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+    "provider_md5": "ca7f36b1892073c883c4cff5c0517b9c",
+    "provider_blake3": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b",
+    "validity_start": "UTC=2026-08-16T10:35:26",
+    "validity_stop": "UTC=2026-08-16T14:09:56",
+    "osv_count": 1288,
+    "first_osv_utc": "UTC=2026-08-16T10:35:25.968171",
+    "last_osv_utc": "UTC=2026-08-16T14:09:55.968171",
+    "validity_stop_shortfall_seconds": 0.031829,
+    "scene_start_utc": "2026-08-16T12:21:16Z",
+    "scene_end_utc": "2026-08-16T12:22:06Z",
+    "minimum_required_scene_margin_seconds": 6350
+  },
+  "interpretation": {
+    "observation": "The exact checksum-matching file failed the frozen literal endpoint-span predicate solely at the final OSV boundary by 0.031829 seconds.",
+    "inference": "A maximum one-second endpoint-consistency tolerance is compatible with the header's one-second representation and remains far smaller than the 6,350-second required scene margin.",
+    "attribution": "No claim is made that Copernicus mandates one-second tolerance or that the orbit is scientifically fit; the tolerance is a proposed local validation interpretation requiring owner review."
+  },
+  "limitations": [
+    "The official specification describes precision and consistency but does not explicitly define rounding behavior or a numerical endpoint tolerance.",
+    "The source pages were inspected online and are not treated as locally archived authoritative document bytes.",
+    "Checksum agreement and format consistency do not establish orbit-application, radar-pixel, terrain-correction, or scientific fitness."
+  ]
+}

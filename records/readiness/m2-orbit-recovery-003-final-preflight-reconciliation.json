@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-RECOVERY-003-FINAL-PREFLIGHT-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-06T18:31:55Z",
+  "status": "pass_ready_exactly_one_owner_handoff",
+  "bindings": {
+    "publication_gate_sha256": "84d707bf046e2653ac9c548402ab5b173abf9e4882bcc403418180a0e909f5d5",
+    "final_preflight_sha256": "6195ce5705fa80a179e8f6c91b3ac80d85c41c8f7129efff4a562e5c2f27aa9c",
+    "milestone_sha256_before": "db903e353dc2f3ac5afd5c8162642b9824340fff24a3c7c599808fbb95610955",
+    "milestone_sha256_after": "99314e07c8e1858cb2c75de22319832ae599b4ff3cc5cfaf4d993c5ce4c93d5c",
+    "profile_sha256_before": "48cb627a3a2d2358148056d60f72ce689f0a343c3dd7b07c54af1ba9dacc042c",
+    "profile_sha256_after": "e109848c2f97390b772249b4d305dcb4d3e7304b26e88b1c79d227f76b55d492",
+    "goal_sha256_before": "f32b6350c2d1ea063dc0104abecbd64ceb725f9699b7940cb5664211c96bec84",
+    "goal_sha256_after": "f32b6350c2d1ea063dc0104abecbd64ceb725f9699b7940cb5664211c96bec84"
+  },
+  "assertions": {
+    "owner_handoff_count": 0,
+    "authority_consumed": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_requested": false,
+    "other_orbit_source_requested": false,
+    "automatic_retry_authorized": false
+  },
+  "next_gate": "one deliberate owner-side secret-safe handoff"
+}

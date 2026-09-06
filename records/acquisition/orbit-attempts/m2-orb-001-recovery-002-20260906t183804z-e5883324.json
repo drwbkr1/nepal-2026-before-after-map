@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "event": "orbit_recovery_003_failed",
+  "attempt_id": "m2-orb-001-recovery-002-20260906t183804z-e5883324",
+  "source_id": "M2-ORB-001",
+  "started_at": "2026-09-06T18:38:04Z",
+  "completed_at": "2026-09-06T18:38:07Z",
+  "failure_code": "osv_times_do_not_span_validity",
+  "last_stage": "staged_orbit_validation",
+  "partial_bytes_preserved": 639533,
+  "catalog_response_sha256": "ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c",
+  "active_intake_attempt_recorded": true,
+  "credential_reference": "anonymous_pipe_single_use_memory_only",
+  "credential_value_recorded": false,
+  "retained_failed_attempt_id": "m2-orb-001-20260904t050937z-8ed21d05",
+  "retained_recovery_002_outcome_ref": "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+  "retry_automatically_authorized": false
+}

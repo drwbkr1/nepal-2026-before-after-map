@@ -128,7 +128,7 @@ class M2DemActivationTests(unittest.TestCase):
         self.assertEqual(set(units["M2-BASELINE"]["depends_on"]), {"M2-VERIFY", "M2-DEM-VERIFY", "M2-ORBIT-APPLY"})
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            ["contracts/milestone-002-orbit-recovery-003-proposal.json"],
+            ["contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json"],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -142,6 +142,7 @@ class M2DemActivationTests(unittest.TestCase):
                 "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
                 "records/source-gates/m2-radar-first-path-001-approval.json",
                 "records/source-gates/m2-orbit-recovery-002-approval.json",
+                "records/source-gates/m2-orbit-recovery-003-approval.json",
             ],
         )
         primary_intake = load("contracts/m2-intake.json")
@@ -189,8 +190,19 @@ class M2DemActivationTests(unittest.TestCase):
             (unit for unit in self.milestone["units"] if unit["id"] == "M2-ORBIT-RECOVERY-003-REVIEW"),
             None,
         )
+        orbit_osv_precision_publication = next(
+            (
+                unit
+                for unit in self.milestone["units"]
+                if unit["id"] == "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"
+            ),
+            None,
+        )
         expected_primary_checkpoint = (
-            "M2-ORBIT-RECOVERY-003-REVIEW"
+            "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"
+            if orbit_osv_precision_publication is not None
+            and orbit_osv_precision_publication.get("status") == "ready"
+            else "M2-ORBIT-RECOVERY-003-REVIEW"
             if orbit_recovery_003_review is not None and orbit_recovery_003_review.get("status") == "ready"
             else "M2-ORBIT-RECOVERY-002-REVIEW"
             if orbit_recovery_002_review is not None and orbit_recovery_002_review.get("status") == "ready"

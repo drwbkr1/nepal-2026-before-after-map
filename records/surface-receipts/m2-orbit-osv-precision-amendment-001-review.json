@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-SURFACE",
+  "verified_at_utc": "2026-09-06T18:48:14Z",
+  "status": "pass_blank_review_surface",
+  "artifact": {
+    "path": "docs/assets/m2-orbit-osv-precision-amendment-001-review.png",
+    "sha256": "d61da555ceaaa8b7d62f008abeaddf15338c5a40ff46d68ff0dc06dbb339cd90",
+    "width_px": 1800,
+    "height_px": 1620,
+    "format": "PNG",
+    "contains_third_party_pixels": false
+  },
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json",
+    "proposal_sha256": "0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4",
+    "source_evidence_ref": "records/source-gates/m2-orbit-osv-time-format-evidence.json",
+    "source_evidence_sha256": "0ffd9adebc0d2d0e3cfb8e4a52eeb7d52f63c9a83fafe1d8209803184990d6db",
+    "outcome_ref": "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json",
+    "outcome_sha256": "f67b7307dfe82cb6f02a13003389f482c7c2a96342fab138f737a31c2ec2d503"
+  },
+  "validation": {
+    "terminal_failure_visible": true,
+    "observed_shortfall_visible": true,
+    "source_precision_and_inference_separated": true,
+    "zero_network_scope_visible": true,
+    "prohibited_scope_visible": true,
+    "blank_state_verified": true,
+    "human_decision_count": 0,
+    "completion_controls_verified": true,
+    "export_verified": true
+  }
+}

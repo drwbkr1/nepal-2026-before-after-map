@@ -72,11 +72,43 @@
             "credential_value_recorded": false,
             "resume": false
           }
+        },
+        {
+          "attempt_id": "m2-orb-001-recovery-002-20260906t183804z-e5883324",
+          "started_at": "2026-09-06T18:38:04Z",
+          "completed_at": "2026-09-06T18:38:07Z",
+          "outcome": "failed",
+          "extensions": {
+            "source_id": "M2-ORB-001",
+            "recovery_id": "M2-ORBIT-RECOVERY-003",
+            "catalog_response_sha256": "ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c",
+            "verified_sentinel_custody": [
+              {
+                "source_id": "M1-SRC-001",
+                "transfer_receipt_sha256": "fb77a8f330ac30643a6d4d92647339ff17a76e4e3e7c49e64baeee114c7d913c",
+                "container_verification_ref": "records/acquisition/container-verification/m1-src-001-m1-src-001-20260904t041621z-fe412d8d.json",
+                "container_verification_sha256": "5f237ec95ca9f5f169a364db30649b5f8187354fea697757bb43e01b5f89b38e"
+              },
+              {
+                "source_id": "M1-SRC-002",
+                "transfer_receipt_sha256": "faf3edd43084367fcc00de675190910eea9276b7addad73df9642bd8810f4ea0",
+                "container_verification_ref": "records/acquisition/container-verification/m1-src-002-m1-src-002-20260904t042408z-b31b162b.json",
+                "container_verification_sha256": "bc9532282fb7146f1d5e8e05cb022518dba2161c48afdb243f48bac35eb75ebf"
+              }
+            ],
+            "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-attempts\\m2-orb-001-recovery-002-20260906t183804z-e5883324\\m2-orb-001-recovery-002-20260906t183804z-e5883324-started.json",
+            "external_catalog_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-attempts\\m2-orb-001-recovery-002-20260906t183804z-e5883324\\m2-orb-001-recovery-002-20260906t183804z-e5883324-catalog-revalidated.json",
+            "credential_reference": "anonymous_pipe_single_use_memory_only",
+            "credential_value_recorded": false,
+            "restart_offset_bytes": 0,
+            "range_or_resume_used": false,
+            "external_terminal_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-attempts\\m2-orb-001-recovery-002-20260906t183804z-e5883324\\m2-orb-001-recovery-002-20260906t183804z-e5883324-failed.json"
+          }
         }
       ],
       "failure": {
-        "code": "orbit_redirect_or_http_status_rejected",
-        "recorded_at": "2026-09-04T05:09:38Z"
+        "code": "osv_times_do_not_span_validity",
+        "recorded_at": "2026-09-06T18:38:07Z"
       },
       "superseded_by": null,
       "extensions": {
@@ -94,7 +126,12 @@
         "minimum_scene_margin_seconds": 6350,
         "eviction_date_utc": "2026-11-16T14:34:08.080856Z",
         "sentinel_custody_prerequisite": "not_satisfied_at_activation",
-        "fresh_catalogue_response_sha256": "ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c"
+        "fresh_catalogue_response_sha256": "ed567de4c1bc5a573f6846da202d0b75574c7aef7269ce5c29498e8c1c8c256c",
+        "retained_failed_attempt_ids": [
+          "m2-orb-001-20260904t050937z-8ed21d05"
+        ],
+        "retained_recovery_002_outcome_ref": "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+        "retained_recovery_002_outcome_sha256": "3d0b6be8e09e0d9049c32c65461e321b2fdbd5db398dd9a6d1b08b62c6c51380"
       }
     },
     {

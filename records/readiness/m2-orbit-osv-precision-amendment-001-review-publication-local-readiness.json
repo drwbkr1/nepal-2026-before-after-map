@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION-LOCAL-READINESS",
+  "verified_at_utc": "2026-09-06T19:10:11Z",
+  "status": "pass_local_full_suite_ready_public_ci_pending",
+  "bindings": {
+    "terminal_reconciliation_sha256": "b6e1843d942d633a989498727823727dac18d481e2a6c8b9dbc2135c0ac7dabc",
+    "source_evidence_sha256": "0ffd9adebc0d2d0e3cfb8e4a52eeb7d52f63c9a83fafe1d8209803184990d6db",
+    "proposal_sha256": "0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4",
+    "review_preflight_sha256": "14383a0a935b4ec27bcd38cd0616159f241ca74a142ef4bc09cb26ad91170fc5",
+    "review_surface_sha256": "9857a5c1188ebff45a4764c54e19700e4f925e7a21e5917a099e6e5c1f0aba50",
+    "rendered_surface_sha256": "d61da555ceaaa8b7d62f008abeaddf15338c5a40ff46d68ff0dc06dbb339cd90",
+    "surface_receipt_sha256": "bcabd0e9a0c2b3768354c4abcf946f4bfcba68492c20e894c97220750ec3e2e7",
+    "review_bundle_sha256": "71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7",
+    "review_contract_sha256": "aeda5b43507f295fbc471e07c612555ebfc93a491e2ccd5b33a6c84a3d735ec0",
+    "blank_response_sha256": "a644aa0572def81d36fc2c1e94ca3d9937bb9ea2fd9ab3758d096ea097b27a15",
+    "review_readiness_sha256": "fed3292487195fcd7c0b18e86d0bb97dae20ba512db2e81c28c10f97a8e1eac9",
+    "checkpoint_deriver_sha256": "c95dc404b976b2bf679707ce794b94b6a6c187b19e8564290c9b5380137ddb91",
+    "terminal_reconciliation_tests_sha256": "e92574bebb68e0c46cf96514e89d65e6f50347c25437470b225e433db4bda02f",
+    "precision_review_tests_sha256": "8a7aaa0e0b5508f4235ae9e635521d3e7236227607190179de19f81fa7b836e4"
+  },
+  "validation": {
+    "focused_test_command": "python -m unittest tests.test_m2_orbit_recovery_003_terminal_reconciliation tests.test_m2_orbit_osv_precision_amendment_001_review",
+    "focused_test_count": 5,
+    "focused_test_status": "pass",
+    "full_repository_test_command": "python -m unittest discover -s tests",
+    "full_repository_test_count": 421,
+    "intentional_skip_count": 3,
+    "full_repository_test_status": "pass",
+    "project_checker_required_file_count": 698,
+    "project_checker_status": "pass",
+    "checkpoint_derivation_status": "pass_current_controls_match",
+    "git_diff_check": "pass",
+    "secret_pattern_scan": "pass_no_jwt_or_bearer_payload"
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "amendment_authorized": false,
+    "public_ci": "pending",
+    "credential_values_read_or_recorded": false,
+    "network_requests_performed": false,
+    "payload_mutated": false,
+    "staged_file_promoted": false,
+    "other_orbit_source_requested": false,
+    "scientific_result_established": false
+  },
+  "next_gate": "commit and push the exact packet, then require successful public default-branch CI before owner review"
+}

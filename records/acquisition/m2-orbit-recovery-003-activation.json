@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-003-ACTIVATION-001",
+  "activated_at_utc": "2026-09-06T18:30:59Z",
+  "status": "pass_exact_orbit_recovery_003_activated_final_no_payload_preflight_pending",
+  "bindings": {
+    "approval_sha256": "63a01a7010a5cbd68cfa2dd35f1d24918c72a2e59ef956a98897ea62e005a278",
+    "review_reconciliation_sha256": "1883bf3ed498f3cb709d85bdc1bd52e48a6b27053986694efccd163f6b5bc11e",
+    "publication_gate_sha256": "84d707bf046e2653ac9c548402ab5b173abf9e4882bcc403418180a0e909f5d5",
+    "recovery_contract_sha256": "bb079df8e381805f109b764ca4cb595d43c040b8e3eda6d569f306aa581fea3b",
+    "active_intake_sha256": "40f4b35549760c766afe8762e766d5f9d6cf14e4064258b09331f0f209cd20a3",
+    "public_commit": "d56f83714d2c8774d23ad364f8b760f06272bf7c"
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "external_data_mutated": false,
+    "recovery_staging_created": false,
+    "attempt_event_root_created": false,
+    "supervisor_root_created": false,
+    "owner_handoff_claim_created": false,
+    "orbit_payload_requested": false,
+    "other_orbit_source_requested": false,
+    "automatic_retry_authorized": false
+  },
+  "next_gate": "run the deterministic final no-payload preflight before owner credential entry"
+}

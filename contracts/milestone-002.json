@@ -170,6 +170,21 @@
         "automatic_retry_authorized": false,
         "other_orbit_source_requests_authorized": false,
         "secret_transport": "anonymous_pipe_single_use_memory_only"
+      },
+      {
+        "approval_ref": "records/source-gates/m2-orbit-recovery-003-approval.json",
+        "approval_sha256": "63a01a7010a5cbd68cfa2dd35f1d24918c72a2e59ef956a98897ea62e005a278",
+        "proposal_ref": "contracts/milestone-002-orbit-recovery-003-proposal.json",
+        "proposal_sha256": "5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3",
+        "review_bundle_sha256": "bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d",
+        "review_reconciliation_ref": "records/source-gates/m2-orbit-recovery-003-review-reconciliation.json",
+        "review_reconciliation_sha256": "1883bf3ed498f3cb709d85bdc1bd52e48a6b27053986694efccd163f6b5bc11e",
+        "source_id": "M2-ORB-001",
+        "maximum_owner_handoffs": 1,
+        "maximum_real_attempts": 1,
+        "automatic_retry_authorized": false,
+        "other_orbit_source_requests_authorized": false,
+        "secret_transport": "anonymous_pipe_single_use_memory_only"
       }
     ]
   },
@@ -239,7 +254,8 @@
       "records/source-gates/m2-materialization-pixel-readiness-approval.json",
       "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
       "records/source-gates/m2-radar-first-path-001-approval.json",
-      "records/source-gates/m2-orbit-recovery-002-approval.json"
+      "records/source-gates/m2-orbit-recovery-002-approval.json",
+      "records/source-gates/m2-orbit-recovery-003-approval.json"
     ]
   },
   "entry_conditions": [
@@ -961,7 +977,7 @@
       "depends_on": [
         "M2-ORBIT-PREFLIGHT",
         "M2-RADAR-SOURCE-READINESS",
-        "M2-ORBIT-RECOVERY-003"
+        "M2-ORBIT-OSV-PRECISION-AMENDMENT-001"
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
@@ -980,18 +996,19 @@
         "fresh_source_preflight": "pass",
         "orbit_custody_initialized": true,
         "token_presence_checked": "synthetic_test_literal_only",
-        "retained_failure_review": "recovery_003_review_ready_zero_decisions",
+        "retained_failure_review": "osv_precision_amendment_review_publication_pending_zero_decisions",
         "retained_failure_reconciliation_ref": "records/acquisition/orbit-test-boundary-reconciliation-001.json",
         "retained_failure_reconciliation_sha256": "40dae0623dcc142cec17ff2108752e5e60bd736a241fe4b83e8f04c5de690025",
-        "retained_failure_review_ref": "reviews/m2-orbit-recovery-003/review-contract.json",
-        "retained_failure_review_bundle_sha256": "bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d",
-        "retained_failure_recovery_proposal_sha256": "5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3",
+        "retained_failure_review_ref": "reviews/m2-orbit-osv-precision-amendment-001/review-contract.json",
+        "retained_failure_review_bundle_sha256": "71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7",
+        "retained_failure_recovery_proposal_sha256": "0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4",
         "radar_source_readiness": "complete",
         "radar_source_readiness_ref": "records/readiness/m2-radar-source-readiness-001.json",
         "radar_source_readiness_sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
         "superseded_milestone_dependency_m2_verify": "preserved_in_stale_unapproved_orbit_packet_only",
         "orbit_recovery_002_status": "terminal_block_consumed_no_transfer_attempt",
-        "orbit_recovery_003_status": "planned_not_authorized"
+        "orbit_recovery_003_status": "terminal_block_consumed_one_request_no_promotion",
+        "osv_precision_amendment_status": "proposed_not_authorized_publication_pending"
       },
       "disposition": "defer",
       "retained_failures": [
@@ -1013,6 +1030,18 @@
           "outcome_ref": "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
           "outcome_sha256": "3d0b6be8e09e0d9049c32c65461e321b2fdbd5db398dd9a6d1b08b62c6c51380",
           "retry_automatically_authorized": false
+        },
+        {
+          "source_id": "M2-ORB-001",
+          "supervisor_id": "m2-orbit-recovery-003-20260906t183804z-e5883324",
+          "attempt_id": "m2-orb-001-recovery-002-20260906t183804z-e5883324",
+          "failure_code": "osv_times_do_not_span_validity",
+          "partial_bytes_preserved": 639533,
+          "receipt_ref": "records/acquisition/orbit-attempts/m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
+          "receipt_sha256": "fb6e9b100f6da3a54a1d6e554611c77c076675434d46ebb44eca8b0a40e9db4c",
+          "outcome_ref": "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json",
+          "outcome_sha256": "f67b7307dfe82cb6f02a13003389f482c7c2a96342fab138f737a31c2ec2d503",
+          "retry_automatically_authorized": false
         }
       ],
       "exit_condition_delta": {
@@ -1021,10 +1050,10 @@
         ],
         "observed": [],
         "decision_value": "no_progress",
-        "rationale": "Recovery-002 is terminal without an attempt ID or payload; recovery-003 is a blank human gate and releases no orbit action."
+        "rationale": "Recovery-003 is terminal after the exact staged orbit failed the frozen literal OSV span check; the precision amendment is a zero-decision packet pending public CI."
       },
       "next_dependency": "M2-ORBIT-VERIFY",
-      "rationale": "Orbit acquisition remains deferred until recovery-003 receives an exact owner decision and, only if approved, passes implementation, public CI, final preflight, and its one owner-selected attempt."
+      "rationale": "No orbit file is promoted. The exact M2-ORB-001 staged bytes are preserved, but any one-second precision interpretation and local promotion require a separately published and approved amendment."
     },
     {
       "id": "M2-ORBIT-VERIFY",
@@ -1897,7 +1926,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "contracts/milestone-002-orbit-recovery-003-proposal.json",
         "reviews/m2-orbit-recovery-003/review-bundle.json",
@@ -1914,23 +1943,27 @@
         "review_bundle_sha256": "bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d",
         "review_contract_sha256": "a122def1ac97e3ff5451d807c2a98e7713d7c46d834103d70d7807e67e694cf0",
         "blank_response_sha256": "63f8972c8d03ba66d2b9d2b850fea72e7e388e2a5b5b538c2f2fc076cd1f4f82",
-        "human_decision_count": 0,
-        "attestation": false,
-        "recovery_authorized": false,
+        "human_decision_count": 1,
+        "attestation": true,
+        "recovery_authorized": true,
         "maximum_future_attempts_if_approved": 1,
-        "other_orbit_source_requests_authorized_by_this_review": false
+        "other_orbit_source_requests_authorized_by_this_review": false,
+        "approval_sha256": "63a01a7010a5cbd68cfa2dd35f1d24918c72a2e59ef956a98897ea62e005a278",
+        "review_reconciliation_sha256": "1883bf3ed498f3cb709d85bdc1bd52e48a6b27053986694efccd163f6b5bc11e"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json"
       ],
       "exit_condition_delta": {
         "expected": [],
-        "observed": [],
-        "decision_value": "awaiting_owner_decision",
-        "rationale": "The recovery-003 packet is blank and creates no implementation, credential, catalog, or payload authority."
+        "observed": [
+          "one exact attested approval"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "The exact approval is locked and reconciled; only the reviewed implementation, public-CI, preflight, and one M2-ORB-001 attempt are released."
       },
-      "next_dependency": null
+      "next_dependency": "M2-ORBIT-RECOVERY-003-IMPLEMENTATION"
     },
     {
       "id": "M2-ORBIT-RECOVERY-003-IMPLEMENTATION",
@@ -1940,22 +1973,33 @@
       ],
       "action_class": "external_publication",
       "human_gate": false,
-      "status": "planned",
-      "inputs": [],
-      "outputs": [],
+      "status": "complete",
+      "inputs": [
+        "records/source-gates/m2-orbit-recovery-003-approval.json",
+        "records/acquisition/m2-orbit-recovery-003-implementation-readiness.json"
+      ],
+      "outputs": [
+        "records/acquisition/m2-orbit-recovery-003-publication-gate.json"
+      ],
       "gates": {
-        "public_ci": "required",
-        "final_no_payload_preflight": "required_after_public_ci"
+        "public_ci": "pass",
+        "final_no_payload_preflight": "pass",
+        "publication_gate_sha256": "84d707bf046e2653ac9c548402ab5b173abf9e4882bcc403418180a0e909f5d5",
+        "credential_read": false,
+        "orbit_payload_requested": false
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json"
       ],
       "exit_condition_delta": {
         "expected": [],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "No recovery-003 approval or implementation exists."
+        "observed": [
+          "local synthetic tests",
+          "public default-branch CI"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "The exact evidence-first recovery-only implementation passed local controls and public CI without credentials or orbit bytes."
       },
       "next_dependency": "M2-ORBIT-RECOVERY-003"
     },
@@ -1967,19 +2011,190 @@
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
-      "status": "planned",
-      "inputs": [],
-      "outputs": [],
+      "status": "complete",
+      "inputs": [
+        "records/acquisition/m2-orbit-recovery-003-publication-gate.json",
+        "contracts/m2-orbit-recovery-003.json",
+        "records/acquisition/m2-orbit-recovery-003-final-preflight.json"
+      ],
+      "outputs": [
+        "records/acquisition/orbit-attempts/m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
+        "records/acquisition/m2-orbit-recovery-003-terminal-failure-control-reconciliation.json",
+        "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json",
+        "records/readiness/m2-orbit-recovery-003-terminal-reconciliation.json"
+      ],
       "gates": {
         "maximum_owner_handoffs": 1,
         "maximum_real_attempts": 1,
         "automatic_retry_authorized": false,
         "source_id": "M2-ORB-001",
+        "other_orbit_source_requests_authorized_by_this_unit": false,
+        "public_ci": "pass",
+        "final_no_payload_preflight": "pass",
+        "credential_values_read_or_recorded": false,
+        "final_preflight_ref": "records/acquisition/m2-orbit-recovery-003-final-preflight.json",
+        "final_preflight_sha256": "6195ce5705fa80a179e8f6c91b3ac80d85c41c8f7129efff4a562e5c2f27aa9c",
+        "owner_handoff_count": 1,
+        "authority_consumed": true,
+        "supervisor_invocation_count": 1,
+        "transfer_attempt_count": 1,
+        "download_request_count": 1,
+        "preserved_staged_bytes": 639533,
+        "terminal_code": "osv_times_do_not_span_validity",
+        "outcome_ref": "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json",
+        "outcome_sha256": "f67b7307dfe82cb6f02a13003389f482c7c2a96342fab138f737a31c2ec2d503",
+        "terminal_reconciliation_ref": "records/readiness/m2-orbit-recovery-003-terminal-reconciliation.json",
+        "terminal_reconciliation_sha256": "b6e1843d942d633a989498727823727dac18d481e2a6c8b9dbc2135c0ac7dabc"
+      },
+      "disposition": "block",
+      "retained_failures": [
+        "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+        "records/acquisition/orbit-attempts/m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
+        "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation-attempt-001-failure.json",
+        "records/acquisition/m2-orbit-recovery-003-terminal-failure-control-reconciliation.json",
+        "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-201-VERIFIED-CUSTODY"
+        ],
+        "observed": [],
+        "decision_value": "block",
+        "rationale": "The one approved request retained checksum-matching bytes in staging but failed the frozen literal OSV validity-span check by 0.031829 seconds; no promotion occurred and recovery-003 cannot retry."
+      },
+      "next_dependency": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"
+    },
+    {
+      "id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION",
+      "purpose": "Publish and publicly validate the exact zero-decision OSV precision amendment review packet before owner review.",
+      "depends_on": [
+        "M2-ORBIT-RECOVERY-003"
+      ],
+      "action_class": "external_publication",
+      "human_gate": false,
+      "status": "ready",
+      "inputs": [
+        "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json",
+        "reviews/m2-orbit-osv-precision-amendment-001/review-bundle.json",
+        "reviews/m2-orbit-osv-precision-amendment-001/review-contract.json",
+        "records/readiness/m2-orbit-osv-precision-amendment-001-review-readiness.json",
+        "records/readiness/m2-orbit-recovery-003-terminal-reconciliation.json"
+      ],
+      "outputs": [
+        "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-gate.json"
+      ],
+      "gates": {
+        "public_ci": "required",
+        "human_decision_count": 0,
+        "amendment_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/acquisition/orbit-attempts/m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
+        "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "The packet is locally ready but has not passed its public default-branch gate."
+      },
+      "next_dependency": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"
+    },
+    {
+      "id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW",
+      "purpose": "Obtain one exact owner decision on the proposed one-second OSV endpoint-consistency rule and preserved-staging route.",
+      "depends_on": [
+        "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "planned",
+      "inputs": [
+        "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json",
+        "reviews/m2-orbit-osv-precision-amendment-001/review-bundle.json",
+        "reviews/m2-orbit-osv-precision-amendment-001/review-contract.json",
+        "records/readiness/m2-orbit-recovery-003-terminal-reconciliation.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-orbit-osv-precision-amendment-001-review-reconciliation.json",
+        "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json"
+      ],
+      "gates": {
+        "proposal_sha256": "0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4",
+        "review_bundle_sha256": "71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7",
+        "review_contract_sha256": "aeda5b43507f295fbc471e07c612555ebfc93a491e2ccd5b33a6c84a3d735ec0",
+        "blank_response_sha256": "a644aa0572def81d36fc2c1e94ca3d9937bb9ea2fd9ab3758d096ea097b27a15",
+        "human_decision_count": 0,
+        "attestation": false,
+        "amendment_authorized": false,
+        "maximum_future_network_requests_if_approved": 0,
+        "maximum_future_local_validation_attempts_if_approved": 1
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/acquisition/orbit-attempts/m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
+        "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "awaiting_publication_gate",
+        "rationale": "The review remains blank and cannot be handed off until its exact packet passes public CI."
+      },
+      "next_dependency": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION"
+    },
+    {
+      "id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION",
+      "purpose": "If separately approved, implement and publicly validate only the exact one-second OSV endpoint-consistency amendment.",
+      "depends_on": [
+        "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"
+      ],
+      "action_class": "external_publication",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [],
+      "outputs": [],
+      "gates": {
+        "public_ci": "required_after_approval",
+        "final_no_network_preflight": "required_after_public_ci"
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/acquisition/orbit-attempts/m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
+        "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "No amendment decision or implementation exists."
+      },
+      "next_dependency": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001"
+    },
+    {
+      "id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001",
+      "purpose": "If every gate passes, validate the exact preserved staged bytes once and conditionally promote them without any network request.",
+      "depends_on": [
+        "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION"
+      ],
+      "action_class": "data_promotion",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [],
+      "outputs": [],
+      "gates": {
+        "maximum_local_validation_attempts": 1,
+        "maximum_network_requests": 0,
+        "automatic_retry_authorized": false,
+        "source_id": "M2-ORB-001",
+        "maximum_endpoint_tolerance_seconds": 1.0,
         "other_orbit_source_requests_authorized_by_this_unit": false
       },
       "disposition": null,
       "retained_failures": [
-        "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json"
+        "records/acquisition/orbit-attempts/m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
+        "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json"
       ],
       "exit_condition_delta": {
         "expected": [
@@ -1987,9 +2202,9 @@
         ],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "The blank review creates no recovery-003 action authority."
+        "rationale": "The blank review creates no local validation or promotion authority."
       },
-      "next_dependency": "M2-ORBIT-ACQUIRE"
+      "next_dependency": "M2-ORBIT-VERIFY"
     }
   ],
   "path_efficiency": {
@@ -2046,8 +2261,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ORBIT-RECOVERY-003-REVIEW",
-    "next_action": "Review M2 orbit recovery-003 bundle SHA-256 bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d and proposal SHA-256 5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3; approve, revise, or defer the evidence-first one-file recovery. No retry, credential, catalog, payload, DEM, radar-pixel, baseline, change, attribution, or scientific-publication action is authorized before an attested decision.",
+    "current_checkpoint": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION",
+    "next_action": "Publish the exact zero-decision OSV precision amendment packet at proposal SHA-256 0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4 and bundle SHA-256 71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7; require successful public CI before owner review. Do not retry recovery-003, touch credentials, request any orbit file, or promote staged bytes.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -2070,7 +2285,11 @@
       "Orbit recovery-002 authorizes one byte-zero M2-ORB-001 attempt only after final preflight; it authorizes no later orbit source request or retry.",
       "Recovery-002 is terminal after one owner handoff and supervisor invocation; it created no attempt ID or payload request and cannot be retried under its consumed authority.",
       "The exact recovery-002 local exception category and returned catalog hash are unavailable; preserve that uncertainty.",
-      "Recovery-003 is a blank review and authorizes no implementation, credential, catalog, payload, other orbit source, processing, or scientific action."
+      "Recovery-003 is a blank review and authorizes no implementation, credential, catalog, payload, other orbit source, processing, or scientific action.",
+      "Orbit recovery-003 authorizes one owner handoff and at most one byte-zero M2-ORB-001 request only after final preflight; it authorizes no later orbit source request or retry.",
+      "Recovery-003 is terminal and consumed after one handoff and one M2-ORB-001 request; its full checksum-matching staged bytes failed the frozen OSV span check and were not promoted.",
+      "The 0.031829-second validity-stop shortfall is an observation; a one-second tolerance is only a proposed inference from format precision and is not yet authorized.",
+      "The OSV precision amendment packet has zero decisions and authorizes no token, network request, retry, promotion, other orbit source, processing, or scientific action."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."

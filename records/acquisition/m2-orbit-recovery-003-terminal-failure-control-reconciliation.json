@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-003-TERMINAL-FAILURE-CONTROL-RECONCILIATION-001",
+  "recorded_at_utc": "2026-09-06T18:45:18Z",
+  "status": "reconciled_terminal_failure_active_intake_no_retry",
+  "source_id": "M2-ORB-001",
+  "supervisor_id": "m2-orbit-recovery-003-20260906t183804z-e5883324",
+  "attempt_id": "m2-orb-001-recovery-002-20260906t183804z-e5883324",
+  "failure_code": "osv_times_do_not_span_validity",
+  "bindings": {
+    "preserved_reconciliation_failure_ref": "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation-attempt-001-failure.json",
+    "preserved_reconciliation_failure_sha256": "0f99de4d1bd7edf0a70487b36826879a857067a80a54573a4d50a2845ff1af93",
+    "active_intake_ref": "contracts/m2-orbit-intake.json",
+    "active_intake_sha256_before": "e171d40f34d535d76250be33ffa56c5ac90e1b9c045c336ee87d462f1b40160b",
+    "active_intake_sha256_after": "74fa02b68e46bb0e2b7a6ad55fb306c2eb73589f5ea4e73f406ff087e29d3909",
+    "public_terminal_receipt_ref": "records/acquisition/orbit-attempts/m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
+    "public_terminal_receipt_sha256": "fb6e9b100f6da3a54a1d6e554611c77c076675434d46ebb44eca8b0a40e9db4c",
+    "external_evidence": {
+      "handoff": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-handoff\\m2-orbit-recovery-003-handoff-20260906t183804z-4b1d0b7b.json",
+        "sha256": "32cfdc6b106913f6bd023e83388cdff0068ba056f87d90e762b127a7f62dc57d"
+      },
+      "supervisor_started": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-supervisor\\m2-orbit-recovery-003-20260906t183804z-e5883324\\m2-orbit-recovery-003-20260906t183804z-e5883324-started.json",
+        "sha256": "644c951c277e4319d4ae1cf1b195f2aceae09fdf3f68803aa2f0bfb14feed2ba"
+      },
+      "supervisor_heartbeat": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-supervisor\\m2-orbit-recovery-003-20260906t183804z-e5883324\\m2-orbit-recovery-003-20260906t183804z-e5883324-heartbeat.json",
+        "sha256": "a8db54e0c0116402c8b292d86a347db379a4ddb7a36939798416dc4fa7b119f3"
+      },
+      "supervisor_failed": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-supervisor\\m2-orbit-recovery-003-20260906t183804z-e5883324\\m2-orbit-recovery-003-20260906t183804z-e5883324-failed.json",
+        "sha256": "2df740d4341f2a81c35846ef9aee3d17583e5819b6cd5b7827bd775c9e6141a2"
+      },
+      "attempt_started": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-attempts\\m2-orb-001-recovery-002-20260906t183804z-e5883324\\m2-orb-001-recovery-002-20260906t183804z-e5883324-started.json",
+        "sha256": "2a5b340d1721382bc373ef2611f398cde480031df850c07d7c5dc403235975c6"
+      },
+      "attempt_catalog": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-attempts\\m2-orb-001-recovery-002-20260906t183804z-e5883324\\m2-orb-001-recovery-002-20260906t183804z-e5883324-catalog-revalidated.json",
+        "sha256": "dd0e72c98ff7dd4e3c32f96b08f47be7061a1a5294b5d05495cb208a01e0a176"
+      },
+      "attempt_failed": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-attempts\\m2-orb-001-recovery-002-20260906t183804z-e5883324\\m2-orb-001-recovery-002-20260906t183804z-e5883324-failed.json",
+        "sha256": "fb6e9b100f6da3a54a1d6e554611c77c076675434d46ebb44eca8b0a40e9db4c"
+      }
+    }
+  },
+  "observations": {
+    "active_intake_asset_state_before": "staging",
+    "active_intake_attempt_outcome_before": "started",
+    "active_intake_asset_state_after": "failed",
+    "active_intake_attempt_outcome_after": "failed",
+    "active_intake_attempt_completed_at_after": "2026-09-06T18:38:07Z",
+    "destination_exists": false,
+    "preserved_staged_file": {
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-recovery-003\\m2-orb-001-recovery-002\\S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF.part",
+      "size_bytes": 639533,
+      "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+      "md5": "ca7f36b1892073c883c4cff5c0517b9c",
+      "blake3": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b",
+      "validity_start": "UTC=2026-08-16T10:35:26",
+      "validity_stop": "UTC=2026-08-16T14:09:56",
+      "osv_count": 1288,
+      "first_osv_utc": "UTC=2026-08-16T10:35:25.968171",
+      "last_osv_utc": "UTC=2026-08-16T14:09:55.968171",
+      "validity_stop_shortfall_seconds": 0.031829
+    },
+    "failure_interpretation": "The exact-length staged bytes match both provider checksums, but the final OSV is 0.031829 seconds earlier than the declared validity stop under the frozen strict span check."
+  },
+  "assertions": {
+    "recovery_003_authority_consumed": true,
+    "active_intake_truth_finalized_from_matching_terminal_evidence": true,
+    "automatic_retry_performed": false,
+    "new_network_request_performed": false,
+    "payload_requested_by_reconciliation": false,
+    "payload_mutated_by_reconciliation": false,
+    "destination_created_by_reconciliation": false,
+    "offline_verification_performed": false,
+    "credential_value_recorded": false,
+    "other_orbit_source_requested": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixels_processed": false,
+    "baseline_or_change_analysis_performed": false,
+    "scientific_result_established": false
+  },
+  "next_gate": "run the existing terminal outcome reconciliation once; any retry or validation-rule change requires a new explicit review"
+}

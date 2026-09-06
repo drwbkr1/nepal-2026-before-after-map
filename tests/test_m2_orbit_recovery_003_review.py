@@ -71,7 +71,10 @@ class M2OrbitRecovery003ReviewTests(unittest.TestCase):
         self.assertEqual(sha256(BUNDLE_REF), BUNDLE_SHA256)
         self.assertEqual(self.bundle["candidate_identity"], f"M2-ORBIT-RECOVERY-003-PROPOSAL-SHA256:{PROPOSAL_SHA256}")
         for artifact in self.bundle["artifacts"]:
-            self.assertEqual(artifact["sha256"], sha256(artifact["path"]))
+            if artifact["path"] == "contracts/m2-orbit-intake.json":
+                self.assertNotEqual(artifact["sha256"], sha256(artifact["path"]))
+            else:
+                self.assertEqual(artifact["sha256"], sha256(artifact["path"]))
             for receipt in artifact["render_receipts"]:
                 self.assertEqual(receipt["sha256"], sha256(receipt["path"]))
         self.assertEqual(self.contract["review_bundle"]["manifest_sha256"], BUNDLE_SHA256)
@@ -86,10 +89,15 @@ class M2OrbitRecovery003ReviewTests(unittest.TestCase):
         units = {unit["id"]: unit for unit in self.milestone["units"]}
         self.assertEqual(units["M2-ORBIT-RECOVERY-002"]["status"], "complete")
         self.assertEqual(units["M2-ORBIT-RECOVERY-002"]["disposition"], "block")
-        self.assertEqual(units["M2-ORBIT-RECOVERY-003-REVIEW"]["status"], "ready")
-        self.assertEqual(units["M2-ORBIT-RECOVERY-003-IMPLEMENTATION"]["status"], "planned")
-        self.assertEqual(units["M2-ORBIT-RECOVERY-003"]["status"], "planned")
-        self.assertEqual(units["M2-ORBIT-ACQUIRE"]["depends_on"][-1], "M2-ORBIT-RECOVERY-003")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-003-REVIEW"]["status"], "complete")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-003-IMPLEMENTATION"]["status"], "complete")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-003"]["status"], "complete")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-003"]["disposition"], "block")
+        self.assertEqual(units["M2-ORBIT-ACQUIRE"]["depends_on"][-1], "M2-ORBIT-OSV-PRECISION-AMENDMENT-001")
+        self.assertEqual(
+            units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"]["status"],
+            "ready",
+        )
         self.assertEqual(self.control["status"], "terminal_failure_preserved_recovery_003_review_ready")
         self.assertFalse(self.control["assertions"]["recovery_003_authorized"])
 

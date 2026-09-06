@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-003-OUTCOME-RECONCILIATION-001",
+  "recorded_at_utc": "2026-09-06T18:45:23Z",
+  "status": "terminal_failure_preserved_no_retry",
+  "source_id": "M2-ORB-001",
+  "supervisor_id": "m2-orbit-recovery-003-20260906t183804z-e5883324",
+  "attempt_id": "m2-orb-001-recovery-002-20260906t183804z-e5883324",
+  "outcome": "failed",
+  "terminal_code": "osv_times_do_not_span_validity",
+  "bindings": {
+    "recovery_002_outcome_ref": "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+    "recovery_002_outcome_sha256": "3d0b6be8e09e0d9049c32c65461e321b2fdbd5db398dd9a6d1b08b62c6c51380",
+    "final_preflight_ref": "records/acquisition/m2-orbit-recovery-003-final-preflight.json",
+    "final_preflight_sha256": "6195ce5705fa80a179e8f6c91b3ac80d85c41c8f7129efff4a562e5c2f27aa9c",
+    "active_intake_ref": "contracts/m2-orbit-intake.json",
+    "active_intake_sha256": "74fa02b68e46bb0e2b7a6ad55fb306c2eb73589f5ea4e73f406ff087e29d3909",
+    "supervisor_events": {
+      "started": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-supervisor\\m2-orbit-recovery-003-20260906t183804z-e5883324\\m2-orbit-recovery-003-20260906t183804z-e5883324-started.json",
+        "exists": true,
+        "sha256": "644c951c277e4319d4ae1cf1b195f2aceae09fdf3f68803aa2f0bfb14feed2ba"
+      },
+      "heartbeat": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-supervisor\\m2-orbit-recovery-003-20260906t183804z-e5883324\\m2-orbit-recovery-003-20260906t183804z-e5883324-heartbeat.json",
+        "exists": true,
+        "sha256": "a8db54e0c0116402c8b292d86a347db379a4ddb7a36939798416dc4fa7b119f3"
+      },
+      "terminal": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-supervisor\\m2-orbit-recovery-003-20260906t183804z-e5883324\\m2-orbit-recovery-003-20260906t183804z-e5883324-failed.json",
+        "exists": true,
+        "sha256": "2df740d4341f2a81c35846ef9aee3d17583e5819b6cd5b7827bd775c9e6141a2"
+      }
+    },
+    "attempt_events": {
+      "started": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-attempts\\m2-orb-001-recovery-002-20260906t183804z-e5883324\\m2-orb-001-recovery-002-20260906t183804z-e5883324-started.json",
+        "exists": true,
+        "sha256": "2a5b340d1721382bc373ef2611f398cde480031df850c07d7c5dc403235975c6"
+      },
+      "catalog": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-attempts\\m2-orb-001-recovery-002-20260906t183804z-e5883324\\m2-orb-001-recovery-002-20260906t183804z-e5883324-catalog-revalidated.json",
+        "exists": true,
+        "sha256": "dd0e72c98ff7dd4e3c32f96b08f47be7061a1a5294b5d05495cb208a01e0a176"
+      },
+      "terminal": {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-003-attempts\\m2-orb-001-recovery-002-20260906t183804z-e5883324\\m2-orb-001-recovery-002-20260906t183804z-e5883324-failed.json",
+        "exists": true,
+        "sha256": "fb6e9b100f6da3a54a1d6e554611c77c076675434d46ebb44eca8b0a40e9db4c"
+      }
+    },
+    "terminal_receipt": {
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map\\records\\acquisition\\orbit-attempts\\m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
+      "exists": true,
+      "sha256": "fb6e9b100f6da3a54a1d6e554611c77c076675434d46ebb44eca8b0a40e9db4c"
+    },
+    "offline_verification_ref": null,
+    "offline_verification_sha256": null
+  },
+  "observations": {
+    "attempt_started_event_exists": true,
+    "catalog_revalidated_event_exists": true,
+    "attempt_terminal_event_exists": true,
+    "active_intake_attempt_recorded": true,
+    "staging_root_exists": true,
+    "destination_exists": false
+  },
+  "assertions": {
+    "owner_handoff_count": 1,
+    "supervisor_invocation_count": 1,
+    "recovery_003_authority_consumed": true,
+    "maximum_real_attempts": 1,
+    "automatic_retry_performed": false,
+    "other_orbit_source_requested": false,
+    "credential_value_recorded": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixels_processed": false,
+    "baseline_or_change_analysis_performed": false,
+    "scientific_result_established": false,
+    "network_requests_performed_by_reconciliation": false
+  },
+  "next_gate": "new explicit review required; do not retry recovery-003"
+}

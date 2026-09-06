@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-003-PUBLICATION-GATE-001",
+  "verified_at_utc": "2026-09-06T18:30:48Z",
+  "status": "pass_public_controls_verified_before_orbit_recovery_003",
+  "bindings": {
+    "approval_sha256": "63a01a7010a5cbd68cfa2dd35f1d24918c72a2e59ef956a98897ea62e005a278",
+    "review_reconciliation_sha256": "1883bf3ed498f3cb709d85bdc1bd52e48a6b27053986694efccd163f6b5bc11e",
+    "approval_activation_sha256": "4299b5af875968bd42a41d974e0f2c3116a6738a81119afa6602ebcbe738cfdf",
+    "superseded_readiness_sha256": "c19b5a1501930ed6e0a0e4e17653ffb4102da4b5b8cfae1df4a8b3499a0cb249",
+    "prepublication_review_failure_sha256": "7967f22d01ca69254c56aa873d4187b3419bea5ad9d02e18a3e989a8afbeba06",
+    "recovery_002_outcome_sha256": "3d0b6be8e09e0d9049c32c65461e321b2fdbd5db398dd9a6d1b08b62c6c51380",
+    "recovery_002_terminal_sha256": "3ac47e6e57c7f2c27074910f6f5a41b432561fc59caad1a0dd75459aeff3abfc",
+    "proposal_sha256": "5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3",
+    "review_bundle_sha256": "bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d",
+    "review_publication_gate_sha256": "39129d10ef4468ed0fc02480dede02bd0efa8c9a4f82d502694e1726e8186fee",
+    "approval_activation_script_sha256": "ac522d55155d4196a931cd3321f8cda1c2948a1fcbadf31cc4897756bdca652a",
+    "core_sha256": "d5c13fe849ff9b649f4367133d3db746e18cf23e109e0f001d401d318945d2ad",
+    "broker_sha256": "797e07ed4fa3fdd39583a85e7cc16bc14ffd00a5347b50f65601e5b796010d1c",
+    "supervisor_sha256": "7df19f326e69503c5a2289f5666283ad927ee23fa497feccf22b9ba8a6bfff2f",
+    "recovery_runner_sha256": "5fdfcc928f6d6e52fa669f6c8fd90353800c3f75e0457b82e91ade04085957fc",
+    "orbit_verifier_sha256": "0addedc10551735c8e18321382f56fd00c227046169d3e4fb9e5b65fa6820c96",
+    "activation_script_sha256": "9add028506233028cc7eb542a6133c1aa128117a85a2761db1a0ef55b3a4c78e",
+    "final_preflight_sha256": "44d58e17e40c5f67d039c2263c40de8954e42b19909270af40016cce34cd44ab",
+    "control_reconciler_sha256": "344e08402bd80a475947cde690e7f0aa3a92486b0ff298ed28c1493a06ff93c9",
+    "outcome_reconciler_sha256": "0756c8e882c36968bbfe55a339d1b1cc8ac02321c5e00d9645042ef816d46d6b",
+    "owner_handoff_sha256": "36bf60ed987a8e3d9f0cc310c81e82eabcb80773620a588aae19f9507371f9db",
+    "focused_tests_sha256": "1e79396340b8978c3011aec2c44f66df82d4fefbae9a824eb600acdb2aeeb300",
+    "orbit_io_tests_sha256": "69a76ad3ac0dedaf8fc0c437304786a77bce6f1148e958d55245298d4e63ea0c",
+    "implementation_readiness_sha256": "2b1080459b5b3e3981d92b5273838229b686b151dbdeed728b3b3e235d6a78e5",
+    "implementation_readiness_recorder_sha256": "053fca5ea21acd488710e1a6f145cf259e9b25dc3cde5ef683566d01f34843ed"
+  },
+  "github_actions": {
+    "workflow": "Validate project controls",
+    "run_id": 34051909920,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/34051909920",
+    "head_sha": "d56f83714d2c8774d23ad364f8b760f06272bf7c",
+    "conclusion": "success"
+  },
+  "assertions": {
+    "remote_ref_verified": true,
+    "public_ci_passed": true,
+    "real_recovery_started": false,
+    "network_requests_performed_by_this_record": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_requested": false,
+    "other_orbit_source_requested": false,
+    "authority_created": false
+  },
+  "next_gate": "reconcile approved controls, activate recovery-003, and pass the final no-payload preflight before owner credential entry"
+}
