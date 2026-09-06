@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-RECOVERY-003-REVIEW-LOCK-ATTEMPT-002-FAILURE",
+  "recorded_at_utc": "2026-09-06T18:21:13Z",
+  "status": "fail_before_lock_no_downstream_authority",
+  "failure_code": "received_at_utc_argument_format_invalid",
+  "candidate_sha256": "0ff1a6e052ae9eaadbea2c55334da54509fe877f9bfd0e637dca4c17eed68804",
+  "observations": {
+    "candidate_filename_was_hash_bound": true,
+    "locked_response_created": false,
+    "lock_receipt_created": false,
+    "decision_values_read_by_process": false
+  },
+  "resolution": "Pass a freshly formatted invariant UTC timestamp string without PowerShell JSON date coercion."
+}

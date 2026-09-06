@@ -102,11 +102,12 @@ def promoted_binding(
     successful_attempt = succeeded[0]
     if source_id == "M2-ORB-001":
         failed = [attempt for attempt in attempts if attempt.get("outcome") == "failed"]
+        recovery_attempt_id = str(successful_attempt.get("attempt_id", ""))
         if (
             len(attempts) != 2
             or len(failed) != 1
             or failed[0].get("attempt_id") != "m2-orb-001-20260904t050937z-8ed21d05"
-            or successful_attempt.get("attempt_id", "").startswith("m2-orb-001-recovery-001-") is not True
+            or not recovery_attempt_id.startswith(("m2-orb-001-recovery-001-", "m2-orb-001-recovery-002-"))
         ):
             raise OrbitControlError("orbit_recovery_attempt_history_drift")
     elif len(attempts) != 1:
@@ -124,11 +125,13 @@ def promoted_binding(
         raise OrbitControlError("orbit_transfer_receipt_missing_or_drifted")
     receipt = load(receipt_path)
     observed = asset.get("observed", {})
-    expected_event = (
-        "orbit_recovery_002_succeeded"
-        if source_id == "M2-ORB-001" and successful_attempt.get("attempt_id", "").startswith("m2-orb-001-recovery-001-")
-        else "orbit_transfer_succeeded"
-    )
+    attempt_id = str(successful_attempt.get("attempt_id", ""))
+    if source_id == "M2-ORB-001" and attempt_id.startswith("m2-orb-001-recovery-002-"):
+        expected_event = "orbit_recovery_003_succeeded"
+    elif source_id == "M2-ORB-001" and attempt_id.startswith("m2-orb-001-recovery-001-"):
+        expected_event = "orbit_recovery_002_succeeded"
+    else:
+        expected_event = "orbit_transfer_succeeded"
     if (
         receipt.get("event") != expected_event
         or receipt.get("attempt_id") != successful_attempt.get("attempt_id")

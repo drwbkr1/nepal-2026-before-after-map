@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-RECOVERY-003-REVIEW-LOCK-ATTEMPT-001-FAILURE",
+  "recorded_at_utc": "2026-09-06T18:21:13Z",
+  "status": "fail_before_lock_no_downstream_authority",
+  "failure_code": "candidate_filename_hash_mismatch",
+  "candidate_sha256": "0ff1a6e052ae9eaadbea2c55334da54509fe877f9bfd0e637dca4c17eed68804",
+  "observations": {
+    "candidate_filename_was_hash_bound": false,
+    "locked_response_created": false,
+    "lock_receipt_created": false,
+    "decision_values_read_by_process": false
+  },
+  "resolution": "Preserve the rejected private candidate and submit a byte-identical copy with the required SHA-256 prefix in its filename."
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-003-APPROVAL-ACTIVATION",
+  "activated_at_utc": "2026-09-06T18:08:59Z",
+  "status": "pass_exact_approval_activated_implementation_and_publication_only",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-orbit-recovery-003-approval.json",
+    "approval_sha256": "63a01a7010a5cbd68cfa2dd35f1d24918c72a2e59ef956a98897ea62e005a278",
+    "proposal_ref": "contracts/milestone-002-orbit-recovery-003-proposal.json",
+    "proposal_sha256": "5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3",
+    "review_bundle_ref": "reviews/m2-orbit-recovery-003/review-bundle.json",
+    "review_bundle_sha256": "bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d",
+    "review_contract_ref": "reviews/m2-orbit-recovery-003/review-contract.json",
+    "review_contract_sha256": "a122def1ac97e3ff5451d807c2a98e7713d7c46d834103d70d7807e67e694cf0",
+    "review_reconciliation_ref": "records/source-gates/m2-orbit-recovery-003-review-reconciliation.json",
+    "review_reconciliation_sha256": "1883bf3ed498f3cb709d85bdc1bd52e48a6b27053986694efccd163f6b5bc11e"
+  },
+  "released_now": {
+    "evidence_first_recovery_only_implementation": true,
+    "synthetic_interruption_and_secret_exposure_tests": true,
+    "public_ci": true,
+    "final_no_payload_preflight_before_public_ci": false,
+    "owner_secret_handoff_before_public_ci_and_preflight": false,
+    "real_recovery_before_public_ci_and_preflight": false,
+    "other_orbit_source_requests": false,
+    "automatic_retry": false,
+    "orbit_application": false,
+    "dem_or_radar_pixel_action": false,
+    "baseline_or_change_analysis": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "external_data_mutated": false,
+    "orbit_payload_requested": false,
+    "recovery_attempt_started": false,
+    "scientific_publication_released": false
+  },
+  "next_gate": "implement and test the exact evidence-first worker, then require successful public CI before activation, final no-payload preflight, or credential entry"
+}

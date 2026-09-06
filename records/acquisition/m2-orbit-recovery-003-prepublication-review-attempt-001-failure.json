@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-RECOVERY-003-PREPUBLICATION-REVIEW-ATTEMPT-001-FAILURE",
+  "recorded_at_utc": "2026-09-06T18:21:13Z",
+  "status": "superseded_before_publication_no_real_access",
+  "failure_code": "maximum_owner_handoff_not_technically_exclusive_and_attempt_identity_too_permissive",
+  "superseded_readiness_ref": "records/acquisition/m2-orbit-recovery-003-implementation-readiness-attempt-001-superseded.json",
+  "superseded_readiness_sha256": "c19b5a1501930ed6e0a0e4e17653ffb4102da4b5b8cfae1df4a8b3499a0cb249",
+  "observations": {
+    "focused_tests_passed_before_review": 14,
+    "full_repository_tests_passed_before_review": 414,
+    "public_ci_started": false,
+    "owner_handoff_claim_created": false,
+    "credential_values_read_or_recorded": false,
+    "network_requests_performed": false,
+    "external_recovery_data_mutated": false,
+    "orbit_payload_requested": false
+  },
+  "required_correction": "Add an exclusive nonsecret owner-handoff claim and exact timestamp-plus-nonce attempt-ID validation, then issue a fresh readiness record and public-CI decision."
+}

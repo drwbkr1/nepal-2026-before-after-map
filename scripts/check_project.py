@@ -165,6 +165,28 @@ REQUIRED = [
     "reviews/m2-orbit-recovery-003/blank-response.json",
     "records/readiness/m2-orbit-recovery-003-review-readiness.json",
     "records/readiness/m2-orbit-recovery-003-review-publication-gate.json",
+    "records/readiness/m2-orbit-recovery-003-review-lock-attempt-001-failure.json",
+    "records/readiness/m2-orbit-recovery-003-review-lock-attempt-002-failure.json",
+    "records/readiness/m2-orbit-recovery-003-review-reconciliation-attempt-001-failure.json",
+    "records/source-gates/m2-orbit-recovery-003-review-reconciliation.json",
+    "records/source-gates/m2-orbit-recovery-003-approval.json",
+    "records/readiness/m2-orbit-recovery-003-approval-activation.json",
+    "records/acquisition/m2-orbit-recovery-003-implementation-readiness.json",
+    "records/acquisition/m2-orbit-recovery-003-implementation-readiness-attempt-001-superseded.json",
+    "records/acquisition/m2-orbit-recovery-003-prepublication-review-attempt-001-failure.json",
+    "scripts/activate_m2_orbit_recovery_003_approval.py",
+    "scripts/m2_orbit_recovery_003_core.py",
+    "scripts/m2_orbit_recovery_003_broker.py",
+    "scripts/m2_orbit_recovery_003_supervisor.py",
+    "scripts/acquire_m2_orbit_recovery_003.py",
+    "scripts/record_m2_orbit_recovery_003_implementation_readiness.py",
+    "scripts/record_m2_orbit_recovery_003_publication_gate.py",
+    "scripts/reconcile_m2_orbit_recovery_003_controls.py",
+    "scripts/activate_m2_orbit_recovery_003.py",
+    "scripts/preflight_m2_orbit_recovery_003.py",
+    "scripts/reconcile_m2_orbit_recovery_003_outcome.py",
+    "scripts/invoke_m2_orbit_recovery_003.ps1",
+    "tests/test_m2_orbit_recovery_003.py",
     "scripts/activate_m2_orbit_recovery_002_approval.py",
     "scripts/m2_orbit_recovery_002_core.py",
     "scripts/m2_orbit_recovery_002_broker.py",
@@ -1027,6 +1049,68 @@ def main() -> None:
     orbit_recovery_003_blank = json.loads((ROOT / "reviews/m2-orbit-recovery-003/blank-response.json").read_text(encoding="utf-8"))
     orbit_recovery_003_readiness = json.loads((ROOT / "records/readiness/m2-orbit-recovery-003-review-readiness.json").read_text(encoding="utf-8"))
     orbit_recovery_003_publication = json.loads((ROOT / "records/readiness/m2-orbit-recovery-003-review-publication-gate.json").read_text(encoding="utf-8"))
+    orbit_recovery_003_review_reconciliation = json.loads((ROOT / "records/source-gates/m2-orbit-recovery-003-review-reconciliation.json").read_text(encoding="utf-8"))
+    orbit_recovery_003_approval = json.loads((ROOT / "records/source-gates/m2-orbit-recovery-003-approval.json").read_text(encoding="utf-8"))
+    orbit_recovery_003_approval_activation = json.loads((ROOT / "records/readiness/m2-orbit-recovery-003-approval-activation.json").read_text(encoding="utf-8"))
+    orbit_recovery_003_implementation = json.loads((ROOT / "records/acquisition/m2-orbit-recovery-003-implementation-readiness.json").read_text(encoding="utf-8"))
+
+    recovery_003_implementation_files = {
+        "approval_sha256": "records/source-gates/m2-orbit-recovery-003-approval.json",
+        "review_reconciliation_sha256": "records/source-gates/m2-orbit-recovery-003-review-reconciliation.json",
+        "approval_activation_sha256": "records/readiness/m2-orbit-recovery-003-approval-activation.json",
+        "superseded_readiness_sha256": "records/acquisition/m2-orbit-recovery-003-implementation-readiness-attempt-001-superseded.json",
+        "prepublication_review_failure_sha256": "records/acquisition/m2-orbit-recovery-003-prepublication-review-attempt-001-failure.json",
+        "recovery_002_outcome_sha256": "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+        "recovery_002_terminal_sha256": "records/readiness/m2-orbit-recovery-002-terminal-reconciliation.json",
+        "proposal_sha256": "contracts/milestone-002-orbit-recovery-003-proposal.json",
+        "review_bundle_sha256": "reviews/m2-orbit-recovery-003/review-bundle.json",
+        "review_publication_gate_sha256": "records/readiness/m2-orbit-recovery-003-review-publication-gate.json",
+        "core_sha256": "scripts/m2_orbit_recovery_003_core.py",
+        "broker_sha256": "scripts/m2_orbit_recovery_003_broker.py",
+        "supervisor_sha256": "scripts/m2_orbit_recovery_003_supervisor.py",
+        "recovery_runner_sha256": "scripts/acquire_m2_orbit_recovery_003.py",
+        "orbit_verifier_sha256": "scripts/verify_m2_orbit_eof.py",
+        "activation_script_sha256": "scripts/activate_m2_orbit_recovery_003.py",
+        "final_preflight_sha256": "scripts/preflight_m2_orbit_recovery_003.py",
+        "control_reconciler_sha256": "scripts/reconcile_m2_orbit_recovery_003_controls.py",
+        "outcome_reconciler_sha256": "scripts/reconcile_m2_orbit_recovery_003_outcome.py",
+        "owner_handoff_sha256": "scripts/invoke_m2_orbit_recovery_003.ps1",
+        "publication_gate_recorder_sha256": "scripts/record_m2_orbit_recovery_003_publication_gate.py",
+        "focused_tests_sha256": "tests/test_m2_orbit_recovery_003.py",
+        "orbit_io_tests_sha256": "tests/test_m2_orbit_io.py",
+    }
+    if (
+        orbit_recovery_003_review_reconciliation.get("status") != "reconciled_exact_human_response"
+        or orbit_recovery_003_review_reconciliation.get("response_sha256") != "0ff1a6e052ae9eaadbea2c55334da54509fe877f9bfd0e637dca4c17eed68804"
+        or orbit_recovery_003_review_reconciliation.get("receipt_sha256") != "7ebf36256790007a8c44e3cd9d0f970fb6a72688851bccf1cdab3a6bd2d3778a"
+        or orbit_recovery_003_review_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+        or orbit_recovery_003_review_reconciliation.get("human_decisions_fabricated") is not False
+        or orbit_recovery_003_approval.get("status") != "approved_exact_evidence_first_recovery_only_implementation_and_one_future_attempt"
+        or orbit_recovery_003_approval.get("review_bundle_manifest_sha256") != "bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d"
+        or orbit_recovery_003_approval.get("proposal_sha256") != "5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3"
+        or orbit_recovery_003_approval.get("locked_response_sha256") != orbit_recovery_003_review_reconciliation.get("response_sha256")
+        or orbit_recovery_003_approval.get("lock_receipt_sha256") != orbit_recovery_003_review_reconciliation.get("receipt_sha256")
+        or orbit_recovery_003_approval.get("authorized_recovery", {}).get("required_new_attempt_namespace") != "m2-orb-001-recovery-002"
+        or orbit_recovery_003_approval.get("authorized_recovery", {}).get("required_new_staging_root") != "nepal-2026-before-after-map-data/.intake-staging/nepal-m2-orbit-recovery-003"
+        or orbit_recovery_003_approval.get("authorized_recovery", {}).get("maximum_owner_handoffs") != 1
+        or orbit_recovery_003_approval.get("authorized_recovery", {}).get("maximum_real_attempts") != 1
+        or orbit_recovery_003_approval.get("authorized_recovery", {}).get("automatic_retry_authorized") is not False
+        or orbit_recovery_003_approval_activation.get("status") != "pass_exact_approval_activated_implementation_and_publication_only"
+        or orbit_recovery_003_approval_activation.get("bindings", {}).get("approval_sha256") != sha256("records/source-gates/m2-orbit-recovery-003-approval.json")
+        or orbit_recovery_003_approval_activation.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or orbit_recovery_003_approval_activation.get("assertions", {}).get("orbit_payload_requested") is not False
+        or orbit_recovery_003_implementation.get("status") != "pass_local_synthetic_ready_public_ci_pending"
+        or orbit_recovery_003_implementation.get("bindings") != {key: sha256(path) for key, path in recovery_003_implementation_files.items()}
+        or orbit_recovery_003_implementation.get("tests", {}).get("focused_test_count") != 16
+        or orbit_recovery_003_implementation.get("tests", {}).get("full_repository_test_count") != 416
+        or orbit_recovery_003_implementation.get("assertions", {}).get("attempt_id_predeclared_before_runtime_mutation") is not True
+        or orbit_recovery_003_implementation.get("assertions", {}).get("attempt_id_exactly_binds_started_time_and_nonce") is not True
+        or orbit_recovery_003_implementation.get("assertions", {}).get("owner_handoff_claim_exclusive") is not True
+        or orbit_recovery_003_implementation.get("assertions", {}).get("started_event_precedes_public_catalog_revalidation") is not True
+        or orbit_recovery_003_implementation.get("assertions", {}).get("real_recovery_started") is not False
+        or orbit_recovery_003_implementation.get("assertions", {}).get("network_requests_performed") is not False
+    ):
+        fail("M2 orbit recovery-003 approval or implementation-readiness evidence differs")
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
     remote_project_name = expected_remote.rstrip("/").rsplit("/", 1)[-1].removesuffix(".git")
@@ -8253,6 +8337,40 @@ def main() -> None:
         or orbit_recovery_003_publication_evidence.get("assertions", {}).get("external_data_mutated") is not False
     ):
         fail("EVID-0107 recovery-003 review publication evidence differs or overclaims")
+    orbit_recovery_003_implementation_evidence = ledger_by_id.get("EVID-0108")
+    if (
+        not isinstance(orbit_recovery_003_implementation_evidence, dict)
+        or orbit_recovery_003_implementation_evidence.get("status") != "superseded_before_publication_no_real_access"
+        or orbit_recovery_003_implementation_evidence.get("implementation_readiness_sha256") != sha256("records/acquisition/m2-orbit-recovery-003-implementation-readiness-attempt-001-superseded.json")
+        or orbit_recovery_003_implementation_evidence.get("failure_sha256") != sha256("records/acquisition/m2-orbit-recovery-003-prepublication-review-attempt-001-failure.json")
+        or orbit_recovery_003_implementation_evidence.get("assertions", {}).get("focused_test_count") != 14
+        or orbit_recovery_003_implementation_evidence.get("assertions", {}).get("full_repository_test_count") != 414
+        or orbit_recovery_003_implementation_evidence.get("assertions", {}).get("public_ci_started") is not False
+        or orbit_recovery_003_implementation_evidence.get("assertions", {}).get("owner_handoff_count") != 0
+        or orbit_recovery_003_implementation_evidence.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or orbit_recovery_003_implementation_evidence.get("assertions", {}).get("orbit_payload_requested") is not False
+        or orbit_recovery_003_implementation_evidence.get("assertions", {}).get("external_data_mutated") is not False
+    ):
+        fail("EVID-0108 recovery-003 superseded implementation readiness differs or overclaims")
+    orbit_recovery_003_corrected_evidence = ledger_by_id.get("EVID-0109")
+    if (
+        not isinstance(orbit_recovery_003_corrected_evidence, dict)
+        or orbit_recovery_003_corrected_evidence.get("status") != "pass_exact_approval_locked_reconciled_local_tests_public_ci_pending"
+        or orbit_recovery_003_corrected_evidence.get("review_reconciliation_sha256") != sha256("records/source-gates/m2-orbit-recovery-003-review-reconciliation.json")
+        or orbit_recovery_003_corrected_evidence.get("approval_sha256") != sha256("records/source-gates/m2-orbit-recovery-003-approval.json")
+        or orbit_recovery_003_corrected_evidence.get("approval_activation_sha256") != sha256("records/readiness/m2-orbit-recovery-003-approval-activation.json")
+        or orbit_recovery_003_corrected_evidence.get("implementation_readiness_sha256") != sha256("records/acquisition/m2-orbit-recovery-003-implementation-readiness.json")
+        or orbit_recovery_003_corrected_evidence.get("assertions", {}).get("human_decision_count") != 1
+        or orbit_recovery_003_corrected_evidence.get("assertions", {}).get("focused_test_count") != 16
+        or orbit_recovery_003_corrected_evidence.get("assertions", {}).get("full_repository_test_count") != 416
+        or orbit_recovery_003_corrected_evidence.get("assertions", {}).get("owner_handoff_claim_exclusive") is not True
+        or orbit_recovery_003_corrected_evidence.get("assertions", {}).get("public_ci") != "pending"
+        or orbit_recovery_003_corrected_evidence.get("assertions", {}).get("owner_handoff_count") != 0
+        or orbit_recovery_003_corrected_evidence.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or orbit_recovery_003_corrected_evidence.get("assertions", {}).get("orbit_payload_requested") is not False
+        or orbit_recovery_003_corrected_evidence.get("assertions", {}).get("external_data_mutated") is not False
+    ):
+        fail("EVID-0109 recovery-003 corrected implementation readiness differs or overclaims")
 
     violations = []
     for relative in tracked_files():
