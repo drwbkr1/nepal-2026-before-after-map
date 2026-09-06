@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-orbit-continuation-001-review",
+  "contract_sha256": "40c4a010e75306a3df997b55d0c68216f745a39622da48fc45566fc877936296",
+  "response_sha256": "692f9ef93a7fd43adc76001cc0c6b5fd5dd5738ad840f91bcdb42d446ace0f04",
+  "receipt_sha256": "6ed7b3226a160db4605e2911cb9631710bb4d118c7454549295f589040b3eb5e",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

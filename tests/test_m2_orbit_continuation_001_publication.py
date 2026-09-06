@@ -10,7 +10,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from derive_m2_acquisition_checkpoint import current_orbit_continuation_001_review_required  # noqa: E402
+from derive_m2_acquisition_checkpoint import (  # noqa: E402
+    current_orbit_continuation_001_implementation_pending,
+    current_orbit_continuation_001_review_required,
+)
 
 
 def load(ref: str) -> dict:
@@ -50,18 +53,18 @@ class OrbitContinuation001PublicationTests(unittest.TestCase):
         self.assertFalse(self.blank["completed"])
         self.assertIsNone(self.blank["responses"][0]["decision"])
 
-    def test_control_plane_exposes_only_the_owner_review(self) -> None:
+    def test_control_plane_preserves_publication_and_activates_approved_implementation(self) -> None:
         units = {item["id"]: item for item in self.milestone["units"]}
         publication = units["M2-ORBIT-CONTINUATION-001-REVIEW-PUBLICATION"]
         review = units["M2-ORBIT-CONTINUATION-001-REVIEW"]
         implementation = units["M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"]
         action = units["M2-ORBIT-CONTINUATION-001"]
         self.assertEqual((publication["status"], publication["disposition"]), ("complete", "pass"))
-        self.assertEqual(review["status"], "ready")
+        self.assertEqual((review["status"], review["disposition"]), ("complete", "pass"))
         self.assertTrue(review["human_gate"])
-        self.assertEqual(review["gates"]["human_decision_count"], 0)
-        self.assertFalse(review["gates"]["continuation_authorized"])
-        self.assertEqual(implementation["status"], "planned")
+        self.assertEqual(review["gates"]["human_decision_count"], 1)
+        self.assertTrue(review["gates"]["continuation_authorized"])
+        self.assertEqual(implementation["status"], "in_progress")
         self.assertFalse(implementation["gates"]["credential_or_source_access_before_public_ci"])
         self.assertEqual(action["status"], "planned")
         self.assertEqual(action["gates"]["source_ids_in_exact_order"], ["M2-ORB-002", "M2-ORB-003", "M2-ORB-004"])
@@ -69,12 +72,13 @@ class OrbitContinuation001PublicationTests(unittest.TestCase):
         self.assertTrue(action["gates"]["stop_on_first_failure"])
         self.assertFalse(action["gates"]["m2_orb_001_request_authorized"])
 
-    def test_checkpoint_derives_to_blank_owner_review(self) -> None:
-        checkpoint = "M2-ORBIT-CONTINUATION-001-REVIEW"
+    def test_checkpoint_derives_to_approved_implementation(self) -> None:
+        checkpoint = "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)
-        self.assertTrue(current_orbit_continuation_001_review_required(ROOT, {"promoted": 8}))
+        self.assertFalse(current_orbit_continuation_001_review_required(ROOT, {"promoted": 8}))
+        self.assertTrue(current_orbit_continuation_001_implementation_pending(ROOT, {"promoted": 8}))
 
 
 if __name__ == "__main__":

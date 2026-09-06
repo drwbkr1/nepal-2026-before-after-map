@@ -102,6 +102,10 @@ ORBIT_CONTINUATION_001_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-ORBIT-CONTINUATION-001-REVIEW",
     "next_action": "Review M2 orbit continuation-001 bundle SHA-256 f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6 and proposal SHA-256 01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b; approve, revise, or defer the fixed-order one-attempt continuation. No implementation, credential, live query, payload request, custody mutation, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision.",
 }
+ORBIT_CONTINUATION_001_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION",
+    "next_action": "Implement and synthetically validate only the approved fixed-order M2-ORB-002, M2-ORB-003, and M2-ORB-004 continuation, then require successful public default-branch CI. No credential, catalog, payload, orbit application, DEM, radar-pixel, baseline, change, attribution, or scientific-publication action is released before that gate.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -685,6 +689,56 @@ def current_orbit_continuation_001_review_required(
     )
 
 
+def current_orbit_continuation_001_implementation_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        intake = load(root / "contracts/m2-orbit-intake.json")
+        approval = load(root / "records/source-gates/m2-orbit-continuation-001-approval.json")
+        review_reconciliation = load(root / "records/source-gates/m2-orbit-continuation-001-review-reconciliation.json")
+        activation = load(root / "records/readiness/m2-orbit-continuation-001-approval-activation.json")
+        approval_reconciliation = load(root / "records/readiness/m2-orbit-continuation-001-approval-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-ORBIT-CONTINUATION-001-REVIEW", {})
+    implementation = units.get("M2-ORBIT-CONTINUATION-001-IMPLEMENTATION", {})
+    action = units.get("M2-ORBIT-CONTINUATION-001", {})
+    assets = intake.get("assets", [])
+    return bool(
+        approval.get("status") == "approved_exact_bounded_fixed_order_orbit_continuation_only"
+        and approval.get("review_bundle_manifest_sha256") == "f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6"
+        and approval.get("continuation_proposal_sha256") == "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b"
+        and approval.get("human_decision_count") == 1
+        and approval.get("source_ids_in_exact_order") == ["M2-ORB-002", "M2-ORB-003", "M2-ORB-004"]
+        and approval.get("maximum_owner_handoffs") == 1
+        and approval.get("maximum_real_attempts_per_source") == 1
+        and approval.get("stop_on_first_failure") is True
+        and approval.get("maximum_osv_endpoint_tolerance_seconds") == 1.0
+        and review_reconciliation.get("status") == "reconciled_exact_human_response"
+        and review_reconciliation.get("human_decision_count") == 1
+        and review_reconciliation.get("decision_counts") == {"approve": 1, "revise": 0, "defer": 0}
+        and activation.get("status") == "pass_exact_approval_activated_implementation_and_publication_only"
+        and approval_reconciliation.get("status") == "pass_exact_approval_reconciled_implementation_publication_only"
+        and approval_reconciliation.get("current_checkpoint") == "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"
+        and review.get("status") == "complete"
+        and review.get("disposition") == "pass"
+        and review.get("gates", {}).get("human_decision_count") == 1
+        and review.get("gates", {}).get("continuation_authorized") is True
+        and implementation.get("status") == "in_progress"
+        and implementation.get("gates", {}).get("public_ci") == "pending"
+        and action.get("status") == "planned"
+        and action.get("gates", {}).get("public_ci") == "pending"
+        and action.get("gates", {}).get("final_no_payload_preflight") == "blocked_by_public_ci"
+        and intake.get("extensions", {}).get("current_orbit_state_counts") == {"authorized": 3, "failed": 0, "promoted": 1}
+        and len(assets) == 4
+        and [item.get("state") for item in assets] == ["promoted", "authorized", "authorized", "authorized"]
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -729,7 +783,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_orbit_continuation_001_review_required(ROOT, progress["state_counts"]):
+        if current_orbit_continuation_001_implementation_pending(ROOT, progress["state_counts"]):
+            checkpoint = dict(ORBIT_CONTINUATION_001_IMPLEMENTATION_CHECKPOINT)
+        elif current_orbit_continuation_001_review_required(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_CONTINUATION_001_REVIEW_CHECKPOINT)
         elif current_orbit_remaining_sources_review_preparation(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_REMAINING_SOURCES_REVIEW_PREPARATION_CHECKPOINT)

@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-CONTINUATION-001-ACTIVE-AMENDMENT-PROJECTION-CORRECTION-001",
+  "corrected_at_utc": "2026-09-06T22:40:28Z",
+  "status": "pass_two_omitted_active_amendment_projections_added_without_scope_change",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-orbit-continuation-001-approval.json",
+    "approval_sha256": "66c40db57082ed29c1dfd3e00a163ab072fe9f14b8e0ed4455df188673de84ba",
+    "initial_reconciliation_ref": "records/readiness/m2-orbit-continuation-001-approval-reconciliation.json",
+    "initial_reconciliation_sha256": "e9518c9c000feee919c69cb5b3445413a98457d5d7bbf791cf4831cfb7014b09",
+    "milestone_sha256_before": "98d54ad93d3e6df06f4d69e353b9c73de987042e3c7e9680cb06660f019865fa",
+    "milestone_sha256_after": "0cbdc81cbf28fbefcfe73e5b644eadc03ca0a8c3e78bd0fc1afddc7fe9605d48",
+    "profile_sha256_before": "6705e711f50f8814cf9ba037f6a915689d1129346b8cffc5f7954e28754e9fb2",
+    "profile_sha256_after": "4cc91af7b3b8b1baee387ef46acc5904c0599d658927290609917e234fdde83f",
+    "goal_sha256_unchanged": "11ff89a914e352726fef585f1389cb2f8a355502ccbcafeb5c57a40694ecd2e6"
+  },
+  "corrected_fields": [
+    "contracts/milestone-002.json#/scope/active_amendments",
+    "records/project-control-profile.json#/control_surfaces/activated_amendments"
+  ],
+  "assertions": {
+    "authority_broadened": false,
+    "approval_content_changed": false,
+    "credential_values_read_or_recorded": false,
+    "network_or_payload_request_performed": false,
+    "m2_orb_001_mutated": false,
+    "external_data_mutated": false
+  },
+  "next_gate": "implementation and successful public default-branch CI"
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-ORBIT-CONTINUATION-001-APPROVAL",
+  "status": "approved_exact_bounded_fixed_order_orbit_continuation_only",
+  "approved_at_utc": "2026-09-06T22:19:16Z",
+  "review_id": "m2-orbit-continuation-001-review",
+  "review_bundle_id": "m2-orbit-continuation-001-review-bundle",
+  "review_bundle_manifest_sha256": "f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6",
+  "continuation_proposal_ref": "contracts/milestone-002-orbit-continuation-001-proposal.json",
+  "continuation_proposal_sha256": "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
+  "review_contract_ref": "reviews/m2-orbit-continuation-001/review-contract.json",
+  "review_contract_sha256": "40c4a010e75306a3df997b55d0c68216f745a39622da48fc45566fc877936296",
+  "review_reconciliation_ref": "records/source-gates/m2-orbit-continuation-001-review-reconciliation.json",
+  "review_reconciliation_sha256": "11e29c1e6a259201b745b802f59219234e4bfec2433f1caf909f2202e3b9f0fa",
+  "locked_response_sha256": "692f9ef93a7fd43adc76001cc0c6b5fd5dd5738ad840f91bcdb42d446ace0f04",
+  "lock_receipt_sha256": "6ed7b3226a160db4605e2911cb9631710bb4d118c7454549295f589040b3eb5e",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "source_ids_in_exact_order": [
+    "M2-ORB-002",
+    "M2-ORB-003",
+    "M2-ORB-004"
+  ],
+  "maximum_owner_handoffs": 1,
+  "maximum_real_attempts_per_source": 1,
+  "stop_on_first_failure": true,
+  "maximum_osv_endpoint_tolerance_seconds": 1.0,
+  "authorized_continuation": {
+    "continuation_id": "M2-ORBIT-CONTINUATION-001",
+    "source_ids_in_exact_order": [
+      "M2-ORB-002",
+      "M2-ORB-003",
+      "M2-ORB-004"
+    ],
+    "maximum_owner_handoffs": 1,
+    "maximum_real_attempts_per_source": 1,
+    "restart_offset_bytes": 0,
+    "resume_or_range_requests_authorized": false,
+    "stop_on_first_failure": true,
+    "automatic_retry_authorized": false,
+    "m2_orb_001_request_authorized": false,
+    "maximum_endpoint_tolerance_seconds": 1.0,
+    "endpoint_rule_scope": [
+      "M2-ORB-002",
+      "M2-ORB-003",
+      "M2-ORB-004"
+    ],
+    "endpoint_rule_timing": "prospective_before_any_payload_byte_or_osv_value_from_these_sources_is_observed",
+    "required_implementation": [
+      "use the proven anonymous single-use in-memory broker and detached supervisor architecture",
+      "predeclare source and attempt identities and create append-only event storage before payload staging",
+      "use a distinct exclusive staging path for every source attempt and atomic no-replace promotion",
+      "scrub credential-bearing environment and command values and emit only fixed nonsecret errors",
+      "preserve every prior M2-ORB-001 attempt, staged file, promotion, receipt, and reconciliation unchanged",
+      "apply the versioned one-second endpoint rule only to M2-ORB-002 through M2-ORB-004"
+    ],
+    "required_gates": [
+      "one completed owner decision on this exact bundle is locked and reconciled",
+      "the continuation implementation and synthetic interruption, exact-order, stop-on-failure, and secret-exposure tests pass public default-branch CI",
+      "a final no-payload preflight revalidates exact terms, catalog identities, paths, collisions, storage, Sentinel prerequisites, and unchanged M2-ORB-001 custody",
+      "the owner initiates one fresh secret-safe credentials-to-token-to-broker handoff only after every nonsecret gate passes"
+    ],
+    "per_source_transfer_and_verification": [
+      "make at most one fresh public catalog revalidation and one authenticated byte-zero payload request",
+      "require exact expected length and provider MD5 and BLAKE3 agreement and compute local SHA-256",
+      "require safe XML identity, declared and observed OSV count agreement, ordered unique finite OSVs, correct units, and exact scene binding",
+      "require OSV endpoints to fall within the prospectively approved maximum one-second consistency rule",
+      "promote without replacement only after every exact check passes; otherwise preserve failure evidence and stop"
+    ],
+    "terminal_reconciliation_required": true
+  },
+  "authorized_next_actions": [
+    "implement and test only the fixed-order continuation for exact M2-ORB-002, M2-ORB-003, and M2-ORB-004",
+    "extend the maximum one-second OSV endpoint-consistency rule prospectively to only those three exact files",
+    "publish the exact implementation and require successful public default-branch CI before any live source access",
+    "perform one bounded final no-payload preflight and one owner-selected secret-safe handoff",
+    "make at most one byte-zero request per source in the stated order, stop on first failure, verify, promote without replacement on pass, and reconcile the exact outcome"
+  ],
+  "does_not_authorize": [
+    "request, resume, reuse, retry, replace, or mutate M2-ORB-001 or its preserved recovery staging evidence",
+    "make an automatic retry or a second request for any failed remaining source",
+    "change source order, provider UUID, filename, orbit type, expected length, provider checksum, scene binding, destination, or source manifest",
+    "use a tolerance above one second, relax another verifier rule, substitute AUX_POEORB, date-shop, or source-shop",
+    "expose, log, copy, file-store, clipboard-store, or environment-store an owner password, TOTP, refresh token, or access token",
+    "accept terms, create or recover an account, change MFA, incur cost, or use a paid source",
+    "apply orbit data, act on DEMs, decode radar pixels, process a baseline, analyze change, attribute cause, or publish a scientific result"
+  ],
+  "human_decisions_fabricated": false
+}

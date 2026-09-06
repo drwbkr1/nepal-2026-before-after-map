@@ -200,6 +200,26 @@
         "maximum_local_validation_attempts": 1,
         "automatic_retry_authorized": false,
         "other_orbit_source_requests_authorized": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-orbit-continuation-001-approval.json",
+        "approval_sha256": "66c40db57082ed29c1dfd3e00a163ab072fe9f14b8e0ed4455df188673de84ba",
+        "proposal_ref": "contracts/milestone-002-orbit-continuation-001-proposal.json",
+        "proposal_sha256": "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
+        "review_bundle_sha256": "f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6",
+        "review_reconciliation_ref": "records/source-gates/m2-orbit-continuation-001-review-reconciliation.json",
+        "review_reconciliation_sha256": "11e29c1e6a259201b745b802f59219234e4bfec2433f1caf909f2202e3b9f0fa",
+        "source_ids_in_exact_order": [
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ],
+        "maximum_owner_handoffs": 1,
+        "maximum_real_attempts_per_source": 1,
+        "stop_on_first_failure": true,
+        "maximum_endpoint_tolerance_seconds": 1.0,
+        "m2_orb_001_request_authorized": false,
+        "secret_transport": "anonymous_pipe_single_use_memory_only"
       }
     ]
   },
@@ -271,7 +291,8 @@
       "records/source-gates/m2-radar-first-path-001-approval.json",
       "records/source-gates/m2-orbit-recovery-002-approval.json",
       "records/source-gates/m2-orbit-recovery-003-approval.json",
-      "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json"
+      "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+      "records/source-gates/m2-orbit-continuation-001-approval.json"
     ]
   },
   "entry_conditions": [
@@ -1012,7 +1033,7 @@
         "fresh_source_preflight": "pass",
         "orbit_custody_initialized": true,
         "token_presence_checked": "synthetic_test_literal_only",
-        "retained_failure_review": "m2_orb_001_promoted_continuation_001_owner_review_pending",
+        "retained_failure_review": "orbit_continuation_001_implementation_public_ci_pending",
         "retained_failure_reconciliation_ref": "records/acquisition/orbit-test-boundary-reconciliation-001.json",
         "retained_failure_reconciliation_sha256": "40dae0623dcc142cec17ff2108752e5e60bd736a241fe4b83e8f04c5de690025",
         "retained_failure_review_ref": "reviews/m2-orbit-osv-precision-amendment-001/review-contract.json",
@@ -1037,7 +1058,10 @@
         "remaining_source_review_ref": "reviews/m2-orbit-continuation-001/review-contract.json",
         "remaining_source_review_bundle_sha256": "f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6",
         "remaining_source_proposal_sha256": "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
-        "remaining_source_requests_authorized_by_current_review": false
+        "remaining_source_requests_authorized_by_current_review": true,
+        "remaining_source_requests_released_now": false,
+        "remaining_source_approval_ref": "records/source-gates/m2-orbit-continuation-001-approval.json",
+        "remaining_source_approval_sha256": "66c40db57082ed29c1dfd3e00a163ab072fe9f14b8e0ed4455df188673de84ba"
       },
       "disposition": "defer",
       "retained_failures": [
@@ -1084,7 +1108,7 @@
         "rationale": "M2-ORB-001 is promoted and input-only verified; no current bounded decision releases requests for M2-ORB-002 through M2-ORB-004."
       },
       "next_dependency": "M2-ORBIT-VERIFY",
-      "rationale": "One exact restituted orbit file is promoted and input-only verified. The publicly validated continuation packet for the other three contains zero decisions and releases no request."
+      "rationale": "The three-source continuation is approved, but no request is released until implementation, public CI, and final no-payload preflight pass."
     },
     {
       "id": "M2-ORBIT-VERIFY",
@@ -2344,7 +2368,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "contracts/milestone-002-orbit-continuation-001-proposal.json",
         "reviews/m2-orbit-continuation-001/review-bundle.json",
@@ -2354,7 +2378,8 @@
       ],
       "outputs": [
         "records/source-gates/m2-orbit-continuation-001-review-reconciliation.json",
-        "records/source-gates/m2-orbit-continuation-001-approval.json"
+        "records/source-gates/m2-orbit-continuation-001-approval.json",
+        "records/readiness/m2-orbit-continuation-001-approval-activation.json"
       ],
       "gates": {
         "proposal_sha256": "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
@@ -2372,11 +2397,13 @@
         "maximum_real_attempts_per_source_if_approved": 1,
         "stop_on_first_failure_if_approved": true,
         "maximum_endpoint_tolerance_seconds_if_approved": 1.0,
-        "human_decision_count": 0,
-        "attestation": false,
-        "continuation_authorized": false
+        "human_decision_count": 1,
+        "attestation": true,
+        "continuation_authorized": true,
+        "approval_sha256": "66c40db57082ed29c1dfd3e00a163ab072fe9f14b8e0ed4455df188673de84ba",
+        "review_reconciliation_sha256": "11e29c1e6a259201b745b802f59219234e4bfec2433f1caf909f2202e3b9f0fa"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
         "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
@@ -2385,9 +2412,11 @@
       ],
       "exit_condition_delta": {
         "expected": [],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "The exact packet is publicly validated and awaits one owner decision."
+        "observed": [
+          "one exact attested approval"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "The exact response is locked and reconciled; only implementation, synthetic tests, and public CI are released now."
       },
       "next_dependency": "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"
     },
@@ -2399,7 +2428,7 @@
       ],
       "action_class": "external_publication",
       "human_gate": false,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-orbit-continuation-001-approval.json",
         "contracts/milestone-002-orbit-continuation-001-proposal.json"
@@ -2410,10 +2439,12 @@
         "records/readiness/m2-orbit-continuation-001-publication-gate.json"
       ],
       "gates": {
-        "public_ci": "required",
+        "public_ci": "pending",
         "synthetic_interruption_and_secret_exposure_tests": "required",
         "exact_order_and_stop_on_first_failure_tests": "required",
-        "credential_or_source_access_before_public_ci": false
+        "credential_or_source_access_before_public_ci": false,
+        "approval_sha256": "66c40db57082ed29c1dfd3e00a163ab072fe9f14b8e0ed4455df188673de84ba",
+        "review_reconciliation_sha256": "11e29c1e6a259201b745b802f59219234e4bfec2433f1caf909f2202e3b9f0fa"
       },
       "disposition": null,
       "retained_failures": [
@@ -2424,9 +2455,11 @@
       ],
       "exit_condition_delta": {
         "expected": [],
-        "observed": [],
+        "observed": [
+          "exact approval locked and reconciled"
+        ],
         "decision_value": "unknown",
-        "rationale": "No implementation is authorized before owner approval."
+        "rationale": "Implementation and synthetic validation are active; no live source action is released before public CI."
       },
       "next_dependency": "M2-ORBIT-CONTINUATION-001"
     },
@@ -2460,8 +2493,8 @@
         "automatic_retry_authorized": false,
         "m2_orb_001_request_authorized": false,
         "maximum_endpoint_tolerance_seconds": 1.0,
-        "public_ci": "required",
-        "final_no_payload_preflight": "required"
+        "public_ci": "pending",
+        "final_no_payload_preflight": "blocked_by_public_ci"
       },
       "disposition": null,
       "retained_failures": [
@@ -2535,8 +2568,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ORBIT-CONTINUATION-001-REVIEW",
-    "next_action": "Review M2 orbit continuation-001 bundle SHA-256 f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6 and proposal SHA-256 01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b; approve, revise, or defer the fixed-order one-attempt continuation. No implementation, credential, live query, payload request, custody mutation, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision.",
+    "current_checkpoint": "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION",
+    "next_action": "Implement and synthetically validate only the approved fixed-order M2-ORB-002, M2-ORB-003, and M2-ORB-004 continuation, then require successful public default-branch CI. No credential, catalog, payload, orbit application, DEM, radar-pixel, baseline, change, attribution, or scientific-publication action is released before that gate.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",

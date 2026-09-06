@@ -86,7 +86,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["status"], "deferred")
         self.assertEqual(
             unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"],
-            "m2_orb_001_promoted_continuation_001_owner_review_pending",
+            "orbit_continuation_001_implementation_public_ci_pending",
         )
         self.assertEqual(
             unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["superseded_milestone_dependency_m2_verify"],
@@ -122,6 +122,7 @@ class M2OrbitActivationTests(unittest.TestCase):
                 "records/source-gates/m2-orbit-recovery-002-approval.json",
                 "records/source-gates/m2-orbit-recovery-003-approval.json",
                 "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+                "records/source-gates/m2-orbit-continuation-001-approval.json",
             ],
         )
         checkpoints = [item["checkpoint_id"] for item in self.profile["parallel_checkpoints"]]

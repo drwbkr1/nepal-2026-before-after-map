@@ -144,6 +144,7 @@ class M2DemActivationTests(unittest.TestCase):
                 "records/source-gates/m2-orbit-recovery-002-approval.json",
                 "records/source-gates/m2-orbit-recovery-003-approval.json",
                 "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+                "records/source-gates/m2-orbit-continuation-001-approval.json",
             ],
         )
         primary_intake = load("contracts/m2-intake.json")
@@ -223,8 +224,19 @@ class M2DemActivationTests(unittest.TestCase):
             ),
             None,
         )
+        orbit_continuation_implementation = next(
+            (
+                unit
+                for unit in self.milestone["units"]
+                if unit["id"] == "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"
+            ),
+            None,
+        )
         expected_primary_checkpoint = (
-            "M2-ORBIT-CONTINUATION-001-REVIEW"
+            "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"
+            if orbit_continuation_implementation is not None
+            and orbit_continuation_implementation.get("status") == "in_progress"
+            else "M2-ORBIT-CONTINUATION-001-REVIEW"
             if orbit_continuation_review is not None
             and orbit_continuation_review.get("status") == "ready"
             else "M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION"
