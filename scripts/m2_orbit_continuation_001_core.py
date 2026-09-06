@@ -52,7 +52,7 @@ RADAR_READINESS_REF = "records/readiness/m2-radar-source-readiness-001.json"
 PRESERVED_RESULT_REF = "records/acquisition/m2-orbit-osv-precision-amendment-001-local-validation.json"
 PRESERVED_TERMINAL_REF = "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json"
 CONTRACT_REF = "contracts/m2-orbit-continuation-001.json"
-IMPLEMENTATION_READINESS_REF = "records/readiness/m2-orbit-continuation-001-implementation-readiness.json"
+IMPLEMENTATION_READINESS_REF = "records/readiness/m2-orbit-continuation-001-implementation-readiness-002.json"
 PUBLICATION_GATE_REF = "records/readiness/m2-orbit-continuation-001-publication-gate.json"
 ACTIVATION_REF = "records/readiness/m2-orbit-continuation-001-activation.json"
 FINAL_PREFLIGHT_REF = "records/readiness/m2-orbit-continuation-001-final-preflight.json"
@@ -317,7 +317,7 @@ def validate_publication_gate(gate: Mapping[str, Any]) -> None:
         gate.get("status") != "pass_public_controls_verified_before_orbit_continuation_001"
         or gate.get("github_actions", {}).get("conclusion") != "success"
         or gate.get("assertions", {}).get("credential_values_read_or_recorded") is not False
-        or gate.get("assertions", {}).get("payload_request_performed") is not False
+        or gate.get("assertions", {}).get("orbit_payload_request_performed") is not False
     ):
         raise OrbitContinuation001Error("continuation_publication_gate_not_passing")
 

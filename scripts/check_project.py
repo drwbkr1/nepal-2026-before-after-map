@@ -292,6 +292,9 @@ REQUIRED = [
     "scripts/record_m2_orbit_continuation_001_publication_gate.py",
     "scripts/record_m2_orbit_continuation_001_implementation_readiness.py",
     "records/readiness/m2-orbit-continuation-001-implementation-readiness.json",
+    "records/readiness/m2-orbit-continuation-001-implementation-readiness-002.json",
+    "records/readiness/m2-orbit-continuation-001-publication-gate-attempt-001.json",
+    "records/readiness/m2-orbit-continuation-001-activation-attempt-001-failure.json",
     "scripts/invoke_m2_orbit_continuation_001.ps1",
     "tests/test_m2_orbit_continuation_001.py",
     "tests/test_m2_orbit_osv_precision_amendment_001.py",
@@ -883,6 +886,9 @@ def main() -> None:
     orbit_continuation_001_approval_reconciliation = json.loads((ROOT / "records/readiness/m2-orbit-continuation-001-approval-reconciliation.json").read_text(encoding="utf-8"))
     orbit_continuation_001_projection_correction = json.loads((ROOT / "records/readiness/m2-orbit-continuation-001-active-amendment-projection-correction-001.json").read_text(encoding="utf-8"))
     orbit_continuation_001_implementation_readiness = json.loads((ROOT / "records/readiness/m2-orbit-continuation-001-implementation-readiness.json").read_text(encoding="utf-8"))
+    orbit_continuation_001_implementation_readiness_002 = json.loads((ROOT / "records/readiness/m2-orbit-continuation-001-implementation-readiness-002.json").read_text(encoding="utf-8"))
+    orbit_continuation_001_publication_attempt_001 = json.loads((ROOT / "records/readiness/m2-orbit-continuation-001-publication-gate-attempt-001.json").read_text(encoding="utf-8"))
+    orbit_continuation_001_activation_failure_001 = json.loads((ROOT / "records/readiness/m2-orbit-continuation-001-activation-attempt-001-failure.json").read_text(encoding="utf-8"))
     contract = json.loads((ROOT / "contracts/milestone-001.json").read_text(encoding="utf-8"))
     m2_proposal = json.loads((ROOT / "contracts/milestone-002-proposal.json").read_text(encoding="utf-8"))
     active_m2 = json.loads((ROOT / "contracts/milestone-002.json").read_text(encoding="utf-8"))
@@ -1096,14 +1102,28 @@ def main() -> None:
         or orbit_continuation_001_projection_correction.get("bindings", {}).get("goal_sha256_unchanged") != sha256("records/long-term-goal.json")
         or any(orbit_continuation_001_projection_correction.get("assertions", {}).values())
         or orbit_continuation_001_implementation_readiness.get("status") != "pass_local_synthetic_ready_public_ci_pending"
-        or orbit_continuation_001_implementation_readiness.get("bindings") != {
-            key: hashlib.sha256(path.read_bytes()).hexdigest()
-            for key, path in ORBIT_CONTINUATION_001_IMPLEMENTATION_FILES.items()
-        }
+        or sha256("records/readiness/m2-orbit-continuation-001-implementation-readiness.json") != "184d7b6308bd90a79ce472f0c1032354459f83324e8900b24292b46474128a33"
         or orbit_continuation_001_implementation_readiness.get("tests", {}).get("focused_test_count") != 24
         or orbit_continuation_001_implementation_readiness.get("tests", {}).get("full_repository_test_count") != 470
         or orbit_continuation_001_implementation_readiness.get("tests", {}).get("windows_detached_process_tested") is not True
         or any(orbit_continuation_001_implementation_readiness.get("assertions", {}).values())
+        or orbit_continuation_001_implementation_readiness_002.get("status") != "pass_local_synthetic_ready_public_ci_pending"
+        or orbit_continuation_001_implementation_readiness_002.get("bindings") != {
+            key: hashlib.sha256(path.read_bytes()).hexdigest()
+            for key, path in ORBIT_CONTINUATION_001_IMPLEMENTATION_FILES.items()
+        }
+        or orbit_continuation_001_implementation_readiness_002.get("tests", {}).get("focused_test_count") != 25
+        or orbit_continuation_001_implementation_readiness_002.get("tests", {}).get("full_repository_test_count") != 471
+        or orbit_continuation_001_implementation_readiness_002.get("tests", {}).get("windows_detached_process_tested") is not True
+        or any(orbit_continuation_001_implementation_readiness_002.get("assertions", {}).values())
+        or sha256("records/readiness/m2-orbit-continuation-001-publication-gate-attempt-001.json") != "fb5b051daedda020e6a925ae67380ef06fa8b77f07b19b221568f22455501377"
+        or orbit_continuation_001_publication_attempt_001.get("status") != "pass_public_controls_verified_before_orbit_continuation_001"
+        or orbit_continuation_001_publication_attempt_001.get("assertions", {}).get("orbit_payload_request_performed") is not False
+        or sha256("records/readiness/m2-orbit-continuation-001-activation-attempt-001-failure.json") != "ccc8a18f3ff70b16b6c4a31e5fab262e3a8eccf436082be9ab2230c16a311aa8"
+        or orbit_continuation_001_activation_failure_001.get("status") != "blocked_publication_gate_schema_mismatch_before_activation_outputs"
+        or orbit_continuation_001_activation_failure_001.get("publication_gate_attempt_sha256") != "fb5b051daedda020e6a925ae67380ef06fa8b77f07b19b221568f22455501377"
+        or orbit_continuation_001_activation_failure_001.get("failure", {}).get("code") != "continuation_publication_gate_not_passing"
+        or any(orbit_continuation_001_activation_failure_001.get("assertions", {}).values())
     ):
         fail("M2 orbit continuation-001 approval, projection correction, or implementation readiness differs")
     continuation_success = json.loads((ROOT / "records/acquisition/sentinel-continuation-001-success-reconciliation.json").read_text(encoding="utf-8"))

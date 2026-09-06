@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-CONTINUATION-001-ACTIVATION-ATTEMPT-001-FAILURE",
+  "recorded_at_utc": "2026-09-06T22:51:45Z",
+  "status": "blocked_publication_gate_schema_mismatch_before_activation_outputs",
+  "public_commit": "e64acfb566bdd807816744f91fff058384ddf327",
+  "github_actions": {
+    "run_id": 34065152165,
+    "conclusion": "success"
+  },
+  "publication_gate_attempt_ref": "records/readiness/m2-orbit-continuation-001-publication-gate-attempt-001.json",
+  "publication_gate_attempt_sha256": "fb5b051daedda020e6a925ae67380ef06fa8b77f07b19b221568f22455501377",
+  "failure": {
+    "code": "continuation_publication_gate_not_passing",
+    "mismatch": "recorder emitted orbit_payload_request_performed while validator required payload_request_performed",
+    "activation_output_count": 0
+  },
+  "assertions": {
+    "continuation_contract_created": false,
+    "activation_receipt_created": false,
+    "control_reconciliation_created": false,
+    "final_preflight_started": false,
+    "credential_values_read_or_recorded": false,
+    "authentication_performed": false,
+    "network_or_payload_request_performed": false,
+    "owner_handoff_claimed": false,
+    "external_data_mutated": false,
+    "m2_orb_001_mutated": false
+  },
+  "next_gate": "correct and publicly validate the recorder-validator schema before another activation attempt"
+}

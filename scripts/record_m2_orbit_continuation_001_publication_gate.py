@@ -30,7 +30,7 @@ FILES = {
     "final_preflight_sha256": ROOT / "scripts/preflight_m2_orbit_continuation_001.py",
     "owner_invoke_script_sha256": ROOT / "scripts/invoke_m2_orbit_continuation_001.ps1",
     "implementation_readiness_recorder_sha256": ROOT / "scripts/record_m2_orbit_continuation_001_implementation_readiness.py",
-    "implementation_readiness_sha256": ROOT / "records/readiness/m2-orbit-continuation-001-implementation-readiness.json",
+    "implementation_readiness_sha256": ROOT / "records/readiness/m2-orbit-continuation-001-implementation-readiness-002.json",
     "focused_tests_sha256": ROOT / "tests/test_m2_orbit_continuation_001.py",
 }
 

@@ -138,6 +138,24 @@ class OrbitContinuation001Tests(unittest.TestCase):
             with self.assertRaisesRegex(OrbitContinuation001Error, "contract_boundary_drift"):
                 require_exact_contract(fixture)
 
+    def test_publication_recorder_schema_is_accepted_by_runtime_validator(self) -> None:
+        gate = {
+            "status": "pass_public_controls_verified_before_orbit_continuation_001",
+            "github_actions": {"conclusion": "success"},
+            "assertions": {
+                "credential_values_read_or_recorded": False,
+                "orbit_payload_request_performed": False,
+            },
+        }
+        core.validate_publication_gate(gate)
+        incompatible = copy.deepcopy(gate)
+        incompatible["assertions"] = {
+            "credential_values_read_or_recorded": False,
+            "payload_request_performed": False,
+        }
+        with self.assertRaisesRegex(OrbitContinuation001Error, "continuation_publication_gate_not_passing"):
+            core.validate_publication_gate(incompatible)
+
     def test_one_second_osv_rule_is_exact_boundary(self) -> None:
         start = datetime(2026, 8, 18, tzinfo=UTC)
         stop = start + timedelta(hours=3)

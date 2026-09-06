@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "records/readiness/m2-orbit-continuation-001-implementation-readiness.json"
+OUTPUT = ROOT / "records/readiness/m2-orbit-continuation-001-implementation-readiness-002.json"
 FILES = {
     "approval_sha256": ROOT / "records/source-gates/m2-orbit-continuation-001-approval.json",
     "review_reconciliation_sha256": ROOT / "records/source-gates/m2-orbit-continuation-001-review-reconciliation.json",
