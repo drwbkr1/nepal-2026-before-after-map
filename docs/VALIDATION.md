@@ -369,3 +369,16 @@ The exact completed owner response was locked in private non-Git review custody 
 The focused controls cover anonymous pipe custody, environment scrubbing, detached worker survival after broker termination on Windows, generic nonsecret failures, PowerShell parser safety, byte-zero headers without Range, distinct exclusive staging, exact source scope, retained failure history, and exactly one later successful verifier binding. No credential was read, no CDSE or orbit endpoint was contacted, no orbit payload was requested, and no external data was mutated. Successful public CI remains required before activation or the final no-payload preflight.
 
 Implementation commit `b61673c26d1a96f5fd01c5adde0e050be374d8ba` passed repository validation in GitHub Actions run `33996953195` but failed the test step because the Linux runner has no `powershell` executable. The failed run, original readiness bytes, and exact cause are retained. The correction applies the existing deployment-platform guard to that parser test; portable static token-custody checks still run on every platform. Local Windows results remain 12 focused and 395 total tests passing. No publication gate, activation, credential access, orbit request, or external mutation occurred after the failure.
+
+## Orbit recovery-002 Windows handoff correction — 2026-09-06
+
+The first owner-side handoff after the corrected implementation passed public CI returned the generic `orbit_recovery_broker_failed` status. Read-only diagnosis reproduced the exact local failure: an LF-framed fixture passed, while the same synthetic nonsecret value framed with PowerShell's CRLF retained `\r` and failed `secret_contains_whitespace`. No detached supervisor, recovery staging root, new attempt ID, catalog request, destination, or payload byte existed. The active intake still contained only the retained original failed attempt. Failure receipt SHA-256 `c8ebff040e6f7f9b03091342c73d5ce09691e03d614134d4788fd872b32c055e` preserves that pre-attempt state without a credential value.
+
+The corrected reader removes exactly one terminal LF or one terminal CRLF sequence, then applies the unchanged UTF-8, size, nonempty, and internal-whitespace validation. Earlier publication, contract, activation, preflight, and control-reconciliation artifacts are retained under superseded names rather than overwritten.
+
+- `python -m unittest tests.test_m2_orbit_recovery_002 -v`: 12 tests pass on Windows, including LF and CRLF single-use pipe fixtures and detached-worker survival.
+- `python -m unittest tests.test_m2_orbit_io -v`: 9 tests pass.
+- `python -m unittest discover -s tests`: 395 tests pass; 2 historical platform or production-state probes are intentionally skipped.
+- Corrected readiness SHA-256: `e640087a49a53d6c11edcc56ac7d0e4d2c842a1453b76b247e7dd53f3525f8d1`.
+
+Public CI is pending. No automatic rerun is permitted. After CI passes, the project must recreate the exact publication gate, control reconciliation, activation, and final no-payload preflight; the owner must then deliberately run a fresh secret-safe handoff.

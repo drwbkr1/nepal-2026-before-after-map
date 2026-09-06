@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-002-TOKEN-HANDOFF-ATTEMPT-001-FAILURE",
+  "recorded_at_utc": "2026-09-06T17:18:05Z",
+  "status": "fail_pre_attempt_windows_crlf_rejected_no_supervisor_no_payload",
+  "reported_public_error": "orbit_recovery_broker_failed",
+  "diagnosis": {
+    "failure_code": "secret_contains_whitespace",
+    "cause": "Windows CRLF retained a carriage return after removing only the final LF byte",
+    "lf_fixture": "pass",
+    "crlf_fixture": "fail_secret_contains_whitespace_before_correction",
+    "local_nonsecret_preconditions": "pass"
+  },
+  "bindings": {
+    "superseded_readiness_ref": "records/acquisition/m2-orbit-recovery-002-implementation-readiness-attempt-002-superseded.json",
+    "superseded_publication_gate_ref": "records/acquisition/m2-orbit-recovery-002-publication-gate-attempt-001-superseded.json",
+    "superseded_contract_ref": "contracts/m2-orbit-recovery-002-handoff-attempt-001-superseded.json",
+    "superseded_activation_ref": "records/acquisition/m2-orbit-recovery-002-activation-attempt-001-superseded.json",
+    "superseded_final_preflight_ref": "records/acquisition/m2-orbit-recovery-002-final-preflight-attempt-001-superseded.json",
+    "superseded_control_reconciliation_ref": "records/readiness/m2-orbit-recovery-002-control-reconciliation-attempt-001-superseded.json",
+    "superseded_readiness_sha256": "d6ba133b6d42864e3c2f5093db97e6bbc5a6c729d5245e8b14a13a69c7df5d70",
+    "superseded_publication_gate_sha256": "359dbed994b8922a08795b188b9e48d97f9d5b3c4b48bae9eedd6178235c2829",
+    "superseded_contract_sha256": "27d590302fa0722bb5b7b3413127ceb5231324be173cd791092d34e136319764",
+    "superseded_activation_sha256": "1d2a9f18d56a6300a392796e2a8d98465b98e55d0944797338213af2f7bcefbc",
+    "superseded_final_preflight_sha256": "82df00177bceb5c6c6ebf5fee174582afd09f639449b93fb485a2234b171a478",
+    "superseded_control_reconciliation_sha256": "c43d43cf4eebb09ac2ff1a08f9c649cf1024cfb94c86f22ac7d496ac81405e76"
+  },
+  "observed_state": {
+    "supervisor_root_exists": false,
+    "recovery_staging_root_exists": false,
+    "recovery_process_running": false,
+    "active_intake_state": "failed",
+    "active_intake_attempt_count": 1,
+    "new_attempt_id_created": false,
+    "destination_exists": false,
+    "payload_bytes_received": 0
+  },
+  "assertions": {
+    "credential_value_recorded": false,
+    "credential_value_recoverable_from_evidence": false,
+    "supervisor_launched": false,
+    "catalog_request_performed": false,
+    "orbit_payload_requested": false,
+    "external_data_mutated": false,
+    "transfer_attempt_started": false,
+    "automatic_retry_performed": false
+  },
+  "authorized_correction": "accept exactly LF or CRLF framing while preserving all secret validation, single-use pipe, scope, and no-storage controls",
+  "next_gate": "fresh local tests, corrected readiness, exact public CI, reactivation, and final no-payload preflight before any owner-selected new handoff"
+}

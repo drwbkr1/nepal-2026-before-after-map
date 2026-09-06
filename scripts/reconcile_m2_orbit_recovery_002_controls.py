@@ -63,26 +63,28 @@ def main() -> int:
     implementation = _unit(milestone, "M2-ORBIT-RECOVERY-002-IMPLEMENTATION")
     recovery = _unit(milestone, "M2-ORBIT-RECOVERY-002")
     acquire = _unit(milestone, "M2-ORBIT-ACQUIRE")
-    if review.get("status") != "ready" or implementation.get("status") != "planned" or recovery.get("status") != "planned":
-        raise SystemExit("orbit recovery-002 milestone is not at the reviewed checkpoint")
-    review.update({
-        "status": "complete",
-        "disposition": "pass",
-        "outputs": [RECONCILIATION_REF, APPROVAL_REF],
-        "next_dependency": "M2-ORBIT-RECOVERY-002-IMPLEMENTATION",
-    })
-    review["gates"].update({
-        "human_decision_count": 1,
-        "attestation": True,
-        "recovery_authorized": True,
-        "approval_sha256": APPROVAL_SHA256,
-        "review_reconciliation_sha256": RECONCILIATION_SHA256,
-    })
-    review["exit_condition_delta"] = {
-        "expected": [], "observed": ["one exact attested approval"],
-        "decision_value": "enables_dependency",
-        "rationale": "The exact approval is locked and reconciled; only the reviewed implementation, public-CI, preflight, and one M2-ORB-001 attempt are released.",
-    }
+    initial_state = (review.get("status"), implementation.get("status"), recovery.get("status"))
+    if initial_state == ("ready", "planned", "planned"):
+        review.update({
+            "status": "complete",
+            "disposition": "pass",
+            "outputs": [RECONCILIATION_REF, APPROVAL_REF],
+            "next_dependency": "M2-ORBIT-RECOVERY-002-IMPLEMENTATION",
+        })
+        review["gates"].update({
+            "human_decision_count": 1,
+            "attestation": True,
+            "recovery_authorized": True,
+            "approval_sha256": APPROVAL_SHA256,
+            "review_reconciliation_sha256": RECONCILIATION_SHA256,
+        })
+        review["exit_condition_delta"] = {
+            "expected": [], "observed": ["one exact attested approval"],
+            "decision_value": "enables_dependency",
+            "rationale": "The exact approval is locked and reconciled; only the reviewed implementation, public-CI, preflight, and one M2-ORB-001 attempt are released.",
+        }
+    elif initial_state != ("complete", "complete", "ready"):
+        raise SystemExit("orbit recovery-002 milestone is not at a supported reviewed or pre-attempt correction checkpoint")
     implementation.update({
         "status": "complete",
         "disposition": "pass",
@@ -118,9 +120,9 @@ def main() -> int:
     acquire["gates"]["orbit_recovery_002_status"] = "ready_final_no_payload_preflight_pending"
     milestone["handoff"]["current_checkpoint"] = CHECKPOINT
     milestone["handoff"]["next_action"] = NEXT_ACTION
-    milestone["handoff"]["do_not_carry_forward"].append(
-        "Orbit recovery-002 authorizes one byte-zero M2-ORB-001 attempt only after final preflight; it authorizes no later orbit source request or retry."
-    )
+    carry_forward = "Orbit recovery-002 authorizes one byte-zero M2-ORB-001 attempt only after final preflight; it authorizes no later orbit source request or retry."
+    if carry_forward not in milestone["handoff"]["do_not_carry_forward"]:
+        milestone["handoff"]["do_not_carry_forward"].append(carry_forward)
     amendment = {
         "approval_ref": APPROVAL_REF,
         "approval_sha256": APPROVAL_SHA256,
@@ -135,8 +137,10 @@ def main() -> int:
         "other_orbit_source_requests_authorized": False,
         "secret_transport": "anonymous_pipe_single_use_memory_only",
     }
-    milestone["authority"]["amendments"].append(copy.deepcopy(amendment))
-    profile["authority"]["amendments"].append(copy.deepcopy(amendment))
+    if not any(item.get("approval_ref") == APPROVAL_REF for item in milestone["authority"]["amendments"]):
+        milestone["authority"]["amendments"].append(copy.deepcopy(amendment))
+    if not any(item.get("approval_ref") == APPROVAL_REF for item in profile["authority"]["amendments"]):
+        profile["authority"]["amendments"].append(copy.deepcopy(amendment))
     profile["current_checkpoint"] = {
         "checkpoint_id": CHECKPOINT,
         "expected_branch": "main",
@@ -145,7 +149,8 @@ def main() -> int:
     }
     goal["current_checkpoint"] = CHECKPOINT
     goal["proposed_amendments"] = []
-    goal["active_amendments"].append(APPROVAL_REF)
+    if APPROVAL_REF not in goal["active_amendments"]:
+        goal["active_amendments"].append(APPROVAL_REF)
     before = {"milestone": sha256_file(MILESTONE), "profile": sha256_file(PROFILE), "goal": sha256_file(GOAL)}
     nonce = "orbit-recovery-002-controls"
     replace_json(MILESTONE, milestone, nonce)

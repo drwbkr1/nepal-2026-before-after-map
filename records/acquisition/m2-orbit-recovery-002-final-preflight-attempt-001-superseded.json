@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-002-FINAL-PREFLIGHT-001",
+  "verified_at_utc": "2026-09-05T22:51:56Z",
+  "status": "pass_no_payload_ready_for_single_secret_pipe_handoff",
+  "bindings": {
+    "approval_sha256": "ee5922426882b5620f2e90e6703d0eb7d5f5ab77ede3ed61acfb8616b2c22d07",
+    "publication_gate_sha256": "359dbed994b8922a08795b188b9e48d97f9d5b3c4b48bae9eedd6178235c2829",
+    "recovery_contract_sha256": "27d590302fa0722bb5b7b3413127ceb5231324be173cd791092d34e136319764",
+    "active_intake_sha256": "40f4b35549760c766afe8762e766d5f9d6cf14e4064258b09331f0f209cd20a3",
+    "radar_source_readiness_sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
+    "public_commit": "5532a4c2e584c529178e09ef21f4830f021fbe3a"
+  },
+  "path_and_storage": {
+    "destination_absent": true,
+    "recovery_staging_root_absent": true,
+    "free_bytes": 525919186944,
+    "minimum_free_bytes": 6395330
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_presence_checked": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_requested": false,
+    "orbit_payload_bytes_received": 0,
+    "external_files_mutated": false,
+    "other_orbit_source_requested": false,
+    "automatic_retry_authorized": false
+  },
+  "next_gate": "run the owner-side token-and-handoff PowerShell once to permit the single detached M2-ORB-001 recovery attempt"
+}

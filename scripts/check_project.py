@@ -139,7 +139,14 @@ REQUIRED = [
     "records/readiness/m2-orbit-recovery-002-approval-activation.json",
     "records/acquisition/m2-orbit-recovery-002-implementation-readiness.json",
     "records/acquisition/m2-orbit-recovery-002-implementation-readiness-attempt-001-superseded.json",
+    "records/acquisition/m2-orbit-recovery-002-implementation-readiness-attempt-002-superseded.json",
     "records/acquisition/m2-orbit-recovery-002-publication-attempt-001-failure.json",
+    "records/acquisition/m2-orbit-recovery-002-publication-gate-attempt-001-superseded.json",
+    "contracts/m2-orbit-recovery-002-handoff-attempt-001-superseded.json",
+    "records/acquisition/m2-orbit-recovery-002-activation-attempt-001-superseded.json",
+    "records/acquisition/m2-orbit-recovery-002-final-preflight-attempt-001-superseded.json",
+    "records/readiness/m2-orbit-recovery-002-control-reconciliation-attempt-001-superseded.json",
+    "records/acquisition/m2-orbit-recovery-002-token-handoff-attempt-001-failure.json",
     "scripts/activate_m2_orbit_recovery_002_approval.py",
     "scripts/m2_orbit_recovery_002_core.py",
     "scripts/m2_orbit_recovery_002_broker.py",
@@ -7981,6 +7988,39 @@ def main() -> None:
         or orbit_recovery_002_publication_evidence.get("assertions", {}).get("external_data_mutated") is not False
     ):
         fail("EVID-0097 corrected orbit recovery review publication evidence differs or overclaims")
+    orbit_recovery_002_handoff_failure_evidence = ledger_by_id.get("EVID-0102")
+    if (
+        not isinstance(orbit_recovery_002_handoff_failure_evidence, dict)
+        or orbit_recovery_002_handoff_failure_evidence.get("status") != "fail_pre_attempt_windows_crlf_rejected_no_supervisor_no_payload"
+        or orbit_recovery_002_handoff_failure_evidence.get("failure_sha256") != sha256("records/acquisition/m2-orbit-recovery-002-token-handoff-attempt-001-failure.json")
+        or orbit_recovery_002_handoff_failure_evidence.get("assertions", {}).get("supervisor_launched") is not False
+        or orbit_recovery_002_handoff_failure_evidence.get("assertions", {}).get("new_attempt_id_created") is not False
+        or orbit_recovery_002_handoff_failure_evidence.get("assertions", {}).get("catalog_request_performed") is not False
+        or orbit_recovery_002_handoff_failure_evidence.get("assertions", {}).get("orbit_payload_requested") is not False
+        or orbit_recovery_002_handoff_failure_evidence.get("assertions", {}).get("payload_bytes_received") != 0
+        or orbit_recovery_002_handoff_failure_evidence.get("assertions", {}).get("credential_value_recorded") is not False
+        or orbit_recovery_002_handoff_failure_evidence.get("assertions", {}).get("external_data_mutated") is not False
+        or orbit_recovery_002_handoff_failure_evidence.get("assertions", {}).get("transfer_attempt_started") is not False
+        or orbit_recovery_002_handoff_failure_evidence.get("assertions", {}).get("automatic_retry_performed") is not False
+    ):
+        fail("EVID-0102 orbit recovery-002 pre-attempt CRLF failure differs or overclaims")
+    orbit_recovery_002_crlf_readiness_evidence = ledger_by_id.get("EVID-0103")
+    if (
+        not isinstance(orbit_recovery_002_crlf_readiness_evidence, dict)
+        or orbit_recovery_002_crlf_readiness_evidence.get("status") != "pass_local_synthetic_ready_public_ci_pending"
+        or orbit_recovery_002_crlf_readiness_evidence.get("readiness_sha256") != sha256("records/acquisition/m2-orbit-recovery-002-implementation-readiness.json")
+        or orbit_recovery_002_crlf_readiness_evidence.get("handoff_failure_sha256") != sha256("records/acquisition/m2-orbit-recovery-002-token-handoff-attempt-001-failure.json")
+        or orbit_recovery_002_crlf_readiness_evidence.get("assertions", {}).get("focused_test_count") != 12
+        or orbit_recovery_002_crlf_readiness_evidence.get("assertions", {}).get("orbit_io_test_count") != 9
+        or orbit_recovery_002_crlf_readiness_evidence.get("assertions", {}).get("full_repository_test_count") != 395
+        or orbit_recovery_002_crlf_readiness_evidence.get("assertions", {}).get("windows_crlf_pipe_framing") != "pass"
+        or orbit_recovery_002_crlf_readiness_evidence.get("assertions", {}).get("public_ci") != "pending"
+        or orbit_recovery_002_crlf_readiness_evidence.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or orbit_recovery_002_crlf_readiness_evidence.get("assertions", {}).get("network_requests_performed") is not False
+        or orbit_recovery_002_crlf_readiness_evidence.get("assertions", {}).get("external_data_mutated") is not False
+        or orbit_recovery_002_crlf_readiness_evidence.get("assertions", {}).get("real_recovery_started") is not False
+    ):
+        fail("EVID-0103 orbit recovery-002 CRLF correction readiness differs or overclaims")
 
     violations = []
     for relative in tracked_files():

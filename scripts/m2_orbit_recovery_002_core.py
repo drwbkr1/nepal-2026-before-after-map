@@ -176,7 +176,7 @@ def read_single_use_secret(stream: BinaryIO) -> str:
         stream.close()
     if not data or not data.endswith(b"\n") or len(data) > MAX_SECRET_BYTES + 1:
         raise OrbitRecovery002Error("secret_pipe_payload_invalid")
-    raw = bytearray(data[:-1])
+    raw = bytearray(data[:-2] if data.endswith(b"\r\n") else data[:-1])
     try:
         secret = raw.decode("utf-8")
         validate_secret(secret)

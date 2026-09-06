@@ -88,6 +88,9 @@ class OrbitRecovery002Tests(unittest.TestCase):
         stream = io.BytesIO(b"fixture-secret\n")
         self.assertEqual(read_single_use_secret(stream), "fixture-secret")
         self.assertTrue(stream.closed)
+        windows_stream = io.BytesIO(b"fixture-secret\r\n")
+        self.assertEqual(read_single_use_secret(windows_stream), "fixture-secret")
+        self.assertTrue(windows_stream.closed)
 
     def test_secret_enters_anonymous_pipe_not_command_or_environment(self) -> None:
         secret = "runtime-fixture-" + uuid.uuid4().hex

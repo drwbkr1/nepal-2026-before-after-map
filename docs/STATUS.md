@@ -6,7 +6,7 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts, both earlier incomplete `M1-SRC-004` partials remain retained, and no orbit payload byte is in custody
 - **Long-term goal:** Active
-- **Checkpoints:** primary orbit recovery-002 implementation publication pending; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`; the old orbit-recovery packet remains stale, unapproved evidence
+- **Checkpoints:** primary orbit recovery-002 Windows CRLF correction publication pending after a preserved pre-attempt handoff failure; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`; the old orbit-recovery packet remains stale, unapproved evidence
 
 ## Purpose
 
@@ -63,6 +63,8 @@ The owner approved recovery proposal SHA-256 `96f0125628e894061fc5da55faff94e92e
 The owner approved radar-first bundle SHA-256 `5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad` and proposal SHA-256 `ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77`. The locked response reconciles to one approval and activates only the control-route split. Optical real-001 remains `INVALID`, recovery-001 remains terminal `BLOCK`, and aggregate `M2-VERIFY` remains deferred. A separate `M2-RADAR-SOURCE-READINESS` unit now binds the six exact Sentinel-1 sources to promoted custody, materialization identity, and passing header readiness without measurement-pixel decoding.
 
 The corrected orbit recovery-002 review is now the primary gate. Bundle SHA-256 `6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5` binds proposal SHA-256 `d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8` with zero decisions. Exact packet commit `45c914695ea3e3b16e309eb0cd1aa13227624599` passed public CI run `33995547794`. The packet concerns only a separately implemented, public-CI-gated, one-attempt byte-zero recovery of exact `M2-ORB-001`. It does not release the other three orbit files, token access, DEM action, radar pixels, baseline, change analysis, attribution, or publication. The ordinary orbit runner stops with `orbit_recovery_002_unit_not_complete` before catalogue access, token lookup, events, or payload requests.
+
+The owner subsequently approved that exact recovery. After implementation commit `5532a4c2e584c529178e09ef21f4830f021fbe3a` passed public CI run `33997069777`, the first owner-side token handoff stopped in the local broker: PowerShell CRLF framing left a carriage return that failed the unchanged internal-whitespace rule before supervisor launch. Failure receipt SHA-256 `c8ebff040e6f7f9b03091342c73d5ce09691e03d614134d4788fd872b32c055e` records no new attempt ID, catalog request, staging root, destination, or payload byte. All previous gate, activation, and preflight artifacts are retained as superseded evidence. The exact CRLF correction passes 12 focused tests, 9 orbit I/O tests, and all 395 repository tests locally. Fresh public CI, reactivation, and a new final no-payload preflight are required before the owner may deliberately repeat the handoff; no automatic retry is authorized.
 
 ## Sentinel execution history
 
