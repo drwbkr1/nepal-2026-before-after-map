@@ -96,8 +96,9 @@ class M2OrbitRecovery003ReviewTests(unittest.TestCase):
         self.assertEqual(units["M2-ORBIT-ACQUIRE"]["depends_on"][-1], "M2-ORBIT-OSV-PRECISION-AMENDMENT-001")
         self.assertEqual(
             units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"]["status"],
-            "ready",
+            "complete",
         )
+        self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["status"], "ready")
         self.assertEqual(self.control["status"], "terminal_failure_preserved_recovery_003_review_ready")
         self.assertFalse(self.control["assertions"]["recovery_003_authorized"])
 

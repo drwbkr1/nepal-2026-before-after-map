@@ -996,7 +996,7 @@
         "fresh_source_preflight": "pass",
         "orbit_custody_initialized": true,
         "token_presence_checked": "synthetic_test_literal_only",
-        "retained_failure_review": "osv_precision_amendment_review_publication_pending_zero_decisions",
+        "retained_failure_review": "osv_precision_amendment_review_ready_zero_decisions",
         "retained_failure_reconciliation_ref": "records/acquisition/orbit-test-boundary-reconciliation-001.json",
         "retained_failure_reconciliation_sha256": "40dae0623dcc142cec17ff2108752e5e60bd736a241fe4b83e8f04c5de690025",
         "retained_failure_review_ref": "reviews/m2-orbit-osv-precision-amendment-001/review-contract.json",
@@ -2072,7 +2072,7 @@
       ],
       "action_class": "external_publication",
       "human_gate": false,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json",
         "reviews/m2-orbit-osv-precision-amendment-001/review-bundle.json",
@@ -2084,20 +2084,25 @@
         "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-gate.json"
       ],
       "gates": {
-        "public_ci": "required",
+        "public_ci": "pass",
         "human_decision_count": 0,
-        "amendment_authorized": false
+        "amendment_authorized": false,
+        "publication_commit": "39a1807f77ed6463f4100b753aa85a3e299220d5",
+        "public_ci_run_id": 34054314929,
+        "publication_gate_sha256": "7f8073ad27f88dfae55df7d6c508af76dd4ca86a2eea2066b4c1f333670cff09"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/acquisition/orbit-attempts/m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
         "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json"
       ],
       "exit_condition_delta": {
         "expected": [],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "The packet is locally ready but has not passed its public default-branch gate."
+        "observed": [
+          "exact blank review packet passed public default-branch CI"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "Public validation passed without creating a human decision or amendment authority."
       },
       "next_dependency": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"
     },
@@ -2109,7 +2114,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "planned",
+      "status": "ready",
       "inputs": [
         "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json",
         "reviews/m2-orbit-osv-precision-amendment-001/review-bundle.json",
@@ -2129,7 +2134,9 @@
         "attestation": false,
         "amendment_authorized": false,
         "maximum_future_network_requests_if_approved": 0,
-        "maximum_future_local_validation_attempts_if_approved": 1
+        "maximum_future_local_validation_attempts_if_approved": 1,
+        "public_ci": "pass",
+        "publication_gate_sha256": "7f8073ad27f88dfae55df7d6c508af76dd4ca86a2eea2066b4c1f333670cff09"
       },
       "disposition": null,
       "retained_failures": [
@@ -2139,8 +2146,8 @@
       "exit_condition_delta": {
         "expected": [],
         "observed": [],
-        "decision_value": "awaiting_publication_gate",
-        "rationale": "The review remains blank and cannot be handed off until its exact packet passes public CI."
+        "decision_value": "unknown",
+        "rationale": "The exact review is public and blank; one attested owner decision is required."
       },
       "next_dependency": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION"
     },
@@ -2261,8 +2268,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION",
-    "next_action": "Publish the exact zero-decision OSV precision amendment packet at proposal SHA-256 0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4 and bundle SHA-256 71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7; require successful public CI before owner review. Do not retry recovery-003, touch credentials, request any orbit file, or promote staged bytes.",
+    "current_checkpoint": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW",
+    "next_action": "Review M2 orbit OSV precision amendment-001 bundle SHA-256 71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7 and proposal SHA-256 0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4; approve, revise, or defer the exact one-second local-only endpoint rule. No token, network request, recovery retry, staged-byte promotion, other orbit source, processing, or scientific action is authorized before an attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",

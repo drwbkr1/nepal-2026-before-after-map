@@ -85,7 +85,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["status"], "deferred")
         self.assertEqual(
             unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"],
-            "osv_precision_amendment_review_publication_pending_zero_decisions",
+            "osv_precision_amendment_review_ready_zero_decisions",
         )
         self.assertEqual(
             unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["superseded_milestone_dependency_m2_verify"],
@@ -98,8 +98,9 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertEqual(unit_by_id["M2-ORBIT-RECOVERY-003"]["disposition"], "block")
         self.assertEqual(
             unit_by_id["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"]["status"],
-            "ready",
+            "complete",
         )
+        self.assertEqual(unit_by_id["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["status"], "ready")
         self.assertTrue(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["orbit_custody_initialized"])
         self.assertEqual(unit_by_id["M2-ORBIT-APPLY"]["gates"]["dem_vertical_datum_gate"], "pending")
         self.assertEqual(

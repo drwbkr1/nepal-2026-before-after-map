@@ -198,8 +198,18 @@ class M2DemActivationTests(unittest.TestCase):
             ),
             None,
         )
+        orbit_osv_precision_review = next(
+            (
+                unit
+                for unit in self.milestone["units"]
+                if unit["id"] == "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"
+            ),
+            None,
+        )
         expected_primary_checkpoint = (
-            "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"
+            "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"
+            if orbit_osv_precision_review is not None and orbit_osv_precision_review.get("status") == "ready"
+            else "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"
             if orbit_osv_precision_publication is not None
             and orbit_osv_precision_publication.get("status") == "ready"
             else "M2-ORBIT-RECOVERY-003-REVIEW"

@@ -86,6 +86,10 @@ ORBIT_OSV_PRECISION_REVIEW_PUBLICATION_CHECKPOINT = {
     "checkpoint_id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION",
     "next_action": "Publish the exact zero-decision OSV precision amendment packet at proposal SHA-256 0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4 and bundle SHA-256 71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7; require successful public CI before owner review. Do not retry recovery-003, touch credentials, request any orbit file, or promote staged bytes.",
 }
+ORBIT_OSV_PRECISION_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW",
+    "next_action": "Review M2 orbit OSV precision amendment-001 bundle SHA-256 71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7 and proposal SHA-256 0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4; approve, revise, or defer the exact one-second local-only endpoint rule. No token, network request, recovery retry, staged-byte promotion, other orbit source, processing, or scientific action is authorized before an attested decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -519,6 +523,46 @@ def current_orbit_osv_precision_review_publication_pending(
     )
 
 
+def current_orbit_osv_precision_review_required(root: Path, state_counts: dict[str, int]) -> bool:
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        gate = load(root / "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-gate.json")
+        reconciliation = load(root / "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-reconciliation.json")
+        proposal = load(root / "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json")
+        bundle = load(root / "reviews/m2-orbit-osv-precision-amendment-001/review-bundle.json")
+        blank = load(root / "reviews/m2-orbit-osv-precision-amendment-001/blank-response.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    publication = units.get("M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION", {})
+    review = units.get("M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW", {})
+    proposal_sha = "0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4"
+    bundle_sha = "71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7"
+    responses = blank.get("responses", [])
+    return bool(
+        publication.get("status") == "complete"
+        and publication.get("disposition") == "pass"
+        and publication.get("gates", {}).get("public_ci") == "pass"
+        and review.get("status") == "ready"
+        and review.get("human_gate") is True
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and review.get("gates", {}).get("amendment_authorized") is False
+        and gate.get("status") == "pass_exact_blank_review_packet_public_ci"
+        and gate.get("github_actions", {}).get("conclusion") == "success"
+        and reconciliation.get("status") == "pass_public_packet_owner_review_ready_zero_decisions"
+        and proposal.get("status") == "proposed_not_authorized"
+        and bundle.get("candidate_identity")
+        == f"M2-ORBIT-OSV-PRECISION-AMENDMENT-001-PROPOSAL-SHA256:{proposal_sha}"
+        and gate.get("bindings", {}).get("review_bundle_sha256") == bundle_sha
+        and blank.get("completed") is False
+        and blank.get("reviewer", {}).get("attestation") is False
+        and len(responses) == 1
+        and responses[0].get("decision") is None
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -563,7 +607,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_orbit_osv_precision_review_publication_pending(ROOT, progress["state_counts"]):
+        if current_orbit_osv_precision_review_required(ROOT, progress["state_counts"]):
+            checkpoint = dict(ORBIT_OSV_PRECISION_REVIEW_CHECKPOINT)
+        elif current_orbit_osv_precision_review_publication_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_OSV_PRECISION_REVIEW_PUBLICATION_CHECKPOINT)
         elif current_orbit_recovery_003_review_required(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_RECOVERY_003_REVIEW_CHECKPOINT)
