@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-APPROVAL",
+  "status": "approved_exact_one_second_endpoint_rule_and_one_local_validation",
+  "approved_at_utc": "2026-09-06T19:41:57Z",
+  "review_id": "m2-orbit-osv-precision-amendment-001-review",
+  "review_bundle_id": "m2-orbit-osv-precision-amendment-001-review-bundle",
+  "review_bundle_manifest_sha256": "71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7",
+  "proposal_ref": "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json",
+  "proposal_sha256": "0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4",
+  "review_contract_ref": "reviews/m2-orbit-osv-precision-amendment-001/review-contract.json",
+  "review_contract_sha256": "aeda5b43507f295fbc471e07c612555ebfc93a491e2ccd5b33a6c84a3d735ec0",
+  "review_reconciliation_ref": "records/source-gates/m2-orbit-osv-precision-amendment-001-review-reconciliation.json",
+  "review_reconciliation_sha256": "1bdbf7a56533b67d9228f1c3545fcd5a65643eacce584a5796e7d80b8d0d1c3c",
+  "locked_response_sha256": "65ad580bfd2e922bceb716593df0c0b3576021701e13e14b704ffc041c694a90",
+  "lock_receipt_sha256": "ceefb4ec8204ad124427ae3c9c29e3931954e99b34711bdbab8e6dc159cd4a34",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "authorized_amendment": {
+    "source_id": "M2-ORB-001",
+    "product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+    "preserved_staged_sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+    "preserved_staged_size_bytes": 639533,
+    "maximum_osv_endpoint_tolerance_seconds": 1.0,
+    "endpoint_rule": "require first_osv_utc <= validity_start_utc + 1 second and last_osv_utc >= validity_stop_utc - 1 second",
+    "maximum_new_owner_handoffs": 0,
+    "maximum_new_catalog_requests": 0,
+    "maximum_new_download_requests": 0,
+    "maximum_local_validation_attempts": 1,
+    "automatic_retry_authorized": false
+  },
+  "authorized_next_actions": [
+    "implement and test only the exact one-second OSV endpoint-consistency amendment",
+    "publish the exact implementation and require successful public CI before touching preserved staged bytes",
+    "perform one final no-network preflight and one read-only validation of the exact preserved M2-ORB-001 staged file",
+    "conditionally promote only those exact bytes without replacement and run the input-only offline verifier once if every amended check passes",
+    "reconcile the single terminal local outcome without requesting another orbit source"
+  ],
+  "does_not_authorize": [
+    "retry, resume, or relaunch recovery-003",
+    "obtain a token or make any CDSE catalogue or payload request",
+    "change the tolerance above 1.0 second or change any other identity, checksum, XML, OSV, scene-margin, or destination rule",
+    "request M2-ORB-002, M2-ORB-003, or M2-ORB-004",
+    "delete, rewrite, hide, or replace the failed recovery-003 evidence or staged file",
+    "substitute AUX_POEORB, apply orbit data, convert DEM data, decode radar pixels, create a baseline, analyze change, attribute cause, or publish a scientific result"
+  ],
+  "human_decisions_fabricated": false
+}

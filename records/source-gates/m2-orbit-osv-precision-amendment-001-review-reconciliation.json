@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-orbit-osv-precision-amendment-001-review",
+  "contract_sha256": "aeda5b43507f295fbc471e07c612555ebfc93a491e2ccd5b33a6c84a3d735ec0",
+  "response_sha256": "65ad580bfd2e922bceb716593df0c0b3576021701e13e14b704ffc041c694a90",
+  "receipt_sha256": "ceefb4ec8204ad124427ae3c9c29e3931954e99b34711bdbab8e6dc159cd4a34",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/source-gates/m2-radar-first-path-001-approval.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

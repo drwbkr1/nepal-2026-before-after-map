@@ -90,6 +90,10 @@ ORBIT_OSV_PRECISION_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW",
     "next_action": "Review M2 orbit OSV precision amendment-001 bundle SHA-256 71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7 and proposal SHA-256 0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4; approve, revise, or defer the exact one-second local-only endpoint rule. No token, network request, recovery retry, staged-byte promotion, other orbit source, processing, or scientific action is authorized before an attested decision.",
 }
+ORBIT_OSV_PRECISION_IMPLEMENTATION_PUBLICATION_CHECKPOINT = {
+    "checkpoint_id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION",
+    "next_action": "Publish the exact approved one-second OSV endpoint implementation and require successful public default-branch CI. Do not read or mutate preserved staged bytes, run the local validation, promote an orbit file, request a token or network resource, or touch another orbit source before that gate passes.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -563,6 +567,48 @@ def current_orbit_osv_precision_review_required(root: Path, state_counts: dict[s
     )
 
 
+def current_orbit_osv_precision_implementation_publication_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        approval = load(root / "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json")
+        reconciliation = load(root / "records/source-gates/m2-orbit-osv-precision-amendment-001-review-reconciliation.json")
+        readiness = load(root / "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-readiness.json")
+        control = load(root / "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-control-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW", {})
+    implementation = units.get("M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION", {})
+    local_action = units.get("M2-ORBIT-OSV-PRECISION-AMENDMENT-001", {})
+    return bool(
+        review.get("status") == "complete"
+        and review.get("disposition") == "pass"
+        and review.get("gates", {}).get("human_decision_count") == 1
+        and review.get("gates", {}).get("attestation") is True
+        and review.get("gates", {}).get("amendment_authorized") is True
+        and implementation.get("status") == "ready"
+        and implementation.get("gates", {}).get("public_ci") == "pending"
+        and implementation.get("gates", {}).get("real_staged_file_read") is False
+        and local_action.get("status") == "planned"
+        and local_action.get("gates", {}).get("local_validation_attempt_count") == 0
+        and approval.get("status") == "approved_exact_one_second_endpoint_rule_and_one_local_validation"
+        and approval.get("authorized_amendment", {}).get("maximum_osv_endpoint_tolerance_seconds") == 1.0
+        and approval.get("authorized_amendment", {}).get("maximum_new_download_requests") == 0
+        and reconciliation.get("decision_counts") == {"approve": 1, "revise": 0, "defer": 0}
+        and reconciliation.get("human_decision_count") == 1
+        and reconciliation.get("human_decisions_fabricated") is False
+        and readiness.get("status") == "pass_local_synthetic_ready_public_ci_pending"
+        and readiness.get("assertions", {}).get("real_staged_file_read") is False
+        and readiness.get("assertions", {}).get("network_requests_performed") is False
+        and control.get("status") == "pass_approved_local_implementation_ready_public_ci_pending"
+        and control.get("assertions", {}).get("staged_file_promoted") is False
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -607,7 +653,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_orbit_osv_precision_review_required(ROOT, progress["state_counts"]):
+        if current_orbit_osv_precision_implementation_publication_pending(ROOT, progress["state_counts"]):
+            checkpoint = dict(ORBIT_OSV_PRECISION_IMPLEMENTATION_PUBLICATION_CHECKPOINT)
+        elif current_orbit_osv_precision_review_required(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_OSV_PRECISION_REVIEW_CHECKPOINT)
         elif current_orbit_osv_precision_review_publication_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_OSV_PRECISION_REVIEW_PUBLICATION_CHECKPOINT)

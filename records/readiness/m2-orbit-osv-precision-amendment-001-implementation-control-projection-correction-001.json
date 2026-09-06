@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-CONTROL-PROJECTION-CORRECTION-001",
+  "corrected_at_utc": "2026-09-06T19:50:43Z",
+  "status": "pass_missing_active_amendment_projections_added_without_scope_change",
+  "bindings": {
+    "initial_reconciliation_sha256": "38fc28d600d0993cf862a8dd24c2b905aa8266eff6048af8130dba4254698b04",
+    "approval_sha256": "4a77a044475b6c940a4b58d4c4dbcf76730c06e63d18927eb717312a97667cf4",
+    "milestone_sha256_before": "88c668d09eef804ae43b69deaccf4adbaca8874757bf11759a90a02e46fdb7fc",
+    "milestone_sha256_after": "75b4a7e08fb4bfd490ed4b3be399eb520ea6ce9fe79dc2f9c7831aeec034c259",
+    "profile_sha256_before": "07dcc403b6b4486b55ee16c532dc0d2b2882f529e33dd2f9284c79ddce163e48",
+    "profile_sha256_after": "be347f6e1fd5e69a1261f2280eb8b1b545f33da5f7fedd5dd91ae94a49c3508f",
+    "goal_sha256_unchanged": "a8db94e398107fa8f53a861cf80d19acc5f7f074732446473553b2ddc23d28bd"
+  },
+  "correction": {
+    "added_milestone_scope_active_amendment": "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+    "added_profile_activated_amendment": "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+    "removed_profile_proposed_amendment": "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json"
+  },
+  "assertions": {
+    "authority_broadened": false,
+    "approval_or_reconciliation_mutated": false,
+    "real_staged_file_read": false,
+    "network_requests_performed": false,
+    "external_data_mutated": false,
+    "local_validation_started": false
+  }
+}

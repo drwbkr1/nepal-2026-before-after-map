@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-APPROVAL-ACTIVATION",
+  "activated_at_utc": "2026-09-06T19:41:57Z",
+  "status": "pass_exact_approval_activated_implementation_and_publication_only",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+    "approval_sha256": "4a77a044475b6c940a4b58d4c4dbcf76730c06e63d18927eb717312a97667cf4",
+    "proposal_ref": "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json",
+    "proposal_sha256": "0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4",
+    "review_bundle_ref": "reviews/m2-orbit-osv-precision-amendment-001/review-bundle.json",
+    "review_bundle_sha256": "71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7",
+    "review_contract_ref": "reviews/m2-orbit-osv-precision-amendment-001/review-contract.json",
+    "review_contract_sha256": "aeda5b43507f295fbc471e07c612555ebfc93a491e2ccd5b33a6c84a3d735ec0",
+    "review_reconciliation_ref": "records/source-gates/m2-orbit-osv-precision-amendment-001-review-reconciliation.json",
+    "review_reconciliation_sha256": "1bdbf7a56533b67d9228f1c3545fcd5a65643eacce584a5796e7d80b8d0d1c3c"
+  },
+  "released_now": {
+    "one_second_endpoint_implementation": true,
+    "synthetic_tests": true,
+    "public_ci": true,
+    "final_no_network_preflight_before_public_ci": false,
+    "local_validation_before_public_ci_and_preflight": false,
+    "staged_file_promotion_before_public_ci_and_preflight": false,
+    "network_or_token_action": false,
+    "other_orbit_source_request": false,
+    "orbit_application": false,
+    "dem_or_radar_pixel_action": false,
+    "baseline_or_change_analysis": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_values_read_or_recorded": false,
+    "preserved_staged_file_read": false,
+    "external_data_mutated": false,
+    "orbit_payload_requested": false,
+    "local_validation_started": false,
+    "scientific_publication_released": false
+  },
+  "next_gate": "implement and test the exact one-second rule, then require successful public CI before the no-network preflight or preserved-byte validation"
+}

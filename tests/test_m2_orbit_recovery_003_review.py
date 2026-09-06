@@ -85,7 +85,7 @@ class M2OrbitRecovery003ReviewTests(unittest.TestCase):
         self.assertEqual(self.readiness["review"]["human_decision_count"], 0)
         self.assertFalse(self.readiness["assertions"]["recovery_003_authorized"])
 
-    def test_active_graph_stops_at_recovery_003_owner_review(self) -> None:
+    def test_active_graph_preserves_recovery_003_and_advances_osv_implementation(self) -> None:
         units = {unit["id"]: unit for unit in self.milestone["units"]}
         self.assertEqual(units["M2-ORBIT-RECOVERY-002"]["status"], "complete")
         self.assertEqual(units["M2-ORBIT-RECOVERY-002"]["disposition"], "block")
@@ -98,7 +98,8 @@ class M2OrbitRecovery003ReviewTests(unittest.TestCase):
             units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"]["status"],
             "complete",
         )
-        self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["status"], "ready")
+        self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["status"], "complete")
+        self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION"]["status"], "ready")
         self.assertEqual(self.control["status"], "terminal_failure_preserved_recovery_003_review_ready")
         self.assertFalse(self.control["assertions"]["recovery_003_authorized"])
 

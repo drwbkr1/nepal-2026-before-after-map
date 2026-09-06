@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-OSV-PRECISION-AMENDMENT-001",
+  "status": "active_exact_m2_orb_001_local_validation_pending_public_ci",
+  "created_at_utc": "2026-09-06T19:42:55Z",
+  "authority": {
+    "mode": "inherited_exact_osv_precision_amendment_approval",
+    "authority_ref": "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+    "authority_sha256": "4a77a044475b6c940a4b58d4c4dbcf76730c06e63d18927eb717312a97667cf4",
+    "maximum_endpoint_tolerance_seconds": 1.0,
+    "maximum_local_validation_attempts": 1,
+    "maximum_network_requests": 0,
+    "conditional_no_replace_promotion_authorized": true,
+    "orbit_application_authorized_by_this_contract": false,
+    "radar_pixel_processing_authorized_by_this_contract": false,
+    "this_contract_creates_authority": false
+  },
+  "bindings": {
+    "base_offline_verification_ref": "contracts/m2-orbit-offline-verification.json",
+    "base_offline_verification_sha256": "bac1154aebf34858fd82d9f42934a5a2d7bfd21a25917df1355f0f9f68682303",
+    "proposal_ref": "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json",
+    "proposal_sha256": "0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4",
+    "approval_ref": "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+    "approval_sha256": "4a77a044475b6c940a4b58d4c4dbcf76730c06e63d18927eb717312a97667cf4",
+    "terminal_recovery_outcome_ref": "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json",
+    "terminal_recovery_outcome_sha256": "f67b7307dfe82cb6f02a13003389f482c7c2a96342fab138f737a31c2ec2d503"
+  },
+  "asset_requirements": [
+    {
+      "source_id": "M2-ORB-001",
+      "provider_product_id": "d4fdc474-0069-459b-9534-b5999dec5aab",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002"
+      ],
+      "scene_start_utc": "2026-08-16T12:21:16Z",
+      "scene_end_utc": "2026-08-16T12:22:06Z",
+      "expected_size_bytes": 639533,
+      "expected_provider_checksums": [
+        {
+          "algorithm": "BLAKE3",
+          "value": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b",
+          "checksum_date": "2026-08-16T14:34:32.604858Z"
+        },
+        {
+          "algorithm": "MD5",
+          "value": "ca7f36b1892073c883c4cff5c0517b9c",
+          "checksum_date": "2026-08-16T14:34:32.563327Z"
+        }
+      ],
+      "expected_validity_start_utc": "2026-08-16T10:35:26.000000Z",
+      "expected_validity_end_utc": "2026-08-16T14:09:56.000000Z",
+      "minimum_required_scene_margin_seconds": 6350,
+      "maximum_osv_endpoint_tolerance_seconds": 1.0
+    }
+  ],
+  "endpoint_rule": {
+    "maximum_tolerance_seconds": 1.0,
+    "predicate": "first_osv_utc <= validity_start_utc + 1 second and last_osv_utc >= validity_stop_utc - 1 second",
+    "interpretation": "local inference from representational precision; not a quoted provider tolerance",
+    "all_other_checks_unchanged": true
+  },
+  "verification_sequence": [
+    "recompute exact byte length, local SHA-256, provider MD5, and provider BLAKE3",
+    "parse safe XML without DTD or entity declarations",
+    "verify exact identity, S1D mission, AUX_RESORB type, and header validity values",
+    "verify positive declared OSV count, strictly increasing unique times, finite vectors, and exact units",
+    "apply only the one-second endpoint-consistency predicate",
+    "verify exact scene binding and minimum 6,350-second scene margin",
+    "conditionally promote exact bytes atomically without replacement and retain the failed-attempt evidence"
+  ],
+  "single_real_action": {
+    "maximum_local_validation_attempts": 1,
+    "maximum_network_requests": 0,
+    "automatic_retry_authorized": false,
+    "source_id": "M2-ORB-001",
+    "preserved_staged_sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+    "preserved_staged_size_bytes": 639533
+  },
+  "claim_boundary": {
+    "passing_establishes": "exact M2-ORB-001 input identity and structural fitness under the approved local endpoint rule",
+    "does_not_establish": [
+      "precise-orbit equivalence",
+      "orbit application",
+      "geolocation or registration accuracy",
+      "vertical-datum or radar-pixel fitness",
+      "baseline quality, event change, interpretation, attribution, or scientific publication"
+    ]
+  }
+}

@@ -85,7 +85,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["status"], "deferred")
         self.assertEqual(
             unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"],
-            "osv_precision_amendment_review_ready_zero_decisions",
+            "approved_exact_one_second_implementation_public_ci_pending",
         )
         self.assertEqual(
             unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["superseded_milestone_dependency_m2_verify"],
@@ -100,12 +100,12 @@ class M2OrbitActivationTests(unittest.TestCase):
             unit_by_id["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"]["status"],
             "complete",
         )
-        self.assertEqual(unit_by_id["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["status"], "ready")
+        self.assertEqual(unit_by_id["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["status"], "complete")
         self.assertTrue(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["orbit_custody_initialized"])
         self.assertEqual(unit_by_id["M2-ORBIT-APPLY"]["gates"]["dem_vertical_datum_gate"], "pending")
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            ["contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json"],
+            [],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -120,6 +120,7 @@ class M2OrbitActivationTests(unittest.TestCase):
                 "records/source-gates/m2-radar-first-path-001-approval.json",
                 "records/source-gates/m2-orbit-recovery-002-approval.json",
                 "records/source-gates/m2-orbit-recovery-003-approval.json",
+                "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
             ],
         )
         checkpoints = [item["checkpoint_id"] for item in self.profile["parallel_checkpoints"]]

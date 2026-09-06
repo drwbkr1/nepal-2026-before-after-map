@@ -31,18 +31,18 @@ class OrbitOsvPrecisionAmendmentPublicationTests(unittest.TestCase):
         self.assertTrue(gate["assertions"]["failed_prior_run_preserved"])
         self.assertFalse(gate["assertions"]["amendment_authorized"])
 
-    def test_publication_reconciliation_stops_at_blank_owner_review(self) -> None:
+    def test_publication_reconciliation_history_remains_bound_after_approval(self) -> None:
         milestone = load("contracts/milestone-002.json")
         profile = load("records/project-control-profile.json")
         goal = load("records/long-term-goal.json")
         reconciliation = load("records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-reconciliation.json")
         units = {unit["id"]: unit for unit in milestone["units"]}
         self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"]["status"], "complete")
-        self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["status"], "ready")
-        self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["gates"]["human_decision_count"], 0)
-        self.assertFalse(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["gates"]["amendment_authorized"])
-        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW")
-        self.assertEqual(goal["current_checkpoint"], "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW")
+        self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["status"], "complete")
+        self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["gates"]["human_decision_count"], 1)
+        self.assertTrue(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["gates"]["amendment_authorized"])
+        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION")
+        self.assertEqual(goal["current_checkpoint"], "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION")
         self.assertEqual(reconciliation["status"], "pass_public_packet_owner_review_ready_zero_decisions")
         self.assertFalse(reconciliation["assertions"]["staged_file_promoted"])
 

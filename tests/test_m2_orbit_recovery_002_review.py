@@ -84,12 +84,12 @@ class M2OrbitRecovery002ReviewTests(unittest.TestCase):
             units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"]["status"],
             "complete",
         )
-        self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["status"], "ready")
+        self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["status"], "complete")
         self.assertEqual(units["M2-ORBIT-ACQUIRE"]["status"], "deferred")
         self.assertIn("M2-ORBIT-OSV-PRECISION-AMENDMENT-001", units["M2-ORBIT-ACQUIRE"]["depends_on"])
         self.assertEqual(
             units["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"],
-            "osv_precision_amendment_review_ready_zero_decisions",
+            "approved_exact_one_second_implementation_public_ci_pending",
         )
 
     def test_publication_gate_binds_exact_green_commit_without_authority(self) -> None:

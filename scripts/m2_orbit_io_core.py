@@ -8,7 +8,7 @@ import math
 import os
 import re
 import xml.etree.ElementTree as ET
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any, BinaryIO
 
@@ -129,6 +129,26 @@ def parse_utc(value: str) -> datetime:
     return parsed.astimezone(UTC)
 
 
+def osv_endpoints_within_tolerance(
+    validity_start: datetime,
+    validity_stop: datetime,
+    first_osv: datetime,
+    last_osv: datetime,
+    *,
+    tolerance_seconds: float,
+) -> bool:
+    """Return whether OSV endpoints cover validity within the approved maximum."""
+
+    try:
+        tolerance_value = float(tolerance_seconds)
+    except (TypeError, ValueError) as exc:
+        raise OrbitControlError("osv_endpoint_tolerance_invalid") from exc
+    if not math.isfinite(tolerance_value) or tolerance_value < 0.0 or tolerance_value > 1.0:
+        raise OrbitControlError("osv_endpoint_tolerance_invalid")
+    tolerance = timedelta(seconds=tolerance_value)
+    return first_osv <= validity_start + tolerance and last_osv >= validity_stop - tolerance
+
+
 def local_name(tag: str) -> str:
     return tag.rsplit("}", 1)[-1]
 
@@ -229,7 +249,14 @@ def inspect_eof(
             parse_finite(matches[0], expected_unit="m/s")
     if any(current <= previous for previous, current in zip(osv_times, osv_times[1:])):
         raise OrbitControlError("osv_time_order_or_uniqueness_failure")
-    if osv_times[0] > validity_start or osv_times[-1] < validity_stop:
+    endpoint_tolerance_seconds = float(requirement.get("maximum_osv_endpoint_tolerance_seconds", 0.0))
+    if not osv_endpoints_within_tolerance(
+        validity_start,
+        validity_stop,
+        osv_times[0],
+        osv_times[-1],
+        tolerance_seconds=endpoint_tolerance_seconds,
+    ):
         raise OrbitControlError("osv_times_do_not_span_validity")
 
     scene_start = parse_utc(requirement["scene_start_utc"])
@@ -266,6 +293,9 @@ def inspect_eof(
             "osv_observed_count": len(osv_elements),
             "first_osv_utc": osv_times[0].isoformat().replace("+00:00", "Z"),
             "last_osv_utc": osv_times[-1].isoformat().replace("+00:00", "Z"),
+            "endpoint_tolerance_seconds": endpoint_tolerance_seconds,
+            "first_endpoint_lag_seconds": max(0.0, (osv_times[0] - validity_start).total_seconds()),
+            "last_endpoint_shortfall_seconds": max(0.0, (validity_stop - osv_times[-1]).total_seconds()),
             "ordered_unique_finite_osvs": True,
             "position_unit": "m",
             "velocity_unit": "m/s",

@@ -21,6 +21,7 @@ from derive_m2_acquisition_checkpoint import (
     current_optical_pixel_recovery_implementation_pending,
     current_optical_pixel_recovery_review_required,
     current_optical_pixel_recovery_terminal,
+    current_orbit_osv_precision_implementation_publication_pending,
     current_orbit_osv_precision_review_publication_pending,
     current_orbit_osv_precision_review_required,
     current_orbit_recovery_002_review_required,
@@ -31,6 +32,7 @@ from derive_m2_acquisition_checkpoint import (
 from record_m2_sentinel_continuation_001_implementation_readiness import IMPLEMENTATION_FILES as CONTINUATION_001_IMPLEMENTATION_FILES
 from record_m2_sentinel_recovery_002_implementation_readiness import IMPLEMENTATION_FILES as RECOVERY_002_IMPLEMENTATION_FILES
 from record_m2_orbit_recovery_002_implementation_readiness import IMPLEMENTATION_FILES as ORBIT_RECOVERY_002_IMPLEMENTATION_FILES
+from record_m2_orbit_osv_precision_amendment_001_implementation_readiness import FILES as ORBIT_OSV_PRECISION_IMPLEMENTATION_FILES
 from validate_m2_acquisition_progress import (
     INITIAL_ACTIVE_INTAKE_SHA256,
     validate_progress as validate_acquisition_progress,
@@ -224,6 +226,26 @@ REQUIRED = [
     "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-gate.json",
     "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-reconciliation.json",
     "tests/test_m2_orbit_osv_precision_amendment_001_publication.py",
+    "records/readiness/m2-orbit-osv-precision-amendment-001-review-lock-attempt-001-failure.json",
+    "records/source-gates/m2-orbit-osv-precision-amendment-001-review-reconciliation.json",
+    "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+    "records/readiness/m2-orbit-osv-precision-amendment-001-approval-activation.json",
+    "scripts/activate_m2_orbit_osv_precision_amendment_001_approval.py",
+    "contracts/m2-orbit-offline-verification-osv-precision-amendment-001.json",
+    "scripts/build_m2_orbit_osv_precision_amendment_001_contract.py",
+    "scripts/m2_orbit_osv_precision_amendment_001_core.py",
+    "scripts/preflight_m2_orbit_osv_precision_amendment_001.py",
+    "scripts/apply_m2_orbit_osv_precision_amendment_001.py",
+    "scripts/record_m2_orbit_osv_precision_amendment_001_implementation_readiness.py",
+    "scripts/record_m2_orbit_osv_precision_amendment_001_publication_gate.py",
+    "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-readiness.json",
+    "scripts/reconcile_m2_orbit_osv_precision_amendment_001_implementation.py",
+    "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-control-reconciliation.json",
+    "scripts/correct_m2_orbit_osv_precision_amendment_001_control_projection.py",
+    "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-control-projection-correction-001.json",
+    "scripts/correct_m2_orbit_osv_precision_amendment_001_acquire_status.py",
+    "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-control-projection-correction-002.json",
+    "tests/test_m2_orbit_osv_precision_amendment_001.py",
     "scripts/activate_m2_orbit_recovery_002_approval.py",
     "scripts/m2_orbit_recovery_002_core.py",
     "scripts/m2_orbit_recovery_002_broker.py",
@@ -1114,6 +1136,14 @@ def main() -> None:
     orbit_osv_precision_publication_correction = json.loads((ROOT / "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-portability-correction-001.json").read_text(encoding="utf-8"))
     orbit_osv_precision_publication_gate = json.loads((ROOT / "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-gate.json").read_text(encoding="utf-8"))
     orbit_osv_precision_publication_reconciliation = json.loads((ROOT / "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-reconciliation.json").read_text(encoding="utf-8"))
+    orbit_osv_precision_review_reconciliation = json.loads((ROOT / "records/source-gates/m2-orbit-osv-precision-amendment-001-review-reconciliation.json").read_text(encoding="utf-8"))
+    orbit_osv_precision_approval = json.loads((ROOT / "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json").read_text(encoding="utf-8"))
+    orbit_osv_precision_approval_activation = json.loads((ROOT / "records/readiness/m2-orbit-osv-precision-amendment-001-approval-activation.json").read_text(encoding="utf-8"))
+    orbit_osv_precision_amended_contract = json.loads((ROOT / "contracts/m2-orbit-offline-verification-osv-precision-amendment-001.json").read_text(encoding="utf-8"))
+    orbit_osv_precision_implementation_readiness = json.loads((ROOT / "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-readiness.json").read_text(encoding="utf-8"))
+    orbit_osv_precision_implementation_control = json.loads((ROOT / "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-control-reconciliation.json").read_text(encoding="utf-8"))
+    orbit_osv_precision_projection_correction = json.loads((ROOT / "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-control-projection-correction-001.json").read_text(encoding="utf-8"))
+    orbit_osv_precision_acquire_status_correction = json.loads((ROOT / "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-control-projection-correction-002.json").read_text(encoding="utf-8"))
 
     recovery_003_implementation_files = {
         "approval_sha256": "records/source-gates/m2-orbit-recovery-003-approval.json",
@@ -1179,10 +1209,8 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json"
-    ]:
-        fail("project profile must expose only the pending orbit OSV precision proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must clear the approved orbit OSV precision proposal")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -1194,8 +1222,9 @@ def main() -> None:
         "records/source-gates/m2-radar-first-path-001-approval.json",
         "records/source-gates/m2-orbit-recovery-002-approval.json",
         "records/source-gates/m2-orbit-recovery-003-approval.json",
+        "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
     ]:
-        fail("project profile must expose the ten exact active amendments")
+        fail("project profile must expose the eleven exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -1345,6 +1374,21 @@ def main() -> None:
         "other_orbit_source_requests_authorized": False,
         "secret_transport": "anonymous_pipe_single_use_memory_only",
     }
+    expected_orbit_osv_precision_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json"),
+        "proposal_ref": "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json",
+        "proposal_sha256": "0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4",
+        "review_bundle_sha256": "71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7",
+        "review_reconciliation_ref": "records/source-gates/m2-orbit-osv-precision-amendment-001-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-orbit-osv-precision-amendment-001-review-reconciliation.json"),
+        "source_id": "M2-ORB-001",
+        "maximum_endpoint_tolerance_seconds": 1.0,
+        "maximum_network_requests": 0,
+        "maximum_local_validation_attempts": 1,
+        "automatic_retry_authorized": False,
+        "other_orbit_source_requests_authorized": False,
+    }
     expected_amendments = [
         expected_dem_amendment_binding,
         expected_orbit_amendment_binding,
@@ -1356,6 +1400,7 @@ def main() -> None:
         expected_radar_first_path_amendment_binding,
         expected_orbit_recovery_002_amendment_binding,
         expected_orbit_recovery_003_amendment_binding,
+        expected_orbit_osv_precision_amendment_binding,
     ]
     if profile["authority"].get("amendments") != expected_amendments:
         fail("profile authority does not bind the exact active amendments")
@@ -1372,8 +1417,9 @@ def main() -> None:
         "records/source-gates/m2-radar-first-path-001-approval.json",
         "records/source-gates/m2-orbit-recovery-002-approval.json",
         "records/source-gates/m2-orbit-recovery-003-approval.json",
+        "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
     ]:
-        fail("active M2 scope does not expose the ten exact amendment approvals")
+        fail("active M2 scope does not expose the eleven exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -1411,10 +1457,8 @@ def main() -> None:
         or "bounded nested-grid correction" not in optical_pixel_recovery_review_gate.get("reason", "")
     ):
         fail("project profile must bind optical pixel recovery to its exact approval")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json"
-    ]:
-        fail("project profile must expose the exact pending orbit OSV precision proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must clear the approved orbit OSV precision proposal")
     radar_first_path_gate = profile_gates.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
     if (
         radar_first_path_gate.get("authority_ref") != "reviews/m2-radar-first-path-001/review-contract.json"
@@ -1427,8 +1471,8 @@ def main() -> None:
         fail("completed orbit recovery-002 review must not remain an actionable human gate")
     if "M2-ORBIT-RECOVERY-003-REVIEW" in profile_gates:
         fail("completed orbit recovery-003 review must not remain an actionable human gate")
-    if profile_gates.get("M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW", {}).get("authority_ref") != "reviews/m2-orbit-osv-precision-amendment-001/review-contract.json":
-        fail("project profile must expose the orbit OSV precision amendment human-review gate")
+    if profile_gates.get("M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW", {}).get("authority_ref") != "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json":
+        fail("project profile must bind the orbit OSV precision amendment to its exact approval")
     for approved_unit in ("M2-ORBIT-AMEND", "M2-ORBIT-PREFLIGHT", "M2-ORBIT-ACQUIRE", "M2-ORBIT-VERIFY", "M2-ORBIT-APPLY"):
         if profile_gates.get(approved_unit, {}).get("authority_ref") != "records/source-gates/m2-orbit-amendment-approval.json":
             fail(f"project profile must bind {approved_unit} to the exact orbit amendment approval")
@@ -1458,10 +1502,11 @@ def main() -> None:
         "records/source-gates/m2-radar-first-path-001-approval.json",
         "records/source-gates/m2-orbit-recovery-002-approval.json",
         "records/source-gates/m2-orbit-recovery-003-approval.json",
+        "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW"]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
-    if goal.get("proposed_amendments") != ["contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json"]:
-        fail("long-term goal must expose the pending orbit OSV precision proposal")
+    if goal.get("proposed_amendments") != []:
+        fail("long-term goal must clear the approved orbit OSV precision proposal")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -4903,13 +4948,18 @@ def main() -> None:
     orbit_osv_precision_review_ready = bool(
         current_orbit_osv_precision_review_required(ROOT, state_counts)
     )
+    orbit_osv_precision_implementation_publication_pending = bool(
+        current_orbit_osv_precision_implementation_publication_pending(ROOT, state_counts)
+    )
     optical_pixel_recovery_history_present = bool(
         optical_pixel_recovery_review_ready
         or optical_pixel_recovery_implementation_pending
         or optical_pixel_recovery_execution_pending
         or optical_pixel_recovery_terminal
     )
-    if orbit_osv_precision_review_ready:
+    if orbit_osv_precision_implementation_publication_pending:
+        expected_checkpoint = "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION"
+    elif orbit_osv_precision_review_ready:
         expected_checkpoint = "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"
     elif orbit_osv_precision_review_publication_pending:
         expected_checkpoint = "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION"
@@ -4962,6 +5012,7 @@ def main() -> None:
     expected_orbit_recovery_003_review_next_action = "Review M2 orbit recovery-003 bundle SHA-256 bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d and proposal SHA-256 5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3; approve, revise, or defer the evidence-first one-file recovery. No retry, credential, catalog, payload, DEM, radar-pixel, baseline, change, attribution, or scientific-publication action is authorized before an attested decision."
     expected_orbit_osv_precision_publication_next_action = "Publish the exact zero-decision OSV precision amendment packet at proposal SHA-256 0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4 and bundle SHA-256 71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7; require successful public CI before owner review. Do not retry recovery-003, touch credentials, request any orbit file, or promote staged bytes."
     expected_orbit_osv_precision_review_next_action = "Review M2 orbit OSV precision amendment-001 bundle SHA-256 71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7 and proposal SHA-256 0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4; approve, revise, or defer the exact one-second local-only endpoint rule. No token, network request, recovery retry, staged-byte promotion, other orbit source, processing, or scientific action is authorized before an attested decision."
+    expected_orbit_osv_precision_implementation_publication_next_action = "Publish the exact approved one-second OSV endpoint implementation and require successful public default-branch CI. Do not read or mutate preserved staged bytes, run the local validation, promote an orbit file, request a token or network resource, or touch another orbit source before that gate passes."
     acquire_unit = m2_units.get("M2-ACQUIRE", {})
     if materialization_pixel_review_ready or materialization_pixel_review_approved:
         proposal_sha = "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c"
@@ -5313,12 +5364,14 @@ def main() -> None:
                     or recovery_execution_unit.get("gates", {}).get("reconciliation_sha256") != sha256("records/readiness/m2-optical-pixel-recovery-001-reconciliation.json")
                 ):
                     fail("terminal optical pixel recovery result or reconciliation differs")
-        if orbit_osv_precision_review_ready or orbit_osv_precision_review_publication_pending:
+        if orbit_osv_precision_implementation_publication_pending or orbit_osv_precision_review_ready or orbit_osv_precision_review_publication_pending:
             expected_materialized_source_count = 8
             expected_materialization_state = "route_split_optical_terminal_block_radar_source_header_ready_aggregate_deferred"
             expected_verify_next_dependency = None
             expected_primary_next_action = (
-                expected_orbit_osv_precision_review_next_action
+                expected_orbit_osv_precision_implementation_publication_next_action
+                if orbit_osv_precision_implementation_publication_pending
+                else expected_orbit_osv_precision_review_next_action
                 if orbit_osv_precision_review_ready
                 else expected_orbit_osv_precision_publication_next_action
             )
@@ -5434,7 +5487,7 @@ def main() -> None:
                 or orbit_osv_precision_publication_correction.get("validation", {}).get("public_ci") != "pending"
                 or orbit_osv_precision_publication_correction.get("assertions", {}).get("amendment_authorized") is not False
                 or (
-                    orbit_osv_precision_review_ready
+                    (orbit_osv_precision_review_ready or orbit_osv_precision_implementation_publication_pending)
                     and (
                         orbit_osv_precision_publication_gate.get("status") != "pass_exact_blank_review_packet_public_ci"
                         or orbit_osv_precision_publication_gate.get("github_actions", {}).get("run_id") != 34054314929
@@ -5459,6 +5512,54 @@ def main() -> None:
                 )
             ):
                 fail("M2 orbit OSV precision review packet differs or contains authority")
+            if orbit_osv_precision_implementation_publication_pending and (
+                orbit_osv_precision_review_reconciliation.get("status") != "reconciled_exact_human_response"
+                or orbit_osv_precision_review_reconciliation.get("contract_sha256") != "aeda5b43507f295fbc471e07c612555ebfc93a491e2ccd5b33a6c84a3d735ec0"
+                or orbit_osv_precision_review_reconciliation.get("response_sha256") != "65ad580bfd2e922bceb716593df0c0b3576021701e13e14b704ffc041c694a90"
+                or orbit_osv_precision_review_reconciliation.get("receipt_sha256") != "ceefb4ec8204ad124427ae3c9c29e3931954e99b34711bdbab8e6dc159cd4a34"
+                or orbit_osv_precision_review_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+                or orbit_osv_precision_review_reconciliation.get("human_decisions_fabricated") is not False
+                or orbit_osv_precision_approval.get("status") != "approved_exact_one_second_endpoint_rule_and_one_local_validation"
+                or orbit_osv_precision_approval.get("proposal_sha256") != proposal_sha
+                or orbit_osv_precision_approval.get("review_bundle_manifest_sha256") != bundle_sha
+                or orbit_osv_precision_approval.get("authorized_amendment", {}).get("maximum_osv_endpoint_tolerance_seconds") != 1.0
+                or orbit_osv_precision_approval.get("authorized_amendment", {}).get("maximum_new_download_requests") != 0
+                or orbit_osv_precision_approval.get("authorized_amendment", {}).get("maximum_local_validation_attempts") != 1
+                or orbit_osv_precision_approval_activation.get("status") != "pass_exact_approval_activated_implementation_and_publication_only"
+                or orbit_osv_precision_approval_activation.get("bindings", {}).get("approval_sha256") != sha256("records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json")
+                or orbit_osv_precision_approval_activation.get("assertions", {}).get("preserved_staged_file_read") is not False
+                or orbit_osv_precision_amended_contract.get("contract_id") != "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-OSV-PRECISION-AMENDMENT-001"
+                or orbit_osv_precision_amended_contract.get("authority", {}).get("maximum_endpoint_tolerance_seconds") != 1.0
+                or orbit_osv_precision_amended_contract.get("authority", {}).get("maximum_network_requests") != 0
+                or len(orbit_osv_precision_amended_contract.get("asset_requirements", [])) != 1
+                or orbit_osv_precision_amended_contract.get("asset_requirements", [{}])[0].get("source_id") != "M2-ORB-001"
+                or orbit_osv_precision_amended_contract.get("asset_requirements", [{}])[0].get("maximum_osv_endpoint_tolerance_seconds") != 1.0
+                or orbit_osv_precision_implementation_readiness.get("status") != "pass_local_synthetic_ready_public_ci_pending"
+                or orbit_osv_precision_implementation_readiness.get("bindings") != {key: sha256(path) for key, path in ORBIT_OSV_PRECISION_IMPLEMENTATION_FILES.items()}
+                or orbit_osv_precision_implementation_readiness.get("tests", {}).get("focused_test_count") != 9
+                or orbit_osv_precision_implementation_readiness.get("tests", {}).get("full_repository_test_count") != 433
+                or orbit_osv_precision_implementation_readiness.get("assertions", {}).get("real_staged_file_read") is not False
+                or orbit_osv_precision_implementation_readiness.get("assertions", {}).get("network_requests_performed") is not False
+                or orbit_osv_precision_implementation_control.get("status") != "pass_approved_local_implementation_ready_public_ci_pending"
+                or orbit_osv_precision_implementation_control.get("assertions", {}).get("maximum_endpoint_tolerance_seconds") != 1.0
+                or orbit_osv_precision_implementation_control.get("assertions", {}).get("staged_file_promoted") is not False
+                or orbit_osv_precision_projection_correction.get("status") != "pass_missing_active_amendment_projections_added_without_scope_change"
+                or orbit_osv_precision_projection_correction.get("assertions", {}).get("authority_broadened") is not False
+                or orbit_osv_precision_projection_correction.get("assertions", {}).get("real_staged_file_read") is not False
+                or orbit_osv_precision_acquire_status_correction.get("status") != "pass_omitted_orbit_acquire_amendment_status_corrected"
+                or orbit_osv_precision_acquire_status_correction.get("bindings", {}).get("prior_correction_sha256") != sha256("records/readiness/m2-orbit-osv-precision-amendment-001-implementation-control-projection-correction-001.json")
+                or orbit_osv_precision_acquire_status_correction.get("assertions", {}).get("authority_broadened") is not False
+                or orbit_osv_precision_acquire_status_correction.get("assertions", {}).get("real_staged_file_read") is not False
+            ):
+                fail("approved M2 orbit OSV precision implementation evidence differs or overclaims")
+            expected_precision_publication_status = "complete" if (orbit_osv_precision_review_ready or orbit_osv_precision_implementation_publication_pending) else "ready"
+            expected_precision_publication_disposition = "pass" if (orbit_osv_precision_review_ready or orbit_osv_precision_implementation_publication_pending) else None
+            expected_precision_publication_ci = "pass" if (orbit_osv_precision_review_ready or orbit_osv_precision_implementation_publication_pending) else "required"
+            expected_precision_review_status = "complete" if orbit_osv_precision_implementation_publication_pending else "ready" if orbit_osv_precision_review_ready else "planned"
+            expected_precision_decision_count = 1 if orbit_osv_precision_implementation_publication_pending else 0
+            expected_precision_attestation = True if orbit_osv_precision_implementation_publication_pending else False
+            expected_precision_authorized = True if orbit_osv_precision_implementation_publication_pending else False
+            expected_precision_implementation_status = "ready" if orbit_osv_precision_implementation_publication_pending else "planned"
             if (
                 recovery_003_unit.get("status") != "complete"
                 or recovery_003_unit.get("disposition") != "block"
@@ -5466,16 +5567,17 @@ def main() -> None:
                 or recovery_003_unit.get("gates", {}).get("owner_handoff_count") != 1
                 or recovery_003_unit.get("gates", {}).get("download_request_count") != 1
                 or recovery_003_unit.get("gates", {}).get("preserved_staged_bytes") != 639533
-                or precision_publication_unit.get("status") != ("complete" if orbit_osv_precision_review_ready else "ready")
-                or precision_publication_unit.get("disposition") != ("pass" if orbit_osv_precision_review_ready else None)
+                or precision_publication_unit.get("status") != expected_precision_publication_status
+                or precision_publication_unit.get("disposition") != expected_precision_publication_disposition
                 or precision_publication_unit.get("human_gate") is not False
-                or precision_publication_unit.get("gates", {}).get("public_ci") != ("pass" if orbit_osv_precision_review_ready else "required")
+                or precision_publication_unit.get("gates", {}).get("public_ci") != expected_precision_publication_ci
                 or precision_publication_unit.get("gates", {}).get("human_decision_count") != 0
-                or precision_review_unit.get("status") != ("ready" if orbit_osv_precision_review_ready else "planned")
+                or precision_review_unit.get("status") != expected_precision_review_status
                 or precision_review_unit.get("human_gate") is not True
-                or precision_review_unit.get("gates", {}).get("human_decision_count") != 0
-                or precision_review_unit.get("gates", {}).get("amendment_authorized") is not False
-                or precision_implementation_unit.get("status") != "planned"
+                or precision_review_unit.get("gates", {}).get("human_decision_count") != expected_precision_decision_count
+                or precision_review_unit.get("gates", {}).get("attestation") is not expected_precision_attestation
+                or precision_review_unit.get("gates", {}).get("amendment_authorized") is not expected_precision_authorized
+                or precision_implementation_unit.get("status") != expected_precision_implementation_status
                 or precision_local_unit.get("status") != "planned"
                 or precision_local_unit.get("gates", {}).get("maximum_network_requests") != 0
                 or precision_local_unit.get("gates", {}).get("maximum_local_validation_attempts") != 1
@@ -5483,9 +5585,16 @@ def main() -> None:
                 or orbit_acquire_unit.get("status") != "deferred"
                 or orbit_acquire_unit.get("depends_on") != ["M2-ORBIT-PREFLIGHT", "M2-RADAR-SOURCE-READINESS", "M2-ORBIT-OSV-PRECISION-AMENDMENT-001"]
                 or orbit_acquire_unit.get("gates", {}).get("retained_failure_review") != (
-                    "osv_precision_amendment_review_ready_zero_decisions"
+                    "approved_exact_one_second_implementation_public_ci_pending"
+                    if orbit_osv_precision_implementation_publication_pending
+                    else "osv_precision_amendment_review_ready_zero_decisions"
                     if orbit_osv_precision_review_ready
                     else "osv_precision_amendment_review_publication_pending_zero_decisions"
+                )
+                or orbit_acquire_unit.get("gates", {}).get("osv_precision_amendment_status") != (
+                    "approved_exact_one_second_implementation_public_ci_pending"
+                    if orbit_osv_precision_implementation_publication_pending
+                    else "proposed_not_authorized_publication_pending"
                 )
             ):
                 fail("M2 orbit OSV precision publication route graph differs")
@@ -5812,12 +5921,14 @@ def main() -> None:
         implementation_unit = m2_units.get("M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION", {})
         implementation_gates = implementation_unit.get("gates", {})
         verify_unit = m2_units.get("M2-VERIFY", {})
-        if orbit_osv_precision_review_ready or orbit_osv_precision_review_publication_pending:
+        if orbit_osv_precision_implementation_publication_pending or orbit_osv_precision_review_ready or orbit_osv_precision_review_publication_pending:
             expected_materialized_source_count = 8
             expected_materialization_state = "route_split_optical_terminal_block_radar_source_header_ready_aggregate_deferred"
             expected_verify_next_dependency = None
             expected_primary_next_action = (
-                expected_orbit_osv_precision_review_next_action
+                expected_orbit_osv_precision_implementation_publication_next_action
+                if orbit_osv_precision_implementation_publication_pending
+                else expected_orbit_osv_precision_review_next_action
                 if orbit_osv_precision_review_ready
                 else expected_orbit_osv_precision_publication_next_action
             )

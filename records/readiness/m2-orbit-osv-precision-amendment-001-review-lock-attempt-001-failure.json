@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-LOCK-ATTEMPT-001-FAILURE",
+  "recorded_at_utc": "2026-09-06T19:37:53Z",
+  "status": "blocked_candidate_filename_hash_mismatch_no_lock",
+  "review_id": "m2-orbit-osv-precision-amendment-001-review",
+  "candidate_sha256": "65ad580bfd2e922bceb716593df0c0b3576021701e13e14b704ffc041c694a90",
+  "failure": {
+    "code": "response_filename_does_not_match_exact_byte_hash",
+    "message": "The first lock invocation used a generic private candidate filename. The review utility rejected it before locking or reading decision and note values."
+  },
+  "assertions": {
+    "response_bytes_changed": false,
+    "response_locked": false,
+    "decision_values_read_by_lock": false,
+    "note_values_read_by_lock": false,
+    "human_decision_fabricated": false,
+    "downstream_authority_created": false
+  },
+  "corrective_action": "Rename the exact candidate bytes to the required hash-bound filename and invoke the preauthorized lock again."
+}
