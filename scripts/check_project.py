@@ -214,6 +214,8 @@ REQUIRED = [
     "reviews/m2-orbit-osv-precision-amendment-001/blank-response.json",
     "records/readiness/m2-orbit-osv-precision-amendment-001-review-readiness.json",
     "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-local-readiness.json",
+    "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-attempt-001-failure.json",
+    "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-portability-correction-001.json",
     "scripts/prepare_m2_orbit_osv_precision_amendment_001_review.py",
     "tests/test_m2_orbit_osv_precision_amendment_001_review.py",
     "scripts/activate_m2_orbit_recovery_002_approval.py",
@@ -1102,6 +1104,8 @@ def main() -> None:
     orbit_osv_precision_blank = json.loads((ROOT / "reviews/m2-orbit-osv-precision-amendment-001/blank-response.json").read_text(encoding="utf-8"))
     orbit_osv_precision_readiness = json.loads((ROOT / "records/readiness/m2-orbit-osv-precision-amendment-001-review-readiness.json").read_text(encoding="utf-8"))
     orbit_osv_precision_publication_local_readiness = json.loads((ROOT / "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-local-readiness.json").read_text(encoding="utf-8"))
+    orbit_osv_precision_publication_failure = json.loads((ROOT / "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-attempt-001-failure.json").read_text(encoding="utf-8"))
+    orbit_osv_precision_publication_correction = json.loads((ROOT / "records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-portability-correction-001.json").read_text(encoding="utf-8"))
 
     recovery_003_implementation_files = {
         "approval_sha256": "records/source-gates/m2-orbit-recovery-003-approval.json",
@@ -5393,6 +5397,24 @@ def main() -> None:
                 or orbit_osv_precision_publication_local_readiness.get("assertions", {}).get("human_decision_count") != 0
                 or orbit_osv_precision_publication_local_readiness.get("assertions", {}).get("amendment_authorized") is not False
                 or orbit_osv_precision_publication_local_readiness.get("assertions", {}).get("public_ci") != "pending"
+                or orbit_osv_precision_publication_failure.get("status") != "failed_public_ci_missing_optional_render_dependency"
+                or orbit_osv_precision_publication_failure.get("publication", {}).get("commit") != "fcafa846cd555a7fdbe9af5d4463be438fc4e798"
+                or orbit_osv_precision_publication_failure.get("publication", {}).get("github_actions_run_id") != 34054152812
+                or orbit_osv_precision_publication_failure.get("publication", {}).get("conclusion") != "failure"
+                or orbit_osv_precision_publication_failure.get("observed_failure", {}).get("missing_module") != "PIL"
+                or orbit_osv_precision_publication_failure.get("assertions", {}).get("review_packet_identity_changed") is not False
+                or orbit_osv_precision_publication_failure.get("assertions", {}).get("amendment_authorized") is not False
+                or orbit_osv_precision_publication_correction.get("status") != "pass_portable_review_test_without_render_dependency_public_ci_pending"
+                or orbit_osv_precision_publication_correction.get("bindings", {}).get("failed_publication_attempt_sha256") != sha256("records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-attempt-001-failure.json")
+                or orbit_osv_precision_publication_correction.get("bindings", {}).get("portable_review_test_sha256") != sha256("tests/test_m2_orbit_osv_precision_amendment_001_review.py")
+                or orbit_osv_precision_publication_correction.get("bindings", {}).get("proposal_sha256") != proposal_sha
+                or orbit_osv_precision_publication_correction.get("bindings", {}).get("review_bundle_sha256") != bundle_sha
+                or orbit_osv_precision_publication_correction.get("correction", {}).get("scope") != "test_import_boundary_only"
+                or orbit_osv_precision_publication_correction.get("correction", {}).get("production_review_artifacts_changed") is not False
+                or orbit_osv_precision_publication_correction.get("validation", {}).get("full_repository_test_count") != 421
+                or orbit_osv_precision_publication_correction.get("validation", {}).get("project_checker_required_file_count") != 700
+                or orbit_osv_precision_publication_correction.get("validation", {}).get("public_ci") != "pending"
+                or orbit_osv_precision_publication_correction.get("assertions", {}).get("amendment_authorized") is not False
             ):
                 fail("M2 orbit OSV precision review packet differs or contains authority")
             if (
@@ -8658,6 +8680,27 @@ def main() -> None:
         or orbit_osv_precision_publication_readiness_evidence.get("assertions", {}).get("scientific_result_established") is not False
     ):
         fail("EVID-0113 orbit OSV precision publication readiness differs or overclaims")
+    orbit_osv_precision_publication_failure_evidence = ledger_by_id.get("EVID-0114")
+    if (
+        not isinstance(orbit_osv_precision_publication_failure_evidence, dict)
+        or orbit_osv_precision_publication_failure_evidence.get("status") != "failed_public_ci_preserved_portable_test_correction_ready"
+        or orbit_osv_precision_publication_failure_evidence.get("failure_sha256") != sha256("records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-attempt-001-failure.json")
+        or orbit_osv_precision_publication_failure_evidence.get("correction_sha256") != sha256("records/readiness/m2-orbit-osv-precision-amendment-001-review-publication-portability-correction-001.json")
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("failed_run_id") != 34054152812
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("failed_commit") != "fcafa846cd555a7fdbe9af5d4463be438fc4e798"
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("repository_validation_passed") is not True
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("test_failure_module") != "PIL"
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("production_review_artifacts_changed") is not False
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("full_repository_test_count") != 421
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("amendment_authorized") is not False
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("network_requests_performed") is not False
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("payload_mutated") is not False
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("staged_file_promoted") is not False
+        or orbit_osv_precision_publication_failure_evidence.get("assertions", {}).get("scientific_result_established") is not False
+    ):
+        fail("EVID-0114 orbit OSV precision failed publication or correction evidence differs")
 
     violations = []
     for relative in tracked_files():

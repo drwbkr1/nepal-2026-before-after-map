@@ -1,20 +1,30 @@
 from __future__ import annotations
 
 import json
-import sys
+import hashlib
 import unittest
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
+SOURCE_REF = "records/source-gates/m2-orbit-osv-time-format-evidence.json"
+PROPOSAL_REF = "contracts/milestone-002-orbit-osv-precision-amendment-001-proposal.json"
+BUNDLE_REF = "reviews/m2-orbit-osv-precision-amendment-001/review-bundle.json"
+CONTRACT_REF = "reviews/m2-orbit-osv-precision-amendment-001/review-contract.json"
+BLANK_REF = "reviews/m2-orbit-osv-precision-amendment-001/blank-response.json"
+READINESS_REF = "records/readiness/m2-orbit-osv-precision-amendment-001-review-readiness.json"
+STAGED_SHA256 = "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4"
+PROVIDER_MD5 = "ca7f36b1892073c883c4cff5c0517b9c"
+PROVIDER_BLAKE3 = "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b"
 
-import prepare_m2_orbit_osv_precision_amendment_001_review as review  # noqa: E402
+
+def sha256(ref: str) -> str:
+    return hashlib.sha256((ROOT / ref).read_bytes()).hexdigest()
 
 
 class OrbitOsvPrecisionAmendmentReviewTests(unittest.TestCase):
     def test_exact_tolerance_and_zero_network_boundary(self) -> None:
-        proposal = json.loads((ROOT / review.PROPOSAL_REF).read_text(encoding="utf-8"))
+        proposal = json.loads((ROOT / PROPOSAL_REF).read_text(encoding="utf-8"))
         amendment = proposal["proposed_amendment"]
         self.assertEqual(amendment["maximum_osv_endpoint_tolerance_seconds"], 1.0)
         self.assertEqual(amendment["maximum_new_owner_handoffs"], 0)
@@ -27,22 +37,22 @@ class OrbitOsvPrecisionAmendmentReviewTests(unittest.TestCase):
             self.assertIn(source_id, prohibited)
 
     def test_source_record_separates_observation_inference_and_attribution(self) -> None:
-        source = json.loads((ROOT / review.SOURCE_REF).read_text(encoding="utf-8"))
+        source = json.loads((ROOT / SOURCE_REF).read_text(encoding="utf-8"))
         local = source["local_observation"]
         self.assertEqual(local["validity_stop_shortfall_seconds"], 0.031829)
-        self.assertEqual(local["sha256"], review.STAGED_SHA256)
-        self.assertEqual(local["provider_md5"], review.PROVIDER_MD5)
-        self.assertEqual(local["provider_blake3"], review.PROVIDER_BLAKE3)
+        self.assertEqual(local["sha256"], STAGED_SHA256)
+        self.assertEqual(local["provider_md5"], PROVIDER_MD5)
+        self.assertEqual(local["provider_blake3"], PROVIDER_BLAKE3)
         self.assertEqual(set(source["interpretation"]), {"observation", "inference", "attribution"})
         self.assertIn("does not explicitly define", source["limitations"][0])
 
     def test_review_is_blank_and_hash_bound(self) -> None:
-        bundle = json.loads((ROOT / review.BUNDLE_REF).read_text(encoding="utf-8"))
-        contract = json.loads((ROOT / review.CONTRACT_REF).read_text(encoding="utf-8"))
-        blank = json.loads((ROOT / review.BLANK_REF).read_text(encoding="utf-8"))
-        readiness = json.loads((ROOT / review.READINESS_REF).read_text(encoding="utf-8"))
-        self.assertEqual(contract["review_bundle"]["manifest_sha256"], review.sha256(review.BUNDLE_REF))
-        self.assertEqual(contract["items"], [{"item_id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001", "evidence_sha256": review.sha256(review.BUNDLE_REF)}])
+        bundle = json.loads((ROOT / BUNDLE_REF).read_text(encoding="utf-8"))
+        contract = json.loads((ROOT / CONTRACT_REF).read_text(encoding="utf-8"))
+        blank = json.loads((ROOT / BLANK_REF).read_text(encoding="utf-8"))
+        readiness = json.loads((ROOT / READINESS_REF).read_text(encoding="utf-8"))
+        self.assertEqual(contract["review_bundle"]["manifest_sha256"], sha256(BUNDLE_REF))
+        self.assertEqual(contract["items"], [{"item_id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001", "evidence_sha256": sha256(BUNDLE_REF)}])
         self.assertFalse(blank["completed"])
         self.assertFalse(blank["reviewer"]["attestation"])
         self.assertIsNone(blank["responses"][0]["decision"])

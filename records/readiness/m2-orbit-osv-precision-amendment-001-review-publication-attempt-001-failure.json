@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION-ATTEMPT-001-FAILURE",
+  "recorded_at_utc": "2026-09-06T19:13:54Z",
+  "status": "failed_public_ci_missing_optional_render_dependency",
+  "publication": {
+    "commit": "fcafa846cd555a7fdbe9af5d4463be438fc4e798",
+    "github_actions_run_id": 34054152812,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/34054152812",
+    "workflow": "Validate project controls",
+    "conclusion": "failure",
+    "failed_step": "Test project controls"
+  },
+  "observed_failure": {
+    "test_module": "test_m2_orbit_osv_precision_amendment_001_review",
+    "exception": "ModuleNotFoundError",
+    "missing_module": "PIL",
+    "cause": "The portable review test imported the local rendering script, whose Pillow dependency is intentionally absent from the pinned portable CI environment."
+  },
+  "assertions": {
+    "repository_validation_passed_before_test_failure": true,
+    "review_packet_identity_changed": false,
+    "human_decision_count": 0,
+    "amendment_authorized": false,
+    "credential_values_read_or_recorded": false,
+    "network_requests_performed_by_correction": false,
+    "payload_mutated": false,
+    "staged_file_promoted": false,
+    "scientific_result_established": false
+  },
+  "disposition": "preserved_failed_publication_attempt_correction_required"
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW-PUBLICATION-PORTABILITY-CORRECTION-001",
+  "verified_at_utc": "2026-09-06T19:13:54Z",
+  "status": "pass_portable_review_test_without_render_dependency_public_ci_pending",
+  "bindings": {
+    "failed_publication_attempt_sha256": "21b7c81688ba230e2191977e3f5fd99b9ea0f001da0d907f6511e994a83a633f",
+    "original_local_readiness_sha256": "1f25703bde0c3f17ea438b6af2a095c228d5e56c6ecd0eb34eb0a58471eeac87",
+    "portable_review_test_sha256": "b26484082f5c9c84e6f657e3bbd4fa5270923d608a68ff0c5272eb15204df092",
+    "proposal_sha256": "0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4",
+    "review_bundle_sha256": "71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7"
+  },
+  "correction": {
+    "scope": "test_import_boundary_only",
+    "before": "portable test imported prepare_m2_orbit_osv_precision_amendment_001_review.py and therefore required PIL at import time",
+    "after": "portable test defines immutable review references and a local SHA-256 helper without importing the optional Pillow rendering script",
+    "production_review_artifacts_changed": false,
+    "rendering_script_changed": false,
+    "review_bundle_changed": false
+  },
+  "validation": {
+    "focused_test_count": 5,
+    "full_repository_test_count": 421,
+    "intentional_skip_count": 3,
+    "project_checker_required_file_count": 700,
+    "public_ci": "pending"
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "amendment_authorized": false,
+    "credential_values_read_or_recorded": false,
+    "network_requests_performed": false,
+    "payload_mutated": false,
+    "staged_file_promoted": false,
+    "scientific_result_established": false
+  },
+  "next_gate": "commit and push the portable test correction, then require a fresh successful public default-branch CI run before owner review"
+}
