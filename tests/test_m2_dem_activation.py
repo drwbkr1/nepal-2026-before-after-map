@@ -216,7 +216,10 @@ class M2DemActivationTests(unittest.TestCase):
             None,
         )
         expected_primary_checkpoint = (
-            "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION"
+            "M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION"
+            if orbit_osv_precision_implementation is not None
+            and orbit_osv_precision_implementation.get("status") == "complete"
+            else "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION"
             if orbit_osv_precision_implementation is not None
             and orbit_osv_precision_implementation.get("status") == "ready"
             else "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"

@@ -151,11 +151,11 @@ class RadarFirstPathReview001Tests(unittest.TestCase):
         self.assertEqual(units["M2-ORBIT-RECOVERY-003"]["disposition"], "block")
         self.assertEqual(
             self.profile["current_checkpoint"]["checkpoint_id"],
-            "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION",
+            "M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION",
         )
         self.assertEqual(
             self.goal["current_checkpoint"],
-            "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION",
+            "M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION",
         )
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],

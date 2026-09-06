@@ -78,7 +78,7 @@ class M2OrbitPreflightTests(unittest.TestCase):
             sha256_path(ROOT / "scripts/initialize_m2_orbit_custody.py"),
         )
 
-    def test_initialized_external_custody_contains_no_orbit_payloads(self) -> None:
+    def test_initialization_receipt_remains_and_current_custody_contains_only_approved_orbit(self) -> None:
         self.assertEqual(self.custody["status"], "created_and_verified_empty")
         self.assertEqual(self.custody["verification"]["preserved_partial_directory_count"], 7)
         self.assertEqual(self.custody["verification"]["created_directory_count_attempt_002"], 10)
@@ -89,7 +89,16 @@ class M2OrbitPreflightTests(unittest.TestCase):
             self.assertEqual(sha256_path(external_receipt), sha256_path(ROOT / "records/acquisition/orbit-custody-initialization.json"))
             custody_root = Path(self.custody["paths"]["custody_root"])
             staging_root = Path(self.custody["paths"]["staging_root"])
-            self.assertEqual([path for path in custody_root.rglob("*") if path.is_file()], [])
+            custody_files = [path for path in custody_root.rglob("*") if path.is_file()]
+            self.assertEqual(len(custody_files), 1)
+            self.assertEqual(
+                custody_files[0].name,
+                "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+            )
+            self.assertEqual(
+                sha256_path(custody_files[0]),
+                "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+            )
             staging_files = [path for path in staging_root.rglob("*") if path.is_file()]
             unexpected = [
                 path
@@ -97,10 +106,10 @@ class M2OrbitPreflightTests(unittest.TestCase):
                 if "attempt-events" not in path.relative_to(staging_root).parts or path.suffix.casefold() != ".json"
             ]
             self.assertEqual(unexpected, [])
-        self.assertEqual(self.intake["extensions"]["status"], "active_acquisition_review_required")
+        self.assertEqual(self.intake["extensions"]["status"], "active_remaining_orbit_sources_review_required")
         self.assertEqual(
             self.intake["extensions"]["sentinel_custody_prerequisite_status"],
-            "partial_three_of_six_promoted_and_verified_one_failed_two_unattempted",
+            "all_six_promoted_and_container_verified",
         )
 
     def test_evidence_ledger_contains_preflight_failure_correction_and_success(self) -> None:

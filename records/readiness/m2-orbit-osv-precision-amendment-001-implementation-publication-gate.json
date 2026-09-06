@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION-GATE-001",
+  "verified_at_utc": "2026-09-06T20:05:12Z",
+  "status": "pass_public_one_second_implementation_before_local_validation",
+  "bindings": {
+    "proposal_sha256": "0eb9e60f3cd26365cc447eb007e28186470a778928730b055b633c5e88d344e4",
+    "review_bundle_sha256": "71b3eea557cbd027fecec299b8661ce555a8fa993bccd8ffaea8f525d79d01a7",
+    "review_reconciliation_sha256": "1bdbf7a56533b67d9228f1c3545fcd5a65643eacce584a5796e7d80b8d0d1c3c",
+    "approval_sha256": "4a77a044475b6c940a4b58d4c4dbcf76730c06e63d18927eb717312a97667cf4",
+    "approval_activation_sha256": "9343eb03785438ca60e541ce5d547b66fbab0e1bb80d3b74a91eb0c7c433c3a7",
+    "lock_failure_sha256": "080c070f16eebbe576ad17581990cbc8b6cbfe2eae1c0dae74825f3ff0990495",
+    "amended_contract_sha256": "ee578c8cc7c4e27c28f6e8ea4d65b664ce1a22a33db57e06c10c9cccafbb928e",
+    "contract_builder_sha256": "493516bfcfeb2496a21d2a1948ba68223e0e234d8bbd02893f9f8fb16d065e38",
+    "orbit_io_core_sha256": "f769bfcb527e253d44d7493898094296a7e90bb290bd6cb78890702592485abe",
+    "amendment_core_sha256": "4a6eb75255e962dbd8081d2334f1253fa3981624440ad27ce67f99ce6bc97d4f",
+    "final_preflight_sha256": "a1a9b3af5c0f0fbc6f8d424b889b16c2ad22f75b402c8f7857a6d4c5d29c8e65",
+    "local_action_sha256": "2f7951029f287566228101e44aca1802ab394014e3c64cdc1777ab4b71942f2b",
+    "publication_gate_recorder_sha256": "611dc057ab925a2f992875397b4f4754dde7248ffa4b603f1fd3a9fff4f168d1",
+    "focused_tests_sha256": "ad5325331440bee3512a9317f871cd88902de99c6e4f325cc8234fe761b30c01",
+    "implementation_readiness_sha256": "c8e01e91cfb30485308e68f00d8eab53de0ca17de95d37002afbafe6591b324d",
+    "implementation_readiness_recorder_sha256": "c7a190da27039a539f690b9e411eac572e3e4bfb7a7c9c311db8dab1d8d57879"
+  },
+  "github_actions": {
+    "workflow": "Validate project controls",
+    "run_id": 34056822125,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/34056822125",
+    "head_sha": "55397416ac902fac7ec46382cdc3904b53566478",
+    "conclusion": "success"
+  },
+  "assertions": {
+    "public_ci_passed": true,
+    "real_staged_file_read": false,
+    "network_requests_performed_by_this_record": false,
+    "credential_values_read_or_recorded": false,
+    "local_validation_started": false,
+    "staged_file_promoted": false,
+    "other_orbit_source_requested": false,
+    "scientific_result_established": false
+  },
+  "next_gate": "run the final no-network preflight against the exact preserved staged bytes and absent destination"
+}

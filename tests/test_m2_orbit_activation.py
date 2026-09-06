@@ -58,19 +58,20 @@ class M2OrbitActivationTests(unittest.TestCase):
         )
         self.assertFalse(self.approval["credential_policy"]["value_recorded"])
 
-    def test_active_controls_preserve_current_failure_and_prerequisite_blocks(self) -> None:
+    def test_active_controls_preserve_failures_and_record_one_input_only_promotion(self) -> None:
         self.assertEqual(
             self.intake["extensions"]["status"],
-            "active_acquisition_review_required",
+            "active_remaining_orbit_sources_review_required",
         )
         self.assertEqual(self.intake["extensions"]["amendment_approval_sha256"], sha256("records/source-gates/m2-orbit-amendment-approval.json"))
         self.assertEqual(
             {state: sum(asset["state"] == state for asset in self.intake["assets"]) for state in ("authorized", "failed", "promoted")},
-            {"authorized": 3, "failed": 1, "promoted": 0},
+            {"authorized": 3, "failed": 0, "promoted": 1},
         )
-        failed = next(asset for asset in self.intake["assets"] if asset["state"] == "failed")
-        self.assertEqual(failed["extensions"]["source_id"], "M2-ORB-001")
-        self.assertFalse(failed["attempts"][0]["extensions"]["credential_value_recorded"])
+        promoted = next(asset for asset in self.intake["assets"] if asset["state"] == "promoted")
+        self.assertEqual(promoted["extensions"]["source_id"], "M2-ORB-001")
+        self.assertEqual([item["outcome"] for item in promoted["attempts"]], ["failed", "failed", "promoted"])
+        self.assertFalse(promoted["attempts"][0]["extensions"]["credential_value_recorded"])
         self.assertTrue(
             all(asset["extensions"]["sentinel_custody_prerequisite"] == "not_satisfied_at_activation" for asset in self.intake["assets"])
         )
@@ -85,7 +86,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["status"], "deferred")
         self.assertEqual(
             unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"],
-            "approved_exact_one_second_implementation_public_ci_pending",
+            "m2_orb_001_promoted_remaining_sources_review_required",
         )
         self.assertEqual(
             unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["superseded_milestone_dependency_m2_verify"],

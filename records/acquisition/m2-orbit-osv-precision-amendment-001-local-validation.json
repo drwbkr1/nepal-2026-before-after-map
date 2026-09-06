@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-LOCAL-VALIDATION-001",
+  "executed_at_utc": "2026-09-06T20:05:23Z",
+  "status": "pass_exact_m2_orb_001_input_promoted_no_replace",
+  "source_id": "M2-ORB-001",
+  "attempt_id": "m2-orb-001-osv-precision-amendment-001-local-001",
+  "bindings": {
+    "final_preflight_sha256": "6060a52bc293ce4005bf0bc1a73df806a77fd51338784eb4e66b3b5151a9abbc",
+    "publication_gate_sha256": "c5b8bedd2f656acc8f464a880fae11dd0d936bf2c12ac3891275bb27c36ba3ea",
+    "amended_contract_sha256": "ee578c8cc7c4e27c28f6e8ea4d65b664ce1a22a33db57e06c10c9cccafbb928e",
+    "external_receipt_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-osv-precision-amendment-001\\m2-orb-001-osv-precision-amendment-001-local-001.json",
+    "external_receipt_sha256": "2cb5ce849565cffdf14ea211071f347a3c17f431a9f341bd09938f1d6c9df934"
+  },
+  "result": {
+    "source_identity_before": {
+      "size_bytes": 639533,
+      "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+      "md5": "ca7f36b1892073c883c4cff5c0517b9c",
+      "blake3": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b"
+    },
+    "source_identity_after": {
+      "size_bytes": 639533,
+      "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+      "md5": "ca7f36b1892073c883c4cff5c0517b9c",
+      "blake3": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b"
+    },
+    "destination_identity": {
+      "size_bytes": 639533,
+      "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+      "md5": "ca7f36b1892073c883c4cff5c0517b9c",
+      "blake3": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b"
+    },
+    "inspection": {
+      "status": "pass_orbit_input_only",
+      "observed": {
+        "size_bytes": 639533,
+        "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+        "md5": "ca7f36b1892073c883c4cff5c0517b9c",
+        "blake3": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b"
+      },
+      "xml": {
+        "root": "Earth_Explorer_File",
+        "header_file_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956",
+        "mission": "Sentinel-1D",
+        "file_type": "AUX_RESORB",
+        "validity_start_utc": "2026-08-16T10:35:26Z",
+        "validity_end_utc": "2026-08-16T14:09:56Z",
+        "osv_declared_count": 1288,
+        "osv_observed_count": 1288,
+        "first_osv_utc": "2026-08-16T10:35:25.968171Z",
+        "last_osv_utc": "2026-08-16T14:09:55.968171Z",
+        "endpoint_tolerance_seconds": 1.0,
+        "first_endpoint_lag_seconds": 0.0,
+        "last_endpoint_shortfall_seconds": 0.031829,
+        "ordered_unique_finite_osvs": true,
+        "position_unit": "m",
+        "velocity_unit": "m/s"
+      },
+      "scene_binding": {
+        "sentinel_source_ids": [
+          "M1-SRC-001",
+          "M1-SRC-002"
+        ],
+        "scene_start_utc": "2026-08-16T12:21:16Z",
+        "scene_end_utc": "2026-08-16T12:22:06Z",
+        "margin_before_seconds": 6350,
+        "margin_after_seconds": 6470,
+        "minimum_margin_seconds": 6350,
+        "minimum_required_margin_seconds": 6350
+      }
+    },
+    "staging_preserved": true,
+    "temporary_path_removed": true,
+    "destination_created_without_replace": true
+  },
+  "assertions": {
+    "local_validation_attempt_count": 1,
+    "automatic_retry_performed": false,
+    "network_requests_performed": false,
+    "credential_values_read_or_recorded": false,
+    "preserved_staging_file_mutated": false,
+    "destination_created_without_replace": true,
+    "other_orbit_source_requested": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixels_processed": false,
+    "baseline_or_change_analysis_performed": false,
+    "scientific_result_established": false
+  },
+  "next_gate": "reconcile the single local result into active intake and milestone controls without requesting another orbit source"
+}

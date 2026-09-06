@@ -1012,7 +1012,7 @@
         "fresh_source_preflight": "pass",
         "orbit_custody_initialized": true,
         "token_presence_checked": "synthetic_test_literal_only",
-        "retained_failure_review": "approved_exact_one_second_implementation_public_ci_pending",
+        "retained_failure_review": "m2_orb_001_promoted_remaining_sources_review_required",
         "retained_failure_reconciliation_ref": "records/acquisition/orbit-test-boundary-reconciliation-001.json",
         "retained_failure_reconciliation_sha256": "40dae0623dcc142cec17ff2108752e5e60bd736a241fe4b83e8f04c5de690025",
         "retained_failure_review_ref": "reviews/m2-orbit-osv-precision-amendment-001/review-contract.json",
@@ -1024,7 +1024,16 @@
         "superseded_milestone_dependency_m2_verify": "preserved_in_stale_unapproved_orbit_packet_only",
         "orbit_recovery_002_status": "terminal_block_consumed_no_transfer_attempt",
         "orbit_recovery_003_status": "terminal_block_consumed_one_request_no_promotion",
-        "osv_precision_amendment_status": "approved_exact_one_second_implementation_public_ci_pending"
+        "osv_precision_amendment_status": "pass_exact_m2_orb_001_promoted",
+        "promoted_source_ids": [
+          "M2-ORB-001"
+        ],
+        "remaining_source_ids": [
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ],
+        "remaining_source_requests_authorized_by_current_amendment": false
       },
       "disposition": "defer",
       "retained_failures": [
@@ -1064,12 +1073,14 @@
         "expected": [
           "EXIT-201-VERIFIED-CUSTODY"
         ],
-        "observed": [],
-        "decision_value": "no_progress",
-        "rationale": "Recovery-003 is terminal after the exact staged orbit failed the frozen literal OSV span check; the precision amendment is a zero-decision packet pending public CI."
+        "observed": [
+          "M2-ORB-001 exact input-only custody"
+        ],
+        "decision_value": "partial_progress_defer_remaining",
+        "rationale": "M2-ORB-001 is promoted and input-only verified; no current bounded decision releases requests for M2-ORB-002 through M2-ORB-004."
       },
       "next_dependency": "M2-ORBIT-VERIFY",
-      "rationale": "No orbit file is promoted. The exact M2-ORB-001 staged bytes are preserved, but any one-second precision interpretation and local promotion require a separately published and approved amendment."
+      "rationale": "One of four exact restituted orbit files is promoted and input-only verified. The other three remain unrequested pending a separate zero-decision review."
     },
     {
       "id": "M2-ORBIT-VERIFY",
@@ -1087,7 +1098,16 @@
       "outputs": [
         "records/acquisition orbit verification receipts"
       ],
-      "gates": {},
+      "gates": {
+        "input_only_verified_source_ids": [
+          "M2-ORB-001"
+        ],
+        "remaining_source_ids": [
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ]
+      },
       "disposition": null,
       "retained_failures": [],
       "exit_condition_delta": {
@@ -2179,7 +2199,7 @@
       ],
       "action_class": "external_publication",
       "human_gate": false,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
         "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-readiness.json",
@@ -2189,14 +2209,18 @@
         "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-publication-gate.json"
       ],
       "gates": {
-        "public_ci": "pending",
-        "final_no_network_preflight": "blocked_until_public_ci",
+        "public_ci": "pass",
+        "final_no_network_preflight": "pass",
         "local_synthetic_tests": "pass",
         "implementation_readiness_sha256": "c8e01e91cfb30485308e68f00d8eab53de0ca17de95d37002afbafe6591b324d",
-        "real_staged_file_read": false,
-        "local_validation_started": false
+        "real_staged_file_read": true,
+        "local_validation_started": true,
+        "publication_commit": "55397416ac902fac7ec46382cdc3904b53566478",
+        "public_ci_run_id": 34056822125,
+        "publication_gate_sha256": "c5b8bedd2f656acc8f464a880fae11dd0d936bf2c12ac3891275bb27c36ba3ea",
+        "final_preflight_sha256": "6060a52bc293ce4005bf0bc1a73df806a77fd51338784eb4e66b3b5151a9abbc"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/acquisition/orbit-attempts/m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
         "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json"
@@ -2204,12 +2228,11 @@
       "exit_condition_delta": {
         "expected": [],
         "observed": [
-          "approved versioned contract",
-          "nine passing synthetic tests",
-          "full local repository suite"
+          "exact implementation passed public default-branch CI",
+          "final no-network preflight passed"
         ],
-        "decision_value": "awaiting_public_ci",
-        "rationale": "Local implementation is ready; public default-branch CI remains required before any real staged-byte access."
+        "decision_value": "enables_dependency",
+        "rationale": "Public CI passed before the first real staged-byte read and the final preflight released only one local validation."
       },
       "next_dependency": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001"
     },
@@ -2221,9 +2244,17 @@
       ],
       "action_class": "data_promotion",
       "human_gate": false,
-      "status": "planned",
-      "inputs": [],
-      "outputs": [],
+      "status": "complete",
+      "inputs": [
+        "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+        "records/readiness/m2-orbit-osv-precision-amendment-001-implementation-publication-gate.json",
+        "records/readiness/m2-orbit-osv-precision-amendment-001-final-preflight.json",
+        "records/acquisition/m2-orbit-osv-precision-amendment-001-local-validation.json"
+      ],
+      "outputs": [
+        "records/acquisition/m2-orbit-osv-precision-amendment-001-local-validation.json",
+        "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json"
+      ],
       "gates": {
         "maximum_local_validation_attempts": 1,
         "maximum_network_requests": 0,
@@ -2231,11 +2262,14 @@
         "source_id": "M2-ORB-001",
         "maximum_endpoint_tolerance_seconds": 1.0,
         "other_orbit_source_requests_authorized_by_this_unit": false,
-        "public_ci": "pending",
-        "final_no_network_preflight": "blocked",
-        "local_validation_attempt_count": 0
+        "public_ci": "pass",
+        "final_no_network_preflight": "pass",
+        "local_validation_attempt_count": 1,
+        "input_only_verification": "pass_orbit_input_only",
+        "staged_file_promoted": true,
+        "staging_preserved": true
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/acquisition/orbit-attempts/m2-orb-001-recovery-002-20260906t183804z-e5883324.json",
         "records/acquisition/m2-orbit-recovery-003-outcome-reconciliation.json"
@@ -2244,9 +2278,11 @@
         "expected": [
           "EXIT-201-VERIFIED-CUSTODY"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "The blank review creates no local validation or promotion authority."
+        "observed": [
+          "EXIT-201-VERIFIED-CUSTODY"
+        ],
+        "decision_value": "pass_input_only",
+        "rationale": "The single approved local action validated and promoted exact M2-ORB-001 without replacement or network access while preserving staging evidence."
       },
       "next_dependency": "M2-ORBIT-VERIFY"
     }
@@ -2305,8 +2341,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION",
-    "next_action": "Publish the exact approved one-second OSV endpoint implementation and require successful public default-branch CI. Do not read or mutate preserved staged bytes, run the local validation, promote an orbit file, request a token or network resource, or touch another orbit source before that gate passes.",
+    "current_checkpoint": "M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION",
+    "next_action": "Prepare a separately governed zero-decision review for exact M2-ORB-002 through M2-ORB-004. Do not request an orbit file, obtain or read a token, retry recovery-003, apply orbit data, read radar pixels, act on DEMs, or perform baseline, change, attribution, or scientific-publication work.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -2334,7 +2370,8 @@
       "Recovery-003 is terminal and consumed after one handoff and one M2-ORB-001 request; its full checksum-matching staged bytes failed the frozen OSV span check and were not promoted.",
       "The 0.031829-second validity-stop shortfall is an observation; a one-second tolerance is only a proposed inference from format precision and is not yet authorized.",
       "The OSV precision amendment packet has zero decisions and authorizes no token, network request, retry, promotion, other orbit source, processing, or scientific action.",
-      "The OSV precision amendment permits no real staged-byte access before its implementation passes public CI and permits no token, network request, other orbit source, retry, orbit application, radar pixels, baseline, change, or scientific action."
+      "The OSV precision amendment permits no real staged-byte access before its implementation passes public CI and permits no token, network request, other orbit source, retry, orbit application, radar pixels, baseline, change, or scientific action.",
+      "The OSV precision amendment is consumed after one successful local validation and promotion of M2-ORB-001; it authorizes no request for M2-ORB-002 through M2-ORB-004 and no downstream processing."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."

@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-TERMINAL-RECONCILIATION-001",
+  "reconciled_at_utc": "2026-09-06T20:08:39Z",
+  "status": "pass_exact_m2_orb_001_promoted_remaining_sources_review_required",
+  "bindings": {
+    "approval_sha256": "4a77a044475b6c940a4b58d4c4dbcf76730c06e63d18927eb717312a97667cf4",
+    "publication_gate_sha256": "c5b8bedd2f656acc8f464a880fae11dd0d936bf2c12ac3891275bb27c36ba3ea",
+    "final_preflight_sha256": "6060a52bc293ce4005bf0bc1a73df806a77fd51338784eb4e66b3b5151a9abbc",
+    "local_validation_result_sha256": "9b3e45fe1d8fe0c9c6668287d7bfc2ec0f8e238d6e0730f04a8d99583eef9898",
+    "external_receipt_sha256": "2cb5ce849565cffdf14ea211071f347a3c17f431a9f341bd09938f1d6c9df934",
+    "intake_sha256_before": "74fa02b68e46bb0e2b7a6ad55fb306c2eb73589f5ea4e73f406ff087e29d3909",
+    "intake_sha256_after": "f64591598c782dc0a7bec58b40517d5b916ca850705ecff8677dbc66022c430b",
+    "milestone_sha256_before": "02b5c89b1a3bf7f79deabf959f766aada0c55503cb660c8494149d9bc9c09805",
+    "milestone_sha256_after": "c6e420716152241c00a82f75481dc7002155dc86579693d2f56f4915b92f2aa4",
+    "profile_sha256_before": "be347f6e1fd5e69a1261f2280eb8b1b545f33da5f7fedd5dd91ae94a49c3508f",
+    "profile_sha256_after": "ce2c4f1d6487ec07aee856e2ce5b03f2b9b4e86779db9ab1dadc7665d17f135d",
+    "goal_sha256_before": "a8db94e398107fa8f53a861cf80d19acc5f7f074732446473553b2ddc23d28bd",
+    "goal_sha256_after": "a5ecaac31b54426db3760f6270184ea3e6a4f8374d47c455c6c1cab82cc025e2"
+  },
+  "observations": {
+    "source_id": "M2-ORB-001",
+    "attempt_id": "m2-orb-001-osv-precision-amendment-001-local-001",
+    "promoted_identity": {
+      "size_bytes": 639533,
+      "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+      "md5": "ca7f36b1892073c883c4cff5c0517b9c",
+      "blake3": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b"
+    },
+    "preserved_staging_identity": {
+      "size_bytes": 639533,
+      "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+      "md5": "ca7f36b1892073c883c4cff5c0517b9c",
+      "blake3": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b"
+    },
+    "input_only_verification_status": "pass_orbit_input_only",
+    "endpoint_tolerance_seconds": 1.0,
+    "last_endpoint_shortfall_seconds": 0.031829,
+    "orbit_state_counts": {
+      "authorized": 3,
+      "failed": 0,
+      "promoted": 1
+    }
+  },
+  "assertions": {
+    "local_validation_attempt_count": 1,
+    "automatic_retry_performed": false,
+    "network_requests_performed_by_reconciliation": false,
+    "credential_values_read_or_recorded": false,
+    "staging_preserved": true,
+    "destination_created_without_replace": true,
+    "other_orbit_source_requested": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixels_processed": false,
+    "baseline_or_change_analysis_performed": false,
+    "scientific_result_established": false
+  },
+  "next_checkpoint": "M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION",
+  "next_action": "Prepare a separately governed zero-decision review for exact M2-ORB-002 through M2-ORB-004. Do not request an orbit file, obtain or read a token, retry recovery-003, apply orbit data, read radar pixels, act on DEMs, or perform baseline, change, attribution, or scientific-publication work."
+}

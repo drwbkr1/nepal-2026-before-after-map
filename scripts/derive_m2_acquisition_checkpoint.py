@@ -94,6 +94,10 @@ ORBIT_OSV_PRECISION_IMPLEMENTATION_PUBLICATION_CHECKPOINT = {
     "checkpoint_id": "M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION-PUBLICATION",
     "next_action": "Publish the exact approved one-second OSV endpoint implementation and require successful public default-branch CI. Do not read or mutate preserved staged bytes, run the local validation, promote an orbit file, request a token or network resource, or touch another orbit source before that gate passes.",
 }
+ORBIT_REMAINING_SOURCES_REVIEW_PREPARATION_CHECKPOINT = {
+    "checkpoint_id": "M2-ORBIT-REMAINING-SOURCES-REVIEW-PREPARATION",
+    "next_action": "Prepare a separately governed zero-decision review for exact M2-ORB-002 through M2-ORB-004. Do not request an orbit file, obtain or read a token, retry recovery-003, apply orbit data, read radar pixels, act on DEMs, or perform baseline, change, attribution, or scientific-publication work.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -609,6 +613,37 @@ def current_orbit_osv_precision_implementation_publication_pending(
     )
 
 
+def current_orbit_remaining_sources_review_preparation(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        intake = load(root / "contracts/m2-orbit-intake.json")
+        result = load(root / "records/acquisition/m2-orbit-osv-precision-amendment-001-local-validation.json")
+        terminal = load(root / "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    assets = intake.get("assets", [])
+    implementation = units.get("M2-ORBIT-OSV-PRECISION-AMENDMENT-001-IMPLEMENTATION", {})
+    local_action = units.get("M2-ORBIT-OSV-PRECISION-AMENDMENT-001", {})
+    return bool(
+        terminal.get("status") == "pass_exact_m2_orb_001_promoted_remaining_sources_review_required"
+        and terminal.get("assertions", {}).get("other_orbit_source_requested") is False
+        and result.get("status") == "pass_exact_m2_orb_001_input_promoted_no_replace"
+        and implementation.get("status") == "complete"
+        and implementation.get("disposition") == "pass"
+        and local_action.get("status") == "complete"
+        and local_action.get("disposition") == "pass"
+        and intake.get("extensions", {}).get("current_orbit_state_counts") == {"authorized": 3, "failed": 0, "promoted": 1}
+        and len(assets) == 4
+        and assets[0].get("state") == "promoted"
+        and [item.get("state") for item in assets[1:]] == ["authorized", "authorized", "authorized"]
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -653,7 +688,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_orbit_osv_precision_implementation_publication_pending(ROOT, progress["state_counts"]):
+        if current_orbit_remaining_sources_review_preparation(ROOT, progress["state_counts"]):
+            checkpoint = dict(ORBIT_REMAINING_SOURCES_REVIEW_PREPARATION_CHECKPOINT)
+        elif current_orbit_osv_precision_implementation_publication_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_OSV_PRECISION_IMPLEMENTATION_PUBLICATION_CHECKPOINT)
         elif current_orbit_osv_precision_review_required(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_OSV_PRECISION_REVIEW_CHECKPOINT)

@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-OSV-PRECISION-AMENDMENT-001-FINAL-PREFLIGHT-001",
+  "verified_at_utc": "2026-09-06T20:05:18Z",
+  "status": "pass_no_network_ready_for_one_local_validation",
+  "source_id": "M2-ORB-001",
+  "attempt_id": "m2-orb-001-osv-precision-amendment-001-local-001",
+  "bindings": {
+    "approval_sha256": "4a77a044475b6c940a4b58d4c4dbcf76730c06e63d18927eb717312a97667cf4",
+    "amended_contract_sha256": "ee578c8cc7c4e27c28f6e8ea4d65b664ce1a22a33db57e06c10c9cccafbb928e",
+    "publication_gate_sha256": "c5b8bedd2f656acc8f464a880fae11dd0d936bf2c12ac3891275bb27c36ba3ea",
+    "active_intake_sha256": "74fa02b68e46bb0e2b7a6ad55fb306c2eb73589f5ea4e73f406ff087e29d3909",
+    "public_commit": "55397416ac902fac7ec46382cdc3904b53566478",
+    "preserved_staged_identity": {
+      "size_bytes": 639533,
+      "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+      "md5": "ca7f36b1892073c883c4cff5c0517b9c",
+      "blake3": "ce824099fa812d6c229bd5bef2d4a70d7185d248f91ec3111ce557868ab1269b"
+    }
+  },
+  "path_and_storage": {
+    "staging_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-recovery-003\\m2-orb-001-recovery-002\\S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF.part",
+    "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-001\\S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+    "destination_absent": true,
+    "promotion_temporary_path_absent": true,
+    "external_receipt_absent": true,
+    "public_result_absent": true,
+    "free_bytes": 523469807616,
+    "minimum_free_bytes": 6395330
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "authentication_performed": false,
+    "credential_presence_checked": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_requested": false,
+    "preserved_staged_bytes_mutated": false,
+    "local_semantic_validation_started": false,
+    "staged_file_promoted": false,
+    "other_orbit_source_requested": false
+  },
+  "next_gate": "invoke the one local M2-ORB-001 validation and conditional no-replace promotion exactly once"
+}
