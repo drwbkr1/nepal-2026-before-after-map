@@ -1,0 +1,116 @@
+{
+  "proposal_version": "1.0",
+  "proposal_id": "NEPAL-M2-ORBIT-RECOVERY-003-PROPOSAL",
+  "prepared_at_utc": "2026-09-06T17:36:58Z",
+  "status": "proposed_not_authorized",
+  "authority_context": {
+    "radar_first_approval_ref": "records/source-gates/m2-radar-first-path-001-approval.json",
+    "radar_first_approval_sha256": "e017099532a681f6c7d39afa8b7ab94c25e3c51495381363eaefd67a4533bdb9",
+    "original_orbit_approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+    "original_orbit_approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+    "consumed_recovery_002_approval_ref": "records/source-gates/m2-orbit-recovery-002-approval.json",
+    "consumed_recovery_002_approval_sha256": "ee5922426882b5620f2e90e6703d0eb7d5f5ab77ede3ed61acfb8616b2c22d07",
+    "authorized_orbit_type": "AUX_RESORB",
+    "precise_substitution_authorized": false
+  },
+  "trigger": {
+    "outcome_ref": "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+    "outcome_sha256": "3d0b6be8e09e0d9049c32c65461e321b2fdbd5db398dd9a6d1b08b62c6c51380",
+    "source_id": "M2-ORB-001",
+    "supervisor_id": "m2-orbit-recovery-002-20260906t172858z-42bace7e",
+    "attempt_id": null,
+    "failure_code": "orbit_recovery_002_supervisor_unexpected_failure",
+    "failure_classification": "unclassified_local_pretransfer_failure",
+    "failure_window": "after exact public catalog revalidation returned and the exclusive payload parent was created, before an attempt event root, attempt ID, started event, intake mutation, or payload request",
+    "payload_bytes_received": 0,
+    "active_intake_sha256": "40f4b35549760c766afe8762e766d5f9d6cf14e4064258b09331f0f209cd20a3",
+    "recovery_002_authority_consumed": true
+  },
+  "observed_limits": {
+    "known": [
+      "one owner handoff reached the detached recovery-002 supervisor",
+      "the exact public catalog revalidation returned before local path initialization advanced",
+      "one exclusive payload-parent directory was created and remains empty",
+      "no attempt event root, attempt ID, active-intake mutation, download request, destination, or payload byte exists"
+    ],
+    "unknown": [
+      "the underlying exception category because the terminal journal intentionally records only a generic safe code",
+      "the returned catalog response hash because failure occurred before its immutable event was written"
+    ],
+    "root_cause_status": "unresolved_bounded_local_pretransfer_window"
+  },
+  "proposed_recovery": {
+    "mode": "fresh_full_restart_distinct_recovery_after_terminal_pretransfer_failure",
+    "source_id": "M2-ORB-001",
+    "provider_product_id": "d4fdc474-0069-459b-9534-b5999dec5aab",
+    "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+    "restart_offset_bytes": 0,
+    "resume_partial": false,
+    "delete_or_modify_prior_recovery_evidence": false,
+    "reuse_prior_staging_path": false,
+    "required_new_attempt_namespace": "m2-orb-001-recovery-002",
+    "required_new_staging_root": "nepal-2026-before-after-map-data/.intake-staging/nepal-m2-orbit-recovery-003",
+    "maximum_owner_handoffs": 1,
+    "maximum_real_attempts": 1,
+    "automatic_retry_authorized": false,
+    "authority_consumption_boundary": "the one owner-selected handoff that launches the recovery-003 supervisor consumes this recovery identity even if failure occurs before download",
+    "implementation_corrections": [
+      "predeclare the recovery attempt ID before any runtime catalog or staging mutation",
+      "create the attempt event root before the payload parent so a later local failure can retain attempt-scoped evidence",
+      "write an immutable started event before public catalog revalidation and a separate immutable catalog-revalidated event with the exact response hash",
+      "map each pretransfer filesystem and control stage to a fixed nonsecret failure code without exception text",
+      "wrap every post-precondition stage in terminal evidence handling while retaining the separate supervisor journal",
+      "use a new exclusive recovery-003 staging root and preserve recovery-002 directories and journals unchanged"
+    ],
+    "prerequisites": [
+      "one completed owner approval of this exact review is locked and reconciled",
+      "the recovery-003 implementation and synthetic interruption and secret-exposure tests pass public CI",
+      "a fresh final no-payload preflight validates the exact current source, rights, catalog identity, paths, collisions, and storage",
+      "the exact six-source radar readiness and original four-file AUX_RESORB approval remain unchanged",
+      "a fresh token is obtained and sent only through the owner-side anonymous single-use in-memory broker"
+    ],
+    "transfer_controls": [
+      "request only the complete exact M2-ORB-001 file from byte zero without Range or resume semantics",
+      "allow at most one public catalog revalidation and one authenticated download request under this identity",
+      "require exact length, provider MD5, provider BLAKE3, local SHA-256, safe XML, ordered finite OSVs, validity coverage, and scene binding before no-replace promotion"
+    ],
+    "failure_policy": "Any recovery-003 failure is terminal for that identity and requires another explicit review; no automatic retry is authorized."
+  },
+  "approval_would_authorize": [
+    "implement and test only the stated pretransfer evidence and staging-order corrections for exact M2-ORB-001",
+    "publish the exact implementation and require successful public CI before real access",
+    "perform one fresh no-payload preflight and one owner-selected recovery-003 handoff under a new exclusive identity",
+    "make at most one byte-zero M2-ORB-001 download request and promote only after every exact verification passes",
+    "reconcile the single terminal outcome without automatically requesting another orbit source"
+  ],
+  "approval_would_not_authorize": [
+    "request M2-ORB-002, M2-ORB-003, or M2-ORB-004",
+    "delete, rewrite, hide, or reuse the original attempt, recovery-002 staging directory, or supervisor journal",
+    "expose, log, file-store, clipboard-store, or environment-store an owner credential or token",
+    "accept terms, change an account or MFA, incur cost, or use a paid route",
+    "change the provider UUID, filename, orbit type, validity interval, scene binding, destination, or approved source manifest",
+    "perform automatic retry, substitute AUX_POEORB, apply orbit data, convert DEM data, decode radar pixels, create a baseline, analyze change, attribute cause, or publish a scientific result"
+  ],
+  "independent_unresolved_gates": [
+    "M2-DEM-VERTICAL-DATUM-REVIEW",
+    "M2-DEM-TERRAIN-RESULT-REVIEW",
+    "future separately reviewed radar pixel readiness"
+  ],
+  "human_gate": {
+    "review_required": true,
+    "item_id": "M2-ORBIT-RECOVERY-003",
+    "allowed_decisions": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "required_attestation": true
+  },
+  "limitations": [
+    "Recovery-002 did not reach an attempt ID or payload request, but its owner handoff and supervisor invocation consumed that recovery identity under its terminal-on-any-failure policy.",
+    "The exact recovery-002 local exception category and catalog response hash are unavailable and must not be invented.",
+    "Synthetic and public-CI evidence cannot prove the next live provider request or filesystem sequence will succeed.",
+    "Even a passing orbit file would not establish corrected imagery, pixel usability, change, attribution, or scientific fitness.",
+    "This proposal creates no implementation, credential, catalog, or payload authority until the exact review receives a completed owner decision."
+  ]
+}

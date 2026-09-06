@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-RECOVERY-002-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-06T17:38:59Z",
+  "status": "terminal_failure_preserved_recovery_003_review_ready",
+  "bindings": {
+    "outcome_ref": "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+    "outcome_sha256": "3d0b6be8e09e0d9049c32c65461e321b2fdbd5db398dd9a6d1b08b62c6c51380",
+    "approval_ref": "records/source-gates/m2-orbit-recovery-002-approval.json",
+    "approval_sha256": "ee5922426882b5620f2e90e6703d0eb7d5f5ab77ede3ed61acfb8616b2c22d07",
+    "publication_gate_ref": "records/acquisition/m2-orbit-recovery-002-publication-gate.json",
+    "publication_gate_sha256": "a94cf2a5c8fafdcafdfc5a4234cb05386129ca3f8579ab7a99450efbf712049a",
+    "final_preflight_ref": "records/acquisition/m2-orbit-recovery-002-final-preflight.json",
+    "final_preflight_sha256": "5458c9ce211ca85627d0420a9f3592623be126923a2d916c95c625ff2a05933f",
+    "recovery_003_proposal_ref": "contracts/milestone-002-orbit-recovery-003-proposal.json",
+    "recovery_003_proposal_sha256": "5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3",
+    "recovery_003_bundle_ref": "reviews/m2-orbit-recovery-003/review-bundle.json",
+    "recovery_003_bundle_sha256": "bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d",
+    "recovery_003_contract_ref": "reviews/m2-orbit-recovery-003/review-contract.json",
+    "recovery_003_contract_sha256": "a122def1ac97e3ff5451d807c2a98e7713d7c46d834103d70d7807e67e694cf0",
+    "recovery_003_blank_response_ref": "reviews/m2-orbit-recovery-003/blank-response.json",
+    "recovery_003_blank_response_sha256": "63f8972c8d03ba66d2b9d2b850fea72e7e388e2a5b5b538c2f2fc076cd1f4f82"
+  },
+  "assertions": {
+    "recovery_002_owner_handoff_count": 1,
+    "recovery_002_authority_consumed": true,
+    "recovery_002_attempt_id_created": false,
+    "recovery_002_download_requested": false,
+    "recovery_002_payload_bytes_received": 0,
+    "recovery_002_automatic_retry_performed": false,
+    "recovery_003_human_decision_count": 0,
+    "recovery_003_authorized": false,
+    "credential_values_read_or_recorded_by_reconciliation": false,
+    "network_requests_performed_by_reconciliation": false,
+    "external_data_mutated_by_reconciliation": false,
+    "radar_pixels_read": false,
+    "dem_action_performed": false,
+    "scientific_result_established": false
+  },
+  "next_gate": "owner review of recovery-003 bundle SHA-256 bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d and proposal SHA-256 5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3"
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-002-OUTCOME-RECONCILIATION-001",
+  "recorded_at_utc": "2026-09-06T17:34:34Z",
+  "status": "terminal_pretransfer_supervisor_failure_no_retry",
+  "source_id": "M2-ORB-001",
+  "supervisor_id": "m2-orbit-recovery-002-20260906t172858z-42bace7e",
+  "attempt_id": null,
+  "outcome": "failed_pre_transfer",
+  "failure": {
+    "terminal_code": "orbit_recovery_002_supervisor_unexpected_failure",
+    "last_recorded_phase": "public_catalog_revalidation",
+    "classification": "unclassified_local_pretransfer_failure",
+    "bounded_window": "after exact public catalog revalidation returned and the exclusive payload parent was created, before an attempt event root, attempt ID, started event, intake mutation, or payload request",
+    "underlying_exception_category": "unavailable_by_design_in_terminal_journal",
+    "catalog_response_hash_persisted": false
+  },
+  "bindings": {
+    "active_intake_ref": "contracts/m2-orbit-intake.json",
+    "active_intake_sha256": "40f4b35549760c766afe8762e766d5f9d6cf14e4064258b09331f0f209cd20a3",
+    "final_preflight_ref": "records/acquisition/m2-orbit-recovery-002-final-preflight.json",
+    "final_preflight_sha256": "5458c9ce211ca85627d0420a9f3592623be126923a2d916c95c625ff2a05933f",
+    "supervisor_started_ref": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-002-supervisor\\m2-orbit-recovery-002-20260906t172858z-42bace7e\\m2-orbit-recovery-002-20260906t172858z-42bace7e-started.json",
+    "supervisor_started_sha256": "1c7eef5a07adbc1f248c2903ea63b7bb62981e725d328d6b0ee679c6476c4940",
+    "supervisor_heartbeat_ref": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-002-supervisor\\m2-orbit-recovery-002-20260906t172858z-42bace7e\\m2-orbit-recovery-002-20260906t172858z-42bace7e-heartbeat.json",
+    "supervisor_heartbeat_sha256": "0578c68cac0a29e94f7421e96c52440f3d73213d896061ba436dcde21b98d518",
+    "supervisor_failed_ref": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-recovery-002-supervisor\\m2-orbit-recovery-002-20260906t172858z-42bace7e\\m2-orbit-recovery-002-20260906t172858z-42bace7e-failed.json",
+    "supervisor_failed_sha256": "1e0bb9d7a846a4c502fa5ffdcc42d5cdaf15c344af4979967fe87d585c6fe770",
+    "retained_original_attempt_id": "m2-orb-001-20260904t050937z-8ed21d05",
+    "retained_original_attempt_count": 1
+  },
+  "external_staging_inventory": {
+    "root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-recovery-002",
+    "entries": [
+      {
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-recovery-002\\m2-orb-001-recovery-001",
+        "kind": "directory",
+        "file_count": 0
+      }
+    ]
+  },
+  "assertions": {
+    "owner_handoff_reached_supervisor": true,
+    "public_catalog_revalidation_returned_before_local_failure": true,
+    "catalog_response_hash_persisted": false,
+    "new_attempt_id_created": false,
+    "active_intake_mutated": false,
+    "orbit_download_requested": false,
+    "orbit_payload_bytes_received": 0,
+    "destination_created": false,
+    "credential_value_recorded": false,
+    "recovery_002_authority_consumed": true,
+    "automatic_retry_performed": false,
+    "other_orbit_source_requested": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixels_processed": false,
+    "baseline_or_change_analysis_performed": false,
+    "scientific_result_established": false,
+    "network_requests_performed_by_reconciliation": false
+  },
+  "next_gate": "new explicit review required before any recovery-003 implementation, credential handoff, or M2-ORB-001 request; do not retry recovery-002"
+}

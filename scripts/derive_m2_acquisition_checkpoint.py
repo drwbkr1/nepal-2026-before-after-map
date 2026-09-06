@@ -78,6 +78,10 @@ ORBIT_RECOVERY_002_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-ORBIT-RECOVERY-002-REVIEW",
     "next_action": "Review corrected M2 orbit recovery-002 bundle SHA-256 6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5 and proposal SHA-256 d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8; approve, revise, or defer one recovery-only implementation and at most one future byte-zero M2-ORB-001 attempt. No orbit, token, DEM, radar-pixel, baseline, change, or scientific action is authorized before an attested decision.",
 }
+ORBIT_RECOVERY_003_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-ORBIT-RECOVERY-003-REVIEW",
+    "next_action": "Review M2 orbit recovery-003 bundle SHA-256 bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d and proposal SHA-256 5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3; approve, revise, or defer the evidence-first one-file recovery. No retry, credential, catalog, payload, DEM, radar-pixel, baseline, change, attribution, or scientific-publication action is authorized before an attested decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -419,6 +423,49 @@ def current_orbit_recovery_002_review_required(root: Path, state_counts: dict[st
     )
 
 
+def current_orbit_recovery_003_review_required(root: Path, state_counts: dict[str, int]) -> bool:
+    if not current_optical_pixel_recovery_terminal(root, state_counts):
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        outcome = load(root / "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json")
+        proposal = load(root / "contracts/milestone-002-orbit-recovery-003-proposal.json")
+        bundle = load(root / "reviews/m2-orbit-recovery-003/review-bundle.json")
+        contract = load(root / "reviews/m2-orbit-recovery-003/review-contract.json")
+        blank = load(root / "reviews/m2-orbit-recovery-003/blank-response.json")
+        readiness = load(root / "records/readiness/m2-orbit-recovery-003-review-readiness.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    recovery_002 = units.get("M2-ORBIT-RECOVERY-002", {})
+    review = units.get("M2-ORBIT-RECOVERY-003-REVIEW", {})
+    proposal_sha = "5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3"
+    bundle_sha = "bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d"
+    responses = blank.get("responses", [])
+    return bool(
+        recovery_002.get("status") == "complete"
+        and recovery_002.get("disposition") == "block"
+        and recovery_002.get("gates", {}).get("authority_consumed") is True
+        and outcome.get("status") == "terminal_pretransfer_supervisor_failure_no_retry"
+        and outcome.get("assertions", {}).get("orbit_payload_bytes_received") == 0
+        and proposal.get("status") == "proposed_not_authorized"
+        and bundle.get("candidate_identity") == f"M2-ORBIT-RECOVERY-003-PROPOSAL-SHA256:{proposal_sha}"
+        and contract.get("review_bundle", {}).get("manifest_sha256") == bundle_sha
+        and review.get("status") == "ready"
+        and review.get("human_gate") is True
+        and review.get("gates", {}).get("proposal_sha256") == proposal_sha
+        and review.get("gates", {}).get("review_bundle_sha256") == bundle_sha
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and review.get("gates", {}).get("recovery_authorized") is False
+        and blank.get("completed") is False
+        and blank.get("reviewer", {}).get("attestation") is False
+        and len(responses) == 1
+        and responses[0].get("decision") is None
+        and readiness.get("status") == "pass_ready_owner_review_zero_decisions"
+        and readiness.get("review", {}).get("ready_for_handoff") is True
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -463,7 +510,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_orbit_recovery_002_review_required(ROOT, progress["state_counts"]):
+        if current_orbit_recovery_003_review_required(ROOT, progress["state_counts"]):
+            checkpoint = dict(ORBIT_RECOVERY_003_REVIEW_CHECKPOINT)
+        elif current_orbit_recovery_002_review_required(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_RECOVERY_002_REVIEW_CHECKPOINT)
         elif current_radar_first_path_review_required(ROOT, progress["state_counts"]):
             checkpoint = dict(RADAR_FIRST_PATH_REVIEW_CHECKPOINT)

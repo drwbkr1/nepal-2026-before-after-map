@@ -134,7 +134,7 @@ class RadarFirstPathReview001Tests(unittest.TestCase):
         self.assertEqual(self.stale_orbit["bindings"]["proposal_sha256"], "ce76d633a8104ea5800f51dccd4b1037f930d41b7f08a3de32eed68c6697915a")
         self.assertEqual(self.stale_orbit["bindings"]["review_bundle_sha256"], "df5aa9d0d03f8ee30a5cd74b91f74a88c83a525e762c22b0bd2b6773ccb5bc6b")
 
-    def test_current_controls_point_to_corrected_orbit_review(self) -> None:
+    def test_current_controls_preserve_route_split_and_point_to_recovery_003_review(self) -> None:
         units = {unit["id"]: unit for unit in self.milestone["units"]}
         review = units["M2-RADAR-FIRST-PATH-001-REVIEW"]
         self.assertEqual(review["status"], "complete")
@@ -144,13 +144,15 @@ class RadarFirstPathReview001Tests(unittest.TestCase):
         self.assertEqual(units["M2-OPTICAL-ROUTE-DISPOSITION"]["disposition"], "block")
         self.assertEqual(units["M2-RADAR-SOURCE-READINESS"]["status"], "complete")
         self.assertEqual(units["M2-VERIFY"]["status"], "deferred")
-        self.assertEqual(units["M2-ORBIT-RECOVERY-002-REVIEW"]["status"], "ready")
-        self.assertEqual(units["M2-ORBIT-RECOVERY-002-REVIEW"]["gates"]["human_decision_count"], 0)
-        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-ORBIT-RECOVERY-002-REVIEW")
-        self.assertEqual(self.goal["current_checkpoint"], "M2-ORBIT-RECOVERY-002-REVIEW")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-002-REVIEW"]["status"], "complete")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-002-REVIEW"]["gates"]["human_decision_count"], 1)
+        self.assertEqual(units["M2-ORBIT-RECOVERY-003-REVIEW"]["status"], "ready")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-003-REVIEW"]["gates"]["human_decision_count"], 0)
+        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], "M2-ORBIT-RECOVERY-003-REVIEW")
+        self.assertEqual(self.goal["current_checkpoint"], "M2-ORBIT-RECOVERY-003-REVIEW")
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            ["contracts/milestone-002-orbit-recovery-002-proposal.json"],
+            ["contracts/milestone-002-orbit-recovery-003-proposal.json"],
         )
         self.assertIn(APPROVAL_REF, self.goal["active_amendments"])
         self.assertEqual(self.control["status"], "pass_route_split_and_corrected_orbit_review_ready")

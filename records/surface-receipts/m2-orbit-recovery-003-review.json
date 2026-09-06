@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-003-REVIEW-SURFACE",
+  "verified_at_utc": "2026-09-06T17:36:58Z",
+  "status": "pass_blank_review_surface",
+  "artifact": {
+    "path": "docs/assets/m2-orbit-recovery-003-review.png",
+    "sha256": "190aeb267b80b41776b0c71d7426e8a477c45e1c2a34a543a3b2599d1b12923d",
+    "width_px": 1800,
+    "height_px": 1540,
+    "format": "PNG",
+    "contains_third_party_pixels": false
+  },
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-orbit-recovery-003-proposal.json",
+    "proposal_sha256": "5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3",
+    "outcome_ref": "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+    "outcome_sha256": "3d0b6be8e09e0d9049c32c65461e321b2fdbd5db398dd9a6d1b08b62c6c51380"
+  },
+  "validation": {
+    "terminal_failure_visible": true,
+    "known_and_unknown_evidence_visible": true,
+    "exact_one_file_scope_visible": true,
+    "prohibited_scope_visible": true,
+    "blank_state_verified": true,
+    "human_decision_count": 0,
+    "completion_controls_verified": true,
+    "export_verified": true
+  }
+}

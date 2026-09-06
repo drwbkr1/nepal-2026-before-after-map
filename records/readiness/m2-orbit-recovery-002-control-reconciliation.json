@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-RECOVERY-002-CONTROL-RECONCILIATION-001",
+  "reconciled_at_utc": "2026-09-06T17:27:01Z",
+  "status": "pass_approved_public_ci_recovery_ready_final_preflight_pending",
+  "bindings": {
+    "approval_sha256": "ee5922426882b5620f2e90e6703d0eb7d5f5ab77ede3ed61acfb8616b2c22d07",
+    "review_reconciliation_sha256": "b289cd6486ea819c22823fba986702c6e3b353171bff87bc437a67c6bfa0e3ab",
+    "publication_gate_sha256": "a94cf2a5c8fafdcafdfc5a4234cb05386129ca3f8579ab7a99450efbf712049a",
+    "milestone_sha256_before": "02a51a29c948280b743b46d5ed64bf9facd6b15261d3cdf3f15ffb257abd2540",
+    "milestone_sha256_after": "f67bbf16528463083c14cb4d35ba6c762d6a27138f35c2a1f30dfc975c6ab085",
+    "profile_sha256_before": "eebe47501c4e5c7136f4c880d03d73412df166ae8f055eff818a5ba09ea0f9b2",
+    "profile_sha256_after": "eebe47501c4e5c7136f4c880d03d73412df166ae8f055eff818a5ba09ea0f9b2",
+    "goal_sha256_before": "e8752bf8a5e6eedfb00643781482fe555bf51087bd4f8f06f37399408a8f9ad0",
+    "goal_sha256_after": "e8752bf8a5e6eedfb00643781482fe555bf51087bd4f8f06f37399408a8f9ad0"
+  },
+  "assertions": {
+    "human_decision_count": 1,
+    "credential_values_read_or_recorded": false,
+    "orbit_payload_requested": false,
+    "other_orbit_source_requested": false,
+    "automatic_retry_authorized": false,
+    "dem_pixel_baseline_change_or_scientific_action_released": false
+  },
+  "next_gate": "final no-payload preflight"
+}

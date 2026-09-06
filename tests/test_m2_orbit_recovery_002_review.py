@@ -70,15 +70,17 @@ class M2OrbitRecovery002ReviewTests(unittest.TestCase):
         self.assertEqual(self.readiness["review"]["human_decision_count"], 0)
         self.assertFalse(self.readiness["assertions"]["orbit_payload_requested"])
 
-    def test_active_graph_stops_before_orbit_recovery(self) -> None:
+    def test_recovery_002_history_is_terminal_and_routes_to_recovery_003_review(self) -> None:
         units = {unit["id"]: unit for unit in self.milestone["units"]}
         self.assertEqual(units["M2-RADAR-SOURCE-READINESS"]["status"], "complete")
-        self.assertEqual(units["M2-ORBIT-RECOVERY-002-REVIEW"]["status"], "ready")
-        self.assertEqual(units["M2-ORBIT-RECOVERY-002-IMPLEMENTATION"]["status"], "planned")
-        self.assertEqual(units["M2-ORBIT-RECOVERY-002"]["status"], "planned")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-002-REVIEW"]["status"], "complete")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-002-IMPLEMENTATION"]["status"], "complete")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-002"]["status"], "complete")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-002"]["disposition"], "block")
+        self.assertEqual(units["M2-ORBIT-RECOVERY-003-REVIEW"]["status"], "ready")
         self.assertEqual(units["M2-ORBIT-ACQUIRE"]["status"], "deferred")
-        self.assertIn("M2-ORBIT-RECOVERY-002", units["M2-ORBIT-ACQUIRE"]["depends_on"])
-        self.assertEqual(units["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"], "corrected_review_ready_zero_decisions")
+        self.assertIn("M2-ORBIT-RECOVERY-003", units["M2-ORBIT-ACQUIRE"]["depends_on"])
+        self.assertEqual(units["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"], "recovery_003_review_ready_zero_decisions")
 
     def test_publication_gate_binds_exact_green_commit_without_authority(self) -> None:
         self.assertEqual(self.publication["status"], "pass_exact_review_packet_public_ci")

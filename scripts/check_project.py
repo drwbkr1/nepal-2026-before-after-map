@@ -22,6 +22,7 @@ from derive_m2_acquisition_checkpoint import (
     current_optical_pixel_recovery_review_required,
     current_optical_pixel_recovery_terminal,
     current_orbit_recovery_002_review_required,
+    current_orbit_recovery_003_review_required,
     current_radar_first_path_review_required,
     derive_checkpoint,
 )
@@ -147,6 +148,22 @@ REQUIRED = [
     "records/acquisition/m2-orbit-recovery-002-final-preflight-attempt-001-superseded.json",
     "records/readiness/m2-orbit-recovery-002-control-reconciliation-attempt-001-superseded.json",
     "records/acquisition/m2-orbit-recovery-002-token-handoff-attempt-001-failure.json",
+    "contracts/m2-orbit-recovery-002.json",
+    "records/acquisition/m2-orbit-recovery-002-publication-gate.json",
+    "records/readiness/m2-orbit-recovery-002-control-reconciliation.json",
+    "records/acquisition/m2-orbit-recovery-002-activation.json",
+    "records/acquisition/m2-orbit-recovery-002-final-preflight.json",
+    "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+    "records/readiness/m2-orbit-recovery-002-terminal-reconciliation.json",
+    "contracts/milestone-002-orbit-recovery-003-proposal.json",
+    "records/readiness/m2-orbit-recovery-003-review-preflight.json",
+    "docs/M2_ORBIT_RECOVERY_003_REVIEW.md",
+    "docs/assets/m2-orbit-recovery-003-review.png",
+    "records/surface-receipts/m2-orbit-recovery-003-review.json",
+    "reviews/m2-orbit-recovery-003/review-bundle.json",
+    "reviews/m2-orbit-recovery-003/review-contract.json",
+    "reviews/m2-orbit-recovery-003/blank-response.json",
+    "records/readiness/m2-orbit-recovery-003-review-readiness.json",
     "scripts/activate_m2_orbit_recovery_002_approval.py",
     "scripts/m2_orbit_recovery_002_core.py",
     "scripts/m2_orbit_recovery_002_broker.py",
@@ -158,8 +175,12 @@ REQUIRED = [
     "scripts/activate_m2_orbit_recovery_002.py",
     "scripts/preflight_m2_orbit_recovery_002.py",
     "scripts/reconcile_m2_orbit_recovery_002_outcome.py",
+    "scripts/prepare_m2_orbit_recovery_003_review.py",
+    "scripts/reconcile_m2_orbit_recovery_002_failure.py",
+    "scripts/record_m2_orbit_recovery_003_review_publication_gate.py",
     "scripts/invoke_m2_orbit_recovery_002.ps1",
     "tests/test_m2_orbit_recovery_002.py",
+    "tests/test_m2_orbit_recovery_003_review.py",
     "scripts/prepare_m2_radar_first_path_review.py",
     "scripts/activate_m2_radar_first_path_001.py",
     "scripts/prepare_m2_orbit_recovery_002_review.py",
@@ -990,6 +1011,20 @@ def main() -> None:
     orbit_recovery_002_reconciliation = json.loads((ROOT / "records/source-gates/m2-orbit-recovery-002-review-reconciliation.json").read_text(encoding="utf-8"))
     orbit_recovery_002_approval_activation = json.loads((ROOT / "records/readiness/m2-orbit-recovery-002-approval-activation.json").read_text(encoding="utf-8"))
     orbit_recovery_002_implementation_readiness = json.loads((ROOT / "records/acquisition/m2-orbit-recovery-002-implementation-readiness.json").read_text(encoding="utf-8"))
+    orbit_recovery_002_runtime_contract = json.loads((ROOT / "contracts/m2-orbit-recovery-002.json").read_text(encoding="utf-8"))
+    orbit_recovery_002_runtime_publication = json.loads((ROOT / "records/acquisition/m2-orbit-recovery-002-publication-gate.json").read_text(encoding="utf-8"))
+    orbit_recovery_002_control_reconciliation = json.loads((ROOT / "records/readiness/m2-orbit-recovery-002-control-reconciliation.json").read_text(encoding="utf-8"))
+    orbit_recovery_002_activation = json.loads((ROOT / "records/acquisition/m2-orbit-recovery-002-activation.json").read_text(encoding="utf-8"))
+    orbit_recovery_002_final_preflight = json.loads((ROOT / "records/acquisition/m2-orbit-recovery-002-final-preflight.json").read_text(encoding="utf-8"))
+    orbit_recovery_002_outcome = json.loads((ROOT / "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json").read_text(encoding="utf-8"))
+    orbit_recovery_002_terminal_reconciliation = json.loads((ROOT / "records/readiness/m2-orbit-recovery-002-terminal-reconciliation.json").read_text(encoding="utf-8"))
+    orbit_recovery_003_proposal = json.loads((ROOT / "contracts/milestone-002-orbit-recovery-003-proposal.json").read_text(encoding="utf-8"))
+    orbit_recovery_003_preflight = json.loads((ROOT / "records/readiness/m2-orbit-recovery-003-review-preflight.json").read_text(encoding="utf-8"))
+    orbit_recovery_003_surface = json.loads((ROOT / "records/surface-receipts/m2-orbit-recovery-003-review.json").read_text(encoding="utf-8"))
+    orbit_recovery_003_bundle = json.loads((ROOT / "reviews/m2-orbit-recovery-003/review-bundle.json").read_text(encoding="utf-8"))
+    orbit_recovery_003_contract = json.loads((ROOT / "reviews/m2-orbit-recovery-003/review-contract.json").read_text(encoding="utf-8"))
+    orbit_recovery_003_blank = json.loads((ROOT / "reviews/m2-orbit-recovery-003/blank-response.json").read_text(encoding="utf-8"))
+    orbit_recovery_003_readiness = json.loads((ROOT / "records/readiness/m2-orbit-recovery-003-review-readiness.json").read_text(encoding="utf-8"))
 
     expected_remote = profile["project"]["repository_identity"]["expected_remote"]
     remote_project_name = expected_remote.rstrip("/").rsplit("/", 1)[-1].removesuffix(".git")
@@ -998,9 +1033,9 @@ def main() -> None:
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
     if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-orbit-recovery-002-proposal.json"
+        "contracts/milestone-002-orbit-recovery-003-proposal.json"
     ]:
-        fail("project profile must expose only the pending corrected orbit-recovery proposal")
+        fail("project profile must expose only the pending orbit recovery-003 proposal")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -1010,8 +1045,9 @@ def main() -> None:
         "records/source-gates/m2-materialization-pixel-readiness-approval.json",
         "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
         "records/source-gates/m2-radar-first-path-001-approval.json",
+        "records/source-gates/m2-orbit-recovery-002-approval.json",
     ]:
-        fail("project profile must expose the eight exact active amendments")
+        fail("project profile must expose the nine exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -1132,6 +1168,20 @@ def main() -> None:
         "radar_source_status": "pass_header_readiness_only",
         "orbit_recovery_authorized": False,
     }
+    expected_orbit_recovery_002_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-orbit-recovery-002-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-orbit-recovery-002-approval.json"),
+        "proposal_ref": "contracts/milestone-002-orbit-recovery-002-proposal.json",
+        "proposal_sha256": "d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8",
+        "review_bundle_sha256": "6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5",
+        "review_reconciliation_ref": "records/source-gates/m2-orbit-recovery-002-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-orbit-recovery-002-review-reconciliation.json"),
+        "source_id": "M2-ORB-001",
+        "maximum_real_attempts": 1,
+        "automatic_retry_authorized": False,
+        "other_orbit_source_requests_authorized": False,
+        "secret_transport": "anonymous_pipe_single_use_memory_only",
+    }
     expected_amendments = [
         expected_dem_amendment_binding,
         expected_orbit_amendment_binding,
@@ -1141,6 +1191,7 @@ def main() -> None:
         expected_materialization_pixel_amendment_binding,
         expected_optical_pixel_recovery_amendment_binding,
         expected_radar_first_path_amendment_binding,
+        expected_orbit_recovery_002_amendment_binding,
     ]
     if profile["authority"].get("amendments") != expected_amendments:
         fail("profile authority does not bind the exact active amendments")
@@ -1155,8 +1206,9 @@ def main() -> None:
         "records/source-gates/m2-materialization-pixel-readiness-approval.json",
         "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
         "records/source-gates/m2-radar-first-path-001-approval.json",
+        "records/source-gates/m2-orbit-recovery-002-approval.json",
     ]:
-        fail("active M2 scope does not expose the eight exact amendment approvals")
+        fail("active M2 scope does not expose the nine exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -1195,9 +1247,9 @@ def main() -> None:
     ):
         fail("project profile must bind optical pixel recovery to its exact approval")
     if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-orbit-recovery-002-proposal.json"
+        "contracts/milestone-002-orbit-recovery-003-proposal.json"
     ]:
-        fail("project profile must expose the exact pending corrected orbit-recovery proposal")
+        fail("project profile must expose the exact pending orbit recovery-003 proposal")
     radar_first_path_gate = profile_gates.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
     if (
         radar_first_path_gate.get("authority_ref") != "reviews/m2-radar-first-path-001/review-contract.json"
@@ -1206,8 +1258,10 @@ def main() -> None:
         fail("project profile must expose the exact radar-first path human-review gate")
     if "M2-ORBIT-RECOVERY" in profile_gates:
         fail("stale orbit recovery review must not remain an actionable human gate")
-    if profile_gates.get("M2-ORBIT-RECOVERY-002-REVIEW", {}).get("authority_ref") != "reviews/m2-orbit-recovery-002/review-contract.json":
-        fail("project profile must expose the corrected orbit recovery-002 human-review gate")
+    if "M2-ORBIT-RECOVERY-002-REVIEW" in profile_gates:
+        fail("completed orbit recovery-002 review must not remain an actionable human gate")
+    if profile_gates.get("M2-ORBIT-RECOVERY-003-REVIEW", {}).get("authority_ref") != "reviews/m2-orbit-recovery-003/review-contract.json":
+        fail("project profile must expose the orbit recovery-003 human-review gate")
     for approved_unit in ("M2-ORBIT-AMEND", "M2-ORBIT-PREFLIGHT", "M2-ORBIT-ACQUIRE", "M2-ORBIT-VERIFY", "M2-ORBIT-APPLY"):
         if profile_gates.get(approved_unit, {}).get("authority_ref") != "records/source-gates/m2-orbit-amendment-approval.json":
             fail(f"project profile must bind {approved_unit} to the exact orbit amendment approval")
@@ -1235,10 +1289,11 @@ def main() -> None:
         "records/source-gates/m2-materialization-pixel-readiness-approval.json",
         "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
         "records/source-gates/m2-radar-first-path-001-approval.json",
+        "records/source-gates/m2-orbit-recovery-002-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW"]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
-    if goal.get("proposed_amendments") != ["contracts/milestone-002-orbit-recovery-002-proposal.json"]:
-        fail("long-term goal must expose the pending corrected orbit-recovery proposal")
+    if goal.get("proposed_amendments") != ["contracts/milestone-002-orbit-recovery-003-proposal.json"]:
+        fail("long-term goal must expose the pending orbit recovery-003 proposal")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -4668,13 +4723,19 @@ def main() -> None:
         optical_pixel_recovery_terminal
         and current_orbit_recovery_002_review_required(ROOT, state_counts)
     )
+    orbit_recovery_003_review_ready = bool(
+        optical_pixel_recovery_terminal
+        and current_orbit_recovery_003_review_required(ROOT, state_counts)
+    )
     optical_pixel_recovery_history_present = bool(
         optical_pixel_recovery_review_ready
         or optical_pixel_recovery_implementation_pending
         or optical_pixel_recovery_execution_pending
         or optical_pixel_recovery_terminal
     )
-    if orbit_recovery_002_review_ready:
+    if orbit_recovery_003_review_ready:
+        expected_checkpoint = "M2-ORBIT-RECOVERY-003-REVIEW"
+    elif orbit_recovery_002_review_ready:
         expected_checkpoint = "M2-ORBIT-RECOVERY-002-REVIEW"
     elif radar_first_path_review_ready:
         expected_checkpoint = "M2-RADAR-FIRST-PATH-001-REVIEW"
@@ -4718,6 +4779,7 @@ def main() -> None:
     expected_optical_pixel_recovery_terminal_next_action = "Review the reconciled terminal BLOCK from optical-pixel-readiness-recovery-001 and choose a separately scoped path forward. Do not retry, change thresholds, substitute dates or sources, or begin baseline or change analysis under the consumed recovery authority."
     expected_radar_first_path_review_next_action = "Review M2 radar-first path bundle SHA-256 5a5bd80f724841f9558ad5ff966ed0d49222419f7310b345492172e4639421ad and proposal SHA-256 ae2ddfa153a86b7acf7f8ec500690713d5ced9a8ddd58f5655d831e1eb282c77; approve, revise, or defer the control-only route split. No pixel, orbit, DEM, source-substitution, baseline, change, or scientific action is authorized before an attested decision."
     expected_orbit_recovery_002_review_next_action = "Review corrected M2 orbit recovery-002 bundle SHA-256 6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5 and proposal SHA-256 d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8; approve, revise, or defer one recovery-only implementation and at most one future byte-zero M2-ORB-001 attempt. No orbit, token, DEM, radar-pixel, baseline, change, or scientific action is authorized before an attested decision."
+    expected_orbit_recovery_003_review_next_action = "Review M2 orbit recovery-003 bundle SHA-256 bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d and proposal SHA-256 5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3; approve, revise, or defer the evidence-first one-file recovery. No retry, credential, catalog, payload, DEM, radar-pixel, baseline, change, attribution, or scientific-publication action is authorized before an attested decision."
     acquire_unit = m2_units.get("M2-ACQUIRE", {})
     if materialization_pixel_review_ready or materialization_pixel_review_approved:
         proposal_sha = "3dbbea5b16eeb297635d6487268cf8b619234fff14755668ac959f778b8e360c"
@@ -5069,7 +5131,96 @@ def main() -> None:
                     or recovery_execution_unit.get("gates", {}).get("reconciliation_sha256") != sha256("records/readiness/m2-optical-pixel-recovery-001-reconciliation.json")
                 ):
                     fail("terminal optical pixel recovery result or reconciliation differs")
-        if orbit_recovery_002_review_ready:
+        if orbit_recovery_003_review_ready:
+            expected_materialized_source_count = 8
+            expected_materialization_state = "route_split_optical_terminal_block_radar_source_header_ready_aggregate_deferred"
+            expected_verify_next_dependency = None
+            expected_primary_next_action = expected_orbit_recovery_003_review_next_action
+            proposal_sha = "5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3"
+            bundle_sha = "bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d"
+            recovery_002_unit = m2_units.get("M2-ORBIT-RECOVERY-002", {})
+            recovery_003_review_unit = m2_units.get("M2-ORBIT-RECOVERY-003-REVIEW", {})
+            recovery_003_implementation_unit = m2_units.get("M2-ORBIT-RECOVERY-003-IMPLEMENTATION", {})
+            recovery_003_unit = m2_units.get("M2-ORBIT-RECOVERY-003", {})
+            orbit_acquire_unit = m2_units.get("M2-ORBIT-ACQUIRE", {})
+            validate_review_bundle("reviews/m2-orbit-recovery-003/review-bundle.json", "reviews/m2-orbit-recovery-003/review-contract.json")
+            if (
+                sha256("contracts/milestone-002-orbit-recovery-003-proposal.json") != proposal_sha
+                or sha256("reviews/m2-orbit-recovery-003/review-bundle.json") != bundle_sha
+                or orbit_recovery_002_runtime_contract.get("source_id") != "M2-ORB-001"
+                or orbit_recovery_002_runtime_contract.get("maximum_real_attempts") != 1
+                or orbit_recovery_002_runtime_publication.get("status") != "pass_public_controls_verified_before_orbit_recovery_002"
+                or orbit_recovery_002_runtime_publication.get("github_actions", {}).get("run_id") != 34048602657
+                or orbit_recovery_002_runtime_publication.get("github_actions", {}).get("conclusion") != "success"
+                or orbit_recovery_002_control_reconciliation.get("status") != "pass_approved_public_ci_recovery_ready_final_preflight_pending"
+                or orbit_recovery_002_activation.get("status") != "pass_exact_orbit_recovery_002_activated_final_no_payload_preflight_pending"
+                or orbit_recovery_002_final_preflight.get("status") != "pass_no_payload_ready_for_single_secret_pipe_handoff"
+                or orbit_recovery_002_outcome.get("status") != "terminal_pretransfer_supervisor_failure_no_retry"
+                or orbit_recovery_002_outcome.get("attempt_id") is not None
+                or orbit_recovery_002_outcome.get("assertions", {}).get("owner_handoff_reached_supervisor") is not True
+                or orbit_recovery_002_outcome.get("assertions", {}).get("catalog_response_hash_persisted") is not False
+                or orbit_recovery_002_outcome.get("assertions", {}).get("active_intake_mutated") is not False
+                or orbit_recovery_002_outcome.get("assertions", {}).get("orbit_download_requested") is not False
+                or orbit_recovery_002_outcome.get("assertions", {}).get("orbit_payload_bytes_received") != 0
+                or orbit_recovery_002_outcome.get("assertions", {}).get("credential_value_recorded") is not False
+                or orbit_recovery_002_outcome.get("assertions", {}).get("recovery_002_authority_consumed") is not True
+                or orbit_recovery_002_outcome.get("assertions", {}).get("automatic_retry_performed") is not False
+                or orbit_recovery_002_terminal_reconciliation.get("status") != "terminal_failure_preserved_recovery_003_review_ready"
+                or orbit_recovery_002_terminal_reconciliation.get("bindings", {}).get("outcome_sha256") != sha256("records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json")
+                or orbit_recovery_002_terminal_reconciliation.get("assertions", {}).get("recovery_003_human_decision_count") != 0
+                or orbit_recovery_002_terminal_reconciliation.get("assertions", {}).get("recovery_003_authorized") is not False
+            ):
+                fail("M2 orbit recovery-002 terminal outcome or preservation boundary differs")
+            if (
+                orbit_recovery_003_proposal.get("status") != "proposed_not_authorized"
+                or orbit_recovery_003_proposal.get("trigger", {}).get("attempt_id") is not None
+                or orbit_recovery_003_proposal.get("trigger", {}).get("payload_bytes_received") != 0
+                or orbit_recovery_003_proposal.get("proposed_recovery", {}).get("source_id") != "M2-ORB-001"
+                or orbit_recovery_003_proposal.get("proposed_recovery", {}).get("required_new_attempt_namespace") != "m2-orb-001-recovery-002"
+                or orbit_recovery_003_proposal.get("proposed_recovery", {}).get("maximum_owner_handoffs") != 1
+                or orbit_recovery_003_proposal.get("proposed_recovery", {}).get("maximum_real_attempts") != 1
+                or orbit_recovery_003_proposal.get("proposed_recovery", {}).get("automatic_retry_authorized") is not False
+                or orbit_recovery_003_preflight.get("status") != "pass_review_ready_no_recovery_003_authority"
+                or orbit_recovery_003_preflight.get("assertions", {}).get("human_decision_count") != 0
+                or orbit_recovery_003_preflight.get("assertions", {}).get("catalog_request_performed") is not False
+                or orbit_recovery_003_surface.get("status") != "pass_blank_review_surface"
+                or orbit_recovery_003_surface.get("validation", {}).get("human_decision_count") != 0
+                or orbit_recovery_003_bundle.get("candidate_identity") != f"M2-ORBIT-RECOVERY-003-PROPOSAL-SHA256:{proposal_sha}"
+                or any(artifact.get("sha256") != sha256(artifact.get("path")) for artifact in orbit_recovery_003_bundle.get("artifacts", []))
+                or orbit_recovery_003_contract.get("review_bundle", {}).get("manifest_sha256") != bundle_sha
+                or orbit_recovery_003_contract.get("items") != [{"item_id": "M2-ORBIT-RECOVERY-003", "evidence_sha256": bundle_sha}]
+                or orbit_recovery_003_blank.get("completed") is not False
+                or orbit_recovery_003_blank.get("reviewer", {}).get("attestation") is not False
+                or orbit_recovery_003_blank.get("responses") != [{"item_id": "M2-ORBIT-RECOVERY-003", "evidence_sha256": bundle_sha, "decision": None, "notes": ""}]
+                or orbit_recovery_003_readiness.get("status") != "pass_ready_owner_review_zero_decisions"
+                or orbit_recovery_003_readiness.get("review", {}).get("human_decision_count") != 0
+                or orbit_recovery_003_readiness.get("review", {}).get("ready_for_handoff") is not True
+                or orbit_recovery_003_readiness.get("assertions", {}).get("recovery_003_authorized") is not False
+                or orbit_recovery_003_readiness.get("assertions", {}).get("orbit_download_requested") is not False
+                or orbit_recovery_003_readiness.get("assertions", {}).get("external_data_mutated") is not False
+            ):
+                fail("M2 orbit recovery-003 review packet differs or contains authority")
+            if (
+                recovery_002_unit.get("status") != "complete"
+                or recovery_002_unit.get("disposition") != "block"
+                or recovery_002_unit.get("gates", {}).get("owner_handoff_count") != 1
+                or recovery_002_unit.get("gates", {}).get("transfer_attempt_count") != 0
+                or recovery_002_unit.get("gates", {}).get("authority_consumed") is not True
+                or recovery_003_review_unit.get("status") != "ready"
+                or recovery_003_review_unit.get("human_gate") is not True
+                or recovery_003_review_unit.get("gates", {}).get("human_decision_count") != 0
+                or recovery_003_review_unit.get("gates", {}).get("recovery_authorized") is not False
+                or recovery_003_implementation_unit.get("status") != "planned"
+                or recovery_003_unit.get("status") != "planned"
+                or recovery_003_unit.get("gates", {}).get("maximum_owner_handoffs") != 1
+                or recovery_003_unit.get("gates", {}).get("maximum_real_attempts") != 1
+                or recovery_003_unit.get("gates", {}).get("automatic_retry_authorized") is not False
+                or orbit_acquire_unit.get("status") != "deferred"
+                or orbit_acquire_unit.get("depends_on") != ["M2-ORBIT-PREFLIGHT", "M2-RADAR-SOURCE-READINESS", "M2-ORBIT-RECOVERY-003"]
+                or orbit_acquire_unit.get("gates", {}).get("retained_failure_review") != "recovery_003_review_ready_zero_decisions"
+            ):
+                fail("M2 recovery-003 active route graph or zero-decision stop gate differs")
+        elif orbit_recovery_002_review_ready:
             expected_materialized_source_count = 8
             expected_materialization_state = "route_split_optical_terminal_block_radar_source_header_ready_aggregate_deferred"
             expected_verify_next_dependency = None
@@ -5291,7 +5442,12 @@ def main() -> None:
         implementation_unit = m2_units.get("M2-SENTINEL-CONTINUATION-001-IMPLEMENTATION", {})
         implementation_gates = implementation_unit.get("gates", {})
         verify_unit = m2_units.get("M2-VERIFY", {})
-        if orbit_recovery_002_review_ready:
+        if orbit_recovery_003_review_ready:
+            expected_materialized_source_count = 8
+            expected_materialization_state = "route_split_optical_terminal_block_radar_source_header_ready_aggregate_deferred"
+            expected_verify_next_dependency = None
+            expected_primary_next_action = expected_orbit_recovery_003_review_next_action
+        elif orbit_recovery_002_review_ready:
             expected_materialized_source_count = 8
             expected_materialization_state = "route_split_optical_terminal_block_radar_source_header_ready_aggregate_deferred"
             expected_verify_next_dependency = None
@@ -8021,6 +8177,51 @@ def main() -> None:
         or orbit_recovery_002_crlf_readiness_evidence.get("assertions", {}).get("real_recovery_started") is not False
     ):
         fail("EVID-0103 orbit recovery-002 CRLF correction readiness differs or overclaims")
+    orbit_recovery_002_gate_evidence = ledger_by_id.get("EVID-0104")
+    orbit_recovery_002_terminal_evidence = ledger_by_id.get("EVID-0105")
+    orbit_recovery_003_review_evidence = ledger_by_id.get("EVID-0106")
+    if (
+        not isinstance(orbit_recovery_002_gate_evidence, dict)
+        or orbit_recovery_002_gate_evidence.get("status") != "pass_exact_controls_ready_one_owner_handoff"
+        or orbit_recovery_002_gate_evidence.get("implementation_commit") != "67ce761003c5c841a068ed688709b348cd423ce3"
+        or orbit_recovery_002_gate_evidence.get("github_actions_run_id") != 34048602657
+        or orbit_recovery_002_gate_evidence.get("publication_gate_sha256") != sha256("records/acquisition/m2-orbit-recovery-002-publication-gate.json")
+        or orbit_recovery_002_gate_evidence.get("runtime_contract_sha256") != sha256("contracts/m2-orbit-recovery-002.json")
+        or orbit_recovery_002_gate_evidence.get("final_preflight_sha256") != sha256("records/acquisition/m2-orbit-recovery-002-final-preflight.json")
+        or orbit_recovery_002_gate_evidence.get("assertions", {}).get("credential_values_read_or_recorded") is not False
+        or orbit_recovery_002_gate_evidence.get("assertions", {}).get("orbit_payload_requested") is not False
+    ):
+        fail("EVID-0104 recovery-002 public gate or final preflight evidence differs")
+    if (
+        not isinstance(orbit_recovery_002_terminal_evidence, dict)
+        or orbit_recovery_002_terminal_evidence.get("status") != "terminal_pretransfer_supervisor_failure_no_retry"
+        or orbit_recovery_002_terminal_evidence.get("outcome_sha256") != sha256("records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json")
+        or orbit_recovery_002_terminal_evidence.get("terminal_reconciliation_sha256") != sha256("records/readiness/m2-orbit-recovery-002-terminal-reconciliation.json")
+        or orbit_recovery_002_terminal_evidence.get("assertions", {}).get("owner_handoff_count") != 1
+        or orbit_recovery_002_terminal_evidence.get("assertions", {}).get("attempt_id_created") is not False
+        or orbit_recovery_002_terminal_evidence.get("assertions", {}).get("orbit_download_requested") is not False
+        or orbit_recovery_002_terminal_evidence.get("assertions", {}).get("payload_bytes_received") != 0
+        or orbit_recovery_002_terminal_evidence.get("assertions", {}).get("recovery_002_authority_consumed") is not True
+        or orbit_recovery_002_terminal_evidence.get("assertions", {}).get("automatic_retry_performed") is not False
+    ):
+        fail("EVID-0105 recovery-002 terminal outcome evidence differs or overclaims")
+    if (
+        not isinstance(orbit_recovery_003_review_evidence, dict)
+        or orbit_recovery_003_review_evidence.get("status") != "pass_blank_evidence_first_one_file_review_public_ci_pending"
+        or orbit_recovery_003_review_evidence.get("proposal_sha256") != sha256("contracts/milestone-002-orbit-recovery-003-proposal.json")
+        or orbit_recovery_003_review_evidence.get("review_preflight_sha256") != sha256("records/readiness/m2-orbit-recovery-003-review-preflight.json")
+        or orbit_recovery_003_review_evidence.get("review_bundle_sha256") != sha256("reviews/m2-orbit-recovery-003/review-bundle.json")
+        or orbit_recovery_003_review_evidence.get("review_contract_sha256") != sha256("reviews/m2-orbit-recovery-003/review-contract.json")
+        or orbit_recovery_003_review_evidence.get("blank_response_sha256") != sha256("reviews/m2-orbit-recovery-003/blank-response.json")
+        or orbit_recovery_003_review_evidence.get("readiness_sha256") != sha256("records/readiness/m2-orbit-recovery-003-review-readiness.json")
+        or orbit_recovery_003_review_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or orbit_recovery_003_review_evidence.get("assertions", {}).get("recovery_003_authorized") is not False
+        or orbit_recovery_003_review_evidence.get("assertions", {}).get("credential_read") is not False
+        or orbit_recovery_003_review_evidence.get("assertions", {}).get("catalog_request_performed") is not False
+        or orbit_recovery_003_review_evidence.get("assertions", {}).get("orbit_payload_requested") is not False
+        or orbit_recovery_003_review_evidence.get("assertions", {}).get("external_data_mutated") is not False
+    ):
+        fail("EVID-0106 recovery-003 review evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():

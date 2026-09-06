@@ -156,6 +156,20 @@
         "optical_route_status": "terminal_block_preserved",
         "radar_source_status": "pass_header_readiness_only",
         "orbit_recovery_authorized": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-orbit-recovery-002-approval.json",
+        "approval_sha256": "ee5922426882b5620f2e90e6703d0eb7d5f5ab77ede3ed61acfb8616b2c22d07",
+        "proposal_ref": "contracts/milestone-002-orbit-recovery-002-proposal.json",
+        "proposal_sha256": "d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8",
+        "review_bundle_sha256": "6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5",
+        "review_reconciliation_ref": "records/source-gates/m2-orbit-recovery-002-review-reconciliation.json",
+        "review_reconciliation_sha256": "b289cd6486ea819c22823fba986702c6e3b353171bff87bc437a67c6bfa0e3ab",
+        "source_id": "M2-ORB-001",
+        "maximum_real_attempts": 1,
+        "automatic_retry_authorized": false,
+        "other_orbit_source_requests_authorized": false,
+        "secret_transport": "anonymous_pipe_single_use_memory_only"
       }
     ]
   },
@@ -224,7 +238,8 @@
       "records/source-gates/m2-sentinel-continuation-001-approval.json",
       "records/source-gates/m2-materialization-pixel-readiness-approval.json",
       "records/source-gates/m2-optical-pixel-recovery-001-approval.json",
-      "records/source-gates/m2-radar-first-path-001-approval.json"
+      "records/source-gates/m2-radar-first-path-001-approval.json",
+      "records/source-gates/m2-orbit-recovery-002-approval.json"
     ]
   },
   "entry_conditions": [
@@ -946,7 +961,7 @@
       "depends_on": [
         "M2-ORBIT-PREFLIGHT",
         "M2-RADAR-SOURCE-READINESS",
-        "M2-ORBIT-RECOVERY-002"
+        "M2-ORBIT-RECOVERY-003"
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
@@ -965,17 +980,18 @@
         "fresh_source_preflight": "pass",
         "orbit_custody_initialized": true,
         "token_presence_checked": "synthetic_test_literal_only",
-        "retained_failure_review": "corrected_review_ready_zero_decisions",
+        "retained_failure_review": "recovery_003_review_ready_zero_decisions",
         "retained_failure_reconciliation_ref": "records/acquisition/orbit-test-boundary-reconciliation-001.json",
         "retained_failure_reconciliation_sha256": "40dae0623dcc142cec17ff2108752e5e60bd736a241fe4b83e8f04c5de690025",
-        "retained_failure_review_ref": "reviews/m2-orbit-recovery-002/review-contract.json",
-        "retained_failure_review_bundle_sha256": "6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5",
-        "retained_failure_recovery_proposal_sha256": "d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8",
+        "retained_failure_review_ref": "reviews/m2-orbit-recovery-003/review-contract.json",
+        "retained_failure_review_bundle_sha256": "bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d",
+        "retained_failure_recovery_proposal_sha256": "5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3",
         "radar_source_readiness": "complete",
         "radar_source_readiness_ref": "records/readiness/m2-radar-source-readiness-001.json",
         "radar_source_readiness_sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
         "superseded_milestone_dependency_m2_verify": "preserved_in_stale_unapproved_orbit_packet_only",
-        "orbit_recovery_002_status": "planned_not_authorized"
+        "orbit_recovery_002_status": "terminal_block_consumed_no_transfer_attempt",
+        "orbit_recovery_003_status": "planned_not_authorized"
       },
       "disposition": "defer",
       "retained_failures": [
@@ -987,6 +1003,16 @@
           "receipt_ref": "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
           "receipt_sha256": "a7057479f4dfb867ead6c9622d684c07df51af9db6c39a6fa2dc6d94ae7afc9c",
           "retry_automatically_authorized": false
+        },
+        {
+          "source_id": "M2-ORB-001",
+          "supervisor_id": "m2-orbit-recovery-002-20260906t172858z-42bace7e",
+          "attempt_id": null,
+          "failure_code": "orbit_recovery_002_supervisor_unexpected_failure",
+          "partial_bytes_preserved": 0,
+          "outcome_ref": "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+          "outcome_sha256": "3d0b6be8e09e0d9049c32c65461e321b2fdbd5db398dd9a6d1b08b62c6c51380",
+          "retry_automatically_authorized": false
         }
       ],
       "exit_condition_delta": {
@@ -995,10 +1021,10 @@
         ],
         "observed": [],
         "decision_value": "no_progress",
-        "rationale": "The route-specific Sentinel prerequisite now passes, but the corrected recovery review is blank and no orbit catalogue, token, or payload action is released."
+        "rationale": "Recovery-002 is terminal without an attempt ID or payload; recovery-003 is a blank human gate and releases no orbit action."
       },
       "next_dependency": "M2-ORBIT-VERIFY",
-      "rationale": "Orbit acquisition remains deferred until the corrected M2-ORB-001 review, implementation, public CI, no-payload preflight, and one-attempt recovery all pass; DEM and radar-pixel gates remain separate."
+      "rationale": "Orbit acquisition remains deferred until recovery-003 receives an exact owner decision and, only if approved, passes implementation, public CI, final preflight, and its one owner-selected attempt."
     },
     {
       "id": "M2-ORBIT-VERIFY",
@@ -1735,7 +1761,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "contracts/milestone-002-orbit-recovery-002-proposal.json",
         "reviews/m2-orbit-recovery-002/review-bundle.json",
@@ -1752,24 +1778,28 @@
         "review_bundle_sha256": "6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5",
         "review_contract_sha256": "1b0da1577a24c9323e529ac5fd58cafb7f15ccefc96f97df1964ddd751dde261",
         "blank_response_sha256": "e21a2a66814c490391c5f1ba1b77bc1e00d7809dbeeca87bef297c96dfd33c9a",
-        "human_decision_count": 0,
-        "attestation": false,
-        "recovery_authorized": false,
+        "human_decision_count": 1,
+        "attestation": true,
+        "recovery_authorized": true,
         "maximum_future_attempts_if_approved": 1,
-        "other_orbit_source_requests_authorized_by_this_review": false
+        "other_orbit_source_requests_authorized_by_this_review": false,
+        "approval_sha256": "ee5922426882b5620f2e90e6703d0eb7d5f5ab77ede3ed61acfb8616b2c22d07",
+        "review_reconciliation_sha256": "b289cd6486ea819c22823fba986702c6e3b353171bff87bc437a67c6bfa0e3ab"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
         "records/readiness/m2-orbit-recovery-001-stale-evidence.json"
       ],
       "exit_condition_delta": {
         "expected": [],
-        "observed": [],
-        "decision_value": "awaiting_owner_decision",
-        "rationale": "The corrected packet is blank and creates no recovery, credential, catalogue, or payload authority."
+        "observed": [
+          "one exact attested approval"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "The exact approval is locked and reconciled; only the reviewed implementation, public-CI, preflight, and one M2-ORB-001 attempt are released."
       },
-      "next_dependency": null
+      "next_dependency": "M2-ORBIT-RECOVERY-002-IMPLEMENTATION"
     },
     {
       "id": "M2-ORBIT-RECOVERY-002-IMPLEMENTATION",
@@ -1779,20 +1809,31 @@
       ],
       "action_class": "external_publication",
       "human_gate": false,
-      "status": "planned",
-      "inputs": [],
-      "outputs": [],
+      "status": "complete",
+      "inputs": [
+        "records/source-gates/m2-orbit-recovery-002-approval.json",
+        "records/acquisition/m2-orbit-recovery-002-implementation-readiness.json"
+      ],
+      "outputs": [
+        "records/acquisition/m2-orbit-recovery-002-publication-gate.json"
+      ],
       "gates": {
-        "public_ci": "required",
-        "final_no_payload_preflight": "required_after_public_ci"
+        "public_ci": "pass",
+        "final_no_payload_preflight": "pending",
+        "publication_gate_sha256": "a94cf2a5c8fafdcafdfc5a4234cb05386129ca3f8579ab7a99450efbf712049a",
+        "credential_read": false,
+        "orbit_payload_requested": false
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [],
       "exit_condition_delta": {
         "expected": [],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "No approval or recovery implementation exists."
+        "observed": [
+          "local synthetic tests",
+          "public default-branch CI"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "The exact recovery-only implementation passed local controls and public CI without credentials or orbit bytes."
       },
       "next_dependency": "M2-ORBIT-RECOVERY-002"
     },
@@ -1804,10 +1845,133 @@
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
+      "status": "complete",
+      "inputs": [
+        "records/acquisition/m2-orbit-recovery-002-publication-gate.json",
+        "contracts/m2-orbit-recovery-002.json",
+        "records/acquisition/m2-orbit-recovery-002-final-preflight.json"
+      ],
+      "outputs": [
+        "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+        "records/readiness/m2-orbit-recovery-002-terminal-reconciliation.json"
+      ],
+      "gates": {
+        "maximum_real_attempts": 1,
+        "automatic_retry_authorized": false,
+        "source_id": "M2-ORB-001",
+        "other_orbit_source_requests_authorized_by_this_unit": false,
+        "public_ci": "pass",
+        "final_no_payload_preflight": "pass",
+        "credential_values_read_or_recorded": false,
+        "owner_handoff_count": 1,
+        "supervisor_invocation_count": 1,
+        "transfer_attempt_count": 0,
+        "authority_consumed": true,
+        "outcome_ref": "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+        "outcome_sha256": "3d0b6be8e09e0d9049c32c65461e321b2fdbd5db398dd9a6d1b08b62c6c51380",
+        "terminal_reconciliation_ref": "records/readiness/m2-orbit-recovery-002-terminal-reconciliation.json",
+        "terminal_reconciliation_sha256": "3ac47e6e57c7f2c27074910f6f5a41b432561fc59caad1a0dd75459aeff3abfc"
+      },
+      "disposition": "block",
+      "retained_failures": [
+        "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json",
+        "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-201-VERIFIED-CUSTODY"
+        ],
+        "observed": [],
+        "decision_value": "block",
+        "rationale": "The one approved owner handoff launched a supervisor but terminated in local pretransfer setup before an attempt ID or payload request; the recovery identity is consumed and cannot retry."
+      },
+      "next_dependency": "M2-ORBIT-RECOVERY-003-REVIEW"
+    },
+    {
+      "id": "M2-ORBIT-RECOVERY-003-REVIEW",
+      "purpose": "Obtain one exact owner decision on a distinct evidence-first recovery after the terminal recovery-002 pretransfer failure.",
+      "depends_on": [
+        "M2-ORBIT-RECOVERY-002",
+        "M2-RADAR-SOURCE-READINESS",
+        "M2-ORBIT-PREFLIGHT"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "ready",
+      "inputs": [
+        "contracts/milestone-002-orbit-recovery-003-proposal.json",
+        "reviews/m2-orbit-recovery-003/review-bundle.json",
+        "reviews/m2-orbit-recovery-003/review-contract.json",
+        "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json",
+        "records/readiness/m2-orbit-recovery-002-terminal-reconciliation.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-orbit-recovery-003-review-reconciliation.json",
+        "records/source-gates/m2-orbit-recovery-003-approval.json"
+      ],
+      "gates": {
+        "proposal_sha256": "5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3",
+        "review_bundle_sha256": "bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d",
+        "review_contract_sha256": "a122def1ac97e3ff5451d807c2a98e7713d7c46d834103d70d7807e67e694cf0",
+        "blank_response_sha256": "63f8972c8d03ba66d2b9d2b850fea72e7e388e2a5b5b538c2f2fc076cd1f4f82",
+        "human_decision_count": 0,
+        "attestation": false,
+        "recovery_authorized": false,
+        "maximum_future_attempts_if_approved": 1,
+        "other_orbit_source_requests_authorized_by_this_review": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "awaiting_owner_decision",
+        "rationale": "The recovery-003 packet is blank and creates no implementation, credential, catalog, or payload authority."
+      },
+      "next_dependency": null
+    },
+    {
+      "id": "M2-ORBIT-RECOVERY-003-IMPLEMENTATION",
+      "purpose": "If separately approved, implement and publicly validate the exact evidence-first recovery-003 controls before any real access.",
+      "depends_on": [
+        "M2-ORBIT-RECOVERY-003-REVIEW"
+      ],
+      "action_class": "external_publication",
+      "human_gate": false,
       "status": "planned",
       "inputs": [],
       "outputs": [],
       "gates": {
+        "public_ci": "required",
+        "final_no_payload_preflight": "required_after_public_ci"
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "No recovery-003 approval or implementation exists."
+      },
+      "next_dependency": "M2-ORBIT-RECOVERY-003"
+    },
+    {
+      "id": "M2-ORBIT-RECOVERY-003",
+      "purpose": "If every new gate passes, permit at most one owner handoff and one byte-zero request for exact M2-ORB-001 under a distinct evidence-first identity.",
+      "depends_on": [
+        "M2-ORBIT-RECOVERY-003-IMPLEMENTATION"
+      ],
+      "action_class": "data_acquisition",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [],
+      "outputs": [],
+      "gates": {
+        "maximum_owner_handoffs": 1,
         "maximum_real_attempts": 1,
         "automatic_retry_authorized": false,
         "source_id": "M2-ORB-001",
@@ -1815,7 +1979,7 @@
       },
       "disposition": null,
       "retained_failures": [
-        "records/acquisition/orbit-attempts/m2-orb-001-20260904t050937z-8ed21d05.json"
+        "records/acquisition/m2-orbit-recovery-002-outcome-reconciliation.json"
       ],
       "exit_condition_delta": {
         "expected": [
@@ -1823,7 +1987,7 @@
         ],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "The corrected review has zero decisions and no recovery attempt is authorized."
+        "rationale": "The blank review creates no recovery-003 action authority."
       },
       "next_dependency": "M2-ORBIT-ACQUIRE"
     }
@@ -1882,8 +2046,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ORBIT-RECOVERY-002-REVIEW",
-    "next_action": "Review corrected M2 orbit recovery-002 bundle SHA-256 6d43342b6bda2740667fa6e924a52f15313d8827cfb62563ea107bc483e87fa5 and proposal SHA-256 d30208c07deb66ef2c7487f8c901abd4fb5ff04aa56766bca8066d4c8d4f0db8; approve, revise, or defer one recovery-only implementation and at most one future byte-zero M2-ORB-001 attempt. No orbit, token, DEM, radar-pixel, baseline, change, or scientific action is authorized before an attested decision.",
+    "current_checkpoint": "M2-ORBIT-RECOVERY-003-REVIEW",
+    "next_action": "Review M2 orbit recovery-003 bundle SHA-256 bc3cdc22d16251c77b26d9903036b4317221e2b01207aa9db26436bfd091fe9d and proposal SHA-256 5aa4a0042024634a7ade191e0c5f36614216d8581a9c0535c0042be20583bfa3; approve, revise, or defer the evidence-first one-file recovery. No retry, credential, catalog, payload, DEM, radar-pixel, baseline, change, attribution, or scientific-publication action is authorized before an attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -1902,7 +2066,11 @@
       "The old orbit-recovery review remains preserved but is not actionable because its full-M2-VERIFY prerequisite deadlocks the independent radar route; the radar-first path review authorizes no replacement or orbit request by itself.",
       "The approved radar-first amendment preserves optical real-001 as INVALID and recovery-001 as terminal BLOCK; it does not authorize retry, tuning, alternate dates, or source substitution.",
       "The old orbit-recovery proposal and bundle remain immutable stale evidence and are not actionable.",
-      "The corrected orbit-recovery-002 review is blank and authorizes no catalogue access, token lookup, payload request, DEM action, radar pixel read, baseline, change analysis, or scientific publication."
+      "The corrected orbit-recovery-002 review is blank and authorizes no catalogue access, token lookup, payload request, DEM action, radar pixel read, baseline, change analysis, or scientific publication.",
+      "Orbit recovery-002 authorizes one byte-zero M2-ORB-001 attempt only after final preflight; it authorizes no later orbit source request or retry.",
+      "Recovery-002 is terminal after one owner handoff and supervisor invocation; it created no attempt ID or payload request and cannot be retried under its consumed authority.",
+      "The exact recovery-002 local exception category and returned catalog hash are unavailable; preserve that uncertainty.",
+      "Recovery-003 is a blank review and authorizes no implementation, credential, catalog, payload, other orbit source, processing, or scientific action."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
