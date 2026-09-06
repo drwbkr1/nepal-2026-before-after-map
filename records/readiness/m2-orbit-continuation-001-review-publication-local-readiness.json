@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-CONTINUATION-001-REVIEW-PUBLICATION-LOCAL-READINESS",
+  "verified_at_utc": "2026-09-06T21:50:10Z",
+  "status": "pass_exact_zero_decision_packet_ready_public_ci_pending",
+  "bindings": {
+    "preparation_base_commit": "ed902cb887be9d42eb0943398f21b91e15371506",
+    "proposal_sha256": "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
+    "review_preflight_sha256": "fe301e15bc4d03d47a04ed76eabda9baf555554fa9582b236abc1877eeb11f1a",
+    "review_surface_sha256": "f3c2cf3e538b40ad9334ef05b3b55564df52c9be5f50d299112c8ac9510bace3",
+    "surface_receipt_sha256": "b99ad9db509a3a92b21a68f5d77a7b11440fe473eb851df578fcfd513198c9c2",
+    "review_bundle_sha256": "f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6",
+    "review_contract_sha256": "40c4a010e75306a3df997b55d0c68216f745a39622da48fc45566fc877936296",
+    "blank_response_sha256": "a027c25cbd0ab4f33eb62bd32daf94c62a66e682da08c4c8ecb7ab7b45e28d5f",
+    "review_readiness_sha256": "eadb62cf4537bf5bed962d945b2badfed19fbecd62fb9ff6f65107bdc79dbe89"
+  },
+  "validation": {
+    "focused_test_count": 5,
+    "full_repository_test_count": 442,
+    "intentional_skip_count": 3,
+    "project_checker_required_file_count": 743,
+    "project_checker_status": "pass",
+    "review_bundle_utility": "pass_ready_for_handoff",
+    "blank_response_round_trip": "pass_exact_bytes",
+    "review_surface_visual_inspection": "pass",
+    "public_ci": "pending"
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "continuation_authorized": false,
+    "credential_values_read_or_recorded": false,
+    "network_requests_performed": false,
+    "payload_requested": false,
+    "external_data_mutated": false,
+    "m2_orb_001_mutated": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Publish the exact zero-decision packet and require successful public default-branch CI before owner review."
+}

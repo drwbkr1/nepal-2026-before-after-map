@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-orbit-continuation-001-review-bundle",
+  "review_id": "m2-orbit-continuation-001-review",
+  "authority_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+  "candidate_identity": "M2-ORBIT-CONTINUATION-001-PROPOSAL-SHA256:01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-orbit-continuation-001-review.png",
+      "sha256": "f3c2cf3e538b40ad9334ef05b3b55564df52c9be5f50d299112c8ac9510bace3",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-orbit-continuation-001-review.json",
+          "sha256": "b99ad9db509a3a92b21a68f5d77a7b11440fe473eb851df578fcfd513198c9c2"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_ORBIT_CONTINUATION_001_REVIEW.md",
+      "sha256": "e808469661cdebcbe3ff04255fd9af3dfe9fee9da590cbba2832d21caa5c0385",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "proposal",
+      "path": "contracts/milestone-002-orbit-continuation-001-proposal.json",
+      "sha256": "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
+      "role": "candidate_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "review-preflight",
+      "path": "records/readiness/m2-orbit-continuation-001-review-preflight.json",
+      "sha256": "fe301e15bc4d03d47a04ed76eabda9baf555554fa9582b236abc1877eeb11f1a",
+      "role": "zero_authority_preflight",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "active-orbit-intake",
+      "path": "contracts/m2-orbit-intake.json",
+      "sha256": "f64591598c782dc0a7bec58b40517d5b916ca850705ecff8677dbc66022c430b",
+      "role": "current_source_state",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "m2-orb-001-terminal-reconciliation",
+      "path": "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json",
+      "sha256": "6309ee02114a8a59d5c3b46ed29b4f5901dfdb009d47dccb314561664a6254dd",
+      "role": "completed_predecessor",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "m2-orb-001-local-result",
+      "path": "records/acquisition/m2-orbit-osv-precision-amendment-001-local-validation.json",
+      "sha256": "9b3e45fe1d8fe0c9c6668287d7bfc2ec0f8e238d6e0730f04a8d99583eef9898",
+      "role": "input_only_predecessor_result",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "original-orbit-approval",
+      "path": "records/source-gates/m2-orbit-amendment-approval.json",
+      "sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+      "role": "exact_source_eligibility",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "original-orbit-proposal",
+      "path": "contracts/milestone-002-orbit-amendment-proposal.json",
+      "sha256": "b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292",
+      "role": "original_scope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "osv-format-evidence",
+      "path": "records/source-gates/m2-orbit-osv-time-format-evidence.json",
+      "sha256": "0ffd9adebc0d2d0e3cfb8e4a52eeb7d52f63c9a83fafe1d8209803184990d6db",
+      "role": "endpoint_precision_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "m2-orb-001-osv-contract",
+      "path": "contracts/m2-orbit-offline-verification-osv-precision-amendment-001.json",
+      "sha256": "ee578c8cc7c4e27c28f6e8ea4d65b664ce1a22a33db57e06c10c9cccafbb928e",
+      "role": "one_second_rule_precedent",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "radar-source-readiness",
+      "path": "records/readiness/m2-radar-source-readiness-001.json",
+      "sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
+      "role": "source_prerequisite",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "request, resume, reuse, retry, replace, or mutate M2-ORB-001 or its preserved recovery staging evidence",
+    "make an automatic retry or a second request for any failed remaining source",
+    "change source order, provider UUID, filename, orbit type, expected length, provider checksum, scene binding, destination, or source manifest",
+    "use a tolerance above one second, relax another verifier rule, substitute AUX_POEORB, date-shop, or source-shop",
+    "expose, log, copy, file-store, clipboard-store, or environment-store an owner password, TOTP, refresh token, or access token",
+    "accept terms, create or recover an account, change MFA, incur cost, or use a paid source",
+    "apply orbit data, act on DEMs, decode radar pixels, process a baseline, analyze change, attribute cause, or publish a scientific result",
+    "The three exact files were catalog-confirmed earlier but have not been downloaded or inspected, so their live availability and byte-level validity remain unproven.",
+    "The one-second rule is a bounded inference from whole-second header and microsecond OSV formats, not a provider-stated numerical tolerance.",
+    "A source-level success would establish only orbit-input custody and verification, not successful orbit application or usable radar pixels.",
+    "Any first failure stops the sequence and requires another explicit review before retry or continuation.",
+    "This packet creates no implementation, network, credential, payload, promotion, processing, or scientific authority until the exact review receives a completed owner decision."
+  ]
+}

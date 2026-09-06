@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-CONTINUATION-001-REVIEW-READINESS",
+  "verified_at_utc": "2026-09-06T21:47:09Z",
+  "status": "pass_ready_owner_review_zero_decisions_public_ci_pending",
+  "bindings": {
+    "proposal_sha256": "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
+    "active_intake_sha256": "f64591598c782dc0a7bec58b40517d5b916ca850705ecff8677dbc66022c430b",
+    "terminal_reconciliation_sha256": "6309ee02114a8a59d5c3b46ed29b4f5901dfdb009d47dccb314561664a6254dd",
+    "review_preflight_sha256": "fe301e15bc4d03d47a04ed76eabda9baf555554fa9582b236abc1877eeb11f1a",
+    "review_surface_sha256": "f3c2cf3e538b40ad9334ef05b3b55564df52c9be5f50d299112c8ac9510bace3",
+    "surface_receipt_sha256": "b99ad9db509a3a92b21a68f5d77a7b11440fe473eb851df578fcfd513198c9c2",
+    "review_bundle_sha256": "f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6",
+    "review_contract_sha256": "40c4a010e75306a3df997b55d0c68216f745a39622da48fc45566fc877936296",
+    "blank_response_sha256": "a027c25cbd0ab4f33eb62bd32daf94c62a66e682da08c4c8ecb7ab7b45e28d5f"
+  },
+  "review": {
+    "human_decision_count": 0,
+    "attestation": false,
+    "ready_for_publication_gate": true
+  },
+  "assertions": {
+    "continuation_authorized": false,
+    "source_ids_in_exact_order": [
+      "M2-ORB-002",
+      "M2-ORB-003",
+      "M2-ORB-004"
+    ],
+    "maximum_owner_handoffs_if_approved": 1,
+    "maximum_real_attempts_per_source_if_approved": 1,
+    "stop_on_first_failure_if_approved": true,
+    "maximum_endpoint_tolerance_seconds_if_approved": 1.0,
+    "m2_orb_001_request_authorized": false,
+    "credential_read": false,
+    "network_request_performed": false,
+    "payload_requested": false,
+    "external_data_mutated": false,
+    "scientific_result_established": false
+  }
+}

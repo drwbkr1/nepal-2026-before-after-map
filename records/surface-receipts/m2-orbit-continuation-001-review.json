@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-CONTINUATION-001-REVIEW-SURFACE",
+  "verified_at_utc": "2026-09-06T21:47:09Z",
+  "status": "pass_blank_review_surface",
+  "artifact": {
+    "path": "docs/assets/m2-orbit-continuation-001-review.png",
+    "sha256": "f3c2cf3e538b40ad9334ef05b3b55564df52c9be5f50d299112c8ac9510bace3",
+    "width_px": 1800,
+    "height_px": 1640,
+    "format": "PNG",
+    "contains_third_party_pixels": false
+  },
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-orbit-continuation-001-proposal.json",
+    "proposal_sha256": "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
+    "active_intake_ref": "contracts/m2-orbit-intake.json",
+    "active_intake_sha256": "f64591598c782dc0a7bec58b40517d5b916ca850705ecff8677dbc66022c430b",
+    "terminal_reconciliation_ref": "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "6309ee02114a8a59d5c3b46ed29b4f5901dfdb009d47dccb314561664a6254dd"
+  },
+  "validation": {
+    "current_state_visible": true,
+    "three_source_fixed_order_visible": true,
+    "one_attempt_and_stop_policy_visible": true,
+    "prospective_one_second_rule_visible": true,
+    "prohibited_scope_visible": true,
+    "blank_state_verified": true,
+    "human_decision_count": 0,
+    "completion_controls_verified": true,
+    "export_verified": true
+  }
+}

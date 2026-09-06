@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-CONTINUATION-001-REVIEW-PREFLIGHT",
+  "observed_at_utc": "2026-09-06T21:47:09Z",
+  "status": "pass_review_ready_zero_decisions_no_network_or_payload_mutation",
+  "bindings": {
+    "proposal_sha256": "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
+    "active_intake_sha256": "f64591598c782dc0a7bec58b40517d5b916ca850705ecff8677dbc66022c430b",
+    "terminal_reconciliation_sha256": "6309ee02114a8a59d5c3b46ed29b4f5901dfdb009d47dccb314561664a6254dd",
+    "m2_orb_001_result_sha256": "9b3e45fe1d8fe0c9c6668287d7bfc2ec0f8e238d6e0730f04a8d99583eef9898",
+    "original_orbit_approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+    "osv_format_evidence_sha256": "0ffd9adebc0d2d0e3cfb8e4a52eeb7d52f63c9a83fafe1d8209803184990d6db",
+    "m2_orb_001_osv_contract_sha256": "ee578c8cc7c4e27c28f6e8ea4d65b664ce1a22a33db57e06c10c9cccafbb928e",
+    "radar_readiness_sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389"
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "continuation_authorized": false,
+    "implementation_started": false,
+    "credential_read": false,
+    "network_request_performed": false,
+    "payload_requested": false,
+    "external_data_mutated": false,
+    "m2_orb_001_mutated": false,
+    "other_orbit_source_requested": false,
+    "orbit_application_performed": false,
+    "radar_pixels_read": false,
+    "scientific_result_established": false
+  }
+}
