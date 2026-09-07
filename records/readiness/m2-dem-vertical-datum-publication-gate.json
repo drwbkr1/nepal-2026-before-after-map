@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PUBLICATION-GATE",
+  "status": "pass_public_default_branch_ci",
+  "verified_at_utc": "2026-09-07T21:03:12Z",
+  "commit_sha": "6a78e3232a290f1b799f1459066f2420439af67f",
+  "public_ci_run_id": 34161674667,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/34161674667",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 860,
+  "public_test_count": 499,
+  "public_intentional_skip_count": 10,
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
+    "approval_sha256": "38c872c8dbeeeab08212dd3f71b2dce131b39819c6f7309d1f2b1df2884ee4a6",
+    "control_reconciliation_ref": "records/readiness/m2-dem-vertical-datum-control-reconciliation.json",
+    "control_reconciliation_sha256": "2aa2ef146f0d682d5e0693303fe7d6d00679feb45097af8ac2e85db864829b41",
+    "postapproval_validation_ref": "records/readiness/m2-dem-vertical-datum-postapproval-validation.json",
+    "postapproval_validation_sha256": "8986899b06d82e26208c8a4b31815994112ca51595fce09649c0b2d86d15bbc4",
+    "publication_failure_ref": "records/readiness/m2-dem-vertical-datum-publication-attempt-001-failure.json",
+    "publication_failure_sha256": "44744391a120422ad0a130054b0ef82a060f035de4d2645f51e6732603b3a878"
+  },
+  "assertions": {
+    "repository_validation_passed": true,
+    "full_public_test_suite_passed": true,
+    "owner_decision_changed": false,
+    "external_data_mutated": false,
+    "arcgis_component_installed": false,
+    "dem_preconversion_executed": false,
+    "orbit_application_executed": false,
+    "radar_pixels_read": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Owner separately installs the exact matching ArcGIS Coordinate Systems Data world1x1_vert feature, then reports completion for a read-only capability reinspection."
+}

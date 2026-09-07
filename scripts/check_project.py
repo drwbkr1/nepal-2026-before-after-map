@@ -693,6 +693,7 @@ REQUIRED = [
     "records/readiness/m2-dem-vertical-datum-postapproval-full-suite-attempt-001-failure.json",
     "records/readiness/m2-dem-vertical-datum-postapproval-validation.json",
     "records/readiness/m2-dem-vertical-datum-publication-attempt-001-failure.json",
+    "records/readiness/m2-dem-vertical-datum-publication-gate.json",
     "reviews/m2-activation/review-bundle.json",
     "reviews/m2-activation/review-contract.json",
     "reviews/m2-activation/blank-response.json",
@@ -1064,6 +1065,7 @@ def main() -> None:
     dem_vertical_postapproval_failure = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-postapproval-full-suite-attempt-001-failure.json").read_text(encoding="utf-8"))
     dem_vertical_postapproval_validation = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-postapproval-validation.json").read_text(encoding="utf-8"))
     dem_vertical_publication_failure = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-publication-attempt-001-failure.json").read_text(encoding="utf-8"))
+    dem_vertical_publication_gate = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-publication-gate.json").read_text(encoding="utf-8"))
     dem_terrain_contract = json.loads((ROOT / "config/qa/dem-terrain-quality-contract.json").read_text(encoding="utf-8"))
     dem_terrain_readiness = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-readiness.json").read_text(encoding="utf-8"))
     dem_terrain_ci_correction = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-ci-correction.json").read_text(encoding="utf-8"))
@@ -3528,6 +3530,27 @@ def main() -> None:
         ))
     ):
         fail("M2 DEM vertical-datum first publication failure is not preserved exactly")
+    if (
+        dem_vertical_publication_gate.get("status") != "pass_public_default_branch_ci"
+        or dem_vertical_publication_gate.get("commit_sha") != "6a78e3232a290f1b799f1459066f2420439af67f"
+        or dem_vertical_publication_gate.get("public_ci_run_id") != 34161674667
+        or dem_vertical_publication_gate.get("public_ci_conclusion") != "success"
+        or dem_vertical_publication_gate.get("repository_required_file_count") != 860
+        or dem_vertical_publication_gate.get("public_test_count") != 499
+        or dem_vertical_publication_gate.get("public_intentional_skip_count") != 10
+        or dem_vertical_publication_gate.get("bindings", {}).get("approval_sha256") != sha256("records/source-gates/m2-dem-vertical-datum-approval.json")
+        or dem_vertical_publication_gate.get("bindings", {}).get("control_reconciliation_sha256") != sha256("records/readiness/m2-dem-vertical-datum-control-reconciliation.json")
+        or dem_vertical_publication_gate.get("bindings", {}).get("postapproval_validation_sha256") != sha256("records/readiness/m2-dem-vertical-datum-postapproval-validation.json")
+        or dem_vertical_publication_gate.get("bindings", {}).get("publication_failure_sha256") != sha256("records/readiness/m2-dem-vertical-datum-publication-attempt-001-failure.json")
+        or dem_vertical_publication_gate.get("assertions", {}).get("repository_validation_passed") is not True
+        or dem_vertical_publication_gate.get("assertions", {}).get("full_public_test_suite_passed") is not True
+        or any(dem_vertical_publication_gate.get("assertions", {}).get(key) is not False for key in (
+            "owner_decision_changed", "external_data_mutated", "arcgis_component_installed",
+            "dem_preconversion_executed", "orbit_application_executed", "radar_pixels_read",
+            "baseline_or_change_analysis_executed", "scientific_result_established",
+        ))
+    ):
+        fail("M2 DEM vertical-datum publication gate differs or overclaims")
     vertical_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-REVIEW", {})
     vertical_install_unit = active_m2_units.get("M2-DEM-EGM2008-COMPONENT-INSTALL", {})
     vertical_conversion_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-CONVERSION", {})
@@ -8820,6 +8843,23 @@ def main() -> None:
         ))
     ):
         fail("EVID-0126 DEM vertical-datum publication failure evidence differs or overclaims")
+    vertical_publication_gate_evidence = ledger_by_id.get("EVID-0127")
+    if (
+        not isinstance(vertical_publication_gate_evidence, dict)
+        or vertical_publication_gate_evidence.get("status") != "pass_public_default_branch_ci_owner_install_pending"
+        or vertical_publication_gate_evidence.get("publication_gate_sha256") != sha256("records/readiness/m2-dem-vertical-datum-publication-gate.json")
+        or vertical_publication_gate_evidence.get("checker_sha256") != sha256("scripts/check_project.py")
+        or vertical_publication_gate_evidence.get("assertions", {}).get("publication_commit") != "6a78e3232a290f1b799f1459066f2420439af67f"
+        or vertical_publication_gate_evidence.get("assertions", {}).get("public_ci_run_id") != 34161674667
+        or vertical_publication_gate_evidence.get("assertions", {}).get("public_ci_conclusion") != "success"
+        or vertical_publication_gate_evidence.get("assertions", {}).get("current_checkpoint") != "M2-DEM-EGM2008-COMPONENT-INSTALL"
+        or any(vertical_publication_gate_evidence.get("assertions", {}).get(key) is not False for key in (
+            "external_data_mutated", "arcgis_component_installed", "dem_preconversion_executed",
+            "orbit_application_executed", "radar_pixels_read", "baseline_or_change_analysis_executed",
+            "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0127 DEM vertical-datum publication gate evidence differs or overclaims")
 
     orbit_review_evidence = ledger_by_id.get("EVID-0052")
     if (
