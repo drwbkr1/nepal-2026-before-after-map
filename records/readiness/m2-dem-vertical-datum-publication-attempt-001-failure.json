@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PUBLICATION-ATTEMPT-001-FAILURE",
+  "status": "failed_public_ci_preserved_hash_normalization_corrected",
+  "observed_at_utc": "2026-09-07T20:59:24Z",
+  "commit_sha": "6437c2c05b98ec70922b12d5a6f9396062196aad",
+  "public_ci_run_id": 34161358203,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/34161358203",
+  "public_ci_conclusion": "failure",
+  "failed_step": "Validate repository",
+  "failed_check": "EVID-0124 DEM vertical-datum owner approval or control transition differs or overclaims",
+  "diagnosis": "Three EVID-0124 control hashes were calculated from pre-existing CRLF working-tree bytes on Windows. Git correctly published those text files with LF bytes under .gitattributes, so the Linux checker compared the repository bytes to noncanonical working-tree hashes and stopped before the test step.",
+  "resolution": {
+    "status": "portable_hash_binding_corrected_public_ci_pending",
+    "repository_lf_hashes_rebound": true,
+    "hash_bound_paths": [
+      "contracts/milestone-002.json",
+      "records/project-control-profile.json",
+      "records/long-term-goal.json"
+    ],
+    "production_or_scientific_logic_changed": false,
+    "fresh_public_ci_required": true
+  },
+  "assertions": {
+    "public_ci_passed": false,
+    "test_step_started": false,
+    "owner_decision_changed": false,
+    "external_data_mutated": false,
+    "arcgis_component_installed": false,
+    "dem_preconversion_executed": false,
+    "orbit_application_executed": false,
+    "radar_pixels_read": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Commit the exact repository-LF hash correction and preserved failure, then require a fresh successful public default-branch CI run before treating the control transition as publication-validated."
+}
