@@ -1,0 +1,190 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-CONTINUATION-001-FINAL-PREFLIGHT",
+  "verified_at_utc": "2026-09-06T23:05:44Z",
+  "status": "pass_no_payload_ready_for_single_secret_pipe_handoff",
+  "source_ids_in_exact_order": [
+    "M2-ORB-002",
+    "M2-ORB-003",
+    "M2-ORB-004"
+  ],
+  "bindings": {
+    "approval_sha256": "66c40db57082ed29c1dfd3e00a163ab072fe9f14b8e0ed4455df188673de84ba",
+    "publication_gate_sha256": "21034baf616bf161d9f9236670747db2e31b7710d201a06796b25aff84e60ca1",
+    "activation_sha256": "466d1bfb86e192ba3025a58120a7b6b6f3ddbd756c013819a083b98623dc5af5",
+    "control_reconciliation_sha256": "e65ad5cce7ab696d9e18ae0187c6eb870d0d3e3ffe15a45a6d2b8d0d9869e960",
+    "continuation_contract_sha256": "5d769c1df6a94ce8ca2a5fd99c29b231528e77329f101e76fc2bf04e20718c00",
+    "active_intake_sha256": "f64591598c782dc0a7bec58b40517d5b916ca850705ecff8677dbc66022c430b",
+    "terms_reconciliation_sha256": "113828e782e47e3335a4b5701f1cedcb51f7416a53c0e71bad0124403f7cac2c",
+    "public_commit": "ac19e1bd818e86b94bbd35ecf53fe93863ca91f5"
+  },
+  "terms": {
+    "url": "https://dataspace.copernicus.eu/terms-and-conditions",
+    "resolved_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+    "status_code": 200,
+    "content_length_bytes": 77721,
+    "sha256": "6a7159b0c6a35aa215f6149870777126b1445cb73206782d45070cee1cb27579",
+    "etag": "\"1788690644\"",
+    "last_modified": "Sun, 06 Sep 2026 10:30:44 GMT",
+    "normalized_text_length": 11412,
+    "normalized_text_sha256": "22cf55ad3949e8eaee715780654be9eb0e8648a2808d6ba007b47c9849ab2b01",
+    "structured_date_modified": "2026-05-05T08:04:39+0200",
+    "required_phrase_count": 6,
+    "terms_acceptance_performed": false
+  },
+  "legal_notice": {
+    "url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+    "resolved_url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+    "status_code": 200,
+    "content_length_bytes": 115881,
+    "sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64",
+    "etag": null,
+    "last_modified": "Thu, 28 Apr 2016 14:32:37 GMT",
+    "exact_legal_notice_unchanged": true
+  },
+  "catalog_revalidation": [
+    {
+      "source_id": "M2-ORB-002",
+      "status": "pass_exact_live_identity_online",
+      "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)?$expand=Locations",
+      "response_sha256": "23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e",
+      "identity": {
+        "provider_product_id": "ec7dd79b-0588-456a-9d17-6324d5affcb5",
+        "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+        "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/18/S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+        "content_length_bytes": 631254,
+        "validity_start_utc": "2026-08-18T21:50:10.000000Z",
+        "validity_end_utc": "2026-08-19T01:21:20.000000Z",
+        "publication_date_utc": "2026-08-19T01:48:40.266889Z",
+        "modification_date_utc": "2026-08-19T01:48:40.266889Z",
+        "online": true,
+        "eviction_date_utc": "2026-11-19T01:48:27.107300Z",
+        "provider_checksums": {
+          "MD5": "4752bc958d3a65a14100e96f4e6489b2",
+          "BLAKE3": "7f69b4ae261fe43ea758ab3d1f0c290706aa4b8308a55c49b510badcf3fca49d"
+        }
+      }
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "status": "pass_exact_live_identity_online",
+      "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)?$expand=Locations",
+      "response_sha256": "75562f7c63668569a538a208b2b86db7f05eff17b4fa7e14555a948a84535132",
+      "identity": {
+        "provider_product_id": "182fec80-86b8-46b4-bc76-43be0ab70ba5",
+        "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+        "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/28/S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+        "content_length_bytes": 639533,
+        "validity_start_utc": "2026-08-28T10:35:27.000000Z",
+        "validity_end_utc": "2026-08-28T14:09:57.000000Z",
+        "publication_date_utc": "2026-08-28T14:33:59.504081Z",
+        "modification_date_utc": "2026-08-28T14:33:59.504081Z",
+        "online": true,
+        "eviction_date_utc": "2026-11-28T14:33:37.358606Z",
+        "provider_checksums": {
+          "MD5": "c7aa9da84a4bd1b8113275e7bbe3d3f7",
+          "BLAKE3": "9138c6cc9e26483b67cfedb69475cb08dcce6170dab24beac53319583a52835d"
+        }
+      }
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "status": "pass_exact_live_identity_online",
+      "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)?$expand=Locations",
+      "response_sha256": "4fa0be02fabc3b74b920374e40d470a7e0acec4505e768e13e6a82875a20b448",
+      "identity": {
+        "provider_product_id": "af27071d-df96-4850-af40-e09aedcd68a3",
+        "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+        "s3_path": "/eodata/Sentinel-1/AUX/AUX_RESORB/2026/08/30/S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+        "content_length_bytes": 629395,
+        "validity_start_utc": "2026-08-30T21:50:11.000000Z",
+        "validity_end_utc": "2026-08-31T01:21:11.000000Z",
+        "publication_date_utc": "2026-08-31T01:50:22.594002Z",
+        "modification_date_utc": "2026-08-31T01:50:22.594002Z",
+        "online": true,
+        "eviction_date_utc": "2026-12-01T01:50:08.131473Z",
+        "provider_checksums": {
+          "MD5": "1eebe30919f50a31dd04f854ee1c813d",
+          "BLAKE3": "0fe6a53b52f3caf11aa8e685a6367f673c69a8a580d90b398148dda772e56d12"
+        }
+      }
+    }
+  ],
+  "sentinel_prerequisites": [
+    {
+      "source_id": "M1-SRC-003",
+      "transfer_receipt_sha256": "b5c9b2fe5882e4574f62e80a797fd66bcfb0b3daf0c80e7485d92184618d60f0",
+      "container_verification_ref": "records/acquisition/container-verification/m1-src-003-m1-src-003-20260904t043000z-d1b78c08.json",
+      "container_verification_sha256": "a7f65ee4938b3b2749fa711b59c3af14b71dc3f02cbb6b3b6123161d388ae44a"
+    },
+    {
+      "source_id": "M1-SRC-004",
+      "transfer_receipt_sha256": "bdba2d107d13150e9a050d2f558478fdca3fb58ad21c1003a364f702b491886f",
+      "container_verification_ref": "records/acquisition/container-verification/m1-src-004-m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
+      "container_verification_sha256": "3ce5c27a801bbc9ea4379faa8dcf382b63caa15841dc2a3b4aa1a0ec960db10d"
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "transfer_receipt_sha256": "a8de8cbc11e5b183a39ba5968b8ca6e2baad26f7cfb0ff5106e90beb92ed490b",
+      "container_verification_ref": "records/acquisition/container-verification/m1-src-005-m1-src-005-20260905t041205z-f34254c7.json",
+      "container_verification_sha256": "a97577bca70657b347ed95d435f4b5f73cdb896628f0ced290d9f5dd8d545117"
+    },
+    {
+      "source_id": "M1-SRC-006",
+      "transfer_receipt_sha256": "5ea3b107f102e0d7fc70a40b70d04068f36b3ab3a00ddc602db86a3c81d5a1ad",
+      "container_verification_ref": "records/acquisition/container-verification/m1-src-006-m1-src-006-20260905t041726z-da401f11.json",
+      "container_verification_sha256": "e639ebe0c7559b9886710f6138d5bafef9744d8260a7efc64d65a8af24fba281"
+    }
+  ],
+  "path_and_storage": [
+    {
+      "source_id": "M2-ORB-002",
+      "destination": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-002\\S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "staging": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-continuation-001\\m2-orb-002-continuation-001\\S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF.part",
+      "attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-continuation-001-attempts"
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "destination": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-003\\S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+      "staging": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-continuation-001\\m2-orb-003-continuation-001\\S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF.part",
+      "attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-continuation-001-attempts"
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "destination": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-004\\S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+      "staging": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-continuation-001\\m2-orb-004-continuation-001\\S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF.part",
+      "attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-continuation-001-attempts"
+    }
+  ],
+  "preserved_m2_orb_001": {
+    "promoted": {
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-001\\S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+      "size_bytes": 639533,
+      "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4"
+    },
+    "staging": {
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-recovery-003\\m2-orb-001-recovery-002\\S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF.part",
+      "size_bytes": 639533,
+      "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4"
+    },
+    "result_ref": "records/acquisition/m2-orbit-osv-precision-amendment-001-local-validation.json",
+    "result_sha256": "9b3e45fe1d8fe0c9c6668287d7bfc2ec0f8e238d6e0730f04a8d99583eef9898",
+    "terminal_ref": "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json",
+    "terminal_sha256": "6309ee02114a8a59d5c3b46ed29b4f5901dfdb009d47dccb314561664a6254dd"
+  },
+  "assertions": {
+    "network_requests_performed": true,
+    "network_request_count": 5,
+    "catalog_request_count": 3,
+    "authentication_performed": false,
+    "credential_presence_checked": false,
+    "credential_values_read_or_recorded": false,
+    "terms_acceptance_or_account_action": false,
+    "orbit_payload_requested": false,
+    "orbit_payload_bytes_received": 0,
+    "external_data_mutated": false,
+    "m2_orb_001_requested_or_mutated": false,
+    "automatic_retry_authorized": false
+  },
+  "next_gate": "one owner-side credentials-to-token-to-anonymous-pipe handoff for the fixed-order three-source continuation"
+}

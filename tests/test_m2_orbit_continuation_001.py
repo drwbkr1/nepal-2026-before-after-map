@@ -76,6 +76,23 @@ class _FakeJournal:
         self.completed.append(source_id)
 
 
+def historical_pre_continuation_intake() -> dict[str, object]:
+    """Reconstruct the exact immutable start condition from current retained assets."""
+    intake = copy.deepcopy(load_object(ROOT / "contracts/m2-orbit-intake.json"))
+    for asset in intake["assets"]:
+        if asset["extensions"]["source_id"] in SOURCE_ORDER:
+            asset["state"] = "authorized"
+            asset["attempts"] = []
+            asset["failure"] = None
+            asset["observed"] = {
+                "staged_sha256": None,
+                "staged_size_bytes": None,
+                "promoted_sha256": None,
+                "promoted_size_bytes": None,
+            }
+    return intake
+
+
 class OrbitContinuation001Tests(unittest.TestCase):
     def test_exact_locked_approval_and_reconciliation_validate(self) -> None:
         approval = load_object(ROOT / APPROVAL_REF)
@@ -101,14 +118,14 @@ class OrbitContinuation001Tests(unittest.TestCase):
             self.assertTrue(kwargs["close_fds"])
 
     def test_initial_metadata_has_one_preserved_and_three_fresh_sources(self) -> None:
-        intake = load_object(ROOT / "contracts/m2-orbit-intake.json")
+        intake = historical_pre_continuation_intake()
         snapshots = validate_initial_asset_state(intake)
         self.assertEqual([item["source_id"] for item in snapshots], list(SOURCE_ORDER))
         self.assertTrue(all(item["initial_state"] == "authorized" for item in snapshots))
         self.assertTrue(all(item["initial_attempt_count"] == 0 for item in snapshots))
 
     def test_initial_metadata_rejects_prior_remaining_source_attempt(self) -> None:
-        intake = copy.deepcopy(load_object(ROOT / "contracts/m2-orbit-intake.json"))
+        intake = historical_pre_continuation_intake()
         asset = next(item for item in intake["assets"] if item["extensions"]["source_id"] == SOURCE_ORDER[0])
         asset["attempts"].append({"attempt_id": "must-not-exist"})
         with self.assertRaisesRegex(OrbitContinuation001Error, "continuation_asset_not_fresh_authorized"):
@@ -248,7 +265,7 @@ class OrbitContinuation001Tests(unittest.TestCase):
             runner.validate_source_sequence(intake, PRESERVED_SOURCE_ID)
 
     def test_source_sequence_rejects_skipping_first_source(self) -> None:
-        intake = copy.deepcopy(load_object(ROOT / "contracts/m2-orbit-intake.json"))
+        intake = historical_pre_continuation_intake()
         with mock.patch.object(runner, "validate_preserved_m2_orb_001_bytes"):
             with self.assertRaisesRegex(OrbitContinuation001Error, "prior_continuation_source_not_exact_success"):
                 runner.validate_source_sequence(intake, SOURCE_ORDER[1])

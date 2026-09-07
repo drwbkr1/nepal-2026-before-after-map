@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "event": "orbit_continuation_001_succeeded",
+  "continuation_id": "M2-ORBIT-CONTINUATION-001",
+  "attempt_id": "m2-orb-002-continuation-001-20260906t231510z-4886cc9b",
+  "source_id": "M2-ORB-002",
+  "started_at": "2026-09-06T23:15:10Z",
+  "completed_at": "2026-09-06T23:15:13Z",
+  "catalog_response_sha256": "23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e",
+  "local_size_bytes": 631254,
+  "local_sha256": "7462fa65549339c09c36338cb690d0b953c665c3c61a397def3cfa7b2d453262",
+  "provider_md5": "4752bc958d3a65a14100e96f4e6489b2",
+  "provider_blake3": "7f69b4ae261fe43ea758ab3d1f0c290706aa4b8308a55c49b510badcf3fca49d",
+  "provider_checksums_locally_verified": true,
+  "staged_xml_validation": {
+    "root": "Earth_Explorer_File",
+    "header_file_name": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120",
+    "mission": "Sentinel-1D",
+    "file_type": "AUX_RESORB",
+    "validity_start_utc": "2026-08-18T21:50:10Z",
+    "validity_end_utc": "2026-08-19T01:21:20Z",
+    "osv_declared_count": 1268,
+    "osv_observed_count": 1268,
+    "first_osv_utc": "2026-08-18T21:50:10.439577Z",
+    "last_osv_utc": "2026-08-19T01:21:20.439577Z",
+    "endpoint_tolerance_seconds": 1.0,
+    "first_endpoint_lag_seconds": 0.439577,
+    "last_endpoint_shortfall_seconds": 0.0,
+    "ordered_unique_finite_osvs": true,
+    "position_unit": "m",
+    "velocity_unit": "m/s"
+  },
+  "scene_binding": {
+    "sentinel_source_ids": [
+      "M1-SRC-003"
+    ],
+    "scene_start_utc": "2026-08-19T00:10:36Z",
+    "scene_end_utc": "2026-08-19T00:11:01Z",
+    "margin_before_seconds": 8426,
+    "margin_after_seconds": 4219,
+    "minimum_margin_seconds": 4219,
+    "minimum_required_margin_seconds": 4219
+  },
+  "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-002\\S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+  "credential_reference": "anonymous_pipe_single_use_memory_only",
+  "credential_value_recorded": false,
+  "retry_automatically_authorized": false
+}

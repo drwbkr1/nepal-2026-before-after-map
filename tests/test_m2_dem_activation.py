@@ -232,8 +232,14 @@ class M2DemActivationTests(unittest.TestCase):
             ),
             None,
         )
+        orbit_verify = next(
+            (unit for unit in self.milestone["units"] if unit["id"] == "M2-ORBIT-VERIFY"),
+            None,
+        )
         expected_primary_checkpoint = (
-            "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"
+            "M2-ORBIT-VERIFY-IMPLEMENTATION"
+            if orbit_verify is not None and orbit_verify.get("status") == "in_progress"
+            else "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"
             if orbit_continuation_implementation is not None
             and orbit_continuation_implementation.get("status") == "in_progress"
             else "M2-ORBIT-CONTINUATION-001-REVIEW"

@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-CONTINUATION-001-CONTROL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-06T23:05:38Z",
+  "status": "pass_public_ci_exact_continuation_ready_final_preflight_pending",
+  "source_ids_in_exact_order": [
+    "M2-ORB-002",
+    "M2-ORB-003",
+    "M2-ORB-004"
+  ],
+  "bindings": {
+    "approval_sha256": "66c40db57082ed29c1dfd3e00a163ab072fe9f14b8e0ed4455df188673de84ba",
+    "publication_gate_sha256": "21034baf616bf161d9f9236670747db2e31b7710d201a06796b25aff84e60ca1",
+    "milestone_sha256": "0cbdc81cbf28fbefcfe73e5b644eadc03ca0a8c3e78bd0fc1afddc7fe9605d48",
+    "profile_sha256": "4cc91af7b3b8b1baee387ef46acc5904c0599d658927290609917e234fdde83f",
+    "goal_sha256": "11ff89a914e352726fef585f1389cb2f8a355502ccbcafeb5c57a40694ecd2e6"
+  },
+  "released_now": {
+    "final_no_payload_preflight": true,
+    "owner_handoff_after_passing_preflight": true,
+    "maximum_owner_handoffs": 1,
+    "maximum_real_attempts_per_source": 1,
+    "stop_on_first_failure": true,
+    "automatic_retry": false,
+    "m2_orb_001_request_or_mutation": false,
+    "orbit_application_or_downstream_science": false
+  },
+  "assertions": {
+    "credential_values_read_or_recorded": false,
+    "network_or_payload_request_performed": false,
+    "external_data_mutated": false
+  },
+  "next_gate": "activate the exact continuation contract and run its single final no-payload preflight"
+}

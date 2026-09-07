@@ -453,10 +453,10 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION",
+    "checkpoint_id": "M2-ORBIT-VERIFY-IMPLEMENTATION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Implement and synthetically validate only the approved fixed-order M2-ORB-002, M2-ORB-003, and M2-ORB-004 continuation, then require successful public default-branch CI. No credential, catalog, payload, orbit application, DEM, radar-pixel, baseline, change, attribution, or scientific-publication action is released before that gate."
+    "next_action": "Project the already approved one-second endpoint rules and continuation receipt identities into the four-source offline verifier, test and publish that exact implementation, and require successful public default-branch CI before reading the four promoted EOF files. Do not apply orbit data, act on DEMs or radar pixels, run a baseline or change analysis, attribute cause, or publish a scientific result."
   },
   "parallel_checkpoints": [
     {

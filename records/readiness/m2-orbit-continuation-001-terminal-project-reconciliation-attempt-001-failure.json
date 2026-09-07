@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-CONTINUATION-001-TERMINAL-PROJECT-RECONCILIATION-ATTEMPT-001-FAILURE",
+  "recorded_at_utc": "2026-09-06T23:22:06Z",
+  "status": "blocked_guard_status_mismatch_before_mutation",
+  "failure": {
+    "code": "activation_status_literal_mismatch",
+    "expected_by_failed_guard": "activated_final_no_payload_preflight_pending",
+    "observed": "pass_exact_orbit_continuation_001_activated_final_no_payload_preflight_pending",
+    "message": "publication, activation, preflight, or tracked checkpoint differs"
+  },
+  "bindings": {
+    "reconciler_sha256_at_failure": "84d1bfbd3b94abce37a84530d1dc8478e6b11721d0621b01da6eb82a4b2b97ed",
+    "active_verification_sha256_unchanged": "ceda1a2ef72eb58a41bbf1036b823d1b2e27fa60e0b164592f9fa4787e8c9474",
+    "milestone_sha256_unchanged": "0cbdc81cbf28fbefcfe73e5b644eadc03ca0a8c3e78bd0fc1afddc7fe9605d48",
+    "profile_sha256_unchanged": "4cc91af7b3b8b1baee387ef46acc5904c0599d658927290609917e234fdde83f",
+    "goal_sha256_unchanged": "11ff89a914e352726fef585f1389cb2f8a355502ccbcafeb5c57a40694ecd2e6"
+  },
+  "assertions": {
+    "tracked_control_mutation_performed": false,
+    "external_data_mutated": false,
+    "credential_value_read_or_recorded": false,
+    "network_request_performed": false,
+    "orbit_payload_requested": false,
+    "offline_eof_content_read": false,
+    "orbit_application_performed": false
+  },
+  "correction": "Change only the reconciler guard to the exact immutable activation status and rerun the still-unconsumed project-control reconciliation."
+}

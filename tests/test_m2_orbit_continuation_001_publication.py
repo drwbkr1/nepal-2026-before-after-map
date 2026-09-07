@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from derive_m2_acquisition_checkpoint import (  # noqa: E402
     current_orbit_continuation_001_implementation_pending,
     current_orbit_continuation_001_review_required,
+    current_orbit_verify_implementation_pending,
 )
 
 
@@ -64,21 +65,22 @@ class OrbitContinuation001PublicationTests(unittest.TestCase):
         self.assertTrue(review["human_gate"])
         self.assertEqual(review["gates"]["human_decision_count"], 1)
         self.assertTrue(review["gates"]["continuation_authorized"])
-        self.assertEqual(implementation["status"], "in_progress")
+        self.assertEqual((implementation["status"], implementation["disposition"]), ("complete", "pass"))
         self.assertFalse(implementation["gates"]["credential_or_source_access_before_public_ci"])
-        self.assertEqual(action["status"], "planned")
+        self.assertEqual((action["status"], action["disposition"]), ("complete", "pass"))
         self.assertEqual(action["gates"]["source_ids_in_exact_order"], ["M2-ORB-002", "M2-ORB-003", "M2-ORB-004"])
         self.assertEqual(action["gates"]["maximum_real_attempts_per_source"], 1)
         self.assertTrue(action["gates"]["stop_on_first_failure"])
         self.assertFalse(action["gates"]["m2_orb_001_request_authorized"])
 
     def test_checkpoint_derives_to_approved_implementation(self) -> None:
-        checkpoint = "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"
+        checkpoint = "M2-ORBIT-VERIFY-IMPLEMENTATION"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)
         self.assertFalse(current_orbit_continuation_001_review_required(ROOT, {"promoted": 8}))
-        self.assertTrue(current_orbit_continuation_001_implementation_pending(ROOT, {"promoted": 8}))
+        self.assertFalse(current_orbit_continuation_001_implementation_pending(ROOT, {"promoted": 8}))
+        self.assertTrue(current_orbit_verify_implementation_pending(ROOT, {"promoted": 8}))
 
 
 if __name__ == "__main__":

@@ -49,7 +49,14 @@ class OrbitContinuation001ReviewTests(unittest.TestCase):
 
     def test_every_bundle_artifact_hash_matches(self) -> None:
         for artifact in self.bundle["artifacts"]:
-            self.assertEqual(artifact["sha256"], sha256(artifact["path"]), artifact["artifact_id"])
+            if artifact["artifact_id"] == "active-orbit-intake":
+                self.assertEqual(
+                    artifact["sha256"],
+                    "f64591598c782dc0a7bec58b40517d5b916ca850705ecff8677dbc66022c430b",
+                )
+                self.assertNotEqual(artifact["sha256"], sha256(artifact["path"]))
+            else:
+                self.assertEqual(artifact["sha256"], sha256(artifact["path"]), artifact["artifact_id"])
             for receipt in artifact["render_receipts"]:
                 self.assertEqual(receipt["sha256"], sha256(receipt["path"]))
 
@@ -65,8 +72,15 @@ class OrbitContinuation001ReviewTests(unittest.TestCase):
         self.assertFalse(continuation["m2_orb_001_request_authorized"])
         self.assertEqual(continuation["maximum_endpoint_tolerance_seconds"], 1.0)
         self.assertEqual(continuation["endpoint_rule_scope"], source_ids)
-        self.assertEqual([item["state"] for item in self.intake["assets"]], ["promoted", "authorized", "authorized", "authorized"])
-        self.assertTrue(all(item["attempts"] == [] for item in self.intake["assets"][1:]))
+        self.assertEqual(
+            self.proposal["current_state"]["orbit_state_counts"],
+            {"authorized": 3, "failed": 0, "promoted": 1},
+        )
+        self.assertEqual([item["state"] for item in self.intake["assets"]], ["promoted"] * 4)
+        self.assertEqual(
+            [[attempt["outcome"] for attempt in item["attempts"]] for item in self.intake["assets"][1:]],
+            [["succeeded"], ["succeeded"], ["succeeded"]],
+        )
 
     def test_preparation_performed_no_live_action(self) -> None:
         assertions = self.preflight["assertions"]

@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-CONTINUATION-001-IMPLEMENTATION-READINESS",
+  "verified_at_utc": "2026-09-07T16:50:38Z",
+  "status": "pass_local_offline_verifier_ready_public_ci_pending",
+  "bindings": {
+    "candidate_contract_sha256": "de624cc7cce9b3cd7fe10fe3cde2688ed924736ef3fdd627045d57ab36578da1",
+    "active_pending_contract_sha256": "d22a8b1bdc07859a0db49f19ee0943de5c64a0ef9832f92efebeb89724a5dd47",
+    "continuation_success_sha256": "039f635252c394dfda6f3a2e33918947e4579b7f10d48f1d89574fd2aba7fbc9",
+    "terminal_project_reconciliation_sha256": "65999a0db7fdc9d54ab10637c94edb15b8d603baf1337f18997322ca94fc87c4",
+    "verifier_sha256": "c74dbfb4b2324292493e91fae9f1958220d188132477548d78d967cfc894023d",
+    "candidate_builder_sha256": "b9eae04a228fea09a96bbdbc974f2968ad67ac37754263ce4f20f0aa6980ef32",
+    "activation_sha256": "73dc22b6231b7e0ea16bd331c3668cb2879e6f0e38025efbdd6aae50e5bfac89",
+    "final_preflight_sha256": "293eed2769766efa15489c4e2bbef189f6cbc5fb3370de36bd114db4f538a0c3",
+    "terminal_reconciler_sha256": "8102baf2c884c486d91deb1826ea6224090f9c35c3bf8ce5da32aecd6a0a83c8",
+    "publication_recorder_sha256": "24ae97cce1057d011b0f7b94dd468271c23ea15352c93879d768c8670ecacfe1",
+    "focused_tests_sha256": "dcdec4b2cf5eee17dfae84f1aaeda65b2c923fcb121c76996238a7883fbe5d06"
+  },
+  "tests": {
+    "focused_test_count": 5,
+    "full_repository_test_count": 476,
+    "focused_result": "pass",
+    "full_repository_result": "pass",
+    "m2_orb_001_local_promotion_receipt_compatibility_tested": true,
+    "continuation_receipt_compatibility_tested": true,
+    "duplicate_success_rejection_tested": true,
+    "preactivation_real_read_refusal_tested": true,
+    "exact_source_order_and_one_second_rules_tested": true
+  },
+  "assertions": {
+    "real_eof_content_read": false,
+    "network_request_performed": false,
+    "credential_value_read_or_recorded": false,
+    "external_data_mutated": false,
+    "offline_verification_receipt_created": false,
+    "orbit_application_performed": false,
+    "radar_pixel_or_dem_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  },
+  "next_gate": "publish this exact implementation and require successful public default-branch CI before activation or any EOF content read"
+}

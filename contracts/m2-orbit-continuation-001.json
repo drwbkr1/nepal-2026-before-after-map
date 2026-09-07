@@ -1,0 +1,90 @@
+{
+  "contract_version": "1.0",
+  "continuation_id": "nepal-m2-orbit-continuation-001",
+  "created_at_utc": "2026-09-06T23:05:32Z",
+  "status": "active_authorized_final_no_payload_preflight_pending",
+  "source_ids_in_exact_order": [
+    "M2-ORB-002",
+    "M2-ORB-003",
+    "M2-ORB-004"
+  ],
+  "preserved_source_ids": [
+    "M2-ORB-001"
+  ],
+  "m2_orb_001_request_authorized": false,
+  "maximum_owner_handoffs": 1,
+  "maximum_real_attempts_per_source": 1,
+  "stop_on_first_failure": true,
+  "maximum_osv_endpoint_tolerance_seconds": 1.0,
+  "secret_transport": "anonymous_pipe_single_use_memory_only",
+  "collision_policy": "fail",
+  "promotion_mode": "atomic-no-replace",
+  "assets": [
+    {
+      "source_id": "M2-ORB-002",
+      "asset_id": "m2-orb-002",
+      "provider_product_id": "ec7dd79b-0588-456a-9d17-6324d5affcb5",
+      "exact_product_id": null,
+      "catalog_content_length_bytes": null,
+      "provider_checksums": null,
+      "source_uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(ec7dd79b-0588-456a-9d17-6324d5affcb5)/$value",
+      "staging_relative_path": "m2-orb-002/S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF.part",
+      "destination_relative_path": "m2-orb-002/S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "initial_state": "authorized",
+      "initial_attempt_count": 0
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "asset_id": "m2-orb-003",
+      "provider_product_id": "182fec80-86b8-46b4-bc76-43be0ab70ba5",
+      "exact_product_id": null,
+      "catalog_content_length_bytes": null,
+      "provider_checksums": null,
+      "source_uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(182fec80-86b8-46b4-bc76-43be0ab70ba5)/$value",
+      "staging_relative_path": "m2-orb-003/S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF.part",
+      "destination_relative_path": "m2-orb-003/S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+      "initial_state": "authorized",
+      "initial_attempt_count": 0
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "asset_id": "m2-orb-004",
+      "provider_product_id": "af27071d-df96-4850-af40-e09aedcd68a3",
+      "exact_product_id": null,
+      "catalog_content_length_bytes": null,
+      "provider_checksums": null,
+      "source_uri": "https://download.dataspace.copernicus.eu/odata/v1/Products(af27071d-df96-4850-af40-e09aedcd68a3)/$value",
+      "staging_relative_path": "m2-orb-004/S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF.part",
+      "destination_relative_path": "m2-orb-004/S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+      "initial_state": "authorized",
+      "initial_attempt_count": 0
+    }
+  ],
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-orbit-continuation-001-approval.json",
+    "approval_sha256": "66c40db57082ed29c1dfd3e00a163ab072fe9f14b8e0ed4455df188673de84ba",
+    "review_bundle_ref": "reviews/m2-orbit-continuation-001/review-bundle.json",
+    "review_bundle_sha256": "f4712a3ffd65eb9cbd1955ccd854423607a384800931004ae10da174a4880dd6",
+    "review_reconciliation_ref": "records/source-gates/m2-orbit-continuation-001-review-reconciliation.json",
+    "review_reconciliation_sha256": "11e29c1e6a259201b745b802f59219234e4bfec2433f1caf909f2202e3b9f0fa",
+    "proposal_ref": "contracts/milestone-002-orbit-continuation-001-proposal.json",
+    "proposal_sha256": "01a2c3521625f8f219909b8d69476dbc3355292ff12e59fd0917ed52bc371e8b",
+    "publication_gate_ref": "records/readiness/m2-orbit-continuation-001-publication-gate.json",
+    "publication_gate_sha256": "21034baf616bf161d9f9236670747db2e31b7710d201a06796b25aff84e60ca1",
+    "active_intake_ref": "contracts/m2-orbit-intake.json",
+    "active_intake_sha256_at_activation": "f64591598c782dc0a7bec58b40517d5b916ca850705ecff8677dbc66022c430b",
+    "public_commit": "ac19e1bd818e86b94bbd35ecf53fe93863ca91f5"
+  },
+  "prohibited": {
+    "m2_orb_001_request_or_mutation": true,
+    "partial_resume_or_reuse": true,
+    "automatic_retry": true,
+    "token_storage_or_exposure": true,
+    "source_date_order_or_identity_substitution": true,
+    "tolerance_above_one_second": true,
+    "aux_poeorb_substitution": true,
+    "orbit_application": true,
+    "dem_or_radar_pixel_action": true,
+    "baseline_change_attribution_or_scientific_publication": true
+  }
+}

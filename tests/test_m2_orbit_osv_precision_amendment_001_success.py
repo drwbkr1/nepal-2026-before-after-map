@@ -56,7 +56,7 @@ class OrbitOsvPrecisionAmendmentSuccessTests(unittest.TestCase):
         self.assertEqual(self.result["result"]["inspection"]["xml"]["endpoint_tolerance_seconds"], 1.0)
         self.assertEqual(self.result["result"]["inspection"]["xml"]["last_endpoint_shortfall_seconds"], 0.031829)
 
-    def test_active_intake_preserves_failures_and_records_one_promotion(self) -> None:
+    def test_active_intake_preserves_failures_after_later_continuation(self) -> None:
         asset = self.intake["assets"][0]
         self.assertEqual(asset["state"], "promoted")
         self.assertIsNone(asset["failure"])
@@ -65,8 +65,8 @@ class OrbitOsvPrecisionAmendmentSuccessTests(unittest.TestCase):
             asset["extensions"]["retained_failed_attempt_ids"],
             ["m2-orb-001-20260904t050937z-8ed21d05", "m2-orb-001-recovery-002-20260906t183804z-e5883324"],
         )
-        self.assertEqual(self.intake["extensions"]["current_orbit_state_counts"], {"authorized": 3, "failed": 0, "promoted": 1})
-        self.assertEqual([item["state"] for item in self.intake["assets"][1:]], ["authorized", "authorized", "authorized"])
+        self.assertEqual(self.intake["extensions"]["current_orbit_state_counts"], {"authorized": 0, "failed": 0, "promoted": 4})
+        self.assertEqual([item["state"] for item in self.intake["assets"][1:]], ["promoted", "promoted", "promoted"])
 
     def test_control_plane_stops_before_other_orbit_requests(self) -> None:
         units = {item["id"]: item for item in self.milestone["units"]}
@@ -77,10 +77,10 @@ class OrbitOsvPrecisionAmendmentSuccessTests(unittest.TestCase):
         self.assertEqual(self.terminal["status"], "pass_exact_m2_orb_001_promoted_remaining_sources_review_required")
         self.assertFalse(self.terminal["assertions"]["other_orbit_source_requested"])
         self.assertFalse(self.terminal["assertions"]["scientific_result_established"])
-        checkpoint = "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"
+        checkpoint = "M2-ORBIT-VERIFY-IMPLEMENTATION"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
-        self.assertTrue(current_orbit_remaining_sources_review_preparation(ROOT, {"promoted": 8}))
+        self.assertFalse(current_orbit_remaining_sources_review_preparation(ROOT, {"promoted": 8}))
 
 
 if __name__ == "__main__":

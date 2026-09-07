@@ -106,6 +106,10 @@ ORBIT_CONTINUATION_001_IMPLEMENTATION_CHECKPOINT = {
     "checkpoint_id": "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION",
     "next_action": "Implement and synthetically validate only the approved fixed-order M2-ORB-002, M2-ORB-003, and M2-ORB-004 continuation, then require successful public default-branch CI. No credential, catalog, payload, orbit application, DEM, radar-pixel, baseline, change, attribution, or scientific-publication action is released before that gate.",
 }
+ORBIT_VERIFY_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-ORBIT-VERIFY-IMPLEMENTATION",
+    "next_action": "Project the already approved one-second endpoint rules and continuation receipt identities into the four-source offline verifier, test and publish that exact implementation, and require successful public default-branch CI before reading the four promoted EOF files. Do not apply orbit data, act on DEMs or radar pixels, run a baseline or change analysis, attribute cause, or publish a scientific result.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -739,6 +743,57 @@ def current_orbit_continuation_001_implementation_pending(
     )
 
 
+def current_orbit_verify_implementation_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the post-continuation, pre-offline-verification control state."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        intake = load(root / "contracts/m2-orbit-intake.json")
+        verification = load(root / "contracts/m2-orbit-offline-verification.json")
+        candidate = load(root / "contracts/m2-orbit-offline-verification-continuation-001.json")
+        success = load(root / "records/acquisition/m2-orbit-continuation-001-success-reconciliation.json")
+        project_reconciliation = load(
+            root / "records/readiness/m2-orbit-continuation-001-terminal-project-reconciliation.json"
+        )
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    assets = intake.get("assets", [])
+    candidate_status = candidate.get("status")
+    active_status = verification.get("status")
+    return bool(
+        success.get("status") == "pass_all_three_exact_remaining_orbits_promoted_input_verified"
+        and success.get("source_ids_in_exact_order")
+        == ["M2-ORB-002", "M2-ORB-003", "M2-ORB-004"]
+        and project_reconciliation.get("status")
+        == "pass_all_four_orbits_promoted_offline_verifier_public_ci_pending"
+        and project_reconciliation.get("next_checkpoint") == "M2-ORBIT-VERIFY-IMPLEMENTATION"
+        and intake.get("extensions", {}).get("current_orbit_state_counts")
+        == {"authorized": 0, "failed": 0, "promoted": 4}
+        and len(assets) == 4
+        and [asset.get("state") for asset in assets] == ["promoted"] * 4
+        and units.get("M2-ORBIT-ACQUIRE", {}).get("status") == "complete"
+        and units.get("M2-ORBIT-ACQUIRE", {}).get("disposition") == "pass"
+        and units.get("M2-ORBIT-VERIFY", {}).get("status") == "in_progress"
+        and units.get("M2-ORBIT-VERIFY", {}).get("gates", {}).get("real_eof_reads_started") is False
+        and candidate_status == "candidate_public_ci_pending"
+        and [item.get("source_id") for item in candidate.get("asset_requirements", [])]
+        == ["M2-ORB-001", "M2-ORB-002", "M2-ORB-003", "M2-ORB-004"]
+        and all(
+            item.get("maximum_osv_endpoint_tolerance_seconds") == 1.0
+            for item in candidate.get("asset_requirements", [])
+        )
+        and active_status
+        in {
+            "active_gate_pending_continuation_compatibility_public_ci",
+            "active_gate_ready_for_offline_verification",
+        }
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -783,7 +838,9 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_orbit_continuation_001_implementation_pending(ROOT, progress["state_counts"]):
+        if current_orbit_verify_implementation_pending(ROOT, progress["state_counts"]):
+            checkpoint = dict(ORBIT_VERIFY_IMPLEMENTATION_CHECKPOINT)
+        elif current_orbit_continuation_001_implementation_pending(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_CONTINUATION_001_IMPLEMENTATION_CHECKPOINT)
         elif current_orbit_continuation_001_review_required(ROOT, progress["state_counts"]):
             checkpoint = dict(ORBIT_CONTINUATION_001_REVIEW_CHECKPOINT)

@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-CONTINUATION-001-TERMINAL-PROJECT-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-06T23:22:18Z",
+  "status": "pass_all_four_orbits_promoted_offline_verifier_public_ci_pending",
+  "bindings": {
+    "publication_gate_sha256": "21034baf616bf161d9f9236670747db2e31b7710d201a06796b25aff84e60ca1",
+    "activation_sha256": "466d1bfb86e192ba3025a58120a7b6b6f3ddbd756c013819a083b98623dc5af5",
+    "control_reconciliation_sha256": "e65ad5cce7ab696d9e18ae0187c6eb870d0d3e3ffe15a45a6d2b8d0d9869e960",
+    "final_preflight_sha256": "de71ef5cec9344e52181c4fba3660a58b6f53e59212171e32f922e0000dca429",
+    "success_reconciliation_sha256": "039f635252c394dfda6f3a2e33918947e4579b7f10d48f1d89574fd2aba7fbc9",
+    "active_intake_sha256": "6c896e9764d2270a903c611144fcf880abd8fc767dc45b02ed2f79522e4e960a",
+    "verification_sha256_before": "ceda1a2ef72eb58a41bbf1036b823d1b2e27fa60e0b164592f9fa4787e8c9474",
+    "verification_sha256_after": "d22a8b1bdc07859a0db49f19ee0943de5c64a0ef9832f92efebeb89724a5dd47",
+    "milestone_sha256_before": "0cbdc81cbf28fbefcfe73e5b644eadc03ca0a8c3e78bd0fc1afddc7fe9605d48",
+    "milestone_sha256_after": "e173adffa4573cef672fd1dfab07a9d16ef32f58fcc0bf89a38c3cae9ec861ae",
+    "profile_sha256_before": "4cc91af7b3b8b1baee387ef46acc5904c0599d658927290609917e234fdde83f",
+    "profile_sha256_after": "bbe3b82f6d7228b5f74f24674674cbd59fa5c8ae7c9a3c326bf096cffd0fb404",
+    "goal_sha256_before": "11ff89a914e352726fef585f1389cb2f8a355502ccbcafeb5c57a40694ecd2e6",
+    "goal_sha256_after": "e93f3accb7d17b7add5cfac7311c75a3bbac17c9c253484d07442dbb0b20c5a3"
+  },
+  "observations": {
+    "source_ids": [
+      "M2-ORB-001",
+      "M2-ORB-002",
+      "M2-ORB-003",
+      "M2-ORB-004"
+    ],
+    "promoted_identities": [
+      {
+        "source_id": "M2-ORB-001",
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-001\\S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+        "size_bytes": 639533,
+        "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4"
+      },
+      {
+        "source_id": "M2-ORB-002",
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-002\\S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+        "size_bytes": 631254,
+        "sha256": "7462fa65549339c09c36338cb690d0b953c665c3c61a397def3cfa7b2d453262"
+      },
+      {
+        "source_id": "M2-ORB-003",
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-003\\S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+        "size_bytes": 639533,
+        "sha256": "c08bf997f1bf02fb25dcf2a4f35643aef4754fbea03c6c2fb0fa9db4a0efe778"
+      },
+      {
+        "source_id": "M2-ORB-004",
+        "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-004\\S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+        "size_bytes": 629395,
+        "sha256": "281388e94a7a8a708f229fd7d19f93de426bb077699db3aaabdad7125043bd83"
+      }
+    ],
+    "owner_handoff_count": 1,
+    "continuation_real_attempt_count": 3,
+    "automatic_retry_performed": false,
+    "current_orbit_state_counts": {
+      "authorized": 0,
+      "failed": 0,
+      "promoted": 4
+    }
+  },
+  "assertions": {
+    "credential_values_read_or_recorded": false,
+    "additional_network_request_performed": false,
+    "additional_orbit_payload_request_performed": false,
+    "m2_orb_001_requested_or_mutated_by_continuation": false,
+    "offline_eof_content_read_by_reconciliation": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixel_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  },
+  "next_checkpoint": "M2-ORBIT-VERIFY-IMPLEMENTATION",
+  "next_action": "Project the already approved one-second endpoint rules and continuation receipt identities into the four-source offline verifier, test and publish that exact implementation, and require successful public default-branch CI before reading the four promoted EOF files. Do not apply orbit data, act on DEMs or radar pixels, run a baseline or change analysis, attribute cause, or publish a scientific result."
+}

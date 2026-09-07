@@ -58,24 +58,28 @@ class M2OrbitActivationTests(unittest.TestCase):
         )
         self.assertFalse(self.approval["credential_policy"]["value_recorded"])
 
-    def test_active_controls_preserve_failures_and_record_one_input_only_promotion(self) -> None:
+    def test_active_controls_preserve_failures_and_record_all_four_promotions(self) -> None:
         self.assertEqual(
             self.intake["extensions"]["status"],
-            "active_remaining_orbit_sources_review_required",
+            "active_all_four_orbits_promoted_input_verified",
         )
         self.assertEqual(self.intake["extensions"]["amendment_approval_sha256"], sha256("records/source-gates/m2-orbit-amendment-approval.json"))
         self.assertEqual(
             {state: sum(asset["state"] == state for asset in self.intake["assets"]) for state in ("authorized", "failed", "promoted")},
-            {"authorized": 3, "failed": 0, "promoted": 1},
+            {"authorized": 0, "failed": 0, "promoted": 4},
         )
-        promoted = next(asset for asset in self.intake["assets"] if asset["state"] == "promoted")
+        promoted = self.intake["assets"][0]
         self.assertEqual(promoted["extensions"]["source_id"], "M2-ORB-001")
         self.assertEqual([item["outcome"] for item in promoted["attempts"]], ["failed", "failed", "promoted"])
         self.assertFalse(promoted["attempts"][0]["extensions"]["credential_value_recorded"])
+        self.assertEqual(
+            [[item["outcome"] for item in asset["attempts"]] for asset in self.intake["assets"][1:]],
+            [["succeeded"], ["succeeded"], ["succeeded"]],
+        )
         self.assertTrue(
             all(asset["extensions"]["sentinel_custody_prerequisite"] == "not_satisfied_at_activation" for asset in self.intake["assets"])
         )
-        self.assertEqual(self.verification["status"], "active_gate_deferred_no_promoted_orbits")
+        self.assertEqual(self.verification["status"], "active_gate_pending_continuation_compatibility_public_ci")
         self.assertFalse(self.verification["authority"]["precise_orbit_substitution_authorized"])
         self.assertFalse(self.verification["authority"]["radar_pixel_processing_authorized_by_this_contract"])
 
@@ -83,10 +87,11 @@ class M2OrbitActivationTests(unittest.TestCase):
         unit_by_id = {unit["id"]: unit for unit in self.milestone["units"]}
         self.assertEqual(unit_by_id["M2-ORBIT-AMEND"]["status"], "complete")
         self.assertEqual(unit_by_id["M2-ORBIT-PREFLIGHT"]["status"], "complete")
-        self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["status"], "deferred")
+        self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["status"], "complete")
+        self.assertEqual(unit_by_id["M2-ORBIT-ACQUIRE"]["disposition"], "pass")
         self.assertEqual(
             unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["retained_failure_review"],
-            "orbit_continuation_001_implementation_public_ci_pending",
+            "historical_failures_preserved_continuation_complete",
         )
         self.assertEqual(
             unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["superseded_milestone_dependency_m2_verify"],
@@ -136,11 +141,13 @@ class M2OrbitActivationTests(unittest.TestCase):
         bindings = self.activation["bindings"]
         for ref_key, sha_key in (
             ("approval_ref", "approval_sha256"),
-            ("active_verification_ref", "active_verification_sha256"),
             ("activation_script_ref", "activation_script_sha256"),
         ):
             self.assertEqual(bindings[sha_key], sha256(bindings[ref_key]))
+        self.assertEqual(bindings["active_intake_sha256"], "e73a630ad5055b489b9dfa2cae5608f4ef1bfc16dcc80e8ac0b99a7d8d933594")
+        self.assertEqual(bindings["active_verification_sha256"], "bac1154aebf34858fd82d9f42934a5a2d7bfd21a25917df1355f0f9f68682303")
         self.assertNotEqual(bindings["active_intake_sha256"], sha256(bindings["active_intake_ref"]))
+        self.assertNotEqual(bindings["active_verification_sha256"], sha256(bindings["active_verification_ref"]))
         self.assertNotEqual(bindings["active_milestone_sha256"], sha256(bindings["active_milestone_ref"]))
         self.assertNotEqual(bindings["project_profile_sha256"], sha256(bindings["project_profile_ref"]))
         self.assertNotEqual(bindings["long_term_goal_sha256"], sha256(bindings["long_term_goal_ref"]))

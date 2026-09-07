@@ -78,7 +78,7 @@ class M2OrbitPreflightTests(unittest.TestCase):
             sha256_path(ROOT / "scripts/initialize_m2_orbit_custody.py"),
         )
 
-    def test_initialization_receipt_remains_and_current_custody_contains_only_approved_orbit(self) -> None:
+    def test_initialization_receipt_remains_and_current_custody_contains_all_approved_orbits(self) -> None:
         self.assertEqual(self.custody["status"], "created_and_verified_empty")
         self.assertEqual(self.custody["verification"]["preserved_partial_directory_count"], 7)
         self.assertEqual(self.custody["verification"]["created_directory_count_attempt_002"], 10)
@@ -90,15 +90,14 @@ class M2OrbitPreflightTests(unittest.TestCase):
             custody_root = Path(self.custody["paths"]["custody_root"])
             staging_root = Path(self.custody["paths"]["staging_root"])
             custody_files = [path for path in custody_root.rglob("*") if path.is_file()]
-            self.assertEqual(len(custody_files), 1)
-            self.assertEqual(
-                custody_files[0].name,
-                "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
-            )
-            self.assertEqual(
-                sha256_path(custody_files[0]),
-                "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
-            )
+            expected = {
+                "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+                "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF": "7462fa65549339c09c36338cb690d0b953c665c3c61a397def3cfa7b2d453262",
+                "S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF": "c08bf997f1bf02fb25dcf2a4f35643aef4754fbea03c6c2fb0fa9db4a0efe778",
+                "S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF": "281388e94a7a8a708f229fd7d19f93de426bb077699db3aaabdad7125043bd83",
+            }
+            self.assertEqual(len(custody_files), 4)
+            self.assertEqual({path.name: sha256_path(path) for path in custody_files}, expected)
             staging_files = [path for path in staging_root.rglob("*") if path.is_file()]
             unexpected = [
                 path
@@ -106,7 +105,7 @@ class M2OrbitPreflightTests(unittest.TestCase):
                 if "attempt-events" not in path.relative_to(staging_root).parts or path.suffix.casefold() != ".json"
             ]
             self.assertEqual(unexpected, [])
-        self.assertEqual(self.intake["extensions"]["status"], "active_remaining_orbit_sources_review_required")
+        self.assertEqual(self.intake["extensions"]["status"], "active_all_four_orbits_promoted_input_verified")
         self.assertEqual(
             self.intake["extensions"]["sentinel_custody_prerequisite_status"],
             "all_six_promoted_and_container_verified",

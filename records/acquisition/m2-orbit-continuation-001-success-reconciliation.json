@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-CONTINUATION-001-SUCCESS-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-06T23:15:18Z",
+  "status": "pass_all_three_exact_remaining_orbits_promoted_input_verified",
+  "source_ids_in_exact_order": [
+    "M2-ORB-002",
+    "M2-ORB-003",
+    "M2-ORB-004"
+  ],
+  "results": [
+    {
+      "source_id": "M2-ORB-002",
+      "attempt_id": "m2-orb-002-continuation-001-20260906t231510z-4886cc9b",
+      "receipt_ref": "records/acquisition/orbit-attempts/m2-orb-002-continuation-001-20260906t231510z-4886cc9b.json",
+      "receipt_sha256": "5dda3d1c5f25c58bb8aa048a49ee7571e5df03325e29a15028a680f62a41352b",
+      "local_size_bytes": 631254,
+      "local_sha256": "7462fa65549339c09c36338cb690d0b953c665c3c61a397def3cfa7b2d453262",
+      "input_verification_status": "pass_orbit_input_only"
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "attempt_id": "m2-orb-003-continuation-001-20260906t231513z-fc45a7a9",
+      "receipt_ref": "records/acquisition/orbit-attempts/m2-orb-003-continuation-001-20260906t231513z-fc45a7a9.json",
+      "receipt_sha256": "14df11a3e85fe0de1fdc885da081c6b59c452a4357a94340317fce4416da65d4",
+      "local_size_bytes": 639533,
+      "local_sha256": "c08bf997f1bf02fb25dcf2a4f35643aef4754fbea03c6c2fb0fa9db4a0efe778",
+      "input_verification_status": "pass_orbit_input_only"
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "attempt_id": "m2-orb-004-continuation-001-20260906t231515z-4c75f3ea",
+      "receipt_ref": "records/acquisition/orbit-attempts/m2-orb-004-continuation-001-20260906t231515z-4c75f3ea.json",
+      "receipt_sha256": "33cb29cd287399505a90284084ed3fee0aad024fc185a310ba5c90af4fd4ca40",
+      "local_size_bytes": 629395,
+      "local_sha256": "281388e94a7a8a708f229fd7d19f93de426bb077699db3aaabdad7125043bd83",
+      "input_verification_status": "pass_orbit_input_only"
+    }
+  ],
+  "preserved_m2_orb_001": {
+    "promoted": {
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-001\\S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+      "size_bytes": 639533,
+      "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4"
+    },
+    "staging": {
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-orbit-recovery-003\\m2-orb-001-recovery-002\\S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF.part",
+      "size_bytes": 639533,
+      "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4"
+    },
+    "result_ref": "records/acquisition/m2-orbit-osv-precision-amendment-001-local-validation.json",
+    "result_sha256": "9b3e45fe1d8fe0c9c6668287d7bfc2ec0f8e238d6e0730f04a8d99583eef9898",
+    "terminal_ref": "records/readiness/m2-orbit-osv-precision-amendment-001-terminal-reconciliation.json",
+    "terminal_sha256": "6309ee02114a8a59d5c3b46ed29b4f5901dfdb009d47dccb314561664a6254dd"
+  },
+  "bindings": {
+    "approval_sha256": "66c40db57082ed29c1dfd3e00a163ab072fe9f14b8e0ed4455df188673de84ba",
+    "publication_gate_sha256": "21034baf616bf161d9f9236670747db2e31b7710d201a06796b25aff84e60ca1",
+    "final_preflight_sha256": "de71ef5cec9344e52181c4fba3660a58b6f53e59212171e32f922e0000dca429",
+    "active_intake_sha256": "6c896e9764d2270a903c611144fcf880abd8fc767dc45b02ed2f79522e4e960a",
+    "active_verification_sha256": "ceda1a2ef72eb58a41bbf1036b823d1b2e27fa60e0b164592f9fa4787e8c9474"
+  },
+  "assertions": {
+    "owner_handoff_count": 1,
+    "real_attempt_count": 3,
+    "automatic_retry_performed": false,
+    "m2_orb_001_requested_or_mutated": false,
+    "credential_values_read_or_recorded": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixel_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  },
+  "next_gate": "project-control reconciliation and offline four-orbit verification; orbit application remains separately gated"
+}

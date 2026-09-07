@@ -137,7 +137,7 @@ class MaterializationPixelReadinessReviewTests(unittest.TestCase):
         self.assertFalse(units["M2-OPTICAL-PIXEL-READINESS"]["gates"]["radar_pixel_readiness_authorized"])
         self.assertEqual(
             self.profile["current_checkpoint"]["checkpoint_id"],
-            "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION",
+            "M2-ORBIT-VERIFY-IMPLEMENTATION",
         )
 
 

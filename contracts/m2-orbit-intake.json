@@ -191,13 +191,40 @@
         "unavailable_reason": "CDSE catalogue metadata records exact content length plus provider MD5 and BLAKE3, but no upstream SHA-256. Revalidate the catalogue identity and compute SHA-256 locally before promotion."
       },
       "observed": {
-        "staged_sha256": null,
-        "staged_size_bytes": null,
-        "promoted_sha256": null,
-        "promoted_size_bytes": null
+        "staged_sha256": "7462fa65549339c09c36338cb690d0b953c665c3c61a397def3cfa7b2d453262",
+        "staged_size_bytes": 631254,
+        "promoted_sha256": "7462fa65549339c09c36338cb690d0b953c665c3c61a397def3cfa7b2d453262",
+        "promoted_size_bytes": 631254
       },
-      "state": "authorized",
-      "attempts": [],
+      "state": "promoted",
+      "attempts": [
+        {
+          "attempt_id": "m2-orb-002-continuation-001-20260906t231510z-4886cc9b",
+          "started_at": "2026-09-06T23:15:10Z",
+          "completed_at": "2026-09-06T23:15:13Z",
+          "outcome": "succeeded",
+          "extensions": {
+            "source_id": "M2-ORB-002",
+            "continuation_id": "M2-ORBIT-CONTINUATION-001",
+            "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-continuation-001-attempts\\m2-orb-002-continuation-001-20260906t231510z-4886cc9b\\m2-orb-002-continuation-001-20260906t231510z-4886cc9b-started.json",
+            "credential_reference": "anonymous_pipe_single_use_memory_only",
+            "credential_value_recorded": false,
+            "restart_offset_bytes": 0,
+            "range_or_resume_used": false,
+            "maximum_osv_endpoint_tolerance_seconds": 1.0,
+            "catalog_response_sha256": "23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e",
+            "verified_sentinel_custody": [
+              {
+                "source_id": "M1-SRC-003",
+                "transfer_receipt_sha256": "b5c9b2fe5882e4574f62e80a797fd66bcfb0b3daf0c80e7485d92184618d60f0",
+                "container_verification_ref": "records/acquisition/container-verification/m1-src-003-m1-src-003-20260904t043000z-d1b78c08.json",
+                "container_verification_sha256": "a7f65ee4938b3b2749fa711b59c3af14b71dc3f02cbb6b3b6123161d388ae44a"
+              }
+            ],
+            "external_terminal_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-continuation-001-attempts\\m2-orb-002-continuation-001-20260906t231510z-4886cc9b\\m2-orb-002-continuation-001-20260906t231510z-4886cc9b-succeeded.json"
+          }
+        }
+      ],
       "failure": null,
       "superseded_by": null,
       "extensions": {
@@ -214,7 +241,14 @@
         "minimum_scene_margin_seconds": 4219,
         "eviction_date_utc": "2026-11-19T01:48:27.107300Z",
         "sentinel_custody_prerequisite": "not_satisfied_at_activation",
-        "fresh_catalogue_response_sha256": "23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e"
+        "fresh_catalogue_response_sha256": "23effe603b604b92f5731483acd975e48b23eb86093776ecdaa7077d092db60e",
+        "successful_attempt_receipt": "records/acquisition/orbit-attempts/m2-orb-002-continuation-001-20260906t231510z-4886cc9b.json",
+        "successful_attempt_receipt_sha256": "5dda3d1c5f25c58bb8aa048a49ee7571e5df03325e29a15028a680f62a41352b",
+        "provider_md5_verified": true,
+        "provider_blake3_verified": true,
+        "staged_xml_verification_status": "pass_orbit_input_only",
+        "offline_reverification_status": "pending",
+        "maximum_osv_endpoint_tolerance_seconds": 1.0
       }
     },
     {
@@ -246,13 +280,46 @@
         "unavailable_reason": "CDSE catalogue metadata records exact content length plus provider MD5 and BLAKE3, but no upstream SHA-256. Revalidate the catalogue identity and compute SHA-256 locally before promotion."
       },
       "observed": {
-        "staged_sha256": null,
-        "staged_size_bytes": null,
-        "promoted_sha256": null,
-        "promoted_size_bytes": null
+        "staged_sha256": "c08bf997f1bf02fb25dcf2a4f35643aef4754fbea03c6c2fb0fa9db4a0efe778",
+        "staged_size_bytes": 639533,
+        "promoted_sha256": "c08bf997f1bf02fb25dcf2a4f35643aef4754fbea03c6c2fb0fa9db4a0efe778",
+        "promoted_size_bytes": 639533
       },
-      "state": "authorized",
-      "attempts": [],
+      "state": "promoted",
+      "attempts": [
+        {
+          "attempt_id": "m2-orb-003-continuation-001-20260906t231513z-fc45a7a9",
+          "started_at": "2026-09-06T23:15:13Z",
+          "completed_at": "2026-09-06T23:15:15Z",
+          "outcome": "succeeded",
+          "extensions": {
+            "source_id": "M2-ORB-003",
+            "continuation_id": "M2-ORBIT-CONTINUATION-001",
+            "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-continuation-001-attempts\\m2-orb-003-continuation-001-20260906t231513z-fc45a7a9\\m2-orb-003-continuation-001-20260906t231513z-fc45a7a9-started.json",
+            "credential_reference": "anonymous_pipe_single_use_memory_only",
+            "credential_value_recorded": false,
+            "restart_offset_bytes": 0,
+            "range_or_resume_used": false,
+            "maximum_osv_endpoint_tolerance_seconds": 1.0,
+            "catalog_response_sha256": "75562f7c63668569a538a208b2b86db7f05eff17b4fa7e14555a948a84535132",
+            "verified_sentinel_custody": [
+              {
+                "source_id": "M1-SRC-004",
+                "transfer_receipt_sha256": "bdba2d107d13150e9a050d2f558478fdca3fb58ad21c1003a364f702b491886f",
+                "container_verification_ref": "records/acquisition/container-verification/m1-src-004-m1-src-004-recovery-002-20260905t002925z-cc1fe1e9.json",
+                "container_verification_sha256": "3ce5c27a801bbc9ea4379faa8dcf382b63caa15841dc2a3b4aa1a0ec960db10d"
+              },
+              {
+                "source_id": "M1-SRC-005",
+                "transfer_receipt_sha256": "a8de8cbc11e5b183a39ba5968b8ca6e2baad26f7cfb0ff5106e90beb92ed490b",
+                "container_verification_ref": "records/acquisition/container-verification/m1-src-005-m1-src-005-20260905t041205z-f34254c7.json",
+                "container_verification_sha256": "a97577bca70657b347ed95d435f4b5f73cdb896628f0ced290d9f5dd8d545117"
+              }
+            ],
+            "external_terminal_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-continuation-001-attempts\\m2-orb-003-continuation-001-20260906t231513z-fc45a7a9\\m2-orb-003-continuation-001-20260906t231513z-fc45a7a9-succeeded.json"
+          }
+        }
+      ],
       "failure": null,
       "superseded_by": null,
       "extensions": {
@@ -270,7 +337,14 @@
         "minimum_scene_margin_seconds": 6349,
         "eviction_date_utc": "2026-11-28T14:33:37.358606Z",
         "sentinel_custody_prerequisite": "not_satisfied_at_activation",
-        "fresh_catalogue_response_sha256": "75562f7c63668569a538a208b2b86db7f05eff17b4fa7e14555a948a84535132"
+        "fresh_catalogue_response_sha256": "75562f7c63668569a538a208b2b86db7f05eff17b4fa7e14555a948a84535132",
+        "successful_attempt_receipt": "records/acquisition/orbit-attempts/m2-orb-003-continuation-001-20260906t231513z-fc45a7a9.json",
+        "successful_attempt_receipt_sha256": "14df11a3e85fe0de1fdc885da081c6b59c452a4357a94340317fce4416da65d4",
+        "provider_md5_verified": true,
+        "provider_blake3_verified": true,
+        "staged_xml_verification_status": "pass_orbit_input_only",
+        "offline_reverification_status": "pending",
+        "maximum_osv_endpoint_tolerance_seconds": 1.0
       }
     },
     {
@@ -302,13 +376,40 @@
         "unavailable_reason": "CDSE catalogue metadata records exact content length plus provider MD5 and BLAKE3, but no upstream SHA-256. Revalidate the catalogue identity and compute SHA-256 locally before promotion."
       },
       "observed": {
-        "staged_sha256": null,
-        "staged_size_bytes": null,
-        "promoted_sha256": null,
-        "promoted_size_bytes": null
+        "staged_sha256": "281388e94a7a8a708f229fd7d19f93de426bb077699db3aaabdad7125043bd83",
+        "staged_size_bytes": 629395,
+        "promoted_sha256": "281388e94a7a8a708f229fd7d19f93de426bb077699db3aaabdad7125043bd83",
+        "promoted_size_bytes": 629395
       },
-      "state": "authorized",
-      "attempts": [],
+      "state": "promoted",
+      "attempts": [
+        {
+          "attempt_id": "m2-orb-004-continuation-001-20260906t231515z-4c75f3ea",
+          "started_at": "2026-09-06T23:15:15Z",
+          "completed_at": "2026-09-06T23:15:18Z",
+          "outcome": "succeeded",
+          "extensions": {
+            "source_id": "M2-ORB-004",
+            "continuation_id": "M2-ORBIT-CONTINUATION-001",
+            "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-continuation-001-attempts\\m2-orb-004-continuation-001-20260906t231515z-4c75f3ea\\m2-orb-004-continuation-001-20260906t231515z-4c75f3ea-started.json",
+            "credential_reference": "anonymous_pipe_single_use_memory_only",
+            "credential_value_recorded": false,
+            "restart_offset_bytes": 0,
+            "range_or_resume_used": false,
+            "maximum_osv_endpoint_tolerance_seconds": 1.0,
+            "catalog_response_sha256": "4fa0be02fabc3b74b920374e40d470a7e0acec4505e768e13e6a82875a20b448",
+            "verified_sentinel_custody": [
+              {
+                "source_id": "M1-SRC-006",
+                "transfer_receipt_sha256": "5ea3b107f102e0d7fc70a40b70d04068f36b3ab3a00ddc602db86a3c81d5a1ad",
+                "container_verification_ref": "records/acquisition/container-verification/m1-src-006-m1-src-006-20260905t041726z-da401f11.json",
+                "container_verification_sha256": "e639ebe0c7559b9886710f6138d5bafef9744d8260a7efc64d65a8af24fba281"
+              }
+            ],
+            "external_terminal_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-orbit-continuation-001-attempts\\m2-orb-004-continuation-001-20260906t231515z-4c75f3ea\\m2-orb-004-continuation-001-20260906t231515z-4c75f3ea-succeeded.json"
+          }
+        }
+      ],
       "failure": null,
       "superseded_by": null,
       "extensions": {
@@ -325,7 +426,14 @@
         "minimum_scene_margin_seconds": 4209,
         "eviction_date_utc": "2026-12-01T01:50:08.131473Z",
         "sentinel_custody_prerequisite": "not_satisfied_at_activation",
-        "fresh_catalogue_response_sha256": "4fa0be02fabc3b74b920374e40d470a7e0acec4505e768e13e6a82875a20b448"
+        "fresh_catalogue_response_sha256": "4fa0be02fabc3b74b920374e40d470a7e0acec4505e768e13e6a82875a20b448",
+        "successful_attempt_receipt": "records/acquisition/orbit-attempts/m2-orb-004-continuation-001-20260906t231515z-4c75f3ea.json",
+        "successful_attempt_receipt_sha256": "33cb29cd287399505a90284084ed3fee0aad024fc185a310ba5c90af4fd4ca40",
+        "provider_md5_verified": true,
+        "provider_blake3_verified": true,
+        "staged_xml_verification_status": "pass_orbit_input_only",
+        "offline_reverification_status": "pending",
+        "maximum_osv_endpoint_tolerance_seconds": 1.0
       }
     }
   ],
@@ -343,7 +451,7 @@
     "resume_policy": "disabled_until_range_support_and_unchanged_remote_identity_are verified",
     "payload_bytes_transferred": 639533,
     "this_contract_creates_authority": false,
-    "status": "active_remaining_orbit_sources_review_required",
+    "status": "active_all_four_orbits_promoted_input_verified",
     "authority_status": "inherited_exact_orbit_amendment_approval",
     "amendment_approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
     "amendment_approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
@@ -362,9 +470,9 @@
     "custody_initialization_sha256": "1ea8bef201ad72cc695d9332400561edacacdc93e704916ed7b1a4b28efa1723",
     "external_custody_initialization_receipt": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\orbit-custody-initialization-receipt.json",
     "current_orbit_state_counts": {
-      "authorized": 3,
+      "authorized": 0,
       "failed": 0,
-      "promoted": 1
+      "promoted": 4
     },
     "current_sentinel_state_counts": {
       "authorized": 0,
@@ -372,6 +480,7 @@
       "promoted": 6
     },
     "osv_precision_amendment_001_result_ref": "records/acquisition/m2-orbit-osv-precision-amendment-001-local-validation.json",
-    "osv_precision_amendment_001_result_sha256": "9b3e45fe1d8fe0c9c6668287d7bfc2ec0f8e238d6e0730f04a8d99583eef9898"
+    "osv_precision_amendment_001_result_sha256": "9b3e45fe1d8fe0c9c6668287d7bfc2ec0f8e238d6e0730f04a8d99583eef9898",
+    "orbit_continuation_001_status": "succeeded_all_three_exact_sources"
   }
 }

@@ -1,12 +1,12 @@
 # Current status
 
-- **State:** M1 complete; M2 active with terminal optical results preserved, six-source radar custody/materialization/header readiness complete, and aggregate `M2-VERIFY` deferred
+- **State:** M1 complete; M2 active with terminal optical results preserved, six-source radar custody/materialization/header readiness complete, all four exact approved orbit files promoted, and offline four-orbit verification awaiting public CI
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
-- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; exact `M2-ORB-001` is promoted and input-only verified while its full recovery-003 staging evidence remains preserved
+- **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary `M2-ORBIT-CONTINUATION-001-IMPLEMENTATION`; the exact continuation approval is locked and reconciled, local implementation tests pass, and public default-branch CI is the next gate before any final preflight or owner credential handoff; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
+- **Checkpoints:** primary `M2-ORBIT-VERIFY-IMPLEMENTATION`; the exact continuation completed in fixed order with one owner handoff and no retry, and the four-source read-only verifier must pass public default-branch CI before activation, final no-content preflight, or real EOF reads; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
 
 ## Purpose
 

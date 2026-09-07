@@ -19,9 +19,14 @@ APPROVAL_PATH = ROOT / "records/source-gates/m2-orbit-amendment-approval.json"
 ACTIVE_INTAKE_PATH = ROOT / "contracts/m2-orbit-intake.json"
 ACTIVE_VERIFICATION_PATH = ROOT / "contracts/m2-orbit-offline-verification.json"
 MANIFEST_PATH = ROOT / "records/source-gates/m2-orbit-candidate-manifest.json"
+CONTINUATION_CONTRACT_PATH = ROOT / "contracts/m2-orbit-offline-verification-continuation-001.json"
 PROPOSAL_SHA256 = "b17e256068759946be611bf4e7beffe0d3121e9e731b6c42163525eca2cf0292"
 REVIEW_BUNDLE_SHA256 = "ee5fbf4933b52be8f97441b78a73559a973bd975efc21b43625f1ceca54e2ff1"
 EXPECTED_SOURCE_IDS = ["M2-ORB-001", "M2-ORB-002", "M2-ORB-003", "M2-ORB-004"]
+OUTPUT_REFS = {
+    source_id: f"records/acquisition/orbit-verification/{source_id.casefold()}-offline-verification-001.json"
+    for source_id in EXPECTED_SOURCE_IDS
+}
 
 
 def now_utc() -> str:
@@ -83,6 +88,13 @@ def guarded_controls() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
         or verification.get("authority", {}).get("precise_orbit_substitution_authorized") is not False
         or verification.get("bindings", {}).get("active_intake_sha256_current") != sha256_file(ACTIVE_INTAKE_PATH)
         or verification.get("bindings", {}).get("candidate_manifest_sha256") != sha256_file(MANIFEST_PATH)
+        or verification.get("extensions", {}).get("offline_verification_continuation_001", {}).get("candidate_sha256")
+        != sha256_file(CONTINUATION_CONTRACT_PATH)
+        or [item.get("source_id") for item in verification.get("asset_requirements", [])] != EXPECTED_SOURCE_IDS
+        or any(
+            item.get("maximum_osv_endpoint_tolerance_seconds") != 1.0
+            for item in verification.get("asset_requirements", [])
+        )
     ):
         raise OrbitControlError("active_orbit_verification_binding_drift")
     return approval, intake, verification
@@ -96,11 +108,25 @@ def promoted_binding(
         raise OrbitControlError("promoted_orbit_asset_absent_or_ambiguous")
     asset = matches[0]
     attempts = asset.get("attempts", [])
-    succeeded = [attempt for attempt in attempts if attempt.get("outcome") == "succeeded"]
+    accepted_success_outcomes = {"promoted", "succeeded"} if source_id == "M2-ORB-001" else {"succeeded"}
+    succeeded = [attempt for attempt in attempts if attempt.get("outcome") in accepted_success_outcomes]
     if asset.get("state") != "promoted" or len(succeeded) != 1:
         raise OrbitControlError("orbit_asset_not_promoted_by_exactly_one_success")
     successful_attempt = succeeded[0]
-    if source_id == "M2-ORB-001":
+    m2_orb_001_local_promotion = source_id == "M2-ORB-001" and successful_attempt.get("outcome") == "promoted"
+    m2_orb_001_historical_recovery = source_id == "M2-ORB-001" and successful_attempt.get("outcome") == "succeeded"
+    if m2_orb_001_local_promotion:
+        failed = [attempt for attempt in attempts if attempt.get("outcome") == "failed"]
+        recovery_attempt_id = str(successful_attempt.get("attempt_id", ""))
+        if (
+            len(attempts) != 3
+            or len(failed) != 2
+            or failed[0].get("attempt_id") != "m2-orb-001-20260904t050937z-8ed21d05"
+            or failed[1].get("attempt_id") != "m2-orb-001-recovery-002-20260906t183804z-e5883324"
+            or recovery_attempt_id != "m2-orb-001-osv-precision-amendment-001-local-001"
+        ):
+            raise OrbitControlError("orbit_recovery_attempt_history_drift")
+    elif m2_orb_001_historical_recovery:
         failed = [attempt for attempt in attempts if attempt.get("outcome") == "failed"]
         recovery_attempt_id = str(successful_attempt.get("attempt_id", ""))
         if (
@@ -112,9 +138,17 @@ def promoted_binding(
             raise OrbitControlError("orbit_recovery_attempt_history_drift")
     elif len(attempts) != 1:
         raise OrbitControlError("orbit_asset_attempt_history_drift")
-    receipt_ref = asset.get("extensions", {}).get("successful_attempt_receipt")
-    receipt_sha = asset.get("extensions", {}).get("successful_attempt_receipt_sha256")
-    if not isinstance(receipt_ref, str) or not receipt_ref.startswith("records/acquisition/orbit-attempts/"):
+    if m2_orb_001_local_promotion:
+        receipt_ref = successful_attempt.get("extensions", {}).get("local_validation_result_ref")
+        receipt_sha = successful_attempt.get("extensions", {}).get("local_validation_result_sha256")
+    else:
+        receipt_ref = asset.get("extensions", {}).get("successful_attempt_receipt")
+        receipt_sha = asset.get("extensions", {}).get("successful_attempt_receipt_sha256")
+    exact_local_ref = "records/acquisition/m2-orbit-osv-precision-amendment-001-local-validation.json"
+    if not isinstance(receipt_ref, str) or (
+        not receipt_ref.startswith("records/acquisition/orbit-attempts/")
+        and not (m2_orb_001_local_promotion and receipt_ref == exact_local_ref)
+    ):
         raise OrbitControlError("orbit_transfer_receipt_reference_invalid")
     receipt_path = (ROOT / receipt_ref).resolve()
     try:
@@ -126,24 +160,53 @@ def promoted_binding(
     receipt = load(receipt_path)
     observed = asset.get("observed", {})
     attempt_id = str(successful_attempt.get("attempt_id", ""))
-    if source_id == "M2-ORB-001" and attempt_id.startswith("m2-orb-001-recovery-002-"):
-        expected_event = "orbit_recovery_003_succeeded"
-    elif source_id == "M2-ORB-001" and attempt_id.startswith("m2-orb-001-recovery-001-"):
-        expected_event = "orbit_recovery_002_succeeded"
+    if m2_orb_001_local_promotion:
+        receipt_identity = receipt.get("result", {}).get("destination_identity", {})
+        receipt_valid = (
+            receipt.get("status") == "pass_exact_m2_orb_001_input_promoted_no_replace"
+            and receipt.get("attempt_id") == successful_attempt.get("attempt_id")
+            and receipt.get("source_id") == source_id
+            and receipt_identity.get("sha256") == observed.get("promoted_sha256")
+            and receipt_identity.get("size_bytes") == observed.get("promoted_size_bytes")
+            and receipt.get("assertions", {}).get("destination_created_without_replace") is True
+            and receipt.get("assertions", {}).get("network_requests_performed") is False
+        )
+    elif m2_orb_001_historical_recovery:
+        receipt_identity = {"sha256": receipt.get("local_sha256"), "size_bytes": receipt.get("local_size_bytes")}
+        expected_event = (
+            "orbit_recovery_002_succeeded"
+            if attempt_id.startswith("m2-orb-001-recovery-001-")
+            else "orbit_recovery_003_succeeded"
+        )
+        receipt_valid = (
+            receipt.get("event") == expected_event
+            and receipt.get("attempt_id") == successful_attempt.get("attempt_id")
+            and receipt.get("source_id") == source_id
+            and receipt.get("provider_checksums_locally_verified") is True
+        )
     else:
-        expected_event = "orbit_transfer_succeeded"
+        receipt_identity = {"sha256": receipt.get("local_sha256"), "size_bytes": receipt.get("local_size_bytes")}
+        receipt_valid = (
+            receipt.get("event") == "orbit_continuation_001_succeeded"
+            and receipt.get("attempt_id") == successful_attempt.get("attempt_id")
+            and receipt.get("source_id") == source_id
+            and receipt.get("provider_checksums_locally_verified") is True
+        )
     if (
-        receipt.get("event") != expected_event
-        or receipt.get("attempt_id") != successful_attempt.get("attempt_id")
-        or receipt.get("source_id") != source_id
-        or receipt.get("local_sha256") != observed.get("promoted_sha256")
-        or receipt.get("local_size_bytes") != observed.get("promoted_size_bytes")
+        not receipt_valid
+        or receipt_identity.get("sha256") != observed.get("promoted_sha256")
+        or receipt_identity.get("size_bytes") != observed.get("promoted_size_bytes")
         or observed.get("staged_sha256") != observed.get("promoted_sha256")
         or observed.get("staged_size_bytes") != observed.get("promoted_size_bytes")
-        or receipt.get("provider_checksums_locally_verified") is not True
     ):
         raise OrbitControlError("orbit_transfer_receipt_identity_mismatch")
-    return asset, receipt
+    return asset, {
+        "ref": receipt_ref,
+        "sha256": receipt_sha,
+        "attempt_id": attempt_id,
+        "identity": receipt_identity,
+        "destination_path": receipt.get("destination_path"),
+    }
 
 
 def main() -> int:
@@ -156,7 +219,9 @@ def main() -> int:
 
     try:
         approval, intake, verification = guarded_controls()
-        asset, transfer_receipt = promoted_binding(intake, args.source_id)
+        if output.resolve() != (ROOT / OUTPUT_REFS[args.source_id]).resolve():
+            raise OrbitControlError("orbit_verification_output_path_not_exact")
+        asset, transfer_evidence = promoted_binding(intake, args.source_id)
         requirements = [
             item for item in verification.get("asset_requirements", []) if item.get("source_id") == args.source_id
         ]
@@ -172,7 +237,8 @@ def main() -> int:
             eof_path.relative_to(custody_root)
         except ValueError as exc:
             raise OrbitControlError("orbit_custody_path_escape") from exc
-        if eof_path.as_posix().casefold() != str(transfer_receipt.get("destination_path", "")).replace("\\", "/").casefold():
+        recorded_destination = transfer_evidence.get("destination_path")
+        if recorded_destination is not None and eof_path.as_posix().casefold() != str(recorded_destination).replace("\\", "/").casefold():
             raise OrbitControlError("orbit_custody_path_differs_from_transfer_receipt")
         before_inventory = inventory(eof_path.parent)
     except (OrbitControlError, FileNotFoundError) as exc:
@@ -200,7 +266,7 @@ def main() -> int:
     identity_match = (
         result["observed"].get("size_bytes") == promoted.get("promoted_size_bytes")
         and result["observed"].get("sha256") == promoted.get("promoted_sha256")
-        and result["observed"].get("sha256") == transfer_receipt.get("local_sha256")
+        and result["observed"].get("sha256") == transfer_evidence.get("identity", {}).get("sha256")
     )
     status = "pass_orbit_input_only" if failure_code is None and custody_unchanged and identity_match else "fail"
     receipt = {
@@ -213,8 +279,8 @@ def main() -> int:
         "approval_sha256": sha256_file(APPROVAL_PATH),
         "active_intake_sha256": sha256_file(ACTIVE_INTAKE_PATH),
         "verification_contract_sha256": sha256_file(ACTIVE_VERIFICATION_PATH),
-        "transfer_receipt_ref": asset["extensions"]["successful_attempt_receipt"],
-        "transfer_receipt_sha256": asset["extensions"]["successful_attempt_receipt_sha256"],
+        "transfer_receipt_ref": transfer_evidence["ref"],
+        "transfer_receipt_sha256": transfer_evidence["sha256"],
         "custody_path": str(eof_path),
         "custody_inventory_before": before_inventory,
         "custody_inventory_after": after_inventory,
