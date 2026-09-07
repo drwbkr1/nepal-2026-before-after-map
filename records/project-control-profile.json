@@ -226,6 +226,28 @@
         "maximum_endpoint_tolerance_seconds": 1.0,
         "m2_orb_001_request_authorized": false,
         "secret_transport": "anonymous_pipe_single_use_memory_only"
+      },
+      {
+        "approval_ref": "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
+        "approval_sha256": "315812935fe725b5c2928a27abc2b51faf561c423065de6216f975cecbe81f30",
+        "proposal_ref": "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json",
+        "proposal_sha256": "0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
+        "review_bundle_sha256": "d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f",
+        "review_reconciliation_ref": "records/source-gates/m2-orbit-offline-verification-recovery-001-review-reconciliation.json",
+        "review_reconciliation_sha256": "a07e67160e592093498d44e9ec76f607837f4a7e6b25784458898fa63a8a0fe3",
+        "source_ids_in_exact_order": [
+          "M2-ORB-001",
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ],
+        "m2_orb_001_new_recovery_attempts": 1,
+        "remaining_source_existing_attempts_per_source": 1,
+        "stop_on_first_failure": true,
+        "automatic_retry_authorized": false,
+        "network_requests_authorized": 0,
+        "external_custody_mutation_authorized": false,
+        "maximum_endpoint_tolerance_seconds": 1.0
       }
     ]
   },
@@ -242,9 +264,7 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [
-      "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json"
-    ],
+    "proposed_amendments": [],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json",
@@ -258,7 +278,8 @@
       "records/source-gates/m2-orbit-recovery-002-approval.json",
       "records/source-gates/m2-orbit-recovery-003-approval.json",
       "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
-      "records/source-gates/m2-orbit-continuation-001-approval.json"
+      "records/source-gates/m2-orbit-continuation-001-approval.json",
+      "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json"
     ]
   },
   "cycle": {
@@ -453,17 +474,17 @@
       },
       {
         "unit_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW",
-        "reason": "The first real EOF evaluation is terminal indeterminate; only an exact owner decision can broaden the one-attempt contract to one post-observation persistence recovery.",
-        "authority_ref": "reviews/m2-orbit-offline-verification-recovery-001/review-contract.json"
+        "reason": "The exact owner decision authorizes only the pre-read receipt-reservation implementation, synthetic tests, public-CI gate, final no-content preflight, one M2-ORB-001 recovery, and conditional fixed-order remaining attempts.",
+        "authority_ref": "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW",
+    "checkpoint_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Review M2 orbit offline-verification recovery-001 bundle SHA-256 d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f and proposal SHA-256 0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf; approve, revise, or defer the exact pre-read receipt-reservation correction and one M2-ORB-001 recovery attempt before conditional fixed-order continuation. No implementation, new EOF read, network or credential action, custody mutation, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision."
+    "next_action": "Implement and synthetically validate only the approved pre-read receipt reservation and fixed-order recovery, then require successful public default-branch CI. Do not run the final no-content preflight or read any EOF before that public gate."
   },
   "parallel_checkpoints": [
     {

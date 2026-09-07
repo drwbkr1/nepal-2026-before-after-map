@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION-READINESS",
+  "verified_at_utc": "2026-09-07T18:43:15Z",
+  "status": "pass_local_recovery_implementation_ready_public_ci_pending",
+  "bindings": {
+    "proposal_sha256": "0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
+    "approval_sha256": "315812935fe725b5c2928a27abc2b51faf561c423065de6216f975cecbe81f30",
+    "approval_activation_sha256": "ab99cbd6a8af39052a44973161d527a5e22688d6bad79fa5a2713416aecfbfb9",
+    "approval_reconciliation_sha256": "652b4110d651aeefd43f37ef3a71b61913e65025c4dad420a2ec5c374d60aaf1",
+    "candidate_contract_sha256": "8db4774dfb36ce9718988c23d9a480a01028055a6a28a1bbf301a926e466df68",
+    "builder_sha256": "067e9c64c4ec393cbc96d6558a7738a9248ac9ad2f81079066a9627f5c69765f",
+    "verifier_sha256": "287df202b2bced5db6b21ce2f74b373749690d2659657b8a23225b7009436fe2",
+    "runner_sha256": "821e481fe3facad57793c5da7f8c57d7458eff1ed5c97217afece540acadea73",
+    "preflight_sha256": "ab8e44d9773026959f257eac2face1d775920cb5354edb4186a0dc7a224dfbed",
+    "publication_recorder_sha256": "0b5e2d85b4e6ce2aca9985e38d7a5bef0c4a2beeaed345ec07da7a7ccf14b4c1",
+    "activation_script_sha256": "832a93c6ebce8deefba6e95f0b12baf6a1897faf66d76c36646ac4038050338f",
+    "terminal_reconciler_sha256": "387665e76d03b64fc710fe614d4e004c1843012fa500043c13779d274b90e4ce",
+    "tests_sha256": "4dfc11f594c0de7a8e1114c717916e6c02c1e5702f2a4e1c8fd66962ccfb66b4"
+  },
+  "tests": {
+    "focused_test_count": 9,
+    "full_repository_test_count": 489,
+    "project_checker_file_count": 832,
+    "git_diff_check": "pass"
+  },
+  "assertions": {
+    "tracked_output_parent_exists": true,
+    "receipt_reserved_before_eof_content_read": true,
+    "empty_or_partial_reservation_preserved": true,
+    "fixed_order_and_stop_on_first_failure_enforced": true,
+    "scientific_validation_rules_changed": false,
+    "real_eof_content_read": false,
+    "network_request_performed": false,
+    "credential_value_read_or_recorded": false,
+    "external_custody_mutated": false,
+    "verification_receipt_created": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixel_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  },
+  "next_gate": "commit and successful public default-branch CI before activation, final no-content preflight, or EOF read"
+}

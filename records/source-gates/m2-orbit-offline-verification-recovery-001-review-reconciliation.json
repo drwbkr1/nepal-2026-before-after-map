@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-orbit-offline-verification-recovery-001-review",
+  "contract_sha256": "73ae6dd33ad0c251792414594c2688652c919358d72422eacb193f759c422b49",
+  "response_sha256": "f49447b8d195da2a469b1809affea706e544a7b1c9f1168dfaf01b3223d07260",
+  "receipt_sha256": "ee6c26961585560e195055a6e154ae2cd96d8217396914f61e460af5261b6519",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-APPROVAL",
+  "status": "approved_exact_pre_read_receipt_reservation_recovery_only",
+  "approved_at_utc": "2026-09-07T18:06:13Z",
+  "review_id": "m2-orbit-offline-verification-recovery-001-review",
+  "review_bundle_id": "m2-orbit-offline-verification-recovery-001-review-bundle",
+  "review_bundle_manifest_sha256": "d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f",
+  "proposal_ref": "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json",
+  "proposal_sha256": "0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
+  "review_contract_ref": "reviews/m2-orbit-offline-verification-recovery-001/review-contract.json",
+  "review_contract_sha256": "73ae6dd33ad0c251792414594c2688652c919358d72422eacb193f759c422b49",
+  "review_reconciliation_ref": "records/source-gates/m2-orbit-offline-verification-recovery-001-review-reconciliation.json",
+  "review_reconciliation_sha256": "a07e67160e592093498d44e9ec76f607837f4a7e6b25784458898fa63a8a0fe3",
+  "locked_response_sha256": "f49447b8d195da2a469b1809affea706e544a7b1c9f1168dfaf01b3223d07260",
+  "lock_receipt_sha256": "ee6c26961585560e195055a6e154ae2cd96d8217396914f61e460af5261b6519",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "authorized_recovery": {
+    "recovery_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001",
+    "mode": "post_observation_receipt_reservation_correction_and_fixed_order_recovery",
+    "source_ids_in_exact_order": [
+      "M2-ORB-001",
+      "M2-ORB-002",
+      "M2-ORB-003",
+      "M2-ORB-004"
+    ],
+    "m2_orb_001_new_recovery_attempts": 1,
+    "remaining_source_existing_attempts_per_source": 1,
+    "automatic_retry_authorized": false,
+    "stop_on_first_failure": true,
+    "network_requests_authorized": 0,
+    "credential_handoffs_authorized": 0,
+    "external_custody_mutation_authorized": false,
+    "maximum_osv_endpoint_tolerance_seconds": 1.0,
+    "required_implementation": [
+      "add a tracked records/acquisition/orbit-verification parent directory marker so clean clones retain the exact receipt parent",
+      "require the exact receipt parent to exist inside the repository and be a real non-link directory during final preflight",
+      "reserve the exact append-only receipt path with exclusive creation before opening or hashing any EOF content",
+      "write the complete terminal receipt through the already-exclusive handle and flush and fsync it before reporting success or fail",
+      "preserve an empty or partial reserved receipt as terminal interruption evidence and never reuse its path",
+      "use a new m2-orb-001-offline-verification-recovery-001 receipt identity while retaining the failed 001 path as absent historical evidence",
+      "leave every scientific validation predicate, source identity, checksum, scene binding, and endpoint rule unchanged"
+    ],
+    "required_tests": [
+      "missing output parent stops before EOF content access",
+      "output collision stops before EOF content access",
+      "exclusive reservation precedes EOF content access",
+      "synthetic interruption preserves the reserved attempt and refuses reuse",
+      "complete pass and fail receipts are durable and append-only",
+      "M2-ORB-001 recovery precedes 002, 003, and 004 and any first failure stops later reads"
+    ],
+    "required_gates": [
+      "one completed owner decision on this exact public bundle is locked and reconciled",
+      "the bounded implementation and synthetic tests pass public default-branch CI",
+      "a new final no-content preflight proves the exact receipt parent and all four output paths are ready without reading an EOF"
+    ],
+    "terminal_execution": [
+      "invoke one new read-only M2-ORB-001 recovery verification and persist its exact pass, fail, or interruption evidence",
+      "only after an exact pass, invoke M2-ORB-002, M2-ORB-003, and M2-ORB-004 once each in that order",
+      "stop on the first failure or persistence interruption and reconcile without retry"
+    ]
+  },
+  "authorized_next_actions": [
+    "implement only the exact pre-read receipt-reservation and output-parent correction described above",
+    "add synthetic tests for pre-read failure, persistence, interruption, exact order, and stop-on-first-failure",
+    "publish the exact implementation and require successful public default-branch CI",
+    "run one new final no-content preflight",
+    "run one new append-only M2-ORB-001 recovery verification and, only on pass, one existing attempt for each remaining source in fixed order",
+    "reconcile the exact terminal outcome without reconstructing the lost first evaluation"
+  ],
+  "does_not_authorize": [
+    "reinterpret, reconstruct, or label the lost M2-ORB-001 attempt as pass or fail",
+    "change any source, provider UUID, filename, byte length, checksum, XML rule, OSV rule, unit, scene binding, margin, or one-second endpoint limit",
+    "make a second recovery attempt or automatically retry any failed or interrupted source",
+    "request a token, access the network, reacquire or replace an orbit file, mutate external custody, substitute AUX_POEORB, date-shop, or source-shop",
+    "apply orbit data, act on DEMs, decode radar pixels, process a baseline, analyze change, attribute cause, or publish a scientific result"
+  ],
+  "human_decisions_fabricated": false
+}

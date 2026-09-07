@@ -84,7 +84,7 @@ class OrbitOfflineVerificationRecoveryReviewTests(unittest.TestCase):
         self.assertEqual(readiness["review"]["human_decision_count"], 0)
         self.assertFalse(readiness["assertions"]["recovery_authorized"])
 
-    def test_public_ci_releases_only_the_blank_owner_review(self) -> None:
+    def test_public_ci_historically_released_only_the_blank_owner_review(self) -> None:
         gate = load(PUBLICATION_GATE_REF)
         reconciliation = load(PUBLICATION_RECONCILIATION_REF)
         milestone = load("contracts/milestone-002.json")
@@ -98,9 +98,9 @@ class OrbitOfflineVerificationRecoveryReviewTests(unittest.TestCase):
         self.assertFalse(reconciliation["assertions"]["attestation"])
         self.assertFalse(reconciliation["assertions"]["recovery_authorized"])
         self.assertEqual((publication["status"], publication["disposition"]), ("complete", "pass"))
-        self.assertEqual(review["status"], "ready")
-        self.assertEqual(review["gates"]["human_decision_count"], 0)
-        self.assertFalse(review["gates"]["recovery_authorized"])
+        self.assertEqual((review["status"], review["disposition"]), ("complete", "pass"))
+        self.assertEqual(review["gates"]["human_decision_count"], 1)
+        self.assertTrue(review["gates"]["recovery_authorized"])
 
 
 if __name__ == "__main__":

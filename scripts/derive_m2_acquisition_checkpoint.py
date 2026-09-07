@@ -118,6 +118,22 @@ ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW",
     "next_action": "Review M2 orbit offline-verification recovery-001 bundle SHA-256 d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f and proposal SHA-256 0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf; approve, revise, or defer the exact pre-read receipt-reservation correction and one M2-ORB-001 recovery attempt before conditional fixed-order continuation. No implementation, new EOF read, network or credential action, custody mutation, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision.",
 }
+ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION",
+    "next_action": "Implement and synthetically validate only the approved pre-read receipt reservation and fixed-order recovery, then require successful public default-branch CI. Do not run the final no-content preflight or read any EOF before that public gate.",
+}
+ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_EXECUTION_CHECKPOINT = {
+    "checkpoint_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001",
+    "next_action": "Run the exact final no-content preflight and, only if it passes, run one M2-ORB-001 recovery verification followed conditionally by M2-ORB-002, M2-ORB-003, and M2-ORB-004 in fixed order, stopping on the first failure.",
+}
+ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_TERMINAL_CHECKPOINT = {
+    "checkpoint_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-TERMINAL",
+    "next_action": "Preserve the terminal recovery result and prepare a separately governed path decision. No second recovery, retry, rule change, source substitution, processing, or scientific publication is authorized.",
+}
+DEM_VERTICAL_DATUM_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-DEM-VERTICAL-DATUM-REVIEW",
+    "next_action": "Conduct the exact pending owner review of the EGM2008-to-ArcGIS-EGM96 vertical-datum route. Do not apply orbit data, reinterpret DEM heights, read radar pixels, run a baseline or change analysis, attribute cause, or publish a scientific result before that human gate is resolved.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -892,6 +908,97 @@ def current_orbit_offline_verification_recovery_001_review_required(
     )
 
 
+def current_orbit_offline_verification_recovery_001_implementation_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the approved recovery while implementation awaits public CI."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        approval = load(root / "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json")
+        activation = load(root / "records/readiness/m2-orbit-offline-verification-recovery-001-approval-activation.json")
+        candidate = load(root / "contracts/m2-orbit-offline-verification-recovery-001.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW", {})
+    implementation = units.get("M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION", {})
+    recovery = units.get("M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001", {})
+    return bool(
+        approval.get("status") == "approved_exact_pre_read_receipt_reservation_recovery_only"
+        and approval.get("decision_counts") == {"approve": 1, "revise": 0, "defer": 0}
+        and activation.get("status") == "pass_exact_approval_activated_implementation_and_publication_only"
+        and activation.get("released_now", {}).get("real_eof_read") is False
+        and candidate.get("status") == "candidate_public_ci_pending"
+        and review.get("status") == "complete"
+        and review.get("gates", {}).get("human_decision_count") == 1
+        and review.get("gates", {}).get("attestation") is True
+        and review.get("gates", {}).get("recovery_authorized") is True
+        and implementation.get("status") == "in_progress"
+        and implementation.get("gates", {}).get("public_ci") == "pending"
+        and recovery.get("status") == "planned"
+    )
+
+
+def current_orbit_offline_verification_recovery_001_execution_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize public recovery controls before terminal reconciliation."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        active = load(root / "contracts/m2-orbit-offline-verification.json")
+        publication = load(root / "records/readiness/m2-orbit-offline-verification-recovery-001-implementation-publication-gate.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    implementation = units.get("M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION", {})
+    recovery = units.get("M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001", {})
+    return bool(
+        active.get("status") == "active_recovery_ready_for_offline_verification"
+        and active.get("extensions", {}).get("offline_verification_recovery_001", {}).get("public_ci") == "pass"
+        and publication.get("status") == "pass_public_recovery_controls_before_eof_reads"
+        and publication.get("github_actions", {}).get("conclusion") == "success"
+        and implementation.get("status") == "complete"
+        and implementation.get("gates", {}).get("public_ci") == "pass"
+        and recovery.get("status") == "ready"
+        and not (root / "records/readiness/m2-orbit-offline-verification-recovery-001-terminal-reconciliation.json").exists()
+    )
+
+
+def current_orbit_offline_verification_recovery_001_terminal(
+    root: Path, state_counts: dict[str, int]
+) -> str | None:
+    """Return pass or blocked for the exact reconciled recovery terminal state."""
+    if state_counts != {"promoted": 8}:
+        return None
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        active = load(root / "contracts/m2-orbit-offline-verification.json")
+        terminal = load(root / "records/readiness/m2-orbit-offline-verification-recovery-001-terminal-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return None
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    recovery = units.get("M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001", {})
+    if (
+        terminal.get("status") == "pass_four_exact_resorb_inputs_verified_no_application"
+        and active.get("status") == "complete_pass_four_orbit_inputs_only"
+        and recovery.get("status") == "complete"
+        and recovery.get("disposition") == "pass"
+    ):
+        return "pass"
+    if (
+        str(terminal.get("status", "")).startswith("terminal_")
+        and str(active.get("status", "")).startswith("terminal_recovery_001_")
+        and recovery.get("status") == "complete"
+        and recovery.get("disposition") == "block"
+    ):
+        return "blocked"
+    return None
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -936,7 +1043,22 @@ def main() -> int:
         print(json.dumps({"status": "blocked_invalid_acquisition_progress", "progress": progress}, indent=2))
         return 12
     try:
-        if current_orbit_offline_verification_recovery_001_review_required(
+        recovery_terminal = current_orbit_offline_verification_recovery_001_terminal(
+            ROOT, progress["state_counts"]
+        )
+        if recovery_terminal == "pass":
+            checkpoint = dict(DEM_VERTICAL_DATUM_REVIEW_CHECKPOINT)
+        elif recovery_terminal == "blocked":
+            checkpoint = dict(ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_TERMINAL_CHECKPOINT)
+        elif current_orbit_offline_verification_recovery_001_execution_pending(
+            ROOT, progress["state_counts"]
+        ):
+            checkpoint = dict(ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_EXECUTION_CHECKPOINT)
+        elif current_orbit_offline_verification_recovery_001_implementation_pending(
+            ROOT, progress["state_counts"]
+        ):
+            checkpoint = dict(ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_IMPLEMENTATION_CHECKPOINT)
+        elif current_orbit_offline_verification_recovery_001_review_required(
             ROOT, progress["state_counts"]
         ):
             checkpoint = dict(ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_REVIEW_CHECKPOINT)

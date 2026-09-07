@@ -220,6 +220,28 @@
         "maximum_endpoint_tolerance_seconds": 1.0,
         "m2_orb_001_request_authorized": false,
         "secret_transport": "anonymous_pipe_single_use_memory_only"
+      },
+      {
+        "approval_ref": "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
+        "approval_sha256": "315812935fe725b5c2928a27abc2b51faf561c423065de6216f975cecbe81f30",
+        "proposal_ref": "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json",
+        "proposal_sha256": "0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
+        "review_bundle_sha256": "d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f",
+        "review_reconciliation_ref": "records/source-gates/m2-orbit-offline-verification-recovery-001-review-reconciliation.json",
+        "review_reconciliation_sha256": "a07e67160e592093498d44e9ec76f607837f4a7e6b25784458898fa63a8a0fe3",
+        "source_ids_in_exact_order": [
+          "M2-ORB-001",
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ],
+        "m2_orb_001_new_recovery_attempts": 1,
+        "remaining_source_existing_attempts_per_source": 1,
+        "stop_on_first_failure": true,
+        "automatic_retry_authorized": false,
+        "network_requests_authorized": 0,
+        "external_custody_mutation_authorized": false,
+        "maximum_endpoint_tolerance_seconds": 1.0
       }
     ]
   },
@@ -292,7 +314,8 @@
       "records/source-gates/m2-orbit-recovery-002-approval.json",
       "records/source-gates/m2-orbit-recovery-003-approval.json",
       "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
-      "records/source-gates/m2-orbit-continuation-001-approval.json"
+      "records/source-gates/m2-orbit-continuation-001-approval.json",
+      "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json"
     ]
   },
   "entry_conditions": [
@@ -1151,7 +1174,9 @@
           "M2-ORB-003",
           "M2-ORB-004"
         ],
-        "automatic_retry_authorized": false
+        "automatic_retry_authorized": false,
+        "recovery_001_status": "approved_implementation_public_ci_pending",
+        "recovery_001_approval_sha256": "315812935fe725b5c2928a27abc2b51faf561c423065de6216f975cecbe81f30"
       },
       "disposition": "terminal_indeterminate_receipt_persistence_failure",
       "retained_failures": [
@@ -2617,7 +2642,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json",
         "reviews/m2-orbit-offline-verification-recovery-001/review-bundle.json",
@@ -2645,10 +2670,56 @@
         "remaining_source_attempts_per_source_if_approved": 1,
         "stop_on_first_failure_if_approved": true,
         "maximum_endpoint_tolerance_seconds_if_approved": 1.0,
-        "human_decision_count": 0,
-        "attestation": false,
-        "recovery_authorized": false,
-        "publication_gate_sha256": "9a2811f96dd191d8b11fa9cbbf78d3769e1a389fd646a5ebd83fc2f134a2f931"
+        "human_decision_count": 1,
+        "attestation": true,
+        "recovery_authorized": true,
+        "publication_gate_sha256": "9a2811f96dd191d8b11fa9cbbf78d3769e1a389fd646a5ebd83fc2f134a2f931",
+        "approval_sha256": "315812935fe725b5c2928a27abc2b51faf561c423065de6216f975cecbe81f30",
+        "review_reconciliation_sha256": "a07e67160e592093498d44e9ec76f607837f4a7e6b25784458898fa63a8a0fe3"
+      },
+      "disposition": "pass",
+      "retained_failures": [
+        "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [
+          "one exact attested approval"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "The exact response is locked and reconciled; only implementation, synthetic tests, and public CI are released now."
+      },
+      "next_dependency": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION"
+    },
+    {
+      "id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION",
+      "purpose": "Implement and publish the approved pre-read append-only receipt reservation without reading an EOF.",
+      "depends_on": [
+        "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW"
+      ],
+      "action_class": "reversible_remediation",
+      "human_gate": false,
+      "status": "in_progress",
+      "inputs": [
+        "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
+        "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json",
+        "scripts/verify_m2_orbit_eof.py"
+      ],
+      "outputs": [
+        "contracts/m2-orbit-offline-verification-recovery-001.json",
+        "scripts/verify_m2_orbit_eof_recovery_001.py",
+        "scripts/run_m2_orbit_offline_verification_recovery_001.py",
+        "scripts/preflight_m2_orbit_offline_verification_recovery_001.py",
+        "records/readiness/m2-orbit-offline-verification-recovery-001-implementation-readiness.json",
+        "records/readiness/m2-orbit-offline-verification-recovery-001-implementation-publication-gate.json"
+      ],
+      "gates": {
+        "approval_sha256": "315812935fe725b5c2928a27abc2b51faf561c423065de6216f975cecbe81f30",
+        "public_ci": "pending",
+        "output_parent_creation_authorized": true,
+        "real_eof_reads_before_public_ci": false,
+        "network_or_credential_action": false,
+        "external_custody_mutation": false
       },
       "disposition": null,
       "retained_failures": [
@@ -2656,11 +2727,60 @@
       ],
       "exit_condition_delta": {
         "expected": [],
+        "observed": [
+          "exact approval locked and reconciled"
+        ],
+        "decision_value": "unknown",
+        "rationale": "Implementation and synthetic validation are active; real EOF reads remain blocked before public CI and final preflight."
+      },
+      "next_dependency": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001"
+    },
+    {
+      "id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001",
+      "purpose": "Run one new M2-ORB-001 verification and conditionally consume the three unattempted fixed-order verifications.",
+      "depends_on": [
+        "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION"
+      ],
+      "action_class": "routine_qa",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "external orbit custody",
+        "contracts/m2-orbit-offline-verification-recovery-001.json"
+      ],
+      "outputs": [
+        "four exact append-only orbit verification receipts",
+        "exact terminal reconciliation"
+      ],
+      "gates": {
+        "public_ci": "pending",
+        "final_no_content_preflight": "blocked_by_public_ci",
+        "source_ids_in_exact_order": [
+          "M2-ORB-001",
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ],
+        "m2_orb_001_new_recovery_attempts": 1,
+        "remaining_source_existing_attempts_per_source": 1,
+        "stop_on_first_failure": true,
+        "automatic_retry_authorized": false,
+        "network_or_credential_action": false,
+        "external_custody_mutation": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-201-VERIFIED-CUSTODY"
+        ],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "The exact review is public and blank; one attested owner decision is required."
+        "rationale": "Real verification remains blocked until the exact implementation passes public CI and final no-content preflight."
       },
-      "next_dependency": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION"
+      "next_dependency": "M2-ORBIT-APPLY"
     }
   ],
   "path_efficiency": {
@@ -2717,8 +2837,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW",
-    "next_action": "Review M2 orbit offline-verification recovery-001 bundle SHA-256 d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f and proposal SHA-256 0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf; approve, revise, or defer the exact pre-read receipt-reservation correction and one M2-ORB-001 recovery attempt before conditional fixed-order continuation. No implementation, new EOF read, network or credential action, custody mutation, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision.",
+    "current_checkpoint": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION",
+    "next_action": "Implement and synthetically validate only the approved pre-read receipt reservation and fixed-order recovery, then require successful public default-branch CI. Do not run the final no-content preflight or read any EOF before that public gate.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
