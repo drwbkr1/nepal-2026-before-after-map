@@ -680,6 +680,13 @@ REQUIRED = [
     "records/readiness/m2-dem-terrain-quality-attempt-003-readiness.json",
     "records/readiness/m2-dem-terrain-readiness-input.json",
     "records/readiness/m2-dem-terrain-readiness-decision.json",
+    "records/source-gates/m2-dem-terrain-result-review-reconciliation.json",
+    "records/source-gates/m2-dem-terrain-result-approval.json",
+    "records/readiness/m2-dem-terrain-readiness-owner-review-001-input.json",
+    "records/readiness/m2-dem-terrain-readiness-owner-review-001-audit-failure.json",
+    "records/readiness/m2-dem-terrain-readiness-owner-review-002-input.json",
+    "records/readiness/m2-dem-terrain-readiness-owner-review-002-decision.json",
+    "records/readiness/m2-dem-terrain-result-owner-review-reconciliation.json",
     "reviews/m2-activation/review-bundle.json",
     "reviews/m2-activation/review-contract.json",
     "reviews/m2-activation/blank-response.json",
@@ -783,6 +790,7 @@ REQUIRED = [
     "tests/test_m2_orbit_preflight.py",
     "tests/test_m2_orbit_io.py",
     "tests/test_dem_terrain_quality_core.py",
+    "tests/test_m2_dem_terrain_result_approval.py",
     "tests/test_radar_processing_contract.py",
     "tests/test_optical_processing_core.py",
     "tests/test_m2_materialization.py",
@@ -1061,6 +1069,13 @@ def main() -> None:
     dem_terrain_review_bundle = json.loads((ROOT / "reviews/m2-dem-terrain-result/review-bundle.json").read_text(encoding="utf-8"))
     dem_terrain_review_contract = json.loads((ROOT / "reviews/m2-dem-terrain-result/review-contract.json").read_text(encoding="utf-8"))
     dem_terrain_review_blank = json.loads((ROOT / "reviews/m2-dem-terrain-result/blank-response.json").read_text(encoding="utf-8"))
+    dem_terrain_review_reconciliation = json.loads((ROOT / "records/source-gates/m2-dem-terrain-result-review-reconciliation.json").read_text(encoding="utf-8"))
+    dem_terrain_review_approval = json.loads((ROOT / "records/source-gates/m2-dem-terrain-result-approval.json").read_text(encoding="utf-8"))
+    dem_terrain_owner_audit_invalid_input = json.loads((ROOT / "records/readiness/m2-dem-terrain-readiness-owner-review-001-input.json").read_text(encoding="utf-8"))
+    dem_terrain_owner_audit_failure = json.loads((ROOT / "records/readiness/m2-dem-terrain-readiness-owner-review-001-audit-failure.json").read_text(encoding="utf-8"))
+    dem_terrain_owner_audit_input = json.loads((ROOT / "records/readiness/m2-dem-terrain-readiness-owner-review-002-input.json").read_text(encoding="utf-8"))
+    dem_terrain_owner_audit_decision = json.loads((ROOT / "records/readiness/m2-dem-terrain-readiness-owner-review-002-decision.json").read_text(encoding="utf-8"))
+    dem_terrain_owner_control = json.loads((ROOT / "records/readiness/m2-dem-terrain-result-owner-review-reconciliation.json").read_text(encoding="utf-8"))
     orbit_proposal = json.loads((ROOT / "contracts/milestone-002-orbit-amendment-proposal.json").read_text(encoding="utf-8"))
     orbit_receipt = json.loads((ROOT / "records/source-gates/m2-orbit-metadata-receipt.json").read_text(encoding="utf-8"))
     orbit_manifest = json.loads((ROOT / "records/source-gates/m2-orbit-candidate-manifest.json").read_text(encoding="utf-8"))
@@ -1748,7 +1763,7 @@ def main() -> None:
         or orbit_offline_verification_recovery_post_control.get("bindings", {}).get("milestone_sha256_before")
         != orbit_offline_verification_recovery_terminal.get("bindings", {}).get("milestone_sha256_after")
         or orbit_offline_verification_recovery_post_control.get("bindings", {}).get("milestone_sha256_after")
-        != sha256("contracts/milestone-002.json")
+        != "4fb49ad34e09bd9201a7c208333c35922ba020afeb334276d21dc2e07fd4868e"
         or orbit_offline_verification_recovery_post_control.get("assertions", {}).get("eof_content_read")
         is not False
         or orbit_offline_verification_recovery_post_snapshot.get("recorded_claims", [{}])[0].get(
@@ -2240,8 +2255,12 @@ def main() -> None:
     for approved_unit in ("M2-DEM-AMEND", "M2-DEM-PREFLIGHT", "M2-DEM-ACQUIRE"):
         if profile_gates.get(approved_unit, {}).get("authority_ref") != "records/source-gates/m2-dem-amendment-approval.json":
             fail(f"project profile must bind {approved_unit} to the exact DEM amendment approval")
-    if profile_gates.get("M2-DEM-TERRAIN-RESULT-REVIEW", {}).get("authority_ref") != "reviews/m2-dem-terrain-result/review-contract.json":
-        fail("project profile must expose the exact terrain-result human-review gate")
+    terrain_result_review_gate = profile_gates.get("M2-DEM-TERRAIN-RESULT-REVIEW", {})
+    if (
+        terrain_result_review_gate.get("authority_ref") != "records/source-gates/m2-dem-terrain-result-approval.json"
+        or "Completed exact owner review" not in terrain_result_review_gate.get("reason", "")
+    ):
+        fail("project profile must bind the completed terrain-result review to its exact approval")
     sentinel_recovery_gate = profile_gates.get("M2-SENTINEL-RECOVERY", {})
     if (
         sentinel_recovery_gate.get("authority_ref") != "records/source-gates/m2-sentinel-recovery-002-approval.json"
@@ -2302,11 +2321,6 @@ def main() -> None:
             "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
             "next_action": expected_dem_next_action,
         },
-        {
-            "checkpoint_id": "M2-DEM-TERRAIN-RESULT-REVIEW",
-            "authority_ref": "reviews/m2-dem-terrain-result/review-contract.json",
-            "next_action": "Review bundle SHA-256 834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5 and approve, revise, or defer the terrain-only result; approval releases no vertical, radar, or scientific action.",
-        },
     ]:
         fail("project profile DEM parallel checkpoint differs")
     if goal.get("active_amendments") != [
@@ -2323,7 +2337,7 @@ def main() -> None:
         "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
         "records/source-gates/m2-orbit-continuation-001-approval.json",
         "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
-    ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint, "M2-DEM-TERRAIN-RESULT-REVIEW"]:
+    ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
     if goal.get("proposed_amendments") != []:
         fail("long-term goal must have no pending proposed amendments after recovery approval")
@@ -4181,6 +4195,115 @@ def main() -> None:
         }],
     }:
         fail("DEM terrain-result blank response differs or contains a human decision")
+    if (
+        dem_terrain_review_reconciliation.get("status") != "reconciled_exact_human_response"
+        or dem_terrain_review_reconciliation.get("review_id") != "m2-dem-terrain-result-review-001"
+        or dem_terrain_review_reconciliation.get("contract_sha256") != sha256("reviews/m2-dem-terrain-result/review-contract.json")
+        or dem_terrain_review_reconciliation.get("response_sha256") != "d075899997fa48d3939aec306d1d2d831c7405fd70771e8280a0afb48924f94f"
+        or dem_terrain_review_reconciliation.get("receipt_sha256") != "8e82fc01b02a2fcff0df8632530060f8216299c7d9f66161a6cc60f3050b0d80"
+        or dem_terrain_review_reconciliation.get("human_decision_count") != 1
+        or dem_terrain_review_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+        or dem_terrain_review_reconciliation.get("human_decisions_fabricated") is not False
+        or dem_terrain_review_reconciliation.get("downstream_authorization_created") is not False
+    ):
+        fail("DEM terrain-result exact human response reconciliation differs")
+    if (
+        dem_terrain_review_approval.get("status") != "approved_exact_attempt_003_owner_terrain_result_review_only"
+        or dem_terrain_review_approval.get("review_bundle_manifest_sha256") != sha256("reviews/m2-dem-terrain-result/review-bundle.json")
+        or dem_terrain_review_approval.get("proposal_sha256") != sha256("contracts/m2-dem-terrain-result-review-proposal.json")
+        or dem_terrain_review_approval.get("terrain_receipt_sha256") != sha256("records/surface-receipts/m2-dem-terrain-quality.json")
+        or dem_terrain_review_approval.get("review_reconciliation_sha256") != sha256("records/source-gates/m2-dem-terrain-result-review-reconciliation.json")
+        or dem_terrain_review_approval.get("locked_response_sha256") != dem_terrain_review_reconciliation.get("response_sha256")
+        or dem_terrain_review_approval.get("lock_receipt_sha256") != dem_terrain_review_reconciliation.get("receipt_sha256")
+        or dem_terrain_review_approval.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+        or dem_terrain_review_approval.get("accepted_result", {}).get("criteria") != [
+            "gross-artifact", "native-seam", "AOI-slope", "EPSG:32645 projection", "stable-output", "rendered-map",
+        ]
+        or dem_terrain_review_approval.get("unresolved_findings") != [
+            "vertical datum", "independent elevation accuracy", "pair-specific radar-input fitness",
+        ]
+        or dem_terrain_review_approval.get("human_decisions_fabricated") is not False
+    ):
+        fail("DEM terrain-result bounded approval differs or overclaims")
+    if (
+        dem_terrain_owner_audit_invalid_input.get("audit_id") != "nepal-m2-dem-terrain-readiness-owner-review-001"
+        or "reassessment" not in dem_terrain_owner_audit_invalid_input
+        or dem_terrain_owner_audit_failure.get("status") != "invalid_extra_top_level_provenance_field_before_decision"
+        or dem_terrain_owner_audit_failure.get("audit_input_sha256") != sha256("records/readiness/m2-dem-terrain-readiness-owner-review-001-input.json")
+        or dem_terrain_owner_audit_failure.get("audit_output_created") is not False
+        or dem_terrain_owner_audit_failure.get("exit_code") != 4
+        or dem_terrain_owner_audit_failure.get("assertions", {}).get("scientific_decision_created") is not False
+        or dem_terrain_owner_audit_failure.get("assertions", {}).get("authority_created") is not False
+    ):
+        fail("DEM terrain-result owner-review audit failure is not preserved exactly")
+    original_terrain_gates = {gate.get("gate_id"): gate for gate in dem_terrain_audit_input.get("gates", [])}
+    owner_terrain_gates = {gate.get("gate_id"): gate for gate in dem_terrain_owner_audit_input.get("gates", [])}
+    if (
+        dem_terrain_owner_audit_input.get("audit_id") != "nepal-m2-dem-terrain-readiness-owner-review-002"
+        or dem_terrain_owner_audit_input.get("candidate_id") != dem_terrain_audit_input.get("candidate_id")
+        or dem_terrain_owner_audit_input.get("candidate_manifest_sha256") != dem_terrain_audit_input.get("candidate_manifest_sha256")
+        or set(owner_terrain_gates) != set(original_terrain_gates)
+        or any(owner_terrain_gates[gate_id] != original_terrain_gates[gate_id] for gate_id in set(original_terrain_gates) - {"human-review"})
+        or owner_terrain_gates.get("human-review", {}).get("status") != "pass"
+        or owner_terrain_gates.get("human-review", {}).get("evidence_refs", [])[:2] != [
+            "records/source-gates/m2-dem-terrain-result-review-reconciliation.json",
+            "records/source-gates/m2-dem-terrain-result-approval.json",
+        ]
+    ):
+        fail("DEM terrain readiness owner-review reassessment input changes more than the human-review gate")
+    if (
+        dem_terrain_owner_audit_decision.get("audit_id") != dem_terrain_owner_audit_input.get("audit_id")
+        or dem_terrain_owner_audit_decision.get("audit_input_sha256") != sha256("records/readiness/m2-dem-terrain-readiness-owner-review-002-input.json")
+        or dem_terrain_owner_audit_decision.get("decision") != "defer"
+        or dem_terrain_owner_audit_decision.get("blocking_required_gate_ids") != []
+        or dem_terrain_owner_audit_decision.get("deferred_required_gate_ids") != [
+            "evaluation-design", "radar-input-fitness", "uncertainty-and-exclusions",
+        ]
+        or "human-review" not in [item.get("gate_id") for item in dem_terrain_owner_audit_decision.get("pass_evidence", [])]
+        or dem_terrain_owner_audit_decision.get("authorized_next_actions") != []
+        or dem_terrain_owner_audit_decision.get("training_authorized") is not False
+        or dem_terrain_owner_audit_decision.get("training_authorized_by_this_audit") is not False
+    ):
+        fail("DEM terrain readiness owner-review reassessment differs or releases downstream action")
+    expected_terrain_owner_bindings = {
+        "proposal_ref": "contracts/m2-dem-terrain-result-review-proposal.json",
+        "proposal_sha256": sha256("contracts/m2-dem-terrain-result-review-proposal.json"),
+        "review_bundle_ref": "reviews/m2-dem-terrain-result/review-bundle.json",
+        "review_bundle_sha256": sha256("reviews/m2-dem-terrain-result/review-bundle.json"),
+        "terrain_receipt_ref": "records/surface-receipts/m2-dem-terrain-quality.json",
+        "terrain_receipt_sha256": sha256("records/surface-receipts/m2-dem-terrain-quality.json"),
+        "review_reconciliation_ref": "records/source-gates/m2-dem-terrain-result-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-dem-terrain-result-review-reconciliation.json"),
+        "approval_ref": "records/source-gates/m2-dem-terrain-result-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-dem-terrain-result-approval.json"),
+        "invalid_audit_input_ref": "records/readiness/m2-dem-terrain-readiness-owner-review-001-input.json",
+        "invalid_audit_input_sha256": sha256("records/readiness/m2-dem-terrain-readiness-owner-review-001-input.json"),
+        "audit_failure_ref": "records/readiness/m2-dem-terrain-readiness-owner-review-001-audit-failure.json",
+        "audit_failure_sha256": sha256("records/readiness/m2-dem-terrain-readiness-owner-review-001-audit-failure.json"),
+        "reassessment_input_ref": "records/readiness/m2-dem-terrain-readiness-owner-review-002-input.json",
+        "reassessment_input_sha256": sha256("records/readiness/m2-dem-terrain-readiness-owner-review-002-input.json"),
+        "reassessment_decision_ref": "records/readiness/m2-dem-terrain-readiness-owner-review-002-decision.json",
+        "reassessment_decision_sha256": sha256("records/readiness/m2-dem-terrain-readiness-owner-review-002-decision.json"),
+    }
+    if (
+        dem_terrain_owner_control.get("status") != "defer_owner_review_pass_three_required_gates_deferred"
+        or dem_terrain_owner_control.get("bindings") != expected_terrain_owner_bindings
+        or dem_terrain_owner_control.get("gate_reassessment") != {
+            "changed_gate_ids": ["human-review"],
+            "human_review": "pass",
+            "overall_decision": "defer",
+            "remaining_deferred_required_gate_ids": ["evaluation-design", "radar-input-fitness", "uncertainty-and-exclusions"],
+            "authorized_next_actions": [],
+            "current_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
+        }
+        or dem_terrain_owner_control.get("assertions", {}).get("vertical_datum_resolved") is not False
+        or dem_terrain_owner_control.get("assertions", {}).get("independent_elevation_accuracy_established") is not False
+        or dem_terrain_owner_control.get("assertions", {}).get("orbit_application_authorized") is not False
+        or dem_terrain_owner_control.get("assertions", {}).get("radar_pixel_processing_authorized") is not False
+        or dem_terrain_owner_control.get("assertions", {}).get("attribution_or_scientific_publication_authorized") is not False
+        or dem_terrain_owner_control.get("assertions", {}).get("authority_created_by_reassessment") is not False
+    ):
+        fail("DEM terrain-result owner-review control reconciliation differs or overclaims")
     expected_dem_acquire_status = "complete" if dem_state_counts["promoted"] == 4 and not dem_state_counts["failed"] else "ready"
     expected_dem_verify_status = "complete" if dem_all_geotiff_verified else ("ready" if expected_dem_acquire_status == "complete" else "planned")
     expected_orbit_verify_status = (
@@ -8404,6 +8527,43 @@ def main() -> None:
         or terrain_review_evidence.get("assertions") != expected_terrain_review_assertions
     ):
         fail("EVID-0051 DEM terrain-result review preparation differs")
+    terrain_owner_audit_failure_evidence = ledger_by_id.get("EVID-0122")
+    if (
+        not isinstance(terrain_owner_audit_failure_evidence, dict)
+        or terrain_owner_audit_failure_evidence.get("status") != "invalid_schema_preserved_no_decision"
+        or terrain_owner_audit_failure_evidence.get("invalid_input_sha256") != sha256("records/readiness/m2-dem-terrain-readiness-owner-review-001-input.json")
+        or terrain_owner_audit_failure_evidence.get("failure_sha256") != sha256("records/readiness/m2-dem-terrain-readiness-owner-review-001-audit-failure.json")
+        or terrain_owner_audit_failure_evidence.get("assertions", {}).get("audit_output_created") is not False
+        or terrain_owner_audit_failure_evidence.get("assertions", {}).get("readiness_decision_created") is not False
+        or terrain_owner_audit_failure_evidence.get("assertions", {}).get("authority_created") is not False
+        or terrain_owner_audit_failure_evidence.get("assertions", {}).get("external_data_mutated") is not False
+    ):
+        fail("EVID-0122 DEM terrain owner-review audit failure differs or overclaims")
+    terrain_owner_review_evidence = ledger_by_id.get("EVID-0123")
+    if (
+        not isinstance(terrain_owner_review_evidence, dict)
+        or terrain_owner_review_evidence.get("status") != "pass_owner_review_gate_overall_readiness_defer"
+        or terrain_owner_review_evidence.get("review_reconciliation_sha256") != sha256("records/source-gates/m2-dem-terrain-result-review-reconciliation.json")
+        or terrain_owner_review_evidence.get("approval_sha256") != sha256("records/source-gates/m2-dem-terrain-result-approval.json")
+        or terrain_owner_review_evidence.get("reassessment_input_sha256") != sha256("records/readiness/m2-dem-terrain-readiness-owner-review-002-input.json")
+        or terrain_owner_review_evidence.get("reassessment_decision_sha256") != sha256("records/readiness/m2-dem-terrain-readiness-owner-review-002-decision.json")
+        or terrain_owner_review_evidence.get("control_reconciliation_sha256") != sha256("records/readiness/m2-dem-terrain-result-owner-review-reconciliation.json")
+        or terrain_owner_review_evidence.get("test_sha256") != sha256("tests/test_m2_dem_terrain_result_approval.py")
+        or terrain_owner_review_evidence.get("assertions", {}).get("human_decision_count") != 1
+        or terrain_owner_review_evidence.get("assertions", {}).get("attestation") is not True
+        or terrain_owner_review_evidence.get("assertions", {}).get("human_review_gate") != "pass"
+        or terrain_owner_review_evidence.get("assertions", {}).get("overall_readiness") != "defer"
+        or terrain_owner_review_evidence.get("assertions", {}).get("remaining_deferred_required_gate_ids") != [
+            "evaluation-design", "radar-input-fitness", "uncertainty-and-exclusions",
+        ]
+        or terrain_owner_review_evidence.get("assertions", {}).get("authorized_next_actions") != []
+        or terrain_owner_review_evidence.get("assertions", {}).get("vertical_datum_resolved") is not False
+        or terrain_owner_review_evidence.get("assertions", {}).get("orbit_application_authorized") is not False
+        or terrain_owner_review_evidence.get("assertions", {}).get("radar_pixel_processing_authorized") is not False
+        or terrain_owner_review_evidence.get("assertions", {}).get("derived_pixel_or_scientific_publication_authorized") is not False
+        or terrain_owner_review_evidence.get("assertions", {}).get("authority_created_by_reassessment") is not False
+    ):
+        fail("EVID-0123 DEM terrain owner approval or reassessment differs or overclaims")
 
     orbit_review_evidence = ledger_by_id.get("EVID-0052")
     if (

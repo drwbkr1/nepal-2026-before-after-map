@@ -192,7 +192,15 @@ python C:\Users\drewb\.codex\skills\conduct-human-review\scripts\prepare_review_
 python C:\Users\drewb\.codex\skills\conduct-human-review\scripts\review_response.py prepare --contract reviews\m2-dem-terrain-result\review-contract.json --output <new-exclusive-blank-response>.json
 ```
 
-The bundle must report manifest SHA-256 `834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5`, seven verified tracked artifacts, and `ready_for_handoff`. Its text-only PNG was visually inspected at 1800 by 1680 pixels with no observed clipping, no selected decision, and no DEM-derived map pixels. The retained blank response contains one exact item, no decision, no timestamps, and a false attestation. Approval can close only the owner terrain-result review after exact lock and reconciliation; the other readiness deferrals remain.
+The bundle must report manifest SHA-256 `834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5`, seven verified tracked artifacts, and `ready_for_handoff`. Its text-only PNG was visually inspected at 1800 by 1680 pixels with no observed clipping, no selected decision, and no DEM-derived map pixels. The retained blank response remains immutable with one exact item, no decision, no timestamps, and a false attestation.
+
+The completed owner response was locked privately before reveal and reconciled publicly. The corrected reassessment command is:
+
+```powershell
+python C:\Users\drewb\.codex\skills\audit-dataset-readiness\scripts\audit_readiness.py audit --input records\readiness\m2-dem-terrain-readiness-owner-review-002-input.json --output <new-exclusive-output>.json
+```
+
+The committed decision must remain `defer`, with `human-review` in the passing evidence and exactly `evaluation-design`, `radar-input-fitness`, and `uncertainty-and-exclusions` deferred. It must release zero authorized next actions and preserve the active `M2-DEM-VERTICAL-DATUM-REVIEW` checkpoint. The rejected owner-review-001 input and its schema failure are retained separately rather than rewritten.
 
 ## M2 Sentinel-1 orbit amendment and runner validation
 

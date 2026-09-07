@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-DEM-TERRAIN-RESULT-REVIEW-001-APPROVAL",
+  "status": "approved_exact_attempt_003_owner_terrain_result_review_only",
+  "approved_at_utc": "2026-09-07T19:31:52Z",
+  "review_id": "m2-dem-terrain-result-review-001",
+  "review_bundle_id": "m2-dem-terrain-result-review-bundle-001",
+  "review_bundle_manifest_sha256": "834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5",
+  "proposal_ref": "contracts/m2-dem-terrain-result-review-proposal.json",
+  "proposal_sha256": "80855c6859a6a78de5712883f604c4f6f7816e459b44638054c3f6a1e848a90c",
+  "terrain_receipt_ref": "records/surface-receipts/m2-dem-terrain-quality.json",
+  "terrain_receipt_sha256": "9663c261de37c77fd96896d1fbb37c4c3a970c47966661908673db880e640dd7",
+  "review_contract_ref": "reviews/m2-dem-terrain-result/review-contract.json",
+  "review_contract_sha256": "96da5c649ef64c7f595649ffbfd908744af34ccb9d2bf7ad24d4da33213f1075",
+  "review_reconciliation_ref": "records/source-gates/m2-dem-terrain-result-review-reconciliation.json",
+  "review_reconciliation_sha256": "7be77e6f1ec06886cd5ce7dd87381abc502b62dc206f86c729d6e08d8eb3397a",
+  "locked_response_sha256": "d075899997fa48d3939aec306d1d2d831c7405fd70771e8280a0afb48924f94f",
+  "lock_receipt_sha256": "8e82fc01b02a2fcff0df8632530060f8216299c7d9f66161a6cc60f3050b0d80",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "accepted_result": {
+    "attempt_id": "attempt-003",
+    "scope": "gross_artifact_and_rendered_terrain_screen_only",
+    "criteria": [
+      "gross-artifact",
+      "native-seam",
+      "AOI-slope",
+      "EPSG:32645 projection",
+      "stable-output",
+      "rendered-map"
+    ],
+    "owner_review_gate_reassessment_authorized": true
+  },
+  "unresolved_findings": [
+    "vertical datum",
+    "independent elevation accuracy",
+    "pair-specific radar-input fitness"
+  ],
+  "does_not_authorize": [
+    "software or ArcGIS Coordinate Systems Data installation",
+    "DEM conversion or vertical transformation",
+    "orbit application",
+    "radar-pixel processing",
+    "baseline or change analysis",
+    "attribution",
+    "derived-pixel publication",
+    "a scientific claim"
+  ],
+  "human_decisions_fabricated": false
+}

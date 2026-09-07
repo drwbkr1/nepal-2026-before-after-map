@@ -2910,7 +2910,8 @@
       "The OSV precision amendment is consumed after one successful local validation and promotion of M2-ORB-001; it authorizes no request for M2-ORB-002 through M2-ORB-004 and no downstream processing.",
       "The continuation-001 packet is blank and publicly validated; it creates no implementation or source-access authority before an exact attested owner decision is locked and reconciled.",
       "Orbit continuation-001 is consumed after one handoff and three successful fixed-order requests. All four AUX_RESORB files are promoted input-only; this does not authorize another request, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication.",
-      "Offline verification attempt 001 read and evaluated M2-ORB-001 but lost the in-memory result when its append-only receipt parent was absent; treat it as terminal indeterminate, do not reconstruct a result, and do not run M2-ORB-002 through M2-ORB-004."
+      "Offline verification attempt 001 read and evaluated M2-ORB-001 but lost the in-memory result when its append-only receipt parent was absent; treat it as terminal indeterminate, do not reconstruct a result, and do not run M2-ORB-002 through M2-ORB-004.",
+      "The exact attempt-003 terrain-result owner review is complete and its human-review readiness gate passes; the overall terrain audit remains DEFER on vertical and independent elevation uncertainty, pair-specific radar-input fitness, and independent accuracy evaluation. No installation, DEM conversion, orbit application, radar-pixel processing, baseline, change, attribution, derived-pixel publication, or scientific claim was released."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."

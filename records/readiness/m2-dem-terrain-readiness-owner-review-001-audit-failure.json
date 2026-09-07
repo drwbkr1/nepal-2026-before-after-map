@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-TERRAIN-READINESS-OWNER-REVIEW-001-AUDIT-FAILURE",
+  "status": "invalid_extra_top_level_provenance_field_before_decision",
+  "recorded_at_utc": "2026-09-07T19:35:44Z",
+  "audit_input_ref": "records/readiness/m2-dem-terrain-readiness-owner-review-001-input.json",
+  "audit_input_sha256": "a02bbef31e12544fa6f4a0f3178c6705bcad532b9bba7ec64f944339ff40c7c6",
+  "audit_output_created": false,
+  "exit_code": 4,
+  "error": "audit input fields differ: expected exactly one of training_authorization or next_step_authority",
+  "cause": "The reassessment input added an unsupported top-level reassessment provenance object.",
+  "correction": "Preserve this invalid input and move reassessment provenance into the separate control reconciliation; create a new exact-schema audit input.",
+  "assertions": {
+    "terrain_gate_status_changed_by_failed_audit": false,
+    "scientific_decision_created": false,
+    "authority_created": false,
+    "external_data_mutated": false
+  }
+}

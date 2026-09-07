@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-TERRAIN-RESULT-OWNER-REVIEW-RECONCILIATION-001",
+  "status": "defer_owner_review_pass_three_required_gates_deferred",
+  "reconciled_at_utc": "2026-09-07T19:38:08Z",
+  "bindings": {
+    "proposal_ref": "contracts/m2-dem-terrain-result-review-proposal.json",
+    "proposal_sha256": "80855c6859a6a78de5712883f604c4f6f7816e459b44638054c3f6a1e848a90c",
+    "review_bundle_ref": "reviews/m2-dem-terrain-result/review-bundle.json",
+    "review_bundle_sha256": "834ad354fc134b2017afdd3b238c1a6271276e8b1a95776e434180c7283a26d5",
+    "terrain_receipt_ref": "records/surface-receipts/m2-dem-terrain-quality.json",
+    "terrain_receipt_sha256": "9663c261de37c77fd96896d1fbb37c4c3a970c47966661908673db880e640dd7",
+    "review_reconciliation_ref": "records/source-gates/m2-dem-terrain-result-review-reconciliation.json",
+    "review_reconciliation_sha256": "7be77e6f1ec06886cd5ce7dd87381abc502b62dc206f86c729d6e08d8eb3397a",
+    "approval_ref": "records/source-gates/m2-dem-terrain-result-approval.json",
+    "approval_sha256": "56503ccb94d8bc95cd5a3f147470f03762eef7a3c4a0b53596600a0db87876a7",
+    "invalid_audit_input_ref": "records/readiness/m2-dem-terrain-readiness-owner-review-001-input.json",
+    "invalid_audit_input_sha256": "a02bbef31e12544fa6f4a0f3178c6705bcad532b9bba7ec64f944339ff40c7c6",
+    "audit_failure_ref": "records/readiness/m2-dem-terrain-readiness-owner-review-001-audit-failure.json",
+    "audit_failure_sha256": "2288f55cc8da80d965d4ea9cbac5045fbf5f9364965ca1ab4b42272dfddb000d",
+    "reassessment_input_ref": "records/readiness/m2-dem-terrain-readiness-owner-review-002-input.json",
+    "reassessment_input_sha256": "fca9df87c9d82376b1da3b1f0330854a8c3a7dcacfd16faf922d0c61e2806d63",
+    "reassessment_decision_ref": "records/readiness/m2-dem-terrain-readiness-owner-review-002-decision.json",
+    "reassessment_decision_sha256": "ea11e57faafa79f1e2d6ddaa249b3c01bed91f075364c6f600c6aea2a8a0717a"
+  },
+  "gate_reassessment": {
+    "changed_gate_ids": [
+      "human-review"
+    ],
+    "human_review": "pass",
+    "overall_decision": "defer",
+    "remaining_deferred_required_gate_ids": [
+      "evaluation-design",
+      "radar-input-fitness",
+      "uncertainty-and-exclusions"
+    ],
+    "authorized_next_actions": [],
+    "current_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW"
+  },
+  "assertions": {
+    "exact_owner_decision_count": 1,
+    "attestation": true,
+    "terrain_owner_review_complete": true,
+    "vertical_datum_resolved": false,
+    "independent_elevation_accuracy_established": false,
+    "pair_specific_radar_input_fitness_established": false,
+    "installation_or_dem_conversion_authorized": false,
+    "orbit_application_authorized": false,
+    "radar_pixel_processing_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "attribution_or_scientific_publication_authorized": false,
+    "external_data_mutated": false,
+    "authority_created_by_reassessment": false
+  },
+  "next_action": "Complete the separately pending EGM2008-to-ArcGIS-EGM96 vertical-datum owner review; do not perform installation, conversion, orbit application, radar-pixel processing, baseline, change, attribution, derived-pixel publication, or a scientific claim under this terrain-result approval."
+}

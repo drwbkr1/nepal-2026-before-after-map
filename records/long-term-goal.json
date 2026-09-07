@@ -29,7 +29,6 @@
     "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json"
   ],
   "parallel_checkpoints": [
-    "M2-DEM-VERTICAL-DATUM-REVIEW",
-    "M2-DEM-TERRAIN-RESULT-REVIEW"
+    "M2-DEM-VERTICAL-DATUM-REVIEW"
   ]
 }

@@ -140,7 +140,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         )
         checkpoints = [item["checkpoint_id"] for item in self.profile["parallel_checkpoints"]]
         self.assertIn("M2-DEM-VERTICAL-DATUM-REVIEW", checkpoints)
-        self.assertIn("M2-DEM-TERRAIN-RESULT-REVIEW", checkpoints)
+        self.assertNotIn("M2-DEM-TERRAIN-RESULT-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-ACQUISITION-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-AMENDMENT-REVIEW", checkpoints)
         self.assertEqual(self.goal["parallel_checkpoints"], checkpoints)
