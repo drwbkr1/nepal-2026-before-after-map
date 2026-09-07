@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-POSTAPPROVAL-FULL-SUITE-ATTEMPT-001-FAILURE",
+  "status": "fail_stale_checkpoint_expectations_preserved",
+  "observed_at_utc": "2026-09-07T20:40:16Z",
+  "command": "python -m unittest discover -s tests",
+  "exit_code": 1,
+  "test_count": 499,
+  "failure_count": 13,
+  "intentional_skip_count": 3,
+  "failed_tests": [
+    "test_m2_checkpoint_reconciliation.M2CheckpointReconciliationTests.test_candidate_output_is_scratch_only_and_no_replace",
+    "test_m2_checkpoint_reconciliation.M2CheckpointReconciliationTests.test_current_repository_checkpoint_is_reconciled_read_only",
+    "test_m2_dem_activation.M2DemActivationTests.test_milestone_and_profile_preserve_parallel_dem_route",
+    "test_m2_dem_preflight.M2DemPreflightTests.test_exact_active_controls_advanced_to_acquisition",
+    "test_m2_dem_terrain_result_approval.TerrainResultApprovalTests.test_reassessment_closes_only_owner_review_gate",
+    "test_m2_materialization_pixel_readiness_review.MaterializationPixelReadinessReviewTests.test_milestone_and_profile_record_exact_approval_and_stop_at_implementation",
+    "test_m2_orbit_activation.M2OrbitActivationTests.test_project_control_surfaces_consume_review_without_releasing_other_gates",
+    "test_m2_orbit_continuation_001_publication.OrbitContinuation001PublicationTests.test_checkpoint_derives_to_terminal_orbit_input_pass",
+    "test_m2_orbit_offline_verification_recovery_001.OrbitOfflineVerificationRecovery001Tests.test_current_checkpoint_preserves_terminal_input_only_receipts",
+    "test_m2_orbit_offline_verification_recovery_001_postsuccess.OrbitOfflineVerificationRecovery001PostsuccessTests.test_terminal_state_is_input_only_and_derives_to_dem_vertical_review",
+    "test_m2_orbit_osv_precision_amendment_001_publication.OrbitOsvPrecisionAmendmentPublicationTests.test_publication_reconciliation_history_remains_bound_after_approval",
+    "test_m2_orbit_osv_precision_amendment_001_success.OrbitOsvPrecisionAmendmentSuccessTests.test_control_plane_stops_before_other_orbit_requests",
+    "test_m2_radar_first_path_review_001.RadarFirstPathReview001Tests.test_current_controls_preserve_route_split_and_point_to_recovery_003_review"
+  ],
+  "diagnosis": [
+    "The read-only checkpoint derivation still returned the completed M2-DEM-VERTICAL-DATUM-REVIEW checkpoint instead of recognizing the new exact approval and owner-install prerequisite.",
+    "Ten historical test modules still asserted the old current checkpoint.",
+    "Two test modules still expected thirteen active approvals instead of the newly recorded fourteenth approval.",
+    "The focused vertical-datum tests and project checker had already passed; no approval, source, custody, pixel, or scientific evidence failed."
+  ],
+  "resolution": {
+    "status": "corrected_unpublished_pending_full_validation",
+    "derivation_change": "Recognize exact method approval plus absent owner-installed component and derive M2-DEM-EGM2008-COMPONENT-INSTALL.",
+    "test_change": "Update only assertions about current control state and active-approval count; retain historical terminal records that correctly point to the then-next vertical-datum review.",
+    "failed_result_preserved": true
+  },
+  "assertions": {
+    "approval_reconciliation_changed": false,
+    "owner_decision_changed": false,
+    "source_dem_mutated": false,
+    "external_data_mutated": false,
+    "arcgis_component_installed": false,
+    "dem_preconversion_executed": false,
+    "orbit_application_executed": false,
+    "radar_pixels_read": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Run the corrected focused tests, full repository suite, checkpoint derivation, and project checker; preserve this failed attempt regardless of the corrected result."
+}

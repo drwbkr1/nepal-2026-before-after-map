@@ -248,6 +248,21 @@
         "network_requests_authorized": 0,
         "external_custody_mutation_authorized": false,
         "maximum_endpoint_tolerance_seconds": 1.0
+      },
+      {
+        "approval_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
+        "approval_sha256": "38c872c8dbeeeab08212dd3f71b2dce131b39819c6f7309d1f2b1df2884ee4a6",
+        "proposal_ref": "contracts/m2-dem-vertical-datum-proposal.json",
+        "proposal_sha256": "bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+        "review_bundle_sha256": "9b40e81df766ea866c5bff51cdbc4d83e7e7da6a554fb1709fc553d8221bebbc",
+        "review_reconciliation_ref": "records/source-gates/m2-dem-vertical-datum-review-reconciliation.json",
+        "review_reconciliation_sha256": "c31e8b20f2bc67d3509043ce7f5fcdb501f85f821988dbdb5aa705cb182421e3",
+        "control_reconciliation_ref": "records/readiness/m2-dem-vertical-datum-control-reconciliation.json",
+        "control_reconciliation_sha256": "2aa2ef146f0d682d5e0693303fe7d6d00679feb45097af8ac2e85db864829b41",
+        "selected_method": "arcgis_egm2008_1x1_preconversion_then_none",
+        "owner_installation_required": true,
+        "installation_authorized_for_codex": false,
+        "vertical_datum_resolved_for_radar": false
       }
     ]
   },
@@ -279,7 +294,8 @@
       "records/source-gates/m2-orbit-recovery-003-approval.json",
       "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
       "records/source-gates/m2-orbit-continuation-001-approval.json",
-      "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json"
+      "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
+      "records/source-gates/m2-dem-vertical-datum-approval.json"
     ]
   },
   "cycle": {
@@ -476,21 +492,31 @@
         "unit_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW",
         "reason": "The exact owner decision authorizes only the pre-read receipt-reservation implementation, synthetic tests, public-CI gate, final no-content preflight, one M2-ORB-001 recovery, and conditional fixed-order remaining attempts.",
         "authority_ref": "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json"
+      },
+      {
+        "unit_id": "M2-DEM-VERTICAL-DATUM-REVIEW",
+        "reason": "The exact owner decision selects only the EGM2008 one-minute preconversion method and preserves the separate owner-controlled component installation.",
+        "authority_ref": "records/source-gates/m2-dem-vertical-datum-approval.json"
+      },
+      {
+        "unit_id": "M2-DEM-EGM2008-COMPONENT-INSTALL",
+        "reason": "My Esri sign-in, license acceptance, component download and installation, and UAC remain owner-controlled and were not delegated by the method approval.",
+        "authority_ref": "contracts/m2-dem-vertical-datum-proposal.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-DEM-VERTICAL-DATUM-REVIEW",
+    "checkpoint_id": "M2-DEM-EGM2008-COMPONENT-INSTALL",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Conduct the exact pending owner review of the EGM2008-to-ArcGIS-EGM96 vertical-datum route. Do not apply orbit data, reinterpret DEM heights, read radar pixels, run a baseline or change analysis, attribute cause, or publish a scientific result before that human gate is resolved."
+    "next_action": "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-DEM-VERTICAL-DATUM-REVIEW",
-      "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
-      "next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
+      "checkpoint_id": "M2-DEM-EGM2008-COMPONENT-INSTALL",
+      "authority_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
+      "next_action": "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim."
     }
   ]
 }

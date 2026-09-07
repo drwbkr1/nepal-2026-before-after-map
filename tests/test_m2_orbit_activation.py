@@ -113,7 +113,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertTrue(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["orbit_custody_initialized"])
         self.assertEqual(
             unit_by_id["M2-ORBIT-APPLY"]["gates"]["dem_vertical_datum_gate"],
-            "pending_owner_review",
+            "method_selected_owner_install_pending",
         )
         self.assertFalse(unit_by_id["M2-ORBIT-APPLY"]["gates"]["orbit_application_started"])
         self.assertEqual(
@@ -136,10 +136,11 @@ class M2OrbitActivationTests(unittest.TestCase):
                 "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
                 "records/source-gates/m2-orbit-continuation-001-approval.json",
                 "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
+                "records/source-gates/m2-dem-vertical-datum-approval.json",
             ],
         )
         checkpoints = [item["checkpoint_id"] for item in self.profile["parallel_checkpoints"]]
-        self.assertIn("M2-DEM-VERTICAL-DATUM-REVIEW", checkpoints)
+        self.assertIn("M2-DEM-EGM2008-COMPONENT-INSTALL", checkpoints)
         self.assertNotIn("M2-DEM-TERRAIN-RESULT-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-ACQUISITION-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-AMENDMENT-REVIEW", checkpoints)

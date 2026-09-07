@@ -137,7 +137,7 @@ class MaterializationPixelReadinessReviewTests(unittest.TestCase):
         self.assertFalse(units["M2-OPTICAL-PIXEL-READINESS"]["gates"]["radar_pixel_readiness_authorized"])
         self.assertEqual(
             self.profile["current_checkpoint"]["checkpoint_id"],
-            "M2-DEM-VERTICAL-DATUM-REVIEW",
+            "M2-DEM-EGM2008-COMPONENT-INSTALL",
         )
 
 

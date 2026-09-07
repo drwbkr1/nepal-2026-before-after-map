@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-POSTAPPROVAL-VALIDATION",
+  "status": "pass_corrected_full_suite_after_preserved_failure",
+  "verified_at_utc": "2026-09-07T20:52:33Z",
+  "command": "python -m unittest discover -s tests",
+  "exit_code": 0,
+  "test_count": 499,
+  "failure_count": 0,
+  "intentional_skip_count": 3,
+  "prior_failure_ref": "records/readiness/m2-dem-vertical-datum-postapproval-full-suite-attempt-001-failure.json",
+  "prior_failure_sha256": "eba1fdc663e99118d5304cf12ba49d9c3d2b787273e5b3eb053bfc0d4cc520a2",
+  "corrections_verified": [
+    "The read-only checkpoint derivation recognizes the exact approved vertical-datum method and stops at the owner-controlled ArcGIS component installation gate.",
+    "Historical tests retain their terminal evidence while current-state assertions use the new owner-install checkpoint and fourteen active approvals.",
+    "The complete repository suite passes after the preserved first-run failure."
+  ],
+  "assertions": {
+    "failed_result_preserved": true,
+    "owner_decision_changed": false,
+    "source_dem_mutated": false,
+    "external_data_mutated": false,
+    "arcgis_component_installed": false,
+    "dem_preconversion_executed": false,
+    "orbit_application_executed": false,
+    "radar_pixels_read": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false,
+    "current_checkpoint": "M2-DEM-EGM2008-COMPONENT-INSTALL"
+  },
+  "next_action": "Run checkpoint derivation and the project-owned checker, publish the nonsecret approval reconciliation only if both pass, then require the owner-controlled matching ArcGIS Coordinate Systems Data installation."
+}

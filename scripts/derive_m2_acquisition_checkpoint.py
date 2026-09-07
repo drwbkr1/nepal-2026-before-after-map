@@ -134,6 +134,10 @@ DEM_VERTICAL_DATUM_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "next_action": "Conduct the exact pending owner review of the EGM2008-to-ArcGIS-EGM96 vertical-datum route. Do not apply orbit data, reinterpret DEM heights, read radar pixels, run a baseline or change analysis, attribute cause, or publish a scientific result before that human gate is resolved.",
 }
+DEM_EGM2008_COMPONENT_INSTALL_CHECKPOINT = {
+    "checkpoint_id": "M2-DEM-EGM2008-COMPONENT-INSTALL",
+    "next_action": "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -999,6 +1003,42 @@ def current_orbit_offline_verification_recovery_001_terminal(
     return None
 
 
+def current_dem_egm2008_component_install_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the approved method while the exact owner-installed component is absent."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        approval = load(root / "records/source-gates/m2-dem-vertical-datum-approval.json")
+        reconciliation = load(root / "records/source-gates/m2-dem-vertical-datum-review-reconciliation.json")
+        control = load(root / "records/readiness/m2-dem-vertical-datum-control-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-DEM-VERTICAL-DATUM-REVIEW", {})
+    install = units.get("M2-DEM-EGM2008-COMPONENT-INSTALL", {})
+    conversion = units.get("M2-DEM-VERTICAL-DATUM-CONVERSION", {})
+    return bool(
+        approval.get("status") == "approved_exact_egm2008_preconversion_method_owner_install_pending"
+        and approval.get("attestation") is True
+        and approval.get("claim_boundary", {}).get("method_decision_approved") is True
+        and approval.get("claim_boundary", {}).get("arcgis_coordinate_systems_data_installed") is False
+        and reconciliation.get("decision_counts") == {"approve": 1, "revise": 0, "defer": 0}
+        and reconciliation.get("human_decisions_fabricated") is False
+        and control.get("status") == "pass_method_selected_owner_component_install_pending"
+        and control.get("assertions", {}).get("arcgis_coordinate_systems_data_installed") is False
+        and control.get("assertions", {}).get("dem_preconversion_executed") is False
+        and review.get("status") == "complete"
+        and review.get("disposition") == "pass"
+        and install.get("status") == "planned"
+        and install.get("human_gate") is True
+        and install.get("gates", {}).get("codex_download_or_install_authorized") is False
+        and conversion.get("status") == "planned"
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -1047,7 +1087,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            checkpoint = dict(DEM_VERTICAL_DATUM_REVIEW_CHECKPOINT)
+            checkpoint = dict(
+                DEM_EGM2008_COMPONENT_INSTALL_CHECKPOINT
+                if current_dem_egm2008_component_install_pending(ROOT, progress["state_counts"])
+                else DEM_VERTICAL_DATUM_REVIEW_CHECKPOINT
+            )
         elif recovery_terminal == "blocked":
             checkpoint = dict(ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_TERMINAL_CHECKPOINT)
         elif current_orbit_offline_verification_recovery_001_execution_pending(

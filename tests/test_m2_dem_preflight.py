@@ -67,7 +67,7 @@ class M2DemPreflightTests(unittest.TestCase):
             asset["extensions"].get("geotiff_verification_status") == "pass_structural_and_full_tile_finite"
             for asset in intake["assets"]
         )
-        expected_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW" if all_verified else ("M2-DEM-GEOTIFF-VERIFICATION" if all_promoted else "M2-DEM-ACQUISITION")
+        expected_checkpoint = "M2-DEM-EGM2008-COMPONENT-INSTALL" if all_verified else ("M2-DEM-GEOTIFF-VERIFICATION" if all_promoted else "M2-DEM-ACQUISITION")
         self.assertEqual(units["M2-DEM-PREFLIGHT"]["status"], "complete")
         self.assertEqual(units["M2-DEM-ACQUIRE"]["status"], "complete" if all_promoted else "ready")
         self.assertIn(expected_checkpoint, {item["checkpoint_id"] for item in profile["parallel_checkpoints"]})

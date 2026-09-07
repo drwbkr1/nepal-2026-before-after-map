@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-dem-vertical-datum-review-001",
+  "contract_sha256": "1227dc4934d6ba22498f86283060f2674474f5ab969c50a507fc0729ebc3c8b6",
+  "response_sha256": "b864b04187d5e4757fd37b475b931123fb88eb4b9b3fca4891f141f600244c2e",
+  "receipt_sha256": "b4f9b3e80cdf87fd94deef79995df4c5010d507e3849981f39a952cc5ebafdf8",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

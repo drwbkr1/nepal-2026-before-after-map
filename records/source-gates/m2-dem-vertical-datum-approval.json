@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-DEM-VERTICAL-DATUM-APPROVAL-001",
+  "status": "approved_exact_egm2008_preconversion_method_owner_install_pending",
+  "approved_at_utc": "2026-09-07T20:18:46.928Z",
+  "authority_ref": "user-instruction:2026-09-07:m2-dem-vertical-datum-review",
+  "review_bundle_ref": "reviews/m2-dem-vertical-datum/review-bundle.json",
+  "review_bundle_manifest_sha256": "9b40e81df766ea866c5bff51cdbc4d83e7e7da6a554fb1709fc553d8221bebbc",
+  "proposal_ref": "contracts/m2-dem-vertical-datum-proposal.json",
+  "proposal_sha256": "bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+  "review_contract_ref": "reviews/m2-dem-vertical-datum/review-contract.json",
+  "review_contract_sha256": "1227dc4934d6ba22498f86283060f2674474f5ab969c50a507fc0729ebc3c8b6",
+  "review_reconciliation_ref": "records/source-gates/m2-dem-vertical-datum-review-reconciliation.json",
+  "review_reconciliation_sha256": "c31e8b20f2bc67d3509043ce7f5fcdb501f85f821988dbdb5aa705cb182421e3",
+  "locked_response_sha256": "b864b04187d5e4757fd37b475b931123fb88eb4b9b3fca4891f141f600244c2e",
+  "lock_receipt_sha256": "b4f9b3e80cdf87fd94deef79995df4c5010d507e3849981f39a952cc5ebafdf8",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "attestation": true,
+  "selected_method": {
+    "route": "arcgis_egm2008_1x1_preconversion_then_none",
+    "source_vertical_crs": "EPSG:3855",
+    "source_height_type": "EGM2008 orthometric",
+    "required_component": "ArcGIS Coordinate Systems Data for ArcGIS Pro 3.7.x",
+    "required_feature": "world1x1_vert",
+    "required_grid": "Dataset_egm2008-1.grd",
+    "required_transformation": "WGS_1984_To_WGS_1984_EGM2008_1x1_Height",
+    "required_transformation_wkid": 110018,
+    "derived_height_type": "WGS 84 ellipsoidal",
+    "derived_horizontal_crs": "EPSG:4326",
+    "radar_geoid_parameter_for_verified_derivatives": "NONE",
+    "egm96_route_role": "labeled_sensitivity_only"
+  },
+  "owner_prerequisite": {
+    "status": "pending_owner_installation",
+    "component_present_in_last_inspection": false,
+    "owner_action_required": true,
+    "codex_installation_authorized": false
+  },
+  "authorized_after_owner_installation": [
+    "re-run the local ArcGIS capability inspection",
+    "prepare and validate no-overwrite conversion controls bound to the installed grid and four verified DEM hashes",
+    "create derived ellipsoidal DEM copies only in C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal",
+    "set ArcGIS SAR geoid parameters to NONE only when the verified ellipsoidal copies are used",
+    "retain EGM96 GEOID processing only as a labeled sensitivity route"
+  ],
+  "actions_not_authorized": [
+    "sign in to My Esri or another account",
+    "accept or modify any Esri license or provider terms",
+    "download or install software or coordinate-system data",
+    "approve or dismiss UAC or another privileged prompt",
+    "acquire an NGA, PROJ, Sentinel Hub, or other alternate geoid grid",
+    "alter or overwrite any promoted Copernicus DEM tile",
+    "use raw EGM2008 orthometric tiles with NONE",
+    "call the ArcGIS EGM96 GEOID route exact EGM2008 handling",
+    "run radar processing before Sentinel custody, container, materialization, pixel, orbit, and registration gates pass",
+    "download updated orbit vectors",
+    "publish a scientific change, interpretation, attribution, or emergency-guidance claim"
+  ],
+  "claim_boundary": {
+    "method_decision_approved": true,
+    "arcgis_coordinate_systems_data_installed": false,
+    "egm2008_grid_in_project_custody": false,
+    "dem_preconversion_executed": false,
+    "vertical_datum_resolved_for_radar": false,
+    "orbit_application_executed": false,
+    "radar_processing_executed": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  },
+  "human_decisions_fabricated": false
+}

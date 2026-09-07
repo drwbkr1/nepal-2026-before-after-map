@@ -78,7 +78,7 @@ class OrbitContinuation001PublicationTests(unittest.TestCase):
         self.assertFalse(action["gates"]["m2_orb_001_request_authorized"])
 
     def test_checkpoint_derives_to_terminal_orbit_input_pass(self) -> None:
-        checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
+        checkpoint = "M2-DEM-EGM2008-COMPONENT-INSTALL"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)

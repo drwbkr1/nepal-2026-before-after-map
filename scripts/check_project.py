@@ -687,6 +687,11 @@ REQUIRED = [
     "records/readiness/m2-dem-terrain-readiness-owner-review-002-input.json",
     "records/readiness/m2-dem-terrain-readiness-owner-review-002-decision.json",
     "records/readiness/m2-dem-terrain-result-owner-review-reconciliation.json",
+    "records/source-gates/m2-dem-vertical-datum-review-reconciliation.json",
+    "records/source-gates/m2-dem-vertical-datum-approval.json",
+    "records/readiness/m2-dem-vertical-datum-control-reconciliation.json",
+    "records/readiness/m2-dem-vertical-datum-postapproval-full-suite-attempt-001-failure.json",
+    "records/readiness/m2-dem-vertical-datum-postapproval-validation.json",
     "reviews/m2-activation/review-bundle.json",
     "reviews/m2-activation/review-contract.json",
     "reviews/m2-activation/blank-response.json",
@@ -1052,6 +1057,11 @@ def main() -> None:
     dem_vertical_bundle = json.loads((ROOT / "reviews/m2-dem-vertical-datum/review-bundle.json").read_text(encoding="utf-8"))
     dem_vertical_contract = json.loads((ROOT / "reviews/m2-dem-vertical-datum/review-contract.json").read_text(encoding="utf-8"))
     dem_vertical_blank = json.loads((ROOT / "reviews/m2-dem-vertical-datum/blank-response.json").read_text(encoding="utf-8"))
+    dem_vertical_reconciliation = json.loads((ROOT / "records/source-gates/m2-dem-vertical-datum-review-reconciliation.json").read_text(encoding="utf-8"))
+    dem_vertical_approval = json.loads((ROOT / "records/source-gates/m2-dem-vertical-datum-approval.json").read_text(encoding="utf-8"))
+    dem_vertical_control = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-control-reconciliation.json").read_text(encoding="utf-8"))
+    dem_vertical_postapproval_failure = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-postapproval-full-suite-attempt-001-failure.json").read_text(encoding="utf-8"))
+    dem_vertical_postapproval_validation = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-postapproval-validation.json").read_text(encoding="utf-8"))
     dem_terrain_contract = json.loads((ROOT / "config/qa/dem-terrain-quality-contract.json").read_text(encoding="utf-8"))
     dem_terrain_readiness = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-readiness.json").read_text(encoding="utf-8"))
     dem_terrain_ci_correction = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-ci-correction.json").read_text(encoding="utf-8"))
@@ -1150,6 +1160,12 @@ def main() -> None:
         asset.get("extensions", {}).get("geotiff_verification_status") == "pass_structural_and_full_tile_finite"
         for asset in dem_current_assets
     )
+    dem_vertical_method_approved = bool(
+        dem_vertical_reconciliation.get("decision_counts") == {"approve": 1, "revise": 0, "defer": 0}
+        and dem_vertical_approval.get("status") == "approved_exact_egm2008_preconversion_method_owner_install_pending"
+        and dem_vertical_control.get("status") == "pass_method_selected_owner_component_install_pending"
+    )
+    expected_dem_checkpoint_authority_ref = "records/source-gates/m2-dem-amendment-approval.json"
     if dem_state_counts["failed"]:
         expected_dem_transfer_checkpoint = "M2-DEM-ACQUISITION-REVIEW"
         expected_dem_checkpoint = expected_dem_transfer_checkpoint
@@ -1159,10 +1175,20 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
+            expected_dem_checkpoint = (
+                "M2-DEM-EGM2008-COMPONENT-INSTALL"
+                if dem_vertical_method_approved
+                else "M2-DEM-VERTICAL-DATUM-REVIEW"
+            )
+            if dem_vertical_method_approved:
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-dem-vertical-datum-approval.json"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            expected_dem_next_action = "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
+            expected_dem_next_action = (
+                "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim."
+                if dem_vertical_method_approved
+                else "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
+            )
         else:
             expected_dem_checkpoint = expected_dem_transfer_checkpoint
             expected_dem_intake_status = "active_all_promoted_pending_geotiff_verification"
@@ -1182,9 +1208,13 @@ def main() -> None:
         expected_dem_verification_status = "active_gate_deferred_no_promoted_rasters"
         expected_dem_next_action = "Acquire M2-DEM-001 only through append-only staging, verify its exact length and local SHA-256, and promote without replacement; stop on any route or identity drift."
     expected_orbit_offline_verification_recovery_pass_next_action = (
-        "Conduct the exact pending owner review of the EGM2008-to-ArcGIS-EGM96 vertical-datum route. "
-        "Do not apply orbit data, reinterpret DEM heights, read radar pixels, run a baseline or change "
-        "analysis, attribute cause, or publish a scientific result before that human gate is resolved."
+        expected_dem_next_action
+        if dem_vertical_method_approved
+        else (
+            "Conduct the exact pending owner review of the EGM2008-to-ArcGIS-EGM96 vertical-datum route. "
+            "Do not apply orbit data, reinterpret DEM heights, read radar pixels, run a baseline or change "
+            "analysis, attribute cause, or publish a scientific result before that human gate is resolved."
+        )
     )
     radar_processing_contract = json.loads((ROOT / "config/qa/radar-baseline-processing-contract.json").read_text(encoding="utf-8"))
     dem_radar_readiness = json.loads((ROOT / "records/surface-receipts/m2-dem-radar-control-readiness.json").read_text(encoding="utf-8"))
@@ -1751,7 +1781,9 @@ def main() -> None:
         or recovery_orbit_apply_unit.get("status") != "planned"
         or recovery_orbit_apply_unit.get("gates", {}).get("orbit_application_started") is not False
         or recovery_orbit_apply_unit.get("gates", {}).get("dem_vertical_datum_gate")
-        != "pending_owner_review"
+        != "method_selected_owner_install_pending"
+        or recovery_orbit_apply_unit.get("gates", {}).get("terrain_result_review")
+        != "complete_bounded_owner_acceptance_readiness_still_defer"
         or orbit_offline_verification_recovery_pre_snapshot.get("recorded_claims", [{}])[0].get(
             "claimed_value"
         )
@@ -2010,8 +2042,9 @@ def main() -> None:
         "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
         "records/source-gates/m2-orbit-continuation-001-approval.json",
         "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
+        "records/source-gates/m2-dem-vertical-datum-approval.json",
     ]:
-        fail("project profile must expose the thirteen exact active amendments")
+        fail("project profile must expose the fourteen exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -2209,6 +2242,21 @@ def main() -> None:
         "external_custody_mutation_authorized": False,
         "maximum_endpoint_tolerance_seconds": 1.0,
     }
+    expected_dem_vertical_datum_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-dem-vertical-datum-approval.json"),
+        "proposal_ref": "contracts/m2-dem-vertical-datum-proposal.json",
+        "proposal_sha256": "bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+        "review_bundle_sha256": "9b40e81df766ea866c5bff51cdbc4d83e7e7da6a554fb1709fc553d8221bebbc",
+        "review_reconciliation_ref": "records/source-gates/m2-dem-vertical-datum-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-dem-vertical-datum-review-reconciliation.json"),
+        "control_reconciliation_ref": "records/readiness/m2-dem-vertical-datum-control-reconciliation.json",
+        "control_reconciliation_sha256": sha256("records/readiness/m2-dem-vertical-datum-control-reconciliation.json"),
+        "selected_method": "arcgis_egm2008_1x1_preconversion_then_none",
+        "owner_installation_required": True,
+        "installation_authorized_for_codex": False,
+        "vertical_datum_resolved_for_radar": False,
+    }
     expected_amendments = [
         expected_dem_amendment_binding,
         expected_orbit_amendment_binding,
@@ -2223,6 +2271,7 @@ def main() -> None:
         expected_orbit_osv_precision_amendment_binding,
         expected_orbit_continuation_001_amendment_binding,
         expected_orbit_offline_verification_recovery_001_amendment_binding,
+        expected_dem_vertical_datum_amendment_binding,
     ]
     if profile["authority"].get("amendments") != expected_amendments:
         fail("profile authority does not bind the exact active amendments")
@@ -2242,8 +2291,9 @@ def main() -> None:
         "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
         "records/source-gates/m2-orbit-continuation-001-approval.json",
         "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
+        "records/source-gates/m2-dem-vertical-datum-approval.json",
     ]:
-        fail("active M2 scope does not expose the thirteen exact amendment approvals")
+        fail("active M2 scope does not expose the fourteen exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -2315,10 +2365,14 @@ def main() -> None:
             fail(f"project profile must bind {approved_unit} to the exact orbit amendment approval")
     if profile_gates.get("M2-RADAR-INPUT-LABEL-AMEND", {}).get("authority_ref") != "records/source-gates/m2-radar-input-readiness-amendment-approval.json":
         fail("project profile must bind the exact radar input label amendment approval")
+    if profile_gates.get("M2-DEM-VERTICAL-DATUM-REVIEW", {}).get("authority_ref") != "records/source-gates/m2-dem-vertical-datum-approval.json":
+        fail("project profile must bind the completed DEM vertical-datum review to its exact approval")
+    if profile_gates.get("M2-DEM-EGM2008-COMPONENT-INSTALL", {}).get("authority_ref") != "contracts/m2-dem-vertical-datum-proposal.json":
+        fail("project profile must retain the EGM2008 component installation as an owner-controlled gate")
     if profile.get("parallel_checkpoints") != [
         {
             "checkpoint_id": expected_dem_checkpoint,
-            "authority_ref": "records/source-gates/m2-dem-amendment-approval.json",
+            "authority_ref": expected_dem_checkpoint_authority_ref,
             "next_action": expected_dem_next_action,
         },
     ]:
@@ -2337,6 +2391,7 @@ def main() -> None:
         "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
         "records/source-gates/m2-orbit-continuation-001-approval.json",
         "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
+        "records/source-gates/m2-dem-vertical-datum-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
     if goal.get("proposed_amendments") != []:
@@ -3357,6 +3412,121 @@ def main() -> None:
         or dem_vertical_blank["responses"][0].get("evidence_sha256") != sha256("reviews/m2-dem-vertical-datum/review-bundle.json")
     ):
         fail("M2 DEM vertical-datum blank response is not blank and exactly bound")
+    if (
+        dem_vertical_reconciliation.get("status") != "reconciled_exact_human_response"
+        or dem_vertical_reconciliation.get("review_id") != "m2-dem-vertical-datum-review-001"
+        or dem_vertical_reconciliation.get("contract_sha256") != sha256("reviews/m2-dem-vertical-datum/review-contract.json")
+        or dem_vertical_reconciliation.get("response_sha256") != "b864b04187d5e4757fd37b475b931123fb88eb4b9b3fca4891f141f600244c2e"
+        or dem_vertical_reconciliation.get("receipt_sha256") != "b4f9b3e80cdf87fd94deef79995df4c5010d507e3849981f39a952cc5ebafdf8"
+        or dem_vertical_reconciliation.get("human_decision_count") != 1
+        or dem_vertical_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+        or dem_vertical_reconciliation.get("human_decisions_fabricated") is not False
+        or dem_vertical_reconciliation.get("downstream_authorization_created") is not False
+    ):
+        fail("M2 DEM vertical-datum exact human response reconciliation differs")
+    if (
+        dem_vertical_approval.get("status") != "approved_exact_egm2008_preconversion_method_owner_install_pending"
+        or dem_vertical_approval.get("review_bundle_manifest_sha256") != sha256("reviews/m2-dem-vertical-datum/review-bundle.json")
+        or dem_vertical_approval.get("proposal_sha256") != sha256("contracts/m2-dem-vertical-datum-proposal.json")
+        or dem_vertical_approval.get("review_contract_sha256") != sha256("reviews/m2-dem-vertical-datum/review-contract.json")
+        or dem_vertical_approval.get("review_reconciliation_sha256") != sha256("records/source-gates/m2-dem-vertical-datum-review-reconciliation.json")
+        or dem_vertical_approval.get("locked_response_sha256") != dem_vertical_reconciliation.get("response_sha256")
+        or dem_vertical_approval.get("lock_receipt_sha256") != dem_vertical_reconciliation.get("receipt_sha256")
+        or dem_vertical_approval.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+        or dem_vertical_approval.get("attestation") is not True
+        or dem_vertical_approval.get("selected_method", {}).get("route") != "arcgis_egm2008_1x1_preconversion_then_none"
+        or dem_vertical_approval.get("selected_method", {}).get("required_transformation_wkid") != 110018
+        or dem_vertical_approval.get("selected_method", {}).get("radar_geoid_parameter_for_verified_derivatives") != "NONE"
+        or dem_vertical_approval.get("owner_prerequisite", {}).get("status") != "pending_owner_installation"
+        or dem_vertical_approval.get("owner_prerequisite", {}).get("codex_installation_authorized") is not False
+        or dem_vertical_approval.get("claim_boundary", {}).get("method_decision_approved") is not True
+        or any(dem_vertical_approval.get("claim_boundary", {}).get(key) is not False for key in (
+            "arcgis_coordinate_systems_data_installed", "egm2008_grid_in_project_custody",
+            "dem_preconversion_executed", "vertical_datum_resolved_for_radar", "orbit_application_executed",
+            "radar_processing_executed", "baseline_or_change_analysis_executed", "scientific_result_established",
+        ))
+        or dem_vertical_approval.get("human_decisions_fabricated") is not False
+    ):
+        fail("M2 DEM vertical-datum approval differs or overclaims")
+    expected_vertical_control_bindings = {
+        "proposal_ref": "contracts/m2-dem-vertical-datum-proposal.json",
+        "proposal_sha256": sha256("contracts/m2-dem-vertical-datum-proposal.json"),
+        "review_bundle_ref": "reviews/m2-dem-vertical-datum/review-bundle.json",
+        "review_bundle_sha256": sha256("reviews/m2-dem-vertical-datum/review-bundle.json"),
+        "review_contract_ref": "reviews/m2-dem-vertical-datum/review-contract.json",
+        "review_contract_sha256": sha256("reviews/m2-dem-vertical-datum/review-contract.json"),
+        "review_reconciliation_ref": "records/source-gates/m2-dem-vertical-datum-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-dem-vertical-datum-review-reconciliation.json"),
+        "approval_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-dem-vertical-datum-approval.json"),
+        "last_capability_inspection_ref": "records/surface-receipts/m2-dem-vertical-datum-capability.json",
+        "last_capability_inspection_sha256": sha256("records/surface-receipts/m2-dem-vertical-datum-capability.json"),
+    }
+    if (
+        dem_vertical_control.get("status") != "pass_method_selected_owner_component_install_pending"
+        or dem_vertical_control.get("bindings") != expected_vertical_control_bindings
+        or dem_vertical_control.get("decision", {}).get("current_checkpoint") != "M2-DEM-EGM2008-COMPONENT-INSTALL"
+        or dem_vertical_control.get("decision", {}).get("selected_production_route") != "arcgis_egm2008_1x1_preconversion_then_none"
+        or dem_vertical_control.get("assertions", {}).get("vertical_datum_method_selected") is not True
+        or dem_vertical_control.get("assertions", {}).get("arcgis_coordinate_systems_data_installed") is not False
+        or dem_vertical_control.get("assertions", {}).get("dem_preconversion_executed") is not False
+        or dem_vertical_control.get("assertions", {}).get("vertical_datum_resolved_for_radar") is not False
+        or dem_vertical_control.get("assertions", {}).get("external_data_mutated_by_reconciliation") is not False
+        or dem_vertical_control.get("assertions", {}).get("installation_or_terms_action_performed") is not False
+    ):
+        fail("M2 DEM vertical-datum control reconciliation differs or overclaims")
+    if (
+        dem_vertical_postapproval_failure.get("status") != "fail_stale_checkpoint_expectations_preserved"
+        or dem_vertical_postapproval_failure.get("command") != "python -m unittest discover -s tests"
+        or dem_vertical_postapproval_failure.get("exit_code") != 1
+        or dem_vertical_postapproval_failure.get("test_count") != 499
+        or dem_vertical_postapproval_failure.get("failure_count") != 13
+        or dem_vertical_postapproval_failure.get("intentional_skip_count") != 3
+        or len(dem_vertical_postapproval_failure.get("failed_tests", [])) != 13
+        or dem_vertical_postapproval_failure.get("resolution", {}).get("failed_result_preserved") is not True
+        or any(dem_vertical_postapproval_failure.get("assertions", {}).get(key) is not False for key in (
+            "approval_reconciliation_changed", "owner_decision_changed", "source_dem_mutated",
+            "external_data_mutated", "arcgis_component_installed", "dem_preconversion_executed",
+            "orbit_application_executed", "radar_pixels_read", "baseline_or_change_analysis_executed",
+            "scientific_result_established",
+        ))
+    ):
+        fail("M2 DEM vertical-datum postapproval full-suite failure is not preserved exactly")
+    if (
+        dem_vertical_postapproval_validation.get("status") != "pass_corrected_full_suite_after_preserved_failure"
+        or dem_vertical_postapproval_validation.get("command") != "python -m unittest discover -s tests"
+        or dem_vertical_postapproval_validation.get("exit_code") != 0
+        or dem_vertical_postapproval_validation.get("test_count") != 499
+        or dem_vertical_postapproval_validation.get("failure_count") != 0
+        or dem_vertical_postapproval_validation.get("intentional_skip_count") != 3
+        or dem_vertical_postapproval_validation.get("prior_failure_ref") != "records/readiness/m2-dem-vertical-datum-postapproval-full-suite-attempt-001-failure.json"
+        or dem_vertical_postapproval_validation.get("prior_failure_sha256") != sha256("records/readiness/m2-dem-vertical-datum-postapproval-full-suite-attempt-001-failure.json")
+        or dem_vertical_postapproval_validation.get("assertions", {}).get("failed_result_preserved") is not True
+        or dem_vertical_postapproval_validation.get("assertions", {}).get("current_checkpoint") != "M2-DEM-EGM2008-COMPONENT-INSTALL"
+        or any(dem_vertical_postapproval_validation.get("assertions", {}).get(key) is not False for key in (
+            "owner_decision_changed", "source_dem_mutated", "external_data_mutated",
+            "arcgis_component_installed", "dem_preconversion_executed", "orbit_application_executed",
+            "radar_pixels_read", "baseline_or_change_analysis_executed", "scientific_result_established",
+        ))
+    ):
+        fail("M2 DEM vertical-datum corrected postapproval validation differs or overclaims")
+    vertical_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-REVIEW", {})
+    vertical_install_unit = active_m2_units.get("M2-DEM-EGM2008-COMPONENT-INSTALL", {})
+    vertical_conversion_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-CONVERSION", {})
+    if (
+        vertical_review_unit.get("status") != "complete"
+        or vertical_review_unit.get("disposition") != "pass"
+        or vertical_review_unit.get("gates", {}).get("approval_sha256") != sha256("records/source-gates/m2-dem-vertical-datum-approval.json")
+        or vertical_review_unit.get("gates", {}).get("control_reconciliation_sha256") != sha256("records/readiness/m2-dem-vertical-datum-control-reconciliation.json")
+        or vertical_review_unit.get("next_dependency") != "M2-DEM-EGM2008-COMPONENT-INSTALL"
+        or vertical_install_unit.get("status") != "planned"
+        or vertical_install_unit.get("human_gate") is not True
+        or vertical_install_unit.get("gates", {}).get("current_status") != "pending_owner_installation"
+        or vertical_install_unit.get("gates", {}).get("codex_download_or_install_authorized") is not False
+        or vertical_conversion_unit.get("status") != "planned"
+        or vertical_conversion_unit.get("gates", {}).get("source_overwrite_permitted") is not False
+    ):
+        fail("M2 DEM vertical-datum milestone units differ or advance past owner installation")
     if dem_manifest.get("status") != "candidate_not_approved" or len(dem_manifest.get("records", [])) != 4:
         fail("M2 DEM candidate manifest must remain an unapproved exact four-tile set")
     expected_dem_ids = {
@@ -5962,7 +6132,11 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        expected_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
+        expected_checkpoint = (
+            "M2-DEM-EGM2008-COMPONENT-INSTALL"
+            if dem_vertical_method_approved
+            else "M2-DEM-VERTICAL-DATUM-REVIEW"
+        )
     elif orbit_offline_verification_recovery_implementation_pending:
         expected_checkpoint = "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION"
     elif orbit_offline_verification_recovery_review_ready:
@@ -8564,6 +8738,53 @@ def main() -> None:
         or terrain_owner_review_evidence.get("assertions", {}).get("authority_created_by_reassessment") is not False
     ):
         fail("EVID-0123 DEM terrain owner approval or reassessment differs or overclaims")
+    vertical_owner_review_evidence = ledger_by_id.get("EVID-0124")
+    if (
+        not isinstance(vertical_owner_review_evidence, dict)
+        or vertical_owner_review_evidence.get("status") != "pass_method_selected_owner_install_pending"
+        or vertical_owner_review_evidence.get("review_reconciliation_sha256") != sha256("records/source-gates/m2-dem-vertical-datum-review-reconciliation.json")
+        or vertical_owner_review_evidence.get("approval_sha256") != sha256("records/source-gates/m2-dem-vertical-datum-approval.json")
+        or vertical_owner_review_evidence.get("control_reconciliation_sha256") != sha256("records/readiness/m2-dem-vertical-datum-control-reconciliation.json")
+        or vertical_owner_review_evidence.get("milestone_sha256") != sha256("contracts/milestone-002.json")
+        or vertical_owner_review_evidence.get("profile_sha256") != sha256("records/project-control-profile.json")
+        or vertical_owner_review_evidence.get("goal_sha256") != sha256("records/long-term-goal.json")
+        or vertical_owner_review_evidence.get("test_sha256") != sha256("tests/test_m2_dem_vertical_datum_review.py")
+        or vertical_owner_review_evidence.get("checker_sha256") != sha256("scripts/check_project.py")
+        or vertical_owner_review_evidence.get("assertions", {}).get("human_decision_count") != 1
+        or vertical_owner_review_evidence.get("assertions", {}).get("attestation") is not True
+        or vertical_owner_review_evidence.get("assertions", {}).get("vertical_datum_method_selected") is not True
+        or vertical_owner_review_evidence.get("assertions", {}).get("arcgis_coordinate_systems_data_installed") is not False
+        or vertical_owner_review_evidence.get("assertions", {}).get("egm2008_grid_verified") is not False
+        or vertical_owner_review_evidence.get("assertions", {}).get("dem_preconversion_executed") is not False
+        or vertical_owner_review_evidence.get("assertions", {}).get("vertical_datum_resolved_for_radar") is not False
+        or vertical_owner_review_evidence.get("assertions", {}).get("source_dem_mutated") is not False
+        or vertical_owner_review_evidence.get("assertions", {}).get("external_data_mutated") is not False
+        or vertical_owner_review_evidence.get("assertions", {}).get("orbit_application_authorized_now") is not False
+        or vertical_owner_review_evidence.get("assertions", {}).get("radar_pixel_processing_authorized_now") is not False
+        or vertical_owner_review_evidence.get("assertions", {}).get("baseline_or_change_analysis_authorized_now") is not False
+        or vertical_owner_review_evidence.get("assertions", {}).get("scientific_result_established") is not False
+        or vertical_owner_review_evidence.get("assertions", {}).get("current_checkpoint") != "M2-DEM-EGM2008-COMPONENT-INSTALL"
+    ):
+        fail("EVID-0124 DEM vertical-datum owner approval or control transition differs or overclaims")
+    vertical_postapproval_validation_evidence = ledger_by_id.get("EVID-0125")
+    if (
+        not isinstance(vertical_postapproval_validation_evidence, dict)
+        or vertical_postapproval_validation_evidence.get("status") != "fail_preserved_corrected_validation_pass"
+        or vertical_postapproval_validation_evidence.get("failure_record_sha256") != sha256("records/readiness/m2-dem-vertical-datum-postapproval-full-suite-attempt-001-failure.json")
+        or vertical_postapproval_validation_evidence.get("validation_record_sha256") != sha256("records/readiness/m2-dem-vertical-datum-postapproval-validation.json")
+        or vertical_postapproval_validation_evidence.get("checker_sha256") != sha256("scripts/check_project.py")
+        or vertical_postapproval_validation_evidence.get("assertions", {}).get("failed_result_preserved") is not True
+        or vertical_postapproval_validation_evidence.get("assertions", {}).get("corrected_full_repository_test_count") != 499
+        or vertical_postapproval_validation_evidence.get("assertions", {}).get("corrected_full_repository_failure_count") != 0
+        or vertical_postapproval_validation_evidence.get("assertions", {}).get("intentional_skip_count") != 3
+        or vertical_postapproval_validation_evidence.get("assertions", {}).get("current_checkpoint") != "M2-DEM-EGM2008-COMPONENT-INSTALL"
+        or any(vertical_postapproval_validation_evidence.get("assertions", {}).get(key) is not False for key in (
+            "owner_decision_changed", "external_data_mutated", "arcgis_component_installed",
+            "dem_preconversion_executed", "orbit_application_executed", "radar_pixels_read",
+            "baseline_or_change_analysis_executed", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0125 DEM vertical-datum corrected validation evidence differs or overclaims")
 
     orbit_review_evidence = ledger_by_id.get("EVID-0052")
     if (

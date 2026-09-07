@@ -242,6 +242,21 @@
         "network_requests_authorized": 0,
         "external_custody_mutation_authorized": false,
         "maximum_endpoint_tolerance_seconds": 1.0
+      },
+      {
+        "approval_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
+        "approval_sha256": "38c872c8dbeeeab08212dd3f71b2dce131b39819c6f7309d1f2b1df2884ee4a6",
+        "proposal_ref": "contracts/m2-dem-vertical-datum-proposal.json",
+        "proposal_sha256": "bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+        "review_bundle_sha256": "9b40e81df766ea866c5bff51cdbc4d83e7e7da6a554fb1709fc553d8221bebbc",
+        "review_reconciliation_ref": "records/source-gates/m2-dem-vertical-datum-review-reconciliation.json",
+        "review_reconciliation_sha256": "c31e8b20f2bc67d3509043ce7f5fcdb501f85f821988dbdb5aa705cb182421e3",
+        "control_reconciliation_ref": "records/readiness/m2-dem-vertical-datum-control-reconciliation.json",
+        "control_reconciliation_sha256": "2aa2ef146f0d682d5e0693303fe7d6d00679feb45097af8ac2e85db864829b41",
+        "selected_method": "arcgis_egm2008_1x1_preconversion_then_none",
+        "owner_installation_required": true,
+        "installation_authorized_for_codex": false,
+        "vertical_datum_resolved_for_radar": false
       }
     ]
   },
@@ -315,7 +330,8 @@
       "records/source-gates/m2-orbit-recovery-003-approval.json",
       "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
       "records/source-gates/m2-orbit-continuation-001-approval.json",
-      "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json"
+      "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
+      "records/source-gates/m2-dem-vertical-datum-approval.json"
     ]
   },
   "entry_conditions": [
@@ -959,6 +975,128 @@
       "next_dependency": "M2-BASELINE"
     },
     {
+      "id": "M2-DEM-VERTICAL-DATUM-REVIEW",
+      "purpose": "Lock and reconcile the exact owner decision selecting the production DEM vertical-datum method.",
+      "depends_on": [
+        "M2-DEM-VERIFY"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "complete",
+      "inputs": [
+        "contracts/m2-dem-vertical-datum-proposal.json",
+        "reviews/m2-dem-vertical-datum/review-bundle.json",
+        "reviews/m2-dem-vertical-datum/review-contract.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-dem-vertical-datum-approval.json",
+        "records/source-gates/m2-dem-vertical-datum-review-reconciliation.json",
+        "records/readiness/m2-dem-vertical-datum-control-reconciliation.json"
+      ],
+      "gates": {
+        "review_bundle_sha256": "9b40e81df766ea866c5bff51cdbc4d83e7e7da6a554fb1709fc553d8221bebbc",
+        "proposal_sha256": "bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+        "approval_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
+        "approval_sha256": "38c872c8dbeeeab08212dd3f71b2dce131b39819c6f7309d1f2b1df2884ee4a6",
+        "review_reconciliation_ref": "records/source-gates/m2-dem-vertical-datum-review-reconciliation.json",
+        "review_reconciliation_sha256": "c31e8b20f2bc67d3509043ce7f5fcdb501f85f821988dbdb5aa705cb182421e3",
+        "control_reconciliation_ref": "records/readiness/m2-dem-vertical-datum-control-reconciliation.json",
+        "control_reconciliation_sha256": "2aa2ef146f0d682d5e0693303fe7d6d00679feb45097af8ac2e85db864829b41",
+        "locked_response_sha256": "b864b04187d5e4757fd37b475b931123fb88eb4b9b3fca4891f141f600244c2e",
+        "human_decision_count": 1,
+        "attestation": true,
+        "selected_method": "arcgis_egm2008_1x1_preconversion_then_none",
+        "owner_installation_required": true,
+        "component_installed": false
+      },
+      "disposition": "pass",
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "enables_dependency",
+        "rationale": "One exact attested approval selects the EGM2008 preconversion method while preserving the separate owner-controlled installation prerequisite."
+      },
+      "next_dependency": "M2-DEM-EGM2008-COMPONENT-INSTALL"
+    },
+    {
+      "id": "M2-DEM-EGM2008-COMPONENT-INSTALL",
+      "purpose": "Wait for the owner to separately install the exact ArcGIS Coordinate Systems Data feature required by the selected EGM2008 route.",
+      "depends_on": [
+        "M2-DEM-VERTICAL-DATUM-REVIEW"
+      ],
+      "action_class": "irreversible_external_action",
+      "human_gate": true,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-dem-vertical-datum-approval.json",
+        "contracts/m2-dem-vertical-datum-proposal.json",
+        "records/surface-receipts/m2-dem-vertical-datum-capability.json"
+      ],
+      "outputs": [
+        "owner-completed installation",
+        "records/surface-receipts/m2-dem-vertical-datum-capability-postinstall-001.json"
+      ],
+      "gates": {
+        "required_product": "ArcGIS Coordinate Systems Data for ArcGIS Pro",
+        "required_version_compatibility": "ArcGIS Pro 3.7.x",
+        "required_feature": "world1x1_vert",
+        "required_grid": "Dataset_egm2008-1.grd",
+        "current_status": "pending_owner_installation",
+        "codex_sign_in_authorized": false,
+        "codex_terms_acceptance_authorized": false,
+        "codex_download_or_install_authorized": false,
+        "codex_uac_action_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "defer",
+        "rationale": "The selected method cannot be implemented until the owner separately completes the exact component installation and a fresh read-only inspection verifies it."
+      },
+      "next_dependency": "M2-DEM-VERTICAL-DATUM-CONVERSION"
+    },
+    {
+      "id": "M2-DEM-VERTICAL-DATUM-CONVERSION",
+      "purpose": "After the exact component passes reinspection, create and verify no-overwrite WGS 84 ellipsoidal copies of the four approved DEM tiles.",
+      "depends_on": [
+        "M2-DEM-EGM2008-COMPONENT-INSTALL"
+      ],
+      "action_class": "data_processing",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-dem-vertical-datum-approval.json",
+        "records/acquisition/dem-verification-summary.json",
+        "records/surface-receipts/m2-dem-vertical-datum-capability-postinstall-001.json"
+      ],
+      "outputs": [
+        "external append-only EGM2008-to-WGS84 ellipsoidal DEM derivatives",
+        "per-tile conversion and validation receipts"
+      ],
+      "gates": {
+        "selected_method": "arcgis_egm2008_1x1_preconversion_then_none",
+        "source_vertical_crs": "EPSG:3855",
+        "required_transformation_wkid": 110018,
+        "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal",
+        "source_overwrite_permitted": false,
+        "radar_geoid_none_permitted_only_after_verified_conversion": true
+      },
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "EXIT-202-PIXEL-AND-RIGHTS-QA"
+        ],
+        "observed": [],
+        "decision_value": "defer",
+        "rationale": "The method is selected, but the component, exact grid, transformation direction, derived rasters, and conversion validation do not yet exist."
+      },
+      "next_dependency": "M2-ORBIT-APPLY"
+    },
+    {
       "id": "M2-ORBIT-AMEND",
       "purpose": "Lock and reconcile the exact owner four-file restituted-orbit amendment decision.",
       "depends_on": [
@@ -1236,8 +1374,8 @@
         "records/baseline orbit-application receipts"
       ],
       "gates": {
-        "dem_vertical_datum_gate": "pending_owner_review",
-        "terrain_result_review": "pending_owner_review",
+        "dem_vertical_datum_gate": "method_selected_owner_install_pending",
+        "terrain_result_review": "complete_bounded_owner_acceptance_readiness_still_defer",
         "radar_pixel_readiness": "pending",
         "precise_substitution_authorized": false,
         "orbit_input_verification": "pass_four_exact_resorb_inputs_only",
@@ -2877,8 +3015,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
-    "next_action": "Conduct the exact pending owner review of the EGM2008-to-ArcGIS-EGM96 vertical-datum route. Do not apply orbit data, reinterpret DEM heights, read radar pixels, run a baseline or change analysis, attribute cause, or publish a scientific result before that human gate is resolved.",
+    "current_checkpoint": "M2-DEM-EGM2008-COMPONENT-INSTALL",
+    "next_action": "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -2911,9 +3049,10 @@
       "The continuation-001 packet is blank and publicly validated; it creates no implementation or source-access authority before an exact attested owner decision is locked and reconciled.",
       "Orbit continuation-001 is consumed after one handoff and three successful fixed-order requests. All four AUX_RESORB files are promoted input-only; this does not authorize another request, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication.",
       "Offline verification attempt 001 read and evaluated M2-ORB-001 but lost the in-memory result when its append-only receipt parent was absent; treat it as terminal indeterminate, do not reconstruct a result, and do not run M2-ORB-002 through M2-ORB-004.",
-      "The exact attempt-003 terrain-result owner review is complete and its human-review readiness gate passes; the overall terrain audit remains DEFER on vertical and independent elevation uncertainty, pair-specific radar-input fitness, and independent accuracy evaluation. No installation, DEM conversion, orbit application, radar-pixel processing, baseline, change, attribution, derived-pixel publication, or scientific claim was released."
+      "The exact attempt-003 terrain-result owner review is complete and its human-review readiness gate passes; the overall terrain audit remains DEFER on vertical and independent elevation uncertainty, pair-specific radar-input fitness, and independent accuracy evaluation. No installation, DEM conversion, orbit application, radar-pixel processing, baseline, change, attribution, derived-pixel publication, or scientific claim was released.",
+      "The owner selected the exact EGM2008 one-minute preconversion method. The matching ArcGIS Coordinate Systems Data component remains absent; approval does not authorize Codex to sign in, accept terms, download, install, approve UAC, convert a DEM, apply an orbit, read radar pixels, or publish a scientific claim before the owner installation and fresh capability reinspection."
     ],
-    "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
-    "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
+    "parallel_checkpoint": "M2-DEM-EGM2008-COMPONENT-INSTALL",
+    "parallel_next_action": "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim."
   }
 }

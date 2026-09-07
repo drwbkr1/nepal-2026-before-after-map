@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-CONTROL-RECONCILIATION-001",
+  "status": "pass_method_selected_owner_component_install_pending",
+  "reconciled_at_utc": "2026-09-07T20:23:54Z",
+  "bindings": {
+    "proposal_ref": "contracts/m2-dem-vertical-datum-proposal.json",
+    "proposal_sha256": "bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+    "review_bundle_ref": "reviews/m2-dem-vertical-datum/review-bundle.json",
+    "review_bundle_sha256": "9b40e81df766ea866c5bff51cdbc4d83e7e7da6a554fb1709fc553d8221bebbc",
+    "review_contract_ref": "reviews/m2-dem-vertical-datum/review-contract.json",
+    "review_contract_sha256": "1227dc4934d6ba22498f86283060f2674474f5ab969c50a507fc0729ebc3c8b6",
+    "review_reconciliation_ref": "records/source-gates/m2-dem-vertical-datum-review-reconciliation.json",
+    "review_reconciliation_sha256": "c31e8b20f2bc67d3509043ce7f5fcdb501f85f821988dbdb5aa705cb182421e3",
+    "approval_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
+    "approval_sha256": "38c872c8dbeeeab08212dd3f71b2dce131b39819c6f7309d1f2b1df2884ee4a6",
+    "last_capability_inspection_ref": "records/surface-receipts/m2-dem-vertical-datum-capability.json",
+    "last_capability_inspection_sha256": "85b977c5b05057823e5e9bb956a82b36b2fab3ea798bd6a1b22782046edb0870"
+  },
+  "decision": {
+    "human_decision_count": 1,
+    "decision_counts": {
+      "approve": 1,
+      "revise": 0,
+      "defer": 0
+    },
+    "attestation": true,
+    "selected_production_route": "arcgis_egm2008_1x1_preconversion_then_none",
+    "previous_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
+    "current_checkpoint": "M2-DEM-EGM2008-COMPONENT-INSTALL",
+    "owner_action_required": "Separately obtain and install the ArcGIS Coordinate Systems Data component matching ArcGIS Pro 3.7.x with the world1x1_vert feature, completing any sign-in, license, download, installer, or UAC steps personally.",
+    "post_owner_action": "Re-run the read-only capability inspection and stop on any version, grid, transformation, direction, extent, or license mismatch before preparing conversion controls."
+  },
+  "assertions": {
+    "exact_method_review_complete": true,
+    "human_decisions_fabricated": false,
+    "vertical_datum_method_selected": true,
+    "arcgis_coordinate_systems_data_installed": false,
+    "egm2008_grid_verified": false,
+    "dem_preconversion_executed": false,
+    "vertical_datum_resolved_for_radar": false,
+    "source_dem_mutated": false,
+    "external_data_mutated_by_reconciliation": false,
+    "orbit_application_authorized_now": false,
+    "radar_pixel_processing_authorized_now": false,
+    "baseline_or_change_analysis_authorized_now": false,
+    "attribution_or_scientific_publication_authorized": false,
+    "installation_or_terms_action_performed": false
+  },
+  "authorized_actions_now": [
+    "record the exact selected method",
+    "update project control records",
+    "wait for the owner-controlled ArcGIS Coordinate Systems Data installation"
+  ],
+  "next_action": "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim."
+}
