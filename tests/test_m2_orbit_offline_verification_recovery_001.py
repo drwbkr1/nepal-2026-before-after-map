@@ -63,15 +63,28 @@ class OrbitOfflineVerificationRecovery001Tests(unittest.TestCase):
         self.assertIn("recovery-001", candidate["output_refs"]["M2-ORB-001"])
         self.assertTrue(all(ref.endswith("offline-verification-001.json") for ref in list(candidate["output_refs"].values())[1:]))
 
-    def test_current_checkpoint_has_no_real_receipts_or_reads(self) -> None:
+    def test_current_checkpoint_preserves_terminal_input_only_receipts(self) -> None:
         milestone = load("contracts/milestone-002.json")
         units = {item["id"]: item for item in milestone["units"]}
-        self.assertEqual(milestone["handoff"]["current_checkpoint"], "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION")
+        terminal = load("records/readiness/m2-orbit-offline-verification-recovery-001-terminal-reconciliation.json")
+        self.assertEqual(milestone["handoff"]["current_checkpoint"], "M2-DEM-VERTICAL-DATUM-REVIEW")
         self.assertEqual(units["M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW"]["status"], "complete")
-        self.assertEqual(units["M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION"]["status"], "in_progress")
-        self.assertEqual(units["M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001"]["status"], "planned")
+        self.assertEqual(units["M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION"]["status"], "complete")
+        self.assertEqual(units["M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001"]["status"], "complete")
+        self.assertEqual(units["M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001"]["disposition"], "pass")
+        self.assertEqual(terminal["status"], "pass_four_exact_resorb_inputs_verified_no_application")
+        self.assertFalse(terminal["assertions"]["orbit_application_performed"])
         parent = ROOT / "records/acquisition/orbit-verification"
-        self.assertEqual(sorted(path.name for path in parent.iterdir()), [".gitkeep"])
+        self.assertEqual(
+            sorted(path.name for path in parent.iterdir()),
+            [
+                ".gitkeep",
+                "m2-orb-001-offline-verification-recovery-001.json",
+                "m2-orb-002-offline-verification-001.json",
+                "m2-orb-003-offline-verification-001.json",
+                "m2-orb-004-offline-verification-001.json",
+            ],
+        )
 
     def _fixture(self, temporary: Path):
         project_root = temporary / "project-parent"

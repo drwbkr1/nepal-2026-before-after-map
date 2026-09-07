@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "verification_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001",
+  "attempt_identity": "m2-orb-002-offline-verification-001",
+  "status": "pass_orbit_input_only",
+  "verified_at_utc": "2026-09-07T18:48:17Z",
+  "source_id": "M2-ORB-002",
+  "asset_id": "m2-orb-002",
+  "approval_sha256": "315812935fe725b5c2928a27abc2b51faf561c423065de6216f975cecbe81f30",
+  "candidate_contract_sha256": "8db4774dfb36ce9718988c23d9a480a01028055a6a28a1bbf301a926e466df68",
+  "active_verification_sha256": "6b9275e1e626d45c2ef110f9bb6d39145c081aea7810c651a663fa386b6d50bb",
+  "final_preflight_sha256": "5dc4a7216c175eca63d6eb4ec9b0b2d082be2b652229b2b0cddbe57e5f0bd6e1",
+  "transfer_receipt_ref": "records/acquisition/orbit-attempts/m2-orb-002-continuation-001-20260906t231510z-4886cc9b.json",
+  "transfer_receipt_sha256": "5dda3d1c5f25c58bb8aa048a49ee7571e5df03325e29a15028a680f62a41352b",
+  "custody_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-002\\S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+  "custody_inventory_before": [
+    {
+      "relative_path": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "size_bytes": 631254,
+      "sha256": "7462fa65549339c09c36338cb690d0b953c665c3c61a397def3cfa7b2d453262"
+    }
+  ],
+  "custody_inventory_after": [
+    {
+      "relative_path": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "size_bytes": 631254,
+      "sha256": "7462fa65549339c09c36338cb690d0b953c665c3c61a397def3cfa7b2d453262"
+    }
+  ],
+  "custody_unchanged": true,
+  "promoted_identity_match": true,
+  "evaluation": {
+    "status": "pass_orbit_input_only",
+    "observed": {
+      "size_bytes": 631254,
+      "sha256": "7462fa65549339c09c36338cb690d0b953c665c3c61a397def3cfa7b2d453262",
+      "md5": "4752bc958d3a65a14100e96f4e6489b2",
+      "blake3": "7f69b4ae261fe43ea758ab3d1f0c290706aa4b8308a55c49b510badcf3fca49d"
+    },
+    "xml": {
+      "root": "Earth_Explorer_File",
+      "header_file_name": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120",
+      "mission": "Sentinel-1D",
+      "file_type": "AUX_RESORB",
+      "validity_start_utc": "2026-08-18T21:50:10Z",
+      "validity_end_utc": "2026-08-19T01:21:20Z",
+      "osv_declared_count": 1268,
+      "osv_observed_count": 1268,
+      "first_osv_utc": "2026-08-18T21:50:10.439577Z",
+      "last_osv_utc": "2026-08-19T01:21:20.439577Z",
+      "endpoint_tolerance_seconds": 1.0,
+      "first_endpoint_lag_seconds": 0.439577,
+      "last_endpoint_shortfall_seconds": 0.0,
+      "ordered_unique_finite_osvs": true,
+      "position_unit": "m",
+      "velocity_unit": "m/s"
+    },
+    "scene_binding": {
+      "sentinel_source_ids": [
+        "M1-SRC-003"
+      ],
+      "scene_start_utc": "2026-08-19T00:10:36Z",
+      "scene_end_utc": "2026-08-19T00:11:01Z",
+      "margin_before_seconds": 8426,
+      "margin_after_seconds": 4219,
+      "minimum_margin_seconds": 4219,
+      "minimum_required_margin_seconds": 4219
+    }
+  },
+  "failure_code": null,
+  "persistence": {
+    "receipt_reserved_before_eof_content_read": true,
+    "exclusive_creation": true,
+    "complete_receipt_written_through_reserved_handle": true,
+    "flush_and_fsync_required": true,
+    "reuse_authorized": false
+  },
+  "claim_boundary": {
+    "exact_orbit_input_identity_and_structure_established": true,
+    "precise_orbit_equivalence_established": false,
+    "geolocation_or_registration_accuracy_established": false,
+    "vertical_datum_fitness_established": false,
+    "radar_pixel_processing_executed": false,
+    "baseline_established": false,
+    "scientific_result_established": false,
+    "authority_created": false
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-POSTSUCCESS-CONTROL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-07T18:51:55Z",
+  "status": "pass_stale_attempted_source_projection_corrected",
+  "bindings": {
+    "terminal_reconciliation_ref": "records/readiness/m2-orbit-offline-verification-recovery-001-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "42df98bbe1680483d14aa29dedf55f3761bae4be45991a5a84fbb304b9232182",
+    "pre_reconciliation_snapshot_ref": "records/readiness/m2-orbit-offline-verification-recovery-001-postsuccess-pre-reconciliation-snapshot.json",
+    "pre_reconciliation_snapshot_sha256": "a34bb410f06c9ae414c9bebfa5e1e20aa77afe9ffc18fa86fc6344f2a7518471",
+    "milestone_sha256_before": "5696751b627229d423ae6c21641ceb2133cee94193cf358b1ffd9dec1100860b",
+    "milestone_sha256_after": "4fb49ad34e09bd9201a7c208333c35922ba020afeb334276d21dc2e07fd4868e"
+  },
+  "correction": {
+    "surface_ref": "contracts/milestone-002.json",
+    "unit_id": "M2-ORBIT-VERIFY",
+    "field": "gates.attempted_source_ids",
+    "before": [
+      "M2-ORB-001"
+    ],
+    "after": [
+      "M2-ORB-001",
+      "M2-ORB-002",
+      "M2-ORB-003",
+      "M2-ORB-004"
+    ],
+    "historical_first_indeterminate_attempt_preserved_as": "gates.initial_indeterminate_attempted_source_ids"
+  },
+  "assertions": {
+    "terminal_receipt_mutated": false,
+    "verification_receipt_mutated": false,
+    "eof_content_read": false,
+    "network_request_performed": false,
+    "credential_value_read_or_recorded": false,
+    "external_custody_mutated": false,
+    "scientific_validation_rules_changed": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixel_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  },
+  "current_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW"
+}

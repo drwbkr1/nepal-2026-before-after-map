@@ -44,10 +44,10 @@ class OrbitOfflineVerificationContinuation001Tests(unittest.TestCase):
             hashlib.sha256((ROOT / "records/source-gates/m2-orbit-continuation-001-approval.json").read_bytes()).hexdigest(),
         )
 
-    def test_current_active_contract_blocks_additional_real_eof_reads_after_failure(self) -> None:
+    def test_current_complete_contract_blocks_additional_real_eof_reads_after_pass(self) -> None:
         self.assertEqual(
             self.active["status"],
-            "terminal_indeterminate_m2_orb_001_receipt_persistence_failure",
+            "complete_pass_four_orbit_inputs_only",
         )
         with self.assertRaisesRegex(OrbitControlError, "active_orbit_verification_binding_drift"):
             verifier.guarded_controls()

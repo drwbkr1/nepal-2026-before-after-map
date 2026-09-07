@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION-PUBLICATION-GATE",
+  "verified_at_utc": "2026-09-07T18:47:49Z",
+  "status": "pass_public_recovery_controls_before_eof_reads",
+  "bindings": {
+    "implementation_readiness_sha256": "1edbb5db3e900cc947886c9672b080f2e2bc87ad48151b95c82edde3863286b1",
+    "candidate_contract_sha256": "8db4774dfb36ce9718988c23d9a480a01028055a6a28a1bbf301a926e466df68",
+    "verifier_sha256": "287df202b2bced5db6b21ce2f74b373749690d2659657b8a23225b7009436fe2",
+    "runner_sha256": "821e481fe3facad57793c5da7f8c57d7458eff1ed5c97217afece540acadea73",
+    "preflight_sha256": "ab8e44d9773026959f257eac2face1d775920cb5354edb4186a0dc7a224dfbed",
+    "activation_script_sha256": "832a93c6ebce8deefba6e95f0b12baf6a1897faf66d76c36646ac4038050338f",
+    "terminal_reconciler_sha256": "387665e76d03b64fc710fe614d4e004c1843012fa500043c13779d274b90e4ce",
+    "tests_sha256": "4dfc11f594c0de7a8e1114c717916e6c02c1e5702f2a4e1c8fd66962ccfb66b4"
+  },
+  "github_actions": {
+    "workflow": "Validate project controls",
+    "run_id": 34153008607,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/34153008607",
+    "head_sha": "72d69e787c772ec2157890bc58a8626e7049dce5",
+    "conclusion": "success"
+  },
+  "assertions": {
+    "real_eof_content_read": false,
+    "network_request_performed": false,
+    "credential_value_read_or_recorded": false,
+    "external_custody_mutated": false,
+    "verification_receipt_created": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixel_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  },
+  "next_gate": "activate exact recovery controls and run one final no-content preflight"
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-07T18:48:25Z",
+  "status": "pass_four_exact_resorb_inputs_verified_no_application",
+  "source_ids_in_exact_order": [
+    "M2-ORB-001",
+    "M2-ORB-002",
+    "M2-ORB-003",
+    "M2-ORB-004"
+  ],
+  "terminal_kind": "pass",
+  "stopped_source_id": null,
+  "results": [
+    {
+      "source_id": "M2-ORB-001",
+      "receipt_ref": "records/acquisition/orbit-verification/m2-orb-001-offline-verification-recovery-001.json",
+      "receipt_sha256": "eaf9344737bcd81598dbfb78b0e580156224860b113ae47914f1a4b101a910d5",
+      "receipt_size_bytes": 3796,
+      "status": "pass_orbit_input_only",
+      "custody_sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+      "custody_size_bytes": 639533
+    },
+    {
+      "source_id": "M2-ORB-002",
+      "receipt_ref": "records/acquisition/orbit-verification/m2-orb-002-offline-verification-001.json",
+      "receipt_sha256": "13e4b612edebfd6a101c31cc98887a78181b1322cf9213d3e910c21d57453a7e",
+      "receipt_size_bytes": 3780,
+      "status": "pass_orbit_input_only",
+      "custody_sha256": "7462fa65549339c09c36338cb690d0b953c665c3c61a397def3cfa7b2d453262",
+      "custody_size_bytes": 631254
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "receipt_ref": "records/acquisition/orbit-verification/m2-orb-003-offline-verification-001.json",
+      "receipt_sha256": "47b7ad088b8a419eb2ec69b0997e2d5260f698d8865fcac7f05860a43b1bbd18",
+      "receipt_size_bytes": 3802,
+      "status": "pass_orbit_input_only",
+      "custody_sha256": "c08bf997f1bf02fb25dcf2a4f35643aef4754fbea03c6c2fb0fa9db4a0efe778",
+      "custody_size_bytes": 639533
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "receipt_ref": "records/acquisition/orbit-verification/m2-orb-004-offline-verification-001.json",
+      "receipt_sha256": "f6d0ffb08d42499c5ae7fdba46755d10898dff29c5dc74349d35738fc0d41718",
+      "receipt_size_bytes": 3780,
+      "status": "pass_orbit_input_only",
+      "custody_sha256": "281388e94a7a8a708f229fd7d19f93de426bb077699db3aaabdad7125043bd83",
+      "custody_size_bytes": 629395
+    }
+  ],
+  "bindings": {
+    "candidate_contract_sha256": "8db4774dfb36ce9718988c23d9a480a01028055a6a28a1bbf301a926e466df68",
+    "final_preflight_sha256": "5dc4a7216c175eca63d6eb4ec9b0b2d082be2b652229b2b0cddbe57e5f0bd6e1",
+    "active_intake_sha256": "6c896e9764d2270a903c611144fcf880abd8fc767dc45b02ed2f79522e4e960a",
+    "active_verification_sha256_before": "6b9275e1e626d45c2ef110f9bb6d39145c081aea7810c651a663fa386b6d50bb",
+    "active_verification_sha256_after": "4ce06d621cb83fab4049977076fa76c62f719b2cac16046a923bca46cbd8e4d9",
+    "milestone_sha256_before": "782ed0177995443ebd1abda44323e9cc458403f845f4382ebda607c820c9118c",
+    "milestone_sha256_after": "5696751b627229d423ae6c21641ceb2133cee94193cf358b1ffd9dec1100860b",
+    "profile_sha256_before": "c0636978bc78a7cbe681655aee35f81ccb165207d62091cf73679b156d3a6972",
+    "profile_sha256_after": "09d9746c9aa83a6eb2d48d11e6333e9785e8ee38b9ce5ce0b5c53f6b85e55c73",
+    "goal_sha256_before": "2686bcd0edab68ef7d0487dcb5f4e7b67f27a658b90886f470a7f870ff457cfe",
+    "goal_sha256_after": "ec089deed14eec86c2ad25634f47c593c53380985f704582495473f11cdfcf6f"
+  },
+  "claim_boundary": {
+    "exact_orbit_input_identity_and_structure_established": true,
+    "precise_orbit_equivalence_established": false,
+    "geolocation_or_registration_accuracy_established": false,
+    "vertical_datum_fitness_established": false,
+    "radar_pixel_processing_executed": false,
+    "baseline_established": false,
+    "observable_event_change_established": false,
+    "interpretation_or_attribution_established": false,
+    "scientific_publication_authorized": false
+  },
+  "assertions": {
+    "network_request_count": 0,
+    "credential_values_read_or_recorded": false,
+    "external_custody_mutation_count": 0,
+    "automatic_retry_performed": false,
+    "second_recovery_authorized": false,
+    "scientific_validation_rules_changed": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixel_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  },
+  "next_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
+  "next_action": "Conduct the exact pending owner review of the EGM2008-to-ArcGIS-EGM96 vertical-datum route. Do not apply orbit data, reinterpret DEM heights, read radar pixels, run a baseline or change analysis, attribute cause, or publish a scientific result before that human gate is resolved."
+}

@@ -81,7 +81,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         )
         self.assertEqual(
             self.verification["status"],
-            "terminal_indeterminate_m2_orb_001_receipt_persistence_failure",
+            "complete_pass_four_orbit_inputs_only",
         )
         self.assertFalse(self.verification["authority"]["precise_orbit_substitution_authorized"])
         self.assertFalse(self.verification["authority"]["radar_pixel_processing_authorized_by_this_contract"])
@@ -111,7 +111,11 @@ class M2OrbitActivationTests(unittest.TestCase):
         )
         self.assertEqual(unit_by_id["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["status"], "complete")
         self.assertTrue(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["orbit_custody_initialized"])
-        self.assertEqual(unit_by_id["M2-ORBIT-APPLY"]["gates"]["dem_vertical_datum_gate"], "pending")
+        self.assertEqual(
+            unit_by_id["M2-ORBIT-APPLY"]["gates"]["dem_vertical_datum_gate"],
+            "pending_owner_review",
+        )
+        self.assertFalse(unit_by_id["M2-ORBIT-APPLY"]["gates"]["orbit_application_started"])
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
             [],

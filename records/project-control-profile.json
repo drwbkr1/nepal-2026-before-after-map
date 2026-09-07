@@ -481,10 +481,10 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION",
+    "checkpoint_id": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Implement and synthetically validate only the approved pre-read receipt reservation and fixed-order recovery, then require successful public default-branch CI. Do not run the final no-content preflight or read any EOF before that public gate."
+    "next_action": "Conduct the exact pending owner review of the EGM2008-to-ArcGIS-EGM96 vertical-datum route. Do not apply orbit data, reinterpret DEM heights, read radar pixels, run a baseline or change analysis, attribute cause, or publish a scientific result before that human gate is resolved."
   },
   "parallel_checkpoints": [
     {

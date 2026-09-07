@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-FINAL-PREFLIGHT",
+  "verified_at_utc": "2026-09-07T18:48:04Z",
+  "status": "pass_no_content_ready_for_exact_recovery_sequence",
+  "bindings": {
+    "active_verification_sha256": "6b9275e1e626d45c2ef110f9bb6d39145c081aea7810c651a663fa386b6d50bb",
+    "active_intake_sha256": "6c896e9764d2270a903c611144fcf880abd8fc767dc45b02ed2f79522e4e960a",
+    "candidate_contract_sha256": "8db4774dfb36ce9718988c23d9a480a01028055a6a28a1bbf301a926e466df68",
+    "publication_gate_sha256": "0423dc90781625d16a0d06ae4a101455f8277cbcb1bedde1c95550d7602da920"
+  },
+  "source_ids_in_exact_order": [
+    "M2-ORB-001",
+    "M2-ORB-002",
+    "M2-ORB-003",
+    "M2-ORB-004"
+  ],
+  "output_refs": {
+    "M2-ORB-001": "records/acquisition/orbit-verification/m2-orb-001-offline-verification-recovery-001.json",
+    "M2-ORB-002": "records/acquisition/orbit-verification/m2-orb-002-offline-verification-001.json",
+    "M2-ORB-003": "records/acquisition/orbit-verification/m2-orb-003-offline-verification-001.json",
+    "M2-ORB-004": "records/acquisition/orbit-verification/m2-orb-004-offline-verification-001.json"
+  },
+  "output_parent": "C:\\Projects\\Active\\nepal-2026-before-after-map\\records\\acquisition\\orbit-verification",
+  "custody_metadata": [
+    {
+      "source_id": "M2-ORB-001",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-001\\S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+      "size_bytes_from_metadata_only": 639533,
+      "content_hash_computed": false
+    },
+    {
+      "source_id": "M2-ORB-002",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-002\\S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "size_bytes_from_metadata_only": 631254,
+      "content_hash_computed": false
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-003\\S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+      "size_bytes_from_metadata_only": 639533,
+      "content_hash_computed": false
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-004\\S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+      "size_bytes_from_metadata_only": 629395,
+      "content_hash_computed": false
+    }
+  ],
+  "assertions": {
+    "output_parent_exact_real_non_link_directory": true,
+    "output_parent_only_contains_tracked_marker": true,
+    "all_output_paths_absent": true,
+    "eof_content_read": false,
+    "eof_content_hash_computed": false,
+    "network_request_performed": false,
+    "credential_value_read_or_recorded": false,
+    "external_custody_mutated": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixel_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  },
+  "next_action": "run exactly one M2-ORB-001 recovery verification and continue in fixed order only on pass"
+}

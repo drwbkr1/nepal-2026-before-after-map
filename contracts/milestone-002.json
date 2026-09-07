@@ -1145,13 +1145,17 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "blocked",
+      "status": "complete",
       "inputs": [
         "external orbit custody",
         "contracts/m2-orbit-offline-verification.json"
       ],
       "outputs": [
-        "records/acquisition orbit verification receipts"
+        "records/acquisition/orbit-verification/m2-orb-001-offline-verification-recovery-001.json",
+        "records/acquisition/orbit-verification/m2-orb-002-offline-verification-001.json",
+        "records/acquisition/orbit-verification/m2-orb-003-offline-verification-001.json",
+        "records/acquisition/orbit-verification/m2-orb-004-offline-verification-001.json",
+        "records/readiness/m2-orbit-offline-verification-recovery-001-terminal-reconciliation.json"
       ],
       "gates": {
         "input_only_verified_source_ids": [
@@ -1161,24 +1165,40 @@
           "M2-ORB-004"
         ],
         "remaining_source_ids": [],
-        "offline_set_verification": "terminal_indeterminate_m2_orb_001_receipt_persistence_failure",
+        "offline_set_verification": "pass_four_exact_orbit_inputs_only",
         "continuation_success_ref": "records/acquisition/m2-orbit-continuation-001-success-reconciliation.json",
         "continuation_success_sha256": "039f635252c394dfda6f3a2e33918947e4579b7f10d48f1d89574fd2aba7fbc9",
         "real_eof_reads_started": true,
         "attempted_source_ids": [
-          "M2-ORB-001"
-        ],
-        "durable_verification_receipt_source_ids": [],
-        "unattempted_source_ids": [
+          "M2-ORB-001",
           "M2-ORB-002",
           "M2-ORB-003",
           "M2-ORB-004"
         ],
+        "durable_verification_receipt_source_ids": [
+          "M2-ORB-001",
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ],
+        "unattempted_source_ids": [],
         "automatic_retry_authorized": false,
-        "recovery_001_status": "approved_implementation_public_ci_pending",
-        "recovery_001_approval_sha256": "315812935fe725b5c2928a27abc2b51faf561c423065de6216f975cecbe81f30"
+        "recovery_001_status": "complete_pass_four_exact_orbit_inputs_only",
+        "recovery_001_approval_sha256": "315812935fe725b5c2928a27abc2b51faf561c423065de6216f975cecbe81f30",
+        "real_eof_read_count": 4,
+        "custody_mutation_count": 0,
+        "orbit_application_performed": false,
+        "initial_indeterminate_attempted_source_ids": [
+          "M2-ORB-001"
+        ],
+        "recovery_001_attempted_source_ids_in_exact_order": [
+          "M2-ORB-001",
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ]
       },
-      "disposition": "terminal_indeterminate_receipt_persistence_failure",
+      "disposition": "pass",
       "retained_failures": [
         "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json"
       ],
@@ -1188,10 +1208,11 @@
           "EXIT-202-PIXEL-AND-RIGHTS-QA"
         ],
         "observed": [
-          "EXIT-201-VERIFIED-CUSTODY"
+          "EXIT-201-VERIFIED-CUSTODY",
+          "orbit input identity and structural fitness only"
         ],
-        "decision_value": "blocked",
-        "rationale": "M2-ORB-001 EOF content was evaluated in memory, but the required append-only receipt could not be written because its output parent directory was missing. The result is indeterminate, the attempt is consumed, and M2-ORB-002 through M2-ORB-004 were not read."
+        "decision_value": "pass_input_only",
+        "rationale": "All four exact AUX_RESORB files passed one durable read-only verification; application and radar fitness remain unproven."
       },
       "next_dependency": "M2-ORBIT-APPLY"
     },
@@ -1215,10 +1236,13 @@
         "records/baseline orbit-application receipts"
       ],
       "gates": {
-        "dem_vertical_datum_gate": "pending",
-        "terrain_result_review": "pending",
+        "dem_vertical_datum_gate": "pending_owner_review",
+        "terrain_result_review": "pending_owner_review",
         "radar_pixel_readiness": "pending",
-        "precise_substitution_authorized": false
+        "precise_substitution_authorized": false,
+        "orbit_input_verification": "pass_four_exact_resorb_inputs_only",
+        "orbit_input_verification_ref": "records/readiness/m2-orbit-offline-verification-recovery-001-terminal-reconciliation.json",
+        "orbit_application_started": false
       },
       "disposition": null,
       "retained_failures": [],
@@ -2699,7 +2723,7 @@
       ],
       "action_class": "reversible_remediation",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
         "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json",
@@ -2715,23 +2739,26 @@
       ],
       "gates": {
         "approval_sha256": "315812935fe725b5c2928a27abc2b51faf561c423065de6216f975cecbe81f30",
-        "public_ci": "pending",
+        "public_ci": "pass",
         "output_parent_creation_authorized": true,
         "real_eof_reads_before_public_ci": false,
         "network_or_credential_action": false,
-        "external_custody_mutation": false
+        "external_custody_mutation": false,
+        "publication_gate_sha256": "0423dc90781625d16a0d06ae4a101455f8277cbcb1bedde1c95550d7602da920",
+        "final_no_content_preflight": "pending"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json"
       ],
       "exit_condition_delta": {
         "expected": [],
         "observed": [
-          "exact approval locked and reconciled"
+          "local synthetic tests",
+          "successful public default-branch CI"
         ],
-        "decision_value": "unknown",
-        "rationale": "Implementation and synthetic validation are active; real EOF reads remain blocked before public CI and final preflight."
+        "decision_value": "enables_dependency",
+        "rationale": "The exact persistence-order implementation passed public CI without reading an EOF or touching external custody."
       },
       "next_dependency": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001"
     },
@@ -2743,18 +2770,21 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "planned",
+      "status": "complete",
       "inputs": [
         "external orbit custody",
         "contracts/m2-orbit-offline-verification-recovery-001.json"
       ],
       "outputs": [
-        "four exact append-only orbit verification receipts",
-        "exact terminal reconciliation"
+        "records/acquisition/orbit-verification/m2-orb-001-offline-verification-recovery-001.json",
+        "records/acquisition/orbit-verification/m2-orb-002-offline-verification-001.json",
+        "records/acquisition/orbit-verification/m2-orb-003-offline-verification-001.json",
+        "records/acquisition/orbit-verification/m2-orb-004-offline-verification-001.json",
+        "records/readiness/m2-orbit-offline-verification-recovery-001-terminal-reconciliation.json"
       ],
       "gates": {
-        "public_ci": "pending",
-        "final_no_content_preflight": "blocked_by_public_ci",
+        "public_ci": "pass",
+        "final_no_content_preflight": "pass",
         "source_ids_in_exact_order": [
           "M2-ORB-001",
           "M2-ORB-002",
@@ -2766,9 +2796,17 @@
         "stop_on_first_failure": true,
         "automatic_retry_authorized": false,
         "network_or_credential_action": false,
-        "external_custody_mutation": false
+        "external_custody_mutation": false,
+        "terminal_kind": "pass",
+        "completed_source_ids_in_exact_order": [
+          "M2-ORB-001",
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ],
+        "stopped_source_id": null
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json"
       ],
@@ -2776,9 +2814,11 @@
         "expected": [
           "EXIT-201-VERIFIED-CUSTODY"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "Real verification remains blocked until the exact implementation passes public CI and final no-content preflight."
+        "observed": [
+          "four exact orbit inputs verified structurally"
+        ],
+        "decision_value": "pass_input_only",
+        "rationale": "All four exact AUX_RESORB inputs passed without custody mutation; application remains blocked."
       },
       "next_dependency": "M2-ORBIT-APPLY"
     }
@@ -2837,8 +2877,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION",
-    "next_action": "Implement and synthetically validate only the approved pre-read receipt reservation and fixed-order recovery, then require successful public default-branch CI. Do not run the final no-content preflight or read any EOF before that public gate.",
+    "current_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
+    "next_action": "Conduct the exact pending owner review of the EGM2008-to-ArcGIS-EGM96 vertical-datum route. Do not apply orbit data, reinterpret DEM heights, read radar pixels, run a baseline or change analysis, attribute cause, or publish a scientific result before that human gate is resolved.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",

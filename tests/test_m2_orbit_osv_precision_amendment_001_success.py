@@ -77,7 +77,7 @@ class OrbitOsvPrecisionAmendmentSuccessTests(unittest.TestCase):
         self.assertEqual(self.terminal["status"], "pass_exact_m2_orb_001_promoted_remaining_sources_review_required")
         self.assertFalse(self.terminal["assertions"]["other_orbit_source_requested"])
         self.assertFalse(self.terminal["assertions"]["scientific_result_established"])
-        checkpoint = "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION"
+        checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertFalse(current_orbit_remaining_sources_review_preparation(ROOT, {"promoted": 8}))

@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-ACTIVATION",
+  "activated_at_utc": "2026-09-07T18:47:50Z",
+  "status": "pass_public_recovery_controls_activated_final_preflight_pending",
+  "bindings": {
+    "candidate_contract_sha256": "8db4774dfb36ce9718988c23d9a480a01028055a6a28a1bbf301a926e466df68",
+    "approval_sha256": "315812935fe725b5c2928a27abc2b51faf561c423065de6216f975cecbe81f30",
+    "publication_gate_sha256": "0423dc90781625d16a0d06ae4a101455f8277cbcb1bedde1c95550d7602da920",
+    "active_verification_sha256_before": "ec89842e15cf3beb82a79c268c853934379dd511dcd052c345213e1ee25e3157",
+    "active_verification_sha256_after": "6b9275e1e626d45c2ef110f9bb6d39145c081aea7810c651a663fa386b6d50bb",
+    "milestone_sha256_before": "303750f287ddcc6eaedb0955d40f48791c425a87dad8b0964b678b550fd74acf",
+    "milestone_sha256_after": "782ed0177995443ebd1abda44323e9cc458403f845f4382ebda607c820c9118c",
+    "profile_sha256_before": "f971c39827c5a97ae7f7fb4a865e0670075d5bbb9c66b18d55fad6d708a507ef",
+    "profile_sha256_after": "c0636978bc78a7cbe681655aee35f81ccb165207d62091cf73679b156d3a6972",
+    "goal_sha256_before": "c008322de628986c82be596a9e26c4d40713a0b34e11e8983d51e8eb62691a5c",
+    "goal_sha256_after": "2686bcd0edab68ef7d0487dcb5f4e7b67f27a658b90886f470a7f870ff457cfe"
+  },
+  "assertions": {
+    "real_eof_content_read": false,
+    "network_request_performed": false,
+    "credential_value_read_or_recorded": false,
+    "external_custody_mutated": false,
+    "verification_receipt_created": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixel_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  },
+  "next_gate": "one final no-content preflight"
+}
