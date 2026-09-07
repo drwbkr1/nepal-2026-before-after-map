@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-CONTINUATION-001-ACTIVATION",
+  "activated_at_utc": "2026-09-07T17:01:50Z",
+  "status": "pass_exact_four_source_offline_verifier_activated_final_preflight_pending",
+  "bindings": {
+    "candidate_contract_sha256": "de624cc7cce9b3cd7fe10fe3cde2688ed924736ef3fdd627045d57ab36578da1",
+    "implementation_readiness_sha256": "4a3e870929a34558bbdf0415fbdda8c4bd9f67db3315b5956ee0c6a5ac1f97a3",
+    "publication_gate_sha256": "539bf79a790e5a9f7aca347e79d40ecb427abaf316ed836ef4cc0aa941747acd",
+    "active_contract_sha256": "b0f2ea2ea59937d1a9a9a6fc66df1aa815c7fbae31813c2d4f4f1cb5f8dad0a8"
+  },
+  "source_ids": [
+    "M2-ORB-001",
+    "M2-ORB-002",
+    "M2-ORB-003",
+    "M2-ORB-004"
+  ],
+  "assertions": {
+    "real_eof_content_read": false,
+    "network_request_performed": false,
+    "external_data_mutated": false,
+    "orbit_application_performed": false,
+    "radar_pixel_or_dem_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  },
+  "next_gate": "one final no-content preflight before four fixed-order read-only EOF verifications"
+}

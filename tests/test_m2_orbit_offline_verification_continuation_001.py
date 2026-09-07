@@ -30,7 +30,10 @@ class OrbitOfflineVerificationContinuation001Tests(unittest.TestCase):
         cls.candidate = load("contracts/m2-orbit-offline-verification-continuation-001.json")
 
     def test_candidate_projects_exact_source_order_and_one_second_rules(self) -> None:
-        self.assertEqual(self.candidate["status"], "candidate_public_ci_pending")
+        self.assertEqual(
+            self.candidate["status"],
+            "terminal_consumed_m2_orb_001_receipt_persistence_failure",
+        )
         self.assertEqual([item["source_id"] for item in self.candidate["asset_requirements"]], SOURCE_IDS)
         self.assertEqual(
             [item["maximum_osv_endpoint_tolerance_seconds"] for item in self.candidate["asset_requirements"]],
@@ -41,8 +44,11 @@ class OrbitOfflineVerificationContinuation001Tests(unittest.TestCase):
             hashlib.sha256((ROOT / "records/source-gates/m2-orbit-continuation-001-approval.json").read_bytes()).hexdigest(),
         )
 
-    def test_current_active_contract_blocks_real_eof_reads_before_publication(self) -> None:
-        self.assertEqual(self.active["status"], "active_gate_pending_continuation_compatibility_public_ci")
+    def test_current_active_contract_blocks_additional_real_eof_reads_after_failure(self) -> None:
+        self.assertEqual(
+            self.active["status"],
+            "terminal_indeterminate_m2_orb_001_receipt_persistence_failure",
+        )
         with self.assertRaisesRegex(OrbitControlError, "active_orbit_verification_binding_drift"):
             verifier.guarded_controls()
 

@@ -41,8 +41,14 @@ class OrbitOsvPrecisionAmendmentPublicationTests(unittest.TestCase):
         self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["status"], "complete")
         self.assertEqual(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["gates"]["human_decision_count"], 1)
         self.assertTrue(units["M2-ORBIT-OSV-PRECISION-AMENDMENT-001-REVIEW"]["gates"]["amendment_authorized"])
-        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], "M2-ORBIT-VERIFY-IMPLEMENTATION")
-        self.assertEqual(goal["current_checkpoint"], "M2-ORBIT-VERIFY-IMPLEMENTATION")
+        self.assertEqual(
+            profile["current_checkpoint"]["checkpoint_id"],
+            "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION",
+        )
+        self.assertEqual(
+            goal["current_checkpoint"],
+            "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION",
+        )
         self.assertEqual(reconciliation["status"], "pass_public_packet_owner_review_ready_zero_decisions")
         self.assertFalse(reconciliation["assertions"]["staged_file_promoted"])
 

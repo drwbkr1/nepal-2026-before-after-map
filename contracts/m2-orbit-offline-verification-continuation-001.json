@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "contract_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-CONTINUATION-001",
-  "status": "candidate_public_ci_pending",
+  "status": "terminal_consumed_m2_orb_001_receipt_persistence_failure",
   "created_at_utc": "2026-09-06T23:24:21Z",
   "authority": {
     "mode": "combined_exact_orbit_and_two_prospective_osv_approvals",
@@ -220,9 +220,26 @@
         "M2-ORB-003",
         "M2-ORB-004"
       ],
-      "offline_file_reads_started": false,
-      "next_gate": "publish exact verifier implementation and require successful public default-branch CI",
-      "candidate_built": true
+      "offline_file_reads_started": true,
+      "next_gate": "separate owner review for any local verification recovery or continuation",
+      "candidate_built": true,
+      "attempted_source_ids": [
+        "M2-ORB-001"
+      ],
+      "unattempted_source_ids": [
+        "M2-ORB-002",
+        "M2-ORB-003",
+        "M2-ORB-004"
+      ],
+      "attempt_001_failure": {
+        "source_id": "M2-ORB-001",
+        "attempt_identity": "m2-orb-001-offline-verification-001",
+        "failure_code": "verification_output_parent_missing",
+        "terminal_status": "indeterminate_evaluated_in_memory_receipt_not_persisted",
+        "terminal_reconciliation_ref": "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json",
+        "automatic_retry_authorized": false,
+        "remaining_source_reads_authorized": false
+      }
     }
   },
   "contract_version": "2.0",

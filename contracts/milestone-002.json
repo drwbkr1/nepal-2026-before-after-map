@@ -1122,7 +1122,7 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "blocked",
       "inputs": [
         "external orbit custody",
         "contracts/m2-orbit-offline-verification.json"
@@ -1138,13 +1138,25 @@
           "M2-ORB-004"
         ],
         "remaining_source_ids": [],
-        "offline_set_verification": "pending_compatibility_implementation_and_public_ci",
+        "offline_set_verification": "terminal_indeterminate_m2_orb_001_receipt_persistence_failure",
         "continuation_success_ref": "records/acquisition/m2-orbit-continuation-001-success-reconciliation.json",
         "continuation_success_sha256": "039f635252c394dfda6f3a2e33918947e4579b7f10d48f1d89574fd2aba7fbc9",
-        "real_eof_reads_started": false
+        "real_eof_reads_started": true,
+        "attempted_source_ids": [
+          "M2-ORB-001"
+        ],
+        "durable_verification_receipt_source_ids": [],
+        "unattempted_source_ids": [
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ],
+        "automatic_retry_authorized": false
       },
-      "disposition": null,
-      "retained_failures": [],
+      "disposition": "terminal_indeterminate_receipt_persistence_failure",
+      "retained_failures": [
+        "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json"
+      ],
       "exit_condition_delta": {
         "expected": [
           "EXIT-201-VERIFIED-CUSTODY",
@@ -1153,8 +1165,8 @@
         "observed": [
           "EXIT-201-VERIFIED-CUSTODY"
         ],
-        "decision_value": "unknown",
-        "rationale": "All four inputs are promoted, but the set-level read-only verifier compatibility gate and public CI remain pending."
+        "decision_value": "blocked",
+        "rationale": "M2-ORB-001 EOF content was evaluated in memory, but the required append-only receipt could not be written because its output parent directory was missing. The result is indeterminate, the attempt is consumed, and M2-ORB-002 through M2-ORB-004 were not read."
       },
       "next_dependency": "M2-ORBIT-APPLY"
     },
@@ -2552,6 +2564,97 @@
         "rationale": "All three remaining exact AUX_RESORB files passed one attempt in fixed order and were promoted without replacement."
       },
       "next_dependency": "M2-ORBIT-VERIFY"
+    },
+    {
+      "id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION",
+      "purpose": "Publish and publicly validate the exact zero-decision orbit-verification recovery packet.",
+      "depends_on": [
+        "M2-ORBIT-VERIFY"
+      ],
+      "action_class": "external_publication",
+      "human_gate": false,
+      "status": "in_progress",
+      "inputs": [
+        "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json",
+        "reviews/m2-orbit-offline-verification-recovery-001/review-bundle.json",
+        "reviews/m2-orbit-offline-verification-recovery-001/review-contract.json",
+        "records/readiness/m2-orbit-offline-verification-recovery-001-review-readiness.json",
+        "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json"
+      ],
+      "outputs": [
+        "records/readiness/m2-orbit-offline-verification-recovery-001-review-publication-gate.json",
+        "records/readiness/m2-orbit-offline-verification-recovery-001-review-publication-reconciliation.json"
+      ],
+      "gates": {
+        "public_ci": "pending",
+        "proposal_sha256": "0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
+        "review_bundle_sha256": "d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f",
+        "human_decision_count": 0,
+        "recovery_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "The exact blank review packet must pass public default-branch CI before owner handoff."
+      },
+      "next_dependency": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW"
+    },
+    {
+      "id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW",
+      "purpose": "Obtain one exact owner decision on the post-observation receipt-persistence recovery.",
+      "depends_on": [
+        "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "blocked",
+      "inputs": [
+        "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json",
+        "reviews/m2-orbit-offline-verification-recovery-001/review-bundle.json",
+        "reviews/m2-orbit-offline-verification-recovery-001/review-contract.json",
+        "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-orbit-offline-verification-recovery-001-review-reconciliation.json",
+        "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
+        "records/readiness/m2-orbit-offline-verification-recovery-001-approval-activation.json"
+      ],
+      "gates": {
+        "proposal_sha256": "0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
+        "review_bundle_sha256": "d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f",
+        "review_contract_sha256": "73ae6dd33ad0c251792414594c2688652c919358d72422eacb193f759c422b49",
+        "blank_response_sha256": "e589062b6083f088b818a73627545652eec286ebb28e59fef45c8558115f8317",
+        "public_ci": "pending",
+        "source_ids_in_exact_order": [
+          "M2-ORB-001",
+          "M2-ORB-002",
+          "M2-ORB-003",
+          "M2-ORB-004"
+        ],
+        "m2_orb_001_new_recovery_attempts_if_approved": 1,
+        "remaining_source_attempts_per_source_if_approved": 1,
+        "stop_on_first_failure_if_approved": true,
+        "maximum_endpoint_tolerance_seconds_if_approved": 1.0,
+        "human_decision_count": 0,
+        "attestation": false,
+        "recovery_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "The packet has zero decisions and grants no recovery authority."
+      },
+      "next_dependency": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION"
     }
   ],
   "path_efficiency": {
@@ -2608,8 +2711,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ORBIT-VERIFY-IMPLEMENTATION",
-    "next_action": "Project the already approved one-second endpoint rules and continuation receipt identities into the four-source offline verifier, test and publish that exact implementation, and require successful public default-branch CI before reading the four promoted EOF files. Do not apply orbit data, act on DEMs or radar pixels, run a baseline or change analysis, attribute cause, or publish a scientific result.",
+    "current_checkpoint": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION",
+    "next_action": "Publish and publicly validate the exact blank M2 orbit offline-verification recovery-001 review packet. No recovery implementation, new EOF read, remaining-source verification, network or credential action, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before one attested owner decision on the exact public packet.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -2640,7 +2743,8 @@
       "The OSV precision amendment permits no real staged-byte access before its implementation passes public CI and permits no token, network request, other orbit source, retry, orbit application, radar pixels, baseline, change, or scientific action.",
       "The OSV precision amendment is consumed after one successful local validation and promotion of M2-ORB-001; it authorizes no request for M2-ORB-002 through M2-ORB-004 and no downstream processing.",
       "The continuation-001 packet is blank and publicly validated; it creates no implementation or source-access authority before an exact attested owner decision is locked and reconciled.",
-      "Orbit continuation-001 is consumed after one handoff and three successful fixed-order requests. All four AUX_RESORB files are promoted input-only; this does not authorize another request, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication."
+      "Orbit continuation-001 is consumed after one handoff and three successful fixed-order requests. All four AUX_RESORB files are promoted input-only; this does not authorize another request, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication.",
+      "Offline verification attempt 001 read and evaluated M2-ORB-001 but lost the in-memory result when its append-only receipt parent was absent; treat it as terminal indeterminate, do not reconstruct a result, and do not run M2-ORB-002 through M2-ORB-004."
     ],
     "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-REVIEW",
     "parallel_next_action": "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."

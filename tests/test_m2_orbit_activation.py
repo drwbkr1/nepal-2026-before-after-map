@@ -79,7 +79,10 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertTrue(
             all(asset["extensions"]["sentinel_custody_prerequisite"] == "not_satisfied_at_activation" for asset in self.intake["assets"])
         )
-        self.assertEqual(self.verification["status"], "active_gate_pending_continuation_compatibility_public_ci")
+        self.assertEqual(
+            self.verification["status"],
+            "terminal_indeterminate_m2_orb_001_receipt_persistence_failure",
+        )
         self.assertFalse(self.verification["authority"]["precise_orbit_substitution_authorized"])
         self.assertFalse(self.verification["authority"]["radar_pixel_processing_authorized_by_this_contract"])
 
@@ -111,7 +114,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertEqual(unit_by_id["M2-ORBIT-APPLY"]["gates"]["dem_vertical_datum_gate"], "pending")
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            [],
+            ["contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json"],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],

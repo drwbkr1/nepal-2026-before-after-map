@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-SURFACE",
+  "verified_at_utc": "2026-09-07T17:15:26Z",
+  "status": "pass_blank_review_surface",
+  "artifact": {
+    "path": "docs/assets/m2-orbit-offline-verification-recovery-001-review.png",
+    "sha256": "a5b81dc149aaecebc414d2ba8b3e5e1a85ebfb0874ab167a515d7c5edd7ce5d3",
+    "width_px": 1800,
+    "height_px": 1720,
+    "format": "PNG",
+    "contains_third_party_pixels": false
+  },
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json",
+    "proposal_sha256": "0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
+    "terminal_reconciliation_ref": "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "4186ba4f6150f8c1466ab67aa9b22af5222bfadff1e8dcdcd0b619de80449a55"
+  },
+  "validation": {
+    "post_observation_failure_visible": true,
+    "indeterminate_result_visible": true,
+    "output_reservation_correction_visible": true,
+    "fixed_order_and_stop_boundary_visible": true,
+    "unchanged_scientific_rules_visible": true,
+    "prohibited_scope_visible": true,
+    "blank_state_verified": true,
+    "human_decision_count": 0,
+    "completion_controls_verified": true,
+    "export_verified": true
+  }
+}

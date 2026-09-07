@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-orbit-offline-verification-recovery-001-review-bundle",
+  "review_id": "m2-orbit-offline-verification-recovery-001-review",
+  "authority_ref": "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json",
+  "candidate_identity": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-PROPOSAL-SHA256:0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-orbit-offline-verification-recovery-001-review.png",
+      "sha256": "a5b81dc149aaecebc414d2ba8b3e5e1a85ebfb0874ab167a515d7c5edd7ce5d3",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-orbit-offline-verification-recovery-001-review.json",
+          "sha256": "18d4f5413332bd8792d14358683d52ec7c4ffb2c2ae75236ef73c90e86e1e888"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_REVIEW.md",
+      "sha256": "9721881760a091bc31c4a9d471e3f1f4586af8c8efd79e427411d5f56dc2e282",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "proposal",
+      "path": "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json",
+      "sha256": "0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
+      "role": "candidate_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "review-preflight",
+      "path": "records/readiness/m2-orbit-offline-verification-recovery-001-review-preflight.json",
+      "sha256": "8665671d5b8be80ce40fa6c3fb5f708e0f207b7361ce1eb792fe2d20cb447a3b",
+      "role": "zero_authority_preflight",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "terminal-reconciliation",
+      "path": "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json",
+      "sha256": "4186ba4f6150f8c1466ab67aa9b22af5222bfadff1e8dcdcd0b619de80449a55",
+      "role": "consumed_indeterminate_attempt",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "active-verification",
+      "path": "contracts/m2-orbit-offline-verification.json",
+      "sha256": "ec89842e15cf3beb82a79c268c853934379dd511dcd052c345213e1ee25e3157",
+      "role": "blocked_current_control",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "verifier-implementation",
+      "path": "scripts/verify_m2_orbit_eof.py",
+      "sha256": "c74dbfb4b2324292493e91fae9f1958220d188132477548d78d967cfc894023d",
+      "role": "failure_code_path",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "prior-publication-gate",
+      "path": "records/readiness/m2-orbit-offline-verification-continuation-001-publication-gate.json",
+      "sha256": "539bf79a790e5a9f7aca347e79d40ecb427abaf316ed836ef4cc0aa941747acd",
+      "role": "public_ci_before_real_read",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "prior-activation",
+      "path": "records/readiness/m2-orbit-offline-verification-continuation-001-activation.json",
+      "sha256": "1a55bcaf1a20d95be3e9fb089f77307b2432a2cb9faf9e1d3b3428dd61d4025b",
+      "role": "activation_before_real_read",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "prior-final-preflight",
+      "path": "records/readiness/m2-orbit-offline-verification-continuation-001-final-preflight.json",
+      "sha256": "2bd59be1b01132a16bd764ca28d88f72b87f7875e48df3cc1a7de1a7f2feb4ed",
+      "role": "preflight_missing_output_parent_check",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "original-orbit-approval",
+      "path": "records/source-gates/m2-orbit-amendment-approval.json",
+      "sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+      "role": "original_exact_source_authority",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "osv-precision-approval",
+      "path": "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+      "sha256": "4a77a044475b6c940a4b58d4c4dbcf76730c06e63d18927eb717312a97667cf4",
+      "role": "one_second_rule_authority",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "continuation-approval",
+      "path": "records/source-gates/m2-orbit-continuation-001-approval.json",
+      "sha256": "66c40db57082ed29c1dfd3e00a163ab072fe9f14b8e0ed4455df188673de84ba",
+      "role": "remaining_source_attempt_authority",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "reinterpret, reconstruct, or label the lost M2-ORB-001 attempt as pass or fail",
+    "change any source, provider UUID, filename, byte length, checksum, XML rule, OSV rule, unit, scene binding, margin, or one-second endpoint limit",
+    "make a second recovery attempt or automatically retry any failed or interrupted source",
+    "request a token, access the network, reacquire or replace an orbit file, mutate external custody, substitute AUX_POEORB, date-shop, or source-shop",
+    "apply orbit data, act on DEMs, decode radar pixels, process a baseline, analyze change, attribute cause, or publish a scientific result",
+    "The first M2-ORB-001 evaluation ran after real input observation, so this recovery is explicitly post-observation even though no validation rule changes.",
+    "The first in-memory pass or fail result is unavailable and cannot be inferred from code reachability or from a later recovery result.",
+    "An exclusive pre-read receipt reservation prevents this exact missing-parent loss but cannot guarantee against every process, disk, or operating-system failure.",
+    "A passing four-source result would establish only exact orbit-input identity and structural fitness, not orbit application, geolocation accuracy, radar-pixel fitness, change, or attribution.",
+    "This packet contains zero human decisions and grants no implementation or real-read authority until exact owner approval is locked and reconciled."
+  ]
+}

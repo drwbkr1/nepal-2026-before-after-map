@@ -128,7 +128,7 @@ class M2DemActivationTests(unittest.TestCase):
         self.assertEqual(set(units["M2-BASELINE"]["depends_on"]), {"M2-VERIFY", "M2-DEM-VERIFY", "M2-ORBIT-APPLY"})
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            [],
+            ["contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json"],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -236,8 +236,19 @@ class M2DemActivationTests(unittest.TestCase):
             (unit for unit in self.milestone["units"] if unit["id"] == "M2-ORBIT-VERIFY"),
             None,
         )
+        orbit_offline_recovery_publication = next(
+            (
+                unit
+                for unit in self.milestone["units"]
+                if unit["id"] == "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION"
+            ),
+            None,
+        )
         expected_primary_checkpoint = (
-            "M2-ORBIT-VERIFY-IMPLEMENTATION"
+            "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION"
+            if orbit_offline_recovery_publication is not None
+            and orbit_offline_recovery_publication.get("status") == "in_progress"
+            else "M2-ORBIT-VERIFY-IMPLEMENTATION"
             if orbit_verify is not None and orbit_verify.get("status") == "in_progress"
             else "M2-ORBIT-CONTINUATION-001-IMPLEMENTATION"
             if orbit_continuation_implementation is not None

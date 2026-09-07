@@ -1,0 +1,45 @@
+{
+  "contract_version": "human-review-contract-v1",
+  "template": false,
+  "review_id": "m2-orbit-offline-verification-recovery-001-review",
+  "response_schema_version": "nepal-m2-orbit-offline-verification-recovery-001-response-v1",
+  "workflow_authority": {
+    "mode": "inherited",
+    "authority_ref": "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json",
+    "authorized_action_classes": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ],
+    "verified_at_utc": "2026-09-07T17:15:26Z",
+    "expires_at_utc": null,
+    "review_required": true,
+    "lock_authorized": true,
+    "reconcile_authorized": true,
+    "post_review_actions": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ]
+  },
+  "review_bundle": {
+    "bundle_id": "m2-orbit-offline-verification-recovery-001-review-bundle",
+    "manifest_sha256": "d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f",
+    "candidate_identity": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-PROPOSAL-SHA256:0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
+    "rendered_surface_verified": true
+  },
+  "allowed_decisions": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "required_attestation": true,
+  "max_notes_length": 2000,
+  "hash_prefix_length": 16,
+  "items": [
+    {
+      "item_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001",
+      "evidence_sha256": "d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f"
+    }
+  ]
+}

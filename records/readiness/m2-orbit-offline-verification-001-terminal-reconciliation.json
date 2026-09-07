@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-001-TERMINAL-RECONCILIATION",
+  "recorded_at_utc": "2026-09-07T17:08:43Z",
+  "status": "terminal_indeterminate_m2_orb_001_evaluated_receipt_not_persisted_no_retry_released",
+  "attempt": {
+    "attempt_identity": "m2-orb-001-offline-verification-001",
+    "source_id": "M2-ORB-001",
+    "planned_output_ref": "records/acquisition/orbit-verification/m2-orb-001-offline-verification-001.json",
+    "failure_code": "verification_output_parent_missing",
+    "time_lower_bound_utc": "2026-09-07T17:01:57Z",
+    "exact_invocation_time_persisted": false,
+    "result_disposition": "indeterminate",
+    "reason": "The complete evaluation ran in memory, but no durable pass or fail receipt was written."
+  },
+  "evidence": {
+    "verifier_ref": "scripts/verify_m2_orbit_eof.py",
+    "verifier_sha256": "c74dbfb4b2324292493e91fae9f1958220d188132477548d78d967cfc894023d",
+    "publication_commit": "308b6d079696a5f5973f7daa02e137e07a14eea3",
+    "public_ci_run_id": 34145814247,
+    "publication_gate_ref": "records/readiness/m2-orbit-offline-verification-continuation-001-publication-gate.json",
+    "publication_gate_sha256": "539bf79a790e5a9f7aca347e79d40ecb427abaf316ed836ef4cc0aa941747acd",
+    "activation_ref": "records/readiness/m2-orbit-offline-verification-continuation-001-activation.json",
+    "activation_sha256": "1a55bcaf1a20d95be3e9fb089f77307b2432a2cb9faf9e1d3b3428dd61d4025b",
+    "final_preflight_ref": "records/readiness/m2-orbit-offline-verification-continuation-001-final-preflight.json",
+    "final_preflight_sha256": "2bd59be1b01132a16bd764ca28d88f72b87f7875e48df3cc1a7de1a7f2feb4ed",
+    "code_path_observation": "inspect_eof and the post-read custody inventory execute before write_new checks the output parent"
+  },
+  "control_hashes": {
+    "before": {
+      "active_verification": "b0f2ea2ea59937d1a9a9a6fc66df1aa815c7fbae31813c2d4f4f1cb5f8dad0a8",
+      "candidate_verification": "de624cc7cce9b3cd7fe10fe3cde2688ed924736ef3fdd627045d57ab36578da1",
+      "milestone": "e173adffa4573cef672fd1dfab07a9d16ef32f58fcc0bf89a38c3cae9ec861ae",
+      "profile": "bbe3b82f6d7228b5f74f24674674cbd59fa5c8ae7c9a3c326bf096cffd0fb404",
+      "goal": "e93f3accb7d17b7add5cfac7311c75a3bbac17c9c253484d07442dbb0b20c5a3"
+    },
+    "after": {
+      "active_verification": "ec89842e15cf3beb82a79c268c853934379dd511dcd052c345213e1ee25e3157",
+      "candidate_verification": "7f3ca3604975fdc22f44e4d4dd86773312009d331d858a184a8288d93f882e4c",
+      "milestone": "741ebeaed9449148c9cb1112a8087295c58f1cc116b1d9597a168684bf2b23c5",
+      "profile": "9834158b728ea7d6979ecbdf6697b35a01ec8370fb527690f6db942f798493e2",
+      "goal": "91831fb71dfe8f4786b78ad8d41b47f1a0252d09bfb94d35d2cd27ceafb4779d"
+    }
+  },
+  "assertions": {
+    "m2_orb_001_eof_content_read": true,
+    "verification_evaluation_executed_in_memory": true,
+    "evaluation_result_durably_persisted": false,
+    "verification_receipt_written": false,
+    "result_reconstructed_or_inferred": false,
+    "external_orbit_custody_mutated": false,
+    "later_source_eof_content_read": false,
+    "automatic_retry_performed": false,
+    "automatic_retry_authorized": false,
+    "network_or_credential_action_performed": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixel_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  },
+  "next_gate": "Preserve the consumed M2-ORB-001 verifier invocation as terminal indeterminate because EOF content was evaluated but its receipt could not be written, then prepare a zero-decision review for an output-directory preflight correction and one separately authorized recovery attempt. Do not rerun any orbit verification, read another EOF, apply orbit data, act on DEMs or radar pixels, run a baseline or change analysis, attribute cause, or publish a scientific result."
+}

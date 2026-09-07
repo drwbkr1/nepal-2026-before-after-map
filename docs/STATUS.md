@@ -1,12 +1,12 @@
 # Current status
 
-- **State:** M1 complete; M2 active with terminal optical results preserved, six-source radar custody/materialization/header readiness complete, all four exact approved orbit files promoted, and offline four-orbit verification awaiting public CI
+- **State:** M1 complete; M2 active with terminal optical results preserved, six-source radar custody/materialization/header readiness complete, all four exact approved orbit files promoted, and the first offline orbit-verification attempt terminal indeterminate after a receipt-persistence failure
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary `M2-ORBIT-VERIFY-IMPLEMENTATION`; the exact continuation completed in fixed order with one owner handoff and no retry, and the four-source read-only verifier must pass public default-branch CI before activation, final no-content preflight, or real EOF reads; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
+- **Checkpoints:** primary `M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION`; a zero-decision recovery packet must pass public CI before owner review, and no recovery implementation or new EOF read is authorized; parallel `M2-DEM-VERTICAL-DATUM-REVIEW` and `M2-DEM-TERRAIN-RESULT-REVIEW`
 
 ## Purpose
 
@@ -53,6 +53,10 @@ Checkpoint derivation is also explicit and read-only. Validated state counts map
 The exact eight-product offline verification contract is now active under the same M2 approval. Its wrapper requires a promoted active-intake identity and successful-transfer receipt before it reads an archive. It performs no network request or extraction and cannot establish pixel usability. Five active-contract and wrapper tests pass; activation read zero product bytes.
 
 ## Current gate
+
+Four-source verifier commit `308b6d079696a5f5973f7daa02e137e07a14eea3` passed public CI run `34145814247`, activation, and final no-content preflight. Its first fixed-order invocation read and evaluated `M2-ORB-001` in memory, then stopped at `verification_output_parent_missing` because `records/acquisition/orbit-verification` did not exist. No durable pass or fail receipt exists, so the result is terminal indeterminate and is not reconstructed. External orbit custody was unchanged, and `M2-ORB-002`, `M2-ORB-003`, and `M2-ORB-004` were not read.
+
+Recovery proposal SHA-256 `0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf` and review bundle SHA-256 `d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f` bind a post-observation persistence correction. Approval would authorize only a tracked receipt parent, exact pre-read exclusive receipt reservation, synthetic persistence and stop-on-failure tests, public CI, a new no-content preflight, one `M2-ORB-001` recovery attempt, and conditional fixed-order first attempts for `002` through `004`. The scientific predicates and one-second endpoint limit remain unchanged. The packet has zero decisions and grants no implementation, new EOF read, network or credential action, custody mutation, orbit application, DEM or radar-pixel action, baseline, change, attribution, or publication authority.
 
 The approved materialization and input-readiness sequence is complete. All five remaining SAFE materializations passed once in the approved order, making all eight sources materialized by identity. Public CI runs `33984065216`, `33985362022`, and `33986585291` passed the three implementation stages. One six-source radar and one two-source optical header inspection then passed once without measurement-pixel decoding.
 

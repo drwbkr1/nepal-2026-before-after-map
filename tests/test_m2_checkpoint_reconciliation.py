@@ -29,6 +29,7 @@ from derive_m2_acquisition_checkpoint import (  # noqa: E402
     current_orbit_osv_precision_implementation_publication_pending,
     current_orbit_continuation_001_implementation_pending,
     current_orbit_continuation_001_review_required,
+    current_orbit_offline_verification_recovery_001_review_publication_pending,
     current_orbit_verify_implementation_pending,
     current_orbit_remaining_sources_review_preparation,
     current_orbit_recovery_002_review_required,
@@ -89,7 +90,12 @@ class M2CheckpointReconciliationTests(unittest.TestCase):
         self.assertFalse(current_orbit_remaining_sources_review_preparation(ROOT, {"promoted": 8}))
         self.assertFalse(current_orbit_continuation_001_review_required(ROOT, {"promoted": 8}))
         self.assertFalse(current_orbit_continuation_001_implementation_pending(ROOT, {"promoted": 8}))
-        self.assertTrue(current_orbit_verify_implementation_pending(ROOT, {"promoted": 8}))
+        self.assertFalse(current_orbit_verify_implementation_pending(ROOT, {"promoted": 8}))
+        self.assertTrue(
+            current_orbit_offline_verification_recovery_001_review_publication_pending(
+                ROOT, {"promoted": 8}
+            )
+        )
         self.assertFalse(current_materialization_pixel_review_required(ROOT, {"authorized": 1, "promoted": 7}))
 
     def test_incomplete_or_unsupported_counts_are_rejected(self) -> None:

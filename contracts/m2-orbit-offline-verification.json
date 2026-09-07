@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "contract_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-001",
-  "status": "active_gate_pending_continuation_compatibility_public_ci",
-  "created_at_utc": "2026-09-04T02:01:22Z",
+  "contract_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-CONTINUATION-001",
+  "status": "terminal_indeterminate_m2_orb_001_receipt_persistence_failure",
+  "created_at_utc": "2026-09-06T23:24:21Z",
   "authority": {
-    "mode": "inherited_exact_orbit_amendment_approval",
+    "mode": "combined_exact_orbit_and_two_prospective_osv_approvals",
     "authority_ref": "records/source-gates/m2-orbit-amendment-approval.json",
     "authority_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
     "orbit_payload_acquisition_authorized": true,
@@ -12,7 +12,15 @@
     "exact_source_orbit_application_authorized": true,
     "radar_pixel_processing_authorized_by_this_contract": false,
     "precise_orbit_substitution_authorized": false,
-    "this_contract_creates_authority": false
+    "this_contract_creates_authority": false,
+    "base_orbit_approval_ref": "records/source-gates/m2-orbit-amendment-approval.json",
+    "base_orbit_approval_sha256": "6501c953baa6d823304eaa54b53a94fa41119b7805622840306d2633a9fb87c1",
+    "m2_orb_001_endpoint_approval_ref": "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
+    "m2_orb_001_endpoint_approval_sha256": "4a77a044475b6c940a4b58d4c4dbcf76730c06e63d18927eb717312a97667cf4",
+    "remaining_sources_endpoint_approval_ref": "records/source-gates/m2-orbit-continuation-001-approval.json",
+    "remaining_sources_endpoint_approval_sha256": "66c40db57082ed29c1dfd3e00a163ab072fe9f14b8e0ed4455df188673de84ba",
+    "maximum_endpoint_tolerance_seconds": 1.0,
+    "offline_verification_attempts_per_source": 1
   },
   "bindings": {
     "candidate_manifest_ref": "records/source-gates/m2-orbit-candidate-manifest.json",
@@ -28,7 +36,13 @@
     "review_reconciliation_ref": "records/source-gates/m2-orbit-amendment-review-reconciliation.json",
     "review_reconciliation_sha256": "d421acb9e343531f5eb595d69d2414c30e4ef5717d7614a5a1696546c6cd866c",
     "active_intake_sha256_current": "6c896e9764d2270a903c611144fcf880abd8fc767dc45b02ed2f79522e4e960a",
-    "latest_promoted_source_id": "M2-ORB-004"
+    "latest_promoted_source_id": "M2-ORB-004",
+    "base_active_verification_ref": "contracts/m2-orbit-offline-verification.json",
+    "base_active_verification_sha256": "d22a8b1bdc07859a0db49f19ee0943de5c64a0ef9832f92efebeb89724a5dd47",
+    "continuation_success_ref": "records/acquisition/m2-orbit-continuation-001-success-reconciliation.json",
+    "continuation_success_sha256": "039f635252c394dfda6f3a2e33918947e4579b7f10d48f1d89574fd2aba7fbc9",
+    "continuation_project_reconciliation_ref": "records/readiness/m2-orbit-continuation-001-terminal-project-reconciliation.json",
+    "continuation_project_reconciliation_sha256": "65999a0db7fdc9d54ab10637c94edb15b8d603baf1337f18997322ca94fc87c4"
   },
   "asset_requirements": [
     {
@@ -57,7 +71,9 @@
       ],
       "expected_validity_start_utc": "2026-08-16T10:35:26.000000Z",
       "expected_validity_end_utc": "2026-08-16T14:09:56.000000Z",
-      "minimum_required_scene_margin_seconds": 6350
+      "minimum_required_scene_margin_seconds": 6350,
+      "maximum_osv_endpoint_tolerance_seconds": 1.0,
+      "endpoint_rule_authority_ref": "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json"
     },
     {
       "source_id": "M2-ORB-002",
@@ -84,7 +100,9 @@
       ],
       "expected_validity_start_utc": "2026-08-18T21:50:10.000000Z",
       "expected_validity_end_utc": "2026-08-19T01:21:20.000000Z",
-      "minimum_required_scene_margin_seconds": 4219
+      "minimum_required_scene_margin_seconds": 4219,
+      "maximum_osv_endpoint_tolerance_seconds": 1.0,
+      "endpoint_rule_authority_ref": "records/source-gates/m2-orbit-continuation-001-approval.json"
     },
     {
       "source_id": "M2-ORB-003",
@@ -112,7 +130,9 @@
       ],
       "expected_validity_start_utc": "2026-08-28T10:35:27.000000Z",
       "expected_validity_end_utc": "2026-08-28T14:09:57.000000Z",
-      "minimum_required_scene_margin_seconds": 6349
+      "minimum_required_scene_margin_seconds": 6349,
+      "maximum_osv_endpoint_tolerance_seconds": 1.0,
+      "endpoint_rule_authority_ref": "records/source-gates/m2-orbit-continuation-001-approval.json"
     },
     {
       "source_id": "M2-ORB-004",
@@ -139,19 +159,21 @@
       ],
       "expected_validity_start_utc": "2026-08-30T21:50:11.000000Z",
       "expected_validity_end_utc": "2026-08-31T01:21:11.000000Z",
-      "minimum_required_scene_margin_seconds": 4209
+      "minimum_required_scene_margin_seconds": 4209,
+      "maximum_osv_endpoint_tolerance_seconds": 1.0,
+      "endpoint_rule_authority_ref": "records/source-gates/m2-orbit-continuation-001-approval.json"
     }
   ],
   "verification_sequence": [
     "recompute and compare exact byte length",
-    "verify provider MD5 and BLAKE3 values",
-    "compute and retain local SHA-256",
-    "parse the EOF as XML without network access or external entities",
-    "verify mission S1D, file type AUX_RESORB, and exact validity interval",
-    "verify the OSV list is nonempty, ordered by UTC, unique, and spans the declared validity interval",
-    "verify every position and velocity component is finite and has the declared physical unit",
-    "verify the complete bound Sentinel acquisition window lies within the EOF validity interval with the required temporal margins",
-    "promote only after every check passes and record a no-replace custody receipt"
+    "verify provider MD5 and BLAKE3 values and compute local SHA-256",
+    "parse the EOF as XML without network access, DTDs, or entity declarations",
+    "verify mission S1D, file type AUX_RESORB, exact validity interval, and exact source identity",
+    "verify the OSV list is nonempty, count-matched, strictly ordered, unique, finite, and uses exact declared units",
+    "require OSV endpoints within the prospectively approved maximum one-second rule for the exact source",
+    "verify the complete bound Sentinel acquisition window lies within validity with required temporal margins",
+    "inventory the custody directory before and after and require no mutation",
+    "write one append-only public verification receipt per exact promoted source and stop on the first failure"
   ],
   "application_boundary": {
     "arcgis_tool": "ApplyOrbitCorrection",
@@ -198,8 +220,65 @@
         "M2-ORB-003",
         "M2-ORB-004"
       ],
-      "offline_file_reads_started": false,
-      "next_gate": "project approved endpoint rules and receipt identities into the verifier, then require public CI"
+      "offline_file_reads_started": true,
+      "next_gate": "publish exact verifier implementation and require successful public default-branch CI",
+      "candidate_built": true
+    },
+    "offline_verification_continuation_001": {
+      "candidate_ref": "contracts/m2-orbit-offline-verification-continuation-001.json",
+      "candidate_sha256": "de624cc7cce9b3cd7fe10fe3cde2688ed924736ef3fdd627045d57ab36578da1",
+      "implementation_readiness_ref": "records/readiness/m2-orbit-offline-verification-continuation-001-implementation-readiness.json",
+      "implementation_readiness_sha256": "4a3e870929a34558bbdf0415fbdda8c4bd9f67db3315b5956ee0c6a5ac1f97a3",
+      "publication_gate_ref": "records/readiness/m2-orbit-offline-verification-continuation-001-publication-gate.json",
+      "publication_gate_sha256": "539bf79a790e5a9f7aca347e79d40ecb427abaf316ed836ef4cc0aa941747acd",
+      "offline_file_reads_started": true,
+      "maximum_verification_attempts_per_source": 1,
+      "attempted_source_ids": [
+        "M2-ORB-001"
+      ],
+      "unattempted_source_ids": [
+        "M2-ORB-002",
+        "M2-ORB-003",
+        "M2-ORB-004"
+      ],
+      "attempt_001_failure": {
+        "source_id": "M2-ORB-001",
+        "attempt_identity": "m2-orb-001-offline-verification-001",
+        "failure_code": "verification_output_parent_missing",
+        "terminal_status": "indeterminate_evaluated_in_memory_receipt_not_persisted",
+        "terminal_reconciliation_ref": "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json",
+        "automatic_retry_authorized": false,
+        "remaining_source_reads_authorized": false
+      }
     }
-  }
+  },
+  "contract_version": "2.0",
+  "receipt_compatibility": {
+    "M2-ORB-001": {
+      "attempt_kind": "osv_precision_local_no_replace_promotion",
+      "evidence_ref": "records/acquisition/m2-orbit-osv-precision-amendment-001-local-validation.json",
+      "required_status": "pass_exact_m2_orb_001_input_promoted_no_replace"
+    },
+    "M2-ORB-002": {
+      "attempt_kind": "orbit_continuation_001",
+      "required_event": "orbit_continuation_001_succeeded"
+    },
+    "M2-ORB-003": {
+      "attempt_kind": "orbit_continuation_001",
+      "required_event": "orbit_continuation_001_succeeded"
+    },
+    "M2-ORB-004": {
+      "attempt_kind": "orbit_continuation_001",
+      "required_event": "orbit_continuation_001_succeeded"
+    }
+  },
+  "activation_boundary": {
+    "public_default_branch_ci_required": true,
+    "final_no_content_preflight_required": true,
+    "real_eof_reads_before_activation_authorized": false,
+    "network_requests_authorized": false,
+    "custody_mutation_authorized": false,
+    "orbit_application_authorized": false
+  },
+  "activated_at_utc": "2026-09-07T17:01:50Z"
 }

@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PREFLIGHT",
+  "observed_at_utc": "2026-09-07T17:15:26Z",
+  "status": "pass_review_ready_zero_decisions_no_new_eof_read_or_mutation",
+  "bindings": {
+    "proposal_sha256": "0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
+    "terminal_reconciliation_sha256": "4186ba4f6150f8c1466ab67aa9b22af5222bfadff1e8dcdcd0b619de80449a55",
+    "active_verification_sha256": "ec89842e15cf3beb82a79c268c853934379dd511dcd052c345213e1ee25e3157",
+    "verifier_sha256": "c74dbfb4b2324292493e91fae9f1958220d188132477548d78d967cfc894023d",
+    "prior_publication_gate_sha256": "539bf79a790e5a9f7aca347e79d40ecb427abaf316ed836ef4cc0aa941747acd",
+    "prior_activation_sha256": "1a55bcaf1a20d95be3e9fb089f77307b2432a2cb9faf9e1d3b3428dd61d4025b",
+    "prior_final_preflight_sha256": "2bd59be1b01132a16bd764ca28d88f72b87f7875e48df3cc1a7de1a7f2feb4ed"
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "recovery_authorized": false,
+    "implementation_started": false,
+    "new_eof_content_read": false,
+    "remaining_source_eof_content_read": false,
+    "network_or_credential_action_performed": false,
+    "external_custody_mutated": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixel_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  }
+}
