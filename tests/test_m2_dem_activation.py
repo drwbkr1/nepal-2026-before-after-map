@@ -244,8 +244,19 @@ class M2DemActivationTests(unittest.TestCase):
             ),
             None,
         )
+        orbit_offline_recovery_review = next(
+            (
+                unit
+                for unit in self.milestone["units"]
+                if unit["id"] == "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW"
+            ),
+            None,
+        )
         expected_primary_checkpoint = (
-            "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION"
+            "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW"
+            if orbit_offline_recovery_review is not None
+            and orbit_offline_recovery_review.get("status") == "ready"
+            else "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION"
             if orbit_offline_recovery_publication is not None
             and orbit_offline_recovery_publication.get("status") == "in_progress"
             else "M2-ORBIT-VERIFY-IMPLEMENTATION"

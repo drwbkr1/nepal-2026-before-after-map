@@ -460,10 +460,10 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION",
+    "checkpoint_id": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish and publicly validate the exact blank M2 orbit offline-verification recovery-001 review packet. No recovery implementation, new EOF read, remaining-source verification, network or credential action, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before one attested owner decision on the exact public packet."
+    "next_action": "Review M2 orbit offline-verification recovery-001 bundle SHA-256 d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f and proposal SHA-256 0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf; approve, revise, or defer the exact pre-read receipt-reservation correction and one M2-ORB-001 recovery attempt before conditional fixed-order continuation. No implementation, new EOF read, network or credential action, custody mutation, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision."
   },
   "parallel_checkpoints": [
     {

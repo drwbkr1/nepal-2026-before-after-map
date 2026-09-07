@@ -13,6 +13,8 @@ CONTRACT_REF = "reviews/m2-orbit-offline-verification-recovery-001/review-contra
 BLANK_REF = "reviews/m2-orbit-offline-verification-recovery-001/blank-response.json"
 TERMINAL_REF = "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json"
 READINESS_REF = "records/readiness/m2-orbit-offline-verification-recovery-001-review-readiness.json"
+PUBLICATION_GATE_REF = "records/readiness/m2-orbit-offline-verification-recovery-001-review-publication-gate.json"
+PUBLICATION_RECONCILIATION_REF = "records/readiness/m2-orbit-offline-verification-recovery-001-review-publication-reconciliation.json"
 PROPOSAL_SHA256 = "0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf"
 BUNDLE_SHA256 = "d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f"
 
@@ -81,6 +83,24 @@ class OrbitOfflineVerificationRecoveryReviewTests(unittest.TestCase):
         self.assertIsNone(blank["responses"][0]["decision"])
         self.assertEqual(readiness["review"]["human_decision_count"], 0)
         self.assertFalse(readiness["assertions"]["recovery_authorized"])
+
+    def test_public_ci_releases_only_the_blank_owner_review(self) -> None:
+        gate = load(PUBLICATION_GATE_REF)
+        reconciliation = load(PUBLICATION_RECONCILIATION_REF)
+        milestone = load("contracts/milestone-002.json")
+        units = {unit["id"]: unit for unit in milestone["units"]}
+        publication = units["M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION"]
+        review = units["M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW"]
+        self.assertEqual(gate["github_actions"]["head_sha"], "d4e113911061236c0ff2e7ccd8f1042814d44002")
+        self.assertEqual(gate["github_actions"]["run_id"], 34148866971)
+        self.assertEqual(gate["github_actions"]["conclusion"], "success")
+        self.assertEqual(reconciliation["assertions"]["human_decision_count"], 0)
+        self.assertFalse(reconciliation["assertions"]["attestation"])
+        self.assertFalse(reconciliation["assertions"]["recovery_authorized"])
+        self.assertEqual((publication["status"], publication["disposition"]), ("complete", "pass"))
+        self.assertEqual(review["status"], "ready")
+        self.assertEqual(review["gates"]["human_decision_count"], 0)
+        self.assertFalse(review["gates"]["recovery_authorized"])
 
 
 if __name__ == "__main__":

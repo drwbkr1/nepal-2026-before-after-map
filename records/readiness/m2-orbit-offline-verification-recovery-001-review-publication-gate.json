@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION-GATE",
+  "verified_at_utc": "2026-09-07T17:47:17Z",
+  "status": "pass_exact_blank_recovery_packet_public_ci_owner_review_ready",
+  "bindings": {
+    "terminal_reconciliation_sha256": "4186ba4f6150f8c1466ab67aa9b22af5222bfadff1e8dcdcd0b619de80449a55",
+    "proposal_sha256": "0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
+    "review_preflight_sha256": "8665671d5b8be80ce40fa6c3fb5f708e0f207b7361ce1eb792fe2d20cb447a3b",
+    "review_instructions_sha256": "9721881760a091bc31c4a9d471e3f1f4586af8c8efd79e427411d5f56dc2e282",
+    "rendered_surface_sha256": "a5b81dc149aaecebc414d2ba8b3e5e1a85ebfb0874ab167a515d7c5edd7ce5d3",
+    "surface_receipt_sha256": "18d4f5413332bd8792d14358683d52ec7c4ffb2c2ae75236ef73c90e86e1e888",
+    "review_bundle_sha256": "d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f",
+    "review_contract_sha256": "73ae6dd33ad0c251792414594c2688652c919358d72422eacb193f759c422b49",
+    "blank_response_sha256": "e589062b6083f088b818a73627545652eec286ebb28e59fef45c8558115f8317",
+    "review_readiness_sha256": "8b5f7d0ee2ffe150fa8c0f182e2d0a94c856d7b31252bc50a303e7f3f1aa60eb"
+  },
+  "github_actions": {
+    "workflow": "Validate project controls",
+    "run_id": 34148866971,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/34148866971",
+    "head_sha": "d4e113911061236c0ff2e7ccd8f1042814d44002",
+    "conclusion": "success"
+  },
+  "assertions": {
+    "remote_ref_verified": true,
+    "public_ci_passed": true,
+    "human_decision_count": 0,
+    "recovery_authorized": false,
+    "new_eof_content_read": false,
+    "remaining_source_eof_content_read": false,
+    "network_or_credential_action_performed": false,
+    "external_custody_mutated": false,
+    "orbit_application_performed": false,
+    "dem_or_radar_pixel_action_performed": false,
+    "baseline_change_attribution_or_publication_performed": false
+  },
+  "next_gate": "owner decision on bundle SHA-256 d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f and proposal SHA-256 0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf"
+}

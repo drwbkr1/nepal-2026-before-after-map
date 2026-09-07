@@ -2573,7 +2573,7 @@
       ],
       "action_class": "external_publication",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json",
         "reviews/m2-orbit-offline-verification-recovery-001/review-bundle.json",
@@ -2586,21 +2586,26 @@
         "records/readiness/m2-orbit-offline-verification-recovery-001-review-publication-reconciliation.json"
       ],
       "gates": {
-        "public_ci": "pending",
+        "public_ci": "pass",
         "proposal_sha256": "0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf",
         "review_bundle_sha256": "d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f",
         "human_decision_count": 0,
-        "recovery_authorized": false
+        "recovery_authorized": false,
+        "publication_commit": "d4e113911061236c0ff2e7ccd8f1042814d44002",
+        "public_ci_run_id": 34148866971,
+        "publication_gate_sha256": "9a2811f96dd191d8b11fa9cbbf78d3769e1a389fd646a5ebd83fc2f134a2f931"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/readiness/m2-orbit-offline-verification-001-terminal-reconciliation.json"
       ],
       "exit_condition_delta": {
         "expected": [],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "The exact blank review packet must pass public default-branch CI before owner handoff."
+        "observed": [
+          "exact blank recovery packet passed public default-branch CI"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "Public validation passed without creating a human decision or recovery authority."
       },
       "next_dependency": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW"
     },
@@ -2612,7 +2617,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "blocked",
+      "status": "ready",
       "inputs": [
         "contracts/milestone-002-orbit-offline-verification-recovery-001-proposal.json",
         "reviews/m2-orbit-offline-verification-recovery-001/review-bundle.json",
@@ -2629,7 +2634,7 @@
         "review_bundle_sha256": "d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f",
         "review_contract_sha256": "73ae6dd33ad0c251792414594c2688652c919358d72422eacb193f759c422b49",
         "blank_response_sha256": "e589062b6083f088b818a73627545652eec286ebb28e59fef45c8558115f8317",
-        "public_ci": "pending",
+        "public_ci": "pass",
         "source_ids_in_exact_order": [
           "M2-ORB-001",
           "M2-ORB-002",
@@ -2642,7 +2647,8 @@
         "maximum_endpoint_tolerance_seconds_if_approved": 1.0,
         "human_decision_count": 0,
         "attestation": false,
-        "recovery_authorized": false
+        "recovery_authorized": false,
+        "publication_gate_sha256": "9a2811f96dd191d8b11fa9cbbf78d3769e1a389fd646a5ebd83fc2f134a2f931"
       },
       "disposition": null,
       "retained_failures": [
@@ -2652,7 +2658,7 @@
         "expected": [],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "The packet has zero decisions and grants no recovery authority."
+        "rationale": "The exact review is public and blank; one attested owner decision is required."
       },
       "next_dependency": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION"
     }
@@ -2711,8 +2717,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW-PUBLICATION",
-    "next_action": "Publish and publicly validate the exact blank M2 orbit offline-verification recovery-001 review packet. No recovery implementation, new EOF read, remaining-source verification, network or credential action, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before one attested owner decision on the exact public packet.",
+    "current_checkpoint": "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW",
+    "next_action": "Review M2 orbit offline-verification recovery-001 bundle SHA-256 d2f0f75f40614c56bc0e62c6eecb1588f7504f50927448192673e6e403b5933f and proposal SHA-256 0be64071cfe718ca758155ff0422cfee48af342c8a560528746adc653e6a2fcf; approve, revise, or defer the exact pre-read receipt-reservation correction and one M2-ORB-001 recovery attempt before conditional fixed-order continuation. No implementation, new EOF read, network or credential action, custody mutation, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",

@@ -339,6 +339,8 @@ REQUIRED = [
     "reviews/m2-orbit-offline-verification-recovery-001/review-contract.json",
     "reviews/m2-orbit-offline-verification-recovery-001/blank-response.json",
     "records/readiness/m2-orbit-offline-verification-recovery-001-review-readiness.json",
+    "records/readiness/m2-orbit-offline-verification-recovery-001-review-publication-gate.json",
+    "records/readiness/m2-orbit-offline-verification-recovery-001-review-publication-reconciliation.json",
     "tests/test_m2_orbit_offline_verification_recovery_001_review.py",
     "tests/test_m2_orbit_osv_precision_amendment_001.py",
     "scripts/activate_m2_orbit_recovery_002_approval.py",
@@ -954,6 +956,8 @@ def main() -> None:
     orbit_offline_verification_recovery_contract = json.loads((ROOT / "reviews/m2-orbit-offline-verification-recovery-001/review-contract.json").read_text(encoding="utf-8"))
     orbit_offline_verification_recovery_blank = json.loads((ROOT / "reviews/m2-orbit-offline-verification-recovery-001/blank-response.json").read_text(encoding="utf-8"))
     orbit_offline_verification_recovery_readiness = json.loads((ROOT / "records/readiness/m2-orbit-offline-verification-recovery-001-review-readiness.json").read_text(encoding="utf-8"))
+    orbit_offline_verification_recovery_publication_gate = json.loads((ROOT / "records/readiness/m2-orbit-offline-verification-recovery-001-review-publication-gate.json").read_text(encoding="utf-8"))
+    orbit_offline_verification_recovery_publication_reconciliation = json.loads((ROOT / "records/readiness/m2-orbit-offline-verification-recovery-001-review-publication-reconciliation.json").read_text(encoding="utf-8"))
     contract = json.loads((ROOT / "contracts/milestone-001.json").read_text(encoding="utf-8"))
     m2_proposal = json.loads((ROOT / "contracts/milestone-002-proposal.json").read_text(encoding="utf-8"))
     active_m2 = json.loads((ROOT / "contracts/milestone-002.json").read_text(encoding="utf-8"))
@@ -1371,10 +1375,28 @@ def main() -> None:
         != "pass_ready_owner_review_zero_decisions_public_ci_pending"
         or orbit_offline_verification_recovery_readiness.get("review", {}).get("human_decision_count") != 0
         or orbit_offline_verification_recovery_readiness.get("assertions", {}).get("recovery_authorized") is not False
-        or recovery_publication_unit.get("status") != "in_progress"
-        or recovery_publication_unit.get("gates", {}).get("public_ci") != "pending"
-        or recovery_review_unit.get("status") != "blocked"
+        or orbit_offline_verification_recovery_publication_gate.get("status")
+        != "pass_exact_blank_recovery_packet_public_ci_owner_review_ready"
+        or orbit_offline_verification_recovery_publication_gate.get("github_actions", {}).get("head_sha")
+        != "d4e113911061236c0ff2e7ccd8f1042814d44002"
+        or orbit_offline_verification_recovery_publication_gate.get("github_actions", {}).get("run_id")
+        != 34148866971
+        or orbit_offline_verification_recovery_publication_gate.get("assertions", {}).get("human_decision_count") != 0
+        or orbit_offline_verification_recovery_publication_gate.get("assertions", {}).get("recovery_authorized") is not False
+        or orbit_offline_verification_recovery_publication_reconciliation.get("status")
+        != "pass_exact_public_packet_owner_review_ready_zero_decisions"
+        or orbit_offline_verification_recovery_publication_reconciliation.get("assertions", {}).get("human_decision_count") != 0
+        or orbit_offline_verification_recovery_publication_reconciliation.get("assertions", {}).get("attestation") is not False
+        or orbit_offline_verification_recovery_publication_reconciliation.get("assertions", {}).get("recovery_authorized") is not False
+        or recovery_publication_unit.get("status") != "complete"
+        or recovery_publication_unit.get("disposition") != "pass"
+        or recovery_publication_unit.get("gates", {}).get("public_ci") != "pass"
+        or recovery_publication_unit.get("gates", {}).get("human_decision_count") != 0
+        or recovery_publication_unit.get("gates", {}).get("recovery_authorized") is not False
+        or recovery_review_unit.get("status") != "ready"
         or recovery_review_unit.get("human_gate") is not True
+        or recovery_review_unit.get("gates", {}).get("human_decision_count") != 0
+        or recovery_review_unit.get("gates", {}).get("attestation") is not False
         or recovery_review_unit.get("gates", {}).get("recovery_authorized") is not False
         or (ROOT / "records/acquisition/orbit-verification").exists()
     ):
