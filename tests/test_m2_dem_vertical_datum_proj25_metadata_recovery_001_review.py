@@ -41,6 +41,8 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         cls.review_reconciliation = load("records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-reconciliation.json")
         cls.approval = load("records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json")
         cls.activation = load("records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval-activation.json")
+        cls.implementation_publication = load("records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-implementation-publication-gate.json")
+        cls.implementation_publication_reconciliation = load("records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-implementation-publication-reconciliation.json")
         cls.milestone = load("contracts/milestone-002.json")
         cls.profile = load("records/project-control-profile.json")
         cls.goal = load("records/long-term-goal.json")
@@ -138,6 +140,15 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         self.assertTrue(review["gates"]["correction_authorized"])
         self.assertEqual(implementation["status"], "in_progress")
         self.assertEqual(implementation["gates"]["network_requests"], 0)
+        self.assertEqual(implementation["gates"]["public_ci"], "success")
+        self.assertEqual(implementation["gates"]["final_no_content_preflight"], "ready_not_run")
+        self.assertEqual(self.implementation_publication["implementation_commit"], "b37f9da8753a1e6e192f909b76a8097224d49021")
+        self.assertEqual(self.implementation_publication["public_ci_run_id"], 35379385533)
+        self.assertFalse(self.implementation_publication["assertions"]["preserved_grid_bytes_read"])
+        self.assertEqual(
+            self.implementation_publication_reconciliation["status"],
+            "pass_public_gate_final_no_content_preflight_ready",
+        )
         self.assertEqual(conversion["depends_on"], [implementation["id"]])
 
     def test_checkpoint_derivation_routes_to_approved_implementation(self) -> None:

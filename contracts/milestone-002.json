@@ -1314,9 +1314,11 @@
         "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-reconciliation.json"
       ],
       "outputs": [
-        "versioned amended validation contract and implementation",
-        "fresh public-CI gate",
-        "one append-only offline recovery receipt"
+        "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-implementation-readiness.json",
+        "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-implementation-publication-gate.json",
+        "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-implementation-publication-reconciliation.json",
+        "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-final-preflight.json",
+        "records/acquisition/m2-geoid-001-metadata-recovery-001-terminal.json"
       ],
       "gates": {
         "approval_required": true,
@@ -1326,10 +1328,15 @@
         "conditional_no_replace_promotion": true,
         "post_success_fixed_order_conversion_only": true,
         "approval_sha256": "b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541",
-        "public_ci": "pending",
-        "final_no_content_preflight": "blocked_by_public_ci",
+        "public_ci": "success",
+        "final_no_content_preflight": "ready_not_run",
         "preserved_byte_read": false,
-        "grid_promotion": false
+        "grid_promotion": false,
+        "implementation_commit": "b37f9da8753a1e6e192f909b76a8097224d49021",
+        "public_ci_run_id": 35379385533,
+        "implementation_readiness_sha256": "7836bc91e077e43337eee7399e903abd2bf54f7be7314cb7f9eeaa3f850cf9eb",
+        "publication_gate_sha256": "f1671d8bc577aafcda828f3c90f156a19d480131125f481a4d826fb6096dbe65",
+        "publication_reconciliation_sha256": "d63cab0983a6583a5a885530b47b1e5d4ee6ab4a44d8f0b6e34bcce3345c235b"
       },
       "disposition": null,
       "retained_failures": [
@@ -1339,10 +1346,11 @@
       "exit_condition_delta": {
         "expected": [],
         "observed": [
-          "exact approval locked and reconciled"
+          "exact approval locked and reconciled",
+          "implementation commit passed fresh public default-branch CI"
         ],
         "decision_value": "unknown",
-        "rationale": "Implementation is active; real preserved-byte access remains gated."
+        "rationale": "Implementation and public validation pass; the one final no-content preflight is the next gate before any preserved-byte read."
       },
       "next_dependency": "M2-DEM-VERTICAL-DATUM-CONVERSION"
     },
@@ -3308,7 +3316,7 @@
   },
   "handoff": {
     "current_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION",
-    "next_action": "Implement and validate only the approved metadata-key interpretation correction and offline recovery controls, then require fresh public default-branch CI. Do not read or promote the preserved grid bytes, inspect DEM pixels, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight.",
+    "next_action": "Run the one final no-content metadata-recovery preflight. Only on its pass may the exact preserved grid bytes be read once for offline verification and conditionally promoted without replacement; conversion remains gated on that pass and the unchanged local operation and sign preflight.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3346,9 +3354,11 @@
       "Purdue cannot supply the approved Esri Coordinate Systems Data component and a fresh read-only inspection still finds no EGM2008 grid; the historical approval remains preserved but its implementation path is closed.",
       "The GeographicLib one-minute metadata probe followed a download redirect and produced an 11,321,072-byte quarantined terminal partial. It is unusable, unselected, and cannot be resumed, reused, or retried under current authority.",
       "The official PROJ-data 2.5-minute route is a zero-decision proposal. No recommended-grid payload, conversion, orbit application, radar pixel, baseline, change, attribution, or scientific action is authorized before exact owner approval.",
-      "The one authorized PROJ-grid request is terminal after exact bytes passed identity and structural checks but failed the first implementation's generic metadata-key requirement. The exact staged bytes remain unpromoted outside Git; no retry, preserved-byte recovery read, DEM pixel access, conversion, or downstream action is authorized before a separate exact owner decision."
+      "The one authorized PROJ-grid request is terminal after exact bytes passed identity and structural checks but failed the first implementation's generic metadata-key requirement. The exact staged bytes remain unpromoted outside Git; no retry, preserved-byte recovery read, DEM pixel access, conversion, or downstream action is authorized before a separate exact owner decision.",
+      "The metadata-recovery implementation passed fresh public default-branch CI; this releases only the final no-content preflight and no preserved-byte read by itself.",
+      "Offline recovery remains one attempt with zero network requests; grid promotion is conditional on exact byte, metadata, and ArcGIS-readability pass, and conversion remains conditional on the unchanged local operation and sign preflight."
     ],
     "parallel_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION",
-    "parallel_next_action": "Implement and validate only the approved metadata-key interpretation correction and offline recovery controls, then require fresh public default-branch CI. Do not read or promote the preserved grid bytes, inspect DEM pixels, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight."
+    "parallel_next_action": "Run the one final no-content metadata-recovery preflight. Only on its pass may the exact preserved grid bytes be read once for offline verification and conditionally promoted without replacement; conversion remains gated on that pass and the unchanged local operation and sign preflight."
   }
 }

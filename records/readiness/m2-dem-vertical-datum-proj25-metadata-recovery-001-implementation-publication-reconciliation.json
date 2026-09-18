@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION-PUBLICATION-RECONCILIATION",
+  "verified_at_utc": "2026-09-18T18:18:32Z",
+  "status": "pass_public_gate_final_no_content_preflight_ready",
+  "implementation_commit": "b37f9da8753a1e6e192f909b76a8097224d49021",
+  "public_ci_run_id": 35379385533,
+  "publication_gate_sha256": "f1671d8bc577aafcda828f3c90f156a19d480131125f481a4d826fb6096dbe65",
+  "current_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION",
+  "released_now": {
+    "final_no_content_preflight": true,
+    "preserved_byte_read": false,
+    "grid_promotion": false,
+    "dem_conversion": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "preserved_grid_bytes_read": false,
+    "external_data_mutated": false,
+    "scientific_result_established": false
+  }
+}

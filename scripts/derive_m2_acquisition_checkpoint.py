@@ -160,7 +160,7 @@ DEM_PROJ25_METADATA_RECOVERY_001_REVIEW_CHECKPOINT = {
 }
 DEM_PROJ25_METADATA_RECOVERY_001_IMPLEMENTATION_CHECKPOINT = {
     "checkpoint_id": "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION",
-    "next_action": "Implement and validate only the approved metadata-key interpretation correction and offline recovery controls, then require fresh public default-branch CI. Do not read or promote the preserved grid bytes, inspect DEM pixels, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight.",
+    "next_action": "Run the one final no-content metadata-recovery preflight. Only on its pass may the exact preserved grid bytes be read once for offline verification and conditionally promoted without replacement; conversion remains gated on that pass and the unchanged local operation and sign preflight.",
 }
 
 
@@ -1209,6 +1209,8 @@ def current_dem_proj25_metadata_recovery_001_implementation_active(
         milestone = load(root / "contracts/milestone-002.json")
         approval = load(root / "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json")
         activation = load(root / "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval-activation.json")
+        publication = load(root / "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-implementation-publication-gate.json")
+        publication_reconciliation = load(root / "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-implementation-publication-reconciliation.json")
     except (OSError, ValueError, json.JSONDecodeError):
         return False
     units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
@@ -1222,8 +1224,11 @@ def current_dem_proj25_metadata_recovery_001_implementation_active(
         and review.get("disposition") == "pass"
         and review.get("gates", {}).get("correction_authorized") is True
         and implementation.get("status") == "in_progress"
-        and implementation.get("gates", {}).get("public_ci") == "pending"
-        and not (root / "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-implementation-publication-gate.json").exists()
+        and implementation.get("gates", {}).get("public_ci") == "success"
+        and implementation.get("gates", {}).get("final_no_content_preflight") == "ready_not_run"
+        and publication.get("status") == "pass_public_default_branch_ci_offline_recovery_released"
+        and publication.get("public_ci_conclusion") == "success"
+        and publication_reconciliation.get("status") == "pass_public_gate_final_no_content_preflight_ready"
         and not (root / "records/acquisition/m2-geoid-001-metadata-recovery-001-terminal.json").exists()
     )
 
