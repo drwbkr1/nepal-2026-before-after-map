@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-dem-vertical-datum-alternate-method-001-review",
+  "contract_sha256": "306eb3fa56ba0feb58818947b5f2dcac7cc8c9ac9ebcade47adb3bc08132e8e1",
+  "response_sha256": "7244844792ae5ec619e0aacbfec905b178745cfd1dd878b8e0642d77f59ac9a9",
+  "receipt_sha256": "c544589c8fac7e56619a207f55a638099ad553586090f3e2cde6828387b80cb2",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

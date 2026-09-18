@@ -128,9 +128,10 @@ class M2DemVerticalDatumReviewTests(unittest.TestCase):
         ):
             self.assertFalse(self.approval["claim_boundary"][field])
 
-    def test_historical_control_is_preserved_and_current_state_stops_at_alternate_review(self) -> None:
+    def test_historical_control_is_preserved_and_current_state_is_bounded_implementation(self) -> None:
         historical_checkpoint = "M2-DEM-EGM2008-COMPONENT-INSTALL"
-        current_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+        review_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+        current_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
         self.assertEqual(self.control["status"], "pass_method_selected_owner_component_install_pending")
         self.assertEqual(self.control["bindings"]["approval_sha256"], sha256("records/source-gates/m2-dem-vertical-datum-approval.json"))
         self.assertEqual(self.control["decision"]["current_checkpoint"], historical_checkpoint)
@@ -146,10 +147,12 @@ class M2DemVerticalDatumReviewTests(unittest.TestCase):
         self.assertEqual(units["M2-DEM-VERTICAL-DATUM-REVIEW"]["status"], "complete")
         self.assertEqual(units[historical_checkpoint]["status"], "complete")
         self.assertEqual(units[historical_checkpoint]["disposition"], "block")
-        self.assertEqual(units[current_checkpoint]["status"], "planned")
+        self.assertEqual(units[review_checkpoint]["status"], "complete")
+        self.assertEqual(units[current_checkpoint]["status"], "in_progress")
         self.assertEqual(units["M2-DEM-VERTICAL-DATUM-CONVERSION"]["status"], "planned")
         self.assertFalse(units[historical_checkpoint]["gates"]["codex_download_or_install_authorized"])
-        self.assertFalse(units[current_checkpoint]["gates"]["alternate_method_authorized"])
+        self.assertTrue(units[review_checkpoint]["gates"]["alternate_method_authorized"])
+        self.assertFalse(units[current_checkpoint]["gates"]["grid_request_before_public_ci"])
 
 
 if __name__ == "__main__":

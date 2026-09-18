@@ -257,6 +257,20 @@
         "owner_installation_required": true,
         "installation_authorized_for_codex": false,
         "vertical_datum_resolved_for_radar": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
+        "approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c",
+        "proposal_ref": "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json",
+        "proposal_sha256": "dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7",
+        "review_bundle_sha256": "caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702",
+        "review_reconciliation_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-review-reconciliation.json",
+        "review_reconciliation_sha256": "f6a94359ffc1ae725c1c3c90867e3160154ea909b0fe9af65fa5127b50a048a5",
+        "selected_method": "local_proj_egm2008_2_5_preconversion_then_none",
+        "maximum_grid_requests": 1,
+        "maximum_conversion_attempts_per_dem": 1,
+        "automatic_retry_authorized": false,
+        "proj_network_enabled": false
       }
     ]
   },
@@ -331,7 +345,8 @@
       "records/source-gates/m2-orbit-osv-precision-amendment-001-approval.json",
       "records/source-gates/m2-orbit-continuation-001-approval.json",
       "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
-      "records/source-gates/m2-dem-vertical-datum-approval.json"
+      "records/source-gates/m2-dem-vertical-datum-approval.json",
+      "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json"
     ]
   },
   "entry_conditions": [
@@ -1073,7 +1088,7 @@
       ],
       "action_class": "normative_decision",
       "human_gate": true,
-      "status": "planned",
+      "status": "complete",
       "inputs": [
         "records/readiness/m2-dem-egm2008-component-access-closure-001.json",
         "records/source-gates/m2-dem-vertical-datum-alternate-method-001-source-review.json",
@@ -1084,32 +1099,109 @@
         "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-readiness.json"
       ],
       "outputs": [
-        "locked completed response",
         "records/source-gates/m2-dem-vertical-datum-alternate-method-001-review-reconciliation.json",
-        "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json"
+        "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
+        "records/readiness/m2-dem-vertical-datum-alternate-method-001-approval-activation.json"
       ],
       "gates": {
         "proposal_sha256": "dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7",
         "review_bundle_sha256": "caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702",
         "review_contract_sha256": "306eb3fa56ba0feb58818947b5f2dcac7cc8c9ac9ebcade47adb3bc08132e8e1",
         "blank_response_sha256": "14ef1d28b646b90b0979f1b6e49887b3015cdbe7da1e2f5414f2817c4af2b304",
-        "human_decision_count": 0,
-        "attestation": false,
-        "alternate_method_authorized": false,
+        "human_decision_count": 1,
+        "attestation": true,
+        "alternate_method_authorized": true,
         "grid_acquisition_authorized": false,
-        "dem_conversion_authorized": false
+        "dem_conversion_authorized": false,
+        "approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c",
+        "review_reconciliation_sha256": "f6a94359ffc1ae725c1c3c90867e3160154ea909b0fe9af65fa5127b50a048a5"
+      },
+      "disposition": "pass",
+      "retained_failures": [
+        "records/readiness/m2-dem-egm2008-component-access-closure-001.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [
+          "one exact attested approval"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "Only bounded implementation, synthetic validation, and public CI are released now."
+      },
+      "next_dependency": "M2-DEM-VERTICAL-DATUM-CONVERSION"
+    },
+    {
+      "id": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION",
+      "purpose": "Implement and publicly validate the approved exact PROJ-grid intake and local no-network DEM conversion route.",
+      "depends_on": [
+        "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+      ],
+      "action_class": "reversible_remediation",
+      "human_gate": false,
+      "status": "in_progress",
+      "inputs": [
+        "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
+        "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json"
+      ],
+      "outputs": [
+        "versioned implementation",
+        "synthetic test receipts",
+        "implementation readiness",
+        "public-CI gate"
+      ],
+      "gates": {
+        "approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c",
+        "public_ci": "pending",
+        "grid_request_before_public_ci": false,
+        "dem_pixel_read_before_public_ci": false,
+        "proj_network_enabled": false
       },
       "disposition": null,
       "retained_failures": [
         "records/readiness/m2-dem-egm2008-component-access-closure-001.json"
       ],
       "exit_condition_delta": {
-        "expected": [
-          "one_exact_owner_decision"
+        "expected": [],
+        "observed": [
+          "exact approval locked and reconciled"
         ],
+        "decision_value": "unknown",
+        "rationale": "Implementation is active; real data remains gated."
+      },
+      "next_dependency": "M2-DEM-EGM2008-PROJ25-ACQUISITION"
+    },
+    {
+      "id": "M2-DEM-EGM2008-PROJ25-ACQUISITION",
+      "purpose": "After public CI and final no-payload preflight, acquire and verify the one exact approved grid without replacement.",
+      "depends_on": [
+        "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
+      ],
+      "action_class": "data_acquisition",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json"
+      ],
+      "outputs": [
+        "verified non-Git us_nga_egm08_25.tif",
+        "append-only receipts"
+      ],
+      "gates": {
+        "public_ci": "pending",
+        "final_no_payload_preflight": "blocked_by_public_ci",
+        "maximum_requests": 1,
+        "automatic_retry": false,
+        "resume": false,
+        "expected_length_bytes": 80585622,
+        "expected_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a"
+      },
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [],
         "observed": [],
-        "decision_value": "defer",
-        "rationale": "The official PROJ-data source is exact and review-ready, but its 2.5-minute spacing and GDAL/PROJ implementation differ materially from the approved Esri one-minute route."
+        "decision_value": "unknown",
+        "rationale": "No real request is permitted before public CI and final preflight."
       },
       "next_dependency": "M2-DEM-VERTICAL-DATUM-CONVERSION"
     },
@@ -1117,7 +1209,7 @@
       "id": "M2-DEM-VERTICAL-DATUM-CONVERSION",
       "purpose": "After a current exact vertical method is approved and its grid and direction pass verification, create and verify no-overwrite WGS 84 ellipsoidal copies of the four approved DEM tiles.",
       "depends_on": [
-        "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+        "M2-DEM-EGM2008-PROJ25-ACQUISITION"
       ],
       "action_class": "data_processing",
       "human_gate": false,
@@ -1132,15 +1224,16 @@
         "per-tile conversion and validation receipts"
       ],
       "gates": {
-        "selected_method": "pending_alternate_owner_decision",
+        "selected_method": "local_proj_egm2008_2_5_preconversion_then_none",
         "source_vertical_crs": "EPSG:3855",
         "required_transformation_wkid": null,
-        "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal",
+        "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal-proj25",
         "source_overwrite_permitted": false,
         "radar_geoid_none_permitted_only_after_verified_conversion": true,
         "prior_selected_method": "arcgis_egm2008_1x1_preconversion_then_none",
         "alternate_proposed_method": "local_proj_egm2008_2_5_preconversion_then_none",
-        "required_grid_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a"
+        "required_grid_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+        "approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c"
       },
       "disposition": null,
       "retained_failures": [],
@@ -3073,8 +3166,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW",
-    "next_action": "Review exact alternate-method bundle SHA-256 caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702 and proposal SHA-256 dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7; do not acquire the recommended PROJ grid, reuse the quarantined GeographicLib partial, convert a DEM, apply orbit data, read radar pixels, run a baseline or change analysis, or publish a scientific claim before one exact attested owner decision is locked and reconciled.",
+    "current_checkpoint": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION",
+    "next_action": "Implement and synthetically validate only the approved exact-grid acquisition, verification, no-network vertical conversion, and ArcGIS-readability controls, then require fresh public default-branch CI. Do not request the grid or read a DEM pixel before that public gate and the final no-payload preflight pass.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3113,7 +3206,7 @@
       "The GeographicLib one-minute metadata probe followed a download redirect and produced an 11,321,072-byte quarantined terminal partial. It is unusable, unselected, and cannot be resumed, reused, or retried under current authority.",
       "The official PROJ-data 2.5-minute route is a zero-decision proposal. No recommended-grid payload, conversion, orbit application, radar pixel, baseline, change, attribution, or scientific action is authorized before exact owner approval."
     ],
-    "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW",
-    "parallel_next_action": "Review exact alternate-method bundle SHA-256 caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702 and proposal SHA-256 dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7; do not acquire the recommended PROJ grid, reuse the quarantined GeographicLib partial, convert a DEM, apply orbit data, read radar pixels, run a baseline or change analysis, or publish a scientific claim before one exact attested owner decision is locked and reconciled."
+    "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION",
+    "parallel_next_action": "Implement and synthetically validate only the approved exact-grid acquisition, verification, no-network vertical conversion, and ArcGIS-readability controls, then require fresh public default-branch CI. Do not request the grid or read a DEM pixel before that public gate and the final no-payload preflight pass."
   }
 }

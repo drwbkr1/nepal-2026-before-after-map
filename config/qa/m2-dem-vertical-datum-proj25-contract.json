@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-001",
+  "status": "approved_implementation_public_ci_pending",
+  "approval_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
+  "approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c",
+  "grid": {
+    "source_id": "M2-GEOID-001",
+    "url": "https://cdn.proj.org/us_nga_egm08_25.tif",
+    "name": "us_nga_egm08_25.tif",
+    "expected_size_bytes": 80585622,
+    "expected_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+    "staging_relative_path": ".intake-staging/nepal-m2-dem-vertical-datum-proj25-001/m2-geoid-001/us_nga_egm08_25.tif.part",
+    "destination_relative_path": "custody/geoid/proj/us_nga_egm08_25.tif",
+    "maximum_requests": 1,
+    "resume": false,
+    "automatic_retry": false
+  },
+  "vertical_operation": {
+    "source_crs": "EPSG:9518",
+    "target_crs": "EPSG:4979",
+    "height_relation": "h = H + N",
+    "pipeline_template": "+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +inv +proj=vgridshift +grids={grid_path} +multiplier=1 +step +proj=unitconvert +xy_in=rad +xy_out=deg",
+    "maximum_direction_check_residual_m": 0.001,
+    "proj_network_enabled": false
+  },
+  "dem_sources_in_exact_order": [
+    {
+      "source_id": "M2-DEM-001",
+      "source_relative_path": "custody/dem/copernicus-glo30/Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+      "source_sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a",
+      "output_relative_path": "derived/dem/egm2008-ellipsoidal-proj25/Copernicus_DSM_COG_10_N27_00_E084_00_DEM_WGS84_ELLIPSOIDAL.tif"
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "source_relative_path": "custody/dem/copernicus-glo30/Copernicus_DSM_COG_10_N27_00_E085_00_DEM.tif",
+      "source_sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194",
+      "output_relative_path": "derived/dem/egm2008-ellipsoidal-proj25/Copernicus_DSM_COG_10_N27_00_E085_00_DEM_WGS84_ELLIPSOIDAL.tif"
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "source_relative_path": "custody/dem/copernicus-glo30/Copernicus_DSM_COG_10_N28_00_E084_00_DEM.tif",
+      "source_sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc",
+      "output_relative_path": "derived/dem/egm2008-ellipsoidal-proj25/Copernicus_DSM_COG_10_N28_00_E084_00_DEM_WGS84_ELLIPSOIDAL.tif"
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "source_relative_path": "custody/dem/copernicus-glo30/Copernicus_DSM_COG_10_N28_00_E085_00_DEM.tif",
+      "source_sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7",
+      "output_relative_path": "derived/dem/egm2008-ellipsoidal-proj25/Copernicus_DSM_COG_10_N28_00_E085_00_DEM_WGS84_ELLIPSOIDAL.tif"
+    }
+  ],
+  "conversion": {
+    "maximum_attempts_per_dem": 1,
+    "stop_on_first_failure": true,
+    "source_overwrite_permitted": false,
+    "same_dimensions_and_geotransform_required": true,
+    "all_approved_aoi_pixels_finite_required": true,
+    "arcgis_pro_readability_required": true,
+    "maximum_published_bilinear_model_error_m": 0.135,
+    "output_format": "GTiff",
+    "output_data_type": "Float32",
+    "output_creation_options": ["TILED=YES", "COMPRESS=DEFLATE", "PREDICTOR=3", "BIGTIFF=IF_SAFER"]
+  }
+}

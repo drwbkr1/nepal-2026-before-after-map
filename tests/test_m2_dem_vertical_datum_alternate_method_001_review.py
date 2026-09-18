@@ -107,24 +107,32 @@ class DemVerticalDatumAlternateMethod001ReviewTests(unittest.TestCase):
         for key in ("alternate_method_authorized", "grid_acquisition_authorized", "dem_conversion_authorized", "radar_processing_authorized", "scientific_result_established"):
             self.assertFalse(self.readiness["assertions"][key])
 
-    def test_current_controls_stop_at_exact_owner_review(self) -> None:
+    def test_current_controls_preserve_review_and_activate_bounded_implementation(self) -> None:
         units = {unit["id"]: unit for unit in self.milestone["units"]}
         install = units["M2-DEM-EGM2008-COMPONENT-INSTALL"]
         review = units[CHECKPOINT]
+        implementation_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
+        implementation = units[implementation_checkpoint]
+        acquisition = units["M2-DEM-EGM2008-PROJ25-ACQUISITION"]
         conversion = units["M2-DEM-VERTICAL-DATUM-CONVERSION"]
         self.assertEqual(install["status"], "complete")
         self.assertEqual(install["disposition"], "block")
         self.assertEqual(install["next_dependency"], CHECKPOINT)
-        self.assertEqual(review["status"], "planned")
+        self.assertEqual(review["status"], "complete")
+        self.assertEqual(review["disposition"], "pass")
         self.assertTrue(review["human_gate"])
-        self.assertEqual(review["gates"]["human_decision_count"], 0)
-        self.assertFalse(review["gates"]["alternate_method_authorized"])
-        self.assertEqual(conversion["depends_on"], [CHECKPOINT])
-        self.assertEqual(self.milestone["handoff"]["current_checkpoint"], CHECKPOINT)
-        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], CHECKPOINT)
-        self.assertEqual(self.goal["current_checkpoint"], CHECKPOINT)
-        self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], [PROPOSAL_REF])
-        self.assertEqual(self.goal["proposed_amendments"], [PROPOSAL_REF])
+        self.assertEqual(review["gates"]["human_decision_count"], 1)
+        self.assertTrue(review["gates"]["attestation"])
+        self.assertTrue(review["gates"]["alternate_method_authorized"])
+        self.assertEqual(implementation["status"], "in_progress")
+        self.assertEqual(acquisition["status"], "planned")
+        self.assertEqual(conversion["depends_on"], ["M2-DEM-EGM2008-PROJ25-ACQUISITION"])
+        self.assertEqual(self.milestone["handoff"]["current_checkpoint"], implementation_checkpoint)
+        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], implementation_checkpoint)
+        self.assertEqual(self.goal["current_checkpoint"], implementation_checkpoint)
+        self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], [])
+        self.assertEqual(self.goal["proposed_amendments"], [])
+        self.assertIn("records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json", self.goal["active_amendments"])
 
     def test_local_validation_preserves_initial_failure_and_corrected_pass(self) -> None:
         attempts = self.local_validation["attempts"]

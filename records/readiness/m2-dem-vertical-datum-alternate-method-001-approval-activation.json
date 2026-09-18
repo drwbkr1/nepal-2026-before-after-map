@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-APPROVAL-ACTIVATION",
+  "activated_at_utc": "2026-09-18T02:09:54Z",
+  "status": "pass_exact_approval_activated_implementation_publication_only",
+  "bindings": {
+    "approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c",
+    "reconciliation_sha256": "f6a94359ffc1ae725c1c3c90867e3160154ea909b0fe9af65fa5127b50a048a5",
+    "proposal_sha256": "dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7",
+    "review_bundle_sha256": "caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702"
+  },
+  "released_now": {
+    "bounded_implementation": true,
+    "synthetic_tests": true,
+    "public_ci": true,
+    "final_no_payload_preflight": false,
+    "grid_request": false,
+    "dem_pixel_read": false,
+    "dem_conversion": false,
+    "orbit_or_radar_action": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "grid_payload_bytes_read": 0,
+    "dem_pixels_read": false,
+    "external_data_mutated": false
+  }
+}

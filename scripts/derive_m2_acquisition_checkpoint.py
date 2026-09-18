@@ -142,6 +142,10 @@ DEM_VERTICAL_DATUM_ALTERNATE_METHOD_001_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW",
     "next_action": "Review exact alternate-method bundle SHA-256 caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702 and proposal SHA-256 dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7; do not acquire the recommended PROJ grid, reuse the quarantined GeographicLib partial, convert a DEM, apply orbit data, read radar pixels, run a baseline or change analysis, or publish a scientific claim before one exact attested owner decision is locked and reconciled.",
 }
+DEM_VERTICAL_DATUM_ALTERNATE_METHOD_001_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION",
+    "next_action": "Implement and synthetically validate only the approved exact-grid acquisition, verification, no-network vertical conversion, and ArcGIS-readability controls, then require fresh public default-branch CI. Do not request the grid or read a DEM pixel before that public gate and the final no-payload preflight pass.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1080,6 +1084,41 @@ def current_dem_vertical_datum_alternate_method_001_review_pending(
     )
 
 
+def current_dem_vertical_datum_alternate_method_001_implementation_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the approved implementation-only state before the public gate."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        approval = load(root / "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json")
+        activation = load(root / "records/readiness/m2-dem-vertical-datum-alternate-method-001-approval-activation.json")
+        readiness = load(root / "records/readiness/m2-dem-vertical-datum-proj25-implementation-readiness.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW", {})
+    implementation = units.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION", {})
+    acquisition = units.get("M2-DEM-EGM2008-PROJ25-ACQUISITION", {})
+    conversion = units.get("M2-DEM-VERTICAL-DATUM-CONVERSION", {})
+    return bool(
+        approval.get("status") == "approved_exact_proj_egm2008_2_5_bounded_route"
+        and activation.get("status") == "pass_exact_approval_activated_implementation_publication_only"
+        and readiness.get("status") == "pass_implementation_synthetic_validation_public_ci_pending"
+        and review.get("status") == "complete"
+        and review.get("disposition") == "pass"
+        and review.get("gates", {}).get("human_decision_count") == 1
+        and review.get("gates", {}).get("attestation") is True
+        and review.get("gates", {}).get("alternate_method_authorized") is True
+        and implementation.get("status") == "in_progress"
+        and implementation.get("gates", {}).get("public_ci") == "pending"
+        and acquisition.get("status") == "planned"
+        and conversion.get("status") == "planned"
+        and conversion.get("depends_on") == ["M2-DEM-EGM2008-PROJ25-ACQUISITION"]
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -1128,7 +1167,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_dem_vertical_datum_alternate_method_001_review_pending(
+            if current_dem_vertical_datum_alternate_method_001_implementation_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(DEM_VERTICAL_DATUM_ALTERNATE_METHOD_001_IMPLEMENTATION_CHECKPOINT)
+            elif current_dem_vertical_datum_alternate_method_001_review_pending(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(DEM_VERTICAL_DATUM_ALTERNATE_METHOD_001_REVIEW_CHECKPOINT)
