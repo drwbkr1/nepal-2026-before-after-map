@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION-PUBLICATION-RECONCILIATION",
+  "verified_at_utc": "2026-09-18T19:20:56Z",
+  "status": "pass_public_gate_final_no_content_preflight_ready",
+  "implementation_commit": "8a05517eb5f320921777370024611cf209014672",
+  "public_ci_run_id": 35385405933,
+  "publication_gate_sha256": "9b52f89eb393364aee605ab998bb57ce2f4f9210b0e1221247e99705ba11d6ef",
+  "current_checkpoint": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION",
+  "released_now": {
+    "final_no_content_preflight": true,
+    "promoted_grid_inspection": false,
+    "new_grid_promotion": false,
+    "operation_sign_preflight": false,
+    "dem_conversion": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "promoted_grid_bytes_read": false,
+    "external_data_mutated": false,
+    "scientific_result_established": false
+  }
+}

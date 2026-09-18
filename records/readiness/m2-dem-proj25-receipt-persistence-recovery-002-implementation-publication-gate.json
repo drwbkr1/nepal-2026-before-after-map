@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION-PUBLICATION-GATE",
+  "verified_at_utc": "2026-09-18T19:20:56Z",
+  "status": "pass_public_default_branch_ci_receipt_recovery_released",
+  "implementation_commit": "8a05517eb5f320921777370024611cf209014672",
+  "public_ci_run_id": 35385405933,
+  "public_ci_conclusion": "success",
+  "public_ci_event": "push",
+  "public_ci_workflow": "Validate project controls",
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35385405933",
+  "repository_required_file_count": 948,
+  "public_test_count": 545,
+  "public_intentional_skip_count": 13,
+  "bindings": {
+    "approval_sha256": "862a4e979b1cebaa9d06cc9b350cba91dfec859b081ae89020627a076a34425d",
+    "activation_sha256": "281d6d73447194c3fe03bf6dc153c595975ac878aa165d09e8bcf96ae5ffe8d7",
+    "implementation_readiness_sha256": "5cbca9f31b3286acba3424a92369b47fad9be81e75988dc7b23a872c7f79764c",
+    "failed_publication_attempt_sha256": "389aa7ebbfac86da8715adb82ad1ce9d049db3ba6490385de1b7db9855e04ca0",
+    "implementation_contract_sha256": "30d1348d3e3ea1727b1115bbd47118996936dc50d30f8ca7db50910334c8dbfe"
+  },
+  "released_now": {
+    "final_no_content_preflight": true,
+    "one_pre_reserved_promoted_grid_inspection_only_after_preflight": true,
+    "new_grid_promotion": false,
+    "operation_and_sign_preflight_only_after_recovery_pass": true,
+    "fixed_order_conversion_only_after_all_prior_gates": true
+  },
+  "assertions": {
+    "final_no_content_preflight_performed": false,
+    "network_requests_performed": false,
+    "promoted_grid_bytes_read": false,
+    "new_grid_promotion_performed": false,
+    "dem_pixels_read": false,
+    "dem_conversion_executed": false,
+    "orbit_or_radar_action_performed": false,
+    "scientific_result_established": false
+  }
+}

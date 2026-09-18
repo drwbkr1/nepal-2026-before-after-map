@@ -1466,15 +1466,19 @@
         "post_success_conversion_attempts_per_dem": 1,
         "stop_on_first_failure": true,
         "approval_sha256": "862a4e979b1cebaa9d06cc9b350cba91dfec859b081ae89020627a076a34425d",
-        "public_ci": "pending",
-        "final_no_content_preflight": "blocked_by_public_ci",
+        "public_ci": "success",
+        "final_no_content_preflight": "ready_not_run",
         "promoted_grid_inspection": false,
         "new_grid_promotion": false,
         "implementation_readiness_sha256": "5cbca9f31b3286acba3424a92369b47fad9be81e75988dc7b23a872c7f79764c",
         "failed_public_ci_attempts": 1,
         "failed_public_ci_run_ids": [
           35384885599
-        ]
+        ],
+        "publication_commit": "8a05517eb5f320921777370024611cf209014672",
+        "public_ci_run_id": 35385405933,
+        "publication_gate_sha256": "9b52f89eb393364aee605ab998bb57ce2f4f9210b0e1221247e99705ba11d6ef",
+        "publication_reconciliation_sha256": "6867e26e726a4ecda31a1f7459006b785bf004d6a090762d69b48bafdb3eeecb"
       },
       "disposition": null,
       "retained_failures": [
@@ -1487,7 +1491,8 @@
           "exact approval locked and reconciled",
           "bounded implementation tested locally",
           "first public CI failed on Git line-ending normalization",
-          "corrected implementation readiness sealed; fresh public CI pending"
+          "corrected implementation commit passed public default-branch CI",
+          "final no-content preflight ready but not run"
         ],
         "decision_value": "unknown",
         "rationale": "Implementation is active; real promoted-grid inspection and all downstream actions remain gated."

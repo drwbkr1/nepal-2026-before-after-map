@@ -111,8 +111,8 @@ class M2DemProj25ReceiptPersistenceRecovery002ReviewTests(unittest.TestCase):
         self.assertTrue(review["gates"]["receipt_persistence_correction_authorized"])
         self.assertFalse(review["gates"]["receipt_recovery_authorized"])
         self.assertEqual(implementation["status"], "in_progress")
-        self.assertEqual(implementation["gates"]["public_ci"], "pending")
-        self.assertEqual(implementation["gates"]["final_no_content_preflight"], "blocked_by_public_ci")
+        self.assertEqual(implementation["gates"]["public_ci"], "success")
+        self.assertEqual(implementation["gates"]["final_no_content_preflight"], "ready_not_run")
         self.assertEqual(conversion["depends_on"], [implementation["id"]])
 
 
