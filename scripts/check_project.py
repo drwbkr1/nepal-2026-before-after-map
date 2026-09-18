@@ -17,6 +17,7 @@ from derive_m2_acquisition_checkpoint import (
     current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending,
     current_dem_proj25_receipt_persistence_recovery_002_review_required,
     current_dem_proj25_receipt_persistence_recovery_002_implementation_active,
+    current_dem_proj25_receipt_persistence_recovery_002_complete,
     current_dem_proj25_metadata_recovery_001_implementation_active,
     current_full_header_implementation_pending,
     current_materialization_pixel_implementation_pending,
@@ -907,6 +908,20 @@ REQUIRED = [
     "scripts/record_m2_dem_proj25_receipt_persistence_recovery_002_publication_gate.py",
     "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-publication-gate.json",
     "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-publication-reconciliation.json",
+    "records/acquisition/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-final-preflight.json",
+    "records/acquisition/m2-geoid-001-receipt-recovery-002.json",
+    "records/acquisition/m2-dem-vertical-datum-proj25-operation-selection-sign-preflight.json",
+    "records/processing/m2-dem-001-proj25-conversion-001-started.json",
+    "records/processing/m2-dem-001-proj25-conversion-001-terminal.json",
+    "records/processing/m2-dem-002-proj25-conversion-001-started.json",
+    "records/processing/m2-dem-002-proj25-conversion-001-terminal.json",
+    "records/processing/m2-dem-003-proj25-conversion-001-started.json",
+    "records/processing/m2-dem-003-proj25-conversion-001-terminal.json",
+    "records/processing/m2-dem-004-proj25-conversion-001-started.json",
+    "records/processing/m2-dem-004-proj25-conversion-001-terminal.json",
+    "records/processing/m2-dem-vertical-datum-proj25-conversion-batch-001.json",
+    "scripts/reconcile_m2_dem_proj25_receipt_persistence_recovery_002.py",
+    "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json",
     "tests/test_m2_dem_proj25_receipt_persistence_recovery_002.py",
     "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-reconciliation.json",
     "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
@@ -1215,6 +1230,11 @@ def main() -> None:
     dem_proj25_receipt_recovery_002_publication_attempt_001_failure = json.loads((ROOT / "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-publication-attempt-001-failure.json").read_text(encoding="utf-8"))
     dem_proj25_receipt_recovery_002_implementation_publication_gate = json.loads((ROOT / "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-publication-gate.json").read_text(encoding="utf-8"))
     dem_proj25_receipt_recovery_002_implementation_publication_reconciliation = json.loads((ROOT / "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-publication-reconciliation.json").read_text(encoding="utf-8"))
+    dem_proj25_receipt_recovery_002_final_preflight = json.loads((ROOT / "records/acquisition/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-final-preflight.json").read_text(encoding="utf-8"))
+    dem_proj25_receipt_recovery_002_grid_receipt = json.loads((ROOT / "records/acquisition/m2-geoid-001-receipt-recovery-002.json").read_text(encoding="utf-8"))
+    dem_proj25_receipt_recovery_002_operation_preflight = json.loads((ROOT / "records/acquisition/m2-dem-vertical-datum-proj25-operation-selection-sign-preflight.json").read_text(encoding="utf-8"))
+    dem_proj25_receipt_recovery_002_conversion_batch = json.loads((ROOT / "records/processing/m2-dem-vertical-datum-proj25-conversion-batch-001.json").read_text(encoding="utf-8"))
+    dem_proj25_receipt_recovery_002_terminal_reconciliation = json.loads((ROOT / "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json").read_text(encoding="utf-8"))
     dem_terrain_contract = json.loads((ROOT / "config/qa/dem-terrain-quality-contract.json").read_text(encoding="utf-8"))
     dem_terrain_readiness = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-readiness.json").read_text(encoding="utf-8"))
     dem_terrain_ci_correction = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-ci-correction.json").read_text(encoding="utf-8"))
@@ -1391,6 +1411,10 @@ def main() -> None:
         and dem_proj25_receipt_recovery_002_approval.get("attestation") is True
         and dem_proj25_receipt_recovery_002_activation.get("status") == "pass_exact_approval_activated_implementation_publication_only"
     )
+    dem_proj25_receipt_recovery_002_complete = bool(
+        dem_proj25_receipt_recovery_002_terminal_reconciliation.get("status") == "pass_receipt_recovered_operation_confirmed_four_conversions_verified"
+        and dem_proj25_receipt_recovery_002_terminal_reconciliation.get("next_checkpoint") == "M2-ORBIT-APPLY"
+    )
     expected_dem_checkpoint_authority_ref = "records/source-gates/m2-dem-amendment-approval.json"
     if dem_state_counts["failed"]:
         expected_dem_transfer_checkpoint = "M2-DEM-ACQUISITION-REVIEW"
@@ -1401,7 +1425,11 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if dem_proj25_receipt_recovery_002_implementation_active:
+            if dem_proj25_receipt_recovery_002_complete:
+                expected_dem_checkpoint = "M2-ORBIT-APPLY"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-orbit-amendment-approval.json"
+                expected_dem_next_action = "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication."
+            elif dem_proj25_receipt_recovery_002_implementation_active:
                 expected_dem_checkpoint = "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json"
                 expected_dem_next_action = "Implement and validate only the approved ArcGIS-safe timestamp and pre-reserved receipt-recovery controls, then require fresh public default-branch CI. Do not inspect the promoted grid or source DEM pixels, run the operation/sign preflight, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight."
@@ -1436,7 +1464,11 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if dem_proj25_receipt_recovery_002_implementation_active:
+            if dem_proj25_receipt_recovery_002_complete:
+                expected_dem_checkpoint = "M2-ORBIT-APPLY"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-orbit-amendment-approval.json"
+                expected_dem_next_action = "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication."
+            elif dem_proj25_receipt_recovery_002_implementation_active:
                 expected_dem_checkpoint = "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json"
             elif dem_proj25_receipt_recovery_002_review_ready:
@@ -2054,7 +2086,11 @@ def main() -> None:
         or recovery_orbit_apply_unit.get("status") != "planned"
         or recovery_orbit_apply_unit.get("gates", {}).get("orbit_application_started") is not False
         or recovery_orbit_apply_unit.get("gates", {}).get("dem_vertical_datum_gate")
-        != "method_selected_owner_install_pending"
+        != "pass_exact_proj25_four_ellipsoidal_derivatives"
+        or recovery_orbit_apply_unit.get("gates", {}).get("dem_vertical_terminal_reconciliation_sha256")
+        != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json")
+        or recovery_orbit_apply_unit.get("gates", {}).get("radar_pixel_readiness")
+        != "pending_separate_governed_review"
         or recovery_orbit_apply_unit.get("gates", {}).get("terrain_result_review")
         != "complete_bounded_owner_acceptance_readiness_still_defer"
         or orbit_offline_verification_recovery_pre_snapshot.get("recorded_claims", [{}])[0].get(
@@ -4639,6 +4675,10 @@ def main() -> None:
             "tests/test_m2_dem_vertical_datum_proj25_arcgis.py",
         )
     }
+    # Implementation readiness is immutable historical evidence. Checkpoint derivation advances
+    # after the terminal conversion result, so retain its exact pre-execution binding here.
+    expected_receipt_recovery_002_bindings["scripts/derive_m2_acquisition_checkpoint.py"] = "aa4cc2bfd4f11d07d489848a49ae836046be3a8793f982e094e6190f0de39e95"
+    expected_receipt_recovery_002_bindings["tests/test_m2_dem_vertical_datum_proj25.py"] = "4ef4f5c018611f142ed20a32e30e68180ed3b716f3baaa7eee9912f06b723f2a"
     if (
         dem_proj25_receipt_recovery_002_implementation_readiness.get("status") != "pass_exact_receipt_persistence_recovery_002_implementation_public_ci_pending"
         or dem_proj25_receipt_recovery_002_implementation_readiness.get("bindings") != expected_receipt_recovery_002_bindings
@@ -4711,6 +4751,66 @@ def main() -> None:
         ))
     ):
         fail("M2 DEM PROJ25 receipt-persistence recovery-002 implementation publication gate differs or overreleases")
+    if (
+        dem_proj25_receipt_recovery_002_final_preflight.get("status") != "pass_no_content_receipt_recovery_002_released"
+        or dem_proj25_receipt_recovery_002_final_preflight.get("publication_gate_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-publication-gate.json")
+        or dem_proj25_receipt_recovery_002_final_preflight.get("staged_and_destination_same_file_identity") is not True
+        or dem_proj25_receipt_recovery_002_final_preflight.get("assertions", {}).get("grid_content_bytes_read") != 0
+        or dem_proj25_receipt_recovery_002_final_preflight.get("assertions", {}).get("conversion_attempts_started") != 0
+        or dem_proj25_receipt_recovery_002_grid_receipt.get("status") != "pass_exact_promoted_grid_receipt_recovered_input_only"
+        or dem_proj25_receipt_recovery_002_grid_receipt.get("final_preflight_sha256") != sha256("records/acquisition/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-final-preflight.json")
+        or dem_proj25_receipt_recovery_002_grid_receipt.get("observed", {}).get("sha256") != "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a"
+        or dem_proj25_receipt_recovery_002_grid_receipt.get("persistence", {}).get("receipt_reserved_before_grid_content_read") is not True
+        or dem_proj25_receipt_recovery_002_grid_receipt.get("assertions", {}).get("new_grid_promotion_actions") != 0
+        or dem_proj25_receipt_recovery_002_operation_preflight.get("status") != "pass_exact_local_inverse_operation_h_equals_H_plus_N"
+        or dem_proj25_receipt_recovery_002_operation_preflight.get("grid_sha256") != "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a"
+        or dem_proj25_receipt_recovery_002_operation_preflight.get("assertions", {}).get("height_relation_confirmed") != "h = H + N"
+        or dem_proj25_receipt_recovery_002_operation_preflight.get("assertions", {}).get("dem_pixels_read") is not False
+        or dem_proj25_receipt_recovery_002_conversion_batch.get("status") != "pass_four_fixed_order_conversions_verified"
+        or dem_proj25_receipt_recovery_002_conversion_batch.get("source_order") != ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
+        or dem_proj25_receipt_recovery_002_conversion_batch.get("attempted_order") != ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
+        or dem_proj25_receipt_recovery_002_conversion_batch.get("seam_failure") is not None
+        or dem_proj25_receipt_recovery_002_conversion_batch.get("assertions", {}).get("automatic_retry_performed") is not False
+        or dem_proj25_receipt_recovery_002_conversion_batch.get("assertions", {}).get("source_files_immutable") is not True
+        or dem_proj25_receipt_recovery_002_conversion_batch.get("assertions", {}).get("scientific_result_established") is not False
+        or dem_proj25_receipt_recovery_002_terminal_reconciliation.get("status") != "pass_receipt_recovered_operation_confirmed_four_conversions_verified"
+        or dem_proj25_receipt_recovery_002_terminal_reconciliation.get("next_checkpoint") != "M2-ORBIT-APPLY"
+        or dem_proj25_receipt_recovery_002_terminal_reconciliation.get("assertions", {}).get("maximum_conversion_attempts_per_dem") != 1
+        or dem_proj25_receipt_recovery_002_terminal_reconciliation.get("assertions", {}).get("automatic_retry_performed") is not False
+        or dem_proj25_receipt_recovery_002_terminal_reconciliation.get("assertions", {}).get("all_four_sources_immutable") is not True
+        or dem_proj25_receipt_recovery_002_terminal_reconciliation.get("assertions", {}).get("orbit_or_radar_action_performed") is not False
+        or dem_proj25_receipt_recovery_002_terminal_reconciliation.get("assertions", {}).get("scientific_result_established") is not False
+    ):
+        fail("M2 DEM PROJ25 receipt recovery, operation preflight, conversion batch, or reconciliation differs")
+    expected_terminal_bindings = {
+        "final_no_content_preflight_sha256": sha256("records/acquisition/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-final-preflight.json"),
+        "grid_receipt_recovery_sha256": sha256("records/acquisition/m2-geoid-001-receipt-recovery-002.json"),
+        "operation_sign_preflight_sha256": sha256("records/acquisition/m2-dem-vertical-datum-proj25-operation-selection-sign-preflight.json"),
+        "conversion_batch_sha256": sha256("records/processing/m2-dem-vertical-datum-proj25-conversion-batch-001.json"),
+    }
+    for source_id in ("M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"):
+        stem = source_id.lower()
+        started_ref = f"records/processing/{stem}-proj25-conversion-001-started.json"
+        terminal_ref = f"records/processing/{stem}-proj25-conversion-001-terminal.json"
+        started = json.loads((ROOT / started_ref).read_text(encoding="utf-8"))
+        terminal = json.loads((ROOT / terminal_ref).read_text(encoding="utf-8"))
+        if (
+            started.get("attempt_id") != f"{stem}-proj25-conversion-001"
+            or terminal.get("status") != "pass_converted_verified_promoted"
+            or terminal.get("source_id") != source_id
+            or terminal.get("source_before") != terminal.get("source_after")
+            or terminal.get("staged") != terminal.get("promoted")
+            or terminal.get("attempt_count") != 1
+            or terminal.get("automatic_retry_performed") is not False
+            or terminal.get("verification", {}).get("nodata_mismatch_count") != 0
+            or terminal.get("verification", {}).get("approved_aoi_nonfinite_count") != 0
+            or terminal.get("arcgis_readability", {}).get("readable") is not True
+        ):
+            fail(f"M2 DEM PROJ25 terminal conversion receipt differs for {source_id}")
+        expected_terminal_bindings[f"{stem}_started_sha256"] = sha256(started_ref)
+        expected_terminal_bindings[f"{stem}_terminal_sha256"] = sha256(terminal_ref)
+    if dem_proj25_receipt_recovery_002_terminal_reconciliation.get("bindings") != expected_terminal_bindings:
+        fail("M2 DEM PROJ25 terminal reconciliation bindings differ")
     vertical_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-REVIEW", {})
     vertical_install_unit = active_m2_units.get("M2-DEM-EGM2008-COMPONENT-INSTALL", {})
     vertical_alternate_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW", {})
@@ -4815,7 +4915,7 @@ def main() -> None:
         or vertical_proj25_receipt_recovery_review_unit.get("gates", {}).get("review_reconciliation_sha256") != sha256("records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-review-reconciliation.json")
         or vertical_proj25_receipt_recovery_review_unit.get("gates", {}).get("receipt_recovery_authorized") is not False
         or vertical_proj25_receipt_recovery_review_unit.get("disposition") != "pass"
-        or vertical_proj25_receipt_recovery_implementation_unit.get("status") != "in_progress"
+        or vertical_proj25_receipt_recovery_implementation_unit.get("status") != "complete"
         or vertical_proj25_receipt_recovery_implementation_unit.get("depends_on") != ["M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW"]
         or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("network_requests") != 0
         or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("recovery_001_retries") != 0
@@ -4829,14 +4929,25 @@ def main() -> None:
         or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("public_ci_run_id") != 35385405933
         or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("publication_gate_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-publication-gate.json")
         or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("publication_reconciliation_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-publication-reconciliation.json")
-        or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("final_no_content_preflight") != "ready_not_run"
-        or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("promoted_grid_inspection") is not False
+        or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("final_no_content_preflight") != "pass"
+        or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("promoted_grid_inspection") is not True
         or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("new_grid_promotion") is not False
-        or vertical_conversion_unit.get("status") != "planned"
+        or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("receipt_recovery_status") != "pass_exact_promoted_grid_receipt_recovered_input_only"
+        or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("operation_sign_preflight") != "pass_exact_local_inverse_operation_h_equals_H_plus_N"
+        or vertical_proj25_receipt_recovery_implementation_unit.get("gates", {}).get("terminal_reconciliation_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json")
+        or vertical_proj25_receipt_recovery_implementation_unit.get("disposition") != "pass"
+        or vertical_conversion_unit.get("status") != "complete"
         or vertical_conversion_unit.get("depends_on") != ["M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"]
         or vertical_conversion_unit.get("gates", {}).get("selected_method") != "local_proj_egm2008_2_5_preconversion_then_none"
         or vertical_conversion_unit.get("gates", {}).get("output_root") != r"C:\Projects\Active\nepal-2026-before-after-map-data\derived\dem\egm2008-ellipsoidal-proj25"
         or vertical_conversion_unit.get("gates", {}).get("source_overwrite_permitted") is not False
+        or vertical_conversion_unit.get("gates", {}).get("conversion_batch_status") != "pass_four_fixed_order_conversions_verified"
+        or vertical_conversion_unit.get("gates", {}).get("conversion_attempts_per_dem") != 1
+        or vertical_conversion_unit.get("gates", {}).get("automatic_retry_performed") is not False
+        or vertical_conversion_unit.get("gates", {}).get("all_source_files_immutable") is not True
+        or vertical_conversion_unit.get("gates", {}).get("proj_network_enabled") is not False
+        or vertical_conversion_unit.get("gates", {}).get("terminal_reconciliation_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json")
+        or vertical_conversion_unit.get("disposition") != "pass"
     ):
         fail("M2 DEM vertical-datum milestone units differ from the approved receipt-persistence recovery implementation state")
     if dem_manifest.get("status") != "candidate_not_approved" or len(dem_manifest.get("records", [])) != 4:
@@ -7444,7 +7555,9 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        if current_dem_proj25_receipt_persistence_recovery_002_implementation_active(ROOT, state_counts):
+        if current_dem_proj25_receipt_persistence_recovery_002_complete(ROOT, state_counts):
+            expected_checkpoint = "M2-ORBIT-APPLY"
+        elif current_dem_proj25_receipt_persistence_recovery_002_implementation_active(ROOT, state_counts):
             expected_checkpoint = "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"
         elif current_dem_proj25_receipt_persistence_recovery_002_review_required(ROOT, state_counts):
             expected_checkpoint = "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW"
@@ -10508,6 +10621,26 @@ def main() -> None:
         ))
     ):
         fail("EVID-0143 DEM PROJ25 receipt-persistence recovery-002 implementation publication differs or overclaims")
+    vertical_proj25_receipt_recovery_terminal_evidence = ledger_by_id.get("EVID-0144")
+    if (
+        not isinstance(vertical_proj25_receipt_recovery_terminal_evidence, dict)
+        or vertical_proj25_receipt_recovery_terminal_evidence.get("status") != "pass_receipt_recovered_operation_confirmed_four_conversions_verified"
+        or vertical_proj25_receipt_recovery_terminal_evidence.get("final_preflight_sha256") != sha256("records/acquisition/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-final-preflight.json")
+        or vertical_proj25_receipt_recovery_terminal_evidence.get("grid_receipt_sha256") != sha256("records/acquisition/m2-geoid-001-receipt-recovery-002.json")
+        or vertical_proj25_receipt_recovery_terminal_evidence.get("operation_preflight_sha256") != sha256("records/acquisition/m2-dem-vertical-datum-proj25-operation-selection-sign-preflight.json")
+        or vertical_proj25_receipt_recovery_terminal_evidence.get("conversion_batch_sha256") != sha256("records/processing/m2-dem-vertical-datum-proj25-conversion-batch-001.json")
+        or vertical_proj25_receipt_recovery_terminal_evidence.get("terminal_reconciliation_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json")
+        or vertical_proj25_receipt_recovery_terminal_evidence.get("assertions", {}).get("source_order") != ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
+        or vertical_proj25_receipt_recovery_terminal_evidence.get("assertions", {}).get("conversion_attempts_per_dem") != 1
+        or vertical_proj25_receipt_recovery_terminal_evidence.get("assertions", {}).get("current_checkpoint") != "M2-ORBIT-APPLY"
+        or any(vertical_proj25_receipt_recovery_terminal_evidence.get("assertions", {}).get(key) is not False for key in (
+            "automatic_retry_performed", "new_grid_promotion_performed", "proj_network_enabled",
+            "orbit_or_radar_action_performed", "baseline_or_change_analysis_performed",
+            "scientific_result_established",
+        ))
+        or vertical_proj25_receipt_recovery_terminal_evidence.get("assertions", {}).get("all_four_sources_immutable") is not True
+    ):
+        fail("EVID-0144 DEM PROJ25 receipt recovery and conversion terminal result differs or overclaims")
 
     orbit_review_evidence = ledger_by_id.get("EVID-0052")
     if (

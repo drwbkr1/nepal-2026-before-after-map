@@ -132,7 +132,7 @@ class M2DemVerticalDatumReviewTests(unittest.TestCase):
         historical_checkpoint = "M2-DEM-EGM2008-COMPONENT-INSTALL"
         review_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
         implementation_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
-        current_checkpoint = "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"
+        current_checkpoint = "M2-ORBIT-APPLY"
         self.assertEqual(self.control["status"], "pass_method_selected_owner_component_install_pending")
         self.assertEqual(self.control["bindings"]["approval_sha256"], sha256("records/source-gates/m2-dem-vertical-datum-approval.json"))
         self.assertEqual(self.control["decision"]["current_checkpoint"], historical_checkpoint)
@@ -159,7 +159,8 @@ class M2DemVerticalDatumReviewTests(unittest.TestCase):
             units["M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW"]["status"],
             "complete",
         )
-        self.assertEqual(units["M2-DEM-VERTICAL-DATUM-CONVERSION"]["status"], "planned")
+        self.assertEqual(units["M2-DEM-VERTICAL-DATUM-CONVERSION"]["status"], "complete")
+        self.assertEqual(units["M2-DEM-VERTICAL-DATUM-CONVERSION"]["disposition"], "pass")
         self.assertFalse(units[historical_checkpoint]["gates"]["codex_download_or_install_authorized"])
         self.assertTrue(units[review_checkpoint]["gates"]["alternate_method_authorized"])
         self.assertFalse(units[implementation_checkpoint]["gates"]["grid_request_before_public_ci"])

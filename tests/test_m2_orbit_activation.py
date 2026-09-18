@@ -113,7 +113,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertTrue(unit_by_id["M2-ORBIT-ACQUIRE"]["gates"]["orbit_custody_initialized"])
         self.assertEqual(
             unit_by_id["M2-ORBIT-APPLY"]["gates"]["dem_vertical_datum_gate"],
-            "method_selected_owner_install_pending",
+            "pass_exact_proj25_four_ellipsoidal_derivatives",
         )
         self.assertFalse(unit_by_id["M2-ORBIT-APPLY"]["gates"]["orbit_application_started"])
         self.assertEqual(
@@ -143,7 +143,7 @@ class M2OrbitActivationTests(unittest.TestCase):
             ],
         )
         checkpoints = [item["checkpoint_id"] for item in self.profile["parallel_checkpoints"]]
-        self.assertIn("M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION", checkpoints)
+        self.assertIn("M2-ORBIT-APPLY", checkpoints)
         self.assertNotIn("M2-DEM-TERRAIN-RESULT-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-ACQUISITION-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-AMENDMENT-REVIEW", checkpoints)

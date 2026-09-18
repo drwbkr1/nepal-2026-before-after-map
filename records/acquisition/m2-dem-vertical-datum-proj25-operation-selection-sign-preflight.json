@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-OPERATION-SIGN-PREFLIGHT",
+  "observed_at_utc": "2026-09-18T19:26:52Z",
+  "status": "pass_exact_local_inverse_operation_h_equals_H_plus_N",
+  "grid_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+  "source_crs": "EPSG:9518",
+  "target_crs": "EPSG:4979",
+  "inverse_operation": "+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +inv +proj=vgridshift +grids=C:/Projects/Active/nepal-2026-before-after-map-data/custody/geoid/proj/us_nga_egm08_25.tif +multiplier=1 +step +proj=unitconvert +xy_in=rad +xy_out=deg",
+  "forward_roundtrip_operation": "+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=vgridshift +grids=C:/Projects/Active/nepal-2026-before-after-map-data/custody/geoid/proj/us_nga_egm08_25.tif +multiplier=1 +step +proj=unitconvert +xy_in=rad +xy_out=deg",
+  "checks": [
+    {
+      "longitude": 85.17500000000001,
+      "latitude": 28.1,
+      "orthometric_height_H_m": 1000.0,
+      "geoid_undulation_N_m": -22.92299133300787,
+      "ellipsoidal_height_h_m": 977.0770086669921,
+      "height_relation": "h = H + N",
+      "height_relation_residual_m": 0.0,
+      "roundtrip_residual_m": 0.0,
+      "horizontal_roundtrip_residual_degrees": 0.0
+    },
+    {
+      "longitude": 85.52,
+      "latitude": 28.285,
+      "orthometric_height_H_m": 1000.0,
+      "geoid_undulation_N_m": -23.087288287353545,
+      "ellipsoidal_height_h_m": 976.9127117126465,
+      "height_relation": "h = H + N",
+      "height_relation_residual_m": 0.0,
+      "roundtrip_residual_m": 0.0,
+      "horizontal_roundtrip_residual_degrees": 0.0
+    },
+    {
+      "longitude": 85.36500000000001,
+      "latitude": 28.240000000000002,
+      "orthometric_height_H_m": 1000.0,
+      "geoid_undulation_N_m": -23.253883789062456,
+      "ellipsoidal_height_h_m": 976.7461162109375,
+      "height_relation": "h = H + N",
+      "height_relation_residual_m": 0.0,
+      "roundtrip_residual_m": 0.0,
+      "horizontal_roundtrip_residual_degrees": 0.0
+    }
+  ],
+  "assertions": {
+    "proj_network_enabled": false,
+    "network_requests_performed": false,
+    "dem_pixels_read": false,
+    "conversion_attempts_started": 0,
+    "height_relation_confirmed": "h = H + N"
+  }
+}

@@ -530,4 +530,16 @@ Public CI attempt `35384885599` for commit `5895ba5f4061ad96567264fbcdad8d65eb61
 
 Corrected commit `8a05517eb5f320921777370024611cf209014672` then passed public default-branch CI run `35385405933`. The public checkout validated 948 required files and ran all 545 tests with 13 intentional environment-dependent skips. Gate SHA-256 `9b52f89eb393364aee605ab998bb57ce2f4f9210b0e1221247e99705ba11d6ef` releases only the final no-content preflight.
 
+### Terminal receipt recovery and DEM conversion validation — 2026-09-18
+
+- The no-content preflight used only path, size, identity, collision, and prior-terminal checks; it recorded zero grid-content bytes read.
+- The receipt recovery reserved, flushed, and fsynced its append-only output before hashing or inspecting the exact promoted grid.
+- The operation/sign preflight confirmed `h = H + N` at all three approved AOI check points, with zero height and horizontal round-trip residual in the recorded values.
+- The conversion batch attempted `M2-DEM-001` through `M2-DEM-004` exactly once and in order. All four passed; no retry occurred.
+- Each source hash was unchanged before and after conversion. Each output matches its staged hash, retains 3600 by 3600 dimensions and the source geotransform, has zero AOI nonfinite cells, and is readable in ArcGIS Pro 3.7.1.
+- Four seam-correction checks passed; the largest recorded absolute correction discontinuity is 0.00048828125 m.
+- Terminal reconciliation SHA-256: `2103359e15c4cd963a89d7cdf2169c598c86a0e02e93766e6aab6df3237b30d6`.
+
+These checks establish bounded input engineering fitness for the four DEM derivatives. They do not establish independent elevation accuracy, radar pixel readiness, successful orbit application, mapped change, event attribution, or a scientific result.
+
 Public GitHub Actions run `35381627104` passed for exact review-publication commit `8c4aec40589baf7f0ff1a917e4f87a9618c1569d`. The Linux runner validated 935 required files and passed 537 tests with 12 intentional environment-dependent skips. Publication-gate SHA-256 `c92ec8c77e256c718d7742219e1bedcd168ac6be804730f753a5130ad236a77d` and reconciliation SHA-256 `b555288dc23c8c0beba0fbabd802b43a0b2a8b92eb16f3781dfb80ef4bd11f74` release only owner review. The blank response remains undecided; recovery implementation and all real or downstream actions remain blocked.

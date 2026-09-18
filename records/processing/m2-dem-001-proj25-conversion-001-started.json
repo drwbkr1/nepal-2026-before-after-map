@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "event": "m2_dem_vertical_conversion_started",
+  "attempt_id": "m2-dem-001-proj25-conversion-001",
+  "source_id": "M2-DEM-001",
+  "started_at_utc": "2026-09-18T19:27:08Z",
+  "source_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\dem\\copernicus-glo30\\Copernicus_DSM_COG_10_N27_00_E084_00_DEM.tif",
+  "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal-proj25\\Copernicus_DSM_COG_10_N27_00_E084_00_DEM_WGS84_ELLIPSOIDAL.tif",
+  "staging_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-dem-vertical-datum-proj25-001\\m2-dem-001\\Copernicus_DSM_COG_10_N27_00_E084_00_DEM_WGS84_ELLIPSOIDAL.tif.part.tif",
+  "maximum_attempts": 1,
+  "automatic_retry_authorized": false,
+  "source_overwrite_permitted": false,
+  "proj_network_enabled": false,
+  "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\control-events\\m2-dem-vertical-datum-proj25\\m2-dem-001-proj25-conversion-001\\started.json"
+}

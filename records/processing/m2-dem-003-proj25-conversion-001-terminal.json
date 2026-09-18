@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "event": "m2_dem_vertical_conversion_succeeded",
+  "status": "pass_converted_verified_promoted",
+  "attempt_id": "m2-dem-003-proj25-conversion-001",
+  "source_id": "M2-DEM-003",
+  "started_at_utc": "2026-09-18T19:27:08Z",
+  "completed_at_utc": "2026-09-18T19:28:16Z",
+  "source_before": {
+    "size_bytes": 41688284,
+    "sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc"
+  },
+  "source_after": {
+    "size_bytes": 41688284,
+    "sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc"
+  },
+  "source_immutable": true,
+  "staged": {
+    "size_bytes": 30742774,
+    "sha256": "f4ccae4518c7557421e8f4beff8357b1cf99434ffe338492f354ac99de1216f9"
+  },
+  "promoted": {
+    "size_bytes": 30742774,
+    "sha256": "f4ccae4518c7557421e8f4beff8357b1cf99434ffe338492f354ac99de1216f9"
+  },
+  "verification": {
+    "width": 3600,
+    "height": 3600,
+    "geotransform": [
+      83.99986111111112,
+      0.0002777777777777778,
+      0.0,
+      29.000138888888888,
+      0.0,
+      -0.0002777777777777778
+    ],
+    "same_dimensions": true,
+    "same_geotransform": true,
+    "source_nodata": null,
+    "output_nodata": null,
+    "nodata_mismatch_count": 0,
+    "source_valid_pixel_count": 12960000,
+    "approved_aoi_pixel_count": 1749600,
+    "approved_aoi_nonfinite_count": 0,
+    "correction_m": {
+      "count": 12960000,
+      "minimum": -22.5240478515625,
+      "maximum": -21.95703125,
+      "mean": -22.193691249221047,
+      "standard_deviation": 0.10685017616187135,
+      "sampled_p01": -22.4779052734375,
+      "sampled_p50": -22.2252197265625,
+      "sampled_p99": -21.9931640625,
+      "sample_count": 65540
+    }
+  },
+  "arcgis_readability": {
+    "readable": true,
+    "data_type": "RasterDataset",
+    "width": 3600,
+    "height": 3600,
+    "band_count": 1,
+    "spatial_reference_name": "WGS_1984_3D",
+    "vertical_coordinate_system_name": null,
+    "runtime_version": "3.7.1"
+  },
+  "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal-proj25\\Copernicus_DSM_COG_10_N28_00_E084_00_DEM_WGS84_ELLIPSOIDAL.tif",
+  "staging_bytes_preserved": true,
+  "attempt_count": 1,
+  "automatic_retry_performed": false,
+  "proj_network_enabled": false,
+  "external_terminal_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\control-events\\m2-dem-vertical-datum-proj25\\m2-dem-003-proj25-conversion-001\\terminal.json"
+}

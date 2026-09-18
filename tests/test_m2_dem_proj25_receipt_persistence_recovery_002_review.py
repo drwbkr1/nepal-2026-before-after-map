@@ -15,6 +15,7 @@ from derive_m2_acquisition_checkpoint import (  # noqa: E402
     current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending,
     current_dem_proj25_receipt_persistence_recovery_002_review_required,
     current_dem_proj25_receipt_persistence_recovery_002_implementation_active,
+    current_dem_proj25_receipt_persistence_recovery_002_complete,
 )
 
 
@@ -88,14 +89,15 @@ class M2DemProj25ReceiptPersistenceRecovery002ReviewTests(unittest.TestCase):
             self.assertFalse(self.readiness["assertions"][key])
 
     def test_control_state_routes_to_bounded_implementation(self) -> None:
-        checkpoint = "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"
+        checkpoint = "M2-ORBIT-APPLY"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)
         self.assertEqual(self.goal["proposed_amendments"], [])
         self.assertFalse(current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending(ROOT, {"promoted": 8}))
         self.assertFalse(current_dem_proj25_receipt_persistence_recovery_002_review_required(ROOT, {"promoted": 8}))
-        self.assertTrue(current_dem_proj25_receipt_persistence_recovery_002_implementation_active(ROOT, {"promoted": 8}))
+        self.assertFalse(current_dem_proj25_receipt_persistence_recovery_002_implementation_active(ROOT, {"promoted": 8}))
+        self.assertTrue(current_dem_proj25_receipt_persistence_recovery_002_complete(ROOT, {"promoted": 8}))
         self.assertFalse(current_dem_proj25_metadata_recovery_001_implementation_active(ROOT, {"promoted": 8}))
 
     def test_milestone_preserves_terminal_history_and_conditional_dependency(self) -> None:
@@ -110,9 +112,11 @@ class M2DemProj25ReceiptPersistenceRecovery002ReviewTests(unittest.TestCase):
         self.assertTrue(review["gates"]["attestation"])
         self.assertTrue(review["gates"]["receipt_persistence_correction_authorized"])
         self.assertFalse(review["gates"]["receipt_recovery_authorized"])
-        self.assertEqual(implementation["status"], "in_progress")
+        self.assertEqual(implementation["status"], "complete")
         self.assertEqual(implementation["gates"]["public_ci"], "success")
-        self.assertEqual(implementation["gates"]["final_no_content_preflight"], "ready_not_run")
+        self.assertEqual(implementation["gates"]["final_no_content_preflight"], "pass")
+        self.assertEqual(conversion["status"], "complete")
+        self.assertEqual(conversion["disposition"], "pass")
         self.assertEqual(conversion["depends_on"], [implementation["id"]])
 
 

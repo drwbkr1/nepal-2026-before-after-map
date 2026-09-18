@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-FINAL-PREFLIGHT",
+  "observed_at_utc": "2026-09-18T19:26:16Z",
+  "status": "pass_no_content_receipt_recovery_002_released",
+  "approval_sha256": "862a4e979b1cebaa9d06cc9b350cba91dfec859b081ae89020627a076a34425d",
+  "publication_gate_sha256": "9b52f89eb393364aee605ab998bb57ce2f4f9210b0e1221247e99705ba11d6ef",
+  "recovery_001_started_sha256": "f38ba817ea7527a2027995f75cb5092fdd9427fb044fe985fcd507736d7054f6",
+  "recovery_001_runtime_failure_sha256": "98657f032709fca03ce5d4de9790517b6f7fd074e33b0d9d820f10f548f7b373",
+  "recovery_001_outcome_sha256": "3899e9c788da8dac12328d323bcc104b70b0eb4eddf20127de66c045a5fd51e5",
+  "staged_file_metadata": {
+    "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-dem-vertical-datum-proj25-001\\m2-geoid-001\\us_nga_egm08_25.tif.part",
+    "size_bytes": 80585622,
+    "content_read": false
+  },
+  "promoted_file_metadata": {
+    "path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\geoid\\proj\\us_nga_egm08_25.tif",
+    "size_bytes": 80585622,
+    "content_read": false
+  },
+  "staged_and_destination_same_file_identity": true,
+  "receipt_ref": "records/acquisition/m2-geoid-001-receipt-recovery-002.json",
+  "assertions": {
+    "network_requests_performed": 0,
+    "grid_content_bytes_read": 0,
+    "grid_hash_computed": false,
+    "grid_metadata_read": false,
+    "receipt_output_reserved": false,
+    "recovery_001_retried": false,
+    "new_grid_promotion_performed": false,
+    "dem_content_read": false,
+    "dem_pixels_read": false,
+    "operation_sign_preflight_performed": false,
+    "conversion_attempts_started": 0,
+    "external_data_mutated": false
+  }
+}

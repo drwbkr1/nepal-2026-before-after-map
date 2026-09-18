@@ -174,6 +174,10 @@ DEM_PROJ25_RECEIPT_PERSISTENCE_RECOVERY_002_IMPLEMENTATION_CHECKPOINT = {
     "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION",
     "next_action": "Implement and validate only the approved ArcGIS-safe timestamp and pre-reserved receipt-recovery controls, then require fresh public default-branch CI. Do not inspect the promoted grid or source DEM pixels, run the operation/sign preflight, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight.",
 }
+M2_ORBIT_APPLY_CHECKPOINT = {
+    "checkpoint_id": "M2-ORBIT-APPLY",
+    "next_action": "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1347,6 +1351,33 @@ def current_dem_proj25_receipt_persistence_recovery_002_implementation_active(
     )
 
 
+def current_dem_proj25_receipt_persistence_recovery_002_complete(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the terminal four-conversion result and stop at orbit application."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        reconciliation = load(root / "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    implementation = units.get("M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION", {})
+    conversion = units.get("M2-DEM-VERTICAL-DATUM-CONVERSION", {})
+    orbit_apply = units.get("M2-ORBIT-APPLY", {})
+    return bool(
+        reconciliation.get("status") == "pass_receipt_recovered_operation_confirmed_four_conversions_verified"
+        and reconciliation.get("next_checkpoint") == "M2-ORBIT-APPLY"
+        and implementation.get("status") == "complete"
+        and implementation.get("disposition") == "pass"
+        and conversion.get("status") == "complete"
+        and conversion.get("disposition") == "pass"
+        and orbit_apply.get("status") == "planned"
+        and orbit_apply.get("gates", {}).get("orbit_application_started") is False
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -1416,7 +1447,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_dem_proj25_receipt_persistence_recovery_002_implementation_active(
+            if current_dem_proj25_receipt_persistence_recovery_002_complete(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(M2_ORBIT_APPLY_CHECKPOINT)
+            elif current_dem_proj25_receipt_persistence_recovery_002_implementation_active(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(DEM_PROJ25_RECEIPT_PERSISTENCE_RECOVERY_002_IMPLEMENTATION_CHECKPOINT)

@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002",
+  "attempt_id": "m2-geoid-001-receipt-recovery-002",
+  "status": "pass_exact_promoted_grid_receipt_recovered_input_only",
+  "observed_at_utc": "2026-09-18T19:26:41Z",
+  "approval_sha256": "862a4e979b1cebaa9d06cc9b350cba91dfec859b081ae89020627a076a34425d",
+  "final_preflight_sha256": "75282ff2681c2778eed3258945c46f64850158dd32c322e4f9fcc4d44b935cc9",
+  "source_id": "M2-GEOID-001",
+  "staged_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-dem-vertical-datum-proj25-001\\m2-geoid-001\\us_nga_egm08_25.tif.part",
+  "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\geoid\\proj\\us_nga_egm08_25.tif",
+  "observed": {
+    "size_bytes": 80585622,
+    "sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a"
+  },
+  "staged_and_destination_same_file_identity": true,
+  "gdal_metadata": {
+    "driver": "GTiff",
+    "band_count": 1,
+    "width": 8640,
+    "height": 4321,
+    "geotransform": [
+      -180.02083333333334,
+      0.041666666666666664,
+      0.0,
+      90.02083333333333,
+      0.0,
+      -0.041666666666666664
+    ],
+    "world_coverage": true,
+    "source_crs": null,
+    "target_crs": null,
+    "tiff_tag_imagedescription": "WGS 84 (EPSG:4979) to EGM2008 height (EPSG:3855). Converted from egm08_25.gtx (last modified at 2018/10/08)",
+    "target_crs_epsg_code": "3855",
+    "type": "VERTICAL_OFFSET_GEOGRAPHIC_TO_VERTICAL",
+    "area_of_use": "World",
+    "area_or_point": "Point",
+    "tiff_tag_copyright": "Derived from work by NGA. Public Domain",
+    "proj_network_enabled": false
+  },
+  "arcgis_readability": {
+    "readable": true,
+    "data_type": "RasterDataset",
+    "width": 8640,
+    "height": 4321,
+    "band_count": 1,
+    "runtime_version": "3.7.1"
+  },
+  "persistence": {
+    "receipt_reserved_before_grid_content_read": true,
+    "exclusive_creation": true,
+    "complete_receipt_written_through_reserved_handle": true,
+    "flush_and_fsync_required": true,
+    "reuse_authorized": false
+  },
+  "assertions": {
+    "network_request_count": 0,
+    "recovery_001_retries": 0,
+    "new_grid_promotion_actions": 0,
+    "external_data_mutated": false,
+    "dem_pixels_read": false,
+    "operation_sign_preflight_performed": false,
+    "conversion_attempts_started": 0,
+    "scientific_result_established": false
+  }
+}

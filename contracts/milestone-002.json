@@ -1445,16 +1445,17 @@
       ],
       "action_class": "reversible_remediation",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
         "contracts/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-proposal.json",
         "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-review-reconciliation.json"
       ],
       "outputs": [
-        "versioned implementation and tests",
-        "fresh public-CI gate",
-        "one append-only receipt-recovery-002 result"
+        "records/acquisition/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-final-preflight.json",
+        "records/acquisition/m2-geoid-001-receipt-recovery-002.json",
+        "records/acquisition/m2-dem-vertical-datum-proj25-operation-selection-sign-preflight.json",
+        "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json"
       ],
       "gates": {
         "approval_required": true,
@@ -1467,8 +1468,8 @@
         "stop_on_first_failure": true,
         "approval_sha256": "862a4e979b1cebaa9d06cc9b350cba91dfec859b081ae89020627a076a34425d",
         "public_ci": "success",
-        "final_no_content_preflight": "ready_not_run",
-        "promoted_grid_inspection": false,
+        "final_no_content_preflight": "pass",
+        "promoted_grid_inspection": true,
         "new_grid_promotion": false,
         "implementation_readiness_sha256": "5cbca9f31b3286acba3424a92369b47fad9be81e75988dc7b23a872c7f79764c",
         "failed_public_ci_attempts": 1,
@@ -1478,9 +1479,12 @@
         "publication_commit": "8a05517eb5f320921777370024611cf209014672",
         "public_ci_run_id": 35385405933,
         "publication_gate_sha256": "9b52f89eb393364aee605ab998bb57ce2f4f9210b0e1221247e99705ba11d6ef",
-        "publication_reconciliation_sha256": "6867e26e726a4ecda31a1f7459006b785bf004d6a090762d69b48bafdb3eeecb"
+        "publication_reconciliation_sha256": "6867e26e726a4ecda31a1f7459006b785bf004d6a090762d69b48bafdb3eeecb",
+        "receipt_recovery_status": "pass_exact_promoted_grid_receipt_recovered_input_only",
+        "operation_sign_preflight": "pass_exact_local_inverse_operation_h_equals_H_plus_N",
+        "terminal_reconciliation_sha256": "2103359e15c4cd963a89d7cdf2169c598c86a0e02e93766e6aab6df3237b30d6"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-runtime-failure.json",
         "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-outcome-reconciliation.json"
@@ -1488,14 +1492,13 @@
       "exit_condition_delta": {
         "expected": [],
         "observed": [
-          "exact approval locked and reconciled",
-          "bounded implementation tested locally",
-          "first public CI failed on Git line-ending normalization",
-          "corrected implementation commit passed public default-branch CI",
-          "final no-content preflight ready but not run"
+          "final no-content preflight passed",
+          "one pre-reserved read-only promoted-grid inspection passed",
+          "operation and sign preflight confirmed h = H + N",
+          "four exact conversions passed once in fixed order"
         ],
-        "decision_value": "unknown",
-        "rationale": "Implementation is active; real promoted-grid inspection and all downstream actions remain gated."
+        "decision_value": "enables_dependency",
+        "rationale": "The exact approved recovery and conditional conversion sequence completed without retry, network access, source mutation, orbit or radar action, or scientific claim."
       },
       "next_dependency": "M2-DEM-VERTICAL-DATUM-CONVERSION"
     },
@@ -1507,15 +1510,19 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "planned",
+      "status": "complete",
       "inputs": [
-        "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
-        "records/acquisition/dem-verification-summary.json",
-        "records/acquisition/m2-egm2008-proj25-verification.json"
+        "records/acquisition/m2-geoid-001-receipt-recovery-002.json",
+        "records/acquisition/m2-dem-vertical-datum-proj25-operation-selection-sign-preflight.json",
+        "records/processing/m2-dem-vertical-datum-proj25-conversion-batch-001.json"
       ],
       "outputs": [
-        "external append-only EGM2008-to-WGS84 ellipsoidal DEM derivatives",
-        "per-tile conversion and validation receipts"
+        "four external append-only EGM2008-to-WGS84 ellipsoidal DEM derivatives",
+        "records/processing/m2-dem-001-proj25-conversion-001-terminal.json",
+        "records/processing/m2-dem-002-proj25-conversion-001-terminal.json",
+        "records/processing/m2-dem-003-proj25-conversion-001-terminal.json",
+        "records/processing/m2-dem-004-proj25-conversion-001-terminal.json",
+        "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json"
       ],
       "gates": {
         "selected_method": "local_proj_egm2008_2_5_preconversion_then_none",
@@ -1527,17 +1534,27 @@
         "prior_selected_method": "arcgis_egm2008_1x1_preconversion_then_none",
         "alternate_proposed_method": "local_proj_egm2008_2_5_preconversion_then_none",
         "required_grid_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
-        "approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c"
+        "approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c",
+        "receipt_recovery_status": "pass",
+        "operation_sign_preflight": "pass",
+        "conversion_batch_status": "pass_four_fixed_order_conversions_verified",
+        "conversion_attempts_per_dem": 1,
+        "automatic_retry_performed": false,
+        "all_source_files_immutable": true,
+        "proj_network_enabled": false,
+        "terminal_reconciliation_sha256": "2103359e15c4cd963a89d7cdf2169c598c86a0e02e93766e6aab6df3237b30d6"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [],
       "exit_condition_delta": {
         "expected": [
           "EXIT-202-PIXEL-AND-RIGHTS-QA"
         ],
-        "observed": [],
-        "decision_value": "defer",
-        "rationale": "The exact grid destination exists, but recovery-001 failed terminal receipt persistence after promotion. Receipt recovery and downstream continuation require a separate owner decision."
+        "observed": [
+          "four exact ellipsoidal DEM derivatives passed structural, AOI finite-value, ArcGIS-readability, and seam-correction checks"
+        ],
+        "decision_value": "enables_dependency",
+        "rationale": "The DEM vertical-datum conversion dependency passes only as an input engineering result; radar pixel readiness and orbit application remain unresolved."
       },
       "next_dependency": "M2-ORBIT-APPLY"
     },
@@ -1819,13 +1836,14 @@
         "records/baseline orbit-application receipts"
       ],
       "gates": {
-        "dem_vertical_datum_gate": "method_selected_owner_install_pending",
+        "dem_vertical_datum_gate": "pass_exact_proj25_four_ellipsoidal_derivatives",
         "terrain_result_review": "complete_bounded_owner_acceptance_readiness_still_defer",
-        "radar_pixel_readiness": "pending",
+        "radar_pixel_readiness": "pending_separate_governed_review",
         "precise_substitution_authorized": false,
         "orbit_input_verification": "pass_four_exact_resorb_inputs_only",
         "orbit_input_verification_ref": "records/readiness/m2-orbit-offline-verification-recovery-001-terminal-reconciliation.json",
-        "orbit_application_started": false
+        "orbit_application_started": false,
+        "dem_vertical_terminal_reconciliation_sha256": "2103359e15c4cd963a89d7cdf2169c598c86a0e02e93766e6aab6df3237b30d6"
       },
       "disposition": null,
       "retained_failures": [],
@@ -1836,7 +1854,7 @@
         ],
         "observed": [],
         "decision_value": "unknown",
-        "rationale": "Application cannot begin until Sentinel, DEM, vertical, orbit, terrain-review, and radar-readiness prerequisites pass."
+        "rationale": "Application cannot begin until radar pixel readiness and an executable exact-source orbit-application route are separately governed and pass; the completed DEM conversion creates no orbit or radar authority."
       },
       "next_dependency": "M2-BASELINE"
     },
@@ -3460,8 +3478,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION",
-    "next_action": "Implement and validate only the approved ArcGIS-safe timestamp and pre-reserved receipt-recovery controls, then require fresh public default-branch CI. Do not inspect the promoted grid or source DEM pixels, run the operation/sign preflight, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight.",
+    "current_checkpoint": "M2-ORBIT-APPLY",
+    "next_action": "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3505,7 +3523,7 @@
       "Metadata recovery-001 is terminal after exact promotion because both success and failure terminal receipt construction failed; do not retry or reconstruct its terminal result.",
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery."
     ],
-    "parallel_checkpoint": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION",
-    "parallel_next_action": "Implement and validate only the approved ArcGIS-safe timestamp and pre-reserved receipt-recovery controls, then require fresh public default-branch CI. Do not inspect the promoted grid or source DEM pixels, run the operation/sign preflight, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight."
+    "parallel_checkpoint": "M2-ORBIT-APPLY",
+    "parallel_next_action": "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication."
   }
 }

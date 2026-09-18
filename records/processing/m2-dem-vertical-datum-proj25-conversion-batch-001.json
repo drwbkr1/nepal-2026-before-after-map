@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-CONVERSION-BATCH-001",
+  "status": "pass_four_fixed_order_conversions_verified",
+  "started_at_utc": "2026-09-18T19:27:08Z",
+  "completed_at_utc": "2026-09-18T19:28:35Z",
+  "source_order": [
+    "M2-DEM-001",
+    "M2-DEM-002",
+    "M2-DEM-003",
+    "M2-DEM-004"
+  ],
+  "attempted_order": [
+    "M2-DEM-001",
+    "M2-DEM-002",
+    "M2-DEM-003",
+    "M2-DEM-004"
+  ],
+  "results": [
+    {
+      "source_id": "M2-DEM-001",
+      "status": "pass_converted_verified_promoted",
+      "attempt_id": "m2-dem-001-proj25-conversion-001"
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "status": "pass_converted_verified_promoted",
+      "attempt_id": "m2-dem-002-proj25-conversion-001"
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "status": "pass_converted_verified_promoted",
+      "attempt_id": "m2-dem-003-proj25-conversion-001"
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "status": "pass_converted_verified_promoted",
+      "attempt_id": "m2-dem-004-proj25-conversion-001"
+    }
+  ],
+  "seams": [
+    {
+      "seam_id": "E85-N27",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.000244140625,
+      "correction_discontinuity_abs_p99_m": 0.0003662109375,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "E85-N28",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.00048828125,
+      "correction_discontinuity_abs_p99_m": 0.00048828125,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "N28-E84",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 6.103515625e-05,
+      "correction_discontinuity_abs_p99_m": 0.0001220703125,
+      "correction_discontinuity_abs_max_m": 0.0001220703125
+    },
+    {
+      "seam_id": "N28-E85",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.0,
+      "correction_discontinuity_abs_p99_m": 0.000244140625,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    }
+  ],
+  "seam_failure": null,
+  "assertions": {
+    "maximum_attempts_per_dem": 1,
+    "automatic_retry_performed": false,
+    "stopped_on_first_failure": false,
+    "source_files_immutable": true,
+    "proj_network_enabled": false,
+    "orbit_or_radar_action_performed": false,
+    "scientific_result_established": false
+  }
+}
