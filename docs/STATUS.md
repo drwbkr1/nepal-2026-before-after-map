@@ -6,7 +6,7 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-ORBIT-APPLY`; radar real-001 is terminal after the first M1-SRC-001 identity guard failed on inventory representation and order before source processing, and any correction or new attempt requires a separately governed recovery
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-PUBLICATION`; radar real-001 remains terminal, and a zero-decision strict-normalization recovery packet is ready for public validation before owner review
 
 ## Purpose
 
@@ -271,3 +271,5 @@ Corrected implementation commit `ff2e26f5d28d59b02c78f4d16d14ddccb3ff987e` passe
 Exact gate-state commit `9a8135e5c503b33c29ab25952efcba265c19cd7a` passed public default-branch CI run `35396191631`: 1,003 required files and all 563 tests passed with 13 intentional public-runtime skips. Final no-content preflight SHA-256 `55e9a30d22c446596e565d12cf13926a939c90850333d5fca54c1272e3af6662` then passed.
 
 The one authorized real attempt was created and consumed, then stopped at the first M1-SRC-001 identity guard before any source processing. The diagnostic found 26 expected and 26 actual files with zero path or byte-identity differences after normalization; direct equality failed because the manifest includes `zip_crc32` and archive order while the runtime inventory omits that field and sorts paths. Terminal reconciliation SHA-256 is `5696ab1542b386260eff7b3c0591891abe0a907c4c62342e4aa411abd9b73300`. No retry, source copy, orbit application, radar pixel processing, route evaluation, baseline, change analysis, attribution, derived-pixel publication, or scientific claim occurred.
+
+Terminal commit `05010532745c7dd361a3ee8af34cb8c96a42b95f` passed public CI run `35397193358` with 1,007 required files, 563 tests, and 13 intentional public-runtime skips. Recovery-001 proposal SHA-256 is `cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04`; review-bundle SHA-256 is `69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9`. The packet contains zero decisions and releases no correction, project-data read, new attempt, or scientific action before public CI and an exact attested owner decision.

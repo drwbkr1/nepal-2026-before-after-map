@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-18T21:34:00Z",
+  "status": "ready_zero_decisions",
+  "human_decision_count": 0,
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json",
+      "sha256": "cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04",
+      "purpose": "normative recovery proposal",
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-pixel-orbit-application-recovery-001-review.json",
+          "sha256": "56a614dbe8ae6bb0bebddda879be682340e65270592b629a2d5263b37df164be"
+        }
+      ]
+    },
+    {
+      "path": "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-preflight.json",
+      "sha256": "a06401b3ccf774c0af1753ed277c27c7ad91ec560c701f67c5f5fa6f3157715a",
+      "purpose": "terminal-state review preflight",
+      "render_receipts": []
+    },
+    {
+      "path": "docs/M2_RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_001_REVIEW.md",
+      "sha256": "113d8770e7d6779a83ae2dc5976744f537a0f89a066e759b0e5b6ec5f6f8f1cc",
+      "purpose": "human-readable review",
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-pixel-orbit-application-recovery-001-review.json",
+          "sha256": "56a614dbe8ae6bb0bebddda879be682340e65270592b629a2d5263b37df164be"
+        }
+      ]
+    },
+    {
+      "path": "docs/assets/m2-radar-pixel-orbit-application-recovery-001-review.png",
+      "sha256": "565b9caaff3de21e0f388f2d294dfaef94a04a07bd48645ff54c25e556d4fa47",
+      "purpose": "rendered review surface",
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-pixel-orbit-application-recovery-001-review.json",
+          "sha256": "56a614dbe8ae6bb0bebddda879be682340e65270592b629a2d5263b37df164be"
+        }
+      ]
+    }
+  ],
+  "decision_items": [
+    {
+      "item_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001",
+      "allowed_decisions": [
+        "approve",
+        "revise",
+        "defer"
+      ],
+      "evidence_ref": "contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json",
+      "evidence_sha256": "cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04"
+    }
+  ]
+}

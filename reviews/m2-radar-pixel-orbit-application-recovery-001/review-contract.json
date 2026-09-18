@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-CONTRACT",
+  "status": "open_zero_decisions",
+  "review_bundle": {
+    "manifest_ref": "reviews/m2-radar-pixel-orbit-application-recovery-001/review-bundle.json",
+    "manifest_sha256": "69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9"
+  },
+  "required_response_path_pattern": "reviews/m2-radar-pixel-orbit-application-recovery-001/response-<sha256>.json",
+  "required_attestation": true,
+  "decision_items": [
+    {
+      "item_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001",
+      "allowed_decisions": [
+        "approve",
+        "revise",
+        "defer"
+      ],
+      "evidence_sha256": "69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9"
+    }
+  ],
+  "authority_boundary": {
+    "packet_creates_authority": false,
+    "implementation_authorized": false,
+    "new_attempt_authorized": false,
+    "baseline_or_change_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

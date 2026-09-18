@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-PROPOSAL",
+  "prepared_at_utc": "2026-09-18T21:34:00Z",
+  "status": "proposed_inactive_owner_review_required",
+  "preparation_base_commit": "05010532745c7dd361a3ee8af34cb8c96a42b95f",
+  "trigger": {
+    "terminal_reconciliation_ref": "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "5696ab1542b386260eff7b3c0591891abe0a907c4c62342e4aa411abd9b73300",
+    "identity_failure_diagnostic_ref": "records/processing/radar-pixel-orbit-application-001/m1-src-001-identity-failure-diagnostic.json",
+    "identity_failure_diagnostic_sha256": "17032e31c285f1d0aa73397c548eed47825510c4f750fc086d10ec17baae5ba4",
+    "terminal_publication_gate_ref": "records/readiness/m2-radar-pixel-orbit-application-001-terminal-publication-gate.json",
+    "terminal_publication_gate_sha256": "28f75337dc39b3038d84e06c48dd42827feae03cd69803a79c7fc1afb76548fc",
+    "consumed_attempt_id": "radar-pixel-orbit-application-001-real-001",
+    "failure_code": "materialized_safe_inventory_mismatch",
+    "stopped_source_id": "M1-SRC-001",
+    "source_processing_attempts_started": 0,
+    "route_evaluations_started": 0
+  },
+  "observed_mismatch": {
+    "expected_file_count": 26,
+    "actual_file_count": 26,
+    "added_path_count": 0,
+    "missing_path_count": 0,
+    "byte_identity_mismatch_count": 0,
+    "representation_only_mismatch_count": 26,
+    "ordering_position_mismatch_count": 17,
+    "expected_only_field": "zip_crc32",
+    "normalized_sorted_expected_matches_actual": true
+  },
+  "proposed_bounded_actions": [
+    "implement one inventory comparator that projects manifest and runtime entries to the exact relative_path, size_bytes, and sha256 fields and sorts both case-insensitively before equality",
+    "retain hard failure for any added path, missing path, size mismatch, SHA-256 mismatch, duplicate normalized path, unsafe path, or reparse point",
+    "move pre-processing external identity verification under durable terminal-error handling so every started attempt receives a terminal receipt",
+    "add synthetic tests for extra zip_crc32 fields, archive-order differences, duplicate paths, real byte mismatches, interruption, terminal persistence, fixed order, and stop on first failure",
+    "require successful public default-branch CI and one fresh no-content preflight before any new project-data read",
+    "only on those passes create one fresh radar-pixel-orbit-application-recovery-001-real-001 attempt and run the same six sources and two routes under the unchanged processing and QA contracts",
+    "reconcile the terminal outcome and stop before baseline admission or change analysis"
+  ],
+  "fixed_sequence": {
+    "source_ids": [
+      "M1-SRC-001",
+      "M1-SRC-002",
+      "M1-SRC-003",
+      "M1-SRC-004",
+      "M1-SRC-005",
+      "M1-SRC-006"
+    ],
+    "route_ids": [
+      "PAIR-S1-ASC-R085-IW",
+      "PAIR-S1-DESC-R121-IW"
+    ],
+    "new_attempt_id": "radar-pixel-orbit-application-recovery-001-real-001",
+    "consumed_attempt_id": "radar-pixel-orbit-application-001-real-001"
+  },
+  "limits": {
+    "new_real_attempts": 1,
+    "orbit_application_attempts_per_source": 1,
+    "qa_processing_attempts_per_source": 1,
+    "route_qa_attempts_per_pair": 1,
+    "automatic_retry": false,
+    "stop_on_first_execution_failure": true,
+    "network_requests": 0,
+    "credential_or_token_actions": 0,
+    "source_overwrites": 0,
+    "output_overwrites": 0
+  },
+  "frozen_without_change": [
+    "six source identities, source order, source-to-AUX_RESORB map, four AUX_RESORB identities, four ellipsoidal DEM identities",
+    "EPSG:32645, 10 metre grid, AOIs, polarization handling, processing chain, masks, thresholds, registration method, route order, and all QA predicates",
+    "real-001 terminal status and every prior receipt"
+  ],
+  "does_not_authorize": [
+    "implementation, preflight, project-data read, new attempt, retry, or reuse before exact attested owner approval and later public implementation CI",
+    "source, date, orbit, DEM, AOI, CRS, resolution, threshold, mask, stable-control, or route substitution",
+    "network, credential, account, terms, installation, or UAC action",
+    "baseline admission, change analysis, interpretation, attribution, emergency guidance, derived-pixel publication, or scientific publication"
+  ],
+  "decision_domain": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "attestation_required": true,
+  "human_decision_count": 0
+}

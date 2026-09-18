@@ -3617,6 +3617,51 @@
         "rationale": "The one authorized real attempt is consumed and cannot be retried. Its byte identities match after normalization, but the frozen direct inventory comparison failed on zip_crc32 fields and archive order before source processing."
       },
       "next_dependency": "M2-ORBIT-APPLY"
+    },
+    {
+      "id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW",
+      "purpose": "Review one bounded inventory-normalization correction and fresh exact-source attempt without releasing baseline or change analysis.",
+      "depends_on": [
+        "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "planned",
+      "inputs": [
+        "contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-preflight.json",
+        "reviews/m2-radar-pixel-orbit-application-recovery-001/review-bundle.json",
+        "reviews/m2-radar-pixel-orbit-application-recovery-001/review-contract.json",
+        "reviews/m2-radar-pixel-orbit-application-recovery-001/blank-response.json",
+        "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json",
+        "records/processing/radar-pixel-orbit-application-001/m1-src-001-identity-failure-diagnostic.json",
+        "records/readiness/m2-radar-pixel-orbit-application-001-terminal-publication-gate.json"
+      ],
+      "outputs": [],
+      "gates": {
+        "public_ci": "pending",
+        "human_decision_count": 0,
+        "attestation": false,
+        "implementation_authorized": false,
+        "new_attempt_authorized": false,
+        "baseline_or_change_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [
+          "successful public CI",
+          "one exact attested owner decision"
+        ],
+        "observed": [
+          "zero-decision packet prepared"
+        ],
+        "decision_value": "unknown",
+        "rationale": "The packet creates no recovery authority."
+      },
+      "next_dependency": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION"
     }
   ],
   "path_efficiency": {
@@ -3673,8 +3718,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ORBIT-APPLY",
-    "next_action": "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication.",
+    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-PUBLICATION",
+    "next_action": "Publish and publicly validate the exact zero-decision radar inventory-normalization recovery-001 review packet. No correction, new real attempt, orbit application, or radar pixel processing is authorized before one exact attested owner decision on the public packet.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3719,7 +3764,7 @@
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery.",
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval."
     ],
-    "parallel_checkpoint": "M2-ORBIT-APPLY",
-    "parallel_next_action": "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication."
+    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-PUBLICATION",
+    "parallel_next_action": "Publish and publicly validate the exact zero-decision radar inventory-normalization recovery-001 review packet. No correction, new real attempt, orbit application, or radar pixel processing is authorized before one exact attested owner decision on the public packet."
   }
 }

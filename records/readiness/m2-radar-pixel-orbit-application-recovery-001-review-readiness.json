@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-READINESS",
+  "recorded_at_utc": "2026-09-18T21:34:00Z",
+  "status": "pass_ready_publication_zero_decisions",
+  "bindings": {
+    "contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json": "cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-preflight.json": "a06401b3ccf774c0af1753ed277c27c7ad91ec560c701f67c5f5fa6f3157715a",
+    "docs/M2_RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_001_REVIEW.md": "113d8770e7d6779a83ae2dc5976744f537a0f89a066e759b0e5b6ec5f6f8f1cc",
+    "docs/assets/m2-radar-pixel-orbit-application-recovery-001-review.png": "565b9caaff3de21e0f388f2d294dfaef94a04a07bd48645ff54c25e556d4fa47",
+    "records/surface-receipts/m2-radar-pixel-orbit-application-recovery-001-review.json": "56a614dbe8ae6bb0bebddda879be682340e65270592b629a2d5263b37df164be",
+    "reviews/m2-radar-pixel-orbit-application-recovery-001/review-bundle.json": "69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9",
+    "reviews/m2-radar-pixel-orbit-application-recovery-001/review-contract.json": "1f131cc63380e4dad9846e32129a6e2493d7071e85e832a385d5079543d0b74b",
+    "reviews/m2-radar-pixel-orbit-application-recovery-001/blank-response.json": "6b45287b9a2280e4afa1a7f7c588c661894abea1af2106fd5c1a69a35aabf06f",
+    "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json": "5696ab1542b386260eff7b3c0591891abe0a907c4c62342e4aa411abd9b73300",
+    "records/processing/radar-pixel-orbit-application-001/m1-src-001-identity-failure-diagnostic.json": "17032e31c285f1d0aa73397c548eed47825510c4f750fc086d10ec17baae5ba4",
+    "records/readiness/m2-radar-pixel-orbit-application-001-terminal-publication-gate.json": "28f75337dc39b3038d84e06c48dd42827feae03cd69803a79c7fc1afb76548fc",
+    "contracts/milestone-002.json": "cabe1a23b25c9a7ea902729cc424d74907a6d51821543f6f720b45ebe4d094d4",
+    "records/project-control-profile.json": "c4bc4beac85f4728a33e8bb036a474c14c09ff208fc4f393cf899e95d99d58e3",
+    "records/long-term-goal.json": "527dfec85e76e9a35613b852c19ee9aad5ff9f35fd770b2dbdb6fc5c6c502ba6"
+  },
+  "checks": {
+    "proposal_sha256": "cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04",
+    "review_bundle_sha256": "69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9",
+    "human_decision_count": 0,
+    "blank_response": true,
+    "terminal_real_001_preserved": true
+  },
+  "released_now": {
+    "public_review_packet_ci": true,
+    "owner_review_after_public_ci": true,
+    "implementation": false,
+    "project_data_content_read": false,
+    "new_real_attempt": false
+  },
+  "assertions": {
+    "human_decisions_fabricated": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "external_custody_mutated": false,
+    "implementation_authorized": false,
+    "new_attempt_authorized": false,
+    "scientific_result_established": false
+  }
+}

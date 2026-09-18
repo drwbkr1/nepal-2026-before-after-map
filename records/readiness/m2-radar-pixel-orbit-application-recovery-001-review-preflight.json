@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-PREFLIGHT",
+  "checked_at_utc": "2026-09-18T21:34:00Z",
+  "status": "pass_ready_prepare_zero_decision_review",
+  "bindings": {
+    "proposal_sha256": "cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04",
+    "terminal_reconciliation_sha256": "5696ab1542b386260eff7b3c0591891abe0a907c4c62342e4aa411abd9b73300",
+    "identity_failure_diagnostic_sha256": "17032e31c285f1d0aa73397c548eed47825510c4f750fc086d10ec17baae5ba4"
+  },
+  "checks": {
+    "terminal_attempt_consumed": true,
+    "byte_identity_mismatch_count": 0,
+    "normalization_defect_bounded": true,
+    "current_authority_allows_retry": false
+  },
+  "assertions": {
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "external_custody_mutated": false,
+    "implementation_authorized": false,
+    "new_attempt_authorized": false,
+    "scientific_result_established": false
+  }
+}
