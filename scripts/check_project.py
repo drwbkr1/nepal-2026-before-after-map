@@ -170,6 +170,8 @@ REQUIRED = [
     "records/surface-receipts/m2-radar-pixel-orbit-application-001-synthetic.json",
     "records/surface-receipts/m2-radar-pixel-orbit-application-001-synthetic-002.json",
     "scripts/record_m2_radar_pixel_orbit_application_001_implementation_readiness.py",
+    "records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness-attempt-001-superseded.json",
+    "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-attempt-001-failure.json",
     "records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness.json",
     "tests/test_m2_radar_pixel_orbit_application_001.py",
     "scripts/inspect_m2_radar_pixel_orbit_application_capability.py",
@@ -12389,6 +12391,8 @@ def main() -> None:
     radar_synthetic_failure = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-synthetic-attempt-001-failure.json").read_text(encoding="utf-8"))
     radar_synthetic = json.loads((ROOT / "records/surface-receipts/m2-radar-pixel-orbit-application-001-synthetic.json").read_text(encoding="utf-8"))
     radar_synthetic_002 = json.loads((ROOT / "records/surface-receipts/m2-radar-pixel-orbit-application-001-synthetic-002.json").read_text(encoding="utf-8"))
+    radar_implementation_superseded = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness-attempt-001-superseded.json").read_text(encoding="utf-8"))
+    radar_implementation_publication_failure = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-attempt-001-failure.json").read_text(encoding="utf-8"))
     radar_implementation_readiness = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness.json").read_text(encoding="utf-8"))
     if (
         radar_lock_failure.get("status") != "rejected_before_decision_reveal_invalid_hash_bound_filename"
@@ -12467,11 +12471,30 @@ def main() -> None:
         or radar_synthetic_002.get("assertions", {}).get("production_runner_calls_match_installed_signatures") is not True
     ):
         fail("radar corrected synthetic receipt does not bind the production runner")
+    if (
+        sha256("records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness-attempt-001-superseded.json") != "84d7b4239244aca4608efabf7893a0473088270ba03b38de9b3d9a96321a6ea7"
+        or radar_implementation_superseded.get("status") != "pass_exact_six_source_implementation_public_ci_pending"
+        or radar_implementation_superseded.get("validation", {}).get("repository_checker_status") != "pass_998_required_files"
+        or radar_implementation_publication_failure.get("status") != "terminal_public_ci_failure_no_release"
+        or radar_implementation_publication_failure.get("implementation_commit_sha") != "2d04633a835141084e38bbdc11e1411d48012e95"
+        or radar_implementation_publication_failure.get("public_ci_run_id") != 35394937116
+        or radar_implementation_publication_failure.get("public_ci_conclusion") != "failure"
+        or radar_implementation_publication_failure.get("repository_checker_status") != "pass_998_required_files"
+        or radar_implementation_publication_failure.get("public_test_result") != {"tests_run": 563, "intentional_skips": 13, "errors": 1, "failures": 0}
+        or radar_implementation_publication_failure.get("superseded_readiness_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness-attempt-001-superseded.json")
+        or any(radar_implementation_publication_failure.get("assertions", {}).get(key) is not False for key in (
+            "public_gate_passed", "final_no_content_preflight_performed", "project_data_content_read",
+            "external_custody_accessed", "external_custody_mutated", "real_processing_attempt_created",
+            "orbit_application_executed", "radar_pixel_processing_executed", "baseline_or_change_analysis_executed",
+            "scientific_result_established",
+        ))
+    ):
+        fail("radar implementation publication failure history differs or overclaims")
     for ref in RADAR_PIXEL_ORBIT_APPLICATION_001_IMPLEMENTATION_FILES:
         if radar_implementation_readiness.get("bindings", {}).get(ref) != sha256(ref):
             fail(f"radar implementation readiness binding differs: {ref}")
     if (
-        radar_implementation_readiness.get("status") != "pass_exact_six_source_implementation_public_ci_pending"
+        radar_implementation_readiness.get("status") != "pass_corrected_portable_six_source_implementation_public_ci_pending"
         or radar_implementation_readiness.get("implementation", {}).get("source_order") != [f"M1-SRC-{index:03d}" for index in range(1, 7)]
         or radar_implementation_readiness.get("implementation", {}).get("route_order") != ["PAIR-S1-ASC-R085-IW", "PAIR-S1-DESC-R121-IW"]
         or radar_implementation_readiness.get("implementation", {}).get("automatic_retry_authorized") is not False
@@ -12479,7 +12502,7 @@ def main() -> None:
         or radar_implementation_readiness.get("validation", {}).get("arcgis_runtime_test_count") != 1
         or radar_implementation_readiness.get("validation", {}).get("full_repository_test_count") != 563
         or radar_implementation_readiness.get("validation", {}).get("full_repository_intentional_skip_count") != 6
-        or radar_implementation_readiness.get("validation", {}).get("repository_checker_status") != "pass_998_required_files"
+        or radar_implementation_readiness.get("validation", {}).get("repository_checker_status") != "pass_1000_required_files"
         or radar_implementation_readiness.get("released_now", {}).get("public_ci") is not True
         or any(radar_implementation_readiness.get("released_now", {}).get(key) is not False for key in (
             "final_no_content_preflight", "project_data_content_read", "orbit_application", "radar_pixel_processing", "route_evaluation",
@@ -12517,7 +12540,7 @@ def main() -> None:
         or radar_implementation_evidence.get("status") != "pass_exact_six_source_implementation_public_ci_pending"
         or radar_implementation_evidence.get("approval_sha256") != sha256("records/source-gates/m2-radar-pixel-orbit-application-001-approval.json")
         or radar_implementation_evidence.get("activation_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-approval-activation.json")
-        or radar_implementation_evidence.get("implementation_readiness_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness.json")
+        or radar_implementation_evidence.get("implementation_readiness_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness-attempt-001-superseded.json")
         or radar_implementation_evidence.get("assertions", {}).get("human_decision_count") != 1
         or radar_implementation_evidence.get("assertions", {}).get("attestation") is not True
         or radar_implementation_evidence.get("assertions", {}).get("focused_test_count") != 11
@@ -12532,6 +12555,36 @@ def main() -> None:
         ))
     ):
         fail("EVID-0146 radar implementation evidence differs or overclaims")
+    radar_implementation_failure_evidence = ledger_by_id.get("EVID-0147")
+    if (
+        not isinstance(radar_implementation_failure_evidence, dict)
+        or radar_implementation_failure_evidence.get("status") != "terminal_public_ci_failure_no_release"
+        or radar_implementation_failure_evidence.get("failure_record_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-attempt-001-failure.json")
+        or radar_implementation_failure_evidence.get("superseded_readiness_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness-attempt-001-superseded.json")
+        or radar_implementation_failure_evidence.get("assertions", {}).get("implementation_commit") != "2d04633a835141084e38bbdc11e1411d48012e95"
+        or radar_implementation_failure_evidence.get("assertions", {}).get("public_ci_run_id") != 35394937116
+        or radar_implementation_failure_evidence.get("assertions", {}).get("repository_checker_passed") is not True
+        or radar_implementation_failure_evidence.get("assertions", {}).get("production_behavior_changed") is not False
+        or radar_implementation_failure_evidence.get("assertions", {}).get("final_no_content_preflight_performed") is not False
+        or radar_implementation_failure_evidence.get("assertions", {}).get("real_processing_attempt_created") is not False
+        or radar_implementation_failure_evidence.get("assertions", {}).get("scientific_result_established") is not False
+    ):
+        fail("EVID-0147 radar implementation publication failure evidence differs")
+    radar_corrected_readiness_evidence = ledger_by_id.get("EVID-0148")
+    if (
+        not isinstance(radar_corrected_readiness_evidence, dict)
+        or radar_corrected_readiness_evidence.get("status") != "pass_corrected_portable_six_source_implementation_public_ci_pending"
+        or radar_corrected_readiness_evidence.get("implementation_readiness_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness.json")
+        or radar_corrected_readiness_evidence.get("failure_record_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-attempt-001-failure.json")
+        or radar_corrected_readiness_evidence.get("assertions", {}).get("full_repository_test_count") != 563
+        or radar_corrected_readiness_evidence.get("assertions", {}).get("repository_required_file_count") != 1000
+        or radar_corrected_readiness_evidence.get("assertions", {}).get("public_ci_pending") is not True
+        or radar_corrected_readiness_evidence.get("assertions", {}).get("production_external_root_enforcement_unchanged") is not True
+        or radar_corrected_readiness_evidence.get("assertions", {}).get("final_no_content_preflight_performed") is not False
+        or radar_corrected_readiness_evidence.get("assertions", {}).get("real_processing_attempt_created") is not False
+        or radar_corrected_readiness_evidence.get("assertions", {}).get("scientific_result_established") is not False
+    ):
+        fail("EVID-0148 radar corrected readiness evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():

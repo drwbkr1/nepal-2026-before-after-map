@@ -28,6 +28,8 @@ ARTIFACTS = [
     "records/readiness/m2-radar-pixel-orbit-application-001-synthetic-attempt-001-failure.json",
     "records/surface-receipts/m2-radar-pixel-orbit-application-001-synthetic.json",
     "records/surface-receipts/m2-radar-pixel-orbit-application-001-synthetic-002.json",
+    "records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness-attempt-001-superseded.json",
+    "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-attempt-001-failure.json",
 ]
 
 
@@ -48,7 +50,7 @@ def main() -> int:
         "schema_version": "1.0",
         "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION-READINESS",
         "recorded_at_utc": args.recorded_at_utc,
-        "status": "pass_exact_six_source_implementation_public_ci_pending",
+        "status": "pass_corrected_portable_six_source_implementation_public_ci_pending",
         "bindings": {ref: sha256_file(ROOT / ref) for ref in ARTIFACTS},
         "implementation": {
             "source_order": [f"M1-SRC-{index:03d}" for index in range(1, 7)],
@@ -78,6 +80,9 @@ def main() -> int:
             "fixed_order_and_stop_on_failure_checked": True,
             "publication_gate_fail_closed_checked": True,
             "network_library_absence_checked": True,
+            "production_external_root_enforcement_unchanged": True,
+            "public_test_uses_metadata_only_when_external_root_is_absent": True,
+            "failed_publication_attempt_preserved": True,
         },
         "released_now": {
             "public_ci": True,

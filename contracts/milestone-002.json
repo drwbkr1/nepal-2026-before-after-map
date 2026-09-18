@@ -3528,7 +3528,9 @@
         "scripts/record_m2_radar_pixel_orbit_application_001_implementation_readiness.py",
         "records/readiness/m2-radar-pixel-orbit-application-001-synthetic-attempt-001-failure.json",
         "records/surface-receipts/m2-radar-pixel-orbit-application-001-synthetic.json",
-        "records/surface-receipts/m2-radar-pixel-orbit-application-001-synthetic-002.json"
+        "records/surface-receipts/m2-radar-pixel-orbit-application-001-synthetic-002.json",
+        "records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness-attempt-001-superseded.json",
+        "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-attempt-001-failure.json"
       ],
       "gates": {
         "approval_sha256": "1d6522a0a340e3237c29b8489e742c6a8b376314c358ee9ae0d323621cf4b6fe",
@@ -3541,7 +3543,8 @@
       "disposition": null,
       "retained_failures": [
         "records/readiness/m2-radar-pixel-orbit-application-001-review-lock-attempt-001-failure.json",
-        "records/readiness/m2-radar-pixel-orbit-application-001-synthetic-attempt-001-failure.json"
+        "records/readiness/m2-radar-pixel-orbit-application-001-synthetic-attempt-001-failure.json",
+        "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-attempt-001-failure.json"
       ],
       "exit_condition_delta": {
         "expected": [

@@ -45,10 +45,17 @@ class M2RadarPixelOrbitApplication001Tests(unittest.TestCase):
     def test_contract_is_exact_and_loads_repo_metadata_without_pixels(self) -> None:
         self.assertEqual(hashlib.sha256((ROOT / CONTRACT_REF).read_bytes()).hexdigest(), CONTRACT_SHA256)
         self.assertEqual(validate_contract(self.contract, ROOT), [])
-        plan = load_execution_plan(ROOT, CONTRACT_REF)
-        self.assertEqual([item["source_id"] for item in plan["sources"]], SOURCE_ORDER)
-        self.assertEqual(sorted(plan["orbits"]), [f"M2-ORB-{index:03d}" for index in range(1, 5)])
-        self.assertEqual([item["source_id"] for item in plan["dems"]], [f"M2-DEM-{index:03d}" for index in range(1, 5)])
+        external_root = Path(self.contract["execution_boundary"]["external_data_root"])
+        if external_root.is_dir():
+            plan = load_execution_plan(ROOT, CONTRACT_REF)
+            self.assertEqual([item["source_id"] for item in plan["sources"]], SOURCE_ORDER)
+            self.assertEqual(sorted(plan["orbits"]), [f"M2-ORB-{index:03d}" for index in range(1, 5)])
+            self.assertEqual([item["source_id"] for item in plan["dems"]], [f"M2-DEM-{index:03d}" for index in range(1, 5)])
+        else:
+            self.assertEqual(str(external_root), r"C:\Projects\Active\nepal-2026-before-after-map-data")
+            self.assertEqual([item["source_id"] for item in self.contract["sources"]], SOURCE_ORDER)
+            self.assertEqual([item["source_id"] for item in self.contract["orbits"]], [f"M2-ORB-{index:03d}" for index in range(1, 5)])
+            self.assertEqual([item["source_id"] for item in self.contract["ellipsoidal_dem_inputs"]], [f"M2-DEM-{index:03d}" for index in range(1, 5)])
 
     def test_contract_preserves_attempt_and_scientific_boundaries(self) -> None:
         attempt = self.contract["attempt"]

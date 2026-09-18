@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION-PUBLICATION-ATTEMPT-001-FAILURE",
+  "observed_at_utc": "2026-09-18T21:05:32Z",
+  "status": "terminal_public_ci_failure_no_release",
+  "implementation_commit_sha": "2d04633a835141084e38bbdc11e1411d48012e95",
+  "public_ci_run_id": 35394937116,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35394937116",
+  "public_ci_conclusion": "failure",
+  "repository_checker_status": "pass_998_required_files",
+  "public_test_result": {
+    "tests_run": 563,
+    "intentional_skips": 13,
+    "errors": 1,
+    "failures": 0
+  },
+  "failure": {
+    "test": "test_m2_radar_pixel_orbit_application_001.M2RadarPixelOrbitApplication001Tests.test_contract_is_exact_and_loads_repo_metadata_without_pixels",
+    "type": "FileNotFoundError",
+    "stage": "portable_public_test",
+    "cause": "The test called the production plan loader, which correctly requires the Windows external custody root, on the Ubuntu public runner where that owner-controlled root does not exist."
+  },
+  "superseded_readiness_ref": "records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness-attempt-001-superseded.json",
+  "superseded_readiness_sha256": "84d7b4239244aca4608efabf7893a0473088270ba03b38de9b3d9a96321a6ea7",
+  "correction": "Keep production external-root enforcement unchanged and make only the test branch portable by validating exact metadata when the external root is absent.",
+  "assertions": {
+    "public_gate_passed": false,
+    "final_no_content_preflight_performed": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "external_custody_mutated": false,
+    "real_processing_attempt_created": false,
+    "orbit_application_executed": false,
+    "radar_pixel_processing_executed": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  }
+}
