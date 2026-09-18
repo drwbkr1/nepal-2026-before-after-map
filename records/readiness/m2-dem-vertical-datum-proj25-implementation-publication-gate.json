@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-IMPLEMENTATION-PUBLICATION-GATE",
+  "verified_at_utc": "2026-09-18T02:43:58Z",
+  "status": "pass_public_default_branch_ci_real_actions_released",
+  "implementation_commit": "961d58ec8b7099df6f68705ec3c22ee53894cd91",
+  "public_ci_run_id": 35300447490,
+  "public_ci_conclusion": "success",
+  "public_ci_event": "push",
+  "public_ci_workflow": "Validate project controls",
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35300447490",
+  "repository_required_file_count": 891,
+  "public_test_count": 520,
+  "public_intentional_skip_count": 11,
+  "bindings": {
+    "approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c",
+    "implementation_contract_sha256": "f502bbaac62e67f742e781b7d3fc2e165b0ad998080756d26036b4457e35396b",
+    "implementation_readiness_sha256": "c6635e4b8422b437be07374422124fd09b6b845da467d143d74d3b53660a2665"
+  },
+  "released_now": {
+    "final_no_payload_preflight": true,
+    "one_grid_request_only_after_preflight": true,
+    "conditional_fixed_order_conversion_only_after_grid_and_sign_pass": true
+  },
+  "assertions": {
+    "grid_request_performed": false,
+    "grid_payload_bytes_read": 0,
+    "dem_pixels_read": false,
+    "dem_conversion_executed": false,
+    "proj_network_enabled": false,
+    "orbit_or_radar_action_performed": false,
+    "scientific_result_established": false
+  }
+}

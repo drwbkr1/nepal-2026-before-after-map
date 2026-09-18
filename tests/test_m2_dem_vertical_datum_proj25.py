@@ -42,6 +42,22 @@ class DemVerticalDatumProj25Tests(unittest.TestCase):
         self.assertEqual(contract["conversion"]["maximum_attempts_per_dem"], 1)
         self.assertTrue(contract["conversion"]["stop_on_first_failure"])
 
+    def test_publication_gate_releases_only_final_preflight_and_control_checkpoint(self) -> None:
+        gate = __import__("json").loads(
+            (ROOT / "records/readiness/m2-dem-vertical-datum-proj25-implementation-publication-gate.json").read_text(encoding="utf-8")
+        )
+        reconciliation = __import__("json").loads(
+            (ROOT / "records/readiness/m2-dem-vertical-datum-proj25-publication-reconciliation.json").read_text(encoding="utf-8")
+        )
+        profile = __import__("json").loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))
+        self.assertEqual(gate["implementation_commit"], "961d58ec8b7099df6f68705ec3c22ee53894cd91")
+        self.assertEqual(gate["public_ci_run_id"], 35300447490)
+        self.assertEqual(gate["public_ci_conclusion"], "success")
+        self.assertFalse(gate["assertions"]["grid_request_performed"])
+        self.assertFalse(gate["assertions"]["dem_pixels_read"])
+        self.assertEqual(reconciliation["status"], "pass_public_gate_final_no_payload_preflight_ready")
+        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], "M2-DEM-EGM2008-PROJ25-ACQUISITION")
+
     def test_controlled_paths_reject_traversal_and_absolute_paths(self) -> None:
         for unsafe in ("../escape.tif", "/absolute.tif", "a/../../escape.tif"):
             with self.assertRaises(ValueError):

@@ -146,6 +146,10 @@ DEM_VERTICAL_DATUM_ALTERNATE_METHOD_001_IMPLEMENTATION_CHECKPOINT = {
     "checkpoint_id": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION",
     "next_action": "Implement and synthetically validate only the approved exact-grid acquisition, verification, no-network vertical conversion, and ArcGIS-readability controls, then require fresh public default-branch CI. Do not request the grid or read a DEM pixel before that public gate and the final no-payload preflight pass.",
 }
+DEM_EGM2008_PROJ25_ACQUISITION_CHECKPOINT = {
+    "checkpoint_id": "M2-DEM-EGM2008-PROJ25-ACQUISITION",
+    "next_action": "Publish this exact public-gate transition and require successful default-branch CI. Then run the one final no-payload preflight; only on its pass may the exact grid be requested once and verified before any fixed-order DEM conversion.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1119,6 +1123,30 @@ def current_dem_vertical_datum_alternate_method_001_implementation_pending(
     )
 
 
+def current_dem_egm2008_proj25_acquisition_pending(root: Path, state_counts: dict[str, int]) -> bool:
+    """Recognize the public implementation gate and unreached final preflight boundary."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        gate = load(root / "records/readiness/m2-dem-vertical-datum-proj25-implementation-publication-gate.json")
+        reconciliation = load(root / "records/readiness/m2-dem-vertical-datum-proj25-publication-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    implementation = units.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION", {})
+    acquisition = units.get("M2-DEM-EGM2008-PROJ25-ACQUISITION", {})
+    return bool(
+        gate.get("status") == "pass_public_default_branch_ci_real_actions_released"
+        and reconciliation.get("status") == "pass_public_gate_final_no_payload_preflight_ready"
+        and reconciliation.get("publication_gate_sha256")
+        and implementation.get("status") == "complete"
+        and implementation.get("disposition") == "pass_public_default_branch_ci"
+        and acquisition.get("status") == "in_progress"
+        and acquisition.get("gates", {}).get("final_no_payload_preflight") == "ready_not_run"
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -1167,7 +1195,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_dem_vertical_datum_alternate_method_001_implementation_pending(
+            if current_dem_egm2008_proj25_acquisition_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(DEM_EGM2008_PROJ25_ACQUISITION_CHECKPOINT)
+            elif current_dem_vertical_datum_alternate_method_001_implementation_pending(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(DEM_VERTICAL_DATUM_ALTERNATE_METHOD_001_IMPLEMENTATION_CHECKPOINT)

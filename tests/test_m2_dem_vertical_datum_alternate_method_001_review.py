@@ -112,6 +112,7 @@ class DemVerticalDatumAlternateMethod001ReviewTests(unittest.TestCase):
         install = units["M2-DEM-EGM2008-COMPONENT-INSTALL"]
         review = units[CHECKPOINT]
         implementation_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
+        current_checkpoint = "M2-DEM-EGM2008-PROJ25-ACQUISITION"
         implementation = units[implementation_checkpoint]
         acquisition = units["M2-DEM-EGM2008-PROJ25-ACQUISITION"]
         conversion = units["M2-DEM-VERTICAL-DATUM-CONVERSION"]
@@ -124,12 +125,13 @@ class DemVerticalDatumAlternateMethod001ReviewTests(unittest.TestCase):
         self.assertEqual(review["gates"]["human_decision_count"], 1)
         self.assertTrue(review["gates"]["attestation"])
         self.assertTrue(review["gates"]["alternate_method_authorized"])
-        self.assertEqual(implementation["status"], "in_progress")
-        self.assertEqual(acquisition["status"], "planned")
+        self.assertEqual(implementation["status"], "complete")
+        self.assertEqual(implementation["disposition"], "pass_public_default_branch_ci")
+        self.assertEqual(acquisition["status"], "in_progress")
         self.assertEqual(conversion["depends_on"], ["M2-DEM-EGM2008-PROJ25-ACQUISITION"])
-        self.assertEqual(self.milestone["handoff"]["current_checkpoint"], implementation_checkpoint)
-        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], implementation_checkpoint)
-        self.assertEqual(self.goal["current_checkpoint"], implementation_checkpoint)
+        self.assertEqual(self.milestone["handoff"]["current_checkpoint"], current_checkpoint)
+        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], current_checkpoint)
+        self.assertEqual(self.goal["current_checkpoint"], current_checkpoint)
         self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], [])
         self.assertEqual(self.goal["proposed_amendments"], [])
         self.assertIn("records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json", self.goal["active_amendments"])

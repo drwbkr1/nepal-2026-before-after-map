@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-PUBLICATION-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-18T02:44:45Z",
+  "status": "pass_public_gate_final_no_payload_preflight_ready",
+  "publication_gate_sha256": "cc67e356c197a674fa1d1aa830e3c465781c15138da95eed260036023a28c1de",
+  "implementation_commit": "961d58ec8b7099df6f68705ec3c22ee53894cd91",
+  "public_ci_run_id": 35300447490,
+  "current_checkpoint": "M2-DEM-EGM2008-PROJ25-ACQUISITION",
+  "released_now": {
+    "final_no_payload_preflight": true,
+    "grid_request": false,
+    "dem_pixel_read": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "grid_payload_bytes_read": 0,
+    "dem_pixels_read": false,
+    "external_data_mutated": false
+  }
+}

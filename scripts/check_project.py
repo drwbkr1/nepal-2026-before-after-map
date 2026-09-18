@@ -842,11 +842,14 @@ REQUIRED = [
     "scripts/convert_m2_dem_vertical_datum_proj25.py",
     "scripts/record_m2_dem_vertical_datum_proj25_implementation_readiness.py",
     "scripts/record_m2_dem_vertical_datum_proj25_publication_gate.py",
+    "scripts/reconcile_m2_dem_vertical_datum_proj25_publication_gate.py",
     "config/qa/m2-dem-vertical-datum-proj25-contract.json",
     "records/source-gates/m2-dem-vertical-datum-alternate-method-001-review-reconciliation.json",
     "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
     "records/readiness/m2-dem-vertical-datum-alternate-method-001-approval-activation.json",
     "records/readiness/m2-dem-vertical-datum-proj25-implementation-readiness.json",
+    "records/readiness/m2-dem-vertical-datum-proj25-implementation-publication-gate.json",
+    "records/readiness/m2-dem-vertical-datum-proj25-publication-reconciliation.json",
     "scripts/render_m2_dem_terrain_result_review.py",
     "scripts/prepare_m2_orbit_amendment.py",
     "scripts/prepare_m2_orbit_controls.py",
@@ -1112,6 +1115,8 @@ def main() -> None:
     dem_alt_activation = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-alternate-method-001-approval-activation.json").read_text(encoding="utf-8"))
     dem_alt_impl_contract = json.loads((ROOT / "config/qa/m2-dem-vertical-datum-proj25-contract.json").read_text(encoding="utf-8"))
     dem_alt_impl_readiness = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-proj25-implementation-readiness.json").read_text(encoding="utf-8"))
+    dem_alt_impl_publication = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-proj25-implementation-publication-gate.json").read_text(encoding="utf-8"))
+    dem_alt_impl_publication_reconciliation = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-proj25-publication-reconciliation.json").read_text(encoding="utf-8"))
     dem_terrain_contract = json.loads((ROOT / "config/qa/dem-terrain-quality-contract.json").read_text(encoding="utf-8"))
     dem_terrain_readiness = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-readiness.json").read_text(encoding="utf-8"))
     dem_terrain_ci_correction = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-ci-correction.json").read_text(encoding="utf-8"))
@@ -1228,6 +1233,11 @@ def main() -> None:
         and dem_alt_activation.get("status") == "pass_exact_approval_activated_implementation_publication_only"
         and dem_alt_impl_readiness.get("status") == "pass_implementation_synthetic_validation_public_ci_pending"
     )
+    dem_alt_acquisition_active = bool(
+        dem_alt_impl_publication.get("status") == "pass_public_default_branch_ci_real_actions_released"
+        and dem_alt_impl_publication.get("public_ci_conclusion") == "success"
+        and dem_alt_impl_publication_reconciliation.get("status") == "pass_public_gate_final_no_payload_preflight_ready"
+    )
     expected_dem_checkpoint_authority_ref = "records/source-gates/m2-dem-amendment-approval.json"
     if dem_state_counts["failed"]:
         expected_dem_transfer_checkpoint = "M2-DEM-ACQUISITION-REVIEW"
@@ -1238,7 +1248,10 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if dem_alt_implementation_active:
+            if dem_alt_acquisition_active:
+                expected_dem_checkpoint = "M2-DEM-EGM2008-PROJ25-ACQUISITION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json"
+            elif dem_alt_implementation_active:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json"
             elif dem_alt_review_ready:
@@ -1251,7 +1264,9 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if dem_alt_implementation_active:
+            if dem_alt_acquisition_active:
+                expected_dem_next_action = "Publish this exact public-gate transition and require successful default-branch CI. Then run the one final no-payload preflight; only on its pass may the exact grid be requested once and verified before any fixed-order DEM conversion."
+            elif dem_alt_implementation_active:
                 expected_dem_next_action = "Implement and synthetically validate only the approved exact-grid acquisition, verification, no-network vertical conversion, and ArcGIS-readability controls, then require fresh public default-branch CI. Do not request the grid or read a DEM pixel before that public gate and the final no-payload preflight pass."
             elif dem_alt_review_ready:
                 expected_dem_next_action = "Review exact alternate-method bundle SHA-256 caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702 and proposal SHA-256 dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7; do not acquire the recommended PROJ grid, reuse the quarantined GeographicLib partial, convert a DEM, apply orbit data, read radar pixels, run a baseline or change analysis, or publish a scientific claim before one exact attested owner decision is locked and reconciled."
@@ -3867,6 +3882,7 @@ def main() -> None:
             "tests/test_m2_dem_vertical_datum_proj25_arcgis.py",
         )
     }
+    expected_impl_bindings["tests/test_m2_dem_vertical_datum_proj25.py"] = "7995bc2cbb2187f999251a713890602e8c181ff70fb0fae5e0feabee51ff44df"
     if (
         dem_alt_impl_readiness.get("status") != "pass_implementation_synthetic_validation_public_ci_pending"
         or dem_alt_impl_readiness.get("approval_sha256") != sha256("records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json")
@@ -3889,6 +3905,42 @@ def main() -> None:
         ))
     ):
         fail("M2 DEM vertical-datum PROJ25 implementation readiness differs or overclaims")
+    if (
+        dem_alt_impl_publication.get("status") != "pass_public_default_branch_ci_real_actions_released"
+        or dem_alt_impl_publication.get("implementation_commit") != "961d58ec8b7099df6f68705ec3c22ee53894cd91"
+        or dem_alt_impl_publication.get("public_ci_run_id") != 35300447490
+        or dem_alt_impl_publication.get("public_ci_conclusion") != "success"
+        or dem_alt_impl_publication.get("public_ci_event") != "push"
+        or dem_alt_impl_publication.get("repository_required_file_count") != 891
+        or dem_alt_impl_publication.get("public_test_count") != 520
+        or dem_alt_impl_publication.get("public_intentional_skip_count") != 11
+        or dem_alt_impl_publication.get("bindings", {}).get("approval_sha256") != sha256("records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json")
+        or dem_alt_impl_publication.get("bindings", {}).get("implementation_contract_sha256") != sha256("config/qa/m2-dem-vertical-datum-proj25-contract.json")
+        or dem_alt_impl_publication.get("bindings", {}).get("implementation_readiness_sha256") != sha256("records/readiness/m2-dem-vertical-datum-proj25-implementation-readiness.json")
+        or dem_alt_impl_publication.get("released_now", {}).get("final_no_payload_preflight") is not True
+        or dem_alt_impl_publication.get("released_now", {}).get("one_grid_request_only_after_preflight") is not True
+        or any(dem_alt_impl_publication.get("assertions", {}).get(key) is not False for key in (
+            "grid_request_performed", "dem_pixels_read", "dem_conversion_executed", "proj_network_enabled",
+            "orbit_or_radar_action_performed", "scientific_result_established",
+        ))
+        or dem_alt_impl_publication.get("assertions", {}).get("grid_payload_bytes_read") != 0
+    ):
+        fail("M2 DEM vertical-datum PROJ25 implementation publication gate differs or overclaims")
+    if (
+        dem_alt_impl_publication_reconciliation.get("status") != "pass_public_gate_final_no_payload_preflight_ready"
+        or dem_alt_impl_publication_reconciliation.get("publication_gate_sha256") != sha256("records/readiness/m2-dem-vertical-datum-proj25-implementation-publication-gate.json")
+        or dem_alt_impl_publication_reconciliation.get("implementation_commit") != "961d58ec8b7099df6f68705ec3c22ee53894cd91"
+        or dem_alt_impl_publication_reconciliation.get("public_ci_run_id") != 35300447490
+        or dem_alt_impl_publication_reconciliation.get("current_checkpoint") != "M2-DEM-EGM2008-PROJ25-ACQUISITION"
+        or dem_alt_impl_publication_reconciliation.get("released_now", {}).get("final_no_payload_preflight") is not True
+        or dem_alt_impl_publication_reconciliation.get("released_now", {}).get("grid_request") is not False
+        or dem_alt_impl_publication_reconciliation.get("released_now", {}).get("dem_pixel_read") is not False
+        or any(dem_alt_impl_publication_reconciliation.get("assertions", {}).get(key) is not False for key in (
+            "network_requests_performed", "dem_pixels_read", "external_data_mutated",
+        ))
+        or dem_alt_impl_publication_reconciliation.get("assertions", {}).get("grid_payload_bytes_read") != 0
+    ):
+        fail("M2 DEM vertical-datum PROJ25 publication reconciliation differs or overreleases")
     vertical_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-REVIEW", {})
     vertical_install_unit = active_m2_units.get("M2-DEM-EGM2008-COMPONENT-INSTALL", {})
     vertical_alternate_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW", {})
@@ -3917,13 +3969,16 @@ def main() -> None:
         or vertical_alternate_review_unit.get("gates", {}).get("attestation") is not True
         or vertical_alternate_review_unit.get("gates", {}).get("alternate_method_authorized") is not True
         or vertical_alternate_review_unit.get("gates", {}).get("approval_sha256") != sha256("records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json")
-        or vertical_alternate_implementation_unit.get("status") != "in_progress"
+        or vertical_alternate_implementation_unit.get("status") != "complete"
+        or vertical_alternate_implementation_unit.get("disposition") != "pass_public_default_branch_ci"
         or vertical_alternate_implementation_unit.get("depends_on") != ["M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"]
-        or vertical_alternate_implementation_unit.get("gates", {}).get("public_ci") != "pending"
+        or vertical_alternate_implementation_unit.get("gates", {}).get("public_ci") != "success"
         or vertical_alternate_implementation_unit.get("gates", {}).get("grid_request_before_public_ci") is not False
         or vertical_alternate_implementation_unit.get("gates", {}).get("dem_pixel_read_before_public_ci") is not False
-        or vertical_proj25_acquisition_unit.get("status") != "planned"
+        or vertical_proj25_acquisition_unit.get("status") != "in_progress"
         or vertical_proj25_acquisition_unit.get("depends_on") != ["M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"]
+        or vertical_proj25_acquisition_unit.get("gates", {}).get("public_ci") != "success"
+        or vertical_proj25_acquisition_unit.get("gates", {}).get("final_no_payload_preflight") != "ready_not_run"
         or vertical_proj25_acquisition_unit.get("gates", {}).get("maximum_requests") != 1
         or vertical_proj25_acquisition_unit.get("gates", {}).get("automatic_retry") is not False
         or vertical_conversion_unit.get("status") != "planned"
@@ -6539,15 +6594,19 @@ def main() -> None:
     )
     if orbit_offline_verification_recovery_pass:
         expected_checkpoint = (
-            "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
-            if dem_alt_implementation_active
+            "M2-DEM-EGM2008-PROJ25-ACQUISITION"
+            if dem_alt_acquisition_active
             else (
-                "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
-                if dem_alt_review_ready
+                "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
+                if dem_alt_implementation_active
                 else (
-                    "M2-DEM-EGM2008-COMPONENT-INSTALL"
-                    if dem_vertical_method_approved
-                    else "M2-DEM-VERTICAL-DATUM-REVIEW"
+                    "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+                    if dem_alt_review_ready
+                    else (
+                        "M2-DEM-EGM2008-COMPONENT-INSTALL"
+                        if dem_vertical_method_approved
+                        else "M2-DEM-VERTICAL-DATUM-REVIEW"
+                    )
                 )
             )
         )
@@ -9336,6 +9395,27 @@ def main() -> None:
         or vertical_proj25_readiness_evidence.get("assertions", {}).get("grid_payload_bytes_read") != 0
     ):
         fail("EVID-0132 DEM vertical-datum PROJ25 implementation readiness differs or overclaims")
+    vertical_proj25_publication_evidence = ledger_by_id.get("EVID-0133")
+    if (
+        not isinstance(vertical_proj25_publication_evidence, dict)
+        or vertical_proj25_publication_evidence.get("status") != "pass_public_ci_final_no_payload_preflight_ready"
+        or vertical_proj25_publication_evidence.get("publication_gate_sha256") != sha256("records/readiness/m2-dem-vertical-datum-proj25-implementation-publication-gate.json")
+        or vertical_proj25_publication_evidence.get("reconciliation_sha256") != sha256("records/readiness/m2-dem-vertical-datum-proj25-publication-reconciliation.json")
+        or vertical_proj25_publication_evidence.get("assertions", {}).get("implementation_commit") != "961d58ec8b7099df6f68705ec3c22ee53894cd91"
+        or vertical_proj25_publication_evidence.get("assertions", {}).get("public_ci_run_id") != 35300447490
+        or vertical_proj25_publication_evidence.get("assertions", {}).get("public_ci_conclusion") != "success"
+        or vertical_proj25_publication_evidence.get("assertions", {}).get("repository_required_file_count") != 891
+        or vertical_proj25_publication_evidence.get("assertions", {}).get("public_test_count") != 520
+        or vertical_proj25_publication_evidence.get("assertions", {}).get("public_intentional_skip_count") != 11
+        or vertical_proj25_publication_evidence.get("assertions", {}).get("current_checkpoint") != "M2-DEM-EGM2008-PROJ25-ACQUISITION"
+        or vertical_proj25_publication_evidence.get("assertions", {}).get("final_no_payload_preflight_released") is not True
+        or any(vertical_proj25_publication_evidence.get("assertions", {}).get(key) is not False for key in (
+            "grid_request_performed", "dem_pixels_read", "dem_conversion_executed",
+            "orbit_or_radar_action_performed", "scientific_result_established",
+        ))
+        or vertical_proj25_publication_evidence.get("assertions", {}).get("grid_payload_bytes_read") != 0
+    ):
+        fail("EVID-0133 DEM vertical-datum PROJ25 publication gate differs or overclaims")
 
     orbit_review_evidence = ledger_by_id.get("EVID-0052")
     if (

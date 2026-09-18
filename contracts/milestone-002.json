@@ -1138,35 +1138,37 @@
       ],
       "action_class": "reversible_remediation",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
         "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json"
       ],
       "outputs": [
-        "versioned implementation",
-        "synthetic test receipts",
-        "implementation readiness",
-        "public-CI gate"
+        "records/readiness/m2-dem-vertical-datum-proj25-implementation-readiness.json",
+        "records/readiness/m2-dem-vertical-datum-proj25-implementation-publication-gate.json",
+        "records/readiness/m2-dem-vertical-datum-proj25-publication-reconciliation.json"
       ],
       "gates": {
         "approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c",
-        "public_ci": "pending",
+        "public_ci": "success",
         "grid_request_before_public_ci": false,
         "dem_pixel_read_before_public_ci": false,
-        "proj_network_enabled": false
+        "proj_network_enabled": false,
+        "implementation_commit": "961d58ec8b7099df6f68705ec3c22ee53894cd91",
+        "public_ci_run_id": 35300447490,
+        "publication_gate_sha256": "cc67e356c197a674fa1d1aa830e3c465781c15138da95eed260036023a28c1de"
       },
-      "disposition": null,
+      "disposition": "pass_public_default_branch_ci",
       "retained_failures": [
         "records/readiness/m2-dem-egm2008-component-access-closure-001.json"
       ],
       "exit_condition_delta": {
         "expected": [],
         "observed": [
-          "exact approval locked and reconciled"
+          "exact implementation commit passed public default-branch CI"
         ],
-        "decision_value": "unknown",
-        "rationale": "Implementation is active; real data remains gated."
+        "decision_value": "enables_dependency",
+        "rationale": "Only the final no-payload preflight and its already-approved conditional successors are released."
       },
       "next_dependency": "M2-DEM-EGM2008-PROJ25-ACQUISITION"
     },
@@ -1178,7 +1180,7 @@
       ],
       "action_class": "data_acquisition",
       "human_gate": false,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json"
       ],
@@ -1187,13 +1189,14 @@
         "append-only receipts"
       ],
       "gates": {
-        "public_ci": "pending",
-        "final_no_payload_preflight": "blocked_by_public_ci",
+        "public_ci": "success",
+        "final_no_payload_preflight": "ready_not_run",
         "maximum_requests": 1,
         "automatic_retry": false,
         "resume": false,
         "expected_length_bytes": 80585622,
-        "expected_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a"
+        "expected_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+        "publication_gate_sha256": "cc67e356c197a674fa1d1aa830e3c465781c15138da95eed260036023a28c1de"
       },
       "disposition": null,
       "retained_failures": [],
@@ -3166,8 +3169,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION",
-    "next_action": "Implement and synthetically validate only the approved exact-grid acquisition, verification, no-network vertical conversion, and ArcGIS-readability controls, then require fresh public default-branch CI. Do not request the grid or read a DEM pixel before that public gate and the final no-payload preflight pass.",
+    "current_checkpoint": "M2-DEM-EGM2008-PROJ25-ACQUISITION",
+    "next_action": "Publish this exact public-gate transition and require successful default-branch CI. Then run the one final no-payload preflight; only on its pass may the exact grid be requested once and verified before any fixed-order DEM conversion.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3206,7 +3209,7 @@
       "The GeographicLib one-minute metadata probe followed a download redirect and produced an 11,321,072-byte quarantined terminal partial. It is unusable, unselected, and cannot be resumed, reused, or retried under current authority.",
       "The official PROJ-data 2.5-minute route is a zero-decision proposal. No recommended-grid payload, conversion, orbit application, radar pixel, baseline, change, attribution, or scientific action is authorized before exact owner approval."
     ],
-    "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION",
-    "parallel_next_action": "Implement and synthetically validate only the approved exact-grid acquisition, verification, no-network vertical conversion, and ArcGIS-readability controls, then require fresh public default-branch CI. Do not request the grid or read a DEM pixel before that public gate and the final no-payload preflight pass."
+    "parallel_checkpoint": "M2-DEM-EGM2008-PROJ25-ACQUISITION",
+    "parallel_next_action": "Publish this exact public-gate transition and require successful default-branch CI. Then run the one final no-payload preflight; only on its pass may the exact grid be requested once and verified before any fixed-order DEM conversion."
   }
 }

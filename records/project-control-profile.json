@@ -527,16 +527,16 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION",
+    "checkpoint_id": "M2-DEM-EGM2008-PROJ25-ACQUISITION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Implement and synthetically validate only the approved exact-grid acquisition, verification, no-network vertical conversion, and ArcGIS-readability controls, then require fresh public default-branch CI. Do not request the grid or read a DEM pixel before that public gate and the final no-payload preflight pass."
+    "next_action": "Publish this exact public-gate transition and require successful default-branch CI. Then run the one final no-payload preflight; only on its pass may the exact grid be requested once and verified before any fixed-order DEM conversion."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION",
+      "checkpoint_id": "M2-DEM-EGM2008-PROJ25-ACQUISITION",
       "authority_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
-      "next_action": "Implement and synthetically validate only the approved exact-grid acquisition, verification, no-network vertical conversion, and ArcGIS-readability controls, then require fresh public default-branch CI. Do not request the grid or read a DEM pixel before that public gate and the final no-payload preflight pass."
+      "next_action": "Publish this exact public-gate transition and require successful default-branch CI. Then run the one final no-payload preflight; only on its pass may the exact grid be requested once and verified before any fixed-order DEM conversion."
     }
   ]
 }
