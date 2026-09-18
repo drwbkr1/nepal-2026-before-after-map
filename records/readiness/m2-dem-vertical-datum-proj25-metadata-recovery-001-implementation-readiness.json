@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION-READINESS",
+  "recorded_at_utc": "2026-09-18T18:14:16Z",
+  "status": "pass_exact_metadata_recovery_implementation_public_ci_pending",
+  "bindings": {
+    "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-reconciliation.json": "17f63ff5834ce89a500f5cf1408f1bc967a7462e766b86e8f5197205eda5e9d1",
+    "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json": "b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541",
+    "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval-activation.json": "6d47899d41b057b7ca98696f7f65dbde4a73e8987ffa30aca5800819355a4814",
+    "config/qa/m2-dem-vertical-datum-proj25-contract.json": "e9adf2d7d826c14abd2328d5f7f48ce67c4b366d2d014cef74f4bfe3fb59f159",
+    "scripts/activate_m2_dem_vertical_datum_proj25_metadata_recovery_001.py": "d7135f55eb07cac7e3d9553cfbc2c9bc5199a7dad8f95be354df36026c60e199",
+    "scripts/m2_dem_vertical_datum_proj25_core.py": "79141cd740dc289d88234f90c80b910d715478131d99e5ff13a9d48692777256",
+    "scripts/acquire_m2_dem_vertical_grid_proj25.py": "5e58ca84f63e42f489fac0b595dc49c728f138e411566388d8d2ce89a38115ed",
+    "scripts/preflight_m2_dem_vertical_datum_proj25_metadata_recovery_001.py": "7fbc9ab3d7b2c3c4ffe4c3f2a5a5373cf2cf623a96399c4ef8fbb22ab7fcbef0",
+    "scripts/recover_m2_dem_vertical_grid_proj25_metadata_001.py": "7deb0ca4a1ecf816088bd61eaebf2ab32b58834e660eecf3d86c8cce0a7cc4a6",
+    "scripts/preflight_m2_dem_vertical_operation_proj25.py": "03609c1fce77c196f7336ef6a2f6bd38382f6c14c505a1494b962ea5aca39387",
+    "scripts/convert_m2_dem_vertical_datum_proj25.py": "bf07e906ff611804665acf1d09831d897d27a6c81c57d3bb6e39bd2c77b9254c",
+    "scripts/derive_m2_acquisition_checkpoint.py": "1928773b390d4a30ebd1036989e548b1e87825009aa3ffbd5b6d56c6775386d6",
+    "scripts/record_m2_dem_vertical_datum_proj25_metadata_recovery_001_implementation_readiness.py": "ef5387fc8aac4405b72d03b1a49ba28d7f28eaf04d65bee0dab96e75338ea308",
+    "tests/test_m2_dem_vertical_datum_proj25.py": "19ac4c74dd09d8fe0cdb81bb5dfc940061b350ea0c75b854564913d840f4fc55",
+    "tests/test_m2_dem_vertical_datum_proj25_arcgis.py": "f9f0c3d2c2ce4b5ad90ee45c1d6c2ef7f378c7467184fbbc67839eab7af89331",
+    "tests/test_m2_dem_vertical_datum_proj25_metadata_recovery_001_review.py": "ecd5b37b78da2da1ec9b53a5eb483fa434877b4e60702a01df0068c060f38639"
+  },
+  "correction": {
+    "from": "literal source_crs and target_crs metadata keys",
+    "to": "exact TIFFTAG_IMAGEDESCRIPTION EPSG:4979 to EPSG:3855 plus target_crs_epsg_code=3855",
+    "all_other_grid_predicates_unchanged": true,
+    "source_semantics_changed": false,
+    "target_semantics_changed": false,
+    "tolerance_changed": false
+  },
+  "validation": {
+    "portable_test_count": 21,
+    "portable_intentional_skip_count": 0,
+    "arcgis_runtime_test_count": 2,
+    "arcgis_runtime_test_failures": 0,
+    "full_repository_test_count": 531,
+    "full_repository_intentional_skip_count": 5,
+    "repository_checker_status": "pass_918_required_files",
+    "exact_official_metadata_acceptance_tested": true,
+    "metadata_drift_refusal_tested": true,
+    "arcgis_runtime_readability_tested": true,
+    "offline_only_recovery_path_tested": true,
+    "no_replace_promotion_tested": true,
+    "fixed_source_order_and_stop_on_failure_retained": true
+  },
+  "released_now": {
+    "public_ci": true,
+    "final_no_content_preflight": false,
+    "preserved_byte_read": false,
+    "grid_promotion": false,
+    "local_operation_and_sign_preflight": false,
+    "dem_conversion": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "preserved_grid_bytes_read": false,
+    "grid_promoted": false,
+    "real_dem_pixels_read": false,
+    "external_data_mutated": false,
+    "software_installed_or_modified": false,
+    "proj_network_enabled": false,
+    "orbit_or_radar_action_performed": false,
+    "baseline_or_change_analysis_performed": false,
+    "scientific_result_established": false
+  }
+}

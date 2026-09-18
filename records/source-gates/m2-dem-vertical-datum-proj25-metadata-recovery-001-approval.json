@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-METADATA-RECOVERY-001-APPROVAL",
+  "status": "approved_exact_post_observation_metadata_recovery_bounded_route",
+  "approved_at_utc": "2026-09-18T17:56:10Z",
+  "review_id": "m2-dem-vertical-datum-proj25-metadata-recovery-001-review",
+  "review_bundle_manifest_sha256": "10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d",
+  "proposal_ref": "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json",
+  "proposal_sha256": "729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd",
+  "review_contract_ref": "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-contract.json",
+  "review_contract_sha256": "f6aef3d7dcb9035cfd5224a07cc6888027c7003b28f013254fabb61a8ddaeb4a",
+  "review_reconciliation_ref": "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-reconciliation.json",
+  "review_reconciliation_sha256": "17f63ff5834ce89a500f5cf1408f1bc967a7462e766b86e8f5197205eda5e9d1",
+  "locked_response_sha256": "97dc8475b9b7a6892a79a1f0d519bbc32e87bea91346f5f1dec0d07432e0a1ee",
+  "lock_receipt_sha256": "c1a1403fe574130588aea1ba892571fd5cde8c8a7f7d35ebe22548135cf9fccd",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "attestation": true,
+  "preserved_failure": {
+    "attempt_id": "m2-geoid-001-real-001",
+    "status": "terminal_failure_no_retry",
+    "request_count": 1,
+    "preserved_size_bytes": 80585622,
+    "preserved_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+    "destination_created": false,
+    "conversion_attempts_started": 0,
+    "failure_stage": "gdal_verification"
+  },
+  "observed_representation": {
+    "expected_by_failed_code": {
+      "source_crs": "EPSG:4979",
+      "target_crs": "EPSG:3855"
+    },
+    "present_in_exact_official_file": {
+      "TIFFTAG_IMAGEDESCRIPTION": "WGS 84 (EPSG:4979) to EGM2008 height (EPSG:3855). Converted from egm08_25.gtx (last modified at 2018/10/08)",
+      "target_crs_epsg_code": "3855"
+    },
+    "already_passing_checks": [
+      "exact approved byte length and SHA-256",
+      "GTiff, one band, 8640 by 4321",
+      "world coverage",
+      "TYPE VERTICAL_OFFSET_GEOGRAPHIC_TO_VERTICAL",
+      "area_of_use World",
+      "public-domain copyright tag"
+    ],
+    "post_observation_bias": "The proposed correction is informed by the failed real-001 observation and is not blind or independent validation."
+  },
+  "authorized_metadata_change": {
+    "scope": "metadata extraction and validation only",
+    "from": "require literal metadata keys source_crs=EPSG:4979 and target_crs=EPSG:3855",
+    "to": "require the exact embedded TIFFTAG_IMAGEDESCRIPTION declaring EPSG:4979 to EPSG:3855 and exact target_crs_epsg_code=3855; retain every other identity, raster, coverage, type, area, license, and no-network check unchanged",
+    "source_semantics_changed": false,
+    "target_semantics_changed": false,
+    "tolerance_changed": false,
+    "source_or_url_changed": false
+  },
+  "authorized_actions": [
+    "preserve real-001, its receipts, the unpromoted staged bytes, and this reconciliation unchanged",
+    "implement only the exact metadata-key interpretation correction and focused synthetic acceptance and drift-refusal tests",
+    "run the repository checker, full local tests, ArcGIS-runtime tests, and fresh public default-branch CI before touching the preserved staged bytes",
+    "after that public gate, run one final no-content local preflight and one offline recovery verification of the exact preserved 80,585,622 bytes with no network request",
+    "only on pass, promote the exact preserved bytes without replacement and run the unchanged local operation-selection and sign preflight",
+    "only if every prior gate passes, run at most one conversion attempt for each exact M2-DEM-001 through M2-DEM-004 in fixed order, stopping on the first failure, under all previously approved thresholds",
+    "record exact reconciliation and stop before orbit application, radar-pixel processing, baseline, change analysis, attribution, or scientific publication"
+  ],
+  "limits": {
+    "network_requests": 0,
+    "recovery_verification_attempts": 1,
+    "automatic_retry": false,
+    "conversion_attempts_per_dem": 1,
+    "stop_on_first_failure": true,
+    "proj_network_enabled": false,
+    "source_dem_overwrite": false
+  },
+  "stop_rules": [
+    "Stop if the preserved staged bytes differ from the exact approved size or SHA-256.",
+    "Stop if any metadata predicate outside the exact key-representation correction changes.",
+    "Stop if the final preflight, offline recovery verification, sign check, ArcGIS readability, source immutability, finite AOI coverage, or a conversion attempt fails.",
+    "Do not make another grid request or perform a second recovery attempt."
+  ],
+  "does_not_authorize": [
+    "any network request, reacquisition, resume, or retry",
+    "reuse or retry of the GeographicLib partial",
+    "alternate source, URL, grid, CRS relation, threshold, or tolerance",
+    "software installation, account action, terms acceptance, or credential use",
+    "source DEM overwrite",
+    "PROJ network fetch",
+    "orbit application or radar-pixel processing",
+    "baseline or change analysis, attribution, emergency guidance, derived-pixel publication, or scientific claim"
+  ],
+  "post_observation_correction_acknowledged": true,
+  "human_decisions_fabricated": false
+}

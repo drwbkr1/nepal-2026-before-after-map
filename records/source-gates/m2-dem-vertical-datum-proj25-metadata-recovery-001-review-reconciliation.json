@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-dem-vertical-datum-proj25-metadata-recovery-001-review",
+  "contract_sha256": "f6aef3d7dcb9035cfd5224a07cc6888027c7003b28f013254fabb61a8ddaeb4a",
+  "response_sha256": "97dc8475b9b7a6892a79a1f0d519bbc32e87bea91346f5f1dec0d07432e0a1ee",
+  "receipt_sha256": "c1a1403fe574130588aea1ba892571fd5cde8c8a7f7d35ebe22548135cf9fccd",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

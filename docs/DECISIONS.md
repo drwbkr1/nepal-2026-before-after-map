@@ -575,3 +575,19 @@ A first project-control reconciliation stopped before mutation because its guard
 **Reason:** The source DEM still requires EGM2008 orthometric-to-WGS84 ellipsoidal conversion, but substituting a public 2.5 arc minute grid and a GDAL/PROJ implementation for the approved Esri 1 arc minute grid and ArcGIS Project Raster changes the exact source, resolution, and execution method. That change requires a new bound owner decision. It cannot be inferred from the institutional access failure.
 
 **Status:** Proposal SHA-256 `dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7` and review bundle SHA-256 `caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702` contain one blank item, zero decisions, and false attestation. The recommended grid is bound to 80,585,622 bytes and SHA-256 `4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a`; its payload has not been requested. A SourceForge metadata redirect produced a terminal 11,321,072-byte GeographicLib partial, which is quarantined outside Git, unselected, unusable, and not authorized for resume or retry. The current checkpoint is `M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW`. No alternate-method implementation, grid acquisition, software installation, DEM pixel read, conversion, orbit application, radar processing, baseline, change analysis, attribution, or scientific publication is authorized.
+
+## D-085 — Approve the official PROJ25 replacement and preserve its terminal first attempt
+
+**Decision:** Accept the exact official public-domain `us_nga_egm08_25.tif` at 80,585,622 bytes and SHA-256 `4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a`, then permit the bounded local PROJ conversion route only after implementation tests, public CI, and a final no-payload preflight. Preserve real-001 as terminal after its single request produced exact bytes but failed the original generic metadata-key interpretation.
+
+**Reason:** The exact official file represents the approved EPSG:4979-to-EPSG:3855 vertical relationship, but its metadata uses an embedded description and target EPSG field rather than the two generic keys the first implementation required. That post-observation difference must be corrected under a separate bounded approval.
+
+**Status:** The original request is consumed and cannot be retried. Its 80,585,622 staged bytes remain unpromoted outside Git and match the approved SHA-256. No DEM pixel or conversion attempt occurred.
+
+## D-086 — Approve only the exact metadata-key recovery correction
+
+**Decision:** Bind the owner's attested approval of bundle SHA-256 `10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d` and proposal SHA-256 `729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd`. Change only metadata interpretation to require the exact `TIFFTAG_IMAGEDESCRIPTION` EPSG:4979-to-EPSG:3855 statement and `target_crs_epsg_code=3855`, retaining every other predicate and downstream gate.
+
+**Reason:** This is the smallest correction supported by the preserved official bytes. It does not change source or target semantics, the sign rule, tolerance, grid identity, source order, conversion thresholds, or scientific claim boundary.
+
+**Status:** Reconciliation SHA-256 `17f63ff5834ce89a500f5cf1408f1bc967a7462e766b86e8f5197205eda5e9d1`, approval SHA-256 `b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541`, activation SHA-256 `6d47899d41b057b7ca98696f7f65dbde4a73e8987ffa30aca5800819355a4814`, and readiness SHA-256 `7836bc91e077e43337eee7399e903abd2bf54f7be7314cb7f9eeaa3f850cf9eb` bind the active implementation. Public CI remains pending; no real recovery read or conversion is released yet.

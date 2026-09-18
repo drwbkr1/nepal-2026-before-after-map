@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from derive_m2_acquisition_checkpoint import (  # noqa: E402
+    current_dem_proj25_metadata_recovery_001_implementation_active,
     current_dem_proj25_metadata_recovery_001_review_publication_pending,
     current_dem_proj25_metadata_recovery_001_review_required,
 )
@@ -37,6 +38,9 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         cls.contract = load("reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-contract.json")
         cls.blank = load("reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/blank-response.json")
         cls.readiness = load("records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-readiness.json")
+        cls.review_reconciliation = load("records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-reconciliation.json")
+        cls.approval = load("records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json")
+        cls.activation = load("records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval-activation.json")
         cls.milestone = load("contracts/milestone-002.json")
         cls.profile = load("records/project-control-profile.json")
         cls.goal = load("records/long-term-goal.json")
@@ -100,18 +104,26 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         self.assertIsNone(self.blank["responses"][0]["decision"])
         self.assertEqual(self.blank["responses"][0]["evidence_sha256"], BUNDLE_SHA256)
 
-    def test_readiness_and_controls_stop_at_publication(self) -> None:
+    def test_static_blank_packet_remains_preserved_after_exact_approval(self) -> None:
         self.assertEqual(self.readiness["status"], "pass_ready_publication_zero_decisions")
         self.assertFalse(self.readiness["assertions"]["correction_authorized"])
         self.assertFalse(self.readiness["assertions"]["network_request_authorized"])
         self.assertTrue(self.readiness["assertions"]["preserved_bytes_read_for_exact_reconciliation"])
         self.assertFalse(self.readiness["assertions"]["recovery_verification_performed"])
         self.assertFalse(self.readiness["assertions"]["grid_sample_values_read"])
-        expected = "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW"
+        self.assertEqual(self.review_reconciliation["decision_counts"], {"approve": 1, "revise": 0, "defer": 0})
+        self.assertEqual(self.approval["status"], "approved_exact_post_observation_metadata_recovery_bounded_route")
+        self.assertTrue(self.approval["attestation"])
+        self.assertEqual(self.approval["limits"]["network_requests"], 0)
+        self.assertEqual(self.approval["limits"]["recovery_verification_attempts"], 1)
+        self.assertEqual(self.activation["status"], "pass_exact_approval_activated_implementation_publication_only")
+        self.assertFalse(self.activation["released_now"]["preserved_byte_read"])
+        expected = "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], expected)
         self.assertEqual(self.goal["current_checkpoint"], expected)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], expected)
-        self.assertEqual(self.goal["proposed_amendments"], ["contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json"])
+        self.assertEqual(self.goal["proposed_amendments"], [])
+        self.assertIn("records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json", self.goal["active_amendments"])
 
     def test_milestone_preserves_block_and_conditional_dependency(self) -> None:
         units = {unit["id"]: unit for unit in self.milestone["units"]}
@@ -121,22 +133,21 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         conversion = units["M2-DEM-VERTICAL-DATUM-CONVERSION"]
         self.assertEqual(acquisition["status"], "complete")
         self.assertEqual(acquisition["disposition"], "block_terminal_metadata_representation_mismatch")
-        self.assertEqual(review["status"], "ready")
-        self.assertEqual(review["gates"]["human_decision_count"], 0)
-        self.assertFalse(review["gates"]["correction_authorized"])
-        self.assertEqual(implementation["status"], "planned")
+        self.assertEqual(review["status"], "complete")
+        self.assertEqual(review["gates"]["human_decision_count"], 1)
+        self.assertTrue(review["gates"]["correction_authorized"])
+        self.assertEqual(implementation["status"], "in_progress")
         self.assertEqual(implementation["gates"]["network_requests"], 0)
         self.assertEqual(conversion["depends_on"], [implementation["id"]])
 
-    def test_checkpoint_derivation_routes_to_review_publication(self) -> None:
+    def test_checkpoint_derivation_routes_to_approved_implementation(self) -> None:
         self.assertFalse(
             current_dem_proj25_metadata_recovery_001_review_publication_pending(
                 ROOT, {"promoted": 8}
             )
         )
-        self.assertTrue(
-            current_dem_proj25_metadata_recovery_001_review_required(ROOT, {"promoted": 8})
-        )
+        self.assertFalse(current_dem_proj25_metadata_recovery_001_review_required(ROOT, {"promoted": 8}))
+        self.assertTrue(current_dem_proj25_metadata_recovery_001_implementation_active(ROOT, {"promoted": 8}))
 
 
 if __name__ == "__main__":

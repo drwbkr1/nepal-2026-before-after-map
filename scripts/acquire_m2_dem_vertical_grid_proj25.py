@@ -15,12 +15,13 @@ from m2_dem_vertical_datum_proj25_core import (
     NoRedirectHandler,
     ROOT,
     controlled_path,
+    inspect_arcgis_readability,
+    inspect_grid,
     load_contract,
     load_json,
     promote_no_replace,
     sha256_file,
     stream_to_exclusive_staging,
-    validate_grid_metadata,
     write_new_json,
 )
 
@@ -33,62 +34,6 @@ PUBLIC_TERMINAL = ROOT / f"records/acquisition/{ATTEMPT_ID}-terminal.json"
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-
-def _metadata_value(metadata: dict[str, str], key: str) -> str | None:
-    folded = {str(k).casefold(): str(v) for k, v in metadata.items()}
-    return folded.get(key.casefold())
-
-
-def inspect_grid(path: Path) -> dict[str, Any]:
-    os.environ["PROJ_NETWORK"] = "OFF"
-    from osgeo import gdal  # type: ignore
-
-    gdal.UseExceptions()
-    dataset = gdal.OpenEx(str(path), gdal.OF_RASTER | gdal.OF_READONLY)
-    if dataset is None:
-        raise ValueError("approved grid is not GDAL-readable")
-    geotransform = tuple(float(value) for value in dataset.GetGeoTransform())
-    width, height = int(dataset.RasterXSize), int(dataset.RasterYSize)
-    corners_x = [geotransform[0], geotransform[0] + geotransform[1] * width]
-    corners_y = [geotransform[3], geotransform[3] + geotransform[5] * height]
-    metadata = dict(dataset.GetMetadata() or {})
-    band = dataset.GetRasterBand(1)
-    band_metadata = dict(band.GetMetadata() or {}) if band else {}
-    combined = {**metadata, **band_metadata}
-    result = {
-        "driver": dataset.GetDriver().ShortName,
-        "band_count": int(dataset.RasterCount),
-        "width": width,
-        "height": height,
-        "geotransform": list(geotransform),
-        "world_coverage": min(corners_x) <= -179.9 and max(corners_x) >= 179.9
-        and min(corners_y) <= -89.9 and max(corners_y) >= 89.9,
-        "source_crs": _metadata_value(combined, "source_crs"),
-        "target_crs": _metadata_value(combined, "target_crs"),
-        "type": _metadata_value(combined, "type"),
-        "area_of_use": _metadata_value(combined, "area_of_use"),
-        "area_or_point": _metadata_value(combined, "AREA_OR_POINT"),
-        "proj_network_enabled": False,
-    }
-    dataset = None
-    validate_grid_metadata(result)
-    return result
-
-
-def inspect_arcgis_readability(path: Path) -> dict[str, Any]:
-    import arcpy  # type: ignore
-
-    description = arcpy.Describe(str(path))
-    raster = arcpy.Raster(str(path))
-    return {
-        "readable": True,
-        "data_type": str(description.dataType),
-        "width": int(raster.width),
-        "height": int(raster.height),
-        "band_count": int(raster.bandCount),
-        "runtime_version": arcpy.GetInstallInfo().get("Version"),
-    }
 
 
 def validate_preconditions() -> tuple[dict[str, Any], Path, Path]:

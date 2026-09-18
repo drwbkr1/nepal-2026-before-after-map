@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-METADATA-RECOVERY-001-APPROVAL-ACTIVATION",
+  "activated_at_utc": "2026-09-18T17:59:12Z",
+  "status": "pass_exact_approval_activated_implementation_publication_only",
+  "bindings": {
+    "approval_sha256": "b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541",
+    "reconciliation_sha256": "17f63ff5834ce89a500f5cf1408f1bc967a7462e766b86e8f5197205eda5e9d1",
+    "proposal_sha256": "729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd",
+    "review_bundle_sha256": "10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d"
+  },
+  "released_now": {
+    "bounded_implementation": true,
+    "synthetic_and_arcgis_tests": true,
+    "public_ci": true,
+    "final_no_content_preflight": false,
+    "preserved_byte_read": false,
+    "grid_promotion": false,
+    "dem_pixel_read": false,
+    "dem_conversion": false,
+    "orbit_or_radar_action": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "preserved_grid_bytes_read": false,
+    "grid_promoted": false,
+    "dem_pixels_read": false,
+    "external_data_mutated": false
+  }
+}

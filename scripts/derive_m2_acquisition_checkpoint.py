@@ -158,6 +158,10 @@ DEM_PROJ25_METADATA_RECOVERY_001_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW",
     "next_action": "Review M2 DEM PROJ25 metadata recovery-001 bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd; approve, revise, or defer the exact post-observation metadata-key correction and one offline verification of the preserved bytes. No implementation, network request, preserved-byte read or promotion, DEM conversion, or downstream processing is authorized before an attested decision.",
 }
+DEM_PROJ25_METADATA_RECOVERY_001_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION",
+    "next_action": "Implement and validate only the approved metadata-key interpretation correction and offline recovery controls, then require fresh public default-branch CI. Do not read or promote the preserved grid bytes, inspect DEM pixels, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1195,11 +1199,42 @@ def current_dem_proj25_metadata_recovery_001_review_publication_pending(
     )
 
 
+def current_dem_proj25_metadata_recovery_001_implementation_active(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize approved metadata recovery before its fresh implementation public gate."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        approval = load(root / "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json")
+        activation = load(root / "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval-activation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW", {})
+    implementation = units.get("M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION", {})
+    return bool(
+        approval.get("status") == "approved_exact_post_observation_metadata_recovery_bounded_route"
+        and approval.get("attestation") is True
+        and activation.get("status") == "pass_exact_approval_activated_implementation_publication_only"
+        and review.get("status") == "complete"
+        and review.get("disposition") == "pass"
+        and review.get("gates", {}).get("correction_authorized") is True
+        and implementation.get("status") == "in_progress"
+        and implementation.get("gates", {}).get("public_ci") == "pending"
+        and not (root / "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-implementation-publication-gate.json").exists()
+        and not (root / "records/acquisition/m2-geoid-001-metadata-recovery-001-terminal.json").exists()
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
     """Recognize a publicly validated blank recovery packet awaiting owner review."""
     if state_counts != {"promoted": 8}:
+        return False
+    if (root / "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json").exists():
         return False
     try:
         gate = load(root / "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-publication-gate.json")
@@ -1262,7 +1297,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_dem_proj25_metadata_recovery_001_review_required(
+            if current_dem_proj25_metadata_recovery_001_implementation_active(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(DEM_PROJ25_METADATA_RECOVERY_001_IMPLEMENTATION_CHECKPOINT)
+            elif current_dem_proj25_metadata_recovery_001_review_required(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(DEM_PROJ25_METADATA_RECOVERY_001_REVIEW_CHECKPOINT)

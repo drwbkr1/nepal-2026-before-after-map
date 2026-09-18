@@ -13,6 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from m2_dem_vertical_datum_proj25_core import (  # noqa: E402
+    EXPECTED_GRID_COPYRIGHT,
+    EXPECTED_GRID_DESCRIPTION,
     EXPECTED_GRID_SHA256,
     SOURCE_ORDER,
     controlled_path,
@@ -39,6 +41,8 @@ class DemVerticalDatumProj25Tests(unittest.TestCase):
         self.assertFalse(contract["grid"]["resume"])
         self.assertFalse(contract["grid"]["automatic_retry"])
         self.assertEqual(contract["grid"]["maximum_requests"], 1)
+        self.assertEqual(contract["metadata_recovery"]["network_requests"], 0)
+        self.assertEqual(contract["metadata_recovery"]["maximum_offline_verification_attempts"], 1)
         self.assertEqual(contract["conversion"]["maximum_attempts_per_dem"], 1)
         self.assertTrue(contract["conversion"]["stop_on_first_failure"])
 
@@ -56,7 +60,7 @@ class DemVerticalDatumProj25Tests(unittest.TestCase):
         self.assertFalse(gate["assertions"]["grid_request_performed"])
         self.assertFalse(gate["assertions"]["dem_pixels_read"])
         self.assertEqual(reconciliation["status"], "pass_public_gate_final_no_payload_preflight_ready")
-        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW")
+        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION")
 
     def test_controlled_paths_reject_traversal_and_absolute_paths(self) -> None:
         for unsafe in ("../escape.tif", "/absolute.tif", "a/../../escape.tif"):
@@ -79,13 +83,26 @@ class DemVerticalDatumProj25Tests(unittest.TestCase):
 
     def test_grid_metadata_is_exactly_constrained(self) -> None:
         metadata = {"driver": "GTiff", "band_count": 1, "width": 8640, "height": 4321,
-                    "world_coverage": True, "source_crs": "EPSG:4979", "target_crs": "EPSG:3855",
-                    "type": "VERTICAL_OFFSET_GEOGRAPHIC_TO_VERTICAL", "area_of_use": "World"}
+                    "world_coverage": True, "source_crs": None, "target_crs": None,
+                    "tiff_tag_imagedescription": EXPECTED_GRID_DESCRIPTION,
+                    "target_crs_epsg_code": "3855",
+                    "type": "VERTICAL_OFFSET_GEOGRAPHIC_TO_VERTICAL", "area_of_use": "World",
+                    "area_or_point": "Point", "tiff_tag_copyright": EXPECTED_GRID_COPYRIGHT}
         validate_grid_metadata(metadata)
-        for key, bad in (("driver", "VRT"), ("band_count", 2), ("world_coverage", False), ("target_crs", "EPSG:5773")):
+        for key, bad in (("driver", "VRT"), ("band_count", 2), ("world_coverage", False),
+                         ("tiff_tag_imagedescription", EXPECTED_GRID_DESCRIPTION.replace("3855", "5773")),
+                         ("target_crs_epsg_code", "5773"), ("tiff_tag_copyright", "unknown")):
             changed = dict(metadata); changed[key] = bad
             with self.assertRaises(ValueError):
                 validate_grid_metadata(changed)
+
+    def test_generic_crs_keys_do_not_substitute_for_the_exact_official_representation(self) -> None:
+        metadata = {"driver": "GTiff", "band_count": 1, "width": 8640, "height": 4321,
+                    "world_coverage": True, "source_crs": "EPSG:4979", "target_crs": "EPSG:3855",
+                    "type": "VERTICAL_OFFSET_GEOGRAPHIC_TO_VERTICAL", "area_of_use": "World",
+                    "area_or_point": "Point", "tiff_tag_copyright": EXPECTED_GRID_COPYRIGHT}
+        with self.assertRaises(ValueError):
+            validate_grid_metadata(metadata)
 
     def test_stream_is_exclusive_and_preserves_interrupted_bytes(self) -> None:
         with tempfile.TemporaryDirectory(dir=ROOT / "scratch") as temporary:
@@ -113,6 +130,18 @@ class DemVerticalDatumProj25Tests(unittest.TestCase):
         self.assertIn("NoRedirectHandler", acquisition)
         self.assertIn('os.environ["PROJ_NETWORK"] = "OFF"', conversion)
         self.assertIn("stop", conversion.casefold())
+
+    def test_metadata_recovery_scripts_have_no_network_client_or_payload_route(self) -> None:
+        recovery = (ROOT / "scripts/recover_m2_dem_vertical_grid_proj25_metadata_001.py").read_text(encoding="utf-8")
+        preflight = (ROOT / "scripts/preflight_m2_dem_vertical_datum_proj25_metadata_recovery_001.py").read_text(encoding="utf-8")
+        for source in (recovery, preflight):
+            folded = source.casefold()
+            self.assertNotIn("urllib", folded)
+            self.assertNotIn("requests.", folded)
+            self.assertNotIn("http://", folded)
+            self.assertNotIn("https://", folded)
+        self.assertIn('"network_request_count": 0', recovery)
+        self.assertIn('"preserved_content_bytes_read": 0', preflight)
 
     def test_promotion_is_no_replace_and_preserves_staged_bytes(self) -> None:
         with tempfile.TemporaryDirectory(dir=ROOT / "scratch") as temporary:

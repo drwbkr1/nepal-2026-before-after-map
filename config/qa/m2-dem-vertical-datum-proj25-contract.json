@@ -1,9 +1,11 @@
 {
   "schema_version": "1.0",
   "contract_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-001",
-  "status": "approved_implementation_public_ci_pending",
-  "approval_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
-  "approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c",
+  "status": "approved_metadata_recovery_implementation_public_ci_pending",
+  "approval_ref": "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
+  "approval_sha256": "b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541",
+  "parent_approval_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
+  "parent_approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c",
   "grid": {
     "source_id": "M2-GEOID-001",
     "url": "https://cdn.proj.org/us_nga_egm08_25.tif",
@@ -15,6 +17,17 @@
     "maximum_requests": 1,
     "resume": false,
     "automatic_retry": false
+  },
+  "metadata_recovery": {
+    "attempt_id": "m2-geoid-001-metadata-recovery-001",
+    "terminal_attempt_id": "m2-geoid-001-real-001",
+    "network_requests": 0,
+    "maximum_offline_verification_attempts": 1,
+    "automatic_retry": false,
+    "conditional_no_replace_promotion": true,
+    "required_tiff_tag_imagedescription": "WGS 84 (EPSG:4979) to EGM2008 height (EPSG:3855). Converted from egm08_25.gtx (last modified at 2018/10/08)",
+    "required_target_crs_epsg_code": "3855",
+    "required_tiff_tag_copyright": "Derived from work by NGA. Public Domain"
   },
   "vertical_operation": {
     "source_crs": "EPSG:9518",

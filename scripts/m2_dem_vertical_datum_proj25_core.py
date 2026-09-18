@@ -15,10 +15,15 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = Path(r"C:\Projects\Active\nepal-2026-before-after-map-data")
 CONTRACT_REF = "config/qa/m2-dem-vertical-datum-proj25-contract.json"
-APPROVAL_REF = "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json"
-EXPECTED_APPROVAL_SHA256 = "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c"
+APPROVAL_REF = "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json"
+EXPECTED_APPROVAL_SHA256 = "b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541"
 EXPECTED_GRID_SHA256 = "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a"
 EXPECTED_GRID_SIZE = 80585622
+EXPECTED_GRID_DESCRIPTION = (
+    "WGS 84 (EPSG:4979) to EGM2008 height (EPSG:3855). "
+    "Converted from egm08_25.gtx (last modified at 2018/10/08)"
+)
+EXPECTED_GRID_COPYRIGHT = "Derived from work by NGA. Public Domain"
 SOURCE_ORDER = ["M2-DEM-001", "M2-DEM-002", "M2-DEM-003", "M2-DEM-004"]
 
 
@@ -67,15 +72,20 @@ def load_contract() -> dict[str, Any]:
     grid = contract.get("grid", {})
     operation = contract.get("vertical_operation", {})
     conversion = contract.get("conversion", {})
+    recovery = contract.get("metadata_recovery", {})
     sources = contract.get("dem_sources_in_exact_order", [])
     if (
-        contract.get("status") != "approved_implementation_public_ci_pending"
+        contract.get("status") != "approved_metadata_recovery_implementation_public_ci_pending"
         or contract.get("approval_sha256") != EXPECTED_APPROVAL_SHA256
         or grid.get("expected_sha256") != EXPECTED_GRID_SHA256
         or grid.get("expected_size_bytes") != EXPECTED_GRID_SIZE
         or grid.get("maximum_requests") != 1
         or grid.get("resume") is not False
         or grid.get("automatic_retry") is not False
+        or recovery.get("attempt_id") != "m2-geoid-001-metadata-recovery-001"
+        or recovery.get("network_requests") != 0
+        or recovery.get("maximum_offline_verification_attempts") != 1
+        or recovery.get("automatic_retry") is not False
         or operation.get("source_crs") != "EPSG:9518"
         or operation.get("target_crs") != "EPSG:4979"
         or operation.get("height_relation") != "h = H + N"
@@ -178,6 +188,65 @@ def stream_to_exclusive_staging(response: Any, staging: Path, expected_size: int
     return {"size_bytes": size, "sha256": digest.hexdigest()}
 
 
+def _metadata_value(metadata: dict[str, Any], key: str) -> str | None:
+    folded = {str(k).casefold(): str(v) for k, v in metadata.items()}
+    return folded.get(key.casefold())
+
+
+def inspect_grid(path: Path) -> dict[str, Any]:
+    os.environ["PROJ_NETWORK"] = "OFF"
+    from osgeo import gdal  # type: ignore
+
+    gdal.UseExceptions()
+    dataset = gdal.OpenEx(str(path), gdal.OF_RASTER | gdal.OF_READONLY)
+    if dataset is None:
+        raise ValueError("approved grid is not GDAL-readable")
+    geotransform = tuple(float(value) for value in dataset.GetGeoTransform())
+    width, height = int(dataset.RasterXSize), int(dataset.RasterYSize)
+    corners_x = [geotransform[0], geotransform[0] + geotransform[1] * width]
+    corners_y = [geotransform[3], geotransform[3] + geotransform[5] * height]
+    metadata = dict(dataset.GetMetadata() or {})
+    band = dataset.GetRasterBand(1)
+    band_metadata = dict(band.GetMetadata() or {}) if band else {}
+    combined = {**metadata, **band_metadata}
+    result = {
+        "driver": dataset.GetDriver().ShortName,
+        "band_count": int(dataset.RasterCount),
+        "width": width,
+        "height": height,
+        "geotransform": list(geotransform),
+        "world_coverage": min(corners_x) <= -179.9 and max(corners_x) >= 179.9
+        and min(corners_y) <= -89.9 and max(corners_y) >= 89.9,
+        "source_crs": _metadata_value(combined, "source_crs"),
+        "target_crs": _metadata_value(combined, "target_crs"),
+        "tiff_tag_imagedescription": _metadata_value(combined, "TIFFTAG_IMAGEDESCRIPTION"),
+        "target_crs_epsg_code": _metadata_value(combined, "target_crs_epsg_code"),
+        "type": _metadata_value(combined, "type"),
+        "area_of_use": _metadata_value(combined, "area_of_use"),
+        "area_or_point": _metadata_value(combined, "AREA_OR_POINT"),
+        "tiff_tag_copyright": _metadata_value(combined, "TIFFTAG_COPYRIGHT"),
+        "proj_network_enabled": False,
+    }
+    dataset = None
+    validate_grid_metadata(result)
+    return result
+
+
+def inspect_arcgis_readability(path: Path) -> dict[str, Any]:
+    import arcpy  # type: ignore
+
+    description = arcpy.Describe(str(path))
+    raster = arcpy.Raster(str(path))
+    return {
+        "readable": True,
+        "data_type": str(description.dataType),
+        "width": int(raster.width),
+        "height": int(raster.height),
+        "band_count": int(raster.bandCount),
+        "runtime_version": arcpy.GetInstallInfo().get("Version"),
+    }
+
+
 def validate_grid_metadata(metadata: dict[str, Any]) -> None:
     if (
         metadata.get("driver") != "GTiff"
@@ -185,9 +254,11 @@ def validate_grid_metadata(metadata: dict[str, Any]) -> None:
         or metadata.get("width") != 8640
         or metadata.get("height") != 4321
         or metadata.get("world_coverage") is not True
-        or metadata.get("source_crs") != "EPSG:4979"
-        or metadata.get("target_crs") != "EPSG:3855"
+        or metadata.get("tiff_tag_imagedescription") != EXPECTED_GRID_DESCRIPTION
+        or metadata.get("target_crs_epsg_code") != "3855"
         or metadata.get("type") != "VERTICAL_OFFSET_GEOGRAPHIC_TO_VERTICAL"
         or metadata.get("area_of_use") != "World"
+        or metadata.get("area_or_point") != "Point"
+        or metadata.get("tiff_tag_copyright") != EXPECTED_GRID_COPYRIGHT
     ):
         raise ValueError("grid GeoTIFF metadata does not match the approved resource")

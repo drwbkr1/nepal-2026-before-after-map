@@ -271,6 +271,20 @@
         "maximum_conversion_attempts_per_dem": 1,
         "automatic_retry_authorized": false,
         "proj_network_enabled": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
+        "approval_sha256": "b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541",
+        "proposal_ref": "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json",
+        "proposal_sha256": "729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd",
+        "review_bundle_sha256": "10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d",
+        "review_reconciliation_ref": "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-reconciliation.json",
+        "review_reconciliation_sha256": "17f63ff5834ce89a500f5cf1408f1bc967a7462e766b86e8f5197205eda5e9d1",
+        "network_requests_authorized": 0,
+        "recovery_verification_attempts": 1,
+        "maximum_conversion_attempts_per_dem": 1,
+        "stop_on_first_failure": true,
+        "automatic_retry_authorized": false
       }
     ]
   },
@@ -346,7 +360,8 @@
       "records/source-gates/m2-orbit-continuation-001-approval.json",
       "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
       "records/source-gates/m2-dem-vertical-datum-approval.json",
-      "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json"
+      "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
+      "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json"
     ]
   },
   "entry_conditions": [
@@ -1237,7 +1252,7 @@
       ],
       "action_class": "normative_decision",
       "human_gate": true,
-      "status": "ready",
+      "status": "complete",
       "inputs": [
         "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json",
         "records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json",
@@ -1247,10 +1262,9 @@
         "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-readiness.json"
       ],
       "outputs": [
-        "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-publication-gate.json",
-        "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-publication-reconciliation.json",
         "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-reconciliation.json",
-        "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json"
+        "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
+        "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval-activation.json"
       ],
       "gates": {
         "proposal_sha256": "729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd",
@@ -1259,29 +1273,29 @@
         "blank_response_sha256": "e9ebb1a150bf34caa68ef73cb7db67a71f869b951480374f3d78725d2de49c6f",
         "readiness_sha256": "b488092a6874642b692a49128584afc9bc36fff58492b3279c3f9e0cc62e3a76",
         "public_ci": "success",
-        "human_decision_count": 0,
-        "attestation": false,
-        "correction_authorized": false,
+        "human_decision_count": 1,
+        "attestation": true,
+        "correction_authorized": true,
         "network_requests_authorized": 0,
         "publication_commit": "a5b736c496d4004ec2923079958b4e756452ed60",
         "public_ci_run_id": 35302230590,
         "publication_gate_sha256": "507cf8618f76cc1bbf4c13726b1112ead34b919a1ae48f3e8e7e3d51e06c4123",
-        "publication_reconciliation_sha256": "bac1c6be7f54f9416306e3d63e49cf8414ac9c8b185929cb7559266f52a80e86"
+        "publication_reconciliation_sha256": "bac1c6be7f54f9416306e3d63e49cf8414ac9c8b185929cb7559266f52a80e86",
+        "approval_sha256": "b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541",
+        "review_reconciliation_sha256": "17f63ff5834ce89a500f5cf1408f1bc967a7462e766b86e8f5197205eda5e9d1"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/acquisition/m2-geoid-001-real-001-terminal.json",
         "records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json"
       ],
       "exit_condition_delta": {
-        "expected": [
-          "one exact attested owner decision"
-        ],
+        "expected": [],
         "observed": [
-          "exact blank review packet passed public default-branch CI"
+          "one exact attested approval"
         ],
-        "decision_value": "unknown",
-        "rationale": "Public validation releases owner review only; the packet still contains zero decisions and creates no correction or recovery authority."
+        "decision_value": "enables_dependency",
+        "rationale": "Only the bounded implementation, tests, and public CI are released now."
       },
       "next_dependency": "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION"
     },
@@ -1293,10 +1307,11 @@
       ],
       "action_class": "reversible_remediation",
       "human_gate": false,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
+        "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
         "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json",
-        "records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json"
+        "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-reconciliation.json"
       ],
       "outputs": [
         "versioned amended validation contract and implementation",
@@ -1309,7 +1324,12 @@
         "recovery_verification_attempts": 1,
         "automatic_retry": false,
         "conditional_no_replace_promotion": true,
-        "post_success_fixed_order_conversion_only": true
+        "post_success_fixed_order_conversion_only": true,
+        "approval_sha256": "b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541",
+        "public_ci": "pending",
+        "final_no_content_preflight": "blocked_by_public_ci",
+        "preserved_byte_read": false,
+        "grid_promotion": false
       },
       "disposition": null,
       "retained_failures": [
@@ -1318,9 +1338,11 @@
       ],
       "exit_condition_delta": {
         "expected": [],
-        "observed": [],
-        "decision_value": "defer",
-        "rationale": "No implementation or preserved-byte access is authorized before the exact review is approved."
+        "observed": [
+          "exact approval locked and reconciled"
+        ],
+        "decision_value": "unknown",
+        "rationale": "Implementation is active; real preserved-byte access remains gated."
       },
       "next_dependency": "M2-DEM-VERTICAL-DATUM-CONVERSION"
     },
@@ -3285,8 +3307,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW",
-    "next_action": "Review M2 DEM PROJ25 metadata recovery-001 bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd; approve, revise, or defer the exact post-observation metadata-key correction and one offline verification of the preserved bytes. No implementation, network request, preserved-byte read or promotion, DEM conversion, or downstream processing is authorized before an attested decision.",
+    "current_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION",
+    "next_action": "Implement and validate only the approved metadata-key interpretation correction and offline recovery controls, then require fresh public default-branch CI. Do not read or promote the preserved grid bytes, inspect DEM pixels, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3326,7 +3348,7 @@
       "The official PROJ-data 2.5-minute route is a zero-decision proposal. No recommended-grid payload, conversion, orbit application, radar pixel, baseline, change, attribution, or scientific action is authorized before exact owner approval.",
       "The one authorized PROJ-grid request is terminal after exact bytes passed identity and structural checks but failed the first implementation's generic metadata-key requirement. The exact staged bytes remain unpromoted outside Git; no retry, preserved-byte recovery read, DEM pixel access, conversion, or downstream action is authorized before a separate exact owner decision."
     ],
-    "parallel_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW",
-    "parallel_next_action": "Review M2 DEM PROJ25 metadata recovery-001 bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd; approve, revise, or defer the exact post-observation metadata-key correction and one offline verification of the preserved bytes. No implementation, network request, preserved-byte read or promotion, DEM conversion, or downstream processing is authorized before an attested decision."
+    "parallel_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION",
+    "parallel_next_action": "Implement and validate only the approved metadata-key interpretation correction and offline recovery controls, then require fresh public default-branch CI. Do not read or promote the preserved grid bytes, inspect DEM pixels, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight."
   }
 }

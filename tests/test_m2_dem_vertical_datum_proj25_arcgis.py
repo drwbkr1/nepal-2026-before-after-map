@@ -17,6 +17,50 @@ HAS_ARCGIS = importlib.util.find_spec("arcpy") is not None and importlib.util.fi
 
 @unittest.skipUnless(HAS_ARCGIS, "requires the existing ArcGIS Pro Python runtime")
 class DemVerticalDatumProj25ArcGISTests(unittest.TestCase):
+    def test_exact_official_metadata_representation_is_accepted_in_arcgis_runtime(self) -> None:
+        from osgeo import gdal
+
+        from m2_dem_vertical_datum_proj25_core import (
+            EXPECTED_GRID_COPYRIGHT,
+            EXPECTED_GRID_DESCRIPTION,
+            inspect_arcgis_readability,
+            inspect_grid,
+        )
+
+        os.environ["PROJ_NETWORK"] = "OFF"
+        gdal.UseExceptions()
+        scratch = ROOT / "scratch"
+        scratch.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=scratch) as temporary:
+            grid = Path(temporary) / "synthetic-official-metadata-grid.tif"
+            driver = gdal.GetDriverByName("GTiff")
+            dataset = driver.Create(
+                str(grid), 8640, 4321, 1, gdal.GDT_Float32,
+                options=["TILED=YES", "SPARSE_OK=YES", "BIGTIFF=YES"],
+            )
+            self.assertIsNotNone(dataset)
+            dataset.SetGeoTransform((-180.02083333333334, 1.0 / 24.0, 0.0, 90.02083333333333, 0.0, -1.0 / 24.0))
+            dataset.SetMetadataItem("AREA_OR_POINT", "Point")
+            dataset.SetMetadataItem("TIFFTAG_IMAGEDESCRIPTION", EXPECTED_GRID_DESCRIPTION)
+            dataset.SetMetadataItem("TIFFTAG_COPYRIGHT", EXPECTED_GRID_COPYRIGHT)
+            band = dataset.GetRasterBand(1)
+            band.SetMetadataItem("TYPE", "VERTICAL_OFFSET_GEOGRAPHIC_TO_VERTICAL")
+            band.SetMetadataItem("area_of_use", "World")
+            band.SetMetadataItem("target_crs_epsg_code", "3855")
+            dataset.FlushCache()
+            dataset = None
+
+            metadata = inspect_grid(grid)
+            self.assertIsNone(metadata["source_crs"])
+            self.assertIsNone(metadata["target_crs"])
+            self.assertEqual(metadata["tiff_tag_imagedescription"], EXPECTED_GRID_DESCRIPTION)
+            self.assertEqual(metadata["target_crs_epsg_code"], "3855")
+            readable = inspect_arcgis_readability(grid)
+            self.assertTrue(readable["readable"])
+            self.assertEqual(readable["width"], 8640)
+            self.assertEqual(readable["height"], 4321)
+            self.assertEqual(readable["band_count"], 1)
+
     def test_synthetic_inverse_grid_conversion_is_sign_correct_and_arcgis_readable(self) -> None:
         import numpy as np
         from osgeo import gdal, osr
