@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-RECONCILIATION",
+  "status": "failed_supervisor_no_retry",
+  "completed_at_utc": "2026-09-18T23:40:07Z",
+  "failure_type": "RuntimeError",
+  "failure_code": "unexpected_processing_failure",
+  "failure_message": "The Product License has not been initialized.",
+  "attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\radar-pixel-orbit-application-recovery-001\\radar-pixel-orbit-application-recovery-001-real-001",
+  "assertions": {
+    "attempt_consumed": true,
+    "terminal_receipt_persisted": true,
+    "automatic_retry_performed": false,
+    "network_request_performed_by_runner": false,
+    "credential_value_read": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_admission_authorized": false
+  }
+}

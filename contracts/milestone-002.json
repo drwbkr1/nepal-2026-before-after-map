@@ -3746,7 +3746,7 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-publication-gate.json",
@@ -3754,12 +3754,14 @@
       ],
       "outputs": [
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-final-preflight.json",
-        "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json"
+        "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json"
       ],
       "gates": {
         "public_ci": "success",
-        "final_no_content_preflight": "pending",
-        "real_attempts_started": 0,
+        "final_no_content_preflight": "pass",
+        "real_attempts_started": 1,
+        "identity_evaluations_started": 1,
         "source_attempts_started": 0,
         "route_evaluations_started": 0,
         "automatic_retry": false,
@@ -3767,22 +3769,37 @@
         "gate_state_publication": "success",
         "implementation_publication_gate_sha256": "1778a9dcb553a5d7eb8473341d62e4dff6e1f4ee387666158461c6916f28312d",
         "gate_state_commit_sha": "e1c57b8c1a56d7fa9a9dc2e7ea732ad215d3773d",
-        "gate_state_publication_sha256": "c9d8a120591999af16e093f2eb8763715d54e06e41396b86e4d318dbc247a2e6"
+        "gate_state_publication_sha256": "c9d8a120591999af16e093f2eb8763715d54e06e41396b86e4d318dbc247a2e6",
+        "terminal_failure_code": "unexpected_processing_failure",
+        "terminal_failure_message": "The Product License has not been initialized.",
+        "terminal_reconciliation_sha256": "3bd2a4cc6bd56d7ec5ae95a316ff3f5b3cc788b94d32436b3cf02586d7a391c0",
+        "outcome_reconciliation_sha256": "ef5b7601ce6073c2736297406ac3324f03ca1a84eaa6e7c3dbc35a1a07601d19",
+        "postattempt_identities_match": true,
+        "project_data_content_read_for_identity_verification": true,
+        "source_processing_started": false,
+        "orbit_application_started": false,
+        "radar_pixel_processing_started": false
       },
-      "disposition": null,
+      "disposition": "block",
       "retained_failures": [
-        "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json"
+        "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json"
       ],
       "exit_condition_delta": {
         "expected": [
-          "six terminal source dispositions",
-          "two independent route QA dispositions"
+          "a separately scoped owner decision before any further radar execution"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "Execution remains blocked until implementation public CI and the one final no-content preflight pass."
+        "observed": [
+          "the final no-content preflight passed",
+          "one fresh attempt was consumed after exact identity verification",
+          "ArcGIS runtime setup failed because the product license was not initialized",
+          "zero source-processing attempts and zero route evaluations started"
+        ],
+        "decision_value": "blocks_dependency",
+        "rationale": "The authorized attempt is terminal and cannot be retried; a separately scoped owner decision is required."
       },
-      "next_dependency": "M2-ORBIT-APPLY"
+      "next_dependency": null
     }
   ],
   "path_efficiency": {
@@ -3839,8 +3856,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION",
-    "next_action": "Run the one authorized final no-content recovery preflight once. Stop on failure; only on pass may the fresh fixed-order six-source and two-route attempt begin.",
+    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-REVIEW",
+    "next_action": "Review the terminal ArcGIS product-license initialization failure and choose a separately scoped path. Do not rerun recovery-001, reuse its attempt path, begin baseline or change analysis, or make a scientific claim.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3885,7 +3902,7 @@
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery.",
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval."
     ],
-    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION",
-    "parallel_next_action": "Run the one authorized final no-content recovery preflight once. Stop on failure; only on pass may the fresh fixed-order six-source and two-route attempt begin."
+    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-REVIEW",
+    "parallel_next_action": "Review the terminal ArcGIS product-license initialization failure and choose a separately scoped path. Do not rerun recovery-001, reuse its attempt path, begin baseline or change analysis, or make a scientific claim."
   }
 }

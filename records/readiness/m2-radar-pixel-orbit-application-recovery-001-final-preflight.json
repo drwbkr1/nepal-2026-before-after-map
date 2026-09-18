@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-FINAL-PREFLIGHT",
+  "checked_at_utc": "2026-09-18T23:38:17Z",
+  "status": "pass_final_no_content_preflight",
+  "bindings": {
+    "implementation_contract_ref": "config/qa/m2-radar-pixel-orbit-application-recovery-001-contract.json",
+    "implementation_contract_sha256": "f2fb1b796aedc2c760d3680cccefcc4558fc83beb6107663ca4e0a6d9f7d7d81",
+    "implementation_publication_gate_ref": "records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-publication-gate.json",
+    "implementation_publication_gate_sha256": "1778a9dcb553a5d7eb8473341d62e4dff6e1f4ee387666158461c6916f28312d",
+    "implementation_commit_sha": "4b35f3a3de1e1f2d2e00d2cf62d4c2164dc59568",
+    "public_ci_run_id": 35405199109
+  },
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "ArcInfo"
+  },
+  "checks": {
+    "implementation_publication_gate_passed": true,
+    "exact_contract_and_repo_bindings_passed": true,
+    "external_data_root_matches_project_sibling": true,
+    "attempt_and_receipt_collision_count": 0,
+    "free_bytes": 512382873600,
+    "minimum_free_bytes": 64424509440,
+    "source_paths_present": true,
+    "orbit_paths_present": true,
+    "dem_paths_present": true,
+    "image_analyst": "Available",
+    "spatial_analyst": "Available",
+    "tool_signatures_match": true
+  },
+  "collisions": [],
+  "assertions": {
+    "project_data_content_read": false,
+    "project_file_hash_computed": false,
+    "project_raster_or_xml_opened": false,
+    "external_custody_mutated": false,
+    "attempt_root_created": false,
+    "orbit_application_executed": false,
+    "radar_pixel_processing_executed": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Execute the exact one-attempt fixed-order route only if this receipt passes."
+}

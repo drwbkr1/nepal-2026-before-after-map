@@ -210,6 +210,10 @@ RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_001_EXECUTION_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION",
     "next_action": "Run the one authorized final no-content recovery preflight once. Stop on failure; only on pass may the fresh fixed-order six-source and two-route attempt begin.",
 }
+RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_001_TERMINAL_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-REVIEW",
+    "next_action": "Review the terminal ArcGIS product-license initialization failure and choose a separately scoped path. Do not rerun recovery-001, reuse its attempt path, begin baseline or change analysis, or make a scientific claim.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1669,6 +1673,37 @@ def current_radar_pixel_orbit_application_recovery_001_execution_pending(
     )
 
 
+def current_radar_pixel_orbit_application_recovery_001_terminal(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the consumed recovery attempt and its exact terminal reconciliation."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        terminal = load(root / "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json")
+        outcome = load(root / "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    execution = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION", {})
+    return bool(
+        terminal.get("status") == "failed_supervisor_no_retry"
+        and terminal.get("failure_code") == "unexpected_processing_failure"
+        and terminal.get("failure_message") == "The Product License has not been initialized."
+        and terminal.get("assertions", {}).get("attempt_consumed") is True
+        and terminal.get("assertions", {}).get("automatic_retry_performed") is False
+        and outcome.get("status") == "block_terminal_arcgis_product_license_not_initialized_no_retry"
+        and outcome.get("assertions", {}).get("postattempt_source_orbit_dem_identities_match") is True
+        and outcome.get("assertions", {}).get("source_processing_started") is False
+        and execution.get("status") == "complete"
+        and execution.get("disposition") == "block"
+        and execution.get("gates", {}).get("real_attempts_started") == 1
+        and execution.get("gates", {}).get("source_attempts_started") == 0
+        and execution.get("gates", {}).get("route_evaluations_started") == 0
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -1738,7 +1773,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_pixel_orbit_application_recovery_001_execution_pending(
+            if current_radar_pixel_orbit_application_recovery_001_terminal(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_001_TERMINAL_CHECKPOINT)
+            elif current_radar_pixel_orbit_application_recovery_001_execution_pending(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_001_EXECUTION_CHECKPOINT)
