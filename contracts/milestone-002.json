@@ -3755,7 +3755,8 @@
       "outputs": [
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-final-preflight.json",
         "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json",
-        "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json"
+        "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json"
       ],
       "gates": {
         "public_ci": "success",
@@ -3774,6 +3775,10 @@
         "terminal_failure_message": "The Product License has not been initialized.",
         "terminal_reconciliation_sha256": "3bd2a4cc6bd56d7ec5ae95a316ff3f5b3cc788b94d32436b3cf02586d7a391c0",
         "outcome_reconciliation_sha256": "ef5b7601ce6073c2736297406ac3324f03ca1a84eaa6e7c3dbc35a1a07601d19",
+        "terminal_state_publication": "success",
+        "terminal_commit_sha": "e83e6b60a6365c8ea305d37e468f986753abb5b7",
+        "terminal_public_ci_run_id": 35407396191,
+        "terminal_publication_gate_sha256": "2d757b464ef71a8f8305145698c2205d4034dc492b51b82fc9261741f3133ade",
         "postattempt_identities_match": true,
         "project_data_content_read_for_identity_verification": true,
         "source_processing_started": false,
