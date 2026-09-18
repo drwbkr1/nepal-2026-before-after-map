@@ -89,11 +89,11 @@ class M2DemProj25ReceiptPersistenceRecovery002ReviewTests(unittest.TestCase):
             self.assertFalse(self.readiness["assertions"][key])
 
     def test_control_state_routes_to_bounded_implementation(self) -> None:
-        checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW"
+        checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)
-        self.assertEqual(self.goal["proposed_amendments"], ["contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json"])
+        self.assertEqual(self.goal["proposed_amendments"], [])
         self.assertFalse(current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending(ROOT, {"promoted": 8}))
         self.assertFalse(current_dem_proj25_receipt_persistence_recovery_002_review_required(ROOT, {"promoted": 8}))
         self.assertFalse(current_dem_proj25_receipt_persistence_recovery_002_implementation_active(ROOT, {"promoted": 8}))

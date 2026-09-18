@@ -25,6 +25,8 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_pixel_orbit_application_001_execution_pending,
     current_radar_pixel_orbit_application_recovery_001_review_publication_pending,
     current_radar_pixel_orbit_application_recovery_001_review_required,
+    current_radar_pixel_orbit_application_recovery_001_implementation_active,
+    current_radar_pixel_orbit_application_recovery_001_execution_pending,
     current_full_header_implementation_pending,
     current_materialization_pixel_implementation_pending,
     current_optical_pixel_implementation_pending,
@@ -55,6 +57,7 @@ from record_m2_orbit_osv_precision_amendment_001_implementation_readiness import
 from record_m2_orbit_continuation_001_implementation_readiness import FILES as ORBIT_CONTINUATION_001_IMPLEMENTATION_FILES
 from record_m2_orbit_offline_verification_recovery_001_implementation_readiness import BINDINGS as ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_IMPLEMENTATION_FILES
 from m2_radar_pixel_orbit_application_001_core import validate_contract as validate_radar_pixel_orbit_application_001_contract
+from m2_radar_pixel_orbit_application_recovery_001_core import validate_recovery_contract as validate_radar_pixel_orbit_application_recovery_001_contract
 from record_m2_radar_pixel_orbit_application_001_implementation_readiness import ARTIFACTS as RADAR_PIXEL_ORBIT_APPLICATION_001_IMPLEMENTATION_FILES
 from validate_m2_acquisition_progress import (
     INITIAL_ACTIVE_INTAKE_SHA256,
@@ -193,6 +196,17 @@ REQUIRED = [
     "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-readiness.json",
     "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-publication-gate.json",
     "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-publication-reconciliation.json",
+    "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-review-reconciliation.json",
+    "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-approval-activation.json",
+    "config/qa/m2-radar-pixel-orbit-application-recovery-001-contract.json",
+    "scripts/m2_radar_pixel_orbit_application_recovery_001_core.py",
+    "scripts/run_m2_radar_pixel_orbit_application_recovery_001.py",
+    "scripts/validate_m2_radar_pixel_orbit_application_recovery_001_arcgis.py",
+    "tests/test_m2_radar_pixel_orbit_application_recovery_001.py",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-synthetic-attempt-001-failure.json",
+    "records/surface-receipts/m2-radar-pixel-orbit-application-recovery-001-synthetic-arcgis.json",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-readiness.json",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -1489,7 +1503,15 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if current_radar_pixel_orbit_application_recovery_001_review_required(ROOT, {"promoted": 8}):
+            if current_radar_pixel_orbit_application_recovery_001_execution_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"
+                expected_dem_next_action = "Run the one final no-content recovery preflight and, only on pass, the single fresh fixed-order six-source and two-route attempt. Stop on the first execution failure, perform no retry, and do not run baseline or change analysis."
+            elif current_radar_pixel_orbit_application_recovery_001_implementation_active(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"
+                expected_dem_next_action = "Implement and validate only the approved strict inventory projection, ordering correction, durable terminal handling, and recovery-specific controls, then require successful public default-branch CI. Do not run the final preflight, read project pixels, or create the fresh recovery attempt before that gate."
+            elif current_radar_pixel_orbit_application_recovery_001_review_required(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW"
                 expected_dem_checkpoint_authority_ref = "reviews/m2-radar-pixel-orbit-application-recovery-001/review-contract.json"
                 expected_dem_next_action = "Review bundle SHA-256 69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9 and proposal SHA-256 cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04; approve, revise, or defer the exact strict inventory-normalization recovery and one fresh fixed-source attempt. No implementation or execution is authorized before an exact attested decision."
@@ -1552,7 +1574,15 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if current_radar_pixel_orbit_application_recovery_001_review_required(ROOT, {"promoted": 8}):
+            if current_radar_pixel_orbit_application_recovery_001_execution_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"
+                expected_dem_next_action = "Run the one final no-content recovery preflight and, only on pass, the single fresh fixed-order six-source and two-route attempt. Stop on the first execution failure, perform no retry, and do not run baseline or change analysis."
+            elif current_radar_pixel_orbit_application_recovery_001_implementation_active(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"
+                expected_dem_next_action = "Implement and validate only the approved strict inventory projection, ordering correction, durable terminal handling, and recovery-specific controls, then require successful public default-branch CI. Do not run the final preflight, read project pixels, or create the fresh recovery attempt before that gate."
+            elif current_radar_pixel_orbit_application_recovery_001_review_required(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW"
                 expected_dem_checkpoint_authority_ref = "reviews/m2-radar-pixel-orbit-application-recovery-001/review-contract.json"
                 expected_dem_next_action = "Review bundle SHA-256 69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9 and proposal SHA-256 cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04; approve, revise, or defer the exact strict inventory-normalization recovery and one fresh fixed-source attempt. No implementation or execution is authorized before an exact attested decision."
@@ -2447,8 +2477,8 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != ["contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json"]:
-        fail("project profile must expose the pending radar inventory recovery proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must clear the approved radar inventory recovery proposal")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -2468,8 +2498,9 @@ def main() -> None:
         "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
         "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
+        "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
     ]:
-        fail("project profile must expose the eighteen exact active amendments")
+        fail("project profile must expose the nineteen exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -2742,6 +2773,19 @@ def main() -> None:
         "network_requests_authorized": 0,
         "automatic_retry_authorized": False,
     }
+    expected_radar_pixel_orbit_application_recovery_001_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"),
+        "proposal_ref": "contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json",
+        "proposal_sha256": "cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04",
+        "review_bundle_sha256": "69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-review-reconciliation.json"),
+        "attempt_id": "radar-pixel-orbit-application-recovery-001-real-001",
+        "maximum_real_attempts": 1,
+        "automatic_retry_authorized": False,
+        "baseline_or_change_authorized": False,
+    }
     expected_amendments = [
         expected_dem_amendment_binding,
         expected_orbit_amendment_binding,
@@ -2761,6 +2805,7 @@ def main() -> None:
         expected_dem_proj25_metadata_recovery_001_amendment_binding,
         expected_dem_proj25_receipt_persistence_recovery_002_amendment_binding,
         expected_radar_pixel_orbit_application_001_amendment_binding,
+        expected_radar_pixel_orbit_application_recovery_001_amendment_binding,
     ]
     if profile["authority"].get("amendments") != expected_amendments:
         fail("profile authority does not bind the exact active amendments")
@@ -2785,8 +2830,9 @@ def main() -> None:
         "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
         "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
+        "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
     ]:
-        fail("active M2 scope does not expose the eighteen exact amendment approvals")
+        fail("active M2 scope does not expose the nineteen exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -2828,8 +2874,8 @@ def main() -> None:
         or "bounded nested-grid correction" not in optical_pixel_recovery_review_gate.get("reason", "")
     ):
         fail("project profile must bind optical pixel recovery to its exact approval")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != ["contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json"]:
-        fail("project profile must expose the pending radar inventory recovery proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must clear the approved radar inventory recovery proposal")
     radar_first_path_gate = profile_gates.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
     if (
         radar_first_path_gate.get("authority_ref") != "reviews/m2-radar-first-path-001/review-contract.json"
@@ -2882,6 +2928,12 @@ def main() -> None:
         or "bounded fixed-order six-source QA route" not in radar_pixel_orbit_review_gate.get("reason", "")
     ):
         fail("project profile must bind the radar pixel and orbit application route to its exact approval")
+    radar_pixel_orbit_recovery_gate = profile_gates.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW", {})
+    if (
+        radar_pixel_orbit_recovery_gate.get("authority_ref") != "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"
+        or "strict inventory normalization" not in radar_pixel_orbit_recovery_gate.get("reason", "")
+    ):
+        fail("project profile must bind the radar inventory-normalization recovery to its exact approval")
     if profile.get("parallel_checkpoints") != [
         {
             "checkpoint_id": expected_dem_checkpoint,
@@ -2909,10 +2961,11 @@ def main() -> None:
         "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
         "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
+        "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
-    if goal.get("proposed_amendments") != ["contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json"]:
-        fail("long-term goal must expose the pending radar inventory recovery proposal")
+    if goal.get("proposed_amendments") != []:
+        fail("long-term goal must clear the approved radar inventory recovery proposal")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -7693,7 +7746,11 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        if current_radar_pixel_orbit_application_recovery_001_review_required(ROOT, state_counts):
+        if current_radar_pixel_orbit_application_recovery_001_execution_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION"
+        elif current_radar_pixel_orbit_application_recovery_001_implementation_active(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION"
+        elif current_radar_pixel_orbit_application_recovery_001_review_required(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW"
         elif current_radar_pixel_orbit_application_recovery_001_review_publication_pending(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-PUBLICATION"
@@ -12453,6 +12510,13 @@ def main() -> None:
     radar_recovery_readiness = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-readiness.json").read_text(encoding="utf-8"))
     radar_recovery_publication_gate = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-publication-gate.json").read_text(encoding="utf-8"))
     radar_recovery_publication_reconciliation = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-publication-reconciliation.json").read_text(encoding="utf-8"))
+    radar_recovery_review_reconciliation = json.loads((ROOT / "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-review-reconciliation.json").read_text(encoding="utf-8"))
+    radar_recovery_approval = json.loads((ROOT / "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json").read_text(encoding="utf-8"))
+    radar_recovery_activation = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-recovery-001-approval-activation.json").read_text(encoding="utf-8"))
+    radar_recovery_implementation_contract = json.loads((ROOT / "config/qa/m2-radar-pixel-orbit-application-recovery-001-contract.json").read_text(encoding="utf-8"))
+    radar_recovery_synthetic_failure = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-recovery-001-synthetic-attempt-001-failure.json").read_text(encoding="utf-8"))
+    radar_recovery_synthetic_arcgis = json.loads((ROOT / "records/surface-receipts/m2-radar-pixel-orbit-application-recovery-001-synthetic-arcgis.json").read_text(encoding="utf-8"))
+    radar_recovery_implementation_readiness = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-readiness.json").read_text(encoding="utf-8"))
     if (
         radar_lock_failure.get("status") != "rejected_before_decision_reveal_invalid_hash_bound_filename"
         or radar_lock_failure.get("candidate_sha256") != "49807e5113a9dc4beec16ae23631f4039e066f1713b338055adc24ee71240369"
@@ -12841,9 +12905,9 @@ def main() -> None:
         or radar_recovery_publication_reconciliation.get("proposal_sha256") != sha256("contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json")
         or radar_recovery_publication_reconciliation.get("review_bundle_sha256") != sha256("reviews/m2-radar-pixel-orbit-application-recovery-001/review-bundle.json")
         or radar_recovery_publication_reconciliation.get("current_checkpoint") != "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW"
-        or radar_recovery_publication_reconciliation.get("control_sha256", {}).get("milestone") != sha256("contracts/milestone-002.json")
-        or radar_recovery_publication_reconciliation.get("control_sha256", {}).get("project_control_profile") != sha256("records/project-control-profile.json")
-        or radar_recovery_publication_reconciliation.get("control_sha256", {}).get("long_term_goal") != sha256("records/long-term-goal.json")
+        or radar_recovery_publication_reconciliation.get("control_sha256", {}).get("milestone") != "c40eb2a02782bd0f15fd2a6cf316b97498379040522b9db3995e5437bc7f1a4b"
+        or radar_recovery_publication_reconciliation.get("control_sha256", {}).get("project_control_profile") != "4b3094bb0ca52d7644a910d156086cde5f068acc124169e9640717f2e9f4e17b"
+        or radar_recovery_publication_reconciliation.get("control_sha256", {}).get("long_term_goal") != "4cff1e092dd4718cdd688f3f966c4b00ad45811661e49fb08605561bf4af7b64"
         or radar_recovery_publication_reconciliation.get("released_now", {}).get("owner_review") is not True
         or any(radar_recovery_publication_reconciliation.get("released_now", {}).get(key) is not False for key in (
             "implementation", "project_data_content_read", "new_real_attempt",
@@ -12851,11 +12915,130 @@ def main() -> None:
         ))
     ):
         fail("radar inventory recovery review publication reconciliation differs or overclaims")
+    if (
+        sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-review-reconciliation.json") != "e6454b84bf76cf07b758e9e075b69b9cfb8a0392b69518a64e7ed16b15cc2554"
+        or radar_recovery_review_reconciliation.get("status") != "reconciled_exact_human_response"
+        or radar_recovery_review_reconciliation.get("contract_sha256") != "1f131cc63380e4dad9846e32129a6e2493d7071e85e832a385d5079543d0b74b"
+        or radar_recovery_review_reconciliation.get("response_sha256") != "3e9603edc2002581c28815a4c1350bd0055eefb2862ad77b0a07cb70cd1b7723"
+        or radar_recovery_review_reconciliation.get("receipt_sha256") != "92d475996d92e9344f30d83b9955a4f06d7f4ba44bd70da15aa10491783b05f7"
+        or radar_recovery_review_reconciliation.get("human_decision_count") != 1
+        or radar_recovery_review_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+        or radar_recovery_review_reconciliation.get("item_decisions") != [{"item_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001", "decision": "approve"}]
+        or radar_recovery_review_reconciliation.get("human_decisions_fabricated") is not False
+    ):
+        fail("radar inventory recovery owner response reconciliation differs")
+    if (
+        sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json") != "4a1fe442f678c354c13f7e255ea459db2ec2d0368c35b72b32170ae8a3dc7d8f"
+        or radar_recovery_approval.get("status") != "approved_strict_inventory_normalization_one_fresh_attempt"
+        or radar_recovery_approval.get("review_bundle_manifest_sha256") != "69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9"
+        or radar_recovery_approval.get("proposal_sha256") != "cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04"
+        or radar_recovery_approval.get("review_reconciliation_sha256") != sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-review-reconciliation.json")
+        or radar_recovery_approval.get("human_decision_count") != 1
+        or radar_recovery_approval.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+        or radar_recovery_approval.get("attestation") is not True
+        or radar_recovery_approval.get("limits", {}).get("new_real_attempts") != 1
+        or radar_recovery_approval.get("limits", {}).get("automatic_retry") is not False
+        or radar_recovery_approval.get("limits", {}).get("network_requests") != 0
+        or any(radar_recovery_approval.get("claim_boundary", {}).get(key) is not False for key in (
+            "baseline_admission_authorized", "change_analysis_authorized", "interpretation_authorized",
+            "attribution_authorized", "derived_pixel_publication_authorized", "scientific_publication_authorized",
+        ))
+    ):
+        fail("radar inventory recovery approval differs or broadens authority")
+    if (
+        sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-approval-activation.json") != "1b42eb0f5eb977a7889333eca9ff9f8c25d14116c3baf1cefd51c2a4af94796b"
+        or radar_recovery_activation.get("status") != "pass_exact_approval_activated_implementation_publication_only"
+        or radar_recovery_activation.get("bindings", {}).get("approval_sha256") != sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json")
+        or radar_recovery_activation.get("bindings", {}).get("reconciliation_sha256") != sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-review-reconciliation.json")
+        or radar_recovery_activation.get("bindings", {}).get("proposal_sha256") != sha256("contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json")
+        or radar_recovery_activation.get("released_now", {}).get("bounded_implementation") is not True
+        or radar_recovery_activation.get("released_now", {}).get("synthetic_tests") is not True
+        or radar_recovery_activation.get("released_now", {}).get("arcgis_runtime_tests") is not True
+        or radar_recovery_activation.get("released_now", {}).get("public_ci") is not True
+        or any(radar_recovery_activation.get("released_now", {}).get(key) is not False for key in (
+            "final_no_content_preflight", "project_data_content_read", "new_real_attempt", "orbit_application",
+            "radar_pixel_processing", "route_qa", "baseline_or_change_analysis", "scientific_publication",
+        ))
+        or any(radar_recovery_activation.get("assertions", {}).get(key) is not False for key in (
+            "network_requests_performed", "credential_values_read", "external_data_accessed",
+            "external_data_mutated", "project_pixels_read", "scientific_result_established",
+        ))
+    ):
+        fail("radar inventory recovery approval activation differs or overclaims")
+    radar_recovery_contract_errors = validate_radar_pixel_orbit_application_recovery_001_contract(
+        radar_recovery_implementation_contract, ROOT
+    )
+    if radar_recovery_contract_errors:
+        fail("radar inventory recovery implementation contract differs: " + "; ".join(radar_recovery_contract_errors))
+    if (
+        radar_recovery_synthetic_failure.get("status") != "terminal_synthetic_arcgis_failure_no_project_data_access"
+        or radar_recovery_synthetic_failure.get("failure_code") != "recovery_overlay_registration_lookup"
+        or radar_recovery_synthetic_failure.get("retained_output", {}).get("stable_file_count") != 14
+        or radar_recovery_synthetic_failure.get("retained_output", {}).get("stable_total_bytes") != 547016
+        or radar_recovery_synthetic_failure.get("assertions", {}).get("synthetic_only") is not True
+        or any(radar_recovery_synthetic_failure.get("assertions", {}).get(key) is not False for key in (
+            "project_data_content_read", "external_custody_accessed", "external_custody_mutated",
+            "real_attempt_created", "orbit_application_executed", "radar_pixel_processing_executed",
+            "network_request_performed", "baseline_or_change_analysis_executed", "scientific_result_established",
+        ))
+    ):
+        fail("radar inventory recovery first synthetic failure differs or overclaims")
+    if (
+        radar_recovery_synthetic_arcgis.get("status") != "pass_synthetic_arcgis_runtime_only"
+        or radar_recovery_synthetic_arcgis.get("bindings", {}).get("implementation_contract_sha256") != sha256("config/qa/m2-radar-pixel-orbit-application-recovery-001-contract.json")
+        or radar_recovery_synthetic_arcgis.get("bindings", {}).get("recovery_core_sha256") != sha256("scripts/m2_radar_pixel_orbit_application_recovery_001_core.py")
+        or radar_recovery_synthetic_arcgis.get("bindings", {}).get("adapter_sha256") != sha256("scripts/validate_m2_radar_pixel_orbit_application_recovery_001_arcgis.py")
+        or radar_recovery_synthetic_arcgis.get("bindings", {}).get("recovery_runner_sha256") != sha256("scripts/run_m2_radar_pixel_orbit_application_recovery_001.py")
+        or radar_recovery_synthetic_arcgis.get("bindings", {}).get("base_contract_sha256") != sha256("config/qa/m2-radar-pixel-orbit-application-001-contract.json")
+        or radar_recovery_synthetic_arcgis.get("bindings", {}).get("base_core_sha256") != sha256("scripts/m2_radar_pixel_orbit_application_001_core.py")
+        or radar_recovery_synthetic_arcgis.get("bindings", {}).get("base_production_runner_sha256") != sha256("scripts/run_m2_radar_pixel_orbit_application_001.py")
+        or radar_recovery_synthetic_arcgis.get("assertions", {}).get("synthetic_only") is not True
+        or radar_recovery_synthetic_arcgis.get("assertions", {}).get("exact_sar_tool_signatures_present") is not True
+        or radar_recovery_synthetic_arcgis.get("assertions", {}).get("base_production_runner_calls_match_installed_signatures") is not True
+        or radar_recovery_synthetic_arcgis.get("assertions", {}).get("recovery_runner_delegates_unchanged_sar_processing") is not True
+        or any(radar_recovery_synthetic_arcgis.get("assertions", {}).get(key) is not False for key in (
+            "project_data_content_read", "external_custody_accessed", "network_request_performed",
+            "orbit_application_executed", "baseline_or_change_analysis_executed", "scientific_admission_authorized",
+        ))
+    ):
+        fail("radar inventory recovery ArcGIS synthetic receipt differs or overclaims")
+    for ref, digest in radar_recovery_implementation_readiness.get("bindings", {}).items():
+        if digest != sha256(ref):
+            fail(f"radar inventory recovery implementation binding differs: {ref}")
+    if (
+        radar_recovery_implementation_readiness.get("status") != "pass_strict_inventory_recovery_implementation_public_ci_pending"
+        or radar_recovery_implementation_readiness.get("implementation", {}).get("projected_inventory_fields") != ["relative_path", "size_bytes", "sha256"]
+        or radar_recovery_implementation_readiness.get("implementation", {}).get("case_insensitive_path_sort") is not True
+        or radar_recovery_implementation_readiness.get("implementation", {}).get("identity_verification_under_durable_terminal_handling") is not True
+        or radar_recovery_implementation_readiness.get("implementation", {}).get("attempt_id") != "radar-pixel-orbit-application-recovery-001-real-001"
+        or radar_recovery_implementation_readiness.get("implementation", {}).get("automatic_retry_authorized") is not False
+        or radar_recovery_implementation_readiness.get("validation", {}).get("focused_recovery_test_count") != 9
+        or radar_recovery_implementation_readiness.get("validation", {}).get("recovery_and_base_regression_test_count") != 20
+        or radar_recovery_implementation_readiness.get("validation", {}).get("arcgis_runtime_test_count") != 1
+        or radar_recovery_implementation_readiness.get("validation", {}).get("full_repository_test_count") != 578
+        or radar_recovery_implementation_readiness.get("validation", {}).get("full_repository_intentional_skip_count") != 6
+        or radar_recovery_implementation_readiness.get("validation", {}).get("repository_checker_status") != "pass_1032_required_files_pending_self_validation"
+        or radar_recovery_implementation_readiness.get("released_now", {}).get("public_ci") is not True
+        or any(radar_recovery_implementation_readiness.get("released_now", {}).get(key) is not False for key in (
+            "final_no_content_preflight", "project_data_content_read", "new_real_attempt", "orbit_application",
+            "radar_pixel_processing", "route_evaluation", "baseline_or_change_analysis",
+        ))
+        or any(radar_recovery_implementation_readiness.get("assertions", {}).get(key) is not False for key in (
+            "project_data_content_read", "external_custody_accessed_by_implementation_tests",
+            "external_custody_mutated", "network_request_performed", "credential_value_read",
+            "real_processing_attempt_created", "orbit_application_executed", "radar_pixel_processing_executed",
+            "baseline_admission_authorized", "change_analysis_executed", "interpretation_or_attribution_executed",
+            "derived_pixel_publication_authorized", "scientific_result_established",
+        ))
+    ):
+        fail("radar inventory recovery implementation readiness differs or overclaims")
     radar_units = {unit.get("id"): unit for unit in active_m2.get("units", [])}
     radar_review_unit = radar_units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW", {})
     radar_implementation_unit = radar_units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION", {})
     radar_execution_unit = radar_units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION", {})
     radar_recovery_review_unit = radar_units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW", {})
+    radar_recovery_implementation_unit = radar_units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION", {})
+    radar_recovery_execution_unit = radar_units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION", {})
     if (
         radar_review_unit.get("status") != "complete"
         or radar_review_unit.get("disposition") != "pass"
@@ -12881,19 +13064,40 @@ def main() -> None:
         or radar_execution_unit.get("gates", {}).get("radar_pixel_processing_started") is not False
         or radar_execution_unit.get("gates", {}).get("automatic_retry") is not False
         or radar_execution_unit.get("gates", {}).get("baseline_or_change_authorized") is not False
-        or radar_recovery_review_unit.get("status") != "in_progress"
+        or radar_recovery_review_unit.get("status") != "complete"
+        or radar_recovery_review_unit.get("disposition") != "pass"
         or radar_recovery_review_unit.get("human_gate") is not True
         or radar_recovery_review_unit.get("gates", {}).get("public_ci") != "success"
         or radar_recovery_review_unit.get("gates", {}).get("publication_commit_sha") != "8bba9bb3de992f598893214a92fe7ca30c92faae"
         or radar_recovery_review_unit.get("gates", {}).get("public_ci_run_id") != 35398189779
         or radar_recovery_review_unit.get("gates", {}).get("publication_gate_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-publication-gate.json")
-        or radar_recovery_review_unit.get("gates", {}).get("human_decision_count") != 0
-        or radar_recovery_review_unit.get("gates", {}).get("attestation") is not False
-        or radar_recovery_review_unit.get("gates", {}).get("implementation_authorized") is not False
+        or radar_recovery_review_unit.get("gates", {}).get("human_decision_count") != 1
+        or radar_recovery_review_unit.get("gates", {}).get("attestation") is not True
+        or radar_recovery_review_unit.get("gates", {}).get("approval_sha256") != sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json")
+        or radar_recovery_review_unit.get("gates", {}).get("review_reconciliation_sha256") != sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-review-reconciliation.json")
+        or radar_recovery_review_unit.get("gates", {}).get("implementation_authorized") is not True
         or radar_recovery_review_unit.get("gates", {}).get("new_attempt_authorized") is not False
         or radar_recovery_review_unit.get("gates", {}).get("baseline_or_change_authorized") is not False
+        or radar_recovery_implementation_unit.get("status") != "in_progress"
+        or radar_recovery_implementation_unit.get("disposition") is not None
+        or radar_recovery_implementation_unit.get("gates", {}).get("public_ci") != "pending"
+        or radar_recovery_implementation_unit.get("gates", {}).get("approval_sha256") != sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json")
+        or radar_recovery_implementation_unit.get("gates", {}).get("review_reconciliation_sha256") != sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-review-reconciliation.json")
+        or radar_recovery_implementation_unit.get("gates", {}).get("project_data_content_read") is not False
+        or radar_recovery_implementation_unit.get("gates", {}).get("new_attempt_created") is not False
+        or radar_recovery_implementation_unit.get("gates", {}).get("orbit_application_started") is not False
+        or radar_recovery_implementation_unit.get("gates", {}).get("radar_pixel_processing_started") is not False
+        or radar_recovery_execution_unit.get("status") != "planned"
+        or radar_recovery_execution_unit.get("disposition") is not None
+        or radar_recovery_execution_unit.get("gates", {}).get("public_ci") != "pending"
+        or radar_recovery_execution_unit.get("gates", {}).get("final_no_content_preflight") != "pending"
+        or radar_recovery_execution_unit.get("gates", {}).get("real_attempts_started") != 0
+        or radar_recovery_execution_unit.get("gates", {}).get("source_attempts_started") != 0
+        or radar_recovery_execution_unit.get("gates", {}).get("route_evaluations_started") != 0
+        or radar_recovery_execution_unit.get("gates", {}).get("automatic_retry") is not False
+        or radar_recovery_execution_unit.get("gates", {}).get("baseline_or_change_authorized") is not False
     ):
-        fail("radar implementation, terminal, or recovery-review milestone units differ or overclaim execution")
+        fail("radar implementation, terminal, or recovery milestone units differ or overclaim execution")
     radar_implementation_evidence = ledger_by_id.get("EVID-0146")
     if (
         not isinstance(radar_implementation_evidence, dict)
@@ -13066,6 +13270,32 @@ def main() -> None:
         ))
     ):
         fail("EVID-0154 radar recovery review publication evidence differs or overclaims")
+    radar_recovery_implementation_evidence = ledger_by_id.get("EVID-0155")
+    if (
+        not isinstance(radar_recovery_implementation_evidence, dict)
+        or radar_recovery_implementation_evidence.get("status") != "pass_exact_approval_activated_recovery_implementation_public_ci_pending"
+        or radar_recovery_implementation_evidence.get("review_reconciliation_sha256") != sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-review-reconciliation.json")
+        or radar_recovery_implementation_evidence.get("approval_sha256") != sha256("records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json")
+        or radar_recovery_implementation_evidence.get("activation_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-approval-activation.json")
+        or radar_recovery_implementation_evidence.get("implementation_readiness_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-readiness.json")
+        or radar_recovery_implementation_evidence.get("assertions", {}).get("human_decision_count") != 1
+        or radar_recovery_implementation_evidence.get("assertions", {}).get("attestation") is not True
+        or radar_recovery_implementation_evidence.get("assertions", {}).get("focused_recovery_test_count") != 9
+        or radar_recovery_implementation_evidence.get("assertions", {}).get("recovery_and_base_regression_test_count") != 20
+        or radar_recovery_implementation_evidence.get("assertions", {}).get("arcgis_runtime_test_count") != 1
+        or radar_recovery_implementation_evidence.get("assertions", {}).get("full_repository_test_count") != 578
+        or radar_recovery_implementation_evidence.get("assertions", {}).get("full_repository_intentional_skip_count") != 6
+        or radar_recovery_implementation_evidence.get("assertions", {}).get("repository_required_file_count") != 1032
+        or radar_recovery_implementation_evidence.get("assertions", {}).get("current_checkpoint") != "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION"
+        or radar_recovery_implementation_evidence.get("assertions", {}).get("implementation_authorized") is not True
+        or radar_recovery_implementation_evidence.get("assertions", {}).get("public_ci_pending") is not True
+        or any(radar_recovery_implementation_evidence.get("assertions", {}).get(key) is not False for key in (
+            "final_no_content_preflight_performed", "project_data_content_read", "new_real_attempt_created",
+            "orbit_application_executed", "radar_pixel_processing_executed",
+            "baseline_or_change_analysis_executed", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0155 radar recovery implementation evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():

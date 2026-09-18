@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from derive_m2_acquisition_checkpoint import (  # noqa: E402
+    current_radar_pixel_orbit_application_recovery_001_implementation_active,
     current_radar_pixel_orbit_application_recovery_001_review_publication_pending,
     current_radar_pixel_orbit_application_recovery_001_review_required,
 )
@@ -28,7 +29,8 @@ DIAGNOSTIC_REF = "records/processing/radar-pixel-orbit-application-001/m1-src-00
 PROPOSAL_SHA256 = "cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04"
 BUNDLE_SHA256 = "69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9"
 READINESS_SHA256 = "d091c39f2957743f35d3bdc03e69e3bd4cb5715b061a2301cec8bfe96a4932ec"
-CHECKPOINT = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW"
+CHECKPOINT = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION"
+APPROVAL_REF = "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"
 
 
 def load(ref: str) -> dict:
@@ -110,7 +112,7 @@ class M2RadarPixelOrbitApplicationRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(surface["artifact_sha256"], sha256(IMAGE_REF))
         self.assertEqual(surface["assertions"]["human_decision_count"], 0)
 
-    def test_publication_gate_releases_only_owner_review(self) -> None:
+    def test_exact_approval_releases_implementation_only(self) -> None:
         readiness = load(READINESS_REF)
         publication_gate = load(PUBLICATION_GATE_REF)
         publication_reconciliation = load(PUBLICATION_RECONCILIATION_REF)
@@ -132,14 +134,24 @@ class M2RadarPixelOrbitApplicationRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(milestone["handoff"]["current_checkpoint"], CHECKPOINT)
         self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], CHECKPOINT)
         self.assertEqual(goal["current_checkpoint"], CHECKPOINT)
-        self.assertEqual(goal["proposed_amendments"], [PROPOSAL_REF])
-        unit = next(item for item in milestone["units"] if item["id"] == "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW")
-        self.assertEqual(unit["status"], "in_progress")
-        self.assertEqual(unit["gates"]["public_ci"], "success")
-        self.assertEqual(unit["gates"]["human_decision_count"], 0)
-        self.assertFalse(unit["gates"]["implementation_authorized"])
-        self.assertFalse(unit["gates"]["new_attempt_authorized"])
-        self.assertTrue(current_radar_pixel_orbit_application_recovery_001_review_required(ROOT, {"promoted": 8}))
+        self.assertEqual(goal["proposed_amendments"], [])
+        self.assertIn(APPROVAL_REF, goal["active_amendments"])
+        units = {item["id"]: item for item in milestone["units"]}
+        review = units["M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW"]
+        implementation = units[CHECKPOINT]
+        execution = units["M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION"]
+        self.assertEqual(review["status"], "complete")
+        self.assertEqual(review["disposition"], "pass")
+        self.assertEqual(review["gates"]["human_decision_count"], 1)
+        self.assertTrue(review["gates"]["attestation"])
+        self.assertTrue(review["gates"]["implementation_authorized"])
+        self.assertEqual(implementation["status"], "in_progress")
+        self.assertEqual(implementation["gates"]["public_ci"], "pending")
+        self.assertFalse(implementation["gates"]["project_data_content_read"])
+        self.assertEqual(execution["status"], "planned")
+        self.assertEqual(execution["gates"]["real_attempts_started"], 0)
+        self.assertTrue(current_radar_pixel_orbit_application_recovery_001_implementation_active(ROOT, {"promoted": 8}))
+        self.assertFalse(current_radar_pixel_orbit_application_recovery_001_review_required(ROOT, {"promoted": 8}))
         self.assertFalse(current_radar_pixel_orbit_application_recovery_001_review_publication_pending(ROOT, {"promoted": 8}))
 
 

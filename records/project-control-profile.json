@@ -333,6 +333,19 @@
         "maximum_route_qa_attempts_per_pair": 1,
         "network_requests_authorized": 0,
         "automatic_retry_authorized": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
+        "approval_sha256": "4a1fe442f678c354c13f7e255ea459db2ec2d0368c35b72b32170ae8a3dc7d8f",
+        "proposal_ref": "contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json",
+        "proposal_sha256": "cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04",
+        "review_bundle_sha256": "69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-review-reconciliation.json",
+        "review_reconciliation_sha256": "e6454b84bf76cf07b758e9e075b69b9cfb8a0392b69518a64e7ed16b15cc2554",
+        "attempt_id": "radar-pixel-orbit-application-recovery-001-real-001",
+        "maximum_real_attempts": 1,
+        "automatic_retry_authorized": false,
+        "baseline_or_change_authorized": false
       }
     ]
   },
@@ -349,9 +362,7 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [
-      "contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json"
-    ],
+    "proposed_amendments": [],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json",
@@ -371,7 +382,8 @@
       "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
       "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
       "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
-      "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json"
+      "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
+      "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"
     ]
   },
   "cycle": {
@@ -598,29 +610,34 @@
         "unit_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW",
         "reason": "The exact owner approval authorizes only the bounded fixed-order six-source QA route and its dependency gates.",
         "authority_ref": "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json"
+      },
+      {
+        "unit_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW",
+        "reason": "The exact owner approval authorizes only bounded strict inventory normalization, durable terminal handling, public implementation validation, and one later fresh attempt behind the remaining gates.",
+        "authority_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW",
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Review bundle SHA-256 69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9 and proposal SHA-256 cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04; approve, revise, or defer the exact strict inventory-normalization recovery and one fresh fixed-source attempt. No implementation or execution is authorized before an exact attested decision."
+    "next_action": "Implement and validate only the approved strict inventory projection, ordering correction, durable terminal handling, and recovery-specific controls, then require successful public default-branch CI. Do not run the final preflight, read project pixels, or create the fresh recovery attempt before that gate."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW",
-      "authority_ref": "reviews/m2-radar-pixel-orbit-application-recovery-001/review-contract.json",
-      "next_action": "Review bundle SHA-256 69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9 and proposal SHA-256 cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04; approve, revise, or defer the exact strict inventory-normalization recovery and one fresh fixed-source attempt. No implementation or execution is authorized before an exact attested decision."
+      "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION",
+      "authority_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
+      "next_action": "Implement and validate only the approved strict inventory projection, ordering correction, durable terminal handling, and recovery-specific controls, then require successful public default-branch CI. Do not run the final preflight, read project pixels, or create the fresh recovery attempt before that gate."
     }
   ],
   "human_gates": {
     "review_gates": [
       {
         "unit_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW",
-        "reason": "A new real attempt requires exact owner approval after terminal real-001.",
-        "authority_ref": "reviews/m2-radar-pixel-orbit-application-recovery-001/review-contract.json"
+        "reason": "The exact owner approval releases bounded strict inventory normalization implementation and later one fresh attempt only after public CI and final preflight.",
+        "authority_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"
       }
     ]
   }
