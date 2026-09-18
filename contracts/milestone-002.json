@@ -1470,7 +1470,11 @@
         "final_no_content_preflight": "blocked_by_public_ci",
         "promoted_grid_inspection": false,
         "new_grid_promotion": false,
-        "implementation_readiness_sha256": "dd3631709807857b402eb8f773c0763f52fd9b188a83924710cdedf0151639e0"
+        "implementation_readiness_sha256": "5cbca9f31b3286acba3424a92369b47fad9be81e75988dc7b23a872c7f79764c",
+        "failed_public_ci_attempts": 1,
+        "failed_public_ci_run_ids": [
+          35384885599
+        ]
       },
       "disposition": null,
       "retained_failures": [
@@ -1482,7 +1486,8 @@
         "observed": [
           "exact approval locked and reconciled",
           "bounded implementation tested locally",
-          "implementation readiness sealed; public CI pending"
+          "first public CI failed on Git line-ending normalization",
+          "corrected implementation readiness sealed; fresh public CI pending"
         ],
         "decision_value": "unknown",
         "rationale": "Implementation is active; real promoted-grid inspection and all downstream actions remain gated."

@@ -520,10 +520,12 @@ The zero-decision receipt-persistence recovery-002 packet passed local structura
 - Focused portable suite: 21 passed, 0 skipped.
 - Installed ArcGIS Pro Python suite: 3 passed, 0 failed.
 - Full repository suite: 545 passed with 6 intentional environment-dependent skips.
-- Project checker: 946 required files, JSON controls, and Git artifact boundaries passed.
+- Project checker after portability reconciliation: 948 required files, JSON controls, and Git artifact boundaries passed.
 - Derived checkpoint: `M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION`, with `current_controls_match=true`.
-- Implementation-readiness SHA-256: `dd3631709807857b402eb8f773c0763f52fd9b188a83924710cdedf0151639e0`.
+- Corrected implementation-readiness SHA-256: `5cbca9f31b3286acba3424a92369b47fad9be81e75988dc7b23a872c7f79764c`.
 
 The tests cover the ArcGIS `datetime` rebinding condition, exclusive receipt reservation before input access, interruption persistence, durable validation-failure output, collision and missing-parent refusal, unchanged fixed source order, and absence of network and promotion paths. This validation releases public CI only. It does not establish that the promoted grid passes recovery, that the vertical operation/sign is correct, that any DEM conversion succeeds, or that a scientific result exists.
+
+Public CI attempt `35384885599` for commit `5895ba5f4061ad96567264fbcdad8d65eb614dca` failed before tests because its checker detected Git line-ending normalization in two bound artifacts. The original readiness is preserved; the two files were normalized explicitly and rebound without changing implementation behavior. No final preflight or external data action was released by the failed run.
 
 Public GitHub Actions run `35381627104` passed for exact review-publication commit `8c4aec40589baf7f0ff1a917e4f87a9618c1569d`. The Linux runner validated 935 required files and passed 537 tests with 12 intentional environment-dependent skips. Publication-gate SHA-256 `c92ec8c77e256c718d7742219e1bedcd168ac6be804730f753a5130ad236a77d` and reconciliation SHA-256 `b555288dc23c8c0beba0fbabd802b43a0b2a8b92eb16f3781dfb80ef4bd11f74` release only owner review. The blank response remains undecided; recovery implementation and all real or downstream actions remain blocked.

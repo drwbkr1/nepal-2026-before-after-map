@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION-PUBLICATION-ATTEMPT-001-FAILURE",
+  "observed_at_utc": "2026-09-18T19:15:21Z",
+  "status": "terminal_public_ci_failure_git_line_ending_normalization",
+  "implementation_commit": "5895ba5f4061ad96567264fbcdad8d65eb614dca",
+  "public_ci_run_id": 35384885599,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35384885599",
+  "public_ci_conclusion": "failure",
+  "superseded_readiness_ref": "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-readiness-attempt-001-superseded.json",
+  "superseded_readiness_sha256": "dd3631709807857b402eb8f773c0763f52fd9b188a83924710cdedf0151639e0",
+  "mismatches": [
+    {
+      "ref": "scripts/activate_m2_dem_proj25_receipt_persistence_recovery_002.py",
+      "recorded_sha256": "243e80a9015d1665df20ac3784f2f619e004743d31e1299e472ce55689d58968",
+      "public_commit_sha256": "281b8056e2a9e2b4ce2ed5ec5c6e4d1b5719131b3027f2c1acfdd17f3696da3f"
+    },
+    {
+      "ref": "tests/test_m2_dem_vertical_datum_proj25.py",
+      "recorded_sha256": "eb67b7f3c2ef69f199cf7ede18213dfd3a52d3fc16a92fb822d35ec1e4debe2a",
+      "public_commit_sha256": "4ef4f5c018611f142ed20a32e30e68180ed3b716f3baaa7eee9912f06b723f2a"
+    }
+  ],
+  "disposition": {
+    "attempt_terminal": true,
+    "public_gate_passed": false,
+    "final_no_content_preflight_released": false,
+    "corrected_readiness_required": true
+  },
+  "assertions": {
+    "promoted_grid_inspected": false,
+    "grid_content_bytes_read": 0,
+    "network_requests_performed": 0,
+    "new_grid_promotion_performed": false,
+    "operation_sign_preflight_performed": false,
+    "dem_pixels_read": false,
+    "dem_conversion_executed": false,
+    "external_data_mutated": false,
+    "scientific_result_established": false
+  }
+}

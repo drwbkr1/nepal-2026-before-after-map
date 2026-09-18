@@ -902,6 +902,8 @@ REQUIRED = [
     "scripts/recover_m2_dem_proj25_receipt_persistence_002.py",
     "scripts/record_m2_dem_proj25_receipt_persistence_recovery_002_implementation_readiness.py",
     "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-readiness.json",
+    "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-readiness-attempt-001-superseded.json",
+    "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-publication-attempt-001-failure.json",
     "tests/test_m2_dem_proj25_receipt_persistence_recovery_002.py",
     "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-reconciliation.json",
     "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
@@ -1207,6 +1209,7 @@ def main() -> None:
     dem_proj25_receipt_recovery_002_approval = json.loads((ROOT / "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json").read_text(encoding="utf-8"))
     dem_proj25_receipt_recovery_002_activation = json.loads((ROOT / "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-approval-activation.json").read_text(encoding="utf-8"))
     dem_proj25_receipt_recovery_002_implementation_readiness = json.loads((ROOT / "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-readiness.json").read_text(encoding="utf-8"))
+    dem_proj25_receipt_recovery_002_publication_attempt_001_failure = json.loads((ROOT / "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-publication-attempt-001-failure.json").read_text(encoding="utf-8"))
     dem_terrain_contract = json.loads((ROOT / "config/qa/dem-terrain-quality-contract.json").read_text(encoding="utf-8"))
     dem_terrain_readiness = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-readiness.json").read_text(encoding="utf-8"))
     dem_terrain_ci_correction = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-ci-correction.json").read_text(encoding="utf-8"))
@@ -4645,7 +4648,7 @@ def main() -> None:
         or dem_proj25_receipt_recovery_002_implementation_readiness.get("validation", {}).get("arcgis_runtime_test_failures") != 0
         or dem_proj25_receipt_recovery_002_implementation_readiness.get("validation", {}).get("full_repository_test_count") != 545
         or dem_proj25_receipt_recovery_002_implementation_readiness.get("validation", {}).get("full_repository_intentional_skip_count") != 6
-        or dem_proj25_receipt_recovery_002_implementation_readiness.get("validation", {}).get("repository_checker_status") != "pass_946_required_files"
+        or dem_proj25_receipt_recovery_002_implementation_readiness.get("validation", {}).get("repository_checker_status") != "pass_948_required_files"
         or dem_proj25_receipt_recovery_002_implementation_readiness.get("released_now", {}).get("public_ci") is not True
         or any(dem_proj25_receipt_recovery_002_implementation_readiness.get("released_now", {}).get(key) is not False for key in (
             "final_no_content_preflight", "promoted_grid_inspection", "new_grid_promotion",
@@ -4659,6 +4662,22 @@ def main() -> None:
         ))
     ):
         fail("M2 DEM PROJ25 receipt-persistence recovery-002 implementation readiness differs or overreleases")
+    if (
+        dem_proj25_receipt_recovery_002_publication_attempt_001_failure.get("status") != "terminal_public_ci_failure_git_line_ending_normalization"
+        or dem_proj25_receipt_recovery_002_publication_attempt_001_failure.get("implementation_commit") != "5895ba5f4061ad96567264fbcdad8d65eb614dca"
+        or dem_proj25_receipt_recovery_002_publication_attempt_001_failure.get("public_ci_run_id") != 35384885599
+        or dem_proj25_receipt_recovery_002_publication_attempt_001_failure.get("public_ci_conclusion") != "failure"
+        or dem_proj25_receipt_recovery_002_publication_attempt_001_failure.get("superseded_readiness_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-readiness-attempt-001-superseded.json")
+        or dem_proj25_receipt_recovery_002_publication_attempt_001_failure.get("disposition", {}).get("attempt_terminal") is not True
+        or dem_proj25_receipt_recovery_002_publication_attempt_001_failure.get("disposition", {}).get("public_gate_passed") is not False
+        or any(dem_proj25_receipt_recovery_002_publication_attempt_001_failure.get("assertions", {}).get(key) is not False for key in (
+            "promoted_grid_inspected", "new_grid_promotion_performed", "operation_sign_preflight_performed",
+            "dem_pixels_read", "dem_conversion_executed", "external_data_mutated", "scientific_result_established",
+        ))
+        or dem_proj25_receipt_recovery_002_publication_attempt_001_failure.get("assertions", {}).get("grid_content_bytes_read") != 0
+        or dem_proj25_receipt_recovery_002_publication_attempt_001_failure.get("assertions", {}).get("network_requests_performed") != 0
+    ):
+        fail("M2 DEM PROJ25 receipt-persistence recovery-002 failed publication attempt differs or overclaims")
     vertical_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-REVIEW", {})
     vertical_install_unit = active_m2_units.get("M2-DEM-EGM2008-COMPONENT-INSTALL", {})
     vertical_alternate_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW", {})
@@ -10383,7 +10402,7 @@ def main() -> None:
         or vertical_proj25_receipt_recovery_implementation_evidence.get("review_reconciliation_sha256") != sha256("records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-review-reconciliation.json")
         or vertical_proj25_receipt_recovery_implementation_evidence.get("approval_sha256") != sha256("records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json")
         or vertical_proj25_receipt_recovery_implementation_evidence.get("activation_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-approval-activation.json")
-        or vertical_proj25_receipt_recovery_implementation_evidence.get("implementation_readiness_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-readiness.json")
+        or vertical_proj25_receipt_recovery_implementation_evidence.get("implementation_readiness_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-readiness-attempt-001-superseded.json")
         or vertical_proj25_receipt_recovery_implementation_evidence.get("assertions", {}).get("human_decision_count") != 1
         or vertical_proj25_receipt_recovery_implementation_evidence.get("assertions", {}).get("attestation") is not True
         or vertical_proj25_receipt_recovery_implementation_evidence.get("assertions", {}).get("portable_test_count") != 21
@@ -10401,6 +10420,35 @@ def main() -> None:
         ))
     ):
         fail("EVID-0140 DEM PROJ25 receipt-persistence recovery-002 implementation readiness differs or overclaims")
+    vertical_proj25_receipt_recovery_publication_failure_evidence = ledger_by_id.get("EVID-0141")
+    if (
+        not isinstance(vertical_proj25_receipt_recovery_publication_failure_evidence, dict)
+        or vertical_proj25_receipt_recovery_publication_failure_evidence.get("status") != "terminal_public_ci_failure_no_release"
+        or vertical_proj25_receipt_recovery_publication_failure_evidence.get("failure_record_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-publication-attempt-001-failure.json")
+        or vertical_proj25_receipt_recovery_publication_failure_evidence.get("superseded_readiness_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-readiness-attempt-001-superseded.json")
+        or vertical_proj25_receipt_recovery_publication_failure_evidence.get("assertions", {}).get("implementation_commit") != "5895ba5f4061ad96567264fbcdad8d65eb614dca"
+        or vertical_proj25_receipt_recovery_publication_failure_evidence.get("assertions", {}).get("public_ci_run_id") != 35384885599
+        or vertical_proj25_receipt_recovery_publication_failure_evidence.get("assertions", {}).get("public_gate_passed") is not False
+        or any(vertical_proj25_receipt_recovery_publication_failure_evidence.get("assertions", {}).get(key) is not False for key in (
+            "final_no_content_preflight_performed", "promoted_grid_inspected", "dem_conversion_executed",
+            "external_data_mutated", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0141 DEM PROJ25 receipt-persistence recovery-002 publication failure differs or overclaims")
+    vertical_proj25_receipt_recovery_corrected_readiness_evidence = ledger_by_id.get("EVID-0142")
+    if (
+        not isinstance(vertical_proj25_receipt_recovery_corrected_readiness_evidence, dict)
+        or vertical_proj25_receipt_recovery_corrected_readiness_evidence.get("status") != "pass_corrected_portable_readiness_public_ci_pending"
+        or vertical_proj25_receipt_recovery_corrected_readiness_evidence.get("implementation_readiness_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-readiness.json")
+        or vertical_proj25_receipt_recovery_corrected_readiness_evidence.get("failure_record_sha256") != sha256("records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-implementation-publication-attempt-001-failure.json")
+        or vertical_proj25_receipt_recovery_corrected_readiness_evidence.get("assertions", {}).get("repository_checker_status") != "pass_948_required_files"
+        or vertical_proj25_receipt_recovery_corrected_readiness_evidence.get("assertions", {}).get("public_ci_pending") is not True
+        or any(vertical_proj25_receipt_recovery_corrected_readiness_evidence.get("assertions", {}).get(key) is not False for key in (
+            "final_no_content_preflight_performed", "promoted_grid_inspected", "dem_conversion_executed",
+            "external_data_mutated", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0142 DEM PROJ25 receipt-persistence recovery-002 corrected readiness differs or overclaims")
 
     orbit_review_evidence = ledger_by_id.get("EVID-0052")
     if (
