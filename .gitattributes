@@ -20,3 +20,4 @@
 /reviews/m1-aoi/review-bundle.json -text -eol -diff whitespace=cr-at-eol
 /reviews/m1-aoi/review-contract.json -text -eol -diff whitespace=cr-at-eol
 /records/readiness/m2-orbit-continuation-001-activation-attempt-001-failure.json -text -eol -diff whitespace=cr-at-eol
+/records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-readiness-attempt-001-superseded.json -text -eol -diff whitespace=cr-at-eol

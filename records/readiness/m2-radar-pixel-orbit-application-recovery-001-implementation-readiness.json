@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION-READINESS",
-  "recorded_at_utc": "2026-09-18T23:05:43Z",
-  "status": "pass_strict_inventory_recovery_implementation_public_ci_pending",
+  "recorded_at_utc": "2026-09-18T23:15:00Z",
+  "status": "pass_corrected_public_portable_strict_inventory_recovery_implementation_public_ci_pending",
   "bindings": {
     "contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json": "cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04",
     "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-review-reconciliation.json": "e6454b84bf76cf07b758e9e075b69b9cfb8a0392b69518a64e7ed16b15cc2554",
@@ -17,7 +17,9 @@
     "records/surface-receipts/m2-radar-pixel-orbit-application-recovery-001-synthetic-arcgis.json": "f7e4b9b9eb7b228f7c61f7f98080f6b3ef91950163f8c732fa05ba1eda7d0b75",
     "config/qa/m2-radar-pixel-orbit-application-001-contract.json": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
     "scripts/m2_radar_pixel_orbit_application_001_core.py": "fd192878acf33e2c73eeeba1ec42865eac48dfc5742b3ae4cf54b51de42755ba",
-    "scripts/run_m2_radar_pixel_orbit_application_001.py": "0b65fbecbeab373d8bbbf2cbbc28f8817e3c3bb08584dbf1a9720dcbb19ceb06"
+    "scripts/run_m2_radar_pixel_orbit_application_001.py": "0b65fbecbeab373d8bbbf2cbbc28f8817e3c3bb08584dbf1a9720dcbb19ceb06",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-readiness-attempt-001-superseded.json": "4697822dae5f3fc7a2327a8073b7b7a5167e20516de3a839d4afb7abd115afb8",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-publication-attempt-001-failure.json": "cc3a67774cf12a90a348a51fd7ed4dbb56958f0834b83488cc3b626f270973b3"
   },
   "implementation": {
     "projected_inventory_fields": [
@@ -53,7 +55,7 @@
     "arcgis_runtime_test_failures": 0,
     "full_repository_test_count": 578,
     "full_repository_intentional_skip_count": 6,
-    "repository_checker_status": "pass_1032_required_files_pending_self_validation",
+    "repository_checker_status": "pass_1034_required_files_pending_self_validation",
     "inventory_projection_and_ordering_checked": true,
     "real_byte_mismatch_rejection_checked": true,
     "durable_terminal_receipt_checked": true,
@@ -61,7 +63,9 @@
     "publication_gate_fail_closed_checked": true,
     "network_library_absence_checked": true,
     "first_synthetic_failure_preserved": true,
-    "second_synthetic_arcgis_attempt_passed": true
+    "second_synthetic_arcgis_attempt_passed": true,
+    "failed_publication_attempt_preserved": true,
+    "git_line_ending_correction": "current readiness serialized as exact LF; superseded CRLF bytes retained separately"
   },
   "released_now": {
     "public_ci": true,
@@ -88,5 +92,5 @@
     "derived_pixel_publication_authorized": false,
     "scientific_result_established": false
   },
-  "next_action": "Commit and publish the exact recovery implementation, then require successful public default-branch CI before the final no-content preflight."
+  "next_action": "Publish the corrected LF-bound readiness identity and require successful public default-branch CI before the final no-content preflight."
 }

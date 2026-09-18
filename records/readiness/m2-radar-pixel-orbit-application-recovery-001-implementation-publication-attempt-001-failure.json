@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION-PUBLICATION-ATTEMPT-001-FAILURE",
+  "observed_at_utc": "2026-09-18T23:15:00Z",
+  "status": "terminal_public_ci_failure_git_line_ending_normalization_no_release",
+  "implementation_commit": "cc576817f1c3979871b80563343b96ea60af8ff9",
+  "public_ci_run_id": 35404769746,
+  "public_ci_job_id": 105792124174,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35404769746",
+  "public_ci_conclusion": "failure",
+  "failed_step": "Validate repository",
+  "failure_message": "EVID-0155 bound the local CRLF implementation-readiness bytes, while Git correctly normalized that tracked JSON to LF in the public commit.",
+  "superseded_readiness_ref": "records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-readiness-attempt-001-superseded.json",
+  "superseded_readiness_sha256": "4697822dae5f3fc7a2327a8073b7b7a5167e20516de3a839d4afb7abd115afb8",
+  "public_commit_readiness_sha256": "5717b7ebdaae12e6e4dd1f172bd7d029f950d0890e38da76d5da197d0e60b98b",
+  "disposition": {
+    "attempt_terminal": true,
+    "public_gate_passed": false,
+    "final_no_content_preflight_released": false,
+    "corrected_readiness_required": true,
+    "implementation_behavior_changed": false
+  },
+  "assertions": {
+    "repository_checker_passed": false,
+    "public_tests_started": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "external_custody_mutated": false,
+    "new_real_attempt_created": false,
+    "orbit_application_executed": false,
+    "radar_pixel_processing_executed": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Preserve the exact superseded readiness bytes, bind a corrected LF readiness identity, and require fresh public default-branch CI."
+}
