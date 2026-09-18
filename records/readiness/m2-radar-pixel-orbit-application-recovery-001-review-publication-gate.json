@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-18T21:44:42Z",
+  "status": "pass_public_default_branch_ci_zero_decision_review_ready",
+  "publication_commit_sha": "8bba9bb3de992f598893214a92fe7ca30c92faae",
+  "public_ci_run_id": 35398189779,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35398189779",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1019,
+  "public_test_count": 569,
+  "public_intentional_skip_count": 13,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json",
+    "proposal_sha256": "cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04",
+    "review_bundle_ref": "reviews/m2-radar-pixel-orbit-application-recovery-001/review-bundle.json",
+    "review_bundle_sha256": "69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9",
+    "review_readiness_ref": "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-readiness.json",
+    "review_readiness_sha256": "d091c39f2957743f35d3bdc03e69e3bd4cb5715b061a2301cec8bfe96a4932ec"
+  },
+  "released_now": {
+    "owner_review": true,
+    "implementation": false,
+    "project_data_content_read": false,
+    "new_real_attempt": false,
+    "orbit_application": false,
+    "radar_pixel_processing": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "attestation": false,
+    "terminal_real_001_preserved": true,
+    "scientific_result_established": false
+  }
+}

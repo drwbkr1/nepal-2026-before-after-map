@@ -603,16 +603,16 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-PUBLICATION",
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish and publicly validate the exact zero-decision radar inventory-normalization recovery-001 review packet. No correction, new real attempt, orbit application, or radar pixel processing is authorized before one exact attested owner decision on the public packet."
+    "next_action": "Review bundle SHA-256 69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9 and proposal SHA-256 cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04; approve, revise, or defer the exact strict inventory-normalization recovery and one fresh fixed-source attempt. No implementation or execution is authorized before an exact attested decision."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-PUBLICATION",
+      "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW",
       "authority_ref": "reviews/m2-radar-pixel-orbit-application-recovery-001/review-contract.json",
-      "next_action": "Publish and publicly validate the exact zero-decision radar inventory-normalization recovery-001 review packet. No correction, new real attempt, orbit application, or radar pixel processing is authorized before one exact attested owner decision on the public packet."
+      "next_action": "Review bundle SHA-256 69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9 and proposal SHA-256 cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04; approve, revise, or defer the exact strict inventory-normalization recovery and one fresh fixed-source attempt. No implementation or execution is authorized before an exact attested decision."
     }
   ],
   "human_gates": {

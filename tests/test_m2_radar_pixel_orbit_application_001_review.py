@@ -115,7 +115,7 @@ class M2RadarPixelOrbitApplication001ReviewTests(unittest.TestCase):
 
     def test_control_state_matches_terminal_block(self) -> None:
         published = (ROOT / PUBLICATION_REF).exists()
-        checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-PUBLICATION"
+        checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)

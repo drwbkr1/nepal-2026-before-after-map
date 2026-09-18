@@ -3626,7 +3626,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json",
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-preflight.json",
@@ -3637,14 +3637,20 @@
         "records/processing/radar-pixel-orbit-application-001/m1-src-001-identity-failure-diagnostic.json",
         "records/readiness/m2-radar-pixel-orbit-application-001-terminal-publication-gate.json"
       ],
-      "outputs": [],
+      "outputs": [
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-publication-gate.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-review-publication-reconciliation.json"
+      ],
       "gates": {
-        "public_ci": "pending",
+        "public_ci": "success",
         "human_decision_count": 0,
         "attestation": false,
         "implementation_authorized": false,
         "new_attempt_authorized": false,
-        "baseline_or_change_authorized": false
+        "baseline_or_change_authorized": false,
+        "publication_commit_sha": "8bba9bb3de992f598893214a92fe7ca30c92faae",
+        "public_ci_run_id": 35398189779,
+        "publication_gate_sha256": "268c2cb74653ae09936076f7e14bad9ca88e6c421e3fab044301a9b49cdfbc37"
       },
       "disposition": null,
       "retained_failures": [
@@ -3652,14 +3658,14 @@
       ],
       "exit_condition_delta": {
         "expected": [
-          "successful public CI",
           "one exact attested owner decision"
         ],
         "observed": [
-          "zero-decision packet prepared"
+          "successful public default-branch CI",
+          "zero human decisions"
         ],
         "decision_value": "unknown",
-        "rationale": "The packet creates no recovery authority."
+        "rationale": "Only owner review is released; the packet creates no implementation or execution authority."
       },
       "next_dependency": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION"
     }
@@ -3718,8 +3724,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-PUBLICATION",
-    "next_action": "Publish and publicly validate the exact zero-decision radar inventory-normalization recovery-001 review packet. No correction, new real attempt, orbit application, or radar pixel processing is authorized before one exact attested owner decision on the public packet.",
+    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW",
+    "next_action": "Review bundle SHA-256 69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9 and proposal SHA-256 cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04; approve, revise, or defer the exact strict inventory-normalization recovery and one fresh fixed-source attempt. No implementation or execution is authorized before an exact attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3764,7 +3770,7 @@
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery.",
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval."
     ],
-    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW-PUBLICATION",
-    "parallel_next_action": "Publish and publicly validate the exact zero-decision radar inventory-normalization recovery-001 review packet. No correction, new real attempt, orbit application, or radar pixel processing is authorized before one exact attested owner decision on the public packet."
+    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW",
+    "parallel_next_action": "Review bundle SHA-256 69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9 and proposal SHA-256 cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04; approve, revise, or defer the exact strict inventory-normalization recovery and one fresh fixed-source attempt. No implementation or execution is authorized before an exact attested decision."
   }
 }
