@@ -7,7 +7,6 @@ import argparse
 import json
 import math
 import os
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -23,13 +22,15 @@ from m2_dem_vertical_datum_proj25_core import (
 )
 
 
-GRID_TERMINAL = ROOT / "records/acquisition/m2-geoid-001-real-001-terminal.json"
+GRID_TERMINAL = ROOT / "records/acquisition/m2-geoid-001-receipt-recovery-002.json"
 AOI_REF = ROOT / "config/aoi/approved-study-areas.geojson"
 OUTPUT = ROOT / "records/acquisition/m2-dem-vertical-datum-proj25-operation-selection-sign-preflight.json"
 
 
 def utc_now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    import datetime as datetime_module
+
+    return datetime_module.datetime.now(datetime_module.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def aoi_points() -> list[tuple[float, float]]:
@@ -79,8 +80,8 @@ def main() -> int:
         raise SystemExit("promoted approved grid is missing or differs")
     terminal = load_json(GRID_TERMINAL)
     if (
-        terminal.get("status") != "pass_verified_promoted_input_only"
-        or terminal.get("promoted", {}).get("sha256") != grid_spec["expected_sha256"]
+        terminal.get("status") != "pass_exact_promoted_grid_receipt_recovered_input_only"
+        or terminal.get("observed", {}).get("sha256") != grid_spec["expected_sha256"]
     ):
         raise SystemExit("grid acquisition terminal receipt differs")
     os.environ["PROJ_NETWORK"] = "OFF"

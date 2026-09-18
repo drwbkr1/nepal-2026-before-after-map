@@ -170,6 +170,10 @@ DEM_PROJ25_RECEIPT_PERSISTENCE_RECOVERY_002_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
     "next_action": "Review bundle SHA-256 cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5 and proposal SHA-256 15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657; approve, revise, or defer the exact receipt-persistence correction, one read-only promoted-grid inspection, and conditional continuation. No implementation or downstream action is authorized before an exact attested decision.",
 }
+DEM_PROJ25_RECEIPT_PERSISTENCE_RECOVERY_002_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION",
+    "next_action": "Implement and validate only the approved ArcGIS-safe timestamp and pre-reserved receipt-recovery controls, then require fresh public default-branch CI. Do not inspect the promoted grid or source DEM pixels, run the operation/sign preflight, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1314,6 +1318,35 @@ def current_dem_proj25_receipt_persistence_recovery_002_review_required(
     )
 
 
+def current_dem_proj25_receipt_persistence_recovery_002_implementation_active(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the approved receipt-persistence recovery before its terminal real action."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        approval = load(root / "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json")
+        activation = load(root / "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-approval-activation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW", {})
+    implementation = units.get("M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION", {})
+    return bool(
+        approval.get("status") == "approved_exact_receipt_persistence_recovery_bounded_route"
+        and approval.get("attestation") is True
+        and activation.get("status") == "pass_exact_approval_activated_implementation_publication_only"
+        and review.get("status") == "complete"
+        and review.get("disposition") == "pass"
+        and review.get("gates", {}).get("human_decision_count") == 1
+        and review.get("gates", {}).get("attestation") is True
+        and implementation.get("status") == "in_progress"
+        and implementation.get("gates", {}).get("public_ci") in {"pending", "success"}
+        and not (root / "records/acquisition/m2-geoid-001-receipt-recovery-002.json").exists()
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -1383,7 +1416,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_dem_proj25_receipt_persistence_recovery_002_review_required(
+            if current_dem_proj25_receipt_persistence_recovery_002_implementation_active(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(DEM_PROJ25_RECEIPT_PERSISTENCE_RECOVERY_002_IMPLEMENTATION_CHECKPOINT)
+            elif current_dem_proj25_receipt_persistence_recovery_002_review_required(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(DEM_PROJ25_RECEIPT_PERSISTENCE_RECOVERY_002_REVIEW_CHECKPOINT)

@@ -17,6 +17,18 @@ HAS_ARCGIS = importlib.util.find_spec("arcpy") is not None and importlib.util.fi
 
 @unittest.skipUnless(HAS_ARCGIS, "requires the existing ArcGIS Pro Python runtime")
 class DemVerticalDatumProj25ArcGISTests(unittest.TestCase):
+    def test_arcgis_import_does_not_rebind_timestamp_implementation(self) -> None:
+        import datetime as datetime_module
+        import arcpy  # noqa: F401
+
+        import convert_m2_dem_vertical_datum_proj25 as conversion
+        import preflight_m2_dem_vertical_operation_proj25 as operation
+        import recover_m2_dem_proj25_receipt_persistence_002 as recovery
+        import recover_m2_dem_vertical_grid_proj25_metadata_001 as recovery_001
+
+        for module in (recovery_001, recovery, operation, conversion):
+            module.datetime = datetime_module
+            self.assertRegex(module.utc_now(), r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
     def test_exact_official_metadata_representation_is_accepted_in_arcgis_runtime(self) -> None:
         from osgeo import gdal
 

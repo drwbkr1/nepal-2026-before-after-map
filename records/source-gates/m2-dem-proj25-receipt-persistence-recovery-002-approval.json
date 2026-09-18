@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-APPROVAL",
+  "status": "approved_exact_receipt_persistence_recovery_bounded_route",
+  "approved_at_utc": "2026-09-18T18:53:57Z",
+  "review_id": "m2-dem-proj25-receipt-persistence-recovery-002-review",
+  "review_bundle_manifest_sha256": "cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5",
+  "proposal_ref": "contracts/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-proposal.json",
+  "proposal_sha256": "15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657",
+  "review_contract_ref": "reviews/m2-dem-proj25-receipt-persistence-recovery-002/review-contract.json",
+  "review_contract_sha256": "7063f7626c1357d8f3fc1bc28112dd459c4d19e66f43352bf1da34f03cfdbf12",
+  "review_reconciliation_ref": "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-review-reconciliation.json",
+  "review_reconciliation_sha256": "f5b23f4e6ecd3e821e99b2b2e52c482aed4d4a7447ef14861b2936b0c8dfee64",
+  "locked_response_sha256": "95362b656e8c99c0ee8239d45837cf5033561301a56bc9a80f3dd20d002e0615",
+  "lock_receipt_sha256": "4ce8a86d3e71df3faab809682c0a3fdb6706b0a580d476a7d6e73c539f62b56b",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "attestation": true,
+  "observed_state": {
+    "recovery_001_terminal": true,
+    "recovery_001_retry_authorized": false,
+    "network_request_count": 0,
+    "destination_created": true,
+    "destination_size_bytes": 80585622,
+    "destination_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+    "staged_and_destination_same_file_identity": true,
+    "terminal_receipt_persisted": false,
+    "conversion_attempts_started": 0,
+    "failure": "ArcGIS arcpy import rebound the module-level datetime class name before success and failure receipt timestamps were constructed",
+    "post_observation_bias": "This proposal is informed by recovery-001 runtime behavior after exact validation and promotion; it is not blind or independent validation."
+  },
+  "authorized_exact_changes": [
+    "preserve recovery-001, its started receipts, promoted exact destination, staged hard link, runtime failure, and outcome reconciliation unchanged",
+    "use a function-local datetime-module import only for timestamp creation in the recovery, operation-preflight, and conversion paths; change no scientific or validation rule",
+    "implement a distinct receipt-recovery-002 that reserves its exact append-only receipt before reading, then performs one read-only verification of the exact already-promoted destination and staged hard-link identity",
+    "retain the exact byte, metadata, ArcGIS readability, CRS, sign, AOI, source-order, threshold, no-overwrite, and stop-on-first-failure rules",
+    "change the operation/sign preflight input only from the unavailable recovery-001 terminal receipt to a passing receipt-recovery-002 receipt",
+    "require synthetic interruption and ArcGIS datetime-rebinding tests, full local validation, and fresh public default-branch CI before the final no-content preflight",
+    "only on all prior passes run one receipt-recovery-002 inspection, then the unchanged operation/sign preflight, then at most one conversion per exact M2-DEM-001 through M2-DEM-004 in fixed order, stopping on first failure"
+  ],
+  "limits": {
+    "network_requests": 0,
+    "recovery_001_retries": 0,
+    "new_promotion_actions": 0,
+    "receipt_recovery_002_attempts": 1,
+    "automatic_retry": false,
+    "conversion_attempts_per_dem": 1,
+    "stop_on_first_failure": true,
+    "proj_network_enabled": false,
+    "source_dem_overwrite": false
+  },
+  "stop_rules": [
+    "Stop if the existing destination or staging identity differs from the approved size, SHA-256, or same-file relationship.",
+    "Stop if receipt reservation is unavailable before content inspection.",
+    "Stop if any existing metadata, ArcGIS readability, CRS, sign, AOI, source immutability, or conversion predicate fails.",
+    "Do not retry recovery-001 or receipt-recovery-002 and do not perform a second conversion for any source."
+  ],
+  "does_not_authorize": [
+    "implementation before exact owner approval and public review publication",
+    "any network request, reacquisition, resume, or recovery-001 retry",
+    "a new grid promotion, replacement, alternate source, grid, CRS relation, threshold, or tolerance",
+    "software installation, account or terms action, credential use, or PROJ network fetch",
+    "source DEM overwrite, orbit application, radar-pixel processing, baseline, change analysis, attribution, derived-pixel publication, or scientific claim"
+  ],
+  "claim_boundary": {
+    "human_decision_count": 0,
+    "receipt_recovery_authorized": false,
+    "operation_sign_preflight_authorized": false,
+    "dem_conversion_authorized": false,
+    "scientific_result_established": false
+  },
+  "post_observation_correction_acknowledged": true,
+  "human_decisions_fabricated": false
+}

@@ -291,6 +291,22 @@
         "maximum_conversion_attempts_per_dem": 1,
         "stop_on_first_failure": true,
         "automatic_retry_authorized": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
+        "approval_sha256": "862a4e979b1cebaa9d06cc9b350cba91dfec859b081ae89020627a076a34425d",
+        "proposal_ref": "contracts/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-proposal.json",
+        "proposal_sha256": "15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657",
+        "review_bundle_sha256": "cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5",
+        "review_reconciliation_ref": "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-review-reconciliation.json",
+        "review_reconciliation_sha256": "f5b23f4e6ecd3e821e99b2b2e52c482aed4d4a7447ef14861b2936b0c8dfee64",
+        "network_requests_authorized": 0,
+        "recovery_001_retries_authorized": 0,
+        "receipt_recovery_002_attempts": 1,
+        "new_promotion_actions_authorized": 0,
+        "maximum_conversion_attempts_per_dem": 1,
+        "stop_on_first_failure": true,
+        "automatic_retry_authorized": false
       }
     ]
   },
@@ -307,9 +323,7 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [
-      "contracts/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-proposal.json"
-    ],
+    "proposed_amendments": [],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json",
@@ -327,7 +341,8 @@
       "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
       "records/source-gates/m2-dem-vertical-datum-approval.json",
       "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
-      "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json"
+      "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
+      "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json"
     ]
   },
   "cycle": {
@@ -547,23 +562,23 @@
       },
       {
         "unit_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
-        "reason": "One exact attested owner decision is required before any receipt-persistence correction, read-only promoted-grid inspection, operation/sign preflight, or conversion.",
-        "authority_ref": "reviews/m2-dem-proj25-receipt-persistence-recovery-002/review-contract.json"
+        "reason": "The exact owner approval authorizes only the ArcGIS-safe timestamp correction, one pre-reserved read-only receipt recovery, and conditional fixed-order conversions.",
+        "authority_ref": "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
+    "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Review bundle SHA-256 cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5 and proposal SHA-256 15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657; approve, revise, or defer the exact receipt-persistence correction, one read-only promoted-grid inspection, and conditional continuation. No implementation or downstream action is authorized before an exact attested decision."
+    "next_action": "Implement and validate only the approved ArcGIS-safe timestamp and pre-reserved receipt-recovery controls, then require fresh public default-branch CI. Do not inspect the promoted grid or source DEM pixels, run the operation/sign preflight, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
-      "authority_ref": "reviews/m2-dem-proj25-receipt-persistence-recovery-002/review-contract.json",
-      "next_action": "Review bundle SHA-256 cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5 and proposal SHA-256 15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657; approve, revise, or defer the exact receipt-persistence correction, one read-only promoted-grid inspection, and conditional continuation. No implementation or downstream action is authorized before an exact attested decision."
+      "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION",
+      "authority_ref": "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
+      "next_action": "Implement and validate only the approved ArcGIS-safe timestamp and pre-reserved receipt-recovery controls, then require fresh public default-branch CI. Do not inspect the promoted grid or source DEM pixels, run the operation/sign preflight, convert a DEM, or perform downstream processing before that public gate and a final no-content preflight."
     }
   ]
 }

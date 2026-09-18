@@ -1,0 +1,23 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-dem-proj25-receipt-persistence-recovery-002-review",
+  "contract_sha256": "7063f7626c1357d8f3fc1bc28112dd459c4d19e66f43352bf1da34f03cfdbf12",
+  "response_sha256": "95362b656e8c99c0ee8239d45837cf5033561301a56bc9a80f3dd20d002e0615",
+  "receipt_sha256": "4ce8a86d3e71df3faab809682c0a3fdb6706b0a580d476a7d6e73c539f62b56b",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ]
+}

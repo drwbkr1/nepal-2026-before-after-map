@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-APPROVAL-ACTIVATION",
+  "activated_at_utc": "2026-09-18T18:54:55Z",
+  "status": "pass_exact_approval_activated_implementation_publication_only",
+  "bindings": {
+    "approval_sha256": "862a4e979b1cebaa9d06cc9b350cba91dfec859b081ae89020627a076a34425d",
+    "reconciliation_sha256": "f5b23f4e6ecd3e821e99b2b2e52c482aed4d4a7447ef14861b2936b0c8dfee64",
+    "proposal_sha256": "15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657",
+    "review_bundle_sha256": "cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5"
+  },
+  "released_now": {
+    "bounded_implementation": true,
+    "synthetic_and_arcgis_tests": true,
+    "public_ci": true,
+    "final_no_content_preflight": false,
+    "promoted_grid_inspection": false,
+    "grid_promotion": false,
+    "dem_pixel_read": false,
+    "dem_conversion": false,
+    "orbit_or_radar_action": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "network_requests_performed": false,
+    "promoted_grid_inspected": false,
+    "new_grid_promotion_performed": false,
+    "dem_pixels_read": false,
+    "external_data_mutated": false
+  }
+}

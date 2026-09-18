@@ -14,6 +14,7 @@ from derive_m2_acquisition_checkpoint import (  # noqa: E402
     current_dem_proj25_metadata_recovery_001_implementation_active,
     current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending,
     current_dem_proj25_receipt_persistence_recovery_002_review_required,
+    current_dem_proj25_receipt_persistence_recovery_002_implementation_active,
 )
 
 
@@ -86,14 +87,15 @@ class M2DemProj25ReceiptPersistenceRecovery002ReviewTests(unittest.TestCase):
         ):
             self.assertFalse(self.readiness["assertions"][key])
 
-    def test_control_state_routes_only_to_review_publication(self) -> None:
-        checkpoint = "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW"
+    def test_control_state_routes_to_bounded_implementation(self) -> None:
+        checkpoint = "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)
-        self.assertEqual(self.goal["proposed_amendments"], ["contracts/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-proposal.json"])
+        self.assertEqual(self.goal["proposed_amendments"], [])
         self.assertFalse(current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending(ROOT, {"promoted": 8}))
-        self.assertTrue(current_dem_proj25_receipt_persistence_recovery_002_review_required(ROOT, {"promoted": 8}))
+        self.assertFalse(current_dem_proj25_receipt_persistence_recovery_002_review_required(ROOT, {"promoted": 8}))
+        self.assertTrue(current_dem_proj25_receipt_persistence_recovery_002_implementation_active(ROOT, {"promoted": 8}))
         self.assertFalse(current_dem_proj25_metadata_recovery_001_implementation_active(ROOT, {"promoted": 8}))
 
     def test_milestone_preserves_terminal_history_and_conditional_dependency(self) -> None:
@@ -103,10 +105,14 @@ class M2DemProj25ReceiptPersistenceRecovery002ReviewTests(unittest.TestCase):
         implementation = units["M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"]
         conversion = units["M2-DEM-VERTICAL-DATUM-CONVERSION"]
         self.assertEqual(prior["disposition"], "block_terminal_receipt_persistence_failure_after_exact_promotion")
-        self.assertEqual(review["status"], "in_progress")
-        self.assertEqual(review["gates"]["human_decision_count"], 0)
+        self.assertEqual(review["status"], "complete")
+        self.assertEqual(review["gates"]["human_decision_count"], 1)
+        self.assertTrue(review["gates"]["attestation"])
+        self.assertTrue(review["gates"]["receipt_persistence_correction_authorized"])
         self.assertFalse(review["gates"]["receipt_recovery_authorized"])
-        self.assertEqual(implementation["status"], "planned")
+        self.assertEqual(implementation["status"], "in_progress")
+        self.assertEqual(implementation["gates"]["public_ci"], "pending")
+        self.assertEqual(implementation["gates"]["final_no_content_preflight"], "blocked_by_public_ci")
         self.assertEqual(conversion["depends_on"], [implementation["id"]])
 
 

@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import datetime, timezone
 
 from m2_dem_vertical_datum_proj25_core import (
     EXPECTED_APPROVAL_SHA256,
@@ -28,7 +27,9 @@ PUBLIC_TERMINAL = ROOT / f"records/acquisition/{ATTEMPT_ID}-terminal.json"
 
 
 def utc_now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    import datetime as datetime_module
+
+    return datetime_module.datetime.now(datetime_module.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def validate_preconditions() -> tuple[dict, object, object, object]:

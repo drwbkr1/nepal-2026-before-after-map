@@ -17,6 +17,8 @@ DATA_ROOT = Path(r"C:\Projects\Active\nepal-2026-before-after-map-data")
 CONTRACT_REF = "config/qa/m2-dem-vertical-datum-proj25-contract.json"
 APPROVAL_REF = "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json"
 EXPECTED_APPROVAL_SHA256 = "b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541"
+RECEIPT_RECOVERY_APPROVAL_REF = "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json"
+EXPECTED_RECEIPT_RECOVERY_APPROVAL_SHA256 = "862a4e979b1cebaa9d06cc9b350cba91dfec859b081ae89020627a076a34425d"
 EXPECTED_GRID_SHA256 = "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a"
 EXPECTED_GRID_SIZE = 80585622
 EXPECTED_GRID_DESCRIPTION = (
@@ -69,13 +71,16 @@ def load_contract() -> dict[str, Any]:
     contract = load_json(ROOT / CONTRACT_REF)
     if sha256_file(ROOT / APPROVAL_REF) != EXPECTED_APPROVAL_SHA256:
         raise ValueError("approval identity drift")
+    if sha256_file(ROOT / RECEIPT_RECOVERY_APPROVAL_REF) != EXPECTED_RECEIPT_RECOVERY_APPROVAL_SHA256:
+        raise ValueError("receipt-recovery approval identity drift")
     grid = contract.get("grid", {})
     operation = contract.get("vertical_operation", {})
     conversion = contract.get("conversion", {})
     recovery = contract.get("metadata_recovery", {})
+    receipt_recovery = contract.get("receipt_persistence_recovery_002", {})
     sources = contract.get("dem_sources_in_exact_order", [])
     if (
-        contract.get("status") != "approved_metadata_recovery_implementation_public_ci_pending"
+        contract.get("status") != "approved_receipt_persistence_recovery_implementation_public_ci_pending"
         or contract.get("approval_sha256") != EXPECTED_APPROVAL_SHA256
         or grid.get("expected_sha256") != EXPECTED_GRID_SHA256
         or grid.get("expected_size_bytes") != EXPECTED_GRID_SIZE
@@ -86,6 +91,17 @@ def load_contract() -> dict[str, Any]:
         or recovery.get("network_requests") != 0
         or recovery.get("maximum_offline_verification_attempts") != 1
         or recovery.get("automatic_retry") is not False
+        or receipt_recovery.get("approval_ref") != RECEIPT_RECOVERY_APPROVAL_REF
+        or receipt_recovery.get("approval_sha256") != EXPECTED_RECEIPT_RECOVERY_APPROVAL_SHA256
+        or receipt_recovery.get("attempt_id") != "m2-geoid-001-receipt-recovery-002"
+        or receipt_recovery.get("terminal_recovery_attempt_id") != "m2-geoid-001-metadata-recovery-001"
+        or receipt_recovery.get("network_requests") != 0
+        or receipt_recovery.get("recovery_001_retries") != 0
+        or receipt_recovery.get("maximum_receipt_recovery_attempts") != 1
+        or receipt_recovery.get("new_promotion_actions") != 0
+        or receipt_recovery.get("automatic_retry") is not False
+        or receipt_recovery.get("receipt_reserved_before_content_read") is not True
+        or receipt_recovery.get("same_file_identity_required") is not True
         or operation.get("source_crs") != "EPSG:9518"
         or operation.get("target_crs") != "EPSG:4979"
         or operation.get("height_relation") != "h = H + N"

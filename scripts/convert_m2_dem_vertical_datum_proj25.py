@@ -7,7 +7,6 @@ import argparse
 import json
 import math
 import os
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -29,7 +28,9 @@ AOI_REF = ROOT / "config/aoi/approved-study-areas.geojson"
 
 
 def utc_now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    import datetime as datetime_module
+
+    return datetime_module.datetime.now(datetime_module.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def output_extent(geotransform: tuple[float, ...], width: int, height: int) -> tuple[float, float, float, float]:

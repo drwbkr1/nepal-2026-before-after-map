@@ -515,4 +515,15 @@ Read-only reconciliation found the staged and destination paths at exactly 80,58
 
 The zero-decision receipt-persistence recovery-002 packet passed local structural checks. Proposal SHA-256 is `15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657`; review-bundle SHA-256 is `cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5`; review-contract SHA-256 is `7063f7626c1357d8f3fc1bc28112dd459c4d19e66f43352bf1da34f03cfdbf12`. The rendered 1800-by-1660 review surface passed visual inspection with no clipping and no third-party raster pixels. The complete local suite passed 537 tests with five intentional skips, and `scripts/check_project.py` validated 935 required files. Public default-branch CI remains required before owner review.
 
+### Receipt-persistence recovery-002 implementation validation — 2026-09-18
+
+- Focused portable suite: 21 passed, 0 skipped.
+- Installed ArcGIS Pro Python suite: 3 passed, 0 failed.
+- Full repository suite: 545 passed with 6 intentional environment-dependent skips.
+- Project checker: 946 required files, JSON controls, and Git artifact boundaries passed.
+- Derived checkpoint: `M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION`, with `current_controls_match=true`.
+- Implementation-readiness SHA-256: `dd3631709807857b402eb8f773c0763f52fd9b188a83924710cdedf0151639e0`.
+
+The tests cover the ArcGIS `datetime` rebinding condition, exclusive receipt reservation before input access, interruption persistence, durable validation-failure output, collision and missing-parent refusal, unchanged fixed source order, and absence of network and promotion paths. This validation releases public CI only. It does not establish that the promoted grid passes recovery, that the vertical operation/sign is correct, that any DEM conversion succeeds, or that a scientific result exists.
+
 Public GitHub Actions run `35381627104` passed for exact review-publication commit `8c4aec40589baf7f0ff1a917e4f87a9618c1569d`. The Linux runner validated 935 required files and passed 537 tests with 12 intentional environment-dependent skips. Publication-gate SHA-256 `c92ec8c77e256c718d7742219e1bedcd168ac6be804730f753a5130ad236a77d` and reconciliation SHA-256 `b555288dc23c8c0beba0fbabd802b43a0b2a8b92eb16f3781dfb80ef4bd11f74` release only owner review. The blank response remains undecided; recovery implementation and all real or downstream actions remain blocked.

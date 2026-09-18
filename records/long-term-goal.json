@@ -11,10 +11,8 @@
   "completion_rule": "Complete only when the reproducible ArcGIS evidence package, reviewed change evidence, exportable deliverables, validation, and final release boundary are all satisfied.",
   "last_completed_milestone": "contracts/milestone-001.json",
   "proposed_milestone": null,
-  "current_checkpoint": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
-  "proposed_amendments": [
-    "contracts/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-proposal.json"
-  ],
+  "current_checkpoint": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION",
+  "proposed_amendments": [],
   "active_amendments": [
     "records/source-gates/m2-dem-amendment-approval.json",
     "records/source-gates/m2-orbit-amendment-approval.json",
@@ -31,9 +29,10 @@
     "records/source-gates/m2-orbit-offline-verification-recovery-001-approval.json",
     "records/source-gates/m2-dem-vertical-datum-approval.json",
     "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
-    "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json"
+    "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
+    "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json"
   ],
   "parallel_checkpoints": [
-    "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW"
+    "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"
   ]
 }
