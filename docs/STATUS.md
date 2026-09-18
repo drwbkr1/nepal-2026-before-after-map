@@ -6,7 +6,7 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION`; the exact zero-decision packet is ready for public validation, while orbit application and radar pixel processing have not started
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW`; the exact zero-decision packet passed public validation and awaits one attested owner decision, while orbit application and radar pixel processing have not started
 
 ## Purpose
 
@@ -252,4 +252,6 @@ The exact candidate binds six approved Sentinel-1 GRDs, four verified S1D `AUX_R
 
 The readiness audit remains `DEFER`: exact rights, provenance, route independence, and evaluation design pass, while real measurement behavior, masked AOI coverage, exclusions, registration, and exact-pipeline reproducibility remain unmeasured. Proposal SHA-256 `3a0f03c5269f4e3e6822c1e31bbe5f19cd288e9e17db67b42990d96b27a4f490` and review bundle SHA-256 `84af38b7e325e862272b97c9f198dc7a3c3aa2371f4c428e36aaaac6e937f633` contain zero human decisions. The packet proposes dependency-ordered implementation, synthetic and ArcGIS tests, public CI, one final no-content preflight, one fixed-order versioned orbit-application and QA-processing attempt per exact source, and two independent route QA dispositions.
 
-The current checkpoint is `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION`. No route implementation, project-data content read, orbit application, radar processing, baseline, change analysis, attribution, derived-pixel publication, or scientific claim is authorized.
+Public default-branch CI run `35389407797` passed for exact commit `14b796cfc95d9fd77fdc33d56354c949681ef09d`: 980 required files, 552 tests, and 13 intentional public-runtime skips. Publication-gate SHA-256 is `fba7f6071cb3f0de036ead87bf13319789630eaedb9d6e2e9110170c0d512201`; publication-reconciliation SHA-256 is `e304d1bc8deeee822e828cf1e0b68e53c429f20842d5fb8d958b28942529afed`.
+
+The current checkpoint is `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW`. Only owner review is released. No route implementation, project-data content read, orbit application, radar processing, baseline, change analysis, attribution, derived-pixel publication, or scientific claim is authorized.

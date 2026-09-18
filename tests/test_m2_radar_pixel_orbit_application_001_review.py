@@ -124,7 +124,16 @@ class M2RadarPixelOrbitApplication001ReviewTests(unittest.TestCase):
             reconciliation = load(RECONCILIATION_REF)
             self.assertEqual(publication["status"], "pass_public_default_branch_ci_zero_decision_review_ready")
             self.assertEqual(publication["public_ci_conclusion"], "success")
+            self.assertEqual(publication["commit_sha"], "14b796cfc95d9fd77fdc33d56354c949681ef09d")
+            self.assertEqual(publication["public_ci_run_id"], 35389407797)
+            self.assertEqual(publication["repository_required_file_count"], 980)
+            self.assertEqual(publication["public_test_count"], 552)
+            self.assertEqual(publication["public_intentional_skip_count"], 13)
             self.assertEqual(reconciliation["status"], "pass_public_gate_owner_review_ready")
+            self.assertEqual(reconciliation["publication_gate_sha256"], sha256(PUBLICATION_REF))
+            self.assertTrue(reconciliation["released_now"]["owner_review"])
+            for key in ("implementation", "project_data_content_read", "orbit_application", "radar_pixel_processing", "baseline_or_change_analysis", "scientific_publication"):
+                self.assertFalse(reconciliation["released_now"][key])
             self.assertTrue(current_radar_pixel_orbit_application_001_review_required(ROOT, {"promoted": 8}))
             self.assertFalse(current_radar_pixel_orbit_application_001_review_publication_pending(ROOT, {"promoted": 8}))
         else:

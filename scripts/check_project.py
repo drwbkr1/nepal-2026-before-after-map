@@ -151,8 +151,11 @@ REQUIRED = [
     "reviews/m2-radar-pixel-orbit-application-001/review-contract.json",
     "reviews/m2-radar-pixel-orbit-application-001/blank-response.json",
     "records/readiness/m2-radar-pixel-orbit-application-001-review-readiness.json",
+    "records/readiness/m2-radar-pixel-orbit-application-001-review-publication-gate.json",
+    "records/readiness/m2-radar-pixel-orbit-application-001-review-publication-reconciliation.json",
     "scripts/inspect_m2_radar_pixel_orbit_application_capability.py",
     "scripts/prepare_m2_radar_pixel_orbit_application_001_review.py",
+    "scripts/record_m2_radar_pixel_orbit_application_001_review_publication.py",
     "tests/test_m2_radar_pixel_orbit_application_001_review.py",
     "records/source-gates/m2-radar-first-path-001-review-reconciliation.json",
     "records/source-gates/m2-radar-first-path-001-approval.json",
@@ -12263,6 +12266,67 @@ def main() -> None:
         fail("radar pixel and orbit application review readiness differs")
     if any(radar_review_readiness.get("assertions", {}).get(key) is not False for key in ("orbit_application_authorized", "radar_pixel_processing_authorized", "baseline_or_change_authorized", "project_data_content_read_during_preparation", "network_requests_performed", "external_custody_mutated", "scientific_result_established")):
         fail("radar pixel and orbit application readiness releases a prohibited action")
+
+    radar_review_publication = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-review-publication-gate.json").read_text(encoding="utf-8"))
+    radar_review_publication_reconciliation = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-review-publication-reconciliation.json").read_text(encoding="utf-8"))
+    if (
+        radar_review_publication.get("status") != "pass_public_default_branch_ci_zero_decision_review_ready"
+        or radar_review_publication.get("commit_sha") != "14b796cfc95d9fd77fdc33d56354c949681ef09d"
+        or radar_review_publication.get("public_ci_run_id") != 35389407797
+        or radar_review_publication.get("public_ci_url") != "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35389407797"
+        or radar_review_publication.get("public_ci_conclusion") != "success"
+        or radar_review_publication.get("repository_required_file_count") != 980
+        or radar_review_publication.get("public_test_count") != 552
+        or radar_review_publication.get("public_intentional_skip_count") != 13
+        or radar_review_publication.get("bindings", {}).get("proposal_sha256") != radar_review_proposal_sha
+        or radar_review_publication.get("bindings", {}).get("review_bundle_sha256") != radar_review_bundle_sha
+        or radar_review_publication.get("assertions", {}).get("human_decision_count") != 0
+        or radar_review_publication.get("assertions", {}).get("owner_review_ready") is not True
+        or any(radar_review_publication.get("assertions", {}).get(key) is not False for key in (
+            "route_implementation_authorized", "project_data_content_read_after_publication",
+            "orbit_application_performed", "radar_pixel_processing_performed", "external_data_mutated",
+            "baseline_or_change_analysis_performed", "scientific_result_established",
+        ))
+    ):
+        fail("radar pixel and orbit application publication gate differs or overclaims")
+    if (
+        radar_review_publication_reconciliation.get("status") != "pass_public_gate_owner_review_ready"
+        or radar_review_publication_reconciliation.get("publication_gate_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-review-publication-gate.json")
+        or radar_review_publication_reconciliation.get("commit_sha") != "14b796cfc95d9fd77fdc33d56354c949681ef09d"
+        or radar_review_publication_reconciliation.get("public_ci_run_id") != 35389407797
+        or radar_review_publication_reconciliation.get("review_bundle_sha256") != radar_review_bundle_sha
+        or radar_review_publication_reconciliation.get("proposal_sha256") != radar_review_proposal_sha
+        or radar_review_publication_reconciliation.get("current_checkpoint") != "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW"
+        or radar_review_publication_reconciliation.get("released_now", {}).get("owner_review") is not True
+        or any(radar_review_publication_reconciliation.get("released_now", {}).get(key) is not False for key in (
+            "implementation", "project_data_content_read", "orbit_application", "radar_pixel_processing",
+            "baseline_or_change_analysis", "scientific_publication",
+        ))
+    ):
+        fail("radar pixel and orbit application publication reconciliation differs or overclaims")
+    radar_review_publication_evidence = ledger_by_id.get("EVID-0145")
+    if (
+        not isinstance(radar_review_publication_evidence, dict)
+        or radar_review_publication_evidence.get("status") != "pass_public_ci_zero_decision_owner_review_ready"
+        or radar_review_publication_evidence.get("publication_gate_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-review-publication-gate.json")
+        or radar_review_publication_evidence.get("publication_reconciliation_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-review-publication-reconciliation.json")
+        or radar_review_publication_evidence.get("proposal_sha256") != radar_review_proposal_sha
+        or radar_review_publication_evidence.get("review_bundle_sha256") != radar_review_bundle_sha
+        or radar_review_publication_evidence.get("assertions", {}).get("publication_commit") != "14b796cfc95d9fd77fdc33d56354c949681ef09d"
+        or radar_review_publication_evidence.get("assertions", {}).get("public_ci_run_id") != 35389407797
+        or radar_review_publication_evidence.get("assertions", {}).get("public_ci_conclusion") != "success"
+        or radar_review_publication_evidence.get("assertions", {}).get("repository_required_file_count") != 980
+        or radar_review_publication_evidence.get("assertions", {}).get("public_test_count") != 552
+        or radar_review_publication_evidence.get("assertions", {}).get("public_intentional_skip_count") != 13
+        or radar_review_publication_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or radar_review_publication_evidence.get("assertions", {}).get("owner_review_ready") is not True
+        or radar_review_publication_evidence.get("assertions", {}).get("current_checkpoint") != "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW"
+        or any(radar_review_publication_evidence.get("assertions", {}).get(key) is not False for key in (
+            "route_implementation_authorized", "project_data_content_read", "orbit_application_performed",
+            "radar_pixel_processing_performed", "baseline_or_change_analysis_performed", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0145 radar pixel and orbit application publication evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():
