@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-METADATA-RECOVERY-001-RUNTIME-FAILURE",
+  "reconciled_at_utc": "2026-09-18T18:27:30Z",
+  "status": "terminal_failure_after_conditional_promotion_no_terminal_receipt",
+  "attempt_id": "m2-geoid-001-metadata-recovery-001",
+  "process_exit_code": 1,
+  "failure": {
+    "primary_stage": "terminal_receipt_construction_after_conditional_no_replace_promotion",
+    "primary_exception_type": "AttributeError",
+    "primary_exception_message": "module 'datetime' has no attribute 'now'",
+    "secondary_stage": "failure_receipt_construction",
+    "secondary_exception_type": "AttributeError",
+    "secondary_exception_message": "module 'datetime' has no attribute 'now'",
+    "durable_terminal_receipt_written": false
+  },
+  "runtime_reproduction": {
+    "runtime": "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\envs\\arcgispro-py3\\python.exe",
+    "before_arcpy_import_datetime_binding": "<class 'datetime.datetime'>",
+    "after_arcpy_import_datetime_binding": "<module 'datetime'>",
+    "reproduced_without_external_data_access": true
+  },
+  "durable_evidence": {
+    "public_started_ref": "records/acquisition/m2-geoid-001-metadata-recovery-001-started.json",
+    "public_started_sha256": "f38ba817ea7527a2027995f75cb5092fdd9427fb044fe985fcd507736d7054f6",
+    "external_started_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\control-events\\m2-dem-vertical-datum-proj25\\m2-geoid-001-metadata-recovery-001\\started.json",
+    "external_started_sha256": "c43374b29c366d8b19645eaa22e81d64f1d264a8cda097d30073da9cc7a94026",
+    "public_terminal_exists": false,
+    "external_terminal_exists": false
+  },
+  "observed_external_state": {
+    "staged_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-dem-vertical-datum-proj25-001\\m2-geoid-001\\us_nga_egm08_25.tif.part",
+    "staged_size_bytes": 80585622,
+    "staged_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+    "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\geoid\\proj\\us_nga_egm08_25.tif",
+    "destination_size_bytes": 80585622,
+    "destination_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+    "same_file_identity": true,
+    "hard_link_count": 2
+  },
+  "assertions": {
+    "attempt_consumed": true,
+    "automatic_retry_performed": false,
+    "network_request_count": 0,
+    "destination_observed_created": true,
+    "conversion_attempts_started": 0,
+    "scientific_result_established": false
+  },
+  "claim_boundary": "Destination existence and exact byte identity are directly observed. The missing in-memory terminal result is not reconstructed or reclassified as a successful completed attempt."
+}

@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-dem-proj25-receipt-persistence-recovery-002-review-bundle",
+  "review_id": "m2-dem-proj25-receipt-persistence-recovery-002-review",
+  "authority_ref": "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
+  "candidate_identity": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-PROPOSAL-SHA256:15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-dem-proj25-receipt-persistence-recovery-002-review.png",
+      "sha256": "60812b91932e94a27e09049ef94aaafcabea106fe3620e790c702300d5508e0b",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-dem-proj25-receipt-persistence-recovery-002-review.json",
+          "sha256": "1dab6505d01a6e52b72c000f33768b056338c0f2d13ca06e2c19a02474bc6809"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_DEM_PROJ25_RECEIPT_PERSISTENCE_RECOVERY_002_REVIEW.md",
+      "sha256": "361963709339928b03613b0438609eed8445745859cf1bb5d27960b97f55b882",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "receipt-recovery-proposal",
+      "path": "contracts/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-proposal.json",
+      "sha256": "15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657",
+      "role": "candidate_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "recovery-001-runtime-failure",
+      "path": "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-runtime-failure.json",
+      "sha256": "98657f032709fca03ce5d4de9790517b6f7fd074e33b0d9d820f10f548f7b373",
+      "role": "preserved_terminal_failure",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "recovery-001-outcome-reconciliation",
+      "path": "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-outcome-reconciliation.json",
+      "sha256": "3899e9c788da8dac12328d323bcc104b70b0eb4eddf20127de66c045a5fd51e5",
+      "role": "preserved_outcome_reconciliation",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "parent-approval",
+      "path": "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
+      "sha256": "b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541",
+      "role": "parent_owner_decision",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "decision_effect_if_approved": [
+    "preserve recovery-001 as terminal and prohibit its retry",
+    "authorize only the ArcGIS-safe timestamp correction and one pre-reserved read-only receipt-recovery-002 inspection",
+    "only on pass retain the unchanged operation/sign preflight and fixed-order one-attempt four-tile conversion sequence"
+  ],
+  "limitations": [
+    "no network request, reacquisition, resume, recovery-001 retry, or new promotion",
+    "no alternate source, grid, CRS relation, threshold, tolerance, or scientific-rule change",
+    "no software installation, account action, terms acceptance, credential use, source overwrite, orbit/radar action, analysis, attribution, publication, or scientific claim"
+  ],
+  "human_decision_count": 0
+}

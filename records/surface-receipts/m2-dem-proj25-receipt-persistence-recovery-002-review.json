@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-SURFACE",
+  "verified_at_utc": "2026-09-18T18:30:00Z",
+  "status": "pass_blank_review_surface",
+  "artifact": {
+    "path": "docs/assets/m2-dem-proj25-receipt-persistence-recovery-002-review.png",
+    "sha256": "60812b91932e94a27e09049ef94aaafcabea106fe3620e790c702300d5508e0b",
+    "width_px": 1800,
+    "height_px": 1660,
+    "format": "PNG",
+    "contains_third_party_pixels": false
+  },
+  "bindings": {
+    "proposal_ref": "contracts/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-proposal.json",
+    "proposal_sha256": "15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657",
+    "runtime_failure_ref": "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-runtime-failure.json",
+    "runtime_failure_sha256": "98657f032709fca03ce5d4de9790517b6f7fd074e33b0d9d820f10f548f7b373",
+    "outcome_reconciliation_ref": "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-outcome-reconciliation.json",
+    "outcome_reconciliation_sha256": "3899e9c788da8dac12328d323bcc104b70b0eb4eddf20127de66c045a5fd51e5",
+    "render_script_ref": "scripts/render_m2_dem_proj25_receipt_persistence_recovery_002_review.py",
+    "render_script_sha256": "6109fef3ca33b38c928be02005f3c7e01a1582a7ec3dbbe90a79b594b3dbec92"
+  },
+  "validation": {
+    "visual_inspection": "pass",
+    "proposal_hash_visible": true,
+    "terminal_recovery_visible": true,
+    "exact_promoted_identity_visible": true,
+    "receipt_failure_visible": true,
+    "bounded_read_only_recovery_visible": true,
+    "post_observation_bias_visible": true,
+    "decision_options_visible": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "blank_state_verified": true,
+    "human_decision_count": 0,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "This text-only surface contains no completed human decision.",
+    "Visual inspection verifies layout and blank state, not a future reviewer decision.",
+    "The surface contains no DEM, radar, derived, or third-party raster pixels."
+  ]
+}

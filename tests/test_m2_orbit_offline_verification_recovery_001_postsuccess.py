@@ -82,8 +82,8 @@ class OrbitOfflineVerificationRecovery001PostsuccessTests(unittest.TestCase):
         self.assertEqual(units["M2-ORBIT-VERIFY"]["gates"]["attempted_source_ids"], SOURCE_IDS)
         self.assertEqual(units["M2-ORBIT-VERIFY"]["gates"]["initial_indeterminate_attempted_source_ids"], ["M2-ORB-001"])
         self.assertFalse(units["M2-ORBIT-APPLY"]["gates"]["orbit_application_started"])
-        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION")
-        self.assertEqual(goal["current_checkpoint"], "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION")
+        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-PUBLICATION")
+        self.assertEqual(goal["current_checkpoint"], "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-PUBLICATION")
         self.assertEqual(
             current_orbit_offline_verification_recovery_001_terminal(ROOT, {"promoted": 8}),
             "pass",

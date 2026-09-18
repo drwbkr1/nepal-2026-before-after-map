@@ -1307,7 +1307,7 @@
       ],
       "action_class": "reversible_remediation",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
         "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json",
@@ -1318,7 +1318,9 @@
         "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-implementation-publication-gate.json",
         "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-implementation-publication-reconciliation.json",
         "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-final-preflight.json",
-        "records/acquisition/m2-geoid-001-metadata-recovery-001-terminal.json"
+        "records/acquisition/m2-geoid-001-metadata-recovery-001-terminal.json",
+        "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-runtime-failure.json",
+        "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-outcome-reconciliation.json"
       ],
       "gates": {
         "approval_required": true,
@@ -1329,28 +1331,124 @@
         "post_success_fixed_order_conversion_only": true,
         "approval_sha256": "b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541",
         "public_ci": "success",
-        "final_no_content_preflight": "ready_not_run",
-        "preserved_byte_read": false,
-        "grid_promotion": false,
+        "final_no_content_preflight": "pass",
+        "preserved_byte_read": true,
+        "grid_promotion": true,
         "implementation_commit": "b37f9da8753a1e6e192f909b76a8097224d49021",
         "public_ci_run_id": 35379385533,
         "implementation_readiness_sha256": "7836bc91e077e43337eee7399e903abd2bf54f7be7314cb7f9eeaa3f850cf9eb",
         "publication_gate_sha256": "f1671d8bc577aafcda828f3c90f156a19d480131125f481a4d826fb6096dbe65",
-        "publication_reconciliation_sha256": "d63cab0983a6583a5a885530b47b1e5d4ee6ab4a44d8f0b6e34bcce3345c235b"
+        "publication_reconciliation_sha256": "d63cab0983a6583a5a885530b47b1e5d4ee6ab4a44d8f0b6e34bcce3345c235b",
+        "final_preflight_sha256": "00fc33b7d829b3f9732cfa3c852d939d72a4eebf24da369f8addc1cd152ca2f9",
+        "recovery_attempts_consumed": 1,
+        "terminal_receipt_persisted": false,
+        "runtime_failure_sha256": "98657f032709fca03ce5d4de9790517b6f7fd074e33b0d9d820f10f548f7b373",
+        "outcome_reconciliation_sha256": "3899e9c788da8dac12328d323bcc104b70b0eb4eddf20127de66c045a5fd51e5"
       },
-      "disposition": null,
+      "disposition": "block_terminal_receipt_persistence_failure_after_exact_promotion",
       "retained_failures": [
         "records/acquisition/m2-geoid-001-real-001-terminal.json",
         "records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json"
       ],
       "exit_condition_delta": {
+        "expected": [
+          "one durable pass or fail recovery receipt before downstream action"
+        ],
+        "observed": [
+          "exact destination promotion is directly observed",
+          "success and failure terminal receipt construction both failed after ArcGIS rebound the module-level datetime class name",
+          "no conversion attempt started"
+        ],
+        "decision_value": "block",
+        "rationale": "Recovery-001 is terminal and cannot retry. A separate owner decision is required before any receipt recovery or downstream continuation."
+      },
+      "next_dependency": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW"
+    },
+    {
+      "id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
+      "purpose": "Review a post-observation correction limited to durable receipt persistence for the already-promoted exact PROJ grid and conditional continuation.",
+      "depends_on": [
+        "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION"
+      ],
+      "action_class": "normative_decision",
+      "human_gate": true,
+      "status": "in_progress",
+      "inputs": [
+        "contracts/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-proposal.json",
+        "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-runtime-failure.json",
+        "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-outcome-reconciliation.json",
+        "reviews/m2-dem-proj25-receipt-persistence-recovery-002/review-bundle.json",
+        "reviews/m2-dem-proj25-receipt-persistence-recovery-002/review-contract.json",
+        "reviews/m2-dem-proj25-receipt-persistence-recovery-002/blank-response.json",
+        "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-review-readiness.json"
+      ],
+      "outputs": [
+        "public review publication gate",
+        "one exact attested owner decision or defer/revise result"
+      ],
+      "gates": {
+        "proposal_sha256": "15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657",
+        "review_bundle_sha256": "cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5",
+        "review_contract_sha256": "7063f7626c1357d8f3fc1bc28112dd459c4d19e66f43352bf1da34f03cfdbf12",
+        "blank_response_sha256": "1ef87c7f28d52c93de5a00093ce04730c0e8963518302d6dc9aa8e3bbe119a2a",
+        "readiness_sha256": "06612161d0fbfe8db64e40c9247655b57d855b1f8305d7ab6aee0423d51f8571",
+        "public_ci": "pending",
+        "human_decision_count": 0,
+        "attestation": false,
+        "receipt_recovery_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-runtime-failure.json",
+        "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-outcome-reconciliation.json"
+      ],
+      "exit_condition_delta": {
         "expected": [],
         "observed": [
-          "exact approval locked and reconciled",
-          "implementation commit passed fresh public default-branch CI"
+          "zero-decision packet prepared locally"
         ],
         "decision_value": "unknown",
-        "rationale": "Implementation and public validation pass; the one final no-content preflight is the next gate before any preserved-byte read."
+        "rationale": "Public CI and one exact attested owner decision are required."
+      },
+      "next_dependency": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"
+    },
+    {
+      "id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION",
+      "purpose": "If separately approved, implement ArcGIS-safe timestamp persistence, one pre-reserved read-only receipt recovery, and conditional downstream continuation.",
+      "depends_on": [
+        "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW"
+      ],
+      "action_class": "reversible_remediation",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "contracts/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-proposal.json"
+      ],
+      "outputs": [
+        "versioned implementation and tests",
+        "fresh public-CI gate",
+        "one append-only receipt-recovery-002 result"
+      ],
+      "gates": {
+        "approval_required": true,
+        "network_requests": 0,
+        "recovery_001_retries": 0,
+        "new_promotions": 0,
+        "receipt_recovery_attempts": 1,
+        "automatic_retry": false,
+        "post_success_conversion_attempts_per_dem": 1,
+        "stop_on_first_failure": true
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-runtime-failure.json",
+        "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-outcome-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [],
+        "observed": [],
+        "decision_value": "defer",
+        "rationale": "No implementation authority exists before owner approval."
       },
       "next_dependency": "M2-DEM-VERTICAL-DATUM-CONVERSION"
     },
@@ -1358,7 +1456,7 @@
       "id": "M2-DEM-VERTICAL-DATUM-CONVERSION",
       "purpose": "After a current exact vertical method is approved and its grid and direction pass verification, create and verify no-overwrite WGS 84 ellipsoidal copies of the four approved DEM tiles.",
       "depends_on": [
-        "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION"
+        "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"
       ],
       "action_class": "data_processing",
       "human_gate": false,
@@ -1392,7 +1490,7 @@
         ],
         "observed": [],
         "decision_value": "defer",
-        "rationale": "The exact approved grid bytes are preserved but remain unpromoted after a terminal metadata-key representation mismatch; the correction and offline recovery require a separate owner decision."
+        "rationale": "The exact grid destination exists, but recovery-001 failed terminal receipt persistence after promotion. Receipt recovery and downstream continuation require a separate owner decision."
       },
       "next_dependency": "M2-ORBIT-APPLY"
     },
@@ -3315,8 +3413,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION",
-    "next_action": "Run the one final no-content metadata-recovery preflight. Only on its pass may the exact preserved grid bytes be read once for offline verification and conditionally promoted without replacement; conversion remains gated on that pass and the unchanged local operation and sign preflight.",
+    "current_checkpoint": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-PUBLICATION",
+    "next_action": "Publish and publicly validate the exact zero-decision receipt-persistence recovery-002 review packet. Do not implement the correction, inspect the promoted grid again, run the operation/sign preflight, read DEM pixels, or convert a DEM before one exact attested owner decision on the public packet.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3356,9 +3454,11 @@
       "The official PROJ-data 2.5-minute route is a zero-decision proposal. No recommended-grid payload, conversion, orbit application, radar pixel, baseline, change, attribution, or scientific action is authorized before exact owner approval.",
       "The one authorized PROJ-grid request is terminal after exact bytes passed identity and structural checks but failed the first implementation's generic metadata-key requirement. The exact staged bytes remain unpromoted outside Git; no retry, preserved-byte recovery read, DEM pixel access, conversion, or downstream action is authorized before a separate exact owner decision.",
       "The metadata-recovery implementation passed fresh public default-branch CI; this releases only the final no-content preflight and no preserved-byte read by itself.",
-      "Offline recovery remains one attempt with zero network requests; grid promotion is conditional on exact byte, metadata, and ArcGIS-readability pass, and conversion remains conditional on the unchanged local operation and sign preflight."
+      "Offline recovery remains one attempt with zero network requests; grid promotion is conditional on exact byte, metadata, and ArcGIS-readability pass, and conversion remains conditional on the unchanged local operation and sign preflight.",
+      "Metadata recovery-001 is terminal after exact promotion because both success and failure terminal receipt construction failed; do not retry or reconstruct its terminal result.",
+      "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery."
     ],
-    "parallel_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION",
-    "parallel_next_action": "Run the one final no-content metadata-recovery preflight. Only on its pass may the exact preserved grid bytes be read once for offline verification and conditionally promoted without replacement; conversion remains gated on that pass and the unchanged local operation and sign preflight."
+    "parallel_checkpoint": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-PUBLICATION",
+    "parallel_next_action": "Publish and publicly validate the exact zero-decision receipt-persistence recovery-002 review packet. Do not implement the correction, inspect the promoted grid again, run the operation/sign preflight, read DEM pixels, or convert a DEM before one exact attested owner decision on the public packet."
   }
 }

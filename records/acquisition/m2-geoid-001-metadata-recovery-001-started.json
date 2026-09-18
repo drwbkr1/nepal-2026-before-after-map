@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "event": "m2_dem_vertical_grid_offline_recovery_started",
+  "attempt_id": "m2-geoid-001-metadata-recovery-001",
+  "source_id": "M2-GEOID-001",
+  "started_at_utc": "2026-09-18T18:25:09Z",
+  "terminal_attempt_id": "m2-geoid-001-real-001",
+  "staged_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\.intake-staging\\nepal-m2-dem-vertical-datum-proj25-001\\m2-geoid-001\\us_nga_egm08_25.tif.part",
+  "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\geoid\\proj\\us_nga_egm08_25.tif",
+  "network_requests_authorized": 0,
+  "maximum_offline_verification_attempts": 1,
+  "automatic_retry_authorized": false,
+  "approval_sha256": "b77d5b943b35efdbc9d8d3c65e1f6122d34f79f581993dc79b244a58fc0a6541",
+  "external_started_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\control-events\\m2-dem-vertical-datum-proj25\\m2-geoid-001-metadata-recovery-001\\started.json"
+}

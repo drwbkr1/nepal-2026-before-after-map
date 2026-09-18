@@ -12,6 +12,7 @@ from derive_m2_acquisition_checkpoint import (  # noqa: E402
     current_dem_proj25_metadata_recovery_001_implementation_active,
     current_dem_proj25_metadata_recovery_001_review_publication_pending,
     current_dem_proj25_metadata_recovery_001_review_required,
+    current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending,
 )
 
 
@@ -120,11 +121,11 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(self.approval["limits"]["recovery_verification_attempts"], 1)
         self.assertEqual(self.activation["status"], "pass_exact_approval_activated_implementation_publication_only")
         self.assertFalse(self.activation["released_now"]["preserved_byte_read"])
-        expected = "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION"
+        expected = "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-PUBLICATION"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], expected)
         self.assertEqual(self.goal["current_checkpoint"], expected)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], expected)
-        self.assertEqual(self.goal["proposed_amendments"], [])
+        self.assertEqual(self.goal["proposed_amendments"], ["contracts/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-proposal.json"])
         self.assertIn("records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json", self.goal["active_amendments"])
 
     def test_milestone_preserves_block_and_conditional_dependency(self) -> None:
@@ -138,10 +139,14 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(review["status"], "complete")
         self.assertEqual(review["gates"]["human_decision_count"], 1)
         self.assertTrue(review["gates"]["correction_authorized"])
-        self.assertEqual(implementation["status"], "in_progress")
+        receipt_implementation = units["M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"]
+        self.assertEqual(implementation["status"], "complete")
         self.assertEqual(implementation["gates"]["network_requests"], 0)
         self.assertEqual(implementation["gates"]["public_ci"], "success")
-        self.assertEqual(implementation["gates"]["final_no_content_preflight"], "ready_not_run")
+        self.assertEqual(implementation["gates"]["final_no_content_preflight"], "pass")
+        self.assertTrue(implementation["gates"]["preserved_byte_read"])
+        self.assertTrue(implementation["gates"]["grid_promotion"])
+        self.assertFalse(implementation["gates"]["terminal_receipt_persisted"])
         self.assertEqual(self.implementation_publication["implementation_commit"], "b37f9da8753a1e6e192f909b76a8097224d49021")
         self.assertEqual(self.implementation_publication["public_ci_run_id"], 35379385533)
         self.assertFalse(self.implementation_publication["assertions"]["preserved_grid_bytes_read"])
@@ -149,7 +154,7 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
             self.implementation_publication_reconciliation["status"],
             "pass_public_gate_final_no_content_preflight_ready",
         )
-        self.assertEqual(conversion["depends_on"], [implementation["id"]])
+        self.assertEqual(conversion["depends_on"], [receipt_implementation["id"]])
 
     def test_checkpoint_derivation_routes_to_approved_implementation(self) -> None:
         self.assertFalse(
@@ -158,7 +163,8 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
             )
         )
         self.assertFalse(current_dem_proj25_metadata_recovery_001_review_required(ROOT, {"promoted": 8}))
-        self.assertTrue(current_dem_proj25_metadata_recovery_001_implementation_active(ROOT, {"promoted": 8}))
+        self.assertFalse(current_dem_proj25_metadata_recovery_001_implementation_active(ROOT, {"promoted": 8}))
+        self.assertTrue(current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending(ROOT, {"promoted": 8}))
 
 
 if __name__ == "__main__":
