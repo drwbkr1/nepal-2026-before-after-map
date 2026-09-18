@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW-PUBLICATION-GATE",
+  "verified_at_utc": "2026-09-18T02:02:38Z",
+  "status": "pass_public_default_branch_ci_zero_decision_review_ready",
+  "commit_sha": "847501b227de4d258309c5909e5333bd8e824947",
+  "public_ci_run_id": 35297712043,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35297712043",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 875,
+  "public_test_count": 507,
+  "public_intentional_skip_count": 10,
+  "bindings": {
+    "proposal_sha256": "dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7",
+    "review_bundle_sha256": "caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702",
+    "review_contract_sha256": "306eb3fa56ba0feb58818947b5f2dcac7cc8c9ac9ebcade47adb3bc08132e8e1",
+    "review_readiness_sha256": "33c5fed75553de0567c37fc365257bf4bff973bb48dd120fb60b615a813825dd",
+    "local_validation_sha256": "79cd395d579c5208d8bffba5a46cdffe9d5b15500db0e947ce88a6d94078f378"
+  },
+  "assertions": {
+    "repository_validation_passed": true,
+    "full_public_test_suite_passed": true,
+    "human_decision_count": 0,
+    "attestation": false,
+    "alternate_method_authorized": false,
+    "recommended_grid_payload_downloaded": false,
+    "dem_pixels_read": false,
+    "dem_conversion_executed": false,
+    "orbit_application_executed": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false,
+    "current_checkpoint": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+  }
+}

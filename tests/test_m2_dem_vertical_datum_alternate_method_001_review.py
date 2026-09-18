@@ -15,6 +15,7 @@ CONTRACT_REF = "reviews/m2-dem-vertical-datum-alternate-method-001/review-contra
 BLANK_REF = "reviews/m2-dem-vertical-datum-alternate-method-001/blank-response.json"
 READINESS_REF = "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-readiness.json"
 LOCAL_VALIDATION_REF = "records/readiness/m2-dem-vertical-datum-alternate-method-001-local-validation.json"
+PUBLICATION_REF = "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-publication-gate.json"
 CHECKPOINT = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
 
 
@@ -37,6 +38,7 @@ class DemVerticalDatumAlternateMethod001ReviewTests(unittest.TestCase):
         cls.blank = load(BLANK_REF)
         cls.readiness = load(READINESS_REF)
         cls.local_validation = load(LOCAL_VALIDATION_REF)
+        cls.publication = load(PUBLICATION_REF)
         cls.milestone = load("contracts/milestone-002.json")
         cls.profile = load("records/project-control-profile.json")
         cls.goal = load("records/long-term-goal.json")
@@ -133,6 +135,14 @@ class DemVerticalDatumAlternateMethod001ReviewTests(unittest.TestCase):
         self.assertTrue(self.local_validation["assertions"]["initial_failure_preserved"])
         self.assertTrue(self.local_validation["assertions"]["corrected_full_suite_passed"])
         self.assertTrue(self.local_validation["assertions"]["final_full_suite_passed"])
+
+    def test_public_packet_passed_default_branch_ci_without_releasing_action(self) -> None:
+        self.assertEqual(self.publication["commit_sha"], "847501b227de4d258309c5909e5333bd8e824947")
+        self.assertEqual(self.publication["public_ci_run_id"], 35297712043)
+        self.assertEqual(self.publication["public_ci_conclusion"], "success")
+        self.assertEqual(self.publication["public_test_count"], 507)
+        self.assertEqual(self.publication["assertions"]["human_decision_count"], 0)
+        self.assertFalse(self.publication["assertions"]["alternate_method_authorized"])
 
 
 if __name__ == "__main__":

@@ -701,6 +701,7 @@ REQUIRED = [
     "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-preflight.json",
     "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-readiness.json",
     "records/readiness/m2-dem-vertical-datum-alternate-method-001-local-validation.json",
+    "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-publication-gate.json",
     "records/source-gates/m2-dem-vertical-datum-alternate-method-001-source-review.json",
     "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json",
     "reviews/m2-activation/review-bundle.json",
@@ -1090,6 +1091,7 @@ def main() -> None:
     dem_alt_readiness = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-readiness.json").read_text(encoding="utf-8"))
     dem_alt_surface = json.loads((ROOT / "records/surface-receipts/m2-dem-vertical-datum-alternate-method-001-review.json").read_text(encoding="utf-8"))
     dem_alt_local_validation = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-alternate-method-001-local-validation.json").read_text(encoding="utf-8"))
+    dem_alt_publication_gate = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-publication-gate.json").read_text(encoding="utf-8"))
     dem_terrain_contract = json.loads((ROOT / "config/qa/dem-terrain-quality-contract.json").read_text(encoding="utf-8"))
     dem_terrain_readiness = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-readiness.json").read_text(encoding="utf-8"))
     dem_terrain_ci_correction = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-ci-correction.json").read_text(encoding="utf-8"))
@@ -3728,6 +3730,27 @@ def main() -> None:
         ))
     ):
         fail("M2 DEM vertical-datum alternate-method local validation differs or overclaims")
+    if (
+        dem_alt_publication_gate.get("status") != "pass_public_default_branch_ci_zero_decision_review_ready"
+        or dem_alt_publication_gate.get("commit_sha") != "847501b227de4d258309c5909e5333bd8e824947"
+        or dem_alt_publication_gate.get("public_ci_run_id") != 35297712043
+        or dem_alt_publication_gate.get("public_ci_conclusion") != "success"
+        or dem_alt_publication_gate.get("repository_required_file_count") != 875
+        or dem_alt_publication_gate.get("public_test_count") != 507
+        or dem_alt_publication_gate.get("public_intentional_skip_count") != 10
+        or dem_alt_publication_gate.get("bindings", {}).get("proposal_sha256") != sha256("contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json")
+        or dem_alt_publication_gate.get("bindings", {}).get("review_bundle_sha256") != sha256("reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json")
+        or dem_alt_publication_gate.get("assertions", {}).get("repository_validation_passed") is not True
+        or dem_alt_publication_gate.get("assertions", {}).get("full_public_test_suite_passed") is not True
+        or dem_alt_publication_gate.get("assertions", {}).get("human_decision_count") != 0
+        or dem_alt_publication_gate.get("assertions", {}).get("current_checkpoint") != "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+        or any(dem_alt_publication_gate.get("assertions", {}).get(key) is not False for key in (
+            "alternate_method_authorized", "recommended_grid_payload_downloaded", "dem_pixels_read",
+            "dem_conversion_executed", "orbit_application_executed", "radar_processing_executed",
+            "scientific_result_established",
+        ))
+    ):
+        fail("M2 DEM vertical-datum alternate-method publication gate differs or overclaims")
     vertical_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-REVIEW", {})
     vertical_install_unit = active_m2_units.get("M2-DEM-EGM2008-COMPONENT-INSTALL", {})
     vertical_alternate_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW", {})
@@ -9098,6 +9121,23 @@ def main() -> None:
         ))
     ):
         fail("EVID-0129 DEM vertical-datum alternate-method local validation differs or overclaims")
+    vertical_alternate_publication_evidence = ledger_by_id.get("EVID-0130")
+    if (
+        not isinstance(vertical_alternate_publication_evidence, dict)
+        or vertical_alternate_publication_evidence.get("status") != "pass_public_default_branch_ci_zero_decision_review_ready"
+        or vertical_alternate_publication_evidence.get("publication_gate_sha256") != sha256("records/readiness/m2-dem-vertical-datum-alternate-method-001-review-publication-gate.json")
+        or vertical_alternate_publication_evidence.get("proposal_sha256") != sha256("contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json")
+        or vertical_alternate_publication_evidence.get("review_bundle_sha256") != sha256("reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json")
+        or vertical_alternate_publication_evidence.get("assertions", {}).get("publication_commit") != "847501b227de4d258309c5909e5333bd8e824947"
+        or vertical_alternate_publication_evidence.get("assertions", {}).get("public_ci_run_id") != 35297712043
+        or vertical_alternate_publication_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or vertical_alternate_publication_evidence.get("assertions", {}).get("current_checkpoint") != "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+        or any(vertical_alternate_publication_evidence.get("assertions", {}).get(key) is not False for key in (
+            "alternate_method_authorized", "recommended_grid_payload_downloaded",
+            "dem_conversion_executed", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0130 DEM vertical-datum alternate-method publication gate differs or overclaims")
 
     orbit_review_evidence = ledger_by_id.get("EVID-0052")
     if (
