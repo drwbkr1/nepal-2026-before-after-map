@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-GATE-STATE-PUBLICATION",
+  "recorded_at_utc": "2026-09-18T21:20:50Z",
+  "status": "pass_public_gate_state_final_preflight_released",
+  "gate_state_commit_sha": "9a8135e5c503b33c29ab25952efcba265c19cd7a",
+  "public_ci_run_id": 35396191631,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35396191631",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1003,
+  "public_test_count": 563,
+  "public_intentional_skip_count": 13,
+  "bindings": {
+    "implementation_publication_gate_ref": "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-gate.json",
+    "implementation_publication_gate_sha256": "228319332ab4422701d223093429b7a8923b7462838939641d8003ec36c2f1fa",
+    "implementation_publication_reconciliation_ref": "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-reconciliation.json",
+    "implementation_publication_reconciliation_sha256": "85ca74b4f75ed54c7609dd74a6763848297f784dedaf20e8a24be3aba117238b",
+    "published_milestone_sha256": "321de200f25141cfc523df08cafe98375de1a82f378219f5466be006e39da500",
+    "published_project_control_profile_sha256": "43a25e795071b2eaaa4238fd82620d131ad5ebc76944fda32bea37f0548fdc7f",
+    "published_long_term_goal_sha256": "d76d92c889656d52e2c884800f651ba6ba05fe599f3ce98d1f8a43e0a595748c"
+  },
+  "released_now": {
+    "final_no_content_preflight": true,
+    "project_data_content_read_only_after_preflight_pass": true,
+    "orbit_application_only_after_preflight_pass": true,
+    "radar_pixel_processing_only_after_preflight_pass": true,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "final_no_content_preflight_performed": false,
+    "project_data_content_read": false,
+    "external_custody_mutated": false,
+    "real_processing_attempt_created": false,
+    "orbit_application_executed": false,
+    "radar_pixel_processing_executed": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the fixed-order six-source real attempt begin."
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-FINAL-PREFLIGHT",
+  "checked_at_utc": "2026-09-18T21:22:42Z",
+  "status": "pass_final_no_content_preflight",
+  "bindings": {
+    "implementation_contract_ref": "config/qa/m2-radar-pixel-orbit-application-001-contract.json",
+    "implementation_contract_sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+    "implementation_publication_gate_ref": "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-gate.json",
+    "implementation_publication_gate_sha256": "228319332ab4422701d223093429b7a8923b7462838939641d8003ec36c2f1fa",
+    "implementation_commit_sha": "ff2e26f5d28d59b02c78f4d16d14ddccb3ff987e",
+    "public_ci_run_id": 35395320916
+  },
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "ArcInfo"
+  },
+  "checks": {
+    "implementation_publication_gate_passed": true,
+    "exact_contract_and_repo_bindings_passed": true,
+    "external_data_root_matches_project_sibling": true,
+    "attempt_and_receipt_collision_count": 0,
+    "free_bytes": 512463060992,
+    "minimum_free_bytes": 64424509440,
+    "source_paths_present": true,
+    "orbit_paths_present": true,
+    "dem_paths_present": true,
+    "image_analyst": "Available",
+    "spatial_analyst": "Available",
+    "tool_signatures_match": true
+  },
+  "collisions": [],
+  "assertions": {
+    "project_data_content_read": false,
+    "project_file_hash_computed": false,
+    "project_raster_or_xml_opened": false,
+    "external_custody_mutated": false,
+    "attempt_root_created": false,
+    "orbit_application_executed": false,
+    "radar_pixel_processing_executed": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Execute the exact one-attempt fixed-order route only if this receipt passes."
+}

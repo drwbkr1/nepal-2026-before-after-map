@@ -3570,34 +3570,51 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
         "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json",
-        "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-gate.json"
+        "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-gate.json",
+        "records/readiness/m2-radar-pixel-orbit-application-001-gate-state-publication.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-pixel-orbit-application-001-final-preflight.json",
-        "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json"
+        "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json",
+        "records/processing/radar-pixel-orbit-application-001/m1-src-001-identity-failure-diagnostic.json"
       ],
       "gates": {
         "public_ci": "success",
-        "final_no_content_preflight": "pending_after_gate_record_publication",
+        "final_no_content_preflight": "pass",
         "source_attempts_started": 0,
         "automatic_retry": false,
         "baseline_or_change_authorized": false,
-        "gate_record_publication": "pending"
+        "gate_record_publication": "success",
+        "gate_state_commit_sha": "9a8135e5c503b33c29ab25952efcba265c19cd7a",
+        "gate_state_public_ci_run_id": 35396191631,
+        "final_no_content_preflight_sha256": "55e9a30d22c446596e565d12cf13926a939c90850333d5fca54c1272e3af6662",
+        "real_attempts_started": 1,
+        "identity_evaluations_started": 1,
+        "source_processing_started": false,
+        "orbit_application_started": false,
+        "radar_pixel_processing_started": false
       },
-      "disposition": null,
-      "retained_failures": [],
+      "disposition": "block",
+      "retained_failures": [
+        "records/processing/radar-pixel-orbit-application-001/m1-src-001-identity-failure-diagnostic.json",
+        "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json"
+      ],
       "exit_condition_delta": {
         "expected": [
           "six terminal source dispositions",
           "two independent route QA dispositions"
         ],
-        "observed": [],
-        "decision_value": "unknown",
-        "rationale": "Execution remains blocked by implementation and public CI."
+        "observed": [
+          "one terminal pre-processing M1-SRC-001 inventory representation guard failure",
+          "zero source processing attempts",
+          "zero route evaluations"
+        ],
+        "decision_value": "blocks_dependency",
+        "rationale": "The one authorized real attempt is consumed and cannot be retried. Its byte identities match after normalization, but the frozen direct inventory comparison failed on zip_crc32 fields and archive order before source processing."
       },
       "next_dependency": "M2-ORBIT-APPLY"
     }
@@ -3656,8 +3673,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION",
-    "next_action": "Run the one final no-content preflight and, only on pass, the single fixed-order six-source orbit-application and QA attempt with two independent route evaluations. Stop on the first execution failure and do not run baseline or change analysis.",
+    "current_checkpoint": "M2-ORBIT-APPLY",
+    "next_action": "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3702,7 +3719,7 @@
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery.",
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval."
     ],
-    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION",
-    "parallel_next_action": "Run the one final no-content preflight and, only on pass, the single fixed-order six-source orbit-application and QA attempt with two independent route evaluations. Stop on the first execution failure and do not run baseline or change analysis."
+    "parallel_checkpoint": "M2-ORBIT-APPLY",
+    "parallel_next_action": "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication."
   }
 }

@@ -6,7 +6,7 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION`; corrected implementation commit `ff2e26f5d28d59b02c78f4d16d14ddccb3ff987e` passed public CI run `35395320916`, and the exact gate state must now pass public default-branch CI before the final no-content preflight or any project-data read
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-ORBIT-APPLY`; radar real-001 is terminal after the first M1-SRC-001 identity guard failed on inventory representation and order before source processing, and any correction or new attempt requires a separately governed recovery
 
 ## Purpose
 
@@ -268,4 +268,6 @@ Exact commit `2d04633a835141084e38bbdc11e1411d48012e95` passed the public reposi
 
 Corrected implementation commit `ff2e26f5d28d59b02c78f4d16d14ddccb3ff987e` passed public default-branch CI run `35395320916`: 1,000 required files and all 563 tests passed with 13 intentional public-runtime skips. Implementation publication-gate SHA-256 is `228319332ab4422701d223093429b7a8923b7462838939641d8003ec36c2f1fa`.
 
-The current checkpoint is `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION`. Publication and successful public validation of the exact gate state remain required before the one final no-content preflight. No final preflight, project-data content read, external-custody mutation, real attempt, orbit application, radar pixel processing, route disposition, baseline, change analysis, attribution, derived-pixel publication, or scientific claim has occurred.
+Exact gate-state commit `9a8135e5c503b33c29ab25952efcba265c19cd7a` passed public default-branch CI run `35396191631`: 1,003 required files and all 563 tests passed with 13 intentional public-runtime skips. Final no-content preflight SHA-256 `55e9a30d22c446596e565d12cf13926a939c90850333d5fca54c1272e3af6662` then passed.
+
+The one authorized real attempt was created and consumed, then stopped at the first M1-SRC-001 identity guard before any source processing. The diagnostic found 26 expected and 26 actual files with zero path or byte-identity differences after normalization; direct equality failed because the manifest includes `zip_crc32` and archive order while the runtime inventory omits that field and sorts paths. Terminal reconciliation SHA-256 is `5696ab1542b386260eff7b3c0591891abe0a907c4c62342e4aa411abd9b73300`. No retry, source copy, orbit application, radar pixel processing, route evaluation, baseline, change analysis, attribution, derived-pixel publication, or scientific claim occurred.

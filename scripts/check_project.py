@@ -175,6 +175,10 @@ REQUIRED = [
     "records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness.json",
     "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-gate.json",
     "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-reconciliation.json",
+    "records/readiness/m2-radar-pixel-orbit-application-001-gate-state-publication.json",
+    "records/readiness/m2-radar-pixel-orbit-application-001-final-preflight.json",
+    "records/processing/radar-pixel-orbit-application-001/m1-src-001-identity-failure-diagnostic.json",
+    "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
     "tests/test_m2_radar_pixel_orbit_application_001.py",
     "scripts/inspect_m2_radar_pixel_orbit_application_capability.py",
@@ -12399,6 +12403,10 @@ def main() -> None:
     radar_implementation_readiness = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness.json").read_text(encoding="utf-8"))
     radar_implementation_publication_gate = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-gate.json").read_text(encoding="utf-8"))
     radar_implementation_publication_reconciliation = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-reconciliation.json").read_text(encoding="utf-8"))
+    radar_gate_state_publication = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-gate-state-publication.json").read_text(encoding="utf-8"))
+    radar_final_preflight = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-final-preflight.json").read_text(encoding="utf-8"))
+    radar_identity_failure_diagnostic = json.loads((ROOT / "records/processing/radar-pixel-orbit-application-001/m1-src-001-identity-failure-diagnostic.json").read_text(encoding="utf-8"))
+    radar_terminal_reconciliation = json.loads((ROOT / "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json").read_text(encoding="utf-8"))
     if (
         radar_lock_failure.get("status") != "rejected_before_decision_reveal_invalid_hash_bound_filename"
         or radar_lock_failure.get("candidate_sha256") != "49807e5113a9dc4beec16ae23631f4039e066f1713b338055adc24ee71240369"
@@ -12560,9 +12568,9 @@ def main() -> None:
         or radar_implementation_publication_reconciliation.get("implementation_commit_sha") != "ff2e26f5d28d59b02c78f4d16d14ddccb3ff987e"
         or radar_implementation_publication_reconciliation.get("public_ci_run_id") != 35395320916
         or radar_implementation_publication_reconciliation.get("current_checkpoint") != "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION"
-        or radar_implementation_publication_reconciliation.get("control_sha256", {}).get("milestone") != sha256("contracts/milestone-002.json")
-        or radar_implementation_publication_reconciliation.get("control_sha256", {}).get("project_control_profile") != sha256("records/project-control-profile.json")
-        or radar_implementation_publication_reconciliation.get("control_sha256", {}).get("long_term_goal") != sha256("records/long-term-goal.json")
+        or radar_implementation_publication_reconciliation.get("control_sha256", {}).get("milestone") != "321de200f25141cfc523df08cafe98375de1a82f378219f5466be006e39da500"
+        or radar_implementation_publication_reconciliation.get("control_sha256", {}).get("project_control_profile") != "43a25e795071b2eaaa4238fd82620d131ad5ebc76944fda32bea37f0548fdc7f"
+        or radar_implementation_publication_reconciliation.get("control_sha256", {}).get("long_term_goal") != "d76d92c889656d52e2c884800f651ba6ba05fe599f3ce98d1f8a43e0a595748c"
         or radar_implementation_publication_reconciliation.get("released_now", {}).get("gate_record_publication") is not True
         or radar_implementation_publication_reconciliation.get("released_now", {}).get("final_no_content_preflight_after_gate_record_publication") is not True
         or any(radar_implementation_publication_reconciliation.get("released_now", {}).get(key) is not False for key in (
@@ -12571,6 +12579,98 @@ def main() -> None:
         ))
     ):
         fail("radar implementation publication reconciliation differs or overclaims")
+    if (
+        sha256("records/readiness/m2-radar-pixel-orbit-application-001-gate-state-publication.json") != "2da1986b6a4118e75063f5b2a3a6b74c9c6096f758f42cbe546131f50c55bf31"
+        or radar_gate_state_publication.get("status") != "pass_public_gate_state_final_preflight_released"
+        or radar_gate_state_publication.get("gate_state_commit_sha") != "9a8135e5c503b33c29ab25952efcba265c19cd7a"
+        or radar_gate_state_publication.get("public_ci_run_id") != 35396191631
+        or radar_gate_state_publication.get("public_ci_url") != "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35396191631"
+        or radar_gate_state_publication.get("public_ci_conclusion") != "success"
+        or radar_gate_state_publication.get("repository_required_file_count") != 1003
+        or radar_gate_state_publication.get("public_test_count") != 563
+        or radar_gate_state_publication.get("public_intentional_skip_count") != 13
+        or radar_gate_state_publication.get("bindings", {}).get("implementation_publication_gate_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-gate.json")
+        or radar_gate_state_publication.get("bindings", {}).get("implementation_publication_reconciliation_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-reconciliation.json")
+        or radar_gate_state_publication.get("bindings", {}).get("published_milestone_sha256") != "321de200f25141cfc523df08cafe98375de1a82f378219f5466be006e39da500"
+        or radar_gate_state_publication.get("bindings", {}).get("published_project_control_profile_sha256") != "43a25e795071b2eaaa4238fd82620d131ad5ebc76944fda32bea37f0548fdc7f"
+        or radar_gate_state_publication.get("bindings", {}).get("published_long_term_goal_sha256") != "d76d92c889656d52e2c884800f651ba6ba05fe599f3ce98d1f8a43e0a595748c"
+        or radar_gate_state_publication.get("released_now", {}).get("final_no_content_preflight") is not True
+        or any(radar_gate_state_publication.get("released_now", {}).get(key) is not False for key in (
+            "baseline_or_change_analysis", "scientific_publication",
+        ))
+        or any(radar_gate_state_publication.get("assertions", {}).get(key) is not False for key in (
+            "final_no_content_preflight_performed", "project_data_content_read", "external_custody_mutated",
+            "real_processing_attempt_created", "orbit_application_executed", "radar_pixel_processing_executed",
+            "baseline_or_change_analysis_executed", "scientific_result_established",
+        ))
+    ):
+        fail("radar gate-state publication record differs or overclaims")
+    if (
+        sha256("records/readiness/m2-radar-pixel-orbit-application-001-final-preflight.json") != "55e9a30d22c446596e565d12cf13926a939c90850333d5fca54c1272e3af6662"
+        or radar_final_preflight.get("status") != "pass_final_no_content_preflight"
+        or radar_final_preflight.get("bindings", {}).get("implementation_contract_sha256") != sha256("config/qa/m2-radar-pixel-orbit-application-001-contract.json")
+        or radar_final_preflight.get("bindings", {}).get("implementation_publication_gate_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-gate.json")
+        or radar_final_preflight.get("checks", {}).get("attempt_and_receipt_collision_count") != 0
+        or radar_final_preflight.get("checks", {}).get("source_paths_present") is not True
+        or radar_final_preflight.get("checks", {}).get("orbit_paths_present") is not True
+        or radar_final_preflight.get("checks", {}).get("dem_paths_present") is not True
+        or radar_final_preflight.get("checks", {}).get("tool_signatures_match") is not True
+        or any(radar_final_preflight.get("assertions", {}).get(key) is not False for key in (
+            "project_data_content_read", "project_file_hash_computed", "project_raster_or_xml_opened",
+            "external_custody_mutated", "attempt_root_created", "orbit_application_executed",
+            "radar_pixel_processing_executed", "network_request_performed", "credential_value_read",
+            "baseline_or_change_analysis_executed", "scientific_result_established",
+        ))
+    ):
+        fail("radar final no-content preflight differs or overclaims")
+    if (
+        sha256("records/processing/radar-pixel-orbit-application-001/m1-src-001-identity-failure-diagnostic.json") != "17032e31c285f1d0aa73397c548eed47825510c4f750fc086d10ec17baae5ba4"
+        or radar_identity_failure_diagnostic.get("status") != "confirmed_schema_and_order_only_inventory_mismatch"
+        or radar_identity_failure_diagnostic.get("source_id") != "M1-SRC-001"
+        or radar_identity_failure_diagnostic.get("runner_failure") != {"exit_code": 12, "failure_code": "materialized_safe_inventory_mismatch", "detail": "M1-SRC-001"}
+        or radar_identity_failure_diagnostic.get("comparison", {}).get("expected_file_count") != 26
+        or radar_identity_failure_diagnostic.get("comparison", {}).get("actual_file_count") != 26
+        or radar_identity_failure_diagnostic.get("comparison", {}).get("added_path_count") != 0
+        or radar_identity_failure_diagnostic.get("comparison", {}).get("missing_path_count") != 0
+        or radar_identity_failure_diagnostic.get("comparison", {}).get("byte_identity_mismatch_count") != 0
+        or radar_identity_failure_diagnostic.get("comparison", {}).get("representation_only_mismatch_count") != 26
+        or radar_identity_failure_diagnostic.get("comparison", {}).get("ordering_position_mismatch_count") != 17
+        or radar_identity_failure_diagnostic.get("comparison", {}).get("expected_only_field") != "zip_crc32"
+        or radar_identity_failure_diagnostic.get("comparison", {}).get("normalized_sorted_expected_matches_actual") is not True
+        or radar_identity_failure_diagnostic.get("assertions", {}).get("read_only_post_failure_inspection") is not True
+        or radar_identity_failure_diagnostic.get("assertions", {}).get("m1_src_001_byte_identity_matches_manifest") is not True
+        or any(radar_identity_failure_diagnostic.get("assertions", {}).get(key) is not False for key in (
+            "source_orbit_or_dem_custody_mutated", "source_processing_started", "orbit_application_executed",
+            "radar_pixel_processing_executed", "route_evaluation_executed", "automatic_retry_performed",
+            "scientific_result_established",
+        ))
+    ):
+        fail("radar M1-SRC-001 identity failure diagnostic differs or overclaims")
+    if (
+        sha256("records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json") != "5696ab1542b386260eff7b3c0591891abe0a907c4c62342e4aa411abd9b73300"
+        or radar_terminal_reconciliation.get("status") != "block_terminal_inventory_representation_mismatch_no_retry"
+        or radar_terminal_reconciliation.get("bindings", {}).get("implementation_contract_sha256") != sha256("config/qa/m2-radar-pixel-orbit-application-001-contract.json")
+        or radar_terminal_reconciliation.get("bindings", {}).get("gate_state_publication_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-gate-state-publication.json")
+        or radar_terminal_reconciliation.get("bindings", {}).get("final_preflight_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-final-preflight.json")
+        or radar_terminal_reconciliation.get("bindings", {}).get("identity_failure_diagnostic_sha256") != sha256("records/processing/radar-pixel-orbit-application-001/m1-src-001-identity-failure-diagnostic.json")
+        or radar_terminal_reconciliation.get("runner_result") != {"exit_code": 12, "failure_code": "materialized_safe_inventory_mismatch", "detail": "M1-SRC-001"}
+        or radar_terminal_reconciliation.get("source_execution", {}).get("identity_evaluations_started") != ["M1-SRC-001"]
+        or radar_terminal_reconciliation.get("source_execution", {}).get("source_processing_results") != []
+        or radar_terminal_reconciliation.get("source_execution", {}).get("source_processing_attempts_started") != 0
+        or radar_terminal_reconciliation.get("source_execution", {}).get("stopped_source_id") != "M1-SRC-001"
+        or radar_terminal_reconciliation.get("route_evaluations") != []
+        or radar_terminal_reconciliation.get("assertions", {}).get("real_attempt_consumed") is not True
+        or radar_terminal_reconciliation.get("assertions", {}).get("source_order_preserved") is not True
+        or radar_terminal_reconciliation.get("assertions", {}).get("stop_on_first_failure_preserved") is not True
+        or any(radar_terminal_reconciliation.get("assertions", {}).get(key) is not False for key in (
+            "automatic_retry_performed", "source_copy_created", "orbit_application_executed",
+            "radar_pixel_processing_executed", "route_evaluation_executed", "source_orbit_or_dem_custody_mutated_by_runner",
+            "network_request_performed_by_runner", "credential_value_read", "baseline_or_change_analysis_executed",
+            "interpretation_or_attribution_executed", "derived_pixel_publication_authorized",
+            "scientific_publication_authorized", "scientific_result_established",
+        ))
+    ):
+        fail("radar terminal reconciliation differs or overclaims")
     radar_units = {unit.get("id"): unit for unit in active_m2.get("units", [])}
     radar_review_unit = radar_units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW", {})
     radar_implementation_unit = radar_units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION", {})
@@ -12585,10 +12685,19 @@ def main() -> None:
         or radar_implementation_unit.get("gates", {}).get("public_ci") != "success"
         or radar_implementation_unit.get("gates", {}).get("project_data_content_read") is not False
         or radar_implementation_unit.get("gates", {}).get("orbit_application_started") is not False
-        or radar_execution_unit.get("status") != "in_progress"
+        or radar_execution_unit.get("status") != "complete"
+        or radar_execution_unit.get("disposition") != "block"
         or radar_execution_unit.get("gates", {}).get("public_ci") != "success"
-        or radar_execution_unit.get("gates", {}).get("gate_record_publication") != "pending"
+        or radar_execution_unit.get("gates", {}).get("gate_record_publication") != "success"
+        or radar_execution_unit.get("gates", {}).get("gate_state_commit_sha") != "9a8135e5c503b33c29ab25952efcba265c19cd7a"
+        or radar_execution_unit.get("gates", {}).get("gate_state_public_ci_run_id") != 35396191631
+        or radar_execution_unit.get("gates", {}).get("final_no_content_preflight") != "pass"
+        or radar_execution_unit.get("gates", {}).get("real_attempts_started") != 1
+        or radar_execution_unit.get("gates", {}).get("identity_evaluations_started") != 1
         or radar_execution_unit.get("gates", {}).get("source_attempts_started") != 0
+        or radar_execution_unit.get("gates", {}).get("source_processing_started") is not False
+        or radar_execution_unit.get("gates", {}).get("orbit_application_started") is not False
+        or radar_execution_unit.get("gates", {}).get("radar_pixel_processing_started") is not False
         or radar_execution_unit.get("gates", {}).get("automatic_retry") is not False
         or radar_execution_unit.get("gates", {}).get("baseline_or_change_authorized") is not False
     ):
@@ -12665,6 +12774,49 @@ def main() -> None:
         ))
     ):
         fail("EVID-0149 radar implementation publication gate evidence differs or overclaims")
+    radar_gate_state_publication_evidence = ledger_by_id.get("EVID-0150")
+    if (
+        not isinstance(radar_gate_state_publication_evidence, dict)
+        or radar_gate_state_publication_evidence.get("status") != "pass_public_gate_state_final_preflight_released"
+        or radar_gate_state_publication_evidence.get("gate_state_publication_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-gate-state-publication.json")
+        or radar_gate_state_publication_evidence.get("assertions", {}).get("gate_state_commit") != "9a8135e5c503b33c29ab25952efcba265c19cd7a"
+        or radar_gate_state_publication_evidence.get("assertions", {}).get("public_ci_run_id") != 35396191631
+        or radar_gate_state_publication_evidence.get("assertions", {}).get("public_ci_conclusion") != "success"
+        or radar_gate_state_publication_evidence.get("assertions", {}).get("repository_required_file_count") != 1003
+        or radar_gate_state_publication_evidence.get("assertions", {}).get("public_test_count") != 563
+        or radar_gate_state_publication_evidence.get("assertions", {}).get("public_intentional_skip_count") != 13
+        or radar_gate_state_publication_evidence.get("assertions", {}).get("final_no_content_preflight_released") is not True
+        or any(radar_gate_state_publication_evidence.get("assertions", {}).get(key) is not False for key in (
+            "final_no_content_preflight_performed", "project_data_content_read", "real_processing_attempt_created",
+            "orbit_application_executed", "radar_pixel_processing_executed", "baseline_or_change_analysis_executed",
+            "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0150 radar gate-state publication evidence differs or overclaims")
+    radar_terminal_block_evidence = ledger_by_id.get("EVID-0151")
+    if (
+        not isinstance(radar_terminal_block_evidence, dict)
+        or radar_terminal_block_evidence.get("status") != "block_terminal_inventory_representation_mismatch_no_retry"
+        or radar_terminal_block_evidence.get("final_preflight_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-001-final-preflight.json")
+        or radar_terminal_block_evidence.get("identity_failure_diagnostic_sha256") != sha256("records/processing/radar-pixel-orbit-application-001/m1-src-001-identity-failure-diagnostic.json")
+        or radar_terminal_block_evidence.get("terminal_reconciliation_sha256") != sha256("records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json")
+        or radar_terminal_block_evidence.get("assertions", {}).get("real_attempts_started") != 1
+        or radar_terminal_block_evidence.get("assertions", {}).get("identity_evaluations_started") != 1
+        or radar_terminal_block_evidence.get("assertions", {}).get("source_processing_attempts_started") != 0
+        or radar_terminal_block_evidence.get("assertions", {}).get("route_evaluations_started") != 0
+        or radar_terminal_block_evidence.get("assertions", {}).get("m1_src_001_expected_file_count") != 26
+        or radar_terminal_block_evidence.get("assertions", {}).get("m1_src_001_actual_file_count") != 26
+        or radar_terminal_block_evidence.get("assertions", {}).get("m1_src_001_byte_identity_mismatch_count") != 0
+        or radar_terminal_block_evidence.get("assertions", {}).get("m1_src_001_representation_only_mismatch_count") != 26
+        or radar_terminal_block_evidence.get("assertions", {}).get("m1_src_001_ordering_position_mismatch_count") != 17
+        or radar_terminal_block_evidence.get("assertions", {}).get("current_checkpoint") != "M2-ORBIT-APPLY"
+        or any(radar_terminal_block_evidence.get("assertions", {}).get(key) is not False for key in (
+            "automatic_retry_performed", "source_copy_created", "orbit_application_executed",
+            "radar_pixel_processing_executed", "route_evaluation_executed",
+            "baseline_or_change_analysis_executed", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0151 radar terminal inventory representation block evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():

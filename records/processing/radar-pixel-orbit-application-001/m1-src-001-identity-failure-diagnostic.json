@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-M1-SRC-001-IDENTITY-FAILURE-DIAGNOSTIC",
+  "inspected_at_utc": "2026-09-18T21:27:23Z",
+  "status": "confirmed_schema_and_order_only_inventory_mismatch",
+  "source_id": "M1-SRC-001",
+  "runner_failure": {
+    "exit_code": 12,
+    "failure_code": "materialized_safe_inventory_mismatch",
+    "detail": "M1-SRC-001"
+  },
+  "bindings": {
+    "implementation_contract_sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+    "materialization_manifest_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-001\\fixture-must-not-run\\materialization-manifest.json",
+    "materialization_manifest_sha256": "3756a702efb9a7d1c1f61e284fabf017702e34073b82c44a3571f213d01295e9",
+    "safe_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\materialized\\m1-src-001\\fixture-must-not-run\\S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE",
+    "attempt_started_receipt_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\radar-pixel-orbit-application-001\\radar-pixel-orbit-application-001-real-001\\started.json",
+    "attempt_started_receipt_sha256": "b7982ba87c801a00911ec71ddac98c5eac22c3d0a43fb6b50df47809f2ea906a"
+  },
+  "comparison": {
+    "expected_file_count": 26,
+    "actual_file_count": 26,
+    "expected_inventory_sha256_with_zip_crc32_and_manifest_order": "55ce1eecf496b0abf896de177dff21994fec30f71af8fa0eb15f6d498c76d357",
+    "normalized_expected_original_order_sha256": "0a5003235da5ead9cf36761d34a502eb00a15efb2ca2afa021240a8ab9824f70",
+    "normalized_sorted_expected_inventory_sha256": "c7fed12adb6c6215c31d12baa9c2c3f73b241232d3cd3def3a49ced6f6801761",
+    "actual_inventory_sha256": "c7fed12adb6c6215c31d12baa9c2c3f73b241232d3cd3def3a49ced6f6801761",
+    "added_path_count": 0,
+    "missing_path_count": 0,
+    "byte_identity_mismatch_count": 0,
+    "representation_only_mismatch_count": 26,
+    "ordering_position_mismatch_count": 17,
+    "expected_only_field": "zip_crc32",
+    "normalized_sorted_expected_matches_actual": true
+  },
+  "observed_cause": "The materialization manifest entries include zip_crc32 and use archive order, while stable_inventory emits only relative_path, size_bytes, and sha256 in case-insensitive path order; direct list equality therefore fails although all 26 normalized, sorted byte identities match.",
+  "assertions": {
+    "read_only_post_failure_inspection": true,
+    "m1_src_001_byte_identity_matches_manifest": true,
+    "source_orbit_or_dem_custody_mutated": false,
+    "source_processing_started": false,
+    "orbit_application_executed": false,
+    "radar_pixel_processing_executed": false,
+    "route_evaluation_executed": false,
+    "automatic_retry_performed": false,
+    "scientific_result_established": false
+  }
+}
