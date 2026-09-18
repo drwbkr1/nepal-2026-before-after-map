@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from derive_m2_acquisition_checkpoint import (  # noqa: E402
+    current_radar_pixel_orbit_application_001_implementation_active,
     current_radar_pixel_orbit_application_001_review_publication_pending,
     current_radar_pixel_orbit_application_001_review_required,
 )
@@ -111,14 +112,16 @@ class M2RadarPixelOrbitApplication001ReviewTests(unittest.TestCase):
         for key in ("orbit_application_authorized", "radar_pixel_processing_authorized", "baseline_or_change_authorized", "project_data_content_read_during_preparation", "network_requests_performed", "external_custody_mutated", "scientific_result_established"):
             self.assertFalse(self.readiness["assertions"][key])
 
-    def test_control_state_matches_publication_or_owner_review_phase(self) -> None:
+    def test_control_state_matches_approved_implementation_phase(self) -> None:
         published = (ROOT / PUBLICATION_REF).exists()
-        checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW" if published else "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION"
+        checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)
-        self.assertEqual(self.goal["proposed_amendments"], [PROPOSAL_REF])
-        self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], [PROPOSAL_REF])
+        self.assertEqual(self.goal["proposed_amendments"], [])
+        self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], [])
+        self.assertEqual(self.goal["active_amendments"][-1], "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json")
+        self.assertEqual(self.profile["control_surfaces"]["activated_amendments"][-1], "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json")
         if published:
             publication = load(PUBLICATION_REF)
             reconciliation = load(RECONCILIATION_REF)
@@ -134,22 +137,31 @@ class M2RadarPixelOrbitApplication001ReviewTests(unittest.TestCase):
             self.assertTrue(reconciliation["released_now"]["owner_review"])
             for key in ("implementation", "project_data_content_read", "orbit_application", "radar_pixel_processing", "baseline_or_change_analysis", "scientific_publication"):
                 self.assertFalse(reconciliation["released_now"][key])
-            self.assertTrue(current_radar_pixel_orbit_application_001_review_required(ROOT, {"promoted": 8}))
+            self.assertFalse(current_radar_pixel_orbit_application_001_review_required(ROOT, {"promoted": 8}))
             self.assertFalse(current_radar_pixel_orbit_application_001_review_publication_pending(ROOT, {"promoted": 8}))
+            self.assertTrue(current_radar_pixel_orbit_application_001_implementation_active(ROOT, {"promoted": 8}))
         else:
             self.assertTrue(current_radar_pixel_orbit_application_001_review_publication_pending(ROOT, {"promoted": 8}))
             self.assertFalse(current_radar_pixel_orbit_application_001_review_required(ROOT, {"promoted": 8}))
 
-    def test_milestone_review_unit_releases_nothing_before_decision(self) -> None:
+    def test_milestone_review_unit_records_exact_approval_and_limited_release(self) -> None:
         units = {unit["id"]: unit for unit in self.milestone["units"]}
         review = units["M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW"]
-        self.assertEqual(review["status"], "in_progress")
+        implementation = units["M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION"]
+        execution = units["M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION"]
+        self.assertEqual(review["status"], "complete")
+        self.assertEqual(review["disposition"], "pass")
         self.assertTrue(review["human_gate"])
-        self.assertEqual(review["gates"]["human_decision_count"], 0)
-        self.assertFalse(review["gates"]["attestation"])
-        self.assertFalse(review["gates"]["orbit_application_authorized"])
-        self.assertFalse(review["gates"]["radar_pixel_processing_authorized"])
+        self.assertEqual(review["gates"]["human_decision_count"], 1)
+        self.assertTrue(review["gates"]["attestation"])
+        self.assertTrue(review["gates"]["route_authorized"])
         self.assertFalse(review["gates"]["baseline_or_change_authorized"])
+        self.assertEqual(implementation["status"], "in_progress")
+        self.assertEqual(implementation["gates"]["public_ci"], "pending")
+        self.assertFalse(implementation["gates"]["project_data_content_read"])
+        self.assertFalse(implementation["gates"]["orbit_application_started"])
+        self.assertEqual(execution["status"], "planned")
+        self.assertEqual(execution["gates"]["source_attempts_started"], 0)
 
 
 if __name__ == "__main__":

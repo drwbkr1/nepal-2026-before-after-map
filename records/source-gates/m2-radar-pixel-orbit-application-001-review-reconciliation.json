@@ -1,0 +1,29 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-radar-pixel-orbit-application-001-review",
+  "contract_sha256": "cf846f8749052c172576c1e03fb46885a0795076beb16d604fcefe6c51b935a7",
+  "response_sha256": "49807e5113a9dc4beec16ae23631f4039e066f1713b338055adc24ee71240369",
+  "receipt_sha256": "75c0abd1fd237bbc092176b8faf4e094bd5b69e61f428a70f5108d608155de0b",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/source-gates/m2-radar-first-path-001-approval.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ],
+  "item_decisions": [
+    {
+      "item_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001",
+      "decision": "approve"
+    }
+  ]
+}

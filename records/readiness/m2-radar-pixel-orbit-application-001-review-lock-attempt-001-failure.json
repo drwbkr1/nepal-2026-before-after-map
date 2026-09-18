@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-LOCK-ATTEMPT-001-FAILURE",
+  "observed_at_utc": "2026-09-18T20:26:15Z",
+  "status": "rejected_before_decision_reveal_invalid_hash_bound_filename",
+  "candidate_path": "C:/Projects/Active/nepal-2026-before-after-map-data/private-review-responses/m2-radar-pixel-orbit-application-001/candidate/m2-radar-pixel-orbit-application-001-response-20260918t202615z.json",
+  "candidate_sha256": "49807e5113a9dc4beec16ae23631f4039e066f1713b338055adc24ee71240369",
+  "failure_reason": "response filename does not match exact byte hash",
+  "assertions": {
+    "response_locked": false,
+    "decision_values_read": false,
+    "note_values_read": false,
+    "project_control_mutated": false,
+    "external_project_data_mutated": false
+  },
+  "preservation": "The rejected candidate remains outside Git. The later hash-bound candidate is byte-identical and was evaluated through a separate lock invocation."
+}

@@ -1,0 +1,351 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001",
+  "status": "active_preobservation_exact_six_source_one_attempt",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
+    "proposal_ref": "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json",
+    "candidate_manifest_ref": "records/readiness/m2-radar-pixel-orbit-application-001-candidate-manifest.json",
+    "readiness_audit_ref": "records/readiness/m2-radar-pixel-orbit-application-001-readiness-audit.json",
+    "radar_header_receipt_ref": "records/readiness/radar-input/m2-s1-input-readiness-real-003.json",
+    "pair_plan_ref": "config/qa/candidate-pair-plan.json",
+    "radar_processing_contract_ref": "config/qa/radar-baseline-processing-contract.json",
+    "pixel_readiness_contract_ref": "config/qa/pixel-readiness-contract.json",
+    "approved_aoi_projected_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "capability_ref": "records/surface-receipts/m2-radar-pixel-orbit-application-001-capability.json",
+    "approval_sha256": "1d6522a0a340e3237c29b8489e742c6a8b376314c358ee9ae0d323621cf4b6fe",
+    "proposal_sha256": "3a0f03c5269f4e3e6822c1e31bbe5f19cd288e9e17db67b42990d96b27a4f490",
+    "candidate_manifest_sha256": "dc4ff8a70c3eb115ee78069afbfd759cc1532fce58de6970584d6b7e5fa34af7",
+    "readiness_audit_sha256": "f3b9ab47d459fe602f2d88d1f771c13256167abfd1e44b23eef1497da75440da",
+    "radar_header_receipt_sha256": "3513098380204268c0fb9c1eb154db36df71f47a1a11fe05e577a12f915ad3da",
+    "pair_plan_sha256": "c346af2e575a21e4931991935c0acc21ba70083c4613255456ced77b71bb1560",
+    "radar_processing_contract_sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f",
+    "pixel_readiness_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "approved_aoi_projected_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "capability_sha256": "78140554ab6571070de5051ed98cd2eac4a6c8a40bec5aca6983d74b6c0f879b"
+  },
+  "fixed_source_order": [
+    "M1-SRC-001",
+    "M1-SRC-002",
+    "M1-SRC-003",
+    "M1-SRC-004",
+    "M1-SRC-005",
+    "M1-SRC-006"
+  ],
+  "fixed_route_order": [
+    "PAIR-S1-ASC-R085-IW",
+    "PAIR-S1-DESC-R121-IW"
+  ],
+  "source_to_orbit": {
+    "M1-SRC-001": "M2-ORB-001",
+    "M1-SRC-002": "M2-ORB-001",
+    "M1-SRC-003": "M2-ORB-002",
+    "M1-SRC-004": "M2-ORB-003",
+    "M1-SRC-005": "M2-ORB-003",
+    "M1-SRC-006": "M2-ORB-004"
+  },
+  "sources": [
+    {
+      "source_id": "M1-SRC-001",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE",
+      "event_role": "before",
+      "acquisition_start_utc": "2026-08-16T12:21:16.058226Z",
+      "acquisition_end_utc": "2026-08-16T12:21:41.056809Z",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "bound_orbit_source_id": "M2-ORB-001",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-001-fixture-must-not-run.json",
+      "materialization_receipt_sha256": "8c1d0c33eee7ab9d562aa9d6273b3188354c4c15be58d6faf7f0b86368b241e9",
+      "external_manifest_sha256": "3756a702efb9a7d1c1f61e284fabf017702e34073b82c44a3571f213d01295e9"
+    },
+    {
+      "source_id": "M1-SRC-002",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE",
+      "event_role": "before",
+      "acquisition_start_utc": "2026-08-16T12:21:41.058298Z",
+      "acquisition_end_utc": "2026-08-16T12:22:06.056880Z",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "bound_orbit_source_id": "M2-ORB-001",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-002-m1-src-002-materialization-001.json",
+      "materialization_receipt_sha256": "eb647c2b1eee541503c2f2595f4de8c1370975918e7f716970aea79e4199efa8",
+      "external_manifest_sha256": "f1b92efcfeaae2c55b016ada4ce76485595c4e0cd980cd5419c5a4b34d9de849"
+    },
+    {
+      "source_id": "M1-SRC-003",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE",
+      "event_role": "before",
+      "acquisition_start_utc": "2026-08-19T00:10:36.889384Z",
+      "acquisition_end_utc": "2026-08-19T00:11:01.887958Z",
+      "orbit_direction": "DESCENDING",
+      "relative_orbit_number": 121,
+      "bound_orbit_source_id": "M2-ORB-002",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-003-m1-src-003-materialization-001.json",
+      "materialization_receipt_sha256": "027128fce548203274c4dee23c309d3297d9ade6bb307eb6c615e2e4620bb9be",
+      "external_manifest_sha256": "ed982516cfc2cef55c522675e095cfef0f979f4c0632c2bfbc692cbe5ad082ba"
+    },
+    {
+      "source_id": "M1-SRC-004",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+      "event_role": "after",
+      "acquisition_start_utc": "2026-08-28T12:21:16.762016Z",
+      "acquisition_end_utc": "2026-08-28T12:21:41.760540Z",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "bound_orbit_source_id": "M2-ORB-003",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-004-m1-src-004-materialization-001.json",
+      "materialization_receipt_sha256": "e99d38428ceb23c820c0a8c3236a54488fe443097a9cf83e09c6555031645f42",
+      "external_manifest_sha256": "adb07abdfc54329f90810987aec25f999809536c9e676279b61aa2270e864783"
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE",
+      "event_role": "after",
+      "acquisition_start_utc": "2026-08-28T12:21:41.762029Z",
+      "acquisition_end_utc": "2026-08-28T12:22:06.760553Z",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "bound_orbit_source_id": "M2-ORB-003",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-005-m1-src-005-materialization-001.json",
+      "materialization_receipt_sha256": "15646e151ae7c048ed552f4a80ab4ca3ba05d16f4ab92dec194fd471b8e2e1ae",
+      "external_manifest_sha256": "fdbf2ca2a60e1ef77f08a81deb7a8e4de9279546d07708c2901eaa9067dec041"
+    },
+    {
+      "source_id": "M1-SRC-006",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE",
+      "event_role": "after",
+      "acquisition_start_utc": "2026-08-31T00:10:37.647071Z",
+      "acquisition_end_utc": "2026-08-31T00:11:02.644291Z",
+      "orbit_direction": "DESCENDING",
+      "relative_orbit_number": 121,
+      "bound_orbit_source_id": "M2-ORB-004",
+      "materialization_receipt_ref": "records/acquisition/materialization/m1-src-006-m1-src-006-materialization-001.json",
+      "materialization_receipt_sha256": "48992aac9a3d21799b6680f1fc9d0a81a26b184705288cb90ebb2bc75a764539",
+      "external_manifest_sha256": "15be94c2730f0285677dce72e661212ba9a800fce1dc6a578a0dc3025951c5a0"
+    }
+  ],
+  "orbits": [
+    {
+      "source_id": "M2-ORB-001",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002"
+      ],
+      "custody_sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+      "custody_size_bytes": 639533,
+      "verification_receipt_ref": "records/acquisition/orbit-verification/m2-orb-001-offline-verification-recovery-001.json",
+      "verification_receipt_sha256": "eaf9344737bcd81598dbfb78b0e580156224860b113ae47914f1a4b101a910d5",
+      "custody_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-001\\S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF"
+    },
+    {
+      "source_id": "M2-ORB-002",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-003"
+      ],
+      "custody_sha256": "7462fa65549339c09c36338cb690d0b953c665c3c61a397def3cfa7b2d453262",
+      "custody_size_bytes": 631254,
+      "verification_receipt_ref": "records/acquisition/orbit-verification/m2-orb-002-offline-verification-001.json",
+      "verification_receipt_sha256": "13e4b612edebfd6a101c31cc98887a78181b1322cf9213d3e910c21d57453a7e",
+      "custody_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-002\\S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF"
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-004",
+        "M1-SRC-005"
+      ],
+      "custody_sha256": "c08bf997f1bf02fb25dcf2a4f35643aef4754fbea03c6c2fb0fa9db4a0efe778",
+      "custody_size_bytes": 639533,
+      "verification_receipt_ref": "records/acquisition/orbit-verification/m2-orb-003-offline-verification-001.json",
+      "verification_receipt_sha256": "47b7ad088b8a419eb2ec69b0997e2d5260f698d8865fcac7f05860a43b1bbd18",
+      "custody_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-003\\S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF"
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-006"
+      ],
+      "custody_sha256": "281388e94a7a8a708f229fd7d19f93de426bb077699db3aaabdad7125043bd83",
+      "custody_size_bytes": 629395,
+      "verification_receipt_ref": "records/acquisition/orbit-verification/m2-orb-004-offline-verification-001.json",
+      "verification_receipt_sha256": "f6d0ffb08d42499c5ae7fdba46755d10898dff29c5dc74349d35738fc0d41718",
+      "custody_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\custody\\orbits\\s1d\\resorb\\m2-orb-004\\S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF"
+    }
+  ],
+  "ellipsoidal_dem_inputs": [
+    {
+      "source_id": "M2-DEM-001",
+      "source_sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a",
+      "ellipsoidal_derivative_sha256": "6e1d85f9b3f2f189b3db4b5bc5b87cf26b7f58a0a08081a9001f951a194c76ec",
+      "ellipsoidal_derivative_size_bytes": 33923558,
+      "status": "pass_converted_verified_promoted",
+      "terminal_receipt_ref": "records/processing/m2-dem-001-proj25-conversion-001-terminal.json",
+      "terminal_receipt_sha256": "ee38b41393bc0b4bfc18ca3f96903c3b9f7aa1d90deed72c4854d0a72a89c941",
+      "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal-proj25\\Copernicus_DSM_COG_10_N27_00_E084_00_DEM_WGS84_ELLIPSOIDAL.tif"
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "source_sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194",
+      "ellipsoidal_derivative_sha256": "85e060693b913d6715bd1b03fdf3f0fb743e59ec5334cbff37722d65f5dd4fce",
+      "ellipsoidal_derivative_size_bytes": 33194280,
+      "status": "pass_converted_verified_promoted",
+      "terminal_receipt_ref": "records/processing/m2-dem-002-proj25-conversion-001-terminal.json",
+      "terminal_receipt_sha256": "3313d454253cc6b8856fb9abb70241e101e26ad99309aea415942bf234c19b8b",
+      "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal-proj25\\Copernicus_DSM_COG_10_N27_00_E085_00_DEM_WGS84_ELLIPSOIDAL.tif"
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "source_sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc",
+      "ellipsoidal_derivative_sha256": "f4ccae4518c7557421e8f4beff8357b1cf99434ffe338492f354ac99de1216f9",
+      "ellipsoidal_derivative_size_bytes": 30742774,
+      "status": "pass_converted_verified_promoted",
+      "terminal_receipt_ref": "records/processing/m2-dem-003-proj25-conversion-001-terminal.json",
+      "terminal_receipt_sha256": "cd5cc1faa7ec3c56b7b5e0d15d893aaefd343c590c33744d6f3a710e14411242",
+      "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal-proj25\\Copernicus_DSM_COG_10_N28_00_E084_00_DEM_WGS84_ELLIPSOIDAL.tif"
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "source_sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7",
+      "ellipsoidal_derivative_sha256": "8f001ecd6507262a9871dab06e391805315868b33383f14b76851627d7601f81",
+      "ellipsoidal_derivative_size_bytes": 28271841,
+      "status": "pass_converted_verified_promoted",
+      "terminal_receipt_ref": "records/processing/m2-dem-004-proj25-conversion-001-terminal.json",
+      "terminal_receipt_sha256": "9f1718f5eb91c208980157797775838d150f909d26647df97d1eb33261f12818",
+      "destination_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal-proj25\\Copernicus_DSM_COG_10_N28_00_E085_00_DEM_WGS84_ELLIPSOIDAL.tif"
+    }
+  ],
+  "analysis_grid": {
+    "wkid": 32645,
+    "cell_size_m": 10.0,
+    "origin_rule": "floor projected approved-AOI minimum coordinates to 10 m",
+    "processing_buffer_m": 1000.0,
+    "continuous_resampling": "BILINEAR",
+    "categorical_resampling": "NEAREST"
+  },
+  "processing": {
+    "copy_safe_before_orbit_application": true,
+    "orbit_tool": "ApplyOrbitCorrection_ia",
+    "orbit_file_explicit": true,
+    "orbit_folder_search_disabled_by_explicit_file": true,
+    "polarization_order": [
+      "VV",
+      "VH"
+    ],
+    "thermal_noise_tool": "RemoveThermalNoise_ia",
+    "calibration_tool": "ApplyRadiometricCalibration_ia",
+    "calibration_type": "BETA_NOUGHT",
+    "flattening_tool": "ApplyRadiometricTerrainFlattening_ia",
+    "flattening_type": "GAMMA_NOUGHT",
+    "geoid": "NONE",
+    "geometric_tool": "ApplyGeometricTerrainCorrection_ia",
+    "output_wkid": 32645,
+    "output_cell_size_m": 10.0,
+    "db_tool": "ConvertSARUnits_ia",
+    "db_conversion": "LINEAR_TO_DB",
+    "linear_master_retained": true,
+    "primary_despeckle": "NONE",
+    "dem_binding": "one attempt-local mosaic dataset containing only the four exact ellipsoidal derivatives",
+    "same_date_mosaic_operator": "FIRST in exact source order",
+    "route_independence": true
+  },
+  "mask": {
+    "precedence": [
+      "pair_nodata",
+      "layover_or_layover_and_shadow",
+      "radar_shadow",
+      "native_undetermined",
+      "native_foreshortening_or_lengthening",
+      "valid_pair"
+    ],
+    "native_to_project": {
+      "0": 0,
+      "1": 1,
+      "2": 1,
+      "3": 3,
+      "4": 2,
+      "5": 2
+    },
+    "valid_class": 1,
+    "unknown_native_class": 90,
+    "unobserved_reason_classes": {
+      "4": "border_noise_separate_class_not_observed_after_nodata_mask",
+      "5": "residual_speckle_or_unstable_background_not_separately_thresholded",
+      "6": "water_variability_not_separately_thresholded",
+      "7": "registration_exclusion_not_applied_before_registration_result"
+    },
+    "unknown_policy": "exclude_and_defer"
+  },
+  "registration": {
+    "band_role": "VV linear gamma nought",
+    "candidate_grid_rows": 30,
+    "candidate_grid_columns": 30,
+    "patch_radius_pixels": 10,
+    "search_radius_pixels": 2,
+    "minimum_pair_valid_fraction": 0.8,
+    "minimum_patch_standard_deviation": 1e-12,
+    "minimum_correlation": 0.6,
+    "event_aoi_exclusion_buffer_m": 1000.0,
+    "selection_rule": "use every deterministic candidate meeting fixed valid-texture-correlation controls; do not rank or cherry-pick",
+    "subpixel_rule": "three-point parabolic refinement around the integer correlation maximum when both neighbors exist",
+    "decision_threshold_source": "config/qa/pixel-readiness-contract.json#registration"
+  },
+  "route_qa": {
+    "aoi_ids": [
+      "AOI-OVERVIEW",
+      "AOI-SOURCE",
+      "AOI-UPPER-CORRIDOR"
+    ],
+    "coverage_threshold_source": "config/qa/pixel-readiness-contract.json#aoi_coverage",
+    "grid_threshold_source": "config/qa/pixel-readiness-contract.json#grid_compatibility",
+    "registration_threshold_source": "config/qa/pixel-readiness-contract.json#registration",
+    "ascending_seam_required": true,
+    "descending_seam_status": "not_applicable_single_source_each_date",
+    "scientific_disposition_does_not_stop_independent_route": true
+  },
+  "attempt": {
+    "attempt_id": "radar-pixel-orbit-application-001-real-001",
+    "maximum_final_preflights": 1,
+    "maximum_orbit_application_attempts_per_source": 1,
+    "maximum_qa_processing_attempts_per_source": 1,
+    "maximum_route_qa_attempts_per_pair": 1,
+    "automatic_retry_authorized": false,
+    "stop_on_first_source_execution_failure": true,
+    "external_attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\radar-pixel-orbit-application-001\\radar-pixel-orbit-application-001-real-001",
+    "minimum_free_space_bytes": 64424509440,
+    "collision_policy": "fail"
+  },
+  "execution_boundary": {
+    "external_data_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "source_materializations": "read_only_inventory_before_after",
+    "orbit_custody": "read_only_hash_before_after",
+    "dem_custody": "read_only_hash_before_after",
+    "derived_outputs": "append_only_exact_attempt_root",
+    "network_requests": "prohibited",
+    "authentication": "prohibited",
+    "source_overwrite": "prohibited",
+    "output_overwrite": "prohibited",
+    "automatic_retry": "prohibited"
+  },
+  "decision_domain": [
+    "pass_qa_only",
+    "defer",
+    "block",
+    "invalid"
+  ],
+  "claim_boundary": {
+    "baseline_admission_authorized": false,
+    "change_analysis_authorized": false,
+    "interpretation_authorized": false,
+    "attribution_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

@@ -6,7 +6,7 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW`; the exact zero-decision packet passed public validation and awaits one attested owner decision, while orbit application and radar pixel processing have not started
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION`; the exact owner approval is locked, the bounded implementation passes local validation, and public default-branch CI is required before the final no-content preflight or any project-data read
 
 ## Purpose
 
@@ -255,3 +255,13 @@ The readiness audit remains `DEFER`: exact rights, provenance, route independenc
 Public default-branch CI run `35389407797` passed for exact commit `14b796cfc95d9fd77fdc33d56354c949681ef09d`: 980 required files, 552 tests, and 13 intentional public-runtime skips. Publication-gate SHA-256 is `fba7f6071cb3f0de036ead87bf13319789630eaedb9d6e2e9110170c0d512201`; publication-reconciliation SHA-256 is `e304d1bc8deeee822e828cf1e0b68e53c429f20842d5fb8d958b28942529afed`.
 
 The current checkpoint is `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW`. Only owner review is released. No route implementation, project-data content read, orbit application, radar processing, baseline, change analysis, attribution, derived-pixel publication, or scientific claim is authorized.
+
+## Radar pixel and orbit application implementation ready for public CI — 2026-09-18
+
+The owner approved review bundle SHA-256 `84af38b7e325e862272b97c9f198dc7a3c3aa2371f4c428e36aaaac6e937f633` and proposal SHA-256 `3a0f03c5269f4e3e6822c1e31bbe5f19cd288e9e17db67b42990d96b27a4f490`. Reconciliation SHA-256 `cdb32247348c7e065103434c5b788c4d7ea4cf5356d64a5d2d4d5fbd3014dc4e`, approval SHA-256 `1d6522a0a340e3237c29b8489e742c6a8b376314c358ee9ae0d323621cf4b6fe`, and activation SHA-256 `c0b677e14d6c81e4453587eac60c387813e1c02f3203b4bdea9d07f4ea2eca6b` bind the exact six-source, four-orbit, four-DEM, two-route scope.
+
+The implementation now uses the installed ArcGIS Pro 3.7.1 geoprocessing signatures with explicit output arguments, applies each exact `AUX_RESORB` only to an append-only SAFE copy, retains linear Gamma nought masters, fixes EPSG:32645 at 10 m, and performs registration and seam QA through bounded raster windows rather than full-scene NumPy loads. The first synthetic fixture failed safely on inconsistent area accounting and remains preserved. A corrected synthetic receipt and a second production-runner-bound ArcGIS receipt both pass without project-data or external-custody access.
+
+Eleven focused tests, one current installed ArcGIS runtime validation, and all 563 repository tests pass with 6 intentional local skips. `scripts/check_project.py` validates 998 required files. Implementation-readiness SHA-256 is `84d7b4239244aca4608efabf7893a0473088270ba03b38de9b3d9a96321a6ea7`.
+
+The current checkpoint is `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION`. Only public CI is released. No final preflight, project-data content read, external-custody mutation, real attempt, orbit application, radar pixel processing, route disposition, baseline, change analysis, attribution, derived-pixel publication, or scientific claim has occurred.

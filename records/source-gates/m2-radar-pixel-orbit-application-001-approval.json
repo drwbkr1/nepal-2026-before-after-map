@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-APPROVAL",
+  "status": "approved_dependency_ordered_exact_six_source_qa_route",
+  "approved_at_utc": "2026-09-18T20:26:15Z",
+  "review_id": "m2-radar-pixel-orbit-application-001-review",
+  "review_bundle_manifest_sha256": "84af38b7e325e862272b97c9f198dc7a3c3aa2371f4c428e36aaaac6e937f633",
+  "proposal_ref": "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json",
+  "proposal_sha256": "3a0f03c5269f4e3e6822c1e31bbe5f19cd288e9e17db67b42990d96b27a4f490",
+  "review_contract_ref": "reviews/m2-radar-pixel-orbit-application-001/review-contract.json",
+  "review_contract_sha256": "cf846f8749052c172576c1e03fb46885a0795076beb16d604fcefe6c51b935a7",
+  "review_reconciliation_ref": "records/source-gates/m2-radar-pixel-orbit-application-001-review-reconciliation.json",
+  "review_reconciliation_sha256": "cdb32247348c7e065103434c5b788c4d7ea4cf5356d64a5d2d4d5fbd3014dc4e",
+  "locked_response_sha256": "49807e5113a9dc4beec16ae23631f4039e066f1713b338055adc24ee71240369",
+  "lock_receipt_sha256": "75c0abd1fd237bbc092176b8faf4e094bd5b69e61f428a70f5108d608155de0b",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "attestation": true,
+  "authorized_bounded_actions": [
+    "implement only the exact six-source ArcGIS processing route, source-to-orbit map, ellipsoidal DEM bindings, append-only receipts, original-custody inventory checks, and frozen QA evaluator",
+    "run synthetic interruption, collision, exact-binding, original-immutability, fixed-order, stop-on-execution-failure, mask, coverage, grid, registration, and no-network tests plus ArcGIS runtime synthetic tests",
+    "require a successful public default-branch CI gate before one final no-content preflight or any project data content read",
+    "only on those passes create one fresh versioned non-Git attempt and process M1-SRC-001 through M1-SRC-006 in exact order, with at most one orbit-application and one QA-processing attempt per source and no automatic retry",
+    "apply only the exact bound AUX_RESORB path to a versioned SAFE copy, never the original materialized SAFE, and verify the original Sentinel, orbit, and DEM custody inventories remain unchanged",
+    "only after all six source executions succeed evaluate the ascending and descending routes independently under the frozen pixel-readiness contract, preserving PASS_QA_ONLY, DEFER, BLOCK, INVALID, masks, exclusions, and limitations",
+    "reconcile the terminal QA dispositions and stop before baseline admission, change analysis, interpretation, attribution, derived-pixel publication, or a scientific claim"
+  ],
+  "fixed_sequence": {
+    "source_ids": [
+      "M1-SRC-001",
+      "M1-SRC-002",
+      "M1-SRC-003",
+      "M1-SRC-004",
+      "M1-SRC-005",
+      "M1-SRC-006"
+    ],
+    "source_to_orbit": {
+      "M1-SRC-001": "M2-ORB-001",
+      "M1-SRC-002": "M2-ORB-001",
+      "M1-SRC-003": "M2-ORB-002",
+      "M1-SRC-004": "M2-ORB-003",
+      "M1-SRC-005": "M2-ORB-003",
+      "M1-SRC-006": "M2-ORB-004"
+    },
+    "route_ids": [
+      "PAIR-S1-ASC-R085-IW",
+      "PAIR-S1-DESC-R121-IW"
+    ],
+    "processing_chain": [
+      "copy exact materialized SAFE into a new versioned attempt without replacing any existing path",
+      "ApplyOrbitCorrection_ia with the explicit exact verified AUX_RESORB file",
+      "RemoveThermalNoise_ia for VV and VH",
+      "ApplyRadiometricCalibration_ia to linear Beta nought",
+      "ApplyRadiometricTerrainFlattening_ia to linear Gamma nought with exact ellipsoidal DEM derivatives and geoid NONE",
+      "ApplyGeometricTerrainCorrection_ia to EPSG:32645 at 10 metres",
+      "derive decibel display candidates from positive linear Gamma nought while retaining linear masters",
+      "build the frozen categorical exclusion mask and route-specific same-date mosaics",
+      "measure AOI coverage, usable fraction, grid compatibility, seams, stable-control registration, and limitations"
+    ]
+  },
+  "limits": {
+    "final_no_content_preflight_attempts": 1,
+    "orbit_application_attempts_per_source": 1,
+    "qa_processing_attempts_per_source": 1,
+    "route_qa_attempts_per_pair": 1,
+    "automatic_retry": false,
+    "stop_on_execution_failure": true,
+    "continue_independent_route_disposition_after_scientific_block_or_defer": true,
+    "network_requests": 0,
+    "credentials_or_tokens": 0,
+    "source_overwrites": 0,
+    "output_overwrites": 0,
+    "precise_orbit_substitutions": 0
+  },
+  "does_not_authorize": [
+    "source, product, date, orbit type, orbit identity, DEM, vertical relation, AOI, CRS, resolution, polarization, threshold, mask-class, stable-control, mosaic, or route-order substitution",
+    "any second attempt, automatic retry, reuse of a failed attempt path, overwrite, in-place mutation of materialized SAFE custody, or mutation of orbit or DEM custody",
+    "a network request, credential or token action, account or terms action, software installation, UAC action, or ArcGIS extension purchase",
+    "AUX_POEORB substitution or any statement that restituted orbit files are precise-orbit equivalent",
+    "despeckling of the primary quantitative route, threshold tuning after observation, alternate source search, or hidden exclusion",
+    "baseline admission, change raster or polygon generation, cross-route synthesis, geomorphic interpretation, event attribution, emergency guidance, derived-pixel publication, or scientific publication"
+  ],
+  "claim_boundary": {
+    "approval_would_authorize_execution_only_after_implementation_public_ci_and_final_preflight": true,
+    "qa_pass_may_establish": "exact processing lineage plus measured coverage, mask, grid, seam, and registration fitness for one or both independent radar routes",
+    "qa_pass_does_not_establish": [
+      "pre-event baseline admission",
+      "landscape change",
+      "geomorphic interpretation",
+      "event attribution",
+      "emergency guidance",
+      "scientific publication"
+    ],
+    "orbit_application_authorized_now": false,
+    "radar_pixel_processing_authorized_now": false,
+    "human_decision_count": 0
+  },
+  "human_decisions_fabricated": false
+}

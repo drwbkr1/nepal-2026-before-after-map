@@ -186,6 +186,14 @@ RADAR_PIXEL_ORBIT_APPLICATION_001_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW",
     "next_action": "Review the exact public M2 radar pixel and orbit application-001 bundle and proposal; approve, revise, or defer the bounded fixed-order QA route. No implementation, orbit application, radar pixel processing, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision.",
 }
+RADAR_PIXEL_ORBIT_APPLICATION_001_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION",
+    "next_action": "Implement and validate only the exact approved six-source route, synthetic controls, and ArcGIS-runtime tests, then require successful public default-branch CI. Do not run the final preflight, read project pixels, apply an orbit, or create a real processing attempt before that public gate.",
+}
+RADAR_PIXEL_ORBIT_APPLICATION_001_EXECUTION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION",
+    "next_action": "Run the one final no-content preflight and, only on pass, the single fixed-order six-source orbit-application and QA attempt with two independent route evaluations. Stop on the first execution failure and do not run baseline or change analysis.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1453,6 +1461,65 @@ def current_radar_pixel_orbit_application_001_review_required(
     )
 
 
+def current_radar_pixel_orbit_application_001_implementation_active(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize approved implementation before its public CI gate."""
+    if state_counts != {"promoted": 8}:
+        return False
+    if (root / "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-gate.json").exists():
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        approval = load(root / "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json")
+        activation = load(root / "records/readiness/m2-radar-pixel-orbit-application-001-approval-activation.json")
+        reconciliation = load(root / "records/source-gates/m2-radar-pixel-orbit-application-001-review-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW", {})
+    implementation = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION", {})
+    execution = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION", {})
+    return bool(
+        approval.get("status") == "approved_dependency_ordered_exact_six_source_qa_route"
+        and approval.get("human_decisions_fabricated") is False
+        and activation.get("status") == "pass_exact_approval_activated_implementation_publication_only"
+        and reconciliation.get("decision_counts") == {"approve": 1, "revise": 0, "defer": 0}
+        and review.get("status") == "complete"
+        and review.get("disposition") == "pass"
+        and implementation.get("status") == "in_progress"
+        and implementation.get("gates", {}).get("public_ci") == "pending"
+        and implementation.get("gates", {}).get("project_data_content_read") is False
+        and execution.get("status") == "planned"
+        and execution.get("gates", {}).get("source_attempts_started") == 0
+    )
+
+
+def current_radar_pixel_orbit_application_001_execution_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize publicly validated implementation awaiting its final preflight or real run."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        gate = load(root / "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-gate.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    implementation = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION", {})
+    execution = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION", {})
+    return bool(
+        gate.get("status") == "pass_public_default_branch_ci_implementation_ready"
+        and gate.get("public_ci_conclusion") == "success"
+        and implementation.get("status") == "complete"
+        and implementation.get("disposition") == "pass"
+        and execution.get("status") == "in_progress"
+        and execution.get("gates", {}).get("source_attempts_started") == 0
+        and not (root / "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json").exists()
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -1522,7 +1589,15 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_pixel_orbit_application_001_review_required(
+            if current_radar_pixel_orbit_application_001_execution_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_001_EXECUTION_CHECKPOINT)
+            elif current_radar_pixel_orbit_application_001_implementation_active(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_001_IMPLEMENTATION_CHECKPOINT)
+            elif current_radar_pixel_orbit_application_001_review_required(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_001_REVIEW_CHECKPOINT)

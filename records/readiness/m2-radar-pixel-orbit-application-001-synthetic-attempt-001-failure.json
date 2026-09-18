@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-SYNTHETIC-ATTEMPT-001-FAILURE",
+  "status": "failed_synthetic_fixture_area_accounting_before_receipt",
+  "stage": "synthetic_arcgis_runtime_test",
+  "failure_type": "RuntimeError",
+  "failure_message": "synthetic registration or route QA did not pass",
+  "cause": "The synthetic fixture counted the same cells as outside pair coverage and as excluded within coverage, so the frozen area-consistency rule correctly returned INVALID.",
+  "correction": "Keep all synthetic cells covered while retaining explicit layover and shadow exclusions; this changes synthetic fixture accounting only.",
+  "assertions": {
+    "receipt_written": false,
+    "external_custody_accessed": false,
+    "project_data_content_read": false,
+    "network_request_performed": false,
+    "orbit_application_executed": false,
+    "radar_pixel_processing_executed": false,
+    "scientific_result_established": false
+  },
+  "retry_kind": "new_append_only_synthetic_test_path_after_fixture_correction",
+  "production_attempt_consumed": false
+}

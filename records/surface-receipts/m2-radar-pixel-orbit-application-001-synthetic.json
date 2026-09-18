@@ -1,0 +1,156 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-SYNTHETIC-ARCGIS",
+  "verified_at_utc": "2026-09-18T20:42:19Z",
+  "status": "pass_synthetic_arcgis_runtime_only",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "ArcInfo",
+    "image_analyst": "Available",
+    "spatial_analyst": "Available"
+  },
+  "bindings": {
+    "implementation_contract_ref": "config/qa/m2-radar-pixel-orbit-application-001-contract.json",
+    "implementation_contract_sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+    "pixel_contract_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "core_ref": "scripts/m2_radar_pixel_orbit_application_001_core.py",
+    "core_sha256": "fd192878acf33e2c73eeeba1ec42865eac48dfc5742b3ae4cf54b51de42755ba",
+    "adapter_ref": "scripts/validate_m2_radar_pixel_orbit_application_001_arcgis.py",
+    "adapter_sha256": "4700d5359404d69de7439d4f8fb835c703c4e195523334c1127ec271d8a64cd0"
+  },
+  "checks": {
+    "tool_signatures": {
+      "usage": {
+        "ApplyOrbitCorrection_ia": "ApplyOrbitCorrection_ia(in_radar_data, {in_orbit_file}, {folder})",
+        "RemoveThermalNoise_ia": "RemoveThermalNoise_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...})",
+        "ApplyRadiometricCalibration_ia": "ApplyRadiometricCalibration_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...}, {Beta nought | Sigma nought | Gamma nought})",
+        "ApplyRadiometricTerrainFlattening_ia": "ApplyRadiometricTerrainFlattening_ia(in_radar_data, out_radar_data, in_dem_raster, {GEOID | NONE}, {polarization_bands;polarization_bands...}, {Gamma nought | Sigma nought}, {out_scattering_area}, {out_geometric_distortion}, {out_geometric_distortion_mask})",
+        "ApplyGeometricTerrainCorrection_ia": "ApplyGeometricTerrainCorrection_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...}, {in_dem_raster}, {GEOID | NONE})",
+        "ConvertSARUnits_ia": "ConvertSARUnits_ia(in_radar_data, out_radar_data, {Linear to dB | dB to linear | Amplitude to intensity | Intensity to amplitude | Complex to intensity | Unwrapped phase to displacement})"
+      },
+      "all_match": true
+    },
+    "mask_class_counts": {
+      "1": 30625,
+      "2": 900,
+      "3": 875
+    },
+    "registration": {
+      "status": "pass_qa_only",
+      "stable_control_pair_count": 900,
+      "rmse_pixels": 0.004961940138886048,
+      "bias_x_pixels": 0.0002499063631955584,
+      "bias_y_pixels": 4.8040256387180045e-06,
+      "finding": "Registration metrics meet the predeclared QA thresholds.",
+      "scientific_admission_authorized": false,
+      "candidate_count": 900,
+      "accepted_control_count": 900,
+      "rejected_counts": {
+        "outside_overview": 0,
+        "event_exclusion": 0,
+        "insufficient_valid": 0,
+        "low_texture": 0,
+        "low_correlation": 0
+      },
+      "method": "deterministic VV normalized local cross-correlation outside buffered event AOIs"
+    },
+    "route_evaluation": {
+      "route_id": "PAIR-S1-ASC-R085-IW",
+      "status": "pass_qa_only",
+      "aoi_coverage": [
+        {
+          "aoi_id": "AOI-SYNTHETIC",
+          "aoi_area_m2": 3240000.0,
+          "covered_area_m2": 3240000.0,
+          "valid_area_m2": 3062500.0,
+          "coverage_fraction": 1.0,
+          "usable_fraction_of_aoi": 0.945216,
+          "valid_fraction_within_coverage": 0.945216,
+          "excluded_area_by_reason_m2": {
+            "layover": 90000.0,
+            "radar_shadow": 87500.0
+          },
+          "coverage_status": "pass_qa_only",
+          "usability_status": "pass_qa_only",
+          "status": "pass_qa_only",
+          "limitations": [
+            "Coverage and mask QA passed; change, interpretation, and attribution remain untested."
+          ],
+          "errors": [],
+          "scientific_admission_authorized": false
+        }
+      ],
+      "grid_compatibility": {
+        "status": "pass_qa_only",
+        "errors": [],
+        "scientific_admission_authorized": false
+      },
+      "registration": {
+        "status": "pass_qa_only",
+        "stable_control_pair_count": 900,
+        "rmse_pixels": 0.004961940138886048,
+        "bias_x_pixels": 0.0002499063631955584,
+        "bias_y_pixels": 4.8040256387180045e-06,
+        "finding": "Registration metrics meet the predeclared QA thresholds.",
+        "scientific_admission_authorized": false,
+        "candidate_count": 900,
+        "accepted_control_count": 900,
+        "rejected_counts": {
+          "outside_overview": 0,
+          "event_exclusion": 0,
+          "insufficient_valid": 0,
+          "low_texture": 0,
+          "low_correlation": 0
+        },
+        "method": "deterministic VV normalized local cross-correlation outside buffered event AOIs"
+      },
+      "same_date_seams": [
+        {
+          "status": "pass_qa_only",
+          "overlap_valid_pixel_count": 30625,
+          "median_absolute_difference": 0.0,
+          "p95_absolute_difference": 0.0,
+          "threshold_applied": false
+        }
+      ],
+      "unknown_mask_class_present": false,
+      "baseline_admission_authorized": false,
+      "change_analysis_authorized": false,
+      "scientific_admission_authorized": false
+    },
+    "dem_mosaic": {
+      "source_tile_count": 4,
+      "wkid": 4326,
+      "band_count": 1,
+      "sha256": "ed4904513249823872586d496052c1bcb0652476b75be3669d04c856a7c31b18"
+    }
+  },
+  "assertions": {
+    "synthetic_only": true,
+    "exact_sar_tool_signatures_present": true,
+    "common_epsg32645_grid_exercised": true,
+    "categorical_mask_translation_exercised": true,
+    "stable_registration_exercised": true,
+    "same_date_seam_measurement_exercised": true,
+    "four_tile_dem_mosaic_exercised": true,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "network_request_performed": false,
+    "orbit_application_executed": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_admission_authorized": false
+  },
+  "synthetic_outputs": {
+    "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\m2-radar-pixel-orbit-application-001-synthetic-20260918T204219Z",
+    "before_sha256": "392447981c33963609ed53ba123fbfaf27b0585476e3a1c8708ba8680c123834",
+    "after_sha256": "392447981c33963609ed53ba123fbfaf27b0585476e3a1c8708ba8680c123834",
+    "mask_sha256": "73bc85e48292b3f34ce879ba0531461573e931d7c0f684d072528a93d8c8be8b"
+  },
+  "limitations": [
+    "Synthetic rasters test ArcGIS raster I/O, DEM mosaicking, grid, masks, registration, seams, and route decisions only.",
+    "The SAR tools were signature-checked but were not executed because arbitrary synthetic rasters are not valid Sentinel-1 SAFE data.",
+    "No project Sentinel, orbit, DEM, credential, network resource, baseline, change product, or scientific claim was accessed or created."
+  ]
+}
