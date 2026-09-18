@@ -534,16 +534,16 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW-PUBLICATION",
+    "checkpoint_id": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish and publicly validate the exact zero-decision metadata recovery-001 review packet at bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd. Do not implement the correction, read or promote the preserved grid bytes, inspect DEM pixels, convert a DEM, or perform downstream processing before one attested owner decision on the exact public packet."
+    "next_action": "Review M2 DEM PROJ25 metadata recovery-001 bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd; approve, revise, or defer the exact post-observation metadata-key correction and one offline verification of the preserved bytes. No implementation, network request, preserved-byte read or promotion, DEM conversion, or downstream processing is authorized before an attested decision."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW-PUBLICATION",
+      "checkpoint_id": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW",
       "authority_ref": "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-contract.json",
-      "next_action": "Publish and publicly validate the exact zero-decision metadata recovery-001 review packet at bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd. Do not implement the correction, read or promote the preserved grid bytes, inspect DEM pixels, convert a DEM, or perform downstream processing before one attested owner decision on the exact public packet."
+      "next_action": "Review M2 DEM PROJ25 metadata recovery-001 bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd; approve, revise, or defer the exact post-observation metadata-key correction and one offline verification of the preserved bytes. No implementation, network request, preserved-byte read or promotion, DEM conversion, or downstream processing is authorized before an attested decision."
     }
   ]
 }

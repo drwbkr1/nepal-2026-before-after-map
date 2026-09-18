@@ -19,6 +19,7 @@ from derive_m2_acquisition_checkpoint import (  # noqa: E402
     current_dem_egm2008_component_install_pending,
     current_dem_egm2008_proj25_acquisition_pending,
     current_dem_proj25_metadata_recovery_001_review_publication_pending,
+    current_dem_proj25_metadata_recovery_001_review_required,
     current_dem_vertical_datum_alternate_method_001_implementation_pending,
     current_dem_vertical_datum_alternate_method_001_review_pending,
     current_full_header_implementation_pending,
@@ -132,8 +133,13 @@ class M2CheckpointReconciliationTests(unittest.TestCase):
             )
         )
         self.assertFalse(current_dem_egm2008_proj25_acquisition_pending(ROOT, {"promoted": 8}))
-        self.assertTrue(
+        self.assertFalse(
             current_dem_proj25_metadata_recovery_001_review_publication_pending(
+                ROOT, {"promoted": 8}
+            )
+        )
+        self.assertTrue(
+            current_dem_proj25_metadata_recovery_001_review_required(
                 ROOT, {"promoted": 8}
             )
         )

@@ -1237,7 +1237,7 @@
       ],
       "action_class": "normative_decision",
       "human_gate": true,
-      "status": "in_progress",
+      "status": "ready",
       "inputs": [
         "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json",
         "records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json",
@@ -1247,6 +1247,8 @@
         "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-readiness.json"
       ],
       "outputs": [
+        "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-publication-gate.json",
+        "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-publication-reconciliation.json",
         "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-reconciliation.json",
         "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json"
       ],
@@ -1256,11 +1258,15 @@
         "review_contract_sha256": "f6aef3d7dcb9035cfd5224a07cc6888027c7003b28f013254fabb61a8ddaeb4a",
         "blank_response_sha256": "e9ebb1a150bf34caa68ef73cb7db67a71f869b951480374f3d78725d2de49c6f",
         "readiness_sha256": "b488092a6874642b692a49128584afc9bc36fff58492b3279c3f9e0cc62e3a76",
-        "public_ci": "pending",
+        "public_ci": "success",
         "human_decision_count": 0,
         "attestation": false,
         "correction_authorized": false,
-        "network_requests_authorized": 0
+        "network_requests_authorized": 0,
+        "publication_commit": "a5b736c496d4004ec2923079958b4e756452ed60",
+        "public_ci_run_id": 35302230590,
+        "publication_gate_sha256": "507cf8618f76cc1bbf4c13726b1112ead34b919a1ae48f3e8e7e3d51e06c4123",
+        "publication_reconciliation_sha256": "bac1c6be7f54f9416306e3d63e49cf8414ac9c8b185929cb7559266f52a80e86"
       },
       "disposition": null,
       "retained_failures": [
@@ -1269,14 +1275,13 @@
       ],
       "exit_condition_delta": {
         "expected": [
-          "exact blank review packet passes public default-branch CI",
           "one exact attested owner decision"
         ],
         "observed": [
-          "zero-decision packet prepared and locally verified"
+          "exact blank review packet passed public default-branch CI"
         ],
         "decision_value": "unknown",
-        "rationale": "Packet preparation creates no correction, preserved-byte read, promotion, conversion, or downstream authority."
+        "rationale": "Public validation releases owner review only; the packet still contains zero decisions and creates no correction or recovery authority."
       },
       "next_dependency": "M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION"
     },
@@ -3280,8 +3285,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW-PUBLICATION",
-    "next_action": "Publish and publicly validate the exact zero-decision metadata recovery-001 review packet at bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd. Do not implement the correction, read or promote the preserved grid bytes, inspect DEM pixels, convert a DEM, or perform downstream processing before one attested owner decision on the exact public packet.",
+    "current_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW",
+    "next_action": "Review M2 DEM PROJ25 metadata recovery-001 bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd; approve, revise, or defer the exact post-observation metadata-key correction and one offline verification of the preserved bytes. No implementation, network request, preserved-byte read or promotion, DEM conversion, or downstream processing is authorized before an attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3321,7 +3326,7 @@
       "The official PROJ-data 2.5-minute route is a zero-decision proposal. No recommended-grid payload, conversion, orbit application, radar pixel, baseline, change, attribution, or scientific action is authorized before exact owner approval.",
       "The one authorized PROJ-grid request is terminal after exact bytes passed identity and structural checks but failed the first implementation's generic metadata-key requirement. The exact staged bytes remain unpromoted outside Git; no retry, preserved-byte recovery read, DEM pixel access, conversion, or downstream action is authorized before a separate exact owner decision."
     ],
-    "parallel_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW-PUBLICATION",
-    "parallel_next_action": "Publish and publicly validate the exact zero-decision metadata recovery-001 review packet at bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd. Do not implement the correction, read or promote the preserved grid bytes, inspect DEM pixels, convert a DEM, or perform downstream processing before one attested owner decision on the exact public packet."
+    "parallel_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW",
+    "parallel_next_action": "Review M2 DEM PROJ25 metadata recovery-001 bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd; approve, revise, or defer the exact post-observation metadata-key correction and one offline verification of the preserved bytes. No implementation, network request, preserved-byte read or promotion, DEM conversion, or downstream processing is authorized before an attested decision."
   }
 }

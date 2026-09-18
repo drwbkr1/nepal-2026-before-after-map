@@ -112,7 +112,7 @@ class DemVerticalDatumAlternateMethod001ReviewTests(unittest.TestCase):
         install = units["M2-DEM-EGM2008-COMPONENT-INSTALL"]
         review = units[CHECKPOINT]
         implementation_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
-        current_checkpoint = "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW-PUBLICATION"
+        current_checkpoint = "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW"
         implementation = units[implementation_checkpoint]
         acquisition = units["M2-DEM-EGM2008-PROJ25-ACQUISITION"]
         conversion = units["M2-DEM-VERTICAL-DATUM-CONVERSION"]

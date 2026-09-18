@@ -107,7 +107,7 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         self.assertTrue(self.readiness["assertions"]["preserved_bytes_read_for_exact_reconciliation"])
         self.assertFalse(self.readiness["assertions"]["recovery_verification_performed"])
         self.assertFalse(self.readiness["assertions"]["grid_sample_values_read"])
-        expected = "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW-PUBLICATION"
+        expected = "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], expected)
         self.assertEqual(self.goal["current_checkpoint"], expected)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], expected)
@@ -121,7 +121,7 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         conversion = units["M2-DEM-VERTICAL-DATUM-CONVERSION"]
         self.assertEqual(acquisition["status"], "complete")
         self.assertEqual(acquisition["disposition"], "block_terminal_metadata_representation_mismatch")
-        self.assertEqual(review["status"], "in_progress")
+        self.assertEqual(review["status"], "ready")
         self.assertEqual(review["gates"]["human_decision_count"], 0)
         self.assertFalse(review["gates"]["correction_authorized"])
         self.assertEqual(implementation["status"], "planned")
@@ -129,12 +129,12 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(conversion["depends_on"], [implementation["id"]])
 
     def test_checkpoint_derivation_routes_to_review_publication(self) -> None:
-        self.assertTrue(
+        self.assertFalse(
             current_dem_proj25_metadata_recovery_001_review_publication_pending(
                 ROOT, {"promoted": 8}
             )
         )
-        self.assertFalse(
+        self.assertTrue(
             current_dem_proj25_metadata_recovery_001_review_required(ROOT, {"promoted": 8})
         )
 

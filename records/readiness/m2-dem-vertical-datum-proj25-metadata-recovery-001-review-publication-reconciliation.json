@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW-PUBLICATION-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-18T03:11:37Z",
+  "status": "pass_public_gate_owner_review_ready",
+  "publication_gate_ref": "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-publication-gate.json",
+  "publication_gate_sha256": "507cf8618f76cc1bbf4c13726b1112ead34b919a1ae48f3e8e7e3d51e06c4123",
+  "commit_sha": "a5b736c496d4004ec2923079958b4e756452ed60",
+  "public_ci_run_id": 35302230590,
+  "review_bundle_sha256": "10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d",
+  "proposal_sha256": "729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd",
+  "current_checkpoint": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW",
+  "released_now": {
+    "owner_review": true,
+    "implementation": false,
+    "preserved_byte_recovery_read": false,
+    "grid_promotion": false,
+    "dem_conversion": false,
+    "downstream_processing": false
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "correction_authorized": false,
+    "network_requests_after_terminal_attempt": 0,
+    "grid_promoted": false,
+    "dem_pixels_read": false,
+    "dem_conversion_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Review bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd; approve, revise, or defer the exact post-observation metadata-key correction and one offline verification of the preserved bytes."
+}
