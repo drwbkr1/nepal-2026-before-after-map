@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-READINESS",
+  "verified_at_utc": "2026-09-18T19:50:00Z",
+  "status": "pass_ready_publication_zero_decisions",
+  "bindings": {
+    "proposal_sha256": "3a0f03c5269f4e3e6822c1e31bbe5f19cd288e9e17db67b42990d96b27a4f490",
+    "candidate_manifest_sha256": "dc4ff8a70c3eb115ee78069afbfd759cc1532fce58de6970584d6b7e5fa34af7",
+    "readiness_audit_sha256": "f3b9ab47d459fe602f2d88d1f771c13256167abfd1e44b23eef1497da75440da",
+    "review_preflight_sha256": "f5ecea2334c6264d8f1276e39ecffd3c004b816b484318c62d2798e80c4f60b6",
+    "review_surface_sha256": "d6170e9b3824f19fd75dadd2d4093b80eaf52d1d61a110d8408cda6e30e12047",
+    "surface_receipt_sha256": "ca939b5cd19dae9fb99e8863a318084740bd8870c0a5f2258aaf3aa7a9019caa",
+    "review_bundle_sha256": "84af38b7e325e862272b97c9f198dc7a3c3aa2371f4c428e36aaaac6e937f633",
+    "review_contract_sha256": "cf846f8749052c172576c1e03fb46885a0795076beb16d604fcefe6c51b935a7",
+    "blank_response_sha256": "8aece403ed15370a1c637cdb574385f1370d6310660c7e24cc1fdb393af0ae0d"
+  },
+  "validation": {
+    "human_decision_count": 0,
+    "attestation": false,
+    "ready_for_publication": true
+  },
+  "assertions": {
+    "orbit_application_authorized": false,
+    "radar_pixel_processing_authorized": false,
+    "baseline_or_change_authorized": false,
+    "project_data_content_read_during_preparation": false,
+    "network_requests_performed": false,
+    "external_custody_mutated": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Publish and publicly validate the exact zero-decision review packet before owner review."
+}

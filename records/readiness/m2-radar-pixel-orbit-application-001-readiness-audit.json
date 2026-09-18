@@ -1,0 +1,131 @@
+{
+  "audit_contract_version": "dataset-readiness-audit-v2-compatible",
+  "audit_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-READINESS-AUDIT",
+  "candidate_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-CANDIDATE",
+  "candidate_manifest_sha256": "dc4ff8a70c3eb115ee78069afbfd759cc1532fce58de6970584d6b7e5fa34af7",
+  "audited_at_utc": "2026-09-18T19:50:00Z",
+  "decision": "defer",
+  "decision_basis": "Required real-pixel coverage, terrain-mask, registration, and exact pipeline reproducibility evidence does not exist yet; the review proposes the bounded route that would generate it.",
+  "required_gate_ids": [
+    "source-and-terms",
+    "provenance-and-custody",
+    "schema-and-quality",
+    "coverage-and-balance",
+    "uncertainty-and-exclusions",
+    "leakage-and-route-independence",
+    "reproducibility",
+    "evaluation-design",
+    "human-review"
+  ],
+  "gates": [
+    {
+      "gate_id": "source-and-terms",
+      "status": "pass",
+      "evidence_refs": [
+        "records/source-gates/source-manifest-approval.json",
+        "records/source-gates/m2-orbit-amendment-approval.json",
+        "records/source-gates/m2-dem-amendment-approval.json"
+      ],
+      "finding": "The six Sentinel, four restituted orbit, and four DEM source families retain exact reviewed identities and rights boundaries."
+    },
+    {
+      "gate_id": "provenance-and-custody",
+      "status": "pass",
+      "evidence_refs": [
+        "records/readiness/m2-radar-source-readiness-001.json",
+        "records/readiness/m2-orbit-offline-verification-recovery-001-terminal-reconciliation.json",
+        "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json"
+      ],
+      "finding": "Exact Sentinel containers and headers, orbit inputs, and ellipsoidal DEM derivatives have immutable verified identities."
+    },
+    {
+      "gate_id": "schema-and-quality",
+      "status": "defer",
+      "evidence_refs": [
+        "records/readiness/radar-input/m2-s1-input-readiness-real-003.json"
+      ],
+      "finding": "All six headers pass, but measurement values and processing behavior on real pixels are untested."
+    },
+    {
+      "gate_id": "coverage-and-balance",
+      "status": "defer",
+      "evidence_refs": [
+        "config/qa/candidate-pair-plan.json",
+        "config/aoi/approved-study-areas.geojson"
+      ],
+      "finding": "Catalog footprints intersect the planned areas, while usable masked coverage after terrain correction is unmeasured."
+    },
+    {
+      "gate_id": "uncertainty-and-exclusions",
+      "status": "defer",
+      "evidence_refs": [
+        "config/qa/pixel-readiness-contract.json",
+        "config/qa/radar-baseline-processing-contract.json"
+      ],
+      "finding": "Exclusion classes are frozen, but their real AOI areas and effects are unknown."
+    },
+    {
+      "gate_id": "leakage-and-route-independence",
+      "status": "pass",
+      "evidence_refs": [
+        "config/qa/candidate-pair-plan.json",
+        "config/qa/radar-baseline-processing-contract.json"
+      ],
+      "finding": "Ascending and descending routes, dates, slices, and same-date mosaics are predeclared and must remain independently evaluated."
+    },
+    {
+      "gate_id": "reproducibility",
+      "status": "defer",
+      "evidence_refs": [
+        "records/surface-receipts/m2-radar-pixel-orbit-application-001-capability.json"
+      ],
+      "finding": "The installed runtime exposes every required tool signature, but the exact-source pipeline has not been implemented or synthetically replayed."
+    },
+    {
+      "gate_id": "evaluation-design",
+      "status": "pass",
+      "evidence_refs": [
+        "config/qa/pixel-readiness-contract.json",
+        "config/qa/radar-baseline-processing-contract.json"
+      ],
+      "finding": "Coverage, mask, grid, registration, stable-control, seam, and route-disposition rules were frozen before real radar pixels."
+    },
+    {
+      "gate_id": "human-review",
+      "status": "defer",
+      "evidence_refs": [],
+      "finding": "This exact staged processing route has zero owner decisions and creates no execution authority."
+    }
+  ],
+  "count_checks": [
+    {
+      "check_id": "exact-sentinel-source-count",
+      "observed": 6,
+      "operator": "==",
+      "threshold": 6,
+      "on_failure": "block",
+      "status": "pass"
+    },
+    {
+      "check_id": "exact-orbit-input-count",
+      "observed": 4,
+      "operator": "==",
+      "threshold": 4,
+      "on_failure": "block",
+      "status": "pass"
+    },
+    {
+      "check_id": "exact-dem-derivative-count",
+      "observed": 4,
+      "operator": "==",
+      "threshold": 4,
+      "on_failure": "block",
+      "status": "pass"
+    }
+  ],
+  "authority_boundary": {
+    "this_audit_creates_authority": false,
+    "authorized_actions": []
+  },
+  "claim_boundary": "The audit identifies evidence gaps only. Counts and input custody cannot establish usable radar pixels, registration, a baseline, event change, interpretation, or attribution."
+}

@@ -6,7 +6,7 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW`; the approved Esri component path is closed as unavailable, the replacement PROJ-data packet contains zero decisions, and `M2-ORBIT-APPLY` has not started
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION`; the exact zero-decision packet is ready for public validation, while orbit application and radar pixel processing have not started
 
 ## Purpose
 
@@ -244,3 +244,12 @@ Final no-content preflight SHA-256 `75282ff2681c2778eed3258945c46f64850158dd32c3
 All four exact DEM conversions passed once in fixed order. Their output SHA-256 values are `6e1d85f9b3f2f189b3db4b5bc5b87cf26b7f58a0a08081a9001f951a194c76ec`, `85e060693b913d6715bd1b03fdf3f0fb743e59ec5334cbff37722d65f5dd4fce`, `f4ccae4518c7557421e8f4beff8357b1cf99434ffe338492f354ac99de1216f9`, and `8f001ecd6507262a9871dab06e391805315868b33383f14b76851627d7601f81`. Source hashes remained unchanged, output dimensions and geotransforms match, all AOI values are finite, ArcGIS Pro 3.7.1 reads every derivative, and recorded seam-correction maxima are at most 0.00048828125 m. Terminal reconciliation SHA-256 is `2103359e15c4cd963a89d7cdf2169c598c86a0e02e93766e6aab6df3237b30d6`.
 
 The current checkpoint is `M2-ORBIT-APPLY`, stopped before execution. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved. No orbit or radar action, baseline, change analysis, attribution, publication, or scientific claim was performed.
+
+
+## Radar pixel readiness and orbit application review prepared — 2026-09-18
+
+The exact candidate binds six approved Sentinel-1 GRDs, four verified S1D `AUX_RESORB` files, four verified WGS 84 ellipsoidal DEM derivatives, the two predeclared independent radar routes, the three approved AOIs, and the frozen radar-processing and pixel-readiness contracts. Candidate-manifest SHA-256 is `dc4ff8a70c3eb115ee78069afbfd759cc1532fce58de6970584d6b7e5fa34af7`. A read-only ArcGIS Pro 3.7.1 capability inspection confirmed the required SAR tool signatures without opening project Sentinel, orbit, or DEM content.
+
+The readiness audit remains `DEFER`: exact rights, provenance, route independence, and evaluation design pass, while real measurement behavior, masked AOI coverage, exclusions, registration, and exact-pipeline reproducibility remain unmeasured. Proposal SHA-256 `3a0f03c5269f4e3e6822c1e31bbe5f19cd288e9e17db67b42990d96b27a4f490` and review bundle SHA-256 `84af38b7e325e862272b97c9f198dc7a3c3aa2371f4c428e36aaaac6e937f633` contain zero human decisions. The packet proposes dependency-ordered implementation, synthetic and ArcGIS tests, public CI, one final no-content preflight, one fixed-order versioned orbit-application and QA-processing attempt per exact source, and two independent route QA dispositions.
+
+The current checkpoint is `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION`. No route implementation, project-data content read, orbit application, radar processing, baseline, change analysis, attribution, derived-pixel publication, or scientific claim is authorized.

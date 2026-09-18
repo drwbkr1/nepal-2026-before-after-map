@@ -19,6 +19,8 @@ from derive_m2_acquisition_checkpoint import (
     current_dem_proj25_receipt_persistence_recovery_002_implementation_active,
     current_dem_proj25_receipt_persistence_recovery_002_complete,
     current_dem_proj25_metadata_recovery_001_implementation_active,
+    current_radar_pixel_orbit_application_001_review_publication_pending,
+    current_radar_pixel_orbit_application_001_review_required,
     current_full_header_implementation_pending,
     current_materialization_pixel_implementation_pending,
     current_optical_pixel_implementation_pending,
@@ -137,6 +139,21 @@ REQUIRED = [
     "reviews/m2-radar-first-path-001/blank-response.json",
     "records/readiness/m2-radar-first-path-001-review-readiness.json",
     "records/readiness/m2-radar-first-path-001-review-publication-gate.json",
+    "records/surface-receipts/m2-radar-pixel-orbit-application-001-capability.json",
+    "records/readiness/m2-radar-pixel-orbit-application-001-candidate-manifest.json",
+    "records/readiness/m2-radar-pixel-orbit-application-001-readiness-audit.json",
+    "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json",
+    "records/readiness/m2-radar-pixel-orbit-application-001-review-preflight.json",
+    "docs/M2_RADAR_PIXEL_ORBIT_APPLICATION_001_REVIEW.md",
+    "docs/assets/m2-radar-pixel-orbit-application-001-review.png",
+    "records/surface-receipts/m2-radar-pixel-orbit-application-001-review.json",
+    "reviews/m2-radar-pixel-orbit-application-001/review-bundle.json",
+    "reviews/m2-radar-pixel-orbit-application-001/review-contract.json",
+    "reviews/m2-radar-pixel-orbit-application-001/blank-response.json",
+    "records/readiness/m2-radar-pixel-orbit-application-001-review-readiness.json",
+    "scripts/inspect_m2_radar_pixel_orbit_application_capability.py",
+    "scripts/prepare_m2_radar_pixel_orbit_application_001_review.py",
+    "tests/test_m2_radar_pixel_orbit_application_001_review.py",
     "records/source-gates/m2-radar-first-path-001-review-reconciliation.json",
     "records/source-gates/m2-radar-first-path-001-approval.json",
     "records/readiness/m2-radar-first-path-001-activation.json",
@@ -1425,7 +1442,15 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if dem_proj25_receipt_recovery_002_complete:
+            if current_radar_pixel_orbit_application_001_review_required(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW"
+                expected_dem_checkpoint_authority_ref = "reviews/m2-radar-pixel-orbit-application-001/review-contract.json"
+                expected_dem_next_action = "Review the exact public M2 radar pixel and orbit application-001 bundle and proposal; approve, revise, or defer the bounded fixed-order QA route. No implementation, orbit application, radar pixel processing, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision."
+            elif current_radar_pixel_orbit_application_001_review_publication_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION"
+                expected_dem_checkpoint_authority_ref = "reviews/m2-radar-pixel-orbit-application-001/review-contract.json"
+                expected_dem_next_action = "Publish and publicly validate the exact zero-decision radar pixel and orbit application review packet. Do not implement the route, read project pixels, apply an orbit, or create processing outputs before successful public CI and one exact attested owner decision."
+            elif dem_proj25_receipt_recovery_002_complete:
                 expected_dem_checkpoint = "M2-ORBIT-APPLY"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-orbit-amendment-approval.json"
                 expected_dem_next_action = "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication."
@@ -1464,7 +1489,15 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if dem_proj25_receipt_recovery_002_complete:
+            if current_radar_pixel_orbit_application_001_review_required(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW"
+                expected_dem_checkpoint_authority_ref = "reviews/m2-radar-pixel-orbit-application-001/review-contract.json"
+                expected_dem_next_action = "Review the exact public M2 radar pixel and orbit application-001 bundle and proposal; approve, revise, or defer the bounded fixed-order QA route. No implementation, orbit application, radar pixel processing, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision."
+            elif current_radar_pixel_orbit_application_001_review_publication_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION"
+                expected_dem_checkpoint_authority_ref = "reviews/m2-radar-pixel-orbit-application-001/review-contract.json"
+                expected_dem_next_action = "Publish and publicly validate the exact zero-decision radar pixel and orbit application review packet. Do not implement the route, read project pixels, apply an orbit, or create processing outputs before successful public CI and one exact attested owner decision."
+            elif dem_proj25_receipt_recovery_002_complete:
                 expected_dem_checkpoint = "M2-ORBIT-APPLY"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-orbit-amendment-approval.json"
                 expected_dem_next_action = "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication."
@@ -2335,8 +2368,10 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must clear the approved DEM PROJ25 receipt-persistence recovery proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
+        "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json"
+    ]:
+        fail("project profile must expose only the pending radar pixel and orbit application proposal")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -2697,8 +2732,10 @@ def main() -> None:
         or "bounded nested-grid correction" not in optical_pixel_recovery_review_gate.get("reason", "")
     ):
         fail("project profile must bind optical pixel recovery to its exact approval")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must clear the approved DEM PROJ25 receipt-persistence recovery proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
+        "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json"
+    ]:
+        fail("project profile must expose only the pending radar pixel and orbit application proposal")
     radar_first_path_gate = profile_gates.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
     if (
         radar_first_path_gate.get("authority_ref") != "reviews/m2-radar-first-path-001/review-contract.json"
@@ -2745,6 +2782,12 @@ def main() -> None:
         or "pre-reserved read-only receipt recovery" not in receipt_recovery_gate.get("reason", "")
     ):
         fail("project profile must bind the completed DEM PROJ25 receipt-persistence recovery review to its approval")
+    radar_pixel_orbit_review_gate = profile_gates.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW", {})
+    if (
+        radar_pixel_orbit_review_gate.get("authority_ref") != "reviews/m2-radar-pixel-orbit-application-001/review-contract.json"
+        or "one exact owner decision" not in radar_pixel_orbit_review_gate.get("reason", "")
+    ):
+        fail("project profile must expose the pending radar pixel and orbit application human-review gate")
     if profile.get("parallel_checkpoints") != [
         {
             "checkpoint_id": expected_dem_checkpoint,
@@ -2773,8 +2816,10 @@ def main() -> None:
         "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
-    if goal.get("proposed_amendments") != []:
-        fail("long-term goal must clear the approved DEM PROJ25 receipt-persistence recovery proposal")
+    if goal.get("proposed_amendments") != [
+        "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json"
+    ]:
+        fail("long-term goal must expose only the pending radar pixel and orbit application proposal")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -7555,7 +7600,11 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        if current_dem_proj25_receipt_persistence_recovery_002_complete(ROOT, state_counts):
+        if current_radar_pixel_orbit_application_001_review_required(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW"
+        elif current_radar_pixel_orbit_application_001_review_publication_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION"
+        elif current_dem_proj25_receipt_persistence_recovery_002_complete(ROOT, state_counts):
             expected_checkpoint = "M2-ORBIT-APPLY"
         elif current_dem_proj25_receipt_persistence_recovery_002_implementation_active(ROOT, state_counts):
             expected_checkpoint = "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"
@@ -12154,6 +12203,66 @@ def main() -> None:
         or orbit_osv_precision_publication_gate_evidence.get("assertions", {}).get("scientific_result_established") is not False
     ):
         fail("EVID-0115 orbit OSV precision publication gate evidence differs or overclaims")
+
+    radar_review_candidate = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-candidate-manifest.json").read_text(encoding="utf-8"))
+    radar_review_audit = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-readiness-audit.json").read_text(encoding="utf-8"))
+    radar_review_proposal = json.loads((ROOT / "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json").read_text(encoding="utf-8"))
+    radar_review_preflight = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-review-preflight.json").read_text(encoding="utf-8"))
+    radar_review_capability = json.loads((ROOT / "records/surface-receipts/m2-radar-pixel-orbit-application-001-capability.json").read_text(encoding="utf-8"))
+    radar_review_surface = json.loads((ROOT / "records/surface-receipts/m2-radar-pixel-orbit-application-001-review.json").read_text(encoding="utf-8"))
+    radar_review_bundle = json.loads((ROOT / "reviews/m2-radar-pixel-orbit-application-001/review-bundle.json").read_text(encoding="utf-8"))
+    radar_review_contract = json.loads((ROOT / "reviews/m2-radar-pixel-orbit-application-001/review-contract.json").read_text(encoding="utf-8"))
+    radar_review_blank = json.loads((ROOT / "reviews/m2-radar-pixel-orbit-application-001/blank-response.json").read_text(encoding="utf-8"))
+    radar_review_readiness = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-001-review-readiness.json").read_text(encoding="utf-8"))
+    radar_review_proposal_sha = "3a0f03c5269f4e3e6822c1e31bbe5f19cd288e9e17db67b42990d96b27a4f490"
+    radar_review_bundle_sha = "84af38b7e325e862272b97c9f198dc7a3c3aa2371f4c428e36aaaac6e937f633"
+    radar_review_candidate_sha = "dc4ff8a70c3eb115ee78069afbfd759cc1532fce58de6970584d6b7e5fa34af7"
+    if sha256("contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json") != radar_review_proposal_sha:
+        fail("radar pixel and orbit application proposal hash differs")
+    if sha256("reviews/m2-radar-pixel-orbit-application-001/review-bundle.json") != radar_review_bundle_sha:
+        fail("radar pixel and orbit application review bundle hash differs")
+    if sha256("records/readiness/m2-radar-pixel-orbit-application-001-candidate-manifest.json") != radar_review_candidate_sha:
+        fail("radar pixel and orbit application candidate manifest hash differs")
+    if radar_review_candidate.get("status") != "exact_inputs_bound_no_orbit_application_or_radar_pixel_processing":
+        fail("radar pixel and orbit application candidate overclaims readiness")
+    if radar_review_audit.get("decision") != "defer" or radar_review_audit.get("authority_boundary", {}).get("this_audit_creates_authority") is not False:
+        fail("radar pixel and orbit application readiness audit must remain DEFER and non-authorizing")
+    if radar_review_proposal.get("status") != "proposed_inactive_owner_review_required":
+        fail("radar pixel and orbit application proposal is not inactive")
+    limits = radar_review_proposal.get("limits", {})
+    if (
+        limits.get("orbit_application_attempts_per_source") != 1
+        or limits.get("qa_processing_attempts_per_source") != 1
+        or limits.get("automatic_retry") is not False
+        or limits.get("network_requests") != 0
+        or limits.get("source_overwrites") != 0
+        or limits.get("output_overwrites") != 0
+    ):
+        fail("radar pixel and orbit application proposal limits differ")
+    if radar_review_capability.get("status") != "pass_installed_runtime_capability_only_no_project_data_read":
+        fail("radar pixel and orbit application capability receipt differs")
+    if any(radar_review_capability.get("checks", {}).get(key) is not False for key in ("project_sentinel_content_read", "project_orbit_content_read", "project_dem_content_read", "processing_executed", "network_request_performed")):
+        fail("radar pixel and orbit application capability receipt records a prohibited action")
+    if radar_review_preflight.get("status") != "pass_review_ready_no_processing_authority":
+        fail("radar pixel and orbit application review preflight differs")
+    if radar_review_surface.get("status") != "pass_blank_review_surface":
+        fail("radar pixel and orbit application review surface differs")
+    if radar_review_bundle.get("human_decision_count") != 0:
+        fail("radar pixel and orbit application bundle contains a human decision")
+    for artifact in radar_review_bundle.get("artifacts", []):
+        if artifact.get("sha256") != sha256(artifact.get("path")):
+            fail("radar pixel and orbit application bundle artifact hash differs")
+        for receipt in artifact.get("render_receipts", []):
+            if receipt.get("sha256") != sha256(receipt.get("path")):
+                fail("radar pixel and orbit application render receipt hash differs")
+    if radar_review_contract.get("review_bundle", {}).get("manifest_sha256") != radar_review_bundle_sha:
+        fail("radar pixel and orbit application review contract binding differs")
+    if radar_review_blank.get("completed") is not False or radar_review_blank.get("reviewer", {}).get("attestation") is not False or radar_review_blank.get("responses", [{}])[0].get("decision") is not None:
+        fail("radar pixel and orbit application response is not blank")
+    if radar_review_readiness.get("status") != "pass_ready_publication_zero_decisions":
+        fail("radar pixel and orbit application review readiness differs")
+    if any(radar_review_readiness.get("assertions", {}).get(key) is not False for key in ("orbit_application_authorized", "radar_pixel_processing_authorized", "baseline_or_change_authorized", "project_data_content_read_during_preparation", "network_requests_performed", "external_custody_mutated", "scientific_result_established")):
+        fail("radar pixel and orbit application readiness releases a prohibited action")
 
     violations = []
     for relative in tracked_files():

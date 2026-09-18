@@ -1,0 +1,197 @@
+{
+  "schema_version": "1.0",
+  "candidate_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-CANDIDATE",
+  "prepared_at_utc": "2026-09-18T19:50:00Z",
+  "status": "exact_inputs_bound_no_orbit_application_or_radar_pixel_processing",
+  "intended_use": "Create versioned QA-only Sentinel-1 processing candidates and evaluate pixel fitness for the approved AOIs before any baseline or change analysis.",
+  "bindings": {
+    "source_manifest_ref": "records/source-manifest.json",
+    "radar_source_readiness_ref": "records/readiness/m2-radar-source-readiness-001.json",
+    "radar_header_receipt_ref": "records/readiness/radar-input/m2-s1-input-readiness-real-003.json",
+    "orbit_verification_ref": "records/readiness/m2-orbit-offline-verification-recovery-001-terminal-reconciliation.json",
+    "dem_conversion_ref": "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json",
+    "aoi_ref": "config/aoi/approved-study-areas.geojson",
+    "pair_plan_ref": "config/qa/candidate-pair-plan.json",
+    "radar_processing_contract_ref": "config/qa/radar-baseline-processing-contract.json",
+    "pixel_readiness_contract_ref": "config/qa/pixel-readiness-contract.json",
+    "arcgis_capability_ref": "records/surface-receipts/m2-radar-pixel-orbit-application-001-capability.json",
+    "source_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+    "radar_source_readiness_sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
+    "radar_header_receipt_sha256": "3513098380204268c0fb9c1eb154db36df71f47a1a11fe05e577a12f915ad3da",
+    "orbit_verification_sha256": "42df98bbe1680483d14aa29dedf55f3761bae4be45991a5a84fbb304b9232182",
+    "dem_conversion_sha256": "2103359e15c4cd963a89d7cdf2169c598c86a0e02e93766e6aab6df3237b30d6",
+    "aoi_sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98",
+    "pair_plan_sha256": "c346af2e575a21e4931991935c0acc21ba70083c4613255456ced77b71bb1560",
+    "radar_processing_contract_sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f",
+    "pixel_readiness_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "arcgis_capability_sha256": "78140554ab6571070de5051ed98cd2eac4a6c8a40bec5aca6983d74b6c0f879b"
+  },
+  "sentinel_sources": [
+    {
+      "source_id": "M1-SRC-001",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122116_20260816T122141_004151_007980_B057.SAFE",
+      "event_role": "before",
+      "acquisition_start_utc": "2026-08-16T12:21:16.058226Z",
+      "acquisition_end_utc": "2026-08-16T12:21:41.056809Z",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "bound_orbit_source_id": "M2-ORB-001"
+    },
+    {
+      "source_id": "M1-SRC-002",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE",
+      "event_role": "before",
+      "acquisition_start_utc": "2026-08-16T12:21:41.058298Z",
+      "acquisition_end_utc": "2026-08-16T12:22:06.056880Z",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "bound_orbit_source_id": "M2-ORB-001"
+    },
+    {
+      "source_id": "M1-SRC-003",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260819T001036_20260819T001101_004187_007ABD_DC16.SAFE",
+      "event_role": "before",
+      "acquisition_start_utc": "2026-08-19T00:10:36.889384Z",
+      "acquisition_end_utc": "2026-08-19T00:11:01.887958Z",
+      "orbit_direction": "DESCENDING",
+      "relative_orbit_number": 121,
+      "bound_orbit_source_id": "M2-ORB-002"
+    },
+    {
+      "source_id": "M1-SRC-004",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122116_20260828T122141_004326_007FA4_C523.SAFE",
+      "event_role": "after",
+      "acquisition_start_utc": "2026-08-28T12:21:16.762016Z",
+      "acquisition_end_utc": "2026-08-28T12:21:41.760540Z",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "bound_orbit_source_id": "M2-ORB-003"
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE",
+      "event_role": "after",
+      "acquisition_start_utc": "2026-08-28T12:21:41.762029Z",
+      "acquisition_end_utc": "2026-08-28T12:22:06.760553Z",
+      "orbit_direction": "ASCENDING",
+      "relative_orbit_number": 85,
+      "bound_orbit_source_id": "M2-ORB-003"
+    },
+    {
+      "source_id": "M1-SRC-006",
+      "exact_product_id": "S1D_IW_GRDH_1SDV_20260831T001037_20260831T001102_004362_0080EC_2C5B.SAFE",
+      "event_role": "after",
+      "acquisition_start_utc": "2026-08-31T00:10:37.647071Z",
+      "acquisition_end_utc": "2026-08-31T00:11:02.644291Z",
+      "orbit_direction": "DESCENDING",
+      "relative_orbit_number": 121,
+      "bound_orbit_source_id": "M2-ORB-004"
+    }
+  ],
+  "orbit_inputs": [
+    {
+      "source_id": "M2-ORB-001",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260816T143208_V20260816T103526_20260816T140956.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002"
+      ],
+      "custody_sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+      "custody_size_bytes": 639533,
+      "verification_receipt_ref": "records/acquisition/orbit-verification/m2-orb-001-offline-verification-recovery-001.json",
+      "verification_receipt_sha256": "eaf9344737bcd81598dbfb78b0e580156224860b113ae47914f1a4b101a910d5"
+    },
+    {
+      "source_id": "M2-ORB-002",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260819T014707_V20260818T215010_20260819T012120.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-003"
+      ],
+      "custody_sha256": "7462fa65549339c09c36338cb690d0b953c665c3c61a397def3cfa7b2d453262",
+      "custody_size_bytes": 631254,
+      "verification_receipt_ref": "records/acquisition/orbit-verification/m2-orb-002-offline-verification-001.json",
+      "verification_receipt_sha256": "13e4b612edebfd6a101c31cc98887a78181b1322cf9213d3e910c21d57453a7e"
+    },
+    {
+      "source_id": "M2-ORB-003",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260828T143236_V20260828T103527_20260828T140957.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-004",
+        "M1-SRC-005"
+      ],
+      "custody_sha256": "c08bf997f1bf02fb25dcf2a4f35643aef4754fbea03c6c2fb0fa9db4a0efe778",
+      "custody_size_bytes": 639533,
+      "verification_receipt_ref": "records/acquisition/orbit-verification/m2-orb-003-offline-verification-001.json",
+      "verification_receipt_sha256": "47b7ad088b8a419eb2ec69b0997e2d5260f698d8865fcac7f05860a43b1bbd18"
+    },
+    {
+      "source_id": "M2-ORB-004",
+      "exact_product_name": "S1D_OPER_AUX_RESORB_OPOD_20260831T014822_V20260830T215011_20260831T012111.EOF",
+      "orbit_type": "AUX_RESORB",
+      "sentinel_source_ids": [
+        "M1-SRC-006"
+      ],
+      "custody_sha256": "281388e94a7a8a708f229fd7d19f93de426bb077699db3aaabdad7125043bd83",
+      "custody_size_bytes": 629395,
+      "verification_receipt_ref": "records/acquisition/orbit-verification/m2-orb-004-offline-verification-001.json",
+      "verification_receipt_sha256": "f6d0ffb08d42499c5ae7fdba46755d10898dff29c5dc74349d35738fc0d41718"
+    }
+  ],
+  "dem_inputs": [
+    {
+      "source_id": "M2-DEM-001",
+      "source_sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a",
+      "ellipsoidal_derivative_sha256": "6e1d85f9b3f2f189b3db4b5bc5b87cf26b7f58a0a08081a9001f951a194c76ec",
+      "ellipsoidal_derivative_size_bytes": 33923558,
+      "status": "pass_converted_verified_promoted"
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "source_sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194",
+      "ellipsoidal_derivative_sha256": "85e060693b913d6715bd1b03fdf3f0fb743e59ec5334cbff37722d65f5dd4fce",
+      "ellipsoidal_derivative_size_bytes": 33194280,
+      "status": "pass_converted_verified_promoted"
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "source_sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc",
+      "ellipsoidal_derivative_sha256": "f4ccae4518c7557421e8f4beff8357b1cf99434ffe338492f354ac99de1216f9",
+      "ellipsoidal_derivative_size_bytes": 30742774,
+      "status": "pass_converted_verified_promoted"
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "source_sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7",
+      "ellipsoidal_derivative_sha256": "8f001ecd6507262a9871dab06e391805315868b33383f14b76851627d7601f81",
+      "ellipsoidal_derivative_size_bytes": 28271841,
+      "status": "pass_converted_verified_promoted"
+    }
+  ],
+  "fixed_source_order": [
+    "M1-SRC-001",
+    "M1-SRC-002",
+    "M1-SRC-003",
+    "M1-SRC-004",
+    "M1-SRC-005",
+    "M1-SRC-006"
+  ],
+  "fixed_route_order": [
+    "PAIR-S1-ASC-R085-IW",
+    "PAIR-S1-DESC-R121-IW"
+  ],
+  "current_observations": {
+    "sentinel_source_count": 6,
+    "orbit_input_count": 4,
+    "ellipsoidal_dem_derivative_count": 4,
+    "measurement_pixels_decoded": false,
+    "orbit_application_started": false,
+    "terrain_processing_started": false,
+    "masked_aoi_coverage_measured": false,
+    "registration_measured": false,
+    "baseline_established": false,
+    "change_established": false
+  }
+}

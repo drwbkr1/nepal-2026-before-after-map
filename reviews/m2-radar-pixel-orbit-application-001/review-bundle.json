@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-radar-pixel-orbit-application-001-review-bundle",
+  "review_id": "m2-radar-pixel-orbit-application-001-review",
+  "authority_ref": "records/source-gates/m2-radar-first-path-001-approval.json",
+  "candidate_identity": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-PROPOSAL-SHA256:3a0f03c5269f4e3e6822c1e31bbe5f19cd288e9e17db67b42990d96b27a4f490",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-radar-pixel-orbit-application-001-review.png",
+      "sha256": "d6170e9b3824f19fd75dadd2d4093b80eaf52d1d61a110d8408cda6e30e12047",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-pixel-orbit-application-001-review.json",
+          "sha256": "ca939b5cd19dae9fb99e8863a318084740bd8870c0a5f2258aaf3aa7a9019caa"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_RADAR_PIXEL_ORBIT_APPLICATION_001_REVIEW.md",
+      "sha256": "ea5aa4e6d0cfc9e8e908ecef9441f20ab9850f28f8d23af92015a6b810adf31b",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "proposal",
+      "path": "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json",
+      "sha256": "3a0f03c5269f4e3e6822c1e31bbe5f19cd288e9e17db67b42990d96b27a4f490",
+      "role": "candidate_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "candidate-manifest",
+      "path": "records/readiness/m2-radar-pixel-orbit-application-001-candidate-manifest.json",
+      "sha256": "dc4ff8a70c3eb115ee78069afbfd759cc1532fce58de6970584d6b7e5fa34af7",
+      "role": "exact_input_and_method_identity",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "readiness-audit",
+      "path": "records/readiness/m2-radar-pixel-orbit-application-001-readiness-audit.json",
+      "sha256": "f3b9ab47d459fe602f2d88d1f771c13256167abfd1e44b23eef1497da75440da",
+      "role": "current_pass_and_defer_gate_assessment",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "review-preflight",
+      "path": "records/readiness/m2-radar-pixel-orbit-application-001-review-preflight.json",
+      "sha256": "f5ecea2334c6264d8f1276e39ecffd3c004b816b484318c62d2798e80c4f60b6",
+      "role": "zero_authority_preflight",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "arcgis-capability",
+      "path": "records/surface-receipts/m2-radar-pixel-orbit-application-001-capability.json",
+      "sha256": "78140554ab6571070de5051ed98cd2eac4a6c8a40bec5aca6983d74b6c0f879b",
+      "role": "installed_runtime_signature_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "radar-source-readiness",
+      "path": "records/readiness/m2-radar-source-readiness-001.json",
+      "sha256": "a582d33b697e8fd9868c265401d99e0f4748dd262f5f5b68189d8e7ffea0c389",
+      "role": "six_source_custody_materialization_header_readiness",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "orbit-verification",
+      "path": "records/readiness/m2-orbit-offline-verification-recovery-001-terminal-reconciliation.json",
+      "sha256": "42df98bbe1680483d14aa29dedf55f3761bae4be45991a5a84fbb304b9232182",
+      "role": "four_exact_orbit_input_verification",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "dem-conversion",
+      "path": "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json",
+      "sha256": "2103359e15c4cd963a89d7cdf2169c598c86a0e02e93766e6aab6df3237b30d6",
+      "role": "four_exact_ellipsoidal_dem_derivatives",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "pair-plan",
+      "path": "config/qa/candidate-pair-plan.json",
+      "sha256": "c346af2e575a21e4931991935c0acc21ba70083c4613255456ced77b71bb1560",
+      "role": "frozen_route_identity",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "radar-processing-contract",
+      "path": "config/qa/radar-baseline-processing-contract.json",
+      "sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f",
+      "role": "frozen_processing_and_admission_method",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "pixel-readiness-contract",
+      "path": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+      "role": "frozen_qa_rules",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "approved-aoi",
+      "path": "config/aoi/approved-study-areas.geojson",
+      "sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98",
+      "role": "approved_spatial_scope",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "decision_effect_if_approved": [
+    "release only the dependency-ordered implementation, public-CI gate, final no-content preflight, fixed-order exact-source orbit and QA-processing attempts, independent route QA, and terminal reconciliation stated in the proposal"
+  ],
+  "limitations": [
+    "source, product, date, orbit type, orbit identity, DEM, vertical relation, AOI, CRS, resolution, polarization, threshold, mask-class, stable-control, mosaic, or route-order substitution",
+    "any second attempt, automatic retry, reuse of a failed attempt path, overwrite, in-place mutation of materialized SAFE custody, or mutation of orbit or DEM custody",
+    "a network request, credential or token action, account or terms action, software installation, UAC action, or ArcGIS extension purchase",
+    "AUX_POEORB substitution or any statement that restituted orbit files are precise-orbit equivalent",
+    "despeckling of the primary quantitative route, threshold tuning after observation, alternate source search, or hidden exclusion",
+    "baseline admission, change raster or polygon generation, cross-route synthesis, geomorphic interpretation, event attribution, emergency guidance, derived-pixel publication, or scientific publication"
+  ],
+  "human_decision_count": 0
+}

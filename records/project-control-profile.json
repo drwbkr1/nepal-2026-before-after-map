@@ -323,7 +323,9 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [],
+    "proposed_amendments": [
+      "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json"
+    ],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json",
@@ -564,21 +566,26 @@
         "unit_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
         "reason": "The exact owner approval authorizes only the ArcGIS-safe timestamp correction, one pre-reserved read-only receipt recovery, and conditional fixed-order conversions.",
         "authority_ref": "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json"
+      },
+      {
+        "unit_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW",
+        "reason": "Requires one exact owner decision before the bounded fixed-order orbit application and radar pixel-readiness QA route can be implemented or executed.",
+        "authority_ref": "reviews/m2-radar-pixel-orbit-application-001/review-contract.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-ORBIT-APPLY",
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication."
+    "next_action": "Publish and publicly validate the exact zero-decision radar pixel and orbit application review packet. Do not implement the route, read project pixels, apply an orbit, or create processing outputs before successful public CI and one exact attested owner decision."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-ORBIT-APPLY",
-      "authority_ref": "records/source-gates/m2-orbit-amendment-approval.json",
-      "next_action": "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication."
+      "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION",
+      "authority_ref": "reviews/m2-radar-pixel-orbit-application-001/review-contract.json",
+      "next_action": "Publish and publicly validate the exact zero-decision radar pixel and orbit application review packet. Do not implement the route, read project pixels, apply an orbit, or create processing outputs before successful public CI and one exact attested owner decision."
     }
   ]
 }

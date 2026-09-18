@@ -3422,6 +3422,51 @@
         "rationale": "All four exact AUX_RESORB inputs passed without custody mutation; application remains blocked."
       },
       "next_dependency": "M2-ORBIT-APPLY"
+    },
+    {
+      "id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW",
+      "purpose": "Review a bounded exact-source orbit-application and radar pixel-readiness QA route without releasing baseline or change analysis.",
+      "depends_on": [
+        "M2-RADAR-SOURCE-READINESS",
+        "M2-ORBIT-VERIFY",
+        "M2-DEM-VERTICAL-DATUM-CONVERSION"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "in_progress",
+      "inputs": [
+        "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json",
+        "records/readiness/m2-radar-pixel-orbit-application-001-candidate-manifest.json",
+        "records/readiness/m2-radar-pixel-orbit-application-001-readiness-audit.json",
+        "reviews/m2-radar-pixel-orbit-application-001/review-bundle.json",
+        "reviews/m2-radar-pixel-orbit-application-001/review-contract.json",
+        "reviews/m2-radar-pixel-orbit-application-001/blank-response.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-radar-pixel-orbit-application-001-review-reconciliation.json",
+        "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json"
+      ],
+      "gates": {
+        "proposal_sha256": "3a0f03c5269f4e3e6822c1e31bbe5f19cd288e9e17db67b42990d96b27a4f490",
+        "review_bundle_sha256": "84af38b7e325e862272b97c9f198dc7a3c3aa2371f4c428e36aaaac6e937f633",
+        "public_ci": "pending",
+        "human_decision_count": 0,
+        "attestation": false,
+        "orbit_application_authorized": false,
+        "radar_pixel_processing_authorized": false,
+        "baseline_or_change_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [],
+      "exit_condition_delta": {
+        "expected": [
+          "one exact attested owner decision"
+        ],
+        "observed": [],
+        "decision_value": "unknown",
+        "rationale": "The public packet is blank and creates no processing authority."
+      },
+      "next_dependency": "M2-ORBIT-APPLY"
     }
   ],
   "path_efficiency": {
@@ -3478,8 +3523,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-ORBIT-APPLY",
-    "next_action": "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication.",
+    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION",
+    "next_action": "Publish and publicly validate the exact zero-decision radar pixel and orbit application review packet. Do not implement the route, read project pixels, apply an orbit, or create processing outputs before successful public CI and one exact attested owner decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3521,9 +3566,10 @@
       "The metadata-recovery implementation passed fresh public default-branch CI; this releases only the final no-content preflight and no preserved-byte read by itself.",
       "Offline recovery remains one attempt with zero network requests; grid promotion is conditional on exact byte, metadata, and ArcGIS-readability pass, and conversion remains conditional on the unchanged local operation and sign preflight.",
       "Metadata recovery-001 is terminal after exact promotion because both success and failure terminal receipt construction failed; do not retry or reconstruct its terminal result.",
-      "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery."
+      "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery.",
+      "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval."
     ],
-    "parallel_checkpoint": "M2-ORBIT-APPLY",
-    "parallel_next_action": "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication."
+    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION",
+    "parallel_next_action": "Publish and publicly validate the exact zero-decision radar pixel and orbit application review packet. Do not implement the route, read project pixels, apply an orbit, or create processing outputs before successful public CI and one exact attested owner decision."
   }
 }

@@ -1,0 +1,46 @@
+{
+  "contract_version": "human-review-contract-v1",
+  "template": false,
+  "review_id": "m2-radar-pixel-orbit-application-001-review",
+  "response_schema_version": "nepal-m2-radar-pixel-orbit-application-001-response-v1",
+  "workflow_authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-radar-first-path-001-approval.json",
+    "authorized_action_classes": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records",
+      "external_publication"
+    ],
+    "verified_at_utc": "2026-09-18T19:50:00Z",
+    "expires_at_utc": null,
+    "review_required": true,
+    "lock_authorized": true,
+    "reconcile_authorized": true,
+    "post_review_actions": [
+      "evidence_recording",
+      "project_control",
+      "update_project_records"
+    ]
+  },
+  "review_bundle": {
+    "bundle_id": "m2-radar-pixel-orbit-application-001-review-bundle",
+    "manifest_sha256": "84af38b7e325e862272b97c9f198dc7a3c3aa2371f4c428e36aaaac6e937f633",
+    "candidate_identity": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-PROPOSAL-SHA256:3a0f03c5269f4e3e6822c1e31bbe5f19cd288e9e17db67b42990d96b27a4f490",
+    "rendered_surface_verified": true
+  },
+  "allowed_decisions": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "required_attestation": true,
+  "max_notes_length": 4000,
+  "hash_prefix_length": 16,
+  "items": [
+    {
+      "item_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001",
+      "evidence_sha256": "84af38b7e325e862272b97c9f198dc7a3c3aa2371f4c428e36aaaac6e937f633"
+    }
+  ]
+}

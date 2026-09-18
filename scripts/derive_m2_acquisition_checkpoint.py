@@ -178,6 +178,14 @@ M2_ORBIT_APPLY_CHECKPOINT = {
     "checkpoint_id": "M2-ORBIT-APPLY",
     "next_action": "Stop before orbit application. Radar pixel readiness and an executable exact-source orbit-application route remain unresolved; prepare a separately governed review before any orbit application, radar pixel read, baseline, change analysis, attribution, or scientific publication.",
 }
+RADAR_PIXEL_ORBIT_APPLICATION_001_REVIEW_PUBLICATION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW-PUBLICATION",
+    "next_action": "Publish and publicly validate the exact zero-decision radar pixel and orbit application review packet. Do not implement the route, read project pixels, apply an orbit, or create processing outputs before successful public CI and one exact attested owner decision.",
+}
+RADAR_PIXEL_ORBIT_APPLICATION_001_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW",
+    "next_action": "Review the exact public M2 radar pixel and orbit application-001 bundle and proposal; approve, revise, or defer the bounded fixed-order QA route. No implementation, orbit application, radar pixel processing, baseline, change analysis, attribution, or scientific publication is authorized before an attested decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1378,6 +1386,73 @@ def current_dem_proj25_receipt_persistence_recovery_002_complete(
     )
 
 
+def current_radar_pixel_orbit_application_001_review_publication_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the zero-decision radar processing review before public CI."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        proposal = load(root / "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json")
+        audit = load(root / "records/readiness/m2-radar-pixel-orbit-application-001-readiness-audit.json")
+        bundle = load(root / "reviews/m2-radar-pixel-orbit-application-001/review-bundle.json")
+        contract = load(root / "reviews/m2-radar-pixel-orbit-application-001/review-contract.json")
+        blank = load(root / "reviews/m2-radar-pixel-orbit-application-001/blank-response.json")
+        readiness = load(root / "records/readiness/m2-radar-pixel-orbit-application-001-review-readiness.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW", {})
+    return bool(
+        proposal.get("status") == "proposed_inactive_owner_review_required"
+        and audit.get("decision") == "defer"
+        and bundle.get("human_decision_count") == 0
+        and contract.get("review_bundle", {}).get("manifest_sha256")
+        == "84af38b7e325e862272b97c9f198dc7a3c3aa2371f4c428e36aaaac6e937f633"
+        and blank.get("completed") is False
+        and blank.get("reviewer", {}).get("attestation") is False
+        and readiness.get("status") == "pass_ready_publication_zero_decisions"
+        and review.get("status") == "in_progress"
+        and review.get("gates", {}).get("public_ci") == "pending"
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and review.get("gates", {}).get("orbit_application_authorized") is False
+        and review.get("gates", {}).get("radar_pixel_processing_authorized") is False
+        and not (root / "records/readiness/m2-radar-pixel-orbit-application-001-review-publication-gate.json").exists()
+    )
+
+
+def current_radar_pixel_orbit_application_001_review_required(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the publicly validated zero-decision packet awaiting owner review."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        proposal = load(root / "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json")
+        blank = load(root / "reviews/m2-radar-pixel-orbit-application-001/blank-response.json")
+        publication = load(root / "records/readiness/m2-radar-pixel-orbit-application-001-review-publication-gate.json")
+        reconciliation = load(root / "records/readiness/m2-radar-pixel-orbit-application-001-review-publication-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW", {})
+    return bool(
+        proposal.get("status") == "proposed_inactive_owner_review_required"
+        and blank.get("completed") is False
+        and blank.get("reviewer", {}).get("attestation") is False
+        and publication.get("status") == "pass_public_default_branch_ci_zero_decision_review_ready"
+        and publication.get("public_ci_conclusion") == "success"
+        and reconciliation.get("status") == "pass_public_gate_owner_review_ready"
+        and review.get("status") == "in_progress"
+        and review.get("gates", {}).get("public_ci") == "success"
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and review.get("gates", {}).get("orbit_application_authorized") is False
+        and review.get("gates", {}).get("radar_pixel_processing_authorized") is False
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -1447,7 +1522,15 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_dem_proj25_receipt_persistence_recovery_002_complete(
+            if current_radar_pixel_orbit_application_001_review_required(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_001_REVIEW_CHECKPOINT)
+            elif current_radar_pixel_orbit_application_001_review_publication_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_001_REVIEW_PUBLICATION_CHECKPOINT)
+            elif current_dem_proj25_receipt_persistence_recovery_002_complete(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(M2_ORBIT_APPLY_CHECKPOINT)

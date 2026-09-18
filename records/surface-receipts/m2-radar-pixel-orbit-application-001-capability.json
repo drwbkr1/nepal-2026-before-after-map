@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-CAPABILITY",
+  "observed_at_utc": "2026-09-18T19:48:40Z",
+  "status": "pass_installed_runtime_capability_only_no_project_data_read",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "build_number": "1901",
+    "license_level": "ArcInfo",
+    "image_analyst": "Available"
+  },
+  "tool_usage": {
+    "ApplyOrbitCorrection_ia": "ApplyOrbitCorrection_ia(in_radar_data, {in_orbit_file}, {folder})",
+    "RemoveThermalNoise_ia": "RemoveThermalNoise_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...})",
+    "ApplyRadiometricCalibration_ia": "ApplyRadiometricCalibration_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...}, {Beta nought | Sigma nought | Gamma nought})",
+    "ApplyRadiometricTerrainFlattening_ia": "ApplyRadiometricTerrainFlattening_ia(in_radar_data, out_radar_data, in_dem_raster, {GEOID | NONE}, {polarization_bands;polarization_bands...}, {Gamma nought | Sigma nought}, {out_scattering_area}, {out_geometric_distortion}, {out_geometric_distortion_mask})",
+    "ApplyGeometricTerrainCorrection_ia": "ApplyGeometricTerrainCorrection_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...}, {in_dem_raster}, {GEOID | NONE})",
+    "ConvertSARUnits_ia": "ConvertSARUnits_ia(in_radar_data, out_radar_data, {Linear to dB | dB to linear | Amplitude to intensity | Intensity to amplitude | Complex to intensity | Unwrapped phase to displacement})"
+  },
+  "checks": {
+    "all_required_signatures_match": true,
+    "explicit_orbit_file_parameter_available": true,
+    "explicit_dem_parameter_available": true,
+    "project_sentinel_content_read": false,
+    "project_orbit_content_read": false,
+    "project_dem_content_read": false,
+    "processing_executed": false,
+    "network_request_performed": false
+  },
+  "limitations": [
+    "Tool presence and usage signatures do not establish successful execution on the six approved Sentinel-1 products.",
+    "No project raster, orbit, DEM, credential, network resource, or external custody path was opened.",
+    "Output behavior, original-input immutability, and stop-on-failure controls require synthetic validation before any real action."
+  ]
+}
