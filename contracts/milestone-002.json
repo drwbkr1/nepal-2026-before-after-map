@@ -1392,10 +1392,14 @@
         "review_contract_sha256": "7063f7626c1357d8f3fc1bc28112dd459c4d19e66f43352bf1da34f03cfdbf12",
         "blank_response_sha256": "1ef87c7f28d52c93de5a00093ce04730c0e8963518302d6dc9aa8e3bbe119a2a",
         "readiness_sha256": "06612161d0fbfe8db64e40c9247655b57d855b1f8305d7ab6aee0423d51f8571",
-        "public_ci": "pending",
+        "public_ci": "success",
         "human_decision_count": 0,
         "attestation": false,
-        "receipt_recovery_authorized": false
+        "receipt_recovery_authorized": false,
+        "publication_commit": "8c4aec40589baf7f0ff1a917e4f87a9618c1569d",
+        "public_ci_run_id": 35381627104,
+        "publication_gate_sha256": "c92ec8c77e256c718d7742219e1bedcd168ac6be804730f753a5130ad236a77d",
+        "publication_reconciliation_sha256": "b555288dc23c8c0beba0fbabd802b43a0b2a8b92eb16f3781dfb80ef4bd11f74"
       },
       "disposition": null,
       "retained_failures": [
@@ -1405,10 +1409,11 @@
       "exit_condition_delta": {
         "expected": [],
         "observed": [
-          "zero-decision packet prepared locally"
+          "exact blank review packet passed public default-branch CI",
+          "zero human decisions remain"
         ],
         "decision_value": "unknown",
-        "rationale": "Public CI and one exact attested owner decision are required."
+        "rationale": "Public validation passed without creating a human decision or receipt-recovery authority."
       },
       "next_dependency": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-IMPLEMENTATION"
     },
@@ -3413,8 +3418,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-PUBLICATION",
-    "next_action": "Publish and publicly validate the exact zero-decision receipt-persistence recovery-002 review packet. Do not implement the correction, inspect the promoted grid again, run the operation/sign preflight, read DEM pixels, or convert a DEM before one exact attested owner decision on the public packet.",
+    "current_checkpoint": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
+    "next_action": "Review bundle SHA-256 cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5 and proposal SHA-256 15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657; approve, revise, or defer the exact receipt-persistence correction, one read-only promoted-grid inspection, and conditional continuation. No implementation or downstream action is authorized before an exact attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3458,7 +3463,7 @@
       "Metadata recovery-001 is terminal after exact promotion because both success and failure terminal receipt construction failed; do not retry or reconstruct its terminal result.",
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery."
     ],
-    "parallel_checkpoint": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-PUBLICATION",
-    "parallel_next_action": "Publish and publicly validate the exact zero-decision receipt-persistence recovery-002 review packet. Do not implement the correction, inspect the promoted grid again, run the operation/sign preflight, read DEM pixels, or convert a DEM before one exact attested owner decision on the public packet."
+    "parallel_checkpoint": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
+    "parallel_next_action": "Review bundle SHA-256 cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5 and proposal SHA-256 15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657; approve, revise, or defer the exact receipt-persistence correction, one read-only promoted-grid inspection, and conditional continuation. No implementation or downstream action is authorized before an exact attested decision."
   }
 }

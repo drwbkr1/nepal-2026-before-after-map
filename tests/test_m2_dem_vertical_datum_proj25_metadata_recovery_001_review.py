@@ -13,6 +13,7 @@ from derive_m2_acquisition_checkpoint import (  # noqa: E402
     current_dem_proj25_metadata_recovery_001_review_publication_pending,
     current_dem_proj25_metadata_recovery_001_review_required,
     current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending,
+    current_dem_proj25_receipt_persistence_recovery_002_review_required,
 )
 
 
@@ -121,7 +122,7 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(self.approval["limits"]["recovery_verification_attempts"], 1)
         self.assertEqual(self.activation["status"], "pass_exact_approval_activated_implementation_publication_only")
         self.assertFalse(self.activation["released_now"]["preserved_byte_read"])
-        expected = "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-PUBLICATION"
+        expected = "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], expected)
         self.assertEqual(self.goal["current_checkpoint"], expected)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], expected)
@@ -164,7 +165,8 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         )
         self.assertFalse(current_dem_proj25_metadata_recovery_001_review_required(ROOT, {"promoted": 8}))
         self.assertFalse(current_dem_proj25_metadata_recovery_001_implementation_active(ROOT, {"promoted": 8}))
-        self.assertTrue(current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending(ROOT, {"promoted": 8}))
+        self.assertFalse(current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending(ROOT, {"promoted": 8}))
+        self.assertTrue(current_dem_proj25_receipt_persistence_recovery_002_review_required(ROOT, {"promoted": 8}))
 
 
 if __name__ == "__main__":

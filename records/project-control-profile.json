@@ -554,16 +554,16 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-PUBLICATION",
+    "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish and publicly validate the exact zero-decision receipt-persistence recovery-002 review packet. Do not implement the correction, inspect the promoted grid again, run the operation/sign preflight, read DEM pixels, or convert a DEM before one exact attested owner decision on the public packet."
+    "next_action": "Review bundle SHA-256 cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5 and proposal SHA-256 15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657; approve, revise, or defer the exact receipt-persistence correction, one read-only promoted-grid inspection, and conditional continuation. No implementation or downstream action is authorized before an exact attested decision."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-PUBLICATION",
+      "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
       "authority_ref": "reviews/m2-dem-proj25-receipt-persistence-recovery-002/review-contract.json",
-      "next_action": "Publish and publicly validate the exact zero-decision receipt-persistence recovery-002 review packet. Do not implement the correction, inspect the promoted grid again, run the operation/sign preflight, read DEM pixels, or convert a DEM before one exact attested owner decision on the public packet."
+      "next_action": "Review bundle SHA-256 cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5 and proposal SHA-256 15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657; approve, revise, or defer the exact receipt-persistence correction, one read-only promoted-grid inspection, and conditional continuation. No implementation or downstream action is authorized before an exact attested decision."
     }
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-PUBLICATION-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-18T18:43:00Z",
+  "status": "pass_public_gate_owner_review_ready",
+  "publication_gate_ref": "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-review-publication-gate.json",
+  "publication_gate_sha256": "c92ec8c77e256c718d7742219e1bedcd168ac6be804730f753a5130ad236a77d",
+  "commit_sha": "8c4aec40589baf7f0ff1a917e4f87a9618c1569d",
+  "public_ci_run_id": 35381627104,
+  "review_bundle_sha256": "cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5",
+  "proposal_sha256": "15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657",
+  "current_checkpoint": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
+  "released_now": {
+    "owner_review": true,
+    "implementation": false,
+    "promoted_grid_inspection": false,
+    "operation_sign_preflight": false,
+    "dem_conversion": false,
+    "downstream_processing": false
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "receipt_recovery_authorized": false,
+    "network_requests_after_terminal_attempt": 0,
+    "recovery_001_retry_performed": false,
+    "new_promotion_performed": false,
+    "dem_pixels_read": false,
+    "dem_conversion_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Review bundle SHA-256 cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5 and proposal SHA-256 15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657; approve, revise, or defer the exact receipt-persistence correction, one read-only promoted-grid inspection, and conditional continuation."
+}

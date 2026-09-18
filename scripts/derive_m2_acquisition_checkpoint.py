@@ -166,6 +166,10 @@ DEM_PROJ25_RECEIPT_PERSISTENCE_RECOVERY_002_REVIEW_PUBLICATION_CHECKPOINT = {
     "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW-PUBLICATION",
     "next_action": "Publish and publicly validate the exact zero-decision receipt-persistence recovery-002 review packet. Do not implement the correction, inspect the promoted grid again, run the operation/sign preflight, read DEM pixels, or convert a DEM before one exact attested owner decision on the public packet.",
 }
+DEM_PROJ25_RECEIPT_PERSISTENCE_RECOVERY_002_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW",
+    "next_action": "Review bundle SHA-256 cb4b87ff5c2fcc577bab0f8377524fb7463701a4a3d798fc594b5db4e570f1b5 and proposal SHA-256 15180773dd351c9f738e4227ee3faa3ce571f683935f0a229c466bee692b5657; approve, revise, or defer the exact receipt-persistence correction, one read-only promoted-grid inspection, and conditional continuation. No implementation or downstream action is authorized before an exact attested decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1272,6 +1276,41 @@ def current_dem_proj25_receipt_persistence_recovery_002_review_publication_pendi
         and review.get("status") == "in_progress"
         and review.get("gates", {}).get("public_ci") == "pending"
         and review.get("gates", {}).get("human_decision_count") == 0
+        and not (root / "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-review-publication-gate.json").exists()
+    )
+
+
+def current_dem_proj25_receipt_persistence_recovery_002_review_required(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the publicly validated zero-decision packet awaiting owner review."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        proposal = load(root / "contracts/m2-dem-vertical-datum-proj25-receipt-persistence-recovery-002-proposal.json")
+        failure = load(root / "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-runtime-failure.json")
+        outcome = load(root / "records/acquisition/m2-dem-vertical-datum-proj25-metadata-recovery-001-outcome-reconciliation.json")
+        blank = load(root / "reviews/m2-dem-proj25-receipt-persistence-recovery-002/blank-response.json")
+        publication = load(root / "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-review-publication-gate.json")
+        reconciliation = load(root / "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-review-publication-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-DEM-PROJ25-RECEIPT-PERSISTENCE-RECOVERY-002-REVIEW", {})
+    return bool(
+        proposal.get("status") == "proposed_inactive_owner_review_required"
+        and failure.get("status") == "terminal_failure_after_conditional_promotion_no_terminal_receipt"
+        and outcome.get("status") == "block_terminal_receipt_persistence_failure_after_exact_promotion"
+        and blank.get("completed") is False
+        and blank.get("reviewer", {}).get("attestation") is False
+        and publication.get("status") == "pass_public_default_branch_ci_zero_decision_review_ready"
+        and publication.get("public_ci_conclusion") == "success"
+        and reconciliation.get("status") == "pass_public_gate_owner_review_ready"
+        and review.get("status") == "in_progress"
+        and review.get("gates", {}).get("public_ci") == "success"
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and review.get("gates", {}).get("receipt_recovery_authorized") is False
     )
 
 
@@ -1344,7 +1383,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending(
+            if current_dem_proj25_receipt_persistence_recovery_002_review_required(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(DEM_PROJ25_RECEIPT_PERSISTENCE_RECOVERY_002_REVIEW_CHECKPOINT)
+            elif current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(DEM_PROJ25_RECEIPT_PERSISTENCE_RECOVERY_002_REVIEW_PUBLICATION_CHECKPOINT)
