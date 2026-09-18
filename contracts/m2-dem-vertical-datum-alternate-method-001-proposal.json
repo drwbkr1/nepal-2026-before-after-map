@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001",
+  "prepared_at_utc": "2026-09-18T01:36:04Z",
+  "status": "proposed_not_authorized",
+  "bindings": {
+    "prior_method_proposal_ref": "contracts/m2-dem-vertical-datum-proposal.json",
+    "prior_method_proposal_sha256": "bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+    "prior_method_approval_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
+    "prior_method_approval_sha256": "38c872c8dbeeeab08212dd3f71b2dce131b39819c6f7309d1f2b1df2884ee4a6",
+    "component_access_closure_ref": "records/readiness/m2-dem-egm2008-component-access-closure-001.json",
+    "component_access_closure_sha256": "4fc0d59d9da19ed5d97bfd85fa17bf485db9ad84df5dd125339eb7e78d3e7ffd",
+    "alternate_source_review_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-source-review.json",
+    "alternate_source_review_sha256": "8416bc6e980af3514018134166abefa16b7b698d9c1476a22ae109ce8716218c",
+    "dem_verification_summary_ref": "records/acquisition/dem-verification-summary.json",
+    "dem_verification_summary_sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef"
+  },
+  "decision_requested": {
+    "item_id": "M2-DEM-VERTICAL-DATUM-PROJ-EGM2008-2_5-PRECONVERSION",
+    "recommended_route": "local_proj_egm2008_2_5_preconversion_then_none",
+    "decision_domain": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "reason": "The approved Esri one-minute implementation path is unavailable, while the official open PROJ-data route preserves EGM2008 height semantics using the existing local runtime."
+  },
+  "material_change_from_prior_approval": {
+    "unchanged": [
+      "source DEM remains EPSG:3855 EGM2008 orthometric height",
+      "required height relation remains h = H + N",
+      "outputs remain new WGS84 ellipsoidal copies outside Git",
+      "NONE remains permitted only for verified ellipsoidal derivatives",
+      "source DEM overwrite remains prohibited"
+    ],
+    "changed": [
+      "grid source changes from unavailable Esri Coordinate Systems Data to the official PROJ CDN",
+      "grid spacing changes from 1 arc minute to 2.5 arc minutes",
+      "conversion implementation changes from ArcGIS Project Raster to the existing ArcGIS-bundled GDAL/PROJ runtime",
+      "no owner installation, account, license acceptance, or UAC step is required"
+    ]
+  },
+  "exact_source_if_approved": {
+    "source_id": "M2-GEOID-001",
+    "name": "us_nga_egm08_25.tif",
+    "url": "https://cdn.proj.org/us_nga_egm08_25.tif",
+    "distributor": "OSGeo PROJ CDN",
+    "upstream_authority": "US National Geospatial-Intelligence Agency (NGA)",
+    "resolution_arc_minutes": 2.5,
+    "area_of_use": "World",
+    "source_crs": "EPSG:4979",
+    "target_crs": "EPSG:3855",
+    "content_length_bytes": 80585622,
+    "sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+    "license": "Public Domain",
+    "http_head_status": 200,
+    "http_head_last_modified": "Tue, 28 Jan 2020 14:45:44 GMT",
+    "payload_bytes_read_during_review": 0
+  },
+  "bounded_execution_if_approved": {
+    "implementation": [
+      "create a versioned no-network acquisition and conversion implementation bound to the exact grid URL, byte length, and SHA-256",
+      "add synthetic direction, sign, exact-grid, output-collision, interruption, source-immutability, and ArcGIS-readability tests",
+      "require the repository checker, full local tests, and fresh public default-branch CI before any real grid request"
+    ],
+    "real_actions_after_public_gate": [
+      "run one final no-payload preflight against the exact public metadata and absent destination",
+      "make at most one byte-zero request for exact M2-GEOID-001 with no resume or automatic retry",
+      "verify exact byte length, SHA-256, GeoTIFF structure, world coverage, CRS metadata, and local-only readability before no-replace promotion",
+      "run one local no-network operation-selection and sign preflight using EPSG:9518 to EPSG:4979 and require h = H + N",
+      "only if every earlier gate passes, convert one new append-only output per exact M2-DEM-001 through M2-DEM-004 in that fixed order, stopping on the first failure",
+      "record exact source and output hashes, unchanged dimensions and geotransforms, NoData semantics, finite AOI coverage, correction statistics, seams, and ArcGIS Pro readability"
+    ],
+    "maximum_grid_requests": 1,
+    "maximum_conversion_attempts_per_dem": 1,
+    "automatic_retry": false,
+    "stop_on_first_failure": true,
+    "proj_network_enabled": false,
+    "source_mutation": "prohibited",
+    "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal-proj25"
+  },
+  "acceptance_thresholds": {
+    "grid_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+    "grid_length_bytes": 80585622,
+    "required_source_crs": "EPSG:9518",
+    "required_target_crs": "EPSG:4979",
+    "height_relation": "h = H + N",
+    "maximum_direction_check_residual_m": 0.001,
+    "maximum_published_bilinear_model_error_m": 0.135,
+    "same_horizontal_dimensions_and_geotransform_required": true,
+    "all_approved_aoi_pixels_finite_required": true,
+    "arcgis_pro_readability_required": true
+  },
+  "actions_not_authorized": [
+    "reuse, resume, complete, or retry the quarantined GeographicLib partial",
+    "download the GeographicLib one-minute archive or any source other than exact M2-GEOID-001",
+    "install or modify ArcGIS, GDAL, PROJ, GeographicLib, or system software",
+    "enable PROJ networking or permit an implicit remote grid fetch",
+    "accept provider terms, use an account or credential, or approve UAC",
+    "alter, overwrite, or relabel a promoted Copernicus DEM tile",
+    "use raw EGM2008 orthometric tiles with NONE",
+    "call the 2.5-minute route identical to the unavailable Esri one-minute route",
+    "apply orbit data, decode radar measurement pixels, run a baseline or change analysis, attribute cause, publish emergency guidance, or make a scientific claim"
+  ],
+  "claim_boundary": {
+    "human_decision_count": 0,
+    "alternate_method_approved": false,
+    "recommended_grid_acquired": false,
+    "dem_preconversion_executed": false,
+    "vertical_datum_resolved_for_radar": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  }
+}

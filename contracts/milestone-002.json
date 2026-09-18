@@ -1027,62 +1027,120 @@
       ],
       "action_class": "irreversible_external_action",
       "human_gate": true,
-      "status": "planned",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-dem-vertical-datum-approval.json",
         "contracts/m2-dem-vertical-datum-proposal.json",
         "records/surface-receipts/m2-dem-vertical-datum-capability.json"
       ],
       "outputs": [
-        "owner-completed installation",
-        "records/surface-receipts/m2-dem-vertical-datum-capability-postinstall-001.json"
+        "records/readiness/m2-dem-egm2008-component-access-closure-001.json"
       ],
       "gates": {
         "required_product": "ArcGIS Coordinate Systems Data for ArcGIS Pro",
         "required_version_compatibility": "ArcGIS Pro 3.7.x",
         "required_feature": "world1x1_vert",
         "required_grid": "Dataset_egm2008-1.grd",
-        "current_status": "pending_owner_installation",
+        "current_status": "closed_unavailable_owner_report_and_machine_reinspection",
         "codex_sign_in_authorized": false,
         "codex_terms_acceptance_authorized": false,
         "codex_download_or_install_authorized": false,
-        "codex_uac_action_authorized": false
+        "codex_uac_action_authorized": false,
+        "access_closure_ref": "records/readiness/m2-dem-egm2008-component-access-closure-001.json",
+        "access_closure_sha256": "4fc0d59d9da19ed5d97bfd85fa17bf485db9ad84df5dd125339eb7e78d3e7ffd",
+        "owner_reported_provider_cannot_supply": true
       },
-      "disposition": null,
-      "retained_failures": [],
+      "disposition": "block",
+      "retained_failures": [
+        "records/readiness/m2-dem-egm2008-component-access-closure-001.json"
+      ],
       "exit_condition_delta": {
         "expected": [],
+        "observed": [
+          "owner_reports_purdue_cannot_supply_component",
+          "fresh_reinspection_confirms_exact_grid_absent"
+        ],
+        "decision_value": "block",
+        "rationale": "The approved Esri implementation path remains scientifically valid but is unavailable on this machine through the owner institution; replacing its source or grid spacing requires a new owner decision."
+      },
+      "next_dependency": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+    },
+    {
+      "id": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW",
+      "purpose": "Review an exact bounded amendment that replaces only the unavailable Esri implementation dependency with an official open PROJ-data EGM2008 2.5-minute route.",
+      "depends_on": [
+        "M2-DEM-EGM2008-COMPONENT-INSTALL"
+      ],
+      "action_class": "normative_decision",
+      "human_gate": true,
+      "status": "planned",
+      "inputs": [
+        "records/readiness/m2-dem-egm2008-component-access-closure-001.json",
+        "records/source-gates/m2-dem-vertical-datum-alternate-method-001-source-review.json",
+        "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json",
+        "reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json",
+        "reviews/m2-dem-vertical-datum-alternate-method-001/review-contract.json",
+        "reviews/m2-dem-vertical-datum-alternate-method-001/blank-response.json",
+        "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-readiness.json"
+      ],
+      "outputs": [
+        "locked completed response",
+        "records/source-gates/m2-dem-vertical-datum-alternate-method-001-review-reconciliation.json",
+        "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json"
+      ],
+      "gates": {
+        "proposal_sha256": "dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7",
+        "review_bundle_sha256": "caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702",
+        "review_contract_sha256": "306eb3fa56ba0feb58818947b5f2dcac7cc8c9ac9ebcade47adb3bc08132e8e1",
+        "blank_response_sha256": "14ef1d28b646b90b0979f1b6e49887b3015cdbe7da1e2f5414f2817c4af2b304",
+        "human_decision_count": 0,
+        "attestation": false,
+        "alternate_method_authorized": false,
+        "grid_acquisition_authorized": false,
+        "dem_conversion_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/readiness/m2-dem-egm2008-component-access-closure-001.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [
+          "one_exact_owner_decision"
+        ],
         "observed": [],
         "decision_value": "defer",
-        "rationale": "The selected method cannot be implemented until the owner separately completes the exact component installation and a fresh read-only inspection verifies it."
+        "rationale": "The official PROJ-data source is exact and review-ready, but its 2.5-minute spacing and GDAL/PROJ implementation differ materially from the approved Esri one-minute route."
       },
       "next_dependency": "M2-DEM-VERTICAL-DATUM-CONVERSION"
     },
     {
       "id": "M2-DEM-VERTICAL-DATUM-CONVERSION",
-      "purpose": "After the exact component passes reinspection, create and verify no-overwrite WGS 84 ellipsoidal copies of the four approved DEM tiles.",
+      "purpose": "After a current exact vertical method is approved and its grid and direction pass verification, create and verify no-overwrite WGS 84 ellipsoidal copies of the four approved DEM tiles.",
       "depends_on": [
-        "M2-DEM-EGM2008-COMPONENT-INSTALL"
+        "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
       ],
       "action_class": "data_processing",
       "human_gate": false,
       "status": "planned",
       "inputs": [
-        "records/source-gates/m2-dem-vertical-datum-approval.json",
+        "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
         "records/acquisition/dem-verification-summary.json",
-        "records/surface-receipts/m2-dem-vertical-datum-capability-postinstall-001.json"
+        "records/acquisition/m2-egm2008-proj25-verification.json"
       ],
       "outputs": [
         "external append-only EGM2008-to-WGS84 ellipsoidal DEM derivatives",
         "per-tile conversion and validation receipts"
       ],
       "gates": {
-        "selected_method": "arcgis_egm2008_1x1_preconversion_then_none",
+        "selected_method": "pending_alternate_owner_decision",
         "source_vertical_crs": "EPSG:3855",
-        "required_transformation_wkid": 110018,
+        "required_transformation_wkid": null,
         "output_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\dem\\egm2008-ellipsoidal",
         "source_overwrite_permitted": false,
-        "radar_geoid_none_permitted_only_after_verified_conversion": true
+        "radar_geoid_none_permitted_only_after_verified_conversion": true,
+        "prior_selected_method": "arcgis_egm2008_1x1_preconversion_then_none",
+        "alternate_proposed_method": "local_proj_egm2008_2_5_preconversion_then_none",
+        "required_grid_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a"
       },
       "disposition": null,
       "retained_failures": [],
@@ -1092,7 +1150,7 @@
         ],
         "observed": [],
         "decision_value": "defer",
-        "rationale": "The method is selected, but the component, exact grid, transformation direction, derived rasters, and conversion validation do not yet exist."
+        "rationale": "The Esri implementation path is unavailable and the exact PROJ-data replacement remains a zero-decision proposal; no grid or converted raster exists."
       },
       "next_dependency": "M2-ORBIT-APPLY"
     },
@@ -3015,8 +3073,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-DEM-EGM2008-COMPONENT-INSTALL",
-    "next_action": "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim.",
+    "current_checkpoint": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW",
+    "next_action": "Review exact alternate-method bundle SHA-256 caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702 and proposal SHA-256 dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7; do not acquire the recommended PROJ grid, reuse the quarantined GeographicLib partial, convert a DEM, apply orbit data, read radar pixels, run a baseline or change analysis, or publish a scientific claim before one exact attested owner decision is locked and reconciled.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3050,9 +3108,12 @@
       "Orbit continuation-001 is consumed after one handoff and three successful fixed-order requests. All four AUX_RESORB files are promoted input-only; this does not authorize another request, orbit application, DEM or radar-pixel action, baseline, change analysis, attribution, or scientific publication.",
       "Offline verification attempt 001 read and evaluated M2-ORB-001 but lost the in-memory result when its append-only receipt parent was absent; treat it as terminal indeterminate, do not reconstruct a result, and do not run M2-ORB-002 through M2-ORB-004.",
       "The exact attempt-003 terrain-result owner review is complete and its human-review readiness gate passes; the overall terrain audit remains DEFER on vertical and independent elevation uncertainty, pair-specific radar-input fitness, and independent accuracy evaluation. No installation, DEM conversion, orbit application, radar-pixel processing, baseline, change, attribution, derived-pixel publication, or scientific claim was released.",
-      "The owner selected the exact EGM2008 one-minute preconversion method. The matching ArcGIS Coordinate Systems Data component remains absent; approval does not authorize Codex to sign in, accept terms, download, install, approve UAC, convert a DEM, apply an orbit, read radar pixels, or publish a scientific claim before the owner installation and fresh capability reinspection."
+      "The owner selected the exact EGM2008 one-minute preconversion method. The matching ArcGIS Coordinate Systems Data component remains absent; approval does not authorize Codex to sign in, accept terms, download, install, approve UAC, convert a DEM, apply an orbit, read radar pixels, or publish a scientific claim before the owner installation and fresh capability reinspection.",
+      "Purdue cannot supply the approved Esri Coordinate Systems Data component and a fresh read-only inspection still finds no EGM2008 grid; the historical approval remains preserved but its implementation path is closed.",
+      "The GeographicLib one-minute metadata probe followed a download redirect and produced an 11,321,072-byte quarantined terminal partial. It is unusable, unselected, and cannot be resumed, reused, or retried under current authority.",
+      "The official PROJ-data 2.5-minute route is a zero-decision proposal. No recommended-grid payload, conversion, orbit application, radar pixel, baseline, change, attribution, or scientific action is authorized before exact owner approval."
     ],
-    "parallel_checkpoint": "M2-DEM-EGM2008-COMPONENT-INSTALL",
-    "parallel_next_action": "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim."
+    "parallel_checkpoint": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW",
+    "parallel_next_action": "Review exact alternate-method bundle SHA-256 caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702 and proposal SHA-256 dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7; do not acquire the recommended PROJ grid, reuse the quarantined GeographicLib partial, convert a DEM, apply orbit data, read radar pixels, run a baseline or change analysis, or publish a scientific claim before one exact attested owner decision is locked and reconciled."
   }
 }

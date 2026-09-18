@@ -279,7 +279,9 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [],
+    "proposed_amendments": [
+      "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json"
+    ],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json",
@@ -502,21 +504,26 @@
         "unit_id": "M2-DEM-EGM2008-COMPONENT-INSTALL",
         "reason": "My Esri sign-in, license acceptance, component download and installation, and UAC remain owner-controlled and were not delegated by the method approval.",
         "authority_ref": "contracts/m2-dem-vertical-datum-proposal.json"
+      },
+      {
+        "unit_id": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW",
+        "reason": "The Esri component is unavailable; selecting the official PROJ-data 2.5-minute grid and GDAL/PROJ implementation changes the exact approved source, resolution, and execution method.",
+        "authority_ref": "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json"
       }
     ],
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-DEM-EGM2008-COMPONENT-INSTALL",
+    "checkpoint_id": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim."
+    "next_action": "Review exact alternate-method bundle SHA-256 caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702 and proposal SHA-256 dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7; do not acquire the recommended PROJ grid, reuse the quarantined GeographicLib partial, convert a DEM, apply orbit data, read radar pixels, run a baseline or change analysis, or publish a scientific claim before one exact attested owner decision is locked and reconciled."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-DEM-EGM2008-COMPONENT-INSTALL",
-      "authority_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
-      "next_action": "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim."
+      "checkpoint_id": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW",
+      "authority_ref": "reviews/m2-dem-vertical-datum-alternate-method-001/review-contract.json",
+      "next_action": "Review exact alternate-method bundle SHA-256 caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702 and proposal SHA-256 dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7; do not acquire the recommended PROJ grid, reuse the quarantined GeographicLib partial, convert a DEM, apply orbit data, read radar pixels, run a baseline or change analysis, or publish a scientific claim before one exact attested owner decision is locked and reconciled."
     }
   ]
 }

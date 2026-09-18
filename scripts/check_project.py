@@ -592,12 +592,14 @@ REQUIRED = [
     "docs/M2_DEM_AMENDMENT_REVIEW.md",
     "docs/M2_DEM_OFFLINE_VERIFICATION.md",
     "docs/M2_DEM_VERTICAL_DATUM_REVIEW.md",
+    "docs/M2_DEM_VERTICAL_DATUM_ALTERNATE_METHOD_001_REVIEW.md",
     "docs/M2_DEM_TERRAIN_RESULT_REVIEW.md",
     "docs/M2_ORBIT_AMENDMENT_REVIEW.md",
     "docs/DEM_TERRAIN_QUALITY_PROTOCOL.md",
     "docs/RADAR_BASELINE_PROCESSING_PROTOCOL.md",
     "docs/assets/m2-dem-amendment-review.png",
     "docs/assets/m2-dem-vertical-datum-review.png",
+    "docs/assets/m2-dem-vertical-datum-alternate-method-001-review.png",
     "docs/assets/m2-dem-terrain-result-review.png",
     "docs/assets/m2-controlled-acquisition-review.png",
     "docs/assets/m2-orbit-amendment-review.png",
@@ -655,6 +657,7 @@ REQUIRED = [
     "records/surface-receipts/m2-dem-radar-control-readiness.json",
     "records/surface-receipts/m2-dem-vertical-datum-capability.json",
     "records/surface-receipts/m2-dem-vertical-datum-review.json",
+    "records/surface-receipts/m2-dem-vertical-datum-alternate-method-001-review.json",
     "records/surface-receipts/m2-dem-terrain-quality-attempt-001-failure.json",
     "records/surface-receipts/m2-dem-terrain-quality-attempt-002-failure.json",
     "records/surface-receipts/m2-dem-terrain-quality.json",
@@ -694,6 +697,12 @@ REQUIRED = [
     "records/readiness/m2-dem-vertical-datum-postapproval-validation.json",
     "records/readiness/m2-dem-vertical-datum-publication-attempt-001-failure.json",
     "records/readiness/m2-dem-vertical-datum-publication-gate.json",
+    "records/readiness/m2-dem-egm2008-component-access-closure-001.json",
+    "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-preflight.json",
+    "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-readiness.json",
+    "records/readiness/m2-dem-vertical-datum-alternate-method-001-local-validation.json",
+    "records/source-gates/m2-dem-vertical-datum-alternate-method-001-source-review.json",
+    "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json",
     "reviews/m2-activation/review-bundle.json",
     "reviews/m2-activation/review-contract.json",
     "reviews/m2-activation/blank-response.json",
@@ -703,6 +712,9 @@ REQUIRED = [
     "reviews/m2-dem-vertical-datum/review-bundle.json",
     "reviews/m2-dem-vertical-datum/review-contract.json",
     "reviews/m2-dem-vertical-datum/blank-response.json",
+    "reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json",
+    "reviews/m2-dem-vertical-datum-alternate-method-001/review-contract.json",
+    "reviews/m2-dem-vertical-datum-alternate-method-001/blank-response.json",
     "reviews/m2-dem-terrain-result/review-bundle.json",
     "reviews/m2-dem-terrain-result/review-contract.json",
     "reviews/m2-dem-terrain-result/blank-response.json",
@@ -792,6 +804,7 @@ REQUIRED = [
     "tests/test_m2_dem_verification_completion.py",
     "tests/test_m2_dem_active_geotiff.py",
     "tests/test_m2_dem_vertical_datum_review.py",
+    "tests/test_m2_dem_vertical_datum_alternate_method_001_review.py",
     "tests/test_m2_orbit_amendment.py",
     "tests/test_m2_orbit_activation.py",
     "tests/test_m2_orbit_preflight.py",
@@ -817,6 +830,7 @@ REQUIRED = [
     "scripts/complete_m2_dem_verification.py",
     "scripts/inspect_m2_dem_vertical_datum_arcgis.py",
     "scripts/render_m2_dem_vertical_datum_review.py",
+    "scripts/prepare_m2_dem_vertical_datum_alternate_method_001_review.py",
     "scripts/render_m2_dem_terrain_result_review.py",
     "scripts/prepare_m2_orbit_amendment.py",
     "scripts/prepare_m2_orbit_controls.py",
@@ -1066,6 +1080,16 @@ def main() -> None:
     dem_vertical_postapproval_validation = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-postapproval-validation.json").read_text(encoding="utf-8"))
     dem_vertical_publication_failure = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-publication-attempt-001-failure.json").read_text(encoding="utf-8"))
     dem_vertical_publication_gate = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-publication-gate.json").read_text(encoding="utf-8"))
+    dem_alt_access = json.loads((ROOT / "records/readiness/m2-dem-egm2008-component-access-closure-001.json").read_text(encoding="utf-8"))
+    dem_alt_sources = json.loads((ROOT / "records/source-gates/m2-dem-vertical-datum-alternate-method-001-source-review.json").read_text(encoding="utf-8"))
+    dem_alt_proposal = json.loads((ROOT / "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json").read_text(encoding="utf-8"))
+    dem_alt_preflight = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-preflight.json").read_text(encoding="utf-8"))
+    dem_alt_bundle = json.loads((ROOT / "reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json").read_text(encoding="utf-8"))
+    dem_alt_contract = json.loads((ROOT / "reviews/m2-dem-vertical-datum-alternate-method-001/review-contract.json").read_text(encoding="utf-8"))
+    dem_alt_blank = json.loads((ROOT / "reviews/m2-dem-vertical-datum-alternate-method-001/blank-response.json").read_text(encoding="utf-8"))
+    dem_alt_readiness = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-readiness.json").read_text(encoding="utf-8"))
+    dem_alt_surface = json.loads((ROOT / "records/surface-receipts/m2-dem-vertical-datum-alternate-method-001-review.json").read_text(encoding="utf-8"))
+    dem_alt_local_validation = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-alternate-method-001-local-validation.json").read_text(encoding="utf-8"))
     dem_terrain_contract = json.loads((ROOT / "config/qa/dem-terrain-quality-contract.json").read_text(encoding="utf-8"))
     dem_terrain_readiness = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-readiness.json").read_text(encoding="utf-8"))
     dem_terrain_ci_correction = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-ci-correction.json").read_text(encoding="utf-8"))
@@ -1169,6 +1193,12 @@ def main() -> None:
         and dem_vertical_approval.get("status") == "approved_exact_egm2008_preconversion_method_owner_install_pending"
         and dem_vertical_control.get("status") == "pass_method_selected_owner_component_install_pending"
     )
+    dem_alt_review_ready = bool(
+        dem_alt_access.get("status") == "closed_owner_report_and_fresh_machine_reinspection"
+        and dem_alt_proposal.get("status") == "proposed_not_authorized"
+        and dem_alt_blank.get("completed") is False
+        and dem_alt_readiness.get("status") == "pass_ready_owner_review_zero_decisions"
+    )
     expected_dem_checkpoint_authority_ref = "records/source-gates/m2-dem-amendment-approval.json"
     if dem_state_counts["failed"]:
         expected_dem_transfer_checkpoint = "M2-DEM-ACQUISITION-REVIEW"
@@ -1179,20 +1209,22 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            expected_dem_checkpoint = (
-                "M2-DEM-EGM2008-COMPONENT-INSTALL"
-                if dem_vertical_method_approved
-                else "M2-DEM-VERTICAL-DATUM-REVIEW"
-            )
-            if dem_vertical_method_approved:
+            if dem_alt_review_ready:
+                expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+                expected_dem_checkpoint_authority_ref = "reviews/m2-dem-vertical-datum-alternate-method-001/review-contract.json"
+            elif dem_vertical_method_approved:
+                expected_dem_checkpoint = "M2-DEM-EGM2008-COMPONENT-INSTALL"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-dem-vertical-datum-approval.json"
+            else:
+                expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            expected_dem_next_action = (
-                "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim."
-                if dem_vertical_method_approved
-                else "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
-            )
+            if dem_alt_review_ready:
+                expected_dem_next_action = "Review exact alternate-method bundle SHA-256 caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702 and proposal SHA-256 dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7; do not acquire the recommended PROJ grid, reuse the quarantined GeographicLib partial, convert a DEM, apply orbit data, read radar pixels, run a baseline or change analysis, or publish a scientific claim before one exact attested owner decision is locked and reconciled."
+            elif dem_vertical_method_approved:
+                expected_dem_next_action = "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim."
+            else:
+                expected_dem_next_action = "Review and explicitly resolve the EGM2008-to-ArcGIS-EGM96 vertical-datum route before any Sentinel-1 terrain correction; do not silently select GEOID or NONE."
         else:
             expected_dem_checkpoint = expected_dem_transfer_checkpoint
             expected_dem_intake_status = "active_all_promoted_pending_geotiff_verification"
@@ -2030,8 +2062,10 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must have no pending proposed amendments after recovery approval")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
+        "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json",
+    ]:
+        fail("project profile must expose only the pending DEM vertical-datum alternate-method amendment")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -2339,8 +2373,10 @@ def main() -> None:
         or "bounded nested-grid correction" not in optical_pixel_recovery_review_gate.get("reason", "")
     ):
         fail("project profile must bind optical pixel recovery to its exact approval")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must have no pending proposed amendments after recovery approval")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
+        "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json",
+    ]:
+        fail("project profile must expose only the pending DEM vertical-datum alternate-method amendment")
     radar_first_path_gate = profile_gates.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
     if (
         radar_first_path_gate.get("authority_ref") != "reviews/m2-radar-first-path-001/review-contract.json"
@@ -2373,6 +2409,8 @@ def main() -> None:
         fail("project profile must bind the completed DEM vertical-datum review to its exact approval")
     if profile_gates.get("M2-DEM-EGM2008-COMPONENT-INSTALL", {}).get("authority_ref") != "contracts/m2-dem-vertical-datum-proposal.json":
         fail("project profile must retain the EGM2008 component installation as an owner-controlled gate")
+    if profile_gates.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW", {}).get("authority_ref") != "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json":
+        fail("project profile must expose the exact DEM vertical-datum alternate-method owner-review gate")
     if profile.get("parallel_checkpoints") != [
         {
             "checkpoint_id": expected_dem_checkpoint,
@@ -2398,8 +2436,10 @@ def main() -> None:
         "records/source-gates/m2-dem-vertical-datum-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
-    if goal.get("proposed_amendments") != []:
-        fail("long-term goal must have no pending proposed amendments after recovery approval")
+    if goal.get("proposed_amendments") != [
+        "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json",
+    ]:
+        fail("long-term goal must expose only the pending DEM vertical-datum alternate-method amendment")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -2464,6 +2504,10 @@ def main() -> None:
     validate_review_bundle("reviews/m2-activation/review-bundle.json", "reviews/m2-activation/review-contract.json")
     validate_review_bundle("reviews/m2-dem-amendment/review-bundle.json", "reviews/m2-dem-amendment/review-contract.json")
     validate_review_bundle("reviews/m2-dem-vertical-datum/review-bundle.json", "reviews/m2-dem-vertical-datum/review-contract.json")
+    validate_review_bundle(
+        "reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json",
+        "reviews/m2-dem-vertical-datum-alternate-method-001/review-contract.json",
+    )
     validate_review_bundle(
         "reviews/m2-orbit-amendment/review-bundle.json",
         "reviews/m2-orbit-amendment/review-contract.json",
@@ -3551,8 +3595,142 @@ def main() -> None:
         ))
     ):
         fail("M2 DEM vertical-datum publication gate differs or overclaims")
+    if (
+        dem_alt_access.get("status") != "closed_owner_report_and_fresh_machine_reinspection"
+        or dem_alt_access.get("owner_report", {}).get("finding") != "The owner reports that Purdue cannot supply the matching ArcGIS Coordinate Systems Data component."
+        or dem_alt_access.get("owner_report", {}).get("private_helpdesk_content_recorded") is not False
+        or dem_alt_access.get("fresh_machine_reinspection", {}).get("expected_transformation_available") is not False
+        or dem_alt_access.get("fresh_machine_reinspection", {}).get("matching_egm2008_grids") != []
+        or dem_alt_access.get("reconciliation", {}).get("route_substitution_authorized") is not False
+        or dem_alt_access.get("reconciliation", {}).get("new_human_decision_required") is not True
+        or dem_alt_access.get("accidental_sourceforge_redirect", {}).get("status") != "terminal_partial_quarantined_not_usable"
+        or dem_alt_access.get("accidental_sourceforge_redirect", {}).get("bytes_received") != 11321072
+        or dem_alt_access.get("accidental_sourceforge_redirect", {}).get("partial_sha256") != "7c0a8597880f622554f6b84355e9587b8b9619e0010247e32ac61ecdd67f7734"
+        or any(dem_alt_access.get("accidental_sourceforge_redirect", {}).get(key) is not False for key in (
+            "promoted", "usable", "retry_authorized", "selected_for_production",
+        ))
+    ):
+        fail("M2 DEM Esri component access closure differs or overclaims")
+    expected_alt_grid = {
+        "source_id": "M2-GEOID-001",
+        "name": "us_nga_egm08_25.tif",
+        "url": "https://cdn.proj.org/us_nga_egm08_25.tif",
+        "distributor": "OSGeo PROJ CDN",
+        "upstream_authority": "US National Geospatial-Intelligence Agency (NGA)",
+        "resolution_arc_minutes": 2.5,
+        "area_of_use": "World",
+        "source_crs": "EPSG:4979",
+        "target_crs": "EPSG:3855",
+        "content_length_bytes": 80585622,
+        "sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+        "license": "Public Domain",
+        "http_head_status": 200,
+        "http_head_last_modified": "Tue, 28 Jan 2020 14:45:44 GMT",
+        "payload_bytes_read_during_review": 0,
+    }
+    if (
+        dem_alt_sources.get("status") != "pass_recommended_open_source_exact_identity_method_change_requires_owner_decision"
+        or dem_alt_sources.get("recommended_candidate") != expected_alt_grid
+        or dem_alt_sources.get("local_runtime", {}).get("gdal_release") != "3.12.2e"
+        or dem_alt_sources.get("local_runtime", {}).get("proj_version") != "9.8.1"
+        or dem_alt_sources.get("local_runtime", {}).get("proj_network_enabled") is not False
+        or dem_alt_sources.get("local_runtime", {}).get("software_install_required") is not False
+        or dem_alt_sources.get("gate_assessment", {}).get("material_deviation") != "2.5_arc_minute_grid_replaces_previously_approved_1_arc_minute_esri_grid"
+        or dem_alt_sources.get("assertions", {}).get("human_decision_count") != 0
+        or dem_alt_sources.get("assertions", {}).get("recommended_grid_payload_downloaded") is not False
+    ):
+        fail("M2 DEM vertical-datum alternate source review differs or overclaims")
+    expected_alt_bindings = {
+        "prior_method_proposal_ref": "contracts/m2-dem-vertical-datum-proposal.json",
+        "prior_method_proposal_sha256": sha256("contracts/m2-dem-vertical-datum-proposal.json"),
+        "prior_method_approval_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
+        "prior_method_approval_sha256": sha256("records/source-gates/m2-dem-vertical-datum-approval.json"),
+        "component_access_closure_ref": "records/readiness/m2-dem-egm2008-component-access-closure-001.json",
+        "component_access_closure_sha256": sha256("records/readiness/m2-dem-egm2008-component-access-closure-001.json"),
+        "alternate_source_review_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-source-review.json",
+        "alternate_source_review_sha256": sha256("records/source-gates/m2-dem-vertical-datum-alternate-method-001-source-review.json"),
+        "dem_verification_summary_ref": "records/acquisition/dem-verification-summary.json",
+        "dem_verification_summary_sha256": sha256("records/acquisition/dem-verification-summary.json"),
+    }
+    if (
+        dem_alt_proposal.get("status") != "proposed_not_authorized"
+        or dem_alt_proposal.get("bindings") != expected_alt_bindings
+        or dem_alt_proposal.get("exact_source_if_approved") != expected_alt_grid
+        or dem_alt_proposal.get("decision_requested", {}).get("recommended_route") != "local_proj_egm2008_2_5_preconversion_then_none"
+        or dem_alt_proposal.get("bounded_execution_if_approved", {}).get("maximum_grid_requests") != 1
+        or dem_alt_proposal.get("bounded_execution_if_approved", {}).get("maximum_conversion_attempts_per_dem") != 1
+        or dem_alt_proposal.get("bounded_execution_if_approved", {}).get("automatic_retry") is not False
+        or dem_alt_proposal.get("bounded_execution_if_approved", {}).get("stop_on_first_failure") is not True
+        or dem_alt_proposal.get("bounded_execution_if_approved", {}).get("proj_network_enabled") is not False
+        or dem_alt_proposal.get("claim_boundary", {}).get("human_decision_count") != 0
+        or any(dem_alt_proposal.get("claim_boundary", {}).get(key) is not False for key in (
+            "alternate_method_approved", "recommended_grid_acquired", "dem_preconversion_executed",
+            "vertical_datum_resolved_for_radar", "radar_processing_executed", "scientific_result_established",
+        ))
+    ):
+        fail("M2 DEM vertical-datum alternate method proposal differs or overclaims")
+    if (
+        dem_alt_preflight.get("status") != "pass_review_ready_no_alternate_method_authority"
+        or dem_alt_preflight.get("bindings", {}).get("proposal_sha256") != sha256("contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json")
+        or dem_alt_preflight.get("bindings", {}).get("source_review_sha256") != sha256("records/source-gates/m2-dem-vertical-datum-alternate-method-001-source-review.json")
+        or dem_alt_preflight.get("bindings", {}).get("access_closure_sha256") != sha256("records/readiness/m2-dem-egm2008-component-access-closure-001.json")
+        or dem_alt_preflight.get("assertions", {}).get("human_decision_count") != 0
+        or dem_alt_preflight.get("assertions", {}).get("recommended_grid_payload_bytes_read") != 0
+    ):
+        fail("M2 DEM vertical-datum alternate review preflight differs or overclaims")
+    if (
+        dem_alt_bundle.get("candidate_identity") != f"M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-PROPOSAL-SHA256:{sha256('contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json')}"
+        or dem_alt_contract.get("review_bundle", {}).get("manifest_sha256") != sha256("reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json")
+        or dem_alt_contract.get("items", [{}])[0].get("evidence_sha256") != sha256("reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json")
+        or dem_alt_blank.get("completed") is not False
+        or dem_alt_blank.get("reviewer") != {"attestation": False}
+        or dem_alt_blank.get("responses", [{}])[0].get("decision") is not None
+        or dem_alt_blank.get("responses", [{}])[0].get("evidence_sha256") != sha256("reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json")
+    ):
+        fail("M2 DEM vertical-datum alternate review bundle, contract, or blank response differs")
+    if (
+        dem_alt_readiness.get("status") != "pass_ready_owner_review_zero_decisions"
+        or dem_alt_readiness.get("bindings", {}).get("proposal_sha256") != sha256("contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json")
+        or dem_alt_readiness.get("bindings", {}).get("review_bundle_sha256") != sha256("reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json")
+        or dem_alt_readiness.get("bindings", {}).get("review_contract_sha256") != sha256("reviews/m2-dem-vertical-datum-alternate-method-001/review-contract.json")
+        or dem_alt_readiness.get("bindings", {}).get("blank_response_sha256") != sha256("reviews/m2-dem-vertical-datum-alternate-method-001/blank-response.json")
+        or dem_alt_readiness.get("review") != {"human_decision_count": 0, "attestation": False, "ready_for_handoff": True}
+        or any(dem_alt_readiness.get("assertions", {}).get(key) is not False for key in (
+            "alternate_method_authorized", "grid_acquisition_authorized", "dem_conversion_authorized",
+            "dem_pixels_read_during_preparation", "radar_processing_authorized", "scientific_result_established",
+        ))
+        or dem_alt_readiness.get("assertions", {}).get("recommended_grid_payload_bytes_read") != 0
+        or dem_alt_surface.get("status") != "pass_blank_review_surface"
+        or dem_alt_surface.get("render", {}).get("sha256") != sha256("docs/assets/m2-dem-vertical-datum-alternate-method-001-review.png")
+        or dem_alt_surface.get("render", {}).get("human_decision_count") != 0
+        or dem_alt_surface.get("checks", {}).get("visual_inspection") != "pass"
+    ):
+        fail("M2 DEM vertical-datum alternate review readiness or surface differs or overclaims")
+    if (
+        dem_alt_local_validation.get("status") != "pass_after_preserved_checkpoint_expectation_failure"
+        or len(dem_alt_local_validation.get("attempts", [])) != 3
+        or dem_alt_local_validation.get("attempts", [{}])[0].get("exit_code") != 1
+        or dem_alt_local_validation.get("attempts", [{}])[0].get("test_count") != 506
+        or dem_alt_local_validation.get("attempts", [{}])[0].get("failure_count") != 6
+        or dem_alt_local_validation.get("attempts", [{}, {}])[1].get("exit_code") != 0
+        or dem_alt_local_validation.get("attempts", [{}, {}])[1].get("test_count") != 506
+        or dem_alt_local_validation.get("attempts", [{}, {}])[1].get("failure_count") != 0
+        or dem_alt_local_validation.get("attempts", [{}, {}, {}])[2].get("exit_code") != 0
+        or dem_alt_local_validation.get("attempts", [{}, {}, {}])[2].get("test_count") != 507
+        or dem_alt_local_validation.get("attempts", [{}, {}, {}])[2].get("failure_count") != 0
+        or dem_alt_local_validation.get("assertions", {}).get("initial_failure_preserved") is not True
+        or dem_alt_local_validation.get("assertions", {}).get("corrected_full_suite_passed") is not True
+        or dem_alt_local_validation.get("assertions", {}).get("final_full_suite_passed") is not True
+        or dem_alt_local_validation.get("assertions", {}).get("human_decision_count") != 0
+        or any(dem_alt_local_validation.get("assertions", {}).get(key) is not False for key in (
+            "recommended_grid_payload_downloaded", "dem_pixels_read", "dem_conversion_executed",
+            "orbit_application_executed", "radar_processing_executed", "scientific_result_established",
+        ))
+    ):
+        fail("M2 DEM vertical-datum alternate-method local validation differs or overclaims")
     vertical_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-REVIEW", {})
     vertical_install_unit = active_m2_units.get("M2-DEM-EGM2008-COMPONENT-INSTALL", {})
+    vertical_alternate_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW", {})
     vertical_conversion_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-CONVERSION", {})
     if (
         vertical_review_unit.get("status") != "complete"
@@ -3560,14 +3738,25 @@ def main() -> None:
         or vertical_review_unit.get("gates", {}).get("approval_sha256") != sha256("records/source-gates/m2-dem-vertical-datum-approval.json")
         or vertical_review_unit.get("gates", {}).get("control_reconciliation_sha256") != sha256("records/readiness/m2-dem-vertical-datum-control-reconciliation.json")
         or vertical_review_unit.get("next_dependency") != "M2-DEM-EGM2008-COMPONENT-INSTALL"
-        or vertical_install_unit.get("status") != "planned"
+        or vertical_install_unit.get("status") != "complete"
         or vertical_install_unit.get("human_gate") is not True
-        or vertical_install_unit.get("gates", {}).get("current_status") != "pending_owner_installation"
+        or vertical_install_unit.get("disposition") != "block"
+        or vertical_install_unit.get("gates", {}).get("current_status") != "closed_unavailable_owner_report_and_machine_reinspection"
         or vertical_install_unit.get("gates", {}).get("codex_download_or_install_authorized") is not False
+        or vertical_install_unit.get("gates", {}).get("access_closure_sha256") != sha256("records/readiness/m2-dem-egm2008-component-access-closure-001.json")
+        or vertical_install_unit.get("next_dependency") != "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+        or vertical_alternate_review_unit.get("status") != "planned"
+        or vertical_alternate_review_unit.get("human_gate") is not True
+        or vertical_alternate_review_unit.get("gates", {}).get("proposal_sha256") != sha256("contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json")
+        or vertical_alternate_review_unit.get("gates", {}).get("review_bundle_sha256") != sha256("reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json")
+        or vertical_alternate_review_unit.get("gates", {}).get("human_decision_count") != 0
+        or vertical_alternate_review_unit.get("gates", {}).get("alternate_method_authorized") is not False
         or vertical_conversion_unit.get("status") != "planned"
+        or vertical_conversion_unit.get("depends_on") != ["M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"]
+        or vertical_conversion_unit.get("gates", {}).get("selected_method") != "pending_alternate_owner_decision"
         or vertical_conversion_unit.get("gates", {}).get("source_overwrite_permitted") is not False
     ):
-        fail("M2 DEM vertical-datum milestone units differ or advance past owner installation")
+        fail("M2 DEM vertical-datum milestone units differ or advance past alternate-method owner review")
     if dem_manifest.get("status") != "candidate_not_approved" or len(dem_manifest.get("records", [])) != 4:
         fail("M2 DEM candidate manifest must remain an unapproved exact four-tile set")
     expected_dem_ids = {
@@ -6174,9 +6363,13 @@ def main() -> None:
     )
     if orbit_offline_verification_recovery_pass:
         expected_checkpoint = (
-            "M2-DEM-EGM2008-COMPONENT-INSTALL"
-            if dem_vertical_method_approved
-            else "M2-DEM-VERTICAL-DATUM-REVIEW"
+            "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+            if dem_alt_review_ready
+            else (
+                "M2-DEM-EGM2008-COMPONENT-INSTALL"
+                if dem_vertical_method_approved
+                else "M2-DEM-VERTICAL-DATUM-REVIEW"
+            )
         )
     elif orbit_offline_verification_recovery_implementation_pending:
         expected_checkpoint = "M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION"
@@ -8860,6 +9053,51 @@ def main() -> None:
         ))
     ):
         fail("EVID-0127 DEM vertical-datum publication gate evidence differs or overclaims")
+    vertical_alternate_review_evidence = ledger_by_id.get("EVID-0128")
+    if (
+        not isinstance(vertical_alternate_review_evidence, dict)
+        or vertical_alternate_review_evidence.get("status") != "pass_zero_decision_review_ready_esri_path_closed"
+        or vertical_alternate_review_evidence.get("access_closure_sha256") != sha256("records/readiness/m2-dem-egm2008-component-access-closure-001.json")
+        or vertical_alternate_review_evidence.get("source_review_sha256") != sha256("records/source-gates/m2-dem-vertical-datum-alternate-method-001-source-review.json")
+        or vertical_alternate_review_evidence.get("proposal_sha256") != sha256("contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json")
+        or vertical_alternate_review_evidence.get("review_bundle_sha256") != sha256("reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json")
+        or vertical_alternate_review_evidence.get("review_contract_sha256") != sha256("reviews/m2-dem-vertical-datum-alternate-method-001/review-contract.json")
+        or vertical_alternate_review_evidence.get("blank_response_sha256") != sha256("reviews/m2-dem-vertical-datum-alternate-method-001/blank-response.json")
+        or vertical_alternate_review_evidence.get("review_readiness_sha256") != sha256("records/readiness/m2-dem-vertical-datum-alternate-method-001-review-readiness.json")
+        or vertical_alternate_review_evidence.get("review_surface_sha256") != sha256("docs/assets/m2-dem-vertical-datum-alternate-method-001-review.png")
+        or vertical_alternate_review_evidence.get("surface_receipt_sha256") != sha256("records/surface-receipts/m2-dem-vertical-datum-alternate-method-001-review.json")
+        or vertical_alternate_review_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or vertical_alternate_review_evidence.get("assertions", {}).get("recommended_grid_payload_bytes_read") != 0
+        or vertical_alternate_review_evidence.get("assertions", {}).get("geographiclib_partial_bytes_quarantined") != 11321072
+        or vertical_alternate_review_evidence.get("assertions", {}).get("geographiclib_partial_selected_or_usable") is not False
+        or vertical_alternate_review_evidence.get("assertions", {}).get("current_checkpoint") != "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+        or any(vertical_alternate_review_evidence.get("assertions", {}).get(key) is not False for key in (
+            "alternate_method_authorized", "grid_acquisition_authorized", "dem_conversion_authorized",
+            "orbit_application_authorized", "radar_pixel_processing_authorized",
+            "baseline_or_change_analysis_authorized", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0128 DEM vertical-datum alternate-method review preparation differs or overclaims")
+    vertical_alternate_local_validation_evidence = ledger_by_id.get("EVID-0129")
+    if (
+        not isinstance(vertical_alternate_local_validation_evidence, dict)
+        or vertical_alternate_local_validation_evidence.get("status") != "pass_after_preserved_checkpoint_expectation_failure"
+        or vertical_alternate_local_validation_evidence.get("validation_sha256") != sha256("records/readiness/m2-dem-vertical-datum-alternate-method-001-local-validation.json")
+        or vertical_alternate_local_validation_evidence.get("checkpoint_derivation_sha256") != sha256("scripts/derive_m2_acquisition_checkpoint.py")
+        or vertical_alternate_local_validation_evidence.get("review_test_sha256") != sha256("tests/test_m2_dem_vertical_datum_alternate_method_001_review.py")
+        or vertical_alternate_local_validation_evidence.get("assertions", {}).get("initial_full_suite_test_count") != 506
+        or vertical_alternate_local_validation_evidence.get("assertions", {}).get("initial_failure_count") != 6
+        or vertical_alternate_local_validation_evidence.get("assertions", {}).get("corrected_full_suite_test_count") != 506
+        or vertical_alternate_local_validation_evidence.get("assertions", {}).get("corrected_failure_count") != 0
+        or vertical_alternate_local_validation_evidence.get("assertions", {}).get("final_full_suite_test_count") != 507
+        or vertical_alternate_local_validation_evidence.get("assertions", {}).get("final_failure_count") != 0
+        or vertical_alternate_local_validation_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or vertical_alternate_local_validation_evidence.get("assertions", {}).get("current_checkpoint") != "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+        or any(vertical_alternate_local_validation_evidence.get("assertions", {}).get(key) is not False for key in (
+            "recommended_grid_payload_downloaded", "dem_pixels_read", "dem_conversion_executed",
+        ))
+    ):
+        fail("EVID-0129 DEM vertical-datum alternate-method local validation differs or overclaims")
 
     orbit_review_evidence = ledger_by_id.get("EVID-0052")
     if (

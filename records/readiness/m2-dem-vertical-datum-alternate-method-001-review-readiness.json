@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW-READINESS",
+  "verified_at_utc": "2026-09-18T01:36:04Z",
+  "status": "pass_ready_owner_review_zero_decisions",
+  "bindings": {
+    "proposal_ref": "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json",
+    "proposal_sha256": "dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7",
+    "source_review_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-source-review.json",
+    "source_review_sha256": "8416bc6e980af3514018134166abefa16b7b698d9c1476a22ae109ce8716218c",
+    "access_closure_ref": "records/readiness/m2-dem-egm2008-component-access-closure-001.json",
+    "access_closure_sha256": "4fc0d59d9da19ed5d97bfd85fa17bf485db9ad84df5dd125339eb7e78d3e7ffd",
+    "preflight_ref": "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-preflight.json",
+    "preflight_sha256": "f35d2dc46393aa55023cab533980ace13397e228da83f0df17de949f8a58e916",
+    "review_surface_ref": "docs/assets/m2-dem-vertical-datum-alternate-method-001-review.png",
+    "review_surface_sha256": "9a213408b8b1d617b842789afe757f14dd05823522f4d29d984c91cde7988e08",
+    "surface_receipt_ref": "records/surface-receipts/m2-dem-vertical-datum-alternate-method-001-review.json",
+    "surface_receipt_sha256": "b09cca3e70bcf24228c5fc4d9093b0746df9d4165146c59302f1a6e5e82f7699",
+    "review_bundle_ref": "reviews/m2-dem-vertical-datum-alternate-method-001/review-bundle.json",
+    "review_bundle_sha256": "caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702",
+    "review_contract_ref": "reviews/m2-dem-vertical-datum-alternate-method-001/review-contract.json",
+    "review_contract_sha256": "306eb3fa56ba0feb58818947b5f2dcac7cc8c9ac9ebcade47adb3bc08132e8e1",
+    "blank_response_ref": "reviews/m2-dem-vertical-datum-alternate-method-001/blank-response.json",
+    "blank_response_sha256": "14ef1d28b646b90b0979f1b6e49887b3015cdbe7da1e2f5414f2817c4af2b304"
+  },
+  "review": {
+    "human_decision_count": 0,
+    "attestation": false,
+    "ready_for_handoff": true
+  },
+  "assertions": {
+    "alternate_method_authorized": false,
+    "grid_acquisition_authorized": false,
+    "dem_conversion_authorized": false,
+    "recommended_grid_payload_bytes_read": 0,
+    "dem_pixels_read_during_preparation": false,
+    "radar_processing_authorized": false,
+    "scientific_result_established": false
+  }
+}

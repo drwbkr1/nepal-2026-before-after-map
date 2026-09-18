@@ -138,6 +138,10 @@ DEM_EGM2008_COMPONENT_INSTALL_CHECKPOINT = {
     "checkpoint_id": "M2-DEM-EGM2008-COMPONENT-INSTALL",
     "next_action": "Owner separately installs the matching ArcGIS Coordinate Systems Data world1x1_vert feature. After the owner reports completion, run only a read-only exact-grid and transformation capability reinspection before any conversion, orbit application, radar-pixel processing, baseline, change, attribution, publication, or scientific claim.",
 }
+DEM_VERTICAL_DATUM_ALTERNATE_METHOD_001_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW",
+    "next_action": "Review exact alternate-method bundle SHA-256 caa27cad02aa78caeb38c511ea3cae7ebb637833bd4d54881b8a557a38eb1702 and proposal SHA-256 dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7; do not acquire the recommended PROJ grid, reuse the quarantined GeographicLib partial, convert a DEM, apply orbit data, read radar pixels, run a baseline or change analysis, or publish a scientific claim before one exact attested owner decision is locked and reconciled.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1039,6 +1043,43 @@ def current_dem_egm2008_component_install_pending(
     )
 
 
+def current_dem_vertical_datum_alternate_method_001_review_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the exact zero-decision review after the Esri dependency closes."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        access = load(root / "records/readiness/m2-dem-egm2008-component-access-closure-001.json")
+        proposal = load(root / "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json")
+        readiness = load(root / "records/readiness/m2-dem-vertical-datum-alternate-method-001-review-readiness.json")
+        blank = load(root / "reviews/m2-dem-vertical-datum-alternate-method-001/blank-response.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    install = units.get("M2-DEM-EGM2008-COMPONENT-INSTALL", {})
+    review = units.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW", {})
+    conversion = units.get("M2-DEM-VERTICAL-DATUM-CONVERSION", {})
+    return bool(
+        access.get("status") == "closed_owner_report_and_fresh_machine_reinspection"
+        and access.get("reconciliation", {}).get("route_substitution_authorized") is False
+        and proposal.get("status") == "proposed_not_authorized"
+        and proposal.get("claim_boundary", {}).get("human_decision_count") == 0
+        and readiness.get("status") == "pass_ready_owner_review_zero_decisions"
+        and readiness.get("review", {}).get("human_decision_count") == 0
+        and blank.get("completed") is False
+        and blank.get("reviewer", {}).get("attestation") is False
+        and install.get("status") == "complete"
+        and install.get("disposition") == "block"
+        and review.get("status") == "planned"
+        and review.get("human_gate") is True
+        and review.get("gates", {}).get("alternate_method_authorized") is False
+        and conversion.get("status") == "planned"
+        and conversion.get("depends_on") == ["M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"]
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -1087,11 +1128,14 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            checkpoint = dict(
-                DEM_EGM2008_COMPONENT_INSTALL_CHECKPOINT
-                if current_dem_egm2008_component_install_pending(ROOT, progress["state_counts"])
-                else DEM_VERTICAL_DATUM_REVIEW_CHECKPOINT
-            )
+            if current_dem_vertical_datum_alternate_method_001_review_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(DEM_VERTICAL_DATUM_ALTERNATE_METHOD_001_REVIEW_CHECKPOINT)
+            elif current_dem_egm2008_component_install_pending(ROOT, progress["state_counts"]):
+                checkpoint = dict(DEM_EGM2008_COMPONENT_INSTALL_CHECKPOINT)
+            else:
+                checkpoint = dict(DEM_VERTICAL_DATUM_REVIEW_CHECKPOINT)
         elif recovery_terminal == "blocked":
             checkpoint = dict(ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_TERMINAL_CHECKPOINT)
         elif current_orbit_offline_verification_recovery_001_execution_pending(

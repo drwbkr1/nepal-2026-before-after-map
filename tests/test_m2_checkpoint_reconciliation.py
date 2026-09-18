@@ -17,6 +17,7 @@ from derive_m2_acquisition_checkpoint import (  # noqa: E402
     candidate_controls,
     current_container_verification_complete,
     current_dem_egm2008_component_install_pending,
+    current_dem_vertical_datum_alternate_method_001_review_pending,
     current_full_header_implementation_pending,
     current_materialization_pixel_implementation_pending,
     current_materialization_pixel_review_required,
@@ -116,7 +117,12 @@ class M2CheckpointReconciliationTests(unittest.TestCase):
             ),
             "pass",
         )
-        self.assertTrue(current_dem_egm2008_component_install_pending(ROOT, {"promoted": 8}))
+        self.assertFalse(current_dem_egm2008_component_install_pending(ROOT, {"promoted": 8}))
+        self.assertTrue(
+            current_dem_vertical_datum_alternate_method_001_review_pending(
+                ROOT, {"promoted": 8}
+            )
+        )
         self.assertFalse(current_materialization_pixel_review_required(ROOT, {"authorized": 1, "promoted": 7}))
 
     def test_incomplete_or_unsupported_counts_are_rejected(self) -> None:

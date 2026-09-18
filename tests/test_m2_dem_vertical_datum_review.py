@@ -128,24 +128,28 @@ class M2DemVerticalDatumReviewTests(unittest.TestCase):
         ):
             self.assertFalse(self.approval["claim_boundary"][field])
 
-    def test_control_state_stops_at_owner_component_installation(self) -> None:
-        checkpoint = "M2-DEM-EGM2008-COMPONENT-INSTALL"
+    def test_historical_control_is_preserved_and_current_state_stops_at_alternate_review(self) -> None:
+        historical_checkpoint = "M2-DEM-EGM2008-COMPONENT-INSTALL"
+        current_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
         self.assertEqual(self.control["status"], "pass_method_selected_owner_component_install_pending")
         self.assertEqual(self.control["bindings"]["approval_sha256"], sha256("records/source-gates/m2-dem-vertical-datum-approval.json"))
-        self.assertEqual(self.control["decision"]["current_checkpoint"], checkpoint)
+        self.assertEqual(self.control["decision"]["current_checkpoint"], historical_checkpoint)
         self.assertTrue(self.control["assertions"]["vertical_datum_method_selected"])
         self.assertFalse(self.control["assertions"]["arcgis_coordinate_systems_data_installed"])
         self.assertFalse(self.control["assertions"]["dem_preconversion_executed"])
         self.assertFalse(self.control["assertions"]["vertical_datum_resolved_for_radar"])
-        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
-        self.assertEqual(self.goal["current_checkpoint"], checkpoint)
-        self.assertEqual(self.goal["parallel_checkpoints"], [checkpoint])
-        self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)
+        self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], current_checkpoint)
+        self.assertEqual(self.goal["current_checkpoint"], current_checkpoint)
+        self.assertEqual(self.goal["parallel_checkpoints"], [current_checkpoint])
+        self.assertEqual(self.milestone["handoff"]["current_checkpoint"], current_checkpoint)
         units = {unit["id"]: unit for unit in self.milestone["units"]}
         self.assertEqual(units["M2-DEM-VERTICAL-DATUM-REVIEW"]["status"], "complete")
-        self.assertEqual(units[checkpoint]["status"], "planned")
+        self.assertEqual(units[historical_checkpoint]["status"], "complete")
+        self.assertEqual(units[historical_checkpoint]["disposition"], "block")
+        self.assertEqual(units[current_checkpoint]["status"], "planned")
         self.assertEqual(units["M2-DEM-VERTICAL-DATUM-CONVERSION"]["status"], "planned")
-        self.assertFalse(units[checkpoint]["gates"]["codex_download_or_install_authorized"])
+        self.assertFalse(units[historical_checkpoint]["gates"]["codex_download_or_install_authorized"])
+        self.assertFalse(units[current_checkpoint]["gates"]["alternate_method_authorized"])
 
 
 if __name__ == "__main__":

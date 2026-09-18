@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-EGM2008-COMPONENT-ACCESS-CLOSURE-001",
+  "observed_at_utc": "2026-09-18T01:36:04Z",
+  "status": "closed_owner_report_and_fresh_machine_reinspection",
+  "owner_report": {
+    "authority_ref": "user-instruction:2026-09-17:purdue-cannot-supply-it",
+    "finding": "The owner reports that Purdue cannot supply the matching ArcGIS Coordinate Systems Data component.",
+    "private_helpdesk_content_recorded": false
+  },
+  "fresh_machine_reinspection": {
+    "inspected_at_utc": "2026-09-18T01:22:28Z",
+    "scratch_receipt_sha256": "732c0c53b90c1cfc71b5a804e04bb90270be627457b1c4a08d8c1289bd9c3d83",
+    "arcgis_version": "3.7.1",
+    "license_level": "Advanced",
+    "expected_transformation_available": false,
+    "matching_egm2008_grids": [],
+    "registry_display_entry_found": false,
+    "standard_install_paths_found": [],
+    "builtin_egm96_only": true
+  },
+  "accidental_sourceforge_redirect": {
+    "status": "terminal_partial_quarantined_not_usable",
+    "cause": "A documentation-metadata probe followed the SourceForge download redirect before timing out.",
+    "candidate": "GeographicLib egm2008-1.tar.bz2",
+    "bytes_received": 11321072,
+    "partial_sha256": "7c0a8597880f622554f6b84355e9587b8b9619e0010247e32ac61ecdd67f7734",
+    "quarantine_path": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\failed\\dem-vertical-datum-alternate-research\\20260917-sourceforge-metadata-redirect\\egm2008-1.tar.bz2.partial-11321072",
+    "promoted": false,
+    "usable": false,
+    "retry_authorized": false,
+    "selected_for_production": false
+  },
+  "reconciliation": {
+    "approved_esri_route_status": "unavailable_preserved_as_historical_selected_method",
+    "route_substitution_authorized": false,
+    "new_human_decision_required": true
+  },
+  "assertions": {
+    "arcgis_coordinate_systems_data_installed": false,
+    "esri_egm2008_grid_available": false,
+    "proj_candidate_payload_bytes_read": 0,
+    "usable_alternate_grid_acquired": false,
+    "dem_pixels_read": false,
+    "dem_conversion_executed": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  }
+}

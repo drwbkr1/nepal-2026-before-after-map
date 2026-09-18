@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW-SURFACE",
+  "verified_at_utc": "2026-09-18T01:36:04Z",
+  "status": "pass_blank_review_surface",
+  "render": {
+    "path": "docs/assets/m2-dem-vertical-datum-alternate-method-001-review.png",
+    "sha256": "9a213408b8b1d617b842789afe757f14dd05823522f4d29d984c91cde7988e08",
+    "width": 1800,
+    "height": 1450,
+    "human_decision_count": 0
+  },
+  "checks": {
+    "proposal_hash_visible": "pass",
+    "closed_esri_path_visible": "pass",
+    "exact_proj_candidate_visible": "pass",
+    "2_5_minute_method_change_visible": "pass",
+    "bounded_route_visible": "pass",
+    "decision_domain_visible": "pass",
+    "text_clipping": "none_observed",
+    "visual_inspection": "pass"
+  },
+  "assertions": {
+    "alternate_method_authorized": false,
+    "grid_acquisition_authorized": false,
+    "dem_conversion_authorized": false,
+    "radar_processing_authorized": false
+  }
+}

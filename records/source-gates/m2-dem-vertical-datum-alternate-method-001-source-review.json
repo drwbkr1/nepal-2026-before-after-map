@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "review_id": "NEPAL-M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-SOURCE-REVIEW",
+  "checked_at_utc": "2026-09-18T01:36:04Z",
+  "status": "pass_recommended_open_source_exact_identity_method_change_requires_owner_decision",
+  "recommended_candidate": {
+    "source_id": "M2-GEOID-001",
+    "name": "us_nga_egm08_25.tif",
+    "url": "https://cdn.proj.org/us_nga_egm08_25.tif",
+    "distributor": "OSGeo PROJ CDN",
+    "upstream_authority": "US National Geospatial-Intelligence Agency (NGA)",
+    "resolution_arc_minutes": 2.5,
+    "area_of_use": "World",
+    "source_crs": "EPSG:4979",
+    "target_crs": "EPSG:3855",
+    "content_length_bytes": 80585622,
+    "sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+    "license": "Public Domain",
+    "http_head_status": 200,
+    "http_head_last_modified": "Tue, 28 Jan 2020 14:45:44 GMT",
+    "payload_bytes_read_during_review": 0
+  },
+  "official_sources": [
+    {
+      "role": "proj_data_provenance_and_license",
+      "url": "https://raw.githubusercontent.com/OSGeo/PROJ-data/master/us_nga/us_nga_README.txt",
+      "response_sha256": "73bf524a13a3b38b27ab3f1748128445aed1d247ab87e4312b84fa58a085ac12",
+      "finding": "The official PROJ-data record identifies the 2.5-minute EGM2008 grid as NGA-derived, public domain, and a physical-height to WGS84 ellipsoidal-height resource."
+    },
+    {
+      "role": "proj_cdn_exact_catalog_identity",
+      "url": "https://cdn.proj.org/files.geojson",
+      "response_sha256": "46f26c830faa164af9ef9ef51a7325a9d3800eb12ad4b1661c1d3143af7becc3",
+      "finding": "The current PROJ CDN catalog binds exact URL, filename, world extent, EPSG:4979 to EPSG:3855 semantics, byte length, and SHA-256."
+    },
+    {
+      "role": "proj_resource_distribution",
+      "url": "https://proj.org/en/stable/resource_files.html",
+      "response_sha256": "e97fa9818c8066860407aa93eb00d21842544cfb66976c61b61ba20bc987ea7d",
+      "finding": "PROJ documents proj-data as its freely available transformation-grid package and identifies EGM08 as a global resource."
+    },
+    {
+      "role": "proj_vertical_grid_semantics",
+      "url": "https://proj.org/en/stable/operations/transformations/vgridshift.html",
+      "response_sha256": "bb6499438d3fa5c69441e16a9fb64b4633c77ab673ee1fb3f44c8571990b2576",
+      "finding": "PROJ documents local GeoTIFF vertical grid shifts and the explicit multiplier relation used to validate direction and sign."
+    },
+    {
+      "role": "gdal_vertical_raster_transform",
+      "url": "https://gdal.org/en/stable/programs/gdalwarp.html",
+      "response_sha256": "3e35f49b2b319df14fd5a246cd2e3450a3a0ded88bb9f4dad20c330de1764403",
+      "finding": "GDAL documents single-band vertical correction between compound or 3D CRSs and explicit control of the output raster grid."
+    },
+    {
+      "role": "geographiclib_interpolation_error_reference",
+      "url": "https://geographiclib.sourceforge.io/C%2B%2B/doc/geoid.html",
+      "response_sha256": "6e8e28296737d1d5175cf83386e5ba2a2373430d58b94e84b349f3cb7a3a443a",
+      "finding": "GeographicLib reports EGM2008 2.5-minute bilinear error of 0.135 m maximum and 0.0032 m RMS relative to the specified model, and states h = H + N."
+    },
+    {
+      "role": "nga_model_authority",
+      "url": "https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84",
+      "prior_review_ref": "records/source-gates/m2-dem-vertical-datum-source-review.json",
+      "prior_review_sha256": "e2b30472848627ddf050f05355442817bdddfd8910727116e89f8b5ab4d0ff96",
+      "finding": "NGA remains the EGM2008 model authority and publishes a 2.5-minute worldwide geoid-height file and supporting software."
+    }
+  ],
+  "local_runtime": {
+    "arcgis_pro": "3.7.1 Advanced",
+    "python": "ArcGIS Pro arcgispro-py3",
+    "gdal_release": "3.12.2e",
+    "proj_version": "9.8.1",
+    "gdal_warp_available": true,
+    "epsg_3855_available": true,
+    "epsg_4979_available": true,
+    "epsg_9518_available": true,
+    "proj_network_enabled": false,
+    "software_install_required": false
+  },
+  "considered_not_recommended": [
+    {
+      "candidate": "GeographicLib egm2008-1",
+      "resolution_arc_minutes": 1.0,
+      "publisher_displayed_archive_sha256": "bdb382d0be7ece9142450eacc24b7b7f0889ee3e0ba4f535b04ec383f94c0fb5",
+      "reason": "It is not present in the current official PROJ CDN catalog, adds a separate dataset and tool path, and the metadata probe produced a quarantined terminal partial that cannot be reused or retried under current authority."
+    },
+    {
+      "candidate": "ArcGIS built-in EGM96",
+      "reason": "It is a different geoid model and remains sensitivity-only under the existing owner decision."
+    }
+  ],
+  "gate_assessment": {
+    "access": "pass_anonymous_direct_https_metadata_only",
+    "rights": "pass_public_domain_as_recorded_by_proj_data",
+    "integrity": "pass_exact_catalog_size_and_sha256_available",
+    "privacy": "pass_no_account_or_credential_required_standard_cdn_access_only",
+    "fitness": "pass_for_owner_review_not_yet_authorized_for_use",
+    "material_deviation": "2.5_arc_minute_grid_replaces_previously_approved_1_arc_minute_esri_grid"
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "recommended_grid_payload_downloaded": false,
+    "software_installed_or_modified": false,
+    "dem_pixels_read": false,
+    "dem_conversion_executed": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  }
+}

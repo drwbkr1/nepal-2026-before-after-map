@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-dem-vertical-datum-alternate-method-001-review-bundle",
+  "review_id": "m2-dem-vertical-datum-alternate-method-001-review",
+  "authority_ref": "records/source-gates/m2-dem-vertical-datum-approval.json",
+  "candidate_identity": "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-PROPOSAL-SHA256:dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-dem-vertical-datum-alternate-method-001-review.png",
+      "sha256": "9a213408b8b1d617b842789afe757f14dd05823522f4d29d984c91cde7988e08",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-dem-vertical-datum-alternate-method-001-review.json",
+          "sha256": "b09cca3e70bcf24228c5fc4d9093b0746df9d4165146c59302f1a6e5e82f7699"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_DEM_VERTICAL_DATUM_ALTERNATE_METHOD_001_REVIEW.md",
+      "sha256": "1cb994e9ce1cf04c0052c91e070b3b12892dc587545112c7adbd81c409f85356",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "alternate-method-proposal",
+      "path": "contracts/m2-dem-vertical-datum-alternate-method-001-proposal.json",
+      "sha256": "dd920e205cb34f812dbbed422909acd9d3357d2f7b53f6843eccf03259e226d7",
+      "role": "candidate_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "alternate-source-review",
+      "path": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-source-review.json",
+      "sha256": "8416bc6e980af3514018134166abefa16b7b698d9c1476a22ae109ce8716218c",
+      "role": "external_source_gate",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "component-access-closure",
+      "path": "records/readiness/m2-dem-egm2008-component-access-closure-001.json",
+      "sha256": "4fc0d59d9da19ed5d97bfd85fa17bf485db9ad84df5dd125339eb7e78d3e7ffd",
+      "role": "closed_prerequisite_evidence",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "prior-method-approval",
+      "path": "records/source-gates/m2-dem-vertical-datum-approval.json",
+      "sha256": "38c872c8dbeeeab08212dd3f71b2dce131b39819c6f7309d1f2b1df2884ee4a6",
+      "role": "historical_owner_decision",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "prior-method-proposal",
+      "path": "contracts/m2-dem-vertical-datum-proposal.json",
+      "sha256": "bdaa7f9e10840d41c9bc47d65b33bbee3f71e82fe7862069ff1129785047f065",
+      "role": "historical_selected_method",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "dem-verification-summary",
+      "path": "records/acquisition/dem-verification-summary.json",
+      "sha256": "97f6a66daccd236decc6cdaac7035ca4cafb541ce7d82cecf08973ec6962f7ef",
+      "role": "verified_input_dependency",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "decision_effect_if_approved": [
+    "replace only the unavailable Esri component implementation dependency with the exact official PROJ-data 2.5-minute route",
+    "authorize the bounded implementation, tests, public gate, one exact grid acquisition, and conditional four-tile conversion sequence in the proposal",
+    "retain NONE only for verified WGS84 ellipsoidal derivatives"
+  ],
+  "limitations": [
+    "reuse, resume, complete, or retry the quarantined GeographicLib partial",
+    "download the GeographicLib one-minute archive or any source other than exact M2-GEOID-001",
+    "install or modify ArcGIS, GDAL, PROJ, GeographicLib, or system software",
+    "enable PROJ networking or permit an implicit remote grid fetch",
+    "accept provider terms, use an account or credential, or approve UAC",
+    "alter, overwrite, or relabel a promoted Copernicus DEM tile",
+    "use raw EGM2008 orthometric tiles with NONE",
+    "call the 2.5-minute route identical to the unavailable Esri one-minute route",
+    "apply orbit data, decode radar measurement pixels, run a baseline or change analysis, attribute cause, publish emergency guidance, or make a scientific claim"
+  ]
+}
