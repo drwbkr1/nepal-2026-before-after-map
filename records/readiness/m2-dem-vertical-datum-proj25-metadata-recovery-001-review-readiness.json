@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW-READINESS",
+  "verified_at_utc": "2026-09-18T02:57:00Z",
+  "status": "pass_ready_publication_zero_decisions",
+  "bindings": {
+    "proposal_ref": "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json",
+    "proposal_sha256": "729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd",
+    "reconciliation_ref": "records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json",
+    "reconciliation_sha256": "86d7ef8e031441f683a31964cedbe434d56748636f48ed2309f973ef15ad62a5",
+    "review_surface_ref": "docs/assets/m2-dem-vertical-datum-proj25-metadata-recovery-001-review.png",
+    "review_surface_sha256": "2ebbcf9112558845546fd0dec846cc531e849878ca70aade9887273fd1d2111a",
+    "surface_receipt_ref": "records/surface-receipts/m2-dem-vertical-datum-proj25-metadata-recovery-001-review.json",
+    "surface_receipt_sha256": "5810d1ae14fd46fdbb2c0446dfc6d88b28cf340d1518520cbb63385cd4afa2b3",
+    "review_bundle_ref": "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-bundle.json",
+    "review_bundle_sha256": "10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d",
+    "review_contract_ref": "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-contract.json",
+    "review_contract_sha256": "f6aef3d7dcb9035cfd5224a07cc6888027c7003b28f013254fabb61a8ddaeb4a",
+    "blank_response_ref": "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/blank-response.json",
+    "blank_response_sha256": "e9ebb1a150bf34caa68ef73cb7db67a71f869b951480374f3d78725d2de49c6f"
+  },
+  "validation": {
+    "terminal_attempt_preserved": true,
+    "exact_staged_identity_bound": true,
+    "metadata_difference_exactly_described": true,
+    "post_observation_limit_disclosed": true,
+    "decision_options": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "human_decision_count": 0,
+    "blank_response_verified": true,
+    "rendered_surface_verified": true
+  },
+  "assertions": {
+    "correction_authorized": false,
+    "network_request_authorized": false,
+    "grid_promoted": false,
+    "dem_pixels_read": false,
+    "dem_conversion_executed": false,
+    "orbit_or_radar_action_performed": false,
+    "scientific_result_established": false,
+    "preserved_bytes_read_for_exact_reconciliation": true,
+    "recovery_verification_performed": false,
+    "grid_sample_values_read": false
+  },
+  "next_action": "Publish the exact zero-decision review packet and require successful public default-branch CI before owner review."
+}

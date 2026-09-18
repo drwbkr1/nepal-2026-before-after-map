@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-METADATA-RECOVERY-001",
+  "prepared_at_utc": "2026-09-18T02:54:57Z",
+  "status": "proposed_inactive_owner_review_required",
+  "purpose": "Correct only the post-observation metadata-key interpretation for the exact preserved official PROJ grid, then perform one offline recovery verification and conditional no-replace promotion before the previously approved local conversion sequence.",
+  "authority": {
+    "mode": "proposed_only",
+    "parent_approval_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
+    "human_review_required": true,
+    "this_proposal_creates_authority": false,
+    "activation_before_exact_owner_approval": false
+  },
+  "bindings": {
+    "parent_approval_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
+    "parent_approval_sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c",
+    "failed_implementation_contract_ref": "config/qa/m2-dem-vertical-datum-proj25-contract.json",
+    "failed_implementation_contract_sha256": "f502bbaac62e67f742e781b7d3fc2e165b0ad998080756d26036b4457e35396b",
+    "terminal_receipt_ref": "records/acquisition/m2-geoid-001-real-001-terminal.json",
+    "terminal_receipt_sha256": "60f565fd3ae615a16a5f3ef51bb368e4aadf3333423283b5407eb779930ec4a2",
+    "acquisition_reconciliation_ref": "records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json",
+    "acquisition_reconciliation_sha256": "86d7ef8e031441f683a31964cedbe434d56748636f48ed2309f973ef15ad62a5"
+  },
+  "preserved_failure": {
+    "attempt_id": "m2-geoid-001-real-001",
+    "status": "terminal_failure_no_retry",
+    "request_count": 1,
+    "preserved_size_bytes": 80585622,
+    "preserved_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a",
+    "destination_created": false,
+    "conversion_attempts_started": 0,
+    "failure_stage": "gdal_verification"
+  },
+  "observed_representation": {
+    "expected_by_failed_code": {
+      "source_crs": "EPSG:4979",
+      "target_crs": "EPSG:3855"
+    },
+    "present_in_exact_official_file": {
+      "TIFFTAG_IMAGEDESCRIPTION": "WGS 84 (EPSG:4979) to EGM2008 height (EPSG:3855). Converted from egm08_25.gtx (last modified at 2018/10/08)",
+      "target_crs_epsg_code": "3855"
+    },
+    "already_passing_checks": [
+      "exact approved byte length and SHA-256",
+      "GTiff, one band, 8640 by 4321",
+      "world coverage",
+      "TYPE VERTICAL_OFFSET_GEOGRAPHIC_TO_VERTICAL",
+      "area_of_use World",
+      "public-domain copyright tag"
+    ],
+    "post_observation_bias": "The proposed correction is informed by the failed real-001 observation and is not blind or independent validation."
+  },
+  "proposed_exact_change": {
+    "scope": "metadata extraction and validation only",
+    "from": "require literal metadata keys source_crs=EPSG:4979 and target_crs=EPSG:3855",
+    "to": "require the exact embedded TIFFTAG_IMAGEDESCRIPTION declaring EPSG:4979 to EPSG:3855 and exact target_crs_epsg_code=3855; retain every other identity, raster, coverage, type, area, license, and no-network check unchanged",
+    "source_semantics_changed": false,
+    "target_semantics_changed": false,
+    "tolerance_changed": false,
+    "source_or_url_changed": false
+  },
+  "bounded_actions_if_approved": [
+    "preserve real-001, its receipts, the unpromoted staged bytes, and this reconciliation unchanged",
+    "implement only the exact metadata-key interpretation correction and focused synthetic acceptance and drift-refusal tests",
+    "run the repository checker, full local tests, ArcGIS-runtime tests, and fresh public default-branch CI before touching the preserved staged bytes",
+    "after that public gate, run one final no-content local preflight and one offline recovery verification of the exact preserved 80,585,622 bytes with no network request",
+    "only on pass, promote the exact preserved bytes without replacement and run the unchanged local operation-selection and sign preflight",
+    "only if every prior gate passes, run at most one conversion attempt for each exact M2-DEM-001 through M2-DEM-004 in fixed order, stopping on the first failure, under all previously approved thresholds",
+    "record exact reconciliation and stop before orbit application, radar-pixel processing, baseline, change analysis, attribution, or scientific publication"
+  ],
+  "limits": {
+    "network_requests": 0,
+    "recovery_verification_attempts": 1,
+    "automatic_retry": false,
+    "conversion_attempts_per_dem": 1,
+    "stop_on_first_failure": true,
+    "proj_network_enabled": false,
+    "source_dem_overwrite": false
+  },
+  "stop_rules": [
+    "Stop if the preserved staged bytes differ from the exact approved size or SHA-256.",
+    "Stop if any metadata predicate outside the exact key-representation correction changes.",
+    "Stop if the final preflight, offline recovery verification, sign check, ArcGIS readability, source immutability, finite AOI coverage, or a conversion attempt fails.",
+    "Do not make another grid request or perform a second recovery attempt."
+  ],
+  "explicitly_not_authorized": [
+    "any network request, reacquisition, resume, or retry",
+    "reuse or retry of the GeographicLib partial",
+    "alternate source, URL, grid, CRS relation, threshold, or tolerance",
+    "software installation, account action, terms acceptance, or credential use",
+    "source DEM overwrite",
+    "PROJ network fetch",
+    "orbit application or radar-pixel processing",
+    "baseline or change analysis, attribution, emergency guidance, derived-pixel publication, or scientific claim"
+  ],
+  "claim_boundary": {
+    "human_decision_count": 0,
+    "correction_authorized": false,
+    "preserved_bytes_reverified": false,
+    "grid_promoted": false,
+    "dem_pixels_read": false,
+    "dem_conversion_executed": false,
+    "vertical_datum_resolved_for_radar": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Prepare and publicly validate a blank exact-bundle owner review. No implementation, preserved-byte read, promotion, DEM conversion, or downstream action is released before a completed hash-bound approval."
+}

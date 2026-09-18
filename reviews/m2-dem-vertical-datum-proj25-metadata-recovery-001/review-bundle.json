@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "template": false,
+  "bundle_id": "m2-dem-vertical-datum-proj25-metadata-recovery-001-review-bundle",
+  "review_id": "m2-dem-vertical-datum-proj25-metadata-recovery-001-review",
+  "authority_ref": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
+  "candidate_identity": "M2-DEM-VERTICAL-DATUM-PROJ25-METADATA-RECOVERY-001-PROPOSAL-SHA256:729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd",
+  "artifacts": [
+    {
+      "artifact_id": "review-surface",
+      "path": "docs/assets/m2-dem-vertical-datum-proj25-metadata-recovery-001-review.png",
+      "sha256": "2ebbcf9112558845546fd0dec846cc531e849878ca70aade9887273fd1d2111a",
+      "role": "review_surface",
+      "render_required": true,
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-dem-vertical-datum-proj25-metadata-recovery-001-review.json",
+          "sha256": "5810d1ae14fd46fdbb2c0446dfc6d88b28cf340d1518520cbb63385cd4afa2b3"
+        }
+      ]
+    },
+    {
+      "artifact_id": "review-instructions",
+      "path": "docs/M2_DEM_VERTICAL_DATUM_PROJ25_METADATA_RECOVERY_001_REVIEW.md",
+      "sha256": "5f3206e7f3e205907ee6e535d91a1c150976e2b3ec293c11852d62f9c6e8b492",
+      "role": "decision_instructions",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "metadata-recovery-proposal",
+      "path": "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json",
+      "sha256": "729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd",
+      "role": "candidate_authority_envelope",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "terminal-acquisition-reconciliation",
+      "path": "records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json",
+      "sha256": "86d7ef8e031441f683a31964cedbe434d56748636f48ed2309f973ef15ad62a5",
+      "role": "preserved_failure_reconciliation",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "terminal-attempt-receipt",
+      "path": "records/acquisition/m2-geoid-001-real-001-terminal.json",
+      "sha256": "60f565fd3ae615a16a5f3ef51bb368e4aadf3333423283b5407eb779930ec4a2",
+      "role": "preserved_terminal_attempt",
+      "render_required": false,
+      "render_receipts": []
+    },
+    {
+      "artifact_id": "parent-approval",
+      "path": "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
+      "sha256": "d2e839dbd005e7d1ed85ab86b26cd887135576d50ad8071b742af1134ecc186c",
+      "role": "parent_owner_decision",
+      "render_required": false,
+      "render_receipts": []
+    }
+  ],
+  "review_surface": {
+    "artifact_id": "review-surface",
+    "blank_state_verified": true,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "decision_effect_if_approved": [
+    "authorize only the exact post-observation metadata-key interpretation correction",
+    "authorize one public-CI-gated offline verification of the exact preserved bytes with no network request and conditional no-replace promotion",
+    "only on pass retain the previously approved sign check and fixed-order one-attempt four-tile conversion sequence"
+  ],
+  "limitations": [
+    "no network request, reacquisition, resume, or retry",
+    "no alternate source, grid, CRS relation, threshold, or tolerance",
+    "no software installation, account action, terms acceptance, credential use, or PROJ network fetch",
+    "no source DEM overwrite, orbit application, radar-pixel processing, baseline, change analysis, attribution, derived-pixel publication, or scientific claim"
+  ],
+  "human_decision_count": 0
+}

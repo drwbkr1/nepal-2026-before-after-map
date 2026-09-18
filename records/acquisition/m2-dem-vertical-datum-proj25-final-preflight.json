@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-DEM-VERTICAL-DATUM-PROJ25-FINAL-PREFLIGHT",
+  "observed_at_utc": "2026-09-18T02:51:16Z",
+  "status": "pass_no_payload_real_actions_released",
+  "publication_gate_sha256": "cc67e356c197a674fa1d1aa830e3c465781c15138da95eed260036023a28c1de",
+  "grid": {
+    "url": "https://cdn.proj.org/us_nga_egm08_25.tif",
+    "http_status": 200,
+    "final_url": "https://cdn.proj.org/us_nga_egm08_25.tif",
+    "content_length_bytes": 80585622,
+    "last_modified": "Tue, 28 Jan 2020 14:45:44 GMT",
+    "etag": "\"c873f04972c6df1749dc7295028a0882-10\"",
+    "staging_absent": true,
+    "destination_absent": true
+  },
+  "source_checks": [
+    {
+      "source_id": "M2-DEM-001",
+      "size_bytes": 45336691,
+      "sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a",
+      "pixels_read": false
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "size_bytes": 44874244,
+      "sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194",
+      "pixels_read": false
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "size_bytes": 41688284,
+      "sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc",
+      "pixels_read": false
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "size_bytes": 38402839,
+      "sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7",
+      "pixels_read": false
+    }
+  ],
+  "free_bytes": 517582123008,
+  "assertions": {
+    "payload_bytes_read": 0,
+    "grid_request_performed": false,
+    "dem_pixels_read": false,
+    "external_data_mutated": false,
+    "maximum_future_grid_requests": 1,
+    "automatic_retry_authorized": false,
+    "proj_network_enabled": false
+  }
+}

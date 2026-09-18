@@ -1,0 +1,18 @@
+{
+  "response_schema_version": "nepal-m2-dem-proj25-metadata-recovery-response-v1",
+  "review_id": "m2-dem-vertical-datum-proj25-metadata-recovery-001-review",
+  "completed": false,
+  "review_started_at_utc": null,
+  "review_completed_at_utc": null,
+  "reviewer": {
+    "attestation": false
+  },
+  "responses": [
+    {
+      "item_id": "M2-DEM-PROJ25-METADATA-RECOVERY-001",
+      "evidence_sha256": "10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d",
+      "decision": null,
+      "notes": ""
+    }
+  ]
+}

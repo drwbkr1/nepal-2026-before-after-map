@@ -150,6 +150,14 @@ DEM_EGM2008_PROJ25_ACQUISITION_CHECKPOINT = {
     "checkpoint_id": "M2-DEM-EGM2008-PROJ25-ACQUISITION",
     "next_action": "Publish this exact public-gate transition and require successful default-branch CI. Then run the one final no-payload preflight; only on its pass may the exact grid be requested once and verified before any fixed-order DEM conversion.",
 }
+DEM_PROJ25_METADATA_RECOVERY_001_REVIEW_PUBLICATION_CHECKPOINT = {
+    "checkpoint_id": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW-PUBLICATION",
+    "next_action": "Publish and publicly validate the exact zero-decision metadata recovery-001 review packet at bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd. Do not implement the correction, read or promote the preserved grid bytes, inspect DEM pixels, convert a DEM, or perform downstream processing before one attested owner decision on the exact public packet.",
+}
+DEM_PROJ25_METADATA_RECOVERY_001_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW",
+    "next_action": "Review M2 DEM PROJ25 metadata recovery-001 bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd; approve, revise, or defer the exact post-observation metadata-key correction and one offline verification of the preserved bytes. No implementation, network request, preserved-byte read or promotion, DEM conversion, or downstream processing is authorized before an attested decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1147,6 +1155,65 @@ def current_dem_egm2008_proj25_acquisition_pending(root: Path, state_counts: dic
     )
 
 
+def current_dem_proj25_metadata_recovery_001_review_publication_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the exact zero-decision recovery packet before its public CI gate."""
+    if state_counts != {"promoted": 8}:
+        return False
+    publication_gate = root / "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-publication-gate.json"
+    if publication_gate.exists():
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        proposal = load(root / "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json")
+        reconciliation = load(root / "records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json")
+        terminal = load(root / "records/acquisition/m2-geoid-001-real-001-terminal.json")
+        bundle = load(root / "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-bundle.json")
+        contract = load(root / "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-contract.json")
+        blank = load(root / "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/blank-response.json")
+        readiness = load(root / "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-readiness.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    acquisition = units.get("M2-DEM-EGM2008-PROJ25-ACQUISITION", {})
+    review = units.get("M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW", {})
+    return bool(
+        proposal.get("status") == "proposed_inactive_owner_review_required"
+        and reconciliation.get("status") == "block_terminal_metadata_representation_mismatch_review_required"
+        and terminal.get("status") == "terminal_failure_no_retry"
+        and terminal.get("request_count") == 1
+        and bundle.get("human_decision_count") == 0
+        and contract.get("review_bundle", {}).get("manifest_sha256") == "10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d"
+        and blank.get("completed") is False
+        and readiness.get("status") == "pass_ready_publication_zero_decisions"
+        and acquisition.get("status") == "complete"
+        and acquisition.get("disposition") == "block_terminal_metadata_representation_mismatch"
+        and review.get("status") == "in_progress"
+        and review.get("gates", {}).get("public_ci") == "pending"
+        and review.get("gates", {}).get("human_decision_count") == 0
+    )
+
+
+def current_dem_proj25_metadata_recovery_001_review_required(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize a publicly validated blank recovery packet awaiting owner review."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        gate = load(root / "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-publication-gate.json")
+        reconciliation = load(root / "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-publication-reconciliation.json")
+        blank = load(root / "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/blank-response.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    return bool(
+        gate.get("status") == "pass_public_default_branch_ci_zero_decision_review_ready"
+        and reconciliation.get("status") == "pass_public_gate_owner_review_ready"
+        and blank.get("completed") is False
+    )
+
+
 def candidate_controls(
     profile: dict[str, Any],
     goal: dict[str, Any],
@@ -1195,7 +1262,15 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_dem_egm2008_proj25_acquisition_pending(
+            if current_dem_proj25_metadata_recovery_001_review_required(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(DEM_PROJ25_METADATA_RECOVERY_001_REVIEW_CHECKPOINT)
+            elif current_dem_proj25_metadata_recovery_001_review_publication_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(DEM_PROJ25_METADATA_RECOVERY_001_REVIEW_PUBLICATION_CHECKPOINT)
+            elif current_dem_egm2008_proj25_acquisition_pending(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(DEM_EGM2008_PROJ25_ACQUISITION_CHECKPOINT)

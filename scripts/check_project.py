@@ -850,6 +850,20 @@ REQUIRED = [
     "records/readiness/m2-dem-vertical-datum-proj25-implementation-readiness.json",
     "records/readiness/m2-dem-vertical-datum-proj25-implementation-publication-gate.json",
     "records/readiness/m2-dem-vertical-datum-proj25-publication-reconciliation.json",
+    "records/acquisition/m2-dem-vertical-datum-proj25-final-preflight.json",
+    "records/acquisition/m2-geoid-001-real-001-started.json",
+    "records/acquisition/m2-geoid-001-real-001-terminal.json",
+    "records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json",
+    "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json",
+    "docs/M2_DEM_VERTICAL_DATUM_PROJ25_METADATA_RECOVERY_001_REVIEW.md",
+    "docs/assets/m2-dem-vertical-datum-proj25-metadata-recovery-001-review.png",
+    "records/surface-receipts/m2-dem-vertical-datum-proj25-metadata-recovery-001-review.json",
+    "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-bundle.json",
+    "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-contract.json",
+    "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/blank-response.json",
+    "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-readiness.json",
+    "scripts/render_m2_dem_vertical_datum_proj25_metadata_recovery_001_review.py",
+    "tests/test_m2_dem_vertical_datum_proj25_metadata_recovery_001_review.py",
     "scripts/render_m2_dem_terrain_result_review.py",
     "scripts/prepare_m2_orbit_amendment.py",
     "scripts/prepare_m2_orbit_controls.py",
@@ -1117,6 +1131,16 @@ def main() -> None:
     dem_alt_impl_readiness = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-proj25-implementation-readiness.json").read_text(encoding="utf-8"))
     dem_alt_impl_publication = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-proj25-implementation-publication-gate.json").read_text(encoding="utf-8"))
     dem_alt_impl_publication_reconciliation = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-proj25-publication-reconciliation.json").read_text(encoding="utf-8"))
+    dem_proj25_final_preflight = json.loads((ROOT / "records/acquisition/m2-dem-vertical-datum-proj25-final-preflight.json").read_text(encoding="utf-8"))
+    dem_proj25_grid_started = json.loads((ROOT / "records/acquisition/m2-geoid-001-real-001-started.json").read_text(encoding="utf-8"))
+    dem_proj25_grid_terminal = json.loads((ROOT / "records/acquisition/m2-geoid-001-real-001-terminal.json").read_text(encoding="utf-8"))
+    dem_proj25_acquisition_reconciliation = json.loads((ROOT / "records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json").read_text(encoding="utf-8"))
+    dem_proj25_metadata_recovery_proposal = json.loads((ROOT / "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json").read_text(encoding="utf-8"))
+    dem_proj25_metadata_recovery_surface = json.loads((ROOT / "records/surface-receipts/m2-dem-vertical-datum-proj25-metadata-recovery-001-review.json").read_text(encoding="utf-8"))
+    dem_proj25_metadata_recovery_bundle = json.loads((ROOT / "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-bundle.json").read_text(encoding="utf-8"))
+    dem_proj25_metadata_recovery_contract = json.loads((ROOT / "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-contract.json").read_text(encoding="utf-8"))
+    dem_proj25_metadata_recovery_blank = json.loads((ROOT / "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/blank-response.json").read_text(encoding="utf-8"))
+    dem_proj25_metadata_recovery_readiness = json.loads((ROOT / "records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-readiness.json").read_text(encoding="utf-8"))
     dem_terrain_contract = json.loads((ROOT / "config/qa/dem-terrain-quality-contract.json").read_text(encoding="utf-8"))
     dem_terrain_readiness = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-readiness.json").read_text(encoding="utf-8"))
     dem_terrain_ci_correction = json.loads((ROOT / "records/readiness/m2-dem-terrain-quality-ci-correction.json").read_text(encoding="utf-8"))
@@ -1238,6 +1262,16 @@ def main() -> None:
         and dem_alt_impl_publication.get("public_ci_conclusion") == "success"
         and dem_alt_impl_publication_reconciliation.get("status") == "pass_public_gate_final_no_payload_preflight_ready"
     )
+    dem_proj25_metadata_recovery_review_publication_pending = bool(
+        dem_proj25_grid_terminal.get("status") == "terminal_failure_no_retry"
+        and dem_proj25_grid_terminal.get("request_count") == 1
+        and dem_proj25_grid_terminal.get("conversion_attempts_started") == 0
+        and dem_proj25_acquisition_reconciliation.get("status") == "block_terminal_metadata_representation_mismatch_review_required"
+        and dem_proj25_metadata_recovery_proposal.get("status") == "proposed_inactive_owner_review_required"
+        and dem_proj25_metadata_recovery_bundle.get("human_decision_count") == 0
+        and dem_proj25_metadata_recovery_blank.get("completed") is False
+        and dem_proj25_metadata_recovery_readiness.get("status") == "pass_ready_publication_zero_decisions"
+    )
     expected_dem_checkpoint_authority_ref = "records/source-gates/m2-dem-amendment-approval.json"
     if dem_state_counts["failed"]:
         expected_dem_transfer_checkpoint = "M2-DEM-ACQUISITION-REVIEW"
@@ -1248,7 +1282,10 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if dem_alt_acquisition_active:
+            if dem_proj25_metadata_recovery_review_publication_pending:
+                expected_dem_checkpoint = "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW-PUBLICATION"
+                expected_dem_checkpoint_authority_ref = "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-contract.json"
+            elif dem_alt_acquisition_active:
                 expected_dem_checkpoint = "M2-DEM-EGM2008-PROJ25-ACQUISITION"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json"
             elif dem_alt_implementation_active:
@@ -1264,7 +1301,9 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if dem_alt_acquisition_active:
+            if dem_proj25_metadata_recovery_review_publication_pending:
+                expected_dem_next_action = "Publish and publicly validate the exact zero-decision metadata recovery-001 review packet at bundle SHA-256 10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d and proposal SHA-256 729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd. Do not implement the correction, read or promote the preserved grid bytes, inspect DEM pixels, convert a DEM, or perform downstream processing before one attested owner decision on the exact public packet."
+            elif dem_alt_acquisition_active:
                 expected_dem_next_action = "Publish this exact public-gate transition and require successful default-branch CI. Then run the one final no-payload preflight; only on its pass may the exact grid be requested once and verified before any fixed-order DEM conversion."
             elif dem_alt_implementation_active:
                 expected_dem_next_action = "Implement and synthetically validate only the approved exact-grid acquisition, verification, no-network vertical conversion, and ArcGIS-readability controls, then require fresh public default-branch CI. Do not request the grid or read a DEM pixel before that public gate and the final no-payload preflight pass."
@@ -2111,8 +2150,10 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must clear the approved DEM vertical-datum alternate-method proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
+        "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json"
+    ]:
+        fail("project profile must expose only the pending DEM PROJ25 metadata recovery proposal")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -2437,8 +2478,10 @@ def main() -> None:
         or "bounded nested-grid correction" not in optical_pixel_recovery_review_gate.get("reason", "")
     ):
         fail("project profile must bind optical pixel recovery to its exact approval")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must clear the approved DEM vertical-datum alternate-method proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
+        "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json"
+    ]:
+        fail("project profile must expose only the pending DEM PROJ25 metadata recovery proposal")
     radar_first_path_gate = profile_gates.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
     if (
         radar_first_path_gate.get("authority_ref") != "reviews/m2-radar-first-path-001/review-contract.json"
@@ -2473,6 +2516,12 @@ def main() -> None:
         fail("project profile must retain the EGM2008 component installation as an owner-controlled gate")
     if profile_gates.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW", {}).get("authority_ref") != "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json":
         fail("project profile must bind the completed DEM vertical-datum alternate-method review to its approval")
+    metadata_recovery_gate = profile_gates.get("M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW", {})
+    if (
+        metadata_recovery_gate.get("authority_ref") != "reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-contract.json"
+        or "post-observation" not in metadata_recovery_gate.get("reason", "")
+    ):
+        fail("project profile must expose the exact DEM PROJ25 metadata recovery human-review gate")
     if profile.get("parallel_checkpoints") != [
         {
             "checkpoint_id": expected_dem_checkpoint,
@@ -2499,8 +2548,10 @@ def main() -> None:
         "records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
-    if goal.get("proposed_amendments") != []:
-        fail("long-term goal must clear the approved DEM vertical-datum alternate-method proposal")
+    if goal.get("proposed_amendments") != [
+        "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json"
+    ]:
+        fail("long-term goal must expose only the pending DEM PROJ25 metadata recovery proposal")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -3941,11 +3992,109 @@ def main() -> None:
         or dem_alt_impl_publication_reconciliation.get("assertions", {}).get("grid_payload_bytes_read") != 0
     ):
         fail("M2 DEM vertical-datum PROJ25 publication reconciliation differs or overreleases")
+    if (
+        dem_proj25_final_preflight.get("status") != "pass_no_payload_real_actions_released"
+        or dem_proj25_final_preflight.get("grid", {}).get("url") != "https://cdn.proj.org/us_nga_egm08_25.tif"
+        or dem_proj25_final_preflight.get("grid", {}).get("http_status") != 200
+        or dem_proj25_final_preflight.get("grid", {}).get("content_length_bytes") != 80585622
+        or dem_proj25_final_preflight.get("assertions", {}).get("payload_bytes_read") != 0
+        or dem_proj25_final_preflight.get("assertions", {}).get("grid_request_performed") is not False
+        or dem_proj25_final_preflight.get("assertions", {}).get("dem_pixels_read") is not False
+        or dem_proj25_final_preflight.get("assertions", {}).get("maximum_future_grid_requests") != 1
+        or dem_proj25_grid_started.get("attempt_id") != "m2-geoid-001-real-001"
+        or dem_proj25_grid_started.get("restart_offset_bytes") != 0
+        or dem_proj25_grid_started.get("range_or_resume_used") is not False
+        or dem_proj25_grid_started.get("maximum_requests") != 1
+        or dem_proj25_grid_terminal.get("status") != "terminal_failure_no_retry"
+        or dem_proj25_grid_terminal.get("attempt_id") != "m2-geoid-001-real-001"
+        or dem_proj25_grid_terminal.get("last_stage") != "gdal_verification"
+        or dem_proj25_grid_terminal.get("request_count") != 1
+        or dem_proj25_grid_terminal.get("automatic_retry_authorized") is not False
+        or dem_proj25_grid_terminal.get("partial_bytes_preserved") != 80585622
+        or dem_proj25_grid_terminal.get("destination_created") is not False
+        or dem_proj25_grid_terminal.get("conversion_attempts_started") != 0
+    ):
+        fail("M2 DEM PROJ25 final preflight or terminal grid attempt differs or overclaims")
+    observed_metadata = dem_proj25_acquisition_reconciliation.get("observed_gdal_metadata", {})
+    if (
+        dem_proj25_acquisition_reconciliation.get("status") != "block_terminal_metadata_representation_mismatch_review_required"
+        or dem_proj25_acquisition_reconciliation.get("bindings", {}).get("final_preflight_sha256") != sha256("records/acquisition/m2-dem-vertical-datum-proj25-final-preflight.json")
+        or dem_proj25_acquisition_reconciliation.get("bindings", {}).get("started_receipt_sha256") != sha256("records/acquisition/m2-geoid-001-real-001-started.json")
+        or dem_proj25_acquisition_reconciliation.get("bindings", {}).get("terminal_receipt_sha256") != sha256("records/acquisition/m2-geoid-001-real-001-terminal.json")
+        or dem_proj25_acquisition_reconciliation.get("bindings", {}).get("public_transition_commit") != "538d468108d2f3b4959dcc1da8eed457bc3937e0"
+        or dem_proj25_acquisition_reconciliation.get("bindings", {}).get("public_transition_ci_run_id") != 35300945376
+        or dem_proj25_acquisition_reconciliation.get("preserved_staged_bytes", {}).get("size_bytes") != 80585622
+        or dem_proj25_acquisition_reconciliation.get("preserved_staged_bytes", {}).get("sha256") != "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a"
+        or dem_proj25_acquisition_reconciliation.get("preserved_staged_bytes", {}).get("exact_approved_identity") is not True
+        or dem_proj25_acquisition_reconciliation.get("preserved_staged_bytes", {}).get("promoted") is not False
+        or observed_metadata.get("driver") != "GTiff"
+        or observed_metadata.get("band_count") != 1
+        or observed_metadata.get("width") != 8640
+        or observed_metadata.get("height") != 4321
+        or observed_metadata.get("world_coverage") is not True
+        or observed_metadata.get("TYPE") != "VERTICAL_OFFSET_GEOGRAPHIC_TO_VERTICAL"
+        or observed_metadata.get("area_of_use") != "World"
+        or observed_metadata.get("target_crs_epsg_code") != "3855"
+        or observed_metadata.get("source_crs") is not None
+        or observed_metadata.get("target_crs") is not None
+        or "EPSG:4979" not in observed_metadata.get("TIFFTAG_IMAGEDESCRIPTION", "")
+        or "EPSG:3855" not in observed_metadata.get("TIFFTAG_IMAGEDESCRIPTION", "")
+        or dem_proj25_acquisition_reconciliation.get("mismatch", {}).get("post_observation_correction_required") is not True
+        or dem_proj25_acquisition_reconciliation.get("assertions", {}).get("exact_grid_request_consumed") is not True
+        or dem_proj25_acquisition_reconciliation.get("assertions", {}).get("grid_bytes_match_approved_identity") is not True
+        or dem_proj25_acquisition_reconciliation.get("assertions", {}).get("metadata_validation_passed") is not False
+        or dem_proj25_acquisition_reconciliation.get("assertions", {}).get("new_network_request_authorized") is not False
+        or dem_proj25_acquisition_reconciliation.get("assertions", {}).get("dem_pixels_read") is not False
+        or dem_proj25_acquisition_reconciliation.get("assertions", {}).get("dem_conversion_executed") is not False
+    ):
+        fail("M2 DEM PROJ25 acquisition reconciliation differs or overclaims")
+    if (
+        dem_proj25_metadata_recovery_proposal.get("status") != "proposed_inactive_owner_review_required"
+        or dem_proj25_metadata_recovery_proposal.get("bindings", {}).get("terminal_receipt_sha256") != sha256("records/acquisition/m2-geoid-001-real-001-terminal.json")
+        or dem_proj25_metadata_recovery_proposal.get("bindings", {}).get("acquisition_reconciliation_sha256") != sha256("records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json")
+        or dem_proj25_metadata_recovery_proposal.get("limits", {}).get("network_requests") != 0
+        or dem_proj25_metadata_recovery_proposal.get("limits", {}).get("recovery_verification_attempts") != 1
+        or dem_proj25_metadata_recovery_proposal.get("limits", {}).get("automatic_retry") is not False
+        or dem_proj25_metadata_recovery_proposal.get("proposed_exact_change", {}).get("source_semantics_changed") is not False
+        or dem_proj25_metadata_recovery_proposal.get("proposed_exact_change", {}).get("target_semantics_changed") is not False
+        or dem_proj25_metadata_recovery_proposal.get("proposed_exact_change", {}).get("tolerance_changed") is not False
+        or dem_proj25_metadata_recovery_proposal.get("claim_boundary", {}).get("human_decision_count") != 0
+        or dem_proj25_metadata_recovery_proposal.get("claim_boundary", {}).get("correction_authorized") is not False
+        or dem_proj25_metadata_recovery_proposal.get("claim_boundary", {}).get("grid_promoted") is not False
+        or dem_proj25_metadata_recovery_proposal.get("claim_boundary", {}).get("dem_pixels_read") is not False
+    ):
+        fail("M2 DEM PROJ25 metadata recovery proposal differs or creates authority")
+    if (
+        dem_proj25_metadata_recovery_surface.get("status") != "pass_blank_review_surface"
+        or dem_proj25_metadata_recovery_surface.get("artifact", {}).get("sha256") != sha256("docs/assets/m2-dem-vertical-datum-proj25-metadata-recovery-001-review.png")
+        or dem_proj25_metadata_recovery_surface.get("validation", {}).get("human_decision_count") != 0
+        or dem_proj25_metadata_recovery_surface.get("validation", {}).get("post_observation_bias_visible") is not True
+        or dem_proj25_metadata_recovery_bundle.get("candidate_identity") != "M2-DEM-VERTICAL-DATUM-PROJ25-METADATA-RECOVERY-001-PROPOSAL-SHA256:729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd"
+        or dem_proj25_metadata_recovery_bundle.get("human_decision_count") != 0
+        or dem_proj25_metadata_recovery_contract.get("review_bundle", {}).get("manifest_sha256") != "10d55916113e2b9e578e5845a75886f6688c112adc3e0f4b6bbb035f8658460d"
+        or dem_proj25_metadata_recovery_contract.get("required_attestation") is not True
+        or dem_proj25_metadata_recovery_blank.get("completed") is not False
+        or dem_proj25_metadata_recovery_blank.get("reviewer", {}).get("attestation") is not False
+        or dem_proj25_metadata_recovery_blank.get("responses", [{}])[0].get("decision") is not None
+        or dem_proj25_metadata_recovery_readiness.get("status") != "pass_ready_publication_zero_decisions"
+        or dem_proj25_metadata_recovery_readiness.get("bindings", {}).get("proposal_sha256") != sha256("contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json")
+        or dem_proj25_metadata_recovery_readiness.get("bindings", {}).get("review_bundle_sha256") != sha256("reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-bundle.json")
+        or dem_proj25_metadata_recovery_readiness.get("bindings", {}).get("review_contract_sha256") != sha256("reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-contract.json")
+        or dem_proj25_metadata_recovery_readiness.get("bindings", {}).get("blank_response_sha256") != sha256("reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/blank-response.json")
+        or dem_proj25_metadata_recovery_readiness.get("assertions", {}).get("correction_authorized") is not False
+        or dem_proj25_metadata_recovery_readiness.get("assertions", {}).get("network_request_authorized") is not False
+        or dem_proj25_metadata_recovery_readiness.get("assertions", {}).get("preserved_bytes_read_for_exact_reconciliation") is not True
+        or dem_proj25_metadata_recovery_readiness.get("assertions", {}).get("recovery_verification_performed") is not False
+        or dem_proj25_metadata_recovery_readiness.get("assertions", {}).get("grid_sample_values_read") is not False
+    ):
+        fail("M2 DEM PROJ25 metadata recovery review packet differs or overclaims")
     vertical_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-REVIEW", {})
     vertical_install_unit = active_m2_units.get("M2-DEM-EGM2008-COMPONENT-INSTALL", {})
     vertical_alternate_review_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW", {})
     vertical_alternate_implementation_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION", {})
     vertical_proj25_acquisition_unit = active_m2_units.get("M2-DEM-EGM2008-PROJ25-ACQUISITION", {})
+    vertical_proj25_metadata_recovery_review_unit = active_m2_units.get("M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW", {})
+    vertical_proj25_metadata_recovery_implementation_unit = active_m2_units.get("M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION", {})
     vertical_conversion_unit = active_m2_units.get("M2-DEM-VERTICAL-DATUM-CONVERSION", {})
     if (
         vertical_review_unit.get("status") != "complete"
@@ -3975,19 +4124,38 @@ def main() -> None:
         or vertical_alternate_implementation_unit.get("gates", {}).get("public_ci") != "success"
         or vertical_alternate_implementation_unit.get("gates", {}).get("grid_request_before_public_ci") is not False
         or vertical_alternate_implementation_unit.get("gates", {}).get("dem_pixel_read_before_public_ci") is not False
-        or vertical_proj25_acquisition_unit.get("status") != "in_progress"
+        or vertical_proj25_acquisition_unit.get("status") != "complete"
         or vertical_proj25_acquisition_unit.get("depends_on") != ["M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"]
         or vertical_proj25_acquisition_unit.get("gates", {}).get("public_ci") != "success"
-        or vertical_proj25_acquisition_unit.get("gates", {}).get("final_no_payload_preflight") != "ready_not_run"
+        or vertical_proj25_acquisition_unit.get("gates", {}).get("final_no_payload_preflight") != "pass"
         or vertical_proj25_acquisition_unit.get("gates", {}).get("maximum_requests") != 1
+        or vertical_proj25_acquisition_unit.get("gates", {}).get("requests_consumed") != 1
         or vertical_proj25_acquisition_unit.get("gates", {}).get("automatic_retry") is not False
+        or vertical_proj25_acquisition_unit.get("gates", {}).get("exact_staged_identity_passed") is not True
+        or vertical_proj25_acquisition_unit.get("gates", {}).get("metadata_verification_passed") is not False
+        or vertical_proj25_acquisition_unit.get("gates", {}).get("destination_promoted") is not False
+        or vertical_proj25_acquisition_unit.get("disposition") != "block_terminal_metadata_representation_mismatch"
+        or vertical_proj25_acquisition_unit.get("next_dependency") != "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW"
+        or vertical_proj25_metadata_recovery_review_unit.get("status") != "in_progress"
+        or vertical_proj25_metadata_recovery_review_unit.get("human_gate") is not True
+        or vertical_proj25_metadata_recovery_review_unit.get("depends_on") != ["M2-DEM-EGM2008-PROJ25-ACQUISITION"]
+        or vertical_proj25_metadata_recovery_review_unit.get("gates", {}).get("proposal_sha256") != sha256("contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json")
+        or vertical_proj25_metadata_recovery_review_unit.get("gates", {}).get("review_bundle_sha256") != sha256("reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-bundle.json")
+        or vertical_proj25_metadata_recovery_review_unit.get("gates", {}).get("public_ci") != "pending"
+        or vertical_proj25_metadata_recovery_review_unit.get("gates", {}).get("human_decision_count") != 0
+        or vertical_proj25_metadata_recovery_review_unit.get("gates", {}).get("correction_authorized") is not False
+        or vertical_proj25_metadata_recovery_implementation_unit.get("status") != "planned"
+        or vertical_proj25_metadata_recovery_implementation_unit.get("depends_on") != ["M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW"]
+        or vertical_proj25_metadata_recovery_implementation_unit.get("gates", {}).get("network_requests") != 0
+        or vertical_proj25_metadata_recovery_implementation_unit.get("gates", {}).get("recovery_verification_attempts") != 1
+        or vertical_proj25_metadata_recovery_implementation_unit.get("gates", {}).get("automatic_retry") is not False
         or vertical_conversion_unit.get("status") != "planned"
-        or vertical_conversion_unit.get("depends_on") != ["M2-DEM-EGM2008-PROJ25-ACQUISITION"]
+        or vertical_conversion_unit.get("depends_on") != ["M2-DEM-PROJ25-METADATA-RECOVERY-001-IMPLEMENTATION"]
         or vertical_conversion_unit.get("gates", {}).get("selected_method") != "local_proj_egm2008_2_5_preconversion_then_none"
         or vertical_conversion_unit.get("gates", {}).get("output_root") != r"C:\Projects\Active\nepal-2026-before-after-map-data\derived\dem\egm2008-ellipsoidal-proj25"
         or vertical_conversion_unit.get("gates", {}).get("source_overwrite_permitted") is not False
     ):
-        fail("M2 DEM vertical-datum milestone units differ from the approved implementation-only state")
+        fail("M2 DEM vertical-datum milestone units differ from the terminal acquisition and zero-decision recovery-review state")
     if dem_manifest.get("status") != "candidate_not_approved" or len(dem_manifest.get("records", [])) != 4:
         fail("M2 DEM candidate manifest must remain an unapproved exact four-tile set")
     expected_dem_ids = {
@@ -6594,18 +6762,22 @@ def main() -> None:
     )
     if orbit_offline_verification_recovery_pass:
         expected_checkpoint = (
-            "M2-DEM-EGM2008-PROJ25-ACQUISITION"
-            if dem_alt_acquisition_active
+            "M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW-PUBLICATION"
+            if dem_proj25_metadata_recovery_review_publication_pending
             else (
-                "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
-                if dem_alt_implementation_active
+                "M2-DEM-EGM2008-PROJ25-ACQUISITION"
+                if dem_alt_acquisition_active
                 else (
-                    "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
-                    if dem_alt_review_ready
+                    "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
+                    if dem_alt_implementation_active
                     else (
-                        "M2-DEM-EGM2008-COMPONENT-INSTALL"
-                        if dem_vertical_method_approved
-                        else "M2-DEM-VERTICAL-DATUM-REVIEW"
+                        "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
+                        if dem_alt_review_ready
+                        else (
+                            "M2-DEM-EGM2008-COMPONENT-INSTALL"
+                            if dem_vertical_method_approved
+                            else "M2-DEM-VERTICAL-DATUM-REVIEW"
+                        )
                     )
                 )
             )
@@ -9416,6 +9588,38 @@ def main() -> None:
         or vertical_proj25_publication_evidence.get("assertions", {}).get("grid_payload_bytes_read") != 0
     ):
         fail("EVID-0133 DEM vertical-datum PROJ25 publication gate differs or overclaims")
+    vertical_proj25_metadata_recovery_review_evidence = ledger_by_id.get("EVID-0134")
+    if (
+        not isinstance(vertical_proj25_metadata_recovery_review_evidence, dict)
+        or vertical_proj25_metadata_recovery_review_evidence.get("status") != "block_terminal_attempt_zero_decision_recovery_review_publication_pending"
+        or vertical_proj25_metadata_recovery_review_evidence.get("final_preflight_sha256") != sha256("records/acquisition/m2-dem-vertical-datum-proj25-final-preflight.json")
+        or vertical_proj25_metadata_recovery_review_evidence.get("terminal_receipt_sha256") != sha256("records/acquisition/m2-geoid-001-real-001-terminal.json")
+        or vertical_proj25_metadata_recovery_review_evidence.get("acquisition_reconciliation_sha256") != sha256("records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json")
+        or vertical_proj25_metadata_recovery_review_evidence.get("proposal_sha256") != sha256("contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json")
+        or vertical_proj25_metadata_recovery_review_evidence.get("review_bundle_sha256") != sha256("reviews/m2-dem-vertical-datum-proj25-metadata-recovery-001/review-bundle.json")
+        or vertical_proj25_metadata_recovery_review_evidence.get("review_readiness_sha256") != sha256("records/readiness/m2-dem-vertical-datum-proj25-metadata-recovery-001-review-readiness.json")
+        or vertical_proj25_metadata_recovery_review_evidence.get("test_sha256") != sha256("tests/test_m2_dem_vertical_datum_proj25_metadata_recovery_001_review.py")
+        or vertical_proj25_metadata_recovery_review_evidence.get("checkpoint_derivation_sha256") != sha256("scripts/derive_m2_acquisition_checkpoint.py")
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("public_transition_commit") != "538d468108d2f3b4959dcc1da8eed457bc3937e0"
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("public_transition_ci_run_id") != 35300945376
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("request_count") != 1
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("exact_staged_byte_identity_passed") is not True
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("metadata_key_validation_passed") is not False
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("preserved_bytes_read_for_exact_reconciliation") is not True
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("recovery_authorized") is not False
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("future_network_request_authorized") is not False
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("grid_promoted") is not False
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("dem_pixels_read") is not False
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("dem_conversion_executed") is not False
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("scientific_result_established") is not False
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("repository_checker_status") != "pass_908_required_files"
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("full_repository_test_count") != 528
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("full_repository_intentional_skip_count") != 4
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("arcgis_focused_test_count") != 20
+        or vertical_proj25_metadata_recovery_review_evidence.get("assertions", {}).get("arcgis_focused_failure_count") != 0
+    ):
+        fail("EVID-0134 DEM PROJ25 terminal acquisition or recovery review differs or overclaims")
 
     orbit_review_evidence = ledger_by_id.get("EVID-0052")
     if (

@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "event": "m2_dem_vertical_grid_request_failed",
+  "status": "terminal_failure_no_retry",
+  "attempt_id": "m2-geoid-001-real-001",
+  "source_id": "M2-GEOID-001",
+  "started_at_utc": "2026-09-18T02:51:55Z",
+  "completed_at_utc": "2026-09-18T02:52:08Z",
+  "last_stage": "gdal_verification",
+  "failure_type": "ValueError",
+  "failure_message": "grid GeoTIFF metadata does not match the approved resource",
+  "request_count": 1,
+  "automatic_retry_authorized": false,
+  "partial_bytes_preserved": 80585622,
+  "destination_created": false,
+  "conversion_attempts_started": 0,
+  "external_terminal_event": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\control-events\\m2-dem-vertical-datum-proj25\\m2-geoid-001-real-001\\terminal.json"
+}

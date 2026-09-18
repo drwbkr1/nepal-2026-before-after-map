@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-DEM-PROJ25-METADATA-RECOVERY-001-REVIEW-SURFACE",
+  "verified_at_utc": "2026-09-18T02:57:00Z",
+  "status": "pass_blank_review_surface",
+  "artifact": {
+    "path": "docs/assets/m2-dem-vertical-datum-proj25-metadata-recovery-001-review.png",
+    "sha256": "2ebbcf9112558845546fd0dec846cc531e849878ca70aade9887273fd1d2111a",
+    "width_px": 1800,
+    "height_px": 1580,
+    "format": "PNG",
+    "contains_third_party_pixels": false
+  },
+  "bindings": {
+    "proposal_ref": "contracts/m2-dem-vertical-datum-proj25-metadata-recovery-001-proposal.json",
+    "proposal_sha256": "729d36da013a9bf987486e18f7c6bac75865eda5b75dc963e8fd31ff4ddb13cd",
+    "reconciliation_ref": "records/acquisition/m2-dem-vertical-datum-proj25-acquisition-reconciliation-001.json",
+    "reconciliation_sha256": "86d7ef8e031441f683a31964cedbe434d56748636f48ed2309f973ef15ad62a5",
+    "terminal_receipt_ref": "records/acquisition/m2-geoid-001-real-001-terminal.json",
+    "terminal_receipt_sha256": "60f565fd3ae615a16a5f3ef51bb368e4aadf3333423283b5407eb779930ec4a2",
+    "render_script_ref": "scripts/render_m2_dem_vertical_datum_proj25_metadata_recovery_001_review.py",
+    "render_script_sha256": "a8a960b3ba736c302c800eca718b7f5fd36685fefcca1288c02bfc2e0252a7df"
+  },
+  "validation": {
+    "visual_inspection": "pass",
+    "proposal_hash_visible": true,
+    "terminal_attempt_visible": true,
+    "exact_byte_identity_visible": true,
+    "metadata_mismatch_visible": true,
+    "bounded_offline_recovery_visible": true,
+    "post_observation_bias_visible": true,
+    "decision_options_visible": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "blank_state_verified": true,
+    "human_decision_count": 0,
+    "completion_controls_verified": true,
+    "export_verified": true
+  },
+  "limitations": [
+    "This text-only surface contains no completed human decision.",
+    "Visual inspection verifies layout and blank state, not a future reviewer decision.",
+    "The surface contains no DEM, radar, derived, or third-party raster pixels."
+  ]
+}
