@@ -89,7 +89,7 @@ class M2DemProj25ReceiptPersistenceRecovery002ReviewTests(unittest.TestCase):
             self.assertFalse(self.readiness["assertions"][key])
 
     def test_control_state_routes_to_bounded_implementation(self) -> None:
-        checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION"
+        checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)

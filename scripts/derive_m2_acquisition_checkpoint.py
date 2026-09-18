@@ -208,7 +208,7 @@ RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_001_IMPLEMENTATION_CHECKPOINT = {
 }
 RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_001_EXECUTION_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION",
-    "next_action": "Run the one final no-content recovery preflight and, only on pass, the single fresh fixed-order six-source and two-route attempt. Stop on the first execution failure, perform no retry, and do not run baseline or change analysis.",
+    "next_action": "Publish and publicly validate the exact recovery implementation gate state. Only after that public CI passes, run the one final no-content recovery preflight; project-data access and the fresh attempt remain blocked until the preflight passes.",
 }
 
 

@@ -3694,7 +3694,7 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
         "contracts/milestone-002-radar-pixel-orbit-application-recovery-001-proposal.json",
@@ -3714,26 +3714,27 @@
       "gates": {
         "approval_sha256": "4a1fe442f678c354c13f7e255ea459db2ec2d0368c35b72b32170ae8a3dc7d8f",
         "review_reconciliation_sha256": "e6454b84bf76cf07b758e9e075b69b9cfb8a0392b69518a64e7ed16b15cc2554",
-        "public_ci": "pending",
+        "public_ci": "success",
         "final_no_content_preflight": false,
         "project_data_content_read": false,
         "new_attempt_created": false,
         "orbit_application_started": false,
-        "radar_pixel_processing_started": false
+        "radar_pixel_processing_started": false,
+        "implementation_commit_sha": "4b35f3a3de1e1f2d2e00d2cf62d4c2164dc59568",
+        "public_ci_run_id": 35405199109,
+        "implementation_publication_gate_sha256": "1778a9dcb553a5d7eb8473341d62e4dff6e1f4ee387666158461c6916f28312d"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json"
       ],
       "exit_condition_delta": {
-        "expected": [
+        "expected": [],
+        "observed": [
           "successful public default-branch CI"
         ],
-        "observed": [
-          "exact approval locked and reconciled"
-        ],
-        "decision_value": "unknown",
-        "rationale": "Implementation-only authority is active; real data access remains gated."
+        "decision_value": "enables_dependency",
+        "rationale": "The exact implementation passed public CI; final preflight remains blocked until this gate state is published and validated."
       },
       "next_dependency": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION"
     },
@@ -3745,7 +3746,7 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-publication-gate.json"
@@ -3755,13 +3756,15 @@
         "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json"
       ],
       "gates": {
-        "public_ci": "pending",
+        "public_ci": "success",
         "final_no_content_preflight": "pending",
         "real_attempts_started": 0,
         "source_attempts_started": 0,
         "route_evaluations_started": 0,
         "automatic_retry": false,
-        "baseline_or_change_authorized": false
+        "baseline_or_change_authorized": false,
+        "gate_state_publication": "pending",
+        "implementation_publication_gate_sha256": "1778a9dcb553a5d7eb8473341d62e4dff6e1f4ee387666158461c6916f28312d"
       },
       "disposition": null,
       "retained_failures": [
@@ -3833,8 +3836,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION",
-    "next_action": "Implement and validate only the approved strict inventory projection, ordering correction, durable terminal handling, and recovery-specific controls, then require successful public default-branch CI. Do not run the final preflight, read project pixels, or create the fresh recovery attempt before that gate.",
+    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION",
+    "next_action": "Publish and publicly validate the exact recovery implementation gate state. Only after that public CI passes, run the one final no-content recovery preflight; project-data access and the fresh attempt remain blocked until the preflight passes.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3879,7 +3882,7 @@
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery.",
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval."
     ],
-    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-IMPLEMENTATION",
-    "parallel_next_action": "Implement and validate only the approved strict inventory projection, ordering correction, durable terminal handling, and recovery-specific controls, then require successful public default-branch CI. Do not run the final preflight, read project pixels, or create the fresh recovery attempt before that gate."
+    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION",
+    "parallel_next_action": "Publish and publicly validate the exact recovery implementation gate state. Only after that public CI passes, run the one final no-content recovery preflight; project-data access and the fresh attempt remain blocked until the preflight passes."
   }
 }
