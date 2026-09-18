@@ -6,7 +6,7 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION`; the exact owner approval is locked, the bounded implementation passes local validation, and public default-branch CI is required before the final no-content preflight or any project-data read
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION`; corrected implementation commit `ff2e26f5d28d59b02c78f4d16d14ddccb3ff987e` passed public CI run `35395320916`, and the exact gate state must now pass public default-branch CI before the final no-content preflight or any project-data read
 
 ## Purpose
 
@@ -266,4 +266,6 @@ Eleven focused tests, one current installed ArcGIS runtime validation, and all 5
 
 Exact commit `2d04633a835141084e38bbdc11e1411d48012e95` passed the public repository checker but failed public CI run `35394937116` because one test called the production loader for an owner-controlled Windows custody root that is absent on Ubuntu. Failure-record SHA-256 is `17ddc940ee4ce021840df56d8278206f9137038d9528842486d62843b2573c96`; the public gate remained closed. The production loader is unchanged. The corrected test validates exact repository metadata when the external root is absent, and the 1,000-file checker passes. Corrected implementation-readiness SHA-256 is `5b735e3dc090f0a6d40e6b061bd804fdddc4721f47da9ac8a806937ca67ae039`.
 
-The current checkpoint is `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION`. Only public CI is released. No final preflight, project-data content read, external-custody mutation, real attempt, orbit application, radar pixel processing, route disposition, baseline, change analysis, attribution, derived-pixel publication, or scientific claim has occurred.
+Corrected implementation commit `ff2e26f5d28d59b02c78f4d16d14ddccb3ff987e` passed public default-branch CI run `35395320916`: 1,000 required files and all 563 tests passed with 13 intentional public-runtime skips. Implementation publication-gate SHA-256 is `228319332ab4422701d223093429b7a8923b7462838939641d8003ec36c2f1fa`.
+
+The current checkpoint is `M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION`. Publication and successful public validation of the exact gate state remain required before the one final no-content preflight. No final preflight, project-data content read, external-custody mutation, real attempt, orbit application, radar pixel processing, route disposition, baseline, change analysis, attribution, derived-pixel publication, or scientific claim has occurred.

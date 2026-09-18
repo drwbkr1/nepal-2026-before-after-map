@@ -3511,7 +3511,7 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
         "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json",
@@ -3530,32 +3530,35 @@
         "records/surface-receipts/m2-radar-pixel-orbit-application-001-synthetic.json",
         "records/surface-receipts/m2-radar-pixel-orbit-application-001-synthetic-002.json",
         "records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness-attempt-001-superseded.json",
-        "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-attempt-001-failure.json"
+        "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-attempt-001-failure.json",
+        "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-reconciliation.json",
+        "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py"
       ],
       "gates": {
         "approval_sha256": "1d6522a0a340e3237c29b8489e742c6a8b376314c358ee9ae0d323621cf4b6fe",
-        "public_ci": "pending",
+        "public_ci": "success",
         "final_no_content_preflight": false,
         "project_data_content_read": false,
         "orbit_application_started": false,
-        "radar_pixel_processing_started": false
+        "radar_pixel_processing_started": false,
+        "public_ci_run_id": 35395320916,
+        "implementation_commit_sha": "ff2e26f5d28d59b02c78f4d16d14ddccb3ff987e"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/readiness/m2-radar-pixel-orbit-application-001-review-lock-attempt-001-failure.json",
         "records/readiness/m2-radar-pixel-orbit-application-001-synthetic-attempt-001-failure.json",
         "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-attempt-001-failure.json"
       ],
       "exit_condition_delta": {
-        "expected": [
-          "portable and ArcGIS runtime tests pass",
-          "public CI succeeds"
-        ],
+        "expected": [],
         "observed": [
-          "approval locked and reconciled"
+          "portable tests pass",
+          "installed ArcGIS synthetic validation passes",
+          "public default-branch CI succeeds"
         ],
-        "decision_value": "unknown",
-        "rationale": "Implementation is active; all real data actions remain blocked."
+        "decision_value": "enables_dependency",
+        "rationale": "Only publication of this gate state and the final no-content preflight are released before project-data access."
       },
       "next_dependency": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION"
     },
@@ -3567,21 +3570,23 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
-        "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json"
+        "contracts/milestone-002-radar-pixel-orbit-application-001-proposal.json",
+        "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-gate.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-pixel-orbit-application-001-final-preflight.json",
         "records/processing/m2-radar-pixel-orbit-application-001-terminal-reconciliation.json"
       ],
       "gates": {
-        "public_ci": "blocked_by_implementation",
-        "final_no_content_preflight": "pending_after_public_ci",
+        "public_ci": "success",
+        "final_no_content_preflight": "pending_after_gate_record_publication",
         "source_attempts_started": 0,
         "automatic_retry": false,
-        "baseline_or_change_authorized": false
+        "baseline_or_change_authorized": false,
+        "gate_record_publication": "pending"
       },
       "disposition": null,
       "retained_failures": [],
@@ -3651,8 +3656,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION",
-    "next_action": "Implement and validate only the exact approved six-source route, synthetic controls, and ArcGIS-runtime tests, then require successful public default-branch CI. Do not run the final preflight, read project pixels, apply an orbit, or create a real processing attempt before that public gate.",
+    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION",
+    "next_action": "Run the one final no-content preflight and, only on pass, the single fixed-order six-source orbit-application and QA attempt with two independent route evaluations. Stop on the first execution failure and do not run baseline or change analysis.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3697,7 +3702,7 @@
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery.",
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval."
     ],
-    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION",
-    "parallel_next_action": "Implement and validate only the exact approved six-source route, synthetic controls, and ArcGIS-runtime tests, then require successful public default-branch CI. Do not run the final preflight, read project pixels, apply an orbit, or create a real processing attempt before that public gate."
+    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION",
+    "parallel_next_action": "Run the one final no-content preflight and, only on pass, the single fixed-order six-source orbit-application and QA attempt with two independent route evaluations. Stop on the first execution failure and do not run baseline or change analysis."
   }
 }

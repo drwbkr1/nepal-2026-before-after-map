@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from derive_m2_acquisition_checkpoint import (  # noqa: E402
+    current_radar_pixel_orbit_application_001_execution_pending,
     current_radar_pixel_orbit_application_001_implementation_active,
     current_radar_pixel_orbit_application_001_review_publication_pending,
     current_radar_pixel_orbit_application_001_review_required,
@@ -112,9 +113,9 @@ class M2RadarPixelOrbitApplication001ReviewTests(unittest.TestCase):
         for key in ("orbit_application_authorized", "radar_pixel_processing_authorized", "baseline_or_change_authorized", "project_data_content_read_during_preparation", "network_requests_performed", "external_custody_mutated", "scientific_result_established"):
             self.assertFalse(self.readiness["assertions"][key])
 
-    def test_control_state_matches_approved_implementation_phase(self) -> None:
+    def test_control_state_matches_approved_execution_phase(self) -> None:
         published = (ROOT / PUBLICATION_REF).exists()
-        checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION"
+        checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-001-EXECUTION"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)
@@ -139,7 +140,8 @@ class M2RadarPixelOrbitApplication001ReviewTests(unittest.TestCase):
                 self.assertFalse(reconciliation["released_now"][key])
             self.assertFalse(current_radar_pixel_orbit_application_001_review_required(ROOT, {"promoted": 8}))
             self.assertFalse(current_radar_pixel_orbit_application_001_review_publication_pending(ROOT, {"promoted": 8}))
-            self.assertTrue(current_radar_pixel_orbit_application_001_implementation_active(ROOT, {"promoted": 8}))
+            self.assertFalse(current_radar_pixel_orbit_application_001_implementation_active(ROOT, {"promoted": 8}))
+            self.assertTrue(current_radar_pixel_orbit_application_001_execution_pending(ROOT, {"promoted": 8}))
         else:
             self.assertTrue(current_radar_pixel_orbit_application_001_review_publication_pending(ROOT, {"promoted": 8}))
             self.assertFalse(current_radar_pixel_orbit_application_001_review_required(ROOT, {"promoted": 8}))
@@ -156,11 +158,14 @@ class M2RadarPixelOrbitApplication001ReviewTests(unittest.TestCase):
         self.assertTrue(review["gates"]["attestation"])
         self.assertTrue(review["gates"]["route_authorized"])
         self.assertFalse(review["gates"]["baseline_or_change_authorized"])
-        self.assertEqual(implementation["status"], "in_progress")
-        self.assertEqual(implementation["gates"]["public_ci"], "pending")
+        self.assertEqual(implementation["status"], "complete")
+        self.assertEqual(implementation["disposition"], "pass")
+        self.assertEqual(implementation["gates"]["public_ci"], "success")
         self.assertFalse(implementation["gates"]["project_data_content_read"])
         self.assertFalse(implementation["gates"]["orbit_application_started"])
-        self.assertEqual(execution["status"], "planned")
+        self.assertEqual(execution["status"], "in_progress")
+        self.assertEqual(execution["gates"]["public_ci"], "success")
+        self.assertEqual(execution["gates"]["gate_record_publication"], "pending")
         self.assertEqual(execution["gates"]["source_attempts_started"], 0)
 
 

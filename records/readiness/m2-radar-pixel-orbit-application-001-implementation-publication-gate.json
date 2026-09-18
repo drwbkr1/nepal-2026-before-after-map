@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-18T21:10:57Z",
+  "status": "pass_public_default_branch_ci_implementation_ready",
+  "implementation_commit_sha": "ff2e26f5d28d59b02c78f4d16d14ddccb3ff987e",
+  "public_ci_run_id": 35395320916,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35395320916",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1000,
+  "public_test_count": 563,
+  "public_intentional_skip_count": 13,
+  "bindings": {
+    "implementation_contract_ref": "config/qa/m2-radar-pixel-orbit-application-001-contract.json",
+    "implementation_contract_sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+    "core_ref": "scripts/m2_radar_pixel_orbit_application_001_core.py",
+    "core_sha256": "fd192878acf33e2c73eeeba1ec42865eac48dfc5742b3ae4cf54b51de42755ba",
+    "runner_ref": "scripts/run_m2_radar_pixel_orbit_application_001.py",
+    "runner_sha256": "0b65fbecbeab373d8bbbf2cbbc28f8817e3c3bb08584dbf1a9720dcbb19ceb06",
+    "arcgis_validator_ref": "scripts/validate_m2_radar_pixel_orbit_application_001_arcgis.py",
+    "arcgis_validator_sha256": "ab6f431cbd42058f65bc0e4dc9ec3c94d3aa83f4017cdb8dab9598fc4f5b4e23",
+    "portable_test_ref": "tests/test_m2_radar_pixel_orbit_application_001.py",
+    "portable_test_sha256": "9e5d78a4dcbf75c705006fb1ed1cf01fcb316840519b4ba13e133bf25a965179",
+    "implementation_readiness_ref": "records/readiness/m2-radar-pixel-orbit-application-001-implementation-readiness.json",
+    "implementation_readiness_sha256": "5b735e3dc090f0a6d40e6b061bd804fdddc4721f47da9ac8a806937ca67ae039",
+    "failed_publication_attempt_ref": "records/readiness/m2-radar-pixel-orbit-application-001-implementation-publication-attempt-001-failure.json",
+    "failed_publication_attempt_sha256": "17ddc940ee4ce021840df56d8278206f9137038d9528842486d62843b2573c96"
+  },
+  "released_now": {
+    "gate_record_publication": true,
+    "final_no_content_preflight_after_gate_record_publication": true,
+    "project_data_content_read": false,
+    "orbit_application": false,
+    "radar_pixel_processing": false,
+    "route_evaluation": false
+  },
+  "assertions": {
+    "failed_prior_run_preserved": true,
+    "project_data_content_read": false,
+    "external_custody_accessed_after_public_ci": false,
+    "external_custody_mutated": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "final_no_content_preflight_performed": false,
+    "real_processing_attempt_created": false,
+    "orbit_application_executed": false,
+    "radar_pixel_processing_executed": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Publish this exact gate state; only after successful public validation run the one final no-content preflight."
+}
