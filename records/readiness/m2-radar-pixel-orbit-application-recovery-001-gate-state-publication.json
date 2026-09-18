@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-GATE-STATE-PUBLICATION",
+  "recorded_at_utc": "2026-09-18T23:31:03Z",
+  "status": "pass_public_gate_state_final_preflight_released",
+  "gate_state_commit_sha": "e1c57b8c1a56d7fa9a9dc2e7ea732ad215d3773d",
+  "public_ci_run_id": 35405865359,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35405865359",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1036,
+  "public_test_count": 578,
+  "public_intentional_skip_count": 13,
+  "bindings": {
+    "implementation_publication_gate_ref": "records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-publication-gate.json",
+    "implementation_publication_gate_sha256": "1778a9dcb553a5d7eb8473341d62e4dff6e1f4ee387666158461c6916f28312d",
+    "implementation_publication_reconciliation_ref": "records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-publication-reconciliation.json",
+    "implementation_publication_reconciliation_sha256": "4cba5e0bc183f2652d51421e2247ec2ccd4b34a0a4caff7ec17b46e2b66f42b1",
+    "published_milestone_sha256": "c5a42c2de42a2ef44c4744409d1f900764e6ad770a5bb617cbb8e1a9d37a96ae",
+    "published_project_control_profile_sha256": "463e017f92659cd940777b9aa72f9328707f47f471d32a037939b553da2691f0",
+    "published_long_term_goal_sha256": "f6d02eb52ed15274a95b35627bbebc482628fa4cdd08b503ff39ad073e707015"
+  },
+  "released_now": {
+    "final_no_content_preflight": true,
+    "project_data_content_read_only_after_preflight_pass": true,
+    "new_real_attempt_only_after_preflight_pass": true,
+    "orbit_application_only_after_preflight_pass": true,
+    "radar_pixel_processing_only_after_preflight_pass": true,
+    "route_evaluation_only_after_preflight_pass": true,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "final_no_content_preflight_performed": false,
+    "project_data_content_read": false,
+    "external_custody_mutated": false,
+    "new_real_attempt_created": false,
+    "orbit_application_executed": false,
+    "radar_pixel_processing_executed": false,
+    "route_evaluation_executed": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Publish and validate this gate-state record, then run the one authorized final no-content preflight once. Stop on failure; only on pass may the fresh fixed-order six-source and two-route attempt begin."
+}

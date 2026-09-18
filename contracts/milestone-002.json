@@ -3749,7 +3749,8 @@
       "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
-        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-publication-gate.json"
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-publication-gate.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-gate-state-publication.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-final-preflight.json",
@@ -3763,8 +3764,10 @@
         "route_evaluations_started": 0,
         "automatic_retry": false,
         "baseline_or_change_authorized": false,
-        "gate_state_publication": "pending",
-        "implementation_publication_gate_sha256": "1778a9dcb553a5d7eb8473341d62e4dff6e1f4ee387666158461c6916f28312d"
+        "gate_state_publication": "success",
+        "implementation_publication_gate_sha256": "1778a9dcb553a5d7eb8473341d62e4dff6e1f4ee387666158461c6916f28312d",
+        "gate_state_commit_sha": "e1c57b8c1a56d7fa9a9dc2e7ea732ad215d3773d",
+        "gate_state_publication_sha256": "c9d8a120591999af16e093f2eb8763715d54e06e41396b86e4d318dbc247a2e6"
       },
       "disposition": null,
       "retained_failures": [
@@ -3837,7 +3840,7 @@
   },
   "handoff": {
     "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION",
-    "next_action": "Publish and publicly validate the exact recovery implementation gate state. Only after that public CI passes, run the one final no-content recovery preflight; project-data access and the fresh attempt remain blocked until the preflight passes.",
+    "next_action": "Run the one authorized final no-content recovery preflight once. Stop on failure; only on pass may the fresh fixed-order six-source and two-route attempt begin.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3883,6 +3886,6 @@
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval."
     ],
     "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION",
-    "parallel_next_action": "Publish and publicly validate the exact recovery implementation gate state. Only after that public CI passes, run the one final no-content recovery preflight; project-data access and the fresh attempt remain blocked until the preflight passes."
+    "parallel_next_action": "Run the one authorized final no-content recovery preflight once. Stop on failure; only on pass may the fresh fixed-order six-source and two-route attempt begin."
   }
 }

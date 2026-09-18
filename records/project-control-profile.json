@@ -623,13 +623,13 @@
     "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish and publicly validate the exact recovery implementation gate state. Only after that public CI passes, run the one final no-content recovery preflight; project-data access and the fresh attempt remain blocked until the preflight passes."
+    "next_action": "Run the one authorized final no-content recovery preflight once. Stop on failure; only on pass may the fresh fixed-order six-source and two-route attempt begin."
   },
   "parallel_checkpoints": [
     {
       "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION",
       "authority_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
-      "next_action": "Publish and publicly validate the exact recovery implementation gate state. Only after that public CI passes, run the one final no-content recovery preflight; project-data access and the fresh attempt remain blocked until the preflight passes."
+      "next_action": "Run the one authorized final no-content recovery preflight once. Stop on failure; only on pass may the fresh fixed-order six-source and two-route attempt begin."
     }
   ],
   "human_gates": {
