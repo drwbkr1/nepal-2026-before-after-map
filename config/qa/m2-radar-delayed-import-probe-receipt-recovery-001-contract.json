@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-CONTRACT",
+  "status": "approved_implementation_publication_pending",
+  "authority": {
+    "approval_ref": "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
+    "approval_sha256": "cf3781bb8ff4d638f48c4f80a88f0bff24c268b1a6f33e4c5ad2430e691ec4f5",
+    "proposal_ref": "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json",
+    "proposal_sha256": "9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09",
+    "review_bundle_ref": "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-bundle.json",
+    "review_bundle_sha256": "df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695",
+    "review_reconciliation_ref": "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-reconciliation.json",
+    "review_reconciliation_sha256": "77e86a7160a5ed3f8a877a28e6f217f4a759abebe88d5bd056e506110bfc9409"
+  },
+  "attempt": {
+    "attempt_id": "radar-delayed-import-probe-receipt-recovery-001-real-001",
+    "maximum_attempts": 1,
+    "automatic_retry": false,
+    "process_count": 1,
+    "distinct_from_consumed_attempt": true,
+    "external_local_path_class": "local_appdata_probe_specific_outside_git_and_external_custody"
+  },
+  "corpus": {
+    "content_class": "deterministic_disposable_zero_bytes",
+    "file_count": 156,
+    "total_logical_bytes": 10367157634,
+    "expected_stable_order_aggregate_sha256": "dd56f8b28a1ed1c6e2b4b1d7d8f5db4fd86dab80a910fe79c8d018d58942430b",
+    "sparse_regular_files_required": true,
+    "stable_name_order_hash_before_arcpy_import": true
+  },
+  "receipt_durability": {
+    "function_local_datetime_import": true,
+    "terminal_identity_reserved_before_corpus": true,
+    "cleanup_identity_reserved_before_corpus": true,
+    "fallback_journal_initialized_before_corpus": true,
+    "original_sanitized_exception_recorded_before_terminal_assembly": true,
+    "terminal_persistence_error_appended_without_replacing_original": true,
+    "cleanup_outer_finally_independent_of_terminal_serialization": true,
+    "fallback_is_success_evidence": false
+  },
+  "stage_order": [
+    "attempt_reserved",
+    "corpus_create_started",
+    "corpus_create_completed",
+    "corpus_hash_started",
+    "corpus_hash_completed",
+    "arcpy_import_started",
+    "arcpy_import_completed",
+    "product_info_started",
+    "product_info_completed",
+    "overwrite_output_started",
+    "overwrite_output_completed",
+    "image_analyst_checkout_started",
+    "image_analyst_checkout_completed",
+    "spatial_checkout_started",
+    "spatial_checkout_completed",
+    "disposable_raster_a_started",
+    "disposable_raster_a_completed",
+    "disposable_raster_b_started",
+    "disposable_raster_b_completed",
+    "disposable_mosaic_started",
+    "disposable_mosaic_completed",
+    "spatial_checkin_started",
+    "spatial_checkin_completed",
+    "image_analyst_checkin_started",
+    "image_analyst_checkin_completed",
+    "terminal_receipt_persisted",
+    "cleanup_started",
+    "cleanup_completed_or_warning"
+  ],
+  "geoprocessing": {
+    "inputs": "two deterministic 2 by 2 disposable rasters",
+    "operation": "arcpy.management.MosaicToNewRaster",
+    "output": "one disposable local raster",
+    "project_crs_or_project_aoi_used": false
+  },
+  "claim_boundary": {
+    "historical_root_cause_claim_allowed": false,
+    "recovery_readiness_claim_allowed": false,
+    "radar_processing_claim_allowed": false,
+    "scientific_claim_allowed": false
+  },
+  "forbidden": {
+    "project_data_or_external_custody_access": true,
+    "network_or_credential_action": true,
+    "installation_or_uac_action": true,
+    "consumed_attempt_retry_or_reuse": true,
+    "radar_processing": true,
+    "baseline_or_change_analysis": true,
+    "interpretation_or_attribution": true,
+    "scientific_publication": true
+  }
+}

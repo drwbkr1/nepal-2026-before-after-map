@@ -36,6 +36,10 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_delayed_import_probe_001_terminal,
     current_radar_delayed_import_probe_receipt_recovery_001_review_publication_pending,
     current_radar_delayed_import_probe_receipt_recovery_001_review_required,
+    current_radar_delayed_import_probe_receipt_recovery_001_implementation_pending,
+    current_radar_delayed_import_probe_receipt_recovery_001_execution_gate_publication_pending,
+    current_radar_delayed_import_probe_receipt_recovery_001_final_preflight_pending,
+    current_radar_delayed_import_probe_receipt_recovery_001_terminal,
     current_full_header_implementation_pending,
     current_materialization_pixel_implementation_pending,
     current_optical_pixel_implementation_pending,
@@ -284,6 +288,23 @@ REQUIRED = [
     "scripts/integrate_m2_radar_delayed_import_probe_receipt_recovery_001_review_publication.py",
     "scripts/record_m2_radar_delayed_import_probe_receipt_recovery_001_review_publication.py",
     "tests/test_m2_radar_delayed_import_probe_receipt_recovery_001_review.py",
+    "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/response-baf64278ef45352ca7add79948d827fdf87dba8138e722510d89da568a006600.json",
+    "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-contract-lock-001.json",
+    "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-reconciliation.json",
+    "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
+    "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-approval-activation.json",
+    "config/qa/m2-radar-delayed-import-probe-receipt-recovery-001-contract.json",
+    "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-arcgis-runtime-validation.json",
+    "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-implementation-readiness.json",
+    "scripts/activate_m2_radar_delayed_import_probe_receipt_recovery_001.py",
+    "scripts/m2_radar_delayed_import_probe_receipt_recovery_001_core.py",
+    "scripts/run_m2_radar_delayed_import_probe_receipt_recovery_001.py",
+    "scripts/validate_m2_radar_delayed_import_probe_receipt_recovery_001_arcgis.py",
+    "scripts/record_m2_radar_delayed_import_probe_receipt_recovery_001_implementation_readiness.py",
+    "scripts/record_m2_radar_delayed_import_probe_receipt_recovery_001_implementation_publication.py",
+    "scripts/record_m2_radar_delayed_import_probe_receipt_recovery_001_gate_state_publication.py",
+    "scripts/reconcile_m2_radar_delayed_import_probe_receipt_recovery_001.py",
+    "tests/test_m2_radar_delayed_import_probe_receipt_recovery_001.py",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -1580,7 +1601,27 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if current_radar_delayed_import_probe_receipt_recovery_001_review_required(ROOT, {"promoted": 8}):
+            if current_radar_delayed_import_probe_receipt_recovery_001_terminal(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Review the terminal receipt-recovery diagnostic outcome. The fresh attempt is consumed and cannot be resumed, reused, or retried; any further diagnostic or radar action requires separately reviewed authority."
+            elif current_radar_delayed_import_probe_receipt_recovery_001_final_preflight_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one fresh disposable receipt-recovery probe begin, and it must never be retried."
+            elif current_radar_delayed_import_probe_receipt_recovery_001_execution_gate_publication_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Publish and publicly validate the exact receipt-recovery implementation-gate state. Do not run the final no-content preflight or create the production corpus or fresh probe until that gate-state commit passes public CI."
+            elif current_radar_delayed_import_probe_receipt_recovery_001_implementation_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Implement and validate only the approved receipt-durability correction, portable synthetic tests, and installed ArcGIS-runtime synthetic test, then require successful public default-branch CI. Do not create the production corpus or start the fresh attempt before the public gate and final no-content preflight."
+            elif current_radar_delayed_import_probe_receipt_recovery_001_review_required(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW"
                 expected_dem_checkpoint_authority_ref = "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-contract.json"
                 expected_dem_proposed_amendments = ["contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"]
@@ -1693,7 +1734,27 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if current_radar_delayed_import_probe_receipt_recovery_001_review_required(ROOT, {"promoted": 8}):
+            if current_radar_delayed_import_probe_receipt_recovery_001_terminal(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Review the terminal receipt-recovery diagnostic outcome. The fresh attempt is consumed and cannot be resumed, reused, or retried; any further diagnostic or radar action requires separately reviewed authority."
+            elif current_radar_delayed_import_probe_receipt_recovery_001_final_preflight_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one fresh disposable receipt-recovery probe begin, and it must never be retried."
+            elif current_radar_delayed_import_probe_receipt_recovery_001_execution_gate_publication_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Publish and publicly validate the exact receipt-recovery implementation-gate state. Do not run the final no-content preflight or create the production corpus or fresh probe until that gate-state commit passes public CI."
+            elif current_radar_delayed_import_probe_receipt_recovery_001_implementation_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Implement and validate only the approved receipt-durability correction, portable synthetic tests, and installed ArcGIS-runtime synthetic test, then require successful public default-branch CI. Do not create the production corpus or start the fresh attempt before the public gate and final no-content preflight."
+            elif current_radar_delayed_import_probe_receipt_recovery_001_review_required(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW"
                 expected_dem_checkpoint_authority_ref = "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-contract.json"
                 expected_dem_proposed_amendments = ["contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"]
@@ -2638,10 +2699,8 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"
-    ]:
-        fail("project profile must expose only the zero-decision probe receipt-recovery proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must expose no inactive proposed amendments after receipt-recovery approval")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -2663,8 +2722,9 @@ def main() -> None:
         "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
         "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
+        "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
     ]:
-        fail("project profile must expose the twenty exact active amendments")
+        fail("project profile must expose the twenty-one exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -2963,6 +3023,19 @@ def main() -> None:
         "automatic_retry_authorized": False,
         "project_data_content_read_authorized": False,
     }
+    expected_radar_delayed_import_probe_receipt_recovery_001_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json"),
+        "proposal_ref": "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json",
+        "proposal_sha256": "9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09",
+        "review_bundle_sha256": "df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-reconciliation.json"),
+        "attempt_id": "radar-delayed-import-probe-receipt-recovery-001-real-001",
+        "maximum_live_attempts": 1,
+        "automatic_retry_authorized": False,
+        "project_data_content_read_authorized": False,
+    }
     expected_amendments = [
         expected_dem_amendment_binding,
         expected_orbit_amendment_binding,
@@ -2984,6 +3057,7 @@ def main() -> None:
         expected_radar_pixel_orbit_application_001_amendment_binding,
         expected_radar_pixel_orbit_application_recovery_001_amendment_binding,
         expected_radar_delayed_import_probe_001_amendment_binding,
+        expected_radar_delayed_import_probe_receipt_recovery_001_amendment_binding,
     ]
     if profile["authority"].get("amendments") != expected_amendments:
         fail("profile authority does not bind the exact active amendments")
@@ -3010,8 +3084,9 @@ def main() -> None:
         "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
         "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
+        "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
     ]:
-        fail("active M2 scope does not expose the twenty exact amendment approvals")
+        fail("active M2 scope does not expose the twenty-one exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -3053,10 +3128,8 @@ def main() -> None:
         or "bounded nested-grid correction" not in optical_pixel_recovery_review_gate.get("reason", "")
     ):
         fail("project profile must bind optical pixel recovery to its exact approval")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"
-    ]:
-        fail("project profile must expose only the zero-decision probe receipt-recovery proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must expose no inactive proposed amendments after receipt-recovery approval")
     radar_first_path_gate = profile_gates.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
     if (
         radar_first_path_gate.get("authority_ref") != "reviews/m2-radar-first-path-001/review-contract.json"
@@ -3144,12 +3217,11 @@ def main() -> None:
         "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
         "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
+        "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
-    if goal.get("proposed_amendments") != [
-        "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"
-    ]:
-        fail("long-term goal must expose only the zero-decision probe receipt-recovery proposal")
+    if goal.get("proposed_amendments") != []:
+        fail("long-term goal must expose no inactive proposed amendments after receipt-recovery approval")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -7930,7 +8002,15 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        if current_radar_delayed_import_probe_receipt_recovery_001_review_required(ROOT, state_counts):
+        if current_radar_delayed_import_probe_receipt_recovery_001_terminal(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW"
+        elif current_radar_delayed_import_probe_receipt_recovery_001_final_preflight_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
+        elif current_radar_delayed_import_probe_receipt_recovery_001_execution_gate_publication_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
+        elif current_radar_delayed_import_probe_receipt_recovery_001_implementation_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION"
+        elif current_radar_delayed_import_probe_receipt_recovery_001_review_required(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW"
         elif current_radar_delayed_import_probe_receipt_recovery_001_review_publication_pending(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION"
@@ -14651,8 +14731,88 @@ def main() -> None:
         fail("M2 delayed-import receipt-recovery review packet or visual evidence differs")
     receipt_recovery_units = {unit.get("id"): unit for unit in active_m2.get("units", []) if isinstance(unit, dict)}
     receipt_recovery_review = receipt_recovery_units.get("M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW", {})
+    receipt_recovery_implementation = receipt_recovery_units.get("M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION", {})
+    receipt_recovery_execution = receipt_recovery_units.get("M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION", {})
     gate_exists = (ROOT / receipt_recovery_gate_ref).is_file()
-    if gate_exists:
+    approval_ref = f"records/source-gates/{receipt_recovery_prefix}-approval.json"
+    approval_exists = (ROOT / approval_ref).is_file()
+    if approval_exists:
+        owner_approval = json.loads((ROOT / approval_ref).read_text(encoding="utf-8"))
+        owner_activation = json.loads((ROOT / f"records/readiness/{receipt_recovery_prefix}-approval-activation.json").read_text(encoding="utf-8"))
+        implementation_contract = json.loads((ROOT / f"config/qa/{receipt_recovery_prefix}-contract.json").read_text(encoding="utf-8"))
+        runtime_validation = json.loads((ROOT / f"records/readiness/{receipt_recovery_prefix}-arcgis-runtime-validation.json").read_text(encoding="utf-8"))
+        implementation_readiness = json.loads((ROOT / f"records/readiness/{receipt_recovery_prefix}-implementation-readiness.json").read_text(encoding="utf-8"))
+        owner_reconciliation = json.loads((ROOT / f"records/source-gates/{receipt_recovery_prefix}-review-reconciliation.json").read_text(encoding="utf-8"))
+        owner_lock = json.loads((ROOT / f"reviews/{receipt_recovery_prefix}/review-contract-lock-001.json").read_text(encoding="utf-8"))
+        response_ref = owner_lock.get("response_ref", "")
+        owner_response = json.loads((ROOT / response_ref).read_text(encoding="utf-8"))
+        if (
+            owner_approval.get("status") != "approved_bounded_receipt_recovery_and_one_conditional_fresh_probe"
+            or owner_approval.get("proposal_sha256") != sha256(receipt_recovery_proposal_ref)
+            or owner_approval.get("review_bundle_manifest_sha256") != sha256(receipt_recovery_bundle_ref)
+            or owner_approval.get("human_decision_count") != 1
+            or owner_approval.get("attestation") is not True
+            or owner_activation.get("status") != "pass_exact_approval_activated_implementation_publication_only"
+            or owner_activation.get("released_now", {}).get("bounded_receipt_recovery_implementation") is not True
+            or owner_activation.get("released_now", {}).get("fresh_probe_execution") is not False
+            or owner_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+            or owner_lock.get("status") != "locked_exact_attested_response"
+            or owner_response.get("completed") is not True
+            or owner_response.get("reviewer", {}).get("attestation") is not True
+            or owner_response.get("responses", [{}])[0].get("decision") != "approve"
+            or implementation_contract.get("attempt", {}).get("attempt_id") != "radar-delayed-import-probe-receipt-recovery-001-real-001"
+            or implementation_contract.get("attempt", {}).get("maximum_attempts") != 1
+            or implementation_contract.get("corpus", {}).get("file_count") != 156
+            or implementation_contract.get("corpus", {}).get("total_logical_bytes") != 10367157634
+            or implementation_contract.get("corpus", {}).get("expected_stable_order_aggregate_sha256") != "dd56f8b28a1ed1c6e2b4b1d7d8f5db4fd86dab80a910fe79c8d018d58942430b"
+            or implementation_contract.get("receipt_durability", {}).get("function_local_datetime_import") is not True
+            or implementation_contract.get("receipt_durability", {}).get("cleanup_outer_finally_independent_of_terminal_serialization") is not True
+            or runtime_validation.get("status") != "pass_installed_arcgis_runtime_receipt_fallback_synthetic"
+            or runtime_validation.get("checks", {}).get("function_local_datetime_survived_global_rebinding") is not True
+            or runtime_validation.get("checks", {}).get("cleanup_persisted_after_terminal_failure") is not True
+            or runtime_validation.get("assertions", {}).get("geoprocessing_invoked") is not False
+            or implementation_readiness.get("status") != "pass_receipt_recovery_implementation_public_ci_pending"
+            or implementation_readiness.get("validation", {}).get("focused_test_count") != 10
+            or implementation_readiness.get("validation", {}).get("installed_arcgis_runtime_test_count") != 1
+            or receipt_recovery_review.get("status") != "complete"
+            or receipt_recovery_review.get("gates", {}).get("human_decision_count") != 1
+            or receipt_recovery_review.get("gates", {}).get("attestation") is not True
+        ):
+            fail("M2 delayed-import receipt-recovery approval or implementation evidence differs")
+        implementation_gate_path = ROOT / f"records/readiness/{receipt_recovery_prefix}-implementation-publication-gate.json"
+        gate_state_path = ROOT / f"records/readiness/{receipt_recovery_prefix}-gate-state-publication.json"
+        outcome_path = ROOT / f"records/processing/{receipt_recovery_prefix}-outcome-reconciliation.json"
+        if outcome_path.exists():
+            if (
+                current_radar_delayed_import_probe_receipt_recovery_001_terminal(ROOT, {"promoted": 8}) is not True
+                or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW"
+                or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW"
+            ):
+                fail("M2 delayed-import receipt-recovery terminal state differs")
+        elif gate_state_path.exists():
+            if (
+                current_radar_delayed_import_probe_receipt_recovery_001_final_preflight_pending(ROOT, {"promoted": 8}) is not True
+                or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
+                or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
+            ):
+                fail("M2 delayed-import receipt-recovery final-preflight state differs")
+        elif implementation_gate_path.exists():
+            if (
+                current_radar_delayed_import_probe_receipt_recovery_001_execution_gate_publication_pending(ROOT, {"promoted": 8}) is not True
+                or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
+                or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
+            ):
+                fail("M2 delayed-import receipt-recovery gate-state publication state differs")
+        elif (
+            current_radar_delayed_import_probe_receipt_recovery_001_implementation_pending(ROOT, {"promoted": 8}) is not True
+            or receipt_recovery_implementation.get("status") != "in_progress"
+            or receipt_recovery_implementation.get("gates", {}).get("public_ci") != "pending"
+            or receipt_recovery_execution.get("status") != "planned"
+            or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION"
+            or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION"
+        ):
+            fail("M2 delayed-import receipt-recovery implementation state differs")
+    elif gate_exists:
         receipt_recovery_gate = json.loads((ROOT / receipt_recovery_gate_ref).read_text(encoding="utf-8"))
         receipt_recovery_reconciliation = json.loads((ROOT / receipt_recovery_reconciliation_ref).read_text(encoding="utf-8"))
         if (
@@ -14720,6 +14880,38 @@ def main() -> None:
             ))
         ):
             fail("EVID-0174 receipt-recovery publication gate differs or overclaims")
+    if approval_exists:
+        activation_evidence = ledger_by_id.get("EVID-0175")
+        readiness_evidence = ledger_by_id.get("EVID-0176")
+        if (
+            not isinstance(activation_evidence, dict)
+            or activation_evidence.get("status") != "pass_exact_approval_implementation_publication_only"
+            or activation_evidence.get("approval_sha256") != sha256(approval_ref)
+            or activation_evidence.get("assertions", {}).get("human_decision_count") != 1
+            or activation_evidence.get("assertions", {}).get("attestation") is not True
+            or activation_evidence.get("assertions", {}).get("implementation_authorized") is not True
+            or any(activation_evidence.get("assertions", {}).get(key) is not False for key in (
+                "final_no_content_preflight_released", "fresh_probe_attempt_released",
+                "production_corpus_created", "fresh_probe_process_started", "project_data_content_read",
+                "external_custody_accessed", "consumed_probe_reused_or_retried",
+                "radar_processing_executed", "scientific_result_established",
+            ))
+        ):
+            fail("EVID-0175 receipt-recovery approval activation differs or overclaims")
+        if (
+            not isinstance(readiness_evidence, dict)
+            or readiness_evidence.get("status") != "pass_receipt_recovery_implementation_public_ci_pending"
+            or readiness_evidence.get("implementation_readiness_sha256") != sha256(f"records/readiness/{receipt_recovery_prefix}-implementation-readiness.json")
+            or readiness_evidence.get("assertions", {}).get("focused_test_count") != 10
+            or readiness_evidence.get("assertions", {}).get("installed_arcgis_runtime_test_count") != 1
+            or readiness_evidence.get("assertions", {}).get("public_ci_pending") is not True
+            or any(readiness_evidence.get("assertions", {}).get(key) is not False for key in (
+                "fresh_probe_process_started", "production_corpus_created", "project_data_content_read",
+                "external_custody_accessed", "consumed_probe_reused_or_retried",
+                "radar_processing_executed", "scientific_result_established",
+            ))
+        ):
+            fail("EVID-0176 receipt-recovery implementation readiness differs or overclaims")
 
     violations = []
     for relative in tracked_files():

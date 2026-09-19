@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-ARCGIS-RUNTIME-VALIDATION",
+  "verified_at_utc": "2026-09-19T19:17:29Z",
+  "status": "pass_installed_arcgis_runtime_receipt_fallback_synthetic",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "ArcInfo",
+    "python_executable": "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\envs\\arcgispro-py3\\python.exe"
+  },
+  "bindings": {
+    "probe_contract_sha256": "beb21c963cc2302e5290116cda9e08229eb3af8503a410ea6dfa9ed55541a56c",
+    "probe_core_sha256": "76470ec20d61472854e3a9b43eca72a61bd6a4bbe084615e1bd1213aa8ddd92c",
+    "probe_runner_sha256": "12cf8c6ad44caddb8e2e7ad2ced541cb2fe50f3bcc43cee4c2d380d5f0003d1e",
+    "portable_test_sha256": "3f0db2425836bd91d68af39ebc79f7813f2f945995cfe06fc2e3ac309cee54cc",
+    "arcgis_validator_sha256": "404ee38af0d77f64cc1a304cee376813594461ad90e87b14ffa99905c1a80af8"
+  },
+  "checks": {
+    "function_local_datetime_survived_global_rebinding": true,
+    "original_sanitized_error_preserved_before_terminal_assembly": true,
+    "terminal_persistence_error_appended_without_replacement": true,
+    "cleanup_persisted_after_terminal_failure": true,
+    "payload_children_removed": true,
+    "fallback_event_order": [
+      "fallback_journal_initialized",
+      "probe_exception_captured",
+      "terminal_persistence_exception_captured",
+      "cleanup_disposition_recorded"
+    ],
+    "durable_stage_order_monotonic": true,
+    "synthetic_return_code": 21
+  },
+  "assertions": {
+    "synthetic_only": true,
+    "arcpy_runtime_imported": true,
+    "geoprocessing_invoked": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "production_attempt_created": false,
+    "consumed_probe_reused_or_retried": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "This validates receipt fallback behavior under the installed ArcGIS Pro Python runtime only.",
+    "ArcPy was imported for runtime identity; no ArcPy geoprocessing tool or project input was invoked.",
+    "The temporary synthetic payload is disposable and is not the authorized production corpus or attempt."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-CONTRACT-LOCK-001",
+  "locked_at_utc": "2026-09-19T19:17:10Z",
+  "status": "locked_exact_attested_response",
+  "review_contract_ref": "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-contract.json",
+  "review_contract_sha256": "e371ee3658993cd43112daa3e10407e66ca9739636976d921cd2d605c3f4c331",
+  "review_bundle_sha256": "df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695",
+  "response_ref": "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/response-baf64278ef45352ca7add79948d827fdf87dba8138e722510d89da568a006600.json",
+  "response_sha256": "baf64278ef45352ca7add79948d827fdf87dba8138e722510d89da568a006600",
+  "human_decision_count": 1,
+  "attestation": true
+}

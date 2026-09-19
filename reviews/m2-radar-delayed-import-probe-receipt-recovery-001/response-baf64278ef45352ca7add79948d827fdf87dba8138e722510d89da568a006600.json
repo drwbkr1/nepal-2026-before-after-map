@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "review_id": "m2-radar-delayed-import-probe-receipt-recovery-001-review",
+  "contract_ref": "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-contract.json",
+  "contract_sha256": "e371ee3658993cd43112daa3e10407e66ca9739636976d921cd2d605c3f4c331",
+  "review_bundle_sha256": "df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695",
+  "completed": true,
+  "review_completed_at_utc": "2026-09-19T19:17:10Z",
+  "reviewer": {
+    "name": "project_owner",
+    "attestation": true
+  },
+  "responses": [
+    {
+      "item_id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001",
+      "decision": "approve",
+      "rationale": "Exact bounded receipt-durability recovery and one conditional fresh disposable attempt approved.",
+      "evidence_sha256": "df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695"
+    }
+  ],
+  "raw_attested_statement": "I approve M2 radar delayed-import probe receipt recovery-001 review bundle `df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695` and proposal `9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09`. I authorize only the bounded function-local timestamp correction, pre-reserved terminal and cleanup receipt identities, append-only fallback error preservation, cleanup independence, synthetic and ArcGIS-runtime tests, public-CI gate, final no-content preflight, and at most one fresh append-only `radar-delayed-import-probe-receipt-recovery-001-real-001` attempt stated in the reviewed proposal. I understand the consumed `radar-delayed-import-probe-001-real-001` remains terminal and cannot be resumed, reused, or retried, and that project-data or external-custody access, radar processing, baseline or change analysis, attribution, and scientific publication remain unauthorized. I attest this is my completed decision.",
+  "human_decision_count": 1
+}

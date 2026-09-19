@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-APPROVAL",
+  "status": "approved_bounded_receipt_recovery_and_one_conditional_fresh_probe",
+  "approved_at_utc": "2026-09-19T19:17:10Z",
+  "review_id": "m2-radar-delayed-import-probe-receipt-recovery-001-review",
+  "review_bundle_manifest_sha256": "df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695",
+  "proposal_ref": "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json",
+  "proposal_sha256": "9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09",
+  "review_contract_ref": "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-contract.json",
+  "review_contract_sha256": "e371ee3658993cd43112daa3e10407e66ca9739636976d921cd2d605c3f4c331",
+  "review_publication_gate_ref": "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-gate.json",
+  "review_publication_gate_sha256": "6886334b64e453d64a08226f8f16cae064569fd0d51264baac50d623c9140ad8",
+  "review_reconciliation_ref": "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-reconciliation.json",
+  "review_reconciliation_sha256": "77e86a7160a5ed3f8a877a28e6f217f4a759abebe88d5bd056e506110bfc9409",
+  "locked_response_sha256": "baf64278ef45352ca7add79948d827fdf87dba8138e722510d89da568a006600",
+  "lock_receipt_sha256": "5d5a44ca32bed4ea5fdbfd6448b1235d01dff772cf704398d7d3bd44cda51a1b",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "attestation": true,
+  "authorized_bounded_actions": [
+    "preserve the consumed delayed-import probe attempt, its public contract, runner, core, tests, receipts, reconciliations, and cleanup evidence unchanged",
+    "replace module-global datetime class reliance in the proposed recovery implementation with a function-local datetime-module import for each timestamp construction; change no diagnostic or scientific predicate",
+    "before any disposable corpus creation, exclusively reserve the new attempt root plus immutable terminal-receipt and cleanup-receipt identity records and initialize one minimal append-only fallback journal",
+    "immediately reduce any caught probe exception to sanitized primitive fields and append it to the fallback journal before ordinary terminal payload construction or timestamping",
+    "if ordinary terminal construction or persistence fails, append the terminal-persistence exception without replacing the preserved original exception; never reconstruct a missing success",
+    "run cleanup from an outer finally path independent of ordinary terminal serialization and append its disposition even when terminal persistence fails",
+    "add portable synthetic tests for timestamp-name rebinding, forced terminal-write failure, original-error retention, cleanup persistence, interruption, exact stage order, one-attempt enforcement, and secret or project-path rejection",
+    "add one installed ArcGIS-runtime synthetic test that exercises timestamp rebinding and receipt fallback without project data, external custody, or geoprocessing inputs",
+    "require successful local validation, a separately authorized public default-branch publication and CI gate, exact attested owner approval, and one final no-content preflight before any new live attempt",
+    "only on all gates run at most one fresh append-only diagnostic attempt using the unchanged exact disposable corpus, stage order, two tiny rasters, and one MosaicToNewRaster operation",
+    "reconcile that new attempt without changing any radar, source, orbit, DEM, AOI, CRS, threshold, mask, route, or QA contract"
+  ],
+  "exact_recovery_contract": {
+    "attempt_id": "radar-delayed-import-probe-receipt-recovery-001-real-001",
+    "distinct_from_consumed_attempt": true,
+    "process_count": 1,
+    "corpus": {
+      "content_class": "deterministic_disposable_zero_bytes",
+      "file_count": 156,
+      "total_logical_bytes": 10367157634,
+      "expected_stable_order_aggregate_sha256": "dd56f8b28a1ed1c6e2b4b1d7d8f5db4fd86dab80a910fe79c8d018d58942430b",
+      "source_names_or_source_bytes_used": false,
+      "path_class": "new probe-specific local temporary root outside Git and external custody"
+    },
+    "stage_order_unchanged_from_probe_001_contract": true,
+    "geoprocessing_unchanged": {
+      "inputs": "two deterministic 2 by 2 disposable rasters",
+      "operation": "arcpy.management.MosaicToNewRaster",
+      "output": "one disposable local raster",
+      "project_crs_or_project_aoi_used": false
+    },
+    "receipt_durability": {
+      "terminal_identity_reserved_before_corpus": true,
+      "cleanup_identity_reserved_before_corpus": true,
+      "fallback_journal_initialized_before_corpus": true,
+      "original_sanitized_exception_recorded_before_normal_terminal_assembly": true,
+      "normal_terminal_and_cleanup_receipts_remain_required": true,
+      "fallback_is_not_success_evidence": true
+    },
+    "result_semantics": {
+      "pass": "the current host completed the exact fresh disposable diagnostic sequence at that time only",
+      "block": "the fresh attempt's durable markers and receipts identify its observed boundary only",
+      "historical_root_cause_claim_allowed": false,
+      "radar_recovery_readiness_claim_allowed": false,
+      "scientific_claim_allowed": false
+    }
+  },
+  "limits": {
+    "consumed_attempt_retries_or_reuses": 0,
+    "future_live_attempts": 1,
+    "automatic_retry": false,
+    "processes": 1,
+    "network_requests": 0,
+    "credential_or_token_actions": 0,
+    "software_installations": 0,
+    "uac_actions": 0,
+    "project_data_content_reads": 0,
+    "external_custody_reads": 0,
+    "external_custody_mutations": 0,
+    "orbit_applications": 0,
+    "radar_pixel_reads": 0,
+    "baseline_or_change_actions": 0,
+    "scientific_outputs": 0
+  },
+  "protected_public_implementation": [
+    {
+      "path": "config/qa/m2-radar-delayed-import-probe-001-contract.json",
+      "sha256": "c9bf8154bfb44cf6a76a9cdfc695c30b7e2bf2349d64ab9e8c0e922ca0b70ac0",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "scripts/m2_radar_delayed_import_probe_001_core.py",
+      "sha256": "b15bcc4f6ec4034aa890d551f3d700977367e9f1bc7e28c69cbdd50f17588d2a",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "scripts/run_m2_radar_delayed_import_probe_001.py",
+      "sha256": "189f59a81733e163c07d72abacf917b9e8482af871b323402a84047ec816792c",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "tests/test_m2_radar_delayed_import_probe_001.py",
+      "sha256": "b6d01b9e18d6a0448fb53581d7ae522ca97db17ec337420ca8ccce226b0cfa02",
+      "must_remain_unchanged_during_preparation": true
+    }
+  ],
+  "reviewed_does_not_authorize_now": [
+    "Git commit, push, public review publication, or public CI",
+    "owner proposal approval, response locking, activation, implementation, tests that invoke ArcPy, preflight, corpus creation, or a live attempt",
+    "reuse, resume, retry, mutation, or reconstruction of the consumed probe attempt",
+    "project-data or external-custody access, network, credentials, account, terms, installation, or UAC action",
+    "orbit application, DEM action, radar pixel processing, route evaluation, baseline, change analysis, interpretation, attribution, emergency guidance, derived-pixel publication, or scientific publication",
+    "a historical root-cause, radar-recovery-readiness, or scientific claim"
+  ],
+  "human_decisions_fabricated": false
+}

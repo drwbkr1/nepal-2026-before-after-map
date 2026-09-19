@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-APPROVAL-ACTIVATION",
+  "activated_at_utc": "2026-09-19T19:17:10Z",
+  "status": "pass_exact_approval_activated_implementation_publication_only",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
+    "approval_sha256": "cf3781bb8ff4d638f48c4f80a88f0bff24c268b1a6f33e4c5ad2430e691ec4f5",
+    "reconciliation_sha256": "77e86a7160a5ed3f8a877a28e6f217f4a759abebe88d5bd056e506110bfc9409",
+    "proposal_sha256": "9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09",
+    "review_bundle_sha256": "df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695",
+    "review_publication_gate_sha256": "6886334b64e453d64a08226f8f16cae064569fd0d51264baac50d623c9140ad8"
+  },
+  "released_now": {
+    "bounded_receipt_recovery_implementation": true,
+    "portable_synthetic_tests": true,
+    "installed_arcgis_runtime_synthetic_test": true,
+    "public_ci": true,
+    "final_no_content_preflight": false,
+    "fresh_probe_execution": false,
+    "project_data_content_read": false,
+    "external_custody_access": false,
+    "radar_processing": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "probe_process_started": false,
+    "disposable_corpus_created": false,
+    "arcpy_invoked": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "consumed_probe_reused_or_retried": false,
+    "scientific_result_established": false
+  }
+}
