@@ -253,6 +253,7 @@ REQUIRED = [
     "records/readiness/m2-radar-delayed-import-probe-001-final-preflight.json",
     "records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json",
     "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json",
+    "records/readiness/m2-radar-delayed-import-probe-001-terminal-publication-gate.json",
     "scripts/activate_m2_radar_delayed_import_probe_001.py",
     "scripts/m2_radar_delayed_import_probe_001_core.py",
     "scripts/run_m2_radar_delayed_import_probe_001.py",
@@ -14036,6 +14037,7 @@ def main() -> None:
     radar_probe_final_preflight = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-final-preflight.json").read_text(encoding="utf-8"))
     radar_probe_terminal_reconciliation = json.loads((ROOT / "records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json").read_text(encoding="utf-8"))
     radar_probe_outcome_reconciliation = json.loads((ROOT / "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json").read_text(encoding="utf-8"))
+    radar_probe_terminal_publication_gate = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-terminal-publication-gate.json").read_text(encoding="utf-8"))
     radar_probe_proposal_ref = "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json"
     radar_probe_bundle_ref = "reviews/m2-radar-delayed-import-probe-001/review-bundle.json"
     radar_probe_readiness_ref = "records/readiness/m2-radar-delayed-import-probe-001-review-readiness.json"
@@ -14207,6 +14209,10 @@ def main() -> None:
         or radar_probe_execution_unit.get("gates", {}).get("postprocess_cleanup") != "success"
         or radar_probe_execution_unit.get("gates", {}).get("terminal_reconciliation_sha256") != sha256("records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json")
         or radar_probe_execution_unit.get("gates", {}).get("outcome_reconciliation_sha256") != sha256("records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json")
+        or radar_probe_execution_unit.get("gates", {}).get("terminal_publication") != "success"
+        or radar_probe_execution_unit.get("gates", {}).get("terminal_commit_sha") != "2e2763975ffc5e33c17e2cabfa7112a93d25fcbd"
+        or radar_probe_execution_unit.get("gates", {}).get("terminal_public_ci_run_id") != 35458643773
+        or radar_probe_execution_unit.get("gates", {}).get("terminal_publication_gate_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-terminal-publication-gate.json")
         or radar_probe_implementation_readiness.get("status") != "pass_portable_probe_implementation_public_ci_pending"
         or radar_probe_implementation_readiness.get("validation", {}).get("focused_test_count") != 8
         or radar_probe_implementation_readiness.get("validation", {}).get("repository_checker_status") != "pass_1073_required_files"
@@ -14297,6 +14303,33 @@ def main() -> None:
             "baseline_or_change_analysis_executed", "interpretation_or_attribution_executed",
             "historical_root_cause_established", "recovery_readiness_established",
             "derived_pixel_publication_authorized", "scientific_publication_authorized", "scientific_result_established",
+        ))
+        or radar_probe_terminal_publication_gate.get("status") != "pass_public_terminal_state_owner_review_only"
+        or radar_probe_terminal_publication_gate.get("terminal_commit_sha") != "2e2763975ffc5e33c17e2cabfa7112a93d25fcbd"
+        or radar_probe_terminal_publication_gate.get("public_ci_run_id") != 35458643773
+        or radar_probe_terminal_publication_gate.get("public_ci_url") != "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35458643773"
+        or radar_probe_terminal_publication_gate.get("public_ci_conclusion") != "success"
+        or radar_probe_terminal_publication_gate.get("repository_required_file_count") != 1080
+        or radar_probe_terminal_publication_gate.get("public_test_count") != 593
+        or radar_probe_terminal_publication_gate.get("public_intentional_skip_count") != 13
+        or radar_probe_terminal_publication_gate.get("bindings", {}).get("final_preflight_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-final-preflight.json")
+        or radar_probe_terminal_publication_gate.get("bindings", {}).get("terminal_reconciliation_sha256") != sha256("records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json")
+        or radar_probe_terminal_publication_gate.get("bindings", {}).get("outcome_reconciliation_sha256") != sha256("records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json")
+        or radar_probe_terminal_publication_gate.get("bindings", {}).get("published_milestone_sha256") != "33a74b4fab109361fb0ca4fab42569bb5b241c0fec062e746651fbbc76cbf6ee"
+        or radar_probe_terminal_publication_gate.get("bindings", {}).get("published_project_control_profile_sha256") != "5fc4f1b24a1c66b26051f66e413396c4bdaa2db69c394d8e3ab1b277bae9bffe"
+        or radar_probe_terminal_publication_gate.get("bindings", {}).get("published_long_term_goal_sha256") != "99fb806510d0498d9023651286e3cb32d5a81351e64ec9c93e776c52745d5229"
+        or radar_probe_terminal_publication_gate.get("released_now", {}).get("terminal_owner_review") is not True
+        or any(radar_probe_terminal_publication_gate.get("released_now", {}).get(key) is not False for key in (
+            "follow_on_review_preparation", "new_probe_implementation", "attempt_retry_or_reuse",
+            "new_real_attempt", "project_data_or_external_custody_access", "radar_processing",
+            "baseline_or_change_analysis", "scientific_publication",
+        ))
+        or radar_probe_terminal_publication_gate.get("assertions", {}).get("probe_attempt_terminal_and_consumed") is not True
+        or radar_probe_terminal_publication_gate.get("assertions", {}).get("postprocess_cleanup_completed") is not True
+        or any(radar_probe_terminal_publication_gate.get("assertions", {}).get(key) is not False for key in (
+            "automatic_retry_performed", "runner_terminal_receipt_persisted", "runner_cleanup_receipt_persisted",
+            "project_data_content_read", "external_custody_accessed", "radar_processing_executed",
+            "historical_root_cause_established", "recovery_readiness_established", "scientific_result_established",
         ))
         or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
         or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
@@ -14430,6 +14463,28 @@ def main() -> None:
         ))
     ):
         fail("EVID-0171 radar delayed-import probe terminal evidence differs or overclaims")
+    radar_probe_terminal_publication_evidence = ledger_by_id.get("EVID-0172")
+    if (
+        not isinstance(radar_probe_terminal_publication_evidence, dict)
+        or radar_probe_terminal_publication_evidence.get("status") != "pass_public_terminal_state_owner_review_only"
+        or radar_probe_terminal_publication_evidence.get("terminal_publication_gate_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-terminal-publication-gate.json")
+        or radar_probe_terminal_publication_evidence.get("assertions", {}).get("terminal_commit") != "2e2763975ffc5e33c17e2cabfa7112a93d25fcbd"
+        or radar_probe_terminal_publication_evidence.get("assertions", {}).get("public_ci_run_id") != 35458643773
+        or radar_probe_terminal_publication_evidence.get("assertions", {}).get("public_ci_conclusion") != "success"
+        or radar_probe_terminal_publication_evidence.get("assertions", {}).get("repository_required_file_count") != 1080
+        or radar_probe_terminal_publication_evidence.get("assertions", {}).get("public_test_count") != 593
+        or radar_probe_terminal_publication_evidence.get("assertions", {}).get("public_intentional_skip_count") != 13
+        or radar_probe_terminal_publication_evidence.get("assertions", {}).get("terminal_owner_review_released") is not True
+        or radar_probe_terminal_publication_evidence.get("assertions", {}).get("probe_attempt_terminal_and_consumed") is not True
+        or radar_probe_terminal_publication_evidence.get("assertions", {}).get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
+        or any(radar_probe_terminal_publication_evidence.get("assertions", {}).get(key) is not False for key in (
+            "follow_on_review_preparation_authorized", "attempt_retry_or_reuse_authorized",
+            "new_real_attempt_authorized", "project_data_or_external_custody_access_authorized",
+            "radar_processing_authorized", "historical_root_cause_established",
+            "recovery_readiness_established", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0172 radar delayed-import probe terminal-publication evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():

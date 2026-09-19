@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-19T17:38:38Z",
+  "status": "pass_public_terminal_state_owner_review_only",
+  "terminal_commit_sha": "2e2763975ffc5e33c17e2cabfa7112a93d25fcbd",
+  "public_ci_run_id": 35458643773,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35458643773",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1080,
+  "public_test_count": 593,
+  "public_intentional_skip_count": 13,
+  "bindings": {
+    "final_preflight_ref": "records/readiness/m2-radar-delayed-import-probe-001-final-preflight.json",
+    "final_preflight_sha256": "f158d04f11df8181d4145ce1ab35c2b745b5f1d5477267491589a0e97cfdddda",
+    "terminal_reconciliation_ref": "records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "90e7b9ff1fa823f9be805e1fba843e7af9dd34c313d4e5c6c75077c8aee81892",
+    "outcome_reconciliation_ref": "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json",
+    "outcome_reconciliation_sha256": "2fe63d80af49baa8a0c92948a3284a4b769fd1c61a10e6b32391a392f0f3cd4c",
+    "published_milestone_sha256": "33a74b4fab109361fb0ca4fab42569bb5b241c0fec062e746651fbbc76cbf6ee",
+    "published_project_control_profile_sha256": "5fc4f1b24a1c66b26051f66e413396c4bdaa2db69c394d8e3ab1b277bae9bffe",
+    "published_long_term_goal_sha256": "99fb806510d0498d9023651286e3cb32d5a81351e64ec9c93e776c52745d5229"
+  },
+  "released_now": {
+    "terminal_owner_review": true,
+    "follow_on_review_preparation": false,
+    "new_probe_implementation": false,
+    "attempt_retry_or_reuse": false,
+    "new_real_attempt": false,
+    "project_data_or_external_custody_access": false,
+    "radar_processing": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "probe_attempt_terminal_and_consumed": true,
+    "automatic_retry_performed": false,
+    "corpus_file_count": 156,
+    "corpus_total_logical_bytes": 10367157634,
+    "last_durable_stage": "arcpy_import_started",
+    "runner_terminal_receipt_persisted": false,
+    "runner_cleanup_receipt_persisted": false,
+    "postprocess_cleanup_completed": true,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "radar_processing_executed": false,
+    "historical_root_cause_established": false,
+    "recovery_readiness_established": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Review the terminal disposable-probe outcome. The attempt is consumed and cannot be retried; any follow-on requires a separately reviewed owner decision."
+}

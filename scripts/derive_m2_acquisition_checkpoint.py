@@ -1899,6 +1899,7 @@ def current_radar_delayed_import_probe_001_terminal(
         milestone = load(root / "contracts/milestone-002.json")
         terminal = load(root / "records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json")
         outcome = load(root / "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json")
+        publication = load(root / "records/readiness/m2-radar-delayed-import-probe-001-terminal-publication-gate.json")
     except (OSError, ValueError, json.JSONDecodeError):
         return False
     units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
@@ -1912,10 +1913,15 @@ def current_radar_delayed_import_probe_001_terminal(
         and outcome.get("assertions", {}).get("arcpy_import_completed_durable") is False
         and outcome.get("assertions", {}).get("historical_root_cause_established") is False
         and outcome.get("assertions", {}).get("recovery_readiness_established") is False
+        and publication.get("status") == "pass_public_terminal_state_owner_review_only"
+        and publication.get("public_ci_conclusion") == "success"
+        and publication.get("released_now", {}).get("terminal_owner_review") is True
+        and publication.get("released_now", {}).get("follow_on_review_preparation") is False
         and execution.get("status") == "complete"
         and execution.get("disposition") == "block"
         and execution.get("gates", {}).get("live_attempts_started") == 1
         and execution.get("gates", {}).get("last_durable_stage") == "arcpy_import_started"
+        and execution.get("gates", {}).get("terminal_publication") == "success"
     )
 
 
