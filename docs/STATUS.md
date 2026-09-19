@@ -10,6 +10,8 @@
 
 Read-only terminal review now shows that both direct ArcGIS Python and `propy` initialize the installed Advanced named-user license and can check out and return Image Analyst and Spatial. This did not reproduce the consumed attempt's product-license error at the licensing API boundary. Its exact failing ArcPy call remains unresolved because no traceback or stage marker was retained. Observation SHA-256 is `adb9975cb69ef9d68d38f483546af407d99b720fa49b73eedd7d0ba0cf1853e6`. No geoprocessing tool, project-data read, retry, recovery preparation, or scientific action occurred.
 
+Static tracing further narrows the historical failure to four setup statements before the first geoprocessing stage: ArcPy import, `overwriteOutput` assignment, Image Analyst checkout, or Spatial checkout. The attempt has no `dem` directory, and `create_dem_mosaic` would create that directory before calling `MosaicToNewRaster`. Observation SHA-256 is `9ce383af0b813deaf6da84259c7b126e64c8a05610c8ddb01d68fa89a911dd2c`. The exact failing statement and root cause remain unresolved.
+
 ## Purpose
 
 This project is building a reproducible, ArcGIS-ready before/after evidence package for the 26 August 2026 Nepal debris avalanche and flash flood. Its public repository preserves source identity, authority, methods, decisions, and lightweight receipts. Heavy imagery and derived geospatial data remain outside Git.

@@ -3757,7 +3757,8 @@
         "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json",
         "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json",
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json",
-        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json"
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-static-call-path-observation-002.json"
       ],
       "gates": {
         "public_ci": "success",
@@ -3782,6 +3783,10 @@
         "terminal_publication_gate_sha256": "2d757b464ef71a8f8305145698c2205d4034dc492b51b82fc9261741f3133ade",
         "terminal_owner_review_observation": "defer_current_license_initialized_prior_failure_not_reproduced_at_license_api_boundary",
         "terminal_owner_review_observation_sha256": "adb9975cb69ef9d68d38f483546af407d99b720fa49b73eedd7d0ba0cf1853e6",
+        "terminal_static_call_path_observation": "defer_historical_failure_narrowed_to_four_pre_geoprocessing_arcpy_setup_statements",
+        "terminal_static_call_path_observation_sha256": "9ce383af0b813deaf6da84259c7b126e64c8a05610c8ddb01d68fa89a911dd2c",
+        "terminal_historical_candidate_statement_count": 4,
+        "terminal_historical_exact_failing_statement_identified": false,
         "terminal_failure_root_cause_resolved": false,
         "postattempt_identities_match": true,
         "project_data_content_read_for_identity_verification": true,
