@@ -651,13 +651,13 @@
     "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish and publicly validate the exact receipt-recovery implementation-gate state. Do not run the final no-content preflight or create the production corpus or fresh probe until that gate-state commit passes public CI."
+    "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one fresh disposable receipt-recovery probe begin, and it must never be retried."
   },
   "parallel_checkpoints": [
     {
       "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION",
       "authority_ref": "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
-      "next_action": "Publish and publicly validate the exact receipt-recovery implementation-gate state. Do not run the final no-content preflight or create the production corpus or fresh probe until that gate-state commit passes public CI."
+      "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one fresh disposable receipt-recovery probe begin, and it must never be retried."
     }
   ],
   "human_gates": {

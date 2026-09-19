@@ -229,7 +229,8 @@ class M2RadarDelayedImportProbeReceiptRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(implementation["status"], "complete")
         self.assertEqual(implementation["gates"]["public_ci"], "success")
         self.assertEqual(execution["status"], "in_progress")
-        self.assertEqual(execution["gates"]["gate_state_publication"], "pending")
+        self.assertEqual(execution["gates"]["gate_state_publication"], "success")
+        self.assertEqual(execution["gates"]["final_no_content_preflight"], "released_not_started")
         self.assertEqual(execution["gates"]["live_attempts_started"], 0)
 
 
