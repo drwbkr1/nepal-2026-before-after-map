@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "review_id": "m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review",
+  "contract_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract.json",
+  "contract_sha256": "c3d0a2d59de816496d9e91f0a69cc789f264e5520278b715f5cd794439ec8203",
+  "review_bundle_sha256": "88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af",
+  "completed": true,
+  "review_completed_at_utc": "2026-09-19T23:17:53Z",
+  "reviewer": {
+    "name": "project_owner",
+    "attestation": true
+  },
+  "responses": [
+    {
+      "item_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001",
+      "decision": "approve",
+      "rationale": "Exact bounded read-only diagnostic approved with every reviewed prohibition retained.",
+      "evidence_sha256": "88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af"
+    }
+  ],
+  "raw_attested_statement": "I approve M2 radar ApplyOrbitCorrection input-resolution diagnostic-001 review bundle `88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af` and proposal `bb318432bf3a63f2bb75d2b1ea69716b6fbade9917d7c35ff8388d3edaa41d84`. I authorize only the bounded implementation, synthetic no-content tests, public-CI gate, final no-content preflight, and at most one read-only diagnostic process over the exact recovery-002 attempt-root candidates and exact M2-ORB-001 stated in the reviewed proposal. I understand the diagnostic must stop if the attempt root or candidate is missing and authorizes no reconstruction, substitution, copying, mutation, ApplyOrbitCorrection or other geoprocessing call, retry, new radar attempt, baseline or change analysis, interpretation, attribution, derived-pixel publication, historical-root-cause claim, radar-recovery-readiness claim, or scientific publication. I attest this is my completed decision.",
+  "human_decision_count": 1
+}

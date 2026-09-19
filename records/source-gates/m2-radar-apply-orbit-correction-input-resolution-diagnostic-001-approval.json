@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-APPROVAL",
+  "status": "approved_bounded_read_only_input_resolution_diagnostic",
+  "approved_at_utc": "2026-09-19T23:17:53Z",
+  "review_id": "m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review",
+  "review_bundle_manifest_sha256": "88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af",
+  "proposal_ref": "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json",
+  "proposal_sha256": "bb318432bf3a63f2bb75d2b1ea69716b6fbade9917d7c35ff8388d3edaa41d84",
+  "review_contract_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract.json",
+  "review_contract_sha256": "c3d0a2d59de816496d9e91f0a69cc789f264e5520278b715f5cd794439ec8203",
+  "review_publication_gate_ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json",
+  "review_publication_gate_sha256": "cbf21f9e3716314eb3c4b6a845438786bf34f8c59906301e14c24a418826bff5",
+  "review_reconciliation_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-reconciliation.json",
+  "review_reconciliation_sha256": "b36533fb12846f75eeba8edfb2bdc71ce7976883b1fa23759afb41de38a0d9a0",
+  "locked_response_sha256": "c4f0ffdaaa43ebb0acef3b35e15dd5e7ea183f6ec4ac29da587b31c5ff51387f",
+  "lock_receipt_sha256": "9d1788dd2831fcf02463506974cfd8fe146da267a3f942d4af653862f2e8440b",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "attestation": true,
+  "proposed_diagnostic_contract": {
+    "diagnostic_id": "radar-apply-orbit-correction-input-resolution-diagnostic-001-real-001",
+    "mode": "read_only_single_process_no_geoprocessing",
+    "exact_inputs": {
+      "terminal_attempt_id": "radar-pixel-orbit-application-recovery-002-real-001",
+      "source_id": "M1-SRC-001",
+      "orbit_source_id": "M2-ORB-001",
+      "attempt_root_path_source": "exact external attempt root frozen by the approved recovery-002 contract",
+      "attempt_root_current_presence": "not observed under preparation-only authority; diagnostic must establish it before content inspection",
+      "candidate_radar_paths": [
+        "copied_SAFE_directory",
+        "copied_SAFE_manifest.safe"
+      ],
+      "candidate_orbit_path": "exact_M2-ORB-001_EOF"
+    },
+    "fixed_check_order": [
+      "reserve_terminal_receipt_before_content_access",
+      "verify_exact protected public evidence",
+      "verify existence and filesystem identity of the exact append-only attempt-root SAFE candidate, manifest.safe candidate, and exact orbit EOF",
+      "import ArcPy and record install, product, extension, and ApplyOrbitCorrection usage identity",
+      "evaluate arcpy.Exists for copied SAFE directory",
+      "evaluate arcpy.Exists for copied manifest.safe",
+      "evaluate arcpy.Exists for exact orbit EOF",
+      "for each ArcGIS-recognized object only, record sanitized Describe dataType, datasetType, catalogPath class, and children count",
+      "persist terminal and cleanup receipts"
+    ],
+    "maximum_real_diagnostic_processes": 1,
+    "maximum_apply_orbit_correction_calls": 0,
+    "maximum_geoprocessing_tool_calls": 0,
+    "automatic_retry": false,
+    "network_requests": 0,
+    "credential_actions": 0,
+    "source_orbit_or_dem_copies": 0,
+    "source_orbit_or_dem_mutations": 0,
+    "derived_raster_outputs": 0,
+    "baseline_or_change_actions": 0,
+    "scientific_outputs": 0,
+    "implementation_gates": [
+      "exact owner approval of the public review packet",
+      "bounded implementation with synthetic no-content tests",
+      "successful public default-branch CI",
+      "one final no-content preflight"
+    ],
+    "result_semantics": {
+      "pass_may_establish": "current filesystem presence plus ArcGIS catalog recognition or nonrecognition of the exact frozen input path forms in one diagnostic process",
+      "missing_attempt_root_or_candidate_semantics": "terminal block without reconstruction, substitution, copy, or processing",
+      "pass_does_not_establish": [
+        "historical root cause",
+        "corrected ApplyOrbitCorrection call",
+        "radar recovery readiness",
+        "authorization for a correction or retry",
+        "usable radar pixels",
+        "baseline admission",
+        "change analysis",
+        "interpretation or attribution",
+        "scientific result"
+      ]
+    }
+  },
+  "stop_rules": [
+    "Stop before Git commit, push, public CI, implementation, ArcPy invocation, or project/external-custody access under the present preparation-only authority.",
+    "Do not call ApplyOrbitCorrection or any other geoprocessing tool in the proposed diagnostic.",
+    "Do not alter the input path, source, orbit, DEM, AOI, CRS, grid, mask, threshold, registration, or scientific contracts.",
+    "Do not reuse, resume, retry, mutate, or reconstruct the consumed recovery-002 attempt.",
+    "Any correction, path substitution, or new processing attempt requires a separate post-diagnostic review and exact owner decision."
+  ],
+  "does_not_authorize": [
+    "Git publication or public CI",
+    "owner approval of this proposal",
+    "diagnostic implementation or ArcPy invocation",
+    "project-data or external-custody access",
+    "ApplyOrbitCorrection or any geoprocessing call",
+    "new radar attempt, source substitution, or path correction",
+    "baseline, change analysis, attribution, derived-pixel publication, or scientific publication"
+  ],
+  "human_decisions_fabricated": false
+}

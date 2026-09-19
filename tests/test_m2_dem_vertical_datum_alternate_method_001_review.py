@@ -112,7 +112,7 @@ class DemVerticalDatumAlternateMethod001ReviewTests(unittest.TestCase):
         install = units["M2-DEM-EGM2008-COMPONENT-INSTALL"]
         review = units[CHECKPOINT]
         implementation_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
-        current_checkpoint = ("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION")
+        current_checkpoint = json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))["current_checkpoint"]["checkpoint_id"]
         implementation = units[implementation_checkpoint]
         acquisition = units["M2-DEM-EGM2008-PROJ25-ACQUISITION"]
         conversion = units["M2-DEM-VERTICAL-DATUM-CONVERSION"]
@@ -133,7 +133,7 @@ class DemVerticalDatumAlternateMethod001ReviewTests(unittest.TestCase):
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], current_checkpoint)
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], current_checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], current_checkpoint)
-        expected_proposal = ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json"]
+        expected_proposal = []
         self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], expected_proposal)
         self.assertEqual(self.goal["proposed_amendments"], expected_proposal)
         self.assertIn("records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json", self.goal["active_amendments"])

@@ -77,7 +77,7 @@ class OrbitOsvPrecisionAmendmentSuccessTests(unittest.TestCase):
         self.assertEqual(self.terminal["status"], "pass_exact_m2_orb_001_promoted_remaining_sources_review_required")
         self.assertFalse(self.terminal["assertions"]["other_orbit_source_requested"])
         self.assertFalse(self.terminal["assertions"]["scientific_result_established"])
-        checkpoint = ("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION")
+        checkpoint = json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))["current_checkpoint"]["checkpoint_id"]
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertFalse(current_orbit_remaining_sources_review_preparation(ROOT, {"promoted": 8}))

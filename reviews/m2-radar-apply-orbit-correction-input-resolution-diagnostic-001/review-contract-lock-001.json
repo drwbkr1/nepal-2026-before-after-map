@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-CONTRACT-LOCK-001",
+  "locked_at_utc": "2026-09-19T23:17:53Z",
+  "status": "locked_exact_attested_response",
+  "review_contract_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract.json",
+  "review_contract_sha256": "c3d0a2d59de816496d9e91f0a69cc789f264e5520278b715f5cd794439ec8203",
+  "review_bundle_sha256": "88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af",
+  "response_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/response-c4f0ffdaaa43ebb0acef3b35e15dd5e7ea183f6ec4ac29da587b31c5ff51387f.json",
+  "response_sha256": "c4f0ffdaaa43ebb0acef3b35e15dd5e7ea183f6ec4ac29da587b31c5ff51387f",
+  "human_decision_count": 1,
+  "attestation": true
+}

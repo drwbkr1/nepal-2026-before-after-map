@@ -28,7 +28,7 @@ BUNDLE_SHA256 = "e699dfc3c4f7dd5ca697581cf4a299c66128fda7691473d65749681e3dfc211
 READINESS_SHA256 = "c5035d74504543f408099343a149a0c9b3317eaacaed767c47faa395d25f6bd4"
 IMAGE_SHA256 = "383fae06f1cf147fec1a7e9f7820b1d2456cf5e211124548ef573063045a2aeb"
 VISUAL_SHA256 = "472ef8c3cf99e2a14e86c4944e621cc0b51a0b045b8f07f6c2eb9d34497e3dd4"
-CURRENT_CHECKPOINT = ("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION")
+CURRENT_CHECKPOINT = json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))["current_checkpoint"]["checkpoint_id"]
 SOURCE_ORDER = [f"M1-SRC-{index:03d}" for index in range(1, 7)]
 ROUTE_ORDER = ["PAIR-S1-ASC-R085-IW", "PAIR-S1-DESC-R121-IW"]
 

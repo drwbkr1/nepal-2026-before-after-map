@@ -1,0 +1,29 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review",
+  "contract_sha256": "c3d0a2d59de816496d9e91f0a69cc789f264e5520278b715f5cd794439ec8203",
+  "response_sha256": "c4f0ffdaaa43ebb0acef3b35e15dd5e7ea183f6ec4ac29da587b31c5ff51387f",
+  "receipt_sha256": "9d1788dd2831fcf02463506974cfd8fe146da267a3f942d4af653862f2e8440b",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "downstream_authorization_created": false,
+  "authority_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+  "authorized_next_actions": [
+    "evidence_recording",
+    "project_control",
+    "update_project_records"
+  ],
+  "item_decisions": [
+    {
+      "item_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001",
+      "decision": "approve"
+    }
+  ]
+}

@@ -36,6 +36,11 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_pixel_orbit_application_recovery_002_terminal,
     current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending,
     current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required,
+    current_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_pending,
+    current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_gate_publication_pending,
+    current_radar_apply_orbit_correction_input_resolution_diagnostic_001_final_preflight_pending,
+    current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_ready,
+    current_radar_apply_orbit_correction_input_resolution_diagnostic_001_terminal,
     current_radar_delayed_import_probe_001_review_publication_pending,
     current_radar_delayed_import_probe_001_review_required,
     current_radar_delayed_import_probe_001_implementation_pending,
@@ -381,6 +386,21 @@ REQUIRED = [
     "scripts/integrate_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication.py",
     "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication.py",
     "tests/test_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_review.py",
+    "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/response-c4f0ffdaaa43ebb0acef3b35e15dd5e7ea183f6ec4ac29da587b31c5ff51387f.json",
+    "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract-lock-001.json",
+    "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-reconciliation.json",
+    "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval-activation.json",
+    "config/qa/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-contract.json",
+    "scripts/activate_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
+    "scripts/m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_core.py",
+    "scripts/run_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
+    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_readiness.py",
+    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_publication.py",
+    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_gate_state_publication.py",
+    "scripts/reconcile_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
+    "tests/test_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-readiness.json",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -1677,7 +1697,27 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(ROOT, {"promoted": 8}):
+            if current_radar_apply_orbit_correction_input_resolution_diagnostic_001_terminal(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-TERMINAL-REVIEW"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Review the terminal input-resolution diagnostic outcome. The diagnostic process is consumed and cannot be resumed, reused, or retried; no path correction, reconstruction, substitution, geoprocessing, new radar attempt, attribution, or scientific action is released."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_ready(ROOT, {"promoted": 8}) or current_radar_apply_orbit_correction_input_resolution_diagnostic_001_final_preflight_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the exact one-process read-only diagnostic inspect the frozen recovery-002 candidate paths and M2-ORB-001. Never retry it."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_gate_publication_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Publish and publicly validate the exact diagnostic implementation-gate state. Do not run the final no-content preflight, import production ArcPy, or access the recovery-002 attempt root or orbit custody until that gate-state commit passes public CI."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Implement and validate only the approved read-only ApplyOrbitCorrection input-resolution diagnostic and synthetic no-content tests, then require successful public default-branch CI. Do not run the final no-content preflight, import production ArcPy, or access the recovery-002 attempt root or orbit custody before that public gate."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
                 expected_dem_checkpoint_authority_ref = "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract.json"
                 expected_dem_proposed_amendments = ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json"]
@@ -1850,7 +1890,27 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(ROOT, {"promoted": 8}):
+            if current_radar_apply_orbit_correction_input_resolution_diagnostic_001_terminal(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-TERMINAL-REVIEW"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Review the terminal input-resolution diagnostic outcome. The diagnostic process is consumed and cannot be resumed, reused, or retried; no path correction, reconstruction, substitution, geoprocessing, new radar attempt, attribution, or scientific action is released."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_ready(ROOT, {"promoted": 8}) or current_radar_apply_orbit_correction_input_resolution_diagnostic_001_final_preflight_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the exact one-process read-only diagnostic inspect the frozen recovery-002 candidate paths and M2-ORB-001. Never retry it."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_gate_publication_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Publish and publicly validate the exact diagnostic implementation-gate state. Do not run the final no-content preflight, import production ArcPy, or access the recovery-002 attempt root or orbit custody until that gate-state commit passes public CI."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Implement and validate only the approved read-only ApplyOrbitCorrection input-resolution diagnostic and synthetic no-content tests, then require successful public default-branch CI. Do not run the final no-content preflight, import production ArcPy, or access the recovery-002 attempt root or orbit custody before that public gate."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
                 expected_dem_checkpoint_authority_ref = "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract.json"
                 expected_dem_proposed_amendments = ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json"]
@@ -2880,8 +2940,9 @@ def main() -> None:
         "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
         "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
     ]:
-        fail("project profile must expose the twenty-two exact active amendments")
+        fail("project profile must expose the twenty-three exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -3206,6 +3267,20 @@ def main() -> None:
         "automatic_retry_authorized": False,
         "project_data_content_read_authorized_only_after_public_gate_and_final_preflight": True,
     }
+    expected_radar_apply_orbit_correction_input_resolution_diagnostic_001_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json"),
+        "proposal_ref": "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json",
+        "proposal_sha256": "bb318432bf3a63f2bb75d2b1ea69716b6fbade9917d7c35ff8388d3edaa41d84",
+        "review_bundle_sha256": "88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-reconciliation.json"),
+        "diagnostic_id": "radar-apply-orbit-correction-input-resolution-diagnostic-001-real-001",
+        "maximum_diagnostic_processes": 1,
+        "automatic_retry_authorized": False,
+        "apply_orbit_correction_authorized": False,
+        "geoprocessing_authorized": False,
+    }
     expected_amendments = [
         expected_dem_amendment_binding,
         expected_orbit_amendment_binding,
@@ -3229,6 +3304,7 @@ def main() -> None:
         expected_radar_delayed_import_probe_001_amendment_binding,
         expected_radar_delayed_import_probe_receipt_recovery_001_amendment_binding,
         expected_radar_pixel_orbit_application_recovery_002_amendment_binding,
+        expected_radar_apply_orbit_correction_input_resolution_diagnostic_001_amendment_binding,
     ]
     if profile["authority"].get("amendments") != expected_amendments:
         fail("profile authority does not bind the exact active amendments")
@@ -3257,8 +3333,9 @@ def main() -> None:
         "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
         "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
     ]:
-        fail("active M2 scope does not expose the twenty-two exact amendment approvals")
+        fail("active M2 scope does not expose the twenty-three exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -3391,6 +3468,7 @@ def main() -> None:
         "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
         "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
     if goal.get("proposed_amendments") != expected_dem_proposed_amendments:
@@ -8175,7 +8253,17 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        if current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(ROOT, state_counts):
+        if current_radar_apply_orbit_correction_input_resolution_diagnostic_001_terminal(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-TERMINAL-REVIEW"
+        elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_ready(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+        elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_final_preflight_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+        elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_gate_publication_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+        elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION"
+        elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
         elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"
@@ -14984,7 +15072,17 @@ def main() -> None:
             diagnostic_publication_pending = current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(
                 ROOT, {"promoted": 8}
             )
-            if diagnostic_review_ready:
+            if current_radar_apply_orbit_correction_input_resolution_diagnostic_001_terminal(ROOT, {"promoted": 8}):
+                expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-TERMINAL-REVIEW"
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_ready(ROOT, {"promoted": 8}):
+                expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_final_preflight_pending(ROOT, {"promoted": 8}):
+                expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_gate_publication_pending(ROOT, {"promoted": 8}):
+                expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_pending(ROOT, {"promoted": 8}):
+                expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION"
+            elif diagnostic_review_ready:
                 expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
             elif diagnostic_publication_pending:
                 expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"
@@ -15487,11 +15585,17 @@ def main() -> None:
                     "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION",
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
+                    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION",
+                    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION",
+                    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-TERMINAL-REVIEW",
                 }
                 or goal.get("current_checkpoint") not in {
                     "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION",
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
+                    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION",
+                    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION",
+                    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-TERMINAL-REVIEW",
                 }
                 or current_radar_pixel_orbit_application_recovery_002_terminal(ROOT, {"promoted": 8}) is not True
             ):
@@ -15635,6 +15739,11 @@ def main() -> None:
     diagnostic_001_activation_ref = f"records/readiness/{diagnostic_001_prefix}-review-publication-activation.json"
     diagnostic_001_gate_ref = f"records/readiness/{diagnostic_001_prefix}-review-publication-gate.json"
     diagnostic_001_reconciliation_ref = f"records/readiness/{diagnostic_001_prefix}-review-publication-reconciliation.json"
+    diagnostic_001_owner_approval_ref = f"records/source-gates/{diagnostic_001_prefix}-approval.json"
+    diagnostic_001_owner_activation_ref = f"records/readiness/{diagnostic_001_prefix}-approval-activation.json"
+    diagnostic_001_response_ref = f"reviews/{diagnostic_001_prefix}/response-c4f0ffdaaa43ebb0acef3b35e15dd5e7ea183f6ec4ac29da587b31c5ff51387f.json"
+    diagnostic_001_lock_ref = f"reviews/{diagnostic_001_prefix}/review-contract-lock-001.json"
+    diagnostic_001_review_reconciliation_ref = f"records/source-gates/{diagnostic_001_prefix}-review-reconciliation.json"
     diagnostic_001_proposal = json.loads((ROOT / diagnostic_001_proposal_ref).read_text(encoding="utf-8"))
     diagnostic_001_bundle = json.loads((ROOT / diagnostic_001_bundle_ref).read_text(encoding="utf-8"))
     diagnostic_001_contract = json.loads((ROOT / diagnostic_001_contract_ref).read_text(encoding="utf-8"))
@@ -15647,11 +15756,22 @@ def main() -> None:
     diagnostic_001_reconciliation = json.loads(
         (ROOT / diagnostic_001_reconciliation_ref).read_text(encoding="utf-8")
     )
+    diagnostic_001_owner_approval = json.loads((ROOT / diagnostic_001_owner_approval_ref).read_text(encoding="utf-8"))
+    diagnostic_001_owner_activation = json.loads((ROOT / diagnostic_001_owner_activation_ref).read_text(encoding="utf-8"))
+    diagnostic_001_response = json.loads((ROOT / diagnostic_001_response_ref).read_text(encoding="utf-8"))
+    diagnostic_001_lock = json.loads((ROOT / diagnostic_001_lock_ref).read_text(encoding="utf-8"))
+    diagnostic_001_review_reconciliation = json.loads((ROOT / diagnostic_001_review_reconciliation_ref).read_text(encoding="utf-8"))
     diagnostic_001_units = {
         unit.get("id"): unit for unit in active_m2.get("units", []) if isinstance(unit, dict)
     }
     diagnostic_001_unit = diagnostic_001_units.get(
         "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW", {}
+    )
+    diagnostic_001_implementation_unit = diagnostic_001_units.get(
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION", {}
+    )
+    diagnostic_001_execution_unit = diagnostic_001_units.get(
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION", {}
     )
     if (
         sha256(diagnostic_001_proposal_ref) != "bb318432bf3a63f2bb75d2b1ea69716b6fbade9917d7c35ff8388d3edaa41d84"
@@ -15690,18 +15810,50 @@ def main() -> None:
         or diagnostic_001_reconciliation.get("status") != "pass_public_gate_owner_review_ready"
         or diagnostic_001_reconciliation.get("publication_gate_sha256") != sha256(diagnostic_001_gate_ref)
         or diagnostic_001_reconciliation.get("current_checkpoint") != "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
-        or diagnostic_001_unit.get("status") != "in_progress"
+        or diagnostic_001_owner_approval.get("status") != "approved_bounded_read_only_input_resolution_diagnostic"
+        or diagnostic_001_owner_approval.get("attestation") is not True
+        or diagnostic_001_owner_approval.get("human_decision_count") != 1
+        or diagnostic_001_owner_approval.get("review_bundle_manifest_sha256") != sha256(diagnostic_001_bundle_ref)
+        or diagnostic_001_owner_approval.get("proposal_sha256") != sha256(diagnostic_001_proposal_ref)
+        or diagnostic_001_owner_approval.get("locked_response_sha256") != sha256(diagnostic_001_response_ref)
+        or diagnostic_001_owner_approval.get("lock_receipt_sha256") != sha256(diagnostic_001_lock_ref)
+        or diagnostic_001_owner_activation.get("status") != "pass_exact_approval_activated_implementation_publication_only"
+        or diagnostic_001_owner_activation.get("bindings", {}).get("approval_sha256") != sha256(diagnostic_001_owner_approval_ref)
+        or diagnostic_001_review_reconciliation.get("status") != "reconciled_exact_human_response"
+        or diagnostic_001_review_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+        or diagnostic_001_unit.get("status") != "complete"
+        or diagnostic_001_unit.get("disposition") != "pass"
         or diagnostic_001_unit.get("gates", {}).get("public_ci") != "success"
-        or diagnostic_001_unit.get("gates", {}).get("human_decision_count") != 0
+        or diagnostic_001_unit.get("gates", {}).get("human_decision_count") != 1
         or diagnostic_001_unit.get("gates", {}).get("review_response_open") is not True
         or diagnostic_001_unit.get("gates", {}).get("publication_gate_sha256") != sha256(diagnostic_001_gate_ref)
         or diagnostic_001_unit.get("gates", {}).get("publication_reconciliation_sha256") != sha256(diagnostic_001_reconciliation_ref)
-        or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
-        or goal.get("current_checkpoint") != "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
-        or current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(ROOT, {"promoted": 8}) is not True
         or current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(ROOT, {"promoted": 8}) is not False
     ):
         fail("M2 ApplyOrbitCorrection input-resolution diagnostic-001 publication gate differs or overclaims")
+    diagnostic_001_phase_checks = {
+        "terminal": current_radar_apply_orbit_correction_input_resolution_diagnostic_001_terminal(ROOT, {"promoted": 8}),
+        "execution_ready": current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_ready(ROOT, {"promoted": 8}),
+        "final_preflight_pending": current_radar_apply_orbit_correction_input_resolution_diagnostic_001_final_preflight_pending(ROOT, {"promoted": 8}),
+        "execution_gate_publication_pending": current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_gate_publication_pending(ROOT, {"promoted": 8}),
+        "implementation_pending": current_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_pending(ROOT, {"promoted": 8}),
+        "review_required": current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(ROOT, {"promoted": 8}),
+    }
+    if sum(bool(value) for value in diagnostic_001_phase_checks.values()) != 1:
+        fail("M2 ApplyOrbitCorrection input-resolution diagnostic-001 phase is not exact")
+    if diagnostic_001_phase_checks["terminal"]:
+        diagnostic_001_expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-TERMINAL-REVIEW"
+    elif any(diagnostic_001_phase_checks[key] for key in ("execution_ready", "final_preflight_pending", "execution_gate_publication_pending")):
+        diagnostic_001_expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+    elif diagnostic_001_phase_checks["implementation_pending"]:
+        diagnostic_001_expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION"
+    else:
+        diagnostic_001_expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
+    if (
+        profile.get("current_checkpoint", {}).get("checkpoint_id") != diagnostic_001_expected_checkpoint
+        or goal.get("current_checkpoint") != diagnostic_001_expected_checkpoint
+    ):
+        fail("M2 ApplyOrbitCorrection input-resolution diagnostic-001 current checkpoint differs")
     diagnostic_001_publication_evidence = ledger_by_id.get("EVID-0188")
     diagnostic_001_gate_evidence = ledger_by_id.get("EVID-0189")
     if (
@@ -15723,6 +15875,52 @@ def main() -> None:
         ))
     ):
         fail("M2 ApplyOrbitCorrection input-resolution diagnostic-001 publication evidence differs or overclaims")
+    diagnostic_001_approval_evidence = ledger_by_id.get("EVID-0190")
+    if (
+        not isinstance(diagnostic_001_approval_evidence, dict)
+        or diagnostic_001_approval_evidence.get("status") != "pass_exact_attested_approval_implementation_publication_only"
+        or diagnostic_001_approval_evidence.get("approval_sha256") != sha256(diagnostic_001_owner_approval_ref)
+        or diagnostic_001_approval_evidence.get("review_reconciliation_sha256") != sha256(diagnostic_001_review_reconciliation_ref)
+        or diagnostic_001_approval_evidence.get("assertions", {}).get("human_decision_count") != 1
+        or diagnostic_001_approval_evidence.get("assertions", {}).get("attestation") is not True
+        or diagnostic_001_approval_evidence.get("assertions", {}).get("implementation_authorized") is not True
+        or any(diagnostic_001_approval_evidence.get("assertions", {}).get(key) is not False for key in (
+            "final_no_content_preflight_released", "diagnostic_process_started", "arcpy_imported",
+            "project_data_content_read", "external_custody_accessed", "apply_orbit_correction_invoked",
+            "geoprocessing_invoked", "new_radar_attempt_created", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0190 diagnostic approval activation differs or overclaims")
+    diagnostic_001_implementation_readiness_ref = f"records/readiness/{diagnostic_001_prefix}-implementation-readiness.json"
+    diagnostic_001_implementation_readiness = json.loads(
+        (ROOT / diagnostic_001_implementation_readiness_ref).read_text(encoding="utf-8")
+    )
+    diagnostic_001_readiness_evidence = ledger_by_id.get("EVID-0191")
+    if (
+        diagnostic_001_implementation_readiness.get("status") != "pass_read_only_diagnostic_implementation_public_ci_pending"
+        or diagnostic_001_implementation_readiness.get("validation", {}).get("focused_test_count") != 9
+        or diagnostic_001_implementation_readiness.get("validation", {}).get("full_repository_test_count") != 645
+        or diagnostic_001_implementation_readiness.get("validation", {}).get("full_repository_intentional_skip_count") != 6
+        or diagnostic_001_implementation_readiness.get("validation", {}).get("repository_checker_status") != "pass_1200_required_files"
+        or any(diagnostic_001_implementation_readiness.get("assertions", {}).get(key) is not False for key in (
+            "arcpy_imported", "diagnostic_process_started", "project_data_content_read", "external_custody_accessed",
+            "apply_orbit_correction_invoked", "geoprocessing_invoked", "source_orbit_or_dem_copied",
+            "source_orbit_or_dem_mutated", "attempt_root_reconstructed_or_substituted", "new_radar_attempt_created",
+            "historical_root_cause_established", "radar_recovery_readiness_established", "scientific_result_established",
+        ))
+        or diagnostic_001_implementation_unit.get("gates", {}).get("synthetic_no_content_tests") != "success"
+        or diagnostic_001_implementation_unit.get("gates", {}).get("repository_validation") != "success"
+        or diagnostic_001_implementation_unit.get("gates", {}).get("implementation_readiness_sha256") != sha256(diagnostic_001_implementation_readiness_ref)
+        or not isinstance(diagnostic_001_readiness_evidence, dict)
+        or diagnostic_001_readiness_evidence.get("status") != "pass_read_only_diagnostic_implementation_public_ci_pending"
+        or diagnostic_001_readiness_evidence.get("implementation_readiness_sha256") != sha256(diagnostic_001_implementation_readiness_ref)
+        or diagnostic_001_readiness_evidence.get("assertions", {}).get("public_ci_pending") is not True
+        or any(diagnostic_001_readiness_evidence.get("assertions", {}).get(key) is not False for key in (
+            "arcpy_imported", "diagnostic_process_started", "project_data_content_read", "external_custody_accessed",
+            "apply_orbit_correction_invoked", "geoprocessing_invoked", "scientific_result_established",
+        ))
+    ):
+        fail("M2 input-resolution diagnostic implementation readiness differs or overclaims")
 
     violations = []
     for relative in tracked_files():

@@ -294,6 +294,22 @@ RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_REVIEW_CHECKPOINT =
     "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
     "next_action": "Review the exact public M2 ApplyOrbitCorrection input-resolution diagnostic-001 bundle and proposal; approve, revise, or defer the bounded one-process read-only diagnostic. No implementation, ArcPy invocation, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline or change analysis, attribution, derived-pixel publication, or scientific publication is authorized before an exact attested decision.",
 }
+RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION",
+    "next_action": "Implement and validate only the approved read-only ApplyOrbitCorrection input-resolution diagnostic and synthetic no-content tests, then require successful public default-branch CI. Do not run the final no-content preflight, import production ArcPy, or access the recovery-002 attempt root or orbit custody before that public gate.",
+}
+RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_EXECUTION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION",
+    "next_action": "Publish and publicly validate the exact diagnostic execution-gate state. Do not run the final no-content preflight, import production ArcPy, or access the recovery-002 attempt root or orbit custody until that gate-state commit passes public CI.",
+}
+RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_FINAL_PREFLIGHT_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION",
+    "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the exact one-process read-only diagnostic inspect the frozen recovery-002 candidate paths and M2-ORB-001. Never retry it.",
+}
+RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_TERMINAL_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-TERMINAL-REVIEW",
+    "next_action": "Review the terminal input-resolution diagnostic outcome. The diagnostic process is consumed and cannot be resumed, reused, or retried; no path correction, reconstruction, substitution, geoprocessing, new radar attempt, attribution, or scientific action is released.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -2376,6 +2392,153 @@ def current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_
     )
 
 
+def current_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize exact diagnostic approval before implementation public CI."""
+    if state_counts != {"promoted": 8}:
+        return False
+    prefix = "m2-radar-apply-orbit-correction-input-resolution-diagnostic-001"
+    if (root / f"records/readiness/{prefix}-implementation-publication-gate.json").exists():
+        return False
+    try:
+        approval = load(root / f"records/source-gates/{prefix}-approval.json")
+        activation = load(root / f"records/readiness/{prefix}-approval-activation.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW", {})
+    implementation = units.get("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION", {})
+    execution = units.get("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION", {})
+    return bool(
+        approval.get("status") == "approved_bounded_read_only_input_resolution_diagnostic"
+        and approval.get("attestation") is True
+        and activation.get("status") == "pass_exact_approval_activated_implementation_publication_only"
+        and review.get("status") == "complete"
+        and review.get("disposition") == "pass"
+        and review.get("gates", {}).get("human_decision_count") == 1
+        and implementation.get("status") == "in_progress"
+        and implementation.get("gates", {}).get("public_ci") == "pending"
+        and execution.get("status") == "planned"
+        and execution.get("gates", {}).get("diagnostic_processes_started") == 0
+    )
+
+
+def current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_gate_publication_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize successful implementation CI before execution-state publication."""
+    if state_counts != {"promoted": 8}:
+        return False
+    prefix = "m2-radar-apply-orbit-correction-input-resolution-diagnostic-001"
+    if (root / f"records/readiness/{prefix}-gate-state-publication.json").exists():
+        return False
+    try:
+        gate = load(root / f"records/readiness/{prefix}-implementation-publication-gate.json")
+        reconciliation = load(root / f"records/readiness/{prefix}-implementation-publication-reconciliation.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    implementation = units.get("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION", {})
+    execution = units.get("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION", {})
+    return bool(
+        gate.get("status") == "pass_public_default_branch_ci_read_only_diagnostic_implementation_ready"
+        and gate.get("public_ci_conclusion") == "success"
+        and reconciliation.get("status") == "pass_public_implementation_gate_gate_state_publication_pending"
+        and implementation.get("status") == "complete"
+        and implementation.get("disposition") == "pass"
+        and implementation.get("gates", {}).get("public_ci") == "success"
+        and execution.get("status") == "in_progress"
+        and execution.get("gates", {}).get("gate_state_publication") == "pending"
+        and execution.get("gates", {}).get("diagnostic_processes_started") == 0
+    )
+
+
+def current_radar_apply_orbit_correction_input_resolution_diagnostic_001_final_preflight_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize public execution-state CI before the one final no-content preflight."""
+    if state_counts != {"promoted": 8}:
+        return False
+    prefix = "m2-radar-apply-orbit-correction-input-resolution-diagnostic-001"
+    if (root / f"records/readiness/{prefix}-final-preflight.json").exists():
+        return False
+    try:
+        gate_state = load(root / f"records/readiness/{prefix}-gate-state-publication.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    execution = units.get("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION", {})
+    return bool(
+        gate_state.get("status") == "pass_public_gate_state_final_no_content_preflight_released"
+        and gate_state.get("public_ci_conclusion") == "success"
+        and execution.get("status") == "in_progress"
+        and execution.get("gates", {}).get("gate_state_publication") == "success"
+        and execution.get("gates", {}).get("diagnostic_processes_started") == 0
+    )
+
+
+def current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_ready(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize a passing final preflight before the sole diagnostic process."""
+    if state_counts != {"promoted": 8}:
+        return False
+    prefix = "m2-radar-apply-orbit-correction-input-resolution-diagnostic-001"
+    if (root / f"records/processing/{prefix}-terminal.json").exists():
+        return False
+    try:
+        preflight = load(root / f"records/readiness/{prefix}-final-preflight.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    execution = units.get("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION", {})
+    return bool(
+        preflight.get("status") == "pass_final_no_content_preflight_one_read_only_diagnostic_released"
+        and execution.get("status") == "in_progress"
+        and execution.get("gates", {}).get("gate_state_publication") == "success"
+        and execution.get("gates", {}).get("diagnostic_processes_started") == 0
+    )
+
+
+def current_radar_apply_orbit_correction_input_resolution_diagnostic_001_terminal(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the reconciled, consumed read-only diagnostic process."""
+    if state_counts != {"promoted": 8}:
+        return False
+    prefix = "m2-radar-apply-orbit-correction-input-resolution-diagnostic-001"
+    try:
+        terminal = load(root / f"records/processing/{prefix}-terminal.json")
+        cleanup = load(root / f"records/processing/{prefix}-cleanup.json")
+        outcome = load(root / f"records/processing/{prefix}-outcome-reconciliation.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    execution = units.get("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION", {})
+    terminal_status = terminal.get("status")
+    return bool(
+        terminal_status in {
+            "pass_current_input_resolution_diagnostic_only",
+            "block_missing_exact_input_no_retry",
+            "block_read_only_diagnostic_failure_no_retry",
+        }
+        and terminal.get("assertions", {}).get("diagnostic_process_consumed") is True
+        and terminal.get("assertions", {}).get("automatic_retry_performed") is False
+        and cleanup.get("status") == "pass_no_payload_or_temporary_artifact_cleanup_required"
+        and outcome.get("status") == terminal_status
+        and outcome.get("assertions", {}).get("diagnostic_process_consumed") is True
+        and execution.get("status") == "complete"
+        and execution.get("gates", {}).get("diagnostic_processes_started") == 1
+        and execution.get("gates", {}).get("diagnostic_process_consumed") is True
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -2445,7 +2608,27 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(
+            if current_radar_apply_orbit_correction_input_resolution_diagnostic_001_terminal(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_TERMINAL_CHECKPOINT)
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_ready(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_FINAL_PREFLIGHT_CHECKPOINT)
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_final_preflight_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_FINAL_PREFLIGHT_CHECKPOINT)
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_gate_publication_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_EXECUTION_CHECKPOINT)
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_IMPLEMENTATION_CHECKPOINT)
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_REVIEW_CHECKPOINT)

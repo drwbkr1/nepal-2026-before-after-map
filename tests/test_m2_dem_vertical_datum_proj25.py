@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import io
+import json
 import os
 import sys
 import tempfile
@@ -60,7 +61,7 @@ class DemVerticalDatumProj25Tests(unittest.TestCase):
         self.assertFalse(gate["assertions"]["grid_request_performed"])
         self.assertFalse(gate["assertions"]["dem_pixels_read"])
         self.assertEqual(reconciliation["status"], "pass_public_gate_final_no_payload_preflight_ready")
-        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], ("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"))
+        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))["current_checkpoint"]["checkpoint_id"])
 
     def test_controlled_paths_reject_traversal_and_absolute_paths(self) -> None:
         for unsafe in ("../escape.tif", "/absolute.tif", "a/../../escape.tif"):

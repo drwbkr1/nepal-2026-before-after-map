@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-APPROVAL-ACTIVATION",
+  "activated_at_utc": "2026-09-19T23:17:53Z",
+  "status": "pass_exact_approval_activated_implementation_publication_only",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+    "approval_sha256": "be935d0011e2819debf45f4bc335ec035bc6e718380a3ad0429d5be88b269287",
+    "reconciliation_sha256": "b36533fb12846f75eeba8edfb2bdc71ce7976883b1fa23759afb41de38a0d9a0",
+    "proposal_sha256": "bb318432bf3a63f2bb75d2b1ea69716b6fbade9917d7c35ff8388d3edaa41d84",
+    "review_bundle_sha256": "88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af",
+    "review_publication_gate_sha256": "cbf21f9e3716314eb3c4b6a845438786bf34f8c59906301e14c24a418826bff5"
+  },
+  "released_now": {
+    "bounded_diagnostic_implementation": true,
+    "synthetic_no_content_tests": true,
+    "public_ci": true,
+    "final_no_content_preflight": false,
+    "diagnostic_process": false,
+    "arcpy_invocation": false,
+    "project_data_or_external_custody_access": false,
+    "apply_orbit_correction": false,
+    "geoprocessing": false,
+    "new_radar_attempt": false
+  },
+  "assertions": {
+    "diagnostic_process_started": false,
+    "arcpy_imported": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "attempt_root_current_presence_observed": false,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "attempt_root_reconstructed_or_substituted": false,
+    "new_radar_attempt_created": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "scientific_result_established": false
+  }
+}

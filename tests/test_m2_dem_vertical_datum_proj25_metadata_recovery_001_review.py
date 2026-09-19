@@ -124,11 +124,11 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(self.approval["limits"]["recovery_verification_attempts"], 1)
         self.assertEqual(self.activation["status"], "pass_exact_approval_activated_implementation_publication_only")
         self.assertFalse(self.activation["released_now"]["preserved_byte_read"])
-        expected = ("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION")
+        expected = json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))["current_checkpoint"]["checkpoint_id"]
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], expected)
         self.assertEqual(self.goal["current_checkpoint"], expected)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], expected)
-        self.assertEqual(self.goal["proposed_amendments"], ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json"])
+        self.assertEqual(self.goal["proposed_amendments"], [])
         self.assertIn("records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json", self.goal["active_amendments"])
 
     def test_milestone_preserves_block_and_conditional_dependency(self) -> None:

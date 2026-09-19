@@ -379,6 +379,20 @@
         "maximum_live_attempts": 1,
         "automatic_retry_authorized": false,
         "project_data_content_read_authorized_only_after_public_gate_and_final_preflight": true
+      },
+      {
+        "approval_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+        "approval_sha256": "be935d0011e2819debf45f4bc335ec035bc6e718380a3ad0429d5be88b269287",
+        "proposal_ref": "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json",
+        "proposal_sha256": "bb318432bf3a63f2bb75d2b1ea69716b6fbade9917d7c35ff8388d3edaa41d84",
+        "review_bundle_sha256": "88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-reconciliation.json",
+        "review_reconciliation_sha256": "b36533fb12846f75eeba8edfb2bdc71ce7976883b1fa23759afb41de38a0d9a0",
+        "diagnostic_id": "radar-apply-orbit-correction-input-resolution-diagnostic-001-real-001",
+        "maximum_diagnostic_processes": 1,
+        "automatic_retry_authorized": false,
+        "apply_orbit_correction_authorized": false,
+        "geoprocessing_authorized": false
       }
     ]
   },
@@ -461,7 +475,8 @@
       "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
       "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
       "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
-      "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json"
+      "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
+      "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json"
     ]
   },
   "entry_conditions": [
@@ -4402,7 +4417,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preparation-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-approval.json",
@@ -4418,16 +4433,19 @@
         "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json"
       ],
       "outputs": [
-        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json",
-        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-reconciliation.json"
+        "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/response-c4f0ffdaaa43ebb0acef3b35e15dd5e7ea183f6ec4ac29da587b31c5ff51387f.json",
+        "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract-lock-001.json",
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-reconciliation.json",
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval-activation.json"
       ],
       "gates": {
         "public_ci": "success",
-        "human_decision_count": 0,
-        "attestation": false,
+        "human_decision_count": 1,
+        "attestation": true,
         "review_response_open": true,
-        "owner_proposal_approval_authorized": false,
-        "diagnostic_implementation_authorized": false,
+        "owner_proposal_approval_authorized": true,
+        "diagnostic_implementation_authorized": true,
         "arcpy_invocation_authorized": false,
         "project_data_or_external_custody_access_authorized": false,
         "apply_orbit_correction_authorized": false,
@@ -4441,26 +4459,111 @@
         "publication_gate_sha256": "cbf21f9e3716314eb3c4b6a845438786bf34f8c59906301e14c24a418826bff5",
         "publication_reconciliation_sha256": "19580456a2ea52b98b14be67a5609859d8a0304c98c21160f4d84c47a8a35cb0",
         "publication_commit": "91a421c0b7159fb9c2ba1d59e48a679d829adf82",
-        "public_ci_run_id": 35473207884
+        "public_ci_run_id": 35473207884,
+        "diagnostic_execution_conditionally_authorized": true,
+        "arcpy_invocation_conditionally_authorized": true,
+        "project_data_or_external_custody_access_conditionally_authorized": true,
+        "approval_sha256": "be935d0011e2819debf45f4bc335ec035bc6e718380a3ad0429d5be88b269287",
+        "review_reconciliation_sha256": "b36533fb12846f75eeba8edfb2bdc71ce7976883b1fa23759afb41de38a0d9a0"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/processing/radar-pixel-orbit-application-001/m1-src-001-real-001-terminal.json",
         "records/processing/m2-radar-pixel-orbit-application-recovery-002-terminal-reconciliation.json",
         "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json"
       ],
       "exit_condition_delta": {
-        "expected": [
-          "successful public default-branch CI",
-          "one later exact attested owner proposal decision"
-        ],
+        "expected": [],
         "observed": [
-          "exact zero-decision packet publication authorized; public CI pending"
+          "one exact attested approval"
         ],
-        "decision_value": "unknown",
-        "rationale": "Publication authority opens no substantive proposal decision and releases no implementation or execution."
+        "decision_value": "enables_dependency",
+        "rationale": "Implementation and public CI are released now; the diagnostic remains conditional on both public gates and final preflight."
       },
       "next_dependency": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION"
+    },
+    {
+      "id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION",
+      "purpose": "Implement and publicly validate the exact read-only input-resolution diagnostic without importing ArcPy or accessing external inputs.",
+      "depends_on": [
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
+      ],
+      "action_class": "routine_qa",
+      "human_gate": false,
+      "status": "in_progress",
+      "inputs": [
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+        "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json",
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-reconciliation.json"
+      ],
+      "outputs": [
+        "config/qa/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-contract.json",
+        "scripts/m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_core.py",
+        "scripts/run_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
+        "tests/test_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-readiness.json"
+      ],
+      "gates": {
+        "synthetic_no_content_tests": "success",
+        "repository_validation": "success",
+        "public_ci": "pending",
+        "arcpy_invoked": false,
+        "external_inputs_accessed": false,
+        "diagnostic_process_started": false,
+        "focused_test_count": 9,
+        "full_test_count": 645,
+        "full_skip_count": 6,
+        "required_file_count": 1200,
+        "implementation_readiness_sha256": "e8ac7b709945c7504b72a884243878a16f3b879a198696a487be282d00c1f8d5"
+      },
+      "exit_condition_delta": {
+        "expected": [
+          "successful public default-branch CI"
+        ],
+        "observed": [
+          "portable synthetic validation passed without ArcPy import or external input access"
+        ],
+        "decision_value": "pending_public_ci",
+        "rationale": "The final preflight and one diagnostic process remain blocked behind two exact public CI gates."
+      },
+      "next_dependency": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+    },
+    {
+      "id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION",
+      "purpose": "Run the one approved read-only diagnostic only after both public gates and a final no-content preflight.",
+      "depends_on": [
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION"
+      ],
+      "action_class": "data_processing",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+        "config/qa/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-contract.json"
+      ],
+      "outputs": [
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-final-preflight.json",
+        "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-terminal.json",
+        "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-cleanup.json"
+      ],
+      "gates": {
+        "public_ci": "pending",
+        "gate_state_publication": "pending",
+        "final_no_content_preflight": "pending",
+        "maximum_diagnostic_processes": 1,
+        "diagnostic_processes_started": 0,
+        "apply_orbit_correction_calls": 0,
+        "geoprocessing_calls": 0
+      },
+      "exit_condition_delta": {
+        "expected": [
+          "terminal diagnostic and cleanup receipts"
+        ],
+        "observed": [],
+        "decision_value": "pending",
+        "rationale": "Either PASS or BLOCK remains diagnostic-only and creates no processing authority."
+      },
+      "next_dependency": null
     }
   ],
   "path_efficiency": {
@@ -4517,8 +4620,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
-    "next_action": "Review the exact public M2 ApplyOrbitCorrection input-resolution diagnostic-001 bundle and proposal; approve, revise, or defer the bounded one-process read-only diagnostic. No implementation, ArcPy invocation, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline or change analysis, attribution, derived-pixel publication, or scientific publication is authorized before an exact attested decision.",
+    "current_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION",
+    "next_action": "Implement and validate only the approved read-only ApplyOrbitCorrection input-resolution diagnostic and synthetic no-content tests, then require successful public default-branch CI. Do not run the final no-content preflight, import production ArcPy, or access the recovery-002 attempt root or orbit custody before that public gate.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4567,7 +4670,7 @@
       "The radar recovery-002 packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, new attempt, radar processing, baseline, change analysis, attribution, or scientific action is released.",
       "The ApplyOrbitCorrection diagnostic packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline, change analysis, attribution, derived-pixel publication, or scientific action is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
-    "parallel_next_action": "Review the exact public M2 ApplyOrbitCorrection input-resolution diagnostic-001 bundle and proposal; approve, revise, or defer the bounded one-process read-only diagnostic. No implementation, ArcPy invocation, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline or change analysis, attribution, derived-pixel publication, or scientific publication is authorized before an exact attested decision."
+    "parallel_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION",
+    "parallel_next_action": "Implement and validate only the approved read-only ApplyOrbitCorrection input-resolution diagnostic and synthetic no-content tests, then require successful public default-branch CI. Do not run the final no-content preflight, import production ArcPy, or access the recovery-002 attempt root or orbit custody before that public gate."
   }
 }

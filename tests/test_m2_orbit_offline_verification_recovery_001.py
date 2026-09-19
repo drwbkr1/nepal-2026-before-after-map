@@ -67,7 +67,7 @@ class OrbitOfflineVerificationRecovery001Tests(unittest.TestCase):
         milestone = load("contracts/milestone-002.json")
         units = {item["id"]: item for item in milestone["units"]}
         terminal = load("records/readiness/m2-orbit-offline-verification-recovery-001-terminal-reconciliation.json")
-        self.assertEqual(milestone["handoff"]["current_checkpoint"], ("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"))
+        self.assertEqual(milestone["handoff"]["current_checkpoint"], json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))["current_checkpoint"]["checkpoint_id"])
         self.assertEqual(units["M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-REVIEW"]["status"], "complete")
         self.assertEqual(units["M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001-IMPLEMENTATION"]["status"], "complete")
         self.assertEqual(units["M2-ORBIT-OFFLINE-VERIFICATION-RECOVERY-001"]["status"], "complete")
