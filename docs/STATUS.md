@@ -6,15 +6,15 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION`; the exact zero-decision packet is authorized for publication and public CI, while radar base real-001, recovery real-001, and the consumed disposable delayed-import probe remain terminal and cannot be retried
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW`; the exact zero-decision packet passed public CI and only owner proposal review is open, while radar base real-001, recovery real-001, and the consumed disposable delayed-import probe remain terminal and cannot be retried
 
-## Radar delayed-import probe receipt recovery-001 review publication pending — 2026-09-19
+## Radar delayed-import probe receipt recovery-001 owner review — 2026-09-19
 
-The owner authorized repository-control integration, public default-branch publication, public CI, and exact post-CI reconciliation only for proposal SHA-256 `9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09` and review-bundle SHA-256 `df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695`. The packet has zero substantive decisions, and its owner response remains closed until the exact packet commit passes public CI.
+Proposal SHA-256 `9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09` and review-bundle SHA-256 `df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695` remain exact and contain zero substantive decisions. Exact packet commit `872f380fbe8134bcb0c9c76b7fd3952013cfba92` passed public default-branch CI run `35462695951` with 1,098 required files, 600 tests, and 13 intentional public-runtime skips. Publication-gate SHA-256 is `6886334b64e453d64a08226f8f16cae064569fd0d51264baac50d623c9140ad8`; publication-reconciliation SHA-256 is `7ca2e44d1e910982f758be8797f4426d215b14c8e54e2ec099da09e2109781ee`.
 
 The proposal preserves the consumed probe and its public implementation unchanged. It proposes only function-local ArcGIS-safe timestamp construction, pre-reserved terminal and cleanup identities, immediate sanitized preservation of the original caught exception, a minimal fallback journal, cleanup evidence independent of ordinary terminal serialization, synthetic tests, and at most one later fresh append-only disposable attempt behind separate owner approval and implementation gates.
 
-No proposal approval, implementation, ArcPy invocation, corpus creation, new attempt, project-data or external-custody access, radar processing, baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication is authorized or has occurred under this publication decision.
+Only owner proposal review is released. No proposal approval, implementation, ArcPy invocation, corpus creation, new attempt, project-data or external-custody access, radar processing, baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication is authorized or has occurred under this publication decision.
 
 ## Radar delayed-import probe-001 approved implementation — 2026-09-19
 

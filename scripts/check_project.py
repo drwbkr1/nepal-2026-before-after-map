@@ -268,6 +268,8 @@ REQUIRED = [
     "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-preparation-approval.json",
     "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-approval.json",
     "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-activation.json",
+    "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-gate.json",
+    "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-reconciliation.json",
     "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json",
     "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-preflight.json",
     "docs/M2_RADAR_DELAYED_IMPORT_PROBE_RECEIPT_RECOVERY_001_REVIEW.md",

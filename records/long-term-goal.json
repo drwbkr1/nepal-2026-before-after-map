@@ -11,7 +11,7 @@
   "completion_rule": "Complete only when the reproducible ArcGIS evidence package, reviewed change evidence, exportable deliverables, validation, and final release boundary are all satisfied.",
   "last_completed_milestone": "contracts/milestone-001.json",
   "proposed_milestone": null,
-  "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION",
+  "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW",
   "proposed_amendments": [
     "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"
   ],
@@ -38,6 +38,6 @@
     "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
   ],
   "parallel_checkpoints": [
-    "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION"
+    "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW"
   ]
 }

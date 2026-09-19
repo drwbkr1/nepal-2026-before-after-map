@@ -4033,7 +4033,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-preparation-approval.json",
         "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-approval.json",
@@ -4048,12 +4048,15 @@
         "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json",
         "records/readiness/m2-radar-delayed-import-probe-001-terminal-publication-gate.json"
       ],
-      "outputs": [],
+      "outputs": [
+        "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-gate.json",
+        "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-reconciliation.json"
+      ],
       "gates": {
-        "public_ci": "pending",
+        "public_ci": "success",
         "human_decision_count": 0,
         "attestation": false,
-        "review_response_open": false,
+        "review_response_open": true,
         "owner_proposal_approval_authorized": false,
         "implementation_authorized": false,
         "arcpy_invocation_authorized": false,
@@ -4063,7 +4066,11 @@
         "radar_processing_authorized": false,
         "baseline_or_change_authorized": false,
         "attribution_authorized": false,
-        "scientific_publication_authorized": false
+        "scientific_publication_authorized": false,
+        "publication_gate_sha256": "6886334b64e453d64a08226f8f16cae064569fd0d51264baac50d623c9140ad8",
+        "publication_reconciliation_sha256": "7ca2e44d1e910982f758be8797f4426d215b14c8e54e2ec099da09e2109781ee",
+        "publication_commit": "872f380fbe8134bcb0c9c76b7fd3952013cfba92",
+        "public_ci_run_id": 35462695951
       },
       "disposition": null,
       "retained_failures": [
@@ -4138,8 +4145,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION",
-    "next_action": "Publish and publicly validate the exact zero-decision radar delayed-import probe receipt-recovery-001 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not implement the correction, invoke ArcPy, create the corpus, create a new attempt, access project data or external custody, process radar data, run baseline or change analysis, attribute cause, or publish science.",
+    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW",
+    "next_action": "Review the exact public M2 radar delayed-import probe receipt-recovery-001 bundle and proposal; approve, revise, or defer the bounded receipt-durability correction and one fresh disposable attempt. No implementation, ArcPy invocation, corpus creation, new attempt, project-data or external-custody access, radar processing, baseline or change analysis, attribution, or scientific publication is authorized before an exact attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4186,7 +4193,7 @@
       "The one delayed-import probe attempt is terminal and consumed after full disposable-corpus hashing and a stop at the arcpy_import_started boundary; its caught exception was masked by terminal timestamp failure, postprocess cleanup completed, and no retry, radar recovery, historical-cause claim, or scientific claim is released.",
       "The receipt-recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, corpus, new attempt, project-data access, radar processing, or scientific action is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION",
-    "parallel_next_action": "Publish and publicly validate the exact zero-decision radar delayed-import probe receipt-recovery-001 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not implement the correction, invoke ArcPy, create the corpus, create a new attempt, access project data or external custody, process radar data, run baseline or change analysis, attribute cause, or publish science."
+    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW",
+    "parallel_next_action": "Review the exact public M2 radar delayed-import probe receipt-recovery-001 bundle and proposal; approve, revise, or defer the bounded receipt-durability correction and one fresh disposable attempt. No implementation, ArcPy invocation, corpus creation, new attempt, project-data or external-custody access, radar processing, baseline or change analysis, attribution, or scientific publication is authorized before an exact attested decision."
   }
 }

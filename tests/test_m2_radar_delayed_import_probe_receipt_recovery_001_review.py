@@ -26,7 +26,7 @@ OUTCOME_REF = "records/processing/m2-radar-delayed-import-probe-001-outcome-reco
 PROPOSAL_SHA256 = "9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09"
 BUNDLE_SHA256 = "df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695"
 READINESS_SHA256 = "468d29d68f9e1c8323a7f388b74457e3063ae9a115d69bcaedde077d49617dc8"
-CURRENT_CHECKPOINT = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION"
+CURRENT_CHECKPOINT = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW"
 PROTECTED_HASHES = {
     "config/qa/m2-radar-delayed-import-probe-001-contract.json": "c9bf8154bfb44cf6a76a9cdfc695c30b7e2bf2349d64ab9e8c0e922ca0b70ac0",
     "scripts/m2_radar_delayed_import_probe_001_core.py": "b15bcc4f6ec4034aa890d551f3d700977367e9f1bc7e28c69cbdd50f17588d2a",
@@ -192,7 +192,7 @@ class M2RadarDelayedImportProbeReceiptRecovery001ReviewTests(unittest.TestCase):
         ):
             self.assertFalse(readiness["released_now"][key])
 
-    def test_publication_authority_routes_only_to_public_ci(self) -> None:
+    def test_publication_gate_opens_only_owner_review(self) -> None:
         approval = load(PUBLICATION_APPROVAL_REF)
         activation = load(PUBLICATION_ACTIVATION_REF)
         self.assertEqual(approval["status"], "approved_exact_zero_decision_review_publication_only")
@@ -217,9 +217,9 @@ class M2RadarDelayedImportProbeReceiptRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(goal["proposed_amendments"], [PROPOSAL_REF])
         units = {item["id"]: item for item in milestone["units"]}
         review = units["M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW"]
-        self.assertEqual(review["status"], "planned")
-        self.assertEqual(review["gates"]["public_ci"], "pending")
-        self.assertFalse(review["gates"]["review_response_open"])
+        self.assertEqual(review["status"], "in_progress")
+        self.assertEqual(review["gates"]["public_ci"], "success")
+        self.assertTrue(review["gates"]["review_response_open"])
         self.assertFalse(review["gates"]["implementation_authorized"])
         self.assertFalse(review["gates"]["new_probe_attempt_authorized"])
 

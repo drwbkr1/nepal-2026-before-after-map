@@ -146,7 +146,7 @@ class M2OrbitActivationTests(unittest.TestCase):
             ],
         )
         checkpoints = [item["checkpoint_id"] for item in self.profile["parallel_checkpoints"]]
-        self.assertIn("M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION", checkpoints)
+        self.assertIn("M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW", checkpoints)
         self.assertNotIn("M2-DEM-TERRAIN-RESULT-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-ACQUISITION-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-AMENDMENT-REVIEW", checkpoints)
