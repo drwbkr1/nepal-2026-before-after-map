@@ -4217,7 +4217,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-review-preparation-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-review-publication-approval.json",
@@ -4235,12 +4235,15 @@
         "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-outcome-reconciliation.json",
         "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-terminal-publication-gate.json"
       ],
-      "outputs": [],
+      "outputs": [
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-review-publication-gate.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-review-publication-reconciliation.json"
+      ],
       "gates": {
-        "public_ci": "pending",
+        "public_ci": "success",
         "human_decision_count": 0,
         "attestation": false,
-        "review_response_open": false,
+        "review_response_open": true,
         "owner_proposal_approval_authorized": false,
         "implementation_authorized": false,
         "arcpy_invocation_authorized": false,
@@ -4249,7 +4252,11 @@
         "radar_processing_authorized": false,
         "baseline_or_change_authorized": false,
         "attribution_authorized": false,
-        "scientific_publication_authorized": false
+        "scientific_publication_authorized": false,
+        "publication_gate_sha256": "b1eb5b1ce6f8915477993f61230ca52ad47251839c5dd47f1e61fc4127d66bc6",
+        "publication_reconciliation_sha256": "f8e093d9c9eb7db178c7cd9141a46bb0da68f612b80f3c411481ce7c5cf817cf",
+        "publication_commit": "2de376ecd1ed4c226cd5fa2d2e39b763aa5c9438",
+        "public_ci_run_id": 35468801414
       },
       "disposition": null,
       "retained_failures": [
@@ -4326,8 +4333,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW-PUBLICATION",
-    "next_action": "Publish and publicly validate the exact zero-decision radar pixel and orbit application recovery-002 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not approve or implement the proposal, invoke ArcPy, access project data or external custody, create a new attempt, process radar data, run baseline or change analysis, attribute cause, or publish science.",
+    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW",
+    "next_action": "Review the exact public M2 radar pixel and orbit application recovery-002 bundle and proposal; approve, revise, or defer the bounded stage-evidence and one-fresh-attempt proposal. No implementation, ArcPy invocation, project-data or external-custody access, new attempt, radar processing, baseline or change analysis, attribution, or scientific publication is authorized before an exact attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4375,7 +4382,7 @@
       "The receipt-recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, corpus, new attempt, project-data access, radar processing, or scientific action is released.",
       "The radar recovery-002 packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, new attempt, radar processing, baseline, change analysis, attribution, or scientific action is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW-PUBLICATION",
-    "parallel_next_action": "Publish and publicly validate the exact zero-decision radar pixel and orbit application recovery-002 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not approve or implement the proposal, invoke ArcPy, access project data or external custody, create a new attempt, process radar data, run baseline or change analysis, attribute cause, or publish science."
+    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW",
+    "parallel_next_action": "Review the exact public M2 radar pixel and orbit application recovery-002 bundle and proposal; approve, revise, or defer the bounded stage-evidence and one-fresh-attempt proposal. No implementation, ArcPy invocation, project-data or external-custody access, new attempt, radar processing, baseline or change analysis, attribution, or scientific publication is authorized before an exact attested decision."
   }
 }
