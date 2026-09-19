@@ -219,6 +219,7 @@ REQUIRED = [
     "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json",
     "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json",
     "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-static-call-path-observation-002.json",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-evidence-triangulation-observation-003.json",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -12550,6 +12551,7 @@ def main() -> None:
     radar_recovery_terminal_publication_gate = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json").read_text(encoding="utf-8"))
     radar_recovery_terminal_owner_review_observation = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json").read_text(encoding="utf-8"))
     radar_recovery_terminal_static_call_path_observation = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-static-call-path-observation-002.json").read_text(encoding="utf-8"))
+    radar_recovery_terminal_evidence_triangulation_observation = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-evidence-triangulation-observation-003.json").read_text(encoding="utf-8"))
     if (
         radar_lock_failure.get("status") != "rejected_before_decision_reveal_invalid_hash_bound_filename"
         or radar_lock_failure.get("candidate_sha256") != "49807e5113a9dc4beec16ae23631f4039e066f1713b338055adc24ee71240369"
@@ -13312,6 +13314,27 @@ def main() -> None:
         ))
     ):
         fail("radar inventory recovery terminal static call-path observation differs or overclaims")
+    if (
+        sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-evidence-triangulation-observation-003.json") != "de34ea0096017135b7d39995324c6c281d4b61193b2d4f9c317c9b78daa2314a"
+        or radar_recovery_terminal_evidence_triangulation_observation.get("status") != "defer_existing_synthetic_geoprocessing_and_current_license_checks_pass_historical_context_unresolved"
+        or radar_recovery_terminal_evidence_triangulation_observation.get("bindings", {}).get("synthetic_arcgis_receipt_sha256") != sha256("records/surface-receipts/m2-radar-pixel-orbit-application-recovery-001-synthetic-arcgis.json")
+        or radar_recovery_terminal_evidence_triangulation_observation.get("bindings", {}).get("synthetic_arcgis_validator_sha256") != sha256("scripts/validate_m2_radar_pixel_orbit_application_recovery_001_arcgis.py")
+        or radar_recovery_terminal_evidence_triangulation_observation.get("bindings", {}).get("terminal_reconciliation_sha256") != sha256("records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json")
+        or radar_recovery_terminal_evidence_triangulation_observation.get("bindings", {}).get("owner_review_observation_001_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json")
+        or radar_recovery_terminal_evidence_triangulation_observation.get("bindings", {}).get("static_call_path_observation_002_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-static-call-path-observation-002.json")
+        or radar_recovery_terminal_evidence_triangulation_observation.get("bindings", {}).get("static_call_path_public_commit_sha") != "8884ac3af94ea1dceefe20d8e3125e2fb8862fbd"
+        or radar_recovery_terminal_evidence_triangulation_observation.get("bindings", {}).get("static_call_path_public_ci_run_id") != 35408957144
+        or radar_recovery_terminal_evidence_triangulation_observation.get("assessment", {}).get("decision") != "defer_owner_choice_separate_scope_required"
+        or radar_recovery_terminal_evidence_triangulation_observation.get("assertions", {}).get("existing_synthetic_geoprocessing_passed") is not True
+        or radar_recovery_terminal_evidence_triangulation_observation.get("assertions", {}).get("current_product_and_extension_checks_passed") is not True
+        or any(radar_recovery_terminal_evidence_triangulation_observation.get("assertions", {}).get(key) is not False for key in (
+            "persistent_install_wide_license_absence_supported", "transient_or_context_specific_cause_proven",
+            "historical_exact_failing_statement_identified", "root_cause_resolved", "new_runtime_probe_executed",
+            "recovery_attempt_reused_or_retried", "project_data_content_read", "external_custody_mutated",
+            "recovery_review_packet_prepared", "new_authority_created", "scientific_result_established",
+        ))
+    ):
+        fail("radar inventory recovery terminal evidence triangulation observation differs or overclaims")
     radar_units = {unit.get("id"): unit for unit in active_m2.get("units", [])}
     radar_review_unit = radar_units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW", {})
     radar_implementation_unit = radar_units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION", {})
@@ -13396,6 +13419,11 @@ def main() -> None:
         or radar_recovery_execution_unit.get("gates", {}).get("terminal_static_call_path_observation_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-static-call-path-observation-002.json")
         or radar_recovery_execution_unit.get("gates", {}).get("terminal_historical_candidate_statement_count") != 4
         or radar_recovery_execution_unit.get("gates", {}).get("terminal_historical_exact_failing_statement_identified") is not False
+        or radar_recovery_execution_unit.get("gates", {}).get("terminal_evidence_triangulation_observation") != "defer_existing_synthetic_geoprocessing_and_current_license_checks_pass_historical_context_unresolved"
+        or radar_recovery_execution_unit.get("gates", {}).get("terminal_evidence_triangulation_observation_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-evidence-triangulation-observation-003.json")
+        or radar_recovery_execution_unit.get("gates", {}).get("terminal_existing_synthetic_geoprocessing_passed") is not True
+        or radar_recovery_execution_unit.get("gates", {}).get("terminal_current_product_and_extension_checks_passed") is not True
+        or radar_recovery_execution_unit.get("gates", {}).get("terminal_persistent_install_wide_license_absence_supported") is not False
         or radar_recovery_execution_unit.get("gates", {}).get("terminal_failure_root_cause_resolved") is not False
         or radar_recovery_execution_unit.get("gates", {}).get("postattempt_identities_match") is not True
         or radar_recovery_execution_unit.get("gates", {}).get("project_data_content_read_for_identity_verification") is not True
@@ -13746,6 +13774,24 @@ def main() -> None:
         ))
     ):
         fail("EVID-0162 radar recovery terminal static call-path evidence differs or overclaims")
+    radar_recovery_terminal_triangulation_evidence = ledger_by_id.get("EVID-0163")
+    if (
+        not isinstance(radar_recovery_terminal_triangulation_evidence, dict)
+        or radar_recovery_terminal_triangulation_evidence.get("status") != "defer_existing_synthetic_geoprocessing_and_current_license_checks_pass_historical_context_unresolved"
+        or radar_recovery_terminal_triangulation_evidence.get("observation_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-evidence-triangulation-observation-003.json")
+        or radar_recovery_terminal_triangulation_evidence.get("assertions", {}).get("synthetic_geoprocessing_minutes_before_attempt") != 49
+        or radar_recovery_terminal_triangulation_evidence.get("assertions", {}).get("current_license_checks_minutes_after_attempt_start") != 25
+        or radar_recovery_terminal_triangulation_evidence.get("assertions", {}).get("existing_synthetic_geoprocessing_passed") is not True
+        or radar_recovery_terminal_triangulation_evidence.get("assertions", {}).get("current_product_and_extension_checks_passed") is not True
+        or radar_recovery_terminal_triangulation_evidence.get("assertions", {}).get("current_checkpoint") != "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-REVIEW"
+        or any(radar_recovery_terminal_triangulation_evidence.get("assertions", {}).get(key) is not False for key in (
+            "persistent_install_wide_license_absence_supported", "transient_or_context_specific_cause_proven",
+            "historical_exact_failing_statement_identified", "root_cause_resolved", "new_runtime_probe_executed",
+            "recovery_attempt_reused_or_retried", "project_data_content_read", "external_custody_mutated",
+            "recovery_review_packet_prepared", "new_authority_created", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0163 radar recovery terminal evidence triangulation differs or overclaims")
 
     violations = []
     for relative in tracked_files():
