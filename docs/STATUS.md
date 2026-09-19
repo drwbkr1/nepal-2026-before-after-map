@@ -14,6 +14,8 @@ Static tracing further narrows the historical failure to four setup statements b
 
 The existing approved synthetic ArcGIS receipt shows that generic raster geoprocessing, including `MosaicToNewRaster`, passed 49 minutes before the real attempt began; current product and extension checks passed 25 minutes after that start. Triangulation SHA-256 is `de34ea0096017135b7d39995324c6c281d4b61193b2d4f9c317c9b78daa2314a`. A persistent installation-wide missing product license or missing pair of extension entitlements is inconsistent with this evidence. A transient or process-context-specific failure remains plausible but unproven, and the historical failing statement remains unknown.
 
+Sanitized operator-transcript comparison confirms the successful synthetic validator, successful final preflight, and failed execute command all used the same recorded PowerShell host family, direct ArcGIS Pro Python executable, and repository working directory. Launch-context observation SHA-256 is `319c0b21312c185674871470039dfc90c007ee4f85fc31b299da3c33db0e7e93`. The failed process uniquely delayed ArcPy import until after the complete 156-file, 10,367,157,634-byte identity scan. That sequence difference is real but is not evidence that the scan or delay caused the license failure.
+
 ## Purpose
 
 This project is building a reproducible, ArcGIS-ready before/after evidence package for the 26 August 2026 Nepal debris avalanche and flash flood. Its public repository preserves source identity, authority, methods, decisions, and lightweight receipts. Heavy imagery and derived geospatial data remain outside Git.

@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-LAUNCH-CONTEXT-OBSERVATION-004",
+  "observed_at_utc": "2026-09-19T00:31:31Z",
+  "status": "defer_same_launcher_and_cwd_delayed_arcpy_import_after_large_identity_scan_is_only_observed_sequence_difference",
+  "bindings": {
+    "final_preflight_ref": "records/readiness/m2-radar-pixel-orbit-application-recovery-001-final-preflight.json",
+    "final_preflight_sha256": "f2301948835e2d3aac883d4dd14a7e8cf9f3d103ae9bbb6dea6c937387bd3ea2",
+    "outcome_reconciliation_ref": "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json",
+    "outcome_reconciliation_sha256": "ef5b7601ce6073c2736297406ac3324f03ca1a84eaa6e7c3dbc35a1a07601d19",
+    "evidence_triangulation_observation_003_ref": "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-evidence-triangulation-observation-003.json",
+    "evidence_triangulation_observation_003_sha256": "de34ea0096017135b7d39995324c6c281d4b61193b2d4f9c317c9b78daa2314a",
+    "operator_transcript_thread_id": "01a04623-a903-7f73-9a66-574788c9b558",
+    "operator_transcript_publicly_available": false
+  },
+  "sanitized_transcript_observations": [
+    {
+      "event_completed_at_utc": "2026-09-18T22:53:25Z",
+      "status": "completed",
+      "operation": "synthetic_arcgis_validator",
+      "shell": "Codex primary-runtime pwsh.exe",
+      "python_executable": "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\envs\\arcgispro-py3\\python.exe",
+      "working_directory": "C:\\Projects\\Active\\nepal-2026-before-after-map",
+      "script": "scripts/validate_m2_radar_pixel_orbit_application_recovery_001_arcgis.py",
+      "result": "pass synthetic ArcGIS runtime receipt"
+    },
+    {
+      "event_completed_at_utc": "2026-09-18T23:38:33Z",
+      "status": "completed",
+      "operation": "final_no_content_preflight",
+      "shell": "Codex primary-runtime pwsh.exe",
+      "python_executable": "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\envs\\arcgispro-py3\\python.exe",
+      "working_directory": "C:\\Projects\\Active\\nepal-2026-before-after-map",
+      "script": "scripts/run_m2_radar_pixel_orbit_application_recovery_001.py --mode final-preflight",
+      "result": "pass final no-content preflight"
+    },
+    {
+      "event_completed_at_utc": "2026-09-18T23:40:07Z",
+      "status": "failed",
+      "operation": "consumed_recovery_execute",
+      "shell": "Codex primary-runtime pwsh.exe",
+      "python_executable": "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\envs\\arcgispro-py3\\python.exe",
+      "working_directory": "C:\\Projects\\Active\\nepal-2026-before-after-map",
+      "script": "scripts/run_m2_radar_pixel_orbit_application_recovery_001.py --mode execute",
+      "result": "terminal RuntimeError before dem directory creation"
+    }
+  ],
+  "sequence_comparison": {
+    "shared_context": [
+      "same PowerShell host family",
+      "same direct ArcGIS Pro Python executable",
+      "same repository working directory",
+      "same machine and installed ArcGIS Pro 3.7.1 runtime"
+    ],
+    "successful_synthetic_validator": "imports arcpy at module initialization before its synthetic computations and geoprocessing",
+    "successful_final_preflight": "loads contract and checks paths, then imports arcpy and queries tool signatures and availability without reading project content",
+    "failed_execute": "reserves the attempt, hashes the exact 156-file 10,367,157,634-byte project identity inventory, then imports arcpy and performs setup",
+    "final_preflight_checked_seconds_before_attempt_start": 43,
+    "failed_execute_elapsed_seconds": 67,
+    "only_observed_pre_failure_sequence_difference": "the failed execute process delayed ArcPy import until after the full external identity scan"
+  },
+  "assessment": {
+    "observed": "The successful and failed commands used the same recorded shell family, ArcGIS Python executable, and working directory.",
+    "inference": "A different launcher, Python environment, or working directory does not explain the observed difference. The delayed ArcPy import after the large identity scan is a concrete sequence difference, but no evidence establishes it as causal.",
+    "unresolved": "The transcript did not preserve a process environment snapshot, license-state transition, stage marker, or traceback from the failed process.",
+    "decision": "defer_owner_choice_separate_scope_required"
+  },
+  "assertions": {
+    "same_recorded_shell_family": true,
+    "same_arcgis_python_executable": true,
+    "same_working_directory": true,
+    "delayed_arcpy_import_after_identity_scan_observed": true,
+    "launcher_difference_supported": false,
+    "delayed_import_cause_proven": false,
+    "historical_exact_failing_statement_identified": false,
+    "root_cause_resolved": false,
+    "new_runtime_probe_executed": false,
+    "recovery_attempt_reused_or_retried": false,
+    "project_data_content_read_during_this_observation": false,
+    "external_custody_mutated": false,
+    "recovery_review_packet_prepared": false,
+    "new_authority_created": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "The operator transcript is local non-Git evidence and is not independently available in the public repository.",
+    "The sanitized launch facts are preserved here for review without exposing unrelated transcript content.",
+    "Shared launcher metadata does not prove identical inherited environment, authentication timing, or license-service state."
+  ],
+  "next_action": "Owner decides whether to authorize a minimal stage-marked single-process probe that reproduces the delayed-import sequence with disposable bytes, authorize preparation of a new recovery design with durable pre-ArcPy stage receipts, or continue deferral."
+}

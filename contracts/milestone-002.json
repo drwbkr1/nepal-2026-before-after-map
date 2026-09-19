@@ -3759,7 +3759,8 @@
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json",
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json",
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-static-call-path-observation-002.json",
-        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-evidence-triangulation-observation-003.json"
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-evidence-triangulation-observation-003.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-launch-context-observation-004.json"
       ],
       "gates": {
         "public_ci": "success",
@@ -3793,6 +3794,12 @@
         "terminal_existing_synthetic_geoprocessing_passed": true,
         "terminal_current_product_and_extension_checks_passed": true,
         "terminal_persistent_install_wide_license_absence_supported": false,
+        "terminal_launch_context_observation": "defer_same_launcher_and_cwd_delayed_arcpy_import_after_large_identity_scan_is_only_observed_sequence_difference",
+        "terminal_launch_context_observation_sha256": "319c0b21312c185674871470039dfc90c007ee4f85fc31b299da3c33db0e7e93",
+        "terminal_same_arcgis_python_executable": true,
+        "terminal_launcher_difference_supported": false,
+        "terminal_delayed_arcpy_import_after_identity_scan_observed": true,
+        "terminal_delayed_import_cause_proven": false,
         "terminal_failure_root_cause_resolved": false,
         "postattempt_identities_match": true,
         "project_data_content_read_for_identity_verification": true,
