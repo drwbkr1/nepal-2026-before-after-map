@@ -302,6 +302,7 @@ REQUIRED = [
     "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-final-preflight.json",
     "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-terminal-reconciliation.json",
     "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-outcome-reconciliation.json",
+    "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-terminal-publication-gate.json",
     "scripts/activate_m2_radar_delayed_import_probe_receipt_recovery_001.py",
     "scripts/m2_radar_delayed_import_probe_receipt_recovery_001_core.py",
     "scripts/run_m2_radar_delayed_import_probe_receipt_recovery_001.py",
@@ -14796,6 +14797,9 @@ def main() -> None:
             final_preflight = json.loads(
                 (ROOT / f"records/readiness/{receipt_recovery_prefix}-final-preflight.json").read_text(encoding="utf-8")
             )
+            terminal_publication = json.loads(
+                (ROOT / f"records/readiness/{receipt_recovery_prefix}-terminal-publication-gate.json").read_text(encoding="utf-8")
+            )
             if (
                 final_preflight.get("status") != "pass_final_no_content_preflight_one_receipt_recovery_probe_released"
                 or final_preflight.get("checks", {}).get("attempt_root_absent") is not True
@@ -14820,6 +14824,26 @@ def main() -> None:
                 or outcome.get("bindings", {}).get("terminal_reconciliation_sha256") != sha256(f"records/processing/{receipt_recovery_prefix}-terminal-reconciliation.json")
                 or outcome.get("corpus_result", {}).get("exact_expected_hash_observed") is not True
                 or outcome.get("corpus_result", {}).get("payload_children_removed") is not True
+                or terminal_publication.get("status") != "pass_public_terminal_state_owner_review_only"
+                or terminal_publication.get("terminal_commit_sha") != "64f8b4344ca620c42c1e616409ee57df32d1e6f6"
+                or terminal_publication.get("public_ci_run_id") != 35465850755
+                or terminal_publication.get("public_ci_url") != "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35465850755"
+                or terminal_publication.get("public_ci_conclusion") != "success"
+                or terminal_publication.get("repository_required_file_count") != 1123
+                or terminal_publication.get("public_test_count") != 610
+                or terminal_publication.get("public_intentional_skip_count") != 13
+                or terminal_publication.get("bindings", {}).get("final_preflight_sha256") != sha256(f"records/readiness/{receipt_recovery_prefix}-final-preflight.json")
+                or terminal_publication.get("bindings", {}).get("terminal_reconciliation_sha256") != sha256(f"records/processing/{receipt_recovery_prefix}-terminal-reconciliation.json")
+                or terminal_publication.get("bindings", {}).get("outcome_reconciliation_sha256") != sha256(f"records/processing/{receipt_recovery_prefix}-outcome-reconciliation.json")
+                or terminal_publication.get("bindings", {}).get("published_milestone_sha256") != "78138e8c6bda2fa99aef7179a6668e6ed356c9e35d69047e990ec9c8cc54c4d7"
+                or terminal_publication.get("bindings", {}).get("published_project_control_profile_sha256") != "f400089693b808c91955f779244d87d5773084da70f50c0f6f27f472e2cce318"
+                or terminal_publication.get("bindings", {}).get("published_long_term_goal_sha256") != "0b100c23dbc024ff19a5ca66e5079c33a337cefafb9f447f94d0367b313e1eea"
+                or terminal_publication.get("released_now", {}).get("terminal_owner_review") is not True
+                or any(terminal_publication.get("released_now", {}).get(key) is not False for key in (
+                    "follow_on_review_preparation", "new_probe_or_radar_implementation", "attempt_retry_or_reuse",
+                    "new_real_attempt", "project_data_or_external_custody_access", "radar_processing",
+                    "baseline_or_change_analysis", "scientific_publication",
+                ))
                 or any(outcome.get("assertions", {}).get(key) is not False for key in (
                     "automatic_retry_performed", "second_attempt_created", "success_reconstructed",
                     "project_data_content_read", "external_custody_accessed", "network_request_performed",
@@ -15042,6 +15066,27 @@ def main() -> None:
                 ))
             ):
                 fail("EVID-0179 receipt-recovery terminal outcome differs or overclaims")
+        if (ROOT / f"records/readiness/{receipt_recovery_prefix}-terminal-publication-gate.json").exists():
+            terminal_publication_evidence = ledger_by_id.get("EVID-0180")
+            if (
+                not isinstance(terminal_publication_evidence, dict)
+                or terminal_publication_evidence.get("status") != "pass_public_terminal_state_owner_review_only"
+                or terminal_publication_evidence.get("terminal_publication_gate_sha256") != sha256(f"records/readiness/{receipt_recovery_prefix}-terminal-publication-gate.json")
+                or terminal_publication_evidence.get("assertions", {}).get("terminal_commit") != "64f8b4344ca620c42c1e616409ee57df32d1e6f6"
+                or terminal_publication_evidence.get("assertions", {}).get("public_ci_run_id") != 35465850755
+                or terminal_publication_evidence.get("assertions", {}).get("public_ci_conclusion") != "success"
+                or terminal_publication_evidence.get("assertions", {}).get("repository_required_file_count") != 1123
+                or terminal_publication_evidence.get("assertions", {}).get("public_test_count") != 610
+                or terminal_publication_evidence.get("assertions", {}).get("public_intentional_skip_count") != 13
+                or terminal_publication_evidence.get("assertions", {}).get("terminal_owner_review_released") is not True
+                or terminal_publication_evidence.get("assertions", {}).get("attempt_consumed") is not True
+                or any(terminal_publication_evidence.get("assertions", {}).get(key) is not False for key in (
+                    "follow_on_review_preparation_released", "attempt_retry_or_reuse", "new_real_attempt",
+                    "project_data_content_read", "external_custody_accessed", "radar_processing_executed",
+                    "historical_root_cause_established", "recovery_readiness_established", "scientific_result_established",
+                ))
+            ):
+                fail("EVID-0180 receipt-recovery terminal publication gate differs or overclaims")
 
     violations = []
     for relative in tracked_files():

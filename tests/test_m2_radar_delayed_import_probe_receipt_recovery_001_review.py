@@ -234,6 +234,10 @@ class M2RadarDelayedImportProbeReceiptRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(execution["gates"]["live_attempts_started"], 1)
         self.assertTrue(execution["gates"]["attempt_consumed"])
         self.assertEqual(execution["gates"]["terminal_status"], "pass_exact_receipt_recovery_probe_no_retry")
+        self.assertEqual(
+            execution["gates"]["terminal_publication_gate_sha256"],
+            "9a0c430452eac76aed9196ca990398c026e166f3b2ec3abf22dd0bbe8a8e5a42",
+        )
 
 
 if __name__ == "__main__":

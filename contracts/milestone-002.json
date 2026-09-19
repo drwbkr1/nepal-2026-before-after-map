@@ -4176,7 +4176,8 @@
         "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-final-preflight.json",
         "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-gate-state-publication.json",
         "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-terminal-reconciliation.json",
-        "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-outcome-reconciliation.json"
+        "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-outcome-reconciliation.json",
+        "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-terminal-publication-gate.json"
       ],
       "gates": {
         "public_ci": "success",
@@ -4191,7 +4192,10 @@
         "terminal_status": "pass_exact_receipt_recovery_probe_no_retry",
         "last_durable_stage": "cleanup_completed_or_warning",
         "terminal_reconciliation_sha256": "a942a1827a72462e32caaed7690e785e7bc0c18df04224125a18131eeb09be26",
-        "outcome_reconciliation_sha256": "7d7028afdca5b880b2d4d1da69d404db72adf3b5210234cb2a88403c541696b3"
+        "outcome_reconciliation_sha256": "7d7028afdca5b880b2d4d1da69d404db72adf3b5210234cb2a88403c541696b3",
+        "terminal_commit_sha": "64f8b4344ca620c42c1e616409ee57df32d1e6f6",
+        "terminal_public_ci_run_id": 35465850755,
+        "terminal_publication_gate_sha256": "9a0c430452eac76aed9196ca990398c026e166f3b2ec3abf22dd0bbe8a8e5a42"
       },
       "exit_condition_delta": {
         "expected": [],

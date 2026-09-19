@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-19T19:58:24Z",
+  "status": "pass_public_terminal_state_owner_review_only",
+  "terminal_commit_sha": "64f8b4344ca620c42c1e616409ee57df32d1e6f6",
+  "public_ci_run_id": 35465850755,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35465850755",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1123,
+  "public_test_count": 610,
+  "public_intentional_skip_count": 13,
+  "bindings": {
+    "final_preflight_ref": "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-final-preflight.json",
+    "final_preflight_sha256": "121cd502ead7c694c740e2b2abf7b4241c566bbefc8b74d569b54c14a4e5136d",
+    "terminal_reconciliation_ref": "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "a942a1827a72462e32caaed7690e785e7bc0c18df04224125a18131eeb09be26",
+    "outcome_reconciliation_ref": "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-outcome-reconciliation.json",
+    "outcome_reconciliation_sha256": "7d7028afdca5b880b2d4d1da69d404db72adf3b5210234cb2a88403c541696b3",
+    "published_milestone_sha256": "78138e8c6bda2fa99aef7179a6668e6ed356c9e35d69047e990ec9c8cc54c4d7",
+    "published_project_control_profile_sha256": "f400089693b808c91955f779244d87d5773084da70f50c0f6f27f472e2cce318",
+    "published_long_term_goal_sha256": "0b100c23dbc024ff19a5ca66e5079c33a337cefafb9f447f94d0367b313e1eea"
+  },
+  "released_now": {
+    "terminal_owner_review": true,
+    "follow_on_review_preparation": false,
+    "new_probe_or_radar_implementation": false,
+    "attempt_retry_or_reuse": false,
+    "new_real_attempt": false,
+    "project_data_or_external_custody_access": false,
+    "radar_processing": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "receipt_recovery_attempt_terminal_and_consumed": true,
+    "automatic_retry_performed": false,
+    "corpus_file_count": 156,
+    "corpus_total_logical_bytes": 10367157634,
+    "aggregate_sha256": "dd56f8b28a1ed1c6e2b4b1d7d8f5db4fd86dab80a910fe79c8d018d58942430b",
+    "last_durable_stage": "cleanup_completed_or_warning",
+    "terminal_receipt_persisted": true,
+    "cleanup_receipt_persisted": true,
+    "payload_children_removed": true,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "radar_processing_executed": false,
+    "historical_root_cause_established": false,
+    "recovery_readiness_established": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Review the terminal receipt-recovery diagnostic outcome. The fresh attempt is consumed and cannot be resumed, reused, or retried; any further diagnostic or radar action requires separately reviewed authority."
+}
