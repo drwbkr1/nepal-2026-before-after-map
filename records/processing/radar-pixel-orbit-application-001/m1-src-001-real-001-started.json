@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M1-SRC-001-RADAR-PIXEL-ORBIT-APPLICATION-001-STARTED",
+  "status": "started_single_attempt_reserved_before_source_content_copy",
+  "started_at_utc": "2026-09-19T21:41:48Z",
+  "source_id": "M1-SRC-001",
+  "orbit_source_id": "M2-ORB-001",
+  "attempt_id": "radar-pixel-orbit-application-recovery-002-real-001",
+  "implementation_contract_sha256": "6482f01722f39455d6150df79186385de532cb22f33d079c651711129eb35c6e",
+  "automatic_retry_authorized": false
+}

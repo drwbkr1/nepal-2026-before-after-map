@@ -4355,7 +4355,7 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
         "config/qa/m2-radar-pixel-orbit-application-recovery-002-contract.json"
@@ -4363,27 +4363,36 @@
       "outputs": [
         "records/readiness/m2-radar-pixel-orbit-application-recovery-002-final-preflight.json",
         "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json",
-        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-gate-state-publication.json"
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-gate-state-publication.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-002-terminal-reconciliation.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json"
       ],
       "gates": {
         "public_ci": "success",
         "gate_state_publication": "success",
-        "final_no_content_preflight": "released_not_started",
+        "final_no_content_preflight": "success",
         "maximum_live_attempts": 1,
-        "live_attempts_started": 0,
+        "live_attempts_started": 1,
         "gate_state_commit_sha": "52f2e4c8bb84c7c67fd478ee502552b56281cc36",
         "gate_state_public_ci_run_id": 35470986919,
-        "gate_state_publication_sha256": "057d3e09b006e3ad3ddd54b48cb599dba598dd277a26303a0b3335c242b76d3b"
+        "gate_state_publication_sha256": "057d3e09b006e3ad3ddd54b48cb599dba598dd277a26303a0b3335c242b76d3b",
+        "attempt_consumed": true,
+        "terminal_status": "block_recovery_002_attempt_no_retry",
+        "last_durable_stage": "cleanup_completed_or_warning",
+        "terminal_reconciliation_sha256": "32babf925933b46c88870d5648bb39fd32596bc1b86d1f5fe01c52de84cffdfb",
+        "outcome_reconciliation_sha256": "371030851c44810ff2d5d06390c27c76af5b47ee1d8865b8e310025317331339"
       },
       "exit_condition_delta": {
-        "expected": [
-          "terminal evidence for one consumed fresh attempt"
+        "expected": [],
+        "observed": [
+          "block_recovery_002_attempt_no_retry",
+          "cleanup_completed"
         ],
-        "observed": [],
-        "decision_value": "pending",
-        "rationale": "Pass or block consumes the one attempt and releases no baseline or change analysis."
+        "decision_value": "terminal_qa_only",
+        "rationale": "The single fresh recovery-002 attempt is consumed. The result supports only the recorded QA boundary."
       },
-      "next_dependency": null
+      "next_dependency": null,
+      "disposition": "block"
     }
   ],
   "path_efficiency": {
@@ -4440,8 +4449,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
-    "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the single-process fresh recovery-002 attempt read the six exact sources, four exact orbit files, four exact DEM derivatives, and evaluate the two frozen routes. The attempt must never be retried.",
+    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
+    "next_action": "Review the terminal recovery-002 outcome. The fresh attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain blocked pending separate reviewed authority.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4489,7 +4498,7 @@
       "The receipt-recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, corpus, new attempt, project-data access, radar processing, or scientific action is released.",
       "The radar recovery-002 packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, new attempt, radar processing, baseline, change analysis, attribution, or scientific action is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
-    "parallel_next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the single-process fresh recovery-002 attempt read the six exact sources, four exact orbit files, four exact DEM derivatives, and evaluate the two frozen routes. The attempt must never be retried."
+    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
+    "parallel_next_action": "Review the terminal recovery-002 outcome. The fresh attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain blocked pending separate reviewed authority."
   }
 }

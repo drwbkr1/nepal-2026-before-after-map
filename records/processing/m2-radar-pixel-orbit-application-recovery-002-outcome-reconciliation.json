@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-OUTCOME-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-19T21:42:30Z",
+  "status": "block_recovery_002_attempt_no_retry",
+  "disposition": "block",
+  "attempt_id": "radar-pixel-orbit-application-recovery-002-real-001",
+  "bindings": {
+    "approval_sha256": "d16f3306d582257b32c25911e9f7f50efad935e9599a90e82247d6d813b29d40",
+    "recovery_contract_sha256": "6482f01722f39455d6150df79186385de532cb22f33d079c651711129eb35c6e",
+    "implementation_publication_gate_sha256": "2f72de4ab54c0bd4bc9941c46b9bf6506d3d55978cf5a6ef461555ab00b50b30",
+    "gate_state_publication_sha256": "057d3e09b006e3ad3ddd54b48cb599dba598dd277a26303a0b3335c242b76d3b",
+    "final_preflight_sha256": "42e41c84ae9c2a826f185bfaa251a47ffad1f46679b97b6048275e6231a39f01",
+    "attempt_started_sha256": "15785bee22101374fc17aefd5f3dfc048dbb02464902883b3e7f3f11c8f4aa38",
+    "stages_sha256": "1cbe676bde913499f6db4c53720d487514d9f3415318c81a9bae3fa1b1854990",
+    "fallback_sha256": "9b754af66dcc643527028acf2872e963053b51a0b0a4e9ba816e5e1eee7d6a41",
+    "terminal_reconciliation_sha256": "32babf925933b46c88870d5648bb39fd32596bc1b86d1f5fe01c52de84cffdfb"
+  },
+  "preflight_result": {
+    "status": "pass_final_no_content_preflight_one_fresh_attempt_released",
+    "attempt_root_absent": true,
+    "project_data_content_read": false,
+    "external_custody_content_read": false,
+    "arcpy_invoked": false
+  },
+  "execution_result": {
+    "source_ids_attempted": [
+      "M1-SRC-001"
+    ],
+    "route_ids_attempted": [],
+    "stopped_source_id": "M1-SRC-001",
+    "stopped_route_id": null,
+    "external_custody_unchanged": true,
+    "failure": {
+      "source_id": "M1-SRC-001",
+      "status": "failed_source_execution_no_retry",
+      "receipt_ref": "records/processing/radar-pixel-orbit-application-001/m1-src-001-real-001-terminal.json",
+      "receipt_sha256": "d1a16548fd0ec13df3802f6a7cf62f4a884f93a6efc8d0be630c3be2b9ac786d"
+    }
+  },
+  "claim_boundary": {
+    "qa_processing_only": true,
+    "baseline_admission_authorized": false,
+    "change_analysis_authorized": false,
+    "interpretation_or_attribution_authorized": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_result_established": false
+  },
+  "assertions": {
+    "attempt_consumed": true,
+    "automatic_retry_performed": false,
+    "second_attempt_created": false,
+    "success_reconstructed": false,
+    "project_data_content_read": true,
+    "external_custody_accessed": true,
+    "production_arcpy_invoked": true,
+    "radar_processing_executed": true,
+    "route_evaluation_executed": false,
+    "source_orbit_or_dem_custody_mutated": false,
+    "baseline_or_change_analysis_executed": false,
+    "interpretation_or_attribution_executed": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Review the terminal recovery-002 outcome. The fresh attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain blocked pending separate reviewed authority."
+}

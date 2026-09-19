@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M1-SRC-001-RADAR-PIXEL-ORBIT-APPLICATION-001-TERMINAL",
+  "status": "failed_source_execution_no_retry",
+  "completed_at_utc": "2026-09-19T21:41:56Z",
+  "source_id": "M1-SRC-001",
+  "orbit_source_id": "M2-ORB-001",
+  "failure_type": "ExecuteError",
+  "failure_code": "unexpected_processing_failure",
+  "failure_message": "ERROR 999999: Something unexpected caused the tool to fail. Contact Esri Technical Support (http://esriurl.com/support) to Report a Bug, and refer to the error help for potential solutions or workarounds. The system cannot locate the object specified.  Failed to execute (ApplyOrbitCorrection). ",
+  "assertions": {
+    "attempt_consumed": true,
+    "automatic_retry_performed": false,
+    "later_source_started": false,
+    "network_request_performed_by_runner": false,
+    "credential_value_read": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_admission_authorized": false
+  }
+}

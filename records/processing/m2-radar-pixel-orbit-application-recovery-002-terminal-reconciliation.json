@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-19T21:42:30Z",
+  "status": "block_recovery_002_attempt_no_retry",
+  "disposition": "block",
+  "attempt_id": "radar-pixel-orbit-application-recovery-002-real-001",
+  "attempt_path_class": "approved_external_derived_append_only_exact_attempt_root",
+  "durable_artifacts": {
+    "terminal-reservation.json": "e66f6dbacf643753a57149009d399bcab963e8cba3a5a77c73cf9a7c271bf0ca",
+    "cleanup-reservation.json": "6cc61a62f59edba9a13dc9372aa6da2fe57c8c81a5474d9c36e07ec4c6ef9d2f",
+    "fallback.jsonl": "9b754af66dcc643527028acf2872e963053b51a0b0a4e9ba816e5e1eee7d6a41",
+    "started.json": "15785bee22101374fc17aefd5f3dfc048dbb02464902883b3e7f3f11c8f4aa38",
+    "stages.jsonl": "1cbe676bde913499f6db4c53720d487514d9f3415318c81a9bae3fa1b1854990",
+    "terminal.json": "7eda516edfc39cd96f56c8514f4cc2c2695e4b71c93a5ad6175e4d0b4978e6ec",
+    "cleanup.json": "356fc79278e03371e85f72bfb1a94b5e8ab807a77c79763cce6244c71c482c1b"
+  },
+  "durable_stage_evidence": {
+    "stage_count": 24,
+    "stages": [
+      "attempt_reserved",
+      "terminal_and_cleanup_receipts_reserved",
+      "fallback_journal_initialized",
+      "identity_scan_started",
+      "identity_scan_completed",
+      "arcpy_import_started",
+      "arcpy_import_completed",
+      "product_info_started",
+      "product_info_completed",
+      "image_analyst_checkout_started",
+      "image_analyst_checkout_completed",
+      "spatial_checkout_started",
+      "spatial_checkout_completed",
+      "dem_mosaic_started",
+      "dem_mosaic_completed",
+      "analysis_support_started",
+      "analysis_support_completed",
+      "source_processing_fixed_order",
+      "source_processing_fixed_order",
+      "postattempt_identity_scan_started",
+      "postattempt_identity_scan_completed",
+      "terminal_receipt_persisted",
+      "cleanup_started",
+      "cleanup_completed_or_warning"
+    ],
+    "last_durable_stage": "cleanup_completed_or_warning",
+    "stage_order_monotonic": true,
+    "terminal_receipt_persisted": true,
+    "cleanup_receipt_persisted": true
+  },
+  "terminal_result": {
+    "schema_version": "1.0",
+    "receipt_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL",
+    "status": "block_recovery_002_failure_no_retry",
+    "completed_at_utc": "2026-09-19T21:42:12Z",
+    "attempt_id": "radar-pixel-orbit-application-recovery-002-real-001",
+    "bindings": {
+      "recovery_contract_sha256": "6482f01722f39455d6150df79186385de532cb22f33d079c651711129eb35c6e",
+      "recovery_core_sha256": "b8a87922b2168408f69d890a599758607fa2ec05a7d266e16aec4040ade2e512",
+      "recovery_runner_sha256": "27f7adfa833eda302a05bac3c309ade9a2fe277643f93a0c8f5ed397563b3ee5",
+      "arcgis_validator_sha256": "4074e4e083e554c6fb839fc916f51d3924e00f361dc31d06e3dc373a07aaa444",
+      "portable_test_sha256": "87b41a5db6eb80cd24f79bdd2342343c4691f9ad82122523c3bfd01fcc5bcd06",
+      "base_contract_sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+      "base_core_sha256": "fd192878acf33e2c73eeeba1ec42865eac48dfc5742b3ae4cf54b51de42755ba",
+      "base_runner_sha256": "0b65fbecbeab373d8bbbf2cbbc28f8817e3c3bb08584dbf1a9720dcbb19ceb06",
+      "recovery_001_contract_sha256": "f2fb1b796aedc2c760d3680cccefcc4558fc83beb6107663ca4e0a6d9f7d7d81",
+      "recovery_001_core_sha256": "9033c5b8b8b1bf066aae00f1db67791be4ce5ada1507762c8f68279089e63993",
+      "implementation_commit_sha": "8266650829218b7f0db518ff991c9d224b4139dc",
+      "implementation_public_ci_run_id": 35470642225,
+      "gate_state_commit_sha": "52f2e4c8bb84c7c67fd478ee502552b56281cc36",
+      "gate_state_public_ci_run_id": 35470986919,
+      "implementation_publication_gate_sha256": "2f72de4ab54c0bd4bc9941c46b9bf6506d3d55978cf5a6ef461555ab00b50b30",
+      "gate_state_publication_sha256": "057d3e09b006e3ad3ddd54b48cb599dba598dd277a26303a0b3335c242b76d3b",
+      "final_preflight_sha256": "42e41c84ae9c2a826f185bfaa251a47ffad1f46679b97b6048275e6231a39f01"
+    },
+    "reservations": {
+      "terminal_sha256": "e66f6dbacf643753a57149009d399bcab963e8cba3a5a77c73cf9a7c271bf0ca",
+      "cleanup_sha256": "6cc61a62f59edba9a13dc9372aa6da2fe57c8c81a5474d9c36e07ec4c6ef9d2f"
+    },
+    "fallback_journal_sha256_before_terminal": "b0e93386714bcfd260ace608d37b422a5e12f391f988c4f237b8502297621273",
+    "source_execution": {
+      "status": "stopped_on_first_failure",
+      "results": [
+        {
+          "source_id": "M1-SRC-001",
+          "status": "failed_source_execution_no_retry",
+          "receipt_ref": "records/processing/radar-pixel-orbit-application-001/m1-src-001-real-001-terminal.json",
+          "receipt_sha256": "d1a16548fd0ec13df3802f6a7cf62f4a884f93a6efc8d0be630c3be2b9ac786d"
+        }
+      ],
+      "completed_source_ids": [],
+      "stopped_source_id": "M1-SRC-001",
+      "automatic_retry_performed": false
+    },
+    "route_evaluations": [],
+    "stopped_route_id": null,
+    "external_custody_unchanged": true,
+    "assertions": {
+      "attempt_consumed": true,
+      "source_order_exact": true,
+      "route_order_exact": true,
+      "automatic_retry_performed": false,
+      "consumed_attempt_reused_or_retried": false,
+      "network_request_performed_by_runner": false,
+      "credential_value_read": false,
+      "source_orbit_or_dem_custody_mutated": false,
+      "historical_root_cause_established": false,
+      "radar_recovery_readiness_established": false,
+      "baseline_admission_authorized": false,
+      "change_analysis_executed": false,
+      "interpretation_or_attribution_executed": false,
+      "derived_pixel_publication_authorized": false,
+      "scientific_publication_authorized": false
+    }
+  },
+  "preserved_primary_failure": {
+    "source_id": "M1-SRC-001",
+    "status": "failed_source_execution_no_retry",
+    "receipt_ref": "records/processing/radar-pixel-orbit-application-001/m1-src-001-real-001-terminal.json",
+    "receipt_sha256": "d1a16548fd0ec13df3802f6a7cf62f4a884f93a6efc8d0be630c3be2b9ac786d"
+  },
+  "terminal_persistence_failure": null,
+  "cleanup_persistence_failure": null,
+  "cleanup": {
+    "status": "cleanup_completed"
+  },
+  "assertions": {
+    "attempt_consumed": true,
+    "automatic_retry_performed": false,
+    "second_attempt_created": false,
+    "success_reconstructed": false,
+    "project_data_content_read": true,
+    "external_custody_accessed": true,
+    "production_arcpy_invoked": true,
+    "radar_processing_executed": true,
+    "route_evaluation_executed": false,
+    "source_orbit_or_dem_custody_mutated": false,
+    "baseline_or_change_analysis_executed": false,
+    "interpretation_or_attribution_executed": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_result_established": false
+  }
+}

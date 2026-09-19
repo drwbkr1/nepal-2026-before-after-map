@@ -282,6 +282,10 @@ RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_FINAL_PREFLIGHT_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
     "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the single-process fresh recovery-002 attempt read the six exact sources, four exact orbit files, four exact DEM derivatives, and evaluate the two frozen routes. The attempt must never be retried.",
 }
+RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_TERMINAL_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
+    "next_action": "Review the terminal recovery-002 outcome. The fresh attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain blocked pending separate reviewed authority.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -2271,6 +2275,36 @@ def current_radar_pixel_orbit_application_recovery_002_final_preflight_pending(
     )
 
 
+def current_radar_pixel_orbit_application_recovery_002_terminal(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the reconciled, consumed recovery-002 attempt."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        terminal = load(root / "records/processing/m2-radar-pixel-orbit-application-recovery-002-terminal-reconciliation.json")
+        outcome = load(root / "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    execution = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION", {})
+    return bool(
+        terminal.get("status") == "block_recovery_002_attempt_no_retry"
+        and terminal.get("disposition") == "block"
+        and terminal.get("assertions", {}).get("attempt_consumed") is True
+        and terminal.get("assertions", {}).get("automatic_retry_performed") is False
+        and outcome.get("status") == "block_recovery_002_attempt_no_retry"
+        and outcome.get("disposition") == "block"
+        and outcome.get("assertions", {}).get("attempt_consumed") is True
+        and outcome.get("assertions", {}).get("second_attempt_created") is False
+        and execution.get("status") == "complete"
+        and execution.get("disposition") == "block"
+        and execution.get("gates", {}).get("live_attempts_started") == 1
+        and execution.get("gates", {}).get("attempt_consumed") is True
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -2340,7 +2374,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_pixel_orbit_application_recovery_002_final_preflight_pending(
+            if current_radar_pixel_orbit_application_recovery_002_terminal(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_TERMINAL_CHECKPOINT)
+            elif current_radar_pixel_orbit_application_recovery_002_final_preflight_pending(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_FINAL_PREFLIGHT_CHECKPOINT)
