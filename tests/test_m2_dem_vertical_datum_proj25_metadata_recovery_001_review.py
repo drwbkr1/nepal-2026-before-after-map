@@ -124,7 +124,7 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(self.approval["limits"]["recovery_verification_attempts"], 1)
         self.assertEqual(self.activation["status"], "pass_exact_approval_activated_implementation_publication_only")
         self.assertFalse(self.activation["released_now"]["preserved_byte_read"])
-        expected = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION"
+        expected = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], expected)
         self.assertEqual(self.goal["current_checkpoint"], expected)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], expected)

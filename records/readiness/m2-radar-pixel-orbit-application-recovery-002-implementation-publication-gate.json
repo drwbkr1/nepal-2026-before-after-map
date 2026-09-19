@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-19T21:31:41Z",
+  "status": "pass_public_default_branch_ci_recovery_002_implementation_ready",
+  "implementation_commit_sha": "8266650829218b7f0db518ff991c9d224b4139dc",
+  "public_ci_run_id": 35470642225,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35470642225",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1161,
+  "public_test_count": 628,
+  "public_intentional_skip_count": 13,
+  "bindings": {
+    "recovery_contract_sha256": "6482f01722f39455d6150df79186385de532cb22f33d079c651711129eb35c6e",
+    "recovery_core_sha256": "b8a87922b2168408f69d890a599758607fa2ec05a7d266e16aec4040ade2e512",
+    "recovery_runner_sha256": "27f7adfa833eda302a05bac3c309ade9a2fe277643f93a0c8f5ed397563b3ee5",
+    "arcgis_validator_sha256": "4074e4e083e554c6fb839fc916f51d3924e00f361dc31d06e3dc373a07aaa444",
+    "portable_test_sha256": "87b41a5db6eb80cd24f79bdd2342343c4691f9ad82122523c3bfd01fcc5bcd06",
+    "base_contract_sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+    "base_core_sha256": "fd192878acf33e2c73eeeba1ec42865eac48dfc5742b3ae4cf54b51de42755ba",
+    "base_runner_sha256": "0b65fbecbeab373d8bbbf2cbbc28f8817e3c3bb08584dbf1a9720dcbb19ceb06",
+    "recovery_001_contract_sha256": "f2fb1b796aedc2c760d3680cccefcc4558fc83beb6107663ca4e0a6d9f7d7d81",
+    "recovery_001_core_sha256": "9033c5b8b8b1bf066aae00f1db67791be4ce5ada1507762c8f68279089e63993"
+  },
+  "authority": {
+    "approval_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
+    "approval_sha256": "d16f3306d582257b32c25911e9f7f50efad935e9599a90e82247d6d813b29d40",
+    "implementation_readiness_ref": "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-readiness.json",
+    "implementation_readiness_sha256": "c8a8138437040188c2248aa701cb191c84a3fe1704d17d104ce3c7f3c4b4446a"
+  },
+  "released_now": {
+    "gate_state_publication": true,
+    "final_no_content_preflight": false,
+    "fresh_attempt": false,
+    "project_data_content_read": false,
+    "external_custody_access": false,
+    "production_arcpy_invocation": false,
+    "radar_processing": false
+  },
+  "assertions": {
+    "final_no_content_preflight_performed": false,
+    "fresh_attempt_process_started": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "consumed_attempt_reused_or_retried": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Publish and publicly validate the exact recovery-002 execution-gate state. Do not run the final no-content preflight, read project data or external custody, invoke production ArcPy, or start the fresh attempt until that gate-state commit passes public CI."
+}

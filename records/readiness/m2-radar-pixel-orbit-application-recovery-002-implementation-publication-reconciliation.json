@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION-PUBLICATION-RECONCILIATION",
+  "recorded_at_utc": "2026-09-19T21:31:41Z",
+  "status": "pass_public_implementation_gate_gate_state_publication_pending",
+  "implementation_publication_gate_ref": "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-publication-gate.json",
+  "implementation_publication_gate_sha256": "2f72de4ab54c0bd4bc9941c46b9bf6506d3d55978cf5a6ef461555ab00b50b30",
+  "implementation_commit_sha": "8266650829218b7f0db518ff991c9d224b4139dc",
+  "public_ci_run_id": 35470642225,
+  "released_now": {
+    "gate_state_publication": true,
+    "final_no_content_preflight": false,
+    "fresh_attempt": false
+  },
+  "next_action": "Publish and publicly validate the exact recovery-002 execution-gate state. Do not run the final no-content preflight, read project data or external custody, invoke production ArcPy, or start the fresh attempt until that gate-state commit passes public CI."
+}

@@ -274,6 +274,14 @@ RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_IMPLEMENTATION_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION",
     "next_action": "Implement and validate only the approved stage-evidenced recovery-002 wrapper, portable synthetic tests, and installed ArcGIS-runtime synthetic test, then require successful public default-branch CI. Do not run the final no-content preflight, access project data or external custody, or start the fresh attempt before that public gate.",
 }
+RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_EXECUTION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
+    "next_action": "Publish and publicly validate the exact recovery-002 execution-gate state. Do not run the final no-content preflight, read project data or external custody, invoke production ArcPy, or start the fresh attempt until that gate-state commit passes public CI.",
+}
+RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_FINAL_PREFLIGHT_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
+    "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the single-process fresh recovery-002 attempt read the six exact sources, four exact orbit files, four exact DEM derivatives, and evaluate the two frozen routes. The attempt must never be retried.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -2209,6 +2217,60 @@ def current_radar_pixel_orbit_application_recovery_002_implementation_pending(
     )
 
 
+def current_radar_pixel_orbit_application_recovery_002_execution_gate_publication_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize successful implementation CI before execution-state publication."""
+    if state_counts != {"promoted": 8}:
+        return False
+    if (root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-gate-state-publication.json").exists():
+        return False
+    try:
+        gate = load(root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-publication-gate.json")
+        reconciliation = load(root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-publication-reconciliation.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    implementation = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION", {})
+    execution = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION", {})
+    return bool(
+        gate.get("status") == "pass_public_default_branch_ci_recovery_002_implementation_ready"
+        and gate.get("public_ci_conclusion") == "success"
+        and reconciliation.get("status") == "pass_public_implementation_gate_gate_state_publication_pending"
+        and implementation.get("status") == "complete"
+        and implementation.get("disposition") == "pass"
+        and implementation.get("gates", {}).get("public_ci") == "success"
+        and execution.get("status") == "in_progress"
+        and execution.get("gates", {}).get("gate_state_publication") == "pending"
+        and execution.get("gates", {}).get("live_attempts_started") == 0
+    )
+
+
+def current_radar_pixel_orbit_application_recovery_002_final_preflight_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize public execution-state CI before the one final preflight."""
+    if state_counts != {"promoted": 8}:
+        return False
+    if (root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-final-preflight.json").exists():
+        return False
+    try:
+        gate_state = load(root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-gate-state-publication.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    execution = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION", {})
+    return bool(
+        gate_state.get("status") == "pass_public_default_branch_ci_one_final_preflight_released"
+        and gate_state.get("public_ci_conclusion") == "success"
+        and execution.get("status") == "in_progress"
+        and execution.get("gates", {}).get("gate_state_publication") == "success"
+        and execution.get("gates", {}).get("live_attempts_started") == 0
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -2278,7 +2340,15 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_pixel_orbit_application_recovery_002_implementation_pending(
+            if current_radar_pixel_orbit_application_recovery_002_final_preflight_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_FINAL_PREFLIGHT_CHECKPOINT)
+            elif current_radar_pixel_orbit_application_recovery_002_execution_gate_publication_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_EXECUTION_CHECKPOINT)
+            elif current_radar_pixel_orbit_application_recovery_002_implementation_pending(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_IMPLEMENTATION_CHECKPOINT)

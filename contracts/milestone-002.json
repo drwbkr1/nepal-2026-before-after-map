@@ -4302,7 +4302,7 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
         "contracts/milestone-002-radar-pixel-orbit-application-recovery-002-proposal.json",
@@ -4315,32 +4315,37 @@
         "scripts/validate_m2_radar_pixel_orbit_application_recovery_002_arcgis.py",
         "tests/test_m2_radar_pixel_orbit_application_recovery_002.py",
         "records/readiness/m2-radar-pixel-orbit-application-recovery-002-arcgis-runtime-validation.json",
-        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-readiness.json"
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-readiness.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-publication-gate.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-publication-reconciliation.json"
       ],
       "gates": {
         "portable_synthetic_tests": "success",
         "installed_arcgis_runtime_test": "success",
         "repository_validation": "success",
-        "public_ci": "pending",
+        "public_ci": "success",
         "project_data_content_read": false,
         "fresh_attempt_process_started": false,
         "focused_test_count": 9,
         "full_test_count": 628,
         "full_skip_count": 6,
         "required_file_count": 1158,
-        "implementation_readiness_sha256": "c8a8138437040188c2248aa701cb191c84a3fe1704d17d104ce3c7f3c4b4446a"
+        "implementation_readiness_sha256": "c8a8138437040188c2248aa701cb191c84a3fe1704d17d104ce3c7f3c4b4446a",
+        "implementation_commit_sha": "8266650829218b7f0db518ff991c9d224b4139dc",
+        "public_ci_run_id": 35470642225,
+        "implementation_publication_gate_sha256": "2f72de4ab54c0bd4bc9941c46b9bf6506d3d55978cf5a6ef461555ab00b50b30",
+        "implementation_publication_reconciliation_sha256": "257d41bd74783fb03f66e60ae28b293bcc92586aab4767cbdcfaddf6caa12c75"
       },
       "exit_condition_delta": {
-        "expected": [
-          "successful public default-branch CI"
-        ],
+        "expected": [],
         "observed": [
-          "portable and installed ArcGIS-runtime synthetic validation passed without project-data access or a production attempt"
+          "exact recovery-002 implementation passed public default-branch CI"
         ],
-        "decision_value": "pending_public_ci",
-        "rationale": "The final no-content preflight and fresh production attempt remain blocked behind two exact public CI gates."
+        "decision_value": "enables_dependency",
+        "rationale": "Only execution gate-state publication is released now; final preflight and the fresh attempt remain blocked."
       },
-      "next_dependency": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION"
+      "next_dependency": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
+      "disposition": "pass"
     },
     {
       "id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
@@ -4350,7 +4355,7 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
         "config/qa/m2-radar-pixel-orbit-application-recovery-002-contract.json"
@@ -4360,7 +4365,7 @@
         "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json"
       ],
       "gates": {
-        "public_ci": "pending",
+        "public_ci": "success",
         "gate_state_publication": "pending",
         "final_no_content_preflight": "pending",
         "maximum_live_attempts": 1,
@@ -4431,8 +4436,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION",
-    "next_action": "Implement and validate only the approved stage-evidenced recovery-002 wrapper, portable synthetic tests, and installed ArcGIS-runtime synthetic test, then require successful public default-branch CI. Do not run the final no-content preflight, access project data or external custody, or start the fresh attempt before that public gate.",
+    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
+    "next_action": "Publish and publicly validate the exact recovery-002 execution-gate state. Do not run the final no-content preflight, read project data or external custody, invoke production ArcPy, or start the fresh attempt until that gate-state commit passes public CI.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4480,7 +4485,7 @@
       "The receipt-recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, corpus, new attempt, project-data access, radar processing, or scientific action is released.",
       "The radar recovery-002 packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, new attempt, radar processing, baseline, change analysis, attribution, or scientific action is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION",
-    "parallel_next_action": "Implement and validate only the approved stage-evidenced recovery-002 wrapper, portable synthetic tests, and installed ArcGIS-runtime synthetic test, then require successful public default-branch CI. Do not run the final no-content preflight, access project data or external custody, or start the fresh attempt before that public gate."
+    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
+    "parallel_next_action": "Publish and publicly validate the exact recovery-002 execution-gate state. Do not run the final no-content preflight, read project data or external custody, invoke production ArcPy, or start the fresh attempt until that gate-state commit passes public CI."
   }
 }
