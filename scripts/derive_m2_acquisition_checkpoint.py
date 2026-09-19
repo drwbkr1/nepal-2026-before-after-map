@@ -230,6 +230,10 @@ RADAR_DELAYED_IMPORT_PROBE_001_EXECUTION_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION",
     "next_action": "Publish and publicly validate the exact implementation-gate state. Do not run the final no-content preflight, create the disposable corpus, or import ArcPy until that gate-state commit passes public CI.",
 }
+RADAR_DELAYED_IMPORT_PROBE_001_FINAL_PREFLIGHT_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION",
+    "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one disposable delayed-import probe begin.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1854,6 +1858,33 @@ def current_radar_delayed_import_probe_001_execution_gate_publication_pending(
     )
 
 
+def current_radar_delayed_import_probe_001_final_preflight_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize published gate state with the one final preflight still pending."""
+    if state_counts != {"promoted": 8}:
+        return False
+    if (root / "records/readiness/m2-radar-delayed-import-probe-001-final-preflight.json").exists():
+        return False
+    try:
+        publication = load(root / "records/readiness/m2-radar-delayed-import-probe-001-gate-state-publication.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    execution = units.get("M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION", {})
+    return bool(
+        publication.get("status") == "pass_public_gate_state_final_preflight_released"
+        and publication.get("public_ci_conclusion") == "success"
+        and publication.get("released_now", {}).get("final_no_content_preflight") is True
+        and publication.get("assertions", {}).get("final_no_content_preflight_performed") is False
+        and execution.get("status") == "in_progress"
+        and execution.get("gates", {}).get("gate_state_publication") == "success"
+        and execution.get("gates", {}).get("final_no_content_preflight") == "pending"
+        and execution.get("gates", {}).get("live_attempts_started") == 0
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -1923,7 +1954,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_delayed_import_probe_001_execution_gate_publication_pending(
+            if current_radar_delayed_import_probe_001_final_preflight_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_001_FINAL_PREFLIGHT_CHECKPOINT)
+            elif current_radar_delayed_import_probe_001_execution_gate_publication_pending(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_001_EXECUTION_CHECKPOINT)

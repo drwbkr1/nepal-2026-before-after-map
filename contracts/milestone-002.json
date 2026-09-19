@@ -3971,7 +3971,8 @@
       "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
-        "config/qa/m2-radar-delayed-import-probe-001-contract.json"
+        "config/qa/m2-radar-delayed-import-probe-001-contract.json",
+        "records/readiness/m2-radar-delayed-import-probe-001-gate-state-publication.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-delayed-import-probe-001-final-preflight.json",
@@ -3982,7 +3983,9 @@
         "final_no_content_preflight": "pending",
         "maximum_live_attempts": 1,
         "live_attempts_started": 0,
-        "gate_state_publication": "pending"
+        "gate_state_publication": "success",
+        "gate_state_commit_sha": "232982840dbfa3249aaf14267a95a38740f89def",
+        "gate_state_publication_sha256": "1ed91c35cdaaf3aa611f6a6f2ab158bc60e420ee3ed7f3321f2b2de621ccd68b"
       },
       "exit_condition_delta": {
         "expected": [
@@ -4050,7 +4053,7 @@
   },
   "handoff": {
     "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION",
-    "next_action": "Publish and publicly validate the exact implementation-gate state. Do not run the final no-content preflight, create the disposable corpus, or import ArcPy until that gate-state commit passes public CI.",
+    "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one disposable delayed-import probe begin.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4094,9 +4097,9 @@
       "Metadata recovery-001 is terminal after exact promotion because both success and failure terminal receipt construction failed; do not retry or reconstruct its terminal result.",
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery.",
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval.",
-      "The exact delayed-import probe implementation passed public CI, but the final preflight remains blocked until the implementation-gate state is published and passes public CI; no live probe, project-data access, recovery retry, radar processing, or scientific claim is released yet."
+      "The exact delayed-import probe implementation and gate state passed public CI; one final no-content preflight is released, while the live probe remains conditional on its pass and no project-data access, recovery retry, radar processing, or scientific claim is released."
     ],
     "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION",
-    "parallel_next_action": "Publish and publicly validate the exact implementation-gate state. Do not run the final no-content preflight, create the disposable corpus, or import ArcPy until that gate-state commit passes public CI."
+    "parallel_next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one disposable delayed-import probe begin."
   }
 }

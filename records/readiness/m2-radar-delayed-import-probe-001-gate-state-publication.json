@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-GATE-STATE-PUBLICATION",
+  "recorded_at_utc": "2026-09-19T17:17:53Z",
+  "status": "pass_public_gate_state_final_preflight_released",
+  "gate_state_commit_sha": "232982840dbfa3249aaf14267a95a38740f89def",
+  "public_ci_run_id": 35457562260,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35457562260",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1076,
+  "public_test_count": 593,
+  "public_intentional_skip_count": 13,
+  "bindings": {
+    "implementation_publication_gate_ref": "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-gate.json",
+    "implementation_publication_gate_sha256": "813ac763286a138b1ee3b87aad3c14a80353fbfdfadbd6169ff7b138d56bb63f",
+    "implementation_publication_reconciliation_ref": "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-reconciliation.json",
+    "implementation_publication_reconciliation_sha256": "653e7648b589c0137d0f0def725c916e765c50e0071f350cd53a4a5d52ffa694",
+    "published_milestone_sha256": "a7df1d6f67f079d5d808d406b7344074f0bc63edec42081f594c319fefe2703f",
+    "published_project_control_profile_sha256": "bd19d07c0ff3ea7b953215d1ad769dd6719b5f81214cc13acc614cae6fe67fa0",
+    "published_long_term_goal_sha256": "7578d7a38d35f14a444cb188ef068916f50e4d513fc67d1417a7441f2984ac98"
+  },
+  "released_now": {
+    "final_no_content_preflight": true,
+    "live_probe_only_after_preflight_pass": true,
+    "project_data_content_read": false,
+    "external_custody_access": false,
+    "recovery_attempt_reuse_or_retry": false,
+    "radar_processing": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "final_no_content_preflight_performed": false,
+    "probe_process_started": false,
+    "disposable_corpus_created": false,
+    "arcpy_imported": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "recovery_attempt_reused_or_retried": false,
+    "radar_processing_executed": false,
+    "historical_root_cause_established": false,
+    "recovery_readiness_established": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Publish and validate this gate-state record, then run the one authorized final no-content preflight once. Stop on failure; only on pass may the one disposable delayed-import probe begin."
+}

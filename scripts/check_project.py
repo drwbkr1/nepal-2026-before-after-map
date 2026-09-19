@@ -32,6 +32,7 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_delayed_import_probe_001_review_required,
     current_radar_delayed_import_probe_001_implementation_pending,
     current_radar_delayed_import_probe_001_execution_gate_publication_pending,
+    current_radar_delayed_import_probe_001_final_preflight_pending,
     current_full_header_implementation_pending,
     current_materialization_pixel_implementation_pending,
     current_optical_pixel_implementation_pending,
@@ -247,6 +248,7 @@ REQUIRED = [
     "records/readiness/m2-radar-delayed-import-probe-001-implementation-readiness.json",
     "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-gate.json",
     "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-reconciliation.json",
+    "records/readiness/m2-radar-delayed-import-probe-001-gate-state-publication.json",
     "scripts/activate_m2_radar_delayed_import_probe_001.py",
     "scripts/m2_radar_delayed_import_probe_001_core.py",
     "scripts/run_m2_radar_delayed_import_probe_001.py",
@@ -1552,7 +1554,12 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, {"promoted": 8}):
+            if current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one disposable delayed-import probe begin."
+            elif current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
                 expected_dem_proposed_amendments = []
@@ -1645,7 +1652,12 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, {"promoted": 8}):
+            if current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one disposable delayed-import probe begin."
+            elif current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
                 expected_dem_proposed_amendments = []
@@ -7856,7 +7868,9 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        if current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, state_counts):
+        if current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
+        elif current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
         elif current_radar_delayed_import_probe_001_implementation_pending(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION"
@@ -14002,6 +14016,7 @@ def main() -> None:
     radar_probe_implementation_readiness = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-implementation-readiness.json").read_text(encoding="utf-8"))
     radar_probe_implementation_publication_gate = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-gate.json").read_text(encoding="utf-8"))
     radar_probe_implementation_publication_reconciliation = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-reconciliation.json").read_text(encoding="utf-8"))
+    radar_probe_gate_state_publication = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-gate-state-publication.json").read_text(encoding="utf-8"))
     radar_probe_proposal_ref = "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json"
     radar_probe_bundle_ref = "reviews/m2-radar-delayed-import-probe-001/review-bundle.json"
     radar_probe_readiness_ref = "records/readiness/m2-radar-delayed-import-probe-001-review-readiness.json"
@@ -14159,7 +14174,9 @@ def main() -> None:
         or radar_probe_implementation_unit.get("gates", {}).get("arcpy_invoked") is not False
         or radar_probe_implementation_unit.get("gates", {}).get("probe_process_started") is not False
         or radar_probe_execution_unit.get("status") != "in_progress"
-        or radar_probe_execution_unit.get("gates", {}).get("gate_state_publication") != "pending"
+        or radar_probe_execution_unit.get("gates", {}).get("gate_state_publication") != "success"
+        or radar_probe_execution_unit.get("gates", {}).get("gate_state_commit_sha") != "232982840dbfa3249aaf14267a95a38740f89def"
+        or radar_probe_execution_unit.get("gates", {}).get("gate_state_publication_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-gate-state-publication.json")
         or radar_probe_execution_unit.get("gates", {}).get("live_attempts_started") != 0
         or radar_probe_implementation_readiness.get("status") != "pass_portable_probe_implementation_public_ci_pending"
         or radar_probe_implementation_readiness.get("validation", {}).get("focused_test_count") != 8
@@ -14180,13 +14197,39 @@ def main() -> None:
         or radar_probe_implementation_publication_gate.get("bindings", {}).get("portable_test_sha256") != sha256("tests/test_m2_radar_delayed_import_probe_001.py")
         or radar_probe_implementation_publication_reconciliation.get("status") != "pass_public_implementation_gate_gate_state_publication_pending"
         or radar_probe_implementation_publication_reconciliation.get("implementation_publication_gate_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-gate.json")
+        or radar_probe_gate_state_publication.get("status") != "pass_public_gate_state_final_preflight_released"
+        or radar_probe_gate_state_publication.get("gate_state_commit_sha") != "232982840dbfa3249aaf14267a95a38740f89def"
+        or radar_probe_gate_state_publication.get("public_ci_run_id") != 35457562260
+        or radar_probe_gate_state_publication.get("public_ci_url") != "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35457562260"
+        or radar_probe_gate_state_publication.get("public_ci_conclusion") != "success"
+        or radar_probe_gate_state_publication.get("repository_required_file_count") != 1076
+        or radar_probe_gate_state_publication.get("public_test_count") != 593
+        or radar_probe_gate_state_publication.get("public_intentional_skip_count") != 13
+        or radar_probe_gate_state_publication.get("bindings", {}).get("implementation_publication_gate_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-gate.json")
+        or radar_probe_gate_state_publication.get("bindings", {}).get("implementation_publication_reconciliation_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-reconciliation.json")
+        or radar_probe_gate_state_publication.get("bindings", {}).get("published_milestone_sha256") != "a7df1d6f67f079d5d808d406b7344074f0bc63edec42081f594c319fefe2703f"
+        or radar_probe_gate_state_publication.get("bindings", {}).get("published_project_control_profile_sha256") != "bd19d07c0ff3ea7b953215d1ad769dd6719b5f81214cc13acc614cae6fe67fa0"
+        or radar_probe_gate_state_publication.get("bindings", {}).get("published_long_term_goal_sha256") != "7578d7a38d35f14a444cb188ef068916f50e4d513fc67d1417a7441f2984ac98"
+        or radar_probe_gate_state_publication.get("released_now", {}).get("final_no_content_preflight") is not True
+        or radar_probe_gate_state_publication.get("released_now", {}).get("live_probe_only_after_preflight_pass") is not True
+        or any(radar_probe_gate_state_publication.get("released_now", {}).get(key) is not False for key in (
+            "project_data_content_read", "external_custody_access", "recovery_attempt_reuse_or_retry",
+            "radar_processing", "baseline_or_change_analysis", "scientific_publication",
+        ))
+        or any(radar_probe_gate_state_publication.get("assertions", {}).get(key) is not False for key in (
+            "final_no_content_preflight_performed", "probe_process_started", "disposable_corpus_created",
+            "arcpy_imported", "project_data_content_read", "external_custody_accessed",
+            "recovery_attempt_reused_or_retried", "radar_processing_executed",
+            "historical_root_cause_established", "recovery_readiness_established", "scientific_result_established",
+        ))
         or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
         or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
         or goal.get("proposed_amendments") != []
         or current_radar_delayed_import_probe_001_review_publication_pending(ROOT, {"promoted": 8}) is not False
         or current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}) is not False
         or current_radar_delayed_import_probe_001_implementation_pending(ROOT, {"promoted": 8}) is not False
-        or current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, {"promoted": 8}) is not True
+        or current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, {"promoted": 8}) is not False
+        or current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, {"promoted": 8}) is not True
     ):
         fail("M2 radar delayed-import probe-001 canonical execution-publication state differs")
     radar_probe_evidence = ledger_by_id.get("EVID-0166")
@@ -14266,6 +14309,26 @@ def main() -> None:
         ))
     ):
         fail("EVID-0169 radar delayed-import probe implementation-publication evidence differs or overclaims")
+    radar_probe_gate_state_publication_evidence = ledger_by_id.get("EVID-0170")
+    if (
+        not isinstance(radar_probe_gate_state_publication_evidence, dict)
+        or radar_probe_gate_state_publication_evidence.get("status") != "pass_public_gate_state_final_preflight_released"
+        or radar_probe_gate_state_publication_evidence.get("gate_state_publication_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-gate-state-publication.json")
+        or radar_probe_gate_state_publication_evidence.get("assertions", {}).get("gate_state_commit") != "232982840dbfa3249aaf14267a95a38740f89def"
+        or radar_probe_gate_state_publication_evidence.get("assertions", {}).get("public_ci_run_id") != 35457562260
+        or radar_probe_gate_state_publication_evidence.get("assertions", {}).get("public_ci_conclusion") != "success"
+        or radar_probe_gate_state_publication_evidence.get("assertions", {}).get("repository_required_file_count") != 1076
+        or radar_probe_gate_state_publication_evidence.get("assertions", {}).get("public_test_count") != 593
+        or radar_probe_gate_state_publication_evidence.get("assertions", {}).get("public_intentional_skip_count") != 13
+        or radar_probe_gate_state_publication_evidence.get("assertions", {}).get("final_no_content_preflight_released") is not True
+        or any(radar_probe_gate_state_publication_evidence.get("assertions", {}).get(key) is not False for key in (
+            "final_no_content_preflight_performed", "probe_process_started", "disposable_corpus_created",
+            "arcpy_imported", "project_data_content_read", "external_custody_accessed",
+            "recovery_attempt_reused_or_retried", "radar_processing_executed",
+            "historical_root_cause_established", "recovery_readiness_established", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0170 radar delayed-import probe gate-state-publication evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():

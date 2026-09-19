@@ -9,6 +9,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from derive_m2_acquisition_checkpoint import (  # noqa: E402
     current_radar_delayed_import_probe_001_execution_gate_publication_pending,
+    current_radar_delayed_import_probe_001_final_preflight_pending,
     current_radar_delayed_import_probe_001_implementation_pending,
     current_radar_delayed_import_probe_001_review_publication_pending,
     current_radar_delayed_import_probe_001_review_required,
@@ -201,7 +202,8 @@ class M2RadarDelayedImportProbe001ReviewTests(unittest.TestCase):
         self.assertFalse(current_radar_delayed_import_probe_001_review_publication_pending(ROOT, {"promoted": 8}))
         self.assertFalse(current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}))
         self.assertFalse(current_radar_delayed_import_probe_001_implementation_pending(ROOT, {"promoted": 8}))
-        self.assertTrue(current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, {"promoted": 8}))
+        self.assertFalse(current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, {"promoted": 8}))
+        self.assertTrue(current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, {"promoted": 8}))
 
 
 if __name__ == "__main__":
