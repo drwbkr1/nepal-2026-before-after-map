@@ -115,11 +115,11 @@ class M2RadarPixelOrbitApplication001ReviewTests(unittest.TestCase):
 
     def test_control_state_matches_terminal_block(self) -> None:
         published = (ROOT / PUBLICATION_REF).exists()
-        checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW"
+        checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW-PUBLICATION"
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)
-        pending_recovery = []
+        pending_recovery = ["contracts/milestone-002-radar-pixel-orbit-application-recovery-002-proposal.json"]
         self.assertEqual(self.goal["proposed_amendments"], pending_recovery)
         self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], pending_recovery)
         self.assertEqual(self.goal["active_amendments"][-1], "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json")

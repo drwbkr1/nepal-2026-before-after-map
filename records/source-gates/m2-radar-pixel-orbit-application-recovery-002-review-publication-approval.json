@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW-PUBLICATION-APPROVAL",
+  "recorded_at_utc": "2026-09-19T20:37:42Z",
+  "status": "approved_exact_zero_decision_review_publication_only",
+  "decision": "authorize_publication",
+  "human_decision_count": 1,
+  "attestation": true,
+  "owner_statement": "I authorize publication of M2 radar pixel and orbit application recovery-002 review bundle `e699dfc3c4f7dd5ca697581cf4a299c66128fda7691473d65749681e3dfc211c` and proposal `86366bca8681bbe90dfdd19d6c5b676e490e6dd87c8e04c2900e9fb1df4b29ca`. I authorize only bounded repository-control integration, public default-branch publication, public CI, and exact post-CI reconciliation of this zero-decision packet. I understand this authorizes no proposal approval, implementation, ArcPy invocation, project-data or external-custody access, new attempt, radar processing, baseline or change analysis, attribution, or scientific publication. I attest this is my completed decision.",
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-radar-pixel-orbit-application-recovery-002-proposal.json",
+    "proposal_sha256": "86366bca8681bbe90dfdd19d6c5b676e490e6dd87c8e04c2900e9fb1df4b29ca",
+    "review_bundle_ref": "reviews/m2-radar-pixel-orbit-application-recovery-002/review-bundle.json",
+    "review_bundle_sha256": "e699dfc3c4f7dd5ca697581cf4a299c66128fda7691473d65749681e3dfc211c",
+    "preparation_approval_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-review-preparation-approval.json",
+    "preparation_base_commit": "b3bb7b393f72220306c53aefe1626ddf6df281c4"
+  },
+  "authorized_actions": [
+    "bounded repository-control integration of the exact zero-decision packet",
+    "one public default-branch packet publication",
+    "public CI for that exact packet commit",
+    "exact post-CI publication-gate reconciliation"
+  ],
+  "authority_boundary": {
+    "repository_control_integration_authorized": true,
+    "public_default_branch_publication_authorized": true,
+    "public_ci_authorized": true,
+    "post_ci_publication_reconciliation_authorized": true,
+    "owner_proposal_approval_authorized": false,
+    "recovery_implementation_authorized": false,
+    "arcpy_invocation_authorized": false,
+    "new_attempt_authorized": false,
+    "project_data_or_external_custody_access_authorized": false,
+    "radar_processing_authorized": false,
+    "baseline_or_change_authorized": false,
+    "attribution_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

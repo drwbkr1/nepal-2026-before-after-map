@@ -81,6 +81,8 @@ An independent metadata-only ArcGIS package fixture has a qualified pass. Public
 
 `config/qa/optical-input-readiness-contract.json` is the next Sentinel-2 gate. It may inspect only the exact materialized RUM pair after two passing materialization receipts. Header and metadata readiness permits later pixel QA only; do not treat a readable JP2, matching grid, or parsed scaling field as usable-pixel or change evidence.
 
+The owner authorized publication of radar pixel and orbit application recovery-002 review-bundle SHA-256 `e699dfc3c4f7dd5ca697581cf4a299c66128fda7691473d65749681e3dfc211c` and proposal SHA-256 `86366bca8681bbe90dfdd19d6c5b676e490e6dd87c8e04c2900e9fb1df4b29ca`. Publication-approval SHA-256 is `634c20297d892adfe702637a5b47624eabef78b5c086d31a744ab4ef21eadf72`; publication-activation SHA-256 is `72be49847d36e63160eed84f7c2acd44db76e56cd2738d911a56ea385b56bd31`. The checkpoint is `M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW-PUBLICATION` and public CI is pending. The packet has zero proposal decisions and preserves both consumed attempts, the diagnostic limitations, the exact six-source and two-route order, and all scientific contracts. Do not approve or implement the proposal, invoke ArcPy, access project data or external custody, create a new attempt, process radar data, run baseline or change analysis, attribute cause, or publish science before the separate public-CI and owner-decision gates.
+
 ## Source and custody rules
 
 - Treat catalog results as availability evidence, not proof of usable pixels, valid coverage, or event causation.

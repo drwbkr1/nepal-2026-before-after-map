@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW-SURFACE",
+  "rendered_at_utc": "2026-09-19T20:14:41Z",
+  "status": "pass_static_review_surface_generated_pending_agent_visual_inspection",
+  "artifact_ref": "docs/assets/m2-radar-pixel-orbit-application-recovery-002-review.png",
+  "artifact_sha256": "383fae06f1cf147fec1a7e9f7820b1d2456cf5e211124548ef573063045a2aeb",
+  "width_px": 1800,
+  "height_px": 2040,
+  "bindings": {
+    "proposal_sha256": "86366bca8681bbe90dfdd19d6c5b676e490e6dd87c8e04c2900e9fb1df4b29ca",
+    "radar_terminal_reconciliation_sha256": "3bd2a4cc6bd56d7ec5ae95a316ff3f5b3cc788b94d32436b3cf02586d7a391c0",
+    "probe_outcome_reconciliation_sha256": "7d7028afdca5b880b2d4d1da69d404db72adf3b5210234cb2a88403c541696b3"
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "attestation": false,
+    "publication_authorized": false,
+    "implementation_authorized": false,
+    "arcpy_invoked": false,
+    "new_attempt_authorized": false,
+    "project_data_content_read": false
+  }
+}

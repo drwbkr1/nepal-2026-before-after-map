@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW-PREFLIGHT",
+  "checked_at_utc": "2026-09-19T20:14:41Z",
+  "status": "pass_ready_local_zero_decision_packet_preparation_only",
+  "bindings": {
+    "preparation_approval_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-review-preparation-approval.json",
+    "preparation_approval_sha256": "be3e2bd7280ea8fd1d206602a8b2a4cf956a38258f39a4fa83ed95b58e3904b5",
+    "proposal_ref": "contracts/milestone-002-radar-pixel-orbit-application-recovery-002-proposal.json",
+    "proposal_sha256": "86366bca8681bbe90dfdd19d6c5b676e490e6dd87c8e04c2900e9fb1df4b29ca",
+    "radar_terminal_reconciliation_sha256": "3bd2a4cc6bd56d7ec5ae95a316ff3f5b3cc788b94d32436b3cf02586d7a391c0",
+    "radar_outcome_reconciliation_sha256": "ef5b7601ce6073c2736297406ac3324f03ca1a84eaa6e7c3dbc35a1a07601d19",
+    "radar_terminal_publication_gate_sha256": "2d757b464ef71a8f8305145698c2205d4034dc492b51b82fc9261741f3133ade",
+    "probe_terminal_reconciliation_sha256": "a942a1827a72462e32caaed7690e785e7bc0c18df04224125a18131eeb09be26",
+    "probe_outcome_reconciliation_sha256": "7d7028afdca5b880b2d4d1da69d404db72adf3b5210234cb2a88403c541696b3",
+    "probe_terminal_publication_gate_sha256": "9a0c430452eac76aed9196ca990398c026e166f3b2ec3abf22dd0bbe8a8e5a42",
+    "preparation_script_sha256": "3bda5c02fefacabdb6e59765b9762914f1d8a1512ddfeb99e3fd6ab76fcf0777",
+    "base_commit": "b3bb7b393f72220306c53aefe1626ddf6df281c4"
+  },
+  "checks": {
+    "radar_attempt_consumed": true,
+    "probe_attempt_consumed": true,
+    "radar_exact_failure_statement_unresolved": true,
+    "probe_delayed_import_sequence_passed": true,
+    "probe_recovery_readiness_claim_prohibited": true,
+    "protected_public_evidence_exact": true,
+    "canonical_checkpoint_unchanged": true,
+    "local_preparation_authorized": true,
+    "publication_or_implementation_authorized": false
+  },
+  "assertions": {
+    "git_commit_created": false,
+    "git_push_performed": false,
+    "public_ci_started": false,
+    "protected_radar_or_probe_code_modified": false,
+    "arcpy_invoked": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "new_attempt_created": false,
+    "radar_processing_executed": false,
+    "implementation_authorized": false,
+    "scientific_result_established": false
+  }
+}

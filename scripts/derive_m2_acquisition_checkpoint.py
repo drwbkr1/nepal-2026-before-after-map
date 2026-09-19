@@ -262,6 +262,14 @@ RADAR_DELAYED_IMPORT_PROBE_RECEIPT_RECOVERY_001_TERMINAL_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW",
     "next_action": "Review the terminal receipt-recovery diagnostic outcome. The fresh attempt is consumed and cannot be resumed, reused, or retried; any further diagnostic or radar action requires separately reviewed authority.",
 }
+RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_REVIEW_PUBLICATION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW-PUBLICATION",
+    "next_action": "Publish and publicly validate the exact zero-decision radar pixel and orbit application recovery-002 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not approve or implement the proposal, invoke ArcPy, access project data or external custody, create a new attempt, process radar data, run baseline or change analysis, attribute cause, or publish science.",
+}
+RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW",
+    "next_action": "Review the exact public M2 radar pixel and orbit application recovery-002 bundle and proposal; approve, revise, or defer the bounded stage-evidence and one-fresh-attempt proposal. No implementation, ArcPy invocation, project-data or external-custody access, new attempt, radar processing, baseline or change analysis, attribution, or scientific publication is authorized before an exact attested decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -2116,6 +2124,53 @@ def current_radar_delayed_import_probe_receipt_recovery_001_terminal(
     )
 
 
+def current_radar_pixel_orbit_application_recovery_002_review_publication_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the exact zero-decision recovery-002 packet pending public CI."""
+    if state_counts != {"promoted": 8}:
+        return False
+    if (root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-review-publication-gate.json").exists():
+        return False
+    try:
+        activation = load(root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-review-publication-activation.json")
+        blank = load(root / "reviews/m2-radar-pixel-orbit-application-recovery-002/blank-response.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW", {})
+    return bool(
+        activation.get("status") == "pass_exact_publication_authority_activated_public_ci_pending"
+        and activation.get("assertions", {}).get("owner_review_open") is False
+        and blank.get("completed") is False
+        and blank.get("human_decision_count") == 0
+        and review.get("status") == "planned"
+        and review.get("gates", {}).get("public_ci") == "pending"
+        and review.get("gates", {}).get("review_response_open") is False
+    )
+
+
+def current_radar_pixel_orbit_application_recovery_002_review_required(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the publicly validated blank recovery-002 packet awaiting owner review."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        gate = load(root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-review-publication-gate.json")
+        reconciliation = load(root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-review-publication-reconciliation.json")
+        blank = load(root / "reviews/m2-radar-pixel-orbit-application-recovery-002/blank-response.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    return bool(
+        gate.get("status") == "pass_public_default_branch_ci_zero_decision_owner_review_ready"
+        and reconciliation.get("status") == "pass_public_gate_owner_review_ready"
+        and blank.get("completed") is False
+        and blank.get("human_decision_count") == 0
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -2185,7 +2240,15 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_delayed_import_probe_receipt_recovery_001_terminal(
+            if current_radar_pixel_orbit_application_recovery_002_review_required(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_REVIEW_CHECKPOINT)
+            elif current_radar_pixel_orbit_application_recovery_002_review_publication_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_REVIEW_PUBLICATION_CHECKPOINT)
+            elif current_radar_delayed_import_probe_receipt_recovery_001_terminal(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_RECEIPT_RECOVERY_001_TERMINAL_CHECKPOINT)

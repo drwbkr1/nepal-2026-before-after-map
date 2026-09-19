@@ -6,7 +6,15 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW`; the single receipt-recovery probe passed its exact diagnostic sequence, is consumed, and cannot be retried; no radar or scientific action is released
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW-PUBLICATION`; exact zero-decision packet publication is authorized and public CI is pending; proposal approval, implementation, ArcPy, project-data access, a new attempt, radar processing, and scientific action remain blocked
+
+## Radar pixel and orbit application recovery-002 review publication — 2026-09-19
+
+The owner authorized publication of exact proposal SHA-256 `86366bca8681bbe90dfdd19d6c5b676e490e6dd87c8e04c2900e9fb1df4b29ca` and review-bundle SHA-256 `e699dfc3c4f7dd5ca697581cf4a299c66128fda7691473d65749681e3dfc211c`. Publication-approval SHA-256 is `634c20297d892adfe702637a5b47624eabef78b5c086d31a744ab4ef21eadf72`; publication-activation SHA-256 is `72be49847d36e63160eed84f7c2acd44db76e56cd2738d911a56ea385b56bd31`. The packet preserves the consumed radar recovery-001 attempt and the consumed delayed-import diagnostic, proposes durable stage evidence around the unchanged six-source and two-route contracts, and contains zero proposal decisions.
+
+Only bounded repository-control integration, public default-branch publication, public CI, and exact post-CI reconciliation are released. The response remains blank and closed until the exact packet commit passes public CI. No proposal approval, implementation, ArcPy invocation, project-data or external-custody access, new attempt, radar processing, baseline or change analysis, attribution, or scientific publication is authorized.
+
+The first complete local suite ran 618 tests and preserved ten stale current-state failures at SHA-256 `7e83f3bb52aa3691b26bab0ccff62b6959053670e35235483cced1ae64ccf423`; every failure expected the proposed-amendment list to remain empty. After changing only those expectations to the exact recovery-002 proposal path, all 618 tests pass with six intentional local skips, and the project checker validates 1,141 required files.
 
 ## Radar delayed-import probe receipt recovery-001 approved implementation — 2026-09-19
 

@@ -112,7 +112,7 @@ class DemVerticalDatumAlternateMethod001ReviewTests(unittest.TestCase):
         install = units["M2-DEM-EGM2008-COMPONENT-INSTALL"]
         review = units[CHECKPOINT]
         implementation_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
-        current_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW"
+        current_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW-PUBLICATION"
         implementation = units[implementation_checkpoint]
         acquisition = units["M2-DEM-EGM2008-PROJ25-ACQUISITION"]
         conversion = units["M2-DEM-VERTICAL-DATUM-CONVERSION"]
@@ -133,7 +133,7 @@ class DemVerticalDatumAlternateMethod001ReviewTests(unittest.TestCase):
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], current_checkpoint)
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], current_checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], current_checkpoint)
-        expected_proposal = []
+        expected_proposal = ["contracts/milestone-002-radar-pixel-orbit-application-recovery-002-proposal.json"]
         self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], expected_proposal)
         self.assertEqual(self.goal["proposed_amendments"], expected_proposal)
         self.assertIn("records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json", self.goal["active_amendments"])

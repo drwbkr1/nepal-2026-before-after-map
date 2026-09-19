@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW-PREPARATION-APPROVAL",
+  "recorded_at_utc": "2026-09-19T20:14:41Z",
+  "status": "approved_local_zero_decision_review_preparation_only",
+  "authority_basis": {
+    "owner_instruction": "I authorize preparation of an M2 radar pixel and orbit application recovery-002 review packet based on the public receipt-recovery terminal evidence.",
+    "owner_scope": "local zero-decision proposal and review preparation and validation only",
+    "owner_exclusions": "no Git publication, project-data or external-custody access, ArcPy execution, new real attempt, radar processing, baseline or change analysis, attribution, or scientific publication",
+    "attestation": true
+  },
+  "approved_scope": [
+    "prepare one local zero-decision M2 radar pixel and orbit application recovery-002 review packet",
+    "render and locally validate the packet without project or external data",
+    "record exact proposal and bundle identities for a later publication decision"
+  ],
+  "authority_boundary": {
+    "local_review_packet_preparation_authorized": true,
+    "local_validation_authorized": true,
+    "git_commit_authorized": false,
+    "public_review_packet_publication_authorized": false,
+    "public_ci_authorized": false,
+    "owner_proposal_decision_recording_authorized": false,
+    "recovery_implementation_authorized": false,
+    "arcpy_invocation_authorized": false,
+    "new_attempt_authorized": false,
+    "project_data_or_external_custody_access_authorized": false,
+    "radar_processing_authorized": false,
+    "baseline_or_change_authorized": false,
+    "scientific_publication_authorized": false
+  },
+  "bindings": {
+    "radar_terminal_reconciliation_sha256": "3bd2a4cc6bd56d7ec5ae95a316ff3f5b3cc788b94d32436b3cf02586d7a391c0",
+    "radar_outcome_reconciliation_sha256": "ef5b7601ce6073c2736297406ac3324f03ca1a84eaa6e7c3dbc35a1a07601d19",
+    "radar_terminal_publication_gate_sha256": "2d757b464ef71a8f8305145698c2205d4034dc492b51b82fc9261741f3133ade",
+    "probe_terminal_reconciliation_sha256": "a942a1827a72462e32caaed7690e785e7bc0c18df04224125a18131eeb09be26",
+    "probe_outcome_reconciliation_sha256": "7d7028afdca5b880b2d4d1da69d404db72adf3b5210234cb2a88403c541696b3",
+    "probe_terminal_publication_gate_sha256": "9a0c430452eac76aed9196ca990398c026e166f3b2ec3abf22dd0bbe8a8e5a42",
+    "base_commit": "b3bb7b393f72220306c53aefe1626ddf6df281c4"
+  }
+}
