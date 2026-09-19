@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION-PUBLICATION-RECONCILIATION",
+  "recorded_at_utc": "2026-09-19T19:39:06Z",
+  "status": "pass_public_implementation_gate_gate_state_publication_pending",
+  "implementation_publication_gate_ref": "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-implementation-publication-gate.json",
+  "implementation_publication_gate_sha256": "36370981e8371b317b12e05212af829fd4c77f475cb988a6f952c0ef4efa3e4f",
+  "implementation_commit_sha": "001fa5f7e23bd3a2348353c947b55adb84da5023",
+  "public_ci_run_id": 35464905883,
+  "released_now": {
+    "gate_state_publication": true,
+    "final_no_content_preflight": false,
+    "fresh_probe": false
+  },
+  "next_action": "Publish and publicly validate the exact receipt-recovery implementation-gate state. Do not run the final no-content preflight or create the production corpus or fresh probe until that gate-state commit passes public CI."
+}

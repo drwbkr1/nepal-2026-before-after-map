@@ -132,7 +132,7 @@ class M2DemVerticalDatumReviewTests(unittest.TestCase):
         historical_checkpoint = "M2-DEM-EGM2008-COMPONENT-INSTALL"
         review_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-REVIEW"
         implementation_checkpoint = "M2-DEM-VERTICAL-DATUM-ALTERNATE-METHOD-001-IMPLEMENTATION"
-        current_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION"
+        current_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
         self.assertEqual(self.control["status"], "pass_method_selected_owner_component_install_pending")
         self.assertEqual(self.control["bindings"]["approval_sha256"], sha256("records/source-gates/m2-dem-vertical-datum-approval.json"))
         self.assertEqual(self.control["decision"]["current_checkpoint"], historical_checkpoint)

@@ -6,7 +6,7 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION`; exact owner approval is locked, portable and installed ArcGIS-runtime synthetic validation pass, and public implementation CI is pending, while radar base real-001, recovery real-001, and the consumed disposable delayed-import probe remain terminal and cannot be retried
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION`; implementation passed public CI and exact execution gate-state publication is pending, while the final preflight and fresh probe remain blocked and all earlier real attempts remain terminal
 
 ## Radar delayed-import probe receipt recovery-001 approved implementation — 2026-09-19
 
@@ -14,7 +14,7 @@ Proposal SHA-256 `9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e
 
 The implementation preserves the consumed probe and its public implementation byte-for-byte. It uses function-local ArcGIS-safe timestamp construction, pre-reserved terminal and cleanup identities, immediate sanitized preservation of the original caught exception, a minimal append-only fallback journal, and cleanup independent of ordinary terminal serialization. Ten portable tests and one installed ArcGIS Pro 3.7.1 runtime synthetic test pass; the runtime test imported ArcPy for runtime identity but invoked no geoprocessing tool. Implementation-readiness SHA-256 is `afc4282244781b0f2e5b6eb27e17f8c3e29e3c0c5eec4c29e50f59fb6e1adbdc`.
 
-Public implementation CI is pending. The final no-content preflight and fresh production attempt remain blocked until the implementation commit and the later execution gate state pass public CI. No production corpus or attempt, project-data or external-custody access, radar processing, baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication has occurred.
+Exact implementation commit `001fa5f7e23bd3a2348353c947b55adb84da5023` passed public default-branch CI run `35464905883` with 1,117 required files, 610 tests, and 13 intentional public-runtime skips. The implementation-publication gate records that pass and releases only publication of the execution gate state. The final no-content preflight and fresh production attempt remain blocked until that gate-state commit passes public CI. No production corpus or attempt, project-data or external-custody access, radar processing, baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication has occurred.
 
 ## Radar delayed-import probe-001 approved implementation — 2026-09-19
 

@@ -296,6 +296,8 @@ REQUIRED = [
     "config/qa/m2-radar-delayed-import-probe-receipt-recovery-001-contract.json",
     "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-arcgis-runtime-validation.json",
     "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-implementation-readiness.json",
+    "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-implementation-publication-gate.json",
+    "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-implementation-publication-reconciliation.json",
     "scripts/activate_m2_radar_delayed_import_probe_receipt_recovery_001.py",
     "scripts/m2_radar_delayed_import_probe_receipt_recovery_001_core.py",
     "scripts/run_m2_radar_delayed_import_probe_receipt_recovery_001.py",
@@ -14797,8 +14799,21 @@ def main() -> None:
             ):
                 fail("M2 delayed-import receipt-recovery final-preflight state differs")
         elif implementation_gate_path.exists():
+            implementation_gate = json.loads(implementation_gate_path.read_text(encoding="utf-8"))
+            implementation_publication_reconciliation = json.loads(
+                (ROOT / f"records/readiness/{receipt_recovery_prefix}-implementation-publication-reconciliation.json").read_text(encoding="utf-8")
+            )
             if (
-                current_radar_delayed_import_probe_receipt_recovery_001_execution_gate_publication_pending(ROOT, {"promoted": 8}) is not True
+                implementation_gate.get("status") != "pass_public_default_branch_ci_receipt_recovery_implementation_ready"
+                or implementation_gate.get("implementation_commit_sha") != "001fa5f7e23bd3a2348353c947b55adb84da5023"
+                or implementation_gate.get("public_ci_run_id") != 35464905883
+                or implementation_gate.get("public_ci_conclusion") != "success"
+                or implementation_gate.get("repository_required_file_count") != 1117
+                or implementation_gate.get("public_test_count") != 610
+                or implementation_gate.get("public_intentional_skip_count") != 13
+                or implementation_publication_reconciliation.get("status") != "pass_public_implementation_gate_gate_state_publication_pending"
+                or implementation_publication_reconciliation.get("implementation_publication_gate_sha256") != sha256(f"records/readiness/{receipt_recovery_prefix}-implementation-publication-gate.json")
+                or current_radar_delayed_import_probe_receipt_recovery_001_execution_gate_publication_pending(ROOT, {"promoted": 8}) is not True
                 or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
                 or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
             ):
@@ -14912,6 +14927,27 @@ def main() -> None:
             ))
         ):
             fail("EVID-0176 receipt-recovery implementation readiness differs or overclaims")
+        if (ROOT / f"records/readiness/{receipt_recovery_prefix}-implementation-publication-gate.json").exists():
+            implementation_gate_evidence = ledger_by_id.get("EVID-0177")
+            if (
+                not isinstance(implementation_gate_evidence, dict)
+                or implementation_gate_evidence.get("status") != "pass_public_ci_gate_state_publication_pending"
+                or implementation_gate_evidence.get("implementation_publication_gate_sha256") != sha256(f"records/readiness/{receipt_recovery_prefix}-implementation-publication-gate.json")
+                or implementation_gate_evidence.get("implementation_publication_reconciliation_sha256") != sha256(f"records/readiness/{receipt_recovery_prefix}-implementation-publication-reconciliation.json")
+                or implementation_gate_evidence.get("assertions", {}).get("implementation_commit") != "001fa5f7e23bd3a2348353c947b55adb84da5023"
+                or implementation_gate_evidence.get("assertions", {}).get("public_ci_run_id") != 35464905883
+                or implementation_gate_evidence.get("assertions", {}).get("public_ci_conclusion") != "success"
+                or implementation_gate_evidence.get("assertions", {}).get("repository_required_file_count") != 1117
+                or implementation_gate_evidence.get("assertions", {}).get("public_test_count") != 610
+                or implementation_gate_evidence.get("assertions", {}).get("public_intentional_skip_count") != 13
+                or implementation_gate_evidence.get("assertions", {}).get("gate_state_publication_pending") is not True
+                or any(implementation_gate_evidence.get("assertions", {}).get(key) is not False for key in (
+                    "final_no_content_preflight_performed", "fresh_probe_process_started", "production_corpus_created",
+                    "project_data_content_read", "external_custody_accessed", "consumed_probe_reused_or_retried",
+                    "radar_processing_executed", "scientific_result_established",
+                ))
+            ):
+                fail("EVID-0177 receipt-recovery implementation publication gate differs or overclaims")
 
     violations = []
     for relative in tracked_files():

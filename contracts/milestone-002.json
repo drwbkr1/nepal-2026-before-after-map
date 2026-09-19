@@ -4114,7 +4114,7 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
         "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json",
@@ -4127,32 +4127,37 @@
         "scripts/validate_m2_radar_delayed_import_probe_receipt_recovery_001_arcgis.py",
         "tests/test_m2_radar_delayed_import_probe_receipt_recovery_001.py",
         "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-arcgis-runtime-validation.json",
-        "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-implementation-readiness.json"
+        "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-implementation-readiness.json",
+        "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-implementation-publication-gate.json",
+        "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-implementation-publication-reconciliation.json"
       ],
       "gates": {
         "portable_synthetic_tests": "success",
         "installed_arcgis_runtime_test": "success",
         "repository_validation": "success",
-        "public_ci": "pending",
+        "public_ci": "success",
         "production_corpus_created": false,
         "fresh_probe_process_started": false,
         "focused_test_count": 10,
         "full_test_count": 610,
         "full_skip_count": 6,
         "required_file_count": 1117,
-        "implementation_readiness_sha256": "afc4282244781b0f2e5b6eb27e17f8c3e29e3c0c5eec4c29e50f59fb6e1adbdc"
+        "implementation_readiness_sha256": "afc4282244781b0f2e5b6eb27e17f8c3e29e3c0c5eec4c29e50f59fb6e1adbdc",
+        "implementation_commit_sha": "001fa5f7e23bd3a2348353c947b55adb84da5023",
+        "public_ci_run_id": 35464905883,
+        "implementation_publication_gate_sha256": "36370981e8371b317b12e05212af829fd4c77f475cb988a6f952c0ef4efa3e4f",
+        "implementation_publication_reconciliation_sha256": "8f085d562745120e3a7a5a700ab179372f311531a85b9378e4a817976a84dbbe"
       },
       "exit_condition_delta": {
-        "expected": [
-          "successful public default-branch CI"
-        ],
+        "expected": [],
         "observed": [
-          "portable and installed ArcGIS-runtime synthetic validation passed without a production corpus or attempt"
+          "exact receipt-recovery implementation passed public default-branch CI"
         ],
-        "decision_value": "pending_public_ci",
-        "rationale": "The fresh disposable probe remains blocked behind public CI, gate-state publication, and the final no-content preflight."
+        "decision_value": "enables_dependency",
+        "rationale": "Only publication of the exact gate state is released now; final preflight remains blocked."
       },
-      "next_dependency": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION"
+      "next_dependency": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION",
+      "disposition": "pass"
     },
     {
       "id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION",
@@ -4162,7 +4167,7 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
         "config/qa/m2-radar-delayed-import-probe-receipt-recovery-001-contract.json"
@@ -4172,7 +4177,7 @@
         "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-outcome-reconciliation.json"
       ],
       "gates": {
-        "public_ci": "pending",
+        "public_ci": "success",
         "gate_state_publication": "pending",
         "final_no_content_preflight": "pending",
         "maximum_live_attempts": 1,
@@ -4243,8 +4248,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION",
-    "next_action": "Implement and validate only the approved receipt-durability correction, portable synthetic tests, and installed ArcGIS-runtime synthetic test, then require successful public default-branch CI. Do not create the production corpus or start the fresh attempt before the public gate and final no-content preflight.",
+    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION",
+    "next_action": "Publish and publicly validate the exact receipt-recovery implementation-gate state. Do not run the final no-content preflight or create the production corpus or fresh probe until that gate-state commit passes public CI.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4291,7 +4296,7 @@
       "The one delayed-import probe attempt is terminal and consumed after full disposable-corpus hashing and a stop at the arcpy_import_started boundary; its caught exception was masked by terminal timestamp failure, postprocess cleanup completed, and no retry, radar recovery, historical-cause claim, or scientific claim is released.",
       "The receipt-recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, corpus, new attempt, project-data access, radar processing, or scientific action is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION",
-    "parallel_next_action": "Implement and validate only the approved receipt-durability correction, portable synthetic tests, and installed ArcGIS-runtime synthetic test, then require successful public default-branch CI. Do not create the production corpus or start the fresh attempt before the public gate and final no-content preflight."
+    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION",
+    "parallel_next_action": "Publish and publicly validate the exact receipt-recovery implementation-gate state. Do not run the final no-content preflight or create the production corpus or fresh probe until that gate-state commit passes public CI."
   }
 }

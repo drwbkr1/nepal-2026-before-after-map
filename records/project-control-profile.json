@@ -648,16 +648,16 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION",
+    "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Implement and validate only the approved receipt-durability correction, portable synthetic tests, and installed ArcGIS-runtime synthetic test, then require successful public default-branch CI. Do not create the production corpus or start the fresh attempt before the public gate and final no-content preflight."
+    "next_action": "Publish and publicly validate the exact receipt-recovery implementation-gate state. Do not run the final no-content preflight or create the production corpus or fresh probe until that gate-state commit passes public CI."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION",
+      "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION",
       "authority_ref": "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
-      "next_action": "Implement and validate only the approved receipt-durability correction, portable synthetic tests, and installed ArcGIS-runtime synthetic test, then require successful public default-branch CI. Do not create the production corpus or start the fresh attempt before the public gate and final no-content preflight."
+      "next_action": "Publish and publicly validate the exact receipt-recovery implementation-gate state. Do not run the final no-content preflight or create the production corpus or fresh probe until that gate-state commit passes public CI."
     }
   ],
   "human_gates": {
