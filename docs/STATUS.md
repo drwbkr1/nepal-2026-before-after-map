@@ -16,6 +16,8 @@ The existing approved synthetic ArcGIS receipt shows that generic raster geoproc
 
 Sanitized operator-transcript comparison confirms the successful synthetic validator, successful final preflight, and failed execute command all used the same recorded PowerShell host family, direct ArcGIS Pro Python executable, and repository working directory. Launch-context observation SHA-256 is `319c0b21312c185674871470039dfc90c007ee4f85fc31b299da3c33db0e7e93`. The failed process uniquely delayed ArcPy import until after the complete 156-file, 10,367,157,634-byte identity scan. That sequence difference is real but is not evidence that the scan or delay caused the license failure.
 
+A targeted read-only search of default local ESRI diagnostic surfaces found no licensing or geoprocessing artifact for the failure window. There were zero Windows Application matches, no files in the local ArcToolbox log directory, no ArcToolbox history entry in the window, and no relevant license/error text among the 33 ESRI index/cache files modified then. Local-log observation SHA-256 is `c58773641181a8d821426e6fd0d77b33539e6700c478ca1f6295ab5c2d7cf052`. The default local logs cannot recover a more specific cause.
+
 ## Purpose
 
 This project is building a reproducible, ArcGIS-ready before/after evidence package for the 26 August 2026 Nepal debris avalanche and flash flood. Its public repository preserves source identity, authority, methods, decisions, and lightweight receipts. Heavy imagery and derived geospatial data remain outside Git.

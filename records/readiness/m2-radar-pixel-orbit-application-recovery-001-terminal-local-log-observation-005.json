@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-LOCAL-LOG-OBSERVATION-005",
+  "observed_at_utc": "2026-09-19T00:38:42Z",
+  "status": "defer_no_arcgis_license_or_geoprocessing_log_artifact_found_for_failure_window",
+  "bindings": {
+    "terminal_reconciliation_ref": "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "3bd2a4cc6bd56d7ec5ae95a316ff3f5b3cc788b94d32436b3cf02586d7a391c0",
+    "owner_review_observation_001_ref": "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json",
+    "owner_review_observation_001_sha256": "adb9975cb69ef9d68d38f483546af407d99b720fa49b73eedd7d0ba0cf1853e6",
+    "launch_context_observation_004_ref": "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-launch-context-observation-004.json",
+    "launch_context_observation_004_sha256": "319c0b21312c185674871470039dfc90c007ee4f85fc31b299da3c33db0e7e93"
+  },
+  "inspection": {
+    "failure_window_utc": {
+      "start": "2026-09-18T23:30:00Z",
+      "end": "2026-09-19T00:10:00Z"
+    },
+    "roots": [
+      "%LOCALAPPDATA%\\ESRI",
+      "%APPDATA%\\ESRI"
+    ],
+    "windows_application_event_matches": 0,
+    "arcgispro_local_arctoolbox_log_file_count": 0,
+    "arcgispro_roaming_arctoolbox_history_files_in_window": 0,
+    "last_arctoolbox_history_before_window": {
+      "name": "H09182026_185251.xml",
+      "modified_at_utc": "2026-09-18T22:53:23.7754117Z",
+      "size_bytes": 35684,
+      "sha256": "a98d3cf3814ee4fd68838472477793739fa975ea3c1f901d1f0f0b01b0e23c17",
+      "relationship": "successful synthetic ArcGIS geoprocessing history"
+    },
+    "esri_files_modified_in_window": 33,
+    "modified_file_categories": [
+      "ArcGIS resource index metadata",
+      "ArcGIS local map cache metadata"
+    ],
+    "targeted_terms": [
+      "product license",
+      "not initialized",
+      "license",
+      "licensing",
+      "checkout",
+      "ImageAnalyst",
+      "Spatial Analyst",
+      "RuntimeError",
+      "error"
+    ],
+    "targeted_relevant_match_count": 0,
+    "discarded_lexical_false_positive_count": 1,
+    "discarded_lexical_false_positive": "SpatialReference in a normal map-cache schema"
+  },
+  "assessment": {
+    "observed": "No ArcGIS geoprocessing history, dedicated ArcToolbox log, Windows Application event, or relevant ESRI local-file text match records the failure.",
+    "inference": "The available default local diagnostic surfaces cannot recover a more specific historical stage, service transition, or cause.",
+    "unresolved": "A diagnostic artifact may never have been emitted, may be stored outside the inspected default roots, or may require logging that was not enabled during the consumed process.",
+    "decision": "defer_owner_choice_separate_scope_required"
+  },
+  "assertions": {
+    "root_cause_resolved": false,
+    "historical_exact_failing_statement_identified": false,
+    "relevant_local_log_artifact_found": false,
+    "new_runtime_probe_executed": false,
+    "recovery_attempt_reused_or_retried": false,
+    "project_data_content_read": false,
+    "external_custody_mutated": false,
+    "recovery_review_packet_prepared": false,
+    "new_authority_created": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "This was a targeted read-only inspection of default user-local ESRI and Windows Application log surfaces, not a claim that every possible system diagnostic source was searched.",
+    "File modification and text search do not establish internal named-user license-service behavior."
+  ],
+  "next_action": "Owner decides whether to authorize preparation of a minimal stage-marked delayed-import probe review, authorize preparation of a new recovery design with durable pre-ArcPy diagnostics, or continue deferral."
+}
