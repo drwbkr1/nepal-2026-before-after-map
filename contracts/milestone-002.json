@@ -3756,7 +3756,8 @@
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-final-preflight.json",
         "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json",
         "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json",
-        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json"
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json"
       ],
       "gates": {
         "public_ci": "success",
@@ -3779,6 +3780,9 @@
         "terminal_commit_sha": "e83e6b60a6365c8ea305d37e468f986753abb5b7",
         "terminal_public_ci_run_id": 35407396191,
         "terminal_publication_gate_sha256": "2d757b464ef71a8f8305145698c2205d4034dc492b51b82fc9261741f3133ade",
+        "terminal_owner_review_observation": "defer_current_license_initialized_prior_failure_not_reproduced_at_license_api_boundary",
+        "terminal_owner_review_observation_sha256": "adb9975cb69ef9d68d38f483546af407d99b720fa49b73eedd7d0ba0cf1853e6",
+        "terminal_failure_root_cause_resolved": false,
         "postattempt_identities_match": true,
         "project_data_content_read_for_identity_verification": true,
         "source_processing_started": false,

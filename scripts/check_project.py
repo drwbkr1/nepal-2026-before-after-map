@@ -217,6 +217,7 @@ REQUIRED = [
     "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json",
     "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json",
     "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -12546,6 +12547,7 @@ def main() -> None:
     radar_recovery_terminal = json.loads((ROOT / "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json").read_text(encoding="utf-8"))
     radar_recovery_outcome = json.loads((ROOT / "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json").read_text(encoding="utf-8"))
     radar_recovery_terminal_publication_gate = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json").read_text(encoding="utf-8"))
+    radar_recovery_terminal_owner_review_observation = json.loads((ROOT / "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json").read_text(encoding="utf-8"))
     if (
         radar_lock_failure.get("status") != "rejected_before_decision_reveal_invalid_hash_bound_filename"
         or radar_lock_failure.get("candidate_sha256") != "49807e5113a9dc4beec16ae23631f4039e066f1713b338055adc24ee71240369"
@@ -13257,6 +13259,33 @@ def main() -> None:
         ))
     ):
         fail("radar inventory recovery terminal publication gate differs or overclaims")
+    if (
+        sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json") != "adb9975cb69ef9d68d38f483546af407d99b720fa49b73eedd7d0ba0cf1853e6"
+        or radar_recovery_terminal_owner_review_observation.get("status") != "defer_current_license_initialized_prior_failure_not_reproduced_at_license_api_boundary"
+        or radar_recovery_terminal_owner_review_observation.get("bindings", {}).get("terminal_publication_gate_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json")
+        or radar_recovery_terminal_owner_review_observation.get("bindings", {}).get("terminal_reconciliation_sha256") != sha256("records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json")
+        or radar_recovery_terminal_owner_review_observation.get("bindings", {}).get("outcome_reconciliation_sha256") != sha256("records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json")
+        or radar_recovery_terminal_owner_review_observation.get("runtime_observations", {}).get("arcgis_product") != "ArcGISPro"
+        or radar_recovery_terminal_owner_review_observation.get("runtime_observations", {}).get("arcgis_version") != "3.7.1"
+        or radar_recovery_terminal_owner_review_observation.get("runtime_observations", {}).get("installed_license_level") != "Advanced"
+        or radar_recovery_terminal_owner_review_observation.get("runtime_observations", {}).get("license_type") != "Named User"
+        or len(radar_recovery_terminal_owner_review_observation.get("runtime_observations", {}).get("launch_paths", [])) != 2
+        or any(item.get("product_info") != "ArcInfo" for item in radar_recovery_terminal_owner_review_observation.get("runtime_observations", {}).get("launch_paths", []))
+        or any(item.get("image_analyst_checkout") != "CheckedOut" for item in radar_recovery_terminal_owner_review_observation.get("runtime_observations", {}).get("launch_paths", []))
+        or any(item.get("image_analyst_checkin") != "CheckedIn" for item in radar_recovery_terminal_owner_review_observation.get("runtime_observations", {}).get("launch_paths", []))
+        or any(item.get("spatial_checkout") != "CheckedOut" for item in radar_recovery_terminal_owner_review_observation.get("runtime_observations", {}).get("launch_paths", []))
+        or any(item.get("spatial_checkin") != "CheckedIn" for item in radar_recovery_terminal_owner_review_observation.get("runtime_observations", {}).get("launch_paths", []))
+        or radar_recovery_terminal_owner_review_observation.get("runtime_observations", {}).get("application_event_matches_in_failure_window") != 0
+        or radar_recovery_terminal_owner_review_observation.get("assessment", {}).get("decision") != "defer_owner_choice_separate_scope_required"
+        or radar_recovery_terminal_owner_review_observation.get("assertions", {}).get("internal_named_user_license_communication_ruled_out") is not False
+        or any(radar_recovery_terminal_owner_review_observation.get("assertions", {}).get(key) is not False for key in (
+            "recovery_attempt_reused_or_retried", "geoprocessing_tool_invoked", "project_data_content_read",
+            "project_output_created", "temporary_probe_scripts_retained", "credential_value_read",
+            "explicit_network_request_initiated_by_probe", "internal_named_user_license_communication_observed",
+            "recovery_review_packet_prepared", "new_authority_created", "scientific_result_established",
+        ))
+    ):
+        fail("radar inventory recovery terminal owner-review observation differs or overclaims")
     radar_units = {unit.get("id"): unit for unit in active_m2.get("units", [])}
     radar_review_unit = radar_units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-REVIEW", {})
     radar_implementation_unit = radar_units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-001-IMPLEMENTATION", {})
@@ -13335,6 +13364,9 @@ def main() -> None:
         or radar_recovery_execution_unit.get("gates", {}).get("terminal_commit_sha") != "e83e6b60a6365c8ea305d37e468f986753abb5b7"
         or radar_recovery_execution_unit.get("gates", {}).get("terminal_public_ci_run_id") != 35407396191
         or radar_recovery_execution_unit.get("gates", {}).get("terminal_publication_gate_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json")
+        or radar_recovery_execution_unit.get("gates", {}).get("terminal_owner_review_observation") != "defer_current_license_initialized_prior_failure_not_reproduced_at_license_api_boundary"
+        or radar_recovery_execution_unit.get("gates", {}).get("terminal_owner_review_observation_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json")
+        or radar_recovery_execution_unit.get("gates", {}).get("terminal_failure_root_cause_resolved") is not False
         or radar_recovery_execution_unit.get("gates", {}).get("postattempt_identities_match") is not True
         or radar_recovery_execution_unit.get("gates", {}).get("project_data_content_read_for_identity_verification") is not True
         or radar_recovery_execution_unit.get("gates", {}).get("source_processing_started") is not False
@@ -13652,6 +13684,23 @@ def main() -> None:
         ))
     ):
         fail("EVID-0160 radar recovery terminal publication evidence differs or overclaims")
+    radar_recovery_terminal_owner_review_evidence = ledger_by_id.get("EVID-0161")
+    if (
+        not isinstance(radar_recovery_terminal_owner_review_evidence, dict)
+        or radar_recovery_terminal_owner_review_evidence.get("status") != "defer_current_license_initialized_prior_failure_not_reproduced_at_license_api_boundary"
+        or radar_recovery_terminal_owner_review_evidence.get("observation_sha256") != sha256("records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json")
+        or radar_recovery_terminal_owner_review_evidence.get("assertions", {}).get("launch_path_count") != 2
+        or radar_recovery_terminal_owner_review_evidence.get("assertions", {}).get("both_product_info_arcinfo") is not True
+        or radar_recovery_terminal_owner_review_evidence.get("assertions", {}).get("both_required_extensions_checkout_and_checkin_passed") is not True
+        or radar_recovery_terminal_owner_review_evidence.get("assertions", {}).get("application_event_matches_in_failure_window") != 0
+        or radar_recovery_terminal_owner_review_evidence.get("assertions", {}).get("current_checkpoint") != "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-REVIEW"
+        or any(radar_recovery_terminal_owner_review_evidence.get("assertions", {}).get(key) is not False for key in (
+            "terminal_error_reproduced", "root_cause_resolved", "recovery_attempt_reused_or_retried",
+            "geoprocessing_tool_invoked", "project_data_content_read", "recovery_review_packet_prepared",
+            "new_authority_created", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0161 radar recovery terminal owner-review evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():

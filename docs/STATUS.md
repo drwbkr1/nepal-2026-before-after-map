@@ -8,6 +8,8 @@
 - **Long-term goal:** Active
 - **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-REVIEW`; radar base real-001 and recovery real-001 are both terminal, recovery-001 is consumed without retry after an ArcGIS product-license initialization failure, and further radar execution requires a separately scoped owner decision
 
+Read-only terminal review now shows that both direct ArcGIS Python and `propy` initialize the installed Advanced named-user license and can check out and return Image Analyst and Spatial. This did not reproduce the consumed attempt's product-license error at the licensing API boundary. Its exact failing ArcPy call remains unresolved because no traceback or stage marker was retained. Observation SHA-256 is `adb9975cb69ef9d68d38f483546af407d99b720fa49b73eedd7d0ba0cf1853e6`. No geoprocessing tool, project-data read, retry, recovery preparation, or scientific action occurred.
+
 ## Purpose
 
 This project is building a reproducible, ArcGIS-ready before/after evidence package for the 26 August 2026 Nepal debris avalanche and flash flood. Its public repository preserves source identity, authority, methods, decisions, and lightweight receipts. Heavy imagery and derived geospatial data remain outside Git.
