@@ -4362,14 +4362,18 @@
       ],
       "outputs": [
         "records/readiness/m2-radar-pixel-orbit-application-recovery-002-final-preflight.json",
-        "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json"
+        "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-gate-state-publication.json"
       ],
       "gates": {
         "public_ci": "success",
-        "gate_state_publication": "pending",
-        "final_no_content_preflight": "pending",
+        "gate_state_publication": "success",
+        "final_no_content_preflight": "released_not_started",
         "maximum_live_attempts": 1,
-        "live_attempts_started": 0
+        "live_attempts_started": 0,
+        "gate_state_commit_sha": "52f2e4c8bb84c7c67fd478ee502552b56281cc36",
+        "gate_state_public_ci_run_id": 35470986919,
+        "gate_state_publication_sha256": "057d3e09b006e3ad3ddd54b48cb599dba598dd277a26303a0b3335c242b76d3b"
       },
       "exit_condition_delta": {
         "expected": [
@@ -4437,7 +4441,7 @@
   },
   "handoff": {
     "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
-    "next_action": "Publish and publicly validate the exact recovery-002 execution-gate state. Do not run the final no-content preflight, read project data or external custody, invoke production ArcPy, or start the fresh attempt until that gate-state commit passes public CI.",
+    "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the single-process fresh recovery-002 attempt read the six exact sources, four exact orbit files, four exact DEM derivatives, and evaluate the two frozen routes. The attempt must never be retried.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4486,6 +4490,6 @@
       "The radar recovery-002 packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, new attempt, radar processing, baseline, change analysis, attribution, or scientific action is released."
     ],
     "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
-    "parallel_next_action": "Publish and publicly validate the exact recovery-002 execution-gate state. Do not run the final no-content preflight, read project data or external custody, invoke production ArcPy, or start the fresh attempt until that gate-state commit passes public CI."
+    "parallel_next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the single-process fresh recovery-002 attempt read the six exact sources, four exact orbit files, four exact DEM derivatives, and evaluate the two frozen routes. The attempt must never be retried."
   }
 }

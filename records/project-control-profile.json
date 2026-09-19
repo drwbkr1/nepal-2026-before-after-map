@@ -665,13 +665,13 @@
     "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish and publicly validate the exact recovery-002 execution-gate state. Do not run the final no-content preflight, read project data or external custody, invoke production ArcPy, or start the fresh attempt until that gate-state commit passes public CI."
+    "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the single-process fresh recovery-002 attempt read the six exact sources, four exact orbit files, four exact DEM derivatives, and evaluate the two frozen routes. The attempt must never be retried."
   },
   "parallel_checkpoints": [
     {
       "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
       "authority_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
-      "next_action": "Publish and publicly validate the exact recovery-002 execution-gate state. Do not run the final no-content preflight, read project data or external custody, invoke production ArcPy, or start the fresh attempt until that gate-state commit passes public CI."
+      "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the single-process fresh recovery-002 attempt read the six exact sources, four exact orbit files, four exact DEM derivatives, and evaluate the two frozen routes. The attempt must never be retried."
     }
   ],
   "human_gates": {

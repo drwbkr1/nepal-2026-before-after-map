@@ -356,6 +356,7 @@ REQUIRED = [
     "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-readiness.json",
     "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-publication-gate.json",
     "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-publication-reconciliation.json",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-002-gate-state-publication.json",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -15334,7 +15335,9 @@ def main() -> None:
         )
         radar_recovery_002_implementation_gate_ref = f"records/readiness/{radar_recovery_002_prefix}-implementation-publication-gate.json"
         radar_recovery_002_implementation_reconciliation_ref = f"records/readiness/{radar_recovery_002_prefix}-implementation-publication-reconciliation.json"
+        radar_recovery_002_gate_state_ref = f"records/readiness/{radar_recovery_002_prefix}-gate-state-publication.json"
         radar_recovery_002_implementation_gate_exists = (ROOT / radar_recovery_002_implementation_gate_ref).exists()
+        radar_recovery_002_gate_state_exists = (ROOT / radar_recovery_002_gate_state_ref).exists()
         if (
             not isinstance(radar_recovery_002_owner_reconciliation, dict)
             or not isinstance(radar_recovery_002_owner_approval, dict)
@@ -15357,7 +15360,36 @@ def main() -> None:
             or radar_recovery_002_execution.get("gates", {}).get("live_attempts_started") != 0
         ):
             fail("M2 radar recovery-002 approved authority differs or overclaims")
-        if radar_recovery_002_implementation_gate_exists:
+        if radar_recovery_002_gate_state_exists:
+            radar_recovery_002_implementation_gate = json.loads(
+                (ROOT / radar_recovery_002_implementation_gate_ref).read_text(encoding="utf-8")
+            )
+            radar_recovery_002_implementation_reconciliation = json.loads(
+                (ROOT / radar_recovery_002_implementation_reconciliation_ref).read_text(encoding="utf-8")
+            )
+            radar_recovery_002_gate_state = json.loads(
+                (ROOT / radar_recovery_002_gate_state_ref).read_text(encoding="utf-8")
+            )
+            if (
+                not radar_recovery_002_implementation_gate_exists
+                or radar_recovery_002_gate_state.get("status") != "pass_public_default_branch_ci_one_final_preflight_released"
+                or radar_recovery_002_gate_state.get("gate_state_commit_sha") != "52f2e4c8bb84c7c67fd478ee502552b56281cc36"
+                or radar_recovery_002_gate_state.get("public_ci_run_id") != 35470986919
+                or radar_recovery_002_gate_state.get("public_ci_conclusion") != "success"
+                or radar_recovery_002_gate_state.get("repository_required_file_count") != 1163
+                or radar_recovery_002_gate_state.get("public_test_count") != 628
+                or radar_recovery_002_gate_state.get("public_intentional_skip_count") != 13
+                or radar_recovery_002_gate_state.get("bindings", {}).get("implementation_publication_gate_sha256") != sha256(radar_recovery_002_implementation_gate_ref)
+                or radar_recovery_002_gate_state.get("bindings", {}).get("implementation_publication_reconciliation_sha256") != sha256(radar_recovery_002_implementation_reconciliation_ref)
+                or radar_recovery_002_execution.get("status") != "in_progress"
+                or radar_recovery_002_execution.get("gates", {}).get("gate_state_publication") != "success"
+                or radar_recovery_002_execution.get("gates", {}).get("final_no_content_preflight") != "released_not_started"
+                or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION"
+                or goal.get("current_checkpoint") != "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION"
+                or current_radar_pixel_orbit_application_recovery_002_final_preflight_pending(ROOT, {"promoted": 8}) is not True
+            ):
+                fail("M2 radar recovery-002 gate-state publication differs or overclaims")
+        elif radar_recovery_002_implementation_gate_exists:
             radar_recovery_002_implementation_gate = json.loads(
                 (ROOT / radar_recovery_002_implementation_gate_ref).read_text(encoding="utf-8")
             )
