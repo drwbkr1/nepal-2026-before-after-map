@@ -35,7 +35,7 @@ OUTCOME_REF = "records/processing/m2-radar-pixel-orbit-application-recovery-001-
 PROPOSAL_SHA256 = "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9"
 BUNDLE_SHA256 = "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5"
 READINESS_SHA256 = "37ce53da206e71ed20db5a4b1b0fef50d3acd953ea9d865de2253a20339ad170"
-CHECKPOINT = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW"
+CHECKPOINT = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION"
 
 
 def load(ref: str) -> dict:
@@ -192,7 +192,7 @@ class M2RadarDelayedImportProbe001ReviewTests(unittest.TestCase):
         self.assertEqual(milestone["handoff"]["current_checkpoint"], CHECKPOINT)
         self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], CHECKPOINT)
         self.assertEqual(goal["current_checkpoint"], CHECKPOINT)
-        self.assertEqual(goal["proposed_amendments"], ["contracts/milestone-002-radar-pixel-orbit-application-recovery-002-proposal.json"])
+        self.assertEqual(goal["proposed_amendments"], [])
         units = {item["id"]: item for item in milestone["units"]}
         review = units["M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW"]
         self.assertEqual(review["status"], "complete")

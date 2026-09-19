@@ -6,7 +6,15 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW-PUBLICATION`; exact zero-decision packet publication is authorized and public CI is pending; proposal approval, implementation, ArcPy, project-data access, a new attempt, radar processing, and scientific action remain blocked
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION`; exact implementation is locally ready and public CI is pending; final preflight, project-data and external-custody access, the fresh attempt, baseline admission, change analysis, attribution, and scientific publication remain blocked
+
+## Radar pixel and orbit application recovery-002 implementation ready — 2026-09-19
+
+The owner approved exact review-bundle SHA-256 `e699dfc3c4f7dd5ca697581cf4a299c66128fda7691473d65749681e3dfc211c` and proposal SHA-256 `86366bca8681bbe90dfdd19d6c5b676e490e6dd87c8e04c2900e9fb1df4b29ca`. Locked response SHA-256 is `c1c5c613354558815d57a02eb185fc837d94b626d44f958ec2cfb8ca900d14cb`; approval SHA-256 is `d16f3306d582257b32c25911e9f7f50efad935e9599a90e82247d6d813b29d40`; activation SHA-256 is `3d3118db0a7c87781ac3f3c690bb086397abb625e908b1b376fe5d8435fd2e57`.
+
+The recovery wrapper reserves terminal and cleanup identities plus a fallback journal before content access, performs the unchanged strict identity scan before delayed ArcPy import, preserves the exact six-source and two-route order, stops on the first failure, retains the first sanitized error before ordinary terminal assembly, and runs cleanup independently. Nine focused tests and all 628 repository tests pass with six intentional local skips. One installed ArcGIS Pro 3.7.1 disposable validation passed real ArcPy import, product and extension checks, tiny raster creation and mosaic, exact synthetic source and route orchestration, reverse extension check-in, and the forced failure plus terminal-persistence fallback path. ArcGIS-runtime receipt SHA-256 is `5a79867b083c6f26642c40b91710441997b52e480b5ac60870088fcb22b0ccdc`; implementation-readiness SHA-256 is `c8a8138437040188c2248aa701cb191c84a3fe1704d17d104ce3c7f3c4b4446a`.
+
+No production attempt exists. No project imagery, orbit, DEM, or external-custody content was read; no production ArcPy process, radar processing, baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication occurred. Public default-branch CI is required before execution gate-state publication, the single final no-content preflight, or the fresh attempt.
 
 ## Radar pixel and orbit application recovery-002 review publication — 2026-09-19
 

@@ -366,6 +366,19 @@
         "maximum_live_attempts": 1,
         "automatic_retry_authorized": false,
         "project_data_content_read_authorized": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
+        "approval_sha256": "d16f3306d582257b32c25911e9f7f50efad935e9599a90e82247d6d813b29d40",
+        "proposal_ref": "contracts/milestone-002-radar-pixel-orbit-application-recovery-002-proposal.json",
+        "proposal_sha256": "86366bca8681bbe90dfdd19d6c5b676e490e6dd87c8e04c2900e9fb1df4b29ca",
+        "review_bundle_sha256": "e699dfc3c4f7dd5ca697581cf4a299c66128fda7691473d65749681e3dfc211c",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-review-reconciliation.json",
+        "review_reconciliation_sha256": "2193aa08750861bc71abec248f1cad7e6b9749b50e2e1debb4eb591c9665d97e",
+        "attempt_id": "radar-pixel-orbit-application-recovery-002-real-001",
+        "maximum_live_attempts": 1,
+        "automatic_retry_authorized": false,
+        "project_data_content_read_authorized_only_after_public_gate_and_final_preflight": true
       }
     ]
   },
@@ -447,7 +460,8 @@
       "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
       "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
       "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
-      "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json"
+      "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
+      "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json"
     ]
   },
   "entry_conditions": [
@@ -4217,7 +4231,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-review-preparation-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-review-publication-approval.json",
@@ -4236,18 +4250,21 @@
         "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-terminal-publication-gate.json"
       ],
       "outputs": [
-        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-review-publication-gate.json",
-        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-review-publication-reconciliation.json"
+        "reviews/m2-radar-pixel-orbit-application-recovery-002/response-c1c5c613354558815d57a02eb185fc837d94b626d44f958ec2cfb8ca900d14cb.json",
+        "reviews/m2-radar-pixel-orbit-application-recovery-002/review-contract-lock-001.json",
+        "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-review-reconciliation.json",
+        "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-approval-activation.json"
       ],
       "gates": {
         "public_ci": "success",
-        "human_decision_count": 0,
-        "attestation": false,
+        "human_decision_count": 1,
+        "attestation": true,
         "review_response_open": true,
-        "owner_proposal_approval_authorized": false,
-        "implementation_authorized": false,
+        "owner_proposal_approval_authorized": true,
+        "implementation_authorized": true,
         "arcpy_invocation_authorized": false,
-        "new_attempt_authorized": false,
+        "new_attempt_authorized": true,
         "project_data_or_external_custody_access_authorized": false,
         "radar_processing_authorized": false,
         "baseline_or_change_authorized": false,
@@ -4256,9 +4273,11 @@
         "publication_gate_sha256": "b1eb5b1ce6f8915477993f61230ca52ad47251839c5dd47f1e61fc4127d66bc6",
         "publication_reconciliation_sha256": "f8e093d9c9eb7db178c7cd9141a46bb0da68f612b80f3c411481ce7c5cf817cf",
         "publication_commit": "2de376ecd1ed4c226cd5fa2d2e39b763aa5c9438",
-        "public_ci_run_id": 35468801414
+        "public_ci_run_id": 35468801414,
+        "approval_sha256": "d16f3306d582257b32c25911e9f7f50efad935e9599a90e82247d6d813b29d40",
+        "review_reconciliation_sha256": "2193aa08750861bc71abec248f1cad7e6b9749b50e2e1debb4eb591c9665d97e"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json",
         "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json",
@@ -4266,17 +4285,96 @@
         "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-outcome-reconciliation.json"
       ],
       "exit_condition_delta": {
-        "expected": [
-          "successful public default-branch CI",
-          "one later exact attested owner proposal decision"
-        ],
+        "expected": [],
         "observed": [
-          "exact zero-decision packet publication authorized; public CI pending"
+          "one exact attested owner approval"
         ],
-        "decision_value": "unknown",
-        "rationale": "Publication authority opens no substantive proposal decision and releases no implementation or execution."
+        "decision_value": "enables_dependency",
+        "rationale": "Implementation and public CI are released now; project-data access and the fresh attempt remain conditional."
       },
       "next_dependency": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION"
+    },
+    {
+      "id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION",
+      "purpose": "Implement and publicly validate the exact stage-evidenced recovery wrapper without project-data access or a fresh attempt.",
+      "depends_on": [
+        "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW"
+      ],
+      "action_class": "routine_qa",
+      "human_gate": false,
+      "status": "in_progress",
+      "inputs": [
+        "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
+        "contracts/milestone-002-radar-pixel-orbit-application-recovery-002-proposal.json",
+        "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-review-reconciliation.json"
+      ],
+      "outputs": [
+        "config/qa/m2-radar-pixel-orbit-application-recovery-002-contract.json",
+        "scripts/m2_radar_pixel_orbit_application_recovery_002_core.py",
+        "scripts/run_m2_radar_pixel_orbit_application_recovery_002.py",
+        "scripts/validate_m2_radar_pixel_orbit_application_recovery_002_arcgis.py",
+        "tests/test_m2_radar_pixel_orbit_application_recovery_002.py",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-arcgis-runtime-validation.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-readiness.json"
+      ],
+      "gates": {
+        "portable_synthetic_tests": "success",
+        "installed_arcgis_runtime_test": "success",
+        "repository_validation": "success",
+        "public_ci": "pending",
+        "project_data_content_read": false,
+        "fresh_attempt_process_started": false,
+        "focused_test_count": 9,
+        "full_test_count": 628,
+        "full_skip_count": 6,
+        "required_file_count": 1158,
+        "implementation_readiness_sha256": "c8a8138437040188c2248aa701cb191c84a3fe1704d17d104ce3c7f3c4b4446a"
+      },
+      "exit_condition_delta": {
+        "expected": [
+          "successful public default-branch CI"
+        ],
+        "observed": [
+          "portable and installed ArcGIS-runtime synthetic validation passed without project-data access or a production attempt"
+        ],
+        "decision_value": "pending_public_ci",
+        "rationale": "The final no-content preflight and fresh production attempt remain blocked behind two exact public CI gates."
+      },
+      "next_dependency": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION"
+    },
+    {
+      "id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION",
+      "purpose": "After public CI and final no-content preflight, run at most one exact fresh recovery attempt and reconcile it.",
+      "depends_on": [
+        "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION"
+      ],
+      "action_class": "data_processing",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
+        "config/qa/m2-radar-pixel-orbit-application-recovery-002-contract.json"
+      ],
+      "outputs": [
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-002-final-preflight.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json"
+      ],
+      "gates": {
+        "public_ci": "pending",
+        "gate_state_publication": "pending",
+        "final_no_content_preflight": "pending",
+        "maximum_live_attempts": 1,
+        "live_attempts_started": 0
+      },
+      "exit_condition_delta": {
+        "expected": [
+          "terminal evidence for one consumed fresh attempt"
+        ],
+        "observed": [],
+        "decision_value": "pending",
+        "rationale": "Pass or block consumes the one attempt and releases no baseline or change analysis."
+      },
+      "next_dependency": null
     }
   ],
   "path_efficiency": {
@@ -4333,8 +4431,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW",
-    "next_action": "Review the exact public M2 radar pixel and orbit application recovery-002 bundle and proposal; approve, revise, or defer the bounded stage-evidence and one-fresh-attempt proposal. No implementation, ArcPy invocation, project-data or external-custody access, new attempt, radar processing, baseline or change analysis, attribution, or scientific publication is authorized before an exact attested decision.",
+    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION",
+    "next_action": "Implement and validate only the approved stage-evidenced recovery-002 wrapper, portable synthetic tests, and installed ArcGIS-runtime synthetic test, then require successful public default-branch CI. Do not run the final no-content preflight, access project data or external custody, or start the fresh attempt before that public gate.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4382,7 +4480,7 @@
       "The receipt-recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, corpus, new attempt, project-data access, radar processing, or scientific action is released.",
       "The radar recovery-002 packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, new attempt, radar processing, baseline, change analysis, attribution, or scientific action is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW",
-    "parallel_next_action": "Review the exact public M2 radar pixel and orbit application recovery-002 bundle and proposal; approve, revise, or defer the bounded stage-evidence and one-fresh-attempt proposal. No implementation, ArcPy invocation, project-data or external-custody access, new attempt, radar processing, baseline or change analysis, attribution, or scientific publication is authorized before an exact attested decision."
+    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION",
+    "parallel_next_action": "Implement and validate only the approved stage-evidenced recovery-002 wrapper, portable synthetic tests, and installed ArcGIS-runtime synthetic test, then require successful public default-branch CI. Do not run the final no-content preflight, access project data or external custody, or start the fresh attempt before that public gate."
   }
 }

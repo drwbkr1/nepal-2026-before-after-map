@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-APPROVAL-ACTIVATION",
+  "activated_at_utc": "2026-09-19T21:06:07Z",
+  "status": "pass_exact_approval_activated_implementation_publication_only",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
+    "approval_sha256": "d16f3306d582257b32c25911e9f7f50efad935e9599a90e82247d6d813b29d40",
+    "reconciliation_sha256": "2193aa08750861bc71abec248f1cad7e6b9749b50e2e1debb4eb591c9665d97e",
+    "proposal_sha256": "86366bca8681bbe90dfdd19d6c5b676e490e6dd87c8e04c2900e9fb1df4b29ca",
+    "review_bundle_sha256": "e699dfc3c4f7dd5ca697581cf4a299c66128fda7691473d65749681e3dfc211c",
+    "review_publication_gate_sha256": "b1eb5b1ce6f8915477993f61230ca52ad47251839c5dd47f1e61fc4127d66bc6"
+  },
+  "released_now": {
+    "bounded_recovery_implementation": true,
+    "portable_synthetic_tests": true,
+    "installed_arcgis_runtime_synthetic_test": true,
+    "public_ci": true,
+    "final_no_content_preflight": false,
+    "fresh_attempt_execution": false,
+    "project_data_or_external_custody_access": false,
+    "radar_processing": false,
+    "baseline_or_change_analysis": false,
+    "attribution": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "fresh_attempt_process_started": false,
+    "arcpy_invoked": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "consumed_attempt_reused_or_retried": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "scientific_result_established": false
+  }
+}

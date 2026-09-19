@@ -31,7 +31,7 @@ DIAGNOSTIC_REF = "records/processing/radar-pixel-orbit-application-001/m1-src-00
 PROPOSAL_SHA256 = "cacda42d4eba2d60f3725bf2933fa00ea5ede6f33e6fed4133ca4d3e1476cd04"
 BUNDLE_SHA256 = "69bae7d7e92f008a4a9a88f0f7408a862c48fe652ea0e98ea022280893a09bc9"
 READINESS_SHA256 = "d091c39f2957743f35d3bdc03e69e3bd4cb5715b061a2301cec8bfe96a4932ec"
-CHECKPOINT = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW"
+CHECKPOINT = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION"
 APPROVAL_REF = "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"
 
 
@@ -136,7 +136,7 @@ class M2RadarPixelOrbitApplicationRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(milestone["handoff"]["current_checkpoint"], CHECKPOINT)
         self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], CHECKPOINT)
         self.assertEqual(goal["current_checkpoint"], CHECKPOINT)
-        self.assertEqual(goal["proposed_amendments"], ["contracts/milestone-002-radar-pixel-orbit-application-recovery-002-proposal.json"])
+        self.assertEqual(goal["proposed_amendments"], [])
         self.assertIn(APPROVAL_REF, goal["active_amendments"])
         units = {item["id"]: item for item in milestone["units"]}
         review = units["M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW"]

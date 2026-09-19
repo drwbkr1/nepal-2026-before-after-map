@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002",
+  "status": "approved_implementation_publication_pending",
+  "authority": {
+    "approval_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
+    "approval_sha256": "d16f3306d582257b32c25911e9f7f50efad935e9599a90e82247d6d813b29d40",
+    "activation_ref": "records/readiness/m2-radar-pixel-orbit-application-recovery-002-approval-activation.json",
+    "proposal_ref": "contracts/milestone-002-radar-pixel-orbit-application-recovery-002-proposal.json",
+    "proposal_sha256": "86366bca8681bbe90dfdd19d6c5b676e490e6dd87c8e04c2900e9fb1df4b29ca",
+    "review_bundle_ref": "reviews/m2-radar-pixel-orbit-application-recovery-002/review-bundle.json",
+    "review_bundle_sha256": "e699dfc3c4f7dd5ca697581cf4a299c66128fda7691473d65749681e3dfc211c",
+    "review_reconciliation_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-review-reconciliation.json",
+    "review_reconciliation_sha256": "2193aa08750861bc71abec248f1cad7e6b9749b50e2e1debb4eb591c9665d97e"
+  },
+  "base_contract_ref": "config/qa/m2-radar-pixel-orbit-application-001-contract.json",
+  "base_contract_sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+  "recovery_001_contract_ref": "config/qa/m2-radar-pixel-orbit-application-recovery-001-contract.json",
+  "recovery_001_contract_sha256": "f2fb1b796aedc2c760d3680cccefcc4558fc83beb6107663ca4e0a6d9f7d7d81",
+  "fixed_source_order": [
+    "M1-SRC-001",
+    "M1-SRC-002",
+    "M1-SRC-003",
+    "M1-SRC-004",
+    "M1-SRC-005",
+    "M1-SRC-006"
+  ],
+  "fixed_route_order": [
+    "PAIR-S1-ASC-R085-IW",
+    "PAIR-S1-DESC-R121-IW"
+  ],
+  "source_to_orbit": {
+    "M1-SRC-001": "M2-ORB-001",
+    "M1-SRC-002": "M2-ORB-001",
+    "M1-SRC-003": "M2-ORB-002",
+    "M1-SRC-004": "M2-ORB-003",
+    "M1-SRC-005": "M2-ORB-003",
+    "M1-SRC-006": "M2-ORB-004"
+  },
+  "inventory_comparison": {
+    "project_exact_fields": [
+      "relative_path",
+      "size_bytes",
+      "sha256"
+    ],
+    "sort_key": "relative_path_casefold",
+    "ignore_unprojected_fields": [
+      "zip_crc32"
+    ],
+    "reject_added_path": true,
+    "reject_missing_path": true,
+    "reject_size_mismatch": true,
+    "reject_sha256_mismatch": true,
+    "reject_duplicate_normalized_path": true,
+    "reject_unsafe_path": true,
+    "reject_reparse_point": true
+  },
+  "attempt": {
+    "attempt_id": "radar-pixel-orbit-application-recovery-002-real-001",
+    "consumed_attempt_ids": [
+      "radar-pixel-orbit-application-recovery-001-real-001",
+      "radar-delayed-import-probe-receipt-recovery-001-real-001"
+    ],
+    "maximum_final_preflights": 1,
+    "maximum_real_attempts": 1,
+    "maximum_orbit_application_attempts_per_source": 1,
+    "maximum_qa_processing_attempts_per_source": 1,
+    "maximum_route_qa_attempts_per_pair": 1,
+    "process_count": 1,
+    "automatic_retry_authorized": false,
+    "stop_on_first_failure": true,
+    "external_attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\radar-pixel-orbit-application-recovery-002\\radar-pixel-orbit-application-recovery-002-real-001",
+    "minimum_free_space_bytes": 64424509440,
+    "collision_policy": "fail"
+  },
+  "stage_order": [
+    "attempt_reserved",
+    "terminal_and_cleanup_receipts_reserved",
+    "fallback_journal_initialized",
+    "identity_scan_started",
+    "identity_scan_completed",
+    "arcpy_import_started",
+    "arcpy_import_completed",
+    "product_info_started",
+    "product_info_completed",
+    "image_analyst_checkout_started",
+    "image_analyst_checkout_completed",
+    "spatial_checkout_started",
+    "spatial_checkout_completed",
+    "dem_mosaic_started",
+    "dem_mosaic_completed",
+    "analysis_support_started",
+    "analysis_support_completed",
+    "source_processing_fixed_order",
+    "route_evaluation_fixed_order",
+    "postattempt_identity_scan_started",
+    "postattempt_identity_scan_completed",
+    "terminal_receipt_persisted",
+    "cleanup_started",
+    "cleanup_completed_or_warning"
+  ],
+  "receipt_durability": {
+    "terminal_identity_reserved_before_project_data_read": true,
+    "cleanup_identity_reserved_before_project_data_read": true,
+    "stage_journal_initialized_before_project_data_read": true,
+    "fallback_journal_initialized_before_project_data_read": true,
+    "first_sanitized_exception_recorded_before_normal_terminal_assembly": true,
+    "persistence_errors_append_without_replacing_first_exception": true,
+    "cleanup_outer_finally_independent_of_terminal_serialization": true,
+    "fallback_is_success_evidence": false
+  },
+  "execution_boundary": {
+    "external_data_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "source_materializations": "read_only_inventory_before_after",
+    "orbit_custody": "read_only_hash_before_after",
+    "dem_custody": "read_only_hash_before_after",
+    "derived_outputs": "append_only_exact_attempt_root",
+    "network_requests": "prohibited",
+    "authentication": "prohibited",
+    "source_overwrite": "prohibited",
+    "output_overwrite": "prohibited",
+    "automatic_retry": "prohibited"
+  },
+  "claim_boundary": {
+    "historical_root_cause_claim_allowed": false,
+    "radar_recovery_readiness_claim_allowed": false,
+    "baseline_admission_authorized": false,
+    "change_analysis_authorized": false,
+    "interpretation_authorized": false,
+    "attribution_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

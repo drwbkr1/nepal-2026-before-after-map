@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "review_id": "m2-radar-pixel-orbit-application-recovery-002-review",
+  "contract_ref": "reviews/m2-radar-pixel-orbit-application-recovery-002/review-contract.json",
+  "contract_sha256": "aca2ab770a5fa0af826a6c81e1ebf2eeade5afe8bfbab787809df124e47ff8e3",
+  "review_bundle_sha256": "e699dfc3c4f7dd5ca697581cf4a299c66128fda7691473d65749681e3dfc211c",
+  "completed": true,
+  "review_completed_at_utc": "2026-09-19T21:06:07Z",
+  "reviewer": {
+    "name": "project_owner",
+    "attestation": true
+  },
+  "responses": [
+    {
+      "item_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002",
+      "decision": "approve",
+      "rationale": "Exact bounded stage-evidenced recovery-002 path and one conditional fresh attempt approved.",
+      "evidence_sha256": "e699dfc3c4f7dd5ca697581cf4a299c66128fda7691473d65749681e3dfc211c"
+    }
+  ],
+  "raw_attested_statement": "I approve M2 radar pixel and orbit application recovery-002 review bundle `e699dfc3c4f7dd5ca697581cf4a299c66128fda7691473d65749681e3dfc211c` and proposal `86366bca8681bbe90dfdd19d6c5b676e490e6dd87c8e04c2900e9fb1df4b29ca`. I authorize only the bounded recovery-002 implementation, portable synthetic tests, installed ArcGIS-runtime synthetic test using disposable inputs, public-CI gate, final no-content preflight, and only on every gate passing at most one fresh single-process `radar-pixel-orbit-application-recovery-002-real-001` attempt over exact M1-SRC-001 through M1-SRC-006 and the two frozen radar routes in their stated fixed order, stopping on the first failure, with exact terminal reconciliation. I understand this authorizes no reuse, resume, retry, or mutation of either consumed attempt; no automatic retry; no source, orbit, DEM, AOI, CRS, grid, mask, threshold, registration, route, or scientific-predicate substitution; and no baseline admission, change analysis, interpretation, attribution, derived-pixel publication, historical-root-cause claim, radar-recovery-readiness claim, or scientific publication. I attest this is my completed decision.",
+  "human_decision_count": 1
+}

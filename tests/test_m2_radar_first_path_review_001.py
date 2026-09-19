@@ -151,15 +151,15 @@ class RadarFirstPathReview001Tests(unittest.TestCase):
         self.assertEqual(units["M2-ORBIT-RECOVERY-003"]["disposition"], "block")
         self.assertEqual(
             self.profile["current_checkpoint"]["checkpoint_id"],
-            "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW",
+            "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION",
         )
         self.assertEqual(
             self.goal["current_checkpoint"],
-            "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW",
+            "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION",
         )
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            ["contracts/milestone-002-radar-pixel-orbit-application-recovery-002-proposal.json"],
+            [],
         )
         self.assertIn(APPROVAL_REF, self.goal["active_amendments"])
         self.assertEqual(self.control["status"], "pass_route_split_and_corrected_orbit_review_ready")

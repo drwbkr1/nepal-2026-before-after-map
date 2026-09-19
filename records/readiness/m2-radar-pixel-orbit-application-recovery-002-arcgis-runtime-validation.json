@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-ARCGIS-RUNTIME-VALIDATION",
+  "verified_at_utc": "2026-09-19T21:15:03Z",
+  "status": "pass_installed_arcgis_runtime_disposable_success_and_failure_paths",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "ArcInfo",
+    "python_executable": "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\envs\\arcgispro-py3\\python.exe"
+  },
+  "bindings": {
+    "recovery_contract_sha256": "6482f01722f39455d6150df79186385de532cb22f33d079c651711129eb35c6e",
+    "recovery_core_sha256": "b8a87922b2168408f69d890a599758607fa2ec05a7d266e16aec4040ade2e512",
+    "recovery_runner_sha256": "27f7adfa833eda302a05bac3c309ade9a2fe277643f93a0c8f5ed397563b3ee5",
+    "arcgis_validator_sha256": "4074e4e083e554c6fb839fc916f51d3924e00f361dc31d06e3dc373a07aaa444",
+    "portable_test_sha256": "87b41a5db6eb80cd24f79bdd2342343c4691f9ad82122523c3bfd01fcc5bcd06",
+    "base_contract_sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+    "base_core_sha256": "fd192878acf33e2c73eeeba1ec42865eac48dfc5742b3ae4cf54b51de42755ba",
+    "base_runner_sha256": "0b65fbecbeab373d8bbbf2cbbc28f8817e3c3bb08584dbf1a9720dcbb19ceb06",
+    "recovery_001_contract_sha256": "f2fb1b796aedc2c760d3680cccefcc4558fc83beb6107663ca4e0a6d9f7d7d81",
+    "recovery_001_core_sha256": "9033c5b8b8b1bf066aae00f1db67791be4ce5ada1507762c8f68279089e63993"
+  },
+  "checks": {
+    "function_local_datetime_survived_global_rebinding": true,
+    "actual_arcpy_import_and_product_info": true,
+    "actual_extension_checkout_and_reverse_checkin": true,
+    "actual_disposable_numpy_rasters_and_mosaic": true,
+    "six_synthetic_source_routes_in_exact_order": true,
+    "two_synthetic_pair_routes_in_exact_order": true,
+    "durable_success_stage_order_monotonic": true,
+    "first_failure_survived_terminal_persistence_failure": true,
+    "cleanup_persisted_after_terminal_failure": true,
+    "success_return_code": 0,
+    "failure_return_code": 21
+  },
+  "assertions": {
+    "synthetic_disposable_inputs_only": true,
+    "arcpy_runtime_imported": true,
+    "disposable_geoprocessing_invoked": true,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "production_attempt_created": false,
+    "consumed_attempt_reused_or_retried": false,
+    "radar_processing_executed": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "This validates the recovery wrapper and a tiny disposable raster mosaic under the installed ArcGIS Pro runtime.",
+    "Synthetic source and route workers do not establish production radar-processing success or recovery readiness.",
+    "No project imagery, orbit, DEM, or external-custody content was accessed."
+  ]
+}

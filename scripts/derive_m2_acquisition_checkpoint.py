@@ -270,6 +270,10 @@ RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW",
     "next_action": "Review the exact public M2 radar pixel and orbit application recovery-002 bundle and proposal; approve, revise, or defer the bounded stage-evidence and one-fresh-attempt proposal. No implementation, ArcPy invocation, project-data or external-custody access, new attempt, radar processing, baseline or change analysis, attribution, or scientific publication is authorized before an exact attested decision.",
 }
+RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION",
+    "next_action": "Implement and validate only the approved stage-evidenced recovery-002 wrapper, portable synthetic tests, and installed ArcGIS-runtime synthetic test, then require successful public default-branch CI. Do not run the final no-content preflight, access project data or external custody, or start the fresh attempt before that public gate.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -2157,6 +2161,8 @@ def current_radar_pixel_orbit_application_recovery_002_review_required(
     """Recognize the publicly validated blank recovery-002 packet awaiting owner review."""
     if state_counts != {"promoted": 8}:
         return False
+    if (root / "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json").exists():
+        return False
     try:
         gate = load(root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-review-publication-gate.json")
         reconciliation = load(root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-review-publication-reconciliation.json")
@@ -2168,6 +2174,38 @@ def current_radar_pixel_orbit_application_recovery_002_review_required(
         and reconciliation.get("status") == "pass_public_gate_owner_review_ready"
         and blank.get("completed") is False
         and blank.get("human_decision_count") == 0
+    )
+
+
+def current_radar_pixel_orbit_application_recovery_002_implementation_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize exact approval activation before implementation public CI."""
+    if state_counts != {"promoted": 8}:
+        return False
+    if (root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-implementation-publication-gate.json").exists():
+        return False
+    try:
+        approval = load(root / "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json")
+        activation = load(root / "records/readiness/m2-radar-pixel-orbit-application-recovery-002-approval-activation.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-REVIEW", {})
+    implementation = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-IMPLEMENTATION", {})
+    execution = units.get("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION", {})
+    return bool(
+        approval.get("status") == "approved_bounded_stage_evidenced_recovery_and_one_conditional_fresh_attempt"
+        and approval.get("attestation") is True
+        and activation.get("status") == "pass_exact_approval_activated_implementation_publication_only"
+        and review.get("status") == "complete"
+        and review.get("disposition") == "pass"
+        and review.get("gates", {}).get("human_decision_count") == 1
+        and implementation.get("status") == "in_progress"
+        and implementation.get("gates", {}).get("public_ci") == "pending"
+        and execution.get("status") == "planned"
+        and execution.get("gates", {}).get("live_attempts_started") == 0
     )
 
 
@@ -2240,7 +2278,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_pixel_orbit_application_recovery_002_review_required(
+            if current_radar_pixel_orbit_application_recovery_002_implementation_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_IMPLEMENTATION_CHECKPOINT)
+            elif current_radar_pixel_orbit_application_recovery_002_review_required(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_002_REVIEW_CHECKPOINT)
