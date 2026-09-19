@@ -4024,6 +4024,64 @@
         "records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json",
         "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json"
       ]
+    },
+    {
+      "id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW",
+      "purpose": "Publish and review one exact receipt-durability recovery proposal without releasing implementation or a new probe attempt.",
+      "depends_on": [
+        "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-preparation-approval.json",
+        "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-approval.json",
+        "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-activation.json",
+        "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json",
+        "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-preflight.json",
+        "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-readiness.json",
+        "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-bundle.json",
+        "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-contract.json",
+        "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/blank-response.json",
+        "records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json",
+        "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json",
+        "records/readiness/m2-radar-delayed-import-probe-001-terminal-publication-gate.json"
+      ],
+      "outputs": [],
+      "gates": {
+        "public_ci": "pending",
+        "human_decision_count": 0,
+        "attestation": false,
+        "review_response_open": false,
+        "owner_proposal_approval_authorized": false,
+        "implementation_authorized": false,
+        "arcpy_invocation_authorized": false,
+        "disposable_corpus_creation_authorized": false,
+        "new_probe_attempt_authorized": false,
+        "project_data_or_external_custody_access_authorized": false,
+        "radar_processing_authorized": false,
+        "baseline_or_change_authorized": false,
+        "attribution_authorized": false,
+        "scientific_publication_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json",
+        "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [
+          "successful public default-branch CI",
+          "one later exact attested owner proposal decision"
+        ],
+        "observed": [
+          "exact zero-decision packet publication authorized; public CI pending"
+        ],
+        "decision_value": "unknown",
+        "rationale": "Publication authority opens no substantive proposal decision and releases no implementation or execution."
+      },
+      "next_dependency": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-IMPLEMENTATION"
     }
   ],
   "path_efficiency": {
@@ -4080,8 +4138,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW",
-    "next_action": "Review the terminal disposable-probe outcome. The attempt is consumed and cannot be retried; any follow-on requires a separately reviewed owner decision.",
+    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION",
+    "next_action": "Publish and publicly validate the exact zero-decision radar delayed-import probe receipt-recovery-001 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not implement the correction, invoke ArcPy, create the corpus, create a new attempt, access project data or external custody, process radar data, run baseline or change analysis, attribute cause, or publish science.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4125,9 +4183,10 @@
       "Metadata recovery-001 is terminal after exact promotion because both success and failure terminal receipt construction failed; do not retry or reconstruct its terminal result.",
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery.",
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval.",
-      "The one delayed-import probe attempt is terminal and consumed after full disposable-corpus hashing and a stop at the arcpy_import_started boundary; its caught exception was masked by terminal timestamp failure, postprocess cleanup completed, and no retry, radar recovery, historical-cause claim, or scientific claim is released."
+      "The one delayed-import probe attempt is terminal and consumed after full disposable-corpus hashing and a stop at the arcpy_import_started boundary; its caught exception was masked by terminal timestamp failure, postprocess cleanup completed, and no retry, radar recovery, historical-cause claim, or scientific claim is released.",
+      "The receipt-recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, corpus, new attempt, project-data access, radar processing, or scientific action is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW",
-    "parallel_next_action": "Review the terminal disposable-probe outcome. The attempt is consumed and cannot be retried; any follow-on requires a separately reviewed owner decision."
+    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION",
+    "parallel_next_action": "Publish and publicly validate the exact zero-decision radar delayed-import probe receipt-recovery-001 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not implement the correction, invoke ArcPy, create the corpus, create a new attempt, access project data or external custody, process radar data, run baseline or change analysis, attribute cause, or publish science."
   }
 }

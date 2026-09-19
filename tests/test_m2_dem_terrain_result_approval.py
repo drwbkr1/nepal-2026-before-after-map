@@ -81,9 +81,9 @@ class TerrainResultApprovalTests(unittest.TestCase):
         self.assertFalse(control["assertions"]["radar_pixel_processing_authorized"])
         self.assertEqual(
             [item["checkpoint_id"] for item in profile["parallel_checkpoints"]],
-            ["M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"],
+            ["M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION"],
         )
-        self.assertEqual(goal["parallel_checkpoints"], ["M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"])
+        self.assertEqual(goal["parallel_checkpoints"], ["M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION"])
 
 
 if __name__ == "__main__":

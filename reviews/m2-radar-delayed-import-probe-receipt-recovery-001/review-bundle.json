@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-19T18:19:16Z",
+  "status": "locally_prepared_zero_decisions_publication_authority_required",
+  "human_decision_count": 0,
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json",
+      "sha256": "9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09",
+      "purpose": "normative receipt-recovery proposal",
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-delayed-import-probe-receipt-recovery-001-review.json",
+          "sha256": "cc6ba6ae4187909f65cf49cbcdb02561bc731abd0f0a1dfbd6e7f571bcb624d0"
+        }
+      ]
+    },
+    {
+      "path": "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-preflight.json",
+      "sha256": "721c9e4ac04defe4c79d92408c40a724d64fb81659b2f139d6fe81311beb2e52",
+      "purpose": "terminal-state and preparation-authority preflight",
+      "render_receipts": []
+    },
+    {
+      "path": "docs/M2_RADAR_DELAYED_IMPORT_PROBE_RECEIPT_RECOVERY_001_REVIEW.md",
+      "sha256": "cd939ec99b5e4bdc4a63770a6029a186e7e82e316766f1bdb51679dd7ea1839e",
+      "purpose": "human-readable local review",
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-delayed-import-probe-receipt-recovery-001-review.json",
+          "sha256": "cc6ba6ae4187909f65cf49cbcdb02561bc731abd0f0a1dfbd6e7f571bcb624d0"
+        }
+      ]
+    },
+    {
+      "path": "docs/assets/m2-radar-delayed-import-probe-receipt-recovery-001-review.png",
+      "sha256": "b710f95569d1a334df7d38d52139255ac5797670a61a620a0c49b2fa3298b303",
+      "purpose": "rendered local review surface",
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-delayed-import-probe-receipt-recovery-001-review.json",
+          "sha256": "cc6ba6ae4187909f65cf49cbcdb02561bc731abd0f0a1dfbd6e7f571bcb624d0"
+        }
+      ]
+    }
+  ],
+  "decision_items": [
+    {
+      "item_id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001",
+      "allowed_decisions_after_public_ci": [
+        "approve",
+        "revise",
+        "defer"
+      ],
+      "decision_currently_open": false,
+      "evidence_ref": "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json",
+      "evidence_sha256": "9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09"
+    }
+  ]
+}

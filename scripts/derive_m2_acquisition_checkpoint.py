@@ -238,6 +238,14 @@ RADAR_DELAYED_IMPORT_PROBE_001_TERMINAL_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW",
     "next_action": "Review the terminal disposable-probe outcome. The attempt is consumed and cannot be retried; any follow-on requires a separately reviewed owner decision.",
 }
+RADAR_DELAYED_IMPORT_PROBE_RECEIPT_RECOVERY_001_REVIEW_PUBLICATION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION",
+    "next_action": "Publish and publicly validate the exact zero-decision radar delayed-import probe receipt-recovery-001 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not implement the correction, invoke ArcPy, create the corpus, create a new attempt, access project data or external custody, process radar data, run baseline or change analysis, attribute cause, or publish science.",
+}
+RADAR_DELAYED_IMPORT_PROBE_RECEIPT_RECOVERY_001_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW",
+    "next_action": "Review the exact public M2 radar delayed-import probe receipt-recovery-001 bundle and proposal; approve, revise, or defer the bounded receipt-durability correction and one fresh disposable attempt. No implementation, ArcPy invocation, corpus creation, new attempt, project-data or external-custody access, radar processing, baseline or change analysis, attribution, or scientific publication is authorized before an exact attested decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1925,6 +1933,72 @@ def current_radar_delayed_import_probe_001_terminal(
     )
 
 
+def current_radar_delayed_import_probe_receipt_recovery_001_review_publication_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the exact receipt-recovery packet after publication authority and before public CI."""
+    if state_counts != {"promoted": 8}:
+        return False
+    if (root / "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-gate.json").exists():
+        return False
+    try:
+        proposal = load(root / "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json")
+        approval = load(root / "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-approval.json")
+        activation = load(root / "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-activation.json")
+        blank = load(root / "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/blank-response.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW", {})
+    return bool(
+        proposal.get("status") == "proposed_inactive_local_review_prepared_publication_and_owner_approval_required"
+        and proposal.get("human_decision_count") == 0
+        and approval.get("status") == "approved_exact_zero_decision_review_publication_only"
+        and activation.get("status") == "pass_exact_publication_authority_activated_public_ci_pending"
+        and activation.get("released_now", {}).get("owner_proposal_review") is False
+        and blank.get("completed") is False
+        and blank.get("human_decision_count") == 0
+        and blank.get("response_not_open_until_public_ci") is True
+        and review.get("status") == "planned"
+        and review.get("gates", {}).get("public_ci") == "pending"
+        and review.get("gates", {}).get("review_response_open") is False
+        and review.get("gates", {}).get("implementation_authorized") is False
+        and review.get("gates", {}).get("new_probe_attempt_authorized") is False
+    )
+
+
+def current_radar_delayed_import_probe_receipt_recovery_001_review_required(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the publicly validated blank receipt-recovery packet awaiting owner review."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        gate = load(root / "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-gate.json")
+        reconciliation = load(root / "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-reconciliation.json")
+        blank = load(root / "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/blank-response.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW", {})
+    return bool(
+        gate.get("status") == "pass_public_default_branch_ci_zero_decision_owner_review_ready"
+        and gate.get("public_ci_conclusion") == "success"
+        and gate.get("released_now", {}).get("owner_proposal_review") is True
+        and reconciliation.get("status") == "pass_public_gate_owner_review_ready"
+        and blank.get("completed") is False
+        and blank.get("human_decision_count") == 0
+        and review.get("status") == "in_progress"
+        and review.get("gates", {}).get("public_ci") == "success"
+        and review.get("gates", {}).get("review_response_open") is True
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and review.get("gates", {}).get("implementation_authorized") is False
+        and review.get("gates", {}).get("new_probe_attempt_authorized") is False
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -1994,7 +2068,15 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_delayed_import_probe_001_terminal(
+            if current_radar_delayed_import_probe_receipt_recovery_001_review_required(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_RECEIPT_RECOVERY_001_REVIEW_CHECKPOINT)
+            elif current_radar_delayed_import_probe_receipt_recovery_001_review_publication_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_RECEIPT_RECOVERY_001_REVIEW_PUBLICATION_CHECKPOINT)
+            elif current_radar_delayed_import_probe_001_terminal(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_001_TERMINAL_CHECKPOINT)

@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PREFLIGHT",
+  "checked_at_utc": "2026-09-19T18:19:16Z",
+  "status": "pass_ready_local_zero_decision_packet_preparation_only",
+  "bindings": {
+    "preparation_approval_ref": "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-preparation-approval.json",
+    "preparation_approval_sha256": "e9894b4ee6b2bca14f6dd8d438d56f742959e1cea47b04ef06787d4706b0e509",
+    "proposal_ref": "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json",
+    "proposal_sha256": "9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09",
+    "terminal_reconciliation_sha256": "90e7b9ff1fa823f9be805e1fba843e7af9dd34c313d4e5c6c75077c8aee81892",
+    "outcome_reconciliation_sha256": "2fe63d80af49baa8a0c92948a3284a4b769fd1c61a10e6b32391a392f0f3cd4c",
+    "terminal_publication_gate_sha256": "44754413056da99d1b228a6f75ee664f3594fa023d55d1dc95f965ad35d9d31a",
+    "preparation_script_sha256": "1b65c5ca538611b7d0396dd3a7c879c04f22e96283009092f7949c7b2dc341a1",
+    "base_commit": "4e47ddc0b201ca86381234e851b58d0c72733211"
+  },
+  "checks": {
+    "terminal_attempt_consumed": true,
+    "original_caught_exception_unrecoverable": true,
+    "protected_public_implementation_exact": true,
+    "canonical_checkpoint_unchanged": true,
+    "local_preparation_authorized": true,
+    "publication_or_implementation_authorized": false
+  },
+  "assertions": {
+    "git_commit_created": false,
+    "git_push_performed": false,
+    "public_ci_started": false,
+    "protected_probe_code_modified": false,
+    "arcpy_invoked": false,
+    "disposable_corpus_created": false,
+    "new_attempt_created": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "implementation_authorized": false,
+    "scientific_result_established": false
+  }
+}

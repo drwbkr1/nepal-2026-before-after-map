@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION-ACTIVATION",
+  "activated_at_utc": "2026-09-19T18:41:40Z",
+  "status": "pass_exact_publication_authority_activated_public_ci_pending",
+  "bindings": {
+    "publication_approval_ref": "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-approval.json",
+    "publication_approval_sha256": "6a8de9f397c6501bf6a1eef560f51c35144ee550fe30dca28c864bc5ca5232eb",
+    "proposal_ref": "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json",
+    "proposal_sha256": "9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09",
+    "review_bundle_ref": "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-bundle.json",
+    "review_bundle_sha256": "df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695",
+    "review_contract_ref": "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-contract.json",
+    "review_contract_sha256": "e371ee3658993cd43112daa3e10407e66ca9739636976d921cd2d605c3f4c331",
+    "blank_response_ref": "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/blank-response.json",
+    "blank_response_sha256": "8e3f033f3bc075b3b63ed0782605a24bfa9e87866046e03f97b3cba23fbcd8de",
+    "review_readiness_ref": "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-readiness.json",
+    "review_readiness_sha256": "468d29d68f9e1c8323a7f388b74457e3063ae9a115d69bcaedde077d49617dc8",
+    "base_commit": "4e47ddc0b201ca86381234e851b58d0c72733211"
+  },
+  "released_now": {
+    "repository_control_integration": true,
+    "public_default_branch_publication": true,
+    "public_ci": true,
+    "post_ci_publication_reconciliation": true,
+    "owner_proposal_review": false,
+    "implementation": false,
+    "arcpy_invocation": false,
+    "disposable_corpus_creation": false,
+    "new_probe_attempt": false,
+    "project_data_or_external_custody_access": false,
+    "radar_processing": false,
+    "baseline_or_change_analysis": false,
+    "attribution": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "packet_human_decision_count": 0,
+    "owner_proposal_decision_recorded": false,
+    "public_ci_passed": false,
+    "owner_review_open": false,
+    "protected_probe_code_modified": false,
+    "arcpy_invoked": false,
+    "disposable_corpus_created": false,
+    "new_attempt_created": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Publish and publicly validate the exact zero-decision radar delayed-import probe receipt-recovery-001 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not implement the correction, invoke ArcPy, create the corpus, create a new attempt, access project data or external custody, process radar data, run baseline or change analysis, attribute cause, or publish science."
+}

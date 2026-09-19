@@ -120,7 +120,7 @@ class M2DemActivationTests(unittest.TestCase):
             asset["extensions"].get("geotiff_verification_status") == "pass_structural_and_full_tile_finite"
             for asset in self.active_intake["assets"]
         )
-        expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW" if all_verified else ("M2-DEM-GEOTIFF-VERIFICATION" if all_promoted else "M2-DEM-ACQUISITION")
+        expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION" if all_verified else ("M2-DEM-GEOTIFF-VERIFICATION" if all_promoted else "M2-DEM-ACQUISITION")
         self.assertEqual(units["M2-DEM-AMEND"]["status"], "complete")
         self.assertEqual(units["M2-DEM-PREFLIGHT"]["status"], "complete")
         self.assertEqual(units["M2-DEM-ACQUIRE"]["status"], "complete" if all_promoted else "ready")
@@ -128,7 +128,7 @@ class M2DemActivationTests(unittest.TestCase):
         self.assertEqual(set(units["M2-BASELINE"]["depends_on"]), {"M2-VERIFY", "M2-DEM-VERIFY", "M2-ORBIT-APPLY"})
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            [],
+            ["contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -277,7 +277,7 @@ class M2DemActivationTests(unittest.TestCase):
             None,
         )
         expected_primary_checkpoint = (
-            "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
+            "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION"
             if orbit_offline_recovery is not None
             and orbit_offline_recovery.get("status") == "complete"
             and orbit_offline_recovery.get("disposition") == "pass"

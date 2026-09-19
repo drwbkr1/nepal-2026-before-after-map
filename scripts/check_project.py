@@ -34,6 +34,8 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_delayed_import_probe_001_execution_gate_publication_pending,
     current_radar_delayed_import_probe_001_final_preflight_pending,
     current_radar_delayed_import_probe_001_terminal,
+    current_radar_delayed_import_probe_receipt_recovery_001_review_publication_pending,
+    current_radar_delayed_import_probe_receipt_recovery_001_review_required,
     current_full_header_implementation_pending,
     current_materialization_pixel_implementation_pending,
     current_optical_pixel_implementation_pending,
@@ -263,6 +265,23 @@ REQUIRED = [
     "scripts/prepare_m2_radar_delayed_import_probe_001_review.py",
     "scripts/record_m2_radar_delayed_import_probe_001_review_publication.py",
     "tests/test_m2_radar_delayed_import_probe_001_review.py",
+    "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-preparation-approval.json",
+    "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-approval.json",
+    "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-activation.json",
+    "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json",
+    "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-preflight.json",
+    "docs/M2_RADAR_DELAYED_IMPORT_PROBE_RECEIPT_RECOVERY_001_REVIEW.md",
+    "docs/assets/m2-radar-delayed-import-probe-receipt-recovery-001-review.png",
+    "records/surface-receipts/m2-radar-delayed-import-probe-receipt-recovery-001-review.json",
+    "records/surface-receipts/m2-radar-delayed-import-probe-receipt-recovery-001-review-visual-inspection.json",
+    "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-bundle.json",
+    "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-contract.json",
+    "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/blank-response.json",
+    "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-review-readiness.json",
+    "scripts/prepare_m2_radar_delayed_import_probe_receipt_recovery_001_review.py",
+    "scripts/integrate_m2_radar_delayed_import_probe_receipt_recovery_001_review_publication.py",
+    "scripts/record_m2_radar_delayed_import_probe_receipt_recovery_001_review_publication.py",
+    "tests/test_m2_radar_delayed_import_probe_receipt_recovery_001_review.py",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -1559,7 +1578,17 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if current_radar_delayed_import_probe_001_terminal(ROOT, {"promoted": 8}):
+            if current_radar_delayed_import_probe_receipt_recovery_001_review_required(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW"
+                expected_dem_checkpoint_authority_ref = "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-contract.json"
+                expected_dem_proposed_amendments = ["contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"]
+                expected_dem_next_action = "Review the exact public M2 radar delayed-import probe receipt-recovery-001 bundle and proposal; approve, revise, or defer the bounded receipt-durability correction and one fresh disposable attempt. No implementation, ArcPy invocation, corpus creation, new attempt, project-data or external-custody access, radar processing, baseline or change analysis, attribution, or scientific publication is authorized before an exact attested decision."
+            elif current_radar_delayed_import_probe_receipt_recovery_001_review_publication_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-approval.json"
+                expected_dem_proposed_amendments = ["contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"]
+                expected_dem_next_action = "Publish and publicly validate the exact zero-decision radar delayed-import probe receipt-recovery-001 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not implement the correction, invoke ArcPy, create the corpus, create a new attempt, access project data or external custody, process radar data, run baseline or change analysis, attribute cause, or publish science."
+            elif current_radar_delayed_import_probe_001_terminal(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
                 expected_dem_proposed_amendments = []
@@ -1662,7 +1691,17 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if current_radar_delayed_import_probe_001_terminal(ROOT, {"promoted": 8}):
+            if current_radar_delayed_import_probe_receipt_recovery_001_review_required(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW"
+                expected_dem_checkpoint_authority_ref = "reviews/m2-radar-delayed-import-probe-receipt-recovery-001/review-contract.json"
+                expected_dem_proposed_amendments = ["contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"]
+                expected_dem_next_action = "Review the exact public M2 radar delayed-import probe receipt-recovery-001 bundle and proposal; approve, revise, or defer the bounded receipt-durability correction and one fresh disposable attempt. No implementation, ArcPy invocation, corpus creation, new attempt, project-data or external-custody access, radar processing, baseline or change analysis, attribution, or scientific publication is authorized before an exact attested decision."
+            elif current_radar_delayed_import_probe_receipt_recovery_001_review_publication_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-review-publication-approval.json"
+                expected_dem_proposed_amendments = ["contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"]
+                expected_dem_next_action = "Publish and publicly validate the exact zero-decision radar delayed-import probe receipt-recovery-001 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not implement the correction, invoke ArcPy, create the corpus, create a new attempt, access project data or external custody, process radar data, run baseline or change analysis, attribute cause, or publish science."
+            elif current_radar_delayed_import_probe_001_terminal(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
                 expected_dem_proposed_amendments = []
@@ -2597,8 +2636,10 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must clear the approved radar delayed-import probe proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
+        "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"
+    ]:
+        fail("project profile must expose only the zero-decision probe receipt-recovery proposal")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -3010,8 +3051,10 @@ def main() -> None:
         or "bounded nested-grid correction" not in optical_pixel_recovery_review_gate.get("reason", "")
     ):
         fail("project profile must bind optical pixel recovery to its exact approval")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must clear the approved radar delayed-import probe proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
+        "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"
+    ]:
+        fail("project profile must expose only the zero-decision probe receipt-recovery proposal")
     radar_first_path_gate = profile_gates.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
     if (
         radar_first_path_gate.get("authority_ref") != "reviews/m2-radar-first-path-001/review-contract.json"
@@ -3101,8 +3144,10 @@ def main() -> None:
         "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
-    if goal.get("proposed_amendments") != []:
-        fail("long-term goal must clear the approved radar delayed-import probe proposal")
+    if goal.get("proposed_amendments") != [
+        "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"
+    ]:
+        fail("long-term goal must expose only the zero-decision probe receipt-recovery proposal")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -7883,7 +7928,11 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        if current_radar_delayed_import_probe_001_terminal(ROOT, state_counts):
+        if current_radar_delayed_import_probe_receipt_recovery_001_review_required(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW"
+        elif current_radar_delayed_import_probe_receipt_recovery_001_review_publication_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION"
+        elif current_radar_delayed_import_probe_001_terminal(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
         elif current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
@@ -14331,9 +14380,6 @@ def main() -> None:
             "project_data_content_read", "external_custody_accessed", "radar_processing_executed",
             "historical_root_cause_established", "recovery_readiness_established", "scientific_result_established",
         ))
-        or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
-        or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
-        or goal.get("proposed_amendments") != []
         or current_radar_delayed_import_probe_001_review_publication_pending(ROOT, {"promoted": 8}) is not False
         or current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}) is not False
         or current_radar_delayed_import_probe_001_implementation_pending(ROOT, {"promoted": 8}) is not False
@@ -14485,6 +14531,193 @@ def main() -> None:
         ))
     ):
         fail("EVID-0172 radar delayed-import probe terminal-publication evidence differs or overclaims")
+
+    receipt_recovery_prefix = "m2-radar-delayed-import-probe-receipt-recovery-001"
+    receipt_recovery_proposal_ref = "contracts/milestone-002-radar-delayed-import-probe-receipt-recovery-001-proposal.json"
+    receipt_recovery_bundle_ref = f"reviews/{receipt_recovery_prefix}/review-bundle.json"
+    receipt_recovery_readiness_ref = f"records/readiness/{receipt_recovery_prefix}-review-readiness.json"
+    receipt_recovery_publication_approval_ref = f"records/source-gates/{receipt_recovery_prefix}-review-publication-approval.json"
+    receipt_recovery_activation_ref = f"records/readiness/{receipt_recovery_prefix}-review-publication-activation.json"
+    receipt_recovery_gate_ref = f"records/readiness/{receipt_recovery_prefix}-review-publication-gate.json"
+    receipt_recovery_reconciliation_ref = f"records/readiness/{receipt_recovery_prefix}-review-publication-reconciliation.json"
+    receipt_recovery_proposal = json.loads((ROOT / receipt_recovery_proposal_ref).read_text(encoding="utf-8"))
+    receipt_recovery_bundle = json.loads((ROOT / receipt_recovery_bundle_ref).read_text(encoding="utf-8"))
+    receipt_recovery_contract = json.loads((ROOT / f"reviews/{receipt_recovery_prefix}/review-contract.json").read_text(encoding="utf-8"))
+    receipt_recovery_blank = json.loads((ROOT / f"reviews/{receipt_recovery_prefix}/blank-response.json").read_text(encoding="utf-8"))
+    receipt_recovery_preflight = json.loads((ROOT / f"records/readiness/{receipt_recovery_prefix}-review-preflight.json").read_text(encoding="utf-8"))
+    receipt_recovery_readiness = json.loads((ROOT / receipt_recovery_readiness_ref).read_text(encoding="utf-8"))
+    receipt_recovery_surface = json.loads((ROOT / f"records/surface-receipts/{receipt_recovery_prefix}-review.json").read_text(encoding="utf-8"))
+    receipt_recovery_visual = json.loads((ROOT / f"records/surface-receipts/{receipt_recovery_prefix}-review-visual-inspection.json").read_text(encoding="utf-8"))
+    receipt_recovery_preparation = json.loads((ROOT / f"records/source-gates/{receipt_recovery_prefix}-review-preparation-approval.json").read_text(encoding="utf-8"))
+    receipt_recovery_publication_approval = json.loads((ROOT / receipt_recovery_publication_approval_ref).read_text(encoding="utf-8"))
+    receipt_recovery_activation = json.loads((ROOT / receipt_recovery_activation_ref).read_text(encoding="utf-8"))
+    if sha256(receipt_recovery_proposal_ref) != "9bbe934bd1dcbe7d1b0700b83473db2ab1a130c13fa6d183d3b1a247dfe88e09":
+        fail("M2 delayed-import receipt-recovery proposal hash differs")
+    if sha256(receipt_recovery_bundle_ref) != "df43e0d93f1d40aa85fb1f8730cc57d596fcc4345299b0939b22f822321a9695":
+        fail("M2 delayed-import receipt-recovery review bundle hash differs")
+    if sha256(receipt_recovery_readiness_ref) != "468d29d68f9e1c8323a7f388b74457e3063ae9a115d69bcaedde077d49617dc8":
+        fail("M2 delayed-import receipt-recovery local readiness hash differs")
+    recovery_contract = receipt_recovery_proposal.get("exact_recovery_contract", {})
+    recovery_corpus = recovery_contract.get("corpus", {})
+    recovery_limits = receipt_recovery_proposal.get("limits", {})
+    if (
+        receipt_recovery_proposal.get("status") != "proposed_inactive_local_review_prepared_publication_and_owner_approval_required"
+        or receipt_recovery_proposal.get("human_decision_count") != 0
+        or receipt_recovery_proposal.get("trigger", {}).get("terminal_reconciliation_sha256") != sha256("records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json")
+        or receipt_recovery_proposal.get("trigger", {}).get("outcome_reconciliation_sha256") != sha256("records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json")
+        or receipt_recovery_proposal.get("observed_state", {}).get("historical_root_cause_established") is not False
+        or recovery_contract.get("attempt_id") != "radar-delayed-import-probe-receipt-recovery-001-real-001"
+        or recovery_contract.get("distinct_from_consumed_attempt") is not True
+        or recovery_corpus.get("file_count") != 156
+        or recovery_corpus.get("total_logical_bytes") != 10367157634
+        or recovery_corpus.get("expected_stable_order_aggregate_sha256") != "dd56f8b28a1ed1c6e2b4b1d7d8f5db4fd86dab80a910fe79c8d018d58942430b"
+        or recovery_contract.get("stage_order_unchanged_from_probe_001_contract") is not True
+        or recovery_contract.get("receipt_durability", {}).get("fallback_is_not_success_evidence") is not True
+        or recovery_contract.get("result_semantics", {}).get("historical_root_cause_claim_allowed") is not False
+        or recovery_contract.get("result_semantics", {}).get("radar_recovery_readiness_claim_allowed") is not False
+        or recovery_contract.get("result_semantics", {}).get("scientific_claim_allowed") is not False
+        or recovery_limits.get("consumed_attempt_retries_or_reuses") != 0
+        or recovery_limits.get("future_live_attempts") != 1
+        or recovery_limits.get("automatic_retry") is not False
+        or any(recovery_limits.get(key) != 0 for key in (
+            "network_requests", "credential_or_token_actions", "software_installations", "uac_actions",
+            "project_data_content_reads", "external_custody_reads", "external_custody_mutations",
+            "orbit_applications", "radar_pixel_reads", "baseline_or_change_actions", "scientific_outputs",
+        ))
+    ):
+        fail("M2 delayed-import receipt-recovery proposal differs or overclaims")
+    for protected in receipt_recovery_proposal.get("protected_public_implementation", []):
+        if protected.get("must_remain_unchanged_during_preparation") is not True or protected.get("sha256") != sha256(protected.get("path")):
+            fail("M2 delayed-import protected public implementation changed")
+    for artifact in receipt_recovery_bundle.get("artifacts", []):
+        if artifact.get("sha256") != sha256(artifact.get("path")):
+            fail("M2 delayed-import receipt-recovery bundle artifact hash differs")
+        for receipt in artifact.get("render_receipts", []):
+            if receipt.get("sha256") != sha256(receipt.get("path")):
+                fail("M2 delayed-import receipt-recovery render receipt hash differs")
+    preparation_boundary = receipt_recovery_preparation.get("authority_boundary", {})
+    publication_boundary = receipt_recovery_publication_approval.get("authority_boundary", {})
+    activation_release = receipt_recovery_activation.get("released_now", {})
+    if (
+        receipt_recovery_preparation.get("status") != "approved_local_review_preparation_only"
+        or preparation_boundary.get("local_review_packet_preparation_authorized") is not True
+        or preparation_boundary.get("public_review_packet_publication_authorized") is not False
+        or receipt_recovery_publication_approval.get("status") != "approved_exact_zero_decision_review_publication_only"
+        or receipt_recovery_publication_approval.get("human_decision_count") != 1
+        or receipt_recovery_publication_approval.get("attestation") is not True
+        or receipt_recovery_publication_approval.get("bindings", {}).get("proposal_sha256") != sha256(receipt_recovery_proposal_ref)
+        or receipt_recovery_publication_approval.get("bindings", {}).get("review_bundle_sha256") != sha256(receipt_recovery_bundle_ref)
+        or any(publication_boundary.get(key) is not True for key in (
+            "repository_control_integration_authorized", "public_default_branch_publication_authorized",
+            "public_ci_authorized", "post_ci_publication_reconciliation_authorized",
+        ))
+        or any(publication_boundary.get(key) is not False for key in (
+            "owner_proposal_approval_authorized", "recovery_implementation_authorized", "arcpy_invocation_authorized",
+            "disposable_corpus_creation_authorized", "new_probe_attempt_authorized",
+            "project_data_or_external_custody_access_authorized", "radar_processing_authorized",
+            "baseline_or_change_authorized", "attribution_authorized", "scientific_publication_authorized",
+        ))
+        or receipt_recovery_activation.get("status") != "pass_exact_publication_authority_activated_public_ci_pending"
+        or activation_release.get("public_default_branch_publication") is not True
+        or activation_release.get("public_ci") is not True
+        or activation_release.get("post_ci_publication_reconciliation") is not True
+        or any(activation_release.get(key) is not False for key in (
+            "owner_proposal_review", "implementation", "arcpy_invocation", "disposable_corpus_creation",
+            "new_probe_attempt", "project_data_or_external_custody_access", "radar_processing",
+            "baseline_or_change_analysis", "attribution", "scientific_publication",
+        ))
+    ):
+        fail("M2 delayed-import receipt-recovery publication authority differs or overclaims")
+    if (
+        receipt_recovery_preflight.get("status") != "pass_ready_local_zero_decision_packet_preparation_only"
+        or receipt_recovery_surface.get("artifact_sha256") != sha256(f"docs/assets/{receipt_recovery_prefix}-review.png")
+        or (receipt_recovery_surface.get("width_px"), receipt_recovery_surface.get("height_px")) != (1800, 1880)
+        or receipt_recovery_visual.get("status") != "pass_agent_visual_inspection"
+        or receipt_recovery_visual.get("artifact_sha256") != sha256(f"docs/assets/{receipt_recovery_prefix}-review.png")
+        or receipt_recovery_visual.get("inspection", {}).get("text_clipped_or_overlapping") is not False
+        or receipt_recovery_readiness.get("status") != "pass_local_zero_decision_packet_ready_publication_authority_required"
+        or receipt_recovery_readiness.get("validation", {}).get("human_decision_count") != 0
+        or receipt_recovery_readiness.get("validation", {}).get("rendered_surface_visually_inspected") is not True
+        or receipt_recovery_bundle.get("human_decision_count") != 0
+        or receipt_recovery_contract.get("review_bundle", {}).get("manifest_sha256") != sha256(receipt_recovery_bundle_ref)
+        or receipt_recovery_contract.get("required_attestation") is not True
+        or receipt_recovery_blank.get("completed") is not False
+        or receipt_recovery_blank.get("human_decision_count") != 0
+        or receipt_recovery_blank.get("reviewer", {}).get("attestation") is not False
+        or receipt_recovery_blank.get("responses", [{}])[0].get("decision") is not None
+    ):
+        fail("M2 delayed-import receipt-recovery review packet or visual evidence differs")
+    receipt_recovery_units = {unit.get("id"): unit for unit in active_m2.get("units", []) if isinstance(unit, dict)}
+    receipt_recovery_review = receipt_recovery_units.get("M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW", {})
+    gate_exists = (ROOT / receipt_recovery_gate_ref).is_file()
+    if gate_exists:
+        receipt_recovery_gate = json.loads((ROOT / receipt_recovery_gate_ref).read_text(encoding="utf-8"))
+        receipt_recovery_reconciliation = json.loads((ROOT / receipt_recovery_reconciliation_ref).read_text(encoding="utf-8"))
+        if (
+            receipt_recovery_gate.get("status") != "pass_public_default_branch_ci_zero_decision_owner_review_ready"
+            or receipt_recovery_gate.get("public_ci_conclusion") != "success"
+            or receipt_recovery_gate.get("repository_required_file_count") != 1098
+            or receipt_recovery_gate.get("public_test_count") != 600
+            or receipt_recovery_gate.get("public_intentional_skip_count") != 13
+            or receipt_recovery_gate.get("released_now", {}).get("owner_proposal_review") is not True
+            or receipt_recovery_reconciliation.get("status") != "pass_public_gate_owner_review_ready"
+            or receipt_recovery_reconciliation.get("publication_gate_sha256") != sha256(receipt_recovery_gate_ref)
+            or receipt_recovery_reconciliation.get("review_bundle_sha256") != sha256(receipt_recovery_bundle_ref)
+            or receipt_recovery_reconciliation.get("proposal_sha256") != sha256(receipt_recovery_proposal_ref)
+            or receipt_recovery_review.get("status") != "in_progress"
+            or receipt_recovery_review.get("gates", {}).get("public_ci") != "success"
+            or receipt_recovery_review.get("gates", {}).get("review_response_open") is not True
+            or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW"
+            or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW"
+            or current_radar_delayed_import_probe_receipt_recovery_001_review_publication_pending(ROOT, {"promoted": 8}) is not False
+            or current_radar_delayed_import_probe_receipt_recovery_001_review_required(ROOT, {"promoted": 8}) is not True
+        ):
+            fail("M2 delayed-import receipt-recovery owner-review state differs")
+    else:
+        if (
+            (ROOT / receipt_recovery_reconciliation_ref).exists()
+            or receipt_recovery_review.get("status") != "planned"
+            or receipt_recovery_review.get("gates", {}).get("public_ci") != "pending"
+            or receipt_recovery_review.get("gates", {}).get("review_response_open") is not False
+            or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION"
+            or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW-PUBLICATION"
+            or current_radar_delayed_import_probe_receipt_recovery_001_review_publication_pending(ROOT, {"promoted": 8}) is not True
+            or current_radar_delayed_import_probe_receipt_recovery_001_review_required(ROOT, {"promoted": 8}) is not False
+        ):
+            fail("M2 delayed-import receipt-recovery publication-pending state differs")
+    publication_authority_evidence = ledger_by_id.get("EVID-0173")
+    if (
+        not isinstance(publication_authority_evidence, dict)
+        or publication_authority_evidence.get("status") != "pass_exact_zero_decision_review_publication_authorized_public_ci_pending"
+        or publication_authority_evidence.get("publication_approval_sha256") != sha256(receipt_recovery_publication_approval_ref)
+        or publication_authority_evidence.get("publication_activation_sha256") != sha256(receipt_recovery_activation_ref)
+        or publication_authority_evidence.get("proposal_sha256") != sha256(receipt_recovery_proposal_ref)
+        or publication_authority_evidence.get("review_bundle_sha256") != sha256(receipt_recovery_bundle_ref)
+        or publication_authority_evidence.get("assertions", {}).get("packet_human_decision_count") != 0
+        or any(publication_authority_evidence.get("assertions", {}).get(key) is not False for key in (
+            "owner_proposal_decision_recorded", "owner_review_open", "implementation_authorized", "arcpy_invoked",
+            "disposable_corpus_created", "new_attempt_created", "project_data_content_read",
+            "external_custody_accessed", "radar_processing_executed", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0173 receipt-recovery publication authority differs or overclaims")
+    if gate_exists:
+        publication_gate_evidence = ledger_by_id.get("EVID-0174")
+        if (
+            not isinstance(publication_gate_evidence, dict)
+            or publication_gate_evidence.get("status") != "pass_public_ci_zero_decision_owner_review_ready"
+            or publication_gate_evidence.get("publication_gate_sha256") != sha256(receipt_recovery_gate_ref)
+            or publication_gate_evidence.get("publication_reconciliation_sha256") != sha256(receipt_recovery_reconciliation_ref)
+            or publication_gate_evidence.get("proposal_sha256") != sha256(receipt_recovery_proposal_ref)
+            or publication_gate_evidence.get("review_bundle_sha256") != sha256(receipt_recovery_bundle_ref)
+            or publication_gate_evidence.get("assertions", {}).get("owner_review_ready") is not True
+            or any(publication_gate_evidence.get("assertions", {}).get(key) is not False for key in (
+                "owner_proposal_decision_recorded", "implementation_authorized", "arcpy_invoked",
+                "disposable_corpus_created", "new_attempt_created", "project_data_content_read",
+                "external_custody_accessed", "radar_processing_executed", "scientific_result_established",
+            ))
+        ):
+            fail("EVID-0174 receipt-recovery publication gate differs or overclaims")
 
     violations = []
     for relative in tracked_files():
