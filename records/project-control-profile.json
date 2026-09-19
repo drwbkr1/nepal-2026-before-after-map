@@ -664,16 +664,16 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION",
+    "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish and publicly validate the exact zero-decision ApplyOrbitCorrection input-resolution diagnostic review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not approve or implement the proposal, invoke ArcPy, access project data or external custody, call ApplyOrbitCorrection or geoprocessing, reconstruct or substitute a missing candidate, create a new radar attempt, run baseline or change analysis, attribute cause, publish derived pixels, or publish science."
+    "next_action": "Review the exact public M2 ApplyOrbitCorrection input-resolution diagnostic-001 bundle and proposal; approve, revise, or defer the bounded one-process read-only diagnostic. No implementation, ArcPy invocation, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline or change analysis, attribution, derived-pixel publication, or scientific publication is authorized before an exact attested decision."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION",
-      "authority_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-approval.json",
-      "next_action": "Publish and publicly validate the exact zero-decision ApplyOrbitCorrection input-resolution diagnostic review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not approve or implement the proposal, invoke ArcPy, access project data or external custody, call ApplyOrbitCorrection or geoprocessing, reconstruct or substitute a missing candidate, create a new radar attempt, run baseline or change analysis, attribute cause, publish derived pixels, or publish science."
+      "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
+      "authority_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract.json",
+      "next_action": "Review the exact public M2 ApplyOrbitCorrection input-resolution diagnostic-001 bundle and proposal; approve, revise, or defer the bounded one-process read-only diagnostic. No implementation, ArcPy invocation, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline or change analysis, attribution, derived-pixel publication, or scientific publication is authorized before an exact attested decision."
     }
   ],
   "human_gates": {

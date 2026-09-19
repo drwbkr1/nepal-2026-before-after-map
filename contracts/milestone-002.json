@@ -4402,7 +4402,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preparation-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-approval.json",
@@ -4417,12 +4417,15 @@
         "records/processing/m2-radar-pixel-orbit-application-recovery-002-terminal-reconciliation.json",
         "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json"
       ],
-      "outputs": [],
+      "outputs": [
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json",
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-reconciliation.json"
+      ],
       "gates": {
-        "public_ci": "pending",
+        "public_ci": "success",
         "human_decision_count": 0,
         "attestation": false,
-        "review_response_open": false,
+        "review_response_open": true,
         "owner_proposal_approval_authorized": false,
         "diagnostic_implementation_authorized": false,
         "arcpy_invocation_authorized": false,
@@ -4434,7 +4437,11 @@
         "baseline_or_change_authorized": false,
         "attribution_authorized": false,
         "derived_pixel_publication_authorized": false,
-        "scientific_publication_authorized": false
+        "scientific_publication_authorized": false,
+        "publication_gate_sha256": "cbf21f9e3716314eb3c4b6a845438786bf34f8c59906301e14c24a418826bff5",
+        "publication_reconciliation_sha256": "19580456a2ea52b98b14be67a5609859d8a0304c98c21160f4d84c47a8a35cb0",
+        "publication_commit": "91a421c0b7159fb9c2ba1d59e48a679d829adf82",
+        "public_ci_run_id": 35473207884
       },
       "disposition": null,
       "retained_failures": [
@@ -4510,8 +4517,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION",
-    "next_action": "Publish and publicly validate the exact zero-decision ApplyOrbitCorrection input-resolution diagnostic review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not approve or implement the proposal, invoke ArcPy, access project data or external custody, call ApplyOrbitCorrection or geoprocessing, reconstruct or substitute a missing candidate, create a new radar attempt, run baseline or change analysis, attribute cause, publish derived pixels, or publish science.",
+    "current_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
+    "next_action": "Review the exact public M2 ApplyOrbitCorrection input-resolution diagnostic-001 bundle and proposal; approve, revise, or defer the bounded one-process read-only diagnostic. No implementation, ArcPy invocation, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline or change analysis, attribution, derived-pixel publication, or scientific publication is authorized before an exact attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4560,7 +4567,7 @@
       "The radar recovery-002 packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, new attempt, radar processing, baseline, change analysis, attribution, or scientific action is released.",
       "The ApplyOrbitCorrection diagnostic packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline, change analysis, attribution, derived-pixel publication, or scientific action is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION",
-    "parallel_next_action": "Publish and publicly validate the exact zero-decision ApplyOrbitCorrection input-resolution diagnostic review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not approve or implement the proposal, invoke ArcPy, access project data or external custody, call ApplyOrbitCorrection or geoprocessing, reconstruct or substitute a missing candidate, create a new radar attempt, run baseline or change analysis, attribute cause, publish derived pixels, or publish science."
+    "parallel_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
+    "parallel_next_action": "Review the exact public M2 ApplyOrbitCorrection input-resolution diagnostic-001 bundle and proposal; approve, revise, or defer the bounded one-process read-only diagnostic. No implementation, ArcPy invocation, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline or change analysis, attribution, derived-pixel publication, or scientific publication is authorized before an exact attested decision."
   }
 }

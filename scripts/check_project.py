@@ -370,6 +370,8 @@ REQUIRED = [
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preflight.json",
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-readiness.json",
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-activation.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-reconciliation.json",
     "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preparation-approval.json",
     "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-approval.json",
     "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-bundle.json",
@@ -15622,6 +15624,105 @@ def main() -> None:
             ))
         ):
             fail("EVID-0182 radar recovery-002 publication gate differs or overclaims")
+
+    diagnostic_001_prefix = "m2-radar-apply-orbit-correction-input-resolution-diagnostic-001"
+    diagnostic_001_proposal_ref = "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json"
+    diagnostic_001_bundle_ref = f"reviews/{diagnostic_001_prefix}/review-bundle.json"
+    diagnostic_001_contract_ref = f"reviews/{diagnostic_001_prefix}/review-contract.json"
+    diagnostic_001_blank_ref = f"reviews/{diagnostic_001_prefix}/blank-response.json"
+    diagnostic_001_readiness_ref = f"records/readiness/{diagnostic_001_prefix}-review-readiness.json"
+    diagnostic_001_publication_approval_ref = f"records/source-gates/{diagnostic_001_prefix}-review-publication-approval.json"
+    diagnostic_001_activation_ref = f"records/readiness/{diagnostic_001_prefix}-review-publication-activation.json"
+    diagnostic_001_gate_ref = f"records/readiness/{diagnostic_001_prefix}-review-publication-gate.json"
+    diagnostic_001_reconciliation_ref = f"records/readiness/{diagnostic_001_prefix}-review-publication-reconciliation.json"
+    diagnostic_001_proposal = json.loads((ROOT / diagnostic_001_proposal_ref).read_text(encoding="utf-8"))
+    diagnostic_001_bundle = json.loads((ROOT / diagnostic_001_bundle_ref).read_text(encoding="utf-8"))
+    diagnostic_001_contract = json.loads((ROOT / diagnostic_001_contract_ref).read_text(encoding="utf-8"))
+    diagnostic_001_blank = json.loads((ROOT / diagnostic_001_blank_ref).read_text(encoding="utf-8"))
+    diagnostic_001_publication_approval = json.loads(
+        (ROOT / diagnostic_001_publication_approval_ref).read_text(encoding="utf-8")
+    )
+    diagnostic_001_activation = json.loads((ROOT / diagnostic_001_activation_ref).read_text(encoding="utf-8"))
+    diagnostic_001_gate = json.loads((ROOT / diagnostic_001_gate_ref).read_text(encoding="utf-8"))
+    diagnostic_001_reconciliation = json.loads(
+        (ROOT / diagnostic_001_reconciliation_ref).read_text(encoding="utf-8")
+    )
+    diagnostic_001_units = {
+        unit.get("id"): unit for unit in active_m2.get("units", []) if isinstance(unit, dict)
+    }
+    diagnostic_001_unit = diagnostic_001_units.get(
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW", {}
+    )
+    if (
+        sha256(diagnostic_001_proposal_ref) != "bb318432bf3a63f2bb75d2b1ea69716b6fbade9917d7c35ff8388d3edaa41d84"
+        or sha256(diagnostic_001_bundle_ref) != "88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af"
+        or sha256(diagnostic_001_readiness_ref) != "42c94874b548ac80864138467fc48011e1d8f3a7a41c6721eef34fa5de204513"
+        or sha256(diagnostic_001_gate_ref) != "cbf21f9e3716314eb3c4b6a845438786bf34f8c59906301e14c24a418826bff5"
+        or sha256(diagnostic_001_reconciliation_ref) != "19580456a2ea52b98b14be67a5609859d8a0304c98c21160f4d84c47a8a35cb0"
+        or diagnostic_001_proposal.get("human_decision_count") != 0
+        or diagnostic_001_bundle.get("human_decision_count") != 0
+        or diagnostic_001_contract.get("workflow_authority", {}).get("review_response_open") is not False
+        or diagnostic_001_blank.get("completed") is not False
+        or diagnostic_001_blank.get("human_decision_count") != 0
+        or diagnostic_001_publication_approval.get("status") != "approved_exact_zero_decision_review_publication_only"
+        or diagnostic_001_publication_approval.get("human_decision_count") != 1
+        or diagnostic_001_publication_approval.get("attestation") is not True
+        or diagnostic_001_publication_approval.get("bindings", {}).get("proposal_sha256") != sha256(diagnostic_001_proposal_ref)
+        or diagnostic_001_publication_approval.get("bindings", {}).get("review_bundle_sha256") != sha256(diagnostic_001_bundle_ref)
+        or diagnostic_001_activation.get("status") != "pass_exact_publication_authority_activated_public_ci_pending"
+        or diagnostic_001_activation.get("bindings", {}).get("publication_approval_sha256") != sha256(diagnostic_001_publication_approval_ref)
+        or diagnostic_001_gate.get("status") != "pass_public_default_branch_ci_zero_decision_owner_review_ready"
+        or diagnostic_001_gate.get("commit_sha") != "91a421c0b7159fb9c2ba1d59e48a679d829adf82"
+        or diagnostic_001_gate.get("public_ci_run_id") != 35473207884
+        or diagnostic_001_gate.get("public_ci_conclusion") != "success"
+        or diagnostic_001_gate.get("repository_required_file_count") != 1183
+        or diagnostic_001_gate.get("public_test_count") != 636
+        or diagnostic_001_gate.get("public_intentional_skip_count") != 13
+        or diagnostic_001_gate.get("bindings", {}).get("proposal_sha256") != sha256(diagnostic_001_proposal_ref)
+        or diagnostic_001_gate.get("bindings", {}).get("review_bundle_sha256") != sha256(diagnostic_001_bundle_ref)
+        or diagnostic_001_gate.get("released_now", {}).get("owner_proposal_review") is not True
+        or any(diagnostic_001_gate.get("released_now", {}).get(key) is not False for key in (
+            "diagnostic_implementation", "arcpy_invocation", "project_data_or_external_custody_access",
+            "apply_orbit_correction", "geoprocessing", "attempt_root_reconstruction_or_substitution",
+            "new_radar_attempt", "baseline_or_change_analysis", "attribution",
+            "derived_pixel_publication", "scientific_publication",
+        ))
+        or diagnostic_001_reconciliation.get("status") != "pass_public_gate_owner_review_ready"
+        or diagnostic_001_reconciliation.get("publication_gate_sha256") != sha256(diagnostic_001_gate_ref)
+        or diagnostic_001_reconciliation.get("current_checkpoint") != "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
+        or diagnostic_001_unit.get("status") != "in_progress"
+        or diagnostic_001_unit.get("gates", {}).get("public_ci") != "success"
+        or diagnostic_001_unit.get("gates", {}).get("human_decision_count") != 0
+        or diagnostic_001_unit.get("gates", {}).get("review_response_open") is not True
+        or diagnostic_001_unit.get("gates", {}).get("publication_gate_sha256") != sha256(diagnostic_001_gate_ref)
+        or diagnostic_001_unit.get("gates", {}).get("publication_reconciliation_sha256") != sha256(diagnostic_001_reconciliation_ref)
+        or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
+        or goal.get("current_checkpoint") != "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
+        or current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(ROOT, {"promoted": 8}) is not True
+        or current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(ROOT, {"promoted": 8}) is not False
+    ):
+        fail("M2 ApplyOrbitCorrection input-resolution diagnostic-001 publication gate differs or overclaims")
+    diagnostic_001_publication_evidence = ledger_by_id.get("EVID-0188")
+    diagnostic_001_gate_evidence = ledger_by_id.get("EVID-0189")
+    if (
+        not isinstance(diagnostic_001_publication_evidence, dict)
+        or diagnostic_001_publication_evidence.get("status") != "pass_exact_zero_decision_review_publication_authorized_public_ci_pending"
+        or diagnostic_001_publication_evidence.get("proposal_sha256") != sha256(diagnostic_001_proposal_ref)
+        or diagnostic_001_publication_evidence.get("review_bundle_sha256") != sha256(diagnostic_001_bundle_ref)
+        or diagnostic_001_publication_evidence.get("assertions", {}).get("owner_review_open") is not False
+        or not isinstance(diagnostic_001_gate_evidence, dict)
+        or diagnostic_001_gate_evidence.get("status") != "pass_public_ci_zero_decision_owner_review_ready"
+        or diagnostic_001_gate_evidence.get("publication_gate_sha256") != sha256(diagnostic_001_gate_ref)
+        or diagnostic_001_gate_evidence.get("publication_reconciliation_sha256") != sha256(diagnostic_001_reconciliation_ref)
+        or diagnostic_001_gate_evidence.get("assertions", {}).get("owner_review_ready") is not True
+        or any(diagnostic_001_gate_evidence.get("assertions", {}).get(key) is not False for key in (
+            "owner_proposal_decision_recorded", "diagnostic_implementation_authorized", "arcpy_invoked",
+            "apply_orbit_correction_invoked", "geoprocessing_invoked",
+            "attempt_root_reconstructed_or_substituted", "new_radar_attempt_created",
+            "project_data_content_read", "external_custody_accessed", "scientific_result_established",
+        ))
+    ):
+        fail("M2 ApplyOrbitCorrection input-resolution diagnostic-001 publication evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():
