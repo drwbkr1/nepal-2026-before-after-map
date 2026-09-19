@@ -1,0 +1,752 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-19T19:52:10Z",
+  "status": "pass_exact_receipt_recovery_probe_no_retry",
+  "disposition": "pass",
+  "attempt_id": "radar-delayed-import-probe-receipt-recovery-001-real-001",
+  "attempt_path_class": "local_appdata_probe_specific_outside_git_and_external_custody",
+  "durable_artifacts": {
+    "terminal-reservation.json": "85b47fe5144979d24e3013f19e00f419c1800e9c1bee77d7ada95105e9dc76a1",
+    "cleanup-reservation.json": "754f79559f741ed49c9eecd15ebb679fca4ea99352d6df33fccd08cc4599db8f",
+    "fallback.jsonl": "15bcb399cd9c209a62b31b1150ab018a333f2e8d36f16f1ed1632df2b9413c12",
+    "started.json": "26b893c0055bc17b69c067e942f18edc783612590b74b39cc152827725066bc2",
+    "stages.jsonl": "762ca0c96d0436ad390354efab1c90266d5eeae8e4174f8f49b8b0c23fe297f9",
+    "terminal.json": "8e8cbb7f58478f3a79b77427552a76ca1657c488ebeceb3109580adae05f32da",
+    "cleanup.json": "683c74cd4eae2e693964601c5c206e8ab159b057257e9250daf464e07e4c3330"
+  },
+  "durable_stage_evidence": {
+    "stage_count": 28,
+    "stages": [
+      "attempt_reserved",
+      "corpus_create_started",
+      "corpus_create_completed",
+      "corpus_hash_started",
+      "corpus_hash_completed",
+      "arcpy_import_started",
+      "arcpy_import_completed",
+      "product_info_started",
+      "product_info_completed",
+      "overwrite_output_started",
+      "overwrite_output_completed",
+      "image_analyst_checkout_started",
+      "image_analyst_checkout_completed",
+      "spatial_checkout_started",
+      "spatial_checkout_completed",
+      "disposable_raster_a_started",
+      "disposable_raster_a_completed",
+      "disposable_raster_b_started",
+      "disposable_raster_b_completed",
+      "disposable_mosaic_started",
+      "disposable_mosaic_completed",
+      "spatial_checkin_started",
+      "spatial_checkin_completed",
+      "image_analyst_checkin_started",
+      "image_analyst_checkin_completed",
+      "terminal_receipt_persisted",
+      "cleanup_started",
+      "cleanup_completed_or_warning"
+    ],
+    "last_durable_stage": "cleanup_completed_or_warning",
+    "stage_order_monotonic": true,
+    "terminal_receipt_persisted": true,
+    "cleanup_receipt_persisted": true
+  },
+  "terminal_result": {
+    "schema_version": "1.0",
+    "receipt_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL",
+    "status": "pass_exact_disposable_delayed_import_sequence",
+    "completed_at_utc": "2026-09-19T19:51:55Z",
+    "attempt_id": "radar-delayed-import-probe-receipt-recovery-001-real-001",
+    "bindings": {
+      "probe_contract_sha256": "beb21c963cc2302e5290116cda9e08229eb3af8503a410ea6dfa9ed55541a56c",
+      "probe_core_sha256": "76470ec20d61472854e3a9b43eca72a61bd6a4bbe084615e1bd1213aa8ddd92c",
+      "probe_runner_sha256": "12cf8c6ad44caddb8e2e7ad2ced541cb2fe50f3bcc43cee4c2d380d5f0003d1e",
+      "portable_test_sha256": "3f0db2425836bd91d68af39ebc79f7813f2f945995cfe06fc2e3ac309cee54cc",
+      "arcgis_validator_sha256": "404ee38af0d77f64cc1a304cee376813594461ad90e87b14ffa99905c1a80af8",
+      "implementation_commit_sha": "001fa5f7e23bd3a2348353c947b55adb84da5023",
+      "implementation_public_ci_run_id": 35464905883,
+      "gate_state_commit_sha": "95686fe7d65333ec1f003982318b3abac7917128",
+      "gate_state_public_ci_run_id": 35465309836,
+      "implementation_publication_gate_sha256": "36370981e8371b317b12e05212af829fd4c77f475cb988a6f952c0ef4efa3e4f",
+      "gate_state_publication_sha256": "f8438357a26ecca48605ddff2881d4d95e4346d06ccc79e3436e6b6b443da9d7",
+      "final_preflight_sha256": "121cd502ead7c694c740e2b2abf7b4241c566bbefc8b74d569b54c14a4e5136d"
+    },
+    "reservations": {
+      "terminal_sha256": "85b47fe5144979d24e3013f19e00f419c1800e9c1bee77d7ada95105e9dc76a1",
+      "cleanup_sha256": "754f79559f741ed49c9eecd15ebb679fca4ea99352d6df33fccd08cc4599db8f"
+    },
+    "fallback_journal_sha256_before_terminal": "782782934ff9f16e4d6700df3938a1a0a1146982d2c376fd0e3aab239b9553df",
+    "corpus": {
+      "file_count": 156,
+      "total_logical_bytes": 10367157634,
+      "aggregate_sha256": "dd56f8b28a1ed1c6e2b4b1d7d8f5db4fd86dab80a910fe79c8d018d58942430b",
+      "elapsed_seconds": 40.5906,
+      "inventory": [
+        {
+          "name": "probe-000.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-001.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-002.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-003.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-004.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-005.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-006.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-007.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-008.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-009.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-010.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-011.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-012.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-013.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-014.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-015.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-016.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-017.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-018.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-019.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-020.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-021.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-022.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-023.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-024.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-025.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-026.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-027.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-028.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-029.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-030.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-031.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-032.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-033.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-034.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-035.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-036.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-037.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-038.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-039.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-040.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-041.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-042.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-043.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-044.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-045.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-046.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-047.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-048.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-049.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-050.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-051.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-052.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-053.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-054.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-055.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-056.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-057.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-058.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-059.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-060.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-061.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-062.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-063.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-064.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-065.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-066.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-067.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-068.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-069.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-070.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-071.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-072.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-073.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-074.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-075.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-076.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-077.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-078.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-079.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-080.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-081.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-082.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-083.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-084.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-085.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-086.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-087.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-088.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-089.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-090.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-091.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-092.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-093.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-094.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-095.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-096.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-097.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-098.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-099.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-100.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-101.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-102.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-103.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-104.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-105.bin",
+          "logical_bytes": 66456139
+        },
+        {
+          "name": "probe-106.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-107.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-108.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-109.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-110.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-111.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-112.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-113.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-114.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-115.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-116.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-117.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-118.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-119.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-120.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-121.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-122.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-123.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-124.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-125.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-126.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-127.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-128.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-129.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-130.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-131.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-132.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-133.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-134.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-135.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-136.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-137.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-138.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-139.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-140.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-141.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-142.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-143.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-144.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-145.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-146.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-147.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-148.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-149.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-150.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-151.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-152.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-153.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-154.bin",
+          "logical_bytes": 66456138
+        },
+        {
+          "name": "probe-155.bin",
+          "logical_bytes": 66456138
+        }
+      ]
+    },
+    "product_info": "ArcInfo",
+    "disposable_rasters_created": 2,
+    "disposable_mosaic_created": true,
+    "assertions": {
+      "attempt_consumed": true,
+      "automatic_retry_performed": false,
+      "consumed_probe_reused_or_retried": false,
+      "project_data_content_read": false,
+      "external_custody_accessed": false,
+      "network_request_performed_by_runner": false,
+      "credential_value_read": false,
+      "radar_processing_executed": false,
+      "historical_root_cause_established": false,
+      "recovery_readiness_established": false,
+      "scientific_result_established": false
+    }
+  },
+  "preserved_primary_failure": null,
+  "terminal_persistence_failure": null,
+  "cleanup_persistence_failure": null,
+  "cleanup": {
+    "status": "cleanup_completed",
+    "payload_children_removed": true
+  },
+  "assertions": {
+    "attempt_consumed": true,
+    "automatic_retry_performed": false,
+    "second_attempt_created": false,
+    "success_reconstructed": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "radar_processing_executed": false,
+    "baseline_or_change_analysis_executed": false,
+    "interpretation_or_attribution_executed": false,
+    "historical_root_cause_established": false,
+    "recovery_readiness_established": false,
+    "scientific_result_established": false
+  }
+}

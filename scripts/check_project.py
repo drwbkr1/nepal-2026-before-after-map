@@ -299,6 +299,9 @@ REQUIRED = [
     "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-implementation-publication-gate.json",
     "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-implementation-publication-reconciliation.json",
     "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-gate-state-publication.json",
+    "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-final-preflight.json",
+    "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-terminal-reconciliation.json",
+    "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-outcome-reconciliation.json",
     "scripts/activate_m2_radar_delayed_import_probe_receipt_recovery_001.py",
     "scripts/m2_radar_delayed_import_probe_receipt_recovery_001_core.py",
     "scripts/run_m2_radar_delayed_import_probe_receipt_recovery_001.py",
@@ -14786,8 +14789,45 @@ def main() -> None:
         gate_state_path = ROOT / f"records/readiness/{receipt_recovery_prefix}-gate-state-publication.json"
         outcome_path = ROOT / f"records/processing/{receipt_recovery_prefix}-outcome-reconciliation.json"
         if outcome_path.exists():
+            terminal_reconciliation = json.loads(
+                (ROOT / f"records/processing/{receipt_recovery_prefix}-terminal-reconciliation.json").read_text(encoding="utf-8")
+            )
+            outcome = json.loads(outcome_path.read_text(encoding="utf-8"))
+            final_preflight = json.loads(
+                (ROOT / f"records/readiness/{receipt_recovery_prefix}-final-preflight.json").read_text(encoding="utf-8")
+            )
             if (
-                current_radar_delayed_import_probe_receipt_recovery_001_terminal(ROOT, {"promoted": 8}) is not True
+                final_preflight.get("status") != "pass_final_no_content_preflight_one_receipt_recovery_probe_released"
+                or final_preflight.get("checks", {}).get("attempt_root_absent") is not True
+                or final_preflight.get("checks", {}).get("arcpy_imported_by_preflight") is not False
+                or terminal_reconciliation.get("status") != "pass_exact_receipt_recovery_probe_no_retry"
+                or terminal_reconciliation.get("disposition") != "pass"
+                or terminal_reconciliation.get("durable_stage_evidence", {}).get("stage_count") != 28
+                or terminal_reconciliation.get("durable_stage_evidence", {}).get("last_durable_stage") != "cleanup_completed_or_warning"
+                or terminal_reconciliation.get("durable_stage_evidence", {}).get("stage_order_monotonic") is not True
+                or terminal_reconciliation.get("durable_stage_evidence", {}).get("terminal_receipt_persisted") is not True
+                or terminal_reconciliation.get("durable_stage_evidence", {}).get("cleanup_receipt_persisted") is not True
+                or terminal_reconciliation.get("terminal_result", {}).get("corpus", {}).get("file_count") != 156
+                or terminal_reconciliation.get("terminal_result", {}).get("corpus", {}).get("total_logical_bytes") != 10367157634
+                or terminal_reconciliation.get("terminal_result", {}).get("corpus", {}).get("aggregate_sha256") != "dd56f8b28a1ed1c6e2b4b1d7d8f5db4fd86dab80a910fe79c8d018d58942430b"
+                or terminal_reconciliation.get("terminal_result", {}).get("disposable_rasters_created") != 2
+                or terminal_reconciliation.get("terminal_result", {}).get("disposable_mosaic_created") is not True
+                or terminal_reconciliation.get("cleanup", {}).get("status") != "cleanup_completed"
+                or terminal_reconciliation.get("cleanup", {}).get("payload_children_removed") is not True
+                or outcome.get("status") != "pass_exact_receipt_recovery_probe_no_retry"
+                or outcome.get("disposition") != "pass"
+                or outcome.get("bindings", {}).get("final_preflight_sha256") != sha256(f"records/readiness/{receipt_recovery_prefix}-final-preflight.json")
+                or outcome.get("bindings", {}).get("terminal_reconciliation_sha256") != sha256(f"records/processing/{receipt_recovery_prefix}-terminal-reconciliation.json")
+                or outcome.get("corpus_result", {}).get("exact_expected_hash_observed") is not True
+                or outcome.get("corpus_result", {}).get("payload_children_removed") is not True
+                or any(outcome.get("assertions", {}).get(key) is not False for key in (
+                    "automatic_retry_performed", "second_attempt_created", "success_reconstructed",
+                    "project_data_content_read", "external_custody_accessed", "network_request_performed",
+                    "credential_value_read", "radar_processing_executed", "baseline_or_change_analysis_executed",
+                    "interpretation_or_attribution_executed", "historical_root_cause_established",
+                    "recovery_readiness_established", "scientific_result_established",
+                ))
+                or current_radar_delayed_import_probe_receipt_recovery_001_terminal(ROOT, {"promoted": 8}) is not True
                 or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW"
                 or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW"
             ):
@@ -14979,6 +15019,29 @@ def main() -> None:
                 ))
             ):
                 fail("EVID-0178 receipt-recovery gate-state publication differs or overclaims")
+        if (ROOT / f"records/processing/{receipt_recovery_prefix}-outcome-reconciliation.json").exists():
+            terminal_evidence = ledger_by_id.get("EVID-0179")
+            if (
+                not isinstance(terminal_evidence, dict)
+                or terminal_evidence.get("status") != "pass_exact_receipt_recovery_probe_no_retry"
+                or terminal_evidence.get("final_preflight_sha256") != sha256(f"records/readiness/{receipt_recovery_prefix}-final-preflight.json")
+                or terminal_evidence.get("terminal_reconciliation_sha256") != sha256(f"records/processing/{receipt_recovery_prefix}-terminal-reconciliation.json")
+                or terminal_evidence.get("outcome_reconciliation_sha256") != sha256(f"records/processing/{receipt_recovery_prefix}-outcome-reconciliation.json")
+                or terminal_evidence.get("assertions", {}).get("attempt_id") != "radar-delayed-import-probe-receipt-recovery-001-real-001"
+                or terminal_evidence.get("assertions", {}).get("attempt_consumed") is not True
+                or terminal_evidence.get("assertions", {}).get("disposition") != "pass"
+                or terminal_evidence.get("assertions", {}).get("last_durable_stage") != "cleanup_completed_or_warning"
+                or terminal_evidence.get("assertions", {}).get("terminal_receipt_persisted") is not True
+                or terminal_evidence.get("assertions", {}).get("cleanup_receipt_persisted") is not True
+                or terminal_evidence.get("assertions", {}).get("payload_children_removed") is not True
+                or terminal_evidence.get("assertions", {}).get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW"
+                or any(terminal_evidence.get("assertions", {}).get(key) is not False for key in (
+                    "automatic_retry_performed", "second_attempt_created", "project_data_content_read",
+                    "external_custody_accessed", "radar_processing_executed", "historical_root_cause_established",
+                    "recovery_readiness_established", "scientific_result_established",
+                ))
+            ):
+                fail("EVID-0179 receipt-recovery terminal outcome differs or overclaims")
 
     violations = []
     for relative in tracked_files():

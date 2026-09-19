@@ -4167,35 +4167,43 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
         "config/qa/m2-radar-delayed-import-probe-receipt-recovery-001-contract.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-final-preflight.json",
-        "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-outcome-reconciliation.json",
-        "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-gate-state-publication.json"
+        "records/readiness/m2-radar-delayed-import-probe-receipt-recovery-001-gate-state-publication.json",
+        "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-terminal-reconciliation.json",
+        "records/processing/m2-radar-delayed-import-probe-receipt-recovery-001-outcome-reconciliation.json"
       ],
       "gates": {
         "public_ci": "success",
         "gate_state_publication": "success",
-        "final_no_content_preflight": "released_not_started",
+        "final_no_content_preflight": "success",
         "maximum_live_attempts": 1,
-        "live_attempts_started": 0,
+        "live_attempts_started": 1,
         "gate_state_commit_sha": "95686fe7d65333ec1f003982318b3abac7917128",
         "gate_state_public_ci_run_id": 35465309836,
-        "gate_state_publication_sha256": "f8438357a26ecca48605ddff2881d4d95e4346d06ccc79e3436e6b6b443da9d7"
+        "gate_state_publication_sha256": "f8438357a26ecca48605ddff2881d4d95e4346d06ccc79e3436e6b6b443da9d7",
+        "attempt_consumed": true,
+        "terminal_status": "pass_exact_receipt_recovery_probe_no_retry",
+        "last_durable_stage": "cleanup_completed_or_warning",
+        "terminal_reconciliation_sha256": "a942a1827a72462e32caaed7690e785e7bc0c18df04224125a18131eeb09be26",
+        "outcome_reconciliation_sha256": "7d7028afdca5b880b2d4d1da69d404db72adf3b5210234cb2a88403c541696b3"
       },
       "exit_condition_delta": {
-        "expected": [
-          "terminal diagnostic evidence and cleanup disposition"
+        "expected": [],
+        "observed": [
+          "pass_exact_receipt_recovery_probe_no_retry",
+          "cleanup_completed"
         ],
-        "observed": [],
-        "decision_value": "pending",
-        "rationale": "Either PASS or BLOCK is diagnostic only and consumes the one fresh attempt."
+        "decision_value": "terminal_diagnostic_only",
+        "rationale": "The single fresh attempt is consumed. The result supports only the recorded host-time diagnostic boundary."
       },
-      "next_dependency": null
+      "next_dependency": null,
+      "disposition": "pass"
     }
   ],
   "path_efficiency": {
@@ -4252,8 +4260,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION",
-    "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one fresh disposable receipt-recovery probe begin, and it must never be retried.",
+    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW",
+    "next_action": "Review the terminal receipt-recovery diagnostic outcome. The fresh attempt is consumed and cannot be resumed, reused, or retried; any further diagnostic or radar action requires separately reviewed authority.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4300,7 +4308,7 @@
       "The one delayed-import probe attempt is terminal and consumed after full disposable-corpus hashing and a stop at the arcpy_import_started boundary; its caught exception was masked by terminal timestamp failure, postprocess cleanup completed, and no retry, radar recovery, historical-cause claim, or scientific claim is released.",
       "The receipt-recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, corpus, new attempt, project-data access, radar processing, or scientific action is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-EXECUTION",
-    "parallel_next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one fresh disposable receipt-recovery probe begin, and it must never be retried."
+    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-TERMINAL-REVIEW",
+    "parallel_next_action": "Review the terminal receipt-recovery diagnostic outcome. The fresh attempt is consumed and cannot be resumed, reused, or retried; any further diagnostic or radar action requires separately reviewed authority."
   }
 }
