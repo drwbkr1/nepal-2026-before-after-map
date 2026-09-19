@@ -82,8 +82,8 @@ class OrbitOfflineVerificationRecovery001PostsuccessTests(unittest.TestCase):
         self.assertEqual(units["M2-ORBIT-VERIFY"]["gates"]["attempted_source_ids"], SOURCE_IDS)
         self.assertEqual(units["M2-ORBIT-VERIFY"]["gates"]["initial_indeterminate_attempted_source_ids"], ["M2-ORB-001"])
         self.assertFalse(units["M2-ORBIT-APPLY"]["gates"]["orbit_application_started"])
-        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW")
-        self.assertEqual(goal["current_checkpoint"], "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW")
+        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], ("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"))
+        self.assertEqual(goal["current_checkpoint"], ("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"))
         self.assertEqual(
             current_orbit_offline_verification_recovery_001_terminal(ROOT, {"promoted": 8}),
             "pass",

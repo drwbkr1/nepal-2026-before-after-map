@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-CONTRACT",
+  "prepared_at_utc": "2026-09-19T22:02:42Z",
+  "review_bundle": {
+    "ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-bundle.json",
+    "manifest_sha256": "88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af"
+  },
+  "proposal": {
+    "ref": "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json",
+    "sha256": "bb318432bf3a63f2bb75d2b1ea69716b6fbade9917d7c35ff8388d3edaa41d84"
+  },
+  "workflow_authority": {
+    "local_preparation_complete": true,
+    "public_review_publication_authorized": false,
+    "review_response_open": false
+  },
+  "authority_boundary": {
+    "owner_proposal_decision_authorized": false,
+    "diagnostic_implementation_authorized": false,
+    "arcpy_invocation_authorized": false,
+    "project_data_or_external_custody_access_authorized": false,
+    "apply_orbit_correction_authorized": false,
+    "new_radar_attempt_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "scientific_publication_authorized": false
+  },
+  "response_requirements": {
+    "exact_proposal_sha256_required": "bb318432bf3a63f2bb75d2b1ea69716b6fbade9917d7c35ff8388d3edaa41d84",
+    "exact_review_bundle_sha256_required": "88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af",
+    "explicit_decision_required": true,
+    "attestation_required": true
+  }
+}

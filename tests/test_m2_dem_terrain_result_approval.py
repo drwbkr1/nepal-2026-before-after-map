@@ -81,9 +81,9 @@ class TerrainResultApprovalTests(unittest.TestCase):
         self.assertFalse(control["assertions"]["radar_pixel_processing_authorized"])
         self.assertEqual(
             [item["checkpoint_id"] for item in profile["parallel_checkpoints"]],
-            ["M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW"],
+            [("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION")],
         )
-        self.assertEqual(goal["parallel_checkpoints"], ["M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW"])
+        self.assertEqual(goal["parallel_checkpoints"], [("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION")])
 
 
 if __name__ == "__main__":

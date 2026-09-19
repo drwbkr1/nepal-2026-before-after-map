@@ -34,6 +34,8 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_pixel_orbit_application_recovery_002_execution_gate_publication_pending,
     current_radar_pixel_orbit_application_recovery_002_final_preflight_pending,
     current_radar_pixel_orbit_application_recovery_002_terminal,
+    current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending,
+    current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required,
     current_radar_delayed_import_probe_001_review_publication_pending,
     current_radar_delayed_import_probe_001_review_required,
     current_radar_delayed_import_probe_001_implementation_pending,
@@ -363,6 +365,20 @@ REQUIRED = [
     "records/processing/radar-pixel-orbit-application-001/m1-src-001-real-001-terminal.json",
     "records/processing/m2-radar-pixel-orbit-application-recovery-002-terminal-reconciliation.json",
     "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json",
+    "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json",
+    "docs/M2_RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_REVIEW.md",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preflight.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-readiness.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-activation.json",
+    "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preparation-approval.json",
+    "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-approval.json",
+    "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-bundle.json",
+    "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract.json",
+    "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/blank-response.json",
+    "scripts/prepare_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_review.py",
+    "scripts/integrate_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication.py",
+    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication.py",
+    "tests/test_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_review.py",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -1659,7 +1675,17 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if current_radar_pixel_orbit_application_recovery_002_terminal(ROOT, {"promoted": 8}):
+            if current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
+                expected_dem_checkpoint_authority_ref = "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract.json"
+                expected_dem_proposed_amendments = ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json"]
+                expected_dem_next_action = "Review the exact public M2 ApplyOrbitCorrection input-resolution diagnostic-001 bundle and proposal; approve, revise, or defer the bounded one-process read-only diagnostic. No implementation, ArcPy invocation, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline or change analysis, attribution, derived-pixel publication, or scientific publication is authorized before an exact attested decision."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-approval.json"
+                expected_dem_proposed_amendments = ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json"]
+                expected_dem_next_action = "Publish and publicly validate the exact zero-decision ApplyOrbitCorrection input-resolution diagnostic review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not approve or implement the proposal, invoke ArcPy, access project data or external custody, call ApplyOrbitCorrection or geoprocessing, reconstruct or substitute a missing candidate, create a new radar attempt, run baseline or change analysis, attribute cause, publish derived pixels, or publish science."
+            elif current_radar_pixel_orbit_application_recovery_002_terminal(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json"
                 expected_dem_proposed_amendments = []
@@ -1822,7 +1848,17 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if current_radar_pixel_orbit_application_recovery_002_terminal(ROOT, {"promoted": 8}):
+            if current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
+                expected_dem_checkpoint_authority_ref = "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract.json"
+                expected_dem_proposed_amendments = ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json"]
+                expected_dem_next_action = "Review the exact public M2 ApplyOrbitCorrection input-resolution diagnostic-001 bundle and proposal; approve, revise, or defer the bounded one-process read-only diagnostic. No implementation, ArcPy invocation, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline or change analysis, attribution, derived-pixel publication, or scientific publication is authorized before an exact attested decision."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-approval.json"
+                expected_dem_proposed_amendments = ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json"]
+                expected_dem_next_action = "Publish and publicly validate the exact zero-decision ApplyOrbitCorrection input-resolution diagnostic review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not approve or implement the proposal, invoke ArcPy, access project data or external custody, call ApplyOrbitCorrection or geoprocessing, reconstruct or substitute a missing candidate, create a new radar attempt, run baseline or change analysis, attribute cause, publish derived pixels, or publish science."
+            elif current_radar_pixel_orbit_application_recovery_002_terminal(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json"
                 expected_dem_proposed_amendments = []
@@ -2817,8 +2853,8 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must clear the approved radar recovery-002 proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != expected_dem_proposed_amendments:
+        fail("project profile proposed amendments differ from the active checkpoint")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -3262,8 +3298,8 @@ def main() -> None:
         or "bounded nested-grid correction" not in optical_pixel_recovery_review_gate.get("reason", "")
     ):
         fail("project profile must bind optical pixel recovery to its exact approval")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
-        fail("project profile must clear the approved radar recovery-002 proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != expected_dem_proposed_amendments:
+        fail("project profile proposed amendments differ from the active checkpoint")
     radar_first_path_gate = profile_gates.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
     if (
         radar_first_path_gate.get("authority_ref") != "reviews/m2-radar-first-path-001/review-contract.json"
@@ -3355,8 +3391,8 @@ def main() -> None:
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
-    if goal.get("proposed_amendments") != []:
-        fail("long-term goal must clear the approved radar recovery-002 proposal")
+    if goal.get("proposed_amendments") != expected_dem_proposed_amendments:
+        fail("long-term goal proposed amendments differ from the active checkpoint")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -8137,7 +8173,11 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        if current_radar_pixel_orbit_application_recovery_002_terminal(ROOT, state_counts):
+        if current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
+        elif current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"
+        elif current_radar_pixel_orbit_application_recovery_002_terminal(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW"
         elif current_radar_pixel_orbit_application_recovery_002_final_preflight_pending(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION"
@@ -14936,7 +14976,17 @@ def main() -> None:
             radar_recovery_002_review_ready = current_radar_pixel_orbit_application_recovery_002_review_required(
                 ROOT, {"promoted": 8}
             )
-            if current_radar_pixel_orbit_application_recovery_002_terminal(ROOT, {"promoted": 8}):
+            diagnostic_review_ready = current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_required(
+                ROOT, {"promoted": 8}
+            )
+            diagnostic_publication_pending = current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(
+                ROOT, {"promoted": 8}
+            )
+            if diagnostic_review_ready:
+                expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW"
+            elif diagnostic_publication_pending:
+                expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"
+            elif current_radar_pixel_orbit_application_recovery_002_terminal(ROOT, {"promoted": 8}):
                 expected_post_probe_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW"
             elif current_radar_pixel_orbit_application_recovery_002_final_preflight_pending(ROOT, {"promoted": 8}):
                 expected_post_probe_checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION"
@@ -15431,8 +15481,16 @@ def main() -> None:
                 or radar_recovery_002_execution.get("gates", {}).get("attempt_consumed") is not True
                 or radar_recovery_002_execution.get("gates", {}).get("terminal_reconciliation_sha256") != sha256(radar_recovery_002_terminal_ref)
                 or radar_recovery_002_execution.get("gates", {}).get("outcome_reconciliation_sha256") != sha256(radar_recovery_002_outcome_ref)
-                or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW"
-                or goal.get("current_checkpoint") != "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW"
+                or profile.get("current_checkpoint", {}).get("checkpoint_id") not in {
+                    "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
+                    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION",
+                    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
+                }
+                or goal.get("current_checkpoint") not in {
+                    "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
+                    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION",
+                    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
+                }
                 or current_radar_pixel_orbit_application_recovery_002_terminal(ROOT, {"promoted": 8}) is not True
             ):
                 fail("M2 radar recovery-002 terminal state differs or overclaims")

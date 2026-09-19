@@ -78,7 +78,7 @@ class OrbitContinuation001PublicationTests(unittest.TestCase):
         self.assertFalse(action["gates"]["m2_orb_001_request_authorized"])
 
     def test_checkpoint_derives_to_terminal_orbit_input_pass(self) -> None:
-        checkpoint = "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW"
+        checkpoint = ("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION")
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)

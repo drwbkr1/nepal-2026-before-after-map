@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-19T22:02:42Z",
+  "status": "ready_local_zero_decision_publication_not_authorized",
+  "human_decision_count": 0,
+  "artifacts": [
+    {
+      "path": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preparation-approval.json",
+      "sha256": "e0ba406485ab0fb55c3254f971de4f0aee7c4758c92d82fb5d3a3d9ba3bc9b7f",
+      "role": "preparation_authority"
+    },
+    {
+      "path": "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json",
+      "sha256": "bb318432bf3a63f2bb75d2b1ea69716b6fbade9917d7c35ff8388d3edaa41d84",
+      "role": "proposal"
+    },
+    {
+      "path": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preflight.json",
+      "sha256": "ae45242d88dee316fc36a34f91d8acbd8d73c6c76b9d22b3fedf5acef1a524f3",
+      "role": "preparation_preflight"
+    },
+    {
+      "path": "docs/M2_RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_REVIEW.md",
+      "sha256": "8b9f3a7a869ab8acf88d13555d29257d933f6abe9532eeaae7e9015d30ec83b9",
+      "role": "human_readable_review"
+    },
+    {
+      "path": "records/processing/radar-pixel-orbit-application-001/m1-src-001-real-001-terminal.json",
+      "sha256": "d1a16548fd0ec13df3802f6a7cf62f4a884f93a6efc8d0be630c3be2b9ac786d",
+      "role": "exact_source_failure"
+    },
+    {
+      "path": "records/processing/m2-radar-pixel-orbit-application-recovery-002-terminal-reconciliation.json",
+      "sha256": "32babf925933b46c88870d5648bb39fd32596bc1b86d1f5fe01c52de84cffdfb",
+      "role": "terminal_reconciliation"
+    },
+    {
+      "path": "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json",
+      "sha256": "371030851c44810ff2d5d06390c27c76af5b47ee1d8865b8e310025317331339",
+      "role": "outcome_reconciliation"
+    }
+  ],
+  "decision_requested_after_publication": {
+    "decision_id": "D-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001",
+    "question": "Approve, revise, or defer the bounded one-process read-only input-resolution diagnostic?",
+    "choices": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "response_open": false
+  },
+  "authority_boundary": {
+    "publication_authorized": false,
+    "owner_review_open": false,
+    "implementation_authorized": false,
+    "arcpy_invocation_authorized": false,
+    "project_data_access_authorized": false,
+    "new_attempt_authorized": false
+  }
+}

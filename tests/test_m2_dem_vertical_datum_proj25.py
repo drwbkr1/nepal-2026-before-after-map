@@ -60,7 +60,7 @@ class DemVerticalDatumProj25Tests(unittest.TestCase):
         self.assertFalse(gate["assertions"]["grid_request_performed"])
         self.assertFalse(gate["assertions"]["dem_pixels_read"])
         self.assertEqual(reconciliation["status"], "pass_public_gate_final_no_payload_preflight_ready")
-        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW")
+        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], ("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"))
 
     def test_controlled_paths_reject_traversal_and_absolute_paths(self) -> None:
         for unsafe in ("../escape.tif", "/absolute.tif", "a/../../escape.tif"):

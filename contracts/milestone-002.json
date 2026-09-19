@@ -4393,6 +4393,67 @@
       },
       "next_dependency": null,
       "disposition": "block"
+    },
+    {
+      "id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
+      "purpose": "Publish and review one exact read-only ApplyOrbitCorrection input-resolution diagnostic proposal without releasing implementation, ArcPy, project-data access, reconstruction, geoprocessing, or a new radar attempt.",
+      "depends_on": [
+        "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-EXECUTION"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preparation-approval.json",
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-approval.json",
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-activation.json",
+        "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json",
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preflight.json",
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-readiness.json",
+        "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-bundle.json",
+        "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract.json",
+        "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/blank-response.json",
+        "records/processing/radar-pixel-orbit-application-001/m1-src-001-real-001-terminal.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-002-terminal-reconciliation.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json"
+      ],
+      "outputs": [],
+      "gates": {
+        "public_ci": "pending",
+        "human_decision_count": 0,
+        "attestation": false,
+        "review_response_open": false,
+        "owner_proposal_approval_authorized": false,
+        "diagnostic_implementation_authorized": false,
+        "arcpy_invocation_authorized": false,
+        "project_data_or_external_custody_access_authorized": false,
+        "apply_orbit_correction_authorized": false,
+        "geoprocessing_authorized": false,
+        "attempt_root_reconstruction_or_substitution_authorized": false,
+        "new_radar_attempt_authorized": false,
+        "baseline_or_change_authorized": false,
+        "attribution_authorized": false,
+        "derived_pixel_publication_authorized": false,
+        "scientific_publication_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/processing/radar-pixel-orbit-application-001/m1-src-001-real-001-terminal.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-002-terminal-reconciliation.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [
+          "successful public default-branch CI",
+          "one later exact attested owner proposal decision"
+        ],
+        "observed": [
+          "exact zero-decision packet publication authorized; public CI pending"
+        ],
+        "decision_value": "unknown",
+        "rationale": "Publication authority opens no substantive proposal decision and releases no implementation or execution."
+      },
+      "next_dependency": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION"
     }
   ],
   "path_efficiency": {
@@ -4449,8 +4510,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
-    "next_action": "Review the terminal recovery-002 outcome. The fresh attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain blocked pending separate reviewed authority.",
+    "current_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION",
+    "next_action": "Publish and publicly validate the exact zero-decision ApplyOrbitCorrection input-resolution diagnostic review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not approve or implement the proposal, invoke ArcPy, access project data or external custody, call ApplyOrbitCorrection or geoprocessing, reconstruct or substitute a missing candidate, create a new radar attempt, run baseline or change analysis, attribute cause, publish derived pixels, or publish science.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4496,9 +4557,10 @@
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval.",
       "The one delayed-import probe attempt is terminal and consumed after full disposable-corpus hashing and a stop at the arcpy_import_started boundary; its caught exception was masked by terminal timestamp failure, postprocess cleanup completed, and no retry, radar recovery, historical-cause claim, or scientific claim is released.",
       "The receipt-recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, corpus, new attempt, project-data access, radar processing, or scientific action is released.",
-      "The radar recovery-002 packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, new attempt, radar processing, baseline, change analysis, attribution, or scientific action is released."
+      "The radar recovery-002 packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, new attempt, radar processing, baseline, change analysis, attribution, or scientific action is released.",
+      "The ApplyOrbitCorrection diagnostic packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline, change analysis, attribution, derived-pixel publication, or scientific action is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
-    "parallel_next_action": "Review the terminal recovery-002 outcome. The fresh attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain blocked pending separate reviewed authority."
+    "parallel_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION",
+    "parallel_next_action": "Publish and publicly validate the exact zero-decision ApplyOrbitCorrection input-resolution diagnostic review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Do not approve or implement the proposal, invoke ArcPy, access project data or external custody, call ApplyOrbitCorrection or geoprocessing, reconstruct or substitute a missing candidate, create a new radar attempt, run baseline or change analysis, attribute cause, publish derived pixels, or publish science."
   }
 }

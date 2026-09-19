@@ -151,15 +151,15 @@ class RadarFirstPathReview001Tests(unittest.TestCase):
         self.assertEqual(units["M2-ORBIT-RECOVERY-003"]["disposition"], "block")
         self.assertEqual(
             self.profile["current_checkpoint"]["checkpoint_id"],
-            "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
+            ("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"),
         )
         self.assertEqual(
             self.goal["current_checkpoint"],
-            "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
+            ("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"),
         )
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            [],
+            ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json"],
         )
         self.assertIn(APPROVAL_REF, self.goal["active_amendments"])
         self.assertEqual(self.control["status"], "pass_route_split_and_corrected_orbit_review_ready")

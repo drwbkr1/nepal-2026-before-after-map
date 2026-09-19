@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-READINESS",
+  "verified_at_utc": "2026-09-19T22:02:42Z",
+  "status": "pass_local_zero_decision_packet_ready_publication_authority_required",
+  "bindings": {
+    "preparation_approval_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preparation-approval.json",
+    "preparation_approval_sha256": "e0ba406485ab0fb55c3254f971de4f0aee7c4758c92d82fb5d3a3d9ba3bc9b7f",
+    "proposal_ref": "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json",
+    "proposal_sha256": "bb318432bf3a63f2bb75d2b1ea69716b6fbade9917d7c35ff8388d3edaa41d84",
+    "review_preflight_ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preflight.json",
+    "review_preflight_sha256": "ae45242d88dee316fc36a34f91d8acbd8d73c6c76b9d22b3fedf5acef1a524f3",
+    "review_document_ref": "docs/M2_RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_REVIEW.md",
+    "review_document_sha256": "8b9f3a7a869ab8acf88d13555d29257d933f6abe9532eeaae7e9015d30ec83b9",
+    "review_bundle_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-bundle.json",
+    "review_bundle_sha256": "88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af",
+    "review_contract_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract.json",
+    "review_contract_sha256": "c3d0a2d59de816496d9e91f0a69cc789f264e5520278b715f5cd794439ec8203",
+    "blank_response_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/blank-response.json",
+    "blank_response_sha256": "6a45d0e25e2547d5f0e049f53a145be909e1ae9a3a7883c6ffde5e508e77644a",
+    "terminal_reconciliation_sha256": "32babf925933b46c88870d5648bb39fd32596bc1b86d1f5fe01c52de84cffdfb",
+    "outcome_reconciliation_sha256": "371030851c44810ff2d5d06390c27c76af5b47ee1d8865b8e310025317331339"
+  },
+  "validation": {
+    "terminal_attempt_record_preserved": true,
+    "external_attempt_root_current_presence_not_claimed": true,
+    "protected_public_evidence_preserved": true,
+    "post_observation_limit_disclosed": true,
+    "human_decision_count": 0,
+    "blank_response_verified": true,
+    "canonical_checkpoint_intentionally_unchanged": true,
+    "maximum_proposed_apply_orbit_correction_calls": 0,
+    "maximum_proposed_geoprocessing_calls": 0
+  },
+  "released_now": {
+    "local_packet_preparation": true,
+    "local_packet_validation": true,
+    "git_commit_or_push": false,
+    "public_ci": false,
+    "owner_proposal_review": false,
+    "diagnostic_implementation": false,
+    "arcpy_invocation": false,
+    "project_data_or_external_custody_access": false,
+    "apply_orbit_correction": false,
+    "new_radar_attempt": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "git_commit_created": false,
+    "git_push_performed": false,
+    "public_ci_started": false,
+    "arcpy_invoked": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "apply_orbit_correction_invoked": false,
+    "new_attempt_created": false,
+    "radar_processing_executed": false,
+    "historical_root_cause_established": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Obtain explicit owner authorization to commit and publish this exact zero-decision packet and run public default-branch CI; do not open the owner proposal response before that gate passes."
+}

@@ -118,7 +118,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertFalse(unit_by_id["M2-ORBIT-APPLY"]["gates"]["orbit_application_started"])
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            [],
+            ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-001-proposal.json"],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -148,7 +148,7 @@ class M2OrbitActivationTests(unittest.TestCase):
             ],
         )
         checkpoints = [item["checkpoint_id"] for item in self.profile["parallel_checkpoints"]]
-        self.assertIn("M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW", checkpoints)
+        self.assertIn(("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW" if (ROOT / "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-publication-gate.json").is_file() else "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION"), checkpoints)
         self.assertNotIn("M2-DEM-TERRAIN-RESULT-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-ACQUISITION-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-AMENDMENT-REVIEW", checkpoints)

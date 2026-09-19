@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "response_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-BLANK-RESPONSE",
+  "completed": false,
+  "reviewer": {
+    "name": null,
+    "reviewed_at_utc": null,
+    "attestation": false
+  },
+  "responses": [
+    {
+      "decision_id": "D-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001",
+      "decision": null,
+      "comment": null
+    }
+  ],
+  "human_decision_count": 0,
+  "response_not_open_until_public_ci": true,
+  "bindings": {
+    "proposal_sha256": "bb318432bf3a63f2bb75d2b1ea69716b6fbade9917d7c35ff8388d3edaa41d84",
+    "review_bundle_sha256": "88c5e50d2f8f223e1c148caa0212e1b28ba4c80eb3eacae23be7e4f63bd477af"
+  }
+}

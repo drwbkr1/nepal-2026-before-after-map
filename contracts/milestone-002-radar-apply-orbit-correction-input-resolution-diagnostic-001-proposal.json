@@ -1,0 +1,183 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001",
+  "prepared_at_utc": "2026-09-19T22:02:42Z",
+  "status": "proposed_zero_decision_not_authorized_for_implementation",
+  "human_decision_count": 0,
+  "preparation_authority": {
+    "ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-review-preparation-approval.json",
+    "sha256": "e0ba406485ab0fb55c3254f971de4f0aee7c4758c92d82fb5d3a3d9ba3bc9b7f",
+    "local_preparation_authorized": true,
+    "git_publication_authorized": false,
+    "public_ci_authorized": false,
+    "implementation_authorized": false
+  },
+  "trigger": {
+    "terminal_reconciliation_ref": "records/processing/m2-radar-pixel-orbit-application-recovery-002-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "32babf925933b46c88870d5648bb39fd32596bc1b86d1f5fe01c52de84cffdfb",
+    "outcome_reconciliation_ref": "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json",
+    "outcome_reconciliation_sha256": "371030851c44810ff2d5d06390c27c76af5b47ee1d8865b8e310025317331339",
+    "source_terminal_ref": "records/processing/radar-pixel-orbit-application-001/m1-src-001-real-001-terminal.json",
+    "source_terminal_sha256": "d1a16548fd0ec13df3802f6a7cf62f4a884f93a6efc8d0be630c3be2b9ac786d"
+  },
+  "observed_state": {
+    "attempt_id": "radar-pixel-orbit-application-recovery-002-real-001",
+    "attempt_terminal_and_consumed": true,
+    "automatic_retry_performed": false,
+    "setup_stages_completed": [
+      "identity_scan",
+      "arcpy_import",
+      "ArcInfo_product_check",
+      "ImageAnalyst_checkout",
+      "Spatial_checkout",
+      "DEM_mosaic",
+      "analysis_support"
+    ],
+    "source_id_started": "M1-SRC-001",
+    "orbit_source_id_bound": "M2-ORB-001",
+    "later_sources_started": false,
+    "route_evaluations_started": false,
+    "failing_tool": "ApplyOrbitCorrection",
+    "failure_type": "ExecuteError",
+    "failure_code": "unexpected_processing_failure",
+    "failure_message": "ERROR 999999: Something unexpected caused the tool to fail. Contact Esri Technical Support (http://esriurl.com/support) to Report a Bug, and refer to the error help for potential solutions or workarounds. The system cannot locate the object specified.  Failed to execute (ApplyOrbitCorrection). ",
+    "static_call_shape": "arcpy.ia.ApplyOrbitCorrection(str(copied_safe / 'manifest.safe'), str(exact_orbit_custody_path))",
+    "python_filesystem_manifest_presence_checked_before_call": true,
+    "python_filesystem_orbit_presence_verified_by_frozen_input_controls": true,
+    "arcgis_catalog_recognition_of_safe_directory_observed": false,
+    "arcgis_catalog_recognition_of_manifest_safe_observed": false,
+    "arcgis_catalog_recognition_of_orbit_eof_observed": false,
+    "attempt_root_current_presence_observed": false,
+    "exact_unresolved_object_identified": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "post_observation_bias": "The proposed questions were selected after observing the ApplyOrbitCorrection failure and therefore may diagnose only the preserved failure boundary; they cannot retrospectively prove an unrecorded cause."
+  },
+  "protected_public_evidence": [
+    {
+      "path": "records/processing/radar-pixel-orbit-application-001/m1-src-001-real-001-started.json",
+      "sha256": "764c297d3e745e54769d07f4c048c706919cbc1cd282d3ff26000f92b036cb1e",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "records/processing/radar-pixel-orbit-application-001/m1-src-001-real-001-terminal.json",
+      "sha256": "d1a16548fd0ec13df3802f6a7cf62f4a884f93a6efc8d0be630c3be2b9ac786d",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "records/processing/m2-radar-pixel-orbit-application-recovery-002-terminal-reconciliation.json",
+      "sha256": "32babf925933b46c88870d5648bb39fd32596bc1b86d1f5fe01c52de84cffdfb",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "records/processing/m2-radar-pixel-orbit-application-recovery-002-outcome-reconciliation.json",
+      "sha256": "371030851c44810ff2d5d06390c27c76af5b47ee1d8865b8e310025317331339",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "records/readiness/m2-radar-pixel-orbit-application-recovery-002-final-preflight.json",
+      "sha256": "42e41c84ae9c2a826f185bfaa251a47ffad1f46679b97b6048275e6231a39f01",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "records/readiness/m2-radar-pixel-orbit-application-recovery-002-gate-state-publication.json",
+      "sha256": "057d3e09b006e3ad3ddd54b48cb599dba598dd277a26303a0b3335c242b76d3b",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "config/qa/m2-radar-pixel-orbit-application-recovery-002-contract.json",
+      "sha256": "6482f01722f39455d6150df79186385de532cb22f33d079c651711129eb35c6e",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "config/qa/m2-radar-pixel-orbit-application-001-contract.json",
+      "sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "scripts/run_m2_radar_pixel_orbit_application_001.py",
+      "sha256": "0b65fbecbeab373d8bbbf2cbbc28f8817e3c3bb08584dbf1a9720dcbb19ceb06",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "scripts/m2_radar_pixel_orbit_application_001_core.py",
+      "sha256": "fd192878acf33e2c73eeeba1ec42865eac48dfc5742b3ae4cf54b51de42755ba",
+      "must_remain_unchanged_during_preparation": true
+    }
+  ],
+  "proposed_diagnostic_contract": {
+    "diagnostic_id": "radar-apply-orbit-correction-input-resolution-diagnostic-001-real-001",
+    "mode": "read_only_single_process_no_geoprocessing",
+    "exact_inputs": {
+      "terminal_attempt_id": "radar-pixel-orbit-application-recovery-002-real-001",
+      "source_id": "M1-SRC-001",
+      "orbit_source_id": "M2-ORB-001",
+      "attempt_root_path_source": "exact external attempt root frozen by the approved recovery-002 contract",
+      "attempt_root_current_presence": "not observed under preparation-only authority; diagnostic must establish it before content inspection",
+      "candidate_radar_paths": [
+        "copied_SAFE_directory",
+        "copied_SAFE_manifest.safe"
+      ],
+      "candidate_orbit_path": "exact_M2-ORB-001_EOF"
+    },
+    "fixed_check_order": [
+      "reserve_terminal_receipt_before_content_access",
+      "verify_exact protected public evidence",
+      "verify existence and filesystem identity of the exact append-only attempt-root SAFE candidate, manifest.safe candidate, and exact orbit EOF",
+      "import ArcPy and record install, product, extension, and ApplyOrbitCorrection usage identity",
+      "evaluate arcpy.Exists for copied SAFE directory",
+      "evaluate arcpy.Exists for copied manifest.safe",
+      "evaluate arcpy.Exists for exact orbit EOF",
+      "for each ArcGIS-recognized object only, record sanitized Describe dataType, datasetType, catalogPath class, and children count",
+      "persist terminal and cleanup receipts"
+    ],
+    "maximum_real_diagnostic_processes": 1,
+    "maximum_apply_orbit_correction_calls": 0,
+    "maximum_geoprocessing_tool_calls": 0,
+    "automatic_retry": false,
+    "network_requests": 0,
+    "credential_actions": 0,
+    "source_orbit_or_dem_copies": 0,
+    "source_orbit_or_dem_mutations": 0,
+    "derived_raster_outputs": 0,
+    "baseline_or_change_actions": 0,
+    "scientific_outputs": 0,
+    "implementation_gates": [
+      "exact owner approval of the public review packet",
+      "bounded implementation with synthetic no-content tests",
+      "successful public default-branch CI",
+      "one final no-content preflight"
+    ],
+    "result_semantics": {
+      "pass_may_establish": "current filesystem presence plus ArcGIS catalog recognition or nonrecognition of the exact frozen input path forms in one diagnostic process",
+      "missing_attempt_root_or_candidate_semantics": "terminal block without reconstruction, substitution, copy, or processing",
+      "pass_does_not_establish": [
+        "historical root cause",
+        "corrected ApplyOrbitCorrection call",
+        "radar recovery readiness",
+        "authorization for a correction or retry",
+        "usable radar pixels",
+        "baseline admission",
+        "change analysis",
+        "interpretation or attribution",
+        "scientific result"
+      ]
+    }
+  },
+  "stop_rules": [
+    "Stop before Git commit, push, public CI, implementation, ArcPy invocation, or project/external-custody access under the present preparation-only authority.",
+    "Do not call ApplyOrbitCorrection or any other geoprocessing tool in the proposed diagnostic.",
+    "Do not alter the input path, source, orbit, DEM, AOI, CRS, grid, mask, threshold, registration, or scientific contracts.",
+    "Do not reuse, resume, retry, mutate, or reconstruct the consumed recovery-002 attempt.",
+    "Any correction, path substitution, or new processing attempt requires a separate post-diagnostic review and exact owner decision."
+  ],
+  "does_not_authorize_now": [
+    "Git publication or public CI",
+    "owner approval of this proposal",
+    "diagnostic implementation or ArcPy invocation",
+    "project-data or external-custody access",
+    "ApplyOrbitCorrection or any geoprocessing call",
+    "new radar attempt, source substitution, or path correction",
+    "baseline, change analysis, attribution, derived-pixel publication, or scientific publication"
+  ]
+}
