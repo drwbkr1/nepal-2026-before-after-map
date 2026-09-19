@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-19T17:29:31Z",
+  "status": "block_terminal_receipt_persistence_failure_no_retry",
+  "attempt_id": "radar-delayed-import-probe-001-real-001",
+  "attempt_path_class": "local_appdata_probe_specific_outside_git_and_external_custody",
+  "process_failure": {
+    "failure_type": "AttributeError",
+    "failure_code": "terminal_timestamp_construction_failed",
+    "failure_message": "module 'datetime' has no attribute 'now'",
+    "observed_traceback_boundary": "run_m2_radar_delayed_import_probe_001.py execute_probe terminal completed_at_utc construction",
+    "original_caught_exception_recoverable": false
+  },
+  "durable_stage_evidence": {
+    "started_sha256": "5309a80e19d3199abd6dc3640e9d16ea8450eb4035f2d3fdd96e8f2008c4dbb9",
+    "stages_sha256": "c8a12796463b29aa62aef668b0bff715b2a61b7369beaa51a064b380e5ca069d",
+    "last_durable_stage": "arcpy_import_started",
+    "durable_stage_count": 6,
+    "durable_stages": [
+      "attempt_reserved",
+      "corpus_create_started",
+      "corpus_create_completed",
+      "corpus_hash_started",
+      "corpus_hash_completed",
+      "arcpy_import_started"
+    ],
+    "arcpy_import_completed_durable": false,
+    "product_info_started": false,
+    "extension_checkout_started": false,
+    "disposable_raster_started": false,
+    "mosaic_started": false
+  },
+  "corpus_scan": {
+    "status": "pass_full_stable_order_hash_before_arcpy_import",
+    "file_count": 156,
+    "total_logical_bytes": 10367157634,
+    "aggregate_sha256": "dd56f8b28a1ed1c6e2b4b1d7d8f5db4fd86dab80a910fe79c8d018d58942430b",
+    "elapsed_seconds": 40.645573
+  },
+  "cleanup": {
+    "status": "cleanup_completed_after_runner_terminal_persistence_failure",
+    "cleanup_reconciliation_sha256": "6b41fb8ad30b2fb001bb3f28f9cc726e8a9f4a1edca131cf55b6720085b288f5",
+    "corpus_removed": true,
+    "runner_terminal_json_persisted": false,
+    "runner_cleanup_json_persisted": false,
+    "original_started_and_stages_preserved": true
+  },
+  "assertions": {
+    "attempt_consumed": true,
+    "automatic_retry_performed": false,
+    "second_attempt_created": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "network_request_performed_by_runner": false,
+    "credential_value_read": false,
+    "radar_processing_executed": false,
+    "baseline_or_change_analysis_executed": false,
+    "interpretation_or_attribution_executed": false,
+    "historical_root_cause_established": false,
+    "recovery_readiness_established": false,
+    "scientific_result_established": false
+  }
+}

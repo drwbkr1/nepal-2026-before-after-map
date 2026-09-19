@@ -234,6 +234,10 @@ RADAR_DELAYED_IMPORT_PROBE_001_FINAL_PREFLIGHT_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION",
     "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one disposable delayed-import probe begin.",
 }
+RADAR_DELAYED_IMPORT_PROBE_001_TERMINAL_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW",
+    "next_action": "Review the terminal disposable-probe outcome. The attempt is consumed and cannot be retried; any follow-on requires a separately reviewed owner decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1885,6 +1889,36 @@ def current_radar_delayed_import_probe_001_final_preflight_pending(
     )
 
 
+def current_radar_delayed_import_probe_001_terminal(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the consumed disposable probe and exact terminal reconciliation."""
+    if state_counts != {"promoted": 8}:
+        return False
+    try:
+        milestone = load(root / "contracts/milestone-002.json")
+        terminal = load(root / "records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json")
+        outcome = load(root / "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    execution = units.get("M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION", {})
+    return bool(
+        terminal.get("status") == "block_terminal_receipt_persistence_failure_no_retry"
+        and terminal.get("durable_stage_evidence", {}).get("last_durable_stage") == "arcpy_import_started"
+        and terminal.get("assertions", {}).get("attempt_consumed") is True
+        and terminal.get("assertions", {}).get("automatic_retry_performed") is False
+        and outcome.get("status") == "block_probe_terminal_persistence_failure_no_retry"
+        and outcome.get("assertions", {}).get("arcpy_import_completed_durable") is False
+        and outcome.get("assertions", {}).get("historical_root_cause_established") is False
+        and outcome.get("assertions", {}).get("recovery_readiness_established") is False
+        and execution.get("status") == "complete"
+        and execution.get("disposition") == "block"
+        and execution.get("gates", {}).get("live_attempts_started") == 1
+        and execution.get("gates", {}).get("last_durable_stage") == "arcpy_import_started"
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -1954,7 +1988,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_delayed_import_probe_001_final_preflight_pending(
+            if current_radar_delayed_import_probe_001_terminal(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_001_TERMINAL_CHECKPOINT)
+            elif current_radar_delayed_import_probe_001_final_preflight_pending(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_001_FINAL_PREFLIGHT_CHECKPOINT)

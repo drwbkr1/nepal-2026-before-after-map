@@ -33,6 +33,7 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_delayed_import_probe_001_implementation_pending,
     current_radar_delayed_import_probe_001_execution_gate_publication_pending,
     current_radar_delayed_import_probe_001_final_preflight_pending,
+    current_radar_delayed_import_probe_001_terminal,
     current_full_header_implementation_pending,
     current_materialization_pixel_implementation_pending,
     current_optical_pixel_implementation_pending,
@@ -249,6 +250,9 @@ REQUIRED = [
     "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-gate.json",
     "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-reconciliation.json",
     "records/readiness/m2-radar-delayed-import-probe-001-gate-state-publication.json",
+    "records/readiness/m2-radar-delayed-import-probe-001-final-preflight.json",
+    "records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json",
+    "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json",
     "scripts/activate_m2_radar_delayed_import_probe_001.py",
     "scripts/m2_radar_delayed_import_probe_001_core.py",
     "scripts/run_m2_radar_delayed_import_probe_001.py",
@@ -1554,7 +1558,12 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, {"promoted": 8}):
+            if current_radar_delayed_import_probe_001_terminal(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Review the terminal disposable-probe outcome. The attempt is consumed and cannot be retried; any follow-on requires a separately reviewed owner decision."
+            elif current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
                 expected_dem_proposed_amendments = []
@@ -1652,7 +1661,12 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, {"promoted": 8}):
+            if current_radar_delayed_import_probe_001_terminal(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Review the terminal disposable-probe outcome. The attempt is consumed and cannot be retried; any follow-on requires a separately reviewed owner decision."
+            elif current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
                 expected_dem_proposed_amendments = []
@@ -7868,7 +7882,9 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        if current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, state_counts):
+        if current_radar_delayed_import_probe_001_terminal(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
+        elif current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
         elif current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
@@ -14017,6 +14033,9 @@ def main() -> None:
     radar_probe_implementation_publication_gate = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-gate.json").read_text(encoding="utf-8"))
     radar_probe_implementation_publication_reconciliation = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-reconciliation.json").read_text(encoding="utf-8"))
     radar_probe_gate_state_publication = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-gate-state-publication.json").read_text(encoding="utf-8"))
+    radar_probe_final_preflight = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-final-preflight.json").read_text(encoding="utf-8"))
+    radar_probe_terminal_reconciliation = json.loads((ROOT / "records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json").read_text(encoding="utf-8"))
+    radar_probe_outcome_reconciliation = json.loads((ROOT / "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json").read_text(encoding="utf-8"))
     radar_probe_proposal_ref = "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json"
     radar_probe_bundle_ref = "reviews/m2-radar-delayed-import-probe-001/review-bundle.json"
     radar_probe_readiness_ref = "records/readiness/m2-radar-delayed-import-probe-001-review-readiness.json"
@@ -14173,11 +14192,21 @@ def main() -> None:
         or radar_probe_implementation_unit.get("gates", {}).get("public_ci") != "success"
         or radar_probe_implementation_unit.get("gates", {}).get("arcpy_invoked") is not False
         or radar_probe_implementation_unit.get("gates", {}).get("probe_process_started") is not False
-        or radar_probe_execution_unit.get("status") != "in_progress"
+        or radar_probe_execution_unit.get("status") != "complete"
+        or radar_probe_execution_unit.get("disposition") != "block"
         or radar_probe_execution_unit.get("gates", {}).get("gate_state_publication") != "success"
         or radar_probe_execution_unit.get("gates", {}).get("gate_state_commit_sha") != "232982840dbfa3249aaf14267a95a38740f89def"
         or radar_probe_execution_unit.get("gates", {}).get("gate_state_publication_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-gate-state-publication.json")
-        or radar_probe_execution_unit.get("gates", {}).get("live_attempts_started") != 0
+        or radar_probe_execution_unit.get("gates", {}).get("final_no_content_preflight") != "success"
+        or radar_probe_execution_unit.get("gates", {}).get("final_no_content_preflight_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-final-preflight.json")
+        or radar_probe_execution_unit.get("gates", {}).get("live_attempts_started") != 1
+        or radar_probe_execution_unit.get("gates", {}).get("live_attempt_id") != "radar-delayed-import-probe-001-real-001"
+        or radar_probe_execution_unit.get("gates", {}).get("last_durable_stage") != "arcpy_import_started"
+        or radar_probe_execution_unit.get("gates", {}).get("runner_terminal_receipt_persisted") is not False
+        or radar_probe_execution_unit.get("gates", {}).get("runner_cleanup_receipt_persisted") is not False
+        or radar_probe_execution_unit.get("gates", {}).get("postprocess_cleanup") != "success"
+        or radar_probe_execution_unit.get("gates", {}).get("terminal_reconciliation_sha256") != sha256("records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json")
+        or radar_probe_execution_unit.get("gates", {}).get("outcome_reconciliation_sha256") != sha256("records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json")
         or radar_probe_implementation_readiness.get("status") != "pass_portable_probe_implementation_public_ci_pending"
         or radar_probe_implementation_readiness.get("validation", {}).get("focused_test_count") != 8
         or radar_probe_implementation_readiness.get("validation", {}).get("repository_checker_status") != "pass_1073_required_files"
@@ -14222,16 +14251,64 @@ def main() -> None:
             "recovery_attempt_reused_or_retried", "radar_processing_executed",
             "historical_root_cause_established", "recovery_readiness_established", "scientific_result_established",
         ))
-        or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
-        or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
+        or radar_probe_final_preflight.get("status") != "pass_final_no_content_preflight_one_probe_released"
+        or radar_probe_final_preflight.get("bindings", {}).get("probe_contract_sha256") != sha256("config/qa/m2-radar-delayed-import-probe-001-contract.json")
+        or radar_probe_final_preflight.get("bindings", {}).get("implementation_publication_gate_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-gate.json")
+        or radar_probe_final_preflight.get("attempt_id") != "radar-delayed-import-probe-001-real-001"
+        or radar_probe_final_preflight.get("corpus_file_count") != 156
+        or radar_probe_final_preflight.get("corpus_total_logical_bytes") != 10367157634
+        or radar_probe_final_preflight.get("checks", {}).get("attempt_root_absent") is not True
+        or radar_probe_final_preflight.get("checks", {}).get("arcpy_imported_by_preflight") is not False
+        or radar_probe_final_preflight.get("checks", {}).get("disposable_corpus_created") is not False
+        or radar_probe_final_preflight.get("checks", {}).get("project_or_external_content_read") is not False
+        or radar_probe_terminal_reconciliation.get("status") != "block_terminal_receipt_persistence_failure_no_retry"
+        or radar_probe_terminal_reconciliation.get("attempt_id") != "radar-delayed-import-probe-001-real-001"
+        or radar_probe_terminal_reconciliation.get("process_failure", {}).get("failure_type") != "AttributeError"
+        or radar_probe_terminal_reconciliation.get("process_failure", {}).get("failure_code") != "terminal_timestamp_construction_failed"
+        or radar_probe_terminal_reconciliation.get("process_failure", {}).get("original_caught_exception_recoverable") is not False
+        or radar_probe_terminal_reconciliation.get("durable_stage_evidence", {}).get("started_sha256") != "5309a80e19d3199abd6dc3640e9d16ea8450eb4035f2d3fdd96e8f2008c4dbb9"
+        or radar_probe_terminal_reconciliation.get("durable_stage_evidence", {}).get("stages_sha256") != "c8a12796463b29aa62aef668b0bff715b2a61b7369beaa51a064b380e5ca069d"
+        or radar_probe_terminal_reconciliation.get("durable_stage_evidence", {}).get("last_durable_stage") != "arcpy_import_started"
+        or radar_probe_terminal_reconciliation.get("durable_stage_evidence", {}).get("arcpy_import_completed_durable") is not False
+        or radar_probe_terminal_reconciliation.get("corpus_scan", {}).get("file_count") != 156
+        or radar_probe_terminal_reconciliation.get("corpus_scan", {}).get("total_logical_bytes") != 10367157634
+        or radar_probe_terminal_reconciliation.get("corpus_scan", {}).get("aggregate_sha256") != "dd56f8b28a1ed1c6e2b4b1d7d8f5db4fd86dab80a910fe79c8d018d58942430b"
+        or radar_probe_terminal_reconciliation.get("cleanup", {}).get("status") != "cleanup_completed_after_runner_terminal_persistence_failure"
+        or radar_probe_terminal_reconciliation.get("cleanup", {}).get("cleanup_reconciliation_sha256") != "6b41fb8ad30b2fb001bb3f28f9cc726e8a9f4a1edca131cf55b6720085b288f5"
+        or radar_probe_terminal_reconciliation.get("cleanup", {}).get("corpus_removed") is not True
+        or radar_probe_terminal_reconciliation.get("cleanup", {}).get("runner_terminal_json_persisted") is not False
+        or radar_probe_terminal_reconciliation.get("cleanup", {}).get("runner_cleanup_json_persisted") is not False
+        or radar_probe_outcome_reconciliation.get("status") != "block_probe_terminal_persistence_failure_no_retry"
+        or radar_probe_outcome_reconciliation.get("bindings", {}).get("final_preflight_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-final-preflight.json")
+        or radar_probe_outcome_reconciliation.get("bindings", {}).get("terminal_reconciliation_sha256") != sha256("records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json")
+        or radar_probe_outcome_reconciliation.get("bindings", {}).get("attempt_started_sha256") != "5309a80e19d3199abd6dc3640e9d16ea8450eb4035f2d3fdd96e8f2008c4dbb9"
+        or radar_probe_outcome_reconciliation.get("bindings", {}).get("stages_sha256") != "c8a12796463b29aa62aef668b0bff715b2a61b7369beaa51a064b380e5ca069d"
+        or radar_probe_outcome_reconciliation.get("bindings", {}).get("postprocess_cleanup_sha256") != "6b41fb8ad30b2fb001bb3f28f9cc726e8a9f4a1edca131cf55b6720085b288f5"
+        or radar_probe_outcome_reconciliation.get("terminal_result", {}).get("last_durable_stage") != "arcpy_import_started"
+        or radar_probe_outcome_reconciliation.get("terminal_result", {}).get("runner_terminal_json_persisted") is not False
+        or radar_probe_outcome_reconciliation.get("corpus_result", {}).get("status") != "pass_full_stable_order_hash_then_cleaned"
+        or radar_probe_outcome_reconciliation.get("assertions", {}).get("attempt_consumed") is not True
+        or radar_probe_outcome_reconciliation.get("assertions", {}).get("arcpy_import_completed_durable") is not False
+        or any(radar_probe_outcome_reconciliation.get("assertions", {}).get(key) is not False for key in (
+            "automatic_retry_performed", "second_attempt_created", "project_data_content_read",
+            "external_custody_accessed", "external_custody_mutated", "network_request_performed",
+            "credential_value_read", "product_info_started", "extension_checkout_started",
+            "disposable_raster_created", "mosaic_executed", "radar_processing_executed",
+            "baseline_or_change_analysis_executed", "interpretation_or_attribution_executed",
+            "historical_root_cause_established", "recovery_readiness_established",
+            "derived_pixel_publication_authorized", "scientific_publication_authorized", "scientific_result_established",
+        ))
+        or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
+        or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
         or goal.get("proposed_amendments") != []
         or current_radar_delayed_import_probe_001_review_publication_pending(ROOT, {"promoted": 8}) is not False
         or current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}) is not False
         or current_radar_delayed_import_probe_001_implementation_pending(ROOT, {"promoted": 8}) is not False
         or current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, {"promoted": 8}) is not False
-        or current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, {"promoted": 8}) is not True
+        or current_radar_delayed_import_probe_001_final_preflight_pending(ROOT, {"promoted": 8}) is not False
+        or current_radar_delayed_import_probe_001_terminal(ROOT, {"promoted": 8}) is not True
     ):
-        fail("M2 radar delayed-import probe-001 canonical execution-publication state differs")
+        fail("M2 radar delayed-import probe-001 canonical terminal state differs")
     radar_probe_evidence = ledger_by_id.get("EVID-0166")
     if (
         not isinstance(radar_probe_evidence, dict)
@@ -14329,6 +14406,30 @@ def main() -> None:
         ))
     ):
         fail("EVID-0170 radar delayed-import probe gate-state-publication evidence differs or overclaims")
+    radar_probe_terminal_evidence = ledger_by_id.get("EVID-0171")
+    if (
+        not isinstance(radar_probe_terminal_evidence, dict)
+        or radar_probe_terminal_evidence.get("status") != "block_probe_terminal_persistence_failure_no_retry"
+        or radar_probe_terminal_evidence.get("final_preflight_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-final-preflight.json")
+        or radar_probe_terminal_evidence.get("terminal_reconciliation_sha256") != sha256("records/processing/m2-radar-delayed-import-probe-001-terminal-reconciliation.json")
+        or radar_probe_terminal_evidence.get("outcome_reconciliation_sha256") != sha256("records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json")
+        or radar_probe_terminal_evidence.get("assertions", {}).get("attempt_id") != "radar-delayed-import-probe-001-real-001"
+        or radar_probe_terminal_evidence.get("assertions", {}).get("attempt_consumed") is not True
+        or radar_probe_terminal_evidence.get("assertions", {}).get("file_count") != 156
+        or radar_probe_terminal_evidence.get("assertions", {}).get("total_logical_bytes") != 10367157634
+        or radar_probe_terminal_evidence.get("assertions", {}).get("aggregate_sha256") != "dd56f8b28a1ed1c6e2b4b1d7d8f5db4fd86dab80a910fe79c8d018d58942430b"
+        or radar_probe_terminal_evidence.get("assertions", {}).get("last_durable_stage") != "arcpy_import_started"
+        or radar_probe_terminal_evidence.get("assertions", {}).get("runner_terminal_receipt_persisted") is not False
+        or radar_probe_terminal_evidence.get("assertions", {}).get("runner_cleanup_receipt_persisted") is not False
+        or radar_probe_terminal_evidence.get("assertions", {}).get("postprocess_cleanup_completed") is not True
+        or radar_probe_terminal_evidence.get("assertions", {}).get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-TERMINAL-REVIEW"
+        or any(radar_probe_terminal_evidence.get("assertions", {}).get(key) is not False for key in (
+            "automatic_retry_performed", "second_attempt_created", "project_data_content_read",
+            "external_custody_accessed", "radar_processing_executed", "historical_root_cause_established",
+            "recovery_readiness_established", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0171 radar delayed-import probe terminal evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():

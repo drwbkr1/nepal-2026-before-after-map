@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-OUTCOME-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-19T17:29:31Z",
+  "status": "block_probe_terminal_persistence_failure_no_retry",
+  "attempt_id": "radar-delayed-import-probe-001-real-001",
+  "attempt_path_class": "local_appdata_probe_specific_outside_git_and_external_custody",
+  "bindings": {
+    "approval_sha256": "4fcc30884748520cca0c944718e96874092567a8dcf02ec62c9f13c12f2c291e",
+    "probe_contract_sha256": "c9bf8154bfb44cf6a76a9cdfc695c30b7e2bf2349d64ab9e8c0e922ca0b70ac0",
+    "implementation_publication_gate_sha256": "813ac763286a138b1ee3b87aad3c14a80353fbfdfadbd6169ff7b138d56bb63f",
+    "gate_state_publication_sha256": "1ed91c35cdaaf3aa611f6a6f2ab158bc60e420ee3ed7f3321f2b2de621ccd68b",
+    "final_preflight_sha256": "f158d04f11df8181d4145ce1ab35c2b745b5f1d5477267491589a0e97cfdddda",
+    "attempt_started_sha256": "5309a80e19d3199abd6dc3640e9d16ea8450eb4035f2d3fdd96e8f2008c4dbb9",
+    "stages_sha256": "c8a12796463b29aa62aef668b0bff715b2a61b7369beaa51a064b380e5ca069d",
+    "postprocess_cleanup_sha256": "6b41fb8ad30b2fb001bb3f28f9cc726e8a9f4a1edca131cf55b6720085b288f5",
+    "terminal_reconciliation_sha256": "90e7b9ff1fa823f9be805e1fba843e7af9dd34c313d4e5c6c75077c8aee81892"
+  },
+  "preflight_result": {
+    "status": "pass_final_no_content_preflight_one_probe_released",
+    "attempt_root_absent": true,
+    "arcpy_imported": false,
+    "disposable_corpus_created": false,
+    "project_or_external_content_read": false
+  },
+  "terminal_result": {
+    "status": "block_terminal_receipt_persistence_failure_no_retry",
+    "attempt_started_at_utc": "2026-09-19T17:23:30Z",
+    "last_durable_stage_at_utc": "2026-09-19T17:25:36Z",
+    "last_durable_stage": "arcpy_import_started",
+    "failure_type": "AttributeError",
+    "failure_code": "terminal_timestamp_construction_failed",
+    "failure_message": "module 'datetime' has no attribute 'now'",
+    "runner_terminal_json_persisted": false,
+    "runner_cleanup_json_persisted": false
+  },
+  "corpus_result": {
+    "status": "pass_full_stable_order_hash_then_cleaned",
+    "file_count": 156,
+    "total_logical_bytes": 10367157634,
+    "aggregate_sha256": "dd56f8b28a1ed1c6e2b4b1d7d8f5db4fd86dab80a910fe79c8d018d58942430b",
+    "elapsed_seconds": 40.645573,
+    "postprocess_cleanup_status": "cleanup_completed_after_runner_terminal_persistence_failure"
+  },
+  "failure_boundary": {
+    "observed": "The disposable corpus completed exact creation and full stable-order hashing. The last durable runtime marker is arcpy_import_started. The runner then escaped while constructing its terminal timestamp, leaving no runner terminal or cleanup receipt.",
+    "inference": "The diagnostic stopped within the ArcPy import operation or its immediate completion-marker boundary, before any durable ProductInfo, extension, raster, or mosaic stage.",
+    "unresolved": "The caught underlying exception was masked by the terminal timestamp failure, so ArcPy import completion and the original exception cannot be reconstructed from durable evidence. This probe cannot establish the historical recovery failure cause or recovery readiness."
+  },
+  "assertions": {
+    "attempt_consumed": true,
+    "automatic_retry_performed": false,
+    "second_attempt_created": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "external_custody_mutated": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "arcpy_import_completed_durable": false,
+    "product_info_started": false,
+    "extension_checkout_started": false,
+    "disposable_raster_created": false,
+    "mosaic_executed": false,
+    "radar_processing_executed": false,
+    "baseline_or_change_analysis_executed": false,
+    "interpretation_or_attribution_executed": false,
+    "historical_root_cause_established": false,
+    "recovery_readiness_established": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Treat radar-delayed-import-probe-001-real-001 as terminal and consumed. Do not retry it or resume radar processing; any follow-on requires a separately reviewed owner decision."
+}
