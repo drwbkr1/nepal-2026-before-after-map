@@ -3918,7 +3918,7 @@
       ],
       "action_class": "routine_qa",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
         "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json",
@@ -3929,31 +3929,36 @@
         "scripts/m2_radar_delayed_import_probe_001_core.py",
         "scripts/run_m2_radar_delayed_import_probe_001.py",
         "tests/test_m2_radar_delayed_import_probe_001.py",
-        "records/readiness/m2-radar-delayed-import-probe-001-implementation-readiness.json"
+        "records/readiness/m2-radar-delayed-import-probe-001-implementation-readiness.json",
+        "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-gate.json",
+        "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-reconciliation.json"
       ],
       "gates": {
         "portable_synthetic_tests": "success",
         "repository_validation": "success",
-        "public_ci": "pending",
+        "public_ci": "success",
         "arcpy_invoked": false,
         "probe_process_started": false,
         "focused_test_count": 8,
         "full_test_count": 593,
         "full_skip_count": 6,
         "required_file_count": 1073,
-        "implementation_readiness_sha256": "b069a86d23a8f1572acfdee554d3f8a09f7cacbda17a4d392d5a62ae88e5d9dc"
+        "implementation_readiness_sha256": "b069a86d23a8f1572acfdee554d3f8a09f7cacbda17a4d392d5a62ae88e5d9dc",
+        "implementation_commit_sha": "93b0da073d142105f3efc9425c0cb931fe3f879b",
+        "public_ci_run_id": 35457066264,
+        "implementation_publication_gate_sha256": "813ac763286a138b1ee3b87aad3c14a80353fbfdfadbd6169ff7b138d56bb63f",
+        "implementation_publication_reconciliation_sha256": "653e7648b589c0137d0f0def725c916e765c50e0071f350cd53a4a5d52ffa694"
       },
       "exit_condition_delta": {
-        "expected": [
-          "successful public default-branch CI"
-        ],
+        "expected": [],
         "observed": [
-          "portable implementation and synthetic validation complete without ArcPy or corpus creation"
+          "exact implementation passed public default-branch CI"
         ],
-        "decision_value": "pending_public_ci",
-        "rationale": "The live probe remains blocked behind public CI and a separate final no-content preflight."
+        "decision_value": "enables_dependency",
+        "rationale": "Only publication of the exact gate state is released now; the final preflight remains blocked."
       },
-      "next_dependency": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
+      "next_dependency": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION",
+      "disposition": "pass"
     },
     {
       "id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION",
@@ -3963,7 +3968,7 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
         "config/qa/m2-radar-delayed-import-probe-001-contract.json"
@@ -3973,10 +3978,11 @@
         "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json"
       ],
       "gates": {
-        "public_ci": "pending",
+        "public_ci": "success",
         "final_no_content_preflight": "pending",
         "maximum_live_attempts": 1,
-        "live_attempts_started": 0
+        "live_attempts_started": 0,
+        "gate_state_publication": "pending"
       },
       "exit_condition_delta": {
         "expected": [
@@ -4043,8 +4049,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION",
-    "next_action": "Implement and validate only the approved disposable delayed-import probe and portable synthetic tests, then require successful public default-branch CI. Do not create the corpus or import ArcPy before that public gate and the final no-content preflight.",
+    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION",
+    "next_action": "Publish and publicly validate the exact implementation-gate state. Do not run the final no-content preflight, create the disposable corpus, or import ArcPy until that gate-state commit passes public CI.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4088,9 +4094,9 @@
       "Metadata recovery-001 is terminal after exact promotion because both success and failure terminal receipt construction failed; do not retry or reconstruct its terminal result.",
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery.",
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval.",
-      "The exact delayed-import probe is approved but remains blocked at implementation publication; no final preflight, live probe, project-data access, recovery retry, radar processing, or scientific claim is released yet."
+      "The exact delayed-import probe implementation passed public CI, but the final preflight remains blocked until the implementation-gate state is published and passes public CI; no live probe, project-data access, recovery retry, radar processing, or scientific claim is released yet."
     ],
-    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION",
-    "parallel_next_action": "Implement and validate only the approved disposable delayed-import probe and portable synthetic tests, then require successful public default-branch CI. Do not create the corpus or import ArcPy before that public gate and the final no-content preflight."
+    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION",
+    "parallel_next_action": "Publish and publicly validate the exact implementation-gate state. Do not run the final no-content preflight, create the disposable corpus, or import ArcPy until that gate-state commit passes public CI."
   }
 }

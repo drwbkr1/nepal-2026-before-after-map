@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION-PUBLICATION-RECONCILIATION",
+  "recorded_at_utc": "2026-09-19T17:09:44Z",
+  "status": "pass_public_implementation_gate_gate_state_publication_pending",
+  "implementation_publication_gate_ref": "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-gate.json",
+  "implementation_publication_gate_sha256": "813ac763286a138b1ee3b87aad3c14a80353fbfdfadbd6169ff7b138d56bb63f",
+  "implementation_commit_sha": "93b0da073d142105f3efc9425c0cb931fe3f879b",
+  "public_ci_run_id": 35457066264,
+  "released_now": {
+    "gate_state_publication": true,
+    "final_no_content_preflight": false,
+    "live_probe": false
+  },
+  "next_action": "Publish and publicly validate the exact implementation-gate state. Do not run the final no-content preflight, create the disposable corpus, or import ArcPy until that gate-state commit passes public CI."
+}

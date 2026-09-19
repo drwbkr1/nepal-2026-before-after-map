@@ -6,7 +6,7 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION`; radar base real-001 and recovery real-001 remain terminal, while only the approved disposable probe implementation, portable tests, and public-CI publication are released
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION`; radar base real-001 and recovery real-001 remain terminal, while only publication and public validation of the exact disposable-probe implementation-gate state are currently released
 
 ## Radar delayed-import probe-001 approved implementation — 2026-09-19
 
@@ -14,7 +14,7 @@ The owner's exact attested approval is locked at response SHA-256 `7ef5b82aa7c93
 
 The implementation now enforces 156 deterministic Windows sparse files totaling exactly 10,367,157,634 logical bytes, a full stable-order hash scan before ArcPy import, durable stages around each setup boundary, two 2-by-2 disposable rasters, one `MosaicToNewRaster`, reverse extension check-in, terminal persistence, cleanup reporting, and collision-based one-attempt enforcement. Eight focused portable tests and all 593 repository tests pass with six intentional local skips. Implementation-readiness SHA-256 is `b069a86d23a8f1572acfdee554d3f8a09f7cacbda17a4d392d5a62ae88e5d9dc`.
 
-Public default-branch CI is still pending. No final preflight, corpus creation, ArcPy import, live probe, project-data or external-custody access, recovery action, radar processing, baseline, change analysis, interpretation, attribution, publication, or historical-cause/recovery-readiness claim has occurred.
+Exact implementation commit `93b0da073d142105f3efc9425c0cb931fe3f879b` passed public default-branch CI run `35457066264`: 1,073 required files and all 593 tests passed with 13 intentional public-runtime skips. Implementation-publication-gate SHA-256 is `813ac763286a138b1ee3b87aad3c14a80353fbfdfadbd6169ff7b138d56bb63f`; reconciliation SHA-256 is `653e7648b589c0137d0f0def725c916e765c50e0071f350cd53a4a5d52ffa694`. Publication and public validation of this exact gate state are pending. No final preflight, corpus creation, ArcPy import, live probe, project-data or external-custody access, recovery action, radar processing, baseline, change analysis, interpretation, attribution, publication, or historical-cause/recovery-readiness claim has occurred.
 
 ## Radar delayed-import probe-001 review prepared — 2026-09-19
 

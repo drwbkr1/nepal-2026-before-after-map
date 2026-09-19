@@ -226,6 +226,10 @@ RADAR_DELAYED_IMPORT_PROBE_001_IMPLEMENTATION_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION",
     "next_action": "Implement and validate only the approved disposable delayed-import probe and portable synthetic tests, then require successful public default-branch CI. Do not create the corpus or import ArcPy before that public gate and the final no-content preflight.",
 }
+RADAR_DELAYED_IMPORT_PROBE_001_EXECUTION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION",
+    "next_action": "Publish and publicly validate the exact implementation-gate state. Do not run the final no-content preflight, create the disposable corpus, or import ArcPy until that gate-state commit passes public CI.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1819,6 +1823,37 @@ def current_radar_delayed_import_probe_001_implementation_pending(
     )
 
 
+def current_radar_delayed_import_probe_001_execution_gate_publication_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize implementation CI success with gate-state publication still pending."""
+    if state_counts != {"promoted": 8}:
+        return False
+    if (root / "records/readiness/m2-radar-delayed-import-probe-001-gate-state-publication.json").exists():
+        return False
+    try:
+        gate = load(root / "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-gate.json")
+        reconciliation = load(root / "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-reconciliation.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    implementation = units.get("M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION", {})
+    execution = units.get("M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION", {})
+    return bool(
+        gate.get("status") == "pass_public_default_branch_ci_probe_implementation_ready"
+        and gate.get("public_ci_conclusion") == "success"
+        and reconciliation.get("status") == "pass_public_implementation_gate_gate_state_publication_pending"
+        and implementation.get("status") == "complete"
+        and implementation.get("disposition") == "pass"
+        and implementation.get("gates", {}).get("public_ci") == "success"
+        and execution.get("status") == "in_progress"
+        and execution.get("gates", {}).get("gate_state_publication") == "pending"
+        and execution.get("gates", {}).get("final_no_content_preflight") == "pending"
+        and execution.get("gates", {}).get("live_attempts_started") == 0
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -1888,7 +1923,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_delayed_import_probe_001_implementation_pending(
+            if current_radar_delayed_import_probe_001_execution_gate_publication_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_001_EXECUTION_CHECKPOINT)
+            elif current_radar_delayed_import_probe_001_implementation_pending(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_001_IMPLEMENTATION_CHECKPOINT)

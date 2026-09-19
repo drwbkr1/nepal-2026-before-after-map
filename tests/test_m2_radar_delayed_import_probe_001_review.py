@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from derive_m2_acquisition_checkpoint import (  # noqa: E402
+    current_radar_delayed_import_probe_001_execution_gate_publication_pending,
     current_radar_delayed_import_probe_001_implementation_pending,
     current_radar_delayed_import_probe_001_review_publication_pending,
     current_radar_delayed_import_probe_001_review_required,
@@ -32,7 +33,7 @@ OUTCOME_REF = "records/processing/m2-radar-pixel-orbit-application-recovery-001-
 PROPOSAL_SHA256 = "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9"
 BUNDLE_SHA256 = "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5"
 READINESS_SHA256 = "37ce53da206e71ed20db5a4b1b0fef50d3acd953ea9d865de2253a20339ad170"
-CHECKPOINT = "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION"
+CHECKPOINT = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
 
 
 def load(ref: str) -> dict:
@@ -182,7 +183,7 @@ class M2RadarDelayedImportProbe001ReviewTests(unittest.TestCase):
         ):
             self.assertFalse(reconciliation["released_now"][key])
 
-    def test_canonical_state_routes_to_approved_implementation(self) -> None:
+    def test_canonical_state_routes_to_execution_gate_publication(self) -> None:
         milestone = load("contracts/milestone-002.json")
         profile = load("records/project-control-profile.json")
         goal = load("records/long-term-goal.json")
@@ -199,7 +200,8 @@ class M2RadarDelayedImportProbe001ReviewTests(unittest.TestCase):
         self.assertTrue(current_radar_pixel_orbit_application_recovery_001_terminal(ROOT, {"promoted": 8}))
         self.assertFalse(current_radar_delayed_import_probe_001_review_publication_pending(ROOT, {"promoted": 8}))
         self.assertFalse(current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}))
-        self.assertTrue(current_radar_delayed_import_probe_001_implementation_pending(ROOT, {"promoted": 8}))
+        self.assertFalse(current_radar_delayed_import_probe_001_implementation_pending(ROOT, {"promoted": 8}))
+        self.assertTrue(current_radar_delayed_import_probe_001_execution_gate_publication_pending(ROOT, {"promoted": 8}))
 
 
 if __name__ == "__main__":

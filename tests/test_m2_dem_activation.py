@@ -120,7 +120,7 @@ class M2DemActivationTests(unittest.TestCase):
             asset["extensions"].get("geotiff_verification_status") == "pass_structural_and_full_tile_finite"
             for asset in self.active_intake["assets"]
         )
-        expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION" if all_verified else ("M2-DEM-GEOTIFF-VERIFICATION" if all_promoted else "M2-DEM-ACQUISITION")
+        expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION" if all_verified else ("M2-DEM-GEOTIFF-VERIFICATION" if all_promoted else "M2-DEM-ACQUISITION")
         self.assertEqual(units["M2-DEM-AMEND"]["status"], "complete")
         self.assertEqual(units["M2-DEM-PREFLIGHT"]["status"], "complete")
         self.assertEqual(units["M2-DEM-ACQUIRE"]["status"], "complete" if all_promoted else "ready")
@@ -277,7 +277,7 @@ class M2DemActivationTests(unittest.TestCase):
             None,
         )
         expected_primary_checkpoint = (
-            "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION"
+            "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
             if orbit_offline_recovery is not None
             and orbit_offline_recovery.get("status") == "complete"
             and orbit_offline_recovery.get("disposition") == "pass"
