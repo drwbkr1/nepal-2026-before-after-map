@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PREFLIGHT",
+  "checked_at_utc": "2026-09-19T00:54:28Z",
+  "status": "pass_ready_prepare_zero_decision_review",
+  "bindings": {
+    "preparation_approval_sha256": "4a3d51f4a981ec38aa26a9b10fabb1a0bea7ee6a1f10135cd06d9f7c541b5dce",
+    "proposal_sha256": "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9",
+    "terminal_reconciliation_sha256": "3bd2a4cc6bd56d7ec5ae95a316ff3f5b3cc788b94d32436b3cf02586d7a391c0",
+    "outcome_reconciliation_sha256": "ef5b7601ce6073c2736297406ac3324f03ca1a84eaa6e7c3dbc35a1a07601d19",
+    "terminal_publication_gate_sha256": "2d757b464ef71a8f8305145698c2205d4034dc492b51b82fc9261741f3133ade",
+    "owner_review_observation_sha256": [
+      "adb9975cb69ef9d68d38f483546af407d99b720fa49b73eedd7d0ba0cf1853e6",
+      "9ce383af0b813deaf6da84259c7b126e64c8a05610c8ddb01d68fa89a911dd2c",
+      "de34ea0096017135b7d39995324c6c281d4b61193b2d4f9c317c9b78daa2314a",
+      "319c0b21312c185674871470039dfc90c007ee4f85fc31b299da3c33db0e7e93",
+      "c58773641181a8d821426e6fd0d77b33539e6700c478ca1f6295ab5c2d7cf052"
+    ]
+  },
+  "checks": {
+    "terminal_attempt_consumed": true,
+    "historical_root_cause_unresolved": true,
+    "delayed_import_sequence_difference_observed_not_proven": true,
+    "preparation_authority_exactly_review_only": true,
+    "current_authority_allows_probe_implementation_or_execution": false
+  },
+  "assertions": {
+    "probe_process_started": false,
+    "disposable_corpus_created": false,
+    "arcpy_invoked": false,
+    "geoprocessing_tool_invoked": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "external_custody_mutated": false,
+    "recovery_attempt_reused_or_retried": false,
+    "implementation_authorized": false,
+    "probe_execution_authorized": false,
+    "scientific_result_established": false
+  }
+}

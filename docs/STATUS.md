@@ -6,7 +6,15 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-REVIEW`; radar base real-001 and recovery real-001 are both terminal, recovery-001 is consumed without retry after an ArcGIS product-license initialization failure, and further radar execution requires a separately scoped owner decision
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PUBLICATION`; radar base real-001 and recovery real-001 remain terminal, while only publication and public validation of a zero-decision disposable delayed-import probe review are released
+
+## Radar delayed-import probe-001 review prepared — 2026-09-19
+
+The owner authorized preparation and publication, but not implementation or execution, of a zero-decision review packet for a stage-marked delayed-import probe using only disposable bytes and no project data. Preparation authority is recorded separately from the blank substantive review decision.
+
+Proposal SHA-256 `7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9` and review-bundle SHA-256 `1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5` bind one fresh process, 156 deterministic local sparse files totaling exactly 10,367,157,634 logical bytes, a full stable-order hash scan before ArcPy import, durable stage markers around all four historical setup candidates, and one tiny disposable `MosaicToNewRaster` operation. Both PASS and BLOCK semantics preserve the unresolved historical cause.
+
+The packet contains zero substantive decisions. No probe implementation, corpus creation, ArcPy invocation, project-data or external-custody access, recovery reuse or retry, orbit application, radar processing, baseline, change analysis, attribution, derived-pixel publication, or scientific claim has occurred or is authorized.
 
 Read-only terminal review now shows that both direct ArcGIS Python and `propy` initialize the installed Advanced named-user license and can check out and return Image Analyst and Spatial. This did not reproduce the consumed attempt's product-license error at the licensing API boundary. Its exact failing ArcPy call remains unresolved because no traceback or stage marker was retained. Observation SHA-256 is `adb9975cb69ef9d68d38f483546af407d99b720fa49b73eedd7d0ba0cf1853e6`. No geoprocessing tool, project-data read, retry, recovery preparation, or scientific action occurred.
 

@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "contract_ref": "reviews/m2-radar-delayed-import-probe-001/review-contract.json",
+  "contract_sha256": "204e4d95d196bf2c08beb83aba78a295a89af26f51e3d5513b72ea158ae8118a",
+  "review_bundle_sha256": "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5",
+  "completed": false,
+  "reviewer": {
+    "name": null,
+    "attestation": false
+  },
+  "responses": [
+    {
+      "item_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001",
+      "decision": null,
+      "rationale": null,
+      "evidence_sha256": "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5"
+    }
+  ],
+  "human_decision_count": 0
+}

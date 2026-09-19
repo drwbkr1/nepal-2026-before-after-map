@@ -3831,6 +3831,61 @@
         "rationale": "The authorized attempt is terminal and cannot be retried; a separately scoped owner decision is required."
       },
       "next_dependency": null
+    },
+    {
+      "id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW",
+      "purpose": "Review one exact disposable delayed-import diagnostic without releasing recovery or radar processing.",
+      "depends_on": [
+        "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-EXECUTION"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-radar-delayed-import-probe-001-review-preparation-approval.json",
+        "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json",
+        "records/readiness/m2-radar-delayed-import-probe-001-review-preflight.json",
+        "reviews/m2-radar-delayed-import-probe-001/review-bundle.json",
+        "reviews/m2-radar-delayed-import-probe-001/review-contract.json",
+        "reviews/m2-radar-delayed-import-probe-001/blank-response.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-static-call-path-observation-002.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-evidence-triangulation-observation-003.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-launch-context-observation-004.json",
+        "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-local-log-observation-005.json"
+      ],
+      "outputs": [],
+      "gates": {
+        "public_ci": "pending",
+        "human_decision_count": 0,
+        "attestation": false,
+        "implementation_authorized": false,
+        "probe_execution_authorized": false,
+        "project_data_content_read_authorized": false,
+        "recovery_retry_or_reuse_authorized": false,
+        "radar_processing_authorized": false,
+        "baseline_or_change_authorized": false
+      },
+      "disposition": null,
+      "retained_failures": [
+        "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json",
+        "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json"
+      ],
+      "exit_condition_delta": {
+        "expected": [
+          "successful public CI",
+          "one exact attested owner decision"
+        ],
+        "observed": [
+          "zero-decision packet prepared under review-preparation-only authority"
+        ],
+        "decision_value": "unknown",
+        "rationale": "The packet creates no implementation, diagnostic-execution, recovery, or scientific authority."
+      },
+      "next_dependency": "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION"
     }
   ],
   "path_efficiency": {
@@ -3887,8 +3942,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-REVIEW",
-    "next_action": "Review the terminal ArcGIS product-license initialization failure and choose a separately scoped path. Do not rerun recovery-001, reuse its attempt path, begin baseline or change analysis, or make a scientific claim.",
+    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PUBLICATION",
+    "next_action": "Publish and publicly validate the exact zero-decision radar delayed-import probe-001 review packet. Do not implement or execute the probe, access project data, reuse recovery-001, or begin radar processing before one exact attested owner decision on the public packet.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3931,9 +3986,10 @@
       "Offline recovery remains one attempt with zero network requests; grid promotion is conditional on exact byte, metadata, and ArcGIS-readability pass, and conversion remains conditional on the unchanged local operation and sign preflight.",
       "Metadata recovery-001 is terminal after exact promotion because both success and failure terminal receipt construction failed; do not retry or reconstruct its terminal result.",
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery.",
-      "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval."
+      "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval.",
+      "The delayed-import probe packet is blank and creates no implementation or execution authority; the consumed radar recovery remains terminal and no project data may be read."
     ],
-    "parallel_checkpoint": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-REVIEW",
-    "parallel_next_action": "Review the terminal ArcGIS product-license initialization failure and choose a separately scoped path. Do not rerun recovery-001, reuse its attempt path, begin baseline or change analysis, or make a scientific claim."
+    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PUBLICATION",
+    "parallel_next_action": "Publish and publicly validate the exact zero-decision radar delayed-import probe-001 review packet. Do not implement or execute the probe, access project data, reuse recovery-001, or begin radar processing before one exact attested owner decision on the public packet."
   }
 }

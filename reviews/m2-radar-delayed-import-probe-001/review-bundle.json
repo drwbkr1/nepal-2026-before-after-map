@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-19T00:54:28Z",
+  "status": "ready_zero_decisions",
+  "human_decision_count": 0,
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json",
+      "sha256": "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9",
+      "purpose": "normative diagnostic proposal",
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-delayed-import-probe-001-review.json",
+          "sha256": "32cd44e3fb5bb8950c8831cbd5b3e4e2697cd8db91e77f75dbe5f3473353584c"
+        }
+      ]
+    },
+    {
+      "path": "records/readiness/m2-radar-delayed-import-probe-001-review-preflight.json",
+      "sha256": "59897dda8a547ab179b1a4cf61d4657cb0b9d7cca0f254c7fe96dd510dd639ca",
+      "purpose": "terminal-state and preparation-authority preflight",
+      "render_receipts": []
+    },
+    {
+      "path": "docs/M2_RADAR_DELAYED_IMPORT_PROBE_001_REVIEW.md",
+      "sha256": "c87a0b5e1a16984468e39a20d440c7a63685e42dd37991f66f36e26dfb6bd7eb",
+      "purpose": "human-readable review",
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-delayed-import-probe-001-review.json",
+          "sha256": "32cd44e3fb5bb8950c8831cbd5b3e4e2697cd8db91e77f75dbe5f3473353584c"
+        }
+      ]
+    },
+    {
+      "path": "docs/assets/m2-radar-delayed-import-probe-001-review.png",
+      "sha256": "c43b8d6c0959f6a0d37593ed26699aacb84747fce4297f4590ad89675af0c8dd",
+      "purpose": "rendered review surface",
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-delayed-import-probe-001-review.json",
+          "sha256": "32cd44e3fb5bb8950c8831cbd5b3e4e2697cd8db91e77f75dbe5f3473353584c"
+        }
+      ]
+    }
+  ],
+  "decision_items": [
+    {
+      "item_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001",
+      "allowed_decisions": [
+        "approve",
+        "revise",
+        "defer"
+      ],
+      "evidence_ref": "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json",
+      "evidence_sha256": "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9"
+    }
+  ]
+}

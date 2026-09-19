@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-SURFACE",
+  "rendered_at_utc": "2026-09-19T00:54:28Z",
+  "status": "pass_static_review_surface",
+  "artifact_ref": "docs/assets/m2-radar-delayed-import-probe-001-review.png",
+  "artifact_sha256": "c43b8d6c0959f6a0d37593ed26699aacb84747fce4297f4590ad89675af0c8dd",
+  "width_px": 1800,
+  "height_px": 1660,
+  "bindings": {
+    "proposal_sha256": "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9",
+    "terminal_reconciliation_sha256": "3bd2a4cc6bd56d7ec5ae95a316ff3f5b3cc788b94d32436b3cf02586d7a391c0"
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "attestation": false,
+    "implementation_authorized": false,
+    "probe_execution_authorized": false,
+    "project_data_content_read": false
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-READINESS",
+  "recorded_at_utc": "2026-09-19T00:54:28Z",
+  "status": "pass_ready_publication_zero_decisions",
+  "bindings": {
+    "records/source-gates/m2-radar-delayed-import-probe-001-review-preparation-approval.json": "4a3d51f4a981ec38aa26a9b10fabb1a0bea7ee6a1f10135cd06d9f7c541b5dce",
+    "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json": "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9",
+    "records/readiness/m2-radar-delayed-import-probe-001-review-preflight.json": "59897dda8a547ab179b1a4cf61d4657cb0b9d7cca0f254c7fe96dd510dd639ca",
+    "docs/M2_RADAR_DELAYED_IMPORT_PROBE_001_REVIEW.md": "c87a0b5e1a16984468e39a20d440c7a63685e42dd37991f66f36e26dfb6bd7eb",
+    "docs/assets/m2-radar-delayed-import-probe-001-review.png": "c43b8d6c0959f6a0d37593ed26699aacb84747fce4297f4590ad89675af0c8dd",
+    "records/surface-receipts/m2-radar-delayed-import-probe-001-review.json": "32cd44e3fb5bb8950c8831cbd5b3e4e2697cd8db91e77f75dbe5f3473353584c",
+    "reviews/m2-radar-delayed-import-probe-001/review-bundle.json": "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5",
+    "reviews/m2-radar-delayed-import-probe-001/review-contract.json": "204e4d95d196bf2c08beb83aba78a295a89af26f51e3d5513b72ea158ae8118a",
+    "reviews/m2-radar-delayed-import-probe-001/blank-response.json": "b4ebe4a30bd2af5d3bc5714ad12413d794737b43d125daf92dfbcb9774ebf889",
+    "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json": "3bd2a4cc6bd56d7ec5ae95a316ff3f5b3cc788b94d32436b3cf02586d7a391c0",
+    "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json": "ef5b7601ce6073c2736297406ac3324f03ca1a84eaa6e7c3dbc35a1a07601d19",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-publication-gate.json": "2d757b464ef71a8f8305145698c2205d4034dc492b51b82fc9261741f3133ade",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-owner-review-observation-001.json": "adb9975cb69ef9d68d38f483546af407d99b720fa49b73eedd7d0ba0cf1853e6",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-static-call-path-observation-002.json": "9ce383af0b813deaf6da84259c7b126e64c8a05610c8ddb01d68fa89a911dd2c",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-evidence-triangulation-observation-003.json": "de34ea0096017135b7d39995324c6c281d4b61193b2d4f9c317c9b78daa2314a",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-launch-context-observation-004.json": "319c0b21312c185674871470039dfc90c007ee4f85fc31b299da3c33db0e7e93",
+    "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-local-log-observation-005.json": "c58773641181a8d821426e6fd0d77b33539e6700c478ca1f6295ab5c2d7cf052",
+    "contracts/milestone-002.json": "efe4e6a7d8da389925570546189fc933bd311c268246e5c56c2a118d4e0848dd",
+    "records/project-control-profile.json": "5ebb24d0cbf31eaab93c5ac77b85f7a557ca5347a5c64075f9e0f9574888aa80",
+    "records/long-term-goal.json": "b71e8481a907486c282448633a4062cc3845571479b15b1b70ea77f5191b2b58"
+  },
+  "checks": {
+    "proposal_sha256": "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9",
+    "review_bundle_sha256": "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5",
+    "human_decision_count": 0,
+    "blank_response": true,
+    "terminal_recovery_001_preserved": true,
+    "exact_disposable_corpus_file_count": 156,
+    "exact_disposable_corpus_logical_bytes": 10367157634
+  },
+  "released_now": {
+    "public_review_packet_ci": true,
+    "owner_review_after_public_ci": true,
+    "implementation": false,
+    "probe_execution": false,
+    "project_data_content_read": false,
+    "recovery_retry_or_reuse": false,
+    "radar_processing": false
+  },
+  "assertions": {
+    "human_decisions_fabricated": false,
+    "probe_process_started": false,
+    "disposable_corpus_created": false,
+    "arcpy_invoked": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "external_custody_mutated": false,
+    "implementation_authorized": false,
+    "probe_execution_authorized": false,
+    "recovery_attempt_reused_or_retried": false,
+    "scientific_result_established": false
+  }
+}

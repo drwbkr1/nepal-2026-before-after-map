@@ -214,6 +214,14 @@ RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_001_TERMINAL_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-TERMINAL-REVIEW",
     "next_action": "Review the terminal ArcGIS product-license initialization failure and choose a separately scoped path. Do not rerun recovery-001, reuse its attempt path, begin baseline or change analysis, or make a scientific claim.",
 }
+RADAR_DELAYED_IMPORT_PROBE_001_REVIEW_PUBLICATION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PUBLICATION",
+    "next_action": "Publish and publicly validate the exact zero-decision radar delayed-import probe-001 review packet. Do not implement or execute the probe, access project data, reuse recovery-001, or begin radar processing before one exact attested owner decision on the public packet.",
+}
+RADAR_DELAYED_IMPORT_PROBE_001_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW",
+    "next_action": "Review the exact public M2 radar delayed-import probe-001 bundle and proposal; approve, revise, or defer the bounded disposable diagnostic. No implementation, ArcPy probe, project-data access, recovery retry, radar processing, baseline, change analysis, attribution, or scientific publication is authorized before an exact attested decision.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1704,6 +1712,70 @@ def current_radar_pixel_orbit_application_recovery_001_terminal(
     )
 
 
+def current_radar_delayed_import_probe_001_review_publication_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the prepared zero-decision delayed-import packet before public CI."""
+    if state_counts != {"promoted": 8}:
+        return False
+    if (root / "records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json").exists():
+        return False
+    if (root / "records/source-gates/m2-radar-delayed-import-probe-001-approval.json").exists():
+        return False
+    try:
+        proposal = load(root / "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json")
+        readiness = load(root / "records/readiness/m2-radar-delayed-import-probe-001-review-readiness.json")
+        blank = load(root / "reviews/m2-radar-delayed-import-probe-001/blank-response.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW", {})
+    return bool(
+        proposal.get("status") == "proposed_inactive_owner_review_required"
+        and proposal.get("human_decision_count") == 0
+        and readiness.get("status") == "pass_ready_publication_zero_decisions"
+        and readiness.get("released_now", {}).get("implementation") is False
+        and readiness.get("released_now", {}).get("probe_execution") is False
+        and blank.get("completed") is False
+        and blank.get("human_decision_count") == 0
+        and review.get("status") == "planned"
+        and review.get("gates", {}).get("public_ci") == "pending"
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and review.get("gates", {}).get("probe_execution_authorized") is False
+    )
+
+
+def current_radar_delayed_import_probe_001_review_required(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the publicly validated blank delayed-import packet awaiting owner review."""
+    if state_counts != {"promoted": 8}:
+        return False
+    if (root / "records/source-gates/m2-radar-delayed-import-probe-001-approval.json").exists():
+        return False
+    try:
+        gate = load(root / "records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json")
+        reconciliation = load(root / "records/readiness/m2-radar-delayed-import-probe-001-review-publication-reconciliation.json")
+        blank = load(root / "reviews/m2-radar-delayed-import-probe-001/blank-response.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW", {})
+    return bool(
+        gate.get("status") == "pass_public_default_branch_ci_zero_decision_review_ready"
+        and gate.get("public_ci_conclusion") == "success"
+        and reconciliation.get("status") == "pass_public_gate_owner_review_ready"
+        and blank.get("completed") is False
+        and blank.get("human_decision_count") == 0
+        and review.get("status") == "in_progress"
+        and review.get("gates", {}).get("public_ci") == "success"
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and review.get("gates", {}).get("probe_execution_authorized") is False
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -1773,7 +1845,15 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_pixel_orbit_application_recovery_001_terminal(
+            if current_radar_delayed_import_probe_001_review_required(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_001_REVIEW_CHECKPOINT)
+            elif current_radar_delayed_import_probe_001_review_publication_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_001_REVIEW_PUBLICATION_CHECKPOINT)
+            elif current_radar_pixel_orbit_application_recovery_001_terminal(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_PIXEL_ORBIT_APPLICATION_RECOVERY_001_TERMINAL_CHECKPOINT)

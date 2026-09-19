@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PREPARATION-APPROVAL",
+  "recorded_at_utc": "2026-09-19T00:54:28Z",
+  "status": "approved_review_preparation_only",
+  "decision": "approve",
+  "human_decision_count": 1,
+  "attestation_required": false,
+  "approved_scope": "prepare and publish, but do not implement or execute, a zero-decision review packet for one stage-marked delayed-import probe using only disposable bytes and no project data",
+  "authority_boundary": {
+    "review_packet_preparation_authorized": true,
+    "public_review_packet_publication_authorized": true,
+    "probe_implementation_authorized": false,
+    "probe_execution_authorized": false,
+    "project_data_content_read_authorized": false,
+    "recovery_retry_or_reuse_authorized": false,
+    "radar_processing_authorized": false,
+    "baseline_or_change_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

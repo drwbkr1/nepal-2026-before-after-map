@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-CONTRACT",
+  "status": "open_zero_decisions",
+  "review_bundle": {
+    "manifest_ref": "reviews/m2-radar-delayed-import-probe-001/review-bundle.json",
+    "manifest_sha256": "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5"
+  },
+  "required_response_path_pattern": "reviews/m2-radar-delayed-import-probe-001/response-<sha256>.json",
+  "required_attestation": true,
+  "decision_items": [
+    {
+      "item_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001",
+      "allowed_decisions": [
+        "approve",
+        "revise",
+        "defer"
+      ],
+      "evidence_sha256": "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5"
+    }
+  ],
+  "authority_boundary": {
+    "packet_creates_authority": false,
+    "implementation_authorized": false,
+    "probe_execution_authorized": false,
+    "project_data_content_read_authorized": false,
+    "recovery_retry_or_reuse_authorized": false,
+    "radar_processing_authorized": false,
+    "baseline_or_change_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}
