@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-APPROVAL-ACTIVATION",
+  "activated_at_utc": "2026-09-19T16:53:04Z",
+  "status": "pass_exact_approval_activated_implementation_publication_only",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
+    "approval_sha256": "4fcc30884748520cca0c944718e96874092567a8dcf02ec62c9f13c12f2c291e",
+    "reconciliation_sha256": "aa239f8e78bc23249d270dd0dc30730a8db6c1272f8e730f470105991b478244",
+    "proposal_sha256": "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9",
+    "review_bundle_sha256": "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5",
+    "review_publication_gate_sha256": "9d514c7cfee958b1c6e8f652486361cb8fe02dbb3b080da2b40022f67853f68b"
+  },
+  "released_now": {
+    "bounded_probe_implementation": true,
+    "portable_synthetic_tests": true,
+    "public_ci": true,
+    "final_no_content_preflight": false,
+    "live_probe_execution": false,
+    "project_data_content_read": false,
+    "external_custody_access": false,
+    "radar_processing": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "probe_process_started": false,
+    "disposable_corpus_created": false,
+    "arcpy_imported": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "recovery_attempt_reused_or_retried": false,
+    "scientific_result_established": false
+  }
+}

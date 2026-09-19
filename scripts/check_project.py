@@ -30,6 +30,7 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_pixel_orbit_application_recovery_001_terminal,
     current_radar_delayed_import_probe_001_review_publication_pending,
     current_radar_delayed_import_probe_001_review_required,
+    current_radar_delayed_import_probe_001_implementation_pending,
     current_full_header_implementation_pending,
     current_materialization_pixel_implementation_pending,
     current_optical_pixel_implementation_pending,
@@ -236,6 +237,18 @@ REQUIRED = [
     "records/readiness/m2-radar-delayed-import-probe-001-review-readiness.json",
     "records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json",
     "records/readiness/m2-radar-delayed-import-probe-001-review-publication-reconciliation.json",
+    "reviews/m2-radar-delayed-import-probe-001/response-7ef5b82aa7c932e8abc3926eb58dc7b7f5221a57bf5ecfced440dc997f57eb82.json",
+    "reviews/m2-radar-delayed-import-probe-001/review-contract-lock-001.json",
+    "records/source-gates/m2-radar-delayed-import-probe-001-review-reconciliation.json",
+    "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
+    "records/readiness/m2-radar-delayed-import-probe-001-approval-activation.json",
+    "config/qa/m2-radar-delayed-import-probe-001-contract.json",
+    "records/readiness/m2-radar-delayed-import-probe-001-implementation-readiness.json",
+    "scripts/activate_m2_radar_delayed_import_probe_001.py",
+    "scripts/m2_radar_delayed_import_probe_001_core.py",
+    "scripts/run_m2_radar_delayed_import_probe_001.py",
+    "scripts/record_m2_radar_delayed_import_probe_001_implementation_readiness.py",
+    "tests/test_m2_radar_delayed_import_probe_001.py",
     "scripts/prepare_m2_radar_delayed_import_probe_001_review.py",
     "scripts/record_m2_radar_delayed_import_probe_001_review_publication.py",
     "tests/test_m2_radar_delayed_import_probe_001_review.py",
@@ -1535,7 +1548,12 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}):
+            if current_radar_delayed_import_probe_001_implementation_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Implement and validate only the approved disposable delayed-import probe and portable synthetic tests, then require successful public default-branch CI. Do not create the corpus or import ArcPy before that public gate and the final no-content preflight."
+            elif current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW"
                 expected_dem_checkpoint_authority_ref = "reviews/m2-radar-delayed-import-probe-001/review-contract.json"
                 expected_dem_next_action = "Review the exact public M2 radar delayed-import probe-001 bundle and proposal; approve, revise, or defer the bounded disposable diagnostic. No implementation, ArcPy probe, project-data access, recovery retry, radar processing, baseline, change analysis, attribution, or scientific publication is authorized before an exact attested decision."
@@ -1618,7 +1636,12 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}):
+            if current_radar_delayed_import_probe_001_implementation_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Implement and validate only the approved disposable delayed-import probe and portable synthetic tests, then require successful public default-branch CI. Do not create the corpus or import ArcPy before that public gate and the final no-content preflight."
+            elif current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW"
                 expected_dem_checkpoint_authority_ref = "reviews/m2-radar-delayed-import-probe-001/review-contract.json"
                 expected_dem_next_action = "Review the exact public M2 radar delayed-import probe-001 bundle and proposal; approve, revise, or defer the bounded disposable diagnostic. No implementation, ArcPy probe, project-data access, recovery retry, radar processing, baseline, change analysis, attribution, or scientific publication is authorized before an exact attested decision."
@@ -2533,10 +2556,8 @@ def main() -> None:
         fail("project name does not match canonical repository identity")
     if profile["project"]["repository_identity"]["default_branch"] != "main":
         fail("expected default branch must be main")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json"
-    ]:
-        fail("project profile must expose only the zero-decision radar delayed-import probe proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must clear the approved radar delayed-import probe proposal")
     if profile.get("control_surfaces", {}).get("activated_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -2557,8 +2578,9 @@ def main() -> None:
         "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
+        "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
     ]:
-        fail("project profile must expose the nineteen exact active amendments")
+        fail("project profile must expose the twenty exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -2844,6 +2866,19 @@ def main() -> None:
         "automatic_retry_authorized": False,
         "baseline_or_change_authorized": False,
     }
+    expected_radar_delayed_import_probe_001_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-radar-delayed-import-probe-001-approval.json"),
+        "proposal_ref": "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json",
+        "proposal_sha256": "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9",
+        "review_bundle_sha256": "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-delayed-import-probe-001-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-radar-delayed-import-probe-001-review-reconciliation.json"),
+        "attempt_id": "radar-delayed-import-probe-001-real-001",
+        "maximum_live_attempts": 1,
+        "automatic_retry_authorized": False,
+        "project_data_content_read_authorized": False,
+    }
     expected_amendments = [
         expected_dem_amendment_binding,
         expected_orbit_amendment_binding,
@@ -2864,6 +2899,7 @@ def main() -> None:
         expected_dem_proj25_receipt_persistence_recovery_002_amendment_binding,
         expected_radar_pixel_orbit_application_001_amendment_binding,
         expected_radar_pixel_orbit_application_recovery_001_amendment_binding,
+        expected_radar_delayed_import_probe_001_amendment_binding,
     ]
     if profile["authority"].get("amendments") != expected_amendments:
         fail("profile authority does not bind the exact active amendments")
@@ -2889,8 +2925,9 @@ def main() -> None:
         "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
+        "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
     ]:
-        fail("active M2 scope does not expose the nineteen exact amendment approvals")
+        fail("active M2 scope does not expose the twenty exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -2932,10 +2969,8 @@ def main() -> None:
         or "bounded nested-grid correction" not in optical_pixel_recovery_review_gate.get("reason", "")
     ):
         fail("project profile must bind optical pixel recovery to its exact approval")
-    if profile.get("control_surfaces", {}).get("proposed_amendments") != [
-        "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json"
-    ]:
-        fail("project profile must expose only the zero-decision radar delayed-import probe proposal")
+    if profile.get("control_surfaces", {}).get("proposed_amendments") != []:
+        fail("project profile must clear the approved radar delayed-import probe proposal")
     radar_first_path_gate = profile_gates.get("M2-RADAR-FIRST-PATH-001-REVIEW", {})
     if (
         radar_first_path_gate.get("authority_ref") != "reviews/m2-radar-first-path-001/review-contract.json"
@@ -3022,12 +3057,11 @@ def main() -> None:
         "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
+        "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
-    if goal.get("proposed_amendments") != [
-        "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json"
-    ]:
-        fail("long-term goal must expose only the zero-decision radar delayed-import probe proposal")
+    if goal.get("proposed_amendments") != []:
+        fail("long-term goal must clear the approved radar delayed-import probe proposal")
     prohibited = set(contract["scope"]["forbidden_work"])
     if "download full satellite products" not in prohibited:
         fail("full satellite-product acquisition must remain prohibited in M1")
@@ -7808,7 +7842,9 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        if current_radar_delayed_import_probe_001_review_required(ROOT, state_counts):
+        if current_radar_delayed_import_probe_001_implementation_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION"
+        elif current_radar_delayed_import_probe_001_review_required(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW"
         elif current_radar_delayed_import_probe_001_review_publication_pending(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PUBLICATION"
@@ -13940,6 +13976,14 @@ def main() -> None:
     radar_probe_readiness = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-review-readiness.json").read_text(encoding="utf-8"))
     radar_probe_publication_gate = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json").read_text(encoding="utf-8"))
     radar_probe_publication_reconciliation = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-review-publication-reconciliation.json").read_text(encoding="utf-8"))
+    radar_probe_response_ref = "reviews/m2-radar-delayed-import-probe-001/response-7ef5b82aa7c932e8abc3926eb58dc7b7f5221a57bf5ecfced440dc997f57eb82.json"
+    radar_probe_response = json.loads((ROOT / radar_probe_response_ref).read_text(encoding="utf-8"))
+    radar_probe_lock = json.loads((ROOT / "reviews/m2-radar-delayed-import-probe-001/review-contract-lock-001.json").read_text(encoding="utf-8"))
+    radar_probe_review_reconciliation = json.loads((ROOT / "records/source-gates/m2-radar-delayed-import-probe-001-review-reconciliation.json").read_text(encoding="utf-8"))
+    radar_probe_approval = json.loads((ROOT / "records/source-gates/m2-radar-delayed-import-probe-001-approval.json").read_text(encoding="utf-8"))
+    radar_probe_activation = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-approval-activation.json").read_text(encoding="utf-8"))
+    radar_probe_runtime_contract = json.loads((ROOT / "config/qa/m2-radar-delayed-import-probe-001-contract.json").read_text(encoding="utf-8"))
+    radar_probe_implementation_readiness = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-implementation-readiness.json").read_text(encoding="utf-8"))
     radar_probe_proposal_ref = "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json"
     radar_probe_bundle_ref = "reviews/m2-radar-delayed-import-probe-001/review-bundle.json"
     radar_probe_readiness_ref = "records/readiness/m2-radar-delayed-import-probe-001-review-readiness.json"
@@ -14028,16 +14072,20 @@ def main() -> None:
         fail("M2 radar delayed-import probe-001 bundle, contract, or blank response differs")
     probe_units = {unit.get("id"): unit for unit in active_m2.get("units", []) if isinstance(unit, dict)}
     radar_probe_review_unit = probe_units.get("M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW", {})
+    radar_probe_implementation_unit = probe_units.get("M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION", {})
+    radar_probe_execution_unit = probe_units.get("M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION", {})
     if (
         radar_probe_readiness.get("status") != "pass_ready_publication_zero_decisions"
         or radar_probe_readiness.get("checks", {}).get("human_decision_count") != 0
         or radar_probe_readiness.get("released_now", {}).get("implementation") is not False
         or radar_probe_readiness.get("released_now", {}).get("probe_execution") is not False
-        or radar_probe_review_unit.get("status") != "in_progress"
+        or radar_probe_review_unit.get("status") != "complete"
+        or radar_probe_review_unit.get("disposition") != "pass"
         or radar_probe_review_unit.get("gates", {}).get("public_ci") != "success"
         or radar_probe_review_unit.get("gates", {}).get("publication_gate_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json")
         or radar_probe_review_unit.get("gates", {}).get("publication_reconciliation_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-review-publication-reconciliation.json")
-        or radar_probe_review_unit.get("gates", {}).get("probe_execution_authorized") is not False
+        or radar_probe_review_unit.get("gates", {}).get("implementation_authorized") is not True
+        or radar_probe_review_unit.get("gates", {}).get("probe_execution_authorized") is not True
         or radar_probe_publication_gate.get("status") != "pass_public_default_branch_ci_zero_decision_review_ready"
         or radar_probe_publication_gate.get("commit_sha") != "83d94782d255b674843ac4f12cda49327a924fb1"
         or radar_probe_publication_gate.get("public_ci_run_id") != 35411448542
@@ -14060,13 +14108,53 @@ def main() -> None:
             "implementation", "probe_execution", "project_data_content_read", "recovery_retry_or_reuse",
             "radar_processing", "baseline_or_change_analysis", "scientific_publication",
         ))
-        or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW"
-        or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW"
-        or goal.get("proposed_amendments") != [radar_probe_proposal_ref]
+        or radar_probe_response.get("completed") is not True
+        or radar_probe_response.get("reviewer", {}).get("attestation") is not True
+        or radar_probe_response.get("responses", [{}])[0].get("decision") != "approve"
+        or radar_probe_response.get("review_bundle_sha256") != "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5"
+        or sha256(radar_probe_response_ref) != "7ef5b82aa7c932e8abc3926eb58dc7b7f5221a57bf5ecfced440dc997f57eb82"
+        or radar_probe_lock.get("status") != "locked_exact_attested_response"
+        or radar_probe_lock.get("response_sha256") != sha256(radar_probe_response_ref)
+        or radar_probe_review_reconciliation.get("status") != "reconciled_exact_human_response"
+        or radar_probe_review_reconciliation.get("response_sha256") != sha256(radar_probe_response_ref)
+        or radar_probe_review_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+        or radar_probe_approval.get("status") != "approved_bounded_disposable_delayed_import_probe"
+        or radar_probe_approval.get("proposal_sha256") != sha256(radar_probe_proposal_ref)
+        or radar_probe_approval.get("review_bundle_manifest_sha256") != sha256(radar_probe_bundle_ref)
+        or radar_probe_approval.get("human_decision_count") != 1
+        or radar_probe_approval.get("attestation") is not True
+        or radar_probe_activation.get("status") != "pass_exact_approval_activated_implementation_publication_only"
+        or radar_probe_activation.get("released_now", {}).get("bounded_probe_implementation") is not True
+        or radar_probe_activation.get("released_now", {}).get("live_probe_execution") is not False
+        or radar_probe_runtime_contract.get("status") != "approved_implementation_publication_pending"
+        or radar_probe_runtime_contract.get("attempt", {}).get("attempt_id") != "radar-delayed-import-probe-001-real-001"
+        or radar_probe_runtime_contract.get("corpus", {}).get("file_count") != 156
+        or radar_probe_runtime_contract.get("corpus", {}).get("total_logical_bytes") != 10367157634
+        or radar_probe_runtime_contract.get("stage_order") != radar_probe_proposal.get("exact_probe_contract", {}).get("stage_order")
+        or any(value is not False for value in radar_probe_runtime_contract.get("claim_boundary", {}).values())
+        or any(value is not True for value in radar_probe_runtime_contract.get("forbidden", {}).values())
+        or radar_probe_implementation_unit.get("status") != "in_progress"
+        or radar_probe_implementation_unit.get("gates", {}).get("portable_synthetic_tests") != "success"
+        or radar_probe_implementation_unit.get("gates", {}).get("repository_validation") != "success"
+        or radar_probe_implementation_unit.get("gates", {}).get("public_ci") != "pending"
+        or radar_probe_implementation_unit.get("gates", {}).get("arcpy_invoked") is not False
+        or radar_probe_implementation_unit.get("gates", {}).get("probe_process_started") is not False
+        or radar_probe_execution_unit.get("status") != "planned"
+        or radar_probe_execution_unit.get("gates", {}).get("live_attempts_started") != 0
+        or radar_probe_implementation_readiness.get("status") != "pass_portable_probe_implementation_public_ci_pending"
+        or radar_probe_implementation_readiness.get("validation", {}).get("focused_test_count") != 8
+        or radar_probe_implementation_readiness.get("validation", {}).get("repository_checker_status") != f"pass_{len(REQUIRED)}_required_files"
+        or radar_probe_implementation_readiness.get("assertions", {}).get("arcpy_imported") is not False
+        or radar_probe_implementation_readiness.get("assertions", {}).get("probe_process_started") is not False
+        or radar_probe_implementation_readiness.get("assertions", {}).get("project_data_content_read") is not False
+        or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION"
+        or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION"
+        or goal.get("proposed_amendments") != []
         or current_radar_delayed_import_probe_001_review_publication_pending(ROOT, {"promoted": 8}) is not False
-        or current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}) is not True
+        or current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}) is not False
+        or current_radar_delayed_import_probe_001_implementation_pending(ROOT, {"promoted": 8}) is not True
     ):
-        fail("M2 radar delayed-import probe-001 canonical owner-review state differs")
+        fail("M2 radar delayed-import probe-001 canonical implementation state differs")
     radar_probe_evidence = ledger_by_id.get("EVID-0166")
     if (
         not isinstance(radar_probe_evidence, dict)
@@ -14103,6 +14191,26 @@ def main() -> None:
         ))
     ):
         fail("EVID-0167 radar delayed-import probe publication evidence differs or overclaims")
+    radar_probe_implementation_evidence = ledger_by_id.get("EVID-0168")
+    if (
+        not isinstance(radar_probe_implementation_evidence, dict)
+        or radar_probe_implementation_evidence.get("status") != "pass_portable_probe_implementation_public_ci_pending"
+        or radar_probe_implementation_evidence.get("approval_sha256") != sha256("records/source-gates/m2-radar-delayed-import-probe-001-approval.json")
+        or radar_probe_implementation_evidence.get("implementation_readiness_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-implementation-readiness.json")
+        or radar_probe_implementation_evidence.get("assertions", {}).get("human_decision_count") != 1
+        or radar_probe_implementation_evidence.get("assertions", {}).get("focused_test_count") != 8
+        or radar_probe_implementation_evidence.get("assertions", {}).get("full_test_count") != 593
+        or radar_probe_implementation_evidence.get("assertions", {}).get("full_skip_count") != 6
+        or radar_probe_implementation_evidence.get("assertions", {}).get("required_file_count") != len(REQUIRED)
+        or radar_probe_implementation_evidence.get("assertions", {}).get("public_ci_pending") is not True
+        or radar_probe_implementation_evidence.get("assertions", {}).get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION"
+        or any(radar_probe_implementation_evidence.get("assertions", {}).get(key) is not False for key in (
+            "arcpy_imported", "probe_process_started", "disposable_corpus_created", "project_data_content_read",
+            "external_custody_accessed", "recovery_attempt_reused_or_retried", "radar_processing_executed",
+            "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0168 radar delayed-import probe implementation evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():

@@ -340,6 +340,19 @@
         "maximum_real_attempts": 1,
         "automatic_retry_authorized": false,
         "baseline_or_change_authorized": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
+        "approval_sha256": "4fcc30884748520cca0c944718e96874092567a8dcf02ec62c9f13c12f2c291e",
+        "proposal_ref": "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json",
+        "proposal_sha256": "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9",
+        "review_bundle_sha256": "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-delayed-import-probe-001-review-reconciliation.json",
+        "review_reconciliation_sha256": "aa239f8e78bc23249d270dd0dc30730a8db6c1272f8e730f470105991b478244",
+        "attempt_id": "radar-delayed-import-probe-001-real-001",
+        "maximum_live_attempts": 1,
+        "automatic_retry_authorized": false,
+        "project_data_content_read_authorized": false
       }
     ]
   },
@@ -419,7 +432,8 @@
       "records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json",
       "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
       "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
-      "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"
+      "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
+      "records/source-gates/m2-radar-delayed-import-probe-001-approval.json"
     ]
   },
   "entry_conditions": [
@@ -3840,7 +3854,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-delayed-import-probe-001-review-preparation-approval.json",
         "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json",
@@ -3858,15 +3872,18 @@
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-local-log-observation-005.json"
       ],
       "outputs": [
-        "records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json",
-        "records/readiness/m2-radar-delayed-import-probe-001-review-publication-reconciliation.json"
+        "reviews/m2-radar-delayed-import-probe-001/response-7ef5b82aa7c932e8abc3926eb58dc7b7f5221a57bf5ecfced440dc997f57eb82.json",
+        "reviews/m2-radar-delayed-import-probe-001/review-contract-lock-001.json",
+        "records/source-gates/m2-radar-delayed-import-probe-001-review-reconciliation.json",
+        "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
+        "records/readiness/m2-radar-delayed-import-probe-001-approval-activation.json"
       ],
       "gates": {
         "public_ci": "success",
-        "human_decision_count": 0,
-        "attestation": false,
-        "implementation_authorized": false,
-        "probe_execution_authorized": false,
+        "human_decision_count": 1,
+        "attestation": true,
+        "implementation_authorized": true,
+        "probe_execution_authorized": true,
         "project_data_content_read_authorized": false,
         "recovery_retry_or_reuse_authorized": false,
         "radar_processing_authorized": false,
@@ -3874,25 +3891,102 @@
         "publication_gate_sha256": "9d514c7cfee958b1c6e8f652486361cb8fe02dbb3b080da2b40022f67853f68b",
         "publication_reconciliation_sha256": "19657eb889bae46e47a53d746b152f1a4574b8b71a5bc9d84b7db6f9a49ea53e",
         "publication_commit": "83d94782d255b674843ac4f12cda49327a924fb1",
-        "public_ci_run_id": 35411448542
+        "public_ci_run_id": 35411448542,
+        "approval_sha256": "4fcc30884748520cca0c944718e96874092567a8dcf02ec62c9f13c12f2c291e",
+        "review_reconciliation_sha256": "aa239f8e78bc23249d270dd0dc30730a8db6c1272f8e730f470105991b478244"
       },
-      "disposition": null,
+      "disposition": "pass",
       "retained_failures": [
         "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json",
         "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json"
       ],
       "exit_condition_delta": {
-        "expected": [
-          "successful public CI",
-          "one exact attested owner decision"
-        ],
+        "expected": [],
         "observed": [
-          "zero-decision packet prepared under review-preparation-only authority"
+          "one exact attested approval"
         ],
-        "decision_value": "unknown",
-        "rationale": "The packet creates no implementation, diagnostic-execution, recovery, or scientific authority."
+        "decision_value": "enables_dependency",
+        "rationale": "Implementation and public CI are released now; the one live probe remains conditional on final preflight."
       },
       "next_dependency": "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION"
+    },
+    {
+      "id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION",
+      "purpose": "Implement and publicly validate the exact disposable delayed-import probe without invoking ArcPy or creating the corpus.",
+      "depends_on": [
+        "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW"
+      ],
+      "action_class": "routine_qa",
+      "human_gate": false,
+      "status": "in_progress",
+      "inputs": [
+        "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
+        "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json",
+        "records/source-gates/m2-radar-delayed-import-probe-001-review-reconciliation.json"
+      ],
+      "outputs": [
+        "config/qa/m2-radar-delayed-import-probe-001-contract.json",
+        "scripts/m2_radar_delayed_import_probe_001_core.py",
+        "scripts/run_m2_radar_delayed_import_probe_001.py",
+        "tests/test_m2_radar_delayed_import_probe_001.py",
+        "records/readiness/m2-radar-delayed-import-probe-001-implementation-readiness.json"
+      ],
+      "gates": {
+        "portable_synthetic_tests": "success",
+        "repository_validation": "success",
+        "public_ci": "pending",
+        "arcpy_invoked": false,
+        "probe_process_started": false,
+        "focused_test_count": 8,
+        "full_test_count": 593,
+        "full_skip_count": 6,
+        "required_file_count": 1073,
+        "implementation_readiness_sha256": "b069a86d23a8f1572acfdee554d3f8a09f7cacbda17a4d392d5a62ae88e5d9dc"
+      },
+      "exit_condition_delta": {
+        "expected": [
+          "successful public default-branch CI"
+        ],
+        "observed": [
+          "portable implementation and synthetic validation complete without ArcPy or corpus creation"
+        ],
+        "decision_value": "pending_public_ci",
+        "rationale": "The live probe remains blocked behind public CI and a separate final no-content preflight."
+      },
+      "next_dependency": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION"
+    },
+    {
+      "id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION",
+      "purpose": "Run the one approved probe only after public CI and a final no-content preflight, then reconcile its diagnostic-only result.",
+      "depends_on": [
+        "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION"
+      ],
+      "action_class": "data_processing",
+      "human_gate": false,
+      "status": "planned",
+      "inputs": [
+        "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
+        "config/qa/m2-radar-delayed-import-probe-001-contract.json"
+      ],
+      "outputs": [
+        "records/readiness/m2-radar-delayed-import-probe-001-final-preflight.json",
+        "records/processing/m2-radar-delayed-import-probe-001-outcome-reconciliation.json"
+      ],
+      "gates": {
+        "public_ci": "pending",
+        "final_no_content_preflight": "pending",
+        "maximum_live_attempts": 1,
+        "live_attempts_started": 0
+      },
+      "exit_condition_delta": {
+        "expected": [
+          "terminal diagnostic receipt and cleanup record"
+        ],
+        "observed": [],
+        "decision_value": "pending",
+        "rationale": "Either PASS or BLOCK is diagnostic only."
+      },
+      "next_dependency": null
     }
   ],
   "path_efficiency": {
@@ -3949,8 +4043,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW",
-    "next_action": "Review the exact public M2 radar delayed-import probe-001 bundle and proposal; approve, revise, or defer the bounded disposable diagnostic. No implementation, ArcPy probe, project-data access, recovery retry, radar processing, baseline, change analysis, attribution, or scientific publication is authorized before an exact attested decision.",
+    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION",
+    "next_action": "Implement and validate only the approved disposable delayed-import probe and portable synthetic tests, then require successful public default-branch CI. Do not create the corpus or import ArcPy before that public gate and the final no-content preflight.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3994,9 +4088,9 @@
       "Metadata recovery-001 is terminal after exact promotion because both success and failure terminal receipt construction failed; do not retry or reconstruct its terminal result.",
       "The exact promoted grid destination and staging path are the same approved hard-link identity, but no operation/sign preflight or conversion is released before a separately approved receipt-persistence recovery.",
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval.",
-      "The delayed-import probe packet is blank and creates no implementation or execution authority; the consumed radar recovery remains terminal and no project data may be read."
+      "The exact delayed-import probe is approved but remains blocked at implementation publication; no final preflight, live probe, project-data access, recovery retry, radar processing, or scientific claim is released yet."
     ],
-    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW",
-    "parallel_next_action": "Review the exact public M2 radar delayed-import probe-001 bundle and proposal; approve, revise, or defer the bounded disposable diagnostic. No implementation, ArcPy probe, project-data access, recovery retry, radar processing, baseline, change analysis, attribution, or scientific publication is authorized before an exact attested decision."
+    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION",
+    "parallel_next_action": "Implement and validate only the approved disposable delayed-import probe and portable synthetic tests, then require successful public default-branch CI. Do not create the corpus or import ArcPy before that public gate and the final no-content preflight."
   }
 }

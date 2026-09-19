@@ -222,6 +222,10 @@ RADAR_DELAYED_IMPORT_PROBE_001_REVIEW_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW",
     "next_action": "Review the exact public M2 radar delayed-import probe-001 bundle and proposal; approve, revise, or defer the bounded disposable diagnostic. No implementation, ArcPy probe, project-data access, recovery retry, radar processing, baseline, change analysis, attribution, or scientific publication is authorized before an exact attested decision.",
 }
+RADAR_DELAYED_IMPORT_PROBE_001_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION",
+    "next_action": "Implement and validate only the approved disposable delayed-import probe and portable synthetic tests, then require successful public default-branch CI. Do not create the corpus or import ArcPy before that public gate and the final no-content preflight.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -1776,6 +1780,45 @@ def current_radar_delayed_import_probe_001_review_required(
     )
 
 
+def current_radar_delayed_import_probe_001_implementation_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize exact owner approval with implementation public CI still pending."""
+    if state_counts != {"promoted": 8}:
+        return False
+    if (root / "records/readiness/m2-radar-delayed-import-probe-001-implementation-publication-gate.json").exists():
+        return False
+    try:
+        approval = load(root / "records/source-gates/m2-radar-delayed-import-probe-001-approval.json")
+        activation = load(root / "records/readiness/m2-radar-delayed-import-probe-001-approval-activation.json")
+        contract = load(root / "config/qa/m2-radar-delayed-import-probe-001-contract.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW", {})
+    implementation = units.get("M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION", {})
+    execution = units.get("M2-RADAR-DELAYED-IMPORT-PROBE-001-EXECUTION", {})
+    return bool(
+        approval.get("status") == "approved_bounded_disposable_delayed_import_probe"
+        and approval.get("human_decision_count") == 1
+        and approval.get("attestation") is True
+        and activation.get("status") == "pass_exact_approval_activated_implementation_publication_only"
+        and activation.get("released_now", {}).get("bounded_probe_implementation") is True
+        and activation.get("released_now", {}).get("live_probe_execution") is False
+        and contract.get("status") == "approved_implementation_publication_pending"
+        and contract.get("attempt", {}).get("attempt_id") == "radar-delayed-import-probe-001-real-001"
+        and review.get("status") == "complete"
+        and review.get("disposition") == "pass"
+        and implementation.get("status") == "in_progress"
+        and implementation.get("gates", {}).get("public_ci") == "pending"
+        and implementation.get("gates", {}).get("arcpy_invoked") is False
+        and implementation.get("gates", {}).get("probe_process_started") is False
+        and execution.get("status") == "planned"
+        and execution.get("gates", {}).get("live_attempts_started") == 0
+    )
+
+
 def current_dem_proj25_metadata_recovery_001_review_required(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -1845,7 +1888,11 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_delayed_import_probe_001_review_required(
+            if current_radar_delayed_import_probe_001_implementation_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_001_IMPLEMENTATION_CHECKPOINT)
+            elif current_radar_delayed_import_probe_001_review_required(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(RADAR_DELAYED_IMPORT_PROBE_001_REVIEW_CHECKPOINT)

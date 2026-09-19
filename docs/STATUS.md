@@ -6,7 +6,15 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW`; radar base real-001 and recovery real-001 remain terminal, while only owner review of the publicly validated zero-decision disposable delayed-import probe packet is released
+- **Checkpoints:** primary and sole active parallel checkpoint `M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION`; radar base real-001 and recovery real-001 remain terminal, while only the approved disposable probe implementation, portable tests, and public-CI publication are released
+
+## Radar delayed-import probe-001 approved implementation — 2026-09-19
+
+The owner's exact attested approval is locked at response SHA-256 `7ef5b82aa7c932e8abc3926eb58dc7b7f5221a57bf5ecfced440dc997f57eb82`; approval SHA-256 is `4fcc30884748520cca0c944718e96874092567a8dcf02ec62c9f13c12f2c291e`. The approved boundary is the one disposable single-process probe only. Recovery-001 remains terminal and cannot be reused or retried.
+
+The implementation now enforces 156 deterministic Windows sparse files totaling exactly 10,367,157,634 logical bytes, a full stable-order hash scan before ArcPy import, durable stages around each setup boundary, two 2-by-2 disposable rasters, one `MosaicToNewRaster`, reverse extension check-in, terminal persistence, cleanup reporting, and collision-based one-attempt enforcement. Eight focused portable tests and all 593 repository tests pass with six intentional local skips. Implementation-readiness SHA-256 is `b069a86d23a8f1572acfdee554d3f8a09f7cacbda17a4d392d5a62ae88e5d9dc`.
+
+Public default-branch CI is still pending. No final preflight, corpus creation, ArcPy import, live probe, project-data or external-custody access, recovery action, radar processing, baseline, change analysis, interpretation, attribution, publication, or historical-cause/recovery-readiness claim has occurred.
 
 ## Radar delayed-import probe-001 review prepared — 2026-09-19
 

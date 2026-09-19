@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-APPROVAL",
+  "status": "approved_bounded_disposable_delayed_import_probe",
+  "approved_at_utc": "2026-09-19T16:53:04Z",
+  "review_id": "m2-radar-delayed-import-probe-001-review",
+  "review_bundle_manifest_sha256": "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5",
+  "proposal_ref": "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json",
+  "proposal_sha256": "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9",
+  "review_contract_ref": "reviews/m2-radar-delayed-import-probe-001/review-contract.json",
+  "review_contract_sha256": "204e4d95d196bf2c08beb83aba78a295a89af26f51e3d5513b72ea158ae8118a",
+  "review_publication_gate_ref": "records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json",
+  "review_publication_gate_sha256": "9d514c7cfee958b1c6e8f652486361cb8fe02dbb3b080da2b40022f67853f68b",
+  "review_reconciliation_ref": "records/source-gates/m2-radar-delayed-import-probe-001-review-reconciliation.json",
+  "review_reconciliation_sha256": "aa239f8e78bc23249d270dd0dc30730a8db6c1272f8e730f470105991b478244",
+  "locked_response_sha256": "7ef5b82aa7c932e8abc3926eb58dc7b7f5221a57bf5ecfced440dc997f57eb82",
+  "lock_receipt_sha256": "5d4c57ce6495a3debadcd201e6093fd7ba9526729200ef4aebbd3448c313c980",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "attestation": true,
+  "authorized_bounded_actions": [
+    "implement a probe-only runner that reserves append-only started, stage, terminal, and cleanup receipts before any disposable corpus creation",
+    "add portable synthetic tests for exact stage order, durable pre-call and post-call markers, sanitized exception persistence, cleanup reporting, one-attempt enforcement, and secret and project-path rejection",
+    "require successful public default-branch CI and one final no-content preflight before the one live probe",
+    "only on those passes create one fresh process and one disposable corpus of exactly 156 deterministic sparse regular files totaling exactly 10,367,157,634 logical bytes under a probe-specific local temporary root",
+    "hash all 156 disposable files in stable name order before importing ArcPy and record only synthetic file names, lengths, aggregate digest, elapsed timing, and stage state",
+    "write and flush durable before and after markers around ArcPy import, ProductInfo, overwriteOutput assignment, Image Analyst checkout, Spatial checkout, two tiny disposable raster creations, and one MosaicToNewRaster operation",
+    "check extensions in in reverse order, write one terminal diagnostic receipt, then attempt cleanup and record cleanup disposition without retrying the probe",
+    "reconcile the diagnostic outcome without changing the terminal recovery, processing contracts, or scientific state"
+  ],
+  "exact_probe_contract": {
+    "attempt_id": "radar-delayed-import-probe-001-real-001",
+    "process_count": 1,
+    "corpus": {
+      "content_class": "deterministic_disposable_zero_bytes",
+      "file_count": 156,
+      "total_logical_bytes": 10367157634,
+      "allocation": "sparse_regular_files_when_supported_with exact logical lengths; fail closed if exact lengths or local free-space guard cannot be established",
+      "path_class": "probe-specific local temporary root outside external custody and outside tracked repository content",
+      "source_names_or_source_bytes_used": false
+    },
+    "stage_order": [
+      "attempt_reserved",
+      "corpus_create_started",
+      "corpus_create_completed",
+      "corpus_hash_started",
+      "corpus_hash_completed",
+      "arcpy_import_started",
+      "arcpy_import_completed",
+      "product_info_started",
+      "product_info_completed",
+      "overwrite_output_started",
+      "overwrite_output_completed",
+      "image_analyst_checkout_started",
+      "image_analyst_checkout_completed",
+      "spatial_checkout_started",
+      "spatial_checkout_completed",
+      "disposable_raster_a_started",
+      "disposable_raster_a_completed",
+      "disposable_raster_b_started",
+      "disposable_raster_b_completed",
+      "disposable_mosaic_started",
+      "disposable_mosaic_completed",
+      "spatial_checkin_started",
+      "spatial_checkin_completed",
+      "image_analyst_checkin_started",
+      "image_analyst_checkin_completed",
+      "terminal_receipt_persisted",
+      "cleanup_started",
+      "cleanup_completed_or_warning"
+    ],
+    "geoprocessing": {
+      "inputs": "two deterministic 2 by 2 disposable rasters",
+      "operation": "arcpy.management.MosaicToNewRaster",
+      "output": "one disposable local raster",
+      "project_crs_or_project_aoi_used": false
+    },
+    "result_semantics": {
+      "pass": "current host completed the exact delayed-import diagnostic sequence at that time only",
+      "block": "the last durable stage and sanitized exception identify this probe failure boundary only",
+      "historical_root_cause_claim_allowed": false,
+      "recovery_readiness_claim_allowed": false
+    }
+  },
+  "limits": {
+    "live_probe_attempts": 1,
+    "automatic_retry": false,
+    "processes": 1,
+    "network_requests": 0,
+    "credential_or_token_actions": 0,
+    "software_installations": 0,
+    "uac_actions": 0,
+    "project_data_content_reads": 0,
+    "external_custody_reads": 0,
+    "external_custody_mutations": 0,
+    "recovery_attempts": 0,
+    "orbit_applications": 0,
+    "radar_pixel_reads": 0,
+    "scientific_outputs": 0
+  },
+  "frozen_without_change": [
+    "the consumed recovery-001 terminal status, attempt path, reconciliations, and five owner-review observations",
+    "all Sentinel, orbit, DEM, AOI, EPSG:32645, 10 metre grid, masks, thresholds, route, and QA contracts",
+    "all existing custody and derived outputs"
+  ],
+  "does_not_authorize": [
+    "probe implementation, tests, preflight, ArcPy invocation, corpus creation, or live probe before exact attested owner approval",
+    "recovery-001 request, reuse, resume, retry, path mutation, or reconstruction",
+    "project-data or external-custody access, source substitution, network, credential, account, terms, installation, or UAC action",
+    "orbit application, DEM action, radar pixel processing, route evaluation, baseline, change analysis, interpretation, attribution, emergency guidance, derived-pixel publication, or scientific publication",
+    "a historical root-cause or recovery-readiness claim from either a passing or failing probe"
+  ],
+  "human_decisions_fabricated": false
+}

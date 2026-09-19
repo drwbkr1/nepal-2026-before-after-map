@@ -118,7 +118,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertFalse(unit_by_id["M2-ORBIT-APPLY"]["gates"]["orbit_application_started"])
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            ["contracts/milestone-002-radar-delayed-import-probe-001-proposal.json"],
+            [],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -142,10 +142,11 @@ class M2OrbitActivationTests(unittest.TestCase):
                 "records/source-gates/m2-dem-proj25-receipt-persistence-recovery-002-approval.json",
                 "records/source-gates/m2-radar-pixel-orbit-application-001-approval.json",
                 "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json",
+                "records/source-gates/m2-radar-delayed-import-probe-001-approval.json",
             ],
         )
         checkpoints = [item["checkpoint_id"] for item in self.profile["parallel_checkpoints"]]
-        self.assertIn("M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW", checkpoints)
+        self.assertIn("M2-RADAR-DELAYED-IMPORT-PROBE-001-IMPLEMENTATION", checkpoints)
         self.assertNotIn("M2-DEM-TERRAIN-RESULT-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-ACQUISITION-REVIEW", checkpoints)
         self.assertNotIn("M2-ORBIT-AMENDMENT-REVIEW", checkpoints)
