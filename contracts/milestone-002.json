@@ -3840,7 +3840,7 @@
       ],
       "action_class": "authority_broadening",
       "human_gate": true,
-      "status": "planned",
+      "status": "in_progress",
       "inputs": [
         "records/source-gates/m2-radar-delayed-import-probe-001-review-preparation-approval.json",
         "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json",
@@ -3857,9 +3857,12 @@
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-launch-context-observation-004.json",
         "records/readiness/m2-radar-pixel-orbit-application-recovery-001-terminal-local-log-observation-005.json"
       ],
-      "outputs": [],
+      "outputs": [
+        "records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json",
+        "records/readiness/m2-radar-delayed-import-probe-001-review-publication-reconciliation.json"
+      ],
       "gates": {
-        "public_ci": "pending",
+        "public_ci": "success",
         "human_decision_count": 0,
         "attestation": false,
         "implementation_authorized": false,
@@ -3867,7 +3870,11 @@
         "project_data_content_read_authorized": false,
         "recovery_retry_or_reuse_authorized": false,
         "radar_processing_authorized": false,
-        "baseline_or_change_authorized": false
+        "baseline_or_change_authorized": false,
+        "publication_gate_sha256": "9d514c7cfee958b1c6e8f652486361cb8fe02dbb3b080da2b40022f67853f68b",
+        "publication_reconciliation_sha256": "19657eb889bae46e47a53d746b152f1a4574b8b71a5bc9d84b7db6f9a49ea53e",
+        "publication_commit": "83d94782d255b674843ac4f12cda49327a924fb1",
+        "public_ci_run_id": 35411448542
       },
       "disposition": null,
       "retained_failures": [
@@ -3942,8 +3949,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PUBLICATION",
-    "next_action": "Publish and publicly validate the exact zero-decision radar delayed-import probe-001 review packet. Do not implement or execute the probe, access project data, reuse recovery-001, or begin radar processing before one exact attested owner decision on the public packet.",
+    "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW",
+    "next_action": "Review the exact public M2 radar delayed-import probe-001 bundle and proposal; approve, revise, or defer the bounded disposable diagnostic. No implementation, ArcPy probe, project-data access, recovery retry, radar processing, baseline, change analysis, attribution, or scientific publication is authorized before an exact attested decision.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -3989,7 +3996,7 @@
       "The radar pixel and orbit application review packet has zero decisions; no project data content read, orbit application, terrain processing, baseline, change analysis, attribution, or scientific publication is released before public CI and exact owner approval.",
       "The delayed-import probe packet is blank and creates no implementation or execution authority; the consumed radar recovery remains terminal and no project data may be read."
     ],
-    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PUBLICATION",
-    "parallel_next_action": "Publish and publicly validate the exact zero-decision radar delayed-import probe-001 review packet. Do not implement or execute the probe, access project data, reuse recovery-001, or begin radar processing before one exact attested owner decision on the public packet."
+    "parallel_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW",
+    "parallel_next_action": "Review the exact public M2 radar delayed-import probe-001 bundle and proposal; approve, revise, or defer the bounded disposable diagnostic. No implementation, ArcPy probe, project-data access, recovery retry, radar processing, baseline, change analysis, attribution, or scientific publication is authorized before an exact attested decision."
   }
 }

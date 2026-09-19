@@ -60,7 +60,7 @@ class DemVerticalDatumProj25Tests(unittest.TestCase):
         self.assertFalse(gate["assertions"]["grid_request_performed"])
         self.assertFalse(gate["assertions"]["dem_pixels_read"])
         self.assertEqual(reconciliation["status"], "pass_public_gate_final_no_payload_preflight_ready")
-        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PUBLICATION")
+        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW")
 
     def test_controlled_paths_reject_traversal_and_absolute_paths(self) -> None:
         for unsafe in ("../escape.tif", "/absolute.tif", "a/../../escape.tif"):

@@ -24,12 +24,14 @@ BUNDLE_REF = f"reviews/{PREFIX}/review-bundle.json"
 CONTRACT_REF = f"reviews/{PREFIX}/review-contract.json"
 BLANK_REF = f"reviews/{PREFIX}/blank-response.json"
 READINESS_REF = f"records/readiness/{PREFIX}-review-readiness.json"
+PUBLICATION_GATE_REF = f"records/readiness/{PREFIX}-review-publication-gate.json"
+PUBLICATION_RECONCILIATION_REF = f"records/readiness/{PREFIX}-review-publication-reconciliation.json"
 TERMINAL_REF = "records/processing/m2-radar-pixel-orbit-application-recovery-001-terminal-reconciliation.json"
 OUTCOME_REF = "records/processing/m2-radar-pixel-orbit-application-recovery-001-outcome-reconciliation.json"
 PROPOSAL_SHA256 = "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9"
 BUNDLE_SHA256 = "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5"
 READINESS_SHA256 = "37ce53da206e71ed20db5a4b1b0fef50d3acd953ea9d865de2253a20339ad170"
-CHECKPOINT = "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PUBLICATION"
+CHECKPOINT = "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW"
 
 
 def load(ref: str) -> dict:
@@ -155,7 +157,31 @@ class M2RadarDelayedImportProbe001ReviewTests(unittest.TestCase):
         self.assertFalse(readiness["released_now"]["implementation"])
         self.assertFalse(readiness["released_now"]["probe_execution"])
 
-    def test_canonical_state_routes_only_to_review_publication(self) -> None:
+    def test_public_ci_releases_owner_review_only(self) -> None:
+        gate = load(PUBLICATION_GATE_REF)
+        reconciliation = load(PUBLICATION_RECONCILIATION_REF)
+        self.assertEqual(gate["status"], "pass_public_default_branch_ci_zero_decision_review_ready")
+        self.assertEqual(gate["commit_sha"], "83d94782d255b674843ac4f12cda49327a924fb1")
+        self.assertEqual(gate["public_ci_run_id"], 35411448542)
+        self.assertEqual(gate["repository_required_file_count"], 1058)
+        self.assertEqual(gate["public_test_count"], 584)
+        self.assertEqual(gate["public_intentional_skip_count"], 13)
+        self.assertTrue(gate["assertions"]["owner_review_ready"])
+        self.assertEqual(reconciliation["status"], "pass_public_gate_owner_review_ready")
+        self.assertEqual(reconciliation["publication_gate_sha256"], sha256(PUBLICATION_GATE_REF))
+        self.assertTrue(reconciliation["released_now"]["owner_review"])
+        for key in (
+            "implementation",
+            "probe_execution",
+            "project_data_content_read",
+            "recovery_retry_or_reuse",
+            "radar_processing",
+            "baseline_or_change_analysis",
+            "scientific_publication",
+        ):
+            self.assertFalse(reconciliation["released_now"][key])
+
+    def test_canonical_state_routes_only_to_owner_review(self) -> None:
         milestone = load("contracts/milestone-002.json")
         profile = load("records/project-control-profile.json")
         goal = load("records/long-term-goal.json")
@@ -165,13 +191,13 @@ class M2RadarDelayedImportProbe001ReviewTests(unittest.TestCase):
         self.assertEqual(goal["proposed_amendments"], [PROPOSAL_REF])
         units = {item["id"]: item for item in milestone["units"]}
         review = units["M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW"]
-        self.assertEqual(review["status"], "planned")
-        self.assertEqual(review["gates"]["public_ci"], "pending")
+        self.assertEqual(review["status"], "in_progress")
+        self.assertEqual(review["gates"]["public_ci"], "success")
         self.assertFalse(review["gates"]["implementation_authorized"])
         self.assertFalse(review["gates"]["probe_execution_authorized"])
         self.assertTrue(current_radar_pixel_orbit_application_recovery_001_terminal(ROOT, {"promoted": 8}))
-        self.assertTrue(current_radar_delayed_import_probe_001_review_publication_pending(ROOT, {"promoted": 8}))
-        self.assertFalse(current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}))
+        self.assertFalse(current_radar_delayed_import_probe_001_review_publication_pending(ROOT, {"promoted": 8}))
+        self.assertTrue(current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}))
 
 
 if __name__ == "__main__":

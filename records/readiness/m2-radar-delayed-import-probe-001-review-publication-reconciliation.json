@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PUBLICATION-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-19T01:06:38Z",
+  "status": "pass_public_gate_owner_review_ready",
+  "publication_gate_ref": "records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json",
+  "publication_gate_sha256": "9d514c7cfee958b1c6e8f652486361cb8fe02dbb3b080da2b40022f67853f68b",
+  "commit_sha": "83d94782d255b674843ac4f12cda49327a924fb1",
+  "public_ci_run_id": 35411448542,
+  "review_bundle_sha256": "1084597b5db7b20e24ad241c5550a58623571747d5ef7d37a086298830bd45e5",
+  "proposal_sha256": "7d3474eeed2dd679ca1f755d1ebcf6542b977b87418b40f4b40204ae5ac02de9",
+  "current_checkpoint": "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW",
+  "released_now": {
+    "owner_review": true,
+    "implementation": false,
+    "probe_execution": false,
+    "project_data_content_read": false,
+    "recovery_retry_or_reuse": false,
+    "radar_processing": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "human_decision_count": 0,
+    "attestation": false,
+    "probe_implementation_authorized": false,
+    "probe_execution_authorized": false,
+    "project_data_content_read_authorized": false,
+    "recovery_retry_or_reuse_authorized": false,
+    "radar_processing_authorized": false,
+    "baseline_or_change_authorized": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Review the exact public M2 radar delayed-import probe-001 bundle and proposal; approve, revise, or defer the bounded disposable diagnostic. No implementation, ArcPy probe, project-data access, recovery retry, radar processing, baseline, change analysis, attribution, or scientific publication is authorized before an exact attested decision."
+}

@@ -234,7 +234,10 @@ REQUIRED = [
     "reviews/m2-radar-delayed-import-probe-001/review-contract.json",
     "reviews/m2-radar-delayed-import-probe-001/blank-response.json",
     "records/readiness/m2-radar-delayed-import-probe-001-review-readiness.json",
+    "records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json",
+    "records/readiness/m2-radar-delayed-import-probe-001-review-publication-reconciliation.json",
     "scripts/prepare_m2_radar_delayed_import_probe_001_review.py",
+    "scripts/record_m2_radar_delayed_import_probe_001_review_publication.py",
     "tests/test_m2_radar_delayed_import_probe_001_review.py",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
@@ -13935,6 +13938,8 @@ def main() -> None:
     radar_probe_contract = json.loads((ROOT / "reviews/m2-radar-delayed-import-probe-001/review-contract.json").read_text(encoding="utf-8"))
     radar_probe_blank = json.loads((ROOT / "reviews/m2-radar-delayed-import-probe-001/blank-response.json").read_text(encoding="utf-8"))
     radar_probe_readiness = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-review-readiness.json").read_text(encoding="utf-8"))
+    radar_probe_publication_gate = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json").read_text(encoding="utf-8"))
+    radar_probe_publication_reconciliation = json.loads((ROOT / "records/readiness/m2-radar-delayed-import-probe-001-review-publication-reconciliation.json").read_text(encoding="utf-8"))
     radar_probe_proposal_ref = "contracts/milestone-002-radar-delayed-import-probe-001-proposal.json"
     radar_probe_bundle_ref = "reviews/m2-radar-delayed-import-probe-001/review-bundle.json"
     radar_probe_readiness_ref = "records/readiness/m2-radar-delayed-import-probe-001-review-readiness.json"
@@ -14028,16 +14033,40 @@ def main() -> None:
         or radar_probe_readiness.get("checks", {}).get("human_decision_count") != 0
         or radar_probe_readiness.get("released_now", {}).get("implementation") is not False
         or radar_probe_readiness.get("released_now", {}).get("probe_execution") is not False
-        or radar_probe_review_unit.get("status") != "planned"
-        or radar_probe_review_unit.get("gates", {}).get("public_ci") != "pending"
+        or radar_probe_review_unit.get("status") != "in_progress"
+        or radar_probe_review_unit.get("gates", {}).get("public_ci") != "success"
+        or radar_probe_review_unit.get("gates", {}).get("publication_gate_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json")
+        or radar_probe_review_unit.get("gates", {}).get("publication_reconciliation_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-review-publication-reconciliation.json")
         or radar_probe_review_unit.get("gates", {}).get("probe_execution_authorized") is not False
-        or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PUBLICATION"
-        or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW-PUBLICATION"
+        or radar_probe_publication_gate.get("status") != "pass_public_default_branch_ci_zero_decision_review_ready"
+        or radar_probe_publication_gate.get("commit_sha") != "83d94782d255b674843ac4f12cda49327a924fb1"
+        or radar_probe_publication_gate.get("public_ci_run_id") != 35411448542
+        or radar_probe_publication_gate.get("public_ci_conclusion") != "success"
+        or radar_probe_publication_gate.get("repository_required_file_count") != 1058
+        or radar_probe_publication_gate.get("public_test_count") != 584
+        or radar_probe_publication_gate.get("public_intentional_skip_count") != 13
+        or radar_probe_publication_gate.get("assertions", {}).get("owner_review_ready") is not True
+        or any(radar_probe_publication_gate.get("assertions", {}).get(key) is not False for key in (
+            "probe_implementation_authorized", "probe_execution_authorized", "probe_process_started",
+            "project_data_content_read", "external_custody_accessed", "recovery_attempt_reused_or_retried",
+            "radar_processing_executed", "baseline_or_change_analysis_executed", "scientific_result_established",
+        ))
+        or radar_probe_publication_reconciliation.get("status") != "pass_public_gate_owner_review_ready"
+        or radar_probe_publication_reconciliation.get("publication_gate_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json")
+        or radar_probe_publication_reconciliation.get("review_bundle_sha256") != sha256(radar_probe_bundle_ref)
+        or radar_probe_publication_reconciliation.get("proposal_sha256") != sha256(radar_probe_proposal_ref)
+        or radar_probe_publication_reconciliation.get("released_now", {}).get("owner_review") is not True
+        or any(radar_probe_publication_reconciliation.get("released_now", {}).get(key) is not False for key in (
+            "implementation", "probe_execution", "project_data_content_read", "recovery_retry_or_reuse",
+            "radar_processing", "baseline_or_change_analysis", "scientific_publication",
+        ))
+        or profile.get("current_checkpoint", {}).get("checkpoint_id") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW"
+        or goal.get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW"
         or goal.get("proposed_amendments") != [radar_probe_proposal_ref]
-        or current_radar_delayed_import_probe_001_review_publication_pending(ROOT, {"promoted": 8}) is not True
-        or current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}) is not False
+        or current_radar_delayed_import_probe_001_review_publication_pending(ROOT, {"promoted": 8}) is not False
+        or current_radar_delayed_import_probe_001_review_required(ROOT, {"promoted": 8}) is not True
     ):
-        fail("M2 radar delayed-import probe-001 canonical review-publication state differs")
+        fail("M2 radar delayed-import probe-001 canonical owner-review state differs")
     radar_probe_evidence = ledger_by_id.get("EVID-0166")
     if (
         not isinstance(radar_probe_evidence, dict)
@@ -14054,6 +14083,26 @@ def main() -> None:
         ))
     ):
         fail("EVID-0166 radar delayed-import probe review evidence differs or overclaims")
+    radar_probe_publication_evidence = ledger_by_id.get("EVID-0167")
+    if (
+        not isinstance(radar_probe_publication_evidence, dict)
+        or radar_probe_publication_evidence.get("status") != "pass_public_ci_zero_decision_owner_review_ready"
+        or radar_probe_publication_evidence.get("publication_gate_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-review-publication-gate.json")
+        or radar_probe_publication_evidence.get("publication_reconciliation_sha256") != sha256("records/readiness/m2-radar-delayed-import-probe-001-review-publication-reconciliation.json")
+        or radar_probe_publication_evidence.get("proposal_sha256") != sha256(radar_probe_proposal_ref)
+        or radar_probe_publication_evidence.get("review_bundle_sha256") != sha256(radar_probe_bundle_ref)
+        or radar_probe_publication_evidence.get("assertions", {}).get("publication_commit") != "83d94782d255b674843ac4f12cda49327a924fb1"
+        or radar_probe_publication_evidence.get("assertions", {}).get("public_ci_run_id") != 35411448542
+        or radar_probe_publication_evidence.get("assertions", {}).get("human_decision_count") != 0
+        or radar_probe_publication_evidence.get("assertions", {}).get("owner_review_ready") is not True
+        or radar_probe_publication_evidence.get("assertions", {}).get("current_checkpoint") != "M2-RADAR-DELAYED-IMPORT-PROBE-001-REVIEW"
+        or any(radar_probe_publication_evidence.get("assertions", {}).get(key) is not False for key in (
+            "probe_implementation_authorized", "probe_execution_authorized", "probe_process_started",
+            "project_data_content_read", "external_custody_accessed", "recovery_attempt_reused_or_retried",
+            "radar_processing_executed", "scientific_result_established",
+        ))
+    ):
+        fail("EVID-0167 radar delayed-import probe publication evidence differs or overclaims")
 
     violations = []
     for relative in tracked_files():
