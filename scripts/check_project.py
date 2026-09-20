@@ -423,6 +423,8 @@ REQUIRED = [
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-readiness.json",
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-local-validation.json",
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-publication-activation.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-publication-gate.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-publication-reconciliation.json",
     "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-preparation-approval.json",
     "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-publication-approval.json",
     "records/surface-receipts/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review.json",
