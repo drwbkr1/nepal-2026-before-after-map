@@ -43,6 +43,7 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_apply_orbit_correction_input_resolution_diagnostic_001_terminal,
     current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_publication_pending,
     current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_required,
+    current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending,
     current_radar_delayed_import_probe_001_review_publication_pending,
     current_radar_delayed_import_probe_001_review_required,
     current_radar_delayed_import_probe_001_implementation_pending,
@@ -438,6 +439,24 @@ REQUIRED = [
     "scripts/integrate_m2_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_publication.py",
     "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_publication.py",
     "tests/test_m2_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review.py",
+    "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001/response-c88b4ee8401b5b3b23acd1ebcfa9ae23e40ec7be737de076f89606c5567576f4.json",
+    "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001/review-contract-lock-001.json",
+    "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-reconciliation.json",
+    "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval-activation.json",
+    "config/qa/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-contract.json",
+    "scripts/activate_m2_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001.py",
+    "scripts/m2_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_core.py",
+    "scripts/run_m2_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001.py",
+    "scripts/validate_m2_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_arcgis.py",
+    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_readiness.py",
+    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_publication.py",
+    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_gate_state_publication.py",
+    "scripts/reconcile_m2_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001.py",
+    "tests/test_m2_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001.py",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-arcgis-runtime-validation-failure-001.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-arcgis-runtime-validation.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-implementation-readiness.json",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -1734,7 +1753,12 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_required(ROOT, {"promoted": 8}):
+            if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Implement and validate only the approved diagnostic receipt-durability correction, portable synthetic tests, and installed ArcGIS-runtime disposable synthetic test, then require successful public default-branch CI. Do not run the final no-content preflight or inspect project data or external custody before the implementation and execution-gate publications pass."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_required(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW"
                 expected_dem_checkpoint_authority_ref = "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001/review-contract.json"
                 expected_dem_proposed_amendments = ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"]
@@ -1937,7 +1961,12 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_required(ROOT, {"promoted": 8}):
+            if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION"
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Implement and validate only the approved diagnostic receipt-durability correction, portable synthetic tests, and installed ArcGIS-runtime disposable synthetic test, then require successful public default-branch CI. Do not run the final no-content preflight or inspect project data or external custody before the implementation and execution-gate publications pass."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_required(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW"
                 expected_dem_checkpoint_authority_ref = "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001/review-contract.json"
                 expected_dem_proposed_amendments = ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"]
@@ -2998,8 +3027,9 @@ def main() -> None:
         "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
     ]:
-        fail("project profile must expose the twenty-three exact active amendments")
+        fail("project profile must expose the twenty-four exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -3338,6 +3368,20 @@ def main() -> None:
         "apply_orbit_correction_authorized": False,
         "geoprocessing_authorized": False,
     }
+    expected_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
+        "approval_sha256": sha256("records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json"),
+        "proposal_ref": "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json",
+        "proposal_sha256": "607c1ba872f91226afc5b3b1c2ce69f111979d20d2f6c611dac9b496f5ed1a28",
+        "review_bundle_sha256": "006ffc48f7344f43b073404163962dbe6f821273b21f4c80a448a11777deb847",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-reconciliation.json",
+        "review_reconciliation_sha256": sha256("records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-reconciliation.json"),
+        "attempt_id": "radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-real-001",
+        "maximum_processes": 1,
+        "automatic_retry_authorized": False,
+        "apply_orbit_correction_authorized": False,
+        "geoprocessing_authorized": False,
+    }
     expected_amendments = [
         expected_dem_amendment_binding,
         expected_orbit_amendment_binding,
@@ -3362,6 +3406,7 @@ def main() -> None:
         expected_radar_delayed_import_probe_receipt_recovery_001_amendment_binding,
         expected_radar_pixel_orbit_application_recovery_002_amendment_binding,
         expected_radar_apply_orbit_correction_input_resolution_diagnostic_001_amendment_binding,
+        expected_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_amendment_binding,
     ]
     if profile["authority"].get("amendments") != expected_amendments:
         fail("profile authority does not bind the exact active amendments")
@@ -3391,8 +3436,9 @@ def main() -> None:
         "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
     ]:
-        fail("active M2 scope does not expose the twenty-three exact amendment approvals")
+        fail("active M2 scope does not expose the twenty-four exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -3526,6 +3572,7 @@ def main() -> None:
         "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+        "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
     if goal.get("proposed_amendments") != expected_dem_proposed_amendments:
@@ -8310,7 +8357,9 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_required(ROOT, state_counts):
+        if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION"
+        elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_required(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW"
         elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_publication_pending(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-PUBLICATION"
@@ -15139,7 +15188,12 @@ def main() -> None:
             diagnostic_receipt_publication_pending = current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_publication_pending(
                 ROOT, {"promoted": 8}
             )
-            if diagnostic_receipt_review_ready:
+            diagnostic_receipt_implementation_pending = current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(
+                ROOT, {"promoted": 8}
+            )
+            if diagnostic_receipt_implementation_pending:
+                expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION"
+            elif diagnostic_receipt_review_ready:
                 expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW"
             elif diagnostic_receipt_publication_pending:
                 expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-PUBLICATION"
@@ -15661,6 +15715,7 @@ def main() -> None:
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-TERMINAL-REVIEW",
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-PUBLICATION",
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW",
+                    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION",
                 }
                 or goal.get("current_checkpoint") not in {
                     "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
@@ -15671,6 +15726,7 @@ def main() -> None:
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-TERMINAL-REVIEW",
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-PUBLICATION",
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW",
+                    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION",
                 }
                 or current_radar_pixel_orbit_application_recovery_002_terminal(ROOT, {"promoted": 8}) is not True
             ):
@@ -15906,10 +15962,25 @@ def main() -> None:
         or current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(ROOT, {"promoted": 8}) is not False
     ):
         fail("M2 ApplyOrbitCorrection input-resolution diagnostic-001 publication gate differs or overclaims")
+    diagnostic_receipt_recovery_implementation_pending = current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(
+        ROOT, {"promoted": 8}
+    )
+    diagnostic_receipt_recovery_review_publication_pending = current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_publication_pending(
+        ROOT, {"promoted": 8}
+    )
+    diagnostic_receipt_recovery_review_required = current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_required(
+        ROOT, {"promoted": 8}
+    )
     diagnostic_001_phase_checks = {
-        "receipt_persistence_recovery_review_publication_pending": current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_publication_pending(ROOT, {"promoted": 8}),
-        "receipt_persistence_recovery_review_required": current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_required(ROOT, {"promoted": 8}),
-        "terminal": current_radar_apply_orbit_correction_input_resolution_diagnostic_001_terminal(ROOT, {"promoted": 8}),
+        "receipt_persistence_recovery_implementation_pending": diagnostic_receipt_recovery_implementation_pending,
+        "receipt_persistence_recovery_review_publication_pending": diagnostic_receipt_recovery_review_publication_pending,
+        "receipt_persistence_recovery_review_required": diagnostic_receipt_recovery_review_required,
+        "terminal": current_radar_apply_orbit_correction_input_resolution_diagnostic_001_terminal(ROOT, {"promoted": 8})
+        and not any((
+            diagnostic_receipt_recovery_implementation_pending,
+            diagnostic_receipt_recovery_review_publication_pending,
+            diagnostic_receipt_recovery_review_required,
+        )),
         "execution_ready": current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_ready(ROOT, {"promoted": 8}),
         "final_preflight_pending": current_radar_apply_orbit_correction_input_resolution_diagnostic_001_final_preflight_pending(ROOT, {"promoted": 8}),
         "execution_gate_publication_pending": current_radar_apply_orbit_correction_input_resolution_diagnostic_001_execution_gate_publication_pending(ROOT, {"promoted": 8}),
@@ -15918,7 +15989,9 @@ def main() -> None:
     }
     if sum(bool(value) for value in diagnostic_001_phase_checks.values()) != 1:
         fail("M2 ApplyOrbitCorrection input-resolution diagnostic-001 phase is not exact")
-    if diagnostic_001_phase_checks["receipt_persistence_recovery_review_required"]:
+    if diagnostic_001_phase_checks["receipt_persistence_recovery_implementation_pending"]:
+        diagnostic_001_expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION"
+    elif diagnostic_001_phase_checks["receipt_persistence_recovery_review_required"]:
         diagnostic_001_expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW"
     elif diagnostic_001_phase_checks["receipt_persistence_recovery_review_publication_pending"]:
         diagnostic_001_expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-PUBLICATION"
@@ -16155,6 +16228,27 @@ def main() -> None:
     diagnostic_receipt_reconciliation_ref = (
         f"records/readiness/{diagnostic_receipt_prefix}-review-publication-reconciliation.json"
     )
+    diagnostic_receipt_owner_approval_ref = (
+        f"records/source-gates/{diagnostic_receipt_prefix}-approval.json"
+    )
+    diagnostic_receipt_owner_reconciliation_ref = (
+        f"records/source-gates/{diagnostic_receipt_prefix}-review-reconciliation.json"
+    )
+    diagnostic_receipt_approval_activation_ref = (
+        f"records/readiness/{diagnostic_receipt_prefix}-approval-activation.json"
+    )
+    diagnostic_receipt_runtime_contract_ref = (
+        f"config/qa/{diagnostic_receipt_prefix}-contract.json"
+    )
+    diagnostic_receipt_arcgis_failure_ref = (
+        f"records/readiness/{diagnostic_receipt_prefix}-arcgis-runtime-validation-failure-001.json"
+    )
+    diagnostic_receipt_arcgis_validation_ref = (
+        f"records/readiness/{diagnostic_receipt_prefix}-arcgis-runtime-validation.json"
+    )
+    diagnostic_receipt_implementation_readiness_ref = (
+        f"records/readiness/{diagnostic_receipt_prefix}-implementation-readiness.json"
+    )
     diagnostic_receipt_proposal = json.loads(
         (ROOT / diagnostic_receipt_proposal_ref).read_text(encoding="utf-8")
     )
@@ -16288,7 +16382,12 @@ def main() -> None:
             ROOT, {"promoted": 8}
         )
     )
-    if sum((publication_pending, owner_review_required)) != 1:
+    implementation_pending = (
+        current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(
+            ROOT, {"promoted": 8}
+        )
+    )
+    if sum((publication_pending, owner_review_required, implementation_pending)) != 1:
         fail("M2 diagnostic receipt-persistence recovery phase is not exact")
     if publication_pending:
         if (
@@ -16300,7 +16399,7 @@ def main() -> None:
             or diagnostic_receipt_unit.get("gates", {}).get("human_decision_count") != 0
         ):
             fail("M2 diagnostic receipt-persistence recovery publication-pending state differs")
-    else:
+    elif owner_review_required:
         diagnostic_receipt_gate = json.loads((ROOT / diagnostic_receipt_gate_ref).read_text(encoding="utf-8"))
         diagnostic_receipt_reconciliation = json.loads(
             (ROOT / diagnostic_receipt_reconciliation_ref).read_text(encoding="utf-8")
@@ -16317,6 +16416,122 @@ def main() -> None:
             or diagnostic_receipt_unit.get("gates", {}).get("review_response_open") is not True
         ):
             fail("M2 diagnostic receipt-persistence recovery owner-review state differs")
+    if implementation_pending:
+        diagnostic_receipt_owner_approval = json.loads(
+            (ROOT / diagnostic_receipt_owner_approval_ref).read_text(encoding="utf-8")
+        )
+        diagnostic_receipt_owner_reconciliation = json.loads(
+            (ROOT / diagnostic_receipt_owner_reconciliation_ref).read_text(encoding="utf-8")
+        )
+        diagnostic_receipt_approval_activation = json.loads(
+            (ROOT / diagnostic_receipt_approval_activation_ref).read_text(encoding="utf-8")
+        )
+        diagnostic_receipt_runtime_contract = json.loads(
+            (ROOT / diagnostic_receipt_runtime_contract_ref).read_text(encoding="utf-8")
+        )
+        diagnostic_receipt_arcgis_failure = json.loads(
+            (ROOT / diagnostic_receipt_arcgis_failure_ref).read_text(encoding="utf-8")
+        )
+        diagnostic_receipt_arcgis_validation = json.loads(
+            (ROOT / diagnostic_receipt_arcgis_validation_ref).read_text(encoding="utf-8")
+        )
+        diagnostic_receipt_implementation_readiness = json.loads(
+            (ROOT / diagnostic_receipt_implementation_readiness_ref).read_text(encoding="utf-8")
+        )
+        implementation_unit = diagnostic_receipt_units.get(
+            "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-"
+            "RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION",
+            {},
+        )
+        execution_unit = diagnostic_receipt_units.get(
+            "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-"
+            "RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
+            {},
+        )
+        if (
+            diagnostic_receipt_owner_approval.get("status")
+            != "approved_bounded_receipt_durability_recovery_and_one_conditional_distinct_read_only_process"
+            or sha256(diagnostic_receipt_owner_approval_ref)
+            != "646a892256823fea5977d01a49a9e8b246f7ead42d7a40173d664bc22194f917"
+            or diagnostic_receipt_owner_approval.get("review_bundle_manifest_sha256")
+            != "006ffc48f7344f43b073404163962dbe6f821273b21f4c80a448a11777deb847"
+            or diagnostic_receipt_owner_approval.get("proposal_sha256")
+            != "607c1ba872f91226afc5b3b1c2ce69f111979d20d2f6c611dac9b496f5ed1a28"
+            or diagnostic_receipt_owner_approval.get("locked_response_sha256")
+            != "c88b4ee8401b5b3b23acd1ebcfa9ae23e40ec7be737de076f89606c5567576f4"
+            or diagnostic_receipt_owner_approval.get("human_decision_count") != 1
+            or diagnostic_receipt_owner_approval.get("attestation") is not True
+            or diagnostic_receipt_owner_approval.get("exact_recovery_contract", {}).get("maximum_processes") != 1
+            or diagnostic_receipt_owner_approval.get("exact_recovery_contract", {}).get("automatic_retry") is not False
+            or diagnostic_receipt_owner_reconciliation.get("status") != "reconciled_exact_human_response"
+            or diagnostic_receipt_owner_reconciliation.get("decision_counts") != {"approve": 1, "revise": 0, "defer": 0}
+            or diagnostic_receipt_approval_activation.get("status")
+            != "pass_exact_approval_activated_implementation_publication_only"
+            or sha256(diagnostic_receipt_approval_activation_ref)
+            != "d99848abb12d140569469006106f10dd498c70fd30e14d06c193a33b470f347e"
+            or diagnostic_receipt_approval_activation.get("bindings", {}).get("approval_sha256")
+            != sha256(diagnostic_receipt_owner_approval_ref)
+            or diagnostic_receipt_runtime_contract.get("status")
+            != "approved_implementation_publication_pending"
+            or diagnostic_receipt_runtime_contract.get("attempt", {}).get("attempt_id")
+            != "radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-real-001"
+            or diagnostic_receipt_runtime_contract.get("attempt", {}).get("maximum_processes") != 1
+            or diagnostic_receipt_runtime_contract.get("attempt", {}).get("automatic_retry") is not False
+            or diagnostic_receipt_runtime_contract.get("limits", {}).get("apply_orbit_correction_calls") != 0
+            or diagnostic_receipt_runtime_contract.get("limits", {}).get("geoprocessing_tool_calls") != 0
+            or diagnostic_receipt_arcgis_failure.get("status")
+            != "terminal_failed_synthetic_validation_receipt_self_hash_path_typo"
+            or diagnostic_receipt_arcgis_validation.get("status")
+            != "pass_installed_arcgis_runtime_disposable_read_only_receipt_recovery"
+            or sha256(diagnostic_receipt_arcgis_validation_ref)
+            != "5e817c1bc809187b3625560648951603a861d5adaaa0292d1be794e73a5ff9da"
+            or diagnostic_receipt_implementation_readiness.get("status")
+            != "pass_receipt_durability_implementation_public_ci_pending"
+            or diagnostic_receipt_implementation_readiness.get("validation", {}).get("focused_test_count") != 10
+            or diagnostic_receipt_implementation_readiness.get("validation", {}).get("full_repository_test_count") != 663
+            or diagnostic_receipt_implementation_readiness.get("validation", {}).get("full_repository_intentional_skip_count") != 6
+            or diagnostic_receipt_implementation_readiness.get("validation", {}).get("repository_checker_status") != "pass_1253_required_files"
+            or diagnostic_receipt_implementation_readiness.get("validation", {}).get("installed_arcgis_runtime_test_count") != 1
+            or diagnostic_receipt_implementation_readiness.get("validation", {}).get("installed_arcgis_runtime_test_failures") != 0
+            or diagnostic_receipt_implementation_readiness.get("assertions", {}).get("distinct_process_started") is not False
+            or diagnostic_receipt_implementation_readiness.get("assertions", {}).get("consumed_reserved_receipts_mutated") is not False
+            or diagnostic_receipt_implementation_readiness.get("assertions", {}).get("geoprocessing_invoked") is not False
+            or diagnostic_receipt_unit.get("status") != "complete"
+            or diagnostic_receipt_unit.get("disposition") != "pass"
+            or diagnostic_receipt_unit.get("gates", {}).get("human_decision_count") != 1
+            or diagnostic_receipt_unit.get("gates", {}).get("review_response_open") is not False
+            or implementation_unit.get("status") != "in_progress"
+            or implementation_unit.get("gates", {}).get("public_ci") != "pending"
+            or implementation_unit.get("gates", {}).get("portable_synthetic_tests") != "success"
+            or implementation_unit.get("gates", {}).get("installed_arcgis_runtime_synthetic_test") != "success"
+            or implementation_unit.get("gates", {}).get("repository_validation") != "success"
+            or implementation_unit.get("gates", {}).get("implementation_readiness_sha256")
+            != sha256(diagnostic_receipt_implementation_readiness_ref)
+            or implementation_unit.get("gates", {}).get("distinct_process_started") is not False
+            or execution_unit.get("status") != "planned"
+            or execution_unit.get("gates", {}).get("processes_started") != 0
+            or receipt_terminal_bytes != b""
+            or receipt_cleanup_bytes != b""
+        ):
+            fail("M2 diagnostic receipt-persistence recovery approval or implementation state differs")
+        diagnostic_receipt_implementation_evidence = ledger_by_id.get("EVID-0200")
+        if (
+            not isinstance(diagnostic_receipt_implementation_evidence, dict)
+            or diagnostic_receipt_implementation_evidence.get("status")
+            != "pass_receipt_durability_implementation_public_ci_pending"
+            or diagnostic_receipt_implementation_evidence.get("approval_sha256")
+            != sha256(diagnostic_receipt_owner_approval_ref)
+            or diagnostic_receipt_implementation_evidence.get("implementation_readiness_sha256")
+            != sha256(diagnostic_receipt_implementation_readiness_ref)
+            or diagnostic_receipt_implementation_evidence.get("assertions", {}).get("focused_test_count") != 10
+            or diagnostic_receipt_implementation_evidence.get("assertions", {}).get("full_test_count") != 663
+            or diagnostic_receipt_implementation_evidence.get("assertions", {}).get("full_skip_count") != 6
+            or diagnostic_receipt_implementation_evidence.get("assertions", {}).get("required_file_count") != 1253
+            or diagnostic_receipt_implementation_evidence.get("assertions", {}).get("public_ci_pending") is not True
+            or diagnostic_receipt_implementation_evidence.get("assertions", {}).get("distinct_process_started") is not False
+            or diagnostic_receipt_implementation_evidence.get("assertions", {}).get("geoprocessing_invoked") is not False
+        ):
+            fail("EVID-0200 diagnostic receipt-persistence recovery implementation readiness differs")
     diagnostic_receipt_authority_evidence = ledger_by_id.get("EVID-0197")
     if (
         not isinstance(diagnostic_receipt_authority_evidence, dict)

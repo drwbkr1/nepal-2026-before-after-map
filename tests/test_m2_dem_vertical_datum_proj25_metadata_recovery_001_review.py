@@ -130,7 +130,7 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], expected)
         self.assertEqual(
             self.goal["proposed_amendments"],
-            ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"],
+            [],
         )
         self.assertIn("records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json", self.goal["active_amendments"])
 

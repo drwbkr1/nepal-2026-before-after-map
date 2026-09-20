@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-APPROVAL-ACTIVATION",
+  "activated_at_utc": "2026-09-20T18:06:02Z",
+  "status": "pass_exact_approval_activated_implementation_publication_only",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
+    "approval_sha256": "646a892256823fea5977d01a49a9e8b246f7ead42d7a40173d664bc22194f917",
+    "reconciliation_sha256": "a9e240af3ad825463f2ca30335c2d2d8865cfd2df0106a5aa7f2c8063879001c",
+    "proposal_sha256": "607c1ba872f91226afc5b3b1c2ce69f111979d20d2f6c611dac9b496f5ed1a28",
+    "review_bundle_sha256": "006ffc48f7344f43b073404163962dbe6f821273b21f4c80a448a11777deb847",
+    "review_publication_gate_sha256": "4633247797df73b4dcd3ef69adeab63fe41833b4a7c09c9c01da655f87e62384"
+  },
+  "released_now": {
+    "bounded_receipt_durability_implementation": true,
+    "portable_synthetic_tests": true,
+    "installed_arcgis_runtime_synthetic_test": true,
+    "public_ci": true,
+    "execution_gate_publication": true,
+    "final_no_content_preflight": false,
+    "distinct_read_only_process": false,
+    "project_data_or_external_custody_access": false,
+    "arcpy_production_invocation": false,
+    "apply_orbit_correction_or_geoprocessing": false,
+    "radar_processing": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "new_process_started": false,
+    "arcpy_production_invoked": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "consumed_diagnostic_reused_or_retried": false,
+    "consumed_reserved_receipts_mutated": false,
+    "geoprocessing_invoked": false,
+    "scientific_result_established": false
+  }
+}

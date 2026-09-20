@@ -1,0 +1,30 @@
+{
+  "reconciliation_version": "human-review-reconciliation-v1",
+  "status": "reconciled_exact_human_response",
+  "review_id": "m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review",
+  "contract_sha256": "2e39f323b0bc615ac36f9be2f0a6103454acbedfa8a689d996243a169dca5615",
+  "response_sha256": "c88b4ee8401b5b3b23acd1ebcfa9ae23e40ec7be737de076f89606c5567576f4",
+  "receipt_sha256": "43b0ac678d5f1a5814714c7c4ceb2f7eac64affe0c6df16ff4d5155f03e6cfeb",
+  "human_decision_count": 1,
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "notes_included": false,
+  "human_decisions_fabricated": false,
+  "authority_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
+  "authorized_next_actions": [
+    "bounded_receipt_durability_implementation",
+    "portable_synthetic_tests",
+    "installed_arcgis_runtime_synthetic_test",
+    "public_ci_and_execution_gate_publication",
+    "conditional_final_preflight_and_one_distinct_process"
+  ],
+  "item_decisions": [
+    {
+      "item_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001",
+      "decision": "approve"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "review_id": "m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review",
+  "contract_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001/review-contract.json",
+  "contract_sha256": "2e39f323b0bc615ac36f9be2f0a6103454acbedfa8a689d996243a169dca5615",
+  "review_bundle_sha256": "006ffc48f7344f43b073404163962dbe6f821273b21f4c80a448a11777deb847",
+  "completed": true,
+  "review_completed_at_utc": "2026-09-20T18:06:02Z",
+  "reviewer": {
+    "name": "project_owner",
+    "attestation": true
+  },
+  "responses": [
+    {
+      "item_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001",
+      "decision": "approve",
+      "rationale": "Exact bounded receipt-durability implementation and one conditional distinct read-only process approved.",
+      "evidence_sha256": "006ffc48f7344f43b073404163962dbe6f821273b21f4c80a448a11777deb847"
+    }
+  ],
+  "raw_attested_statement": "I approve M2 radar ApplyOrbitCorrection input-resolution diagnostic receipt-persistence recovery-001 review bundle `006ffc48f7344f43b073404163962dbe6f821273b21f4c80a448a11777deb847` and proposal `607c1ba872f91226afc5b3b1c2ce69f111979d20d2f6c611dac9b496f5ed1a28`. I authorize only the bounded receipt-durability implementation, portable synthetic tests, installed ArcGIS-runtime synthetic test using disposable inputs, public-CI and execution-gate publication, final no-content preflight, and at most one fresh distinct read-only `radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-real-001` process over the exact frozen SAFE directory, `manifest.safe`, and M2-ORB-001 EOF, with no automatic retry. I understand the consumed diagnostic remains terminal and cannot be resumed, reused, or retried; its two zero-byte reserved receipts remain immutable; and this authorizes no reconstruction, source or path substitution, ApplyOrbitCorrection or other geoprocessing, radar processing, baseline or change analysis, interpretation, attribution, derived-pixel publication, historical-root-cause claim, radar-recovery-readiness claim, or scientific publication. I attest this is my completed decision.",
+  "human_decision_count": 1
+}

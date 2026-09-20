@@ -216,7 +216,7 @@ class M2RadarDelayedImportProbeReceiptRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(goal["current_checkpoint"], CURRENT_CHECKPOINT)
         self.assertEqual(
             goal["proposed_amendments"],
-            ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"],
+            [],
         )
         units = {item["id"]: item for item in milestone["units"]}
         review = units["M2-RADAR-DELAYED-IMPORT-PROBE-RECEIPT-RECOVERY-001-REVIEW"]

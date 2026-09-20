@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-ARCGIS-RUNTIME-VALIDATION",
+  "validated_at_utc": "2026-09-20T18:14:43Z",
+  "status": "pass_installed_arcgis_runtime_disposable_read_only_receipt_recovery",
+  "bindings": {
+    "contract_sha256": "495ed3c5f9458df31d595a0ae76a62c3c64533bcaf85a37fdd5e13b6334eafa5",
+    "core_sha256": "f3968552244519624bd4a4d57aedec69b970fa2bdc2c336cb708347ffe0d6ec4",
+    "runner_sha256": "46ae9019d14a136f0c64ac18f701979179ee5c11a3b8d1d5a713638820d13c8b",
+    "validator_sha256": "4a98ad6a8c2c94f598c3173be81ae9a5570f9943d7c2c0082853567196a700e3"
+  },
+  "runtime": {
+    "product_name": "ArcGISPro",
+    "version": "3.7.1",
+    "build_number": "1901",
+    "license_level": "ArcInfo",
+    "extensions": {
+      "image_analyst": "Available",
+      "spatial": "Available"
+    },
+    "apply_orbit_correction_usage": "ApplyOrbitCorrection_ia(in_radar_data, {in_orbit_file}, {folder})"
+  },
+  "validation": {
+    "disposable_attempt_root_created": true,
+    "disposable_safe_directory_created": true,
+    "disposable_manifest_created": true,
+    "disposable_orbit_created": true,
+    "terminal_receipt_persisted": true,
+    "cleanup_receipt_persisted": true,
+    "fallback_journal_initialized_before_reads": true,
+    "fallback_event_count": 4,
+    "temporary_root_removed_on_context_exit": true
+  },
+  "assertions": {
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "consumed_diagnostic_reused_or_retried": false,
+    "consumed_reserved_receipts_mutated": false,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  }
+}

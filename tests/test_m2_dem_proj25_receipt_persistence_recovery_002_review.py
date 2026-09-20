@@ -95,7 +95,7 @@ class M2DemProj25ReceiptPersistenceRecovery002ReviewTests(unittest.TestCase):
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)
         self.assertEqual(
             self.goal["proposed_amendments"],
-            ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"],
+            [],
         )
         self.assertFalse(current_dem_proj25_receipt_persistence_recovery_002_review_publication_pending(ROOT, {"promoted": 8}))
         self.assertFalse(current_dem_proj25_receipt_persistence_recovery_002_review_required(ROOT, {"promoted": 8}))

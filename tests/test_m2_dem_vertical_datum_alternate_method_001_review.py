@@ -133,7 +133,7 @@ class DemVerticalDatumAlternateMethod001ReviewTests(unittest.TestCase):
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], current_checkpoint)
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], current_checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], current_checkpoint)
-        expected_proposal = ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"]
+        expected_proposal = []
         self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], expected_proposal)
         self.assertEqual(self.goal["proposed_amendments"], expected_proposal)
         self.assertIn("records/source-gates/m2-dem-vertical-datum-alternate-method-001-approval.json", self.goal["active_amendments"])

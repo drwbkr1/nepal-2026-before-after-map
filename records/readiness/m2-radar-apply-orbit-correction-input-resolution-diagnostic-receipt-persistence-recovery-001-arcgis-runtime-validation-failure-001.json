@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-ARCGIS-RUNTIME-VALIDATION-FAILURE-001",
+  "recorded_at_utc": "2026-09-20T18:14:28Z",
+  "status": "terminal_failed_synthetic_validation_receipt_self_hash_path_typo",
+  "process_observation": {
+    "runtime": "installed ArcGIS Pro Python environment",
+    "process_exit_code": 1,
+    "failure_type": "FileNotFoundError",
+    "failure_code": "validator_self_hash_path_typo",
+    "failure_boundary": "validation receipt construction after the disposable read-only body",
+    "validation_receipt_persisted": false
+  },
+  "assertions": {
+    "disposable_inputs_only": true,
+    "temporary_input_context_exited": true,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "production_recovery_process_started": false,
+    "consumed_diagnostic_reused_or_retried": false,
+    "consumed_reserved_receipts_mutated": false,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "radar_processing_executed": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "The console traceback establishes the validator self-reference failure, but no success receipt survived.",
+    "This failed synthetic validation establishes no production input-resolution result and no radar-recovery readiness."
+  ]
+}

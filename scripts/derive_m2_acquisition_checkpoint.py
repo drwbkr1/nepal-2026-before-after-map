@@ -319,6 +319,10 @@ RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_REC
     "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW",
     "next_action": "Review the exact public M2 ApplyOrbitCorrection input-resolution diagnostic receipt-persistence recovery-001 bundle and proposal; approve, revise, or defer the bounded receipt-durability correction and one distinct future read-only process. No implementation, ArcPy invocation, project-data or external-custody access, new process, retry, reconstruction, mutation of either consumed receipt, geoprocessing, radar processing, baseline or change analysis, attribution, or scientific publication is authorized before an exact attested decision.",
 }
+RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_RECOVERY_001_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION",
+    "next_action": "Implement and validate only the approved diagnostic receipt-durability correction, portable synthetic tests, and installed ArcGIS-runtime disposable synthetic test, then require successful public default-branch CI. Do not run the final no-content preflight or inspect project data or external custody before the implementation and execution-gate publications pass.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -2428,6 +2432,63 @@ def current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_per
     )
 
 
+def current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the exact approved receipt-persistence recovery implementation phase."""
+    if state_counts != {"promoted": 8}:
+        return False
+    prefix = "m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001"
+    source_prefix = "m2-radar-apply-orbit-correction-input-resolution-diagnostic-001"
+    try:
+        approval = load(root / f"records/source-gates/{prefix}-approval.json")
+        activation = load(root / f"records/readiness/{prefix}-approval-activation.json")
+        contract = load(root / f"config/qa/{prefix}-contract.json")
+        milestone = load(root / "contracts/milestone-002.json")
+        consumed = (
+            (root / f"records/processing/{source_prefix}-terminal.json").read_bytes(),
+            (root / f"records/processing/{source_prefix}-cleanup.json").read_bytes(),
+        )
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get(
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW",
+        {},
+    )
+    implementation = units.get(
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION",
+        {},
+    )
+    execution = units.get(
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
+        {},
+    )
+    return bool(
+        approval.get("status")
+        == "approved_bounded_receipt_durability_recovery_and_one_conditional_distinct_read_only_process"
+        and approval.get("human_decision_count") == 1
+        and approval.get("attestation") is True
+        and activation.get("status") == "pass_exact_approval_activated_implementation_publication_only"
+        and activation.get("released_now", {}).get("bounded_receipt_durability_implementation") is True
+        and activation.get("released_now", {}).get("distinct_read_only_process") is False
+        and contract.get("status") == "approved_implementation_publication_pending"
+        and contract.get("attempt", {}).get("attempt_id")
+        == "radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-real-001"
+        and contract.get("attempt", {}).get("maximum_processes") == 1
+        and contract.get("attempt", {}).get("automatic_retry") is False
+        and all(value == b"" for value in consumed)
+        and review.get("status") == "complete"
+        and review.get("gates", {}).get("human_decision_count") == 1
+        and review.get("gates", {}).get("attestation") is True
+        and implementation.get("status") == "in_progress"
+        and implementation.get("gates", {}).get("public_ci") == "pending"
+        and implementation.get("gates", {}).get("distinct_process_started") is False
+        and execution.get("status") == "planned"
+        and execution.get("gates", {}).get("processes_started") == 0
+    )
+
+
 def current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -2707,7 +2768,13 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_required(
+            if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(
+                    RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_RECOVERY_001_IMPLEMENTATION_CHECKPOINT
+                )
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_review_required(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(

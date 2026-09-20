@@ -128,7 +128,7 @@ class M2DemActivationTests(unittest.TestCase):
         self.assertEqual(set(units["M2-BASELINE"]["depends_on"]), {"M2-VERIFY", "M2-DEM-VERIFY", "M2-ORBIT-APPLY"})
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"],
+            [],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],
@@ -156,6 +156,7 @@ class M2DemActivationTests(unittest.TestCase):
                 "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
                 "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
                 "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+                "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
             ],
         )
         primary_intake = load("contracts/m2-intake.json")

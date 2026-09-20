@@ -119,11 +119,11 @@ class M2RadarPixelOrbitApplication001ReviewTests(unittest.TestCase):
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], checkpoint)
         self.assertEqual(self.goal["current_checkpoint"], checkpoint)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], checkpoint)
-        pending_recovery = ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"]
+        pending_recovery = []
         self.assertEqual(self.goal["proposed_amendments"], pending_recovery)
         self.assertEqual(self.profile["control_surfaces"]["proposed_amendments"], pending_recovery)
-        self.assertEqual(self.goal["active_amendments"][-1], "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json")
-        self.assertEqual(self.profile["control_surfaces"]["activated_amendments"][-1], "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json")
+        self.assertEqual(self.goal["active_amendments"][-1], "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json")
+        self.assertEqual(self.profile["control_surfaces"]["activated_amendments"][-1], "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json")
         if published:
             publication = load(PUBLICATION_REF)
             reconciliation = load(RECONCILIATION_REF)
