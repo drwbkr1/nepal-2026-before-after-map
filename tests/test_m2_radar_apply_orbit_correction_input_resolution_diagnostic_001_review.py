@@ -176,7 +176,12 @@ class ApplyOrbitCorrectionInputResolutionDiagnostic001ReviewTests(unittest.TestC
         goal = load("records/long-term-goal.json")
         gate_exists = (ROOT / PUBLICATION_GATE_REF).is_file()
         expected = profile["current_checkpoint"]["checkpoint_id"]
-        self.assertTrue(expected.startswith("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-"))
+        self.assertTrue(
+            expected.startswith("M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-")
+            or expected.startswith(
+                "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-"
+            )
+        )
         self.assertEqual(milestone["handoff"]["current_checkpoint"], expected)
         self.assertEqual(goal["current_checkpoint"], expected)
         if gate_exists:

@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-TERMINAL-RECEIPT-PERSISTENCE-FAILURE-OBSERVATION",
+  "recorded_at_utc": "2026-09-20T00:36:38Z",
+  "status": "terminal_process_consumed_reserved_receipts_empty_result_indeterminate",
+  "diagnostic_id": "radar-apply-orbit-correction-input-resolution-diagnostic-001-real-001",
+  "process_observation": {
+    "runtime": "installed ArcGIS Pro Python environment",
+    "process_exit_code": 1,
+    "failure_type": "AttributeError",
+    "failure_code": "terminal_timestamp_construction_failed",
+    "failure_message": "module 'datetime' has no attribute 'now'",
+    "traceback_boundary": "run_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py execute_diagnostic terminal completed_at_utc construction at line 326",
+    "exact_failure_time_persisted": false,
+    "reserved_receipt_creation_time_utc": "2026-09-20T00:20:59Z"
+  },
+  "durable_evidence": {
+    "final_preflight_ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-final-preflight.json",
+    "final_preflight_sha256": "70a8005d3646b06a5d205c829362a2556a77d0ba37901545aed3ffca3ef956a8",
+    "terminal_ref": "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-terminal.json",
+    "terminal_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "terminal_bytes": 0,
+    "cleanup_ref": "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-cleanup.json",
+    "cleanup_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cleanup_bytes": 0,
+    "runner_ref": "scripts/run_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
+    "runner_sha256": "34239fb9669559f1668887c89b08db5f7e213cfea3132ef0eeb3dffebd041d8f"
+  },
+  "assertions": {
+    "diagnostic_process_started": true,
+    "diagnostic_process_consumed": true,
+    "automatic_retry_performed": false,
+    "second_process_started": false,
+    "runner_terminal_json_persisted": false,
+    "runner_cleanup_json_persisted": false,
+    "reserved_receipts_mutated_after_failure": false,
+    "arcpy_import_initiated_by_runner": true,
+    "arcpy_catalog_observations_persisted": false,
+    "project_data_content_read_durably_established": false,
+    "external_custody_access_durably_established": false,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "input_resolution_result_reconstructed": false,
+    "current_input_resolution_established": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "The empty reserved receipts prove their identities were allocated but preserve no JSON observations.",
+    "Whether individual filesystem or ArcGIS recognition checks completed cannot be reconstructed from durable evidence.",
+    "The observed timestamp failure does not establish the historical ApplyOrbitCorrection failure cause."
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-PREPARATION-APPROVAL",
+  "recorded_at_utc": "2026-09-20T00:36:38Z",
+  "status": "approved_local_zero_decision_review_preparation_only",
+  "authority_basis": {
+    "owner_instruction": "I authorize preparation of an M2 radar ApplyOrbitCorrection input-resolution diagnostic receipt-persistence recovery-001 review packet based on the preserved terminal failure evidence. I authorize only local zero-decision proposal and review preparation and validation. This does not authorize Git publication, ArcPy invocation, project-data or external-custody access, a new diagnostic process, retry, reconstruction, mutation of the reserved receipts, geoprocessing, radar processing, baseline or change analysis, attribution, or scientific publication. I attest this is my completed decision.",
+    "attestation_claimed": true,
+    "instruction_context": "preserved terminal receipt-persistence failure of the consumed read-only diagnostic"
+  },
+  "approved_scope": [
+    "prepare one local zero-decision receipt-persistence recovery review packet",
+    "render and locally validate that packet",
+    "record exact proposal and review-bundle identities for a later publication decision"
+  ],
+  "authority_boundary": {
+    "local_review_packet_preparation_authorized": true,
+    "local_validation_authorized": true,
+    "git_commit_authorized": false,
+    "public_review_packet_publication_authorized": false,
+    "public_ci_authorized": false,
+    "owner_proposal_decision_recording_authorized": false,
+    "recovery_implementation_authorized": false,
+    "arcpy_invocation_authorized": false,
+    "project_data_or_external_custody_access_authorized": false,
+    "new_diagnostic_process_authorized": false,
+    "retry_or_reconstruction_authorized": false,
+    "reserved_receipt_mutation_authorized": false,
+    "geoprocessing_authorized": false,
+    "radar_processing_authorized": false,
+    "baseline_or_change_authorized": false,
+    "attribution_authorized": false,
+    "scientific_publication_authorized": false
+  },
+  "bindings": {
+    "base_commit": "b705dadd8ab989e1dcbfa04d9a3bd082064a6177",
+    "implementation_publication_gate_sha256": "e448a17b4aefef44d7e6bd3ba45838bcbda1e0b6df8569ef948511fd8aaba61d",
+    "gate_state_publication_sha256": "2b6d21637c715084e7281a1d8259c66a45b742793a5f26594cc56960bd446953",
+    "final_preflight_sha256": "70a8005d3646b06a5d205c829362a2556a77d0ba37901545aed3ffca3ef956a8",
+    "reserved_terminal_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reserved_cleanup_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reserved_terminal_bytes": 0,
+    "reserved_cleanup_bytes": 0
+  }
+}

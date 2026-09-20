@@ -11,8 +11,10 @@
   "completion_rule": "Complete only when the reproducible ArcGIS evidence package, reviewed change evidence, exportable deliverables, validation, and final release boundary are all satisfied.",
   "last_completed_milestone": "contracts/milestone-001.json",
   "proposed_milestone": null,
-  "current_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION",
-  "proposed_amendments": [],
+  "current_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-PUBLICATION",
+  "proposed_amendments": [
+    "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"
+  ],
   "active_amendments": [
     "records/source-gates/m2-dem-amendment-approval.json",
     "records/source-gates/m2-orbit-amendment-approval.json",
@@ -39,6 +41,6 @@
     "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json"
   ],
   "parallel_checkpoints": [
-    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
+    "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-PUBLICATION"
   ]
 }

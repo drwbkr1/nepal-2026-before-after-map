@@ -1,0 +1,57 @@
+{
+  "contract_version": "human-review-contract-v1",
+  "template": false,
+  "review_id": "m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review",
+  "response_schema_version": "nepal-m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-response-v1",
+  "status": "locally_prepared_not_public_owner_response_not_yet_open",
+  "workflow_authority": {
+    "mode": "local_preparation_only",
+    "authority_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-preparation-approval.json",
+    "authorized_action_classes": [
+      "local_evidence_preparation",
+      "local_validation"
+    ],
+    "verified_at_utc": "2026-09-20T00:36:38Z",
+    "expires_at_utc": null,
+    "public_review_publication_authorized": false,
+    "review_response_open": false,
+    "lock_authorized": false,
+    "reconcile_authorized": false
+  },
+  "review_bundle": {
+    "bundle_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-BUNDLE",
+    "manifest_sha256": "006ffc48f7344f43b073404163962dbe6f821273b21f4c80a448a11777deb847",
+    "candidate_identity": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-PROPOSAL-SHA256:607c1ba872f91226afc5b3b1c2ce69f111979d20d2f6c611dac9b496f5ed1a28",
+    "rendered_surface_generated": true,
+    "public_ci_verified": false
+  },
+  "allowed_decisions_after_public_ci": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "required_attestation": true,
+  "items": [
+    {
+      "item_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001",
+      "evidence_sha256": "006ffc48f7344f43b073404163962dbe6f821273b21f4c80a448a11777deb847"
+    }
+  ],
+  "authority_boundary": {
+    "packet_creates_authority": false,
+    "git_staging_authorized": false,
+    "git_commit_or_push_authorized": false,
+    "public_ci_authorized": false,
+    "implementation_authorized": false,
+    "arcpy_invocation_authorized": false,
+    "project_data_or_external_custody_access_authorized": false,
+    "new_diagnostic_process_authorized": false,
+    "retry_or_reconstruction_authorized": false,
+    "reserved_receipt_mutation_authorized": false,
+    "geoprocessing_authorized": false,
+    "radar_processing_authorized": false,
+    "baseline_or_change_authorized": false,
+    "attribution_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

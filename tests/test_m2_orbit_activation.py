@@ -118,7 +118,7 @@ class M2OrbitActivationTests(unittest.TestCase):
         self.assertFalse(unit_by_id["M2-ORBIT-APPLY"]["gates"]["orbit_application_started"])
         self.assertEqual(
             self.profile["control_surfaces"]["proposed_amendments"],
-            [],
+            ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"],
         )
         self.assertEqual(
             self.profile["control_surfaces"]["activated_amendments"],

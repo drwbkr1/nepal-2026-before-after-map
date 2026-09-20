@@ -415,7 +415,9 @@
     ],
     "last_completed_contract": "contracts/milestone-001.json",
     "proposed_contract": null,
-    "proposed_amendments": [],
+    "proposed_amendments": [
+      "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"
+    ],
     "activated_from_contract": "contracts/milestone-002-proposal.json",
     "activated_amendments": [
       "records/source-gates/m2-dem-amendment-approval.json",
@@ -677,16 +679,16 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION",
+    "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-PUBLICATION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish and publicly validate the exact diagnostic implementation-gate state. Do not run the final no-content preflight, import production ArcPy, or access the recovery-002 attempt root or orbit custody until that gate-state commit passes public CI."
+    "next_action": "Publish and publicly validate the exact zero-decision ApplyOrbitCorrection input-resolution diagnostic receipt-persistence recovery-001 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Preserve the consumed diagnostic and its zero-byte reserved receipts. Do not implement the correction, invoke ArcPy, access project data or external custody, start a new process, retry, reconstruct lost observations, mutate either receipt, call geoprocessing, process radar data, run baseline or change analysis, attribute cause, or publish science."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION",
-      "authority_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
-      "next_action": "Publish and publicly validate the exact diagnostic implementation-gate state. Do not run the final no-content preflight, import production ArcPy, or access the recovery-002 attempt root or orbit custody until that gate-state commit passes public CI."
+      "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-PUBLICATION",
+      "authority_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-publication-approval.json",
+      "next_action": "Publish and publicly validate the exact zero-decision ApplyOrbitCorrection input-resolution diagnostic receipt-persistence recovery-001 review packet. Keep the owner proposal response closed until the exact packet commit passes public default-branch CI. Preserve the consumed diagnostic and its zero-byte reserved receipts. Do not implement the correction, invoke ArcPy, access project data or external custody, start a new process, retry, reconstruct lost observations, mutate either receipt, call geoprocessing, process radar data, run baseline or change analysis, attribute cause, or publish science."
     }
   ],
   "human_gates": {
@@ -695,6 +697,11 @@
         "unit_id": "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW",
         "reason": "The exact owner approval releases bounded strict inventory normalization implementation and later one fresh attempt only after public CI and final preflight.",
         "authority_ref": "records/source-gates/m2-radar-pixel-orbit-application-recovery-001-approval.json"
+      },
+      {
+        "unit_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW",
+        "reason": "Diagnostic receipt-persistence recovery implementation or a distinct new read-only process requires a later exact attested owner decision after public CI.",
+        "authority_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001/review-contract.json"
       }
     ]
   }

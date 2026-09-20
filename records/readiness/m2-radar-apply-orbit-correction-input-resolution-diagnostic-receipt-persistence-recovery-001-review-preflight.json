@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-PREFLIGHT",
+  "checked_at_utc": "2026-09-20T00:36:38Z",
+  "status": "pass_ready_local_zero_decision_packet_preparation_only",
+  "bindings": {
+    "preparation_approval_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-preparation-approval.json",
+    "preparation_approval_sha256": "d637eeaf7f4b37578901b644302858fa4e4b22105a500023cdf800e92503e29f",
+    "failure_observation_ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-terminal-receipt-persistence-failure-observation.json",
+    "failure_observation_sha256": "e342c0e0c5301d9eee9aa0ce6492fdc9560de96d4001ed47884c54e43396ab17",
+    "proposal_ref": "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json",
+    "proposal_sha256": "607c1ba872f91226afc5b3b1c2ce69f111979d20d2f6c611dac9b496f5ed1a28",
+    "preparation_script_sha256": "4ba617b81c396ff4875b638cec8dc2d7a9a92a32d3c0c93800f6f0cb96087df8",
+    "visual_finalizer_sha256": "5edc511b215b70c8cf63e7d152ae39c4115381a955c3352339b9e861256bc36c",
+    "portable_test_sha256": "10a306cf000a5da3157094465c76cc4a8f4a8e8c1f4954de278a52f68ea6ee17",
+    "base_commit": "b705dadd8ab989e1dcbfa04d9a3bd082064a6177"
+  },
+  "checks": {
+    "diagnostic_process_consumed": true,
+    "reserved_terminal_exactly_zero_bytes": true,
+    "reserved_cleanup_exactly_zero_bytes": true,
+    "input_resolution_result_unrecoverable": true,
+    "protected_public_implementation_exact": true,
+    "canonical_checkpoint_intentionally_unchanged": true,
+    "local_preparation_authorized": true,
+    "publication_or_implementation_authorized": false
+  },
+  "assertions": {
+    "git_staging_performed": false,
+    "git_commit_created": false,
+    "git_push_performed": false,
+    "public_ci_started": false,
+    "protected_diagnostic_code_modified": false,
+    "arcpy_invoked": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "new_diagnostic_process_started": false,
+    "consumed_attempt_retried_or_reused": false,
+    "reserved_receipt_mutated": false,
+    "implementation_authorized": false,
+    "scientific_result_established": false
+  }
+}

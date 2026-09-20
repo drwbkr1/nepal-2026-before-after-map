@@ -128,7 +128,10 @@ class M2DemProj25MetadataRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(self.profile["current_checkpoint"]["checkpoint_id"], expected)
         self.assertEqual(self.goal["current_checkpoint"], expected)
         self.assertEqual(self.milestone["handoff"]["current_checkpoint"], expected)
-        self.assertEqual(self.goal["proposed_amendments"], [])
+        self.assertEqual(
+            self.goal["proposed_amendments"],
+            ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"],
+        )
         self.assertIn("records/source-gates/m2-dem-vertical-datum-proj25-metadata-recovery-001-approval.json", self.goal["active_amendments"])
 
     def test_milestone_preserves_block_and_conditional_dependency(self) -> None:

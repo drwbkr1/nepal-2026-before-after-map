@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-VISUAL-INSPECTION",
+  "inspected_at_utc": "2026-09-20T00:36:56Z",
+  "status": "pass_agent_visual_inspection",
+  "artifact_ref": "docs/assets/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review.png",
+  "artifact_sha256": "4f8f16828bdea3737eda69c1eb42dfb040ed75689fb1ebf10212430021be2d1d",
+  "inspection": {
+    "dimensions_px": [
+      1800,
+      2060
+    ],
+    "title_and_authority_banner_legible": true,
+    "terminal_failure_boundary_legible": true,
+    "proposal_scope_legible": true,
+    "prohibited_actions_legible": true,
+    "hashes_legible": true,
+    "text_clipped_or_overlapping": false,
+    "decision_count_displayed_as_zero": true
+  }
+}

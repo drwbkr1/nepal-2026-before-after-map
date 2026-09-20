@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-LOCAL-VALIDATION",
+  "recorded_at_utc": "2026-09-20T00:39:29Z",
+  "status": "pass_packet_specific_validation_repository_reconciliation_block_retained",
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json",
+    "proposal_sha256": "607c1ba872f91226afc5b3b1c2ce69f111979d20d2f6c611dac9b496f5ed1a28",
+    "review_bundle_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001/review-bundle.json",
+    "review_bundle_sha256": "006ffc48f7344f43b073404163962dbe6f821273b21f4c80a448a11777deb847",
+    "review_contract_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001/review-contract.json",
+    "review_contract_sha256": "2e39f323b0bc615ac36f9be2f0a6103454acbedfa8a689d996243a169dca5615",
+    "blank_response_ref": "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001/blank-response.json",
+    "blank_response_sha256": "ce18010f187b24469e45caab5feb0481581d229694252fc2587c88e7cdff7ad9",
+    "review_readiness_ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-readiness.json",
+    "review_readiness_sha256": "e3a50e568589809e919c1d84caf7a936b83921811e3930f4a83713f8912dafe5",
+    "failure_observation_ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-terminal-receipt-persistence-failure-observation.json",
+    "failure_observation_sha256": "e342c0e0c5301d9eee9aa0ce6492fdc9560de96d4001ed47884c54e43396ab17",
+    "reserved_terminal_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reserved_cleanup_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "validation": {
+    "packet_specific_tests": {
+      "tests_run": 7,
+      "failures": 0,
+      "errors": 0,
+      "result": "pass"
+    },
+    "full_portable_suite": {
+      "tests_run": 652,
+      "intentional_skips": 6,
+      "failures": 2,
+      "errors": 0,
+      "result": "expected_reconciliation_block",
+      "failure_tests": [
+        "test_m2_checkpoint_reconciliation.M2CheckpointReconciliationTests.test_candidate_output_is_scratch_only_and_no_replace",
+        "test_m2_checkpoint_reconciliation.M2CheckpointReconciliationTests.test_current_repository_checkpoint_is_reconciled_read_only"
+      ]
+    },
+    "repository_checker": {
+      "result": "expected_reconciliation_block",
+      "message": "project profile DEM parallel checkpoint differs"
+    },
+    "packet_json_and_hash_bindings_valid": true,
+    "rendered_surface_visually_inspected": true,
+    "reserved_receipts_preserved_zero_byte": true,
+    "canonical_checkpoint_intentionally_unchanged": true,
+    "public_ci_readiness_established": false
+  },
+  "interpretation": {
+    "packet_specific_validation_passed": true,
+    "repository_wide_validation_passed": false,
+    "block_is_the_preserved_unreconciled_consumed_diagnostic_state": true,
+    "control_plane_reconciliation_performed": false,
+    "checker_or_checkpoint_logic_modified": false,
+    "publication_integration_authorized": false
+  },
+  "assertions": {
+    "git_staging_performed": false,
+    "git_commit_created": false,
+    "git_push_performed": false,
+    "public_ci_started": false,
+    "arcpy_invoked": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "new_diagnostic_process_started": false,
+    "consumed_attempt_retried_or_reused": false,
+    "reserved_receipt_mutated": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Obtain explicit owner authorization for bounded repository-control integration, publication of the exact zero-decision packet, public default-branch CI, and exact post-CI reconciliation. Keep the owner proposal response closed and perform no ArcPy, data-access, retry, reconstruction, processing, or scientific action."
+}

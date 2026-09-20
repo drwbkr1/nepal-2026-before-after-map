@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-20T00:36:38Z",
+  "status": "locally_prepared_zero_decisions_publication_authority_required",
+  "human_decision_count": 0,
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json",
+      "sha256": "607c1ba872f91226afc5b3b1c2ce69f111979d20d2f6c611dac9b496f5ed1a28",
+      "purpose": "normative receipt-persistence recovery proposal",
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review.json",
+          "sha256": "4b076b45e353be993826ba70692eb6156feb4bd25ff58aecd747e7a88cb3a942"
+        }
+      ]
+    },
+    {
+      "path": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-terminal-receipt-persistence-failure-observation.json",
+      "sha256": "e342c0e0c5301d9eee9aa0ce6492fdc9560de96d4001ed47884c54e43396ab17",
+      "purpose": "preserved terminal receipt-persistence failure observation",
+      "render_receipts": []
+    },
+    {
+      "path": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-preflight.json",
+      "sha256": "7d2f40890afcb5ad485aa80e136021fe7c4d3e08c2e86d48acd817b80faa00ea",
+      "purpose": "terminal-state and preparation-authority preflight",
+      "render_receipts": []
+    },
+    {
+      "path": "docs/M2_RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_RECOVERY_001_REVIEW.md",
+      "sha256": "7269df6e66a38c515f06c2553c3f1bf4bf1858aa3d6da7561fb42566b563820d",
+      "purpose": "human-readable local review",
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review.json",
+          "sha256": "4b076b45e353be993826ba70692eb6156feb4bd25ff58aecd747e7a88cb3a942"
+        }
+      ]
+    },
+    {
+      "path": "docs/assets/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review.png",
+      "sha256": "4f8f16828bdea3737eda69c1eb42dfb040ed75689fb1ebf10212430021be2d1d",
+      "purpose": "rendered local review surface",
+      "render_receipts": [
+        {
+          "path": "records/surface-receipts/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review.json",
+          "sha256": "4b076b45e353be993826ba70692eb6156feb4bd25ff58aecd747e7a88cb3a942"
+        }
+      ]
+    }
+  ],
+  "decision_items": [
+    {
+      "item_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001",
+      "allowed_decisions_after_public_ci": [
+        "approve",
+        "revise",
+        "defer"
+      ],
+      "decision_currently_open": false,
+      "evidence_ref": "contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json",
+      "evidence_sha256": "607c1ba872f91226afc5b3b1c2ce69f111979d20d2f6c611dac9b496f5ed1a28"
+    }
+  ]
+}

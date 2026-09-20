@@ -136,7 +136,10 @@ class M2RadarPixelOrbitApplicationRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(milestone["handoff"]["current_checkpoint"], CHECKPOINT)
         self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], CHECKPOINT)
         self.assertEqual(goal["current_checkpoint"], CHECKPOINT)
-        self.assertEqual(goal["proposed_amendments"], [])
+        self.assertEqual(
+            goal["proposed_amendments"],
+            ["contracts/milestone-002-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-proposal.json"],
+        )
         self.assertIn(APPROVAL_REF, goal["active_amendments"])
         units = {item["id"]: item for item in milestone["units"]}
         review = units["M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-001-REVIEW"]

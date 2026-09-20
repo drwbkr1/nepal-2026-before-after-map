@@ -1,0 +1,200 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-PROPOSAL",
+  "prepared_at_utc": "2026-09-20T00:36:38Z",
+  "status": "proposed_inactive_local_review_prepared_publication_and_owner_approval_required",
+  "preparation_base_commit": "b705dadd8ab989e1dcbfa04d9a3bd082064a6177",
+  "preparation_authority": {
+    "ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-review-preparation-approval.json",
+    "sha256": "d637eeaf7f4b37578901b644302858fa4e4b22105a500023cdf800e92503e29f",
+    "local_preparation_only": true,
+    "public_publication_authorized": false,
+    "implementation_authorized": false,
+    "new_process_authorized": false
+  },
+  "trigger": {
+    "failure_observation_ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-terminal-receipt-persistence-failure-observation.json",
+    "failure_observation_sha256": "e342c0e0c5301d9eee9aa0ce6492fdc9560de96d4001ed47884c54e43396ab17",
+    "consumed_attempt_id": "radar-apply-orbit-correction-input-resolution-diagnostic-001-real-001",
+    "terminal_failure_code": "terminal_timestamp_construction_failed",
+    "terminal_failure_type": "AttributeError",
+    "terminal_failure_message": "module 'datetime' has no attribute 'now'",
+    "runner_terminal_receipt_persisted": false,
+    "runner_cleanup_receipt_persisted": false,
+    "input_resolution_result_recoverable": false
+  },
+  "observed_state": {
+    "consumed_attempt_terminal": true,
+    "consumed_attempt_retry_or_reuse_authorized": false,
+    "terminal_identity_reserved": true,
+    "cleanup_identity_reserved": true,
+    "terminal_bytes": 0,
+    "cleanup_bytes": 0,
+    "terminal_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cleanup_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "arcgis_catalog_observations_persisted": false,
+    "current_input_resolution_established": false,
+    "project_data_content_read_durably_established": false,
+    "external_custody_access_durably_established": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "post_observation_bias": "The proposal was designed after observing the receipt-persistence failure and can only address receipt durability in a distinct future process; it cannot recover or validate the lost in-memory observations."
+  },
+  "protected_public_implementation": [
+    {
+      "path": "config/qa/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-contract.json",
+      "sha256": "e390c0918947eaac49df025bf1b3c6c0ee35804c04404b12a42597dc4411e724",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "scripts/m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_core.py",
+      "sha256": "9d6ca7be8514b62d088eea3e1648b002ae40f25555ab620ca298efa37b7d5129",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "scripts/run_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
+      "sha256": "34239fb9669559f1668887c89b08db5f7e213cfea3132ef0eeb3dffebd041d8f",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "tests/test_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
+      "sha256": "3741af9396bf25b3fc22d35560e92ad1cea90cf964a4ba99384e6fe78014ca1d",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
+      "sha256": "be935d0011e2819debf45f4bc335ec035bc6e718380a3ad0429d5be88b269287",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-publication-gate.json",
+      "sha256": "e448a17b4aefef44d7e6bd3ba45838bcbda1e0b6df8569ef948511fd8aaba61d",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-gate-state-publication.json",
+      "sha256": "2b6d21637c715084e7281a1d8259c66a45b742793a5f26594cc56960bd446953",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-final-preflight.json",
+      "sha256": "70a8005d3646b06a5d205c829362a2556a77d0ba37901545aed3ffca3ef956a8",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-terminal.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "must_remain_unchanged_during_preparation": true
+    },
+    {
+      "path": "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-cleanup.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "must_remain_unchanged_during_preparation": true
+    }
+  ],
+  "proposed_exact_changes": [
+    "preserve the consumed diagnostic, its public gates, final preflight, original contract, runner, tests, and two zero-byte reserved receipts unchanged",
+    "use a distinct recovery attempt and distinct append-only output identities; never reuse, fill, replace, rename, or delete either consumed reserved receipt",
+    "replace module-global datetime class reliance only in the proposed recovery implementation with function-local datetime-module imports for every timestamp construction",
+    "reserve the new terminal and cleanup identities and initialize one append-only fallback journal before any project-data or external-custody read",
+    "append a sanitized original failure before ordinary terminal assembly and append any later persistence failure without replacing the original failure",
+    "run cleanup recording from an outer finally path independent of ordinary terminal serialization",
+    "preserve the exact approved SAFE-directory, manifest.safe, and M2-ORB-001 identities, check order, sanitization, ArcGIS read-only calls, and zero-geoprocessing rule",
+    "add portable synthetic tests for datetime rebinding, terminal-write failure, original-error retention, empty-receipt preservation, one-process enforcement, exact stop behavior, and path or secret sanitization",
+    "add one installed ArcGIS-runtime synthetic test using disposable paths only and no project data, external custody, ApplyOrbitCorrection, or geoprocessing",
+    "require separate publication authority, successful public default-branch CI, exact attested owner approval, bounded implementation, a second public gate, and one final no-content preflight before any new process",
+    "only after every gate, run at most one distinct read-only recovery process over the same exact three candidate forms and stop terminally on any missing input or failure"
+  ],
+  "future_gate_sequence": [
+    "explicit owner authorization to commit and publish this exact zero-decision packet and run public default-branch CI",
+    "successful public default-branch CI on the exact packet commit",
+    "exact attested owner approval of the public review bundle and proposal",
+    "bounded receipt-durability implementation plus portable and ArcGIS-runtime synthetic validation",
+    "successful public default-branch CI on the exact implementation commit",
+    "publication and public validation of the exact execution-gate state",
+    "one final no-content preflight",
+    "at most one distinct read-only real recovery process with no retry"
+  ],
+  "exact_recovery_contract": {
+    "attempt_id": "radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-real-001",
+    "distinct_from_consumed_attempt": true,
+    "maximum_processes": 1,
+    "automatic_retry": false,
+    "exact_inputs_unchanged": {
+      "attempt_root_source": "the exact external recovery-002 attempt root already frozen by the approved diagnostic contract",
+      "candidate_radar_paths": [
+        "copied_SAFE_directory",
+        "copied_SAFE_manifest.safe"
+      ],
+      "candidate_orbit_path": "exact_M2-ORB-001_EOF",
+      "path_reconstruction_or_substitution": false
+    },
+    "fixed_check_order_unchanged": true,
+    "arcgis_read_only_calls": [
+      "GetInstallInfo",
+      "ProductInfo",
+      "CheckExtension",
+      "Usage",
+      "Exists",
+      "Describe"
+    ],
+    "maximum_apply_orbit_correction_calls": 0,
+    "maximum_geoprocessing_calls": 0,
+    "receipt_durability": {
+      "new_terminal_identity_reserved_before_external_reads": true,
+      "new_cleanup_identity_reserved_before_external_reads": true,
+      "fallback_journal_initialized_before_external_reads": true,
+      "function_local_datetime_imports": true,
+      "original_sanitized_exception_recorded_before_normal_terminal_assembly": true,
+      "later_persistence_error_cannot_replace_original_error": true,
+      "cleanup_recording_independent_of_terminal_serialization": true,
+      "fallback_is_not_success_evidence": true,
+      "consumed_empty_receipts_remain_immutable": true
+    },
+    "result_semantics": {
+      "pass": "current filesystem presence and ArcGIS catalog recognition or nonrecognition for the exact frozen paths at the recovery time only",
+      "block": "the distinct recovery process's durable boundary only",
+      "historical_root_cause_claim_allowed": false,
+      "corrected_apply_orbit_correction_call_claim_allowed": false,
+      "radar_recovery_readiness_claim_allowed": false,
+      "scientific_claim_allowed": false
+    }
+  },
+  "current_authority_limits": {
+    "git_commits_or_pushes": 0,
+    "public_ci_runs": 0,
+    "owner_proposal_decisions": 0,
+    "implementation_actions": 0,
+    "arcpy_invocations": 0,
+    "project_data_content_reads": 0,
+    "external_custody_reads": 0,
+    "new_diagnostic_processes": 0,
+    "consumed_attempt_retries_or_reuses": 0,
+    "reserved_receipt_mutations": 0,
+    "geoprocessing_calls": 0,
+    "radar_processing_actions": 0,
+    "baseline_or_change_actions": 0,
+    "scientific_outputs": 0
+  },
+  "stop_rules": [
+    "Stop before Git staging, commit, push, public CI, owner proposal response, implementation, ArcPy invocation, project-data or external-custody access, or a new diagnostic process under the present authority.",
+    "Stop if either consumed zero-byte receipt, any protected public diagnostic artifact, or any public gate identity differs.",
+    "Do not reconstruct the lost filesystem or ArcGIS observations or infer a pass, missing-input result, or historical cause.",
+    "Do not reuse, resume, retry, mutate, replace, or fill the consumed diagnostic or either reserved receipt.",
+    "Any future recovery implementation, publication, or execution requires the separately gated sequence in this proposal."
+  ],
+  "does_not_authorize_now": [
+    "Git staging, commit, push, public review publication, or public CI",
+    "owner proposal approval, response locking, activation, implementation, ArcPy invocation, final preflight, or a new process",
+    "project-data or external-custody access, reconstruction, source or path substitution, or mutation of the consumed receipts",
+    "ApplyOrbitCorrection or any geoprocessing, radar processing, baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication",
+    "a current input-resolution, historical-root-cause, radar-recovery-readiness, or scientific claim"
+  ],
+  "decision_domain_after_public_ci": [
+    "approve",
+    "revise",
+    "defer"
+  ],
+  "attestation_required_after_public_ci": true,
+  "human_decision_count": 0
+}
