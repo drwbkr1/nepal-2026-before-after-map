@@ -396,11 +396,16 @@ REQUIRED = [
     "scripts/m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_core.py",
     "scripts/run_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
     "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_readiness.py",
+    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_portability_correction_001.py",
+    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_portability_reseal_001.py",
     "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_publication.py",
     "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_gate_state_publication.py",
     "scripts/reconcile_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
     "tests/test_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-readiness.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-readiness-attempt-001-superseded.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-publication-attempt-001-failure.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-portability-correction-001-reseal.json",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -15895,13 +15900,36 @@ def main() -> None:
     diagnostic_001_implementation_readiness = json.loads(
         (ROOT / diagnostic_001_implementation_readiness_ref).read_text(encoding="utf-8")
     )
+    diagnostic_001_superseded_readiness_ref = f"records/readiness/{diagnostic_001_prefix}-implementation-readiness-attempt-001-superseded.json"
+    diagnostic_001_failure_ref = f"records/readiness/{diagnostic_001_prefix}-implementation-publication-attempt-001-failure.json"
+    diagnostic_001_reseal_ref = f"records/readiness/{diagnostic_001_prefix}-implementation-portability-correction-001-reseal.json"
+    diagnostic_001_superseded_readiness = json.loads((ROOT / diagnostic_001_superseded_readiness_ref).read_text(encoding="utf-8"))
+    diagnostic_001_failure = json.loads((ROOT / diagnostic_001_failure_ref).read_text(encoding="utf-8"))
+    diagnostic_001_reseal = json.loads((ROOT / diagnostic_001_reseal_ref).read_text(encoding="utf-8"))
     diagnostic_001_readiness_evidence = ledger_by_id.get("EVID-0191")
+    diagnostic_001_failure_evidence = ledger_by_id.get("EVID-0192")
+    diagnostic_001_correction_evidence = ledger_by_id.get("EVID-0193")
+    diagnostic_001_reseal_evidence = ledger_by_id.get("EVID-0194")
+    diagnostic_001_corrected_bindings = diagnostic_001_implementation_readiness.get("bindings", {})
     if (
-        diagnostic_001_implementation_readiness.get("status") != "pass_read_only_diagnostic_implementation_public_ci_pending"
+        diagnostic_001_superseded_readiness.get("status") != "pass_read_only_diagnostic_implementation_public_ci_pending"
+        or diagnostic_001_implementation_readiness.get("status") != "pass_portable_path_assertion_correction_public_ci_pending"
         or diagnostic_001_implementation_readiness.get("validation", {}).get("focused_test_count") != 9
         or diagnostic_001_implementation_readiness.get("validation", {}).get("full_repository_test_count") != 645
         or diagnostic_001_implementation_readiness.get("validation", {}).get("full_repository_intentional_skip_count") != 6
-        or diagnostic_001_implementation_readiness.get("validation", {}).get("repository_checker_status") != "pass_1200_required_files"
+        or diagnostic_001_implementation_readiness.get("validation", {}).get("repository_checker_status") != "pass_1205_required_files"
+        or diagnostic_001_implementation_readiness.get("validation", {}).get("portable_windows_path_assertion_checked") is not True
+        or diagnostic_001_implementation_readiness.get("validation", {}).get("correction_aware_publication_reader_checked") is not True
+        or len(diagnostic_001_corrected_bindings) != 16
+        or any(sha256(ref) != expected for ref, expected in diagnostic_001_corrected_bindings.items())
+        or diagnostic_001_implementation_readiness.get("supersedes", {}).get("sha256") != sha256(diagnostic_001_superseded_readiness_ref)
+        or diagnostic_001_implementation_readiness.get("failed_publication", {}).get("sha256") != sha256(diagnostic_001_failure_ref)
+        or diagnostic_001_failure.get("status") != "terminal_public_ci_failure_no_release"
+        or diagnostic_001_failure.get("implementation_commit_sha") != "1c8a1f9f95debd47c6b58b0ae3dde8cb300a9daf"
+        or diagnostic_001_failure.get("public_ci_run_id") != 35477364361
+        or diagnostic_001_failure.get("public_ci_conclusion") != "failure"
+        or diagnostic_001_failure.get("repository_checker_status") != "pass_1200_required_files"
+        or diagnostic_001_failure.get("public_test_result") != {"tests_run": 645, "intentional_skips": 13, "errors": 0, "failures": 1}
         or any(diagnostic_001_implementation_readiness.get("assertions", {}).get(key) is not False for key in (
             "arcpy_imported", "diagnostic_process_started", "project_data_content_read", "external_custody_accessed",
             "apply_orbit_correction_invoked", "geoprocessing_invoked", "source_orbit_or_dem_copied",
@@ -15913,10 +15941,34 @@ def main() -> None:
         or diagnostic_001_implementation_unit.get("gates", {}).get("implementation_readiness_sha256") != sha256(diagnostic_001_implementation_readiness_ref)
         or not isinstance(diagnostic_001_readiness_evidence, dict)
         or diagnostic_001_readiness_evidence.get("status") != "pass_read_only_diagnostic_implementation_public_ci_pending"
-        or diagnostic_001_readiness_evidence.get("implementation_readiness_sha256") != sha256(diagnostic_001_implementation_readiness_ref)
+        or diagnostic_001_readiness_evidence.get("implementation_readiness_sha256") != sha256(diagnostic_001_superseded_readiness_ref)
         or diagnostic_001_readiness_evidence.get("assertions", {}).get("public_ci_pending") is not True
         or any(diagnostic_001_readiness_evidence.get("assertions", {}).get(key) is not False for key in (
             "arcpy_imported", "diagnostic_process_started", "project_data_content_read", "external_custody_accessed",
+            "apply_orbit_correction_invoked", "geoprocessing_invoked", "scientific_result_established",
+        ))
+        or not isinstance(diagnostic_001_failure_evidence, dict)
+        or diagnostic_001_failure_evidence.get("status") != "terminal_public_ci_failure_no_release"
+        or diagnostic_001_failure_evidence.get("failure_sha256") != sha256(diagnostic_001_failure_ref)
+        or not isinstance(diagnostic_001_correction_evidence, dict)
+        or diagnostic_001_correction_evidence.get("status") != "pass_portable_path_assertion_correction_public_ci_pending"
+        or diagnostic_001_correction_evidence.get("implementation_readiness_sha256") != diagnostic_001_reseal.get("prior_readiness_sha256")
+        or diagnostic_001_correction_evidence.get("assertions", {}).get("production_path_logic_changed") is not False
+        or diagnostic_001_correction_evidence.get("assertions", {}).get("public_ci_pending") is not True
+        or any(diagnostic_001_correction_evidence.get("assertions", {}).get(key) is not False for key in (
+            "final_no_content_preflight_performed", "diagnostic_process_started", "arcpy_imported",
+            "project_data_content_read", "external_custody_accessed", "apply_orbit_correction_invoked",
+            "geoprocessing_invoked", "scientific_result_established",
+        ))
+        or diagnostic_001_reseal.get("status") != "pass_corrected_readiness_resealed_public_ci_pending"
+        or diagnostic_001_reseal.get("current_readiness_sha256") != sha256(diagnostic_001_implementation_readiness_ref)
+        or not isinstance(diagnostic_001_reseal_evidence, dict)
+        or diagnostic_001_reseal_evidence.get("status") != "pass_corrected_readiness_resealed_public_ci_pending"
+        or diagnostic_001_reseal_evidence.get("reseal_sha256") != sha256(diagnostic_001_reseal_ref)
+        or diagnostic_001_reseal_evidence.get("implementation_readiness_sha256") != sha256(diagnostic_001_implementation_readiness_ref)
+        or any(diagnostic_001_reseal_evidence.get("assertions", {}).get(key) is not False for key in (
+            "production_path_logic_changed", "diagnostic_runner_changed", "final_no_content_preflight_performed",
+            "diagnostic_process_started", "arcpy_imported", "project_data_content_read", "external_custody_accessed",
             "apply_orbit_correction_invoked", "geoprocessing_invoked", "scientific_result_established",
         ))
     ):

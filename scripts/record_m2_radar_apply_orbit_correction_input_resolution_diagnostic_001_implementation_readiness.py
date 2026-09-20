@@ -31,6 +31,8 @@ ARTIFACTS = [
     f"scripts/{PREFIX.replace('-', '_')}_core.py",
     f"scripts/run_{PREFIX.replace('-', '_')}.py",
     f"scripts/record_{PREFIX.replace('-', '_')}_implementation_readiness.py",
+    f"scripts/record_{PREFIX.replace('-', '_')}_implementation_portability_correction_001.py",
+    f"scripts/record_{PREFIX.replace('-', '_')}_implementation_portability_reseal_001.py",
     f"scripts/record_{PREFIX.replace('-', '_')}_implementation_publication.py",
     f"scripts/record_{PREFIX.replace('-', '_')}_gate_state_publication.py",
     f"scripts/reconcile_{PREFIX.replace('-', '_')}.py",

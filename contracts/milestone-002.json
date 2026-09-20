@@ -4501,7 +4501,10 @@
         "scripts/m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_core.py",
         "scripts/run_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
         "tests/test_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py",
-        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-readiness.json"
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-readiness.json",
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-readiness-attempt-001-superseded.json",
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-publication-attempt-001-failure.json",
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-portability-correction-001-reseal.json"
       ],
       "gates": {
         "synthetic_no_content_tests": "success",
@@ -4514,17 +4517,19 @@
         "full_test_count": 645,
         "full_skip_count": 6,
         "required_file_count": 1200,
-        "implementation_readiness_sha256": "e8ac7b709945c7504b72a884243878a16f3b879a198696a487be282d00c1f8d5"
+        "implementation_readiness_sha256": "15a88648822cb3d2f92a508dc6b731c3291714eee4133e4a95ee95debe41860e",
+        "failed_public_ci_attempts": 1,
+        "failed_public_ci_run_id": 35477364361
       },
       "exit_condition_delta": {
         "expected": [
           "successful public default-branch CI"
         ],
         "observed": [
-          "portable synthetic validation passed without ArcPy import or external input access"
+          "attempt-001 public CI failed only on one host-separator-dependent synthetic assertion; the failed run is preserved and the production path logic is unchanged"
         ],
-        "decision_value": "pending_public_ci",
-        "rationale": "The final preflight and one diagnostic process remain blocked behind two exact public CI gates."
+        "decision_value": "pending_corrected_public_ci",
+        "rationale": "No final preflight, ArcPy import, or external input access is released by the failed run or correction."
       },
       "next_dependency": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION"
     },

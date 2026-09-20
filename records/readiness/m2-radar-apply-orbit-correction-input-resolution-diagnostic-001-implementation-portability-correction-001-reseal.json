@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION-PORTABILITY-CORRECTION-001-RESEAL",
+  "recorded_at_utc": "2026-09-20T00:04:12Z",
+  "status": "pass_corrected_readiness_resealed_public_ci_pending",
+  "prior_readiness_sha256": "1aae4577e48246e8cf7f74418b0e52dceafc9dbb8fc26b5277c596130045ecd0",
+  "current_readiness_ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-readiness.json",
+  "current_readiness_sha256": "15a88648822cb3d2f92a508dc6b731c3291714eee4133e4a95ee95debe41860e",
+  "changed_control": "implementation publication recorder accepts pass_portable_path_assertion_correction_public_ci_pending",
+  "assertions": {
+    "production_path_logic_changed": false,
+    "diagnostic_runner_changed": false,
+    "public_ci_pending": true,
+    "final_no_content_preflight_performed": false,
+    "diagnostic_process_started": false,
+    "arcpy_imported": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "scientific_result_established": false
+  }
+}

@@ -150,7 +150,7 @@ def main() -> int:
     replace_json("records/long-term-goal.json", goal, nonce)
 
     evidence = {
-        "record_id": "EVID-0194",
+        "record_id": "EVID-0197",
         "type": "m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_terminal_outcome",
         "verified_at_utc": args.reconciled_at_utc,
         "status": terminal["status"],

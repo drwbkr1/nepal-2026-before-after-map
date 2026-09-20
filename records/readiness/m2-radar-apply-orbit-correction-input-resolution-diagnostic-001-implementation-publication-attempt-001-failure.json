@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION-PUBLICATION-ATTEMPT-001-FAILURE",
+  "observed_at_utc": "2026-09-20T00:01:28Z",
+  "status": "terminal_public_ci_failure_no_release",
+  "implementation_commit_sha": "1c8a1f9f95debd47c6b58b0ae3dde8cb300a9daf",
+  "public_ci_run_id": 35477364361,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35477364361",
+  "public_ci_conclusion": "failure",
+  "repository_checker_status": "pass_1200_required_files",
+  "public_test_result": {
+    "tests_run": 645,
+    "intentional_skips": 13,
+    "errors": 0,
+    "failures": 1
+  },
+  "failure": {
+    "test": "test_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.InputResolutionDiagnostic001Tests.test_candidate_paths_are_exact_and_contained",
+    "type": "AssertionError",
+    "stage": "portable_public_test",
+    "cause": "The test constructed its expected Windows child path with the host-native pathlib separator, producing forward slashes on the Ubuntu public runner while production path construction remained exact Windows lexical handling."
+  },
+  "superseded_readiness_ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-readiness-attempt-001-superseded.json",
+  "superseded_readiness_sha256": "e8ac7b709945c7504b72a884243878a16f3b879a198696a487be282d00c1f8d5",
+  "correction": "Keep production Windows path construction unchanged and compare the synthetic expected paths through the same explicit Windows lexical containment helper.",
+  "assertions": {
+    "public_gate_passed": false,
+    "final_no_content_preflight_performed": false,
+    "diagnostic_process_started": false,
+    "arcpy_imported": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "new_radar_attempt_created": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "scientific_result_established": false
+  }
+}

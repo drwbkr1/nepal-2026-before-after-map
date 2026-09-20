@@ -59,7 +59,7 @@ def main() -> int:
     if head != args.implementation_commit_sha:
         raise SystemExit("HEAD does not match successful implementation commit")
     readiness = load(READINESS_REF)
-    if readiness.get("status") != "pass_read_only_diagnostic_implementation_public_ci_pending":
+    if readiness.get("status") != "pass_portable_path_assertion_correction_public_ci_pending":
         raise SystemExit("implementation readiness differs")
 
     gate = {
@@ -152,7 +152,7 @@ def main() -> int:
     replace_json("records/long-term-goal.json", goal, nonce)
 
     evidence = {
-        "record_id": "EVID-0192",
+        "record_id": "EVID-0195",
         "type": "m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_publication_gate",
         "verified_at_utc": args.recorded_at_utc,
         "status": "pass_public_ci_gate_state_publication_pending",

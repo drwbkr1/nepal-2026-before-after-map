@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION-READINESS-CORRECTED-001",
-  "recorded_at_utc": "2026-09-20T00:01:28Z",
-  "status": "pass_portable_path_assertion_correction_public_ci_pending",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-IMPLEMENTATION-READINESS",
+  "recorded_at_utc": "2026-09-19T23:50:43Z",
+  "status": "pass_read_only_diagnostic_implementation_public_ci_pending",
   "bindings": {
     "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/response-c4f0ffdaaa43ebb0acef3b35e15dd5e7ea183f6ec4ac29da587b31c5ff51387f.json": "c4f0ffdaaa43ebb0acef3b35e15dd5e7ea183f6ec4ac29da587b31c5ff51387f",
     "reviews/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001/review-contract-lock-001.json": "9d1788dd2831fcf02463506974cfd8fe146da267a3f942d4af653862f2e8440b",
@@ -13,13 +13,11 @@
     "scripts/activate_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py": "f63da30204315dc2e9f159954f0f91f3853aa261e37549a4b8f970c298971f40",
     "scripts/m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_core.py": "9d6ca7be8514b62d088eea3e1648b002ae40f25555ab620ca298efa37b7d5129",
     "scripts/run_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py": "34239fb9669559f1668887c89b08db5f7e213cfea3132ef0eeb3dffebd041d8f",
-    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_readiness.py": "f17692916b256be062ecf7ef9a6c23841eb4c7170d9d6e526b09e018e978d95a",
-    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_portability_correction_001.py": "d464c3296fe123f1c87dd2ab34dd1171b9376ff508456649d658d86d70059a73",
-    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_portability_reseal_001.py": "fb7a7bc594994b3fcf38244971303862865f2fe0277e1f0db31ffbc9d4f38a49",
-    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_publication.py": "eda64cabb4c13416a2c8aa3bf6f0732362678cc12d836ffc17b75f379030bfc3",
-    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_gate_state_publication.py": "aba46f77a429fd59b467255d7aa188f4d1fcd8f05343d8ab7813b10a793d20a5",
-    "scripts/reconcile_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py": "c2b0fef8ff79ee9c39958d9e366ea217a324a98301f0d9073c7cb0b7f6ade8a9",
-    "tests/test_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py": "3741af9396bf25b3fc22d35560e92ad1cea90cf964a4ba99384e6fe78014ca1d"
+    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_readiness.py": "78c8fe98f7914498c3f28756be6a1e072e93b2baca6dcfca86e9810ee21f0945",
+    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_implementation_publication.py": "2019c78796844463bc921b422048cb610b2d3df48638a97e365f93fd542f562a",
+    "scripts/record_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001_gate_state_publication.py": "ed5f2caa1a90fc1aa96cdaa924ce150f35bdaa5be5d0ed00f60c0fb90092d2ba",
+    "scripts/reconcile_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py": "7a89b61c5a3c464bfc43d80e45448cc1c2f001c9b29bfbfb56e1e08da45e3d4a",
+    "tests/test_m2_radar_apply_orbit_correction_input_resolution_diagnostic_001.py": "30d743f93079a4beed1896d9a591c2335498656c19fbc4e5aece9f9dd858625b"
   },
   "implementation": {
     "diagnostic_id": "radar-apply-orbit-correction-input-resolution-diagnostic-001-real-001",
@@ -43,16 +41,13 @@
     "focused_test_count": 9,
     "full_repository_test_count": 645,
     "full_repository_intentional_skip_count": 6,
-    "repository_checker_status": "pass_1205_required_files",
+    "repository_checker_status": "pass_1200_required_files",
     "exact_contract_and_path_containment_checked": true,
     "receipt_reservation_and_persistence_checked": true,
     "synthetic_success_and_missing_input_checked": true,
     "read_only_arcpy_allowlist_checked": true,
     "no_network_copy_or_processing_call_checked": true,
-    "secret_and_path_redaction_checked": true,
-    "portable_windows_path_assertion_checked": true,
-    "failed_public_ci_attempts_preserved": 1,
-    "correction_aware_publication_reader_checked": true
+    "secret_and_path_redaction_checked": true
   },
   "released_now": {
     "public_ci": true,
@@ -77,18 +72,5 @@
     "radar_recovery_readiness_established": false,
     "scientific_result_established": false
   },
-  "next_action": "Publish the exact portable synthetic-test correction and require a fresh successful public default-branch CI run before gate-state publication, final preflight, ArcPy import, or external input access.",
-  "supersedes": {
-    "ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-readiness-attempt-001-superseded.json",
-    "sha256": "e8ac7b709945c7504b72a884243878a16f3b879a198696a487be282d00c1f8d5"
-  },
-  "failed_publication": {
-    "ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-publication-attempt-001-failure.json",
-    "sha256": "1290e6ac3bf6215b7867622ad8fb73378050712e6e91e3042e404d01eb1de3b5"
-  },
-  "reseal": {
-    "reason": "The publication recorder now accepts the exact corrected-readiness status; no production diagnostic behavior changed.",
-    "prior_readiness_sha256": "1aae4577e48246e8cf7f74418b0e52dceafc9dbb8fc26b5277c596130045ecd0",
-    "recorded_at_utc": "2026-09-20T00:04:12Z"
-  }
+  "next_action": "Publish the exact implementation and require successful public default-branch CI before gate-state publication, final preflight, ArcPy import, or external input access."
 }

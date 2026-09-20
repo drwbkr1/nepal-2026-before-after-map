@@ -92,8 +92,14 @@ class InputResolutionDiagnostic001Tests(unittest.TestCase):
     def test_candidate_paths_are_exact_and_contained(self):
         paths = core.external_paths(self.contract)
         self.assertEqual(str(paths["attempt_root"]), core.EXPECTED_ATTEMPT_ROOT)
-        self.assertEqual(str(paths["safe_directory"]), str(Path(core.EXPECTED_ATTEMPT_ROOT) / Path(core.EXPECTED_SAFE_RELATIVE)))
-        self.assertEqual(str(paths["manifest"]), str(Path(core.EXPECTED_ATTEMPT_ROOT) / Path(core.EXPECTED_MANIFEST_RELATIVE)))
+        self.assertEqual(
+            str(paths["safe_directory"]),
+            core.contained_windows_child(core.EXPECTED_ATTEMPT_ROOT, core.EXPECTED_SAFE_RELATIVE),
+        )
+        self.assertEqual(
+            str(paths["manifest"]),
+            core.contained_windows_child(core.EXPECTED_ATTEMPT_ROOT, core.EXPECTED_MANIFEST_RELATIVE),
+        )
         with self.assertRaises(core.DiagnosticError):
             core.contained_windows_child(core.EXPECTED_ATTEMPT_ROOT, "../escape")
 
