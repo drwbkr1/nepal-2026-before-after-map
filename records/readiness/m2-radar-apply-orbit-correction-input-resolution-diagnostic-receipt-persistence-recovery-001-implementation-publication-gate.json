@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-20T20:24:26Z",
+  "status": "pass_public_default_branch_ci_receipt_recovery_implementation_ready",
+  "implementation_commit_sha": "267c74841bfadddb8d8fc1bd162df9c1d5855825",
+  "public_ci_run_id": 35535407396,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35535407396",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1253,
+  "public_test_count": 663,
+  "public_intentional_skip_count": 13,
+  "bindings": {
+    "recovery_contract_sha256": "495ed3c5f9458df31d595a0ae76a62c3c64533bcaf85a37fdd5e13b6334eafa5",
+    "recovery_core_sha256": "f3968552244519624bd4a4d57aedec69b970fa2bdc2c336cb708347ffe0d6ec4",
+    "recovery_runner_sha256": "46ae9019d14a136f0c64ac18f701979179ee5c11a3b8d1d5a713638820d13c8b",
+    "portable_test_sha256": "0a990379b629a109b5f027adabdd3f58d96b91fd6e7ea6c1eabcf5345165e59e",
+    "arcgis_validator_sha256": "4a98ad6a8c2c94f598c3173be81ae9a5570f9943d7c2c0082853567196a700e3",
+    "approval_sha256": "646a892256823fea5977d01a49a9e8b246f7ead42d7a40173d664bc22194f917"
+  },
+  "authority": {
+    "approval_ref": "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
+    "approval_sha256": "646a892256823fea5977d01a49a9e8b246f7ead42d7a40173d664bc22194f917",
+    "implementation_readiness_ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-implementation-readiness.json",
+    "implementation_readiness_sha256": "000c5be0b2e71751d712548686de2ed1e5c070d4551260f8eee421668d349dc0"
+  },
+  "released_now": {
+    "gate_state_publication": true,
+    "final_no_content_preflight": false,
+    "distinct_process": false,
+    "project_data_content_read": false,
+    "external_custody_access": false
+  },
+  "assertions": {
+    "final_no_content_preflight_performed": false,
+    "distinct_process_started": false,
+    "production_arcpy_imported": false,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "consumed_diagnostic_reused_or_retried": false,
+    "consumed_reserved_receipts_mutated": false,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Publish and publicly validate the exact execution-gate state. Do not run the final no-content preflight, import production ArcPy, or access the frozen exact inputs until that gate-state commit passes public CI."
+}

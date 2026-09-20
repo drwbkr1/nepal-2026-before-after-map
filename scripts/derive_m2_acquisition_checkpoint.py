@@ -323,6 +323,18 @@ RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_REC
     "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION",
     "next_action": "Implement and validate only the approved diagnostic receipt-durability correction, portable synthetic tests, and installed ArcGIS-runtime disposable synthetic test, then require successful public default-branch CI. Do not run the final no-content preflight or inspect project data or external custody before the implementation and execution-gate publications pass.",
 }
+RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_RECOVERY_001_EXECUTION_GATE_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
+    "next_action": "Publish and publicly validate the exact execution-gate state. Do not run the final no-content preflight, import production ArcPy, or access the frozen exact inputs until that gate-state commit passes public CI.",
+}
+RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_RECOVERY_001_FINAL_PREFLIGHT_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
+    "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one distinct read-only diagnostic process inspect the exact frozen SAFE directory, manifest.safe, and M2-ORB-001 EOF in ArcGIS Pro Python. Never retry it.",
+}
+RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_RECOVERY_001_TERMINAL_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW",
+    "next_action": "Review the terminal read-only diagnostic recovery outcome. The distinct process is consumed and cannot be resumed, reused, or retried; no reconstruction, source or path substitution, geoprocessing, radar processing, causal, recovery-readiness, or scientific claim is released.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -2489,6 +2501,139 @@ def current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_per
     )
 
 
+def current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_execution_gate_publication_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize implementation CI pass before public execution-gate validation."""
+    if state_counts != {"promoted": 8}:
+        return False
+    prefix = "m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001"
+    gate_ref = root / f"records/readiness/{prefix}-implementation-publication-gate.json"
+    state_ref = root / f"records/readiness/{prefix}-gate-state-publication.json"
+    if not gate_ref.is_file() or state_ref.exists():
+        return False
+    try:
+        gate = load(gate_ref)
+        reconciliation = load(root / f"records/readiness/{prefix}-implementation-publication-reconciliation.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    implementation = units.get(
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-IMPLEMENTATION",
+        {},
+    )
+    execution = units.get(
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
+        {},
+    )
+    return bool(
+        gate.get("status") == "pass_public_default_branch_ci_receipt_recovery_implementation_ready"
+        and gate.get("public_ci_conclusion") == "success"
+        and reconciliation.get("status") == "pass_public_implementation_gate_execution_gate_publication_pending"
+        and implementation.get("status") == "complete"
+        and implementation.get("disposition") == "pass"
+        and implementation.get("gates", {}).get("public_ci") == "success"
+        and execution.get("status") == "in_progress"
+        and execution.get("gates", {}).get("execution_gate_publication") == "pending"
+        and execution.get("gates", {}).get("final_no_content_preflight") == "pending"
+        and execution.get("gates", {}).get("processes_started") == 0
+    )
+
+
+def current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_final_preflight_pending(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize public execution-gate success before the final no-content preflight."""
+    if state_counts != {"promoted": 8}:
+        return False
+    prefix = "m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001"
+    if (root / f"records/readiness/{prefix}-final-preflight.json").exists():
+        return False
+    try:
+        state = load(root / f"records/readiness/{prefix}-gate-state-publication.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    execution = units.get(
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
+        {},
+    )
+    return bool(
+        state.get("status") == "pass_public_execution_gate_final_no_content_preflight_released"
+        and state.get("public_ci_conclusion") == "success"
+        and state.get("released_now", {}).get("final_no_content_preflight") is True
+        and execution.get("status") == "in_progress"
+        and execution.get("gates", {}).get("execution_gate_publication") == "success"
+        and execution.get("gates", {}).get("final_no_content_preflight") == "released_not_started"
+        and execution.get("gates", {}).get("processes_started") == 0
+    )
+
+
+def current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_execution_ready(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the exact passed final preflight before the one process."""
+    if state_counts != {"promoted": 8}:
+        return False
+    prefix = "m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001"
+    if (root / f"records/processing/{prefix}-fallback.jsonl").exists():
+        return False
+    try:
+        preflight = load(root / f"records/readiness/{prefix}-final-preflight.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    execution = units.get(
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
+        {},
+    )
+    return bool(
+        preflight.get("status") == "pass_final_no_content_preflight_one_distinct_read_only_process_released"
+        and preflight.get("attempt_id")
+        == "radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-real-001"
+        and preflight.get("assertions", {}).get("distinct_process_started") is False
+        and execution.get("status") == "in_progress"
+        and execution.get("gates", {}).get("processes_started") == 0
+    )
+
+
+def current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the terminal reconciliation of the one distinct process."""
+    if state_counts != {"promoted": 8}:
+        return False
+    prefix = "m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001"
+    try:
+        terminal = load(root / f"records/processing/{prefix}-terminal-reconciliation.json")
+        outcome = load(root / f"records/processing/{prefix}-outcome-reconciliation.json")
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    execution = units.get(
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
+        {},
+    )
+    statuses = {
+        "pass_current_input_resolution_diagnostic_only_no_retry",
+        "block_read_only_diagnostic_recovery_no_retry",
+    }
+    return bool(
+        terminal.get("status") in statuses
+        and outcome.get("status") == terminal.get("status")
+        and terminal.get("assertions", {}).get("distinct_process_consumed") is True
+        and terminal.get("assertions", {}).get("automatic_retry_performed") is False
+        and outcome.get("assertions", {}).get("second_process_created") is False
+        and execution.get("status") == "complete"
+        and execution.get("gates", {}).get("processes_started") == 1
+        and execution.get("gates", {}).get("process_consumed") is True
+    )
+
+
 def current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -2768,7 +2913,31 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(
+            if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(
+                    RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_RECOVERY_001_TERMINAL_CHECKPOINT
+                )
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_execution_ready(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(
+                    RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_RECOVERY_001_FINAL_PREFLIGHT_CHECKPOINT
+                )
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_final_preflight_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(
+                    RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_RECOVERY_001_FINAL_PREFLIGHT_CHECKPOINT
+                )
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_execution_gate_publication_pending(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(
+                    RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_RECOVERY_001_EXECUTION_GATE_CHECKPOINT
+                )
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(
