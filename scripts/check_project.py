@@ -406,6 +406,8 @@ REQUIRED = [
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-readiness-attempt-001-superseded.json",
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-publication-attempt-001-failure.json",
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-portability-correction-001-reseal.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-publication-gate.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-implementation-publication-reconciliation.json",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -15903,13 +15905,18 @@ def main() -> None:
     diagnostic_001_superseded_readiness_ref = f"records/readiness/{diagnostic_001_prefix}-implementation-readiness-attempt-001-superseded.json"
     diagnostic_001_failure_ref = f"records/readiness/{diagnostic_001_prefix}-implementation-publication-attempt-001-failure.json"
     diagnostic_001_reseal_ref = f"records/readiness/{diagnostic_001_prefix}-implementation-portability-correction-001-reseal.json"
+    diagnostic_001_implementation_gate_ref = f"records/readiness/{diagnostic_001_prefix}-implementation-publication-gate.json"
+    diagnostic_001_implementation_reconciliation_ref = f"records/readiness/{diagnostic_001_prefix}-implementation-publication-reconciliation.json"
     diagnostic_001_superseded_readiness = json.loads((ROOT / diagnostic_001_superseded_readiness_ref).read_text(encoding="utf-8"))
     diagnostic_001_failure = json.loads((ROOT / diagnostic_001_failure_ref).read_text(encoding="utf-8"))
     diagnostic_001_reseal = json.loads((ROOT / diagnostic_001_reseal_ref).read_text(encoding="utf-8"))
+    diagnostic_001_implementation_gate = json.loads((ROOT / diagnostic_001_implementation_gate_ref).read_text(encoding="utf-8"))
+    diagnostic_001_implementation_reconciliation = json.loads((ROOT / diagnostic_001_implementation_reconciliation_ref).read_text(encoding="utf-8"))
     diagnostic_001_readiness_evidence = ledger_by_id.get("EVID-0191")
     diagnostic_001_failure_evidence = ledger_by_id.get("EVID-0192")
     diagnostic_001_correction_evidence = ledger_by_id.get("EVID-0193")
     diagnostic_001_reseal_evidence = ledger_by_id.get("EVID-0194")
+    diagnostic_001_implementation_gate_evidence = ledger_by_id.get("EVID-0195")
     diagnostic_001_corrected_bindings = diagnostic_001_implementation_readiness.get("bindings", {})
     if (
         diagnostic_001_superseded_readiness.get("status") != "pass_read_only_diagnostic_implementation_public_ci_pending"
@@ -15970,6 +15977,35 @@ def main() -> None:
             "production_path_logic_changed", "diagnostic_runner_changed", "final_no_content_preflight_performed",
             "diagnostic_process_started", "arcpy_imported", "project_data_content_read", "external_custody_accessed",
             "apply_orbit_correction_invoked", "geoprocessing_invoked", "scientific_result_established",
+        ))
+        or diagnostic_001_implementation_gate.get("status") != "pass_public_default_branch_ci_read_only_diagnostic_implementation_ready"
+        or diagnostic_001_implementation_gate.get("implementation_commit_sha") != "3984e59ffa77b4c8facb2b7f3b87402e7c9f58df"
+        or diagnostic_001_implementation_gate.get("public_ci_run_id") != 35478073524
+        or diagnostic_001_implementation_gate.get("public_ci_conclusion") != "success"
+        or diagnostic_001_implementation_gate.get("repository_required_file_count") != 1205
+        or diagnostic_001_implementation_gate.get("public_test_count") != 645
+        or diagnostic_001_implementation_gate.get("public_intentional_skip_count") != 13
+        or diagnostic_001_implementation_gate.get("authority", {}).get("implementation_readiness_sha256") != sha256(diagnostic_001_implementation_readiness_ref)
+        or diagnostic_001_implementation_reconciliation.get("status") != "pass_public_implementation_gate_gate_state_publication_pending"
+        or diagnostic_001_implementation_reconciliation.get("implementation_publication_gate_sha256") != sha256(diagnostic_001_implementation_gate_ref)
+        or diagnostic_001_implementation_unit.get("status") != "complete"
+        or diagnostic_001_implementation_unit.get("disposition") != "pass"
+        or diagnostic_001_implementation_unit.get("gates", {}).get("public_ci") != "success"
+        or diagnostic_001_implementation_unit.get("gates", {}).get("implementation_commit_sha") != "3984e59ffa77b4c8facb2b7f3b87402e7c9f58df"
+        or diagnostic_001_implementation_unit.get("gates", {}).get("public_ci_run_id") != 35478073524
+        or diagnostic_001_implementation_unit.get("gates", {}).get("implementation_publication_gate_sha256") != sha256(diagnostic_001_implementation_gate_ref)
+        or diagnostic_001_implementation_unit.get("gates", {}).get("implementation_publication_reconciliation_sha256") != sha256(diagnostic_001_implementation_reconciliation_ref)
+        or diagnostic_001_execution_unit.get("status") != "in_progress"
+        or diagnostic_001_execution_unit.get("gates", {}).get("public_ci") != "success"
+        or not isinstance(diagnostic_001_implementation_gate_evidence, dict)
+        or diagnostic_001_implementation_gate_evidence.get("status") != "pass_public_ci_gate_state_publication_pending"
+        or diagnostic_001_implementation_gate_evidence.get("implementation_publication_gate_sha256") != sha256(diagnostic_001_implementation_gate_ref)
+        or diagnostic_001_implementation_gate_evidence.get("implementation_publication_reconciliation_sha256") != sha256(diagnostic_001_implementation_reconciliation_ref)
+        or diagnostic_001_implementation_gate_evidence.get("assertions", {}).get("gate_state_publication_pending") is not True
+        or any(diagnostic_001_implementation_gate_evidence.get("assertions", {}).get(key) is not False for key in (
+            "final_no_content_preflight_performed", "diagnostic_process_started", "arcpy_imported",
+            "project_data_content_read", "external_custody_accessed", "apply_orbit_correction_invoked",
+            "geoprocessing_invoked", "scientific_result_established",
         ))
     ):
         fail("M2 input-resolution diagnostic implementation readiness differs or overclaims")

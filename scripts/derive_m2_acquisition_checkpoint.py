@@ -300,7 +300,7 @@ RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_IMPLEMENTATION_CHEC
 }
 RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_EXECUTION_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION",
-    "next_action": "Publish and publicly validate the exact diagnostic execution-gate state. Do not run the final no-content preflight, import production ArcPy, or access the recovery-002 attempt root or orbit custody until that gate-state commit passes public CI.",
+    "next_action": "Publish and publicly validate the exact diagnostic implementation-gate state. Do not run the final no-content preflight, import production ArcPy, or access the recovery-002 attempt root or orbit custody until that gate-state commit passes public CI.",
 }
 RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_001_FINAL_PREFLIGHT_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-EXECUTION",
