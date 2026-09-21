@@ -166,6 +166,17 @@ class M2RadarRasterFunctionCallShapeRecovery004ReviewTests(unittest.TestCase):
         self.assertFalse(gate["released_now"]["attempt_retry_or_reuse"])
         self.assertFalse(gate["assertions"]["historical_failure_root_cause_established"])
 
+    def test_terminal_publication_reconciliation_closes_the_envelope(self) -> None:
+        reconciliation = load(
+            "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-reconciliation.json"
+        )
+        self.assertEqual(reconciliation["status"], "pass_exact_terminal_gate_public_ci_reconciled")
+        self.assertEqual(reconciliation["bindings"]["terminal_gate_commit_sha"], "120f658893e40c262745f55b7f975fe320365191")
+        self.assertEqual(reconciliation["bindings"]["terminal_gate_public_ci_run_id"], 35644433136)
+        self.assertTrue(reconciliation["assertions"]["terminal_gate_public_ci_conclusion_success"])
+        self.assertFalse(reconciliation["assertions"]["second_attempt_created"])
+        self.assertEqual(reconciliation["current_checkpoint"], CHECKPOINT)
+
 
 if __name__ == "__main__":
     unittest.main()

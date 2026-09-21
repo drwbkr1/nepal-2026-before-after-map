@@ -1440,6 +1440,7 @@ REQUIRED = [
     "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json",
     "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json",
     "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-gate.json",
+    "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-reconciliation.json",
     "tests/test_m2_radar_raster_function_call_shape_recovery_004.py",
     ".github/workflows/validate.yml",
 ]
@@ -17358,6 +17359,7 @@ def main() -> None:
     raster_function_terminal_ref = "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json"
     raster_function_outcome_ref = "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json"
     raster_function_terminal_publication_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-gate.json"
+    raster_function_terminal_publication_reconciliation_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-reconciliation.json"
     raster_function_observation = json.loads((ROOT / raster_function_observation_ref).read_text(encoding="utf-8"))
     raster_function_proposal = json.loads((ROOT / raster_function_proposal_ref).read_text(encoding="utf-8"))
     raster_function_bundle = json.loads((ROOT / raster_function_bundle_ref).read_text(encoding="utf-8"))
@@ -17374,6 +17376,9 @@ def main() -> None:
     raster_function_terminal = json.loads((ROOT / raster_function_terminal_ref).read_text(encoding="utf-8"))
     raster_function_outcome = json.loads((ROOT / raster_function_outcome_ref).read_text(encoding="utf-8"))
     raster_function_terminal_publication = json.loads((ROOT / raster_function_terminal_publication_ref).read_text(encoding="utf-8"))
+    raster_function_terminal_publication_reconciliation = json.loads(
+        (ROOT / raster_function_terminal_publication_reconciliation_ref).read_text(encoding="utf-8")
+    )
     raster_function_review_unit = m2_units.get(
         "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-REVIEW", {}
     )
@@ -17573,6 +17578,25 @@ def main() -> None:
         or raster_function_terminal_publication.get("assertions", {}).get("radar_recovery_readiness_established") is not False
         or raster_function_recovery_unit.get("gates", {}).get("terminal_publication_gate_sha256")
         != sha256(raster_function_terminal_publication_ref)
+        or raster_function_terminal_publication_reconciliation.get("status")
+        != "pass_exact_terminal_gate_public_ci_reconciled"
+        or raster_function_terminal_publication_reconciliation.get("bindings", {}).get("terminal_publication_gate_sha256")
+        != sha256(raster_function_terminal_publication_ref)
+        or raster_function_terminal_publication_reconciliation.get("bindings", {}).get("terminal_gate_commit_sha")
+        != "120f658893e40c262745f55b7f975fe320365191"
+        or raster_function_terminal_publication_reconciliation.get("bindings", {}).get("terminal_gate_public_ci_run_id")
+        != 35644433136
+        or raster_function_terminal_publication_reconciliation.get("bindings", {}).get("terminal_reconciliation_sha256")
+        != sha256(raster_function_terminal_ref)
+        or raster_function_terminal_publication_reconciliation.get("bindings", {}).get("outcome_reconciliation_sha256")
+        != sha256(raster_function_outcome_ref)
+        or raster_function_terminal_publication_reconciliation.get("assertions", {}).get("terminal_gate_public_ci_conclusion_success") is not True
+        or raster_function_terminal_publication_reconciliation.get("assertions", {}).get("second_attempt_created") is not False
+        or raster_function_terminal_publication_reconciliation.get("assertions", {}).get("radar_recovery_readiness_established") is not False
+        or raster_function_terminal_publication_reconciliation.get("current_checkpoint")
+        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW"
+        or raster_function_recovery_unit.get("gates", {}).get("terminal_publication_reconciliation_sha256")
+        != sha256(raster_function_terminal_publication_reconciliation_ref)
         or profile.get("control_surfaces", {}).get("proposed_amendments") != []
         or goal.get("proposed_amendments") != []
         or profile.get("current_checkpoint", {}).get("checkpoint_id")
