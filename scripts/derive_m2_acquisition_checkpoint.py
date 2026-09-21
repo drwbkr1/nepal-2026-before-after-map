@@ -335,6 +335,22 @@ RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_REC
     "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW",
     "next_action": "Review the terminal read-only diagnostic outcome. The distinct process is consumed and cannot be resumed, reused, or retried; any further diagnostic, path, geoprocessing, or radar action requires separately reviewed authority.",
 }
+RADAR_SHORT_PATH_RECOVERY_003_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION",
+    "next_action": "Review one combined M2 radar short-path recovery-003 decision at bundle SHA-256 a1bcfa69bf70a43866b78cff5fb3c99a3825204f098f6c96c06b1b6bd59a5693 and proposal SHA-256 c070f8f90af63d366744d56e938a1b857e5a3efb4b421683ff89265f64599299. One approval covers publication, implementation, validation, one fresh real attempt, reconciliation, and sanitized terminal publication with no intermediate owner reconfirmation. Until approval, no publication, implementation, ArcPy, external-custody read or copy, or geoprocessing is released.",
+}
+RADAR_SHORT_PATH_RECOVERY_003_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION",
+    "next_action": "Publish and validate the approved short-path recovery-003 implementation, portable tests, and installed ArcGIS disposable signature and license test. Continue through the exact public CI gates under inherited authority; do not access external custody or start the real attempt until both public gates and the final no-content preflight pass.",
+}
+RADAR_SHORT_PATH_RECOVERY_003_EXECUTION_GATE_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
+    "next_action": "Publish and validate the exact short-path recovery-003 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order real attempt begin; stop on the first failure and never retry.",
+}
+RADAR_SHORT_PATH_RECOVERY_003_TERMINAL_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
+    "next_action": "Review the sanitized terminal short-path recovery-003 evidence. The attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain outside this authority.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -2634,6 +2650,76 @@ def current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_per
     )
 
 
+def current_radar_short_path_recovery_003_review_required(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the exact local one-decision short-path review packet."""
+    if state_counts != {"promoted": 8}:
+        return False
+    proposal_ref = "contracts/milestone-002-radar-short-path-recovery-003-proposal.json"
+    bundle_ref = "reviews/m2-radar-short-path-recovery-003/review-bundle.json"
+    approval_ref = "records/source-gates/m2-radar-short-path-recovery-003-approval.json"
+    if (root / approval_ref).exists():
+        return False
+    try:
+        proposal = load(root / proposal_ref)
+        bundle = load(root / bundle_ref)
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-SHORT-PATH-RECOVERY-003-REVIEW", {})
+    recovery = units.get("M2-RADAR-SHORT-PATH-RECOVERY-003", {})
+    return bool(
+        hashlib.sha256((root / proposal_ref).read_bytes()).hexdigest()
+        == "c070f8f90af63d366744d56e938a1b857e5a3efb4b421683ff89265f64599299"
+        and hashlib.sha256((root / bundle_ref).read_bytes()).hexdigest()
+        == "a1bcfa69bf70a43866b78cff5fb3c99a3825204f098f6c96c06b1b6bd59a5693"
+        and proposal.get("human_decision_count") == 0
+        and proposal.get("status") == "proposed_inactive_local_one_decision_review"
+        and bundle.get("human_decision_count") == 0
+        and bundle.get("status") == "local_zero_decision_one_combined_owner_decision_pending"
+        and review.get("status") == "in_progress"
+        and review.get("human_gate") is True
+        and review.get("gates", {}).get("owner_combined_decision") == "pending"
+        and recovery.get("status") == "pending"
+        and recovery.get("human_gate") is False
+        and recovery.get("gates", {}).get("inherited_owner_authority") == "pending"
+    )
+
+
+def current_radar_short_path_recovery_003_stage(
+    root: Path, state_counts: dict[str, int]
+) -> str | None:
+    """Return the approved short-path stage without reopening its owner gate."""
+    if state_counts != {"promoted": 8}:
+        return None
+    approval_ref = "records/source-gates/m2-radar-short-path-recovery-003-approval.json"
+    activation_ref = "records/readiness/m2-radar-short-path-recovery-003-approval-activation.json"
+    try:
+        approval = load(root / approval_ref)
+        activation = load(root / activation_ref)
+    except (OSError, ValueError, json.JSONDecodeError):
+        return None
+    if not (
+        approval.get("status") == "approved_exact_single_bounded_authority_envelope_through_sanitized_terminal_publication"
+        and activation.get("status") == "pass_exact_combined_authority_activated_implementation_publication_pending"
+        and approval.get("bindings", {}).get("proposal_sha256")
+        == "c070f8f90af63d366744d56e938a1b857e5a3efb4b421683ff89265f64599299"
+        and approval.get("bindings", {}).get("review_bundle_sha256")
+        == "a1bcfa69bf70a43866b78cff5fb3c99a3825204f098f6c96c06b1b6bd59a5693"
+    ):
+        return None
+    prefix = "m2-radar-short-path-recovery-003"
+    if (root / f"records/readiness/{prefix}-terminal-publication-gate.json").is_file() or (
+        root / f"records/processing/{prefix}-terminal-reconciliation.json"
+    ).is_file():
+        return "terminal"
+    if (root / f"records/readiness/{prefix}-implementation-publication-gate.json").is_file():
+        return "execution"
+    return "implementation"
+
+
 def current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -2913,7 +2999,20 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal(
+            short_path_stage = current_radar_short_path_recovery_003_stage(
+                ROOT, progress["state_counts"]
+            )
+            if short_path_stage == "terminal":
+                checkpoint = dict(RADAR_SHORT_PATH_RECOVERY_003_TERMINAL_CHECKPOINT)
+            elif short_path_stage == "execution":
+                checkpoint = dict(RADAR_SHORT_PATH_RECOVERY_003_EXECUTION_GATE_CHECKPOINT)
+            elif short_path_stage == "implementation":
+                checkpoint = dict(RADAR_SHORT_PATH_RECOVERY_003_IMPLEMENTATION_CHECKPOINT)
+            elif current_radar_short_path_recovery_003_review_required(
+                ROOT, progress["state_counts"]
+            ):
+                checkpoint = dict(RADAR_SHORT_PATH_RECOVERY_003_REVIEW_CHECKPOINT)
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal(
                 ROOT, progress["state_counts"]
             ):
                 checkpoint = dict(

@@ -48,6 +48,8 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_final_preflight_pending,
     current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_execution_ready,
     current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal,
+    current_radar_short_path_recovery_003_review_required,
+    current_radar_short_path_recovery_003_stage,
     current_radar_delayed_import_probe_001_review_publication_pending,
     current_radar_delayed_import_probe_001_review_required,
     current_radar_delayed_import_probe_001_implementation_pending,
@@ -83,6 +85,22 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_first_path_review_required,
     derive_checkpoint,
 )
+
+
+SHORT_PATH_STAGE = {
+    "implementation": (
+        "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION",
+        "Publish and validate the approved short-path recovery-003 implementation, portable tests, and installed ArcGIS disposable signature and license test. Continue through the exact public CI gates under inherited authority; do not access external custody or start the real attempt until both public gates and the final no-content preflight pass.",
+    ),
+    "execution": (
+        "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
+        "Publish and validate the exact short-path recovery-003 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order real attempt begin; stop on the first failure and never retry.",
+    ),
+    "terminal": (
+        "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
+        "Review the sanitized terminal short-path recovery-003 evidence. The attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain outside this authority.",
+    ),
+}
 from record_m2_sentinel_continuation_001_implementation_readiness import IMPLEMENTATION_FILES as CONTINUATION_001_IMPLEMENTATION_FILES
 from record_m2_sentinel_recovery_002_implementation_readiness import IMPLEMENTATION_FILES as RECOVERY_002_IMPLEMENTATION_FILES
 from record_m2_orbit_recovery_002_implementation_readiness import IMPLEMENTATION_FILES as ORBIT_RECOVERY_002_IMPLEMENTATION_FILES
@@ -1362,6 +1380,20 @@ REQUIRED = [
     "contracts/m2-dem-vertical-datum-proposal.json",
     "contracts/m2-dem-terrain-result-review-proposal.json",
     "records/source-gates/m2-dem-vertical-datum-source-review.json",
+    "contracts/milestone-002-radar-short-path-recovery-003-proposal.json",
+    "docs/M2_RADAR_SHORT_PATH_RECOVERY_003_REVIEW.md",
+    "reviews/m2-radar-short-path-recovery-003/review-bundle.json",
+    "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
+    "records/source-gates/m2-radar-short-path-recovery-003-review-reconciliation.json",
+    "records/readiness/m2-radar-short-path-recovery-003-approval-activation.json",
+    "records/readiness/m2-radar-short-path-recovery-003-implementation-readiness.json",
+    "records/readiness/m2-radar-short-path-recovery-003-arcgis-runtime-validation.json",
+    "config/qa/m2-radar-short-path-recovery-003-contract.json",
+    "scripts/m2_radar_short_path_recovery_003_core.py",
+    "scripts/m2_radar_short_path_processing_003.py",
+    "scripts/run_m2_radar_short_path_recovery_003.py",
+    "scripts/validate_m2_radar_short_path_recovery_003_arcgis.py",
+    "tests/test_m2_radar_short_path_recovery_003.py",
     ".github/workflows/validate.yml",
 ]
 
@@ -1767,7 +1799,17 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
-            if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal(ROOT, {"promoted": 8}):
+            short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, {"promoted": 8})
+            if short_path_stage:
+                expected_dem_checkpoint, expected_dem_next_action = SHORT_PATH_STAGE[short_path_stage]
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-short-path-recovery-003-approval.json"
+                expected_dem_proposed_amendments = []
+            elif current_radar_short_path_recovery_003_review_required(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION"
+                expected_dem_checkpoint_authority_ref = "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-publication-gate.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Review one combined M2 radar short-path recovery-003 decision at bundle SHA-256 a1bcfa69bf70a43866b78cff5fb3c99a3825204f098f6c96c06b1b6bd59a5693 and proposal SHA-256 c070f8f90af63d366744d56e938a1b857e5a3efb4b421683ff89265f64599299. One approval covers publication, implementation, validation, one fresh real attempt, reconciliation, and sanitized terminal publication with no intermediate owner reconfirmation. Until approval, no publication, implementation, ArcPy, external-custody read or copy, or geoprocessing is released."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json"
                 expected_dem_proposed_amendments = []
@@ -1990,7 +2032,17 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
-            if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal(ROOT, {"promoted": 8}):
+            short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, {"promoted": 8})
+            if short_path_stage:
+                expected_dem_checkpoint, expected_dem_next_action = SHORT_PATH_STAGE[short_path_stage]
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-short-path-recovery-003-approval.json"
+                expected_dem_proposed_amendments = []
+            elif current_radar_short_path_recovery_003_review_required(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION"
+                expected_dem_checkpoint_authority_ref = "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-publication-gate.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Review one combined M2 radar short-path recovery-003 decision at bundle SHA-256 a1bcfa69bf70a43866b78cff5fb3c99a3825204f098f6c96c06b1b6bd59a5693 and proposal SHA-256 c070f8f90af63d366744d56e938a1b857e5a3efb4b421683ff89265f64599299. One approval covers publication, implementation, validation, one fresh real attempt, reconciliation, and sanitized terminal publication with no intermediate owner reconfirmation. Until approval, no publication, implementation, ArcPy, external-custody read or copy, or geoprocessing is released."
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json"
                 expected_dem_proposed_amendments = []
@@ -3072,8 +3124,9 @@ def main() -> None:
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
+        "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
     ]:
-        fail("project profile must expose the twenty-four exact active amendments")
+        fail("project profile must expose the exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
         fail("AGENTS.md must contain controlling project instructions")
     if goal["status"] != "active":
@@ -3617,6 +3670,7 @@ def main() -> None:
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
+        "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
     if goal.get("proposed_amendments") != expected_dem_proposed_amendments:
@@ -8401,7 +8455,12 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
-        if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal(ROOT, state_counts):
+        short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, state_counts)
+        if short_path_stage:
+            expected_checkpoint = SHORT_PATH_STAGE[short_path_stage][0]
+        elif current_radar_short_path_recovery_003_review_required(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION"
+        elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW"
         elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_execution_ready(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION"
@@ -15243,7 +15302,12 @@ def main() -> None:
             diagnostic_receipt_implementation_pending = current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(
                 ROOT, {"promoted": 8}
             )
-            if current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal(ROOT, {"promoted": 8}):
+            short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, {"promoted": 8})
+            if short_path_stage:
+                expected_post_probe_checkpoint = SHORT_PATH_STAGE[short_path_stage][0]
+            elif current_radar_short_path_recovery_003_review_required(ROOT, {"promoted": 8}):
+                expected_post_probe_checkpoint = "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION"
+            elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal(ROOT, {"promoted": 8}):
                 expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW"
             elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_execution_ready(ROOT, {"promoted": 8}) or current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_final_preflight_pending(ROOT, {"promoted": 8}):
                 expected_post_probe_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION"
@@ -15765,6 +15829,10 @@ def main() -> None:
                 or radar_recovery_002_execution.get("gates", {}).get("terminal_reconciliation_sha256") != sha256(radar_recovery_002_terminal_ref)
                 or radar_recovery_002_execution.get("gates", {}).get("outcome_reconciliation_sha256") != sha256(radar_recovery_002_outcome_ref)
                 or profile.get("current_checkpoint", {}).get("checkpoint_id") not in {
+                    "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION",
+                    "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION",
+                    "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
+                    "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
                     "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION",
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
@@ -15778,6 +15846,10 @@ def main() -> None:
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW",
                 }
                 or goal.get("current_checkpoint") not in {
+                    "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION",
+                    "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION",
+                    "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
+                    "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
                     "M2-RADAR-PIXEL-ORBIT-APPLICATION-RECOVERY-002-TERMINAL-REVIEW",
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW-PUBLICATION",
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-001-REVIEW",
@@ -16071,7 +16143,12 @@ def main() -> None:
     }
     if sum(bool(value) for value in diagnostic_001_phase_checks.values()) != 1:
         fail("M2 ApplyOrbitCorrection input-resolution diagnostic-001 phase is not exact")
-    if diagnostic_001_phase_checks["receipt_persistence_recovery_terminal"]:
+    short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, {"promoted": 8})
+    if short_path_stage:
+        diagnostic_001_expected_checkpoint = SHORT_PATH_STAGE[short_path_stage][0]
+    elif current_radar_short_path_recovery_003_review_required(ROOT, {"promoted": 8}):
+        diagnostic_001_expected_checkpoint = "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION"
+    elif diagnostic_001_phase_checks["receipt_persistence_recovery_terminal"]:
         diagnostic_001_expected_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW"
     elif any(diagnostic_001_phase_checks[key] for key in (
         "receipt_persistence_recovery_execution_ready",
@@ -16980,6 +17057,99 @@ def main() -> None:
             or diagnostic_receipt_gate_evidence.get("assertions", {}).get("reserved_receipt_mutated") is not False
         ):
             fail("EVID-0198 diagnostic receipt-persistence recovery publication gate differs or overclaims")
+
+    short_path_proposal_ref = "contracts/milestone-002-radar-short-path-recovery-003-proposal.json"
+    short_path_review_ref = "docs/M2_RADAR_SHORT_PATH_RECOVERY_003_REVIEW.md"
+    short_path_bundle_ref = "reviews/m2-radar-short-path-recovery-003/review-bundle.json"
+    short_path_approval_ref = "records/source-gates/m2-radar-short-path-recovery-003-approval.json"
+    short_path_reconciliation_ref = "records/source-gates/m2-radar-short-path-recovery-003-review-reconciliation.json"
+    short_path_activation_ref = "records/readiness/m2-radar-short-path-recovery-003-approval-activation.json"
+    short_path_contract_ref = "config/qa/m2-radar-short-path-recovery-003-contract.json"
+    short_path_readiness_ref = "records/readiness/m2-radar-short-path-recovery-003-implementation-readiness.json"
+    short_path_arcgis_ref = "records/readiness/m2-radar-short-path-recovery-003-arcgis-runtime-validation.json"
+    short_path_proposal = json.loads((ROOT / short_path_proposal_ref).read_text(encoding="utf-8"))
+    short_path_bundle = json.loads((ROOT / short_path_bundle_ref).read_text(encoding="utf-8"))
+    short_path_approval = json.loads((ROOT / short_path_approval_ref).read_text(encoding="utf-8"))
+    short_path_reconciliation = json.loads((ROOT / short_path_reconciliation_ref).read_text(encoding="utf-8"))
+    short_path_activation = json.loads((ROOT / short_path_activation_ref).read_text(encoding="utf-8"))
+    short_path_contract = json.loads((ROOT / short_path_contract_ref).read_text(encoding="utf-8"))
+    short_path_readiness = json.loads((ROOT / short_path_readiness_ref).read_text(encoding="utf-8"))
+    short_path_arcgis = json.loads((ROOT / short_path_arcgis_ref).read_text(encoding="utf-8"))
+    short_path_review_unit = m2_units.get("M2-RADAR-SHORT-PATH-RECOVERY-003-REVIEW", {})
+    short_path_recovery_unit = m2_units.get("M2-RADAR-SHORT-PATH-RECOVERY-003", {})
+    if (
+        sha256(short_path_proposal_ref)
+        != "c070f8f90af63d366744d56e938a1b857e5a3efb4b421683ff89265f64599299"
+        or sha256(short_path_review_ref)
+        != "3c2342a89e8e38fb21e14fd4a35b38de87a7d416f61a6e8663798f13412a9349"
+        or sha256(short_path_bundle_ref)
+        != "a1bcfa69bf70a43866b78cff5fb3c99a3825204f098f6c96c06b1b6bd59a5693"
+        or short_path_proposal.get("status") != "proposed_inactive_local_one_decision_review"
+        or short_path_proposal.get("human_decision_count") != 0
+        or short_path_proposal.get("authority_basis", {}).get("terminal_publication_gate_sha256")
+        != sha256(
+            "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-"
+            "receipt-persistence-recovery-001-terminal-publication-gate.json"
+        )
+        or short_path_proposal.get("proposed_attempt", {}).get("external_attempt_root_characters") != 57
+        or short_path_proposal.get("proposed_attempt", {}).get("m1_src_001_manifest_path_characters") != 148
+        or short_path_proposal.get("proposed_attempt", {}).get("maximum_predicted_full_path_characters") != 240
+        or short_path_proposal.get("proposed_attempt", {}).get("maximum_real_attempts") != 1
+        or short_path_proposal.get("proposed_attempt", {}).get("automatic_retry") is not False
+        or short_path_proposal.get("hypothesis_boundary", {}).get("historical_root_cause_established") is not False
+        or not all(short_path_proposal.get("single_owner_decision_scope", {}).values())
+        or short_path_bundle.get("status") != "local_zero_decision_one_combined_owner_decision_pending"
+        or short_path_bundle.get("human_decision_count") != 0
+        or short_path_bundle.get("candidate_identity", {}).get("proposal_sha256") != sha256(short_path_proposal_ref)
+        or any(artifact.get("sha256") != sha256(artifact.get("path", "")) for artifact in short_path_bundle.get("artifacts", []))
+        or sha256(short_path_approval_ref) != "599b2425a069d607249d60d603719d25b71483137a5e58804857706be519c088"
+        or sha256(short_path_reconciliation_ref) != "8d63ffcf6b70a46af8527ae54b4ed2ef707f6ac1eee01fe33cbed4265e5680a6"
+        or sha256(short_path_activation_ref) != "658a6767be04c526d691a41cd9642797c5e8cd934db529462b5e9f262d9bc076"
+        or short_path_approval.get("status") != "approved_exact_single_bounded_authority_envelope_through_sanitized_terminal_publication"
+        or short_path_approval.get("human_decision_count") != 1
+        or short_path_approval.get("attestation") is not True
+        or short_path_approval.get("bindings", {}).get("proposal_sha256") != sha256(short_path_proposal_ref)
+        or short_path_approval.get("bindings", {}).get("review_bundle_sha256") != sha256(short_path_bundle_ref)
+        or short_path_reconciliation.get("status") != "reconciled_exact_attested_single_owner_decision"
+        or short_path_activation.get("status") != "pass_exact_combined_authority_activated_implementation_publication_pending"
+        or short_path_contract.get("contract_id") != "NEPAL-M2-RADAR-SHORT-PATH-RECOVERY-003"
+        or short_path_contract.get("attempt", {}).get("maximum_real_attempts") != 1
+        or short_path_contract.get("short_path", {}).get("maximum_predicted_full_path_characters") != 240
+        or short_path_contract.get("short_path", {}).get("first_blocked_path_characters") != 241
+        or short_path_readiness.get("status") != "pass_local_portable_and_installed_arcgis_ready_public_ci_pending"
+        or short_path_readiness.get("validation", {}).get("full_portable_tests", {}).get("total") != 676
+        or short_path_readiness.get("validation", {}).get("full_portable_tests", {}).get("failed") != 0
+        or short_path_readiness.get("assertions", {}).get("external_custody_accessed") is not False
+        or short_path_readiness.get("assertions", {}).get("real_attempt_started") is not False
+        or any(
+            short_path_readiness.get("bindings", {}).get(ref) != sha256(ref)
+            for ref in (
+                short_path_contract_ref,
+                "scripts/m2_radar_short_path_recovery_003_core.py",
+                "scripts/m2_radar_short_path_processing_003.py",
+                "scripts/run_m2_radar_short_path_recovery_003.py",
+                "scripts/validate_m2_radar_short_path_recovery_003_arcgis.py",
+                "tests/test_m2_radar_short_path_recovery_003.py",
+                "scripts/run_m2_radar_pixel_orbit_application_001.py",
+                short_path_arcgis_ref,
+                short_path_approval_ref,
+                short_path_activation_ref,
+            )
+        )
+        or short_path_arcgis.get("status") != "pass_installed_arcgis_runtime_signature_license_and_disposable_path_validation"
+        or short_path_arcgis.get("assertions", {}).get("geoprocessing_invoked") is not False
+        or short_path_arcgis.get("assertions", {}).get("external_custody_accessed") is not False
+        or short_path_review_unit.get("status") != "complete"
+        or short_path_review_unit.get("human_gate") is not True
+        or short_path_review_unit.get("gates", {}).get("owner_combined_decision") != "approved_exact"
+        or short_path_review_unit.get("gates", {}).get("human_decision_count") != 1
+        or short_path_review_unit.get("gates", {}).get("intermediate_owner_reconfirmation_required") is not False
+        or short_path_recovery_unit.get("status") not in {"in_progress", "complete"}
+        or short_path_recovery_unit.get("human_gate") is not False
+        or short_path_recovery_unit.get("gates", {}).get("inherited_owner_authority") != "pass_exact_combined_approval"
+        or short_path_recovery_unit.get("gates", {}).get("intermediate_owner_reconfirmation_required") is not False
+    ):
+        fail("M2 radar short-path recovery-003 authority or implementation boundary differs or overclaims")
 
     violations = []
     for relative in tracked_files():

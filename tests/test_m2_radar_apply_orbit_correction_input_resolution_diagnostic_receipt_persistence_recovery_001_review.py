@@ -24,6 +24,13 @@ BLANK_REF = f"reviews/{PREFIX}/blank-response.json"
 PREVISUAL_REF = f"records/readiness/{PREFIX}-review-readiness-previsual.json"
 READINESS_REF = f"records/readiness/{PREFIX}-review-readiness.json"
 TERMINAL_PUBLICATION_GATE_REF = f"records/readiness/{PREFIX}-terminal-publication-gate.json"
+SHORT_PATH_PROPOSAL_REF = "contracts/milestone-002-radar-short-path-recovery-003-proposal.json"
+SHORT_PATH_REVIEW_REF = "docs/M2_RADAR_SHORT_PATH_RECOVERY_003_REVIEW.md"
+SHORT_PATH_BUNDLE_REF = "reviews/m2-radar-short-path-recovery-003/review-bundle.json"
+SHORT_PATH_APPROVAL_REF = "records/source-gates/m2-radar-short-path-recovery-003-approval.json"
+SHORT_PATH_PROPOSAL_SHA256 = "c070f8f90af63d366744d56e938a1b857e5a3efb4b421683ff89265f64599299"
+SHORT_PATH_REVIEW_SHA256 = "3c2342a89e8e38fb21e14fd4a35b38de87a7d416f61a6e8663798f13412a9349"
+SHORT_PATH_BUNDLE_SHA256 = "a1bcfa69bf70a43866b78cff5fb3c99a3825204f098f6c96c06b1b6bd59a5693"
 TERMINAL_REF = f"records/processing/{SOURCE_PREFIX}-terminal.json"
 CLEANUP_REF = f"records/processing/{SOURCE_PREFIX}-cleanup.json"
 EMPTY_SHA256 = hashlib.sha256(b"").hexdigest()
@@ -224,6 +231,56 @@ class M2DiagnosticReceiptPersistenceRecovery001ReviewTests(unittest.TestCase):
             "scientific_result_established",
         ):
             self.assertFalse(gate["assertions"][key], key)
+
+    def test_short_path_packet_is_exact_local_and_zero_decision(self) -> None:
+        proposal = load(SHORT_PATH_PROPOSAL_REF)
+        bundle = load(SHORT_PATH_BUNDLE_REF)
+        self.assertEqual(sha256(SHORT_PATH_PROPOSAL_REF), SHORT_PATH_PROPOSAL_SHA256)
+        self.assertEqual(sha256(SHORT_PATH_REVIEW_REF), SHORT_PATH_REVIEW_SHA256)
+        self.assertEqual(sha256(SHORT_PATH_BUNDLE_REF), SHORT_PATH_BUNDLE_SHA256)
+        self.assertEqual(proposal["status"], "proposed_inactive_local_one_decision_review")
+        self.assertEqual(proposal["human_decision_count"], 0)
+        self.assertFalse(proposal["authority_basis"]["publication_implementation_or_execution_authorized"])
+        self.assertEqual(bundle["status"], "local_zero_decision_one_combined_owner_decision_pending")
+        self.assertEqual(bundle["human_decision_count"], 0)
+        self.assertEqual(bundle["candidate_identity"]["proposal_sha256"], SHORT_PATH_PROPOSAL_SHA256)
+        for artifact in bundle["artifacts"]:
+            self.assertEqual(artifact["sha256"], sha256(artifact["path"]))
+        approval = load(SHORT_PATH_APPROVAL_REF)
+        self.assertEqual(approval["human_decision_count"], 1)
+        self.assertTrue(approval["attestation"])
+        self.assertEqual(approval["bindings"]["proposal_sha256"], SHORT_PATH_PROPOSAL_SHA256)
+        self.assertEqual(approval["bindings"]["review_bundle_sha256"], SHORT_PATH_BUNDLE_SHA256)
+
+    def test_short_path_contract_is_narrow_and_one_decision(self) -> None:
+        proposal = load(SHORT_PATH_PROPOSAL_REF)
+        attempt = proposal["proposed_attempt"]
+        self.assertEqual(attempt["external_attempt_root_characters"], 57)
+        self.assertEqual(attempt["m1_src_001_manifest_path_characters"], 148)
+        self.assertEqual(attempt["maximum_predicted_full_path_characters"], 240)
+        self.assertEqual(attempt["maximum_real_attempts"], 1)
+        self.assertFalse(attempt["automatic_retry"])
+        self.assertTrue(attempt["stop_on_first_failure"])
+        self.assertEqual(list(attempt["source_aliases"]), attempt["preserve_exact_source_order"])
+        self.assertFalse(proposal["hypothesis_boundary"]["historical_root_cause_established"])
+        self.assertFalse(proposal["hypothesis_boundary"]["success_would_prove_historical_cause"])
+        self.assertTrue(all(proposal["single_owner_decision_scope"].values()))
+
+    def test_short_path_units_hold_one_gate_and_inherit_after_approval(self) -> None:
+        milestone = load("contracts/milestone-002.json")
+        units = {unit["id"]: unit for unit in milestone["units"]}
+        review = units["M2-RADAR-SHORT-PATH-RECOVERY-003-REVIEW"]
+        recovery = units["M2-RADAR-SHORT-PATH-RECOVERY-003"]
+        self.assertTrue(review["human_gate"])
+        self.assertEqual(review["status"], "complete")
+        self.assertEqual(review["gates"]["owner_combined_decision"], "approved_exact")
+        self.assertEqual(review["gates"]["human_decision_count"], 1)
+        self.assertFalse(review["gates"]["intermediate_owner_reconfirmation_required"])
+        self.assertFalse(recovery["human_gate"])
+        self.assertEqual(recovery["status"], "in_progress")
+        self.assertEqual(recovery["gates"]["inherited_owner_authority"], "pass_exact_combined_approval")
+        self.assertFalse(recovery["gates"]["intermediate_owner_reconfirmation_required"])
+        self.assertEqual(CURRENT_CHECKPOINT, "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION")
 
 
 if __name__ == "__main__":

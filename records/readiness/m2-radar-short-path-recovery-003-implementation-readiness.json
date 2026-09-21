@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION-READINESS",
+  "verified_at_utc": "2026-09-21T16:55:40Z",
+  "status": "pass_local_portable_and_installed_arcgis_ready_public_ci_pending",
+  "bindings": {
+    "config/qa/m2-radar-short-path-recovery-003-contract.json": "8d1edd44a3a096899094c72844736c3411272289edf07cc759c09e7825a33e7c",
+    "scripts/m2_radar_short_path_recovery_003_core.py": "c6183201d3aaf960d8bd4e5de5fdb8f36d2f87bf967054b8616657aeecedf814",
+    "scripts/m2_radar_short_path_processing_003.py": "78d14496b07ced49ca6f6849727651fd6d73c1ac4c4ba42b255ddfef5d14c565",
+    "scripts/run_m2_radar_short_path_recovery_003.py": "66703751958178595c738b21fab5856e3a5ef514bd03a22577923405bf81bf55",
+    "scripts/validate_m2_radar_short_path_recovery_003_arcgis.py": "eda187a4dd7ced82881e9b47b46524dede3b75c72e7c347d8a9c5129fe32d3a6",
+    "tests/test_m2_radar_short_path_recovery_003.py": "a9d7f977204f78d5d2d62bb63550d8e3b418eaafff035b45cbfa1f285ad5ac43",
+    "scripts/run_m2_radar_pixel_orbit_application_001.py": "0b65fbecbeab373d8bbbf2cbbc28f8817e3c3bb08584dbf1a9720dcbb19ceb06",
+    "records/readiness/m2-radar-short-path-recovery-003-arcgis-runtime-validation.json": "994548ae74615fdd87c381b8ce62ee531785bf933155bcdc855e3dc3ede93480",
+    "records/source-gates/m2-radar-short-path-recovery-003-approval.json": "599b2425a069d607249d60d603719d25b71483137a5e58804857706be519c088",
+    "records/readiness/m2-radar-short-path-recovery-003-approval-activation.json": "658a6767be04c526d691a41cd9642797c5e8cd934db529462b5e9f262d9bc076"
+  },
+  "validation": {
+    "focused_portable_tests": {
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0
+    },
+    "full_portable_tests": {
+      "passed": 670,
+      "failed": 0,
+      "skipped": 6,
+      "total": 676
+    },
+    "installed_arcgis_runtime_validation": "pass_signature_license_and_disposable_path_only",
+    "repository_required_file_count_after_readiness": 1277,
+    "check_project": "pass",
+    "git_diff_check": "pass"
+  },
+  "assertions": {
+    "approved_combined_authority_active": true,
+    "historical_base_runner_unchanged": true,
+    "observed_260_character_boundary_preserved": true,
+    "projected_240_character_maximum_enforced": true,
+    "projected_241_character_path_blocks_before_copy_or_arcpy": true,
+    "source_order_and_route_order_frozen": true,
+    "attempt_local_receipts_distinct": true,
+    "stop_on_first_failure": true,
+    "automatic_retry_authorized": false,
+    "external_custody_accessed": false,
+    "production_arcpy_imported": false,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "real_attempt_started": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Publish the exact implementation commit to public main and require successful public CI before recording the implementation-publication gate."
+}

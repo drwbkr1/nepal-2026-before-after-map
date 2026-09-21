@@ -21,3 +21,7 @@
 /reviews/m1-aoi/review-contract.json -text -eol -diff whitespace=cr-at-eol
 /records/readiness/m2-orbit-continuation-001-activation-attempt-001-failure.json -text -eol -diff whitespace=cr-at-eol
 /records/readiness/m2-radar-pixel-orbit-application-recovery-001-implementation-readiness-attempt-001-superseded.json -text -eol -diff whitespace=cr-at-eol
+/config/qa/m2-radar-short-path-recovery-003-contract.json -text -eol -diff whitespace=cr-at-eol
+/records/source-gates/m2-radar-short-path-recovery-003-approval.json -text -eol -diff whitespace=cr-at-eol
+/records/source-gates/m2-radar-short-path-recovery-003-review-reconciliation.json -text -eol -diff whitespace=cr-at-eol
+/records/readiness/m2-radar-short-path-recovery-003-approval-activation.json -text -eol -diff whitespace=cr-at-eol

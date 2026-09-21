@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-SHORT-PATH-RECOVERY-003",
+  "prepared_at_utc": "2026-09-21T15:55:09Z",
+  "status": "proposed_inactive_local_one_decision_review",
+  "human_decision_count": 0,
+  "authority_basis": {
+    "terminal_publication_gate_ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-publication-gate.json",
+    "terminal_publication_gate_sha256": "2cbb96c4764ddacac714b7ff24a7dc5506d7a3362eefa6143f84e9b36d647518",
+    "local_recovery_design_authorized": true,
+    "publication_implementation_or_execution_authorized": false,
+    "authority_ref": "user-instruction:2026-09-21:authorize-terminal-publication-review-human-gates-and-continue"
+  },
+  "problem_statement": {
+    "consumed_attempt_id": "radar-pixel-orbit-application-recovery-002-real-001",
+    "terminal_status": "block_recovery_002_attempt_no_retry",
+    "failed_source_id": "M1-SRC-001",
+    "failed_tool": "ApplyOrbitCorrection",
+    "failure_code": "ERROR 999999",
+    "sanitized_failure_detail": "The system cannot locate the object specified.",
+    "automatic_retry_performed": false,
+    "consumed_attempt_reuse_or_retry_allowed": false
+  },
+  "evidence": {
+    "terminal_commit_sha": "f56a8ef304d6e8154e770290b6c7584a63364960",
+    "terminal_public_ci_run_id": 35620985831,
+    "diagnostic_terminal_reconciliation_sha256": "7e6f7f7ba795c6341eb0cac9e13e9c1890b1ee789941812faddc1a25f18a31bc",
+    "diagnostic_outcome_reconciliation_sha256": "249ed79b155177a61ca699067d515914673f360c4e92248debd3b0f57e9a7d0e",
+    "current_arcgis_catalog_observations": {
+      "safe_directory": "Folder",
+      "manifest_safe": "RasterDataset",
+      "orbit_eof": "File"
+    },
+    "failed_call_shape_matches_esri_example": true,
+    "failed_manifest_path_characters": 260,
+    "official_esri_apply_orbit_correction_url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-orbit-correction.html",
+    "official_esri_sar_faq_url": "https://pro.arcgis.com/en/pro-app/3.4/help/analysis/image-analyst/synthetic-aperture-radar-faq.htm",
+    "official_source_checked_at_utc": "2026-09-21T15:55:09Z",
+    "official_source_findings": [
+      "ApplyOrbitCorrection requires a raster dataset or raster layer plus an orbit file, and Esri's stand-alone example passes manifest.safe.",
+      "Esri documents a 260-character maximum file-system path length for ArcGIS Pro SAR data."
+    ]
+  },
+  "hypothesis_boundary": {
+    "classification": "post_observation_testable_path_length_hypothesis",
+    "hypothesis": "The exactly 260-character manifest path may have crossed an ArcGIS SAR processing path boundary even though Exists and Describe recognized the dataset.",
+    "historical_root_cause_established": false,
+    "manifest_vs_safe_directory_substitution_supported": false,
+    "s1d_support_failure_established": false,
+    "orbit_incompatibility_established": false,
+    "success_would_prove_historical_cause": false,
+    "failure_would_disprove_all_path_length_effects": false
+  },
+  "proposed_attempt": {
+    "attempt_id": "radar-pixel-orbit-application-short-path-recovery-003-real-001",
+    "distinct_from_all_consumed_attempts": true,
+    "external_attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\r3\\a1",
+    "external_attempt_root_characters": 57,
+    "source_subdirectory_template": "s/<one-digit-fixed-order-index>/<exact-product-id>.SAFE",
+    "source_aliases": {
+      "M1-SRC-001": "1",
+      "M1-SRC-002": "2",
+      "M1-SRC-003": "3",
+      "M1-SRC-004": "4",
+      "M1-SRC-005": "5",
+      "M1-SRC-006": "6"
+    },
+    "m1_src_001_manifest_path_characters": 148,
+    "maximum_predicted_full_path_characters": 240,
+    "path_length_policy": "Before any SAFE copy or ArcPy import, compute every predicted copied SAFE member, declared output, and attempt-control path from the exact verified inventories; stop terminally if any path exceeds 240 characters.",
+    "preserve_exact_safe_directory_names": true,
+    "preserve_exact_source_member_bytes": true,
+    "preserve_exact_source_order": [
+      "M1-SRC-001",
+      "M1-SRC-002",
+      "M1-SRC-003",
+      "M1-SRC-004",
+      "M1-SRC-005",
+      "M1-SRC-006"
+    ],
+    "preserve_exact_route_order": [
+      "PAIR-S1-ASC-R085-IW",
+      "PAIR-S1-DESC-R121-IW"
+    ],
+    "preserve_source_to_orbit_mapping": true,
+    "preserve_dem_aoi_crs_grid_mask_threshold_registration_and_route_contracts": true,
+    "maximum_processes": 1,
+    "maximum_real_attempts": 1,
+    "maximum_apply_orbit_correction_calls_per_source": 1,
+    "automatic_retry": false,
+    "stop_on_first_failure": true,
+    "collision_policy": "fail_before_external_content_read",
+    "overwrite": false,
+    "network_requests": 0,
+    "credential_actions": 0
+  },
+  "implementation_requirements": {
+    "new_contract_core_runner_and_distinct_receipt_namespace": true,
+    "historical_contracts_scripts_receipts_and_external_attempt_roots_immutable": true,
+    "terminal_cleanup_stage_and_fallback_receipts_reserved_before_external_content_read": true,
+    "path_projection_uses_verified_inventory_before_copy": true,
+    "short_path_is_not_a_reparse_point_or_subst_drive": true,
+    "external_source_orbit_and_dem_custody_read_only": true,
+    "derived_outputs_append_only": true,
+    "original_sanitized_failure_preserved": true,
+    "portable_tests": [
+      "legacy 260-character manifest path is represented as the observed boundary",
+      "240-character predicted maximum passes and 241 characters blocks before copy or ArcPy import",
+      "all six source aliases map one-to-one in frozen order",
+      "path traversal, reparse points, collisions, and alternate roots fail closed",
+      "distinct receipts cannot overwrite any consumed-attempt receipt",
+      "first source failure stops all later sources and both routes",
+      "secret and absolute-path exposure is sanitized"
+    ],
+    "installed_arcgis_runtime_test": "Disposable-input signature and license validation only; no project data, external custody, ApplyOrbitCorrection, or other geoprocessing.",
+    "public_ci_required_before_real_attempt": true,
+    "final_no_content_preflight_required": true
+  },
+  "single_owner_decision_scope": {
+    "public_default_branch_publication_of_packet_and_implementation": true,
+    "public_ci_and_post_ci_reconciliation": true,
+    "bounded_implementation_and_reversible_corrections": true,
+    "portable_and_installed_arcgis_disposable_tests": true,
+    "one_final_no_content_preflight": true,
+    "one_fresh_short_path_real_attempt": true,
+    "terminal_reconciliation_and_sanitized_publication": true,
+    "no_intermediate_owner_reconfirmation": true
+  },
+  "not_authorized_by_approval": [
+    "reuse, resume, retry, reconstruction, deletion, or mutation of a consumed attempt or receipt",
+    "a second short-path attempt or automatic retry",
+    "source, date, product, orbit, DEM, AOI, CRS, grid, mask, threshold, registration, route, or scientific-predicate substitution",
+    "credential, network, account, terms, installation, or UAC action",
+    "baseline admission, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication",
+    "a historical-root-cause claim based only on success or failure of the short-path attempt"
+  ],
+  "result_semantics": {
+    "path_precheck_failure": "terminal block before copy, ArcPy import, or geoprocessing; no retry",
+    "apply_orbit_correction_failure": "terminal block on the first failed source; no later source or route and no retry",
+    "full_pass": "six exact sources and two exact routes pass the unchanged QA-only processing contracts",
+    "full_pass_does_not_establish": [
+      "historical root cause",
+      "event-related change",
+      "geomorphic interpretation",
+      "event attribution",
+      "derived-pixel publication authority",
+      "scientific publication authority"
+    ]
+  },
+  "next_action": "Owner reviews this one combined decision. Approval would cover publication, implementation, validation, one real attempt, terminal reconciliation, and sanitized terminal publication without intermediate confirmation; until approval, no publication, implementation, ArcPy, external-custody read, copy, or geoprocessing is released."
+}

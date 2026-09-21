@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-SHORT-PATH-RECOVERY-003-ARCGIS-RUNTIME-VALIDATION",
+  "verified_at_utc": "2026-09-21T16:55:00Z",
+  "status": "pass_installed_arcgis_runtime_signature_license_and_disposable_path_validation",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "ArcInfo",
+    "image_analyst_status": "Available",
+    "spatial_analyst_status": "Available",
+    "python_executable": "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\envs\\arcgispro-py3\\python.exe"
+  },
+  "bindings": {
+    "recovery_contract_sha256": "8d1edd44a3a096899094c72844736c3411272289edf07cc759c09e7825a33e7c",
+    "recovery_core_sha256": "c6183201d3aaf960d8bd4e5de5fdb8f36d2f87bf967054b8616657aeecedf814",
+    "recovery_runner_sha256": "66703751958178595c738b21fab5856e3a5ef514bd03a22577923405bf81bf55",
+    "arcgis_validator_sha256": "eda187a4dd7ced82881e9b47b46524dede3b75c72e7c347d8a9c5129fe32d3a6",
+    "portable_test_sha256": "a9d7f977204f78d5d2d62bb63550d8e3b418eaafff035b45cbfa1f285ad5ac43",
+    "base_contract_sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+    "base_core_sha256": "fd192878acf33e2c73eeeba1ec42865eac48dfc5742b3ae4cf54b51de42755ba",
+    "base_runner_sha256": "0b65fbecbeab373d8bbbf2cbbc28f8817e3c3bb08584dbf1a9720dcbb19ceb06",
+    "short_path_processing_sha256": "78d14496b07ced49ca6f6849727651fd6d73c1ac4c4ba42b255ddfef5d14c565"
+  },
+  "checks": {
+    "contract_loaded_and_authority_bound": true,
+    "apply_orbit_correction_callable": true,
+    "apply_orbit_correction_documentation_mentions_radar_and_orbit": true,
+    "image_analyst_license_available": true,
+    "spatial_analyst_license_available": true,
+    "disposable_240_character_path_constructed": true
+  },
+  "assertions": {
+    "disposable_inputs_only": true,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "extension_checked_out": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "production_attempt_created": false,
+    "baseline_or_change_analysis_executed": false,
+    "scientific_result_established": false
+  }
+}

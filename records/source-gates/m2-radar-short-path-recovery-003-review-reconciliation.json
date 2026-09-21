@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "reconciliation_id": "NEPAL-M2-RADAR-SHORT-PATH-RECOVERY-003-REVIEW-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-21T16:23:25Z",
+  "status": "reconciled_exact_attested_single_owner_decision",
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
+    "approval_sha256": "599b2425a069d607249d60d603719d25b71483137a5e58804857706be519c088",
+    "proposal_sha256": "c070f8f90af63d366744d56e938a1b857e5a3efb4b421683ff89265f64599299",
+    "review_bundle_sha256": "a1bcfa69bf70a43866b78cff5fb3c99a3825204f098f6c96c06b1b6bd59a5693"
+  },
+  "assertions": {
+    "attestation_recorded": true,
+    "human_decision_count": 1,
+    "single_authority_envelope": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "implementation_or_execution_performed": false,
+    "arcpy_invoked": false,
+    "external_custody_accessed": false,
+    "geoprocessing_invoked": false
+  }
+}

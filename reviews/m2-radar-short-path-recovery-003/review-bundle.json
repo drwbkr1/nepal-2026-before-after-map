@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-SHORT-PATH-RECOVERY-003-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-21T15:55:09Z",
+  "status": "local_zero_decision_one_combined_owner_decision_pending",
+  "human_decision_count": 0,
+  "candidate_identity": {
+    "proposal_ref": "contracts/milestone-002-radar-short-path-recovery-003-proposal.json",
+    "proposal_sha256": "c070f8f90af63d366744d56e938a1b857e5a3efb4b421683ff89265f64599299"
+  },
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-radar-short-path-recovery-003-proposal.json",
+      "sha256": "c070f8f90af63d366744d56e938a1b857e5a3efb4b421683ff89265f64599299",
+      "role": "exact_machine_readable_proposal"
+    },
+    {
+      "path": "docs/M2_RADAR_SHORT_PATH_RECOVERY_003_REVIEW.md",
+      "sha256": "3c2342a89e8e38fb21e14fd4a35b38de87a7d416f61a6e8663798f13412a9349",
+      "role": "human_readable_decision_brief"
+    },
+    {
+      "path": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-publication-gate.json",
+      "sha256": "2cbb96c4764ddacac714b7ff24a7dc5506d7a3362eefa6143f84e9b36d647518",
+      "role": "published_terminal_evidence_gate"
+    }
+  ],
+  "official_technical_sources": [
+    {
+      "publisher": "Esri",
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-orbit-correction.html",
+      "use": "ApplyOrbitCorrection parameter types and manifest.safe example"
+    },
+    {
+      "publisher": "Esri",
+      "url": "https://pro.arcgis.com/en/pro-app/3.4/help/analysis/image-analyst/synthetic-aperture-radar-faq.htm",
+      "use": "documented 260-character ArcGIS Pro SAR file-system path limit"
+    }
+  ],
+  "decision_item": {
+    "decision_id": "M2-RADAR-SHORT-PATH-RECOVERY-003-COMBINED-AUTHORITY",
+    "question": "Approve the exact bounded short-path recovery-003 proposal as one authority envelope through sanitized terminal publication?",
+    "recommendation": "approve",
+    "reason": "The failed manifest path is exactly at Esri's documented SAR path limit, while the manifest and orbit are otherwise recognized. The proposal tests the narrow path-length hypothesis without changing any source, orbit, DEM, AOI, grid, mask, threshold, registration, route, or scientific predicate.",
+    "approval_effect": "One approval covers packet and implementation publication, implementation and bounded corrections, portable and disposable ArcGIS-runtime tests, public CI, one final no-content preflight, at most one fresh real attempt, terminal reconciliation, and sanitized terminal publication with no intermediate owner reconfirmation.",
+    "rejection_effect": "No publication, implementation, ArcPy, external-custody access, copy, geoprocessing, or new attempt occurs."
+  },
+  "response_method": {
+    "mode": "ordinary_chat_authorization",
+    "formal_response_form_required": false,
+    "attestation_required": true,
+    "required_bindings": [
+      "bundle SHA-256",
+      "proposal SHA-256"
+    ]
+  },
+  "claim_boundary": {
+    "historical_root_cause_established": false,
+    "corrected_call_established": false,
+    "radar_recovery_readiness_established": false,
+    "baseline_or_change_analysis_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

@@ -4781,6 +4781,106 @@
       },
       "next_dependency": null,
       "disposition": "pass_diagnostic_only"
+    },
+    {
+      "id": "M2-RADAR-SHORT-PATH-RECOVERY-003-REVIEW",
+      "purpose": "Review one exact combined authority envelope for public packet and implementation publication, bounded implementation, validation, one fresh short-path attempt, reconciliation, and sanitized terminal publication.",
+      "depends_on": [
+        "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "complete",
+      "inputs": [
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-publication-gate.json",
+        "contracts/milestone-002-radar-short-path-recovery-003-proposal.json",
+        "reviews/m2-radar-short-path-recovery-003/review-bundle.json",
+        "docs/M2_RADAR_SHORT_PATH_RECOVERY_003_REVIEW.md",
+        "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
+        "records/source-gates/m2-radar-short-path-recovery-003-review-reconciliation.json",
+        "records/readiness/m2-radar-short-path-recovery-003-approval-activation.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-radar-short-path-recovery-003-approval.json"
+      ],
+      "gates": {
+        "human_decision_count": 1,
+        "owner_combined_decision": "approved_exact",
+        "ordinary_chat_authorization_permitted": true,
+        "formal_response_form_required": false,
+        "intermediate_owner_reconfirmation_required": false,
+        "publication_authorized": true,
+        "implementation_authorized": true,
+        "external_custody_access_authorized": true,
+        "arcpy_or_geoprocessing_authorized": true,
+        "new_real_attempt_authorized": true
+      },
+      "exit_condition_delta": {
+        "expected": [
+          "one exact attested owner decision bound to proposal and bundle hashes"
+        ],
+        "observed": [
+          "one exact attested owner decision bound to proposal and bundle hashes"
+        ],
+        "decision_value": "approved",
+        "rationale": "The exact combined approval persists across the unchanged bounded sequence through sanitized terminal publication; no intermediate reconfirmation is required."
+      },
+      "next_dependency": "M2-RADAR-SHORT-PATH-RECOVERY-003"
+    },
+    {
+      "id": "M2-RADAR-SHORT-PATH-RECOVERY-003",
+      "purpose": "Under one inherited exact owner decision, publish, implement, test, validate in public CI, run one final no-content preflight, execute at most one fresh short-path recovery attempt, reconcile it, and publish sanitized terminal evidence.",
+      "depends_on": [
+        "M2-RADAR-SHORT-PATH-RECOVERY-003-REVIEW"
+      ],
+      "action_class": "data_processing",
+      "human_gate": false,
+      "status": "in_progress",
+      "inputs": [
+        "contracts/milestone-002-radar-short-path-recovery-003-proposal.json",
+        "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
+        "records/source-gates/m2-radar-short-path-recovery-003-review-reconciliation.json",
+        "records/readiness/m2-radar-short-path-recovery-003-approval-activation.json",
+        "config/qa/m2-radar-short-path-recovery-003-contract.json",
+        "scripts/m2_radar_short_path_recovery_003_core.py",
+        "scripts/run_m2_radar_short_path_recovery_003.py",
+        "scripts/validate_m2_radar_short_path_recovery_003_arcgis.py",
+        "tests/test_m2_radar_short_path_recovery_003.py",
+        "records/readiness/m2-radar-short-path-recovery-003-implementation-readiness.json",
+        "records/readiness/m2-radar-short-path-recovery-003-arcgis-runtime-validation.json"
+      ],
+      "outputs": [
+        "records/readiness/m2-radar-short-path-recovery-003-implementation-readiness.json",
+        "records/readiness/m2-radar-short-path-recovery-003-arcgis-runtime-validation.json",
+        "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-gate.json",
+        "records/readiness/m2-radar-short-path-recovery-003-gate-state-publication.json",
+        "records/readiness/m2-radar-short-path-recovery-003-final-preflight.json",
+        "records/processing/m2-radar-short-path-recovery-003-terminal-reconciliation.json",
+        "records/processing/m2-radar-short-path-recovery-003-outcome-reconciliation.json",
+        "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-gate.json"
+      ],
+      "gates": {
+        "inherited_owner_authority": "pass_exact_combined_approval",
+        "public_default_branch_ci": "pending",
+        "final_no_content_preflight": "pending",
+        "maximum_real_attempts": 1,
+        "real_attempts_started": 0,
+        "automatic_retry": false,
+        "stop_on_first_failure": true,
+        "intermediate_owner_reconfirmation_required": false,
+        "local_portable_tests": "pass_676_total_6_intentional_skips",
+        "installed_arcgis_disposable_validation": "pass_signature_license_no_geoprocessing",
+        "implementation_readiness_sha256": "cfa95c96adde617979aa8817c12a6884f189041ea82e5f4debd11f8332e6d13d"
+      },
+      "exit_condition_delta": {
+        "expected": [
+          "one terminal short-path recovery result with immutable reconciliation and sanitized publication"
+        ],
+        "observed": [],
+        "decision_value": "in_progress",
+        "rationale": "The owner-approved envelope is active. Implementation and public gates proceed without another human decision; one real attempt remains conditional on all gates."
+      },
+      "next_dependency": null
     }
   ],
   "path_efficiency": {
@@ -4837,8 +4937,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW",
-    "next_action": "Review the terminal read-only diagnostic outcome. The distinct process is consumed and cannot be resumed, reused, or retried; any further diagnostic, path, geoprocessing, or radar action requires separately reviewed authority.",
+    "current_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION",
+    "next_action": "Publish and validate the approved short-path recovery-003 implementation, portable tests, and installed ArcGIS disposable signature and license test. Continue through the exact public CI gates under inherited authority; do not access external custody or start the real attempt until both public gates and the final no-content preflight pass.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4886,9 +4986,10 @@
       "The receipt-recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, corpus, new attempt, project-data access, radar processing, or scientific action is released.",
       "The radar recovery-002 packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, new attempt, radar processing, baseline, change analysis, attribution, or scientific action is released.",
       "The ApplyOrbitCorrection diagnostic packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline, change analysis, attribution, derived-pixel publication, or scientific action is released.",
-      "The diagnostic receipt-persistence recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, both zero-byte reserved receipts remain immutable, and no implementation, ArcPy, data access, new process, retry, reconstruction, geoprocessing, radar processing, or scientific action is released."
+      "The diagnostic receipt-persistence recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, both zero-byte reserved receipts remain immutable, and no implementation, ArcPy, data access, new process, retry, reconstruction, geoprocessing, radar processing, or scientific action is released.",
+      "The exact short-path recovery-003 packet is approved as one bounded authority envelope through sanitized terminal publication. Continue unchanged implementation, public CI gates, one final no-content preflight, at most one fresh real attempt, reconciliation, and terminal publication without intermediate owner reconfirmation. Never retry or broaden into baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication."
     ],
-    "parallel_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW",
-    "parallel_next_action": "Review the terminal read-only diagnostic outcome. The distinct process is consumed and cannot be resumed, reused, or retried; any further diagnostic, path, geoprocessing, or radar action requires separately reviewed authority."
+    "parallel_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION",
+    "parallel_next_action": "Publish and validate the approved short-path recovery-003 implementation, portable tests, and installed ArcGIS disposable signature and license test. Continue through the exact public CI gates under inherited authority; do not access external custody or start the real attempt until both public gates and the final no-content preflight pass."
   }
 }
