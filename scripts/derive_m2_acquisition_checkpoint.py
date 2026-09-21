@@ -361,7 +361,7 @@ RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_IMPLEMENTATION_CHECKPOINT = {
 }
 RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_EXECUTION_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
-    "next_action": "Publish and validate the exact recovery-004 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order attempt begin; stop on the first failure and never retry.",
+    "next_action": "Run the single authorized final no-content preflight. Stop on failure; only on pass may the one fresh fixed-order recovery-004 attempt read exact custody and invoke the frozen radar route. Never retry.",
 }
 RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_TERMINAL_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",

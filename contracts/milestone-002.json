@@ -4971,7 +4971,8 @@
         "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-review-reconciliation.json",
         "records/readiness/m2-radar-raster-function-call-shape-recovery-004-approval-activation.json",
         "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-gate.json",
-        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-reconciliation.json"
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-reconciliation.json",
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-gate-state-publication.json"
       ],
       "outputs": [
         "config/qa/m2-radar-raster-function-call-shape-recovery-004-contract.json",
@@ -4996,7 +4997,9 @@
         "local_portable_tests": "pass_695_total_6_intentional_skips",
         "installed_arcgis_signature_validation": "pass_six_interfaces_no_geoprocessing",
         "implementation_readiness_sha256": "0d72249ede3cb733cc462fccdd5b50c61a603ef80c8aa16f8523eed54ad47975",
-        "implementation_publication_gate_sha256": "5d7772e8bb6548248017e0be219abd37de1702d519f6d86bc4c29e5f8580c8c0"
+        "implementation_publication_gate_sha256": "5d7772e8bb6548248017e0be219abd37de1702d519f6d86bc4c29e5f8580c8c0",
+        "execution_gate_publication": "pass_commit_1bc8a20e956cea1cdb3a48e6c50a4a6ece7c7702_run_35639072351",
+        "gate_state_publication_sha256": "78d75e256cb38eb6c7324af010bac619c4edc9008200a304a5c09a04756ad02a"
       },
       "exit_condition_delta": {
         "expected": [
@@ -5064,7 +5067,7 @@
   },
   "handoff": {
     "current_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
-    "next_action": "Publish and validate the exact recovery-004 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order attempt begin; stop on the first failure and never retry.",
+    "next_action": "Run the single authorized final no-content preflight. Stop on failure; only on pass may the one fresh fixed-order recovery-004 attempt read exact custody and invoke the frozen radar route. Never retry.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -5118,6 +5121,6 @@
       "The exact recovery-004 packet is approved as one bounded authority envelope through sanitized terminal publication. Implementation and validation may continue without intermediate reconfirmation, but project-data or external-custody reads, ArcPy processing, geoprocessing, and the one fresh attempt remain gated on successful public CI and the final no-content preflight. Never retry or broaden into baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication."
     ],
     "parallel_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
-    "parallel_next_action": "Publish and validate the exact recovery-004 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order attempt begin; stop on the first failure and never retry."
+    "parallel_next_action": "Run the single authorized final no-content preflight. Stop on failure; only on pass may the one fresh fixed-order recovery-004 attempt read exact custody and invoke the frozen radar route. Never retry."
   }
 }
