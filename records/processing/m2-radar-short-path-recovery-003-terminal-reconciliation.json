@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-21T17:09:42Z",
+  "status": "block_short_path_recovery_003_source_001_after_orbit_call_no_retry",
+  "disposition": "block",
+  "attempt_id": "radar-pixel-orbit-application-short-path-recovery-003-real-001",
+  "attempt_consumed": true,
+  "bindings": {
+    "approval_sha256": "599b2425a069d607249d60d603719d25b71483137a5e58804857706be519c088",
+    "contract_sha256": "8d1edd44a3a096899094c72844736c3411272289edf07cc759c09e7825a33e7c",
+    "implementation_publication_gate_sha256": "ebbae65b2ffd02e0142da86f1c7680d9e664574a7fe336d2dedbe6c11001e311",
+    "gate_state_publication_sha256": "7489a0eb233a5697d358d6d86cd96c74b992efa94f34778621998c4b8168e97f",
+    "final_preflight_ref": "records/readiness/m2-radar-short-path-recovery-003-final-preflight.json",
+    "final_preflight_sha256": "e62ee783c55d952cd0bbaa3c9b43f4d6a5b30adf5f19a163b3ff6f4e80a1eef3",
+    "external_receipts": {
+      "started.json": {
+        "size_bytes": 1897,
+        "sha256": "bcd37610dd7b1af935d92eba861db581ffeb6a661754935016173e22a3e4ccd3"
+      },
+      "terminal-reservation.json": {
+        "size_bytes": 310,
+        "sha256": "cb5f18eedceb87f61633665938463216cf4d0274526fb3ba4562c6c8d199f636"
+      },
+      "cleanup-reservation.json": {
+        "size_bytes": 308,
+        "sha256": "47be94a881f51d82acdd9015358997e90a7644f29c2b6ce5bd7df6136be0149e"
+      },
+      "fallback.jsonl": {
+        "size_bytes": 360,
+        "sha256": "264fb4b0d6d6be23bfc4a698ffa9dd8e07b2a7d86c204bdb6572c4b2bf6b6273"
+      },
+      "stages.jsonl": {
+        "size_bytes": 2105,
+        "sha256": "1643f3b52a6566d5f19e156243f191a57d0bf449904beb4e3be15ce971ecd3f9"
+      },
+      "terminal.json": {
+        "size_bytes": 3613,
+        "sha256": "497227f4594721b54cb05695059450fcdd16854ed8ff1e09ba7614e29a21b1fe"
+      },
+      "cleanup.json": {
+        "size_bytes": 627,
+        "sha256": "c5ce308b2f3e5089111e504536e33b19ed55dafa78ae9c5819157b86790515a5"
+      },
+      "receipts/sources/m1-src-001-started.json": {
+        "size_bytes": 511,
+        "sha256": "ee90c00d8faad9795d7fafa2e8163f7e17046e8ffe5b796b7a30704deda08d25"
+      },
+      "receipts/sources/m1-src-001-terminal.json": {
+        "size_bytes": 756,
+        "sha256": "739a111b3e67cecafe2d03bbbe03584ac66bbd3a07db1e40c16e79ea95c0f9bf"
+      }
+    }
+  },
+  "execution_result": {
+    "path_projection": {
+      "status": "pass_all_projected_paths_at_or_below_240",
+      "projected_path_count": 269,
+      "maximum_projected_path_characters": 237,
+      "maximum_allowed_path_characters": 240,
+      "longest_path_kind": "verified_safe_member",
+      "absolute_paths_recorded": false
+    },
+    "arcgis_import_completed": true,
+    "product_info": "ArcInfo",
+    "image_analyst_checkout_completed": true,
+    "spatial_checkout_completed": true,
+    "dem_mosaic_completed": true,
+    "analysis_support_completed": true,
+    "source_ids_attempted": [
+      "M1-SRC-001"
+    ],
+    "source_ids_not_started": [
+      "M1-SRC-002",
+      "M1-SRC-003",
+      "M1-SRC-004",
+      "M1-SRC-005",
+      "M1-SRC-006"
+    ],
+    "route_ids_attempted": [],
+    "stopped_source_id": "M1-SRC-001",
+    "failure_type": "TypeError",
+    "failure_code": "unexpected_processing_failure",
+    "failure_message": "RemoveThermalNoise() takes from 1 to 2 positional arguments but 3 were given",
+    "cleanup_status": "cleanup_completed",
+    "external_custody_unchanged": true
+  },
+  "call_boundary_observation": {
+    "apply_orbit_correction_returned_before_failure": "inferred_from_exact_control_flow_and_next_call_TypeError",
+    "apply_orbit_correction_success_claim_limited_to_no_exception_return_for_M1_SRC_001": true,
+    "remove_thermal_noise_namespace": "arcpy.ia.RemoveThermalNoise",
+    "installed_namespace_signature": "(in_radar_data, polarization_bands='#') -> Raster",
+    "frozen_call_shape": "RemoveThermalNoise(manifest, output_path, 'VV;VH')",
+    "observed_failure": "three positional arguments were passed to a one-or-two-argument raster-function interface",
+    "thermal_noise_output_created": false,
+    "historical_path_root_cause_established": false
+  },
+  "assertions": {
+    "exact_short_attempt_root_used": true,
+    "path_projection_completed_before_copy_or_arcpy": true,
+    "all_projected_paths_at_or_below_240": true,
+    "observed_maximum_projected_path_characters": 237,
+    "first_source_failure_stopped_later_sources_and_routes": true,
+    "automatic_retry_performed": false,
+    "second_attempt_created": false,
+    "consumed_attempt_reused_or_retried": false,
+    "source_orbit_or_dem_custody_mutated": false,
+    "network_request_performed_by_runner": false,
+    "credential_value_read": false,
+    "baseline_admission_authorized": false,
+    "change_analysis_executed": false,
+    "interpretation_or_attribution_executed": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false
+  },
+  "next_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW"
+}

@@ -698,16 +698,16 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
+    "checkpoint_id": "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Publish and validate the exact short-path recovery-003 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order real attempt begin; stop on the first failure and never retry."
+    "next_action": "Review the sanitized terminal short-path recovery-003 evidence. The attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain outside this authority."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
+      "checkpoint_id": "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
       "authority_ref": "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
-      "next_action": "Publish and validate the exact short-path recovery-003 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order real attempt begin; stop on the first failure and never retry."
+      "next_action": "Review the sanitized terminal short-path recovery-003 evidence. The attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain outside this authority."
     }
   ],
   "human_gates": {

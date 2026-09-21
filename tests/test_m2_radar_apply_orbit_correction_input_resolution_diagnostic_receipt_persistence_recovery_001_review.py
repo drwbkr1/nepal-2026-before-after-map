@@ -277,7 +277,8 @@ class M2DiagnosticReceiptPersistenceRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(review["gates"]["human_decision_count"], 1)
         self.assertFalse(review["gates"]["intermediate_owner_reconfirmation_required"])
         self.assertFalse(recovery["human_gate"])
-        self.assertEqual(recovery["status"], "in_progress")
+        self.assertEqual(recovery["status"], "complete")
+        self.assertEqual(recovery["disposition"], "block")
         self.assertEqual(recovery["gates"]["inherited_owner_authority"], "pass_exact_combined_approval")
         self.assertFalse(recovery["gates"]["intermediate_owner_reconfirmation_required"])
         self.assertIn(

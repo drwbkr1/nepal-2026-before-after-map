@@ -4835,7 +4835,7 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "contracts/milestone-002-radar-short-path-recovery-003-proposal.json",
         "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
@@ -4850,7 +4850,10 @@
         "records/readiness/m2-radar-short-path-recovery-003-arcgis-runtime-validation.json",
         "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-gate.json",
         "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-reconciliation.json",
-        "records/readiness/m2-radar-short-path-recovery-003-gate-state-publication.json"
+        "records/readiness/m2-radar-short-path-recovery-003-gate-state-publication.json",
+        "records/readiness/m2-radar-short-path-recovery-003-final-preflight.json",
+        "records/processing/m2-radar-short-path-recovery-003-terminal-reconciliation.json",
+        "records/processing/m2-radar-short-path-recovery-003-outcome-reconciliation.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-short-path-recovery-003-implementation-readiness.json",
@@ -4865,9 +4868,9 @@
       "gates": {
         "inherited_owner_authority": "pass_exact_combined_approval",
         "public_default_branch_ci": "pass_implementation_commit_b3ca0ddd985d9d72216dc957440095c7d0935fe1_run_35628942719",
-        "final_no_content_preflight": "pending",
+        "final_no_content_preflight": "pass_once",
         "maximum_real_attempts": 1,
-        "real_attempts_started": 0,
+        "real_attempts_started": 1,
         "automatic_retry": false,
         "stop_on_first_failure": true,
         "intermediate_owner_reconfirmation_required": false,
@@ -4876,17 +4879,26 @@
         "implementation_readiness_sha256": "cfa95c96adde617979aa8817c12a6884f189041ea82e5f4debd11f8332e6d13d",
         "implementation_publication_gate_sha256": "ebbae65b2ffd02e0142da86f1c7680d9e664574a7fe336d2dedbe6c11001e311",
         "execution_gate_publication": "pass_commit_6faa4bb5c6941b616c2866e1085c3f73c8af29af_run_35629396993",
-        "gate_state_publication_sha256": "7489a0eb233a5697d358d6d86cd96c74b992efa94f34778621998c4b8168e97f"
+        "gate_state_publication_sha256": "7489a0eb233a5697d358d6d86cd96c74b992efa94f34778621998c4b8168e97f",
+        "attempt_consumed": true,
+        "stopped_source_id": "M1-SRC-001",
+        "later_sources_or_routes_started": false,
+        "terminal_reconciliation_sha256": "b8770861ea87d7d36d04e7326699dfda220f4681e4b0a82da9085ac551fa46a4",
+        "outcome_reconciliation_sha256": "3d3cf190abd41d6ba8302908e71aad153ea8bb5a3e2fcdbd362dc13330755a90",
+        "sanitized_terminal_publication": "pending"
       },
       "exit_condition_delta": {
         "expected": [
           "one terminal short-path recovery result with immutable reconciliation and sanitized publication"
         ],
-        "observed": [],
-        "decision_value": "in_progress",
-        "rationale": "The owner-approved envelope is active. Implementation and public gates proceed without another human decision; one real attempt remains conditional on all gates."
+        "observed": [
+          "one terminal short-path recovery block after M1-SRC-001 and no retry"
+        ],
+        "decision_value": "block",
+        "rationale": "The exact path projection passed and ApplyOrbitCorrection returned for M1-SRC-001, then the frozen RemoveThermalNoise call shape failed. The attempt is consumed; no retry or downstream scientific action is released."
       },
-      "next_dependency": null
+      "next_dependency": null,
+      "disposition": "block"
     }
   ],
   "path_efficiency": {
@@ -4943,8 +4955,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
-    "next_action": "Publish and validate the exact short-path recovery-003 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order real attempt begin; stop on the first failure and never retry.",
+    "current_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
+    "next_action": "Review the sanitized terminal short-path recovery-003 evidence. The attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain outside this authority.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4993,9 +5005,10 @@
       "The radar recovery-002 packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, new attempt, radar processing, baseline, change analysis, attribution, or scientific action is released.",
       "The ApplyOrbitCorrection diagnostic packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline, change analysis, attribution, derived-pixel publication, or scientific action is released.",
       "The diagnostic receipt-persistence recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, both zero-byte reserved receipts remain immutable, and no implementation, ArcPy, data access, new process, retry, reconstruction, geoprocessing, radar processing, or scientific action is released.",
-      "The exact short-path recovery-003 packet is approved as one bounded authority envelope through sanitized terminal publication. Continue unchanged implementation, public CI gates, one final no-content preflight, at most one fresh real attempt, reconciliation, and terminal publication without intermediate owner reconfirmation. Never retry or broaden into baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication."
+      "The exact short-path recovery-003 packet is approved as one bounded authority envelope through sanitized terminal publication. Continue unchanged implementation, public CI gates, one final no-content preflight, at most one fresh real attempt, reconciliation, and terminal publication without intermediate owner reconfirmation. Never retry or broaden into baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication.",
+      "Short-path recovery-003 is terminal and consumed. All 269 projected paths were at or below 240 characters (maximum 237); ArcGIS setup, DEM/support creation, and the M1-SRC-001 orbit-correction call completed before the next frozen arcpy.ia.RemoveThermalNoise call failed on its namespace-specific signature. No later source or route started, no retry occurred, external custody remained unchanged, and no historical-root-cause, radar-readiness, baseline, change, attribution, derived-pixel, or scientific claim is established."
     ],
-    "parallel_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
-    "parallel_next_action": "Publish and validate the exact short-path recovery-003 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order real attempt begin; stop on the first failure and never retry."
+    "parallel_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
+    "parallel_next_action": "Review the sanitized terminal short-path recovery-003 evidence. The attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain outside this authority."
   }
 }

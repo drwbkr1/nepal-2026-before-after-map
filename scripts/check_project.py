@@ -1391,6 +1391,9 @@ REQUIRED = [
     "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-gate.json",
     "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-reconciliation.json",
     "records/readiness/m2-radar-short-path-recovery-003-gate-state-publication.json",
+    "records/readiness/m2-radar-short-path-recovery-003-final-preflight.json",
+    "records/processing/m2-radar-short-path-recovery-003-terminal-reconciliation.json",
+    "records/processing/m2-radar-short-path-recovery-003-outcome-reconciliation.json",
     "config/qa/m2-radar-short-path-recovery-003-contract.json",
     "scripts/m2_radar_short_path_recovery_003_core.py",
     "scripts/m2_radar_short_path_processing_003.py",
@@ -17073,6 +17076,9 @@ def main() -> None:
     short_path_implementation_gate_ref = "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-gate.json"
     short_path_implementation_reconciliation_ref = "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-reconciliation.json"
     short_path_gate_state_ref = "records/readiness/m2-radar-short-path-recovery-003-gate-state-publication.json"
+    short_path_preflight_ref = "records/readiness/m2-radar-short-path-recovery-003-final-preflight.json"
+    short_path_terminal_ref = "records/processing/m2-radar-short-path-recovery-003-terminal-reconciliation.json"
+    short_path_outcome_ref = "records/processing/m2-radar-short-path-recovery-003-outcome-reconciliation.json"
     short_path_proposal = json.loads((ROOT / short_path_proposal_ref).read_text(encoding="utf-8"))
     short_path_bundle = json.loads((ROOT / short_path_bundle_ref).read_text(encoding="utf-8"))
     short_path_approval = json.loads((ROOT / short_path_approval_ref).read_text(encoding="utf-8"))
@@ -17084,6 +17090,9 @@ def main() -> None:
     short_path_implementation_gate = json.loads((ROOT / short_path_implementation_gate_ref).read_text(encoding="utf-8"))
     short_path_implementation_reconciliation = json.loads((ROOT / short_path_implementation_reconciliation_ref).read_text(encoding="utf-8"))
     short_path_gate_state = json.loads((ROOT / short_path_gate_state_ref).read_text(encoding="utf-8"))
+    short_path_preflight = json.loads((ROOT / short_path_preflight_ref).read_text(encoding="utf-8"))
+    short_path_terminal = json.loads((ROOT / short_path_terminal_ref).read_text(encoding="utf-8"))
+    short_path_outcome = json.loads((ROOT / short_path_outcome_ref).read_text(encoding="utf-8"))
     short_path_review_unit = m2_units.get("M2-RADAR-SHORT-PATH-RECOVERY-003-REVIEW", {})
     short_path_recovery_unit = m2_units.get("M2-RADAR-SHORT-PATH-RECOVERY-003", {})
     if (
@@ -17165,6 +17174,30 @@ def main() -> None:
         or short_path_gate_state.get("bindings", {}).get("implementation_publication_gate_sha256") != sha256(short_path_implementation_gate_ref)
         or short_path_gate_state.get("bindings", {}).get("implementation_publication_reconciliation_sha256") != sha256(short_path_implementation_reconciliation_ref)
         or short_path_gate_state.get("assertions", {}).get("fresh_attempt_process_started") is not False
+        or short_path_preflight.get("status") != "pass_final_no_content_preflight_one_fresh_attempt_released"
+        or short_path_preflight.get("attempt_id") != "radar-pixel-orbit-application-short-path-recovery-003-real-001"
+        or short_path_preflight.get("assertions", {}).get("external_custody_content_read") is not False
+        or short_path_preflight.get("assertions", {}).get("fresh_attempt_process_started") is not False
+        or short_path_terminal.get("status") != "block_short_path_recovery_003_source_001_after_orbit_call_no_retry"
+        or short_path_terminal.get("disposition") != "block"
+        or short_path_terminal.get("attempt_consumed") is not True
+        or short_path_terminal.get("execution_result", {}).get("stopped_source_id") != "M1-SRC-001"
+        or short_path_terminal.get("execution_result", {}).get("source_ids_attempted") != ["M1-SRC-001"]
+        or short_path_terminal.get("execution_result", {}).get("route_ids_attempted") != []
+        or short_path_terminal.get("execution_result", {}).get("external_custody_unchanged") is not True
+        or short_path_terminal.get("execution_result", {}).get("failure_type") != "TypeError"
+        or short_path_terminal.get("execution_result", {}).get("failure_message") != "RemoveThermalNoise() takes from 1 to 2 positional arguments but 3 were given"
+        or short_path_terminal.get("call_boundary_observation", {}).get("historical_path_root_cause_established") is not False
+        or short_path_terminal.get("assertions", {}).get("automatic_retry_performed") is not False
+        or short_path_terminal.get("assertions", {}).get("second_attempt_created") is not False
+        or short_path_outcome.get("status") != short_path_terminal.get("status")
+        or short_path_outcome.get("bindings", {}).get("terminal_reconciliation_sha256") != sha256(short_path_terminal_ref)
+        or short_path_outcome.get("assertions", {}).get("radar_recovery_readiness_established") is not False
+        or short_path_recovery_unit.get("disposition") != "block"
+        or short_path_recovery_unit.get("gates", {}).get("real_attempts_started") != 1
+        or short_path_recovery_unit.get("gates", {}).get("attempt_consumed") is not True
+        or short_path_recovery_unit.get("gates", {}).get("terminal_reconciliation_sha256") != sha256(short_path_terminal_ref)
+        or short_path_recovery_unit.get("gates", {}).get("outcome_reconciliation_sha256") != sha256(short_path_outcome_ref)
         or short_path_review_unit.get("status") != "complete"
         or short_path_review_unit.get("human_gate") is not True
         or short_path_review_unit.get("gates", {}).get("owner_combined_decision") != "approved_exact"
