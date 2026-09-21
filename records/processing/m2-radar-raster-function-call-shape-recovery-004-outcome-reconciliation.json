@@ -7,7 +7,7 @@
   "attempt_id": "radar-pixel-orbit-application-raster-function-recovery-004-real-001",
   "bindings": {
     "terminal_reconciliation_ref": "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json",
-    "terminal_reconciliation_sha256": "7780af6bf4cf69eb1004beccce78a4561e44ebc6bfd2291f0af3192c128f678e",
+    "terminal_reconciliation_sha256": "1f3e278e38abd2259922fb6b5aad0f7395424a41708303c9c73de422ee773d6a",
     "source_terminal_receipt_sha256": "fa75b00e9485067625bef6ca65dcbbe41038ac2f07d3d94e9d50bb47b3386531"
   },
   "outcome": {

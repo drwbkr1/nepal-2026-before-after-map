@@ -5008,8 +5008,8 @@
         "stopped_source_id": "M1-SRC-001",
         "stopped_tool": "ApplyGeometricTerrainCorrection_gamma",
         "later_sources_or_routes_started": false,
-        "terminal_reconciliation_sha256": "7780af6bf4cf69eb1004beccce78a4561e44ebc6bfd2291f0af3192c128f678e",
-        "outcome_reconciliation_sha256": "32d7e1940ba119acedb78b2a7f3b2356f258bcc8c5e5a144ed12b9480035fa02"
+        "terminal_reconciliation_sha256": "1f3e278e38abd2259922fb6b5aad0f7395424a41708303c9c73de422ee773d6a",
+        "outcome_reconciliation_sha256": "e2424da90ef44ded6ae8fbe86a443cc1c698e1e52db4aff05f9e4e51c466f43b"
       },
       "exit_condition_delta": {
         "expected": [
