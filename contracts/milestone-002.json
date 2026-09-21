@@ -4847,7 +4847,9 @@
         "scripts/validate_m2_radar_short_path_recovery_003_arcgis.py",
         "tests/test_m2_radar_short_path_recovery_003.py",
         "records/readiness/m2-radar-short-path-recovery-003-implementation-readiness.json",
-        "records/readiness/m2-radar-short-path-recovery-003-arcgis-runtime-validation.json"
+        "records/readiness/m2-radar-short-path-recovery-003-arcgis-runtime-validation.json",
+        "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-gate.json",
+        "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-reconciliation.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-short-path-recovery-003-implementation-readiness.json",
@@ -4861,7 +4863,7 @@
       ],
       "gates": {
         "inherited_owner_authority": "pass_exact_combined_approval",
-        "public_default_branch_ci": "pending",
+        "public_default_branch_ci": "pass_implementation_commit_b3ca0ddd985d9d72216dc957440095c7d0935fe1_run_35628942719",
         "final_no_content_preflight": "pending",
         "maximum_real_attempts": 1,
         "real_attempts_started": 0,
@@ -4870,7 +4872,9 @@
         "intermediate_owner_reconfirmation_required": false,
         "local_portable_tests": "pass_676_total_6_intentional_skips",
         "installed_arcgis_disposable_validation": "pass_signature_license_no_geoprocessing",
-        "implementation_readiness_sha256": "cfa95c96adde617979aa8817c12a6884f189041ea82e5f4debd11f8332e6d13d"
+        "implementation_readiness_sha256": "cfa95c96adde617979aa8817c12a6884f189041ea82e5f4debd11f8332e6d13d",
+        "implementation_publication_gate_sha256": "ebbae65b2ffd02e0142da86f1c7680d9e664574a7fe336d2dedbe6c11001e311",
+        "execution_gate_publication": "pending"
       },
       "exit_condition_delta": {
         "expected": [
@@ -4937,8 +4941,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION",
-    "next_action": "Publish and validate the approved short-path recovery-003 implementation, portable tests, and installed ArcGIS disposable signature and license test. Continue through the exact public CI gates under inherited authority; do not access external custody or start the real attempt until both public gates and the final no-content preflight pass.",
+    "current_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
+    "next_action": "Publish and validate the exact short-path recovery-003 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order real attempt begin; stop on the first failure and never retry.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4989,7 +4993,7 @@
       "The diagnostic receipt-persistence recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, both zero-byte reserved receipts remain immutable, and no implementation, ArcPy, data access, new process, retry, reconstruction, geoprocessing, radar processing, or scientific action is released.",
       "The exact short-path recovery-003 packet is approved as one bounded authority envelope through sanitized terminal publication. Continue unchanged implementation, public CI gates, one final no-content preflight, at most one fresh real attempt, reconciliation, and terminal publication without intermediate owner reconfirmation. Never retry or broaden into baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication."
     ],
-    "parallel_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION",
-    "parallel_next_action": "Publish and validate the approved short-path recovery-003 implementation, portable tests, and installed ArcGIS disposable signature and license test. Continue through the exact public CI gates under inherited authority; do not access external custody or start the real attempt until both public gates and the final no-content preflight pass."
+    "parallel_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
+    "parallel_next_action": "Publish and validate the exact short-path recovery-003 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order real attempt begin; stop on the first failure and never retry."
   }
 }

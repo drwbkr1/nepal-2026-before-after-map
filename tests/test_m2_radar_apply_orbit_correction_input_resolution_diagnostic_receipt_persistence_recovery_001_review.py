@@ -280,7 +280,14 @@ class M2DiagnosticReceiptPersistenceRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(recovery["status"], "in_progress")
         self.assertEqual(recovery["gates"]["inherited_owner_authority"], "pass_exact_combined_approval")
         self.assertFalse(recovery["gates"]["intermediate_owner_reconfirmation_required"])
-        self.assertEqual(CURRENT_CHECKPOINT, "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION")
+        self.assertIn(
+            CURRENT_CHECKPOINT,
+            {
+                "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION",
+                "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
+                "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
+            },
+        )
 
 
 if __name__ == "__main__":

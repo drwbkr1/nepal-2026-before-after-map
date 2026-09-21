@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION-PUBLICATION-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-21T16:59:40Z",
+  "status": "pass_exact_implementation_publication_reconciled_execution_gate_publication_pending",
+  "bindings": {
+    "implementation_publication_gate_ref": "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-gate.json",
+    "implementation_publication_gate_sha256": "ebbae65b2ffd02e0142da86f1c7680d9e664574a7fe336d2dedbe6c11001e311",
+    "implementation_commit_sha": "b3ca0ddd985d9d72216dc957440095c7d0935fe1",
+    "public_ci_run_id": 35628942719,
+    "approval_sha256": "599b2425a069d607249d60d603719d25b71483137a5e58804857706be519c088"
+  },
+  "assertions": {
+    "code_and_contract_match_public_commit": true,
+    "public_ci_passed": true,
+    "external_custody_accessed": false,
+    "real_attempt_started": false,
+    "intermediate_owner_reconfirmation_required": false
+  }
+}

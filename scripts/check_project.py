@@ -1388,6 +1388,8 @@ REQUIRED = [
     "records/readiness/m2-radar-short-path-recovery-003-approval-activation.json",
     "records/readiness/m2-radar-short-path-recovery-003-implementation-readiness.json",
     "records/readiness/m2-radar-short-path-recovery-003-arcgis-runtime-validation.json",
+    "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-gate.json",
+    "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-reconciliation.json",
     "config/qa/m2-radar-short-path-recovery-003-contract.json",
     "scripts/m2_radar_short_path_recovery_003_core.py",
     "scripts/m2_radar_short_path_processing_003.py",
@@ -17067,6 +17069,8 @@ def main() -> None:
     short_path_contract_ref = "config/qa/m2-radar-short-path-recovery-003-contract.json"
     short_path_readiness_ref = "records/readiness/m2-radar-short-path-recovery-003-implementation-readiness.json"
     short_path_arcgis_ref = "records/readiness/m2-radar-short-path-recovery-003-arcgis-runtime-validation.json"
+    short_path_implementation_gate_ref = "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-gate.json"
+    short_path_implementation_reconciliation_ref = "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-reconciliation.json"
     short_path_proposal = json.loads((ROOT / short_path_proposal_ref).read_text(encoding="utf-8"))
     short_path_bundle = json.loads((ROOT / short_path_bundle_ref).read_text(encoding="utf-8"))
     short_path_approval = json.loads((ROOT / short_path_approval_ref).read_text(encoding="utf-8"))
@@ -17075,6 +17079,8 @@ def main() -> None:
     short_path_contract = json.loads((ROOT / short_path_contract_ref).read_text(encoding="utf-8"))
     short_path_readiness = json.loads((ROOT / short_path_readiness_ref).read_text(encoding="utf-8"))
     short_path_arcgis = json.loads((ROOT / short_path_arcgis_ref).read_text(encoding="utf-8"))
+    short_path_implementation_gate = json.loads((ROOT / short_path_implementation_gate_ref).read_text(encoding="utf-8"))
+    short_path_implementation_reconciliation = json.loads((ROOT / short_path_implementation_reconciliation_ref).read_text(encoding="utf-8"))
     short_path_review_unit = m2_units.get("M2-RADAR-SHORT-PATH-RECOVERY-003-REVIEW", {})
     short_path_recovery_unit = m2_units.get("M2-RADAR-SHORT-PATH-RECOVERY-003", {})
     if (
@@ -17139,6 +17145,16 @@ def main() -> None:
         or short_path_arcgis.get("status") != "pass_installed_arcgis_runtime_signature_license_and_disposable_path_validation"
         or short_path_arcgis.get("assertions", {}).get("geoprocessing_invoked") is not False
         or short_path_arcgis.get("assertions", {}).get("external_custody_accessed") is not False
+        or short_path_implementation_gate.get("status") != "pass_public_default_branch_ci_short_path_recovery_003_implementation_ready"
+        or short_path_implementation_gate.get("implementation_commit_sha") != "b3ca0ddd985d9d72216dc957440095c7d0935fe1"
+        or short_path_implementation_gate.get("public_ci_run_id") != 35628942719
+        or short_path_implementation_gate.get("public_ci_conclusion") != "success"
+        or short_path_implementation_gate.get("repository_required_file_count") != 1277
+        or short_path_implementation_gate.get("public_test_count") != 676
+        or short_path_implementation_gate.get("public_intentional_skip_count") != 13
+        or short_path_implementation_gate.get("assertions", {}).get("real_attempt_started") is not False
+        or short_path_implementation_reconciliation.get("status") != "pass_exact_implementation_publication_reconciled_execution_gate_publication_pending"
+        or short_path_implementation_reconciliation.get("bindings", {}).get("implementation_publication_gate_sha256") != sha256(short_path_implementation_gate_ref)
         or short_path_review_unit.get("status") != "complete"
         or short_path_review_unit.get("human_gate") is not True
         or short_path_review_unit.get("gates", {}).get("owner_combined_decision") != "approved_exact"
