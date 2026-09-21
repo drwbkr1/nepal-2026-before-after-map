@@ -470,6 +470,7 @@ REQUIRED = [
     "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-fallback.jsonl",
     "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-reconciliation.json",
     "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-outcome-reconciliation.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-publication-gate.json",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -16828,6 +16829,110 @@ def main() -> None:
             or receipt_cleanup_bytes != b""
         ):
             fail("M2 diagnostic receipt-persistence recovery terminal state differs or overclaims")
+        terminal_publication_ref = (
+            f"records/readiness/{diagnostic_receipt_prefix}-terminal-publication-gate.json"
+        )
+        if (ROOT / terminal_publication_ref).exists():
+            terminal_publication = json.loads(
+                (ROOT / terminal_publication_ref).read_text(encoding="utf-8")
+            )
+            terminal_publication_evidence = ledger_by_id.get("EVID-0204")
+            if (
+                terminal_publication.get("status")
+                != "pass_public_terminal_state_local_recovery_design_released"
+                or terminal_publication.get("terminal_commit_sha")
+                != "f56a8ef304d6e8154e770290b6c7584a63364960"
+                or terminal_publication.get("public_ci_run_id") != 35620985831
+                or terminal_publication.get("public_ci_url")
+                != "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35620985831"
+                or terminal_publication.get("public_ci_conclusion") != "success"
+                or terminal_publication.get("repository_required_file_count") != 1262
+                or terminal_publication.get("public_test_count") != 663
+                or terminal_publication.get("public_intentional_skip_count") != 13
+                or terminal_publication.get("authority_ref")
+                != "user-instruction:2026-09-21:authorize-terminal-publication-review-human-gates-and-continue"
+                or terminal_publication.get("bindings", {}).get("final_preflight_sha256")
+                != sha256(final_preflight_ref)
+                or terminal_publication.get("bindings", {}).get("terminal_reconciliation_sha256")
+                != sha256(terminal_reconciliation_ref)
+                or terminal_publication.get("bindings", {}).get("outcome_reconciliation_sha256")
+                != sha256(outcome_reconciliation_ref)
+                or terminal_publication.get("bindings", {}).get("published_milestone_sha256")
+                != "fe017da08dfe66495d43f4b8e55526a86f789be608a9fd316f8ac7133f3b2d06"
+                or terminal_publication.get("bindings", {}).get("published_project_control_profile_sha256")
+                != "039817dd698f45af382bacafca45c27e1622a26dbaddb6c50fc7a14febcad2da"
+                or terminal_publication.get("bindings", {}).get("published_long_term_goal_sha256")
+                != "d4f69f98ddc8722684f3579153e7f7fca5d4a96b5ebcfae6dce0ef94b5bdaf3f"
+                or terminal_publication.get("released_now", {}).get("terminal_owner_review") is not True
+                or terminal_publication.get("released_now", {}).get("local_follow_on_recovery_design") is not True
+                or any(
+                    terminal_publication.get("released_now", {}).get(key) is not False
+                    for key in (
+                        "follow_on_publication",
+                        "new_diagnostic_or_radar_implementation",
+                        "attempt_retry_or_reuse",
+                        "new_real_attempt",
+                        "apply_orbit_correction_or_other_geoprocessing",
+                        "baseline_or_change_analysis",
+                        "scientific_publication",
+                    )
+                )
+                or terminal_publication.get("assertions", {}).get("distinct_process_terminal_and_consumed") is not True
+                or terminal_publication.get("assertions", {}).get("terminal_receipt_persisted") is not True
+                or terminal_publication.get("assertions", {}).get("cleanup_receipt_persisted") is not True
+                or terminal_publication.get("assertions", {}).get("manifest_recognized_as_raster_dataset") is not True
+                or terminal_publication.get("assertions", {}).get("safe_directory_recognized_as_folder") is not True
+                or terminal_publication.get("assertions", {}).get("orbit_recognized_as_file") is not True
+                or any(
+                    terminal_publication.get("assertions", {}).get(key) is not False
+                    for key in (
+                        "automatic_retry_performed",
+                        "apply_orbit_correction_invoked",
+                        "geoprocessing_invoked",
+                        "historical_root_cause_established",
+                        "corrected_call_established",
+                        "radar_recovery_readiness_established",
+                        "scientific_result_established",
+                    )
+                )
+                or execution_unit.get("gates", {}).get("terminal_commit_sha")
+                != "f56a8ef304d6e8154e770290b6c7584a63364960"
+                or execution_unit.get("gates", {}).get("terminal_public_ci_run_id") != 35620985831
+                or execution_unit.get("gates", {}).get("terminal_publication_gate_sha256")
+                != sha256(terminal_publication_ref)
+                or execution_unit.get("gates", {}).get("local_follow_on_recovery_design")
+                != "released"
+                or not isinstance(terminal_publication_evidence, dict)
+                or terminal_publication_evidence.get("status")
+                != "pass_public_terminal_state_local_recovery_design_released"
+                or terminal_publication_evidence.get("authority_ref")
+                != terminal_publication.get("authority_ref")
+                or terminal_publication_evidence.get("terminal_publication_gate_sha256")
+                != sha256(terminal_publication_ref)
+                or terminal_publication_evidence.get("assertions", {}).get("terminal_commit")
+                != "f56a8ef304d6e8154e770290b6c7584a63364960"
+                or terminal_publication_evidence.get("assertions", {}).get("public_ci_run_id")
+                != 35620985831
+                or terminal_publication_evidence.get("assertions", {}).get("public_ci_conclusion")
+                != "success"
+                or terminal_publication_evidence.get("assertions", {}).get("terminal_owner_review") is not True
+                or terminal_publication_evidence.get("assertions", {}).get("local_follow_on_recovery_design") is not True
+                or any(
+                    terminal_publication_evidence.get("assertions", {}).get(key) is not False
+                    for key in (
+                        "follow_on_publication",
+                        "new_diagnostic_or_radar_implementation",
+                        "attempt_retry_or_reuse",
+                        "new_real_attempt",
+                        "apply_orbit_correction_or_other_geoprocessing",
+                        "historical_root_cause_established",
+                        "corrected_call_established",
+                        "radar_recovery_readiness_established",
+                        "scientific_result_established",
+                    )
+                )
+            ):
+                fail("M2 diagnostic receipt-persistence recovery terminal publication differs or overclaims")
     diagnostic_receipt_authority_evidence = ledger_by_id.get("EVID-0197")
     if (
         not isinstance(diagnostic_receipt_authority_evidence, dict)

@@ -23,6 +23,7 @@ CONTRACT_REF = f"reviews/{PREFIX}/review-contract.json"
 BLANK_REF = f"reviews/{PREFIX}/blank-response.json"
 PREVISUAL_REF = f"records/readiness/{PREFIX}-review-readiness-previsual.json"
 READINESS_REF = f"records/readiness/{PREFIX}-review-readiness.json"
+TERMINAL_PUBLICATION_GATE_REF = f"records/readiness/{PREFIX}-terminal-publication-gate.json"
 TERMINAL_REF = f"records/processing/{SOURCE_PREFIX}-terminal.json"
 CLEANUP_REF = f"records/processing/{SOURCE_PREFIX}-cleanup.json"
 EMPTY_SHA256 = hashlib.sha256(b"").hexdigest()
@@ -198,6 +199,31 @@ class M2DiagnosticReceiptPersistenceRecovery001ReviewTests(unittest.TestCase):
         self.assertEqual(milestone["handoff"]["current_checkpoint"], CURRENT_CHECKPOINT)
         self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], CURRENT_CHECKPOINT)
         self.assertEqual(goal["current_checkpoint"], CURRENT_CHECKPOINT)
+
+    def test_terminal_publication_releases_local_design_without_processing(self) -> None:
+        gate = load(TERMINAL_PUBLICATION_GATE_REF)
+        self.assertEqual(
+            gate["status"],
+            "pass_public_terminal_state_local_recovery_design_released",
+        )
+        self.assertEqual(gate["terminal_commit_sha"], "f56a8ef304d6e8154e770290b6c7584a63364960")
+        self.assertEqual(gate["public_ci_run_id"], 35620985831)
+        self.assertEqual(gate["public_ci_conclusion"], "success")
+        self.assertTrue(gate["released_now"]["terminal_owner_review"])
+        self.assertTrue(gate["released_now"]["local_follow_on_recovery_design"])
+        for key, value in gate["released_now"].items():
+            if key not in {"terminal_owner_review", "local_follow_on_recovery_design"}:
+                self.assertFalse(value, key)
+        for key in (
+            "automatic_retry_performed",
+            "apply_orbit_correction_invoked",
+            "geoprocessing_invoked",
+            "historical_root_cause_established",
+            "corrected_call_established",
+            "radar_recovery_readiness_established",
+            "scientific_result_established",
+        ):
+            self.assertFalse(gate["assertions"][key], key)
 
 
 if __name__ == "__main__":

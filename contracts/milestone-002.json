@@ -4747,7 +4747,8 @@
         "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-cleanup.json",
         "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-fallback.jsonl",
         "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-reconciliation.json",
-        "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-outcome-reconciliation.json"
+        "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-outcome-reconciliation.json",
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-publication-gate.json"
       ],
       "gates": {
         "public_ci": "success",
@@ -4763,7 +4764,11 @@
         "process_consumed": true,
         "terminal_status": "pass_current_input_resolution_diagnostic_only_no_retry",
         "terminal_reconciliation_sha256": "7e6f7f7ba795c6341eb0cac9e13e9c1890b1ee789941812faddc1a25f18a31bc",
-        "outcome_reconciliation_sha256": "249ed79b155177a61ca699067d515914673f360c4e92248debd3b0f57e9a7d0e"
+        "outcome_reconciliation_sha256": "249ed79b155177a61ca699067d515914673f360c4e92248debd3b0f57e9a7d0e",
+        "terminal_commit_sha": "f56a8ef304d6e8154e770290b6c7584a63364960",
+        "terminal_public_ci_run_id": 35620985831,
+        "terminal_publication_gate_sha256": "2cbb96c4764ddacac714b7ff24a7dc5506d7a3362eefa6143f84e9b36d647518",
+        "local_follow_on_recovery_design": "released"
       },
       "exit_condition_delta": {
         "expected": [],

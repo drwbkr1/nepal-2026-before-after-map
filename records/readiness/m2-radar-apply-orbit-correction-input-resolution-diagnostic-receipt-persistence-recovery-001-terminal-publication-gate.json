@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-21T15:46:29Z",
+  "status": "pass_public_terminal_state_local_recovery_design_released",
+  "terminal_commit_sha": "f56a8ef304d6e8154e770290b6c7584a63364960",
+  "public_ci_run_id": 35620985831,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35620985831",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1262,
+  "public_test_count": 663,
+  "public_intentional_skip_count": 13,
+  "authority_ref": "user-instruction:2026-09-21:authorize-terminal-publication-review-human-gates-and-continue",
+  "bindings": {
+    "final_preflight_ref": "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-final-preflight.json",
+    "final_preflight_sha256": "f9ae642adb6106fe3dab0decbf502037dc7a1024dac2cb6f39dcf28ef60c05a0",
+    "terminal_reconciliation_ref": "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "7e6f7f7ba795c6341eb0cac9e13e9c1890b1ee789941812faddc1a25f18a31bc",
+    "outcome_reconciliation_ref": "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-outcome-reconciliation.json",
+    "outcome_reconciliation_sha256": "249ed79b155177a61ca699067d515914673f360c4e92248debd3b0f57e9a7d0e",
+    "published_milestone_sha256": "fe017da08dfe66495d43f4b8e55526a86f789be608a9fd316f8ac7133f3b2d06",
+    "published_project_control_profile_sha256": "039817dd698f45af382bacafca45c27e1622a26dbaddb6c50fc7a14febcad2da",
+    "published_long_term_goal_sha256": "d4f69f98ddc8722684f3579153e7f7fca5d4a96b5ebcfae6dce0ef94b5bdaf3f"
+  },
+  "released_now": {
+    "terminal_owner_review": true,
+    "local_follow_on_recovery_design": true,
+    "follow_on_publication": false,
+    "new_diagnostic_or_radar_implementation": false,
+    "attempt_retry_or_reuse": false,
+    "new_real_attempt": false,
+    "apply_orbit_correction_or_other_geoprocessing": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "distinct_process_terminal_and_consumed": true,
+    "automatic_retry_performed": false,
+    "terminal_receipt_persisted": true,
+    "cleanup_receipt_persisted": true,
+    "manifest_recognized_as_raster_dataset": true,
+    "safe_directory_recognized_as_folder": true,
+    "orbit_recognized_as_file": true,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "historical_root_cause_established": false,
+    "corrected_call_established": false,
+    "radar_recovery_readiness_established": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Prepare one combined local recovery design from the published diagnostic evidence, batching any genuinely new publication, implementation, execution, and terminal-publication authority into one owner decision. Do not start ArcPy or geoprocessing under this gate."
+}
