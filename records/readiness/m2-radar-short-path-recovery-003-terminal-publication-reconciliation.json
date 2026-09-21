@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-PUBLICATION-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-21T17:16:58Z",
+  "status": "pass_exact_terminal_gate_public_ci_reconciled",
+  "bindings": {
+    "terminal_publication_gate_ref": "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-gate.json",
+    "terminal_publication_gate_sha256": "e546008ccf590c4588af1ea1d01bea6e6853397e6a7e0bb0636798e0ee9976e0",
+    "terminal_gate_commit_sha": "246050a417115e91d1713b45ede5be60e442de21",
+    "terminal_gate_public_ci_run_id": 35630907651,
+    "terminal_gate_public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35630907651",
+    "terminal_reconciliation_sha256": "b8770861ea87d7d36d04e7326699dfda220f4681e4b0a82da9085ac551fa46a4",
+    "outcome_reconciliation_sha256": "3d3cf190abd41d6ba8302908e71aad153ea8bb5a3e2fcdbd362dc13330755a90"
+  },
+  "assertions": {
+    "terminal_gate_public_ci_conclusion_success": true,
+    "sanitized_terminal_evidence_public": true,
+    "attempt_consumed": true,
+    "automatic_retry_performed": false,
+    "second_attempt_created": false,
+    "external_custody_unchanged": true,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "baseline_or_change_analysis_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false,
+    "intermediate_owner_reconfirmation_required": false
+  },
+  "current_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
+  "next_action": "Review the terminal block. Any correction or further radar processing requires a new separately scoped authority decision."
+}

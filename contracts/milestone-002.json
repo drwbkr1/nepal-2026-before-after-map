@@ -4854,7 +4854,8 @@
         "records/readiness/m2-radar-short-path-recovery-003-final-preflight.json",
         "records/processing/m2-radar-short-path-recovery-003-terminal-reconciliation.json",
         "records/processing/m2-radar-short-path-recovery-003-outcome-reconciliation.json",
-        "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-gate.json"
+        "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-gate.json",
+        "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-reconciliation.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-short-path-recovery-003-implementation-readiness.json",
@@ -4886,8 +4887,9 @@
         "later_sources_or_routes_started": false,
         "terminal_reconciliation_sha256": "b8770861ea87d7d36d04e7326699dfda220f4681e4b0a82da9085ac551fa46a4",
         "outcome_reconciliation_sha256": "3d3cf190abd41d6ba8302908e71aad153ea8bb5a3e2fcdbd362dc13330755a90",
-        "sanitized_terminal_publication": "gate_record_prepared_public_ci_pending",
-        "terminal_publication_gate_sha256": "e546008ccf590c4588af1ea1d01bea6e6853397e6a7e0bb0636798e0ee9976e0"
+        "sanitized_terminal_publication": "pass_gate_commit_246050a417115e91d1713b45ede5be60e442de21_run_35630907651",
+        "terminal_publication_gate_sha256": "e546008ccf590c4588af1ea1d01bea6e6853397e6a7e0bb0636798e0ee9976e0",
+        "terminal_publication_reconciliation_sha256": "7ecd8edd21980376f63b046111396dc807a216b67c0481dfeba1703a2b731736"
       },
       "exit_condition_delta": {
         "expected": [

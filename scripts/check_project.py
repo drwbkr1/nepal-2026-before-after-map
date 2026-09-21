@@ -1395,6 +1395,7 @@ REQUIRED = [
     "records/processing/m2-radar-short-path-recovery-003-terminal-reconciliation.json",
     "records/processing/m2-radar-short-path-recovery-003-outcome-reconciliation.json",
     "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-gate.json",
+    "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-reconciliation.json",
     "config/qa/m2-radar-short-path-recovery-003-contract.json",
     "scripts/m2_radar_short_path_recovery_003_core.py",
     "scripts/m2_radar_short_path_processing_003.py",
@@ -17081,6 +17082,7 @@ def main() -> None:
     short_path_terminal_ref = "records/processing/m2-radar-short-path-recovery-003-terminal-reconciliation.json"
     short_path_outcome_ref = "records/processing/m2-radar-short-path-recovery-003-outcome-reconciliation.json"
     short_path_terminal_publication_ref = "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-gate.json"
+    short_path_terminal_publication_reconciliation_ref = "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-reconciliation.json"
     short_path_proposal = json.loads((ROOT / short_path_proposal_ref).read_text(encoding="utf-8"))
     short_path_bundle = json.loads((ROOT / short_path_bundle_ref).read_text(encoding="utf-8"))
     short_path_approval = json.loads((ROOT / short_path_approval_ref).read_text(encoding="utf-8"))
@@ -17096,6 +17098,7 @@ def main() -> None:
     short_path_terminal = json.loads((ROOT / short_path_terminal_ref).read_text(encoding="utf-8"))
     short_path_outcome = json.loads((ROOT / short_path_outcome_ref).read_text(encoding="utf-8"))
     short_path_terminal_publication = json.loads((ROOT / short_path_terminal_publication_ref).read_text(encoding="utf-8"))
+    short_path_terminal_publication_reconciliation = json.loads((ROOT / short_path_terminal_publication_reconciliation_ref).read_text(encoding="utf-8"))
     short_path_review_unit = m2_units.get("M2-RADAR-SHORT-PATH-RECOVERY-003-REVIEW", {})
     short_path_recovery_unit = m2_units.get("M2-RADAR-SHORT-PATH-RECOVERY-003", {})
     if (
@@ -17212,6 +17215,14 @@ def main() -> None:
         or short_path_terminal_publication.get("bindings", {}).get("outcome_reconciliation_sha256") != sha256(short_path_outcome_ref)
         or short_path_terminal_publication.get("released_now", {}).get("attempt_retry_or_reuse") is not False
         or short_path_terminal_publication.get("assertions", {}).get("historical_root_cause_established") is not False
+        or short_path_terminal_publication_reconciliation.get("status") != "pass_exact_terminal_gate_public_ci_reconciled"
+        or short_path_terminal_publication_reconciliation.get("bindings", {}).get("terminal_publication_gate_sha256") != sha256(short_path_terminal_publication_ref)
+        or short_path_terminal_publication_reconciliation.get("bindings", {}).get("terminal_gate_commit_sha") != "246050a417115e91d1713b45ede5be60e442de21"
+        or short_path_terminal_publication_reconciliation.get("bindings", {}).get("terminal_gate_public_ci_run_id") != 35630907651
+        or short_path_terminal_publication_reconciliation.get("assertions", {}).get("terminal_gate_public_ci_conclusion_success") is not True
+        or short_path_terminal_publication_reconciliation.get("assertions", {}).get("second_attempt_created") is not False
+        or short_path_terminal_publication_reconciliation.get("current_checkpoint") != "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW"
+        or short_path_recovery_unit.get("gates", {}).get("terminal_publication_reconciliation_sha256") != sha256(short_path_terminal_publication_reconciliation_ref)
         or short_path_review_unit.get("status") != "complete"
         or short_path_review_unit.get("human_gate") is not True
         or short_path_review_unit.get("gates", {}).get("owner_combined_decision") != "approved_exact"
