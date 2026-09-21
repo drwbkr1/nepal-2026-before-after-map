@@ -50,6 +50,8 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_terminal,
     current_radar_short_path_recovery_003_review_required,
     current_radar_short_path_recovery_003_stage,
+    current_radar_raster_function_call_shape_recovery_004_review_required,
+    current_radar_raster_function_call_shape_recovery_004_stage,
     current_radar_delayed_import_probe_001_review_publication_pending,
     current_radar_delayed_import_probe_001_review_required,
     current_radar_delayed_import_probe_001_implementation_pending,
@@ -99,6 +101,20 @@ SHORT_PATH_STAGE = {
     "terminal": (
         "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
         "Review the sanitized terminal short-path recovery-003 evidence. The attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain outside this authority.",
+    ),
+}
+RASTER_FUNCTION_RECOVERY_004_STAGE = {
+    "implementation": (
+        "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION",
+        "Implement and validate the exact five-function Raster-returning call-shape correction under the approved single authority envelope, then publish public CI gates before the one final preflight and at most one fresh attempt.",
+    ),
+    "execution": (
+        "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
+        "Publish and validate the exact recovery-004 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order attempt begin; stop on the first failure and never retry.",
+    ),
+    "terminal": (
+        "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
+        "Review the sanitized terminal recovery-004 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline, change analysis, attribution, derived-pixel publication, or scientific publication is released.",
     ),
 }
 from record_m2_sentinel_continuation_001_implementation_readiness import IMPLEMENTATION_FILES as CONTINUATION_001_IMPLEMENTATION_FILES
@@ -1402,6 +1418,22 @@ REQUIRED = [
     "scripts/run_m2_radar_short_path_recovery_003.py",
     "scripts/validate_m2_radar_short_path_recovery_003_arcgis.py",
     "tests/test_m2_radar_short_path_recovery_003.py",
+    "records/observations/m2-radar-ia-raster-function-signature-audit-001.json",
+    "contracts/milestone-002-radar-raster-function-call-shape-recovery-004-proposal.json",
+    "docs/M2_RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_REVIEW.md",
+    "reviews/m2-radar-raster-function-call-shape-recovery-004/review-bundle.json",
+    "tests/test_m2_radar_raster_function_call_shape_recovery_004_review.py",
+    "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
+    "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-review-reconciliation.json",
+    "records/readiness/m2-radar-raster-function-call-shape-recovery-004-approval-activation.json",
+    "config/qa/m2-radar-raster-function-call-shape-recovery-004-contract.json",
+    "scripts/m2_radar_raster_function_call_shape_recovery_004_core.py",
+    "scripts/m2_radar_raster_function_call_shape_processing_004.py",
+    "scripts/run_m2_radar_raster_function_call_shape_recovery_004.py",
+    "scripts/validate_m2_radar_raster_function_call_shape_recovery_004_arcgis.py",
+    "records/readiness/m2-radar-raster-function-call-shape-recovery-004-arcgis-runtime-validation.json",
+    "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-readiness.json",
+    "tests/test_m2_radar_raster_function_call_shape_recovery_004.py",
     ".github/workflows/validate.yml",
 ]
 
@@ -1807,8 +1839,18 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
+            raster_function_stage = current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
             short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, {"promoted": 8})
-            if short_path_stage:
+            if raster_function_stage:
+                expected_dem_checkpoint, expected_dem_next_action = RASTER_FUNCTION_RECOVERY_004_STAGE[raster_function_stage]
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json"
+                expected_dem_proposed_amendments = []
+            elif current_radar_raster_function_call_shape_recovery_004_review_required(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OWNER-DECISION"
+                expected_dem_checkpoint_authority_ref = "contracts/milestone-002-radar-raster-function-call-shape-recovery-004-proposal.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Review one combined M2 radar raster-function call-shape recovery-004 decision at bundle SHA-256 46c52b15d939a2ca7536205b61ec06158a84708e59425a92224a5a6dad7969c5 and proposal SHA-256 bee3b46d05bf671b8b6657ee12629dfeaa5f04a9adce40bd0593823a664429ed. One approval covers packet and implementation publication, the exact five-function correction, validation, one final no-content preflight, at most one fresh real attempt, reconciliation, and sanitized terminal publication without intermediate owner reconfirmation. Until approval, no publication, implementation, project-data or external-custody access, ArcPy processing invocation, geoprocessing, or fresh attempt is released."
+            elif short_path_stage:
                 expected_dem_checkpoint, expected_dem_next_action = SHORT_PATH_STAGE[short_path_stage]
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-short-path-recovery-003-approval.json"
                 expected_dem_proposed_amendments = []
@@ -2040,8 +2082,18 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
+            raster_function_stage = current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
             short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, {"promoted": 8})
-            if short_path_stage:
+            if raster_function_stage:
+                expected_dem_checkpoint, expected_dem_next_action = RASTER_FUNCTION_RECOVERY_004_STAGE[raster_function_stage]
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json"
+                expected_dem_proposed_amendments = []
+            elif current_radar_raster_function_call_shape_recovery_004_review_required(ROOT, {"promoted": 8}):
+                expected_dem_checkpoint = "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OWNER-DECISION"
+                expected_dem_checkpoint_authority_ref = "contracts/milestone-002-radar-raster-function-call-shape-recovery-004-proposal.json"
+                expected_dem_proposed_amendments = []
+                expected_dem_next_action = "Review one combined M2 radar raster-function call-shape recovery-004 decision at bundle SHA-256 46c52b15d939a2ca7536205b61ec06158a84708e59425a92224a5a6dad7969c5 and proposal SHA-256 bee3b46d05bf671b8b6657ee12629dfeaa5f04a9adce40bd0593823a664429ed. One approval covers packet and implementation publication, the exact five-function correction, validation, one final no-content preflight, at most one fresh real attempt, reconciliation, and sanitized terminal publication without intermediate owner reconfirmation. Until approval, no publication, implementation, project-data or external-custody access, ArcPy processing invocation, geoprocessing, or fresh attempt is released."
+            elif short_path_stage:
                 expected_dem_checkpoint, expected_dem_next_action = SHORT_PATH_STAGE[short_path_stage]
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-short-path-recovery-003-approval.json"
                 expected_dem_proposed_amendments = []
@@ -3133,6 +3185,7 @@ def main() -> None:
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
         "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
+        "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
     ]:
         fail("project profile must expose the exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
@@ -3652,7 +3705,20 @@ def main() -> None:
             "next_action": expected_dem_next_action,
         },
     ]:
-        fail("project profile DEM parallel checkpoint differs")
+        fail(
+            "project profile DEM parallel checkpoint differs: "
+            + json.dumps(
+                {
+                    "expected": [{
+                        "checkpoint_id": expected_dem_checkpoint,
+                        "authority_ref": expected_dem_checkpoint_authority_ref,
+                        "next_action": expected_dem_next_action,
+                    }],
+                    "actual": profile.get("parallel_checkpoints"),
+                },
+                sort_keys=True,
+            )
+        )
     if goal.get("active_amendments") != [
         "records/source-gates/m2-dem-amendment-approval.json",
         "records/source-gates/m2-orbit-amendment-approval.json",
@@ -3679,6 +3745,7 @@ def main() -> None:
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
         "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
+        "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
     if goal.get("proposed_amendments") != expected_dem_proposed_amendments:
@@ -8463,8 +8530,13 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
+        raster_function_stage = current_radar_raster_function_call_shape_recovery_004_stage(ROOT, state_counts)
         short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, state_counts)
-        if short_path_stage:
+        if raster_function_stage:
+            expected_checkpoint = RASTER_FUNCTION_RECOVERY_004_STAGE[raster_function_stage][0]
+        elif current_radar_raster_function_call_shape_recovery_004_review_required(ROOT, state_counts):
+            expected_checkpoint = "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OWNER-DECISION"
+        elif short_path_stage:
             expected_checkpoint = SHORT_PATH_STAGE[short_path_stage][0]
         elif current_radar_short_path_recovery_003_review_required(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION"
@@ -15310,8 +15382,15 @@ def main() -> None:
             diagnostic_receipt_implementation_pending = current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(
                 ROOT, {"promoted": 8}
             )
+            raster_function_stage = current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
             short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, {"promoted": 8})
-            if short_path_stage:
+            if raster_function_stage:
+                expected_post_probe_checkpoint = RASTER_FUNCTION_RECOVERY_004_STAGE[raster_function_stage][0]
+            elif current_radar_raster_function_call_shape_recovery_004_review_required(
+                ROOT, {"promoted": 8}
+            ):
+                expected_post_probe_checkpoint = "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OWNER-DECISION"
+            elif short_path_stage:
                 expected_post_probe_checkpoint = SHORT_PATH_STAGE[short_path_stage][0]
             elif current_radar_short_path_recovery_003_review_required(ROOT, {"promoted": 8}):
                 expected_post_probe_checkpoint = "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION"
@@ -15837,6 +15916,10 @@ def main() -> None:
                 or radar_recovery_002_execution.get("gates", {}).get("terminal_reconciliation_sha256") != sha256(radar_recovery_002_terminal_ref)
                 or radar_recovery_002_execution.get("gates", {}).get("outcome_reconciliation_sha256") != sha256(radar_recovery_002_outcome_ref)
                 or profile.get("current_checkpoint", {}).get("checkpoint_id") not in {
+                    "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OWNER-DECISION",
+                    "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION",
+                    "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
+                    "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
                     "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION",
                     "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION",
                     "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
@@ -15854,6 +15937,10 @@ def main() -> None:
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW",
                 }
                 or goal.get("current_checkpoint") not in {
+                    "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OWNER-DECISION",
+                    "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION",
+                    "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
+                    "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
                     "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION",
                     "M2-RADAR-SHORT-PATH-RECOVERY-003-IMPLEMENTATION",
                     "M2-RADAR-SHORT-PATH-RECOVERY-003-EXECUTION",
@@ -16151,8 +16238,16 @@ def main() -> None:
     }
     if sum(bool(value) for value in diagnostic_001_phase_checks.values()) != 1:
         fail("M2 ApplyOrbitCorrection input-resolution diagnostic-001 phase is not exact")
+    raster_function_recovery_004_review_required = current_radar_raster_function_call_shape_recovery_004_review_required(
+        ROOT, {"promoted": 8}
+    )
+    raster_function_stage = current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
     short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, {"promoted": 8})
-    if short_path_stage:
+    if raster_function_stage:
+        diagnostic_001_expected_checkpoint = RASTER_FUNCTION_RECOVERY_004_STAGE[raster_function_stage][0]
+    elif raster_function_recovery_004_review_required:
+        diagnostic_001_expected_checkpoint = "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OWNER-DECISION"
+    elif short_path_stage:
         diagnostic_001_expected_checkpoint = SHORT_PATH_STAGE[short_path_stage][0]
     elif current_radar_short_path_recovery_003_review_required(ROOT, {"promoted": 8}):
         diagnostic_001_expected_checkpoint = "M2-RADAR-SHORT-PATH-RECOVERY-003-OWNER-DECISION"
@@ -16320,7 +16415,11 @@ def main() -> None:
         or diagnostic_001_implementation_unit.get("gates", {}).get("public_ci_run_id") != 35478073524
         or diagnostic_001_implementation_unit.get("gates", {}).get("implementation_publication_gate_sha256") != sha256(diagnostic_001_implementation_gate_ref)
         or diagnostic_001_implementation_unit.get("gates", {}).get("implementation_publication_reconciliation_sha256") != sha256(diagnostic_001_implementation_reconciliation_ref)
-        or diagnostic_001_execution_unit.get("status") != "in_progress"
+        or diagnostic_001_execution_unit.get("status") != "complete"
+        or diagnostic_001_execution_unit.get("disposition") != "stop"
+        or diagnostic_001_execution_unit.get("gates", {}).get(
+            "terminal_process_consumed_without_durable_receipts"
+        ) is not True
         or diagnostic_001_execution_unit.get("gates", {}).get("public_ci") != "success"
         or not isinstance(diagnostic_001_implementation_gate_evidence, dict)
         or diagnostic_001_implementation_gate_evidence.get("status") != "pass_public_ci_gate_state_publication_pending"
@@ -17234,6 +17333,130 @@ def main() -> None:
         or short_path_recovery_unit.get("gates", {}).get("intermediate_owner_reconfirmation_required") is not False
     ):
         fail("M2 radar short-path recovery-003 authority or implementation boundary differs or overclaims")
+
+    raster_function_observation_ref = "records/observations/m2-radar-ia-raster-function-signature-audit-001.json"
+    raster_function_proposal_ref = "contracts/milestone-002-radar-raster-function-call-shape-recovery-004-proposal.json"
+    raster_function_review_ref = "docs/M2_RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_REVIEW.md"
+    raster_function_bundle_ref = "reviews/m2-radar-raster-function-call-shape-recovery-004/review-bundle.json"
+    raster_function_approval_ref = "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json"
+    raster_function_reconciliation_ref = "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-review-reconciliation.json"
+    raster_function_activation_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-approval-activation.json"
+    raster_function_contract_ref = "config/qa/m2-radar-raster-function-call-shape-recovery-004-contract.json"
+    raster_function_runtime_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-arcgis-runtime-validation.json"
+    raster_function_readiness_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-readiness.json"
+    raster_function_observation = json.loads((ROOT / raster_function_observation_ref).read_text(encoding="utf-8"))
+    raster_function_proposal = json.loads((ROOT / raster_function_proposal_ref).read_text(encoding="utf-8"))
+    raster_function_bundle = json.loads((ROOT / raster_function_bundle_ref).read_text(encoding="utf-8"))
+    raster_function_approval = json.loads((ROOT / raster_function_approval_ref).read_text(encoding="utf-8"))
+    raster_function_reconciliation = json.loads((ROOT / raster_function_reconciliation_ref).read_text(encoding="utf-8"))
+    raster_function_activation = json.loads((ROOT / raster_function_activation_ref).read_text(encoding="utf-8"))
+    raster_function_contract = json.loads((ROOT / raster_function_contract_ref).read_text(encoding="utf-8"))
+    raster_function_runtime = json.loads((ROOT / raster_function_runtime_ref).read_text(encoding="utf-8"))
+    raster_function_readiness = json.loads((ROOT / raster_function_readiness_ref).read_text(encoding="utf-8"))
+    raster_function_review_unit = m2_units.get(
+        "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-REVIEW", {}
+    )
+    raster_function_recovery_unit = m2_units.get(
+        "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004", {}
+    )
+    raster_function_implementation_refs = (
+        raster_function_contract_ref,
+        "scripts/m2_radar_raster_function_call_shape_recovery_004_core.py",
+        "scripts/m2_radar_raster_function_call_shape_processing_004.py",
+        "scripts/run_m2_radar_raster_function_call_shape_recovery_004.py",
+        "scripts/validate_m2_radar_raster_function_call_shape_recovery_004_arcgis.py",
+        "tests/test_m2_radar_raster_function_call_shape_recovery_004.py",
+        "tests/test_m2_radar_raster_function_call_shape_recovery_004_review.py",
+        raster_function_runtime_ref,
+        raster_function_approval_ref,
+        raster_function_reconciliation_ref,
+        raster_function_activation_ref,
+    )
+    if (
+        sha256(raster_function_observation_ref)
+        != "fb7ebc9d4f62e855cdce8ef4cec2fe9bb8fcbb6220f4d4a0bda62877fa9b1eae"
+        or sha256(raster_function_proposal_ref)
+        != "bee3b46d05bf671b8b6657ee12629dfeaa5f04a9adce40bd0593823a664429ed"
+        or sha256(raster_function_review_ref)
+        != "a43584c40f69ac5ad414349bd9073cfdb4f7d0a338862f1148504c966c7ca157"
+        or sha256(raster_function_bundle_ref)
+        != "46c52b15d939a2ca7536205b61ec06158a84708e59425a92224a5a6dad7969c5"
+        or sha256(raster_function_approval_ref)
+        != "b7133be0ee697895d45ba5702dae046c183472f2c93bf81029f130d333aa460a"
+        or sha256(raster_function_reconciliation_ref)
+        != "1218d0732ae7794fc0efbe17dc680d02caed30a70baef4409f6d54ae9880acdf"
+        or sha256(raster_function_activation_ref)
+        != "f4539c9707a5935cee0189867ba966a665becc14dccf3bc35a617b981a913a4b"
+        or raster_function_observation.get("status") != "pass_read_only_installed_runtime_signature_inventory"
+        or raster_function_observation.get("finding", {}).get("other_five_interfaces")
+        != "raster_returning_functions_without_output_path"
+        or raster_function_proposal.get("status") != "proposed_inactive_local_one_decision_review"
+        or raster_function_bundle.get("status") != "local_zero_decision_one_combined_owner_decision_pending"
+        or raster_function_bundle.get("candidate_identity", {}).get("proposal_sha256")
+        != sha256(raster_function_proposal_ref)
+        or any(
+            artifact.get("sha256") != sha256(artifact.get("path", ""))
+            for artifact in raster_function_bundle.get("artifacts", [])
+        )
+        or raster_function_approval.get("status")
+        != "approved_exact_single_bounded_authority_envelope_through_sanitized_terminal_publication"
+        or raster_function_approval.get("attestation") is not True
+        or raster_function_approval.get("human_decision_count") != 1
+        or raster_function_approval.get("bindings", {}).get("proposal_sha256")
+        != sha256(raster_function_proposal_ref)
+        or raster_function_approval.get("bindings", {}).get("review_bundle_sha256")
+        != sha256(raster_function_bundle_ref)
+        or raster_function_approval.get("authorized_scope", {}).get("maximum_fresh_raster_function_recovery_attempts") != 1
+        or raster_function_approval.get("authorized_scope", {}).get("intermediate_owner_reconfirmation_required") is not False
+        or raster_function_reconciliation.get("status") != "reconciled_exact_attested_single_owner_decision"
+        or raster_function_activation.get("status")
+        != "pass_exact_combined_authority_activated_implementation_publication_pending"
+        or raster_function_contract.get("contract_id")
+        != "NEPAL-M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004"
+        or raster_function_contract.get("authority", {}).get("approval_sha256")
+        != sha256(raster_function_approval_ref)
+        or raster_function_contract.get("attempt", {}).get("maximum_real_attempts") != 1
+        or raster_function_contract.get("attempt", {}).get("automatic_retry_authorized") is not False
+        or raster_function_contract.get("attempt", {}).get("external_attempt_root")
+        != r"C:\Projects\Active\nepal-2026-before-after-map-data\r4\a1"
+        or raster_function_contract.get("raster_function_call_shape", {}).get("returned_raster_save_exactly_once") is not True
+        or raster_function_runtime.get("status")
+        != "pass_installed_arcgis_runtime_six_interface_signature_only_validation"
+        or raster_function_runtime.get("assertions", {}).get("signature_inspection_only") is not True
+        or raster_function_runtime.get("assertions", {}).get("geoprocessing_invoked") is not False
+        or raster_function_readiness.get("status")
+        != "pass_local_portable_and_installed_arcgis_signature_ready_public_ci_pending"
+        or raster_function_readiness.get("validation", {}).get("full_portable_tests", {}).get("total") != 695
+        or raster_function_readiness.get("validation", {}).get("full_portable_tests", {}).get("failed") != 0
+        or any(
+            raster_function_readiness.get("bindings", {}).get(ref) != sha256(ref)
+            for ref in raster_function_implementation_refs
+        )
+        or raster_function_readiness.get("assertions", {}).get("external_custody_accessed") is not False
+        or raster_function_readiness.get("assertions", {}).get("real_attempt_started") is not False
+        or raster_function_review_unit.get("status") != "complete"
+        or raster_function_review_unit.get("human_gate") is not True
+        or raster_function_review_unit.get("gates", {}).get("human_decision_count") != 1
+        or raster_function_review_unit.get("gates", {}).get("owner_combined_decision") != "approved_exact"
+        or raster_function_recovery_unit.get("status") != "in_progress"
+        or raster_function_recovery_unit.get("human_gate") is not False
+        or raster_function_recovery_unit.get("gates", {}).get("inherited_owner_authority")
+        != "pass_exact_combined_approval"
+        or raster_function_recovery_unit.get("gates", {}).get("real_attempts_started") != 0
+        or raster_function_recovery_unit.get("gates", {}).get("intermediate_owner_reconfirmation_required") is not False
+        or profile.get("control_surfaces", {}).get("proposed_amendments") != []
+        or goal.get("proposed_amendments") != []
+        or profile.get("current_checkpoint", {}).get("checkpoint_id")
+        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION"
+        or goal.get("current_checkpoint")
+        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION"
+        or current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
+        != "implementation"
+        or (ROOT / "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-gate.json").exists()
+        or (ROOT / "records/readiness/m2-radar-raster-function-call-shape-recovery-004-final-preflight.json").exists()
+        or (ROOT / "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json").exists()
+    ):
+        fail("M2 radar raster-function call-shape recovery-004 approved implementation boundary differs or overclaims")
 
     violations = []
     for relative in tracked_files():

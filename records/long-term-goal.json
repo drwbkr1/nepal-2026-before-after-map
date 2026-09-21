@@ -11,7 +11,7 @@
   "completion_rule": "Complete only when the reproducible ArcGIS evidence package, reviewed change evidence, exportable deliverables, validation, and final release boundary are all satisfied.",
   "last_completed_milestone": "contracts/milestone-001.json",
   "proposed_milestone": null,
-  "current_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
+  "current_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION",
   "proposed_amendments": [],
   "active_amendments": [
     "records/source-gates/m2-dem-amendment-approval.json",
@@ -38,9 +38,11 @@
     "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
     "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
     "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
-    "records/source-gates/m2-radar-short-path-recovery-003-approval.json"
+    "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
+    "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json"
   ],
   "parallel_checkpoints": [
-    "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW"
-  ]
+    "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION"
+  ],
+  "next_action": null
 }

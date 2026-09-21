@@ -182,6 +182,7 @@ class ApplyOrbitCorrectionInputResolutionDiagnostic001ReviewTests(unittest.TestC
                 "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-"
             )
             or expected.startswith("M2-RADAR-SHORT-PATH-RECOVERY-003-")
+            or expected.startswith("M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-")
         )
         self.assertEqual(milestone["handoff"]["current_checkpoint"], expected)
         self.assertEqual(goal["current_checkpoint"], expected)

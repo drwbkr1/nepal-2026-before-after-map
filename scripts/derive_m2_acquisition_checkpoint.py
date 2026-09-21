@@ -351,6 +351,22 @@ RADAR_SHORT_PATH_RECOVERY_003_TERMINAL_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
     "next_action": "Review the sanitized terminal short-path recovery-003 evidence. The attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain outside this authority.",
 }
+RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OWNER-DECISION",
+    "next_action": "Review one combined M2 radar raster-function call-shape recovery-004 decision at bundle SHA-256 46c52b15d939a2ca7536205b61ec06158a84708e59425a92224a5a6dad7969c5 and proposal SHA-256 bee3b46d05bf671b8b6657ee12629dfeaa5f04a9adce40bd0593823a664429ed. One approval covers packet and implementation publication, the exact five-function correction, validation, one final no-content preflight, at most one fresh real attempt, reconciliation, and sanitized terminal publication without intermediate owner reconfirmation. Until approval, no publication, implementation, project-data or external-custody access, ArcPy processing invocation, geoprocessing, or fresh attempt is released.",
+}
+RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION",
+    "next_action": "Implement and validate the exact five-function Raster-returning call-shape correction under the approved single authority envelope, then publish public CI gates before the one final preflight and at most one fresh attempt.",
+}
+RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_EXECUTION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
+    "next_action": "Publish and validate the exact recovery-004 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order attempt begin; stop on the first failure and never retry.",
+}
+RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_TERMINAL_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
+    "next_action": "Review the sanitized terminal recovery-004 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline, change analysis, attribution, derived-pixel publication, or scientific publication is released.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -2682,7 +2698,7 @@ def current_radar_short_path_recovery_003_review_required(
         and review.get("status") == "in_progress"
         and review.get("human_gate") is True
         and review.get("gates", {}).get("owner_combined_decision") == "pending"
-        and recovery.get("status") == "pending"
+        and recovery.get("status") == "planned"
         and recovery.get("human_gate") is False
         and recovery.get("gates", {}).get("inherited_owner_authority") == "pending"
     )
@@ -2711,6 +2727,65 @@ def current_radar_short_path_recovery_003_stage(
     ):
         return None
     prefix = "m2-radar-short-path-recovery-003"
+    if (root / f"records/readiness/{prefix}-terminal-publication-gate.json").is_file() or (
+        root / f"records/processing/{prefix}-terminal-reconciliation.json"
+    ).is_file():
+        return "terminal"
+    if (root / f"records/readiness/{prefix}-implementation-publication-gate.json").is_file():
+        return "execution"
+    return "implementation"
+
+
+def current_radar_raster_function_call_shape_recovery_004_review_required(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the exact local zero-decision recovery-004 review packet."""
+    if state_counts != {"promoted": 8}:
+        return False
+    proposal_ref = "contracts/milestone-002-radar-raster-function-call-shape-recovery-004-proposal.json"
+    bundle_ref = "reviews/m2-radar-raster-function-call-shape-recovery-004/review-bundle.json"
+    approval_ref = "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json"
+    if (root / approval_ref).exists():
+        return False
+    try:
+        proposal = load(root / proposal_ref)
+        bundle = load(root / bundle_ref)
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-REVIEW", {})
+    recovery = units.get("M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004", {})
+    return bool(
+        hashlib.sha256((root / proposal_ref).read_bytes()).hexdigest()
+        == "bee3b46d05bf671b8b6657ee12629dfeaa5f04a9adce40bd0593823a664429ed"
+        and hashlib.sha256((root / bundle_ref).read_bytes()).hexdigest()
+        == "46c52b15d939a2ca7536205b61ec06158a84708e59425a92224a5a6dad7969c5"
+        and proposal.get("human_decision_count") == 0
+        and proposal.get("status") == "proposed_inactive_local_one_decision_review"
+        and proposal.get("authority_basis", {}).get("publication_implementation_or_execution_authorized") is False
+        and bundle.get("human_decision_count") == 0
+        and bundle.get("status") == "local_zero_decision_one_combined_owner_decision_pending"
+        and review.get("status") == "in_progress"
+        and review.get("human_gate") is True
+        and review.get("gates", {}).get("owner_combined_decision") == "pending"
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and recovery.get("status") == "planned"
+        and recovery.get("human_gate") is False
+        and recovery.get("gates", {}).get("inherited_owner_authority") == "pending"
+        and recovery.get("gates", {}).get("real_attempts_started") == 0
+    )
+
+
+def current_radar_raster_function_call_shape_recovery_004_stage(
+    root: Path, state_counts: dict[str, int]
+) -> str | None:
+    """Recognize the approved recovery-004 implementation, execution, or terminal stage."""
+    if state_counts != {"promoted": 8}:
+        return None
+    prefix = "m2-radar-raster-function-call-shape-recovery-004"
+    if not (root / f"records/source-gates/{prefix}-approval.json").is_file():
+        return None
     if (root / f"records/readiness/{prefix}-terminal-publication-gate.json").is_file() or (
         root / f"records/processing/{prefix}-terminal-reconciliation.json"
     ).is_file():
@@ -2999,10 +3074,24 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
-            short_path_stage = current_radar_short_path_recovery_003_stage(
+            recovery_004_review_required = current_radar_raster_function_call_shape_recovery_004_review_required(
                 ROOT, progress["state_counts"]
             )
-            if short_path_stage == "terminal":
+            recovery_004_stage = current_radar_raster_function_call_shape_recovery_004_stage(
+                ROOT, progress["state_counts"]
+            )
+            short_path_stage = None if (recovery_004_review_required or recovery_004_stage) else current_radar_short_path_recovery_003_stage(
+                ROOT, progress["state_counts"]
+            )
+            if recovery_004_stage == "terminal":
+                checkpoint = dict(RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_TERMINAL_CHECKPOINT)
+            elif recovery_004_stage == "execution":
+                checkpoint = dict(RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_EXECUTION_CHECKPOINT)
+            elif recovery_004_stage == "implementation":
+                checkpoint = dict(RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_IMPLEMENTATION_CHECKPOINT)
+            elif recovery_004_review_required:
+                checkpoint = dict(RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_REVIEW_CHECKPOINT)
+            elif short_path_stage == "terminal":
                 checkpoint = dict(RADAR_SHORT_PATH_RECOVERY_003_TERMINAL_CHECKPOINT)
             elif short_path_stage == "execution":
                 checkpoint = dict(RADAR_SHORT_PATH_RECOVERY_003_EXECUTION_GATE_CHECKPOINT)

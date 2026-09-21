@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-IA-RASTER-FUNCTION-SIGNATURE-AUDIT-001",
+  "observed_at_utc": "2026-09-21T17:23:35Z",
+  "status": "pass_read_only_installed_runtime_signature_inventory",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "license_level": "ArcInfo",
+    "python_executable": "C:\\Program Files\\ArcGIS\\Pro\\bin\\Python\\envs\\arcgispro-py3\\python.exe"
+  },
+  "interfaces": {
+    "ApplyOrbitCorrection": {
+      "namespace": "arcpy.ia",
+      "callable": true,
+      "signature": "(in_radar_data, in_orbit_file='#', folder='#')",
+      "doc_first_line": "ApplyOrbitCorrection_ia(in_radar_data, {in_orbit_file}, {folder})",
+      "geoprocessing_usage": "ApplyOrbitCorrection_ia(in_radar_data, {in_orbit_file}, {folder})"
+    },
+    "RemoveThermalNoise": {
+      "namespace": "arcpy.ia",
+      "callable": true,
+      "signature": "(in_radar_data, polarization_bands='#') -> arcpy.sa.Raster.Raster",
+      "doc_first_line": "RemoveThermalNoise_ia(in_radar_data, {polarization_bands;polarization_bands...})",
+      "geoprocessing_usage": "RemoveThermalNoise_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...})"
+    },
+    "ApplyRadiometricCalibration": {
+      "namespace": "arcpy.ia",
+      "callable": true,
+      "signature": "(in_radar_data, polarization_bands='#', calibration_type: Optional[Literal['BETA_NOUGHT', 'SIGMA_NOUGHT', 'GAMMA_NOUGHT', '#']] = '#') -> arcpy.sa.Raster.Raster",
+      "doc_first_line": "ApplyRadiometricCalibration_ia(in_radar_data, {polarization_bands;polarization_bands...}, {calibration_type})",
+      "geoprocessing_usage": "ApplyRadiometricCalibration_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...}, {Beta nought | Sigma nought | Gamma nought})"
+    },
+    "ApplyRadiometricTerrainFlattening": {
+      "namespace": "arcpy.ia",
+      "callable": true,
+      "signature": "(in_radar_data, in_dem_raster, geoid: Optional[Literal['GEOID', 'NONE', '#']] = '#', polarization_bands='#', calibration_type: Optional[Literal['SIGMA_NOUGHT', 'GAMMA_NOUGHT', '#']] = '#', out_scattering_area='#', out_geometric_distortion='#', out_geometric_distortion_mask='#') -> arcpy.sa.Raster.Raster",
+      "doc_first_line": "ApplyRadiometricTerrainFlattening_ia(in_radar_data, in_dem_raster, {geoid}, {polarization_bands;polarization_bands...}, {calibration_type}, {out_scattering_area}, {out_geometric_distortion}, {out_geometric_distortion_mask})",
+      "geoprocessing_usage": "ApplyRadiometricTerrainFlattening_ia(in_radar_data, out_radar_data, in_dem_raster, {GEOID | NONE}, {polarization_bands;polarization_bands...}, {Gamma nought | Sigma nought}, {out_scattering_area}, {out_geometric_distortion}, {out_geometric_distortion_mask})"
+    },
+    "ApplyGeometricTerrainCorrection": {
+      "namespace": "arcpy.ia",
+      "callable": true,
+      "signature": "(in_radar_data, polarization_bands='#', in_dem_raster='#', geoid: Optional[Literal['GEOID', 'NONE', '#']] = '#') -> arcpy.sa.Raster.Raster",
+      "doc_first_line": "ApplyGeometricTerrainCorrection_ia(in_radar_data, {polarization_bands;polarization_bands...}, {in_dem_raster}, {geoid})",
+      "geoprocessing_usage": "ApplyGeometricTerrainCorrection_ia(in_radar_data, out_radar_data, {polarization_bands;polarization_bands...}, {in_dem_raster}, {GEOID | NONE})"
+    },
+    "ConvertSARUnits": {
+      "namespace": "arcpy.ia",
+      "callable": true,
+      "signature": "(in_radar_data, conversion_type: Optional[Literal['LINEAR_TO_DB', 'DB_TO_LINEAR', 'AMPLITUDE_TO_INTENSITY', 'INTENSITY_TO_AMPLITUDE', 'COMPLEX_TO_INTENSITY', 'PHASE_TO_DISPLACEMENT', '#']] = '#') -> arcpy.sa.Raster.Raster",
+      "doc_first_line": "ConvertSARUnits_ia(in_radar_data, {conversion_type})",
+      "geoprocessing_usage": "ConvertSARUnits_ia(in_radar_data, out_radar_data, {Linear to dB | dB to linear | Amplitude to intensity | Intensity to amplitude | Complex to intensity | Unwrapped phase to displacement})"
+    }
+  },
+  "finding": {
+    "apply_orbit_correction_interface": "in_place_tool_no_output_path",
+    "other_five_interfaces": "raster_returning_functions_without_output_path",
+    "terminal_failure_explained_by_installed_remove_thermal_noise_signature": true,
+    "other_frozen_raster_function_call_shapes_also_include_an_output_path_not_present_in_the_installed_arcpy_ia_signature": true,
+    "historical_260_character_failure_root_cause_established": false,
+    "future_processing_success_established": false
+  },
+  "assertions": {
+    "signature_inspection_only": true,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "arcpy_function_invoked": false,
+    "geoprocessing_invoked": false,
+    "extension_checked_out": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "production_attempt_created": false,
+    "correction_implemented": false,
+    "scientific_result_established": false
+  }
+}

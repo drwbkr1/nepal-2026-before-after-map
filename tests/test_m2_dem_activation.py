@@ -158,6 +158,7 @@ class M2DemActivationTests(unittest.TestCase):
                 "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
                 "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
                 "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
+            "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
             ],
         )
         primary_intake = load("contracts/m2-intake.json")

@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "reconciliation_id": "NEPAL-M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-REVIEW-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-21T18:04:46Z",
+  "status": "reconciled_exact_attested_single_owner_decision",
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
+    "approval_sha256": "b7133be0ee697895d45ba5702dae046c183472f2c93bf81029f130d333aa460a",
+    "proposal_sha256": "bee3b46d05bf671b8b6657ee12629dfeaa5f04a9adce40bd0593823a664429ed",
+    "review_bundle_sha256": "46c52b15d939a2ca7536205b61ec06158a84708e59425a92224a5a6dad7969c5"
+  },
+  "assertions": {
+    "attestation_recorded": true,
+    "human_decision_count": 1,
+    "single_authority_envelope": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "implementation_or_execution_performed": false,
+    "arcpy_invoked": false,
+    "external_custody_accessed": false,
+    "geoprocessing_invoked": false
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "activation_id": "NEPAL-M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-APPROVAL-ACTIVATION",
+  "activated_at_utc": "2026-09-21T18:04:46Z",
+  "status": "pass_exact_combined_authority_activated_implementation_publication_pending",
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
+    "approval_sha256": "b7133be0ee697895d45ba5702dae046c183472f2c93bf81029f130d333aa460a",
+    "review_reconciliation_ref": "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-review-reconciliation.json",
+    "review_reconciliation_sha256": "1218d0732ae7794fc0efbe17dc680d02caed30a70baef4409f6d54ae9880acdf",
+    "proposal_ref": "contracts/milestone-002-radar-raster-function-call-shape-recovery-004-proposal.json",
+    "proposal_sha256": "bee3b46d05bf671b8b6657ee12629dfeaa5f04a9adce40bd0593823a664429ed",
+    "review_bundle_ref": "reviews/m2-radar-raster-function-call-shape-recovery-004/review-bundle.json",
+    "review_bundle_sha256": "46c52b15d939a2ca7536205b61ec06158a84708e59425a92224a5a6dad7969c5"
+  },
+  "released_now": {
+    "packet_and_implementation_publication": true,
+    "bounded_implementation_and_tests": true,
+    "public_ci_and_reconciliation": true,
+    "final_no_content_preflight_only_after_public_gates": true,
+    "one_fresh_real_attempt_only_after_preflight_pass": true,
+    "terminal_reconciliation_and_sanitized_publication": true,
+    "intermediate_owner_reconfirmation_required": false
+  },
+  "assertions": {
+    "implementation_started": false,
+    "public_ci_started": false,
+    "external_custody_accessed": false,
+    "arcpy_invoked": false,
+    "geoprocessing_invoked": false,
+    "real_attempt_started": false,
+    "automatic_retry_authorized": false,
+    "historical_root_cause_established": false,
+    "scientific_result_established": false
+  }
+}

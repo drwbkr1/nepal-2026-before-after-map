@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004",
+  "prepared_at_utc": "2026-09-21T17:28:55Z",
+  "status": "proposed_inactive_local_one_decision_review",
+  "human_decision_count": 0,
+  "authority_basis": {
+    "terminal_reconciliation_ref": "records/processing/m2-radar-short-path-recovery-003-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "b8770861ea87d7d36d04e7326699dfda220f4681e4b0a82da9085ac551fa46a4",
+    "outcome_reconciliation_ref": "records/processing/m2-radar-short-path-recovery-003-outcome-reconciliation.json",
+    "outcome_reconciliation_sha256": "3d3cf190abd41d6ba8302908e71aad153ea8bb5a3e2fcdbd362dc13330755a90",
+    "terminal_publication_gate_ref": "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-gate.json",
+    "terminal_publication_gate_sha256": "e546008ccf590c4588af1ea1d01bea6e6853397e6a7e0bb0636798e0ee9976e0",
+    "terminal_publication_reconciliation_ref": "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-reconciliation.json",
+    "terminal_publication_reconciliation_sha256": "7ecd8edd21980376f63b046111396dc807a216b67c0481dfeba1703a2b731736",
+    "signature_audit_ref": "records/observations/m2-radar-ia-raster-function-signature-audit-001.json",
+    "signature_audit_sha256": "fb7ebc9d4f62e855cdce8ef4cec2fe9bb8fcbb6220f4d4a0bda62877fa9b1eae",
+    "publication_implementation_or_execution_authorized": false
+  },
+  "problem_statement": {
+    "consumed_attempt_id": "radar-pixel-orbit-application-short-path-recovery-003-real-001",
+    "terminal_status": "block_short_path_recovery_003_source_001_after_orbit_call_no_retry",
+    "failed_source_id": "M1-SRC-001",
+    "observed_failure_type": "TypeError",
+    "observed_failure_message": "RemoveThermalNoise() takes from 1 to 2 positional arguments but 3 were given",
+    "apply_orbit_correction_returned_before_failure": "inferred_from_exact_control_flow",
+    "automatic_retry_performed": false,
+    "consumed_attempt_reuse_or_retry_allowed": false
+  },
+  "installed_runtime_evidence": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "namespace": "arcpy.ia",
+    "apply_orbit_correction_signature": "(in_radar_data, in_orbit_file='#', folder='#')",
+    "raster_returning_signatures": {
+      "RemoveThermalNoise": "(in_radar_data, polarization_bands='#') -> Raster",
+      "ApplyRadiometricCalibration": "(in_radar_data, polarization_bands='#', calibration_type='#') -> Raster",
+      "ApplyRadiometricTerrainFlattening": "(in_radar_data, in_dem_raster, geoid='#', polarization_bands='#', calibration_type='#', out_scattering_area='#', out_geometric_distortion='#', out_geometric_distortion_mask='#') -> Raster",
+      "ApplyGeometricTerrainCorrection": "(in_radar_data, polarization_bands='#', in_dem_raster='#', geoid='#') -> Raster",
+      "ConvertSARUnits": "(in_radar_data, conversion_type='#') -> Raster"
+    },
+    "all_other_frozen_arcpy_ia_raster_function_calls_include_an_invalid_output_path_argument": true
+  },
+  "proposed_correction": {
+    "scope": "recovery_specific_processing_module_only",
+    "apply_orbit_correction_call": "unchanged",
+    "raster_returning_call_pattern": "invoke without an output-path positional argument, require a Raster-like result, and save it exactly once to the predeclared absent output",
+    "exact_call_shapes": {
+      "RemoveThermalNoise": [
+        "in_radar_data",
+        "VV;VH"
+      ],
+      "ApplyRadiometricCalibration": [
+        "in_radar_data",
+        "VV;VH",
+        "BETA_NOUGHT"
+      ],
+      "ApplyRadiometricTerrainFlattening": [
+        "in_radar_data",
+        "in_dem_raster",
+        "NONE",
+        "VV;VH",
+        "GAMMA_NOUGHT",
+        "out_scattering_area",
+        "out_geometric_distortion",
+        "out_geometric_distortion_mask"
+      ],
+      "ApplyGeometricTerrainCorrection_gamma": [
+        "in_radar_data",
+        "VV;VH",
+        "in_dem_raster",
+        "NONE"
+      ],
+      "ConvertSARUnits": [
+        "in_radar_data",
+        "LINEAR_TO_DB"
+      ],
+      "ApplyGeometricTerrainCorrection_mask": [
+        "in_radar_data",
+        "#",
+        "in_dem_raster",
+        "NONE"
+      ]
+    },
+    "exclusive_output_save": true,
+    "per_tool_before_and_after_stage_markers": true,
+    "returned_object_must_expose_save": true,
+    "output_must_exist_after_save": true,
+    "no_change_to_algorithm_parameters": true
+  },
+  "proposed_attempt": {
+    "attempt_id": "radar-pixel-orbit-application-raster-function-recovery-004-real-001",
+    "distinct_from_all_consumed_attempts": true,
+    "external_attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\r4\\a1",
+    "external_attempt_root_characters": 57,
+    "source_aliases": {
+      "M1-SRC-001": "1",
+      "M1-SRC-002": "2",
+      "M1-SRC-003": "3",
+      "M1-SRC-004": "4",
+      "M1-SRC-005": "5",
+      "M1-SRC-006": "6"
+    },
+    "preserve_exact_source_order": [
+      "M1-SRC-001",
+      "M1-SRC-002",
+      "M1-SRC-003",
+      "M1-SRC-004",
+      "M1-SRC-005",
+      "M1-SRC-006"
+    ],
+    "preserve_exact_route_order": [
+      "PAIR-S1-ASC-R085-IW",
+      "PAIR-S1-DESC-R121-IW"
+    ],
+    "preserve_source_to_orbit_mapping": true,
+    "preserve_dem_aoi_crs_grid_mask_threshold_registration_and_route_contracts": true,
+    "maximum_processes": 1,
+    "maximum_real_attempts": 1,
+    "maximum_call_per_tool_per_source": 1,
+    "automatic_retry": false,
+    "stop_on_first_failure": true,
+    "collision_policy": "fail_before_external_content_read",
+    "overwrite": false,
+    "network_requests": 0,
+    "credential_actions": 0
+  },
+  "implementation_requirements": {
+    "historical_contracts_scripts_receipts_and_external_attempt_roots_immutable": true,
+    "new_contract_core_processing_runner_validator_and_receipt_namespace": true,
+    "all_five_installed_raster_function_signatures_corrected_together": true,
+    "per_tool_stage_journal_reserved_before_external_content_read": true,
+    "terminal_cleanup_and_fallback_receipts_reserved_before_external_content_read": true,
+    "external_source_orbit_and_dem_custody_read_only": true,
+    "derived_outputs_append_only": true,
+    "portable_tests": [
+      "all Raster-returning call shapes match installed signatures and omit output paths",
+      "each Raster-like result is saved exactly once to its declared absent output",
+      "missing save method, save failure, or missing post-save output stops the source",
+      "per-tool before and after markers remain monotonic and identify the exact terminal call",
+      "fixed source and route order and stop-on-first-failure remain unchanged",
+      "secret and absolute-path exposure is sanitized"
+    ],
+    "installed_arcgis_runtime_test": "Read-only inspect.signature and documentation validation for all six exact arcpy.ia interfaces; no project data, external custody, function invocation, geoprocessing, or extension checkout.",
+    "public_ci_required_before_real_attempt": true,
+    "final_no_content_preflight_required": true
+  },
+  "single_owner_decision_scope": {
+    "public_packet_and_implementation_publication": true,
+    "bounded_implementation_and_reversible_correction": true,
+    "portable_and_installed_arcgis_signature_tests": true,
+    "public_ci_and_exact_reconciliation": true,
+    "one_final_no_content_preflight": true,
+    "one_fresh_raster_function_recovery_attempt": true,
+    "terminal_reconciliation_and_sanitized_publication": true,
+    "no_intermediate_owner_reconfirmation": true
+  },
+  "not_authorized_by_approval": [
+    "reuse, resume, retry, reconstruction, deletion, or mutation of a consumed attempt or receipt",
+    "a second recovery-004 attempt or automatic retry",
+    "source, date, product, orbit, DEM, AOI, CRS, grid, mask, threshold, registration, route, or scientific-predicate substitution",
+    "credential, network, account, terms, installation, or UAC action",
+    "baseline admission, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication",
+    "a historical-root-cause claim based only on a later success or failure"
+  ],
+  "result_semantics": {
+    "signature_precheck_failure": "terminal block before external-custody content read or ArcPy function invocation",
+    "first_tool_failure": "terminal block on the exact failed tool and source; no later tool, source, route, or retry",
+    "full_pass": "six exact sources and two exact routes pass the unchanged QA-only processing contracts",
+    "full_pass_does_not_establish": [
+      "historical root cause",
+      "event-related change",
+      "geomorphic interpretation",
+      "event attribution",
+      "derived-pixel publication authority",
+      "scientific publication authority"
+    ]
+  },
+  "next_action": "Owner reviews one combined decision. Approval would cover packet and implementation publication, the exact five-function call-shape correction, tests, public CI, one final no-content preflight, at most one fresh real attempt, reconciliation, and sanitized terminal publication without intermediate confirmation. Until approval, no publication, implementation, external-custody access, ArcPy function invocation, geoprocessing, or new attempt is released."
+}

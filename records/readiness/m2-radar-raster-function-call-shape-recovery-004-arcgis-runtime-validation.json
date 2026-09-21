@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-ARCGIS-RUNTIME-VALIDATION",
+  "status": "pass_installed_arcgis_runtime_six_interface_signature_only_validation",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1"
+  },
+  "expected_parameters": {
+    "ApplyOrbitCorrection": [
+      "in_radar_data",
+      "in_orbit_file",
+      "folder"
+    ],
+    "RemoveThermalNoise": [
+      "in_radar_data",
+      "polarization_bands"
+    ],
+    "ApplyRadiometricCalibration": [
+      "in_radar_data",
+      "polarization_bands",
+      "calibration_type"
+    ],
+    "ApplyRadiometricTerrainFlattening": [
+      "in_radar_data",
+      "in_dem_raster",
+      "geoid",
+      "polarization_bands",
+      "calibration_type",
+      "out_scattering_area",
+      "out_geometric_distortion",
+      "out_geometric_distortion_mask"
+    ],
+    "ApplyGeometricTerrainCorrection": [
+      "in_radar_data",
+      "polarization_bands",
+      "in_dem_raster",
+      "geoid"
+    ],
+    "ConvertSARUnits": [
+      "in_radar_data",
+      "conversion_type"
+    ]
+  },
+  "observed_parameters": {
+    "ApplyOrbitCorrection": [
+      "in_radar_data",
+      "in_orbit_file",
+      "folder"
+    ],
+    "RemoveThermalNoise": [
+      "in_radar_data",
+      "polarization_bands"
+    ],
+    "ApplyRadiometricCalibration": [
+      "in_radar_data",
+      "polarization_bands",
+      "calibration_type"
+    ],
+    "ApplyRadiometricTerrainFlattening": [
+      "in_radar_data",
+      "in_dem_raster",
+      "geoid",
+      "polarization_bands",
+      "calibration_type",
+      "out_scattering_area",
+      "out_geometric_distortion",
+      "out_geometric_distortion_mask"
+    ],
+    "ApplyGeometricTerrainCorrection": [
+      "in_radar_data",
+      "polarization_bands",
+      "in_dem_raster",
+      "geoid"
+    ],
+    "ConvertSARUnits": [
+      "in_radar_data",
+      "conversion_type"
+    ]
+  },
+  "observed_signatures": {
+    "ApplyOrbitCorrection": "(in_radar_data, in_orbit_file='#', folder='#')",
+    "RemoveThermalNoise": "(in_radar_data, polarization_bands='#') -> arcpy.sa.Raster.Raster",
+    "ApplyRadiometricCalibration": "(in_radar_data, polarization_bands='#', calibration_type: Optional[Literal['BETA_NOUGHT', 'SIGMA_NOUGHT', 'GAMMA_NOUGHT', '#']] = '#') -> arcpy.sa.Raster.Raster",
+    "ApplyRadiometricTerrainFlattening": "(in_radar_data, in_dem_raster, geoid: Optional[Literal['GEOID', 'NONE', '#']] = '#', polarization_bands='#', calibration_type: Optional[Literal['SIGMA_NOUGHT', 'GAMMA_NOUGHT', '#']] = '#', out_scattering_area='#', out_geometric_distortion='#', out_geometric_distortion_mask='#') -> arcpy.sa.Raster.Raster",
+    "ApplyGeometricTerrainCorrection": "(in_radar_data, polarization_bands='#', in_dem_raster='#', geoid: Optional[Literal['GEOID', 'NONE', '#']] = '#') -> arcpy.sa.Raster.Raster",
+    "ConvertSARUnits": "(in_radar_data, conversion_type: Optional[Literal['LINEAR_TO_DB', 'DB_TO_LINEAR', 'AMPLITUDE_TO_INTENSITY', 'INTENSITY_TO_AMPLITUDE', 'COMPLEX_TO_INTENSITY', 'PHASE_TO_DISPLACEMENT', '#']] = '#') -> arcpy.sa.Raster.Raster"
+  },
+  "raster_returning": {
+    "ApplyOrbitCorrection": false,
+    "RemoveThermalNoise": true,
+    "ApplyRadiometricCalibration": true,
+    "ApplyRadiometricTerrainFlattening": true,
+    "ApplyGeometricTerrainCorrection": true,
+    "ConvertSARUnits": true
+  },
+  "documentation_present": {
+    "ApplyOrbitCorrection": true,
+    "RemoveThermalNoise": true,
+    "ApplyRadiometricCalibration": true,
+    "ApplyRadiometricTerrainFlattening": true,
+    "ApplyGeometricTerrainCorrection": true,
+    "ConvertSARUnits": true
+  },
+  "assertions": {
+    "signature_inspection_only": true,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "raster_function_invoked": false,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "extension_checked_out": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "production_attempt_created": false,
+    "scientific_result_established": false
+  }
+}

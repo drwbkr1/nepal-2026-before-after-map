@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-21T17:28:55Z",
+  "status": "local_zero_decision_one_combined_owner_decision_pending",
+  "human_decision_count": 0,
+  "candidate_identity": {
+    "proposal_ref": "contracts/milestone-002-radar-raster-function-call-shape-recovery-004-proposal.json",
+    "proposal_sha256": "bee3b46d05bf671b8b6657ee12629dfeaa5f04a9adce40bd0593823a664429ed"
+  },
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-radar-raster-function-call-shape-recovery-004-proposal.json",
+      "sha256": "bee3b46d05bf671b8b6657ee12629dfeaa5f04a9adce40bd0593823a664429ed",
+      "role": "exact_machine_readable_proposal"
+    },
+    {
+      "path": "docs/M2_RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_REVIEW.md",
+      "sha256": "a43584c40f69ac5ad414349bd9073cfdb4f7d0a338862f1148504c966c7ca157",
+      "role": "human_readable_decision_brief"
+    },
+    {
+      "path": "records/observations/m2-radar-ia-raster-function-signature-audit-001.json",
+      "sha256": "fb7ebc9d4f62e855cdce8ef4cec2fe9bb8fcbb6220f4d4a0bda62877fa9b1eae",
+      "role": "installed_runtime_read_only_signature_audit"
+    },
+    {
+      "path": "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-gate.json",
+      "sha256": "e546008ccf590c4588af1ea1d01bea6e6853397e6a7e0bb0636798e0ee9976e0",
+      "role": "published_recovery_003_terminal_gate"
+    },
+    {
+      "path": "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-reconciliation.json",
+      "sha256": "7ecd8edd21980376f63b046111396dc807a216b67c0481dfeba1703a2b731736",
+      "role": "published_recovery_003_terminal_gate_reconciliation"
+    }
+  ],
+  "decision_item": {
+    "decision_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-COMBINED-AUTHORITY",
+    "question": "Approve the exact five-function installed-interface correction and one bounded recovery-004 envelope through sanitized terminal publication?",
+    "recommendation": "approve",
+    "reason": "All five downstream arcpy.ia calls share the same output-path mismatch against the installed Raster-returning signatures; reviewing them together avoids serial failures and duplicate human gates while preserving every data and scientific predicate.",
+    "approval_effect": "One approval covers packet and implementation publication, exact correction, tests, public CI, one final no-content preflight, at most one fresh real attempt, reconciliation, and sanitized terminal publication without intermediate owner reconfirmation.",
+    "rejection_effect": "No publication, implementation, external-custody read, ArcPy invocation, geoprocessing, or new attempt occurs."
+  },
+  "response_method": {
+    "mode": "ordinary_chat_authorization",
+    "formal_response_form_required": false,
+    "attestation_required": true,
+    "required_bindings": [
+      "bundle SHA-256",
+      "proposal SHA-256"
+    ]
+  },
+  "claim_boundary": {
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "baseline_or_change_analysis_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

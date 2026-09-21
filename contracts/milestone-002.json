@@ -4561,7 +4561,7 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
         "config/qa/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-contract.json"
@@ -4582,17 +4582,17 @@
         "geoprocessing_calls": 0,
         "gate_state_commit_sha": "b705dadd8ab989e1dcbfa04d9a3bd082064a6177",
         "gate_state_public_ci_run_id": 35478371708,
-        "gate_state_publication_sha256": "2b6d21637c715084e7281a1d8259c66a45b742793a5f26594cc56960bd446953"
+        "gate_state_publication_sha256": "2b6d21637c715084e7281a1d8259c66a45b742793a5f26594cc56960bd446953",
+        "terminal_process_consumed_without_durable_receipts": true
       },
       "exit_condition_delta": {
-        "expected": [
-          "terminal diagnostic and cleanup receipts"
-        ],
+        "expected": [],
         "observed": [],
-        "decision_value": "pending",
-        "rationale": "Either PASS or BLOCK remains diagnostic-only and creates no processing authority."
+        "decision_value": "no_progress",
+        "rationale": "The diagnostic process was consumed without durable terminal receipts; the later receipt-persistence recovery preserved the current terminal evidence under a distinct authority and process."
       },
-      "next_dependency": null
+      "next_dependency": null,
+      "disposition": "stop"
     },
     {
       "id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-REVIEW",
@@ -4903,6 +4903,103 @@
       },
       "next_dependency": null,
       "disposition": "block"
+    },
+    {
+      "id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-REVIEW",
+      "purpose": "Review one exact combined authority envelope for the installed five-function Raster-returning call-shape correction, bounded validation, at most one fresh attempt, reconciliation, and sanitized terminal publication.",
+      "depends_on": [
+        "M2-RADAR-SHORT-PATH-RECOVERY-003"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "complete",
+      "inputs": [
+        "records/processing/m2-radar-short-path-recovery-003-terminal-reconciliation.json",
+        "records/processing/m2-radar-short-path-recovery-003-outcome-reconciliation.json",
+        "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-gate.json",
+        "records/readiness/m2-radar-short-path-recovery-003-terminal-publication-reconciliation.json",
+        "records/observations/m2-radar-ia-raster-function-signature-audit-001.json",
+        "contracts/milestone-002-radar-raster-function-call-shape-recovery-004-proposal.json",
+        "reviews/m2-radar-raster-function-call-shape-recovery-004/review-bundle.json",
+        "docs/M2_RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_REVIEW.md",
+        "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
+        "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-review-reconciliation.json",
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-approval-activation.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json"
+      ],
+      "gates": {
+        "human_decision_count": 1,
+        "owner_combined_decision": "approved_exact",
+        "ordinary_chat_authorization_permitted": true,
+        "formal_response_form_required": false,
+        "attestation_required": true,
+        "intermediate_owner_reconfirmation_required_after_approval": false,
+        "publication_authorized": true,
+        "implementation_authorized": true,
+        "external_custody_access_authorized": true,
+        "arcpy_processing_or_geoprocessing_authorized": true,
+        "new_real_attempt_authorized": true
+      },
+      "exit_condition_delta": {
+        "expected": [
+          "one exact attested owner decision bound to proposal and bundle hashes"
+        ],
+        "observed": [
+          "one exact attested owner decision bound to proposal and bundle hashes"
+        ],
+        "decision_value": "approved",
+        "rationale": "The exact combined approval persists across the unchanged bounded sequence through sanitized terminal publication; no intermediate reconfirmation is required."
+      },
+      "next_dependency": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004"
+    },
+    {
+      "id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004",
+      "purpose": "Only after the exact combined owner decision, inherit it across packet and implementation publication, the five-function correction, tests, public CI, one final no-content preflight, at most one fresh attempt, reconciliation, and sanitized terminal publication.",
+      "depends_on": [
+        "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-REVIEW"
+      ],
+      "action_class": "data_processing",
+      "human_gate": false,
+      "status": "in_progress",
+      "inputs": [
+        "contracts/milestone-002-radar-raster-function-call-shape-recovery-004-proposal.json",
+        "reviews/m2-radar-raster-function-call-shape-recovery-004/review-bundle.json",
+        "records/observations/m2-radar-ia-raster-function-signature-audit-001.json",
+        "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
+        "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-review-reconciliation.json",
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-approval-activation.json"
+      ],
+      "outputs": [
+        "config/qa/m2-radar-raster-function-call-shape-recovery-004-contract.json",
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-readiness.json",
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-gate.json",
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-gate-state-publication.json",
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-final-preflight.json",
+        "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json",
+        "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json",
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-gate.json"
+      ],
+      "gates": {
+        "inherited_owner_authority": "pass_exact_combined_approval",
+        "maximum_real_attempts": 1,
+        "real_attempts_started": 0,
+        "automatic_retry": false,
+        "stop_on_first_failure": true,
+        "intermediate_owner_reconfirmation_required": false,
+        "external_custody_accessed": false,
+        "arcpy_processing_or_geoprocessing_invoked": false
+      },
+      "exit_condition_delta": {
+        "expected": [
+          "one terminal recovery-004 result with immutable reconciliation and sanitized publication"
+        ],
+        "observed": [],
+        "decision_value": "in_progress",
+        "rationale": "Implementation and validation are active under the exact inherited owner authority; the one real attempt remains gated on successful public CI and a final no-content preflight."
+      },
+      "next_dependency": null
     }
   ],
   "path_efficiency": {
@@ -4959,8 +5056,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
-    "next_action": "Review the sanitized terminal short-path recovery-003 evidence. The attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain outside this authority.",
+    "current_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION",
+    "next_action": "Implement and validate the exact five-function Raster-returning call-shape correction under the approved single authority envelope, then publish public CI gates before the one final preflight and at most one fresh attempt.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -5010,9 +5107,10 @@
       "The ApplyOrbitCorrection diagnostic packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline, change analysis, attribution, derived-pixel publication, or scientific action is released.",
       "The diagnostic receipt-persistence recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, both zero-byte reserved receipts remain immutable, and no implementation, ArcPy, data access, new process, retry, reconstruction, geoprocessing, radar processing, or scientific action is released.",
       "The exact short-path recovery-003 packet is approved as one bounded authority envelope through sanitized terminal publication. Continue unchanged implementation, public CI gates, one final no-content preflight, at most one fresh real attempt, reconciliation, and terminal publication without intermediate owner reconfirmation. Never retry or broaden into baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication.",
-      "Short-path recovery-003 is terminal and consumed. All 269 projected paths were at or below 240 characters (maximum 237); ArcGIS setup, DEM/support creation, and the M1-SRC-001 orbit-correction call completed before the next frozen arcpy.ia.RemoveThermalNoise call failed on its namespace-specific signature. No later source or route started, no retry occurred, external custody remained unchanged, and no historical-root-cause, radar-readiness, baseline, change, attribution, derived-pixel, or scientific claim is established."
+      "Short-path recovery-003 is terminal and consumed. All 269 projected paths were at or below 240 characters (maximum 237); ArcGIS setup, DEM/support creation, and the M1-SRC-001 orbit-correction call completed before the next frozen arcpy.ia.RemoveThermalNoise call failed on its namespace-specific signature. No later source or route started, no retry occurred, external custody remained unchanged, and no historical-root-cause, radar-readiness, baseline, change, attribution, derived-pixel, or scientific claim is established.",
+      "The exact recovery-004 packet is approved as one bounded authority envelope through sanitized terminal publication. Implementation and validation may continue without intermediate reconfirmation, but project-data or external-custody reads, ArcPy processing, geoprocessing, and the one fresh attempt remain gated on successful public CI and the final no-content preflight. Never retry or broaden into baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication."
     ],
-    "parallel_checkpoint": "M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-REVIEW",
-    "parallel_next_action": "Review the sanitized terminal short-path recovery-003 evidence. The attempt is consumed and cannot be resumed, reused, or retried. Baseline admission, change analysis, interpretation, attribution, derived-pixel publication, and scientific publication remain outside this authority."
+    "parallel_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION",
+    "parallel_next_action": "Implement and validate the exact five-function Raster-returning call-shape correction under the approved single authority envelope, then publish public CI gates before the one final preflight and at most one fresh attempt."
   }
 }

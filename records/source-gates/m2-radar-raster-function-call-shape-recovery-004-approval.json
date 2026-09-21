@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-APPROVAL",
+  "recorded_at_utc": "2026-09-21T18:04:46Z",
+  "status": "approved_exact_single_bounded_authority_envelope_through_sanitized_terminal_publication",
+  "authority_ref": "user-instruction:2026-09-21:m2-radar-raster-function-call-shape-recovery-004-exact-approval",
+  "owner_statement": "I approve M2 radar raster-function call-shape recovery-004 review bundle `46c52b15d939a2ca7536205b61ec06158a84708e59425a92224a5a6dad7969c5` and proposal `bee3b46d05bf671b8b6657ee12629dfeaa5f04a9adce40bd0593823a664429ed`. I authorize the proposal’s single bounded authority envelope through sanitized terminal publication, without intermediate owner reconfirmation. I attest this is my completed decision.",
+  "attestation": true,
+  "human_decision_count": 1,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-radar-raster-function-call-shape-recovery-004-proposal.json",
+    "proposal_sha256": "bee3b46d05bf671b8b6657ee12629dfeaa5f04a9adce40bd0593823a664429ed",
+    "review_bundle_ref": "reviews/m2-radar-raster-function-call-shape-recovery-004/review-bundle.json",
+    "review_bundle_sha256": "46c52b15d939a2ca7536205b61ec06158a84708e59425a92224a5a6dad7969c5"
+  },
+  "authorized_scope": {
+    "public_packet_and_implementation_publication": true,
+    "bounded_implementation_and_reversible_correction": true,
+    "portable_and_installed_arcgis_signature_tests": true,
+    "public_ci_and_exact_reconciliation": true,
+    "one_final_no_content_preflight": true,
+    "maximum_fresh_raster_function_recovery_attempts": 1,
+    "terminal_reconciliation_and_sanitized_publication": true,
+    "intermediate_owner_reconfirmation_required": false
+  },
+  "not_authorized": [
+    "reuse, resume, retry, reconstruction, deletion, or mutation of a consumed attempt or receipt",
+    "a second recovery-004 attempt or automatic retry",
+    "source, date, product, orbit, DEM, AOI, CRS, grid, mask, threshold, registration, route, or scientific-predicate substitution",
+    "credential, network, account, terms, installation, or UAC action",
+    "baseline admission, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication",
+    "a historical-root-cause claim based only on a later success or failure"
+  ]
+}
