@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-21T20:43:23Z",
+  "status": "pass_public_default_branch_ci_esri_sequence_recovery_005_implementation_ready",
+  "implementation_commit_sha": "7b559b5235c16df71c734c2ae82b147d17926af6",
+  "public_ci_run_id": 35651659897,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35651659897",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1324,
+  "public_test_count": 717,
+  "public_intentional_skip_count": 6,
+  "bindings": {
+    "recovery_contract_sha256": "e388f84dd97db781e89d9115e03a7cda92895e1dfb9c4adf9a35e1ce494e1b0b",
+    "recovery_core_sha256": "4c4486e8bdeeac1dc97eb47be397a55533dfadc9cf4a7fa4c218fe536ad387b0",
+    "recovery_runner_sha256": "6078f9a191e3da45274d7e6671fcd4e66e7e6b2a5c9def03e572e6e719de30d6",
+    "arcgis_validator_sha256": "393d0e3e6d5d933f558821919231deb966fa40c316c76643528bdb0320b23d1c",
+    "portable_test_sha256": "0a6a1a452a544bde82ebe18e7cb13796d38a4a89f1e7d34fa28daa945a1153fb",
+    "base_contract_sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+    "base_core_sha256": "fd192878acf33e2c73eeeba1ec42865eac48dfc5742b3ae4cf54b51de42755ba",
+    "base_runner_sha256": "0b65fbecbeab373d8bbbf2cbbc28f8817e3c3bb08584dbf1a9720dcbb19ceb06",
+    "esri_sequence_processing_sha256": "faadf83f4ae1c35209ed104ab3ba2c97ad233615655aaa31dfc72851b968e0fd",
+    "implementation_readiness_sha256": "9486bd7d9fff7bd925d8608a1d8550e37051116763f01811b10056569ab94905"
+  },
+  "released_now": {
+    "execution_gate_publication": true,
+    "final_no_content_preflight_before_execution_gate_publication": false,
+    "real_attempt_before_all_gates": false
+  },
+  "assertions": {
+    "exact_public_default_branch_commit": true,
+    "public_ci_passed": true,
+    "owner_authority_inherited_without_reconfirmation": true,
+    "external_custody_accessed": false,
+    "production_arcpy_function_invoked": false,
+    "geoprocessing_invoked": false,
+    "real_attempt_started": false,
+    "automatic_retry_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "historical_root_cause_established": false,
+    "scientific_result_established": false
+  }
+}

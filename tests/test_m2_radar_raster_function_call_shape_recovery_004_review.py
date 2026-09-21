@@ -31,7 +31,11 @@ BUNDLE_SHA256 = "46c52b15d939a2ca7536205b61ec06158a84708e59425a92224a5a6dad7969c
 APPROVAL_SHA256 = "b7133be0ee697895d45ba5702dae046c183472f2c93bf81029f130d333aa460a"
 RECONCILIATION_SHA256 = "1218d0732ae7794fc0efbe17dc680d02caed30a70baef4409f6d54ae9880acdf"
 ACTIVATION_SHA256 = "f4539c9707a5935cee0189867ba966a665becc14dccf3bc35a617b981a913a4b"
-CHECKPOINT = "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION"
+CHECKPOINTS = {
+    "implementation": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
+    "execution": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
+    "terminal": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-REVIEW",
+}
 
 
 def load(relative: str) -> dict:
@@ -113,9 +117,11 @@ class M2RadarRasterFunctionCallShapeRecovery004ReviewTests(unittest.TestCase):
         milestone = load("contracts/milestone-002.json")
         profile = load("records/project-control-profile.json")
         goal = load("records/long-term-goal.json")
-        self.assertEqual(milestone["handoff"]["current_checkpoint"], CHECKPOINT)
-        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], CHECKPOINT)
-        self.assertEqual(goal["current_checkpoint"], CHECKPOINT)
+        recovery_005_stage = current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8})
+        checkpoint = CHECKPOINTS[recovery_005_stage]
+        self.assertEqual(milestone["handoff"]["current_checkpoint"], checkpoint)
+        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], checkpoint)
+        self.assertEqual(goal["current_checkpoint"], checkpoint)
         self.assertEqual(
             profile["parallel_checkpoints"][0]["authority_ref"],
             "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
@@ -123,7 +129,7 @@ class M2RadarRasterFunctionCallShapeRecovery004ReviewTests(unittest.TestCase):
         self.assertFalse(current_radar_raster_function_call_shape_recovery_004_review_required(ROOT, {"promoted": 8}))
         self.assertEqual(current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8}), "terminal")
         self.assertFalse(current_radar_esri_sequence_recovery_005_review_required(ROOT, {"promoted": 8}))
-        self.assertEqual(current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8}), "implementation")
+        self.assertEqual(current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8}), recovery_005_stage)
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts/derive_m2_acquisition_checkpoint.py")],
             cwd=ROOT, capture_output=True, text=True, check=False,
@@ -131,7 +137,7 @@ class M2RadarRasterFunctionCallShapeRecovery004ReviewTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         payload = json.loads(result.stdout)
         self.assertEqual(payload["status"], "pass")
-        self.assertEqual(payload["checkpoint"]["checkpoint_id"], CHECKPOINT)
+        self.assertEqual(payload["checkpoint"]["checkpoint_id"], checkpoint)
 
     def test_implementation_contract_and_arcgis_signature_receipt_exist(self) -> None:
         contract = load("config/qa/m2-radar-raster-function-call-shape-recovery-004-contract.json")

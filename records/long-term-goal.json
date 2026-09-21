@@ -11,7 +11,7 @@
   "completion_rule": "Complete only when the reproducible ArcGIS evidence package, reviewed change evidence, exportable deliverables, validation, and final release boundary are all satisfied.",
   "last_completed_milestone": "contracts/milestone-001.json",
   "proposed_milestone": null,
-  "current_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
+  "current_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
   "proposed_amendments": [],
   "active_amendments": [
     "records/source-gates/m2-dem-amendment-approval.json",
@@ -43,7 +43,8 @@
     "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json"
   ],
   "parallel_checkpoints": [
-    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION"
+    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION"
   ],
-  "next_action": "Implement and validate the exact approved REFINED_LEE step after radiometric terrain flattening and before gamma geometric terrain correction. Publish and reconcile the implementation and public CI gate under the single approved authority envelope; do not read external custody or begin the real attempt before both public gates and the one final no-content preflight pass."
+  "next_action": "Run the single final no-content preflight. Only on its pass may the one fresh fixed-order recovery-005 attempt read exact custody and invoke the approved Esri-sequence route. Stop on the first failure and never retry.",
+  "parallel_next_action": "Run the single final no-content preflight. Only on its pass may the one fresh fixed-order recovery-005 attempt read exact custody and invoke the approved Esri-sequence route. Stop on the first failure and never retry."
 }

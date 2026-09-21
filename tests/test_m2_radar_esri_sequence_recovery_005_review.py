@@ -29,7 +29,11 @@ ACTIVATION_REF = "records/readiness/m2-radar-esri-sequence-recovery-005-approval
 APPROVAL_SHA256 = "da95bf4570a7062166a758ce5cfb037300b2a039bfc9454995cd366313595a20"
 RECONCILIATION_SHA256 = "c8c25fc6958db2c927c8550b885a82f03d5582754e95cf9fcbaf26261a35365b"
 ACTIVATION_SHA256 = "9376187bb965d15b70a7e15aa930f4052d0f7cbf7c9e6fd6b03e5dae830b5290"
-CHECKPOINT = "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION"
+CHECKPOINTS = {
+    "implementation": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
+    "execution": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
+    "terminal": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-REVIEW",
+}
 
 
 def load(relative: str) -> dict:
@@ -131,15 +135,17 @@ class M2RadarEsriSequenceRecovery005ReviewTests(unittest.TestCase):
         self.assertEqual(recovery["gates"]["inherited_owner_authority"], "pass_exact_combined_approval")
         self.assertEqual(recovery["gates"]["real_attempts_started"], 0)
         self.assertFalse(current_radar_esri_sequence_recovery_005_review_required(ROOT, {"promoted": 8}))
-        self.assertEqual(current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8}), "implementation")
+        self.assertEqual(current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8}), "execution")
 
     def test_controls_and_derivation_point_to_implementation(self) -> None:
         milestone = load("contracts/milestone-002.json")
         profile = load("records/project-control-profile.json")
         goal = load("records/long-term-goal.json")
-        self.assertEqual(milestone["handoff"]["current_checkpoint"], CHECKPOINT)
-        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], CHECKPOINT)
-        self.assertEqual(goal["current_checkpoint"], CHECKPOINT)
+        stage = current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8})
+        checkpoint = CHECKPOINTS[stage]
+        self.assertEqual(milestone["handoff"]["current_checkpoint"], checkpoint)
+        self.assertEqual(profile["current_checkpoint"]["checkpoint_id"], checkpoint)
+        self.assertEqual(goal["current_checkpoint"], checkpoint)
         self.assertEqual(profile["control_surfaces"]["proposed_amendments"], [])
         self.assertEqual(goal["proposed_amendments"], [])
         self.assertEqual(profile["parallel_checkpoints"][0]["authority_ref"], APPROVAL_REF)
@@ -153,7 +159,7 @@ class M2RadarEsriSequenceRecovery005ReviewTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         payload = json.loads(result.stdout)
         self.assertEqual(payload["status"], "pass")
-        self.assertEqual(payload["checkpoint"]["checkpoint_id"], CHECKPOINT)
+        self.assertEqual(payload["checkpoint"]["checkpoint_id"], checkpoint)
 
 
 if __name__ == "__main__":

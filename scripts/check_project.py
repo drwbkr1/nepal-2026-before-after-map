@@ -1473,6 +1473,8 @@ REQUIRED = [
     "tests/test_m2_radar_esri_sequence_recovery_005.py",
     "records/readiness/m2-radar-esri-sequence-recovery-005-arcgis-runtime-validation.json",
     "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json",
+    "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-gate.json",
+    "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-reconciliation.json",
     "tests/test_m2_radar_raster_function_call_shape_recovery_004.py",
     ".github/workflows/validate.yml",
 ]
@@ -17705,9 +17707,9 @@ def main() -> None:
         or profile.get("control_surfaces", {}).get("proposed_amendments") != []
         or goal.get("proposed_amendments") != []
         or profile.get("current_checkpoint", {}).get("checkpoint_id")
-        != "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION"
+        != ESRI_SEQUENCE_RECOVERY_005_STAGE[current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8})][0]
         or goal.get("current_checkpoint")
-        != "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION"
+        != ESRI_SEQUENCE_RECOVERY_005_STAGE[current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8})][0]
         or current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
         != "terminal"
     ):
@@ -17723,6 +17725,8 @@ def main() -> None:
     esri_sequence_contract_ref = "config/qa/m2-radar-esri-sequence-recovery-005-contract.json"
     esri_sequence_runtime_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-arcgis-runtime-validation.json"
     esri_sequence_readiness_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json"
+    esri_sequence_publication_gate_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-gate.json"
+    esri_sequence_publication_reconciliation_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-reconciliation.json"
     esri_sequence_observation = json.loads((ROOT / esri_sequence_observation_ref).read_text(encoding="utf-8"))
     esri_sequence_proposal = json.loads((ROOT / esri_sequence_proposal_ref).read_text(encoding="utf-8"))
     esri_sequence_bundle = json.loads((ROOT / esri_sequence_bundle_ref).read_text(encoding="utf-8"))
@@ -17732,9 +17736,12 @@ def main() -> None:
     esri_sequence_contract = json.loads((ROOT / esri_sequence_contract_ref).read_text(encoding="utf-8"))
     esri_sequence_runtime = json.loads((ROOT / esri_sequence_runtime_ref).read_text(encoding="utf-8"))
     esri_sequence_readiness = json.loads((ROOT / esri_sequence_readiness_ref).read_text(encoding="utf-8"))
+    esri_sequence_publication_gate = json.loads((ROOT / esri_sequence_publication_gate_ref).read_text(encoding="utf-8"))
+    esri_sequence_publication_reconciliation = json.loads((ROOT / esri_sequence_publication_reconciliation_ref).read_text(encoding="utf-8"))
     esri_sequence_review_unit = m2_units.get("M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-REVIEW", {})
     esri_sequence_recovery_unit = m2_units.get("M2-RADAR-ESRI-SEQUENCE-RECOVERY-005", {})
-    expected_esri_sequence_next_action = ESRI_SEQUENCE_RECOVERY_005_STAGE["implementation"][1]
+    esri_sequence_stage = current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8})
+    expected_esri_sequence_checkpoint, expected_esri_sequence_next_action = ESRI_SEQUENCE_RECOVERY_005_STAGE[esri_sequence_stage]
     if (
         sha256(esri_sequence_observation_ref)
         != "1237c8e8cc6d3905228dd7797782782b0262d634489c62d56d6850c213e7f4eb"
@@ -17814,6 +17821,23 @@ def main() -> None:
         or esri_sequence_readiness.get("assertions", {}).get("exact_refined_lee_sequence_inserted") is not True
         or esri_sequence_readiness.get("assertions", {}).get("external_custody_accessed") is not False
         or esri_sequence_readiness.get("assertions", {}).get("real_attempt_started") is not False
+        or esri_sequence_publication_gate.get("status")
+        != "pass_public_default_branch_ci_esri_sequence_recovery_005_implementation_ready"
+        or esri_sequence_publication_gate.get("implementation_commit_sha")
+        != "7b559b5235c16df71c734c2ae82b147d17926af6"
+        or esri_sequence_publication_gate.get("public_ci_run_id") != 35651659897
+        or esri_sequence_publication_gate.get("public_ci_conclusion") != "success"
+        or esri_sequence_publication_gate.get("repository_required_file_count") != 1324
+        or esri_sequence_publication_gate.get("public_test_count") != 717
+        or esri_sequence_publication_gate.get("public_intentional_skip_count") != 6
+        or esri_sequence_publication_gate.get("bindings", {}).get("implementation_readiness_sha256")
+        != sha256(esri_sequence_readiness_ref)
+        or esri_sequence_publication_reconciliation.get("status")
+        != "pass_exact_implementation_publication_reconciled_execution_gate_publication_pending"
+        or esri_sequence_publication_reconciliation.get("bindings", {}).get("implementation_publication_gate_sha256")
+        != sha256(esri_sequence_publication_gate_ref)
+        or esri_sequence_publication_reconciliation.get("bindings", {}).get("implementation_readiness_sha256")
+        != sha256(esri_sequence_readiness_ref)
         or esri_sequence_review_unit.get("status") != "complete"
         or esri_sequence_review_unit.get("human_gate") is not True
         or esri_sequence_review_unit.get("gates", {}).get("human_decision_count") != 1
@@ -17826,9 +17850,14 @@ def main() -> None:
         or esri_sequence_recovery_unit.get("gates", {}).get("inherited_owner_authority")
         != "pass_exact_combined_approval"
         or esri_sequence_recovery_unit.get("gates", {}).get("real_attempts_started") != 0
-        or esri_sequence_recovery_unit.get("gates", {}).get("publication_started") is not False
+        or esri_sequence_recovery_unit.get("gates", {}).get("publication_started") is not True
+        or esri_sequence_recovery_unit.get("gates", {}).get("public_ci") != "success"
+        or esri_sequence_recovery_unit.get("gates", {}).get("implementation_publication_gate_sha256")
+        != sha256(esri_sequence_publication_gate_ref)
+        or esri_sequence_recovery_unit.get("gates", {}).get("implementation_publication_reconciliation_sha256")
+        != sha256(esri_sequence_publication_reconciliation_ref)
         or active_m2.get("handoff", {}).get("current_checkpoint")
-        != "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION"
+        != expected_esri_sequence_checkpoint
         or active_m2.get("handoff", {}).get("next_action") != expected_esri_sequence_next_action
         or profile.get("current_checkpoint", {}).get("next_action") != expected_esri_sequence_next_action
         or goal.get("next_action") != expected_esri_sequence_next_action
@@ -17836,7 +17865,7 @@ def main() -> None:
         or profile.get("control_surfaces", {}).get("proposed_amendments") != []
         or goal.get("proposed_amendments") != []
         or current_radar_esri_sequence_recovery_005_review_required(ROOT, {"promoted": 8}) is not False
-        or current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8}) != "implementation"
+        or esri_sequence_stage != "execution"
     ):
         fail("M2 radar Esri-sequence recovery-005 approved implementation boundary differs or overclaims")
 

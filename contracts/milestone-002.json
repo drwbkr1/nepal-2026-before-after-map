@@ -5117,7 +5117,9 @@
         "scripts/run_m2_radar_esri_sequence_recovery_005.py",
         "scripts/validate_m2_radar_esri_sequence_recovery_005_arcgis.py",
         "tests/test_m2_radar_esri_sequence_recovery_005.py",
-        "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json"
+        "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-gate.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-reconciliation.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json",
@@ -5139,13 +5141,17 @@
         "intermediate_owner_reconfirmation_required": false,
         "external_custody_accessed": false,
         "arcpy_processing_or_geoprocessing_invoked": false,
-        "publication_started": false,
+        "publication_started": true,
         "official_method_guidance_adopted": true,
         "recovery_specific_refined_lee_method_amendment": "approved_exact",
         "implementation_readiness_sha256": "9486bd7d9fff7bd925d8608a1d8550e37051116763f01811b10056569ab94905",
         "portable_synthetic_tests": "success",
         "installed_arcgis_runtime_signature_validation": "success",
-        "repository_validation": "success"
+        "repository_validation": "success",
+        "public_ci": "success",
+        "implementation_publication_gate_sha256": "8f43dcefb6ca79f24c91af8a54866a6456eaa354f9ef14a4cf29eb05fabeaae3",
+        "implementation_publication_reconciliation_sha256": "6be8ce527ee3787623d1f5677083b5ac3815389d0eab1787eac659ba6ceb3ffd",
+        "final_no_content_preflight": false
       },
       "exit_condition_delta": {
         "expected": [
@@ -5153,7 +5159,7 @@
         ],
         "observed": [],
         "decision_value": null,
-        "rationale": "Approved implementation is locally validated and ready for public default-branch CI; no real attempt has started."
+        "rationale": "The exact implementation passed public default-branch CI. Execution-gate publication and the one final no-content preflight remain before the single real attempt."
       },
       "next_dependency": null
     }
@@ -5212,8 +5218,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
-    "next_action": "Implement and validate the exact approved REFINED_LEE step after radiometric terrain flattening and before gamma geometric terrain correction. Publish and reconcile the implementation and public CI gate under the single approved authority envelope; do not read external custody or begin the real attempt before both public gates and the one final no-content preflight pass.",
+    "current_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
+    "next_action": "Run the single final no-content preflight. Only on its pass may the one fresh fixed-order recovery-005 attempt read exact custody and invoke the approved Esri-sequence route. Stop on the first failure and never retry.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -5266,7 +5272,7 @@
       "Short-path recovery-003 is terminal and consumed. All 269 projected paths were at or below 240 characters (maximum 237); ArcGIS setup, DEM/support creation, and the M1-SRC-001 orbit-correction call completed before the next frozen arcpy.ia.RemoveThermalNoise call failed on its namespace-specific signature. No later source or route started, no retry occurred, external custody remained unchanged, and no historical-root-cause, radar-readiness, baseline, change, attribution, derived-pixel, or scientific claim is established.",
       "Recovery-004 is terminal and consumed. M1-SRC-001 completed ApplyOrbitCorrection and the corrected Raster-returning RemoveThermalNoise, ApplyRadiometricCalibration, and ApplyRadiometricTerrainFlattening calls and saves, then ArcGIS ERROR 000425 stopped the gamma ApplyGeometricTerrainCorrection invocation before it returned a Raster or created its output. No later source, route, retry, baseline, change analysis, attribution, derived-pixel publication, historical-root-cause claim, radar-readiness claim, or scientific result is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
-    "parallel_next_action": "Implement and validate the exact approved REFINED_LEE step after radiometric terrain flattening and before gamma geometric terrain correction. Publish and reconcile the implementation and public CI gate under the single approved authority envelope; do not read external custody or begin the real attempt before both public gates and the one final no-content preflight pass."
+    "parallel_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
+    "parallel_next_action": "Run the single final no-content preflight. Only on its pass may the one fresh fixed-order recovery-005 attempt read exact custody and invoke the approved Esri-sequence route. Stop on the first failure and never retry."
   }
 }

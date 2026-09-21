@@ -713,16 +713,16 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
+    "checkpoint_id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Implement and validate the exact approved REFINED_LEE step after radiometric terrain flattening and before gamma geometric terrain correction. Publish and reconcile the implementation and public CI gate under the single approved authority envelope; do not read external custody or begin the real attempt before both public gates and the one final no-content preflight pass."
+    "next_action": "Run the single final no-content preflight. Only on its pass may the one fresh fixed-order recovery-005 attempt read exact custody and invoke the approved Esri-sequence route. Stop on the first failure and never retry."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
+      "checkpoint_id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
       "authority_ref": "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
-      "next_action": "Implement and validate the exact approved REFINED_LEE step after radiometric terrain flattening and before gamma geometric terrain correction. Publish and reconcile the implementation and public CI gate under the single approved authority envelope; do not read external custody or begin the real attempt before both public gates and the one final no-content preflight pass."
+      "next_action": "Run the single final no-content preflight. Only on its pass may the one fresh fixed-order recovery-005 attempt read exact custody and invoke the approved Esri-sequence route. Stop on the first failure and never retry."
     }
   ],
   "human_gates": {

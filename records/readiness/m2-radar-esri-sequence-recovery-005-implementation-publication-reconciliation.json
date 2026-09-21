@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION-PUBLICATION-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-21T20:43:23Z",
+  "status": "pass_exact_implementation_publication_reconciled_execution_gate_publication_pending",
+  "bindings": {
+    "implementation_publication_gate_ref": "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-gate.json",
+    "implementation_publication_gate_sha256": "8f43dcefb6ca79f24c91af8a54866a6456eaa354f9ef14a4cf29eb05fabeaae3",
+    "approval_sha256": "da95bf4570a7062166a758ce5cfb037300b2a039bfc9454995cd366313595a20",
+    "implementation_readiness_sha256": "9486bd7d9fff7bd925d8608a1d8550e37051116763f01811b10056569ab94905"
+  },
+  "released_now": {
+    "execution_gate_state_publication": true,
+    "final_no_content_preflight": false,
+    "real_attempt": false
+  },
+  "assertions": {
+    "implementation_commit_public": true,
+    "implementation_public_ci_passed": true,
+    "external_custody_accessed": false,
+    "arcpy_processing_invoked": false,
+    "geoprocessing_invoked": false,
+    "real_attempt_started": false,
+    "historical_root_cause_established": false,
+    "scientific_result_established": false
+  }
+}
