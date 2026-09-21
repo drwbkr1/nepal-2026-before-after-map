@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-SHORT-PATH-RECOVERY-003-TERMINAL-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-21T17:14:26Z",
+  "status": "pass_public_terminal_block_published_no_retry",
+  "terminal_commit_sha": "9d9cf49c5a4ebcd8d2fb47821b0e07031490b9b9",
+  "public_ci_run_id": 35630577679,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35630577679",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1283,
+  "public_test_count": 676,
+  "public_intentional_skip_count": 13,
+  "authority_ref": "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
+  "bindings": {
+    "final_preflight_ref": "records/readiness/m2-radar-short-path-recovery-003-final-preflight.json",
+    "final_preflight_sha256": "e62ee783c55d952cd0bbaa3c9b43f4d6a5b30adf5f19a163b3ff6f4e80a1eef3",
+    "terminal_reconciliation_ref": "records/processing/m2-radar-short-path-recovery-003-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "b8770861ea87d7d36d04e7326699dfda220f4681e4b0a82da9085ac551fa46a4",
+    "outcome_reconciliation_ref": "records/processing/m2-radar-short-path-recovery-003-outcome-reconciliation.json",
+    "outcome_reconciliation_sha256": "3d3cf190abd41d6ba8302908e71aad153ea8bb5a3e2fcdbd362dc13330755a90",
+    "published_milestone_sha256": "2fc222406dd4260f767a5dd456b7d8cb36d20722976766734247f738b46fcd99",
+    "published_project_control_profile_sha256": "fae11f054256c943ccedaa27f795cc768e8e0fb6d66c66d180da9bfb7d52e54e",
+    "published_long_term_goal_sha256": "75bcd95bcc217c98eb2258ae9643d91e481ac17fa08efcaa2616ec20d8472689"
+  },
+  "released_now": {
+    "sanitized_terminal_evidence_public": true,
+    "terminal_owner_review": true,
+    "attempt_retry_or_reuse": false,
+    "second_real_attempt": false,
+    "new_radar_implementation": false,
+    "baseline_or_change_analysis": false,
+    "derived_pixel_publication": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "attempt_terminal_and_consumed": true,
+    "path_projection_passed_at_maximum_237_characters": true,
+    "m1_src_001_orbit_call_returned_before_later_failure": true,
+    "stopped_at_remove_thermal_noise_call_shape": true,
+    "later_source_or_route_started": false,
+    "automatic_retry_performed": false,
+    "cleanup_receipt_persisted": true,
+    "external_custody_unchanged": true,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Review the terminal block. The attempt is consumed and cannot be retried. Any correction or further radar processing requires separately scoped authority."
+}
