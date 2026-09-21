@@ -29,7 +29,7 @@ BUNDLE_SHA256 = "46c52b15d939a2ca7536205b61ec06158a84708e59425a92224a5a6dad7969c
 APPROVAL_SHA256 = "b7133be0ee697895d45ba5702dae046c183472f2c93bf81029f130d333aa460a"
 RECONCILIATION_SHA256 = "1218d0732ae7794fc0efbe17dc680d02caed30a70baef4409f6d54ae9880acdf"
 ACTIVATION_SHA256 = "f4539c9707a5935cee0189867ba966a665becc14dccf3bc35a617b981a913a4b"
-CHECKPOINT = "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION"
+CHECKPOINT = "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW"
 
 
 def load(relative: str) -> dict:
@@ -96,16 +96,18 @@ class M2RadarRasterFunctionCallShapeRecovery004ReviewTests(unittest.TestCase):
         self.assertEqual(review["gates"]["human_decision_count"], 1)
         self.assertEqual(review["gates"]["owner_combined_decision"], "approved_exact")
         self.assertTrue(review["gates"]["publication_authorized"])
-        self.assertEqual(recovery["status"], "in_progress")
+        self.assertEqual(recovery["status"], "complete")
+        self.assertEqual(recovery["disposition"], "block")
         self.assertEqual(recovery["gates"]["inherited_owner_authority"], "pass_exact_combined_approval")
-        self.assertEqual(recovery["gates"]["real_attempts_started"], 0)
+        self.assertEqual(recovery["gates"]["real_attempts_started"], 1)
+        self.assertTrue(recovery["gates"]["attempt_consumed"])
         pending_human = [
             unit["id"] for unit in milestone["units"]
             if unit.get("human_gate") is True and unit.get("status") in {"ready", "in_progress", "pending"}
         ]
         self.assertEqual(pending_human, [])
 
-    def test_controls_and_derivation_point_to_implementation(self) -> None:
+    def test_controls_and_derivation_point_to_terminal_review(self) -> None:
         milestone = load("contracts/milestone-002.json")
         profile = load("records/project-control-profile.json")
         goal = load("records/long-term-goal.json")
@@ -114,7 +116,7 @@ class M2RadarRasterFunctionCallShapeRecovery004ReviewTests(unittest.TestCase):
         self.assertEqual(goal["current_checkpoint"], CHECKPOINT)
         self.assertEqual(profile["parallel_checkpoints"][0]["authority_ref"], APPROVAL_REF)
         self.assertFalse(current_radar_raster_function_call_shape_recovery_004_review_required(ROOT, {"promoted": 8}))
-        self.assertEqual(current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8}), "execution")
+        self.assertEqual(current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8}), "terminal")
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts/derive_m2_acquisition_checkpoint.py")],
             cwd=ROOT, capture_output=True, text=True, check=False,
@@ -132,6 +134,27 @@ class M2RadarRasterFunctionCallShapeRecovery004ReviewTests(unittest.TestCase):
         self.assertEqual(runtime["status"], "pass_installed_arcgis_runtime_six_interface_signature_only_validation")
         self.assertTrue(runtime["assertions"]["signature_inspection_only"])
         self.assertFalse(runtime["assertions"]["geoprocessing_invoked"])
+
+    def test_terminal_reconciliation_preserves_failure_and_no_retry_boundary(self) -> None:
+        terminal = load("records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json")
+        outcome = load("records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json")
+        self.assertEqual(
+            terminal["status"],
+            "block_raster_function_recovery_004_source_001_geometric_terrain_correction_gamma_no_retry",
+        )
+        self.assertEqual(terminal["execution_result"]["source_ids_attempted"], ["M1-SRC-001"])
+        self.assertEqual(terminal["execution_result"]["route_ids_attempted"], [])
+        self.assertEqual(terminal["execution_result"]["stopped_tool"], "ApplyGeometricTerrainCorrection_gamma")
+        self.assertEqual(terminal["execution_result"]["failure_type"], "ExecuteError")
+        self.assertFalse(terminal["call_boundary_observation"]["function_returned_successfully"])
+        self.assertFalse(terminal["call_boundary_observation"]["returned_raster_save_started"])
+        self.assertFalse(terminal["call_boundary_observation"]["output_created"])
+        self.assertFalse(terminal["assertions"]["automatic_retry_performed"])
+        self.assertFalse(terminal["assertions"]["second_attempt_created"])
+        self.assertEqual(outcome["bindings"]["terminal_reconciliation_sha256"], sha256(
+            "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json"
+        ))
+        self.assertFalse(outcome["assertions"]["radar_recovery_readiness_established"])
 
 
 if __name__ == "__main__":

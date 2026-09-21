@@ -1436,6 +1436,9 @@ REQUIRED = [
     "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-gate.json",
     "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-reconciliation.json",
     "records/readiness/m2-radar-raster-function-call-shape-recovery-004-gate-state-publication.json",
+    "records/readiness/m2-radar-raster-function-call-shape-recovery-004-final-preflight.json",
+    "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json",
+    "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json",
     "tests/test_m2_radar_raster_function_call_shape_recovery_004.py",
     ".github/workflows/validate.yml",
 ]
@@ -17350,6 +17353,9 @@ def main() -> None:
     raster_function_implementation_gate_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-gate.json"
     raster_function_implementation_reconciliation_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-reconciliation.json"
     raster_function_gate_state_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-gate-state-publication.json"
+    raster_function_preflight_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-final-preflight.json"
+    raster_function_terminal_ref = "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json"
+    raster_function_outcome_ref = "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json"
     raster_function_observation = json.loads((ROOT / raster_function_observation_ref).read_text(encoding="utf-8"))
     raster_function_proposal = json.loads((ROOT / raster_function_proposal_ref).read_text(encoding="utf-8"))
     raster_function_bundle = json.loads((ROOT / raster_function_bundle_ref).read_text(encoding="utf-8"))
@@ -17362,6 +17368,9 @@ def main() -> None:
     raster_function_implementation_gate = json.loads((ROOT / raster_function_implementation_gate_ref).read_text(encoding="utf-8"))
     raster_function_implementation_reconciliation = json.loads((ROOT / raster_function_implementation_reconciliation_ref).read_text(encoding="utf-8"))
     raster_function_gate_state = json.loads((ROOT / raster_function_gate_state_ref).read_text(encoding="utf-8"))
+    raster_function_preflight = json.loads((ROOT / raster_function_preflight_ref).read_text(encoding="utf-8"))
+    raster_function_terminal = json.loads((ROOT / raster_function_terminal_ref).read_text(encoding="utf-8"))
+    raster_function_outcome = json.loads((ROOT / raster_function_outcome_ref).read_text(encoding="utf-8"))
     raster_function_review_unit = m2_units.get(
         "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-REVIEW", {}
     )
@@ -17487,22 +17496,61 @@ def main() -> None:
         or raster_function_review_unit.get("human_gate") is not True
         or raster_function_review_unit.get("gates", {}).get("human_decision_count") != 1
         or raster_function_review_unit.get("gates", {}).get("owner_combined_decision") != "approved_exact"
-        or raster_function_recovery_unit.get("status") != "in_progress"
+        or raster_function_recovery_unit.get("status") != "complete"
+        or raster_function_recovery_unit.get("disposition") != "block"
         or raster_function_recovery_unit.get("human_gate") is not False
         or raster_function_recovery_unit.get("gates", {}).get("inherited_owner_authority")
         != "pass_exact_combined_approval"
-        or raster_function_recovery_unit.get("gates", {}).get("real_attempts_started") != 0
+        or raster_function_recovery_unit.get("gates", {}).get("real_attempts_started") != 1
+        or raster_function_recovery_unit.get("gates", {}).get("attempt_consumed") is not True
+        or raster_function_recovery_unit.get("gates", {}).get("stopped_source_id") != "M1-SRC-001"
+        or raster_function_recovery_unit.get("gates", {}).get("stopped_tool")
+        != "ApplyGeometricTerrainCorrection_gamma"
+        or raster_function_recovery_unit.get("gates", {}).get("later_sources_or_routes_started") is not False
+        or raster_function_recovery_unit.get("gates", {}).get("terminal_reconciliation_sha256")
+        != sha256(raster_function_terminal_ref)
+        or raster_function_recovery_unit.get("gates", {}).get("outcome_reconciliation_sha256")
+        != sha256(raster_function_outcome_ref)
         or raster_function_recovery_unit.get("gates", {}).get("intermediate_owner_reconfirmation_required") is not False
+        or raster_function_preflight.get("status")
+        != "pass_final_no_content_preflight_one_fresh_attempt_released"
+        or raster_function_preflight.get("attempt_id")
+        != "radar-pixel-orbit-application-raster-function-recovery-004-real-001"
+        or raster_function_preflight.get("assertions", {}).get("external_custody_content_read") is not False
+        or raster_function_preflight.get("assertions", {}).get("fresh_attempt_process_started") is not False
+        or raster_function_terminal.get("status")
+        != "block_raster_function_recovery_004_source_001_geometric_terrain_correction_gamma_no_retry"
+        or raster_function_terminal.get("disposition") != "block"
+        or raster_function_terminal.get("attempt_consumed") is not True
+        or raster_function_terminal.get("execution_result", {}).get("source_ids_attempted") != ["M1-SRC-001"]
+        or raster_function_terminal.get("execution_result", {}).get("route_ids_attempted") != []
+        or raster_function_terminal.get("execution_result", {}).get("stopped_source_id") != "M1-SRC-001"
+        or raster_function_terminal.get("execution_result", {}).get("stopped_tool")
+        != "ApplyGeometricTerrainCorrection_gamma"
+        or raster_function_terminal.get("execution_result", {}).get("failure_type") != "ExecuteError"
+        or raster_function_terminal.get("execution_result", {}).get("failure_code")
+        != "unexpected_processing_failure"
+        or "ERROR 000425" not in raster_function_terminal.get("execution_result", {}).get("failure_message", "")
+        or raster_function_terminal.get("execution_result", {}).get("external_custody_unchanged") is not True
+        or raster_function_terminal.get("call_boundary_observation", {}).get("function_returned_successfully") is not False
+        or raster_function_terminal.get("call_boundary_observation", {}).get("returned_raster_save_started") is not False
+        or raster_function_terminal.get("call_boundary_observation", {}).get("output_created") is not False
+        or raster_function_terminal.get("assertions", {}).get("automatic_retry_performed") is not False
+        or raster_function_terminal.get("assertions", {}).get("second_attempt_created") is not False
+        or raster_function_terminal.get("assertions", {}).get("historical_failure_root_cause_established") is not False
+        or raster_function_terminal.get("assertions", {}).get("radar_recovery_readiness_established") is not False
+        or raster_function_outcome.get("status") != raster_function_terminal.get("status")
+        or raster_function_outcome.get("bindings", {}).get("terminal_reconciliation_sha256")
+        != sha256(raster_function_terminal_ref)
+        or raster_function_outcome.get("assertions", {}).get("radar_recovery_readiness_established") is not False
         or profile.get("control_surfaces", {}).get("proposed_amendments") != []
         or goal.get("proposed_amendments") != []
         or profile.get("current_checkpoint", {}).get("checkpoint_id")
-        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION"
+        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW"
         or goal.get("current_checkpoint")
-        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION"
+        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW"
         or current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
-        != "execution"
-        or (ROOT / "records/readiness/m2-radar-raster-function-call-shape-recovery-004-final-preflight.json").exists()
-        or (ROOT / "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json").exists()
+        != "terminal"
     ):
         fail("M2 radar raster-function call-shape recovery-004 approved implementation boundary differs or overclaims")
 

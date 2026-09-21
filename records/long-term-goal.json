@@ -11,7 +11,7 @@
   "completion_rule": "Complete only when the reproducible ArcGIS evidence package, reviewed change evidence, exportable deliverables, validation, and final release boundary are all satisfied.",
   "last_completed_milestone": "contracts/milestone-001.json",
   "proposed_milestone": null,
-  "current_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
+  "current_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
   "proposed_amendments": [],
   "active_amendments": [
     "records/source-gates/m2-dem-amendment-approval.json",
@@ -42,7 +42,7 @@
     "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json"
   ],
   "parallel_checkpoints": [
-    "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION"
+    "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW"
   ],
   "next_action": null
 }

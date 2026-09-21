@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-21T19:10:14Z",
+  "status": "block_raster_function_recovery_004_source_001_geometric_terrain_correction_gamma_no_retry",
+  "disposition": "block",
+  "attempt_id": "radar-pixel-orbit-application-raster-function-recovery-004-real-001",
+  "attempt_consumed": true,
+  "bindings": {
+    "approval_sha256": "b7133be0ee697895d45ba5702dae046c183472f2c93bf81029f130d333aa460a",
+    "contract_sha256": "62f3df970137fc34665c26c12054ec0aa8498e29c8ff053d84e9dc512130b88d",
+    "implementation_publication_gate_sha256": "5d7772e8bb6548248017e0be219abd37de1702d519f6d86bc4c29e5f8580c8c0",
+    "gate_state_publication_sha256": "78d75e256cb38eb6c7324af010bac619c4edc9008200a304a5c09a04756ad02a",
+    "final_preflight_ref": "records/readiness/m2-radar-raster-function-call-shape-recovery-004-final-preflight.json",
+    "final_preflight_sha256": "93fea93fa78f7bc1dc4633087147c28514533fc8da14227577d2128159beef63",
+    "external_receipts": {
+      "started.json": {
+        "size_bytes": 1912,
+        "sha256": "d2b0c7a614d4763c15972bdeb9d1a0482f2d5c758d5165c12c310a3f841ce38f"
+      },
+      "terminal-reservation.json": {
+        "size_bytes": 318,
+        "sha256": "994c2be0f3bb76d67c370a77b6d1ba4a3ad9be5b27ce9a9165026fd8914afeda"
+      },
+      "cleanup-reservation.json": {
+        "size_bytes": 316,
+        "sha256": "082f353e8ba03e0d561533f220f0b9e4cf302d32a682e5fd04d7500f241156ad"
+      },
+      "fallback.jsonl": {
+        "size_bytes": 365,
+        "sha256": "f8d948d60aa933ecd9d572ef38e359ed4cfedb438dbce9cc4d2a45b8aab6d41b"
+      },
+      "stages.jsonl": {
+        "size_bytes": 3499,
+        "sha256": "ebcf6fadd4c85d8e4d059ef10adfbb067a5ac8ff52fc3371fe7d372d802a92c3"
+      },
+      "terminal.json": {
+        "size_bytes": 3631,
+        "sha256": "40b316c58a6c376cbaf3576c58155bc15fd7f311a756740a6a6e06d69c99b03f"
+      },
+      "cleanup.json": {
+        "size_bytes": 635,
+        "sha256": "89f33f4656a1d21162bcaf917710b405aa633c60ced440da37fff04c936dffe2"
+      },
+      "receipts/sources/m1-src-001-started.json": {
+        "size_bytes": 532,
+        "sha256": "4f649813ee06eb0cd2e235339e57158db6a85191c9ca42b868b7b574ed1ba80f"
+      },
+      "receipts/sources/m1-src-001-terminal.json": {
+        "size_bytes": 814,
+        "sha256": "fa75b00e9485067625bef6ca65dcbbe41038ac2f07d3d94e9d50bb47b3386531"
+      }
+    }
+  },
+  "execution_result": {
+    "path_projection": {
+      "status": "pass_all_projected_paths_at_or_below_240",
+      "projected_path_count": 269,
+      "maximum_projected_path_characters": 237,
+      "maximum_allowed_path_characters": 240,
+      "longest_path_kind": "verified_safe_member",
+      "absolute_paths_recorded": false
+    },
+    "arcgis_import_completed": true,
+    "product_info": "ArcInfo",
+    "image_analyst_checkout_completed": true,
+    "spatial_checkout_completed": true,
+    "dem_mosaic_completed": true,
+    "analysis_support_completed": true,
+    "source_ids_attempted": [
+      "M1-SRC-001"
+    ],
+    "source_ids_not_started": [
+      "M1-SRC-002",
+      "M1-SRC-003",
+      "M1-SRC-004",
+      "M1-SRC-005",
+      "M1-SRC-006"
+    ],
+    "route_ids_attempted": [],
+    "stopped_source_id": "M1-SRC-001",
+    "stopped_tool": "ApplyGeometricTerrainCorrection_gamma",
+    "completed_processing_tools": [
+      "ApplyOrbitCorrection",
+      "RemoveThermalNoise",
+      "ApplyRadiometricCalibration",
+      "ApplyRadiometricTerrainFlattening"
+    ],
+    "failure_type": "ExecuteError",
+    "failure_code": "unexpected_processing_failure",
+    "failure_message": "ERROR 000425: Failed to create ortho-corrected raster dataset Failed to execute (ApplyGeometricTerrainCorrection). ",
+    "cleanup_status": "cleanup_completed",
+    "external_custody_unchanged": true
+  },
+  "call_boundary_observation": {
+    "tool_namespace": "arcpy.ia.ApplyGeometricTerrainCorrection",
+    "installed_namespace_signature": "(in_radar_data, polarization_bands='#', in_dem_raster='#', geoid: Optional[Literal['GEOID', 'NONE', '#']] = '#') -> arcpy.sa.Raster.Raster",
+    "exact_call_shape": "ApplyGeometricTerrainCorrection(gamma_slant, 'VV;VH', dem_mosaic, 'NONE')",
+    "function_started": true,
+    "function_returned_successfully": false,
+    "returned_raster_save_started": false,
+    "output_created": false,
+    "preceding_corrected_raster_function_calls_and_saves_completed": [
+      "RemoveThermalNoise",
+      "ApplyRadiometricCalibration",
+      "ApplyRadiometricTerrainFlattening"
+    ],
+    "convert_sar_units_started": false,
+    "mask_geometric_terrain_correction_started": false,
+    "historical_failure_root_cause_established": false,
+    "radar_recovery_readiness_established": false
+  },
+  "assertions": {
+    "exact_attempt_root_used": true,
+    "path_projection_completed_before_copy_or_arcpy": true,
+    "all_projected_paths_at_or_below_240": true,
+    "observed_maximum_projected_path_characters": 237,
+    "first_source_failure_stopped_later_sources_and_routes": true,
+    "automatic_retry_performed": false,
+    "second_attempt_created": false,
+    "consumed_attempt_reused_or_retried": false,
+    "source_orbit_or_dem_custody_mutated": false,
+    "network_request_performed_by_runner": false,
+    "credential_value_read": false,
+    "baseline_admission_authorized": false,
+    "change_analysis_executed": false,
+    "interpretation_or_attribution_executed": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false,
+    "historical_failure_root_cause_established": false,
+    "radar_recovery_readiness_established": false
+  },
+  "next_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW"
+}

@@ -699,16 +699,16 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
+    "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Run the single authorized final no-content preflight. Stop on failure; only on pass may the one fresh fixed-order recovery-004 attempt read exact custody and invoke the frozen radar route. Never retry."
+    "next_action": "Review the sanitized terminal recovery-004 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline, change analysis, attribution, derived-pixel publication, or scientific publication is released."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
+      "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
       "authority_ref": "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
-      "next_action": "Run the single authorized final no-content preflight. Stop on failure; only on pass may the one fresh fixed-order recovery-004 attempt read exact custody and invoke the frozen radar route. Never retry."
+      "next_action": "Review the sanitized terminal recovery-004 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline, change analysis, attribution, derived-pixel publication, or scientific publication is released."
     }
   ],
   "human_gates": {

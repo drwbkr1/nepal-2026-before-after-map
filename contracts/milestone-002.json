@@ -4962,7 +4962,7 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "contracts/milestone-002-radar-raster-function-call-shape-recovery-004-proposal.json",
         "reviews/m2-radar-raster-function-call-shape-recovery-004/review-bundle.json",
@@ -4972,7 +4972,10 @@
         "records/readiness/m2-radar-raster-function-call-shape-recovery-004-approval-activation.json",
         "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-gate.json",
         "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-reconciliation.json",
-        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-gate-state-publication.json"
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-gate-state-publication.json",
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-final-preflight.json",
+        "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json",
+        "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json"
       ],
       "outputs": [
         "config/qa/m2-radar-raster-function-call-shape-recovery-004-contract.json",
@@ -4987,29 +4990,39 @@
       "gates": {
         "inherited_owner_authority": "pass_exact_combined_approval",
         "maximum_real_attempts": 1,
-        "real_attempts_started": 0,
+        "real_attempts_started": 1,
         "automatic_retry": false,
         "stop_on_first_failure": true,
         "intermediate_owner_reconfirmation_required": false,
-        "external_custody_accessed": false,
-        "arcpy_processing_or_geoprocessing_invoked": false,
+        "external_custody_accessed": true,
+        "arcpy_processing_or_geoprocessing_invoked": true,
         "public_default_branch_ci": "pass_implementation_commit_048137d8193c3f253a94a58b759032d89add3655_run_35638588780",
         "local_portable_tests": "pass_695_total_6_intentional_skips",
         "installed_arcgis_signature_validation": "pass_six_interfaces_no_geoprocessing",
         "implementation_readiness_sha256": "0d72249ede3cb733cc462fccdd5b50c61a603ef80c8aa16f8523eed54ad47975",
         "implementation_publication_gate_sha256": "5d7772e8bb6548248017e0be219abd37de1702d519f6d86bc4c29e5f8580c8c0",
         "execution_gate_publication": "pass_commit_1bc8a20e956cea1cdb3a48e6c50a4a6ece7c7702_run_35639072351",
-        "gate_state_publication_sha256": "78d75e256cb38eb6c7324af010bac619c4edc9008200a304a5c09a04756ad02a"
+        "gate_state_publication_sha256": "78d75e256cb38eb6c7324af010bac619c4edc9008200a304a5c09a04756ad02a",
+        "final_no_content_preflight": "pass_once",
+        "attempt_consumed": true,
+        "stopped_source_id": "M1-SRC-001",
+        "stopped_tool": "ApplyGeometricTerrainCorrection_gamma",
+        "later_sources_or_routes_started": false,
+        "terminal_reconciliation_sha256": "7780af6bf4cf69eb1004beccce78a4561e44ebc6bfd2291f0af3192c128f678e",
+        "outcome_reconciliation_sha256": "32d7e1940ba119acedb78b2a7f3b2356f258bcc8c5e5a144ed12b9480035fa02"
       },
       "exit_condition_delta": {
         "expected": [
           "one terminal recovery-004 result with immutable reconciliation and sanitized publication"
         ],
-        "observed": [],
-        "decision_value": "in_progress",
-        "rationale": "Implementation and validation are active under the exact inherited owner authority; the one real attempt remains gated on successful public CI and a final no-content preflight."
+        "observed": [
+          "one consumed attempt stopped on M1-SRC-001 at gamma geometric terrain correction after three corrected Raster-returning functions completed"
+        ],
+        "decision_value": "block",
+        "rationale": "The bounded attempt is terminal and cannot be retried. Sanitized terminal evidence proceeds to public CI under the existing authority envelope."
       },
-      "next_dependency": null
+      "next_dependency": null,
+      "disposition": "block"
     }
   ],
   "path_efficiency": {
@@ -5066,8 +5079,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
-    "next_action": "Run the single authorized final no-content preflight. Stop on failure; only on pass may the one fresh fixed-order recovery-004 attempt read exact custody and invoke the frozen radar route. Never retry.",
+    "current_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
+    "next_action": "Review the sanitized terminal recovery-004 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline, change analysis, attribution, derived-pixel publication, or scientific publication is released.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -5118,9 +5131,9 @@
       "The diagnostic receipt-persistence recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, both zero-byte reserved receipts remain immutable, and no implementation, ArcPy, data access, new process, retry, reconstruction, geoprocessing, radar processing, or scientific action is released.",
       "The exact short-path recovery-003 packet is approved as one bounded authority envelope through sanitized terminal publication. Continue unchanged implementation, public CI gates, one final no-content preflight, at most one fresh real attempt, reconciliation, and terminal publication without intermediate owner reconfirmation. Never retry or broaden into baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication.",
       "Short-path recovery-003 is terminal and consumed. All 269 projected paths were at or below 240 characters (maximum 237); ArcGIS setup, DEM/support creation, and the M1-SRC-001 orbit-correction call completed before the next frozen arcpy.ia.RemoveThermalNoise call failed on its namespace-specific signature. No later source or route started, no retry occurred, external custody remained unchanged, and no historical-root-cause, radar-readiness, baseline, change, attribution, derived-pixel, or scientific claim is established.",
-      "The exact recovery-004 packet is approved as one bounded authority envelope through sanitized terminal publication. Implementation and validation may continue without intermediate reconfirmation, but project-data or external-custody reads, ArcPy processing, geoprocessing, and the one fresh attempt remain gated on successful public CI and the final no-content preflight. Never retry or broaden into baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication."
+      "Recovery-004 is terminal and consumed. M1-SRC-001 completed ApplyOrbitCorrection and the corrected Raster-returning RemoveThermalNoise, ApplyRadiometricCalibration, and ApplyRadiometricTerrainFlattening calls and saves, then ArcGIS ERROR 000425 stopped the gamma ApplyGeometricTerrainCorrection invocation before it returned a Raster or created its output. No later source, route, retry, baseline, change analysis, attribution, derived-pixel publication, historical-root-cause claim, radar-readiness claim, or scientific result is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
-    "parallel_next_action": "Run the single authorized final no-content preflight. Stop on failure; only on pass may the one fresh fixed-order recovery-004 attempt read exact custody and invoke the frozen radar route. Never retry."
+    "parallel_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
+    "parallel_next_action": "Review the sanitized terminal recovery-004 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline, change analysis, attribution, derived-pixel publication, or scientific publication is released."
   }
 }

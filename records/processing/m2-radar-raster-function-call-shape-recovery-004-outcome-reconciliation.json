@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OUTCOME-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-21T19:10:14Z",
+  "status": "block_raster_function_recovery_004_source_001_geometric_terrain_correction_gamma_no_retry",
+  "disposition": "block",
+  "attempt_id": "radar-pixel-orbit-application-raster-function-recovery-004-real-001",
+  "bindings": {
+    "terminal_reconciliation_ref": "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "7780af6bf4cf69eb1004beccce78a4561e44ebc6bfd2291f0af3192c128f678e",
+    "source_terminal_receipt_sha256": "fa75b00e9485067625bef6ca65dcbbe41038ac2f07d3d94e9d50bb47b3386531"
+  },
+  "outcome": {
+    "raster_function_call_shape_test": "The corrected Raster-returning call-and-save pattern completed thermal-noise removal, calibration, and terrain flattening for M1-SRC-001. The gamma geometric terrain correction function then raised ArcGIS ERROR 000425 before returning a Raster, so no save began and no gamma terrain-corrected output was created.",
+    "new_terminal_boundary": "Processing stopped inside the first gamma ApplyGeometricTerrainCorrection function invocation.",
+    "historical_failure_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "usable_radar_baseline_established": false,
+    "change_evidence_established": false
+  },
+  "assertions": {
+    "attempt_consumed": true,
+    "automatic_retry_performed": false,
+    "second_attempt_authorized": false,
+    "later_sources_or_routes_started": false,
+    "external_custody_unchanged": true,
+    "historical_failure_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "baseline_or_change_analysis_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false
+  },
+  "next_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW"
+}
