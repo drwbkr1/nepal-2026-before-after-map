@@ -1439,6 +1439,7 @@ REQUIRED = [
     "records/readiness/m2-radar-raster-function-call-shape-recovery-004-final-preflight.json",
     "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json",
     "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json",
+    "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-gate.json",
     "tests/test_m2_radar_raster_function_call_shape_recovery_004.py",
     ".github/workflows/validate.yml",
 ]
@@ -17356,6 +17357,7 @@ def main() -> None:
     raster_function_preflight_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-final-preflight.json"
     raster_function_terminal_ref = "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json"
     raster_function_outcome_ref = "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json"
+    raster_function_terminal_publication_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-gate.json"
     raster_function_observation = json.loads((ROOT / raster_function_observation_ref).read_text(encoding="utf-8"))
     raster_function_proposal = json.loads((ROOT / raster_function_proposal_ref).read_text(encoding="utf-8"))
     raster_function_bundle = json.loads((ROOT / raster_function_bundle_ref).read_text(encoding="utf-8"))
@@ -17371,6 +17373,7 @@ def main() -> None:
     raster_function_preflight = json.loads((ROOT / raster_function_preflight_ref).read_text(encoding="utf-8"))
     raster_function_terminal = json.loads((ROOT / raster_function_terminal_ref).read_text(encoding="utf-8"))
     raster_function_outcome = json.loads((ROOT / raster_function_outcome_ref).read_text(encoding="utf-8"))
+    raster_function_terminal_publication = json.loads((ROOT / raster_function_terminal_publication_ref).read_text(encoding="utf-8"))
     raster_function_review_unit = m2_units.get(
         "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-REVIEW", {}
     )
@@ -17543,6 +17546,33 @@ def main() -> None:
         or raster_function_outcome.get("bindings", {}).get("terminal_reconciliation_sha256")
         != sha256(raster_function_terminal_ref)
         or raster_function_outcome.get("assertions", {}).get("radar_recovery_readiness_established") is not False
+        or raster_function_terminal_publication.get("status") != "pass_public_terminal_block_published_no_retry"
+        or raster_function_terminal_publication.get("terminal_commit_sha")
+        != "e4be97407bd4c8ce9e12e1759b17a94c9c73a1f7"
+        or raster_function_terminal_publication.get("public_ci_run_id") != 35644029954
+        or raster_function_terminal_publication.get("public_ci_conclusion") != "success"
+        or raster_function_terminal_publication.get("repository_required_file_count") != 1307
+        or raster_function_terminal_publication.get("public_test_count") != 696
+        or raster_function_terminal_publication.get("public_intentional_skip_count") != 13
+        or raster_function_terminal_publication.get("bindings", {}).get("final_preflight_sha256")
+        != sha256(raster_function_preflight_ref)
+        or raster_function_terminal_publication.get("bindings", {}).get("terminal_reconciliation_sha256")
+        != sha256(raster_function_terminal_ref)
+        or raster_function_terminal_publication.get("bindings", {}).get("outcome_reconciliation_sha256")
+        != sha256(raster_function_outcome_ref)
+        or raster_function_terminal_publication.get("bindings", {}).get("published_milestone_sha256")
+        != "bc50b9b80d91c119e10e71205f3c719075fcf5a5e780494cdaf38262b53dd044"
+        or raster_function_terminal_publication.get("bindings", {}).get("published_project_control_profile_sha256")
+        != "9fb7a249602ba757c9e89cc742414aa829e5c277e417533a474df51202fdd59c"
+        or raster_function_terminal_publication.get("bindings", {}).get("published_long_term_goal_sha256")
+        != "5fd252cb6f525843bf8ecdb320a7f2f439a641a8c087c1c1b021e65dfb529367"
+        or raster_function_terminal_publication.get("released_now", {}).get("attempt_retry_or_reuse") is not False
+        or raster_function_terminal_publication.get("released_now", {}).get("second_real_attempt") is not False
+        or raster_function_terminal_publication.get("assertions", {}).get("gamma_geometric_terrain_correction_output_created") is not False
+        or raster_function_terminal_publication.get("assertions", {}).get("historical_failure_root_cause_established") is not False
+        or raster_function_terminal_publication.get("assertions", {}).get("radar_recovery_readiness_established") is not False
+        or raster_function_recovery_unit.get("gates", {}).get("terminal_publication_gate_sha256")
+        != sha256(raster_function_terminal_publication_ref)
         or profile.get("control_surfaces", {}).get("proposed_amendments") != []
         or goal.get("proposed_amendments") != []
         or profile.get("current_checkpoint", {}).get("checkpoint_id")

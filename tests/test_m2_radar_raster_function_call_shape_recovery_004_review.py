@@ -156,6 +156,16 @@ class M2RadarRasterFunctionCallShapeRecovery004ReviewTests(unittest.TestCase):
         ))
         self.assertFalse(outcome["assertions"]["radar_recovery_readiness_established"])
 
+    def test_terminal_publication_gate_binds_successful_public_ci(self) -> None:
+        gate = load("records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-gate.json")
+        self.assertEqual(gate["status"], "pass_public_terminal_block_published_no_retry")
+        self.assertEqual(gate["terminal_commit_sha"], "e4be97407bd4c8ce9e12e1759b17a94c9c73a1f7")
+        self.assertEqual(gate["public_ci_run_id"], 35644029954)
+        self.assertEqual(gate["public_ci_conclusion"], "success")
+        self.assertEqual(gate["public_test_count"], 696)
+        self.assertFalse(gate["released_now"]["attempt_retry_or_reuse"])
+        self.assertFalse(gate["assertions"]["historical_failure_root_cause_established"])
+
 
 if __name__ == "__main__":
     unittest.main()

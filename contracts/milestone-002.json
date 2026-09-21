@@ -4975,7 +4975,8 @@
         "records/readiness/m2-radar-raster-function-call-shape-recovery-004-gate-state-publication.json",
         "records/readiness/m2-radar-raster-function-call-shape-recovery-004-final-preflight.json",
         "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json",
-        "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json"
+        "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json",
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-gate.json"
       ],
       "outputs": [
         "config/qa/m2-radar-raster-function-call-shape-recovery-004-contract.json",
@@ -5009,7 +5010,8 @@
         "stopped_tool": "ApplyGeometricTerrainCorrection_gamma",
         "later_sources_or_routes_started": false,
         "terminal_reconciliation_sha256": "1f3e278e38abd2259922fb6b5aad0f7395424a41708303c9c73de422ee773d6a",
-        "outcome_reconciliation_sha256": "e2424da90ef44ded6ae8fbe86a443cc1c698e1e52db4aff05f9e4e51c466f43b"
+        "outcome_reconciliation_sha256": "e2424da90ef44ded6ae8fbe86a443cc1c698e1e52db4aff05f9e4e51c466f43b",
+        "terminal_publication_gate_sha256": "d156cebcf413dfbab46a52f1b4e830d37f2daa5ef8361324330f9d10c2ab8f42"
       },
       "exit_condition_delta": {
         "expected": [
