@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-CLEANUP",
+  "status": "pass_no_payload_or_temporary_artifact_cleanup_required",
+  "completed_at_utc": "2026-09-20T20:32:18Z",
+  "attempt_id": "radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-real-001",
+  "terminal_persisted": true,
+  "terminal_sha256": "eed581e47bd9d5a1beb85e06f50373fdcb29827123b7695eb0a20d66038f6a59",
+  "fallback_journal_sha256_before_cleanup": "75067b863023792fc6aa866ac72940b00e3a797c2dae006a41b48284d69b75ce",
+  "assertions": {
+    "temporary_payload_created": false,
+    "source_orbit_or_dem_copied": false,
+    "source_orbit_or_dem_mutated": false,
+    "derived_raster_created": false,
+    "external_cleanup_attempted": false,
+    "consumed_reserved_receipts_mutated": false
+  }
+}

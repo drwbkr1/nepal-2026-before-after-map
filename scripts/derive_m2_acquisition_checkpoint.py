@@ -329,11 +329,11 @@ RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_REC
 }
 RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_RECOVERY_001_FINAL_PREFLIGHT_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
-    "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one distinct read-only diagnostic process inspect the exact frozen SAFE directory, manifest.safe, and M2-ORB-001 EOF in ArcGIS Pro Python. Never retry it.",
+    "next_action": "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one distinct read-only diagnostic process begin in ArcGIS Pro Python, and it must never be retried.",
 }
 RADAR_APPLY_ORBIT_CORRECTION_INPUT_RESOLUTION_DIAGNOSTIC_RECEIPT_PERSISTENCE_RECOVERY_001_TERMINAL_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW",
-    "next_action": "Review the terminal read-only diagnostic recovery outcome. The distinct process is consumed and cannot be resumed, reused, or retried; no reconstruction, source or path substitution, geoprocessing, radar processing, causal, recovery-readiness, or scientific claim is released.",
+    "next_action": "Review the terminal read-only diagnostic outcome. The distinct process is consumed and cannot be resumed, reused, or retried; any further diagnostic, path, geoprocessing, or radar action requires separately reviewed authority.",
 }
 
 

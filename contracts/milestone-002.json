@@ -4733,7 +4733,7 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
         "config/qa/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-contract.json"
@@ -4741,26 +4741,41 @@
       "outputs": [
         "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-final-preflight.json",
         "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-reconciliation.json",
+        "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-outcome-reconciliation.json",
+        "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-gate-state-publication.json",
+        "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal.json",
+        "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-cleanup.json",
+        "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-fallback.jsonl",
+        "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-reconciliation.json",
         "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-outcome-reconciliation.json"
       ],
       "gates": {
         "public_ci": "success",
-        "execution_gate_publication": "pending",
-        "final_no_content_preflight": "pending",
+        "execution_gate_publication": "success",
+        "final_no_content_preflight": "success",
         "maximum_processes": 1,
-        "processes_started": 0,
+        "processes_started": 1,
         "apply_orbit_correction_calls": 0,
-        "geoprocessing_calls": 0
+        "geoprocessing_calls": 0,
+        "gate_state_commit_sha": "aab5254ff3c0d8a7a2b935a108e7c09ac1a99126",
+        "gate_state_public_ci_run_id": 35535753456,
+        "gate_state_publication_sha256": "c55d2be6d8a7c4baf76e45a8417f9fcce8943c07a4e827563886372b530effd9",
+        "process_consumed": true,
+        "terminal_status": "pass_current_input_resolution_diagnostic_only_no_retry",
+        "terminal_reconciliation_sha256": "7e6f7f7ba795c6341eb0cac9e13e9c1890b1ee789941812faddc1a25f18a31bc",
+        "outcome_reconciliation_sha256": "249ed79b155177a61ca699067d515914673f360c4e92248debd3b0f57e9a7d0e"
       },
       "exit_condition_delta": {
-        "expected": [
-          "terminal read-only diagnostic and cleanup evidence"
+        "expected": [],
+        "observed": [
+          "pass_current_input_resolution_diagnostic_only_no_retry",
+          "pass_no_payload_or_temporary_artifact_cleanup_required"
         ],
-        "observed": [],
-        "decision_value": "pending",
-        "rationale": "Either PASS or BLOCK is diagnostic only and consumes the one distinct process."
+        "decision_value": "terminal_diagnostic_only",
+        "rationale": "The one distinct process is consumed. The result supports only the recorded current input-resolution diagnostic boundary."
       },
-      "next_dependency": null
+      "next_dependency": null,
+      "disposition": "pass_diagnostic_only"
     }
   ],
   "path_efficiency": {
@@ -4817,8 +4832,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
-    "next_action": "Publish and publicly validate the exact execution-gate state. Do not run the final no-content preflight, import production ArcPy, or access the frozen exact inputs until that gate-state commit passes public CI.",
+    "current_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW",
+    "next_action": "Review the terminal read-only diagnostic outcome. The distinct process is consumed and cannot be resumed, reused, or retried; any further diagnostic, path, geoprocessing, or radar action requires separately reviewed authority.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -4868,7 +4883,7 @@
       "The ApplyOrbitCorrection diagnostic packet has zero proposal decisions and is publication-only; its owner response stays closed until public CI, and no implementation, ArcPy, project-data or external-custody access, ApplyOrbitCorrection or geoprocessing call, candidate reconstruction or substitution, new radar attempt, baseline, change analysis, attribution, derived-pixel publication, or scientific action is released.",
       "The diagnostic receipt-persistence recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, both zero-byte reserved receipts remain immutable, and no implementation, ArcPy, data access, new process, retry, reconstruction, geoprocessing, radar processing, or scientific action is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
-    "parallel_next_action": "Publish and publicly validate the exact execution-gate state. Do not run the final no-content preflight, import production ArcPy, or access the frozen exact inputs until that gate-state commit passes public CI."
+    "parallel_checkpoint": "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW",
+    "parallel_next_action": "Review the terminal read-only diagnostic outcome. The distinct process is consumed and cannot be resumed, reused, or retried; any further diagnostic, path, geoprocessing, or radar action requires separately reviewed authority."
   }
 }

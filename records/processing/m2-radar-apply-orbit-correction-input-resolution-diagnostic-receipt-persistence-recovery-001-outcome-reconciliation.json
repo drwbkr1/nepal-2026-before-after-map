@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-OUTCOME-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-20T20:32:28Z",
+  "status": "pass_current_input_resolution_diagnostic_only_no_retry",
+  "disposition": "pass_diagnostic_only",
+  "attempt_id": "radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-real-001",
+  "bindings": {
+    "approval_sha256": "646a892256823fea5977d01a49a9e8b246f7ead42d7a40173d664bc22194f917",
+    "recovery_contract_sha256": "495ed3c5f9458df31d595a0ae76a62c3c64533bcaf85a37fdd5e13b6334eafa5",
+    "implementation_publication_gate_sha256": "5efc2890e61f8e591be740d61afa3730f954d29632fbd8b8f191e08deb6419b8",
+    "gate_state_publication_sha256": "c55d2be6d8a7c4baf76e45a8417f9fcce8943c07a4e827563886372b530effd9",
+    "final_preflight_sha256": "f9ae642adb6106fe3dab0decbf502037dc7a1024dac2cb6f39dcf28ef60c05a0",
+    "fallback_sha256": "886286701005f88a9ca89eb9e34d1bc4c90295c59254b0567ad517eb93499088",
+    "terminal_reconciliation_sha256": "7e6f7f7ba795c6341eb0cac9e13e9c1890b1ee789941812faddc1a25f18a31bc"
+  },
+  "preflight_result": {
+    "status": "pass_final_no_content_preflight_one_distinct_read_only_process_released",
+    "arcpy_imported": false,
+    "external_attempt_root_presence_checked": false,
+    "project_or_external_content_read": false
+  },
+  "terminal_result": {
+    "status": "pass_current_input_resolution_diagnostic_only_no_retry",
+    "raw_terminal_receipt_persisted": true,
+    "cleanup_receipt_persisted": true,
+    "failure": null
+  },
+  "claim_boundary": {
+    "current_input_resolution_diagnostic_only": true,
+    "historical_root_cause_established": false,
+    "corrected_apply_orbit_correction_call_established": false,
+    "radar_recovery_readiness_established": false,
+    "scientific_result_established": false
+  },
+  "assertions": {
+    "distinct_process_consumed": true,
+    "automatic_retry_performed": false,
+    "second_process_created": false,
+    "success_reconstructed": false,
+    "consumed_diagnostic_reused_or_retried": false,
+    "consumed_reserved_receipts_mutated": false,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "source_or_path_substituted": false,
+    "baseline_or_change_analysis_executed": false,
+    "interpretation_or_attribution_executed": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Review the terminal read-only diagnostic outcome. The distinct process is consumed and cannot be resumed, reused, or retried; any further diagnostic, path, geoprocessing, or radar action requires separately reviewed authority."
+}

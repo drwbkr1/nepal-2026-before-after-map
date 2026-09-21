@@ -463,6 +463,13 @@ REQUIRED = [
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-implementation-readiness.json",
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-implementation-publication-gate.json",
     "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-implementation-publication-reconciliation.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-gate-state-publication.json",
+    "records/readiness/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-final-preflight.json",
+    "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal.json",
+    "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-cleanup.json",
+    "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-fallback.jsonl",
+    "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-terminal-reconciliation.json",
+    "records/processing/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-outcome-reconciliation.json",
     "scripts/prepare_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "tests/test_m2_radar_pixel_orbit_application_recovery_001_review.py",
     "scripts/activate_m2_radar_pixel_orbit_application_001_execution.py",
@@ -1763,12 +1770,12 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json"
                 expected_dem_proposed_amendments = []
-                expected_dem_next_action = "Review the terminal read-only diagnostic recovery outcome. The distinct process is consumed and cannot be resumed, reused, or retried; no reconstruction, source or path substitution, geoprocessing, radar processing, causal, recovery-readiness, or scientific claim is released."
+                expected_dem_next_action = "Review the terminal read-only diagnostic outcome. The distinct process is consumed and cannot be resumed, reused, or retried; any further diagnostic, path, geoprocessing, or radar action requires separately reviewed authority."
             elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_execution_ready(ROOT, {"promoted": 8}) or current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_final_preflight_pending(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json"
                 expected_dem_proposed_amendments = []
-                expected_dem_next_action = "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one distinct read-only diagnostic process inspect the exact frozen SAFE directory, manifest.safe, and M2-ORB-001 EOF in ArcGIS Pro Python. Never retry it."
+                expected_dem_next_action = "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one distinct read-only diagnostic process begin in ArcGIS Pro Python, and it must never be retried."
             elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_execution_gate_publication_pending(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json"
@@ -1986,12 +1993,12 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json"
                 expected_dem_proposed_amendments = []
-                expected_dem_next_action = "Review the terminal read-only diagnostic recovery outcome. The distinct process is consumed and cannot be resumed, reused, or retried; no reconstruction, source or path substitution, geoprocessing, radar processing, causal, recovery-readiness, or scientific claim is released."
+                expected_dem_next_action = "Review the terminal read-only diagnostic outcome. The distinct process is consumed and cannot be resumed, reused, or retried; any further diagnostic, path, geoprocessing, or radar action requires separately reviewed authority."
             elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_execution_ready(ROOT, {"promoted": 8}) or current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_final_preflight_pending(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json"
                 expected_dem_proposed_amendments = []
-                expected_dem_next_action = "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one distinct read-only diagnostic process inspect the exact frozen SAFE directory, manifest.safe, and M2-ORB-001 EOF in ArcGIS Pro Python. Never retry it."
+                expected_dem_next_action = "Run the one authorized final no-content preflight once. Stop on failure; only on pass may the one distinct read-only diagnostic process begin in ArcGIS Pro Python, and it must never be retried."
             elif current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_execution_gate_publication_pending(ROOT, {"promoted": 8}):
                 expected_dem_checkpoint = "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION"
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json"
@@ -16689,6 +16696,138 @@ def main() -> None:
             or receipt_cleanup_bytes != b""
         ):
             fail("M2 diagnostic receipt-persistence recovery implementation publication differs")
+    if final_preflight_pending:
+        implementation_gate_ref = f"records/readiness/{diagnostic_receipt_prefix}-implementation-publication-gate.json"
+        implementation_reconciliation_ref = f"records/readiness/{diagnostic_receipt_prefix}-implementation-publication-reconciliation.json"
+        gate_state_ref = f"records/readiness/{diagnostic_receipt_prefix}-gate-state-publication.json"
+        gate_state = json.loads((ROOT / gate_state_ref).read_text(encoding="utf-8"))
+        execution_unit = diagnostic_receipt_units.get(
+            "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-"
+            "RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
+            {},
+        )
+        gate_evidence = ledger_by_id.get("EVID-0202")
+        if (
+            gate_state.get("status") != "pass_public_execution_gate_final_no_content_preflight_released"
+            or gate_state.get("gate_state_commit_sha") != "aab5254ff3c0d8a7a2b935a108e7c09ac1a99126"
+            or gate_state.get("public_ci_run_id") != 35535753456
+            or gate_state.get("public_ci_conclusion") != "success"
+            or gate_state.get("repository_required_file_count") != 1255
+            or gate_state.get("public_test_count") != 663
+            or gate_state.get("public_intentional_skip_count") != 13
+            or gate_state.get("bindings", {}).get("implementation_publication_gate_sha256")
+            != sha256(implementation_gate_ref)
+            or gate_state.get("bindings", {}).get("implementation_publication_reconciliation_sha256")
+            != sha256(implementation_reconciliation_ref)
+            or gate_state.get("released_now", {}).get("final_no_content_preflight") is not True
+            or gate_state.get("assertions", {}).get("final_no_content_preflight_performed") is not False
+            or gate_state.get("assertions", {}).get("distinct_process_started") is not False
+            or gate_state.get("assertions", {}).get("geoprocessing_invoked") is not False
+            or execution_unit.get("status") != "in_progress"
+            or execution_unit.get("gates", {}).get("execution_gate_publication") != "success"
+            or execution_unit.get("gates", {}).get("final_no_content_preflight") != "released_not_started"
+            or execution_unit.get("gates", {}).get("processes_started") != 0
+            or (ROOT / f"records/readiness/{diagnostic_receipt_prefix}-final-preflight.json").exists()
+            or not isinstance(gate_evidence, dict)
+            or gate_evidence.get("status") != "pass_public_execution_gate_final_no_content_preflight_released"
+            or gate_evidence.get("gate_state_publication_sha256") != sha256(gate_state_ref)
+            or gate_evidence.get("assertions", {}).get("final_no_content_preflight_released") is not True
+            or gate_evidence.get("assertions", {}).get("final_no_content_preflight_performed") is not False
+            or gate_evidence.get("assertions", {}).get("distinct_process_started") is not False
+            or gate_evidence.get("assertions", {}).get("geoprocessing_invoked") is not False
+            or receipt_terminal_bytes != b""
+            or receipt_cleanup_bytes != b""
+        ):
+            fail("M2 diagnostic receipt-persistence recovery execution-gate publication differs")
+    if terminal:
+        gate_state_ref = f"records/readiness/{diagnostic_receipt_prefix}-gate-state-publication.json"
+        final_preflight_ref = f"records/readiness/{diagnostic_receipt_prefix}-final-preflight.json"
+        raw_terminal_ref = f"records/processing/{diagnostic_receipt_prefix}-terminal.json"
+        cleanup_ref = f"records/processing/{diagnostic_receipt_prefix}-cleanup.json"
+        fallback_ref = f"records/processing/{diagnostic_receipt_prefix}-fallback.jsonl"
+        terminal_reconciliation_ref = f"records/processing/{diagnostic_receipt_prefix}-terminal-reconciliation.json"
+        outcome_reconciliation_ref = f"records/processing/{diagnostic_receipt_prefix}-outcome-reconciliation.json"
+        final_preflight = json.loads((ROOT / final_preflight_ref).read_text(encoding="utf-8"))
+        raw_terminal = json.loads((ROOT / raw_terminal_ref).read_text(encoding="utf-8"))
+        cleanup = json.loads((ROOT / cleanup_ref).read_text(encoding="utf-8"))
+        terminal_reconciliation = json.loads(
+            (ROOT / terminal_reconciliation_ref).read_text(encoding="utf-8")
+        )
+        outcome_reconciliation = json.loads(
+            (ROOT / outcome_reconciliation_ref).read_text(encoding="utf-8")
+        )
+        execution_unit = diagnostic_receipt_units.get(
+            "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-"
+            "RECEIPT-PERSISTENCE-RECOVERY-001-EXECUTION",
+            {},
+        )
+        terminal_evidence = ledger_by_id.get("EVID-0203")
+        catalog = raw_terminal.get("arcgis_observations", {}).get("catalog_recognition", {})
+        filesystem = raw_terminal.get("filesystem_observations", {})
+        if (
+            final_preflight.get("status")
+            != "pass_final_no_content_preflight_one_distinct_read_only_process_released"
+            or sha256(final_preflight_ref) != "f9ae642adb6106fe3dab0decbf502037dc7a1024dac2cb6f39dcf28ef60c05a0"
+            or final_preflight.get("checks", {}).get("arcpy_imported_by_preflight") is not False
+            or final_preflight.get("checks", {}).get("external_attempt_root_presence_checked") is not False
+            or final_preflight.get("checks", {}).get("project_or_external_content_read") is not False
+            or raw_terminal.get("status") != "pass_current_input_resolution_diagnostic_only"
+            or raw_terminal.get("disposition") != "pass_diagnostic_only"
+            or sha256(raw_terminal_ref) != "eed581e47bd9d5a1beb85e06f50373fdcb29827123b7695eb0a20d66038f6a59"
+            or filesystem.get("attempt_root", {}).get("exists") is not True
+            or filesystem.get("safe_directory", {}).get("exists") is not True
+            or filesystem.get("manifest", {}).get("size_bytes") != 24488
+            or filesystem.get("manifest", {}).get("sha256")
+            != "98e2674ba10c0f1447390ea9d47ccdd695a6abc2ea7dde1214d45543c6488e90"
+            or filesystem.get("orbit", {}).get("size_bytes") != 639533
+            or filesystem.get("orbit", {}).get("sha256")
+            != "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4"
+            or catalog.get("safe_directory", {}).get("arcpy_exists") is not True
+            or catalog.get("safe_directory", {}).get("describe", {}).get("data_type") != "Folder"
+            or catalog.get("manifest", {}).get("arcpy_exists") is not True
+            or catalog.get("manifest", {}).get("describe", {}).get("data_type") != "RasterDataset"
+            or catalog.get("orbit", {}).get("arcpy_exists") is not True
+            or catalog.get("orbit", {}).get("describe", {}).get("data_type") != "File"
+            or raw_terminal.get("assertions", {}).get("distinct_process_consumed") is not True
+            or raw_terminal.get("assertions", {}).get("automatic_retry_performed") is not False
+            or raw_terminal.get("assertions", {}).get("consumed_reserved_receipts_mutated") is not False
+            or raw_terminal.get("assertions", {}).get("apply_orbit_correction_invoked") is not False
+            or raw_terminal.get("assertions", {}).get("geoprocessing_invoked") is not False
+            or cleanup.get("status") != "pass_no_payload_or_temporary_artifact_cleanup_required"
+            or cleanup.get("terminal_persisted") is not True
+            or cleanup.get("terminal_sha256") != sha256(raw_terminal_ref)
+            or sha256(cleanup_ref) != "8d1d738ac7f1456b95e6e91d6a93380c04ec66c0d52b9c56e7e781bfe961a6e3"
+            or sha256(fallback_ref) != "886286701005f88a9ca89eb9e34d1bc4c90295c59254b0567ad517eb93499088"
+            or terminal_reconciliation.get("status")
+            != "pass_current_input_resolution_diagnostic_only_no_retry"
+            or terminal_reconciliation.get("disposition") != "pass_diagnostic_only"
+            or sha256(terminal_reconciliation_ref)
+            != "7e6f7f7ba795c6341eb0cac9e13e9c1890b1ee789941812faddc1a25f18a31bc"
+            or outcome_reconciliation.get("status")
+            != "pass_current_input_resolution_diagnostic_only_no_retry"
+            or outcome_reconciliation.get("disposition") != "pass_diagnostic_only"
+            or sha256(outcome_reconciliation_ref)
+            != "249ed79b155177a61ca699067d515914673f360c4e92248debd3b0f57e9a7d0e"
+            or outcome_reconciliation.get("claim_boundary", {}).get("current_input_resolution_diagnostic_only") is not True
+            or outcome_reconciliation.get("claim_boundary", {}).get("historical_root_cause_established") is not False
+            or outcome_reconciliation.get("claim_boundary", {}).get("radar_recovery_readiness_established") is not False
+            or execution_unit.get("status") != "complete"
+            or execution_unit.get("disposition") != "pass_diagnostic_only"
+            or execution_unit.get("gates", {}).get("processes_started") != 1
+            or execution_unit.get("gates", {}).get("process_consumed") is not True
+            or not isinstance(terminal_evidence, dict)
+            or terminal_evidence.get("status") != "pass_current_input_resolution_diagnostic_only_no_retry"
+            or terminal_evidence.get("terminal_reconciliation_sha256")
+            != sha256(terminal_reconciliation_ref)
+            or terminal_evidence.get("outcome_reconciliation_sha256")
+            != sha256(outcome_reconciliation_ref)
+            or terminal_evidence.get("assertions", {}).get("distinct_process_consumed") is not True
+            or terminal_evidence.get("assertions", {}).get("automatic_retry_performed") is not False
+            or terminal_evidence.get("assertions", {}).get("geoprocessing_invoked") is not False
+            or receipt_terminal_bytes != b""
+            or receipt_cleanup_bytes != b""
+        ):
+            fail("M2 diagnostic receipt-persistence recovery terminal state differs or overclaims")
     diagnostic_receipt_authority_evidence = ledger_by_id.get("EVID-0197")
     if (
         not isinstance(diagnostic_receipt_authority_evidence, dict)

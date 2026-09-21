@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL",
+  "status": "pass_current_input_resolution_diagnostic_only",
+  "disposition": "pass_diagnostic_only",
+  "started_at_utc": "2026-09-20T20:32:09Z",
+  "completed_at_utc": "2026-09-20T20:32:18Z",
+  "attempt_id": "radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-real-001",
+  "bindings": {
+    "recovery_contract_sha256": "495ed3c5f9458df31d595a0ae76a62c3c64533bcaf85a37fdd5e13b6334eafa5",
+    "recovery_core_sha256": "f3968552244519624bd4a4d57aedec69b970fa2bdc2c336cb708347ffe0d6ec4",
+    "recovery_runner_sha256": "46ae9019d14a136f0c64ac18f701979179ee5c11a3b8d1d5a713638820d13c8b",
+    "portable_test_sha256": "0a990379b629a109b5f027adabdd3f58d96b91fd6e7ea6c1eabcf5345165e59e",
+    "arcgis_validator_sha256": "4a98ad6a8c2c94f598c3173be81ae9a5570f9943d7c2c0082853567196a700e3",
+    "approval_sha256": "646a892256823fea5977d01a49a9e8b246f7ead42d7a40173d664bc22194f917",
+    "implementation_commit_sha": "267c74841bfadddb8d8fc1bd162df9c1d5855825",
+    "implementation_public_ci_run_id": 35535407396,
+    "execution_gate_commit_sha": "aab5254ff3c0d8a7a2b935a108e7c09ac1a99126",
+    "execution_gate_public_ci_run_id": 35535753456,
+    "implementation_publication_gate_sha256": "5efc2890e61f8e591be740d61afa3730f954d29632fbd8b8f191e08deb6419b8",
+    "execution_gate_publication_sha256": "c55d2be6d8a7c4baf76e45a8417f9fcce8943c07a4e827563886372b530effd9",
+    "final_preflight_sha256": "f9ae642adb6106fe3dab0decbf502037dc7a1024dac2cb6f39dcf28ef60c05a0"
+  },
+  "fallback_journal_sha256_before_terminal": "c2a45988ac94c45ec1b0943be13a8ebb8b64c93f5cd40e11dadee028d6c60e66",
+  "filesystem_observations": {
+    "attempt_root": {
+      "exists": true,
+      "entry_type": "directory",
+      "path_class": "exact_frozen_recovery_002_attempt_root",
+      "device": 2503098095643541969,
+      "inode": 12666373952949534
+    },
+    "safe_directory": {
+      "exists": true,
+      "entry_type": "directory",
+      "path_class": "exact_m1_src_001_copied_safe_candidate",
+      "device": 2503098095643541969,
+      "inode": 6192449488604646
+    },
+    "manifest": {
+      "exists": true,
+      "entry_type": "file",
+      "path_class": "exact_m1_src_001_manifest_candidate",
+      "size_bytes": 24488,
+      "sha256": "98e2674ba10c0f1447390ea9d47ccdd695a6abc2ea7dde1214d45543c6488e90",
+      "device": 2503098095643541969,
+      "inode": 5910974511894005
+    },
+    "orbit": {
+      "exists": true,
+      "entry_type": "file",
+      "path_class": "exact_m2_orb_001_eof",
+      "size_bytes": 639533,
+      "sha256": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+      "device": 2503098095643541969,
+      "inode": 3096224744404965
+    }
+  },
+  "arcgis_observations": {
+    "runtime": {
+      "product_name": "ArcGISPro",
+      "version": "3.7.1",
+      "build_number": "1901",
+      "license_level": "ArcInfo",
+      "extensions": {
+        "image_analyst": "Available",
+        "spatial": "Available"
+      },
+      "apply_orbit_correction_usage": "ApplyOrbitCorrection_ia(in_radar_data, {in_orbit_file}, {folder})"
+    },
+    "catalog_recognition": {
+      "safe_directory": {
+        "arcpy_exists": true,
+        "describe": {
+          "data_type": "Folder",
+          "dataset_type": "None",
+          "catalog_path_class": "exact_safe_directory",
+          "children_count": 6
+        }
+      },
+      "manifest": {
+        "arcpy_exists": true,
+        "describe": {
+          "data_type": "RasterDataset",
+          "dataset_type": "RasterDataset",
+          "catalog_path_class": "exact_manifest",
+          "children_count": 0
+        }
+      },
+      "orbit": {
+        "arcpy_exists": true,
+        "describe": {
+          "data_type": "File",
+          "dataset_type": "None",
+          "catalog_path_class": "exact_orbit",
+          "children_count": 0
+        }
+      }
+    }
+  },
+  "assertions": {
+    "distinct_process_consumed": true,
+    "automatic_retry_performed": false,
+    "consumed_diagnostic_reused_or_retried": false,
+    "consumed_reserved_receipts_mutated": false,
+    "project_data_content_read": true,
+    "external_custody_accessed": true,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "source_orbit_or_dem_copied": false,
+    "source_orbit_or_dem_mutated": false,
+    "attempt_root_reconstructed_or_substituted": false,
+    "new_radar_attempt_created": false,
+    "derived_raster_created": false,
+    "baseline_or_change_analysis_executed": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "scientific_result_established": false
+  },
+  "limitations": [
+    "This result describes current filesystem presence and ArcGIS catalog recognition only.",
+    "It does not establish the historical ApplyOrbitCorrection failure cause or a corrected call.",
+    "It does not authorize path correction, substitution, processing, retry, or scientific use."
+  ]
+}
