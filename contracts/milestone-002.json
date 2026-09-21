@@ -4849,7 +4849,8 @@
         "records/readiness/m2-radar-short-path-recovery-003-implementation-readiness.json",
         "records/readiness/m2-radar-short-path-recovery-003-arcgis-runtime-validation.json",
         "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-gate.json",
-        "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-reconciliation.json"
+        "records/readiness/m2-radar-short-path-recovery-003-implementation-publication-reconciliation.json",
+        "records/readiness/m2-radar-short-path-recovery-003-gate-state-publication.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-short-path-recovery-003-implementation-readiness.json",
@@ -4874,7 +4875,8 @@
         "installed_arcgis_disposable_validation": "pass_signature_license_no_geoprocessing",
         "implementation_readiness_sha256": "cfa95c96adde617979aa8817c12a6884f189041ea82e5f4debd11f8332e6d13d",
         "implementation_publication_gate_sha256": "ebbae65b2ffd02e0142da86f1c7680d9e664574a7fe336d2dedbe6c11001e311",
-        "execution_gate_publication": "pending"
+        "execution_gate_publication": "pass_commit_6faa4bb5c6941b616c2866e1085c3f73c8af29af_run_35629396993",
+        "gate_state_publication_sha256": "7489a0eb233a5697d358d6d86cd96c74b992efa94f34778621998c4b8168e97f"
       },
       "exit_condition_delta": {
         "expected": [
