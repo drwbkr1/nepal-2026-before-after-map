@@ -29,7 +29,7 @@ BUNDLE_SHA256 = "46c52b15d939a2ca7536205b61ec06158a84708e59425a92224a5a6dad7969c
 APPROVAL_SHA256 = "b7133be0ee697895d45ba5702dae046c183472f2c93bf81029f130d333aa460a"
 RECONCILIATION_SHA256 = "1218d0732ae7794fc0efbe17dc680d02caed30a70baef4409f6d54ae9880acdf"
 ACTIVATION_SHA256 = "f4539c9707a5935cee0189867ba966a665becc14dccf3bc35a617b981a913a4b"
-CHECKPOINT = "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION"
+CHECKPOINT = "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION"
 
 
 def load(relative: str) -> dict:
@@ -114,7 +114,7 @@ class M2RadarRasterFunctionCallShapeRecovery004ReviewTests(unittest.TestCase):
         self.assertEqual(goal["current_checkpoint"], CHECKPOINT)
         self.assertEqual(profile["parallel_checkpoints"][0]["authority_ref"], APPROVAL_REF)
         self.assertFalse(current_radar_raster_function_call_shape_recovery_004_review_required(ROOT, {"promoted": 8}))
-        self.assertEqual(current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8}), "implementation")
+        self.assertEqual(current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8}), "execution")
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts/derive_m2_acquisition_checkpoint.py")],
             cwd=ROOT, capture_output=True, text=True, check=False,

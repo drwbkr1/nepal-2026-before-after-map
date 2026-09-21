@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-21T18:30:27Z",
+  "status": "pass_public_default_branch_ci_raster_function_recovery_004_implementation_ready",
+  "implementation_commit_sha": "048137d8193c3f253a94a58b759032d89add3655",
+  "public_ci_run_id": 35638588780,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35638588780",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1301,
+  "public_test_count": 695,
+  "public_intentional_skip_count": 13,
+  "bindings": {
+    "recovery_contract_sha256": "62f3df970137fc34665c26c12054ec0aa8498e29c8ff053d84e9dc512130b88d",
+    "recovery_core_sha256": "3cf0f6ebf38c48b7f679e6271ed6ee64b394215aded91c5caba5297a9be80750",
+    "recovery_runner_sha256": "04388bf3be3cec57283566f1dda615f40940f86f2c61a38f195de00acb700e81",
+    "arcgis_validator_sha256": "37402ba521c7c132f8adf89535570d090763dbfcdcb5a7f4ca648a7538324716",
+    "portable_test_sha256": "c8da299153f631222b2266e42d4afef6a1e38187687fdb04ab028dc1d34edfbe",
+    "base_contract_sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+    "base_core_sha256": "fd192878acf33e2c73eeeba1ec42865eac48dfc5742b3ae4cf54b51de42755ba",
+    "base_runner_sha256": "0b65fbecbeab373d8bbbf2cbbc28f8817e3c3bb08584dbf1a9720dcbb19ceb06",
+    "raster_function_processing_sha256": "cbf4a49abbe2fb2bcdec029d2b37fdc0aab26c14cc5a55c3bbe7be41dd0c32b9"
+  },
+  "released_now": {
+    "execution_gate_publication": true,
+    "final_no_content_preflight_before_execution_gate_publication": false,
+    "real_attempt_before_all_gates": false
+  },
+  "assertions": {
+    "exact_public_default_branch_commit": true,
+    "public_ci_passed": true,
+    "owner_authority_inherited_without_reconfirmation": true,
+    "external_custody_accessed": false,
+    "production_arcpy_function_invoked": false,
+    "geoprocessing_invoked": false,
+    "real_attempt_started": false,
+    "automatic_retry_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "scientific_result_established": false
+  }
+}

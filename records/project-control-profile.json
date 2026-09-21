@@ -699,16 +699,16 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION",
+    "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Implement and validate the exact five-function Raster-returning call-shape correction under the approved single authority envelope, then publish public CI gates before the one final preflight and at most one fresh attempt."
+    "next_action": "Publish and validate the exact recovery-004 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order attempt begin; stop on the first failure and never retry."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION",
+      "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
       "authority_ref": "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
-      "next_action": "Implement and validate the exact five-function Raster-returning call-shape correction under the approved single authority envelope, then publish public CI gates before the one final preflight and at most one fresh attempt."
+      "next_action": "Publish and validate the exact recovery-004 execution-gate state, then run the single no-content preflight. Only on every pass may the one fresh fixed-order attempt begin; stop on the first failure and never retry."
     }
   ],
   "human_gates": {

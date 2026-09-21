@@ -1433,6 +1433,8 @@ REQUIRED = [
     "scripts/validate_m2_radar_raster_function_call_shape_recovery_004_arcgis.py",
     "records/readiness/m2-radar-raster-function-call-shape-recovery-004-arcgis-runtime-validation.json",
     "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-readiness.json",
+    "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-gate.json",
+    "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-reconciliation.json",
     "tests/test_m2_radar_raster_function_call_shape_recovery_004.py",
     ".github/workflows/validate.yml",
 ]
@@ -17344,6 +17346,8 @@ def main() -> None:
     raster_function_contract_ref = "config/qa/m2-radar-raster-function-call-shape-recovery-004-contract.json"
     raster_function_runtime_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-arcgis-runtime-validation.json"
     raster_function_readiness_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-readiness.json"
+    raster_function_implementation_gate_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-gate.json"
+    raster_function_implementation_reconciliation_ref = "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-reconciliation.json"
     raster_function_observation = json.loads((ROOT / raster_function_observation_ref).read_text(encoding="utf-8"))
     raster_function_proposal = json.loads((ROOT / raster_function_proposal_ref).read_text(encoding="utf-8"))
     raster_function_bundle = json.loads((ROOT / raster_function_bundle_ref).read_text(encoding="utf-8"))
@@ -17353,6 +17357,8 @@ def main() -> None:
     raster_function_contract = json.loads((ROOT / raster_function_contract_ref).read_text(encoding="utf-8"))
     raster_function_runtime = json.loads((ROOT / raster_function_runtime_ref).read_text(encoding="utf-8"))
     raster_function_readiness = json.loads((ROOT / raster_function_readiness_ref).read_text(encoding="utf-8"))
+    raster_function_implementation_gate = json.loads((ROOT / raster_function_implementation_gate_ref).read_text(encoding="utf-8"))
+    raster_function_implementation_reconciliation = json.loads((ROOT / raster_function_implementation_reconciliation_ref).read_text(encoding="utf-8"))
     raster_function_review_unit = m2_units.get(
         "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-REVIEW", {}
     )
@@ -17366,7 +17372,6 @@ def main() -> None:
         "scripts/run_m2_radar_raster_function_call_shape_recovery_004.py",
         "scripts/validate_m2_radar_raster_function_call_shape_recovery_004_arcgis.py",
         "tests/test_m2_radar_raster_function_call_shape_recovery_004.py",
-        "tests/test_m2_radar_raster_function_call_shape_recovery_004_review.py",
         raster_function_runtime_ref,
         raster_function_approval_ref,
         raster_function_reconciliation_ref,
@@ -17434,6 +17439,31 @@ def main() -> None:
         )
         or raster_function_readiness.get("assertions", {}).get("external_custody_accessed") is not False
         or raster_function_readiness.get("assertions", {}).get("real_attempt_started") is not False
+        or raster_function_implementation_gate.get("status")
+        != "pass_public_default_branch_ci_raster_function_recovery_004_implementation_ready"
+        or raster_function_implementation_gate.get("implementation_commit_sha")
+        != "048137d8193c3f253a94a58b759032d89add3655"
+        or raster_function_implementation_gate.get("public_ci_run_id") != 35638588780
+        or raster_function_implementation_gate.get("public_ci_conclusion") != "success"
+        or raster_function_implementation_gate.get("repository_required_file_count") != 1301
+        or raster_function_implementation_gate.get("public_test_count") != 695
+        or raster_function_implementation_gate.get("public_intentional_skip_count") != 13
+        or any(
+            raster_function_implementation_gate.get("bindings", {}).get(key)
+            != value
+            for key, value in {
+                "recovery_contract_sha256": sha256(raster_function_contract_ref),
+                "recovery_core_sha256": sha256("scripts/m2_radar_raster_function_call_shape_recovery_004_core.py"),
+                "recovery_runner_sha256": sha256("scripts/run_m2_radar_raster_function_call_shape_recovery_004.py"),
+                "arcgis_validator_sha256": sha256("scripts/validate_m2_radar_raster_function_call_shape_recovery_004_arcgis.py"),
+                "portable_test_sha256": sha256("tests/test_m2_radar_raster_function_call_shape_recovery_004.py"),
+                "raster_function_processing_sha256": sha256("scripts/m2_radar_raster_function_call_shape_processing_004.py"),
+            }.items()
+        )
+        or raster_function_implementation_reconciliation.get("status")
+        != "pass_exact_implementation_publication_reconciled_execution_gate_publication_pending"
+        or raster_function_implementation_reconciliation.get("bindings", {}).get("implementation_publication_gate_sha256")
+        != sha256(raster_function_implementation_gate_ref)
         or raster_function_review_unit.get("status") != "complete"
         or raster_function_review_unit.get("human_gate") is not True
         or raster_function_review_unit.get("gates", {}).get("human_decision_count") != 1
@@ -17447,12 +17477,12 @@ def main() -> None:
         or profile.get("control_surfaces", {}).get("proposed_amendments") != []
         or goal.get("proposed_amendments") != []
         or profile.get("current_checkpoint", {}).get("checkpoint_id")
-        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION"
+        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION"
         or goal.get("current_checkpoint")
-        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION"
+        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION"
         or current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
-        != "implementation"
-        or (ROOT / "records/readiness/m2-radar-raster-function-call-shape-recovery-004-implementation-publication-gate.json").exists()
+        != "execution"
+        or (ROOT / "records/readiness/m2-radar-raster-function-call-shape-recovery-004-gate-state-publication.json").exists()
         or (ROOT / "records/readiness/m2-radar-raster-function-call-shape-recovery-004-final-preflight.json").exists()
         or (ROOT / "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json").exists()
     ):
