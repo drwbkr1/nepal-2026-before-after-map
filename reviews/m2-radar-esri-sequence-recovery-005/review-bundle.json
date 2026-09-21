@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-21T19:45:00Z",
+  "status": "local_zero_decision_one_combined_owner_decision_pending",
+  "human_decision_count": 0,
+  "candidate_identity": {
+    "proposal_ref": "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json",
+    "proposal_sha256": "5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217"
+  },
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json",
+      "sha256": "5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217",
+      "role": "exact_machine_readable_proposal"
+    },
+    {
+      "path": "docs/M2_RADAR_ESRI_SEQUENCE_RECOVERY_005_REVIEW.md",
+      "sha256": "d53879c8496b71187f5fd4b003b3c08e3eb76e308f932d717aaa8b937d716443",
+      "role": "human_readable_decision_brief"
+    },
+    {
+      "path": "records/observations/m2-radar-gtc-despeckle-prerequisite-audit-001.json",
+      "sha256": "1237c8e8cc6d3905228dd7797782782b0262d634489c62d56d6850c213e7f4eb",
+      "role": "official_method_and_installed_runtime_read_only_audit"
+    },
+    {
+      "path": "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json",
+      "sha256": "1f3e278e38abd2259922fb6b5aad0f7395424a41708303c9c73de422ee773d6a",
+      "role": "published_recovery_004_terminal_evidence"
+    },
+    {
+      "path": "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-gate.json",
+      "sha256": "d156cebcf413dfbab46a52f1b4e830d37f2daa5ef8361324330f9d10c2ab8f42",
+      "role": "published_recovery_004_terminal_gate"
+    },
+    {
+      "path": "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-reconciliation.json",
+      "sha256": "bc2b5a09507cc177ecd0dc016bf2aec4164b29a438245f41ed98380992a392bb",
+      "role": "published_recovery_004_terminal_gate_reconciliation"
+    }
+  ],
+  "decision_item": {
+    "decision_id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-COMBINED-AUTHORITY",
+    "question": "Approve the exact Esri-documented Despeckle prerequisite, the recovery-specific REFINED_LEE scientific-method amendment, and one bounded recovery-005 envelope through sanitized terminal publication?",
+    "recommendation": "approve",
+    "reason": "The current frozen no-despeckle primary route omits a prerequisite stated by official Esri Sentinel-1 and Apply Geometric Terrain Correction guidance. One combined decision makes the consequential method change explicit while avoiding repeated publication, implementation, execution, and terminal-review confirmations.",
+    "approval_effect": "One approval covers official-method adoption for this recovery, the exact recovery-specific scientific amendment, packet and implementation publication, exact correction, tests, public CI, one final no-content preflight, at most one fresh real attempt, reconciliation, and sanitized terminal publication without intermediate owner reconfirmation.",
+    "rejection_effect": "No publication, implementation, project-data or external-custody read, ArcPy processing invocation, geoprocessing, or new attempt occurs."
+  },
+  "response_method": {
+    "mode": "ordinary_chat_authorization",
+    "formal_response_form_required": false,
+    "attestation_required": true,
+    "required_bindings": [
+      "bundle SHA-256",
+      "proposal SHA-256"
+    ]
+  },
+  "claim_boundary": {
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "baseline_or_change_analysis_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

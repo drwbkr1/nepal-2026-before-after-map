@@ -413,6 +413,19 @@
         "automatic_retry_authorized": false,
         "apply_orbit_correction_authorized": false,
         "geoprocessing_authorized": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
+        "approval_sha256": "da95bf4570a7062166a758ce5cfb037300b2a039bfc9454995cd366313595a20",
+        "proposal_ref": "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json",
+        "proposal_sha256": "5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217",
+        "review_bundle_sha256": "19af7c293e91bea1e5c46092263e67ce064781f10601f3139024457817b0bcd0",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-esri-sequence-recovery-005-review-reconciliation.json",
+        "review_reconciliation_sha256": "c8c25fc6958db2c927c8550b885a82f03d5582754e95cf9fcbaf26261a35365b",
+        "method_guidance": "official_esri_sentinel_1_sequence",
+        "recovery_specific_primary_despeckle": "REFINED_LEE",
+        "maximum_real_attempts": 1,
+        "automatic_retry_authorized": false
       }
     ]
   },
@@ -457,7 +470,8 @@
       "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
       "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
       "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
-      "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json"
+      "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
+      "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json"
     ]
   },
   "cycle": {
@@ -699,16 +713,16 @@
     "amendment_required_to_change_active_gate": true
   },
   "current_checkpoint": {
-    "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
+    "checkpoint_id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
     "expected_branch": "main",
     "expected_head": null,
-    "next_action": "Review the sanitized terminal recovery-004 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline, change analysis, attribution, derived-pixel publication, or scientific publication is released."
+    "next_action": "Implement and validate the exact approved REFINED_LEE step after radiometric terrain flattening and before gamma geometric terrain correction. Publish and reconcile the implementation and public CI gate under the single approved authority envelope; do not read external custody or begin the real attempt before both public gates and the one final no-content preflight pass."
   },
   "parallel_checkpoints": [
     {
-      "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
-      "authority_ref": "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
-      "next_action": "Review the sanitized terminal recovery-004 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline, change analysis, attribution, derived-pixel publication, or scientific publication is released."
+      "checkpoint_id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
+      "authority_ref": "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
+      "next_action": "Implement and validate the exact approved REFINED_LEE step after radiometric terrain flattening and before gamma geometric terrain correction. Publish and reconcile the implementation and public CI gate under the single approved authority envelope; do not read external custody or begin the real attempt before both public gates and the one final no-content preflight pass."
     }
   ],
   "human_gates": {
@@ -724,5 +738,16 @@
         "authority_ref": "records/source-gates/m2-radar-short-path-recovery-003-approval.json"
       }
     ]
-  }
+  },
+  "review_gates": [
+    {
+      "id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-REVIEW",
+      "authority_ref": "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json",
+      "status": "approved_exact",
+      "human_decision_count": 1,
+      "review_bundle_ref": "reviews/m2-radar-esri-sequence-recovery-005/review-bundle.json",
+      "publication_implementation_or_execution_authorized": true,
+      "approval_ref": "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json"
+    }
+  ]
 }

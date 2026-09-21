@@ -11,7 +11,7 @@
   "completion_rule": "Complete only when the reproducible ArcGIS evidence package, reviewed change evidence, exportable deliverables, validation, and final release boundary are all satisfied.",
   "last_completed_milestone": "contracts/milestone-001.json",
   "proposed_milestone": null,
-  "current_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
+  "current_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
   "proposed_amendments": [],
   "active_amendments": [
     "records/source-gates/m2-dem-amendment-approval.json",
@@ -39,10 +39,11 @@
     "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
     "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
     "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
-    "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json"
+    "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
+    "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json"
   ],
   "parallel_checkpoints": [
-    "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW"
+    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION"
   ],
-  "next_action": null
+  "next_action": "Implement and validate the exact approved REFINED_LEE step after radiometric terrain flattening and before gamma geometric terrain correction. Publish and reconcile the implementation and public CI gate under the single approved authority envelope; do not read external custody or begin the real attempt before both public gates and the one final no-content preflight pass."
 }

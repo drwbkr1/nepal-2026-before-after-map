@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "reconciliation_id": "NEPAL-M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-REVIEW-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-21T20:07:49Z",
+  "status": "reconciled_exact_attested_single_owner_decision",
+  "decision_counts": {
+    "approve": 1,
+    "revise": 0,
+    "defer": 0
+  },
+  "bindings": {
+    "approval_ref": "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
+    "approval_sha256": "da95bf4570a7062166a758ce5cfb037300b2a039bfc9454995cd366313595a20",
+    "proposal_sha256": "5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217",
+    "review_bundle_sha256": "19af7c293e91bea1e5c46092263e67ce064781f10601f3139024457817b0bcd0"
+  },
+  "assertions": {
+    "attestation_recorded": true,
+    "human_decision_count": 1,
+    "official_method_guidance_adopted_for_this_recovery": true,
+    "recovery_specific_refined_lee_scientific_method_amendment_approved": true,
+    "single_authority_envelope": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "implementation_or_execution_performed": false,
+    "arcpy_invoked": false,
+    "external_custody_accessed": false,
+    "geoprocessing_invoked": false
+  }
+}

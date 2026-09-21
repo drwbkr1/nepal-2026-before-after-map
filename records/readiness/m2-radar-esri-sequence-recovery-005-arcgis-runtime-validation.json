@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-ARCGIS-RUNTIME-VALIDATION",
+  "status": "pass_installed_arcgis_runtime_seven_interface_signature_only_validation",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1"
+  },
+  "expected_parameters": {
+    "ApplyOrbitCorrection": [
+      "in_radar_data",
+      "in_orbit_file",
+      "folder"
+    ],
+    "RemoveThermalNoise": [
+      "in_radar_data",
+      "polarization_bands"
+    ],
+    "ApplyRadiometricCalibration": [
+      "in_radar_data",
+      "polarization_bands",
+      "calibration_type"
+    ],
+    "ApplyRadiometricTerrainFlattening": [
+      "in_radar_data",
+      "in_dem_raster",
+      "geoid",
+      "polarization_bands",
+      "calibration_type",
+      "out_scattering_area",
+      "out_geometric_distortion",
+      "out_geometric_distortion_mask"
+    ],
+    "Despeckle": [
+      "in_radar_data",
+      "polarization_bands",
+      "filter_type",
+      "filter_size",
+      "noise_model",
+      "noise_variance",
+      "add_noise_mean",
+      "mult_noise_mean",
+      "number_of_looks",
+      "damp_factor"
+    ],
+    "ApplyGeometricTerrainCorrection": [
+      "in_radar_data",
+      "polarization_bands",
+      "in_dem_raster",
+      "geoid"
+    ],
+    "ConvertSARUnits": [
+      "in_radar_data",
+      "conversion_type"
+    ]
+  },
+  "observed_parameters": {
+    "ApplyOrbitCorrection": [
+      "in_radar_data",
+      "in_orbit_file",
+      "folder"
+    ],
+    "RemoveThermalNoise": [
+      "in_radar_data",
+      "polarization_bands"
+    ],
+    "ApplyRadiometricCalibration": [
+      "in_radar_data",
+      "polarization_bands",
+      "calibration_type"
+    ],
+    "ApplyRadiometricTerrainFlattening": [
+      "in_radar_data",
+      "in_dem_raster",
+      "geoid",
+      "polarization_bands",
+      "calibration_type",
+      "out_scattering_area",
+      "out_geometric_distortion",
+      "out_geometric_distortion_mask"
+    ],
+    "Despeckle": [
+      "in_radar_data",
+      "polarization_bands",
+      "filter_type",
+      "filter_size",
+      "noise_model",
+      "noise_variance",
+      "add_noise_mean",
+      "mult_noise_mean",
+      "number_of_looks",
+      "damp_factor"
+    ],
+    "ApplyGeometricTerrainCorrection": [
+      "in_radar_data",
+      "polarization_bands",
+      "in_dem_raster",
+      "geoid"
+    ],
+    "ConvertSARUnits": [
+      "in_radar_data",
+      "conversion_type"
+    ]
+  },
+  "observed_signatures": {
+    "ApplyOrbitCorrection": "(in_radar_data, in_orbit_file='#', folder='#')",
+    "RemoveThermalNoise": "(in_radar_data, polarization_bands='#') -> arcpy.sa.Raster.Raster",
+    "ApplyRadiometricCalibration": "(in_radar_data, polarization_bands='#', calibration_type: Optional[Literal['BETA_NOUGHT', 'SIGMA_NOUGHT', 'GAMMA_NOUGHT', '#']] = '#') -> arcpy.sa.Raster.Raster",
+    "ApplyRadiometricTerrainFlattening": "(in_radar_data, in_dem_raster, geoid: Optional[Literal['GEOID', 'NONE', '#']] = '#', polarization_bands='#', calibration_type: Optional[Literal['SIGMA_NOUGHT', 'GAMMA_NOUGHT', '#']] = '#', out_scattering_area='#', out_geometric_distortion='#', out_geometric_distortion_mask='#') -> arcpy.sa.Raster.Raster",
+    "Despeckle": "(in_radar_data, polarization_bands='#', filter_type: Optional[Literal['LEE', 'ENHANCED_LEE', 'REFINED_LEE', 'FROST', 'KUAN', 'GAMMA_MAP', '#']] = '#', filter_size: Optional[Literal['3x3', '5x5', '7x7', '9x9', '11x11', '#']] = '#', noise_model: Optional[Literal['MULTIPLICATIVE_NOISE', 'ADDITIVE_NOISE', 'ADDITIVE_AND_MULTIPLICATIVE_NOISE', '#']] = '#', noise_variance='#', add_noise_mean='#', mult_noise_mean='#', number_of_looks='#', damp_factor='#') -> arcpy.sa.Raster.Raster",
+    "ApplyGeometricTerrainCorrection": "(in_radar_data, polarization_bands='#', in_dem_raster='#', geoid: Optional[Literal['GEOID', 'NONE', '#']] = '#') -> arcpy.sa.Raster.Raster",
+    "ConvertSARUnits": "(in_radar_data, conversion_type: Optional[Literal['LINEAR_TO_DB', 'DB_TO_LINEAR', 'AMPLITUDE_TO_INTENSITY', 'INTENSITY_TO_AMPLITUDE', 'COMPLEX_TO_INTENSITY', 'PHASE_TO_DISPLACEMENT', '#']] = '#') -> arcpy.sa.Raster.Raster"
+  },
+  "raster_returning": {
+    "ApplyOrbitCorrection": false,
+    "RemoveThermalNoise": true,
+    "ApplyRadiometricCalibration": true,
+    "ApplyRadiometricTerrainFlattening": true,
+    "Despeckle": true,
+    "ApplyGeometricTerrainCorrection": true,
+    "ConvertSARUnits": true
+  },
+  "documentation_present": {
+    "ApplyOrbitCorrection": true,
+    "RemoveThermalNoise": true,
+    "ApplyRadiometricCalibration": true,
+    "ApplyRadiometricTerrainFlattening": true,
+    "Despeckle": true,
+    "ApplyGeometricTerrainCorrection": true,
+    "ConvertSARUnits": true
+  },
+  "method_amendment": {
+    "exact_despeckle_call_shape": [
+      "in_radar_data",
+      "VV;VH",
+      "REFINED_LEE"
+    ],
+    "filter_size_argument_omitted": true,
+    "position": "after_rtf_before_gamma_gtc"
+  },
+  "assertions": {
+    "signature_inspection_only": true,
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "raster_function_invoked": false,
+    "apply_orbit_correction_invoked": false,
+    "geoprocessing_invoked": false,
+    "extension_checked_out": false,
+    "network_request_performed": false,
+    "credential_value_read": false,
+    "production_attempt_created": false,
+    "scientific_result_established": false
+  }
+}

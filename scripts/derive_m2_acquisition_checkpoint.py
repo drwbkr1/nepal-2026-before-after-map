@@ -367,6 +367,22 @@ RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_TERMINAL_CHECKPOINT = {
     "checkpoint_id": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
     "next_action": "Review the sanitized terminal recovery-004 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline, change analysis, attribution, derived-pixel publication, or scientific publication is released.",
 }
+RADAR_ESRI_SEQUENCE_RECOVERY_005_REVIEW_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-OWNER-DECISION",
+    "next_action": "Review one combined M2 radar Esri-sequence recovery-005 decision at bundle SHA-256 19af7c293e91bea1e5c46092263e67ce064781f10601f3139024457817b0bcd0 and proposal SHA-256 5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217. One approval adopts the exact REFINED_LEE recovery-specific scientific-method amendment and covers packet and implementation publication, validation, public CI, one final no-content preflight, at most one fresh fixed-order real attempt, reconciliation, and sanitized terminal publication without intermediate owner reconfirmation. Until approval, no publication, implementation, project-data or external-custody access, ArcPy processing invocation, geoprocessing, or new attempt is released.",
+}
+RADAR_ESRI_SEQUENCE_RECOVERY_005_IMPLEMENTATION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
+    "next_action": "Implement and validate the exact approved REFINED_LEE step after radiometric terrain flattening and before gamma geometric terrain correction. Publish and reconcile the implementation and public CI gate under the single approved authority envelope; do not read external custody or begin the real attempt before both public gates and the one final no-content preflight pass.",
+}
+RADAR_ESRI_SEQUENCE_RECOVERY_005_EXECUTION_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
+    "next_action": "Run the single final no-content preflight. Only on its pass may the one fresh fixed-order recovery-005 attempt read exact custody and invoke the approved Esri-sequence route. Stop on the first failure and never retry.",
+}
+RADAR_ESRI_SEQUENCE_RECOVERY_005_TERMINAL_CHECKPOINT = {
+    "checkpoint_id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-REVIEW",
+    "next_action": "Review the sanitized terminal recovery-005 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline admission, change analysis, attribution, derived-pixel publication, historical-root-cause claim, or scientific publication is released.",
+}
 
 
 def derive_checkpoint(state_counts: dict[str, int]) -> dict[str, str]:
@@ -2795,6 +2811,87 @@ def current_radar_raster_function_call_shape_recovery_004_stage(
     return "implementation"
 
 
+def current_radar_esri_sequence_recovery_005_review_required(
+    root: Path, state_counts: dict[str, int]
+) -> bool:
+    """Recognize the exact local zero-decision recovery-005 review packet."""
+    if state_counts != {"promoted": 8}:
+        return False
+    proposal_ref = "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json"
+    bundle_ref = "reviews/m2-radar-esri-sequence-recovery-005/review-bundle.json"
+    observation_ref = "records/observations/m2-radar-gtc-despeckle-prerequisite-audit-001.json"
+    approval_ref = "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json"
+    if (root / approval_ref).exists():
+        return False
+    try:
+        proposal = load(root / proposal_ref)
+        bundle = load(root / bundle_ref)
+        observation = load(root / observation_ref)
+        milestone = load(root / "contracts/milestone-002.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return False
+    units = {unit.get("id"): unit for unit in milestone.get("units", []) if isinstance(unit, dict)}
+    review = units.get("M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-REVIEW", {})
+    recovery = units.get("M2-RADAR-ESRI-SEQUENCE-RECOVERY-005", {})
+    return bool(
+        hashlib.sha256((root / proposal_ref).read_bytes()).hexdigest()
+        == "5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217"
+        and hashlib.sha256((root / bundle_ref).read_bytes()).hexdigest()
+        == "19af7c293e91bea1e5c46092263e67ce064781f10601f3139024457817b0bcd0"
+        and hashlib.sha256((root / observation_ref).read_bytes()).hexdigest()
+        == "1237c8e8cc6d3905228dd7797782782b0262d634489c62d56d6850c213e7f4eb"
+        and observation.get("status") == "pass_official_method_guidance_for_zero_decision_review_only"
+        and observation.get("project_contract_mismatch", {}).get("scientific_method_amendment_required") is True
+        and proposal.get("human_decision_count") == 0
+        and proposal.get("status") == "proposed_inactive_local_one_decision_review"
+        and proposal.get("authority_basis", {}).get("publication_implementation_or_execution_authorized") is False
+        and proposal.get("proposed_scientific_method_amendment", {}).get("proposed_recovery_005_primary_despeckle")
+        == "REFINED_LEE"
+        and bundle.get("human_decision_count") == 0
+        and bundle.get("status") == "local_zero_decision_one_combined_owner_decision_pending"
+        and review.get("status") == "in_progress"
+        and review.get("human_gate") is True
+        and review.get("gates", {}).get("owner_combined_decision") == "pending"
+        and review.get("gates", {}).get("human_decision_count") == 0
+        and recovery.get("status") == "planned"
+        and recovery.get("human_gate") is False
+        and recovery.get("gates", {}).get("inherited_owner_authority") == "pending"
+        and recovery.get("gates", {}).get("real_attempts_started") == 0
+    )
+
+
+def current_radar_esri_sequence_recovery_005_stage(
+    root: Path, state_counts: dict[str, int]
+) -> str | None:
+    """Recognize the approved recovery-005 implementation, execution, or terminal stage."""
+    if state_counts != {"promoted": 8}:
+        return None
+    prefix = "m2-radar-esri-sequence-recovery-005"
+    try:
+        approval = load(root / f"records/source-gates/{prefix}-approval.json")
+        activation = load(root / f"records/readiness/{prefix}-approval-activation.json")
+    except (OSError, ValueError, json.JSONDecodeError):
+        return None
+    if not (
+        approval.get("status")
+        == "approved_exact_single_bounded_authority_envelope_through_sanitized_terminal_publication"
+        and approval.get("bindings", {}).get("proposal_sha256")
+        == "5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217"
+        and approval.get("bindings", {}).get("review_bundle_sha256")
+        == "19af7c293e91bea1e5c46092263e67ce064781f10601f3139024457817b0bcd0"
+        and activation.get("status")
+        == "pass_exact_combined_authority_activated_implementation_publication_pending"
+    ):
+        return None
+    if (root / f"records/readiness/{prefix}-terminal-publication-gate.json").is_file() or (
+        root / f"records/processing/{prefix}-terminal-reconciliation.json"
+    ).is_file():
+        return "terminal"
+    if (root / f"records/readiness/{prefix}-implementation-publication-gate.json").is_file():
+        return "execution"
+    return "implementation"
+
+
 def current_radar_apply_orbit_correction_input_resolution_diagnostic_001_review_publication_pending(
     root: Path, state_counts: dict[str, int]
 ) -> bool:
@@ -3074,6 +3171,12 @@ def main() -> int:
             ROOT, progress["state_counts"]
         )
         if recovery_terminal == "pass":
+            recovery_005_stage = current_radar_esri_sequence_recovery_005_stage(
+                ROOT, progress["state_counts"]
+            )
+            recovery_005_review_required = current_radar_esri_sequence_recovery_005_review_required(
+                ROOT, progress["state_counts"]
+            )
             recovery_004_review_required = current_radar_raster_function_call_shape_recovery_004_review_required(
                 ROOT, progress["state_counts"]
             )
@@ -3083,7 +3186,15 @@ def main() -> int:
             short_path_stage = None if (recovery_004_review_required or recovery_004_stage) else current_radar_short_path_recovery_003_stage(
                 ROOT, progress["state_counts"]
             )
-            if recovery_004_stage == "terminal":
+            if recovery_005_stage == "terminal":
+                checkpoint = dict(RADAR_ESRI_SEQUENCE_RECOVERY_005_TERMINAL_CHECKPOINT)
+            elif recovery_005_stage == "execution":
+                checkpoint = dict(RADAR_ESRI_SEQUENCE_RECOVERY_005_EXECUTION_CHECKPOINT)
+            elif recovery_005_stage == "implementation":
+                checkpoint = dict(RADAR_ESRI_SEQUENCE_RECOVERY_005_IMPLEMENTATION_CHECKPOINT)
+            elif recovery_005_review_required:
+                checkpoint = dict(RADAR_ESRI_SEQUENCE_RECOVERY_005_REVIEW_CHECKPOINT)
+            elif recovery_004_stage == "terminal":
                 checkpoint = dict(RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_TERMINAL_CHECKPOINT)
             elif recovery_004_stage == "execution":
                 checkpoint = dict(RADAR_RASTER_FUNCTION_CALL_SHAPE_RECOVERY_004_EXECUTION_CHECKPOINT)

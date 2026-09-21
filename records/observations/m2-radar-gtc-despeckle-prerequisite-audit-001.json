@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-RADAR-GTC-DESPECKLE-PREREQUISITE-AUDIT-001",
+  "observed_at_utc": "2026-09-21T19:45:00Z",
+  "status": "pass_official_method_guidance_for_zero_decision_review_only",
+  "scope": "Public Esri method guidance and installed ArcGIS interface metadata only; no project data, external custody, geoprocessing, or processing change.",
+  "terminal_evidence": {
+    "terminal_reconciliation_ref": "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "1f3e278e38abd2259922fb6b5aad0f7395424a41708303c9c73de422ee773d6a",
+    "attempt_id": "radar-pixel-orbit-application-raster-function-recovery-004-real-001",
+    "stopped_source_id": "M1-SRC-001",
+    "stopped_tool": "ApplyGeometricTerrainCorrection_gamma",
+    "failure_message_contains": "ERROR 000425: Failed to create ortho-corrected raster dataset",
+    "function_returned_successfully": false,
+    "returned_raster_save_started": false,
+    "output_created": false,
+    "attempt_consumed": true
+  },
+  "official_sources": [
+    {
+      "publisher": "Esri",
+      "title": "Sentinel-1 GRD workflow",
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/help/analysis/image-analyst/analysis-ready-sentinel-1-grd-data-generation.html",
+      "retrieved_at_utc": "2026-09-21T19:42:00Z",
+      "relevant_guidance": "The documented analysis-ready Sentinel-1 GRD sequence places Despeckle after Apply Radiometric Terrain Flattening and before Apply Geometric Terrain Correction."
+    },
+    {
+      "publisher": "Esri",
+      "title": "Apply Geometric Terrain Correction (Image Analyst Tools)",
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-geometric-terrain-correction.html",
+      "retrieved_at_utc": "2026-09-21T19:42:00Z",
+      "relevant_guidance": "The Usage section directs users to run Despeckle on the input SAR data before Apply Geometric Terrain Correction; the examples use a despeckled input."
+    },
+    {
+      "publisher": "Esri",
+      "title": "Despeckle (Image Analyst Tools)",
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/despeckle.html",
+      "retrieved_at_utc": "2026-09-21T19:42:00Z",
+      "relevant_guidance": "REFINED_LEE is the default edge-preserving option; Esri's Python example calls arcpy.ia.Despeckle(input, 'VV;VH', 'REFINED_LEE') and then saves the returned Raster. Filter size is not valid for REFINED_LEE."
+    },
+    {
+      "publisher": "Esri",
+      "title": "Generate Radiometric Terrain Corrected Data (Image Analyst Tools)",
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/generate-radiometric-terrain-corrected-data.html",
+      "retrieved_at_utc": "2026-09-21T19:42:00Z",
+      "relevant_guidance": "The integrated RTC workflow includes Apply Radiometric Terrain Flattening, Despeckle, and Apply Geometric Terrain Correction as successive processing stages."
+    }
+  ],
+  "installed_runtime_observation": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "inspection_mode": "read_only_import_signature_usage_and_message_lookup",
+    "error_000425_message": "Failed to create ortho-corrected raster dataset",
+    "despeckle_signature": "(in_radar_data, polarization_bands='#', filter_type='REFINED_LEE|other|#', filter_size='3x3|5x5|7x7|9x9|11x11|#', noise_model='...', noise_variance='#', add_noise_mean='#', mult_noise_mean='#', number_of_looks='#', damp_factor='#') -> Raster",
+    "apply_geometric_terrain_correction_signature": "(in_radar_data, polarization_bands='#', in_dem_raster='#', geoid='GEOID|NONE|#') -> Raster",
+    "despeckle_exact_proposed_call": "arcpy.ia.Despeckle(gamma_slant, 'VV;VH', 'REFINED_LEE')",
+    "output_save_pattern": "Save the returned Raster exactly once to a predeclared absent output.",
+    "arcpy_function_invoked": false,
+    "geoprocessing_invoked": false,
+    "extension_checkout_performed": false
+  },
+  "project_contract_mismatch": {
+    "baseline_contract_ref": "config/qa/radar-baseline-processing-contract.json",
+    "baseline_contract_sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f",
+    "pixel_orbit_contract_ref": "config/qa/m2-radar-pixel-orbit-application-001-contract.json",
+    "pixel_orbit_contract_sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+    "frozen_primary_despeckle": "NONE",
+    "recovery_004_observed_sequence": [
+      "ApplyRadiometricTerrainFlattening",
+      "ApplyGeometricTerrainCorrection_gamma"
+    ],
+    "official_esri_sequence_requires_intervening_stage": "Despeckle",
+    "scientific_method_amendment_required": true
+  },
+  "source_gate_assessment": {
+    "source_type": "official_public_vendor_method_documentation",
+    "adoption_mode": "citation_and_method_guidance_only",
+    "access": "public_no_account_no_cost",
+    "rights": "Reference and citation only; no documentation-page redistribution.",
+    "privacy_and_security": "No credentials, personal data, project data, or executable payload were supplied or requested.",
+    "integrity": "Exact official URLs and retrieval timestamps are recorded and corroborated against the installed 3.7.1 interface metadata. The mutable web pages are not content-hash locked.",
+    "fitness": "Fit to support owner review of the documented processing prerequisite and exact call design only.",
+    "limitations": [
+      "The documentation does not prove that omitted despeckling caused recovery-004 ERROR 000425.",
+      "A later success or failure cannot establish the historical root cause by itself.",
+      "The guidance does not establish radar recovery readiness, a usable baseline, event-related change, attribution, or publication fitness."
+    ],
+    "decision": "pass_for_zero_decision_proposal_preparation_only"
+  },
+  "assertions": {
+    "project_data_read": false,
+    "external_custody_read": false,
+    "network_action_beyond_public_documentation_read": false,
+    "credential_action": false,
+    "processing_change_authorized": false,
+    "implementation_authorized": false,
+    "new_real_attempt_authorized": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "scientific_claim_established": false
+  }
+}

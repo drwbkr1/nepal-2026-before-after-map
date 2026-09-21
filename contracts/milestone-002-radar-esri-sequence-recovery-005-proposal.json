@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-ESRI-SEQUENCE-RECOVERY-005",
+  "prepared_at_utc": "2026-09-21T19:45:00Z",
+  "status": "proposed_inactive_local_one_decision_review",
+  "human_decision_count": 0,
+  "authority_basis": {
+    "terminal_reconciliation_ref": "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "1f3e278e38abd2259922fb6b5aad0f7395424a41708303c9c73de422ee773d6a",
+    "outcome_reconciliation_ref": "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json",
+    "outcome_reconciliation_sha256": "e2424da90ef44ded6ae8fbe86a443cc1c698e1e52db4aff05f9e4e51c466f43b",
+    "terminal_publication_gate_ref": "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-gate.json",
+    "terminal_publication_gate_sha256": "d156cebcf413dfbab46a52f1b4e830d37f2daa5ef8361324330f9d10c2ab8f42",
+    "terminal_publication_reconciliation_ref": "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-reconciliation.json",
+    "terminal_publication_reconciliation_sha256": "bc2b5a09507cc177ecd0dc016bf2aec4164b29a438245f41ed98380992a392bb",
+    "official_method_audit_ref": "records/observations/m2-radar-gtc-despeckle-prerequisite-audit-001.json",
+    "official_method_audit_sha256": "1237c8e8cc6d3905228dd7797782782b0262d634489c62d56d6850c213e7f4eb",
+    "publication_implementation_or_execution_authorized": false
+  },
+  "problem_statement": {
+    "consumed_attempt_id": "radar-pixel-orbit-application-raster-function-recovery-004-real-001",
+    "terminal_status": "block_raster_function_recovery_004_source_001_geometric_terrain_correction_gamma_no_retry",
+    "failed_source_id": "M1-SRC-001",
+    "failed_tool": "ApplyGeometricTerrainCorrection_gamma",
+    "observed_failure_type": "ExecuteError",
+    "observed_failure_message": "ERROR 000425: Failed to create ortho-corrected raster dataset Failed to execute (ApplyGeometricTerrainCorrection).",
+    "recovery_004_sequence_omitted_esri_documented_despeckle_prerequisite": true,
+    "historical_root_cause_established": false,
+    "automatic_retry_performed": false,
+    "consumed_attempt_reuse_or_retry_allowed": false
+  },
+  "official_method_evidence": {
+    "publisher": "Esri",
+    "guidance_summary": "Current official Sentinel-1 GRD and Apply Geometric Terrain Correction documentation places Despeckle after radiometric terrain flattening and before geometric terrain correction.",
+    "installed_runtime": "ArcGIS Pro 3.7.1",
+    "installed_despeckle_interface": "arcpy.ia.Despeckle(in_radar_data, polarization_bands, filter_type, ...) -> Raster",
+    "exact_supported_example_shape": "arcpy.ia.Despeckle(input, 'VV;VH', 'REFINED_LEE') followed by Raster.save(output)",
+    "filter_size_for_refined_lee": "not_applicable_and_omitted",
+    "evidentiary_limit": "Supports a method-amendment proposal, not a historical-causation or future-success claim."
+  },
+  "proposed_scientific_method_amendment": {
+    "amendment_required": true,
+    "historical_primary_route": "no_despeckle",
+    "proposed_recovery_005_primary_despeckle": "REFINED_LEE",
+    "position": "after_ApplyRadiometricTerrainFlattening_before_ApplyGeometricTerrainCorrection_gamma",
+    "polarization_bands": "VV;VH",
+    "filter_size_argument": "omitted",
+    "reason_filter_size_is_omitted": "Esri documents filter_size as invalid for REFINED_LEE.",
+    "historical_contracts_mutated": false,
+    "recovery_specific_overlay_contract_required": true,
+    "owner_normative_scientific_judgment_required": true
+  },
+  "proposed_correction": {
+    "scope": "recovery_specific_processing_module_only",
+    "insert_after": "ApplyRadiometricTerrainFlattening",
+    "insert_before": "ApplyGeometricTerrainCorrection_gamma",
+    "exact_call": "arcpy.ia.Despeckle(gamma_slant, 'VV;VH', 'REFINED_LEE')",
+    "exact_output": "gamma0_linear_despeckled.crf",
+    "output_precondition": "absent",
+    "returned_object_must_expose_save": true,
+    "exclusive_output_save": true,
+    "output_must_exist_after_save": true,
+    "per_tool_before_and_after_stage_markers": true,
+    "gamma_gtc_input_becomes_exact_despeckled_output": true,
+    "all_other_recovery_004_call_shapes_and_parameters": "unchanged",
+    "mask_gtc_route": "unchanged_and_stops_on_failure"
+  },
+  "proposed_attempt": {
+    "attempt_id": "radar-pixel-orbit-application-esri-sequence-recovery-005-real-001",
+    "distinct_from_all_consumed_attempts": true,
+    "external_attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\r5\\a1",
+    "external_attempt_root_must_be_absent_at_final_preflight": true,
+    "source_aliases": {
+      "M1-SRC-001": "1",
+      "M1-SRC-002": "2",
+      "M1-SRC-003": "3",
+      "M1-SRC-004": "4",
+      "M1-SRC-005": "5",
+      "M1-SRC-006": "6"
+    },
+    "preserve_exact_source_order": [
+      "M1-SRC-001",
+      "M1-SRC-002",
+      "M1-SRC-003",
+      "M1-SRC-004",
+      "M1-SRC-005",
+      "M1-SRC-006"
+    ],
+    "preserve_exact_route_order": [
+      "PAIR-S1-ASC-R085-IW",
+      "PAIR-S1-DESC-R121-IW"
+    ],
+    "preserve_source_to_orbit_mapping": true,
+    "preserve_dem_aoi_crs_grid_mask_threshold_registration_and_route_contracts": true,
+    "maximum_processes": 1,
+    "maximum_real_attempts": 1,
+    "maximum_call_per_tool_per_source": 1,
+    "automatic_retry": false,
+    "stop_on_first_failure": true,
+    "collision_policy": "fail_before_external_content_read",
+    "overwrite": false,
+    "network_requests": 0,
+    "credential_actions": 0
+  },
+  "implementation_requirements": {
+    "historical_contracts_scripts_receipts_and_external_attempt_roots_immutable": true,
+    "new_recovery_specific_contract_core_runner_validator_and_receipt_namespace": true,
+    "despeckle_output_and_stage_receipts_reserved_before_external_content_read": true,
+    "terminal_cleanup_and_fallback_receipts_reserved_before_external_content_read": true,
+    "external_source_orbit_and_dem_custody_read_only": true,
+    "derived_outputs_append_only": true,
+    "portable_tests": [
+      "exact Despeckle position is after RTF and before gamma GTC",
+      "exact arcpy.ia Raster-returning call omits output path and filter size",
+      "returned Raster-like object saves exactly once to the declared absent output",
+      "gamma GTC receives only the exact saved despeckled output",
+      "missing save method, save failure, or missing output stops the source",
+      "fixed source and route order and stop-on-first-failure remain unchanged",
+      "secret and absolute-path exposure is sanitized"
+    ],
+    "installed_arcgis_runtime_test": "Read-only inspect.signature, Usage, product-version, and message lookup for Despeckle and ApplyGeometricTerrainCorrection; no project data, external custody, function invocation, geoprocessing, or extension checkout.",
+    "public_ci_required_before_real_attempt": true,
+    "final_no_content_preflight_required": true
+  },
+  "single_owner_decision_scope": {
+    "adopt_official_esri_method_guidance_for_this_recovery": true,
+    "approve_recovery_specific_scientific_method_amendment": true,
+    "public_packet_and_implementation_publication": true,
+    "bounded_implementation_and_reversible_correction": true,
+    "portable_and_installed_arcgis_signature_tests": true,
+    "public_ci_and_exact_reconciliation": true,
+    "one_final_no_content_preflight": true,
+    "one_fresh_esri_sequence_recovery_attempt": true,
+    "terminal_reconciliation_and_sanitized_publication": true,
+    "no_intermediate_owner_reconfirmation": true
+  },
+  "not_authorized_by_approval": [
+    "reuse, resume, retry, reconstruction, deletion, or mutation of a consumed attempt or receipt",
+    "a second recovery-005 attempt or automatic retry",
+    "source, date, product, orbit, DEM, AOI, CRS, grid, mask, threshold, registration, route, or other scientific-predicate substitution",
+    "any despeckle filter other than exact REFINED_LEE or any filter-size argument",
+    "credential, network, account, terms, installation, or UAC action",
+    "baseline admission, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication",
+    "a historical-root-cause claim based only on a later success or failure"
+  ],
+  "result_semantics": {
+    "signature_precheck_failure": "terminal block before external-custody content read or ArcPy function invocation",
+    "first_tool_failure": "terminal block on the exact failed tool and source; no later tool, source, route, or retry",
+    "full_pass": "six exact sources and two exact routes pass the amended recovery-005 QA-only processing contract",
+    "full_pass_does_not_establish": [
+      "historical root cause",
+      "baseline admission",
+      "event-related change",
+      "geomorphic interpretation",
+      "event attribution",
+      "derived-pixel publication authority",
+      "scientific publication authority"
+    ]
+  },
+  "next_action": "Owner reviews one combined decision. Approval would adopt the exact official Esri sequence for this recovery, approve the REFINED_LEE scientific-method amendment, and cover packet and implementation publication, tests, public CI, one final no-content preflight, at most one fresh real attempt, reconciliation, and sanitized terminal publication without intermediate confirmation. Until approval, no publication, implementation, project-data or external-custody access, ArcPy function invocation, geoprocessing, or new attempt is released."
+}

@@ -407,6 +407,19 @@
         "automatic_retry_authorized": false,
         "apply_orbit_correction_authorized": false,
         "geoprocessing_authorized": false
+      },
+      {
+        "approval_ref": "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
+        "approval_sha256": "da95bf4570a7062166a758ce5cfb037300b2a039bfc9454995cd366313595a20",
+        "proposal_ref": "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json",
+        "proposal_sha256": "5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217",
+        "review_bundle_sha256": "19af7c293e91bea1e5c46092263e67ce064781f10601f3139024457817b0bcd0",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-esri-sequence-recovery-005-review-reconciliation.json",
+        "review_reconciliation_sha256": "c8c25fc6958db2c927c8550b885a82f03d5582754e95cf9fcbaf26261a35365b",
+        "method_guidance": "official_esri_sentinel_1_sequence",
+        "recovery_specific_primary_despeckle": "REFINED_LEE",
+        "maximum_real_attempts": 1,
+        "automatic_retry_authorized": false
       }
     ]
   },
@@ -491,7 +504,8 @@
       "records/source-gates/m2-radar-delayed-import-probe-receipt-recovery-001-approval.json",
       "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
       "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
-      "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json"
+      "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
+      "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json"
     ]
   },
   "entry_conditions": [
@@ -5028,6 +5042,120 @@
       },
       "next_dependency": null,
       "disposition": "block"
+    },
+    {
+      "id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-REVIEW",
+      "purpose": "Review one exact combined authority envelope for the official Esri Despeckle prerequisite, recovery-specific REFINED_LEE scientific-method amendment, bounded implementation and validation, at most one fresh attempt, reconciliation, and sanitized terminal publication.",
+      "depends_on": [
+        "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004"
+      ],
+      "action_class": "authority_broadening",
+      "human_gate": true,
+      "status": "complete",
+      "inputs": [
+        "records/processing/m2-radar-raster-function-call-shape-recovery-004-terminal-reconciliation.json",
+        "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json",
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-gate.json",
+        "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-reconciliation.json",
+        "records/observations/m2-radar-gtc-despeckle-prerequisite-audit-001.json",
+        "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json",
+        "reviews/m2-radar-esri-sequence-recovery-005/review-bundle.json",
+        "docs/M2_RADAR_ESRI_SEQUENCE_RECOVERY_005_REVIEW.md",
+        "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
+        "records/source-gates/m2-radar-esri-sequence-recovery-005-review-reconciliation.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-approval-activation.json"
+      ],
+      "outputs": [
+        "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json"
+      ],
+      "gates": {
+        "human_decision_count": 1,
+        "owner_combined_decision": "approved_exact",
+        "ordinary_chat_authorization_permitted": true,
+        "formal_response_form_required": false,
+        "attestation_required": true,
+        "method_guidance_adoption_pending": false,
+        "scientific_method_amendment_pending": false,
+        "intermediate_owner_reconfirmation_required_after_approval": false,
+        "publication_authorized": true,
+        "implementation_authorized": true,
+        "external_custody_access_authorized": true,
+        "arcpy_processing_or_geoprocessing_authorized": true,
+        "new_real_attempt_authorized": true
+      },
+      "exit_condition_delta": {
+        "expected": [
+          "one exact attested owner decision bound to proposal and bundle hashes"
+        ],
+        "observed": [
+          "one exact attested owner decision bound to proposal and bundle hashes"
+        ],
+        "decision_value": "approved",
+        "rationale": "The exact combined approval adopts the recovery-specific REFINED_LEE method amendment and persists through sanitized terminal publication without intermediate reconfirmation."
+      },
+      "next_dependency": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005"
+    },
+    {
+      "id": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005",
+      "purpose": "Only after the exact combined owner decision, inherit it across packet and implementation publication, the exact REFINED_LEE sequence correction, tests, public CI, one final no-content preflight, at most one fresh attempt, reconciliation, and sanitized terminal publication.",
+      "depends_on": [
+        "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-REVIEW"
+      ],
+      "action_class": "data_processing",
+      "human_gate": false,
+      "status": "in_progress",
+      "inputs": [
+        "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json",
+        "reviews/m2-radar-esri-sequence-recovery-005/review-bundle.json",
+        "records/observations/m2-radar-gtc-despeckle-prerequisite-audit-001.json",
+        "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
+        "records/source-gates/m2-radar-esri-sequence-recovery-005-review-reconciliation.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-approval-activation.json",
+        "config/qa/m2-radar-esri-sequence-recovery-005-contract.json",
+        "scripts/m2_radar_esri_sequence_recovery_005_core.py",
+        "scripts/m2_radar_esri_sequence_processing_005.py",
+        "scripts/run_m2_radar_esri_sequence_recovery_005.py",
+        "scripts/validate_m2_radar_esri_sequence_recovery_005_arcgis.py",
+        "tests/test_m2_radar_esri_sequence_recovery_005.py",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json"
+      ],
+      "outputs": [
+        "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-arcgis-runtime-validation.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-gate.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-gate-state-publication.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-final-preflight.json",
+        "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+        "records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-gate.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-reconciliation.json"
+      ],
+      "gates": {
+        "inherited_owner_authority": "pass_exact_combined_approval",
+        "maximum_real_attempts": 1,
+        "real_attempts_started": 0,
+        "automatic_retry": false,
+        "stop_on_first_failure": true,
+        "intermediate_owner_reconfirmation_required": false,
+        "external_custody_accessed": false,
+        "arcpy_processing_or_geoprocessing_invoked": false,
+        "publication_started": false,
+        "official_method_guidance_adopted": true,
+        "recovery_specific_refined_lee_method_amendment": "approved_exact",
+        "implementation_readiness_sha256": "9486bd7d9fff7bd925d8608a1d8550e37051116763f01811b10056569ab94905",
+        "portable_synthetic_tests": "success",
+        "installed_arcgis_runtime_signature_validation": "success",
+        "repository_validation": "success"
+      },
+      "exit_condition_delta": {
+        "expected": [
+          "one terminal recovery-005 result with immutable reconciliation and sanitized publication"
+        ],
+        "observed": [],
+        "decision_value": null,
+        "rationale": "Approved implementation is locally validated and ready for public default-branch CI; no real attempt has started."
+      },
+      "next_dependency": null
     }
   ],
   "path_efficiency": {
@@ -5084,8 +5212,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
-    "next_action": "Review the sanitized terminal recovery-004 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline, change analysis, attribution, derived-pixel publication, or scientific publication is released.",
+    "current_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
+    "next_action": "Implement and validate the exact approved REFINED_LEE step after radiometric terrain flattening and before gamma geometric terrain correction. Publish and reconcile the implementation and public CI gate under the single approved authority envelope; do not read external custody or begin the real attempt before both public gates and the one final no-content preflight pass.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -5138,7 +5266,7 @@
       "Short-path recovery-003 is terminal and consumed. All 269 projected paths were at or below 240 characters (maximum 237); ArcGIS setup, DEM/support creation, and the M1-SRC-001 orbit-correction call completed before the next frozen arcpy.ia.RemoveThermalNoise call failed on its namespace-specific signature. No later source or route started, no retry occurred, external custody remained unchanged, and no historical-root-cause, radar-readiness, baseline, change, attribution, derived-pixel, or scientific claim is established.",
       "Recovery-004 is terminal and consumed. M1-SRC-001 completed ApplyOrbitCorrection and the corrected Raster-returning RemoveThermalNoise, ApplyRadiometricCalibration, and ApplyRadiometricTerrainFlattening calls and saves, then ArcGIS ERROR 000425 stopped the gamma ApplyGeometricTerrainCorrection invocation before it returned a Raster or created its output. No later source, route, retry, baseline, change analysis, attribution, derived-pixel publication, historical-root-cause claim, radar-readiness claim, or scientific result is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW",
-    "parallel_next_action": "Review the sanitized terminal recovery-004 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline, change analysis, attribution, derived-pixel publication, or scientific publication is released."
+    "parallel_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
+    "parallel_next_action": "Implement and validate the exact approved REFINED_LEE step after radiometric terrain flattening and before gamma geometric terrain correction. Publish and reconcile the implementation and public CI gate under the single approved authority envelope; do not read external custody or begin the real attempt before both public gates and the one final no-content preflight pass."
   }
 }

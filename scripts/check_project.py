@@ -52,6 +52,8 @@ from derive_m2_acquisition_checkpoint import (
     current_radar_short_path_recovery_003_stage,
     current_radar_raster_function_call_shape_recovery_004_review_required,
     current_radar_raster_function_call_shape_recovery_004_stage,
+    current_radar_esri_sequence_recovery_005_review_required,
+    current_radar_esri_sequence_recovery_005_stage,
     current_radar_delayed_import_probe_001_review_publication_pending,
     current_radar_delayed_import_probe_001_review_required,
     current_radar_delayed_import_probe_001_implementation_pending,
@@ -117,6 +119,20 @@ RASTER_FUNCTION_RECOVERY_004_STAGE = {
         "Review the sanitized terminal recovery-004 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline, change analysis, attribution, derived-pixel publication, or scientific publication is released.",
     ),
 }
+ESRI_SEQUENCE_RECOVERY_005_STAGE = {
+    "implementation": (
+        "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
+        "Implement and validate the exact approved REFINED_LEE step after radiometric terrain flattening and before gamma geometric terrain correction. Publish and reconcile the implementation and public CI gate under the single approved authority envelope; do not read external custody or begin the real attempt before both public gates and the one final no-content preflight pass.",
+    ),
+    "execution": (
+        "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
+        "Run the single final no-content preflight. Only on its pass may the one fresh fixed-order recovery-005 attempt read exact custody and invoke the approved Esri-sequence route. Stop on the first failure and never retry.",
+    ),
+    "terminal": (
+        "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-REVIEW",
+        "Review the sanitized terminal recovery-005 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline admission, change analysis, attribution, derived-pixel publication, historical-root-cause claim, or scientific publication is released.",
+    ),
+}
 from record_m2_sentinel_continuation_001_implementation_readiness import IMPLEMENTATION_FILES as CONTINUATION_001_IMPLEMENTATION_FILES
 from record_m2_sentinel_recovery_002_implementation_readiness import IMPLEMENTATION_FILES as RECOVERY_002_IMPLEMENTATION_FILES
 from record_m2_orbit_recovery_002_implementation_readiness import IMPLEMENTATION_FILES as ORBIT_RECOVERY_002_IMPLEMENTATION_FILES
@@ -125,6 +141,7 @@ from record_m2_orbit_continuation_001_implementation_readiness import FILES as O
 from record_m2_orbit_offline_verification_recovery_001_implementation_readiness import BINDINGS as ORBIT_OFFLINE_VERIFICATION_RECOVERY_001_IMPLEMENTATION_FILES
 from m2_radar_pixel_orbit_application_001_core import validate_contract as validate_radar_pixel_orbit_application_001_contract
 from m2_radar_pixel_orbit_application_recovery_001_core import validate_recovery_contract as validate_radar_pixel_orbit_application_recovery_001_contract
+from m2_radar_esri_sequence_recovery_005_core import validate_contract as validate_esri_sequence_recovery_005_contract
 from record_m2_radar_pixel_orbit_application_001_implementation_readiness import ARTIFACTS as RADAR_PIXEL_ORBIT_APPLICATION_001_IMPLEMENTATION_FILES
 from validate_m2_acquisition_progress import (
     INITIAL_ACTIVE_INTAKE_SHA256,
@@ -1441,6 +1458,21 @@ REQUIRED = [
     "records/processing/m2-radar-raster-function-call-shape-recovery-004-outcome-reconciliation.json",
     "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-gate.json",
     "records/readiness/m2-radar-raster-function-call-shape-recovery-004-terminal-publication-reconciliation.json",
+    "records/observations/m2-radar-gtc-despeckle-prerequisite-audit-001.json",
+    "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json",
+    "docs/M2_RADAR_ESRI_SEQUENCE_RECOVERY_005_REVIEW.md",
+    "reviews/m2-radar-esri-sequence-recovery-005/review-bundle.json",
+    "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
+    "records/source-gates/m2-radar-esri-sequence-recovery-005-review-reconciliation.json",
+    "records/readiness/m2-radar-esri-sequence-recovery-005-approval-activation.json",
+    "config/qa/m2-radar-esri-sequence-recovery-005-contract.json",
+    "scripts/m2_radar_esri_sequence_recovery_005_core.py",
+    "scripts/m2_radar_esri_sequence_processing_005.py",
+    "scripts/run_m2_radar_esri_sequence_recovery_005.py",
+    "scripts/validate_m2_radar_esri_sequence_recovery_005_arcgis.py",
+    "tests/test_m2_radar_esri_sequence_recovery_005.py",
+    "records/readiness/m2-radar-esri-sequence-recovery-005-arcgis-runtime-validation.json",
+    "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json",
     "tests/test_m2_radar_raster_function_call_shape_recovery_004.py",
     ".github/workflows/validate.yml",
 ]
@@ -1847,9 +1879,22 @@ def main() -> None:
     elif dem_state_counts["promoted"] == 4:
         expected_dem_transfer_checkpoint = "M2-DEM-GEOTIFF-VERIFICATION"
         if dem_all_geotiff_verified:
+            recovery_005_stage = current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8})
+            recovery_005_review_required = current_radar_esri_sequence_recovery_005_review_required(
+                ROOT, {"promoted": 8}
+            )
             raster_function_stage = current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
             short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, {"promoted": 8})
-            if raster_function_stage:
+            if recovery_005_stage:
+                expected_dem_checkpoint, expected_dem_next_action = ESRI_SEQUENCE_RECOVERY_005_STAGE[recovery_005_stage]
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json"
+                expected_dem_proposed_amendments = []
+            elif recovery_005_review_required:
+                expected_dem_checkpoint = "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-OWNER-DECISION"
+                expected_dem_checkpoint_authority_ref = "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json"
+                expected_dem_proposed_amendments = ["contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json"]
+                expected_dem_next_action = "Review one combined M2 radar Esri-sequence recovery-005 decision at bundle SHA-256 19af7c293e91bea1e5c46092263e67ce064781f10601f3139024457817b0bcd0 and proposal SHA-256 5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217. One approval adopts the exact REFINED_LEE recovery-specific scientific-method amendment and covers packet and implementation publication, validation, public CI, one final no-content preflight, at most one fresh fixed-order real attempt, reconciliation, and sanitized terminal publication without intermediate owner reconfirmation. Until approval, no publication, implementation, project-data or external-custody access, ArcPy processing invocation, geoprocessing, or new attempt is released."
+            elif raster_function_stage:
                 expected_dem_checkpoint, expected_dem_next_action = RASTER_FUNCTION_RECOVERY_004_STAGE[raster_function_stage]
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json"
                 expected_dem_proposed_amendments = []
@@ -2090,9 +2135,22 @@ def main() -> None:
                 expected_dem_checkpoint = "M2-DEM-VERTICAL-DATUM-REVIEW"
             expected_dem_intake_status = "active_geotiff_verified_vertical_datum_deferred"
             expected_dem_verification_status = "complete_structural_and_valid_coverage_vertical_datum_deferred"
+            recovery_005_stage = current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8})
+            recovery_005_review_required = current_radar_esri_sequence_recovery_005_review_required(
+                ROOT, {"promoted": 8}
+            )
             raster_function_stage = current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
             short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, {"promoted": 8})
-            if raster_function_stage:
+            if recovery_005_stage:
+                expected_dem_checkpoint, expected_dem_next_action = ESRI_SEQUENCE_RECOVERY_005_STAGE[recovery_005_stage]
+                expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json"
+                expected_dem_proposed_amendments = []
+            elif recovery_005_review_required:
+                expected_dem_checkpoint = "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-OWNER-DECISION"
+                expected_dem_checkpoint_authority_ref = "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json"
+                expected_dem_proposed_amendments = ["contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json"]
+                expected_dem_next_action = "Review one combined M2 radar Esri-sequence recovery-005 decision at bundle SHA-256 19af7c293e91bea1e5c46092263e67ce064781f10601f3139024457817b0bcd0 and proposal SHA-256 5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217. One approval adopts the exact REFINED_LEE recovery-specific scientific-method amendment and covers packet and implementation publication, validation, public CI, one final no-content preflight, at most one fresh fixed-order real attempt, reconciliation, and sanitized terminal publication without intermediate owner reconfirmation. Until approval, no publication, implementation, project-data or external-custody access, ArcPy processing invocation, geoprocessing, or new attempt is released."
+            elif raster_function_stage:
                 expected_dem_checkpoint, expected_dem_next_action = RASTER_FUNCTION_RECOVERY_004_STAGE[raster_function_stage]
                 expected_dem_checkpoint_authority_ref = "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json"
                 expected_dem_proposed_amendments = []
@@ -3194,6 +3252,7 @@ def main() -> None:
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
         "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
         "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
+        "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
     ]:
         fail("project profile must expose the exact active amendments")
     if not (ROOT / "AGENTS.md").read_text(encoding="utf-8").strip():
@@ -3548,6 +3607,19 @@ def main() -> None:
         "apply_orbit_correction_authorized": False,
         "geoprocessing_authorized": False,
     }
+    expected_radar_esri_sequence_recovery_005_amendment_binding = {
+        "approval_ref": "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
+        "approval_sha256": "da95bf4570a7062166a758ce5cfb037300b2a039bfc9454995cd366313595a20",
+        "proposal_ref": "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json",
+        "proposal_sha256": "5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217",
+        "review_bundle_sha256": "19af7c293e91bea1e5c46092263e67ce064781f10601f3139024457817b0bcd0",
+        "review_reconciliation_ref": "records/source-gates/m2-radar-esri-sequence-recovery-005-review-reconciliation.json",
+        "review_reconciliation_sha256": "c8c25fc6958db2c927c8550b885a82f03d5582754e95cf9fcbaf26261a35365b",
+        "method_guidance": "official_esri_sentinel_1_sequence",
+        "recovery_specific_primary_despeckle": "REFINED_LEE",
+        "maximum_real_attempts": 1,
+        "automatic_retry_authorized": False,
+    }
     expected_amendments = [
         expected_dem_amendment_binding,
         expected_orbit_amendment_binding,
@@ -3573,6 +3645,7 @@ def main() -> None:
         expected_radar_pixel_orbit_application_recovery_002_amendment_binding,
         expected_radar_apply_orbit_correction_input_resolution_diagnostic_001_amendment_binding,
         expected_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_amendment_binding,
+        expected_radar_esri_sequence_recovery_005_amendment_binding,
     ]
     if profile["authority"].get("amendments") != expected_amendments:
         fail("profile authority does not bind the exact active amendments")
@@ -3603,8 +3676,9 @@ def main() -> None:
         "records/source-gates/m2-radar-pixel-orbit-application-recovery-002-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-001-approval.json",
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
+        "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
     ]:
-        fail("active M2 scope does not expose the twenty-four exact amendment approvals")
+        fail("active M2 scope does not expose the exact amendment approvals")
     profile_gates = {
         item.get("unit_id"): item
         for item in profile.get("gate_policy", {}).get("explicit_human_gates", [])
@@ -3754,6 +3828,7 @@ def main() -> None:
         "records/source-gates/m2-radar-apply-orbit-correction-input-resolution-diagnostic-receipt-persistence-recovery-001-approval.json",
         "records/source-gates/m2-radar-short-path-recovery-003-approval.json",
         "records/source-gates/m2-radar-raster-function-call-shape-recovery-004-approval.json",
+        "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
     ] or goal.get("parallel_checkpoints") != [expected_dem_checkpoint]:
         fail("long-term goal does not expose the active amendments and pending checkpoints")
     if goal.get("proposed_amendments") != expected_dem_proposed_amendments:
@@ -8538,9 +8613,15 @@ def main() -> None:
         or optical_pixel_recovery_terminal
     )
     if orbit_offline_verification_recovery_pass:
+        recovery_005_stage = current_radar_esri_sequence_recovery_005_stage(ROOT, state_counts)
+        recovery_005_review_required = current_radar_esri_sequence_recovery_005_review_required(ROOT, state_counts)
         raster_function_stage = current_radar_raster_function_call_shape_recovery_004_stage(ROOT, state_counts)
         short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, state_counts)
-        if raster_function_stage:
+        if recovery_005_stage:
+            expected_checkpoint = ESRI_SEQUENCE_RECOVERY_005_STAGE[recovery_005_stage][0]
+        elif recovery_005_review_required:
+            expected_checkpoint = "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-OWNER-DECISION"
+        elif raster_function_stage:
             expected_checkpoint = RASTER_FUNCTION_RECOVERY_004_STAGE[raster_function_stage][0]
         elif current_radar_raster_function_call_shape_recovery_004_review_required(ROOT, state_counts):
             expected_checkpoint = "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OWNER-DECISION"
@@ -15390,9 +15471,17 @@ def main() -> None:
             diagnostic_receipt_implementation_pending = current_radar_apply_orbit_correction_input_resolution_diagnostic_receipt_persistence_recovery_001_implementation_pending(
                 ROOT, {"promoted": 8}
             )
+            recovery_005_stage = current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8})
+            recovery_005_review_required = current_radar_esri_sequence_recovery_005_review_required(
+                ROOT, {"promoted": 8}
+            )
             raster_function_stage = current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
             short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, {"promoted": 8})
-            if raster_function_stage:
+            if recovery_005_stage:
+                expected_post_probe_checkpoint = ESRI_SEQUENCE_RECOVERY_005_STAGE[recovery_005_stage][0]
+            elif recovery_005_review_required:
+                expected_post_probe_checkpoint = "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-OWNER-DECISION"
+            elif raster_function_stage:
                 expected_post_probe_checkpoint = RASTER_FUNCTION_RECOVERY_004_STAGE[raster_function_stage][0]
             elif current_radar_raster_function_call_shape_recovery_004_review_required(
                 ROOT, {"promoted": 8}
@@ -15924,6 +16013,10 @@ def main() -> None:
                 or radar_recovery_002_execution.get("gates", {}).get("terminal_reconciliation_sha256") != sha256(radar_recovery_002_terminal_ref)
                 or radar_recovery_002_execution.get("gates", {}).get("outcome_reconciliation_sha256") != sha256(radar_recovery_002_outcome_ref)
                 or profile.get("current_checkpoint", {}).get("checkpoint_id") not in {
+                    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-OWNER-DECISION",
+                    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
+                    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
+                    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-REVIEW",
                     "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OWNER-DECISION",
                     "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION",
                     "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
@@ -15945,6 +16038,10 @@ def main() -> None:
                     "M2-RADAR-APPLY-ORBIT-CORRECTION-INPUT-RESOLUTION-DIAGNOSTIC-RECEIPT-PERSISTENCE-RECOVERY-001-TERMINAL-REVIEW",
                 }
                 or goal.get("current_checkpoint") not in {
+                    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-OWNER-DECISION",
+                    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION",
+                    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
+                    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-REVIEW",
                     "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OWNER-DECISION",
                     "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-IMPLEMENTATION",
                     "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-EXECUTION",
@@ -16249,9 +16346,17 @@ def main() -> None:
     raster_function_recovery_004_review_required = current_radar_raster_function_call_shape_recovery_004_review_required(
         ROOT, {"promoted": 8}
     )
+    recovery_005_review_required = current_radar_esri_sequence_recovery_005_review_required(
+        ROOT, {"promoted": 8}
+    )
+    recovery_005_stage = current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8})
     raster_function_stage = current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
     short_path_stage = current_radar_short_path_recovery_003_stage(ROOT, {"promoted": 8})
-    if raster_function_stage:
+    if recovery_005_stage:
+        diagnostic_001_expected_checkpoint = ESRI_SEQUENCE_RECOVERY_005_STAGE[recovery_005_stage][0]
+    elif recovery_005_review_required:
+        diagnostic_001_expected_checkpoint = "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-OWNER-DECISION"
+    elif raster_function_stage:
         diagnostic_001_expected_checkpoint = RASTER_FUNCTION_RECOVERY_004_STAGE[raster_function_stage][0]
     elif raster_function_recovery_004_review_required:
         diagnostic_001_expected_checkpoint = "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-OWNER-DECISION"
@@ -17600,13 +17705,140 @@ def main() -> None:
         or profile.get("control_surfaces", {}).get("proposed_amendments") != []
         or goal.get("proposed_amendments") != []
         or profile.get("current_checkpoint", {}).get("checkpoint_id")
-        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW"
+        != "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION"
         or goal.get("current_checkpoint")
-        != "M2-RADAR-RASTER-FUNCTION-CALL-SHAPE-RECOVERY-004-TERMINAL-REVIEW"
+        != "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION"
         or current_radar_raster_function_call_shape_recovery_004_stage(ROOT, {"promoted": 8})
         != "terminal"
     ):
         fail("M2 radar raster-function call-shape recovery-004 approved implementation boundary differs or overclaims")
+
+    esri_sequence_observation_ref = "records/observations/m2-radar-gtc-despeckle-prerequisite-audit-001.json"
+    esri_sequence_proposal_ref = "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json"
+    esri_sequence_review_ref = "docs/M2_RADAR_ESRI_SEQUENCE_RECOVERY_005_REVIEW.md"
+    esri_sequence_bundle_ref = "reviews/m2-radar-esri-sequence-recovery-005/review-bundle.json"
+    esri_sequence_approval_ref = "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json"
+    esri_sequence_review_reconciliation_ref = "records/source-gates/m2-radar-esri-sequence-recovery-005-review-reconciliation.json"
+    esri_sequence_activation_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-approval-activation.json"
+    esri_sequence_contract_ref = "config/qa/m2-radar-esri-sequence-recovery-005-contract.json"
+    esri_sequence_runtime_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-arcgis-runtime-validation.json"
+    esri_sequence_readiness_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json"
+    esri_sequence_observation = json.loads((ROOT / esri_sequence_observation_ref).read_text(encoding="utf-8"))
+    esri_sequence_proposal = json.loads((ROOT / esri_sequence_proposal_ref).read_text(encoding="utf-8"))
+    esri_sequence_bundle = json.loads((ROOT / esri_sequence_bundle_ref).read_text(encoding="utf-8"))
+    esri_sequence_approval = json.loads((ROOT / esri_sequence_approval_ref).read_text(encoding="utf-8"))
+    esri_sequence_review_reconciliation = json.loads((ROOT / esri_sequence_review_reconciliation_ref).read_text(encoding="utf-8"))
+    esri_sequence_activation = json.loads((ROOT / esri_sequence_activation_ref).read_text(encoding="utf-8"))
+    esri_sequence_contract = json.loads((ROOT / esri_sequence_contract_ref).read_text(encoding="utf-8"))
+    esri_sequence_runtime = json.loads((ROOT / esri_sequence_runtime_ref).read_text(encoding="utf-8"))
+    esri_sequence_readiness = json.loads((ROOT / esri_sequence_readiness_ref).read_text(encoding="utf-8"))
+    esri_sequence_review_unit = m2_units.get("M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-REVIEW", {})
+    esri_sequence_recovery_unit = m2_units.get("M2-RADAR-ESRI-SEQUENCE-RECOVERY-005", {})
+    expected_esri_sequence_next_action = ESRI_SEQUENCE_RECOVERY_005_STAGE["implementation"][1]
+    if (
+        sha256(esri_sequence_observation_ref)
+        != "1237c8e8cc6d3905228dd7797782782b0262d634489c62d56d6850c213e7f4eb"
+        or sha256(esri_sequence_proposal_ref)
+        != "5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217"
+        or sha256(esri_sequence_review_ref)
+        != "d53879c8496b71187f5fd4b003b3c08e3eb76e308f932d717aaa8b937d716443"
+        or sha256(esri_sequence_bundle_ref)
+        != "19af7c293e91bea1e5c46092263e67ce064781f10601f3139024457817b0bcd0"
+        or esri_sequence_observation.get("status")
+        != "pass_official_method_guidance_for_zero_decision_review_only"
+        or esri_sequence_observation.get("project_contract_mismatch", {}).get("frozen_primary_despeckle")
+        != "NONE"
+        or esri_sequence_observation.get("project_contract_mismatch", {}).get("official_esri_sequence_requires_intervening_stage")
+        != "Despeckle"
+        or esri_sequence_observation.get("project_contract_mismatch", {}).get("scientific_method_amendment_required") is not True
+        or esri_sequence_observation.get("source_gate_assessment", {}).get("decision")
+        != "pass_for_zero_decision_proposal_preparation_only"
+        or esri_sequence_observation.get("assertions", {}).get("project_data_read") is not False
+        or esri_sequence_observation.get("assertions", {}).get("external_custody_read") is not False
+        or esri_sequence_observation.get("assertions", {}).get("implementation_authorized") is not False
+        or esri_sequence_observation.get("assertions", {}).get("historical_root_cause_established") is not False
+        or esri_sequence_proposal.get("status") != "proposed_inactive_local_one_decision_review"
+        or esri_sequence_proposal.get("human_decision_count") != 0
+        or esri_sequence_proposal.get("authority_basis", {}).get("official_method_audit_sha256")
+        != sha256(esri_sequence_observation_ref)
+        or esri_sequence_proposal.get("authority_basis", {}).get("publication_implementation_or_execution_authorized") is not False
+        or esri_sequence_proposal.get("proposed_scientific_method_amendment", {}).get("proposed_recovery_005_primary_despeckle")
+        != "REFINED_LEE"
+        or esri_sequence_proposal.get("proposed_scientific_method_amendment", {}).get("filter_size_argument")
+        != "omitted"
+        or esri_sequence_proposal.get("proposed_scientific_method_amendment", {}).get("historical_contracts_mutated") is not False
+        or esri_sequence_proposal.get("proposed_correction", {}).get("exact_call")
+        != "arcpy.ia.Despeckle(gamma_slant, 'VV;VH', 'REFINED_LEE')"
+        or esri_sequence_proposal.get("proposed_correction", {}).get("gamma_gtc_input_becomes_exact_despeckled_output") is not True
+        or esri_sequence_proposal.get("proposed_attempt", {}).get("maximum_processes") != 1
+        or esri_sequence_proposal.get("proposed_attempt", {}).get("maximum_real_attempts") != 1
+        or esri_sequence_proposal.get("proposed_attempt", {}).get("automatic_retry") is not False
+        or esri_sequence_proposal.get("proposed_attempt", {}).get("stop_on_first_failure") is not True
+        or esri_sequence_proposal.get("proposed_attempt", {}).get("network_requests") != 0
+        or esri_sequence_proposal.get("proposed_attempt", {}).get("credential_actions") != 0
+        or esri_sequence_bundle.get("status")
+        != "local_zero_decision_one_combined_owner_decision_pending"
+        or esri_sequence_bundle.get("human_decision_count") != 0
+        or esri_sequence_bundle.get("candidate_identity", {}).get("proposal_sha256")
+        != sha256(esri_sequence_proposal_ref)
+        or any(item.get("sha256") != sha256(item.get("path")) for item in esri_sequence_bundle.get("artifacts", []))
+        or any(value is not False for value in esri_sequence_bundle.get("claim_boundary", {}).values())
+        or sha256(esri_sequence_approval_ref) != "da95bf4570a7062166a758ce5cfb037300b2a039bfc9454995cd366313595a20"
+        or sha256(esri_sequence_review_reconciliation_ref) != "c8c25fc6958db2c927c8550b885a82f03d5582754e95cf9fcbaf26261a35365b"
+        or sha256(esri_sequence_activation_ref) != "9376187bb965d15b70a7e15aa930f4052d0f7cbf7c9e6fd6b03e5dae830b5290"
+        or esri_sequence_approval.get("status")
+        != "approved_exact_single_bounded_authority_envelope_through_sanitized_terminal_publication"
+        or esri_sequence_approval.get("attestation") is not True
+        or esri_sequence_approval.get("human_decision_count") != 1
+        or esri_sequence_approval.get("bindings", {}).get("proposal_sha256") != sha256(esri_sequence_proposal_ref)
+        or esri_sequence_approval.get("bindings", {}).get("review_bundle_sha256") != sha256(esri_sequence_bundle_ref)
+        or esri_sequence_approval.get("authorized_scope", {}).get("approve_recovery_specific_refined_lee_scientific_method_amendment") is not True
+        or esri_sequence_approval.get("authorized_scope", {}).get("intermediate_owner_reconfirmation_required") is not False
+        or esri_sequence_review_reconciliation.get("status") != "reconciled_exact_attested_single_owner_decision"
+        or esri_sequence_review_reconciliation.get("decision_counts", {}).get("approve") != 1
+        or esri_sequence_review_reconciliation.get("bindings", {}).get("approval_sha256") != sha256(esri_sequence_approval_ref)
+        or esri_sequence_activation.get("status")
+        != "pass_exact_combined_authority_activated_implementation_publication_pending"
+        or esri_sequence_activation.get("bindings", {}).get("approval_sha256") != sha256(esri_sequence_approval_ref)
+        or validate_esri_sequence_recovery_005_contract(esri_sequence_contract, ROOT)
+        or esri_sequence_contract.get("scientific_method_amendment", {}).get("recovery_005_primary_despeckle") != "REFINED_LEE"
+        or esri_sequence_contract.get("scientific_method_amendment", {}).get("filter_size_argument") != "omitted"
+        or esri_sequence_runtime.get("status")
+        != "pass_installed_arcgis_runtime_seven_interface_signature_only_validation"
+        or esri_sequence_runtime.get("assertions", {}).get("signature_inspection_only") is not True
+        or esri_sequence_runtime.get("assertions", {}).get("raster_function_invoked") is not False
+        or esri_sequence_runtime.get("assertions", {}).get("geoprocessing_invoked") is not False
+        or esri_sequence_readiness.get("status")
+        != "pass_local_portable_and_installed_arcgis_signature_ready_public_ci_pending"
+        or esri_sequence_readiness.get("validation", {}).get("check_project") != "pass"
+        or esri_sequence_readiness.get("assertions", {}).get("exact_refined_lee_sequence_inserted") is not True
+        or esri_sequence_readiness.get("assertions", {}).get("external_custody_accessed") is not False
+        or esri_sequence_readiness.get("assertions", {}).get("real_attempt_started") is not False
+        or esri_sequence_review_unit.get("status") != "complete"
+        or esri_sequence_review_unit.get("human_gate") is not True
+        or esri_sequence_review_unit.get("gates", {}).get("human_decision_count") != 1
+        or esri_sequence_review_unit.get("gates", {}).get("owner_combined_decision") != "approved_exact"
+        or esri_sequence_review_unit.get("gates", {}).get("publication_authorized") is not True
+        or esri_sequence_review_unit.get("gates", {}).get("implementation_authorized") is not True
+        or esri_sequence_review_unit.get("gates", {}).get("new_real_attempt_authorized") is not True
+        or esri_sequence_recovery_unit.get("status") != "in_progress"
+        or esri_sequence_recovery_unit.get("human_gate") is not False
+        or esri_sequence_recovery_unit.get("gates", {}).get("inherited_owner_authority")
+        != "pass_exact_combined_approval"
+        or esri_sequence_recovery_unit.get("gates", {}).get("real_attempts_started") != 0
+        or esri_sequence_recovery_unit.get("gates", {}).get("publication_started") is not False
+        or active_m2.get("handoff", {}).get("current_checkpoint")
+        != "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-IMPLEMENTATION"
+        or active_m2.get("handoff", {}).get("next_action") != expected_esri_sequence_next_action
+        or profile.get("current_checkpoint", {}).get("next_action") != expected_esri_sequence_next_action
+        or goal.get("next_action") != expected_esri_sequence_next_action
+        or profile.get("parallel_checkpoints", [{}])[0].get("authority_ref") != esri_sequence_approval_ref
+        or profile.get("control_surfaces", {}).get("proposed_amendments") != []
+        or goal.get("proposed_amendments") != []
+        or current_radar_esri_sequence_recovery_005_review_required(ROOT, {"promoted": 8}) is not False
+        or current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8}) != "implementation"
+    ):
+        fail("M2 radar Esri-sequence recovery-005 approved implementation boundary differs or overclaims")
 
     violations = []
     for relative in tracked_files():

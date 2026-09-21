@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-APPROVAL",
+  "recorded_at_utc": "2026-09-21T20:07:49Z",
+  "status": "approved_exact_single_bounded_authority_envelope_through_sanitized_terminal_publication",
+  "authority_ref": "user-instruction:2026-09-21:m2-radar-esri-sequence-recovery-005-exact-approval",
+  "owner_statement": "I approve M2 radar Esri-sequence recovery-005 review bundle `19af7c293e91bea1e5c46092263e67ce064781f10601f3139024457817b0bcd0` and proposal `5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217`. I adopt the exact official Esri method guidance and approve the recovery-specific `REFINED_LEE` scientific-method amendment. I authorize the proposal’s single bounded authority envelope through sanitized terminal publication, without intermediate owner reconfirmation. I attest this is my completed decision.",
+  "attestation": true,
+  "human_decision_count": 1,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json",
+    "proposal_sha256": "5e7ca67eedecba76746e7c3862b691d0e954425cadadd0782ff90ed3f95ab217",
+    "review_bundle_ref": "reviews/m2-radar-esri-sequence-recovery-005/review-bundle.json",
+    "review_bundle_sha256": "19af7c293e91bea1e5c46092263e67ce064781f10601f3139024457817b0bcd0"
+  },
+  "authorized_scope": {
+    "adopt_official_esri_method_guidance_for_this_recovery": true,
+    "approve_recovery_specific_refined_lee_scientific_method_amendment": true,
+    "public_packet_and_implementation_publication": true,
+    "bounded_implementation_and_reversible_correction": true,
+    "portable_and_installed_arcgis_signature_tests": true,
+    "public_ci_and_exact_reconciliation": true,
+    "one_final_no_content_preflight": true,
+    "maximum_fresh_esri_sequence_recovery_attempts": 1,
+    "terminal_reconciliation_and_sanitized_publication": true,
+    "intermediate_owner_reconfirmation_required": false
+  },
+  "not_authorized": [
+    "reuse, resume, retry, reconstruction, deletion, or mutation of a consumed attempt or receipt",
+    "a second recovery-005 attempt or automatic retry",
+    "source, date, product, orbit, DEM, AOI, CRS, grid, mask, threshold, registration, route, or other scientific-predicate substitution",
+    "any despeckle filter other than exact REFINED_LEE or any filter-size argument",
+    "credential, network, account, terms, installation, or UAC action",
+    "baseline admission, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication",
+    "a historical-root-cause claim based only on a later success or failure"
+  ]
+}
