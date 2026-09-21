@@ -5119,7 +5119,8 @@
         "tests/test_m2_radar_esri_sequence_recovery_005.py",
         "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json",
         "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-gate.json",
-        "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-reconciliation.json"
+        "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-reconciliation.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-gate-state-publication.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json",
@@ -5151,7 +5152,9 @@
         "public_ci": "success",
         "implementation_publication_gate_sha256": "becb62d4fc2325561a0f0dfc97b9bc8c06963ac105ae505c7313e0f404782b83",
         "implementation_publication_reconciliation_sha256": "90dc5ae4859dc54d5900e7eb2e502a455aca8858e54d9ee87aeeb1870aa922b1",
-        "final_no_content_preflight": false
+        "final_no_content_preflight": false,
+        "gate_state_source_public_ci": "success",
+        "gate_state_publication_sha256": "c0c6d9c008053d104bf225622ebed156e1b53aa0e854124cf1ffcdebad73297c"
       },
       "exit_condition_delta": {
         "expected": [

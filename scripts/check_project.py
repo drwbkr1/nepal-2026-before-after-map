@@ -1475,6 +1475,7 @@ REQUIRED = [
     "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json",
     "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-gate.json",
     "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-reconciliation.json",
+    "records/readiness/m2-radar-esri-sequence-recovery-005-gate-state-publication.json",
     "tests/test_m2_radar_raster_function_call_shape_recovery_004.py",
     ".github/workflows/validate.yml",
 ]
@@ -17727,6 +17728,7 @@ def main() -> None:
     esri_sequence_readiness_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json"
     esri_sequence_publication_gate_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-gate.json"
     esri_sequence_publication_reconciliation_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-reconciliation.json"
+    esri_sequence_gate_state_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-gate-state-publication.json"
     esri_sequence_observation = json.loads((ROOT / esri_sequence_observation_ref).read_text(encoding="utf-8"))
     esri_sequence_proposal = json.loads((ROOT / esri_sequence_proposal_ref).read_text(encoding="utf-8"))
     esri_sequence_bundle = json.loads((ROOT / esri_sequence_bundle_ref).read_text(encoding="utf-8"))
@@ -17738,6 +17740,7 @@ def main() -> None:
     esri_sequence_readiness = json.loads((ROOT / esri_sequence_readiness_ref).read_text(encoding="utf-8"))
     esri_sequence_publication_gate = json.loads((ROOT / esri_sequence_publication_gate_ref).read_text(encoding="utf-8"))
     esri_sequence_publication_reconciliation = json.loads((ROOT / esri_sequence_publication_reconciliation_ref).read_text(encoding="utf-8"))
+    esri_sequence_gate_state = json.loads((ROOT / esri_sequence_gate_state_ref).read_text(encoding="utf-8"))
     esri_sequence_review_unit = m2_units.get("M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-REVIEW", {})
     esri_sequence_recovery_unit = m2_units.get("M2-RADAR-ESRI-SEQUENCE-RECOVERY-005", {})
     esri_sequence_stage = current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8})
@@ -17838,6 +17841,24 @@ def main() -> None:
         != sha256(esri_sequence_publication_gate_ref)
         or esri_sequence_publication_reconciliation.get("bindings", {}).get("implementation_readiness_sha256")
         != sha256(esri_sequence_readiness_ref)
+        or esri_sequence_gate_state.get("status")
+        != "pass_public_default_branch_ci_one_final_preflight_released"
+        or esri_sequence_gate_state.get("attempt_id")
+        != "radar-pixel-orbit-application-esri-sequence-recovery-005-real-001"
+        or esri_sequence_gate_state.get("gate_state_commit_sha")
+        != "c9342ca0a9dc750445603a53b3aecada4323c75f"
+        or esri_sequence_gate_state.get("public_ci_run_id") != 35653632817
+        or esri_sequence_gate_state.get("public_ci_conclusion") != "success"
+        or esri_sequence_gate_state.get("repository_required_file_count") != 1326
+        or esri_sequence_gate_state.get("public_test_count") != 717
+        or esri_sequence_gate_state.get("public_intentional_skip_count") != 6
+        or esri_sequence_gate_state.get("bindings", {}).get("implementation_publication_gate_sha256")
+        != sha256(esri_sequence_publication_gate_ref)
+        or esri_sequence_gate_state.get("bindings", {}).get("implementation_publication_reconciliation_sha256")
+        != sha256(esri_sequence_publication_reconciliation_ref)
+        or esri_sequence_gate_state.get("assertions", {}).get("final_no_content_preflight_performed") is not False
+        or esri_sequence_gate_state.get("assertions", {}).get("fresh_attempt_process_started") is not False
+        or esri_sequence_gate_state.get("assertions", {}).get("external_custody_accessed") is not False
         or esri_sequence_review_unit.get("status") != "complete"
         or esri_sequence_review_unit.get("human_gate") is not True
         or esri_sequence_review_unit.get("gates", {}).get("human_decision_count") != 1
@@ -17856,6 +17877,8 @@ def main() -> None:
         != sha256(esri_sequence_publication_gate_ref)
         or esri_sequence_recovery_unit.get("gates", {}).get("implementation_publication_reconciliation_sha256")
         != sha256(esri_sequence_publication_reconciliation_ref)
+        or esri_sequence_recovery_unit.get("gates", {}).get("gate_state_publication_sha256")
+        != sha256(esri_sequence_gate_state_ref)
         or active_m2.get("handoff", {}).get("current_checkpoint")
         != expected_esri_sequence_checkpoint
         or active_m2.get("handoff", {}).get("next_action") != expected_esri_sequence_next_action
