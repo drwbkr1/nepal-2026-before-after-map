@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-RADAR-GTC-PUBLIC-COVERAGE-AUDIT-001",
+  "status": "local_public_metadata_coverage_observation_only",
+  "source_id": "M1-SRC-001",
+  "input_bindings": [
+    {
+      "ref": "records/source-manifest.json",
+      "sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef"
+    },
+    {
+      "ref": "records/source-gates/source-manifest-approval.json",
+      "sha256": "c6df8c24adc96439e8b8ef00c733db8fc3cd3ffb229b333b1d8a63933f3aa04e"
+    },
+    {
+      "ref": "records/source-gates/m2-dem-candidate-manifest.json",
+      "sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243"
+    },
+    {
+      "ref": "records/source-gates/m2-dem-amendment-approval.json",
+      "sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0"
+    },
+    {
+      "ref": "records/processing/m2-radar-gtc-input-compatibility-diagnostic-001-terminal-reconciliation.json",
+      "sha256": "150ccee98112d8a29b04e2da29807964c1006254542e1136341848f96a6f31c3"
+    }
+  ],
+  "method": "Clip the approved source catalog polygon against each of four nonoverlapping approved DEM STAC boxes in WGS84; estimate areas with the spherical equal-area cylindrical transform x=R*lon, y=R*sin(lat), R=6371008.8 m. This approximates catalog geometry, not raster pixel coverage.",
+  "result": {
+    "source_catalog_footprint_bounds_wgs84": [
+      84.177147,
+      26.082024,
+      87.035492,
+      28.008406
+    ],
+    "dem_tile_union_bounds_wgs84": [
+      84.0,
+      27.0,
+      86.0,
+      29.0
+    ],
+    "approx_source_catalog_area_km2": 43813.4,
+    "approx_catalog_intersection_area_km2": 14385.3,
+    "approx_catalog_intersection_percent": 32.83,
+    "approx_catalog_outside_dem_percent": 67.17
+  },
+  "official_method_context": {
+    "esri_gtc_url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-geometric-terrain-correction.html",
+    "esri_sar_faq_url": "https://doc.esri.com/en/arcgis-pro/latest/help/analysis/image-analyst/synthetic-aperture-radar-faq.html",
+    "accessed_date_utc": "2026-09-22",
+    "summary": "Esri states that GTC approximates elevation from metadata tie points where a DEM does not cover an area, while recommending a DEM wherever land is present. Esri separately states that radiometric terrain flattening can leave NoData outside DEM coverage. This audit does not establish which behavior caused the observed GTC error."
+  },
+  "claim_boundary": {
+    "actual_radar_pixel_coverage_established": false,
+    "actual_dem_valid_pixel_coverage_established": false,
+    "gtc_historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "new_dem_acquisition_or_processing_authorized": false,
+    "new_radar_processing_attempt_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "scientific_result_established": false
+  }
+}
