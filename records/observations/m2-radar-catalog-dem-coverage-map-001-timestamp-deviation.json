@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-CATALOG-DEM-COVERAGE-MAP-001-TIMESTAMP-DEVIATION",
+  "recorded_at_utc": "2026-09-22T20:13:13Z",
+  "status": "corrected_metadata_time_claim_only_original_preserved",
+  "original_observation_ref": "records/observations/m2-radar-catalog-dem-coverage-map-001.json",
+  "original_observation_sha256": "d761a9df2e378a9941d396ff259cf245e767ef3f903b94a84891af1e68415db3",
+  "discrepancy": {
+    "original_generated_at_utc": "2026-09-22T20:15:00Z",
+    "finding": "The passed-in generated_at_utc was later than the Git commit and public CI start. It is an erroneous future timestamp, not a valid generation time.",
+    "exact_generation_time_established": false,
+    "observed_local_file_last_write_utc": "2026-09-22T20:08:25.8742714Z",
+    "local_file_time_limit": "NTFS last-write metadata is a contemporaneous observation, not immutable proof of the exact build time.",
+    "public_commit": "c24c949056a2f8387cfe68704500cd53c09ce434",
+    "public_commit_time_utc": "2026-09-22T20:09:15Z",
+    "public_ci_run_id": 35778421624,
+    "public_ci_created_at_utc": "2026-09-22T20:09:24Z"
+  },
+  "affected_claim": "generated_at_utc only",
+  "unchanged_artifact_sha256": {
+    "config/arcgis/radar-catalog-footprints-epsg32645.json": "40a0ded0ca1dc33d60a136c7c9b1b91df960bb885f58b1d418d66cfe183e530f",
+    "config/arcgis/approved-dem-tile-boxes-epsg32645.json": "112f158e66cb0a1220214e15b8bbcca7ad58d657547b2d3e3b9247a5b6e8e310",
+    "docs/assets/radar-catalog-dem-coverage-epsg32645.png": "754c0b171fc1f41e1fcee080d272842b26d25bbaa90a74adf0d0d216c7ccc177"
+  },
+  "arcgis_import_validation_ref": "records/surface-receipts/m2-radar-catalog-coverage-arcgis-validation-001.json",
+  "arcgis_import_validation_sha256": "7f4e911573574fe3023319a47efbdd29203abc4c6cbdcdd2ea7b6b51dad2f095",
+  "correction": "Treat generated_at_utc in the original observation as invalid. Preserve its bytes and use the public commit and CI chronology plus this append-only record for provenance. The geometry, image, and ArcGIS import checks remain separately evidenced.",
+  "claim_boundary": "This correction does not establish pixel coverage, GTC fitness, a radar baseline, or event change."
+}

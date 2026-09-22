@@ -3,6 +3,7 @@ import json
 import math
 import struct
 import unittest
+from datetime import datetime
 from pathlib import Path
 
 
@@ -11,6 +12,8 @@ RADAR_REF = "config/arcgis/radar-catalog-footprints-epsg32645.json"
 DEM_REF = "config/arcgis/approved-dem-tile-boxes-epsg32645.json"
 PNG_REF = "docs/assets/radar-catalog-dem-coverage-epsg32645.png"
 RECEIPT_REF = "records/observations/m2-radar-catalog-dem-coverage-map-001.json"
+ARCGIS_RECEIPT_REF = "records/surface-receipts/m2-radar-catalog-coverage-arcgis-validation-001.json"
+TIMESTAMP_DEVIATION_REF = "records/observations/m2-radar-catalog-dem-coverage-map-001-timestamp-deviation.json"
 
 
 class RadarCatalogCoverageMapTests(unittest.TestCase):
@@ -46,6 +49,27 @@ class RadarCatalogCoverageMapTests(unittest.TestCase):
             header = stream.read(24)
         self.assertEqual(header[:8], b"\x89PNG\r\n\x1a\n")
         self.assertEqual(struct.unpack(">II", header[16:24]), (2520, 1260))
+
+    def test_arcgis_import_and_append_only_timestamp_correction(self):
+        arcgis = json.loads((ROOT / ARCGIS_RECEIPT_REF).read_text(encoding="utf-8"))
+        original = json.loads((ROOT / RECEIPT_REF).read_text(encoding="utf-8"))
+        correction = json.loads((ROOT / TIMESTAMP_DEVIATION_REF).read_text(encoding="utf-8"))
+        digest = lambda ref: hashlib.sha256((ROOT / ref).read_bytes()).hexdigest()
+        self.assertEqual(arcgis["status"], "pass_arcgis_metadata_featureset_import_only")
+        self.assertEqual(arcgis["inputs"]["map_observation_sha256"], digest(RECEIPT_REF))
+        self.assertEqual([row["feature_count"] for row in arcgis["observations"]], [6, 4])
+        self.assertTrue(all(row["spatial_reference_wkid"] == 32645 for row in arcgis["observations"]))
+        self.assertTrue(all(feature["area_square_metres"] > 0 for row in arcgis["observations"] for feature in row["features"]))
+        self.assertFalse(arcgis["assertions"]["radar_or_dem_pixels_read"])
+        self.assertFalse(arcgis["assertions"]["gtc_or_other_sar_processing_invoked"])
+        self.assertEqual(correction["original_observation_sha256"], digest(RECEIPT_REF))
+        self.assertEqual(correction["arcgis_import_validation_sha256"], digest(ARCGIS_RECEIPT_REF))
+        self.assertEqual(correction["discrepancy"]["original_generated_at_utc"], original["generated_at_utc"])
+        self.assertGreater(datetime.fromisoformat(original["generated_at_utc"].replace("Z", "+00:00")),
+                           datetime.fromisoformat(correction["discrepancy"]["public_commit_time_utc"].replace("Z", "+00:00")))
+        self.assertFalse(correction["discrepancy"]["exact_generation_time_established"])
+        for ref, sha in correction["unchanged_artifact_sha256"].items():
+            self.assertEqual(sha, digest(ref))
 
 
 if __name__ == "__main__":

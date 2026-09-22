@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import datetime as datetime_module
 import hashlib
 import json
 import math
@@ -168,6 +169,12 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--generated-at-utc", required=True)
     args = parser.parse_args()
+    try:
+        timestamp = datetime_module.datetime.fromisoformat(args.generated_at_utc.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise SystemExit("generated-at-utc must be an ISO-8601 UTC timestamp") from exc
+    if timestamp.tzinfo != datetime_module.timezone.utc or timestamp > datetime_module.datetime.now(datetime_module.timezone.utc):
+        raise SystemExit("generated-at-utc must be UTC and must not be in the future")
     for ref in (RADAR_OUT, DEM_OUT, PNG_OUT, RECEIPT_OUT):
         if (ROOT / ref).exists():
             raise SystemExit(f"output collision: {ref}")

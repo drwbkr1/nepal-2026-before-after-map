@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-RADAR-CATALOG-COVERAGE-ARCGIS-VALIDATION-001",
+  "validated_at_utc": "2026-09-22T20:12:22Z",
+  "status": "pass_arcgis_metadata_featureset_import_only",
+  "inputs": {
+    "map_observation_ref": "records/observations/m2-radar-catalog-dem-coverage-map-001.json",
+    "map_observation_sha256": "d761a9df2e378a9941d396ff259cf245e767ef3f903b94a84891af1e68415db3"
+  },
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1"
+  },
+  "method": "ArcGIS Pro JSONToFeatures in memory, Describe, GetCount, and geometry cursor checks over repository metadata JSON only",
+  "observations": [
+    {
+      "input_ref": "config/arcgis/radar-catalog-footprints-epsg32645.json",
+      "input_sha256": "40a0ded0ca1dc33d60a136c7c9b1b91df960bb885f58b1d418d66cfe183e530f",
+      "temporary_dataset": "memory\\radar_catalog_coverage_validation_001",
+      "feature_count": 6,
+      "shape_type": "Polygon",
+      "spatial_reference_wkid": 32645,
+      "extent_m": {
+        "xmin": 200685.2210480012,
+        "ymin": 2887170.1932440028,
+        "xmax": 601704.0407189997,
+        "ymax": 3266239.1903259996
+      },
+      "features": [
+        {
+          "id": "M1-SRC-001",
+          "area_square_metres": 43729465589.7,
+          "point_count": 166
+        },
+        {
+          "id": "M1-SRC-002",
+          "area_square_metres": 43711537559.9,
+          "point_count": 168
+        },
+        {
+          "id": "M1-SRC-003",
+          "area_square_metres": 43289983323.6,
+          "point_count": 166
+        },
+        {
+          "id": "M1-SRC-004",
+          "area_square_metres": 43729387866.4,
+          "point_count": 166
+        },
+        {
+          "id": "M1-SRC-005",
+          "area_square_metres": 43711519872.8,
+          "point_count": 168
+        },
+        {
+          "id": "M1-SRC-006",
+          "area_square_metres": 43290773551.4,
+          "point_count": 166
+        }
+      ]
+    },
+    {
+      "input_ref": "config/arcgis/approved-dem-tile-boxes-epsg32645.json",
+      "input_sha256": "112f158e66cb0a1220214e15b8bbcca7ad58d657547b2d3e3b9247a5b6e8e310",
+      "temporary_dataset": "memory\\dem_catalog_coverage_validation_001",
+      "feature_count": 4,
+      "shape_type": "Polygon",
+      "spatial_reference_wkid": 32645,
+      "extent_m": {
+        "xmin": 202273.9129950013,
+        "ymin": 2986828.3526649997,
+        "xmax": 402597.4274390003,
+        "ymax": 3211697.3733450025
+      },
+      "features": [
+        {
+          "id": "M2-DEM-001",
+          "area_square_metres": 10957328570.2,
+          "point_count": 81
+        },
+        {
+          "id": "M2-DEM-002",
+          "area_square_metres": 10946771309.3,
+          "point_count": 81
+        },
+        {
+          "id": "M2-DEM-003",
+          "area_square_metres": 10857910312.1,
+          "point_count": 81
+        },
+        {
+          "id": "M2-DEM-004",
+          "area_square_metres": 10847642324.1,
+          "point_count": 81
+        }
+      ]
+    }
+  ],
+  "assertions": {
+    "project_data_or_external_custody_accessed": false,
+    "radar_or_dem_pixels_read": false,
+    "gtc_or_other_sar_processing_invoked": false,
+    "metadata_featureset_import_and_epsg32645_established": true,
+    "arcgis_map_or_package_created": false,
+    "valid_pixel_coverage_or_change_established": false
+  }
+}
