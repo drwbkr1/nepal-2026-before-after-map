@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001-EXECUTION-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-22T21:40:50Z",
+  "status": "pass_public_default_branch_ci_execution_ready",
+  "execution_commit_sha": "693290b0f0e2ce8a9f0b7459101863164d3d5e23",
+  "public_ci_run_id": 35788020379,
+  "public_ci_conclusion": "success",
+  "implementation_gate_sha256": "66e4a5057b51c4baae1561e4f2401e38fde3ffa151dca9a3200d78952697dcd25",
+  "assertions": {
+    "public_ci_passed": true,
+    "implementation_binding_unchanged": true,
+    "project_data_content_read": false,
+    "real_attempt_started": false,
+    "one_final_no_content_preflight_required": true
+  }
+}

@@ -1496,6 +1496,7 @@ REQUIRED = [
     "records/readiness/m2-radar-gtc-dem-isolation-probe-001-arcgis-runtime-validation.json",
     "records/readiness/m2-radar-gtc-dem-isolation-probe-001-implementation-readiness.json",
     "records/readiness/m2-radar-gtc-dem-isolation-probe-001-implementation-publication-gate.json",
+    "records/readiness/m2-radar-gtc-dem-isolation-probe-001-execution-publication-gate.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -18032,11 +18033,13 @@ def main() -> None:
     gtc_probe_runtime_ref = f"records/readiness/{gtc_probe_prefix}-arcgis-runtime-validation.json"
     gtc_probe_readiness_ref = f"records/readiness/{gtc_probe_prefix}-implementation-readiness.json"
     gtc_probe_gate_ref = f"records/readiness/{gtc_probe_prefix}-implementation-publication-gate.json"
+    gtc_probe_execution_ref = f"records/readiness/{gtc_probe_prefix}-execution-publication-gate.json"
     gtc_probe_bundle = json.loads((ROOT / gtc_probe_bundle_ref).read_text(encoding="utf-8"))
     gtc_probe_approval = json.loads((ROOT / gtc_probe_approval_ref).read_text(encoding="utf-8"))
     gtc_probe_runtime = json.loads((ROOT / gtc_probe_runtime_ref).read_text(encoding="utf-8"))
     gtc_probe_readiness = json.loads((ROOT / gtc_probe_readiness_ref).read_text(encoding="utf-8"))
     gtc_probe_gate = json.loads((ROOT / gtc_probe_gate_ref).read_text(encoding="utf-8"))
+    gtc_probe_execution = json.loads((ROOT / gtc_probe_execution_ref).read_text(encoding="utf-8"))
     gtc_probe_bindings = {
         "proposal_sha256": sha256(gtc_probe_proposal_ref),
         "review_bundle_sha256": sha256(gtc_probe_bundle_ref),
@@ -18069,6 +18072,12 @@ def main() -> None:
         or gtc_probe_gate.get("public_ci_conclusion") != "success"
         or gtc_probe_gate.get("bindings") != {key: value for key, value in gtc_probe_bindings.items() if key not in {"proposal_sha256", "review_bundle_sha256"}}
         or gtc_probe_gate.get("assertions", {}).get("real_attempt_started") is not False
+        or gtc_probe_execution.get("status") != "pass_public_default_branch_ci_execution_ready"
+        or gtc_probe_execution.get("execution_commit_sha") != "693290b0f0e2ce8a9f0b7459101863164d3d5e23"
+        or gtc_probe_execution.get("public_ci_run_id") != 35788020379
+        or gtc_probe_execution.get("public_ci_conclusion") != "success"
+        or gtc_probe_execution.get("implementation_gate_sha256") != sha256(gtc_probe_gate_ref)
+        or gtc_probe_execution.get("assertions", {}).get("real_attempt_started") is not False
     ):
         fail("M2 radar GTC DEM-isolation probe implementation readiness differs or overclaims")
 
