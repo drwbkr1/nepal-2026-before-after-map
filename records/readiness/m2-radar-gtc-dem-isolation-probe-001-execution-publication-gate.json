@@ -6,7 +6,13 @@
   "execution_commit_sha": "693290b0f0e2ce8a9f0b7459101863164d3d5e23",
   "public_ci_run_id": 35788020379,
   "public_ci_conclusion": "success",
-  "implementation_gate_sha256": "66e4a5057b51c4baae1561e4f2401e38fde3ffa151dca9a3200d78952697dcd25",
+  "implementation_gate_sha256": "66e4a5057b51c4baae1561e4f2401e38fde3ffa151dc9a3200d78952697dcd25",
+  "failed_gate_record_publication": {
+    "commit_sha": "149ac4f3a4d5a406751188dcd23a10ac26d143d5",
+    "public_ci_run_id": 35788115166,
+    "public_ci_conclusion": "failure",
+    "reason": "one transposed implementation-gate SHA-256 in this record; no preflight or real attempt began"
+  },
   "assertions": {
     "public_ci_passed": true,
     "implementation_binding_unchanged": true,
