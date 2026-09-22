@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001-TERMINAL-PUBLICATION-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-22T21:56:20Z",
+  "status": "pass_exact_terminal_gate_public_ci_reconciled",
+  "bindings": {
+    "terminal_publication_gate_ref": "records/readiness/m2-radar-gtc-dem-isolation-probe-001-terminal-publication-gate.json",
+    "terminal_publication_gate_sha256": "e9fe995af609789f01ab3da785c38c5e2150ac8a796607afd0cf01044ab9fc9b",
+    "terminal_gate_commit_sha": "c6dd0b3c258e368b741e6987e9f4410d760b723a",
+    "terminal_gate_public_ci_run_id": 35789518529,
+    "terminal_gate_public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35789518529",
+    "terminal_reconciliation_sha256": "2ada1edd398eea7e6dfd35729a1da3e7c9f12d22e99b4b05f336bcc8b4e958af"
+  },
+  "current_radar_processing_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-REVIEW",
+  "assertions": {
+    "terminal_gate_public_ci_conclusion_success": true,
+    "one_diagnostic_attempt_consumed": true,
+    "no_dem_gtc_diagnostic_completed": true,
+    "quarantined_derived_pixels_published": false,
+    "dem_coverage_historical_cause_established": false,
+    "land_scene_scientific_fitness_established": false,
+    "baseline_or_change_evidence_established": false,
+    "follow_on_processing_released": false
+  },
+  "next_action": "Use the limited diagnostic observation to prepare a separately scoped owner-reviewed scientific route; do not reuse this no-DEM output as map or baseline data."
+}
