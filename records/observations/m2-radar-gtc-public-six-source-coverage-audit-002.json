@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-RADAR-GTC-PUBLIC-SIX-SOURCE-COVERAGE-AUDIT-002",
+  "status": "local_public_metadata_coverage_observation_only",
+  "input_bindings": [
+    {
+      "ref": "records/source-manifest.json",
+      "sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef"
+    },
+    {
+      "ref": "records/source-gates/source-manifest-approval.json",
+      "sha256": "c6df8c24adc96439e8b8ef00c733db8fc3cd3ffb229b333b1d8a63933f3aa04e"
+    },
+    {
+      "ref": "records/source-gates/m2-dem-candidate-manifest.json",
+      "sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243"
+    },
+    {
+      "ref": "records/source-gates/m2-dem-amendment-approval.json",
+      "sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0"
+    },
+    {
+      "ref": "records/processing/m2-radar-gtc-input-compatibility-diagnostic-001-terminal-reconciliation.json",
+      "sha256": "150ccee98112d8a29b04e2da29807964c1006254542e1136341848f96a6f31c3"
+    }
+  ],
+  "method": "Clip each of six approved radar catalog polygons against the four approved nonoverlapping DEM STAC boxes in WGS84; estimate area via the spherical equal-area cylindrical transform. This is catalog geometry, not raster-pixel coverage.",
+  "results": [
+    {
+      "source_id": "M1-SRC-001",
+      "event_role": "before",
+      "analysis_role": "regional_context_and_swath_continuity",
+      "approved_aoi_catalog_bbox_intersections": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "approx_catalog_footprint_area_km2": 43813.4,
+      "approx_catalog_intersection_area_km2": 14385.3,
+      "approx_catalog_intersection_percent": 32.83,
+      "approx_catalog_outside_dem_percent": 67.17
+    },
+    {
+      "source_id": "M1-SRC-002",
+      "event_role": "before",
+      "analysis_role": "event_aoi_radar_pair",
+      "approved_aoi_catalog_bbox_intersections": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "approx_catalog_footprint_area_km2": 43774.9,
+      "approx_catalog_intersection_area_km2": 26688.0,
+      "approx_catalog_intersection_percent": 60.97,
+      "approx_catalog_outside_dem_percent": 39.03
+    },
+    {
+      "source_id": "M1-SRC-003",
+      "event_role": "before",
+      "analysis_role": "event_aoi_radar_pair",
+      "approved_aoi_catalog_bbox_intersections": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "approx_catalog_footprint_area_km2": 43383.9,
+      "approx_catalog_intersection_area_km2": 10997.3,
+      "approx_catalog_intersection_percent": 25.35,
+      "approx_catalog_outside_dem_percent": 74.65
+    },
+    {
+      "source_id": "M1-SRC-004",
+      "event_role": "after",
+      "analysis_role": "regional_context_and_swath_continuity",
+      "approved_aoi_catalog_bbox_intersections": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "approx_catalog_footprint_area_km2": 43813.3,
+      "approx_catalog_intersection_area_km2": 14384.0,
+      "approx_catalog_intersection_percent": 32.83,
+      "approx_catalog_outside_dem_percent": 67.17
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "event_role": "after",
+      "analysis_role": "event_aoi_radar_pair",
+      "approved_aoi_catalog_bbox_intersections": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "approx_catalog_footprint_area_km2": 43774.9,
+      "approx_catalog_intersection_area_km2": 26685.0,
+      "approx_catalog_intersection_percent": 60.96,
+      "approx_catalog_outside_dem_percent": 39.04
+    },
+    {
+      "source_id": "M1-SRC-006",
+      "event_role": "after",
+      "analysis_role": "event_aoi_radar_pair",
+      "approved_aoi_catalog_bbox_intersections": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "approx_catalog_footprint_area_km2": 43384.7,
+      "approx_catalog_intersection_area_km2": 11012.4,
+      "approx_catalog_intersection_percent": 25.38,
+      "approx_catalog_outside_dem_percent": 74.62
+    }
+  ],
+  "interpretation_boundary": "All six catalog polygons extend beyond the approved DEM boxes. This does not establish actual valid-pixel coverage, GTC fitness, the ERROR 000425 cause, or a suitable source-order or DEM remedy.",
+  "claim_boundary": {
+    "actual_radar_pixel_coverage_established": false,
+    "actual_dem_valid_pixel_coverage_established": false,
+    "gtc_historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "new_source_order_or_dem_action_authorized": false,
+    "new_radar_processing_attempt_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "scientific_result_established": false
+  }
+}
