@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001-APPROVAL",
+  "recorded_at_utc": "2026-09-22T21:29:17Z",
+  "status": "approved_exact_single_bounded_diagnostic_envelope_through_sanitized_terminal_publication",
+  "authority_ref": "user-instruction:2026-09-22:m2-radar-gtc-dem-isolation-probe-001-exact-approval",
+  "owner_statement": "I approve M2 radar GTC DEM-isolation probe-001 review bundle `e0438080c30e7073e94af012121b94db1c0cc193854cc43f7f5fc5339bdfe536` and proposal `2cac9f72dc21bcda9e0bdff571de681ad7efe5b4c0c86ac26a0c5fd4aea9f984`. I authorize the proposal’s single bounded diagnostic-only envelope through sanitized terminal publication, without intermediate reconfirmation. I attest this is my completed decision.",
+  "attestation": true,
+  "human_decision_count": 1,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-radar-gtc-dem-isolation-probe-001-proposal.json",
+    "proposal_sha256": "2cac9f72dc21bcda9e0bdff571de681ad7efe5b4c0c86ac26a0c5fd4aea9f984",
+    "review_bundle_ref": "reviews/m2-radar-gtc-dem-isolation-probe-001/review-bundle.json",
+    "review_bundle_sha256": "e0438080c30e7073e94af012121b94db1c0cc193854cc43f7f5fc5339bdfe536"
+  },
+  "authorized_scope": {
+    "bounded_implementation_and_portable_synthetic_tests": true,
+    "installed_arcgis_signature_and_disposable_no_content_validation": true,
+    "public_default_branch_ci_gates": true,
+    "one_final_no_content_preflight": true,
+    "maximum_fresh_diagnostic_processes": 1,
+    "maximum_gtc_calls": 1,
+    "maximum_output_saves": 1,
+    "automatic_retry": false,
+    "terminal_reconciliation_and_sanitized_publication": true,
+    "intermediate_owner_reconfirmation_required": false
+  },
+  "exclusions": [
+    "reuse, resume, retry, reconstruction, or mutation of consumed attempts",
+    "source, DEM, orbit, AOI, CRS, grid, mask, threshold, order, or route substitution",
+    "DEM or geoid argument in the diagnostic GTC call",
+    "any later radar source, route, second probe, or fallback call",
+    "network, credential, account, or terms action",
+    "baseline admission, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication",
+    "historical-root-cause or radar-recovery-readiness claim"
+  ]
+}

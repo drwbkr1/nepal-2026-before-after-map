@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "response_id": "NEPAL-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001-BLANK-RESPONSE",
+  "completed": false,
+  "reviewer": {
+    "name": null,
+    "reviewed_at_utc": null,
+    "attestation": false
+  },
+  "decision": {
+    "id": "D-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001",
+    "value": null,
+    "comment": null
+  },
+  "human_decision_count": 0,
+  "response_not_open_until_public_ci": false,
+  "bindings": {
+    "proposal_sha256": "2cac9f72dc21bcda9e0bdff571de681ad7efe5b4c0c86ac26a0c5fd4aea9f984",
+    "review_bundle_sha256": "e0438080c30e7073e94af012121b94db1c0cc193854cc43f7f5fc5339bdfe536"
+  }
+}

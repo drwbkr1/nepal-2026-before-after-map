@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001",
+  "prepared_at_utc": "2026-09-22T20:00:00Z",
+  "status": "proposed_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "base_commit": "8bfa7635ecfc2f6e1842babca2c2aab76693f11e",
+  "input_bindings": [
+    {
+      "ref": "AGENTS.md",
+      "sha256": "a4630c53af4fcfff730b6a006923698f177f8939f78cf62e2a602770574682ba"
+    },
+    {
+      "ref": "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+      "sha256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521"
+    },
+    {
+      "ref": "records/processing/m2-radar-gtc-input-compatibility-diagnostic-001-terminal-reconciliation.json",
+      "sha256": "150ccee98112d8a29b04e2da29807964c1006254542e1136341848f96a6f31c3"
+    },
+    {
+      "ref": "records/observations/m2-radar-gtc-public-six-source-coverage-audit-002.json",
+      "sha256": "606ef9cf5c6ce4f884b7e28288bd5e4befefd3b7445dd0ba07a9e1f5db2c54d7"
+    },
+    {
+      "ref": "config/qa/m2-radar-esri-sequence-recovery-005-contract.json",
+      "sha256": "e388f84dd97db781e89d9115e03a7cda92895e1dfb9c4adf9a35e1ce494e1b0b"
+    }
+  ],
+  "problem": "Recovery-005 completed the approved REFINED_LEE step but GTC with the approved DEM failed with ArcGIS ERROR 000425. A later read-only diagnostic established ArcGIS catalog recognition only. All six radar catalog footprints extend beyond the four approved DEM tile boxes; this is not actual valid-pixel coverage or proof of failure cause.",
+  "question": "Does the exact preserved M1-SRC-001 despeckled gamma input complete one GTC call when the DEM argument is omitted?",
+  "official_guidance": {
+    "url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-geometric-terrain-correction.html",
+    "checked_at_utc": "2026-09-22T20:00:00Z",
+    "boundary": "Esri documents metadata tie-point interpolation when no DEM is specified, but directs users to specify a DEM whenever land is in the scene. A no-DEM output here is diagnostic only and must not enter a map, baseline, change analysis, or scientific claim."
+  },
+  "proposed_single_authority_envelope": {
+    "covers_without_intermediate_reconfirmation": [
+      "bounded probe implementation and portable synthetic tests",
+      "installed ArcGIS signature and disposable no-content runtime validation",
+      "public default-branch implementation and execution CI gates",
+      "one final no-content preflight",
+      "at most one fresh diagnostic-only GTC process over one exact preserved input",
+      "exact terminal reconciliation and sanitized publication"
+    ],
+    "attempt_id": "radar-gtc-dem-isolation-probe-001-real-001",
+    "prospective_attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\r5\\d2",
+    "exact_input": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\r5\\a1\\s\\1\\gamma0_linear_despeckled.crf",
+    "output_ref_within_attempt_root": "gtc_no_dem_diagnostic.crf",
+    "exact_call": "arcpy.ia.ApplyGeometricTerrainCorrection(gamma_despeckled, 'VV;VH')",
+    "save_rule": "If and only if the function returns a Raster, save it once to the declared absent output. Retain any output outside Git as quarantined diagnostic material; do not use or publish its pixels.",
+    "preflight_requirements": [
+      "verify public evidence hashes and the exact consumed recovery-005 and diagnostic-001 identities",
+      "verify the exact input exists without reconstruction or substitution",
+      "verify the prospective root and output are absent, path lengths are safe, and at least 60 GiB is free",
+      "verify installed ArcGIS version, Image Analyst, and exact two-argument call signature without processing",
+      "reserve durable terminal and cleanup receipt identities before any content read"
+    ],
+    "maximum_processes": 1,
+    "maximum_gtc_calls": 1,
+    "maximum_output_saves": 1,
+    "automatic_retry": false,
+    "no_dem_and_no_geoid_argument": true,
+    "other_raster_functions_or_geoprocessing_calls": 0,
+    "network_or_credential_actions": 0,
+    "stop_on_failure": true,
+    "possible_observations": {
+      "success": "The preserved input can complete GTC in the documented no-DEM tie-point mode; this does not prove DEM coverage caused the earlier failure or produce land-scene scientific data.",
+      "failure": "The no-DEM call also failed; this does not isolate a single cause or establish that the DEM is sound."
+    }
+  },
+  "exclusions": [
+    "reuse, resume, retry, or mutation of consumed recovery-005 or diagnostic-001 attempts",
+    "DEM acquisition, conversion, substitution, or modification",
+    "source, orbit, AOI, CRS, grid, mask, threshold, order, or processing-route substitution",
+    "any later source or route, fallback call, or second probe",
+    "baseline admission, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication",
+    "historical-root-cause or radar-recovery-readiness claim"
+  ],
+  "does_not_authorize_now": [
+    "Git commit, push, public CI, or owner response recording",
+    "implementation, ArcPy invocation, project-data or external-custody access",
+    "GTC or any other pixel/geoprocessing action",
+    "a new real attempt or scientific use"
+  ]
+}

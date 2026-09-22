@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001-REVIEW-CONTRACT",
+  "review_bundle": {
+    "ref": "reviews/m2-radar-gtc-dem-isolation-probe-001/review-bundle.json",
+    "sha256": "e0438080c30e7073e94af012121b94db1c0cc193854cc43f7f5fc5339bdfe536"
+  },
+  "proposal": {
+    "ref": "contracts/milestone-002-radar-gtc-dem-isolation-probe-001-proposal.json",
+    "sha256": "2cac9f72dc21bcda9e0bdff571de681ad7efe5b4c0c86ac26a0c5fd4aea9f984"
+  },
+  "response_requirements": {
+    "exact_hashes_required": true,
+    "explicit_decision_required": true,
+    "attestation_required": true
+  },
+  "workflow_authority": {
+    "local_preparation_complete": true,
+    "response_open": true
+  }
+}

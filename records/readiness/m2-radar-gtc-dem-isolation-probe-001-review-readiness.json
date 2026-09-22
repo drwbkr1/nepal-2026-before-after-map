@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001-REVIEW-READINESS",
+  "status": "pass_local_zero_decision_packet_ready_one_owner_decision_required",
+  "base_commit": "8bfa7635ecfc2f6e1842babca2c2aab76693f11e",
+  "bindings": {
+    "proposal_sha256": "2cac9f72dc21bcda9e0bdff571de681ad7efe5b4c0c86ac26a0c5fd4aea9f984",
+    "review_document_sha256": "e5332ba062faea911fa466da0aa3743017a864fa8e8386698240fb90ac415e74",
+    "review_bundle_sha256": "e0438080c30e7073e94af012121b94db1c0cc193854cc43f7f5fc5339bdfe536",
+    "review_contract_sha256": "db7ded1cbe26e10137dc4808b133494d40e4f70e10d7c7fb9789be3a3900e9ed",
+    "blank_response_sha256": "a4ac091ce9befcdf36d095478d1f93a92dc287c1e3088fbf05c52e159a9d45ed"
+  },
+  "validation": {
+    "consumed_attempts_preserved": true,
+    "public_metadata_only": true,
+    "human_decision_count": 0
+  },
+  "released_now": {
+    "local_preparation": true,
+    "publication": false,
+    "implementation": false,
+    "real_probe": false
+  },
+  "next_action": "Seek one owner decision covering publication, implementation, CI, final no-content preflight, at most one exact diagnostic-only no-DEM GTC call, reconciliation, and sanitized terminal publication; no intermediate reconfirmation."
+}

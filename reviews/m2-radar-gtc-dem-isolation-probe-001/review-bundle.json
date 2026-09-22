@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-22T20:00:00Z",
+  "status": "ready_local_zero_decision_one_owner_decision_required",
+  "human_decision_count": 0,
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-radar-gtc-dem-isolation-probe-001-proposal.json",
+      "sha256": "2cac9f72dc21bcda9e0bdff571de681ad7efe5b4c0c86ac26a0c5fd4aea9f984",
+      "role": "proposal"
+    },
+    {
+      "path": "docs/M2_RADAR_GTC_DEM_ISOLATION_PROBE_001_REVIEW.md",
+      "sha256": "e5332ba062faea911fa466da0aa3743017a864fa8e8386698240fb90ac415e74",
+      "role": "human_readable_review"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "a4630c53af4fcfff730b6a006923698f177f8939f78cf62e2a602770574682ba",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+      "sha256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/processing/m2-radar-gtc-input-compatibility-diagnostic-001-terminal-reconciliation.json",
+      "sha256": "150ccee98112d8a29b04e2da29807964c1006254542e1136341848f96a6f31c3",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/observations/m2-radar-gtc-public-six-source-coverage-audit-002.json",
+      "sha256": "606ef9cf5c6ce4f884b7e28288bd5e4befefd3b7445dd0ba07a9e1f5db2c54d7",
+      "role": "frozen_input"
+    },
+    {
+      "path": "config/qa/m2-radar-esri-sequence-recovery-005-contract.json",
+      "sha256": "e388f84dd97db781e89d9115e03a7cda92895e1dfb9c4adf9a35e1ce494e1b0b",
+      "role": "frozen_input"
+    }
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001",
+    "question": "Approve, revise, or defer the single bounded diagnostic-only envelope?",
+    "choices": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "response_open": true
+  },
+  "authority_boundary": {
+    "publication_authorized": false,
+    "implementation_authorized": false,
+    "arcpy_or_project_data_access_authorized": false,
+    "gtc_or_new_attempt_authorized": false
+  }
+}
