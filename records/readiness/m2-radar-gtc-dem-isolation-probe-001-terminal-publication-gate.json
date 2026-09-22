@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001-TERMINAL-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-22T21:54:57Z",
+  "status": "pass_public_default_branch_ci_terminal_evidence_only",
+  "terminal_commit_sha": "fa4bc5ce2d188ac7f31f8d3234a5b9db9405a4f5",
+  "public_ci_run_id": 35789370586,
+  "public_ci_conclusion": "success",
+  "bindings": {
+    "terminal_reconciliation_sha256": "2ada1edd398eea7e6dfd35729a1da3e7c9f12d22e99b4b05f336bcc8b4e958af",
+    "final_preflight_sha256": "b368163c7cc2d26568dd7d3177f6abd1836fee9d50546dbfb89a57677d6675a6"
+  },
+  "assertions": {
+    "single_attempt_consumed": true,
+    "no_dem_gtc_and_one_save_completed": true,
+    "quarantined_output_not_published": true,
+    "historical_dem_failure_cause_established": false,
+    "land_scene_scientific_fitness_established": false,
+    "baseline_or_change_evidence_established": false,
+    "follow_on_processing_authorized": false
+  }
+}
