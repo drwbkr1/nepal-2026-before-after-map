@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001-IMPLEMENTATION-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-22T19:37:33Z",
+  "status": "pass_public_default_branch_ci_implementation_ready",
+  "implementation_commit_sha": "59194ae58c826edf2da7d539b5831e0651fff3dd",
+  "public_ci_run_id": 35774920086,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35774920086",
+  "public_ci_conclusion": "success",
+  "bindings": {
+    "approval_sha256": "70e0e378687dd986aabdfdbe4b3fe4d5c83ec8ab3e23d4fcd0914b8e59a10183",
+    "proposal_sha256": "9506b91f3809b08340b44e8965311088ad7537ff5626ef78a9f5bdad9d841910",
+    "review_bundle_sha256": "16221f886565c9fb445b32d7c27f2fe666591b46ddc1fde0ecf72feb95500241",
+    "runner_sha256": "21b88bd81e41753b9a890b3fc1df285eed63a6aadae628dfb7148080c63eff9f",
+    "portable_tests_sha256": "2ddbdc1ca51a0806f7276fa288269ad42eaf135d1db1ece0196a78bcc91f5015",
+    "arcgis_synthetic_validator_sha256": "7be875584389540eb50bbc75b1103d34f4fdcf0246ca8cc3c8a92cc4c1ecb97a"
+  },
+  "released_now": {
+    "final_no_content_preflight": true,
+    "diagnostic_process_after_preflight": true,
+    "new_radar_processing_attempt": false
+  }
+}
