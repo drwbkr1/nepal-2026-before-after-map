@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001-REVIEW-PREPARATION-AUTHORITY",
+  "recorded_at_utc": "2026-09-22T18:17:00Z",
+  "status": "standing_authority_local_zero_decision_preparation_only",
+  "authority_basis": {
+    "project_instruction_ref": "AGENTS.md",
+    "project_instruction_sha256": "a4630c53af4fcfff730b6a006923698f177f8939f78cf62e2a602770574682ba",
+    "standing_rule": "batch genuinely new owner decisions at a coherent milestone boundary",
+    "local_follow_on_design_released": true,
+    "interpretation": "prepare and validate one local zero-decision packet; reserve publication, implementation, data access, execution, and terminal publication for one later owner decision"
+  },
+  "authority_boundary": {
+    "local_review_packet_preparation_authorized": true,
+    "local_validation_authorized": true,
+    "git_commit_or_push_authorized": false,
+    "public_ci_authorized": false,
+    "owner_proposal_decision_recording_authorized": false,
+    "diagnostic_implementation_authorized": false,
+    "arcpy_invocation_authorized": false,
+    "project_data_or_external_custody_access_authorized": false,
+    "geoprocessing_authorized": false,
+    "new_radar_processing_attempt_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "scientific_publication_authorized": false
+  },
+  "bindings": {
+    "base_commit": "a9e94dc02f4024f88399daab9620faa81f198e08",
+    "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521",
+    "records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json": "dc7412b95b6174182eaab2ca6274b981d5f98c6ea1df40a3ff34f74e91e5fb00",
+    "records/readiness/m2-radar-esri-sequence-recovery-005-final-preflight.json": "9c732541fefb2229635074b30b950b1e8449925e508f99cc2ee4cc09478f1ba0",
+    "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-gate.json": "2dc779265cbdf8aa38bbf6da9b24ab146bc468a47ed39be515ba3e74d3b1a618",
+    "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-reconciliation.json": "a9e778403184b151e47566963529c020fae23be5572dc1e54165c730bf6e40ab",
+    "config/qa/m2-radar-esri-sequence-recovery-005-contract.json": "e388f84dd97db781e89d9115e03a7cda92895e1dfb9c4adf9a35e1ce494e1b0b",
+    "scripts/m2_radar_esri_sequence_processing_005.py": "faadf83f4ae1c35209ed104ab3ba2c97ad233615655aaa31dfc72851b968e0fd",
+    "AGENTS.md": "a4630c53af4fcfff730b6a006923698f177f8939f78cf62e2a602770574682ba"
+  }
+}

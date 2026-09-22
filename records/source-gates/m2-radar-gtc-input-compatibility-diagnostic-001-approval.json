@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001-APPROVAL",
+  "approved_at_utc": "2026-09-22T19:23:18Z",
+  "status": "approved_single_bounded_diagnostic_envelope",
+  "reviewer": "project_owner",
+  "attestation": true,
+  "human_decision_count": 1,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-radar-gtc-input-compatibility-diagnostic-001-proposal.json",
+    "proposal_sha256": "9506b91f3809b08340b44e8965311088ad7537ff5626ef78a9f5bdad9d841910",
+    "review_bundle_ref": "reviews/m2-radar-gtc-input-compatibility-diagnostic-001/review-bundle.json",
+    "review_bundle_sha256": "16221f886565c9fb445b32d7c27f2fe666591b46ddc1fde0ecf72feb95500241"
+  },
+  "owner_statement": "I approve M2 radar GTC input-compatibility diagnostic-001 review bundle `16221f886565c9fb445b32d7c27f2fe666591b46ddc1fde0ecf72feb95500241` and proposal `9506b91f3809b08340b44e8965311088ad7537ff5626ef78a9f5bdad9d841910`. I authorize the proposal’s single bounded authority envelope through sanitized terminal publication, without intermediate owner reconfirmation. I understand it permits at most one fresh read-only metadata diagnostic process over the exact preserved recovery-005 candidates, with zero geoprocessing, raster-function, pixel-read, network, credential, mutation, reconstruction, retry, or new radar-processing attempt, and does not authorize baseline admission, change analysis, interpretation, attribution, derived-pixel publication, historical-root-cause or radar-recovery-readiness claims, or scientific publication. I attest this is my completed decision.",
+  "authorized_actions": [
+    "bounded implementation and synthetic tests",
+    "public default-branch publication and CI gates",
+    "one final no-content preflight",
+    "at most one fresh read-only metadata diagnostic process over the exact preserved candidates",
+    "exact reconciliation and sanitized terminal publication"
+  ],
+  "limits": {
+    "maximum_diagnostic_processes": 1,
+    "maximum_geoprocessing_calls": 0,
+    "maximum_raster_function_calls": 0,
+    "maximum_pixel_reads": 0,
+    "automatic_retry": false,
+    "new_radar_processing_attempt": false,
+    "baseline_or_change_analysis": false,
+    "derived_pixel_or_scientific_publication": false
+  }
+}

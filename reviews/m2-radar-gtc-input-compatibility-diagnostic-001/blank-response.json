@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "response_id": "NEPAL-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001-BLANK-RESPONSE",
+  "completed": false,
+  "reviewer": {
+    "name": null,
+    "reviewed_at_utc": null,
+    "attestation": false
+  },
+  "responses": [
+    {
+      "decision_id": "D-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001",
+      "decision": null,
+      "comment": null
+    }
+  ],
+  "human_decision_count": 0,
+  "response_not_open_until_public_ci": true,
+  "bindings": {
+    "proposal_sha256": "9506b91f3809b08340b44e8965311088ad7537ff5626ef78a9f5bdad9d841910",
+    "review_bundle_sha256": "16221f886565c9fb445b32d7c27f2fe666591b46ddc1fde0ecf72feb95500241"
+  }
+}

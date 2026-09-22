@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001-REVIEW-PREFLIGHT",
+  "checked_at_utc": "2026-09-22T18:17:00Z",
+  "status": "pass_local_zero_decision_packet_preparation_only",
+  "bindings": {
+    "preparation_authority_sha256": "bce7de9a66c62facba290ed4113be6ec2c45e2fd627debd0402f03ca1322b607",
+    "proposal_sha256": "9506b91f3809b08340b44e8965311088ad7537ff5626ef78a9f5bdad9d841910",
+    "preparation_script_sha256": "43cab48b7ae7b53bbe73b75f59123e25af3ffc5b38d2bca7edc794ad6f5444fc",
+    "base_commit": "a9e94dc02f4024f88399daab9620faa81f198e08"
+  },
+  "checks": {
+    "terminal_attempt_consumed": true,
+    "refined_lee_output_created": true,
+    "gtc_output_absent": true,
+    "protected_public_evidence_exact": true,
+    "canonical_checkpoint_unchanged": true,
+    "human_decision_count_zero": true
+  },
+  "assertions": {
+    "git_commit_created": false,
+    "git_push_performed": false,
+    "public_ci_started": false,
+    "arcpy_invoked": false,
+    "project_data_read": false,
+    "external_custody_accessed": false,
+    "geoprocessing_invoked": false,
+    "pixel_data_read": false,
+    "new_attempt_created": false,
+    "scientific_result_established": false
+  }
+}

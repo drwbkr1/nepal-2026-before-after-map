@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001-REVIEW-READINESS",
+  "verified_at_utc": "2026-09-22T18:17:00Z",
+  "status": "pass_local_zero_decision_packet_ready_publication_authority_required",
+  "bindings": {
+    "preparation_authority_ref": "records/source-gates/m2-radar-gtc-input-compatibility-diagnostic-001-review-preparation-authority.json",
+    "preparation_authority_sha256": "bce7de9a66c62facba290ed4113be6ec2c45e2fd627debd0402f03ca1322b607",
+    "proposal_ref": "contracts/milestone-002-radar-gtc-input-compatibility-diagnostic-001-proposal.json",
+    "proposal_sha256": "9506b91f3809b08340b44e8965311088ad7537ff5626ef78a9f5bdad9d841910",
+    "review_preflight_ref": "records/readiness/m2-radar-gtc-input-compatibility-diagnostic-001-review-preflight.json",
+    "review_preflight_sha256": "b37227c5a78671115446793361ca794e19f73e36b0e8fae05504342caf82dea8",
+    "review_document_ref": "docs/M2_RADAR_GTC_INPUT_COMPATIBILITY_DIAGNOSTIC_001_REVIEW.md",
+    "review_document_sha256": "a8787cd3a414fe27d299a5dad5e7837ab3ccb0e7751296bc4f73d6410cac5499",
+    "review_bundle_ref": "reviews/m2-radar-gtc-input-compatibility-diagnostic-001/review-bundle.json",
+    "review_bundle_sha256": "16221f886565c9fb445b32d7c27f2fe666591b46ddc1fde0ecf72feb95500241",
+    "review_contract_ref": "reviews/m2-radar-gtc-input-compatibility-diagnostic-001/review-contract.json",
+    "review_contract_sha256": "988bb74bf7574a49ca511ef8ed7ed0a5bc8bf6f58a742bc738a72f7419ba2ef4",
+    "blank_response_ref": "reviews/m2-radar-gtc-input-compatibility-diagnostic-001/blank-response.json",
+    "blank_response_sha256": "47354c5c3aea866dfd1b66b6f7ef38dc064d2f1c65ff40bad9dabe781b8a15c1"
+  },
+  "validation": {
+    "terminal_attempt_preserved": true,
+    "external_candidates_not_inspected_or_claimed": true,
+    "post_observation_limit_disclosed": true,
+    "human_decision_count": 0,
+    "canonical_checkpoint_unchanged": true,
+    "single_later_owner_decision_designed": true
+  },
+  "released_now": {
+    "local_packet_preparation": true,
+    "local_packet_validation": true,
+    "git_commit_or_push": false,
+    "public_ci": false,
+    "owner_proposal_review": false,
+    "diagnostic_implementation": false,
+    "arcpy_invocation": false,
+    "project_data_access": false,
+    "geoprocessing": false,
+    "new_radar_processing_attempt": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "git_commit_created": false,
+    "git_push_performed": false,
+    "public_ci_started": false,
+    "arcpy_invoked": false,
+    "project_data_read": false,
+    "external_custody_accessed": false,
+    "geoprocessing_invoked": false,
+    "pixel_data_read": false,
+    "new_attempt_created": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Obtain one owner authorization covering publication of this exact packet, implementation, tests, public CI, one final no-content preflight, at most one fresh read-only diagnostic process, exact reconciliation, and sanitized terminal publication without intermediate reconfirmation."
+}

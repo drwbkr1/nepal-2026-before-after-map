@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001-REVIEW-CONTRACT",
+  "prepared_at_utc": "2026-09-22T18:17:00Z",
+  "review_bundle": {
+    "ref": "reviews/m2-radar-gtc-input-compatibility-diagnostic-001/review-bundle.json",
+    "sha256": "16221f886565c9fb445b32d7c27f2fe666591b46ddc1fde0ecf72feb95500241"
+  },
+  "proposal": {
+    "ref": "contracts/milestone-002-radar-gtc-input-compatibility-diagnostic-001-proposal.json",
+    "sha256": "9506b91f3809b08340b44e8965311088ad7537ff5626ef78a9f5bdad9d841910"
+  },
+  "workflow_authority": {
+    "local_preparation_complete": true,
+    "public_review_publication_authorized": false,
+    "review_response_open": false
+  },
+  "response_requirements": {
+    "exact_proposal_sha256_required": "9506b91f3809b08340b44e8965311088ad7537ff5626ef78a9f5bdad9d841910",
+    "exact_review_bundle_sha256_required": "16221f886565c9fb445b32d7c27f2fe666591b46ddc1fde0ecf72feb95500241",
+    "explicit_decision_required": true,
+    "attestation_required": true
+  },
+  "authority_boundary": {
+    "publication_authorized": false,
+    "owner_review_open": false,
+    "implementation_authorized": false,
+    "arcpy_invocation_authorized": false,
+    "project_data_access_authorized": false,
+    "geoprocessing_authorized": false,
+    "new_radar_processing_attempt_authorized": false
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-22T18:17:00Z",
+  "status": "ready_local_zero_decision_publication_not_authorized",
+  "human_decision_count": 0,
+  "artifacts": [
+    {
+      "path": "records/source-gates/m2-radar-gtc-input-compatibility-diagnostic-001-review-preparation-authority.json",
+      "sha256": "bce7de9a66c62facba290ed4113be6ec2c45e2fd627debd0402f03ca1322b607",
+      "role": "preparation_authority"
+    },
+    {
+      "path": "contracts/milestone-002-radar-gtc-input-compatibility-diagnostic-001-proposal.json",
+      "sha256": "9506b91f3809b08340b44e8965311088ad7537ff5626ef78a9f5bdad9d841910",
+      "role": "proposal"
+    },
+    {
+      "path": "records/readiness/m2-radar-gtc-input-compatibility-diagnostic-001-review-preflight.json",
+      "sha256": "b37227c5a78671115446793361ca794e19f73e36b0e8fae05504342caf82dea8",
+      "role": "preparation_preflight"
+    },
+    {
+      "path": "docs/M2_RADAR_GTC_INPUT_COMPATIBILITY_DIAGNOSTIC_001_REVIEW.md",
+      "sha256": "a8787cd3a414fe27d299a5dad5e7837ab3ccb0e7751296bc4f73d6410cac5499",
+      "role": "human_readable_review"
+    },
+    {
+      "path": "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+      "sha256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521",
+      "role": "terminal_reconciliation"
+    },
+    {
+      "path": "records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json",
+      "sha256": "dc7412b95b6174182eaab2ca6274b981d5f98c6ea1df40a3ff34f74e91e5fb00",
+      "role": "outcome_reconciliation"
+    },
+    {
+      "path": "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-reconciliation.json",
+      "sha256": "a9e778403184b151e47566963529c020fae23be5572dc1e54165c730bf6e40ab",
+      "role": "terminal_publication_reconciliation"
+    }
+  ],
+  "decision_requested_after_publication": {
+    "decision_id": "D-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001",
+    "question": "Approve, revise, or defer the single bounded diagnostic envelope?",
+    "choices": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "response_open": false
+  },
+  "authority_boundary": {
+    "publication_authorized": false,
+    "owner_review_open": false,
+    "implementation_authorized": false,
+    "arcpy_invocation_authorized": false,
+    "project_data_access_authorized": false,
+    "geoprocessing_authorized": false,
+    "new_radar_processing_attempt_authorized": false
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001",
+  "prepared_at_utc": "2026-09-22T18:17:00Z",
+  "status": "proposed_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "preparation_authority": {
+    "ref": "records/source-gates/m2-radar-gtc-input-compatibility-diagnostic-001-review-preparation-authority.json",
+    "sha256": "bce7de9a66c62facba290ed4113be6ec2c45e2fd627debd0402f03ca1322b607"
+  },
+  "trigger": {
+    "terminal_reconciliation_ref": "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521",
+    "outcome_reconciliation_ref": "records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json",
+    "outcome_reconciliation_sha256": "dc7412b95b6174182eaab2ca6274b981d5f98c6ea1df40a3ff34f74e91e5fb00",
+    "terminal_publication_reconciliation_ref": "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-reconciliation.json",
+    "terminal_publication_reconciliation_sha256": "a9e778403184b151e47566963529c020fae23be5572dc1e54165c730bf6e40ab"
+  },
+  "observed_state": {
+    "attempt_id": "radar-pixel-orbit-application-esri-sequence-recovery-005-real-001",
+    "attempt_terminal_and_consumed": true,
+    "source_id": "M1-SRC-001",
+    "completed_sequence": [
+      "ApplyOrbitCorrection",
+      "RemoveThermalNoise",
+      "ApplyRadiometricCalibration",
+      "ApplyRadiometricTerrainFlattening",
+      "Despeckle_REFINED_LEE"
+    ],
+    "failing_tool": "ApplyGeometricTerrainCorrection_gamma",
+    "failure_message": "ERROR 000425: Failed to create ortho-corrected raster dataset Failed to execute (ApplyGeometricTerrainCorrection). ",
+    "despeckled_output_created": true,
+    "gtc_output_created": false,
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "post_observation_limit": "The proposed checks were selected after the GTC failure and can characterize only the preserved current inputs; they cannot prove an unrecorded historical cause."
+  },
+  "protected_public_evidence": [
+    {
+      "path": "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+      "sha256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521",
+      "must_remain_unchanged": true
+    },
+    {
+      "path": "records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json",
+      "sha256": "dc7412b95b6174182eaab2ca6274b981d5f98c6ea1df40a3ff34f74e91e5fb00",
+      "must_remain_unchanged": true
+    },
+    {
+      "path": "records/readiness/m2-radar-esri-sequence-recovery-005-final-preflight.json",
+      "sha256": "9c732541fefb2229635074b30b950b1e8449925e508f99cc2ee4cc09478f1ba0",
+      "must_remain_unchanged": true
+    },
+    {
+      "path": "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-gate.json",
+      "sha256": "2dc779265cbdf8aa38bbf6da9b24ab146bc468a47ed39be515ba3e74d3b1a618",
+      "must_remain_unchanged": true
+    },
+    {
+      "path": "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-reconciliation.json",
+      "sha256": "a9e778403184b151e47566963529c020fae23be5572dc1e54165c730bf6e40ab",
+      "must_remain_unchanged": true
+    },
+    {
+      "path": "config/qa/m2-radar-esri-sequence-recovery-005-contract.json",
+      "sha256": "e388f84dd97db781e89d9115e03a7cda92895e1dfb9c4adf9a35e1ce494e1b0b",
+      "must_remain_unchanged": true
+    },
+    {
+      "path": "scripts/m2_radar_esri_sequence_processing_005.py",
+      "sha256": "faadf83f4ae1c35209ed104ab3ba2c97ad233615655aaa31dfc72851b968e0fd",
+      "must_remain_unchanged": true
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "a4630c53af4fcfff730b6a006923698f177f8939f78cf62e2a602770574682ba",
+      "must_remain_unchanged": true
+    }
+  ],
+  "proposed_single_authority_envelope": {
+    "covers_without_intermediate_reconfirmation": [
+      "bounded diagnostic implementation",
+      "portable synthetic no-content tests",
+      "installed ArcGIS runtime synthetic test using disposable inputs only",
+      "public default-branch publication and CI gates",
+      "one final no-content preflight",
+      "at most one fresh read-only diagnostic process",
+      "exact reconciliation and sanitized terminal publication"
+    ],
+    "diagnostic_id": "radar-gtc-input-compatibility-diagnostic-001-real-001",
+    "diagnostic_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\r5\\d1",
+    "mode": "single_process_read_only_metadata_no_pixel_read_no_geoprocessing",
+    "exact_preserved_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\r5\\a1",
+    "exact_candidates": [
+      "s/1/gamma0_linear_slant.crf",
+      "s/1/gamma0_linear_despeckled.crf",
+      "s/1/scattering_area.crf",
+      "s/1/geometric_distortion.crf",
+      "s/1/geometric_distortion_mask_slant.crf",
+      "dem/ellipsoidal_dem_mosaic.tif"
+    ],
+    "fixed_check_order": [
+      "reserve append-only terminal and cleanup receipt identities before content access",
+      "verify exact protected public evidence",
+      "require the exact preserved attempt root and every candidate without reconstruction or substitution",
+      "record sanitized filesystem type and size metadata without opening pixel blocks",
+      "import ArcPy and record product, extensions, and exact GTC signature identity",
+      "evaluate arcpy.Exists for each exact candidate",
+      "record sanitized arcpy.Describe metadata for recognized candidates: dataType, datasetType, format, bandCount, pixelType, spatial reference identity, cell size, extent dimensions, and multidimensional flag when exposed",
+      "compare only structural metadata among slant gamma, despeckled gamma, terrain-flattening support outputs, and DEM",
+      "persist terminal and cleanup receipts and publish only sanitized findings"
+    ],
+    "maximum_diagnostic_processes": 1,
+    "maximum_arcpy_imports": 1,
+    "maximum_geoprocessing_calls": 0,
+    "maximum_raster_function_calls": 0,
+    "maximum_pixel_reads": 0,
+    "maximum_network_requests": 0,
+    "maximum_credential_actions": 0,
+    "automatic_retry": false,
+    "missing_or_unrecognized_candidate_semantics": "terminal block without reconstruction, substitution, mutation, or processing",
+    "result_may_establish": "current structural and ArcGIS catalog compatibility observations for the exact preserved inputs",
+    "result_does_not_establish": [
+      "historical root cause",
+      "a corrected GTC method",
+      "radar recovery readiness",
+      "authorization for another processing attempt",
+      "usable baseline",
+      "change evidence",
+      "interpretation",
+      "attribution",
+      "scientific result"
+    ]
+  },
+  "does_not_authorize_now": [
+    "Git publication or public CI",
+    "proposal approval or implementation",
+    "ArcPy invocation or project-data access",
+    "geoprocessing, raster-function, or pixel-read calls",
+    "attempt reuse, retry, reconstruction, mutation, or a new radar-processing attempt",
+    "source, orbit, DEM, AOI, CRS, grid, mask, threshold, registration, route, or method substitution",
+    "baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication"
+  ]
+}
