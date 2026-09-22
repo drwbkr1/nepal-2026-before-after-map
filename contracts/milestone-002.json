@@ -5124,7 +5124,8 @@
         "records/readiness/m2-radar-esri-sequence-recovery-005-final-preflight.json",
         "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
         "records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json",
-        "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-gate.json"
+        "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-gate.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-reconciliation.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json",
@@ -5168,7 +5169,9 @@
         "outcome_reconciliation_sha256": "dc7412b95b6174182eaab2ca6274b981d5f98c6ea1df40a3ff34f74e91e5fb00",
         "terminal_publication_pending": true,
         "terminal_publication_gate_sha256": "2dc779265cbdf8aa38bbf6da9b24ab146bc468a47ed39be515ba3e74d3b1a618",
-        "terminal_gate_public_ci_pending": true
+        "terminal_gate_public_ci_pending": false,
+        "terminal_publication_reconciliation_sha256": "a9e778403184b151e47566963529c020fae23be5572dc1e54165c730bf6e40ab",
+        "terminal_publication_reconciled": "pass_exact_public_ci"
       },
       "exit_condition_delta": {
         "expected": [
