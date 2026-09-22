@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001-IMPLEMENTATION-READINESS",
+  "status": "pass_local_implementation_gates_pending_public_ci",
+  "approval_authority_ref": "user-instruction:2026-09-22:m2-radar-gtc-dem-isolation-probe-001-exact-approval",
+  "packet_publication": {
+    "commit_sha": "6e4c028ed07e4f3af0aee23b9dde05ddde55a7ed",
+    "public_ci_run_id": 35787050013,
+    "public_ci_conclusion": "success"
+  },
+  "bindings": {
+    "proposal_sha256": "2cac9f72dc21bcda9e0bdff571de681ad7efe5b4c0c86ac26a0c5fd4aea9f984",
+    "review_bundle_sha256": "e0438080c30e7073e94af012121b94db1c0cc193854cc43f7f5fc5339bdfe536",
+    "approval_sha256": "20c1b9210d836dfa8e1ce01d847ad748f3d617903ac35ac54f5163fb6fe95e0d",
+    "runner_sha256": "2b921244d9fef1b23ff180dd4cafe256902f08c4715349e3cbd2341aa493adb6",
+    "validator_sha256": "9733bafe0a62123c7c97ae9e79de7f71103ea16a6731e8214669c63f7f95336d",
+    "test_sha256": "0a64804af25fc5292b85e67caa5b062533d83593e1a5f236d609e1b79281bb62",
+    "runtime_validation_sha256": "50de10bd64edc6bce9197e8eb342e4c43d09d689d7975636e1d7b7afc00775ef"
+  },
+  "validation": {
+    "focused_portable_tests_passed": 5,
+    "full_portable_tests_passed": 735,
+    "full_portable_tests_skipped": 6,
+    "arcgis_version": "3.7.1",
+    "installed_signature_and_in_memory_synthetic_raster": "pass",
+    "gtc_called_in_validation": false,
+    "project_data_accessed_in_validation": false,
+    "first_disposable_validator_output_cleanup": "failed_windows_open_handle; four tiny files remain in Windows Temp; subsequent nonrecursive cleanup request was denied by command policy"
+  },
+  "released_now": {
+    "implementation_publication": true,
+    "real_project_input_access": false,
+    "real_probe": false
+  },
+  "next_action": "Publish the exact implementation, require public CI, then publish and verify the execution gate before one final no-content preflight."
+}

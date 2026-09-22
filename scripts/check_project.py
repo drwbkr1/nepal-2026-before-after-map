@@ -1482,6 +1482,19 @@ REQUIRED = [
     "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-gate.json",
     "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-reconciliation.json",
     "tests/test_m2_radar_raster_function_call_shape_recovery_004.py",
+    "contracts/milestone-002-radar-gtc-dem-isolation-probe-001-proposal.json",
+    "docs/M2_RADAR_GTC_DEM_ISOLATION_PROBE_001_REVIEW.md",
+    "reviews/m2-radar-gtc-dem-isolation-probe-001/review-bundle.json",
+    "reviews/m2-radar-gtc-dem-isolation-probe-001/review-contract.json",
+    "reviews/m2-radar-gtc-dem-isolation-probe-001/blank-response.json",
+    "records/readiness/m2-radar-gtc-dem-isolation-probe-001-review-readiness.json",
+    "records/source-gates/m2-radar-gtc-dem-isolation-probe-001-approval.json",
+    "scripts/prepare_m2_radar_gtc_dem_isolation_probe_001_review.py",
+    "scripts/m2_radar_gtc_dem_isolation_probe_001.py",
+    "scripts/validate_m2_radar_gtc_dem_isolation_probe_001_arcgis.py",
+    "tests/test_m2_radar_gtc_dem_isolation_probe_001.py",
+    "records/readiness/m2-radar-gtc-dem-isolation-probe-001-arcgis-runtime-validation.json",
+    "records/readiness/m2-radar-gtc-dem-isolation-probe-001-implementation-readiness.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -18007,6 +18020,48 @@ def main() -> None:
         or esri_sequence_stage != "terminal"
     ):
         fail("M2 radar Esri-sequence recovery-005 approved implementation boundary differs or overclaims")
+
+    gtc_probe_prefix = "m2-radar-gtc-dem-isolation-probe-001"
+    gtc_probe_proposal_ref = "contracts/milestone-002-radar-gtc-dem-isolation-probe-001-proposal.json"
+    gtc_probe_bundle_ref = f"reviews/{gtc_probe_prefix}/review-bundle.json"
+    gtc_probe_approval_ref = f"records/source-gates/{gtc_probe_prefix}-approval.json"
+    gtc_probe_runner_ref = "scripts/m2_radar_gtc_dem_isolation_probe_001.py"
+    gtc_probe_validator_ref = "scripts/validate_m2_radar_gtc_dem_isolation_probe_001_arcgis.py"
+    gtc_probe_test_ref = "tests/test_m2_radar_gtc_dem_isolation_probe_001.py"
+    gtc_probe_runtime_ref = f"records/readiness/{gtc_probe_prefix}-arcgis-runtime-validation.json"
+    gtc_probe_readiness_ref = f"records/readiness/{gtc_probe_prefix}-implementation-readiness.json"
+    gtc_probe_bundle = json.loads((ROOT / gtc_probe_bundle_ref).read_text(encoding="utf-8"))
+    gtc_probe_approval = json.loads((ROOT / gtc_probe_approval_ref).read_text(encoding="utf-8"))
+    gtc_probe_runtime = json.loads((ROOT / gtc_probe_runtime_ref).read_text(encoding="utf-8"))
+    gtc_probe_readiness = json.loads((ROOT / gtc_probe_readiness_ref).read_text(encoding="utf-8"))
+    gtc_probe_bindings = {
+        "proposal_sha256": sha256(gtc_probe_proposal_ref),
+        "review_bundle_sha256": sha256(gtc_probe_bundle_ref),
+        "approval_sha256": sha256(gtc_probe_approval_ref),
+        "runner_sha256": sha256(gtc_probe_runner_ref),
+        "validator_sha256": sha256(gtc_probe_validator_ref),
+        "test_sha256": sha256(gtc_probe_test_ref),
+        "runtime_validation_sha256": sha256(gtc_probe_runtime_ref),
+    }
+    if (
+        gtc_probe_bindings["proposal_sha256"] != "2cac9f72dc21bcda9e0bdff571de681ad7efe5b4c0c86ac26a0c5fd4aea9f984"
+        or gtc_probe_bindings["review_bundle_sha256"] != "e0438080c30e7073e94af012121b94db1c0cc193854cc43f7f5fc5339bdfe536"
+        or any(sha256(item["path"]) != item["sha256"] for item in gtc_probe_bundle["artifacts"])
+        or gtc_probe_approval.get("attestation") is not True
+        or gtc_probe_approval.get("human_decision_count") != 1
+        or gtc_probe_approval.get("bindings", {}).get("proposal_sha256") != gtc_probe_bindings["proposal_sha256"]
+        or gtc_probe_approval.get("bindings", {}).get("review_bundle_sha256") != gtc_probe_bindings["review_bundle_sha256"]
+        or gtc_probe_approval.get("authorized_scope", {}).get("maximum_gtc_calls") != 1
+        or gtc_probe_approval.get("authorized_scope", {}).get("automatic_retry") is not False
+        or gtc_probe_runtime.get("status") != "pass_installed_signature_and_disposable_raster_construct_only"
+        or gtc_probe_runtime.get("runtime", {}).get("gtc_parameters") != ["in_radar_data", "polarization_bands", "in_dem_raster", "geoid"]
+        or gtc_probe_runtime.get("assertions", {}).get("project_data_content_read") is not False
+        or gtc_probe_runtime.get("assertions", {}).get("gtc_called") is not False
+        or gtc_probe_readiness.get("status") != "pass_local_implementation_gates_pending_public_ci"
+        or gtc_probe_readiness.get("bindings") != gtc_probe_bindings
+        or gtc_probe_readiness.get("released_now", {}).get("real_probe") is not False
+    ):
+        fail("M2 radar GTC DEM-isolation probe implementation readiness differs or overclaims")
 
     violations = []
     for relative in tracked_files():

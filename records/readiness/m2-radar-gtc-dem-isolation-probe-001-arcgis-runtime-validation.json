@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001-ARCGIS-RUNTIME-VALIDATION",
+  "status": "pass_installed_signature_and_disposable_raster_construct_only",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "gtc_parameters": [
+      "in_radar_data",
+      "polarization_bands",
+      "in_dem_raster",
+      "geoid"
+    ],
+    "image_analyst": "Available"
+  },
+  "assertions": {
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "gtc_called": false,
+    "disposable_raster_constructed": true,
+    "disposable_file_output_created": false,
+    "image_analyst_checked_in": true,
+    "network_or_credentials_used": false,
+    "scientific_result_established": false
+  }
+}
