@@ -1497,6 +1497,9 @@ REQUIRED = [
     "records/readiness/m2-radar-gtc-dem-isolation-probe-001-implementation-readiness.json",
     "records/readiness/m2-radar-gtc-dem-isolation-probe-001-implementation-publication-gate.json",
     "records/readiness/m2-radar-gtc-dem-isolation-probe-001-execution-publication-gate.json",
+    "records/readiness/m2-radar-gtc-dem-isolation-probe-001-final-preflight.json",
+    "scripts/reconcile_m2_radar_gtc_dem_isolation_probe_001.py",
+    "records/processing/m2-radar-gtc-dem-isolation-probe-001-terminal-reconciliation.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -18034,12 +18037,16 @@ def main() -> None:
     gtc_probe_readiness_ref = f"records/readiness/{gtc_probe_prefix}-implementation-readiness.json"
     gtc_probe_gate_ref = f"records/readiness/{gtc_probe_prefix}-implementation-publication-gate.json"
     gtc_probe_execution_ref = f"records/readiness/{gtc_probe_prefix}-execution-publication-gate.json"
+    gtc_probe_preflight_ref = f"records/readiness/{gtc_probe_prefix}-final-preflight.json"
+    gtc_probe_terminal_ref = f"records/processing/{gtc_probe_prefix}-terminal-reconciliation.json"
     gtc_probe_bundle = json.loads((ROOT / gtc_probe_bundle_ref).read_text(encoding="utf-8"))
     gtc_probe_approval = json.loads((ROOT / gtc_probe_approval_ref).read_text(encoding="utf-8"))
     gtc_probe_runtime = json.loads((ROOT / gtc_probe_runtime_ref).read_text(encoding="utf-8"))
     gtc_probe_readiness = json.loads((ROOT / gtc_probe_readiness_ref).read_text(encoding="utf-8"))
     gtc_probe_gate = json.loads((ROOT / gtc_probe_gate_ref).read_text(encoding="utf-8"))
     gtc_probe_execution = json.loads((ROOT / gtc_probe_execution_ref).read_text(encoding="utf-8"))
+    gtc_probe_preflight = json.loads((ROOT / gtc_probe_preflight_ref).read_text(encoding="utf-8"))
+    gtc_probe_terminal = json.loads((ROOT / gtc_probe_terminal_ref).read_text(encoding="utf-8"))
     gtc_probe_bindings = {
         "proposal_sha256": sha256(gtc_probe_proposal_ref),
         "review_bundle_sha256": sha256(gtc_probe_bundle_ref),
@@ -18078,6 +18085,27 @@ def main() -> None:
         or gtc_probe_execution.get("public_ci_conclusion") != "success"
         or gtc_probe_execution.get("implementation_gate_sha256") != sha256(gtc_probe_gate_ref)
         or gtc_probe_execution.get("assertions", {}).get("real_attempt_started") is not False
+        or gtc_probe_preflight.get("status") != "pass_final_no_content_preflight_one_attempt_ready"
+        or gtc_probe_preflight.get("bindings", {}).get("execution_gate_sha256") != sha256(gtc_probe_execution_ref)
+        or gtc_probe_preflight.get("assertions", {}).get("project_data_content_read") is not False
+        or gtc_probe_preflight.get("assertions", {}).get("gtc_called") is not False
+        or gtc_probe_terminal.get("status") != "pass_terminal_receipts_reconciled_diagnostic_only"
+        or gtc_probe_terminal.get("disposition") != "pass_diagnostic_only_no_scientific_admission"
+        or gtc_probe_terminal.get("attempt_consumed") is not True
+        or gtc_probe_terminal.get("bindings", {}).get("final_preflight_sha256") != sha256(gtc_probe_preflight_ref)
+        or set(gtc_probe_terminal.get("bindings", {}).get("external_receipts", {}))
+        != {"terminal-reservation.json", "cleanup-reservation.json", "terminal.json", "cleanup.json", *(f"stage-{number:03d}.json" for number in range(8))}
+        or gtc_probe_terminal.get("observation", {}).get("gtc_called_without_dem_or_geoid_argument") is not True
+        or gtc_probe_terminal.get("observation", {}).get("gtc_returned_raster") is not True
+        or gtc_probe_terminal.get("observation", {}).get("one_explicit_save_completed") is not True
+        or gtc_probe_terminal.get("observation", {}).get("quarantined_output_file_count") != 86
+        or gtc_probe_terminal.get("observation", {}).get("quarantined_output_total_file_bytes") != 807911166
+        or gtc_probe_terminal.get("observation", {}).get("quarantined_output_inventory_sha256") != "2f4282bae4678db56f2c6cfc05fd7a7e7e86d3cef18fc457e24f9d61506e6dd0"
+        or gtc_probe_terminal.get("observation", {}).get("preserved_input_file_writes_after_attempt_start") != 0
+        or gtc_probe_terminal.get("limits", {}).get("no_dem_result_is_diagnostic_only") is not True
+        or gtc_probe_terminal.get("limits", {}).get("dem_coverage_historical_cause_established") is not False
+        or gtc_probe_terminal.get("limits", {}).get("land_scene_scientific_fitness_established") is not False
+        or gtc_probe_terminal.get("limits", {}).get("derived_pixels_published") is not False
     ):
         fail("M2 radar GTC DEM-isolation probe implementation readiness differs or overclaims")
 

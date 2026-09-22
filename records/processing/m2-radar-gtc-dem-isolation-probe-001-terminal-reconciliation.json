@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-DEM-ISOLATION-PROBE-001-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-22T21:52:23Z",
+  "status": "pass_terminal_receipts_reconciled_diagnostic_only",
+  "disposition": "pass_diagnostic_only_no_scientific_admission",
+  "attempt_id": "radar-gtc-dem-isolation-probe-001-real-001",
+  "attempt_consumed": true,
+  "bindings": {
+    "proposal_sha256": "2cac9f72dc21bcda9e0bdff571de681ad7efe5b4c0c86ac26a0c5fd4aea9f984",
+    "review_bundle_sha256": "e0438080c30e7073e94af012121b94db1c0cc193854cc43f7f5fc5339bdfe536",
+    "approval_sha256": "20c1b9210d836dfa8e1ce01d847ad748f3d617903ac35ac54f5163fb6fe95e0d",
+    "final_preflight_sha256": "b368163c7cc2d26568dd7d3177f6abd1836fee9d50546dbfb89a57677d6675a6",
+    "external_receipts": {
+      "cleanup-reservation.json": {
+        "size_bytes": 279,
+        "sha256": "2577d36528b7efdaa5d63f8008f85970b50d3fb0d3301d79b05b2f47098c3693"
+      },
+      "cleanup.json": {
+        "size_bytes": 192,
+        "sha256": "bc0c04c598a9e4c78539b874ca72cdd39758c8591edcfb956cdf166e1b20d15b"
+      },
+      "stage-000.json": {
+        "size_bytes": 135,
+        "sha256": "ce2709c19cb78e8d75199e50a2d3c5cad62cf551e0a5284dc0c8133a7dca7869"
+      },
+      "stage-001.json": {
+        "size_bytes": 141,
+        "sha256": "cf0e5bb6b8b00eaebcfcd039037e456f9a3c95d369a9795c740211338e4cb12a"
+      },
+      "stage-002.json": {
+        "size_bytes": 141,
+        "sha256": "3c48c32f60af7e411f7be229144dca69c6f2fa6ac274562ce0fa15dbf90071bf"
+      },
+      "stage-003.json": {
+        "size_bytes": 150,
+        "sha256": "56be503ffe1b6915f1a006b53f35e6b65dc3428d9d3a5c5ad5025e52955663ad"
+      },
+      "stage-004.json": {
+        "size_bytes": 139,
+        "sha256": "f9aa812ea99c9137318e8ad43b436fd3961d0656dcd8d5b4a82cdc636817e8b1"
+      },
+      "stage-005.json": {
+        "size_bytes": 128,
+        "sha256": "96150ddf67053bd75a563b31b0662d45499f8755c00c9278f67b474d85573a0e"
+      },
+      "stage-006.json": {
+        "size_bytes": 142,
+        "sha256": "64ef993b3d99eae050b7c35a072f8cc2a6539ed9383ce74eb1b39101c82b40fd"
+      },
+      "stage-007.json": {
+        "size_bytes": 144,
+        "sha256": "047d7d9314ab5574068869a99fb0cf73ee4f90251736b550ac3ef4e67efe89c9"
+      },
+      "terminal-reservation.json": {
+        "size_bytes": 279,
+        "sha256": "2577d36528b7efdaa5d63f8008f85970b50d3fb0d3301d79b05b2f47098c3693"
+      },
+      "terminal.json": {
+        "size_bytes": 852,
+        "sha256": "8d4e55c7ebb9747998608e35af28d1b0eb04e18c0d807cee9e14b1a770bbd1a5"
+      }
+    }
+  },
+  "observation": {
+    "gtc_called_without_dem_or_geoid_argument": true,
+    "gtc_returned_raster": true,
+    "one_explicit_save_completed": true,
+    "quarantined_output_file_count": 86,
+    "quarantined_output_total_file_bytes": 807911166,
+    "quarantined_output_inventory_sha256": "2f4282bae4678db56f2c6cfc05fd7a7e7e86d3cef18fc457e24f9d61506e6dd0",
+    "arcgis_generated_intermediate_retained": false,
+    "preserved_input_file_count": 86,
+    "preserved_input_file_writes_after_attempt_start": 0,
+    "cleanup_status": "extension_checked_in_or_not_checked_out"
+  },
+  "limits": {
+    "no_dem_result_is_diagnostic_only": true,
+    "dem_coverage_historical_cause_established": false,
+    "land_scene_scientific_fitness_established": false,
+    "baseline_or_change_evidence_established": false,
+    "derived_pixels_published": false,
+    "automatic_retry_performed": false,
+    "further_radar_processing_authorized_by_this_result": false
+  },
+  "method": "Receipt SHA-256 and content-byte inventory hashing only; no raster pixel decoding, statistics, map use, or output publication."
+}
