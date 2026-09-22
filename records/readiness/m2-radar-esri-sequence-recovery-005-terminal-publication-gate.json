@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-22T18:01:33Z",
+  "status": "pass_public_terminal_block_published_no_retry",
+  "terminal_commit_sha": "fc99fa6c2a7b27f3195004f3ae4c2ab37fa2605e",
+  "public_ci_run_id": 35764320850,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35764320850",
+  "public_ci_conclusion": "success",
+  "repository_required_file_count": 1330,
+  "public_test_count": 718,
+  "public_intentional_skip_count": 6,
+  "authority_ref": "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json",
+  "bindings": {
+    "final_preflight_ref": "records/readiness/m2-radar-esri-sequence-recovery-005-final-preflight.json",
+    "final_preflight_sha256": "9c732541fefb2229635074b30b950b1e8449925e508f99cc2ee4cc09478f1ba0",
+    "terminal_reconciliation_ref": "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521",
+    "outcome_reconciliation_ref": "records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json",
+    "outcome_reconciliation_sha256": "dc7412b95b6174182eaab2ca6274b981d5f98c6ea1df40a3ff34f74e91e5fb00",
+    "published_milestone_sha256": "b40e130dc3dd5c5c52b818888e3fdc460c0d32f441f10c40f95b2d38c40a308e",
+    "published_project_control_profile_sha256": "9bf56c5e76382f5a5ae29e54a949f952737b3b17015a725ae000deeeb0b1dc68",
+    "published_long_term_goal_sha256": "ff86d35c7e1a894ceafd485d43f4b1cc3a844f43b629f78f181c21cea4ae1fac"
+  },
+  "released_now": {
+    "sanitized_terminal_evidence_public": true,
+    "terminal_owner_review": true,
+    "attempt_retry_or_reuse": false,
+    "second_real_attempt": false,
+    "new_radar_implementation": false,
+    "baseline_or_change_analysis": false,
+    "derived_pixel_publication": false,
+    "scientific_publication": false
+  },
+  "assertions": {
+    "attempt_terminal_and_consumed": true,
+    "path_projection_passed_at_maximum_237_characters": true,
+    "m1_src_001_approved_refined_lee_step_completed": true,
+    "stopped_at_gamma_geometric_terrain_correction": true,
+    "gamma_geometric_terrain_correction_output_created": false,
+    "later_source_or_route_started": false,
+    "automatic_retry_performed": false,
+    "cleanup_receipt_persisted": true,
+    "external_custody_unchanged": true,
+    "historical_failure_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "scientific_result_established": false
+  },
+  "next_action": "Review the terminal block. The attempt is consumed and cannot be retried. Any correction or further radar processing requires separately scoped authority."
+}

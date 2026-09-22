@@ -5123,7 +5123,8 @@
         "records/readiness/m2-radar-esri-sequence-recovery-005-gate-state-publication.json",
         "records/readiness/m2-radar-esri-sequence-recovery-005-final-preflight.json",
         "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
-        "records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json"
+        "records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-terminal-publication-gate.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json",
@@ -5165,7 +5166,9 @@
         "cleanup_status": "cleanup_completed",
         "terminal_reconciliation_sha256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521",
         "outcome_reconciliation_sha256": "dc7412b95b6174182eaab2ca6274b981d5f98c6ea1df40a3ff34f74e91e5fb00",
-        "terminal_publication_pending": true
+        "terminal_publication_pending": true,
+        "terminal_publication_gate_sha256": "2dc779265cbdf8aa38bbf6da9b24ab146bc468a47ed39be515ba3e74d3b1a618",
+        "terminal_gate_public_ci_pending": true
       },
       "exit_condition_delta": {
         "expected": [
