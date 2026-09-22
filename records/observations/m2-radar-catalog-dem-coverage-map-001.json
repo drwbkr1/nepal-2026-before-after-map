@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-RADAR-CATALOG-DEM-COVERAGE-MAP-001",
+  "generated_at_utc": "2026-09-22T20:15:00Z",
+  "status": "projected_metadata_context_only_not_arcgis_runtime_validated",
+  "input_bindings": [
+    {
+      "ref": "records/source-manifest.json",
+      "sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef"
+    },
+    {
+      "ref": "records/source-gates/source-manifest-approval.json",
+      "sha256": "c6df8c24adc96439e8b8ef00c733db8fc3cd3ffb229b333b1d8a63933f3aa04e"
+    },
+    {
+      "ref": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"
+    },
+    {
+      "ref": "records/source-gates/m2-dem-candidate-manifest.json",
+      "sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243"
+    },
+    {
+      "ref": "records/source-gates/m2-dem-amendment-approval.json",
+      "sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0"
+    }
+  ],
+  "outputs": [
+    {
+      "ref": "config/arcgis/radar-catalog-footprints-epsg32645.json",
+      "sha256": "40a0ded0ca1dc33d60a136c7c9b1b91df960bb885f58b1d418d66cfe183e530f"
+    },
+    {
+      "ref": "config/arcgis/approved-dem-tile-boxes-epsg32645.json",
+      "sha256": "112f158e66cb0a1220214e15b8bbcca7ad58d657547b2d3e3b9247a5b6e8e310"
+    },
+    {
+      "ref": "docs/assets/radar-catalog-dem-coverage-epsg32645.png",
+      "sha256": "754c0b171fc1f41e1fcee080d272842b26d25bbaa90a74adf0d0d216c7ccc177"
+    }
+  ],
+  "checks": {
+    "radar_features": 6,
+    "dem_box_features": 4,
+    "approved_aoi_features": 3,
+    "crs": "EPSG:32645",
+    "round_trip_tolerance_degrees": 1e-07,
+    "proj_network": "OFF",
+    "ogr_reopen": [
+      {
+        "ref": "config/arcgis/radar-catalog-footprints-epsg32645.json",
+        "feature_count": 6,
+        "epsg": "32645"
+      },
+      {
+        "ref": "config/arcgis/approved-dem-tile-boxes-epsg32645.json",
+        "feature_count": 4,
+        "epsg": "32645"
+      }
+    ]
+  },
+  "limitations": [
+    "Catalog polygons and STAC DEM boxes are not valid-pixel coverage.",
+    "This PNG is a metadata context preview, not an ArcGIS export or scientific map.",
+    "ArcGIS FeatureSet import and map rendering have not yet been validated in ArcGIS Pro.",
+    "No GTC cause, radar recovery readiness, baseline, or event change is established."
+  ]
+}
