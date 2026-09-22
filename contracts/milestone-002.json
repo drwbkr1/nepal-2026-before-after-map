@@ -5103,7 +5103,7 @@
       ],
       "action_class": "data_processing",
       "human_gate": false,
-      "status": "in_progress",
+      "status": "complete",
       "inputs": [
         "contracts/milestone-002-radar-esri-sequence-recovery-005-proposal.json",
         "reviews/m2-radar-esri-sequence-recovery-005/review-bundle.json",
@@ -5120,7 +5120,10 @@
         "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json",
         "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-gate.json",
         "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-reconciliation.json",
-        "records/readiness/m2-radar-esri-sequence-recovery-005-gate-state-publication.json"
+        "records/readiness/m2-radar-esri-sequence-recovery-005-gate-state-publication.json",
+        "records/readiness/m2-radar-esri-sequence-recovery-005-final-preflight.json",
+        "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+        "records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json"
       ],
       "outputs": [
         "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-readiness.json",
@@ -5136,12 +5139,12 @@
       "gates": {
         "inherited_owner_authority": "pass_exact_combined_approval",
         "maximum_real_attempts": 1,
-        "real_attempts_started": 0,
+        "real_attempts_started": 1,
         "automatic_retry": false,
         "stop_on_first_failure": true,
         "intermediate_owner_reconfirmation_required": false,
-        "external_custody_accessed": false,
-        "arcpy_processing_or_geoprocessing_invoked": false,
+        "external_custody_accessed": true,
+        "arcpy_processing_or_geoprocessing_invoked": true,
         "publication_started": true,
         "official_method_guidance_adopted": true,
         "recovery_specific_refined_lee_method_amendment": "approved_exact",
@@ -5152,19 +5155,30 @@
         "public_ci": "success",
         "implementation_publication_gate_sha256": "becb62d4fc2325561a0f0dfc97b9bc8c06963ac105ae505c7313e0f404782b83",
         "implementation_publication_reconciliation_sha256": "90dc5ae4859dc54d5900e7eb2e502a455aca8858e54d9ee87aeeb1870aa922b1",
-        "final_no_content_preflight": false,
+        "final_no_content_preflight": "pass_exact_one_attempt_released_and_consumed",
         "gate_state_source_public_ci": "success",
-        "gate_state_publication_sha256": "c0c6d9c008053d104bf225622ebed156e1b53aa0e854124cf1ffcdebad73297c"
+        "gate_state_publication_sha256": "c0c6d9c008053d104bf225622ebed156e1b53aa0e854124cf1ffcdebad73297c",
+        "attempt_consumed": true,
+        "stopped_source_id": "M1-SRC-001",
+        "stopped_tool": "ApplyGeometricTerrainCorrection_gamma",
+        "later_sources_or_routes_started": false,
+        "cleanup_status": "cleanup_completed",
+        "terminal_reconciliation_sha256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521",
+        "outcome_reconciliation_sha256": "dc7412b95b6174182eaab2ca6274b981d5f98c6ea1df40a3ff34f74e91e5fb00",
+        "terminal_publication_pending": true
       },
       "exit_condition_delta": {
         "expected": [
           "one terminal recovery-005 result with immutable reconciliation and sanitized publication"
         ],
-        "observed": [],
-        "decision_value": null,
-        "rationale": "The exact implementation passed public default-branch CI. Execution-gate publication and the one final no-content preflight remain before the single real attempt."
+        "observed": [
+          "one terminal BLOCK result after the approved REFINED_LEE step completed and gamma ApplyGeometricTerrainCorrection raised ArcGIS ERROR 000425 on M1-SRC-001"
+        ],
+        "decision_value": "block",
+        "rationale": "The single attempt is consumed. REFINED_LEE completed and created its output; the following gamma geometric terrain correction failed before returning a Raster. No later source or route started, no retry occurred, and no historical-root-cause, radar-readiness, baseline, change, attribution, or scientific claim is established."
       },
-      "next_dependency": null
+      "next_dependency": null,
+      "disposition": "block"
     }
   ],
   "path_efficiency": {
@@ -5221,8 +5235,8 @@
     "reconciliation_sha256": "c527b3c375bd6a522487178b391f1901f429ed192276ed3cbc37412dc8cdaca0"
   },
   "handoff": {
-    "current_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
-    "next_action": "Run the single final no-content preflight. Only on its pass may the one fresh fixed-order recovery-005 attempt read exact custody and invoke the approved Esri-sequence route. Stop on the first failure and never retry.",
+    "current_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-REVIEW",
+    "next_action": "Review the sanitized terminal recovery-005 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline admission, change analysis, attribution, derived-pixel publication, historical-root-cause claim, or scientific publication is released.",
     "do_not_carry_forward": [
       "Activation does not accept provider terms, authorize account changes, incur cost, or permit products outside the exact eight.",
       "Catalog byte counts and checksums remain metadata until transferred bytes are independently verified.",
@@ -5273,9 +5287,10 @@
       "The diagnostic receipt-persistence recovery packet has zero decisions and is publication-only; its owner response stays closed until public CI, both zero-byte reserved receipts remain immutable, and no implementation, ArcPy, data access, new process, retry, reconstruction, geoprocessing, radar processing, or scientific action is released.",
       "The exact short-path recovery-003 packet is approved as one bounded authority envelope through sanitized terminal publication. Continue unchanged implementation, public CI gates, one final no-content preflight, at most one fresh real attempt, reconciliation, and terminal publication without intermediate owner reconfirmation. Never retry or broaden into baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication.",
       "Short-path recovery-003 is terminal and consumed. All 269 projected paths were at or below 240 characters (maximum 237); ArcGIS setup, DEM/support creation, and the M1-SRC-001 orbit-correction call completed before the next frozen arcpy.ia.RemoveThermalNoise call failed on its namespace-specific signature. No later source or route started, no retry occurred, external custody remained unchanged, and no historical-root-cause, radar-readiness, baseline, change, attribution, derived-pixel, or scientific claim is established.",
-      "Recovery-004 is terminal and consumed. M1-SRC-001 completed ApplyOrbitCorrection and the corrected Raster-returning RemoveThermalNoise, ApplyRadiometricCalibration, and ApplyRadiometricTerrainFlattening calls and saves, then ArcGIS ERROR 000425 stopped the gamma ApplyGeometricTerrainCorrection invocation before it returned a Raster or created its output. No later source, route, retry, baseline, change analysis, attribution, derived-pixel publication, historical-root-cause claim, radar-readiness claim, or scientific result is released."
+      "Recovery-004 is terminal and consumed. M1-SRC-001 completed ApplyOrbitCorrection and the corrected Raster-returning RemoveThermalNoise, ApplyRadiometricCalibration, and ApplyRadiometricTerrainFlattening calls and saves, then ArcGIS ERROR 000425 stopped the gamma ApplyGeometricTerrainCorrection invocation before it returned a Raster or created its output. No later source, route, retry, baseline, change analysis, attribution, derived-pixel publication, historical-root-cause claim, radar-readiness claim, or scientific result is released.",
+      "Recovery-005 is terminal and consumed. M1-SRC-001 completed ApplyOrbitCorrection, RemoveThermalNoise, ApplyRadiometricCalibration, ApplyRadiometricTerrainFlattening, and the approved exact REFINED_LEE Despeckle call and save. The following gamma ApplyGeometricTerrainCorrection raised ArcGIS ERROR 000425 before returning a Raster or creating its output. No later source, route, retry, baseline, change analysis, attribution, derived-pixel publication, historical-root-cause claim, radar-readiness claim, or scientific result is released."
     ],
-    "parallel_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
-    "parallel_next_action": "Run the single final no-content preflight. Only on its pass may the one fresh fixed-order recovery-005 attempt read exact custody and invoke the approved Esri-sequence route. Stop on the first failure and never retry."
+    "parallel_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-REVIEW",
+    "parallel_next_action": "Review the sanitized terminal recovery-005 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline admission, change analysis, attribution, derived-pixel publication, historical-root-cause claim, or scientific publication is released."
   }
 }

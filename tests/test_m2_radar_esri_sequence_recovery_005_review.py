@@ -130,12 +130,34 @@ class M2RadarEsriSequenceRecovery005ReviewTests(unittest.TestCase):
         self.assertTrue(review["gates"]["publication_authorized"])
         self.assertTrue(review["gates"]["implementation_authorized"])
         self.assertTrue(review["gates"]["new_real_attempt_authorized"])
-        self.assertEqual(recovery["status"], "in_progress")
+        self.assertEqual(recovery["status"], "complete")
+        self.assertEqual(recovery["disposition"], "block")
         self.assertFalse(recovery["human_gate"])
         self.assertEqual(recovery["gates"]["inherited_owner_authority"], "pass_exact_combined_approval")
-        self.assertEqual(recovery["gates"]["real_attempts_started"], 0)
+        self.assertEqual(recovery["gates"]["real_attempts_started"], 1)
+        self.assertTrue(recovery["gates"]["attempt_consumed"])
+        self.assertEqual(recovery["gates"]["stopped_tool"], "ApplyGeometricTerrainCorrection_gamma")
         self.assertFalse(current_radar_esri_sequence_recovery_005_review_required(ROOT, {"promoted": 8}))
-        self.assertEqual(current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8}), "execution")
+        self.assertEqual(current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8}), "terminal")
+
+    def test_terminal_reconciliation_preserves_exact_stop_boundary(self) -> None:
+        terminal = load("records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json")
+        outcome = load("records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json")
+        self.assertEqual(
+            terminal["status"],
+            "block_esri_sequence_recovery_005_source_001_geometric_terrain_correction_gamma_no_retry",
+        )
+        self.assertEqual(terminal["execution_result"]["source_ids_attempted"], ["M1-SRC-001"])
+        self.assertEqual(terminal["execution_result"]["route_ids_attempted"], [])
+        self.assertEqual(terminal["execution_result"]["stopped_tool"], "ApplyGeometricTerrainCorrection_gamma")
+        self.assertIn("Despeckle", terminal["execution_result"]["completed_processing_tools"])
+        self.assertTrue(terminal["call_boundary_observation"]["approved_refined_lee_output_created"])
+        self.assertFalse(terminal["call_boundary_observation"]["gamma_geometric_terrain_correction_output_created"])
+        self.assertFalse(terminal["assertions"]["automatic_retry_performed"])
+        self.assertFalse(terminal["assertions"]["historical_failure_root_cause_established"])
+        self.assertEqual(outcome["bindings"]["terminal_reconciliation_sha256"], sha256("records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json"))
+        self.assertTrue(outcome["assertions"]["approved_refined_lee_step_completed"])
+        self.assertFalse(outcome["assertions"]["radar_recovery_readiness_established"])
 
     def test_controls_and_derivation_point_to_implementation(self) -> None:
         milestone = load("contracts/milestone-002.json")

@@ -1476,6 +1476,9 @@ REQUIRED = [
     "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-gate.json",
     "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-reconciliation.json",
     "records/readiness/m2-radar-esri-sequence-recovery-005-gate-state-publication.json",
+    "records/readiness/m2-radar-esri-sequence-recovery-005-final-preflight.json",
+    "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+    "records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json",
     "tests/test_m2_radar_raster_function_call_shape_recovery_004.py",
     ".github/workflows/validate.yml",
 ]
@@ -17729,6 +17732,9 @@ def main() -> None:
     esri_sequence_publication_gate_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-gate.json"
     esri_sequence_publication_reconciliation_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-implementation-publication-reconciliation.json"
     esri_sequence_gate_state_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-gate-state-publication.json"
+    esri_sequence_preflight_ref = "records/readiness/m2-radar-esri-sequence-recovery-005-final-preflight.json"
+    esri_sequence_terminal_ref = "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json"
+    esri_sequence_outcome_ref = "records/processing/m2-radar-esri-sequence-recovery-005-outcome-reconciliation.json"
     esri_sequence_observation = json.loads((ROOT / esri_sequence_observation_ref).read_text(encoding="utf-8"))
     esri_sequence_proposal = json.loads((ROOT / esri_sequence_proposal_ref).read_text(encoding="utf-8"))
     esri_sequence_bundle = json.loads((ROOT / esri_sequence_bundle_ref).read_text(encoding="utf-8"))
@@ -17741,6 +17747,9 @@ def main() -> None:
     esri_sequence_publication_gate = json.loads((ROOT / esri_sequence_publication_gate_ref).read_text(encoding="utf-8"))
     esri_sequence_publication_reconciliation = json.loads((ROOT / esri_sequence_publication_reconciliation_ref).read_text(encoding="utf-8"))
     esri_sequence_gate_state = json.loads((ROOT / esri_sequence_gate_state_ref).read_text(encoding="utf-8"))
+    esri_sequence_preflight = json.loads((ROOT / esri_sequence_preflight_ref).read_text(encoding="utf-8"))
+    esri_sequence_terminal = json.loads((ROOT / esri_sequence_terminal_ref).read_text(encoding="utf-8"))
+    esri_sequence_outcome = json.loads((ROOT / esri_sequence_outcome_ref).read_text(encoding="utf-8"))
     esri_sequence_review_unit = m2_units.get("M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-REVIEW", {})
     esri_sequence_recovery_unit = m2_units.get("M2-RADAR-ESRI-SEQUENCE-RECOVERY-005", {})
     esri_sequence_stage = current_radar_esri_sequence_recovery_005_stage(ROOT, {"promoted": 8})
@@ -17859,6 +17868,48 @@ def main() -> None:
         or esri_sequence_gate_state.get("assertions", {}).get("final_no_content_preflight_performed") is not False
         or esri_sequence_gate_state.get("assertions", {}).get("fresh_attempt_process_started") is not False
         or esri_sequence_gate_state.get("assertions", {}).get("external_custody_accessed") is not False
+        or esri_sequence_preflight.get("status")
+        != "pass_final_no_content_preflight_one_fresh_attempt_released"
+        or esri_sequence_preflight.get("attempt_id")
+        != "radar-pixel-orbit-application-esri-sequence-recovery-005-real-001"
+        or esri_sequence_preflight.get("bindings", {}).get("implementation_publication_gate_sha256")
+        != sha256(esri_sequence_publication_gate_ref)
+        or esri_sequence_preflight.get("bindings", {}).get("gate_state_publication_sha256")
+        != sha256(esri_sequence_gate_state_ref)
+        or esri_sequence_preflight.get("assertions", {}).get("external_custody_content_read") is not False
+        or esri_sequence_preflight.get("assertions", {}).get("fresh_attempt_process_started") is not False
+        or esri_sequence_terminal.get("status")
+        != "block_esri_sequence_recovery_005_source_001_geometric_terrain_correction_gamma_no_retry"
+        or esri_sequence_terminal.get("disposition") != "block"
+        or esri_sequence_terminal.get("attempt_consumed") is not True
+        or esri_sequence_terminal.get("execution_result", {}).get("source_ids_attempted") != ["M1-SRC-001"]
+        or esri_sequence_terminal.get("execution_result", {}).get("source_ids_not_started")
+        != ["M1-SRC-002", "M1-SRC-003", "M1-SRC-004", "M1-SRC-005", "M1-SRC-006"]
+        or esri_sequence_terminal.get("execution_result", {}).get("route_ids_attempted") != []
+        or esri_sequence_terminal.get("execution_result", {}).get("stopped_source_id") != "M1-SRC-001"
+        or esri_sequence_terminal.get("execution_result", {}).get("stopped_tool")
+        != "ApplyGeometricTerrainCorrection_gamma"
+        or esri_sequence_terminal.get("execution_result", {}).get("completed_processing_tools")
+        != ["ApplyOrbitCorrection", "RemoveThermalNoise", "ApplyRadiometricCalibration", "ApplyRadiometricTerrainFlattening", "Despeckle"]
+        or esri_sequence_terminal.get("execution_result", {}).get("failure_type") != "ExecuteError"
+        or esri_sequence_terminal.get("execution_result", {}).get("failure_code") != "unexpected_processing_failure"
+        or "ERROR 000425" not in esri_sequence_terminal.get("execution_result", {}).get("failure_message", "")
+        or esri_sequence_terminal.get("execution_result", {}).get("cleanup_status") != "cleanup_completed"
+        or esri_sequence_terminal.get("execution_result", {}).get("external_custody_unchanged") is not True
+        or esri_sequence_terminal.get("call_boundary_observation", {}).get("approved_refined_lee_function_returned_successfully") is not True
+        or esri_sequence_terminal.get("call_boundary_observation", {}).get("approved_refined_lee_output_created") is not True
+        or esri_sequence_terminal.get("call_boundary_observation", {}).get("gamma_geometric_terrain_correction_returned_successfully") is not False
+        or esri_sequence_terminal.get("call_boundary_observation", {}).get("gamma_geometric_terrain_correction_output_created") is not False
+        or esri_sequence_terminal.get("assertions", {}).get("automatic_retry_performed") is not False
+        or esri_sequence_terminal.get("assertions", {}).get("second_attempt_created") is not False
+        or esri_sequence_terminal.get("assertions", {}).get("historical_failure_root_cause_established") is not False
+        or esri_sequence_terminal.get("assertions", {}).get("radar_recovery_readiness_established") is not False
+        or esri_sequence_outcome.get("status") != esri_sequence_terminal.get("status")
+        or esri_sequence_outcome.get("bindings", {}).get("terminal_reconciliation_sha256")
+        != sha256(esri_sequence_terminal_ref)
+        or esri_sequence_outcome.get("assertions", {}).get("approved_refined_lee_step_completed") is not True
+        or esri_sequence_outcome.get("assertions", {}).get("later_sources_or_routes_started") is not False
+        or esri_sequence_outcome.get("assertions", {}).get("radar_recovery_readiness_established") is not False
         or esri_sequence_review_unit.get("status") != "complete"
         or esri_sequence_review_unit.get("human_gate") is not True
         or esri_sequence_review_unit.get("gates", {}).get("human_decision_count") != 1
@@ -17866,11 +17917,23 @@ def main() -> None:
         or esri_sequence_review_unit.get("gates", {}).get("publication_authorized") is not True
         or esri_sequence_review_unit.get("gates", {}).get("implementation_authorized") is not True
         or esri_sequence_review_unit.get("gates", {}).get("new_real_attempt_authorized") is not True
-        or esri_sequence_recovery_unit.get("status") != "in_progress"
+        or esri_sequence_recovery_unit.get("status") != "complete"
+        or esri_sequence_recovery_unit.get("disposition") != "block"
         or esri_sequence_recovery_unit.get("human_gate") is not False
         or esri_sequence_recovery_unit.get("gates", {}).get("inherited_owner_authority")
         != "pass_exact_combined_approval"
-        or esri_sequence_recovery_unit.get("gates", {}).get("real_attempts_started") != 0
+        or esri_sequence_recovery_unit.get("gates", {}).get("real_attempts_started") != 1
+        or esri_sequence_recovery_unit.get("gates", {}).get("attempt_consumed") is not True
+        or esri_sequence_recovery_unit.get("gates", {}).get("stopped_source_id") != "M1-SRC-001"
+        or esri_sequence_recovery_unit.get("gates", {}).get("stopped_tool")
+        != "ApplyGeometricTerrainCorrection_gamma"
+        or esri_sequence_recovery_unit.get("gates", {}).get("later_sources_or_routes_started") is not False
+        or esri_sequence_recovery_unit.get("gates", {}).get("final_no_content_preflight")
+        != "pass_exact_one_attempt_released_and_consumed"
+        or esri_sequence_recovery_unit.get("gates", {}).get("terminal_reconciliation_sha256")
+        != sha256(esri_sequence_terminal_ref)
+        or esri_sequence_recovery_unit.get("gates", {}).get("outcome_reconciliation_sha256")
+        != sha256(esri_sequence_outcome_ref)
         or esri_sequence_recovery_unit.get("gates", {}).get("publication_started") is not True
         or esri_sequence_recovery_unit.get("gates", {}).get("public_ci") != "success"
         or esri_sequence_recovery_unit.get("gates", {}).get("implementation_publication_gate_sha256")
@@ -17888,7 +17951,7 @@ def main() -> None:
         or profile.get("control_surfaces", {}).get("proposed_amendments") != []
         or goal.get("proposed_amendments") != []
         or current_radar_esri_sequence_recovery_005_review_required(ROOT, {"promoted": 8}) is not False
-        or esri_sequence_stage != "execution"
+        or esri_sequence_stage != "terminal"
     ):
         fail("M2 radar Esri-sequence recovery-005 approved implementation boundary differs or overclaims")
 

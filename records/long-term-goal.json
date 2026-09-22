@@ -11,7 +11,7 @@
   "completion_rule": "Complete only when the reproducible ArcGIS evidence package, reviewed change evidence, exportable deliverables, validation, and final release boundary are all satisfied.",
   "last_completed_milestone": "contracts/milestone-001.json",
   "proposed_milestone": null,
-  "current_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION",
+  "current_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-REVIEW",
   "proposed_amendments": [],
   "active_amendments": [
     "records/source-gates/m2-dem-amendment-approval.json",
@@ -43,8 +43,8 @@
     "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json"
   ],
   "parallel_checkpoints": [
-    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-EXECUTION"
+    "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-REVIEW"
   ],
-  "next_action": "Run the single final no-content preflight. Only on its pass may the one fresh fixed-order recovery-005 attempt read exact custody and invoke the approved Esri-sequence route. Stop on the first failure and never retry.",
-  "parallel_next_action": "Run the single final no-content preflight. Only on its pass may the one fresh fixed-order recovery-005 attempt read exact custody and invoke the approved Esri-sequence route. Stop on the first failure and never retry."
+  "next_action": "Review the sanitized terminal recovery-005 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline admission, change analysis, attribution, derived-pixel publication, historical-root-cause claim, or scientific publication is released.",
+  "parallel_next_action": "Review the sanitized terminal recovery-005 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline admission, change analysis, attribution, derived-pixel publication, historical-root-cause claim, or scientific publication is released."
 }
