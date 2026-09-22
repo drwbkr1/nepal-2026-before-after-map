@@ -1,0 +1,208 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-22T19:40:19Z",
+  "status": "pass_six_current_metadata_candidates_observed_only_no_retry",
+  "disposition": "pass_diagnostic_only",
+  "attempt_id": "radar-gtc-input-compatibility-diagnostic-001-real-001",
+  "attempt_consumed": true,
+  "bindings": {
+    "approval_sha256": "70e0e378687dd986aabdfdbe4b3fe4d5c83ec8ab3e23d4fcd0914b8e59a10183",
+    "implementation_gate_sha256": "d8da21dada2ed485a6cb50838fa32cc62f51f6666b540239a92f93a82de86be3",
+    "final_preflight_sha256": "7e26db745fd76a19a39f815ecc10f7550ef14c15cb687f3befccf4c05467a2f4",
+    "external_receipts": {
+      "terminal-reservation.json": {
+        "size_bytes": 194,
+        "sha256": "9388e2d483bd1633404375b83efa2b04ef67380652174368ee91c71adb41253a"
+      },
+      "cleanup-reservation.json": {
+        "size_bytes": 194,
+        "sha256": "9388e2d483bd1633404375b83efa2b04ef67380652174368ee91c71adb41253a"
+      },
+      "started.json": {
+        "size_bytes": 282,
+        "sha256": "94cbb957f7b7dc48449975ccc14204a4465fdba615618609bc6682763cf0116f"
+      },
+      "terminal.json": {
+        "size_bytes": 5094,
+        "sha256": "803fa97402170c434ef11b35c7ca20dc21f27fcf6eaa1ca557140a2fb3a53150"
+      },
+      "cleanup.json": {
+        "size_bytes": 215,
+        "sha256": "b49d575b3e1540138edc77a3cfb9313164edfcfe7e87c9d5c45cf6895c4a9c39"
+      }
+    }
+  },
+  "runtime": {
+    "product_info": "ArcInfo",
+    "image_analyst_extension": "Available",
+    "spatial_extension": "Available",
+    "gtc_parameters": [
+      "in_radar_data",
+      "polarization_bands",
+      "in_dem_raster",
+      "geoid"
+    ]
+  },
+  "candidate_observations": [
+    {
+      "candidate_index": 0,
+      "candidate_ref": "s/1/gamma0_linear_slant.crf",
+      "filesystem": {
+        "type": "directory",
+        "size_bytes": null
+      },
+      "arcgis_exists": true,
+      "describe": {
+        "dataType": "RasterDataset",
+        "datasetType": "RasterDataset",
+        "format": null,
+        "pixelType": null,
+        "bandCount": 2,
+        "meanCellWidth": null,
+        "meanCellHeight": null,
+        "spatial_reference_factory_code": 4326,
+        "extent_width": 3.0322871110000023,
+        "extent_height": 2.079575966300002,
+        "is_multidimensional": null
+      }
+    },
+    {
+      "candidate_index": 1,
+      "candidate_ref": "s/1/gamma0_linear_despeckled.crf",
+      "filesystem": {
+        "type": "directory",
+        "size_bytes": null
+      },
+      "arcgis_exists": true,
+      "describe": {
+        "dataType": "RasterDataset",
+        "datasetType": "RasterDataset",
+        "format": null,
+        "pixelType": null,
+        "bandCount": 2,
+        "meanCellWidth": null,
+        "meanCellHeight": null,
+        "spatial_reference_factory_code": 4326,
+        "extent_width": 3.0322871110000023,
+        "extent_height": 2.079575966300002,
+        "is_multidimensional": null
+      }
+    },
+    {
+      "candidate_index": 2,
+      "candidate_ref": "s/1/scattering_area.crf",
+      "filesystem": {
+        "type": "directory",
+        "size_bytes": null
+      },
+      "arcgis_exists": true,
+      "describe": {
+        "dataType": "RasterDataset",
+        "datasetType": "RasterDataset",
+        "format": null,
+        "pixelType": "F32",
+        "bandCount": 1,
+        "meanCellWidth": 0.00011770387046813145,
+        "meanCellHeight": 0.00012428735155988537,
+        "spatial_reference_factory_code": 4326,
+        "extent_width": 3.0322871110000023,
+        "extent_height": 2.079575966300002,
+        "is_multidimensional": null
+      }
+    },
+    {
+      "candidate_index": 3,
+      "candidate_ref": "s/1/geometric_distortion.crf",
+      "filesystem": {
+        "type": "directory",
+        "size_bytes": null
+      },
+      "arcgis_exists": true,
+      "describe": {
+        "dataType": "RasterDataset",
+        "datasetType": "RasterDataset",
+        "format": null,
+        "pixelType": null,
+        "bandCount": 4,
+        "meanCellWidth": null,
+        "meanCellHeight": null,
+        "spatial_reference_factory_code": 4326,
+        "extent_width": 3.0322871110000023,
+        "extent_height": 2.079575966300002,
+        "is_multidimensional": null
+      }
+    },
+    {
+      "candidate_index": 4,
+      "candidate_ref": "s/1/geometric_distortion_mask_slant.crf",
+      "filesystem": {
+        "type": "directory",
+        "size_bytes": null
+      },
+      "arcgis_exists": true,
+      "describe": {
+        "dataType": "RasterDataset",
+        "datasetType": "RasterDataset",
+        "format": null,
+        "pixelType": "U8",
+        "bandCount": 1,
+        "meanCellWidth": 0.00011770387046813145,
+        "meanCellHeight": 0.00012428735155988537,
+        "spatial_reference_factory_code": 4326,
+        "extent_width": 3.0322871110000023,
+        "extent_height": 2.079575966300002,
+        "is_multidimensional": null
+      }
+    },
+    {
+      "candidate_index": 5,
+      "candidate_ref": "dem/ellipsoidal_dem_mosaic.tif",
+      "filesystem": {
+        "type": "file",
+        "size_bytes": 209331380
+      },
+      "arcgis_exists": true,
+      "describe": {
+        "dataType": "RasterDataset",
+        "datasetType": "RasterDataset",
+        "format": "TIFF",
+        "pixelType": "F32",
+        "bandCount": 1,
+        "meanCellWidth": 0.0002777777777777778,
+        "meanCellHeight": 0.00027777777777777827,
+        "spatial_reference_factory_code": 4326,
+        "extent_width": 2.0,
+        "extent_height": 2.0000000000000036,
+        "is_multidimensional": null
+      }
+    }
+  ],
+  "structural_comparisons": {
+    "slant_vs_despeckled_band_count_equal": true,
+    "slant_vs_despeckled_spatial_reference_equal": true,
+    "dem_single_band_observed": true,
+    "support_band_counts": [
+      1,
+      4,
+      1
+    ]
+  },
+  "limitations": {
+    "some_crf_describe_pixel_type_and_cell_size_values_unavailable": true,
+    "extent_dimensions_do_not_establish_spatial_overlap": true,
+    "arcgis_catalog_recognition_does_not_prove_gtc_processing_fitness": true,
+    "historical_failure_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "usable_baseline_established": false,
+    "change_evidence_established": false
+  },
+  "assertions": {
+    "exact_six_candidates_observed_in_fixed_order": true,
+    "one_diagnostic_process_consumed": true,
+    "later_diagnostic_or_processing_attempt_started": false,
+    "geoprocessing_or_raster_function_called": false,
+    "pixel_data_read": false,
+    "scientific_result_established": false
+  }
+}

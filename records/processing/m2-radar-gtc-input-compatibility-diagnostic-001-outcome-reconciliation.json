@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-GTC-INPUT-COMPATIBILITY-DIAGNOSTIC-001-OUTCOME-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-22T19:40:19Z",
+  "status": "pass_current_metadata_observation_no_processing_release",
+  "bindings": {
+    "terminal_reconciliation_ref": "records/processing/m2-radar-gtc-input-compatibility-diagnostic-001-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "150ccee98112d8a29b04e2da29807964c1006254542e1136341848f96a6f31c3"
+  },
+  "finding": "ArcGIS recognized all six exact preserved candidates. Slant and despeckled gamma each reported two bands and EPSG:4326; the DEM reported one band and EPSG:4326. ArcGIS Describe did not expose pixel type or cell size for both gamma CRFs. These observations do not explain ERROR 000425 or establish GTC processing fitness.",
+  "next_checkpoint": "M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-REVIEW",
+  "next_action": "Review the metadata observation and select a separately scoped GTC investigation or other mapped-evidence path. The recovery-005 processing attempt and this diagnostic are consumed.",
+  "assertions": {
+    "historical_root_cause_established": false,
+    "radar_recovery_readiness_established": false,
+    "new_radar_processing_attempt_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}
