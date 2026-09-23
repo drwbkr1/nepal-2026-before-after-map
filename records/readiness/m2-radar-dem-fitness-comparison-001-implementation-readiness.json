@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-IMPLEMENTATION-READINESS",
+  "checked_at_utc": "2026-09-23T16:48:48Z",
+  "status": "pass_local_implementation_gates_pending_public_ci",
+  "bindings": {
+    "approval_sha256": "6b7c5dcf6d94c2d9a144330ccefa8fa30de0eaa9e53811757d389e286179a9b0",
+    "runner_sha256": "ec8e4a0c69da091743baa633e608c94b5f8312d9ce7cb273cf889a3858aaedb1",
+    "validator_sha256": "429128c9c5db0b35398da448bebb170be0cdd2c278e5a43ba5864a0cb7db930a",
+    "test_sha256": "6c5749577032c4244493c3126b5760be6baaf91ca33eea4631deba8c4ee31487",
+    "runtime_validation_sha256": "69a2a415f6b8478e1c774b2a1149117696d20a9e6162b9dcfb61bf02f70e8fef",
+    "packet_publication_gate_sha256": "91c4e484decda3ce0170230da45a41fda827eee262d510c05282ad1ff51030b6"
+  },
+  "validation": {
+    "focused_portable_tests_passed": 7,
+    "full_local_tests_passed": 742,
+    "full_local_intentional_skips": 6,
+    "installed_arcgis_pro_version": "3.7.1",
+    "installed_disposable_multiband_four_block_validation": "pass",
+    "preliminary_disposable_validation_sha256": "f15d9fc2f7593cbc86f9472577af6b81fbd8336c5116c1b809230574150a79ed",
+    "preliminary_validation_is_not_execution_gate": true
+  },
+  "released_now": {
+    "implementation_publication": true,
+    "real_process": false,
+    "project_pixel_read": false,
+    "gtc": false
+  },
+  "next_action": "Publish exact implementation and pass public CI, then publish and pass the execution gate before one final no-content preflight."
+}

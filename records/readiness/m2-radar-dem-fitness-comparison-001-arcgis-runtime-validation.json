@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-ARCGIS-RUNTIME-VALIDATION",
+  "status": "pass_installed_disposable_native_grid_and_multiband_validation",
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "gtc_parameters": [
+      "in_radar_data",
+      "polarization_bands",
+      "in_dem_raster",
+      "geoid"
+    ],
+    "image_analyst": "Available"
+  },
+  "synthetic": {
+    "gamma": {
+      "native_wkid": 4326,
+      "band_count": 2,
+      "nodata_markers": [
+        -9999.0,
+        -9999.0
+      ],
+      "block_count": 1,
+      "aois": {
+        "AOI-OVERVIEW": {
+          "total_native_cell_centers": 16,
+          "valid_per_band": [
+            15,
+            15
+          ],
+          "nodata_or_nonfinite_per_band": [
+            1,
+            1
+          ],
+          "valid_all_bands": 15,
+          "valid_envelope_native": [
+            84.8,
+            27.8,
+            84.84,
+            27.84
+          ]
+        },
+        "AOI-SOURCE": {
+          "total_native_cell_centers": 0,
+          "valid_per_band": [
+            0,
+            0
+          ],
+          "nodata_or_nonfinite_per_band": [
+            0,
+            0
+          ],
+          "valid_all_bands": 0,
+          "valid_envelope_native": null
+        },
+        "AOI-UPPER-CORRIDOR": {
+          "total_native_cell_centers": 0,
+          "valid_per_band": [
+            0,
+            0
+          ],
+          "nodata_or_nonfinite_per_band": [
+            0,
+            0
+          ],
+          "valid_all_bands": 0,
+          "valid_envelope_native": null
+        }
+      }
+    },
+    "dem": {
+      "native_wkid": 4326,
+      "band_count": 1,
+      "nodata_markers": [
+        -9999.0
+      ],
+      "block_count": 1,
+      "aois": {
+        "AOI-OVERVIEW": {
+          "total_native_cell_centers": 16,
+          "valid_per_band": [
+            15
+          ],
+          "nodata_or_nonfinite_per_band": [
+            1
+          ],
+          "valid_all_bands": 15,
+          "valid_envelope_native": [
+            84.8,
+            27.8,
+            84.84,
+            27.84
+          ]
+        },
+        "AOI-SOURCE": {
+          "total_native_cell_centers": 0,
+          "valid_per_band": [
+            0
+          ],
+          "nodata_or_nonfinite_per_band": [
+            0
+          ],
+          "valid_all_bands": 0,
+          "valid_envelope_native": null
+        },
+        "AOI-UPPER-CORRIDOR": {
+          "total_native_cell_centers": 0,
+          "valid_per_band": [
+            0
+          ],
+          "nodata_or_nonfinite_per_band": [
+            0
+          ],
+          "valid_all_bands": 0,
+          "valid_envelope_native": null
+        }
+      }
+    }
+  },
+  "assertions": {
+    "project_data_content_read": false,
+    "external_custody_accessed": false,
+    "gtc_called": false,
+    "disposable_in_memory_rasters_only": true,
+    "disposable_file_output_created": false,
+    "image_analyst_checked_in": true,
+    "network_or_credentials_used": false,
+    "scientific_result_established": false
+  }
+}

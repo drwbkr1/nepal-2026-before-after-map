@@ -1509,6 +1509,12 @@ REQUIRED = [
     "reviews/m2-radar-dem-fitness-comparison-001/blank-response.json",
     "records/readiness/m2-radar-dem-fitness-comparison-001-review-readiness.json",
     "records/readiness/m2-radar-dem-fitness-comparison-001-packet-publication-gate.json",
+    "scripts/m2_radar_dem_fitness_comparison_001.py",
+    "scripts/validate_m2_radar_dem_fitness_comparison_001_arcgis.py",
+    "tests/test_m2_radar_dem_fitness_comparison_001.py",
+    "records/readiness/m2-radar-dem-fitness-comparison-001-arcgis-runtime-validation.json",
+    "records/readiness/m2-radar-dem-fitness-comparison-001-arcgis-runtime-validation-final.json",
+    "records/readiness/m2-radar-dem-fitness-comparison-001-implementation-readiness.json",
     "records/source-gates/m2-radar-dem-fitness-comparison-001-approval.json",
     "records/observations/m2-radar-dem-candidate-heads-001.json",
     "records/observations/m2-radar-dem-license-recheck-001.json",
@@ -18155,6 +18161,12 @@ def main() -> None:
     dem_fitness_readiness_ref = f"records/readiness/{dem_fitness_prefix}-review-readiness.json"
     dem_fitness_approval_ref = f"records/source-gates/{dem_fitness_prefix}-approval.json"
     dem_fitness_packet_gate_ref = f"records/readiness/{dem_fitness_prefix}-packet-publication-gate.json"
+    dem_fitness_runner_ref = "scripts/m2_radar_dem_fitness_comparison_001.py"
+    dem_fitness_validator_ref = "scripts/validate_m2_radar_dem_fitness_comparison_001_arcgis.py"
+    dem_fitness_test_ref = "tests/test_m2_radar_dem_fitness_comparison_001.py"
+    dem_fitness_runtime_ref = f"records/readiness/{dem_fitness_prefix}-arcgis-runtime-validation-final.json"
+    dem_fitness_preliminary_runtime_ref = f"records/readiness/{dem_fitness_prefix}-arcgis-runtime-validation.json"
+    dem_fitness_implementation_ref = f"records/readiness/{dem_fitness_prefix}-implementation-readiness.json"
     dem_fitness_proposal = json.loads((ROOT / dem_fitness_proposal_ref).read_text(encoding="utf-8"))
     dem_fitness_bundle = json.loads((ROOT / dem_fitness_bundle_ref).read_text(encoding="utf-8"))
     dem_fitness_contract = json.loads((ROOT / dem_fitness_contract_ref).read_text(encoding="utf-8"))
@@ -18162,6 +18174,8 @@ def main() -> None:
     dem_fitness_readiness = json.loads((ROOT / dem_fitness_readiness_ref).read_text(encoding="utf-8"))
     dem_fitness_approval = json.loads((ROOT / dem_fitness_approval_ref).read_text(encoding="utf-8"))
     dem_fitness_packet_gate = json.loads((ROOT / dem_fitness_packet_gate_ref).read_text(encoding="utf-8"))
+    dem_fitness_runtime = json.loads((ROOT / dem_fitness_runtime_ref).read_text(encoding="utf-8"))
+    dem_fitness_implementation = json.loads((ROOT / dem_fitness_implementation_ref).read_text(encoding="utf-8"))
     dem_fitness_proposal_sha = sha256(dem_fitness_proposal_ref)
     dem_fitness_bundle_sha = sha256(dem_fitness_bundle_ref)
     dem_fitness_scope = dem_fitness_proposal.get("proposed_single_authority_envelope", {})
@@ -18199,6 +18213,22 @@ def main() -> None:
         or dem_fitness_packet_gate.get("bindings", {}).get("public_ci_conclusion") != "success"
         or dem_fitness_packet_gate.get("assertions", {}).get("implementation_eligible_within_scope") is not True
         or dem_fitness_packet_gate.get("assertions", {}).get("new_real_process_started") is not False
+        or dem_fitness_runtime.get("status") != "pass_installed_disposable_native_grid_and_multiband_validation"
+        or dem_fitness_runtime.get("runtime", {}).get("version") != "3.7.1"
+        or dem_fitness_runtime.get("synthetic", {}).get("gamma", {}).get("block_count") != 4
+        or dem_fitness_runtime.get("synthetic", {}).get("gamma", {}).get("aois", {}).get("AOI-OVERVIEW", {}).get("valid_per_band") != [15, 15]
+        or dem_fitness_runtime.get("assertions", {}).get("project_data_content_read") is not False
+        or dem_fitness_runtime.get("assertions", {}).get("gtc_called") is not False
+        or dem_fitness_implementation.get("status") != "pass_local_implementation_gates_pending_public_ci"
+        or dem_fitness_implementation.get("bindings", {}).get("approval_sha256") != sha256(dem_fitness_approval_ref)
+        or dem_fitness_implementation.get("bindings", {}).get("runner_sha256") != sha256(dem_fitness_runner_ref)
+        or dem_fitness_implementation.get("bindings", {}).get("validator_sha256") != sha256(dem_fitness_validator_ref)
+        or dem_fitness_implementation.get("bindings", {}).get("test_sha256") != sha256(dem_fitness_test_ref)
+        or dem_fitness_implementation.get("bindings", {}).get("runtime_validation_sha256") != sha256(dem_fitness_runtime_ref)
+        or dem_fitness_implementation.get("bindings", {}).get("packet_publication_gate_sha256") != sha256(dem_fitness_packet_gate_ref)
+        or dem_fitness_implementation.get("validation", {}).get("preliminary_disposable_validation_sha256") != sha256(dem_fitness_preliminary_runtime_ref)
+        or dem_fitness_implementation.get("validation", {}).get("full_local_tests_passed") != 742
+        or dem_fitness_implementation.get("released_now", {}).get("real_process") is not False
     ):
         fail("M2 radar DEM fitness comparison packet or owner authority differs")
 
