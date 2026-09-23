@@ -1537,6 +1537,7 @@ REQUIRED = [
     "reviews/m2-radar-event-area-pair-001/blank-response.json",
     "records/readiness/m2-radar-event-area-pair-001-review-readiness.json",
     "records/readiness/m2-radar-event-area-pair-001-packet-publication-gate.json",
+    "records/readiness/m2-radar-event-area-pair-001-implementation-publication-gate.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18398,6 +18399,19 @@ def main() -> None:
         or event_pair_mosaic_runtime.get("claim_boundary", {}).get("radar_processing_released") is not False
     ):
         fail("M2 radar event-area pair disposable mosaic evidence differs")
+    event_pair_implementation_gate = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-implementation-publication-gate.json").read_text(encoding="utf-8"))
+    implementation_bindings = event_pair_implementation_gate.get("bindings", {})
+    if (
+        event_pair_implementation_gate.get("status") != "pass_public_ci_dem_implementation_only"
+        or event_pair_implementation_gate.get("public_ci_conclusion") != "success"
+        or implementation_bindings.get("intake_code_sha256") != sha256("scripts/m2_radar_event_pair_dem_intake_001.py")
+        or implementation_bindings.get("conversion_code_sha256") != sha256("scripts/m2_radar_event_pair_dem_conversion_001.py")
+        or implementation_bindings.get("mosaic_code_sha256") != sha256("scripts/m2_radar_event_pair_dem_mosaic_001.py")
+        or implementation_bindings.get("intake_runtime_validation_sha256") != sha256("records/readiness/m2-radar-event-area-pair-001-dem-intake-arcgis-runtime-validation-final.json")
+        or implementation_bindings.get("mosaic_runtime_validation_sha256") != sha256("records/readiness/m2-radar-event-area-pair-001-dem-mosaic-arcgis-runtime-validation.json")
+        or event_pair_implementation_gate.get("assertions", {}).get("radar_processing_released") is not False
+    ):
+        fail("M2 radar event-area pair DEM implementation public gate differs")
 
     violations = []
     for relative in tracked_files():

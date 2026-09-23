@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-DEM-IMPLEMENTATION-PUBLICATION-GATE",
+  "status": "pass_public_ci_dem_implementation_only",
+  "scope": "seven_tile_intake_offline_conversion_and_eleven_tile_mosaic_code_only",
+  "bindings": {
+    "approved_proposal_sha256": "ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2",
+    "approved_bundle_sha256": "ad6f0f5e75c768721ebbc787e6550dcb28e61fba22c86271beed982d220a5423",
+    "intake_code_sha256": "054f2205ca6c278581bbcde912be3d585771e20b7948cede664f16695ad364ac",
+    "conversion_code_sha256": "c2d0905173ea81967db0825eed3ee816605697dbc8fd4775629bfee9b5bcd9d4",
+    "mosaic_code_sha256": "f8d6a6540de1619c83b41fd1b19e69a3bbb01cf6a8e7374ba2ea27a9e29abb90",
+    "intake_runtime_validation_sha256": "ff18fa0450ef20203c6377f418663f5237b5fbef718e95c0d61dc5e60ca1abd0",
+    "mosaic_runtime_validation_sha256": "229dc478d81cea6278270a74709abb9966c3d2c41ecf1d9e42ad5b95d7a34a8c",
+    "implementation_commit_sha": "12dd11cb3767f6db1fef3c1e59493973260f7072"
+  },
+  "public_ci_run_id": 35924666367,
+  "public_ci_job_id": 107396762390,
+  "public_ci_conclusion": "success",
+  "assertions": {
+    "single_approved_authority_envelope_inherited": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "execution_gate_publication_still_required": true,
+    "final_no_payload_preflight_still_required": true,
+    "new_dem_payload_requested": false,
+    "conversion_or_mosaic_started": false,
+    "radar_processing_released": false,
+    "baseline_or_change_analysis_released": false
+  }
+}
