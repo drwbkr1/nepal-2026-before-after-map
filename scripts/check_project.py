@@ -1517,6 +1517,9 @@ REQUIRED = [
     "records/readiness/m2-radar-dem-fitness-comparison-001-implementation-readiness.json",
     "records/readiness/m2-radar-dem-fitness-comparison-001-implementation-publication-gate.json",
     "records/readiness/m2-radar-dem-fitness-comparison-001-execution-publication-gate.json",
+    "records/readiness/m2-radar-dem-fitness-comparison-001-final-preflight.json",
+    "records/processing/m2-radar-dem-fitness-comparison-001-terminal-reconciliation.json",
+    "scripts/reconcile_m2_radar_dem_fitness_comparison_001.py",
     "records/source-gates/m2-radar-dem-fitness-comparison-001-approval.json",
     "records/observations/m2-radar-dem-candidate-heads-001.json",
     "records/observations/m2-radar-dem-license-recheck-001.json",
@@ -18171,6 +18174,8 @@ def main() -> None:
     dem_fitness_implementation_ref = f"records/readiness/{dem_fitness_prefix}-implementation-readiness.json"
     dem_fitness_implementation_gate_ref = f"records/readiness/{dem_fitness_prefix}-implementation-publication-gate.json"
     dem_fitness_execution_gate_ref = f"records/readiness/{dem_fitness_prefix}-execution-publication-gate.json"
+    dem_fitness_preflight_ref = f"records/readiness/{dem_fitness_prefix}-final-preflight.json"
+    dem_fitness_terminal_ref = f"records/processing/{dem_fitness_prefix}-terminal-reconciliation.json"
     dem_fitness_proposal = json.loads((ROOT / dem_fitness_proposal_ref).read_text(encoding="utf-8"))
     dem_fitness_bundle = json.loads((ROOT / dem_fitness_bundle_ref).read_text(encoding="utf-8"))
     dem_fitness_contract = json.loads((ROOT / dem_fitness_contract_ref).read_text(encoding="utf-8"))
@@ -18182,6 +18187,8 @@ def main() -> None:
     dem_fitness_implementation = json.loads((ROOT / dem_fitness_implementation_ref).read_text(encoding="utf-8"))
     dem_fitness_implementation_gate = json.loads((ROOT / dem_fitness_implementation_gate_ref).read_text(encoding="utf-8"))
     dem_fitness_execution_gate = json.loads((ROOT / dem_fitness_execution_gate_ref).read_text(encoding="utf-8"))
+    dem_fitness_preflight = json.loads((ROOT / dem_fitness_preflight_ref).read_text(encoding="utf-8"))
+    dem_fitness_terminal = json.loads((ROOT / dem_fitness_terminal_ref).read_text(encoding="utf-8"))
     dem_fitness_proposal_sha = sha256(dem_fitness_proposal_ref)
     dem_fitness_bundle_sha = sha256(dem_fitness_bundle_ref)
     dem_fitness_scope = dem_fitness_proposal.get("proposed_single_authority_envelope", {})
@@ -18250,6 +18257,28 @@ def main() -> None:
         or dem_fitness_execution_gate.get("public_ci_conclusion") != "success"
         or dem_fitness_execution_gate.get("implementation_gate_sha256") != sha256(dem_fitness_implementation_gate_ref)
         or dem_fitness_execution_gate.get("assertions", {}).get("real_attempt_started") is not False
+        or dem_fitness_preflight.get("status") != "pass_final_no_content_preflight_one_attempt_ready"
+        or dem_fitness_preflight.get("bindings", {}).get("execution_gate_sha256") != sha256(dem_fitness_execution_gate_ref)
+        or dem_fitness_preflight.get("assertions", {}).get("project_pixel_read") is not False
+        or dem_fitness_preflight.get("assertions", {}).get("gtc_called") is not False
+        or dem_fitness_terminal.get("status") != "pass_terminal_receipts_reconciled_diagnostic_only"
+        or dem_fitness_terminal.get("disposition") != "pass_diagnostic_only_no_scientific_admission"
+        or dem_fitness_terminal.get("attempt_consumed") is not True
+        or dem_fitness_terminal.get("bindings", {}).get("final_preflight_sha256") != sha256(dem_fitness_preflight_ref)
+        or dem_fitness_terminal.get("observation", {}).get("gamma_overview_native_cell_centers") != 21735203
+        or dem_fitness_terminal.get("observation", {}).get("gamma_overview_valid_both_bands") != 1579825
+        or dem_fitness_terminal.get("observation", {}).get("gamma_source_aoi_status") != "not_applicable_no_native_grid_intersection"
+        or dem_fitness_terminal.get("observation", {}).get("gamma_upper_corridor_aoi_status") != "not_applicable_no_native_grid_intersection"
+        or dem_fitness_terminal.get("observation", {}).get("dem_overview_valid_cells") != 8616691
+        or dem_fitness_terminal.get("observation", {}).get("one_explicit_save_completed") is not True
+        or dem_fitness_terminal.get("observation", {}).get("quarantined_output_file_count") != 101
+        or dem_fitness_terminal.get("observation", {}).get("quarantined_output_total_file_bytes") != 2653220232
+        or dem_fitness_terminal.get("observation", {}).get("quarantined_output_inventory_sha256") != "47bb4ebae874174bad924f67aabe7ae44d899cdf302fe9be08ee48867284fac7"
+        or dem_fitness_terminal.get("observation", {}).get("preserved_gamma_file_writes_after_attempt_start") != 0
+        or dem_fitness_terminal.get("observation", {}).get("preserved_dem_file_write_after_attempt_start") is not False
+        or dem_fitness_terminal.get("limits", {}).get("derived_pixels_published") is not False
+        or dem_fitness_terminal.get("limits", {}).get("no_dem_vs_dem_historical_error_cause_isolated") is not False
+        or dem_fitness_terminal.get("limits", {}).get("further_radar_processing_authorized_by_this_result") is not False
     ):
         fail("M2 radar DEM fitness comparison packet or owner authority differs")
 

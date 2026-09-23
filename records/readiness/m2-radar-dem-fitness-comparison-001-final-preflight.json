@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-FINAL-PREFLIGHT",
+  "checked_at_utc": "2026-09-23T16:54:23Z",
+  "status": "pass_final_no_content_preflight_one_attempt_ready",
+  "attempt_id": "radar-dem-fitness-comparison-001-real-001",
+  "bindings": {
+    "approval_sha256": "6b7c5dcf6d94c2d9a144330ccefa8fa30de0eaa9e53811757d389e286179a9b0",
+    "implementation_gate_sha256": "6836651866edde86be8b309a4ade0f2c63b4ece53892b417bd00ba8bff30ffe8",
+    "execution_gate_sha256": "d4aaadf9abf9dd924cbe7accd8356ca947e173cce03cbde09769a5e17b4f5b62",
+    "public_head_sha": "f0ade80a6bd39ebb2ba1992c188ad529a7cff975"
+  },
+  "checks": {
+    "gamma_present": true,
+    "dem_present": true,
+    "attempt_root_absent": true,
+    "free_bytes": 462847295488,
+    "minimum_free_bytes": 64424509440,
+    "maximum_path_characters": 94
+  },
+  "runtime": {
+    "product": "ArcGISPro",
+    "version": "3.7.1",
+    "gtc_parameters": [
+      "in_radar_data",
+      "polarization_bands",
+      "in_dem_raster",
+      "geoid"
+    ],
+    "image_analyst": "Available"
+  },
+  "assertions": {
+    "project_pixel_read": false,
+    "arcpy_raster_constructed": false,
+    "gtc_called": false,
+    "attempt_root_created": false,
+    "network_or_credentials_used": false
+  }
+}

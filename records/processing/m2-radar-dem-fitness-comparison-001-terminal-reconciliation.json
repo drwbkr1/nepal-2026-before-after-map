@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-23T17:00:30Z",
+  "status": "pass_terminal_receipts_reconciled_diagnostic_only",
+  "disposition": "pass_diagnostic_only_no_scientific_admission",
+  "attempt_id": "radar-dem-fitness-comparison-001-real-001",
+  "attempt_consumed": true,
+  "bindings": {
+    "proposal_sha256": "a918f784e4722dfa25ddf8c78b0dc98abab86bd4c2023e439293d4004baebf06",
+    "review_bundle_sha256": "f85cfa93c89deb4b50670ede59406bc8ff07b272cffcc2803a15fa5fb870a654",
+    "approval_sha256": "6b7c5dcf6d94c2d9a144330ccefa8fa30de0eaa9e53811757d389e286179a9b0",
+    "final_preflight_sha256": "d8a2e5e0d7988d7608d0662472a1b8a3b1b4180f64275234e3e7da0d3e217211",
+    "external_receipts": {
+      "cleanup-reservation.json": {
+        "size_bytes": 276,
+        "sha256": "b11e93db02e0752ebdade6e43a18c5c76c90bbd560050a2c74b8126bf4f8cfb2"
+      },
+      "cleanup.json": {
+        "size_bytes": 191,
+        "sha256": "84a4b8e70f03aecbf4fe3316168a775920d1b1420cc7988dde8d16e73c5ebc80"
+      },
+      "coverage-audit.json": {
+        "size_bytes": 3046,
+        "sha256": "96af655e847d67b3840e749df928d0e45c12b2e2c944078a3fd758c807b9b56b"
+      },
+      "stage-000.json": {
+        "size_bytes": 134,
+        "sha256": "747026aacbfacd3c54bc8398d0fa25365c053d014b03701d74f43c64849dbbaf"
+      },
+      "stage-001.json": {
+        "size_bytes": 136,
+        "sha256": "f0f5657bd0bd2d0bdf41b6e38175f058363afa64e9d1894738805839dc063b2c"
+      },
+      "stage-002.json": {
+        "size_bytes": 140,
+        "sha256": "335d4b09660e5a5ad7b2ca0fb05b734d118cce479a912d278137897d3eb72881"
+      },
+      "stage-003.json": {
+        "size_bytes": 147,
+        "sha256": "b91733d7bf5cf996725287aa8151d2bb29c4e85eafb0574973e670d90209e516"
+      },
+      "stage-004.json": {
+        "size_bytes": 144,
+        "sha256": "545608b9649bd61c3fb194ba18e1e414761c40c492a6697fa00eb8a2c0b1594b"
+      },
+      "stage-005.json": {
+        "size_bytes": 146,
+        "sha256": "783b1834678a0eb37f17961f5e03e71e734b0d73657390ffc7705059f52d6c63"
+      },
+      "stage-006.json": {
+        "size_bytes": 149,
+        "sha256": "72018e62fb955b31396b431c977c0a637b2886d01be54571ae3bc0e38dd51e66"
+      },
+      "stage-007.json": {
+        "size_bytes": 127,
+        "sha256": "a902d0a56ff83e965084da22a6b7a6bfac41bead590b019b7034748a4bbe9641"
+      },
+      "stage-008.json": {
+        "size_bytes": 141,
+        "sha256": "1c7b5929e1bed39beecfd3897751c674ed6fb61c733ea9b84040d0fb8c214377"
+      },
+      "stage-009.json": {
+        "size_bytes": 143,
+        "sha256": "c7e77d1512d0261637b05d8452b53071066a71532d890bf7eb2c0ad4891ccc28"
+      },
+      "terminal-reservation.json": {
+        "size_bytes": 276,
+        "sha256": "b11e93db02e0752ebdade6e43a18c5c76c90bbd560050a2c74b8126bf4f8cfb2"
+      },
+      "terminal.json": {
+        "size_bytes": 895,
+        "sha256": "3f7534ea007bd06ce654dd523d64531bdef52e91ed23d195341bc5429a7add66"
+      }
+    }
+  },
+  "observation": {
+    "gamma_overview_native_cell_centers": 21735203,
+    "gamma_overview_valid_both_bands": 1579825,
+    "gamma_source_aoi_status": "not_applicable_no_native_grid_intersection",
+    "gamma_upper_corridor_aoi_status": "not_applicable_no_native_grid_intersection",
+    "dem_overview_native_cell_centers": 8616691,
+    "dem_overview_valid_cells": 8616691,
+    "gtc_called_with_exact_existing_dem_and_geoid_none": true,
+    "gtc_returned_raster": true,
+    "one_explicit_save_completed": true,
+    "quarantined_output_file_count": 101,
+    "quarantined_output_total_file_bytes": 2653220232,
+    "quarantined_output_inventory_sha256": "47bb4ebae874174bad924f67aabe7ae44d899cdf302fe9be08ee48867284fac7",
+    "preserved_gamma_file_count": 86,
+    "preserved_gamma_file_writes_after_attempt_start": 0,
+    "preserved_dem_file_write_after_attempt_start": false,
+    "cleanup_status": "extension_checked_in_or_not_checked_out"
+  },
+  "limits": {
+    "positive_valid_envelope_intersection_is_only_a_diagnostic_floor": true,
+    "dem_sufficiency_for_full_six_source_radar_route_established": false,
+    "no_dem_vs_dem_historical_error_cause_isolated": false,
+    "land_scene_scientific_fitness_established": false,
+    "usable_baseline_or_change_evidence_established": false,
+    "derived_pixels_published": false,
+    "automatic_retry_performed": false,
+    "further_radar_processing_authorized_by_this_result": false
+  },
+  "method": "Receipt SHA-256 and output-byte inventory hashing only; no output raster pixel decoding, map use, or pixel publication."
+}
