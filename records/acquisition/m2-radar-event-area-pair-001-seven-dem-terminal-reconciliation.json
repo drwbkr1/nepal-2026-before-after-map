@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-SEVEN-DEM-TERMINAL-RECONCILIATION",
+  "checked_at_utc": "2026-09-23T22:12:31Z",
+  "status": "pass_seven_exact_tiles_verified_custody_only",
+  "fixed_order": [
+    "Copernicus_DSM_COG_10_N27_00_E086_00_DEM",
+    "Copernicus_DSM_COG_10_N28_00_E083_00_DEM",
+    "Copernicus_DSM_COG_10_N28_00_E086_00_DEM",
+    "Copernicus_DSM_COG_10_N29_00_E083_00_DEM",
+    "Copernicus_DSM_COG_10_N29_00_E084_00_DEM",
+    "Copernicus_DSM_COG_10_N29_00_E085_00_DEM",
+    "Copernicus_DSM_COG_10_N29_00_E086_00_DEM"
+  ],
+  "results": [
+    {
+      "item_id": "Copernicus_DSM_COG_10_N27_00_E086_00_DEM",
+      "attempt_id": "m2-radar-event-area-pair-001-01-attempt-001",
+      "status": "pass_verified_and_promoted",
+      "size_bytes": 43039634,
+      "sha256": "4dfc87a0dec44a8a037164ddade45dd24bb53187176b5a14175c265bd6d20e76",
+      "valid_pixels": 12960000,
+      "terminal_receipt_sha256": "3f2b10ec0b715840f93623708d96bbffdd189839d018525832986cd6c136c40b",
+      "cleanup_receipt_sha256": "74a09c4978ef4cd8fc1b1cb1c0dfbe6f8ad163c752c28ac3758c60fbdd9fb955"
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N28_00_E083_00_DEM",
+      "attempt_id": "m2-radar-event-area-pair-001-02-attempt-001",
+      "status": "pass_verified_and_promoted",
+      "size_bytes": 42265817,
+      "sha256": "964c1708a96bd8437de439b5eaf6e659eda85f6b70a3563de5fbd02d1fdf9bbe",
+      "valid_pixels": 12960000,
+      "terminal_receipt_sha256": "682e75e75da2399309951f85f6697415a21d0dfc56852cc64782833882d503e2",
+      "cleanup_receipt_sha256": "bf4d45060fd7bd99f3fb2a81f3f9438ab376dfdebbd993fc8c1d4b8d66e72ca2"
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N28_00_E086_00_DEM",
+      "attempt_id": "m2-radar-event-area-pair-001-03-attempt-001",
+      "status": "pass_verified_and_promoted",
+      "size_bytes": 38212170,
+      "sha256": "c13a224161a9fb9de14ea259a9f5dfa3c9d39f975c78c53b87e497c04b3c4b9c",
+      "valid_pixels": 12960000,
+      "terminal_receipt_sha256": "7186e0ada3cdd9111fe449411b89c30ad4e4d39be675144fdec628610a8376ec",
+      "cleanup_receipt_sha256": "0f519f8f0e8e56990f07e885b60fbc5b17ff70cae032e94bb6c2e7426c8ccf7e"
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N29_00_E083_00_DEM",
+      "attempt_id": "m2-radar-event-area-pair-001-04-attempt-001",
+      "status": "pass_verified_and_promoted",
+      "size_bytes": 37587811,
+      "sha256": "adc17f551e1fd8d00bab2230af23344b5ca2ca4772b739e7b36d59581cb952c8",
+      "valid_pixels": 12960000,
+      "terminal_receipt_sha256": "25b6522ae8e39dab26b91f1b7d188d199ecc8b0dbf8e25635b006b1dca98ba29",
+      "cleanup_receipt_sha256": "c0e51690be96e09e998a62a7bf5600b61d48613dee008452e1d526204d23f7cc"
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N29_00_E084_00_DEM",
+      "attempt_id": "m2-radar-event-area-pair-001-05-attempt-001",
+      "status": "pass_verified_and_promoted",
+      "size_bytes": 37062134,
+      "sha256": "ee7616d594585235d2d388d77bb8f7113e19676825aa529b03f492eba2530d73",
+      "valid_pixels": 12960000,
+      "terminal_receipt_sha256": "d356275d5304cc358b9312f4538824fd2b51d45922135abd63012716562280b3",
+      "cleanup_receipt_sha256": "16d8e98fddffd88d0c209e0af88a1802907daaa7571b727625bfa4ae910f045d"
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N29_00_E085_00_DEM",
+      "attempt_id": "m2-radar-event-area-pair-001-06-attempt-001",
+      "status": "pass_verified_and_promoted",
+      "size_bytes": 36990418,
+      "sha256": "8fe8cf7b253bea4981e0b4e4e417a6e7676d720fec7c8a03c341c30dc2624a2a",
+      "valid_pixels": 12960000,
+      "terminal_receipt_sha256": "850e4d9827c34b709a63cf90e5a6921be09bbefa627104014f6fdd5c619760b5",
+      "cleanup_receipt_sha256": "602b9a946f56697006c666c085bd6cd08673602d564aef023f7c79af169983b5"
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N29_00_E086_00_DEM",
+      "attempt_id": "m2-radar-event-area-pair-001-07-attempt-001",
+      "status": "pass_verified_and_promoted",
+      "size_bytes": 37897719,
+      "sha256": "d829ee6bef476a5d62e7369ae74983bc114a550709edc29a14a66fb6bf470267",
+      "valid_pixels": 12960000,
+      "terminal_receipt_sha256": "0d365b312142c1ef0ca42104a0e107e8200b6c025f747de73f390ac7b9a14dc5",
+      "cleanup_receipt_sha256": "d5bf5bb7f79f46b19f8791ad9897e4a3d7b22236db4fa9be573f4f46917fd933"
+    }
+  ],
+  "total_bytes": 273055703,
+  "prior_four_read_only_identity": [
+    {
+      "source_id": "M2-DEM-001",
+      "raw_sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a",
+      "ellipsoidal_sha256": "6e1d85f9b3f2f189b3db4b5bc5b87cf26b7f58a0a08081a9001f951a194c76ec"
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "raw_sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194",
+      "ellipsoidal_sha256": "85e060693b913d6715bd1b03fdf3f0fb743e59ec5334cbff37722d65f5dd4fce"
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "raw_sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc",
+      "ellipsoidal_sha256": "f4ccae4518c7557421e8f4beff8357b1cf99434ffe338492f354ac99de1216f9"
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "raw_sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7",
+      "ellipsoidal_sha256": "8f001ecd6507262a9871dab06e391805315868b33383f14b76851627d7601f81"
+    }
+  ],
+  "assertions": {
+    "initial_requests": 7,
+    "transport_recovery_requests": 0,
+    "all_staging_paths_absent": true,
+    "all_terminal_receipts_persisted": true,
+    "new_conversion_attempts_started": 0,
+    "mosaic_attempts_started": 0,
+    "radar_processing_started": false,
+    "baseline_or_change_analysis_released": false
+  }
+}

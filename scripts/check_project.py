@@ -1543,6 +1543,8 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-001-final-preflight.json",
     "scripts/reconcile_m2_radar_event_pair_dem_intake_001.py",
     "tests/test_m2_radar_event_pair_dem_reconciliation_001.py",
+    "records/acquisition/m2-radar-event-area-pair-001-seven-dem-terminal-reconciliation.json",
+    "records/readiness/m2-radar-event-area-pair-001-dem-conversion-preflight.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18444,6 +18446,21 @@ def main() -> None:
         or event_pair_preflight.get("released_now", {}).get("radar_processing") is not False
     ):
         fail("M2 radar event-area pair final no-payload preflight differs")
+    event_pair_intake_result = json.loads((ROOT / "records/acquisition/m2-radar-event-area-pair-001-seven-dem-terminal-reconciliation.json").read_text(encoding="utf-8"))
+    event_pair_conversion_preflight = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-dem-conversion-preflight.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_intake_result.get("status") != "pass_seven_exact_tiles_verified_custody_only"
+        or event_pair_intake_result.get("fixed_order") != event_pair_proposal.get("seven_exact_candidate_item_ids_in_fixed_order")
+        or len(event_pair_intake_result.get("results", [])) != 7
+        or event_pair_intake_result.get("total_bytes") != 273055703
+        or any(item.get("status") != "pass_verified_and_promoted" or item.get("valid_pixels") != 12960000 for item in event_pair_intake_result.get("results", []))
+        or event_pair_intake_result.get("assertions", {}).get("transport_recovery_requests") != 0
+        or event_pair_conversion_preflight.get("status") != "pass_no_conversion"
+        or event_pair_conversion_preflight.get("bindings", {}).get("seven_tile_reconciliation_sha256") != sha256("records/acquisition/m2-radar-event-area-pair-001-seven-dem-terminal-reconciliation.json")
+        or event_pair_conversion_preflight.get("bindings", {}).get("conversion_code_sha256") != sha256("scripts/m2_radar_event_pair_dem_conversion_001.py")
+        or event_pair_conversion_preflight.get("released_now", {}).get("radar_processing") is not False
+    ):
+        fail("M2 radar event-area pair DEM intake or conversion preflight differs")
 
     violations = []
     for relative in tracked_files():

@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-DEM-CONVERSION-PREFLIGHT",
+  "checked_at_utc": "2026-09-23T22:13:25Z",
+  "status": "pass_no_conversion",
+  "bindings": {
+    "seven_tile_reconciliation_sha256": "ee225e608a8d6a3329a2c45af03a2258a776059006bcf6afd3f036fd64f19a08",
+    "conversion_code_sha256": "c2d0905173ea81967db0825eed3ee816605697dbc8fd4775629bfee9b5bcd9d4",
+    "execution_gate_sha256": "448d61190a7f3c682ff26f62cb2821553d29537f28d2d303039434c06df63553",
+    "exact_proj25_grid_sha256": "4191d471eefebf24091b56dbc604353cb3b8cf8cc70e448bb9ae56a272bef17a"
+  },
+  "checks": {
+    "new_promoted_raw_dem_tiles": 7,
+    "new_raw_tile_hashes_match_receipts": true,
+    "prior_four_raw_tiles_and_derivatives_unchanged": true,
+    "existing_vertical_operation_and_sign_preflight_pass": true,
+    "source_crs": "EPSG:9518",
+    "target_crs": "EPSG:4979",
+    "height_relation": "h = H + N",
+    "proj_network_enabled": false,
+    "new_conversion_output_paths_absent": true,
+    "conversion_batch_receipt_absent": true,
+    "arcgis_pro_version": "3.7.1",
+    "gdal_version_number": "3120210",
+    "conversion_attempts_started": 0
+  },
+  "released_now": {
+    "one_fixed_order_conversion_batch_over_exact_seven_tiles": true,
+    "automatic_retry": false,
+    "source_dem_overwrite": false,
+    "mosaic_only_after_conversion_pass": true,
+    "radar_processing": false,
+    "baseline_or_change_analysis": false
+  }
+}
