@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-DEM-INTAKE-ARCGIS-RUNTIME-VALIDATION",
+  "checked_at_utc": "2026-09-23T21:20:13Z",
+  "status": "pass_disposable_runtime_only",
+  "bindings": {
+    "intake_code_ref": "scripts/m2_radar_event_pair_dem_intake_001.py",
+    "intake_code_sha256": "de7401edda2e99f3f3647c22771a8067b468ea5d063e07060ff5b066bfd34108",
+    "portable_test_ref": "tests/test_m2_radar_event_pair_dem_intake_001.py",
+    "portable_test_sha256": "d6693c3239ef53d302b27298995bfeb4a9c2a7c6284f7b99306d8464d63b1551",
+    "runtime_validator_ref": "scripts/validate_m2_radar_event_pair_dem_intake_001_arcgis.py",
+    "runtime_validator_sha256": "90c10b3587d4347fc85d4eefb53e52b76025dfd8cd5919d682e46eb1b9c39040"
+  },
+  "runtime": {
+    "arcgis_pro_version": "3.7.1",
+    "synthetic_raster_dimensions": [3600, 3600],
+    "synthetic_valid_pixel_count": 12960000,
+    "synthetic_bounds_wgs84": [86, 27, 87, 28],
+    "deliberately_shifted_bounds_rejected": true,
+    "project_data_read": false,
+    "external_custody_read_or_mutated": false
+  },
+  "prepublication_disposable_failures_preserved": [
+    "AutoIdentifyEPSG raised Unsupported SRS on an ArcGIS/GDAL-written WGS84 test TIFF",
+    "The TIFF lacked a root authority code after longitude-latitude serialization",
+    "Literal GEOGCS and GEOGCRS authority lookups still lacked EPSG:4326",
+    "IsSame rejected longitude-latitude versus latitude-longitude WKT axis order"
+  ],
+  "claim_boundary": {
+    "real_dem_payload_verified": false,
+    "seven_tile_acquisition_released": false,
+    "conversion_or_radar_processing_released": false,
+    "scientific_result_established": false
+  }
+}

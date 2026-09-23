@@ -1544,6 +1544,10 @@ REQUIRED = [
     "scripts/assess_m2_radar_event_pair_catalog_001.py",
     "scripts/prepare_m2_radar_event_pair_dem_source_assessment_001.py",
     "scripts/prepare_m2_radar_event_area_pair_001_review.py",
+    "scripts/m2_radar_event_pair_dem_intake_001.py",
+    "tests/test_m2_radar_event_pair_dem_intake_001.py",
+    "scripts/validate_m2_radar_event_pair_dem_intake_001_arcgis.py",
+    "records/readiness/m2-radar-event-area-pair-001-dem-intake-arcgis-runtime-validation.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -18354,6 +18358,16 @@ def main() -> None:
         or event_pair_packet_gate.get("assertions", {}).get("baseline_or_change_analysis_released") is not False
     ):
         fail("M2 radar event-area pair public packet gate differs")
+    event_pair_runtime = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-dem-intake-arcgis-runtime-validation.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_runtime.get("status") != "pass_disposable_runtime_only"
+        or event_pair_runtime.get("bindings", {}).get("intake_code_sha256") != sha256("scripts/m2_radar_event_pair_dem_intake_001.py")
+        or event_pair_runtime.get("bindings", {}).get("portable_test_sha256") != sha256("tests/test_m2_radar_event_pair_dem_intake_001.py")
+        or event_pair_runtime.get("bindings", {}).get("runtime_validator_sha256") != sha256("scripts/validate_m2_radar_event_pair_dem_intake_001_arcgis.py")
+        or event_pair_runtime.get("claim_boundary", {}).get("real_dem_payload_verified") is not False
+        or event_pair_runtime.get("claim_boundary", {}).get("seven_tile_acquisition_released") is not False
+    ):
+        fail("M2 radar event-area pair disposable runtime evidence differs")
 
     violations = []
     for relative in tracked_files():
