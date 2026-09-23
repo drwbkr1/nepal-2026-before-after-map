@@ -1539,6 +1539,8 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-001-packet-publication-gate.json",
     "records/readiness/m2-radar-event-area-pair-001-implementation-publication-gate.json",
     "records/readiness/m2-radar-event-area-pair-001-execution-publication-gate.json",
+    "records/readiness/m2-radar-event-area-pair-001-final-preflight-attempt-001-failure.json",
+    "records/readiness/m2-radar-event-area-pair-001-final-preflight.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18426,6 +18428,20 @@ def main() -> None:
         or event_pair_execution_gate.get("assertions", {}).get("automatic_retry") is not False
     ):
         fail("M2 radar event-area pair DEM execution public gate differs")
+    event_pair_preflight = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-final-preflight.json").read_text(encoding="utf-8"))
+    event_pair_preflight_failure = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-final-preflight-attempt-001-failure.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_preflight_failure.get("failure_code") != "head_unavailable"
+        or event_pair_preflight_failure.get("observed", {}).get("dem_payload_get_requests") != 0
+        or event_pair_preflight.get("status") != "pass_no_payload"
+        or event_pair_preflight.get("bindings", {}).get("execution_gate_sha256") != sha256("records/readiness/m2-radar-event-area-pair-001-execution-publication-gate.json")
+        or event_pair_preflight.get("bindings", {}).get("intake_code_sha256") != sha256("scripts/m2_radar_event_pair_dem_intake_001.py")
+        or event_pair_preflight.get("checks", {}).get("official_stac_items_checked") != 7
+        or event_pair_preflight.get("checks", {}).get("anonymous_tile_heads_checked") != 7
+        or event_pair_preflight.get("checks", {}).get("dem_payload_get_requests") != 0
+        or event_pair_preflight.get("released_now", {}).get("radar_processing") is not False
+    ):
+        fail("M2 radar event-area pair final no-payload preflight differs")
 
     violations = []
     for relative in tracked_files():

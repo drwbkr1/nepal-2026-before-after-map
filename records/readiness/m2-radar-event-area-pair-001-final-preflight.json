@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-FINAL-NO-PAYLOAD-PREFLIGHT",
+  "checked_at_utc": "2026-09-23T22:01:59Z",
+  "status": "pass_no_payload",
+  "bindings": {
+    "proposal_sha256": "ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2",
+    "review_bundle_sha256": "ad6f0f5e75c768721ebbc787e6550dcb28e61fba22c86271beed982d220a5423",
+    "implementation_gate_sha256": "9a4fdc140e2d13898dc1767d4102bf91a12fdda19b3a9971c4c6b5c3cd7c760e",
+    "execution_gate_sha256": "448d61190a7f3c682ff26f62cb2821553d29537f28d2d303039434c06df63553",
+    "intake_code_sha256": "054f2205ca6c278581bbcde912be3d585771e20b7948cede664f16695ad364ac",
+    "prior_failed_preflight_ref": "records/readiness/m2-radar-event-area-pair-001-final-preflight-attempt-001-failure.json"
+  },
+  "checks": {
+    "exact_accepted_license_pdf_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd",
+    "official_stac_items_checked": 7,
+    "anonymous_tile_heads_checked": 7,
+    "exact_expected_head_total_bytes": 273055703,
+    "source_redirects_followed": false,
+    "free_bytes_after_preflight": 475257327616,
+    "minimum_free_bytes": 64424509440,
+    "all_seven_attempt_and_destination_paths_absent": true,
+    "credential_used": false,
+    "dem_payload_get_requests": 0,
+    "dem_payload_bytes_read": 0
+  },
+  "released_now": {
+    "one_initial_fresh_byte_zero_request_per_exact_tile_in_fixed_order": true,
+    "automatic_retry": false,
+    "conversion_only_after_all_seven_verified": true,
+    "mosaic_only_after_all_seven_converted": true,
+    "radar_processing": false,
+    "baseline_or_change_analysis": false
+  }
+}
