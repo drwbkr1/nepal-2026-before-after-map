@@ -1557,6 +1557,7 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-001-footprint-arcgis-runtime-validation.json",
     "records/readiness/m2-radar-event-area-pair-001-footprint-arcgis-runtime-validation-final.json",
     "records/readiness/m2-radar-event-area-pair-001-footprint-implementation-gate.json",
+    "records/readiness/m2-radar-event-area-pair-001-footprint-preflight.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18521,6 +18522,17 @@ def main() -> None:
         or event_pair_footprint_gate.get("assertions", {}).get("radar_geoprocessing_released") is not False
     ):
         fail("M2 radar event-area pair footprint implementation gate differs")
+    event_pair_footprint_preflight = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-footprint-preflight.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_footprint_preflight.get("status") != "pass_no_content_footprint_audit_eligible"
+        or event_pair_footprint_preflight.get("implementation_gate_sha256") != sha256("records/readiness/m2-radar-event-area-pair-001-footprint-implementation-gate.json")
+        or event_pair_footprint_preflight.get("mosaic_output_sha256") != event_pair_mosaic_result.get("output_sha256")
+        or [item.get("source_id") for item in event_pair_footprint_preflight.get("source_annotations", [])] != ["M1-SRC-002", "M1-SRC-005"]
+        or event_pair_footprint_preflight.get("safe_member_hash_scan_started") is not False
+        or event_pair_footprint_preflight.get("dem_pixel_scan_started") is not False
+        or event_pair_footprint_preflight.get("radar_geoprocessing_started") is not False
+    ):
+        fail("M2 radar event-area pair footprint no-content preflight differs")
 
     violations = []
     for relative in tracked_files():
