@@ -1566,6 +1566,7 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-001-radar-arcgis-runtime-validation-attempt-001-failure.json",
     "records/readiness/m2-radar-event-area-pair-001-radar-arcgis-runtime-validation.json",
     "records/readiness/m2-radar-event-area-pair-001-radar-implementation-gate.json",
+    "records/readiness/m2-radar-event-area-pair-001-radar-final-preflight.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18588,6 +18589,20 @@ def main() -> None:
         or event_pair_radar_gate.get("baseline_or_change_analysis_released") is not False
     ):
         fail("M2 radar event-area pair radar implementation gate differs")
+    event_pair_radar_preflight = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-radar-final-preflight.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_radar_preflight.get("status") != "pass_final_no_content_two_source_radar_preflight"
+        or event_pair_radar_preflight.get("implementation_gate_sha256") != sha256("records/readiness/m2-radar-event-area-pair-001-radar-implementation-gate.json")
+        or event_pair_radar_preflight.get("footprint_gate_sha256") != sha256("records/processing/m2-radar-event-area-pair-001-footprint-dem-validity-gate.json")
+        or event_pair_radar_preflight.get("source_order") != ["M1-SRC-002", "M1-SRC-005"]
+        or event_pair_radar_preflight.get("orbit_order") != ["M2-ORB-001", "M2-ORB-003"]
+        or event_pair_radar_preflight.get("path_projection", {}).get("maximum_projected_path_characters", 999) > 240
+        or event_pair_radar_preflight.get("project_source_content_read") is not False
+        or event_pair_radar_preflight.get("dem_pixel_read") is not False
+        or event_pair_radar_preflight.get("radar_geoprocessing_started") is not False
+        or event_pair_radar_preflight.get("automatic_retry") is not False
+    ):
+        fail("M2 radar event-area pair final no-content preflight differs")
 
     violations = []
     for relative in tracked_files():
