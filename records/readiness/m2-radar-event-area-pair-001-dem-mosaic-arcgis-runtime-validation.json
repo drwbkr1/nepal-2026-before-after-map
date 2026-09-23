@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-DEM-MOSAIC-ARCGIS-RUNTIME-VALIDATION",
+  "status": "pass_disposable_eleven_input_mosaic_only",
+  "bindings": {
+    "conversion_code_ref": "scripts/m2_radar_event_pair_dem_conversion_001.py",
+    "conversion_code_sha256": "c2d0905173ea81967db0825eed3ee816605697dbc8fd4775629bfee9b5bcd9d4",
+    "mosaic_code_ref": "scripts/m2_radar_event_pair_dem_mosaic_001.py",
+    "mosaic_code_sha256": "f8d6a6540de1619c83b41fd1b19e69a3bbb01cf6a8e7374ba2ea27a9e29abb90",
+    "conversion_test_sha256": "024a34fa9c125caa5d6363e7285b53844122fdbc8ae52925e97c0994497c8a60",
+    "mosaic_test_sha256": "e619246e4c9e2837df9251d9b4b823e3883cc5a52573e5e93dca36dd7de2699c",
+    "runtime_validator_sha256": "06b4c146e7ee3799b6a8366031440c630b852a21ed4de666058789f327a0ac52"
+  },
+  "runtime": {
+    "arcgis_pro_version": "3.7.1",
+    "disposable_input_count": 11,
+    "mosaic_tool": "arcpy.management.MosaicToNewRaster",
+    "pixel_type": "32_BIT_FLOAT",
+    "horizontal_epsg": 4326,
+    "output_band_count": 1,
+    "synthetic_output_sha256": "7dac94487c01615bc2824f2166851d0e15f9b75607f3f302542a784028177f20",
+    "project_data_read": false,
+    "external_custody_read_or_mutated": false
+  },
+  "claim_boundary": {
+    "eleven_real_tiles_mosaicked": false,
+    "actual_sar_extent_or_valid_elevation_proven": false,
+    "radar_processing_released": false,
+    "scientific_result_established": false
+  }
+}

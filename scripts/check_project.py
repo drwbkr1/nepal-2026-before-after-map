@@ -1548,6 +1548,12 @@ REQUIRED = [
     "tests/test_m2_radar_event_pair_dem_intake_001.py",
     "scripts/validate_m2_radar_event_pair_dem_intake_001_arcgis.py",
     "records/readiness/m2-radar-event-area-pair-001-dem-intake-arcgis-runtime-validation.json",
+    "scripts/m2_radar_event_pair_dem_conversion_001.py",
+    "scripts/m2_radar_event_pair_dem_mosaic_001.py",
+    "tests/test_m2_radar_event_pair_dem_conversion_001.py",
+    "tests/test_m2_radar_event_pair_dem_mosaic_001.py",
+    "scripts/validate_m2_radar_event_pair_dem_mosaic_001_arcgis.py",
+    "records/readiness/m2-radar-event-area-pair-001-dem-mosaic-arcgis-runtime-validation.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -18368,6 +18374,19 @@ def main() -> None:
         or event_pair_runtime.get("claim_boundary", {}).get("seven_tile_acquisition_released") is not False
     ):
         fail("M2 radar event-area pair disposable runtime evidence differs")
+    event_pair_mosaic_runtime = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-dem-mosaic-arcgis-runtime-validation.json").read_text(encoding="utf-8"))
+    mosaic_bindings = event_pair_mosaic_runtime.get("bindings", {})
+    if (
+        event_pair_mosaic_runtime.get("status") != "pass_disposable_eleven_input_mosaic_only"
+        or mosaic_bindings.get("conversion_code_sha256") != sha256("scripts/m2_radar_event_pair_dem_conversion_001.py")
+        or mosaic_bindings.get("mosaic_code_sha256") != sha256("scripts/m2_radar_event_pair_dem_mosaic_001.py")
+        or mosaic_bindings.get("conversion_test_sha256") != sha256("tests/test_m2_radar_event_pair_dem_conversion_001.py")
+        or mosaic_bindings.get("mosaic_test_sha256") != sha256("tests/test_m2_radar_event_pair_dem_mosaic_001.py")
+        or mosaic_bindings.get("runtime_validator_sha256") != sha256("scripts/validate_m2_radar_event_pair_dem_mosaic_001_arcgis.py")
+        or event_pair_mosaic_runtime.get("claim_boundary", {}).get("eleven_real_tiles_mosaicked") is not False
+        or event_pair_mosaic_runtime.get("claim_boundary", {}).get("radar_processing_released") is not False
+    ):
+        fail("M2 radar event-area pair disposable mosaic evidence differs")
 
     violations = []
     for relative in tracked_files():
