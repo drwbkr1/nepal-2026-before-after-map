@@ -1567,6 +1567,8 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-001-radar-arcgis-runtime-validation.json",
     "records/readiness/m2-radar-event-area-pair-001-radar-implementation-gate.json",
     "records/readiness/m2-radar-event-area-pair-001-radar-final-preflight.json",
+    "scripts/reconcile_m2_radar_event_pair_terminal_001.py",
+    "tests/test_m2_radar_event_pair_terminal_reconciliation_001.py",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
