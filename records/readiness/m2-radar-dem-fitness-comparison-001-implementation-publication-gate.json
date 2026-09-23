@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-IMPLEMENTATION-PUBLICATION-GATE",
+  "checked_at_utc": "2026-09-23T16:50:46Z",
+  "status": "pass_public_default_branch_ci_implementation_ready",
+  "implementation_commit_sha": "52298bcdcc5eaef4b0dbcfdbc63ed29cd2b57d92",
+  "public_ci_run_id": 35891505405,
+  "public_ci_job_id": 107284828030,
+  "public_ci_conclusion": "success",
+  "bindings": {
+    "approval_sha256": "6b7c5dcf6d94c2d9a144330ccefa8fa30de0eaa9e53811757d389e286179a9b0",
+    "runner_sha256": "ec8e4a0c69da091743baa633e608c94b5f8312d9ce7cb273cf889a3858aaedb1",
+    "validator_sha256": "429128c9c5db0b35398da448bebb170be0cdd2c278e5a43ba5864a0cb7db930a",
+    "test_sha256": "6c5749577032c4244493c3126b5760be6baaf91ca33eea4631deba8c4ee31487",
+    "runtime_validation_sha256": "69a2a415f6b8478e1c774b2a1149117696d20a9e6162b9dcfb61bf02f70e8fef"
+  },
+  "assertions": {
+    "portable_tests_passed": true,
+    "installed_disposable_arcgis_validation_passed": true,
+    "project_pixel_read": false,
+    "real_attempt_started": false,
+    "gtc_called_on_project_data": false,
+    "additional_dem_acquired": false,
+    "baseline_or_change_analysis_released": false
+  }
+}
