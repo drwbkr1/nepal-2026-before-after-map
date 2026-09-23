@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-REVIEW-CONTRACT",
+  "review_bundle": {
+    "ref": "reviews/m2-radar-event-area-pair-001/review-bundle.json",
+    "sha256": "ad6f0f5e75c768721ebbc787e6550dcb28e61fba22c86271beed982d220a5423"
+  },
+  "proposal": {
+    "ref": "contracts/milestone-002-radar-event-area-pair-001-proposal.json",
+    "sha256": "ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2"
+  },
+  "response_requirements": {
+    "exact_hashes_required": true,
+    "explicit_decision_required": true,
+    "attestation_required": true,
+    "one_combined_authority_envelope": true
+  },
+  "workflow_authority": {
+    "local_preparation_complete": true,
+    "response_open": true,
+    "publication_or_execution_authorized_before_decision": false
+  }
+}

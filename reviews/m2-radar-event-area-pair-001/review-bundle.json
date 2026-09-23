@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-23T17:24:02Z",
+  "status": "local_zero_decision_one_owner_decision_required",
+  "human_decision_count": 0,
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-radar-event-area-pair-001-proposal.json",
+      "sha256": "ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2",
+      "role": "proposal"
+    },
+    {
+      "path": "docs/M2_RADAR_EVENT_AREA_PAIR_001_REVIEW.md",
+      "sha256": "0e79b41dce4b423803e8f8a7fed9caa5fa863f38ae558e96aebe10e89b76afc4",
+      "role": "human_readable_review"
+    },
+    {
+      "path": "records/observations/m2-radar-event-pair-catalog-triage-001.json",
+      "sha256": "5c19d4edc3210ac7474ffc58aa2224801dd57ff32db9a51e386e48cee02f76db",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/source-gates/m2-radar-event-pair-seven-dem-source-assessment-001.json",
+      "sha256": "2e4244e41976fbd6a7ef11d635bed93276e2cf8c31f6e63012ec50d449386ab9",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/observations/m2-radar-event-pair-method-boundary-001.json",
+      "sha256": "66943539298bb5459d5e99efd2a8ee52c449cbfa85a80cdb6650d3b363344e44",
+      "role": "frozen_input"
+    },
+    {
+      "path": "config/qa/m2-radar-pixel-orbit-application-001-contract.json",
+      "sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+      "role": "frozen_input"
+    },
+    {
+      "path": "config/qa/radar-baseline-processing-contract.json",
+      "sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f",
+      "role": "frozen_input"
+    },
+    {
+      "path": "config/qa/m2-radar-esri-sequence-recovery-005-contract.json",
+      "sha256": "e388f84dd97db781e89d9115e03a7cda92895e1dfb9c4adf9a35e1ce494e1b0b",
+      "role": "frozen_input"
+    },
+    {
+      "path": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+      "role": "frozen_input"
+    },
+    {
+      "path": "config/qa/candidate-pair-plan.json",
+      "sha256": "c346af2e575a21e4931991935c0acc21ba70083c4613255456ced77b71bb1560",
+      "role": "frozen_input"
+    },
+    {
+      "path": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json",
+      "sha256": "2103359e15c4cd963a89d7cdf2169c598c86a0e02e93766e6aab6df3237b30d6",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/readiness/m2-radar-dem-fitness-comparison-001-terminal-publication-reconciliation.json",
+      "sha256": "36be123641a1a7ad2e55d51effcf6dadba6aa34bbeea50e81dad0d6f55d46a28",
+      "role": "frozen_input"
+    }
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-RADAR-EVENT-AREA-PAIR-001",
+    "question": "Approve, revise, or defer one bounded seven-tile and 002/005 QA route envelope, conditional on exact public CI gates?",
+    "choices": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "response_open": true,
+    "approval_effective_only_after": "Exact packet and approval are published to the public default branch and public CI passes; later implementation and execution gates must also pass before real access."
+  },
+  "authority_boundary": {
+    "publication_authorized": false,
+    "new_dem_acquisition_authorized": false,
+    "scientific_method_amended": false,
+    "arcgis_project_processing_authorized": false,
+    "baseline_or_change_analysis_authorized": false
+  }
+}

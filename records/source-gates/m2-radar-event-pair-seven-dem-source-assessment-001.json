@@ -1,0 +1,340 @@
+{
+  "contract_version": "source-gate/v2",
+  "assessment_id": "NEPAL-M2-RADAR-EVENT-PAIR-SEVEN-DEM-SOURCE-ASSESSMENT-001",
+  "assessed_at": "2026-09-23T17:16:45Z",
+  "authority": {
+    "mode": "not_granted",
+    "authority_ref": "",
+    "authorized_actions": [],
+    "expires_at_utc": null
+  },
+  "intended_use": {
+    "summary": "Evaluate acquisition of seven exact DEM candidates to test full-swath terrain-processing fitness for the approved M1-SRC-002/005 event pair; no payload access or processing now.",
+    "planned_actions": [
+      "metadata review",
+      "download seven exact DEM payloads to controlled non-Git custody"
+    ]
+  },
+  "input_bindings": [
+    {
+      "ref": "records/source-manifest.json",
+      "sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef"
+    },
+    {
+      "ref": "records/observations/m2-radar-event-pair-catalog-triage-001.json",
+      "sha256": "5c19d4edc3210ac7474ffc58aa2224801dd57ff32db9a51e386e48cee02f76db"
+    },
+    {
+      "ref": "records/observations/m2-radar-dem-swath-catalog-001.json",
+      "sha256": "ed2c7653a656e7eb274d2f1fc1e510ec48d065112b5fbeab8986548240b17f83"
+    },
+    {
+      "ref": "records/observations/m2-radar-dem-candidate-heads-001.json",
+      "sha256": "41a3dfece724e2c6177afcdcd20fff4f07368f2de767bb53deedab3563b6ccc8"
+    },
+    {
+      "ref": "records/observations/m2-radar-dem-license-recheck-001.json",
+      "sha256": "cb903c464a72cc729ff103b11f19b2756f7af1869e0e1c2d37952eb24a4a093a"
+    },
+    {
+      "ref": "records/source-gates/m2-dem-amendment-approval.json",
+      "sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "M2-DEM-ASC-R085-SEVEN-CANDIDATES",
+      "name": "Seven exact Copernicus DEM GLO-30 COG candidate cells for M1-SRC-002/005 full catalog swaths",
+      "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog",
+      "exact_assets": [
+        {
+          "item_id": "Copernicus_DSM_COG_10_N27_00_E086_00_DEM",
+          "cell_wgs84": [
+            86,
+            27,
+            87,
+            28
+          ],
+          "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E086_00_DEM",
+          "anonymous_https_url": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E086_00_DEM/Copernicus_DSM_COG_10_N27_00_E086_00_DEM.tif",
+          "observed_head_content_length_bytes": 43039634,
+          "observed_head_etag": "\"37c621f4f1b33740ea8f5997922a3f03\"",
+          "head_checked_at_utc": "2026-09-22T22:04:48Z",
+          "stac_checked_at_utc": "2026-09-22T22:02:58Z",
+          "payload_acquired": false,
+          "payload_sha256": null
+        },
+        {
+          "item_id": "Copernicus_DSM_COG_10_N28_00_E083_00_DEM",
+          "cell_wgs84": [
+            83,
+            28,
+            84,
+            29
+          ],
+          "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E083_00_DEM",
+          "anonymous_https_url": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E083_00_DEM/Copernicus_DSM_COG_10_N28_00_E083_00_DEM.tif",
+          "observed_head_content_length_bytes": 42265817,
+          "observed_head_etag": "\"aad15d14257e84e12e484c5f53c7ef2a\"",
+          "head_checked_at_utc": "2026-09-22T22:04:49Z",
+          "stac_checked_at_utc": "2026-09-22T22:03:01Z",
+          "payload_acquired": false,
+          "payload_sha256": null
+        },
+        {
+          "item_id": "Copernicus_DSM_COG_10_N28_00_E086_00_DEM",
+          "cell_wgs84": [
+            86,
+            28,
+            87,
+            29
+          ],
+          "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E086_00_DEM",
+          "anonymous_https_url": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N28_00_E086_00_DEM/Copernicus_DSM_COG_10_N28_00_E086_00_DEM.tif",
+          "observed_head_content_length_bytes": 38212170,
+          "observed_head_etag": "\"6103f546fec418f2377ca1c76ad41346\"",
+          "head_checked_at_utc": "2026-09-22T22:04:50Z",
+          "stac_checked_at_utc": "2026-09-22T22:03:02Z",
+          "payload_acquired": false,
+          "payload_sha256": null
+        },
+        {
+          "item_id": "Copernicus_DSM_COG_10_N29_00_E083_00_DEM",
+          "cell_wgs84": [
+            83,
+            29,
+            84,
+            30
+          ],
+          "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N29_00_E083_00_DEM",
+          "anonymous_https_url": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N29_00_E083_00_DEM/Copernicus_DSM_COG_10_N29_00_E083_00_DEM.tif",
+          "observed_head_content_length_bytes": 37587811,
+          "observed_head_etag": "\"56c78a9c09af5557a61008cb02bfd1e4\"",
+          "head_checked_at_utc": "2026-09-22T22:04:51Z",
+          "stac_checked_at_utc": "2026-09-22T22:03:05Z",
+          "payload_acquired": false,
+          "payload_sha256": null
+        },
+        {
+          "item_id": "Copernicus_DSM_COG_10_N29_00_E084_00_DEM",
+          "cell_wgs84": [
+            84,
+            29,
+            85,
+            30
+          ],
+          "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N29_00_E084_00_DEM",
+          "anonymous_https_url": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N29_00_E084_00_DEM/Copernicus_DSM_COG_10_N29_00_E084_00_DEM.tif",
+          "observed_head_content_length_bytes": 37062134,
+          "observed_head_etag": "\"3607ad61e162a077323fb6706be1060a\"",
+          "head_checked_at_utc": "2026-09-22T22:04:52Z",
+          "stac_checked_at_utc": "2026-09-22T22:03:06Z",
+          "payload_acquired": false,
+          "payload_sha256": null
+        },
+        {
+          "item_id": "Copernicus_DSM_COG_10_N29_00_E085_00_DEM",
+          "cell_wgs84": [
+            85,
+            29,
+            86,
+            30
+          ],
+          "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N29_00_E085_00_DEM",
+          "anonymous_https_url": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N29_00_E085_00_DEM/Copernicus_DSM_COG_10_N29_00_E085_00_DEM.tif",
+          "observed_head_content_length_bytes": 36990418,
+          "observed_head_etag": "\"a62269d8baaf5be07f45c50ce1f339aa\"",
+          "head_checked_at_utc": "2026-09-22T22:04:53Z",
+          "stac_checked_at_utc": "2026-09-22T22:03:06Z",
+          "payload_acquired": false,
+          "payload_sha256": null
+        },
+        {
+          "item_id": "Copernicus_DSM_COG_10_N29_00_E086_00_DEM",
+          "cell_wgs84": [
+            86,
+            29,
+            87,
+            30
+          ],
+          "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N29_00_E086_00_DEM",
+          "anonymous_https_url": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N29_00_E086_00_DEM/Copernicus_DSM_COG_10_N29_00_E086_00_DEM.tif",
+          "observed_head_content_length_bytes": 37897719,
+          "observed_head_etag": "\"a443ed089dca9aecc85729e783d2c038\"",
+          "head_checked_at_utc": "2026-09-22T22:04:53Z",
+          "stac_checked_at_utc": "2026-09-22T22:03:07Z",
+          "payload_acquired": false,
+          "payload_sha256": null
+        }
+      ],
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/observations/m2-radar-dem-swath-catalog-001.json",
+              "note": "Exact seven cells intersect the event-pair catalog polygons."
+            },
+            {
+              "type": "static",
+              "locator": "records/observations/m2-radar-dem-candidate-heads-001.json",
+              "note": "Exact public asset URL, length, and ETag observations."
+            }
+          ],
+          "note": "The seven item IDs and byte estimates are exact metadata bindings; no payload identity is established."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E086_00_DEM",
+              "note": "Official STAC item observation retained in the bound swath catalog.",
+              "observed_at": "2026-09-22T22:02:58Z"
+            }
+          ],
+          "note": "Official CDSE STAC identifies the Copernicus DEM collection; the AWS mirror is a distribution route, not the publisher."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://copernicus-dem-30m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_10_N27_00_E086_00_DEM/Copernicus_DSM_COG_10_N27_00_E086_00_DEM.tif",
+              "note": "All seven exact anonymous HEAD observations are retained in the bound candidate-head record.",
+              "observed_at": "2026-09-22T22:04:48Z"
+            }
+          ],
+          "note": "Yesterday's anonymous HEAD observations returned 200 without redirects or body reads; recheck immediately before any approved acquisition."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+              "note": "Exact license PDF SHA-256 matches the owner's previously accepted document; acquisition scope remains four tiles.",
+              "observed_at": "2026-09-22T22:05:17Z"
+            },
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-amendment-approval.json",
+              "note": "Prior owner acceptance and its four-tile limit."
+            }
+          ],
+          "note": "The same public license document bytes were rechecked, but owner approval covered only four earlier tiles; seven new requests need an explicit scope decision."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/observations/m2-radar-dem-swath-catalog-001.json",
+              "note": "Official item identities and bboxes."
+            },
+            {
+              "type": "static",
+              "locator": "records/observations/m2-radar-dem-candidate-heads-001.json",
+              "note": "Mirror asset metadata; no redirect or body read."
+            }
+          ],
+          "note": "Official STAC metadata and the previously observed anonymous distribution mirror bind each candidate locator; bytes have not entered custody."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/observations/m2-radar-dem-candidate-heads-001.json",
+              "note": "Expected length and ETag are pre-acquisition comparators; post-acquisition checks remain pending."
+            }
+          ],
+          "note": "For candidate acquisition only, require fresh no-redirect HEAD, expected length, complete byte-zero download, SHA-256, GeoTIFF structure, no-replace non-Git promotion, and a durable receipt before any conversion or use; ETag is not accepted as a content checksum."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/observations/m2-radar-event-pair-catalog-triage-001.json",
+              "note": "Event AOI and DEM-box overlap is catalog geometry only."
+            },
+            {
+              "type": "static",
+              "locator": "records/observations/m2-radar-dem-swath-catalog-001.json",
+              "note": "Seven additional cells intersect M1-SRC-002/005 catalog swaths."
+            }
+          ],
+          "note": "The seven one-degree cells cover the public catalog swaths missing from the approved four-tile set for this pair. This establishes only acquisition-candidate fit, not valid DEM pixels, exact SAR raster extent, GTC fitness, or elevation accuracy."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/source-gates/m2-dem-candidate-manifest.json",
+              "note": "Same public DEM product family and controlled external-custody pattern."
+            }
+          ],
+          "note": "Public elevation tiles contain no identified personal records. Candidate payloads require non-Git custody and structural checks; no credentials or account action are planned."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "ready",
+    "blocking_reasons": [],
+    "live_verification_pending": [],
+    "approved_actions": [
+      "metadata review"
+    ]
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": [
+      "read already-public metadata",
+      "record local zero-decision assessment"
+    ],
+    "requires_explicit_authorization": [
+      "download seven exact DEM payloads",
+      "convert or use DEM pixels",
+      "change the frozen radar method or source order",
+      "run ArcPy on project data",
+      "publish review or derived data"
+    ]
+  },
+  "candidate_summary": {
+    "exact_asset_count": 7,
+    "observed_head_total_bytes": 273055703,
+    "license_document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd",
+    "prior_owner_approval_tile_count": 4,
+    "new_tile_acquisition_authorized": false,
+    "payload_integrity_verified": false,
+    "valid_pixel_fitness_established": false,
+    "full_radar_processing_route_authorized": false
+  }
+}

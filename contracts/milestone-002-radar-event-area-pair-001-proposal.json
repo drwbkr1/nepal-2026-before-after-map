@@ -1,0 +1,177 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001",
+  "status": "local_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "base_commit": "1bd89503494931de5f3c566a958ee4711c576cb5",
+  "input_bindings": [
+    {
+      "ref": "records/observations/m2-radar-event-pair-catalog-triage-001.json",
+      "sha256": "5c19d4edc3210ac7474ffc58aa2224801dd57ff32db9a51e386e48cee02f76db"
+    },
+    {
+      "ref": "records/source-gates/m2-radar-event-pair-seven-dem-source-assessment-001.json",
+      "sha256": "2e4244e41976fbd6a7ef11d635bed93276e2cf8c31f6e63012ec50d449386ab9"
+    },
+    {
+      "ref": "records/observations/m2-radar-event-pair-method-boundary-001.json",
+      "sha256": "66943539298bb5459d5e99efd2a8ee52c449cbfa85a80cdb6650d3b363344e44"
+    },
+    {
+      "ref": "config/qa/m2-radar-pixel-orbit-application-001-contract.json",
+      "sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1"
+    },
+    {
+      "ref": "config/qa/radar-baseline-processing-contract.json",
+      "sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f"
+    },
+    {
+      "ref": "config/qa/m2-radar-esri-sequence-recovery-005-contract.json",
+      "sha256": "e388f84dd97db781e89d9115e03a7cda92895e1dfb9c4adf9a35e1ce494e1b0b"
+    },
+    {
+      "ref": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"
+    },
+    {
+      "ref": "config/qa/candidate-pair-plan.json",
+      "sha256": "c346af2e575a21e4931991935c0acc21ba70083c4613255456ced77b71bb1560"
+    },
+    {
+      "ref": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"
+    },
+    {
+      "ref": "records/readiness/m2-dem-proj25-receipt-persistence-recovery-002-terminal-reconciliation.json",
+      "sha256": "2103359e15c4cd963a89d7cdf2169c598c86a0e02e93766e6aab6df3237b30d6"
+    },
+    {
+      "ref": "records/readiness/m2-radar-dem-fitness-comparison-001-terminal-publication-reconciliation.json",
+      "sha256": "36be123641a1a7ad2e55d51effcf6dadba6aa34bbeea50e81dad0d6f55d46a28"
+    }
+  ],
+  "question": "Can the exact ascending event-area before/after pair M1-SRC-002/005 become independently QA-ready over the approved source and upper-corridor AOIs using DEM coverage for its full processed extents, without treating QA as change evidence?",
+  "evidence_basis": {
+    "catalog_pair_aoi_source_overlap_percent": 100.0,
+    "catalog_pair_aoi_upper_corridor_overlap_percent": 100.0,
+    "approved_dem_boxes_cover_event_aois_percent": 100.0,
+    "approved_four_dem_boxes_cover_full_event_pair_swaths": false,
+    "additional_dem_candidate_count": 7,
+    "additional_candidate_head_total_bytes": 273055703,
+    "candidate_payload_or_valid_pixels_verified": false,
+    "m1_src_001_dem_gtc_success_proves_event_pair_fitness": false
+  },
+  "proposed_normative_amendments": {
+    "source_subset": [
+      "M1-SRC-002",
+      "M1-SRC-005"
+    ],
+    "reason": "Their exact public catalog polygons jointly cover both approved event AOIs; M1-SRC-001/004 do not cover either event AOI. This subset is a new QA route, not a silent change to the frozen six-source route or an admitted baseline.",
+    "pair_id": "PAIR-S1-ASC-R085-IW",
+    "before_source_id": "M1-SRC-002",
+    "after_source_id": "M1-SRC-005",
+    "before_orbit_id": "M2-ORB-001",
+    "after_orbit_id": "M2-ORB-003",
+    "orbit_type": "AUX_RESORB",
+    "same_orbit_direction": "ASCENDING",
+    "same_relative_orbit_number": 85,
+    "date_mosaic": "none_in_this_two_source_qa_route",
+    "additional_dem_scope_ref": "records/source-gates/m2-radar-event-pair-seven-dem-source-assessment-001.json",
+    "additional_dem_scope_sha256": "2e4244e41976fbd6a7ef11d635bed93276e2cf8c31f6e63012ec50d449386ab9",
+    "additional_dem_tile_count": 7,
+    "reuse_exact_prior_four_dem_derivatives_read_only": true,
+    "dem_height_route": "validated_PROJ25_EGM2008_2_5_arc_minute_to_ellipsoidal_then_GEOID_NONE",
+    "dem_must_span_entire_actual_processed_sar_extents": true,
+    "despeckle_route": "REFINED_LEE_after_RTF_before_GTC_for_QA_only",
+    "despeckle_bands": "VV;VH",
+    "despeckle_filter_size_argument": "omitted",
+    "historical_six_source_contracts_and_receipts_immutable": true,
+    "thresholds_and_masks_unchanged": true,
+    "owner_scientific_method_decision_required": true
+  },
+  "seven_exact_candidate_item_ids_in_fixed_order": [
+    "Copernicus_DSM_COG_10_N27_00_E086_00_DEM",
+    "Copernicus_DSM_COG_10_N28_00_E083_00_DEM",
+    "Copernicus_DSM_COG_10_N28_00_E086_00_DEM",
+    "Copernicus_DSM_COG_10_N29_00_E083_00_DEM",
+    "Copernicus_DSM_COG_10_N29_00_E084_00_DEM",
+    "Copernicus_DSM_COG_10_N29_00_E085_00_DEM",
+    "Copernicus_DSM_COG_10_N29_00_E086_00_DEM"
+  ],
+  "rights_and_custody": {
+    "license_document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd",
+    "same_document_previously_accepted": true,
+    "prior_owner_acquisition_scope_limited_to_four_tiles": true,
+    "new_seven_tile_acquisition_requires_this_decision": true,
+    "anonymous_https_only": true,
+    "network_redirects_refused": true,
+    "credential_or_account_action": false,
+    "raw_and_derived_rasters_outside_git": true,
+    "no_replace_promotion": true,
+    "required_copernicus_dem_attribution_and_no_liability_notice_retained_for_later_publication": true
+  },
+  "proposed_single_authority_envelope": {
+    "owner_decision_count": 1,
+    "covers_without_intermediate_owner_reconfirmation": [
+      "bounded implementation, synthetic and installed ArcGIS disposable validation, reversible structural correction, public default-branch packet and implementation CI gates",
+      "final no-payload preflight and fixed-order seven exact public DEM payload acquisitions into new append-only non-Git attempt paths",
+      "per-tile byte identity, GeoTIFF structure, rights notice, and no-replace custody checks; stop on source drift or integrity failure",
+      "using the already approved exact PROJ25 grid offline, one fixed-order conversion for each newly verified tile and an append-only eleven-tile ellipsoidal DEM mosaic",
+      "read-only actual two-source footprint and DEM valid-pixel assessment before any radar geoprocessing, including explicit full processed-extent check",
+      "only on all prior gates passing, one fresh fixed-order two-source ArcGIS processing attempt with M1-SRC-002 then M1-SRC-005 and the reviewed REFINED_LEE QA route",
+      "only on both source outputs passing identity and persistence checks, frozen EPSG:32645 grid, AOI coverage, mask, and registration QA with no baseline admission",
+      "durable attempt, terminal, cleanup, and exact reconciliation receipts and sanitized public terminal publication"
+    ],
+    "publication_is_conditional_on_public_ci_at_each_stage": true,
+    "final_no_content_preflight_before_each_real_stage": true,
+    "maximum_new_dem_payloads": 7,
+    "maximum_initial_dem_requests": 7,
+    "maximum_fresh_byte_zero_transport_recovery_requests_per_tile": 1,
+    "maximum_dem_conversions": 7,
+    "maximum_new_dem_mosaics": 1,
+    "maximum_event_pair_radar_processes": 1,
+    "maximum_radar_sources_in_process": 2,
+    "fixed_radar_source_order": [
+      "M1-SRC-002",
+      "M1-SRC-005"
+    ],
+    "automatic_retry": false,
+    "resume_or_reuse_consumed_attempts": false,
+    "stop_on_first_unresolved_failure": true,
+    "source_substitution": false,
+    "pixel_threshold_change": false,
+    "scientific_claim_or_publication": false
+  },
+  "execution_gates": [
+    "Confirm the seven exact STAC identities, HTTPS headers, license-document SHA, absence of redirect and payload collision, adequate disk and approved local ArcGIS runtime before request; stop if a material source or terms fact has drifted.",
+    "Reserve all per-tile terminal, error, and cleanup receipt identities before any payload request; use byte-zero requests only and never store credentials or payloads in Git.",
+    "Promote a tile only after complete expected-length download, SHA-256, GeoTIFF metadata and pixel-validity inspection, and no-replace custody check; keep partial and failed attempts quarantined.",
+    "Recheck exact existing PROJ25 grid and four approved DEM derivatives read-only, then convert the seven new tiles one time in fixed order; fail closed on vertical operation, sign, datum, seam, or output collision ambiguity.",
+    "Require the eleven-tile ellipsoidal mosaic to cover the actual processed extent of both exact SAR sources with valid elevation, not merely their catalog boxes or the approved AOIs; stop if this cannot be established.",
+    "Run the source-specific sequence with exact orbit correction, thermal-noise removal, beta-nought calibration, gamma-nought terrain flattening, REFINED_LEE Despeckle after RTF, and DEM-supplied GTC with GEOID NONE, preserving separate before and after lineage.",
+    "Do not begin M1-SRC-005 if M1-SRC-002 fails, and do not begin pair QA if either source or its required mask fails. No silent scene, DEM, geoid, CRS, polarization, resampling, or output substitution.",
+    "Apply frozen pixel-readiness thresholds: AOI coverage at least 0.99 and usable fraction at least 0.80 for pass_qa_only, with at least 30 stable control pairs, RMSE at most 0.5 pixel and absolute bias at most 0.5 pixel; retain defer/block/invalid outcomes without tuning.",
+    "Quarantine all derived rasters outside Git; publish only sanitized identities, QA metrics, disposition, limitations, and receipt hashes."
+  ],
+  "safe_recovery_within_envelope": {
+    "before_real_payload_or_pixel_access": "Correct reversible implementation and test defects, republish changed code, and rerun public CI without a new owner decision if exact inputs and scientific predicates remain unchanged.",
+    "after_failed_dem_transport": "Preserve the failed append-only attempt. A fresh byte-zero request for the same exact tile requires a separately recorded failure classification and fresh no-payload preflight; no automatic partial resume, no silent content or item substitution, and no second request after integrity or terms failure.",
+    "after_failed_conversion_or_radar_processing": "Stop and preserve all attempts. No same-attempt retry, method change, new real radar process, or source substitution is released by this envelope."
+  },
+  "claim_boundary": {
+    "possible_disposition": "invalid_block_defer_or_pass_qa_only",
+    "pass_qa_only_is_not_baseline_admission": true,
+    "change_analysis_or_difference_raster_authorized": false,
+    "event_attribution_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false,
+    "historical_gtc_error_root_cause_claim_authorized": false
+  },
+  "does_not_authorize_now": [
+    "Git commit or public publication of this local zero-decision packet",
+    "owner response recording or proposal activation",
+    "new seven-tile acquisition, conversion, or mosaic creation",
+    "project-data or external-custody content read, ArcPy invocation, or radar processing",
+    "baseline admission, change analysis, attribution, derived-pixel or scientific publication"
+  ]
+}

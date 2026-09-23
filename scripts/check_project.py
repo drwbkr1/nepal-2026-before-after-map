@@ -1530,6 +1530,19 @@ REQUIRED = [
     "scripts/observe_m2_radar_dem_candidate_heads_001.py",
     "scripts/observe_m2_radar_dem_swath_catalog_001.py",
     "scripts/prepare_m2_radar_dem_fitness_comparison_001_review.py",
+    "contracts/milestone-002-radar-event-area-pair-001-proposal.json",
+    "docs/M2_RADAR_EVENT_AREA_PAIR_001_REVIEW.md",
+    "reviews/m2-radar-event-area-pair-001/review-bundle.json",
+    "reviews/m2-radar-event-area-pair-001/review-contract.json",
+    "reviews/m2-radar-event-area-pair-001/blank-response.json",
+    "records/readiness/m2-radar-event-area-pair-001-review-readiness.json",
+    "records/source-gates/m2-radar-event-area-pair-001-approval.json",
+    "records/observations/m2-radar-event-pair-catalog-triage-001.json",
+    "records/observations/m2-radar-event-pair-method-boundary-001.json",
+    "records/source-gates/m2-radar-event-pair-seven-dem-source-assessment-001.json",
+    "scripts/assess_m2_radar_event_pair_catalog_001.py",
+    "scripts/prepare_m2_radar_event_pair_dem_source_assessment_001.py",
+    "scripts/prepare_m2_radar_event_area_pair_001_review.py",
     ".github/workflows/validate.yml",
 ]
 
@@ -18306,6 +18319,30 @@ def main() -> None:
         or dem_fitness_terminal_publication.get("assertions", {}).get("quarantined_derived_pixels_published") is not False
     ):
         fail("M2 radar DEM fitness comparison packet or owner authority differs")
+
+    event_pair_proposal_ref = "contracts/milestone-002-radar-event-area-pair-001-proposal.json"
+    event_pair_bundle_ref = "reviews/m2-radar-event-area-pair-001/review-bundle.json"
+    event_pair_contract_ref = "reviews/m2-radar-event-area-pair-001/review-contract.json"
+    event_pair_approval = json.loads((ROOT / "records/source-gates/m2-radar-event-area-pair-001-approval.json").read_text(encoding="utf-8"))
+    event_pair_proposal = json.loads((ROOT / event_pair_proposal_ref).read_text(encoding="utf-8"))
+    event_pair_bundle = json.loads((ROOT / event_pair_bundle_ref).read_text(encoding="utf-8"))
+    event_pair_contract = json.loads((ROOT / event_pair_contract_ref).read_text(encoding="utf-8"))
+    if (
+        event_pair_approval.get("decision") != "approve"
+        or event_pair_approval.get("attestation") is not True
+        or event_pair_approval.get("human_decision_count") != 1
+        or event_pair_approval.get("bindings", {}).get("proposal_sha256") != sha256(event_pair_proposal_ref)
+        or event_pair_approval.get("bindings", {}).get("review_bundle_sha256") != sha256(event_pair_bundle_ref)
+        or event_pair_contract.get("proposal", {}).get("sha256") != sha256(event_pair_proposal_ref)
+        or event_pair_contract.get("review_bundle", {}).get("sha256") != sha256(event_pair_bundle_ref)
+        or event_pair_proposal.get("proposed_single_authority_envelope", {}).get("maximum_new_dem_payloads") != 7
+        or event_pair_proposal.get("proposed_single_authority_envelope", {}).get("maximum_event_pair_radar_processes") != 1
+        or event_pair_approval.get("authority", {}).get("baseline_admission_or_change_analysis") is not False
+    ):
+        fail("M2 radar event-area pair approval or bounded scope differs")
+    for artifact in event_pair_bundle.get("artifacts", []):
+        if artifact.get("sha256") != sha256(artifact.get("path", "")):
+            fail("M2 radar event-area pair frozen artifact differs")
 
     violations = []
     for relative in tracked_files():

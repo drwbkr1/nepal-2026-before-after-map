@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-RADAR-EVENT-PAIR-CATALOG-TRIAGE-001",
+  "observed_at_utc": "2026-09-23T17:10:57Z",
+  "status": "local_zero_decision_metadata_only_unpublished",
+  "input_bindings": [
+    {
+      "ref": "records/source-manifest.json",
+      "sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef"
+    },
+    {
+      "ref": "config/aoi/approved-study-areas.geojson",
+      "sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98"
+    },
+    {
+      "ref": "records/source-gates/m2-dem-candidate-manifest.json",
+      "sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243"
+    },
+    {
+      "ref": "records/observations/m2-radar-gtc-public-six-source-coverage-audit-002.json",
+      "sha256": "606ef9cf5c6ce4f884b7e28288bd5e4befefd3b7445dd0ba07a9e1f5db2c54d7"
+    },
+    {
+      "ref": "records/processing/m2-radar-dem-fitness-comparison-001-terminal-reconciliation.json",
+      "sha256": "b69c9082a42184d2c26367659610e8afa1467aae8bf27a256e6d337c54bc1bd8"
+    }
+  ],
+  "method": "Intersect each exact before/after public catalog footprint pair with each approved AOI and the union of four approved DEM STAC boxes in WGS84; estimate area fractions by spherical equal-area cylindrical transform with R=6371008.8 m. This is catalog geometry, not raster or DEM valid-pixel coverage.",
+  "approved_aoi_dem_box_overlap_percent": {
+    "AOI-OVERVIEW": 100.0,
+    "AOI-SOURCE": 100.0,
+    "AOI-UPPER-CORRIDOR": 100.0
+  },
+  "pair_results": [
+    {
+      "before_source_id": "M1-SRC-001",
+      "after_source_id": "M1-SRC-004",
+      "catalog_pair_overlap_area_km2_approx": 43809.406,
+      "aoi_catalog_pair_overlap_percent": {
+        "AOI-OVERVIEW": 2.994,
+        "AOI-SOURCE": 0.0,
+        "AOI-UPPER-CORRIDOR": 0.0
+      },
+      "aoi_catalog_pair_and_dem_box_overlap_percent": {
+        "AOI-OVERVIEW": 2.994,
+        "AOI-SOURCE": 0.0,
+        "AOI-UPPER-CORRIDOR": 0.0
+      }
+    },
+    {
+      "before_source_id": "M1-SRC-002",
+      "after_source_id": "M1-SRC-005",
+      "catalog_pair_overlap_area_km2_approx": 43770.593,
+      "aoi_catalog_pair_overlap_percent": {
+        "AOI-OVERVIEW": 96.999,
+        "AOI-SOURCE": 100.0,
+        "AOI-UPPER-CORRIDOR": 100.0
+      },
+      "aoi_catalog_pair_and_dem_box_overlap_percent": {
+        "AOI-OVERVIEW": 96.999,
+        "AOI-SOURCE": 100.0,
+        "AOI-UPPER-CORRIDOR": 100.0
+      }
+    },
+    {
+      "before_source_id": "M1-SRC-003",
+      "after_source_id": "M1-SRC-006",
+      "catalog_pair_overlap_area_km2_approx": 43366.441,
+      "aoi_catalog_pair_overlap_percent": {
+        "AOI-OVERVIEW": 33.858,
+        "AOI-SOURCE": 100.0,
+        "AOI-UPPER-CORRIDOR": 58.675
+      },
+      "aoi_catalog_pair_and_dem_box_overlap_percent": {
+        "AOI-OVERVIEW": 33.858,
+        "AOI-SOURCE": 100.0,
+        "AOI-UPPER-CORRIDOR": 58.675
+      }
+    }
+  ],
+  "interpretation": {
+    "regional_context_pair_001_004_source_or_upper_corridor_catalog_overlap": false,
+    "event_pair_002_005_source_and_upper_corridor_catalog_overlap_percent": 100.0,
+    "event_pair_003_006_source_catalog_overlap_percent": 100.0,
+    "event_pair_003_006_upper_corridor_catalog_overlap_is_partial": true,
+    "approved_dem_boxes_cover_all_approved_aois_in_catalog_geometry": true,
+    "existing_four_tiles_cover_all_six_full_swaths": false,
+    "m1_src_001_diagnostic_generalizes_to_event_pairs": false
+  },
+  "limits": {
+    "actual_event_pair_valid_radar_pixels_established": false,
+    "actual_event_pair_valid_dem_pixels_established": false,
+    "dem_sufficiency_for_full_swath_or_gtc_established": false,
+    "event_pair_registration_or_change_established": false,
+    "new_dem_tiles_selected_or_authorized": false,
+    "event_pair_pixel_read_or_processing_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "scientific_claim_authorized": false
+  },
+  "next_decision_frame": "One owner-reviewed, bounded event-pair AOI pixel/DEM-readiness method should be considered using exact M1-SRC-002/005 first, with explicit stop rules and no automatic admission. Decide separately whether full-swath terrain correction requires more DEM coverage; catalog AOI overlap alone cannot answer it."
+}

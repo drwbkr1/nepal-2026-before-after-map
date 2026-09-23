@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-RADAR-EVENT-PAIR-METHOD-BOUNDARY-001",
+  "observed_at_utc": "2026-09-23T17:17:51Z",
+  "status": "local_zero_decision_method_reconciliation_unpublished",
+  "input_bindings": [
+    {
+      "ref": "records/observations/m2-radar-event-pair-catalog-triage-001.json",
+      "sha256": "5c19d4edc3210ac7474ffc58aa2224801dd57ff32db9a51e386e48cee02f76db"
+    },
+    {
+      "ref": "records/source-gates/m2-radar-event-pair-seven-dem-source-assessment-001.json",
+      "sha256": "2e4244e41976fbd6a7ef11d635bed93276e2cf8c31f6e63012ec50d449386ab9"
+    },
+    {
+      "ref": "config/qa/m2-radar-pixel-orbit-application-001-contract.json",
+      "sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1"
+    },
+    {
+      "ref": "config/qa/radar-baseline-processing-contract.json",
+      "sha256": "d70bda6235511f30185558d18e5902d69be81dcfa02517117f1dc404e450f26f"
+    },
+    {
+      "ref": "config/qa/m2-radar-esri-sequence-recovery-005-contract.json",
+      "sha256": "e388f84dd97db781e89d9115e03a7cda92895e1dfb9c4adf9a35e1ce494e1b0b"
+    },
+    {
+      "ref": "records/processing/m2-radar-dem-fitness-comparison-001-terminal-reconciliation.json",
+      "sha256": "b69c9082a42184d2c26367659610e8afa1467aae8bf27a256e6d337c54bc1bd8"
+    }
+  ],
+  "official_method_guidance": {
+    "gtc_url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-geometric-terrain-correction.html",
+    "rtf_url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-radiometric-terrain-flattening.html",
+    "checked_at_utc": "2026-09-23T17:17:51Z",
+    "gtc_without_full_dem_can_use_metadata_tie_point_approximation": true,
+    "gtc_tie_point_approach_recommended_for_full_ocean_scenes_only": true,
+    "rtf_outputs_nodata_outside_dem_extent": true,
+    "gtc_recommends_despeckle_before_correction": true
+  },
+  "observed_constraints": {
+    "fixed_six_source_order_still_in_prior_contract": true,
+    "prior_baseline_contract_dem_must_span_entire_processed_sar_extent": true,
+    "prior_baseline_contract_primary_despeckle": "NONE",
+    "recovery_005_refined_lee_is_recovery_specific_overlay": true,
+    "approved_four_dem_boxes_cover_event_aois_in_catalog_geometry": true,
+    "approved_four_dem_boxes_cover_full_m1_src_002_005_catalog_swaths": false,
+    "additional_candidate_cells_for_m1_src_002_005": 7,
+    "additional_candidate_head_total_bytes": 273055703,
+    "seven_candidate_source_assessment_structurally_ready": true,
+    "seven_candidate_source_assessment_authorized_next_actions": [],
+    "m1_src_001_single_dem_gtc_diagnostic_completed": true,
+    "m1_src_001_diagnostic_proves_event_pair_fitness": false
+  },
+  "route_options": [
+    {
+      "id": "retain_six_source_route",
+      "implication": "Keep the frozen source and date-mosaic route; all fourteen additional catalog DEM cells remain candidates for full-swath coverage, with new source scope and verified pixels still required.",
+      "selected": false
+    },
+    {
+      "id": "propose_event_area_pair_002_005",
+      "implication": "A new method decision would explicitly select the same-orbit event-area pair without the 001/004 context slices, assess seven additional exact DEM candidates for full processed extent, and predeclare the processing, pixel, registration, and uncertainty gates. This is not a silent substitution under the six-source contract.",
+      "selected": false
+    },
+    {
+      "id": "use_four_dem_tiles_on_full_002_005_swaths",
+      "implication": "Would leave catalog swath areas without the approved DEM and conflict with the frozen full-extent requirement; the current diagnostic does not justify this shortcut.",
+      "selected": false
+    }
+  ],
+  "recommended_review_preparation": "Prepare one coherent owner review for an explicitly amended event-area 002/005 route, the seven exact DEM candidate acquisitions, source verification and conversion, predeclared ArcGIS processing and QA, and bounded safe failure handling. Preserve the ascending route identity and existing scientific predicates unless the review expressly changes them. Separate execution QA from baseline admission and event-change claims.",
+  "authority_boundary": {
+    "new_dem_acquisition_authorized": false,
+    "source_order_or_scientific_method_amended": false,
+    "project_pixel_read_or_arcgis_process_authorized": false,
+    "baseline_admission_or_change_analysis_authorized": false,
+    "local_review_publication_authorized": false,
+    "scientific_result_established": false
+  }
+}

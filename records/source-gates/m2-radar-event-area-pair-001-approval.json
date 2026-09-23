@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-APPROVAL",
+  "status": "owner_approved_single_bounded_envelope_public_ci_pending",
+  "decision_id": "D-M2-RADAR-EVENT-AREA-PAIR-001",
+  "decision": "approve",
+  "human_decision_count": 1,
+  "attestation": true,
+  "owner_statement_verbatim": "I approve M2 radar event-area pair-001 review bundle `ad6f0f5e75c768721ebbc787e6550dcb28e61fba22c86271beed982d220a5423` and proposal `ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2`. I authorize the proposal’s single bounded envelope, conditional on its public CI and preflight gates, through sanitized terminal publication. I attest this is my completed decision.",
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-radar-event-area-pair-001-proposal.json",
+    "proposal_sha256": "ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2",
+    "review_bundle_ref": "reviews/m2-radar-event-area-pair-001/review-bundle.json",
+    "review_bundle_sha256": "ad6f0f5e75c768721ebbc787e6550dcb28e61fba22c86271beed982d220a5423"
+  },
+  "authority": {
+    "single_bounded_envelope_through_sanitized_terminal_publication": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "packet_publication_and_public_ci": true,
+    "implementation_and_disposable_validation": true,
+    "seven_exact_dem_tile_attempts_and_conditional_conversion": true,
+    "conditional_one_fixed_order_event_pair_radar_attempt": true,
+    "real_access_requires_prior_public_ci_and_final_preflight": true,
+    "stop_on_first_unresolved_failure": true,
+    "automatic_retry": false,
+    "baseline_admission_or_change_analysis": false,
+    "derived_pixel_or_scientific_publication": false
+  }
+}

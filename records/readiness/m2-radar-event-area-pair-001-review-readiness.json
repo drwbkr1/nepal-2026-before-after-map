@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-REVIEW-READINESS",
+  "checked_at_utc": "2026-09-23T17:24:02Z",
+  "status": "local_packet_ready_for_one_owner_decision_not_public",
+  "bindings": {
+    "proposal_sha256": "ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2",
+    "review_bundle_sha256": "ad6f0f5e75c768721ebbc787e6550dcb28e61fba22c86271beed982d220a5423",
+    "review_contract_sha256": "0b757a8b4ced1a1bb78f265e761a1865a58857d9786a95d99a77294b38f2d472",
+    "blank_response_sha256": "c7ab7c09673e7e4f149f899a8d430eb352370704987a0e74fa79a3d46dde0027"
+  },
+  "checks": {
+    "exact_input_hashes_match": true,
+    "seven_candidate_id_and_order_match": true,
+    "source_gate_authorized_next_actions": [],
+    "human_decision_count": 0,
+    "public_ci_not_yet_run": true
+  },
+  "released_now": {
+    "packet_publication": false,
+    "new_dem_acquisition": false,
+    "arcgis_project_processing": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  }
+}
