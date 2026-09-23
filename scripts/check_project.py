@@ -1549,6 +1549,8 @@ REQUIRED = [
     "tests/test_m2_radar_event_pair_dem_conversion_reconciliation_001.py",
     "records/processing/m2-radar-event-area-pair-001-dem-conversion-reconciliation.json",
     "records/readiness/m2-radar-event-area-pair-001-dem-mosaic-preflight.json",
+    "scripts/reconcile_m2_radar_event_pair_dem_mosaic_001.py",
+    "records/processing/m2-radar-event-area-pair-001-dem-mosaic-reconciliation.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18480,6 +18482,18 @@ def main() -> None:
         or event_pair_mosaic_preflight.get("released_now", {}).get("radar_processing") is not False
     ):
         fail("M2 radar event-area pair DEM conversion or mosaic preflight differs")
+
+    event_pair_mosaic_result = json.loads((ROOT / "records/processing/m2-radar-event-area-pair-001-dem-mosaic-reconciliation.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_mosaic_result.get("status") != "pass_mosaic_identity_and_structure_only_pending_actual_sar_extent_gate"
+        or event_pair_mosaic_result.get("input_count") != 11
+        or len(event_pair_mosaic_result.get("input_sha256_in_order", [])) != 11
+        or event_pair_mosaic_result.get("output_sha256") != "e46bd9455c19dda85d8c63d0f721df27a4e14abbcc9be0d15e32ed44f32dea4e"
+        or event_pair_mosaic_result.get("metadata", {}).get("horizontal_epsg") != 4326
+        or event_pair_mosaic_result.get("actual_sar_extent_and_valid_elevation_proven") is not False
+        or event_pair_mosaic_result.get("radar_processing_released") is not False
+    ):
+        fail("M2 radar event-area pair mosaic reconciliation differs")
 
     violations = []
     for relative in tracked_files():
