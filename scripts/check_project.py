@@ -1559,6 +1559,7 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-001-footprint-implementation-gate.json",
     "records/readiness/m2-radar-event-area-pair-001-footprint-preflight.json",
     "records/processing/m2-radar-event-area-pair-001-footprint-audit-started.json",
+    "records/processing/m2-radar-event-area-pair-001-footprint-dem-validity-gate.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18545,6 +18546,16 @@ def main() -> None:
         or event_pair_footprint_started.get("automatic_retry") is not False
     ):
         fail("M2 radar event-area pair footprint audit reservation differs")
+    event_pair_footprint_result = json.loads((ROOT / "records/processing/m2-radar-event-area-pair-001-footprint-dem-validity-gate.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_footprint_result.get("status") != "pass_full_actual_sar_footprints_have_valid_dem"
+        or event_pair_footprint_result.get("mosaic_output_sha256") != event_pair_mosaic_result.get("output_sha256")
+        or [item.get("source_id") for item in event_pair_footprint_result.get("source_results", [])] != ["M1-SRC-002", "M1-SRC-005"]
+        or any(item.get("dem_grid_cells_in_full_buffered_footprint", 0) <= 0 or item.get("invalid_dem_cells") != 0 or item.get("valid_fraction") != 1.0 for item in event_pair_footprint_result.get("source_results", []))
+        or event_pair_footprint_result.get("radar_processing_started") is not False
+        or event_pair_footprint_result.get("baseline_or_change_analysis_started") is not False
+    ):
+        fail("M2 radar event-area pair full-footprint DEM validity differs")
 
     violations = []
     for relative in tracked_files():

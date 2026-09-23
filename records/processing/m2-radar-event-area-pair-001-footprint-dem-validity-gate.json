@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-FOOTPRINT-DEM-VALIDITY-GATE",
+  "checked_at_utc": "2026-09-23T22:43:43Z",
+  "status": "pass_full_actual_sar_footprints_have_valid_dem",
+  "method": "Exact materialized SAFE VV and VH annotation geolocation-grid outer boundaries, full scene line and sample extrema, conservative 0.005-degree buffer, GDAL ALL_TOUCHED rasterization, exhaustive native DEM grid-cell mask and finite/nodata scan; not catalog boxes or approved AOI rectangles.",
+  "mosaic_output_sha256": "e46bd9455c19dda85d8c63d0f721df27a4e14abbcc9be0d15e32ed44f32dea4e",
+  "source_results": [
+    {
+      "source_id": "M1-SRC-002",
+      "safe_manifest_sha256": "f1b92efcfeaae2c55b016ada4ce76485595c4e0cd980cd5419c5a4b34d9de849",
+      "annotation_sha256": {
+        "VV": "c25c6540386b642af0f7bfa6648f1940da472da74f01d3784b06e745f32427fa",
+        "VH": "81af45f0ee524947a8ba742fada7df869845ceef444243747b7d2a27ce431a77"
+      },
+      "geolocation_grid_points_per_polarization": [
+        210,
+        210
+      ],
+      "footprint_bounds_degrees": [
+        83.92061814,
+        27.58613595,
+        86.8118742,
+        29.52940196
+      ],
+      "conservative_buffer_degrees": 0.005,
+      "dem_grid_cells_in_full_buffered_footprint": 53449977,
+      "valid_dem_cells": 53449977,
+      "invalid_dem_cells": 0,
+      "valid_fraction": 1.0,
+      "observed_min_ellipsoidal_elevation_m": 120.6011,
+      "observed_max_ellipsoidal_elevation_m": 8131.2319
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "safe_manifest_sha256": "fdbf2ca2a60e1ef77f08a81deb7a8e4de9279546d07708c2901eaa9067dec041",
+      "annotation_sha256": {
+        "VV": "0e4bde18aa9e09019e1d9bac1860192d346fc4dfcb037a73f8f3603db35f78f8",
+        "VH": "0c9ef5ad633c53159f1e02d97964da5d20286488757b5bf8257a7b37cd4c878e"
+      },
+      "geolocation_grid_points_per_polarization": [
+        210,
+        210
+      ],
+      "footprint_bounds_degrees": [
+        83.92087006,
+        27.586195,
+        86.81211037,
+        29.52942149
+      ],
+      "conservative_buffer_degrees": 0.005,
+      "dem_grid_cells_in_full_buffered_footprint": 53449864,
+      "valid_dem_cells": 53449864,
+      "invalid_dem_cells": 0,
+      "valid_fraction": 1.0,
+      "observed_min_ellipsoidal_elevation_m": 120.6011,
+      "observed_max_ellipsoidal_elevation_m": 8131.2319
+    }
+  ],
+  "radar_processing_started": false,
+  "baseline_or_change_analysis_started": false
+}
