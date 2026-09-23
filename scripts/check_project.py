@@ -1545,6 +1545,8 @@ REQUIRED = [
     "tests/test_m2_radar_event_pair_dem_reconciliation_001.py",
     "records/acquisition/m2-radar-event-area-pair-001-seven-dem-terminal-reconciliation.json",
     "records/readiness/m2-radar-event-area-pair-001-dem-conversion-preflight.json",
+    "scripts/reconcile_m2_radar_event_pair_dem_conversion_001.py",
+    "tests/test_m2_radar_event_pair_dem_conversion_reconciliation_001.py",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
