@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-PACKET-PUBLICATION-GATE",
+  "checked_at_utc": "2026-09-23T16:37:42Z",
+  "status": "pass_exact_public_packet_and_approval_ci_implementation_eligible",
+  "bindings": {
+    "proposal_sha256": "a918f784e4722dfa25ddf8c78b0dc98abab86bd4c2023e439293d4004baebf06",
+    "review_bundle_sha256": "f85cfa93c89deb4b50670ede59406bc8ff07b272cffcc2803a15fa5fb870a654",
+    "approval_sha256": "6b7c5dcf6d94c2d9a144330ccefa8fa30de0eaa9e53811757d389e286179a9b0",
+    "review_readiness_sha256": "db2719f0d2af3453bf98a7237e1bcf1f5f559592378c0425ab1419341e4022b1",
+    "packet_commit_sha": "cf059f47ee645f2c32b913f484873b186dc9e9f7",
+    "public_ci_run_id": 35890007199,
+    "public_ci_job_id": 107279790127,
+    "public_ci_conclusion": "success"
+  },
+  "assertions": {
+    "one_owner_decision_applied_to_exact_hashes": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "implementation_eligible_within_scope": true,
+    "project_data_content_read": false,
+    "arcpy_invoked": false,
+    "new_real_process_started": false,
+    "additional_dem_tiles_acquired": false,
+    "baseline_or_change_analysis_released": false
+  }
+}

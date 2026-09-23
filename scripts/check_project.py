@@ -1508,6 +1508,7 @@ REQUIRED = [
     "reviews/m2-radar-dem-fitness-comparison-001/review-contract.json",
     "reviews/m2-radar-dem-fitness-comparison-001/blank-response.json",
     "records/readiness/m2-radar-dem-fitness-comparison-001-review-readiness.json",
+    "records/readiness/m2-radar-dem-fitness-comparison-001-packet-publication-gate.json",
     "records/source-gates/m2-radar-dem-fitness-comparison-001-approval.json",
     "records/observations/m2-radar-dem-candidate-heads-001.json",
     "records/observations/m2-radar-dem-license-recheck-001.json",
@@ -18153,12 +18154,14 @@ def main() -> None:
     dem_fitness_blank_ref = f"reviews/{dem_fitness_prefix}/blank-response.json"
     dem_fitness_readiness_ref = f"records/readiness/{dem_fitness_prefix}-review-readiness.json"
     dem_fitness_approval_ref = f"records/source-gates/{dem_fitness_prefix}-approval.json"
+    dem_fitness_packet_gate_ref = f"records/readiness/{dem_fitness_prefix}-packet-publication-gate.json"
     dem_fitness_proposal = json.loads((ROOT / dem_fitness_proposal_ref).read_text(encoding="utf-8"))
     dem_fitness_bundle = json.loads((ROOT / dem_fitness_bundle_ref).read_text(encoding="utf-8"))
     dem_fitness_contract = json.loads((ROOT / dem_fitness_contract_ref).read_text(encoding="utf-8"))
     dem_fitness_blank = json.loads((ROOT / dem_fitness_blank_ref).read_text(encoding="utf-8"))
     dem_fitness_readiness = json.loads((ROOT / dem_fitness_readiness_ref).read_text(encoding="utf-8"))
     dem_fitness_approval = json.loads((ROOT / dem_fitness_approval_ref).read_text(encoding="utf-8"))
+    dem_fitness_packet_gate = json.loads((ROOT / dem_fitness_packet_gate_ref).read_text(encoding="utf-8"))
     dem_fitness_proposal_sha = sha256(dem_fitness_proposal_ref)
     dem_fitness_bundle_sha = sha256(dem_fitness_bundle_ref)
     dem_fitness_scope = dem_fitness_proposal.get("proposed_single_authority_envelope", {})
@@ -18186,6 +18189,16 @@ def main() -> None:
         or dem_fitness_scope.get("maximum_gtc_calls") != 1
         or dem_fitness_scope.get("additional_dem_tile_requests") != 0
         or dem_fitness_scope.get("automatic_retry") is not False
+        or dem_fitness_packet_gate.get("status") != "pass_exact_public_packet_and_approval_ci_implementation_eligible"
+        or dem_fitness_packet_gate.get("bindings", {}).get("approval_sha256") != sha256(dem_fitness_approval_ref)
+        or dem_fitness_packet_gate.get("bindings", {}).get("proposal_sha256") != dem_fitness_proposal_sha
+        or dem_fitness_packet_gate.get("bindings", {}).get("review_bundle_sha256") != dem_fitness_bundle_sha
+        or dem_fitness_packet_gate.get("bindings", {}).get("review_readiness_sha256") != sha256(dem_fitness_readiness_ref)
+        or dem_fitness_packet_gate.get("bindings", {}).get("packet_commit_sha") != "cf059f47ee645f2c32b913f484873b186dc9e9f7"
+        or dem_fitness_packet_gate.get("bindings", {}).get("public_ci_run_id") != 35890007199
+        or dem_fitness_packet_gate.get("bindings", {}).get("public_ci_conclusion") != "success"
+        or dem_fitness_packet_gate.get("assertions", {}).get("implementation_eligible_within_scope") is not True
+        or dem_fitness_packet_gate.get("assertions", {}).get("new_real_process_started") is not False
     ):
         fail("M2 radar DEM fitness comparison packet or owner authority differs")
 
