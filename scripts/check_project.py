@@ -1565,6 +1565,7 @@ REQUIRED = [
     "scripts/validate_m2_radar_event_pair_processing_001_arcgis.py",
     "records/readiness/m2-radar-event-area-pair-001-radar-arcgis-runtime-validation-attempt-001-failure.json",
     "records/readiness/m2-radar-event-area-pair-001-radar-arcgis-runtime-validation.json",
+    "records/readiness/m2-radar-event-area-pair-001-radar-implementation-gate.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18572,6 +18573,21 @@ def main() -> None:
         or event_pair_radar_disposable_failure.get("project_data_or_external_custody_accessed") is not False
     ):
         fail("M2 radar event-area pair disposable runtime validation differs")
+    event_pair_radar_gate = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-radar-implementation-gate.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_radar_gate.get("status") != "pass_public_ci_event_pair_radar_implementation"
+        or event_pair_radar_gate.get("implementation_commit_sha") != "fbdafc0cd8e5adc1505a7aedc67a7c50f3fed3e3"
+        or event_pair_radar_gate.get("public_ci_run_id") != 35930804934
+        or event_pair_radar_gate.get("public_ci_conclusion") != "success"
+        or event_pair_radar_gate.get("runner_sha256") != sha256("scripts/m2_radar_event_pair_processing_001.py")
+        or event_pair_radar_gate.get("arcgis_runtime_validation_sha256") != sha256("records/readiness/m2-radar-event-area-pair-001-radar-arcgis-runtime-validation.json")
+        or event_pair_radar_gate.get("footprint_gate_sha256") != sha256("records/processing/m2-radar-event-area-pair-001-footprint-dem-validity-gate.json")
+        or event_pair_radar_gate.get("source_order") != ["M1-SRC-002", "M1-SRC-005"]
+        or event_pair_radar_gate.get("maximum_real_attempts") != 1
+        or event_pair_radar_gate.get("automatic_retry") is not False
+        or event_pair_radar_gate.get("baseline_or_change_analysis_released") is not False
+    ):
+        fail("M2 radar event-area pair radar implementation gate differs")
 
     violations = []
     for relative in tracked_files():
