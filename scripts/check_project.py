@@ -1548,6 +1548,7 @@ REQUIRED = [
     "tests/test_m2_radar_event_pair_dem_intake_001.py",
     "scripts/validate_m2_radar_event_pair_dem_intake_001_arcgis.py",
     "records/readiness/m2-radar-event-area-pair-001-dem-intake-arcgis-runtime-validation.json",
+    "records/readiness/m2-radar-event-area-pair-001-dem-intake-arcgis-runtime-validation-final.json",
     "scripts/m2_radar_event_pair_dem_conversion_001.py",
     "scripts/m2_radar_event_pair_dem_mosaic_001.py",
     "tests/test_m2_radar_event_pair_dem_conversion_001.py",
@@ -18367,13 +18368,23 @@ def main() -> None:
     event_pair_runtime = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-dem-intake-arcgis-runtime-validation.json").read_text(encoding="utf-8"))
     if (
         event_pair_runtime.get("status") != "pass_disposable_runtime_only"
-        or event_pair_runtime.get("bindings", {}).get("intake_code_sha256") != sha256("scripts/m2_radar_event_pair_dem_intake_001.py")
-        or event_pair_runtime.get("bindings", {}).get("portable_test_sha256") != sha256("tests/test_m2_radar_event_pair_dem_intake_001.py")
+        or event_pair_runtime.get("bindings", {}).get("intake_code_sha256") != "de7401edda2e99f3f3647c22771a8067b468ea5d063e07060ff5b066bfd34108"
+        or event_pair_runtime.get("bindings", {}).get("portable_test_sha256") != "d6693c3239ef53d302b27298995bfeb4a9c2a7c6284f7b99306d8464d63b1551"
         or event_pair_runtime.get("bindings", {}).get("runtime_validator_sha256") != sha256("scripts/validate_m2_radar_event_pair_dem_intake_001_arcgis.py")
         or event_pair_runtime.get("claim_boundary", {}).get("real_dem_payload_verified") is not False
         or event_pair_runtime.get("claim_boundary", {}).get("seven_tile_acquisition_released") is not False
     ):
         fail("M2 radar event-area pair disposable runtime evidence differs")
+    event_pair_runtime_final = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-dem-intake-arcgis-runtime-validation-final.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_runtime_final.get("status") != "pass_disposable_runtime_only"
+        or event_pair_runtime_final.get("bindings", {}).get("intake_code_sha256") != sha256("scripts/m2_radar_event_pair_dem_intake_001.py")
+        or event_pair_runtime_final.get("bindings", {}).get("portable_test_sha256") != sha256("tests/test_m2_radar_event_pair_dem_intake_001.py")
+        or event_pair_runtime_final.get("bindings", {}).get("runtime_validator_sha256") != sha256("scripts/validate_m2_radar_event_pair_dem_intake_001_arcgis.py")
+        or event_pair_runtime_final.get("claim_boundary", {}).get("real_dem_payload_verified") is not False
+        or event_pair_runtime_final.get("claim_boundary", {}).get("seven_tile_acquisition_released") is not False
+    ):
+        fail("M2 radar event-area pair final disposable intake evidence differs")
     event_pair_mosaic_runtime = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-dem-mosaic-arcgis-runtime-validation.json").read_text(encoding="utf-8"))
     mosaic_bindings = event_pair_mosaic_runtime.get("bindings", {})
     if (

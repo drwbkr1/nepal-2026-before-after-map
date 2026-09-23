@@ -5,6 +5,8 @@ from __future__ import annotations
 import sys
 import tempfile
 import unittest
+import hashlib
+import json
 from pathlib import Path
 from unittest.mock import patch
 
@@ -71,6 +73,70 @@ class EventPairIntakeTests(unittest.TestCase):
         asset = route.exact_assets()[0]
         with self.assertRaisesRegex(route.IntakeError, "source_head_identity_drift"):
             route.check_head(asset, opener=FakeOpener(asset, url="https://other.example/file.tif"))
+
+    def test_exact_license_bytes_and_redirect_guard(self):
+        body = b"%PDF-1.7\nsynthetic license"
+
+        class LicenseResponse:
+            status = 200
+            headers = {"Content-Type": "application/pdf"}
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self, _limit):
+                return body
+
+            def geturl(self):
+                return route.LICENSE_URL
+
+        class Opener:
+            def open(self, request, timeout):
+                self.request_method = request.get_method()
+                self.request_url = request.full_url
+                self.timeout = timeout
+                return LicenseResponse()
+
+        opener = Opener()
+        with patch.object(route, "LICENSE_SHA", hashlib.sha256(body).hexdigest()):
+            self.assertEqual(route.check_license(opener=opener)["size_bytes"], len(body))
+            self.assertEqual((opener.request_method, opener.request_url, opener.timeout), ("GET", route.LICENSE_URL, 60))
+        with self.assertRaisesRegex(route.IntakeError, "exact_license_document_drift"):
+            route.check_license(opener=opener)
+
+    def test_stac_item_identity_is_exact(self):
+        asset = route.exact_assets()[0]
+        item = {"id": asset["item_id"], "collection": "cop-dem-glo-30-dged-cog", "bbox": asset["cell_wgs84"], "assets": {"data": {"href": "https://example.invalid/data"}}}
+
+        class Response:
+            status = 200
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self, _limit):
+                return json.dumps(item).encode("utf-8")
+
+            def geturl(self):
+                return asset["stac_item_url"]
+
+        class Opener:
+            def open(self, request, timeout):
+                self.method = request.get_method()
+                return Response()
+
+        opener = Opener()
+        self.assertEqual(route.check_stac(asset, opener=opener)["item_id"], asset["item_id"])
+        self.assertEqual(opener.method, "GET")
+        item["id"] = "substituted"
+        with self.assertRaisesRegex(route.IntakeError, "stac_item_identity_drift"):
+            route.check_stac(asset, opener=opener)
 
     def test_attempt_number_is_bounded(self):
         with self.assertRaisesRegex(route.IntakeError, "unapproved_item_or_attempt"):

@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-DEM-INTAKE-ARCGIS-RUNTIME-VALIDATION-FINAL",
+  "checked_at_utc": "2026-09-23T21:45:22Z",
+  "status": "pass_disposable_runtime_only",
+  "supersedes_for_current_code": "records/readiness/m2-radar-event-area-pair-001-dem-intake-arcgis-runtime-validation.json",
+  "bindings": {
+    "intake_code_sha256": "054f2205ca6c278581bbcde912be3d585771e20b7948cede664f16695ad364ac",
+    "portable_test_sha256": "19740f319780ac9ef594032eb8cf8f00c8193259c5c50e36612412ded258843f",
+    "runtime_validator_sha256": "90c10b3587d4347fc85d4eefb53e52b76025dfd8cd5919d682e46eb1b9c39040"
+  },
+  "runtime": {
+    "arcgis_pro_version": "3.7.1",
+    "synthetic_raster_dimensions": [3600, 3600],
+    "synthetic_valid_pixel_count": 12960000,
+    "deliberately_shifted_bounds_rejected": true,
+    "project_data_read": false,
+    "external_custody_read_or_mutated": false
+  },
+  "claim_boundary": {
+    "real_dem_payload_verified": false,
+    "seven_tile_acquisition_released": false,
+    "conversion_or_radar_processing_released": false,
+    "scientific_result_established": false
+  }
+}

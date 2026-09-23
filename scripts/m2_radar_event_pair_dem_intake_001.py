@@ -42,7 +42,9 @@ ITEMS = (
     "Copernicus_DSM_COG_10_N29_00_E086_00_DEM",
 )
 HOST = "copernicus-dem-30m.s3.eu-central-1.amazonaws.com"
-MIN_FREE_BYTES = 4 * 1024**3
+LICENSE_URL = "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf"
+LICENSE_SHA = "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd"
+MIN_FREE_BYTES = 60 * 1024**3
 
 
 class IntakeError(Exception):
@@ -94,6 +96,8 @@ def exact_assets() -> list[dict[str, Any]]:
         raise IntakeError("fixed_tile_order_drift")
     if proposal["seven_exact_candidate_item_ids_in_fixed_order"] != list(ITEMS):
         raise IntakeError("proposal_tile_order_drift")
+    if proposal.get("rights_and_custody", {}).get("license_document_sha256") != LICENSE_SHA:
+        raise IntakeError("approved_license_identity_drift")
     if sum(item["observed_head_content_length_bytes"] for item in assets) != 273055703:
         raise IntakeError("metadata_byte_total_drift")
     for item in assets:
@@ -156,6 +160,57 @@ def check_head(asset: dict[str, Any], opener: Any | None = None) -> dict[str, An
     return result
 
 
+def check_license(opener: Any | None = None) -> dict[str, Any]:
+    opener = opener or urllib.request.build_opener(NoRedirectHandler())
+    request = urllib.request.Request(LICENSE_URL, headers={"User-Agent": "nepal-event-pair-dem-rights-preflight/1.0", "Accept": "application/pdf"})
+    try:
+        with opener.open(request, timeout=60) as response:
+            body = response.read(200001)
+            headers = {key.casefold(): value for key, value in response.headers.items()}
+            if (
+                response.status != 200
+                or response.geturl() != LICENSE_URL
+                or len(body) > 200000
+                or not body.startswith(b"%PDF-")
+                or headers.get("content-type", "").split(";", 1)[0].casefold() != "application/pdf"
+                or hashlib.sha256(body).hexdigest() != LICENSE_SHA
+            ):
+                raise IntakeError("exact_license_document_drift")
+            return {"sha256": LICENSE_SHA, "size_bytes": len(body), "exact_url_no_redirect": True}
+    except urllib.error.HTTPError as exc:
+        raise IntakeError("license_http_failure_or_redirect") from exc
+    except (OSError, TimeoutError, urllib.error.URLError) as exc:
+        raise IntakeError("license_unavailable") from exc
+
+
+def check_stac(asset: dict[str, Any], opener: Any | None = None) -> dict[str, Any]:
+    opener = opener or urllib.request.build_opener(NoRedirectHandler())
+    url = asset["stac_item_url"]
+    parsed = urlsplit(url)
+    if parsed.scheme != "https" or parsed.hostname != "stac.dataspace.copernicus.eu" or parsed.query or parsed.fragment:
+        raise IntakeError("unsafe_stac_url")
+    request = urllib.request.Request(url, headers={"User-Agent": "nepal-event-pair-dem-stac-preflight/1.0", "Accept": "application/json"})
+    try:
+        with opener.open(request, timeout=60) as response:
+            body = response.read(100001)
+            if response.status != 200 or response.geturl() != url or len(body) > 100000:
+                raise IntakeError("stac_response_identity_drift")
+            item = json.loads(body)
+    except urllib.error.HTTPError as exc:
+        raise IntakeError("stac_http_failure_or_redirect") from exc
+    except (OSError, TimeoutError, urllib.error.URLError, json.JSONDecodeError) as exc:
+        raise IntakeError("stac_unavailable_or_invalid") from exc
+    if (
+        not isinstance(item, dict)
+        or item.get("id") != asset["item_id"]
+        or item.get("collection") != "cop-dem-glo-30-dged-cog"
+        or item.get("bbox") != [float(value) for value in asset["cell_wgs84"]]
+        or "data" not in item.get("assets", {})
+    ):
+        raise IntakeError("stac_item_identity_drift")
+    return {"item_id": asset["item_id"], "response_sha256": hashlib.sha256(body).hexdigest(), "exact_url_no_redirect": True}
+
+
 def no_payload_preflight(*, opener: Any | None = None, free_bytes: int | None = None) -> list[dict[str, Any]]:
     assets = exact_assets()
     if not DATA_ROOT.is_dir() or DATA_ROOT.is_symlink():
@@ -167,6 +222,9 @@ def no_payload_preflight(*, opener: Any | None = None, free_bytes: int | None = 
         paths = paths_for(item["item_id"])
         if any(path.exists() for path in paths.values()):
             raise IntakeError("fresh_attempt_or_destination_collision")
+    check_license(opener=opener)
+    for item in assets:
+        check_stac(item, opener=opener)
     return [check_head(item, opener=opener) for item in assets]
 
 
