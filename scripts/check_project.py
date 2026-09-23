@@ -1560,6 +1560,11 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-001-footprint-preflight.json",
     "records/processing/m2-radar-event-area-pair-001-footprint-audit-started.json",
     "records/processing/m2-radar-event-area-pair-001-footprint-dem-validity-gate.json",
+    "scripts/m2_radar_event_pair_processing_001.py",
+    "tests/test_m2_radar_event_pair_processing_001.py",
+    "scripts/validate_m2_radar_event_pair_processing_001_arcgis.py",
+    "records/readiness/m2-radar-event-area-pair-001-radar-arcgis-runtime-validation-attempt-001-failure.json",
+    "records/readiness/m2-radar-event-area-pair-001-radar-arcgis-runtime-validation.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18556,6 +18561,17 @@ def main() -> None:
         or event_pair_footprint_result.get("baseline_or_change_analysis_started") is not False
     ):
         fail("M2 radar event-area pair full-footprint DEM validity differs")
+    event_pair_radar_runtime = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-radar-arcgis-runtime-validation.json").read_text(encoding="utf-8"))
+    event_pair_radar_disposable_failure = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-radar-arcgis-runtime-validation-attempt-001-failure.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_radar_runtime.get("status") != "pass_disposable_arcgis_event_pair_mask_and_signatures"
+        or event_pair_radar_runtime.get("runner_sha256") != sha256("scripts/m2_radar_event_pair_processing_001.py")
+        or event_pair_radar_runtime.get("project_data_or_external_custody_accessed") is not False
+        or event_pair_radar_runtime.get("radar_geoprocessing_on_project_data") is not False
+        or event_pair_radar_disposable_failure.get("status") != "terminal_disposable_cleanup_file_lock"
+        or event_pair_radar_disposable_failure.get("project_data_or_external_custody_accessed") is not False
+    ):
+        fail("M2 radar event-area pair disposable runtime validation differs")
 
     violations = []
     for relative in tracked_files():

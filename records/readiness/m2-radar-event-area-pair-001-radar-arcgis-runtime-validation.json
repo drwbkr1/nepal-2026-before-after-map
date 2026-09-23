@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "status": "pass_disposable_arcgis_event_pair_mask_and_signatures",
+  "runner_sha256": "e0fc7b3ed48c5f45f169dbd5f5f609bda80f3e1e8b3f11ca0b9a43909e7c0ddd",
+  "arcgis_version": "3.7.1",
+  "all_required_raster_function_signatures_match": true,
+  "disposable_pixel_count": 1024,
+  "valid_layover_shadow_undetermined_and_nodata_predicates_pass": true,
+  "project_data_or_external_custody_accessed": false,
+  "radar_geoprocessing_on_project_data": false
+}
