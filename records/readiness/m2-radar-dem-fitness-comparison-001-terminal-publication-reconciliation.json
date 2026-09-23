@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-TERMINAL-PUBLICATION-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-23T17:05:20Z",
+  "status": "pass_exact_terminal_gate_public_ci_reconciled",
+  "bindings": {
+    "terminal_publication_gate_ref": "records/readiness/m2-radar-dem-fitness-comparison-001-terminal-publication-gate.json",
+    "terminal_publication_gate_sha256": "bc31434fccb8677028d242674b21d3969abb038cc018bec243ee91fdf861aca1",
+    "terminal_gate_commit_sha": "ed061083ad8a26456aa363d9065dd0264332c964",
+    "terminal_gate_public_ci_run_id": 35892968645,
+    "terminal_gate_public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/35892968645",
+    "terminal_reconciliation_sha256": "b69c9082a42184d2c26367659610e8afa1467aae8bf27a256e6d337c54bc1bd8",
+    "final_preflight_sha256": "d8a2e5e0d7988d7608d0662472a1b8a3b1b4180f64275234e3e7da0d3e217211",
+    "quarantined_output_inventory_sha256": "47bb4ebae874174bad924f67aabe7ae44d899cdf302fe9be08ee48867284fac7"
+  },
+  "observation": {
+    "quarantined_output_file_count": 101,
+    "quarantined_output_total_file_bytes": 2653220232,
+    "gamma_overview_valid_both_bands": 1579825,
+    "gamma_source_aoi_status": "not_applicable_no_native_grid_intersection",
+    "gamma_upper_corridor_aoi_status": "not_applicable_no_native_grid_intersection"
+  },
+  "assertions": {
+    "terminal_gate_public_ci_conclusion_success": true,
+    "one_diagnostic_attempt_consumed": true,
+    "one_dem_supplied_gtc_call_and_save_completed": true,
+    "automatic_retry_performed": false,
+    "quarantined_derived_pixels_published": false,
+    "full_six_source_dem_fitness_established": false,
+    "historical_error_cause_isolated": false,
+    "baseline_or_change_evidence_established": false,
+    "follow_on_processing_released": false,
+    "scientific_publication_authorized": false
+  },
+  "current_checkpoint": "M2-RADAR-DEM-FITNESS-COMPARISON-001-TERMINAL-REVIEW",
+  "next_action": "Assess the published six-source footprint and AOI coverage evidence for a separately scoped owner decision; do not reuse this quarantined diagnostic output as map or baseline data or automatically acquire more DEM tiles or process other radar sources."
+}
