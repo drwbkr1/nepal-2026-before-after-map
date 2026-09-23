@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-RADAR-DEM-LICENSE-RECHECK-001",
+  "checked_at_utc": "2026-09-22T22:05:17Z",
+  "status": "pass_same_public_license_document_bytes_as_prior_four_tile_acceptance",
+  "document_url": "https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Data/DEM/resources/license/License-COPDEM-30.pdf",
+  "observed_document_size_bytes": 113786,
+  "observed_document_sha256": "9cd37d37ea654bbcaf0a2e059e6a3a5b5f76072824d8dd860ccf274ada8951bd",
+  "prior_approval_ref": "records/source-gates/m2-dem-amendment-approval.json",
+  "prior_approval_sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+  "prior_license_acceptance_applies_to_document_identity": true,
+  "prior_acquisition_scope_limited_to_four_tiles": true,
+  "new_tile_acquisition_authorized": false,
+  "new_source_fitness_established": false,
+  "account_or_terms_action_performed": false,
+  "method": "One public GET of the licence PDF into process memory for SHA-256; no file retained or licence acceptance action performed."
+}

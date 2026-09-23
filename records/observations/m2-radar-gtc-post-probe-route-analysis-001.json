@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-RADAR-GTC-POST-PROBE-ROUTE-ANALYSIS-001",
+  "status": "local_zero_decision_method_analysis_only",
+  "input_bindings": [
+    {
+      "ref": "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+      "sha256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521"
+    },
+    {
+      "ref": "records/processing/m2-radar-gtc-dem-isolation-probe-001-terminal-reconciliation.json",
+      "sha256": "2ada1edd398eea7e6dfd35729a1da3e7c9f12d22e99b4b05f336bcc8b4e958af"
+    },
+    {
+      "ref": "records/observations/m2-radar-dem-swath-catalog-001.json",
+      "sha256": "ed2c7653a656e7eb274d2f1fc1e510ec48d065112b5fbeab8986548240b17f83"
+    },
+    {
+      "ref": "records/observations/m2-radar-dem-candidate-heads-001.json",
+      "sha256": "41a3dfece724e2c6177afcdcd20fff4f07368f2de767bb53deedab3563b6ccc8"
+    },
+    {
+      "ref": "records/observations/m2-radar-dem-license-recheck-001.json",
+      "sha256": "cb903c464a72cc729ff103b11f19b2756f7af1869e0e1c2d37952eb24a4a093a"
+    }
+  ],
+  "observations": {
+    "prior_gtc_with_four_tile_dem": "ArcGIS ERROR 000425 before Raster return in consumed recovery-005",
+    "later_gtc_without_dem": "Raster returned and one explicit save completed in consumed diagnostic-only probe-001",
+    "comparison_changed_variables": [
+      "DEM and geoid arguments were supplied only in recovery-005",
+      "recovery-005 passed the saved CRF path as a string; probe-001 reopened it as an ArcPy Raster object",
+      "recovery-005 used a 10 m snapRaster and bilinear EnvManager around GTC; probe-001 did not",
+      "the calls occurred in separate processes and attempts"
+    ],
+    "public_catalog_dem_boxes_cover_fraction_of_six_radar_footprints_percent": "25.35 to 60.97, depending on source; this is catalog geometry, not valid-pixel coverage",
+    "four_approved_dem_cells": 4,
+    "additional_catalog_intersecting_cells": 14,
+    "additional_stac_items_http_200": 14,
+    "additional_anonymous_asset_heads_http_200": 14,
+    "additional_asset_header_content_length_total_bytes": 572186011,
+    "license_document_same_accepted_sha256": true
+  },
+  "official_method_boundary": {
+    "gtc_url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-geometric-terrain-correction.html",
+    "rtf_url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-radiometric-terrain-flattening.html",
+    "checked_at_utc": "2026-09-22T22:02:22Z",
+    "gtc_land_scene_requires_dem": true,
+    "gtc_outside_partial_dem_can_use_metadata_tie_points": true,
+    "rtf_outside_dem_extent_outputs_nodata": true,
+    "catalog_footprint_gap_alone_proves_error_cause": false,
+    "no_dem_output_is_scientifically_admissible_for_nepal_land_scene": false
+  },
+  "source_gate": {
+    "four_tile_acquisition_approval_extends_to_fourteen_candidates": false,
+    "candidate_metadata_availability_proves_payload_integrity": false,
+    "additional_tile_need_and_pixel_fitness": "unknown",
+    "additional_tile_acquisition_disposition": "defer_until_valid-pixel_coverage_and_method_compatibility_evidence"
+  },
+  "recommended_next_review_scope": {
+    "decision_count": 1,
+    "unit_1": "Read-only actual valid-pixel and NoData coverage audit of the exact preserved M1-SRC-001 RTF gamma, approved AOIs, and exact four-tile ellipsoidal DEM mosaic; no derived-pixel publication.",
+    "unit_2": "Only if predeclared coverage and identity gates pass, at most one new isolated GTC comparison on the exact preserved saved gamma CRF and exact existing DEM under the successful probe's environment, with DEM argument and geoid NONE; quarantine any output.",
+    "unit_3": "Synthetic and ArcGIS runtime tests, public CI gates, final no-content preflight, durable terminal receipts, and sanitized publication under one owner decision without intermediate reconfirmation.",
+    "stop_rule": "Stop on failed coverage, failed comparison, identity drift, or receipt persistence failure; do not acquire candidate tiles or launch six-source radar processing in this scope.",
+    "follow_on_if_pass": "Use resulting coverage and GTC evidence to propose one scientifically reviewed six-source radar route; no automatic admission or execution.",
+    "follow_on_if_block": "Reassess actual DEM coverage, ArcGIS environment, or the exact additional-tile source gate from evidence; do not infer a remedy from catalog boxes alone."
+  },
+  "claims_not_established": [
+    "historical ERROR 000425 root cause",
+    "existing four-tile DEM valid-pixel sufficiency for land-scene correction",
+    "new fourteen-tile DEM need, integrity, or fitness",
+    "radar processing recovery readiness",
+    "usable before or after baseline",
+    "change evidence, geomorphic interpretation, or event attribution"
+  ],
+  "authority_boundary": {
+    "publication_authorized_by_local_preparation": false,
+    "project_or_external_custody_pixel_read_performed": false,
+    "new_arcgis_processing_attempt_started": false,
+    "new_dem_acquisition_authorized": false,
+    "scientific_method_amendment_approved": false
+  }
+}

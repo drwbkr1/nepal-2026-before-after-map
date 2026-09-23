@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-22T22:12:33Z",
+  "status": "local_zero_decision_one_owner_decision_required",
+  "human_decision_count": 0,
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-m2-radar-dem-fitness-comparison-001-proposal.json",
+      "sha256": "a918f784e4722dfa25ddf8c78b0dc98abab86bd4c2023e439293d4004baebf06",
+      "role": "proposal"
+    },
+    {
+      "path": "docs/M2_RADAR_DEM_FITNESS_COMPARISON_001_REVIEW.md",
+      "sha256": "a9e9a4abe5c5bae25e9e13ff617847fbab418bd9bcf4806b2b24724d1b91e825",
+      "role": "human_readable_review"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "a4630c53af4fcfff730b6a006923698f177f8939f78cf62e2a602770574682ba",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+      "sha256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/processing/m2-radar-gtc-dem-isolation-probe-001-terminal-reconciliation.json",
+      "sha256": "2ada1edd398eea7e6dfd35729a1da3e7c9f12d22e99b4b05f336bcc8b4e958af",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/processing/m2-radar-gtc-input-compatibility-diagnostic-001-terminal-reconciliation.json",
+      "sha256": "150ccee98112d8a29b04e2da29807964c1006254542e1136341848f96a6f31c3",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/observations/m2-radar-gtc-post-probe-route-analysis-001.json",
+      "sha256": "eda62f0c72fbe62303a3288256aab1d064b50a5467d4feeac87177b1e8c5da80",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/observations/m2-radar-dem-swath-catalog-001.json",
+      "sha256": "ed2c7653a656e7eb274d2f1fc1e510ec48d065112b5fbeab8986548240b17f83",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/observations/m2-radar-dem-candidate-heads-001.json",
+      "sha256": "41a3dfece724e2c6177afcdcd20fff4f07368f2de767bb53deedab3563b6ccc8",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/observations/m2-radar-dem-license-recheck-001.json",
+      "sha256": "cb903c464a72cc729ff103b11f19b2756f7af1869e0e1c2d37952eb24a4a093a",
+      "role": "frozen_input"
+    },
+    {
+      "path": "config/qa/m2-radar-pixel-orbit-application-001-contract.json",
+      "sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+      "role": "frozen_input"
+    },
+    {
+      "path": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+      "role": "frozen_input"
+    },
+    {
+      "path": "records/source-gates/m2-dem-amendment-approval.json",
+      "sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0",
+      "role": "frozen_input"
+    }
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-RADAR-DEM-FITNESS-COMPARISON-001",
+    "question": "Approve, revise, or defer the one bounded diagnostic envelope?",
+    "choices": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "response_open": true
+  },
+  "authority_boundary": {
+    "publication_authorized": false,
+    "implementation_authorized": false,
+    "project_pixel_read_authorized": false,
+    "gtc_or_new_attempt_authorized": false,
+    "new_dem_acquisition_authorized": false
+  }
+}

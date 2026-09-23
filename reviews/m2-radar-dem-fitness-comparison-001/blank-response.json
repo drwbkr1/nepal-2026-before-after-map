@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "response_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-BLANK-RESPONSE",
+  "completed": false,
+  "reviewer": {
+    "name": null,
+    "reviewed_at_utc": null,
+    "attestation": false
+  },
+  "decision": {
+    "id": "D-M2-RADAR-DEM-FITNESS-COMPARISON-001",
+    "value": null,
+    "comment": null
+  },
+  "human_decision_count": 0,
+  "bindings": {
+    "proposal_sha256": "a918f784e4722dfa25ddf8c78b0dc98abab86bd4c2023e439293d4004baebf06",
+    "review_bundle_sha256": "f85cfa93c89deb4b50670ede59406bc8ff07b272cffcc2803a15fa5fb870a654"
+  }
+}

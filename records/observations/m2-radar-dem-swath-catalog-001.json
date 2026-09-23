@@ -1,0 +1,582 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-RADAR-DEM-SWATH-CATALOG-001",
+  "observed_at_utc": "2026-09-22T22:03:08Z",
+  "status": "local_zero_decision_public_metadata_inventory_only",
+  "input_bindings": [
+    {
+      "ref": "records/source-manifest.json",
+      "sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef"
+    },
+    {
+      "ref": "records/source-gates/m2-dem-candidate-manifest.json",
+      "sha256": "1fb1b96f4bb3e42b77b4638d7ea36f13685eb29dec7e01a63c27acfc56786243"
+    },
+    {
+      "ref": "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+      "sha256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521"
+    },
+    {
+      "ref": "records/processing/m2-radar-gtc-dem-isolation-probe-001-terminal-reconciliation.json",
+      "sha256": "2ada1edd398eea7e6dfd35729a1da3e7c9f12d22e99b4b05f336bcc8b4e958af"
+    },
+    {
+      "ref": "scripts/m2_radar_esri_sequence_processing_005.py",
+      "sha256": "faadf83f4ae1c35209ed104ab3ba2c97ad233615655aaa31dfc72851b968e0fd"
+    },
+    {
+      "ref": "scripts/m2_radar_gtc_dem_isolation_probe_001.py",
+      "sha256": "2b921244d9fef1b23ff180dd4cafe256902f08c4715349e3cbd2341aa493adb6"
+    }
+  ],
+  "method": "Clip six approved public SAR catalog polygons against integer WGS84 one-degree cells and inspect public CDSE STAC item metadata for cells not in the four-tile approval. No DEM or SAR payload was requested or read.",
+  "intersecting_cells": [
+    {
+      "latitude": 26,
+      "longitude": 84,
+      "source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-004"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 26,
+      "longitude": 85,
+      "source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-004"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 26,
+      "longitude": 86,
+      "source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-004"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 26,
+      "longitude": 87,
+      "source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-004"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 27,
+      "longitude": 84,
+      "source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002",
+        "M1-SRC-004",
+        "M1-SRC-005"
+      ],
+      "already_approved": true
+    },
+    {
+      "latitude": 27,
+      "longitude": 85,
+      "source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002",
+        "M1-SRC-003",
+        "M1-SRC-004",
+        "M1-SRC-005",
+        "M1-SRC-006"
+      ],
+      "already_approved": true
+    },
+    {
+      "latitude": 27,
+      "longitude": 86,
+      "source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002",
+        "M1-SRC-003",
+        "M1-SRC-004",
+        "M1-SRC-005",
+        "M1-SRC-006"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 27,
+      "longitude": 87,
+      "source_ids": [
+        "M1-SRC-003",
+        "M1-SRC-006"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 28,
+      "longitude": 83,
+      "source_ids": [
+        "M1-SRC-002",
+        "M1-SRC-005"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 28,
+      "longitude": 84,
+      "source_ids": [
+        "M1-SRC-002",
+        "M1-SRC-005"
+      ],
+      "already_approved": true
+    },
+    {
+      "latitude": 28,
+      "longitude": 85,
+      "source_ids": [
+        "M1-SRC-002",
+        "M1-SRC-003",
+        "M1-SRC-005",
+        "M1-SRC-006"
+      ],
+      "already_approved": true
+    },
+    {
+      "latitude": 28,
+      "longitude": 86,
+      "source_ids": [
+        "M1-SRC-001",
+        "M1-SRC-002",
+        "M1-SRC-003",
+        "M1-SRC-004",
+        "M1-SRC-005",
+        "M1-SRC-006"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 28,
+      "longitude": 87,
+      "source_ids": [
+        "M1-SRC-003",
+        "M1-SRC-006"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 28,
+      "longitude": 88,
+      "source_ids": [
+        "M1-SRC-003",
+        "M1-SRC-006"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 29,
+      "longitude": 83,
+      "source_ids": [
+        "M1-SRC-002",
+        "M1-SRC-005"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 29,
+      "longitude": 84,
+      "source_ids": [
+        "M1-SRC-002",
+        "M1-SRC-005"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 29,
+      "longitude": 85,
+      "source_ids": [
+        "M1-SRC-002",
+        "M1-SRC-005"
+      ],
+      "already_approved": false
+    },
+    {
+      "latitude": 29,
+      "longitude": 86,
+      "source_ids": [
+        "M1-SRC-002",
+        "M1-SRC-005"
+      ],
+      "already_approved": false
+    }
+  ],
+  "additional_candidate_cells": [
+    {
+      "latitude": 26,
+      "longitude": 84
+    },
+    {
+      "latitude": 26,
+      "longitude": 85
+    },
+    {
+      "latitude": 26,
+      "longitude": 86
+    },
+    {
+      "latitude": 26,
+      "longitude": 87
+    },
+    {
+      "latitude": 27,
+      "longitude": 86
+    },
+    {
+      "latitude": 27,
+      "longitude": 87
+    },
+    {
+      "latitude": 28,
+      "longitude": 83
+    },
+    {
+      "latitude": 28,
+      "longitude": 86
+    },
+    {
+      "latitude": 28,
+      "longitude": 87
+    },
+    {
+      "latitude": 28,
+      "longitude": 88
+    },
+    {
+      "latitude": 29,
+      "longitude": 83
+    },
+    {
+      "latitude": 29,
+      "longitude": 84
+    },
+    {
+      "latitude": 29,
+      "longitude": 85
+    },
+    {
+      "latitude": 29,
+      "longitude": 86
+    }
+  ],
+  "public_stac_observations": [
+    {
+      "item_id": "Copernicus_DSM_COG_10_N26_00_E084_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N26_00_E084_00_DEM",
+      "checked_at_utc": "2026-09-22T22:02:54Z",
+      "http_status": 200,
+      "response_sha256": "5952a2d7b99b13a1fc974567410b10cb646ac35ef8d5ef088841aad40153109b",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N26_00_E084_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        84.0,
+        26.0,
+        85.0,
+        27.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N26_00_E085_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N26_00_E085_00_DEM",
+      "checked_at_utc": "2026-09-22T22:02:56Z",
+      "http_status": 200,
+      "response_sha256": "a496a784cd613c58bc07e79d7453d5a7ecfab10d96989b38c409a3caae72421a",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N26_00_E085_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        85.0,
+        26.0,
+        86.0,
+        27.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N26_00_E086_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N26_00_E086_00_DEM",
+      "checked_at_utc": "2026-09-22T22:02:56Z",
+      "http_status": 200,
+      "response_sha256": "3324042e7a86b0ddcd2e5263e914b7a867c50b24b0ab18ee4efdf345c3785dd9",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N26_00_E086_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        86.0,
+        26.0,
+        87.0,
+        27.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N26_00_E087_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N26_00_E087_00_DEM",
+      "checked_at_utc": "2026-09-22T22:02:57Z",
+      "http_status": 200,
+      "response_sha256": "19cba3b360d362c4dec4343076de7382590efc31f33ee82993ed0f5272a5981a",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N26_00_E087_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        87.0,
+        26.0,
+        88.0,
+        27.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N27_00_E086_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E086_00_DEM",
+      "checked_at_utc": "2026-09-22T22:02:58Z",
+      "http_status": 200,
+      "response_sha256": "4761912f44d91b99c1fede02deb31fb2379efbc513d812c367cc49266d7501f4",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N27_00_E086_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        86.0,
+        27.0,
+        87.0,
+        28.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N27_00_E087_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N27_00_E087_00_DEM",
+      "checked_at_utc": "2026-09-22T22:02:59Z",
+      "http_status": 200,
+      "response_sha256": "7fd5bdc71c5c4e0f2b32f1ee34f4fff6c6d876be072506e2664ebc3076b789a3",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N27_00_E087_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        87.0,
+        27.0,
+        88.0,
+        28.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N28_00_E083_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E083_00_DEM",
+      "checked_at_utc": "2026-09-22T22:03:01Z",
+      "http_status": 200,
+      "response_sha256": "6123e9d76f99b91a616008b68690e5c501a21007e92b6845cc5e8523b7babe24",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N28_00_E083_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        83.0,
+        28.0,
+        84.0,
+        29.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N28_00_E086_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E086_00_DEM",
+      "checked_at_utc": "2026-09-22T22:03:02Z",
+      "http_status": 200,
+      "response_sha256": "da962ecfa3a85d1d56bd5be33f584a12959148fab687ec19f1d6579db9006cc2",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N28_00_E086_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        86.0,
+        28.0,
+        87.0,
+        29.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N28_00_E087_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E087_00_DEM",
+      "checked_at_utc": "2026-09-22T22:03:03Z",
+      "http_status": 200,
+      "response_sha256": "6517e34a788902bbc1c0a0d636f06ebad22f6f862f39f24b5d48cfb826c9852c",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N28_00_E087_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        87.0,
+        28.0,
+        88.0,
+        29.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N28_00_E088_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N28_00_E088_00_DEM",
+      "checked_at_utc": "2026-09-22T22:03:04Z",
+      "http_status": 200,
+      "response_sha256": "6fd66df0607b4d5fbccda9858e3c1d53ad4263d0a8bb4f99d9326e5f5307421a",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N28_00_E088_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        88.0,
+        28.0,
+        89.0,
+        29.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N29_00_E083_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N29_00_E083_00_DEM",
+      "checked_at_utc": "2026-09-22T22:03:05Z",
+      "http_status": 200,
+      "response_sha256": "c3e2daac35bb967f8a307a02ad7afe3221ea40458a764770a4d2a0faa1a8d1ea",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N29_00_E083_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        83.0,
+        29.0,
+        84.0,
+        30.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N29_00_E084_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N29_00_E084_00_DEM",
+      "checked_at_utc": "2026-09-22T22:03:06Z",
+      "http_status": 200,
+      "response_sha256": "f12f3c6f2e96183f3364231da64769d1735299d285744c4aaa9215e2813e58ee",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N29_00_E084_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        84.0,
+        29.0,
+        85.0,
+        30.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N29_00_E085_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N29_00_E085_00_DEM",
+      "checked_at_utc": "2026-09-22T22:03:06Z",
+      "http_status": 200,
+      "response_sha256": "030eeecc1038b0caa111ce89ffb178c349691a535eb9963f00ab137889f8feb5",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N29_00_E085_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        85.0,
+        29.0,
+        86.0,
+        30.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    },
+    {
+      "item_id": "Copernicus_DSM_COG_10_N29_00_E086_00_DEM",
+      "stac_item_url": "https://stac.dataspace.copernicus.eu/v1/collections/cop-dem-glo-30-dged-cog/items/Copernicus_DSM_COG_10_N29_00_E086_00_DEM",
+      "checked_at_utc": "2026-09-22T22:03:07Z",
+      "http_status": 200,
+      "response_sha256": "4983e46d795a2abdead4f8a89e35f776c9815c0c135b796a09459b537f70bc48",
+      "response_bytes": 3348,
+      "returned_item_id": "Copernicus_DSM_COG_10_N29_00_E086_00_DEM",
+      "returned_collection": "cop-dem-glo-30-dged-cog",
+      "returned_bbox_wgs84": [
+        86.0,
+        29.0,
+        87.0,
+        30.0
+      ],
+      "asset_keys": [
+        "data",
+        "manifest"
+      ],
+      "redirect_followed": false
+    }
+  ],
+  "controlled_comparison_limitation": "Recovery-005 used a saved-CRF path, a DEM and geoid argument, and a 10m bilinear snap environment; the successful no-DEM probe reopened the saved CRF as a Raster in a separate process without that environment. The changed variables prevent attributing the earlier failure to DEM coverage or bytes.",
+  "official_esri_guidance": {
+    "gtc_url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-geometric-terrain-correction.html",
+    "rtf_url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-radiometric-terrain-flattening.html",
+    "checked_at_utc": "2026-09-22T22:03:08Z",
+    "summary": "Esri says GTC without a DEM uses metadata tie points and directs users to specify a DEM for land scenes. GTC can interpolate outside a partial DEM; RTF emits NoData outside DEM extent. These rules do not establish the current input's valid-pixel coverage or the earlier ERROR 000425 cause."
+  },
+  "boundaries": {
+    "new_dem_tiles_selected_or_approved": false,
+    "additional_tiles_available_or_fit": false,
+    "dem_payload_or_source_pixels_read": false,
+    "historical_failure_cause_established": false,
+    "scientific_radar_output_admitted": false,
+    "acquisition_or_processing_authorized": false
+  }
+}

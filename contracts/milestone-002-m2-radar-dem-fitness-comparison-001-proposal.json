@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001",
+  "prepared_at_utc": "2026-09-22T22:12:33Z",
+  "status": "local_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "base_commit": "dafa082b608b16f630e5378ca8072e76e17078fe",
+  "input_bindings": [
+    {
+      "ref": "AGENTS.md",
+      "sha256": "a4630c53af4fcfff730b6a006923698f177f8939f78cf62e2a602770574682ba"
+    },
+    {
+      "ref": "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+      "sha256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521"
+    },
+    {
+      "ref": "records/processing/m2-radar-gtc-dem-isolation-probe-001-terminal-reconciliation.json",
+      "sha256": "2ada1edd398eea7e6dfd35729a1da3e7c9f12d22e99b4b05f336bcc8b4e958af"
+    },
+    {
+      "ref": "records/processing/m2-radar-gtc-input-compatibility-diagnostic-001-terminal-reconciliation.json",
+      "sha256": "150ccee98112d8a29b04e2da29807964c1006254542e1136341848f96a6f31c3"
+    },
+    {
+      "ref": "records/observations/m2-radar-gtc-post-probe-route-analysis-001.json",
+      "sha256": "eda62f0c72fbe62303a3288256aab1d064b50a5467d4feeac87177b1e8c5da80"
+    },
+    {
+      "ref": "records/observations/m2-radar-dem-swath-catalog-001.json",
+      "sha256": "ed2c7653a656e7eb274d2f1fc1e510ec48d065112b5fbeab8986548240b17f83"
+    },
+    {
+      "ref": "records/observations/m2-radar-dem-candidate-heads-001.json",
+      "sha256": "41a3dfece724e2c6177afcdcd20fff4f07368f2de767bb53deedab3563b6ccc8"
+    },
+    {
+      "ref": "records/observations/m2-radar-dem-license-recheck-001.json",
+      "sha256": "cb903c464a72cc729ff103b11f19b2756f7af1869e0e1c2d37952eb24a4a093a"
+    },
+    {
+      "ref": "config/qa/m2-radar-pixel-orbit-application-001-contract.json",
+      "sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1"
+    },
+    {
+      "ref": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"
+    },
+    {
+      "ref": "records/source-gates/m2-dem-amendment-approval.json",
+      "sha256": "6d1fc7e05854bc149ace177d89e84a7651cc049efd530cab650a9464222769d0"
+    }
+  ],
+  "problem": "The DEM-supplied recovery-005 GTC failed with ERROR 000425, whereas a no-DEM diagnostic returned and saved a Raster. Input representation, environment, and process also differed; no historical cause is isolated. Four-tile catalog geometry does not establish valid DEM coverage, and the no-DEM land-scene output cannot be admitted scientifically.",
+  "question": "Is there actual valid DEM and preserved gamma coverage in the M1-SRC-001 portion of the approved overview AOI, and can one isolated DEM-supplied GTC call complete under the later successful probe environment?",
+  "official_guidance": {
+    "gtc_url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-geometric-terrain-correction.html",
+    "rtf_url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-radiometric-terrain-flattening.html",
+    "block_read_url": "https://doc.esri.com/en/arcgis-pro/latest/arcpy/functions/rastertonumpyarray-function.html",
+    "boundary": "Esri directs land-scene GTC to use a DEM; RTF yields NoData outside DEM extent. Catalog polygons and a no-DEM output do not establish usable terrain-corrected pixels."
+  },
+  "proposed_single_authority_envelope": {
+    "covers_without_intermediate_reconfirmation": [
+      "local bounded implementation and synthetic and installed ArcGIS disposable runtime validation",
+      "public default-branch packet, implementation, and execution CI gates",
+      "one final no-content preflight and one new append-only diagnostic process",
+      "read-only actual valid-pixel and NoData audit of the exact existing DEM and preserved gamma on the frozen overview AOI",
+      "only on structural and positive-overlap pass, at most one DEM-supplied GTC call and one output save",
+      "durable terminal and cleanup receipts, exact reconciliation, and sanitized public terminal publication"
+    ],
+    "attempt_id": "radar-dem-fitness-comparison-001-real-001",
+    "prospective_attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\r5\\d3",
+    "exact_gamma_input": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\r5\\a1\\s\\1\\gamma0_linear_despeckled.crf",
+    "exact_dem_input": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\r5\\a1\\dem\\ellipsoidal_dem_mosaic.tif",
+    "exact_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "output_ref_within_attempt_root": "gtc_with_existing_dem_diagnostic.crf",
+  "coverage_audit_method": [
+    "Before real execution, publish a fixed blockwise raster-read algorithm and test it on disposable rasters; do not adapt its validity predicate after seeing project pixels.",
+    "Use at most 512-by-512 native-grid RasterToNumPyArray windows. Confirm Esri's multiband (bands, rows, columns) shape and cell-corner snapping on disposable rasters; fail closed on shape or alignment ambiguity.",
+    "Project the frozen EPSG:32645 AOI geometry into each input's verified native EPSG:4326 CRS and count native cell centers within that geometry. Do not reproject, resample, write, or derive either input raster.",
+    "Read only the exact existing DEM and both bands of the exact preserved gamma CRF. Establish band-specific NoData and finite-value predicates before counting; if a NoData sentinel is absent, collides with valid values, or cannot be distinguished reliably, stop before GTC rather than classify unknown cells as valid.",
+    "Count valid and NoData cells for each input within its own projected AOI-OVERVIEW intersection; report separate counts, geometry, and denominators. Do not call these counts co-registered pixel overlap or full SAR-scene DEM coverage.",
+      "Gate the GTC comparison only on exact identity, successful complete counts, positive native valid cells for DEM and both gamma bands in the AOI-OVERVIEW, and a positive geometric intersection of their valid-cell envelopes there. This is a diagnostic floor, not a scientific coverage threshold or baseline admission.",
+      "Report coverage for AOI-SOURCE and AOI-UPPER-CORRIDOR where each input intersects, with not-applicable where M1-SRC-001 does not; do not impose full-AOI or six-source route criteria on this diagnostic."
+    ],
+    "conditional_exact_call": "arcpy.ia.ApplyGeometricTerrainCorrection(arcpy.Raster(exact_gamma_input), 'VV;VH', exact_dem_input, 'NONE')",
+    "environment": "Same one-process ArcGIS Image Analyst and scratch-workspace setup as the successful no-DEM probe; no recovery-005 10 m snapRaster, cellSize, or resampling EnvManager override around GTC.",
+    "save_rule": "Only if GTC returns Raster, save once to the declared absent output and quarantine it outside Git; never use or publish its pixels.",
+    "preflight": [
+      "verify exact public evidence hashes and consumed prior attempt identities",
+      "verify exact input and DEM paths and approved AOI identity without reading pixels",
+      "verify prospective root and output absent, path lengths safe, disk space at least 60 GiB, installed ArcGIS interface and Image Analyst availability",
+      "reserve durable terminal and cleanup receipt identities before any project-data pixel read"
+    ],
+    "maximum_new_processes": 1,
+    "maximum_gtc_calls": 1,
+    "maximum_output_saves": 1,
+    "automatic_retry": false,
+    "stop_on_failure": true,
+    "network_or_credential_actions": 0,
+    "additional_dem_tile_requests": 0,
+    "other_geoprocessing_calls": 0,
+    "possible_observations": {
+      "coverage_block": "Actual input validity or identity prevents this narrow comparison; retain receipts and stop without GTC.",
+      "gtc_success": "The exact DEM-supplied call can complete in this changed input/environment; neither historical root cause nor full-route fitness is established.",
+      "gtc_failure": "The call remains blocked or fails; do not attribute a sole cause or retry."
+    }
+  },
+  "source_gate": {
+    "existing_four_tiles": "Previously accepted exact source and license, for diagnostic use only under the reviewed action envelope.",
+    "additional_fourteen_tiles": "Public STAC/HEAD metadata observed; integrity, valid-pixel fitness, need, and acquisition authority remain unresolved. Defer acquisition."
+  },
+  "exclusions": [
+    "reuse, resume, retry, or mutation of consumed recovery-005, input diagnostic, or no-DEM probe attempts",
+    "new DEM acquisition, source or DEM conversion, substitution, or mutation",
+    "source/date/order/identity, AOI, CRS, mask, threshold, or frozen scientific-route substitution",
+    "another source, route, fallback call, second process, or retry after any failure",
+    "baseline admission, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication",
+    "historical-root-cause, terrain-error-cause, full DEM fitness, or radar-recovery-readiness claim"
+  ],
+  "does_not_authorize_now": [
+    "Git commit, push, public CI, or response recording",
+    "ArcPy invocation, project-data or external-custody access, or pixel read",
+    "new GTC call, DEM acquisition, or scientific use"
+  ]
+}

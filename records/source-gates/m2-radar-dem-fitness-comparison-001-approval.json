@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-APPROVAL",
+  "recorded_at_utc": "2026-09-23T16:33:53Z",
+  "status": "approved_exact_single_bounded_diagnostic_envelope_through_sanitized_terminal_publication",
+  "authority_ref": "user-instruction:2026-09-23:m2-radar-dem-fitness-comparison-001-contextual-approval",
+  "owner_statement_verbatim": "I approve them",
+  "statement_context": "Direct reply to the assistant message naming only the revised proposal and review bundle and their exact SHA-256 identities. Earlier packet hashes were explicitly superseded.",
+  "attestation": true,
+  "attestation_basis": "The owner's first-person declarative approval is the completed decision; no separate attestation sentence was supplied or attributed to the owner.",
+  "human_decision_count": 1,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-m2-radar-dem-fitness-comparison-001-proposal.json",
+    "proposal_sha256": "a918f784e4722dfa25ddf8c78b0dc98abab86bd4c2023e439293d4004baebf06",
+    "review_bundle_ref": "reviews/m2-radar-dem-fitness-comparison-001/review-bundle.json",
+    "review_bundle_sha256": "f85cfa93c89deb4b50670ede59406bc8ff07b272cffcc2803a15fa5fb870a654"
+  },
+  "authorized_scope": {
+    "packet_publication_and_public_ci": true,
+    "bounded_implementation_and_portable_synthetic_tests": true,
+    "installed_arcgis_disposable_runtime_validation": true,
+    "public_implementation_and_execution_ci_gates": true,
+    "one_final_no_content_preflight": true,
+    "maximum_fresh_diagnostic_processes": 1,
+    "read_only_actual_dem_and_gamma_pixel_audit": true,
+    "maximum_conditional_dem_supplied_gtc_calls": 1,
+    "maximum_quarantined_output_saves": 1,
+    "automatic_retry": false,
+    "terminal_reconciliation_and_sanitized_publication": true,
+    "intermediate_owner_reconfirmation_required": false
+  },
+  "exclusions": [
+    "reuse, resume, retry, or mutation of any consumed attempt",
+    "new DEM tile acquisition, DEM conversion, or source substitution",
+    "other geoprocessing calls, any later source or radar route",
+    "baseline admission, change analysis, attribution, derived-pixel publication, or scientific publication",
+    "historical-root-cause or radar-recovery-readiness claim"
+  ]
+}

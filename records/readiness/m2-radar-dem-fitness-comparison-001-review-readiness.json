@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-REVIEW-READINESS",
+  "status": "pass_local_zero_decision_packet_ready_one_owner_decision_required",
+  "base_commit": "dafa082b608b16f630e5378ca8072e76e17078fe",
+  "bindings": {
+    "proposal_sha256": "a918f784e4722dfa25ddf8c78b0dc98abab86bd4c2023e439293d4004baebf06",
+    "review_document_sha256": "a9e9a4abe5c5bae25e9e13ff617847fbab418bd9bcf4806b2b24724d1b91e825",
+    "review_bundle_sha256": "f85cfa93c89deb4b50670ede59406bc8ff07b272cffcc2803a15fa5fb870a654",
+    "review_contract_sha256": "36789559bcb28764316e3b77c468577f7583c17d5bbb7b702adb3ba1d02f1b31",
+    "blank_response_sha256": "566c7349f9fe192e174c658f25aab1efd65f52b25eaf69946fb4c832311e5d34"
+  },
+  "validation": {
+    "prior_attempts_consumed": true,
+    "new_decisions_recorded": 0,
+    "project_pixels_read": false
+  },
+  "released_now": {
+    "local_preparation": true,
+    "publication": false,
+    "implementation": false,
+    "real_process": false
+  },
+  "next_action": "One owner decision on the exact local bundle covering publication through sanitized terminal reconciliation; no intermediate reconfirmation."
+}

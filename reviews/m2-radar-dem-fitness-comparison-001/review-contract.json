@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-REVIEW-CONTRACT",
+  "review_bundle": {
+    "ref": "reviews/m2-radar-dem-fitness-comparison-001/review-bundle.json",
+    "sha256": "f85cfa93c89deb4b50670ede59406bc8ff07b272cffcc2803a15fa5fb870a654"
+  },
+  "proposal": {
+    "ref": "contracts/milestone-002-m2-radar-dem-fitness-comparison-001-proposal.json",
+    "sha256": "a918f784e4722dfa25ddf8c78b0dc98abab86bd4c2023e439293d4004baebf06"
+  },
+  "response_requirements": {
+    "exact_hashes_required": true,
+    "explicit_decision_required": true,
+    "attestation_required": true
+  },
+  "workflow_authority": {
+    "local_preparation_complete": true,
+    "response_open": true
+  }
+}

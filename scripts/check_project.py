@@ -1502,6 +1502,20 @@ REQUIRED = [
     "records/processing/m2-radar-gtc-dem-isolation-probe-001-terminal-reconciliation.json",
     "records/readiness/m2-radar-gtc-dem-isolation-probe-001-terminal-publication-gate.json",
     "records/readiness/m2-radar-gtc-dem-isolation-probe-001-terminal-publication-reconciliation.json",
+    "contracts/milestone-002-m2-radar-dem-fitness-comparison-001-proposal.json",
+    "docs/M2_RADAR_DEM_FITNESS_COMPARISON_001_REVIEW.md",
+    "reviews/m2-radar-dem-fitness-comparison-001/review-bundle.json",
+    "reviews/m2-radar-dem-fitness-comparison-001/review-contract.json",
+    "reviews/m2-radar-dem-fitness-comparison-001/blank-response.json",
+    "records/readiness/m2-radar-dem-fitness-comparison-001-review-readiness.json",
+    "records/source-gates/m2-radar-dem-fitness-comparison-001-approval.json",
+    "records/observations/m2-radar-dem-candidate-heads-001.json",
+    "records/observations/m2-radar-dem-license-recheck-001.json",
+    "records/observations/m2-radar-dem-swath-catalog-001.json",
+    "records/observations/m2-radar-gtc-post-probe-route-analysis-001.json",
+    "scripts/observe_m2_radar_dem_candidate_heads_001.py",
+    "scripts/observe_m2_radar_dem_swath_catalog_001.py",
+    "scripts/prepare_m2_radar_dem_fitness_comparison_001_review.py",
     ".github/workflows/validate.yml",
 ]
 
@@ -18131,6 +18145,49 @@ def main() -> None:
         or gtc_probe_terminal_publication.get("assertions", {}).get("follow_on_processing_released") is not False
     ):
         fail("M2 radar GTC DEM-isolation probe implementation readiness differs or overclaims")
+
+    dem_fitness_prefix = "m2-radar-dem-fitness-comparison-001"
+    dem_fitness_proposal_ref = "contracts/milestone-002-m2-radar-dem-fitness-comparison-001-proposal.json"
+    dem_fitness_bundle_ref = f"reviews/{dem_fitness_prefix}/review-bundle.json"
+    dem_fitness_contract_ref = f"reviews/{dem_fitness_prefix}/review-contract.json"
+    dem_fitness_blank_ref = f"reviews/{dem_fitness_prefix}/blank-response.json"
+    dem_fitness_readiness_ref = f"records/readiness/{dem_fitness_prefix}-review-readiness.json"
+    dem_fitness_approval_ref = f"records/source-gates/{dem_fitness_prefix}-approval.json"
+    dem_fitness_proposal = json.loads((ROOT / dem_fitness_proposal_ref).read_text(encoding="utf-8"))
+    dem_fitness_bundle = json.loads((ROOT / dem_fitness_bundle_ref).read_text(encoding="utf-8"))
+    dem_fitness_contract = json.loads((ROOT / dem_fitness_contract_ref).read_text(encoding="utf-8"))
+    dem_fitness_blank = json.loads((ROOT / dem_fitness_blank_ref).read_text(encoding="utf-8"))
+    dem_fitness_readiness = json.loads((ROOT / dem_fitness_readiness_ref).read_text(encoding="utf-8"))
+    dem_fitness_approval = json.loads((ROOT / dem_fitness_approval_ref).read_text(encoding="utf-8"))
+    dem_fitness_proposal_sha = sha256(dem_fitness_proposal_ref)
+    dem_fitness_bundle_sha = sha256(dem_fitness_bundle_ref)
+    dem_fitness_scope = dem_fitness_proposal.get("proposed_single_authority_envelope", {})
+    if (
+        dem_fitness_proposal_sha != "a918f784e4722dfa25ddf8c78b0dc98abab86bd4c2023e439293d4004baebf06"
+        or dem_fitness_bundle_sha != "f85cfa93c89deb4b50670ede59406bc8ff07b272cffcc2803a15fa5fb870a654"
+        or any(sha256(item["ref"]) != item["sha256"] for item in dem_fitness_proposal["input_bindings"])
+        or any(sha256(item["path"]) != item["sha256"] for item in dem_fitness_bundle["artifacts"])
+        or dem_fitness_contract.get("review_bundle", {}).get("sha256") != dem_fitness_bundle_sha
+        or dem_fitness_contract.get("proposal", {}).get("sha256") != dem_fitness_proposal_sha
+        or dem_fitness_blank.get("completed") is not False
+        or dem_fitness_blank.get("human_decision_count") != 0
+        or dem_fitness_readiness.get("bindings", {}).get("proposal_sha256") != dem_fitness_proposal_sha
+        or dem_fitness_readiness.get("bindings", {}).get("review_bundle_sha256") != dem_fitness_bundle_sha
+        or dem_fitness_readiness.get("released_now", {}).get("real_process") is not False
+        or dem_fitness_approval.get("bindings", {}).get("proposal_sha256") != dem_fitness_proposal_sha
+        or dem_fitness_approval.get("bindings", {}).get("review_bundle_sha256") != dem_fitness_bundle_sha
+        or dem_fitness_approval.get("owner_statement_verbatim") != "I approve them"
+        or dem_fitness_approval.get("attestation") is not True
+        or dem_fitness_approval.get("human_decision_count") != 1
+        or dem_fitness_approval.get("authorized_scope", {}).get("maximum_fresh_diagnostic_processes") != 1
+        or dem_fitness_approval.get("authorized_scope", {}).get("maximum_conditional_dem_supplied_gtc_calls") != 1
+        or dem_fitness_approval.get("authorized_scope", {}).get("automatic_retry") is not False
+        or dem_fitness_scope.get("maximum_new_processes") != 1
+        or dem_fitness_scope.get("maximum_gtc_calls") != 1
+        or dem_fitness_scope.get("additional_dem_tile_requests") != 0
+        or dem_fitness_scope.get("automatic_retry") is not False
+    ):
+        fail("M2 radar DEM fitness comparison packet or owner authority differs")
 
     violations = []
     for relative in tracked_files():
