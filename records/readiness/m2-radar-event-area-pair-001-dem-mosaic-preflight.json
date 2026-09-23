@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-DEM-MOSAIC-PREFLIGHT",
+  "checked_at_utc": "2026-09-23T22:21:11Z",
+  "status": "pass_no_mosaic",
+  "bindings": {
+    "conversion_reconciliation_sha256": "f51df1c2ca421099c564dc07077c407db4618effb21e62269da0c1b68f767a17",
+    "mosaic_code_sha256": "f8d6a6540de1619c83b41fd1b19e69a3bbb01cf6a8e7374ba2ea27a9e29abb90"
+  },
+  "checks": {
+    "exact_input_derivatives": 11,
+    "touching_seams": 15,
+    "finite_samples_per_seam": 3600,
+    "observed_maximum_correction_discontinuity_m": 0.00048828125,
+    "historical_four_tile_maximum_correction_discontinuity_m": 0.00048828125,
+    "seam_review": "no_new_discontinuity_above_the_recorded_prior_four_tile_maximum",
+    "numeric_seam_threshold_amended": false,
+    "mosaic_attempt_root_absent": true,
+    "free_bytes": 471766028288,
+    "single_disposable_arcgis_mosaic_runtime_validation_passed": true,
+    "mosaic_attempts_started": 0
+  },
+  "released_now": {
+    "one_append_only_eleven_tile_mosaic_attempt": true,
+    "automatic_retry": false,
+    "actual_sar_extent_and_valid_elevation_gate_still_required": true,
+    "radar_processing": false,
+    "baseline_or_change_analysis": false
+  }
+}

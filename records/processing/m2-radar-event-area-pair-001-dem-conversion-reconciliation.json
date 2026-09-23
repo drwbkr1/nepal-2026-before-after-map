@@ -1,0 +1,276 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-DEM-CONVERSION-RECONCILIATION",
+  "checked_at_utc": "2026-09-23T22:20:39Z",
+  "status": "pass_eleven_exact_derivatives_seams_measured_not_yet_reviewed",
+  "derivatives": [
+    {
+      "source_id": "M2-DEM-001",
+      "cell": [
+        27,
+        84
+      ],
+      "source_sha256": "66ae02e02fff0bcc1455717c1a5d6199c5ad3d00f96a1a94c10b74f3301d122a",
+      "ellipsoidal_sha256": "6e1d85f9b3f2f189b3db4b5bc5b87cf26b7f58a0a08081a9001f951a194c76ec",
+      "output_size_bytes": 33923558,
+      "terminal_receipt_sha256": "ee38b41393bc0b4bfc18ca3f96903c3b9f7aa1d90deed72c4854d0a72a89c941"
+    },
+    {
+      "source_id": "M2-DEM-002",
+      "cell": [
+        27,
+        85
+      ],
+      "source_sha256": "5a0ec09cda62bcacfccacae0724e6493bee8f3f6fe11fb0ef47ccf3fa3716194",
+      "ellipsoidal_sha256": "85e060693b913d6715bd1b03fdf3f0fb743e59ec5334cbff37722d65f5dd4fce",
+      "output_size_bytes": 33194280,
+      "terminal_receipt_sha256": "3313d454253cc6b8856fb9abb70241e101e26ad99309aea415942bf234c19b8b"
+    },
+    {
+      "source_id": "M2-DEM-003",
+      "cell": [
+        28,
+        84
+      ],
+      "source_sha256": "4df89793d0dc6373deb9c27536a1d7039ec4a9962a699a2312f57c935fbbe6dc",
+      "ellipsoidal_sha256": "f4ccae4518c7557421e8f4beff8357b1cf99434ffe338492f354ac99de1216f9",
+      "output_size_bytes": 30742774,
+      "terminal_receipt_sha256": "cd5cc1faa7ec3c56b7b5e0d15d893aaefd343c590c33744d6f3a710e14411242"
+    },
+    {
+      "source_id": "M2-DEM-004",
+      "cell": [
+        28,
+        85
+      ],
+      "source_sha256": "1590255a0ae7e8c1f49b277e287032a18a2e32c8e13c4c3298ed458f851cd3c7",
+      "ellipsoidal_sha256": "8f001ecd6507262a9871dab06e391805315868b33383f14b76851627d7601f81",
+      "output_size_bytes": 28271841,
+      "terminal_receipt_sha256": "9f1718f5eb91c208980157797775838d150f909d26647df97d1eb33261f12818"
+    },
+    {
+      "source_id": "M2-DEM-EVENT-001",
+      "cell": [
+        27,
+        86
+      ],
+      "source_sha256": "4dfc87a0dec44a8a037164ddade45dd24bb53187176b5a14175c265bd6d20e76",
+      "ellipsoidal_sha256": "8208bd6517451ce380461f18c44111bfda2df3f84dc3eccdc4b748ce01670b7c",
+      "output_size_bytes": 31704867,
+      "terminal_receipt_sha256": "2502676d9e3fcf586a34ff6ac5311b88ede67c0318bdd9c0cd0f6b97c7bdd912"
+    },
+    {
+      "source_id": "M2-DEM-EVENT-002",
+      "cell": [
+        28,
+        83
+      ],
+      "source_sha256": "964c1708a96bd8437de439b5eaf6e659eda85f6b70a3563de5fbd02d1fdf9bbe",
+      "ellipsoidal_sha256": "c1693922926f96410029b3451c21d0db1fcc4c624db091aeaf145831fc83674f",
+      "output_size_bytes": 31144609,
+      "terminal_receipt_sha256": "cf3440dcb3c39a061b603b6cb3a8619e035ca85e71d265e4b3bb9c14cebccf2e"
+    },
+    {
+      "source_id": "M2-DEM-EVENT-003",
+      "cell": [
+        28,
+        86
+      ],
+      "source_sha256": "c13a224161a9fb9de14ea259a9f5dfa3c9d39f975c78c53b87e497c04b3c4b9c",
+      "ellipsoidal_sha256": "e941111a765765ab537e67098b69804132367e72fe40afeea41253f8830a8fec",
+      "output_size_bytes": 28096916,
+      "terminal_receipt_sha256": "61759cf4dc7d24f64f06ba55d089b94e52efad60103cb496909cec7c88e1f85a"
+    },
+    {
+      "source_id": "M2-DEM-EVENT-004",
+      "cell": [
+        29,
+        83
+      ],
+      "source_sha256": "adc17f551e1fd8d00bab2230af23344b5ca2ca4772b739e7b36d59581cb952c8",
+      "ellipsoidal_sha256": "8ab19fd304b93ac745ef0c9cf155fae977863ef9dc0899c365704ec76b9a4e66",
+      "output_size_bytes": 27582138,
+      "terminal_receipt_sha256": "f433d5f17f4cbdb03fd99fc5e7add26de54b926d089f67439ba71ddb28b90023"
+    },
+    {
+      "source_id": "M2-DEM-EVENT-005",
+      "cell": [
+        29,
+        84
+      ],
+      "source_sha256": "ee7616d594585235d2d388d77bb8f7113e19676825aa529b03f492eba2530d73",
+      "ellipsoidal_sha256": "032215965c6eb6a9333dfa4538fbf32621d1f9eb675ef109853de5e73f4cd5b0",
+      "output_size_bytes": 27190169,
+      "terminal_receipt_sha256": "84f3b591e7f7f8ed860ca1306544f1d25677e1d18f6db80ca7eb3930e96e7db7"
+    },
+    {
+      "source_id": "M2-DEM-EVENT-006",
+      "cell": [
+        29,
+        85
+      ],
+      "source_sha256": "8fe8cf7b253bea4981e0b4e4e417a6e7676d720fec7c8a03c341c30dc2624a2a",
+      "ellipsoidal_sha256": "cdb5ed9943e48c36e326265741068c8a292a8e856b704f94088ef76bb2e736c4",
+      "output_size_bytes": 27133372,
+      "terminal_receipt_sha256": "02b4e98f6de73c1db4e4578487d3a7c4d9d808e1c7407ced62511e3060b7d630"
+    },
+    {
+      "source_id": "M2-DEM-EVENT-007",
+      "cell": [
+        29,
+        86
+      ],
+      "source_sha256": "d829ee6bef476a5d62e7369ae74983bc114a550709edc29a14a66fb6bf470267",
+      "ellipsoidal_sha256": "d443c600ac09ac1456bc58017b58a3c27482ba2dcf57f9ec7247b288144d2ca8",
+      "output_size_bytes": 27862495,
+      "terminal_receipt_sha256": "e60a1ab10c7e169a1e7a2a30f49d9b822612405b317cbb7136a93a877f0cc8e0"
+    }
+  ],
+  "seams": [
+    {
+      "seam_id": "E85-N27",
+      "first_source_id": "M2-DEM-001",
+      "second_source_id": "M2-DEM-002",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.000244140625,
+      "correction_discontinuity_abs_p99_m": 0.0003662109375,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "N28-E84",
+      "first_source_id": "M2-DEM-001",
+      "second_source_id": "M2-DEM-003",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 6.103515625e-05,
+      "correction_discontinuity_abs_p99_m": 0.0001220703125,
+      "correction_discontinuity_abs_max_m": 0.0001220703125
+    },
+    {
+      "seam_id": "E86-N27",
+      "first_source_id": "M2-DEM-002",
+      "second_source_id": "M2-DEM-EVENT-001",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.000244140625,
+      "correction_discontinuity_abs_p99_m": 0.000244140625,
+      "correction_discontinuity_abs_max_m": 0.000244140625
+    },
+    {
+      "seam_id": "N28-E85",
+      "first_source_id": "M2-DEM-002",
+      "second_source_id": "M2-DEM-004",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.0,
+      "correction_discontinuity_abs_p99_m": 0.000244140625,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "N28-E86",
+      "first_source_id": "M2-DEM-EVENT-001",
+      "second_source_id": "M2-DEM-EVENT-003",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.0,
+      "correction_discontinuity_abs_p99_m": 0.00048828125,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "E84-N28",
+      "first_source_id": "M2-DEM-EVENT-002",
+      "second_source_id": "M2-DEM-003",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.0,
+      "correction_discontinuity_abs_p99_m": 0.00048828125,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "N29-E83",
+      "first_source_id": "M2-DEM-EVENT-002",
+      "second_source_id": "M2-DEM-EVENT-004",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.0,
+      "correction_discontinuity_abs_p99_m": 0.00048828125,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "E85-N28",
+      "first_source_id": "M2-DEM-003",
+      "second_source_id": "M2-DEM-004",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.00048828125,
+      "correction_discontinuity_abs_p99_m": 0.00048828125,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "N29-E84",
+      "first_source_id": "M2-DEM-003",
+      "second_source_id": "M2-DEM-EVENT-005",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.0,
+      "correction_discontinuity_abs_p99_m": 0.00048828125,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "E86-N28",
+      "first_source_id": "M2-DEM-004",
+      "second_source_id": "M2-DEM-EVENT-003",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.000244140625,
+      "correction_discontinuity_abs_p99_m": 0.00048828125,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "N29-E85",
+      "first_source_id": "M2-DEM-004",
+      "second_source_id": "M2-DEM-EVENT-006",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.0,
+      "correction_discontinuity_abs_p99_m": 0.00048828125,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "N29-E86",
+      "first_source_id": "M2-DEM-EVENT-003",
+      "second_source_id": "M2-DEM-EVENT-007",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.0,
+      "correction_discontinuity_abs_p99_m": 0.00048828125,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "E84-N29",
+      "first_source_id": "M2-DEM-EVENT-004",
+      "second_source_id": "M2-DEM-EVENT-005",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.0,
+      "correction_discontinuity_abs_p99_m": 0.00048828125,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "E85-N29",
+      "first_source_id": "M2-DEM-EVENT-005",
+      "second_source_id": "M2-DEM-EVENT-006",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.00048828125,
+      "correction_discontinuity_abs_p99_m": 0.00048828125,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    },
+    {
+      "seam_id": "E86-N29",
+      "first_source_id": "M2-DEM-EVENT-006",
+      "second_source_id": "M2-DEM-EVENT-007",
+      "sample_count": 3600,
+      "correction_discontinuity_abs_median_m": 0.00048828125,
+      "correction_discontinuity_abs_p99_m": 0.00048828125,
+      "correction_discontinuity_abs_max_m": 0.00048828125
+    }
+  ],
+  "assertions": {
+    "original_four_derivatives_read_only": true,
+    "new_conversion_attempts": 7,
+    "automatic_retries": 0,
+    "source_overwrites": 0,
+    "mosaic_attempts_started": 0,
+    "actual_sar_extent_or_valid_elevation_proven": false,
+    "radar_processing_started": false,
+    "baseline_or_change_analysis_released": false
+  }
+}

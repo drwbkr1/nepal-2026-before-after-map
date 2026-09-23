@@ -1547,6 +1547,8 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-001-dem-conversion-preflight.json",
     "scripts/reconcile_m2_radar_event_pair_dem_conversion_001.py",
     "tests/test_m2_radar_event_pair_dem_conversion_reconciliation_001.py",
+    "records/processing/m2-radar-event-area-pair-001-dem-conversion-reconciliation.json",
+    "records/readiness/m2-radar-event-area-pair-001-dem-mosaic-preflight.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18463,6 +18465,21 @@ def main() -> None:
         or event_pair_conversion_preflight.get("released_now", {}).get("radar_processing") is not False
     ):
         fail("M2 radar event-area pair DEM intake or conversion preflight differs")
+    event_pair_conversion_result = json.loads((ROOT / "records/processing/m2-radar-event-area-pair-001-dem-conversion-reconciliation.json").read_text(encoding="utf-8"))
+    event_pair_mosaic_preflight = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-dem-mosaic-preflight.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_conversion_result.get("status") != "pass_eleven_exact_derivatives_seams_measured_not_yet_reviewed"
+        or len(event_pair_conversion_result.get("derivatives", [])) != 11
+        or len(event_pair_conversion_result.get("seams", [])) != 15
+        or any(item.get("sample_count") != 3600 for item in event_pair_conversion_result.get("seams", []))
+        or event_pair_conversion_result.get("assertions", {}).get("mosaic_attempts_started") != 0
+        or event_pair_mosaic_preflight.get("status") != "pass_no_mosaic"
+        or event_pair_mosaic_preflight.get("bindings", {}).get("conversion_reconciliation_sha256") != sha256("records/processing/m2-radar-event-area-pair-001-dem-conversion-reconciliation.json")
+        or event_pair_mosaic_preflight.get("bindings", {}).get("mosaic_code_sha256") != sha256("scripts/m2_radar_event_pair_dem_mosaic_001.py")
+        or event_pair_mosaic_preflight.get("checks", {}).get("numeric_seam_threshold_amended") is not False
+        or event_pair_mosaic_preflight.get("released_now", {}).get("radar_processing") is not False
+    ):
+        fail("M2 radar event-area pair DEM conversion or mosaic preflight differs")
 
     violations = []
     for relative in tracked_files():
