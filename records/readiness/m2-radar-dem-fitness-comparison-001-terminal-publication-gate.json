@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-DEM-FITNESS-COMPARISON-001-TERMINAL-PUBLICATION-GATE",
+  "checked_at_utc": "2026-09-23T17:02:14Z",
+  "status": "pass_public_default_branch_ci_terminal_evidence_only",
+  "terminal_commit_sha": "18243f86d9752509e96d596c94f350d8288f4477",
+  "public_ci_run_id": 35892789436,
+  "public_ci_job_id": 107289136609,
+  "public_ci_conclusion": "success",
+  "bindings": {
+    "proposal_sha256": "a918f784e4722dfa25ddf8c78b0dc98abab86bd4c2023e439293d4004baebf06",
+    "review_bundle_sha256": "f85cfa93c89deb4b50670ede59406bc8ff07b272cffcc2803a15fa5fb870a654",
+    "approval_sha256": "6b7c5dcf6d94c2d9a144330ccefa8fa30de0eaa9e53811757d389e286179a9b0",
+    "final_preflight_sha256": "d8a2e5e0d7988d7608d0662472a1b8a3b1b4180f64275234e3e7da0d3e217211",
+    "terminal_reconciliation_sha256": "b69c9082a42184d2c26367659610e8afa1467aae8bf27a256e6d337c54bc1bd8"
+  },
+  "assertions": {
+    "one_diagnostic_attempt_consumed": true,
+    "coverage_audit_and_single_dem_supplied_gtc_completed": true,
+    "quarantined_output_not_published": true,
+    "old_attempts_unchanged": true,
+    "automatic_retry_performed": false,
+    "historical_error_cause_isolated": false,
+    "full_six_source_dem_fitness_established": false,
+    "baseline_or_change_analysis_released": false,
+    "follow_on_processing_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}
