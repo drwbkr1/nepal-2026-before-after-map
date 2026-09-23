@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-PACKET-PUBLICATION-GATE",
+  "status": "pass_exact_public_packet_and_approval_ci_implementation_eligible",
+  "bindings": {
+    "proposal_sha256": "ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2",
+    "review_bundle_sha256": "ad6f0f5e75c768721ebbc787e6550dcb28e61fba22c86271beed982d220a5423",
+    "approval_sha256": "50becd7494176d5202075d71cbaf40d9da316d1f585144e8defbc8036534de01",
+    "review_readiness_sha256": "3e8e68c549a9c8fe9b19bb2f4116d137b39c44866fcee610be7c212a463e460e",
+    "packet_commit_sha": "5cc9e3b660c7efabfa644d803ba5450efde677e9",
+    "public_ci_run_id": 35920087744,
+    "public_ci_job_id": 107381530106,
+    "public_ci_conclusion": "success"
+  },
+  "assertions": {
+    "one_owner_decision_applied_to_exact_hashes": true,
+    "implementation_eligible_within_scope": true,
+    "new_dem_payload_requested": false,
+    "arcgis_project_processing_started": false,
+    "baseline_or_change_analysis_released": false
+  }
+}

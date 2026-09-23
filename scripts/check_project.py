@@ -1536,6 +1536,7 @@ REQUIRED = [
     "reviews/m2-radar-event-area-pair-001/review-contract.json",
     "reviews/m2-radar-event-area-pair-001/blank-response.json",
     "records/readiness/m2-radar-event-area-pair-001-review-readiness.json",
+    "records/readiness/m2-radar-event-area-pair-001-packet-publication-gate.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18343,6 +18344,16 @@ def main() -> None:
     for artifact in event_pair_bundle.get("artifacts", []):
         if artifact.get("sha256") != sha256(artifact.get("path", "")):
             fail("M2 radar event-area pair frozen artifact differs")
+    event_pair_packet_gate = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-packet-publication-gate.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_packet_gate.get("bindings", {}).get("approval_sha256") != sha256("records/source-gates/m2-radar-event-area-pair-001-approval.json")
+        or event_pair_packet_gate.get("bindings", {}).get("proposal_sha256") != sha256(event_pair_proposal_ref)
+        or event_pair_packet_gate.get("bindings", {}).get("review_bundle_sha256") != sha256(event_pair_bundle_ref)
+        or event_pair_packet_gate.get("bindings", {}).get("review_readiness_sha256") != sha256("records/readiness/m2-radar-event-area-pair-001-review-readiness.json")
+        or event_pair_packet_gate.get("bindings", {}).get("public_ci_conclusion") != "success"
+        or event_pair_packet_gate.get("assertions", {}).get("baseline_or_change_analysis_released") is not False
+    ):
+        fail("M2 radar event-area pair public packet gate differs")
 
     violations = []
     for relative in tracked_files():
