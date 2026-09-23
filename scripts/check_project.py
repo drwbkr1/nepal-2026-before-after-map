@@ -1558,6 +1558,7 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-001-footprint-arcgis-runtime-validation-final.json",
     "records/readiness/m2-radar-event-area-pair-001-footprint-implementation-gate.json",
     "records/readiness/m2-radar-event-area-pair-001-footprint-preflight.json",
+    "records/processing/m2-radar-event-area-pair-001-footprint-audit-started.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18533,6 +18534,17 @@ def main() -> None:
         or event_pair_footprint_preflight.get("radar_geoprocessing_started") is not False
     ):
         fail("M2 radar event-area pair footprint no-content preflight differs")
+    event_pair_footprint_started = json.loads((ROOT / "records/processing/m2-radar-event-area-pair-001-footprint-audit-started.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_footprint_started.get("status") != "reserved_pending_one_read_only_audit"
+        or event_pair_footprint_started.get("source_order") != ["M1-SRC-002", "M1-SRC-005"]
+        or event_pair_footprint_started.get("code_sha256") != sha256("scripts/m2_radar_event_pair_dem_footprint_gate_001.py")
+        or event_pair_footprint_started.get("preflight_sha256") != sha256("records/readiness/m2-radar-event-area-pair-001-footprint-preflight.json")
+        or event_pair_footprint_started.get("safe_content_or_dem_pixel_read_started") is not False
+        or event_pair_footprint_started.get("radar_geoprocessing_started") is not False
+        or event_pair_footprint_started.get("automatic_retry") is not False
+    ):
+        fail("M2 radar event-area pair footprint audit reservation differs")
 
     violations = []
     for relative in tracked_files():
