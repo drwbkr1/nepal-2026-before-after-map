@@ -1556,6 +1556,7 @@ REQUIRED = [
     "scripts/validate_m2_radar_event_pair_dem_footprint_gate_001_arcgis.py",
     "records/readiness/m2-radar-event-area-pair-001-footprint-arcgis-runtime-validation.json",
     "records/readiness/m2-radar-event-area-pair-001-footprint-arcgis-runtime-validation-final.json",
+    "records/readiness/m2-radar-event-area-pair-001-footprint-implementation-gate.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18508,6 +18509,18 @@ def main() -> None:
         or event_pair_footprint_runtime.get("project_data_or_external_custody_accessed") is not False
     ):
         fail("M2 radar event-area pair footprint disposable runtime validation differs")
+    event_pair_footprint_gate = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-footprint-implementation-gate.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_footprint_gate.get("status") != "pass_public_ci_footprint_implementation"
+        or event_pair_footprint_gate.get("implementation_commit_sha") != "8fccb9d86f700f7e132ef725d269129fb39f56e1"
+        or event_pair_footprint_gate.get("public_ci_run_id") != 35929544482
+        or event_pair_footprint_gate.get("public_ci_conclusion") != "success"
+        or event_pair_footprint_gate.get("code_sha256") != sha256("scripts/m2_radar_event_pair_dem_footprint_gate_001.py")
+        or event_pair_footprint_gate.get("mosaic_reconciliation_sha256") != sha256("records/processing/m2-radar-event-area-pair-001-dem-mosaic-reconciliation.json")
+        or event_pair_footprint_gate.get("arcgis_runtime_validation_sha256") != sha256("records/readiness/m2-radar-event-area-pair-001-footprint-arcgis-runtime-validation-final.json")
+        or event_pair_footprint_gate.get("assertions", {}).get("radar_geoprocessing_released") is not False
+    ):
+        fail("M2 radar event-area pair footprint implementation gate differs")
 
     violations = []
     for relative in tracked_files():
