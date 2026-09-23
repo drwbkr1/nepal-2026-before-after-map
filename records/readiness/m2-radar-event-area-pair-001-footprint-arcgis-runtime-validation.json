@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "status": "pass_disposable_arcgis_runtime_footprint_mask_and_nodata_rejection",
+  "production_code_sha256": "bfdab55d18f6946137fa9bac86b57eabe7c39e74001f162e9ab78e89e8cc64b9",
+  "disposable_raster_cells": 10000,
+  "valid_case_selected_cells": 4890,
+  "valid_case_invalid_cells": 0,
+  "nodata_case_invalid_cells": 100,
+  "project_data_or_external_custody_accessed": false
+}

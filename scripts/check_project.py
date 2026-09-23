@@ -1551,6 +1551,11 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-001-dem-mosaic-preflight.json",
     "scripts/reconcile_m2_radar_event_pair_dem_mosaic_001.py",
     "records/processing/m2-radar-event-area-pair-001-dem-mosaic-reconciliation.json",
+    "scripts/m2_radar_event_pair_dem_footprint_gate_001.py",
+    "tests/test_m2_radar_event_pair_dem_footprint_gate_001.py",
+    "scripts/validate_m2_radar_event_pair_dem_footprint_gate_001_arcgis.py",
+    "records/readiness/m2-radar-event-area-pair-001-footprint-arcgis-runtime-validation.json",
+    "records/readiness/m2-radar-event-area-pair-001-footprint-arcgis-runtime-validation-final.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18494,6 +18499,15 @@ def main() -> None:
         or event_pair_mosaic_result.get("radar_processing_released") is not False
     ):
         fail("M2 radar event-area pair mosaic reconciliation differs")
+
+    event_pair_footprint_runtime = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-001-footprint-arcgis-runtime-validation-final.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_footprint_runtime.get("status") != "pass_disposable_arcgis_runtime_footprint_mask_and_nodata_rejection"
+        or event_pair_footprint_runtime.get("production_code_sha256") != sha256("scripts/m2_radar_event_pair_dem_footprint_gate_001.py")
+        or event_pair_footprint_runtime.get("nodata_case_invalid_cells") != 100
+        or event_pair_footprint_runtime.get("project_data_or_external_custody_accessed") is not False
+    ):
+        fail("M2 radar event-area pair footprint disposable runtime validation differs")
 
     violations = []
     for relative in tracked_files():
