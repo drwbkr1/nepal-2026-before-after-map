@@ -10,11 +10,29 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from m2_radar_event_pair_processing_001 import IDS, event_aoi_only, source_sequence  # noqa: E402
 from m2_radar_event_pair_dem_intake_001 import IntakeError  # noqa: E402
 from validate_m2_radar_event_pair_extent_001 import evaluate as evaluate_disposable_extent  # noqa: E402
+from m2_radar_event_pair_projected_clip_recovery_002_core import (  # noqa: E402
+    TARGET, check_final, check_intermediate,
+)
 
 import numpy as np
 
 
 class EventPairProcessingTests(unittest.TestCase):
+    def test_projected_clip_resource_and_final_grid_guards(self) -> None:
+        intermediate = {"wkid": 32645, "bounds": [TARGET[0] - 4000, TARGET[1] - 4600, TARGET[2] + 4000, TARGET[3] + 4500],
+                        "width": 2000, "height": 1800, "band_count": 2, "cell_size_x": 50.0, "cell_size_y": 50.0}
+        self.assertEqual(check_intermediate(intermediate, target=TARGET, cell_m=50.0, bands=2, logical_bytes=1000), [])
+        oversized = dict(intermediate, width=20000, height=20000)
+        self.assertIn("intermediate_cell_ceiling_exceeded", check_intermediate(oversized, target=TARGET, cell_m=50.0, bands=2, logical_bytes=1000))
+        shifted = dict(intermediate, bounds=[TARGET[0] - 10001, TARGET[1], TARGET[2], TARGET[3]])
+        self.assertIn("intermediate_extent_ceiling_exceeded", check_intermediate(shifted, target=TARGET, cell_m=50.0, bands=2, logical_bytes=1000))
+        final = dict(intermediate, bounds=list(TARGET), width=9652, height=8098, cell_size_x=10.0, cell_size_y=10.0)
+        self.assertEqual(check_final(final, target=TARGET, cell_m=10.0, bands=2, snap_origin=(TARGET[0], TARGET[1])), [])
+        drifted = dict(final, bounds=[TARGET[0] + 110, TARGET[1], TARGET[2], TARGET[3]])
+        self.assertIn("final_target_boundary_mismatch", check_final(drifted, target=TARGET, cell_m=10.0, bands=2, snap_origin=(TARGET[0], TARGET[1])))
+        unaligned = dict(final, bounds=[TARGET[0] + 0.5, TARGET[1], TARGET[2], TARGET[3]])
+        self.assertIn("final_snap_origin_mismatch", check_final(unaligned, target=TARGET, cell_m=10.0, bands=2, snap_origin=(TARGET[0], TARGET[1])))
+
     def test_disposable_projection_extent_gate_blocks_drift(self) -> None:
         output = {"wkid": 32645, "bounds": [272300.0, 3069230.0, 368820.0, 3150210.0], "cells": 3125000}
         pixels = np.full((2, 2), 7, dtype=np.uint8)

@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-PROJECTED-CLIP-RECOVERY-002-PACKET-PUBLICATION-GATE",
+  "status": "pass_exact_public_packet_and_approval_ci_implementation_eligible",
+  "bindings": {
+    "proposal_sha256": "cff158699f32723a8935fbfdc13083ae425b4a5d2a9eab1d38369819d0384acd",
+    "review_bundle_sha256": "0de5fa500c2ca048b619c2d459ed1624c2439490b555ed0633df06b77bbbc052",
+    "approval_sha256": "b33277e54fef35c96f1ae2fab268b45f639a1ce210cb0282a87818b9fa5234f2",
+    "packet_commit_sha": "d7709360ae42ad1b0ea0c057976213aca8e3b488",
+    "public_ci_run_id": 36032454636,
+    "public_ci_job_id": 107744303916,
+    "public_ci_conclusion": "success"
+  },
+  "assertions": {
+    "one_owner_decision_applied_to_exact_hashes": true,
+    "implementation_eligible_within_scope": true,
+    "disposable_arcgis_validation_started": false,
+    "project_data_or_external_custody_access_started": false,
+    "new_real_attempt_started": false,
+    "baseline_or_change_analysis_released": false
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-PROJECTED-CLIP-RECOVERY-002-DISPOSABLE-VALIDATION-TERMINAL",
+  "status": "block_disposable_final_boundary_no_real_attempt",
+  "bindings": {
+    "proposal_sha256": "cff158699f32723a8935fbfdc13083ae425b4a5d2a9eab1d38369819d0384acd",
+    "review_bundle_sha256": "0de5fa500c2ca048b619c2d459ed1624c2439490b555ed0633df06b77bbbc052",
+    "packet_publication_gate_sha256": "fb377f25cc385cf1c1846b847fca80244e19575d8222c0a011b8b8195fc95a79",
+    "core_sha256": "2fc1690d1276b1133a39caf4a1f5952b13ffba9c42adc6b9d967d1f4cc74bb33",
+    "arcgis_validator_sha256": "e71582222f6e364d8924cd575cfeaee55caa704a5dd20afcdaa407ccc384219a"
+  },
+  "execution_history": [
+    {
+      "sequence": 1,
+      "scope": "generated_disposable_inputs_only",
+      "result": "validator_development_error_AttributeError_DescribeData_missing_width",
+      "project_data_or_external_custody_accessed": false,
+      "temporary_directory_removed": true
+    },
+    {
+      "sequence": 2,
+      "scope": "generated_disposable_inputs_only",
+      "result": "same_validator_development_error_reproduced_for_sanitized_diagnosis",
+      "project_data_or_external_custody_accessed": false,
+      "temporary_directory_removed": true
+    },
+    {
+      "sequence": 3,
+      "scope": "generated_disposable_inputs_only",
+      "arcgis_version": "3.7.1",
+      "result": "block_disposable_projected_clip_at_coarse_continuous_final",
+      "frozen_target_bounds_epsg32645_m": [272300.0, 3069230.0, 368820.0, 3150210.0],
+      "intermediate": {
+        "bounds_epsg32645_m": [273200.0, 3064580.0, 372850.0, 3154780.0],
+        "cell_size_m": 50.0,
+        "width": 1993,
+        "height": 1804,
+        "band_count": 2,
+        "cell_count": 3595372,
+        "resource_and_extent_errors": []
+      },
+      "clipped_final": {
+        "bounds_epsg32645_m": [273200.0, 3069230.0, 368850.0, 3150230.0],
+        "cell_size_m": 50.0,
+        "width": 1913,
+        "height": 1620,
+        "band_count": 2,
+        "cell_count": 3099060,
+        "final_errors": ["final_target_boundary_mismatch"],
+        "west_boundary_offset_from_target_m": 900.0,
+        "retained_intermediate_pixels_identical": true,
+        "synthetic_values_valid": true
+      },
+      "interpretation": "The projected intermediate starts 900 metres east of the frozen target west boundary. Clip preserves retained pixels but cannot create missing west-side coverage.",
+      "window_10m_stage_started": false,
+      "categorical_mask_stage_started": false,
+      "project_data_or_external_custody_accessed": false,
+      "temporary_directory_removed": true
+    }
+  ],
+  "terminal_assertions": {
+    "disposable_method_gate_passed": false,
+    "production_runner_created": false,
+    "final_no_content_preflight_started": false,
+    "new_e1_a2_real_attempt_started": false,
+    "old_e1_a1_attempt_reused_or_mutated": false,
+    "baseline_or_change_analysis_started": false,
+    "scientific_result_or_derived_pixel_publication_authorized": false
+  },
+  "next_action": "Publish this sanitized BLOCK result under the existing envelope. Any altered projection, extent, coverage, source, or processing method requires a separately reviewed owner decision before another disposable or real attempt."
+}
