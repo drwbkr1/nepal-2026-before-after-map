@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-TERMINAL-INDETERMINATE-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-24T01:07:03Z",
+  "status": "pass_public_default_branch_ci_indeterminate_evidence_only",
+  "terminal_evidence_commit_sha": "3c3eb938e14b97caed75f771ec5e0be025b696b8",
+  "public_ci_run_id": 35941389678,
+  "public_ci_job_id": 107449803566,
+  "public_ci_conclusion": "success",
+  "public_ci_required_file_count": 1439,
+  "public_ci_test_count": 768,
+  "public_ci_intentional_skip_count": 13,
+  "bindings": {
+    "indeterminate_reconciliation_ref": "records/processing/m2-radar-event-area-pair-001-radar-terminal-indeterminate-reconciliation.json",
+    "indeterminate_reconciliation_sha256": "77037c851311730c8e0b1431d97ad57982a381d395616445aba43ace769104a1",
+    "approval_ref": "records/source-gates/m2-radar-event-area-pair-001-approval.json"
+  },
+  "assertions": {
+    "single_attempt_consumed": true,
+    "attempt_resumed_reconstructed_or_retried": false,
+    "reserved_zero_byte_receipts_mutated": false,
+    "partial_raster_published": false,
+    "first_source_qa_pass_established": false,
+    "second_source_started": false,
+    "pair_route_evaluated": false,
+    "frozen_input_identity_check_passed_after_stop": true,
+    "exact_arcgis_extent_failure_mechanism_established": false,
+    "baseline_or_change_analysis_authorized": false,
+    "derived_pixel_or_scientific_publication_authorized": false,
+    "new_radar_processing_attempt_authorized": false
+  }
+}
