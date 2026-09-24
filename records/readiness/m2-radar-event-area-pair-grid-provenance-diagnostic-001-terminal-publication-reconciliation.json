@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001-TERMINAL-PUBLICATION-RECONCILIATION",
+  "status": "pass_exact_public_terminal_gate_ci_reconciled_indeterminate_diagnostic_closed",
+  "bindings": {
+    "terminal_publication_gate_ref": "records/readiness/m2-radar-event-area-pair-grid-provenance-diagnostic-001-terminal-publication-gate.json",
+    "terminal_publication_gate_sha256": "2f29b0e193697e4e5267b4e2b2f223a44c95587c0ba79fe1d7dba70b0cab6109",
+    "terminal_gate_commit_sha": "143dcb86b7ecc361a40eeb5ffbf8c8cf5ba421da",
+    "terminal_gate_public_ci_run_id": 36036140122,
+    "terminal_gate_public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/36036140122",
+    "terminal_gate_public_ci_conclusion": "success"
+  },
+  "assertions": {
+    "one_read_only_diagnostic_invocation_consumed": true,
+    "gtc_configuration_ambiguity_error_preserved": true,
+    "terminal_and_cleanup_reserved_zero_bytes_immutable": true,
+    "actual_grid_metadata_persisted": false,
+    "new_radar_processing_attempt_started": false,
+    "source_qa_baseline_or_change_evidence_established": false,
+    "follow_on_diagnostic_or_processing_released": false
+  },
+  "next_action": "Review the configuration-identity ambiguity and terminal receipt-persistence failure as separate evidence problems before proposing any fresh diagnostic. Preserve real-001 and all old attempts unchanged."
+}
