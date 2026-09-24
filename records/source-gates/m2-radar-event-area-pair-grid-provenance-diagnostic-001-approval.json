@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001-APPROVAL",
+  "status": "owner_approved_exact_conditional_envelope_public_ci_pending",
+  "decision_id": "D-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001",
+  "decision": "approve",
+  "human_decision_count": 1,
+  "owner_statement_verbatim": "approve",
+  "decision_context": "Direct reply to the immediately preceding assistant request to approve, revise, or defer the revised exact proposal and review-bundle hashes below. Ordinary chat authorization is permitted by AGENTS.md. The owner did not separately utter an attestation sentence in this reply.",
+  "explicit_attestation_statement": false,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-radar-event-area-pair-grid-provenance-diagnostic-001-proposal.json",
+    "proposal_sha256": "715656bf5ad964eea5805d99e5416ba592e5c743cde6db6f629ce3029c7d1bf4",
+    "review_bundle_ref": "reviews/m2-radar-event-area-pair-grid-provenance-diagnostic-001/review-bundle.json",
+    "review_bundle_sha256": "469da6bd5b69173d25561f1f9b405362ee4218685831920ef8d2933a4995d0f2"
+  },
+  "authority": {
+    "single_conditional_envelope_through_sanitized_terminal_publication": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "packet_publication_and_public_ci": true,
+    "diagnostic_only_implementation_and_disposable_validation": true,
+    "implementation_and_execution_public_ci_gates_required": true,
+    "final_no_content_preflight_required": true,
+    "conditional_maximum_fresh_read_only_diagnostic_processes": 1,
+    "exact_preserved_source": "e1/a1/s/2",
+    "maximum_raster_metadata_reads": 5,
+    "pixel_reads": 0,
+    "geoprocessing_or_raster_function_calls": 0,
+    "automatic_retry": false,
+    "consumed_e1_a1_reuse_or_mutation": false,
+    "new_e1_a2_radar_processing": false,
+    "baseline_admission_or_change_analysis": false,
+    "derived_pixel_or_scientific_publication": false
+  }
+}

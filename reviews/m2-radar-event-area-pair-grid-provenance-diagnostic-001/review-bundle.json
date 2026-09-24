@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001-REVIEW-BUNDLE",
+  "status": "local_zero_decision_one_owner_decision_required",
+  "human_decision_count": 0,
+  "base_commit": "dc62b299fa224db89115647efeb11b34a9f6603e",
+  "artifacts": [
+    {"path": "contracts/milestone-002-radar-event-area-pair-grid-provenance-diagnostic-001-proposal.json", "sha256": "715656bf5ad964eea5805d99e5416ba592e5c743cde6db6f629ce3029c7d1bf4", "role": "proposal"},
+    {"path": "docs/M2_RADAR_EVENT_AREA_PAIR_GRID_PROVENANCE_DIAGNOSTIC_001_REVIEW.md", "sha256": "bb89bb7ab9dc0cae51666f623688706e5a20d25c8a6a8d0dee68f10bafca9b76", "role": "human_readable_review"},
+    {"path": "records/readiness/m2-radar-event-area-pair-projected-clip-recovery-002-terminal-publication-reconciliation.json", "sha256": "8215d24e247e30831af81c3ae0961f3a728cb2fd1f2af84533ddbd819f0d2264", "role": "prior_closed_envelope"},
+    {"path": "records/readiness/m2-radar-event-area-pair-projected-clip-recovery-002-disposable-validation-terminal.json", "sha256": "bbfd5ee7e6fcf7276ef6a827e1018217f7c3f7bda60a0f973749ec366d342f02", "role": "prior_disposable_method_failure"},
+    {"path": "records/processing/m2-radar-event-area-pair-001-radar-terminal-indeterminate-reconciliation.json", "sha256": "77037c851311730c8e0b1431d97ad57982a381d395616445aba43ace769104a1", "role": "published_grid_declaration_and_consumed_attempt"},
+    {"path": "records/readiness/m2-radar-event-area-pair-001-terminal-indeterminate-publication-gate.json", "sha256": "ff402b2050df2819aca28559b00e48a21d5e69cf69a8b0615686d8ec0844172c", "role": "prior_public_terminal_gate"},
+    {"path": "scripts/m2_radar_esri_sequence_processing_005.py", "sha256": "faadf83f4ae1c35209ed104ab3ba2c97ad233615655aaa31dfc72851b968e0fd", "role": "consumed_processing_sequence"},
+    {"path": "scripts/m2_radar_event_pair_processing_001.py", "sha256": "e0fc7b3ed48c5f45f169dbd5f5f609bda80f3e1e8b3f11ca0b9a43909e7c0ddd", "role": "consumed_event_runner"},
+    {"path": "scripts/m2_radar_esri_sequence_recovery_005_core.py", "sha256": "4c4486e8bdeeac1dc97eb47be397a55533dfadc9cf4a7fa4c218fe536ad387b0", "role": "exact_output_names"},
+    {"path": "contracts/milestone-002-radar-event-area-pair-001-proposal.json", "sha256": "ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2", "role": "original_event_pair_scope"},
+    {"path": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2", "role": "frozen_grid_and_qa"},
+    {"path": "config/aoi/approved-study-areas-epsg32645.json", "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615", "role": "frozen_aoi"}
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001",
+    "question": "Approve, revise, or defer the single bounded read-only grid metadata diagnostic envelope through sanitized terminal publication?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "The exact packet and owner approval are public on the default branch and public CI passes; implementation, synthetic, final no-content, and terminal-publication gates still apply."
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "implementation_authorized": false,
+    "arcgis_runtime_or_external_custody_access_authorized": false,
+    "diagnostic_process_authorized": false,
+    "new_real_radar_processing_attempt_authorized": false,
+    "consumed_attempt_mutation_or_retry_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "derived_pixel_or_scientific_publication_authorized": false
+  }
+}

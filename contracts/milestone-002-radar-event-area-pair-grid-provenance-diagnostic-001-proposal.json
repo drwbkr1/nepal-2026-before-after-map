@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001",
+  "status": "local_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "base_commit": "dc62b299fa224db89115647efeb11b34a9f6603e",
+  "input_bindings": [
+    {"ref": "records/readiness/m2-radar-event-area-pair-projected-clip-recovery-002-terminal-publication-reconciliation.json", "sha256": "8215d24e247e30831af81c3ae0961f3a728cb2fd1f2af84533ddbd819f0d2264"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-projected-clip-recovery-002-disposable-validation-terminal.json", "sha256": "bbfd5ee7e6fcf7276ef6a827e1018217f7c3f7bda60a0f973749ec366d342f02"},
+    {"ref": "records/processing/m2-radar-event-area-pair-001-radar-terminal-indeterminate-reconciliation.json", "sha256": "77037c851311730c8e0b1431d97ad57982a381d395616445aba43ace769104a1"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-001-terminal-indeterminate-publication-gate.json", "sha256": "ff402b2050df2819aca28559b00e48a21d5e69cf69a8b0615686d8ec0844172c"},
+    {"ref": "scripts/m2_radar_esri_sequence_processing_005.py", "sha256": "faadf83f4ae1c35209ed104ab3ba2c97ad233615655aaa31dfc72851b968e0fd"},
+    {"ref": "scripts/m2_radar_event_pair_processing_001.py", "sha256": "e0fc7b3ed48c5f45f169dbd5f5f609bda80f3e1e8b3f11ca0b9a43909e7c0ddd"},
+    {"ref": "scripts/m2_radar_esri_sequence_recovery_005_core.py", "sha256": "4c4486e8bdeeac1dc97eb47be397a55533dfadc9cf4a7fa4c218fe536ad387b0"},
+    {"ref": "contracts/milestone-002-radar-event-area-pair-001-proposal.json", "sha256": "ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2"},
+    {"ref": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"},
+    {"ref": "config/aoi/approved-study-areas-epsg32645.json", "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"}
+  ],
+  "decision_question": "Approve, revise, or defer one read-only metadata diagnostic of the exact preserved M1-SRC-002 intermediate rasters to determine whether the published 10-degree GTC grid declaration reflects the saved raster and where that declaration first appears?",
+  "observed_boundary": {
+    "consumed_attempt": "e1/a1 is terminal indeterminate and immutable",
+    "published_gtc_input_declared_epsg4326_bounds": [80.0, 10.0, 100.0, 30.0],
+    "published_gtc_input_declared_cell_size_degrees": [10.0, 10.0],
+    "published_saved_gtc_input_conf_sha256": "eff271e62660d4ae2fe64d614c9051a953c750f167926b946dcf3cb5e9c7d419",
+    "inference_only": "Those declared numbers imply two cells on each side if they describe one internally consistent raster grid; actual readable raster dimensions and pixel validity have not been independently verified.",
+    "projected_clip_recovery_002": "terminal BLOCK because the disposable projected intermediate began 900 m east of the frozen western target boundary",
+    "projected_clip_failure_cause_established": false,
+    "source_grid_fitness_established": false,
+    "new_e1_a2_attempt_started": false
+  },
+  "single_authority_envelope_requested": {
+    "owner_decision_count": 1,
+    "covers_without_intermediate_owner_reconfirmation": [
+      "publish the exact zero-decision packet and owner response to public default branch and require passing public CI",
+      "implement a diagnostic-only metadata reader and portable synthetic no-mutation, strict-path, missing-input, and receipt-durability tests",
+      "run one installed ArcGIS runtime synthetic test using only generated disposable rasters and require public CI of implementation",
+      "perform one final no-content preflight confirming exact frozen path identities, old receipt immutability, absence of a new attempt, and no output collision",
+      "on every gate passing, run at most one fresh distinct read-only ArcPy metadata diagnostic process over the five exact preserved M1-SRC-002 raster datasets named below, stopping on the first missing or ambiguous input",
+      "record per-dataset ArcPy Raster and Describe width, height, band count, CRS, cell size, and extent; verify the saved GTC input CRF configuration against its exact published SHA-256 before interpreting its fields; perform no pixel read",
+      "persist append-only sanitized terminal and cleanup receipts and exact post-run reconciliation, then publish only those records after public CI"
+    ],
+    "exact_attempt_root": "C:/Projects/Active/nepal-2026-before-after-map-data/e1/a1",
+    "exact_source_subdirectory": "s/2",
+    "exact_raster_names_in_order": [
+      "gamma0_linear_slant.crf",
+      "gamma0_linear_despeckled.crf",
+      "gamma0_linear_gtc_raw.crf",
+      "gamma0_db_gtc_raw.crf",
+      "geometric_distortion_mask_gtc_raw.crf"
+    ],
+    "maximum_real_diagnostic_processes": 1,
+    "maximum_raster_metadata_reads": 5,
+    "pixel_reads": 0,
+    "geoprocessing_calls": 0,
+    "raster_function_calls": 0,
+    "network_or_credential_actions": 0,
+    "project_data_mutation": false,
+    "external_custody_mutation": false,
+    "automatic_retry": false
+  },
+  "hard_stops": [
+    "Do not open, reconstruct, resume, reuse, or retry the old worker or its reserved zero-byte receipts; read-only access is limited to the five named raster datasets and their existing metadata.",
+    "Stop without substitution if any exact candidate is missing, its raster and Describe metadata disagree, a CRF configuration is ambiguous, or the process cannot persist its terminal receipt.",
+    "Stop if the saved GTC input CRF configuration fails the published SHA-256 identity; do not reinterpret changed or missing metadata as the preserved observation.",
+    "The diagnostic may locate a grid anomaly but cannot repair it, promote an input, run ProjectRaster or Clip, process another source, start e1/a2, or declare any pixel usable.",
+    "No test or real diagnostic can silently change the frozen 10 m grid, source pair, orbit, DEM, mask, registration, threshold, or scientific predicate."
+  ],
+  "claim_boundary": {
+    "allowed_result": "metadata_consistent_metadata_conflict_missing_input_or_indeterminate",
+    "valid_pixel_coverage_proven_without_pixel_read": false,
+    "historical_projection_failure_cause_proven_by_this_diagnostic_alone": false,
+    "radar_recovery_readiness_or_source_qa_pass_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "derived_pixel_or_scientific_publication_authorized": false
+  },
+  "does_not_authorize_now": [
+    "Git commit or public publication of this local packet",
+    "approval recording or activation",
+    "ArcPy invocation, existing CRF metadata read, project-data or external-custody access",
+    "new diagnostic process, projection, clipping, radar processing, baseline or change analysis, attribution, or scientific publication"
+  ]
+}
