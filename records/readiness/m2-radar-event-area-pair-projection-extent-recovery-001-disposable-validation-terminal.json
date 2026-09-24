@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-PROJECTION-EXTENT-RECOVERY-001-DISPOSABLE-VALIDATION-TERMINAL",
+  "status": "block_disposable_arcgis_extent_outside_resource_ceiling_no_real_attempt",
+  "packet_publication_gate_sha256": "b9e437d6c828342e0781103915a3da22f51c4f1493ee3fedba8b6b7bfcee7b0d",
+  "validator_ref": "scripts/validate_m2_radar_event_pair_extent_001.py",
+  "validator_sha256": "04a157ee55697fae49ec1fdbb722de98d50b0b993522b64ee7115be43b328c00",
+  "arcgis_version": "3.7.1",
+  "test_input": {
+    "generated_only": true,
+    "wkid": 4326,
+    "bounds": [80.0, 10.0, 100.0, 30.0],
+    "width": 200,
+    "height": 200,
+    "pixel_value": 7,
+    "project_data_or_external_custody_accessed": false
+  },
+  "disposable_run_history": [
+    {
+      "kind": "validator_development_failure",
+      "result": "PermissionError during first disposable run; exact failing stage not preserved; no projected result retained in the terminal output",
+      "later_disposable_temp_residue": "one generated source TIFF and four generated sidecars retained under a unique OS temporary directory"
+    },
+    {
+      "kind": "validator_development_failure",
+      "result": "TypeError from positional ArcPy Extent spatial-reference argument; corrected to keyword argument"
+    },
+    {
+      "kind": "validator_development_failure",
+      "result": "ValueError from NaN replacement on an integer raster; corrected to integer sentinel"
+    },
+    {
+      "kind": "coarse_screen_only",
+      "test_cell_size_m": 10000,
+      "output_wkid": 32645,
+      "output_bounds": [273200.1674090625, 3054748.7416942418, 373200.1674090625, 3154748.7416942418],
+      "output_cells": 100,
+      "expected_synthetic_value_present": true,
+      "disposition": "not_sufficient_for_100_m_guard"
+    },
+    {
+      "kind": "decisive_disposable_guard_evaluation",
+      "test_cell_size_m": 50,
+      "output_wkid": 32645,
+      "output_bounds": [273200.1674090625, 3064598.7416942418, 372800.1674090625, 3154748.7416942418],
+      "output_width": 1992,
+      "output_height": 1803,
+      "output_cells": 3591576,
+      "expected_synthetic_value_present": true,
+      "southward_extension_m": 4631.258305758238,
+      "eastward_extension_m": 3980.167409062502,
+      "northward_extension_m": 4538.741694241762,
+      "maximum_authorized_extension_m": 100,
+      "disposition": "block_disposable_extent_not_proven"
+    }
+  ],
+  "terminal_boundary": {
+    "candidate_method_proven_to_meet_100_m_guard": false,
+    "production_runner_implemented": false,
+    "project_data_pixel_read_or_radar_geoprocessing": false,
+    "new_e1_a2_attempt_root_exists": false,
+    "new_real_radar_attempts_started": 0,
+    "alternate_method_authorized_within_this_envelope": false,
+    "automatic_retry": false,
+    "baseline_or_change_analysis": false,
+    "derived_pixel_or_scientific_publication": false
+  },
+  "disposable_cleanup": {
+    "final_decisive_run_temporary_directory_observed_absent": true,
+    "one_earlier_generated_only_temporary_directory_retained": true,
+    "removal_command_rejected_by_runtime_policy": true,
+    "project_data_present_in_retained_directory": false
+  },
+  "next_action": "Stop this recovery envelope at failed disposable validation. Do not implement a fallback or start e1/a2 without a separately reviewed method."
+}

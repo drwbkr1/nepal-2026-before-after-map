@@ -9,9 +9,19 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from m2_radar_event_pair_processing_001 import IDS, event_aoi_only, source_sequence  # noqa: E402
 from m2_radar_event_pair_dem_intake_001 import IntakeError  # noqa: E402
+from validate_m2_radar_event_pair_extent_001 import evaluate as evaluate_disposable_extent  # noqa: E402
+
+import numpy as np
 
 
 class EventPairProcessingTests(unittest.TestCase):
+    def test_disposable_projection_extent_gate_blocks_drift(self) -> None:
+        output = {"wkid": 32645, "bounds": [272300.0, 3069230.0, 368820.0, 3150210.0], "cells": 3125000}
+        pixels = np.full((2, 2), 7, dtype=np.uint8)
+        self.assertEqual(evaluate_disposable_extent(output, pixels)["status"], "pass_disposable_crs_explicit_extent")
+        output["bounds"] = [273200.0, 3064598.0, 372800.0, 3154748.0]
+        self.assertEqual(evaluate_disposable_extent(output, pixels)["status"], "block_disposable_extent_not_proven")
+
     def test_stops_after_first_failed_source(self) -> None:
         calls: list[str] = []
 
