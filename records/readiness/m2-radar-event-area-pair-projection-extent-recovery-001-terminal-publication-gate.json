@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-PROJECTION-EXTENT-RECOVERY-001-TERMINAL-PUBLICATION-GATE",
+  "status": "pass_public_ci_blocked_disposable_validation_terminal_published",
+  "bindings": {
+    "terminal_record_ref": "records/readiness/m2-radar-event-area-pair-projection-extent-recovery-001-disposable-validation-terminal.json",
+    "terminal_record_sha256": "35cb64d082a883450218be71a047a756bd8c620937b905edda075bebf4bc49ab",
+    "packet_gate_sha256": "b9e437d6c828342e0781103915a3da22f51c4f1493ee3fedba8b6b7bfcee7b0d",
+    "terminal_commit_sha": "170469717113a34b431f5d7d5425800c99197adf",
+    "public_ci_run_id": 36030824435,
+    "public_ci_job_id": 107738823134,
+    "public_ci_conclusion": "success"
+  },
+  "reconciliation": {
+    "local_and_origin_main_match_terminal_commit": true,
+    "disposable_arcgis_100_m_guard_passed": false,
+    "new_e1_a2_attempt_root_absent_after_publication": true,
+    "new_real_radar_attempt_started": false,
+    "alternate_method_or_retry_authorized": false,
+    "baseline_or_change_analysis": false,
+    "derived_pixel_or_scientific_publication": false
+  },
+  "next_gate": "Separately reviewed projection method required before any new real radar attempt."
+}
