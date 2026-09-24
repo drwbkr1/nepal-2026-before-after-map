@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-PROJECTION-EXTENT-RECOVERY-001-APPROVAL",
+  "status": "owner_approved_exact_conditional_envelope_public_ci_pending",
+  "decision_id": "D-M2-RADAR-EVENT-AREA-PAIR-PROJECTION-EXTENT-RECOVERY-001",
+  "decision": "approve",
+  "human_decision_count": 1,
+  "owner_statement_verbatim": "I approve",
+  "decision_context": "Direct reply to the immediately preceding assistant request to approve, revise, or defer the exact proposal and review bundle hashes below. Ordinary chat authorization is permitted by AGENTS.md. The owner did not separately utter an attestation sentence in this reply.",
+  "explicit_attestation_statement": false,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-radar-event-area-pair-projection-extent-recovery-001-proposal.json",
+    "proposal_sha256": "d5d3f096e839d7568e202ce1b5e3db35ee1bf55abc6bb2c37bfd91e9d404ad60",
+    "review_bundle_ref": "reviews/m2-radar-event-area-pair-projection-extent-recovery-001/review-bundle.json",
+    "review_bundle_sha256": "424901832b1815d761a6c67adcf48c24712590a3e762cdf96b3bc4b191007b88"
+  },
+  "authority": {
+    "single_conditional_envelope_through_sanitized_terminal_publication": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "packet_publication_and_public_ci": true,
+    "event_pair_only_implementation_and_disposable_validation": true,
+    "implementation_and_execution_public_ci_gates_required": true,
+    "final_no_content_preflight_required": true,
+    "conditional_maximum_fresh_real_processes": 1,
+    "fresh_attempt_root_alias": "e1/a2",
+    "fixed_source_order": ["M1-SRC-002", "M1-SRC-005"],
+    "automatic_retry": false,
+    "consumed_a1_reuse_or_mutation": false,
+    "baseline_admission_or_change_analysis": false,
+    "derived_pixel_or_scientific_publication": false
+  }
+}

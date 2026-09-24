@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-PROJECTION-EXTENT-RECOVERY-001-REVIEW-BUNDLE",
+  "prepared_at_utc": "2026-09-24T01:15:39Z",
+  "status": "local_zero_decision_one_owner_decision_required",
+  "human_decision_count": 0,
+  "base_commit": "1a2de0f183bde99ab1e14b6b8125859809b90090",
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-radar-event-area-pair-projection-extent-recovery-001-proposal.json",
+      "sha256": "d5d3f096e839d7568e202ce1b5e3db35ee1bf55abc6bb2c37bfd91e9d404ad60",
+      "role": "proposal"
+    },
+    {
+      "path": "docs/M2_RADAR_EVENT_AREA_PAIR_PROJECTION_EXTENT_RECOVERY_001_REVIEW.md",
+      "sha256": "3a45a38398f194a16ed1f8c2520bbfadfeed2183b0ae37db7d2f14a6608f65d0",
+      "role": "human_readable_review"
+    },
+    {
+      "path": "records/processing/m2-radar-event-area-pair-001-radar-terminal-indeterminate-reconciliation.json",
+      "sha256": "77037c851311730c8e0b1431d97ad57982a381d395616445aba43ace769104a1",
+      "role": "consumed_attempt_evidence"
+    },
+    {
+      "path": "records/readiness/m2-radar-event-area-pair-001-terminal-indeterminate-publication-gate.json",
+      "sha256": "ff402b2050df2819aca28559b00e48a21d5e69cf69a8b0615686d8ec0844172c",
+      "role": "consumed_attempt_publication_gate"
+    },
+    {
+      "path": "records/readiness/m2-radar-event-area-pair-001-terminal-indeterminate-publication-reconciliation.json",
+      "sha256": "21fd6dfe40e5d495458b68117708be25b82f2e82b69d76b514110b14352079f0",
+      "role": "consumed_attempt_publication_reconciliation"
+    },
+    {
+      "path": "records/source-gates/m2-radar-event-area-pair-001-approval.json",
+      "sha256": "50becd7494176d5202075d71cbaf40d9da316d1f585144e8defbc8036534de01",
+      "role": "prior_authority_boundary"
+    },
+    {
+      "path": "scripts/m2_radar_event_pair_processing_001.py",
+      "sha256": "e0fc7b3ed48c5f45f169dbd5f5f609bda80f3e1e8b3f11ca0b9a43909e7c0ddd",
+      "role": "consumed_runner_frozen"
+    },
+    {
+      "path": "scripts/m2_radar_esri_sequence_processing_005.py",
+      "sha256": "faadf83f4ae1c35209ed104ab3ba2c97ad233615655aaa31dfc72851b968e0fd",
+      "role": "shared_sequence_frozen"
+    },
+    {
+      "path": "config/qa/m2-radar-pixel-orbit-application-001-contract.json",
+      "sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1",
+      "role": "scientific_contract_frozen"
+    },
+    {
+      "path": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+      "role": "aoi_and_crs_frozen"
+    }
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-RADAR-EVENT-AREA-PAIR-PROJECTION-EXTENT-RECOVERY-001",
+    "question": "Approve, revise, or defer one conditional CRS-explicit extent and supervised-resource-guard recovery envelope through sanitized terminal publication?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "The exact packet and owner approval are published on the public default branch and public CI passes. Implementation and execution still require their own public-CI and no-content gates before the one possible new real process."
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "implementation_authorized": false,
+    "disposable_arcgis_execution_authorized": false,
+    "project_data_or_external_custody_access_authorized": false,
+    "new_real_radar_attempt_authorized": false,
+    "consumed_attempt_reuse_or_retry_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "derived_pixel_or_scientific_publication_authorized": false
+  }
+}
