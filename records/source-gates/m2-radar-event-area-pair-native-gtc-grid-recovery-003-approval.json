@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-NATIVE-GTC-GRID-RECOVERY-003-APPROVAL",
+  "status": "owner_approved_exact_conditional_envelope_public_ci_pending",
+  "decision_id": "D-M2-RADAR-EVENT-AREA-PAIR-NATIVE-GTC-GRID-RECOVERY-003",
+  "decision": "approve",
+  "human_decision_count": 1,
+  "owner_statement_verbatim": "approve",
+  "decision_context": "Direct reply to the immediately preceding assistant request to approve, revise, or defer the exact proposal and review bundle hashes below. Ordinary chat authorization is permitted by AGENTS.md. The owner did not separately utter an attestation sentence in this reply.",
+  "explicit_attestation_statement": false,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-radar-event-area-pair-native-gtc-grid-recovery-003-proposal.json",
+    "proposal_sha256": "5999763f7ca46fbf295622916d203f63e9bd2656107433603be47108784eba63",
+    "review_bundle_ref": "reviews/m2-radar-event-area-pair-native-gtc-grid-recovery-003/review-bundle.json",
+    "review_bundle_sha256": "5d7eb90a65b399307666544e3f3074b0a62d4af98978dec3ac9c800a89acdd3c"
+  },
+  "authority": {
+    "single_conditional_envelope_through_sanitized_terminal_publication": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "packet_publication_and_public_ci": true,
+    "event_pair_only_implementation_and_disposable_validation": true,
+    "implementation_and_execution_public_ci_gates_required": true,
+    "final_no_content_preflight_required": true,
+    "read_only_actual_source_and_full_extent_valid_dem_assessment_after_preflight": true,
+    "conditional_maximum_fresh_real_processes": 1,
+    "fresh_attempt_root_alias": "e1/a2",
+    "fixed_source_order": ["M1-SRC-002", "M1-SRC-005"],
+    "automatic_retry": false,
+    "consumed_a1_reuse_or_mutation": false,
+    "baseline_admission_or_change_analysis": false,
+    "derived_pixel_or_scientific_publication": false
+  }
+}

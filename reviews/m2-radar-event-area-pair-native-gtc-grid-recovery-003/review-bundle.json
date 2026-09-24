@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-NATIVE-GTC-GRID-RECOVERY-003-REVIEW-BUNDLE",
+  "status": "local_zero_decision_one_owner_decision_required",
+  "human_decision_count": 0,
+  "base_commit": "489f9d00572d15765f6052716ce9ed1bc7c8bf16",
+  "artifacts": [
+    {"path": "contracts/milestone-002-radar-event-area-pair-native-gtc-grid-recovery-003-proposal.json", "sha256": "5999763f7ca46fbf295622916d203f63e9bd2656107433603be47108784eba63", "role": "exact_bounded_method_and_attempt_proposal"},
+    {"path": "docs/M2_RADAR_EVENT_AREA_PAIR_NATIVE_GTC_GRID_RECOVERY_003_REVIEW.md", "sha256": "b1d7425181352feea349532d62ee7463ef43d6718564b0d8fdddd3a9eef31c88", "role": "human_readable_review"},
+    {"path": "docs/M2_NATIVE_GTC_GRID_METHOD_DESIGN_001.md", "sha256": "c13c7240653d9b1c89bb63b2c73c8d61885b97d489a950566239ecc25036a558", "role": "technical_method_design"},
+    {"path": "records/observations/m2-gtc-grid-unit-hypothesis-001.json", "sha256": "53e7bd747f2f9fc3994b466f3ed1c31e630be3950045b51bdfa0468d82b5531b", "role": "hypothesis_not_historical_cause"},
+    {"path": "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-terminal-reconciliation.json", "sha256": "664d99fd7cb261238cd322143cc1326ff3c0f36159c79e348c201cf08a949a5c", "role": "consumed_grid_evidence"},
+    {"path": "records/processing/m2-radar-event-area-pair-001-dem-mosaic-reconciliation.json", "sha256": "74f3213c3bd1b10ace40904b9a0bcbb605d81c8d787797952a9370161d525cf4", "role": "structural_dem_evidence"},
+    {"path": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2", "role": "frozen_projected_pixel_qa"}
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-RADAR-EVENT-AREA-PAIR-NATIVE-GTC-GRID-RECOVERY-003",
+    "question": "Approve, revise, or defer the proposal's single bounded native-GTC method and conditional one-attempt envelope through sanitized terminal publication?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "Exact packet and owner response pass public default-branch CI; later implementation, disposable, execution, final no-content, actual DEM-support, and terminal-publication gates still apply without intermediate owner reconfirmation."
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "implementation_or_disposable_arcgis_authorized": false,
+    "protected_data_or_external_custody_access_authorized": false,
+    "fresh_real_radar_process_authorized": false,
+    "consumed_attempt_reuse_or_retry_authorized": false,
+    "baseline_change_attribution_or_scientific_publication_authorized": false
+  }
+}

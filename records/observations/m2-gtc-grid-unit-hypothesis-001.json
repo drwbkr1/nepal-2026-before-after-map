@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-GTC-GRID-UNIT-HYPOTHESIS-001",
+  "status": "local_zero_decision_code_and_receipt_audit_unpublished",
+  "observed_date": "2026-09-24",
+  "input_bindings": [
+    {"ref": "scripts/m2_radar_esri_sequence_processing_005.py", "sha256": "faadf83f4ae1c35209ed104ab3ba2c97ad233615655aaa31dfc72851b968e0fd"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-terminal-reconciliation.json", "sha256": "664d99fd7cb261238cd322143cc1326ff3c0f36159c79e348c201cf08a949a5c"},
+    {"ref": "records/processing/m2-radar-event-area-pair-001-radar-terminal-indeterminate-reconciliation.json", "sha256": "77037c851311730c8e0b1431d97ad57982a381d395616445aba43ace769104a1"},
+    {"ref": "records/processing/m2-radar-event-area-pair-001-dem-mosaic-reconciliation.json", "sha256": "74f3213c3bd1b10ace40904b9a0bcbb605d81c8d787797952a9370161d525cf4"}
+  ],
+  "code_observation": {
+    "gtc_gamma_env": "snapRaster is a 2-by-2 EPSG:32645 raster with 10-metre cells; cellSize is numeric 10.0; outputCoordinateSystem and extent are not set in this GTC EnvManager",
+    "gtc_mask_env": "the same snapRaster and numeric 10.0 cellSize are applied to the native mask GTC",
+    "dem_mosaic": "EPSG:4326 14400-by-10800 ellipsoidal-height mosaic is passed explicitly to both GTC calls",
+    "project_raster": "the later ProjectRaster call separately requests EPSG:32645 and 10-metre cells"
+  },
+  "saved_geometry_arithmetic": {
+    "gtc_wkid": 4326,
+    "gtc_bounds_degrees": [80.0, 10.0, 100.0, 30.0],
+    "gtc_columns": 2,
+    "gtc_rows": 2,
+    "gtc_cell_degrees": [10.0, 10.0],
+    "longitude_span_degrees": 20.0,
+    "latitude_span_degrees": 20.0,
+    "columns_times_cell_degrees": 20.0,
+    "rows_times_cell_degrees": 20.0,
+    "numeric_gtc_environment_cell_size": 10.0,
+    "numeric_equality_of_environment_and_geographic_cell_size": true,
+    "frozen_target_epsg32645_columns": 9652,
+    "frozen_target_epsg32645_rows": 8098,
+    "frozen_target_cells": 78161896
+  },
+  "official_documentation_checked": [
+    {"url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-geometric-terrain-correction.html", "finding": "GTC lists Snap Raster and Cell Alignment, not Cell Size or Output Coordinate System, in its documented environments; it describes backgeocoding over DEM grid points."},
+    {"url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/environment-settings/cell-size.html", "finding": "A numeric Cell Size value is direct for tools that honor the environment and is not projected into a different output spatial reference."},
+    {"url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/environment-settings/snap-raster.html", "finding": "Snap Raster adjusts alignment for tools that honor it; raster dimensions are not significant, and it does not alone determine output cell size."},
+    {"url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/data-management/project-raster.html", "finding": "Project Raster transforms an existing raster to a new spatial reference; its resampling cannot restore information omitted by a coarse source grid."}
+  ],
+  "inference": "The exact numeric match between cellSize=10.0 and ten-degree GTC cells makes a geographic-versus-metric grid-unit interaction a strong candidate explanation. It is not proof that ArcGIS GTC honored that environment or that the snap raster caused the result; GTC's documented environment list does not include Cell Size, and the historical configuration identity and actual runtime mechanism remain unresolved.",
+  "candidate_for_separate_method_review": "Isolate native GTC from the projected 10-metre snap and numeric 10.0 cell-size settings while retaining the exact DEM, SAR sequence, geoid NONE, and polarizations. Inspect the native GTC grid and valid elevation over each actual processed extent before any projection. Project to the frozen EPSG:32645 grid only if source detail, coverage, output bounds, resource limits, and mask behavior pass explicit gates. This is a design hypothesis, not an executable correction.",
+  "open_requirements_before_method_approval": [
+    "Define exact ArcPy environment isolation and restoration semantics without inherited meter-valued settings.",
+    "Specify native GTC grid and effective-resolution acceptance predicates that do not pretend 10-metre detail was created from coarser output.",
+    "Establish DEM valid-elevation coverage over both actual SAR processed extents; mosaic structure alone is insufficient.",
+    "Specify a bounded SAR-specific runtime validation and independent output guard; generic generated rasters cannot prove GTC behavior.",
+    "Bind all new attempt identities, no-retry stops, frozen source and grid predicates, and terminal evidence before any protected-data access."
+  ],
+  "authority_boundary": {
+    "project_data_or_external_custody_accessed": false,
+    "arcpy_invoked": false,
+    "code_changed": false,
+    "new_scientific_method_selected": false,
+    "new_disposable_or_real_attempt_authorized": false,
+    "baseline_change_or_scientific_result_established": false
+  }
+}

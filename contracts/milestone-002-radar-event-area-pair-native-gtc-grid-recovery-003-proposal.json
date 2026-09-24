@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-NATIVE-GTC-GRID-RECOVERY-003",
+  "status": "local_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "base_commit": "489f9d00572d15765f6052716ce9ed1bc7c8bf16",
+  "input_bindings": [
+    {"ref": "docs/M2_NATIVE_GTC_GRID_METHOD_DESIGN_001.md", "sha256": "c13c7240653d9b1c89bb63b2c73c8d61885b97d489a950566239ecc25036a558"},
+    {"ref": "records/observations/m2-gtc-grid-unit-hypothesis-001.json", "sha256": "53e7bd747f2f9fc3994b466f3ed1c31e630be3950045b51bdfa0468d82b5531b"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-terminal-reconciliation.json", "sha256": "664d99fd7cb261238cd322143cc1326ff3c0f36159c79e348c201cf08a949a5c"},
+    {"ref": "records/processing/m2-radar-event-area-pair-001-radar-terminal-indeterminate-reconciliation.json", "sha256": "77037c851311730c8e0b1431d97ad57982a381d395616445aba43ace769104a1"},
+    {"ref": "records/processing/m2-radar-event-area-pair-001-dem-mosaic-reconciliation.json", "sha256": "74f3213c3bd1b10ace40904b9a0bcbb605d81c8d787797952a9370161d525cf4"},
+    {"ref": "scripts/m2_radar_esri_sequence_processing_005.py", "sha256": "faadf83f4ae1c35209ed104ab3ba2c97ad233615655aaa31dfc72851b968e0fd"},
+    {"ref": "contracts/milestone-002-radar-event-area-pair-001-proposal.json", "sha256": "ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2"},
+    {"ref": "records/source-gates/m2-radar-event-area-pair-001-approval.json", "sha256": "50becd7494176d5202075d71cbaf40d9da316d1f585144e8defbc8036534de01"},
+    {"ref": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"},
+    {"ref": "config/aoi/approved-study-areas-epsg32645.json", "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"}
+  ],
+  "decision_question": "Approve, revise, or defer one conditional native-GTC grid method recovery for the exact ascending M1-SRC-002/005 QA route through sanitized terminal publication, with no intermediate owner reconfirmation?",
+  "observed_boundary": {
+    "consumed_attempt": "e1/a1_terminal_indeterminate_no_retry",
+    "saved_m1_src_002_gtc_grid": "EPSG4326_2_by_2_10_degrees_per_cell",
+    "historical_failure_cause": "unknown",
+    "prior_project_raster_and_clip_candidates": "closed_after_disposable_blocks_no_real_recovery_attempt",
+    "eleven_tile_dem_mosaic_cells": 155520000,
+    "eleven_tile_dem_actual_sar_valid_elevation": "not_established",
+    "new_real_attempt_started": false,
+    "source_qa_or_baseline_admission": false
+  },
+  "proposed_method_amendment": {
+    "scope": "exact ascending event-area QA pair only",
+    "sources_in_fixed_order": ["M1-SRC-002", "M1-SRC-005"],
+    "orbits_in_fixed_order": ["M2-ORB-001", "M2-ORB-003"],
+    "dem": "exact already-verified eleven-tile ellipsoidal mosaic with GEOID NONE, conditional on full actual processed-extent valid-elevation proof",
+    "unchanged_sequence": "orbit correction, thermal-noise removal, beta calibration, gamma terrain flattening, REFINED_LEE after RTF, native GTC, VV/VH, native mask, and frozen QA",
+    "native_gtc_environment": "clear cellSize, snapRaster, outputCoordinateSystem, and extent to defaults for gamma and mask GTC; capture and restore prior values on success and exception; keep BILINEAR continuous and NEAREST categorical resampling",
+    "native_pre_save_guard": "inspect returned Raster spatialReference, width, height, meanCellWidth, meanCellHeight, extent, bandCount, and isTemporary and durably record them before save; missing or nonfinite metadata blocks without save",
+    "native_grid_screen": {
+      "required_wkid": 4326,
+      "maximum_cell_size_degrees_each_axis": 0.0002787777777777778,
+      "basis": "one arc-second DEM cell plus 0.000001 degree tolerance; a proposed gross native-resolution stop, not proof of 10-metre information",
+      "maximum_declared_cells": 200000000,
+      "maximum_single_native_output_logical_bytes": 2147483648,
+      "maximum_single_native_output_on_disk_bytes": 10737418240,
+      "require_positive_overlap_with_source_and_approved_event_aois": true,
+      "require_full_valid_dem_support_over_processed_extent": true,
+      "missing_or_ambiguous_metadata_disposition": "BLOCK"
+    },
+    "projection": "only after native grid and valid-pixel checks, use one CRS-bearing-extent ProjectRaster method with the frozen EPSG:32645 10-m target and snap origin; use BILINEAR for continuous gamma and dB and NEAREST for the categorical mask; no Clip, fallback projection method, or coverage creation is authorized",
+    "projected_grid_screen": {
+      "target_bounds_epsg32645_m": [272300.0, 3069230.0, 368820.0, 3150210.0],
+      "target_columns": 9652,
+      "target_rows": 8098,
+      "target_cells": 78161896,
+      "maximum_declared_cells_before_acceptance": 100000000,
+      "maximum_extension_each_target_side_m": 100,
+      "frozen_pixel_qa_contract_unchanged": true,
+      "effective_native_resolution_must_be_disclosed": true
+    }
+  },
+  "requested_single_authority_envelope": {
+    "owner_decision_count": 1,
+    "covers_without_intermediate_owner_reconfirmation": [
+      "publish this exact packet and owner response on the public default branch and require successful public CI",
+      "implement the separate append-only recovery-003 runner and independent resource and receipt supervisor without modifying consumed code, receipts, or outputs",
+      "add portable fake-ArcPy tests for environment clearing and restoration, exact call order, pre-save gross-grid stop, size/extent guards, independent terminal and cleanup persistence, and secret-safe errors",
+      "run installed ArcGIS disposable tests on generated nonproject inputs to verify environment behavior, returned-Raster metadata access, realistic native-grid projection, categorical mask preservation, and resource stops; record that generated rasters do not prove SAR-specific GTC fitness",
+      "publish implementation and execution gates and require passing public default-branch CI before protected access",
+      "perform one final no-content preflight of exact source, orbit, DEM, AOI, contract, disk, ArcGIS, immutable e1/a1 receipts, and absent e1/a2 root and new receipt identities",
+      "on all preceding gates passing, perform one read-only actual-source footprint and full-extent valid-DEM assessment and stop before radar geoprocessing if any required elevation is absent or indeterminate",
+      "only on all preceding gates passing, run at most one fresh byte-zero e1/a2 process with M1-SRC-002 first and M1-SRC-005 only after the first source passes its independent native-grid, projected-grid, mask, AOI-coverage, and persistence checks; pair registration is evaluated only after both dates exist",
+      "stop on the first missing native metadata, coarse or oversized native grid, incomplete DEM support, projected guard failure, supervisor stop, receipt failure, or source QA failure, with no fallback method or automatic retry",
+      "reconcile all exact input identities, immutable old attempts, fresh terminal and cleanup evidence, route disposition, and sanitized public terminal publication"
+    ],
+    "maximum_new_real_radar_processes": 1,
+    "maximum_radar_sources_in_process": 2,
+    "fresh_attempt_root_alias": "e1/a2_only_if_absent_at_final_preflight",
+    "minimum_free_space_at_each_materialization": "greater_of_40_GiB_or_twice_next_stage_declared_logical_bytes",
+    "maximum_native_output_on_disk_bytes": 10737418240,
+    "maximum_projected_output_on_disk_bytes": 10737418240,
+    "source_orbit_dem_substitution": false,
+    "automatic_retry": false,
+    "consumed_attempt_resume_reuse_or_mutation": false,
+    "baseline_change_or_scientific_publication": false
+  },
+  "hard_stops": [
+    "A portable or disposable pass is only an implementation gate; it is not SAR-specific GTC or pixel-fitness proof.",
+    "Do not save a returned native GTC Raster if metadata is missing, coarser than the proposed native screen, outside the resource limits, or incompatible with source and DEM coverage. If property access itself materializes an uncontrolled output, stop and retain evidence; do not silently save and inspect afterward.",
+    "Do not project a 2-by-2 or other failed native grid. Do not infer 10-metre information from a 10-metre output sampling grid; record native effective resolution and any oversampling.",
+    "Do not begin M1-SRC-005 after a failed or indeterminate M1-SRC-002 stage. Do not retry a stopped attempt, add Clip, or substitute either closed projection/clip candidate.",
+    "Preserve all prior attempts, partial rasters, zero-byte receipts, optical INVALID/BLOCK results, and their public reconciliations without rewrite."
+  ],
+  "claim_boundary": {
+    "possible_result": "INVALID_BLOCK_DEFER_or_PASS_QA_ONLY",
+    "pass_qa_only_is_not_baseline_admission": true,
+    "change_analysis_or_difference_raster_authorized": false,
+    "interpretation_or_event_attribution_authorized": false,
+    "derived_pixel_or_scientific_publication_authorized": false,
+    "historical_gtc_root_cause_claim_authorized": false
+  },
+  "does_not_authorize_now": [
+    "Git commit or public publication of this local packet",
+    "approval recording or activation",
+    "ArcPy invocation, disposable or project-data geoprocessing, project-data pixel read, or external-custody mutation",
+    "new e1/a2 process, reuse or retry of e1/a1, baseline or change analysis, attribution, derived-pixel publication, or scientific publication"
+  ]
+}
