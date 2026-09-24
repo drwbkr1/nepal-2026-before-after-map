@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001-LOCAL-POSTMORTEM-OBSERVATION",
+  "status": "pass_portable_synthetic_replay_only_real_persistence_trigger_unknown",
+  "bindings": {
+    "consumed_attempt_reconciliation_sha256": "29b4f414b223b79f71f845a7321657eccb13f88e7d642ade0ababa54d82737a7",
+    "terminal_publication_reconciliation_sha256": "a18a8f95d4db449ed484f3ccfcf2815924c84b81cb8bb49bb071dc7dd7675a20",
+    "frozen_runner_sha256": "67f567d8cb8dbcbbb69841b1a1ea1530eab8c150d1cb214dd381e78562c2b379",
+    "frozen_core_sha256": "e82e60cc5d0f7874b42da7ea24246120542f681c22c400c24b00b1faca14d869",
+    "portable_synthetic_test_sha256": "7c74223c10c16687308fadd5c49e62a315038e5c197354565a1c2b3bc2ff7d57"
+  },
+  "observations": [
+    "A disposable fake-ArcPy replay of the exact gtc_configuration_count_ambiguous exception path wrote all four synthetic receipts, including terminal and cleanup.",
+    "A disposable injected failure at the terminal persistence call left the synthetic error receipt written but terminal and cleanup zero bytes, reproducing the structural receipt pattern observed in real-001.",
+    "The real terminal persistence trigger was not captured. The injected OSError is a hypothetical fault, not an identification of the real exception."
+  ],
+  "scope": {
+    "portable_tests_passed": 2,
+    "arcgis_invoked": false,
+    "project_data_or_external_custody_accessed": false,
+    "consumed_attempt_receipts_mutated": false,
+    "new_real_diagnostic_started": false,
+    "configuration_ambiguity_root_cause_established": false,
+    "historical_terminal_persistence_trigger_established": false
+  },
+  "next_action": "Use this limited structural evidence in a separately reviewed fresh diagnostic proposal with durable per-stage metadata and independent terminal/cleanup fallbacks; do not retry or reconstruct real-001."
+}

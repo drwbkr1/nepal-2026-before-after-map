@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-RECOVERY-001",
+  "status": "local_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "base_commit": "3c955c941d9e01726be27210a7eb8796c497460b",
+  "input_bindings": [
+    {"ref": "records/readiness/m2-radar-event-area-pair-grid-provenance-diagnostic-001-terminal-publication-reconciliation.json", "sha256": "a18a8f95d4db449ed484f3ccfcf2815924c84b81cb8bb49bb071dc7dd7675a20"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-grid-provenance-diagnostic-001-real-001-terminal-reconciliation.json", "sha256": "29b4f414b223b79f71f845a7321657eccb13f88e7d642ade0ababa54d82737a7"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-grid-provenance-diagnostic-001-local-postmortem-observation.json", "sha256": "03491c082291193f3d7f4666f04131ef3c7f815cf3e4c2d19f68a8690bfafce3"},
+    {"ref": "tests/test_m2_radar_event_pair_grid_provenance_postmortem_001.py", "sha256": "7c74223c10c16687308fadd5c49e62a315038e5c197354565a1c2b3bc2ff7d57"},
+    {"ref": "scripts/run_m2_radar_event_pair_grid_provenance_diagnostic_001.py", "sha256": "67f567d8cb8dbcbbb69841b1a1ea1530eab8c150d1cb214dd381e78562c2b379"},
+    {"ref": "scripts/m2_radar_event_pair_grid_provenance_diagnostic_001_core.py", "sha256": "e82e60cc5d0f7874b42da7ea24246120542f681c22c400c24b00b1faca14d869"},
+    {"ref": "records/processing/m2-radar-event-area-pair-grid-provenance-diagnostic-001-real-001-error.json", "sha256": "202171e0b003930c1ade51719f284f8ded525aa5a5d878c0636a500d103e4e0b"},
+    {"ref": "records/processing/m2-radar-event-area-pair-grid-provenance-diagnostic-001-real-001-terminal.json", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+    {"ref": "records/processing/m2-radar-event-area-pair-grid-provenance-diagnostic-001-real-001-cleanup.json", "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+    {"ref": "records/processing/m2-radar-event-area-pair-001-radar-terminal-indeterminate-reconciliation.json", "sha256": "77037c851311730c8e0b1431d97ad57982a381d395616445aba43ace769104a1"},
+    {"ref": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"}
+  ],
+  "decision_question": "Approve, revise, or defer a single bounded recovery envelope for a fresh read-only metadata-only process with per-stage persistence and independent terminal and cleanup fallbacks, without reusing or retrying the consumed diagnostic?",
+  "observed_boundary": {
+    "consumed_real_001_error": "gtc_configuration_count_ambiguous",
+    "consumed_real_001_started_and_error_receipts": "nonzero_append_only",
+    "consumed_real_001_terminal_and_cleanup_receipts": "immutable_zero_bytes",
+    "five_raster_metadata_calls_returned_before_error": "inferred_from_frozen_control_flow_not_durable_metadata_values",
+    "actual_raster_metadata_values": "unknown_not_persisted",
+    "configuration_candidate_count": "unknown_not_persisted",
+    "secondary_receipt_persistence_failure_trigger": "unknown_not_persisted",
+    "portable_synthetic_replay": "ordinary_config_error_path_persists_all_receipts; injected_terminal_failure_leaves_cleanup_unwritten",
+    "scientific_fitness_or_change_evidence": false
+  },
+  "requested_single_authority_envelope": {
+    "owner_decision_count": 1,
+    "covers_without_intermediate_owner_reconfirmation": [
+      "publish this exact packet and owner response to public default branch and require passing public CI",
+      "implement a separate recovery-only read-only diagnostic, leaving the consumed real-001 code and receipts immutable",
+      "add portable strict-path, no-pixel, exact-order, per-stage fsync, injected-terminal-failure, cleanup-independence, interruption, and secret-safe tests",
+      "run installed ArcGIS synthetic tests on generated disposable CRFs only, including metadata enumeration and no-mutation comparison",
+      "publish implementation and execution gates and require passing public default-branch CI",
+      "perform one final no-content preflight of exact five preserved M1-SRC-002 CRFs, old zero-byte receipts, absent new receipt identities, and absent e1/a2 root",
+      "only on every gate passing, run at most one fresh distinct read-only recovery process over the exact five preserved CRFs in the same order, with no automatic retry",
+      "before any preserved metadata read, reserve and fsync new append-only started, stage-journal, terminal, cleanup, error, and fallback-error identities",
+      "persist and fsync sanitized ArcPy Raster and Describe metadata after each exact CRF before configuration inspection, so later errors do not erase already observed grid values",
+      "enumerate only bounded metadata/configuration sidecars within the exact saved GTC CRF; record candidate counts and SHA-256 identities, and interpret the old published configuration only if exactly one bounded candidate matches its published hash",
+      "persist terminal and cleanup independently; if either fails, preserve a distinct fallback error without reconstructing or overwriting a reserved receipt",
+      "reconcile the outcome and publish only sanitized metadata, disposition, receipt hashes, and public CI evidence"
+    ],
+    "exact_source_root": "C:/Projects/Active/nepal-2026-before-after-map-data/e1/a1/s/2",
+    "exact_raster_names_in_order": [
+      "gamma0_linear_slant.crf",
+      "gamma0_linear_despeckled.crf",
+      "gamma0_linear_gtc_raw.crf",
+      "gamma0_db_gtc_raw.crf",
+      "geometric_distortion_mask_gtc_raw.crf"
+    ],
+    "published_saved_gtc_configuration_sha256": "eff271e62660d4ae2fe64d614c9051a953c750f167926b946dcf3cb5e9c7d419",
+    "maximum_new_real_read_only_processes": 1,
+    "maximum_raster_metadata_reads": 5,
+    "maximum_gtc_directory_entries_enumerated": 20000,
+    "maximum_configuration_candidates_hashed": 256,
+    "maximum_bytes_per_configuration_candidate": 1048576,
+    "configuration_candidate_name_classes": ["conf", "json", "xml", "cdi", "aux.xml"],
+    "pixel_reads": 0,
+    "geoprocessing_calls": 0,
+    "raster_function_calls": 0,
+    "network_or_credential_actions": 0,
+    "source_or_custody_writes": 0,
+    "new_radar_processing_attempts": 0,
+    "automatic_retry": false
+  },
+  "hard_stops": [
+    "The old real-001 process and its zero-byte terminal and cleanup receipts remain terminal and immutable; do not reconstruct, reuse, resume, or retry them.",
+    "If any exact CRF is missing, resolved outside the exact source root, or has conflicting Raster and Describe metadata, stop and retain already persisted stage records.",
+    "Do not read raster pixels, invoke geoprocessing or raster functions, substitute another CRF or source, mutate external custody, or start e1/a2.",
+    "If the configuration inventory exceeds a bound, has no exact historical SHA match, or has multiple matches, report unresolved configuration identity rather than treating the grid as validated.",
+    "No baseline admission, change analysis, geomorphic interpretation, event attribution, derived-pixel publication, or scientific publication is authorized."
+  ],
+  "does_not_authorize_now": [
+    "Git commit or public publication of this local packet",
+    "approval recording or activation",
+    "ArcPy invocation or access to preserved project-data and external-custody contents",
+    "fresh real diagnostic process, radar processing, baseline or change analysis, attribution, or scientific publication"
+  ]
+}

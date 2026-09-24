@@ -1589,6 +1589,12 @@ REQUIRED = [
     "tests/test_m2_radar_event_pair_dem_mosaic_001.py",
     "scripts/validate_m2_radar_event_pair_dem_mosaic_001_arcgis.py",
     "records/readiness/m2-radar-event-area-pair-001-dem-mosaic-arcgis-runtime-validation.json",
+    "contracts/milestone-002-radar-event-area-pair-grid-provenance-recovery-001-proposal.json",
+    "docs/M2_RADAR_EVENT_AREA_PAIR_GRID_PROVENANCE_RECOVERY_001_REVIEW.md",
+    "reviews/m2-radar-event-area-pair-grid-provenance-recovery-001/review-bundle.json",
+    "records/readiness/m2-radar-event-area-pair-grid-provenance-diagnostic-001-local-postmortem-observation.json",
+    "tests/test_m2_radar_event_pair_grid_provenance_postmortem_001.py",
+    "records/source-gates/m2-radar-event-area-pair-grid-provenance-recovery-001-approval.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -1649,6 +1655,26 @@ def main() -> None:
     missing = [name for name in REQUIRED if not (ROOT / name).is_file()]
     if missing:
         fail("missing required files: " + ", ".join(missing))
+
+    recovery_proposal_ref = "contracts/milestone-002-radar-event-area-pair-grid-provenance-recovery-001-proposal.json"
+    recovery_bundle_ref = "reviews/m2-radar-event-area-pair-grid-provenance-recovery-001/review-bundle.json"
+    recovery_approval_ref = "records/source-gates/m2-radar-event-area-pair-grid-provenance-recovery-001-approval.json"
+    recovery_proposal = json.loads((ROOT / recovery_proposal_ref).read_text(encoding="utf-8"))
+    recovery_bundle = json.loads((ROOT / recovery_bundle_ref).read_text(encoding="utf-8"))
+    recovery_approval = json.loads((ROOT / recovery_approval_ref).read_text(encoding="utf-8"))
+    if (
+        sha256(recovery_proposal_ref) != "ccb4617ae462910789eefc4d411b0a9c6b8d4baf1c9107ed301eed536feafdc3"
+        or sha256(recovery_bundle_ref) != "27d55419ddc0a02edfc009c076a45faaaaaf90a25f7f5b5a0a3aa107be691645"
+        or recovery_proposal.get("human_decision_count") != 0
+        or recovery_bundle.get("human_decision_count") != 0
+        or recovery_approval.get("decision") != "approve"
+        or recovery_approval.get("human_decision_count") != 1
+        or recovery_approval.get("bindings", {}).get("proposal_sha256") != sha256(recovery_proposal_ref)
+        or recovery_approval.get("bindings", {}).get("review_bundle_sha256") != sha256(recovery_bundle_ref)
+        or any(sha256(item["ref"]) != item["sha256"] for item in recovery_proposal["input_bindings"])
+        or any(sha256(item["path"]) != item["sha256"] for item in recovery_bundle["artifacts"])
+    ):
+        fail("M2 radar event-area pair grid provenance recovery packet or approval differs")
 
     profile = json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))
     orbit_continuation_001_review_reconciliation = json.loads((ROOT / "records/source-gates/m2-orbit-continuation-001-review-reconciliation.json").read_text(encoding="utf-8"))
