@@ -1605,6 +1605,7 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-execution-publication-gate.json",
     "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-final-no-content-preflight.json",
     "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-terminal-reconciliation.json",
+    "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-terminal-publication-gate.json",
     "records/processing/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-started.json",
     "records/processing/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-stage-journal.jsonl",
     "records/processing/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-error.json",
@@ -1776,6 +1777,18 @@ def main() -> None:
         ref = f"records/processing/{recovery_prefix}-real-001-{suffix}.{'jsonl' if suffix == 'stage-journal' else 'json'}"
         if sha256(ref) != receipt["sha256"] or (ROOT / ref).stat().st_size != receipt["size_bytes"]:
             fail("M2 radar event-area pair grid provenance recovery immutable receipt differs")
+    recovery_terminal_gate = json.loads((ROOT / f"records/readiness/{recovery_prefix}-terminal-publication-gate.json").read_text(encoding="utf-8"))
+    if (
+        recovery_terminal_gate.get("status") != "pass_public_terminal_evidence_ci_indeterminate_diagnostic"
+        or recovery_terminal_gate.get("bindings", {}).get("terminal_reconciliation_sha256")
+            != sha256(f"records/readiness/{recovery_prefix}-real-001-terminal-reconciliation.json")
+        or recovery_terminal_gate.get("bindings", {}).get("terminal_evidence_commit_sha")
+            != "7bc944af3712bc30607947c41bba5bd2d3a6de10"
+        or recovery_terminal_gate.get("bindings", {}).get("public_ci_conclusion") != "success"
+        or recovery_terminal_gate.get("assertions", {}).get("configuration_identity_resolved") is not False
+        or recovery_terminal_gate.get("assertions", {}).get("pixel_or_radar_processing_released") is not False
+    ):
+        fail("M2 radar event-area pair grid provenance recovery terminal publication gate differs")
 
     profile = json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))
     orbit_continuation_001_review_reconciliation = json.loads((ROOT / "records/source-gates/m2-orbit-continuation-001-review-reconciliation.json").read_text(encoding="utf-8"))

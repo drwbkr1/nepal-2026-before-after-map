@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-RECOVERY-001-TERMINAL-PUBLICATION-GATE",
+  "status": "pass_public_terminal_evidence_ci_indeterminate_diagnostic",
+  "bindings": {
+    "terminal_reconciliation_sha256": "664d99fd7cb261238cd322143cc1326ff3c0f36159c79e348c201cf08a949a5c",
+    "terminal_evidence_commit_sha": "7bc944af3712bc30607947c41bba5bd2d3a6de10",
+    "public_ci_run_id": 36038825039,
+    "public_ci_job_id": 107765551901,
+    "public_ci_conclusion": "success"
+  },
+  "assertions": {
+    "single_recovery_process_consumed": true,
+    "five_raster_metadata_stages_persisted": true,
+    "configuration_candidate_oversized_stop_preserved": true,
+    "old_diagnostic_and_new_recovery_receipts_immutable": true,
+    "new_terminal_and_cleanup_receipts_zero_bytes": true,
+    "configuration_identity_resolved": false,
+    "pixel_or_radar_processing_released": false,
+    "baseline_or_change_analysis_released": false,
+    "scientific_publication_released": false
+  }
+}
