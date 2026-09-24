@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001-FINAL-NO-CONTENT-PREFLIGHT",
+  "checked_at_utc": "2026-09-24T17:37:40Z",
+  "status": "pass_no_content_preflight_metadata_diagnostic_only",
+  "bindings": {
+    "implementation_gate_sha256": "15bc6f1e8106c87f918ac3227c2c22f449cf3f2648bf118c7ca18c8457e70a65",
+    "implementation_commit_sha": "88cd520374361743b30d02f8ee85091200e0b10a",
+    "proposal_sha256": "715656bf5ad964eea5805d99e5416ba592e5c743cde6db6f629ce3029c7d1bf4",
+    "review_bundle_sha256": "469da6bd5b69173d25561f1f9b405362ee4218685831920ef8d2933a4995d0f2"
+  },
+  "assertions": {
+    "old_reserved_receipts_zero_bytes": true,
+    "five_exact_candidates_present": true,
+    "new_e1_a2_attempt_root_absent": true,
+    "diagnostic_receipt_collision": false,
+    "raster_or_configuration_content_read": false,
+    "arcgis_invoked": false
+  }
+}

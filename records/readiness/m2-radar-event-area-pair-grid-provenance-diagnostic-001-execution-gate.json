@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001-EXECUTION-GATE",
+  "status": "ready_only_if_this_exact_commit_passes_public_default_branch_ci",
+  "bindings": {
+    "implementation_gate_sha256": "15bc6f1e8106c87f918ac3227c2c22f449cf3f2648bf118c7ca18c8457e70a65",
+    "implementation_gate_commit_sha": "7d49b6a0ccd1f4149a4bdddd85a22cd5569fc9df",
+    "implementation_gate_public_ci_run_id": 36035559895,
+    "implementation_gate_public_ci_conclusion": "success",
+    "final_no_content_preflight_sha256": "0ddfedcc17865823161507391cb3db97aa6b943256508fa71e915c9fbbff8cb7"
+  },
+  "conditional_action": {
+    "maximum_real_read_only_metadata_diagnostic_processes": 1,
+    "exact_preserved_source": "e1/a1/s/2",
+    "raster_metadata_reads_maximum": 5,
+    "pixel_reads": 0,
+    "geoprocessing_calls": 0,
+    "network_or_credential_actions": 0,
+    "external_custody_writes": 0,
+    "automatic_retry": false,
+    "new_radar_processing_attempts": 0
+  },
+  "hard_stop": "This gate releases no real metadata access unless its exact public default-branch commit passes CI and the final preflight remains identical."
+}
