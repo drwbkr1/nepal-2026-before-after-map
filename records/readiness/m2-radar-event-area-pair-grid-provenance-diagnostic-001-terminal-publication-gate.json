@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001-TERMINAL-PUBLICATION-GATE",
+  "status": "pass_public_default_branch_ci_indeterminate_terminal_evidence_only",
+  "bindings": {
+    "terminal_reconciliation_sha256": "29b4f414b223b79f71f845a7321657eccb13f88e7d642ade0ababa54d82737a7",
+    "terminal_evidence_commit_sha": "7495711f1a56f010ca6ecfb3587cae68ad4619f0",
+    "public_ci_run_id": 36036039274,
+    "public_ci_job_id": 107756255270,
+    "public_ci_conclusion": "success",
+    "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/36036039274"
+  },
+  "assertions": {
+    "single_real_diagnostic_attempt_consumed": true,
+    "sanitized_error_receipt_published": true,
+    "reserved_zero_byte_terminal_and_cleanup_receipts_preserved": true,
+    "five_raster_metadata_values_persisted": false,
+    "gtc_configuration_count_resolved": false,
+    "external_custody_post_run_inventory_compared": false,
+    "new_radar_processing_attempt_started": false,
+    "grid_fitness_or_source_qa_established": false,
+    "baseline_or_change_evidence_established": false,
+    "follow_on_diagnostic_or_processing_released": false
+  }
+}
