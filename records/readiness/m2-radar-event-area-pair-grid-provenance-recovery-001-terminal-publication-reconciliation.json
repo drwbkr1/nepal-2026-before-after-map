@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-RECOVERY-001-TERMINAL-PUBLICATION-RECONCILIATION",
+  "status": "pass_exact_public_terminal_gate_ci_reconciled_indeterminate_recovery_closed",
+  "bindings": {
+    "terminal_publication_gate_sha256": "19a3708d8ea382a6b4f4f9714314e6c437a447fdf48c46ec981ed02fe1f9fb56",
+    "terminal_gate_commit_sha": "434f4efddc146a78cfb430625c0ffc9cace51eea",
+    "terminal_gate_public_ci_run_id": 36038934610,
+    "terminal_gate_public_ci_job_id": 107765922493,
+    "terminal_gate_public_ci_conclusion": "success"
+  },
+  "assertions": {
+    "one_distinct_read_only_recovery_process_consumed": true,
+    "five_exact_crf_metadata_observations_durable": true,
+    "gtc_raw_metadata_is_two_by_two_ten_degree_grid": true,
+    "gtc_configuration_identity_resolved": false,
+    "terminal_and_cleanup_receipts_persisted": false,
+    "old_and_new_zero_byte_receipts_preserved": true,
+    "new_radar_processing_attempt_started": false,
+    "pixel_qa_baseline_or_change_evidence_established": false,
+    "follow_on_preserved_data_diagnostic_or_processing_released": false,
+    "scientific_publication_released": false
+  },
+  "next_action": "Review configuration candidate handling and the still-unexplained terminal/cleanup persistence failure as separate evidence problems. Do not relaunch recovery real-001 or use the GTC metadata as pixel or change evidence."
+}
