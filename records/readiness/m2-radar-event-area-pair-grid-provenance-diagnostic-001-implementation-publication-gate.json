@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001-IMPLEMENTATION-PUBLICATION-GATE",
+  "status": "pass_public_default_branch_ci_diagnostic_implementation_only",
+  "implementation_commit_sha": "88cd520374361743b30d02f8ee85091200e0b10a",
+  "public_ci_run_id": 36035445711,
+  "public_ci_job_id": 107754262581,
+  "public_ci_conclusion": "success",
+  "bindings": {
+    "proposal_sha256": "715656bf5ad964eea5805d99e5416ba592e5c743cde6db6f629ce3029c7d1bf4",
+    "review_bundle_sha256": "469da6bd5b69173d25561f1f9b405362ee4218685831920ef8d2933a4995d0f2",
+    "approval_sha256": "4f062d2660fc49560322aa15457f24b6dc4f78003e1c126385f572b4fdb3c956",
+    "packet_gate_sha256": "6a1a80ab8584b52dd7e86920de467e7de5db2017aaa9f28afe269fdab4393cf9",
+    "core_sha256": "e82e60cc5d0f7874b42da7ea24246120542f681c22c400c24b00b1faca14d869",
+    "runner_sha256": "67f567d8cb8dbcbbb69841b1a1ea1530eab8c150d1cb214dd381e78562c2b379",
+    "arcgis_validator_sha256": "ff566783db058cee3a87fdc299654759c2f86704e8cd187eaaec1492d43ee134",
+    "synthetic_tests_sha256": "acea250a5858440360633f3ef53c71d8fe8849c5dce10e24bff76666f7c43cef"
+  },
+  "assertions": {
+    "portable_unit_tests_passed": 7,
+    "repository_unit_tests_passed": 777,
+    "installed_arcgis_disposable_reader_passed": true,
+    "preserved_e1_a1_raster_metadata_access_started": false,
+    "real_diagnostic_started": false,
+    "radar_processing_or_scientific_action_released": false
+  }
+}
