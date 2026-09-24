@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-PROJECTED-CLIP-RECOVERY-002-TERMINAL-PUBLICATION-GATE",
+  "recorded_at_utc": "2026-09-24T17:18:25Z",
+  "status": "pass_public_default_branch_ci_for_blocked_disposable_method_only",
+  "bindings": {
+    "proposal_sha256": "cff158699f32723a8935fbfdc13083ae425b4a5d2a9eab1d38369819d0384acd",
+    "review_bundle_sha256": "0de5fa500c2ca048b619c2d459ed1624c2439490b555ed0633df06b77bbbc052",
+    "disposable_validation_terminal_sha256": "bbfd5ee7e6fcf7276ef6a827e1018217f7c3f7bda60a0f973749ec366d342f02",
+    "terminal_evidence_commit_sha": "f095d58948ef237f904675e751ca4e6bb8faadba",
+    "public_ci_run_id": 36033302759,
+    "public_ci_job_id": 107747134665,
+    "public_ci_conclusion": "success",
+    "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/36033302759"
+  },
+  "assertions": {
+    "blocked_disposable_result_published": true,
+    "project_data_or_external_custody_accessed": false,
+    "production_runner_created": false,
+    "new_real_attempt_started": false,
+    "old_attempt_retried_or_mutated": false,
+    "baseline_or_change_evidence_established": false,
+    "scientific_result_or_derived_pixels_published": false,
+    "follow_on_method_or_processing_released": false
+  },
+  "next_action": "Stop the approved projected-clip recovery-002 envelope at the blocked disposable validation gate. A changed method or new attempt requires separately reviewed owner authority."
+}
