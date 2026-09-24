@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-RADAR-TERMINAL-INDETERMINATE-RECONCILIATION",
+  "checked_at_utc": "2026-09-24T01:01:18Z",
+  "status": "terminal_indeterminate_supervised_stop_no_retry",
+  "attempt_id": "radar-event-area-pair-001-real-001",
+  "authority": {
+    "proposal_sha256": "ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2",
+    "review_bundle_sha256": "ad6f0f5e75c768721ebbc787e6550dcb28e61fba22c86271beed982d220a5423",
+    "approval_ref": "records/source-gates/m2-radar-event-area-pair-001-approval.json"
+  },
+  "stop_reason": "The first projected raster declared a grid 644.91 times the frozen AOI processing-grid area. Continuing the projection posed a substantial compute and storage risk and could not establish the intended grid contract.",
+  "observed_grid_metadata": {
+    "frozen_aoi_with_1000m_buffer_epsg32645_bounds": [272300.0, 3069230.0, 368820.0, 3150210.0],
+    "frozen_10m_target_cell_count": 78161896,
+    "saved_gtc_input_declared_epsg4326_bounds": [80.0, 10.0, 100.0, 30.0],
+    "saved_gtc_input_declared_pixel_size_degrees": [10.0, 10.0],
+    "saved_gtc_input_conf_sha256": "eff271e62660d4ae2fe64d614c9051a953c750f167926b946dcf3cb5e9c7d419",
+    "partial_projected_raster_declared_epsg32645_bounds": [-268990.0, 1105400.0, 1936450.0, 3391000.0],
+    "partial_projected_raster_declared_cell_size_m": 10.0,
+    "partial_projected_raster_declared_cell_count": 50407536640,
+    "declared_area_ratio_to_target": 644.91,
+    "partial_projected_raster_conf_sha256": "65031840d433d3662ec03fab0dcd6010283364381a572c066b6e65bed5051d03",
+    "partial_projected_raster_file_count": 3343,
+    "partial_projected_raster_total_bytes": 96165383,
+    "partial_projected_raster_inventory_sha256": "e390c41213a0b7e39b4a5f17039743d7d5a3084d6a3c3f8befa6e95e5c4e9f1b",
+    "partial_projected_raster_usable_or_complete": false
+  },
+  "process_observation": {
+    "worker_pid": 26744,
+    "started_at_utc": "2026-09-23T22:58:02Z",
+    "stop_action": "Console interrupt sent to the existing authorized process after the gross grid mismatch was verified.",
+    "process_exit_code": 1,
+    "worker_absent_after_exit": true,
+    "python_failure_handler_persisted_terminal": false
+  },
+  "durable_attempt_evidence": {
+    "attempt_started_receipt_sha256": "99ede50d3a8da860afbff904eceda55008bc8a648404ffc87143dc307da18e30",
+    "first_source_started_receipt_sha256": "650c3afdf7542e4c052c18ff7bfd8feee85547e61f2e332e5deccd14d3f820b4",
+    "stage_journal_sha256": "700dee324780ff35b642311de4620bf5011e9cc1616217cb8163b82aba4a109b",
+    "last_durable_stage": {
+      "at_utc": "2026-09-24T00:11:24Z",
+      "source_id": "M1-SRC-002",
+      "tool": "ApplyGeometricTerrainCorrection_mask",
+      "phase": "completed"
+    },
+    "first_source_terminal_receipt_exists": false,
+    "second_source_started_receipt_exists": false,
+    "second_source_output_root_exists": false,
+    "pair_route_root_exists": false,
+    "reserved_terminal_receipt_bytes": 0,
+    "reserved_cleanup_receipt_bytes": 0,
+    "reserved_error_receipt_bytes": 0,
+    "reserved_zero_byte_receipts_left_unchanged": true,
+    "normal_terminal_reconciler_status": "terminal_reconciliation_stopped",
+    "normal_terminal_reconciler_code": "radar_terminal_or_cleanup_not_durable"
+  },
+  "post_stop_frozen_input_identity_check": {
+    "status": "pass_exact_inputs_match_frozen_manifests",
+    "source_inventory_sha256": {
+      "M1-SRC-002": "c71362fe6befe05f64ed4d57a8e16825068d9852605cd18414ce3d0659a8a9d2",
+      "M1-SRC-005": "c1d3abb52776c4e0cdd61a1d535ce5bf4be43253038a979f505d4b6e31db269a"
+    },
+    "orbit_sha256": {
+      "M2-ORB-001": "a72c93e500a1c09b62b4cd31889837c9d57ccc41542b16397ff9f2c0fccba3f4",
+      "M2-ORB-003": "c08bf997f1bf02fb25dcf2a4f35643aef4754fbea03c6c2fb0fa9db4a0efe778"
+    },
+    "dem_derivative_count": 11,
+    "dem_mosaic_sha256": "e46bd9455c19dda85d8c63d0f721df27a4e14abbcc9be0d15e32ed44f32dea4e"
+  },
+  "interpretation_boundary": {
+    "exact_arcgis_extent_failure_mechanism_established": false,
+    "source_qa_pass_established": false,
+    "event_pair_route_evaluated": false,
+    "baseline_admission_authorized": false,
+    "change_analysis_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false
+  },
+  "next_action_boundary": "The attempt is consumed and its reserved receipts must not be reconstructed or mutated. A separately reviewed recovery is required before any new radar processing attempt or grid-method change."
+}
