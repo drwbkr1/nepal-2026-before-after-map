@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001-ERROR",
+  "status": "sanitized_diagnostic_error",
+  "failure_type": "DiagnosticError",
+  "failure_code": "gtc_configuration_count_ambiguous"
+}

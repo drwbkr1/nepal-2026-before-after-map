@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001-STARTED",
+  "started_at_utc": "2026-09-24T17:39:03Z",
+  "status": "started_read_only_metadata_diagnostic",
+  "final_preflight_sha256": "0ddfedcc17865823161507391cb3db97aa6b943256508fa71e915c9fbbff8cb7"
+}

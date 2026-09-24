@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-DIAGNOSTIC-001-REAL-001-TERMINAL-RECONCILIATION",
+  "status": "terminal_indeterminate_error_preserved_terminal_and_cleanup_zero_bytes_no_retry",
+  "attempt_id": "m2-radar-event-area-pair-grid-provenance-diagnostic-001-real-001",
+  "bindings": {
+    "execution_gate_sha256": "04ff9e8a8f94c38dc0d7dc0c348691e10752361f6fcf315332e9b161022350f5",
+    "execution_gate_commit_sha": "a95c3feb26afd2c1acecad2c2272a8d56134c757",
+    "execution_gate_public_ci_run_id": 36035687943,
+    "execution_gate_public_ci_conclusion": "success",
+    "runner_sha256": "67f567d8cb8dbcbbb69841b1a1ea1530eab8c150d1cb214dd381e78562c2b379",
+    "core_sha256": "e82e60cc5d0f7874b42da7ea24246120542f681c22c400c24b00b1faca14d869",
+    "started_receipt_sha256": "e1eeb642a644e42dc3e92fbf1585de7e1effd1bd50874f176a1ca67f565db919",
+    "error_receipt_sha256": "202171e0b003930c1ade51719f284f8ded525aa5a5d878c0636a500d103e4e0b",
+    "terminal_receipt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cleanup_receipt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "observed": {
+    "process_exit_code": 1,
+    "stdout_status": "block_before_raster_metadata_access",
+    "stdout_status_is_misleading_generic_outer_handler": true,
+    "started_receipt_bytes": 311,
+    "error_receipt_bytes": 250,
+    "error_failure_type": "DiagnosticError",
+    "error_failure_code": "gtc_configuration_count_ambiguous",
+    "terminal_receipt_bytes": 0,
+    "cleanup_receipt_bytes": 0,
+    "inferred_from_frozen_control_flow": "The five ArcPy Raster and Describe metadata calls returned before configuration verification raised the recorded DiagnosticError. Their values were held only in process memory and are not retained as results.",
+    "configuration_match_count": "unknown_not_preserved",
+    "secondary_terminal_persistence_failure_type": "unknown_not_preserved",
+    "actual_raster_dimensions_or_cell_sizes": "unknown_not_persisted",
+    "external_custody_post_run_inventory_comparison": "not_performed",
+    "old_e1_a1_terminal_error_cleanup_receipt_sizes_bytes": [0, 0, 0],
+    "new_e1_a2_root_exists": false
+  },
+  "terminal_boundary": {
+    "attempt_consumed": true,
+    "attempt_resume_reuse_or_retry_authorized": false,
+    "reserved_zero_byte_receipts_reconstruction_authorized": false,
+    "pixel_read_or_geoprocessing_started": false,
+    "new_radar_processing_attempt_started": false,
+    "grid_fitness_or_source_qa_established": false,
+    "baseline_or_change_analysis_authorized": false,
+    "derived_pixel_or_scientific_publication_authorized": false
+  },
+  "next_action": "Publish this sanitized terminal-indeterminate evidence and preserve all four real-001 receipts unchanged. A fresh diagnostic or processing method needs a separately reviewed owner decision."
+}
