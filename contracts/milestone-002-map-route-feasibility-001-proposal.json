@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-MAP-ROUTE-FEASIBILITY-001",
+  "status": "local_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "base_commit": "3fb6a40668d61572e176408ab520da25b2ed8827",
+  "purpose": "Choose one map-producing route after the terminal native-GTC recovery-003 disposable extent block, with one bounded owner decision and independent execution gates.",
+  "input_bindings": [
+    {"ref": "records/observations/m2-map-route-feasibility-after-gtc-003.json", "sha256": "3864a0bce50d1aa1274cb3e979997dc3bfc4558ce49a2558fa1eb567ef3b42bc"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-terminal-publication-reconciliation.json", "sha256": "4cbdc12a41b081b2874b19bf60ba0ec87e24a8c5d0e59122b2d594e905a3e853"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-projected-clip-recovery-002-disposable-validation-terminal.json", "sha256": "bbfd5ee7e6fcf7276ef6a827e1018217f7c3f7bda60a0f973749ec366d342f02"},
+    {"ref": "records/observations/m2-radar-event-pair-catalog-triage-001.json", "sha256": "5c19d4edc3210ac7474ffc58aa2224801dd57ff32db9a51e386e48cee02f76db"},
+    {"ref": "records/readiness/m2-optical-route-disposition-001.json", "sha256": "d51fa2408cac094205b6881222322ff67cd07b21386f58842d677f01c6061a63"},
+    {"ref": "config/aoi/approved-study-areas-epsg32645.json", "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"},
+    {"ref": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"}
+  ],
+  "decision_question": "Approve, revise, or defer one map-route feasibility envelope: coverage-verified ascending radar ProjectRaster then aligned Clip, with a metadata-only alternate optical search if the radar route stops, through sanitized terminal publication?",
+  "observed_boundary": {
+    "recovery_003_disposable": "terminal_block_projected_intermediate_exceeded_final_100_m_extent_guard",
+    "recovery_003_real_attempt_started": false,
+    "e1_a1_consumed": true,
+    "e1_a2_method_identity_closed_without_real_attempt": true,
+    "previous_clip_002_intermediate_west_gap_m": 900.0,
+    "recovery_003_generated_intermediate_covers_target": true,
+    "real_native_gtc_grid_usable": "not_established",
+    "real_radar_pair_pixel_qa": "not_established",
+    "frozen_optical_pair": "INVALID_then_BLOCK",
+    "map_change_layer_exists": false
+  },
+  "proposed_radar_method": {
+    "name": "coverage_verified_project_raster_then_aligned_clip",
+    "new_separate_attempt_root_alias": "e1/a3_only_if_absent_at_final_preflight",
+    "source_order": ["M1-SRC-002", "M1-SRC-005"],
+    "orbit_order": ["M2-ORB-001", "M2-ORB-003"],
+    "dem": "exact already-verified eleven-tile ellipsoidal mosaic, GEOID NONE; full actual processed extent valid-elevation assessment remains a hard gate",
+    "unchanged_sar_sequence": "ApplyOrbitCorrection, RemoveThermalNoise, beta calibration, radiometric terrain flattening, REFINED_LEE despeckle, native gamma and mask GTC, ConvertSARUnits, VV/VH, frozen mask and pixel QA",
+    "native_gtc_guard": "clear and restore cellSize, snapRaster, outputCoordinateSystem, and extent through returned-Raster metadata inspection and save; retain the recovery-003 EPSG:4326, one-arc-second-plus-0.000001-degree, 200-million-cell, 2-GiB-logical, 10-GiB-on-disk gross stops and full source/AOI/DEM-support checks",
+    "intermediate_projection": "one EPSG:32645 10-m snap-aligned ProjectRaster per continuous or categorical native output; BILINEAR continuous and NEAREST categorical; verify that each intermediate fully contains the frozen target rectangle before Clip",
+    "intermediate_limits": {"maximum_declared_cells": 100000000, "maximum_each_side_extension_beyond_target_m": 2000.0, "maximum_single_output_on_disk_bytes": 10737418240},
+    "final_clip": "one rectangular Clip using the exact target bounds and NO_MAINTAIN_EXTENT, only after intermediate coverage and resources pass; no MAINTAIN_EXTENT, second clip, optional projection, or fallback",
+    "final_grid": {"wkid": 32645, "bounds_m": [272300.0, 3069230.0, 368820.0, 3150210.0], "cell_size_m": 10.0, "columns": 9652, "rows": 8098, "cells": 78161896, "maximum_each_side_extension_m": 100.0, "maximum_declared_cells": 100000000},
+    "final_pixel_guard": "verify exact target coverage, snap alignment, source-to-final pixel equivalence on controlled windows, valid-pixel and categorical-mask preservation, AOI coverage, and unchanged frozen registration contract; report native effective resolution and oversampling",
+    "difference_from_closed_clip_002": "do not clip unless the projected intermediate first covers all four target boundaries; the closed clip-002 intermediate lacked 900 m of west coverage and cannot create missing pixels"
+  },
+  "conditional_optical_metadata_fallback": {
+    "trigger": "radar disposable method block or terminal real-route BLOCK, INVALID, or DEFER without QA-only pair",
+    "endpoint": "public CDSE Sentinel-2 Level-2A product catalog metadata only",
+    "search_bounds": "approved AOI footprint intersection; 2026-08-01 through 2026-08-25 before and 2026-08-27 through 2026-09-24 after, UTC; no fixed cloud threshold or silent source selection",
+    "maximum_returned_catalog_rows": 200,
+    "authentication": "none",
+    "allowed_output": "append-only candidate metadata inventory and source/rights/comparability review for a later owner decision",
+    "quicklook_or_pixel_download": false,
+    "source_or_date_adoption": false,
+    "acquisition_or_processing": false
+  },
+  "requested_single_authority_envelope": {
+    "owner_decision_count": 1,
+    "covers_without_intermediate_owner_reconfirmation": [
+      "publish this exact packet and owner response on the public default branch and require successful public CI",
+      "implement a distinct recovery-specific radar runner and resource/receipt supervisor without changing or invoking the closed e1/a1 or e1/a2 attempts",
+      "run portable synthetic tests and one or more append-only installed-ArcGIS disposable attempts on generated continuous and categorical rasters, preserving failed attempts and stopping method work if the exact grid and pixel guards cannot pass",
+      "publish the bounded implementation and execution gates and require passing public default-branch CI before protected access",
+      "perform one final no-content preflight of exact source, orbit, DEM, AOI, code, contract, disk, ArcGIS, immutable prior evidence, and absent e1/a3 root and receipt identities",
+      "only after every gate passes, perform one read-only full actual-source and processing-extent valid-DEM assessment; stop before SAR geoprocessing if any required elevation is absent or indeterminate",
+      "only after all gates pass, run at most one fresh byte-zero e1/a3 process: M1-SRC-002 first, M1-SRC-005 only after independent native, intermediate, final-grid, mask, AOI, and receipt checks pass; pair registration only after both dates pass",
+      "if the radar route stops, perform only the bounded public optical metadata search and prepare a candidate review, without adopting, downloading, or processing a new source",
+      "publish sanitized terminal evidence and exact post-CI reconciliation for whichever branches actually run"
+    ],
+    "maximum_new_real_radar_processes": 1,
+    "maximum_radar_sources_in_process": 2,
+    "automatic_retry": false,
+    "minimum_free_space_at_each_materialization": "greater_of_40_GiB_or_twice_next_stage_declared_logical_bytes",
+    "source_orbit_dem_aoi_threshold_substitution": false,
+    "consumed_attempt_resume_reuse_or_mutation": false,
+    "baseline_change_or_scientific_publication": false
+  },
+  "hard_stops": [
+    "A disposable pass is grid-method evidence only, not SAR-specific GTC or real pixel fitness proof.",
+    "Do not save failed native GTC output, clip an intermediate missing any target boundary, resample with MAINTAIN_EXTENT, or infer 10-m source information from a 10-m output grid.",
+    "Do not begin M1-SRC-005 after a failed or indeterminate M1-SRC-002 stage; do not retry a failed real attempt or substitute the closed e1/a2 method.",
+    "Preserve optical INVALID/BLOCK, all radar failed and indeterminate attempts, and every disposable receipt without rewrite.",
+    "Any new optical source or date remains a separate adoption decision after catalog and rights review."
+  ],
+  "claim_boundary": {"possible_radar_result": "INVALID_BLOCK_DEFER_or_PASS_QA_ONLY", "pass_qa_only_is_not_baseline_admission": true, "change_analysis_or_difference_raster_authorized": false, "interpretation_or_attribution_authorized": false, "derived_pixel_or_scientific_publication_authorized": false, "historical_gtc_root_cause_claim_authorized": false},
+  "does_not_authorize_now": ["Git publication or activation of this local packet", "new ArcPy execution or project-data/external-custody read", "new radar process, source substitution, optical search or acquisition", "baseline or change analysis, attribution, derived-pixel publication, or scientific publication"]
+}

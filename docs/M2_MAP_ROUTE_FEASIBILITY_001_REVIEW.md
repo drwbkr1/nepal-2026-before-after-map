@@ -1,0 +1,32 @@
+# M2 map-route feasibility-001 review
+
+**Status:** Local zero-decision packet. Nothing in this document authorizes publication, ArcGIS execution, protected-data access, a new radar attempt, an optical search, or a scientific result.
+
+## The decision
+
+Approve, revise, or defer one conditional map-route envelope. It would test a new **coverage-verified ProjectRaster → aligned Clip** method for the existing ascending Sentinel-1 pair M1-SRC-002/005. If that radar route stops at its disposable or real QA gate, it would permit only a bounded public Sentinel-2 Level-2A *metadata* search to prepare a later source decision. One approval would cover the packet publication, implementation, validation, public CI, conditional one-attempt radar execution, fallback metadata inventory, and sanitized terminal publication without intermediate owner reconfirmation. Every dependent gate must pass in order. It would not authorize a difference raster, baseline admission, event interpretation, attribution, new optical acquisition, or a scientific map claim. [Exact proposal](../contracts/milestone-002-map-route-feasibility-001-proposal.json)
+
+## Why a different grid method is plausible but unproven
+
+Recovery-003 stopped before touching real SAR data. Its broad generated raster projected to 83,107,486 EPSG:32645 cells, below the 100-million-cell ceiling, but the intermediate extended 950–1,550 m outside the frozen target. The approved final limit was 100 m per side. That output is therefore a **BLOCK**, not a small discrepancy to waive. The unfinished recovery-003 runner is inert. [Terminal reconciliation](../records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-disposable-terminal-reconciliation.json) · [exact generated-grid receipt](../records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-arcgis-disposable-validation-007.json)
+
+Esri states that the [Extent environment](https://pro.arcgis.com/en/pro-app/3.3/tool-reference/environment-settings/output-extent.htm) selects data to process and does not itself clip output to the rectangle. The overshoot is consistent with that documented behavior; it does not identify the historical GTC cause. The older Clip candidate also stopped, but for a different reason: its projected intermediate began **900 m east** of the frozen western boundary. A Clip cannot recover pixels absent from its input. The recovery-003 generated intermediate *did* cover all four target boundaries. That contrast suggests a new disposable test with an explicit intermediate-coverage gate followed by one aligned Clip. It does not prove the new method works. [Closed Clip evidence](../records/readiness/m2-radar-event-area-pair-projected-clip-recovery-002-disposable-validation-terminal.json) · [Esri Clip behavior](https://pro.arcgis.com/en/pro-app/3.4/tool-reference/data-management/clip.htm)
+
+The proposed Clip uses `NO_MAINTAIN_EXTENT` on a 10 m snap-aligned intermediate, then checks the exact frozen grid and retained pixels. Esri documents that `MAINTAIN_EXTENT` adjusts dimensions and resamples; the proposal does not allow silently switching to it. Generated two-band continuous and categorical mask rasters must prove output bounds, cell count, pixel equivalence, and mask classes before any real-data access. An intermediate may extend at most 2 km on a side, a newly proposed *resource screen* chosen above the observed maximum of 1.55 km; the unchanged final limit remains 100 m. No 10 m information claim follows from a 10 m sampling grid. [Exact method observation](../records/observations/m2-map-route-feasibility-after-gtc-003.json)
+
+## Route value and limits
+
+| Route | What it could give the ArcGIS map | Present limit |
+| --- | --- | --- |
+| Ascending M1-SRC-002/005 | Same-orbit before/after candidate with 100% **catalog-footprint** overlap at both event AOIs. | The only real M1-SRC-002 GTC result was 2 × 2 cells at 10 degrees per cell. Neither date has passed the new native-grid, mask, pixel-coverage, or registration gates. |
+| Descending M1-SRC-003/006 | Independent source-area observation if later made usable. | Catalog overlap is 100% at the source but only 58.675% at the upper corridor; the same processing uncertainty applies. It cannot replace a complete event-area pair without separate review. |
+| Existing optical pair | A spectral comparison if its terminal evidence changed under a separately reviewed method. | Real-001 is INVALID and recovery-001 is BLOCK; neither can be retried or relabeled. |
+| New optical catalog candidates | A possible alternate path if a new date and usable AOI pixels exist. | The proposed fallback is metadata-only. No scene is selected, downloaded, processed, or admitted here. |
+
+The proposal keeps the exact existing orbit files, eleven-tile ellipsoidal DEM, GEOID NONE, SAR sequence, AOIs, and frozen pixel QA. It assigns a distinct **e1/a3** identity, conditionally and only if absent at final preflight; e1/a1 is consumed, while e1/a2 belongs to the closed recovery-003 method. M1-SRC-005 cannot start unless M1-SRC-002 passes its independent native, intermediate, final-grid, mask, AOI, and durable-receipt checks. Pair registration runs only after both dates pass. An `INVALID`, `BLOCK`, or `DEFER` is an acceptable terminal outcome. Even `PASS_QA_ONLY` is not baseline admission. [Catalog triage](../records/observations/m2-radar-event-pair-catalog-triage-001.json) · [frozen pixel contract](../config/qa/pixel-readiness-contract.json)
+
+## Fallback and what still needs a person
+
+If the radar method stops, the same envelope would allow an unauthenticated public CDSE Sentinel-2 Level-2A metadata search intersecting the approved AOIs, with pre-event acquisitions from 1–25 August and post-event acquisitions from 27 August–24 September 2026. The search would retain at most 200 catalog rows, record exact queries and rights, and publish no third-party quicklooks. A candidate's catalog coverage or cloud percentage is not pixel fitness. Selecting a new source/date, accepting terms if changed, acquiring it, and processing it would require a later explicit decision.
+
+This packet asks for **one** decision now because the radar method, its conditional real attempt, and the metadata-only fallback are specified together with independent stops. It does not ask the owner to endorse a scientific conclusion or promise an ArcGIS change map. The [map-oriented route note](M2_MAP_ORIENTED_ROUTE_AFTER_NATIVE_GTC_003.md) remains local supporting context and is not part of the approved record.

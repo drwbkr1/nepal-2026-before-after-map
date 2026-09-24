@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-MAP-ROUTE-FEASIBILITY-AFTER-GTC-003",
+  "status": "local_zero_decision_method_comparison_only",
+  "input_bindings": [
+    {"ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-terminal-publication-reconciliation.json", "sha256": "4cbdc12a41b081b2874b19bf60ba0ec87e24a8c5d0e59122b2d594e905a3e853"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-disposable-terminal-reconciliation.json", "sha256": "d67ff046e6427a83665fbbd8abfeb5cdc8bbe86d0207b3333d23896c1b44921e"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-arcgis-disposable-validation-007.json", "sha256": "5124257ae9a0e02c19282c90258540161d9b86ba7ac99c6342ceb2cc98502d9b"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-projected-clip-recovery-002-disposable-validation-terminal.json", "sha256": "bbfd5ee7e6fcf7276ef6a827e1018217f7c3f7bda60a0f973749ec366d342f02"},
+    {"ref": "records/observations/m2-radar-event-pair-catalog-triage-001.json", "sha256": "5c19d4edc3210ac7474ffc58aa2224801dd57ff32db9a51e386e48cee02f76db"},
+    {"ref": "records/readiness/m2-optical-route-disposition-001.json", "sha256": "d51fa2408cac094205b6881222322ff67cd07b21386f58842d677f01c6061a63"},
+    {"ref": "config/aoi/approved-study-areas-epsg32645.json", "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"},
+    {"ref": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"},
+    {"ref": "records/source-manifest.json", "sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef"}
+  ],
+  "official_method_sources_checked_utc_date": "2026-09-24",
+  "official_method_sources": [
+    {"url": "https://pro.arcgis.com/en/pro-app/3.3/tool-reference/environment-settings/output-extent.htm", "relevant_statement_paraphrase": "The Extent environment selects the processed area but does not necessarily clip output to the rectangle."},
+    {"url": "https://pro.arcgis.com/en/pro-app/3.4/tool-reference/data-management/clip.htm", "relevant_statement_paraphrase": "Clip Raster can use a rectangular extent; maintaining the clipping extent adjusts dimensions and resamples, while the default preserves input alignment and can adjust bounds."},
+    {"url": "https://pro.arcgis.com/en/pro-app/3.3/tool-reference/environment-settings/how-snap-raster-environment-works.htm", "relevant_statement_paraphrase": "Snap Raster aligns cell corners and can expand an output extent; it is not a guarantee that the requested rectangle is the exact output boundary."}
+  ],
+  "fixed_grid": {"wkid": 32645, "bounds_m": [272300.0, 3069230.0, 368820.0, 3150210.0], "cell_size_m": 10.0, "columns": 9652, "rows": 8098, "cells": 78161896},
+  "observed_geometry": {
+    "recovery_003_generated_intermediate": {"bounds_m": [270750.0, 3067790.0, 369770.0, 3151720.0], "cells": 83107486, "covers_full_target_rectangle": true, "excess_each_side_m": {"west": 1550.0, "south": 1440.0, "east": 950.0, "north": 1510.0}, "approved_final_excess_limit_each_side_m": 100.0},
+    "closed_clip_002_generated_intermediate": {"bounds_m": [273200.0, 3064580.0, 372850.0, 3154780.0], "cell_size_m": 50.0, "west_target_gap_m": 900.0, "covers_full_target_rectangle": false},
+    "comparison_limit": "Different generated input geometries and cell sizes were used; the contrast identifies a testable coverage precondition, not a proven correction to SAR processing."
+  },
+  "route_evidence": {
+    "ascending_m1_src_002_005_catalog_event_aoi_overlap_percent": {"AOI-SOURCE": 100.0, "AOI-UPPER-CORRIDOR": 100.0},
+    "descending_m1_src_003_006_catalog_event_aoi_overlap_percent": {"AOI-SOURCE": 100.0, "AOI-UPPER-CORRIDOR": 58.675},
+    "frozen_optical_route": {"real_001": "INVALID", "recovery_001": "BLOCK", "alternate_search_authorized": false}
+  },
+  "inference": "A separately approved, coverage-verified ProjectRaster-then-aligned-Clip disposable candidate may merit testing. ProjectRaster extent alone is insufficient, and the old Clip test cannot be adopted because its intermediate lacked west-side coverage.",
+  "claim_limits": {"new_method_proven": false, "real_sar_gtc_fitness_proven": false, "real_pair_pixel_qa_passed": false, "alternate_optical_source_adopted": false, "baseline_or_change_analysis_authorized": false, "derived_pixel_or_scientific_publication_authorized": false}
+}
