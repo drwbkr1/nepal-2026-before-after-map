@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-PROJECTED-CLIP-RECOVERY-002",
+  "status": "local_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "base_commit": "61c411ab96a7d0258532c330a458f1deea760788",
+  "input_bindings": [
+    {"ref": "records/readiness/m2-radar-event-area-pair-projection-extent-recovery-001-terminal-publication-gate.json", "sha256": "4df6c0664f2de9dc851b4f7fd2df3b9128d31edd967817d4dd4dfc1ac984d9d4"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-projection-extent-recovery-001-disposable-validation-terminal.json", "sha256": "35cb64d082a883450218be71a047a756bd8c620937b905edda075bebf4bc49ab"},
+    {"ref": "records/source-gates/m2-radar-event-area-pair-projection-extent-recovery-001-approval.json", "sha256": "f2ec50e97334d837e92ce0dd890f0ebef84c8229adcb2501409ed7c7ab434e03"},
+    {"ref": "scripts/validate_m2_radar_event_pair_extent_001.py", "sha256": "04a157ee55697fae49ec1fdbb722de98d50b0b993522b64ee7115be43b328c00"},
+    {"ref": "scripts/m2_radar_esri_sequence_processing_005.py", "sha256": "faadf83f4ae1c35209ed104ab3ba2c97ad233615655aaa31dfc72851b968e0fd"},
+    {"ref": "scripts/m2_radar_event_pair_processing_001.py", "sha256": "e0fc7b3ed48c5f45f169dbd5f5f609bda80f3e1e8b3f11ca0b9a43909e7c0ddd"},
+    {"ref": "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json", "sha256": "da95bf4570a7062166a758ce5cfb037300b2a039bfc9454995cd366313595a20"},
+    {"ref": "records/source-gates/m2-radar-event-area-pair-001-approval.json", "sha256": "50becd7494176d5202075d71cbaf40d9da316d1f585144e8defbc8036534de01"},
+    {"ref": "config/qa/m2-radar-pixel-orbit-application-001-contract.json", "sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1"},
+    {"ref": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"},
+    {"ref": "config/aoi/approved-study-areas-epsg32645.json", "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"},
+    {"ref": "records/processing/m2-radar-event-area-pair-001-radar-terminal-indeterminate-reconciliation.json", "sha256": "77037c851311730c8e0b1431d97ad57982a381d395616445aba43ace769104a1"}
+  ],
+  "decision_question": "Approve, revise, or defer one conditional snap-aligned ProjectRaster plus non-resampling Clip recovery envelope for the exact two-source event-area radar QA route through sanitized terminal publication?",
+  "observed_boundary": {
+    "prior_recovery_001": "terminal_blocked_disposable_validation_no_real_attempt",
+    "prior_disposable_test_output_cell_size_m": 50,
+    "prior_disposable_output_cells": 3591576,
+    "prior_disposable_output_southward_extension_m": 4631.258305758238,
+    "prior_disposable_output_eastward_extension_m": 3980.167409062502,
+    "prior_disposable_output_northward_extension_m": 4538.741694241762,
+    "prior_maximum_extension_m": 100,
+    "prior_test_omitted_production_snap_raster": true,
+    "production_method_disproven": false,
+    "candidate_clipped_method_runtime_proven": false,
+    "consumed_e1_a1_immutable": true,
+    "e1_a2_root_absent_at_preparation": true
+  },
+  "official_method_context": [
+    {"url": "https://pro.arcgis.com/en/pro-app/3.3/tool-reference/environment-settings/output-extent.htm", "claim": "The Extent environment selects input cells and does not strictly clip output; output can be larger than the specified rectangle."},
+    {"url": "https://pro.arcgis.com/en/pro-app/3.5/tool-reference/environment-settings/snap-raster.htm", "claim": "Snap Raster aligns output raster cell edges to its origin and cell size and can expand an output by a row or column."},
+    {"url": "https://pro.arcgis.com/en/pro-app/3.6/tool-reference/data-management/clip.htm", "claim": "Raster Clip with NO_MAINTAIN_EXTENT retains input cell alignment; MAINTAIN_EXTENT resamples pixels to force exact extent."},
+    {"url": "https://pro.arcgis.com/en/pro-app/3.3/tool-reference/data-management/project-raster.htm", "claim": "Project Raster honors Extent and Snap Raster environments but requires verification of its actual output geometry."}
+  ],
+  "proposed_method_amendment": {
+    "scope": "event_pair_only_three_projected_outputs_per_source",
+    "projection": "ProjectRaster of the existing GTC gamma-linear, dB display candidate, and geometric-distortion mask rasters to a new disposable or attempt-local intermediate, using an EPSG:32645 spatial-reference-bearing Extent, the frozen snap origin, and the frozen output cell size; retain BILINEAR for continuous rasters and NEAREST for the categorical mask",
+    "intermediate_ceiling": {"maximum_cells": 100000000, "maximum_extension_from_frozen_target_each_side_m": 10000, "maximum_projected_output_logical_bytes": 10737418240},
+    "clip": "Only after the intermediate passes its resource ceiling, Clip each projected intermediate to the frozen buffered EPSG:32645 target rectangle with clipping_geometry NONE and maintain_clipping_extent NO_MAINTAIN_EXTENT; never use MAINTAIN_EXTENT because it may resample.",
+    "final_grid": {"wkid": 32645, "cell_size_m": 10, "target_bounds": [272300.0, 3069230.0, 368820.0, 3150210.0], "target_cells": 78161896, "maximum_final_extension_each_side_m": 100},
+    "pixel_equivalence_requirement": "On disposable tests, retained interior pixels and mask classes must equal the aligned projected intermediate; no new resampling or class change is permitted by Clip.",
+    "frozen_sar_sequence_preserved": "Orbit, thermal-noise removal, beta calibration, gamma terrain flattening, the later owner-approved event-pair REFINED_LEE despeckling amendment without a filter-size argument, DEM-supplied GTC with GEOID NONE, VV/VH, source-specific orbit, masks, registration, and QA predicates remain unchanged."
+  },
+  "proposed_single_authority_envelope": {
+    "owner_decision_count": 1,
+    "covers_without_intermediate_owner_reconfirmation": [
+      "publish this exact zero-decision packet and approval to public default branch and require successful public CI before implementation",
+      "implement only the reviewed event-pair projected-intermediate and non-resampling Clip method without changing consumed or frozen code and contracts",
+      "add portable synthetic tests for snap origin, bounds, exact source order, band and pixel preservation, resource caps, interruption receipt durability, and secret-safe errors",
+      "run installed ArcGIS disposable validation on generated broad EPSG:4326 two-band continuous and one-band categorical inputs, with production-equivalent snap settings, first at storage-bounded coarse resolution and then a bounded 10 m window",
+      "require both intermediate resource ceilings and final clipped grid, band, pixel-equivalence, and mask-class tests to pass; any failure stops without another method",
+      "publish implementation and disposable validation evidence and require successful public CI before project-data access",
+      "perform one final no-content preflight of exact source, orbit, DEM mosaic, AOI, grid, disk, ArcGIS, old immutable attempt, and absent e1/a2 identities",
+      "only if every gate passes, execute at most one fresh byte-zero e1/a2 radar worker process over M1-SRC-002 then M1-SRC-005, stopping on first failure, with a separate non-radar durable supervisor active before projection and no automatic retry",
+      "reconcile exact input identities and publish only sanitized terminal, cleanup, QA disposition, and gate evidence after public CI"
+    ],
+    "maximum_new_real_radar_processes": 1,
+    "attempt_root_alias": "e1/a2",
+    "fixed_source_order": ["M1-SRC-002", "M1-SRC-005"],
+    "fixed_orbit_order": ["M2-ORB-001", "M2-ORB-003"],
+    "automatic_retry": false,
+    "reuse_or_resume_consumed_e1_a1": false,
+    "baseline_or_change_analysis": false,
+    "derived_pixel_or_scientific_publication": false
+  },
+  "hard_stops": [
+    "A disposable ArcGIS result must prove the final clipped output is aligned to the frozen 10 m grid and within 100 m of each target side; a visually plausible footprint is insufficient.",
+    "Any intermediate with more than 100000000 declared cells, more than 10000 m extension on any side, or more than 10737418240 logical output bytes stops the process; missing metadata after the projection stage or a missing durable guard receipt also stops. These are resource ceilings, not scientific acceptance thresholds.",
+    "The independent supervisor must be proven to stop a synthetic runaway worker and persist terminal and cleanup evidence before any real attempt.",
+    "No source/date/order/orbit/DEM/AOI/CRS/grid/mask/registration/threshold substitution, MAINTAIN_EXTENT resampling, alternate method, second attempt, or fallback is permitted.",
+    "No real attempt starts until the packet, implementation, and execution gates pass public default-branch CI and the final no-content preflight passes."
+  ],
+  "claim_boundary": {
+    "possible_result": "invalid_block_defer_or_pass_qa_only",
+    "pass_qa_only_is_not_baseline_admission": true,
+    "change_analysis_authorized": false,
+    "event_attribution_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false,
+    "historical_root_cause_or_general_radar_readiness_claim_authorized": false
+  },
+  "does_not_authorize_now": [
+    "Git commit or public publication of this local packet",
+    "approval recording or activation",
+    "ArcPy invocation, new disposable test, project-data access, or external-custody mutation",
+    "new e1/a2 attempt, reuse or retry of e1/a1, baseline or change analysis, attribution, derived-pixel publication, or scientific publication"
+  ]
+}

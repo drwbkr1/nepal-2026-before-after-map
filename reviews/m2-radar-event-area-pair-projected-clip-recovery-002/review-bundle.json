@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-PROJECTED-CLIP-RECOVERY-002-REVIEW-BUNDLE",
+  "status": "local_zero_decision_one_owner_decision_required",
+  "human_decision_count": 0,
+  "base_commit": "61c411ab96a7d0258532c330a458f1deea760788",
+  "artifacts": [
+    {"path": "contracts/milestone-002-radar-event-area-pair-projected-clip-recovery-002-proposal.json", "sha256": "cff158699f32723a8935fbfdc13083ae425b4a5d2a9eab1d38369819d0384acd", "role": "proposal"},
+    {"path": "docs/M2_RADAR_EVENT_AREA_PAIR_PROJECTED_CLIP_RECOVERY_002_REVIEW.md", "sha256": "ab30362530e81a5e2e9c81165df8e72c6597b182d2def311f1183f9307e15acb", "role": "human_readable_review"},
+    {"path": "records/readiness/m2-radar-event-area-pair-projection-extent-recovery-001-terminal-publication-gate.json", "sha256": "4df6c0664f2de9dc851b4f7fd2df3b9128d31edd967817d4dd4dfc1ac984d9d4", "role": "prior_terminal_publication_gate"},
+    {"path": "records/readiness/m2-radar-event-area-pair-projection-extent-recovery-001-disposable-validation-terminal.json", "sha256": "35cb64d082a883450218be71a047a756bd8c620937b905edda075bebf4bc49ab", "role": "prior_disposable_failure"},
+    {"path": "records/source-gates/m2-radar-event-area-pair-projection-extent-recovery-001-approval.json", "sha256": "f2ec50e97334d837e92ce0dd890f0ebef84c8229adcb2501409ed7c7ab434e03", "role": "prior_authority_boundary"},
+    {"path": "scripts/validate_m2_radar_event_pair_extent_001.py", "sha256": "04a157ee55697fae49ec1fdbb722de98d50b0b993522b64ee7115be43b328c00", "role": "prior_disposable_validator"},
+    {"path": "scripts/m2_radar_esri_sequence_processing_005.py", "sha256": "faadf83f4ae1c35209ed104ab3ba2c97ad233615655aaa31dfc72851b968e0fd", "role": "shared_sequence_frozen"},
+    {"path": "scripts/m2_radar_event_pair_processing_001.py", "sha256": "e0fc7b3ed48c5f45f169dbd5f5f609bda80f3e1e8b3f11ca0b9a43909e7c0ddd", "role": "consumed_event_runner_frozen"},
+    {"path": "records/source-gates/m2-radar-esri-sequence-recovery-005-approval.json", "sha256": "da95bf4570a7062166a758ce5cfb037300b2a039bfc9454995cd366313595a20", "role": "refined_lee_scientific_method_authority"},
+    {"path": "records/source-gates/m2-radar-event-area-pair-001-approval.json", "sha256": "50becd7494176d5202075d71cbaf40d9da316d1f585144e8defbc8036534de01", "role": "event_pair_route_authority"},
+    {"path": "config/qa/m2-radar-pixel-orbit-application-001-contract.json", "sha256": "a25f86588979fd4b5cfb45c999a862d83d71be31925a5b39565970de526f8fb1", "role": "scientific_contract_frozen"},
+    {"path": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2", "role": "grid_and_registration_qa_frozen"},
+    {"path": "config/aoi/approved-study-areas-epsg32645.json", "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615", "role": "aoi_and_crs_frozen"},
+    {"path": "records/processing/m2-radar-event-area-pair-001-radar-terminal-indeterminate-reconciliation.json", "sha256": "77037c851311730c8e0b1431d97ad57982a381d395616445aba43ace769104a1", "role": "consumed_real_attempt_evidence"}
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-RADAR-EVENT-AREA-PAIR-PROJECTED-CLIP-RECOVERY-002",
+    "question": "Approve, revise, or defer the single conditional snap-aligned projection and non-resampling clip envelope through sanitized terminal publication?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "The exact packet and owner approval are public on the default branch and public CI passes. All implementation, ArcGIS disposable, execution, and final no-content gates still apply."
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "implementation_authorized": false,
+    "disposable_arcgis_execution_authorized": false,
+    "project_data_or_external_custody_access_authorized": false,
+    "new_real_radar_attempt_authorized": false,
+    "consumed_attempt_reuse_or_retry_authorized": false,
+    "baseline_or_change_analysis_authorized": false,
+    "derived_pixel_or_scientific_publication_authorized": false
+  }
+}
