@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-NATIVE-GTC-GRID-RECOVERY-003-TERMINAL-PUBLICATION-RECONCILIATION",
+  "status": "pass_exact_terminal_block_public_ci_reconciled",
+  "bindings": {
+    "terminal_reconciliation_sha256": "d67ff046e6427a83665fbbd8abfeb5cdc8bbe86d0207b3333d23896c1b44921e",
+    "terminal_publication_gate_sha256": "24002b05ba778bfbca8540d9e30043dbaf4d73229e9b351f10b6fe8ab67816c3",
+    "terminal_commit_sha": "8438855ce54a2dbba9890dc7a02ebf4f58508441",
+    "terminal_public_ci_run_id": 36047894044,
+    "gate_commit_sha": "0c48323808842bc6f26be858dbbd635d1dfd8a4c",
+    "gate_public_ci_run_id": 36047999520,
+    "public_ci_conclusion": "success"
+  },
+  "assertions": {
+    "seven_disposable_receipts_preserved": true,
+    "exact_method_terminal_at_approved_extent_guard": true,
+    "implementation_and_execution_gates_not_reached": true,
+    "e1_a2_real_process_not_started": true,
+    "baseline_change_or_scientific_publication_released": false
+  }
+}
