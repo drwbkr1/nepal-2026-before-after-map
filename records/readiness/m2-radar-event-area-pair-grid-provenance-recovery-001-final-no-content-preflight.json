@@ -1,0 +1,18 @@
+{
+  "assertions": {
+    "arcpy_invoked": false,
+    "e1_a2_absent": true,
+    "exact_five_crf_paths_present": true,
+    "new_receipt_identities_absent": true,
+    "old_zero_byte_receipts_unchanged": true,
+    "preserved_content_read": false
+  },
+  "bindings": {
+    "execution_commit_sha": "696824136d43c7f128b9826bb63dcd962d3a5004",
+    "execution_gate_sha256": "f10eb6061ca4655706e94cc713b54e6f2bc23dcd5503065f5b2ac057bb6b3af1"
+  },
+  "checked_at_utc": "2026-09-24T18:02:33Z",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-RECOVERY-001-FINAL-NO-CONTENT-PREFLIGHT",
+  "schema_version": "1.0",
+  "status": "pass_no_content_read_only_recovery_preflight"
+}

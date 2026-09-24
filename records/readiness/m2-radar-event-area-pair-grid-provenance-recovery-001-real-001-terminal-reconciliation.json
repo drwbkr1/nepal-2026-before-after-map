@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-RECOVERY-001-REAL-001-TERMINAL-RECONCILIATION",
+  "status": "terminal_indeterminate_consumed_no_retry",
+  "bindings": {
+    "proposal_sha256": "ccb4617ae462910789eefc4d411b0a9c6b8d4baf1c9107ed301eed536feafdc3",
+    "review_bundle_sha256": "27d55419ddc0a02edfc009c076a45faaaaaf90a25f7f5b5a0a3aa107be691645",
+    "approval_sha256": "072ad68461869c27bd155fde1b9a5f48526a75901be8cd134ddf31269fa383b1",
+    "execution_gate_commit_sha": "3178dd12013d25610a0e5821abd8e49e28141e4f",
+    "execution_gate_public_ci_run_id": 36038432608,
+    "execution_gate_public_ci_conclusion": "success",
+    "final_no_content_preflight_sha256": "ba5cb243b7a571d05f4f0c9518a35a0129b882d343b3cb67066f395da004fae8"
+  },
+  "single_process": {
+    "source_id": "M1-SRC-002",
+    "preserved_attempt_root": "e1/a1/s/2",
+    "new_recovery_processes_invoked": 1,
+    "process_exit_code": 1,
+    "outer_status": "block_before_preserved_metadata_access",
+    "outer_status_is_misleading": true,
+    "stage_journal_start_persisted": true,
+    "raster_metadata_reads_completed_in_exact_order": [
+      "gamma0_linear_slant.crf",
+      "gamma0_linear_despeckled.crf",
+      "gamma0_linear_gtc_raw.crf",
+      "gamma0_db_gtc_raw.crf",
+      "geometric_distortion_mask_gtc_raw.crf"
+    ],
+    "configuration_inventory_started": true,
+    "configuration_inventory_completed": false,
+    "sanitized_error_code": "gtc_configuration_candidate_oversized",
+    "oversized_candidate_identity_and_size": "unknown_not_persisted",
+    "historical_configuration_identity": "unresolved",
+    "secondary_terminal_persistence_failure_trigger": "unknown_not_persisted"
+  },
+  "metadata_observation_only": {
+    "slant_and_despeckled": {
+      "wkid": 4326,
+      "width": 25769,
+      "height": 16732,
+      "cell_size_x": 0.0001186617587100782,
+      "cell_size_y": 0.00012414510873774788,
+      "bounds": [83.7983846205, 27.520723831, 86.8561794807, 29.5979197904]
+    },
+    "three_gtc_outputs": {
+      "wkid": 4326,
+      "width": 2,
+      "height": 2,
+      "cell_size_x": 10.0,
+      "cell_size_y": 10.0,
+      "bounds": [80.0, 10.0, 100.0, 30.0]
+    },
+    "pixel_values_or_validity_read": false,
+    "raster_fitness_established": false
+  },
+  "immutable_receipts": [
+    {"name": "started", "size_bytes": 457, "sha256": "2ef22f1532096939e2811f1426838d1d2288a9a54d366318825bdc17f95be065"},
+    {"name": "stage-journal", "size_bytes": 2721, "sha256": "b0ed50a3b9cc63488256b3f06185c5b9322692c4b28c9df627ce8819b12129f0"},
+    {"name": "error", "size_bytes": 166, "sha256": "b28e5c6ef4a352b23bc86ec0b152bb8723b4bc7b1174e649b2b32102318748a8"},
+    {"name": "terminal", "size_bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+    {"name": "cleanup", "size_bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+    {"name": "fallback-error", "size_bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ],
+  "claims_and_stops": {
+    "old_diagnostic_reused_or_retried": false,
+    "new_recovery_consumed_no_retry": true,
+    "new_e1_a2_radar_attempt_started": false,
+    "pixel_reads_or_geoprocessing_calls_evidenced": false,
+    "external_custody_unchanged_proven_by_post_process_inventory": false,
+    "baseline_change_attribution_or_scientific_publication_released": false
+  },
+  "next_action": "Preserve every receipt. Separately review the bounded configuration candidate classification and the independent terminal/cleanup persistence failure before proposing any further preserved-data process."
+}

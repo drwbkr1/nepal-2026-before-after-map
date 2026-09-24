@@ -1603,6 +1603,14 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-arcgis-runtime-validation.json",
     "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-implementation-publication-gate.json",
     "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-execution-publication-gate.json",
+    "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-final-no-content-preflight.json",
+    "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-terminal-reconciliation.json",
+    "records/processing/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-started.json",
+    "records/processing/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-stage-journal.jsonl",
+    "records/processing/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-error.json",
+    "records/processing/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-terminal.json",
+    "records/processing/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-cleanup.json",
+    "records/processing/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-fallback-error.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -1739,6 +1747,35 @@ def main() -> None:
         or recovery_execution_gate.get("conditional_action", {}).get("geoprocessing_calls") != 0
     ):
         fail("M2 radar event-area pair grid provenance recovery execution gate differs")
+    recovery_prefix = "m2-radar-event-area-pair-grid-provenance-recovery-001"
+    recovery_preflight_ref = f"records/readiness/{recovery_prefix}-final-no-content-preflight.json"
+    recovery_preflight = json.loads((ROOT / recovery_preflight_ref).read_text(encoding="utf-8"))
+    recovery_terminal = json.loads((ROOT / f"records/readiness/{recovery_prefix}-real-001-terminal-reconciliation.json").read_text(encoding="utf-8"))
+    recovery_error = json.loads((ROOT / f"records/processing/{recovery_prefix}-real-001-error.json").read_text(encoding="utf-8"))
+    recovery_journal_ref = f"records/processing/{recovery_prefix}-real-001-stage-journal.jsonl"
+    recovery_stages = [json.loads(line) for line in (ROOT / recovery_journal_ref).read_text(encoding="utf-8").splitlines()]
+    expected_recovery_names = recovery_execution_gate["conditional_action"]["raster_names_in_order"]
+    if (
+        recovery_preflight.get("status") != "pass_no_content_read_only_recovery_preflight"
+        or recovery_preflight.get("bindings", {}).get("execution_gate_sha256")
+            != sha256(f"records/readiness/{recovery_prefix}-execution-publication-gate.json")
+        or recovery_terminal.get("status") != "terminal_indeterminate_consumed_no_retry"
+        or recovery_terminal.get("bindings", {}).get("final_no_content_preflight_sha256") != sha256(recovery_preflight_ref)
+        or recovery_terminal.get("single_process", {}).get("outer_status_is_misleading") is not True
+        or recovery_terminal.get("single_process", {}).get("raster_metadata_reads_completed_in_exact_order") != expected_recovery_names
+        or [item.get("name") for item in recovery_stages if item.get("stage") == "raster_metadata_completed"] != expected_recovery_names
+        or recovery_stages[-1].get("stage") != "configuration_inventory_started"
+        or recovery_error.get("failure_code") != "gtc_configuration_candidate_oversized"
+        or recovery_terminal.get("metadata_observation_only", {}).get("three_gtc_outputs", {}).get("width") != 2
+        or recovery_terminal.get("claims_and_stops", {}).get("new_recovery_consumed_no_retry") is not True
+        or recovery_terminal.get("claims_and_stops", {}).get("baseline_change_attribution_or_scientific_publication_released") is not False
+    ):
+        fail("M2 radar event-area pair grid provenance recovery terminal reconciliation differs")
+    for receipt in recovery_terminal["immutable_receipts"]:
+        suffix = receipt["name"]
+        ref = f"records/processing/{recovery_prefix}-real-001-{suffix}.{'jsonl' if suffix == 'stage-journal' else 'json'}"
+        if sha256(ref) != receipt["sha256"] or (ROOT / ref).stat().st_size != receipt["size_bytes"]:
+            fail("M2 radar event-area pair grid provenance recovery immutable receipt differs")
 
     profile = json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))
     orbit_continuation_001_review_reconciliation = json.loads((ROOT / "records/source-gates/m2-orbit-continuation-001-review-reconciliation.json").read_text(encoding="utf-8"))

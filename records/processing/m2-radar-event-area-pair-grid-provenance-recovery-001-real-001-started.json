@@ -1,0 +1,14 @@
+{
+  "final_preflight_sha256": "ba5cb243b7a571d05f4f0c9518a35a0129b882d343b3cb67066f395da004fae8",
+  "raster_names_in_order": [
+    "gamma0_linear_slant.crf",
+    "gamma0_linear_despeckled.crf",
+    "gamma0_linear_gtc_raw.crf",
+    "gamma0_db_gtc_raw.crf",
+    "geometric_distortion_mask_gtc_raw.crf"
+  ],
+  "schema_version": "1.0",
+  "source_id": "M1-SRC-002",
+  "started_at_utc": "2026-09-24T18:02:42Z",
+  "status": "started_read_only_metadata_recovery"
+}

@@ -1,0 +1,6 @@
+{
+  "failure_code": "gtc_configuration_candidate_oversized",
+  "failure_type": "DiagnosticError",
+  "schema_version": "1.0",
+  "status": "sanitized_recovery_error"
+}
