@@ -1602,6 +1602,7 @@ REQUIRED = [
     "tests/test_m2_radar_event_pair_grid_provenance_recovery_001.py",
     "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-arcgis-runtime-validation.json",
     "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-implementation-publication-gate.json",
+    "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-execution-publication-gate.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -1725,6 +1726,19 @@ def main() -> None:
         or recovery_implementation_gate.get("assertions", {}).get("new_real_recovery_started") is not False
     ):
         fail("M2 radar event-area pair grid provenance recovery implementation gate differs")
+    recovery_execution_gate = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-execution-publication-gate.json").read_text(encoding="utf-8"))
+    if (
+        recovery_execution_gate.get("status") != "pass_public_default_branch_ci_read_only_recovery_execution"
+        or recovery_execution_gate.get("public_ci_conclusion") != "success"
+        or recovery_execution_gate.get("bindings", {}).get("implementation_gate_sha256")
+            != sha256("records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-implementation-publication-gate.json")
+        or recovery_execution_gate.get("bindings", {}).get("implementation_commit_sha") != "c2fbc68150262885fb2823f5f6012d81f2e51ee4"
+        or recovery_execution_gate.get("bindings", {}).get("execution_commit_sha") != "696824136d43c7f128b9826bb63dcd962d3a5004"
+        or recovery_execution_gate.get("conditional_action", {}).get("maximum_fresh_read_only_processes") != 1
+        or recovery_execution_gate.get("conditional_action", {}).get("pixel_reads") != 0
+        or recovery_execution_gate.get("conditional_action", {}).get("geoprocessing_calls") != 0
+    ):
+        fail("M2 radar event-area pair grid provenance recovery execution gate differs")
 
     profile = json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))
     orbit_continuation_001_review_reconciliation = json.loads((ROOT / "records/source-gates/m2-orbit-continuation-001-review-reconciliation.json").read_text(encoding="utf-8"))
