@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-001-TERMINAL-INDETERMINATE-PUBLICATION-RECONCILIATION",
+  "checked_at_utc": "2026-09-24T01:08:17Z",
+  "status": "pass_exact_indeterminate_gate_public_ci_reconciled",
+  "bindings": {
+    "indeterminate_reconciliation_ref": "records/processing/m2-radar-event-area-pair-001-radar-terminal-indeterminate-reconciliation.json",
+    "indeterminate_reconciliation_sha256": "77037c851311730c8e0b1431d97ad57982a381d395616445aba43ace769104a1",
+    "publication_gate_ref": "records/readiness/m2-radar-event-area-pair-001-terminal-indeterminate-publication-gate.json",
+    "publication_gate_sha256": "ff402b2050df2819aca28559b00e48a21d5e69cf69a8b0615686d8ec0844172c",
+    "publication_gate_commit_sha": "e13bd16dfecc0fda7b5b0f0d00c87393745118a9",
+    "publication_gate_public_ci_run_id": 35941549660,
+    "publication_gate_public_ci_conclusion": "success",
+    "public_default_branch_head_at_check": "e13bd16dfecc0fda7b5b0f0d00c87393745118a9"
+  },
+  "post_ci_observations": {
+    "worker_pid_26744_present": false,
+    "reserved_terminal_receipt_bytes": 0,
+    "reserved_cleanup_receipt_bytes": 0,
+    "reserved_error_receipt_bytes": 0,
+    "attempt_consumed": true,
+    "attempt_resumed_reconstructed_or_retried": false,
+    "first_source_qa_pass_established": false,
+    "second_source_started": false,
+    "pair_route_evaluated": false,
+    "partial_derived_raster_published": false,
+    "baseline_or_change_analysis_authorized": false,
+    "scientific_publication_authorized": false
+  },
+  "next_action": "Review the preserved indeterminate attempt and gross grid-extent mismatch. Any new radar processing attempt, method or grid correction, baseline admission, change analysis, or derived-pixel publication requires separately reviewed authority."
+}
