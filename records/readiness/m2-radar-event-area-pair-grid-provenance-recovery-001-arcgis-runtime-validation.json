@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GRID-PROVENANCE-RECOVERY-001-ARCGIS-RUNTIME-VALIDATION",
+  "status": "pass_disposable_arcgis_recovery_metadata_only",
+  "arcgis_version": "3.7.1",
+  "bindings": {
+    "core_sha256": "99625fd5ccb681ac2b2587d1b10d454e42436b851b47e24517ca083401ad764c",
+    "runner_sha256": "b507a682546b6839e3c18004e472709a1bf86f40b0e29bf54cd9815e2a01cc48",
+    "validator_sha256": "d1d37c5df4d2e7ee41d55246f30dd582ac386bc066b53b09c1751d03f300cb38",
+    "portable_test_sha256": "cc2ddbcf5440f02112086b34fb019cfcd68b1b14bde03a8be89ca84d3419d883"
+  },
+  "assertions": {
+    "generated_disposable_raster_count": 5,
+    "metadata_stages_persisted": 5,
+    "exact_stage_order": true,
+    "unique_disposable_config_match": true,
+    "input_file_inventory_unchanged": true,
+    "temporary_directory_removed": true,
+    "project_data_or_external_custody_accessed": false,
+    "pixel_reads": 0,
+    "radar_processing": false
+  }
+}

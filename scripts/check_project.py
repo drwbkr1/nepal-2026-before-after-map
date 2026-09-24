@@ -1595,6 +1595,12 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-grid-provenance-diagnostic-001-local-postmortem-observation.json",
     "tests/test_m2_radar_event_pair_grid_provenance_postmortem_001.py",
     "records/source-gates/m2-radar-event-area-pair-grid-provenance-recovery-001-approval.json",
+    "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-packet-publication-gate.json",
+    "scripts/m2_radar_event_pair_grid_provenance_recovery_001_core.py",
+    "scripts/run_m2_radar_event_pair_grid_provenance_recovery_001.py",
+    "scripts/validate_m2_radar_event_pair_grid_provenance_recovery_001_arcgis.py",
+    "tests/test_m2_radar_event_pair_grid_provenance_recovery_001.py",
+    "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-arcgis-runtime-validation.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -1675,6 +1681,32 @@ def main() -> None:
         or any(sha256(item["path"]) != item["sha256"] for item in recovery_bundle["artifacts"])
     ):
         fail("M2 radar event-area pair grid provenance recovery packet or approval differs")
+    recovery_packet_gate_ref = "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-packet-publication-gate.json"
+    recovery_packet_gate = json.loads((ROOT / recovery_packet_gate_ref).read_text(encoding="utf-8"))
+    if (
+        recovery_packet_gate.get("status") != "pass_exact_public_packet_and_approval_ci_implementation_eligible"
+        or recovery_packet_gate.get("bindings", {}).get("approval_sha256") != sha256(recovery_approval_ref)
+        or recovery_packet_gate.get("bindings", {}).get("packet_commit_sha") != "75508e75e5e6e2c2201c2df6b11e67db81a00e47"
+        or recovery_packet_gate.get("bindings", {}).get("public_ci_conclusion") != "success"
+    ):
+        fail("M2 radar event-area pair grid provenance recovery packet public gate differs")
+    recovery_runtime = json.loads((ROOT / "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-arcgis-runtime-validation.json").read_text(encoding="utf-8"))
+    recovery_runtime_refs = {
+        "core_sha256": "scripts/m2_radar_event_pair_grid_provenance_recovery_001_core.py",
+        "runner_sha256": "scripts/run_m2_radar_event_pair_grid_provenance_recovery_001.py",
+        "validator_sha256": "scripts/validate_m2_radar_event_pair_grid_provenance_recovery_001_arcgis.py",
+        "portable_test_sha256": "tests/test_m2_radar_event_pair_grid_provenance_recovery_001.py",
+    }
+    if (
+        recovery_runtime.get("status") != "pass_disposable_arcgis_recovery_metadata_only"
+        or any(recovery_runtime.get("bindings", {}).get(key) != sha256(ref)
+               for key, ref in recovery_runtime_refs.items())
+        or recovery_runtime.get("assertions", {}).get("metadata_stages_persisted") != 5
+        or recovery_runtime.get("assertions", {}).get("input_file_inventory_unchanged") is not True
+        or recovery_runtime.get("assertions", {}).get("project_data_or_external_custody_accessed") is not False
+        or recovery_runtime.get("assertions", {}).get("pixel_reads") != 0
+    ):
+        fail("M2 radar event-area pair grid provenance recovery runtime validation differs")
 
     profile = json.loads((ROOT / "records/project-control-profile.json").read_text(encoding="utf-8"))
     orbit_continuation_001_review_reconciliation = json.loads((ROOT / "records/source-gates/m2-orbit-continuation-001-review-reconciliation.json").read_text(encoding="utf-8"))
