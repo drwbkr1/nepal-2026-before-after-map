@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "status": "block_disposable_arcgis_mechanics",
+  "failure_type": "RuntimeError",
+  "failure_code": "categorical_mask_classes_not_preserved",
+  "failure_site": {
+    "function": "run",
+    "line": 94
+  },
+  "project_data_or_external_custody_accessed": false,
+  "sar_specific_gtc_fitness_proven": false
+}

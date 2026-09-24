@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0",
+  "status": "block_disposable_arcgis_mechanics",
+  "failure_type": "RuntimeError",
+  "failure_code": "arcgis_disposable_error",
+  "project_data_or_external_custody_accessed": false,
+  "sar_specific_gtc_fitness_proven": false
+}

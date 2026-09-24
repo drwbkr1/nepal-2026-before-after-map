@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-NATIVE-GTC-GRID-RECOVERY-003-DISPOSABLE-TERMINAL",
+  "status": "terminal_disposable_method_block_no_real_attempt",
+  "authority_bindings": {
+    "proposal_sha256": "5999763f7ca46fbf295622916d203f63e9bd2656107433603be47108784eba63",
+    "review_bundle_sha256": "5d7eb90a65b399307666544e3f3074b0a62d4af98978dec3ac9c800a89acdd3c",
+    "approval_sha256": "1fa0999ff5091523e3f2bab1853f6f1d305d76a50160a203d5f4faa8ae9413ed",
+    "packet_publication_gate_sha256": "f0fbf8dd0d725f2d65a24d65cfaedf0b4183811252789041abc3e7645c3009f3",
+    "packet_commit_sha": "f6594f095894d5106f59f95c6b46e0e6d8101e5e",
+    "packet_public_ci_run_id": 36045141415,
+    "partial_core_commit_sha": "410629cf249e79e99c028f7c7ace078a74cece4c",
+    "partial_core_public_ci_run_id": 36045657834
+  },
+  "disposable_attempts": [
+    {
+      "attempt_ordinal": 1,
+      "ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-arcgis-disposable-validation.json",
+      "sha256": "d3f3ccaa3f6b53f7b58f858fd226a4f2c802e86e0a4fc795c12a6120c11e3beb",
+      "status": "block_disposable_arcgis_mechanics"
+    },
+    {
+      "attempt_ordinal": 2,
+      "ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-arcgis-disposable-validation-002.json",
+      "sha256": "88ff2b7a40d40a94ea652f497779b1c2e7e865353b552aaf9c99629b6d186d1f",
+      "status": "block_disposable_arcgis_mechanics"
+    },
+    {
+      "attempt_ordinal": 3,
+      "ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-arcgis-disposable-validation-003.json",
+      "sha256": "48a7499f965bb0a903e57ed75188d6e1188e9821e21d10ec89708388401537a5",
+      "status": "block_disposable_arcgis_mechanics"
+    },
+    {
+      "attempt_ordinal": 4,
+      "ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-arcgis-disposable-validation-004.json",
+      "sha256": "e2bfd11ae013d3dfed1794870b5fa71da4d63c7916081687a88bb46d9dc1e693",
+      "status": "block_disposable_arcgis_mechanics"
+    },
+    {
+      "attempt_ordinal": 5,
+      "ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-arcgis-disposable-validation-005.json",
+      "sha256": "16dcf67b53497d1a064148d5c183a55b784dd3422a8004652f27308ef4afe94e",
+      "status": "pass_disposable_arcgis_grid_mechanics_only"
+    },
+    {
+      "attempt_ordinal": 6,
+      "ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-arcgis-disposable-validation-006.json",
+      "sha256": "3bad52ad02ca701e123bec06bde84f0a69330cf648011a6c4229d0a7c5f57799",
+      "status": "block_disposable_arcgis_mechanics"
+    },
+    {
+      "attempt_ordinal": 7,
+      "ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-arcgis-disposable-validation-007.json",
+      "sha256": "5124257ae9a0e02c19282c90258540161d9b86ba7ac99c6342ceb2cc98502d9b",
+      "status": "block_disposable_broad_projected_guard"
+    }
+  ],
+  "observed_decisive_block": {
+    "receipt_ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-arcgis-disposable-validation-007.json",
+    "generated_broad_raster_only": true,
+    "guard_code": "projected_grid_resource_or_extent_limit_exceeded",
+    "frozen_target_bounds_epsg32645_m": [
+      272300.0,
+      3069230.0,
+      368820.0,
+      3150210.0
+    ],
+    "observed_projected_bounds_epsg32645_m": [
+      270750.0,
+      3067790.0,
+      369770.0,
+      3151720.0
+    ],
+    "extension_beyond_target_m": {
+      "west": 1550.0,
+      "south": 1440.0,
+      "east": 950.0,
+      "north": 1510.0
+    },
+    "maximum_approved_extension_each_side_m": 100.0,
+    "observed_projected_cells": 83107486,
+    "maximum_approved_projected_cells": 100000000,
+    "interpretation": "The exact CRS-bearing-extent ProjectRaster disposable method does not satisfy the approved maximum extent extension. This does not identify the historical GTC root cause or establish SAR pixel fitness."
+  },
+  "stopped_gates": {
+    "full_recovery_003_implementation_gate": "not_reached",
+    "final_no_content_preflight": "not_run",
+    "actual_source_full_extent_dem_assessment": "not_run",
+    "fresh_e1_a2_real_process": "not_started",
+    "m1_src_002_or_005_processed_in_recovery_003": false,
+    "pair_registration": "not_run",
+    "baseline_admission": "not_authorized",
+    "change_analysis": "not_authorized",
+    "derived_pixel_or_scientific_publication": "not_authorized"
+  },
+  "draft_runner_status": "local_incomplete_terminal_blocked_do_not_activate",
+  "evidence_limits": [
+    "Attempts 001 through 004 document disposable harness and diagnostic failures; their exact intermediate validator code revisions were not retained.",
+    "Attempt 005 passes only small generated-raster mechanics; attempt 006 blocks on a broad synthetic output; attempt 007 supplies the decisive inspected broad-grid bounds.",
+    "No GTC-specific output from the approved SAR sources was tested in recovery-003."
+  ],
+  "next_authority_boundary": "No Clip, fallback projection, altered extent tolerance, new real attempt, baseline, or change analysis is released. A different map-oriented method requires separately reviewed scope."
+}

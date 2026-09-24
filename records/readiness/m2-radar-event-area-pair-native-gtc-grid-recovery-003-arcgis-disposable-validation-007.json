@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "status": "block_disposable_broad_projected_guard",
+  "guard_code": "projected_grid_resource_or_extent_limit_exceeded",
+  "observed_broad_grid": {
+    "wkid": 32645,
+    "width": 9902,
+    "height": 8393,
+    "cells": 83107486,
+    "bounds": [
+      270750.0,
+      3067790.0,
+      369770.0,
+      3151720.0
+    ]
+  },
+  "generated_source_shape": [
+    748,
+    999
+  ],
+  "project_data_or_external_custody_accessed": false,
+  "sar_specific_gtc_fitness_proven": false
+}

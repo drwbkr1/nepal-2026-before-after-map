@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "status": "pass_disposable_arcgis_grid_mechanics_only",
+  "arcgis_version": "3.7.1",
+  "native_generated_raster_metadata": {
+    "wkid": 4326,
+    "width": 512,
+    "height": 512,
+    "band_count": 1,
+    "cell_size_x_degrees": 0.0002500000000000002,
+    "cell_size_y_degrees": 0.0002500000000000002,
+    "bounds": [
+      85.15,
+      28.0,
+      85.278,
+      28.128
+    ],
+    "is_temporary": true,
+    "pixel_type": "U8",
+    "declared_cells": 262144,
+    "declared_logical_bytes": 262144,
+    "native_effective_resolution_degrees": [
+      0.0002500000000000002,
+      0.0002500000000000002
+    ]
+  },
+  "cleared_environment": [
+    {
+      "cleared": {
+        "cellSize": null,
+        "snapRaster": null,
+        "outputCoordinateSystem": null,
+        "extent": null
+      },
+      "prior_nondefault_cleared": {
+        "cellSize": true,
+        "snapRaster": true,
+        "outputCoordinateSystem": true,
+        "extent": true
+      },
+      "resampling": "BILINEAR"
+    }
+  ],
+  "environment_restored": true,
+  "continuous_projected_grid": {
+    "wkid": 32645,
+    "width": 1280,
+    "height": 1438,
+    "cells": 1840640,
+    "cell_size_m": [
+      10.0,
+      10.0
+    ],
+    "bounds": [
+      318080.0,
+      3098390.0,
+      330880.0,
+      3112770.0
+    ],
+    "target_bounds_m": [
+      272300.0,
+      3069230.0,
+      368820.0,
+      3150210.0
+    ],
+    "target_columns": 9652,
+    "target_rows": 8098,
+    "materialized_disk_bytes": 355780,
+    "resampling": "BILINEAR"
+  },
+  "categorical_projected_grid": {
+    "wkid": 32645,
+    "width": 1280,
+    "height": 1438,
+    "cells": 1840640,
+    "cell_size_m": [
+      10.0,
+      10.0
+    ],
+    "bounds": [
+      318080.0,
+      3098390.0,
+      330880.0,
+      3112770.0
+    ],
+    "target_bounds_m": [
+      272300.0,
+      3069230.0,
+      368820.0,
+      3150210.0
+    ],
+    "target_columns": 9652,
+    "target_rows": 8098,
+    "materialized_disk_bytes": 40699,
+    "resampling": "NEAREST"
+  },
+  "categorical_values_in_sample": [
+    1,
+    3
+  ],
+  "core_sha256": "0af6c7e5286af84d927b6bd92e8afcd4d76d39bd48ae56baab280bc2c95bd28c",
+  "processing_sha256": "8eec8f15666709c2daa1fc4c994854f5e2cfe1f73523e76768e155fb2c299205",
+  "project_data_or_external_custody_accessed": false,
+  "sar_specific_gtc_fitness_proven": false,
+  "baseline_or_change_analysis_authorized": false
+}

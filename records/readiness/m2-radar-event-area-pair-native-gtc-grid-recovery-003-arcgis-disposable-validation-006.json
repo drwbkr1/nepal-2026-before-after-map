@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "status": "block_disposable_arcgis_mechanics",
+  "failure_type": "NativeGridStop",
+  "failure_code": "arcgis_disposable_error",
+  "failure_site": {
+    "function": "projected_grid_description",
+    "line": 172
+  },
+  "project_data_or_external_custody_accessed": false,
+  "sar_specific_gtc_fitness_proven": false
+}

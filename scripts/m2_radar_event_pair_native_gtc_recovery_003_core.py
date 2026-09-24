@@ -8,6 +8,7 @@ opens project data, imports ArcPy, or creates an attempt by itself.
 from __future__ import annotations
 
 import math
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Callable
 
@@ -102,9 +103,10 @@ def inspect_returned_raster(raster: Any, *, source_bounds: tuple[float, float, f
             "native_effective_resolution_degrees": [cell_x, cell_y]}
 
 
-def native_gtc_call(arcpy: Any, function: Callable[..., Any], arguments: tuple[Any, ...],
-                    *, resampling: str, record_environment: Callable[[dict[str, Any]], None]) -> Any:
-    """Clear four inherited grid controls; always restore exact prior values."""
+@contextmanager
+def native_gtc_environment(arcpy: Any, *, resampling: str,
+                           record_environment: Callable[[dict[str, Any]], None]):
+    """Hold the native settings through lazy metadata reads and the Raster save."""
     if resampling not in ("BILINEAR", "NEAREST"):
         raise NativeGridStop("invalid_gtc_resampling")
     prior = {name: getattr(arcpy.env, name) for name in ENVIRONMENT_NAMES}
@@ -114,12 +116,25 @@ def native_gtc_call(arcpy: Any, function: Callable[..., Any], arguments: tuple[A
             arcpy.ClearEnvironment(name)
         arcpy.env.resamplingMethod = resampling
         cleared = {name: getattr(arcpy.env, name) for name in ENVIRONMENT_NAMES}
-        record_environment({"cleared": cleared, "resampling": resampling})
-        return function(*arguments)
+        changed = {name: prior[name] is None or str(cleared[name]) != str(prior[name])
+                   for name in ENVIRONMENT_NAMES}
+        if not all(changed.values()):
+            raise NativeGridStop("native_environment_clear_not_effective")
+        record_environment({"cleared": {name: None if value is None else str(value)
+                                        for name, value in cleared.items()},
+                            "prior_nondefault_cleared": changed, "resampling": resampling})
+        yield
     finally:
         for name in ENVIRONMENT_NAMES:
             setattr(arcpy.env, name, prior[name])
         arcpy.env.resamplingMethod = prior_resampling
+
+
+def native_gtc_call(arcpy: Any, function: Callable[..., Any], arguments: tuple[Any, ...],
+                    *, resampling: str, record_environment: Callable[[dict[str, Any]], None]) -> Any:
+    """Compatibility helper for eager call-only validation."""
+    with native_gtc_environment(arcpy, resampling=resampling, record_environment=record_environment):
+        return function(*arguments)
 
 
 def dataset_bytes(path: Path) -> int:
