@@ -1569,6 +1569,7 @@ REQUIRED = [
     "records/readiness/m2-radar-event-area-pair-001-radar-final-preflight.json",
     "scripts/reconcile_m2_radar_event_pair_terminal_001.py",
     "tests/test_m2_radar_event_pair_terminal_reconciliation_001.py",
+    "records/processing/m2-radar-event-area-pair-001-radar-in-progress-checkpoint-001.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18605,6 +18606,20 @@ def main() -> None:
         or event_pair_radar_preflight.get("automatic_retry") is not False
     ):
         fail("M2 radar event-area pair final no-content preflight differs")
+    event_pair_live = json.loads((ROOT / "records/processing/m2-radar-event-area-pair-001-radar-in-progress-checkpoint-001.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_live.get("status") != "single_approved_attempt_in_progress_not_terminal"
+        or event_pair_live.get("source_order") != ["M1-SRC-002", "M1-SRC-005"]
+        or event_pair_live.get("last_durable_stage", {}).get("source_id") != "M1-SRC-002"
+        or event_pair_live.get("last_durable_stage", {}).get("tool") != "Despeckle"
+        or event_pair_live.get("last_durable_stage", {}).get("phase") != "started"
+        or event_pair_live.get("terminal_receipt_reserved_zero_bytes") is not True
+        or event_pair_live.get("second_source_started") is not False
+        or event_pair_live.get("pair_qa_started") is not False
+        or event_pair_live.get("terminal_publication_ready") is not False
+        or event_pair_live.get("preflight_sha256") != sha256("records/readiness/m2-radar-event-area-pair-001-radar-final-preflight.json")
+    ):
+        fail("M2 radar event-area pair in-progress checkpoint differs")
 
     violations = []
     for relative in tracked_files():
