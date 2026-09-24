@@ -1570,6 +1570,7 @@ REQUIRED = [
     "scripts/reconcile_m2_radar_event_pair_terminal_001.py",
     "tests/test_m2_radar_event_pair_terminal_reconciliation_001.py",
     "records/processing/m2-radar-event-area-pair-001-radar-in-progress-checkpoint-001.json",
+    "records/processing/m2-radar-event-area-pair-001-radar-in-progress-checkpoint-002.json",
     "records/source-gates/m2-radar-event-area-pair-001-approval.json",
     "records/observations/m2-radar-event-pair-catalog-triage-001.json",
     "records/observations/m2-radar-event-pair-method-boundary-001.json",
@@ -18620,6 +18621,22 @@ def main() -> None:
         or event_pair_live.get("preflight_sha256") != sha256("records/readiness/m2-radar-event-area-pair-001-radar-final-preflight.json")
     ):
         fail("M2 radar event-area pair in-progress checkpoint differs")
+    event_pair_live_002 = json.loads((ROOT / "records/processing/m2-radar-event-area-pair-001-radar-in-progress-checkpoint-002.json").read_text(encoding="utf-8"))
+    if (
+        event_pair_live_002.get("status") != "single_approved_attempt_in_progress_first_source_projection_unverified"
+        or event_pair_live_002.get("source_order") != ["M1-SRC-002", "M1-SRC-005"]
+        or event_pair_live_002.get("last_durable_stage", {}).get("source_id") != "M1-SRC-002"
+        or event_pair_live_002.get("last_durable_stage", {}).get("tool") != "ApplyGeometricTerrainCorrection_mask"
+        or event_pair_live_002.get("last_durable_stage", {}).get("phase") != "completed"
+        or event_pair_live_002.get("first_gamma_projected_crf_path_exists") is not True
+        or event_pair_live_002.get("first_source_terminal_receipt_exists") is not False
+        or event_pair_live_002.get("terminal_receipt_reserved_zero_bytes") is not True
+        or event_pair_live_002.get("second_source_started") is not False
+        or event_pair_live_002.get("pair_qa_started") is not False
+        or event_pair_live_002.get("terminal_publication_ready") is not False
+        or event_pair_live_002.get("preflight_sha256") != sha256("records/readiness/m2-radar-event-area-pair-001-radar-final-preflight.json")
+    ):
+        fail("M2 radar event-area pair second in-progress checkpoint differs")
 
     violations = []
     for relative in tracked_files():
