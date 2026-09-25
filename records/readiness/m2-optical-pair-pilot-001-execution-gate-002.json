@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001-EXECUTION-GATE-002",
+  "status": "pass_public_execution_gate",
+  "proposal_sha256": "82f394235b3beee5e8e05e8a6515f425b88bba1b7b947422efaacab720f252a5",
+  "review_bundle_sha256": "0aa10813289f917e44cb684c86d78e8b1b381a8271993b202c87d6e262703870",
+  "approval_sha256": "68833c8e356e6e901e21e6b3361c9df3af60a8afb982946ae63269d9b38e6fe5",
+  "contract_sha256": "80cfad39e112dd4c6f49ad12ab91d3d3ab050dcdb039e20bd531e78e15d132f4",
+  "implementation_readiness_sha256": "665a94b33e2cefeede2d9f5f66eac353cf2eab2da33a3c156045d7da6628571f",
+  "implementation_commit_sha": "0795fa9adf2c9037993ced3a5d518179c59ef473",
+  "public_ci_run_id": 36192071223,
+  "public_ci_job_id": 108259293708,
+  "public_ci_conclusion": "success",
+  "superseded_gate_ref": "records/readiness/m2-optical-pair-pilot-001-execution-gate.json",
+  "superseded_gate_current_runtime_release": false,
+  "assertions": {
+    "exact_corrected_implementation_public": true,
+    "gate_002_record_publication_ci_still_required": true,
+    "final_no_payload_preflight_required_per_source": true,
+    "owner_secret_handoff_occurred": false,
+    "payload_request_occurred": false,
+    "real_product_pixels_examined": false,
+    "baseline_or_change_analysis_released": false,
+    "scientific_publication_released": false
+  }
+}
