@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001",
+  "status": "local_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "base_commit": "c23a9c73d4a6eea33732d6214c7f50cea32bb462",
+  "purpose": "Test one exact alternate Sentinel-2 Level-2A pair for source-area and upper-corridor pixel QA toward an ArcGIS before/after map after terminal optical and radar route blocks.",
+  "assessment_ref": "records/observations/m2-optical-pair-pilot-001-assessment.json",
+  "decision_question": "Approve, revise, or defer one conditional envelope for the exact 24 August and 16 September T45RUM products: packet publication, controlled acquisition, exact-source QA, and sanitized terminal publication?",
+  "exact_sources": [
+    {"role": "before", "provider_product_id": "35b149d6-cdde-4959-8ff4-d28f37bf67bb", "name": "S2A_MSIL2A_20260824T050231_N0512_R119_T45RUM_20260824T115710.SAFE", "content_length_bytes": 1069015437, "provider_md5": "0a5a184fa5880f3a0b80a7e958ec2884", "provider_blake3": "f49d5f8f87ecf23e25acc257b4d487111bceb8bce61e53317f2402ad0cfbbb16"},
+    {"role": "after", "provider_product_id": "3856463e-02bd-44ad-9525-d4d98fa3eb72", "name": "S2B_MSIL2A_20260916T045659_N0512_R119_T45RUM_20260916T084937.SAFE", "content_length_bytes": 1046835859, "provider_md5": "a878d0deea57ea2c6f8d5f43396869b5", "provider_blake3": "c4ef38f2d2fab75f0881fef62174f647a7767ab807c8f5d2db2ac9d33d7f7e84"}
+  ],
+  "spatial_scope": {
+    "analysis_crs": "EPSG:32645",
+    "full_catalog_footprint_aoi_targets": ["AOI-SOURCE", "AOI-UPPER-CORRIDOR"],
+    "aoi_overview": "metadata context and explicit incomplete-coverage disposition; one T45RUM product per date cannot establish full-overview pixel coverage",
+    "source_and_corridor_success_rule": "Each of the two target AOIs must independently meet the unchanged frozen coverage, mask, grid, and registration predicates before any localized QA-only pass; do not reinterpret a DEFER or BLOCK as a pass.",
+    "no_aoi_geometry_or_threshold_change": true
+  },
+  "requested_single_authority_envelope": {
+    "owner_decision_count": 1,
+    "covers_without_intermediate_owner_reconfirmation": [
+      "publish this exact packet and owner response on the public default branch and require passing public CI",
+      "implement exact-source identity, controlled intake, SAFE materialization, optical header, and new-pair pixel-QA bindings without altering the frozen 20-m grid, SCL mask, quality-mask, coverage, or registration predicates",
+      "run synthetic and installed ArcGIS-runtime tests using disposable generated inputs, then publish implementation and execution gates with passing public CI",
+      "perform a final no-payload preflight of source identity, current CDSE availability and terms, account access, bytes/checksums, non-Git custody, implementation, prior terminal receipts, disk, and ArcGIS prerequisites",
+      "use only an owner-controlled single-use in-memory credential handoff if authenticated transfer is needed; no credential in chat, files, logs, environment, or Git",
+      "after all gates pass, acquire the two exact products in before-then-after order using distinct append-only byte-zero transport attempts; permit one transport-only retry per product after a documented interruption, but stop on identity, rights, checksum, container, or custody failure; verify size, provider MD5 and BLAKE3, ZIP/SAFE integrity, and non-Git custody without replacing existing files",
+      "only after both products pass intake and materialization, perform one new append-only exact-pair header and optical pixel-QA attempt; record all three approved AOI dispositions, with incomplete overview coverage explicit",
+      "publish only sanitized terminal evidence and exact post-CI reconciliation"
+    ],
+    "maximum_product_requests": 4,
+    "maximum_requests_per_product": 2,
+    "maximum_real_pair_pixel_qa_attempts": 1,
+    "automatic_retry": "one fresh byte-zero transport-only retry per exact product after a documented interruption; no retry after integrity, identity, rights, or custody failure",
+    "additional_product_or_date": false,
+    "old_attempt_reuse_or_mutation": false,
+    "baseline_change_or_scientific_publication": false
+  },
+  "pre_execution_stops": [
+    "If current CDSE terms or an account prompt requires a new acceptance, stop for the owner's separate terms decision; this proposal grants no terms acceptance.",
+    "If either exact product identity, footprint, availability, size, checksum, rights, or access differs materially at final preflight, stop without a request.",
+    "If the first product cannot be promoted after its allowed transport attempts, do not request the second product; preserve each failed attempt as distinct evidence.",
+    "If either product fails materialization or header checks, do not inspect pixels.",
+    "If current frozen predicates cannot be applied to the new pair without a scientific-method change, stop before real pixels and return a revised proposal."
+  ],
+  "claim_boundary": {
+    "possible_result": "INVALID_BLOCK_DEFER_or_localized_PASS_QA_ONLY",
+    "overview_full_pixel_coverage_claim": false,
+    "pass_qa_only_is_not_baseline_admission": true,
+    "spectral_indices_or_difference_raster_authorized": false,
+    "interpretation_or_attribution_authorized": false,
+    "derived_pixel_or_scientific_publication_authorized": false
+  },
+  "does_not_authorize_now": ["Git publication of this local packet", "new source adoption or acquisition", "credential use or terms acceptance", "project-data or external-custody access", "ArcPy execution or real pixel inspection", "baseline, change analysis, attribution, or scientific publication"]
+}

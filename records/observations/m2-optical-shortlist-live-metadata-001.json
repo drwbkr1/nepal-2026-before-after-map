@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-SHORTLIST-LIVE-METADATA-001",
+  "status": "exact_public_metadata_checked_no_adoption",
+  "checked_at_utc": "2026-09-25T20:30:22Z",
+  "prior_catalog_ref": "records/observations/m2-map-route-feasibility-001-optical-fallback-catalog.json",
+  "prior_catalog_sha256": "0ffd82483be80f5f75bd8a41da7379f58dbb6ed33db3ca451e89013e7f05072c",
+  "authentication": "none",
+  "products": [
+    {
+      "role": "before_2026_08_24",
+      "provider_product_id": "35b149d6-cdde-4959-8ff4-d28f37bf67bb",
+      "name": "S2A_MSIL2A_20260824T050231_N0512_R119_T45RUM_20260824T115710.SAFE",
+      "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(35b149d6-cdde-4959-8ff4-d28f37bf67bb)?$expand=Attributes",
+      "response_sha256": "55485fa834ef77cb2cc07e690528575ae7ac8fa03572df2647827707207888f0",
+      "content_start_utc": "2026-08-24T05:02:31.024000Z",
+      "content_length_bytes": 1069015437,
+      "provider_checksums": [
+        {
+          "Value": "0a5a184fa5880f3a0b80a7e958ec2884",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-08-24T13:03:13.365990Z"
+        },
+        {
+          "Value": "f49d5f8f87ecf23e25acc257b4d487111bceb8bce61e53317f2402ad0cfbbb16",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-08-24T13:03:15.424160Z"
+        }
+      ],
+      "online": true,
+      "catalog_cloud_cover_percent": 50.966662,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "footprint_equal_to_prior_catalog": true
+    },
+    {
+      "role": "after_2026_09_16",
+      "provider_product_id": "3856463e-02bd-44ad-9525-d4d98fa3eb72",
+      "name": "S2B_MSIL2A_20260916T045659_N0512_R119_T45RUM_20260916T084937.SAFE",
+      "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(3856463e-02bd-44ad-9525-d4d98fa3eb72)?$expand=Attributes",
+      "response_sha256": "3f6b452aa4fb7905bd0825ab9ffbfe0b863450c15ccfd9a37a1e3570694c363d",
+      "content_start_utc": "2026-09-16T04:56:59.024000Z",
+      "content_length_bytes": 1046835859,
+      "provider_checksums": [
+        {
+          "Value": "a878d0deea57ea2c6f8d5f43396869b5",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-09-16T09:35:54.141742Z"
+        },
+        {
+          "Value": "c4ef38f2d2fab75f0881fef62174f647a7767ab807c8f5d2db2ac9d33d7f7e84",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-09-16T09:35:55.864281Z"
+        }
+      ],
+      "online": true,
+      "catalog_cloud_cover_percent": 55.417758,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "footprint_equal_to_prior_catalog": true
+    },
+    {
+      "role": "after_2026_09_21",
+      "provider_product_id": "d6d898f4-2337-487d-afff-943df794c3e6",
+      "name": "S2C_MSIL2A_20260921T045701_N0513_R119_T45RUM_20260921T102407.SAFE",
+      "query_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d6d898f4-2337-487d-afff-943df794c3e6)?$expand=Attributes",
+      "response_sha256": "f8fb5edb10d56fc38b5d59c5df850a3134800dcceed47a60ab1aa467367a6249",
+      "content_start_utc": "2026-09-21T04:57:01.025000Z",
+      "content_length_bytes": 1036170454,
+      "provider_checksums": [
+        {
+          "Value": "0f7c83c2c73d752606076b7a825fe5de",
+          "Algorithm": "MD5",
+          "ChecksumDate": "2026-09-21T11:30:39.460038Z"
+        },
+        {
+          "Value": "dbd439d47eff3631e0aa149754f8c6833241147d82affce0ff8476e17ab1beb4",
+          "Algorithm": "BLAKE3",
+          "ChecksumDate": "2026-09-21T11:30:41.541516Z"
+        }
+      ],
+      "online": true,
+      "catalog_cloud_cover_percent": 60.282749,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "footprint_equal_to_prior_catalog": true
+    }
+  ],
+  "claims": {
+    "new_source_adopted": false,
+    "product_downloaded": false,
+    "pixels_inspected": false,
+    "source_terms_accepted": false,
+    "cloud_percent_proves_aoi_clear_pixels": false
+  }
+}

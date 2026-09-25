@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001-APPROVAL",
+  "status": "owner_approved_exact_conditional_envelope_public_ci_pending",
+  "recorded_at_utc": "2026-09-25T20:52:10Z",
+  "decision_id": "D-M2-OPTICAL-PAIR-PILOT-001",
+  "decision": "approve",
+  "human_decision_count": 1,
+  "owner_statement_verbatim": "approve",
+  "decision_context": "Owner reply to the immediately preceding exact approve, revise, or defer request naming the M2 optical pair pilot-001 review-bundle and proposal SHA-256 values. The request covered one conditional August 24 / September 16 Sentinel-2 envelope, excluded new terms acceptance and scientific actions, and pointed to the human-readable review. Ordinary chat authorization is permitted by AGENTS.md.",
+  "explicit_attestation_statement": false,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-optical-pair-pilot-001-proposal.json",
+    "proposal_sha256": "82f394235b3beee5e8e05e8a6515f425b88bba1b7b947422efaacab720f252a5",
+    "review_bundle_ref": "reviews/m2-optical-pair-pilot-001/review-bundle.json",
+    "review_bundle_sha256": "0aa10813289f917e44cb684c86d78e8b1b381a8271993b202c87d6e262703870"
+  },
+  "authority": {
+    "single_conditional_envelope_through_sanitized_terminal_publication": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "packet_publication_and_public_ci": true,
+    "implementation_disposable_arcgis_and_execution_public_ci_gates_required": true,
+    "final_no_payload_preflight_required": true,
+    "exact_product_ids_in_order": [
+      "35b149d6-cdde-4959-8ff4-d28f37bf67bb",
+      "3856463e-02bd-44ad-9525-d4d98fa3eb72"
+    ],
+    "maximum_requests_per_product": 2,
+    "second_request_only_after_documented_transport_interruption": true,
+    "maximum_real_pair_pixel_qa_attempts": 1,
+    "new_terms_acceptance": false,
+    "credential_storage_or_exposure": false,
+    "additional_product_or_date": false,
+    "old_attempt_reuse_or_mutation": false,
+    "baseline_admission_or_change_analysis": false,
+    "interpretation_or_attribution": false,
+    "derived_pixel_or_scientific_publication": false
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001-ASSESSMENT",
+  "status": "local_metadata_assessment_no_source_adoption",
+  "assessed_at_utc": "2026-09-25T20:35:33Z",
+  "input_bindings": [
+    {"ref": "records/readiness/m2-map-route-feasibility-001-terminal-publication.json", "sha256": "d584432debbbc0f0bcb359e5b0c3265859a0ebc49899e96710251acb5475aa2c"},
+    {"ref": "records/observations/m2-map-route-feasibility-001-optical-fallback-catalog.json", "sha256": "0ffd82483be80f5f75bd8a41da7379f58dbb6ed33db3ca451e89013e7f05072c"},
+    {"ref": "records/observations/m2-optical-shortlist-live-metadata-001.json", "sha256": "8c081f6863fa089aa41b90c0e95368917aea62c9c416559f76edc557332dd0fe"},
+    {"ref": "config/aoi/approved-study-areas.geojson", "sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98"},
+    {"ref": "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json", "sha256": "9ffae2e589700adec07373325e3d35d6ee8ccf5bc3a5d66da5fe7e6639c406b5"},
+    {"ref": "config/qa/optical-pixel-readiness-contract-001.json", "sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7"}
+  ],
+  "catalog": {
+    "before_rows": 41,
+    "after_rows": 44,
+    "before_full_source_and_corridor_footprint_rows": 7,
+    "after_full_source_and_corridor_footprint_rows": 7,
+    "footprint_method": "Shapely polygon covers of both approved EPSG:4326 AOI geometries; catalog footprint, not pixel coverage"
+  },
+  "proposed_primary_pair": {
+    "before": {
+      "provider_product_id": "35b149d6-cdde-4959-8ff4-d28f37bf67bb",
+      "name": "S2A_MSIL2A_20260824T050231_N0512_R119_T45RUM_20260824T115710.SAFE",
+      "content_start_utc": "2026-08-24T05:02:31.024000Z",
+      "catalog_cloud_cover_percent": 50.966662,
+      "content_length_bytes": 1069015437,
+      "provider_md5": "0a5a184fa5880f3a0b80a7e958ec2884",
+      "provider_blake3": "f49d5f8f87ecf23e25acc257b4d487111bceb8bce61e53317f2402ad0cfbbb16",
+      "online_at_metadata_check": true
+    },
+    "after": {
+      "provider_product_id": "3856463e-02bd-44ad-9525-d4d98fa3eb72",
+      "name": "S2B_MSIL2A_20260916T045659_N0512_R119_T45RUM_20260916T084937.SAFE",
+      "content_start_utc": "2026-09-16T04:56:59.024000Z",
+      "catalog_cloud_cover_percent": 55.417758,
+      "content_length_bytes": 1046835859,
+      "provider_md5": "a878d0deea57ea2c6f8d5f43396869b5",
+      "provider_blake3": "c4ef38f2d2fab75f0881fef62174f647a7767ab807c8f5d2db2ac9d33d7f7e84",
+      "online_at_metadata_check": true
+    },
+    "common": {"product_type": "S2MSI2A", "tile": "T45RUM", "relative_orbit": 119, "processing_baseline_from_product_name": "N0512", "catalog_footprint_covers": ["AOI-SOURCE", "AOI-UPPER-CORRIDOR"]},
+    "combined_catalog_content_length_bytes": 2115851296,
+    "ranking_reason": "24 August is the nearest pre-event fully covering tile in the approved window; 16 September has the lowest tile-wide cloud percentage among post-event fully covering tiles in that inventory. Neither fact proves event-AOI clear pixels."
+  },
+  "comparative_not_authorized_backup": {
+    "provider_product_id": "d6d898f4-2337-487d-afff-943df794c3e6",
+    "name": "S2C_MSIL2A_20260921T045701_N0513_R119_T45RUM_20260921T102407.SAFE",
+    "catalog_cloud_cover_percent": 60.282749,
+    "reason_not_automatic": "Later observation, different named processing baseline N0513, and unknown AOI usable pixels; a separate source decision is needed."
+  },
+  "retained_failure": {
+    "old_pair": ["M1-SRC-010", "M1-SRC-008"],
+    "real_001": "terminal_invalid",
+    "recovery_001": "terminal_block",
+    "source_aoi_pair_usable_fraction": 0.063252,
+    "upper_corridor_pair_usable_fraction": 0.256403,
+    "overview_pair_coverage_fraction": 0.541205,
+    "old_attempt_reuse_or_retry": false
+  },
+  "source_gate": {
+    "identity": "pass_for_metadata: exact CDSE UUID and product name",
+    "authority": "pass_for_metadata: official CDSE Sentinel catalog",
+    "access": "conditional_for_acquisition: online metadata, but authenticated account access and fresh availability remain unverified",
+    "rights": "conditional_for_acquisition: current public Sentinel legal notice reviewed; account-specific terms action not delegated",
+    "provenance": "pass_for_metadata: official OData identity and unchanged footprint against captured catalog",
+    "integrity": "plan_only: verify exact size, provider MD5 and BLAKE3, and container before promotion; no bytes acquired",
+    "fitness": "unknown_for_pixels: AOI clear-pixel, masks, registration, temporal stability, and full overview not established",
+    "privacy_security": "conditional_for_acquisition: public EO data, with account token confined to owner-controlled single-use memory broker"
+  },
+  "claim_boundary": {
+    "new_source_adopted": false,
+    "product_downloaded": false,
+    "pixels_inspected": false,
+    "qa_pair_pass": false,
+    "baseline_or_change_established": false,
+    "scientific_or_derived_pixel_publication_authorized": false
+  }
+}

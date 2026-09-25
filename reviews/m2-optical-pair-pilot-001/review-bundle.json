@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001-REVIEW-BUNDLE",
+  "status": "local_zero_decision_one_owner_decision_required",
+  "human_decision_count": 0,
+  "base_commit": "c23a9c73d4a6eea33732d6214c7f50cea32bb462",
+  "artifacts": [
+    {"path": "contracts/milestone-002-optical-pair-pilot-001-proposal.json", "sha256": "82f394235b3beee5e8e05e8a6515f425b88bba1b7b947422efaacab720f252a5", "role": "one_conditional_exact_pair_proposal"},
+    {"path": "docs/M2_OPTICAL_PAIR_PILOT_001_REVIEW.md", "sha256": "fa5f0590ce82c640d84576ba615e1b31cf8ba98c235b78174c55d5bf610ca912", "role": "human_readable_review"},
+    {"path": "records/observations/m2-optical-pair-pilot-001-assessment.json", "sha256": "826afe1fcb3514267806cc56183b5bdcb33ae42a0a06d6c4ce38da0f03214c27", "role": "bound_candidate_and_source_gate_assessment"},
+    {"path": "records/observations/m2-optical-shortlist-live-metadata-001.json", "sha256": "8c081f6863fa089aa41b90c0e95368917aea62c9c416559f76edc557332dd0fe", "role": "exact_public_product_metadata"},
+    {"path": "records/observations/m2-map-route-feasibility-001-optical-fallback-catalog.json", "sha256": "0ffd82483be80f5f75bd8a41da7379f58dbb6ed33db3ca451e89013e7f05072c", "role": "bounded_85_row_catalog"},
+    {"path": "records/readiness/m2-map-route-feasibility-001-terminal-publication.json", "sha256": "d584432debbbc0f0bcb359e5b0c3265859a0ebc49899e96710251acb5475aa2c", "role": "closed_radar_route_and_optical_fallback"},
+    {"path": "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json", "sha256": "9ffae2e589700adec07373325e3d35d6ee8ccf5bc3a5d66da5fe7e6639c406b5", "role": "retained_old_pair_block"},
+    {"path": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2", "role": "frozen_coverage_mask_and_registration_predicates"}
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-OPTICAL-PAIR-PILOT-001",
+    "question": "Approve, revise, or defer one exact August 24 / September 16 Sentinel-2 pair pilot through conditional source acquisition, QA-only pixel inspection, and sanitized terminal publication?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "Exact packet and owner response pass public default-branch CI; implementation, disposable ArcGIS, final no-payload preflight, acquisition, integrity, materialization, header, pixel-QA, and terminal-publication gates remain sequential without intermediate owner reconfirmation."
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "new_source_adoption_or_acquisition_authorized": false,
+    "credential_or_terms_action_authorized": false,
+    "arcgis_or_protected_data_execution_authorized": false,
+    "old_attempt_retry_authorized": false,
+    "baseline_change_attribution_or_scientific_publication_authorized": false
+  }
+}

@@ -1,0 +1,26 @@
+# M2 optical pair pilot-001 review
+
+**Status:** Local zero-decision review. Your general approval to continue preparation did not adopt a new scene or release acquisition, ArcGIS processing, or publication. The [exact proposal](../contracts/milestone-002-optical-pair-pilot-001-proposal.json) requests one later decision for its full conditional envelope.
+
+## The map-oriented choice
+
+The approved map still lacks a usable before/after pixel pair. The last ascending radar route stopped at native GTC on its first source; the earlier optical August 12/August 27 pair is terminal `INVALID` then `BLOCK`. Its measured usable fraction was 6.3252% at `AOI-SOURCE` and 25.6403% at `AOI-UPPER-CORRIDOR`; the overview had only 54.1205% tile coverage. None of those attempts may be reused, relabeled, or retried. [Radar terminal](../records/readiness/m2-map-route-feasibility-001-terminal-publication.json) · [optical receipt](../records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json)
+
+The exact public CDSE catalog returned 41 pre-event and 44 post-event Level-2A rows in the already approved search. A geometry `covers` check against the approved EPSG:4326 polygons found seven records on each side whose **catalog footprints**, not verified pixels, fully enclose both the source and upper-corridor AOIs. The proposed pilot is:
+
+| Role | Exact product | Tile cloud metadata | Why test it |
+| --- | --- | ---: | --- |
+| Before | `S2A_MSIL2A_20260824T050231_N0512_R119_T45RUM_20260824T115710.SAFE` · `35b149d6-cdde-4959-8ff4-d28f37bf67bb` | 50.966662% | Nearest pre-event full-footprint T45RUM scene in the approved window, two days before the event. |
+| After | `S2B_MSIL2A_20260916T045659_N0512_R119_T45RUM_20260916T084937.SAFE` · `3856463e-02bd-44ad-9525-d4d98fa3eb72` | 55.417758% | Lowest tile-wide cloud figure among post-event full-footprint candidates, 21 days after the event. |
+
+Both are Sentinel-2 Level-2A, T45RUM, relative orbit 119, and named processing baseline N0512. They are different spacecraft, and a 21-day post-event interval can include unrelated landscape changes. Tile cloud metadata says nothing conclusive about clear pixels over either event AOI. The September 21 T45RUM record is comparison context only: it is later, named baseline N0513, and is **not** an automatic backup. [Captured catalog](../records/observations/m2-map-route-feasibility-001-optical-fallback-catalog.json) · [three exact live-metadata checks](../records/observations/m2-optical-shortlist-live-metadata-001.json) · [assessment](../records/observations/m2-optical-pair-pilot-001-assessment.json)
+
+One T45RUM scene per date does not cover the full regional overview. The proposed QA pilot targets the source and upper-corridor AOIs; the overview remains a projected metadata/context map with an explicit coverage limit. This does **not** lower the frozen full-coverage or usable-pixel thresholds, or call partial evidence a full before/after map. A later multi-tile overview would require its own source and method decision.
+
+## Source gate and the proposed single envelope
+
+Identity, authoritative catalog provenance, and exact product metadata are established for review. At the metadata check, both products were listed online, with provider byte counts, MD5, and BLAKE3 checksums. That is an integrity **plan**, not verification of downloaded bytes. Pixel fitness, clear AOI coverage, SCL and quality masks, registration, and stable control areas remain unknown. Official [CDSE terms](https://dataspace.copernicus.eu/terms-and-conditions) distinguish open Sentinel data from other portal content and require registered access to EO data; the linked [Sentinel legal notice](https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice) governs Sentinel reuse and credit. A new account terms prompt would remain the owner's decision. Tokens stay in the established owner-controlled, single-use in-memory handoff. No terms action or credential is requested by this review.
+
+One exact approval could cover packet/public-CI publication, implementation and disposable tests, a final no-payload preflight, fixed-order acquisition of the two named products, byte/container verification and non-Git custody, and only then one append-only new-pair pixel-QA attempt. A documented transport interruption would allow one fresh byte-zero request for the **same** product without another owner decision; identity, rights, checksum, container, or custody failures stop the route. All attempts remain distinct and retained. The existing 20 m EPSG:32645 grid, conservative SCL/quality masks, 99% full-coverage and 80% usable-pixel pass thresholds, and stable-control registration criteria would remain unchanged and be bound **before** any new-pair pixel read. Stop at a failed gate and retain the evidence. The result may be `INVALID`, `BLOCK`, `DEFER`, or localized `PASS_QA_ONLY`; even a pass would not admit a baseline or authorize change analysis, interpretation, attribution, derived-pixel publication, or a scientific result. [Frozen QA contract](../config/qa/pixel-readiness-contract.json)
+
+**Decision to make after reviewing this exact packet:** approve, revise, or defer the conditional pilot. Approval must identify the packet's exact hashes; the present local review itself authorizes nothing beyond preparation.
