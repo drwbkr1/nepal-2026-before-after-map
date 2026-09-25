@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001-GATE-PUBLICATION-CI",
+  "status": "pass_exact_public_gate_commit_ci",
+  "execution_gate_ref": "records/readiness/m2-optical-pair-pilot-001-execution-gate.json",
+  "execution_gate_sha256": "eb74251d0c1b4496f29e7f28fd4e415b8a9142594e24efd32f6ffe3ca4fe8115",
+  "gate_commit_sha": "3de637844bad811f1ae7d0fcd1b427009cfd2068",
+  "public_ci_run_id": 36191579129,
+  "public_ci_job_id": 108257696421,
+  "public_ci_conclusion": "success",
+  "assertions": {
+    "gate_commit_was_public_default_branch": true,
+    "owner_credential_handoff_performed": false,
+    "final_no_payload_preflight_passed": false,
+    "payload_requested": false,
+    "pixel_qa_started": false,
+    "baseline_or_change_analysis_released": false
+  }
+}

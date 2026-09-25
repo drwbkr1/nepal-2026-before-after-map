@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001-TERMINAL",
+  "status": "stopped",
+  "stage": "header",
+  "terminal_code": "pilot_arcgis_worker_no_header_receipt",
+  "completed_at_utc": "2026-09-25T22:20:22Z",
+  "promoted_product_source_ids": [
+    "M2-OPT-001",
+    "M2-OPT-002"
+  ],
+  "credential_value_recorded": false,
+  "account_response_or_pii_recorded": false,
+  "exception_text_recorded": false,
+  "automatic_source_substitution": false,
+  "old_attempt_reused": false,
+  "baseline_or_change_analysis": false,
+  "interpretation_or_attribution": false,
+  "derived_pixel_or_scientific_publication": false
+}

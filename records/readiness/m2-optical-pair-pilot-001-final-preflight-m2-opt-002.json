@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001-FINAL-PREFLIGHT",
+  "source_id": "M2-OPT-002",
+  "provider_product_id": "3856463e-02bd-44ad-9525-d4d98fa3eb72",
+  "status": "pass_no_payload",
+  "checked_at_utc": "2026-09-25T22:11:09Z",
+  "contract_sha256": "80cfad39e112dd4c6f49ad12ab91d3d3ab050dcdb039e20bd531e78e15d132f4",
+  "execution_gate_sha256": "c0c71420e3d532da3dd5e201508b93f171add24a1f4fc55c3c6d6b3820d7a2a4",
+  "catalog_response_sha256": "3f6b452aa4fb7905bd0825ab9ffbfe0b863450c15ccfd9a37a1e3570694c363d",
+  "official_page_observations": [
+    {
+      "page_id": "odata-download-documentation",
+      "url": "https://documentation.dataspace.copernicus.eu/APIs/OData.html",
+      "comparison_mode": "current_route_markers_after_raw_page_change",
+      "current_page_sha256": "418816f5e16f63de8afb694e49d4b43757a0b2f1d45ba542ce66718f71db3d25",
+      "prior_page_sha256": "bc178f27ebcaa8033696bb89d2c86b18385d2cd40997d4eb09233b7143857594",
+      "raw_page_changed": true,
+      "exact_api_route_markers_present": true,
+      "marker_count": 4,
+      "terms_or_legal_notice_equivalence_inferred": false
+    },
+    {
+      "page_id": "token-documentation",
+      "url": "https://documentation.dataspace.copernicus.eu/APIs/Token.html",
+      "comparison_mode": "current_route_markers_after_raw_page_change",
+      "current_page_sha256": "adaef997d2bbfaba2be12ee8a862b846493609bd8cef41c9710bff092362534b",
+      "prior_page_sha256": "70931ccfcd68a1bf9a607687aa13e138f599db0ef840e1bccfaa0f34a9ca6ae3",
+      "raw_page_changed": true,
+      "exact_api_route_markers_present": true,
+      "marker_count": 4,
+      "terms_or_legal_notice_equivalence_inferred": false
+    },
+    {
+      "page_id": "terms-and-conditions",
+      "url": "https://dataspace.copernicus.eu/terms-and-conditions",
+      "comparison_mode": "normalized_terms_section_sha256",
+      "rendered_page_sha256": "e822ec4bc599c0eeb7876ad2b6caa61bba690d95012306437ed6180ed44060c9",
+      "terms_section_id": "paragraph--1",
+      "normalized_terms_text_length": 11412,
+      "normalized_terms_text_sha256": "22cf55ad3949e8eaee715780654be9eb0e8648a2808d6ba007b47c9849ab2b01",
+      "structured_date_modified": "2026-05-05T08:04:39+0200",
+      "required_phrase_count": 6,
+      "terms_identity_unchanged_from_preflight_refresh": true
+    },
+    {
+      "page_id": "sentinel-data-legal-notice",
+      "url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "comparison_mode": "raw_sha256",
+      "rendered_page_sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64",
+      "unchanged_from_preflight": true
+    }
+  ],
+  "account_access_confirmed": true,
+  "account_response_or_pii_recorded": false,
+  "new_terms_acceptance_performed": false,
+  "arcgis_version": "3.7.1",
+  "spatial_analyst_available": true,
+  "payload_requests_performed": false,
+  "credential_value_recorded": false,
+  "source_footprint_is_catalog_only": true,
+  "pixel_fitness_unknown": true
+}
