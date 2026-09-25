@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-MAP-ROUTE-FEASIBILITY-001-RADAR-IMPLEMENTATION-GATE",
+  "status": "pass_public_ci_map_route_implementation",
+  "checked_at_utc": "2026-09-25T18:54:51Z",
+  "proposal_sha256": "6a0e568e7db0af2fbbd8d317a4324c4fda4c9784d069c9aaaa2697e3e12d436a",
+  "review_bundle_sha256": "9419b4c0dc4272f14ec59521fa268d592368ccab6b8411c3a868f12e6739756e",
+  "approval_sha256": "cc75b1887fa3309869f88897ce408a851a4d7f2f31828cabe4d2ad70abc9da42",
+  "packet_publication_gate_sha256": "fc55c80d040717ab84e510f8bf5c63e63ae9bf8dc1a9bded8e1a788e1c1ead11",
+  "runner_sha256": "fb38dcfabe0c6b10f9a811ea3ac1265cffa743f3b27f173334d5a84fdf425328",
+  "processor_sha256": "d51f9b62dbeb8e3fa7e2f22fd91d3e4905ff297a92fc2a5add0092d80f8b51c9",
+  "core_sha256": "8edc41a61bc5a66bc3104388cdac24d68e89d3a28cca692794f2bc08b456ae4a",
+  "disposable_receipt_sha256": "ed7d8cfd1fc53caaf5113ca83d0af2d866194f13b9b1697b96059a83bc900be6",
+  "disposable_terminal_sha256": "077a8b97da538850b4257c5dbe08a9885b6cb02038242bdf89d7f09d4099f9df",
+  "footprint_gate_sha256": "d49cd9a8b3a3edc086193d985f5bd898665e3b201c442ef38cef6153bd7dc7ff",
+  "implementation_commit_sha": "2a3355de0fcade449a4c22dd790403c74e79f85c",
+  "public_ci_run_id": 36176363974,
+  "public_ci_job_id": 108207820632,
+  "public_ci_conclusion": "success",
+  "public_ci_repository_tests": 805,
+  "public_ci_intentional_skips": 13,
+  "assertions": {
+    "exact_public_implementation_ci_passed": true,
+    "disposable_004_pass_proves_only_generated_grid_method": true,
+    "execution_gate_public_ci_passed": false,
+    "protected_data_preflight_started": false,
+    "real_radar_attempt_started": false,
+    "baseline_or_change_analysis_authorized": false
+  }
+}
