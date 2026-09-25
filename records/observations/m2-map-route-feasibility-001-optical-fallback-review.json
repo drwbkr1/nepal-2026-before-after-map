@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-MAP-ROUTE-FEASIBILITY-001-OPTICAL-FALLBACK-REVIEW",
+  "status": "metadata_candidates_only_no_adoption",
+  "catalog_ref": "records/observations/m2-map-route-feasibility-001-optical-fallback-catalog.json",
+  "catalog_sha256": "0ffd82483be80f5f75bd8a41da7379f58dbb6ed33db3ca451e89013e7f05072c",
+  "catalog_rows": {
+    "before": 41,
+    "after": 44
+  },
+  "source_aoi_footprint_intersections": {
+    "before": 14,
+    "after": 15
+  },
+  "upper_corridor_aoi_footprint_intersections": {
+    "before": 14,
+    "after": 15
+  },
+  "source_aoi_intersecting_tile_cloud_percent_range": {
+    "before": [
+      18.746611,
+      99.55588
+    ],
+    "after": [
+      53.709519,
+      92.579216
+    ]
+  },
+  "rights": {
+    "cdse_terms_ref": "https://dataspace.copernicus.eu/terms-and-conditions",
+    "sentinel_legal_notice_ref": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+    "finding": "Public Sentinel catalog metadata and official terms/legal-notice references are identified. No new product rights or current-terms adoption gate has been completed.",
+    "third_party_quicklooks_published": false
+  },
+  "comparability": {
+    "same_product_level": "S2MSI2A metadata filter for both windows",
+    "same_aoi_search": "approved AOI-OVERVIEW, with exact footprint intersection flags for source and upper corridor",
+    "pixel_coverage": "unknown",
+    "aoi_cloud_snow_shadow_fitness": "unknown",
+    "co_registration": "unknown",
+    "new_source_or_date_selected": false,
+    "note": "Tile-level cloud percentages and footprint intersections do not establish clear AOI pixels or a valid before/after pair."
+  },
+  "later_owner_decision_required_for": [
+    "exact product/date selection",
+    "current source and terms review",
+    "acquisition",
+    "pixel inspection and processing"
+  ],
+  "scientific_claim_authorized": false
+}

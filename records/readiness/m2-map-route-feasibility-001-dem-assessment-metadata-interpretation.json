@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-MAP-ROUTE-FEASIBILITY-001-DEM-ASSESSMENT-METADATA-INTERPRETATION",
+  "status": "preserved_receipt_helper_label_corrected_by_code_trace_no_new_read",
+  "checked_at_utc": "2026-09-25T18:58:35Z",
+  "preserved_assessment_sha256": "42935116177572860ace0968e43eb24d7aca3188cd3b27b91b87c13bb0f175c4",
+  "runner_sha256": "fb38dcfabe0c6b10f9a811ea3ac1265cffa743f3b27f173334d5a84fdf425328",
+  "reused_helper_sha256": "dc39afe0facdc582afd87a9321499f6b3093f78e94bfde1480ca1bad6ba75cb1",
+  "finding": "The runner buffered its densified EPSG:32645 maximum-processing-extent polygon by 0.001 WGS84 degree before passing it to scan_dem_validity. That helper scanned the passed polygon without applying another buffer, but returned its older hard-coded conservative_buffer_degrees value of 0.005. The nested 0.005 label is not the buffer applied in this assessment.",
+  "actual_method": {
+    "maximum_processing_extent_bounds_32645_m": [270300.0, 3067230.0, 370820.0, 3152210.0],
+    "polygon_buffer_applied_degrees": 0.001,
+    "helper_applied_additional_buffer": false,
+    "dem_grid_cells_scanned": 10218452,
+    "invalid_dem_cells": 0
+  },
+  "limits": {
+    "does_not_establish_0p005_degree_processing_extent_scan": true,
+    "does_not_change_dem_validity_predicate": true,
+    "does_not_mutate_or_reconstruct_preserved_assessment": true,
+    "additional_dem_read_performed": false,
+    "radar_geoprocessing_started": false,
+    "baseline_or_change_analysis_authorized": false
+  }
+}

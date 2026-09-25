@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 import datetime
+import json
 from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
@@ -22,6 +23,7 @@ import validate_m2_map_route_feasibility_001_arcgis as validator  # noqa: E402
 import validate_m2_map_route_feasibility_001_crf_arcgis as crf_validator  # noqa: E402
 import validate_m2_map_route_feasibility_001_crf_resource_arcgis as resource_validator  # noqa: E402
 import m2_map_route_feasibility_001 as runner  # noqa: E402
+import m2_map_route_feasibility_001_optical_fallback as optical_fallback  # noqa: E402
 
 
 def grid(bounds, bands=2):
@@ -328,6 +330,63 @@ class MapRouteCoreTests(unittest.TestCase):
                                   before_materialization=before)
             self.assertEqual(stages, ["ProjectRaster", "Clip"])
             self.assertFalse((root / "guarded_final.tif").exists())
+
+
+class OpticalFallbackMetadataTests(unittest.TestCase):
+    def test_bounded_two_window_inventory_without_download(self):
+        aoi = optical_fallback.AOI.read_bytes()
+        rectangle = {"type": "Polygon", "coordinates": [[[85.48, 28.24], [85.54, 28.24],
+                     [85.54, 28.30], [85.48, 28.30], [85.48, 28.24]]]}
+        urls = []
+
+        def fetch(url):
+            urls.append(url)
+            window = "before" if "2026-08-01" in url else "after"
+            date = "2026-08-20" if window == "before" else "2026-09-10"
+            item = {"Id": window, "Name": f"S2A_MSIL2A_{date.replace('-', '')}T000000_N0000_R000_T00AAA_0000.SAFE",
+                    "GeoFootprint": rectangle, "ContentDate": {"Start": date + "T00:00:00.000Z",
+                    "End": date + "T00:10:00.000Z"}, "Online": True,
+                    "Attributes": [{"Name": "productType", "Value": "S2MSI2A"},
+                                   {"Name": "cloudCover", "Value": 35.0}]}
+            return json.dumps({"@odata.count": 1, "value": [item]}).encode()
+
+        with tempfile.TemporaryDirectory() as directory, mock.patch.object(optical_fallback, "OUTPUT", Path(directory) / "inventory.json"), mock.patch.object(optical_fallback, "AOI", Path(directory) / "aoi.json"):
+            optical_fallback.AOI.write_bytes(aoi)
+            result = optical_fallback.run(fetch=fetch)
+            self.assertEqual(result["row_count"], 2)
+            self.assertEqual([row["window"] for row in result["rows"]], ["before", "after"])
+            self.assertTrue(all(row["aoi_footprint_intersects"]["AOI-SOURCE"] for row in result["rows"]))
+            self.assertEqual(len(urls), 2)
+            self.assertTrue(all("%24top=100" in url and "S2MSI2A" in url for url in urls))
+            self.assertTrue(all(row["pixel_fitness"] == "not_inspected" for row in result["rows"]))
+            with self.assertRaises(FileExistsError):
+                optical_fallback.run(fetch=fetch)
+
+    def test_hard_200_row_cap_marks_incomplete_search_without_selection(self):
+        aoi = optical_fallback.AOI.read_bytes()
+        rectangle = {"type": "Polygon", "coordinates": [[[85.48, 28.24], [85.54, 28.24],
+                     [85.54, 28.30], [85.48, 28.30], [85.48, 28.24]]]}
+        calls = []
+
+        def fetch(url):
+            window = "before" if "2026-08-01" in url else "after"
+            calls.append(window)
+            date = "2026-08-20" if window == "before" else "2026-09-10"
+            values = [{"Id": f"{window}-{i}",
+                       "Name": f"S2A_MSIL2A_{date.replace('-', '')}T000000_N0000_R000_T00AAA_{i:04d}.SAFE",
+                       "GeoFootprint": rectangle,
+                       "ContentDate": {"Start": date + "T00:00:00.000Z"},
+                       "Attributes": [{"Name": "productType", "Value": "S2MSI2A"}]}
+                      for i in range(100)]
+            return json.dumps({"@odata.count": 101, "value": values}).encode()
+
+        with tempfile.TemporaryDirectory() as directory, mock.patch.object(optical_fallback, "OUTPUT", Path(directory) / "inventory.json"), mock.patch.object(optical_fallback, "AOI", Path(directory) / "aoi.json"):
+            optical_fallback.AOI.write_bytes(aoi)
+            result = optical_fallback.run(fetch=fetch)
+            self.assertEqual(result["row_count"], 200)
+            self.assertEqual(result["status"], "catalog_metadata_inventory_truncated_at_200_maximum")
+            self.assertEqual(calls, ["before", "after"])
+            self.assertTrue(all(row["source_adoption"] == "not_authorized" for row in result["rows"]))
 
 
 if __name__ == "__main__":

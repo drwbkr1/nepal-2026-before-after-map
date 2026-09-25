@@ -1,0 +1,5801 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-MAP-ROUTE-FEASIBILITY-001-OPTICAL-FALLBACK-CATALOG",
+  "status": "catalog_metadata_inventory_complete",
+  "retrieved_at_utc": "2026-09-25T20:03:53Z",
+  "catalog_endpoint": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products",
+  "request_authentication": "none",
+  "approved_aoi_ref": "config/aoi/approved-study-areas.geojson",
+  "approved_aoi_sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98",
+  "geometry_query": "approved AOI-OVERVIEW polygon; per-row exact footprint intersects all approved AOIs",
+  "requests": [
+    {
+      "window": "before",
+      "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+Attributes%2FOData.CSC.StringAttribute%2Fany%28att%3Aatt%2FName+eq+%27productType%27+and+att%2FOData.CSC.StringAttribute%2FValue+eq+%27S2MSI2A%27%29+and+OData.CSC.Intersects%28area%3Dgeography%27SRID%3D4326%3BPOLYGON%28%2884.70000000+27.75000000%2C85.65000000+27.75000000%2C85.65000000+28.45000000%2C84.70000000+28.45000000%2C84.70000000+27.75000000%29%29%27%29+and+ContentDate%2FStart+ge+2026-08-01T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2026-08-26T00%3A00%3A00.000Z&%24orderby=ContentDate%2FStart+asc&%24top=100&%24count=true&%24expand=Attributes",
+      "response_sha256": "cb208611625f113b3dfdfe23785a0b298d8d80bc3327ce269198da6ecf27e160",
+      "returned_rows": 41,
+      "reported_total_rows": 41
+    },
+    {
+      "window": "after",
+      "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-2%27+and+Attributes%2FOData.CSC.StringAttribute%2Fany%28att%3Aatt%2FName+eq+%27productType%27+and+att%2FOData.CSC.StringAttribute%2FValue+eq+%27S2MSI2A%27%29+and+OData.CSC.Intersects%28area%3Dgeography%27SRID%3D4326%3BPOLYGON%28%2884.70000000+27.75000000%2C85.65000000+27.75000000%2C85.65000000+28.45000000%2C84.70000000+28.45000000%2C84.70000000+27.75000000%29%29%27%29+and+ContentDate%2FStart+ge+2026-08-27T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2026-09-25T00%3A00%3A00.000Z&%24orderby=ContentDate%2FStart+asc&%24top=100&%24count=true&%24expand=Attributes",
+      "response_sha256": "10e6f7b6a6a99e943fef221b9ea4bd97af01380562f696b355008d6ff7c75307",
+      "returned_rows": 44,
+      "reported_total_rows": 44
+    }
+  ],
+  "row_count": 85,
+  "rights_review": {
+    "cdse_terms": "https://dataspace.copernicus.eu/terms-and-conditions",
+    "sentinel_legal_notice": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+    "status": "public Sentinel metadata only; any new product adoption or acquisition requires later exact source and current-terms review",
+    "third_party_quicklooks_published": false
+  },
+  "comparability_review": "Catalog footprint and cloud percentage are tile-level metadata, not AOI clear-pixel, registration, or scientific suitability evidence. No date or product selected.",
+  "rows": [
+    {
+      "window": "before",
+      "provider_product_id": "17cde44c-add5-498c-aad2-985b63557bc9",
+      "name": "S2C_MSIL2A_20260802T045701_N0512_R119_T45RTM_20260802T095114.SAFE",
+      "content_start_utc": "2026-08-02T04:57:01.025000Z",
+      "content_end_utc": "2026-08-02T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 96.754676,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "65f81228-0b3f-4863-9f0b-66f874c083cc",
+      "name": "S2C_MSIL2A_20260802T045701_N0512_R119_T45RTL_20260802T095114.SAFE",
+      "content_start_utc": "2026-08-02T04:57:01.025000Z",
+      "content_end_utc": "2026-08-02T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 99.898118,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "a47be9fa-0bd9-4fbf-949d-8740978653a5",
+      "name": "S2C_MSIL2A_20260802T045701_N0512_R119_T45RUL_20260802T095114.SAFE",
+      "content_start_utc": "2026-08-02T04:57:01.025000Z",
+      "content_end_utc": "2026-08-02T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 99.914879,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.86545875614227,
+              28.020041758616586
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.60001825974298,
+              27.026135760046042
+            ],
+            [
+              85.60422760366441,
+              27.041551060689525
+            ],
+            [
+              85.64437719890297,
+              27.189424731167914
+            ],
+            [
+              85.68410088384162,
+              27.33747487177148
+            ],
+            [
+              85.72448367080077,
+              27.48534982488672
+            ],
+            [
+              85.7630599013603,
+              27.63378064897216
+            ],
+            [
+              85.79599086790358,
+              27.75115634894569
+            ],
+            [
+              85.80497976403491,
+              27.78336191058855
+            ],
+            [
+              85.84278074858393,
+              27.929683619910968
+            ],
+            [
+              85.86545875614227,
+              28.020041758616586
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "d0d56cf1-ea40-481d-8f89-a10234165ee5",
+      "name": "S2C_MSIL2A_20260802T045701_N0512_R119_T45RUM_20260802T095114.SAFE",
+      "content_start_utc": "2026-08-02T04:57:01.025000Z",
+      "content_end_utc": "2026-08-02T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 99.55588,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07588565021432,
+              28.777691276251762
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.84324331871937,
+              27.931526682020863
+            ],
+            [
+              85.87993512476227,
+              28.07772132858563
+            ],
+            [
+              85.88081022818758,
+              28.08125266293516
+            ],
+            [
+              85.92114091461802,
+              28.22907713858978
+            ],
+            [
+              85.95038224975798,
+              28.32970899569868
+            ],
+            [
+              85.9630792662442,
+              28.373483485460977
+            ],
+            [
+              86.00343456406218,
+              28.52135308869109
+            ],
+            [
+              86.03008388026035,
+              28.61506073582033
+            ],
+            [
+              86.04581000587137,
+              28.670381938587475
+            ],
+            [
+              86.05386094406106,
+              28.69909555798524
+            ],
+            [
+              86.07588565021432,
+              28.777691276251762
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "3270a598-3646-45ed-857a-c88b285e4f2e",
+      "name": "S2B_MSIL2A_20260804T044659_N0512_R076_T45RUL_20260804T083355.SAFE",
+      "content_start_utc": "2026-08-04T04:46:59.024000Z",
+      "content_end_utc": "2026-08-04T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 88.756734,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.081969765621,
+              27.0207528082395
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.3330640768928,
+              28.014323796104424
+            ],
+            [
+              85.29924987901478,
+              27.889624542381465
+            ],
+            [
+              85.26328602912045,
+              27.74133441039297
+            ],
+            [
+              85.22652640396096,
+              27.593279570428543
+            ],
+            [
+              85.18935289279884,
+              27.445346761745547
+            ],
+            [
+              85.1508829540546,
+              27.297853885431447
+            ],
+            [
+              85.11384741844755,
+              27.149885926944734
+            ],
+            [
+              85.081969765621,
+              27.0207528082395
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "92a48f48-0b2b-48b9-a2c8-374767b9a500",
+      "name": "S2B_MSIL2A_20260804T044659_N0512_R076_T45RUM_20260804T083355.SAFE",
+      "content_start_utc": "2026-08-04T04:46:59.024000Z",
+      "content_end_utc": "2026-08-04T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 80.390173,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.30906107803116,
+              27.925806065890733
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.56341284435393,
+              28.91945116773709
+            ],
+            [
+              85.52727315548482,
+              28.7753148168558
+            ],
+            [
+              85.49262933061328,
+              28.626537247490766
+            ],
+            [
+              85.45294553340864,
+              28.479430248169702
+            ],
+            [
+              85.41243008713916,
+              28.33261570133493
+            ],
+            [
+              85.3765483418984,
+              28.18433920093039
+            ],
+            [
+              85.33910188286121,
+              28.03658988389103
+            ],
+            [
+              85.30906107803116,
+              27.925806065890733
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "1058c8ec-ce88-4858-8ebc-59031ff30982",
+      "name": "S2A_MSIL2A_20260804T050241_N0512_R119_T45RTM_20260804T114612.SAFE",
+      "content_start_utc": "2026-08-04T05:02:41.024000Z",
+      "content_end_utc": "2026-08-04T05:02:41.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 87.472838,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "7c3cd477-99b7-4e81-a43c-1dfc5b6dd5b1",
+      "name": "S2A_MSIL2A_20260804T050241_N0512_R119_T45RTL_20260804T114612.SAFE",
+      "content_start_utc": "2026-08-04T05:02:41.024000Z",
+      "content_end_utc": "2026-08-04T05:02:41.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 91.352266,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "dacdb44d-f63e-4ab6-9271-e4bfd17c28f3",
+      "name": "S2A_MSIL2A_20260804T050241_N0512_R119_T45RUL_20260804T114612.SAFE",
+      "content_start_utc": "2026-08-04T05:02:41.024000Z",
+      "content_end_utc": "2026-08-04T05:02:41.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 81.200576,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87004340022426,
+              28.02009099806997
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.60368690278119,
+              27.026173880277824
+            ],
+            [
+              85.61183526433416,
+              27.056034655624465
+            ],
+            [
+              85.65207770480548,
+              27.203765336733383
+            ],
+            [
+              85.69157928054541,
+              27.351853655921488
+            ],
+            [
+              85.73214402523993,
+              27.49973888683052
+            ],
+            [
+              85.77160334503526,
+              27.647947206657072
+            ],
+            [
+              85.81238841542827,
+              27.79569846625016
+            ],
+            [
+              85.85104553983382,
+              27.944036477231737
+            ],
+            [
+              85.87004340022426,
+              28.02009099806997
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "e152354b-045f-4313-9fa1-23d9abb716ba",
+      "name": "S2A_MSIL2A_20260804T050241_N0512_R119_T45RUM_20260804T114612.SAFE",
+      "content_start_utc": "2026-08-04T05:02:41.024000Z",
+      "content_end_utc": "2026-08-04T05:02:41.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 83.47609,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07600531033026,
+              28.763872070631706
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.84779817882239,
+              27.931575460516648
+            ],
+            [
+              85.85104553983382,
+              27.944036477231737
+            ],
+            [
+              85.88820365623553,
+              28.092792320263648
+            ],
+            [
+              85.92869084317545,
+              28.240578278579125
+            ],
+            [
+              85.97111492376891,
+              28.38776058454243
+            ],
+            [
+              86.01128164420349,
+              28.535478985694684
+            ],
+            [
+              86.0532222782211,
+              28.68274632477788
+            ],
+            [
+              86.07600531033026,
+              28.763872070631706
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "293f280e-f733-4a85-8b73-2e574ff3d182",
+      "name": "S2B_MSIL2A_20260807T045659_N0512_R119_T45RTM_20260807T084539.SAFE",
+      "content_start_utc": "2026-08-07T04:56:59.024000Z",
+      "content_end_utc": "2026-08-07T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 85.269511,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "39884223-9661-4616-91d5-33bd59ab4247",
+      "name": "S2B_MSIL2A_20260807T045659_N0512_R119_T45RUL_20260807T084539.SAFE",
+      "content_start_utc": "2026-08-07T04:56:59.024000Z",
+      "content_end_utc": "2026-08-07T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 77.507961,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87285217971002,
+              28.020121164591973
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.60724155347695,
+              27.026210816034997
+            ],
+            [
+              85.6377170328419,
+              27.139166112135875
+            ],
+            [
+              85.67810092285212,
+              27.28696713554708
+            ],
+            [
+              85.71697556748192,
+              27.43522828739316
+            ],
+            [
+              85.75782210632961,
+              27.58296369091183
+            ],
+            [
+              85.79947248932297,
+              27.7304866542008
+            ],
+            [
+              85.83724500929132,
+              27.87906138587697
+            ],
+            [
+              85.87285217971002,
+              28.020121164591973
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "66b0e633-e73c-43f5-b401-3d17322a21c0",
+      "name": "S2B_MSIL2A_20260807T045659_N0512_R119_T45RUM_20260807T084539.SAFE",
+      "content_start_utc": "2026-08-07T04:56:59.024000Z",
+      "content_end_utc": "2026-08-07T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 63.177466,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07608161259039,
+              28.75506014015887
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.8505082586222,
+              27.931604483058088
+            ],
+            [
+              85.87475013627486,
+              28.02764002469508
+            ],
+            [
+              85.91515807756677,
+              28.175378368238256
+            ],
+            [
+              85.95496690321512,
+              28.323206829778737
+            ],
+            [
+              85.99622893430234,
+              28.47066725435372
+            ],
+            [
+              86.03842147479193,
+              28.617936204035328
+            ],
+            [
+              86.07608161259039,
+              28.75506014015887
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "815c9247-87c1-44ed-bbdb-f7217827d9cd",
+      "name": "S2B_MSIL2A_20260807T045659_N0512_R119_T45RTL_20260807T084539.SAFE",
+      "content_start_utc": "2026-08-07T04:56:59.024000Z",
+      "content_end_utc": "2026-08-07T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 84.710813,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "1e3e2b4a-b2d2-496e-af28-a47221141acd",
+      "name": "S2C_MSIL2A_20260809T044701_N0512_R076_T45RUM_20260809T095114.SAFE",
+      "content_start_utc": "2026-08-09T04:47:01.025000Z",
+      "content_end_utc": "2026-08-09T04:47:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 79.045314,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.30736857545601,
+              27.92578794069526
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.56248496177544,
+              28.919440909736576
+            ],
+            [
+              85.55277742119952,
+              28.88044399134232
+            ],
+            [
+              85.51507200946371,
+              28.732664852034205
+            ],
+            [
+              85.48197150712117,
+              28.597379441586096
+            ],
+            [
+              85.4791348772385,
+              28.585701986935465
+            ],
+            [
+              85.4789488107265,
+              28.58502534743423
+            ],
+            [
+              85.47881088743958,
+              28.58446163972108
+            ],
+            [
+              85.43860981906305,
+              28.437445699052866
+            ],
+            [
+              85.39953273537407,
+              28.290045127661905
+            ],
+            [
+              85.36191725523331,
+              28.14216710593948
+            ],
+            [
+              85.32559122251367,
+              27.993919448946148
+            ],
+            [
+              85.30736857545601,
+              27.92578794069526
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "ab1afc14-1334-44c3-9ff1-9fedef1f34d5",
+      "name": "S2C_MSIL2A_20260809T044701_N0512_R076_T45RUL_20260809T095114.SAFE",
+      "content_start_utc": "2026-08-09T04:47:01.025000Z",
+      "content_end_utc": "2026-08-09T04:47:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 93.42283,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.12329879266947,
+              27.021182250971865
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.33058449933021,
+              28.014297165238077
+            ],
+            [
+              85.32559122251367,
+              27.993919448946148
+            ],
+            [
+              85.28620089887734,
+              27.846645446912195
+            ],
+            [
+              85.25016986143957,
+              27.69832808632558
+            ],
+            [
+              85.21378859342593,
+              27.55018260189137
+            ],
+            [
+              85.17590322395105,
+              27.40253845836135
+            ],
+            [
+              85.13823860757414,
+              27.254838483062667
+            ],
+            [
+              85.10133612415616,
+              27.106898741840048
+            ],
+            [
+              85.08185206891139,
+              27.027932981765836
+            ],
+            [
+              85.12329879266947,
+              27.021182250971865
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "94d101c3-8eb1-41a5-bfd0-4321174a6d56",
+      "name": "S2A_MSIL2A_20260811T045241_N0512_R076_T45RUL_20260811T100012.SAFE",
+      "content_start_utc": "2026-08-11T04:52:41.024000Z",
+      "content_end_utc": "2026-08-11T04:52:41.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 13.369124,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.08386564385282,
+              27.020772507980485
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.33404909368407,
+              28.014334375265538
+            ],
+            [
+              85.31759193959718,
+              27.95619352991156
+            ],
+            [
+              85.28271904569665,
+              27.80741666734384
+            ],
+            [
+              85.24491975083171,
+              27.659689083007347
+            ],
+            [
+              85.20770629522234,
+              27.51188235901712
+            ],
+            [
+              85.16940236359562,
+              27.364491699226683
+            ],
+            [
+              85.13229572211806,
+              27.21673432142815
+            ],
+            [
+              85.09568885186893,
+              27.06881581590987
+            ],
+            [
+              85.08386564385282,
+              27.020772507980485
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "d4e93b61-28a1-4be0-8154-7b5e767856c9",
+      "name": "S2A_MSIL2A_20260811T045241_N0512_R076_T45RUM_20260811T100012.SAFE",
+      "content_start_utc": "2026-08-11T04:52:41.024000Z",
+      "content_end_utc": "2026-08-11T04:52:41.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 61.064899,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.31047274382273,
+              27.92582118357433
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.56608444807215,
+              28.919480703060792
+            ],
+            [
+              85.54670288681406,
+              28.842411957442227
+            ],
+            [
+              85.51029311089388,
+              28.694192667068567
+            ],
+            [
+              85.47198173578286,
+              28.54656316267648
+            ],
+            [
+              85.4334991532897,
+              28.39897993802412
+            ],
+            [
+              85.39510318598914,
+              28.25135592924337
+            ],
+            [
+              85.35911820039088,
+              28.10290005609393
+            ],
+            [
+              85.31759193959718,
+              27.95619352991156
+            ],
+            [
+              85.31047274382273,
+              27.92582118357433
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "25faa527-2502-4f7d-a703-cfff3e99d483",
+      "name": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUM_20260812T100317.SAFE",
+      "content_start_utc": "2026-08-12T04:57:01.025000Z",
+      "content_end_utc": "2026-08-12T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 18.746611,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07604033874381,
+              28.759826739022365
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.84856889358903,
+              27.93158371418551
+            ],
+            [
+              85.8569692544807,
+              27.964245323992664
+            ],
+            [
+              85.86629555517366,
+              28.001409104559695
+            ],
+            [
+              85.8934599034619,
+              28.110324656468123
+            ],
+            [
+              85.93122662803566,
+              28.245795298991247
+            ],
+            [
+              85.93536068405822,
+              28.26066227241861
+            ],
+            [
+              85.9503570205109,
+              28.311424182498495
+            ],
+            [
+              85.9778960012283,
+              28.404970168354108
+            ],
+            [
+              86.01811647852264,
+              28.55291024012904
+            ],
+            [
+              86.05589230244709,
+              28.68905629574412
+            ],
+            [
+              86.05982409329533,
+              28.703344958967968
+            ],
+            [
+              86.075641188383,
+              28.75843159425008
+            ],
+            [
+              86.07604033874381,
+              28.759826739022365
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "3af134a8-03e0-44b7-b770-8a96384dd8d7",
+      "name": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RTL_20260812T100317.SAFE",
+      "content_start_utc": "2026-08-12T04:57:01.025000Z",
+      "content_end_utc": "2026-08-12T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 16.107024,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "d3bfdd84-3c6d-41a6-8ccc-915c139c3b98",
+      "name": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RTM_20260812T100317.SAFE",
+      "content_start_utc": "2026-08-12T04:57:01.025000Z",
+      "content_end_utc": "2026-08-12T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 19.043779,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "d5883e5c-6124-4672-8e68-dd7c84307c8c",
+      "name": "S2C_MSIL2A_20260812T045701_N0512_R119_T45RUL_20260812T100317.SAFE",
+      "content_start_utc": "2026-08-12T04:57:01.025000Z",
+      "content_end_utc": "2026-08-12T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 27.947062,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87095740659909,
+              28.020100814573386
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.60556087134167,
+              27.026193352359225
+            ],
+            [
+              85.61839575800268,
+              27.073209393031128
+            ],
+            [
+              85.6497397191664,
+              27.188382854687248
+            ],
+            [
+              85.6594077371371,
+              27.224060618309338
+            ],
+            [
+              85.6985401373765,
+              27.37216447034669
+            ],
+            [
+              85.72521161135603,
+              27.47300573052601
+            ],
+            [
+              85.7367997103997,
+              27.517379699549032
+            ],
+            [
+              85.77888056426282,
+              27.66463549819693
+            ],
+            [
+              85.80439421787534,
+              27.760695427156897
+            ],
+            [
+              85.81878849823764,
+              27.8157939683146
+            ],
+            [
+              85.8569692544807,
+              27.964245323992664
+            ],
+            [
+              85.86629555517366,
+              28.001409104559695
+            ],
+            [
+              85.87095740659909,
+              28.020100814573386
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "0c138ebc-5928-40b1-ad50-327f97706e89",
+      "name": "S2B_MSIL2A_20260814T044659_N0512_R076_T45RUL_20260814T083006.SAFE",
+      "content_start_utc": "2026-08-14T04:46:59.024000Z",
+      "content_end_utc": "2026-08-14T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 67.353016,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.0885818700879,
+              27.020821513467077
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.3400831607867,
+              28.01439918164102
+            ],
+            [
+              85.30524864811485,
+              27.887567222867315
+            ],
+            [
+              85.26926574643404,
+              27.73920712342732
+            ],
+            [
+              85.23272271713763,
+              27.59104967549672
+            ],
+            [
+              85.1949845409166,
+              27.443371573566555
+            ],
+            [
+              85.15684941417203,
+              27.2958265806909
+            ],
+            [
+              85.11994280312915,
+              27.14791558816584
+            ],
+            [
+              85.0885818700879,
+              27.020821513467077
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "23988b32-b424-4288-8bf5-fe2999e11531",
+      "name": "S2B_MSIL2A_20260814T044659_N0512_R076_T45RUM_20260814T083413.SAFE",
+      "content_start_utc": "2026-08-14T04:46:59.024000Z",
+      "content_end_utc": "2026-08-14T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 49.037722,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.08088441310429,
+              28.200398402341975
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.57002260284295,
+              28.91952424045938
+            ],
+            [
+              85.54824105602749,
+              28.8328392170678
+            ],
+            [
+              85.51176034803521,
+              28.684709073357627
+            ],
+            [
+              85.47363153780599,
+              28.53712290290608
+            ],
+            [
+              85.43502822389696,
+              28.389630906592664
+            ],
+            [
+              85.41245065569785,
+              28.310749244251507
+            ],
+            [
+              85.6847393374968,
+              28.26689214039031
+            ],
+            [
+              85.68502087273728,
+              28.268017328390915
+            ],
+            [
+              85.68506078192507,
+              28.26801085122662
+            ],
+            [
+              85.68591588300342,
+              28.27141382035828
+            ],
+            [
+              85.91771340145624,
+              28.234727615337505
+            ],
+            [
+              85.91759532710512,
+              28.23427991417061
+            ],
+            [
+              85.91812084708992,
+              28.234196322338303
+            ],
+            [
+              85.91683260923173,
+              28.22930995075435
+            ],
+            [
+              86.08088441310429,
+              28.200398402341975
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "50d37a02-f5e8-4358-a47c-f99c331e257d",
+      "name": "S2B_MSIL2A_20260814T044659_N0512_R076_T45RUM_20260814T083006.SAFE",
+      "content_start_utc": "2026-08-14T04:46:59.024000Z",
+      "content_end_utc": "2026-08-14T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 62.630904,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.31577071591575,
+              27.925877920137818
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07936408666673,
+              28.37597656792802
+            ],
+            [
+              85.96950791029728,
+              28.395656979312168
+            ],
+            [
+              85.96951992628063,
+              28.39570577379241
+            ],
+            [
+              85.96926584466911,
+              28.395751406640382
+            ],
+            [
+              85.97024354112611,
+              28.39971676090685
+            ],
+            [
+              85.71171357519182,
+              28.441658447617524
+            ],
+            [
+              85.71114303477657,
+              28.43936639428615
+            ],
+            [
+              85.71078904400412,
+              28.439422892737728
+            ],
+            [
+              85.71071169613289,
+              28.43911263982255
+            ],
+            [
+              85.71051937678759,
+              28.43914298295816
+            ],
+            [
+              85.71040610955276,
+              28.438687690742253
+            ],
+            [
+              85.71031442002125,
+              28.43870222146941
+            ],
+            [
+              85.71010407916489,
+              28.43785520208387
+            ],
+            [
+              85.70967876845027,
+              28.437923685657797
+            ],
+            [
+              85.70965026593984,
+              28.43780903648225
+            ],
+            [
+              85.70950939939411,
+              28.43783163406688
+            ],
+            [
+              85.7093730836193,
+              28.437280222985216
+            ],
+            [
+              85.70891280161865,
+              28.43735507893607
+            ],
+            [
+              85.70885890456346,
+              28.43713717688921
+            ],
+            [
+              85.70864861771425,
+              28.43717119994516
+            ],
+            [
+              85.70856400507537,
+              28.436828617778342
+            ],
+            [
+              85.70836895340733,
+              28.436860317499068
+            ],
+            [
+              85.70827497205366,
+              28.436480239758712
+            ],
+            [
+              85.70795267228176,
+              28.43653283149936
+            ],
+            [
+              85.70784435723971,
+              28.436094682892527
+            ],
+            [
+              85.45809106120164,
+              28.477029171806453
+            ],
+            [
+              85.41826362639452,
+              28.331087418417205
+            ],
+            [
+              85.38352571969466,
+              28.18228417631805
+            ],
+            [
+              85.34560631056348,
+              28.034508890405665
+            ],
+            [
+              85.31577071591575,
+              27.925877920137818
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "1455bf82-6c31-4b16-a398-ddf3b8cb66a0",
+      "name": "S2B_MSIL2A_20260817T045659_N0512_R119_T45RTL_20260817T084758.SAFE",
+      "content_start_utc": "2026-08-17T04:56:59.024000Z",
+      "content_end_utc": "2026-08-17T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 99.842429,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "69b3f37c-3dd6-4ce4-8625-43156326ace2",
+      "name": "S2B_MSIL2A_20260817T045659_N0512_R119_T45RTM_20260817T084758.SAFE",
+      "content_start_utc": "2026-08-17T04:56:59.024000Z",
+      "content_end_utc": "2026-08-17T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 97.329456,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "7a11071c-411b-4c1c-86cf-9aca4329e5a2",
+      "name": "S2B_MSIL2A_20260817T045659_N0512_R119_T45RUM_20260817T084758.SAFE",
+      "content_start_utc": "2026-08-17T04:56:59.024000Z",
+      "content_end_utc": "2026-08-17T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 97.080457,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07632852287554,
+              28.726545175306537
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.85773794312611,
+              27.931681906541385
+            ],
+            [
+              85.8623499852915,
+              27.949943364874148
+            ],
+            [
+              85.89886442070362,
+              28.09891145523944
+            ],
+            [
+              85.94097212633852,
+              28.24633135122632
+            ],
+            [
+              85.98393065308363,
+              28.39346820039163
+            ],
+            [
+              86.0240191092911,
+              28.541290882220714
+            ],
+            [
+              86.06559419686435,
+              28.68865502644412
+            ],
+            [
+              86.07632852287554,
+              28.726545175306537
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "8bcb2c54-2e78-49ae-9de6-98c6fb86b8d8",
+      "name": "S2B_MSIL2A_20260817T045659_N0512_R119_T45RUL_20260817T084758.SAFE",
+      "content_start_utc": "2026-08-17T04:56:59.024000Z",
+      "content_end_utc": "2026-08-17T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 99.899292,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87956935751586,
+              28.020193307632425
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.6148558154952,
+              27.026289934507403
+            ],
+            [
+              85.62461478839614,
+              27.062044752233685
+            ],
+            [
+              85.66473001843633,
+              27.209787757037315
+            ],
+            [
+              85.7044110947504,
+              27.35765990927661
+            ],
+            [
+              85.74373619641817,
+              27.505670363271207
+            ],
+            [
+              85.78462875557736,
+              27.653339732640145
+            ],
+            [
+              85.82480705713371,
+              27.80129151095411
+            ],
+            [
+              85.8623499852915,
+              27.949943364874148
+            ],
+            [
+              85.87956935751586,
+              28.020193307632425
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "7d708f58-89b0-46a3-affa-5e70b48d250f",
+      "name": "S2C_MSIL2A_20260819T044701_N0512_R076_T45RUM_20260819T095714.SAFE",
+      "content_start_utc": "2026-08-19T04:47:01.025000Z",
+      "content_end_utc": "2026-08-19T04:47:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 84.667307,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.31416313868053,
+              27.92586070441711
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.56943042650488,
+              28.91951769378492
+            ],
+            [
+              85.55042593783358,
+              28.843925109205568
+            ],
+            [
+              85.51403681916102,
+              28.695676985708445
+            ],
+            [
+              85.47613997261587,
+              28.54789488090135
+            ],
+            [
+              85.43707091521482,
+              28.400516814472688
+            ],
+            [
+              85.39864527529174,
+              28.252939811718115
+            ],
+            [
+              85.36329896652211,
+              28.10440431370305
+            ],
+            [
+              85.3323621470559,
+              27.996013486579987
+            ],
+            [
+              85.32196461777994,
+              27.95929315029239
+            ],
+            [
+              85.31416313868053,
+              27.92586070441711
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "7e08d864-a4d2-430c-b0b4-be0acc9410cf",
+      "name": "S2C_MSIL2A_20260819T044701_N0512_R076_T45RUL_20260819T095714.SAFE",
+      "content_start_utc": "2026-08-19T04:47:01.025000Z",
+      "content_end_utc": "2026-08-19T04:47:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 93.616366,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.08804245607635,
+              27.020815908509896
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.33760217151715,
+              28.01437253561282
+            ],
+            [
+              85.3323621470559,
+              27.996013486579987
+            ],
+            [
+              85.32196461777994,
+              27.95929315029239
+            ],
+            [
+              85.30380510256556,
+              27.88147239325521
+            ],
+            [
+              85.2870677353616,
+              27.809119994378182
+            ],
+            [
+              85.24897354598586,
+              27.66146183400356
+            ],
+            [
+              85.21166661500833,
+              27.513605816993987
+            ],
+            [
+              85.17376390063481,
+              27.36596339662592
+            ],
+            [
+              85.1367192252931,
+              27.218076614868604
+            ],
+            [
+              85.10014728588708,
+              27.07002871028823
+            ],
+            [
+              85.08804245607635,
+              27.020815908509896
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "681bf159-5509-4be1-ac51-6c464803d999",
+      "name": "S2C_MSIL2A_20260822T045651_N0512_R119_T45RUL_20260822T095910.SAFE",
+      "content_start_utc": "2026-08-22T04:56:51.024000Z",
+      "content_end_utc": "2026-08-22T04:56:51.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 56.715876,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87627165848718,
+              28.02015789007444
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.6105589855311,
+              27.026245286894525
+            ],
+            [
+              85.6426633581961,
+              27.14618631603624
+            ],
+            [
+              85.68294618893533,
+              27.293887952976128
+            ],
+            [
+              85.72142971551644,
+              27.442146756472567
+            ],
+            [
+              85.76311026965125,
+              27.589438460261423
+            ],
+            [
+              85.80444019405921,
+              27.736909373028777
+            ],
+            [
+              85.84277581589862,
+              27.88542880727536
+            ],
+            [
+              85.86619556780666,
+              27.97938687648065
+            ],
+            [
+              85.87627165848718,
+              28.02015789007444
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "a0b62a46-ee5d-4181-b29c-3132d75279f7",
+      "name": "S2C_MSIL2A_20260822T045651_N0512_R119_T45RTM_20260822T095910.SAFE",
+      "content_start_utc": "2026-08-22T04:56:51.024000Z",
+      "content_end_utc": "2026-08-22T04:56:51.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 83.673549,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "cccc41ef-7316-40c3-9670-4b439adf5730",
+      "name": "S2C_MSIL2A_20260822T045651_N0512_R119_T45RTL_20260822T095910.SAFE",
+      "content_start_utc": "2026-08-22T04:56:51.024000Z",
+      "content_end_utc": "2026-08-22T04:56:51.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 68.685782,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "d3f7e073-b108-4dcc-b9bf-d0b38511daa1",
+      "name": "S2C_MSIL2A_20260822T045651_N0512_R119_T45RUM_20260822T095910.SAFE",
+      "content_start_utc": "2026-08-22T04:56:51.024000Z",
+      "content_end_utc": "2026-08-22T04:56:51.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 78.243607,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07618239704404,
+              28.743420830960247
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.8542955581907,
+              27.93164504166403
+            ],
+            [
+              85.86619556780666,
+              27.97938687648065
+            ],
+            [
+              85.88048694667795,
+              28.03721426417587
+            ],
+            [
+              85.90270215624211,
+              28.116722046578637
+            ],
+            [
+              85.92080705018253,
+              28.18210992853978
+            ],
+            [
+              85.96003540153642,
+              28.330347521568005
+            ],
+            [
+              86.00132245201213,
+              28.477961396245767
+            ],
+            [
+              86.01003186126343,
+              28.508113728045103
+            ],
+            [
+              86.04443071634249,
+              28.62799308955808
+            ],
+            [
+              86.06318756888723,
+              28.69590380732111
+            ],
+            [
+              86.07618239704404,
+              28.743420830960247
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "a7144f04-93ac-40a9-be0c-386db16f9765",
+      "name": "S2B_MSIL2A_20260824T044659_N0512_R076_T45RUM_20260824T083447.SAFE",
+      "content_start_utc": "2026-08-24T04:46:59.024000Z",
+      "content_end_utc": "2026-08-24T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 38.568816,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.31747805514154,
+              27.92589620422061
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.57229342380111,
+              28.91954934501797
+            ],
+            [
+              85.56377513332684,
+              28.88517476074006
+            ],
+            [
+              85.52625997221635,
+              28.73737283718152
+            ],
+            [
+              85.49145110496539,
+              28.588624388898893
+            ],
+            [
+              85.45066232727729,
+              28.441743037861134
+            ],
+            [
+              85.4117671256445,
+              28.29421493910846
+            ],
+            [
+              85.37288224663848,
+              28.146718725018378
+            ],
+            [
+              85.33748338978796,
+              27.998079342372662
+            ],
+            [
+              85.31747805514154,
+              27.92589620422061
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "ff8d35f3-3944-4dc0-a21c-667d5e0bdefa",
+      "name": "S2B_MSIL2A_20260824T044659_N0512_R076_T45RUL_20260824T083447.SAFE",
+      "content_start_utc": "2026-08-24T04:46:59.024000Z",
+      "content_end_utc": "2026-08-24T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 75.374717,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.09005006185309,
+              27.02083676919237
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.34137330199174,
+              28.014413037863356
+            ],
+            [
+              85.33748338978796,
+              27.998079342372662
+            ],
+            [
+              85.29678911637257,
+              27.851246489443305
+            ],
+            [
+              85.26110193212281,
+              27.70282371866096
+            ],
+            [
+              85.2242139270208,
+              27.55486385145492
+            ],
+            [
+              85.18666811379768,
+              27.407158749591137
+            ],
+            [
+              85.1493952858835,
+              27.259422049161515
+            ],
+            [
+              85.11243510305782,
+              27.1116126917928
+            ],
+            [
+              85.09005006185309,
+              27.02083676919237
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "35b149d6-cdde-4959-8ff4-d28f37bf67bb",
+      "name": "S2A_MSIL2A_20260824T050231_N0512_R119_T45RUM_20260824T115710.SAFE",
+      "content_start_utc": "2026-08-24T05:02:31.024000Z",
+      "content_end_utc": "2026-08-24T05:02:31.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 50.966662,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07612166566237,
+              28.750434525073413
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.85263704599703,
+              27.931627280475276
+            ],
+            [
+              85.88303388586763,
+              28.055367264137832
+            ],
+            [
+              85.92404985412972,
+              28.203152333996428
+            ],
+            [
+              85.96440346657916,
+              28.35116641627314
+            ],
+            [
+              86.00497134455635,
+              28.49909382360776
+            ],
+            [
+              86.04762132500947,
+              28.64636935527956
+            ],
+            [
+              86.07612166566237,
+              28.750434525073413
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "527db6f3-d1fc-41b5-b77f-b65161c290ec",
+      "name": "S2A_MSIL2A_20260824T050231_N0512_R119_T45RTM_20260824T115710.SAFE",
+      "content_start_utc": "2026-08-24T05:02:31.024000Z",
+      "content_end_utc": "2026-08-24T05:02:31.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 73.723817,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "58acf71b-d90b-4c1d-84e9-1ae1ffae0a19",
+      "name": "S2A_MSIL2A_20260824T050231_N0512_R119_T45RUL_20260824T115710.SAFE",
+      "content_start_utc": "2026-08-24T05:02:31.024000Z",
+      "content_end_utc": "2026-08-24T05:02:31.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 79.761755,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87437967937943,
+              28.020137570063678
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.60781153245142,
+              27.026216738587394
+            ],
+            [
+              85.64618778451302,
+              27.16766387782582
+            ],
+            [
+              85.68567357005118,
+              27.315499654090768
+            ],
+            [
+              85.72490291392974,
+              27.4633970087186
+            ],
+            [
+              85.7660924599904,
+              27.610806931719942
+            ],
+            [
+              85.80737108419929,
+              27.758234813351727
+            ],
+            [
+              85.84644498583688,
+              27.906420534434684
+            ],
+            [
+              85.87437967937943,
+              28.020137570063678
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "before",
+      "provider_product_id": "97e3dd1e-46d8-450a-93cd-1ba772075e28",
+      "name": "S2A_MSIL2A_20260824T050231_N0512_R119_T45RTL_20260824T115710.SAFE",
+      "content_start_utc": "2026-08-24T05:02:31.024000Z",
+      "content_end_utc": "2026-08-24T05:02:31.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 77.188253,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "2f35c992-1ea6-42f9-965c-011ea770d334",
+      "name": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUL_20260827T084453.SAFE",
+      "content_start_utc": "2026-08-27T04:56:59.024000Z",
+      "content_end_utc": "2026-08-27T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 54.286689,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87659957738256,
+              28.020161411950266
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.61166133848934,
+              27.0262567412524
+            ],
+            [
+              85.62538457335674,
+              27.07655523095373
+            ],
+            [
+              85.66543816597073,
+              27.224235701877745
+            ],
+            [
+              85.70399634961379,
+              27.37237609402516
+            ],
+            [
+              85.74401426383886,
+              27.520168008862484
+            ],
+            [
+              85.7859866603375,
+              27.66753620012581
+            ],
+            [
+              85.82453192440458,
+              27.81591334224957
+            ],
+            [
+              85.86263108044032,
+              27.96444800801939
+            ],
+            [
+              85.87659957738256,
+              28.020161411950266
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "3754c118-e70a-482e-93e2-a7ab17df12a2",
+      "name": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RTL_20260827T084453.SAFE",
+      "content_start_utc": "2026-08-27T04:56:59.024000Z",
+      "content_end_utc": "2026-08-27T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 84.982914,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "76de2c15-9281-45e3-8f0b-e97085fa6d69",
+      "name": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RUM_20260827T084453.SAFE",
+      "content_start_utc": "2026-08-27T04:56:59.024000Z",
+      "content_end_utc": "2026-08-27T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 78.471315,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07620966099518,
+              28.74027219497689
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.85421690035542,
+              27.931644199308657
+            ],
+            [
+              85.86263108044032,
+              27.96444800801939
+            ],
+            [
+              85.8999286249787,
+              28.113209408267966
+            ],
+            [
+              85.94191454032125,
+              28.260718047903893
+            ],
+            [
+              85.98499093002968,
+              28.407804555528468
+            ],
+            [
+              86.02529434713477,
+              28.55554567271025
+            ],
+            [
+              86.0655079376437,
+              28.703302426571373
+            ],
+            [
+              86.07620966099518,
+              28.74027219497689
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "b79284a4-0366-4c3b-a0bb-ca757ecfabcd",
+      "name": "S2B_MSIL2A_20260827T045659_N0512_R119_T45RTM_20260827T084453.SAFE",
+      "content_start_utc": "2026-08-27T04:56:59.024000Z",
+      "content_end_utc": "2026-08-27T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 85.923547,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "2bdadece-d47d-4569-9a2b-ed5477c09bf9",
+      "name": "S2C_MSIL2A_20260829T044701_N0512_R076_T45RUM_20260829T095112.SAFE",
+      "content_start_utc": "2026-08-29T04:47:01.025000Z",
+      "content_end_utc": "2026-08-29T04:47:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 82.618147,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.30891313619998,
+              27.925804481565457
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.56331271410424,
+              28.91945006076927
+            ],
+            [
+              85.54922948944622,
+              28.863326052340646
+            ],
+            [
+              85.51252043893801,
+              28.715209536688945
+            ],
+            [
+              85.47507885609932,
+              28.567306442804327
+            ],
+            [
+              85.43613304460001,
+              28.41989414745027
+            ],
+            [
+              85.3980624402247,
+              28.272219404280204
+            ],
+            [
+              85.36057601087552,
+              28.12434872986126
+            ],
+            [
+              85.32188483771577,
+              27.976837198805043
+            ],
+            [
+              85.30891313619998,
+              27.925804481565457
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "45cd8a4b-7ddd-48b6-a1af-571655079120",
+      "name": "S2C_MSIL2A_20260829T044701_N0512_R076_T45RUL_20260829T095112.SAFE",
+      "content_start_utc": "2026-08-29T04:47:01.025000Z",
+      "content_end_utc": "2026-08-29T04:47:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 66.546643,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.08169208838923,
+              27.020749922943676
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.33171348761469,
+              28.01430929066483
+            ],
+            [
+              85.32188483771577,
+              27.976837198805043
+            ],
+            [
+              85.28429889959709,
+              27.82896819720499
+            ],
+            [
+              85.24732605519,
+              27.68095649072916
+            ],
+            [
+              85.21147653052894,
+              27.532661867141087
+            ],
+            [
+              85.17254839113413,
+              27.38539430778896
+            ],
+            [
+              85.13532471343261,
+              27.237573975015327
+            ],
+            [
+              85.098673638171,
+              27.08955828037549
+            ],
+            [
+              85.08169208838923,
+              27.020749922943676
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "cb5d55e3-1322-45d2-b696-6cb55613a671",
+      "name": "S2A_MSIL2A_20260831T045231_N0512_R076_T45RUL_20260831T112507.SAFE",
+      "content_start_utc": "2026-08-31T04:52:31.024000Z",
+      "content_end_utc": "2026-08-31T04:52:31.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 90.919399,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.08090021352562,
+              27.020741694709685
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.33090561465075,
+              28.01430061404295
+            ],
+            [
+              85.30145960108035,
+              27.906960687576493
+            ],
+            [
+              85.2660752247763,
+              27.7584491566117
+            ],
+            [
+              85.22979066394417,
+              27.610293456757528
+            ],
+            [
+              85.19277484765585,
+              27.46245486800412
+            ],
+            [
+              85.15401166630073,
+              27.315243621689675
+            ],
+            [
+              85.11705795260039,
+              27.167420149647057
+            ],
+            [
+              85.08090021352562,
+              27.020741694709685
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "f00c63c9-8412-4eee-b3f0-41ac2c54fd16",
+      "name": "S2A_MSIL2A_20260831T045231_N0512_R076_T45RUM_20260831T112507.SAFE",
+      "content_start_utc": "2026-08-31T04:52:31.024000Z",
+      "content_end_utc": "2026-08-31T04:52:31.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 88.798189,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.30662219252457,
+              27.925779947598688
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.56277038477901,
+              28.919444065167433
+            ],
+            [
+              85.53106321106078,
+              28.793095762351346
+            ],
+            [
+              85.49473377168276,
+              28.644850283074685
+            ],
+            [
+              85.45667149323553,
+              28.49709437491345
+            ],
+            [
+              85.41733785074922,
+              28.3497201769584
+            ],
+            [
+              85.37880996361622,
+              28.202074263972207
+            ],
+            [
+              85.34179037455105,
+              28.05397896726079
+            ],
+            [
+              85.30662219252457,
+              27.925779947598688
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "5bd46a5c-7719-4702-9f1e-90f73d44c7ed",
+      "name": "S2C_MSIL2A_20260901T045701_N0512_R119_T45RTL_20260901T100104.SAFE",
+      "content_start_utc": "2026-09-01T04:57:01.025000Z",
+      "content_end_utc": "2026-09-01T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 84.803873,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "62108485-bf81-4a80-a365-9f97f0001e34",
+      "name": "S2C_MSIL2A_20260901T045701_N0512_R119_T45RUM_20260901T100104.SAFE",
+      "content_start_utc": "2026-09-01T04:57:01.025000Z",
+      "content_end_utc": "2026-09-01T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 87.864655,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07595948900199,
+              28.769163845190008
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.84550222769282,
+              27.931550872924504
+            ],
+            [
+              85.86509113060225,
+              28.007971249576407
+            ],
+            [
+              85.8775421282115,
+              28.05459008008376
+            ],
+            [
+              85.9051578082878,
+              28.15893345632037
+            ],
+            [
+              85.91402614799739,
+              28.191968910882725
+            ],
+            [
+              85.94340938483299,
+              28.304417630955147
+            ],
+            [
+              85.98569860469502,
+              28.448159815228816
+            ],
+            [
+              85.98740296270081,
+              28.45405790896313
+            ],
+            [
+              86.02833226215189,
+              28.59873653980689
+            ],
+            [
+              86.06499943430423,
+              28.72987240250639
+            ],
+            [
+              86.0703589623443,
+              28.74910669523508
+            ],
+            [
+              86.07595948900199,
+              28.769163845190008
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "a312693d-6ef3-47fb-a82e-4bc2ebc10686",
+      "name": "S2C_MSIL2A_20260901T045701_N0512_R119_T45RTM_20260901T100104.SAFE",
+      "content_start_utc": "2026-09-01T04:57:01.025000Z",
+      "content_end_utc": "2026-09-01T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 86.048871,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "d57dc918-3b5f-46b1-a34f-6a8c800dedd7",
+      "name": "S2C_MSIL2A_20260901T045701_N0512_R119_T45RUL_20260901T100104.SAFE",
+      "content_start_utc": "2026-09-01T04:57:01.025000Z",
+      "content_end_utc": "2026-09-01T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 91.558999,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.86832314903221,
+              28.020072522431107
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.60256025761126,
+              27.026162173503803
+            ],
+            [
+              85.62786475642774,
+              27.119396702333848
+            ],
+            [
+              85.66837857353964,
+              27.267048448755283
+            ],
+            [
+              85.70538434587945,
+              27.41584005917452
+            ],
+            [
+              85.70602901917131,
+              27.418056681801367
+            ],
+            [
+              85.70621733779505,
+              27.418818473217875
+            ],
+            [
+              85.7487987097043,
+              27.565966115126848
+            ],
+            [
+              85.79007778396593,
+              27.71355084669448
+            ],
+            [
+              85.79058578501133,
+              27.715551843196227
+            ],
+            [
+              85.82699238579745,
+              27.859340137287496
+            ],
+            [
+              85.86509113060225,
+              28.007971249576407
+            ],
+            [
+              85.86832314903221,
+              28.020072522431107
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "1693e90c-3ba4-41b2-9805-c1bafbef5b56",
+      "name": "S2B_MSIL2A_20260903T044659_N0512_R076_T45RUL_20260903T084603.SAFE",
+      "content_start_utc": "2026-09-03T04:46:59.024000Z",
+      "content_end_utc": "2026-09-03T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 89.604729,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.08181002569674,
+              27.020751148409726
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.33175329834484,
+              28.014309718235335
+            ],
+            [
+              85.32082767797057,
+              27.97341744765173
+            ],
+            [
+              85.28371359585587,
+              27.82538442104205
+            ],
+            [
+              85.2466516656734,
+              27.67740080611119
+            ],
+            [
+              85.21076516361485,
+              27.5290381684816
+            ],
+            [
+              85.17170630165882,
+              27.38176216292321
+            ],
+            [
+              85.13450941019931,
+              27.233961644139136
+            ],
+            [
+              85.09786268385896,
+              27.086010525066776
+            ],
+            [
+              85.08181002569674,
+              27.020751148409726
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "4c591fb0-cb0e-4204-b112-e633ec0025f3",
+      "name": "S2B_MSIL2A_20260903T044659_N0512_R076_T45RUM_20260903T084603.SAFE",
+      "content_start_utc": "2026-09-03T04:46:59.024000Z",
+      "content_end_utc": "2026-09-03T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 69.480759,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.30889033780437,
+              27.92580423741494
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.56343239081765,
+              28.919451383828694
+            ],
+            [
+              85.54838112134307,
+              28.859488317486186
+            ],
+            [
+              85.51182901725785,
+              28.711396861036224
+            ],
+            [
+              85.47438418574244,
+              28.56362626465179
+            ],
+            [
+              85.43559859786545,
+              28.41628312432436
+            ],
+            [
+              85.39754309070241,
+              28.268652645859984
+            ],
+            [
+              85.36018828930237,
+              28.12073583450578
+            ],
+            [
+              85.32082767797057,
+              27.97341744765173
+            ],
+            [
+              85.30889033780437,
+              27.92580423741494
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "24c85ccd-175b-4038-a352-a80df5614bab",
+      "name": "S2B_MSIL2A_20260906T045659_N0512_R119_T45RTL_20260906T084726.SAFE",
+      "content_start_utc": "2026-09-06T04:56:59.024000Z",
+      "content_end_utc": "2026-09-06T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 92.071611,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "8059d6a8-8196-4fe6-bfe0-512036dcf4f8",
+      "name": "S2B_MSIL2A_20260906T045659_N0512_R119_T45RTM_20260906T084726.SAFE",
+      "content_start_utc": "2026-09-06T04:56:59.024000Z",
+      "content_end_utc": "2026-09-06T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 93.717897,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "806d762d-9bc8-49a0-b785-e27f0bb7cb2c",
+      "name": "S2B_MSIL2A_20260906T045659_N0512_R119_T45RUM_20260906T084726.SAFE",
+      "content_start_utc": "2026-09-06T04:56:59.024000Z",
+      "content_end_utc": "2026-09-06T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 77.886385,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07600260096439,
+              28.764184967571246
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.84758707562581,
+              27.931573199789394
+            ],
+            [
+              85.86427463470265,
+              27.99774922285824
+            ],
+            [
+              85.90399274917104,
+              28.14577050470791
+            ],
+            [
+              85.94337760055636,
+              28.29382988478352
+            ],
+            [
+              85.98558152297296,
+              28.441000789214883
+            ],
+            [
+              86.0270936588522,
+              28.58841301593256
+            ],
+            [
+              86.06805725366446,
+              28.736031401728585
+            ],
+            [
+              86.07600260096439,
+              28.764184967571246
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "a67d9951-6d09-4bc0-8865-086132383fef",
+      "name": "S2B_MSIL2A_20260906T045659_N0512_R119_T45RUL_20260906T084726.SAFE",
+      "content_start_utc": "2026-09-06T04:56:59.024000Z",
+      "content_end_utc": "2026-09-06T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 96.753353,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87027019100142,
+              28.020093433821515
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.6043878153014,
+              27.02618116333792
+            ],
+            [
+              85.62696732392412,
+              27.10902609075094
+            ],
+            [
+              85.66728276675434,
+              27.256778769245265
+            ],
+            [
+              85.70470881873409,
+              27.40552340589736
+            ],
+            [
+              85.70480644296035,
+              27.405854317242365
+            ],
+            [
+              85.7048447891637,
+              27.40600673807812
+            ],
+            [
+              85.72013302714399,
+              27.45780597699014
+            ],
+            [
+              85.74806294659597,
+              27.552478452916173
+            ],
+            [
+              85.78707645814512,
+              27.700804976802488
+            ],
+            [
+              85.826756132447,
+              27.848966212752007
+            ],
+            [
+              85.86427463470265,
+              27.99774922285824
+            ],
+            [
+              85.87027019100142,
+              28.020093433821515
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "212dc0e4-d139-4749-86ac-74f052afb7ff",
+      "name": "S2C_MSIL2A_20260908T044701_N0512_R076_T45RUM_20260908T094920.SAFE",
+      "content_start_utc": "2026-09-08T04:47:01.025000Z",
+      "content_end_utc": "2026-09-08T04:47:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 62.746352,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.30140477726556,
+              27.92572407372716
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.55744498319378,
+              28.919385191368676
+            ],
+            [
+              85.54850007601101,
+              28.883605475126185
+            ],
+            [
+              85.51056318631642,
+              28.735866036188977
+            ],
+            [
+              85.49278680031334,
+              28.663559574287657
+            ],
+            [
+              85.47452281867382,
+              28.58892323531153
+            ],
+            [
+              85.46444087281044,
+              28.55170050796072
+            ],
+            [
+              85.43449378596614,
+              28.44051858371067
+            ],
+            [
+              85.40986697642063,
+              28.35035297268734
+            ],
+            [
+              85.39481585342652,
+              28.294868978954725
+            ],
+            [
+              85.37851135480682,
+              28.229741163172275
+            ],
+            [
+              85.35758173658972,
+              28.145431399767453
+            ],
+            [
+              85.3205675327381,
+              27.997388384336222
+            ],
+            [
+              85.30140477726556,
+              27.92572407372716
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "64e997ac-7dd0-48f6-95f3-238056996ef6",
+      "name": "S2C_MSIL2A_20260908T044701_N0512_R076_T45RUL_20260908T094920.SAFE",
+      "content_start_utc": "2026-09-08T04:47:01.025000Z",
+      "content_end_utc": "2026-09-08T04:47:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 56.559694,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.07478098787745,
+              27.020678110900196
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.32477953410218,
+              28.01423481943551
+            ],
+            [
+              85.3205675327381,
+              27.997388384336222
+            ],
+            [
+              85.28117545950019,
+              27.850071064752328
+            ],
+            [
+              85.24563007438769,
+              27.70156799587688
+            ],
+            [
+              85.20901372609745,
+              27.55345629754417
+            ],
+            [
+              85.17127192891833,
+              27.40577844377632
+            ],
+            [
+              85.13361907868553,
+              27.25810069722233
+            ],
+            [
+              85.09684730921522,
+              27.110130552597926
+            ],
+            [
+              85.07478098787745,
+              27.020678110900196
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "67aa8490-0b44-41b1-894d-e958eb6adffc",
+      "name": "S2C_MSIL2A_20260911T045651_N0512_R119_T45RTL_20260911T100115.SAFE",
+      "content_start_utc": "2026-09-11T04:56:51.025000Z",
+      "content_end_utc": "2026-09-11T04:56:51.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 81.159705,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "7a348ed3-f83b-45a0-98fc-902d4ea24ae1",
+      "name": "S2C_MSIL2A_20260911T045651_N0512_R119_T45RUL_20260911T100115.SAFE",
+      "content_start_utc": "2026-09-11T04:56:51.025000Z",
+      "content_end_utc": "2026-09-11T04:56:51.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 68.960714,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.86881387527619,
+              28.020077792871206
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.60298322383746,
+              27.0261665684723
+            ],
+            [
+              85.63052839908286,
+              27.12750905712798
+            ],
+            [
+              85.67113145225987,
+              27.2752158670406
+            ],
+            [
+              85.70888210536955,
+              27.42393748177981
+            ],
+            [
+              85.75067958182889,
+              27.571359255777583
+            ],
+            [
+              85.77160591151835,
+              27.64637605552725
+            ],
+            [
+              85.79259299242,
+              27.722063968211828
+            ],
+            [
+              85.8017880051299,
+              27.757577120811145
+            ],
+            [
+              85.83007470555502,
+              27.867541778184968
+            ],
+            [
+              85.86776761635969,
+              28.01618333336553
+            ],
+            [
+              85.86881387527619,
+              28.020077792871206
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "8ed9c91a-f4c0-442e-9460-acfe7e0f115d",
+      "name": "S2C_MSIL2A_20260911T045651_N0512_R119_T45RTM_20260911T100115.SAFE",
+      "content_start_utc": "2026-09-11T04:56:51.025000Z",
+      "content_end_utc": "2026-09-11T04:56:51.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 72.43762,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "9464025c-b5ab-4a30-a9d7-f1e66ec6dbd6",
+      "name": "S2C_MSIL2A_20260911T045651_N0512_R119_T45RUM_20260911T100115.SAFE",
+      "content_start_utc": "2026-09-11T04:56:51.025000Z",
+      "content_end_utc": "2026-09-11T04:56:51.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 83.01723,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07596282664552,
+              28.7687783902542
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.84630848720836,
+              27.93155950724597
+            ],
+            [
+              85.86776761635969,
+              28.01618333336553
+            ],
+            [
+              85.9075148645734,
+              28.16413337344449
+            ],
+            [
+              85.90767223045843,
+              28.164710517822733
+            ],
+            [
+              85.90825453498444,
+              28.166884212149736
+            ],
+            [
+              85.9169551538112,
+              28.19875593386374
+            ],
+            [
+              85.94781219174467,
+              28.31192509990292
+            ],
+            [
+              85.95143280553881,
+              28.324738976435555
+            ],
+            [
+              85.99009784121523,
+              28.462106700462908
+            ],
+            [
+              86.03221776877984,
+              28.609440909097408
+            ],
+            [
+              86.07275522458205,
+              28.757321121663885
+            ],
+            [
+              86.07596282664552,
+              28.7687783902542
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "66771d95-0f3e-40bb-93e6-935d22b96975",
+      "name": "S2B_MSIL2A_20260913T044659_N0512_R076_T45RUL_20260913T084712.SAFE",
+      "content_start_utc": "2026-09-13T04:46:59.024000Z",
+      "content_end_utc": "2026-09-13T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 72.04743,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.08181796531461,
+              27.020751230908914
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.33272252856581,
+              28.014320127847387
+            ],
+            [
+              85.29712298065596,
+              27.881146719523723
+            ],
+            [
+              85.26102154361578,
+              27.73285867414023
+            ],
+            [
+              85.22438866484954,
+              27.58470513244149
+            ],
+            [
+              85.18676428985451,
+              27.436863198369192
+            ],
+            [
+              85.1488170279927,
+              27.2891711606758
+            ],
+            [
+              85.11157029721747,
+              27.141262526316943
+            ],
+            [
+              85.08181796531461,
+              27.020751230908914
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "bffbf5c6-d2f6-4cba-99e2-bf5e05d1ba8b",
+      "name": "S2B_MSIL2A_20260913T044659_N0512_R076_T45RUM_20260913T084712.SAFE",
+      "content_start_utc": "2026-09-13T04:46:59.024000Z",
+      "content_end_utc": "2026-09-13T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 83.087271,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.30906119418454,
+              27.925806067134634
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.56397753538798,
+              28.919457410553857
+            ],
+            [
+              85.5627208829931,
+              28.914593301432728
+            ],
+            [
+              85.52558226874552,
+              28.766571341870424
+            ],
+            [
+              85.49048759851186,
+              28.61797098105043
+            ],
+            [
+              85.45075425186282,
+              28.470944232371792
+            ],
+            [
+              85.41021889783235,
+              28.3241969208304
+            ],
+            [
+              85.37445057069128,
+              28.17591651040143
+            ],
+            [
+              85.33646471007145,
+              28.02831915578264
+            ],
+            [
+              85.30906119418454,
+              27.925806067134634
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "6c91d17f-0a3b-4b1b-b97b-c0e3a7a9e92d",
+      "name": "S2A_MSIL2A_20260913T050231_N0512_R119_T45RUM_20260913T101112.SAFE",
+      "content_start_utc": "2026-09-13T05:02:31.024000Z",
+      "content_end_utc": "2026-09-13T05:02:31.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 87.112558,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07585915644171,
+              28.780750966513637
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.84281379071442,
+              27.93152208215841
+            ],
+            [
+              85.86257267577008,
+              28.008730749989567
+            ],
+            [
+              85.90151329228382,
+              28.1568273690554
+            ],
+            [
+              85.94041644693317,
+              28.304893868697192
+            ],
+            [
+              85.98366381917452,
+              28.45171637166281
+            ],
+            [
+              86.02515415625686,
+              28.59905469257963
+            ],
+            [
+              86.06637132681283,
+              28.746567345141948
+            ],
+            [
+              86.07585915644171,
+              28.780750966513637
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "cb206fd9-ccbb-48bc-8d62-20b399a470b0",
+      "name": "S2A_MSIL2A_20260913T050231_N0512_R119_T45RTL_20260913T101112.SAFE",
+      "content_start_utc": "2026-09-13T05:02:31.024000Z",
+      "content_end_utc": "2026-09-13T05:02:31.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 41.834709,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "dbd2d73d-9e2d-4ee1-ac72-28eae18b4520",
+      "name": "S2A_MSIL2A_20260913T050231_N0512_R119_T45RTM_20260913T101112.SAFE",
+      "content_start_utc": "2026-09-13T05:02:31.024000Z",
+      "content_end_utc": "2026-09-13T05:02:31.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 75.948691,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "e26f5501-870f-4601-8826-71da689d55a5",
+      "name": "S2A_MSIL2A_20260913T050231_N0512_R119_T45RUL_20260913T101112.SAFE",
+      "content_start_utc": "2026-09-13T05:02:31.024000Z",
+      "content_end_utc": "2026-09-13T05:02:31.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 62.546724,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.86554704870514,
+              28.02004270688595
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.59907250735537,
+              27.02612593289746
+            ],
+            [
+              85.6246655753704,
+              27.12020774232279
+            ],
+            [
+              85.66547478194201,
+              27.268013636198383
+            ],
+            [
+              85.70272350381529,
+              27.41686301414532
+            ],
+            [
+              85.74539997763377,
+              27.56414776144244
+            ],
+            [
+              85.78695956929141,
+              27.711678166209808
+            ],
+            [
+              85.82457778488208,
+              27.860264128437382
+            ],
+            [
+              85.86257267577008,
+              28.008730749989567
+            ],
+            [
+              85.86554704870514,
+              28.02004270688595
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "12680f4c-519e-4ff9-a7b7-289c9110fd63",
+      "name": "S2B_MSIL2A_20260916T045659_N0512_R119_T45RUL_20260916T084937.SAFE",
+      "content_start_utc": "2026-09-16T04:56:59.024000Z",
+      "content_end_utc": "2026-09-16T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 63.21395,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87014326614901,
+              28.020092070638192
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.60413461865822,
+              27.026178532415635
+            ],
+            [
+              85.62207558320345,
+              27.09179177952918
+            ],
+            [
+              85.66231238299657,
+              27.23967829748135
+            ],
+            [
+              85.70032689882237,
+              27.388179094964883
+            ],
+            [
+              85.7413960464668,
+              27.53581435765997
+            ],
+            [
+              85.7824114336763,
+              27.68337907439981
+            ],
+            [
+              85.82187521159389,
+              27.83130867461911
+            ],
+            [
+              85.85956224721345,
+              27.979740844145866
+            ],
+            [
+              85.87014326614901,
+              28.020092070638192
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "3856463e-02bd-44ad-9525-d4d98fa3eb72",
+      "name": "S2B_MSIL2A_20260916T045659_N0512_R119_T45RUM_20260916T084937.SAFE",
+      "content_start_utc": "2026-09-16T04:56:59.024000Z",
+      "content_end_utc": "2026-09-16T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 55.417758,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07600829435287,
+              28.76352745436857
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.84733175310188,
+              27.931570465512515
+            ],
+            [
+              85.85956224721345,
+              27.979740844145866
+            ],
+            [
+              85.89840548589491,
+              28.12787140995193
+            ],
+            [
+              85.93892148393462,
+              28.27553280397395
+            ],
+            [
+              85.98125210333741,
+              28.42272965518328
+            ],
+            [
+              86.02196566159337,
+              28.57047023043068
+            ],
+            [
+              86.06315235958486,
+              28.718142242635235
+            ],
+            [
+              86.07600829435287,
+              28.76352745436857
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "9365ebcc-ddf4-42f1-80cb-fc6b7fc8ee8b",
+      "name": "S2B_MSIL2A_20260916T045659_N0512_R119_T45RTL_20260916T084937.SAFE",
+      "content_start_utc": "2026-09-16T04:56:59.024000Z",
+      "content_end_utc": "2026-09-16T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 59.362179,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "b579fa98-6ac3-4978-a817-e8bb6cb64c26",
+      "name": "S2B_MSIL2A_20260916T045659_N0512_R119_T45RTM_20260916T084937.SAFE",
+      "content_start_utc": "2026-09-16T04:56:59.024000Z",
+      "content_end_utc": "2026-09-16T04:56:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 61.728686,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "70e642c7-2a4c-45cb-92a7-97ff1951cb4e",
+      "name": "S2C_MSIL2A_20260918T044701_N0512_R076_T45RUM_20260918T074909.SAFE",
+      "content_start_utc": "2026-09-18T04:47:01.025000Z",
+      "content_end_utc": "2026-09-18T04:47:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 53.709519,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.30010425181027,
+              27.9257101462576
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.55501002458857,
+              28.919358272222652
+            ],
+            [
+              85.54155082592864,
+              28.86592818821986
+            ],
+            [
+              85.50443972405473,
+              28.71782970818068
+            ],
+            [
+              85.47820720330218,
+              28.61473798075812
+            ],
+            [
+              85.4672027499513,
+              28.5711799461722
+            ],
+            [
+              85.4590724341978,
+              28.539610007786745
+            ],
+            [
+              85.42911089645865,
+              28.42213528918621
+            ],
+            [
+              85.38959998130531,
+              28.27497116912648
+            ],
+            [
+              85.35291995673417,
+              28.126950868696248
+            ],
+            [
+              85.31412691041272,
+              27.979622162368344
+            ],
+            [
+              85.30010425181027,
+              27.9257101462576
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "ee645773-19b9-436b-a7ca-88220fe229e1",
+      "name": "S2C_MSIL2A_20260918T044701_N0512_R076_T45RUL_20260918T074909.SAFE",
+      "content_start_utc": "2026-09-18T04:47:01.025000Z",
+      "content_end_utc": "2026-09-18T04:47:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 61.846262,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.07297260068387,
+              27.02065932026337
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.32323638747926,
+              28.014218245914243
+            ],
+            [
+              85.31412691041272,
+              27.979622162368344
+            ],
+            [
+              85.27576127831321,
+              27.832120277420184
+            ],
+            [
+              85.23951088683384,
+              27.68392645188568
+            ],
+            [
+              85.20355514769415,
+              27.53561864717852
+            ],
+            [
+              85.16438606339652,
+              27.388343706266745
+            ],
+            [
+              85.12728617370867,
+              27.240435153260613
+            ],
+            [
+              85.09063486569097,
+              27.09241673777759
+            ],
+            [
+              85.07297260068387,
+              27.02065932026337
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "201998ee-db9c-4964-bf83-ca67822bbaf1",
+      "name": "S2A_MSIL2A_20260920T045231_N0512_R076_T45RUL_20260920T095509.SAFE",
+      "content_start_utc": "2026-09-20T04:52:31.024000Z",
+      "content_end_utc": "2026-09-20T04:52:31.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 15.991828,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.07632991537977,
+              27.02069420553649
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.32716660986267,
+              28.01426045682492
+            ],
+            [
+              85.29945283305565,
+              27.91709603318366
+            ],
+            [
+              85.2641339043246,
+              27.768670292309235
+            ],
+            [
+              85.22887521560166,
+              27.62017002399161
+            ],
+            [
+              85.19196490564974,
+              27.47217098596412
+            ],
+            [
+              85.15211206513763,
+              27.325060082050697
+            ],
+            [
+              85.11511828126147,
+              27.176959173715392
+            ],
+            [
+              85.07833134495748,
+              27.028804277101216
+            ],
+            [
+              85.07632991537977,
+              27.02069420553649
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "a696a42b-6bcb-44e9-9826-c1c23c22a417",
+      "name": "S2A_MSIL2A_20260920T045231_N0512_R076_T45RUM_20260920T095509.SAFE",
+      "content_start_utc": "2026-09-20T04:52:31.024000Z",
+      "content_end_utc": "2026-09-20T04:52:31.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 65.978175,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.30191533021132,
+              27.925729541294583
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.5581851102846,
+              28.91939337367994
+            ],
+            [
+              85.52868384898099,
+              28.80232881370252
+            ],
+            [
+              85.4924281389329,
+              28.654005285917293
+            ],
+            [
+              85.45404903637002,
+              28.506434362178705
+            ],
+            [
+              85.41643175827886,
+              28.358729709685097
+            ],
+            [
+              85.37748076034988,
+              28.211485026936145
+            ],
+            [
+              85.34118927671251,
+              28.063423887412704
+            ],
+            [
+              85.30191533021132,
+              27.925729541294583
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "4011f102-b17b-4cab-88df-3aeb642d59dc",
+      "name": "S2C_MSIL2A_20260921T045701_N0513_R119_T45RTM_20260921T102407.SAFE",
+      "content_start_utc": "2026-09-21T04:57:01.025000Z",
+      "content_end_utc": "2026-09-21T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 51.263416,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.92366383707036,
+              28.893134383068205
+            ],
+            [
+              83.95214137520378,
+              27.903415687218992
+            ],
+            [
+              85.06691621561555,
+              27.923579527791233
+            ],
+            [
+              85.04883385369031,
+              28.914144364569694
+            ],
+            [
+              83.92366383707036,
+              28.893134383068205
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "65cdb676-2c4d-409c-9949-adc19473f653",
+      "name": "S2C_MSIL2A_20260921T045701_N0513_R119_T45RUL_20260921T102407.SAFE",
+      "content_start_utc": "2026-09-21T04:57:01.025000Z",
+      "content_end_utc": "2026-09-21T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 16.237105,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.86271839667684,
+              28.020012326931212
+            ],
+            [
+              84.96592364373934,
+              28.01038067774639
+            ],
+            [
+              84.98407353867857,
+              27.019735585570864
+            ],
+            [
+              85.59594141899835,
+              27.026093398302883
+            ],
+            [
+              85.61813611743972,
+              27.107318733023515
+            ],
+            [
+              85.65825737866878,
+              27.254730758254308
+            ],
+            [
+              85.69555506705488,
+              27.40065746731912
+            ],
+            [
+              85.73794600792158,
+              27.54772710115136
+            ],
+            [
+              85.77762495769056,
+              27.6956189991348
+            ],
+            [
+              85.80676258977587,
+              27.804420154057883
+            ],
+            [
+              85.81796392729085,
+              27.8465903683262
+            ],
+            [
+              85.8248586797393,
+              27.873133744073343
+            ],
+            [
+              85.85544834083386,
+              27.99193857201285
+            ],
+            [
+              85.86271839667684,
+              28.020012326931212
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "696166db-82a0-4467-81dc-73e1e1135a4c",
+      "name": "S2C_MSIL2A_20260921T045701_N0513_R119_T45RTL_20260921T102407.SAFE",
+      "content_start_utc": "2026-09-21T04:57:01.025000Z",
+      "content_end_utc": "2026-09-21T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 12.977688,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              83.94966291515031,
+              27.991577831689415
+            ],
+            [
+              83.9768526405984,
+              27.001706217086564
+            ],
+            [
+              85.08260664643534,
+              27.02111225850134
+            ],
+            [
+              85.06534249241301,
+              28.011816421914702
+            ],
+            [
+              83.94966291515031,
+              27.991577831689415
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "d6d898f4-2337-487d-afff-943df794c3e6",
+      "name": "S2C_MSIL2A_20260921T045701_N0513_R119_T45RUM_20260921T102407.SAFE",
+      "content_start_utc": "2026-09-21T04:57:01.025000Z",
+      "content_end_utc": "2026-09-21T04:57:01.025000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 60.282749,
+      "processing_baseline": null,
+      "relative_orbit_number": 119,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.0757556733394,
+              28.792701934951857
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              84.94856806237455,
+              28.912653887310096
+            ],
+            [
+              84.96757810552188,
+              27.92214908733191
+            ],
+            [
+              85.83988433020026,
+              27.931490710244866
+            ],
+            [
+              85.85544834083386,
+              27.99193857201285
+            ],
+            [
+              85.89388583406534,
+              28.140367248210467
+            ],
+            [
+              85.93373764401463,
+              28.288435959973988
+            ],
+            [
+              85.93439073526622,
+              28.290701540372037
+            ],
+            [
+              85.93451681052153,
+              28.2911724796921
+            ],
+            [
+              85.97696184105331,
+              28.43848978916478
+            ],
+            [
+              85.97925509299971,
+              28.446634050138925
+            ],
+            [
+              86.01759709442092,
+              28.583371368195927
+            ],
+            [
+              86.05831753888958,
+              28.731206183958857
+            ],
+            [
+              86.0757556733394,
+              28.792701934951857
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "8e9731ca-56cb-45b9-a555-24185c583280",
+      "name": "S2B_MSIL2A_20260923T044659_N0513_R076_T45RUM_20260923T084252.SAFE",
+      "content_start_utc": "2026-09-23T04:46:59.024000Z",
+      "content_end_utc": "2026-09-23T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 92.579216,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.3023286444185,
+              27.9257339675217
+            ],
+            [
+              86.0831903155732,
+              27.93409630069409
+            ],
+            [
+              86.07460921979444,
+              28.92510258614215
+            ],
+            [
+              85.55918031287234,
+              28.91940437592192
+            ],
+            [
+              85.529118462389,
+              28.799987056134007
+            ],
+            [
+              85.49264024460976,
+              28.651693804938915
+            ],
+            [
+              85.45440663259437,
+              28.504005861175248
+            ],
+            [
+              85.4163689203054,
+              28.35629623621173
+            ],
+            [
+              85.37736314577499,
+              28.208943255257942
+            ],
+            [
+              85.34063117465206,
+              28.060883784477863
+            ],
+            [
+              85.3023286444185,
+              27.9257339675217
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    },
+    {
+      "window": "after",
+      "provider_product_id": "aaf25219-547b-4509-b4d7-205bb4d7b03b",
+      "name": "S2B_MSIL2A_20260923T044659_N0513_R076_T45RUL_20260923T084252.SAFE",
+      "content_start_utc": "2026-09-23T04:46:59.024000Z",
+      "content_end_utc": "2026-09-23T04:46:59.024000Z",
+      "online": true,
+      "catalog_cloud_cover_percent": 98.270202,
+      "processing_baseline": null,
+      "relative_orbit_number": 76,
+      "platform": "SENTINEL-2",
+      "aoi_footprint_intersects": {
+        "AOI-OVERVIEW": true,
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "footprint": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.07708087772113,
+              27.020702008655576
+            ],
+            [
+              86.09063619091846,
+              27.031233685643564
+            ],
+            [
+              86.08244350122112,
+              28.022372192571748
+            ],
+            [
+              85.32741852051635,
+              28.014263162366
+            ],
+            [
+              85.29912791030395,
+              27.91444023243243
+            ],
+            [
+              85.26405056259338,
+              27.76591973569259
+            ],
+            [
+              85.22866266139356,
+              27.617484096257733
+            ],
+            [
+              85.19146893367066,
+              27.469634455469848
+            ],
+            [
+              85.15215444254805,
+              27.32247476850121
+            ],
+            [
+              85.11519628759083,
+              27.174546976506647
+            ],
+            [
+              85.0785021187838,
+              27.026458016777728
+            ],
+            [
+              85.07708087772113,
+              27.020702008655576
+            ]
+          ]
+        ]
+      },
+      "pixel_fitness": "not_inspected",
+      "source_adoption": "not_authorized"
+    }
+  ],
+  "assertions": {
+    "product_downloaded": false,
+    "pixels_read": false,
+    "new_source_adopted": false,
+    "change_analysis_executed": false
+  }
+}

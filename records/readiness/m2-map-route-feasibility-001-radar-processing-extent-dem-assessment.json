@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "status": "pass_actual_sources_and_full_processing_extent_valid_dem",
+  "checked_at_utc": "2026-09-25T18:57:49Z",
+  "source_order": [
+    "M1-SRC-002",
+    "M1-SRC-005"
+  ],
+  "source_inventory_sha256_by_id": {
+    "M1-SRC-002": "c71362fe6befe05f64ed4d57a8e16825068d9852605cd18414ce3d0659a8a9d2",
+    "M1-SRC-005": "c1d3abb52776c4e0cdd61a1d535ce5bf4be43253038a979f505d4b6e31db269a"
+  },
+  "mosaic_sha256": "e46bd9455c19dda85d8c63d0f721df27a4e14abbcc9be0d15e32ed44f32dea4e",
+  "processing_extent_maximum_bounds_32645_m": [
+    270300.0,
+    3067230.0,
+    370820.0,
+    3152210.0
+  ],
+  "conservative_wgs84_buffer_degrees": 0.001,
+  "dem_scan": {
+    "footprint_bounds_degrees": [
+      84.6527725,
+      27.70881568,
+      85.69055905,
+      28.49114524
+    ],
+    "conservative_buffer_degrees": 0.005,
+    "dem_grid_cells_in_full_buffered_footprint": 10218452,
+    "valid_dem_cells": 10218452,
+    "invalid_dem_cells": 0,
+    "valid_fraction": 1.0,
+    "observed_min_ellipsoidal_elevation_m": 246.7198,
+    "observed_max_ellipsoidal_elevation_m": 7329.8691
+  },
+  "radar_geoprocessing_started": false,
+  "baseline_or_change_analysis_authorized": false
+}

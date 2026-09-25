@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-MAP-ROUTE-FEASIBILITY-001-TERMINAL-PUBLICATION",
+  "status": "radar_stopped_first_source_optical_metadata_only",
+  "radar_attempt_id": "e1/a3",
+  "radar_terminal_at_utc": "2026-09-25T19:59:37Z",
+  "radar_first_source": "M1-SRC-002",
+  "radar_stop_stage": "ApplyGeometricTerrainCorrection_gamma",
+  "radar_stop_code": "native_declared_resource_limit_exceeded",
+  "radar_failure_type": "NativeGridStop",
+  "radar_second_source_started": false,
+  "radar_retry_performed": false,
+  "radar_external_custody_unchanged": true,
+  "radar_evidence_sha256": {
+    "terminal": "e88a1ed48161dd8710490c5cae21537778ea901ac8eff599778498ec08187240",
+    "source_terminal": "d98bfebc64ed393a628525714ddf3cbf9139c3aa1054f80ebd3bbea43978ea58",
+    "cleanup": "f820f10efbd73c039866c61b46bc41b5d6d1815cb95afb138a6eaddfc2ff6b75",
+    "supervisor": "6ea9035484a1bfd41219e4dc04eb518c4fe63a35587efc4908220949b44c5824",
+    "stage_journal": "e1ad1d8390f5c9d04fa0db8023832b72fc0978ef1ab8b5c530b301b89f2d11a4"
+  },
+  "optical_catalog_ref": "records/observations/m2-map-route-feasibility-001-optical-fallback-catalog.json",
+  "optical_catalog_sha256": "0ffd82483be80f5f75bd8a41da7379f58dbb6ed33db3ca451e89013e7f05072c",
+  "optical_review_ref": "records/observations/m2-map-route-feasibility-001-optical-fallback-review.json",
+  "optical_review_sha256": "281bcb6d2d9bc7157fa69acfaea87d0d3f2beabb8213ad32640da5a896ce17e1",
+  "result_boundary": "Neither radar pair QA nor optical pixel fitness established; no map change layer or baseline admission.",
+  "new_optical_source_adopted": false,
+  "baseline_or_change_analysis_executed": false,
+  "derived_pixel_or_scientific_publication_authorized": false
+}
