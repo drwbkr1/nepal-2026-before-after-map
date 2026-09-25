@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001-EXECUTION",
+  "status": "conditional_public_ci_and_final_preflight_pending",
+  "authority": {
+    "proposal_ref": "contracts/milestone-002-optical-pair-pilot-001-proposal.json",
+    "proposal_sha256": "82f394235b3beee5e8e05e8a6515f425b88bba1b7b947422efaacab720f252a5",
+    "review_bundle_ref": "reviews/m2-optical-pair-pilot-001/review-bundle.json",
+    "review_bundle_sha256": "0aa10813289f917e44cb684c86d78e8b1b381a8271993b202c87d6e262703870",
+    "approval_ref": "records/source-gates/m2-optical-pair-pilot-001-approval.json",
+    "approval_sha256": "68833c8e356e6e901e21e6b3361c9df3af60a8afb982946ae63269d9b38e6fe5",
+    "packet_gate_ref": "records/readiness/m2-optical-pair-pilot-001-packet-publication-gate.json",
+    "new_terms_acceptance": false,
+    "baseline_or_change_analysis": false,
+    "derived_pixel_or_scientific_publication": false
+  },
+  "sources_in_order": [
+    {
+      "source_id": "M2-OPT-001",
+      "role": "before",
+      "provider_product_id": "35b149d6-cdde-4959-8ff4-d28f37bf67bb",
+      "exact_product_name": "S2A_MSIL2A_20260824T050231_N0512_R119_T45RUM_20260824T115710.SAFE",
+      "content_length_bytes": 1069015437,
+      "provider_md5": "0a5a184fa5880f3a0b80a7e958ec2884",
+      "provider_blake3": "f49d5f8f87ecf23e25acc257b4d487111bceb8bce61e53317f2402ad0cfbbb16"
+    },
+    {
+      "source_id": "M2-OPT-002",
+      "role": "after",
+      "provider_product_id": "3856463e-02bd-44ad-9525-d4d98fa3eb72",
+      "exact_product_name": "S2B_MSIL2A_20260916T045659_N0512_R119_T45RUM_20260916T084937.SAFE",
+      "content_length_bytes": 1046835859,
+      "provider_md5": "a878d0deea57ea2c6f8d5f43396869b5",
+      "provider_blake3": "c4ef38f2d2fab75f0881fef62174f647a7767ab807c8f5d2db2ac9d33d7f7e84"
+    }
+  ],
+  "source_and_spatial_boundary": {
+    "tile": "T45RUM",
+    "relative_orbit": 119,
+    "processing_baseline": "05.12",
+    "qa_targets": ["AOI-SOURCE", "AOI-UPPER-CORRIDOR"],
+    "overview_full_coverage_claim": false,
+    "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"
+  },
+  "frozen_scientific_bindings": {
+    "pixel_qa_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_qa_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "original_optical_pixel_contract_ref": "config/qa/optical-pixel-readiness-contract-001.json",
+    "original_optical_pixel_contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
+    "optical_header_contract_ref": "config/qa/optical-input-readiness-contract.json",
+    "optical_header_contract_sha256": "83327ebc03fb5a7b66152a77717354e4b88450b6f63a2734b5b4ceea6550f3b0",
+    "analysis_crs_wkid": 32645,
+    "cell_size_m": 20.0,
+    "minimum_full_coverage_fraction": 0.99,
+    "minimum_usable_aoi_fraction": 0.8,
+    "valid_scl_classes": [4, 5, 6],
+    "quality_classification_clear_value": 0,
+    "max_registration_rmse_pixels": 0.5
+  },
+  "execution_boundary": {
+    "external_data_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data",
+    "attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map-data\\derived\\m2-optical-pair-pilot-001",
+    "maximum_requests_per_product": 2,
+    "second_request_only_after_documented_transport_interruption": true,
+    "maximum_pair_pixel_qa_attempts": 1,
+    "fixed_order": ["M2-OPT-001", "M2-OPT-002"],
+    "resume_partial": false,
+    "no_replace_promotion": true,
+    "secret_transport": "anonymous_pipe_single_use_memory_only",
+    "credential_value_recorded": false,
+    "automatic_source_substitution": false
+  }
+}

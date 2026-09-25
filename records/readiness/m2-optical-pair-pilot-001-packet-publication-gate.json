@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001-PACKET-PUBLICATION-GATE",
+  "status": "pass_exact_public_packet_and_approval_ci_implementation_eligible",
+  "bindings": {
+    "proposal_sha256": "82f394235b3beee5e8e05e8a6515f425b88bba1b7b947422efaacab720f252a5",
+    "review_bundle_sha256": "0aa10813289f917e44cb684c86d78e8b1b381a8271993b202c87d6e262703870",
+    "approval_sha256": "68833c8e356e6e901e21e6b3361c9df3af60a8afb982946ae63269d9b38e6fe5",
+    "packet_commit_sha": "a2245ce20d86af6c21b295b4f43eb5e856036206",
+    "public_ci_run_id": 36188512340,
+    "public_ci_job_id": 108247693537,
+    "public_ci_conclusion": "success"
+  },
+  "assertions": {
+    "one_owner_decision_applied_to_exact_hashes": true,
+    "implementation_eligible_within_scope": true,
+    "protected_data_access_released_now": false,
+    "new_real_attempt_started": false,
+    "baseline_or_change_analysis_released": false
+  }
+}

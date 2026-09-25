@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001-SYNTHETIC-VALIDATION",
+  "status": "pass_second_disposable_arcgis_validation_first_cleanup_failure_preserved",
+  "script_ref": "scripts/validate_m2_optical_pair_pilot_001_arcgis.py",
+  "script_sha256": "a98896a0f9151cd4a3c447961ae808d18c0a780293aec06235c4c98081babf75",
+  "runtime": {
+    "product": "ArcGIS Pro",
+    "version": "3.7.1",
+    "spatial_analyst": "Available"
+  },
+  "attempts": [
+    {
+      "ordinal": 1,
+      "status": "failed_disposable_cleanup_lock",
+      "stage": "TemporaryDirectory cleanup after generated raster and mask checks",
+      "error_class": "PermissionError",
+      "retained_temporary_path": "C:\\Users\\drewb\\AppData\\Local\\Temp\\nepal-optical-pilot-synthetic-5fnu0dkt",
+      "retained_file_confirmed_present": true,
+      "project_data_accessed": false
+    },
+    {
+      "ordinal": 2,
+      "status": "pass_disposable_arcgis_runtime_only",
+      "generated_grid_wkid": 32645,
+      "generated_grid_shape": [50, 50],
+      "generated_scl_and_three_band_quality_mask_read": true,
+      "synthetic_pair_valid_count": 2499,
+      "cleanup_completed": true,
+      "project_data_accessed": false
+    }
+  ],
+  "limitations": [
+    "This validates the ArcGIS array adapter and mask classification on tiny disposable generated rasters, not full production-grid memory or actual Sentinel products.",
+    "The first attempt's temporary residue is retained as failure evidence and is not a project source or approved pixel artifact."
+  ],
+  "real_product_pixels_examined": false,
+  "scientific_admission": false
+}

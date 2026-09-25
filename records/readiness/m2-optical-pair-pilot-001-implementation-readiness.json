@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001-IMPLEMENTATION-READINESS",
+  "status": "pass_local_synthetic_public_ci_pending",
+  "recorded_at_utc": "2026-09-25T21:23:42Z",
+  "implementation_file_sha256": {
+    "contracts/m2-optical-pair-pilot-001-execution.json": "80cfad39e112dd4c6f49ad12ab91d3d3ab050dcdb039e20bd531e78e15d132f4",
+    "scripts/m2_optical_pair_pilot_001_core.py": "e6743182157d792d7de0ee78a509df096ee1fc2422db5c3940dc31a83ddc44de",
+    "scripts/m2_optical_pair_pilot_001_transfer.py": "672588ac6adbf1481359674189e136de3c36e0c23588f9c746b001fc6c88fc16",
+    "scripts/m2_optical_pair_pilot_001_offline.py": "43e40b0ec61727ad5c2513bffbbe102a8ffa66d7d0dc6ff128c2fef187155b71",
+    "scripts/m2_optical_pair_pilot_001_pixel.py": "a72cbeb4fdb6e7ab5befcce1f4ca0b22ba93ac63d35341e6c81986e178c03bcb",
+    "scripts/m2_optical_pair_pilot_001_preflight.py": "066070a89e29b563e227bcb196c90a8bc714f20b0aa94813ca3dbb0c5ac45716",
+    "scripts/m2_optical_pair_pilot_001_supervisor.py": "2a5612a93b01dff28de007dd53e2ff6aa4472981370bb20e7608705897e1c111",
+    "scripts/m2_optical_pair_pilot_001_arcgis_worker.py": "a612e3cbec4ea019028f3b02ccc1c78cdaefa7423ad2dc22e2f54e254e512143",
+    "scripts/m2_optical_pair_pilot_001_broker.py": "d0db5114a50398d35945cc22f831f2cdf0a8be3fdc582cb62b24f7098372162e",
+    "scripts/invoke_m2_optical_pair_pilot_001.ps1": "6888d6f6900f0dcea928304b18413f84e72f650dfed4595b165ac94ffa31d222",
+    "scripts/validate_m2_optical_pair_pilot_001_arcgis.py": "a98896a0f9151cd4a3c447961ae808d18c0a780293aec06235c4c98081babf75",
+    "tests/test_m2_optical_pair_pilot_001_core.py": "b0ef58e6f40083a5f577d42900e07def889a88f79c4cc991930f5f450d40bebd",
+    "tests/test_m2_optical_pair_pilot_001_transfer.py": "1833768252ff3fe27d4a856d5eacd24ca5c051ac94e9213277e60e9c71c3e8f6",
+    "tests/test_m2_optical_pair_pilot_001_preflight.py": "78e571d964035adc25b35a78a397f8653ed502b42cb6c34568d22439573fd33a",
+    "tests/test_m2_optical_pair_pilot_001_supervisor.py": "8c7eefba3e9354bf8ac59cdb6bb617f05e1307ef5dec4dec49f880d6dd2cbe5d",
+    "tests/test_m2_optical_pair_pilot_001_pixel.py": "dec2203d507517d379b6831e74d2af29fb94d668b0889a1c4d96a28cc3a3fb9b",
+    "records/readiness/m2-optical-pair-pilot-001-packet-publication-gate.json": "4b6d3404935c9b858739a5eab4a385af6c9e1fb2ed1ac9e1959ce8b7a95af1c2",
+    "records/readiness/m2-optical-pair-pilot-001-synthetic-validation.json": "a5ed8ed0144a94e33db46df3b2a2c92ec1c576942f20e79043a46200b13aa15d"
+  },
+  "validation": {
+    "focused_synthetic_tests_passed": 16,
+    "full_local_suite_tests_ran": 827,
+    "full_local_suite_skipped": 6,
+    "full_local_suite_status": "pass",
+    "check_project_status": "pass_1463_required_files_with_implementation_files_present",
+    "arcgis_runtime": "ArcGIS Pro 3.7.1",
+    "arcgis_disposable_second_attempt": "pass",
+    "arcgis_disposable_first_attempt": "cleanup_lock_failure_retained",
+    "synthetic_validation_ref": "records/readiness/m2-optical-pair-pilot-001-synthetic-validation.json"
+  },
+  "source_observation": {
+    "exact_two_public_catalog_records_online_and_unchanged": true,
+    "terms_section_and_legal_notice_unchanged": true,
+    "odata_and_token_document_raw_pages_changed_exact_route_markers_present": true,
+    "credential_used": false,
+    "payload_requests": 0,
+    "real_pixel_reads": 0
+  },
+  "claim_boundary": {
+    "public_implementation_ci_passed": false,
+    "execution_gate_released": false,
+    "final_no_payload_preflight_passed": false,
+    "source_acquisition_authorized_to_run_now": false,
+    "qa_result_established": false,
+    "baseline_or_change_established": false,
+    "scientific_publication_authorized": false
+  }
+}
