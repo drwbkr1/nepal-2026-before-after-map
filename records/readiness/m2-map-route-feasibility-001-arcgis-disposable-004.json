@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-MAP-ROUTE-FEASIBILITY-001-ARCGIS-DISPOSABLE-004",
+  "status": "pass_disposable_grid_and_sampled_pixels_only",
+  "attempt_terminal_sha256": "077a8b97da538850b4257c5dbe08a9885b6cb02038242bdf89d7f09d4099f9df",
+  "attempt_terminal_ref": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\map-route-feasibility-disposable-004\\terminal.json",
+  "project_data_or_external_custody_accessed": false,
+  "sar_specific_gtc_fitness_proven": false,
+  "real_radar_pixel_fitness_proven": false,
+  "baseline_or_change_analysis_authorized": false
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-MAP-ROUTE-FEASIBILITY-001-DISPOSABLE-001-PERSISTENCE-FAILURE",
+  "recorded_at_utc": "2026-09-24T20:03:31Z",
+  "status": "terminal_indeterminate_preserved_no_method_pass",
+  "attempt_root": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\map-route-feasibility-disposable-001",
+  "attempt_started_receipt_status": "started_generated_inputs_only",
+  "reserved_terminal_bytes": 0,
+  "reserved_terminal_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "public_terminal_receipt_exists": false,
+  "process_exit_code": 1,
+  "failure_stage": "terminal_timestamp_construction_after_generated_raster_work",
+  "failure_type": "AttributeError",
+  "failure_code": "arcpy_rebound_module_global_datetime_before_terminal_and_fallback_serialization",
+  "failure_detail_sanitized": "datetime.now(timezone.utc) raised because the module-global datetime name referred to the datetime module; the fallback error receipt called the same failed helper.",
+  "implementation_at_attempt": {
+    "core_sha256": "5d9bc83ae082296cf4948a9bd219a1c1455cc1068efab4e8014c08e0d89b3271",
+    "validator_sha256": "9219ac9af5c2f7601f1901601c243dc1b4d6b3a148794dbb72400853a4da94be"
+  },
+  "observations": {
+    "generated_continuous_and_categorical_inputs_exist": true,
+    "intermediate_and_final_outputs_exist_for_both_types": true,
+    "output_presence_proves_method_pass": false,
+    "original_attempt_reuse_or_mutation_allowed": false,
+    "project_data_or_external_custody_accessed": false,
+    "new_real_radar_attempt_started": false,
+    "baseline_or_change_analysis_executed": false
+  },
+  "next_action": "Correct only terminal timestamp construction, prove success and fallback persistence with synthetic tests, then use a distinct append-only disposable identity under the already approved conditional envelope."
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-MAP-ROUTE-FEASIBILITY-001-RADAR-IMPLEMENTATION-LOCAL-READINESS",
+  "status": "pass_local_synthetic_and_disposable_pending_public_ci",
+  "checked_at_utc": "2026-09-24T20:28:51Z",
+  "authority": {
+    "proposal_sha256": "6a0e568e7db0af2fbbd8d317a4324c4fda4c9784d069c9aaaa2697e3e12d436a",
+    "review_bundle_sha256": "9419b4c0dc4272f14ec59521fa268d592368ccab6b8411c3a868f12e6739756e",
+    "packet_publication_gate_sha256": "fc55c80d040717ab84e510f8bf5c63e63ae9bf8dc1a9bded8e1a788e1c1ead11"
+  },
+  "implementation": {
+    "runner_sha256": "fb38dcfabe0c6b10f9a811ea3ac1265cffa743f3b27f173334d5a84fdf425328",
+    "processor_sha256": "d51f9b62dbeb8e3fa7e2f22fd91d3e4905ff297a92fc2a5add0092d80f8b51c9",
+    "core_sha256": "8edc41a61bc5a66bc3104388cdac24d68e89d3a28cca692794f2bc08b456ae4a",
+    "crf_resource_validator_sha256": "6e341f31fb2c4dafaa74703d4c522a20b199ab333c36dbe6bcac80eefec4f426",
+    "portable_test_sha256": "a694bfdbd84116148dee5a7bdfab8e24c651db85a556c0f5e422c1e8c78366d1"
+  },
+  "local_tests": {
+    "project_control_check": "pass_1463_preexisting_required_files",
+    "repository_unittest_count": 807,
+    "repository_unittest_skipped": 6,
+    "repository_unittest_status": "pass",
+    "focused_map_route_unittest_count": 12,
+    "focused_map_route_unittest_status": "pass"
+  },
+  "disposable_attempts": [
+    {"identity": "001", "status": "terminal_indeterminate_preserved_no_method_pass", "reason": "timestamp_receipt_persistence_failure"},
+    {"identity": "002", "status": "pass_disposable_grid_and_sampled_pixels_only", "format": "GeoTIFF"},
+    {"identity": "003", "status": "pass_disposable_grid_and_sampled_pixels_only", "format": "CRF"},
+    {"identity": "004", "status": "pass_disposable_grid_and_sampled_pixels_only", "format": "CRF_with_per_materialization_resource_checks", "receipt_sha256": "ed7d8cfd1fc53caaf5113ca83d0af2d866194f13b9b1697b96059a83bc900be6", "terminal_sha256": "077a8b97da538850b4257c5dbe08a9885b6cb02038242bdf89d7f09d4099f9df"}
+  ],
+  "disposable_004_observations": {
+    "arcgis_version": "3.7.1",
+    "projected_intermediate_cells_per_type": 83107486,
+    "exact_final_cells_per_type": 78161896,
+    "full_target_coverage_before_clip": true,
+    "sampled_retained_values_identical": true,
+    "per_type_materialization_stages": ["ProjectRaster", "Clip"],
+    "project_data_or_external_custody_accessed": false
+  },
+  "boundaries": {
+    "public_implementation_ci_passed": false,
+    "execution_gate_public_ci_passed": false,
+    "real_data_preflight_started": false,
+    "dem_processing_extent_assessed": false,
+    "e1_a3_attempt_started": false,
+    "sar_specific_gtc_fitness_proven": false,
+    "baseline_or_change_analysis_authorized": false,
+    "scientific_result_established": false
+  }
+}
