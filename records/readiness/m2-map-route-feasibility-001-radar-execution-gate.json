@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-MAP-ROUTE-FEASIBILITY-001-RADAR-EXECUTION-GATE",
+  "status": "pass_public_ci_map_route_execution_gate",
+  "checked_at_utc": "2026-09-25T18:55:52Z",
+  "implementation_gate_sha256": "a20f104b02f421c9aa43648b70131aae8af98ab83e13aca80f32b640cb8a5d0c",
+  "implementation_gate_commit_sha": "9ca0d3acc7289e0c0be80fc9b5a6ca42b54d409e",
+  "implementation_gate_public_ci_run_id": 36176472677,
+  "implementation_gate_public_ci_job_id": 108208178227,
+  "implementation_gate_public_ci_conclusion": "success",
+  "execution_gate_commit_must_pass_public_ci_before_preflight": true,
+  "source_order": ["M1-SRC-002", "M1-SRC-005"],
+  "orbit_order": ["M2-ORB-001", "M2-ORB-003"],
+  "distinct_attempt_root_alias": "e1/a3",
+  "maximum_new_real_processes": 1,
+  "automatic_retry": false,
+  "assertions": {
+    "implementation_and_gate_public_ci_passed": true,
+    "disposable_004_generated_method_pass_is_not_real_sar_fitness": true,
+    "final_no_content_preflight_completed": false,
+    "actual_source_and_processing_extent_dem_assessed": false,
+    "e1_a3_attempt_started": false,
+    "baseline_or_change_analysis_authorized": false
+  }
+}
