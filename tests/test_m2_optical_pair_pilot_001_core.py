@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import io
 import json
 import sys
 import tempfile
@@ -22,6 +23,7 @@ from m2_optical_pair_pilot_001_core import (  # noqa: E402
     exact_download_url,
     load_contract,
     may_make_second_request,
+    read_owner_pipe_secret,
     require_execution_release,
     source_for_id,
     validate_catalog_product,
@@ -104,6 +106,13 @@ class OpticalPairPilotCoreTests(unittest.TestCase):
             classify_terminal_exception(urllib.error.HTTPError("https://example.invalid/secret", 401, secret, {}, None)),
             "pilot_http_failure_nonretryable",
         )
+
+    def test_powershell_crlf_secret_pipe_framing(self) -> None:
+        self.assertEqual(read_owner_pipe_secret(io.BytesIO(b"synthetic-token\r\n")), "synthetic-token")
+        self.assertEqual(read_owner_pipe_secret(io.BytesIO(b"synthetic-token\n")), "synthetic-token")
+        for payload in (b"synthetic-token\r\r\n", b"synthetic-token \r\n", b"synthetic-token"):
+            with self.assertRaises(PilotControlError):
+                read_owner_pipe_secret(io.BytesIO(payload))
 
 
 if __name__ == "__main__":

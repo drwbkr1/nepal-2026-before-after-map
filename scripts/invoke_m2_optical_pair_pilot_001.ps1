@@ -4,7 +4,7 @@ param()
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-$gatePath = Join-Path $projectRoot 'records\readiness\m2-optical-pair-pilot-001-execution-gate.json'
+$gatePath = Join-Path $projectRoot 'records\readiness\m2-optical-pair-pilot-001-execution-gate-002.json'
 $brokerPath = Join-Path $PSScriptRoot 'm2_optical_pair_pilot_001_broker.py'
 $tokenEndpoint = 'https://identity.dataspace.copernicus.eu/auth/realms/CDSE/protocol/openid-connect/token'
 $passwordBstr = [IntPtr]::Zero

@@ -9,13 +9,13 @@ import json
 import re
 import urllib.error
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, BinaryIO, Mapping
 
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_REF = "contracts/m2-optical-pair-pilot-001-execution.json"
-EXECUTION_GATE_REF = "records/readiness/m2-optical-pair-pilot-001-execution-gate.json"
-IMPLEMENTATION_READINESS_REF = "records/readiness/m2-optical-pair-pilot-001-implementation-readiness.json"
+EXECUTION_GATE_REF = "records/readiness/m2-optical-pair-pilot-001-execution-gate-002.json"
+IMPLEMENTATION_READINESS_REF = "records/readiness/m2-optical-pair-pilot-001-implementation-readiness-002.json"
 FINAL_PREFLIGHT_PREFIX = "records/readiness/m2-optical-pair-pilot-001-final-preflight-"
 PROPOSAL_SHA256 = "82f394235b3beee5e8e05e8a6515f425b88bba1b7b947422efaacab720f252a5"
 BUNDLE_SHA256 = "0aa10813289f917e44cb684c86d78e8b1b381a8271993b202c87d6e262703870"
@@ -267,3 +267,29 @@ def classify_terminal_exception(exc: BaseException) -> str:
     if isinstance(exc, (ConnectionError, TimeoutError, OSError)):
         return "transport_interrupted"
     return "unexpected_failure"
+
+
+def read_owner_pipe_secret(stream: BinaryIO) -> str:
+    """Accept PowerShell CRLF or LF framing, never trimming token content."""
+    try:
+        data = stream.readline(16_387)
+    finally:
+        stream.close()
+    if data.endswith(b"\r\n"):
+        raw = bytearray(data[:-2])
+    elif data.endswith(b"\n"):
+        raw = bytearray(data[:-1])
+    else:
+        raise PilotControlError("pilot_secret_pipe_framing_invalid")
+    try:
+        if not raw or len(raw) > 16_384:
+            raise PilotControlError("pilot_secret_pipe_length_invalid")
+        secret = raw.decode("utf-8")
+        if any(char.isspace() for char in secret):
+            raise PilotControlError("pilot_secret_contains_whitespace")
+        return secret
+    except UnicodeError as exc:
+        raise PilotControlError("pilot_secret_pipe_encoding_invalid") from exc
+    finally:
+        for index in range(len(raw)):
+            raw[index] = 0

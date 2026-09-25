@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-PILOT-001-SECRET-FRAMING-CORRECTION-001",
+  "status": "local_pre_execution_correction_old_gate_retained_stale",
+  "observation": {
+    "synthetic_input": "nonsecret synthetic token through PowerShell native pipeline",
+    "powershell_native_pipeline_framing": "CRLF",
+    "borrowed_reader_expected": "LF",
+    "result_before_correction": "synthetic handoff would fail before detached supervisor launch",
+    "real_credential_used": false,
+    "payload_request_occurred": false,
+    "real_attempt_started": false
+  },
+  "correction": {
+    "scope": "accept exactly one CRLF or LF line ending in the optical pilot broker's single-use in-memory reader; do not trim token content",
+    "secret_storage_or_exposure_added": false,
+    "source_or_scientific_method_changed": false,
+    "portable_synthetic_pipe_test_required": true,
+    "new_implementation_readiness_ref": "records/readiness/m2-optical-pair-pilot-001-implementation-readiness-002.json",
+    "new_execution_gate_ref": "records/readiness/m2-optical-pair-pilot-001-execution-gate-002.json"
+  },
+  "retained_public_gate": {
+    "ref": "records/readiness/m2-optical-pair-pilot-001-execution-gate.json",
+    "sha256": "eb74251d0c1b4496f29e7f28fd4e415b8a9142594e24efd32f6ffe3ca4fe8115",
+    "commit_sha": "3de637844bad811f1ae7d0fcd1b427009cfd2068",
+    "ci_run_id": 36191579129,
+    "current_runtime_release": false
+  }
+}

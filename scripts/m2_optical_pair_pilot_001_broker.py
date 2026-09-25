@@ -6,13 +6,12 @@ from __future__ import annotations
 import json
 import sys
 
-from m2_optical_pair_pilot_001_core import CONTRACT_REF, EXECUTION_GATE_REF, PilotControlError, load_contract, sha256_file, validate_implementation_manifest
+from m2_optical_pair_pilot_001_core import CONTRACT_REF, EXECUTION_GATE_REF, PilotControlError, load_contract, read_owner_pipe_secret, sha256_file, validate_implementation_manifest
 from m2_optical_pair_pilot_001_offline import PILOT_ROOT
 from m2_optical_pair_pilot_001_supervisor import PUBLIC_TERMINAL, ROOT
 from m2_optical_pair_pilot_001_transfer import read_json
 from m2_sentinel_continuation_001_core import (
     launch_detached_supervisor,
-    read_single_use_secret,
 )
 
 
@@ -38,7 +37,7 @@ def validate_broker_release() -> None:
 def main() -> int:
     try:
         validate_broker_release()
-        secret = read_single_use_secret(sys.stdin.buffer)
+        secret = read_owner_pipe_secret(sys.stdin.buffer)
         command = [sys.executable, str(ROOT / "scripts/m2_optical_pair_pilot_001_supervisor.py")]
         process_id = launch_detached_supervisor(secret, command=command)
         secret = ""
