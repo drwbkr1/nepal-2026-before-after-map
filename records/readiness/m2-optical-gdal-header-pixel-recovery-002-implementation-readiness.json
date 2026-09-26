@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-GDAL-HEADER-PIXEL-RECOVERY-002-IMPLEMENTATION-READINESS",
+  "status": "pass_local_synthetic_public_ci_pending",
+  "checked_at_utc": "2026-09-26T17:25:42Z",
+  "proposal_sha256": "293a9f90a1d6ca9d1531423798d191901d3772999763fbce34ca6b583e5f7d8e",
+  "approval_sha256": "bf9b0a05e1e4ad2061707cf8961d8d3027db2f6d7568f0de489ffc2a261918af",
+  "implementation_file_sha256": {
+    "contracts/m2-optical-gdal-header-pixel-recovery-002-source-binding.json": "5ac73df955700af9a087782990f13b214f7cbf38daa7b4f23fb1d452befa610f",
+    "scripts/m2_optical_gdal_recovery_002_adapter.py": "42cc4740f322fdbbcbde1af8f4201be85b9c32bfd1e0574d79feb520f38f19d8",
+    "scripts/m2_optical_gdal_recovery_002_core.py": "e64e8ae747cfc83c7727d74c8b19f29e3ed05e0116273b2507e8a8af63354c34",
+    "scripts/m2_optical_gdal_recovery_002_engine.py": "4346fed56e58131f4911a7e0075aea57aba467646f711089b6e77f5369323930",
+    "scripts/m2_optical_gdal_recovery_002_preflight.py": "ef752e372af2de12669f8629764d9c590d95f09c529eb1411f504b89f8f0bf9c",
+    "scripts/m2_optical_gdal_recovery_002_worker.py": "dc942a2ca2ffb0b56e2d5d1f68cf28196e8ddeee2b3cc691573bfebc909e3b6b",
+    "scripts/m2_optical_gdal_recovery_002_execute.py": "ddd5c2bc77d8c67e760929fa7900a77feda05ef599b9baec8334f82c36432cee",
+    "scripts/validate_m2_optical_gdal_recovery_002_arcgis.py": "2b13eb095f494624de772d362296d277b97dff62cce654eea1ac197127c35bcb",
+    "tests/test_m2_optical_gdal_recovery_002_adapter.py": "5558433ee43a63da2175798f52ad95ee2a1b8ed81955b930a0c05dbcf9abd2fc"
+  },
+  "local_checks": {
+    "portable_suite": "849_pass_6_skipped",
+    "check_project": "pass_1463_required_files",
+    "installed_arcgis_generated_jp2_header": "pass",
+    "installed_arcgis_generated_grid_mask_aoi_registration_and_tabulate_area_parity": "pass",
+    "production_shape_4726_by_3950_mask": "pass",
+    "synthetic_interruption_receipt_and_secret_exposure": "pass"
+  },
+  "claim_boundary": {
+    "real_source_or_external_custody_accessed": false,
+    "real_header_or_pixel_evaluated": false,
+    "real_attempt_started": false,
+    "public_implementation_ci_passed": false,
+    "execution_gate_released": false,
+    "baseline_or_change_analysis": false,
+    "derived_pixel_or_scientific_publication": false
+  }
+}

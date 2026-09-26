@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-GDAL-HEADER-PIXEL-RECOVERY-002-PACKET-PUBLICATION-GATE",
+  "status": "pass_exact_public_packet_and_approval_ci_implementation_eligible",
+  "bindings": {
+    "proposal_sha256": "293a9f90a1d6ca9d1531423798d191901d3772999763fbce34ca6b583e5f7d8e",
+    "review_bundle_sha256": "933f141a4474edafb0fe2580e97428c3dd47a802e4ae8d6d434fb0e6803fb785",
+    "approval_sha256": "bf9b0a05e1e4ad2061707cf8961d8d3027db2f6d7568f0de489ffc2a261918af",
+    "packet_commit_sha": "2e4dfc4c03fc4c97e9cea589b091ea24cf2803d5",
+    "public_ci_run_id": 36257809958,
+    "public_ci_job_id": 108447809393,
+    "public_ci_conclusion": "success"
+  },
+  "assertions": {
+    "one_owner_decision_applied_to_exact_hashes": true,
+    "implementation_eligible_within_scope": true,
+    "protected_data_access_released_now": false,
+    "new_real_header_or_pixel_attempt_started": false,
+    "consumed_attempt_reuse_or_retry_released": false,
+    "baseline_or_change_analysis_released": false
+  }
+}
