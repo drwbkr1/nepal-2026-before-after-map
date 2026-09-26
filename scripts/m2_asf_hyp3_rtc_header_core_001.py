@@ -88,7 +88,7 @@ def inspect_raster_headers(source_id: str, headers: dict) -> dict:
                 raise RouteStop("rtc_header_layer_grid_mismatch")
     return {
         "source_id": source_id,
-        "status": "pass_synthetic_header_grid_only",
+        "status": "pass_header_descriptor_rules_only",
         "expected_raster_count": len(RASTERS),
         "required_wkid": contract["grid_compatibility"]["required_wkid"],
         "expected_cell_size_m": contract["grid_compatibility"]["radar_candidate_cell_size_m"],

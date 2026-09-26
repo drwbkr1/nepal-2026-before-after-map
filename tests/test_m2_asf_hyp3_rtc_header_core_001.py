@@ -33,7 +33,7 @@ class HeaderScreenTests(unittest.TestCase):
         for source_id in ORDER:
             with self.subTest(source_id=source_id):
                 result = inspect_raster_headers(source_id, headers())
-                self.assertEqual(result["status"], "pass_synthetic_header_grid_only")
+                self.assertEqual(result["status"], "pass_header_descriptor_rules_only")
                 self.assertFalse(result["actual_headers_opened"])
                 self.assertFalse(result["pixels_or_aoi_coverage_assessed"])
                 self.assertFalse(result["arcgis_map_ready"])
