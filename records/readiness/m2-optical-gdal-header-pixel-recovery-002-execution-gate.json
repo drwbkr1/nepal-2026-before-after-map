@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-GDAL-HEADER-PIXEL-RECOVERY-002-EXECUTION-GATE",
+  "status": "pass_public_execution_gate",
+  "proposal_sha256": "293a9f90a1d6ca9d1531423798d191901d3772999763fbce34ca6b583e5f7d8e",
+  "approval_sha256": "bf9b0a05e1e4ad2061707cf8961d8d3027db2f6d7568f0de489ffc2a261918af",
+  "implementation_sha256": "c23df89e759b4e677ac261b99d099331f08cc59d956fc59dfa14a73e5ad098f4",
+  "implementation_commit_sha": "dcab771cddb09641ad4ce29538b9a60f122c0f82",
+  "public_ci_run_id": 36259043253,
+  "public_ci_job_id": 108451211547,
+  "public_ci_conclusion": "success",
+  "installed_arcgis_runtime_disposable_parity": "pass",
+  "execution_gate_publication_ci_required_before_final_preflight": true,
+  "real_source_access_released_now": false,
+  "final_offline_no_pixel_preflight_required": true,
+  "maximum_fresh_real_processes_after_all_gates": 1,
+  "automatic_retry": false,
+  "baseline_or_change_analysis": false,
+  "derived_pixel_or_scientific_publication": false
+}
