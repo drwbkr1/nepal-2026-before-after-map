@@ -1,4 +1,4 @@
-param([switch]$CheckRelease)
+param([switch]$CheckRelease, [switch]$UseExistingToken)
 
 $ErrorActionPreference = 'Stop'
 $probe = Join-Path $PSScriptRoot 'm2_asf_hyp3_account_probe_001.py'
@@ -26,19 +26,46 @@ if ($CheckRelease) {
     exit 0
 }
 
-$secureToken = Read-Host 'NASA Earthdata bearer token (hidden; paste once)' -AsSecureString
 $bstr = [IntPtr]::Zero
+$secureToken = $null
+$securePassword = $null
+$passwordBstr = [IntPtr]::Zero
+$password = $null
+$username = $null
 $token = $null
 $child = $null
 try {
-    $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureToken)
-    $token = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($bstr)
-    if ([string]::IsNullOrWhiteSpace($token)) {
-        throw 'empty token'
+    if ($UseExistingToken) {
+        $secureToken = Read-Host 'NASA Earthdata bearer token (hidden; paste once)' -AsSecureString
+        $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureToken)
+        $token = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($bstr)
+    } else {
+        Write-Output 'Earthdata may create a 60-day user token if none exists; it will not be printed or saved.'
+        $choice = Read-Host 'Continue with your Earthdata username and password? [y/N]'
+        if ($choice -notin @('y', 'Y')) {
+            Write-Output 'HyP3 account handoff cancelled; no credentials were requested.'
+            exit 0
+        }
+        $username = Read-Host 'NASA Earthdata username'
+        $securePassword = Read-Host 'NASA Earthdata password (hidden)' -AsSecureString
+        $passwordBstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($securePassword)
+        $password = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($passwordBstr)
+        if ([string]::IsNullOrWhiteSpace($username) -or [string]::IsNullOrEmpty($password) -or $username.Contains(':') -or $username.Contains("`n") -or $password.Contains("`n")) {
+            throw 'invalid credentials shape'
+        }
+    }
+    if ($UseExistingToken) {
+        if ([string]::IsNullOrWhiteSpace($token) -or $token.Length -gt 4096 -or $token -cnotmatch '^[A-Za-z0-9._-]+$') {
+            throw 'invalid token shape'
+        }
     }
     $start = New-Object System.Diagnostics.ProcessStartInfo
     $start.FileName = $pythonPath
-    $start.Arguments = ('"{0}"' -f $probe)
+    if ($UseExistingToken) {
+        $start.Arguments = ('"{0}"' -f $probe)
+    } else {
+        $start.Arguments = ('"{0}" --earthdata-credentials' -f $probe)
+    }
     $start.UseShellExecute = $false
     $start.CreateNoWindow = $true
     $start.WindowStyle = [System.Diagnostics.ProcessWindowStyle]::Hidden
@@ -50,9 +77,16 @@ try {
     if (-not $child.Start()) {
         throw 'child launch failed'
     }
-    $child.StandardInput.WriteLine($token)
+    if ($UseExistingToken) {
+        $child.StandardInput.WriteLine($token)
+    } else {
+        $child.StandardInput.WriteLine($username)
+        $child.StandardInput.WriteLine($password)
+    }
     $child.StandardInput.Close()
     $token = $null
+    $username = $null
+    $password = $null
     $resultText = $child.StandardOutput.ReadToEnd()
     $null = $child.StandardError.ReadToEnd()
     $child.WaitForExit()
@@ -61,16 +95,22 @@ try {
         Write-Output ('HyP3 account probe stopped: {0}' -f $result.code)
         exit 12
     }
-    # The Python child emits only balance and non-identifying status.
+    # The Python child emits only a yes/no free-capacity result.
     Write-Output $resultText.Trim()
 } catch {
-    Write-Output 'Secret-safe HyP3 account handoff stopped before a verified account result.'
+    Write-Output 'Secret-safe HyP3 account handoff stopped without a verified result. Earthdata may have created or returned a token; check your Earthdata token page if needed.'
     exit 20
 } finally {
     $token = $null
     $secureToken = $null
+    $securePassword = $null
+    $password = $null
+    $username = $null
     if ($bstr -ne [IntPtr]::Zero) {
         [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr)
+    }
+    if ($passwordBstr -ne [IntPtr]::Zero) {
+        [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($passwordBstr)
     }
     if ($null -ne $child) {
         $child.Dispose()

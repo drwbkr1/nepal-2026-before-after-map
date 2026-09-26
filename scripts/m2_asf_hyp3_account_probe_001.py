@@ -9,6 +9,7 @@ it reads standard input or opens a connection.
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import http.client
 import json
@@ -20,8 +21,10 @@ from m2_asf_hyp3_rtc_core_001 import APPROVAL_REF, PROPOSAL_SHA256, ROOT, RouteS
 
 
 HOST = "hyp3-api.asf.alaska.edu"
+EARTHDATA_HOST = "urs.earthdata.nasa.gov"
+EARTHDATA_TOKEN_PATH = "/api/users/find_or_create_token"
 RIGHTS_GATE_REF = "records/source-gates/m2-asf-hyp3-rtc-live-source-gate-001.json"
-IMPLEMENTATION_GATE_REF = "records/readiness/m2-asf-hyp3-rtc-map-route-001-implementation-publication-gate.json"
+IMPLEMENTATION_GATE_REF = "records/readiness/m2-asf-hyp3-rtc-account-credential-handoff-implementation-gate-002.json"
 FINAL_PREFLIGHT_REF = "records/readiness/m2-asf-hyp3-rtc-map-route-001-account-preflight.json"
 MAX_SECRET_BYTES = 4096
 MAX_RESPONSE_BYTES = 65536
@@ -31,6 +34,7 @@ IMPLEMENTATION_FILES = (
     "scripts/invoke_m2_asf_hyp3_account_probe_001.ps1",
     "tests/test_m2_asf_hyp3_rtc_core_001.py",
     "tests/test_m2_asf_hyp3_account_probe_001.py",
+    "tests/test_m2_asf_hyp3_account_gate_001.py",
 )
 
 
@@ -107,6 +111,69 @@ def read_owner_token(stream: BinaryIO) -> str:
             data[index] = 0
 
 
+def read_owner_credentials(stream: BinaryIO) -> tuple[str, str]:
+    """Read a one-use two-line credential pipe; never print the values."""
+    username_bytes = bytearray(stream.readline(513))
+    password_bytes = bytearray(stream.readline(4097))
+    try:
+        if not username_bytes.endswith(b"\n") or not password_bytes.endswith(b"\n"):
+            raise RouteStop("credential_pipe_invalid")
+        def without_terminator(data: bytearray) -> bytes:
+            return bytes(data[:-2] if data.endswith(b"\r\n") else data[:-1])
+
+        username = without_terminator(username_bytes).decode("utf-8")
+        password = without_terminator(password_bytes).decode("utf-8")
+        if (
+            not username or not password or ":" in username
+            or any(char in username for char in "\r\n")
+            or any(char in password for char in "\r\n")
+            or len(username_bytes) > 512 or len(password_bytes) > 4096
+        ):
+            raise RouteStop("credential_pipe_invalid")
+        return username, password
+    except UnicodeDecodeError:
+        raise RouteStop("credential_pipe_invalid") from None
+    finally:
+        for data in (username_bytes, password_bytes):
+            for index in range(len(data)):
+                data[index] = 0
+
+
+def get_earthdata_token(username: str, password: str, connection_factory: Callable = http.client.HTTPSConnection) -> str:
+    """Retrieve or create one EDL user token, following no redirects."""
+    if not username or not password or ":" in username or any(char in username + password for char in "\r\n"):
+        raise RouteStop("credential_pipe_invalid")
+    authorization = base64.b64encode(f"{username}:{password}".encode("utf-8")).decode("ascii")
+    connection = None
+    try:
+        connection = connection_factory(EARTHDATA_HOST, timeout=20)
+        connection.request(
+            "POST", EARTHDATA_TOKEN_PATH,
+            headers={"Authorization": f"Basic {authorization}", "Accept": "application/json", "Content-Length": "0"},
+        )
+        response = connection.getresponse()
+        if response.status != 200:
+            raise RouteStop("earthdata_token_response_not_success")
+        raw = response.read(MAX_RESPONSE_BYTES + 1)
+        if len(raw) > MAX_RESPONSE_BYTES:
+            raise RouteStop("earthdata_token_response_too_large")
+        result = json.loads(raw)
+        if not isinstance(result, dict) or result.get("token_type") != "Bearer":
+            raise RouteStop("earthdata_token_response_invalid")
+        token = result.get("access_token")
+        if not isinstance(token, str) or not token or len(token) > MAX_SECRET_BYTES or not all(char.isalnum() or char in "._-" for char in token):
+            raise RouteStop("earthdata_token_response_invalid")
+        return token
+    except RouteStop:
+        raise
+    except (OSError, ValueError):
+        raise RouteStop("earthdata_token_request_failed") from None
+    finally:
+        authorization = ""
+        if connection is not None:
+            connection.close()
+
+
 def get_basic_account(token: str, connection_factory: Callable = http.client.HTTPSConnection) -> dict:
     """Call only GET /user on the fixed Basic host; do not follow redirects."""
     if not token or len(token) > MAX_SECRET_BYTES or not all(char.isalnum() or char in "._-" for char in token):
@@ -154,9 +221,15 @@ def main() -> int:
         if sys.argv[1:] == ["--check-release"]:
             print(json.dumps({"status": "pass_account_probe_release_no_secret_read", "credential_value_recorded": False}, sort_keys=True))
             return 0
-        if len(sys.argv) != 1:
+        if sys.argv[1:] not in ([], ["--earthdata-credentials"]):
             raise RouteStop("account_probe_arguments_invalid")
-        token = read_owner_token(sys.stdin.buffer)
+        if sys.argv[1:] == ["--earthdata-credentials"]:
+            username, password = read_owner_credentials(sys.stdin.buffer)
+            token = get_earthdata_token(username, password)
+            username = ""
+            password = ""
+        else:
+            token = read_owner_token(sys.stdin.buffer)
         result = get_basic_account(token)
         token = ""
         print(json.dumps(result, sort_keys=True))

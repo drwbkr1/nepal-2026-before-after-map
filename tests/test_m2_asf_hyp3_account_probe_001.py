@@ -18,6 +18,8 @@ from m2_asf_hyp3_account_probe_001 import (  # noqa: E402
     APPROVAL_REF,
     FINAL_PREFLIGHT_REF,
     HOST,
+    EARTHDATA_HOST,
+    EARTHDATA_TOKEN_PATH,
     IMPLEMENTATION_FILES,
     IMPLEMENTATION_GATE_REF,
     PROPOSAL_SHA256,
@@ -25,6 +27,8 @@ from m2_asf_hyp3_account_probe_001 import (  # noqa: E402
     ROOT,
     RouteStop,
     get_basic_account,
+    get_earthdata_token,
+    read_owner_credentials,
     read_owner_token,
     require_account_probe_release,
 )
@@ -115,6 +119,45 @@ class AccountProbeTests(unittest.TestCase):
         for payload in (b"", b"synthetic token\n", b"synthetic-token"):
             with self.subTest(payload=payload), self.assertRaises(RouteStop):
                 read_owner_token(io.BytesIO(payload))
+
+    def test_credential_pipe_removes_only_line_terminator(self) -> None:
+        self.assertEqual(
+            read_owner_credentials(io.BytesIO(b"synthetic-user\r\nsynthetic-pass \r\n")),
+            ("synthetic-user", "synthetic-pass "),
+        )
+        for payload in (b"", b"user\n", b"user:bad\npass\n", b"user\npass", b"user\npass\r\r\n"):
+            with self.subTest(payload=payload), self.assertRaises(RouteStop):
+                read_owner_credentials(io.BytesIO(payload))
+
+    def test_earthdata_fixed_host_token_exchange_and_redirect_stop(self) -> None:
+        class TokenConnection(FakeConnection):
+            def getresponse(self) -> FakeResponse:
+                return FakeResponse(self.status, {
+                    "access_token": "synthetic.earthdata.token",
+                    "token_type": "Bearer",
+                    "user_id": "synthetic-private-identity",
+                })
+
+        instances = []
+
+        def factory(host: str, timeout: int) -> TokenConnection:
+            conn = TokenConnection(host, timeout)
+            instances.append(conn)
+            return conn
+
+        self.assertEqual(
+            get_earthdata_token("synthetic-user", "synthetic-pass", connection_factory=factory),
+            "synthetic.earthdata.token",
+        )
+        self.assertEqual(instances[0].host, EARTHDATA_HOST)
+        self.assertEqual(instances[0].request_record[:2], ("POST", EARTHDATA_TOKEN_PATH))
+        self.assertEqual(instances[0].request_record[2]["Content-Length"], "0")
+        self.assertTrue(instances[0].closed)
+        with self.assertRaisesRegex(RouteStop, "earthdata_token_response_not_success"):
+            get_earthdata_token(
+                "synthetic-user", "synthetic-pass",
+                connection_factory=lambda host, timeout: TokenConnection(host, timeout, status=302),
+            )
 
     def test_fixed_host_get_only_and_sanitized_result(self) -> None:
         instances = []
