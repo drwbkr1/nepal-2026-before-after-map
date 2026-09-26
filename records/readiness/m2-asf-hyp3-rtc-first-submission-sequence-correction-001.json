@@ -1,0 +1,23 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-FIRST-SUBMISSION-SEQUENCE-CORRECTION-001",
+  "recorded_at_utc": "2026-09-26T23:36:20Z",
+  "status": "corrects_agent_created_next_gate_text_only",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+  "approved_proposal_ref": "contracts/milestone-002-asf-hyp3-rtc-map-route-001-proposal.json",
+  "approved_proposal_sha256": "5118b0bb3727e9ef6080bed9015a68cd64bbbba226dc422948ec5cac294fbb55",
+  "prior_reconciliation_ref": "records/readiness/m2-asf-hyp3-rtc-first-submission-reconciliation-001.json",
+  "prior_reconciliation_sha256": "c908ea3225600212f2283cee97c6e52b4f78b24f9714a3824a360c6288dd8a7e",
+  "correction": {
+    "field": "next_gate",
+    "error": "The prior text placed the complete event-area pair QA gate before M1-SRC-005, although that gate requires M1-SRC-005 itself.",
+    "correct_order": ["M1-SRC-002", "M1-SRC-005", "M1-SRC-001", "M1-SRC-004"],
+    "correct_next_gate": "Observe M1-SRC-002 to a provider terminal status and verify its product if successful. Continue with M1-SRC-005 only under the approved fixed-order stop rules. Inspect the 002/005 event-area pair for both target AOIs before any 001/004 context-strip request. Stop on the first rejected or indeterminate submission or job failure; do not submit duplicates automatically."
+  },
+  "unchanged_evidence": {
+    "first_job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+    "first_job_product_bytes_verified": false,
+    "first_job_pixel_qa_pass": false,
+    "additional_project_job_submissions_recorded": 0
+  },
+  "disposition": "This corrects only an agent-authored sequence sentence. It grants no new authority, changes no source, job, method, or threshold, and does not convert the Running service job into a verified product."
+}

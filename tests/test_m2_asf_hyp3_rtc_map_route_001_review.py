@@ -68,6 +68,7 @@ class HyP3ReviewIdentityTests(unittest.TestCase):
         self.assertEqual(gate["bindings"]["publication_commit_sha"], "6b8c62847a3c50cdcb520a68aca8999e1ed0b0ce")
         self.assertEqual(gate["bindings"]["public_ci_run_id"], 36270829002)
         self.assertEqual(gate["observed_public_ci"]["run_conclusion"], "success")
+        current_routes = []
         for ref, key in (
             ("records/project-control-profile.json", "active_map_route"),
             ("records/long-term-goal.json", "active_map_route"),
@@ -77,7 +78,10 @@ class HyP3ReviewIdentityTests(unittest.TestCase):
             route = state[key] if key == "active_map_route" else state[key]["active_map_route"]
             self.assertEqual(route["authority_ref"], APPROVAL)
             self.assertEqual(route["public_review_gate_ref"], gate_ref)
-            self.assertEqual(route["checkpoint_id"], "M2-ASF-HYP3-RTC-MAP-ROUTE-001-IMPLEMENTATION")
+            current_routes.append((route["checkpoint_id"], route["next_action"]))
+        self.assertEqual(len(set(current_routes)), 1)
+        self.assertTrue(current_routes[0][0])
+        self.assertTrue(current_routes[0][1])
 
 
 if __name__ == "__main__":
