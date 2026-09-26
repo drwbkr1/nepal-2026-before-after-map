@@ -199,11 +199,21 @@ class ValidationTransportTests(unittest.TestCase):
 
     @unittest.skipUnless(sys.platform == "win32", "PowerShell handoff is Windows-only")
     def test_powershell_precheck_asks_for_no_secret_when_unreleased(self) -> None:
-        completed = subprocess.run(
-            ["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
-             str(ROOT / "scripts/invoke_m2_asf_hyp3_rtc_validate_only_001.ps1"), "-CheckRelease"],
-            cwd=ROOT, capture_output=True, text=True, timeout=20, check=False,
-        )
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = Path(temp)
+            wrapper = fixture / "invoke_m2_asf_hyp3_rtc_validate_only_001.ps1"
+            shutil.copyfile(ROOT / "scripts/invoke_m2_asf_hyp3_rtc_validate_only_001.ps1", wrapper)
+            (fixture / "m2_asf_hyp3_rtc_validate_only_001.py").write_text(
+                "import json, sys\n"
+                "print(json.dumps({'status': 'stopped', 'code': 'validation_release_unavailable'}))\n"
+                "sys.exit(12)\n",
+                encoding="utf-8",
+            )
+            completed = subprocess.run(
+                ["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
+                 str(wrapper), "-CheckRelease"],
+                cwd=fixture, capture_output=True, text=True, timeout=20, check=False,
+            )
         self.assertEqual(completed.returncode, 12)
         self.assertIn("no credential was requested", completed.stdout)
         self.assertNotIn("NASA Earthdata password", completed.stdout + completed.stderr)
