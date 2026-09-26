@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-GDAL-HEADER-PIXEL-RECOVERY-002-POST-CI-RECONCILIATION",
+  "status": "terminal_pixel_qa_block_provenance_locked_no_retry",
+  "authority": {
+    "proposal_sha256": "293a9f90a1d6ca9d1531423798d191901d3772999763fbce34ca6b583e5f7d8e",
+    "review_bundle_sha256": "933f141a4474edafb0fe2580e97428c3dd47a802e4ae8d6d434fb0e6803fb785",
+    "approval_sha256": "bf9b0a05e1e4ad2061707cf8961d8d3027db2f6d7568f0de489ffc2a261918af"
+  },
+  "public_sequence": {
+    "packet_and_approval_commit_sha": "2e4dfc4c03fc4c97e9cea589b091ea24cf2803d5",
+    "packet_and_approval_ci_run_id": 36257809958,
+    "packet_and_approval_ci_conclusion": "success",
+    "implementation_commit_sha": "dcab771cddb09641ad4ce29538b9a60f122c0f82",
+    "implementation_ci_run_id": 36259043253,
+    "implementation_ci_conclusion": "success",
+    "execution_gate_commit_sha": "ebbfc8c4c4053014adddd6cbe3b47865ab129f3f",
+    "execution_gate_ci_run_id": 36259132922,
+    "execution_gate_ci_conclusion": "success",
+    "final_no_pixel_preflight_commit_sha": "82a983e77c847edd1c64ad4012c1e4cee9c1a080",
+    "final_no_pixel_preflight_ci_run_id": 36259347097,
+    "final_no_pixel_preflight_ci_conclusion": "success",
+    "sanitized_terminal_commit_sha": "0179a356740b477ba69d8c19a232b0bcce20bd57",
+    "sanitized_terminal_ci_run_id": 36259459817,
+    "sanitized_terminal_ci_conclusion": "success"
+  },
+  "gate_sha256": {
+    "packet_publication": "40390823eab0548f1b3d98d3f84e23cc21278e78eeff87d80349522913bb98b4",
+    "implementation": "c23df89e759b4e677ac261b99d099331f08cc59d956fc59dfa14a73e5ad098f4",
+    "execution": "254c23d6283d6862ef70c17629c89959df8fc887d796b492c27bc6dbc59817da",
+    "final_no_pixel_preflight": "88e6a9c93f906578afc3306120feafd6b9f188aefbd4dda5684ace979d1bfaaa"
+  },
+  "terminal_ref": "records/readiness/m2-optical-gdal-header-pixel-recovery-002-terminal.json",
+  "terminal_sha256": "a7fe3cedd24ff23158f95007b6931b403ae1745a19fc0006b97d834a08aa98a0",
+  "non_git_receipt_sha256": {
+    "started": "e29d3fcad3c110a9b229be68fc629b0def43dbf6732234aed826e009eb099d00",
+    "terminal_reservation": "fe7cf1622c2229583680e33f5d8c365d5f026ea7428b9a77cea5822fb04a20b6",
+    "cleanup_reservation": "82b78ee3aa881e1652daf0b88e6c26585265924e57105256c1dbcc3d168b87dc",
+    "worker_terminal": "1db47c37f4719c43574620159bd3bd3c52b08ff51769a330fe07406d99b13397",
+    "header": "c88ceac048a53828729d9a7b0a25aefcfb0dba1c98a448d95ce2f5f26f8f8aff",
+    "pixel_qa": "78d76dffd6714a4d0a4ad6dc60c5909db335753b647e17082696b01dc050cef8",
+    "classification_geotiff_not_published": "d117132aefa9626364f4afd7d26e229d612129ea02564d4b35b4b2c987c0964e",
+    "terminal": "c94119e625e8baac9ca8a4b36217d2434fc9ccde8733a0cc5de1848b59d716d9",
+    "cleanup": "db641119a50273852ce4523e72f490b8bef3c3d49b6f0e90c8dfd977b88943e5"
+  },
+  "attempt": {
+    "id": "real-001",
+    "consumed": true,
+    "retry_authorized": false,
+    "single_process_exit_code": 0,
+    "source_order": ["M2-OPT-001", "M2-OPT-002"],
+    "both_headers_status": "pass_header_readability_only",
+    "pixel_qa_status": "block",
+    "aoi_dispositions": {
+      "AOI-SOURCE": "block",
+      "AOI-UPPER-CORRIDOR": "block",
+      "AOI-OVERVIEW": "block"
+    },
+    "registration_status": "defer",
+    "dominant_qa_limitations": [
+      "Paired usable surface fraction is below the frozen minimum in both event AOIs; cloud and snow exclusions are recorded by date in the private QA receipt.",
+      "The one-tile regional overview has incomplete coverage and cannot support a full-overview claim.",
+      "Stable B11 registration controls are below the frozen minimum; registration is not admitted."
+    ],
+    "source_materializations_unchanged": true,
+    "receipt_persistence_errors": [],
+    "automatic_retry": false
+  },
+  "historical_boundary": {
+    "original_optical_pilot_and_header_recovery_001_remain_terminal": true,
+    "historical_arcpy_exit_cause_identified": false,
+    "radar_native_gtc_recovery_003_remains_terminal": true
+  },
+  "scientific_disposition": {
+    "local_optical_pixel_qa_pass": false,
+    "optical_baseline_admitted": false,
+    "change_analysis_performed": false,
+    "event_attribution": false,
+    "derived_pixel_or_scientific_publication": false
+  },
+  "next_boundary": "This exact optical GDAL recovery envelope is closed. The QA block cannot be retried, relaxed, source-substituted, or presented as an observed-change map under this approval. A different map-oriented route or any scientific operation requires a separate reviewed authority decision."
+}
