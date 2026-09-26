@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 IMPLEMENTATION_GATE = "records/readiness/m2-asf-hyp3-rtc-map-route-001-implementation-publication-gate.json"
-SUCCESSOR_GATE = "records/readiness/m2-asf-hyp3-rtc-account-credential-handoff-implementation-gate-002.json"
+SUCCESSOR_GATE = "records/readiness/m2-asf-hyp3-rtc-account-handoff-implementation-gate-002.json"
 SOURCE_GATE = "records/source-gates/m2-asf-hyp3-rtc-live-source-gate-001.json"
 APPROVAL = "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json"
 
