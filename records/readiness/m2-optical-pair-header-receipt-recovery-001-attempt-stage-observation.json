@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-HEADER-RECEIPT-RECOVERY-001-ATTEMPT-STAGE-OBSERVATION",
+  "status": "terminal_stopped_before_header",
+  "attempt_id": "real-001",
+  "final_preflight_ref": "records/readiness/m2-optical-pair-header-receipt-recovery-001-final-preflight.json",
+  "final_preflight_sha256": "7fc0522622cccc9635de98b63c2158b95938d7cdbffc407341c2bfe1d5445580",
+  "sanitized_terminal_ref": "records/readiness/m2-optical-pair-header-receipt-recovery-001-terminal.json",
+  "sanitized_terminal_sha256": "3cf75f6ce169f3b539970b37e5b788c8bafd3df89dea50a8c21235b68aa219af",
+  "last_durable_child_marker": "arcpy-import-started.json",
+  "last_durable_child_marker_sha256": "4e17e474cb144456f423547375fee52853892229bbaf2520dac98294459da474",
+  "child_exit_code": 1,
+  "arcpy_import_complete_marker_present": false,
+  "header_receipt_present": false,
+  "pixel_qa_started_marker_present": false,
+  "worker_terminal_receipt_present": false,
+  "supervisor_terminal_receipt_present": true,
+  "supervisor_cleanup_receipt_present": true,
+  "supervisor_cleanup_status": "pass_preserved_inputs",
+  "source_materializations_unchanged": true,
+  "automatic_retry": false,
+  "original_pilot_reused_or_mutated": false,
+  "cause_identified": false,
+  "cause_boundary": "The last durable marker precedes ArcPy import completion. The retained records do not establish why the child exited or whether ArcPy import itself caused the exit.",
+  "result_boundary": {
+    "new_header_result_established": false,
+    "new_pixel_qa_result_established": false,
+    "baseline_or_change_analysis": false,
+    "interpretation_or_attribution": false,
+    "derived_pixel_or_scientific_publication": false
+  },
+  "early_custody_read_deviation_ref": "records/readiness/m2-optical-pair-header-receipt-recovery-001-early-custody-read-observation.json"
+}

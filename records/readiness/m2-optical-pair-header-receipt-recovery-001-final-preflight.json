@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-OPTICAL-PAIR-HEADER-RECEIPT-RECOVERY-001-FINAL-PREFLIGHT",
+  "status": "pass_offline_exact_identity_no_pixel_decode",
+  "checked_at_utc": "2026-09-26T00:33:08Z",
+  "proposal_sha256": "45b7dc504bf3f92b3dc72db5130596e7465c06f74e3aeb679670e886d0eee2f3",
+  "execution_gate_sha256": "feed8766d9b24ad7e3940d7501b64034668e2fa59ce11574771508ce1ca298e0",
+  "old_terminal_sha256": "accdd4e2f192c0e527f4d92ea35152d6bb04694e682356c71f3141b316a44cfc",
+  "sources_in_order": [
+    {
+      "source_id": "M2-OPT-001",
+      "archive_size_bytes": 1069015437,
+      "archive_sha256": "b8050b4aaaacc2014c8b5dbec7fca8738c8be74f2cf9d65df7dda089ac5114e8",
+      "manifest_sha256": "92fcfad15c70297dbc174c2ab470257196e21d232cb5ad131fba21b23ab8b542",
+      "file_count": 95,
+      "inventory_digest": "84f47c5711ba5ccc50d7589d715dc5310e3daacbf397933eb0033cbf4468435c"
+    },
+    {
+      "source_id": "M2-OPT-002",
+      "archive_size_bytes": 1046835859,
+      "archive_sha256": "0c201b7196b87a9efd79deb5a4c5a5cab6e45cce7e3d2d7bce593c9b3368a1ae",
+      "manifest_sha256": "7c85c00bca387d303354554c43070ce665893237f06b00f97600ef646ab969ea",
+      "file_count": 95,
+      "inventory_digest": "3179e77f2fa837a0bb80ad59a7177a0ef9f870f8bf11a9e71ced6cbb0df209a6"
+    }
+  ],
+  "arcgis_runtime": {
+    "version": "3.7.1",
+    "spatial": "Available"
+  },
+  "network_requests": false,
+  "credential_or_account_action": false,
+  "raster_pixel_values_decoded": false,
+  "source_or_original_attempt_mutated": false,
+  "new_real_attempt_started": false,
+  "early_custody_read_observation_ref": "records/readiness/m2-optical-pair-header-receipt-recovery-001-early-custody-read-observation.json"
+}
