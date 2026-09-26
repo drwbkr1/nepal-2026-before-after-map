@@ -1,0 +1,98 @@
+{
+  "contract_version": "source-gate/v2",
+  "assessment_id": "NEPAL-M2-ASF-HYP3-RTC-PROCESSING-SOURCE-GATE-001",
+  "assessed_at": "2026-09-26T22:39:43Z",
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+    "authorized_actions": ["submit_exact_free_basic_rtc_job", "inspect_generated_product_locally"],
+    "expires_at_utc": null
+  },
+  "bindings": {
+    "approved_proposal_sha256": "5118b0bb3727e9ef6080bed9015a68cd64bbbba226dc422948ec5cac294fbb55",
+    "approved_review_bundle_sha256": "f6afe7e4f5b1210c6d614ca4ba7c701b8a016bc773825f72cf1eb16d07a8bdca",
+    "owner_approval_sha256": "1c3103429418f1c1847fa5865f5634b6dece7acd8cd19e42a279537709087596",
+    "validate_only_terminal_reconciliation_sha256": "01ff8c31b5297bdc3441188669225698c4e1aefd69d08d75bf113622dd126593"
+  },
+  "intended_use": {
+    "summary": "Source eligibility for at most one fixed-order free HyP3 Basic RTC_GAMMA job per approved S1D scene, followed by non-Git receipt and local product identity and integrity inspection. This gate does not release execution before separate implementation, public CI, current free-credit, and no-content gates; it does not accept product pixels for map use or authorize redistribution.",
+    "planned_actions": ["submit_exact_free_basic_rtc_job", "inspect_generated_product_locally"]
+  },
+  "sources": [
+    {
+      "source_id": "ASF-HYP3-BASIC-RTC-GAMMA-FOUR-EXACT-S1D-GRDS",
+      "name": "ASF HyP3 Basic on-demand RTC_GAMMA for four approved Sentinel-1D GRDs",
+      "locator": "https://hyp3-api.asf.alaska.edu/jobs",
+      "criteria": [
+        {
+          "id": "identity", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [{"type": "static", "locator": "records/observations/m2-asf-rtc-four-scene-candidate-001-local.json", "note": "Hash-bound exact GRD names, one-scene job definitions, method settings, and event-first order."}],
+          "note": "This identifies the service request and source cohort. Actual generated products will need independent identity checks."
+        },
+        {
+          "id": "authority", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [{"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/guides/rtc_product_guide/", "observed_at": "2026-09-26T22:39:43Z", "note": "Official ASF full-scene RTC_GAMMA product guide describes exact processing options and product package."}],
+          "note": "ASF operates this Basic service and documents its RTC method."
+        },
+        {
+          "id": "access", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/about/hyp3_basic/", "observed_at": "2026-09-26T22:39:43Z", "note": "Official Basic guidance permits Earthdata users to request no-payment On Demand products, with monthly free credits and 14-day output retention."},
+            {"type": "static", "locator": "records/readiness/m2-asf-hyp3-rtc-validate-only-terminal-reconciliation-001.json", "note": "Owner-controlled Basic account check reported at least 240 free credits, and all four exact definitions passed authenticated validation at at most 60 credits each."
+            }
+          ],
+          "note": "Access and exact-job eligibility passed at validation time. A fresh free Basic credit check is mandatory immediately before processing; no paid path is allowed."
+        },
+        {
+          "id": "rights", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/about/hyp3_basic/", "observed_at": "2026-09-26T22:39:43Z", "note": "ASF expressly offers users free Basic On Demand product requests and downloads for 14 days."},
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/usage_guidelines/", "observed_at": "2026-09-26T22:39:43Z", "note": "ASF provides product-specific acknowledgement and DOI instructions, supporting intended local research inspection while reserving publication conditions."},
+            {"type": "static", "locator": "records/source-gates/m2-asf-hyp3-owner-access-attestation-001-local.json", "note": "Owner reported accepting the agreement presented at sign-in and public visibility of jobs and outputs."},
+            {"type": "static", "locator": "records/source-gates/m2-asf-hyp3-rtc-terms-followup-001.json", "note": "Owner expressly declined retrieving the exact agreement document for continuation. This does not waive restrictions or authorize the agent to accept terms."}
+          ],
+          "note": "Pass is narrow: request free Basic processing and inspect the resulting product locally under the user's reported accepted access. No claim is made about the unavailable exact agreement text, output redistribution, product-specific DEM license, map export, or scientific publication. Stop if a changed or conflicting term is presented; inspect actual README before downstream use."
+        },
+        {
+          "id": "provenance", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [{"type": "static", "locator": "scripts/m2_asf_hyp3_rtc_core_001.py", "note": "Code hash-binds candidate, proposal, bundle, approval, exact source order and RTC settings."}],
+          "note": "Persist exact submission and provider job identity; later product README and log must bind inputs, ASF method, DEM, and product."
+        },
+        {
+          "id": "integrity", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [{"type": "static", "locator": "scripts/m2_asf_hyp3_rtc_zip_core_001.py", "note": "Generated-data-tested plan verifies file size and SHA-256, ZIP safety and CRC, exact members, and no-replace custody before pixel use."}],
+          "note": "This is a post-acquisition verification plan, not a claim that any provider bytes exist or passed."
+        },
+        {
+          "id": "fitness", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "records/observations/m2-asf-four-source-catalog-mosaic-coverage-001-local.json", "note": "Approved catalog footprints fit an attempt to establish two-date event-AOI raster coverage, not actual valid pixels."},
+            {"type": "static", "locator": "records/readiness/m2-asf-hyp3-rtc-validate-only-terminal-reconciliation-001.json", "note": "Live Basic API accepted exact definitions and quoted no more than 60 credits for each."
+            }
+          ],
+          "note": "Fit is limited to trying the exact job and assessing product integrity. Real AOI pixels, masks, registration, and map fitness remain untested."
+        },
+        {
+          "id": "privacy-security", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "records/source-gates/m2-asf-hyp3-owner-access-attestation-001-local.json", "note": "Owner accepted public job metadata and outputs."},
+            {"type": "static", "locator": "scripts/m2_asf_hyp3_rtc_validate_only_001.py", "note": "Owner-controlled secret-safe handoff passed synthetic tests and a real four-source validation without credentials in receipts."},
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/using/", "observed_at": "2026-09-26T22:39:43Z", "note": "ASF warns all submitted jobs, user IDs and generated downloads are public; names must omit sensitive information."}
+          ],
+          "note": "A future processing worker must pass its own secret-exposure and interruption tests. Public job names are fixed non-sensitive source IDs; files and account identifiers stay outside Git."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "ready",
+    "blocking_reasons": [],
+    "live_verification_pending": [],
+    "approved_actions": ["submit_exact_free_basic_rtc_job", "inspect_generated_product_locally"]
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": ["record_sanitized_source_assessment", "implement_offline_executor_and_tests"],
+    "requires_explicit_authorization": ["authenticate", "submit_exact_free_basic_rtc_job", "spend_free_credits", "inspect_generated_product_locally", "publish_source_or_derived_pixels"]
+  },
+  "claim_boundary": "This source assessment resolves only the narrowly intended free Basic generation and local inspection path under existing owner authority. It is neither execution release nor a product license, product identity, pixel-QA pass, map-use pass, derived-pixel publication, M3/M4 result, or scientific claim."
+}

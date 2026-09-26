@@ -1,0 +1,38 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-SUBMIT-FIRST-LOCAL-READINESS-001",
+  "checked_at_utc": "2026-09-26T22:47:57Z",
+  "status": "pass_local_implementation_tests_public_ci_and_preflight_pending",
+  "scope": "Exact M1-SRC-002 processing-job submission worker only. This record does not release authentication or a job request.",
+  "bindings": {
+    "approved_proposal_sha256": "5118b0bb3727e9ef6080bed9015a68cd64bbbba226dc422948ec5cac294fbb55",
+    "owner_approval_sha256": "1c3103429418f1c1847fa5865f5634b6dece7acd8cd19e42a279537709087596",
+    "processing_source_gate_sha256": "7f1af5e46f9b1cba3753383b686a68618c7694b53a4be07d612b6df6045bd8a4",
+    "validation_terminal_reconciliation_sha256": "01ff8c31b5297bdc3441188669225698c4e1aefd69d08d75bf113622dd126593",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_submit_first_001.py": "1cab381bb9234363f303542f60bb882018617db3283237178c21f0745327f34e",
+      "scripts/invoke_m2_asf_hyp3_rtc_submit_first_001.ps1": "5fef8e86c49ce4b81770713c6b1e42086e05032dab9284e3e35aad26e5922cc6",
+      "scripts/validate_m2_asf_hyp3_rtc_arcgis_synthetic_001.py": "e80d6af0bbfa2592a17bdb76ee051c15a401544a40c95242f35679c7ef37ca41",
+      "tests/test_m2_asf_hyp3_rtc_submit_first_001.py": "f74cdc20b974a9783563a5583ab17a8ee5dd1b4ce3f5fda6eb29f618d69cb802"
+    }
+  },
+  "checks": {
+    "source_gate_validator": "pass_ready_for_narrow_source_use",
+    "submit_first_synthetic_tests": 10,
+    "full_repository_tests": 945,
+    "full_repository_skips": 6,
+    "installed_arcgis_pro_disposable_six_raster_header_test": "pass",
+    "installed_arcgis_pro_disposable_shift_rejected": true,
+    "project_controls_required_files": 1463,
+    "check_project": "pass",
+    "submission_worker_check_release_before_gate": "stopped_before_secret_read"
+  },
+  "preserved_synthetic_failure": "The first installed ArcGIS test invocation produced a passing header result but its launcher erroneously caught its own SystemExit(0) and returned failure. Only the test launcher was corrected; a distinct rerun exited 0 with six disposable rasters. Neither run opened project imagery, external custody, credentials, or a provider job.",
+  "assertions": {
+    "account_or_job_request_performed_by_this_implementation": false,
+    "processing_job_submitted": false,
+    "provider_product_or_pixel_read": false,
+    "public_ci_gate_complete": false,
+    "final_no_content_preflight_complete": false
+  },
+  "next_action": "Publish the exact sanitized implementation to default branch and require public CI success. Then bind its hashes in a separate implementation gate, publish that gate, run a final no-content collision and rights preflight, and only afterward offer the owner a secret-safe first-scene handoff."
+}
