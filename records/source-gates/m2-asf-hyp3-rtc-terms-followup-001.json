@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-TERMS-FOLLOWUP-001",
+  "status": "owner_declines_exact_agreement_retrieval_for_continuation",
+  "owner_answer_verbatim": "You don't need the agreement. Please continue",
+  "decision_channel": "request_user_input_async",
+  "bindings": {
+    "approved_proposal_sha256": "5118b0bb3727e9ef6080bed9015a68cd64bbbba226dc422948ec5cac294fbb55",
+    "approved_review_bundle_sha256": "f6afe7e4f5b1210c6d614ca4ba7c701b8a016bc773825f72cf1eb16d07a8bdca",
+    "approved_envelope_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json"
+  },
+  "narrow_interpretation": {
+    "owner_will_not_supply_exact_accepted_agreement_document": true,
+    "official_public_service_and_product_terms_still_require_assessment": true,
+    "account_probe_may_use_a_separate_read_only_source_gate_after_public_ci": true,
+    "product_generation_requires_separate_current_access_and_rights_pass": true,
+    "output_redistribution_rights_assumed": false,
+    "agent_acceptance_of_new_or_changed_terms_authorized": false,
+    "paid_credits_or_purchases_authorized": false,
+    "scientific_or_derived_pixel_publication_authorized": false
+  },
+  "claim_boundary": "The owner did not provide the exact agreement. This follow-up removes a request for owner retrieval; it is not evidence that any terms were reviewed or that product use, jobs, pixels, or publication are eligible."
+}

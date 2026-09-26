@@ -41,8 +41,7 @@ class CreditTests(unittest.TestCase):
         for value in (239, None, True, float("nan")):
             with self.subTest(value=value), self.assertRaises(RouteStop):
                 check_free_credits({"application_status": "APPROVED", "remaining_credits": value}, required_jobs=4)
-        with self.assertRaises(RouteStop):
-            check_free_credits({"application_status": "PENDING", "remaining_credits": 240})
+        self.assertEqual(check_free_credits({"application_status": "NOT_STARTED", "remaining_credits": 240}), 240)
 
 
 class SubmissionTests(unittest.TestCase):

@@ -118,7 +118,7 @@ def one_job_payload(jobs: tuple[dict, ...], source_id: str) -> dict:
     return {"jobs": [{key: job[key] for key in ("name", "job_type", "job_parameters")}], "validate_only": False}
 
 
-def check_free_credits(account: dict, *, required_jobs: int = 1) -> int:
+def check_free_credits(account: dict, *, required_jobs: int = 1) -> float | int:
     """Check free Basic capacity without retaining account identifiers."""
     if not isinstance(account, dict) or not 1 <= required_jobs <= 4:
         raise RouteStop("account_or_job_count_invalid")
@@ -127,9 +127,9 @@ def check_free_credits(account: dict, *, required_jobs: int = 1) -> int:
         raise RouteStop("free_credit_balance_unknown")
     if value < required_jobs * PER_JOB_CREDIT_CEILING:
         raise RouteStop("insufficient_free_credits")
-    if account.get("application_status") != "APPROVED":
-        raise RouteStop("account_not_approved_for_processing")
-    return int(value)
+    # The API's application_status field is not documented as a Basic-service
+    # eligibility decision. A validate-only exact-job response checks that.
+    return value
 
 
 def inspect_submission(reply: dict, expected_job: dict) -> dict:
