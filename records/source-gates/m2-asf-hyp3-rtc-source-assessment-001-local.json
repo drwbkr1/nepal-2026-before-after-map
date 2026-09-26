@@ -1,0 +1,100 @@
+{
+  "contract_version": "source-gate/v2",
+  "assessment_id": "NEPAL-M2-ASF-HYP3-RTC-SOURCE-ASSESSMENT-001-LOCAL",
+  "assessed_at": "2026-09-26T20:37:22Z",
+  "authority": {
+    "mode": "not_granted",
+    "authority_ref": "",
+    "authorized_actions": [],
+    "expires_at_utc": null
+  },
+  "intended_use": {
+    "summary": "Assess a conditional HyP3 Basic GAMMA RTC route for the four exact frozen ascending Sentinel-1D GRDs, with local integrity and pixel QA and, only on QA pass, an ArcGIS before/after visual panel. No baseline, change analysis, attribution, or derived-pixel publication.",
+    "planned_actions": ["anonymous metadata review", "conditional four-job RTC acquisition for local QA"]
+  },
+  "sources": [
+    {
+      "source_id": "ASF-HYP3-BASIC-RTC-GAMMA-FOUR-EXACT-S1D-GRDS",
+      "name": "ASF HyP3 Basic full-scene GAMMA RTC from M1-SRC-002, M1-SRC-005, M1-SRC-001, and M1-SRC-004",
+      "locator": "https://hyp3-api.asf.alaska.edu/",
+      "criteria": [
+        {
+          "id": "identity", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "records/observations/m2-asf-rtc-four-scene-candidate-001-local.json", "note": "Four exact scene names and GAMMA job shapes are bound offline to the saved official API schema and ASF catalog rows."},
+            {"type": "static", "locator": "records/observations/m2-asf-ascending-adjacent-001-local.json", "note": "ASF public catalog supplied the adjacent two exact GRD rows."}
+          ],
+          "note": "This identifies the proposed input cohort and service, not future generated product IDs or bytes."
+        },
+        {
+          "id": "authority", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/using/", "observed_at": "2026-09-26T20:37:22Z", "note": "ASF's official HyP3 documentation identifies the Basic service and its Sentinel-1 on-demand workflows."},
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/guides/rtc_product_guide/", "observed_at": "2026-09-26T20:37:22Z", "note": "Official guide identifies full-scene GAMMA RTC output and method options."}
+          ],
+          "note": "ASF is the direct processing provider and authoritative source for service behavior, not proof of this cohort's product fitness."
+        },
+        {
+          "id": "access", "required": true, "requires_live": true, "status": "unknown",
+          "evidence": [
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/about/hyp3_basic/", "observed_at": "2026-09-26T20:37:22Z", "note": "Basic uses Earthdata Login, documents free monthly credits and 14-day output retention."},
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/using/credits/", "observed_at": "2026-09-26T20:37:22Z", "note": "Official table documents the nominal per-job 10 m RTC credit cost."},
+            {"type": "static", "locator": "records/source-gates/m2-asf-hyp3-owner-access-attestation-001-local.json", "note": "Owner reports successful Vertex sign-in; the agent did not inspect the account."}
+          ],
+          "note": "Current account credit balance, exact S1D eligibility, possible restrictions, and accepted job cost must be verified without submission before any job. No paid purchase is permitted."
+        },
+        {
+          "id": "rights", "required": true, "requires_live": true, "status": "unknown",
+          "evidence": [
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/using/", "observed_at": "2026-09-26T20:37:22Z", "note": "ASF says job metadata and generated products are public."},
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/usage_guidelines/", "observed_at": "2026-09-26T20:37:22Z", "note": "ASF asks users to include each product's acknowledgement in publications and presentations."},
+            {"type": "static", "locator": "records/source-gates/m2-asf-hyp3-owner-access-attestation-001-local.json", "note": "Owner attests to accepting an agreement at sign-in, but its exact document and version were not captured."}
+          ],
+          "note": "The exact accepted agreement and derived-output redistribution terms have not been verified. Local QA and eventual map export must remain conditional; raw or derived pixel publication is excluded."
+        },
+        {
+          "id": "provenance", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "records/observations/m2-asf-rtc-four-scene-candidate-001-local.json", "note": "Candidate binds the existing M1 source IDs to exact GRD names, method settings, order, and saved OpenAPI schema."},
+            {"type": "static", "locator": "contracts/milestone-002-asf-hyp3-rtc-map-route-001-proposal-draft.json", "note": "Separate provider provenance and local no-replace custody are required; local AUX_RESORB application is not claimed."}
+          ],
+          "note": "Future job and product IDs, actual orbit/DEM versions, README, and processing logs must be retained after generation."
+        },
+        {
+          "id": "integrity", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "contracts/milestone-002-asf-hyp3-rtc-map-route-001-proposal-draft.json", "note": "Conditional plan requires exact job settings and IDs, non-Git append-only custody, hashes, container verification, and no-replace promotion."}
+          ],
+          "note": "Post-acquisition integrity plan supports consideration of a bounded acquisition; no product bytes or integrity pass exist yet."
+        },
+        {
+          "id": "fitness", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "records/observations/m2-asf-four-source-catalog-mosaic-coverage-001-local.json", "note": "Four catalog footprints meet the frozen 99% geometry screen as a date-pair union, not valid raster coverage."},
+            {"type": "static", "locator": "config/qa/pixel-readiness-contract.json", "note": "Frozen 99% valid coverage, 80% usable AOI, EPSG:32645 grid and registration checks remain prerequisites."}
+          ],
+          "note": "Fit only for an attempt to establish product and pixel fitness; it is not evidence of usable radar pixels, admission, or observed change."
+        },
+        {
+          "id": "privacy-security", "required": true, "requires_live": false, "status": "unknown",
+          "evidence": [
+            {"type": "static", "locator": "records/source-gates/m2-asf-hyp3-owner-access-attestation-001-local.json", "note": "Owner accepts public job metadata and outputs; no identity or secret is recorded."},
+            {"type": "static", "locator": "AGENTS.md", "note": "Project rules keep credentials, source archives, rasters and packages outside Git."}
+          ],
+          "note": "A separate Earthdata secret-safe handoff and synthetic leak tests have not been implemented; no token, account access, or job action is permitted yet."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "blocked",
+    "blocking_reasons": ["Current account capacity and exact S1D job eligibility unknown", "Exact accepted terms and output rights not captured or assessed", "Earthdata secret-safe handoff not implemented or tested", "No method or job authority approved"],
+    "live_verification_pending": ["ASF-HYP3-BASIC-RTC-GAMMA-FOUR-EXACT-S1D-GRDS:access", "ASF-HYP3-BASIC-RTC-GAMMA-FOUR-EXACT-S1D-GRDS:rights"],
+    "approved_actions": ["anonymous metadata review"]
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": ["read public ASF metadata", "record local review evidence"],
+    "requires_explicit_authorization": ["authenticate", "submit job", "spend credits", "download provider output", "publish source or derived pixels"]
+  },
+  "claim_boundary": "This assessment does not authorize account access or processing. It permits a conditional review packet that stops before any job unless every unresolved access, rights, privacy, integrity, and public-CI gate passes."
+}

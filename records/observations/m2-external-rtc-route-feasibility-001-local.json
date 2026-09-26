@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-EXTERNAL-RTC-ROUTE-FEASIBILITY-001-LOCAL",
+  "status": "public_metadata_research_only_no_source_adoption",
+  "retrieved_at_utc": "2026-09-26T19:50:37Z",
+  "query_responses": {
+    "asf_exact_grd": {
+      "url": "https://api.daac.asf.alaska.edu/services/search/param?granule_list=S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB%2CS1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4&output=geojson",
+      "payload_ref": "scratch/external-rtc-feasibility-001/asf_exact_grd.json",
+      "payload_sha256": "7f641c491e898943b3ce6eef44367d80616480db7f687cbbe3a2e2e77bad5da3",
+      "payload_bytes": 10353
+    },
+    "cdse_rtc_window": {
+      "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1-RTC%27+and+ContentDate%2FStart+ge+2026-08-01T00%3A00%3A00.000Z+and+ContentDate%2FStart+lt+2026-09-26T00%3A00%3A00.000Z&%24select=Id%2CName%2CContentDate&%24top=1&%24count=true",
+      "payload_ref": "scratch/external-rtc-feasibility-001/cdse_rtc_window.json",
+      "payload_sha256": "edd11d7c1ea99f6b26e04c1ad8ccc4262a0b1b76335d20ab7c13f9f1ac07f9e7",
+      "payload_bytes": 88
+    },
+    "cdse_rtc_latest": {
+      "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?%24filter=Collection%2FName+eq+%27SENTINEL-1-RTC%27&%24select=Id%2CName%2CContentDate&%24top=1&%24orderby=ContentDate%2FStart+desc&%24count=true",
+      "payload_ref": "scratch/external-rtc-feasibility-001/cdse_rtc_latest.json",
+      "payload_sha256": "a96ae180538b5b3579ead798309a75a308c36f5c3de264169f08d910c7122ac0",
+      "payload_bytes": 552
+    },
+    "cmr_opera_nepal_window": {
+      "url": "https://cmr.earthdata.nasa.gov/search/granules.json?collection_concept_id=C2777436413-ASF&temporal=2026-08-01T00%3A00%3A00Z%2C2026-09-26T00%3A00%3A00Z&bounding_box=84.7%2C27.75%2C85.65%2C28.45&page_size=1",
+      "payload_ref": "scratch/external-rtc-feasibility-001/cmr_opera_nepal_window.json",
+      "payload_sha256": "ff989e4f7ef1faea4f5599c30698629b346ff98cfc9572c7e10531423d405f54",
+      "payload_bytes": 306
+    }
+  },
+  "asf_exact_scene_rows": [
+    {
+      "scene_name": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4",
+      "start_utc": "2026-08-28T12:21:41Z",
+      "platform": "Sentinel-1D",
+      "processing_level": "METADATA_GRD_HD",
+      "flight_direction": "ASCENDING"
+    },
+    {
+      "scene_name": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4",
+      "start_utc": "2026-08-28T12:21:41Z",
+      "platform": "Sentinel-1D",
+      "processing_level": "GRD_HD",
+      "flight_direction": "ASCENDING"
+    },
+    {
+      "scene_name": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB",
+      "start_utc": "2026-08-16T12:21:41Z",
+      "platform": "Sentinel-1D",
+      "processing_level": "METADATA_GRD_HD",
+      "flight_direction": "ASCENDING"
+    },
+    {
+      "scene_name": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB",
+      "start_utc": "2026-08-16T12:21:41Z",
+      "platform": "Sentinel-1D",
+      "processing_level": "GRD_HD",
+      "flight_direction": "ASCENDING"
+    }
+  ],
+  "cdse_sentinel_1_rtc_window_count": 0,
+  "cdse_sentinel_1_rtc_latest_count": 1620951,
+  "cdse_sentinel_1_rtc_latest_item": [
+    {
+      "@odata.mediaContentType": "application/octet-stream",
+      "Id": "02e3e55a-b219-40a1-b1c4-ae52577eaf13",
+      "Name": "N03E019_2025_04_01_073F2C",
+      "ContentDate": {
+        "Start": "2025-04-01T04:24:48.775583Z",
+        "End": "2025-04-01T04:25:30.056574Z"
+      }
+    }
+  ],
+  "cmr_opera_nepal_window_rows": 0,
+  "assertions": {
+    "requests_authenticated": false,
+    "product_bytes_acquired": false,
+    "hyp3_job_submitted": false,
+    "new_source_adopted": false,
+    "project_radar_pixels_read": false,
+    "baseline_or_change_analysis": false
+  }
+}

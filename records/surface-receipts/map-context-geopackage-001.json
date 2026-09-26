@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "status": "pass_ogr_metadata_geopackage_only_not_final_arcgis_delivery",
+  "output": "C:\\Projects\\Active\\nepal-2026-before-after-map\\scratch\\map-context-gpkg-001\\Nepal_2026_Map_Context.gpkg",
+  "output_bytes": 172032,
+  "output_sha256": "5bdb418dc8af0eed9ce9ba4db6712d7af26cc8b1f5a107329a94d50ec3bf70c8",
+  "readme_sha256": "ac96ff38d836ef31360506eaf32387aceba4dcd36e0b1fef7f4a50fa4c022fe5",
+  "layers": [
+    {
+      "layer": "StudyAreas",
+      "count": 3,
+      "ids": [
+        "AOI-OVERVIEW",
+        "AOI-SOURCE",
+        "AOI-UPPER-CORRIDOR"
+      ],
+      "wkid": 32645,
+      "input_ref": "config/aoi/approved-study-areas-epsg32645.json",
+      "input_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"
+    },
+    {
+      "layer": "RadarCatalogFootprints",
+      "count": 6,
+      "ids": [
+        "M1-SRC-001",
+        "M1-SRC-002",
+        "M1-SRC-003",
+        "M1-SRC-004",
+        "M1-SRC-005",
+        "M1-SRC-006"
+      ],
+      "wkid": 32645,
+      "input_ref": "config/arcgis/radar-catalog-footprints-epsg32645.json",
+      "input_sha256": "40a0ded0ca1dc33d60a136c7c9b1b91df960bb885f58b1d418d66cfe183e530f"
+    },
+    {
+      "layer": "DEMTileBoxes",
+      "count": 4,
+      "ids": [
+        "M2-DEM-001",
+        "M2-DEM-002",
+        "M2-DEM-003",
+        "M2-DEM-004"
+      ],
+      "wkid": 32645,
+      "input_ref": "config/arcgis/approved-dem-tile-boxes-epsg32645.json",
+      "input_sha256": "112f158e66cb0a1220214e15b8bbcca7ad58d657547b2d3e3b9247a5b6e8e310"
+    }
+  ],
+  "checks": {
+    "gdal_version": "3.12.2e",
+    "proj_network": "OFF",
+    "geometry_and_attributes_reopened_equal": true,
+    "arcgis_pro_open_or_export_tested": false,
+    "satellite_or_dem_pixels_read": false,
+    "scientific_change_claim": false
+  }
+}

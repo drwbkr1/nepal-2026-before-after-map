@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-MAP-CONTEXT-ARCGIS-LOCAL-QA-001",
+  "checked_at_utc": "2026-09-25T20:25:36Z",
+  "status": "pass_local_metadata_context_arcgis_roundtrip_not_final_delivery",
+  "input": {
+    "source_geopackage_ref": "scratch/map-context-gpkg-001/Nepal_2026_Map_Context.gpkg",
+    "source_geopackage_sha256": "5bdb418dc8af0eed9ce9ba4db6712d7af26cc8b1f5a107329a94d50ec3bf70c8",
+    "source_preserved_unchanged": true
+  },
+  "staging": {
+    "root": "scratch/map-context-arcgis-validation-006",
+    "aprx_ref": "scratch/map-context-arcgis-validation-006/Nepal_2026_Map_Context.aprx",
+    "aprx_sha256": "9f34aa69e584f49972c57e1f195f9d7a050e73236b44d5e017dc6d34470f93c4",
+    "map_png_ref": "scratch/map-context-arcgis-validation-006/Map_Context_ArcGIS.png",
+    "map_png_sha256": "0b2b4255d588671e3d01357d549c4525443fff0b68257a6828f6217a2fdad18b",
+    "map_pdf_ref": "scratch/map-context-arcgis-validation-006/Map_Context_ArcGIS.pdf",
+    "map_pdf_sha256": "e0562f1c12f3dabcedfa04e8606c5d99ddd241d2153d171bbd5e180bd1e61d5e",
+    "reopen_png_sha256": "0b2b4255d588671e3d01357d549c4525443fff0b68257a6828f6217a2fdad18b",
+    "presentation_source": "Explicit ArcGIS File Geodatabase import of exact metadata-only GeoPackage; both retained in staging."
+  },
+  "package": {
+    "ref": "scratch/map-context-arcgis-package-001/delivery.ppkx",
+    "sha256": "6b97e3984c5340985488dc64b087a3ccd83acb85cfa0336858f2602751261374",
+    "pilot_receipt_ref": "scratch/map-context-arcgis-package-001/receipt.json",
+    "pilot_receipt_sha256": "732573423d773480d30410535c4abfa1c32d83b69115a0a177031df788d9cbec",
+    "same_machine_fresh_process_structure_equal": true,
+    "same_machine_fresh_process_layout_pixels_equal": true,
+    "source_stable_files_unchanged": true,
+    "extracted_sources_local": true,
+    "extracted_png_visually_inspected": true
+  },
+  "arcgis_checks": {
+    "runtime_version": "3.7.1",
+    "projected_wkid": 32645,
+    "study_area_features": 3,
+    "radar_catalog_footprints": 6,
+    "dem_tile_boxes": 4,
+    "broken_layers": false,
+    "visual_title_legend_north_arrow_scale_and_limitation_legible": true
+  },
+  "retained_failed_staging": [
+    "scratch/map-context-arcgis-validation-001/failure.json",
+    "scratch/map-context-arcgis-validation-002/verify-failure.json",
+    "scratch/map-context-arcgis-validation-002/visual-failure.json",
+    "scratch/map-context-arcgis-validation-003/visual-failure.json",
+    "scratch/map-context-arcgis-validation-004/visual-failure.json"
+  ],
+  "limits": {
+    "catalog_footprints_are_valid_pixel_coverage": false,
+    "before_after_imagery_displayed": false,
+    "observed_change_mapped": false,
+    "scientific_interpretation_or_attribution_authorized": false,
+    "clean_machine_or_clean_profile_tested": false,
+    "final_m6_delivery_proven": false
+  }
+}

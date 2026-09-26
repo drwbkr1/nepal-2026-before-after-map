@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-ASF-HYP3-RTC-MAP-ROUTE-001-APPROVAL",
+  "recorded_at_utc": "2026-09-26T20:43:41Z",
+  "status": "owner_approved_single_conditional_envelope_public_ci_pending",
+  "decision_id": "D-M2-ASF-HYP3-RTC-MAP-ROUTE-001",
+  "decision": "approve",
+  "human_method_decision_count": 1,
+  "owner_answer_verbatim": "Approve exact packet",
+  "decision_channel": "request_user_input_async",
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-asf-hyp3-rtc-map-route-001-proposal.json",
+    "proposal_sha256": "5118b0bb3727e9ef6080bed9015a68cd64bbbba226dc422948ec5cac294fbb55",
+    "review_bundle_ref": "reviews/m2-asf-hyp3-rtc-map-route-001/review-bundle.json",
+    "review_bundle_sha256": "f6afe7e4f5b1210c6d614ca4ba7c701b8a016bc773825f72cf1eb16d07a8bdca"
+  },
+  "authority": {
+    "single_conditional_envelope_through_sanitized_terminal_publication": true,
+    "intermediate_owner_reconfirmation_required_for_unchanged_scope": false,
+    "packet_publication_and_public_ci": true,
+    "separate_hyp3_implementation_and_disposable_tests_after_public_ci": true,
+    "secret_safe_owner_controlled_earthdata_handoff_after_gates": true,
+    "at_most_one_job_per_exact_source_in_reviewed_order_after_gates": true,
+    "no_paid_credits": true,
+    "stop_on_first_failure_or_indeterminate_submission": true,
+    "automatic_retry": false,
+    "non_git_output_custody_and_pixel_qa_after_gates": true,
+    "conditional_local_arcgis_before_after_panel_after_qa_pass": true,
+    "terms_acceptance_by_agent": false,
+    "changed_source_method_or_threshold": false,
+    "baseline_admission_or_change_analysis": false,
+    "attribution_or_scientific_publication": false,
+    "derived_pixel_publication": false
+  },
+  "current_release": "Record approval and publish the exact packet for public CI. Do not inspect the account, handle a secret, submit a job, spend credits, acquire products, or read project pixels until the proposal's later gates pass."
+}

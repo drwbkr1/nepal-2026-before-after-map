@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-ASF-HYP3-RTC-MAP-ROUTE-001",
+  "status": "local_zero_decision_one_owner_decision_required_not_published",
+  "purpose": "Test whether the exact four-scene ascending Sentinel-1D cohort can yield a source-linked EPSG:32645 ArcGIS before/after map through ASF HyP3 GAMMA RTC, without treating a map display or pixel-QA pass as admitted change evidence.",
+  "preparation_authority": "Owner conversational approval to prepare the ASF route plus owner-reported Vertex sign-in, acceptance of public HyP3 visibility, and acceptance of the agreement presented. These owner statements do not approve this method, account inspection, credential handoff, job, product, pixel, contract activation, or Git publication.",
+  "input_bindings": [
+    {
+      "ref": "records/observations/m2-asf-rtc-four-scene-candidate-001-local.json",
+      "sha256": "d18d0b9e47892e5930bd306fb196d8f49884e773b5b9e8495018e3b2c7c138ba",
+      "role": "offline_job_shape_and_order_candidate"
+    },
+    {
+      "ref": "records/observations/m2-asf-ascending-adjacent-001-local.json",
+      "sha256": "b6aa53453441e188c43421fd150367b28dc2e042d7fb1e1c5c6073da716c495a",
+      "role": "additional_exact_GRD_catalog_rows"
+    },
+    {
+      "ref": "records/observations/m2-external-rtc-route-feasibility-001-local.json",
+      "sha256": "edb7a731efc8104b5263c8440a484b0022d53675341af93e818e9e4c942b373d",
+      "role": "event_pair_catalog_and_archival_RTC_queries"
+    },
+    {
+      "ref": "records/observations/m2-radar-event-pair-catalog-triage-001.json",
+      "sha256": "5c19d4edc3210ac7474ffc58aa2224801dd57ff32db9a51e386e48cee02f76db",
+      "role": "catalog_AOI_coverage_only"
+    },
+    {
+      "ref": "records/observations/m2-asf-four-source-catalog-mosaic-coverage-001-local.json",
+      "sha256": "61bae112a09d225e2b50ccfa0e2e6f79abb64f6dd9f6329f3cc0dc7b66c00b88",
+      "role": "four_source_date_union_catalog_coverage_only"
+    },
+    {
+      "ref": "config/qa/candidate-pair-plan.json",
+      "sha256": "c346af2e575a21e4931991935c0acc21ba70083c4613255456ced77b71bb1560",
+      "role": "frozen_four_source_ascending_route"
+    },
+    {
+      "ref": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+      "role": "frozen_coverage_grid_registration_predicates"
+    },
+    {
+      "ref": "config/qa/change-evidence-contract.json",
+      "sha256": "fc2d18fa758d25b212361110ec9dba2611ba447611a2f7a284f5d1859b0ad33e",
+      "role": "unreleased_M4_radar_change_thresholds_and_four_source_binding"
+    },
+    {
+      "ref": "config/qa/arcgis-final-delivery-contract.json",
+      "sha256": "a3eda86374e77e4c8dbc48ff7a37b0f3766119878a65b95ff137477ba497527d",
+      "role": "eventual_portable_delivery_and_rights_boundary"
+    },
+    {
+      "ref": "records/source-gates/m2-asf-hyp3-owner-access-attestation-001-local.json",
+      "sha256": "1d2a58fde055b0e3d7c9c19aebf9a7a9368074933c5404d35797f7129d763ef5",
+      "role": "nonsecret_owner_signin_public_visibility_and_agreement_acceptance_attestation"
+    },
+    {
+      "ref": "records/source-gates/m2-asf-hyp3-rtc-source-assessment-001-local.json",
+      "sha256": "16b15aa1fbc38d27caa8056bc7cb207e123e9a705ff47b49b6fa604a526e2f33",
+      "role": "conditional_external_source_gate_with_access_rights_and_secret_transport_blockers"
+    }
+  ],
+  "provider_references": {
+    "product_guide": "https://hyp3-docs.asf.alaska.edu/guides/rtc_product_guide/",
+    "authentication": "https://hyp3-docs.asf.alaska.edu/using/authentication/",
+    "public_job_visibility": "https://hyp3-docs.asf.alaska.edu/using/",
+    "product_acknowledgement": "https://hyp3-docs.asf.alaska.edu/usage_guidelines/",
+    "credits": "https://hyp3-docs.asf.alaska.edu/using/credits/",
+    "basic_service": "https://hyp3-docs.asf.alaska.edu/about/hyp3_basic/",
+    "asf_account_eula_notice": "https://docs.asf.alaska.edu/api/basics/"
+  },
+  "proposed_method_amendment": {
+    "provider": "Alaska Satellite Facility HyP3 Basic",
+    "job_type": "RTC_GAMMA",
+    "source_ids_in_proposed_event_first_order": ["M1-SRC-002", "M1-SRC-005", "M1-SRC-001", "M1-SRC-004"],
+    "exact_jobs_ref": "records/observations/m2-asf-rtc-four-scene-candidate-001-local.json#candidate_jobs",
+    "output_radiometry": "gamma0",
+    "output_scale": "power",
+    "pixel_spacing_m": 10.0,
+    "dem": "copernicus",
+    "speckle_filter": false,
+    "dem_matching": false,
+    "include_dem_incidence_scattering_area": true,
+    "new_method_is_not_equivalent_to_local_ArcGIS_GTC": true,
+    "local_AUX_RESORB_application_claim_permitted": false,
+    "preexisting_two_scene_db_candidate_reused_or_mutated": false
+  },
+  "catalog_geometry_screen": {
+    "two_scene_event_pair_overview_percent": 96.999,
+    "four_scene_both_date_union_overview_percent": 99.993,
+    "four_scene_both_date_union_source_percent": 100.0,
+    "four_scene_both_date_union_upper_corridor_percent": 100.0,
+    "frozen_99_percent_catalog_screen_all_three_AOIs": true,
+    "actual_provider_RTC_or_valid_pixel_coverage_established": false
+  },
+  "proposed_single_conditional_envelope": [
+    "After exact owner review, implement only a separate HyP3-specific source, receipt, QA, and ArcGIS-display path with generated-data tests; do not change old attempt outcomes or silently relax scientific predicates.",
+    "The owner has reported successful Vertex sign-in, public-job visibility acceptance, and acceptance of the presented agreement. Before any account use or job, confirm the exact applicable terms and provider-product local-use rights without recording credentials or personal identifiers. Stop on changed terms, rights conflict, or withdrawal of consent; do not repeat an unchanged owner decision.",
+    "Establish and test a separate secret-safe owner-controlled Earthdata handoff without token storage, chat disclosure, command-line exposure, or reuse of the CDSE token. Use account information only inside the approved envelope and stop if eligibility or balance cannot be verified safely.",
+    "Run generated-data and installed ArcGIS-runtime synthetic tests, then publish sanitized implementation and execution gates to public default-branch CI only if that publication is included in the exact owner approval. Require passing CI, exact identities, no-content collision preflight, sufficient free Basic credits, and zero paid purchase before submission.",
+    "Submit at most one new job for each exact source in the fixed event-first order. Stop on the first rejected or indeterminate submission or job failure; never submit a duplicate automatically. Preserve job ID, public name, accepted settings, credit debit, timestamps, and terminal result. Inspect M1-SRC-002/005 first for both target AOIs; stop before context-strip jobs if the event pair fails its reviewed source, product, or pixel gate.",
+    "Only after a successful job, acquire exact provider outputs within retention into non-Git append-only custody; preserve provider README/log, product-specific acknowledgement and DOI metadata, and manifest, hash each file, verify container and source identity, and never replace existing bytes. Separate service completion, download integrity, and product fitness dispositions.",
+    "Only on passing identity and integrity, inspect GeoTIFF headers and actual pixels, NoData, layover/shadow, exclusions, seam and AOI coverage, grid compatibility, and stable-control registration under reviewed provider-specific rules. Derive dB display only from positive power values with a documented transform. A QA pass is PASS_QA_ONLY and does not authorize M3 or M4.",
+    "Only on a target-AOI QA pass, create a local EPSG:32645 ArcGIS before/after panel with dates, provider method, product-specific ASF acknowledgement, exclusions, coverage, and uncertainty visible. Reopen and export in a fresh process. Publish sanitized terminal status and CI reconciliation, never protected source or derived pixel files."
+  ],
+  "account_and_rights_stop": {
+    "earthdata_login_available": "owner_reports_signed_in_to_asf_vertex_not_independently_verified",
+    "public_job_metadata_accepted": true,
+    "public_generated_outputs_accepted": true,
+    "owner_reports_agreement_accepted": true,
+    "exact_agreement_document_or_version_captured": false,
+    "exact_ASF_eula_document_version_verified_by_project": false,
+    "output_redistribution_rights_resolved": false,
+    "credit_balance_verified": false,
+    "actual_S1D_job_eligibility_verified": false,
+    "paid_credits_or_purchase_authorized": false,
+    "documented_credit_ceiling_if_four_10m_jobs_succeed": 240,
+    "retention_days_in_public_documentation": 14
+  },
+  "frozen_scientific_boundaries": {
+    "approved_AOIs_or_EPSG_32645_target_changed": false,
+    "coverage_or_registration_threshold_changed": false,
+    "old_local_ArcGIS_or_optical_attempt_reuse_resume_retry_or_mutation": false,
+    "provider_mask_codes_assumed_from_OPERA_RTC": false,
+    "M3_baseline_admission_authorized": false,
+    "M4_change_analysis_or_threshold_adaptation_authorized": false,
+    "interpretation_attribution_or_scientific_claim_authorized": false,
+    "source_or_derived_pixel_publication_authorized": false,
+    "M6_final_package_claim_authorized": false
+  },
+  "authority": {
+    "owner_approval_received": false,
+    "this_proposal_creates_execution_authority": false,
+    "review_bundle_created": true,
+    "current_actions_only": ["local_zero_decision_preparation", "anonymous_public_metadata_research", "offline_schema_checks"],
+    "next_required_input": "One exact owner decision on this four-scene power-scale GAMMA RTC method and conditional authority envelope; access, rights, credits, eligibility, and secret-safe implementation remain mandatory execution gates."
+  }
+}

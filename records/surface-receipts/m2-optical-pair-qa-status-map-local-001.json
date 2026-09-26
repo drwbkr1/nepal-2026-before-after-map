@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-QA-STATUS-MAP-LOCAL-001",
+  "checked_at_utc": "2026-09-26T17:51:41Z",
+  "status": "pass_local_projected_metadata_QA_status_not_final_delivery",
+  "purpose": "Supersede the historical image's now-stale statement that the exact pair was not acquired or pixel-tested without changing that immutable historical image or its receipt.",
+  "input_terminal": {
+    "ref": "records/readiness/m2-optical-gdal-header-pixel-recovery-002-terminal.json",
+    "sha256": "a7fe3cedd24ff23158f95007b6931b403ae1745a19fc0006b97d834a08aa98a0",
+    "header_status": "pass_header_readability_only",
+    "pixel_status": "block",
+    "aoi_source": "block",
+    "aoi_upper_corridor": "block",
+    "aoi_overview": "block"
+  },
+  "builder": {
+    "ref": "scratch/build_optical_pair_status_map_001.py",
+    "sha256": "c7eb6f98d27251ad536ff65a617d0315725687e6b0cc3a7ef532763ec75c8a65",
+    "runtime": "installed ArcGIS Python environment, GDAL/OGR and Matplotlib only; no ArcPy invocation"
+  },
+  "local_outputs": {
+    "root": "scratch/optical-pair-status-map-001",
+    "build_receipt_sha256": "e6fb637da34b8845c545fd6d0e5b1af03dd7eb9ea22de7d7f1b0bf301a62423f",
+    "geopackage": {"ref": "scratch/optical-pair-status-map-001/Optical_Pair_QA_Status_Metadata.gpkg", "sha256": "816efb9858aa1fc5a963857782465e6705e7f1f415c63e15c68e358f53409d5f"},
+    "png": {"ref": "scratch/optical-pair-status-map-001/Optical_Pair_QA_Status_Metadata.png", "sha256": "c6c09d88490cbdac5b3d405682b1347351d6fec85301406c1f2553acee4614f4"},
+    "pdf": {"ref": "scratch/optical-pair-status-map-001/Optical_Pair_QA_Status_Metadata.pdf", "sha256": "d667565f30d0dcbe44d6170f26a3ba64f0c90a87d99139972c792d7a779db235"}
+  },
+  "checks": {
+    "all_four_input_sha256_bindings_pass": true,
+    "ogr_reopen_geometry_identity_and_epsg32645_pass": true,
+    "sqlite_integrity": "ok",
+    "aoi_feature_count": 3,
+    "acquired_catalog_footprint_count": 2,
+    "pdf_page_count": 1,
+    "png_and_pdf_render_visually_inspected": true,
+    "historical_png_and_geopackage_hashes_unchanged": true,
+    "satellite_or_dem_pixels_read": false,
+    "arcgis_pro_open_or_export_tested_for_new_geopackage": false,
+    "before_after_imagery_or_observed_change_displayed": false,
+    "scientific_or_final_m6_delivery_claim": false
+  },
+  "limits": "Map shows catalog footprints and the exact published QA disposition only. It does not depict usable-pixel geometry, change, event attribution, clear coverage, or final ArcGIS delivery. The new GeoPackage has not undergone an ArcGIS Pro reopen/export test."
+}

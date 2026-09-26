@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-ASF-HYP3-RTC-MAP-ROUTE-001-REVIEW-BUNDLE",
+  "status": "local_zero_decision_one_owner_method_decision_required_not_published",
+  "human_method_decision_count": 0,
+  "base_commit": "9dcbeaaf7ea01e9dc872de43ca375ef192e1df9a",
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-asf-hyp3-rtc-map-route-001-proposal.json",
+      "sha256": "5118b0bb3727e9ef6080bed9015a68cd64bbbba226dc422948ec5cac294fbb55",
+      "role": "single_conditional_exact_source_method_and_attempt_proposal"
+    },
+    {
+      "path": "docs/M2_ASF_HYP3_RTC_MAP_ROUTE_001_REVIEW.md",
+      "sha256": "c1c3392655ca570e24d99c154790d64d0f6d0bb6e0b3dde0b6dcf804371c2229",
+      "role": "human_readable_method_access_rights_and_map_review"
+    },
+    {
+      "path": "records/source-gates/m2-asf-hyp3-owner-access-attestation-001-local.json",
+      "sha256": "1d2a58fde055b0e3d7c9c19aebf9a7a9368074933c5404d35797f7129d763ef5",
+      "role": "nonsecret_owner_visibility_and_agreement_attestation"
+    },
+    {
+      "path": "records/source-gates/m2-asf-hyp3-rtc-source-assessment-001-local.json",
+      "sha256": "16b15aa1fbc38d27caa8056bc7cb207e123e9a705ff47b49b6fa604a526e2f33",
+      "role": "blocked_pre_execution_source_access_rights_and_security_assessment"
+    },
+    {
+      "path": "records/observations/m2-asf-rtc-four-scene-candidate-001-local.json",
+      "sha256": "d18d0b9e47892e5930bd306fb196d8f49884e773b5b9e8495018e3b2c7c138ba",
+      "role": "offline_exact_scene_job_shapes_in_fixed_order"
+    },
+    {
+      "path": "records/observations/m2-asf-four-source-catalog-mosaic-coverage-001-local.json",
+      "sha256": "61bae112a09d225e2b50ccfa0e2e6f79abb64f6dd9f6329f3cc0dc7b66c00b88",
+      "role": "catalog_geometry_only_not_valid_raster_coverage"
+    },
+    {
+      "path": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+      "role": "frozen_coverage_grid_mask_and_registration_predicates"
+    },
+    {
+      "path": "config/qa/change-evidence-contract.json",
+      "sha256": "fc2d18fa758d25b212361110ec9dba2611ba447611a2f7a284f5d1859b0ad33e",
+      "role": "unreleased_M4_route_and_change_boundary"
+    }
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-ASF-HYP3-RTC-MAP-ROUTE-001",
+    "question": "Approve, revise, or defer this exact four-source power-scale HyP3 GAMMA RTC route as one conditional envelope through sanitized terminal publication and, only after every gate passes, a local ArcGIS before/after panel?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "Exact packet and owner response pass the public default-branch CI gate; implementation, source access/rights, synthetic/runtime, no-content, free-credit, exact-job, product-identity, pixel-QA, and terminal-publication gates remain mandatory without intermediate owner reconfirmation."
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "implementation_or_synthetic_arcgis_authorized": false,
+    "account_or_credential_access_authorized": false,
+    "job_validation_or_submission_authorized": false,
+    "credit_use_authorized": false,
+    "provider_product_acquisition_authorized": false,
+    "real_pixel_read_or_local_map_authorized": false,
+    "baseline_change_attribution_or_scientific_publication_authorized": false
+  }
+}

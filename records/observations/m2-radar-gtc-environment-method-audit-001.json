@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-RADAR-GTC-ENVIRONMENT-METHOD-AUDIT-001",
+  "status": "local_zero_decision_official_method_audit_unpublished",
+  "checked_date": "2026-09-24",
+  "official_sources": [
+    {
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/image-analyst/apply-geometric-terrain-correction.html",
+      "paraphrased_finding": "GTC describes range-Doppler backgeocoding over DEM grid points using orbit vectors; it recommends a DEM for land scenes. Its listed analysis environments include Snap Raster and Cell Alignment but do not list Cell Size, Output Coordinate System, or Extent."
+    },
+    {
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/environment-settings/snap-raster.html",
+      "paraphrased_finding": "Snap Raster aligns output cell edges; when output cell size differs, it does not by itself make upper-right output alignment or size identical to the snap raster."
+    },
+    {
+      "url": "https://doc.esri.com/en/arcgis-pro/latest/tool-reference/environment-settings/output-extent.html",
+      "paraphrased_finding": "The Extent environment selects intersecting inputs for tools that honor it and is not a strict clipping operation."
+    }
+  ],
+  "local_bindings": [
+    {"ref": "scripts/m2_radar_esri_sequence_processing_005.py", "sha256": "faadf83f4ae1c35209ed104ab3ba2c97ad233615655aaa31dfc72851b968e0fd"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-terminal-reconciliation.json", "sha256": "664d99fd7cb261238cd322143cc1326ff3c0f36159c79e348c201cf08a949a5c"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-projected-clip-recovery-002-disposable-validation-terminal.json", "sha256": "bbfd5ee7e6fcf7276ef6a827e1018217f7c3f7bda60a0f973749ec366d342f02"},
+    {"ref": "records/processing/m2-radar-event-area-pair-001-dem-mosaic-reconciliation.json", "sha256": "74f3213c3bd1b10ace40904b9a0bcbb605d81c8d787797952a9370161d525cf4"}
+  ],
+  "local_code_and_result": {
+    "existing_gtc_envmanager_sets_cell_size_10_m": true,
+    "existing_gtc_envmanager_sets_snap_raster": true,
+    "documented_gtc_cell_size_honoring_established": false,
+    "saved_gtc_outputs_report_epsg4326_two_by_two_ten_degree_grid": true,
+    "projected_clip_disposable_west_target_coverage_deficit_m": 900.0,
+    "approved_dem_mosaic_grid": "EPSG:4326 14400_columns_by_10800_rows_over_approximately_83_to_87_E_and_27_to_30_N",
+    "saved_gtc_grid_matches_dem_mosaic_grid": false
+  },
+  "inference_not_cause": "A 10 m Cell Size environment around GTC cannot be treated as proof of a 10 m native GTC grid. Although the documented algorithm evaluates DEM grid points, the saved 2-by-2 output does not match the 14400-by-10800 DEM mosaic, so output inheritance from the DEM grid is not established. The documentation and current receipts do not identify why the saved output was 2 by 2 or establish a corrected executable method.",
+  "authority_boundary": {
+    "project_data_or_external_custody_accessed": false,
+    "arcpy_invoked": false,
+    "new_method_selected": false,
+    "new_disposable_or_real_attempt_authorized": false,
+    "source_or_scientific_predicate_changed": false,
+    "scientific_result_established": false
+  }
+}
