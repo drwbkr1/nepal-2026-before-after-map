@@ -36,7 +36,8 @@ SUBMISSION_REF = "m2-asf-hyp3-rtc-submit-first-001/attempt-001/terminal.json"
 ATTEMPT_ROOT = DATA_ROOT / "m2-asf-hyp3-rtc-acquire-first-001" / "attempt-001"
 PRODUCT_DIR = DATA_ROOT / "m2-asf-hyp3-rtc-products-001"
 SOURCE_GATE_REF = "records/source-gates/m2-asf-hyp3-rtc-processing-source-gate-001.json"
-GATE_REF = "records/readiness/m2-asf-hyp3-rtc-acquire-first-implementation-gate-001.json"
+GATE_REF = "records/readiness/m2-asf-hyp3-rtc-acquire-first-implementation-gate-002.json"
+PREFLIGHT_REF = "records/readiness/m2-asf-hyp3-rtc-acquire-first-execution-preflight-001.json"
 IMPLEMENTATION_FILES = (
     "scripts/m2_asf_hyp3_rtc_http_transfer_001.py",
     "scripts/m2_asf_hyp3_rtc_acquire_first_001.py",
@@ -88,6 +89,7 @@ def require_acquisition_release(
 ) -> dict:
     """Check exact approved job and published implementation before stdin."""
     gate = _read_json(root / GATE_REF)
+    preflight = _read_json(root / PREFLIGHT_REF)
     source = _read_json(root / SOURCE_GATE_REF)
     submission_path = data_root / SUBMISSION_REF
     if (
@@ -108,6 +110,14 @@ def require_acquisition_release(
         or gate.get("bindings", {}).get("source_gate_sha256") != _sha(root / SOURCE_GATE_REF)
         or gate.get("bindings", {}).get("submission_terminal_sha256") != _sha(submission_path)
         or not files_match
+        or preflight.get("status") != "pass_first_product_no_content_preflight"
+        or preflight.get("bindings", {}).get("implementation_gate_sha256") != _sha(root / GATE_REF)
+        or preflight.get("bindings", {}).get("submission_terminal_sha256") != _sha(submission_path)
+        or preflight.get("assertions", {}).get("provider_status") != "SUCCEEDED"
+        or preflight.get("assertions", {}).get("exact_job_id") != EXACT_JOB_ID
+        or preflight.get("assertions", {}).get("attempt_root_absent") is not True
+        or preflight.get("assertions", {}).get("destination_collision_absent") is not True
+        or preflight.get("assertions", {}).get("no_network_or_pixel_read") is not True
         or source.get("decision", {}).get("status") != "ready"
         or source.get("authority", {}).get("authority_ref") != APPROVAL_REF
         or submission.get("status") != "submitted_product_unverified"
