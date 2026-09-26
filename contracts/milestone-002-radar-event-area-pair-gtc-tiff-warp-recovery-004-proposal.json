@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GTC-TIFF-WARP-RECOVERY-004",
+  "status": "local_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "base_commit": "42ea8f87edf984d52a4406bde5b9c5796dbf7945",
+  "decision_question": "Approve, revise, or defer one conditional map-oriented radar GTC-to-TIFF-to-GDAL-Warp method and at most one fresh exact ascending-pair QA attempt through sanitized terminal publication?",
+  "input_bindings": [
+    {"ref": "docs/M2_POST_OPTICAL_QA_MAP_ROUTE_DESIGN_001.md", "sha256": "587120bba2976726e9a26cbe20cb80a1af97e657fbc46f206e0924b73612bac5"},
+    {"ref": "records/readiness/m2-optical-gdal-header-pixel-recovery-002-post-ci-reconciliation.json", "sha256": "c8c07d5ee22f0fb240d6b6e2459a87c171a4b6da04a14290118648db541c4e33"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-disposable-terminal-reconciliation.json", "sha256": "d67ff046e6427a83665fbbd8abfeb5cdc8bbe86d0207b3333d23896c1b44921e"},
+    {"ref": "records/processing/m2-radar-event-area-pair-001-footprint-dem-validity-gate.json", "sha256": "d49cd9a8b3a3edc086193d985f5bd898665e3b201c442ef38cef6153bd7dc7ff"},
+    {"ref": "contracts/milestone-002-radar-event-area-pair-001-proposal.json", "sha256": "ae5fe535123debcd8619487bbdd68e2c19ff49dbc2505795fcdc48cea324b1e2"},
+    {"ref": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"},
+    {"ref": "config/aoi/approved-study-areas-epsg32645.json", "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"}
+  ],
+  "observed_boundary": {
+    "optical_pair": "terminal_pixel_qa_block_no_retry_or_threshold_change",
+    "saved_radar_gtc": "EPSG4326_2_by_2_10_degrees_per_cell_not_usable",
+    "native_gtc_recovery_003": "terminal_disposable_projected_extent_guard_no_real_attempt",
+    "historical_gtc_root_cause": "unknown",
+    "catalog_coverage_is_pixel_qa": false,
+    "baseline_or_change_admitted": false
+  },
+  "proposed_exact_method": {
+    "sources_in_fixed_order": ["M1-SRC-002", "M1-SRC-005"],
+    "orbits_in_fixed_order": ["M2-ORB-001", "M2-ORB-003"],
+    "dem": "exact approved eleven-tile ellipsoidal mosaic with GEOID NONE; independently verify valid elevation over actual processed extents",
+    "unchanged_sequence": "orbit correction, thermal-noise removal, beta calibration, gamma terrain flattening, REFINED_LEE after RTF, native GTC, VV/VH, native mask, and frozen QA",
+    "native_gtc_environment": "clear cellSize, snapRaster, outputCoordinateSystem, and extent only around native gamma and mask GTC; restore on success and exception",
+    "native_pre_save_guard": "durably inspect returned Raster CRS, dimensions, cell sizes, extent, bands, resource estimate, AOI intersection, and valid DEM support before saving; missing or ambiguous metadata blocks",
+    "native_grid_screen": {
+      "required_wkid": 4326,
+      "maximum_cell_size_degrees_each_axis": 0.0002787777777777778,
+      "maximum_declared_cells": 200000000,
+      "maximum_single_native_output_logical_bytes": 2147483648,
+      "maximum_single_native_output_on_disk_bytes": 10737418240,
+      "gross_screen_not_effective_resolution_proof": true
+    },
+    "bridge": "ArcPy CopyRaster native CRF to GTiff, only after native guard; compare CRS, transform, dimensions, band count, pixel type, NoData, finite-value and sampled pixel identity before GDAL opens or warps output; any mismatch blocks",
+    "projection": "GDAL Warp exact outputBounds, width, height, dstSRS EPSG:32645; bilinear for continuous gamma and nearest for categorical masks; preserve explicit NoData and actual coverage; no ProjectRaster, Clip, targetAlignedPixels adjustment, or fallback",
+    "target_grid": {
+      "bounds_epsg32645_m": [272300.0, 3069230.0, 368820.0, 3150210.0],
+      "columns": 9652,
+      "rows": 8098,
+      "cells": 78161896,
+      "cell_size_m": 10,
+      "maximum_projected_declared_cells": 100000000,
+      "maximum_single_projected_output_on_disk_bytes": 10737418240,
+      "output_frame_is_not_coverage_proof": true
+    }
+  },
+  "requested_single_authority_envelope": {
+    "owner_decision_count": 1,
+    "covers_without_intermediate_owner_reconfirmation": [
+      "publish this exact packet and owner response on public default branch; require passing public CI",
+      "implement separate append-only recovery-004 runner and independent receipt/resource supervisor without modifying consumed attempts",
+      "run portable synthetic interruption, receipt persistence, exact-order, hard-stop, resource, grid, NoData, secret-exposure, and mask tests",
+      "run installed ArcGIS disposable generated-CRF/TIFF and GDAL exact-grid tests with full pixel and georeference comparison; generated data do not prove SAR geolocation",
+      "publish implementation and execution gates and require passing public CI before protected access",
+      "run one final no-content preflight of exact bindings, CI, free space, immutable old attempts, and absent fresh e1/a3 root and receipt identities",
+      "only on all prior gates passing, read-only verify actual processed-extent DEM validity; block if absent or indeterminate",
+      "only on all prior gates passing, run at most one fresh e1/a3 single process: M1-SRC-002 first; M1-SRC-005 only if first source's native grid, bridge, projection, mask, event-AOI and receipt checks pass; pair registration only after both sources exist",
+      "stop on the first failed or indeterminate stage with no alternate method or retry; retain terminal and cleanup evidence and publish only sanitized non-pixel reconciliation"
+    ],
+    "maximum_new_real_radar_processes": 1,
+    "maximum_sources_in_process": 2,
+    "fresh_attempt_root_alias": "e1/a3_only_if_absent_at_final_preflight",
+    "minimum_free_space_at_each_materialization": "greater_of_60_GiB_or_twice_next_stage_declared_logical_bytes",
+    "source_orbit_dem_aoi_crs_grid_mask_threshold_or_registration_substitution": false,
+    "automatic_retry": false,
+    "consumed_attempt_resume_reuse_or_mutation": false
+  },
+  "hard_stops": [
+    "Any native GTC 2-by-2, coarse, unrecognized, oversized, or missing-metadata result blocks before save, bridge, or projection.",
+    "Any CRF-to-TIFF change of values, georeferencing, mask, type, band count, or NoData blocks; never treat compression or equal output dimensions alone as equivalence.",
+    "An exact projected frame is not source coverage or native information; inspect actual finite pixels, event-AOI coverage, masks, DEM support, and registration under the unchanged QA contract.",
+    "Any failure of public CI, disposable proof, final preflight, receipts, or first source stops before protected processing or second source as applicable.",
+    "All prior terminal attempts, partial rasters, private optical QA outputs, and public reconciliations remain immutable."
+  ],
+  "claim_boundary": {
+    "possible_result": "INVALID_BLOCK_DEFER_or_PASS_QA_ONLY",
+    "baseline_admission_authorized": false,
+    "change_analysis_or_difference_raster_authorized": false,
+    "interpretation_or_event_attribution_authorized": false,
+    "derived_pixel_or_scientific_publication_authorized": false,
+    "historical_gtc_root_cause_or_recovery_readiness_claim_authorized": false
+  },
+  "does_not_authorize_now": [
+    "Git publication, approval recording, or activation of this local zero-decision packet",
+    "ArcPy or GDAL invocation, disposable execution, project-data or external-custody access, or a new radar attempt",
+    "baseline, change analysis, attribution, derived-pixel publication, or scientific publication"
+  ]
+}

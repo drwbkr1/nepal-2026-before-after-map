@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GTC-TIFF-WARP-RECOVERY-004-REVIEW-BUNDLE",
+  "status": "local_zero_decision_one_owner_decision_required",
+  "human_decision_count": 0,
+  "base_commit": "42ea8f87edf984d52a4406bde5b9c5796dbf7945",
+  "artifacts": [
+    {"path": "contracts/milestone-002-radar-event-area-pair-gtc-tiff-warp-recovery-004-proposal.json", "sha256": "69f69b8685f3f0daf9d00a361377085fccb6e954d4ba8d16e40241f2a6c8fd92", "role": "exact_bounded_map_route_proposal"},
+    {"path": "docs/M2_RADAR_EVENT_AREA_PAIR_GTC_TIFF_WARP_RECOVERY_004_REVIEW.md", "sha256": "bda8ed994cc9fdb77a3f9488aded92520b9210dcfa69421e0f08b10251a66780", "role": "human_readable_review"},
+    {"path": "docs/M2_POST_OPTICAL_QA_MAP_ROUTE_DESIGN_001.md", "sha256": "587120bba2976726e9a26cbe20cb80a1af97e657fbc46f206e0924b73612bac5", "role": "method_hypothesis_not_execution_evidence"},
+    {"path": "records/readiness/m2-optical-gdal-header-pixel-recovery-002-post-ci-reconciliation.json", "sha256": "c8c07d5ee22f0fb240d6b6e2459a87c171a4b6da04a14290118648db541c4e33", "role": "terminal_optical_qa_block"},
+    {"path": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-disposable-terminal-reconciliation.json", "sha256": "d67ff046e6427a83665fbbd8abfeb5cdc8bbe86d0207b3333d23896c1b44921e", "role": "closed_old_method"},
+    {"path": "records/processing/m2-radar-event-area-pair-001-footprint-dem-validity-gate.json", "sha256": "d49cd9a8b3a3edc086193d985f5bd898665e3b201c442ef38cef6153bd7dc7ff", "role": "conservative_dem_evidence_not_full_processed_extent"},
+    {"path": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2", "role": "unchanged_pixel_qa"},
+    {"path": "config/aoi/approved-study-areas-epsg32645.json", "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615", "role": "unchanged_aoi_and_grid"}
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-RADAR-EVENT-AREA-PAIR-GTC-TIFF-WARP-RECOVERY-004",
+    "question": "Approve, revise, or defer the proposal's single bounded map-oriented radar method and conditional one-attempt envelope through sanitized terminal publication?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "Exact packet and owner response pass public default-branch CI; later implementation, disposable, execution, final no-content, DEM-support, and terminal-publication gates remain mandatory without intermediate owner reconfirmation."
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "implementation_or_disposable_arcgis_authorized": false,
+    "protected_data_or_external_custody_access_authorized": false,
+    "fresh_real_radar_process_authorized": false,
+    "consumed_attempt_reuse_or_retry_authorized": false,
+    "baseline_change_attribution_or_scientific_publication_authorized": false
+  }
+}
