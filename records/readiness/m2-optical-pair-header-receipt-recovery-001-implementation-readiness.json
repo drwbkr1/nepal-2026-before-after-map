@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-HEADER-RECEIPT-RECOVERY-001-IMPLEMENTATION-READINESS",
+  "status": "pass_local_synthetic_public_ci_pending",
+  "proposal_sha256": "45b7dc504bf3f92b3dc72db5130596e7465c06f74e3aeb679670e886d0eee2f3",
+  "review_bundle_sha256": "c11ad27a12563b1db4ec0f95b074436c4b8ff4837b74ea9164ed9bae7e909e95",
+  "approval_sha256": "d3558944b22bfe9a1fbe75cb66aca8ea1ec0f5eb91d7496449051668449ac64a",
+  "packet_publication_gate_sha256": "77fee0afecb2dfa42ebbbcfefa478c047bffdbc0da28ddc59fbb24503b2b61f1",
+  "implementation_file_sha256": {
+    "scripts/m2_optical_pair_header_recovery_001_core.py": "0d46b04d14f2879a8c8fc3f034aed26a1ae34fa6ee106d1ed29b7fc59be84560",
+    "scripts/m2_optical_pair_header_recovery_001_header.py": "94d7173953c00fe7a09164491223aa6097f4596cf2cced696f96df1a48497fd4",
+    "scripts/m2_optical_pair_header_recovery_001_pixel.py": "e80e3e7407266ecc4bf1f8d1966caede7d51fe75d40718cf4c83ddeb668ea162",
+    "scripts/m2_optical_pair_header_recovery_001_worker.py": "019b83911b78121dfa32e49c3c19e09943bb4aaba7c6e819fc1b36e0a31b89d1",
+    "scripts/m2_optical_pair_header_recovery_001_preflight.py": "619454b87a163f44ae447b430b1222620638f8216220f8af596e538df7b6f027",
+    "scripts/m2_optical_pair_header_recovery_001_execute.py": "3b06415ccb6e2300b6f8fd535488009bd5f575ec56389eaec6324463931ba800",
+    "scripts/validate_m2_optical_pair_header_recovery_001_arcgis.py": "ed212fa5f051dce82a8bf0c0b7b1138dbe5596e159cfc93b7d9714f382323cbb",
+    "tests/test_m2_optical_pair_header_recovery_001.py": "58309bddfc828d2e45e9e05563d1e73ff6fc31b6d0905d43e9a5c6fae56524dc",
+    "records/readiness/m2-optical-pair-header-receipt-recovery-001-early-custody-read-observation.json": "095779e8c6902052cf42d0ac8a915738b372a733b5c9c6ddcd5d269a093aa80c"
+  },
+  "validation": {
+    "focused_recovery_synthetic_tests_passed": 7,
+    "full_local_suite_tests_ran": 835,
+    "full_local_suite_skipped": 6,
+    "full_local_suite_status": "pass",
+    "check_project": "pass_1463_required_files",
+    "arcgis_runtime": "ArcGIS Pro 3.7.1",
+    "arcgis_disposable_launch_and_header": "pass_expected_block_for_generated_tiff_under_frozen_jp2_contract",
+    "arcgis_test_real_source_access": false
+  },
+  "protocol_deviation": {
+    "record_ref": "records/readiness/m2-optical-pair-header-receipt-recovery-001-early-custody-read-observation.json",
+    "record_sha256": "095779e8c6902052cf42d0ac8a915738b372a733b5c9c6ddcd5d269a093aa80c",
+    "description": "One M2-OPT-001 materialization manifest was read early for schema inspection, before implementation public CI. No raster bytes, mutation, network, or M2-OPT-002 access occurred. This is not final identity evidence.",
+    "deviation_preserved_not_retroactively_authorized": true
+  },
+  "claim_boundary": {
+    "public_implementation_ci_passed": false,
+    "execution_gate_released": false,
+    "final_offline_identity_preflight_passed": false,
+    "new_real_header_or_pixel_attempt_started": false,
+    "baseline_or_change_analysis_released": false,
+    "derived_pixel_or_scientific_publication_released": false
+  }
+}

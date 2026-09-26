@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-HEADER-RECEIPT-RECOVERY-001-EARLY-CUSTODY-READ-OBSERVATION",
+  "recorded_at_utc": "2026-09-26T00:14:58Z",
+  "status": "protocol_deviation_read_only_no_pixel_decode",
+  "event_time_exact_recorded": false,
+  "event": {
+    "source_id": "M2-OPT-001",
+    "data_root_relative_path": "derived/m2-optical-pair-pilot-001/materialized/m2-opt-001/materialization-001/materialization-manifest.json",
+    "read_method": "PowerShell Get-Content and ConvertFrom-Json for schema inspection",
+    "bytes_read_scope": "One existing materialization-manifest JSON file was loaded; only top-level keys, selected identity fields, and the first file entry were printed.",
+    "raster_or_pixel_bytes_read": false,
+    "network_or_credential_action": false,
+    "file_or_attempt_mutation": false,
+    "source_two_accessed": false
+  },
+  "authority_assessment": {
+    "approved_packet": "NEPAL-M2-OPTICAL-PAIR-HEADER-RECEIPT-RECOVERY-001",
+    "required_implementation_public_ci_gate_passed_before_read": false,
+    "external_custody_read_was_out_of_order": true,
+    "new_real_header_or_pixel_attempt_started": false,
+    "scientific_predicate_or_result_changed": false,
+    "this_observation_creates_new_authority": false
+  },
+  "containment": "No further external-custody reads before the implementation and execution gates. This early metadata read is not used as final identity evidence; repeat exact verification at the approved final offline preflight and preserve this deviation in the implementation and terminal reconciliation."
+}
