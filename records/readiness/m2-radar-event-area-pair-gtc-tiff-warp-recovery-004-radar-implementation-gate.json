@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GTC-TIFF-WARP-RECOVERY-004-IMPLEMENTATION-GATE",
+  "status": "pass_public_ci_event_pair_radar_implementation",
+  "proposal_sha256": "69f69b8685f3f0daf9d00a361377085fccb6e954d4ba8d16e40241f2a6c8fd92",
+  "review_bundle_sha256": "1378fb4057dfa47c36f83366c47936dae553e3c52dfee9a710a9c4757b94e93d",
+  "packet_gate_sha256": "1fa057b184defb71cb31a63b915b37cc2a58bd51e92cca64dbdf8ffb0cdaf13c",
+  "runner_sha256": "2526cd1d99da53907e24fe8f7d8d4a0519d32e363ca8cfa1edd025d93ac16b2c",
+  "processing_sha256": "638ab8627261965f07767f14fa4bd3a7d0828075ef19f9a82d997df1763ec65e",
+  "core_sha256": "3a77f4fbe56c0607e925472ebde11f43677213519071135ff1be854ea2929626",
+  "disposable_receipt_sha256": "1ff1788487945e313735dcd3f28fe53e3f64af7b1b8d4ee34f3a60d33e198d8e",
+  "footprint_gate_sha256": "d49cd9a8b3a3edc086193d985f5bd898665e3b201c442ef38cef6153bd7dc7ff",
+  "implementation_commit_sha": "e4de8ab898fc3a49f45b13fe3ae7474aacde55dd",
+  "public_ci_run_id": 36262383446,
+  "public_ci_job_id": 108460545930,
+  "public_ci_conclusion": "success",
+  "synthetic_disposable_005_status": "pass_generated_production_bridge_core_only",
+  "protected_data_accessed": false,
+  "fresh_real_attempt_started": false,
+  "baseline_or_change_analysis_authorized": false
+}

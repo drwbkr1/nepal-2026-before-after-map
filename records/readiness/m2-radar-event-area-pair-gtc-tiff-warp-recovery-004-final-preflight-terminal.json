@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-RADAR-EVENT-AREA-PAIR-GTC-TIFF-WARP-RECOVERY-004-FINAL-PREFLIGHT-TERMINAL",
+  "status": "block_exact_attempt_identity_already_consumed_no_real_attempt",
+  "approved_proposal_sha256": "69f69b8685f3f0daf9d00a361377085fccb6e954d4ba8d16e40241f2a6c8fd92",
+  "approved_review_bundle_sha256": "1378fb4057dfa47c36f83366c47936dae553e3c52dfee9a710a9c4757b94e93d",
+  "implementation_gate_sha256": "ff498eaf997ddc4dc60597233d770748b59152c14ec046bf415f6b64cca84f11",
+  "implementation_commit_sha": "e4de8ab898fc3a49f45b13fe3ae7474aacde55dd",
+  "implementation_public_ci_run_id": 36262383446,
+  "implementation_public_ci_conclusion": "success",
+  "preflight_command_result": {
+    "status": "stopped_before_radar_process",
+    "code": "event_pair_attempt_root_collision",
+    "exit_code": 1,
+    "pass_preflight_receipt_written": false
+  },
+  "attempt_identity": {
+    "approved_root_alias": "e1/a3",
+    "root_exists": true,
+    "root_is_directory": true,
+    "root_creation_time_utc": "2026-09-25T18:59:08.4705806Z",
+    "root_last_write_time_utc_at_no_content_check": "2026-09-25T19:59:42.6799894Z",
+    "prior_public_terminal_ref": "records/readiness/m2-map-route-feasibility-001-terminal-publication.json",
+    "prior_public_terminal_sha256": "d584432debbbc0f0bcb359e5b0c3265859a0ebc49899e96710251acb5475aa2c",
+    "prior_terminal_status": "radar_stopped_first_source_optical_metadata_only",
+    "prior_terminal_stage": "ApplyGeometricTerrainCorrection_gamma",
+    "prior_terminal_code": "native_declared_resource_limit_exceeded"
+  },
+  "disposable_method": {
+    "latest_passing_receipt_ref": "records/readiness/m2-radar-event-area-pair-gtc-tiff-warp-recovery-004-arcgis-disposable-005.json",
+    "latest_passing_receipt_sha256": "1ff1788487945e313735dcd3f28fe53e3f64af7b1b8d4ee34f3a60d33e198d8e",
+    "scope": "generated CRF-to-TIFF bridge and exact-grid GDAL Warp only",
+    "real_sar_geolocation_or_pixel_fitness_proven": false
+  },
+  "authority_reconciliation": {
+    "approved_fresh_attempt_condition_satisfied": false,
+    "replacement_attempt_identity_authorized": false,
+    "old_attempt_reused_or_mutated": false,
+    "new_real_radar_worker_launched": false,
+    "protected_radar_pixels_read": false,
+    "automatic_retry_performed": false,
+    "baseline_or_change_analysis_executed": false,
+    "derived_pixel_or_scientific_publication_authorized": false
+  },
+  "next_decision_boundary": "The proposal's reused e1/a3 identity is a material scope defect. A new owner-reviewed route is required; merely changing to e1/a4 would not address the earlier upstream native resource stop."
+}

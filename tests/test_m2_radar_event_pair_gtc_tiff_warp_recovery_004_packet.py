@@ -69,6 +69,17 @@ class RadarGtcTiffWarpPacketTests(unittest.TestCase):
         self.assertFalse(proposal["claim_boundary"]["change_analysis_or_difference_raster_authorized"])
         self.assertFalse(bundle["authority_boundary"]["fresh_real_radar_process_authorized"])
 
+    def test_terminal_preflight_exposes_reused_consumed_identity(self) -> None:
+        terminal = load("records/readiness/m2-radar-event-area-pair-gtc-tiff-warp-recovery-004-final-preflight-terminal.json")
+        prior_ref = terminal["attempt_identity"]["prior_public_terminal_ref"]
+        prior = load(prior_ref)
+        self.assertEqual(digest(prior_ref), terminal["attempt_identity"]["prior_public_terminal_sha256"])
+        self.assertEqual(prior["radar_attempt_id"], terminal["attempt_identity"]["approved_root_alias"])
+        self.assertEqual(terminal["status"], "block_exact_attempt_identity_already_consumed_no_real_attempt")
+        self.assertEqual(terminal["preflight_command_result"]["code"], "event_pair_attempt_root_collision")
+        self.assertFalse(terminal["preflight_command_result"]["pass_preflight_receipt_written"])
+        self.assertFalse(terminal["authority_reconciliation"]["new_real_radar_worker_launched"])
+
 
 if __name__ == "__main__":
     unittest.main()
