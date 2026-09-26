@@ -1,0 +1,58 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-BASIC-SERVICE-AND-DATA-RIGHTS-001",
+  "observed_at_utc": "2026-09-26T22:21:24Z",
+  "status": "public_guidance_assessed_product_specific_rights_unverified",
+  "scope": "Anonymous, read-only assessment of current public guidance for the approved HyP3 Basic RTC route. No account, token, job, product, pixel, or external-custody access occurred.",
+  "bindings": {
+    "approved_review_bundle_sha256": "f6afe7e4f5b1210c6d614ca4ba7c701b8a016bc773825f72cf1eb16d07a8bdca",
+    "approved_proposal_sha256": "5118b0bb3727e9ef6080bed9015a68cd64bbbba226dc422948ec5cac294fbb55",
+    "owner_declined_exact_agreement_retrieval_ref": "records/source-gates/m2-asf-hyp3-rtc-terms-followup-001.json"
+  },
+  "public_sources": [
+    {
+      "url": "https://hyp3-docs.asf.alaska.edu/about/hyp3_basic/",
+      "finding": "ASF says anyone with Earthdata Login credentials may use HyP3 Basic to request On Demand products without payment, with a monthly free-credit allotment and 14-day output retention. This is Basic service guidance, not the private accepted agreement or a generated-product license."
+    },
+    {
+      "url": "https://hyp3-docs.asf.alaska.edu/using/",
+      "finding": "ASF distinguishes Basic from HyP3+ and says submitted jobs, user IDs, metadata, and resulting downloads are publicly visible. The owner previously accepted public visibility; no job has been submitted."
+    },
+    {
+      "url": "https://hyp3-docs.asf.alaska.edu/usage_guidelines/",
+      "finding": "ASF asks users of On Demand products to retain the product-specific acknowledgement and relevant DOIs in each multi-file product README. The exact future README has not been obtained."
+    },
+    {
+      "url": "https://hyp3-docs.asf.alaska.edu/about/hyp3_plus_terms/",
+      "finding": "The posted CC0 product clause expressly concerns HyP3+; it cannot be assigned to HyP3 Basic outputs by inference. The route uses Basic only and authorizes no paid credits."
+    },
+    {
+      "url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "finding": "The European Commission permits lawful Sentinel data reproduction, distribution, adaptation, and combination with source notices. This governs underlying Copernicus Sentinel data; it does not by itself establish the license of ASF's processed RTC package or its ancillary DEM."
+    },
+    {
+      "url": "https://docs.asf.alaska.edu/api/basics/",
+      "finding": "ASF says new users are prompted to accept its End-User License Agreement, but this public page does not give the exact agreement text or version accepted by the owner."
+    },
+    {
+      "url": "https://hyp3-api.asf.alaska.edu/openapi.json",
+      "finding": "The current Basic POST /jobs schema advertises HTTP 200 and an explicit validate_only boolean. The approved request supplies every current RTC_GAMMA option, avoiding unstated defaults in the validation response identity check."
+    },
+    {
+      "url": "https://github.com/ASFHyP3/hyp3/blob/c88707a58d64fcc6bbc37ba6704a6f0b713d1723/lib/dynamo/dynamo/jobs.py",
+      "finding": "Recent public source preserves supplied job parameters while adding defaults, and performs credit decrement and database writes only when dry_run is false. This is source-code evidence, not proof of the deployed service's behavior."
+    }
+  ],
+  "disposition": {
+    "current_validate_only_handoff_changed": false,
+    "public_basic_service_access_guidance_found": true,
+    "underlying_sentinel_data_reuse_guidance_found": true,
+    "exact_accepted_asf_agreement_verified": false,
+    "generated_basic_product_license_verified": false,
+    "product_specific_acknowledgement_verified": false,
+    "actual_account_or_scene_eligibility_verified": false,
+    "job_submission_rights_released_by_this_record": false,
+    "product_or_derived_pixel_publication_released": false
+  },
+  "next_dependency": "Await the one owner-run validate-only result. Any processing-job gate must separately reconcile the proposal's exact-terms condition and current Basic product local-use rights; a future product's README must be inspected before product-specific acknowledgement or publication claims.",
+  "claim_boundary": "Public documentation establishes a plausible Basic service path and the underlying Sentinel legal notice, not the owner's exact ASF agreement, deployed no-charge dry-run behavior, a processed-package license, live scene eligibility, a product QA pass, or a scientific map."
+}
