@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-OPTICAL-PAIR-HEADER-RECEIPT-RECOVERY-001",
+  "status": "local_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "base_commit": "e34661962ef2cadac5571c98b6cdb8be5cf2e44d",
+  "purpose": "Give one fresh offline evaluation of the already verified exact Sentinel-2 pair durable failure evidence and, only if its unchanged header predicates pass, one conditional QA-only pixel evaluation toward the ArcGIS map.",
+  "terminal_evidence": {
+    "pilot_terminal_ref": "records/readiness/m2-optical-pair-pilot-001-terminal.json",
+    "pilot_terminal_sha256": "accdd4e2f192c0e527f4d92ea35152d6bb04694e682356c71f3141b316a44cfc",
+    "terminal_publication_reconciliation_ref": "records/readiness/m2-optical-pair-pilot-001-terminal-publication-reconciliation.json",
+    "terminal_publication_reconciliation_sha256": "fafc3b56900f2496b9973560a71f90d91b3b83796c499ed99f5def2302b81553",
+    "static_review_ref": "records/observations/m2-optical-pair-header-stop-static-review-001.json",
+    "static_review_sha256": "ac82fb00a8a6d5738a7b5500f66440413dfa4e3eb00f6b62457ab99e3099933e",
+    "known_outcome": "Two exact archives passed provider size, MD5, BLAKE3, ZIP CRC, and materialization checks. The sole original ArcGIS worker ended without a header receipt; its exit code and failing statement were not preserved. No real pixel QA began. The original pilot is terminal and cannot be reused or retried."
+  },
+  "exact_existing_inputs": [
+    {
+      "source_id": "M2-OPT-001",
+      "role": "before",
+      "exact_product_name": "S2A_MSIL2A_20260824T050231_N0512_R119_T45RUM_20260824T115710.SAFE",
+      "provider_product_id": "35b149d6-cdde-4959-8ff4-d28f37bf67bb",
+      "verified_archive_sha256": "b8050b4aaaacc2014c8b5dbec7fca8738c8be74f2cf9d65df7dda089ac5114e8",
+      "materialization_manifest_sha256": "92fcfad15c70297dbc174c2ab470257196e21d232cb5ad131fba21b23ab8b542"
+    },
+    {
+      "source_id": "M2-OPT-002",
+      "role": "after",
+      "exact_product_name": "S2B_MSIL2A_20260916T045659_N0512_R119_T45RUM_20260916T084937.SAFE",
+      "provider_product_id": "3856463e-02bd-44ad-9525-d4d98fa3eb72",
+      "verified_archive_sha256": "0c201b7196b87a9efd79deb5a4c5a5cab6e45cce7e3d2d7bce593c9b3368a1ae",
+      "materialization_manifest_sha256": "7c85c00bca387d303354554c43070ce665893237f06b00f97600ef646ab969ea"
+    }
+  ],
+  "frozen_scientific_bindings": {
+    "analysis_crs_wkid": 32645,
+    "analysis_cell_size_m": 20.0,
+    "qa_targets": ["AOI-SOURCE", "AOI-UPPER-CORRIDOR", "AOI-OVERVIEW"],
+    "overview_full_coverage_claim": false,
+    "pixel_qa_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_qa_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "original_optical_pixel_contract_ref": "config/qa/optical-pixel-readiness-contract-001.json",
+    "original_optical_pixel_contract_sha256": "2410955b686d545a39f1962c2924b8515cc130c3db9bbae5fe314f1e5bd04fa7",
+    "optical_header_contract_ref": "config/qa/optical-input-readiness-contract.json",
+    "optical_header_contract_sha256": "83327ebc03fb5a7b66152a77717354e4b88450b6f63a2734b5b4ceea6550f3b0",
+    "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "threshold_or_mask_change": false
+  },
+  "requested_single_conditional_envelope": {
+    "owner_decision_count": 1,
+    "covers_without_intermediate_reconfirmation": [
+      "Publish this exact packet and owner response to the public default branch and require passing public CI.",
+      "Implement a distinct offline recovery worker with append-only parent-reserved start, stage, terminal, and cleanup receipts before any child process or ArcPy import; preserve a sanitized child exit code and bounded phase/error-class codes, never raw exception text, paths, stdout, stderr, credentials, or pixel values.",
+      "Add portable synthetic interruption, early-import, receipt-persistence, exact-identity, stop-on-failure, and secret-exposure tests and one installed ArcGIS-runtime disposable launch/header test using generated inputs only; require passing local and public-CI gates.",
+      "Perform one final offline no-network, no-token, no-raster-decoding preflight of exact public authority, current immutable terminal, existing verified custody and materialization identities, free space, ArcGIS runtime, and unchanged scientific contracts; byte-identity hash reads of the exact existing inputs are permitted.",
+      "Only after every gate passes, start at most one fresh distinct offline recovery process against the two exact already materialized products in before-then-after order. Read those inputs without mutating or rematerializing them; persist a terminal receipt even if the child exits before importing ArcPy or before a header receipt.",
+      "If and only if the new header receipt passes the unchanged frozen header predicates, perform at most one new append-only exact-pair pixel-QA attempt under the unchanged 20-m EPSG:32645 grid, masks, coverage, and registration predicates; record all three AOI dispositions and stop on any failure without retry.",
+      "Publish only sanitized terminal evidence and exact post-CI reconciliation, preserving the original terminal pilot and all failed or inconclusive recovery evidence."
+    ],
+    "maximum_new_real_header_processes": 1,
+    "maximum_new_real_pair_pixel_qa_attempts": 1,
+    "automatic_retry": false,
+    "source_reacquisition_or_network": false,
+    "credential_or_account_action": false,
+    "original_pilot_attempt_reuse_resume_or_mutation": false,
+    "existing_archive_or_materialization_overwrite": false,
+    "source_date_aoi_crs_grid_mask_threshold_or_registration_change": false,
+    "baseline_change_analysis_attribution_or_scientific_publication": false
+  },
+  "stop_conditions": [
+    "Stop before the real process if any authority, public CI, source identity, receipt, contract, runtime, disk, or disposable test gate fails or is unknown.",
+    "Stop without pixel decoding if the new header receipt is missing, invalid, blocked, or does not independently pass the exact frozen pair checks.",
+    "Stop without another attempt on any child failure, persistence failure, process interruption, pixel QA block, or incomplete cleanup; preserve terminal evidence and uncertainty.",
+    "Do not infer the original failure cause from a new successful or failed run without direct supporting evidence."
+  ],
+  "claim_boundary": {
+    "possible_result": "INVALID_BLOCK_DEFER_or_localized_PASS_QA_ONLY",
+    "pass_qa_only_is_not_baseline_admission": true,
+    "spectral_indices_or_difference_raster_authorized": false,
+    "interpretation_or_attribution_authorized": false,
+    "derived_pixel_or_scientific_publication_authorized": false
+  },
+  "decision_question": "Approve, revise, or defer this one bounded offline header-receipt recovery and conditional pixel-QA envelope through sanitized terminal publication?",
+  "does_not_authorize_now": [
+    "Git publication of this local packet",
+    "implementation or ArcPy invocation",
+    "external-custody or materialized-product access",
+    "new real diagnostic, header, or pixel attempt",
+    "network, token, source acquisition, or terms action",
+    "baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication"
+  ]
+}

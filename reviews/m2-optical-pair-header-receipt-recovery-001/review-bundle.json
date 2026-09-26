@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-OPTICAL-PAIR-HEADER-RECEIPT-RECOVERY-001-REVIEW-BUNDLE",
+  "status": "local_zero_decision_one_owner_decision_required",
+  "human_decision_count": 0,
+  "base_commit": "e34661962ef2cadac5571c98b6cdb8be5cf2e44d",
+  "artifacts": [
+    {"path": "contracts/milestone-002-optical-pair-header-receipt-recovery-001-proposal.json", "sha256": "45b7dc504bf3f92b3dc72db5130596e7465c06f74e3aeb679670e886d0eee2f3", "role": "single_conditional_offline_recovery_proposal"},
+    {"path": "docs/M2_OPTICAL_PAIR_HEADER_RECEIPT_RECOVERY_001_REVIEW.md", "sha256": "da580925526b9e74a4fb3cae88e4c21cbb1f785605fbf620cb3f580813c5a1a9", "role": "human_readable_review"},
+    {"path": "records/observations/m2-optical-pair-header-stop-static-review-001.json", "sha256": "ac82fb00a8a6d5738a7b5500f66440413dfa4e3eb00f6b62457ab99e3099933e", "role": "read_only_failure_observability_assessment"},
+    {"path": "records/readiness/m2-optical-pair-pilot-001-terminal-publication-reconciliation.json", "sha256": "fafc3b56900f2496b9973560a71f90d91b3b83796c499ed99f5def2302b81553", "role": "closed_original_pilot_terminal_and_public_ci"},
+    {"path": "records/readiness/m2-optical-pair-pilot-001-terminal.json", "sha256": "accdd4e2f192c0e527f4d92ea35152d6bb04694e682356c71f3141b316a44cfc", "role": "preserved_original_header_stop"},
+    {"path": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2", "role": "frozen_grid_coverage_mask_and_registration_predicates"}
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-OPTICAL-PAIR-HEADER-RECEIPT-RECOVERY-001",
+    "question": "Approve, revise, or defer one bounded offline observability and exact-pair header recovery, with one conditional QA-only pixel attempt, through sanitized terminal publication?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "The exact packet and owner response pass public default-branch CI. Implementation, portable and installed ArcGIS disposable tests, public CI, final offline exact-identity preflight, one new header process, conditional one new pixel-QA attempt, and terminal publication remain dependency ordered without intermediate owner reconfirmation."
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "implementation_or_arcgis_invocation_authorized": false,
+    "project_data_or_external_custody_access_authorized": false,
+    "new_header_or_pixel_attempt_authorized": false,
+    "network_credential_source_acquisition_or_terms_action_authorized": false,
+    "original_pilot_retry_or_mutation_authorized": false,
+    "baseline_change_attribution_or_scientific_publication_authorized": false
+  }
+}

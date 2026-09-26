@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-OPTICAL-PAIR-HEADER-STOP-STATIC-REVIEW-001",
+  "observed_at_utc": "2026-09-25T22:29:00Z",
+  "status": "read_only_static_review_no_root_cause",
+  "inputs": {
+    "terminal_receipt_sha256": "accdd4e2f192c0e527f4d92ea35152d6bb04694e682356c71f3141b316a44cfc",
+    "terminal_publication_reconciliation_sha256": "fafc3b56900f2496b9973560a71f90d91b3b83796c499ed99f5def2302b81553",
+    "supervisor_code_sha256": "2a5612a93b01dff28de007dd53e2ff6aa4472981370bb20e7608705897e1c111",
+    "arcgis_worker_code_sha256": "a612e3cbec4ea019028f3b02ccc1c78cdaefa7423ad2dc22e2f54e254e512143",
+    "offline_header_code_sha256": "43e40b0ec61727ad5c2513bffbbe102a8ffa66d7d0dc6ff128c2fef187155b71"
+  },
+  "observations": {
+    "both_exact_products_verified_and_materialized": true,
+    "supervisor_invoked_one_arcgis_worker": true,
+    "arcgis_worker_exit_code_persisted": false,
+    "child_stdout_or_stderr_persisted": false,
+    "header_receipt_reserved_before_worker_import": false,
+    "header_receipt_written_only_after_both_product_inspections": true,
+    "pixel_qa_attempt_started": false,
+    "existing_execution_release_read_only_check_passed_after_terminal": true
+  },
+  "inference_limit": "The missing header receipt can arise before or during the child process and does not identify a failing statement, product, ArcGIS component, or scientific predicate. The post-terminal release check does not prove the child's release check passed at execution time.",
+  "activity": {
+    "project_data_or_external_custody_read_for_this_review": false,
+    "arcgis_invocation": false,
+    "new_header_or_pixel_attempt": false,
+    "network_or_credential_action": false,
+    "mutation_of_preserved_attempt": false
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-OPTICAL-PAIR-HEADER-RECEIPT-RECOVERY-001-APPROVAL",
+  "status": "owner_approved_exact_conditional_envelope_public_ci_pending",
+  "recorded_at_utc": "2026-09-26T00:04:29Z",
+  "decision_id": "D-M2-OPTICAL-PAIR-HEADER-RECEIPT-RECOVERY-001",
+  "decision": "approve",
+  "human_decision_count": 1,
+  "owner_replies_verbatim_in_order": ["approve", "retry", "retry"],
+  "decision_context": "The owner replied approve to the immediately preceding request naming the exact local review-bundle and proposal SHA-256 values, then twice directed retry. This applies to the new distinct conditional recovery described by those files; it does not retry the consumed original pilot. Ordinary chat authorization is permitted by AGENTS.md.",
+  "explicit_attestation_statement": false,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-optical-pair-header-receipt-recovery-001-proposal.json",
+    "proposal_sha256": "45b7dc504bf3f92b3dc72db5130596e7465c06f74e3aeb679670e886d0eee2f3",
+    "review_bundle_ref": "reviews/m2-optical-pair-header-receipt-recovery-001/review-bundle.json",
+    "review_bundle_sha256": "c11ad27a12563b1db4ec0f95b074436c4b8ff4837b74ea9164ed9bae7e909e95",
+    "original_terminal_ref": "records/readiness/m2-optical-pair-pilot-001-terminal.json",
+    "original_terminal_sha256": "accdd4e2f192c0e527f4d92ea35152d6bb04694e682356c71f3141b316a44cfc"
+  },
+  "authority": {
+    "single_conditional_envelope_through_sanitized_terminal_publication": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "packet_publication_and_public_ci": true,
+    "bounded_implementation_disposable_arcgis_and_public_ci_gates": true,
+    "final_offline_exact_identity_preflight_required": true,
+    "maximum_new_real_header_processes": 1,
+    "maximum_new_real_pair_pixel_qa_attempts": 1,
+    "pixel_attempt_requires_passing_new_header": true,
+    "automatic_retry": false,
+    "source_reacquisition_network_token_or_terms_action": false,
+    "consumed_pilot_reuse_resume_or_mutation": false,
+    "existing_archive_or_materialization_overwrite": false,
+    "source_date_aoi_crs_grid_mask_threshold_or_registration_change": false,
+    "baseline_change_analysis_interpretation_or_attribution": false,
+    "derived_pixel_or_scientific_publication": false
+  }
+}
