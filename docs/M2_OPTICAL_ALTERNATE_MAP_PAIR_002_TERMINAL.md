@@ -1,0 +1,7 @@
+# M2 optical alternate map pair-002 — terminal result
+
+The approved [pair-002 review](M2_OPTICAL_ALTERNATE_MAP_PAIR_002_REVIEW.md) is preserved as the exact predecision packet. The later [owner approval](../records/source-gates/m2-optical-alternate-map-pair-002-approval.json) released one conditional envelope. Its single new before-scene screen is complete and **blocked**; the [terminal reconciliation](../records/readiness/m2-optical-alternate-map-pair-002-terminal-reconciliation.json) binds the append-only receipts.
+
+The 24 August `M2-OPT-001` scene passed exact-source header checks, but only **34.72%** of the source AOI and **29.01%** of the upper-corridor AOI were usable under the unchanged SCL, quality, and DN-zero exclusions. The approved acquisition prerequisite required **80% in each**. The result is a single-date screen, not pair-level pixel QA or evidence of event change.
+
+The 21 September `M2-OPT-003` scene was **not requested or acquired**. No token was solicited; pair QA and the local derived-pixel map did not start. The before-screen attempt is consumed and cannot be reused or retried. The other three fixed attempt roots remain absent because the first gate failed. This route is closed under the pair-002 approval; a different date, source, threshold, or method needs separate review. The metadata-only ArcGIS displays remain the current map products, and no observed-change or attribution claim is supported.

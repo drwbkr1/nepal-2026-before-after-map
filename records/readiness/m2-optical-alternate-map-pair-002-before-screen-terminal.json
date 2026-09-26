@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "status": "completed_single_date_screen",
+  "stage": "pixel_screen",
+  "completed_at_utc": "2026-09-26T19:37:29Z",
+  "child_exit_code": 0,
+  "child_terminal_present": true,
+  "header_receipt_present": true,
+  "screen_receipt_present": true,
+  "screen_status": "block",
+  "target_aoi_usable_fractions": {
+    "AOI-SOURCE": 0.3472036355525817,
+    "AOI-UPPER-CORRIDOR": 0.2900860217047938
+  },
+  "screen_receipt_sha256": "f511bfbdf32d58f1cf2472fb40e8a3b4980a2ee7f4a9a75660a520d6d47d1c8e",
+  "exception_text_recorded": false,
+  "network_or_credential_action": false,
+  "automatic_retry": false,
+  "old_attempt_reused_or_mutated": false,
+  "baseline_or_change_analysis": false,
+  "derived_pixel_or_scientific_publication": false
+}

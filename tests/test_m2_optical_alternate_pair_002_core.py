@@ -389,5 +389,25 @@ class CandidateSupervisorTests(unittest.TestCase):
             self.assertEqual(json.loads(terminal)["status"], "stopped")
 
 
+class CandidateTerminalTests(unittest.TestCase):
+    def test_blocked_before_screen_closes_acquisition_dependency(self) -> None:
+        reconciliation = json.loads((ROOT / "records/readiness/m2-optical-alternate-map-pair-002-terminal-reconciliation.json").read_text())
+        terminal_ref = reconciliation["public_terminal_ref"]
+        terminal = json.loads((ROOT / terminal_ref).read_text())
+        self.assertEqual(hashlib.sha256((ROOT / terminal_ref).read_bytes()).hexdigest(),
+                         reconciliation["public_terminal_sha256"])
+        self.assertEqual(terminal["screen_status"], "block")
+        self.assertTrue(reconciliation["before_screen_attempt_consumed"])
+        for key in ("M2-OPT-003_request_or_acquisition", "pair_header_or_pixel_qa_started",
+                    "real_local_visual_map_started", "token_or_credential_action",
+                    "baseline_admission_or_change_analysis", "event_attribution_or_scientific_result"):
+            self.assertFalse(reconciliation[key])
+        for identifier in ("AOI-SOURCE", "AOI-UPPER-CORRIDOR"):
+            item = reconciliation["target_results"][identifier]
+            self.assertAlmostEqual(item["usable_cells"] / item["aoi_cells"],
+                                   item["usable_fraction"])
+            self.assertLess(item["usable_fraction"], reconciliation["required_usable_fraction_each_target"])
+
+
 if __name__ == "__main__":
     unittest.main()

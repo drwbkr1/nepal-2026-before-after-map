@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "status": "terminal_block_before_scene_under_threshold_no_after_request",
+  "receipt_id": "NEPAL-M2-OPTICAL-ALTERNATE-MAP-PAIR-002-TERMINAL-RECONCILIATION",
+  "proposal_sha256": "c38ed063e8eadd44b364e41235e0cc9ba8fb09e620f32e1eb4d96e4a8fde7de0",
+  "bundle_sha256": "980df8c0412fd1997ba5d6cc67a5f8b7a3b7cb5b3e62ed6fad96c2bd5f9c3e6d",
+  "approval_sha256": "a85e5c2d4d2bc93f22d700674cb65db74eef0f9085ece18cc53480de00cf1458",
+  "before_screen_attempt_id": "m2-optical-alternate-map-pair-002-before-screen-real-001",
+  "before_screen_attempt_consumed": true,
+  "attempt_receipts_sha256": {
+    "started": "83a8d455660bf89a5218fda8ba2284811fb1df1702cbdbd564aa197ad4125bab",
+    "header": "d93c84fc9984eb4297d4711fb58d2b772506a5bd03b3c0ec3c8f7a2fb7d1086d",
+    "screen": "f511bfbdf32d58f1cf2472fb40e8a3b4980a2ee7f4a9a75660a520d6d47d1c8e",
+    "worker_terminal": "d1b65e5cbae4a4820f7c7a59f565ddfc9f7925241bdb342c9bbed80df8110951",
+    "terminal": "45034de86ff43b7726a57e09b4e5c697cb3d366acfbf70accda7d1d2450c0fda",
+    "cleanup": "4d9217dfc7b1653e93542ef56494b517ce7cdd3c1554a0e42db74d0a5b125b1e"
+  },
+  "public_preflight_ref": "records/readiness/m2-optical-alternate-map-pair-002-final-preflight.json",
+  "public_preflight_sha256": "66e68815824af600ce144bf32ee3c295161c3d004dc9224d0ae1e30ffd5c24d0",
+  "public_terminal_ref": "records/readiness/m2-optical-alternate-map-pair-002-before-screen-terminal.json",
+  "public_terminal_sha256": "45034de86ff43b7726a57e09b4e5c697cb3d366acfbf70accda7d1d2450c0fda",
+  "source_id": "M2-OPT-001",
+  "internal_processing_baseline": "05.12",
+  "header_status": "pass_single_source_header_only",
+  "single_date_screen_status": "block",
+  "required_usable_fraction_each_target": 0.8,
+  "target_results": {
+    "AOI-SOURCE": {
+      "usable_cells": 124535,
+      "aoi_cells": 358680,
+      "usable_fraction": 0.3472036355525817
+    },
+    "AOI-UPPER-CORRIDOR": {
+      "usable_cells": 375398,
+      "aoi_cells": 1294092,
+      "usable_fraction": 0.2900860217047938
+    }
+  },
+  "source_materialization_manifest_sha256_after_attempt": "92fcfad15c70297dbc174c2ab470257196e21d232cb5ad131fba21b23ab8b542",
+  "cleanup_status": "pass_no_temporary_payload_cleanup_required",
+  "remaining_exact_attempt_roots_present": false,
+  "M2-OPT-003_request_or_acquisition": false,
+  "pair_header_or_pixel_qa_started": false,
+  "real_local_visual_map_started": false,
+  "token_or_credential_action": false,
+  "automatic_retry": false,
+  "baseline_admission_or_change_analysis": false,
+  "event_attribution_or_scientific_result": false,
+  "next_authorized_action": "sanitized_terminal_publication_only",
+  "route_closed_for_this_approval": true
+}
