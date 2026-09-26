@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-OPTICAL-GDAL-RECOVERY-002-TERMINAL",
+  "status": "completed_qa_evaluation",
+  "stage": "pixel_qa",
+  "completed_at_utc": "2026-09-26T17:32:28Z",
+  "child_exit_code": 0,
+  "child_terminal_receipt_present": true,
+  "header_receipt_present": true,
+  "pixel_receipt_present": true,
+  "error_class": null,
+  "safe_code": null,
+  "header_status": "pass_header_readability_only",
+  "pixel_status": "block",
+  "aoi_dispositions": {
+    "AOI-SOURCE": "block",
+    "AOI-UPPER-CORRIDOR": "block",
+    "AOI-OVERVIEW": "block"
+  },
+  "exception_text_recorded": false,
+  "network_or_credential_action": false,
+  "automatic_retry": false,
+  "arcpy_imported": false,
+  "old_attempt_reused_or_mutated": false,
+  "baseline_or_change_analysis": false,
+  "derived_pixel_or_scientific_publication": false,
+  "non_git_terminal_sha256": "c94119e625e8baac9ca8a4b36217d2434fc9ccde8733a0cc5de1848b59d716d9",
+  "cleanup_status": "pass_preserved_inputs",
+  "receipt_persistence_errors": []
+}
