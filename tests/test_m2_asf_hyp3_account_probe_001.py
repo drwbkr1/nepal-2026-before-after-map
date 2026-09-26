@@ -131,7 +131,8 @@ class AccountProbeTests(unittest.TestCase):
         rendered = json.dumps(result)
         for forbidden in ("synthetic-token.123", "synthetic-private-identity", "synthetic-private-job", "synthetic-private-text"):
             self.assertNotIn(forbidden, rendered)
-        self.assertEqual(result["remaining_free_credits"], 8000)
+        self.assertTrue(result["at_least_240_free_basic_credits"])
+        self.assertNotIn("remaining_free_credits", result)
         self.assertFalse(result["exact_s1d_job_eligibility_verified"])
 
     def test_redirect_does_not_follow_or_disclose(self) -> None:

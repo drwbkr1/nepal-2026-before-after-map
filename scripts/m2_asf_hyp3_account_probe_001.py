@@ -124,7 +124,7 @@ def get_basic_account(token: str, connection_factory: Callable = http.client.HTT
         value = json.loads(raw)
         if not isinstance(value, dict):
             raise RouteStop("account_response_invalid")
-        balance = check_free_credits(value, required_jobs=4)
+        check_free_credits(value, required_jobs=4)
         application_status = value.get("application_status")
         if application_status not in {"NOT_STARTED", "PENDING", "APPROVED", "REJECTED"}:
             raise RouteStop("account_application_status_unknown")
@@ -132,9 +132,9 @@ def get_basic_account(token: str, connection_factory: Callable = http.client.HTT
         return {
             "status": "account_probe_pass_free_credit_capacity_only",
             "service": "HyP3 Basic",
-            "remaining_free_credits": balance,
+            "at_least_240_free_basic_credits": True,
             "four_job_nominal_ceiling": 240,
-            "application_status_observed_not_interpreted_as_basic_eligibility": application_status,
+            "application_status_checked_but_not_interpreted_as_basic_eligibility": True,
             "exact_s1d_job_eligibility_verified": False,
             "credential_value_recorded": False,
             "jobs_submitted": 0,
