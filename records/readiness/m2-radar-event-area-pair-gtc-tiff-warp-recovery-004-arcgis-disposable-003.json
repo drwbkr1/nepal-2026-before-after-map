@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "status": "block_generated_core_no_real_attempt",
+  "terminal_sha256": "7113ee389b1989bd90cfad83c63169826f0a294319d6f3248f01f05f61ecb6d1",
+  "core_sha256": "de9ba15aecdeeca090c8abf689515351b9132c1cc33d23dd26fc6296ecadcbfd",
+  "validator_sha256": "a977f4c179c5cdb3d307491b1d76b7876ce762366840656e67740e3f35c58ffd",
+  "protected_data_accessed": false,
+  "real_attempt_started": false
+}

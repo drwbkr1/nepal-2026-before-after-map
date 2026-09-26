@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "status": "pass_generated_bridge_and_exact_grid_only",
+  "terminal_sha256": "9145815a3850b083420fc5ab62563f6f842dad1750332524bd39b7033172d448",
+  "core_sha256": "c74fbda2985cebfbaa287896bd89e827a932cd5eac20952bc471f5e82546a34e",
+  "validator_sha256": "b0c701e73fdf504d6e35feedc2f1fbe70da5bc59a9b3c4ad35b89984128a21b7",
+  "protected_data_accessed": false,
+  "real_attempt_started": false,
+  "sar_fitness_proven": false
+}

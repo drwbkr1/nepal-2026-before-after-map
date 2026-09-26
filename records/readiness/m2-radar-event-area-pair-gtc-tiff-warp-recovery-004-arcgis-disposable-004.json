@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "status": "pass_generated_production_bridge_core_only",
+  "terminal_sha256": "03ce34ba44f8c5df9cc23cafacce86a4b9d3e1c692a5910be685f481b0d65fd6",
+  "core_sha256": "436226db638f4bb40dc246902a4a42bbe09b500c030ddf8df0964e3b320dcaf2",
+  "validator_sha256": "b4a30374b95bbe7e887334f0933d4b5da4203febfbcefd1bc43fc3acc7292e69",
+  "protected_data_accessed": false,
+  "real_attempt_started": false
+}
