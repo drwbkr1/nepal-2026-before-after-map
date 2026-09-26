@@ -1,0 +1,35 @@
+{
+  "record_id": "NEPAL-MAP-CONTEXT-CURRENT-CUSTODY-2026-09-26",
+  "checked_at_utc": "2026-09-26T22:28:45Z",
+  "status": "pass_current_local_metadata_context_custody_only",
+  "prior_arcgis_qa_ref": "records/surface-receipts/map-context-arcgis-local-qa-001.json",
+  "checks": {
+    "scratch/map-context-gpkg-001/Nepal_2026_Map_Context.gpkg": "5bdb418dc8af0eed9ce9ba4db6712d7af26cc8b1f5a107329a94d50ec3bf70c8",
+    "scratch/map-context-arcgis-validation-006/Nepal_2026_Map_Context.aprx": "9f34aa69e584f49972c57e1f195f9d7a050e73236b44d5e017dc6d34470f93c4",
+    "scratch/map-context-arcgis-validation-006/Map_Context_ArcGIS.png": "0b2b4255d588671e3d01357d549c4525443fff0b68257a6828f6217a2fdad18b",
+    "scratch/map-context-arcgis-validation-006/Map_Context_ArcGIS.pdf": "e0562f1c12f3dabcedfa04e8606c5d99ddd241d2153d171bbd5e180bd1e61d5e",
+    "scratch/map-context-arcgis-package-001/delivery.ppkx": "6b97e3984c5340985488dc64b087a3ccd83acb85cfa0336858f2602751261374"
+  },
+  "geopackage_read_only_check": {
+    "sqlite_integrity": "ok",
+    "srs_id": 32645,
+    "feature_counts": {
+      "StudyAreas": 3,
+      "RadarCatalogFootprints": 6,
+      "DEMTileBoxes": 4
+    }
+  },
+  "visual_review": {
+    "surface": "scratch/map-context-arcgis-validation-006/Map_Context_ArcGIS.png",
+    "status": "pass_existing_metadata_only_claim_boundary_visible",
+    "findings": "The rendered title, EPSG:32645 subtitle, footprint/DEM legend, map scale, and explicit metadata-only disclaimer remain visible; no before/after imagery, observed change, or attribution is depicted."
+  },
+  "limits": {
+    "arcgis_runtime_reopened_in_this_check": false,
+    "clean_profile_or_machine_verified": false,
+    "imagery_or_dem_pixels_verified": false,
+    "before_after_change_mapped": false,
+    "final_m6_delivery_proven": false
+  },
+  "next_dependency": "Retain this projected metadata shell, then wait for an exact source route to pass product and pixel QA before adding before/after imagery or making an observed-change claim."
+}
