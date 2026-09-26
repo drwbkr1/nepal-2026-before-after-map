@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-HEADER-RECEIPT-RECOVERY-001-EXECUTION-GATE",
+  "status": "pass_public_execution_gate",
+  "proposal_sha256": "45b7dc504bf3f92b3dc72db5130596e7465c06f74e3aeb679670e886d0eee2f3",
+  "review_bundle_sha256": "c11ad27a12563b1db4ec0f95b074436c4b8ff4837b74ea9164ed9bae7e909e95",
+  "approval_sha256": "d3558944b22bfe9a1fbe75cb66aca8ea1ec0f5eb91d7496449051668449ac64a",
+  "implementation_readiness_sha256": "c0a13a2acfbe1e29ebcd3df3dde4e5830e9f69d42aad40c106cd40615c080d1d",
+  "implementation_commit_sha": "3d077dec3514988c9ef59247f0a296f9671e9e91",
+  "public_ci_run_id": 36204981109,
+  "public_ci_job_id": 108299490807,
+  "public_ci_conclusion": "success",
+  "gate_record_publication_ci_still_required": true,
+  "early_custody_read_observation_ref": "records/readiness/m2-optical-pair-header-receipt-recovery-001-early-custody-read-observation.json",
+  "assertions": {
+    "exact_implementation_public_and_ci_passing": true,
+    "final_offline_exact_identity_preflight_required": true,
+    "new_real_header_process_maximum": 1,
+    "conditional_pixel_qa_attempt_maximum": 1,
+    "old_pilot_retry_or_mutation_released": false,
+    "network_credential_or_reacquisition_released": false,
+    "baseline_change_analysis_or_scientific_publication_released": false
+  }
+}
