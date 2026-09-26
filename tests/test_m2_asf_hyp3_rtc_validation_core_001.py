@@ -42,6 +42,10 @@ class ValidationCoreTests(unittest.TestCase):
                 self.assertEqual(len(payload["jobs"]), 1)
                 self.assertEqual(payload["jobs"][0]["job_type"], "RTC_GAMMA")
         self.assertFalse("validate_only" in self.jobs[0])
+        altered = copy.deepcopy(self.jobs)
+        altered[0]["job_parameters"]["resolution"] = 20.0
+        with self.assertRaisesRegex(RouteStop, "validation_candidate_identity_mismatch"):
+            one_validation_payload(altered, ORDER[0])
 
     def test_exact_response_emits_no_account_or_job_identity(self) -> None:
         result = inspect_validation({"validate_only": True, "jobs": [self.actual]}, self.expected, ORDER[0])
@@ -66,6 +70,10 @@ class ValidationCoreTests(unittest.TestCase):
         for index, reply in enumerate(mutations):
             with self.subTest(index=index), self.assertRaises(RouteStop):
                 inspect_validation(reply, self.expected, ORDER[0])
+        altered_expected = copy.deepcopy(self.expected)
+        altered_expected["job_parameters"]["resolution"] = 20.0
+        with self.assertRaisesRegex(RouteStop, "validation_candidate_identity_mismatch"):
+            inspect_validation({"validate_only": True, "jobs": [self.actual]}, altered_expected, ORDER[0])
 
     def test_only_passing_fixed_order_prefix_can_advance(self) -> None:
         receipts = []

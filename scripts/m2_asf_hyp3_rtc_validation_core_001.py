@@ -14,6 +14,7 @@ from m2_asf_hyp3_rtc_core_001 import (
     ORDER,
     PER_JOB_CREDIT_CEILING,
     RouteStop,
+    load_approved_jobs,
     one_job_payload,
 )
 
@@ -23,6 +24,8 @@ VALIDATION_PASS = "pass_validate_only_identity_and_cost_only"
 
 def one_validation_payload(jobs: tuple[dict, ...], source_id: str) -> dict:
     """Build one exact-source request with validate_only set explicitly."""
+    if jobs != load_approved_jobs():
+        raise RouteStop("validation_candidate_identity_mismatch")
     payload = copy.deepcopy(one_job_payload(jobs, source_id))
     payload["validate_only"] = True
     return payload
@@ -32,6 +35,8 @@ def inspect_validation(reply: dict, expected_job: dict, source_id: str) -> dict:
     """Return only non-identifying validation evidence or stop closed."""
     if source_id not in ORDER or not isinstance(reply, dict) or reply.get("validate_only") is not True:
         raise RouteStop("validation_response_not_validate_only")
+    if expected_job != one_job_payload(load_approved_jobs(), source_id)["jobs"][0]:
+        raise RouteStop("validation_candidate_identity_mismatch")
     jobs = reply.get("jobs")
     if not isinstance(jobs, list) or len(jobs) != 1 or not isinstance(jobs[0], dict):
         raise RouteStop("validation_response_ambiguous")
