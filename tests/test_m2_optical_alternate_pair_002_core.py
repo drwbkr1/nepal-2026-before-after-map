@@ -232,6 +232,23 @@ class CandidateSupervisorTests(unittest.TestCase):
                 with self.assertRaisesRegex(control.PairControlError, "public_ci_gate_missing"):
                     control.require_public_ci()
 
+    def test_public_ci_gate_must_be_committed(self) -> None:
+        gate = {"status": "pass_public_default_branch_ci_pair_002_before_screen_gate",
+                "proposal_sha256": control.PROPOSAL_SHA256,
+                "bundle_sha256": control.BUNDLE_SHA256,
+                "approval_sha256": control.APPROVAL_SHA256,
+                "public_ci_conclusion": "success", "public_ci_run_id": 1,
+                "implementation_commit": "synthetic", "public_ci_head_sha": "synthetic",
+                "released_stage_after_final_no_content_preflight":
+                "at_most_one_exact_M2-OPT-001_single_date_screen",
+                "new_M2-OPT-003_acquisition_released_by_this_gate": False}
+        with patch.object(control, "read_json", return_value=gate), \
+                patch.object(control, "subprocess") as process, \
+                patch.object(control, "require_packet"):
+            process.run.return_value.returncode = 1
+            with self.assertRaisesRegex(control.PairControlError, "not_committed"):
+                control.require_public_ci()
+
     def test_final_preflight_collision_stops_before_custody(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             collision = Path(directory) / "preflight.json"

@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -107,9 +108,19 @@ def require_public_ci() -> dict[str, Any]:
             or gate.get("bundle_sha256") != BUNDLE_SHA256
             or gate.get("approval_sha256") != APPROVAL_SHA256
             or gate.get("public_ci_conclusion") != "success"
+            or gate.get("public_ci_head_sha") != gate.get("implementation_commit")
             or not isinstance(gate.get("public_ci_run_id"), int)
-            or not isinstance(gate.get("implementation_commit"), str)):
+            or not isinstance(gate.get("implementation_commit"), str)
+            or gate.get("released_stage_after_final_no_content_preflight")
+            != "at_most_one_exact_M2-OPT-001_single_date_screen"
+            or gate.get("new_M2-OPT-003_acquisition_released_by_this_gate") is not False):
         raise PairControlError("pair_public_ci_gate_invalid")
+    committed = subprocess.run(
+        ["git", "show", f"HEAD:{EXECUTION_GATE.relative_to(ROOT).as_posix()}"],
+        cwd=ROOT, capture_output=True, check=False,
+    )
+    if committed.returncode != 0 or hashlib.sha256(committed.stdout).hexdigest() != sha256_file(EXECUTION_GATE):
+        raise PairControlError("pair_public_ci_gate_not_committed")
     return gate
 
 
