@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "gate_id": "NEPAL-M2-ASF-HYP3-RTC-MAP-ROUTE-001-REVIEW-PUBLICATION-GATE",
+  "status": "pass_exact_review_packet_public_ci_only",
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-asf-hyp3-rtc-map-route-001-proposal.json",
+    "proposal_sha256": "5118b0bb3727e9ef6080bed9015a68cd64bbbba226dc422948ec5cac294fbb55",
+    "review_bundle_ref": "reviews/m2-asf-hyp3-rtc-map-route-001/review-bundle.json",
+    "review_bundle_sha256": "f6afe7e4f5b1210c6d614ca4ba7c701b8a016bc773825f72cf1eb16d07a8bdca",
+    "owner_approval_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+    "owner_approval_sha256": "1c3103429418f1c1847fa5865f5634b6dece7acd8cd19e42a279537709087596",
+    "publication_commit_sha": "6b8c62847a3c50cdcb520a68aca8999e1ed0b0ce",
+    "public_ci_run_id": 36270829002,
+    "public_ci_job_id": 108484325836
+  },
+  "observed_public_ci": {
+    "workflow": "Validate project controls",
+    "job": "validate",
+    "run_status": "completed",
+    "run_conclusion": "success",
+    "repository_validation": "success",
+    "project_control_tests": "success"
+  },
+  "released_actions": [
+    "separate_hyp3_implementation",
+    "generated_data_and_installed_arcgis_runtime_synthetic_tests",
+    "sanitized_implementation_public_ci"
+  ],
+  "not_yet_released": [
+    "account_inspection",
+    "credential_handoff",
+    "job_submission_or_credit_use",
+    "provider_output_acquisition",
+    "real_pixel_read",
+    "local_real_pixel_map",
+    "baseline_or_change_analysis",
+    "scientific_publication"
+  ],
+  "unresolved_execution_gates": [
+    "exact_accepted_terms_and_local_product_rights",
+    "secret_safe_earthdata_handoff_implementation_and_tests",
+    "account_free_credit_balance_and_exact_scene_eligibility",
+    "implementation_public_ci_and_final_no_content_preflight"
+  ],
+  "claim_boundary": "A successful review-packet CI run confirms repository controls only. No HyP3 account, job, product, usable pixels, or observed-change map has been verified."
+}

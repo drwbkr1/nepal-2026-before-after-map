@@ -58,6 +58,27 @@ class HyP3ReviewIdentityTests(unittest.TestCase):
         self.assertFalse(proposal["frozen_scientific_boundaries"]["M4_change_analysis_or_threshold_adaptation_authorized"])
         self.assertFalse(proposal["frozen_scientific_boundaries"]["source_or_derived_pixel_publication_authorized"])
 
+    def test_public_review_gate_and_parallel_map_route(self) -> None:
+        gate_ref = "records/readiness/m2-asf-hyp3-rtc-map-route-001-review-publication-gate.json"
+        gate = load(gate_ref)
+        self.assertEqual(gate["status"], "pass_exact_review_packet_public_ci_only")
+        self.assertEqual(gate["bindings"]["proposal_sha256"], PROPOSAL_SHA256)
+        self.assertEqual(gate["bindings"]["review_bundle_sha256"], BUNDLE_SHA256)
+        self.assertEqual(gate["bindings"]["owner_approval_sha256"], sha256(APPROVAL))
+        self.assertEqual(gate["bindings"]["publication_commit_sha"], "6b8c62847a3c50cdcb520a68aca8999e1ed0b0ce")
+        self.assertEqual(gate["bindings"]["public_ci_run_id"], 36270829002)
+        self.assertEqual(gate["observed_public_ci"]["run_conclusion"], "success")
+        for ref, key in (
+            ("records/project-control-profile.json", "active_map_route"),
+            ("records/long-term-goal.json", "active_map_route"),
+            ("contracts/milestone-002.json", "handoff"),
+        ):
+            state = load(ref)
+            route = state[key] if key == "active_map_route" else state[key]["active_map_route"]
+            self.assertEqual(route["authority_ref"], APPROVAL)
+            self.assertEqual(route["public_review_gate_ref"], gate_ref)
+            self.assertEqual(route["checkpoint_id"], "M2-ASF-HYP3-RTC-MAP-ROUTE-001-IMPLEMENTATION")
+
 
 if __name__ == "__main__":
     unittest.main()

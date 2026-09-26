@@ -725,6 +725,12 @@
       "next_action": "Review the sanitized terminal recovery-005 evidence. The attempt is consumed and cannot be resumed, reused, or retried; no baseline admission, change analysis, attribution, derived-pixel publication, historical-root-cause claim, or scientific publication is released."
     }
   ],
+  "active_map_route": {
+    "checkpoint_id": "M2-ASF-HYP3-RTC-MAP-ROUTE-001-IMPLEMENTATION",
+    "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+    "public_review_gate_ref": "records/readiness/m2-asf-hyp3-rtc-map-route-001-review-publication-gate.json",
+    "next_action": "Implement and validate the separate HyP3 route and publish its public CI gate. Do not access the account or submit jobs until exact terms, rights, secret-safe handoff, eligibility, free credits, and final preflight pass."
+  },
   "human_gates": {
     "review_gates": [
       {
