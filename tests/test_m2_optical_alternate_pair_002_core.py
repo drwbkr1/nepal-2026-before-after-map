@@ -243,6 +243,7 @@ class CandidateSupervisorTests(unittest.TestCase):
                 "at_most_one_exact_M2-OPT-001_single_date_screen",
                 "new_M2-OPT-003_acquisition_released_by_this_gate": False}
         with patch.object(control, "read_json", return_value=gate), \
+                patch.object(control, "EXECUTION_GATE", control.APPROVAL), \
                 patch.object(control, "subprocess") as process, \
                 patch.object(control, "require_packet"):
             process.run.return_value.returncode = 1

@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "status": "terminal_failed_public_ci_no_execution_release",
+  "implementation_commit": "ece27674b72f5bc5243dd76d4f63d22fcd443840",
+  "public_ci_run_id": 36266517446,
+  "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/36266517446",
+  "public_ci_conclusion": "failure",
+  "failed_check": "test_public_ci_gate_must_be_committed",
+  "failure_scope": "The test used a locally present but untracked gate path. CI correctly had no gate yet and stopped at gate_missing before reaching the intended uncommitted-gate branch.",
+  "correction": "Use an already committed disposable path as the mocked gate-file location; leave production gate validation unchanged.",
+  "protected_pixels_read": false,
+  "new_source_requested_or_acquired": false,
+  "attempt_started": false,
+  "execution_gate_released": false
+}
