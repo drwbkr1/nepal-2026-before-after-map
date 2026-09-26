@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "receipt_id": "NEPAL-M2-OPTICAL-GDAL-RECOVERY-002-FINAL-PREFLIGHT",
+  "status": "pass_offline_exact_identity_no_pixel_decode",
+  "checked_at_utc": "2026-09-26T17:31:17Z",
+  "proposal_sha256": "293a9f90a1d6ca9d1531423798d191901d3772999763fbce34ca6b583e5f7d8e",
+  "execution_gate_sha256": "254c23d6283d6862ef70c17629c89959df8fc887d796b492c27bc6dbc59817da",
+  "source_ids_in_order": [
+    "M2-OPT-001",
+    "M2-OPT-002"
+  ],
+  "sources_in_order": [
+    {
+      "source_id": "M2-OPT-001",
+      "archive_size_bytes": 1069015437,
+      "archive_sha256": "b8050b4aaaacc2014c8b5dbec7fca8738c8be74f2cf9d65df7dda089ac5114e8",
+      "manifest_sha256": "92fcfad15c70297dbc174c2ab470257196e21d232cb5ad131fba21b23ab8b542",
+      "file_count": 95,
+      "inventory_digest": "84f47c5711ba5ccc50d7589d715dc5310e3daacbf397933eb0033cbf4468435c"
+    },
+    {
+      "source_id": "M2-OPT-002",
+      "archive_size_bytes": 1046835859,
+      "archive_sha256": "0c201b7196b87a9efd79deb5a4c5a5cab6e45cce7e3d2d7bce593c9b3368a1ae",
+      "manifest_sha256": "7c85c00bca387d303354554c43070ce665893237f06b00f97600ef646ab969ea",
+      "file_count": 95,
+      "inventory_digest": "3179e77f2fa837a0bb80ad59a7177a0ef9f870f8bf11a9e71ced6cbb0df209a6"
+    }
+  ],
+  "aoi_ids": [
+    "AOI-OVERVIEW",
+    "AOI-SOURCE",
+    "AOI-UPPER-CORRIDOR"
+  ],
+  "gdal_runtime": {
+    "version": "GDAL 3.12.2e \"for ArcGIS 3.7\", released 2026/02/03; Esri build 34fdbfd31b@build/gdal-merge, built on 2026/04/09",
+    "jp2": true,
+    "mem": true
+  },
+  "available_memory_bytes_at_preflight": 17641222144,
+  "network_or_credential_action": false,
+  "raster_pixel_values_decoded": false,
+  "source_or_old_attempt_mutated": false,
+  "new_real_attempt_started": false
+}
