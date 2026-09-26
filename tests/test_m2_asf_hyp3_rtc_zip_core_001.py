@@ -6,6 +6,7 @@ import hashlib
 import sys
 import tempfile
 import unittest
+from io import BytesIO
 from pathlib import Path
 from zipfile import ZIP_STORED, ZipFile, ZipInfo
 
@@ -14,6 +15,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from m2_asf_hyp3_rtc_core_001 import ORDER, RouteStop, load_approved_jobs  # noqa: E402
 from m2_asf_hyp3_rtc_package_core_001 import REQUIRED_SUFFIXES  # noqa: E402
 from m2_asf_hyp3_rtc_zip_core_001 import inspect_package_zip  # noqa: E402
+from m2_asf_hyp3_rtc_transfer_core_001 import (  # noqa: E402
+    promote_verified_zip_no_replace, stream_exact_zip_once,
+)
 
 
 def make_zip(path: Path, source_id: str, *, traversal: bool = False, empty_suffix: str | None = None, special_suffix: str | None = None) -> None:
@@ -94,6 +98,67 @@ class ZipScreenTests(unittest.TestCase):
             make_zip(path, ORDER[0], special_suffix="_VH.tif")
             with self.assertRaisesRegex(RouteStop, "rtc_zip_special_member"):
                 inspect_package_zip(ORDER[0], path, **binding(path))
+
+    def test_stream_and_no_replace_promotion_preserve_exact_zip(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            source = directory / "source.zip"
+            stage = directory / "staged.part"
+            final = directory / "product.zip"
+            make_zip(source, ORDER[0])
+            expected = source.read_bytes()
+            staged = stream_exact_zip_once(
+                BytesIO(expected), stage, source_id=ORDER[0],
+                expected_size_bytes=len(expected), chunk_bytes=17,
+            )
+            self.assertEqual(staged["status"], "pass_staged_bytes_and_zip_only")
+            self.assertFalse(staged["raster_pixel_values_decoded"])
+            promoted = promote_verified_zip_no_replace(stage, final, staged)
+            self.assertEqual(promoted["archive_sha256"], hashlib.sha256(expected).hexdigest())
+            self.assertEqual(final.read_bytes(), expected)
+            self.assertFalse(stage.exists())
+            with self.assertRaisesRegex(RouteStop, "rtc_transfer_promotion_binding_invalid"):
+                promote_verified_zip_no_replace(stage, final, {**staged, "zip_crc_verified": False})
+
+    def test_failed_stream_or_container_is_retained_without_promotion(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            source = directory / "source.zip"
+            make_zip(source, ORDER[0])
+            good = source.read_bytes()
+            for label, payload, expected_size, code in (
+                ("short", good[:-1], len(good), "rtc_transfer_size_mismatch"),
+                ("long", good + b"x", len(good), "rtc_transfer_exceeds_descriptor_size"),
+                ("corrupt", b"x" * len(good), len(good), "rtc_zip_unreadable"),
+            ):
+                stage = directory / f"{label}.part"
+                with self.assertRaisesRegex(RouteStop, code):
+                    stream_exact_zip_once(BytesIO(payload), stage, source_id=ORDER[0],
+                                          expected_size_bytes=expected_size, chunk_bytes=19)
+                self.assertTrue(stage.exists())
+                self.assertFalse((directory / f"{label}.zip").exists())
+
+    def test_stage_and_destination_collisions_stop_without_replacement(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            source = directory / "source.zip"
+            make_zip(source, ORDER[0])
+            good = source.read_bytes()
+            stage = directory / "stage.part"
+            stage.write_bytes(b"old")
+            with self.assertRaisesRegex(RouteStop, "rtc_transfer_staging_collision"):
+                stream_exact_zip_once(BytesIO(good), stage, source_id=ORDER[0],
+                                      expected_size_bytes=len(good))
+            self.assertEqual(stage.read_bytes(), b"old")
+            stage.unlink()
+            staged = stream_exact_zip_once(BytesIO(good), stage, source_id=ORDER[0],
+                                           expected_size_bytes=len(good))
+            final = directory / "product.zip"
+            final.write_bytes(b"existing")
+            with self.assertRaisesRegex(RouteStop, "rtc_transfer_promotion_failed"):
+                promote_verified_zip_no_replace(stage, final, staged)
+            self.assertEqual(final.read_bytes(), b"existing")
+            self.assertTrue(stage.exists())
 
 
 if __name__ == "__main__":
