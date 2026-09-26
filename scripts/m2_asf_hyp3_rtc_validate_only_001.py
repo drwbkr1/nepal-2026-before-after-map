@@ -55,6 +55,7 @@ def _read_json(path: Path) -> dict:
 
 def require_validation_release(root: Path = ROOT, attempt_root: Path = ATTEMPT_ROOT) -> None:
     """Stop before stdin or network unless every separate gate is current."""
+    data_root = attempt_root.parents[1]
     source = _read_json(root / SOURCE_GATE_REF)
     gate = _read_json(root / IMPLEMENTATION_GATE_REF)
     preflight = _read_json(root / PREFLIGHT_REF)
@@ -90,8 +91,9 @@ def require_validation_release(root: Path = ROOT, attempt_root: Path = ATTEMPT_R
         or preflight.get("bindings", {}).get("approval_sha256") != approval_sha
         or preflight.get("assertions", {}).get("secret_or_account_or_job_request_performed") is not False
         or attempt_root.exists()
-        or DATA_ROOT.is_symlink()
-        or bool(getattr(DATA_ROOT.stat(), "st_file_attributes", 0) & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0))
+        or not data_root.is_dir()
+        or data_root.is_symlink()
+        or bool(getattr(data_root.stat(), "st_file_attributes", 0) & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0))
         or attempt_root.parent.is_symlink()
     ):
         raise RouteStop("validation_not_released")

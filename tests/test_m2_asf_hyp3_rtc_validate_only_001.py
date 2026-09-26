@@ -102,7 +102,8 @@ class ValidationTransportTests(unittest.TestCase):
                 "assertions": {"secret_or_account_or_job_request_performed": False},
             }
             (root / PREFLIGHT_REF).write_text(json.dumps(preflight), encoding="utf-8")
-            attempt = root / "attempt"
+            (root / "data").mkdir()
+            attempt = root / "data" / "validation" / "attempt"
             require_validation_release(root, attempt)
             (root / IMPLEMENTATION_FILES[0]).write_text("drift", encoding="utf-8")
             with self.assertRaisesRegex(RouteStop, "validation_not_released"):
