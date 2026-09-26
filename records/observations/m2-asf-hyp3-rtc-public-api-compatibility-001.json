@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "observation_id": "NEPAL-M2-ASF-HYP3-RTC-PUBLIC-API-COMPATIBILITY-001",
+  "observed_at_utc": "2026-09-26T21:32:26Z",
+  "status": "public_schema_compatibility_only_no_account_or_job",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+  "exact_candidate_ref": "records/observations/m2-asf-rtc-four-scene-candidate-001-local.json",
+  "exact_candidate_sha256": "d18d0b9e47892e5930bd306fb196d8f49884e773b5b9e8495018e3b2c7c138ba",
+  "official_sources": [
+    {
+      "url": "https://hyp3-api.asf.alaska.edu/openapi.json",
+      "observed_api_version": "10.17.8",
+      "finding": "The Basic RTC_GAMMA request schema admits one Sentinel-1 IW GRDH granule with the S1[ABCD] prefix and declares validate_only on POST /jobs. This includes the proposed S1D prefix syntactically, but does not verify that the four exact scenes are processable by the service."
+    },
+    {
+      "url": "https://hyp3-docs.asf.alaska.edu/using/api/",
+      "finding": "ASF documents single RTC_GAMMA job definitions, authenticated GET /user, POST /jobs, and GET /jobs."
+    },
+    {
+      "url": "https://hyp3-docs.asf.alaska.edu/using/credits/",
+      "finding": "ASF lists 60 Basic credits for a 10 m RTC job; four exact candidate jobs have a 240-credit nominal ceiling. The actual account balance and accepted costs remain unobserved."
+    },
+    {
+      "url": "https://hyp3-docs.asf.alaska.edu/products/",
+      "finding": "ASF describes full-scene GAMMA RTC as UTM GeoTIFF and says ordinary On Demand products are available for 14 days. Generated product identity, files, georeferencing, and pixels remain unobserved."
+    },
+    {
+      "url": "https://hyp3-docs.asf.alaska.edu/usage_guidelines/",
+      "finding": "ASF asks for the acknowledgement supplied with each product when products are used in a publication or presentation. This guidance does not itself prove permission to redistribute source or derived pixels."
+    },
+    {
+      "url": "https://dataspace.copernicus.eu/terms-and-conditions",
+      "finding": "The official Copernicus Data Space terms identify the free, full, open Sentinel data legal notice. This is input-data context, not an independent determination of HyP3 generated-product rights."
+    }
+  ],
+  "owner_terms_followup_ref": "records/source-gates/m2-asf-hyp3-rtc-terms-followup-001.json",
+  "owner_agreement_retrieval_required_again": false,
+  "account_capacity_verified": false,
+  "exact_four_scene_processing_eligibility_verified": false,
+  "job_or_validate_only_request_performed": false,
+  "credits_spent": 0,
+  "product_or_pixel_read": false,
+  "job_submission_released_by_this_observation": false,
+  "local_arcgis_map_or_scientific_result_established": false,
+  "next_dependency": "One owner-controlled account capacity result, then exact-scene validate-only and product-rights gates under the existing approved envelope. No paid credits, automatic retry, derived-pixel publication, baseline, change analysis, attribution, or scientific claim."
+}
