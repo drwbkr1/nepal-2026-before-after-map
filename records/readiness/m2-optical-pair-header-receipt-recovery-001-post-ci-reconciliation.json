@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PAIR-HEADER-RECEIPT-RECOVERY-001-POST-CI-RECONCILIATION",
+  "status": "terminal_stopped_provenance_locked_no_retry",
+  "authority": {
+    "proposal_sha256": "45b7dc504bf3f92b3dc72db5130596e7465c06f74e3aeb679670e886d0eee2f3",
+    "review_bundle_sha256": "c11ad27a12563b1db4ec0f95b074436c4b8ff4837b74ea9164ed9bae7e909e95",
+    "approval_sha256": "d3558944b22bfe9a1fbe75cb66aca8ea1ec0f5eb91d7496449051668449ac64a"
+  },
+  "public_sequence": {
+    "packet_commit_sha": "6435cc70a2719e886db379e43cff6baf133eedc4",
+    "packet_publication_gate_commit_sha": "a9355a54576b6cd42ad1d2e4fbcc131ebd72c9d8",
+    "implementation_commit_sha": "3d077dec3514988c9ef59247f0a296f9671e9e91",
+    "implementation_ci_run_id": 36204981109,
+    "implementation_ci_conclusion": "success",
+    "execution_gate_commit_sha": "0788a116e85618809a47048c1a49a0334e1bbef8",
+    "execution_gate_ci_run_id": 36205065711,
+    "execution_gate_ci_conclusion": "success",
+    "terminal_evidence_commit_sha": "bbc048895ac61fe6e2b92c5e383509e6465952f9",
+    "terminal_evidence_ci_run_id": 36205432829,
+    "terminal_evidence_ci_conclusion": "success",
+    "terminal_publication_gate_commit_sha": "dd0db69cbcc507d0cd3f929c8ae9c345407601e3",
+    "terminal_publication_gate_ci_run_id": 36205532497,
+    "terminal_publication_gate_ci_job_id": 108301148315,
+    "terminal_publication_gate_ci_conclusion": "success"
+  },
+  "terminal_publication_gate_sha256": "fd44e3f96e23df5fa111310972cb32ea6c1dca738657ec7e0899b38b57ee4c5a",
+  "terminal_ref": "records/readiness/m2-optical-pair-header-receipt-recovery-001-terminal.json",
+  "terminal_sha256": "3cf75f6ce169f3b539970b37e5b788c8bafd3df89dea50a8c21235b68aa219af",
+  "attempt_stage_observation_ref": "records/readiness/m2-optical-pair-header-receipt-recovery-001-attempt-stage-observation.json",
+  "attempt_stage_observation_sha256": "49d4d1e2be9989e85f0f0f159f6245d90936986e8e820d5977504aa3e7f535a7",
+  "early_custody_read_observation_ref": "records/readiness/m2-optical-pair-header-receipt-recovery-001-early-custody-read-observation.json",
+  "early_custody_read_observation_sha256": "095779e8c6902052cf42d0ac8a915738b372a733b5c9c6ddcd5d269a093aa80c",
+  "attempt": {
+    "id": "real-001",
+    "consumed": true,
+    "retry_authorized": false,
+    "child_exit_code": 1,
+    "last_durable_stage": "arcpy-import-started",
+    "header_or_pixel_receipt_present": false,
+    "source_materializations_unchanged": true,
+    "cause_identified": false
+  },
+  "scientific_disposition": {
+    "header_readiness_established": false,
+    "pixel_qa_established": false,
+    "map_baseline_or_change_established": false,
+    "interpretation_or_attribution": false,
+    "derived_pixel_or_scientific_publication": false
+  },
+  "next_boundary": "This exact recovery envelope is closed. Another real process, retry, source change, or scientific operation requires separately reviewed authority; no result may be inferred from the failed child launch."
+}
