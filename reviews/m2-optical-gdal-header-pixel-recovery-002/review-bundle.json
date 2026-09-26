@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-OPTICAL-GDAL-HEADER-PIXEL-RECOVERY-002-REVIEW-BUNDLE",
+  "status": "local_zero_decision_one_owner_decision_required",
+  "human_decision_count": 0,
+  "base_commit": "8c68a3d23c177c99702d4cb3e8c1eb8100a55846",
+  "artifacts": [
+    {"path": "contracts/milestone-002-optical-gdal-header-pixel-recovery-002-proposal.json", "sha256": "293a9f90a1d6ca9d1531423798d191901d3772999763fbce34ca6b583e5f7d8e", "role": "exact_bounded_alternate_method_and_attempt_proposal"},
+    {"path": "docs/M2_OPTICAL_GDAL_HEADER_PIXEL_RECOVERY_002_REVIEW.md", "sha256": "268784c7a745845b3dd3ae8f6cc8a2e2e448690473358e2151cd797ab2ea69ff", "role": "human_readable_review_and_radar_comparison"},
+    {"path": "docs/M2_OPTICAL_GDAL_READER_FEASIBILITY_LOCAL_001.md", "sha256": "dc3159fbc97546d4e97590ef530af2b56d1133a396dfe05fb8ee9dc5ae1c34e7", "role": "source_free_method_feasibility_limits"},
+    {"path": "records/observations/m2-optical-gdal-reader-feasibility-local-001.json", "sha256": "1e360af91a3f753a29a2f36f41cc1ce6db8a15f7ffffe484bf35b86bb42cc40d", "role": "synthetic_header_and_mask_observation"},
+    {"path": "records/observations/m2-optical-gdal-production-grid-local-001.json", "sha256": "13e197373c011c53af8c0e91195887622ab5a9f008bc99958d8bdc1828ed2661", "role": "synthetic_full_grid_jp2_observation"},
+    {"path": "records/readiness/m2-optical-pair-header-receipt-recovery-001-post-ci-reconciliation.json", "sha256": "2ae992adfd6f51f541f40a221061214397b024993fccb180ba27fa08d94d6141", "role": "consumed_terminal_evidence"},
+    {"path": "records/readiness/m2-optical-pair-header-receipt-recovery-001-final-preflight.json", "sha256": "7fc0522622cccc9635de98b63c2158b95938d7cdbffc407341c2bfe1d5445580", "role": "last_exact_source_identity_evidence"},
+    {"path": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2", "role": "frozen_pixel_qa_predicates"}
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-OPTICAL-GDAL-HEADER-PIXEL-RECOVERY-002",
+    "question": "Approve, revise, or defer the optical proposal's one conditional exact-pair GDAL header and pixel-QA envelope through sanitized terminal publication?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "Exact packet and owner response pass public default-branch CI; implementation, disposable parity, execution, final no-pixel, real-source, and terminal-publication gates still apply without intermediate owner reconfirmation."
+  },
+  "route_relationship": {
+    "radar_recovery_003_terminal_ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-terminal-publication-reconciliation.json",
+    "radar_recovery_003_terminal_sha256": "4cbdc12a41b081b2874b19bf60ba0ec87e24a8c5d0e59122b2d594e905a3e853",
+    "radar_recovery_003_already_consumed": true,
+    "different_radar_method_requires_new_review": true,
+    "selecting_this_optical_packet_activates_radar": false
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "implementation_or_disposable_arcgis_authorized": false,
+    "protected_data_or_external_custody_access_authorized": false,
+    "fresh_real_optical_process_authorized": false,
+    "consumed_attempt_reuse_or_retry_authorized": false,
+    "baseline_change_attribution_or_scientific_publication_authorized": false
+  }
+}

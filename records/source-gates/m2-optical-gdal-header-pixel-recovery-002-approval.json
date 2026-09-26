@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-OPTICAL-GDAL-HEADER-PIXEL-RECOVERY-002-APPROVAL",
+  "status": "owner_approved_exact_conditional_envelope_public_ci_pending",
+  "recorded_at_utc": "2026-09-26T17:03:39Z",
+  "decision_id": "D-M2-OPTICAL-GDAL-HEADER-PIXEL-RECOVERY-002",
+  "decision": "approve",
+  "human_decision_count": 1,
+  "owner_statement_verbatim": "approval optical",
+  "decision_context": "Direct reply to the immediately preceding assistant request offering approval of the corrected local optical packet, after correcting the already terminal radar alternative. The request named the exact bundle and proposal SHA-256 values below. Ordinary chat authorization is sufficient under AGENTS.md; no separate attestation phrase was given.",
+  "explicit_attestation_statement": false,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-optical-gdal-header-pixel-recovery-002-proposal.json",
+    "proposal_sha256": "293a9f90a1d6ca9d1531423798d191901d3772999763fbce34ca6b583e5f7d8e",
+    "review_bundle_ref": "reviews/m2-optical-gdal-header-pixel-recovery-002/review-bundle.json",
+    "review_bundle_sha256": "933f141a4474edafb0fe2580e97428c3dd47a802e4ae8d6d434fb0e6803fb785",
+    "radar_terminal_ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-terminal-publication-reconciliation.json",
+    "radar_terminal_sha256": "4cbdc12a41b081b2874b19bf60ba0ec87e24a8c5d0e59122b2d594e905a3e853"
+  },
+  "authority": {
+    "single_conditional_envelope_through_sanitized_terminal_publication": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "packet_publication_and_public_ci": true,
+    "bounded_gdal_only_implementation_and_disposable_tests": true,
+    "implementation_and_execution_public_ci_gates_required": true,
+    "final_no_pixel_preflight_required": true,
+    "conditional_maximum_new_real_processes": 1,
+    "fixed_source_order": ["M2-OPT-001", "M2-OPT-002"],
+    "conditional_pixel_read_requires_both_headers_pass": true,
+    "automatic_retry": false,
+    "network_credential_terms_or_reacquisition_action": false,
+    "consumed_attempt_reuse_resume_or_mutation": false,
+    "source_date_aoi_crs_grid_mask_threshold_or_registration_change": false,
+    "radar_activation": false,
+    "baseline_change_analysis_interpretation_or_attribution": false,
+    "derived_pixel_or_scientific_publication": false
+  }
+}

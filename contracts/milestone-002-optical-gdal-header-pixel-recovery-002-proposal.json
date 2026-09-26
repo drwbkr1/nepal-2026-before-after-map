@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-OPTICAL-GDAL-HEADER-PIXEL-RECOVERY-002",
+  "status": "local_zero_decision_not_authorized",
+  "human_decision_count": 0,
+  "base_commit": "8c68a3d23c177c99702d4cb3e8c1eb8100a55846",
+  "purpose": "Evaluate the exact already acquired M2-OPT-001/002 pair for header and QA-only pixel fitness using a new ArcPy-independent GDAL reader after two terminal pre-header attempts.",
+  "input_bindings": [
+    {"ref": "records/readiness/m2-optical-pair-header-receipt-recovery-001-post-ci-reconciliation.json", "sha256": "2ae992adfd6f51f541f40a221061214397b024993fccb180ba27fa08d94d6141"},
+    {"ref": "records/readiness/m2-optical-pair-header-receipt-recovery-001-final-preflight.json", "sha256": "7fc0522622cccc9635de98b63c2158b95938d7cdbffc407341c2bfe1d5445580"},
+    {"ref": "records/readiness/m2-radar-event-area-pair-native-gtc-grid-recovery-003-terminal-publication-reconciliation.json", "sha256": "4cbdc12a41b081b2874b19bf60ba0ec87e24a8c5d0e59122b2d594e905a3e853"},
+    {"ref": "contracts/m2-optical-pair-pilot-001-execution.json", "sha256": "80cfad39e112dd4c6f49ad12ab91d3d3ab050dcdb039e20bd531e78e15d132f4"},
+    {"ref": "config/qa/optical-input-readiness-contract.json", "sha256": "83327ebc03fb5a7b66152a77717354e4b88450b6f63a2734b5b4ceea6550f3b0"},
+    {"ref": "config/qa/optical-baseline-processing-contract.json", "sha256": "8321b7d3bd6a4a4304ed111f67b9b3ec372204823e495fbabd434ba9463e6eb5"},
+    {"ref": "config/qa/pixel-readiness-contract.json", "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"},
+    {"ref": "config/aoi/approved-study-areas-epsg32645.json", "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"},
+    {"ref": "records/observations/m2-optical-gdal-reader-feasibility-local-001.json", "sha256": "1e360af91a3f753a29a2f36f41cc1ce6db8a15f7ffffe484bf35b86bb42cc40d"},
+    {"ref": "records/observations/m2-optical-gdal-production-grid-local-001.json", "sha256": "13e197373c011c53af8c0e91195887622ab5a9f008bc99958d8bdc1828ed2661"}
+  ],
+  "exact_existing_sources": [
+    {"source_id": "M2-OPT-001", "role": "before", "product_name": "S2A_MSIL2A_20260824T050231_N0512_R119_T45RUM_20260824T115710.SAFE", "provider_product_id": "35b149d6-cdde-4959-8ff4-d28f37bf67bb", "archive_size_bytes": 1069015437, "archive_sha256": "b8050b4aaaacc2014c8b5dbec7fca8738c8be74f2cf9d65df7dda089ac5114e8", "materialization_manifest_sha256": "92fcfad15c70297dbc174c2ab470257196e21d232cb5ad131fba21b23ab8b542"},
+    {"source_id": "M2-OPT-002", "role": "after", "product_name": "S2B_MSIL2A_20260916T045659_N0512_R119_T45RUM_20260916T084937.SAFE", "provider_product_id": "3856463e-02bd-44ad-9525-d4d98fa3eb72", "archive_size_bytes": 1046835859, "archive_sha256": "0c201b7196b87a9efd79deb5a4c5a5cab6e45cce7e3d2d7bce593c9b3368a1ae", "materialization_manifest_sha256": "7c85c00bca387d303354554c43070ce665893237f06b00f97600ef646ab969ea"}
+  ],
+  "observed_boundary": {
+    "original_pilot": "terminal_no_header_receipt_no_retry",
+    "header_recovery_001": "terminal_child_exit_1_after_arcpy_import_started_no_header_or_pixel_receipt_no_retry",
+    "radar_native_gtc_recovery_003": "approved_packet_terminal_at_disposable_projected_extent_guard_no_real_e1_a2_process",
+    "cause_of_child_exit": "unknown",
+    "source_materializations_at_last_preflight": "exact_identity_pass_95_files_each",
+    "generated_jp2_header_and_mask_tests": "pass_disposable_only",
+    "real_product_gdal_header_or_pixel_read": false,
+    "baseline_or_change_observation": false
+  },
+  "proposed_method_change": {
+    "reader": "GDAL-only in the installed ArcGIS Pro Python environment; no ArcPy import in the real worker",
+    "source_binding": "versioned exact M2-OPT-001/002 binding; do not mutate the old M1-SRC-010/008 optical contracts or outcomes",
+    "header_predicates": "preserve frozen member identity, XML scaling, JP2 band, pixel type, CRS-equivalence, extent, cell, and pair-grid checks",
+    "pixel_predicates": "preserve frozen 20-m EPSG:32645 grid, SCL and three-band quality masks, DN-zero handling, AOI coverage, and deterministic B11 registration thresholds and control selection",
+    "continuous_resampling": "BILINEAR",
+    "categorical_resampling": "NEAREST",
+    "analysis_grid_columns": 4726,
+    "analysis_grid_rows": 3950,
+    "qa_aois": ["AOI-SOURCE", "AOI-UPPER-CORRIDOR", "AOI-OVERVIEW"],
+    "overview_full_coverage_claim": false,
+    "missing_or_non_equivalent_metadata": "BLOCK before pixels",
+    "unknown_or_ambiguous_mask_semantics": "BLOCK or DEFER per unchanged frozen contract, never assume clear",
+    "method_parity_requirement": "Synthetic GDAL-versus-ArcGIS-runtime results must agree on frozen header, mask, AOI, grid, and registration decisions before any real-product read; disposable agreement cannot establish real-product fitness"
+  },
+  "requested_single_conditional_envelope": {
+    "owner_decision_count": 1,
+    "covers_without_intermediate_owner_reconfirmation": [
+      "Publish the exact packet and owner response on the public default branch and require successful public CI.",
+      "Implement a separate append-only GDAL header-and-pixel worker and independent supervisor; reserve start, terminal, and cleanup receipt identities before launch; retain safe phase and exit codes on any process failure without raw paths, exception text, stdout, stderr, credentials, or pixel values.",
+      "Add portable synthetic identity, header, mask, AOI, registration, grid, memory-bound, interruption, receipt-durability, and secret-exposure tests plus installed ArcGIS-runtime synthetic parity tests using only generated rasters; require passing public CI before protected access.",
+      "Publish the implementation and execution gates and require successful public default-branch CI for each.",
+      "Perform one final offline no-pixel preflight of this exact authority, both immutable terminals, exact archive and materialization identity, absent new attempt root and receipts, disk and memory bounds, GDAL drivers, frozen contracts, and all three AOI identities; stop on missing or ambiguous evidence.",
+      "Only after every gate passes, run at most one fresh offline single-process header-then-conditional-pixel evaluation over exact M2-OPT-001 followed by M2-OPT-002, using read-only existing materializations and a new append-only derived root; stop before pixels if either header fails.",
+      "Evaluate all three frozen AOI dispositions, record source-specific cloud, snow, coverage, grid, and registration limitations, preserve all previous terminal attempts unchanged, and publish only sanitized terminal evidence and exact post-CI reconciliation."
+    ],
+    "new_real_process_maximum": 1,
+    "attempt_root_alias": "m2-optical-gdal-header-pixel-recovery-002-real-001_only_if_absent_at_final_preflight",
+    "automatic_retry": false,
+    "network_or_credential_action": false,
+    "reacquisition_or_rematerialization": false,
+    "source_date_aoi_crs_grid_mask_threshold_or_registration_substitution": false,
+    "consumed_attempt_resume_reuse_or_mutation": false,
+    "baseline_change_analysis_or_scientific_publication": false
+  },
+  "stops": [
+    "A synthetic pass is a method gate, not proof that the acquired pair has readable, clear, or registered pixels.",
+    "Stop before the real worker if any exact input hash, source identity, receipt, public CI, runtime, memory, or no-pixel preflight condition is missing, failed, or unknown.",
+    "Stop before real pixels if either exact header is INVALID, BLOCK, DEFER, or lacks durable receipt; do not silently substitute metadata or another decoder on a failed real header.",
+    "Stop at first failed or indeterminate worker, persistence, cleanup, pixel-QA, or source stage; no fallback method, second process, or automatic retry.",
+    "Do not infer the historical ArcPy failure cause from a successful or failed GDAL process."
+  ],
+  "claim_boundary": {
+    "possible_result": "INVALID_BLOCK_DEFER_or_localized_PASS_QA_ONLY",
+    "pass_qa_only_is_not_baseline_admission": true,
+    "difference_raster_or_change_polygon_authorized": false,
+    "interpretation_or_event_attribution_authorized": false,
+    "derived_pixel_or_scientific_publication_authorized": false
+  },
+  "decision_question": "Approve, revise, or defer this one conditional GDAL-only header and pixel-QA method envelope for exact M2-OPT-001/002 through sanitized terminal publication?",
+  "does_not_authorize_now": [
+    "Git publication or approval recording of this local packet",
+    "production implementation, new ArcPy or GDAL geoprocessing, or disposable ArcGIS execution under this packet",
+    "project-data or external-custody access, real source header or pixel reads, or a new attempt",
+    "network, token, terms, account, acquisition, or rematerialization action",
+    "radar native-GTC activation, baseline admission, change analysis, attribution, derived-pixel publication, or scientific publication"
+  ]
+}

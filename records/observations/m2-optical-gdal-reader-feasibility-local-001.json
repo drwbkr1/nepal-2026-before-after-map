@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-GDAL-READER-FEASIBILITY-LOCAL-001",
+  "status": "pass_disposable_method_feasibility_only",
+  "authority": "Local source-free method research while the next map route remains unselected; no real source or new method is approved.",
+  "script_ref": "scripts/validate_m2_optical_gdal_reader_disposable_001.py",
+  "script_sha256": "ff347f60019cc1a285b7fd425cf23d20971f605751b51ccf3d694a77671eb5e1",
+  "runtime": {
+    "gdal": "3.12.2e for ArcGIS 3.7",
+    "generated_jp2_writer": "JP2OpenJPEG",
+    "default_jp2_reader": "JP2KAK",
+    "forced_alternate_jp2_reader": "JP2OpenJPEG",
+    "arcpy_imported": false
+  },
+  "synthetic_validation": {
+    "generated_sentinel_style_raster_roles": 8,
+    "epsg32645_crs_equivalence_pass": true,
+    "embedded_epsg_authority_code_present_in_reopened_jp2": false,
+    "frozen_header_predicates_pass_matching_pair": true,
+    "frozen_header_predicates_block_shifted_pair": true,
+    "three_band_quality_mask_preserved_by_both_jp2_readers": true,
+    "nearest_neighbor_quality_mask_60m_to_20m_exact": true,
+    "fixture_generation_options": ["REVERSIBLE=YES", "QUALITY=100", "YCC=NO"],
+    "temporary_datasets_closed_on_final_run": true
+  },
+  "retained_failure_findings": [
+    "The first disposable probe incorrectly required JP2OpenJPEG as the default reader; ArcGIS's installed GDAL selected JP2KAK. An open GDAL dataset also prevented Windows temporary-directory cleanup on that failure path.",
+    "The second probe called AutoIdentifyEPSG on the reopened JP2 spatial reference; it raised Unsupported SRS because the synthetic JP2 retained equivalent UTM coordinates without an embedded EPSG authority code. Its open handle also prevented cleanup.",
+    "The initial reversible-only synthetic three-band mask fixture lost an isolated 1 under JP2OpenJPEG's default quality setting. QUALITY=100 and YCC=NO preserved the fixture in both installed readers. This is a fixture-generation result, not evidence about Copernicus mask encoding."
+  ],
+  "limits": {
+    "real_product_jp2_header_or_pixel_read": false,
+    "real_cloud_or_snow_mask_assessed": false,
+    "real_aoi_coverage_or_registration_assessed": false,
+    "full_production_grid_or_memory_bound_tested": false,
+    "arcgis_final_map_or_export_tested": false,
+    "new_reader_method_approved": false,
+    "new_real_attempt_started": false,
+    "baseline_change_analysis_or_scientific_claim": false
+  },
+  "next_method_proof_if_optical_route_selected": "Bind the exact existing pair, preserve the frozen header and pixel predicates, test production-grid array and mask behavior plus AOI/registration equivalence, add append-only crash-safe receipts and public CI, and require a new reviewed one-attempt real-data authority before custody reads or pixel QA."
+}
