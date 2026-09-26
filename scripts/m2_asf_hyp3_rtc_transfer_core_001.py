@@ -63,7 +63,14 @@ def stream_exact_zip_once(
             os.fsync(target.fileno())
     except FileExistsError:
         raise RouteStop("rtc_transfer_staging_collision") from None
+    except RouteStop:
+        raise
     except OSError:
+        raise RouteStop("rtc_transfer_stream_failed") from None
+    except Exception:
+        # A provider-backed stream may raise an HTTP or client exception whose
+        # message contains a signed URL. Keep the partial file and expose only
+        # the fixed failure code to the receipt caller.
         raise RouteStop("rtc_transfer_stream_failed") from None
     if size != expected_size_bytes:
         raise RouteStop("rtc_transfer_size_mismatch")

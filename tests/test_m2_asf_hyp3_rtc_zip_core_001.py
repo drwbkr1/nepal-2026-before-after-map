@@ -138,6 +138,22 @@ class ZipScreenTests(unittest.TestCase):
                 self.assertTrue(stage.exists())
                 self.assertFalse((directory / f"{label}.zip").exists())
 
+    def test_provider_stream_exception_is_sanitized_and_partial_retained(self) -> None:
+        class FailedProviderStream:
+            def read(self, _count: int) -> bytes:
+                raise RuntimeError("private-provider-url")
+
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            stage = directory / "failed.part"
+            with self.assertRaisesRegex(RouteStop, "^rtc_transfer_stream_failed$"):
+                stream_exact_zip_once(
+                    FailedProviderStream(), stage, source_id=ORDER[0],
+                    expected_size_bytes=10,
+                )
+            self.assertEqual(stage.read_bytes(), b"")
+            self.assertFalse((directory / "product.zip").exists())
+
     def test_stage_and_destination_collisions_stop_without_replacement(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             directory = Path(temp)
