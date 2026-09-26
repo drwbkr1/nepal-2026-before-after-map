@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-ALTERNATE-MAP-PAIR-001-SUPERSESSION-LOCAL",
+  "status": "unapproved_pair_001_review_superseded_by_pair_002_before_execution",
+  "old_bundle_ref": "reviews/m2-optical-alternate-map-pair-001/review-bundle.json",
+  "old_bundle_sha256": "2c5a9e9e5e1e315e4c1d85270082d7a1970aef1db4621353be1f43f3992931c0",
+  "old_proposal_ref": "contracts/milestone-002-optical-alternate-map-pair-001-proposal.json",
+  "old_proposal_sha256": "bef0237b0d3ca6a3c2b7635316dd602fe96a826842e21f496774d80483c2c674",
+  "new_bundle_ref": "reviews/m2-optical-alternate-map-pair-002/review-bundle.json",
+  "reason": "Official ESA PB 05.13 changes include L2A mask and reflectance-method differences; the existing project reader requires PB 05.12 for both sources. The old review did not specify the resulting distinct candidate reader and fixed attempt identities.",
+  "boundary": {
+    "old_packet_approved": false,
+    "old_packet_execution_allowed": false,
+    "new_packet_approved": false,
+    "source_or_method_action_performed": false,
+    "prior_terminal_results_mutated": false
+  }
+}

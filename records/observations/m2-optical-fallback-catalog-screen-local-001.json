@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-FALLBACK-CATALOG-SCREEN-LOCAL-001",
+  "status": "pass_local_projected_metadata_and_same_machine_arcgis_review_only",
+  "catalog_ref": "records/observations/m2-map-route-feasibility-001-optical-fallback-catalog.json",
+  "catalog_sha256": "0ffd82483be80f5f75bd8a41da7379f58dbb6ed33db3ca451e89013e7f05072c",
+  "projected_screen": {
+    "builder_ref": "scripts/build_m2_optical_fallback_catalog_screen_001.py",
+    "builder_sha256": "b66f706f7a65cc6915118f79a95a11e8a799fcf27f2c38d9941650e8bbe8ee07",
+    "receipt_ref": "scratch/optical-fallback-catalog-screen-001/receipt.json",
+    "receipt_sha256": "a6a39c3d739e0c0edc0e0bd1013f58e2503ce885eba617ce01d20c0e7ccad4a8",
+    "geopackage_ref": "scratch/optical-fallback-catalog-screen-001/Optical_Fallback_Catalog_Metadata_EPSG32645.gpkg",
+    "geopackage_sha256": "2898f9abe010f63f6eb5b0427b1f4d1a8fd6c7b09d73510ef372e3b437ee8471",
+    "wkid": 32645,
+    "candidate_features": 29,
+    "approved_aoi_features": 3,
+    "sqlite_integrity": "ok",
+    "gdal_ogr_reopen_pass": true
+  },
+  "geometry_screen": {
+    "candidate_catalog_intersections": {"before": 14, "after": 15},
+    "at_least_99_percent_footprint_area_of_both_event_aois": {"before": 7, "after": 7},
+    "prior_exact_pair_blocked_within_full_footprint_group": {"before": 1, "after": 1},
+    "uninspected_with_full_footprint_geometry": {"before": 6, "after": 6},
+    "example_partial_corridor_after": {
+      "date": "2026-09-18",
+      "provider_product_id": "70e642c7-2a4c-45cb-92a7-97ff1951cb4e",
+      "source_footprint_fraction": 1.0,
+      "upper_corridor_footprint_fraction": 0.404098,
+      "catalog_tile_cloud_percent": 53.709519,
+      "pixel_fitness": "unknown",
+      "adoption": "none"
+    },
+    "example_full_corridor_after": {
+      "date": "2026-09-21",
+      "provider_product_id": "d6d898f4-2337-487d-afff-943df794c3e6",
+      "source_footprint_fraction": 1.0,
+      "upper_corridor_footprint_fraction": 1.0,
+      "catalog_tile_cloud_percent": 60.282749,
+      "pixel_fitness": "unknown",
+      "adoption": "none"
+    }
+  },
+  "arcgis_local_check": {
+    "validator_ref": "scripts/validate_m2_optical_fallback_catalog_arcgis_001.py",
+    "validator_sha256": "7d74dcba8d3c5761af7e98e28b64de44e68f8cca94baad8a46887db79166a61f",
+    "receipt_ref": "scratch/optical-fallback-catalog-arcgis-001/arcgis-validation.json",
+    "receipt_sha256": "a96d2ae5c5d4cb408950ffcdf550bc0144f695e0a95cf989444bd46e83c4f8c2",
+    "aprx_ref": "scratch/optical-fallback-catalog-arcgis-001/Nepal_2026_Optical_Catalog_Screen.aprx",
+    "aprx_sha256": "1557cbb128853a29b7071d2b1923d58a69593745c5da5a1f91151d48e73737b1",
+    "png_ref": "scratch/optical-fallback-catalog-arcgis-001/Optical_Catalog_Screen.png",
+    "png_sha256": "20df0d5c50c3fab65a6e8f85063d09f6fcb68d03b7fec907498a881527eddc44",
+    "runtime_version": "3.7.1",
+    "file_gdb_import_pass": true,
+    "fresh_process_reopen_pass": true,
+    "broken_layers": 0,
+    "first_and_reopen_png_byte_identical": true,
+    "rendered_png_visually_inspected": true,
+    "visual_limitation_text_legible": true,
+    "clean_machine_or_clean_profile_tested": false
+  },
+  "limits": {
+    "catalog_footprints_are_clear_pixel_coverage": false,
+    "tile_cloud_percentage_is_aoi_clear_pixel_fitness": false,
+    "uninspected_candidates_adopted": false,
+    "new_product_acquired_or_processed": false,
+    "protected_product_or_dem_pixels_read": false,
+    "baseline_or_change_analysis_executed": false,
+    "derived_pixel_or_scientific_publication_authorized": false,
+    "final_arcgis_delivery_proven": false
+  }
+}

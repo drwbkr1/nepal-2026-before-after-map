@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "status": "pass_repo_only_packet_audit_no_execution_authority",
+  "bundle_ref": "reviews/m2-optical-alternate-map-pair-002/review-bundle.json",
+  "bundle_sha256": "980df8c0412fd1997ba5d6cc67a5f8b7a3b7cb5b3e62ed6fad96c2bd5f9c3e6d",
+  "proposal_sha256": "c38ed063e8eadd44b364e41235e0cc9ba8fb09e620f32e1eb4d96e4a8fde7de0",
+  "validator_ref": "scripts/validate_m2_optical_alternate_pair_002_packet.py",
+  "validator_sha256": "9f9e90e7d75c01548c952565e5557ba62270d945c7174c0deb0b8e204960ed74",
+  "bound_files_verified": 6,
+  "exact_new_attempt_ids_unique": true,
+  "repo_text_collision_count": 0,
+  "external_custody_collision_checked": false,
+  "protected_pixels_read": false,
+  "new_source_adopted_or_acquired": false,
+  "owner_approval_received": false,
+  "repository_published": false,
+  "scientific_result_established": false
+}

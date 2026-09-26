@@ -1,0 +1,125 @@
+{
+  "contract_version": "source-gate/v2",
+  "assessment_id": "NEPAL-M2-OPTICAL-ALTERNATE-MAP-PAIR-002-SOURCE-ASSESSMENT-LOCAL",
+  "assessed_at": "2026-09-26T18:50:57Z",
+  "authority": {
+    "mode": "not_granted",
+    "authority_ref": "",
+    "authorized_actions": [],
+    "expires_at_utc": null
+  },
+  "intended_use": {
+    "summary": "Assess the exact 21 September Sentinel-2C L2A product for one future controlled acquisition to test optical pixel fitness with existing 24 August M2-OPT-001 over the approved source and upper-corridor AOIs. This is not baseline admission or publication.",
+    "planned_actions": ["metadata review", "controlled acquisition for QA"]
+  },
+  "sources": [
+    {
+      "source_id": "CDSE-S2C-20260921-T45RUM-D6D898F4",
+      "name": "S2C_MSIL2A_20260921T045701_N0513_R119_T45RUM_20260921T102407.SAFE",
+      "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d6d898f4-2337-487d-afff-943df794c3e6)",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {"type": "live", "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d6d898f4-2337-487d-afff-943df794c3e6)", "observed_at": "2026-09-26T18:50:47Z", "note": "Exact UUID, SAFE name, Sentinel-2C L2A acquisition time, 1,036,170,454-byte length, online flag, and provider checksums matched the proposal."},
+            {"type": "static", "locator": "records/observations/m2-map-route-feasibility-001-optical-fallback-catalog.json", "note": "Earlier public catalogue snapshot records the same UUID, name, orbit, tile, acquisition time, and footprint."}
+          ],
+          "note": "Publisher product UUID and asset identity are fixed; a catalogue record is not the acquired asset."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {"type": "live", "locator": "https://dataspace.copernicus.eu/terms-and-conditions", "observed_at": "2026-09-26T18:50:47Z", "note": "CDSE is the Copernicus Sentinel data access portal and refers Sentinel data use to the official legal notice."},
+            {"type": "live", "locator": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice", "observed_at": "2026-09-26T18:50:47Z", "note": "Official Sentinel programme legal notice governs use of Sentinel data."}
+          ],
+          "note": "The direct Copernicus catalogue is authoritative for product identity and access metadata, not for observed local pixel quality."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {"type": "live", "locator": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d6d898f4-2337-487d-afff-943df794c3e6)", "observed_at": "2026-09-26T18:50:47Z", "note": "Product Online=true at assessment; this is not a guarantee of future availability."},
+            {"type": "live", "locator": "https://dataspace.copernicus.eu/terms-and-conditions", "observed_at": "2026-09-26T18:50:47Z", "note": "Registered account is required for EO data access and service availability is not guaranteed."},
+            {"type": "live", "locator": "https://documentation.dataspace.copernicus.eu/Quotas.html", "observed_at": "2026-09-26T18:50:47Z", "note": "Official general-user OData quota page lists transfer and connection limits and a ten-minute access-token life. Current owner account quota use and a fresh token are not established."}
+          ],
+          "note": "One exact product is eligible for a future authenticated request; execution must recheck online state, account eligibility, quota and a fresh owner token. No authentication occurred during this assessment."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {"type": "live", "locator": "https://dataspace.copernicus.eu/terms-and-conditions", "observed_at": "2026-09-26T18:50:47Z", "note": "Sentinel source data are governed by the separate Sentinel legal notice; other portal material has distinct redistribution limits."},
+            {"type": "live", "locator": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice", "observed_at": "2026-09-26T18:50:47Z", "note": "Free, full and open Sentinel data use with attribution requirements; no warranty."}
+          ],
+          "note": "Acquisition and local QA of the Sentinel source are permitted by the source terms; no provider quicklook, source archive, or derived-pixel publication is assessed or authorized."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "records/observations/m2-map-route-feasibility-001-optical-fallback-catalog.json", "note": "Project candidate came from unauthenticated official CDSE OData metadata; no third-party image or rehosted archive was used."},
+            {"type": "static", "locator": "contracts/milestone-002-optical-alternate-map-pair-002-proposal.json", "note": "Future request is bound to the exact official product UUID and conditional no-replace non-Git custody."}
+          ],
+          "note": "Metadata lineage is known; no product bytes have yet been acquired."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "contracts/milestone-002-optical-alternate-map-pair-002-proposal.json", "note": "Future one-request plan requires provider checksum comparison, independent local SHA-256, archive and required-member identity verification, and no-replace promotion."},
+            {"type": "static", "locator": "docs/M2_OPTICAL_ALTERNATE_MAP_PAIR_002_REVIEW.md", "note": "Review distinguishes catalog checksum claims from verified acquired bytes."}
+          ],
+          "note": "This is a post-acquisition verification plan sufficient only to consider acquisition. No acquired-byte integrity pass is claimed."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "records/observations/m2-optical-fallback-catalog-screen-correction-002.json", "note": "Projected catalogue footprint covers at least 99% of each target event AOI; overview coverage is partial and excluded from target admission."},
+            {"type": "static", "locator": "docs/M2_OPTICAL_ALTERNATE_MAP_PAIR_002_REVIEW.md", "note": "L2A, same tile and relative orbit, but 26-day delay, N0512/N0513 baseline difference, cloud, and pixel usability remain unresolved."},
+            {"type": "static", "locator": "records/observations/m2-optical-pb0513-method-risk-local-001.json", "note": "Official PB 05.13 changes and the existing PB 05.12-only reader are known method risks; new candidate-specific tests are required before protected reads."}
+          ],
+          "note": "Fit only for a bounded attempt to establish pixel fitness after PB 05.13-specific implementation and tests, not for baseline, observed change, event attribution, or full-overview mapping."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "contracts/milestone-002-optical-alternate-map-pair-002-proposal.json", "note": "Plan uses existing anonymous in-memory owner token broker, no token storage or exposure, one fixed request, and non-Git product custody."},
+            {"type": "static", "locator": "AGENTS.md", "note": "Project rules keep credentials, source archives, rasters, geodatabases, and packages outside Git."}
+          ],
+          "note": "Orbital optical data are not expected to contain personal data at 10/20 m resolution; account access metadata and token exposure are controlled separately. No malware/content claim is made before container verification."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "ready",
+    "blocking_reasons": [],
+    "live_verification_pending": [],
+    "approved_actions": ["metadata review", "controlled acquisition for QA"]
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": ["read public catalogue metadata", "record local eligibility assessment"],
+    "requires_explicit_authorization": ["authenticate", "accept changed terms", "download content", "read protected existing source pixels", "publish or redistribute"]
+  },
+  "claim_boundary": "Source eligibility is not owner approval. The authority mode is not_granted, so no acquisition or protected-data action is released; pixel quality and scientific fitness remain unknown."
+}

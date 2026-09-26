@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-PB0513-METHOD-RISK-LOCAL-001",
+  "status": "official_method_change_found_original_review_superseded_before_approval",
+  "observed_at_utc": "2026-09-26T18:58:56Z",
+  "official_evidence": [
+    {
+      "url": "https://dataspace.copernicus.eu/news/2026-8-7-introduction-copernicus-sentinel-2-processing-baseline-0513",
+      "publisher": "Copernicus Data Space Ecosystem / ESA",
+      "finding": "PB 05.13 introduces L2A surface-reflectance edge improvements, revised no-data boundaries, cast-shadow classification, water atmospheric correction, saturation metadata consistency, JPEG2000 encoding optimization, and spectral-response metadata updates."
+    },
+    {
+      "url": "https://sentinels.copernicus.eu/-/deployment-of-copernicus-sentinel-2-processing-baseline-05.13-on-21-september-2026",
+      "publisher": "Sentinel Online / ESA",
+      "finding": "ESA scheduled PB 05.13 deployment for 21 September 2026 and states that generated products comply with PSD v15.2."
+    },
+    {
+      "url": "https://sentiwiki.copernicus.eu/__attachments/a_79d81f1db038da666d7831a1b76a44df399e5a67ba5e5f39f1f7038d75cb1fb9/S2-Sentinel-2%20Products%20Specification%20Document-15.2.pdf",
+      "publisher": "Sentinel-2 product specification / ESA",
+      "finding": "PSD v15.2 continues to specify metadata-driven BOA offset and quantification scaling and describes the L2A mask products. This specification is structural evidence only, not proof of a particular unacquired product's internal metadata or QA."
+    }
+  ],
+  "exact_candidate": {
+    "before_product_id": "35b149d6-cdde-4959-8ff4-d28f37bf67bb",
+    "before_named_baseline": "05.12",
+    "after_product_id": "d6d898f4-2337-487d-afff-943df794c3e6",
+    "after_named_baseline": "05.13"
+  },
+  "current_code_constraint": {
+    "reader_ref": "scripts/m2_optical_gdal_recovery_002_engine.py",
+    "reader_requires_baseline_0512_for_both_products": true,
+    "protocol_ref": "docs/OPTICAL_INPUT_READINESS_PROTOCOL.md",
+    "protocol_requires_internal_baseline_0512": true,
+    "old_contracts_and_terminal_results_must_remain_unchanged": true
+  },
+  "method_implications": [
+    "The existing 05.12 reader cannot be reused unchanged for the 05.13 candidate; a distinct candidate-specific parser and header test path is required before any real pixel attempt.",
+    "SCL and no-data algorithm differences can change masked-area measurements between dates even with the same class-number exclusion list; report baseline as a quality-method limitation, not a landscape change.",
+    "Reflectance over water and spectral response metadata may differ; no reflectance difference, index change, or event attribution is admissible merely from a visually aligned pair.",
+    "Only unacquired-product metadata is available now; internal product tags, selected-mask structure, AOI clear pixels, and cross-date registration remain unknown."
+  ],
+  "authority_boundary": {
+    "new_source_adopted_or_acquired": false,
+    "protected_pixels_read": false,
+    "existing_attempt_or_contract_mutated": false,
+    "new_method_implemented": false,
+    "baseline_or_change_analysis": false,
+    "scientific_publication": false
+  }
+}

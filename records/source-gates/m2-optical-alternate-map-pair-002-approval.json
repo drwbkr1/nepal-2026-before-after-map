@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-OPTICAL-ALTERNATE-MAP-PAIR-002-APPROVAL",
+  "status": "owner_approved_exact_conditional_envelope_public_ci_pending",
+  "recorded_at_utc": "2026-09-26T19:09:07Z",
+  "decision_id": "D-M2-OPTICAL-ALTERNATE-MAP-PAIR-002",
+  "decision": "approve",
+  "human_decision_count": 1,
+  "owner_statement_verbatim": "approve",
+  "decision_context": "Direct reply to the immediately preceding assistant request to approve the exact pair-002 bundle and proposal hashes. The review packet requested one conditional envelope. Ordinary chat authorization is sufficient under AGENTS.md; no separate attestation phrase was given.",
+  "explicit_attestation_statement": false,
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-optical-alternate-map-pair-002-proposal.json",
+    "proposal_sha256": "c38ed063e8eadd44b364e41235e0cc9ba8fb09e620f32e1eb4d96e4a8fde7de0",
+    "review_bundle_ref": "reviews/m2-optical-alternate-map-pair-002/review-bundle.json",
+    "review_bundle_sha256": "980df8c0412fd1997ba5d6cc67a5f8b7a3b7cb5b3e62ed6fad96c2bd5f9c3e6d"
+  },
+  "authority": {
+    "single_conditional_envelope_through_sanitized_terminal_publication": true,
+    "intermediate_owner_reconfirmation_required": false,
+    "candidate_specific_implementation_and_disposable_tests": true,
+    "bounded_public_ci_required_before_protected_reads": true,
+    "final_no_content_preflight_required": true,
+    "before_single_date_screen_maximum": 1,
+    "before_each_target_aoi_usable_fraction_minimum": 0.8,
+    "conditional_exact_new_source_requests_maximum": 1,
+    "conditional_exact_pair_header_pixel_qa_maximum": 1,
+    "conditional_local_masked_visual_map": true,
+    "owner_secret_safe_handoff_required_if_acquisition_reached": true,
+    "automatic_retry": false,
+    "source_or_date_substitution": false,
+    "baseline_admission_or_change_analysis": false,
+    "attribution_or_scientific_claim": false,
+    "source_or_derived_pixel_publication": false
+  }
+}

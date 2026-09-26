@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "status": "partial_candidate_method_and_map_implementation_no_execution_release",
+  "recorded_at_utc": "2026-09-26T19:22:02Z",
+  "prior_partial_ref": "records/readiness/m2-optical-alternate-map-pair-002-implementation-partial-001.json",
+  "approval_ref": "records/source-gates/m2-optical-alternate-map-pair-002-approval.json",
+  "candidate_code": {
+    "pair_qa_ref": "scripts/m2_optical_alternate_pair_002_qa.py",
+    "pair_qa_sha256": "ff32a9697e406d281acdc7bb783460eba1959b67b5b6bb7fe211c1d6de897d34",
+    "masked_rgb_ref": "scripts/m2_optical_alternate_pair_002_display.py",
+    "masked_rgb_sha256": "de797d4bda89d7104e646fab45192c9bd50c48bb8650c8deb16d432afa1ea452",
+    "arcgis_map_ref": "scripts/m2_optical_alternate_pair_002_map.py",
+    "arcgis_map_sha256": "5cdffa44935931579377327e4a353a73f931b324ad65e44c1c91b6572efb664c"
+  },
+  "verification": {
+    "focused_generated_tests": "12 passed",
+    "full_portable_suite": "875 tests passed, 6 skipped",
+    "project_control_check": "pass, 1463 required files",
+    "installed_arcgis_pro_3_7_1_generated_jp2": "pass",
+    "generated_masked_rgb_epsg32645": "pass",
+    "disposable_local_aprx_two_map_layout_fresh_process_reopen_export": "pass",
+    "first_and_reopen_png_byte_identical": true,
+    "clean_machine_package_test": false
+  },
+  "known_remaining": [
+    "durable append-only supervisors for exact bounded attempts and stop-on-failure",
+    "final source and external-custody collision preflight",
+    "execution-time terms and catalog recheck",
+    "public default-branch CI gate before any protected read",
+    "one real before-scene screen and conditional later stages"
+  ],
+  "protected_pixels_read": false,
+  "new_source_requested_or_acquired": false,
+  "public_ci_passed_for_this_implementation": false,
+  "real_attempt_started": false,
+  "scientific_result_established": false
+}

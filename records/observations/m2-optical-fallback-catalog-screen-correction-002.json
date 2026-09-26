@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-OPTICAL-FALLBACK-CATALOG-SCREEN-CORRECTION-002",
+  "status": "local_metadata_status_correction_only",
+  "supersedes_status_labels_not_geometry": {
+    "original_screen_receipt_ref": "scratch/optical-fallback-catalog-screen-001/receipt.json",
+    "original_screen_receipt_sha256": "a6a39c3d739e0c0edc0e0bd1013f58e2503ce885eba617ce01d20c0e7ccad4a8",
+    "original_arcgis_receipt_ref": "scratch/optical-fallback-catalog-arcgis-001/arcgis-validation.json",
+    "original_arcgis_receipt_sha256": "a96d2ae5c5d4cb408950ffcdf550bc0144f695e0a95cf989444bd46e83c4f8c2"
+  },
+  "additional_public_evidence": {
+    "m1_manifest_ref": "records/source-manifest.json",
+    "m1_manifest_sha256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+    "m1_pixel_qa_ref": "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json",
+    "m1_pixel_qa_sha256": "9ffae2e589700adec07373325e3d35d6ee8ccf5bc3a5d66da5fe7e6639c406b5"
+  },
+  "corrected_screen": {
+    "builder_ref": "scripts/build_m2_optical_fallback_catalog_screen_002.py",
+    "builder_sha256": "d74ac3adc14f5647b6ef5a6f1b9e967f91ba4d5964ffc4d1bc5abaca2b2f0963",
+    "screen_receipt_ref": "scratch/optical-fallback-catalog-screen-002/receipt.json",
+    "screen_receipt_sha256": "306f9c5b532f3d92ca795fe51c85bab5a9fa22f5d5d3b67c9650e772310ba0ad",
+    "gpkg_ref": "scratch/optical-fallback-catalog-screen-002/Optical_Fallback_Catalog_Metadata_EPSG32645.gpkg",
+    "gpkg_sha256": "c04801350d8daefd54b552c5d4ddc5d967fe6845b2d96a78a2ea45f3119abb3c",
+    "arcgis_validator_ref": "scripts/validate_m2_optical_fallback_catalog_arcgis_002.py",
+    "arcgis_validator_sha256": "002701fa17f382b8d112e6d80070c2d2892d51dac1984387a805bbfec5c7a11f",
+    "arcgis_receipt_ref": "scratch/optical-fallback-catalog-arcgis-002/arcgis-validation.json",
+    "arcgis_receipt_sha256": "30847efcfe010c34bb082e18857a16fb75653feacfefe932da5bc7599a8b426f",
+    "aprx_ref": "scratch/optical-fallback-catalog-arcgis-002/Nepal_2026_Optical_Catalog_Screen.aprx",
+    "aprx_sha256": "abcc642927ff2eef8b261e40c5dbf9090ee3b0d211af17f51e32cecf35dcbdf3",
+    "same_machine_fresh_process_reopen_pass": true,
+    "broken_layers": 0,
+    "visual_png_inspected": true
+  },
+  "cohort": {
+    "catalog_intersections": 29,
+    "full_footprint_both_event_aois_before": 7,
+    "full_footprint_both_event_aois_after": 7,
+    "products_in_two_prior_blocked_pairs": 4,
+    "no_public_pair_level_pixel_qa_full_footprint_before": 5,
+    "no_public_pair_level_pixel_qa_full_footprint_after": 5,
+    "individual_pixel_fitness_of_every_alternative": "unknown"
+  },
+  "authority_boundary": {
+    "new_source_adopted_or_acquired": false,
+    "protected_product_pixels_read": false,
+    "baseline_or_change_analysis": false,
+    "derived_pixel_or_scientific_publication": false,
+    "clean_machine_delivery_proven": false
+  }
+}

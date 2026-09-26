@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "status": "partial_candidate_implementation_no_execution_release",
+  "recorded_at_utc": "2026-09-26T19:14:42Z",
+  "approval_ref": "records/source-gates/m2-optical-alternate-map-pair-002-approval.json",
+  "approval_sha256": "a85e5c2d4d2bc93f22d700674cb65db74eef0f9085ece18cc53480de00cf1458",
+  "bundle_sha256": "980df8c0412fd1997ba5d6cc67a5f8b7a3b7cb5b3e62ed6fad96c2bd5f9c3e6d",
+  "proposal_sha256": "c38ed063e8eadd44b364e41235e0cc9ba8fb09e620f32e1eb4d96e4a8fde7de0",
+  "implemented": [
+    "exact PB 05.12 and PB 05.13 name/internal-metadata consistency controls",
+    "per-product metadata scaling extraction without cross-baseline harmonization",
+    "single-date SCL, three-band quality, no-data, and DN-zero mask controls",
+    "separate 80 percent acquisition-prerequisite screen for each target AOI",
+    "selected materialized-member byte-identity check before header opening"
+  ],
+  "portable_tests": {
+    "focused": "8 passed",
+    "full_repository": "871 passed, 6 skipped",
+    "project_control_check": "pass, 1463 required files"
+  },
+  "installed_arcgis_runtime_disposable_test": {
+    "status": "pass_disposable_arcgis_gdal_candidate_smoke",
+    "arcgis_pro_version": "3.7.1",
+    "gdal_version": "3.12.2e for ArcGIS 3.7",
+    "generated_jp2_roles": ["B11", "SCL", "quality_classification"],
+    "wkid": 32645,
+    "project_data_access": false
+  },
+  "not_yet_completed": [
+    "candidate-specific exact-pair pixel QA",
+    "local masked ArcGIS before/after display implementation and disposable export/reopen test",
+    "public default-branch CI",
+    "final no-content preflight",
+    "one real before-scene screen"
+  ],
+  "protected_pixels_read": false,
+  "new_source_requested_or_acquired": false,
+  "public_ci_passed_for_this_implementation": false,
+  "real_attempt_started": false,
+  "derived_pixel_or_scientific_publication": false
+}

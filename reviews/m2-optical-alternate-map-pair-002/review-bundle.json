@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-OPTICAL-ALTERNATE-MAP-PAIR-002-LOCAL-REVIEW-BUNDLE",
+  "status": "local_zero_decision_not_approved_not_published",
+  "review_ref": "docs/M2_OPTICAL_ALTERNATE_MAP_PAIR_002_REVIEW.md",
+  "review_sha256": "a6b1fc5f18fcbd95436c85bbf76f89cfdfe5cf9ec1728e196ee3611d06ed53b3",
+  "proposal_ref": "contracts/milestone-002-optical-alternate-map-pair-002-proposal.json",
+  "proposal_sha256": "c38ed063e8eadd44b364e41235e0cc9ba8fb09e620f32e1eb4d96e4a8fde7de0",
+  "method_risk_ref": "records/observations/m2-optical-pb0513-method-risk-local-001.json",
+  "method_risk_sha256": "5c5010a2b32cf8abe3a754657e47cbb994ec521a08384360455f367a36378cf5",
+  "source_eligibility_ref": "records/source-gates/m2-optical-alternate-map-pair-002-source-assessment-local.json",
+  "source_eligibility_sha256": "0da10543b0fb3b217795ea6d3e4d3aa4b8a2aa358f3da76a8757762909299d82",
+  "corrected_metadata_screen_ref": "records/observations/m2-optical-fallback-catalog-screen-correction-002.json",
+  "corrected_metadata_screen_sha256": "c66f18e9c02d041c8e7a65bb2ac30e59a09333cf10bdd64b1f60d70baee180b7",
+  "superseded_unapproved_bundle": {
+    "ref": "reviews/m2-optical-alternate-map-pair-001/review-bundle.json",
+    "sha256": "2c5a9e9e5e1e315e4c1d85270082d7a1970aef1db4621353be1f43f3992931c0",
+    "approval_status": "never_approved"
+  },
+  "decision_state": {
+    "owner_approval_received": false,
+    "earlier_generic_approval_applied_retroactively": false,
+    "new_method_implemented": false,
+    "new_source_adopted_or_acquired": false,
+    "protected_pixels_read": false,
+    "repository_published": false,
+    "baseline_or_change_analysis": false,
+    "derived_pixel_or_scientific_publication": false
+  }
+}

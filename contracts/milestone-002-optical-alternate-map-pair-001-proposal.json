@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-OPTICAL-ALTERNATE-MAP-PAIR-001",
+  "status": "local_zero_decision_proposal_not_approved",
+  "purpose": "Test one exact alternative Sentinel-2 pair for a locally projected, masked, ArcGIS-openable before/after visual map over the source and upper-corridor AOIs, without change analysis or scientific admission.",
+  "source_evidence": {
+    "catalog_ref": "records/observations/m2-map-route-feasibility-001-optical-fallback-catalog.json",
+    "catalog_sha256": "0ffd82483be80f5f75bd8a41da7379f58dbb6ed33db3ca451e89013e7f05072c",
+    "live_exact_after_metadata_url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products(d6d898f4-2337-487d-afff-943df794c3e6)",
+    "cdse_terms_url": "https://dataspace.copernicus.eu/terms-and-conditions",
+    "sentinel_legal_notice_url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+    "rights_assessment": "Sentinel source data are under the free, full and open Sentinel legal notice. Portal ancillary content has separate restrictions; do not publish provider quicklooks. Fresh account access and any changed terms require execution-time review. Any later public Sentinel-derived map must carry the required Copernicus Sentinel data credit and its own publication authority.",
+    "corrected_screen_ref": "records/observations/m2-optical-fallback-catalog-screen-correction-002.json",
+    "existing_m2_pair_terminal_ref": "records/readiness/m2-optical-gdal-header-pixel-recovery-002-terminal.json",
+    "existing_m2_pair_terminal_sha256": "a7fe3cedd24ff23158f95007b6931b403ae1745a19fc0006b97d834a08aa98a0",
+    "approved_aoi_ref": "config/aoi/approved-study-areas.geojson",
+    "approved_aoi_sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98"
+  },
+  "exact_pair": {
+    "before": {
+      "existing_source_id": "M2-OPT-001",
+      "provider_product_id": "35b149d6-cdde-4959-8ff4-d28f37bf67bb",
+      "name": "S2A_MSIL2A_20260824T050231_N0512_R119_T45RUM_20260824T115710.SAFE",
+      "acquired_utc": "2026-08-24T05:02:31.024000Z",
+      "catalog_cloud_cover_percent": 50.966662,
+      "existing_pair_result": "BLOCK_WITH_2026_09_16; individual_scene_fitness_unknown"
+    },
+    "after": {
+      "provider_product_id": "d6d898f4-2337-487d-afff-943df794c3e6",
+      "name": "S2C_MSIL2A_20260921T045701_N0513_R119_T45RUM_20260921T102407.SAFE",
+      "acquired_utc": "2026-09-21T04:57:01.025000Z",
+      "catalog_cloud_cover_percent": 60.282749,
+      "live_catalog_checked_utc": "2026-09-26T18:45:49Z",
+      "live_catalog_online": true,
+      "content_length_bytes": 1036170454,
+      "provider_md5": "0f7c83c2c73d752606076b7a825fe5de",
+      "provider_blake3": "dbd439d47eff3631e0aa149754f8c6833241147d82affce0ff8476e17ab1beb4",
+      "download_count_maximum": 1
+    },
+    "tile": "45RUM",
+    "relative_orbit": 119,
+    "processing_baseline_from_names": ["05.12", "05.13"],
+    "temporal_limit": "After scene is 26 days after the event; intervening weather, terrain, and human changes cannot be attributed to the 26 August event from this pair alone."
+  },
+  "spatial_scope": {
+    "target_aoi_ids": ["AOI-SOURCE", "AOI-UPPER-CORRIDOR"],
+    "geometry_screen_each_source_fraction_minimum": 0.99,
+    "overview_role": "context_only_partial_single_tile_coverage; not a full-area before/after panel",
+    "target_crs_wkid": 32645,
+    "target_cell_size_m": 20,
+    "existing_mask_classes_retained": [4, 5, 6],
+    "scientific_threshold_relaxation_authorized": false
+  },
+  "proposed_single_conditional_envelope": [
+    "Record the exact source, access, rights, provenance, integrity plan, fitness limits, and security controls; stop on any unresolved current terms or identity conflict.",
+    "Implement portable synthetic and installed ArcGIS-runtime disposable tests for the exact N0512/N0513 pair, 20 m grid, masks, receipt durability, and local visual-map export; stop if processing-baseline differences cannot be handled without scientific threshold changes.",
+    "Publish only sanitized implementation and gate evidence to the public default branch, then require passing public CI and an exact no-content preflight before protected reads.",
+    "Perform at most one new read-only single-scene SCL and quality-mask screen of the exact existing M2-OPT-001 bytes over AOI-SOURCE and AOI-UPPER-CORRIDOR; require at least 0.80 usable single-date area in each as a conservative acquisition-prerequisite screen, not a scientific admission decision. Stop if either fails or evidence is indeterminate.",
+    "Only on the preceding pass, receive one fresh owner-controlled CDSE token via the existing anonymous single-use in-memory broker; request the exact after UUID once from byte zero with no resume or retry; verify provider checksum, local SHA-256, container identity and required files; promote only to non-Git custody without replacement.",
+    "Only on verified acquisition, run at most one fresh exact-pair header and pixel-QA attempt on the frozen 20 m EPSG:32645 grid, retaining existing SCL classes, quality masks, registration method and thresholds. Record source and corridor results separately; report overview as partial context. Stop on the first failed or indeterminate gate.",
+    "Only on QA pass for a target AOI, create a local masked ArcGIS before/after display for that AOI, then reopen and export in a fresh ArcGIS process. Preserve all intermediate and terminal receipts. Publish sanitized terminal status and CI reconciliation, but no source or derived pixels."
+  ],
+  "execution_invariants": {
+    "new_product_ids_allowed": ["d6d898f4-2337-487d-afff-943df794c3e6"],
+    "new_acquisition_requests_maximum": 1,
+    "new_pair_pixel_attempts_maximum": 1,
+    "new_source_or_date_substitution": false,
+    "old_attempt_reuse_resume_retry_or_mutation": false,
+    "automatic_retry": false,
+    "token_storage_or_exposure": false,
+    "external_custody_overwrite": false,
+    "third_party_quicklook_publication": false,
+    "baseline_admission_or_change_analysis": false,
+    "event_attribution_or_scientific_claim": false,
+    "source_or_derived_pixel_publication": false
+  },
+  "authority": {
+    "owner_approval_received": false,
+    "this_proposal_creates_authority": false,
+    "current_authorized_actions": ["local proposal and review preparation", "public metadata inspection", "metadata-only map correction"],
+    "requires_exact_owner_approval_before": ["Git publication", "protected-source read", "ArcGIS protected-pixel processing", "credential handoff", "network acquisition", "local derived-pixel map creation"]
+  }
+}
