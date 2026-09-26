@@ -25,6 +25,13 @@ IMPLEMENTATION_GATE_REF = "records/readiness/m2-asf-hyp3-rtc-map-route-001-imple
 FINAL_PREFLIGHT_REF = "records/readiness/m2-asf-hyp3-rtc-map-route-001-account-preflight.json"
 MAX_SECRET_BYTES = 4096
 MAX_RESPONSE_BYTES = 65536
+IMPLEMENTATION_FILES = (
+    "scripts/m2_asf_hyp3_rtc_core_001.py",
+    "scripts/m2_asf_hyp3_account_probe_001.py",
+    "scripts/invoke_m2_asf_hyp3_account_probe_001.ps1",
+    "tests/test_m2_asf_hyp3_rtc_core_001.py",
+    "tests/test_m2_asf_hyp3_account_probe_001.py",
+)
 
 
 def _read_json(path: Path) -> dict:
@@ -46,6 +53,16 @@ def require_account_probe_release(root: Path = ROOT) -> None:
     implementation_sha = hashlib.sha256((root / IMPLEMENTATION_GATE_REF).read_bytes()).hexdigest()
     sources = rights.get("sources")
     criteria = sources[0].get("criteria", []) if isinstance(sources, list) and len(sources) == 1 and isinstance(sources[0], dict) else []
+    published_files = implementation.get("bindings", {}).get("implementation_file_sha256")
+    files_match = isinstance(published_files, dict) and set(published_files) == set(IMPLEMENTATION_FILES)
+    if files_match:
+        try:
+            files_match = all(
+                hashlib.sha256((root / ref).read_bytes()).hexdigest() == published_files[ref]
+                for ref in IMPLEMENTATION_FILES
+            )
+        except OSError:
+            files_match = False
     if (
         rights.get("decision", {}).get("status") != "ready"
         or len(criteria) != 8
@@ -56,7 +73,8 @@ def require_account_probe_release(root: Path = ROOT) -> None:
         or rights.get("terms", {}).get("public_account_use_guidance_assessed") is not True
         or rights.get("terms", {}).get("job_and_product_rights_released") is not False
         or "read_own_basic_account_capacity" not in rights.get("decision", {}).get("approved_actions", [])
-        or implementation.get("status") != "pass_exact_implementation_public_ci"
+        or implementation.get("status") != "pass_account_probe_implementation_public_ci_only"
+        or not files_match
         or implementation.get("bindings", {}).get("approval_sha256") != approval_sha
         or implementation.get("public_ci", {}).get("conclusion") != "success"
         or implementation.get("assertions", {}).get("account_or_job_request_performed") is not False

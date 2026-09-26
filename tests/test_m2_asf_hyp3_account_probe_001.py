@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import io
+import hashlib
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -13,7 +15,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from m2_asf_hyp3_account_probe_001 import (  # noqa: E402
+    APPROVAL_REF,
+    FINAL_PREFLIGHT_REF,
     HOST,
+    IMPLEMENTATION_FILES,
+    IMPLEMENTATION_GATE_REF,
+    PROPOSAL_SHA256,
+    RIGHTS_GATE_REF,
+    ROOT,
     RouteStop,
     get_basic_account,
     read_owner_token,
@@ -58,6 +67,48 @@ class AccountProbeTests(unittest.TestCase):
     def test_unreleased_account_probe_does_not_read_a_token(self) -> None:
         with tempfile.TemporaryDirectory() as temporary, self.assertRaises(RouteStop):
             require_account_probe_release(Path(temporary))
+
+    def test_complete_synthetic_release_and_code_drift_stop(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for ref in (*IMPLEMENTATION_FILES, APPROVAL_REF):
+                destination = root / ref
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ROOT / ref, destination)
+            approval_sha = hashlib.sha256((root / APPROVAL_REF).read_bytes()).hexdigest()
+            rights = {
+                "authority": {"authority_ref": APPROVAL_REF},
+                "bindings": {"proposal_sha256": PROPOSAL_SHA256, "approval_sha256": approval_sha},
+                "terms": {"public_account_use_guidance_assessed": True, "job_and_product_rights_released": False},
+                "sources": [{"criteria": [{"required": True, "status": "pass"} for _ in range(8)]}],
+                "decision": {"status": "ready", "approved_actions": ["read_own_basic_account_capacity"]},
+            }
+            implementation = {
+                "status": "pass_account_probe_implementation_public_ci_only",
+                "bindings": {
+                    "approval_sha256": approval_sha,
+                    "implementation_file_sha256": {
+                        ref: hashlib.sha256((root / ref).read_bytes()).hexdigest() for ref in IMPLEMENTATION_FILES
+                    },
+                },
+                "public_ci": {"conclusion": "success"},
+                "assertions": {"account_or_job_request_performed": False},
+            }
+            for ref, value in ((RIGHTS_GATE_REF, rights), (IMPLEMENTATION_GATE_REF, implementation)):
+                destination = root / ref
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_text(json.dumps(value), encoding="utf-8")
+            implementation_sha = hashlib.sha256((root / IMPLEMENTATION_GATE_REF).read_bytes()).hexdigest()
+            preflight = {
+                "status": "pass_no_content_account_probe_only",
+                "bindings": {"approval_sha256": approval_sha, "implementation_gate_sha256": implementation_sha},
+                "assertions": {"secret_read_or_account_request_performed": False},
+            }
+            (root / FINAL_PREFLIGHT_REF).write_text(json.dumps(preflight), encoding="utf-8")
+            require_account_probe_release(root)
+            (root / IMPLEMENTATION_FILES[0]).write_text("changed", encoding="utf-8")
+            with self.assertRaisesRegex(RouteStop, "account_probe_not_released"):
+                require_account_probe_release(root)
 
     def test_pipe_reads_only_one_ascii_secret(self) -> None:
         self.assertEqual(read_owner_token(io.BytesIO(b"synthetic-token.123\r\n")), "synthetic-token.123")
