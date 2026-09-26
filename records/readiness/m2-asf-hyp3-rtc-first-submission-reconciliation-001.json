@@ -1,0 +1,35 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-FIRST-SUBMISSION-RECONCILIATION-001",
+  "reconciled_at_utc": "2026-09-26T23:32:27Z",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+  "status": "pass_exact_first_submission_product_pending",
+  "source_id": "M1-SRC-002",
+  "job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+  "job_type": "RTC_GAMMA",
+  "job_name": "m2-rtc-002-m1-src-002",
+  "quoted_basic_credit_cost": 60,
+  "submission_receipts_non_git": {
+    "root": "C:/Projects/Active/nepal-2026-before-after-map-data/m2-asf-hyp3-rtc-submit-first-001/attempt-001",
+    "started_sha256": "b93f5e80e3131782b9463ac4fccc7c5fda1425f9badbac01176429acc87b3c54",
+    "terminal_sha256": "91bb47018b99450111153e8ffd101346eddadd1370578000ef44d7929102870c"
+  },
+  "first_browser_observation_non_git": {
+    "receipt_ref": "m2-asf-hyp3-rtc-browser-status-001/job-dad53076-running-20260926T232237Z.json",
+    "sha256": "5e22dc50b0efccf9714c0871515bcd58df88199912ef93c5ae66c97b3b19d12b",
+    "observed_at_utc": "2026-09-26T23:22:37Z",
+    "visible_status": "Running",
+    "api_terminal_response_captured": false
+  },
+  "verification": {
+    "one_attempt_directory_only": true,
+    "exact_approved_job_name_type_parameters": true,
+    "quote_within_60_free_basic_credits": true,
+    "credentials_recorded": false,
+    "archive_bytes_acquired": false,
+    "product_bytes_verified": false,
+    "pixel_qa_pass": false,
+    "additional_project_job_submissions_recorded": 0
+  },
+  "disposition": "The first exact RTC_GAMMA processing job was accepted and subsequently visible as Running. The submission receipt is terminal for this one request, but the provider job is nonterminal; neither its product nor any pixels are verified. Do not submit the next source or infer map readiness.",
+  "next_gate": "Observe this same job to SUCCEEDED or FAILED. On SUCCEEDED, bind the exact provider ZIP descriptor, acquire under non-Git custody, verify archive and source metadata, then perform target-AOI pixel and registration QA before considering M1-SRC-005."
+}
