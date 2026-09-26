@@ -1,0 +1,107 @@
+{
+  "contract_version": "source-gate/v2",
+  "assessment_id": "NEPAL-M2-ASF-HYP3-RTC-READ-ONLY-ACCOUNT-SOURCE-GATE-001",
+  "assessed_at": "2026-09-26T21:12:00Z",
+  "authority": {
+    "mode": "inherited",
+    "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+    "authorized_actions": ["read_own_basic_account_capacity"],
+    "expires_at_utc": null
+  },
+  "bindings": {
+    "proposal_sha256": "5118b0bb3727e9ef6080bed9015a68cd64bbbba226dc422948ec5cac294fbb55",
+    "approval_sha256": "1c3103429418f1c1847fa5865f5634b6dece7acd8cd19e42a279537709087596",
+    "terms_followup_sha256": "0763fe9f136a72c279882738af74ac5b317379424925552d9868212d927c7160",
+    "account_probe_implementation_gate_ref": "records/readiness/m2-asf-hyp3-rtc-map-route-001-implementation-publication-gate.json"
+  },
+  "intended_use": {
+    "summary": "One owner-controlled, read-only GET /user check of HyP3 Basic free-credit capacity. This assessment excludes exact-scene validation, job submission, credit use, product download, pixel access, map export, and publication.",
+    "planned_actions": ["read_own_basic_account_capacity"]
+  },
+  "sources": [
+    {
+      "source_id": "ASF-HYP3-BASIC-GET-USER",
+      "name": "ASF HyP3 Basic account-capacity endpoint",
+      "locator": "https://hyp3-api.asf.alaska.edu/user",
+      "criteria": [
+        {
+          "id": "identity", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "scripts/m2_asf_hyp3_account_probe_001.py", "note": "Hardcodes the official Basic host and exact read-only /user path; no dynamic URL or redirect follows."}
+          ],
+          "note": "This identifies an account metadata endpoint, not a processed RTC product."
+        },
+        {
+          "id": "authority", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/using/api/", "observed_at": "2026-09-26T21:12:00Z", "note": "ASF's official API guide identifies the Basic API and authentication workflow."}
+          ],
+          "note": "ASF operates the endpoint and provides the authoritative API documentation."
+        },
+        {
+          "id": "access", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/using/authentication/", "observed_at": "2026-09-26T21:12:00Z", "note": "Official documentation permits a bearer token or an owner-established asf-urs session cookie for authenticated HyP3 API use."},
+            {"type": "static", "locator": "records/source-gates/m2-asf-hyp3-owner-access-attestation-001-local.json", "note": "Owner reports signing in; no current credential or account capacity has been verified."}
+          ],
+          "note": "A documented route exists for one account check. Actual authentication, balance, and exact-scene eligibility remain unverified until observed; this pass does not release a job."
+        },
+        {
+          "id": "rights", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [
+            {"type": "live", "locator": "https://hyp3-docs.asf.alaska.edu/using/api/", "observed_at": "2026-09-26T21:12:00Z", "note": "ASF documents authenticating and confirming one's own HyP3 account through the API."},
+            {"type": "static", "locator": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json", "note": "Owner authorizes secret-safe account checks inside the bounded route."},
+            {"type": "static", "locator": "records/source-gates/m2-asf-hyp3-rtc-terms-followup-001.json", "note": "Owner declines retrieving the exact accepted agreement; this is not a product-rights waiver."}
+          ],
+          "note": "Eligible only to read the owner's own account capacity without accepting new terms. The exact accepted EULA, generated-product rights, derivative distribution, and publication remain unresolved and are not inherited by this limited pass."
+        },
+        {
+          "id": "provenance", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "scripts/m2_asf_hyp3_account_probe_001.py", "note": "Only the fixed Basic /user response supplies the balance; output strips user_id, job names, use case, and raw response."}
+          ],
+          "note": "The capacity observation will be attributed to ASF Basic /user and the exact probe time, not to a product or raster."
+        },
+        {
+          "id": "integrity", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "records/readiness/m2-asf-hyp3-rtc-map-route-001-implementation-publication-gate.json", "note": "Exact implementation bytes passed public CI; the probe requires HTTPS 200, bounded JSON, finite four-job free-credit balance, and a documented status enum."}
+          ],
+          "note": "Response integrity is a runtime predicate; this pass supports a bounded attempt, not a pre-observed balance."
+        },
+        {
+          "id": "fitness", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "scripts/m2_asf_hyp3_rtc_core_001.py", "note": "The guard checks 240 nominal free Basic credits for four fixed 10 m RTC jobs without treating balance as scene eligibility."}
+          ],
+          "note": "The endpoint is fit to check balance only; a separate exact-scene eligibility check is required before any job."
+        },
+        {
+          "id": "privacy-security", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [
+            {"type": "static", "locator": "tests/test_m2_asf_hyp3_account_probe_001.py", "note": "Synthetic tests cover one-use pipe parsing, no-redirect fixed-host GET, sanitized result, pre-gate stop, and code-identity drift stop."},
+            {"type": "static", "locator": "records/readiness/m2-asf-hyp3-rtc-map-route-001-implementation-publication-gate.json", "note": "Public CI passed without account or token access."}
+          ],
+          "note": "No username, password, token, raw account JSON, job names, or user ID may be stored or printed."
+        }
+      ]
+    }
+  ],
+  "terms": {
+    "public_account_use_guidance_assessed": true,
+    "exact_accepted_agreement_document_not_retrieved": true,
+    "job_and_product_rights_released": false,
+    "new_terms_acceptance_by_agent": false
+  },
+  "decision": {
+    "status": "ready",
+    "blocking_reasons": [],
+    "live_verification_pending": [],
+    "approved_actions": ["read_own_basic_account_capacity"]
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": ["read_public_HyP3_documentation", "record_nonsecret_account_capacity"],
+    "requires_explicit_authorization": ["authenticate", "submit_job", "spend_credits", "download_product", "publish_pixels"]
+  },
+  "claim_boundary": "This gate authorizes only a read-only owner-account capacity attempt under the already approved envelope and public CI. It does not prove that the account works, that four scenes are eligible, that any generated product may be used or redistributed, or that a map is ready."
+}

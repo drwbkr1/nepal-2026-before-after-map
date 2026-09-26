@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "gate_id": "NEPAL-M2-ASF-HYP3-RTC-MAP-ROUTE-001-ACCOUNT-PROBE-IMPLEMENTATION-PUBLICATION-GATE",
+  "status": "pass_account_probe_implementation_public_ci_only",
+  "bindings": {
+    "proposal_sha256": "5118b0bb3727e9ef6080bed9015a68cd64bbbba226dc422948ec5cac294fbb55",
+    "approval_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+    "approval_sha256": "1c3103429418f1c1847fa5865f5634b6dece7acd8cd19e42a279537709087596",
+    "terms_followup_ref": "records/source-gates/m2-asf-hyp3-rtc-terms-followup-001.json",
+    "terms_followup_sha256": "0763fe9f136a72c279882738af74ac5b317379424925552d9868212d927c7160",
+    "implementation_commit_sha": "f3f81dce2ca384b87f7f5b080ab38717ffbf79c3",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_core_001.py": "1fcf17b90e3414a8b4ffaa496e35d6cc4c183e796c894858f8d86f105620d719",
+      "scripts/m2_asf_hyp3_account_probe_001.py": "abcfb1e874472f86a4d4f36b82b809eb7555de4357560feb93baa9fba98cbe91",
+      "scripts/invoke_m2_asf_hyp3_account_probe_001.ps1": "b2e7eddf0e6ff23c169f195aa59280bf2f4cf429c752fd1993db41cd392bbb1b",
+      "tests/test_m2_asf_hyp3_rtc_core_001.py": "68012977b692a7301706d04f82bfc8700e2a3073d606f6a9bb4f41baf971a2b1",
+      "tests/test_m2_asf_hyp3_account_probe_001.py": "9f5af65fd9725b9db3b5d3c96c28b69d4b0ce4a2eee1eee1e0280873d86e1f86"
+    }
+  },
+  "public_ci": {
+    "run_id": 36272230208,
+    "job_id": 108488243700,
+    "head_sha": "f3f81dce2ca384b87f7f5b080ab38717ffbf79c3",
+    "status": "completed",
+    "conclusion": "success",
+    "required_file_count": 1463,
+    "test_count": 896,
+    "intentional_public_skip_count": 14
+  },
+  "assertions": {
+    "account_or_job_request_performed": false,
+    "token_read_or_recorded": false,
+    "source_or_derived_pixels_read": false,
+    "full_rtc_job_or_product_implementation_complete": false,
+    "source_and_final_preflight_still_required": true
+  },
+  "released_action": "Prepare a separate read-only account source gate and final no-content preflight. Only after both pass may one owner-controlled secret-safe GET /user probe check Basic balance. No job is released."
+}
