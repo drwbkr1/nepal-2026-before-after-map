@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "gate_id": "NEPAL-M2-ASF-HYP3-RTC-ACCOUNT-HANDOFF-IMPLEMENTATION-GATE-002",
+  "status": "pass_account_probe_implementation_public_ci_only",
+  "bindings": {
+    "proposal_sha256": "5118b0bb3727e9ef6080bed9015a68cd64bbbba226dc422948ec5cac294fbb55",
+    "approval_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+    "approval_sha256": "1c3103429418f1c1847fa5865f5634b6dece7acd8cd19e42a279537709087596",
+    "predecessor_gate_ref": "records/readiness/m2-asf-hyp3-rtc-map-route-001-implementation-publication-gate.json",
+    "implementation_commit_sha": "212165f52617efc60716a0d557477aadfe2d79e5",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_core_001.py": "1fcf17b90e3414a8b4ffaa496e35d6cc4c183e796c894858f8d86f105620d719",
+      "scripts/m2_asf_hyp3_account_probe_001.py": "eabcc941008951bf70026498785c2a09e455a8d1ab3b9ea05cc283bd66700ffa",
+      "scripts/invoke_m2_asf_hyp3_account_probe_001.ps1": "019e87c9f5254609bbec5cd3366160398a8afc5996ef24d080b7eb558044b777",
+      "tests/test_m2_asf_hyp3_rtc_core_001.py": "68012977b692a7301706d04f82bfc8700e2a3073d606f6a9bb4f41baf971a2b1",
+      "tests/test_m2_asf_hyp3_account_probe_001.py": "b7531d403b9a8d1f4fe6cdfce20e7e88f4a6f50e5eab288e41f08a575b2a2bf6",
+      "tests/test_m2_asf_hyp3_account_gate_001.py": "ee3760483733576207f5a04587814fae6ead5b6be362ab836b334a08017136d7"
+    }
+  },
+  "public_ci": {
+    "run_id": 36273000659,
+    "job_id": 108490375072,
+    "head_sha": "212165f52617efc60716a0d557477aadfe2d79e5",
+    "status": "completed",
+    "conclusion": "success",
+    "required_file_count": 1463,
+    "local_test_count": 902,
+    "local_intentional_skip_count": 7
+  },
+  "official_earthdata_token_reference": "https://urs.earthdata.nasa.gov/documentation/for_users/user_token",
+  "bounded_behavior": {
+    "owner_confirms_possible_token_creation_before_credentials": true,
+    "earthdata_method": "POST /api/users/find_or_create_token",
+    "earthdata_host": "urs.earthdata.nasa.gov",
+    "hyp3_method": "GET /user",
+    "hyp3_host": "hyp3-api.asf.alaska.edu",
+    "redirect_following": false,
+    "token_or_credentials_in_argv_environment_or_files": false,
+    "optional_existing_token_route_preserved": true
+  },
+  "assertions": {
+    "account_or_job_request_performed": false,
+    "token_or_credentials_read_or_recorded": false,
+    "source_or_derived_pixels_read": false,
+    "full_rtc_job_or_product_implementation_complete": false,
+    "final_no_content_preflight_still_required": true
+  },
+  "released_action": "After this gate itself passes public CI and a fresh final no-content preflight, the owner may opt into one secret-safe Earthdata token retrieval-or-creation and read-only HyP3 Basic capacity check. No job, credit use, product acquisition, pixel read, or map claim is released."
+}
