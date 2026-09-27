@@ -1,0 +1,31 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-FIRST-PRODUCT-AVAILABLE-001",
+  "observed_at_utc": "2026-09-27T17:19:18Z",
+  "status": "provider_ui_product_available_api_status_unverified",
+  "source_id": "M1-SRC-002",
+  "job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+  "source_granule": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB",
+  "product_filename": "S1D_IW_20260816T122141_DVP_RTC10_G_gpuned_944C.zip",
+  "observations": {
+    "asf_vertex_exact_job_tab": "One RTC_GAMMA product ZIP is listed for the exact job, with the reviewed processing settings, 60-credit cost, and a 14-day expiry label. A completion toast appeared before refresh.",
+    "asf_vertex_displayed_size": "9.57 GB",
+    "anonymous_exact_job_api_get_http_status": 401,
+    "product_url_host_category": "cloudfront.net",
+    "product_url_query_present": false,
+    "product_head_http_status": 200,
+    "product_head_content_type": "application/zip",
+    "product_head_content_length_bytes": 9574123274,
+    "product_head_content_encoding_present": false,
+    "product_head_content_range_present": false,
+    "product_head_redirected": false
+  },
+  "limits": {
+    "authenticated_provider_api_status_observed": false,
+    "provider_archive_bytes_downloaded": false,
+    "archive_integrity_verified": false,
+    "geotiff_headers_or_pixels_read": false,
+    "pixel_qa_pass": false,
+    "map_ready": false
+  },
+  "next_gate": "A separately published exact no-content execution preflight must pass before owner-controlled credentials. The acquisition worker must authenticate and verify exact API status SUCCEEDED, job identity, settings, and single-file descriptor before one ZIP GET. This UI and HEAD observation alone does not prove container integrity or pixel fitness."
+}

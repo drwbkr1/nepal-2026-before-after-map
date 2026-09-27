@@ -15,6 +15,7 @@ from zipfile import ZIP_STORED, ZipFile, ZipInfo
 
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+import m2_asf_hyp3_rtc_acquire_first_001 as acquire_module  # noqa: E402
 from m2_asf_hyp3_rtc_core_001 import ORDER, RouteStop, load_approved_jobs, one_job_payload  # noqa: E402
 from m2_asf_hyp3_rtc_http_transfer_001 import (  # noqa: E402
     fetch_first_descriptor_once, transfer_first_zip_once,
@@ -92,6 +93,77 @@ class FakeConnection:
 
 
 class ZipScreenTests(unittest.TestCase):
+    def test_release_accepts_ui_availability_only_when_api_success_remains_runtime_guarded(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "repo"
+            data = Path(temp) / "custody"
+            data.mkdir()
+            attempt = data / "m2-asf-hyp3-rtc-acquire-first-001" / "attempt-001"
+            approved = load_approved_jobs()
+            expected = one_job_payload(approved, ORDER[0])["jobs"][0]
+            submission = {
+                **expected, "status": "submitted_product_unverified",
+                "source_id": ORDER[0], "job_id": EXACT_JOB_ID,
+                "credentials_recorded": False, "product_bytes_verified": False,
+                "pixel_qa_pass": False,
+            }
+            digest = lambda path: hashlib.sha256(str(path).encode()).hexdigest()
+            gate = {
+                "status": "pass_acquire_first_implementation_public_ci_only",
+                "public_ci": {"conclusion": "success"},
+                "bindings": {
+                    "approval_sha256": digest(root / acquire_module.APPROVAL_REF),
+                    "source_gate_sha256": digest(root / acquire_module.SOURCE_GATE_REF),
+                    "submission_terminal_sha256": digest(data / acquire_module.SUBMISSION_REF),
+                    "implementation_file_sha256": {
+                        ref: digest(root / ref) for ref in acquire_module.IMPLEMENTATION_FILES
+                    },
+                },
+            }
+            preflight = {
+                "status": "pass_first_product_no_content_preflight",
+                "bindings": {
+                    "implementation_gate_sha256": digest(root / acquire_module.GATE_REF),
+                    "submission_terminal_sha256": digest(data / acquire_module.SUBMISSION_REF),
+                    "product_observation_sha256": digest(root / acquire_module.PRODUCT_OBSERVATION_REF),
+                },
+                "assertions": {
+                    "provider_completion_indicated": True,
+                    "provider_api_status_verified": False,
+                    "exact_job_id": EXACT_JOB_ID,
+                    "attempt_root_absent": True,
+                    "destination_collision_absent": True,
+                    "no_product_payload_or_pixel_read": True,
+                },
+            }
+            observation = {
+                "status": "provider_ui_product_available_api_status_unverified",
+                "source_id": ORDER[0], "job_id": EXACT_JOB_ID,
+            }
+            source = {
+                "decision": {"status": "ready"},
+                "authority": {"authority_ref": acquire_module.APPROVAL_REF},
+            }
+            records = {
+                root / acquire_module.GATE_REF: gate,
+                root / acquire_module.PREFLIGHT_REF: preflight,
+                root / acquire_module.PRODUCT_OBSERVATION_REF: observation,
+                root / acquire_module.SOURCE_GATE_REF: source,
+                data / acquire_module.SUBMISSION_REF: submission,
+            }
+            with (patch.object(acquire_module, "_read_json", side_effect=lambda path: records[path]),
+                  patch.object(acquire_module, "_sha", side_effect=digest),
+                  patch.object(acquire_module, "_safe_directory", return_value=True),
+                  patch.object(acquire_module, "load_approved_jobs", return_value=approved)):
+                self.assertEqual(acquire_module.require_acquisition_release(root, data, attempt), submission)
+                preflight["assertions"]["provider_completion_indicated"] = False
+                with self.assertRaisesRegex(RouteStop, "rtc_acquire_not_released"):
+                    acquire_module.require_acquisition_release(root, data, attempt)
+                preflight["assertions"]["provider_completion_indicated"] = True
+                preflight["assertions"]["no_product_payload_or_pixel_read"] = False
+                with self.assertRaisesRegex(RouteStop, "rtc_acquire_not_released"):
+                    acquire_module.require_acquisition_release(root, data, attempt)
+
     def test_acquisition_receipts_are_append_only_and_do_not_expose_url(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

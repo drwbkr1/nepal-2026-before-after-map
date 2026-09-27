@@ -36,8 +36,9 @@ SUBMISSION_REF = "m2-asf-hyp3-rtc-submit-first-001/attempt-001/terminal.json"
 ATTEMPT_ROOT = DATA_ROOT / "m2-asf-hyp3-rtc-acquire-first-001" / "attempt-001"
 PRODUCT_DIR = DATA_ROOT / "m2-asf-hyp3-rtc-products-001"
 SOURCE_GATE_REF = "records/source-gates/m2-asf-hyp3-rtc-processing-source-gate-001.json"
-GATE_REF = "records/readiness/m2-asf-hyp3-rtc-acquire-first-implementation-gate-002.json"
+GATE_REF = "records/readiness/m2-asf-hyp3-rtc-acquire-first-implementation-gate-003.json"
 PREFLIGHT_REF = "records/readiness/m2-asf-hyp3-rtc-acquire-first-execution-preflight-001.json"
+PRODUCT_OBSERVATION_REF = "records/observations/m2-asf-hyp3-rtc-first-product-available-001.json"
 IMPLEMENTATION_FILES = (
     "scripts/m2_asf_hyp3_rtc_http_transfer_001.py",
     "scripts/m2_asf_hyp3_rtc_acquire_first_001.py",
@@ -90,6 +91,7 @@ def require_acquisition_release(
     """Check exact approved job and published implementation before stdin."""
     gate = _read_json(root / GATE_REF)
     preflight = _read_json(root / PREFLIGHT_REF)
+    observation = _read_json(root / PRODUCT_OBSERVATION_REF)
     source = _read_json(root / SOURCE_GATE_REF)
     submission_path = data_root / SUBMISSION_REF
     if (
@@ -113,11 +115,16 @@ def require_acquisition_release(
         or preflight.get("status") != "pass_first_product_no_content_preflight"
         or preflight.get("bindings", {}).get("implementation_gate_sha256") != _sha(root / GATE_REF)
         or preflight.get("bindings", {}).get("submission_terminal_sha256") != _sha(submission_path)
-        or preflight.get("assertions", {}).get("provider_status") != "SUCCEEDED"
+        or preflight.get("bindings", {}).get("product_observation_sha256") != _sha(root / PRODUCT_OBSERVATION_REF)
+        or observation.get("status") != "provider_ui_product_available_api_status_unverified"
+        or observation.get("source_id") != SOURCE_ID
+        or observation.get("job_id") != EXACT_JOB_ID
+        or preflight.get("assertions", {}).get("provider_completion_indicated") is not True
+        or preflight.get("assertions", {}).get("provider_api_status_verified") is not False
         or preflight.get("assertions", {}).get("exact_job_id") != EXACT_JOB_ID
         or preflight.get("assertions", {}).get("attempt_root_absent") is not True
         or preflight.get("assertions", {}).get("destination_collision_absent") is not True
-        or preflight.get("assertions", {}).get("no_network_or_pixel_read") is not True
+        or preflight.get("assertions", {}).get("no_product_payload_or_pixel_read") is not True
         or source.get("decision", {}).get("status") != "ready"
         or source.get("authority", {}).get("authority_ref") != APPROVAL_REF
         or submission.get("status") != "submitted_product_unverified"
