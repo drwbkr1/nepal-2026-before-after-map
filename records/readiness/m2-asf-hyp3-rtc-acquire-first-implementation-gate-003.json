@@ -1,0 +1,44 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-ACQUIRE-FIRST-IMPLEMENTATION-GATE-003",
+  "checked_at_utc": "2026-09-27T17:22:49Z",
+  "status": "pass_acquire_first_implementation_public_ci_only",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+  "supersedes": {
+    "ref": "records/readiness/m2-asf-hyp3-rtc-acquire-first-implementation-gate-002.json",
+    "sha256": "dda46cb9bef2425c9e29d24bbaa81ab44d07145c51c423b3b5824ccffb349dc0",
+    "reason": "The earlier gate required a verified authenticated API SUCCEEDED status before credential handoff, while the anonymous exact-job API returns 401. The corrected worker accepts only a bound ASF UI product-availability observation before credentials and still requires exact authenticated SUCCEEDED before a ZIP GET."
+  },
+  "bindings": {
+    "approval_sha256": "1c3103429418f1c1847fa5865f5634b6dece7acd8cd19e42a279537709087596",
+    "source_gate_sha256": "7f1af5e46f9b1cba3753383b686a68618c7694b53a4be07d612b6df6045bd8a4",
+    "submission_terminal_sha256": "91bb47018b99450111153e8ffd101346eddadd1370578000ef44d7929102870c",
+    "product_observation_sha256": "b3bee04fa7af030b85ca8b43b8b0a6c3376272ae292de2d277a1f66420cab8dd",
+    "implementation_commit_sha": "7c55ec3f34347b472d3e349ee6a9c33abb60d920",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_http_transfer_001.py": "b1f961ec0e1cf35f3066349ab7c976c0d1066bed0c0766bcdf42c1e983d70359",
+      "scripts/m2_asf_hyp3_rtc_acquire_first_001.py": "5c17521e739a4a9db15d9fa01bad3f7a8f6315f21ba35f81a67df0059e40cbc8",
+      "scripts/invoke_m2_asf_hyp3_rtc_acquire_first_001.ps1": "4f62ee0bf61d96b1bc264354df1c906affca39570a3c8970f47c2a15e32022ad",
+      "scripts/m2_asf_hyp3_rtc_transfer_core_001.py": "39388fb32297c7457686c7a1b9ac9783f9233e20a08e0343d1f03bfd51c29c4e",
+      "tests/test_m2_asf_hyp3_rtc_zip_core_001.py": "33f1c5f865bd2fea725ade26712cb059f405a319609ed08f6771a9aaf00a4e79"
+    }
+  },
+  "public_ci": {
+    "run_id": 36336639150,
+    "head_sha": "7c55ec3f34347b472d3e349ee6a9c33abb60d920",
+    "conclusion": "success"
+  },
+  "local_checks": {
+    "focused_synthetic_tests": 14,
+    "full_repository_tests": 967,
+    "full_repository_skips": 6,
+    "project_controls": "pass_1463_required_files"
+  },
+  "assertions": {
+    "ui_product_availability_observed": true,
+    "anonymous_api_status_verified": false,
+    "product_payload_bytes_acquired": false,
+    "pixel_qa_pass": false,
+    "real_acquisition_released_now": false
+  },
+  "release_condition": "Publish this exact gate and require its own successful public default-branch CI. Then publish a fresh no-content preflight binding this gate, the immutable submission and UI/HEAD observation, narrow rights, safe capacity, and absence of attempt/destination collisions. Only then may the owner-controlled secret-safe handoff make one authenticated exact-job status GET and, only if that response is SUCCEEDED with the exact reviewed descriptor, one allowed-host ZIP GET. No automatic retry, M1-SRC-005 request, pixel or scientific action follows from this gate alone."
+}
