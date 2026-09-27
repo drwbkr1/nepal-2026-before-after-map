@@ -1,0 +1,29 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-PRODUCT-PIXEL-001-EXECUTION-PREFLIGHT",
+  "checked_at_utc": "2026-09-27T19:14:28Z",
+  "status": "pass_product_pixel_no_content_preflight",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+  "bindings": {
+    "implementation_gate_sha256": "04b0114c73009797c6500d807999c8aeed42404a0023c8743bb287c41c0a18a0",
+    "implementation_gate_public_ci_run_id": 36343590118,
+    "implementation_gate_public_ci_head_sha": "0a32bf6df2e7a353d5b147a96f43096f15fbf0e6",
+    "header_terminal_sha256": "a90db1ee3a2a73802640ff4bd0933dcbb45a125104403d44ef1d7c1932d4fdd5",
+    "acquisition_terminal_sha256": "3261283cb1c32d9633af45437eeb33c43cf504e06764a71174c67421ad40c02c",
+    "source_id": "M1-SRC-002",
+    "job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+    "product_filename": "S1D_IW_20260816T122141_DVP_RTC10_G_gpuned_944C.zip",
+    "archive_size_bytes": 9574123274,
+    "aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "pixel_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"
+  },
+  "assertions": {
+    "header_terminal_pass_for_local_pixel_QA_only": true,
+    "exact_source_rights_for_local_radar_review": true,
+    "archive_exists_with_exact_name_and_size": true,
+    "archive_path_is_not_reparse_point": true,
+    "attempt_absent": true,
+    "no_product_pixels_read": true,
+    "no_new_job_or_network_request": true
+  },
+  "release_scope": "Only after this exact preflight passes public default-branch CI, run one new append-only M1-SRC-002 pixel attempt in the installed ArcGIS Python environment. Rehash the exact archive and read only VV, VH, and layover/shadow windows for AOI-SOURCE and AOI-UPPER-CORRIDOR. Apply the frozen 99 percent coverage and 80 percent usable-area predicates with the product's exact mask codes. Any failed or indeterminate AOI stops before M1-SRC-005. No DEM pixel, registration, new job before source QA pass, map, baseline, change, attribution, or scientific publication is released by this preflight."
+}
