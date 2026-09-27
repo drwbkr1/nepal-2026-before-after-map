@@ -1,0 +1,35 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-ACQUIRE-FIRST-EXECUTION-PREFLIGHT-001",
+  "checked_at_utc": "2026-09-27T17:23:56Z",
+  "status": "pass_first_product_no_content_preflight",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+  "bindings": {
+    "implementation_gate_sha256": "f4a688fc3a40dc5921a652c6ca815a6c9b6a0bed3703bb89798a32cff39a1655",
+    "submission_terminal_sha256": "91bb47018b99450111153e8ffd101346eddadd1370578000ef44d7929102870c",
+    "product_observation_sha256": "b3bee04fa7af030b85ca8b43b8b0a6c3376272ae292de2d277a1f66420cab8dd",
+    "source_gate_sha256": "7f1af5e46f9b1cba3753383b686a68618c7694b53a4be07d612b6df6045bd8a4",
+    "gate_commit_sha": "6d72167a03b46f62aa269c41b21d9279724bef8a",
+    "gate_public_ci_run_id": 36336738509,
+    "gate_public_ci_conclusion": "success"
+  },
+  "assertions": {
+    "provider_completion_indicated": true,
+    "provider_api_status_verified": false,
+    "exact_job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+    "source_id": "M1-SRC-002",
+    "attempt_root_absent": true,
+    "destination_collision_absent": true,
+    "data_root_safe_non_reparse": true,
+    "product_directory_exists": false,
+    "free_bytes": 393258377216,
+    "observed_archive_length_bytes": 9574123274,
+    "free_space_exceeds_three_archive_copies_plus_one_gib": true,
+    "narrow_local_product_inspection_rights_ready": true,
+    "metadata_only_product_head_performed": true,
+    "no_product_payload_or_pixel_read": true,
+    "credential_read_or_recorded_by_preflight": false,
+    "new_job_submitted_by_preflight": false
+  },
+  "release_scope": "After this preflight passes public CI, the owner may run one secret-safe credential handoff. The worker makes at most one authenticated GET of the exact job status and, only if that API response proves SUCCEEDED with the exact source, settings, and single-file descriptor, one allowed-host GET of the exact ZIP. It stages, hashes, ZIP-checks, and conditionally promotes without replacement. No automatic retry, next job, raster pixel read, change analysis, or scientific publication is released.",
+  "claim_boundary": "ASF Vertex and a metadata-only HEAD indicate a downloadable product, but the API status has not yet been authenticated, and no archive bytes, CRC, source README, GeoTIFF pixels, or AOI coverage have been verified."
+}
