@@ -1,12 +1,12 @@
 {
   "record_id": "NEPAL-M2-ASF-HYP3-RTC-PRODUCT-METADATA-001-EXECUTION-PREFLIGHT",
-  "checked_at_utc": "2026-09-27T18:49:53Z",
+  "checked_at_utc": "2026-09-27T18:52:13Z",
   "status": "pass_product_metadata_no_content_preflight",
   "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
   "bindings": {
-    "implementation_gate_sha256": "5804603d5d55f493d2b385c33a978d9585ee388a58cb9938270faf5bbc964360",
-    "implementation_gate_public_ci_run_id": 36342060918,
-    "implementation_gate_public_ci_head_sha": "0514327f15ee7092a64afebacacaac9c9df12c09",
+    "implementation_gate_sha256": "2757c8bd770963b7d0248d8793cee4aac960fd6e9772fa830caf50ae7f5f4c1a",
+    "implementation_gate_public_ci_run_id": 36342200132,
+    "implementation_gate_public_ci_head_sha": "0b76f78479a76cc4b197d3962a65864e0faa55f4",
     "composite_terminal_sha256": "cf3eae1d78aab736383f007fd4eebde6872c51f21c52831db5594085389a2401",
     "acquisition_terminal_sha256": "3261283cb1c32d9633af45437eeb33c43cf504e06764a71174c67421ad40c02c",
     "source_id": "M1-SRC-002",
