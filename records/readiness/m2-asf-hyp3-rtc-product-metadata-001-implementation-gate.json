@@ -9,7 +9,7 @@
     "implementation_commit_sha": "b6c6686f7423e74fd4038691e1a9f81b4dbd6165",
     "implementation_file_sha256": {
       "scripts/m2_asf_hyp3_rtc_product_metadata_001.py": "4cffaa999d8aaf4600f0df90c795bc7bdaeba5320ee4fc3ba1f6eeebad5b730e",
-      "tests/test_m2_asf_hyp3_rtc_product_metadata_001.py": "8744e0febb65df958fe4c68ac154f2f1d162a8efb3d60d023e03bb7ecca6eae"
+      "tests/test_m2_asf_hyp3_rtc_product_metadata_001.py": "8744e0febb65df958fe4c68ac154f2f1d162a8efb3d60d023e03bb7eccca6eae"
     }
   },
   "public_ci": {
