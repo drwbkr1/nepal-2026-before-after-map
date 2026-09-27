@@ -1,0 +1,30 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-PRODUCT-HEADER-001-IMPLEMENTATION-GATE",
+  "checked_at_utc": "2026-09-27T19:02:09Z",
+  "status": "pass_product_header_implementation_public_ci_only",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+  "bindings": {
+    "approval_sha256": "11b17a520a1661e7b154fa69de2369369ede94eb79f1dbbebf7c2e9560763c97",
+    "source_gate_sha256": "7f1af5e46f9b1cba3753383b686a68618c7694b53a4be07d612b6df6045bd8a4",
+    "metadata_review_sha256": "52f98a918cd52fa3abc5abb9116537f837656ead858fbfb9b30f2bec030aee79",
+    "implementation_commit_sha": "983360cf2f573caac639ae2cbea8086e98cbd223",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_product_header_001.py": "a144a626cb26eb1694273e7e52f239fa6db2bff537b1041bd86bcb822a278931",
+      "tests/test_m2_asf_hyp3_rtc_product_header_001.py": "3e77f340f45908ab238ecd56ef641f82c77e9b43d9c449041bcc16b42969cad2",
+      "scripts/validate_m2_asf_hyp3_rtc_vsi_header_synthetic_001.py": "68af9273d01d58d84e91ea2d3b1776403f43e57661e09f63bb8aadea419ac22b"
+    }
+  },
+  "public_ci": {
+    "run_id": 36342815534,
+    "head_sha": "983360cf2f573caac639ae2cbea8086e98cbd223",
+    "conclusion": "success"
+  },
+  "local_checks": {
+    "portable_disposable_header_tests": 3,
+    "installed_arcgis_vsi_disposable_rasters": 6,
+    "repository_tests": 983,
+    "repository_skips": 6,
+    "project_controls": "pass_1474_required_files"
+  },
+  "release_scope": "Implementation only. Publish this gate to public CI, then publish a fresh no-content preflight binding exact metadata and acquisition receipts, preserved archive identity and path safety, and absence of the new header attempt. Only on both gates passing may one append-only, read-only six-raster GeoTIFF-header inspection run in the installed ArcGIS Python environment. No raster pixel, next job, map, baseline, change, or scientific claim is released."
+}
