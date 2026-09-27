@@ -1,0 +1,39 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-PRODUCT-HEADER-001-TERMINAL-RECONCILIATION",
+  "checked_at_utc": "2026-09-27T19:04:44Z",
+  "status": "pass_actual_headers_for_local_pixel_qa_only",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+  "bindings": {
+    "source_id": "M1-SRC-002",
+    "job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+    "product_filename": "S1D_IW_20260816T122141_DVP_RTC10_G_gpuned_944C.zip",
+    "preflight_public_ci_run_id": 36342954382,
+    "preflight_public_ci_head_sha": "fb159602bf264ebc14acc06145c12b06641b9cdc",
+    "non_git_started_sha256": "5d01c61274046997887426cf5ca2f1f1c333bca08161d98cc86c47377963ca5e",
+    "non_git_terminal_sha256": "a90db1ee3a2a73802640ff4bd0933dcbb45a125104403d44ef1d7c1932d4fdd5",
+    "archive_sha256": "82ca5a9e7c77dd1e28c15eb64f93e5a408ec53b81b5df3fda64bf47c286dc6d3"
+  },
+  "observations": {
+    "one_distinct_attempt_consumed": true,
+    "exact_six_raster_roles": ["VV", "VH", "layover_shadow", "DEM", "incidence", "scattering_area"],
+    "six_single_band_headers_same_projected_grid": true,
+    "spatial_reference_semantically_matches_EPSG_32645": true,
+    "cell_size_m": 10.0,
+    "width_pixels": 29360,
+    "height_pixels": 21199,
+    "extent_epsg_32645_m": [192030.0, 3054850.0, 485630.0, 3266840.0],
+    "VV_VH_incidence_scattering_area_type": "Float32",
+    "layover_shadow_type": "Byte",
+    "DEM_type": "Int16",
+    "archive_rehashed_before_header_read": true,
+    "archive_mutated": false,
+    "pixel_values_read": false,
+    "AOI_coverage_measured": false,
+    "mask_distribution_measured": false,
+    "registration_measured": false,
+    "pixel_qa_pass": false,
+    "arcgis_map_ready": false,
+    "next_job_submitted": false
+  },
+  "disposition": "The exact first ASF RTC product's six real GeoTIFF headers pass the frozen projected-grid and raster-type screen. This releases only separately implemented and publicly gated local pixel QA of M1-SRC-002 under the existing owner envelope. It does not establish usable AOI pixels, provider mask distribution, registration, map readiness, baseline admission, change analysis, attribution, derived-pixel publication, or scientific publication."
+}
