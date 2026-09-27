@@ -1621,6 +1621,7 @@ REQUIRED = [
     "scripts/m2_asf_hyp3_rtc_composite_provenance_001.py",
     "tests/test_m2_asf_hyp3_rtc_composite_provenance_001.py",
     "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-implementation-readiness.json",
+    "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-implementation-gate.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -1720,6 +1721,18 @@ def main() -> None:
         or composite_readiness.get("assertions", {}).get("real_composite_attempt_released_now") is not False
     ):
         fail("M2 ASF HyP3 RTC composite implementation readiness differs")
+    composite_gate = json.loads((ROOT / "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-implementation-gate.json").read_text(encoding="utf-8"))
+    if (
+        composite_gate.get("status") != "pass_composite_implementation_public_ci_only"
+        or composite_gate.get("bindings", {}).get("amendment_approval_sha256") != sha256(amendment_approval_ref)
+        or composite_gate.get("bindings", {}).get("implementation_file_sha256")
+        != composite_readiness.get("bindings", {}).get("implementation_file_sha256")
+        or composite_gate.get("public_ci", {}).get("conclusion") != "success"
+        or composite_gate.get("public_ci", {}).get("head_sha")
+        != composite_gate.get("bindings", {}).get("implementation_commit_sha")
+        or composite_gate.get("assertions", {}).get("real_composite_evaluation_released_now") is not False
+    ):
+        fail("M2 ASF HyP3 RTC composite implementation gate differs")
 
     recovery_proposal_ref = "contracts/milestone-002-radar-event-area-pair-grid-provenance-recovery-001-proposal.json"
     recovery_bundle_ref = "reviews/m2-radar-event-area-pair-grid-provenance-recovery-001/review-bundle.json"

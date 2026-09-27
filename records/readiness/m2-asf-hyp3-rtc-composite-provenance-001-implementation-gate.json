@@ -1,0 +1,28 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-COMPOSITE-PROVENANCE-001-IMPLEMENTATION-GATE",
+  "checked_at_utc": "2026-09-27T18:37:27Z",
+  "status": "pass_composite_implementation_public_ci_only",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+  "bindings": {
+    "amendment_approval_sha256": "11b17a520a1661e7b154fa69de2369369ede94eb79f1dbbebf7c2e9560763c97",
+    "implementation_commit_sha": "15166bb60714e3a03f5e35c4cf550382466208d5",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_composite_provenance_core_001.py": "c3b4e5837b548b8027341bb82adb8a561a410deaecbb22ae5c9f4101778918a0",
+      "scripts/m2_asf_hyp3_rtc_composite_provenance_001.py": "0e82b1bb4ac10a330453d643bc74cba0158e291c258ddf09a0514484515bffeb",
+      "tests/test_m2_asf_hyp3_rtc_composite_provenance_001.py": "b2c10c61c1672084768686a6b984bf2fe1e3c63236bfc9fdbfbf3ded7588195f"
+    }
+  },
+  "public_ci": {
+    "run_id": 36341297247,
+    "head_sha": "15166bb60714e3a03f5e35c4cf550382466208d5",
+    "conclusion": "success"
+  },
+  "assertions": {
+    "old_readme_terminal_preserved_deferred": true,
+    "synthetic_secret_safe_receipt_tests_passed": true,
+    "provider_archive_opened": false,
+    "raster_pixels_read": false,
+    "real_composite_evaluation_released_now": false
+  },
+  "release_condition": "Publish this exact gate and require its own successful public default-branch CI. Then publish a fresh no-content preflight binding the gate, exact receipt bytes and archive path metadata, and absence of a composite attempt. Only after the preflight's own successful public CI may one distinct receipt-only evaluation run. No ZIP payload, raster header, or pixel read, new job, or map action follows from this gate alone."
+}
