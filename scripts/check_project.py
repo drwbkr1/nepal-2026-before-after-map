@@ -1617,6 +1617,10 @@ REQUIRED = [
     "docs/M2_ASF_HYP3_RTC_PROVENANCE_RULE_AMENDMENT_001_REVIEW.md",
     "reviews/m2-asf-hyp3-rtc-provenance-rule-amendment-001/review-bundle.json",
     "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+    "scripts/m2_asf_hyp3_rtc_composite_provenance_core_001.py",
+    "scripts/m2_asf_hyp3_rtc_composite_provenance_001.py",
+    "tests/test_m2_asf_hyp3_rtc_composite_provenance_001.py",
+    "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-implementation-readiness.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -1699,6 +1703,23 @@ def main() -> None:
         or amendment_approval.get("authority", {}).get("old_readme_attempt_reuse_resume_retry_or_mutation") is not False
     ):
         fail("M2 ASF HyP3 RTC provenance amendment packet or approval differs")
+    composite_readiness = json.loads((ROOT / "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-implementation-readiness.json").read_text(encoding="utf-8"))
+    if (
+        composite_readiness.get("status") != "pass_local_synthetic_implementation_public_ci_pending"
+        or composite_readiness.get("bindings", {}).get("approval_sha256") != sha256(amendment_approval_ref)
+        or any(
+            sha256(ref) != digest
+            for ref, digest in composite_readiness.get("bindings", {}).get("implementation_file_sha256", {}).items()
+        )
+        or set(composite_readiness.get("bindings", {}).get("implementation_file_sha256", {})) != {
+            "scripts/m2_asf_hyp3_rtc_composite_provenance_core_001.py",
+            "scripts/m2_asf_hyp3_rtc_composite_provenance_001.py",
+            "tests/test_m2_asf_hyp3_rtc_composite_provenance_001.py",
+        }
+        or composite_readiness.get("assertions", {}).get("provider_product_archive_opened") is not False
+        or composite_readiness.get("assertions", {}).get("real_composite_attempt_released_now") is not False
+    ):
+        fail("M2 ASF HyP3 RTC composite implementation readiness differs")
 
     recovery_proposal_ref = "contracts/milestone-002-radar-event-area-pair-grid-provenance-recovery-001-proposal.json"
     recovery_bundle_ref = "reviews/m2-radar-event-area-pair-grid-provenance-recovery-001/review-bundle.json"

@@ -1,0 +1,30 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-COMPOSITE-PROVENANCE-001-IMPLEMENTATION-READINESS",
+  "checked_at_utc": "2026-09-27T18:36:00Z",
+  "status": "pass_local_synthetic_implementation_public_ci_pending",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+  "bindings": {
+    "approval_sha256": "11b17a520a1661e7b154fa69de2369369ede94eb79f1dbbebf7c2e9560763c97",
+    "packet_public_ci_run_id": 36340918835,
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_composite_provenance_core_001.py": "c3b4e5837b548b8027341bb82adb8a561a410deaecbb22ae5c9f4101778918a0",
+      "scripts/m2_asf_hyp3_rtc_composite_provenance_001.py": "0e82b1bb4ac10a330453d643bc74cba0158e291c258ddf09a0514484515bffeb",
+      "tests/test_m2_asf_hyp3_rtc_composite_provenance_001.py": "b2c10c61c1672084768686a6b984bf2fe1e3c63236bfc9fdbfbf3ded7588195f"
+    }
+  },
+  "local_checks": {
+    "focused_synthetic_tests": 4,
+    "full_repository_tests": 976,
+    "full_repository_skips": 6,
+    "project_controls": "pass_1470_required_files",
+    "py_compile": "pass"
+  },
+  "assertions": {
+    "old_readme_rule_or_terminal_mutated": false,
+    "provider_product_archive_opened": false,
+    "raster_header_or_pixels_read": false,
+    "new_job_or_network_request": false,
+    "real_composite_attempt_released_now": false
+  },
+  "release_condition": "Publish exact implementation and this readiness record to public default-branch CI. Only after that CI passes, publish a gate binding its exact commit and file hashes, require that gate's own successful public CI, then publish a fresh no-content preflight binding the exact non-Git receipts and absence of the composite attempt. Only then run one append-only receipt-only composite evaluation. No ZIP payload or pixel read, next job, map, or scientific claim is released by this readiness alone."
+}
