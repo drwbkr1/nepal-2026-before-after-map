@@ -1,0 +1,28 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-COMPOSITE-PROVENANCE-001-TERMINAL-RECONCILIATION",
+  "checked_at_utc": "2026-09-27T18:40:25Z",
+  "status": "pass_composite_provenance_for_local_qa_only",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+  "bindings": {
+    "source_id": "M1-SRC-002",
+    "job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+    "preflight_public_ci_run_id": 36341462336,
+    "preflight_public_ci_head_sha": "4516be7422cc64e25c4b1f08b3a2701d36b9821b",
+    "preflight_sha256": "cae18c93806fc1b6e5fe4dcfe522eeb879688906702bd58e4343c3d8e7f095d9",
+    "non_git_started_sha256": "b1750d23e4c377a2140af606d7415943e8222959c0f81c06c4a703f1412cbd8f",
+    "non_git_terminal_sha256": "cf3eae1d78aab736383f007fd4eebde6872c51f21c52831db5594085389a2401",
+    "archive_sha256_from_preserved_acquisition": "82ca5a9e7c77dd1e28c15eb64f93e5a408ec53b81b5df3fda64bf47c286dc6d3",
+    "readme_sha256_from_preserved_probe": "1c387e54051d6d585a49ed9f09342c1d85e2f038ef9b7af5b7d01eb1ea295fad"
+  },
+  "observations": {
+    "one_distinct_attempt_consumed": true,
+    "old_readme_status_preserved": "defer_readme_source_text_review",
+    "missing_readme_product_base_warning": true,
+    "product_payload_read_by_evaluation": false,
+    "raster_pixels_read": false,
+    "pixel_qa_pass": false,
+    "arcgis_map_ready": false,
+    "new_job_or_network_request": false
+  },
+  "disposition": "The approved composite rule passed for the exact first RTC product, using only immutable receipt data and current path metadata. It permits subsequent local product metadata and pixel QA only after their separate implementation, public-CI, source-rights, and no-content gates. The old literal README result remains terminal defer. This is not pixel fitness, AOI coverage, registration, map readiness, baseline admission, change analysis, attribution, or scientific publication."
+}

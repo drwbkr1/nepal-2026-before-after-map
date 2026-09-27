@@ -1623,6 +1623,7 @@ REQUIRED = [
     "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-implementation-readiness.json",
     "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-implementation-gate.json",
     "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-execution-preflight.json",
+    "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-terminal-reconciliation.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -1745,6 +1746,19 @@ def main() -> None:
         or composite_preflight.get("assertions", {}).get("old_readme_result_remains_deferred") is not True
     ):
         fail("M2 ASF HyP3 RTC composite no-content preflight differs")
+    composite_terminal = json.loads((ROOT / "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-terminal-reconciliation.json").read_text(encoding="utf-8"))
+    if (
+        composite_terminal.get("status") != "pass_composite_provenance_for_local_qa_only"
+        or composite_terminal.get("bindings", {}).get("preflight_sha256")
+        != sha256("records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-execution-preflight.json")
+        or composite_terminal.get("observations", {}).get("old_readme_status_preserved")
+        != "defer_readme_source_text_review"
+        or composite_terminal.get("observations", {}).get("missing_readme_product_base_warning") is not True
+        or composite_terminal.get("observations", {}).get("product_payload_read_by_evaluation") is not False
+        or composite_terminal.get("observations", {}).get("pixel_qa_pass") is not False
+        or composite_terminal.get("observations", {}).get("arcgis_map_ready") is not False
+    ):
+        fail("M2 ASF HyP3 RTC composite terminal reconciliation differs")
 
     recovery_proposal_ref = "contracts/milestone-002-radar-event-area-pair-grid-provenance-recovery-001-proposal.json"
     recovery_bundle_ref = "reviews/m2-radar-event-area-pair-grid-provenance-recovery-001/review-bundle.json"
