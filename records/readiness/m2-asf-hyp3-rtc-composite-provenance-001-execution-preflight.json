@@ -1,0 +1,27 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-COMPOSITE-PROVENANCE-001-EXECUTION-PREFLIGHT",
+  "checked_at_utc": "2026-09-27T18:38:47Z",
+  "status": "pass_composite_no_content_preflight",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+  "bindings": {
+    "implementation_gate_sha256": "e6eb808295b7bb3022f25690d59d883ec94938eaf0f26a53135a231f08e77776",
+    "submission_sha256": "91bb47018b99450111153e8ffd101346eddadd1370578000ef44d7929102870c",
+    "descriptor_sha256": "36b00c1423c6ec7f07839deffbf3b15b1a774f229110b9a28d80f0a5c48ed559",
+    "acquisition_sha256": "3261283cb1c32d9633af45437eeb33c43cf504e06764a71174c67421ad40c02c",
+    "readme_sha256": "1659f4a4f682ed5834f8270e4a510939fabe0ca8203c45793a8832c03362cae7",
+    "source_id": "M1-SRC-002",
+    "job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+    "product_filename": "S1D_IW_20260816T122141_DVP_RTC10_G_gpuned_944C.zip",
+    "archive_size_bytes": 9574123274
+  },
+  "assertions": {
+    "source_gate_current_status_ready": true,
+    "archive_exists_with_exact_name_and_size": true,
+    "archive_path_is_not_reparse_point": true,
+    "attempt_absent": true,
+    "no_product_payload_or_pixel_read": true,
+    "no_network_request_or_credentials_used": true,
+    "old_readme_result_remains_deferred": true
+  },
+  "release_scope": "After this exact preflight passes public default-branch CI, one distinct append-only evaluation may read only the four exact sanitized receipt JSON files and frozen repository controls. It may stat, but never open, the exact promoted ZIP. No retry, raster header or pixel read, next job, map, baseline, change analysis, attribution, or scientific publication is released by this preflight alone."
+}

@@ -1622,6 +1622,7 @@ REQUIRED = [
     "tests/test_m2_asf_hyp3_rtc_composite_provenance_001.py",
     "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-implementation-readiness.json",
     "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-implementation-gate.json",
+    "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-execution-preflight.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -1733,6 +1734,17 @@ def main() -> None:
         or composite_gate.get("assertions", {}).get("real_composite_evaluation_released_now") is not False
     ):
         fail("M2 ASF HyP3 RTC composite implementation gate differs")
+    composite_preflight = json.loads((ROOT / "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-execution-preflight.json").read_text(encoding="utf-8"))
+    if (
+        composite_preflight.get("status") != "pass_composite_no_content_preflight"
+        or composite_preflight.get("bindings", {}).get("implementation_gate_sha256")
+        != sha256("records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-implementation-gate.json")
+        or composite_preflight.get("bindings", {}).get("source_id") != "M1-SRC-002"
+        or composite_preflight.get("assertions", {}).get("attempt_absent") is not True
+        or composite_preflight.get("assertions", {}).get("no_product_payload_or_pixel_read") is not True
+        or composite_preflight.get("assertions", {}).get("old_readme_result_remains_deferred") is not True
+    ):
+        fail("M2 ASF HyP3 RTC composite no-content preflight differs")
 
     recovery_proposal_ref = "contracts/milestone-002-radar-event-area-pair-grid-provenance-recovery-001-proposal.json"
     recovery_bundle_ref = "reviews/m2-radar-event-area-pair-grid-provenance-recovery-001/review-bundle.json"
