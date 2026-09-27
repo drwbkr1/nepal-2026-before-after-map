@@ -1613,6 +1613,10 @@ REQUIRED = [
     "records/processing/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-terminal.json",
     "records/processing/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-cleanup.json",
     "records/processing/m2-radar-event-area-pair-grid-provenance-recovery-001-real-001-fallback-error.json",
+    "contracts/milestone-002-asf-hyp3-rtc-provenance-rule-amendment-001-proposal.json",
+    "docs/M2_ASF_HYP3_RTC_PROVENANCE_RULE_AMENDMENT_001_REVIEW.md",
+    "reviews/m2-asf-hyp3-rtc-provenance-rule-amendment-001/review-bundle.json",
+    "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
     ".github/workflows/validate.yml",
 ]
 
@@ -1673,6 +1677,28 @@ def main() -> None:
     missing = [name for name in REQUIRED if not (ROOT / name).is_file()]
     if missing:
         fail("missing required files: " + ", ".join(missing))
+
+    amendment_proposal_ref = "contracts/milestone-002-asf-hyp3-rtc-provenance-rule-amendment-001-proposal.json"
+    amendment_bundle_ref = "reviews/m2-asf-hyp3-rtc-provenance-rule-amendment-001/review-bundle.json"
+    amendment_approval_ref = "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json"
+    amendment_proposal = json.loads((ROOT / amendment_proposal_ref).read_text(encoding="utf-8"))
+    amendment_bundle = json.loads((ROOT / amendment_bundle_ref).read_text(encoding="utf-8"))
+    amendment_approval = json.loads((ROOT / amendment_approval_ref).read_text(encoding="utf-8"))
+    if (
+        sha256(amendment_proposal_ref) != "87971416153e4567e368786d7a0853c3208a1bf6cd98583f13e6968624c3fc45"
+        or sha256(amendment_bundle_ref) != "6b4ebe177aba218597ad68748c4a09a019081730794c128103ee6046918e8654"
+        or amendment_proposal.get("status") != "local_zero_decision_not_published_not_approved"
+        or amendment_bundle.get("status") != "local_zero_decision_not_published_not_approved"
+        or amendment_approval.get("decision") != "approve"
+        or amendment_approval.get("human_method_decision_count") != 1
+        or amendment_approval.get("bindings", {}).get("proposal_sha256") != sha256(amendment_proposal_ref)
+        or amendment_approval.get("bindings", {}).get("review_bundle_sha256") != sha256(amendment_bundle_ref)
+        or any(sha256(item["path"]) != item["sha256"] for item in amendment_bundle["artifacts"])
+        or amendment_proposal.get("frozen_evidence", {}).get("terminal_reconciliation_sha256")
+        != sha256("records/readiness/m2-asf-hyp3-rtc-readme-first-terminal-reconciliation-001.json")
+        or amendment_approval.get("authority", {}).get("old_readme_attempt_reuse_resume_retry_or_mutation") is not False
+    ):
+        fail("M2 ASF HyP3 RTC provenance amendment packet or approval differs")
 
     recovery_proposal_ref = "contracts/milestone-002-radar-event-area-pair-grid-provenance-recovery-001-proposal.json"
     recovery_bundle_ref = "reviews/m2-radar-event-area-pair-grid-provenance-recovery-001/review-bundle.json"

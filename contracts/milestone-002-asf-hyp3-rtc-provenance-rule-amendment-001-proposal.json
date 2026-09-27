@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-ASF-HYP3-RTC-PROVENANCE-RULE-AMENDMENT-001",
+  "status": "local_zero_decision_not_published_not_approved",
+  "purpose": "Resolve the exact first HyP3 RTC product's deferred README text predicate without retrying or rewriting its terminal attempt, and conditionally resume the already approved path toward a local ArcGIS before/after map.",
+  "authority_boundary": {
+    "preparation_only_now": true,
+    "new_normative_product_identity_decision_required": true,
+    "this_proposal_releases_product_access_or_pixel_work": false,
+    "original_map_route_authority_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+    "original_map_route_authority_sha256": "1c3103429418f1c1847fa5865f5634b6dece7acd8cd19e42a279537709087596"
+  },
+  "frozen_evidence": {
+    "terminal_reconciliation_ref": "records/readiness/m2-asf-hyp3-rtc-readme-first-terminal-reconciliation-001.json",
+    "terminal_reconciliation_sha256": "3030bc69e34553ccbf44cb646eef469c335e3160089b4e594fcad28fc48d3c3e",
+    "non_git_acquisition_terminal_sha256": "3261283cb1c32d9633af45437eeb33c43cf504e06764a71174c67421ad40c02c",
+    "non_git_descriptor_sha256": "36b00c1423c6ec7f07839deffbf3b15b1a774f229110b9a28d80f0a5c48ed559",
+    "non_git_readme_probe_terminal_sha256": "1659f4a4f682ed5834f8270e4a510939fabe0ca8203c45793a8832c03362cae7",
+    "archive_sha256": "82ca5a9e7c77dd1e28c15eb64f93e5a408ec53b81b5df3fda64bf47c286dc6d3",
+    "readme_sha256": "1c387e54051d6d585a49ed9f09342c1d85e2f038ef9b7af5b7d01eb1ea295fad",
+    "old_readme_result": "defer_readme_source_text_review",
+    "exact_source_granule_text_present": true,
+    "exact_product_base_text_present": false,
+    "old_attempt_terminal_and_immutable": true
+  },
+  "readme_probe_logic_bindings": {
+    "implementation_gate_sha256": "3a9a2988ba82af5d0895cdf04c43f2ef037ec391efc418037d5282f65851f63d",
+    "readme_core_sha256": "a2add7b7e5fb05682a18b4319214a016bd76d919e391c465f9301666c53e59d8",
+    "readme_runner_sha256": "4db17f16cc96574cd337837901819313bca27d820d266399c660252417c751af",
+    "package_core_sha256": "9293e47889ccf6b032966c5824af43bfe1f1da5f1932d521ab4521723eb9ce7d",
+    "inference_to_verify_before_composite_pass": "The old README probe could return defer only after its ZIP member-name screen and exact ZIP filename-to-product-root comparison returned successfully. The new evaluator must hash-bind and verify those exact code paths and old receipts before relying on this inference; a changed or unprovable dependency stops."
+  },
+  "official_method_reference": {
+    "url": "https://hyp3-docs.asf.alaska.edu/guides/rtc_product_guide/",
+    "observed_at_utc": "2026-09-27T18:22:47Z",
+    "bounded_interpretation": "ASF documents the generated product base as the ZIP folder and member-file naming convention and calls the README product-specific; it does not state that the README body must contain the full generated base name. This is documentation context, not proof of this particular product's source identity."
+  },
+  "proposed_composite_identity_rule": {
+    "keep_old_two_text_match_terminal_result": "defer_readme_source_text_review",
+    "require_exact_approved_source_and_job_id": true,
+    "require_authenticated_SUCCEEDED_descriptor_and_matching_ZIP_name_and_size": true,
+    "require_promoted_archive_hash_and_ZIP_CRC_verified": true,
+    "require_documented_single_product_root_and_required_member_names_match_descriptor": true,
+    "require_README_sha256_and_exact_approved_source_granule_text_present": true,
+    "record_missing_literal_product_base_in_README_as_warning": true,
+    "do_not_use_absent_README_product_base_as_a_new_pass": true,
+    "reject_any_conflicting_source_product_or_processing_metadata": true,
+    "composite_pass_scope": "product_provenance_for_subsequent_local_QA_only",
+    "pixel_or_map_fitness_implied": false
+  },
+  "conditional_execution_envelope_if_owner_approves": [
+    "Implement the distinct composite-provenance evaluator and synthetic tests without changing the old README rule or terminal receipts; bind exact hashes of the existing approved source, job, archive, descriptor, ZIP-member, and README receipts.",
+    "Publish only sanitized implementation and execution gates to public default-branch CI. Perform a fresh no-content preflight and stop if any binding, source right, archive identity, or product-path safety condition fails.",
+    "Evaluate the exact preserved first-product receipts once under the new rule without rereading the ZIP. A composite pass permits only the already approved local product metadata and pixel QA path; it is not a scientific admission.",
+    "Under the original approved ASF route, implement and test a separate bounded product metadata and pixel QA path. Confirm product-specific processing, mask codes, acknowledgement/DOI and rights before map use. Read exact M1-SRC-002 headers and pixels only after its own public CI and no-content gate; stop on mismatch or inadequate AOI fitness.",
+    "Only after M1-SRC-002 passes its individual gates, continue the original fixed event-first order, free-credit, one-job-per-source, stop-on-first-failure envelope. A before/after ArcGIS panel remains conditional on real two-date QA and registration passes; publish only sanitized status, not source or derived pixels."
+  ],
+  "not_authorized_by_this_proposal": [
+    "implementation_or_publication_before_owner_approval",
+    "reuse_resume_retry_or_mutation_of_the_consumed_README_probe",
+    "new_product_read_before_a_new_exact_public_CI_and_no_content_gate",
+    "automatic_job_or_download_retry",
+    "changed_source_date_order_AOI_CRS_grid_threshold_or_processing_method",
+    "paid_credits_or_account_terms_acceptance_by_agent",
+    "baseline_admission_change_analysis_attribution_derived_pixel_publication_or_scientific_publication"
+  ],
+  "stop_conditions": [
+    "composite_identity_chain_has_a_missing_or_conflicting_link",
+    "product_log_or_other_metadata_conflicts_with_the_exact_approved_job_or_source",
+    "rights_or_product_specific_attribution_cannot_be_resolved_for_the_intended_local_map",
+    "pixel_mask_coverage_or_registration_QA_fails_or_is_indeterminate",
+    "any_public_CI_or_no_content_gate_fails"
+  ],
+  "decision_requested": "Approve, revise, or defer only this product-provenance amendment and its single conditional continuation envelope. No execution is released by the local zero-decision packet alone."
+}

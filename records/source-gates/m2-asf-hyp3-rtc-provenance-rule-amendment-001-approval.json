@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-ASF-HYP3-RTC-PROVENANCE-RULE-AMENDMENT-001-APPROVAL",
+  "recorded_at_utc": "2026-09-27T18:28:52Z",
+  "status": "owner_approved_exact_conditional_envelope_public_ci_pending",
+  "decision_id": "D-M2-ASF-HYP3-RTC-PROVENANCE-RULE-AMENDMENT-001",
+  "decision": "approve",
+  "human_method_decision_count": 1,
+  "owner_answer_verbatim": "approve",
+  "decision_channel": "chat",
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-asf-hyp3-rtc-provenance-rule-amendment-001-proposal.json",
+    "proposal_sha256": "87971416153e4567e368786d7a0853c3208a1bf6cd98583f13e6968624c3fc45",
+    "review_bundle_ref": "reviews/m2-asf-hyp3-rtc-provenance-rule-amendment-001/review-bundle.json",
+    "review_bundle_sha256": "6b4ebe177aba218597ad68748c4a09a019081730794c128103ee6046918e8654",
+    "original_route_approval_sha256": "1c3103429418f1c1847fa5865f5634b6dece7acd8cd19e42a279537709087596",
+    "old_readme_terminal_reconciliation_sha256": "3030bc69e34553ccbf44cb646eef469c335e3160089b4e594fcad28fc48d3c3e"
+  },
+  "authority": {
+    "single_conditional_envelope_without_intermediate_reconfirmation": true,
+    "sanitized_packet_publication_and_public_ci": true,
+    "distinct_composite_provenance_implementation_and_synthetic_tests_after_packet_ci": true,
+    "receipt_only_real_composite_evaluation_after_implementation_ci_and_no_content_gate": true,
+    "conditional_product_metadata_and_pixel_QA_under_original_route": true,
+    "conditional_fixed_order_remaining_jobs_under_original_free_credit_and_stop_rules": true,
+    "conditional_local_arcgis_before_after_panel_after_real_QA_pass": true,
+    "old_readme_attempt_reuse_resume_retry_or_mutation": false,
+    "new_product_read_before_its_own_public_ci_and_no_content_gate": false,
+    "changed_source_date_order_AOI_CRS_grid_threshold_or_processing_method": false,
+    "paid_credits_or_account_terms_acceptance_by_agent": false,
+    "baseline_admission_change_analysis_attribution_derived_pixel_or_scientific_publication": false
+  },
+  "current_release": "Publish the exact packet and this decision for public default-branch CI. Do not inspect the product, evaluate the composite rule, read pixels, or request the next job before the proposal's later implementation, source, CI, and no-content gates pass. The old README defer remains terminal."
+}

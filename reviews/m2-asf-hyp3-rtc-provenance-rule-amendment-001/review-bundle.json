@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-ASF-HYP3-RTC-PROVENANCE-RULE-AMENDMENT-001-REVIEW-BUNDLE",
+  "status": "local_zero_decision_not_published_not_approved",
+  "base_commit": "8c4ee0c4bd3fc900d0c7e5abd25587431b7ad9f6",
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-asf-hyp3-rtc-provenance-rule-amendment-001-proposal.json",
+      "sha256": "87971416153e4567e368786d7a0853c3208a1bf6cd98583f13e6968624c3fc45",
+      "role": "single_conditional_product_provenance_amendment_proposal"
+    },
+    {
+      "path": "docs/M2_ASF_HYP3_RTC_PROVENANCE_RULE_AMENDMENT_001_REVIEW.md",
+      "sha256": "b9b9286f9f7b06c4c989835148b32473b8f1fda0e3de2cc3e65368d00b6bf650",
+      "role": "human_readable_identity_evidence_and_tradeoff_review"
+    },
+    {
+      "path": "records/readiness/m2-asf-hyp3-rtc-readme-first-terminal-reconciliation-001.json",
+      "sha256": "3030bc69e34553ccbf44cb646eef469c335e3160089b4e594fcad28fc48d3c3e",
+      "role": "immutable_prior_probe_disposition"
+    },
+    {
+      "path": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+      "sha256": "1c3103429418f1c1847fa5865f5634b6dece7acd8cd19e42a279537709087596",
+      "role": "original_owner_conditional_route_authority"
+    }
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-ASF-HYP3-RTC-PROVENANCE-RULE-AMENDMENT-001",
+    "question": "Approve, revise, or defer the exact composite provenance identity rule and its conditional continuation to the already approved local ArcGIS map route?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "intermediate_reconfirmation_for_unchanged_approved_scope": false
+  },
+  "authority_boundary": {
+    "local_review_preparation_only": true,
+    "public_packet_publication_authorized": false,
+    "implementation_or_product_access_authorized": false,
+    "raster_pixel_or_new_job_authorized": false,
+    "baseline_change_attribution_or_scientific_publication_authorized": false
+  }
+}
