@@ -1,0 +1,27 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-PRODUCT-METADATA-001-IMPLEMENTATION-GATE",
+  "checked_at_utc": "2026-09-27T18:48:55Z",
+  "status": "pass_product_metadata_implementation_public_ci_only",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+  "bindings": {
+    "approval_sha256": "11b17a520a1661e7b154fa69de2369369ede94eb79f1dbbebf7c2e9560763c97",
+    "source_gate_sha256": "7f1af5e46f9b1cba3753383b686a68618c7694b53a4be07d612b6df6045bd8a4",
+    "implementation_commit_sha": "b6c6686f7423e74fd4038691e1a9f81b4dbd6165",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_product_metadata_001.py": "4cffaa999d8aaf4600f0df90c795bc7bdaeba5320ee4fc3ba1f6eeebad5b730e",
+      "tests/test_m2_asf_hyp3_rtc_product_metadata_001.py": "8744e0febb65df958fe4c68ac154f2f1d162a8efb3d60d023e03bb7ecca6eae"
+    }
+  },
+  "public_ci": {
+    "run_id": 36341990011,
+    "head_sha": "b6c6686f7423e74fd4038691e1a9f81b4dbd6165",
+    "conclusion": "success"
+  },
+  "local_checks": {
+    "focused_disposable_tests": 4,
+    "repository_tests": 980,
+    "repository_skips": 6,
+    "project_controls": "pass_1474_required_files"
+  },
+  "release_scope": "Implementation only. After this gate passes public CI, publish a fresh no-content preflight binding the exact prior composite and acquisition receipts, archive identity and safe path metadata, and absence of the distinct metadata attempt. Only after that preflight passes public CI may one append-only bounded README, log, and six XML metadata capture run. No raster header or pixel, new job, map, baseline, change, or scientific claim is released."
+}
