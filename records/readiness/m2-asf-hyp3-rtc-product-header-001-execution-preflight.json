@@ -1,0 +1,26 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-PRODUCT-HEADER-001-EXECUTION-PREFLIGHT",
+  "checked_at_utc": "2026-09-27T19:03:14Z",
+  "status": "pass_product_header_no_content_preflight",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+  "bindings": {
+    "implementation_gate_sha256": "3aed40237e6c8585c6a9ebd43c0e42e06623f47d30c6ba4183f5cc319cff5977",
+    "implementation_gate_public_ci_run_id": 36342885648,
+    "implementation_gate_public_ci_head_sha": "c56f276ee1ba8e00aae8695cf6fbd7b903d405fb",
+    "metadata_terminal_sha256": "6539b986f28d7ccdfa454234b375f8f86feb352f8d182aa496ea1df1c616d421",
+    "acquisition_terminal_sha256": "3261283cb1c32d9633af45437eeb33c43cf504e06764a71174c67421ad40c02c",
+    "source_id": "M1-SRC-002",
+    "job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+    "product_filename": "S1D_IW_20260816T122141_DVP_RTC10_G_gpuned_944C.zip",
+    "archive_size_bytes": 9574123274
+  },
+  "assertions": {
+    "metadata_review_pass_for_local_QA_only": true,
+    "archive_exists_with_exact_name_and_size": true,
+    "archive_path_is_not_reparse_point": true,
+    "attempt_absent": true,
+    "no_raster_header_or_pixel_read": true,
+    "no_new_job_or_network_request": true
+  },
+  "release_scope": "Only after this exact preflight passes public default-branch CI, run one new append-only ArcGIS GDAL /vsizip/ inspection of six exact M1-SRC-002 GeoTIFF headers. It must rehash the preserved ZIP, validate EPSG:32645 and 10 m aligned single-band types, and retain a terminal receipt. It may not read raster pixel values, request another job, create a map, or claim AOI fitness. Stop on first failure without retry."
+}
