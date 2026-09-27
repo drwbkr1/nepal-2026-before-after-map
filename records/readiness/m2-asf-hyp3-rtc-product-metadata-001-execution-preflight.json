@@ -1,0 +1,28 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-PRODUCT-METADATA-001-EXECUTION-PREFLIGHT",
+  "checked_at_utc": "2026-09-27T18:49:53Z",
+  "status": "pass_product_metadata_no_content_preflight",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+  "bindings": {
+    "implementation_gate_sha256": "5804603d5d55f493d2b385c33a978d9585ee388a58cb9938270faf5bbc964360",
+    "implementation_gate_public_ci_run_id": 36342060918,
+    "implementation_gate_public_ci_head_sha": "0514327f15ee7092a64afebacacaac9c9df12c09",
+    "composite_terminal_sha256": "cf3eae1d78aab736383f007fd4eebde6872c51f21c52831db5594085389a2401",
+    "acquisition_terminal_sha256": "3261283cb1c32d9633af45437eeb33c43cf504e06764a71174c67421ad40c02c",
+    "source_id": "M1-SRC-002",
+    "job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+    "product_filename": "S1D_IW_20260816T122141_DVP_RTC10_G_gpuned_944C.zip",
+    "archive_size_bytes": 9574123274
+  },
+  "assertions": {
+    "composite_status_pass_for_local_qa_only": true,
+    "acquisition_status_pass_local_zip_promoted_no_replace": true,
+    "archive_exists_with_exact_name_and_size": true,
+    "archive_path_is_not_reparse_point": true,
+    "attempt_absent": true,
+    "no_product_payload_read": true,
+    "no_raster_header_or_pixel_read": true,
+    "no_new_job_or_network_request": true
+  },
+  "release_scope": "Only after this exact preflight passes public default-branch CI, run one new append-only product-metadata attempt. It may rehash the exact preserved ZIP and capture only bounded README, processing log, and six GeoTIFF XML sidecars into non-Git custody. Its capture status is not a processing, mask, rights, header, pixel, AOI, or map fitness decision. Stop on first failure without retry."
+}
