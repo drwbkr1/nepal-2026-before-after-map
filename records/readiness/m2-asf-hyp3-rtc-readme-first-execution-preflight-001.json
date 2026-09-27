@@ -1,0 +1,28 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-README-FIRST-EXECUTION-PREFLIGHT-001",
+  "checked_at_utc": "2026-09-27T18:16:10Z",
+  "status": "pass_readme_first_no_content_preflight",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+  "bindings": {
+    "implementation_gate_sha256": "3a9a2988ba82af5d0895cdf04c43f2ef037ec391efc418037d5282f65851f63d",
+    "acquisition_terminal_sha256": "3261283cb1c32d9633af45437eeb33c43cf504e06764a71174c67421ad40c02c",
+    "acquisition_descriptor_sha256": "36b00c1423c6ec7f07839deffbf3b15b1a774f229110b9a28d80f0a5c48ed559",
+    "source_id": "M1-SRC-002",
+    "job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+    "product_filename": "S1D_IW_20260816T122141_DVP_RTC10_G_gpuned_944C.zip",
+    "archive_size_bytes": 9574123274,
+    "archive_sha256_from_acquisition_receipt": "82ca5a9e7c77dd1e28c15eb64f93e5a408ec53b81b5df3fda64bf47c286dc6d3"
+  },
+  "assertions": {
+    "archive_exists": true,
+    "archive_size_and_name_bound_to_acquisition_receipt": true,
+    "archive_path_is_not_reparse_point": true,
+    "acquisition_terminal_passed_integrity_and_no_replace_custody": true,
+    "probe_attempt_absent": true,
+    "no_product_payload_or_pixel_read": true,
+    "no_new_job_or_network_request": true,
+    "no_credentials_used_or_recorded": true
+  },
+  "release_scope": "After this exact preflight passes public default-branch CI and a fresh release check, run at most one append-only local read-only README probe over the exact promoted M1-SRC-002 archive. The probe rehashes the archive before bounded README text inspection. No extraction, raster header or pixel read, new job, source substitution, retry, map use, change analysis, or scientific claim is released.",
+  "claim_boundary": "This is a no-content release check. The promoted ZIP passed archive integrity, but source granule and product processing provenance have not yet been established from its README; pixel QA and map readiness remain false."
+}
