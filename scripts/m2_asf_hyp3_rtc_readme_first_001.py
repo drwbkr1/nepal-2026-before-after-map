@@ -20,13 +20,14 @@ from typing import Callable
 from m2_asf_hyp3_rtc_acquire_first_001 import (
     DATA_ROOT, EXACT_JOB_ID, SOURCE_ID,
 )
-from m2_asf_hyp3_rtc_core_001 import ROOT, RouteStop
+from m2_asf_hyp3_rtc_core_001 import APPROVAL_REF, ROOT, RouteStop
 from m2_asf_hyp3_rtc_package_core_001 import PRODUCT_ROOT
 from m2_asf_hyp3_rtc_readme_core_001 import inspect_product_readme
 
 
 GATE_REF = "records/readiness/m2-asf-hyp3-rtc-readme-first-implementation-gate-001.json"
 PREFLIGHT_REF = "records/readiness/m2-asf-hyp3-rtc-readme-first-execution-preflight-001.json"
+SOURCE_GATE_REF = "records/source-gates/m2-asf-hyp3-rtc-processing-source-gate-001.json"
 PROBE_ROOT = DATA_ROOT / "m2-asf-hyp3-rtc-readme-first-001" / "attempt-001"
 IMPLEMENTATION_FILES = (
     "scripts/m2_asf_hyp3_rtc_readme_core_001.py",
@@ -110,6 +111,8 @@ def require_readme_release(
         bindings_match = (
             preflight.get("bindings", {}).get("implementation_gate_sha256") == _sha(root / GATE_REF)
             and preflight.get("bindings", {}).get("acquisition_terminal_sha256") == _sha(acquisition_path)
+            and gate.get("bindings", {}).get("approval_sha256") == _sha(root / APPROVAL_REF)
+            and gate.get("bindings", {}).get("source_gate_sha256") == _sha(root / SOURCE_GATE_REF)
         )
     except OSError:
         raise RouteStop("rtc_readme_release_unavailable") from None

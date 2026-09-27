@@ -13,7 +13,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from m2_asf_hyp3_rtc_acquire_first_001 import EXACT_JOB_ID, SOURCE_ID  # noqa: E402
-from m2_asf_hyp3_rtc_core_001 import RouteStop, load_approved_jobs  # noqa: E402
+from m2_asf_hyp3_rtc_core_001 import APPROVAL_REF, RouteStop, load_approved_jobs  # noqa: E402
 import m2_asf_hyp3_rtc_readme_first_001 as readme_module  # noqa: E402
 from m2_asf_hyp3_rtc_readme_first_001 import probe_readme_once  # noqa: E402
 from tests.test_m2_asf_hyp3_rtc_readme_core_001 import fixture  # noqa: E402
@@ -53,9 +53,13 @@ class ReadmeReceiptTests(unittest.TestCase):
             gate = {
                 "status": "pass_readme_first_implementation_public_ci_only",
                 "public_ci": {"conclusion": "success"},
-                "bindings": {"implementation_file_sha256": {
-                    ref: digest(root / ref) for ref in readme_module.IMPLEMENTATION_FILES
-                }},
+                "bindings": {
+                    "approval_sha256": digest(root / APPROVAL_REF),
+                    "source_gate_sha256": digest(root / readme_module.SOURCE_GATE_REF),
+                    "implementation_file_sha256": {
+                        ref: digest(root / ref) for ref in readme_module.IMPLEMENTATION_FILES
+                    },
+                },
             }
             preflight = {
                 "status": "pass_readme_first_no_content_preflight",
