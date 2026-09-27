@@ -1,0 +1,29 @@
+{
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-README-FIRST-TERMINAL-RECONCILIATION-001",
+  "checked_at_utc": "2026-09-27T18:18:48Z",
+  "status": "defer_readme_source_text_review_no_pixel_release",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+  "bindings": {
+    "source_id": "M1-SRC-002",
+    "job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+    "public_ci_run_id": 36340097577,
+    "public_ci_head_sha": "6bcf99e10d9f50dda0c6ffbb4dd7bf11345e2b4b",
+    "public_ci_conclusion": "success",
+    "preflight_sha256": "dd725cad27e852377471198b64b973976a3054ab22e39f9c406b4fa3b7de480d",
+    "non_git_probe_started_sha256": "d046f20f96efa423b696e73121d5a67f99b651523539b81074df50ca30a33f7b",
+    "non_git_probe_terminal_sha256": "1659f4a4f682ed5834f8270e4a510939fabe0ca8203c45793a8832c03362cae7",
+    "archive_sha256_verified_current": "82ca5a9e7c77dd1e28c15eb64f93e5a408ec53b81b5df3fda64bf47c286dc6d3",
+    "readme_sha256": "1c387e54051d6d585a49ed9f09342c1d85e2f038ef9b7af5b7d01eb1ea295fad"
+  },
+  "observations": {
+    "readme_member_size_bytes": 16540,
+    "exact_source_granule_text_present": true,
+    "exact_product_base_text_present": false,
+    "raster_pixels_read": false,
+    "archive_bytes_mutated": false,
+    "new_job_submitted": false,
+    "probe_attempt_consumed": true
+  },
+  "disposition": "The one README-only probe is terminal with a deferred source-text result. Preserve the attempt and do not rerun it. The archive remains integrity-verified in non-Git custody, but README provenance has not passed the frozen two-text-match rule. Do not release GeoTIFF headers, pixels, M1-SRC-005 job submission, ArcGIS panel, change analysis, attribution, or scientific publication from this result.",
+  "next_action": "Assess the exact product-base text predicate and alternative provider provenance evidence under a separately reviewed route before any additional product access or pixel work. No historical failure cause is inferred from this Boolean-only receipt."
+}
