@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-SUBMIT-AFTER-PARTIAL-001-TERMINAL-RECONCILIATION",
+  "checked_at_utc": "2026-09-28T01:39:00Z",
+  "status": "submitted_exact_after_job_product_unverified",
+  "source_id": "M1-SRC-005",
+  "job_id": "0a3e6fd4-a9a3-42c1-8c7c-3824ade06861",
+  "bindings": {
+    "approval_sha256": "7092d2c5f7e4b3f2d0c9cff22a7c0d0a44c62942746a9b73c183b3b96f08d506",
+    "non_git_started_sha256": "2989695f8a3e873e33ec84a702251c2d6d65ea15d6c04b7f9be978139d80e4f8",
+    "non_git_validation_request_reserved_sha256": "9f95f94991f69bfbb81777f12e1249e6c4fca0053d31394b3605b6b8fecc97dd",
+    "non_git_validation_terminal_sha256": "1c6010f1e0078936e63914765a257d1758d9c2b11407a881e1ba6c21244675a9",
+    "non_git_submission_request_reserved_sha256": "031b30b2b8e8d02f14bd1848058a86aa36700a6d3844f16f8b466213b75e7c92",
+    "non_git_terminal_sha256": "54772227380763c2af44de10ad87389a5e1ee6b4acf18040862dad982310e232"
+  },
+  "observed_result": {
+    "attempt_reserved_once": true,
+    "exact_validate_only_identity_and_cost_passed": true,
+    "exact_job_submission_recorded": true,
+    "reported_basic_credit_cost": 60,
+    "credits_spent_independently_verified": false,
+    "credentials_recorded": false,
+    "product_bytes_verified": false,
+    "pixel_qa_pass": false,
+    "after_product_acquired": false,
+    "arcgis_map_ready": false
+  },
+  "next_boundary": "One exact-job status observation may proceed only after the published acquisition implementation gate and fresh no-content preflight. A succeeded service status is not product integrity, rights, header, pixel, overlap, or map evidence. At most one ZIP request may be reserved after exact succeeded status; no automatic retry or source substitution."
+}

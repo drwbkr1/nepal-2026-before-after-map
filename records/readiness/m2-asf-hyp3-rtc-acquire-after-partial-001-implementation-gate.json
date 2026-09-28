@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-ACQUIRE-AFTER-PARTIAL-001-IMPLEMENTATION-GATE",
+  "checked_at_utc": "2026-09-28T01:39:00Z",
+  "status": "pass_acquire_after_partial_implementation_public_ci_only",
+  "source_id": "M1-SRC-005",
+  "job_id": "0a3e6fd4-a9a3-42c1-8c7c-3824ade06861",
+  "bindings": {
+    "approval_sha256": "7092d2c5f7e4b3f2d0c9cff22a7c0d0a44c62942746a9b73c183b3b96f08d506",
+    "source_gate_sha256": "7f1af5e46f9b1cba3753383b686a68618c7694b53a4be07d612b6df6045bd8a4",
+    "submission_terminal_sha256": "54772227380763c2af44de10ad87389a5e1ee6b4acf18040862dad982310e232",
+    "submission_reconciliation_ref": "records/readiness/m2-asf-hyp3-rtc-submit-after-partial-001-terminal-reconciliation.json",
+    "implementation_commit_sha": "be3cc39925b3204e3f4a10b4161a335050d15039",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_after_descriptor_core_001.py": "dbfecb0f274ed91e73daa4f25a5ddf4cd5fc923699635000cca8df1940609e4c",
+      "scripts/m2_asf_hyp3_rtc_after_transfer_core_001.py": "12b0f95c634593a6400de0a70c641170f464317765c21872774eab6efc327d9f",
+      "scripts/m2_asf_hyp3_rtc_acquire_after_partial_001.py": "0f7401726dc0d56be82ea838962df2633900f01b8e824cf8d3d8ca6c7464e1a1",
+      "scripts/invoke_m2_asf_hyp3_rtc_acquire_after_partial_001.ps1": "76b9d2938e9655fe866e880a71e1f355e8fb5aeca44292c138445ba5406e1bde",
+      "tests/test_m2_asf_hyp3_rtc_after_descriptor_core_001.py": "4fe24b33c8f9ea8b2ac2b0069c000f2947074729e08824b64fa7586642c159a6",
+      "tests/test_m2_asf_hyp3_rtc_after_transfer_core_001.py": "0907882e9dd5c698f347888c3836d4c252193d8089b0f9ff0da2f0145ac6ae30",
+      "tests/test_m2_asf_hyp3_rtc_acquire_after_partial_001.py": "ff3ea711369866547cf9d63c64e5f7237def75a415efb90910241e6663f698e7"
+    }
+  },
+  "public_ci": {
+    "run_id": 36364071439,
+    "head_sha": "be3cc39925b3204e3f4a10b4161a335050d15039",
+    "conclusion": "success"
+  },
+  "release_scope": "Implementation and exact submission binding only. Publish this gate to public default-branch CI, then perform one fresh no-content preflight for exact job, paths, collisions and custody. Only after that preflight also passes public CI may an owner-controlled secret-safe handoff observe this same job and, only on exact service success, reserve at most one ZIP acquisition. No token or ZIP request is released by this gate alone.",
+  "claim_boundary": "No service completion, product bytes, ZIP integrity, source provenance, rights, raster headers or pixels, pair overlap, map, change or scientific result is established."
+}
