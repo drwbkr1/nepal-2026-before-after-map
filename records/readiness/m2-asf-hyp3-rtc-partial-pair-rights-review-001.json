@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PAIR-RIGHTS-REVIEW-001",
+  "reviewed_at_utc": "2026-09-28T17:41:01Z",
+  "status": "pass_local_rtc_vv_visual_display_only",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-partial-pair-map-001-approval.json",
+  "intended_use": "A local, explicitly partial ArcGIS Pro side-by-side visual of the two exact RTC VV scenes in EPSG:32645, with attributed image export kept in non-Git custody. No DEM image, public pixel release, change analysis, or scientific publication.",
+  "bindings": {
+    "before_source_id": "M1-SRC-002",
+    "after_source_id": "M1-SRC-005",
+    "before_review_sha256": "52f98a918cd52fa3abc5abb9116537f837656ead858fbfb9b30f2bec030aee79",
+    "after_review_sha256": "f5a27a3b7dc101159bf20b064a9065c124621757bf9864e29fb4acfb73915357",
+    "approval_sha256": "7092d2c5f7e4b3f2d0c9cff22a7c0d0a44c62942746a9b73c183b3b96f08d506",
+    "processing_source_gate_sha256": "7f1af5e46f9b1cba3753383b686a68618c7694b53a4be07d612b6df6045bd8a4"
+  },
+  "source_evidence": {
+    "before_VV_VH_XML_use_limit": "No restrictions on use with acknowledgement or citation as listed in the product credits.",
+    "after_VV_VH_XML_use_limit": "No restrictions on use with acknowledgement or citation as listed in the product credits.",
+    "before_and_after_layover_shadow_XML_allow_credited_use": true,
+    "both_READMEs_supply_same_image_credit_form": true,
+    "image_credit": "ASF DAAC HyP3 2026. Contains modified Copernicus Sentinel data 2026, processed by ESA.",
+    "processing_environment_doi": "10.5281/zenodo.3962581",
+    "gamma_plugin_doi": "10.5281/zenodo.3962936",
+    "included_DEM_XML_has_separate_all_rights_reserved_credit": true,
+    "separate_account_agreement_text_not_retrieved": true,
+    "owner_reported_account_agreement_accepted": true
+  },
+  "local_VV_display": true,
+  "credited_local_panel_export_non_git": true,
+  "layover_shadow_mask_for_exclusion_only": true,
+  "DEM_display_or_export": false,
+  "public_source_pixels": false,
+  "public_derived_pixels": false,
+  "change_analysis": false,
+  "scientific_publication": false,
+  "decision": "The exact two product metadata sets support only a local credited VV visual panel and local export under the already approved partial-pair envelope. Keep the generated DEM out of displayed and exported layers. Retain the product image credit and two HyP3 DOIs. Any changed provider terms, broader distribution, or public pixel/scientific use requires fresh review; this record is not pair coverage, map fitness, or change evidence."
+}
