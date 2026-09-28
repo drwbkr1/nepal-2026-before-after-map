@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001-REVIEW-BUNDLE",
+  "status": "local_zero_decision_not_published_not_approved",
+  "base_commit": "94bbc6551058449d18d6d0d8335f7f835872934e",
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-asf-hyp3-rtc-partial-pair-map-001-proposal.json",
+      "sha256": "587b3e5fe4878395d0a32802e19a66b77ed2c57dcb924dd14796d0ff462c9d8a",
+      "role": "single_conditional_visual_only_sequence_amendment"
+    },
+    {
+      "path": "docs/M2_ASF_HYP3_RTC_PARTIAL_PAIR_MAP_001_REVIEW.md",
+      "sha256": "5bf681c0c0daa584b1144528258f343a731da64eb65b2bf10debbaf676d089b7",
+      "role": "human_readable_partial_map_tradeoff_review"
+    },
+    {
+      "path": "records/readiness/m2-asf-hyp3-rtc-product-pixel-001-terminal-reconciliation.json",
+      "sha256": "2305f6ce504e550b57aa207c3eb1004f2d4c014715745776d60c004e184afecd",
+      "role": "immutable_first_source_QA_stop"
+    },
+    {
+      "path": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+      "sha256": "1c3103429418f1c1847fa5865f5634b6dece7acd8cd19e42a279537709087596",
+      "role": "original_four_scene_route_authority_and_stop_rule"
+    },
+    {
+      "path": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+      "sha256": "11b17a520a1661e7b154fa69de2369369ede94eb79f1dbbebf7c2e9560763c97",
+      "role": "completed_first_product_provenance_authority"
+    },
+    {
+      "path": "records/observations/m2-asf-rtc-four-scene-candidate-001-local.json",
+      "sha256": "d18d0b9e47892e5930bd306fb196d8f49884e773b5b9e8495018e3b2c7c138ba",
+      "role": "exact_existing_after_source_and_job_settings"
+    },
+    {
+      "path": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+      "role": "unchanged_projected_AOIs"
+    },
+    {
+      "path": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+      "role": "unchanged_full_and_partial_QA_thresholds"
+    }
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001",
+    "question": "Approve, revise, or defer one exact free-credit M1-SRC-005 after job and a conditional local partial-data ArcGIS side-by-side map, preserving the first source's QA defer and the full scientific threshold?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "intermediate_reconfirmation_for_unchanged_approved_scope": false
+  },
+  "authority_boundary": {
+    "local_review_preparation_only": true,
+    "public_packet_publication_authorized": false,
+    "proposal_approval_received": false,
+    "after_job_or_pixel_action_authorized": false,
+    "partial_map_execution_authorized": false,
+    "baseline_change_attribution_or_scientific_publication_authorized": false
+  }
+}

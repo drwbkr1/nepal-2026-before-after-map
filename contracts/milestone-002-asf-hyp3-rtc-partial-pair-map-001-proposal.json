@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001",
+  "status": "local_zero_decision_not_published_not_approved",
+  "purpose": "Decide whether the approved exact after scene should be processed solely to test a candidly labeled local partial before/after visual map after the first scene failed full-area pixel QA.",
+  "frozen_evidence": {
+    "first_source_id": "M1-SRC-002",
+    "first_source_job_id": "dad53076-78fc-42e8-a58e-ad17efb88a7e",
+    "terminal_reconciliation_ref": "records/readiness/m2-asf-hyp3-rtc-product-pixel-001-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "2305f6ce504e550b57aa207c3eb1004f2d4c014715745776d60c004e184afecd",
+    "non_git_terminal_sha256": "2a2d9b88662475e2ec9b78e2683befd3b100682ba38010617dc2ff081b2e7603",
+    "source_aoi_usable_fraction": 0.55135,
+    "upper_corridor_usable_fraction": 0.760829,
+    "both_AOIs_full_coverage_and_partial_evidence_but_not_usable_pass": true,
+    "first_source_attempt_terminal_no_retry": true,
+    "next_job_currently_released": false,
+    "original_route_approval_ref": "records/source-gates/m2-asf-hyp3-rtc-map-route-001-approval.json",
+    "original_route_approval_sha256": "1c3103429418f1c1847fa5865f5634b6dece7acd8cd19e42a279537709087596",
+    "provenance_amendment_approval_ref": "records/source-gates/m2-asf-hyp3-rtc-provenance-rule-amendment-001-approval.json",
+    "provenance_amendment_approval_sha256": "11b17a520a1661e7b154fa69de2369369ede94eb79f1dbbebf7c2e9560763c97"
+  },
+  "normative_change_requested": {
+    "amend_original_stop_on_first_source_QA_defer_for_visual_only_after_pair": true,
+    "preserve_original_80_percent_usable_area_QA_pass_threshold": true,
+    "preserve_first_source_defer_status_and_terminal_attempt": true,
+    "no_baseline_or_change_admission_from_partial_display": true,
+    "use_frozen_20_percent_partial_evidence_floor_for_common_valid_overlap": true,
+    "visual_panel_is_not_a_change_analysis_or_registered_comparison": true
+  },
+  "exact_after_source": {
+    "source_id": "M1-SRC-005",
+    "granule": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4",
+    "event_role": "after",
+    "job_type": "RTC_GAMMA",
+    "job_parameters_ref": "records/observations/m2-asf-rtc-four-scene-candidate-001-local.json#candidate_jobs[1]",
+    "candidate_record_sha256": "d18d0b9e47892e5930bd306fb196d8f49884e773b5b9e8495018e3b2c7c138ba",
+    "method_unchanged": "Copernicus DEM, gamma0 power, 10 m, no speckle filter, no DEM matching, VV/VH and optional support layers",
+    "other_cohort_sources_requested": false
+  },
+  "unchanged_spatial_and_QA_bindings": {
+    "approved_projected_AOIs_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "pixel_readiness_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "full_usable_area_pass_minimum": 0.8,
+    "partial_evidence_defer_minimum": 0.2,
+    "analysis_CRS_EPSG": 32645
+  },
+  "single_conditional_envelope_if_approved": [
+    "Publish this exact packet and one owner decision to public default-branch CI. Continue through implementation, generated-data and installed ArcGIS synthetic tests, source-rights check, public CI, and fresh no-content preflight without intermediate owner reconfirmation.",
+    "Require a fresh free Basic credit check and exact M1-SRC-005 job validation through one secret-safe owner-controlled handoff. Stop on changed terms, insufficient free credits, any paid path, identity drift, or an indeterminate account response. Never store or print credentials.",
+    "Submit at most one exact RTC_GAMMA job for M1-SRC-005, with no automatic retry. On success, acquire its one exact ZIP once into append-only non-Git custody, verify size/hash/CRC and exact source/job/package identity, and preserve README, log, XML, product credits, DOI, and rights evidence.",
+    "After distinct implementation, public CI, and no-content gates, inspect only the after product's exact GeoTIFF headers and the two event AOIs' VV/VH/layover-shadow pixels under the unchanged product-specific exclusions. Preserve a separate after-source QA disposition even if it defers.",
+    "Only if both dates have at least 0.20 common valid VV/VH area in each event AOI, no undocumented mask classes, matching projected 10 m grids, and resolved image-display rights, create one local EPSG:32645 ArcGIS Pro side-by-side panel. Show true dates, extent of valid coverage and excluded layover/shadow/NoData, exact ASF/ESA credits and DOIs, and a conspicuous partial-data and unverified-registration warning. Display positive gamma0 power as 10*log10(power) dB only; no difference or swipe layer.",
+    "Reopen and export the local project and panel in a fresh ArcGIS process. Keep source and derived rasters, APRX and exports in non-Git custody. Publish only sanitized terminal receipts and exact public CI reconciliation. Stop on any gate, processing, rights, overlap, or export failure without automatic retry."
+  ],
+  "hard_limits": {
+    "after_job_maximum": 1,
+    "after_job_cost": "free Basic credits only; no purchase or paid overflow",
+    "automatic_retry": false,
+    "source_date_order_AOI_CRS_grid_or_frozen_QA_threshold_substitution": false,
+    "first_source_retry_or_mutation": false,
+    "adjacent_context_strip_jobs_M1_SRC_001_or_004": false,
+    "DEM_raster_display_or_export": false,
+    "registration_pass_claim_without_measurement": false,
+    "difference_raster_or_change_polygon": false,
+    "baseline_admission_change_analysis_event_attribution_or_scientific_publication": false,
+    "public_source_or_derived_pixel_publication": false
+  },
+  "decision_requested": "Approve, revise, or defer this single conditional visual-only partial-pair envelope. Approval would explicitly amend the first-source stop rule only for one exact M1-SRC-005 job and a conditional local partial-data panel, while preserving all full-QA and scientific restrictions."
+}

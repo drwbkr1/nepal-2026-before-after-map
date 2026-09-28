@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001-APPROVAL",
+  "recorded_at_utc": "2026-09-28T00:14:18Z",
+  "status": "owner_approved_single_conditional_envelope_public_ci_pending",
+  "decision_id": "D-M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001",
+  "decision": "approve",
+  "human_method_decision_count": 1,
+  "owner_answer_verbatim": "approe",
+  "decision_channel": "chat",
+  "interpretation": "Interpreted as approve in direct response to the exact approve, revise, or defer question; all packet and artifact SHA-256 bindings were reverified before recording.",
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-asf-hyp3-rtc-partial-pair-map-001-proposal.json",
+    "proposal_sha256": "587b3e5fe4878395d0a32802e19a66b77ed2c57dcb924dd14796d0ff462c9d8a",
+    "review_bundle_ref": "reviews/m2-asf-hyp3-rtc-partial-pair-map-001/review-bundle.json",
+    "review_bundle_sha256": "f3c981c36bc1f9ebf61f42a3451e7aa05e5a040799a59ced78a5dc741665f58e",
+    "first_source_terminal_reconciliation_sha256": "2305f6ce504e550b57aa207c3eb1004f2d4c014715745776d60c004e184afecd"
+  },
+  "authority": {
+    "single_conditional_envelope_through_sanitized_terminal_publication": true,
+    "intermediate_owner_reconfirmation_required_for_unchanged_scope": false,
+    "packet_publication_and_public_ci": true,
+    "bounded_implementation_synthetic_and_installed_arcgis_tests": true,
+    "fresh_secret_safe_free_basic_credit_check_and_exact_after_job_validation_after_gates": true,
+    "at_most_one_exact_M1_SRC_005_RTC_GAMMA_job_after_gates": true,
+    "conditional_one_zip_acquisition_integrity_provenance_rights_header_and_pixel_qa": true,
+    "conditional_local_EPSG_32645_partial_pair_panel_and_fresh_process_export": true,
+    "automatic_retry_paid_credits_or_changed_terms": false,
+    "first_source_retry_mutation_or_full_QA_status_change": false,
+    "other_source_jobs_or_source_method_threshold_substitution": false,
+    "DEM_raster_display_or_export": false,
+    "difference_swipe_change_polygon_baseline_admission_or_change_analysis": false,
+    "attribution_public_pixels_or_scientific_publication": false
+  },
+  "current_release": "Publish the exact packet and this decision for public default-branch CI. No account, after-job, product, pixel, or map action before its distinct implementation, rights, CI, and no-content gates."
+}
