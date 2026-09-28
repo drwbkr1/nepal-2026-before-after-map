@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-PARTIAL-VV-DELTA-MAP-001-PRE-ATTEMPT-RECONCILIATION",
+  "checked_at_utc": "2026-09-28T18:19:00Z",
+  "status": "stop_before_real_attempt_stable_controls_not_predeclared",
+  "authority_ref": "records/source-gates/m2-asf-partial-vv-delta-map-001-approval.json",
+  "bindings": {
+    "proposal_sha256": "abc74e89066bff3b675fe0bcb0f3c97ff4733faaad50c0c448ca9b84259a4abd",
+    "review_bundle_sha256": "2146de66d7b761ca98054f9fe229f0198a8473cee026198702814042a408f3be",
+    "approved_packet_commit": "28a6ce596f9aa56b5389a197ef1c80144f4673b4",
+    "packet_public_ci_run_id": 36464206905,
+    "packet_public_ci_conclusion": "success",
+    "staged_pair_terminal_ref": "records/readiness/m2-asf-hyp3-rtc-partial-pair-stage-001-terminal-reconciliation.json",
+    "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "stable_control_workspace_ref": "records/surface-receipts/arcgis-evidence-workspace.json"
+  },
+  "no_content_observations": {
+    "approved_source_aoi_purpose": "Candidate debris-avalanche source and immediate path",
+    "approved_upper_corridor_aoi_purpose": "Candidate Bhote Koshi-Trishuli change corridor",
+    "staged_pair_scope": "The two display rasters retain common-valid values only inside the union of AOI-SOURCE and AOI-UPPER-CORRIDOR; all other cells are NoData.",
+    "independently_identified_stable_control_geometry_for_this_pair": false,
+    "existing_workspace_stable_controls_row_count": 0,
+    "predeclared_qualifying_control_windows": 0,
+    "required_stable_control_windows": 30,
+    "controls_selected_by_difference_signal": false,
+    "real_staged_raster_pixel_read": false,
+    "new_attempt_root_created": false,
+    "registration_measured": false,
+    "difference_raster_or_map_created": false
+  },
+  "reason": "The approved route requires 30 stable control windows outside the event corridor, selected before examining pair differences. The exact staged pair contains values only inside the two candidate event areas, and the current evidence workspace has no stable controls. No independent non-change geometry in the reviewed inputs can lock the required controls. Searching the difference signal for quiet patches, treating candidate event areas as stable without independent evidence, or restaging pixels outside the approved union would change the reviewed method or source-read scope. The route therefore stops at its explicit control-selection gate before any real attempt.",
+  "preserved_checkpoint": "The existing EPSG:32645 ArcGIS Pro side-by-side visual remains valid as a partial, unregistered visual reference only. Both individual full-area QA dispositions remain defer.",
+  "next_decision_boundary": "A derivative difference map would need separately reviewed independent stable-reference geometry and, if necessary, a changed staging scope. No revised route is approved by this record."
+}
