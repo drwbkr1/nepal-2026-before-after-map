@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-STABLE-REFERENCE-FEASIBILITY-001-LOCAL",
+  "observed_at_utc": "2026-09-28T18:23:04Z",
+  "status": "metadata_and_geometry_only_candidate_route_not_approved",
+  "purpose": "Determine whether a separately reviewed stable-reference route could use the same two exact ASF RTC products after the event-only staged rasters stopped at control selection.",
+  "local_bindings": {
+    "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "before_header_ref": "records/readiness/m2-asf-hyp3-rtc-product-header-001-terminal-reconciliation.json",
+    "before_header_sha256": "272494ad0fe5d44a072cb8ab7fcebf5eacf99efd0f95817714c46671434c7125",
+    "after_header_ref": "records/readiness/m2-asf-hyp3-rtc-after-header-001-terminal-reconciliation.json",
+    "after_header_sha256": "c1886951586859d78dbcc8ba8c3d72d84359b2157d760dddafa3899c31e0430c",
+    "staged_pair_ref": "records/readiness/m2-asf-hyp3-rtc-partial-pair-stage-001-terminal-reconciliation.json",
+    "staged_pair_sha256": "925c7d0496e69d3fae985050cf0bf5ea2abf4f4ec12bef90363fd542a87f31d9",
+    "stopped_route_ref": "records/readiness/m2-asf-partial-vv-delta-map-001-pre-attempt-reconciliation.json",
+    "stopped_route_sha256": "821b6c449eae0c3dc1d2ebc10238db79212558f18e220974714f16cc0aab5060"
+  },
+  "exact_product_header_geometry": {
+    "before_source_id": "M1-SRC-002",
+    "after_source_id": "M1-SRC-005",
+    "before_extent_epsg_32645_m": [192030.0, 3054850.0, 485630.0, 3266840.0],
+    "after_extent_epsg_32645_m": [192050.0, 3054850.0, 485650.0, 3266840.0],
+    "approved_overview_wholly_inside_both_header_rectangles": true,
+    "header_overlap_is_not_valid_pixel_coverage_or_registration": true,
+    "current_staged_display_scope": "Only common-valid cells inside AOI-SOURCE union AOI-UPPER-CORRIDOR; no reference pixels outside that union."
+  },
+  "projected_geometry_screen": {
+    "method": "Shapely 2.1.2 polygon area in EPSG:32645: approved AOI-OVERVIEW difference from union of AOI-SOURCE and AOI-UPPER-CORRIDOR buffered by each stated distance, then intersection with both exact product header rectangles. No raster or external vector was opened.",
+    "overview_area_km2": 7242.179,
+    "event_aoi_union_area_km2": 661.108,
+    "buffer_sensitivity_km_to_geometric_candidate_area_km2": {
+      "1": 6445.49,
+      "2": 6316.45,
+      "5": 5896.87,
+      "10": 5210.25,
+      "15": 4652.29
+    },
+    "buffer_adopted_as_method": false,
+    "geometric_space_proves_stability_or_usable_pixels": false
+  },
+  "independent_event_extent_candidate_metadata": {
+    "publisher": "UNOSAT via UNESCO IHP-WINS",
+    "dataset_url": "https://ihp-wins.unesco.org/en/dataset/nepal-satellite-detected-mudflow-and-rockflow-extent-nepal",
+    "dataset_doi": "10.63253/1y26ihdq",
+    "reported_source_images": "Sentinel-2, 27 August 2026, and PlanetScope, 26 August 2026",
+    "reported_mapped_mudflow_rockflow_extent_km2_approx": 37,
+    "reported_analyzed_extent_km2_approx": 363,
+    "both_extent_and_analysis_extent_resource_pages_exist": true,
+    "preliminary_not_field_validated": true,
+    "absence_of_mapped_extent_outside_analyzed_polygon_proves_no_impact": false,
+    "resource_license_and_access_rights_fields_displayed_without_values": true,
+    "exact_vector_bytes_acquired_or_verified": false,
+    "vector_source_adopted": false
+  },
+  "assessment": "The exact ASF source-product headers leave broad geometric room outside the event-only staging, and a separate mapped event/analysis vector family exists. Neither fact supplies 30 verified stable control windows. A new route would require independent source/rights/integrity review for any UNOSAT vectors; an explicit, fixed non-change control rule that respects the analyzed-area limit and event uncertainty; separately authorized reads of the original ASF RTC product pixels outside the old stage; generated-data and installed-runtime tests; and a fresh one-attempt, CI-gated execution contract. The prior stopped route, full-area defer statuses, and M4 scientific rules remain unchanged.",
+  "actions_taken": {
+    "source_archive_or_pixel_read": false,
+    "UNOSAT_vector_download": false,
+    "new_attempt_created": false,
+    "method_buffer_or_control_geometry_locked": false,
+    "approval_or_publication_requested": false,
+    "map_or_difference_generated": false
+  }
+}
