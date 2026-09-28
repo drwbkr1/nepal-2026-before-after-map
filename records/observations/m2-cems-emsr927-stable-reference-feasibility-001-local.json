@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-CEMS-EMSR927-STABLE-REFERENCE-FEASIBILITY-001-LOCAL",
+  "observed_at_utc": "2026-09-28T18:35:48Z",
+  "status": "official_metadata_and_projected_geometry_only_no_source_adoption",
+  "purpose": "Screen official CEMS EMSR927 metadata as an independent event-exclusion aid for a separately reviewed stable-reference method after the event-only ASF staged pair stopped before registration.",
+  "official_sources": {
+    "activation_code": "EMSR927",
+    "activation_url": "https://mapping.emergency.copernicus.eu/activations/EMSR927/",
+    "public_api_url": "https://rapidmapping.emergency.copernicus.eu/backend/dashboard-api/public-activations/?code=EMSR927",
+    "api_documentation_url": "https://mapping.emergency.copernicus.eu/about/how-to-harvest-cems-mapping-data/emergency-response-data/",
+    "terms_url": "https://mapping.emergency.copernicus.eu/terms-and-conditions/",
+    "citation_guidelines_url": "https://mapping.emergency.copernicus.eu/about/citation-guidelines/",
+    "api_response_bytes": 43718,
+    "api_response_sha256": "88274286b904412a978eac6ef05f107510a3264bcf31e25d2253e13290d00219",
+    "api_record_count": 1,
+    "activation_name": "Flood in Nepal",
+    "sensitive": false,
+    "closed": true,
+    "event_time_as_published": "2026-08-25T22:00:00",
+    "activation_time_as_published": "2026-08-26T09:53:00"
+  },
+  "local_bindings": {
+    "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "stopped_route_ref": "records/readiness/m2-asf-partial-vv-delta-map-001-pre-attempt-reconciliation.json",
+    "stopped_route_sha256": "821b6c449eae0c3dc1d2ebc10238db79212558f18e220974714f16cc0aab5060"
+  },
+  "geometry_screen": {
+    "method": "ArcGIS Pro 3.7.1 ArcPy projected public API WKT from EPSG:4326 to the approved EPSG:32645 and intersected it with the approved AOI-OVERVIEW and AOI-SOURCE union AOI-UPPER-CORRIDOR. No product vector, raster, or project-data pixel was opened.",
+    "activation_extent_wkt": "POLYGON ((84.351228 27.675376, 84.351228 28.279944, 85.380579 28.279944, 85.380579 27.675376, 84.351228 27.675376))",
+    "activation_extent_semantics": "Bounding rectangle of mapped AOIs in the public API, not an observed-event polygon or analyzed-area proof.",
+    "activation_extent_intersection_with_approved_overview_km2": 3932.06,
+    "approved_overview_outside_activation_extent_km2": 3310.119,
+    "aoi_results": [
+      {"number": 1, "name": "Syapru Besi", "overview_overlap_km2": 3.458, "event_aoi_overlap_km2": 3.458, "finished_feasible_product": "GRA_PRODUCT_v1", "published_candidate_layers": ["observedEventA"]},
+      {"number": 2, "name": "Timure", "overview_overlap_km2": 2.97, "event_aoi_overlap_km2": 2.97, "finished_feasible_product": "GRA_PRODUCT_v2", "published_candidate_layers": ["observedEventA"]},
+      {"number": 3, "name": "Bidur", "overview_overlap_km2": 21.122, "event_aoi_overlap_km2": 0.0, "finished_feasible_products": ["GRA_PRODUCT_v1", "GRA_MONIT01_v1"], "published_candidate_layers": ["observedEventA", "notAnalysedA"]},
+      {"number": 4, "name": "Bharatpur", "overview_overlap_km2": 0.0, "event_aoi_overlap_km2": 0.0, "finished_feasible_product": null},
+      {"number": 5, "name": "Phosretar", "overview_overlap_km2": 23.932, "event_aoi_overlap_km2": 0.0, "finished_feasible_products": ["GRA_PRODUCT_v3", "GRA_MONIT01_v2"], "published_candidate_layers": ["observedEventA", "notAnalysedA"]},
+      {"number": 6, "name": "Kyundi", "overview_overlap_km2": 0.0, "event_aoi_overlap_km2": 0.0, "finished_feasible_product": null}
+    ],
+    "buffer_or_control_rule_adopted": false,
+    "geometric_non_overlap_proves_stability": false,
+    "geometric_non_overlap_proves_usable_asf_pixels": false
+  },
+  "rights_and_method_boundary": {
+    "cems_terms_last_modified_as_published": "07/06/2023",
+    "cems_service_information_terms_allow_reproduction_distribution_communication_adaptation_and_combination_subject_to_terms": true,
+    "data_use_binds_user_to_terms": true,
+    "third_party_source_imagery_has_separate_terms": true,
+    "third_party_ortho_cog_or_product_zip_use_approved": false,
+    "cems_vector_content_acquired_or_verified": false,
+    "cems_terms_accepted_for_new_source_adoption_by_owner": false,
+    "stable_reference_control_geometry_locked": false,
+    "interpretation": "CEMS event layers may help conservatively exclude reported impacts where mapping exists, but the AOIs cover only selected places and product mapping can omit other affected areas. Neither absence of a mapped event nor land outside the activation rectangle establishes a stable control. A separately fixed independent non-change rule, source adoption decision, exact vector custody if used, and ASF usable-pixel assessment are required before any registration or difference attempt."
+  },
+  "metadata_only_vector_locator_probe": {
+    "observed_at_utc": "2026-09-28T18:38:26Z",
+    "method": "HTTP HEAD on the ten exact public API-advertised observedEventA or notAnalysedA JSON locators for finished feasible products; no response body fetched or retained.",
+    "status": "all_ten_http_200",
+    "content_length_bytes_by_aoi_product_layer": [
+      {"aoi": 1, "product": "GRA_PRODUCT", "layer": "observedEventA_v1", "bytes": 278931},
+      {"aoi": 2, "product": "GRA_PRODUCT", "layer": "observedEventA_v2", "bytes": 89011},
+      {"aoi": 3, "product": "GRA_MONIT01", "layer": "notAnalysedA_v1", "bytes": 2985},
+      {"aoi": 3, "product": "GRA_MONIT01", "layer": "observedEventA_v1", "bytes": 519028},
+      {"aoi": 3, "product": "GRA_PRODUCT", "layer": "notAnalysedA_v1", "bytes": 25561},
+      {"aoi": 3, "product": "GRA_PRODUCT", "layer": "observedEventA_v1", "bytes": 249942},
+      {"aoi": 5, "product": "GRA_MONIT01", "layer": "notAnalysedA_v2", "bytes": 148373},
+      {"aoi": 5, "product": "GRA_MONIT01", "layer": "observedEventA_v2", "bytes": 2863791},
+      {"aoi": 5, "product": "GRA_PRODUCT", "layer": "notAnalysedA_v2", "bytes": 353037},
+      {"aoi": 5, "product": "GRA_PRODUCT", "layer": "observedEventA_v2", "bytes": 3096566}
+    ],
+    "content_or_feature_schema_verified": false,
+    "http_head_proves_downloaded_byte_identity": false
+  },
+  "actions_taken": {
+    "anonymous_public_metadata_read": true,
+    "projected_public_api_geometry_screen": true,
+    "metadata_only_http_head": true,
+    "cems_vector_or_imagery_content_download": false,
+    "asf_pixel_read": false,
+    "new_registration_or_difference_attempt": false,
+    "change_map_or_scientific_claim": false
+  }
+}

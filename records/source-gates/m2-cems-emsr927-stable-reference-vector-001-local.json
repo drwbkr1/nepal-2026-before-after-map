@@ -1,0 +1,74 @@
+{
+  "contract_version": "source-gate/v2",
+  "assessment_id": "NEPAL-M2-CEMS-EMSR927-STABLE-REFERENCE-VECTOR-001-LOCAL",
+  "assessed_at": "2026-09-28T18:36:16Z",
+  "authority": {
+    "mode": "not_granted",
+    "authority_ref": "",
+    "authorized_actions": [],
+    "expires_at_utc": null
+  },
+  "intended_use": {
+    "summary": "Consider exact CEMS EMSR927 observedEventA and notAnalysedA service vectors only as an independent event-exclusion aid in a separately reviewed local ASF stable-reference selection method. Exclude third-party ortho imagery and do not infer that unmapped terrain is unchanged.",
+    "planned_actions": ["anonymous metadata review", "conditional service-vector intake", "local exclusion screening"]
+  },
+  "sources": [
+    {
+      "source_id": "CEMS-EMSR927-EVENT-VECTORS",
+      "name": "Copernicus Emergency Management Service Rapid Mapping EMSR927 event and not-analyzed vector layers",
+      "locator": "https://mapping.emergency.copernicus.eu/activations/EMSR927/",
+      "criteria": [
+        {
+          "id": "identity", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [{"type": "live", "locator": "https://rapidmapping.emergency.copernicus.eu/backend/dashboard-api/public-activations/?code=EMSR927", "observed_at": "2026-09-28T18:35:48Z", "note": "Exact public API response SHA-256 88274286b904412a978eac6ef05f107510a3264bcf31e25d2253e13290d00219 identifies EMSR927, AOI numbers, finished product versions, and observedEventA/notAnalysedA layer locators; no vector bytes were fetched."}],
+          "note": "Activation metadata identity is bound; future intake must bind exact layer URL and bytes."
+        },
+        {
+          "id": "authority", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [{"type": "live", "locator": "https://mapping.emergency.copernicus.eu/about/how-to-harvest-cems-mapping-data/emergency-response-data/", "observed_at": "2026-09-28T18:36:16Z", "note": "Official CEMS documentation identifies its Rapid Mapping public activation API and the product-layer fields."}],
+          "note": "CEMS is authoritative for its own emergency mapping product, not independent proof of complete or field-validated event extent."
+        },
+        {
+          "id": "access", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [{"type": "live", "locator": "https://rapidmapping.emergency.copernicus.eu/backend/dashboard-api/public-activations/?code=EMSR927", "observed_at": "2026-09-28T18:35:48Z", "note": "The public activation API has sensitive=false and advertises ten target vector-layer JSON URLs for feasible finished products."}, {"type": "live", "locator": "https://rapidmapping-viewer.s3.eu-west-1.amazonaws.com/EMSR927/AOI01/GRA_PRODUCT/EMSR927_AOI01_GRA_PRODUCT_observedEventA_v1.json", "observed_at": "2026-09-28T18:38:26Z", "note": "A metadata-only HTTP HEAD probe returned 200 and Content-Length 278931; all ten exact target URLs returned HTTP 200 with published response lengths as recorded in the local observation. No body was fetched."}],
+          "note": "Public anonymous URL availability is established at this timestamp; content, checksum, schema, later uptime, and any rate limits remain unverified."
+        },
+        {
+          "id": "rights", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [{"type": "live", "locator": "https://mapping.emergency.copernicus.eu/terms-and-conditions/", "observed_at": "2026-09-28T18:36:16Z", "note": "CEMS grants free service-data access and permits reproduction, distribution, public communication, adaptation, modification, and combination subject to its conditions and attribution; use binds the user to the terms, and third-party information has separate terms."}, {"type": "live", "locator": "https://mapping.emergency.copernicus.eu/about/citation-guidelines/", "observed_at": "2026-09-28T18:36:16Z", "note": "Official attribution instructions exist for activation and product credits."}],
+          "note": "Rights are sufficient in principle for CEMS-created service vectors only, conditional on an authorized owner decision to use them under these terms. Proprietary source ortho/COG imagery and mixed product ZIPs are excluded."
+        },
+        {
+          "id": "provenance", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [{"type": "static", "locator": "records/observations/m2-cems-emsr927-stable-reference-feasibility-001-local.json", "note": "The official EMSR927 API reports AOI-specific GRA and monitoring product versions and distinguishes observedEventA and notAnalysedA layers from third-party source-image COGs."}],
+          "note": "Published product lineage is identified; exact vector content and feature-level provenance remain unverified."
+        },
+        {
+          "id": "integrity", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [{"type": "static", "locator": "records/observations/m2-cems-emsr927-stable-reference-feasibility-001-local.json", "note": "Conditional intake can bind each exact API-advertised layer URL, response length and SHA-256, validate JSON structure, CRS and geometry, and retain append-only non-Git custody before use."}],
+          "note": "This is a post-acquisition verification plan, not a verified vector checksum or promotion."
+        },
+        {
+          "id": "fitness", "required": true, "requires_live": false, "status": "unknown",
+          "evidence": [{"type": "static", "locator": "records/observations/m2-cems-emsr927-stable-reference-feasibility-001-local.json", "note": "Official AOI metadata intersect the approved source and corridor only in AOI01 and AOI02; the activation extent is a bounding rectangle. No vector geometry, independently stable land units, or usable ASF control pixels were tested."}],
+          "note": "CEMS mapping may conservatively exclude observed impacts, but an unmapped location is not a stable control; 30 independent usable controls are not established."
+        },
+        {
+          "id": "privacy-security", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [{"type": "static", "locator": "records/observations/m2-cems-emsr927-stable-reference-feasibility-001-local.json", "note": "The public API reports sensitive=false. The proposed use is event-area service vectors, not person-level records; later content still requires safe JSON/geometry validation and non-Git custody."}],
+          "note": "No account, credential, purchase, or third-party source image is needed for this metadata assessment."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "blocked",
+    "blocking_reasons": ["Exact service-vector bytes, schema, and feature geometry remain unverified", "Published event geometry cannot by itself establish 30 independent stable and usable ASF control windows", "Owner has not accepted the CEMS data-use terms or authorized adoption of this distinct source"],
+    "live_verification_pending": [],
+    "approved_actions": []
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": ["anonymous public metadata review", "record local assessment evidence"],
+    "requires_explicit_authorization": ["accept CEMS data-use terms", "download or retain CEMS service-vector content", "use CEMS geometry to select stable controls", "read ASF pixels outside previously approved event-only staging", "publish or redistribute vectors or derived pixels"]
+  }
+}
