@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "gate_id": "NEPAL-M2-ASF-HYP3-RTC-SUBMIT-AFTER-PARTIAL-001-IMPLEMENTATION-GATE",
+  "checked_at_utc": "2026-09-28T00:30:51Z",
+  "status": "pass_submit_after_partial_implementation_public_ci_only",
+  "bindings": {
+    "proposal_sha256": "587b3e5fe4878395d0a32802e19a66b77ed2c57dcb924dd14796d0ff462c9d8a",
+    "approval_sha256": "7092d2c5f7e4b3f2d0c9cff22a7c0d0a44c62942746a9b73c183b3b96f08d506",
+    "review_gate_sha256": "0991b00019bf8054feca5f64c4a88bc2c277ba251a1280b2da26b2ea1733573c",
+    "source_gate_sha256": "7f1af5e46f9b1cba3753383b686a68618c7694b53a4be07d612b6df6045bd8a4",
+    "first_terminal_sha256": "2305f6ce504e550b57aa207c3eb1004f2d4c014715745776d60c004e184afecd",
+    "implementation_commit_sha": "5774daeb9827474d5831597ea68bf6d6ce8f95e8",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_submit_after_partial_001.py": "9dede86a74b86c652bd843c04c75250e7bf04c20574936d5ffd15738fb7f8c87",
+      "scripts/invoke_m2_asf_hyp3_rtc_submit_after_partial_001.ps1": "4c820ab37527b65a8139fc4f14eefef3ae6a49a09bb5ca6a49f10ba385aa4a81",
+      "tests/test_m2_asf_hyp3_rtc_submit_after_partial_001.py": "40e36c367c3f21adde8a67c41514fcef4d171e6fb5dec46116c3caea162e936b"
+    }
+  },
+  "public_ci": {
+    "run_id": 36362430465,
+    "job_id": 108742127555,
+    "head_sha": "5774daeb9827474d5831597ea68bf6d6ce8f95e8",
+    "conclusion": "success"
+  },
+  "local_checks": {
+    "after_worker_synthetic_tests": 8,
+    "full_repository_tests_before_final_source_binding": 1001,
+    "full_repository_skips": 6,
+    "after_worker_tests_after_final_source_binding": 8,
+    "installed_arcgis_pro_disposable_six_raster_header_test": "pass",
+    "project_controls": "pass_1474_required_files"
+  },
+  "source_and_rights": {
+    "prior_exact_source_gate_remains_ready": true,
+    "official_basic_guidance_ref": "https://hyp3-docs.asf.alaska.edu/about/hyp3_basic/",
+    "official_usage_guidance_ref": "https://hyp3-docs.asf.alaska.edu/usage_guidelines/",
+    "official_guidance_checked_date_utc": "2026-09-28",
+    "free_basic_and_14_day_retention_documented": true,
+    "product_specific_display_rights_verified_for_after_product": false,
+    "exact_owner_accepted_agreement_text_retrieved": false,
+    "no_new_or_changed_account_terms_presented_to_agent": true
+  },
+  "assertions": {
+    "secret_or_account_or_job_request_performed_by_implementation": false,
+    "project_or_provider_pixels_read_by_implementation": false,
+    "after_job_submitted": false,
+    "after_product_verified": false,
+    "map_implementation_or_export_completed": false
+  },
+  "next_action": "Publish this exact gate for public CI, then perform and publish a final no-content preflight. The worker still requires a fresh owner-controlled credential handoff, at least 60 free Basic credits, and exact validate-only acceptance before one after-job submission."
+}
