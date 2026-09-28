@@ -1,6 +1,6 @@
 # Current status
 
-- **State:** M1 complete; M2 active. The approved ASF RTC partial-pair route has an exact after-scene ZIP in verified non-Git custody; product provenance, rights, headers, pixels, pair overlap, and a real map remain unverified. Earlier terminal optical and radar results remain preserved.
+- **State:** M1 complete; M2 active. The approved ASF RTC partial-pair route has an exact after-scene ZIP in verified non-Git custody and a reviewed product-metadata capture. Raster headers, pixels, pair overlap, and a real map remain unverified. Earlier terminal optical and radar results remain preserved.
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
@@ -411,3 +411,9 @@ The gated local panel runner and fresh-process reopen/audit reached public `main
 The owner-controlled handoff observed exact job `0a3e6fd4-a9a3-42c1-8c7c-3824ade06861` as service-succeeded and used its one authorized ZIP attempt. The 9,576,381,144-byte `M1-SRC-005` archive was promoted without replacement to non-Git custody. An independent local rehash matched SHA-256 `068e796f790763d82b86b0349451c5e507c29f826001961281f48c8403e6e175`. The [sanitized acquisition reconciliation](../records/readiness/m2-asf-hyp3-rtc-acquire-after-partial-001-terminal-reconciliation.json) binds the immutable observation, descriptor, attempt, and terminal receipts. The ZIP attempt is consumed; it cannot be retried.
 
 Archive integrity is not product provenance, rights, header, pixel, overlap, or map evidence. The next authorized work is a separately gated, metadata-only capture of the exact README, processing log, and six XML sidecars, followed by source and rights review. No after raster header or pixel has been read and no real EPSG:32645 pair or ArcGIS panel exists. The first source remains terminal `defer`; baseline admission, change analysis, attribution, public pixels, and scientific publication remain unauthorized.
+
+## ASF after metadata captured and reviewed; header QA next — 2026-09-28
+
+The metadata reader passed its exact implementation gate and no-content preflight in public CI runs `36458035023` and `36458175121`. Its sole append-only attempt rehashed the exact after ZIP and preserved the README, processing log, and six XML sidecars outside Git without reading a raster header or pixel. All eight captured file sizes and SHA-256 hashes match the terminal receipt. The [capture reconciliation](../records/readiness/m2-asf-hyp3-rtc-after-metadata-001-terminal-reconciliation.json) retains those identities.
+
+The [local metadata review](../records/readiness/m2-asf-hyp3-rtc-after-metadata-001-local-review.json) found only the approved `M1-SRC-005` granule in the README and log; final output is 10 m gamma0 power without speckle filtering. The provider used a precise orbit file and Copernicus GLO-30. The README documents the same additive layover/shadow bit values as the first RTC product. The VV/VH and mask XML permits local inspection and conditional credited display. The included DEM carries separate all-rights-reserved credit and remains excluded from display/export. Header and pixel QA need distinct public gates and one-attempt executions; no actual after mask values, usable AOI coverage, same-cell overlap, real panel, or scientific change has been measured.
