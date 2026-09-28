@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-INDEPENDENT-CONTROL-GEOMETRY-001-LOCAL",
+  "observed_at_utc": "2026-09-28T18:45:13Z",
+  "status": "geometry_only_candidate_capacity_not_stable_controls_or_method_approval",
+  "purpose": "Quantify whether a separately reviewed registration route could predeclare control-window locations outside the approved event AOIs and all CEMS EMSR927 mapped AOI bounding geography without treating the public activation rectangle itself as a stability proof.",
+  "bindings": {
+    "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "asf_before_header_ref": "records/readiness/m2-asf-hyp3-rtc-product-header-001-terminal-reconciliation.json",
+    "asf_before_header_sha256": "272494ad0fe5d44a072cb8ab7fcebf5eacf99efd0f95817714c46671434c7125",
+    "asf_after_header_ref": "records/readiness/m2-asf-hyp3-rtc-after-header-001-terminal-reconciliation.json",
+    "asf_after_header_sha256": "c1886951586859d78dbcc8ba8c3d72d84359b2157d760dddafa3899c31e0430c",
+    "cems_metadata_observation_ref": "records/observations/m2-cems-emsr927-stable-reference-feasibility-001-local.json",
+    "cems_metadata_observation_sha256": "0c244acd6e6033dec0d8b123ba44e6a22ad2dbeae45fbd4b02c88beae7248ec0",
+    "cems_source_gate_ref": "records/source-gates/m2-cems-emsr927-stable-reference-vector-001-local.json",
+    "cems_source_gate_sha256": "8d9f8f2285ea002560a831f82abcf7ac1bdc0af99b10c0d47768efc70dff3224",
+    "stopped_vv_route_ref": "records/readiness/m2-asf-partial-vv-delta-map-001-pre-attempt-reconciliation.json",
+    "stopped_vv_route_sha256": "821b6c449eae0c3dc1d2ebc10238db79212558f18e220974714f16cc0aab5060",
+    "existing_optical_pair_receipt_ref": "records/readiness/optical-pixel/m2-s2-pixel-readiness-recovery-001.json",
+    "existing_optical_pair_receipt_sha256": "9ffae2e589700adec07373325e3d35d6ee8ccf5bc3a5d66da5fe7e6639c406b5",
+    "asf_after_metadata_review_ref": "records/readiness/m2-asf-hyp3-rtc-after-metadata-001-local-review.json",
+    "asf_after_metadata_review_sha256": "f5a27a3b7dc101159bf20b064a9065c124621757bf9864e29fb4acfb73915357"
+  },
+  "geometry_method": {
+    "runtime": "ArcGIS Pro 3.7.1 ArcPy geometry only; no raster or source vector body opened",
+    "crs": "EPSG:32645",
+    "overview_area_km2": 7242.179,
+    "approved_event_aoi_union_area_km2": 661.108,
+    "cems_activation_bbox_intersection_with_approved_source_aoi_km2": 0.0,
+    "finding": "The CEMS activation bounding rectangle misses the approved source AOI. Excluding it alone would leave possible source-area controls. The tested exclusion geometry is its union with AOI-SOURCE and AOI-UPPER-CORRIDOR, then a sensitivity buffer.",
+    "grid_anchor_epsg32645_m": [192050.0, 3054850.0],
+    "cell_size_m": 10.0,
+    "grid_anchor_role": "Shared product-header cell lattice for geometry screening, not a new output grid or registration result.",
+    "window_selection_rule_for_screen_only": "Count nonoverlapping square grid windows fully contained in approved AOI-OVERVIEW minus the buffered union of the CEMS activation rectangle and the two approved event AOIs.",
+    "sensitivity": [
+      {"buffer_km": 2, "eligible_area_km2": 2461.137, "geometric_window_count_64x64": 5695, "geometric_window_count_128x128": 1334, "geometric_window_count_256x256": 289},
+      {"buffer_km": 5, "eligible_area_km2": 1902.707, "geometric_window_count_64x64": 4316, "geometric_window_count_128x128": 1002, "geometric_window_count_256x256": 203},
+      {"buffer_km": 10, "eligible_area_km2": 1095.691, "geometric_window_count_64x64": 2458, "geometric_window_count_128x128": 561, "geometric_window_count_256x256": 112}
+    ],
+    "buffer_or_window_size_adopted_as_scientific_method": false,
+    "geometric_candidates_are_independently_stable_or_pair_valid": false
+  },
+  "existing_independent_evidence_limits": {
+    "optical_pair_source_ids": ["M1-SRC-010", "M1-SRC-008"],
+    "optical_overview_pair_valid_area_km2": 574.9744,
+    "optical_pair_route_status": "block",
+    "optical_registration_status": "defer",
+    "optical_registration_accepted_controls": 20,
+    "optical_registration_required_controls": 30,
+    "optical_registration_rmse_pixels": 0.5087470343284738,
+    "optical_registration_pass_max_rmse_pixels": 0.5,
+    "optical_pair_cannot_validate_sar_stable_controls_without_new_review": true,
+    "asf_after_product_dem_matching": false,
+    "asf_before_product_dem_matching_verified_in_this_record": false,
+    "asf_guide_url": "https://hyp3-docs.asf.alaska.edu/guides/rtc_product_guide/",
+    "asf_guide_note": "ASF describes orbit-based geocoding as the RTC default and warns that DEM matching can create variable image offsets; neither the default nor the after-product setting substitutes for measured pair registration."
+  },
+  "decision_boundary": {
+    "current_staged_pair_sufficient_for_outside_event_controls": false,
+    "needs_separate_owner_scientific_method_choice": true,
+    "needs_cems_data_use_terms_authority_if_bbox_is_adopted": true,
+    "needs_distinct_authority_for_original_asf_product_pixel_reads_outside_event_only_stage": true,
+    "needs_predeclared_window_acceptance_rejection_and_registration_algorithm": true,
+    "needs_30_accepted_stable_controls_and_unchanged_0_5_pixel_rmse_and_bias_gate": true,
+    "no_promise_of_pass_from_geometry_count": true,
+    "prior_stopped_route_reopened_or_retried": false,
+    "new_real_attempt_or_change_map_created": false
+  }
+}
