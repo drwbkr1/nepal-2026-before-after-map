@@ -58,7 +58,7 @@ class HyP3ReviewIdentityTests(unittest.TestCase):
         self.assertFalse(proposal["frozen_scientific_boundaries"]["M4_change_analysis_or_threshold_adaptation_authorized"])
         self.assertFalse(proposal["frozen_scientific_boundaries"]["source_or_derived_pixel_publication_authorized"])
 
-    def test_public_review_gate_and_parallel_map_route(self) -> None:
+    def test_public_review_gate_and_reconciled_parallel_map_route(self) -> None:
         gate_ref = "records/readiness/m2-asf-hyp3-rtc-map-route-001-review-publication-gate.json"
         gate = load(gate_ref)
         self.assertEqual(gate["status"], "pass_exact_review_packet_public_ci_only")
@@ -68,6 +68,10 @@ class HyP3ReviewIdentityTests(unittest.TestCase):
         self.assertEqual(gate["bindings"]["publication_commit_sha"], "6b8c62847a3c50cdcb520a68aca8999e1ed0b0ce")
         self.assertEqual(gate["bindings"]["public_ci_run_id"], 36270829002)
         self.assertEqual(gate["observed_public_ci"]["run_conclusion"], "success")
+        current_approval_ref = "records/source-gates/m2-asf-hyp3-rtc-partial-pair-map-001-approval.json"
+        current_review_gate_ref = "records/readiness/m2-asf-hyp3-rtc-partial-pair-map-001-review-publication-gate.json"
+        terminal_ref = "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-publication-reconciliation.json"
+        self.assertEqual(load(terminal_ref)["status"], "pass_exact_public_terminal_ci_reconciled_visual_only")
         current_routes = []
         for ref, key in (
             ("records/project-control-profile.json", "active_map_route"),
@@ -76,12 +80,13 @@ class HyP3ReviewIdentityTests(unittest.TestCase):
         ):
             state = load(ref)
             route = state[key] if key == "active_map_route" else state[key]["active_map_route"]
-            self.assertEqual(route["authority_ref"], APPROVAL)
-            self.assertEqual(route["public_review_gate_ref"], gate_ref)
+            self.assertEqual(route["authority_ref"], current_approval_ref)
+            self.assertEqual(route["public_review_gate_ref"], current_review_gate_ref)
+            self.assertEqual(route["terminal_publication_ref"], terminal_ref)
             current_routes.append((route["checkpoint_id"], route["next_action"]))
         self.assertEqual(len(set(current_routes)), 1)
-        self.assertTrue(current_routes[0][0])
-        self.assertTrue(current_routes[0][1])
+        self.assertEqual(current_routes[0][0], "M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001-LOCAL-VISUAL-TERMINAL")
+        self.assertIn("no retry, new pixel processing", current_routes[0][1])
 
 
 if __name__ == "__main__":

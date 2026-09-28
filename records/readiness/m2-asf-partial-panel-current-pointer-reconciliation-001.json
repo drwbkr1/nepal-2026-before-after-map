@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-PARTIAL-PANEL-CURRENT-POINTER-RECONCILIATION-001",
+  "checked_at_utc": "2026-09-28T18:10:16Z",
+  "status": "pass_current_map_route_pointer_reconciled_only",
+  "old_checkpoint": "M2-ASF-HYP3-RTC-FIRST-JOB-PRODUCT-PENDING",
+  "new_checkpoint": "M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001-LOCAL-VISUAL-TERMINAL",
+  "evidence": {
+    "terminal_ref": "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-reconciliation.json",
+    "terminal_sha256": "561a9c0cea0dfd708d8b5feef14b6950be4e85b7063288ca3c4f5e9683552f56",
+    "terminal_publication_ref": "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-publication-reconciliation.json",
+    "terminal_publication_sha256": "2749654abfcd43b97a91754f3de2ca5c85650374871c46eea4bd5df31960e135",
+    "terminal_publication_public_ci_run_id": 36461761095,
+    "post_ci_reconciliation_public_ci_run_id": 36461965248
+  },
+  "corrected_current_surfaces": [
+    "contracts/milestone-002.json#/handoff/active_map_route",
+    "records/project-control-profile.json#/active_map_route",
+    "records/long-term-goal.json#/active_map_route"
+  ],
+  "preserved_history": {
+    "original_map_route_approval_unchanged": true,
+    "original_pending_job_checkpoint_remains_in_git_history": true,
+    "parallel_radar_terminal_checkpoint_unchanged": true,
+    "before_and_after_full_area_QA_status": "defer",
+    "consumed_attempts_reused_or_retried": false
+  },
+  "authority_boundary": {
+    "current_state_correction_only": true,
+    "new_source_or_pixel_processing_authorized": false,
+    "registration_or_delta_authorized": false,
+    "m4_scientific_candidate_authorized": false,
+    "public_pixels_or_scientific_publication_authorized": false
+  },
+  "validation": {
+    "focused_map_route_tests_passed": 3,
+    "full_unit_tests_total": 1068,
+    "full_unit_tests_passed": 1062,
+    "full_unit_tests_skipped": 6,
+    "project_checker_required_files_passed": 1474,
+    "generic_milestone_validator_passed": false,
+    "generic_milestone_validator_limit": "The existing historical M2 unit format is not accepted by the generic validator; errors are unrelated to the three current map-route pointer edits. The project checker and tests pass."
+  }
+}
