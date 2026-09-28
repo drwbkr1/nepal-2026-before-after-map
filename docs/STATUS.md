@@ -1,12 +1,12 @@
 # Current status
 
-- **State:** M1 complete; M2 active. The ASF RTC partial-pair visual route is approved and its offline implementation is public, but the exact after-scene processing handoff has not run. Earlier terminal optical and radar results remain preserved.
+- **State:** M1 complete; M2 active. The approved ASF RTC partial-pair route has an exact after-scene ZIP in verified non-Git custody; product provenance, rights, headers, pixels, pair overlap, and a real map remain unverified. Earlier terminal optical and radar results remain preserved.
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Current checkpoint:** `M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001`; the before RTC source is terminal `defer`, the one exact after-job handoff is awaiting owner-controlled credentials, and no real pair or map exists. The earlier radar recovery-002 attempt remains terminal and consumed. No baseline admission, change analysis, attribution, public pixels, or scientific publication is authorized.
+- **Current checkpoint:** `M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001`; the before RTC source is terminal `defer`, the one exact after-job and ZIP attempt are terminal, and no real pair or map exists. The earlier radar recovery-002 attempt remains terminal and consumed. No baseline admission, change analysis, attribution, public pixels, or scientific publication is authorized.
 
 ## Radar pixel and orbit application recovery-002 terminal outcome — 2026-09-19
 
@@ -405,3 +405,9 @@ The distinct one-attempt partial-pair coordinator reached public `main` at commi
 The owner-supplied `submitted_product_unverified` output was the earlier job-submission result, not the separate after-product intake result. A fresh controlled-custody check still found neither an after-job observation nor a ZIP-attempt receipt. The owner-controlled intake command was provided separately; do not repeat job submission or infer product integrity, rights, usable overlap, map readiness, change, or attribution from the submitted job.
 
 The gated local panel runner and fresh-process reopen/audit reached public `main` at commit `5d96631a5c147113d3abb51aa57f0af7d6f6378e` and passed CI run `36374853512`. Five portable tests exercised a satisfiable synthetic rights, stage, implementation-CI, and preflight release; changed staged raster bytes; one successful append-only attempt; collision; and retained terminal failure. The installed ArcGIS Pro 3.7.1 disposable validation built the EPSG:32645 APRX, reopened it in a separate process, exported the second PNG, and passed the artifact audit with zero broken layers. The full local suite passed 1,068 tests with six skips. This is method and handoff readiness only: the real panel release remains closed before ArcGIS because the after ZIP, product-specific rights and pixel receipts, measured pair overlap, and their distinct gates do not exist. No real APRX/export, change analysis, attribution, or scientific result is claimed.
+
+## ASF exact after archive acquired; metadata review next — 2026-09-28
+
+The owner-controlled handoff observed exact job `0a3e6fd4-a9a3-42c1-8c7c-3824ade06861` as service-succeeded and used its one authorized ZIP attempt. The 9,576,381,144-byte `M1-SRC-005` archive was promoted without replacement to non-Git custody. An independent local rehash matched SHA-256 `068e796f790763d82b86b0349451c5e507c29f826001961281f48c8403e6e175`. The [sanitized acquisition reconciliation](../records/readiness/m2-asf-hyp3-rtc-acquire-after-partial-001-terminal-reconciliation.json) binds the immutable observation, descriptor, attempt, and terminal receipts. The ZIP attempt is consumed; it cannot be retried.
+
+Archive integrity is not product provenance, rights, header, pixel, overlap, or map evidence. The next authorized work is a separately gated, metadata-only capture of the exact README, processing log, and six XML sidecars, followed by source and rights review. No after raster header or pixel has been read and no real EPSG:32645 pair or ArcGIS panel exists. The first source remains terminal `defer`; baseline admission, change analysis, attribution, public pixels, and scientific publication remain unauthorized.
