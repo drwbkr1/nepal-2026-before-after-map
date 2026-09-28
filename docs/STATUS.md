@@ -1,6 +1,6 @@
 # Current status
 
-- **State:** M1 complete; M2 active. The approved ASF RTC partial-pair route has an exact after-scene ZIP in verified non-Git custody, reviewed product metadata, and passing real raster headers. Pixels, pair overlap, and a real map remain unverified. Earlier terminal optical and radar results remain preserved.
+- **State:** M1 complete; M2 active. The approved ASF RTC partial-pair route has two exact RTC archives in verified non-Git custody and both dates' individual event-AOI pixel screens completed as `defer` under the full-area rule. Same-cell pair overlap and a real map remain unverified. Earlier terminal optical and radar results remain preserved.
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
@@ -421,3 +421,7 @@ The [local metadata review](../records/readiness/m2-asf-hyp3-rtc-after-metadata-
 ## ASF after raster headers passed; event-AOI pixels next — 2026-09-28
 
 The after-header implementation and no-content gates passed public CI runs `36458855733` and `36458997143`. A disposable ArcGIS Pro 3.7.1 test exposed and corrected a missing source/job identity in its generated-data fixture before these gates; production header logic and frozen predicates were unchanged. The single real ArcGIS GDAL attempt rehashed the exact after archive and inspected only six GeoTIFF headers through `/vsizip/`. All are single-band, 10 m EPSG:32645 on a 29,360 by 21,199 grid with extent 192,050–485,650 E and 3,054,850–3,266,840 N. VV/VH, incidence and scattering area are Float32, layover/shadow is Byte, and DEM is Int16. The [terminal reconciliation](../records/readiness/m2-asf-hyp3-rtc-after-header-001-terminal-reconciliation.json) binds the consumed attempt and records a two-cell eastward offset from the before product. That offset is not a registration or overlap assessment. No after pixel value, mask distribution, AOI coverage, or real pair has been measured.
+
+## ASF after event-AOI pixels defer under full-area rule; partial pair remains conditional — 2026-09-28
+
+The after-pixel implementation and no-content gates passed public CI runs `36459447343` and `36459570392`; portable and installed ArcGIS disposable tests passed before execution. One append-only real attempt read only VV, VH, and layover/shadow windows inside `AOI-SOURCE` and `AOI-UPPER-CORRIDOR`. The after product covers virtually all of each AOI, but usable fractions are **55.1376%** and **76.0875%**, below the unchanged 80% full-area threshold. Both dispositions are `defer`; layover and shadow dominate exclusions and no unknown provider mask value was observed. The [terminal reconciliation](../records/readiness/m2-asf-hyp3-rtc-after-pixel-001-terminal-reconciliation.json) preserves the result without changing the before scene's terminal `defer` or admitting a baseline. Both dates individually exceed the 20% partial-evidence floor, but common-valid same-cell overlap has not been measured. No real panel, map export, change analysis, attribution, or scientific result is established.
