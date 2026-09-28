@@ -12,6 +12,7 @@ from zipfile import ZIP_STORED, ZipFile
 import numpy as np
 from osgeo import gdal, osr
 
+from m2_asf_hyp3_rtc_after_descriptor_core_001 import SOURCE_ID
 from m2_asf_hyp3_rtc_after_header_001 import inspect_once
 from m2_asf_hyp3_rtc_header_core_001 import RASTERS
 from m2_asf_hyp3_rtc_package_core_001 import REQUIRED_SUFFIXES
@@ -52,7 +53,8 @@ def main() -> int:
                 else:
                     package.writestr(member, b"disposable metadata")
         archive_sha = hashlib.sha256(archive.read_bytes()).hexdigest()
-        acquisition = {"product_filename": archive.name,
+        acquisition = {"source_id": SOURCE_ID, "job_id": JOB_ID,
+                       "product_filename": archive.name,
                        "archive_size_bytes": archive.stat().st_size,
                        "archive_sha256": archive_sha}
         result = inspect_once(acquisition, archive,
