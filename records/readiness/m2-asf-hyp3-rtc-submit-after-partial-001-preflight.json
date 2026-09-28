@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "preflight_id": "NEPAL-M2-ASF-HYP3-RTC-SUBMIT-AFTER-PARTIAL-001-PREFLIGHT",
+  "checked_at_utc": "2026-09-28T00:32:24Z",
+  "status": "pass_submit_after_partial_no_content",
+  "bindings": {
+    "proposal_sha256": "587b3e5fe4878395d0a32802e19a66b77ed2c57dcb924dd14796d0ff462c9d8a",
+    "review_bundle_sha256": "f3c981c36bc1f9ebf61f42a3451e7aa05e5a040799a59ced78a5dc741665f58e",
+    "approval_sha256": "7092d2c5f7e4b3f2d0c9cff22a7c0d0a44c62942746a9b73c183b3b96f08d506",
+    "review_gate_sha256": "0991b00019bf8054feca5f64c4a88bc2c277ba251a1280b2da26b2ea1733573c",
+    "implementation_gate_sha256": "026d8d73d4d1b1f2207612aa7464c47d6a515af9ea99fdde2c9e25ac27d4de6d",
+    "source_gate_sha256": "7f1af5e46f9b1cba3753383b686a68618c7694b53a4be07d612b6df6045bd8a4",
+    "first_terminal_sha256": "2305f6ce504e550b57aa207c3eb1004f2d4c014715745776d60c004e184afecd",
+    "public_implementation_gate_commit": "75a32d123836f2d31cfc8300705bb64abe971371",
+    "public_implementation_gate_ci_run_id": 36362555767
+  },
+  "assertions": {
+    "public_ci_passed_for_review_implementation_and_gate": true,
+    "exact_after_source_and_method_unchanged": true,
+    "prior_four_scene_validate_only_receipt_retained": true,
+    "first_source_QA_defer_and_terminal_attempt_unchanged": true,
+    "new_approval_amends_stop_only_for_one_partial_visual_after_job": true,
+    "non_git_custody_root_exists_and_is_not_link": true,
+    "attempt_absent": true,
+    "no_secret_or_account_or_job_request": true,
+    "provider_product_or_pixel_read": false,
+    "current_free_basic_balance_verified": false,
+    "after_job_submitted": false
+  },
+  "release_scope": "After this preflight passes public default-branch CI, the owner-controlled PowerShell handoff may obtain one Earthdata bearer token without recording it. The worker reserves one append-only attempt, requires at least 60 current free Basic credits and one exact M1-SRC-005 validate-only acceptance, then submits at most one unchanged RTC_GAMMA processing request. No automatic retry, other scene, acquisition, pixel read, map build, change analysis, or publication is released by this receipt alone.",
+  "claim_boundary": "A pass here is a no-content execution gate, not proof of current account capacity, job submission, product integrity, pixel QA, display rights, registration, map suitability, or scientific result."
+}
