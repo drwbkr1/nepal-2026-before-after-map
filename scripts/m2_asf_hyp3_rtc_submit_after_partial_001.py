@@ -40,6 +40,8 @@ APPROVAL_SHA = "7092d2c5f7e4b3f2d0c9cff22a7c0d0a44c62942746a9b73c183b3b96f08d506
 REVIEW_GATE_REF = "records/readiness/m2-asf-hyp3-rtc-partial-pair-map-001-review-publication-gate.json"
 FIRST_TERMINAL_REF = "records/readiness/m2-asf-hyp3-rtc-product-pixel-001-terminal-reconciliation.json"
 FIRST_TERMINAL_SHA = "2305f6ce504e550b57aa207c3eb1004f2d4c014715745776d60c004e184afecd"
+SOURCE_GATE_REF = "records/source-gates/m2-asf-hyp3-rtc-processing-source-gate-001.json"
+SOURCE_GATE_SHA = "7f1af5e46f9b1cba3753383b686a68618c7694b53a4be07d612b6df6045bd8a4"
 IMPLEMENTATION_GATE_REF = "records/readiness/m2-asf-hyp3-rtc-submit-after-partial-001-implementation-gate.json"
 PREFLIGHT_REF = "records/readiness/m2-asf-hyp3-rtc-submit-after-partial-001-preflight.json"
 DATA_ROOT = ROOT.parent / f"{ROOT.name}-data"
@@ -78,11 +80,13 @@ def require_release(root: Path = ROOT, attempt_root: Path = ATTEMPT_ROOT) -> Non
     if any(_sha(root / ref) != sha for ref, sha in (
         (PROPOSAL_REF, PROPOSAL_SHA), (BUNDLE_REF, BUNDLE_SHA),
         (APPROVAL_REF, APPROVAL_SHA), (FIRST_TERMINAL_REF, FIRST_TERMINAL_SHA),
+        (SOURCE_GATE_REF, SOURCE_GATE_SHA),
     )):
         raise RouteStop("after_bound_identity_mismatch")
     approval = _json(root / APPROVAL_REF)
     review = _json(root / REVIEW_GATE_REF)
     first = _json(root / FIRST_TERMINAL_REF)
+    source_gate = _json(root / SOURCE_GATE_REF)
     implementation = _json(root / IMPLEMENTATION_GATE_REF)
     preflight = _json(root / PREFLIGHT_REF)
     files = implementation.get("bindings", {}).get("implementation_file_sha256")
@@ -94,6 +98,12 @@ def require_release(root: Path = ROOT, attempt_root: Path = ATTEMPT_ROOT) -> Non
         or review.get("observed_public_ci", {}).get("run_conclusion") != "success"
         or first.get("status") != "stop_source_event_aoi_pixel_qa_no_next_date"
         or first.get("verification", {}).get("next_ASF_job_submitted") is not False
+        or source_gate.get("decision", {}).get("status") != "ready"
+        or "submit_exact_free_basic_rtc_job" not in source_gate.get("decision", {}).get("approved_actions", [])
+        or len(source_gate.get("sources", [])) != 1
+        or len(source_gate["sources"][0].get("criteria", [])) != 8
+        or any(item.get("required") is not True or item.get("status") != "pass"
+               for item in source_gate["sources"][0]["criteria"])
         or implementation.get("status") != "pass_submit_after_partial_implementation_public_ci_only"
         or implementation.get("bindings", {}).get("proposal_sha256") != PROPOSAL_SHA
         or implementation.get("bindings", {}).get("approval_sha256") != APPROVAL_SHA

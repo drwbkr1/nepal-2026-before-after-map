@@ -18,7 +18,8 @@ from m2_asf_hyp3_rtc_core_001 import RouteStop, load_approved_jobs  # noqa: E402
 from m2_asf_hyp3_rtc_submit_after_partial_001 import (  # noqa: E402
     APPROVAL_REF, APPROVAL_SHA, BUNDLE_REF, BUNDLE_SHA, FIRST_TERMINAL_REF,
     FIRST_TERMINAL_SHA, HOST, IMPLEMENTATION_FILES, IMPLEMENTATION_GATE_REF,
-    PREFLIGHT_REF, PROPOSAL_REF, PROPOSAL_SHA, REVIEW_GATE_REF, SOURCE_ID,
+    PREFLIGHT_REF, PROPOSAL_REF, PROPOSAL_SHA, REVIEW_GATE_REF, SOURCE_GATE_REF,
+    SOURCE_GATE_SHA, SOURCE_ID,
     _request, account_60, require_release, run_once, submit_after, validate_after,
 )
 
@@ -85,7 +86,8 @@ class AfterPartialTests(unittest.TestCase):
             data = root / "data"
             data.mkdir()
             attempt = data / "after" / "attempt"
-            for ref in (*IMPLEMENTATION_FILES, PROPOSAL_REF, BUNDLE_REF, APPROVAL_REF, FIRST_TERMINAL_REF):
+            for ref in (*IMPLEMENTATION_FILES, PROPOSAL_REF, BUNDLE_REF, APPROVAL_REF,
+                        FIRST_TERMINAL_REF, SOURCE_GATE_REF):
                 target = root / ref
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(ROOT / ref, target)
@@ -93,6 +95,7 @@ class AfterPartialTests(unittest.TestCase):
             self.assertEqual(sha(root / BUNDLE_REF), BUNDLE_SHA)
             self.assertEqual(sha(root / APPROVAL_REF), APPROVAL_SHA)
             self.assertEqual(sha(root / FIRST_TERMINAL_REF), FIRST_TERMINAL_SHA)
+            self.assertEqual(sha(root / SOURCE_GATE_REF), SOURCE_GATE_SHA)
             write(root / REVIEW_GATE_REF, {
                 "status": "pass_exact_review_packet_public_ci_only",
                 "bindings": {"owner_approval_sha256": APPROVAL_SHA},
