@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PANEL-001-PREFLIGHT",
+  "checked_at_utc": "2026-09-28T17:51:24Z",
+  "status": "pass_partial_panel_no_content",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-partial-pair-map-001-approval.json",
+  "bindings": {
+    "implementation_gate_sha256": "f0c56ba983736bb89145eecf5fe81d1c92bd81843bef2a732129673a33f94e0c",
+    "implementation_gate_public_ci_run_id": 36461013907,
+    "implementation_gate_public_ci_head_sha": "db5721c185ae1aaec7baa477a2a399a4bcd73268",
+    "stage_terminal_sha256": "c6966f0304c96be68edacf0e5d342ece7443935d325aa87fdf01807068b56a0d",
+    "rights_review_sha256": "6767d00437e49e3f01c64dca6c07c43ed98cf8d6e7fa95c46129f75e949102a3",
+    "before_staged_raster_sha256": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3",
+    "after_staged_raster_sha256": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+    "AOI_SOURCE_common_valid_fraction": 0.546721,
+    "AOI_UPPER_CORRIDOR_common_valid_fraction": 0.757928
+  },
+  "assertions": {
+    "exact_two_stage_rasters_exist_with_size_and_sha256_rechecked": true,
+    "both_AOIs_above_20_percent_same_cell_floor": true,
+    "parent_rights_review_unchanged": true,
+    "credit_line_contains_ASF_ESA_and_two_HyP3_DOIs": true,
+    "DEM_display_or_export": false,
+    "implementation_files_match_public_ci_bound_gate": true,
+    "public_implementation_gate_ci_passed": true,
+    "attempt_absent": true,
+    "no_map_or_export_created": true,
+    "no_change_analysis_attribution_or_public_pixels": true
+  },
+  "release_scope": "Only after this exact preflight passes public default-branch CI, perform one append-only local ArcGIS Pro visual-panel attempt from the two hash-bound VV gamma0 dB rasters: build the EPSG:32645 APRX and first PNG, reopen in a distinct ArcGIS process, export the second PNG, and audit paths, labels, credits, warnings and artifacts. Keep all raster, APRX and PNG bytes outside Git. A pass remains visual-only and partial; no DEM display, difference raster, registration claim, change analysis, attribution, public pixels, or scientific publication. Stop on failure without automatic retry."
+}
