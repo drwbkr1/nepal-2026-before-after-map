@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PANEL-001-TERMINAL-PUBLICATION-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-28T17:58:28Z",
+  "status": "pass_exact_public_terminal_ci_reconciled_visual_only",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-partial-pair-map-001-approval.json",
+  "bindings": {
+    "terminal_reconciliation_ref": "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-reconciliation.json",
+    "terminal_reconciliation_sha256": "561a9c0cea0dfd708d8b5feef14b6950be4e85b7063288ca3c4f5e9683552f56",
+    "terminal_commit_sha": "f5203be46d8d8611c131321a2c3bd92fdbdedba3",
+    "terminal_public_ci_run_id": 36461761095,
+    "terminal_public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/36461761095",
+    "terminal_public_ci_conclusion": "success"
+  },
+  "assertions": {
+    "local_and_remote_main_matched_terminal_commit": true,
+    "sanitized_terminal_receipt_and_status_public": true,
+    "non_git_aprx_png_and_rasters_not_published": true,
+    "one_panel_attempt_consumed": true,
+    "automatic_retry_performed": false,
+    "both_individual_full_area_QA_status": "defer",
+    "registration_or_clean_machine_portability_verified": false,
+    "baseline_or_change_analysis_authorized": false,
+    "attribution_or_scientific_publication_authorized": false
+  },
+  "current_checkpoint": "M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001-LOCAL-VISUAL-TERMINAL",
+  "next_action": "Use the local credited partial visual only as a reference. Any change analysis, broader delivery, new source, or consumed-attempt retry needs separate review and authority."
+}
