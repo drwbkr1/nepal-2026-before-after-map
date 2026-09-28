@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PAIR-STAGE-001-PREFLIGHT",
+  "checked_at_utc": "2026-09-28T17:44:18Z",
+  "status": "pass_partial_pair_stage_no_content",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-partial-pair-map-001-approval.json",
+  "bindings": {
+    "implementation_gate_sha256": "8993d5a1449869d4323a095acd82b5a160ad49b3ee88aa70817f5afcff53112b",
+    "implementation_gate_public_ci_run_id": 36460147323,
+    "implementation_gate_public_ci_head_sha": "07cb9437e858e6f8d59c1d8e717bbdd27b692f72",
+    "before_acquisition_sha256": "3261283cb1c32d9633af45437eeb33c43cf504e06764a71174c67421ad40c02c",
+    "after_acquisition_sha256": "8db7f8e7e119a08beeecd5d719bd8550fe8147e1b2d21913e9aaac8094d599e3",
+    "before_pixel_sha256": "2a2d9b88662475e2ec9b78e2683befd3b100682ba38010617dc2ff081b2e7603",
+    "after_pixel_sha256": "68be48ce724b8ab0ca76759b5f511c8ad8367dfc0a18b3719fe1f3261e18a27b",
+    "rights_review_sha256": "409dfbd12deee028206fc86be75b2825b30a0e1e05a2f2ac43e3d73778f34574",
+    "before_archive_size_bytes": 9574123274,
+    "after_archive_size_bytes": 9576381144,
+    "approved_AOI_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "pixel_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"
+  },
+  "assertions": {
+    "exact_before_and_after_acquisition_receipts_unchanged": true,
+    "both_archives_exist_with_exact_name_and_size": true,
+    "neither_archive_path_is_reparse_point": true,
+    "both_individual_AOI_pixel_screens_terminal_defer_with_partial_evidence": true,
+    "both_dates_have_no_undocumented_mask_values": true,
+    "rights_review_permits_only_local_credited_VV_display": true,
+    "frozen_AOI_and_pixel_contract_hashes_match": true,
+    "implementation_files_match_public_ci_bound_gate": true,
+    "public_implementation_gate_ci_passed": true,
+    "attempt_absent": true,
+    "no_pair_pixel_read": true,
+    "no_new_job_network_request_or_secret_access": true
+  },
+  "release_scope": "Only after this exact preflight passes public default-branch CI, run one append-only local pair-stage attempt. It may rehash both approved ZIPs, read VV, VH, and layover/shadow pixels in the two event AOIs, measure same-cell common-valid area against the fixed 20% floor, and conditionally write only two aligned VV gamma0 dB GeoTIFFs outside Git. A pass releases subsequent separately gated local visual panel preparation only. Stop on first failure without retry; no DEM display, difference raster, registration claim, change analysis, attribution, public pixels, or scientific publication."
+}
