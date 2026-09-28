@@ -53,26 +53,28 @@ def validate() -> dict:
             common_valid_by_aoi={"AOI-SOURCE": .55, "AOI-UPPER-CORRIDOR": .74},
             credits_and_dois="Synthetic ASF/ESA credit | https://doi.org/10.5281/zenodo.4646138",
         )
-        command = [sys.executable, "-c",
-                   "import json,sys; sys.path.insert(0,'scripts'); from pathlib import Path; "
-                   "from m2_asf_hyp3_rtc_partial_pair_map_001 import verify_fresh_reopen; "
-                   "print(json.dumps(verify_fresh_reopen(Path(sys.argv[1]))))", str(output)]
+        command = [sys.executable,
+                   str(ROOT / "scripts/m2_asf_hyp3_rtc_partial_panel_reopen_001.py"),
+                   str(output)]
         reopened = subprocess.run(command, cwd=ROOT, capture_output=True,
                                   text=True, timeout=120, check=False)
         if reopened.returncode != 0:
             raise RuntimeError("partial_synthetic_fresh_reopen_failed")
         receipt = json.loads(reopened.stdout)
         if (built["status"] != "built_local_partial_visual_pending_fresh_reopen"
-                or receipt["status"] != "pass_local_arcgis_fresh_reopen_export"
-                or receipt["broken_layers"] != 0
+                or receipt["status"] != "pass_local_partial_panel_fresh_reopen_and_audit"
+                or receipt["reopen"]["status"] != "pass_local_arcgis_fresh_reopen_export"
+                or receipt["audit"]["status"] != "pass_local_partial_panel_artifact_audit_only"
+                or receipt["reopen"]["broken_layers"] != 0
                 or built["DEM_raster_displayed"] is not False
                 or built["change_analysis_or_attribution"] is not False):
             raise RuntimeError("partial_synthetic_panel_invalid")
         return {
             "status": "pass_disposable_partial_panel_fresh_arcgis_reopen",
             "arcgis_version": arcpy.GetInstallInfo()["Version"],
-            "wkid": receipt["wkid"], "map_count": receipt["map_count"],
-            "broken_layers": receipt["broken_layers"],
+            "wkid": receipt["reopen"]["wkid"],
+            "map_count": receipt["reopen"]["map_count"],
+            "broken_layers": receipt["reopen"]["broken_layers"],
             "project_or_provider_data_read": False,
             "network_or_credential_action": False,
             "scientific_admission": False,
