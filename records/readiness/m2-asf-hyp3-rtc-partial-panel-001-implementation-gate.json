@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PANEL-001-IMPLEMENTATION-GATE",
+  "checked_at_utc": "2026-09-28T17:50:07Z",
+  "status": "pass_partial_panel_implementation_public_ci_only",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-partial-pair-map-001-approval.json",
+  "bindings": {
+    "approval_sha256": "7092d2c5f7e4b3f2d0c9cff22a7c0d0a44c62942746a9b73c183b3b96f08d506",
+    "rights_review_sha256": "6767d00437e49e3f01c64dca6c07c43ed98cf8d6e7fa95c46129f75e949102a3",
+    "parent_rights_review_sha256": "409dfbd12deee028206fc86be75b2825b30a0e1e05a2f2ac43e3d73778f34574",
+    "stage_terminal_sha256": "c6966f0304c96be68edacf0e5d342ece7443935d325aa87fdf01807068b56a0d",
+    "submission_sha256": "54772227380763c2af44de10ad87389a5e1ee6b4acf18040862dad982310e232",
+    "aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "before_staged_raster_sha256": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3",
+    "after_staged_raster_sha256": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+    "implementation_commit_sha": "e10f385452dc4980aa786dd0809ce8e2e5277b7d",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_partial_panel_run_001.py": "4ab472a82494b2ff65cc05f9f2edab4e4334f383c81802419189f8b168e1154a",
+      "scripts/m2_asf_hyp3_rtc_partial_panel_reopen_001.py": "d697e00021124b4e60ead482d9a9b536c5239f917178bdc5931788660bc32a94",
+      "scripts/m2_asf_hyp3_rtc_partial_pair_map_001.py": "25ef10488a043cb243d62561cabd74a13ff72ed037da3a0df92e8f87eb771106",
+      "scripts/m2_asf_hyp3_rtc_partial_panel_audit_001.py": "7c38d7eb177d10206e797d26239a9aad40c0fc428dc0f128cce509d0a3e357d2",
+      "scripts/validate_m2_asf_hyp3_rtc_partial_pair_arcgis_synthetic_001.py": "8a691aff396c26c525452f0a5be47377d20cfa62aae85386068b9946ecb435a1",
+      "tests/test_m2_asf_hyp3_rtc_partial_panel_run_001.py": "5d31ab9c6e70b276b5048b2a68dfeb9830db3521285494754b007bb2735ffd59"
+    }
+  },
+  "public_ci": {
+    "run_id": 36460861613,
+    "head_sha": "e10f385452dc4980aa786dd0809ce8e2e5277b7d",
+    "conclusion": "success"
+  },
+  "local_checks": {
+    "portable_disposable_panel_tests_passed": 5,
+    "installed_arcgis_disposable_fresh_reopen_and_export_passed": true,
+    "disposable_map_count": 2,
+    "disposable_broken_layers": 0,
+    "project_or_provider_raster_read_by_synthetic_test": false,
+    "scientific_admission": false
+  },
+  "release_scope": "Implementation and exact staged-raster and credit binding only. Publish this gate to public default-branch CI, then perform a fresh no-map preflight confirming the two raster hashes, 20% same-cell results, rights, and absent panel attempt. Only on that preflight also passing CI may one local ArcGIS Pro APRX/two-panel build, first PNG export, distinct-process reopen, second PNG export and artifact audit run outside Git. No DEM display, difference raster, registration claim, change analysis, attribution, public pixels, or scientific publication is released."
+}
