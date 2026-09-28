@@ -1,0 +1,74 @@
+{
+  "contract_version": "source-gate/v2",
+  "assessment_id": "NEPAL-M2-UNOSAT-STABLE-REFERENCE-VECTOR-001-LOCAL",
+  "assessed_at": "2026-09-28T18:26:51Z",
+  "authority": {
+    "mode": "not_granted",
+    "authority_ref": "",
+    "authorized_actions": [],
+    "expires_at_utc": null
+  },
+  "intended_use": {
+    "summary": "Evaluate the exact UNOSAT preliminary mapped mudflow/rockflow and analyzed-area vectors only as an independent exclusion and reference-candidate aid for a separately reviewed local ASF VV registration route. No impact attribution, public redistribution, or assertion that unmapped land is unchanged.",
+    "planned_actions": ["anonymous metadata review", "conditional vector intake", "local reference-candidate screening"]
+  },
+  "sources": [
+    {
+      "source_id": "UNOSAT-IHP-WINS-NEPAL-MUDROCK-2026-08-26-27",
+      "name": "Satellite-detected mudflow and rockflow extent in Rasuwa and Nuwakot, with separate analyzed-area vector",
+      "locator": "https://ihp-wins.unesco.org/en/dataset/nepal-satellite-detected-mudflow-and-rockflow-extent-nepal",
+      "criteria": [
+        {
+          "id": "identity", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [{"type": "live", "locator": "https://ihp-wins.unesco.org/en/dataset/nepal-satellite-detected-mudflow-and-rockflow-extent-nepal", "observed_at": "2026-09-28T18:26:51Z", "note": "Publisher page names DOI 10.63253/1y26ihdq, revision 28 August 2026, UNOSAT products 4257 and 4258, and distinct mapped and analyzed-area SHP resources. Exact downloadable bytes have not been bound."}],
+          "note": "Dataset and resource-page identities are known; source file hashes are not yet known."
+        },
+        {
+          "id": "authority", "required": true, "requires_live": true, "status": "pass",
+          "evidence": [{"type": "live", "locator": "https://ihp-wins.unesco.org/en/dataset/nepal-satellite-detected-mudflow-and-rockflow-extent-nepal", "observed_at": "2026-09-28T18:26:51Z", "note": "UNOSAT is identified as dataset publisher through UNESCO IHP-WINS and as the producer of the underlying products."}],
+          "note": "Authoritative for its own preliminary mapped event extent, not proof of complete or field-validated impact."
+        },
+        {
+          "id": "access", "required": true, "requires_live": true, "status": "unknown",
+          "evidence": [{"type": "live", "locator": "https://ihp-wins.unesco.org/en/dataset/nepal-satellite-detected-mudflow-and-rockflow-extent-nepal", "observed_at": "2026-09-28T18:26:51Z", "note": "Landing page exposes separate Download controls, but account, rate, exact payload URL, and file-size conditions were not verified; no download was requested."}],
+          "note": "A visible download control alone does not establish accessible, exact source bytes."
+        },
+        {
+          "id": "rights", "required": true, "requires_live": true, "status": "unknown",
+          "evidence": [{"type": "live", "locator": "https://ihp-wins.unesco.org/en/dataset/nepal-satellite-detected-mudflow-and-rockflow-extent-nepal/resource/9f9498b2-4b48-4e83-8c8c-b227d5938a08", "observed_at": "2026-09-28T18:26:51Z", "note": "The official mapped-extent resource page displays License and Access rights headings without values."}, {"type": "live", "locator": "https://ihp-wins.unesco.org/en/dataset/nepal-satellite-detected-mudflow-and-rockflow-extent-nepal/resource/11195e74-c0cb-4c18-b2c4-190eea71059c", "observed_at": "2026-09-28T18:26:51Z", "note": "The official analyzed-area resource page also displays empty License and Access rights fields."}, {"type": "live", "locator": "https://www.unitar.org/legal", "observed_at": "2026-09-28T18:26:51Z", "note": "UNITAR general website conditions discuss limited research/private-study extracts with acknowledgement and prior permission for substantial reproduction; they do not specify a license for these exact vectors."}],
+          "note": "The general website conditions are not an exact vector grant. Attribution, local modification, derivative use, retention, and redistribution constraints remain unestablished for the two exact resource files."
+        },
+        {
+          "id": "provenance", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [{"type": "static", "locator": "records/observations/m2-asf-stable-reference-feasibility-001-local.json", "note": "The publisher attributes the preliminary mapping to Sentinel-2 acquired 27 August and PlanetScope acquired 26 August 2026; the resource roles and DOI are retained."}],
+          "note": "This establishes published lineage metadata, not chain of custody for unacquired vector bytes."
+        },
+        {
+          "id": "integrity", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [{"type": "static", "locator": "records/observations/m2-asf-stable-reference-feasibility-001-local.json", "note": "Any later separately authorized intake must use append-only non-Git custody, SHA-256 hashing, archive/member checks, CRS/geometry validation, and exact resource binding before use."}],
+          "note": "A post-acquisition verification plan is feasible; no actual checksum or integrity result exists."
+        },
+        {
+          "id": "fitness", "required": true, "requires_live": false, "status": "unknown",
+          "evidence": [{"type": "static", "locator": "records/observations/m2-asf-stable-reference-feasibility-001-local.json", "note": "Metadata report approximately 37 square kilometers of mapped impact and 363 square kilometers analyzed; the exact vector geometry and overlap with usable ASF pair pixels are unverified."}],
+          "note": "Preliminary, unvalidated mapping may omit affected areas; unmapped land inside or outside the analyzed polygon is not automatically stable."
+        },
+        {
+          "id": "privacy-security", "required": true, "requires_live": false, "status": "pass",
+          "evidence": [{"type": "static", "locator": "AGENTS.md", "note": "The proposed input is an aggregate event-extent vector, not person-level data; project rules require licensed data and output outside Git and controlled archive validation."}],
+          "note": "No account credential is requested or stored; later vector content still requires safe container inspection."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "blocked",
+    "blocking_reasons": ["Exact vector license and access rights are not stated on the official resource pages", "Exact payload access and byte identity are unverified", "Preliminary analyzed-area and mapped-extent vectors have not been checked for usable stable-control fitness", "No authority to adopt or download this distinct external source has been granted"],
+    "live_verification_pending": ["UNOSAT-IHP-WINS-NEPAL-MUDROCK-2026-08-26-27:access", "UNOSAT-IHP-WINS-NEPAL-MUDROCK-2026-08-26-27:rights"],
+    "approved_actions": []
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": ["anonymous metadata review", "record local assessment evidence"],
+    "requires_explicit_authorization": ["accept terms", "authenticate", "download vector content", "adopt vector as stable-reference input", "read ASF pixels outside the previously approved event-only staging", "publish or redistribute vector or derived pixels"]
+  }
+}
