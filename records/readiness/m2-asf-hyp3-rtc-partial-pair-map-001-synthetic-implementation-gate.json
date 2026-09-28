@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "gate_id": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001-SYNTHETIC-IMPLEMENTATION-GATE",
+  "checked_at_utc": "2026-09-28T00:46:03Z",
+  "status": "pass_partial_visual_method_synthetic_only",
+  "bindings": {
+    "proposal_sha256": "587b3e5fe4878395d0a32802e19a66b77ed2c57dcb924dd14796d0ff462c9d8a",
+    "approval_sha256": "7092d2c5f7e4b3f2d0c9cff22a7c0d0a44c62942746a9b73c183b3b96f08d506",
+    "first_source_terminal_sha256": "2305f6ce504e550b57aa207c3eb1004f2d4c014715745776d60c004e184afecd",
+    "code_commit_sha": "d31bb3d773977c452fb228e1b27a26b8f48b8988",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_partial_pair_core_001.py": "cdede1418a7c649da02fa854395d1d8efda6fc3c56a33428e4e8dc357845c19a",
+      "scripts/m2_asf_hyp3_rtc_partial_pair_map_001.py": "68529bf662b8fc36f821dcfc90c0b9657cf59c8231e54c1c974f6dc6d4d90c85",
+      "scripts/validate_m2_asf_hyp3_rtc_partial_pair_arcgis_synthetic_001.py": "128883f83aca2852a3bf6d7838d705622dd1282ad112fbb6efff18377669eefe",
+      "tests/test_m2_asf_hyp3_rtc_partial_pair_core_001.py": "1483707e3894f389f6ebd88807607d54cfe2dca48bb8276f99ca989e545f98df"
+    }
+  },
+  "public_ci": {
+    "run_id": 36363016899,
+    "head_sha": "d31bb3d773977c452fb228e1b27a26b8f48b8988",
+    "conclusion": "success"
+  },
+  "local_checks": {
+    "portable_partial_pair_core_tests": 8,
+    "full_repository_tests": 1009,
+    "full_repository_skips": 6,
+    "installed_arcgis_version": "3.7.1",
+    "disposable_projected_map_count": 2,
+    "disposable_fresh_process_reopen_export": "pass",
+    "disposable_broken_layer_count": 0
+  },
+  "claim_boundary": "Generated arrays and disposable ArcGIS rasters prove method wiring only. No after product, real pair common-valid fraction, product-specific image-display rights, visual QA of the eventual map, registration, derived-pixel export, change finding, or scientific result has passed."
+}
