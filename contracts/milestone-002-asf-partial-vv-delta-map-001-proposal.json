@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-ASF-PARTIAL-VV-DELTA-MAP-001",
+  "status": "local_zero_decision_not_published_not_approved",
+  "purpose": "Test residual registration of the exact local ASF partial VV pair, and only if it passes, render an explicitly exploratory local continuous backscatter-difference map without admitting an M4 scientific candidate.",
+  "frozen_inputs": {
+    "before_source_id": "M1-SRC-002",
+    "after_source_id": "M1-SRC-005",
+    "after_job_id": "0a3e6fd4-a9a3-42c1-8c7c-3824ade06861",
+    "stage_terminal_ref": "records/readiness/m2-asf-hyp3-rtc-partial-pair-stage-001-terminal-reconciliation.json",
+    "stage_terminal_sha256": "925c7d0496e69d3fae985050cf0bf5ea2abf4f4ec12bef90363fd542a87f31d9",
+    "panel_terminal_publication_ref": "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-publication-reconciliation.json",
+    "panel_terminal_publication_sha256": "2749654abfcd43b97a91754f3de2ca5c85650374871c46eea4bd5df31960e135",
+    "before_staged_vv_db_sha256": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3",
+    "after_staged_vv_db_sha256": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+    "rights_review_ref": "records/readiness/m2-asf-hyp3-rtc-partial-pair-rights-review-001.json",
+    "rights_review_sha256": "409dfbd12deee028206fc86be75b2825b30a0e1e05a2f2ac43e3d73778f34574",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "pixel_readiness_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "m4_change_evidence_contract_sha256": "fc2d18fa758d25b212361110ec9dba2611ba447611a2f7a284f5d1859b0ad33e"
+  },
+  "observed_limits": {
+    "AOI_SOURCE_same_cell_common_valid_fraction": 0.546721,
+    "AOI_UPPER_CORRIDOR_same_cell_common_valid_fraction": 0.757928,
+    "both_individual_full_area_qa_status": "defer",
+    "registration_measured": false,
+    "current_panel_is_visual_only": true
+  },
+  "proposed_one_conditional_envelope": [
+    "Publish the exact review packet and owner decision, then implement only the fixed-source registration and continuous-VV-delta route with synthetic and installed ArcGIS disposable tests, public CI, and one final no-content preflight. No intermediate owner reconfirmation is required within unchanged approved scope.",
+    "Before a real pixel read, recheck the exact staged raster hashes, grid, rights for local derivative display, available disk, and a collision-free new append-only attempt root. Lock a deterministic stable-reference/control-window selection method from approved geometry and non-change evidence, excluding the event corridor. Stop if 30 usable control windows cannot be predeclared without looking at the pair's difference signal.",
+    "Run at most one fresh local real attempt that reads only the two exact staged VV dB rasters. Measure residual registration on at least 30 predeclared control windows, retaining per-window offsets and rejected-window reasons. A pass requires RMSE at most 0.5 pixel and absolute x and y bias at most 0.5 pixel; indeterminate or failed registration stops before any delta raster or map is produced. No shift, resampling, or control reselection is allowed in this envelope.",
+    "Only after that registration pass, compute one continuous after-minus-before VV gamma0 dB raster solely on exact common-valid cells. Retain raw values and the predeclared exclusions; do not speckle-filter, threshold, classify, polygonize, or infer geomorphic or causal change. Preserve an exact input, output, mask, registration, and pixel-statistics receipt outside Git.",
+    "Render one local EPSG:32645 ArcGIS Pro before/after/continuous-delta layout with true dates, a quantitative signed dB legend, valid and excluded area, source credits and DOI references, and prominent partial-coverage, unfiltered-speckle, terrain/moisture/vegetation, and non-attribution warnings. Reopen in a separate ArcGIS process, export, inspect visually, and audit broken paths and hashes. Keep all raster, APRX, and export bytes outside Git; publish only sanitized terminal evidence and exact public-CI reconciliation."
+  ],
+  "unchanged_scientific_rules": {
+    "individual_full_area_qa_defer_preserved": true,
+    "80_percent_full_area_pass_threshold_unchanged": true,
+    "m4_candidate_input_policy_unchanged": true,
+    "m4_stable_reference_thresholds_and_route_accounting_unchanged": true,
+    "partial_vv_delta_is_not_m4_candidate_or_scientific_admission": true,
+    "no_landslide_inundation_or_attribution_class": true
+  },
+  "hard_limits": {
+    "maximum_real_attempts": 1,
+    "automatic_retry_or_consumed_attempt_reuse": false,
+    "source_zip_or_provider_request": false,
+    "new_source_or_date": false,
+    "source_or_staged_raster_mutation": false,
+    "registration_shift_or_resampling": false,
+    "threshold_change_or_stable_control_reselection_after_signal": false,
+    "vh_or_dem_pixel_action": false,
+    "m4_candidate_polygons_or_baseline_admission": false,
+    "interpretation_or_attribution": false,
+    "public_source_or_derived_pixels": false,
+    "scientific_publication": false
+  },
+  "stop_conditions": [
+    "Any input identity, grid, rights, or public-CI gate fails or is indeterminate.",
+    "At least 30 control windows cannot be selected without examining the before/after difference signal.",
+    "Residual registration exceeds the unchanged 0.5-pixel RMSE or bias bounds, or cannot be measured reproducibly.",
+    "Any unknown mask, nonfinite or unexpected unit value, output-path collision, broken ArcGIS layer, missing credit, or export/audit failure occurs."
+  ],
+  "decision_requested": "Approve, revise, or defer this one registration-first, local exploratory VV-delta envelope through sanitized terminal publication. Approval would release no scientific candidate, attribution, or public pixel publication."
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-ASF-PARTIAL-VV-DELTA-MAP-001-REVIEW-BUNDLE",
+  "status": "local_zero_decision_not_published_not_approved",
+  "base_commit": "16c46f6150fe2b35e1adf868ad576baeeb3d30cb",
+  "artifacts": [
+    {
+      "path": "contracts/milestone-002-asf-partial-vv-delta-map-001-proposal.json",
+      "sha256": "abc74e89066bff3b675fe0bcb0f3c97ff4733faaad50c0c448ca9b84259a4abd",
+      "role": "single_conditional_registration_first_local_delta_envelope"
+    },
+    {
+      "path": "docs/M2_ASF_PARTIAL_VV_DELTA_MAP_001_REVIEW.md",
+      "sha256": "1ddb4aae0c8c33c3d02aca093a9e1583afc89e42f429a5f759a77394f55bc765",
+      "role": "human_readable_scientific_boundary_and_tradeoff_review"
+    },
+    {
+      "path": "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-reconciliation.json",
+      "sha256": "561a9c0cea0dfd708d8b5feef14b6950be4e85b7063288ca3c4f5e9683552f56",
+      "role": "exact_consumed_real_local_visual_panel"
+    },
+    {
+      "path": "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-publication-reconciliation.json",
+      "sha256": "2749654abfcd43b97a91754f3de2ca5c85650374871c46eea4bd5df31960e135",
+      "role": "public_CI_reconciled_panel_checkpoint"
+    },
+    {
+      "path": "records/readiness/m2-asf-hyp3-rtc-partial-pair-stage-001-terminal-reconciliation.json",
+      "sha256": "925c7d0496e69d3fae985050cf0bf5ea2abf4f4ec12bef90363fd542a87f31d9",
+      "role": "exact_hash_bound_staged_VV_rasters_and_common_valid_area"
+    },
+    {
+      "path": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+      "role": "unchanged_registration_and_full_area_QA_rules"
+    },
+    {
+      "path": "config/qa/change-evidence-contract.json",
+      "sha256": "fc2d18fa758d25b212361110ec9dba2611ba447611a2f7a284f5d1859b0ad33e",
+      "role": "unchanged_M4_scientific_candidate_admission_rules"
+    }
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-ASF-PARTIAL-VV-DELTA-MAP-001",
+    "question": "Approve, revise, or defer one registration-first local continuous VV backscatter-difference map from the exact existing partial pair, stopping on failed registration and preserving all full-area and M4 scientific restrictions?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "intermediate_reconfirmation_for_unchanged_approved_scope": false
+  },
+  "authority_boundary": {
+    "local_review_preparation_only": true,
+    "public_packet_publication_authorized": false,
+    "proposal_approval_received": false,
+    "real_staged_raster_read_authorized": false,
+    "registration_or_delta_execution_authorized": false,
+    "scientific_candidate_or_attribution_authorized": false,
+    "public_source_or_derived_pixel_publication_authorized": false
+  }
+}

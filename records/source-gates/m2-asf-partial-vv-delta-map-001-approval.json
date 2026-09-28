@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-ASF-PARTIAL-VV-DELTA-MAP-001-APPROVAL",
+  "recorded_at_utc": "2026-09-28T18:17:07Z",
+  "decision_id": "D-M2-ASF-PARTIAL-VV-DELTA-MAP-001",
+  "decision": "approve",
+  "owner_answer_verbatim": "I approve.",
+  "decision_channel": "chat",
+  "interpretation": "The answer directly followed the exact bundle/proposal approval request. Both SHA-256 hashes and all seven bundle artifact hashes were reverified unchanged before recording. The post-bundle base-commit drift touched only current-control pointers and a corresponding test; it did not alter the reviewed artifacts.",
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-asf-partial-vv-delta-map-001-proposal.json",
+    "proposal_sha256": "abc74e89066bff3b675fe0bcb0f3c97ff4733faaad50c0c448ca9b84259a4abd",
+    "review_bundle_ref": "reviews/m2-asf-partial-vv-delta-map-001/review-bundle.json",
+    "review_bundle_sha256": "2146de66d7b761ca98054f9fe229f0198a8473cee026198702814042a408f3be",
+    "bundle_base_commit": "16c46f6150fe2b35e1adf868ad576baeeb3d30cb",
+    "head_at_decision_record": "c354e4a8d6e0eca77415a3de62c930d421501139"
+  },
+  "authority": {
+    "single_conditional_envelope_through_sanitized_terminal_publication": true,
+    "intermediate_owner_reconfirmation_required_for_unchanged_scope": false,
+    "exact_packet_and_decision_publication_public_ci": true,
+    "bounded_implementation_synthetic_and_installed_arcgis_tests": true,
+    "one_final_no_content_preflight": true,
+    "at_most_one_append_only_local_real_registration_attempt": true,
+    "conditional_continuous_vv_db_delta_and_local_arcgis_three_panel_export": true,
+    "automatic_retry_source_change_control_reselection_or_resampling": false,
+    "public_source_or_derived_pixels": false,
+    "m4_scientific_candidate_attribution_or_scientific_publication": false
+  },
+  "current_release": "Publish the exact packet and decision for public default-branch CI. Real staged-raster reads remain gated on method implementation, synthetic and ArcGIS disposable tests, public CI, exact rights and custody checks, predeclared controls, and one final no-content preflight."
+}
