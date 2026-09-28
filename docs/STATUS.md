@@ -1,12 +1,18 @@
 # Current status
 
-- **State:** M1 complete; M2 active. Both dates' exact ASF RTC products remain individual full-area `defer`, while their measured same-cell partial-pair floor passed and two aligned VV display rasters are staged in non-Git custody. A real ArcGIS panel remains unverified. Earlier terminal optical and radar results remain preserved.
+- **State:** M1 complete; M2 active. Both dates' exact ASF RTC products remain individual full-area `defer`. Their measured same-cell partial-pair floor passed, and a local EPSG:32645 ArcGIS side-by-side visual panel was built, freshly reopened, and exported. Earlier terminal optical and radar results remain preserved.
 - **Last completed milestone:** M1 — Event geometry and source manifest
 - **Active milestone:** M2 — Controlled acquisition and baseline
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Current checkpoint:** `M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001`; the before RTC source is terminal `defer`, the one exact after-job and ZIP attempt are terminal, and no real pair or map exists. The earlier radar recovery-002 attempt remains terminal and consumed. No baseline admission, change analysis, attribution, public pixels, or scientific publication is authorized.
+- **Current checkpoint:** `M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001` has a terminal local visual-only panel. The one exact after-job, ZIP, pair-stage, and panel attempts are consumed; both RTC scenes remain full-area `defer`. The earlier radar recovery-002 attempt remains terminal and consumed. Registration, clean-machine portability, baseline admission, change analysis, attribution, public pixels, and scientific publication remain unverified or unauthorized.
+
+## ASF local partial before/after panel verified — 2026-09-28
+
+The exact panel implementation and no-content gates passed public CI runs `36461013907` and `36461142904`. One append-only ArcGIS Pro attempt built the local EPSG:32645 side-by-side VV gamma0 dB project and first PNG from two hash-bound, aligned 10 m display rasters. A separate ArcGIS process reopened the saved project and exported a second PNG with an identical SHA-256 hash. The saved project has two maps, one layout, zero broken layers, local raster paths that resolve inside its output folder, and visible partial-data and unverified-registration warnings, measured coverage, ASF/ESA credit, and two HyP3 DOIs. The real PNG was visually inspected. The [terminal reconciliation](../records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-reconciliation.json) binds the consumed attempt and local artifact hashes; source and derived pixels, APRX, and PNG bytes remain outside Git.
+
+The same-cell common-valid fractions are **54.6721%** in `AOI-SOURCE` and **75.7928%** in `AOI-UPPER-CORRIDOR`, above the approved 20% floor for a partial visual. Both individual dates still fail the unchanged 80% full-area usability rule. The panel is a local, credited visual reference only; excluded areas appear blank, not as a classified change. No registration measurement, clean-machine portability proof, difference raster, baseline admission, change analysis, event attribution, public pixel release, or scientific result is established. No consumed attempt can be rerun automatically.
 
 ## Radar pixel and orbit application recovery-002 terminal outcome — 2026-09-19
 
