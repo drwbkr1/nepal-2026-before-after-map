@@ -22,8 +22,10 @@ CONTRACT = load_contract(ROOT / "config/qa/pixel-readiness-contract.json")
 def result(aoi: str, usable: float, *, covered: float = 1.0,
            status: str = "defer", unknown: bool = False) -> dict:
     return {"aoi_id": aoi, "status": status,
-            "coverage_fraction": covered,
-            "usable_fraction_of_aoi": usable,
+            "aoi_area_m2": 100.0, "covered_area_m2": covered * 100.0,
+            "valid_area_m2": usable * 100.0,
+            "coverage_fraction": round(covered, 6),
+            "usable_fraction_of_aoi": round(usable, 6),
             "unknown_provider_mask_value_present": unknown}
 
 
@@ -70,6 +72,14 @@ class AfterPixelDispositionTests(unittest.TestCase):
         values[0]["status"] = "pass_qa_only"
         with self.assertRaisesRegex(ValueError, "result_contract_mismatch"):
             evaluate_after_aoi_results(values, CONTRACT)
+
+    def test_rounded_20_percent_does_not_promote_raw_below_floor(self):
+        values = [result("AOI-SOURCE", .1999999, status="block"),
+                  result("AOI-UPPER-CORRIDOR", .76)]
+        decision = evaluate_after_aoi_results(values, CONTRACT)
+        self.assertEqual(decision["aoi_results"][0]["usable_fraction_of_aoi"], .2)
+        self.assertEqual(decision["status"], "block_after_pixel_qa_no_pair_candidate")
+        self.assertFalse(decision["partial_pair_candidate_pending_same_cell_overlap"])
 
 
 if __name__ == "__main__":

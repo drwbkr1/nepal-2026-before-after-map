@@ -34,6 +34,7 @@ def evaluate_after_aoi_results(results: list[dict], contract: dict) -> dict:
         raise ValueError("after_pixel_frozen_thresholds_changed")
     statuses = []
     summaries = []
+    raw_usable_fractions = []
     unknown_any = False
     for item in results:
         status = item.get("status")
@@ -42,17 +43,29 @@ def evaluate_after_aoi_results(results: list[dict], contract: dict) -> dict:
             raise ValueError("after_pixel_result_status_invalid")
         covered, usable = (item.get(key) for key in
                            ("coverage_fraction", "usable_fraction_of_aoi"))
+        aoi_area, covered_area, valid_area = (item.get(key) for key in
+            ("aoi_area_m2", "covered_area_m2", "valid_area_m2"))
         if (any(type(value) not in (int, float) or not math.isfinite(value)
                 or not 0 <= value <= 1 for value in (covered, usable))
-                or usable > covered + 1e-6):
+                or any(type(value) not in (int, float) or not math.isfinite(value)
+                       for value in (aoi_area, covered_area, valid_area))
+                or aoi_area <= 0 or covered_area < 0 or valid_area < 0
+                or covered_area > aoi_area * (1 + coverage["area_consistency_tolerance_fraction"])
+                or valid_area > covered_area or usable > covered + 1e-6):
             raise ValueError("after_pixel_result_fraction_invalid")
+        raw_covered = min(1.0, covered_area / aoi_area)
+        raw_usable = min(1.0, valid_area / aoi_area)
+        if (covered != round(raw_covered, coverage["fraction_precision"])
+                or usable != round(raw_usable, coverage["fraction_precision"])):
+            raise ValueError("after_pixel_result_fraction_drift")
         expected = combine_statuses([
-            classify_fraction(covered, full_coverage, partial),
-            classify_fraction(usable, full, partial),
+            classify_fraction(raw_covered, full_coverage, partial),
+            classify_fraction(raw_usable, full, partial),
         ])
         if status != ("defer" if unknown and expected == "pass_qa_only" else expected):
             raise ValueError("after_pixel_result_contract_mismatch")
         statuses.append(status)
+        raw_usable_fractions.append(raw_usable)
         unknown_any |= unknown
         summaries.append({"aoi_id": item["aoi_id"], "status": status,
                           "coverage_fraction": covered,
@@ -60,8 +73,7 @@ def evaluate_after_aoi_results(results: list[dict], contract: dict) -> dict:
                           "unknown_provider_mask_value_present": unknown})
     full_status = combine_statuses(statuses)
     partial_candidate = (full_status != "block" and not unknown_any
-                         and all(item["usable_fraction_of_aoi"] >= partial
-                                 for item in summaries))
+                         and all(value >= partial for value in raw_usable_fractions))
     if full_status == "block":
         decision_status = "block_after_pixel_qa_no_pair_candidate"
     elif unknown_any:
