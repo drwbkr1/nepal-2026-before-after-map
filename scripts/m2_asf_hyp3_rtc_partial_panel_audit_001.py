@@ -18,8 +18,8 @@ from m2_asf_hyp3_rtc_partial_pair_map_001 import (
 
 
 RASTERS = {
-    BEFORE_LABEL: "before_common_valid_db.tif",
-    AFTER_LABEL: "after_common_valid_db.tif",
+    BEFORE_LABEL: "before_common_valid_vv_db.tif",
+    AFTER_LABEL: "after_common_valid_vv_db.tif",
 }
 PNG_FILES = (
     "Nepal_ASF_RTC_Partial_Pair_Local.png",

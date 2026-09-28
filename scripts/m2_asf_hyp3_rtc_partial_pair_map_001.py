@@ -71,8 +71,8 @@ def build_local_panel(before: Path, after: Path, output: Path, *,
         raise ValueError("rtc_partial_display_grids_differ")
     output.mkdir(parents=True, exist_ok=False)
     staged = []
-    for source, name in ((before, "before_common_valid_db.tif"),
-                         (after, "after_common_valid_db.tif")):
+    for source, name in ((before, "before_common_valid_vv_db.tif"),
+                         (after, "after_common_valid_vv_db.tif")):
         dest = output / name
         with source.open("rb") as src, dest.open("xb") as dst:
             shutil.copyfileobj(src, dst, length=8 * 1024 * 1024)
