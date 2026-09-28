@@ -43,7 +43,7 @@ class FakeLayout:
                     "Blank areas exclude layover, shadow or NoData.")
         values = {
             "before label": BEFORE_LABEL, "after label": AFTER_LABEL,
-            "Title": "Nepal 2026 | EPSG:32645 | ASF RTC gamma0 dB",
+            "Title": "Nepal 2026 | EPSG:32645 | ASF RTC VV gamma0 dB",
             "Coverage": coverage, "Partial-data warning": warning,
             "Credits and DOIs": credits or "ASF/ESA | https://doi.org/10.5281/test",
         }

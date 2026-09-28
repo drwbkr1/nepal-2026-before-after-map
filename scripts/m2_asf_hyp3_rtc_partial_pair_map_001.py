@@ -91,7 +91,7 @@ def build_local_panel(before: Path, after: Path, output: Path, *,
             map_obj.removeLayer(layer)
         map_obj.spatialReference = arcpy.SpatialReference(32645)
         layer = map_obj.addDataFromPath(str(raster))
-        layer.name = label + " | common-valid gamma0 dB"
+        layer.name = label + " | common-valid VV gamma0 dB"
         maps.append(map_obj)
     layout = project.createLayout(13, 7.5, "INCH", "Nepal RTC partial before and after")
     for map_obj, raster, x0, label in zip(maps, staged, (.4, 6.7),
@@ -102,7 +102,7 @@ def build_local_panel(before: Path, after: Path, output: Path, *,
         project.createTextElement(layout, _rect(arcpy, x0, 6.82, x0 + 5.9, 7.13),
                                   "POLYGON", label, 10, "Segoe UI", "Bold", name=label)
     project.createTextElement(layout, _rect(arcpy, .4, 7.16, 12.6, 7.43),
-                              "POLYGON", "Nepal 2026 | EPSG:32645 | ASF RTC gamma0 dB",
+                              "POLYGON", "Nepal 2026 | EPSG:32645 | ASF RTC VV gamma0 dB",
                               14, "Segoe UI", "Bold", name="Title")
     coverage = (f"Common valid VV/VH: source {common_valid_by_aoi['AOI-SOURCE']:.1%}; "
                 f"upper corridor {common_valid_by_aoi['AOI-UPPER-CORRIDOR']:.1%}. "

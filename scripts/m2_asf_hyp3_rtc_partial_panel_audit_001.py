@@ -94,7 +94,7 @@ def audit_saved_panel(output: Path, *, arcpy_module=None) -> dict:
         raise ValueError("partial_panel_text_set_invalid")
     by_name = {element.name: element.text for element in text_elements}
     if (by_name["Partial-data warning"] != WARNING
-            or by_name["Title"] != "Nepal 2026 | EPSG:32645 | ASF RTC gamma0 dB"):
+            or by_name["Title"] != "Nepal 2026 | EPSG:32645 | ASF RTC VV gamma0 dB"):
         raise ValueError("partial_panel_warning_or_title_drift")
     coverage = receipt.get("common_valid_by_aoi")
     if (not isinstance(coverage, dict)
