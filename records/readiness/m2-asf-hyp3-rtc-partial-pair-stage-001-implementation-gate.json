@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PAIR-STAGE-001-IMPLEMENTATION-GATE",
+  "checked_at_utc": "2026-09-28T17:42:39Z",
+  "status": "pass_partial_pair_stage_implementation_public_ci_only",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-partial-pair-map-001-approval.json",
+  "bindings": {
+    "approval_sha256": "7092d2c5f7e4b3f2d0c9cff22a7c0d0a44c62942746a9b73c183b3b96f08d506",
+    "rights_review_sha256": "409dfbd12deee028206fc86be75b2825b30a0e1e05a2f2ac43e3d73778f34574",
+    "submission_sha256": "54772227380763c2af44de10ad87389a5e1ee6b4acf18040862dad982310e232",
+    "before_review_sha256": "52f98a918cd52fa3abc5abb9116537f837656ead858fbfb9b30f2bec030aee79",
+    "after_review_sha256": "f5a27a3b7dc101159bf20b064a9065c124621757bf9864e29fb4acfb73915357",
+    "before_acquisition_sha256": "3261283cb1c32d9633af45437eeb33c43cf504e06764a71174c67421ad40c02c",
+    "before_header_sha256": "a90db1ee3a2a73802640ff4bd0933dcbb45a125104403d44ef1d7c1932d4fdd5",
+    "before_pixel_sha256": "2a2d9b88662475e2ec9b78e2683befd3b100682ba38010617dc2ff081b2e7603",
+    "after_acquisition_sha256": "8db7f8e7e119a08beeecd5d719bd8550fe8147e1b2d21913e9aaac8094d599e3",
+    "after_header_sha256": "f86be9ae0a9efb2a6d32442e64f6dee1f2d1958747f48cab479424a83867447d",
+    "after_pixel_sha256": "68be48ce724b8ab0ca76759b5f511c8ad8367dfc0a18b3719fe1f3261e18a27b",
+    "aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "before_archive_sha256": "82ca5a9e7c77dd1e28c15eb64f93e5a408ec53b81b5df3fda64bf47c286dc6d3",
+    "after_archive_sha256": "068e796f790763d82b86b0349451c5e507c29f826001961281f48c8403e6e175",
+    "implementation_commit_sha": "0b0adb196942b2ce4fd696a7f99d798886b6bc52",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_partial_pair_stage_001.py": "e1edad47464f4c9de7bd9dd2722f6060bafbb3939e9c84beb76d8548fdb237d4",
+      "scripts/m2_asf_hyp3_rtc_partial_pair_stage_io_001.py": "957d494dba58a90b871f10c33d6fec74ba7def11bc6a02f0f2a8bdb6a57d2439",
+      "scripts/m2_asf_hyp3_rtc_partial_pair_stage_core_001.py": "85c1d163ea978f38228cb06b42ff7c635a8e81c18b0c830d2aedcaf8d1b412e5",
+      "scripts/m2_asf_hyp3_rtc_partial_pair_grid_001.py": "c46ee878203f92becc9a0a0c346e796942d384dcd460d1976bc01b680d06b084",
+      "scripts/m2_asf_hyp3_rtc_partial_pair_core_001.py": "cdede1418a7c649da02fa854395d1d8efda6fc3c56a33428e4e8dc357845c19a",
+      "scripts/m2_asf_hyp3_rtc_partial_pair_map_001.py": "25ef10488a043cb243d62561cabd74a13ff72ed037da3a0df92e8f87eb771106",
+      "scripts/m2_asf_hyp3_rtc_partial_panel_audit_001.py": "7c38d7eb177d10206e797d26239a9aad40c0fc428dc0f128cce509d0a3e357d2",
+      "scripts/validate_m2_asf_hyp3_rtc_partial_pair_stage_arcgis_synthetic_001.py": "b20663ec3d5e35031661a0a7068276de8c5c7b3d85c39d53dfa9735d05fd8da5",
+      "scripts/validate_m2_asf_hyp3_rtc_partial_pair_stage_route_arcgis_synthetic_001.py": "6218e7ff577405e821d08540a68d793d459d08ced9bfb0ca5c223d34bda7e9c4",
+      "tests/test_m2_asf_hyp3_rtc_partial_pair_stage_001.py": "c8f6687dac45afdaa244faa15f6c1a9fc6f152205aad0bd157e8f637655452f7",
+      "tests/test_m2_asf_hyp3_rtc_partial_pair_stage_core_001.py": "9464a473ebe16ece188f923d51be646321b248aa2f083b389c3f10e504fe0020"
+    }
+  },
+  "public_ci": {
+    "run_id": 36459914892,
+    "head_sha": "0b0adb196942b2ce4fd696a7f99d798886b6bc52",
+    "conclusion": "success"
+  },
+  "local_checks": {
+    "portable_disposable_stage_tests_passed": 9,
+    "installed_arcgis_disposable_zip_pair_route_passed": true,
+    "header_drift_blocked_before_stage": true,
+    "project_provider_pixels_read_by_synthetic_test": false,
+    "scientific_admission": false
+  },
+  "release_scope": "Implementation and exact two-source, rights, grid, AOI, QA, and individual-pixel binding only. Publish this gate to public default-branch CI, then perform a fresh no-pair-pixel preflight binding both archives and all terminal receipts. Only after that preflight passes public CI may one append-only pair-stage attempt rehash the exact ZIPs, read VV, VH and layover/shadow for the two approved AOIs, test at least 20% same-cell common-valid area in each AOI, and conditionally write two matching native 10 m VV gamma0 dB rasters in non-Git custody. No DEM display, difference image, registration claim, change analysis, attribution, public pixels, or scientific publication is released."
+}
