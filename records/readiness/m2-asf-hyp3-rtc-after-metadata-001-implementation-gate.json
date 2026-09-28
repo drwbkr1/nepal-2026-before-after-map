@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-HYP3-RTC-AFTER-METADATA-001-IMPLEMENTATION-GATE",
+  "checked_at_utc": "2026-09-28T17:25:06Z",
+  "status": "pass_after_metadata_implementation_public_ci_only",
+  "authority_ref": "records/source-gates/m2-asf-hyp3-rtc-partial-pair-map-001-approval.json",
+  "source_id": "M1-SRC-005",
+  "job_id": "0a3e6fd4-a9a3-42c1-8c7c-3824ade06861",
+  "bindings": {
+    "approval_sha256": "7092d2c5f7e4b3f2d0c9cff22a7c0d0a44c62942746a9b73c183b3b96f08d506",
+    "submission_terminal_sha256": "54772227380763c2af44de10ad87389a5e1ee6b4acf18040862dad982310e232",
+    "acquisition_terminal_sha256": "8db7f8e7e119a08beeecd5d719bd8550fe8147e1b2d21913e9aaac8094d599e3",
+    "acquisition_reconciliation_sha256": "3c058ed083c5eb4dbb1c485ff09b6e5e277e4987cf5cb1cb24754e4853a39db4",
+    "acquisition_reconciliation_public_ci_run_id": 36457914559,
+    "implementation_commit_sha": "1e943c54ae262fe3a86988d6f57a03708f62e643",
+    "implementation_file_sha256": {
+      "scripts/m2_asf_hyp3_rtc_after_metadata_001.py": "5a14960e5be7e6543d32b5cee71e0f983b9b81f160fadb4c83089519cc7b6d62",
+      "tests/test_m2_asf_hyp3_rtc_after_metadata_001.py": "5b69578891190c50582e507f67a50d77848b4d8d1846b7c738076817ceeb97a0"
+    }
+  },
+  "public_ci": {
+    "run_id": 36365085471,
+    "head_sha": "1e943c54ae262fe3a86988d6f57a03708f62e643",
+    "conclusion": "success"
+  },
+  "local_checks": {
+    "focused_disposable_tests_passed": 5,
+    "archive_size_and_sha256_independently_rechecked": true,
+    "raster_header_or_pixel_read": false
+  },
+  "release_scope": "Implementation and exact acquisition binding only. Publish this gate to public default-branch CI, then perform a fresh no-content preflight that verifies the exact archive path and size, no distinct metadata attempt, and no member or pixel read. Only after that preflight passes public CI may one append-only bounded README, log, and six XML metadata capture run. No raster header, pixel, map, change, or scientific claim is released."
+}
