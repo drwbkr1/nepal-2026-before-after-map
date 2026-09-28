@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "gate_id": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001-REVIEW-PUBLICATION-GATE",
+  "checked_at_utc": "2026-09-28T00:17:44Z",
+  "status": "pass_exact_review_packet_public_ci_only",
+  "bindings": {
+    "proposal_ref": "contracts/milestone-002-asf-hyp3-rtc-partial-pair-map-001-proposal.json",
+    "proposal_sha256": "587b3e5fe4878395d0a32802e19a66b77ed2c57dcb924dd14796d0ff462c9d8a",
+    "review_bundle_ref": "reviews/m2-asf-hyp3-rtc-partial-pair-map-001/review-bundle.json",
+    "review_bundle_sha256": "f3c981c36bc1f9ebf61f42a3451e7aa05e5a040799a59ced78a5dc741665f58e",
+    "owner_approval_ref": "records/source-gates/m2-asf-hyp3-rtc-partial-pair-map-001-approval.json",
+    "owner_approval_sha256": "7092d2c5f7e4b3f2d0c9cff22a7c0d0a44c62942746a9b73c183b3b96f08d506",
+    "publication_commit_sha": "45e85c0337b564eaf501b8b25f4939b6e135b4de",
+    "public_ci_run_id": 36361626560,
+    "public_ci_job_id": 108739787476
+  },
+  "observed_public_ci": {
+    "workflow": "Validate project controls",
+    "job": "validate",
+    "run_status": "completed",
+    "run_conclusion": "success",
+    "repository_validation": "success",
+    "project_control_tests": "success"
+  },
+  "released_actions": [
+    "bounded_after_source_implementation",
+    "generated_data_and_installed_arcgis_runtime_synthetic_tests",
+    "sanitized_implementation_public_ci"
+  ],
+  "not_yet_released": [
+    "account_inspection_or_credential_handoff",
+    "after_job_submission_or_credit_use",
+    "provider_output_acquisition_or_real_pixel_read",
+    "local_real_pixel_map_or_export",
+    "baseline_change_analysis_or_scientific_publication"
+  ],
+  "claim_boundary": "Packet CI verifies repository controls, not account capacity, after-job eligibility, product pixels, map usability, or a scientific result."
+}
