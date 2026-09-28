@@ -21,7 +21,8 @@ from m2_asf_hyp3_rtc_after_header_001 import (
 from m2_asf_hyp3_rtc_core_001 import ROOT, RouteStop
 from m2_asf_hyp3_rtc_partial_pair_map_001 import build_local_panel
 from m2_asf_hyp3_rtc_partial_pair_stage_001 import (
-    AOI_REF, AOI_SHA256, CONTRACT_REF, CONTRACT_SHA256, RIGHTS_REF,
+    AOI_REF, AOI_SHA256, CONTRACT_REF, CONTRACT_SHA256,
+    RIGHTS_REF as STAGE_RIGHTS_REF,
     BEFORE_SOURCE, AFTER_SOURCE,
 )
 from m2_asf_hyp3_rtc_partial_pair_stage_io_001 import DISPLAY_NAMES
@@ -29,6 +30,7 @@ from m2_asf_hyp3_rtc_partial_pair_stage_io_001 import DISPLAY_NAMES
 
 STAGE_REF = "m2-asf-hyp3-rtc-partial-pair-stage-001/attempt-001/terminal.json"
 STAGE_DISPLAY_REF = "m2-asf-hyp3-rtc-partial-pair-stage-001/attempt-001/display"
+RIGHTS_REF = "records/readiness/m2-asf-hyp3-rtc-partial-panel-credit-review-001.json"
 GATE_REF = "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-implementation-gate.json"
 PREFLIGHT_REF = "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-preflight.json"
 ATTEMPT_ROOT = DATA_ROOT / "m2-asf-hyp3-rtc-partial-panel-001" / "attempt-001"
@@ -89,6 +91,7 @@ def require_release(root: Path = ROOT, data_root: Path = DATA_ROOT,
     paths = {
         "approval": root / APPROVAL_REF,
         "rights": root / RIGHTS_REF,
+        "stage_rights": root / STAGE_RIGHTS_REF,
         "aoi": root / AOI_REF,
         "contract": root / CONTRACT_REF,
         "stage": data_root / STAGE_REF,
@@ -100,9 +103,9 @@ def require_release(root: Path = ROOT, data_root: Path = DATA_ROOT,
         raise RouteStop("partial_panel_required_path_invalid")
     records = {key: _json(path) for key, path in paths.items()
                if key not in {"aoi", "contract"}}
-    approval, rights, stage, submission, gate, preflight = (
-        records[key] for key in ("approval", "rights", "stage", "submission",
-                                 "gate", "preflight")
+    approval, rights, stage_rights, stage, submission, gate, preflight = (
+        records[key] for key in ("approval", "rights", "stage_rights", "stage",
+                                 "submission", "gate", "preflight")
     )
     stage_result, coverage = _stage_view(stage)
     stage_root = data_root / STAGE_DISPLAY_REF
@@ -126,7 +129,15 @@ def require_release(root: Path = ROOT, data_root: Path = DATA_ROOT,
             and _sha(paths["aoi"]) == AOI_SHA256
             and _sha(paths["contract"]) == CONTRACT_SHA256
             and stage.get("after_job_id") == job
+            and stage_rights.get("status") == "pass_local_rtc_vv_visual_display_only"
+            and stage_rights.get("local_VV_display") is True
+            and stage_rights.get("DEM_display_or_export") is False
+            and stage_rights.get("public_derived_pixels") is False
             and rights.get("status") == "pass_local_rtc_vv_visual_display_only"
+            and rights.get("bindings", {}).get("parent_rights_review_sha256")
+                == _sha(paths["stage_rights"])
+            and rights.get("bindings", {}).get("stage_terminal_sha256")
+                == _sha(paths["stage"])
             and rights.get("local_VV_display") is True
             and rights.get("DEM_display_or_export") is False
             and rights.get("public_derived_pixels") is False

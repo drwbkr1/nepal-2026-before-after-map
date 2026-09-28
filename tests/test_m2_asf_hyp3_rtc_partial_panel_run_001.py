@@ -77,12 +77,19 @@ class PartialPanelRunTests(unittest.TestCase):
             for source in staged_rasters:
                 (display / source.name).write_bytes(source.read_bytes())
             stage_sha = write(route.STAGE_REF, stage)
+            stage_rights_sha = write(route.STAGE_RIGHTS_REF, {
+                "status": "pass_local_rtc_vv_visual_display_only",
+                "local_VV_display": True,
+                "DEM_display_or_export": False,
+                "public_derived_pixels": False})
             aoi_sha = write(route.AOI_REF, {})
             contract_sha = write(route.CONTRACT_REF, {})
             approval_sha = write(route.APPROVAL_REF, {
                 "decision": "approve", "authority": {
                     "conditional_local_EPSG_32645_partial_pair_panel_and_fresh_process_export": True}})
             rights.update({"status": "pass_local_rtc_vv_visual_display_only",
+                           "bindings": {"parent_rights_review_sha256": stage_rights_sha,
+                                        "stage_terminal_sha256": stage_sha},
                            "local_VV_display": True,
                            "DEM_display_or_export": False,
                            "public_derived_pixels": False})
@@ -117,6 +124,15 @@ class PartialPanelRunTests(unittest.TestCase):
             released = route.require_release(root, root, attempt)
             self.assertEqual(released[2], tuple(display / name for name in route.DISPLAY_NAMES))
             self.assertEqual(released[3]["AOI-SOURCE"], .55)
+            write(route.STAGE_RIGHTS_REF, {"status": "changed"})
+            with self.assertRaises(RouteStop) as caught:
+                route.require_release(root, root, attempt)
+            self.assertEqual(caught.exception.code, "partial_panel_not_released")
+            write(route.STAGE_RIGHTS_REF, {
+                "status": "pass_local_rtc_vv_visual_display_only",
+                "local_VV_display": True,
+                "DEM_display_or_export": False,
+                "public_derived_pixels": False})
             (display / route.DISPLAY_NAMES[0]).write_bytes(b"changed")
             with self.assertRaises(RouteStop) as caught:
                 route.require_release(root, root, attempt)
