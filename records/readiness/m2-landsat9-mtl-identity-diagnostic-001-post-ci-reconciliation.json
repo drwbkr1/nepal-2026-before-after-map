@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-MTL-IDENTITY-DIAGNOSTIC-001-POST-CI-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-29T19:30:10Z",
+  "status": "terminal_diagnostic_publication_verified_envelope_closed",
+  "terminal_commit": "9d41ee0311df9f7afb02203447a100dd4ca5ba0d",
+  "terminal_public_ci_run_id": "36619596169",
+  "terminal_public_ci_conclusion": "success",
+  "terminal_public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/36619596169",
+  "terminal_reconciliation_sha256": "b5e0181c8cb9a292e8815a2412fd7a642eddca5d65c769afa467f5ccc7e7477b",
+  "external_append_only_receipt_sha256": {
+    "reservation": "22c5273cf4577b0fbe0bab51eb17820c3c07b7b08a34e0e3ed3a50314a38b458",
+    "terminal": "ce9bd962098ef83a4bbf18e3a2a5fa7f124224b522788a9c2f7d55f695b26625",
+    "cleanup": "9e6268f93713df0c9375793fede0caa47a63c646e4f6009a331fb5ff29ef5f38"
+  },
+  "diagnostic_id": "landsat9-mtl-identity-diagnostic-001-real-001",
+  "diagnostic_consumed": true,
+  "source_identity_accepted": false,
+  "before_product_promoted": false,
+  "after_product_requested": false,
+  "tiff_or_pixel_qa_performed": false,
+  "arcgis_raster_map_released": false,
+  "scientific_or_change_claim_released": false,
+  "next_checkpoint": "M2-LANDSAT9-MTL-IDENTITY-DIAGNOSTIC-001-TERMINAL-REVIEW",
+  "next_authority_boundary": "Any context-aware MTL interpretation, verifier or predicate amendment, source promotion, August 26 download, TIFF/pixel QA, map/change analysis, attribution, or scientific publication requires a separately reviewed decision. The diagnostic process cannot be reused or retried."
+}
