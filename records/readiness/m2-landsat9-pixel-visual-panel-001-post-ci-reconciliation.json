@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-PIXEL-VISUAL-PANEL-001-POST-CI-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-29T20:43:48Z",
+  "status": "terminal_block_publication_verified_envelope_closed",
+  "terminal_reconciliation_ref": "records/readiness/m2-landsat9-pixel-visual-panel-001-terminal-reconciliation.json",
+  "terminal_reconciliation_sha256": "e0270f75233b8c80b9559c5b70936d07f7e7787f28957a8db54697d848ea46ae",
+  "terminal_commit": "a029d01dd7adb118301ae274a3bb1acfc4d14c47",
+  "terminal_public_ci_run_id": "36628331424",
+  "terminal_public_ci_conclusion": "success",
+  "terminal_public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/36628331424",
+  "attempt_disposition": "The empty real-001 directory is a consumed one-shot reservation with no durable started or terminal receipt. No materialized Landsat TIFF, pixel QA, or local Landsat visual panel was produced. The exact underlying receipt-write failure is indeterminate. Do not reconstruct, resume, reuse, or retry real-001.",
+  "source_custody": "The two exact promoted Landsat-9 TARs remain container-only local QA custody; no provider request, download, source mutation, or substitute was made under this envelope.",
+  "next_authority_boundary": "A separately reviewed recovery method and fresh append-only attempt would be required for Landsat TIFF/pixel QA or a Landsat visual panel. Baseline admission, change analysis, interpretation, attribution, public derived pixels, final handoff, and scientific publication remain unauthorized."
+}
