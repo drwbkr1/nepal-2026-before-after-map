@@ -124,7 +124,7 @@ def preflight(public_ci_commit: str, public_ci_run: str) -> dict:
         raise RouteStop("public_ci_reference_invalid")
     if not DATA.is_dir() or DATA.is_symlink() or is_reparse_point(DATA):
         raise RouteStop("controlled_data_root_unsafe")
-    if ATTEMPT.exists() or ATTEMPT.is_symlink() or is_reparse_point(ATTEMPT):
+    if ATTEMPT.exists() or ATTEMPT.is_symlink():
         raise RouteStop("real_attempt_already_consumed")
     runtime = Path(r"C:\Program Files\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\python.exe")
     if not runtime.is_file():
