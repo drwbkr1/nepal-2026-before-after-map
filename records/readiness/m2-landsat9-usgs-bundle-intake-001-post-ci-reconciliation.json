@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-USGS-BUNDLE-INTAKE-001-POST-CI-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-29T18:37:59Z",
+  "status": "terminal_publication_verified_stopped_before_second_product",
+  "implementation_gate": {
+    "commit": "1004b84d16bcd36c4b3e55efbb630cb5cba4a407",
+    "public_ci_run_id": "36612172656",
+    "conclusion": "success"
+  },
+  "terminal_publication_gate": {
+    "commit": "c6ca5c74cb618e52bc6e558e1fc98501c64e5ec4",
+    "public_ci_run_id": "36613317235",
+    "conclusion": "success",
+    "terminal_reconciliation_sha256_in_commit": "ef66eea9fc2a737e44784aa08f8e0933ccad7c664e5c3c46a4ec00f4c3ce03e1",
+    "active_intake_contract_sha256_in_commit": "8531d5a128eff8c91ca09b323e54cf4ae3e3b684f39484c98b518a447074a620"
+  },
+  "local_validation": {
+    "project_controls": "pass",
+    "intake_contract_verify_files": "pass"
+  },
+  "attempt_truth": {
+    "before_attempt_id": "landsat9-before-20260810-001",
+    "before_terminal_failure_code": "browser_download_path_unavailable",
+    "before_bundle_in_controlled_custody": false,
+    "early_after_request_started": false,
+    "unverified_browser_download_files_retained_outside_custody": 2,
+    "no_automatic_retry": true
+  },
+  "closed_scope": "The approved initial two-product intake stopped on the first handoff failure. No bundle was container-verified or promoted, and no TIFF or pixel check, map, change analysis, attribution, or scientific publication occurred. The browser-managed files are not approved source custody."
+}
