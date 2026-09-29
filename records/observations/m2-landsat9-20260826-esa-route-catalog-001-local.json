@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-20260826-ESA-ROUTE-CATALOG-001-LOCAL",
+  "observed_at_utc": "2026-09-28T19:26:29Z",
+  "last_local_reconciliation_utc": "2026-09-28T19:43:05Z",
+  "status": "official_catalog_metadata_only_no_source_adoption",
+  "purpose": "Identify official USGS Landsat-9 post-event scene candidates for the ESA 26 August versus 24 August visual comparison without reading image or QA pixels.",
+  "official_esa_comparison_url": "https://www.esa.int/ESA_Multimedia/Images/2026/08/Nepal_glacier_collapse_and_flood_before_and_after",
+  "official_usgs_stac_collection_url": "https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l2-sr",
+  "official_usgs_search_url": "https://landsatlook.usgs.gov/stac-server/search?collections=landsat-c2l2-sr&bbox=84.7%2C27.75%2C85.65%2C28.45&datetime=2026-08-26T00%3A00%3A00Z%2F2026-08-27T00%3A00%3A00Z&limit=100",
+  "approved_aoi_ref": "config/aoi/approved-study-areas.geojson",
+  "approved_aoi_sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98",
+  "geometry_method": "Shapely 2.1.2 STAC and approved-AOI polygon intersection in EPSG:4326; fractions are angular-area screens, not geodesic or usable-pixel coverage.",
+  "scenes": [
+    {
+      "stac_item_id": "LC09_L2SP_141040_20260826_20260827_02_T1_SR",
+      "item_url": "https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l2-sr/items/LC09_L2SP_141040_20260826_20260827_02_T1_SR",
+      "acquired_utc": "2026-08-26T04:47:48.916081Z",
+      "platform": "LANDSAT_9",
+      "wrs_path_row": "141/040",
+      "tier": "T1",
+      "scene_cloud_cover_percent": 47.54,
+      "proj_epsg": 32645,
+      "proj_shape": [7841, 7711],
+      "proj_transform": [30, 0, 251685, 0, -30, 3311415],
+      "aoi_footprint_screen": {
+        "AOI-OVERVIEW": {"covers_whole_aoi": false, "approx_intersection_fraction": 0.574061},
+        "AOI-SOURCE": {"covers_whole_aoi": true, "approx_intersection_fraction": 1.0},
+        "AOI-UPPER-CORRIDOR": {"covers_whole_aoi": true, "approx_intersection_fraction": 1.0}
+      },
+      "asset_names_present": ["swir16", "swir22", "qa_pixel"],
+      "asset_bytes_read": false
+    },
+    {
+      "stac_item_id": "LC09_L2SP_141041_20260826_20260827_02_T1_SR",
+      "item_url": "https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l2-sr/items/LC09_L2SP_141041_20260826_20260827_02_T1_SR",
+      "acquired_utc": "2026-08-26T04:48:12.815568Z",
+      "platform": "LANDSAT_9",
+      "wrs_path_row": "141/041",
+      "tier": "T1",
+      "scene_cloud_cover_percent": 67.8,
+      "proj_epsg": 32645,
+      "proj_shape": [7851, 7711],
+      "proj_transform": [30, 0, 213585, 0, -30, 3152715],
+      "aoi_footprint_screen": {
+        "AOI-OVERVIEW": {"covers_whole_aoi": false, "approx_intersection_fraction": 0.860358},
+        "AOI-SOURCE": {"covers_whole_aoi": false, "approx_intersection_fraction": 0.491206},
+        "AOI-UPPER-CORRIDOR": {"covers_whole_aoi": false, "approx_intersection_fraction": 0.766719}
+      },
+      "asset_names_present": ["swir16", "swir22", "qa_pixel"],
+      "asset_bytes_read": false
+    }
+  ],
+  "pre_event_catalog_screen": {
+    "search_url": "https://landsatlook.usgs.gov/stac-server/search?collections=landsat-c2l2-sr&bbox=84.7%2C27.75%2C85.65%2C28.45&datetime=2026-08-01T00%3A00%3A00Z%2F2026-08-26T00%3A00%3A00Z&limit=100",
+    "returned_scene_count": 14,
+    "same_sensor_full_aoi_candidate": {
+      "stac_item_id": "LC09_L2SP_141040_20260810_20260811_02_T1_SR",
+      "item_url": "https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l2-sr/items/LC09_L2SP_141040_20260810_20260811_02_T1_SR",
+      "acquired_utc": "2026-08-10T04:47:45.817454Z",
+      "scene_cloud_cover_percent": 49.41,
+      "tier": "T1",
+      "proj_epsg": 32645,
+      "proj_shape": [7841, 7711],
+      "proj_transform": [30, 0, 250485, 0, -30, 3311415],
+      "footprint_covers_whole_aoi_source_and_upper_corridor": true,
+      "swir_and_qa_assets_listed": true,
+      "asset_bytes_read": false
+    },
+    "other_full_aoi_candidate": {
+      "stac_item_id": "LC08_L2SP_141040_20260818_20260824_02_T1_SR",
+      "acquired_utc": "2026-08-18T04:47:40.796144Z",
+      "scene_cloud_cover_percent": 79.83,
+      "footprint_covers_whole_aoi_source_and_upper_corridor": true,
+      "asset_bytes_read": false
+    },
+    "note": "The 10/26 August Landsat-9 pair is a possible same-sensor route. Catalog transforms lie on the same 30 m lattice, but scene-level cloud statistics still require pixel QA and true residual registration remains unmeasured. A new source decision is required before use."
+  },
+  "same_sensor_pair_catalog_grid_relation": {
+    "checked_against": ["USGS LandsatLook STAC exact items", "Microsoft Planetary Computer STAC exact items"],
+    "before_transform": [30, 0, 250485, 0, -30, 3311415],
+    "after_transform": [30, 0, 251685, 0, -30, 3311415],
+    "same_epsg": 32645,
+    "same_shape": [7841, 7711],
+    "origin_delta_m_after_minus_before": [1200, 0],
+    "integer_cell_offset_after_minus_before": [40, 0],
+    "same_30m_grid_lattice_by_catalog": true,
+    "implication": "A shared overlap window can be selected on catalog coordinates without interpolating either date solely to align grid origins, if exact acquired COG headers verify these transforms. Residual image-to-image geolocation still requires independent measurement before any difference or change claim.",
+    "asset_headers_or_pixels_read": false
+  },
+  "candidate_host_neutral_asset_set": {
+    "status": "proposed_not_authorized",
+    "per_date_roles_in_order": ["MTL.json", "qa_pixel", "qa_radsat", "qa_aerosol", "red", "swir16", "swir22"],
+    "maximum_exact_asset_roles_for_two_dates": 14,
+    "source_product_prefixes": ["LC09_L2SP_141040_20260810_20260811_02_T1", "LC09_L2SP_141040_20260826_20260827_02_T1"],
+    "qa_stage_roles_per_date": ["MTL.json", "qa_pixel", "qa_radsat", "qa_aerosol"],
+    "conditional_display_roles_per_date": ["red", "swir16", "swir22"],
+    "note": "Both exact USGS STAC items list all seven roles. The initial QA-only stage can screen flags but cannot establish final display-band valid fraction or reflectance without reading the three display bands; any QA-only pass is preliminary.",
+    "asset_content_lengths_or_checksums_in_catalog": false,
+    "asset_bytes_read": false
+  },
+  "official_usgs_known_issue_relevant_to_aoi": {
+    "source_url": "https://www.usgs.gov/landsat-missions/landsat-collection-2-known-issues",
+    "status": "method_risk_not_observed_in_exact_scenes",
+    "summary": "USGS documents Landsat 8-9 Collection 2 surface-reflectance aerosol overcorrection near bright snow/ice and cloud, possible reflectance outside 0..1, and band NoData near cloud edges that QA_PIXEL may not flag. It recommends examining SR_QA_AEROSOL validity and aerosol-level bits.",
+    "implication": "Future pixel QA must measure per-band nodata and out-of-range values independently of QA_PIXEL, retain aerosol QA strata, and keep bright snow/ice uncertainty visible. No exact-scene incidence is claimed.",
+    "exact_scene_pixels_read": false
+  },
+  "access_screen_2026_09_28": {
+    "usgs_asset_head": {
+      "assets_checked": ["swir16", "swir22", "qa_pixel"],
+      "dates_checked": ["2026-08-10", "2026-08-26"],
+      "result": "All six nominal USGS GeoTIFF URLs redirected to an ERS login HTML page; final HTTP 200 and 33171-byte text/html describe the login page, not asset availability.",
+      "raster_bytes_read": false,
+      "download_access_status": "requires_USGS_ERS_authentication_or_other_authorized_path"
+    },
+    "usgs_aws_option": {
+      "official_guidance_url": "https://www.usgs.gov/landsat-missions/landsat-commercial-cloud-data-access",
+      "status": "documented_requester_pays_not_selected",
+      "note": "The USGS-hosted AWS bucket is requester pays. No charged AWS route is authorized or tested."
+    },
+    "planetary_computer_metadata_option": {
+      "api_collection_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2",
+      "exact_item_ids": ["LC09_L2SP_141040_20260810_02_T1", "LC09_L2SP_141040_20260826_02_T1"],
+      "matching_usgs_scene_ids": ["LC91410402026222LGN00", "LC91410402026238LGN00"],
+      "matching_acquisition_times_and_scene_cloud_cover": true,
+      "asset_host": "landsateuwest.blob.core.windows.net",
+      "access_documentation_url": "https://planetarycomputer.microsoft.com/docs/concepts/sas/",
+      "terms_url": "https://planetarycomputer.microsoft.com/terms",
+      "status": "metadata_match_only_no_token_or_asset_access_no_further_host_request",
+      "note": "Microsoft documents anonymous STAC and no-account SAS issuance with rate limits. The rendered supplemental terms say accessing or attempting to use the preview constitutes acceptance, so no further Microsoft-host request is proposed without an exact owner decision. No SAS token was requested, stored, displayed, or used."
+    }
+  },
+  "planetary_computer_terms_page_read_only_observation": {
+    "observed_at_utc": "2026-09-28T19:37:59Z",
+    "url": "https://planetarycomputer.microsoft.com/terms",
+    "rendered_heading": "Supplemental Terms of Use for Microsoft Planetary Computer Previews",
+    "rendered_last_updated": "January 2023",
+    "material_conditions_observed": [
+      "The page says access to or attempted use of the Previews accepts its Supplemental Terms and ratifies acceptance of the linked Microsoft Terms of Use.",
+      "It describes Previews as for evaluation and testing, not mission-critical use, and provided as-is with limited remedies.",
+      "It says data-access tokens are individual, time-limited, confidential, non-transferable except within stated personnel/contractor conditions, and subject to rate limits."
+    ],
+    "linked_general_terms_url": "https://www.microsoft.com/en-us/servicesagreement",
+    "owner_acceptance_attested": false,
+    "token_requested": false,
+    "next_boundary": "No further Microsoft catalog, token, or data request pending an exact owner decision about this host and its terms."
+  },
+  "cross_sensor_before_context": {
+    "existing_product_id": "M2-OPT-001",
+    "existing_product_name": "S2A_MSIL2A_20260824T050231_N0512_R119_T45RUM_20260824T115710.SAFE",
+    "terminal_ref": "records/readiness/m2-optical-alternate-map-pair-002-terminal-reconciliation.json",
+    "terminal_sha256": "ae86acd28773511bc74a6423be127c1286414426454f9c4af0af8c3292d917d7",
+    "existing_single_date_usable_fraction": {"AOI-SOURCE": 0.3472036355525817, "AOI-UPPER-CORRIDOR": 0.2900860217047938},
+    "existing_screen_status": "block_below_frozen_0.8_threshold",
+    "note": "ESA's composed image does not override this exact local before-scene pixel screen or authorize reuse."
+  },
+  "method_references": [
+    "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+    "https://www.usgs.gov/landsat-missions/landsat-collection-2-quality-assessment-bands"
+  ],
+  "limits": [
+    "Scene-wide cloud cover does not establish usable pixels in an approved AOI.",
+    "Footprint coverage does not establish clear or registered pixels.",
+    "No raster, QA, thumbnail, MTL, or other asset bytes were requested; six USGS asset HEAD requests followed login redirects only.",
+    "A Landsat/Sentinel-2 comparison requires separately reviewed cross-sensor spectral, resolution, and registration methods.",
+    "No source substitution, acquisition, processing, map inclusion, change analysis, attribution, or publication is approved by this observation."
+  ],
+  "disposition": "metadata_candidates_only; the existing 24 August Sentinel-2 failure blocks promoting the ESA-style pair under current criteria, while the 10/26 August same-sensor Landsat-9 alternative remains unassessed at pixel level and its asset access path unapproved"
+}

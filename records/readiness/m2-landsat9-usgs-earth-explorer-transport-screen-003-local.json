@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-USGS-EARTH-EXPLORER-TRANSPORT-SCREEN-003-LOCAL",
+  "screened_at_utc": "2026-09-29T17:32:01Z",
+  "status": "two_exact_full_bundle_options_confirmed_acquisition_not_approved",
+  "supersedes_ref": "records/readiness/m2-landsat9-usgs-earth-explorer-transport-screen-002-local.json",
+  "observation_ref": "records/observations/m2-landsat9-usgs-earth-explorer-product-options-003-local.json",
+  "selected_host": "USGS EarthExplorer browser session",
+  "candidate_transport": "One full Landsat Collection 2 Level-2 Product Bundle per exact Landsat-9 scene, before then early after, each displayed at 1.05 GiB. Do not use the distinct 13-file surface-reflectance or 14-file surface-temperature Download All Files Now controls as a substitute.",
+  "exact_products_in_order": [
+    "LC09_L2SP_141040_20260810_20260811_02_T1",
+    "LC09_L2SP_141040_20260826_20260827_02_T1"
+  ],
+  "display_total_for_capacity_planning_only": "2.10 GiB",
+  "remaining_preparation": [
+    "Freeze a non-Git download destination and confirm free space immediately before any authorized request, including room for staged bundles, extraction, and verification.",
+    "Freeze browser transfer completion detection, one-attempt stop-on-failure semantics, actual filename and byte-length checks, safe archive member rules, and no-replace promotion.",
+    "Replace the host-neutral MTL.json expectation with a reviewed MTL.txt or MTL.xml parser that verifies exact product and scene identifiers.",
+    "Seek one bounded owner decision for exact acquisition and any separate later AOI pixel-QA stage."
+  ],
+  "acquisition_or_pixel_qa_authorized": false,
+  "asset_bytes_acquired": false
+}

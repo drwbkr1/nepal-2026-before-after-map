@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-LANDSAT9-USGS-BUNDLE-INTAKE-001-LOCAL",
+  "status": "prepared_zero_decision_not_public_not_approved",
+  "prepared_at_utc": "2026-09-29T18:14:52Z",
+  "proposal_ref": "contracts/milestone-002-landsat9-usgs-bundle-intake-001-proposal.json",
+  "proposal_sha256": "46401cecebde782b4449c3fb76a51f89f8cd3993f70c954181e15bb7ac0636dd",
+  "bound_files": [
+    {
+      "ref": "docs/M2_LANDSAT9_USGS_BUNDLE_INTAKE_001_REVIEW.md",
+      "sha256": "c925ddc171124578e83abc4fb701109bef8d1b42c8b4303cd5c9d61a44a50f09"
+    },
+    {
+      "ref": "contracts/m2-landsat9-usgs-bundle-intake-candidate.json",
+      "sha256": "97a5f4aefd47bb688532a083df96b0b7f16c1bbb2a3294a5fdbf2aa74575bba1"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-usgs-earth-explorer-bundle-intake-plan-003-local.json",
+      "sha256": "30e047c923021e9168699d64ec715aa11a21873ca9743f18154cbe4ed6fd825b"
+    },
+    {
+      "ref": "records/source-gates/m2-landsat9-same-sensor-usgs-intake-003-local.json",
+      "sha256": "9a2b7f5cefadde6680f50e2afc44d2f4e70deb0f07614c031ac3bf4908613d2f"
+    },
+    {
+      "ref": "records/observations/m2-landsat9-usgs-earth-explorer-product-options-003-local.json",
+      "sha256": "0b4ca6ee10d2c9adfac43aa3a32b06a3e2760b4b9e7eec86f48040b096c8b0d3"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-usgs-earth-explorer-transport-screen-003-local.json",
+      "sha256": "4d6549f2aa1a9c5d5bdcdd2686f70ecc0120afa0ee104b44c424464a707a102e"
+    },
+    {
+      "ref": "records/observations/m2-landsat9-20260826-esa-route-catalog-001-local.json",
+      "sha256": "f4cfa2f9e8ac5e04bac5b7fb8e9a84d4c8d95760a679cfa6ae268b4ce57b9595"
+    },
+    {
+      "ref": "scripts/landsat_l2_bundle_integrity.py",
+      "sha256": "aa5e0db52ccad0e252c20872f7060cf45fe24d1c4993f95906f4cc017286d043"
+    },
+    {
+      "ref": "tests/test_landsat_l2_bundle_integrity.py",
+      "sha256": "f0b36e52b2643d304849f4026aad7c9a1950981d36f9e7d32c64f20fcaca235e"
+    }
+  ],
+  "decision": {
+    "owner_approval_recorded": false,
+    "real_requests_authorized": false,
+    "public_git_publication_authorized_by_bundle_alone": false
+  }
+}

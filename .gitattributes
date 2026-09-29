@@ -25,3 +25,4 @@
 /records/source-gates/m2-radar-short-path-recovery-003-approval.json -text -eol -diff whitespace=cr-at-eol
 /records/source-gates/m2-radar-short-path-recovery-003-review-reconciliation.json -text -eol -diff whitespace=cr-at-eol
 /records/readiness/m2-radar-short-path-recovery-003-approval-activation.json -text -eol -diff whitespace=cr-at-eol
+/records/source-gates/m2-landsat9-same-sensor-usgs-intake-003-local.json -text -eol -diff whitespace=cr-at-eol

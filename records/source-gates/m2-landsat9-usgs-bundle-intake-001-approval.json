@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-LANDSAT9-USGS-BUNDLE-INTAKE-001-APPROVAL",
+  "approved_at_utc": "2026-09-29T18:17:33Z",
+  "decision_source": "Owner's 2026-09-29 answer to the exact one-question review: Approve exact packet",
+  "review_bundle_ref": "reviews/m2-landsat9-usgs-bundle-intake-001/review-bundle.json",
+  "review_bundle_sha256": "f9f86507376dbc5b6998defb0f865a322d068459b854798ac647f845b96e4882",
+  "proposal_ref": "contracts/milestone-002-landsat9-usgs-bundle-intake-001-proposal.json",
+  "proposal_sha256": "46401cecebde782b4449c3fb76a51f89f8cd3993f70c954181e15bb7ac0636dd",
+  "decision": "approved_one_conditional_envelope",
+  "authorized_scope": "Exact two-product EarthExplorer full-bundle intake, dependency-ordered implementation and synthetic tests, public CI gate, final no-payload preflight, bounded browser requests, container-only verification, non-Git no-replace custody, and sanitized terminal publication as stated in the proposal.",
+  "request_budget": "At most one initial browser download per exact product and at most one conditional distinct byte-zero recovery per same product only for a clearly classified transport or local persistence failure under unchanged source, rights, terms, and custody conditions. No retry for content identity, rights, security, or unexplained verification failure.",
+  "explicit_exclusions": [
+    "No token or credential storage/exposure, terms acceptance, paid action, M2M API, alternate host, source substitution, or unbounded retry.",
+    "No TIFF header or pixel QA, AOI mask, registration, baseline, change analysis, interpretation, or attribution.",
+    "No ArcGIS raster map, derived-pixel release, or scientific publication."
+  ],
+  "execution_gates": [
+    "Exact bound-file hashes must still match before control integration.",
+    "Synthetic tests and public default-branch CI must pass before any real request.",
+    "Final no-payload source, rights, browser, path, free-space, collision, and receipt preflight must pass before each browser request."
+  ],
+  "request_or_payload_started_at_approval": false
+}

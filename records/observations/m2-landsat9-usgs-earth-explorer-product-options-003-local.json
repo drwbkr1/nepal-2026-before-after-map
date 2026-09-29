@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-USGS-EARTH-EXPLORER-PRODUCT-OPTIONS-003-LOCAL",
+  "observed_at_utc": "2026-09-29T17:32:01Z",
+  "status": "both_exact_full_bundle_options_visible_no_asset_transfer",
+  "host": "https://earthexplorer.usgs.gov/",
+  "supersedes_observation_ref": "records/observations/m2-landsat9-usgs-earth-explorer-product-options-002-local.json",
+  "owner_supplied_top_level_screenshot_sha256": "f4862d0fb55dc19b9df6b123d2397ca36cda4ab72649ad7b19ea26240df0a94c",
+  "live_browser_observation": "From the owner-opened August 10 Download Options dialog, Product Options exposed the exact pre-event Level-2 Product Bundle and individual-file list. The bundle download button was not activated.",
+  "exact_product_bundle_options": [
+    {
+      "role": "before",
+      "landsat_product_identifier_l2": "LC09_L2SP_141040_20260810_20260811_02_T1",
+      "display_name": "Landsat Collection 2 Level-2 Product Bundle",
+      "display_size": "1.05 GiB",
+      "individually_listed_required_roles": [
+        "MTL.txt",
+        "MTL.xml",
+        "QA_PIXEL.TIF",
+        "QA_RADSAT.TIF",
+        "SR_B3.TIF",
+        "SR_B4.TIF",
+        "SR_B5.TIF",
+        "SR_B6.TIF",
+        "SR_B7.TIF",
+        "SR_QA_AEROSOL.TIF"
+      ]
+    },
+    {
+      "role": "early_after",
+      "landsat_product_identifier_l2": "LC09_L2SP_141040_20260826_20260827_02_T1",
+      "display_name": "Landsat Collection 2 Level-2 Product Bundle",
+      "display_size": "1.05 GiB",
+      "evidence_ref": "records/observations/m2-landsat9-usgs-earth-explorer-product-options-002-local.json"
+    }
+  ],
+  "display_total_for_planning_only": "2.10 GiB",
+  "limitations": [
+    "Displayed sizes are rounded interface values, not verified byte lengths or upstream checksums.",
+    "Individually listed files are availability metadata, not verified members of either acquired archive.",
+    "No product filename, actual bytes, archive integrity, AOI pixel usability, map inclusion, or scientific result is established."
+  ],
+  "asset_transfer_or_pixel_read_observed": false,
+  "authority_effect": "Zero decision. No product download, retry, pixel QA, change analysis, or publication is authorized by this observation."
+}

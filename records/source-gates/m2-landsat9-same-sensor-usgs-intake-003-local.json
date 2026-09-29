@@ -1,0 +1,166 @@
+{
+  "contract_version": "source-gate/v2",
+  "assessment_id": "NEPAL-M2-LANDSAT9-SAME-SENSOR-USGS-INTAKE-003-LOCAL",
+  "assessed_at": "2026-09-29T17:58:39Z",
+  "authority": {
+    "mode": "not_granted",
+    "authority_ref": "",
+    "authorized_actions": [],
+    "expires_at_utc": null
+  },
+  "intended_use": {
+    "summary": "Source suitability reassessment for the owner-selected EarthExplorer full Level-2 bundles of the exact 10 and 26 August 2026 Landsat-9 pair. Signed-in bundle availability is observed; this record grants no request, download, pixel read, map inclusion, or scientific action.",
+    "planned_actions": [
+      "prepare_validated_earth_explorer_bundle_intake_contract",
+      "seek_one_bounded_owner_acquisition_decision",
+      "keep_pixel_and_scientific_methods_separate"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "USGS-LC09-141040-20260810-20260826-VIA-USGS",
+      "name": "USGS Landsat-9 C2L2 SR 10/26 August pair via EarthExplorer",
+      "locator": "https://earthexplorer.usgs.gov/",
+      "criteria": [
+        {
+          "id": "identity",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/observations/m2-landsat9-20260826-esa-route-catalog-001-local.json",
+              "note": "USGS STAC item IDs LC09_L2SP_141040_20260810_20260811_02_T1_SR and LC09_L2SP_141040_20260826_20260827_02_T1_SR, scene IDs, dates, path/row, and exact candidate asset roles were captured."
+            }
+          ],
+          "note": "Catalog identity is exact enough to propose QA intake, but no band, QA, or MTL bytes have been authenticated."
+        },
+        {
+          "id": "authority",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+              "observed_at": "2026-09-28T19:56:13Z",
+              "note": "USGS is the producer of Collection 2 Level-2 Landsat 8-9 science products and identifies EarthExplorer as a distribution route."
+            }
+          ],
+          "note": "Producer and proposed distribution host are the same public agency; this is not independent event corroboration."
+        },
+        {
+          "id": "access",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://earthexplorer.usgs.gov/",
+              "observed_at": "2026-09-29T17:32:01Z",
+              "note": "Owner-signed-in EarthExplorer session displayed the full Collection 2 Level-2 Product Bundle option for both exact scene IDs; each showed a rounded 1.05 GiB size. No download was activated."
+            },
+            {
+              "type": "static",
+              "locator": "records/observations/m2-landsat9-usgs-earth-explorer-product-options-003-local.json",
+              "note": "Sanitized browser observation with both exact products, required member availability, and explicit no-transfer limitation."
+            }
+          ],
+          "note": "The exact full-bundle option is visible under the owner-signed-in EarthExplorer session. Actual download completion, exact bytes, archive members, and durable access are unverified and require separate controlled intake."
+        },
+        {
+          "id": "rights",
+          "required": true,
+          "requires_live": true,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "live",
+              "locator": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+              "observed_at": "2026-09-28T19:56:13Z",
+              "note": "USGS states Landsat products have no use restrictions and supplies the Landsat 8-9 Level-2 dataset citation."
+            }
+          ],
+          "note": "This supports local QA use of the source data, not acceptance of any owner account condition or authority to publish project-derived pixels."
+        },
+        {
+          "id": "provenance",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/observations/m2-landsat9-20260826-esa-route-catalog-001-local.json",
+              "note": "Exact USGS scene identifiers, acquisition times, path/row, cloud values, source IDs, and STAC transforms are recorded."
+            }
+          ],
+          "note": "A future transfer must still bind filenames and MTL identity to these exact catalog items; metadata is not a binary checksum."
+        },
+        {
+          "id": "integrity",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/readiness/m2-landsat9-usgs-earth-explorer-bundle-intake-plan-003-local.json",
+              "note": "Host-specific two-bundle plan corrects MTL.json to MTL.txt plus MTL.xml, freezes archive-member identity and local SHA-256/length/structural checks, and states no upstream digest or exact bytes were observed."
+            }
+          ],
+          "note": "Pass concerns a proposed post-acquisition integrity plan only, not any downloaded or verified bundle."
+        },
+        {
+          "id": "fitness",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/observations/m2-landsat9-20260826-esa-route-catalog-001-local.json",
+              "note": "Both exact Landsat-9 scene footprints cover AOI-SOURCE and AOI-UPPER-CORRIDOR, with catalog 30 m EPSG:32645 QA and band assets on a common lattice shifted 40 columns."
+            }
+          ],
+          "note": "Pass is only for attempting local QA after authority and verified intake. Scene cloud fractions and catalog transforms do not establish AOI pixel usability, residual registration, a visual map, or change."
+        },
+        {
+          "id": "privacy-security",
+          "required": true,
+          "requires_live": false,
+          "status": "pass",
+          "evidence": [
+            {
+              "type": "static",
+              "locator": "records/readiness/m2-landsat9-usgs-earth-explorer-bundle-intake-plan-003-local.json",
+              "note": "Selected browser transport would keep cookies, tokens, account identifiers, and signed URLs out of files, shell history, logs, and receipts; data would remain outside Git."
+            }
+          ],
+          "note": "No account secret is retained or requested by this assessment."
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "status": "ready",
+    "blocking_reasons": [],
+    "live_verification_pending": [],
+    "approved_actions": []
+  },
+  "write_boundary": {
+    "permitted_without_further_authorization": [
+      "read public USGS catalog metadata",
+      "prepare local zero-decision USGS EarthExplorer bundle intake controls and review"
+    ],
+    "requires_explicit_authorization": [
+      "request or download either full bundle",
+      "read source archive or pixel bytes",
+      "publish or redistribute project-derived pixels",
+      "claim mapped change or event causation"
+    ]
+  }
+}

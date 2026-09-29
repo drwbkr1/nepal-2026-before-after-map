@@ -1,0 +1,95 @@
+{
+  "contract_version": "1.0",
+  "intake_id": "nepal-m2-landsat9-usgs-bundle-001",
+  "created_at": "2026-09-29T18:17:33Z",
+  "collision_policy": "fail",
+  "promotion_mode": "atomic-no-replace",
+  "secret_policy": "references-only",
+  "custody_root": "nepal-2026-before-after-map-data/custody",
+  "staging_root": "nepal-2026-before-after-map-data/.intake-staging/nepal-m2-landsat9-usgs-bundle-001",
+  "assets": [
+    {
+      "asset_id": "landsat9-before-20260810",
+      "source": {
+        "kind": "other",
+        "uri": "https://earthexplorer.usgs.gov/",
+        "authorization_ref": "records/source-gates/m2-landsat9-usgs-bundle-intake-001-approval.json",
+        "terms_ref": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+        "transport_exception_ref": null
+      },
+      "destination_relative_path": "landsat9-c2l2/LC09_L2SP_141040_20260810_20260811_02_T1.tar",
+      "staging_relative_path": "attempt-bytes/landsat9-before-20260810-001/LC09_L2SP_141040_20260810_20260811_02_T1.tar.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": null,
+        "unavailable_reason": "EarthExplorer showed only a rounded 1.05 GiB display size; no upstream SHA-256 or exact byte length was observed. Browser completion, actual bytes, local SHA-256, TAR structure, and MTL identity must be checked before promotion."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "authorized",
+      "attempts": [],
+      "failure": null,
+      "superseded_by": null,
+      "extensions": {
+        "role": "before",
+        "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+        "scene_id": "LC91410402026222LGN00",
+        "catalog_item_id": "LC09_L2SP_141040_20260810_20260811_02_T1_SR",
+        "earth_explorer_control": "Landsat Collection 2 Level-2 Product Bundle / Download Product",
+        "browser_download_url_persisted": false,
+        "real_transfer_authorized": true
+      }
+    },
+    {
+      "asset_id": "landsat9-early-after-20260826",
+      "source": {
+        "kind": "other",
+        "uri": "https://earthexplorer.usgs.gov/",
+        "authorization_ref": "records/source-gates/m2-landsat9-usgs-bundle-intake-001-approval.json",
+        "terms_ref": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+        "transport_exception_ref": null
+      },
+      "destination_relative_path": "landsat9-c2l2/LC09_L2SP_141040_20260826_20260827_02_T1.tar",
+      "staging_relative_path": "attempt-bytes/landsat9-early-after-20260826-001/LC09_L2SP_141040_20260826_20260827_02_T1.tar.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": null,
+        "unavailable_reason": "EarthExplorer showed only a rounded 1.05 GiB display size; no upstream SHA-256 or exact byte length was observed. Browser completion, actual bytes, local SHA-256, TAR structure, and MTL identity must be checked before promotion."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "authorized",
+      "attempts": [],
+      "failure": null,
+      "superseded_by": null,
+      "extensions": {
+        "role": "early_after",
+        "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+        "scene_id": "LC91410402026238LGN00",
+        "catalog_item_id": "LC09_L2SP_141040_20260826_20260827_02_T1_SR",
+        "earth_explorer_control": "Landsat Collection 2 Level-2 Product Bundle / Download Product",
+        "browser_download_url_persisted": false,
+        "real_transfer_authorized": true
+      }
+    }
+  ],
+  "extensions": {
+    "status": "authorized_but_public_ci_and_final_preflight_pending",
+    "source_gate_ref": "records/source-gates/m2-landsat9-same-sensor-usgs-intake-003-local.json",
+    "bundle_plan_ref": "records/readiness/m2-landsat9-usgs-earth-explorer-bundle-intake-plan-003-local.json",
+    "verifier_ref": "scripts/landsat_l2_bundle_integrity.py",
+    "approval_required_before_activating_or_requesting_bundle": true,
+    "archive_or_pixel_bytes_read": false,
+    "approval_ref": "records/source-gates/m2-landsat9-usgs-bundle-intake-001-approval.json",
+    "review_bundle_sha256": "f9f86507376dbc5b6998defb0f865a322d068459b854798ac647f845b96e4882",
+    "proposal_sha256": "46401cecebde782b4449c3fb76a51f89f8cd3993f70c954181e15bb7ac0636dd"
+  }
+}

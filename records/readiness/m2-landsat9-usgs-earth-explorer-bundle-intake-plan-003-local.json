@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-USGS-EARTH-EXPLORER-BUNDLE-INTAKE-PLAN-003-LOCAL",
+  "prepared_at_utc": "2026-09-29T17:58:39Z",
+  "status": "zero_decision_host_specific_preparation_no_acquisition_authority",
+  "supersedes_for_selected_host": "records/readiness/m2-landsat9-full-optical-intake-integrity-plan-002-local.json",
+  "purpose": "Freeze the observed two-bundle EarthExplorer transport shape and exact post-transfer identity checks before any owner acquisition decision. The earlier host-neutral MTL.json and eighteen-separate-asset transport assumptions do not apply to this route.",
+  "host": "https://earthexplorer.usgs.gov/",
+  "evidence_refs": [
+    "records/observations/m2-landsat9-usgs-earth-explorer-product-options-003-local.json",
+    "records/readiness/m2-landsat9-usgs-earth-explorer-transport-screen-003-local.json",
+    "records/observations/m2-landsat9-20260826-esa-route-catalog-001-local.json"
+  ],
+  "exact_product_bundles_in_order": [
+    {
+      "role": "before",
+      "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+      "scene_id": "LC91410402026222LGN00",
+      "catalog_item_id": "LC09_L2SP_141040_20260810_20260811_02_T1_SR",
+      "earth_explorer_display_size_only": "1.05 GiB"
+    },
+    {
+      "role": "early_after",
+      "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+      "scene_id": "LC91410402026238LGN00",
+      "catalog_item_id": "LC09_L2SP_141040_20260826_20260827_02_T1_SR",
+      "earth_explorer_display_size_only": "1.05 GiB"
+    }
+  ],
+  "selected_option": "Landsat Collection 2 Level-2 Product Bundle; one full bundle per exact scene, not either separate Download All Files Now band-group control",
+  "required_archive_members_per_product_suffix": [
+    "_MTL.txt",
+    "_MTL.xml",
+    "_QA_PIXEL.TIF",
+    "_QA_RADSAT.TIF",
+    "_SR_QA_AEROSOL.TIF",
+    "_SR_B3.TIF",
+    "_SR_B4.TIF",
+    "_SR_B5.TIF",
+    "_SR_B6.TIF",
+    "_SR_B7.TIF"
+  ],
+  "pre_request_checks_if_later_approved": [
+    "Confirm the signed-in browser still shows the exact product ID and the full Level-2 Product Bundle for each date; do not use M2M, another host, or a substitute scene.",
+    "Freeze a unique non-Git staging and final path under the established external project data root, verify free space and collision absence, and reserve append-only attempt and terminal receipt identities before each request.",
+    "Freeze an explicit browser-download handoff that waits for a completed download event, obtains its local path, and moves or copies the exact completed file into unique non-Git staging without recording cookies, signed URLs, tokens, or account identifiers. If the browser cannot expose a completed local file safely, stop and revise the transport method."
+  ],
+  "proposed_transfer_controls_if_later_approved": {
+    "fixed_order": "before, then early_after; a shared account, source-identity, security, or storage failure stops both",
+    "attempts": "Append-only identities for each owner-initiated download and any safe recovery; no silent retry or attempt-path reuse. The future owner decision must state any exact request or recovery limit.",
+    "resume": "Do not resume a partial browser transfer unless the provider and browser expose unchanged strong object identity and verified range semantics; otherwise preserve available failure evidence and start a distinct byte-zero attempt only within the approved envelope.",
+    "browser_transport_limitation": "A browser may issue internal range requests or retries without exposing them. Count and audit owner-initiated Download Product actions, and make no stronger HTTP-attempt claim than observable evidence supports.",
+    "promotion": "Atomic no-replace only after verification; preserve failed and partial attempts outside Git when available"
+  },
+  "post_transfer_container_checks": [
+    "Record actual bundle filename, byte length, and SHA-256. The rounded 1.05 GiB display is only a capacity estimate; no upstream cryptographic digest or exact expected byte length was observed.",
+    "Determine actual archive format from the delivered file and open it without extracting or following links; reject traversal, unsafe member types, duplicates, missing required members, truncation, and unexpected product-prefixed identity.",
+    "Read both MTL.txt and MTL.xml as metadata only and require LANDSAT_PRODUCT_ID and LANDSAT_SCENE_ID to match the exact frozen pair and member prefixes. Do not expect MTL.json from EarthExplorer.",
+    "Stream every archive member to completion for structural integrity and local member hashes before any no-replace promotion; record that local hashes do not prove equality to an unpublished upstream checksum."
+  ],
+  "synthetic_only_verifier_candidate": {
+    "script_ref": "scripts/landsat_l2_bundle_integrity.py",
+    "tests_ref": "tests/test_landsat_l2_bundle_integrity.py",
+    "scope": "TAR structure, safe paths/types, complete member reads, required roles, exact MTL.txt/XML identifiers, and local hashes only; no real archive has been inspected and no pixel may be read under this plan"
+  },
+  "separate_later_gates": [
+    "Archive verification does not establish TIFF header or pixel fitness. A distinct approved read must verify required TIFF structure, EPSG:32645, 30 m grid, data types, scale, nodata, scene-pair lattice, and AOI masks.",
+    "A 30 m Landsat visual panel or observed-change route needs its own frozen method and review; the existing Sentinel-2 20 m thresholds and mask implementation cannot be silently reused.",
+    "No verified transfer alone establishes usable pixels, a map, observable change, event causation, or publication readiness."
+  ],
+  "authority": {
+    "acquisition_approved": false,
+    "asset_or_pixel_bytes_read_by_this_plan": false,
+    "source_or_method_substitution_approved": false,
+    "publication_approved": false
+  }
+}
