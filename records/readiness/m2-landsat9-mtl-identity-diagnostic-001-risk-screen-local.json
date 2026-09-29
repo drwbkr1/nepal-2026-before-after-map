@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-MTL-IDENTITY-DIAGNOSTIC-001-RISK-SCREEN-LOCAL",
+  "screened_at_utc": "2026-09-29T19:14:03Z",
+  "status": "local_zero_decision_no_staged_content_reinspection",
+  "terminal_checkpoint_ref": "records/readiness/m2-landsat9-local-download-recovery-001-post-ci-reconciliation.json",
+  "terminal_checkpoint_sha256": "6e8b1383334833693af61b1b589b945b9376f98027544fe31eba7d82134f86e3",
+  "observed_failure": "mtl_text_identity_mismatch",
+  "preserved_staged_file_metadata_only": {
+    "role": "exact retained before-product staging from terminal recovery-001",
+    "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+    "scene_id_expected": "LC91410402026222LGN00",
+    "size_bytes": 1126565376,
+    "regular_non_reparse": true,
+    "sha256_from_terminal_staged_receipt_not_remeasured": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255"
+  },
+  "eight_criterion_assessment": {
+    "identity": "The exact product and scene IDs remain frozen. The terminal code reports a text-MTL mismatch but does not say which key was absent, duplicated, malformed, or different.",
+    "authority": "The owner's recovery-001 approval ended at a terminal failure; it grants no further content read or reinterpretation. A new exact decision is required for a distinct diagnostic process.",
+    "access": "The preserved staged file exists by metadata only. The two Downloads originals remain untouched; neither is a substitute input for the proposed diagnostic.",
+    "rights": "USGS describes Collection 2 Level-2 delivery with MTL text and XML metadata; no new provider request, account action, or terms acceptance is proposed.",
+    "provenance": "The retained staged SHA-256 was recorded during the consumed recovery. A future diagnostic must first remeasure and match that exact digest before interpreting any MTL field; this still does not create an upstream provider checksum.",
+    "integrity": "The current verifier reached MTL text identity after copying and hashing, but it did not produce an identity-key diagnostic receipt. A bounded TAR-header and two-MTL-field read is proposed, not archive revalidation or promotion.",
+    "fitness": "The proposed classification can guide a later reviewed correction or rejection, but cannot establish source authenticity, TIFF/header/pixel quality, AOI coverage, or map usability.",
+    "privacy_security": "The process must never log a raw MTL body, unexpected arbitrary field value, private path, signed URL, account identifier, token, or payload byte. Only allowlisted product/scene identifiers and fixed codes may be recorded."
+  },
+  "current_disposition": "diagnostic_design_only_pending_owner_decision_no_content_read"
+}

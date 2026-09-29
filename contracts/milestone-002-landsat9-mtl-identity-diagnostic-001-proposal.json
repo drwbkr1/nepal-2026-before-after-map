@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-LANDSAT9-MTL-IDENTITY-DIAGNOSTIC-001",
+  "status": "local_zero_decision_not_approved_not_published",
+  "prepared_at_utc": "2026-09-29T19:14:03Z",
+  "objective": "Classify the frozen MTL text identity failure of the exact preserved 10 August Landsat-9 staging bytes without reopening the terminal recovery or making an acquisition, promotion, map, or scientific decision.",
+  "risk_screen_ref": "records/readiness/m2-landsat9-mtl-identity-diagnostic-001-risk-screen-local.json",
+  "prior_terminal_ref": "records/readiness/m2-landsat9-local-download-recovery-001-terminal-reconciliation.json",
+  "prior_post_ci_ref": "records/readiness/m2-landsat9-local-download-recovery-001-post-ci-reconciliation.json",
+  "frozen_input": {
+    "data_root_role": "external non-Git project data root",
+    "relative_path": ".intake-staging/nepal-m2-landsat9-local-download-recovery-001/attempt-bytes/landsat9-before-20260810-recovery-001/LC09_L2SP_141040_20260810_20260811_02_T1.tar.part",
+    "size_bytes": 1126565376,
+    "sha256_from_terminal_staged_receipt": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255",
+    "expected_product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+    "expected_scene_id": "LC91410402026222LGN00",
+    "consumed_attempt_id": "landsat9-before-20260810-recovery-001"
+  },
+  "new_distinct_diagnostic": {
+    "diagnostic_id": "landsat9-mtl-identity-diagnostic-001-real-001",
+    "external_attempt_root_relative": ".intake-staging/nepal-m2-landsat9-mtl-identity-diagnostic-001/attempt-events/landsat9-mtl-identity-diagnostic-001-real-001",
+    "maximum_real_processes": 1,
+    "automatic_retry": false,
+    "input_mutation": false,
+    "output_class": "sanitized identity classification and append-only receipts only"
+  },
+  "single_owner_decision_requested": {
+    "approval_effect": "One conditional envelope covering publication of the exact packet, read-only diagnostic implementation and synthetic tests, public default-branch CI, a final no-content preflight, at most one new distinct local diagnostic process, and sanitized terminal publication without intermediate owner reconfirmation while all frozen conditions hold.",
+    "allowed_actions_in_dependency_order": [
+      "Record exact owner approval against the unchanged bundle and proposal hashes. Implement a diagnostic-only script and disposable synthetic tests without opening any real archive, staging file, or Downloads original. Preserve the consumed verifier and recovery attempt unchanged.",
+      "Test receipt durability, interruption, source drift, unsafe path/member, missing or duplicate MTL, oversized metadata, malformed values, and secret exposure on disposable fixtures. Publish source-safe packet, approval, code and tests to public main; require successful public CI before any real staged-content read.",
+      "Run a final no-content preflight: verify unchanged terminal and post-CI records and four external attempt receipts, exact staged-file metadata and non-reparse status, absence of a prior diagnostic root, and exact public CI. Reserve the new diagnostic receipt identity durably before opening source content.",
+      "In one read-only diagnostic process, stream the exact staged file once to remeasure its full SHA-256 and length. Stop before MTL interpretation unless both equal the frozen receipt values. Then inspect TAR headers and read only the exact product-named MTL.txt and MTL.xml regular-file members, with a maximum of 2 MiB each. Do not extract any file or read TIFF member payloads.",
+      "For each of LANDSAT_PRODUCT_ID and LANDSAT_SCENE_ID in text and XML, record presence count, syntactic validity, exact equality with the frozen expected value, and only well-formed allowlisted Landsat identifier values. Record fixed failure codes for malformed or arbitrary content; never persist raw MTL text, XML, unknown values, private paths, URLs, or secrets. Write independent append-only terminal and cleanup receipts even if classification fails.",
+      "Publish only sanitized terminal classification and exact reconciliation to public main, pass public CI, and stop for a new scientific/source-method decision. A diagnostic pass or mismatch does not automatically change the verifier, source identity, or custody state."
+    ],
+    "stop_on": [
+      "Any reviewed proposal, approval, receipt, staged path, staged size, source digest, safety condition, or public CI gate drift.",
+      "A missing, unsafe, duplicate, oversized, malformed, or ambiguous MTL member or identity key; an archive-header anomaly; any source mutation during the process.",
+      "Any inability to persist the pre-read reservation or terminal/cleanup evidence without exposing private data.",
+      "Any request to revise the identity predicate, accept a different scene/product, promote or retry bytes, click an EarthExplorer download, or inspect pixels under this diagnostic-only envelope."
+    ]
+  },
+  "explicit_exclusions": [
+    "No reuse, resume, reconstruction, retry, or mutation of consumed landsat9-before-20260810-001 or landsat9-before-20260810-recovery-001, including their reserved receipts.",
+    "No mutation, relocation, deletion, adoption, or promotion of the preserved staging file or either Downloads original; no browser, network, credential, account, terms, or paid action.",
+    "No parser or frozen identity-predicate amendment, source/date/scene substitution, after-product request, TIFF/header/pixel QA, registration, baseline, map generation, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication."
+  ],
+  "decision_state": {
+    "owner_approved": false,
+    "publication_authorized_by_draft": false,
+    "implementation_authorized_by_draft": false,
+    "staged_content_read_authorized_by_draft": false,
+    "new_browser_request_authorized_by_draft": false
+  }
+}

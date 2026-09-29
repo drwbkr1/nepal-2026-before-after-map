@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-LANDSAT9-MTL-IDENTITY-DIAGNOSTIC-001-LOCAL",
+  "status": "local_zero_decision_not_public_not_approved",
+  "human_decision_count": 0,
+  "base_commit": "604e30c36f4e66042ff0ba4111999ae381aaa41a",
+  "proposal_ref": "contracts/milestone-002-landsat9-mtl-identity-diagnostic-001-proposal.json",
+  "proposal_sha256": "0da636740994658fb106ba59957951edd894d7aa34531b829147059b4a3d2b00",
+  "bound_files": [
+    {
+      "ref": "docs/M2_LANDSAT9_MTL_IDENTITY_DIAGNOSTIC_001_REVIEW.md",
+      "sha256": "24f58e9be34e260a37e3b78dc7873416d511c5694656c2d1726399f6444dec58",
+      "role": "human_readable_review"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-mtl-identity-diagnostic-001-risk-screen-local.json",
+      "sha256": "fd731ad0a6d50ea74b633130586494db700c798fb3180ef0c2c789536d042836",
+      "role": "risk_screen"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-local-download-recovery-001-terminal-reconciliation.json",
+      "sha256": "b133aca13be2683446b13964dbf47d03d339b58c4309a4da562ea5e844525b16",
+      "role": "terminal_failure"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-local-download-recovery-001-post-ci-reconciliation.json",
+      "sha256": "6e8b1383334833693af61b1b589b945b9376f98027544fe31eba7d82134f86e3",
+      "role": "closed_envelope"
+    },
+    {
+      "ref": "scripts/landsat_l2_bundle_integrity.py",
+      "sha256": "aa5e0db52ccad0e252c20872f7060cf45fe24d1c4993f95906f4cc017286d043",
+      "role": "frozen_failed_verifier"
+    },
+    {
+      "ref": "scripts/landsat_l2_local_download_recovery.py",
+      "sha256": "c33be22884c337f2897e24dc5bb1e6ead8387c33df05d17ee8c5ff7f14687e8b",
+      "role": "consumed_recovery_runner"
+    }
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-LANDSAT9-MTL-IDENTITY-DIAGNOSTIC-001",
+    "question": "Approve, revise, or defer the one bounded read-only MTL identity diagnostic envelope through sanitized terminal publication?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "Exact packet and owner approval are published to public main and public CI passes, followed by diagnostic implementation/tests and their public-CI gate and final no-content preflight."
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "implementation_authorized": false,
+    "staged_file_content_read_authorized": false,
+    "new_real_diagnostic_authorized": false,
+    "parser_amendment_or_promotion_authorized": false,
+    "after_browser_action_authorized": false,
+    "pixel_or_map_action_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

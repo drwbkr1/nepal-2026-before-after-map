@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-LANDSAT9-MTL-IDENTITY-DIAGNOSTIC-001-APPROVAL",
+  "approved_at_utc": "2026-09-29T19:21:00Z",
+  "decision_source": "Owner's exact review-question answer: Approve exact packet",
+  "review_bundle_ref": "reviews/m2-landsat9-mtl-identity-diagnostic-001/review-bundle.json",
+  "review_bundle_sha256": "89d4c11876334095581550ba054a62a2be036db3583747b7bfa08f0af8225ee1",
+  "proposal_ref": "contracts/milestone-002-landsat9-mtl-identity-diagnostic-001-proposal.json",
+  "proposal_sha256": "0da636740994658fb106ba59957951edd894d7aa34531b829147059b4a3d2b00",
+  "decision": "approved_one_conditional_envelope",
+  "authorized_scope": "Exact packet publication, diagnostic-only implementation and synthetic tests, public default-branch CI, final no-content preflight, at most one distinct read-only staged-TAR diagnostic process, and sanitized terminal publication in the reviewed dependency order.",
+  "real_process_budget": 1,
+  "explicit_exclusions": [
+    "No mutation, reuse, resume, or retry of the consumed local-download recovery or its receipts.",
+    "No parser or identity-predicate amendment, promotion, browser or network request, after-product download, TIFF payload read, pixel QA, map or change analysis, attribution, or scientific publication."
+  ],
+  "execution_gates": [
+    "All approved packet and bound-file hashes remain exact.",
+    "Synthetic tests and public default-branch CI pass before any real staged-content read.",
+    "Final no-content preflight confirms terminal and receipt hashes, staged-file metadata and non-reparse status, absence of the diagnostic attempt root, and exact public CI."
+  ],
+  "real_staged_content_read_started_at_approval": false
+}
