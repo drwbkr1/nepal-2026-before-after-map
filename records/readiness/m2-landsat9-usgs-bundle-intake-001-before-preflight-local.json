@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-USGS-BUNDLE-INTAKE-001-BEFORE-PREFLIGHT-LOCAL",
+  "checked_at_utc": "2026-09-29T18:29:06Z",
+  "status": "pass_no_payload_preflight_before_first_browser_request",
+  "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+  "scene_id": "LC91410402026222LGN00",
+  "attempt_id": "landsat9-before-20260810-001",
+  "approval_ref": "records/source-gates/m2-landsat9-usgs-bundle-intake-001-approval.json",
+  "approval_sha256": "bb00c9601f27b759d0e51a5df1b2dc62a117a06cf921c9281b4ae0423dbba375",
+  "public_ci": {
+    "commit": "1004b84d16bcd36c4b3e55efbb630cb5cba4a407",
+    "run_id": "36612172656",
+    "conclusion": "success"
+  },
+  "source_browser_check": {
+    "host": "https://earthexplorer.usgs.gov/",
+    "owner_session_signed_in": true,
+    "evidence": "EarthExplorer navigation showed a Logout control; account identifier was not copied to this record.",
+    "exact_result_and_date_visible": true,
+    "selected_control": "Landsat Collection 2 Level-2 Product Bundle / 1.05 GiB display / Download Product",
+    "no_terms_payment_or_source_change_observed": true,
+    "browser_request_started": false
+  },
+  "rights_check": {
+    "official_usgs_ref": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+    "verified_at_utc": "2026-09-29T18:28:00Z",
+    "finding": "USGS still states there are no restrictions on Landsat product use and lists EarthExplorer as the Level-2 distribution route. This does not approve project-derived pixel publication."
+  },
+  "custody_check": {
+    "external_root_exists_without_reparse": true,
+    "attempt_and_destination_paths_unoccupied": true,
+    "free_bytes_on_c_drive": 392040861696,
+    "minimum_free_bytes_required": 8589934592,
+    "unique_external_attempt_and_staging_paths_frozen": true,
+    "promotion": "atomic-no-replace"
+  },
+  "limitations": [
+    "No source bundle, TIFF header, or pixel bytes were read during this preflight.",
+    "The browser may perform internal network requests or retries that this project cannot count individually; the bound limit concerns owner-initiated Download Product actions.",
+    "The displayed size is rounded and is not an upstream byte-length or checksum guarantee."
+  ]
+}

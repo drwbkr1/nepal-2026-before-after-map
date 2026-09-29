@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-USGS-BUNDLE-INTAKE-001-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-29T18:34:25Z",
+  "status": "stopped_on_first_product_browser_handoff_failure",
+  "approved_review_bundle_sha256": "f9f86507376dbc5b6998defb0f865a322d068459b854798ac647f845b96e4882",
+  "approved_proposal_sha256": "46401cecebde782b4449c3fb76a51f89f8cd3993f70c954181e15bb7ac0636dd",
+  "approval_sha256": "bb00c9601f27b759d0e51a5df1b2dc62a117a06cf921c9281b4ae0423dbba375",
+  "implementation_public_ci": {
+    "commit": "1004b84d16bcd36c4b3e55efbb630cb5cba4a407",
+    "run_id": "36612172656",
+    "conclusion": "success"
+  },
+  "first_product": {
+    "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+    "attempt_id": "landsat9-before-20260810-001",
+    "preflight_sha256": "cd9166b652bc77087d9b0be71dbc0011361d125ece14f04e3298892977484307",
+    "owner_initiated_download_control_actions": 1,
+    "browser_completion_event_observed": false,
+    "browser_local_path_api_result": "timeout_no_bound_completed_path",
+    "signed_url_or_account_identifier_recorded": false,
+    "browser_follow_on_observation": "The one clicked control opened two new tabs with ephemeral signed download links. Two exact-product-named files then appeared in Downloads, one base-name and one numbered duplicate, each 1126565376 bytes by filesystem metadata. Underlying HTTP request count and their binding to a completed browser event were not established. Neither file was selected or read by the project.",
+    "container_verification_performed": false,
+    "controlled_staging_created": false,
+    "custody_promotion_performed": false,
+    "terminal_status": "block_browser_download_no_complete_file",
+    "terminal_failure_code": "browser_download_path_unavailable",
+    "external_append_only_receipt_sha256": {
+      "reservation": "164fc9c0f476b2918ca352c357d48f46f75bdb39ea16f58a5e7b7881a10387e1",
+      "browser_request_started": "b378507dbaef7686e8db775f4a80028a3db22079562c53a5366909a895275c88",
+      "terminal": "d82b1f9684382ca07c1784b1b3a1a195de57de9b7ab2b30069d4f344b315217e",
+      "cleanup": "b5b06a3459ec49cb6e763cb08307d484fd9e4dbd75bc7143c139ced462005795"
+    }
+  },
+  "second_product": {
+    "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+    "browser_request_started": false,
+    "attempt_reserved": false,
+    "status": "blocked_by_first_product_fixed_order_dependency"
+  },
+  "limitations": [
+    "No downloaded TAR bytes, TIFF headers, or pixels were read by project code.",
+    "The two files visible in Downloads remain unverified browser-managed files outside controlled custody; their equal displayed length does not prove identical or trusted content.",
+    "This does not establish either Landsat scene's pixel usability, an ArcGIS before/after panel, mapped change, or event attribution."
+  ],
+  "next_authority_boundary": "Do not reuse or silently select either browser-managed file, click again, request the second product, or claim intake success. Resolve the browser completion-path and duplicate-tab behavior under a separately reviewed recovery before any new request or file adoption."
+}
