@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-LOCAL-DOWNLOAD-RECOVERY-001-POST-CI-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-29T19:10:14Z",
+  "status": "terminal_failure_publication_verified_envelope_closed",
+  "terminal_commit": "c1065625d78db9690100a06c9fc003f623846be5",
+  "terminal_public_ci_run_id": "36617199524",
+  "terminal_public_ci_conclusion": "success",
+  "terminal_public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/36617199524",
+  "terminal_contract_sha256": "917446ee25ab76685cfd2b7e3975852ecc9abb1258760c2c4a1931a2b5862d71",
+  "terminal_reconciliation_sha256": "b133aca13be2683446b13964dbf47d03d339b58c4309a4da562ea5e844525b16",
+  "final_no_payload_preflight_sha256": "3297b491762f2eef7ddfc29b33956d382440d8a0cfe7e23888f5d2b4be7b2e49",
+  "attempt_id": "landsat9-before-20260810-recovery-001",
+  "terminal_failure_code": "mtl_text_identity_mismatch",
+  "before_promoted": false,
+  "after_request_started": false,
+  "after_attempt_reserved": false,
+  "tiff_or_pixel_qa_performed": false,
+  "scientific_or_map_claim_released": false,
+  "next_checkpoint": "M2-LANDSAT9-LOCAL-DOWNLOAD-RECOVERY-001-TERMINAL-REVIEW",
+  "next_authority_boundary": "No file-content reinspection, identity-predicate amendment, retry, promotion, or after request is released. A separately reviewed recovery or diagnostic is required."
+}
