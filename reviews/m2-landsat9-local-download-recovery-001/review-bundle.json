@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-LANDSAT9-LOCAL-DOWNLOAD-RECOVERY-001-LOCAL",
+  "status": "prepared_zero_decision_not_public_not_approved",
+  "prepared_at_utc": "2026-09-29T18:43:04Z",
+  "proposal_ref": "contracts/milestone-002-landsat9-local-download-recovery-001-proposal.json",
+  "proposal_sha256": "18b3ab22fb1816779108845b04c5668252007a0adb1af2bdbbd1c152693f4e4d",
+  "bound_files": [
+    {
+      "ref": "docs/M2_LANDSAT9_LOCAL_DOWNLOAD_RECOVERY_001_REVIEW.md",
+      "sha256": "905da95185e68d3aea3534c48328a01a072d581770d8fef9585aacf42121b02f"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-local-download-recovery-001-risk-screen-local.json",
+      "sha256": "5d17881345df641c15e2b3396844611050f4217f62e22f34227dda091bf146ee"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-usgs-bundle-intake-001-terminal-reconciliation.json",
+      "sha256": "ef66eea9fc2a737e44784aa08f8e0933ccad7c664e5c3c46a4ec00f4c3ce03e1"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-usgs-bundle-intake-001-post-ci-reconciliation.json",
+      "sha256": "4f5ddf5f8e607f2e5ef3afdb1008b8928039f232452ae6b2894f62501d32a987"
+    }
+  ],
+  "decision": {
+    "owner_approval_recorded": false,
+    "public_git_publication_authorized_by_bundle_alone": false,
+    "real_download_file_content_read_authorized": false,
+    "new_browser_request_authorized": false
+  }
+}

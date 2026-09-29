@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-LOCAL-DOWNLOAD-RECOVERY-001-RISK-SCREEN-LOCAL",
+  "screened_at_utc": "2026-09-29T18:43:04Z",
+  "status": "zero_decision_method_risk_screen_no_file_content_read",
+  "prior_terminal_ref": "records/readiness/m2-landsat9-usgs-bundle-intake-001-terminal-reconciliation.json",
+  "prior_terminal_publication_ref": "records/readiness/m2-landsat9-usgs-bundle-intake-001-post-ci-reconciliation.json",
+  "exact_before_product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+  "exact_after_product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+  "current_local_metadata_only": {
+    "directory_role": "current user's Downloads; absolute private path omitted",
+    "before_base_name_present": true,
+    "before_numbered_duplicate_present": true,
+    "size_bytes_each": 1126565376,
+    "base_last_write_utc": "2026-09-29T18:32:01.7363292Z",
+    "numbered_duplicate_last_write_utc": "2026-09-29T18:32:01.7081607Z",
+    "both_regular_files_without_reparse": true,
+    "file_bytes_hashed_or_opened": false,
+    "tar_or_tiff_content_read": false,
+    "after_product_download_file_observed": false
+  },
+  "browser_observation": {
+    "owner_initiated_exact_before_button_actions": 1,
+    "new_signed_link_tabs_observed": 2,
+    "signed_link_host_observed": "landsatlook.usgs.gov",
+    "signed_url_or_account_identifier_in_project_files": false,
+    "ephemeral_signed_url_seen_in_private_tool_output": true,
+    "future_browser_inventory_rule": "Do not emit full browser-tab URLs; inspect only sanitized host, product identity, and tab count. Never replay a signed URL.",
+    "browser_completion_event_or_path_captured": false,
+    "inference": "The two exact-name files are consistent with the one EarthExplorer action and the two subsequent signed-link tabs, but no browser event bound either file to a completed download; file provenance is not yet verified."
+  },
+  "official_source_context": {
+    "usgs_earth_explorer_download_ref": "https://www.usgs.gov/faqs/how-do-i-search-and-download-landsat-collection-2-data-products",
+    "usgs_landsatlook_background_service_ref": "https://landsatlook.usgs.gov/",
+    "interpretation": "USGS describes EarthExplorer-managed Collection 2 downloads and says the landsatlook background service remains operational. This supports the host relationship, not the identity or integrity of either local file."
+  },
+  "eight_criterion_assessment_for_proposed_local_qa_intake": {
+    "identity": "Exact product IDs and scene IDs remain frozen; local filenames alone are insufficient and both MTL forms must later match.",
+    "authority": "USGS remains the publisher for the selected Collection 2 Level-2 products; the local files have not yet been authenticated as its bytes.",
+    "access": "Two before files are visible by filesystem metadata; no new before request is proposed. After access requires one future owner-initiated browser action under fresh signed-in preflight.",
+    "rights": "The prior USGS no-restrictions source check applies to Landsat source products; verify current terms and account conditions before any new request. This does not release derived-pixel publication.",
+    "provenance": "The lost browser event/path is a material provenance gap. A conditional local-file adoption method needs explicit owner acceptance, strict filename and time-window binding, duplicate-byte agreement, and unchanged exact source identity.",
+    "integrity": "No local source bytes have been read. Require complete local SHA-256 measurements of both before files, exact equality, safe TAR structure, complete member stream checks, both MTL identity forms, verified staging, and no-replace promotion.",
+    "fitness": "The proposed result is container custody for subsequent QA only; archive checks cannot establish AOI pixel usability or a map.",
+    "privacy_security": "The prior tab inventory exposed ephemeral signed links in private tool output, not Git. Do not repeat this: emit only sanitized host/count, never record or replay signed URLs, cookies, account identifiers, local private paths, browser tokens, or payload bytes; reject reparse points and unsafe paths and retain all original downloads."
+  },
+  "current_disposition": "blocked_pending_exact_owner_decision_and_new_public_ci_gates"
+}

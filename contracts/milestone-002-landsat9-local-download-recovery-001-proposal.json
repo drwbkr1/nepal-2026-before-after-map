@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-LANDSAT9-LOCAL-DOWNLOAD-RECOVERY-001",
+  "status": "zero_decision_local_review_only",
+  "prepared_at_utc": "2026-09-29T18:43:04Z",
+  "objective": "Recover exact before/early-after Landsat-9 Level-2 bundle custody for local QA after the first EarthExplorer browser event-path handoff failed, using the two already downloaded before files only if their identity and bytes agree, then at most one new after browser action watched through a fixed local-file monitor.",
+  "risk_screen_ref": "records/readiness/m2-landsat9-local-download-recovery-001-risk-screen-local.json",
+  "prior_terminal_ref": "records/readiness/m2-landsat9-usgs-bundle-intake-001-terminal-reconciliation.json",
+  "prior_post_ci_ref": "records/readiness/m2-landsat9-usgs-bundle-intake-001-post-ci-reconciliation.json",
+  "prior_failed_attempt_id": "landsat9-before-20260810-001",
+  "exact_products_in_order": [
+    {
+      "role": "before",
+      "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+      "scene_id": "LC91410402026222LGN00",
+      "new_attempt_id": "landsat9-before-20260810-recovery-001",
+      "new_browser_request_budget": 0
+    },
+    {
+      "role": "early_after",
+      "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+      "scene_id": "LC91410402026238LGN00",
+      "new_attempt_id": "landsat9-early-after-20260826-local-download-001",
+      "new_browser_request_budget": 1
+    }
+  ],
+  "single_owner_decision_requested": {
+    "approval_effect": "One conditional envelope from implementation and public-CI gates through exact offline-before adoption, at most one after browser action, fixed local-file monitoring, container-only custody checks, and sanitized terminal publication, without intermediate owner reconfirmation while all frozen conditions hold.",
+    "allowed_actions_in_dependency_order": [
+      "Implement a secret-safe exact-name Downloads intake adapter and append-only successor assets/attempts, without modifying the terminal prior attempt or reading either real file during implementation. Extend the existing TAR/MTL verifier and no-replace promotion controls only where necessary; preserve their scientific predicates.",
+      "Run portable synthetic tests for one/two-file arrival, byte agreement and disagreement, source mutation, reparse/path collision, incomplete download, duplicate tabs, interruption, receipt durability, no-replace promotion, and secret-exposure prevention; use disposable paths only. Publish source-safe controls, proposal, approval, code and tests to the public default branch and require successful CI before any real file content read or new browser request.",
+      "Run one final no-payload preflight: verify exact prior receipt hashes and failed state, exact before-file names/lengths/write-times and safety, absence of exact after files and promoted destinations, adequate free space, current USGS rights/account conditions, signed-in EarthExplorer and exact after full-bundle control, and fresh public CI. Reserve distinct non-Git attempt identities before content or browser action.",
+      "Read both exact existing before files once in a new append-only offline recovery: require unchanged metadata and safe regular files, complete local SHA-256 equality, stable source identity across the read and copy, then deterministic base-name selection, safe complete TAR/MTL container verification, unique external staging, and atomic no-replace promotion. If either file is missing, changed, different, unsafe, or invalid, stop without an after request; leave both originals untouched.",
+      "Only after before promotion passes, initiate at most one owner-initiated Download Product click for the exact 26 August full Level-2 bundle from the signed-in EarthExplorer result. Snapshot absence of exact output names before the click; monitor only the exact base and first numbered-duplicate names and their partial-download counterparts in Downloads. Accept one or two newly arrived stable regular files; require complete matching SHA-256 if two. Stop on zero, more than two, unstable, unsafe, ambiguous, or nonmatching outputs, without clicking again.",
+      "For a passing after file, use a distinct non-Git staging path, verify complete safe TAR structure and both exact MTL IDs, promote by atomic no-replace, retain all browser originals, write durable sanitized terminal/cleanup evidence, and publish exact post-CI reconciliation."
+    ],
+    "request_budget": "Zero new before requests and at most one new after browser control action. Browser-internal requests or duplicate tabs cannot be counted as separate user actions; record observed multiplicity without claiming a one-HTTP-request guarantee. No automatic retry, direct signed-URL replay, M2M token, or fallback host.",
+    "stop_on": [
+      "Any prior terminal receipt, source name, size, timestamp, source identity, destination, rights, account condition, host relationship, or selected bundle control has drifted.",
+      "Before duplicate hashes differ or either file fails TAR/MTL, stability, path, or no-replace checks; do not request the after file.",
+      "The after monitor cannot unambiguously bind one or two newly created exact-name files to the single observed click; any unexpected output count or filename stops the route.",
+      "Any secret, signed URL, private local path, account identifier, or product byte would enter Git, a receipt, log, or process argument.",
+      "Any provider terms, fee, permission, or browser safety prompt appears that requires a separate owner action."
+    ]
+  },
+  "fixed_monitor_bounds": {
+    "after_arrival_wall_time_limit_seconds": 900,
+    "minimum_unchanged_size_observation_interval_seconds": 30,
+    "maximum_exact_output_files": 2,
+    "maximum_single_archive_bytes": 8589934592,
+    "partial_download_names": "Only the exact base and first numbered-duplicate product TAR names with browser partial-file suffixes may be observed; partials must be gone before content read."
+  },
+  "frozen_provenance_limit": "This method would bind local files by exact EarthExplorer browser context, exact post-click names and time window, duplicate-byte agreement when applicable, exact TAR/MTL identity, and internal hashes. Without an upstream digest or captured browser completion path it cannot prove cryptographic equivalence to an unpublished provider object; a pass would support controlled local QA custody only.",
+  "explicit_exclusions": [
+    "No reuse, resume, reconstruction, retry, or mutation of terminal landsat9-before-20260810-001; no deletion or relocation of either existing Downloads original.",
+    "No new before request, direct access to a signed URL, credential or token handling, terms acceptance, paid action, alternate provider, scene/date/order substitution, or unbounded monitor/retry loop.",
+    "No TIFF header or pixel read, AOI masks, registration, baseline admission, change analysis, interpretation, attribution, ArcGIS raster map, derived-pixel publication, or scientific publication."
+  ],
+  "decision_state": {
+    "owner_approved": false,
+    "public_git_publication_authorized_by_this_draft": false,
+    "real_download_file_content_read_authorized_by_this_draft": false,
+    "new_after_browser_action_authorized_by_this_draft": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-LANDSAT9-LOCAL-DOWNLOAD-RECOVERY-001-APPROVAL",
+  "approved_at_utc": "2026-09-29T18:48:00Z",
+  "decision_source": "Owner's 2026-09-29 answer to the exact one-question review: Approve exact packet",
+  "review_bundle_ref": "reviews/m2-landsat9-local-download-recovery-001/review-bundle.json",
+  "review_bundle_sha256": "a293c2e01e4a66c8b2830370931d484334f970bd276f0d23047a3948f084bb15",
+  "proposal_ref": "contracts/milestone-002-landsat9-local-download-recovery-001-proposal.json",
+  "proposal_sha256": "18b3ab22fb1816779108845b04c5668252007a0adb1af2bdbbd1c152693f4e4d",
+  "decision": "approved_one_conditional_envelope",
+  "authorized_scope": "Exact dependency-ordered local Downloads recovery, source-safe implementation and synthetic tests, public CI, final no-payload preflight, one new append-only offline read of both exact existing before files with conditional no-replace promotion, at most one exact after EarthExplorer browser action only on before success, fixed-name local monitoring, container-only verification, and sanitized terminal publication as stated in the proposal.",
+  "request_budget": "Zero new before browser actions; at most one owner-initiated after Download Product action, with no automatic retry or signed-URL replay.",
+  "provenance_limit_accepted": "Local exact-name/time-window, duplicate hash agreement, and TAR/MTL checks support conditional local QA custody only; they do not supply an upstream checksum or prove pixel fitness.",
+  "explicit_exclusions": [
+    "No mutation, reuse, resume, or retry of terminal landsat9-before-20260810-001, and no deletion or relocation of browser originals.",
+    "No token or credential handling, terms acceptance, paid action, source/date/order substitution, direct signed-URL request, alternate provider, or unbounded retry.",
+    "No TIFF header or pixel read, masks, registration, baseline, change analysis, interpretation, attribution, ArcGIS raster map, derived-pixel publication, or scientific publication."
+  ],
+  "execution_gates": [
+    "Exact review-bundle and bound-file hashes must still match.",
+    "Source-safe implementation, synthetic tests, and public default-branch CI must pass before any real file-content read or browser request.",
+    "Final no-payload preflight must pass all exact source, rights, account, path, free-space, previous-attempt, and output-collision checks before each dependent real action."
+  ],
+  "real_file_read_or_browser_action_started_at_approval": false
+}

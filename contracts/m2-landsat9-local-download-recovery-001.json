@@ -1,0 +1,92 @@
+{
+  "contract_version": "1.0",
+  "intake_id": "nepal-m2-landsat9-local-download-recovery-001",
+  "created_at": "2026-09-29T18:48:00Z",
+  "collision_policy": "fail",
+  "promotion_mode": "atomic-no-replace",
+  "secret_policy": "references-only",
+  "custody_root": "nepal-2026-before-after-map-data/custody",
+  "staging_root": "nepal-2026-before-after-map-data/.intake-staging/nepal-m2-landsat9-local-download-recovery-001",
+  "assets": [
+    {
+      "asset_id": "landsat9-before-20260810-recovery-001",
+      "source": {
+        "kind": "other",
+        "uri": "https://earthexplorer.usgs.gov/",
+        "authorization_ref": "records/source-gates/m2-landsat9-local-download-recovery-001-approval.json",
+        "terms_ref": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+        "transport_exception_ref": "records/readiness/m2-landsat9-local-download-recovery-001-risk-screen-local.json"
+      },
+      "destination_relative_path": "landsat9-c2l2/LC09_L2SP_141040_20260810_20260811_02_T1.tar",
+      "staging_relative_path": "attempt-bytes/landsat9-before-20260810-recovery-001/LC09_L2SP_141040_20260810_20260811_02_T1.tar.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": null,
+        "unavailable_reason": "No upstream digest or exact provider length was published. Two unverified exact-name Downloads files each showed 1126565376 bytes by metadata only; both must be safely read, hashed, and match before new custody."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "authorized",
+      "attempts": [],
+      "failure": null,
+      "superseded_by": null,
+      "extensions": {
+        "role": "before",
+        "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+        "scene_id": "LC91410402026222LGN00",
+        "source_file_variants": ["base", "numbered_duplicate"],
+        "new_browser_request_budget": 0,
+        "prior_failed_attempt_id": "landsat9-before-20260810-001",
+        "real_file_read_authorized_only_after_public_ci_and_preflight": true
+      }
+    },
+    {
+      "asset_id": "landsat9-early-after-20260826-local-download-001",
+      "source": {
+        "kind": "other",
+        "uri": "https://earthexplorer.usgs.gov/",
+        "authorization_ref": "records/source-gates/m2-landsat9-local-download-recovery-001-approval.json",
+        "terms_ref": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+        "transport_exception_ref": "records/readiness/m2-landsat9-local-download-recovery-001-risk-screen-local.json"
+      },
+      "destination_relative_path": "landsat9-c2l2/LC09_L2SP_141040_20260826_20260827_02_T1.tar",
+      "staging_relative_path": "attempt-bytes/landsat9-early-after-20260826-local-download-001/LC09_L2SP_141040_20260826_20260827_02_T1.tar.part",
+      "expected": {
+        "sha256": null,
+        "size_bytes": null,
+        "unavailable_reason": "EarthExplorer showed only a rounded 1.05 GiB display size, with no upstream digest or exact length. Exact new-file monitoring, local hashes, TAR/MTL identity, and no-replace custody are required."
+      },
+      "observed": {
+        "staged_sha256": null,
+        "staged_size_bytes": null,
+        "promoted_sha256": null,
+        "promoted_size_bytes": null
+      },
+      "state": "authorized",
+      "attempts": [],
+      "failure": null,
+      "superseded_by": null,
+      "extensions": {
+        "role": "early_after",
+        "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+        "scene_id": "LC91410402026238LGN00",
+        "source_file_variants": ["base", "numbered_duplicate"],
+        "new_browser_request_budget": 1,
+        "depends_on_promoted_asset_id": "landsat9-before-20260810-recovery-001",
+        "real_browser_action_authorized_only_after_before_success_public_ci_and_preflight": true
+      }
+    }
+  ],
+  "extensions": {
+    "status": "approved_but_public_ci_and_final_preflight_pending",
+    "approval_ref": "records/source-gates/m2-landsat9-local-download-recovery-001-approval.json",
+    "review_bundle_sha256": "a293c2e01e4a66c8b2830370931d484334f970bd276f0d23047a3948f084bb15",
+    "proposal_sha256": "18b3ab22fb1816779108845b04c5668252007a0adb1af2bdbbd1c152693f4e4d",
+    "source_file_content_read": false,
+    "browser_request_started": false
+  }
+}
