@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-GROUPED-MTL-DFCB-SCREEN-001-LOCAL",
+  "observed_at_utc": "2026-09-29T19:34:34Z",
+  "status": "official_format_context_supports_new_review_not_source_acceptance",
+  "official_source": {
+    "title": "USGS Landsat 8-9 Collection 2 Level 2 Data Format Control Book, LSDS-1328 version 7.0",
+    "url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/files/LSDS-1328_Landsat8-9_OLI-TIRS-C2-L2_DFCB-v7.pdf",
+    "retrieved_bytes_for_document_hash_only": 703629,
+    "sha256": "d737fe15f2c4f7e5fe79f690ac67f4aa6d3d7f6c2c86a2bb1bd5fb9fe9839b1b",
+    "relevant_sections": "Section 3.7, Table 3-4 ODL groups and Table 3-5 XML elements; PDF pages 17, 19, 39-40, 56-57, 62-65",
+    "format_rule": "The Level-2 metadata has LANDSAT_PRODUCT_ID under PRODUCT_CONTENTS and LEVEL2_PROCESSING_RECORD, and a distinct Level-1 provenance LANDSAT_PRODUCT_ID under LEVEL1_PROCESSING_RECORD. LANDSAT_SCENE_ID is in the Level-1 processing record. ODL groups correspond to XML parent/child elements."
+  },
+  "frozen_local_evidence": {
+    "diagnostic_terminal_ref": "records/readiness/m2-landsat9-mtl-identity-diagnostic-001-terminal-reconciliation.json",
+    "diagnostic_terminal_sha256": "b5e0181c8cb9a292e8815a2412fd7a642eddca5d65c769afa467f5ccc7e7477b",
+    "diagnostic_post_ci_ref": "records/readiness/m2-landsat9-mtl-identity-diagnostic-001-post-ci-reconciliation.json",
+    "diagnostic_post_ci_sha256": "7bf08b96e415b049991dc112267a9828a6b36fa8123b425183cf9b9d1a6a6670",
+    "text_and_xml_product_id_presence_count_each": 3,
+    "text_and_xml_exact_expected_l2_id_count_each": 2,
+    "text_and_xml_l2_only_syntax_rejected_count_each": 1,
+    "text_and_xml_scene_id_exact_count_each": 1,
+    "group_paths_or_rejected_value_observed": false
+  },
+  "inference_only": "The three product-ID values in each MTL form are consistent with the DFCB's two Level-2 IDs plus one Level-1 provenance ID. This has not been established for the frozen staged TAR because the authorized diagnostic recorded no group paths or rejected value.",
+  "local_path_state_metadata_only": {
+    "existing_before_or_after_promoted_destination": false,
+    "grouped_mtl_recovery_002_attempt_root": false,
+    "source_content_read_for_this_screen": false
+  },
+  "boundaries": {
+    "frozen_verifier_changed": false,
+    "consumed_attempt_reopened": false,
+    "source_promoted": false,
+    "after_download_started": false,
+    "pixel_or_map_action": false,
+    "approval_or_publication_granted": false
+  },
+  "next_action": "Prepare one conditional owner review for a versioned, group-aware verifier and exact before/after container intake. Do not interpret this format comparison as identity proof or source acceptance."
+}

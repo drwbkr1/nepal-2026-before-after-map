@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-LANDSAT9-GROUPED-MTL-RECOVERY-002-LOCAL",
+  "status": "local_zero_decision_not_public_not_approved",
+  "human_decision_count": 0,
+  "base_commit": "95985abea4bf7bec05174eb4955f8f2790577467",
+  "proposal_ref": "contracts/milestone-002-landsat9-grouped-mtl-recovery-002-proposal.json",
+  "proposal_sha256": "bec77e8b1bb948c9021e78156af919fa0f074cbfc9badd3a7b783b593b9bb08c",
+  "bound_files": [
+    {
+      "ref": "docs/M2_LANDSAT9_GROUPED_MTL_RECOVERY_002_REVIEW.md",
+      "sha256": "3a0d82108683c60b5d915006901b4d7e678c508259e5ce9637ef441c00b9067d",
+      "role": "human_readable_review"
+    },
+    {
+      "ref": "records/observations/m2-landsat9-grouped-mtl-dfcb-screen-001-local.json",
+      "sha256": "886547b0975fc12b910d9f68c2c3df504e3761f8f554b4a644c9a0cb0a773b50",
+      "role": "official_format_screen"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-mtl-identity-diagnostic-001-terminal-reconciliation.json",
+      "sha256": "b5e0181c8cb9a292e8815a2412fd7a642eddca5d65c769afa467f5ccc7e7477b",
+      "role": "terminal_diagnostic"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-mtl-identity-diagnostic-001-post-ci-reconciliation.json",
+      "sha256": "7bf08b96e415b049991dc112267a9828a6b36fa8123b425183cf9b9d1a6a6670",
+      "role": "diagnostic_closed_envelope"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-local-download-recovery-001-terminal-reconciliation.json",
+      "sha256": "b133aca13be2683446b13964dbf47d03d339b58c4309a4da562ea5e844525b16",
+      "role": "consumed_intake_failure"
+    },
+    {
+      "ref": "scripts/landsat_l2_bundle_integrity.py",
+      "sha256": "aa5e0db52ccad0e252c20872f7060cf45fe24d1c4993f95906f4cc017286d043",
+      "role": "frozen_failed_verifier"
+    }
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-LANDSAT9-GROUPED-MTL-RECOVERY-002",
+    "question": "Approve, revise, or defer one group-aware verifier and exact before/after container-intake recovery envelope through sanitized terminal publication?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "Exact packet and owner approval are public on main and public CI passes; versioned implementation and synthetic/public-CI gates then precede any real staged-content read or after browser action."
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "group_aware_verifier_implementation_authorized": false,
+    "real_staged_content_read_or_promotion_authorized": false,
+    "after_browser_action_authorized": false,
+    "pixel_or_map_action_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

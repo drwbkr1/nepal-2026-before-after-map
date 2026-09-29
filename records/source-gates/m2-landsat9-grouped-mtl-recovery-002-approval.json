@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-LANDSAT9-GROUPED-MTL-RECOVERY-002-APPROVAL",
+  "approved_at_utc": "2026-09-29T19:38:59Z",
+  "decision_source": "Owner's answer to the exact one-question review: Approve exact packet",
+  "review_bundle_ref": "reviews/m2-landsat9-grouped-mtl-recovery-002/review-bundle.json",
+  "review_bundle_sha256": "cf732ce0465a13e4074f84a805b16632b237e76e031d57e1b7de708d044df9f2",
+  "proposal_ref": "contracts/milestone-002-landsat9-grouped-mtl-recovery-002-proposal.json",
+  "proposal_sha256": "bec77e8b1bb948c9021e78156af919fa0f074cbfc9badd3a7b783b593b9bb08c",
+  "decision": "approved_one_conditional_envelope",
+  "authorized_scope": "Public-CI-gated versioned group-aware verifier and synthetic tests, one distinct offline verification and conditional no-replace copy promotion of the exact frozen before staging TAR, and only on its pass at most one exact after EarthExplorer full-bundle browser action and container-only verification, through sanitized terminal publication as reviewed.",
+  "request_budget": "Zero new before requests; at most one owner-initiated exact August 26 full-bundle Download Product action after a passing before result; no automatic retry.",
+  "explicit_exclusions": [
+    "No reuse, reconstruction, retry, or mutation of prior terminal attempts or receipts; no overwrite or relocation of the preserved staging file or Downloads originals.",
+    "No signed-URL replay, M2M token, alternate source, date or host, account or terms action, credential handling, payment, or second after request.",
+    "No TIFF header or pixel QA, AOI masks, registration, ArcGIS raster map, difference or change analysis, interpretation, attribution, derived-pixel publication, or scientific publication."
+  ],
+  "execution_gates": [
+    "Publish exact packet and this approval and pass public default-branch CI before implementation is actionable.",
+    "Versioned implementation, disposable synthetic tests, project validation, and a fresh public-CI gate must pass before real staged-content read or browser action.",
+    "A final no-content preflight must verify all frozen identities, evidence and receipt hashes, safe exact staged-file metadata, absent destinations and attempt roots, rights/account/browser conditions, disk, and public CI."
+  ],
+  "real_archive_read_or_browser_action_started_at_approval": false
+}

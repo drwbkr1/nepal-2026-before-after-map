@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-LANDSAT9-GROUPED-MTL-RECOVERY-002",
+  "status": "local_zero_decision_not_approved_not_published",
+  "prepared_at_utc": "2026-09-29T19:36:00Z",
+  "objective": "Resolve the frozen Landsat-9 Level-2 MTL identity ambiguity using the official ODL/XML group structure, and only on exact verification promote the preserved 10 August before bundle and acquire and container-verify one exact 26 August early-after bundle for later pixel-QA and ArcGIS-map review.",
+  "why_new_owner_decision_is_required": [
+    "The previously approved strict verifier rejected the 10 August MTL identity and the recovery-001 and diagnostic-001 attempts are terminal and consumed.",
+    "Selecting group-scoped Level-2 identities instead of requiring every same-named metadata field to equal the Level-2 product ID changes a consequential source-integrity predicate.",
+    "A new no-replace promotion and a new EarthExplorer after-product browser action are outside the closed previous envelope."
+  ],
+  "frozen_evidence": {
+    "official_format_screen_ref": "records/observations/m2-landsat9-grouped-mtl-dfcb-screen-001-local.json",
+    "official_dfcb_url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/files/LSDS-1328_Landsat8-9_OLI-TIRS-C2-L2_DFCB-v7.pdf",
+    "official_dfcb_sha256": "d737fe15f2c4f7e5fe79f690ac67f4aa6d3d7f6c2c86a2bb1bd5fb9fe9839b1b",
+    "diagnostic_terminal_ref": "records/readiness/m2-landsat9-mtl-identity-diagnostic-001-terminal-reconciliation.json",
+    "diagnostic_terminal_sha256": "b5e0181c8cb9a292e8815a2412fd7a642eddca5d65c769afa467f5ccc7e7477b",
+    "diagnostic_post_ci_ref": "records/readiness/m2-landsat9-mtl-identity-diagnostic-001-post-ci-reconciliation.json",
+    "diagnostic_post_ci_sha256": "7bf08b96e415b049991dc112267a9828a6b36fa8123b425183cf9b9d1a6a6670",
+    "consumed_recovery_terminal_ref": "records/readiness/m2-landsat9-local-download-recovery-001-terminal-reconciliation.json",
+    "consumed_recovery_terminal_sha256": "b133aca13be2683446b13964dbf47d03d339b58c4309a4da562ea5e844525b16",
+    "frozen_failed_verifier_sha256": "aa5e0db52ccad0e252c20872f7060cf45fe24d1c4993f95906f4cc017286d043"
+  },
+  "exact_products_in_order": [
+    {
+      "role": "before",
+      "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+      "scene_id": "LC91410402026222LGN00",
+      "source_role": "exact retained non-Git staging copy from terminal local-download-recovery-001",
+      "source_size_bytes": 1126565376,
+      "source_sha256": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255",
+      "new_attempt_id": "landsat9-before-20260810-grouped-mtl-recovery-002",
+      "new_browser_request_budget": 0
+    },
+    {
+      "role": "early_after",
+      "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+      "scene_id": "LC91410402026238LGN00",
+      "source_role": "one future owner-signed-in EarthExplorer Landsat Collection 2 Level-2 full product bundle download",
+      "new_attempt_id": "landsat9-after-20260826-grouped-mtl-intake-002",
+      "new_browser_request_budget": 1
+    }
+  ],
+  "group_aware_identity_predicate": {
+    "odl_root_and_xml_root": "Exactly one LANDSAT_METADATA_FILE root in each representation with well-formed nested ODL GROUP/END_GROUP stack and corresponding XML parent/child paths; no unbalanced, repeated, or ambiguous identity-bearing group.",
+    "required_level2_paths": [
+      "LANDSAT_METADATA_FILE/PRODUCT_CONTENTS/LANDSAT_PRODUCT_ID",
+      "LANDSAT_METADATA_FILE/LEVEL2_PROCESSING_RECORD/LANDSAT_PRODUCT_ID"
+    ],
+    "level2_rule": "Exactly one value at each required path in each MTL representation, both equal the frozen product ID; the associated PROCESSING_LEVEL at those two groups must be L2SP. No other Level-2 group may contradict them.",
+    "level1_provenance_path": "LANDSAT_METADATA_FILE/LEVEL1_PROCESSING_RECORD/LANDSAT_PRODUCT_ID",
+    "level1_rule": "Exactly one value at the Level-1 provenance path, matching the official Landsat 9 Level-1 identifier syntax and the frozen satellite, WRS path/row, acquisition date, collection number, and Tier 1 category. Its processing correction level and processing date remain those actually recorded; it is not forced to equal the Level-2 product ID. Exactly one LANDSAT_SCENE_ID in that Level-1 record must equal the frozen scene ID.",
+    "cross_representation_rule": "ODL and XML must agree exactly at each of the three product-ID group paths and the scene-ID path. Require the official three product-ID field locations and one scene-ID location globally; any missing, duplicate, unexpected, malformed, or conflicting identity-bearing field stops.",
+    "archive_rule": "Retain all existing path/type, duplicate, member-count, required-file, length, complete-stream SHA-256, end-marker/trailing-payload, and source-stability protections. TAR/member hashing is container integrity only; never decode TIFF headers or pixels in this envelope.",
+    "no_silent_fallback": "A parser error, unknown ODL construct, XML external entity/DOCTYPE, value mismatch, or count/path mismatch is terminal. Do not choose the first, last, or majority ID and do not edit or replace the original frozen verifier."
+  },
+  "single_conditional_authority_envelope": [
+    "Record exact owner approval, publish only the reviewed source-safe packet, implementation, tests, and controls, and require public default-branch CI. Preserve both consumed attempts and the frozen failed verifier unchanged; implement a versioned group-aware verifier and new append-only runner for these exact sources only.",
+    "Test the official three-group ODL/XML form and adversarial wrong-group, duplicate-group, missing Level-1, inconsistent XML, wrong scene, malformed value, unsafe TAR, source drift, collision, interrupted receipt, and secret-exposure cases on disposable synthetic files. Run project validation and public CI before any real staged-content read or browser action.",
+    "Run one final no-content preflight of the exact reviewed hashes, all prior terminal and external receipt identities, retained staged-file size and non-reparse path, absent promoted destinations and new attempt roots, sufficient disk, current USGS no-restrictions and account conditions, signed-in exact EarthExplorer after full-bundle control, and passing public CI. Stop on any drift or owner-only prompt.",
+    "Reserve one new before attempt before reading content. Rehash the exact preserved staging copy and require its frozen 1,126,565,376-byte size and SHA-256, then run the new full TAR and group-aware ODL/XML verifier. Only on every check passing, copy into a unique new non-Git staging path and atomically promote a no-replace copy to the existing custody role; leave the original staged bytes and Downloads originals untouched. A failure is terminal and stops the after action.",
+    "Only after the before promotion passes, reserve one distinct after attempt and initiate at most one owner-initiated click on the exact 26 August EarthExplorer full Level-2 Product Bundle. Preserve the old exact-name and first numbered-duplicate monitoring bounds: at most two new stable regular local files, no partials, 900-second arrival limit, 30-second unchanged-size interval, and 8 GiB maximum per file. If two files arrive require identical full SHA-256. No automatic retry, signed-link replay, M2M token, alternate host, or request after a failure.",
+    "Copy the selected after file into unique external staging; require safe complete TAR, required nonempty QA and SR members, full member hashes, and the same group-aware ODL/XML identity rules with the frozen after product/scene. Only on pass atomically promote no-replace. Keep browser originals and all failed staging and receipts; publish only sanitized terminal identities, outcomes, and exact post-CI reconciliation.",
+    "Stop at container-only custody review. A passing pair permits preparation of a separate pixel-QA and local ArcGIS visual-map method decision, but this envelope itself does not read TIFF headers/pixels, compute masks/registration/change, or create a raster map."
+  ],
+  "fixed_after_monitor_bounds": {
+    "arrival_wall_time_seconds": 900,
+    "unchanged_size_interval_seconds": 30,
+    "maximum_exact_output_files": 2,
+    "maximum_archive_bytes_each": 8589934592
+  },
+  "provenance_limit": "The preserved before hash and complete new container checks bind local bytes and metadata structure. Without an upstream digest, the future after EarthExplorer click/name/time-window and local hashes support conditional local QA custody only, not cryptographic provider-object equivalence or usable pixels.",
+  "stop_conditions": [
+    "The current DFCB bytes, frozen source identity, old terminal/receipt evidence, signed-in browser product, rights or account condition, output path, public CI, or no-content preflight differs from the reviewed expectation.",
+    "The real before MTL field paths or values are inconsistent with the official group structure or frozen IDs, even if the global value counts appear plausible.",
+    "The before source fails full digest, TAR safety, versioned identity, or no-replace custody; no after request follows.",
+    "The after download is absent, ambiguous, interrupted, mismatched, unsafe, or fails container/group-aware verification; stop without retry or substitution.",
+    "Any private path, account material, signed URL, arbitrary MTL value, or source/product bytes would enter Git or a public receipt."
+  ],
+  "explicit_exclusions": [
+    "No reopening, reuse, reconstruction, mutation, or retry of consumed landsat9-before-20260810-001, landsat9-before-20260810-recovery-001, or landsat9-mtl-identity-diagnostic-001-real-001 and their reserved receipts.",
+    "No new before request, mutation/deletion/relocation of preserved staging or Downloads originals, automatic retry, provider/source/date/order substitution, account action, terms acceptance, payment, credential/token handling, or signed-URL replay.",
+    "No TIFF header or pixel QA, AOI masking, 30 m registration, baseline admission, ArcGIS raster map, difference/change analysis, interpretation, attribution, derived-pixel publication, or scientific publication."
+  ],
+  "decision_requested": "Approve, revise, or defer one exact conditional envelope from versioned group-aware identity correction through one before offline recovery, one conditional after EarthExplorer browser action, container-only custody, and sanitized terminal publication. No intermediate reconfirmation is requested while every frozen gate remains unchanged.",
+  "decision_state": {
+    "owner_approved": false,
+    "packet_publication_authorized_by_draft": false,
+    "verifier_implementation_authorized_by_draft": false,
+    "real_archive_read_or_promotion_authorized_by_draft": false,
+    "after_browser_action_authorized_by_draft": false,
+    "pixel_or_map_action_authorized_by_draft": false
+  }
+}

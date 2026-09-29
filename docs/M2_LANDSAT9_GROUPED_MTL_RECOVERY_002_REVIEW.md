@@ -1,0 +1,21 @@
+# M2 Landsat-9 grouped-MTL recovery-002 — local review
+
+**Status: zero decision, local only.** This packet has not been approved or published. Preparing it opened no retained archive, changed no verifier or custody path, and initiated no EarthExplorer request.
+
+## What changed in the evidence
+
+The one approved [MTL diagnostic](../records/readiness/m2-landsat9-mtl-identity-diagnostic-001-terminal-reconciliation.json) rehashed the exact retained 10 August TAR and found three `LANDSAT_PRODUCT_ID` values in each MTL form. Two equal the frozen Level-2 product ID; one does not match the diagnostic's **Level-2-only** identifier syntax. The single scene ID matches. The old global set-equality verifier therefore still rejects the source, and neither the before nor after archive is in promoted custody.
+
+The official [USGS Landsat 8–9 Collection 2 Level-2 Data Format Control Book, version 7](https://www.usgs.gov/media/files/landsat-8-9-olitirs-collection-2-level-2-data-format-control-book) specifies two Level-2 `LANDSAT_PRODUCT_ID` fields, in `PRODUCT_CONTENTS` and `LEVEL2_PROCESSING_RECORD`, plus a Level-1 provenance `LANDSAT_PRODUCT_ID` and `LANDSAT_SCENE_ID` in `LEVEL1_PROCESSING_RECORD`. It says ODL groups and XML parent/child elements correspond. The direct official PDF bytes were 703,629 bytes with SHA-256 `d737fe15f2c4f7e5fe79f690ac67f4aa6d3d7f6c2c86a2bb1bd5fb9fe9839b1b`. The [source screen](../records/observations/m2-landsat9-grouped-mtl-dfcb-screen-001-local.json) distinguishes this documented structure from an observation of the retained file: the diagnostic **did not record group paths or the third value**, so it has not proven that the retained file follows the book.
+
+## One proposed recovery envelope
+
+The [proposal](../contracts/milestone-002-landsat9-grouped-mtl-recovery-002-proposal.json) would version the verifier. It would require exactly the two frozen Level-2 IDs at their official ODL/XML paths, one syntactically valid and internally consistent Level-1 provenance ID at its path, and the exact scene ID at its official path. Both metadata forms must agree path by path. Duplicate, missing, misplaced, contradictory, or malformed identity fields would stop. The old verifier and all three consumed attempts remain unchanged. Disposable adversarial tests and public CI must pass before any real content read.
+
+Only after final no-content preflight would one new append-only offline attempt rehash and verify the exact retained before TAR. A pass could promote a **copy** to non-Git custody without replacing or moving the preserved source. A failure stops. Only after before promotion could one signed-in EarthExplorer action request the exact 26 August full Level-2 bundle. The fixed local monitor permits no retry or signed-URL replay; the new after TAR must pass the same complete container and group-aware identity checks before conditional no-replace promotion. No provider checksum is available, so this remains local QA custody rather than cryptographic proof of the provider object.
+
+This is a map-oriented intake step, not a map or pixel result. The existing [ASF partial ArcGIS panel](M2_ASF_PARTIAL_PANEL_LOCAL_HANDOFF.md) remains the only verified local before/after pixel display, with incomplete area coverage and unmeasured residual registration. If both Landsat bundles reach custody, a later reviewed 30 m pixel-QA, mask, registration, and ArcGIS visual-panel method is still needed; the current Sentinel-2 change contract does not silently admit Landsat. No TIFF header/pixel read, mapped change, interpretation, attribution, or publication is released here.
+
+## Decision needed
+
+Approve, revise, or defer the **single conditional envelope** in the exact proposal and review bundle. Approval would cover packet and implementation publication, synthetic and public-CI gates, one distinct before offline verification with conditional copy promotion, at most one dependent after browser action with bounded monitoring and container-only verification, and sanitized terminal publication without intermediate reconfirmation while all exact conditions hold. It would not authorize a parser shortcut based only on the three-value count, a retry of any consumed attempt, new before download, account or terms action, pixels, a new map, or a scientific claim.
