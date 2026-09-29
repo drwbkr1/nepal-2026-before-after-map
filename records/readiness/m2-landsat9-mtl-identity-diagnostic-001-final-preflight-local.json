@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-MTL-IDENTITY-DIAGNOSTIC-001-FINAL-PREFLIGHT",
+  "observed_at_utc": "2026-09-29T19:27:12Z",
+  "status": "pass",
+  "diagnostic_id": "landsat9-mtl-identity-diagnostic-001-real-001",
+  "approval_sha256": "9e26764c0a3bcc4bde96cacd661e2ffa8852e5202246246c389878342ec1270a",
+  "implementation_commit": "42f55694349948260f5843677e60e5f3e277feae",
+  "public_ci_run_id": "36619166534",
+  "public_ci_success": true,
+  "bound_repository_hashes_match": true,
+  "frozen_prior_receipt_hashes_match": true,
+  "source_regular_non_reparse_exact_size": true,
+  "source_content_read_during_preflight": false,
+  "diagnostic_attempt_root_absent": true,
+  "no_network_or_browser_action": true,
+  "real_process_budget": 1
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-MTL-IDENTITY-DIAGNOSTIC-001-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-29T19:29:00Z",
+  "status": "identity_discrepancy_classified_source_unaccepted",
+  "approved_review_bundle_sha256": "89d4c11876334095581550ba054a62a2be036db3583747b7bfa08f0af8225ee1",
+  "approved_proposal_sha256": "0da636740994658fb106ba59957951edd894d7aa34531b829147059b4a3d2b00",
+  "implementation_commit": "42f55694349948260f5843677e60e5f3e277feae",
+  "implementation_public_ci_run_id": "36619166534",
+  "implementation_public_ci_conclusion": "success",
+  "final_no_content_preflight_local_crlf_sha256": "25bd144626df5a31a3e6c8c5bb0eaad97c1542e28493de2cb77a8393d71da4fb",
+  "final_no_content_preflight_public_lf_sha256": "4721d06301ce8fc1d97443064fd28727c2f73b7ab14dc4717c2e359e6199ac29",
+  "diagnostic_id": "landsat9-mtl-identity-diagnostic-001-real-001",
+  "real_processes_executed": 1,
+  "external_append_only_receipt_sha256": {
+    "reservation": "22c5273cf4577b0fbe0bab51eb17820c3c07b7b08a34e0e3ed3a50314a38b458",
+    "terminal": "ce9bd962098ef83a4bbf18e3a2a5fa7f124224b522788a9c2f7d55f695b26625",
+    "cleanup": "9e6268f93713df0c9375793fede0caa47a63c646e4f6009a331fb5ff29ef5f38"
+  },
+  "frozen_source_result": {
+    "size_bytes": 1126565376,
+    "sha256": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255",
+    "full_hash_matches_terminal_staged_receipt": true,
+    "tar_header_member_count": 27,
+    "post_process_size_and_regular_file_metadata_unchanged": true,
+    "promoted": false
+  },
+  "identity_classification": {
+    "text": {
+      "LANDSAT_PRODUCT_ID": {
+        "presence_count": 3,
+        "allowlisted_syntactically_valid_count": 2,
+        "exact_expected_value_count": 2,
+        "all_syntactically_valid": false,
+        "strict_exact_identity_pass": false
+      },
+      "LANDSAT_SCENE_ID": {
+        "presence_count": 1,
+        "strict_exact_identity_pass": true
+      }
+    },
+    "xml": {
+      "LANDSAT_PRODUCT_ID": {
+        "presence_count": 3,
+        "allowlisted_syntactically_valid_count": 2,
+        "exact_expected_value_count": 2,
+        "all_syntactically_valid": false,
+        "strict_exact_identity_pass": false
+      },
+      "LANDSAT_SCENE_ID": {
+        "presence_count": 1,
+        "strict_exact_identity_pass": true
+      }
+    }
+  },
+  "boundaries": {
+    "unknown_product_id_value_persisted": false,
+    "tiff_member_payload_semantically_read": false,
+    "pixels_read": false,
+    "source_mutated_or_promoted": false,
+    "after_product_request_started": false,
+    "retry_performed": false
+  },
+  "interpretation_limit": "The extra non-allowlisted product-ID value explains the frozen strict MTL-text mismatch, but this diagnostic does not establish its meaning, that it is harmless, or that a parser change or source promotion is valid. Both text and XML contain the same count pattern; only scene-ID strict equality passed.",
+  "next_authority_boundary": "The diagnostic identity is consumed and cannot be reused or retried. Any context-aware MTL interpretation, verifier or predicate amendment, promotion, after-product download, TIFF/pixel QA, map or change analysis, attribution, or scientific publication requires a separately reviewed decision."
+}
