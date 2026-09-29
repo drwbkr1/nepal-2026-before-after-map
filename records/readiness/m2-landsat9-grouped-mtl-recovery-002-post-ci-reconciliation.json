@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-GROUPED-MTL-RECOVERY-002-POST-CI-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-29T20:04:08.328034Z",
+  "status": "terminal_container_only_publication_verified_envelope_closed",
+  "terminal_commit": "3f80a6ce79487e22f80ff6ae784fa84a15ba8fa6",
+  "terminal_public_ci_run_id": "36623520244",
+  "terminal_public_ci_conclusion": "success",
+  "terminal_public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/36623520244",
+  "terminal_reconciliation_sha256": "dbab7cb803c434dba2d095f545942c02fec623e923d370bd1510abac3d636ffa",
+  "external_append_only_receipt_sha256": {
+    "before": {
+      "reservation.json": "fc87857640a8d7864e153ddd13381edd4e320780a1008672af90f0afdd849a3e",
+      "staged.json": "a340c89955126bb4183d2199f524b2c71fa99213aea3236bd2a952733f070ce2",
+      "verification.json": "0e0e181022fabd0a83de03d3b6d0474d21529effb8215dd7177cacc80e2b2104",
+      "terminal.json": "d73c89104d1a03bb13b3082970def4fe247cac87114244364cada7cf444f65f0",
+      "cleanup.json": "23df7c3ab56cb16059171aa2de44d1c8462c67cf27dc6f121599ff296658542c"
+    },
+    "after": {
+      "reservation.json": "04fcbda8f0c2aa0ba95d6c64f4a7556873eca135bb38fdc061455456d1c07a59",
+      "browser-click-started.json": "b99d4349f19be58d45709a3c010ce15092c3e96e49ac9e0d5b64dff692803cd1",
+      "staged.json": "398d4be7af6869f7b501c30bb1c9748934f50b696137001afa15b7e2af8d12d4",
+      "verification.json": "aae66e1d51e6da45c2965d3207aefe1fbd1e341a4be1ec029295b030f4216c2c",
+      "terminal.json": "cbdec18ed509f5a38a2c8c87972b22e99dba452e4f42f21e7654a459f015ae4a",
+      "cleanup.json": "96fae6221904ba1bc37832f8aca1b0158e624f508d5dd7d7176513bf161a291b"
+    }
+  },
+  "before_product_promoted_container_only": true,
+  "after_product_promoted_container_only": true,
+  "after_browser_clicks_counted": 1,
+  "automatic_retries_performed": 0,
+  "provider_checksum_verified": false,
+  "tiff_or_pixel_qa_performed": false,
+  "arcgis_raster_map_released": false,
+  "change_or_scientific_claim_released": false,
+  "next_checkpoint": "M2-LANDSAT9-GROUPED-MTL-RECOVERY-002-TERMINAL-REVIEW",
+  "next_authority_boundary": "Both exact Level-2 TARs are in non-Git local QA custody. A separately reviewed pixel/header, QA-mask, coverage, registration, and local ArcGIS visual-panel method is required before raster map production. No change analysis, attribution, derived-pixel publication, or scientific publication is released."
+}
