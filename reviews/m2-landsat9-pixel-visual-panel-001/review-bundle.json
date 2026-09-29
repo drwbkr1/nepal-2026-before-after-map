@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-LANDSAT9-PIXEL-VISUAL-PANEL-001-LOCAL",
+  "status": "local_zero_decision_not_public_not_approved",
+  "human_decision_count": 0,
+  "base_commit": "451199daa6b9c8e8c8071879703a0b565d224ef4",
+  "proposal_ref": "contracts/milestone-002-landsat9-pixel-visual-panel-001-proposal.json",
+  "proposal_sha256": "e40d6f84aed7e41e52f8b084511213d4fe4c6d1a31fe54484172f1d1893d793e",
+  "bound_files": [
+    {
+      "ref": "docs/M2_LANDSAT9_PIXEL_VISUAL_PANEL_001_REVIEW.md",
+      "sha256": "718c6878c756a019a1e731c3ca6b85fe23d70c8ac8ade8dd6a18092971a23880",
+      "role": "human_readable_review"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-grouped-mtl-recovery-002-post-ci-reconciliation.json",
+      "sha256": "e3ab69e49a8799afbc12551b7424f9f0082e9e07b7247d4bcb6085b410eb79b6",
+      "role": "closed_exact_container_intake"
+    },
+    {
+      "ref": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+      "role": "approved_projected_aoi_geometry"
+    },
+    {
+      "ref": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+      "role": "unchanged_coverage_and_registration_limits"
+    },
+    {
+      "ref": "scripts/landsat_c2_qa_flags.py",
+      "sha256": "9023715cb57a7651fc679acbe412e363d8e26d399f2f13493dba2693d54f2e03",
+      "role": "synthetic_only_usgs_qa_bit_decoder"
+    }
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-LANDSAT9-PIXEL-VISUAL-PANEL-001",
+    "question": "Approve, revise, or defer one exact-source Landsat-9 pixel-QA and conditional local ArcGIS visual-panel envelope through sanitized terminal publication?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "Exact packet and owner approval are public on main and public CI passes; versioned implementation, synthetic and installed-runtime tests, implementation public CI, and final no-content preflight then precede any real TIFF header or pixel read."
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "implementation_authorized": false,
+    "real_tiff_or_pixel_read_authorized": false,
+    "local_visual_panel_authorized": false,
+    "change_analysis_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

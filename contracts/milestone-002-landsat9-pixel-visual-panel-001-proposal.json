@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-LANDSAT9-PIXEL-VISUAL-PANEL-001",
+  "status": "local_zero_decision_not_approved_not_published",
+  "prepared_at_utc": "2026-09-29T20:09:36Z",
+  "objective": "Measure whether the exact locally promoted 10 and 26 August 2026 Landsat-9 Level-2 pair can support a truthful EPSG:32645, owner-local ArcGIS Pro visual before/after panel over the approved source and upper-corridor AOIs, with explicit masks and no change or attribution claim.",
+  "frozen_entry_evidence": {
+    "intake_post_ci_ref": "records/readiness/m2-landsat9-grouped-mtl-recovery-002-post-ci-reconciliation.json",
+    "intake_post_ci_sha256": "e3ab69e49a8799afbc12551b7424f9f0082e9e07b7247d4bcb6085b410eb79b6",
+    "before": {
+      "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+      "scene_id": "LC91410402026222LGN00",
+      "archive_size_bytes": 1126565376,
+      "archive_sha256": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255"
+    },
+    "after": {
+      "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+      "scene_id": "LC91410402026238LGN00",
+      "archive_size_bytes": 1123888128,
+      "archive_sha256": "f2b7a99f75d1324f0c7a984af5172740ca20862b774e2a17714df0cd7c454b38"
+    },
+    "approved_aoi_epsg32645_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_epsg32645_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "existing_pixel_contract_ref": "config/qa/pixel-readiness-contract.json",
+    "existing_pixel_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+    "qa_flag_decoder_ref": "scripts/landsat_c2_qa_flags.py",
+    "qa_flag_decoder_sha256": "9023715cb57a7651fc679acbe412e363d8e26d399f2f13493dba2693d54f2e03"
+  },
+  "official_method_references": [
+    "https://www.usgs.gov/landsat-missions/landsat-collection-2-quality-assessment-bands",
+    "https://www.usgs.gov/landsat-missions/landsat-collection-2-surface-reflectance",
+    "https://www.usgs.gov/landsat-missions/landsat-collection-2-known-issues",
+    "https://www.usgs.gov/media/files/landsat-8-9-olitirs-collection-2-level-2-data-format-control-book"
+  ],
+  "exact_scope": {
+    "archive_reads": "Only the two already-promoted exact TARs, after rehashing their frozen size and SHA-256; no network, source substitution, or archive retry.",
+    "materialized_members_per_product": [
+      "_MTL.txt", "_MTL.xml", "_QA_PIXEL.TIF", "_QA_RADSAT.TIF", "_SR_QA_AEROSOL.TIF",
+      "_SR_B3.TIF", "_SR_B4.TIF", "_SR_B5.TIF", "_SR_B6.TIF", "_SR_B7.TIF"
+    ],
+    "aoi_ids": ["AOI-SOURCE", "AOI-UPPER-CORRIDOR"],
+    "analysis_crs_epsg": 32645,
+    "reflectance_cell_size_m": 30,
+    "visual_rgb_channels": {"red": "SR_B7", "green": "SR_B6", "blue": "SR_B4"},
+    "real_attempt_budget": "One new fixed-order header/pixel-QA attempt for each exact product, then at most one conditional ArcGIS visual-panel attempt; stop on first integrity or method failure, no automatic retry."
+  },
+  "predeclared_header_gate": [
+    "Hash each promoted TAR and compare the frozen size and SHA-256 before extracting only the ten exact required members into unique non-Git, append-only attempt paths. Check each extracted member against its container-verification member SHA-256 and never overwrite a source or prior attempt.",
+    "Read only MTL and raster headers first. Require matching exact product/scene identity, valid nonempty required files, all eight TIFFs per product on one unrotated 30 m EPSG:32645 grid with integer dimensions and coherent nodata; stop before pixel reads on discrepancy.",
+    "Require the two acquired scene grids to share a 30 m lattice: integer-column origin offset within 0.000001 pixel, zero rotation, common positive intersection, and no reprojection or interpolation for grid alignment. The catalog's 40-column offset is a hypothesis to test, not a substitute for acquired-header evidence.",
+    "Require USGS Collection-2 Level-2 scale 0.0000275 and offset -0.2 for each B3 through B7 reflectance band from the exact metadata, or stop. Never treat raw DN as reflectance."
+  ],
+  "predeclared_pixel_qa_method": {
+    "aoi_area_accounting": "Rasterize each approved EPSG:32645 polygon onto the common 30 m lattice with exact cell-polygon intersection-area weights for boundary cells. Total approved AOI area is the denominator for coverage, single-date strict usability, and paired strict usability; report raw intersected area and reconcile to polygon area within the existing 0.02 tolerance.",
+    "strict_mask_exclusions": [
+      "QA_PIXEL fill, dilated cloud, high-confidence cirrus, high-confidence cloud, high-confidence cloud shadow, high-confidence snow/ice, medium-or-high cloud confidence, or reserved/unknown confidence encoding; the Clear bit alone never admits a pixel.",
+      "QA_RADSAT saturation in any B3 through B7 displayed or retained QA band, or terrain occlusion.",
+      "SR_QA_AEROSOL fill or the conjunction of invalid aerosol retrieval and high aerosol level. Count invalid retrieval, interpolated aerosol, high aerosol, and water separately as visible uncertainty strata; interpolation or invalid retrieval alone is not an automatic exclusion because these occur as part of the documented LaSRC gap-filling procedure.",
+      "Per-band zero/nodata, nonfinite values, or calibrated reflectance outside [0, 1] for any B3 through B7. Do not clamp nonphysical values into a display-valid class."
+    ],
+    "reason_accounting": "Persist raw overlapping flag counts and one mutually exclusive first-failure reason per AOI cell in fixed order: outside footprint; fill/nodata; cloud/cirrus/shadow; snow/ice; saturation/terrain occlusion; aerosol uncertainty; nonphysical band; strict valid. Report before, after, and same-cell paired masks and the fraction of the full approved AOI for every reason.",
+    "thresholds": {"full_footprint_minimum": 0.99, "full_single_date_usable_minimum": 0.8, "full_paired_usable_minimum": 0.8, "partial_visual_review_floor": 0.2},
+    "qualification": "An AOI may receive a local visual panel only if both scene footprints cover at least 0.99 of its area and paired strict-valid area is at least 0.20 of its total area. At 0.20 to below 0.80, label that AOI PARTIAL / INSUFFICIENT FOR FULL-AREA COMPARISON. At or above 0.80 with both single-date fractions at or above 0.80, label PIXEL-QA PASS FOR VISUAL COMPARISON ONLY. If neither AOI qualifies, retain QA receipts and produce no before/after panel. No threshold may be lowered after observation.",
+    "registration_boundary": "Shared projected lattice is not measured residual registration. The visual panel makes no pixelwise difference, overlay-change, stable-control, baseline-admission, or co-registration pass claim; those require a separate reviewed method with the existing minimum 30 control pairs and 0.5-pixel RMSE and absolute-bias pass bounds."
+  },
+  "conditional_local_arcgis_panel": {
+    "display_method": "For each qualifying AOI, use B7/B6/B4 in RGB. Compute one deterministic nearest-rank 2nd/98th percentile stretch per channel from the pooled before-and-after strict paired-valid pixels of qualifying AOIs, then apply those same channel limits to both dates. Preserve excluded snow/ice and other masks as distinct visible classes; do not tune the stretch by eye or by date.",
+    "required_labels": ["Exact product IDs and UTC acquisition times", "EPSG:32645 and 30 m cell size", "AOI-specific footprint, single-date, and paired strict-valid fractions", "Mask legend including cloud, shadow, snow/ice, aerosol and nodata", "Visual comparison only; residual registration not measured; no change or attribution claim"],
+    "local_outputs": "Non-Git, no-replace ArcGIS Pro APRX with georeferenced source rasters and exclusion layers, plus PNG and PDF exports. Reopen APRX in a fresh ArcGIS Pro process, check broken paths and layer sources, and visually inspect both exports. Do not publish derived pixels or call this the final M6 package."
+  },
+  "conditional_authority_envelope": [
+    "Record one owner decision, publish this source-safe packet, implement a versioned exact-source pipeline, and require portable synthetic, installed ArcGIS-runtime synthetic, project-validation, and public-CI gates before any real TIFF header or pixel read.",
+    "Run one final no-content preflight of packet hashes, the closed container-intake receipts and both promoted archive hashes, exact AOIs, installed runtime, non-Git free space and no-replace attempt paths. Stop on drift.",
+    "Perform one fixed-order real header and pixel-QA evaluation of the before then after source, with append-only receipts and no automatic retry. Stop at the first integrity or method failure; retain unsuccessful outputs and exact limitations.",
+    "If and only if at least one AOI qualifies under the frozen visual-only thresholds, perform at most one local ArcGIS Pro panel creation, fresh-process reopen, PNG/PDF export and visual QA. Publish only sanitized metadata, QA aggregates, hashes, status and terminal reconciliation after public CI."
+  ],
+  "explicit_exclusions": [
+    "No download, provider request, credentials, terms or account action, alternate scene, archive replacement, reuse of a consumed attempt, or automatic retry.",
+    "No threshold, AOI, mask, band order, stretch, datum, grid or source substitution after observing real pixels.",
+    "No quantitative difference raster, NDVI/NBR/MNDWI change, baseline admission, geomorphic interpretation, event attribution, public derived-pixel upload, final M6 delivery claim, emergency guidance or scientific publication."
+  ],
+  "decision_requested": "Approve, revise, or defer one conditional pixel-QA and local ArcGIS visual-panel envelope through sanitized terminal publication, with no intermediate owner reconfirmation while the exact gates remain unchanged.",
+  "decision_state": {"owner_approved": false, "packet_publication_authorized_by_draft": false, "real_tiff_or_pixel_read_authorized_by_draft": false, "visual_panel_authorized_by_draft": false, "scientific_change_authorized_by_draft": false}
+}

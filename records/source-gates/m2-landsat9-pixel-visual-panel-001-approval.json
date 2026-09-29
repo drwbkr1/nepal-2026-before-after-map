@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-LANDSAT9-PIXEL-VISUAL-PANEL-001-APPROVAL",
+  "approved_at_utc": "2026-09-29T20:13:26Z",
+  "decision_source": "Owner's answer to the exact one-question review: Approve exact packet",
+  "review_bundle_ref": "reviews/m2-landsat9-pixel-visual-panel-001/review-bundle.json",
+  "review_bundle_sha256": "9df5137caa4d83577b5350178b5c61055cd366f935653d8aa5e13d2eed0a0f28",
+  "proposal_ref": "contracts/milestone-002-landsat9-pixel-visual-panel-001-proposal.json",
+  "proposal_sha256": "e40d6f84aed7e41e52f8b084511213d4fe4c6d1a31fe54484172f1d1893d793e",
+  "decision": "approved_one_conditional_envelope",
+  "authorized_scope": "Public-CI-gated versioned implementation; exact-source header and pixel QA of the already promoted 10 and 26 August 2026 Landsat-9 full bundles in fixed order; and only on all frozen gates passing at most one owner-local EPSG:32645 ArcGIS visual panel with PNG and PDF exports, through sanitized terminal publication, exactly as reviewed.",
+  "request_budget": "No new download or provider request; one fresh fixed-order header and pixel-QA attempt per exact archive, then at most one conditional local visual-panel attempt; no automatic retry.",
+  "explicit_exclusions": [
+    "No new download, credential, terms or account action, source or archive substitution, prior-attempt reuse, or retry.",
+    "No post-observation AOI, mask, threshold, band order, stretch, datum, grid or scientific-method substitution.",
+    "No quantitative difference, change analysis, baseline admission, event interpretation, attribution, public derived pixels, final M6 delivery claim, or scientific publication."
+  ],
+  "execution_gates": [
+    "Publish the exact packet and this approval to public main and pass public CI before implementation is actionable.",
+    "Versioned implementation, portable synthetic and installed ArcGIS-runtime synthetic tests, project validation, and fresh public CI must pass before real TIFF header or pixel reads.",
+    "A final no-content preflight must verify packet and closed-intake hashes, exact promoted archives, approved AOIs, installed runtime, non-Git free space, and absent no-replace attempt paths."
+  ],
+  "real_tiff_header_or_pixel_read_started_at_approval": false
+}
