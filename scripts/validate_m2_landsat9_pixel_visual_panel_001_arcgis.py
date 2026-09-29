@@ -53,7 +53,9 @@ def main() -> dict:
         data = {"AOI-SOURCE": {"npz": "aoi-source-panel-data.npz"}}
         mtls = {"before": {"date_acquired": "2026-08-10", "scene_center_time": "05:00:00Z"},
                 "after": {"date_acquired": "2026-08-26", "scene_center_time": "05:00:00Z"}}
-        built = build(attempt, metrics, data, mtls, root / "panel", arcpy)
+        source_bands = {date: {band: paths[f"_SR_{band}.TIF"] for band in ("B7", "B6", "B4")}
+                        for date in ("before", "after")}
+        built = build(attempt, metrics, data, mtls, source_bands, root / "panel", arcpy)
         reopened = fresh_reopen(root / "panel")
         if built["status"] != "built_visual_panel_pending_fresh_reopen" or reopened["status"] != "pass_fresh_process_reopen":
             raise ValueError("synthetic_panel_gate_failed")

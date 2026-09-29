@@ -459,7 +459,11 @@ def run_once(gate: dict, arcpy) -> dict:
         if qualifying:
             result["stage"] = "arcgis_visual_panel"
             output = ATTEMPT / "panel"
-            built = build_panel(ATTEMPT, all_metrics, panel_data, mtls, output, arcpy)
+            source_bands = {date: {band: paths[date][f"_SR_{band}.TIF"]
+                                   for band in ("B7", "B6", "B4")}
+                            for date in ("before", "after")}
+            built = build_panel(ATTEMPT, all_metrics, panel_data, mtls,
+                                source_bands, output, arcpy)
             write_new(ATTEMPT / "panel-build.json", built)
             reopened = fresh_reopen(output)
             write_new(ATTEMPT / "panel-reopen.json", reopened)

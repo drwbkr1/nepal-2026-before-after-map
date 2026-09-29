@@ -105,9 +105,14 @@ def _panel_arrays(attempt: Path, metrics: dict, panel_data: dict) -> tuple[dict,
 
 
 def build(attempt: Path, metrics: dict, panel_data: dict, mtls: dict,
-          output: Path, arcpy) -> dict:
+          source_bands: dict[str, dict[str, Path]], output: Path, arcpy) -> dict:
     if not TEMPLATE.is_file() or output.exists():
         raise ValueError("panel_template_or_output_invalid")
+    if (set(source_bands) != {"before", "after"} or any(
+            set(source_bands[date]) != {"B7", "B6", "B4"}
+            or any(not path.is_file() for path in source_bands[date].values())
+            for date in ("before", "after"))):
+        raise ValueError("panel_exact_source_bands_missing")
     data, _, qualifying = _panel_arrays(attempt, metrics, panel_data)
     output.mkdir(parents=True, exist_ok=False)
     rgb_paths, mask_paths = {}, {}
@@ -138,6 +143,10 @@ def build(attempt: Path, metrics: dict, panel_data: dict, mtls: dict,
         exclusion = map_obj.addDataFromPath(str(mask_paths[date]))
         exclusion.name = f"{date.title()} exclusion class | inspectable"
         exclusion.visible = False  # Colors are already burned into the RGB view.
+        for band in ("B7", "B6", "B4"):
+            source = map_obj.addDataFromPath(str(source_bands[date][band]))
+            source.name = f"{date.title()} source SR_{band} | inspectable original"
+            source.visible = False
         maps[date] = map_obj
     layout = project.createLayout(14, 8.5, "INCH", "Nepal Landsat-9 visual comparison only")
     for date, x0 in (("before", .4), ("after", 7.1)):
@@ -194,7 +203,7 @@ def reopen(output: Path, arcpy) -> dict:
         raise ValueError("panel_project_defaults_or_layout_invalid")
     for map_obj in project.listMaps():
         if (map_obj.spatialReference.factoryCode != 32645
-                or len(map_obj.listLayers()) != 2
+                or len(map_obj.listLayers()) != 5
                 or any(layer.isBroken for layer in map_obj.listLayers())):
             raise ValueError("panel_broken_or_missing_layer")
     reopened = output / "Nepal_Landsat9_Visual_Before_After_Reopen.png"
