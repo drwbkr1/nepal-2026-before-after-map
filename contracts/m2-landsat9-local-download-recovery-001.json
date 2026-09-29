@@ -25,14 +25,23 @@
         "unavailable_reason": "No upstream digest or exact provider length was published. Two unverified exact-name Downloads files each showed 1126565376 bytes by metadata only; both must be safely read, hashed, and match before new custody."
       },
       "observed": {
-        "staged_sha256": null,
-        "staged_size_bytes": null,
+        "staged_sha256": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255",
+        "staged_size_bytes": 1126565376,
         "promoted_sha256": null,
         "promoted_size_bytes": null
       },
-      "state": "authorized",
-      "attempts": [],
-      "failure": null,
+      "state": "failed",
+      "attempts": [
+        {
+          "attempt_id": "landsat9-before-20260810-recovery-001",
+          "started_at": "2026-09-29T19:06:18.068576Z",
+          "completed_at": "2026-09-29T19:06:40.489379Z",
+          "outcome": "failed",
+          "failure_code": "mtl_text_identity_mismatch",
+          "terminal_receipt_sha256": "ce17ccc48005ba19c4c7b89bde85a130aafc99644b50852bd7c4ccd302b374ed"
+        }
+      ],
+      "failure": "The two exact before Downloads archives passed full SHA-256 equality and a verified local copy was staged, but the staged TAR failed the frozen MTL text product/scene identity predicate. The attempt is terminal, staging is retained, and no custody promotion occurred.",
       "superseded_by": null,
       "extensions": {
         "role": "before",
@@ -41,7 +50,8 @@
         "source_file_variants": ["base", "numbered_duplicate"],
         "new_browser_request_budget": 0,
         "prior_failed_attempt_id": "landsat9-before-20260810-001",
-        "real_file_read_authorized_only_after_public_ci_and_preflight": true
+        "real_file_read_authorized_only_after_public_ci_and_preflight": true,
+        "terminal_status": "block_local_handoff_or_container_failure"
       }
     },
     {
@@ -77,16 +87,17 @@
         "source_file_variants": ["base", "numbered_duplicate"],
         "new_browser_request_budget": 1,
         "depends_on_promoted_asset_id": "landsat9-before-20260810-recovery-001",
-        "real_browser_action_authorized_only_after_before_success_public_ci_and_preflight": true
+        "real_browser_action_authorized_only_after_before_success_public_ci_and_preflight": true,
+        "blocked_by_before_terminal_failure": true
       }
     }
   ],
   "extensions": {
-    "status": "approved_but_public_ci_and_final_preflight_pending",
+    "status": "stopped_after_before_mtl_identity_failure_no_after_request",
     "approval_ref": "records/source-gates/m2-landsat9-local-download-recovery-001-approval.json",
     "review_bundle_sha256": "a293c2e01e4a66c8b2830370931d484334f970bd276f0d23047a3948f084bb15",
     "proposal_sha256": "18b3ab22fb1816779108845b04c5668252007a0adb1af2bdbbd1c152693f4e4d",
-    "source_file_content_read": false,
+    "source_file_content_read": true,
     "browser_request_started": false
   }
 }

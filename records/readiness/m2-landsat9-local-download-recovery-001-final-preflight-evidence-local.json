@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-LOCAL-DOWNLOAD-RECOVERY-001-FINAL-PREFLIGHT-EVIDENCE-LOCAL",
+  "checked_at_utc": "2026-09-29T19:04:58Z",
+  "status": "pass_no_payload_preflight_evidence",
+  "approval_sha256": "d8bcedf8054835bbce365fe74e3b5a55ff38199b2e09ef47e73b4adf94ffcc39",
+  "implementation_commit": "3f687b9c5aa2cf18978e877b57d761cec61edde5",
+  "public_ci_run_id": "36615842380",
+  "public_ci_conclusion": "success",
+  "prior_failed_attempt_receipts_unchanged": {
+    "reservation.json": "164fc9c0f476b2918ca352c357d48f46f75bdb39ea16f58a5e7b7881a10387e1",
+    "browser-request-started.json": "b378507dbaef7686e8db775f4a80028a3db22079562c53a5366909a895275c88",
+    "terminal.json": "d82b1f9684382ca07c1784b1b3a1a195de57de9b7ab2b30069d4f344b315217e",
+    "cleanup.json": "b5b06a3459ec49cb6e763cb08307d484fd9e4dbd75bc7143c139ced462005795"
+  },
+  "before_files_metadata_only": [
+    {
+      "name": "LC09_L2SP_141040_20260810_20260811_02_T1.tar",
+      "size_bytes": 1126565376,
+      "last_write_utc": "2026-09-29T18:32:01.7363292Z",
+      "regular_non_reparse": true
+    },
+    {
+      "name": "LC09_L2SP_141040_20260810_20260811_02_T1 (1).tar",
+      "size_bytes": 1126565376,
+      "last_write_utc": "2026-09-29T18:32:01.7081607Z",
+      "regular_non_reparse": true
+    }
+  ],
+  "after_exact_base_or_first_duplicate_present": false,
+  "before_or_after_promoted_destination_present": false,
+  "new_recovery_attempt_root_present": false,
+  "free_space_bytes_on_custody_volume": 393479917568,
+  "official_usgs_access_and_rights_check": {
+    "download_instructions": "https://www.usgs.gov/faqs/how-do-i-search-and-download-landsat-collection-2-data-products",
+    "level_2_product_documentation": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+    "checked_at_utc": "2026-09-29T18:58:00Z",
+    "finding": "EarthExplorer remains the Collection 2 portal and USGS continues its no-cost open Landsat policy; no fee or changed terms observed."
+  },
+  "browser_observation": {
+    "signed_in": true,
+    "exact_after_product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+    "exact_after_acquisition_date": "2026-08-26",
+    "exact_after_path_row": "141/040",
+    "full_level_2_product_bundle_control_visible": true,
+    "displayed_rounded_bundle_size": "1.05 GiB",
+    "download_clicked": false,
+    "account_identifier_or_signed_url_recorded": false
+  },
+  "archive_content_read": false,
+  "browser_request_started": false,
+  "provenance_limit": "Pass supports bounded local QA custody only and does not establish upstream checksum equivalence, TIFF/pixel fitness, map admissibility, or scientific claims."
+}

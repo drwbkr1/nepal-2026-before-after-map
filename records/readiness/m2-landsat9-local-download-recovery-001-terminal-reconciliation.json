@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-LOCAL-DOWNLOAD-RECOVERY-001-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-29T19:08:00Z",
+  "status": "stopped_on_before_mtl_text_identity_failure_no_after_request",
+  "approved_review_bundle_sha256": "a293c2e01e4a66c8b2830370931d484334f970bd276f0d23047a3948f084bb15",
+  "approved_proposal_sha256": "18b3ab22fb1816779108845b04c5668252007a0adb1af2bdbbd1c152693f4e4d",
+  "approval_sha256": "d8bcedf8054835bbce365fe74e3b5a55ff38199b2e09ef47e73b4adf94ffcc39",
+  "implementation_public_ci": {
+    "commit": "3f687b9c5aa2cf18978e877b57d761cec61edde5",
+    "run_id": "36615842380",
+    "conclusion": "success",
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/36615842380"
+  },
+  "final_no_payload_preflight": {
+    "evidence_sha256": "06c419090abcfd70bbeda2af4b675f0bf2be73930d478c1d03114076a381446c",
+    "gate_sha256": "3297b491762f2eef7ddfc29b33956d382440d8a0cfe7e23888f5d2b4be7b2e49",
+    "status": "pass"
+  },
+  "before_product": {
+    "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+    "attempt_id": "landsat9-before-20260810-recovery-001",
+    "new_browser_request_count": 0,
+    "exact_existing_local_file_count": 2,
+    "complete_local_sha256_agreement": true,
+    "staged_size_bytes": 1126565376,
+    "staged_sha256": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255",
+    "container_verification_passed": false,
+    "terminal_status": "block_local_handoff_or_container_failure",
+    "terminal_failure_code": "mtl_text_identity_mismatch",
+    "staging_retained": true,
+    "custody_promotion_performed": false,
+    "downloads_originals_deleted_or_relocated": false,
+    "external_append_only_receipt_sha256": {
+      "reservation": "549de1e09b8542a9aeaf15c9d9bfc4d533cc634af5267f06e68942daa1b45557",
+      "staged": "87d3a2861250bfe729900fd81ff5434a8bd964c01050cbbaeff6eb6d26f723d9",
+      "terminal": "ce17ccc48005ba19c4c7b89bde85a130aafc99644b50852bd7c4ccd302b374ed",
+      "cleanup": "b8b0cc5c792aa727163c61550f6cfa22a5493e68a18b57dce10629b6c5395380"
+    }
+  },
+  "after_product": {
+    "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+    "browser_click_started": false,
+    "attempt_reserved": false,
+    "download_file_observed": false,
+    "custody_promotion_performed": false,
+    "status": "blocked_by_before_terminal_failure"
+  },
+  "limitations": [
+    "Two equal local hashes and a staged copy do not override the failed frozen MTL text identity predicate or establish upstream provider checksum equivalence.",
+    "No TIFF/header/pixel QA, AOI masks, registration, map, change analysis, interpretation, attribution, or scientific publication was performed or released."
+  ],
+  "next_authority_boundary": "The recovery-001 attempt is terminal and consumed. Do not reuse, inspect further under this execution envelope, retry, promote the staged bytes, click the after product, or alter the identity predicate. A separately reviewed disposition is required before any further file-content or browser action."
+}
