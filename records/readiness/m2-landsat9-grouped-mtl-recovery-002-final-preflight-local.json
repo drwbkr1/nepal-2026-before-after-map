@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "status": "pass_final_no_content_preflight",
+  "approval_sha256": "f3b713e63259c60b758e7155ce9fc04e76917d40d6e23167e35d1c716afa8282",
+  "public_ci_commit": "d3155715659059dc862b74a64d7233e5f2f771ad",
+  "public_ci_run_id": "36622273273",
+  "public_ci_conclusion": "success",
+  "preflight_sha256": "a99b28af65a5037748d79a1f9b00e1eaf63586cb9813b45a9c1b9ce24d67493e"
+}

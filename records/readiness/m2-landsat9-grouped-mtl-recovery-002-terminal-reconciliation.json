@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-GROUPED-MTL-RECOVERY-002-TERMINAL-RECONCILIATION",
+  "reconciled_at_utc": "2026-09-29T20:01:53.713244Z",
+  "status": "pass_both_bundles_promoted_container_only_local_qa_custody",
+  "authority": {
+    "review_bundle_sha256": "cf732ce0465a13e4074f84a805b16632b237e76e031d57e1b7de708d044df9f2",
+    "proposal_sha256": "bec77e8b1bb948c9021e78156af919fa0f074cbfc9badd3a7b783b593b9bb08c",
+    "approval_sha256": "f3b713e63259c60b758e7155ce9fc04e76917d40d6e23167e35d1c716afa8282"
+  },
+  "implementation_public_ci": {
+    "commit": "d3155715659059dc862b74a64d7233e5f2f771ad",
+    "run_id": "36622273273",
+    "conclusion": "success",
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/36622273273"
+  },
+  "final_no_content_preflight": {
+    "evidence_ref": "records/readiness/m2-landsat9-grouped-mtl-recovery-002-final-preflight-evidence-local.json",
+    "evidence_sha256": "a99b28af65a5037748d79a1f9b00e1eaf63586cb9813b45a9c1b9ce24d67493e",
+    "gate_ref": "records/readiness/m2-landsat9-grouped-mtl-recovery-002-final-preflight-local.json",
+    "gate_sha256": "0605a5b2462bf4b6b83adcf34c005099d7e1dfd867faaf861bc4cf92b9cc634f",
+    "status": "pass"
+  },
+  "before": {
+    "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+    "attempt_id": "landsat9-before-20260810-grouped-mtl-recovery-002",
+    "terminal_status": "pass_bundle_promoted_container_only",
+    "container_and_grouped_mtl_status": "pass_container_and_grouped_mtl_identity_only",
+    "size_bytes": 1126565376,
+    "sha256": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255",
+    "member_count": 27,
+    "provider_checksum_verified": false,
+    "tiff_header_or_pixel_qa_performed": false,
+    "external_receipt_sha256": {
+      "reservation.json": "fc87857640a8d7864e153ddd13381edd4e320780a1008672af90f0afdd849a3e",
+      "staged.json": "a340c89955126bb4183d2199f524b2c71fa99213aea3236bd2a952733f070ce2",
+      "verification.json": "0e0e181022fabd0a83de03d3b6d0474d21529effb8215dd7177cacc80e2b2104",
+      "terminal.json": "d73c89104d1a03bb13b3082970def4fe247cac87114244364cada7cf444f65f0",
+      "cleanup.json": "23df7c3ab56cb16059171aa2de44d1c8462c67cf27dc6f121599ff296658542c"
+    }
+  },
+  "after": {
+    "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+    "attempt_id": "landsat9-after-20260826-grouped-mtl-intake-002",
+    "terminal_status": "pass_bundle_promoted_container_only",
+    "container_and_grouped_mtl_status": "pass_container_and_grouped_mtl_identity_only",
+    "size_bytes": 1123888128,
+    "sha256": "f2b7a99f75d1324f0c7a984af5172740ca20862b774e2a17714df0cd7c454b38",
+    "member_count": 27,
+    "provider_checksum_verified": false,
+    "tiff_header_or_pixel_qa_performed": false,
+    "external_receipt_sha256": {
+      "reservation.json": "04fcbda8f0c2aa0ba95d6c64f4a7556873eca135bb38fdc061455456d1c07a59",
+      "browser-click-started.json": "b99d4349f19be58d45709a3c010ce15092c3e96e49ac9e0d5b64dff692803cd1",
+      "staged.json": "398d4be7af6869f7b501c30bb1c9748934f50b696137001afa15b7e2af8d12d4",
+      "verification.json": "aae66e1d51e6da45c2965d3207aefe1fbd1e341a4be1ec029295b030f4216c2c",
+      "terminal.json": "cbdec18ed509f5a38a2c8c87972b22e99dba452e4f42f21e7654a459f015ae4a",
+      "cleanup.json": "96fae6221904ba1bc37832f8aca1b0158e624f508d5dd7d7176513bf161a291b"
+    }
+  },
+  "execution_bounds": {
+    "new_before_browser_requests": 0,
+    "after_browser_clicks_counted": 1,
+    "automatic_retries": 0,
+    "source_substitutions": 0,
+    "before_old_staging_preserved": true,
+    "downloads_originals_preserved": true,
+    "no_replace_promotions": 2,
+    "new_success_staging_copies_removed_after_promotion": true
+  },
+  "provenance_limit": "Local EarthExplorer browser selection, exact filenames, complete archive hashes, and metadata structure support conditional local QA custody only. No upstream provider checksum was available, so cryptographic provider-object equivalence is not established.",
+  "scientific_limit": "No TIFF header, CRS, pixel, AOI coverage, cloud or other masks, registration, baseline, change analysis, interpretation, attribution, derived-pixel publication, or scientific publication was performed or authorized.",
+  "next_authority_boundary": "A separate reviewed Landsat pixel-QA, mask, registration, and ArcGIS visual-panel method is required before these archives support a before/after raster map or any change claim."
+}
