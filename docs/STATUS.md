@@ -6,7 +6,18 @@
 - **Scientific result:** None
 - **Imagery custody:** Four exact Copernicus DEM GLO-30 tiles and a 189-file ArcGIS terrain-QA derivative set remain verified outside Git; all eight exact Sentinel archives are promoted, container-verified, and materialized into append-only manifest-verified SAFE attempts; two incomplete `M1-SRC-004` partials remain retained; all four approved Sentinel-1D `AUX_RESORB` files are promoted with exact checksums, and full recovery-003 staging evidence for `M2-ORB-001` remains preserved
 - **Long-term goal:** Active
-- **Current checkpoint:** `M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001` has a terminal local visual-only panel. The approved `M2-ASF-PARTIAL-VV-DELTA-MAP-001` route stopped before a real attempt because 30 independently stable control windows could not be predeclared from the event-only staged rasters. The one exact after-job, ZIP, pair-stage, and panel attempts are consumed; both RTC scenes remain full-area `defer`. The earlier radar recovery-002 attempt remains terminal and consumed. Registration, clean-machine portability, baseline admission, change analysis, attribution, public pixels, and scientific publication remain unverified or unauthorized.
+- **Current checkpoint:** The alternate optical source-to-visual route has terminal insufficient coverage at both locked pairs; sanitized terminal publication is pending. The earlier partial ASF radar map remains a local visual only. No registration, baseline admission, change analysis, attribution or final M6 scientific result is established. See the current optical route pointer in `records/project-control-profile.json`.
+
+## Alternate Landsat source route: inconclusive terminal QA - 2026-10-03
+
+The approved fixed-policy envelope completed four metadata queries, locked two Landsat-8 pairs, acquired three exact full bundles once each, and ran one supervised QA worker per pair. All three archive identities and forty pair-specific materialized members were reverified. Both metadata audits and all sixteen TIFF headers per pair preceded pixels; native 30 m EPSG:32645, calibration and unchanged masks passed. Fourteen metadata requests, three download activations and 3,293,686,784 observed received bytes remained within the reviewed caps. No credential, account or terms action, scientific retry, additional owner reconfirmation, or public source/derived pixels occurred.
+
+| Dates (2026) | Source paired usable | Upper-corridor paired usable | Visual result |
+| --- | ---: | ---: | --- |
+| 18 August / 3 September | 0.0578% | 0.5700% | No qualifying panel |
+| 18 August / 19 September | 0.0000% | 0.3213% | No qualifying panel |
+
+Neither pair reaches the unchanged 20% visual floor. No new optical panel attempt, APRX, PNG or PDF was created. This is measured insufficient usable coverage, not source corruption or evidence of no event change. The [terminal reconciliation](../records/readiness/m2-optical-alternate-source-route-001-terminal-reconciliation.json) preserves exact identities, QA, supervision, cleanup and failures. Sanitized terminal publication and its exact post-CI reconciliation are pending at this checkpoint. A scientific next-milestone brief was prepared and validated locally, with zero decisions and no publication of its contents. The existing partial radar visual remains available. Registration, scientific admission, change analysis, attribution and final M6 delivery remain unverified or unauthorized; the long-term goal is incomplete.
 
 ## Landsat-9 visual route completed with inconclusive QA - 2026-10-03
 

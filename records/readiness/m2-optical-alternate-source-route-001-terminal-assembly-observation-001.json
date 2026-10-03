@@ -1,0 +1,16 @@
+{
+  "at_utc": "2026-10-03T22:29:13.953303Z",
+  "correction_scope": "Strictly project the two already-observed first-receipt keys for terminal summary only; do not amend or reconstruct the original receipt.",
+  "exact_first_click_receipt_sha256": "506f20b30aa514aa85e19cff7057acacb327b109635d4e67f0043e4a89e473b6",
+  "exception_class": "KeyError",
+  "existing_first_receipt_fields": [
+    "counted_activations",
+    "individual_band_bulk_or_retry_clicks"
+  ],
+  "field_expected": "full_bundle_click_count",
+  "new_real_attempt_or_request": false,
+  "prior_click_receipt_mutated": false,
+  "production_implementation_changed": false,
+  "schema_version": "1.0",
+  "status": "local_reconciliation_assembly_stopped_before_output"
+}

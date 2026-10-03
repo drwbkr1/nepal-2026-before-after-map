@@ -1,0 +1,17 @@
+{
+  "actual_terminal_metrics_bound": true,
+  "at_utc": "2026-10-03T22:35:03.717739Z",
+  "brief_contents_publication_authorized_or_performed": false,
+  "existing_radar_runtime_reopen_performed_this_route": false,
+  "existing_repaired_radar_project_sha256": "603010d42bd4f4158c9d793d7dab9a41ce7fc39fe1e437bf11c9c3c39846fd71",
+  "frozen_change_contract_sha256": "fc2d18fa758d25b212361110ec9dba2611ba447611a2f7a284f5d1859b0ad33e",
+  "frozen_final_delivery_contract_sha256": "a3eda86374e77e4c8dbc48ff7a37b0f3766119878a65b95ff137477ba497527d",
+  "local_brief_name": "M2_OPTICAL_ALTERNATE_SOURCE_ROUTE_001_SCIENTIFIC_NEXT_MILESTONE_LOCAL.md",
+  "local_brief_sha256": "8d98e73c7ce8f27070d9cf306cea845c54516f4b37f1ad8d32ac70e8ace9698e",
+  "new_scientific_method_or_claim_adopted": false,
+  "no_source_request_or_arcgis_execution": true,
+  "owner_decisions_recorded": 0,
+  "schema_version": "1.0",
+  "status": "pass_local_zero_decision_next_brief_validation",
+  "terminal_reconciliation_sha256": "7ebea4deeee686a6e3652d6e546add5783fe25286ff0bd16ae7b506a13d2a26a"
+}

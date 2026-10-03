@@ -1,0 +1,283 @@
+{
+  "all_pair_headers_preceded_pixels": true,
+  "aoi_metrics": {
+    "AOI-SOURCE": {
+      "after": {
+        "footprint_fraction": 1.0,
+        "overlapping_raw_flag_fraction": {
+          "aerosol_high": 0.862907,
+          "aerosol_interpolated": 0.888854,
+          "aerosol_invalid_retrieval": 0.99521,
+          "aerosol_uncertainty": 0.858261,
+          "clear_bit": 0.261841,
+          "cloud_cirrus_shadow": 0.912873,
+          "fill_nodata": 0.0,
+          "nonphysical_band": 0.032861,
+          "outside_footprint": 0.0,
+          "saturation_terrain": 0.000194,
+          "snow_ice": 0.13634,
+          "water": 0.006731
+        },
+        "reason_fraction": {
+          "aerosol_uncertainty": 0.012635,
+          "cloud_cirrus_shadow": 0.912873,
+          "fill_nodata": 0.0,
+          "nonphysical_band": 6e-06,
+          "outside_footprint": 0.0,
+          "saturation_terrain": 0.0,
+          "snow_ice": 0.072007,
+          "strict_valid": 0.002479
+        },
+        "strict_usable_fraction": 0.002479
+      },
+      "aoi_area_m2": 143470831.156,
+      "before": {
+        "footprint_fraction": 1.0,
+        "overlapping_raw_flag_fraction": {
+          "aerosol_high": 0.787498,
+          "aerosol_interpolated": 0.888917,
+          "aerosol_invalid_retrieval": 0.980172,
+          "aerosol_uncertainty": 0.771273,
+          "clear_bit": 0.181879,
+          "cloud_cirrus_shadow": 0.885597,
+          "fill_nodata": 0.0,
+          "nonphysical_band": 0.014151,
+          "outside_footprint": 0.0,
+          "saturation_terrain": 0.0,
+          "snow_ice": 0.012628,
+          "water": 0.003193
+        },
+        "reason_fraction": {
+          "aerosol_uncertainty": 0.067255,
+          "cloud_cirrus_shadow": 0.885597,
+          "fill_nodata": 0.0,
+          "nonphysical_band": 0.000696,
+          "outside_footprint": 0.0,
+          "saturation_terrain": 0.0,
+          "snow_ice": 0.00414,
+          "strict_valid": 0.042312
+        },
+        "strict_usable_fraction": 0.042312
+      },
+      "paired_strict_usable_fraction": 0.000578,
+      "visual_status": "no_visual_panel_for_aoi"
+    },
+    "AOI-UPPER-CORRIDOR": {
+      "after": {
+        "footprint_fraction": 1.0,
+        "overlapping_raw_flag_fraction": {
+          "aerosol_high": 0.893326,
+          "aerosol_interpolated": 0.88891,
+          "aerosol_invalid_retrieval": 0.991971,
+          "aerosol_uncertainty": 0.885439,
+          "clear_bit": 0.459618,
+          "cloud_cirrus_shadow": 0.801089,
+          "fill_nodata": 0.0,
+          "nonphysical_band": 0.028797,
+          "outside_footprint": 0.0,
+          "saturation_terrain": 0.0,
+          "snow_ice": 0.18997,
+          "water": 0.001481
+        },
+        "reason_fraction": {
+          "aerosol_uncertainty": 0.114493,
+          "cloud_cirrus_shadow": 0.801089,
+          "fill_nodata": 0.0,
+          "nonphysical_band": 4.3e-05,
+          "outside_footprint": 0.0,
+          "saturation_terrain": 0.0,
+          "snow_ice": 0.04758,
+          "strict_valid": 0.036795
+        },
+        "strict_usable_fraction": 0.036795
+      },
+      "aoi_area_m2": 517636995.868,
+      "before": {
+        "footprint_fraction": 1.0,
+        "overlapping_raw_flag_fraction": {
+          "aerosol_high": 0.819379,
+          "aerosol_interpolated": 0.888893,
+          "aerosol_invalid_retrieval": 0.943193,
+          "aerosol_uncertainty": 0.770911,
+          "clear_bit": 0.504652,
+          "cloud_cirrus_shadow": 0.585063,
+          "fill_nodata": 0.0,
+          "nonphysical_band": 0.006328,
+          "outside_footprint": 0.0,
+          "saturation_terrain": 0.0,
+          "snow_ice": 0.002662,
+          "water": 1.6e-05
+        },
+        "reason_fraction": {
+          "aerosol_uncertainty": 0.303413,
+          "cloud_cirrus_shadow": 0.585063,
+          "fill_nodata": 0.0,
+          "nonphysical_band": 0.001384,
+          "outside_footprint": 0.0,
+          "saturation_terrain": 0.0,
+          "snow_ice": 0.001845,
+          "strict_valid": 0.108296
+        },
+        "strict_usable_fraction": 0.108296
+      },
+      "paired_strict_usable_fraction": 0.0057,
+      "visual_status": "no_visual_panel_for_aoi"
+    }
+  },
+  "approval_sha256": "eea904b27f94d3055c9b98ed523b7f46c0bebf0ecd20fbe681d06fea2693a532",
+  "at_utc": "2026-10-03T22:18:21.909858Z",
+  "attempt": "pair-1-qa-real-001",
+  "attempt_consumed": true,
+  "cleanup": {
+    "automatic_retries": 0,
+    "recorded_at_utc": "2026-10-03T22:16:53.906665Z",
+    "source_archives_overwritten_or_removed": false,
+    "status": "retained_outputs_for_audit"
+  },
+  "event_record_hashes": {
+    "arcpy-import-pass.json": "e07a26dc4fe601c8d867fa7081a11cc8d6d10d5f47d3c75dc1aa1dfeb825abc6",
+    "arcpy-import-start.json": "d80a4c1bcdfda97ee03a02b154b3dd537664256a56b55d674e649554a4d1400d",
+    "cleanup.json": "269cb80912432037b100122b9de5f210e744975f213fd7dafd63c04810594d6d",
+    "intent.json": "9b462d0aa2e0f31afae3bacfa73307cde412a9b9e4cc0f964677814857ce79c7",
+    "stage-001.json": "595fe56ab935bbdf059c724648103cdd16b03b3f32dd8d7c45e8074cba3fc316",
+    "stage-002.json": "b854a6c313de5c2b9bf0ee0bc2673888a54ae5d10371d0c7ef1c9e06f0fcf497",
+    "stage-003.json": "6dbb1d206212b85ba4d26e187fe32b25ecf1e2cd84966910958c9d439c4134dc",
+    "stage-004.json": "d263891d94afc4d61c6aa59485af3fbdbabcd2dab3e9ad9895483ba4634bc9ee",
+    "stage-005.json": "b5d46b9d9ac89da53fb60c6be3b11bbafc412259cc2c826dece930da2de29264",
+    "stage-006.json": "81a69072ee39afcd608b520462469e5404b3e8b1a34f97158136ea0b961629a0",
+    "stage-007.json": "246e9d0b7c1d7dc98d5e5f1e560fec6ca7c54d0d26ef9bc0abadcbdf28c8462d",
+    "terminal.json": "a4943327cdf6300f67d30a48e4846bc78cea47702dd35919d31466cc7de97cf5",
+    "worker-claim.json": "32b89920850cdcdc2d222955acf988242f2cec6b5142521eec49af8a49bf8691",
+    "worker-start.json": "8dbf4b48f44e49bd47fe569023258a6b534bb38c8a5e55f80a886227c5de8980"
+  },
+  "exact_materialized_members": 20,
+  "full_both_aois": false,
+  "grid_check": {
+    "after": {
+      "bands": 1,
+      "cell_x": 30.0,
+      "cell_y": 30.0,
+      "columns": 7701,
+      "nodata": 0.0,
+      "pixel_type": "U16",
+      "rotation_x": 0.0,
+      "rotation_y": 0.0,
+      "rows": 7851,
+      "tag_cell_x": 30.0,
+      "tag_cell_y": 30.0,
+      "wkid": 32645,
+      "xmax": 483915.0,
+      "xmin": 252885.0,
+      "ymax": 3311715.0,
+      "ymin": 3076185.0
+    },
+    "after_offset_columns": 20,
+    "after_offset_rows": 0,
+    "before": {
+      "bands": 1,
+      "cell_x": 30.0,
+      "cell_y": 30.0,
+      "columns": 7711,
+      "nodata": 0.0,
+      "pixel_type": "U16",
+      "rotation_x": 0.0,
+      "rotation_y": 0.0,
+      "rows": 7851,
+      "tag_cell_x": 30.0,
+      "tag_cell_y": 30.0,
+      "wkid": 32645,
+      "xmax": 483615.0,
+      "xmin": 252285.0,
+      "ymax": 3311715.0,
+      "ymin": 3076185.0
+    },
+    "registration_residual_measured": false
+  },
+  "mtl_audits": {
+    "after": {
+      "date_acquired": "2026-09-03",
+      "reflectance_add": -0.2,
+      "reflectance_mult": 2.75e-05,
+      "scene_center_time": "04:47:46.3461140Z",
+      "selected_group_paths": [
+        "LANDSAT_METADATA_FILE/IMAGE_ATTRIBUTES",
+        "LANDSAT_METADATA_FILE/LEVEL2_SURFACE_REFLECTANCE_PARAMETERS"
+      ],
+      "text_xml_selected_values_agree": true,
+      "validated_coefficients": {
+        "REFLECTANCE_ADD_BAND_3": -0.2,
+        "REFLECTANCE_ADD_BAND_4": -0.2,
+        "REFLECTANCE_ADD_BAND_5": -0.2,
+        "REFLECTANCE_ADD_BAND_6": -0.2,
+        "REFLECTANCE_ADD_BAND_7": -0.2,
+        "REFLECTANCE_MULT_BAND_3": 2.75e-05,
+        "REFLECTANCE_MULT_BAND_4": 2.75e-05,
+        "REFLECTANCE_MULT_BAND_5": 2.75e-05,
+        "REFLECTANCE_MULT_BAND_6": 2.75e-05,
+        "REFLECTANCE_MULT_BAND_7": 2.75e-05
+      }
+    },
+    "before": {
+      "date_acquired": "2026-08-18",
+      "reflectance_add": -0.2,
+      "reflectance_mult": 2.75e-05,
+      "scene_center_time": "04:47:40.7961440Z",
+      "selected_group_paths": [
+        "LANDSAT_METADATA_FILE/IMAGE_ATTRIBUTES",
+        "LANDSAT_METADATA_FILE/LEVEL2_SURFACE_REFLECTANCE_PARAMETERS"
+      ],
+      "text_xml_selected_values_agree": true,
+      "validated_coefficients": {
+        "REFLECTANCE_ADD_BAND_3": -0.2,
+        "REFLECTANCE_ADD_BAND_4": -0.2,
+        "REFLECTANCE_ADD_BAND_5": -0.2,
+        "REFLECTANCE_ADD_BAND_6": -0.2,
+        "REFLECTANCE_ADD_BAND_7": -0.2,
+        "REFLECTANCE_MULT_BAND_3": 2.75e-05,
+        "REFLECTANCE_MULT_BAND_4": 2.75e-05,
+        "REFLECTANCE_MULT_BAND_5": 2.75e-05,
+        "REFLECTANCE_MULT_BAND_6": 2.75e-05,
+        "REFLECTANCE_MULT_BAND_7": 2.75e-05
+      }
+    }
+  },
+  "next_allowed_action": "Only the second already-locked pair is released by ordinary low coverage, using verified before archive without another request; no ranking, mask or threshold changes.",
+  "panel_created": false,
+  "primary_record_hashes": {
+    "after-headers.json": "d375581873b14e2f607196b33b62c3adbf734e5e20a50c6ec95f5b19004de05d",
+    "after-metadata.json": "f6e045f770e9c2c11dc61f2265c0758b0b0895f94b7534af75096e399dc98181",
+    "before-headers.json": "3ef1c4e28e0be07f6b9b10fc8e6854bf5a2c498eb2506dfe63d228a9a314a4cf",
+    "before-metadata.json": "dffe26368d44016090ac63229dc47b70f3e8916396263a86b30840d39450f222",
+    "pair-header.json": "5c8008dda82bbdf6a758b7ede83f3bb4bb8eae2d8fbfb2640d26a04e39261bf5",
+    "pixel-qa.json": "2d6296d0a7507e38da1e89404dde27291e5c11e69bd15019e0b4bd83a5a326c4",
+    "started.json": "7a3462a19621c8dc7573699ec3aca2d99183837a0b33c10726a3b3ec3b91af62",
+    "terminal.json": "d5e84a8e22c7c7bd0e7024fc92b3d5396fb5833dd9d7237672c74971eee49869"
+  },
+  "qualifying_aois": [],
+  "registration_measured": false,
+  "retry_or_reuse_allowed": false,
+  "schema_version": "1.0",
+  "scientific_admission": false,
+  "selection_manifest_sha256": "073f3644ee871d4c9fa9b9adf8cf182d7de047804499aeee36c14745aadf46c3",
+  "source_or_derived_pixels_published": false,
+  "status": "pass_pair_1_execution_ordinary_insufficient_visual_coverage",
+  "supervisor_terminal": {
+    "automatic_retries": 0,
+    "change_analysis_or_attribution": false,
+    "provider_requests": 0,
+    "public_derived_pixel_publication": false,
+    "stage": "worker",
+    "status": "pass_pair_visual_qa_only",
+    "terminal_at_utc": "2026-10-03T22:16:53.874659Z",
+    "worker_exit_code": 0,
+    "worker_invocations": 1,
+    "worker_terminal_sha256": "d5e84a8e22c7c7bd0e7024fc92b3d5396fb5833dd9d7237672c74971eee49869"
+  },
+  "tiff_header_count": 16,
+  "worker_cleanup": {
+    "at_utc": "2026-10-03T22:16:51.243335Z",
+    "status": "attempt_inputs_and_outputs_retained"
+  },
+  "worker_invocations": 1,
+  "worker_terminal_sha256": "d5e84a8e22c7c7bd0e7024fc92b3d5396fb5833dd9d7237672c74971eee49869"
+}

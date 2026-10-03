@@ -1,0 +1,26 @@
+{
+  "approval_sha256": "eea904b27f94d3055c9b98ed523b7f46c0bebf0ecd20fbe681d06fea2693a532",
+  "at_utc": "2026-10-03T22:11:58.694164Z",
+  "commit": "c18dd805c8cec0b51803541afde48a511b0389b2",
+  "first_source_container_only_pass": true,
+  "public_ci": {
+    "conclusion": "success",
+    "headSha": "c18dd805c8cec0b51803541afde48a511b0389b2",
+    "status": "completed"
+  },
+  "public_ci_run_id": 37157530890,
+  "published_file_sha256": {
+    "records/project-control-profile.json": "947b5d6686433fe8a04ad6ae53f6474f579296e5df1cd12db1af49ca1c583eb7",
+    "records/readiness/m2-optical-alternate-source-route-001-final-no-payload-preflight-003.json": "8075e4e16ae656d66f004a1d300bf7d63bdd2f2bfc1d193572a5edefc5db6509",
+    "records/readiness/m2-optical-alternate-source-route-001-intake-checkpoint-001.json": "472eb9cfd043be9f14469b287c31fd27f55ddef2cbfab424e36899017c679e6e",
+    "records/readiness/m2-optical-alternate-source-route-001-selection-and-transfer-checkpoint.json": "51b8b2c9a3af9d8037e7630d87d77ca063b8de4db191d98b83eb683e44b0575d",
+    "records/source-gates/m2-optical-alternate-source-route-001-query-inventory-sanitized.json": "e674c692d35c71c9563d89201fcd08cdb27d5767331a8829794898bc5f59b9e0",
+    "records/source-gates/m2-optical-alternate-source-route-001-selection-manifest.json": "073f3644ee871d4c9fa9b9adf8cf182d7de047804499aeee36c14745aadf46c3"
+  },
+  "real_pixel_qa_or_map_claim": false,
+  "schema_version": "1.0",
+  "second_source_transfer_at_checkpoint_unverified": true,
+  "snapshot_not_route_terminal": true,
+  "source_or_derived_pixels_published": false,
+  "status": "pass_exact_checkpoint_publication_ci"
+}
