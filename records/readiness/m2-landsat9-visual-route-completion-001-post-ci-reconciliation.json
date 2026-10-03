@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-VISUAL-ROUTE-COMPLETION-001-POST-CI-RECONCILIATION",
+  "status": "terminal_inconclusive_visual_outcome_publication_verified_envelope_closed",
+  "recorded_at_utc": "2026-10-03T18:56:09.868108Z",
+  "terminal_ref": "records/readiness/m2-landsat9-visual-route-completion-001-terminal-reconciliation.json",
+  "terminal_sha256": "df69ca75ce96aae5faffb7402c55698a4af772e54502250bd106f8adfc33cc0b",
+  "terminal_public_commit": "f9bd4fef78b33341c72d6859de988038261323fa",
+  "terminal_public_ci_run_id": "37145959611",
+  "terminal_public_ci_conclusion": "success",
+  "terminal_public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/37145959611",
+  "implementation_commit": "23e3842073a858d94f322b23b42f223422d7ea40",
+  "implementation_public_ci_run_id": "37145603395",
+  "implementation_public_ci_conclusion": "success",
+  "approval_sha256": "9ba6d3366aa43f7e2d34fa44d9dd0f67ef1674099887ca6496c0677a695a7389",
+  "review_bundle_sha256": "22c6d4843838b363c851919fb9fd585fc6dbaf6850075b5dcc07e2c529ddab45",
+  "proposal_sha256": "7f4dc4bec11cea3f370f7efd26ab586360fad0e85e5b4f278cd7a7f279c38e6f",
+  "route_outcome": {
+    "metadata_audit": "pass_two_exact_sources",
+    "header_lattice": "pass_native_30m_epsg32645",
+    "real_worker_invocations": 1,
+    "qualifying_aois": [],
+    "paired_strict_valid_fraction": {
+      "AOI-SOURCE": 0.0,
+      "AOI-UPPER-CORRIDOR": 0.001777
+    },
+    "unchanged_visual_floor": 0.2,
+    "local_landsat_panel_created": false,
+    "mechanical_recovery_attempts": 0,
+    "automatic_retries": 0
+  },
+  "reconciliation": {
+    "source_archives_and_twenty_materialized_members_reverified": true,
+    "prior_consumed_attempts_preserved": true,
+    "primary_worker_supervisor_and_cleanup_receipts_durable": true,
+    "no_source_dates_masks_thresholds_or_scientific_predicates_changed": true,
+    "no_provider_request_or_credentials": true,
+    "no_change_analysis_or_attribution": true,
+    "no_public_derived_pixels": true,
+    "existing_radar_project_reverified_sha256": "603010d42bd4f4158c9d793d7dab9a41ce7fc39fe1e437bf11c9c3c39846fd71",
+    "long_term_goal_complete": false
+  },
+  "next_boundary": "This exact optical visual envelope is closed with a measured inconclusive result. The earlier partial radar visual remains available. Do not retry or tune the optical pair to force a map; any new source, changed method, registration or change-analysis route requires a separate coherent scoped decision. No scientific or final M6 result is claimed."
+}

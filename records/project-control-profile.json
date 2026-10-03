@@ -762,8 +762,10 @@
     "authority_ref": "records/source-gates/m2-landsat9-visual-route-completion-001-approval.json",
     "implementation_readiness_ref": "records/readiness/m2-landsat9-visual-route-completion-001-implementation-readiness.json",
     "prior_terminal_ref": "records/readiness/m2-landsat9-pixel-visual-recovery-001-terminal-reconciliation.json",
-    "next_action": "Finish sanitized terminal publication and exact post-CI reconciliation. The approved visual outcome is measured inconclusive: no AOI reached the unchanged 20 percent paired-valid floor, and no Landsat panel exists. Do not retry or change sources, dates, masks or thresholds to improve coverage. New source/method/change work requires a separate scoped decision; the long-term goal remains incomplete.",
+    "next_action": "This exact optical visual envelope is closed with a measured inconclusive result. The earlier partial radar visual remains available. Do not retry or tune the optical pair to force a map; any new source, changed method, registration or change-analysis route requires a separate coherent scoped decision. No scientific or final M6 result is claimed.",
     "terminal_ref": "records/readiness/m2-landsat9-visual-route-completion-001-terminal-reconciliation.json",
-    "terminal_sha256": "df69ca75ce96aae5faffb7402c55698a4af772e54502250bd106f8adfc33cc0b"
+    "terminal_sha256": "df69ca75ce96aae5faffb7402c55698a4af772e54502250bd106f8adfc33cc0b",
+    "post_ci_ref": "records/readiness/m2-landsat9-visual-route-completion-001-post-ci-reconciliation.json",
+    "post_ci_sha256": "97a98937d770d032a83e3bc4e5ec885e2cb777ff8fc362cae743f4ff7ba518fc"
   }
 }
