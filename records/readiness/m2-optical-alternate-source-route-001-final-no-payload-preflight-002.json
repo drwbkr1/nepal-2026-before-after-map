@@ -1,0 +1,21 @@
+{
+  "approval_sha256": "eea904b27f94d3055c9b98ed523b7f46c0bebf0ecd20fbe681d06fea2693a532",
+  "at_utc": "2026-10-03T21:41:01.916434Z",
+  "implementation_hashes": {
+    "scripts/optical_alternate_catalog_001.py": "911c61ba08a4b9b9f4e97d680bc4f1b1c7b886b75cfbca1af12d8f5665fd3f24",
+    "scripts/optical_alternate_intake_001.py": "8ceaf480e5aa9fa2da7dba4895be691c68054a80c4149267d3aa0e7f0bd4b082",
+    "scripts/optical_alternate_panel_arcgis_001.py": "cf539a8f1e84e6bb357a19c3f05a57ac6f091df9d296649cda79f7acab0af417",
+    "scripts/run_m2_optical_alternate_source_route_001.py": "26a82342c621344b91fa65a5786f5f82300b7da9cf72cf48e3722e45b784a004",
+    "scripts/validate_m2_optical_alternate_source_route_001_arcgis.py": "4e2fa4328294639596f06bc8bf99c241572be67ea7de8c9e40623ce30edb760c"
+  },
+  "implementation_public_ci_commit": "d24935f4ae8c438c94cbd66f02b793d85620f347",
+  "implementation_public_ci_run_id": "37155869587",
+  "mechanical_correction_record_sha256": "d36fcbd6c049bab10746b7ca795b2fc899432bc66fdb4767a5aa862691774f90",
+  "mechanical_metadata_recovery": true,
+  "metadata_http_budget": 18,
+  "provider_requests": 0,
+  "readiness_ref": "records\\readiness\\m2-optical-alternate-source-route-001-mechanical-recovery-001-implementation-readiness.json",
+  "readiness_sha256": "0d26311cf06c4216a7aae182e8cc83056c47b31fcf671be435fef45453003d6a",
+  "source_payload_or_pixel_access": false,
+  "status": "pass_final_no_content_preflight"
+}

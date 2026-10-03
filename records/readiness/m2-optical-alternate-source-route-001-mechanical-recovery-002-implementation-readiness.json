@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "status": "pass_portable_and_installed_disposable_tests",
+  "at_utc": "2026-10-03T21:48:15.885191Z",
+  "approval_sha256": "eea904b27f94d3055c9b98ed523b7f46c0bebf0ecd20fbe681d06fea2693a532",
+  "implementation_hashes": {
+    "scripts/optical_alternate_catalog_001.py": "d78d198482901015b824196b4f80abd01b943da3660b67a1906dfedca42a987a",
+    "scripts/optical_alternate_intake_001.py": "8ceaf480e5aa9fa2da7dba4895be691c68054a80c4149267d3aa0e7f0bd4b082",
+    "scripts/optical_alternate_panel_arcgis_001.py": "cf539a8f1e84e6bb357a19c3f05a57ac6f091df9d296649cda79f7acab0af417",
+    "scripts/run_m2_optical_alternate_source_route_001.py": "250b81e53f66749983ddfbb3609a05f750b4e0e0ef5238ba8f3af5533a669c59",
+    "scripts/validate_m2_optical_alternate_source_route_001_arcgis.py": "4e2fa4328294639596f06bc8bf99c241572be67ea7de8c9e40623ce30edb760c"
+  },
+  "portable_route_tests_passed": 30,
+  "tests_ref": "tests/test_optical_alternate_source_route_001.py",
+  "tests_sha256": "c158e8874fdc3ae39c53d51bf71036a2bf213f26981170095d1e09d565f98e69",
+  "installed_arcgis_disposable_end_to_end_pass": true,
+  "installed_synthetic_ref": "records/readiness/m2-optical-alternate-source-route-001-mechanical-recovery-002-arcgis-synthetic.json",
+  "installed_synthetic_sha256": "c433bb5710863d7ed02e8cae3ce142df3e339aa02526b5b463bb1b0a3d89bb91",
+  "installed_runtime_tests": 33,
+  "mechanical_correction_ref": "records/readiness/m2-optical-alternate-source-route-001-catalog-pagination-correction-002.json",
+  "mechanical_correction_sha256": "a59a2aba3a0ef54a8a3c7d1a76cd022499b87a491d0eefa8d86116c4b09fd5e2",
+  "prior_attempts_preserved_immutable": true,
+  "internal_efficiency_review_completed": true,
+  "observed_complete_count_and_superfluous_cursor_test_passed": true,
+  "preserved_page_not_re_requested": true,
+  "metadata_budget_not_reset": true,
+  "source_payload_requests": 0,
+  "scientific_claim": false
+}

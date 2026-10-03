@@ -141,6 +141,20 @@ class CatalogPolicyTests(unittest.TestCase):
             ledger = self.ledger(lambda *args: (200,"application/json",json.dumps(page).encode()))
             with self.assertRaises(catalog.PolicyStop): catalog.discover(ledger,GEOMETRIES)
 
+    def test_complete_count_ignores_superfluous_cursor_and_preserved_page_is_not_replayed(self):
+        item=feature();item['properties']['platform']='LANDSAT_8'
+        page={'type':'FeatureCollection','features':[item],'numberMatched':1,'numberReturned':1,
+              'links':[{'rel':'next','method':'GET','href':catalog.SEARCH+'?next=cursor'}]}
+        calls=[]
+        empty={'type':'FeatureCollection','features':[],'numberMatched':0,'numberReturned':0,'links':[]}
+        ledger=self.ledger(lambda *args:(calls.append(args) or (200,'application/json',json.dumps(empty).encode())))
+        out=catalog.discover(ledger,GEOMETRIES,preserved_complete_pages={('landsat-8','before'):page})
+        self.assertEqual(ledger.total,3)
+        self.assertEqual(len(calls),3)
+        self.assertEqual(out['queries'][0]['features_returned'],1)
+        self.assertTrue(out['dispositions'][0]['eligible'])
+        self.assertTrue(out['queries'][0]['uses_exact_preserved_complete_response_without_request_replay'])
+
     def test_budgets_and_response_caps_before_transport(self):
         ledger = self.ledger(lambda *args: (200,"application/json",b'{}'))
         for _ in range(8): ledger.request("search", catalog.SEARCH)

@@ -1,0 +1,46 @@
+{
+  "arcgis_version": "3.7.1",
+  "implementation_hashes": {
+    "scripts/optical_alternate_catalog_001.py": "d78d198482901015b824196b4f80abd01b943da3660b67a1906dfedca42a987a",
+    "scripts/optical_alternate_intake_001.py": "8ceaf480e5aa9fa2da7dba4895be691c68054a80c4149267d3aa0e7f0bd4b082",
+    "scripts/optical_alternate_panel_arcgis_001.py": "cf539a8f1e84e6bb357a19c3f05a57ac6f091df9d296649cda79f7acab0af417",
+    "scripts/run_m2_optical_alternate_source_route_001.py": "250b81e53f66749983ddfbb3609a05f750b4e0e0ef5238ba8f3af5533a669c59",
+    "scripts/validate_m2_optical_alternate_source_route_001_arcgis.py": "4e2fa4328294639596f06bc8bf99c241572be67ea7de8c9e40623ce30edb760c"
+  },
+  "portable_tests_after_arcpy_import": 33,
+  "project_data_or_external_custody_access": false,
+  "provider_requests": 0,
+  "sensors": [
+    {
+      "both_aoi_paired_valid_fraction": 1.0,
+      "fresh_reopen": {
+        "broken_layer_count": 0,
+        "map_count": 2,
+        "public_derived_pixel_publication": false,
+        "reopen_png_sha256": "e58b4ffb67be388c83370c41bb76718021370f97547fce59fb9530276b1a95ff",
+        "status": "pass_fresh_process_reopen"
+      },
+      "metadata_first_then_all_headers_then_pixels": true,
+      "panel_sha256": "e58b4ffb67be388c83370c41bb76718021370f97547fce59fb9530276b1a95ff",
+      "qa_supervisor_terminal_and_cleanup_persisted": true,
+      "sensor": 8,
+      "source_labels_exact": true
+    },
+    {
+      "both_aoi_paired_valid_fraction": 1.0,
+      "fresh_reopen": {
+        "broken_layer_count": 0,
+        "map_count": 2,
+        "public_derived_pixel_publication": false,
+        "reopen_png_sha256": "6eebd463c164a1a0443807fb60063f4b05a779d512acbcda2ad4538ac24ad1b4",
+        "status": "pass_fresh_process_reopen"
+      },
+      "metadata_first_then_all_headers_then_pixels": true,
+      "panel_sha256": "6eebd463c164a1a0443807fb60063f4b05a779d512acbcda2ad4538ac24ad1b4",
+      "qa_supervisor_terminal_and_cleanup_persisted": true,
+      "sensor": 9,
+      "source_labels_exact": true
+    }
+  ],
+  "status": "pass_disposable_installed_arcgis_alternate_route_synthetic"
+}

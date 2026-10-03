@@ -260,9 +260,12 @@ class MetadataLedger:
     def sealed_budget(path):
         path = Path(path)
         terminal = read(path / "terminal.json")
-        if terminal.get("status") != "defer_no_eligible_metadata_pair" or terminal.get("pairs") != []:
+        expected_empty = terminal.get("status") == "defer_no_eligible_metadata_pair" and terminal.get("pairs") == []
+        expected_parser_stop = terminal.get("status") == "stopped_metadata_no_selection" and terminal.get("failure_code") == "pagination_query_scope_unresolved"
+        if not (expected_empty or expected_parser_stop):
             raise PolicyStop("prior_metadata_terminal_not_expected")
-        counts, total, outcomes = {key: 0 for key in LIMITS}, 0, []
+        inherited = read(path / "inherited-budget.json") if (path / "inherited-budget.json").is_file() else None
+        counts, total, outcomes = (dict(inherited["prior_counts"]), inherited["prior_request_count"], []) if inherited else ({key: 0 for key in LIMITS}, 0, [])
         for intent_path in sorted(path.glob("request-*-intent.json")):
             intent = read(intent_path); n = intent["number"]
             if n != total + 1:
@@ -335,7 +338,7 @@ class MetadataLedger:
                 values = {key: value[0] for key, value in values.items()}
             else:
                 values = body
-            if not isinstance(values, dict) or set(values) - set(self.query_context) - {"token"}:
+            if not isinstance(values, dict) or set(values) - set(self.query_context) - {"token", "next"}:
                 raise PolicyStop("pagination_query_scope_unresolved")
             for key, expected in self.query_context.items():
                 value = values.get(key)
@@ -391,7 +394,7 @@ class MetadataLedger:
         return data
 
 
-def discover(ledger, geometries):
+def discover(ledger, geometries, *, preserved_complete_pages=None):
     from shapely.geometry import shape
     from shapely.ops import unary_union
     bbox = list(unary_union([shape(g) for g in geometries.values()]).bounds)
@@ -411,7 +414,8 @@ def discover(ledger, geometries):
             if fingerprint in seen:
                 raise PolicyStop("pagination_cycle_incomplete")
             seen.add(fingerprint)
-            data = ledger.request("search", url, method, body)
+            preserved = (preserved_complete_pages or {}).get((sensor, role))
+            data = preserved if len(seen) == 1 and preserved is not None else ledger.request("search", url, method, body)
             if not isinstance(data, dict) or data.get("type") != "FeatureCollection" or not isinstance(data.get("features"), list):
                 raise PolicyStop("search_schema_incomplete")
             features = data["features"]
@@ -425,6 +429,12 @@ def discover(ledger, geometries):
             if len(next_links) > 1:
                 raise PolicyStop("pagination_ambiguous_incomplete")
             matched = data.get("numberMatched", data.get("context", {}).get("matched"))
+            if isinstance(matched, int) and not isinstance(matched, bool) and matched == returned:
+                # USGS can advertise a cursor even when every match is already
+                # returned. The explicit complete count needs no extra request.
+                break
+            if matched is not None and (isinstance(matched, bool) or not isinstance(matched, int) or matched < returned):
+                raise PolicyStop("pagination_count_incomplete")
             if not next_links:
                 if matched is not None and (not isinstance(matched, int) or matched != returned):
                     raise PolicyStop("pagination_count_incomplete")
@@ -438,7 +448,8 @@ def discover(ledger, geometries):
             if method == "POST" and link.get("merge"):
                 raise PolicyStop("pagination_merge_semantics_unresolved")
         queries.append({"platform": sensor, "role": role, "features_returned": returned,
-                        "pages": len(seen), "complete": True})
+                        "pages": len(seen), "complete": True,
+                        "uses_exact_preserved_complete_response_without_request_replay": (sensor,role) in (preserved_complete_pages or {})})
     return {"queries": queries, "complete": True, "inventory": inventory, "dispositions": dispositions}
 
 

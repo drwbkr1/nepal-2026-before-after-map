@@ -769,12 +769,13 @@
     "post_ci_sha256": "97a98937d770d032a83e3bc4e5ec885e2cb777ff8fc362cae743f4ff7ba518fc"
   },
   "active_optical_alternate_source_route": {
-    "checkpoint_id": "M2-OPTICAL-ALTERNATE-SOURCE-ROUTE-001-CATALOG-MECHANICAL-RECOVERY-001-CI-PENDING",
+    "checkpoint_id": "M2-OPTICAL-ALTERNATE-SOURCE-ROUTE-001-CATALOG-MECHANICAL-RECOVERY-002-CI-PENDING",
     "authority_ref": "records/source-gates/m2-optical-alternate-source-route-001-approval.json",
     "proposal_ref": "contracts/milestone-002-optical-alternate-source-route-001-proposal.json",
     "review_bundle_ref": "reviews/m2-optical-alternate-source-route-001/review-bundle.json",
-    "implementation_readiness_ref": "records/readiness/m2-optical-alternate-source-route-001-mechanical-recovery-001-implementation-readiness.json",
-    "next_action": "Verify fresh public implementation CI and no-payload recovery preflight; execute corrected fixed-order provider platform serialization in metadata-recovery-001 without resetting request caps. Approval remains effective; no source payload, pixel or scientific action has started.",
-    "preserved_metadata_attempt_ref": "records/readiness/m2-optical-alternate-source-route-001-metadata-attempt-001-reconciliation.json"
+    "implementation_readiness_ref": "records/readiness/m2-optical-alternate-source-route-001-mechanical-recovery-002-implementation-readiness.json",
+    "next_action": "Verify fresh public implementation CI and no-payload preflight; interpret the preserved complete first query without request replay, then execute the three remaining queries and shortlisted details within unchanged cumulative request caps. No source payload or pixels started.",
+    "preserved_metadata_attempt_ref": "records/readiness/m2-optical-alternate-source-route-001-metadata-attempt-001-reconciliation.json",
+    "preserved_metadata_recovery_ref": "records/readiness/m2-optical-alternate-source-route-001-metadata-recovery-001-reconciliation.json"
   }
 }

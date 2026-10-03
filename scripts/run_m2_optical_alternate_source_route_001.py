@@ -39,6 +39,9 @@ RECOVERY_DISCOVERY = DATA / ".attempt-events" / SCOPE / "metadata-recovery-001"
 MECHANICAL = ROOT / "records/readiness/m2-optical-alternate-source-route-001-catalog-serialization-correction-001.json"
 READINESS = ROOT / "records/readiness/m2-optical-alternate-source-route-001-implementation-readiness.json"
 MECHANICAL_READINESS = ROOT / "records/readiness/m2-optical-alternate-source-route-001-mechanical-recovery-001-implementation-readiness.json"
+RECOVERY2_DISCOVERY = DATA / ".attempt-events" / SCOPE / "metadata-recovery-002"
+MECHANICAL2 = ROOT / "records/readiness/m2-optical-alternate-source-route-001-catalog-pagination-correction-002.json"
+MECHANICAL2_READINESS = ROOT / "records/readiness/m2-optical-alternate-source-route-001-mechanical-recovery-002-implementation-readiness.json"
 
 
 def code_hashes():
@@ -52,12 +55,14 @@ def controls():
             raise policy.PolicyStop("frozen_method_hash_drift")
 
 
-def preflight(commit, run, mechanical=False):
+def preflight(commit, run, mechanical=False, mechanical_version=1):
     """No provider, source, TIFF or pixel read. Exact public CI checked live."""
     controls()
     if not re.fullmatch(r"[a-f0-9]{40}", commit) or not re.fullmatch(r"\d{8,20}", run):
         raise policy.PolicyStop("implementation_ci_reference_invalid")
-    readiness_path = MECHANICAL_READINESS if mechanical else READINESS
+    if mechanical_version not in (1,2):
+        raise policy.PolicyStop("mechanical_recovery_identity_invalid")
+    readiness_path = (MECHANICAL2_READINESS if mechanical_version == 2 else MECHANICAL_READINESS) if mechanical else READINESS
     readiness = read(readiness_path)
     if (readiness.get("status") != "pass_portable_and_installed_disposable_tests"
             or readiness.get("implementation_hashes") != code_hashes()
@@ -75,26 +80,33 @@ def preflight(commit, run, mechanical=False):
             raise policy.PolicyStop("public_implementation_byte_mismatch")
     if not RUNTIME.is_file() or not DATA.is_dir() or shutil.disk_usage(DATA).free < intake.MIN_FREE:
         raise policy.PolicyStop("runtime_or_disk_preflight_invalid")
-    search_root = RECOVERY_DISCOVERY if mechanical else DISCOVERY
+    search_root = (RECOVERY2_DISCOVERY if mechanical_version == 2 else RECOVERY_DISCOVERY) if mechanical else DISCOVERY
     for root in (search_root, DATA / "processing" / SCOPE, DATA / ".intake-staging" / SCOPE):
         policy.safe_path(DATA, root)
         if root.exists() or root.is_symlink():
             raise policy.PolicyStop("fresh_route_root_collision")
     if mechanical:
-        correction = read(MECHANICAL)
+        correction_path = MECHANICAL2 if mechanical_version == 2 else MECHANICAL
+        correction = read(correction_path)
         if correction.get("status") != "classified_agent_catalog_serialization_correction_within_unchanged_envelope":
             raise policy.PolicyStop("mechanical_correction_record_invalid")
         for ref, expected in correction["preserved_metadata_attempt_files"].items():
             if sha(DISCOVERY / ref) != expected:
                 raise policy.PolicyStop("consumed_metadata_attempt_drift")
         policy.MetadataLedger.sealed_budget(DISCOVERY)
+        if mechanical_version == 2:
+            for ref, expected in correction["preserved_recovery_001_files"].items():
+                if sha(RECOVERY_DISCOVERY / ref) != expected:
+                    raise policy.PolicyStop("consumed_metadata_recovery_attempt_drift")
+            policy.MetadataLedger.sealed_budget(RECOVERY_DISCOVERY)
     return {"status": "pass_final_no_content_preflight", "at_utc": now(), "approval_sha256": policy.APPROVAL_SHA,
             "implementation_hashes": code_hashes(), "implementation_public_ci_commit": commit,
             "implementation_public_ci_run_id": run, "readiness_sha256": sha(readiness_path),
             "readiness_ref": str(readiness_path.relative_to(ROOT)),
             "source_payload_or_pixel_access": False, "provider_requests": 0, "metadata_http_budget": 18,
             "mechanical_metadata_recovery": mechanical,
-            "mechanical_correction_record_sha256": sha(MECHANICAL) if mechanical else None}
+            "mechanical_recovery_number": mechanical_version if mechanical else None,
+            "mechanical_correction_record_sha256": sha(MECHANICAL2 if mechanical_version == 2 else MECHANICAL) if mechanical else None}
 
 
 def validate_gate(gate):
@@ -102,7 +114,7 @@ def validate_gate(gate):
     if (gate.get("status") != "pass_final_no_content_preflight" or gate.get("approval_sha256") != policy.APPROVAL_SHA
             or gate.get("implementation_hashes") != code_hashes()):
         raise policy.PolicyStop("exact_preflight_gate_invalid")
-    if gate.get("mechanical_metadata_recovery") and sha(MECHANICAL) != gate.get("mechanical_correction_record_sha256"):
+    if gate.get("mechanical_metadata_recovery") and sha(MECHANICAL2 if gate.get("mechanical_recovery_number")==2 else MECHANICAL) != gate.get("mechanical_correction_record_sha256"):
         raise policy.PolicyStop("mechanical_correction_record_drift")
 
 
@@ -116,13 +128,14 @@ def rights_check(html):
 def discovery_once(gate):
     validate_gate(gate)
     mechanical = gate.get("mechanical_metadata_recovery", False)
-    discovery_root = RECOVERY_DISCOVERY if mechanical else DISCOVERY
+    version = gate.get("mechanical_recovery_number",1)
+    discovery_root = (RECOVERY2_DISCOVERY if version==2 else RECOVERY_DISCOVERY) if mechanical else DISCOVERY
     fallback = DATA / ".attempt-fallback" / SCOPE / discovery_root.name
     if fallback.exists():
         raise policy.PolicyStop("metadata_attempt_already_consumed")
     fallback.mkdir(parents=True, exist_ok=False)
     write_new(fallback / "ready.json", {"at_utc": now(), "status": "fallback_reserved_before_http"})
-    seed = policy.MetadataLedger.sealed_budget(DISCOVERY) if mechanical else None
+    seed = policy.MetadataLedger.sealed_budget(RECOVERY_DISCOVERY if version==2 else DISCOVERY) if mechanical else None
     ledger = policy.MetadataLedger(discovery_root, seed=seed)
     terminal = {"status": "stopped_metadata_no_selection", "source_payload_requests": 0}
     try:
@@ -142,7 +155,8 @@ def discovery_once(gate):
                     "official_page": policy.RIGHTS, "at_utc": now(), "rights_read_number": ledger.total,
                     "verification_origin": rights_status, "account_or_terms_action": False})
         geometries = policy.focus_geometries()
-        discovery = policy.discover(ledger, geometries)
+        preserved = {("landsat-8","before"): read(RECOVERY_DISCOVERY / "response-07.json")} if mechanical and version==2 else None
+        discovery = policy.discover(ledger, geometries, preserved_complete_pages=preserved)
         terminal = policy.lock_selection(ledger, discovery, geometries)
     except BaseException as exc:
         terminal["failure_code"] = str(exc) if isinstance(exc, policy.PolicyStop) else "unclassified_metadata_failure"
@@ -481,12 +495,13 @@ def main():
     parser.add_argument("--stage")
     parser.add_argument("--selection")
     parser.add_argument("--mechanical-metadata-recovery", action="store_true")
+    parser.add_argument("--mechanical-recovery-number", type=int, default=1)
     args = parser.parse_args()
     try:
         if args.mode == "worker":
             return worker_once(Path(args.gate))
         if args.mode == "preflight":
-            result = preflight(args.public_ci_commit, args.public_ci_run, args.mechanical_metadata_recovery)
+            result = preflight(args.public_ci_commit, args.public_ci_run, args.mechanical_metadata_recovery, args.mechanical_recovery_number)
         elif args.mode == "discover":
             result = discovery_once(read(args.gate))
         elif args.mode == "stage-preflight":

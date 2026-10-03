@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "status": "terminal_preserved_after_complete_first_corrected_query_parser_stop",
+  "at_utc": "2026-10-03T21:48:15.985665Z",
+  "public_implementation_commit": "d24935f4ae8c438c94cbd66f02b793d85620f347",
+  "public_ci_run_id": 37155869587,
+  "public_ci_conclusion": "success",
+  "public_ci_tests": 1198,
+  "public_ci_skips": 19,
+  "external_terminal_sha256": "fa8f5ceead7fb28f9e0a508e3bcd31ada6f928d21051d81407016e10d6ab2c78",
+  "observed_requests": 7,
+  "observed_source_payload_requests": 0,
+  "observed_failure_code": "pagination_query_scope_unresolved",
+  "corrected_before_query_complete_matches": 4,
+  "next_link_request_sent": false,
+  "metadata_selection_locked": false,
+  "classification_ref": "records/readiness/m2-optical-alternate-source-route-001-catalog-pagination-correction-002.json",
+  "next_action": "Read exact preserved complete metadata page in a fresh distinct local process, then perform only the three remaining fixed-order queries under cumulative 8-page/18-total caps."
+}
