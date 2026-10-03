@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-VISUAL-ROUTE-COMPLETION-001-IMPLEMENTATION-READINESS",
+  "recorded_at_utc": "2026-10-03T18:48:11.799103Z",
+  "status": "pass_local_synthetic_gates_public_implementation_ci_pending",
+  "authority": {
+    "approval_ref": "records/source-gates/m2-landsat9-visual-route-completion-001-approval.json",
+    "approval_sha256": "9ba6d3366aa43f7e2d34fa44d9dd0f67ef1674099887ca6496c0677a695a7389",
+    "proposal_sha256": "7f4dc4bec11cea3f370f7efd26ab586360fad0e85e5b4f278cd7a7f279c38e6f",
+    "review_bundle_sha256": "22c6d4843838b363c851919fb9fd585fc6dbaf6850075b5dcc07e2c529ddab45",
+    "approval_public_commit": "ff6f170d070bc2fc8e68c8fbbb3a7a81a9e2b27c",
+    "approval_public_ci_run_id": "37144804387",
+    "approval_public_ci_conclusion": "success"
+  },
+  "implementation_hashes": {
+    "scripts/landsat9_grouped_visual_metadata_001.py": "53b2212040d917b820542afd7785c9c472adbe98a8d6b1cae75ed68d065155df",
+    "scripts/run_m2_landsat9_visual_route_completion_001.py": "51fd52ba626cdbef6d83fd3787ec2c44b478882e9b5b04476fa043d8565f27f9",
+    "scripts/validate_m2_landsat9_visual_route_completion_001_arcgis.py": "1d96e99a778fafcab388a03000f54fed3f78b6faad4f5e0b0298c07307d2c0aa",
+    "tests/test_landsat9_visual_route_completion_001.py": "6eddde0f66d36227805dd62422e551396c52fc3f05ce358f62fdd8a5ec5fcd41"
+  },
+  "portable_verification": {
+    "focused_final_tests": 20,
+    "focused_result": "pass",
+    "repository_intermediate_revision_tests": 1169,
+    "repository_intermediate_revision_skipped": 6,
+    "repository_intermediate_revision_result": "pass; final public CI required"
+  },
+  "installed_arcgis_disposable_synthetic": {
+    "status": "pass_disposable_installed_arcgis_completion_synthetic",
+    "arcgis_version": "3.7.1",
+    "portable_tests_after_arcpy_import": 33,
+    "fixed_source_order": [
+      "before",
+      "after"
+    ],
+    "full_frozen_route_with_grouped_metadata": true,
+    "both_aoi_paired_valid_fraction": 1.0,
+    "fresh_process_reopen": true,
+    "supervisor_cleanup_persisted": true,
+    "project_data_or_external_custody_access": false
+  },
+  "implementation_design": "Separate exact-path ODL/XML adapter reuses unchanged grouped identity validator. A private-process binding changes only metadata adapter, approval controls, fresh roots, timestamps, durable receipt writes and markers. Frozen scientific files and both consumed attempts remain immutable. Independent supervisor intent and fallback precede one worker; fixed-order two-source metadata-only audit precedes headers/pixels. Classified mechanical remediation remains within the approved outcome envelope; scientific/identity/unclassified failures stop.",
+  "remaining_gates": [
+    "fresh public implementation CI",
+    "no-content preflight",
+    "bounded metadata-only audit",
+    "fresh no-content worker preflight",
+    "exact-source visual route and conditional rendered verification",
+    "sanitized terminal publication"
+  ],
+  "real_content_access_started": false,
+  "scientific_method_change": false,
+  "provider_requests": 0
+}

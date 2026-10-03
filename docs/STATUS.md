@@ -8,6 +8,12 @@
 - **Long-term goal:** Active
 - **Current checkpoint:** `M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001` has a terminal local visual-only panel. The approved `M2-ASF-PARTIAL-VV-DELTA-MAP-001` route stopped before a real attempt because 30 independently stable control windows could not be predeclared from the event-only staged rasters. The one exact after-job, ZIP, pair-stage, and panel attempts are consumed; both RTC scenes remain full-area `defer`. The earlier radar recovery-002 attempt remains terminal and consumed. Registration, clean-machine portability, baseline admission, change analysis, attribution, public pixels, and scientific publication remain unverified or unauthorized.
 
+## Landsat-9 visual route completion authorized - 2026-10-03
+
+The owner approved the exact remaining-route proposal `7f4dc4bec11cea3f370f7efd26ab586360fad0e85e5b4f278cd7a7f279c38e6f` and bundle `22c6d4843838b363c851919fb9fd585fc6dbaf6850075b5dcc07e2c529ddab45` as one outcome-scoped envelope, including narrowly classified mechanical remediation and sanitized terminal publication without intermediate reconfirmation. Approval publication commit `ff6f170d070bc2fc8e68c8fbbb3a7a81a9e2b27c` passed public CI run `37144804387`.
+
+The new exact-group ODL/XML adapter retains all source identities and frozen scientific predicates. Twenty final focused tests pass, and installed ArcGIS Pro 3.7.1 passed 33 metadata/supervision tests and a complete disposable before/after header, pixel, two-AOI, export and fresh-reopen route. [Implementation readiness](../records/readiness/m2-landsat9-visual-route-completion-001-implementation-readiness.json) remains conditional on fresh public implementation CI, no-content preflight and the two-source metadata-only audit before real TIFF/pixel access. Both earlier attempts remain terminal and immutable. No new real content, map or scientific result has been produced by this implementation.
+
 ## Landsat-9 visual recovery stopped at metadata — 2026-10-03
 
 The owner approved the exact recovery-001 packet as one conditional envelope. Approval commit `afd36b1f43e2c6f38f175eefef933551b41752ad` passed public CI run `37140695731`; the versioned supervisor implementation at `7d087e4fa9edb92fa568a69165e3138a789071c2` passed run `37141856825`, 13 focused recovery tests, and installed ArcGIS Pro 3.7.1 disposable synthetic validation with a fresh-process panel reopen. The final no-content preflight passed before the single new `landsat9-pixel-visual-recovery-001-real-002` worker.
