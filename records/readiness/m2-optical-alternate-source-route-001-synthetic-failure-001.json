@@ -1,0 +1,10 @@
+{
+  "status": "terminal_disposable_runtime_import_failure_before_inputs",
+  "at_utc": "2026-10-03T21:26:14.561303+00:00",
+  "observed_missing_dependency": "shapely",
+  "failure_boundary": "Eager catalog-module import in installed ArcGIS runtime",
+  "classified_agent_owned_correction": "Move catalog geometry imports to discovery-only functions; use generated locked identities in ArcGIS-only tests. No installation or scientific predicate change.",
+  "source_or_external_custody_access": false,
+  "provider_requests": 0,
+  "attempt_reused": false
+}

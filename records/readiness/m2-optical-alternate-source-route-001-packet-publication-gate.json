@@ -1,0 +1,11 @@
+{
+  "status": "pass_exact_approved_packet_public_ci",
+  "at_utc": "2026-10-03T21:29:48.943133Z",
+  "commit": "7e299add5fc3322bc964fbfd0ea1ac1c1af6e23d",
+  "public_ci_run_id": 37153913511,
+  "public_ci_conclusion": "success",
+  "approval_sha256": "eea904b27f94d3055c9b98ed523b7f46c0bebf0ecd20fbe681d06fea2693a532",
+  "proposal_sha256": "9ff230d9edc31fb6df5afeda4ca8bf115ca105ea084ccd0e770fe3b188c765a7",
+  "bundle_sha256": "98ab5b8969692461bc5e2c128ac99b1df9f1770c6b1e46e3734cc6d027d57d07",
+  "provider_or_source_content_access": false
+}

@@ -767,5 +767,13 @@
     "terminal_sha256": "df69ca75ce96aae5faffb7402c55698a4af772e54502250bd106f8adfc33cc0b",
     "post_ci_ref": "records/readiness/m2-landsat9-visual-route-completion-001-post-ci-reconciliation.json",
     "post_ci_sha256": "97a98937d770d032a83e3bc4e5ec885e2cb777ff8fc362cae743f4ff7ba518fc"
+  },
+  "active_optical_alternate_source_route": {
+    "checkpoint_id": "M2-OPTICAL-ALTERNATE-SOURCE-ROUTE-001-IMPLEMENTATION-CI-PENDING",
+    "authority_ref": "records/source-gates/m2-optical-alternate-source-route-001-approval.json",
+    "proposal_ref": "contracts/milestone-002-optical-alternate-source-route-001-proposal.json",
+    "review_bundle_ref": "reviews/m2-optical-alternate-source-route-001/review-bundle.json",
+    "implementation_readiness_ref": "records/readiness/m2-optical-alternate-source-route-001-implementation-readiness.json",
+    "next_action": "Verify exact public implementation CI, then no-payload preflight and bounded fixed-order metadata discovery. The fixed-policy envelope remains authoritative through sanitized terminal publication; no intermediate reconfirmation. Prior consumed attempts and scientific exclusions remain immutable."
   }
 }
