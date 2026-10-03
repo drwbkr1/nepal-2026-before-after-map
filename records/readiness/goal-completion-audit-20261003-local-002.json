@@ -1,0 +1,384 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-GOAL-COMPLETION-AUDIT-20261003-LOCAL-002",
+  "checked_at_utc": "2026-10-03T19:08:21.198877Z",
+  "status": "objective_incomplete_optical_route_closed_next_source_decision_needed",
+  "previous_goal_turn_classification": "progress",
+  "previous_turn_delta": "Implemented and published group-aware metadata/supervision; audited both real metadata pairs; completed one fresh exact-source header and pixel run; established paired-valid 0 and 0.001777; closed with preserved inconclusive QA and no Landsat panel. This changes the next eligible action to new-source discovery or independently validated registration, not a retry.",
+  "audit_scope": "Read-only canonical contracts and public terminal/QA receipts; no source pixels, ArcPy, provider query, acquisition, package operation, terms, credentials, publication or scientific adoption in this audit. Evidence gaps are reported unverified, not inferred globally absent.",
+  "head": "3ddece18810448b1775343511f965e947887ce67",
+  "evidence_hashes": {
+    "records/readiness/m2-landsat9-visual-route-completion-001-terminal-reconciliation.json": "df69ca75ce96aae5faffb7402c55698a4af772e54502250bd106f8adfc33cc0b",
+    "records/readiness/m2-landsat9-visual-route-completion-001-post-ci-reconciliation.json": "97a98937d770d032a83e3bc4e5ec885e2cb777ff8fc362cae743f4ff7ba518fc",
+    "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-reconciliation.json": "561a9c0cea0dfd708d8b5feef14b6950be4e85b7063288ca3c4f5e9683552f56",
+    "records/readiness/m2-asf-reference-control-vv-delta-map-002-pre-approval-withdrawal.json": "c77a3cfb3eff1398ae3bbdce4f986c86aa7e335e2f1b72df8bc2778a98b0f67f",
+    "records/readiness/m2-asf-registration-boundary-screen-004-local-reconciliation.json": "526b8ad75a09a986be0ae02c4ec06080d77060afd852086ddf8660a59908fc45",
+    "config/qa/change-evidence-contract.json": "fc2d18fa758d25b212361110ec9dba2611ba447611a2f7a284f5d1859b0ad33e",
+    "config/qa/arcgis-final-delivery-contract.json": "a3eda86374e77e4c8dbc48ff7a37b0f3766119878a65b95ff137477ba497527d",
+    "records/readiness/goal-completion-audit-20261003-local-001.json": "8ae259024c6215e353e244500572381edd70a2f445abbd6bc5d79f7cb9cd378e"
+  },
+  "objective_requirements": [
+    {
+      "requirement": "Credible before/after source identity and custody",
+      "disposition": "verified_for_exact_current_archives_not_universal_usability",
+      "evidence_refs": [
+        "records/readiness/m2-landsat9-visual-route-completion-001-terminal-reconciliation.json",
+        "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-reconciliation.json"
+      ],
+      "limit": "Landsat metadata, sixteen TIFF headers, source hashes and native grid passed; both focus AOIs failed paired optical usability. Radar full-area decisions remain defer."
+    },
+    {
+      "requirement": "Observable change mapped in EPSG:32645",
+      "disposition": "not_established",
+      "evidence_refs": [
+        "records/readiness/m2-landsat9-visual-route-completion-001-terminal-reconciliation.json",
+        "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-reconciliation.json",
+        "config/qa/change-evidence-contract.json"
+      ],
+      "limit": "No qualifying Landsat panel; existing radar product is visual only with unmeasured registration. No adopted Landsat M4 route or admitted scientific change observation."
+    },
+    {
+      "requirement": "Separate observation, interpretation and attribution with uncertainty",
+      "disposition": "schema_and_controls_predeclared_scientific_links_unverified",
+      "evidence_refs": [
+        "config/arcgis/evidence-workspace-schema.json",
+        "config/qa/change-evidence-contract.json"
+      ],
+      "limit": "An explicit no-attribution statement is not the reviewed nonempty linked observation, interpretation, attribution and QA record required by final delivery."
+    },
+    {
+      "requirement": "Preserve failed, deferred and inconclusive evidence",
+      "disposition": "verified_current_routes",
+      "evidence_refs": [
+        "records/readiness/m2-landsat9-visual-route-completion-001-terminal-reconciliation.json",
+        "records/readiness/m2-landsat9-visual-route-completion-001-post-ci-reconciliation.json",
+        "records/readiness/m2-asf-reference-control-vv-delta-map-002-pre-approval-withdrawal.json",
+        "records/readiness/m2-asf-registration-boundary-screen-004-local-reconciliation.json"
+      ],
+      "limit": "Consumed attempts, withdrawn false-pass methods, full-area radar defer and inconclusive optical QA remain distinct. This requirement alone does not establish scientific completion."
+    },
+    {
+      "requirement": "Projected, reviewable ArcGIS map and export",
+      "disposition": "partial_local_visual_only",
+      "evidence_refs": [
+        "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-reconciliation.json",
+        "records/readiness/goal-completion-audit-20261003-local-001.json"
+      ],
+      "limit": "Historical partial ASF panel is projected and has prior local reopen evidence; it is not a registered change map or final package."
+    },
+    {
+      "requirement": "Reproducibility and source-safe public controls",
+      "disposition": "implementation_and_terminal_controls_verified_scope_limited",
+      "evidence_refs": [
+        "records/readiness/m2-landsat9-visual-route-completion-001-terminal-reconciliation.json",
+        "records/readiness/m2-landsat9-visual-route-completion-001-post-ci-reconciliation.json"
+      ],
+      "limit": "Current commit 3ddece18810448b1775343511f965e947887ce67 passed public CI 37146068632. Green CI proves control/tests, not M3-M6 science or portable final artifacts."
+    }
+  ],
+  "m6_artifact_requirements": [
+    {
+      "artifact_class": "arcgis_project",
+      "suffix": ".aprx",
+      "minimum_count": 1,
+      "disposition": "final_scientific_artifact_not_verified",
+      "proof_needed": "Accepted final-delivery manifest, exact artifact hash, source/rights audit and required independent reopen/export evidence; local metadata/partial visual counterparts do not satisfy this requirement."
+    },
+    {
+      "artifact_class": "file_geodatabase",
+      "suffix": ".gdb",
+      "minimum_count": 1,
+      "disposition": "final_scientific_artifact_not_verified",
+      "proof_needed": "Accepted final-delivery manifest, exact artifact hash, source/rights audit and required independent reopen/export evidence; local metadata/partial visual counterparts do not satisfy this requirement."
+    },
+    {
+      "artifact_class": "layer_file",
+      "suffix": ".lyrx",
+      "minimum_count": 5,
+      "disposition": "final_scientific_artifact_not_verified",
+      "proof_needed": "Accepted final-delivery manifest, exact artifact hash, source/rights audit and required independent reopen/export evidence; local metadata/partial visual counterparts do not satisfy this requirement."
+    },
+    {
+      "artifact_class": "analysis_geotiff",
+      "suffix": ".tif",
+      "minimum_count": 1,
+      "disposition": "final_scientific_artifact_not_verified",
+      "proof_needed": "Accepted final-delivery manifest, exact artifact hash, source/rights audit and required independent reopen/export evidence; local metadata/partial visual counterparts do not satisfy this requirement."
+    },
+    {
+      "artifact_class": "interoperable_geopackage",
+      "suffix": ".gpkg",
+      "minimum_count": 1,
+      "disposition": "final_scientific_artifact_not_verified",
+      "proof_needed": "Accepted final-delivery manifest, exact artifact hash, source/rights audit and required independent reopen/export evidence; local metadata/partial visual counterparts do not satisfy this requirement."
+    },
+    {
+      "artifact_class": "project_package",
+      "suffix": ".ppkx",
+      "minimum_count": 1,
+      "disposition": "final_scientific_artifact_not_verified",
+      "proof_needed": "Accepted final-delivery manifest, exact artifact hash, source/rights audit and required independent reopen/export evidence; local metadata/partial visual counterparts do not satisfy this requirement."
+    },
+    {
+      "artifact_class": "map_png",
+      "suffix": ".png",
+      "minimum_count": 5,
+      "disposition": "final_scientific_artifact_not_verified",
+      "proof_needed": "Accepted final-delivery manifest, exact artifact hash, source/rights audit and required independent reopen/export evidence; local metadata/partial visual counterparts do not satisfy this requirement."
+    },
+    {
+      "artifact_class": "map_pdf",
+      "suffix": ".pdf",
+      "minimum_count": 5,
+      "disposition": "final_scientific_artifact_not_verified",
+      "proof_needed": "Accepted final-delivery manifest, exact artifact hash, source/rights audit and required independent reopen/export evidence; local metadata/partial visual counterparts do not satisfy this requirement."
+    },
+    {
+      "artifact_class": "artifact_manifest",
+      "suffix": ".json",
+      "minimum_count": 1,
+      "disposition": "final_scientific_artifact_not_verified",
+      "proof_needed": "Accepted final-delivery manifest, exact artifact hash, source/rights audit and required independent reopen/export evidence; local metadata/partial visual counterparts do not satisfy this requirement."
+    },
+    {
+      "artifact_class": "delivery_readme",
+      "suffix": ".md",
+      "minimum_count": 1,
+      "disposition": "final_scientific_artifact_not_verified",
+      "proof_needed": "Accepted final-delivery manifest, exact artifact hash, source/rights audit and required independent reopen/export evidence; local metadata/partial visual counterparts do not satisfy this requirement."
+    }
+  ],
+  "m6_map_requirements": [
+    {
+      "name": "regional_overview",
+      "disposition": "complete_scientific_map_not_verified",
+      "proof_needed": "Final named map with linked reviewed evidence, visible exclusions, required layout elements and individually inspected export."
+    },
+    {
+      "name": "source_area_comparison",
+      "disposition": "complete_scientific_map_not_verified",
+      "proof_needed": "Final named map with linked reviewed evidence, visible exclusions, required layout elements and individually inspected export."
+    },
+    {
+      "name": "upper_corridor_comparison",
+      "disposition": "complete_scientific_map_not_verified",
+      "proof_needed": "Final named map with linked reviewed evidence, visible exclusions, required layout elements and individually inspected export."
+    },
+    {
+      "name": "evidence_map",
+      "disposition": "complete_scientific_map_not_verified",
+      "proof_needed": "Final named map with linked reviewed evidence, visible exclusions, required layout elements and individually inspected export."
+    },
+    {
+      "name": "limitations_map",
+      "disposition": "complete_scientific_map_not_verified",
+      "proof_needed": "Final named map with linked reviewed evidence, visible exclusions, required layout elements and individually inspected export."
+    }
+  ],
+  "m6_layout_requirements": [
+    {
+      "name": "title",
+      "disposition": "all_five_final_maps_not_verified"
+    },
+    {
+      "name": "before_after_dates",
+      "disposition": "all_five_final_maps_not_verified"
+    },
+    {
+      "name": "legend",
+      "disposition": "all_five_final_maps_not_verified"
+    },
+    {
+      "name": "scale_bar",
+      "disposition": "all_five_final_maps_not_verified"
+    },
+    {
+      "name": "north_arrow",
+      "disposition": "all_five_final_maps_not_verified"
+    },
+    {
+      "name": "crs_statement",
+      "disposition": "all_five_final_maps_not_verified"
+    },
+    {
+      "name": "source_credits",
+      "disposition": "all_five_final_maps_not_verified"
+    },
+    {
+      "name": "limitations_statement",
+      "disposition": "all_five_final_maps_not_verified"
+    },
+    {
+      "name": "review_status",
+      "disposition": "all_five_final_maps_not_verified"
+    },
+    {
+      "name": "attribution_disclaimer",
+      "disposition": "all_five_final_maps_not_verified"
+    }
+  ],
+  "m6_dataset_requirements": [
+    {
+      "name": "StudyAreas",
+      "disposition": "final_scientific_workspace_content_not_verified"
+    },
+    {
+      "name": "SourceProducts",
+      "disposition": "final_scientific_workspace_content_not_verified"
+    },
+    {
+      "name": "ObservedChange",
+      "disposition": "final_scientific_workspace_content_not_verified"
+    },
+    {
+      "name": "AnalysisExclusions",
+      "disposition": "final_scientific_workspace_content_not_verified"
+    },
+    {
+      "name": "StableControls",
+      "disposition": "final_scientific_workspace_content_not_verified"
+    },
+    {
+      "name": "ObservationSources",
+      "disposition": "final_scientific_workspace_content_not_verified"
+    },
+    {
+      "name": "Interpretations",
+      "disposition": "final_scientific_workspace_content_not_verified"
+    },
+    {
+      "name": "AttributionAssessments",
+      "disposition": "final_scientific_workspace_content_not_verified"
+    },
+    {
+      "name": "AnalysisQA",
+      "disposition": "final_scientific_workspace_content_not_verified"
+    }
+  ],
+  "m6_relationship_requirements": [
+    {
+      "name": "StudyAreas_ObservedChange",
+      "disposition": "final_referential_integrity_not_verified"
+    },
+    {
+      "name": "StudyAreas_StableControls",
+      "disposition": "final_referential_integrity_not_verified"
+    },
+    {
+      "name": "ObservedChange_ObservationSources",
+      "disposition": "final_referential_integrity_not_verified"
+    },
+    {
+      "name": "SourceProducts_ObservationSources",
+      "disposition": "final_referential_integrity_not_verified"
+    },
+    {
+      "name": "ObservedChange_Interpretations",
+      "disposition": "final_referential_integrity_not_verified"
+    },
+    {
+      "name": "Interpretations_Attribution",
+      "disposition": "final_referential_integrity_not_verified"
+    },
+    {
+      "name": "ObservedChange_AnalysisQA",
+      "disposition": "final_referential_integrity_not_verified"
+    },
+    {
+      "name": "SourceProducts_Exclusions",
+      "disposition": "final_referential_integrity_not_verified"
+    }
+  ],
+  "m6_evidence_integrity_requirements": [
+    {
+      "name": "minimum_scientific_record_count",
+      "required": 1,
+      "disposition": "scientific_admission_and_review_not_verified"
+    },
+    {
+      "name": "minimum_preserved_non_success_records",
+      "required": 2,
+      "disposition": "preserved_non_success_history_verified_only"
+    },
+    {
+      "name": "require_before_and_after_source_per_observation",
+      "required": true,
+      "disposition": "scientific_admission_and_review_not_verified"
+    },
+    {
+      "name": "require_exact_source_identity_and_acquisition_dates",
+      "required": true,
+      "disposition": "scientific_admission_and_review_not_verified"
+    },
+    {
+      "name": "require_uncertainty_and_limitation_per_observation",
+      "required": true,
+      "disposition": "scientific_admission_and_review_not_verified"
+    },
+    {
+      "name": "require_interpretation_links",
+      "required": true,
+      "disposition": "scientific_admission_and_review_not_verified"
+    },
+    {
+      "name": "require_attribution_links_and_status",
+      "required": true,
+      "disposition": "scientific_admission_and_review_not_verified"
+    },
+    {
+      "name": "require_observation_interpretation_attribution_separation",
+      "required": true,
+      "disposition": "scientific_admission_and_review_not_verified"
+    },
+    {
+      "name": "require_failed_deferred_inconclusive_reconciliation",
+      "required": true,
+      "disposition": "scientific_admission_and_review_not_verified"
+    },
+    {
+      "name": "require_qa_records",
+      "required": true,
+      "disposition": "scientific_admission_and_review_not_verified"
+    },
+    {
+      "name": "require_owner_review",
+      "required": true,
+      "disposition": "scientific_admission_and_review_not_verified"
+    },
+    {
+      "name": "require_completed_m5_review",
+      "required": true,
+      "disposition": "scientific_admission_and_review_not_verified"
+    }
+  ],
+  "m6_spatial_acceptance_requirements": {
+    "required_vector_wkid": 32645,
+    "required_raster_wkid": 32645,
+    "require_grid_metadata": true,
+    "require_passing_registration_qa": true,
+    "require_visible_exclusion_masks": true
+  },
+  "m6_spatial_disposition": "Local radar projection exists; final vectors/rasters, passing residual registration and reviewed exclusions not collectively verified.",
+  "m6_package_acceptance_requirements": {
+    "independent_environment_required": true,
+    "allowed_independent_environment_types": [
+      "clean_machine",
+      "clean_local_profile"
+    ],
+    "original_workspace_must_be_absent": true,
+    "package_extract_reopen_and_reexport_required": true,
+    "broken_source_maximum": 0,
+    "external_operational_source_maximum": 0,
+    "unsafe_path_maximum": 0,
+    "missing_artifact_maximum": 0,
+    "rights_conflict_maximum": 0,
+    "artifact_sha256_verification_required": true,
+    "visual_review_required_for_every_map": true
+  },
+  "m6_package_disposition": "No accepted final scientific package manifest and independent clean machine/profile extract, reopen and re-export evidence; historical same-machine metadata package is not sufficient.",
+  "completion_proven": false,
+  "long_term_goal_redefined": false,
+  "execution_authority": "Latest exact Landsat visual envelope is closed. Its exclusions do not permit different products/dates, provider requests, registration/change or final delivery. Local zero-decision follow-on preparation and validation remain the available safe action.",
+  "next_eligible_action": "Prepare one prospective alternate optical source envelope, delegating deterministic metadata selection, bounded EarthExplorer acquisition, unchanged QA, conditional local visual panel and sanitized terminal publication. Do not reactivate withdrawn radar route 002, claim a visual panel as mapped change, or weaken QA.",
+  "publication_authorized_by_this_record": false
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-OPTICAL-ALTERNATE-SOURCE-ROUTE-001-APPROVAL",
+  "recorded_at_utc": "2026-10-03T21:05:41.199016+00:00",
+  "decision_source": "Direct human answer Approve exact packet to the exact asynchronous review request; no approval inferred from draft flags",
+  "human_answer": "Approve exact packet",
+  "review_bundle_ref": "reviews/m2-optical-alternate-source-route-001/review-bundle.json",
+  "review_bundle_sha256": "98ab5b8969692461bc5e2c128ac99b1df9f1770c6b1e46e3734cc6d027d57d07",
+  "proposal_ref": "contracts/milestone-002-optical-alternate-source-route-001-proposal.json",
+  "proposal_sha256": "9ff230d9edc31fb6df5afeda4ca8bf115ca105ea084ccd0e770fe3b188c765a7",
+  "decision": "approved_one_conditional_envelope",
+  "authorized_scope": [
+    "Record one exact owner decision delegating source selection under this prospective policy, packet/decision publication and public CI. Preserve all prior consumed attempts, QA outcomes and withdrawn methods.",
+    "Implement only metadata discovery/ranking, bounded EarthExplorer intake, versioned exact-source controls, durable supervision and the frozen visual QA/panel route. Test generated catalog fixtures, exact budgets/host/identity/window checks, complete pagination, deterministic same-sensor ranking, browser-file ambiguity, safe errors/interruption/no-replace custody, group-aware Landsat-8 and Landsat-9 metadata, and the unchanged QA/grid/masks. Require installed ArcGIS disposable end-to-end validation and public implementation CI before provider/source content.",
+    "Pass a no-payload preflight of the approved policy/AOIs/entry evidence, exact implementation/public CI, rights/access, absent fresh roots and request budgets. Run fixed-order bounded metadata discovery; lock the full returned metadata inventory and up to two eligible ranked pairs before any source payload. Refresh exact source rights/options and freeze each intent within the delegated policy without a new owner choice.",
+    "Conditionally acquire at most four new exact full bundles in the reviewed pair/source order and byte/click budget using the unchanged owner-selected EarthExplorer host. Preserve all partial/failed attempts and weak-provenance limitations; only promote on full container and exact grouped identity pass. No old-source request or overwrite.",
+    "After each pair passes metadata and no-content gates, use fresh append-only supervised attempts for exact member materialization, all headers, then fixed AOI pixel QA. Record every coverage exclusion. Continue only to the next prelocked pair for ordinary insufficient usable coverage, not to an unlisted source. Conditionally build the one predeclared local visual panel; reopen in a fresh process and inspect PNG/PDF exports.",
+    "Within the same envelope repair deterministically classified agent-owned parser, receipt, timestamp, serialization, path or ArcGIS interface defects while sources and scientific predicates stay fixed. Preserve consumed attempts; revalidate relevant portable and installed tests, fresh public implementation CI if code changed and fresh preflight before distinct recovery attempts. No mechanical checkpoint expiry or intermediate owner reconfirmation. After two consecutive mechanical failures without progress, perform an evidence-based internal efficiency review before another; unclassified/scientific/integrity errors remain stops. All acquisition recovery stays within the click/byte budget.",
+    "Publish only sanitized implementation, policy/selection manifests, identities/hashes, QA aggregates, limitations, outcome receipts and exact post-CI reconciliation. The complete unchanged source-to-visual-readiness route is covered; source/derived pixels remain outside Git.",
+    "Prepare and locally validate a zero-decision scientific-method/next-milestone brief from the actual terminal evidence. Keep registration validation, a Landsat-specific 30 m M4 method, source/observation/interpretation/attribution links, owner M5 review and final M6 delivery requirements explicit. Do not adopt or execute that later scientific route under this approval."
+  ],
+  "explicit_exclusions": [
+    "No previously consumed optical/radar attempt reuse, reconstruction, mutation or retry; no requeue of either exact 10/26 August Landsat-9 product; no withdrawn radar route 002 activation.",
+    "No unlisted provider/host/platform/date/geometry substitution, widening or reranking after results, threshold/mask/grid/scaling/stretch relaxation, fabrication of stable controls or registration-readiness claim.",
+    "No paid product/credit, software installation, UAC, new account, agent credential/token capture/storage, new or changed terms acceptance, included provider DEM action or radar processing. Owner-only existing-account sign-in and exact authorized browser clicks may be required as runtime handoffs.",
+    "No baseline admission, quantitative difference, spectral change analysis, interpretation, attribution, final scientific package, final M6 claim, emergency guidance, public source/derived pixels or scientific publication."
+  ],
+  "prospective_fixed_policy_source_selection_delegated": true,
+  "intermediate_owner_reconfirmation_required": false,
+  "provider_or_source_content_access_started_at_recording": false,
+  "previous_goal_turn_classification": "progress"
+}

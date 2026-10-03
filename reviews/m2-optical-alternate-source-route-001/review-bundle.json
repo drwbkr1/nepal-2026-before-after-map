@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-OPTICAL-ALTERNATE-SOURCE-ROUTE-001-LOCAL",
+  "status": "local_zero_decision_not_public_not_approved",
+  "human_decision_count": 0,
+  "base_commit": "3ddece18810448b1775343511f965e947887ce67",
+  "proposal_ref": "contracts/milestone-002-optical-alternate-source-route-001-proposal.json",
+  "proposal_sha256": "9ff230d9edc31fb6df5afeda4ca8bf115ca105ea084ccd0e770fe3b188c765a7",
+  "bound_files": [
+    {
+      "ref": "docs/M2_OPTICAL_ALTERNATE_SOURCE_ROUTE_001_REVIEW.md",
+      "sha256": "0e066fba7a2b4a16b7a39daa91dd908042a1ee6e2a7af372e339e457cd0f75f5"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-visual-route-completion-001-terminal-reconciliation.json",
+      "sha256": "df69ca75ce96aae5faffb7402c55698a4af772e54502250bd106f8adfc33cc0b"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-visual-route-completion-001-post-ci-reconciliation.json",
+      "sha256": "97a98937d770d032a83e3bc4e5ec885e2cb777ff8fc362cae743f4ff7ba518fc"
+    },
+    {
+      "ref": "records/readiness/m2-asf-reference-control-vv-delta-map-002-pre-approval-withdrawal.json",
+      "sha256": "c77a3cfb3eff1398ae3bbdce4f986c86aa7e335e2f1b72df8bc2778a98b0f67f"
+    },
+    {
+      "ref": "records/readiness/m2-asf-registration-boundary-screen-004-local-reconciliation.json",
+      "sha256": "526b8ad75a09a986be0ae02c4ec06080d77060afd852086ddf8660a59908fc45"
+    },
+    {
+      "ref": "config/qa/change-evidence-contract.json",
+      "sha256": "fc2d18fa758d25b212361110ec9dba2611ba447611a2f7a284f5d1859b0ad33e"
+    },
+    {
+      "ref": "records/readiness/goal-completion-audit-20261003-local-002.json",
+      "sha256": "af2abed5beb71ccbdf563e1e32b9218f0b5749ea7988f44d290ac51fe95bb43c"
+    },
+    {
+      "ref": "records/source-gates/m2-landsat9-same-sensor-usgs-intake-003-local.json",
+      "sha256": "9a2b7f5cefadde6680f50e2afc44d2f4e70deb0f07614c031ac3bf4908613d2f"
+    },
+    {
+      "ref": "config/aoi/approved-study-areas.geojson",
+      "sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98"
+    },
+    {
+      "ref": "scripts/landsat9_pixel_visual_core_001.py",
+      "sha256": "55a7641f7826f41d3b461aa2ff99f57d829546515b3285d37045e28071ef1915"
+    },
+    {
+      "ref": "scripts/landsat_c2_qa_flags.py",
+      "sha256": "9023715cb57a7651fc679acbe412e363d8e26d399f2f13493dba2693d54f2e03"
+    },
+    {
+      "ref": "scripts/landsat9_grouped_visual_metadata_001.py",
+      "sha256": "53b2212040d917b820542afd7785c9c472adbe98a8d6b1cae75ed68d065155df"
+    },
+    {
+      "ref": "scripts/landsat_l2_grouped_mtl_integrity_002.py",
+      "sha256": "476cc32f4c70a0feb229ebf440095a1fd936f29fd1ca9795f60b88d23950f036"
+    },
+    {
+      "ref": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"
+    },
+    {
+      "ref": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"
+    },
+    {
+      "ref": "config/qa/arcgis-final-delivery-contract.json",
+      "sha256": "a3eda86374e77e4c8dbc48ff7a37b0f3766119878a65b95ff137477ba497527d"
+    }
+  ],
+  "decision_requested": "Approve, revise or defer one fixed-policy alternate optical source-to-visual-readiness envelope through sanitized terminal publication. Approval prospectively delegates ranked candidate selection, up to four new exact EarthExplorer bundles within the reviewed budget, unchanged QA and one conditional local visual panel; it does not authorize registered scientific change or final M6 delivery.",
+  "publication_implementation_provider_requests_or_pixels_authorized_by_draft": false
+}

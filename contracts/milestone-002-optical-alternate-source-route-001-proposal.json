@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-OPTICAL-ALTERNATE-SOURCE-ROUTE-001",
+  "status": "local_zero_decision_not_published_not_approved",
+  "prepared_at_utc": "2026-10-03T19:08:21.198877Z",
+  "objective": "Find up to two prospectively ranked same-sensor Landsat-8 or Landsat-9 Collection 2 Level-2 pairs at the existing focus areas; conditionally acquire at most four new exact bundles via the owner-selected EarthExplorer host, evaluate unchanged header/pixel QA, and produce at most one qualifying owner-local visual ArcGIS panel or a preserved inconclusive outcome. Complete this route through sanitized terminal publication under one delegated-selection envelope. This is M2 source/visual readiness, not mapped change or final goal completion.",
+  "entry_evidence": {
+    "records/readiness/m2-landsat9-visual-route-completion-001-terminal-reconciliation.json": "df69ca75ce96aae5faffb7402c55698a4af772e54502250bd106f8adfc33cc0b",
+    "records/readiness/m2-landsat9-visual-route-completion-001-post-ci-reconciliation.json": "97a98937d770d032a83e3bc4e5ec885e2cb777ff8fc362cae743f4ff7ba518fc",
+    "records/readiness/m2-asf-reference-control-vv-delta-map-002-pre-approval-withdrawal.json": "c77a3cfb3eff1398ae3bbdce4f986c86aa7e335e2f1b72df8bc2778a98b0f67f",
+    "records/readiness/m2-asf-registration-boundary-screen-004-local-reconciliation.json": "526b8ad75a09a986be0ae02c4ec06080d77060afd852086ddf8660a59908fc45",
+    "config/qa/change-evidence-contract.json": "fc2d18fa758d25b212361110ec9dba2611ba447611a2f7a284f5d1859b0ad33e",
+    "records/readiness/goal-completion-audit-20261003-local-002.json": "af2abed5beb71ccbdf563e1e32b9218f0b5749ea7988f44d290ac51fe95bb43c",
+    "records/source-gates/m2-landsat9-same-sensor-usgs-intake-003-local.json": "9a2b7f5cefadde6680f50e2afc44d2f4e70deb0f07614c031ac3bf4908613d2f"
+  },
+  "why_new_authority_is_required": "The latest owner approval binds only two exact promoted August 10/26 Landsat-9 products and expressly excludes new provider requests or source/date substitution. This proposal preserves that terminal result and asks prospectively for a new date window and public metadata-only discovery, not a retry or post-observation QA relaxation.",
+  "selected_existing_download_host": "USGS EarthExplorer only; reuse an owner-signed-in browser if available. No alternate provider, account creation, credential collection or terms acceptance is delegated.",
+  "prospective_search_policy": {
+    "provider": "USGS public Landsat STAC metadata; current endpoint/access must be verified before any query",
+    "catalog_origin": "https://landsatlook.usgs.gov",
+    "catalog_root": "https://landsatlook.usgs.gov/stac-server/",
+    "search_endpoint": "https://landsatlook.usgs.gov/stac-server/search",
+    "collection": "landsat-c2l2-sr",
+    "platforms_in_order": [
+      "landsat-8",
+      "landsat-9"
+    ],
+    "path": 141,
+    "row": 40,
+    "processing_level": "L2SP",
+    "collection_number": "02",
+    "tier": "T1",
+    "before_window_utc": [
+      "2026-07-27T00:00:00Z",
+      "2026-08-25T23:59:59.999999Z"
+    ],
+    "after_window_utc": [
+      "2026-08-27T00:00:00Z",
+      "2026-09-25T23:59:59.999999Z"
+    ],
+    "date_window_reason": "One fixed 30-day window on each side, excluding the event day to avoid acquisition/event ordering ambiguity. Larger temporal gaps retain explicit weather, snow/ice, vegetation and unrelated-change uncertainty; they do not improve attribution.",
+    "geography_ref": "config/aoi/approved-study-areas.geojson",
+    "geography_sha256": "17af33b60f59faef3a8f9cb2a44978a4e241e00d7329ee99076cce688073bd98",
+    "focus_aoi_ids": [
+      "AOI-SOURCE",
+      "AOI-UPPER-CORRIDOR"
+    ],
+    "approved_aoi_change": false,
+    "query_order": [
+      "landsat-8 before",
+      "landsat-8 after",
+      "landsat-9 before",
+      "landsat-9 after"
+    ],
+    "maximum_search_pages": 8,
+    "maximum_features_per_page": 100,
+    "maximum_selected_item_detail_requests": 4,
+    "maximum_catalog_root_or_conformance_requests": 2,
+    "maximum_total_metadata_http_requests_including_transient_recovery": 18,
+    "transient_recovery_max_requests": 2,
+    "transient_recovery_only": "Connection interruption or 429/5xx metadata response, within the total cap, with preserved request outcome and at most 30 seconds backoff. No recovery of access denial, terms action, identity/schema inconsistency or changed policy.",
+    "maximum_response_bytes_each": 5000000,
+    "allowed_response_content": "Catalog/conformance/search/item JSON plus the two specified official rights/distribution page reads only; no catalog asset href dereference, browse, quicklook, tile, standalone MTL or band content. Source payloads are permitted only through the separately bounded EarthExplorer full-bundle intake below.",
+    "on_pagination_cap_or_truncation": "Record incomplete search and do not claim exhaustive ranking or select a winning pair.",
+    "on_authentication_or_new_terms": "Stop before agent credentials, account or terms actions. Owner may sign into an existing EarthExplorer account themselves if needed; no secret is requested or captured by the agent. New/changed conditions require a real terms decision.",
+    "current_catalog_availability": "not_verified_in_this_local_preparation",
+    "allowed_official_information_origin": "https://www.usgs.gov",
+    "official_rights_and_distribution_page": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products",
+    "maximum_official_rights_or_distribution_page_requests": 2
+  },
+  "predeclared_candidate_policy": {
+    "source_identity": "Require exact product ID, acquisition datetime, platform, path/row, collection/tier, processing level and parseable valid footprint; retain all rejected/missing-field reasons.",
+    "pairing": "Same platform and path/row only; before acquisition in the fixed before window and after acquisition in the fixed after window. No cross-sensor pair or event-day substitute.",
+    "metadata_footprint": "Classify whether the catalog footprint contains both exact approved focus polygons. Footprint metadata is not TIFF extent or valid pixel coverage. Only fully containing metadata pairs are eligible for the prospective shortlist; retain partial/unknown as context.",
+    "known_terminal_exclusions": [
+      "LC09_L2SP_141040_20260810_20260811_02_T1",
+      "LC09_L2SP_141040_20260826_20260827_02_T1"
+    ],
+    "terminal_exclusion_semantics": "Retain these if returned but never requeue either exact source for acquisition or another QA attempt under this proposal.",
+    "ranking_tuple_ascending": [
+      "maximum reported scene eo:cloud_cover across pair",
+      "sum of reported scene eo:cloud_cover",
+      "elapsed seconds between acquisitions",
+      "before product ID lexicographic",
+      "after product ID lexicographic"
+    ],
+    "missing_cloud_cover": "Retain as unknown and ineligible for ranked shortlist; never replace with zero. Validate range 0 to 100.",
+    "rank_semantics": "Reported scene cloud cover is a discovery hint, not AOI usability or scientific admission. Selection uses only predeclared metadata, never an observed change signal.",
+    "shortlist_maximum_pairs": 2,
+    "shortlist_detail_maximum_distinct_products": 4,
+    "candidate_lock": "Before any new source payload, lock complete query inventory, rejections and at most two ranked eligible pairs in a SHA-256 source-selection manifest. This approval prospectively delegates selection only within these unchanged rules. Catalog truncation, uncertainty about product identity or changed rights prohibits automatic selection. No reranking from source pixel values or change signal."
+  },
+  "one_conditional_envelope": [
+    "Record one exact owner decision delegating source selection under this prospective policy, packet/decision publication and public CI. Preserve all prior consumed attempts, QA outcomes and withdrawn methods.",
+    "Implement only metadata discovery/ranking, bounded EarthExplorer intake, versioned exact-source controls, durable supervision and the frozen visual QA/panel route. Test generated catalog fixtures, exact budgets/host/identity/window checks, complete pagination, deterministic same-sensor ranking, browser-file ambiguity, safe errors/interruption/no-replace custody, group-aware Landsat-8 and Landsat-9 metadata, and the unchanged QA/grid/masks. Require installed ArcGIS disposable end-to-end validation and public implementation CI before provider/source content.",
+    "Pass a no-payload preflight of the approved policy/AOIs/entry evidence, exact implementation/public CI, rights/access, absent fresh roots and request budgets. Run fixed-order bounded metadata discovery; lock the full returned metadata inventory and up to two eligible ranked pairs before any source payload. Refresh exact source rights/options and freeze each intent within the delegated policy without a new owner choice.",
+    "Conditionally acquire at most four new exact full bundles in the reviewed pair/source order and byte/click budget using the unchanged owner-selected EarthExplorer host. Preserve all partial/failed attempts and weak-provenance limitations; only promote on full container and exact grouped identity pass. No old-source request or overwrite.",
+    "After each pair passes metadata and no-content gates, use fresh append-only supervised attempts for exact member materialization, all headers, then fixed AOI pixel QA. Record every coverage exclusion. Continue only to the next prelocked pair for ordinary insufficient usable coverage, not to an unlisted source. Conditionally build the one predeclared local visual panel; reopen in a fresh process and inspect PNG/PDF exports.",
+    "Within the same envelope repair deterministically classified agent-owned parser, receipt, timestamp, serialization, path or ArcGIS interface defects while sources and scientific predicates stay fixed. Preserve consumed attempts; revalidate relevant portable and installed tests, fresh public implementation CI if code changed and fresh preflight before distinct recovery attempts. No mechanical checkpoint expiry or intermediate owner reconfirmation. After two consecutive mechanical failures without progress, perform an evidence-based internal efficiency review before another; unclassified/scientific/integrity errors remain stops. All acquisition recovery stays within the click/byte budget.",
+    "Publish only sanitized implementation, policy/selection manifests, identities/hashes, QA aggregates, limitations, outcome receipts and exact post-CI reconciliation. The complete unchanged source-to-visual-readiness route is covered; source/derived pixels remain outside Git.",
+    "Prepare and locally validate a zero-decision scientific-method/next-milestone brief from the actual terminal evidence. Keep registration validation, a Landsat-specific 30 m M4 method, source/observation/interpretation/attribution links, owner M5 review and final M6 delivery requirements explicit. Do not adopt or execute that later scientific route under this approval."
+  ],
+  "explicit_exclusions": [
+    "No previously consumed optical/radar attempt reuse, reconstruction, mutation or retry; no requeue of either exact 10/26 August Landsat-9 product; no withdrawn radar route 002 activation.",
+    "No unlisted provider/host/platform/date/geometry substitution, widening or reranking after results, threshold/mask/grid/scaling/stretch relaxation, fabrication of stable controls or registration-readiness claim.",
+    "No paid product/credit, software installation, UAC, new account, agent credential/token capture/storage, new or changed terms acceptance, included provider DEM action or radar processing. Owner-only existing-account sign-in and exact authorized browser clicks may be required as runtime handoffs.",
+    "No baseline admission, quantitative difference, spectral change analysis, interpretation, attribution, final scientific package, final M6 claim, emergency guidance, public source/derived pixels or scientific publication."
+  ],
+  "decision_state": {
+    "owner_approved": false,
+    "publication_authorized": false,
+    "implementation_authorized": false,
+    "provider_requests_authorized": false,
+    "acquisition_or_pixels_authorized": false,
+    "scientific_change_or_final_delivery_authorized": false
+  },
+  "decision_requested": "Approve, revise or defer one fixed-policy alternate optical source-to-visual-readiness envelope through sanitized terminal publication. Approval prospectively delegates ranked candidate selection, up to four new exact EarthExplorer bundles within the reviewed budget, unchanged QA and one conditional local visual panel; it does not authorize registered scientific change or final M6 delivery.",
+  "intake_and_custody": {
+    "prospective_owner_source_choice_delegated": true,
+    "new_distinct_product_maximum": 4,
+    "provider": "USGS",
+    "host": "EarthExplorer full Collection 2 Level-2 Product Bundle only",
+    "source_order": "Pair 1 before then after; only if pair 1 does not meet full-area QA, pair 2 before then after. A previously acquired new source shared by both locked pairs is verified and reused within this route without another request; no previously consumed source is requeued.",
+    "full_bundle_activation_maximum": 6,
+    "activation_accounting": "At most four initial exact product activations plus two classified transient transfer or agent-owned handoff recoveries across the route; every activation has a prior exclusive intent and independent receipt. No blind double click, new source, access-denial retry, identity/integrity-error recovery or terms bypass.",
+    "maximum_one_archive_bytes": 2147483648,
+    "maximum_total_received_source_bytes_including_partials": 12884901888,
+    "maximum_initial_promoted_archive_bytes": 8589934592,
+    "minimum_free_disk_bytes": 32212254720,
+    "source_request_conditions": "New rights/access and exact product options must be checked for each locked source before activation. Payload content must be from the owner-selected EarthExplorer full bundle and match the locked product/scene/date, not a standalone band or other processing level.",
+    "browser_to_file_provenance": "Prospectively accept the same documented weaker local browser-to-file provenance used by the earlier approved grouped-MTL intake: record a no-payload initial download-directory snapshot and exact product download intent, bind observed transfer/name/size/stability to only its exact expected new TAR, then verify full TAR structure and all member hashes plus group-aware ODL/XML identity. Browser provenance and local SHA-256 are not provider authentication or an upstream checksum. Ambiguous, multiple, preexisting or mismatching candidates stop; never adopt a convenient file.",
+    "verification_method_ref": "scripts/landsat_l2_grouped_mtl_integrity_002.py",
+    "verification_method_sha256": "476cc32f4c70a0feb229ebf440095a1fd936f29fd1ca9795f60b88d23950f036",
+    "custody": "Fresh append-only non-Git staging and attempts, conditional no-replace promotion after exact container/identity pass; originals never overwritten. Every source and request outcome remains in the source manifest.",
+    "if_browser_download_control_unavailable": "Ask the owner to perform the exact already-authorized product click as a runtime handoff; this is not another source approval. Stop if the click cannot be safely bound or monitored."
+  },
+  "frozen_qa_and_visual_route": {
+    "scientific_core_ref": "scripts/landsat9_pixel_visual_core_001.py",
+    "scientific_core_sha256": "55a7641f7826f41d3b461aa2ff99f57d829546515b3285d37045e28071ef1915",
+    "qa_decoder_ref": "scripts/landsat_c2_qa_flags.py",
+    "qa_decoder_sha256": "9023715cb57a7651fc679acbe412e363d8e26d399f2f13493dba2693d54f2e03",
+    "metadata_adapter_ref": "scripts/landsat9_grouped_visual_metadata_001.py",
+    "metadata_adapter_sha256": "53b2212040d917b820542afd7785c9c472adbe98a8d6b1cae75ed68d065155df",
+    "metadata_identity_verifier_ref": "scripts/landsat_l2_grouped_mtl_integrity_002.py",
+    "metadata_identity_verifier_sha256": "476cc32f4c70a0feb229ebf440095a1fd936f29fd1ca9795f60b88d23950f036",
+    "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "aoi_ids": [
+      "AOI-SOURCE",
+      "AOI-UPPER-CORRIDOR"
+    ],
+    "crs_epsg": 32645,
+    "cell_size_m": 30,
+    "members_per_source": [
+      "_MTL.txt",
+      "_MTL.xml",
+      "_QA_PIXEL.TIF",
+      "_QA_RADSAT.TIF",
+      "_SR_QA_AEROSOL.TIF",
+      "_SR_B3.TIF",
+      "_SR_B4.TIF",
+      "_SR_B5.TIF",
+      "_SR_B6.TIF",
+      "_SR_B7.TIF"
+    ],
+    "unchanged_predicates": "Group-aware identities, exact dates/time and text/XML agreement; Level-2 reflectance mult 0.0000275 and add -0.2 at 1e-12 absolute tolerance; native 30 m grid/lattice, nodata, all QA flags, mask precedence, per-band nonphysical handling, exact AOI cell-area accounting, and pooled B7/B6/B4 nearest-rank stretch remain unchanged.",
+    "metadata_before_tiff": "Audit exact new verified MTL pairs in pair/source order and reserve receipts before any TIFF header; inspect all pair headers before pixels. No extra members or new indices are decoded.",
+    "full_area_rule": "Full visual QA requires both dates footprint >=0.99 and before/after/paired strict usable fractions >=0.80 at each approved AOI. It is still visual QA only, not registered baseline admission.",
+    "partial_visual_rule": "An AOI with both footprint >=0.99 and paired strict usable fraction >=0.20 can support only an explicitly partial visual panel. Lower values do not qualify.",
+    "pair_evaluation_and_panel_selection": "Evaluate locked pair 1 first. If both AOIs reach full visual QA, stop before acquiring pair 2 and select pair 1. Otherwise evaluate locked pair 2 if every integrity/safety gate permits it. Select the first full-QA pair in locked rank order; if neither is full, select the first ranked pair with at least one partial-qualifying AOI; if none qualifies, create no panel. No selection by apparent event signal or pleasing image.",
+    "ordinary_scientific_exclusion_vs_hard_stop": "Insufficient measured usable coverage is a preserved exclude/defer outcome and permits the next already-locked pair. Identity/integrity/scaling/grid inconsistency, unexpected scientific predicate, unexplained content side effect, unclassified failure or changed rights/access is a hard stop; it cannot be recast as a mechanical defect.",
+    "local_panel": "At most one owner-local editable EPSG:32645 APRX with writable default GDB/toolbox, exact georeferenced source bands, inspectable exclusions, acquisition UTC dates, measured coverage, source credits, visible partial-data and unmeasured-registration warnings, PNG/PDF exports and fresh-process reopen/broken-path/render inspection. No difference raster.",
+    "registration_residual_measured": false,
+    "scientific_admission_or_m4_change_authorized": false
+  }
+}

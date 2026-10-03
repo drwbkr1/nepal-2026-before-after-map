@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-ASF-REGISTRATION-BOUNDARY-SCREEN-004-LOCAL-RECONCILIATION",
+  "checked_at_utc": "2026-09-28T19:51:54Z",
+  "status": "synthetic_falsification_composite_rule_rejected_no_method_adopted",
+  "inputs": {
+    "script_ref": "scripts/assess_m2_asf_registration_boundary_004.py",
+    "script_sha256": "d6108faf0b09ef068541c6077bd9ee013c8bb933e48500bb27141508272b7011",
+    "full_case_output_ref": "records/observations/m2-asf-registration-boundary-screen-004-local.json",
+    "full_case_output_sha256": "647d4320f5a76e317b3d73aec16fca160192c721e4c605c2de4ddef123f350bb",
+    "prior_screen_ref": "records/readiness/m2-asf-registration-method-screen-003-local-reconciliation.json",
+    "runtime": "installed ArcGIS Pro Python 3.13.13 with NumPy and SciPy; no ArcPy imported",
+    "design": "12 held-out threshold-adjacent synthetic cases: two texture families, three shift-generation kernels, two true 2D shifts, independent Gaussian noise with standard deviation 0.3, and 30 new random seeds per case. The candidate conservative screen required all 30 controls for each of three estimators and the maximum of their estimated shift magnitudes to be at most the existing 0.5-pixel limit."
+  },
+  "finding": {
+    "frozen_registration_limit_pixels": 0.5,
+    "true_below_limit_magnitude_pixels": 0.487904,
+    "true_above_limit_magnitude_pixels": 0.502046,
+    "case_count": 12,
+    "false_pass_count": 1,
+    "false_defer_count": 1,
+    "false_pass_case": {
+      "texture": "mixed",
+      "shift_generator": "cubic",
+      "true_shift_xy_pixels": [0.355, 0.355],
+      "true_magnitude_pixels": 0.502046,
+      "accepted_controls_each_method": 30,
+      "estimated_magnitude_rms_pixels": {
+        "parabolic": 0.34555,
+        "spline1": 0.467939,
+        "spline3": 0.498586
+      }
+    },
+    "false_defer_case": "Mixed-texture Fourier-generated 0.345/0.345-pixel shift with true magnitude 0.487904 pixels; spline3 estimated magnitude 0.505127 pixels.",
+    "conclusion": "Taking the maximum of the three existing estimators is not a defensible pass rule. Its apparent zero-false-pass result on the earlier 108-case screen did not survive held-out near-boundary tests. This synthetic result cannot establish real SAR registration accuracy or a scientific change-map route."
+  },
+  "authority_and_outputs": {
+    "source_or_project_pixels_read": false,
+    "arcpy_or_real_geoprocessing_called": false,
+    "real_attempt_created": false,
+    "difference_raster_or_map_created": false,
+    "scientific_threshold_changed": false,
+    "withdrawn_route_002_reactivated": false,
+    "git_publication_or_public_ci": false
+  },
+  "next_boundary": "Keep the visual-only ASF panel and full-area defer results. Do not approve or execute withdrawn radar delta-map route 002. A pass-capable radar registration method requires separate independent validation and review; the same-sensor Landsat route still requires an owner-selected permitted download host, verified terms and access, and real QA pixel checks before it can support a map."
+}
