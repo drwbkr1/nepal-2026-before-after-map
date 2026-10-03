@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "approval_id": "NEPAL-M2-LANDSAT9-PIXEL-VISUAL-RECOVERY-001-APPROVAL",
+  "approved_at_utc": "2026-10-03T17:27:23Z",
+  "decision_source": "Owner's approve response to the immediately preceding exact Landsat recovery-001 review request",
+  "review_bundle_ref": "reviews/m2-landsat9-pixel-visual-recovery-001/review-bundle.json",
+  "review_bundle_sha256": "92fe8c191eb854a09e7e5e5f45494e324f9b1feee186528fd620bfa6ca4de2f3",
+  "proposal_ref": "contracts/milestone-002-landsat9-pixel-visual-recovery-001-proposal.json",
+  "proposal_sha256": "9437ea0dea7222118a88e5d8157987d22afcfaf33d765e954745142abbe6694c",
+  "decision": "approved_one_conditional_envelope",
+  "authorized_scope": "Exact packet and public-CI-gated versioned receipt/supervisor and fresh-root correction, portable and installed ArcGIS disposable synthetic tests, final no-content preflight, at most one new fixed-order real-002 worker over the two exact promoted Landsat-9 archives, conditional owner-local visual-only EPSG:32645 APRX and PNG/PDF exports, and sanitized terminal publication, exactly as reviewed.",
+  "request_budget": "No provider request or new download; at most one fresh real-002 worker invocation, no automatic retry; at most one conditional local visual panel.",
+  "execution_gates": [
+    "Publish the exact reviewed packet and this approval to public main and pass public CI before implementation is actionable.",
+    "Pass versioned portable adversarial synthetic tests, installed ArcGIS disposable synthetic validation, project validation, and fresh public CI before opening any real archive member or TIFF.",
+    "Pass one final no-content preflight of approved and terminal hashes, exact promoted archives and member receipts, frozen AOI and method, runtime, non-Git space, and absent new attempt and supervisor receipt paths."
+  ],
+  "explicit_exclusions": [
+    "No mutation, reconstruction, resume, reuse, or retry of consumed real-001 or prior terminal evidence.",
+    "No provider request, download, browser, account, terms, credential, token, payment, source/date/order substitution, archive overwrite, or external-custody change.",
+    "No AOI, band, mask, grid, registration, stretch, threshold, or scientific-method change after observing real data.",
+    "No quantitative difference, baseline admission, change analysis, event interpretation, attribution, public derived pixels, emergency guidance, final M6 claim, or scientific publication."
+  ],
+  "real_tiff_header_or_pixel_read_started_at_approval": false
+}

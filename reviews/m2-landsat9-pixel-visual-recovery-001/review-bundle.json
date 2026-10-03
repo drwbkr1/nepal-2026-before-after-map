@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-LANDSAT9-PIXEL-VISUAL-RECOVERY-001-LOCAL",
+  "status": "local_zero_decision_not_public_not_approved",
+  "human_decision_count": 0,
+  "base_commit": "bde5b095b851489e227064e776971fb15ae10156",
+  "proposal_ref": "contracts/milestone-002-landsat9-pixel-visual-recovery-001-proposal.json",
+  "proposal_sha256": "9437ea0dea7222118a88e5d8157987d22afcfaf33d765e954745142abbe6694c",
+  "bound_files": [
+    {
+      "ref": "docs/M2_LANDSAT9_PIXEL_VISUAL_RECOVERY_001_REVIEW.md",
+      "sha256": "788220ce8a4037a5ec33b9260106c818172e6547f0f2f25d9f9cbb48f4a6b361",
+      "role": "human_readable_review"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-pixel-visual-panel-001-terminal-reconciliation.json",
+      "sha256": "e0270f75233b8c80b9559c5b70936d07f7e7787f28957a8db54697d848ea46ae",
+      "role": "consumed_real_001_terminal"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-pixel-visual-panel-001-post-ci-reconciliation.json",
+      "sha256": "032b367420f2ffd6c69b7fd3832929365e41cb58193e38e3bfd92e004668df4c",
+      "role": "closed_prior_envelope"
+    },
+    {
+      "ref": "records/source-gates/m2-landsat9-pixel-visual-panel-001-approval.json",
+      "sha256": "5f0ee6a201c77784e103f1e2b2cf316f87f01af1983676e54cc96c3a52563cbc",
+      "role": "prior_exact_owner_scope"
+    },
+    {
+      "ref": "scripts/run_m2_landsat9_pixel_visual_panel_001.py",
+      "sha256": "8f73dc48f8b2b669c85d6bf76c1cfe0b816d91e4acf63b07aa247111f4340c00",
+      "role": "frozen_consumed_runner"
+    },
+    {
+      "ref": "scripts/landsat9_pixel_visual_core_001.py",
+      "sha256": "55a7641f7826f41d3b461aa2ff99f57d829546515b3285d37045e28071ef1915",
+      "role": "unchanged_pixel_geometry_and_mask_predicates"
+    },
+    {
+      "ref": "scripts/landsat9_visual_panel_arcgis_001.py",
+      "sha256": "b25d11a03c35310cbab00128a160cafb5f8cfbec43e72456430d2c98a8516362",
+      "role": "unchanged_local_panel_method"
+    },
+    {
+      "ref": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+      "role": "approved_projected_aoi_geometry"
+    },
+    {
+      "ref": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2",
+      "role": "unchanged_coverage_and_registration_limits"
+    }
+  ],
+  "decision_requested": {
+    "decision_id": "D-M2-LANDSAT9-PIXEL-VISUAL-RECOVERY-001",
+    "question": "Approve, revise, or defer one exact evidence-persistence recovery envelope through at most one fresh Landsat real-002 visual-only attempt and sanitized terminal publication?",
+    "choices": ["approve", "revise", "defer"],
+    "response_open": true,
+    "approval_effective_only_after": "The exact packet and owner approval are public on main and public CI passes; versioned synthetic and installed ArcGIS-runtime tests, implementation public CI, and final no-content preflight then precede any new TAR member or TIFF header/pixel read."
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "implementation_authorized": false,
+    "new_real_attempt_authorized": false,
+    "real_tiff_or_pixel_read_authorized": false,
+    "local_landsat_panel_authorized": false,
+    "change_analysis_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

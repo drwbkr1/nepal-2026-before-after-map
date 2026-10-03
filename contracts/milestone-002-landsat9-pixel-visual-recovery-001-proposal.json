@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-LANDSAT9-PIXEL-VISUAL-RECOVERY-001",
+  "status": "local_zero_decision_not_approved_not_published",
+  "prepared_at_utc": "2026-09-29T20:48:39Z",
+  "objective": "Recover durable attempt evidence before a fresh exact-source Landsat-9 header and pixel-QA evaluation, then conditionally create the already reviewed owner-local EPSG:32645 visual panel without altering scientific predicates or hiding the consumed empty real-001 attempt.",
+  "why_a_new_owner_decision_is_required": [
+    "The approved pixel-visual-panel-001 envelope closed after its sole real-001 directory was reserved but no started, terminal, materialized, header, pixel, or panel artifact was persisted. Its exact underlying exception remains unknown.",
+    "The real-001 attempt is terminal and cannot be reconstructed, resumed, reused, or retried. A distinct real-002 content-read and ArcGIS-processing attempt exceeds the closed one-shot budget.",
+    "This proposal changes only receipt durability and supervision; it does not authorize a change to the frozen source, AOI, band, mask, grid, registration, stretch, or visual threshold method."
+  ],
+  "frozen_entry_evidence": {
+    "terminal_ref": "records/readiness/m2-landsat9-pixel-visual-panel-001-terminal-reconciliation.json",
+    "terminal_sha256": "e0270f75233b8c80b9559c5b70936d07f7e7787f28957a8db54697d848ea46ae",
+    "post_ci_ref": "records/readiness/m2-landsat9-pixel-visual-panel-001-post-ci-reconciliation.json",
+    "post_ci_sha256": "032b367420f2ffd6c69b7fd3832929365e41cb58193e38e3bfd92e004668df4c",
+    "prior_approval_ref": "records/source-gates/m2-landsat9-pixel-visual-panel-001-approval.json",
+    "prior_approval_sha256": "5f0ee6a201c77784e103f1e2b2cf316f87f01af1983676e54cc96c3a52563cbc",
+    "prior_runner_ref": "scripts/run_m2_landsat9_pixel_visual_panel_001.py",
+    "prior_runner_sha256": "8f73dc48f8b2b669c85d6bf76c1cfe0b816d91e4acf63b07aa247111f4340c00",
+    "frozen_pixel_core_ref": "scripts/landsat9_pixel_visual_core_001.py",
+    "frozen_pixel_core_sha256": "55a7641f7826f41d3b461aa2ff99f57d829546515b3285d37045e28071ef1915",
+    "frozen_panel_ref": "scripts/landsat9_visual_panel_arcgis_001.py",
+    "frozen_panel_sha256": "b25d11a03c35310cbab00128a160cafb5f8cfbec43e72456430d2c98a8516362",
+    "approved_aoi_ref": "config/aoi/approved-study-areas-epsg32645.json",
+    "approved_aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+    "pixel_contract_ref": "config/qa/pixel-readiness-contract.json",
+    "pixel_contract_sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"
+  },
+  "exact_products_in_order": [
+    {
+      "role": "before",
+      "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+      "scene_id": "LC91410402026222LGN00",
+      "promoted_archive_size_bytes": 1126565376,
+      "promoted_archive_sha256": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255"
+    },
+    {
+      "role": "after",
+      "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+      "scene_id": "LC91410402026238LGN00",
+      "promoted_archive_size_bytes": 1123888128,
+      "promoted_archive_sha256": "f2b7a99f75d1324f0c7a984af5172740ca20862b774e2a17714df0cd7c454b38"
+    }
+  ],
+  "recovery_only_change": {
+    "new_attempt_id": "landsat9-pixel-visual-recovery-001-real-002",
+    "new_external_relative_root": "processing/landsat9-pixel-visual-recovery-001/real-002",
+    "reservation_design": "A new supervisor creates a distinct append-only intent receipt in a no-replace external events path before creating or invoking the real worker. It records safe stage markers and an independent terminal fallback outside the worker's attempt directory, so an empty worker directory or a worker crash cannot erase the terminal outcome. Every write is flushed and checked before any archive member is opened.",
+    "error_design": "Record only fixed stage codes, exception class from an allowlist, and persistence outcome. Never copy arbitrary exception text, private paths, unchecked MTL fields, environment variables, command lines, source bytes, or ArcPy messages into public or local status receipts. An unclassified error remains indeterminate and terminal.",
+    "worker_design": "Run a distinct versioned worker with an explicit new attempt root. Preserve the already reviewed TAR/member/MTL/header, 30 m lattice, exact AOI area weights, mask and threshold predicates, B7/B6/B4 pooled stretch, conditional APRX/PNG/PDF production, and fresh-process reopen. Do not call or mutate the consumed real-001 runner's attempt root.",
+    "persistence_stop": "If intent reservation, started receipt, worker terminal, independent fallback, or cleanup record cannot be durably written, stop before the next content stage. Preserve the partial state and do not retry automatically."
+  },
+  "single_conditional_authority_envelope": [
+    "Record one exact owner approval, publish this source-safe packet, implement only the versioned receipt/supervisor and explicit fresh-root correction, and run portable adversarial synthetic tests, installed ArcGIS disposable synthetic tests, project validation, and public default-branch CI before any real TAR-member or TIFF access.",
+    "Synthetic tests must cover reservation interruption after directory creation, failure of the primary and fallback receipt path, worker crash before started receipt, fixed-order source dispatch, no-replace collisions, secret-safe error normalization, and preservation of real-001. A failed synthetic or CI gate stops without a real attempt.",
+    "Run one final no-content preflight of exact approved packet and closed terminal hashes, both promoted archive size/SHA-256 and prior member-verification receipts, unchanged AOIs/pixel method, installed runtime, enough non-Git space, and absent real-002 and supervisor receipt paths. Recheck public CI and stop on drift.",
+    "Only on all gates passing, reserve the independent supervisor intent and invoke at most one fresh real-002 worker. It may verify and materialize only the exact ten approved MTL, QA, and SR B3-B7 members from the before then after archives, inspect headers before pixels, compute the frozen per-AOI and paired QA, and stop on the first integrity, method, or persistence failure. No automatic retry.",
+    "Only if at least one approved AOI passes the frozen 0.99 footprint and 0.20 paired-valid visual floor, create at most one owner-local visual-only EPSG:32645 ArcGIS Pro APRX with source rasters and exclusion layers, and PNG/PDF exports; fresh-process reopen and visually inspect exports. Retain partial or failing results honestly.",
+    "Publish only sanitized source-safe receipt identities, QA aggregates, statuses, hashes, terminal outcome, and exact post-CI reconciliation. One approval covers this conditional envelope through its terminal publication without intermediate owner reconfirmation while the frozen gates remain unchanged."
+  ],
+  "explicit_exclusions": [
+    "No mutation, reconstruction, resume, reuse, or retry of the consumed real-001 directory or any earlier terminal attempt or receipt.",
+    "No provider request, new download, network, browser, account, terms, credential, token, payment, source/date/order substitution, archive overwrite, or change to external source custody.",
+    "No mask, threshold, AOI, band, grid, registration, stretch, or scientific-method adjustment after seeing real data; no second real-002 worker invocation or automatic retry after any failure.",
+    "No quantitative difference, baseline admission, event interpretation, attribution, public derived pixels, emergency guidance, final M6 delivery claim, or scientific publication."
+  ],
+  "decision_requested": "Approve, revise, or defer one exact conditional recovery envelope from durable source-safe reservation through at most one new real-002 evaluation and conditional local visual-only panel, ending in sanitized terminal publication; no intermediate reconfirmation while all fixed gates hold.",
+  "decision_state": {
+    "owner_approved": false,
+    "packet_publication_authorized_by_draft": false,
+    "implementation_authorized_by_draft": false,
+    "new_real_attempt_authorized_by_draft": false,
+    "real_tiff_or_pixel_read_authorized_by_draft": false,
+    "local_landsat_panel_authorized_by_draft": false,
+    "scientific_change_authorized_by_draft": false
+  }
+}
