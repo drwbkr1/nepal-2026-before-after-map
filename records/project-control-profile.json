@@ -769,13 +769,18 @@
     "post_ci_sha256": "97a98937d770d032a83e3bc4e5ec885e2cb777ff8fc362cae743f4ff7ba518fc"
   },
   "active_optical_alternate_source_route": {
-    "checkpoint_id": "M2-OPTICAL-ALTERNATE-SOURCE-ROUTE-001-CATALOG-MECHANICAL-RECOVERY-002-CI-PENDING",
+    "checkpoint_id": "M2-OPTICAL-ALTERNATE-SOURCE-ROUTE-001-FIRST-CUSTODY-PASS-SECOND-TRANSFER-UNVERIFIED",
     "authority_ref": "records/source-gates/m2-optical-alternate-source-route-001-approval.json",
     "proposal_ref": "contracts/milestone-002-optical-alternate-source-route-001-proposal.json",
     "review_bundle_ref": "reviews/m2-optical-alternate-source-route-001/review-bundle.json",
     "implementation_readiness_ref": "records/readiness/m2-optical-alternate-source-route-001-mechanical-recovery-002-implementation-readiness.json",
-    "next_action": "Verify fresh public implementation CI and no-payload preflight; interpret the preserved complete first query without request replay, then execute the three remaining queries and shortlisted details within unchanged cumulative request caps. No source payload or pixels started.",
+    "next_action": "Observe the existing activation-002 monitor without re-click or retry; only passing exact container custody releases pair-1 QA preflight.",
     "preserved_metadata_attempt_ref": "records/readiness/m2-optical-alternate-source-route-001-metadata-attempt-001-reconciliation.json",
-    "preserved_metadata_recovery_ref": "records/readiness/m2-optical-alternate-source-route-001-metadata-recovery-001-reconciliation.json"
+    "preserved_metadata_recovery_ref": "records/readiness/m2-optical-alternate-source-route-001-metadata-recovery-001-reconciliation.json",
+    "selection_manifest_ref": "records/source-gates/m2-optical-alternate-source-route-001-selection-manifest.json",
+    "selection_manifest_sha256": "073f3644ee871d4c9fa9b9adf8cf182d7de047804499aeee36c14745aadf46c3",
+    "selection_and_transfer_checkpoint_ref": "records/readiness/m2-optical-alternate-source-route-001-selection-and-transfer-checkpoint.json",
+    "intake_checkpoint_ref": "records/readiness/m2-optical-alternate-source-route-001-intake-checkpoint-001.json",
+    "intake_checkpoint_sha256": "472eb9cfd043be9f14469b287c31fd27f55ddef2cbfab424e36899017c679e6e"
   }
 }

@@ -1,0 +1,198 @@
+{
+  "approval_sha256": "eea904b27f94d3055c9b98ed523b7f46c0bebf0ecd20fbe681d06fea2693a532",
+  "at_utc": "2026-10-03T22:09:32.990258Z",
+  "first_attempt_evidence_hashes": {
+    "browser-click-observation.json": "506f20b30aa514aa85e19cff7057acacb327b109635d4e67f0043e4a89e473b6",
+    "cleanup.json": "52b07cac7eb4ffc52385ca620d899983aebcb1c311f101695b3265e511e97232",
+    "intent.json": "26f40ddcb73f6e2299d7fe2ae740cbf8eaefa2f402e74e46f25589b4455475b0",
+    "monitor-claim.json": "8fc7fa59e720343d77cff9587c14eccea8b2be2248329cbd91126f268cabe355",
+    "sample-00001.json": "00c0f5b325ac59f0ddde0abd26c7597cefc2872a0d908ba6809542e6d5fe2363",
+    "sample-00002.json": "2c77fffde6c40b92bfec69e8ff9bbe2ad044aec4fbb4a12df66a7a34c9bd7531",
+    "sample-00003.json": "6d59c1ed2cde351c695110bd083b31fc1b4fda4347330642dc5fff21490b69bc",
+    "terminal.json": "4c62a174a50935a8a47850a6316dff43b8c7b0994304422f7eec4a62c99901c3",
+    "verification.json": "4fa8ff07161ad9b85a62bbab8e7ba2b78e44796d92e28ea6010acf39d958e4b2"
+  },
+  "first_source": {
+    "archive_sha256": "592a410b5b193b42ebb80b305220159f37f1110d36ef4f2a09dcbcf02dbfde2b",
+    "archive_size_bytes": 1089306624,
+    "at_utc": "2026-10-03T22:02:17.410289Z",
+    "pixel_qa": false,
+    "product_id": "LC08_L2SP_141040_20260818_20260824_02_T1",
+    "provider_authenticated_checksum": false,
+    "scene_id": "LC81410402026230LGN00",
+    "status": "pass_container_only_no_replace_custody"
+  },
+  "first_source_browser_file_initially_absent": true,
+  "first_source_container_verification": {
+    "archive_sha256": "592a410b5b193b42ebb80b305220159f37f1110d36ef4f2a09dcbcf02dbfde2b",
+    "archive_size_bytes": 1089306624,
+    "limitations": [
+      "No upstream checksum was compared.",
+      "No TIFF header, CRS, pixel, AOI, registration, or change check was performed."
+    ],
+    "member_count": 27,
+    "members": [
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_ANG.txt",
+        "sha256": "6b52ae313ae0a06b3501e6681aeca424a773a111988ef1f3a76098f51f2a1bc2",
+        "size_bytes": 117265
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_MTL.json",
+        "sha256": "61df998a872c0d535677d6053b1c2d8cf3ab693c88859cf0b11db30e2de1d0c7",
+        "size_bytes": 18650
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_MTL.txt",
+        "sha256": "56ebe59d320fcc7a5ec5909ed12739dbaf9cd5a2a7930633c1e1c93e909d2cc4",
+        "size_bytes": 15369
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_MTL.xml",
+        "sha256": "a73032ec3f775c75f860534e8f27ac0cca204aab425794295b99dad9d0084a60",
+        "size_bytes": 22632
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_QA_PIXEL.TIF",
+        "sha256": "2b2ab962ed10da2a4860f8a5a825f45b62140a944eb06666b83c39bb558589f7",
+        "size_bytes": 2848041
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_QA_RADSAT.TIF",
+        "sha256": "3ca683bb16d547860aa0b50991fdcbc0f66eb2520197cc789d9376e835dc56b6",
+        "size_bytes": 232857
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_SR_B1.TIF",
+        "sha256": "76b7bef7fdcc31f5c44dbe1959cd4223c3544ef92b26c8637a4f30ee79a1643b",
+        "size_bytes": 101704513
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_SR_B2.TIF",
+        "sha256": "871f39d4e6dfb98a449dfa082c984601a19aabc400594a83c0a8b9e4fe85a1d5",
+        "size_bytes": 101702557
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_SR_B3.TIF",
+        "sha256": "f4056182b9f127d43de67fd8ca8e025172c2c54ce016dbe0da72c26539dd37d8",
+        "size_bytes": 101238905
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_SR_B4.TIF",
+        "sha256": "e9d2f04e9a9eb04d490917c23a47668fe448a75cf1d5a211cdc55d97d4568f60",
+        "size_bytes": 101194906
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_SR_B5.TIF",
+        "sha256": "dcb459a1ad3e18d522856281bb58fa299360dbaabe6d43c7838a9c2aba8aa3a4",
+        "size_bytes": 100378773
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_SR_B6.TIF",
+        "sha256": "1b546c10d5755cf3b10d80d34baf48a7e8af96af90e671107331eceec6b6465e",
+        "size_bytes": 97299784
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_SR_B7.TIF",
+        "sha256": "992ff296634dbabc4e98d5bb9a7f2c282b84ff02a2b316111a90fb9fb3bacfc6",
+        "size_bytes": 95318894
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_SR_QA_AEROSOL.TIF",
+        "sha256": "70f0710486af832090947668a79b9a39f5fe9b7d8ff4844511a3a03807a5ea8f",
+        "size_bytes": 4712301
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_SR_stac.json",
+        "sha256": "376a571a48d131cd61114ca711a032c487e5f4ac443abac550aa23a9ad26fdd3",
+        "size_bytes": 46310
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_ST_ATRAN.TIF",
+        "sha256": "16cda06350032b2067ea3242bac8e6465a326dda325d59953ae551a27aae7f76",
+        "size_bytes": 56086202
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_ST_B10.TIF",
+        "sha256": "fa87c34468841a5f17d08dc4af40b76881702254a55389a189ec11b1eb2c081f",
+        "size_bytes": 87840294
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_ST_CDIST.TIF",
+        "sha256": "694229c1f0b12a6c99e4e74b16326bd60114aaba0ad63cb15b9315e47e5586c0",
+        "size_bytes": 4657781
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_ST_DRAD.TIF",
+        "sha256": "891e4474e3038a71398d09c08096140fec206de7914c8b165feb4c5f549a8e6a",
+        "size_bytes": 36614654
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_ST_EMIS.TIF",
+        "sha256": "72864130d5692c12a775561a4460690b66cd744bd7062ff78f14612e4df8b181",
+        "size_bytes": 20618009
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_ST_EMSD.TIF",
+        "sha256": "539cabdcf7e586261108fe826288a3f6dd8286a0674a606e945be0ca4b053313",
+        "size_bytes": 18193178
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_ST_QA.TIF",
+        "sha256": "618ea2b8c0082d9aa74b45f64104f96fcdb98ae07312ecb1196704fd973bbfc3",
+        "size_bytes": 34439778
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_ST_TRAD.TIF",
+        "sha256": "ad0b9175431827f076d2e687c37c5514d590686f94265a4a73057a17721481d0",
+        "size_bytes": 74469952
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_ST_URAD.TIF",
+        "sha256": "4ecce578083d256aab9f9ad6d73c605a2ea2aa02d5400e8af92c49773ff13608",
+        "size_bytes": 49347753
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_ST_stac.json",
+        "sha256": "2776a31eaf13a6a170e733b0974992fd96361e27a0427d8b04149ab5a56cc519",
+        "size_bytes": 41261
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_thumb_large.jpeg",
+        "sha256": "ed4b4b846869b8702f650c69542394e32e99cbe33d5fb1a044b54188f726ce19",
+        "size_bytes": 80435
+      },
+      {
+        "name": "LC08_L2SP_141040_20260818_20260824_02_T1_thumb_small.jpeg",
+        "sha256": "3d8b6e218a8ce6d8b3aa7bfe4c18ac855f4dd577b9ad850cd3390e2083043c2c",
+        "size_bytes": 12289
+      }
+    ],
+    "product_id": "LC08_L2SP_141040_20260818_20260824_02_T1",
+    "scene_id": "LC81410402026230LGN00",
+    "status": "pass_container_and_grouped_mtl_identity_only"
+  },
+  "first_source_one_click_only": true,
+  "first_source_weak_browser_file_provenance_local_qa_only": true,
+  "full_bundle_activations_total": 2,
+  "implementation_commit": "9cea1ef90f9787442ea42a0496a929db825a72d7",
+  "implementation_public_ci_run_id": 37156335085,
+  "metadata_http_requests_total": 14,
+  "new_header_or_pixel_qa": false,
+  "new_map": false,
+  "next_action": "Observe the existing activation-002 monitor without re-click or retry; only passing exact container custody releases pair-1 QA preflight.",
+  "observed_received_bytes_so_far": 1089306624,
+  "registration_or_change_or_attribution": false,
+  "schema_version": "1.0",
+  "second_source": {
+    "attempt": "activation-002",
+    "click_observation_sha256": "bf0ab74d1cd17cad19befa98a060e5f8d24f9c8a62b066cd29d8a38d4a228dd5",
+    "full_bundle_clicks": 1,
+    "intent_sha256": "3fb205633dc3c84c65df264099c657df96aac8bd382d6634b09233b98c17572a",
+    "monitor_session_id": 42889,
+    "product_id": "LC08_L2SP_141040_20260903_20260911_02_T1",
+    "status": "transfer_unverified"
+  },
+  "selection_manifest_sha256": "073f3644ee871d4c9fa9b9adf8cf182d7de047804499aeee36c14745aadf46c3",
+  "status": "pass_first_source_container_custody_second_transfer_unverified"
+}

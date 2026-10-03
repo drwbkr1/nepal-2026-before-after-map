@@ -1,0 +1,644 @@
+{
+  "dispositions": [
+    {
+      "acquired_at_utc": "2026-08-18T04:48:04.695655Z",
+      "catalog_focus_containment": {
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "eligible": false,
+      "eo_cloud_cover": 84.01,
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              84.57711141052309,
+              28.473019018115924
+            ],
+            [
+              84.14838398605472,
+              26.746667489281357
+            ],
+            [
+              85.96846304975021,
+              26.37752476430521
+            ],
+            [
+              86.41262727537097,
+              28.10772458166977
+            ],
+            [
+              84.57711141052309,
+              28.473019018115924
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "item_id": "LC08_L2SP_141041_20260818_20260824_02_T1_SR",
+      "metadata_footprint_is_not_pixel_qa": true,
+      "platform": "landsat-8",
+      "processing_level": null,
+      "processing_level_identity_source": "exact_product_id_and_independent_field_when_present",
+      "product_id": "LC08_L2SP_141041_20260818_20260824_02_T1",
+      "query_platform": "landsat-8",
+      "query_role": "before",
+      "reasons": [
+        "product_identity_outside_fixed_policy",
+        "landsat_wrs_row_missing_or_mismatch",
+        "scene_identity_missing_or_disagreeing",
+        "catalog_footprint_not_full_focus_containment"
+      ],
+      "reported_catalog_platform": "LANDSAT_8",
+      "scene_id": "LC81410412026230LGN00"
+    },
+    {
+      "acquired_at_utc": "2026-08-18T04:47:40.796144Z",
+      "catalog_focus_containment": {
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "eligible": true,
+      "eo_cloud_cover": 79.83,
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              84.93507820698171,
+              29.911628472721354
+            ],
+            [
+              84.50052760336551,
+              28.185811876466254
+            ],
+            [
+              86.33805814897893,
+              27.815722324610217
+            ],
+            [
+              86.79434472508453,
+              29.54425959298588
+            ],
+            [
+              84.93507820698171,
+              29.911628472721354
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "item_id": "LC08_L2SP_141040_20260818_20260824_02_T1_SR",
+      "metadata_footprint_is_not_pixel_qa": true,
+      "platform": "landsat-8",
+      "processing_level": "L2SP",
+      "processing_level_identity_source": "exact_product_id_and_independent_field_when_present",
+      "product_id": "LC08_L2SP_141040_20260818_20260824_02_T1",
+      "query_platform": "landsat-8",
+      "query_role": "before",
+      "reasons": [],
+      "reported_catalog_platform": "LANDSAT_8",
+      "scene_id": "LC81410402026230LGN00"
+    },
+    {
+      "acquired_at_utc": "2026-08-02T04:47:58.468889Z",
+      "catalog_focus_containment": {
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "eligible": false,
+      "eo_cloud_cover": 99.96,
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              84.57281854490736,
+              28.473213097659414
+            ],
+            [
+              84.14386412556394,
+              26.74657644761907
+            ],
+            [
+              85.96395276394637,
+              26.377492194263112
+            ],
+            [
+              86.40835158713726,
+              28.107706203468627
+            ],
+            [
+              84.57281854490736,
+              28.473213097659414
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "item_id": "LC08_L2SP_141041_20260802_20260811_02_T2_SR",
+      "metadata_footprint_is_not_pixel_qa": true,
+      "platform": "landsat-8",
+      "processing_level": null,
+      "processing_level_identity_source": "exact_product_id_and_independent_field_when_present",
+      "product_id": "LC08_L2SP_141041_20260802_20260811_02_T2",
+      "query_platform": "landsat-8",
+      "query_role": "before",
+      "reasons": [
+        "product_identity_outside_fixed_policy",
+        "landsat_wrs_row_missing_or_mismatch",
+        "landsat_collection_category_missing_or_mismatch",
+        "scene_identity_missing_or_disagreeing",
+        "catalog_footprint_not_full_focus_containment"
+      ],
+      "reported_catalog_platform": "LANDSAT_8",
+      "scene_id": "LC81410412026214LGN00"
+    },
+    {
+      "acquired_at_utc": "2026-08-02T04:47:34.569376Z",
+      "catalog_focus_containment": {
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "eligible": false,
+      "eo_cloud_cover": 90.56,
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              84.93072461208807,
+              29.911830860796904
+            ],
+            [
+              84.49594733002178,
+              28.185728124907705
+            ],
+            [
+              86.33409859438581,
+              27.815703287961533
+            ],
+            [
+              86.7900102915378,
+              29.543982058137686
+            ],
+            [
+              84.93072461208807,
+              29.911830860796904
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "item_id": "LC08_L2SP_141040_20260802_20260811_02_T2_SR",
+      "metadata_footprint_is_not_pixel_qa": true,
+      "platform": "landsat-8",
+      "processing_level": null,
+      "processing_level_identity_source": "exact_product_id_and_independent_field_when_present",
+      "product_id": "LC08_L2SP_141040_20260802_20260811_02_T2",
+      "query_platform": "landsat-8",
+      "query_role": "before",
+      "reasons": [
+        "product_identity_outside_fixed_policy",
+        "landsat_collection_category_missing_or_mismatch",
+        "scene_identity_missing_or_disagreeing"
+      ],
+      "reported_catalog_platform": "LANDSAT_8",
+      "scene_id": "LC81410402026214LGN00"
+    },
+    {
+      "acquired_at_utc": "2026-09-19T04:48:16.453779Z",
+      "catalog_focus_containment": {
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "eligible": false,
+      "eo_cloud_cover": 67.47,
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              84.57588664366638,
+              28.472997181393524
+            ],
+            [
+              84.14718544560422,
+              26.746372695113024
+            ],
+            [
+              85.96756099197377,
+              26.377518261660477
+            ],
+            [
+              86.4114056497508,
+              28.107719344355207
+            ],
+            [
+              84.57588664366638,
+              28.472997181393524
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "item_id": "LC08_L2SP_141041_20260919_20260925_02_T1_SR",
+      "metadata_footprint_is_not_pixel_qa": true,
+      "platform": "landsat-8",
+      "processing_level": null,
+      "processing_level_identity_source": "exact_product_id_and_independent_field_when_present",
+      "product_id": "LC08_L2SP_141041_20260919_20260925_02_T1",
+      "query_platform": "landsat-8",
+      "query_role": "after",
+      "reasons": [
+        "product_identity_outside_fixed_policy",
+        "landsat_wrs_row_missing_or_mismatch",
+        "scene_identity_missing_or_disagreeing",
+        "catalog_footprint_not_full_focus_containment"
+      ],
+      "reported_catalog_platform": "LANDSAT_8",
+      "scene_id": "LC81410412026262LGN00"
+    },
+    {
+      "acquired_at_utc": "2026-09-19T04:47:52.554266Z",
+      "catalog_focus_containment": {
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "eligible": true,
+      "eo_cloud_cover": 63.99,
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              84.93383591998177,
+              29.91160900828802
+            ],
+            [
+              84.4993124940854,
+              28.18551900502677
+            ],
+            [
+              86.33683982407624,
+              27.815716479270264
+            ],
+            [
+              86.79310615546682,
+              29.544257670367752
+            ],
+            [
+              84.93383591998177,
+              29.91160900828802
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "item_id": "LC08_L2SP_141040_20260919_20260925_02_T1_SR",
+      "metadata_footprint_is_not_pixel_qa": true,
+      "platform": "landsat-8",
+      "processing_level": "L2SP",
+      "processing_level_identity_source": "exact_product_id_and_independent_field_when_present",
+      "product_id": "LC08_L2SP_141040_20260919_20260925_02_T1",
+      "query_platform": "landsat-8",
+      "query_role": "after",
+      "reasons": [],
+      "reported_catalog_platform": "LANDSAT_8",
+      "scene_id": "LC81410402026262LGN00"
+    },
+    {
+      "acquired_at_utc": "2026-09-03T04:48:10.241390Z",
+      "catalog_focus_containment": {
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "eligible": false,
+      "eo_cloud_cover": 82.63,
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              84.57862385237475,
+              28.47385797075761
+            ],
+            [
+              84.14957578134896,
+              26.74723280477497
+            ],
+            [
+              85.96966098871268,
+              26.378075100886903
+            ],
+            [
+              86.41353907626225,
+              28.10854090376636
+            ],
+            [
+              84.57862385237475,
+              28.47385797075761
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "item_id": "LC08_L2SP_141041_20260903_20260911_02_T2_SR",
+      "metadata_footprint_is_not_pixel_qa": true,
+      "platform": "landsat-8",
+      "processing_level": null,
+      "processing_level_identity_source": "exact_product_id_and_independent_field_when_present",
+      "product_id": "LC08_L2SP_141041_20260903_20260911_02_T2",
+      "query_platform": "landsat-8",
+      "query_role": "after",
+      "reasons": [
+        "product_identity_outside_fixed_policy",
+        "landsat_wrs_row_missing_or_mismatch",
+        "landsat_collection_category_missing_or_mismatch",
+        "scene_identity_missing_or_disagreeing",
+        "catalog_footprint_not_full_focus_containment"
+      ],
+      "reported_catalog_platform": "LANDSAT_8",
+      "scene_id": "LC81410412026246LGN00"
+    },
+    {
+      "acquired_at_utc": "2026-09-03T04:47:46.346114Z",
+      "catalog_focus_containment": {
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "eligible": true,
+      "eo_cloud_cover": 50.58,
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              84.93599876001896,
+              29.91218419463461
+            ],
+            [
+              84.50143736680808,
+              28.186099161497097
+            ],
+            [
+              86.33896861324027,
+              27.816268317691602
+            ],
+            [
+              86.79527256123603,
+              29.544802537878876
+            ],
+            [
+              84.93599876001896,
+              29.91218419463461
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "item_id": "LC08_L2SP_141040_20260903_20260911_02_T1_SR",
+      "metadata_footprint_is_not_pixel_qa": true,
+      "platform": "landsat-8",
+      "processing_level": "L2SP",
+      "processing_level_identity_source": "exact_product_id_and_independent_field_when_present",
+      "product_id": "LC08_L2SP_141040_20260903_20260911_02_T1",
+      "query_platform": "landsat-8",
+      "query_role": "after",
+      "reasons": [],
+      "reported_catalog_platform": "LANDSAT_8",
+      "scene_id": "LC81410402026246LGN00"
+    },
+    {
+      "acquired_at_utc": "2026-08-10T04:48:09.712705Z",
+      "catalog_focus_containment": {
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "eligible": false,
+      "eo_cloud_cover": 76.53,
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              84.56121441589023,
+              28.471652065850527
+            ],
+            [
+              84.13305050314757,
+              26.74500472534498
+            ],
+            [
+              85.95944733859632,
+              26.376917808655378
+            ],
+            [
+              86.40377349175482,
+              28.107144764704984
+            ],
+            [
+              84.56121441589023,
+              28.471652065850527
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "item_id": "LC09_L2SP_141041_20260810_20260811_02_T1_SR",
+      "metadata_footprint_is_not_pixel_qa": true,
+      "platform": "landsat-9",
+      "processing_level": null,
+      "processing_level_identity_source": "exact_product_id_and_independent_field_when_present",
+      "product_id": "LC09_L2SP_141041_20260810_20260811_02_T1",
+      "query_platform": "landsat-9",
+      "query_role": "before",
+      "reasons": [
+        "product_identity_outside_fixed_policy",
+        "landsat_wrs_row_missing_or_mismatch",
+        "scene_identity_missing_or_disagreeing",
+        "catalog_footprint_not_full_focus_containment"
+      ],
+      "reported_catalog_platform": "LANDSAT_9",
+      "scene_id": "LC91410412026222LGN00"
+    },
+    {
+      "acquired_at_utc": "2026-08-10T04:47:45.817454Z",
+      "catalog_focus_containment": {
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "eligible": false,
+      "eo_cloud_cover": 49.41,
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              84.91989402403931,
+              29.909765850388577
+            ],
+            [
+              84.48499909683919,
+              28.183632648870756
+            ],
+            [
+              86.3295365350865,
+              27.81459795123198
+            ],
+            [
+              86.78505717426383,
+              29.543432626651576
+            ],
+            [
+              84.91989402403931,
+              29.909765850388577
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "item_id": "LC09_L2SP_141040_20260810_20260811_02_T1_SR",
+      "metadata_footprint_is_not_pixel_qa": true,
+      "platform": "landsat-9",
+      "processing_level": "L2SP",
+      "processing_level_identity_source": "exact_product_id_and_independent_field_when_present",
+      "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+      "query_platform": "landsat-9",
+      "query_role": "before",
+      "reasons": [
+        "known_terminal_product_never_requeue"
+      ],
+      "reported_catalog_platform": "LANDSAT_9",
+      "scene_id": "LC91410402026222LGN00"
+    },
+    {
+      "acquired_at_utc": "2026-09-11T04:48:18.726946Z",
+      "catalog_focus_containment": {
+        "AOI-SOURCE": false,
+        "AOI-UPPER-CORRIDOR": false
+      },
+      "eligible": false,
+      "eo_cloud_cover": 77.14,
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              84.57071855620572,
+              28.471280917230764
+            ],
+            [
+              84.14241166077733,
+              26.744381833599203
+            ],
+            [
+              85.96847026573059,
+              26.376712251693366
+            ],
+            [
+              86.4123248206605,
+              28.107181672591874
+            ],
+            [
+              84.57071855620572,
+              28.471280917230764
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "item_id": "LC09_L2SP_141041_20260911_20260912_02_T1_SR",
+      "metadata_footprint_is_not_pixel_qa": true,
+      "platform": "landsat-9",
+      "processing_level": null,
+      "processing_level_identity_source": "exact_product_id_and_independent_field_when_present",
+      "product_id": "LC09_L2SP_141041_20260911_20260912_02_T1",
+      "query_platform": "landsat-9",
+      "query_role": "after",
+      "reasons": [
+        "product_identity_outside_fixed_policy",
+        "landsat_wrs_row_missing_or_mismatch",
+        "scene_identity_missing_or_disagreeing",
+        "catalog_footprint_not_full_focus_containment"
+      ],
+      "reported_catalog_platform": "LANDSAT_9",
+      "scene_id": "LC91410412026254LGN00"
+    },
+    {
+      "acquired_at_utc": "2026-09-11T04:47:54.831696Z",
+      "catalog_focus_containment": {
+        "AOI-SOURCE": true,
+        "AOI-UPPER-CORRIDOR": true
+      },
+      "eligible": true,
+      "eo_cloud_cover": 63.86,
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              84.92890598727837,
+              29.909637082389235
+            ],
+            [
+              84.49416571898615,
+              28.18353016847113
+            ],
+            [
+              86.33775849609641,
+              27.814908440208285
+            ],
+            [
+              86.79403672922501,
+              29.543446847635792
+            ],
+            [
+              84.92890598727837,
+              29.909637082389235
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "item_id": "LC09_L2SP_141040_20260911_20260912_02_T1_SR",
+      "metadata_footprint_is_not_pixel_qa": true,
+      "platform": "landsat-9",
+      "processing_level": "L2SP",
+      "processing_level_identity_source": "exact_product_id_and_independent_field_when_present",
+      "product_id": "LC09_L2SP_141040_20260911_20260912_02_T1",
+      "query_platform": "landsat-9",
+      "query_role": "after",
+      "reasons": [],
+      "reported_catalog_platform": "LANDSAT_9",
+      "scene_id": "LC91410402026254LGN00"
+    }
+  ],
+  "queries": [
+    {
+      "complete": true,
+      "features_returned": 4,
+      "pages": 1,
+      "platform": "landsat-8",
+      "role": "before",
+      "uses_exact_preserved_complete_response_without_request_replay": true
+    },
+    {
+      "complete": true,
+      "features_returned": 4,
+      "pages": 1,
+      "platform": "landsat-8",
+      "role": "after",
+      "uses_exact_preserved_complete_response_without_request_replay": false
+    },
+    {
+      "complete": true,
+      "features_returned": 2,
+      "pages": 1,
+      "platform": "landsat-9",
+      "role": "before",
+      "uses_exact_preserved_complete_response_without_request_replay": false
+    },
+    {
+      "complete": true,
+      "features_returned": 2,
+      "pages": 1,
+      "platform": "landsat-9",
+      "role": "after",
+      "uses_exact_preserved_complete_response_without_request_replay": false
+    }
+  ],
+  "raw_asset_links_or_source_pixels_published": false,
+  "raw_non_git_inventory_sha256": "f5786547265438703def97202e5770f4cf8f62845a8c90b08fe9fc219970615d",
+  "selection_manifest_sha256": "073f3644ee871d4c9fa9b9adf8cf182d7de047804499aeee36c14745aadf46c3",
+  "status": "complete_fixed_policy_metadata_inventory_only"
+}

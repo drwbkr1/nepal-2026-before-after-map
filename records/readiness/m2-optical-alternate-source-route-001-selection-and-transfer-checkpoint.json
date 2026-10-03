@@ -1,0 +1,100 @@
+{
+  "approval_sha256": "eea904b27f94d3055c9b98ed523b7f46c0bebf0ecd20fbe681d06fea2693a532",
+  "at_utc": "2026-10-03T22:00:31.530120Z",
+  "browser_tab_for_transfer": "2 in existing in-app browser",
+  "candidate_disposition_count": 12,
+  "change_registration_attribution_or_scientific_claim": false,
+  "file_transfer_completion_or_integrity_proven": false,
+  "first_source_full_bundle_clicks": 1,
+  "first_source_option_displayed_size": "1.01 GiB rounded",
+  "first_source_product": "LC08_L2SP_141040_20260818_20260824_02_T1",
+  "inventory_sha256": "f5786547265438703def97202e5770f4cf8f62845a8c90b08fe9fc219970615d",
+  "locked_pairs": [
+    {
+      "after": "LC08_L2SP_141040_20260903_20260911_02_T1",
+      "before": "LC08_L2SP_141040_20260818_20260824_02_T1",
+      "platform": "landsat-8",
+      "rank": 1,
+      "rank_tuple": [
+        79.83,
+        130.41,
+        1382405.54997,
+        "LC08_L2SP_141040_20260818_20260824_02_T1",
+        "LC08_L2SP_141040_20260903_20260911_02_T1"
+      ]
+    },
+    {
+      "after": "LC08_L2SP_141040_20260919_20260925_02_T1",
+      "before": "LC08_L2SP_141040_20260818_20260824_02_T1",
+      "platform": "landsat-8",
+      "rank": 2,
+      "rank_tuple": [
+        79.83,
+        143.82,
+        2764811.758122,
+        "LC08_L2SP_141040_20260818_20260824_02_T1",
+        "LC08_L2SP_141040_20260919_20260925_02_T1"
+      ]
+    }
+  ],
+  "metadata_http_request_cap": 18,
+  "metadata_http_requests_total_after_rights_refresh": 14,
+  "monitor_tool_session_id": 75958,
+  "new_optical_map_created": false,
+  "new_real_pixel_qa": false,
+  "next_action": "Observe the same browser transfer and one live monitor. Never click again or resume a consumed attempt based solely on an observation timeout.",
+  "prior_failed_attempts_preserved": true,
+  "public_ci_conclusion": "success",
+  "public_ci_run_id": 37156335085,
+  "public_implementation_commit": "9cea1ef90f9787442ea42a0496a929db825a72d7",
+  "query_summary": [
+    {
+      "complete": true,
+      "features_returned": 4,
+      "pages": 1,
+      "platform": "landsat-8",
+      "role": "before",
+      "uses_exact_preserved_complete_response_without_request_replay": true
+    },
+    {
+      "complete": true,
+      "features_returned": 4,
+      "pages": 1,
+      "platform": "landsat-8",
+      "role": "after",
+      "uses_exact_preserved_complete_response_without_request_replay": false
+    },
+    {
+      "complete": true,
+      "features_returned": 2,
+      "pages": 1,
+      "platform": "landsat-9",
+      "role": "before",
+      "uses_exact_preserved_complete_response_without_request_replay": false
+    },
+    {
+      "complete": true,
+      "features_returned": 2,
+      "pages": 1,
+      "platform": "landsat-9",
+      "role": "after",
+      "uses_exact_preserved_complete_response_without_request_replay": false
+    }
+  ],
+  "rejection_reasons": {
+    "catalog_footprint_not_full_focus_containment": 6,
+    "known_terminal_product_never_requeue": 1,
+    "landsat_collection_category_missing_or_mismatch": 3,
+    "landsat_wrs_row_missing_or_mismatch": 6,
+    "product_identity_outside_fixed_policy": 7,
+    "scene_identity_missing_or_disagreeing": 7
+  },
+  "rights_reads": 2,
+  "schema_version": "1.0",
+  "search_page_cap": 8,
+  "search_pages_total": 8,
+  "selected_detail_requests": 3,
+  "selection_manifest_ref": "records/source-gates/m2-optical-alternate-source-route-001-selection-manifest.json",
+  "selection_manifest_sha256": "073f3644ee871d4c9fa9b9adf8cf182d7de047804499aeee36c14745aadf46c3",
+  "status": "pass_metadata_selection_locked_first_source_transfer_unverified"
+}
