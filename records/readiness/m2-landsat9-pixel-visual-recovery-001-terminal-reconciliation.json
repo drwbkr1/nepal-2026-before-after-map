@@ -1,0 +1,157 @@
+{
+  "authority": {
+    "approval_sha256": "d49822fe1f9531c1b531033d1f93806225f16369dd1095682611007cac9f74d9",
+    "proposal_sha256": "9437ea0dea7222118a88e5d8157987d22afcfaf33d765e954745142abbe6694c",
+    "review_bundle_sha256": "92fe8c191eb854a09e7e5e5f45494e324f9b1feee186528fd620bfa6ca4de2f3"
+  },
+  "disposition": "Durable supervisor and worker evidence now exists. The frozen mtl_fields function builds a flat key dictionary and stopped when a key repeated with a differing value. The actual conflicting field and its groups were not recorded or separately inspected. This does not classify the source as corrupt or establish pixel usability. The new real-002 and prior real-001 attempts are terminal and cannot be resumed, reused, mutated, or retried. Any group-selection correction and new content-processing attempt lie outside this closed one-worker envelope.",
+  "execution_bounds": {
+    "automatic_retries": 0,
+    "change_analysis_or_attribution": false,
+    "local_panel_created": false,
+    "members_materialized": 10,
+    "new_downloads": 0,
+    "provider_requests": 0,
+    "public_derived_pixel_publication": false,
+    "real_pixel_reads": 0,
+    "real_tiff_header_reads": 0,
+    "scientific_method_change": false,
+    "source_attempts_started": 1
+  },
+  "final_no_content_preflight": {
+    "external_ref": "processing/landsat9-pixel-visual-recovery-001/final-preflight-local.json",
+    "sha256": "d8ac71351a8ae957ae7c5b63abc814716b8f8ebcb64b309ed372f796df6f18d8",
+    "status": "pass_final_no_content_preflight"
+  },
+  "implementation_gate": {
+    "commit": "7d087e4fa9edb92fa568a69165e3138a789071c2",
+    "focused_synthetic_tests": 13,
+    "installed_arcgis_disposable_synthetic": "pass_disposable_installed_arcgis_recovery_synthetic",
+    "public_ci_conclusion": "success",
+    "public_ci_run_id": "37141856825",
+    "public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/37141856825",
+    "public_required_files": 1474,
+    "public_runtime_skips": 19,
+    "public_tests": 1149
+  },
+  "real_attempt": {
+    "after_attempt_started": false,
+    "attempt_id": "landsat9-pixel-visual-recovery-001-real-002",
+    "before_exact_members_materialized": [
+      {
+        "name": "LC09_L2SP_141040_20260810_20260811_02_T1_MTL.txt",
+        "sha256": "12ae339956cb873ba8316a48715d1db2fbb7f46182a16dd9895f8949733cf799",
+        "size_bytes": 15287
+      },
+      {
+        "name": "LC09_L2SP_141040_20260810_20260811_02_T1_MTL.xml",
+        "sha256": "91f593186a7847ebf0b255cb3de3ad25e24c863061ae70066598904270d61e82",
+        "size_bytes": 22512
+      },
+      {
+        "name": "LC09_L2SP_141040_20260810_20260811_02_T1_QA_PIXEL.TIF",
+        "sha256": "793bebbaffebd0fbdb59a456e8c4534794b2f72e3fb5b9652ba78604f22d5f9a",
+        "size_bytes": 3898913
+      },
+      {
+        "name": "LC09_L2SP_141040_20260810_20260811_02_T1_QA_RADSAT.TIF",
+        "sha256": "74e3fefcf32615e20f3af1c3843b145d011622a208513a7a3740038c53a73dcd",
+        "size_bytes": 235489
+      },
+      {
+        "name": "LC09_L2SP_141040_20260810_20260811_02_T1_SR_B3.TIF",
+        "sha256": "14d2c0792ec0b7d1f459692e2eed5cb2d85d0357620cae8992a4a737410d2d29",
+        "size_bytes": 100336842
+      },
+      {
+        "name": "LC09_L2SP_141040_20260810_20260811_02_T1_SR_B4.TIF",
+        "sha256": "f7a39356029b2946f07236bc581cd6e5aaa73b0791be7be14aef0c2b0971582f",
+        "size_bytes": 101057193
+      },
+      {
+        "name": "LC09_L2SP_141040_20260810_20260811_02_T1_SR_B5.TIF",
+        "sha256": "217fb199824217772e2cbdef2e5e5d8e7ed22049573092e0b6793be56123858d",
+        "size_bytes": 101282094
+      },
+      {
+        "name": "LC09_L2SP_141040_20260810_20260811_02_T1_SR_B6.TIF",
+        "sha256": "65a8510f8ed2be99651d197556ff9c583d5cf38afa51c5a7248c75224a5292b1",
+        "size_bytes": 100569184
+      },
+      {
+        "name": "LC09_L2SP_141040_20260810_20260811_02_T1_SR_B7.TIF",
+        "sha256": "dacf77ffc20c98965fb332a1d44db83c10b013e6357d68d92f85226405296201",
+        "size_bytes": 99613482
+      },
+      {
+        "name": "LC09_L2SP_141040_20260810_20260811_02_T1_SR_QA_AEROSOL.TIF",
+        "sha256": "b676ab38f7187479d2f6142a008a37fea2fd2b1b4dcdf8329ce970d4f33ed6ea",
+        "size_bytes": 6758693
+      }
+    ],
+    "external_receipt_sha256": {
+      "fallback": {
+        "ready.json": "5e09b70c37a2c26802adf7d30ded6e4eb0dd40a581f5c04cd71d53e1ed149f52"
+      },
+      "supervisor": {
+        "arcpy-import-pass.json": "079018c3ce6ed9d2a031f6941a5ea5289055d57dfb8a38f4f8842e58b30f3ec4",
+        "arcpy-import-start.json": "e021bb8e1871db94a46c1679845ebacd146124dcf0a61bd1642f96636281f365",
+        "cleanup.json": "ee223b66b3f48cbb45da65222e41361d622ea0a1e9cb2dce2f113c63f05c8259",
+        "intent.json": "092c2cf2c57b5f277b8ae6de008062c1bfd22b52812f785431a08eaabcd7acd7",
+        "stage-01.json": "347907a1f024b2387d84f4594e15009f1d3b3b49db47e890fdc86462d52fb5aa",
+        "stage-02.json": "08d838731f911e316fea12729567d3c3e2850b87b53243565f70071b21abcf48",
+        "terminal.json": "47fb0845b748a58391aa4c0f035b511f75bacd998ae03a52e0d2477c6acf4f71",
+        "worker-claim.json": "62f8dc1a69a526df37857187b2610b7287552a891ed375f192c67e0df2fa4fca",
+        "worker-start.json": "695324384ce58b7ee64ad5356b75e8a531e7bfea5ef59a64adb9ce600db7d39c"
+      },
+      "worker": {
+        "cleanup.json": "1b05e989b7cf732abc9380c2ce7bfccedc59ce0a45e634232f43ab76063095e7",
+        "started.json": "ba5c9be1af38c012e7589f28f84012bab4b54b9872afdefa05f43f329ec69fce",
+        "terminal.json": "736c53220401184ab2673ef1e3e940f3e82ec3c3f7a8a1d2271818d65ed71345"
+      }
+    },
+    "external_ref": "processing/landsat9-pixel-visual-recovery-001/real-002",
+    "panel_created": false,
+    "pixel_read_started": false,
+    "stage_markers": [
+      "before_materialization",
+      "terminal_error_routestop"
+    ],
+    "tiff_header_read_started": false,
+    "worker_exit_code": 20,
+    "worker_invocations": 1,
+    "worker_terminal": {
+      "change_analysis_or_attribution": false,
+      "public_derived_pixel_publication": false,
+      "reason": "mtl_field_duplicate_disagreement",
+      "stage": "before_header",
+      "status": "blocked_terminal_no_retry",
+      "terminal_at_utc": "2026-10-03T17:50:39.291041Z"
+    }
+  },
+  "reconciled_at_utc": "2026-10-03T17:53:18.985155Z",
+  "reconciliation": {
+    "independent_fallback_reserved": true,
+    "new_attempt_terminal_and_consumed": true,
+    "old_real_001_preserved_empty": true,
+    "source_archives": {
+      "after": {
+        "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+        "sha256": "f2b7a99f75d1324f0c7a984af5172740ca20862b774e2a17714df0cd7c454b38",
+        "size_bytes": 1123888128,
+        "unchanged": true
+      },
+      "before": {
+        "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+        "sha256": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255",
+        "size_bytes": 1126565376,
+        "unchanged": true
+      }
+    },
+    "supervisor_cleanup_persisted": true,
+    "worker_cleanup_persisted": true
+  },
+  "record_id": "NEPAL-M2-LANDSAT9-PIXEL-VISUAL-RECOVERY-001-TERMINAL-RECONCILIATION",
+  "schema_version": "1.0",
+  "status": "block_frozen_mtl_flat_key_duplicate_disagreement_terminal_no_retry"
+}
