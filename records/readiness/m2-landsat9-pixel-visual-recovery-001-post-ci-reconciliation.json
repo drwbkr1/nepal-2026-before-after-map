@@ -1,0 +1,28 @@
+{
+  "after_attempts_started": 0,
+  "authority": {
+    "approval_sha256": "d49822fe1f9531c1b531033d1f93806225f16369dd1095682611007cac9f74d9",
+    "proposal_sha256": "9437ea0dea7222118a88e5d8157987d22afcfaf33d765e954745142abbe6694c",
+    "review_bundle_sha256": "92fe8c191eb854a09e7e5e5f45494e324f9b1feee186528fd620bfa6ca4de2f3"
+  },
+  "automatic_retry": false,
+  "before_members_materialized_and_hash_verified": 10,
+  "implementation_public_ci_run_id": "37141856825",
+  "implementation_public_commit": "7d087e4fa9edb92fa568a69165e3138a789071c2",
+  "local_landsat_panel_created": false,
+  "next_action": "Prepare a local zero-decision metadata-group correction and remaining visual-route review. No further implementation or real attempt is released by this closed recovery-001 envelope.",
+  "old_real_001_preserved_empty": true,
+  "real_tiff_header_or_pixel_reads": 0,
+  "reconciled_at_utc": "2026-10-03T17:55:51Z",
+  "record_id": "NEPAL-M2-LANDSAT9-PIXEL-VISUAL-RECOVERY-001-POST-CI-RECONCILIATION",
+  "schema_version": "1.0",
+  "scientific_change_or_attribution_claim": false,
+  "status": "terminal_metadata_parser_block_publication_verified_envelope_closed",
+  "terminal_public_ci_conclusion": "success",
+  "terminal_public_ci_run_id": "37142219140",
+  "terminal_public_ci_url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/37142219140",
+  "terminal_public_commit": "a47d2985e249015836d8295d6cde80239ba11bc6",
+  "terminal_ref": "records/readiness/m2-landsat9-pixel-visual-recovery-001-terminal-reconciliation.json",
+  "terminal_sha256": "35c66f6ef84f93a40887a53b8038c4fc3fad08191055d61e5ab0c13587df851b",
+  "worker_invocations": 1
+}

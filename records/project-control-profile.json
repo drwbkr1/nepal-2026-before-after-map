@@ -758,11 +758,13 @@
     }
   ],
   "active_landsat_map_route": {
-    "checkpoint_id": "M2-LANDSAT9-PIXEL-VISUAL-RECOVERY-001-TERMINAL-PUBLICATION-PENDING",
+    "checkpoint_id": "M2-LANDSAT9-PIXEL-VISUAL-RECOVERY-001-TERMINAL-REVIEW",
     "authority_ref": "records/source-gates/m2-landsat9-pixel-visual-recovery-001-approval.json",
     "implementation_readiness_ref": "records/readiness/m2-landsat9-pixel-visual-recovery-001-implementation-readiness.json",
-    "next_action": "Publish and reconcile the durable metadata-parser terminal evidence. Both real-001 and real-002 remain consumed. Any group-selection correction or new processing attempt exceeds the closed one-worker envelope.",
+    "next_action": "Prepare a local zero-decision metadata-group correction and remaining visual-route review. No further implementation or real attempt is released by this closed recovery-001 envelope.",
     "terminal_ref": "records/readiness/m2-landsat9-pixel-visual-recovery-001-terminal-reconciliation.json",
-    "terminal_sha256": "35c66f6ef84f93a40887a53b8038c4fc3fad08191055d61e5ab0c13587df851b"
+    "terminal_sha256": "35c66f6ef84f93a40887a53b8038c4fc3fad08191055d61e5ab0c13587df851b",
+    "post_ci_ref": "records/readiness/m2-landsat9-pixel-visual-recovery-001-post-ci-reconciliation.json",
+    "post_ci_sha256": "207fcd5fd98d88f86c934a8f29f53568c5f406d7f1b9ae97966498a9e8483ad7"
   }
 }
