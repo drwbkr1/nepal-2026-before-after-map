@@ -769,12 +769,12 @@
     "post_ci_sha256": "97a98937d770d032a83e3bc4e5ec885e2cb777ff8fc362cae743f4ff7ba518fc"
   },
   "active_optical_alternate_source_route": {
-    "checkpoint_id": "M2-OPTICAL-ALTERNATE-SOURCE-ROUTE-001-INCONCLUSIVE-TERMINAL-PUBLICATION-PENDING",
+    "checkpoint_id": "M2-OPTICAL-ALTERNATE-SOURCE-ROUTE-001-INCONCLUSIVE-TERMINAL-CLOSED",
     "authority_ref": "records/source-gates/m2-optical-alternate-source-route-001-approval.json",
     "proposal_ref": "contracts/milestone-002-optical-alternate-source-route-001-proposal.json",
     "review_bundle_ref": "reviews/m2-optical-alternate-source-route-001/review-bundle.json",
     "implementation_readiness_ref": "records/readiness/m2-optical-alternate-source-route-001-mechanical-recovery-002-implementation-readiness.json",
-    "next_action": "Verify sanitized terminal public CI and record exact post-CI reconciliation. The local zero-decision scientific brief is prepared; no further source, QA retry, new scientific method or scientific execution is released.",
+    "next_action": "Owner review of the local zero-decision scientific brief; a new scientific/source scope requires one coherent reviewed decision. No unchanged-envelope reconfirmation or retry of consumed attempts is needed or permitted.",
     "preserved_metadata_attempt_ref": "records/readiness/m2-optical-alternate-source-route-001-metadata-attempt-001-reconciliation.json",
     "preserved_metadata_recovery_ref": "records/readiness/m2-optical-alternate-source-route-001-metadata-recovery-001-reconciliation.json",
     "selection_manifest_ref": "records/source-gates/m2-optical-alternate-source-route-001-selection-manifest.json",
@@ -789,6 +789,8 @@
     "terminal_sha256": "7ebea4deeee686a6e3652d6e546add5783fe25286ff0bd16ae7b506a13d2a26a",
     "pair_2_qa_preflight_ref": "records/readiness/m2-optical-alternate-source-route-001-pair-2-qa-final-no-content-preflight-001.json",
     "local_next_brief_name": "M2_OPTICAL_ALTERNATE_SOURCE_ROUTE_001_SCIENTIFIC_NEXT_MILESTONE_LOCAL.md",
-    "local_next_brief_validation_ref": "records/readiness/m2-optical-alternate-source-route-001-local-next-brief-validation-001.json"
+    "local_next_brief_validation_ref": "records/readiness/m2-optical-alternate-source-route-001-local-next-brief-validation-001.json",
+    "post_ci_ref": "records/readiness/m2-optical-alternate-source-route-001-post-ci-reconciliation.json",
+    "post_ci_sha256": "9a9d60d2a8b3c9b1d3144204e3c8fb4e1eb58847c28a6611b1d2ffb461130a04"
   }
 }

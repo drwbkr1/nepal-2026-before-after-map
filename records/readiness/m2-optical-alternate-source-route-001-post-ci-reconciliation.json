@@ -1,0 +1,40 @@
+{
+  "approval_sha256": "eea904b27f94d3055c9b98ed523b7f46c0bebf0ecd20fbe681d06fea2693a532",
+  "at_utc": "2026-10-03T22:38:09.969099Z",
+  "automatic_retries": 0,
+  "distinct_new_sources_verified": 3,
+  "local_next_brief_contents_published": false,
+  "local_next_brief_prepared_and_validated": true,
+  "long_term_goal_complete": false,
+  "new_optical_panel": false,
+  "next_action": "Owner review of the local zero-decision scientific brief; a new scientific/source scope requires one coherent reviewed decision. No unchanged-envelope reconfirmation or retry of consumed attempts is needed or permitted.",
+  "public_ci": {
+    "conclusion": "success",
+    "headSha": "d4be9a59b9cfa68d4b4f787f5837bba7b3a95460",
+    "status": "completed"
+  },
+  "public_ci_run_id": 37159018593,
+  "public_default_branch": "main",
+  "published_file_sha256": {
+    "docs/STATUS.md": "e3c58d687d1ce3030fd4cb70e09b414b39561f92077f6ed711b7c2f8c2aca303",
+    "records/project-control-profile.json": "5f20cad22bde03abaaeb16cd82237c3123b500d0c2d226256b5d730ce5dadeb6",
+    "records/readiness/m2-optical-alternate-source-route-001-intake-checkpoint-002.json": "5c7e27f592b20c419faa04c65de986aa008b36be71f4c459bb5c6baa1f1ba347",
+    "records/readiness/m2-optical-alternate-source-route-001-local-next-brief-validation-001.json": "ea5566c5117dc32daf0970cddccbc1230cda3f7fe144df685f51c4a57cf09e2f",
+    "records/readiness/m2-optical-alternate-source-route-001-pair-1-qa-final-no-content-preflight-001.json": "f01bc6e3b47886937801457680842efb68319068bbca5171445030deaee663e3",
+    "records/readiness/m2-optical-alternate-source-route-001-pair-1-qa-reconciliation-001.json": "4b833faf6503b9bdca6d01fa4e31d89c49e0e76230afc24bf7e8783b141824c9",
+    "records/readiness/m2-optical-alternate-source-route-001-pair-2-qa-final-no-content-preflight-001.json": "2923a50c3cb62414118c61c10086c6674bef05c604b66bc64e4e420447900145",
+    "records/readiness/m2-optical-alternate-source-route-001-selection-intake-checkpoint-publication-001.json": "5850d65ed349c6c3a80f33c5acd562a2f744ac86b95d0eefaa86e5aecb317b1a",
+    "records/readiness/m2-optical-alternate-source-route-001-terminal-assembly-observation-001.json": "e4aa4cf72bffa07530e94d726b849c81a8a0f9114fb4a57d373747cb96f3ba84",
+    "records/readiness/m2-optical-alternate-source-route-001-terminal-reconciliation.json": "7ebea4deeee686a6e3652d6e546add5783fe25286ff0bd16ae7b506a13d2a26a"
+  },
+  "schema_version": "1.0",
+  "scientific_method_or_future_source_route_adopted": false,
+  "single_qa_workers": 2,
+  "source_or_derived_pixels_published": false,
+  "status": "pass_exact_terminal_publication_ci_closed_visual_envelope",
+  "terminal_evidence_commit": "d4be9a59b9cfa68d4b4f787f5837bba7b3a95460",
+  "terminal_outcome": "inconclusive_no_optical_visual_panel",
+  "terminal_reconciliation_ref": "records/readiness/m2-optical-alternate-source-route-001-terminal-reconciliation.json",
+  "terminal_reconciliation_sha256": "7ebea4deeee686a6e3652d6e546add5783fe25286ff0bd16ae7b506a13d2a26a",
+  "visual_envelope_closed": true
+}
