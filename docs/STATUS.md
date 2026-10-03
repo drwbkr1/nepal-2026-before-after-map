@@ -8,11 +8,20 @@
 - **Long-term goal:** Active
 - **Current checkpoint:** `M2-ASF-HYP3-RTC-PARTIAL-PAIR-MAP-001` has a terminal local visual-only panel. The approved `M2-ASF-PARTIAL-VV-DELTA-MAP-001` route stopped before a real attempt because 30 independently stable control windows could not be predeclared from the event-only staged rasters. The one exact after-job, ZIP, pair-stage, and panel attempts are consumed; both RTC scenes remain full-area `defer`. The earlier radar recovery-002 attempt remains terminal and consumed. Registration, clean-machine portability, baseline admission, change analysis, attribution, public pixels, and scientific publication remain unverified or unauthorized.
 
-## Landsat-9 visual route completion authorized - 2026-10-03
+## Landsat-9 visual route completed with inconclusive QA - 2026-10-03
 
-The owner approved the exact remaining-route proposal `7f4dc4bec11cea3f370f7efd26ab586360fad0e85e5b4f278cd7a7f279c38e6f` and bundle `22c6d4843838b363c851919fb9fd585fc6dbaf6850075b5dcc07e2c529ddab45` as one outcome-scoped envelope, including narrowly classified mechanical remediation and sanitized terminal publication without intermediate reconfirmation. Approval publication commit `ff6f170d070bc2fc8e68c8fbbb3a7a81a9e2b27c` passed public CI run `37144804387`.
+The owner approved one exact outcome-scoped envelope, including narrowly classified mechanical remediation and sanitized terminal publication without intermediate reconfirmation. Approval commit `ff6f170d070bc2fc8e68c8fbbb3a7a81a9e2b27c` passed public CI run `37144804387`; final implementation commit `23e3842073a858d94f322b23b42f223422d7ea40` passed run `37145603395` with 1,169 tests and 19 intentional public-runtime skips. Twenty focused final tests and an installed ArcGIS Pro 3.7.1 complete disposable route passed, including 33 metadata/supervision tests, exports and fresh-process reopen.
 
-The new exact-group ODL/XML adapter retains all source identities and frozen scientific predicates. Twenty final focused tests pass, and installed ArcGIS Pro 3.7.1 passed 33 metadata/supervision tests and a complete disposable before/after header, pixel, two-AOI, export and fresh-reopen route. [Implementation readiness](../records/readiness/m2-landsat9-visual-route-completion-001-implementation-readiness.json) remains conditional on fresh public implementation CI, no-content preflight and the two-source metadata-only audit before real TIFF/pixel access. Both earlier attempts remain terminal and immutable. No new real content, map or scientific result has been produced by this implementation.
+Both exact real metadata pairs passed the group-aware audit before any new TIFF access. After a fresh no-content preflight, the single `landsat9-visual-route-completion-001-real-003` worker materialized twenty exact members in before/after order. All sixteen TIFF headers and the native 30 m EPSG:32645 shared lattice passed; residual registration remains unmeasured. The unchanged masks then gave:
+
+| Approved AOI | Before strict usable | After strict usable | Paired strict usable | Visual disposition |
+| --- | ---: | ---: | ---: | --- |
+| Source | 0.0000% | 4.1049% | 0.0000% | No panel |
+| Upper corridor | 0.3091% | 14.2258% | 0.1777% | No panel |
+
+Both dates cover 100% of both AOIs, but neither reaches the unchanged 20% paired-valid visual floor. Before cloud/cirrus/shadow QA flags cover 100% of the source area and 97.5768% of the upper corridor. This is a measured inconclusive optical comparison, not an engineering failure or evidence of no event change. No Landsat APRX, PNG or PDF was created. The [terminal reconciliation](../records/readiness/m2-landsat9-visual-route-completion-001-terminal-reconciliation.json) preserves metadata, header, pixel QA, supervisor and cleanup receipts; all source archives and twenty materialized members were reverified. Both earlier attempts remain immutable. No retry or source/mask/threshold change is released to improve coverage.
+
+The earlier partial ASF radar panel remains the available local before/after visual. New source or scientific-method selection, registration, baseline admission, difference/change analysis, attribution, final M6 delivery and public derived pixels remain outside this completed visual envelope. The long-term project remains active and incomplete. Sanitized terminal publication and exact post-CI reconciliation are the remaining closure actions.
 
 ## Landsat-9 visual recovery stopped at metadata — 2026-10-03
 

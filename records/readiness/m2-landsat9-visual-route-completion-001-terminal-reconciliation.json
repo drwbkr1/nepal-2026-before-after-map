@@ -1,0 +1,467 @@
+{
+  "authority": {
+    "approval_ref": "records/source-gates/m2-landsat9-visual-route-completion-001-approval.json",
+    "approval_sha256": "9ba6d3366aa43f7e2d34fa44d9dd0f67ef1674099887ca6496c0677a695a7389",
+    "proposal_sha256": "7f4dc4bec11cea3f370f7efd26ab586360fad0e85e5b4f278cd7a7f279c38e6f",
+    "review_bundle_sha256": "22c6d4843838b363c851919fb9fd585fc6dbaf6850075b5dcc07e2c529ddab45"
+  },
+  "disposition": "Both exact-source metadata pairs, all sixteen TIFF headers and shared native 30 m EPSG:32645 lattice passed. The first real pixel evaluation is scientifically inconclusive for the approved visual panel: source AOI paired strict valid is 0; upper corridor is 0.001777, both below the unchanged 0.20 visual floor. Before cloud/cirrus/shadow flags cover 100% and 97.5768% respectively. No local Landsat APRX, PNG or PDF was produced. No source, mask, threshold, or date substitution or retry is released to improve the result. This is not an engineering failure or evidence that the event had no change. Residual registration remains unmeasured; no difference, attribution or scientific release. The existing partial ASF radar visual panel is separate historical output.",
+  "execution_bounds": {
+    "aois_evaluated": 2,
+    "automatic_retries": 0,
+    "change_analysis_or_attribution": false,
+    "local_panel_created": false,
+    "mechanical_recovery_attempts": 0,
+    "members_materialized": 20,
+    "new_downloads": 0,
+    "provider_requests": 0,
+    "public_derived_pixel_publication": false,
+    "real_tiff_headers": 16,
+    "scientific_method_change": false,
+    "source_attempts_started": 2
+  },
+  "final_preflights": {
+    "metadata": {
+      "external_ref": "processing/landsat9-visual-route-completion-001/metadata-preflight-001.json",
+      "sha256": "dd3dedf8cd9e3ac82487b2d331c6d2f17e66d72a2bfb3752377e96ff40f00af6"
+    },
+    "worker": {
+      "external_ref": "processing/landsat9-visual-route-completion-001/real-003-final-preflight.json",
+      "sha256": "53ee89b0ae9c7625f49af465c766967aedd6cce053cc384f0c5a47c6273b2f8e"
+    }
+  },
+  "implementation_gate": {
+    "commit": "23e3842073a858d94f322b23b42f223422d7ea40",
+    "focused_tests": 20,
+    "installed_arcgis_version": "3.7.1",
+    "installed_disposable_full_route_and_fresh_reopen": "pass",
+    "public_ci_conclusion": "success",
+    "public_ci_run_id": "37145603395",
+    "public_required_files": 1474,
+    "public_runtime_skips": 19,
+    "public_tests": 1169
+  },
+  "metadata_audit": {
+    "external_ref": ".attempt-events/landsat9-visual-route-completion-001/metadata-audit-001",
+    "results": {
+      "after": {
+        "archive_sha256": "f2b7a99f75d1324f0c7a984af5172740ca20862b774e2a17714df0cd7c454b38",
+        "members": {
+          "_MTL.txt": {
+            "sha256": "9d15538683a985000949f86e3708df0673d338a1951b16dd19f8af335a6f2f3d",
+            "size_bytes": 15216
+          },
+          "_MTL.xml": {
+            "sha256": "06ffe7e28c32e9e4fc8d57fa841f62a830163e0e07015d4e23571f5da8c8adda",
+            "size_bytes": 22388
+          }
+        },
+        "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+        "role": "after",
+        "validated_metadata": {
+          "date_acquired": "2026-08-26",
+          "reflectance_add": -0.2,
+          "reflectance_mult": 2.75e-05,
+          "scene_center_time": "04:47:48.9160810Z",
+          "selected_group_paths": [
+            "LANDSAT_METADATA_FILE/IMAGE_ATTRIBUTES",
+            "LANDSAT_METADATA_FILE/LEVEL2_SURFACE_REFLECTANCE_PARAMETERS"
+          ],
+          "text_xml_selected_values_agree": true,
+          "validated_coefficients": {
+            "REFLECTANCE_ADD_BAND_3": -0.2,
+            "REFLECTANCE_ADD_BAND_4": -0.2,
+            "REFLECTANCE_ADD_BAND_5": -0.2,
+            "REFLECTANCE_ADD_BAND_6": -0.2,
+            "REFLECTANCE_ADD_BAND_7": -0.2,
+            "REFLECTANCE_MULT_BAND_3": 2.75e-05,
+            "REFLECTANCE_MULT_BAND_4": 2.75e-05,
+            "REFLECTANCE_MULT_BAND_5": 2.75e-05,
+            "REFLECTANCE_MULT_BAND_6": 2.75e-05,
+            "REFLECTANCE_MULT_BAND_7": 2.75e-05
+          }
+        }
+      },
+      "before": {
+        "archive_sha256": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255",
+        "members": {
+          "_MTL.txt": {
+            "sha256": "12ae339956cb873ba8316a48715d1db2fbb7f46182a16dd9895f8949733cf799",
+            "size_bytes": 15287
+          },
+          "_MTL.xml": {
+            "sha256": "91f593186a7847ebf0b255cb3de3ad25e24c863061ae70066598904270d61e82",
+            "size_bytes": 22512
+          }
+        },
+        "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+        "role": "before",
+        "validated_metadata": {
+          "date_acquired": "2026-08-10",
+          "reflectance_add": -0.2,
+          "reflectance_mult": 2.75e-05,
+          "scene_center_time": "04:47:45.8174540Z",
+          "selected_group_paths": [
+            "LANDSAT_METADATA_FILE/IMAGE_ATTRIBUTES",
+            "LANDSAT_METADATA_FILE/LEVEL2_SURFACE_REFLECTANCE_PARAMETERS"
+          ],
+          "text_xml_selected_values_agree": true,
+          "validated_coefficients": {
+            "REFLECTANCE_ADD_BAND_3": -0.2,
+            "REFLECTANCE_ADD_BAND_4": -0.2,
+            "REFLECTANCE_ADD_BAND_5": -0.2,
+            "REFLECTANCE_ADD_BAND_6": -0.2,
+            "REFLECTANCE_ADD_BAND_7": -0.2,
+            "REFLECTANCE_MULT_BAND_3": 2.75e-05,
+            "REFLECTANCE_MULT_BAND_4": 2.75e-05,
+            "REFLECTANCE_MULT_BAND_5": 2.75e-05,
+            "REFLECTANCE_MULT_BAND_6": 2.75e-05,
+            "REFLECTANCE_MULT_BAND_7": 2.75e-05
+          }
+        }
+      }
+    },
+    "status": "pass_exact_two_source_metadata_only",
+    "terminal_sha256": "09fa4ab66ae38b7c77b4a34edf240cadc180a434786445be89e59ea900d12bdb",
+    "tiff_header_or_pixel_read": false
+  },
+  "real_attempt": {
+    "attempt_id": "landsat9-visual-route-completion-001-real-003",
+    "external_receipt_sha256": {
+      "fallback": {
+        "ready.json": "ca58d2cd70a773e9ae1190fb4a454024b457790d0413208e55064100a1245b91"
+      },
+      "metadata_audit": {
+        "after-metadata.json": "1f3227612293556af731552d3017b50aa59acc0a82dc1a63f2f49c2be7f683a7",
+        "after-start.json": "d3548ba81f38ddd23e6ad5cc1e3d8649db6ca5043166afc07de955365e910b73",
+        "before-metadata.json": "e49415b794a40284d619e3a0e61c003cefa0c37b8080dc7eedc50fcfd224a967",
+        "before-start.json": "2e96334ad5f3711b190505246f4f14130689a703d7fe5f8bbb729d0a39833129",
+        "intent.json": "021dd2af9d7a3474cd78cfe28ff8cdfe9b0c553966112fd9f430087155c0f0c5",
+        "terminal.json": "09fa4ab66ae38b7c77b4a34edf240cadc180a434786445be89e59ea900d12bdb"
+      },
+      "metadata_audit_fallback": {
+        "cleanup.json": "3d4e9abc74bd1bc9c73cd31f833fcef7e3c05dcc1e60e28e6024d20a31230d13",
+        "ready.json": "7c062c2564b078b01549b00ceddee6f8d928cc274bf5c9e9fd753113a8d9a918"
+      },
+      "supervisor": {
+        "arcpy-import-pass.json": "5c0e2c53429bc94d790403543ab43ab405ea5b166ac6cc5576f6891e8147f754",
+        "arcpy-import-start.json": "acc42b7900e719055dc349099eedc88d60d53a2ddf2e88bc578c3ba9e753b81c",
+        "cleanup.json": "4777ece334d2b50d014aa846d70cab2884f82a7939cbbd64f724b2628746f8b5",
+        "intent.json": "54341e43199b219a6db9a7c04d4d0335f94cd8a276cd19f84f1bcd576979e7d0",
+        "stage-01.json": "4a2ddde892ef33ff83bb652fd1f103a5cdfb386d2020a6e659e672e1ae007ecb",
+        "stage-02.json": "49bfafa2cc147a7c3f845013e9c8ae8bfd728aaff6c9e498722ecfa5a10602b7",
+        "stage-03.json": "f1eb67009b5093db3c3dc9502c84df861980d2427edf53f1d12c291c398529bc",
+        "stage-04.json": "751c7d4a08fbc5df17e319563d3f456af44ea557c4fc0d787f10e6aab249bd03",
+        "stage-05.json": "839c55063e7b75a3b5b823d4d911df158ac62539795b3870c79ac429db397de7",
+        "stage-06.json": "6fdb8f656d5821e217a97d070c06782623fdb291c7d3982954c3ed03a3184685",
+        "stage-07.json": "97e495b2e1bcab287bf28052dd0b085a30673565df2fc355e33eb71d81efb980",
+        "stage-08.json": "0f1728f63aa5e24f245b034a5f5fb5256887025aad898f5c5827093878e8d746",
+        "terminal.json": "79642a4cb78c6266e299d29e8bba44940194b12f44251076e8c5e98909117c92",
+        "worker-claim.json": "ddd94ffa07972c038178b458f913f498f6dc8cfa78d01beafa9e5355fa2ec2f4",
+        "worker-start.json": "f3a849cd9a6dd8dae4cac945eee7e436ad6cc5524aa44517e0706820df5e73dc"
+      },
+      "worker": {
+        "after/header.json": "985993cfc0245527771816cd76c8c2ce7ed168a71d000f5556187e6246d4ca45",
+        "after/started.json": "7327b5ebf6a125256821f32a467ab983147185a8a9c2c6440b9adc2e540d811e",
+        "before/header.json": "172dd7c6b32e111a7b34993159aa4e8db57126f7911b3d7c8133bb70e369dc2b",
+        "before/started.json": "85cdc913fe82e1e4d3bd75eec7c413fc2953e6638e19dde4fa6a1a6708eda776",
+        "cleanup.json": "34174c411bc43e029fc1c68fb3de098cc025bf62dbbdca4954c0479840a0dab7",
+        "pair-header.json": "c1339f4e60a33c7cea9945650de13139b3466ffc2bc621a7e72ab33c9388a100",
+        "pixel-qa.json": "e2e4916423d4933df844cf59e999593d06cd9e588dfaa49119acaaaa28452622",
+        "started.json": "25e7cd0afcee230f1e6427a1bd5c9aa22bed8586bb2d7a0e0bd69843af4b6775",
+        "terminal.json": "508ab500908b6e01cea9e57999cc4def42f675299356d11b4dfbf11e2b96fade"
+      }
+    },
+    "external_ref": "processing/landsat9-visual-route-completion-001/real-003",
+    "materialized_exact_members": {
+      "after": [
+        {
+          "name": "LC09_L2SP_141040_20260826_20260827_02_T1_MTL.txt",
+          "sha256": "9d15538683a985000949f86e3708df0673d338a1951b16dd19f8af335a6f2f3d",
+          "size_bytes": 15216
+        },
+        {
+          "name": "LC09_L2SP_141040_20260826_20260827_02_T1_MTL.xml",
+          "sha256": "06ffe7e28c32e9e4fc8d57fa841f62a830163e0e07015d4e23571f5da8c8adda",
+          "size_bytes": 22388
+        },
+        {
+          "name": "LC09_L2SP_141040_20260826_20260827_02_T1_QA_PIXEL.TIF",
+          "sha256": "df7244fa630a336485f2f77982ea596a643a766c7f5095419652379b939bdcff",
+          "size_bytes": 4317038
+        },
+        {
+          "name": "LC09_L2SP_141040_20260826_20260827_02_T1_QA_RADSAT.TIF",
+          "sha256": "c1df08b15de04066fd979bb3521f21d6a53b9c9a9cef25bb6a5d7f20a809ffb4",
+          "size_bytes": 231611
+        },
+        {
+          "name": "LC09_L2SP_141040_20260826_20260827_02_T1_SR_QA_AEROSOL.TIF",
+          "sha256": "bf1f0f16fbf823af23443d9c61d42b2e8324cd3f2ffaf58e0b13e76109e24bd4",
+          "size_bytes": 6880150
+        },
+        {
+          "name": "LC09_L2SP_141040_20260826_20260827_02_T1_SR_B3.TIF",
+          "sha256": "f4e4d0518147b66719ec462d3fb5b04f80bdcaaba9b8086219a4e41fdd0e51ef",
+          "size_bytes": 100448949
+        },
+        {
+          "name": "LC09_L2SP_141040_20260826_20260827_02_T1_SR_B4.TIF",
+          "sha256": "3eb60fba204c906a15ab28347dbf308dab6b3bb8daf18ad7012b1d681a6f10b6",
+          "size_bytes": 101102197
+        },
+        {
+          "name": "LC09_L2SP_141040_20260826_20260827_02_T1_SR_B5.TIF",
+          "sha256": "5c240498cbfef577a647e0209c8425b75b5daa3d117bbc30f32f5b9067e7c63c",
+          "size_bytes": 101390665
+        },
+        {
+          "name": "LC09_L2SP_141040_20260826_20260827_02_T1_SR_B6.TIF",
+          "sha256": "aa96ffe65a104b42f21292a23ea2887f85a51da7753b2c00573fbfc3ce11342c",
+          "size_bytes": 100332802
+        },
+        {
+          "name": "LC09_L2SP_141040_20260826_20260827_02_T1_SR_B7.TIF",
+          "sha256": "21bed4dc43a6792aeb72a353d5eb659ae1661d013a37592120df7a878bf2d520",
+          "size_bytes": 99181364
+        }
+      ],
+      "before": [
+        {
+          "name": "LC09_L2SP_141040_20260810_20260811_02_T1_MTL.txt",
+          "sha256": "12ae339956cb873ba8316a48715d1db2fbb7f46182a16dd9895f8949733cf799",
+          "size_bytes": 15287
+        },
+        {
+          "name": "LC09_L2SP_141040_20260810_20260811_02_T1_MTL.xml",
+          "sha256": "91f593186a7847ebf0b255cb3de3ad25e24c863061ae70066598904270d61e82",
+          "size_bytes": 22512
+        },
+        {
+          "name": "LC09_L2SP_141040_20260810_20260811_02_T1_QA_PIXEL.TIF",
+          "sha256": "793bebbaffebd0fbdb59a456e8c4534794b2f72e3fb5b9652ba78604f22d5f9a",
+          "size_bytes": 3898913
+        },
+        {
+          "name": "LC09_L2SP_141040_20260810_20260811_02_T1_QA_RADSAT.TIF",
+          "sha256": "74e3fefcf32615e20f3af1c3843b145d011622a208513a7a3740038c53a73dcd",
+          "size_bytes": 235489
+        },
+        {
+          "name": "LC09_L2SP_141040_20260810_20260811_02_T1_SR_QA_AEROSOL.TIF",
+          "sha256": "b676ab38f7187479d2f6142a008a37fea2fd2b1b4dcdf8329ce970d4f33ed6ea",
+          "size_bytes": 6758693
+        },
+        {
+          "name": "LC09_L2SP_141040_20260810_20260811_02_T1_SR_B3.TIF",
+          "sha256": "14d2c0792ec0b7d1f459692e2eed5cb2d85d0357620cae8992a4a737410d2d29",
+          "size_bytes": 100336842
+        },
+        {
+          "name": "LC09_L2SP_141040_20260810_20260811_02_T1_SR_B4.TIF",
+          "sha256": "f7a39356029b2946f07236bc581cd6e5aaa73b0791be7be14aef0c2b0971582f",
+          "size_bytes": 101057193
+        },
+        {
+          "name": "LC09_L2SP_141040_20260810_20260811_02_T1_SR_B5.TIF",
+          "sha256": "217fb199824217772e2cbdef2e5e5d8e7ed22049573092e0b6793be56123858d",
+          "size_bytes": 101282094
+        },
+        {
+          "name": "LC09_L2SP_141040_20260810_20260811_02_T1_SR_B6.TIF",
+          "sha256": "65a8510f8ed2be99651d197556ff9c583d5cf38afa51c5a7248c75224a5292b1",
+          "size_bytes": 100569184
+        },
+        {
+          "name": "LC09_L2SP_141040_20260810_20260811_02_T1_SR_B7.TIF",
+          "sha256": "dacf77ffc20c98965fb332a1d44db83c10b013e6357d68d92f85226405296201",
+          "size_bytes": 99613482
+        }
+      ]
+    },
+    "stage_markers": [
+      "before_materialization",
+      "before_headers",
+      "after_materialization",
+      "after_headers",
+      "aoi_source_before_pixels",
+      "aoi_source_after_pixels",
+      "aoi_upper_corridor_before_pixels",
+      "aoi_upper_corridor_after_pixels"
+    ],
+    "supervisor_terminal": {
+      "automatic_retries": 0,
+      "change_analysis_or_attribution": false,
+      "provider_requests": 0,
+      "public_derived_pixel_publication": false,
+      "stage": "worker",
+      "status": "pass_pixel_qa_visual_only_no_panel_qualified",
+      "terminal_at_utc": "2026-10-03T18:51:37.490320Z",
+      "worker_exit_code": 0,
+      "worker_invocations": 1,
+      "worker_terminal_sha256": "508ab500908b6e01cea9e57999cc4def42f675299356d11b4dfbf11e2b96fade"
+    },
+    "worker_exit_code": 0,
+    "worker_invocations": 1,
+    "worker_terminal": {
+      "aoi_metrics": {
+        "AOI-SOURCE": {
+          "after": {
+            "footprint_fraction": 1.0,
+            "overlapping_raw_flag_fraction": {
+              "aerosol_high": 0.829954,
+              "aerosol_interpolated": 0.888855,
+              "aerosol_invalid_retrieval": 0.963491,
+              "aerosol_uncertainty": 0.800146,
+              "clear_bit": 0.259429,
+              "cloud_cirrus_shadow": 0.871784,
+              "fill_nodata": 0.0,
+              "nonphysical_band": 0.090542,
+              "outside_footprint": 0.0,
+              "saturation_terrain": 1.3e-05,
+              "snow_ice": 0.029847,
+              "water": 0.02332
+            },
+            "reason_fraction": {
+              "aerosol_uncertainty": 0.069764,
+              "cloud_cirrus_shadow": 0.871784,
+              "fill_nodata": 0.0,
+              "nonphysical_band": 0.000202,
+              "outside_footprint": 0.0,
+              "saturation_terrain": 0.0,
+              "snow_ice": 0.017201,
+              "strict_valid": 0.041049
+            },
+            "strict_usable_fraction": 0.041049
+          },
+          "aoi_area_m2": 143470831.156,
+          "before": {
+            "footprint_fraction": 1.0,
+            "overlapping_raw_flag_fraction": {
+              "aerosol_high": 0.877977,
+              "aerosol_interpolated": 0.888827,
+              "aerosol_invalid_retrieval": 0.997686,
+              "aerosol_uncertainty": 0.875662,
+              "clear_bit": 0.007352,
+              "cloud_cirrus_shadow": 1.0,
+              "fill_nodata": 0.0,
+              "nonphysical_band": 0.029348,
+              "outside_footprint": 0.0,
+              "saturation_terrain": 6e-06,
+              "snow_ice": 0.000263,
+              "water": 0.001299
+            },
+            "reason_fraction": {
+              "aerosol_uncertainty": 0.0,
+              "cloud_cirrus_shadow": 1.0,
+              "fill_nodata": 0.0,
+              "nonphysical_band": 0.0,
+              "outside_footprint": 0.0,
+              "saturation_terrain": 0.0,
+              "snow_ice": 0.0,
+              "strict_valid": 0.0
+            },
+            "strict_usable_fraction": 0.0
+          },
+          "paired_strict_usable_fraction": 0.0,
+          "visual_status": "no_visual_panel_for_aoi"
+        },
+        "AOI-UPPER-CORRIDOR": {
+          "after": {
+            "footprint_fraction": 1.0,
+            "overlapping_raw_flag_fraction": {
+              "aerosol_high": 0.761968,
+              "aerosol_interpolated": 0.888888,
+              "aerosol_invalid_retrieval": 0.952731,
+              "aerosol_uncertainty": 0.731613,
+              "clear_bit": 0.378221,
+              "cloud_cirrus_shadow": 0.685209,
+              "fill_nodata": 0.0,
+              "nonphysical_band": 0.051717,
+              "outside_footprint": 0.0,
+              "saturation_terrain": 0.0,
+              "snow_ice": 0.0,
+              "water": 0.006303
+            },
+            "reason_fraction": {
+              "aerosol_uncertainty": 0.16822,
+              "cloud_cirrus_shadow": 0.685209,
+              "fill_nodata": 0.0,
+              "nonphysical_band": 0.004313,
+              "outside_footprint": 0.0,
+              "saturation_terrain": 0.0,
+              "snow_ice": 0.0,
+              "strict_valid": 0.142258
+            },
+            "strict_usable_fraction": 0.142258
+          },
+          "aoi_area_m2": 517636995.868,
+          "before": {
+            "footprint_fraction": 1.0,
+            "overlapping_raw_flag_fraction": {
+              "aerosol_high": 0.815096,
+              "aerosol_interpolated": 0.888868,
+              "aerosol_invalid_retrieval": 0.990728,
+              "aerosol_uncertainty": 0.805932,
+              "clear_bit": 0.033335,
+              "cloud_cirrus_shadow": 0.975768,
+              "fill_nodata": 0.0,
+              "nonphysical_band": 0.002997,
+              "outside_footprint": 0.0,
+              "saturation_terrain": 0.0,
+              "snow_ice": 0.0,
+              "water": 0.000216
+            },
+            "reason_fraction": {
+              "aerosol_uncertainty": 0.02113,
+              "cloud_cirrus_shadow": 0.975768,
+              "fill_nodata": 0.0,
+              "nonphysical_band": 1e-05,
+              "outside_footprint": 0.0,
+              "saturation_terrain": 0.0,
+              "snow_ice": 0.0,
+              "strict_valid": 0.003091
+            },
+            "strict_usable_fraction": 0.003091
+          },
+          "paired_strict_usable_fraction": 0.001777,
+          "visual_status": "no_visual_panel_for_aoi"
+        }
+      },
+      "change_analysis_or_attribution": false,
+      "public_derived_pixel_publication": false,
+      "qualifying_aois": [],
+      "registration_residual_measured": false,
+      "stage": "pixel_qa_complete",
+      "status": "pass_pixel_qa_visual_only_no_panel_qualified",
+      "terminal_at_utc": "2026-10-03T18:51:35.732543Z"
+    }
+  },
+  "reconciled_at_utc": "2026-10-03T18:52:55.426949Z",
+  "reconciliation": {
+    "materialized_members_match_source_receipts": true,
+    "new_attempt_terminal_and_consumed": true,
+    "new_panel_directory_absent": true,
+    "prior_real_001_preserved_empty": true,
+    "prior_real_002_receipts_preserved": true,
+    "source_archives": {
+      "after": {
+        "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+        "sha256": "f2b7a99f75d1324f0c7a984af5172740ca20862b774e2a17714df0cd7c454b38",
+        "size_bytes": 1123888128,
+        "unchanged": true
+      },
+      "before": {
+        "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+        "sha256": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255",
+        "size_bytes": 1126565376,
+        "unchanged": true
+      }
+    },
+    "supervisor_cleanup_persisted": true,
+    "worker_cleanup_persisted": true
+  },
+  "record_id": "NEPAL-M2-LANDSAT9-VISUAL-ROUTE-COMPLETION-001-TERMINAL-RECONCILIATION",
+  "schema_version": "1.0",
+  "status": "terminal_measured_inconclusive_no_aoi_qualified_no_landsat_panel"
+}
