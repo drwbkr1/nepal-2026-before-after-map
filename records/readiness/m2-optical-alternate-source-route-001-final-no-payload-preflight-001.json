@@ -1,0 +1,18 @@
+{
+  "approval_sha256": "eea904b27f94d3055c9b98ed523b7f46c0bebf0ecd20fbe681d06fea2693a532",
+  "at_utc": "2026-10-03T21:31:50.595607Z",
+  "implementation_hashes": {
+    "scripts/optical_alternate_catalog_001.py": "ca2df29f897994fec4afd36533e8b6f2ed1471d589353281324c77169bf34103",
+    "scripts/optical_alternate_intake_001.py": "8ceaf480e5aa9fa2da7dba4895be691c68054a80c4149267d3aa0e7f0bd4b082",
+    "scripts/optical_alternate_panel_arcgis_001.py": "cf539a8f1e84e6bb357a19c3f05a57ac6f091df9d296649cda79f7acab0af417",
+    "scripts/run_m2_optical_alternate_source_route_001.py": "8bdaa68aa898f7bb790dfd961937ba65c1e0727a36b42800ebf2e106f261cb1b",
+    "scripts/validate_m2_optical_alternate_source_route_001_arcgis.py": "4e2fa4328294639596f06bc8bf99c241572be67ea7de8c9e40623ce30edb760c"
+  },
+  "implementation_public_ci_commit": "6fbde577da5ae1f2b97403c8e02729ce8499c839",
+  "implementation_public_ci_run_id": "37155383505",
+  "metadata_http_budget": 18,
+  "provider_requests": 0,
+  "readiness_sha256": "04671b1f9f99c4495d83fa4ba8a1c5376046c549e7b6d684d288044f04382a29",
+  "source_payload_or_pixel_access": false,
+  "status": "pass_final_no_content_preflight"
+}

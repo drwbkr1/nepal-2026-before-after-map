@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "status": "terminal_original_metadata_attempt_preserved_agent_query_error",
+  "at_utc": "2026-10-03T21:39:15.005613Z",
+  "public_implementation_commit": "6fbde577da5ae1f2b97403c8e02729ce8499c839",
+  "public_ci_run_id": 37155383505,
+  "public_ci_conclusion": "success",
+  "preflight_ref": "records/readiness/m2-optical-alternate-source-route-001-final-no-payload-preflight-001.json",
+  "metadata_attempt_root_relative": ".attempt-events/optical-alternate-source-route-001/metadata-001",
+  "external_terminal_sha256": "757b5a64ce42e3252ddf0ed4693d7f1e96eb7fcc82dd17ccc05167e4bce02c1e",
+  "observed_status": "defer_no_eligible_metadata_pair",
+  "zero_return_queries": [
+    {
+      "complete": true,
+      "features_returned": 0,
+      "pages": 1,
+      "platform": "landsat-8",
+      "role": "before"
+    },
+    {
+      "complete": true,
+      "features_returned": 0,
+      "pages": 1,
+      "platform": "landsat-8",
+      "role": "after"
+    },
+    {
+      "complete": true,
+      "features_returned": 0,
+      "pages": 1,
+      "platform": "landsat-9",
+      "role": "before"
+    },
+    {
+      "complete": true,
+      "features_returned": 0,
+      "pages": 1,
+      "platform": "landsat-9",
+      "role": "after"
+    }
+  ],
+  "observed_requests": 6,
+  "source_payload_requests": 0,
+  "pixel_qa_or_new_map": false,
+  "classification_ref": "records/readiness/m2-optical-alternate-source-route-001-catalog-serialization-correction-001.json",
+  "availability_or_ineligibility_inference_supported": false,
+  "next_action": "Fresh distinct mechanical serialization correction within remaining four search pages and unchanged 18-total request cap; never mutate or replay the original attempt."
+}

@@ -48,6 +48,17 @@ class CatalogPolicyTests(unittest.TestCase):
             self.assertTrue(row["eligible"])
             self.assertTrue(all(row["catalog_focus_containment"].values()))
 
+    def test_official_usgs_platform_and_zero_padded_wrs_serialization(self):
+        for sensor in (8,9):
+            item=feature(sensor)
+            item['properties'].update({'platform':f'LANDSAT_{sensor}','landsat:wrs_path':'141','landsat:wrs_row':'040'})
+            row=catalog.item_disposition(item,f'landsat-{sensor}','before',GEOMETRIES)
+            self.assertTrue(row['eligible'])
+            self.assertEqual(row['platform'],f'landsat-{sensor}')
+            self.assertEqual(row['reported_catalog_platform'],f'LANDSAT_{sensor}')
+            item['properties']['landsat:wrs_row']='041'
+            self.assertFalse(catalog.item_disposition(item,f'landsat-{sensor}','before',GEOMETRIES)['eligible'])
+
     def test_required_identity_fields_and_wrong_values_are_ineligible(self):
         for key in ("platform", "datetime", "landsat:scene_id", "landsat:wrs_path", "landsat:wrs_row",
                     "landsat:collection_number", "landsat:collection_category"):
@@ -115,6 +126,10 @@ class CatalogPolicyTests(unittest.TestCase):
         self.assertEqual(ledger.total, 4)
         self.assertTrue(out["complete"])
         self.assertTrue(all((ledger.path/f"request-{n:02d}-intent.json").exists() for n in range(1,5)))
+        from urllib.parse import parse_qs,urlsplit
+        for call,(sensor,role) in zip(calls,catalog.ORDER):
+            query=json.loads(parse_qs(urlsplit(call[1]).query)['query'][0])
+            self.assertEqual(query,{'platform':{'eq':catalog.PROVIDER_PLATFORM[sensor]}})
 
     def test_pagination_cycle_wrong_host_missing_count_and_page_caps_stop(self):
         for mode in ("wrong_host", "count", "overfull", "unproven"):
@@ -150,6 +165,16 @@ class CatalogPolicyTests(unittest.TestCase):
         with self.assertRaisesRegex(catalog.PolicyStop,"exhausted"): ledger.request("root",catalog.CATALOG)
         self.assertEqual(ledger.total,2)
         self.assertEqual(len(list(ledger.path.glob('*outcome.json'))),2)
+
+    def test_distinct_mechanical_attempt_inherits_not_resets_budgets(self):
+        temp=tempfile.TemporaryDirectory();self.addCleanup(temp.cleanup)
+        seed={'counts':{'root':1,'rights':1,'search':4,'detail':0,'recovery':0},'total':6,'outcomes':[],'terminal_sha256':'a'*64}
+        ledger=catalog.MetadataLedger(Path(temp.name)/'new',transport=lambda *args:(200,'application/json',b'{}'),seed=seed)
+        for _ in range(4):ledger.request('search',catalog.SEARCH)
+        self.assertEqual((ledger.total,ledger.counts['search']),(10,8))
+        with self.assertRaisesRegex(catalog.PolicyStop,'budget'):ledger.request('search',catalog.SEARCH)
+        self.assertTrue((ledger.path/'request-07-intent.json').exists())
+        self.assertFalse((ledger.path/'request-01-intent.json').exists())
 
     def test_url_assets_credentials_unknown_origins_never_sent(self):
         ledger=self.ledger(lambda *args:self.fail("unexpected network"))

@@ -36,6 +36,7 @@ COLLECTION = "landsat-c2l2-sr"
 WINDOWS = {"before": ("2026-07-27T00:00:00Z", "2026-08-25T23:59:59.999999Z"),
            "after": ("2026-08-27T00:00:00Z", "2026-09-25T23:59:59.999999Z")}
 ORDER = tuple((sensor, role) for sensor in ("landsat-8", "landsat-9") for role in WINDOWS)
+PROVIDER_PLATFORM = {"landsat-8": "LANDSAT_8", "landsat-9": "LANDSAT_9"}
 AOIS = ("AOI-SOURCE", "AOI-UPPER-CORRIDOR")
 EXCLUDED = frozenset(("LC09_L2SP_141040_20260810_20260811_02_T1",
                       "LC09_L2SP_141040_20260826_20260827_02_T1"))
@@ -106,6 +107,12 @@ def utc(value):
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
 
+def exact_integer_identity(value, expected):
+    return (not isinstance(value, bool) and
+            ((isinstance(value, int) and value == expected) or
+             (isinstance(value, str) and re.fullmatch(r"\d+", value) is not None and int(value) == expected)))
+
+
 def item_disposition(item, sensor, role, geometries):
     """Retain rejection reasons; independent fields must agree with product ID."""
     from shapely.geometry import shape
@@ -131,14 +138,16 @@ def item_disposition(item, sensor, role, geometries):
         reasons.append("known_terminal_product_never_requeue")
     if item.get("type") != "Feature" or item.get("collection") != COLLECTION:
         reasons.append("item_type_or_collection_invalid")
-    platform = props.get("platform")
+    reported_platform = props.get("platform")
+    platform = {"LANDSAT_8": "landsat-8", "LANDSAT_9": "landsat-9"}.get(reported_platform, reported_platform)
+    out["reported_catalog_platform"] = reported_platform if isinstance(reported_platform, str) else None
     out["platform"] = platform if isinstance(platform, str) else None
     if platform != sensor or (match and platform != "landsat-" + match[1]):
         reasons.append("platform_identity_mismatch")
     for key, expected in (("landsat:wrs_path", 141), ("landsat:wrs_row", 40),
                           ("landsat:collection_number", 2), ("landsat:collection_category", "T1")):
         value = props.get(key)
-        good = (str(value) in (str(expected), "02")) if key == "landsat:collection_number" else str(value) == str(expected)
+        good = exact_integer_identity(value, expected) if isinstance(expected, int) else value == expected
         if isinstance(value, bool) or not good:
             reasons.append(key.replace(":", "_") + "_missing_or_mismatch")
     # Product ID itself explicitly encodes L2SP. When reported independently it
@@ -233,15 +242,40 @@ def http(method, url, body):
 
 
 class MetadataLedger:
-    def __init__(self, path, transport=http, sleeper=time.sleep):
+    def __init__(self, path, transport=http, sleeper=time.sleep, *, seed=None):
         self.path, self.transport, self.sleeper = Path(path), transport, sleeper
         if self.path.exists() or self.path.is_symlink():
             raise PolicyStop("metadata_attempt_already_reserved")
         self.path.mkdir(parents=True, exist_ok=False)
         write_new(self.path / "intent.json", {"status": "reserved_before_any_http", "at_utc": now(),
                                               "approval_sha256": APPROVAL_SHA, "maximum_requests": 18})
-        self.counts = {key: 0 for key in LIMITS}
-        self.total, self.outcomes = 0, []
+        self.counts = {key: 0 for key in LIMITS} if seed is None else dict(seed["counts"])
+        self.total, self.outcomes = (0, []) if seed is None else (seed["total"], list(seed["outcomes"]))
+        if seed is not None:
+            write_new(self.path / "inherited-budget.json", {"previous_attempt_terminal_sha256": seed["terminal_sha256"],
+                       "prior_request_count": self.total, "prior_counts": self.counts,
+                       "mechanical_correction_not_transient_retry": True})
+
+    @staticmethod
+    def sealed_budget(path):
+        path = Path(path)
+        terminal = read(path / "terminal.json")
+        if terminal.get("status") != "defer_no_eligible_metadata_pair" or terminal.get("pairs") != []:
+            raise PolicyStop("prior_metadata_terminal_not_expected")
+        counts, total, outcomes = {key: 0 for key in LIMITS}, 0, []
+        for intent_path in sorted(path.glob("request-*-intent.json")):
+            intent = read(intent_path); n = intent["number"]
+            if n != total + 1:
+                raise PolicyStop("prior_metadata_request_sequence_invalid")
+            outcome = read(path / f"request-{n:02d}-outcome.json")
+            response = path / f"response-{n:02d}.{'html' if intent['kind']=='rights' else 'json'}"
+            if not response.is_file() or outcome.get("http_status") != 200:
+                raise PolicyStop("prior_metadata_outcome_incomplete")
+            counts["recovery" if intent["recovery"] else intent["kind"]] += 1
+            total = n; outcomes.append(outcome)
+        if counts != terminal["metadata_budget_counts"] or total != terminal["metadata_http_requests"]:
+            raise PolicyStop("prior_metadata_budget_drift")
+        return {"counts": counts, "total": total, "outcomes": outcomes, "terminal_sha256": sha256_file(path / "terminal.json")}
 
     @classmethod
     def rights_refresh(cls, path, transport=http, sleeper=time.sleep):
@@ -254,7 +288,8 @@ class MetadataLedger:
         terminal = read(obj.path / "terminal.json")
         if terminal.get("status") != "pass_complete_fixed_policy_selection_locked":
             raise PolicyStop("sealed_selection_required_for_rights_refresh")
-        obj.counts, obj.total, obj.outcomes = {key: 0 for key in LIMITS}, 0, []
+        inherited = read(obj.path / "inherited-budget.json") if (obj.path / "inherited-budget.json").is_file() else None
+        obj.counts, obj.total, obj.outcomes = (dict(inherited["prior_counts"]), inherited["prior_request_count"], []) if inherited else ({key: 0 for key in LIMITS}, 0, [])
         for p in sorted(obj.path.glob("request-*-intent.json")):
             intent = read(p)
             n = intent["number"]
@@ -364,8 +399,10 @@ def discover(ledger, geometries):
     for sensor, role in ORDER:
         params = {"collections": COLLECTION, "bbox": ",".join(map(str, bbox)),
                   "datetime": "/".join(WINDOWS[role]), "limit": 100,
-                  "query": json.dumps({"platform": {"eq": sensor}, "landsat:wrs_path": {"eq": 141},
-                                       "landsat:wrs_row": {"eq": 40}}, separators=(",", ":"))}
+                  "query": json.dumps({"platform": {"eq": PROVIDER_PLATFORM[sensor]}}, separators=(",", ":"))}
+        # Same path/row policy is checked against the exact ID and independent
+        # fields locally. Removing an unverified server-side numeric formatting
+        # assumption changes no candidate eligibility or ranking predicate.
         url, method, body = SEARCH + "?" + urllib.parse.urlencode(params), "GET", None
         ledger.query_context = params
         seen, returned = set(), 0

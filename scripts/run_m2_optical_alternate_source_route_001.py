@@ -35,7 +35,10 @@ IMPLEMENTATION = ("optical_alternate_catalog_001.py", "optical_alternate_intake_
                   "optical_alternate_panel_arcgis_001.py", "run_m2_optical_alternate_source_route_001.py",
                   "validate_m2_optical_alternate_source_route_001_arcgis.py")
 DISCOVERY = DATA / ".attempt-events" / SCOPE / "metadata-001"
+RECOVERY_DISCOVERY = DATA / ".attempt-events" / SCOPE / "metadata-recovery-001"
+MECHANICAL = ROOT / "records/readiness/m2-optical-alternate-source-route-001-catalog-serialization-correction-001.json"
 READINESS = ROOT / "records/readiness/m2-optical-alternate-source-route-001-implementation-readiness.json"
+MECHANICAL_READINESS = ROOT / "records/readiness/m2-optical-alternate-source-route-001-mechanical-recovery-001-implementation-readiness.json"
 
 
 def code_hashes():
@@ -49,12 +52,13 @@ def controls():
             raise policy.PolicyStop("frozen_method_hash_drift")
 
 
-def preflight(commit, run):
+def preflight(commit, run, mechanical=False):
     """No provider, source, TIFF or pixel read. Exact public CI checked live."""
     controls()
     if not re.fullmatch(r"[a-f0-9]{40}", commit) or not re.fullmatch(r"\d{8,20}", run):
         raise policy.PolicyStop("implementation_ci_reference_invalid")
-    readiness = read(READINESS)
+    readiness_path = MECHANICAL_READINESS if mechanical else READINESS
+    readiness = read(readiness_path)
     if (readiness.get("status") != "pass_portable_and_installed_disposable_tests"
             or readiness.get("implementation_hashes") != code_hashes()
             or not readiness.get("installed_arcgis_disposable_end_to_end_pass")):
@@ -71,14 +75,26 @@ def preflight(commit, run):
             raise policy.PolicyStop("public_implementation_byte_mismatch")
     if not RUNTIME.is_file() or not DATA.is_dir() or shutil.disk_usage(DATA).free < intake.MIN_FREE:
         raise policy.PolicyStop("runtime_or_disk_preflight_invalid")
-    for root in (DISCOVERY, DATA / "processing" / SCOPE, DATA / ".intake-staging" / SCOPE):
+    search_root = RECOVERY_DISCOVERY if mechanical else DISCOVERY
+    for root in (search_root, DATA / "processing" / SCOPE, DATA / ".intake-staging" / SCOPE):
         policy.safe_path(DATA, root)
         if root.exists() or root.is_symlink():
             raise policy.PolicyStop("fresh_route_root_collision")
+    if mechanical:
+        correction = read(MECHANICAL)
+        if correction.get("status") != "classified_agent_catalog_serialization_correction_within_unchanged_envelope":
+            raise policy.PolicyStop("mechanical_correction_record_invalid")
+        for ref, expected in correction["preserved_metadata_attempt_files"].items():
+            if sha(DISCOVERY / ref) != expected:
+                raise policy.PolicyStop("consumed_metadata_attempt_drift")
+        policy.MetadataLedger.sealed_budget(DISCOVERY)
     return {"status": "pass_final_no_content_preflight", "at_utc": now(), "approval_sha256": policy.APPROVAL_SHA,
             "implementation_hashes": code_hashes(), "implementation_public_ci_commit": commit,
-            "implementation_public_ci_run_id": run, "readiness_sha256": sha(READINESS),
-            "source_payload_or_pixel_access": False, "provider_requests": 0, "metadata_http_budget": 18}
+            "implementation_public_ci_run_id": run, "readiness_sha256": sha(readiness_path),
+            "readiness_ref": str(readiness_path.relative_to(ROOT)),
+            "source_payload_or_pixel_access": False, "provider_requests": 0, "metadata_http_budget": 18,
+            "mechanical_metadata_recovery": mechanical,
+            "mechanical_correction_record_sha256": sha(MECHANICAL) if mechanical else None}
 
 
 def validate_gate(gate):
@@ -86,6 +102,8 @@ def validate_gate(gate):
     if (gate.get("status") != "pass_final_no_content_preflight" or gate.get("approval_sha256") != policy.APPROVAL_SHA
             or gate.get("implementation_hashes") != code_hashes()):
         raise policy.PolicyStop("exact_preflight_gate_invalid")
+    if gate.get("mechanical_metadata_recovery") and sha(MECHANICAL) != gate.get("mechanical_correction_record_sha256"):
+        raise policy.PolicyStop("mechanical_correction_record_drift")
 
 
 def rights_check(html):
@@ -97,23 +115,32 @@ def rights_check(html):
 
 def discovery_once(gate):
     validate_gate(gate)
-    fallback = DATA / ".attempt-fallback" / SCOPE / "metadata-001"
+    mechanical = gate.get("mechanical_metadata_recovery", False)
+    discovery_root = RECOVERY_DISCOVERY if mechanical else DISCOVERY
+    fallback = DATA / ".attempt-fallback" / SCOPE / discovery_root.name
     if fallback.exists():
         raise policy.PolicyStop("metadata_attempt_already_consumed")
     fallback.mkdir(parents=True, exist_ok=False)
     write_new(fallback / "ready.json", {"at_utc": now(), "status": "fallback_reserved_before_http"})
-    ledger = policy.MetadataLedger(DISCOVERY)
+    seed = policy.MetadataLedger.sealed_budget(DISCOVERY) if mechanical else None
+    ledger = policy.MetadataLedger(discovery_root, seed=seed)
     terminal = {"status": "stopped_metadata_no_selection", "source_payload_requests": 0}
     try:
-        root = ledger.request("root", policy.CATALOG)
-        if not isinstance(root, dict) or root.get("type") != "Catalog" or not isinstance(root.get("stac_version"), str):
-            raise policy.PolicyStop("catalog_root_schema_unresolved")
-        rights = ledger.request("rights", policy.RIGHTS)
-        if not rights_check(rights):
-            raise policy.PolicyStop("rights_or_distribution_not_reconciled")
-        write_new(DISCOVERY / "rights-observation.json", {"status": "pass_unchanged_public_usgs_rights_distribution",
+        if mechanical:
+            if read(DISCOVERY / "rights-observation.json").get("status") != "pass_unchanged_public_usgs_rights_distribution":
+                raise policy.PolicyStop("prior_verified_rights_missing")
+            rights_status = "prior_exact_live_official_rights_and_root_preserved"
+        else:
+            root = ledger.request("root", policy.CATALOG)
+            if not isinstance(root, dict) or root.get("type") != "Catalog" or not isinstance(root.get("stac_version"), str):
+                raise policy.PolicyStop("catalog_root_schema_unresolved")
+            rights = ledger.request("rights", policy.RIGHTS)
+            if not rights_check(rights):
+                raise policy.PolicyStop("rights_or_distribution_not_reconciled")
+            rights_status = "new_official_page_read"
+        write_new(discovery_root / "rights-observation.json", {"status": "pass_unchanged_public_usgs_rights_distribution",
                     "official_page": policy.RIGHTS, "at_utc": now(), "rights_read_number": ledger.total,
-                    "account_or_terms_action": False})
+                    "verification_origin": rights_status, "account_or_terms_action": False})
         geometries = policy.focus_geometries()
         discovery = policy.discover(ledger, geometries)
         terminal = policy.lock_selection(ledger, discovery, geometries)
@@ -123,7 +150,7 @@ def discovery_once(gate):
                      "metadata_budget_counts": ledger.counts, "implementation_hashes": code_hashes(),
                      "automatic_source_payload_request": False})
     try:
-        write_new(DISCOVERY / "terminal.json", terminal)
+        write_new(discovery_root / "terminal.json", terminal)
     except BaseException:
         write_new(fallback / "terminal.json", terminal)
     write_new(fallback / "cleanup.json", {"status": "metadata_evidence_retained", "at_utc": now()})
@@ -453,12 +480,13 @@ def main():
     parser.add_argument("--output")
     parser.add_argument("--stage")
     parser.add_argument("--selection")
+    parser.add_argument("--mechanical-metadata-recovery", action="store_true")
     args = parser.parse_args()
     try:
         if args.mode == "worker":
             return worker_once(Path(args.gate))
         if args.mode == "preflight":
-            result = preflight(args.public_ci_commit, args.public_ci_run)
+            result = preflight(args.public_ci_commit, args.public_ci_run, args.mechanical_metadata_recovery)
         elif args.mode == "discover":
             result = discovery_once(read(args.gate))
         elif args.mode == "stage-preflight":
