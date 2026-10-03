@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-M2-LANDSAT9-PIXEL-VISUAL-RECOVERY-001-IMPLEMENTATION-READINESS",
+  "recorded_at_utc": "2026-10-03T17:45:38Z",
+  "status": "pass_local_synthetic_gates_public_implementation_ci_pending",
+  "authority": {
+    "approval_ref": "records/source-gates/m2-landsat9-pixel-visual-recovery-001-approval.json",
+    "approval_sha256": "d49822fe1f9531c1b531033d1f93806225f16369dd1095682611007cac9f74d9",
+    "proposal_sha256": "9437ea0dea7222118a88e5d8157987d22afcfaf33d765e954745142abbe6694c",
+    "review_bundle_sha256": "92fe8c191eb854a09e7e5e5f45494e324f9b1feee186528fd620bfa6ca4de2f3",
+    "approval_public_commit": "afd36b1f43e2c6f38f175eefef933551b41752ad",
+    "approval_public_ci_run_id": "37140695731",
+    "approval_public_ci_conclusion": "success"
+  },
+  "implementation_hashes": {
+    "scripts/run_m2_landsat9_pixel_visual_recovery_001.py": "322ffab8ff44a4d81f7aa0ddd7c487c165d10da71c54596b356e39d2d4e573e4",
+    "scripts/validate_m2_landsat9_pixel_visual_recovery_001_arcgis.py": "cb2c1fee15bb627d411a51e92d0ff188f1799c16df2d41b229d864e4fc422cd5",
+    "tests/test_landsat9_pixel_visual_recovery_001.py": "d4a54e741f6b2d7b1efe0d0e6cb8a3e3310c22d20a0b9f9cb86fbd9adb484168"
+  },
+  "frozen_method_hashes": {
+    "scripts/run_m2_landsat9_pixel_visual_panel_001.py": "8f73dc48f8b2b669c85d6bf76c1cfe0b816d91e4acf63b07aa247111f4340c00",
+    "scripts/landsat9_pixel_visual_core_001.py": "55a7641f7826f41d3b461aa2ff99f57d829546515b3285d37045e28071ef1915",
+    "scripts/landsat9_visual_panel_arcgis_001.py": "b25d11a03c35310cbab00128a160cafb5f8cfbec43e72456430d2c98a8516362",
+    "scripts/landsat_c2_qa_flags.py": "9023715cb57a7651fc679acbe412e363d8e26d399f2f13493dba2693d54f2e03"
+  },
+  "portable_verification": {
+    "focused_final_revision_tests": 13,
+    "focused_result": "pass",
+    "repository_intermediate_revision": "1150 tests passed with 6 intentional local skips; final revision public CI remains required",
+    "coverage": ["reservation interruption", "worker crash before started receipt", "primary and independent fallback failures", "cleanup independence", "exclusive no-replace receipts", "fixed-order stop on first source failure", "safe error allowlists", "consumed-root preservation"]
+  },
+  "installed_arcgis_disposable_synthetic": {
+    "status": "pass_disposable_installed_arcgis_recovery_synthetic",
+    "arcgis_version": "3.7.1",
+    "supervisor_tests": 13,
+    "header_lattice": 0,
+    "pixel_valid_cells": 9,
+    "panel_fresh_reopen": true,
+    "supervisor_cleanup_persisted": true,
+    "project_data_or_external_custody_access": false
+  },
+  "implementation_design": "A versioned supervisor reserves independent fallback readiness and primary intent before one fixed-runtime worker. Exclusive receipts are flushed and read back. A private-process binding uses the exact hash-bound earlier method with only the new root, approval controls, function-local timestamps, durable stage markers, and safe receipt writes. The binding restores imported globals on exit and does not edit frozen scripts or the consumed real-001 filesystem root.",
+  "remaining_gates": ["public implementation CI", "one final no-content preflight", "at most one fresh real-002 worker", "conditional local panel inspection", "sanitized terminal publication"],
+  "real_attempt_started": false,
+  "real_tiff_header_or_pixel_read": false,
+  "scientific_method_change": false,
+  "provider_request": false
+}
