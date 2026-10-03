@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "NEPAL-M2-LANDSAT9-VISUAL-ROUTE-COMPLETION-001-LOCAL",
+  "status": "local_zero_decision_not_public_not_approved",
+  "human_decision_count": 0,
+  "base_commit": "7396a956b388e4adfef9935bf5c0cfe02fb5a7ac",
+  "proposal_ref": "contracts/milestone-002-landsat9-visual-route-completion-001-proposal.json",
+  "proposal_sha256": "7f4dc4bec11cea3f370f7efd26ab586360fad0e85e5b4f278cd7a7f279c38e6f",
+  "bound_files": [
+    {
+      "ref": "docs/M2_LANDSAT9_VISUAL_ROUTE_COMPLETION_001_REVIEW.md",
+      "sha256": "3fc79dfa45d2bce4e07403d1f89202d298f20c049b889cbb3d77c019f2665848"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-pixel-visual-panel-001-terminal-reconciliation.json",
+      "sha256": "e0270f75233b8c80b9559c5b70936d07f7e7787f28957a8db54697d848ea46ae"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-pixel-visual-recovery-001-terminal-reconciliation.json",
+      "sha256": "35c66f6ef84f93a40887a53b8038c4fc3fad08191055d61e5ab0c13587df851b"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-pixel-visual-recovery-001-post-ci-reconciliation.json",
+      "sha256": "207fcd5fd98d88f86c934a8f29f53568c5f406d7f1b9ae97966498a9e8483ad7"
+    },
+    {
+      "ref": "records/readiness/m2-landsat9-pixel-visual-recovery-001-implementation-readiness.json",
+      "sha256": "50268b49a909c058c2bc70524009543fe7c07058a01424caef722bb35368cae3"
+    },
+    {
+      "ref": "scripts/run_m2_landsat9_pixel_visual_recovery_001.py",
+      "sha256": "322ffab8ff44a4d81f7aa0ddd7c487c165d10da71c54596b356e39d2d4e573e4"
+    },
+    {
+      "ref": "scripts/run_m2_landsat9_pixel_visual_panel_001.py",
+      "sha256": "8f73dc48f8b2b669c85d6bf76c1cfe0b816d91e4acf63b07aa247111f4340c00"
+    },
+    {
+      "ref": "scripts/landsat9_pixel_visual_core_001.py",
+      "sha256": "55a7641f7826f41d3b461aa2ff99f57d829546515b3285d37045e28071ef1915"
+    },
+    {
+      "ref": "scripts/landsat9_visual_panel_arcgis_001.py",
+      "sha256": "b25d11a03c35310cbab00128a160cafb5f8cfbec43e72456430d2c98a8516362"
+    },
+    {
+      "ref": "scripts/landsat_c2_qa_flags.py",
+      "sha256": "9023715cb57a7651fc679acbe412e363d8e26d399f2f13493dba2693d54f2e03"
+    },
+    {
+      "ref": "config/aoi/approved-study-areas-epsg32645.json",
+      "sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615"
+    },
+    {
+      "ref": "config/qa/pixel-readiness-contract.json",
+      "sha256": "5a66ae11288813868f362c342027ce0e4850d435dfbb2cfec3f5098b17d123e2"
+    },
+    {
+      "ref": "scripts/landsat_l2_grouped_mtl_integrity_002.py",
+      "sha256": "476cc32f4c70a0feb229ebf440095a1fd936f29fd1ca9795f60b88d23950f036"
+    },
+    {
+      "ref": "contracts/milestone-002-landsat9-pixel-visual-panel-001-proposal.json",
+      "sha256": "e40d6f84aed7e41e52f8b084511213d4fe4c6d1a31fe54484172f1d1893d793e"
+    }
+  ],
+  "decision_requested": {
+    "question": "Approve, revise, or defer one remaining Landsat visual-route envelope including exact metadata-group selection, fixed scientific QA, narrowly classified mechanical recovery, a conditional owner-local ArcGIS panel, and sanitized terminal publication?",
+    "choices": [
+      "approve",
+      "revise",
+      "defer"
+    ],
+    "response_open": true
+  },
+  "authority_boundary": {
+    "packet_publication_authorized": false,
+    "implementation_authorized": false,
+    "project_metadata_or_pixel_access_authorized": false,
+    "new_real_attempt_authorized": false,
+    "local_landsat_panel_authorized": false,
+    "scientific_method_threshold_change_authorized": false,
+    "change_analysis_authorized": false,
+    "derived_pixel_publication_authorized": false,
+    "scientific_publication_authorized": false
+  }
+}

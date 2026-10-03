@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0",
+  "proposal_id": "NEPAL-M2-LANDSAT9-VISUAL-ROUTE-COMPLETION-001",
+  "status": "local_zero_decision_not_approved_not_published",
+  "prepared_at_utc": "2026-10-03T18:01:28Z",
+  "objective": "Finish the exact-source Landsat-9 owner-local visual before/after route, ending in a verified projected ArcGIS panel if the frozen QA qualifies, or a durable scientifically inconclusive disposition if it does not. Cover the metadata-group correction and foreseeable mechanical remediation in one outcome-scoped authority envelope.",
+  "entry_evidence": {
+    "terminal_ref": "records/readiness/m2-landsat9-pixel-visual-recovery-001-terminal-reconciliation.json",
+    "terminal_sha256": "35c66f6ef84f93a40887a53b8038c4fc3fad08191055d61e5ab0c13587df851b",
+    "post_ci_ref": "records/readiness/m2-landsat9-pixel-visual-recovery-001-post-ci-reconciliation.json",
+    "post_ci_sha256": "207fcd5fd98d88f86c934a8f29f53568c5f406d7f1b9ae97966498a9e8483ad7",
+    "closure_public_commit": "7396a956b388e4adfef9935bf5c0cfe02fb5a7ac",
+    "closure_public_ci_run_id": "37142353206",
+    "closure_public_ci_conclusion": "success",
+    "prior_pixel_method_proposal_ref": "contracts/milestone-002-landsat9-pixel-visual-panel-001-proposal.json",
+    "prior_pixel_method_proposal_sha256": "e40d6f84aed7e41e52f8b084511213d4fe4c6d1a31fe54484172f1d1893d793e"
+  },
+  "observed_block_and_limits": "The single recovery-001 real-002 worker materialized and hash-verified ten before-source members, then the frozen flat-key MTL parser stopped with mtl_field_duplicate_disagreement. No TIFF header, pixel, after-source processing, or Landsat panel ran. Durable worker and supervisor evidence now exists. The actual conflicting field and groups were not recorded, and no new source-content diagnostic was performed after the stop. Neither consumed attempt can be retried or mutated.",
+  "official_metadata_basis": {
+    "format_specification_url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/files/LSDS-1328_Landsat8-9_OLI-TIRS-C2-L2_DFCB-v7.pdf",
+    "science_guide_url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/files/LSDS-1619_Landsat8-9-Collection2-Level2-Science-Product-Guide-v6.pdf",
+    "verified_on": "2026-10-03",
+    "interpretation": "USGS examples place acquisition date and time in IMAGE_ATTRIBUTES and surface-reflectance coefficients in LEVEL2_SURFACE_REFLECTANCE_PARAMETERS. Separate Level-1 rescaling groups repeat coefficient names with different meanings. ODL GROUP and END_GROUP are structural declarations. The frozen flat-key function does not track groups and also collects GROUP declarations as scalar keys. These code and format observations support a structural parser correction; they do not identify the exact field that triggered the real stop or establish pixel usability."
+  },
+  "exact_sources_in_order": [
+    {
+      "role": "before",
+      "product_id": "LC09_L2SP_141040_20260810_20260811_02_T1",
+      "scene_id": "LC91410402026222LGN00",
+      "archive_size_bytes": 1126565376,
+      "archive_sha256": "9f9a5a63e7abd78f889c9f5229a80f62008b6c31e88b212bf8af01950ca9b255"
+    },
+    {
+      "role": "after",
+      "product_id": "LC09_L2SP_141040_20260826_20260827_02_T1",
+      "scene_id": "LC91410402026238LGN00",
+      "archive_size_bytes": 1123888128,
+      "archive_sha256": "f2b7a99f75d1324f0c7a984af5172740ca20862b774e2a17714df0cd7c454b38"
+    }
+  ],
+  "metadata_correction": {
+    "implementation": "Create a separate versioned group-aware metadata adapter, leaving the frozen scripts intact. Track and validate ODL group boundaries and XML parent paths; require exactly one occurrence of each required group and selected field at its exact path; compare normalized ODL and XML values. Structural GROUP, END_GROUP, and END tokens are not scalar values. Reuse the existing grouped product/scene/processing-level identity checks without weakening them.",
+    "date_time_paths": [
+      "LANDSAT_METADATA_FILE/IMAGE_ATTRIBUTES/DATE_ACQUIRED",
+      "LANDSAT_METADATA_FILE/IMAGE_ATTRIBUTES/SCENE_CENTER_TIME"
+    ],
+    "reflectance_paths": "LANDSAT_METADATA_FILE/LEVEL2_SURFACE_REFLECTANCE_PARAMETERS/REFLECTANCE_MULT_BAND_3 through BAND_7 and REFLECTANCE_ADD_BAND_3 through BAND_7",
+    "required_scale_and_offset": {
+      "mult": 2.75e-05,
+      "add": -0.2,
+      "absolute_tolerance": 1e-12
+    },
+    "duplicate_policy": "Different semantic groups may contain the same key. Reject duplicate required groups, duplicate selected fields even if values agree, unbalanced structure, missing required paths, wrong product/date, text/XML disagreement, nonfinite coefficients, or coefficients outside the unchanged scale and offset tolerance. Never choose first or last occurrence globally or substitute Level-1 coefficients.",
+    "pre_pixel_audit": "After public implementation CI, perform one distinct append-only metadata-only audit of the two exact MTL.txt and MTL.xml pairs in before/after order, taken from the hash-verified promoted TARs. Verify member hashes before parsing. Retain safe group/path names, validated dates and numerical coefficients, exact byte hashes, and pass/fail dispositions, never arbitrary metadata dumps. This audit precedes all new TIFF headers and pixels. A failed scientific or identity predicate stops the route."
+  },
+  "frozen_science": {
+    "aoi_ids": [
+      "AOI-SOURCE",
+      "AOI-UPPER-CORRIDOR"
+    ],
+    "crs_epsg": 32645,
+    "cell_size_m": 30,
+    "required_members_per_source": [
+      "_MTL.txt",
+      "_MTL.xml",
+      "_QA_PIXEL.TIF",
+      "_QA_RADSAT.TIF",
+      "_SR_QA_AEROSOL.TIF",
+      "_SR_B3.TIF",
+      "_SR_B4.TIF",
+      "_SR_B5.TIF",
+      "_SR_B6.TIF",
+      "_SR_B7.TIF"
+    ],
+    "pixel_predicates": "Reuse the exact hash-bound pixel core, QA flag decoder, AOI polygons, exact cell-area accounting, native grid/lattice limits, nodata rules, calibration, mask precedence, and pooled nearest-rank B7/B6/B4 stretch from the reviewed pixel-visual-panel-001 method.",
+    "thresholds": {
+      "footprint_minimum": 0.99,
+      "partial_paired_valid_floor": 0.2,
+      "full_single_date_valid_minimum": 0.8,
+      "full_paired_valid_minimum": 0.8
+    },
+    "registration_boundary": "Residual registration remains unmeasured. No quantitative difference, mapped change, baseline admission, geomorphic interpretation, or event attribution is permitted."
+  },
+  "single_outcome_scoped_authority_envelope": [
+    "Record one exact approval and publish this packet and approval to public main with CI. Implement only the versioned group-aware adapter and the control, receipt, supervision, and ArcGIS interface repairs needed to execute the frozen route. Leave consumed attempts and frozen method files immutable.",
+    "Test realistic nested ODL/XML fixtures with repeated root/group declarations, differing Level-1 and Level-2 identities and coefficients, exact Level-2 selection, malformed or duplicate groups/fields, text/XML disagreement, and wrong scale/date. Extend the existing durable-supervisor tests. Require an installed ArcGIS disposable end-to-end test and public implementation CI before project content access.",
+    "Verify exact approved and closed-attempt evidence, source archive and member identities, unchanged method and AOI hashes, runtime, space, and absent fresh attempt paths. Complete the bounded two-source metadata-only audit before TIFF access; persist its terminal evidence.",
+    "Only after metadata and implementation gates pass, launch the first fresh worker at processing/landsat9-visual-route-completion-001/real-003 with independent no-replace supervisor receipts. Process before then after using the exact ten members, inspect all headers before pixels, measure the frozen AOI and paired QA, and conditionally create the local visual panel. Seal evidence for every outcome.",
+    "Within this same envelope, correct a deterministically classified agent-owned parser, receipt, timestamp, path-length, serialization, or ArcGIS interface-shape defect when all source identities and scientific predicates remain unchanged. After preserving the consumed attempt, relevant synthetic tests, fresh public implementation CI if code changed, and a fresh no-content preflight, use a distinct sequential append-only attempt for necessary recovery. Never replay, resume, reuse, mutate, or conceal a consumed attempt. The authority lasts through the route outcome, rather than ending at each mechanical checkpoint.",
+    "After two consecutive mechanical attempts produce no progress, perform one non-human efficiency review of their preserved receipts and method interfaces before another attempt. Continue only with a specific evidenced correction inside this envelope. An unexplained content side effect, an unclassified failure, source-integrity drift, changed scientific predicate, or failed scientific QA is a hard stop and cannot be relabeled as mechanical recovery.",
+    "When at least one AOI qualifies, create an owner-local EPSG:32645 APRX with georeferenced source rasters, exclusion layers, UTC dates, masks, coverage figures, visible partial-data and unmeasured-registration labels, and PNG/PDF exports. Verify a fresh-process reopen, paths, and both rendered exports, and show the result to the owner. If neither AOI qualifies, close with the measured inconclusive QA and no panel.",
+    "Publish only sanitized receipts, hashes, QA aggregates, limitations, source-safe implementation, and exact terminal/post-CI reconciliation. This approval covers the complete unchanged route through terminal publication without intermediate owner reconfirmation. Stop at a real scientific, source, security, or authority boundary."
+  ],
+  "explicit_exclusions": [
+    "No mutation, resume, reuse, reconstruction, or retry of prior real-001, real-002, or any consumed attempt. New attempts retain separate roots and complete lineage.",
+    "No provider request, download, browser, account, terms, credentials, token, payment, source/date/order substitution, archive overwrite, or external source-custody mutation.",
+    "No post-observation change to AOI, CRS, grid, band order, scaling constants, mask, threshold, registration rule, stretch, or scientific predicate; no recovery merely to obtain more favorable coverage or stronger visuals.",
+    "No quantitative difference, change analysis, baseline admission, event interpretation or attribution, public derived pixels, emergency guidance, final M6 delivery claim, historical-root-cause claim, or scientific publication."
+  ],
+  "decision_requested": "Approve, revise, or defer one remaining-route envelope covering the specified metadata interpretation correction, validation, metadata audit, exact-source visual processing, narrowly classified mechanical recovery, conditional local map and exports, and sanitized terminal publication.",
+  "decision_state": {
+    "owner_approved": false,
+    "publication_authorized_by_draft": false,
+    "implementation_authorized_by_draft": false,
+    "metadata_or_pixel_access_authorized_by_draft": false,
+    "new_real_attempt_authorized_by_draft": false
+  }
+}
