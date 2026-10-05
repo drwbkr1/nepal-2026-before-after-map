@@ -1,20 +1,29 @@
 # Nepal 2026 Before/After Map
 
-An independent GIS project using satellite imagery around the 26 August 2026 Nepal event. **The current deliverable is an unofficial GIS demonstration, not a validated change map or operational hazard product.**
+An independent GIS project using satellite imagery around the 26 August 2026 Nepal event. **The current deliverable is an unverified GIS experiment for visual exploration.**
 
 ## Available demonstration — 5 October 2026
 
-**Interactive inspection:** the [local Leaflet swipe viewer](docs/viewer/index.html) uses higher-resolution renders with synchronized zoom/pan, a draggable boundary, date-only modes and optional blinking. Run it through the local-server instructions; GitHub's file view does not execute HTML. See [viewer instructions](docs/GIS_SWIPE_VIEWER.md). This remains a visual comparison with unverified registration, not a change detector.
+**Interactive inspection:** the [local Leaflet swipe viewer](docs/viewer/index.html) uses higher-resolution renders with synchronized zoom/pan, a draggable boundary, date-only modes and optional blinking. Run it through the local-server instructions; GitHub's file view does not execute HTML. See [viewer instructions](docs/GIS_SWIPE_VIEWER.md).
+
+Presentation work continues under the experiment scope. Scientific verification and public CI are not presentation release gates; routine checks keep the files usable and the dates and credits accurate. The viewer keeps one short experiment label, with technical details in expandable notes.
 
 ![Unregistered partial Sentinel-1D imagery demonstration with native cartographic cues](docs/assets/gis-demonstration-cartography-001.png)
 
 The panel displays **16 and 28 August 2026 Sentinel-1D ASF HyP3 RTC VV gamma0 imagery**, in **WGS 84 / UTM zone 45N (EPSG:32645)**. It uses a shared -30 to 0 dB display scale. Blank areas are exclusions, not evidence of no landscape change.
+
+The local ArcGIS handoff includes an editable project, display GeoTIFFs, a source table, PNG/PDF exports and packages. See the [demonstration guide](docs/GIS_DEMONSTRATION.md) for paths and recorded checks.
+
+<details>
+<summary>Package checks and technical history</summary>
 
 - An owner-local APRX, two display GeoTIFFs, source-manifest table, PNG/PDF exports and ZIP handoff have passed same-machine copied-folder and extracted-ZIP reopen/export tests.
 - The original display rasters are unchanged, and the ZIP exports match the working layout exactly.
 - A fifth PPKX test, using internal packaging with strictly local inputs, preserved the original GeoTIFF bytes and passed fresh-process reopen/render checks at two extraction locations. Four earlier PPKX failures remain retained evidence.
 - The latest fresh-copy layout adds linked true-north arrows, kilometer scale bars and a shared native legend. Its PPKX passes the same checks at two extraction locations; map viewports and imagery are unchanged. A failed cartographic preview remains retained.
 - Registration is unverified; source-area and upper-corridor common-valid coverage remain **54.6721%** and **75.7928%**. Both full-area QA dispositions remain `defer`.
+
+</details>
 
 Read the [demonstration guide](docs/GIS_DEMONSTRATION.md), [initial ZIP result](records/readiness/gis-demonstration-001-result.json), [preserved-format PPKX result](records/readiness/gis-demonstration-001-ppkx-preserved-format-result.json) and [cartographic result](records/readiness/gis-demonstration-001-cartography-result.json). Large GIS files stay outside Git. Source archives, DEM rasters, credentials and private correspondence are not distributed here.
 

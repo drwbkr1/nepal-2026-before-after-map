@@ -1,6 +1,8 @@
 # Nepal imagery: a GIS workflow demonstration
 
-This is an independent, unofficial GIS demonstration. It shows existing satellite imagery and an ArcGIS workflow; it does **not** identify validated landscape change or attribute a feature to the 26 August 2026 event. It is not an operational hazard map.
+This is an **unverified GIS experiment** using existing satellite imagery and an ArcGIS workflow. It is a visual comparison, not an operational hazard map.
+
+The accepted experiment scope permits presentation work without making scientific verification a release gate. Routine functionality and file-integrity checks remain useful; public CI is diagnostic rather than a presentation blocker. The retained scientific acceptance contracts and historical results are separate from this experiment.
 
 ![Partial imagery demonstration with unverified registration and native cartographic cues](assets/gis-demonstration-cartography-001.png)
 

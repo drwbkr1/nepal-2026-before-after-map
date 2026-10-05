@@ -1,5 +1,7 @@
 # Projected imagery swipe viewer
 
+This is an **unverified GIS experiment** for visual exploration. Scientific verification and public CI are not presentation release gates. We keep routine checks proportionate to functionality and file integrity, preserve the source dates and credits, and retain technical history for anyone who wants it.
+
 ## Open and use
 
 The verified opening route is a loopback HTTP server from a complete local checkout. All renderer code and scene assets are bundled; there is no Internet imagery, basemap or account dependency. GitHub displays HTML source instead of running this viewer. Serve only the viewer directory:
@@ -11,6 +13,8 @@ python -m http.server 8767 --bind 127.0.0.1 --directory docs/viewer
 Then open `http://127.0.0.1:8767/index.html`. Stop this optional local server with Ctrl+C when finished.
 
 Start with **Closer view**, drag the divider, and use **Blink dates** to compare one location. The native slider also supports arrow keys and Home/End. Use **16 Aug only** or **28 Aug only** for manual switching; **Overview** restores context. Zoom buttons and pan remain synchronized because both dates share one map. A URL fragment preserves the view without storing private data. Blinking does not autoplay and falls back to a manual date toggle when reduced motion is requested.
+
+The page uses one short experiment label. **Sources and technical notes** is collapsed by default and can be opened with a click or the keyboard; dates, display scale and source credits remain visible without opening it.
 
 The two native display exports are 3,540 by 2,880 pixels each, 12,124,225 bytes combined, about 77.8 MiB decoded RGBA. Their render pixel size is approximately 11.72 projected meters, distinct from the source's 10 m posting. Rendering or enlarging them does not improve accuracy. No public website deployment is claimed; this is a local viewer and a reproducible public repository artifact.
 
@@ -38,7 +42,7 @@ The source-area and upper-corridor common-valid VV/VH coverage remain 54.6721% a
 - Vendor pinned Leaflet 1.9.4 JS/CSS and its BSD 2-Clause license. This is a static browser dependency, not a software installation, and does not relicense project code or imagery.
 - Keep two raster overlays in map space; date labels, divider, warning, controls and source credits remain screen-stable. No WebGL, animation pipeline, particle effects or derived change marks.
 - Keep the swipe value, mode and finite projected camera coordinates in the URL hash. No cookies, analytics, account state or persistent private data. Invalid hashes fall back to the overview.
-- Desktop and mobile portrait share the same comparison. Provide keyboard slider/zoom/reset controls, touch drag/pan/pinch, visible dates and an always-present registration warning. Blink is opt-in and slow; reduced-motion mode uses a manual date toggle.
+- Desktop and mobile portrait share the same comparison. Provide keyboard slider/zoom/reset controls, touch drag/pan/pinch, visible dates and one always-present unverified-experiment label. Technical limitations remain available in expandable notes. Blink is opt-in and slow; reduced-motion mode uses a manual date toggle.
 - Missing Leaflet or imagery must show an explicit failure plus the static qualified panel. The native ArcGIS package/PDF remain the export fallback.
 - Cap the two PNG assets at 32 MiB combined; use one map and no remote tiles. Enlarging a render cannot add source detail or accuracy. The decoded image footprint is recorded in the local export receipt.
 
@@ -54,7 +58,7 @@ The first export candidate stopped on a development assertion that native world-
 
 The portable and installed-runtime focused suites each pass 19 tests: the original 16 plus three public-bundle checks for native PNG/PGW identity and bounds, pinned third-party bytes, and the qualified fallback preview. Those checks guard the published files across Git checkout line-ending behavior; they do not establish scientific registration. Browser checks pass actual image loading, both date-only modes, keyboard swipe increment and 0/100% endpoints, divider dragging, opt-in blink/stop, zoom, pan, overview and closer-view controls, URL-state restoration, and a 390-by-844 responsive layout with no horizontal overflow. Both image elements keep identical positions and dimensions after panning.
 
-A disposable missing-metadata fixture shows the explicit static fallback. A boundary-mocked reduced-motion fixture switches dates manually with the same renderer. These fixtures are local test inputs, not part of the shipped viewer. Actual phone touch/pinch hardware and an OS reduced-motion preference change were not exercised. The scientific limits and source credit remain visible in the main and fallback pages. See the [sanitized result](../records/readiness/gis-demonstration-001-swipe-viewer-result.json).
+A disposable missing-metadata fixture shows the explicit static fallback. A boundary-mocked reduced-motion fixture switches dates manually with the same renderer. These fixtures are local test inputs, not part of the shipped viewer. Actual phone touch/pinch hardware and an OS reduced-motion preference change were not exercised. The experiment label and source credit remain visible; detailed limits are in the expandable notes, and the static fallback retains its original annotations. See the [sanitized result](../records/readiness/gis-demonstration-001-swipe-viewer-result.json).
 
 ## Primary references
 
