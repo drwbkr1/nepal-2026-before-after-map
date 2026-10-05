@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "record_id": "NEPAL-GIS-DEMONSTRATION-001-PUBLICATION-RECONCILIATION",
+  "at_utc": "2026-10-05T18:24:27+00:00",
+  "status": "pass_qualified_demonstration_code_and_preview_publication",
+  "reconciles": {
+    "ref": "records/readiness/gis-demonstration-001-result.json",
+    "sha256": "4d4019804c115198187d08109462a506f5873859fa2516237731f592de17a7e8",
+    "initial_publication_status": "pending",
+    "current_publication_status": "published_with_exact_commit_CI_pass",
+    "initial_record_mutated": false
+  },
+  "publication": {
+    "repository": "https://github.com/drwbkr1/nepal-2026-before-after-map",
+    "branch": "main",
+    "commit": "43a91cdec9bbfbdd10bd8c3925fae65d4f3f9816",
+    "commit_and_public_preview_verified": true,
+    "guide": "docs/GIS_DEMONSTRATION.md",
+    "preview": {
+      "ref": "docs/assets/gis-demonstration-001.png",
+      "bytes": 802355,
+      "sha256": "bf0b21fa4b62ca59f59bd0ca73c46bc589ac3dbbca6ca303fa457544334feb09"
+    },
+    "public_ZIP_or_PPKX_uploaded": false,
+    "private_correspondence_or_owner_context_published": false
+  },
+  "public_CI": {
+    "run_id": 37355194505,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/37355194505",
+    "workflow": "Validate project controls",
+    "head_sha": "43a91cdec9bbfbdd10bd8c3925fae65d4f3f9816",
+    "status": "completed",
+    "conclusion": "success",
+    "required_files_validated": 1474,
+    "tests_reported": 1207,
+    "tests_skipped": 19,
+    "non_skipped_tests_passed": 1188,
+    "private_GIS_runtime_or_scientific_proof": false
+  },
+  "local_handoff": {
+    "format": "ZIP retaining original display GeoTIFFs",
+    "sha256": "55b483b03358635757e857f7ee8e7d94bc496cb7103dc0346fd0792fdd6a7098",
+    "fresh_process_reopen_and_rendered_export_equality": true,
+    "same_machine_only": true,
+    "PPKX_render_parity_pass": false
+  },
+  "scientific_admission": false,
+  "measured_change_or_event_attribution": false,
+  "original_M5_M6_complete": false,
+  "goal_complete": false,
+  "historical_failures_and_scientific_contracts_unchanged": true
+}
