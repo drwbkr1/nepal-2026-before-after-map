@@ -1,9 +1,14 @@
 """Staging and public display-bundle integrity; no ArcPy or raw imagery access."""
+import base64
+import io
 import json
+import shutil
 import struct
+import subprocess
 import sys
 import tempfile
 import unittest
+import zipfile
 from types import SimpleNamespace
 from pathlib import Path
 
@@ -163,6 +168,91 @@ class PublishedViewerIntegrity(unittest.TestCase):
         expected = record['public_preview']['sha256']
         self.assertEqual(digest(self.root / 'fallback-panel.png'), expected)
         self.assertEqual(digest(repo / record['public_preview']['ref']), expected)
+
+
+class BrowserExportPackaging(unittest.TestCase):
+    """Exercise the real ZIP writer with disposable bytes, using an existing Node."""
+    @classmethod
+    def setUpClass(cls):
+        bundled = (Path.home() / '.cache' / 'codex-runtimes' / 'codex-primary-runtime' /
+                   'dependencies' / 'node' / 'bin' / 'node.exe')
+        cls.node = shutil.which('node') or (str(bundled) if bundled.is_file() else None)
+        if cls.node is None:
+            raise unittest.SkipTest('Node is not available; no installation requested')
+        cls.module = Path(__file__).resolve().parents[1] / 'docs' / 'viewer' / 'export-bundle.js'
+
+    def execute(self, code):
+        return subprocess.run([self.node, '-e', code, str(self.module)], check=True,
+                              capture_output=True, text=True).stdout
+
+    def test_zip_roundtrip_and_crc_preserve_member_bytes(self):
+        encoded = self.execute("""
+            const {zip} = require(process.argv[1]);
+            const entries = [
+              {name:'before.png', bytes:Uint8Array.from([0, 255, 128, 10])},
+              {name:'before.pgw', bytes:new TextEncoder().encode('10\\r\\n0\\r\\n0\\r\\n-10\\r\\n105\\r\\n195\\r\\n')}
+            ];
+            process.stdout.write(Buffer.from(zip(entries)).toString('base64'));
+        """)
+        with zipfile.ZipFile(io.BytesIO(base64.b64decode(encoded))) as archive:
+            self.assertIsNone(archive.testzip())
+            self.assertEqual(archive.namelist(), ['before.png', 'before.pgw'])
+            self.assertEqual(archive.read('before.png'), bytes([0, 255, 128, 10]))
+            self.assertEqual(archive.read('before.pgw'), b'10\r\n0\r\n0\r\n-10\r\n105\r\n195\r\n')
+
+    def test_invalid_members_and_oversize_are_rejected(self):
+        rejected = json.loads(self.execute("""
+            const {zip} = require(process.argv[1]), bytes = new Uint8Array([1]);
+            const cases = [[], [{name:'../escape', bytes}], [{name:'same', bytes}, {name:'same', bytes}],
+              [{bytes}], [null], [{name:'invalid', bytes:'not bytes'}],
+              [{name:'large', bytes:new Uint8Array(32 * 1024 * 1024 + 1)}]];
+            process.stdout.write(JSON.stringify(cases.map(entries => {
+              try {zip(entries); return false;} catch {return true;}
+            })));
+        """))
+        self.assertEqual(rejected, [True] * 7)
+
+    def test_display_packaging_keeps_files_and_rejects_identity_drift(self):
+        result = json.loads(self.execute("""
+            const {displayBundle} = require(process.argv[1]);
+            const {createHash, webcrypto} = require('node:crypto');
+            global.crypto = webcrypto;
+            const enc = new TextEncoder(), files = new Map(), bounds = [100,180,130,200];
+            const sha = bytes => createHash('sha256').update(bytes).digest('hex');
+            const source = {wkid:32645, renders:[]}, data = {bounds};
+            for (const key of ['before','after']) {
+              const png = enc.encode('disposable ' + key), pgw = enc.encode('10\\n0\\n0\\n-10\\n105\\n195\\n');
+              const row = {key, file:key+'.png', world_file:key+'.pgw', source_id:key, date:'fixture',
+                sha256:sha(png), bytes:png.length, world_file_sha256:sha(pgw), bounds_easting_northing:bounds};
+              source.renders.push(row); data[key] = row;
+              files.set('renders/'+row.file,png); files.set('renders/'+row.world_file,pgw);
+              files.set('renders/'+row.file+'.aux.xml',enc.encode('<fixture/>'));
+            }
+            files.set('ARCGIS_DISPLAY_README.txt',enc.encode('Unverified fixture'));
+            const setSource = () => files.set('renders/SOURCE.json',enc.encode(JSON.stringify(source)));
+            setSource();
+            global.fetch = async path => {
+              const bytes = files.get(path);
+              return {ok:!!bytes, headers:{get:() => bytes?.length ?? 0}, arrayBuffer:async () => bytes.buffer};
+            };
+            (async () => {
+              const original = Buffer.from(await displayBundle(data)).toString('base64');
+              source.renders[0] = {...source.renders[0],source_id:'wrong'}; setSource();
+              let identityRejected = false, bytesRejected = false;
+              try {await displayBundle(data);} catch {identityRejected = true;}
+              source.renders[0] = data.before; setSource();
+              files.set('renders/before.png',enc.encode('wrong-byte-content'));
+              try {await displayBundle(data);} catch {bytesRejected = true;}
+              process.stdout.write(JSON.stringify({original,identityRejected,bytesRejected}));
+            })().catch(error => {console.error(error); process.exitCode = 1;});
+        """))
+        self.assertTrue(result['identityRejected'])
+        self.assertTrue(result['bytesRejected'])
+        with zipfile.ZipFile(io.BytesIO(base64.b64decode(result['original']))) as archive:
+            self.assertIsNone(archive.testzip())
+            self.assertEqual(len(archive.namelist()), 8)
+            self.assertEqual(archive.read('before.png'), b'disposable before')
+            self.assertEqual(archive.read('after.png'), b'disposable after')
 
 
 if __name__ == "__main__":

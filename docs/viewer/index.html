@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="viewer.css">
   <script defer src="vendor/leaflet/leaflet.js"></script>
   <script defer src="data.js"></script>
+  <script defer src="export-bundle.js"></script>
   <script defer src="viewer.js"></script>
 </head>
 <body data-ready="false">
@@ -52,6 +53,10 @@
       <span id="coordinates">EPSG:32645 · coordinates in meters</span>
     </div>
     <p id="ready-status" class="status" role="status">Loading two local scene renders…</p>
+    <div class="export-row">
+      <button id="download-layers" disabled>Download ArcGIS layers</button>
+      <span id="export-status" role="status">Both dates · full display extent · ZIP, about 12 MB</span>
+    </div>
     <div id="fallback" hidden>
       <p>The interactive view is unavailable. The static qualified panel remains available below.</p>
       <img src="fallback-panel.png" alt="Qualified partial before and after radar panel, with credits and unverified-registration warning">

@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "record_id": "GIS-DEMONSTRATION-001-DISPLAY-BUNDLE-RESULT",
+  "date": "2026-10-05",
+  "status": "pass_arcgis_display_bundle_header_import",
+  "use": "Unverified GIS experiment. Visual comparison only.",
+  "code_ref": "docs/viewer/export-bundle.js",
+  "guide_ref": "docs/GIS_SWIPE_VIEWER.md",
+  "portable_focused_tests_passed": 22,
+  "browser_download_observed": true,
+  "sample_archive": {
+    "file": "Nepal_unverified_display_layers.zip",
+    "bytes": 12130882,
+    "sha256": "d04ccaf208d2f9f5a6b95e24ca3bd904bc5454bf9a4c37cf99bbedc568fa04d2",
+    "CRC_check": "pass",
+    "members": 8,
+    "retained_outside_git": true,
+    "note": "Observed initial download; README wording was subsequently clarified. Newly generated ZIPs need not have this sample archive hash. PNG/PGW identities remain fixed."
+  },
+  "arcgis_header_check": {
+    "version": "3.7.1",
+    "wkid": 32645,
+    "size_each": [3540, 2880],
+    "bounds_each": [325165.27224028925, 3108005.4275006475, 366663.00523626537, 3141766.295022798],
+    "before_source_id": "M1-SRC-002",
+    "before_date": "2026-08-16",
+    "after_source_id": "M1-SRC-005",
+    "after_date": "2026-08-28",
+    "original_PNG_and_PGW_bytes_preserved": true,
+    "header_properties_only": true,
+    "geoprocessing_calls": 0,
+    "pixel_calculation": false
+  },
+  "retained_mechanical_observations": [
+    "Browser download-event observation timed out; the completed ZIP was found and inspected without a second click.",
+    "First header adapter requested an unavailable Describe width property; the corrected check used Raster header properties over the same extracted display copies."
+  ],
+  "limits": {
+    "full_extent_not_current_browser_viewport": true,
+    "PNG_values_are_display_colors_not_quantitative_VV_or_dB": true,
+    "registration_verified": false,
+    "scientific_admission": false,
+    "change_analysis": false,
+    "attribution": false,
+    "raw_source_processing": false,
+    "original_scientific_goal_complete": false
+  },
+  "credit": "ASF DAAC HyP3 2026. Contains modified Copernicus Sentinel data 2026, processed by ESA.",
+  "processing_DOIs": ["10.5281/zenodo.3962581", "10.5281/zenodo.3962936"]
+}

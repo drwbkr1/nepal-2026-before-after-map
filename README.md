@@ -8,6 +8,8 @@ An independent GIS project using satellite imagery around the 26 August 2026 Nep
 
 Presentation work continues under the experiment scope. Scientific verification and public CI are not presentation release gates; routine checks keep the files usable and the dates and credits accurate. The viewer keeps one short experiment label, with technical details in expandable notes.
 
+**ArcGIS companion:** the viewer's **Download ArcGIS layers** button packages the two existing full-extent display images with projected placement, dates and credits. Extract the ZIP and add both PNGs to one map. These are display layers; the editable project and cartographic exports remain in the local handoff.
+
 ![Unregistered partial Sentinel-1D imagery demonstration with native cartographic cues](docs/assets/gis-demonstration-cartography-001.png)
 
 The panel displays **16 and 28 August 2026 Sentinel-1D ASF HyP3 RTC VV gamma0 imagery**, in **WGS 84 / UTM zone 45N (EPSG:32645)**. It uses a shared -30 to 0 dB display scale. Blank areas are exclusions, not evidence of no landscape change.

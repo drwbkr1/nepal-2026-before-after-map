@@ -31,6 +31,8 @@ output { width:46px; font-variant-numeric:tabular-nums; text-align:right; font-s
 .legend { display:flex; align-items:center; gap:8px; }
 .ramp { height:12px; width:96px; border:1px solid #61747c; background:linear-gradient(to right,#000,#fff); }
 .status { color:#4f6670; font-size:12px; padding:0 18px 10px; margin:0; }
+.export-row { display:flex; align-items:center; flex-wrap:wrap; gap:8px 14px; padding:0 18px 12px; }
+.export-row span { color:#516771; font-size:12px; }
 .notes { padding:12px 0 0; color:#455e68; font-size:13px; }
 .notes summary { cursor:pointer; font-weight:650; min-height:44px; padding:10px 0; }
 .notes p { margin:8px 0; }

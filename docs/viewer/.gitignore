@@ -1,0 +1,3 @@
+# Authored CRS-only sidecars for these public display PNGs, not generated caches.
+!renders/before.png.aux.xml
+!renders/after.png.aux.xml

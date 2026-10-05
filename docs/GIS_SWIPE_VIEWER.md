@@ -20,6 +20,18 @@ The two native display exports are 3,540 by 2,880 pixels each, 12,124,225 bytes 
 
 Direct `file:` opening was not runtime-verified: the current testing browser permits HTTP/HTTPS only. No file-protocol workaround was attempted. The bundled viewer needs no Internet connection when served locally.
 
+## Download the display layers for ArcGIS
+
+Click **Download ArcGIS layers** below the comparison. The viewer packages the two existing full-extent PNGs, their unchanged native PGW world files, spatial-reference sidecars, source manifest and a short README into one ZIP of about 12 MB. It does not export the current zoomed viewport or recompute imagery.
+
+Extract the complete ZIP into a writable folder, keep each PNG with its PGW and `.png.aux.xml`, and add `before.png` and `after.png` to one ArcGIS map. Both are in EPSG:32645. Toggle layer visibility to compare dates; use the existing APRX/PPKX handoff for its cartographic layout and PNG/PDF exports.
+
+These PNGs contain **display colors, not quantitative VV or dB measurements**. The ZIP README carries the unverified-experiment label, dates and ASF/ESA credits with processing DOIs. The original rendered PNG/PGW bytes are retained. No registration, filtering, resampling or difference calculation is performed by the export.
+
+The browser reads only bundled local files, checks the existing PNG/PGW identities, and uses a small uncompressed ZIP writer capped at 32 MiB. It adds no package installation, account, external request or new imagery dependency. This path needs a secure browser context, such as the documented loopback server; failure leaves the comparison and native ArcGIS handoff available.
+
+The completed browser-generated ZIP passed its CRC/member check. ArcGIS Pro 3.7.1 read both extracted display layers as EPSG:32645, 3,540 by 2,880 pixels, with their expected native projected bounds. The focused portable suite now passes 22 tests, including disposable ZIP round-trip, invalid-member/size rejection and source/byte-drift cases. This is a file-opening check, not scientific validation. The [display-bundle result](../records/readiness/gis-demonstration-001-display-bundle-result.json) also preserves the browser-observation timeout and the corrected header adapter.
+
 ## Design and evidence scope
 
 The job is spatial and temporal visual comparison: inspect the two existing radar displays in one shared viewport, rather than shrinking them into side-by-side panels. This is a presentation tool for an unofficial GIS demonstration, not a change detector or hazard product.
@@ -54,7 +66,7 @@ The static qualified layout is the fallback when JavaScript is unavailable. Cred
 
 The first export candidate stopped on a development assertion that native world-file outer edges would equal the map camera extent. The observed difference is about half a render pixel, with a smaller scale difference. That failed candidate is retained. The viewer does not alter either origin or fit a correction: placement follows each native world file as supplied, both renders must use exactly the same display grid, and the camera must remain unchanged. Native extent deltas are recorded separately. No independent positional-accuracy or registration claim follows from those metadata.
 
-## Verified result
+## Earlier viewer checks
 
 The portable and installed-runtime focused suites each pass 19 tests: the original 16 plus three public-bundle checks for native PNG/PGW identity and bounds, pinned third-party bytes, and the qualified fallback preview. Those checks guard the published files across Git checkout line-ending behavior; they do not establish scientific registration. Browser checks pass actual image loading, both date-only modes, keyboard swipe increment and 0/100% endpoints, divider dragging, opt-in blink/stop, zoom, pan, overview and closer-view controls, URL-state restoration, and a 390-by-844 responsive layout with no horizontal overflow. Both image elements keep identical positions and dimensions after panning.
 

@@ -12,6 +12,7 @@
     $('map-wrap').hidden = true;
     document.querySelectorAll('.toolbar button').forEach(button => button.disabled = true);
     $('split').disabled = true;
+    $('download-layers').disabled = true;
     $('fallback').hidden = false;
     document.body.dataset.ready = 'failed';
   };
@@ -104,6 +105,8 @@
     restoreHash();
     document.body.dataset.ready = 'true';
     document.querySelectorAll('.toolbar button').forEach(button => button.disabled = false);
+    $('download-layers').disabled = !window.NEPAL_EXPORT || !window.crypto?.subtle;
+    if ($('download-layers').disabled) $('export-status').textContent = 'Download unavailable here; use the local-server instructions in the viewer guide.';
     draw(); hashState();
     status.textContent = `Two local renders loaded · ${data.before.size[0]} × ${data.before.size[1]} px each · no computed difference`;
   }
@@ -117,6 +120,26 @@
   }
   document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click',() => setMode(button.dataset.mode)));
   $('blink').addEventListener('click',toggleBlink);
+  $('download-layers').addEventListener('click',async () => {
+    if (!ready || !window.NEPAL_EXPORT || !window.crypto?.subtle) return;
+    const button = $('download-layers'), message = $('export-status');
+    button.disabled = true;
+    message.textContent = 'Packaging the two existing local display layers…';
+    let url = null;
+    try {
+      const bytes = await window.NEPAL_EXPORT.displayBundle(data);
+      url = URL.createObjectURL(new Blob([bytes], {type:'application/zip'}));
+      const link = document.createElement('a');
+      link.href = url; link.download = 'Nepal_unverified_display_layers.zip';
+      document.body.append(link); link.click(); link.remove();
+      message.textContent = 'Download requested. Extract the ZIP, keep sidecars together, then add both PNGs in ArcGIS.';
+    } catch {
+      message.textContent = 'Could not package the local display files. The viewer and existing ArcGIS handoff are still available.';
+    } finally {
+      if (url) setTimeout(() => URL.revokeObjectURL(url), 60000);
+      button.disabled = !ready;
+    }
+  });
   $('fit').addEventListener('click',() => {map.fitBounds(bounds,{padding:[22,30],animate:false}); hashState();});
   $('closer').addEventListener('click',() => {map.fitBounds(bounds,{padding:[22,30],animate:false}); map.setZoom(map.getZoom() + 1,{animate:false}); hashState();});
   $('split').addEventListener('input',() => {split = Number($('split').value); draw(); hashState();});
