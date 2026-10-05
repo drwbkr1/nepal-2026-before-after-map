@@ -795,7 +795,7 @@
   },
   "current_checkpoint_scope": "Preserved native radar-processing terminal checkpoint. Later optical and presentation routes are separate active_* pointers; this field does not describe their current outcome or create authority.",
   "active_gis_demonstration": {
-    "checkpoint_id": "GIS-DEMONSTRATION-001-UNVERIFIED-BRIGHTNESS-DIFFERENCE-AVAILABLE",
+    "checkpoint_id": "GIS-DEMONSTRATION-001-UNVERIFIED-FIVE-MAP-ATLAS-AVAILABLE",
     "authority_scope": "Accepted existing-output demonstration and 5 October unverified brightness-difference experiment: exact existing dB inputs, new numeric difference/exclusion files, editable ArcGIS handoff, viewer and credited previews; routine reversible corrections and sanitized publication without intermediate reconfirmation. No registration adjustment, detection, attribution or scientific admission.",
     "guide_ref": "docs/GIS_DEMONSTRATION.md",
     "viewer_guide_ref": "docs/GIS_SWIPE_VIEWER.md",
@@ -817,7 +817,7 @@
     "presentation_requires_public_CI_pass": false,
     "public_CI_role": "diagnostic_not_a_presentation_release_gate",
     "routine_checks": "Proportionate functionality and data integrity; retain source dates and credits.",
-    "next_action": "Use the available swipe and unverified brightness-difference views and editable ArcGIS handoff. Ordinary presentation improvements inherit accepted scope; acquisition, registration adjustment, scientific detection and attribution remain outside it.",
+    "next_action": "Use the existing swipe/difference viewer and five-map ArcGIS atlas. Presentation and packaging improvements inherit the accepted experiment scope. New acquisition, registration correction, scientific detection or attribution require separate supported scope; original scientific acceptance remains unmet.",
     "registration_verified": false,
     "scientific_admission": false,
     "goal_complete": false,
@@ -831,6 +831,11 @@
       "CI_run_id": 37368462707,
       "CI_status": "terminal_hosted_runner_not_acquired_no_test_steps"
     },
-    "viewer_public_commit_scope": "Brightness-difference implementation and assets; later evidence-only commits do not change it"
+    "viewer_public_commit_scope": "Brightness-difference implementation and assets; later evidence-only commits do not change it",
+    "atlas_guide_ref": "docs/GIS_EXPERIMENT_ATLAS.md",
+    "atlas_result_ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+    "atlas_package_sha256": "6f8ff248d33b5c1bbefd68451d3fff74cc387b1ec0a464cf5fc2dd3f3ad3537a",
+    "atlas_bundle_sha256": "8dfc7add1d00231a36000fbff208402ff6b6db6443dbcc492efad8f7ce38b89a",
+    "atlas_layout_count": 5
   }
 }

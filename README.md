@@ -8,7 +8,9 @@ An independent GIS project using satellite imagery around the 26 August 2026 Nep
 
 Presentation work continues under the experiment scope. Scientific verification and public CI are not presentation release gates; routine checks keep the files usable and the dates and credits accurate. The viewer keeps one short experiment label, with technical details in expandable notes.
 
-**ArcGIS companion:** the viewer's **Download ArcGIS layers** button packages the two existing full-extent display images with projected placement, dates and credits. Extract the ZIP and add both PNGs to one map. These are display layers; the editable project and cartographic exports remain in the local handoff.
+**ArcGIS companion:** the [five-map atlas](docs/GIS_EXPERIMENT_ATLAS.md) provides overview, source-area, upper-corridor, brightness-difference and coverage-gap layouts, with an editable project package, reusable layers and PDF/PNG exports. The viewer also downloads the two dated display images with projected placement; those PNG layers are separate from the numeric GeoTIFF handoff.
+
+**Difference view:** select **Difference** in the viewer to see the unverified after-minus-before brightness layer. Blue means a lower value; orange means a higher value. See [the method notes](docs/GIS_BRIGHTNESS_DIFFERENCE.md).
 
 ![Unregistered partial Sentinel-1D imagery demonstration with native cartographic cues](docs/assets/gis-demonstration-cartography-001.png)
 

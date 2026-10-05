@@ -1,0 +1,269 @@
+{
+  "record_id": "GIS-DEMONSTRATION-001-FIVE-MAP-ATLAS-RESULT",
+  "date": "2026-10-05",
+  "status": "available_unverified_gis_atlas",
+  "purpose": "Editable and exportable presentation of existing exact rasters and approved search/review geometry",
+  "crs": "EPSG:32645",
+  "principal_maps_and_layouts": [
+    "regional_overview",
+    "source_area_comparison",
+    "upper_corridor_comparison",
+    "evidence_map",
+    "limitations_map"
+  ],
+  "maps": 7,
+  "layouts": 5,
+  "layer_files": 5,
+  "rasters": {
+    "before_common_valid_vv_db.tif": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3",
+    "after_common_valid_vv_db.tif": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+    "delta_vv_db.tif": "ffb9b8e8f2e8a64bd0b57a777dabf5497794e4037f2f6bbef8cff68505f2d4ad",
+    "excluded_cells.tif": "cb9b777f138971218b36b7e62633df706347fa3c746c3457a0718a5db5efebbd"
+  },
+  "raster_calculation": false,
+  "new_acquisition": false,
+  "inputs_unchanged": true,
+  "aoi_sha256": "3d6c9bb39fa9b3ffeddfb0048ddabf30ee4472c0006b78c5c7d58193693ac615",
+  "aoi_role": "Approved M1 search/review extents, not event boundaries",
+  "gpkg_counts": {
+    "StudyAreas": 3,
+    "DisplayedSources": 2,
+    "ExperimentMethod": 1
+  },
+  "formula": "delta_vv_db = after_vv_db - before_vv_db (existing calculation reused unchanged)",
+  "project": {
+    "file": "Nepal_Unverified_Atlas.aprx",
+    "sha256": "d92af6a2423c9b792a165451c26e7bfc01a5ba15b15a70cd54aa0fac12e95caa"
+  },
+  "package": {
+    "file": "Nepal_Unverified_Atlas.ppkx",
+    "bytes": 63381722,
+    "sha256": "6f8ff248d33b5c1bbefd68451d3fff74cc387b1ec0a464cf5fc2dd3f3ad3537a",
+    "arcgis_version": "3.7.1",
+    "original_strict_receipt_status": "failed",
+    "field_order_policy": "Compare exact names/types independent of order; original order remains in snapshots",
+    "semantic_verification_checks": {
+      "structure_equal": true,
+      "layout_metadata_equal": true,
+      "layout_pixels_equal": true,
+      "study_geometry_and_named_attributes_equal": true,
+      "study_crs_equal": true,
+      "packaged_tiffs_exact": true
+    },
+    "original_source_stable_files_unchanged": true,
+    "extracted_sources_local": true,
+    "packaged_tiff_hashes": {
+      "before_common_valid_vv_db.tif": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3",
+      "after_common_valid_vv_db.tif": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+      "delta_vv_db.tif": "ffb9b8e8f2e8a64bd0b57a777dabf5497794e4037f2f6bbef8cff68505f2d4ad",
+      "excluded_cells.tif": "cb9b777f138971218b36b7e62633df706347fa3c746c3457a0718a5db5efebbd"
+    },
+    "clean_machine_tested": false,
+    "clean_profile_tested": false,
+    "cross_version_tested": false
+  },
+  "bundle": {
+    "file": "Nepal_Unverified_Atlas.zip",
+    "archive_bytes": 133113127,
+    "archive_sha256": "8dfc7add1d00231a36000fbff208402ff6b6db6443dbcc492efad8f7ce38b89a",
+    "file_count": 88,
+    "crc_pass": true,
+    "all_file_hashes_match": true,
+    "status": "passed_bundle_integrity",
+    "arcgis_package_test": "same_machine_fresh_process_pass",
+    "clean_machine_tested": false,
+    "scientific_validity_tested": false
+  },
+  "standalone_layer_reopen": {
+    "status": "passed_extracted_bundle_sidecars",
+    "layers": [
+      {
+        "file": "after.lyrx",
+        "local_source": "imagery/after_common_valid_vv_db.tif",
+        "wkid": 32645
+      },
+      {
+        "file": "before.lyrx",
+        "local_source": "imagery/before_common_valid_vv_db.tif",
+        "wkid": 32645
+      },
+      {
+        "file": "difference.lyrx",
+        "local_source": "imagery/delta_vv_db.tif",
+        "wkid": 32645
+      },
+      {
+        "file": "exclusions.lyrx",
+        "local_source": "imagery/excluded_cells.tif",
+        "wkid": 32645
+      },
+      {
+        "file": "study-areas.lyrx",
+        "local_source": "Experiment.gdb/StudyAreas",
+        "wkid": 32645
+      }
+    ],
+    "gpkg_counts": {
+      "StudyAreas": 3,
+      "DisplayedSources": 2,
+      "ExperimentMethod": 1
+    },
+    "clean_machine_tested": false
+  },
+  "exports": [
+    {
+      "map_id": "regional_overview",
+      "png": {
+        "file": "regional_overview.png",
+        "bytes": 243252,
+        "sha256": "da8086b0b5b7122e69bdd7952d0ffafc3b503e716cafe71ae44b08790c2ca0fd"
+      },
+      "pdf": {
+        "file": "regional_overview.pdf",
+        "bytes": 205198,
+        "sha256": "e582b730dbaba38a2de585c8bfc557cf157d9686ba061bce5de96f30d8debf5c"
+      }
+    },
+    {
+      "map_id": "source_area_comparison",
+      "png": {
+        "file": "source_area_comparison.png",
+        "bytes": 1266613,
+        "sha256": "01e74f91a93ef493990a847ae3eac6061f6716c160f177ce361f3cba1eb0fc26"
+      },
+      "pdf": {
+        "file": "source_area_comparison.pdf",
+        "bytes": 599179,
+        "sha256": "ea690ad0ca59e7d49ea0da2b9a88effa4244c0f15a74f849c4f2d805fcee3672"
+      }
+    },
+    {
+      "map_id": "upper_corridor_comparison",
+      "png": {
+        "file": "upper_corridor_comparison.png",
+        "bytes": 1283712,
+        "sha256": "ddde1a344c240b5abc71cdaeffc5f98f85f48741624b75e26fb8df2d21968af3"
+      },
+      "pdf": {
+        "file": "upper_corridor_comparison.pdf",
+        "bytes": 565319,
+        "sha256": "9d7032da89fd82c29a0894bdf310d1d081b6ed5ecf37fd20a3fd748d56b8aced"
+      }
+    },
+    {
+      "map_id": "evidence_map",
+      "png": {
+        "file": "evidence_map.png",
+        "bytes": 917371,
+        "sha256": "d797e4c1f075d245615ceb1d970d4895a010ac4a0354eedb674b4a7590fa3366"
+      },
+      "pdf": {
+        "file": "evidence_map.pdf",
+        "bytes": 552020,
+        "sha256": "f090bfc9da08d4189525ab4f16640fbc96f09b3dd9047d4c0e2fff4dc962ceb0"
+      }
+    },
+    {
+      "map_id": "limitations_map",
+      "png": {
+        "file": "limitations_map.png",
+        "bytes": 167369,
+        "sha256": "f2c544363ec99862211dbcd1edb840dc8c2082fa077b67a0a7ebe9f577eed4dd"
+      },
+      "pdf": {
+        "file": "limitations_map.pdf",
+        "bytes": 205087,
+        "sha256": "ec0698619fa3612215f791ff49b9f9cb55fb451303bd304b42d572bffc0c5c1f"
+      }
+    }
+  ],
+  "public_previews": [
+    {
+      "layout": "regional_overview",
+      "file": "docs/assets/gis-atlas-001-regional_overview.png",
+      "bytes": 243252,
+      "sha256": "da8086b0b5b7122e69bdd7952d0ffafc3b503e716cafe71ae44b08790c2ca0fd"
+    },
+    {
+      "layout": "source_area_comparison",
+      "file": "docs/assets/gis-atlas-001-source_area_comparison.png",
+      "bytes": 1266613,
+      "sha256": "01e74f91a93ef493990a847ae3eac6061f6716c160f177ce361f3cba1eb0fc26"
+    },
+    {
+      "layout": "upper_corridor_comparison",
+      "file": "docs/assets/gis-atlas-001-upper_corridor_comparison.png",
+      "bytes": 1283712,
+      "sha256": "ddde1a344c240b5abc71cdaeffc5f98f85f48741624b75e26fb8df2d21968af3"
+    },
+    {
+      "layout": "evidence_map",
+      "file": "docs/assets/gis-atlas-001-evidence_map.png",
+      "bytes": 917371,
+      "sha256": "d797e4c1f075d245615ceb1d970d4895a010ac4a0354eedb674b4a7590fa3366"
+    },
+    {
+      "layout": "limitations_map",
+      "file": "docs/assets/gis-atlas-001-limitations_map.png",
+      "bytes": 167369,
+      "sha256": "f2c544363ec99862211dbcd1edb840dc8c2082fa077b67a0a7ebe9f577eed4dd"
+    }
+  ],
+  "visual_review": {
+    "native_pngs": 5,
+    "separately_poppler_rendered_pdfs": 5,
+    "all_five_reviewed": true,
+    "pages_per_pdf": 1,
+    "page_size_points": [
+      936,
+      612
+    ]
+  },
+  "tests": {
+    "portable": {
+      "run": 6,
+      "pass": 5,
+      "intentional_gdal_skip": 1
+    },
+    "installed_arcgis_runtime": {
+      "run": 6,
+      "pass": 6,
+      "generated_inputs_only": true
+    },
+    "full_local_working_tree_suite": {
+      "run": 1274,
+      "status": "pass",
+      "intentional_skips": 9,
+      "public_tracked_tree_CI": "not_yet_observed_for_atlas_commit"
+    }
+  },
+  "retained_failures": [
+    {
+      "stage": "disposable GeoPackage test",
+      "finding": "Borrowed geometry outlived temporary owning Feature; corrected owner lifetime in test; no real-data access"
+    },
+    {
+      "stage": "staging-001 visual review",
+      "finding": "North arrows overlapped legend; retained candidate, corrected fresh copy"
+    },
+    {
+      "stage": "staging-002 visual review",
+      "finding": "North labels touched frame border; retained candidate, corrected fresh copy"
+    },
+    {
+      "stage": "roundtrip-001 strict schema comparison",
+      "finding": "System Shape_Length/Shape_Area fields reordered during packaging; original failed receipt retained; separate named-field/geometry verification passes"
+    }
+  ],
+  "registration_verified": false,
+  "scientific_admission": false,
+  "interpretation_or_attribution": false,
+  "original_M4_M5_M6_complete": false,
+  "goal_complete": false,
+  "public_scope": "Sanitized code, guide, identities and credited unverified PNG previews; numeric GIS bundle remains owner-local outside Git",
+  "credits": "ASF DAAC HyP3 2026. Contains modified Copernicus Sentinel data 2026, processed by ESA.",
+  "processing_dois": [
+    "10.5281/zenodo.3962581",
+    "10.5281/zenodo.3962936"
+  ]
+}

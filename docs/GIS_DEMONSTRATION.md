@@ -10,6 +10,8 @@ The accepted experiment scope permits presentation work without making scientifi
 
 For closer inspection, the [Leaflet swipe viewer](viewer/index.html) presents higher-resolution renders in one synchronized projected viewport, with a draggable boundary and optional blinking. It now also offers a separately calculated [unverified brightness-difference layer](GIS_BRIGHTNESS_DIFFERENCE.md), using the two exact existing dB TIFFs. Registration is not corrected. [Usage and method limits](GIS_SWIPE_VIEWER.md) explain local opening and native world-file placement; the new local ArcGIS handoff remains editable and exportable.
 
+The newer [five-map ArcGIS atlas](GIS_EXPERIMENT_ATLAS.md) adds printable overview, source-area, upper-corridor, difference and coverage-gap views. It reuses the exact existing rasters and unchanged approved study geometry, with no new analysis calculation.
+
 | Item | Before | After |
 |---|---|---|
 | Acquisition | 16 August 2026 | 28 August 2026 |
