@@ -845,6 +845,10 @@
     "evidence_catalog_ref": "records/readiness/gis-demonstration-001-evidence-catalog.json",
     "evidence_catalog_result_ref": "records/readiness/gis-demonstration-001-evidence-catalog-result.json",
     "latest_handoff_scope": "Same unverified atlas maps and PPKX plus offline source identities, selected history, lineage, coverage and claim boundaries",
-    "latest_handoff_bundle_sha256": "247fe982f834d30dd612a5a25bad0d424c96ff265879da455a14cd228f8af0ab"
+    "latest_handoff_bundle_sha256": "247fe982f834d30dd612a5a25bad0d424c96ff265879da455a14cd228f8af0ab",
+    "evidence_catalog_public_commit": "1fe2c3bcf0eca62cfd5c1e4c69ccb4f5fddd577e",
+    "evidence_catalog_CI_run_id": 37383688576,
+    "evidence_catalog_CI_status": "completed_success_for_exact_implementation_commit",
+    "evidence_catalog_post_ci_ref": "records/readiness/gis-demonstration-001-evidence-catalog-post-ci.json"
   }
 }

@@ -1,0 +1,26 @@
+{
+  "record_id": "GIS-DEMONSTRATION-001-EVIDENCE-CATALOG-POST-CI",
+  "date": "2026-10-05",
+  "implementation_commit": "1fe2c3bcf0eca62cfd5c1e4c69ccb4f5fddd577e",
+  "public_CI": {
+    "run_id": 37383688576,
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "1fe2c3bcf0eca62cfd5c1e4c69ccb4f5fddd577e",
+    "required_files": 1474,
+    "tests": 1237,
+    "intentional_skips": 21,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/37383688576"
+  },
+  "result_ref": "records/readiness/gis-demonstration-001-evidence-catalog-result.json",
+  "catalog_ref": "records/readiness/gis-demonstration-001-evidence-catalog.json",
+  "source_record_snapshot_commit": "ea2b48166102742a2fb339186aa2d68031738795",
+  "bundle_sha256": "247fe982f834d30dd612a5a25bad0d424c96ff265879da455a14cd228f8af0ab",
+  "unchanged_existing_artifact_files": 85,
+  "CI_role": "Engineering diagnostic, not scientific verification or presentation-release gate",
+  "numeric_GIS_bundle_public": false,
+  "registration_verified": false,
+  "scientific_admission": false,
+  "interpretation_or_attribution_added": false,
+  "original_scientific_goal_complete": false
+}
