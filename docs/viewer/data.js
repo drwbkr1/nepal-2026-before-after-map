@@ -33,5 +33,27 @@ window.NEPAL_VIEWER = Object.freeze({
       2880
     ],
     "sha256": "af4b053d9e15d4474b35cd54114bd70f652c44e929727b8bf03f1b44dd5ee27e"
+  },
+  "difference": {
+    "file": "renders/difference.png",
+    "source_ids": [
+      "M1-SRC-002",
+      "M1-SRC-005"
+    ],
+    "dates": [
+      "2026-08-16",
+      "2026-08-28"
+    ],
+    "size": [
+      3540,
+      2880
+    ],
+    "sha256": "cb711301a264892c69bd2ec697281b379637b206e5be6efaa8034be5451b51c0",
+    "display_range_db": [
+      -6,
+      6
+    ],
+    "formula": "after_vv_db - before_vv_db",
+    "unverified": true
   }
 });

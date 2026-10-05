@@ -1,4 +1,4 @@
-/* One projected viewport, two original-display renders. No change calculation. */
+/* One projected viewport: two original displays and a precomputed unverified dB difference. */
 (() => {
   'use strict';
   const $ = (id) => document.getElementById(id);
@@ -33,13 +33,17 @@
   L.control.scale({imperial:false, metric:true, position:'bottomleft', maxWidth:120}).addTo(map);
   const after = L.imageOverlay(data.after.file, bounds, {alt:'28 August 2026 Sentinel-1D VV gamma0 display',interactive:false}).addTo(map);
   const before = L.imageOverlay(data.before.file, bounds, {alt:'16 August 2026 Sentinel-1D VV gamma0 display',interactive:false}).addTo(map);
+  const difference = data.difference ? L.imageOverlay(data.difference.file, bounds,
+    {alt:'Unverified radar brightness difference, 28 minus 16 August, blue decreased and orange increased',interactive:false,opacity:0}).addTo(map) : null;
+  let differenceLoaded = false, differenceFailed = false;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let mode = 'swipe', split = 50, blinkDate = 'before';
+  let pendingDifference = new URLSearchParams(location.hash.slice(1)).get('view') === 'difference';
   const loaded = new Set();
   const wrap = $('map-wrap');
 
   function hashState() {
-    if (!ready) return;
+    if (!ready || (pendingDifference && !differenceLoaded)) return;
     const center = map.getCenter();
     const view = mode === 'blink' ? blinkDate : mode;
     const hash = new URLSearchParams({view, split:String(split), z:map.getZoom().toFixed(2),
@@ -53,7 +57,9 @@
     if (!ready) return;
     const image = before.getElement();
     const effective = mode === 'blink' ? blinkDate : mode;
-    before.setOpacity(effective === 'after' ? 0 : 1);
+    before.setOpacity(effective === 'after' || effective === 'difference' ? 0 : 1);
+    after.setOpacity(effective === 'difference' ? 0 : 1);
+    if (difference) difference.setOpacity(effective === 'difference' && differenceLoaded ? 1 : 0);
     if (effective === 'swipe') {
       const cut = map.containerPointToLayerPoint([map.getSize().x * split / 100,0]);
       const corner = map.latLngToLayerPoint(bounds.getNorthWest());
@@ -66,10 +72,14 @@
     $('split').disabled = effective !== 'swipe';
     $('split').value = split;
     $('split-value').textContent = split + '%';
-    $('before-label').hidden = effective === 'after';
-    $('after-label').hidden = effective === 'before';
+    $('before-label').hidden = effective === 'after' || effective === 'difference';
+    $('after-label').hidden = effective === 'before' || effective === 'difference';
+    $('difference-label').hidden = effective !== 'difference';
+    $('display-legend').hidden = effective === 'difference';
+    $('difference-legend').hidden = effective !== 'difference';
     $('scene-status').textContent = effective === 'swipe'
       ? 'Swipe: before on the left, after on the right'
+      : effective === 'difference' ? 'Unverified brightness difference · 28 Aug minus 16 Aug · blue ↓ / orange ↑'
       : `${mode === 'blink' ? 'Blink · ' : ''}${effective === 'before' ? '16 August 2026 · before' : '28 August 2026 · after'}`;
     document.querySelectorAll('[data-mode]').forEach(button => button.setAttribute('aria-pressed',String(button.dataset.mode === mode)));
     $('blink').setAttribute('aria-pressed',String(mode === 'blink'));
@@ -80,8 +90,13 @@
   }
 
   function stopBlink() { if (timer !== null) clearInterval(timer); timer = null; }
-  function setMode(next) { stopBlink(); mode = next; draw(); hashState(); }
+  function setMode(next) {
+    if (next === 'difference' && !differenceLoaded) return;
+    pendingDifference = false;
+    stopBlink(); mode = next; draw(); hashState();
+  }
   function toggleBlink() {
+    pendingDifference = false;
     if (reduced.matches) { setMode(mode === 'before' ? 'after' : 'before'); return; }
     if (mode === 'blink') { setMode('swipe'); return; }
     stopBlink(); mode = 'blink'; blinkDate = 'before'; draw();
@@ -91,7 +106,9 @@
   function restoreHash() {
     const parameters = new URLSearchParams(location.hash.slice(1));
     const v = parameters.get('view');
-    if (['swipe','before','after'].includes(v)) mode = v;
+    if (['swipe','before','after'].includes(v)) { mode = v; pendingDifference = false; }
+    if (v === 'difference' && differenceLoaded) mode = v;
+    else if (v === 'difference' && !differenceFailed) pendingDifference = true;
     if (parameters.has('split')) { const n = Number(parameters.get('split')); if (Number.isFinite(n)) split = Math.round(Math.max(0,Math.min(100,n))); }
     if (['x','y','z'].every(k => parameters.has(k))) {
       const [x,y,z] = ['x','y','z'].map(k => Number(parameters.get(k)));
@@ -105,15 +122,36 @@
     restoreHash();
     document.body.dataset.ready = 'true';
     document.querySelectorAll('.toolbar button').forEach(button => button.disabled = false);
+    $('mode-difference').disabled = !differenceLoaded;
     $('download-layers').disabled = !window.NEPAL_EXPORT || !window.crypto?.subtle;
     if ($('download-layers').disabled) $('export-status').textContent = 'Download unavailable here; use the local-server instructions in the viewer guide.';
     draw(); hashState();
-    status.textContent = `Two local renders loaded · ${data.before.size[0]} × ${data.before.size[1]} px each · no computed difference`;
+    status.textContent = `Two date displays loaded · ${data.before.size[0]} × ${data.before.size[1]} px each${differenceFailed ? ' · difference unavailable' : differenceLoaded ? ' · unverified difference available' : ' · loading difference…'}`;
   }
   before.on('load',() => didLoad('before'));
   after.on('load',() => didLoad('after'));
   before.on('error',() => fail('The before render could not load.'));
   after.on('error',() => fail('The after render could not load.'));
+  if (difference) {
+    const differenceReady = () => {
+      differenceLoaded = true;
+      if (!ready) return;
+      $('mode-difference').disabled = false;
+      if (pendingDifference) mode = 'difference';
+      pendingDifference = false;
+      draw(); hashState();
+      status.textContent = 'Two date displays and unverified brightness difference loaded · same projected display grid';
+    };
+    difference.on('load', differenceReady);
+    difference.on('error', () => {
+      differenceFailed = true; differenceLoaded = false;
+      pendingDifference = false;
+      $('mode-difference').disabled = true;
+      if (mode === 'difference') setMode('swipe');
+      status.textContent = 'Difference render unavailable. Both original date displays remain available.';
+    });
+    if (difference.getElement().complete && difference.getElement().naturalWidth) differenceReady();
+  } else differenceFailed = true;
   for (const [key,layer] of [['before',before],['after',after]]) {
     layer.getElement().dataset.sourceId = data[key].source_id;
     if (layer.getElement().complete && layer.getElement().naturalWidth) didLoad(key);

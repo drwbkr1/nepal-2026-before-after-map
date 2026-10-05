@@ -1,0 +1,213 @@
+{
+  "record_id": "GIS-DEMONSTRATION-001-BRIGHTNESS-DIFFERENCE-RESULT",
+  "date": "2026-10-05",
+  "status": "passed_unverified_experiment_mechanics",
+  "formula": "delta_vv_db = after_vv_db - before_vv_db",
+  "grid": {
+    "wkid": 32645,
+    "width": 2980,
+    "height": 3126,
+    "geotransform": [
+      331020.0,
+      10.0,
+      0.0,
+      3140510.0,
+      0.0,
+      -10.0
+    ]
+  },
+  "inputs": [
+    {
+      "source_id": "M1-SRC-002",
+      "date": "2026-08-16",
+      "file": "before_common_valid_vv_db.tif",
+      "sha256": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3"
+    },
+    {
+      "source_id": "M1-SRC-005",
+      "date": "2026-08-28",
+      "file": "after_common_valid_vv_db.tif",
+      "sha256": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7"
+    }
+  ],
+  "numeric_outputs": [
+    {
+      "file": "delta_vv_db.tif",
+      "bytes": 22921396,
+      "sha256": "ffb9b8e8f2e8a64bd0b57a777dabf5497794e4037f2f6bbef8cff68505f2d4ad"
+    },
+    {
+      "file": "excluded_cells.tif",
+      "bytes": 264777,
+      "sha256": "cb9b777f138971218b36b7e62633df706347fa3c746c3457a0718a5db5efebbd"
+    }
+  ],
+  "validity": "finite values in both exact inputs; original NaN/NoData retained",
+  "valid_cells": 4707699,
+  "excluded_cells": 4607781,
+  "numeric_values_clamped": false,
+  "numeric_min_db": -58.1768798828125,
+  "numeric_max_db": 67.26586151123047,
+  "display_range_db": [
+    -6,
+    6
+  ],
+  "source_tiffs_unchanged": true,
+  "registration_adjusted": false,
+  "registration_verified": false,
+  "scientific_admission": false,
+  "change_detection_or_attribution": false,
+  "original_M4_M5_M6_acceptance_complete": false,
+  "goal_complete": false,
+  "arcgis": {
+    "version": "3.7.1",
+    "maps": 3,
+    "layouts": 1,
+    "layer_files": 4,
+    "local_writable_defaults": true,
+    "package_bytes": 63334205,
+    "package_sha256": "c1135bf17428a0adb35fb9107fe0abf320dc14896f8c9bde4ed3f64bc9e5cd89",
+    "fresh_process_same_machine_reopen": {
+      "structure_equal": true,
+      "layout_metadata_equal": true,
+      "layout_pixels_equal": true,
+      "source_stable_files_unchanged": true,
+      "extracted_sources_local": true
+    },
+    "packaged_tiff_bytes_equal": {
+      "before_common_valid_vv_db.tif": true,
+      "after_common_valid_vv_db.tif": true,
+      "delta_vv_db.tif": true,
+      "excluded_cells.tif": true
+    },
+    "clean_machine_tested": false,
+    "cross_version_tested": false
+  },
+  "native_sign_probe": {
+    "status": "passed_native_display_sign",
+    "values_db": [
+      -6,
+      0,
+      6
+    ],
+    "sampled_rgb": [
+      [
+        33,
+        102,
+        172
+      ],
+      [
+        247,
+        246,
+        246
+      ],
+      [
+        230,
+        97,
+        1
+      ]
+    ],
+    "expected_rgba": [
+      [
+        33,
+        102,
+        172,
+        100
+      ],
+      [
+        247,
+        247,
+        247,
+        100
+      ],
+      [
+        230,
+        97,
+        1,
+        100
+      ]
+    ],
+    "disposable_inputs_only": true,
+    "scientific_validation": false,
+    "arcgis_version": "3.7.1"
+  },
+  "exports": [
+    {
+      "file": "comparison.png",
+      "bytes": 2874803,
+      "sha256": "aaa4b863506aff2e5cbed86ec7c3af1a654aa64cbbf0f7da24bd1e7fa830d787"
+    },
+    {
+      "file": "comparison.pdf",
+      "bytes": 1450984,
+      "sha256": "d63bed4298c1a625683f0b52f61974e92d342f5c751078396de8b13a0ca8c9ba"
+    }
+  ],
+  "public_preview": {
+    "ref": "docs/assets/gis-brightness-difference-001.png",
+    "sha256": "aaa4b863506aff2e5cbed86ec7c3af1a654aa64cbbf0f7da24bd1e7fa830d787"
+  },
+  "difference_render": {
+    "file": "difference.png",
+    "bytes": 10184781,
+    "sha256": "cb711301a264892c69bd2ec697281b379637b206e5be6efaa8034be5451b51c0",
+    "size": [
+      3540,
+      2880
+    ],
+    "world_file": "difference.pgw",
+    "world_file_sha256": "0537eba3fb643ee6d9d9135a4ffcb7b3b393dc9c3993e484de74f1fad0a99348",
+    "world_coefficients": [
+      11.722523445191,
+      0.0,
+      0.0,
+      -11.722523445191037,
+      325171.1335020118,
+      3141760.433761075
+    ],
+    "bounds_easting_northing": [
+      325165.27224028925,
+      3108005.4275006475,
+      366663.00523626537,
+      3141766.295022798
+    ]
+  },
+  "browser_checks": {
+    "rendered_desktop": true,
+    "mode_switch_without_camera_change": true,
+    "overlays_same_transform_and_dimensions": true,
+    "difference_URL_restore": true,
+    "keyboard_swipe_50_to_51": true,
+    "zoom_control": true,
+    "mobile_viewport": [
+      390,
+      844
+    ],
+    "mobile_horizontal_overflow": false,
+    "technical_notes_collapsed": true,
+    "missing_difference_retains_date_views": true,
+    "real_phone_touch_tested": false
+  },
+  "focused_tests": {
+    "portable": 27,
+    "installed_arcgis_runtime": 27
+  },
+  "pdf_review": {
+    "pages": 1,
+    "page_size_points": [
+      1425.6,
+      612
+    ],
+    "poppler_render_sha256": "95fb7bb0dd3bbc2ddb1a708f12113a91963071e97c76ac9d58a1764035291f97",
+    "visually_reviewed": true,
+    "text_graphics_dates_sign_credits_legible": true
+  },
+  "retained_mechanical_failures": [
+    "preflight rendering hash paired with relocated project path; no output or input mutation",
+    "arcgis-build-001: unsupported Camera deepcopy",
+    "roundtrip-001: new Experiment.pyt.xml failed stable-file check; structures, cells and layout matched; roundtrip-002 passed with that sidecar in the baseline"
+  ],
+  "numeric_files_and_packages_outside_git": true,
+  "public_CI_role": "diagnostic_not_release_gate",
+  "credits": "ASF DAAC HyP3 2026. Contains modified Copernicus Sentinel data 2026, processed by ESA."
+}

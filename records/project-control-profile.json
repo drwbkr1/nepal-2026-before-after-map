@@ -795,8 +795,8 @@
   },
   "current_checkpoint_scope": "Preserved native radar-processing terminal checkpoint. Later optical and presentation routes are separate active_* pointers; this field does not describe their current outcome or create authority.",
   "active_gis_demonstration": {
-    "checkpoint_id": "GIS-DEMONSTRATION-001-UNVERIFIED-EXPERIMENT-AVAILABLE",
-    "authority_scope": "Accepted owner scope and 5 October presentation steering: unverified GIS experiment using existing accessible outputs, reversible presentation and packaging, sanitized public code/docs and rights-cleared credited previews, without intermediate reconfirmation. No registration or scientific change release.",
+    "checkpoint_id": "GIS-DEMONSTRATION-001-UNVERIFIED-BRIGHTNESS-DIFFERENCE-AVAILABLE",
+    "authority_scope": "Accepted existing-output demonstration and 5 October unverified brightness-difference experiment: exact existing dB inputs, new numeric difference/exclusion files, editable ArcGIS handoff, viewer and credited previews; routine reversible corrections and sanitized publication without intermediate reconfirmation. No registration adjustment, detection, attribution or scientific admission.",
     "guide_ref": "docs/GIS_DEMONSTRATION.md",
     "viewer_guide_ref": "docs/GIS_SWIPE_VIEWER.md",
     "viewer_ref": "docs/viewer/index.html",
@@ -811,16 +811,20 @@
     "viewer_CI_status": "terminal_hosted_runner_not_acquired_no_test_steps",
     "routing_CI_run_id": 37369573281,
     "routing_CI_status": "terminal_hosted_runner_not_acquired_no_test_steps",
-    "presentation_label": "Unverified GIS experiment. Visual comparison only.",
+    "presentation_label": "Unverified GIS experiment. Radar brightness only; no event attribution.",
     "technical_notes_collapsed_by_default": true,
     "presentation_requires_scientific_verification": false,
     "presentation_requires_public_CI_pass": false,
     "public_CI_role": "diagnostic_not_a_presentation_release_gate",
     "routine_checks": "Proportionate functionality and data integrity; retain source dates and credits.",
-    "next_action": "Continue ordinary reversible presentation improvements under the accepted unverified-experiment scope, without intermediate reconfirmation. Preserve the separate original scientific history and acceptance criteria.",
+    "next_action": "Use the available swipe and unverified brightness-difference views and editable ArcGIS handoff. Ordinary presentation improvements inherit accepted scope; acquisition, registration adjustment, scientific detection and attribution remain outside it.",
     "registration_verified": false,
     "scientific_admission": false,
     "goal_complete": false,
-    "original_M5_M6_complete": false
+    "original_M5_M6_complete": false,
+    "brightness_difference_guide_ref": "docs/GIS_BRIGHTNESS_DIFFERENCE.md",
+    "brightness_difference_result_ref": "records/readiness/gis-demonstration-001-brightness-difference-result.json",
+    "brightness_difference_available": true,
+    "brightness_difference_formula": "after_vv_db - before_vv_db"
   }
 }

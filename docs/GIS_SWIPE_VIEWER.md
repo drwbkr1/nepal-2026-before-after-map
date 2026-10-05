@@ -14,15 +14,17 @@ Then open `http://127.0.0.1:8767/index.html`. Stop this optional local server wi
 
 Start with **Closer view**, drag the divider, and use **Blink dates** to compare one location. The native slider also supports arrow keys and Home/End. Use **16 Aug only** or **28 Aug only** for manual switching; **Overview** restores context. Zoom buttons and pan remain synchronized because both dates share one map. A URL fragment preserves the view without storing private data. Blinking does not autoplay and falls back to a manual date toggle when reduced motion is requested.
 
+**Brightness difference** switches to an unverified after-minus-before dB view without moving the map. Blue indicates decreased radar brightness, orange increased; the fixed −6 to +6 dB scale is not a detection threshold. The calculation uses the two existing numeric TIFFs, not PNG colors. [Method, limits and ArcGIS handoff](GIS_BRIGHTNESS_DIFFERENCE.md). No registration adjustment is performed.
+
 The page uses one short experiment label. **Sources and technical notes** is collapsed by default and can be opened with a click or the keyboard; dates, display scale and source credits remain visible without opening it.
 
-The two native display exports are 3,540 by 2,880 pixels each, 12,124,225 bytes combined, about 77.8 MiB decoded RGBA. Their render pixel size is approximately 11.72 projected meters, distinct from the source's 10 m posting. Rendering or enlarging them does not improve accuracy. No public website deployment is claimed; this is a local viewer and a reproducible public repository artifact.
+All three native display exports are 3,540 by 2,880 pixels each. The two dates total 12,124,225 bytes; the added difference is 10,184,781 bytes. All three decode to about 116.7 MiB RGBA. Their render pixel size is approximately 11.72 projected meters, distinct from the source's 10 m posting. Rendering or enlarging them does not improve accuracy. No public website deployment is claimed; this is a local viewer and a reproducible public repository artifact.
 
 Direct `file:` opening was not runtime-verified: the current testing browser permits HTTP/HTTPS only. No file-protocol workaround was attempted. The bundled viewer needs no Internet connection when served locally.
 
 ## Download the display layers for ArcGIS
 
-Click **Download ArcGIS layers** below the comparison. The viewer packages the two existing full-extent PNGs, their unchanged native PGW world files, spatial-reference sidecars, source manifest and a short README into one ZIP of about 12 MB. It does not export the current zoomed viewport or recompute imagery.
+Click **Download date display layers** below the comparison. The viewer packages the two existing full-extent date PNGs, their unchanged native PGW world files, spatial-reference sidecars, source manifest and a short README into one ZIP of about 12 MB. It does not include numeric difference data, export the current zoomed viewport or recompute imagery.
 
 Extract the complete ZIP into a writable folder, keep each PNG with its PGW and `.png.aux.xml`, and add `before.png` and `after.png` to one ArcGIS map. Both are in EPSG:32645. Toggle layer visibility to compare dates; use the existing APRX/PPKX handoff for its cartographic layout and PNG/PDF exports.
 
@@ -36,12 +38,13 @@ The completed browser-generated ZIP passed its CRC/member check. ArcGIS Pro 3.7.
 
 The job is spatial and temporal visual comparison: inspect the two existing radar displays in one shared viewport, rather than shrinking them into side-by-side panels. This is a presentation tool for an unofficial GIS demonstration, not a change detector or hazard product.
 
-One Leaflet instance owns pan/zoom; two static PNG overlays share a north-up EPSG:32645 display grid. A swipe boundary clips the before image over the after image. Date-only modes and optional slow blinking are alternatives. No difference image, registration correction, feature boundary or event attribution is computed.
+One Leaflet instance owns pan/zoom; three static PNG overlays share a north-up EPSG:32645 display grid. A swipe boundary clips the before image over the after image. Date-only modes, optional slow blinking and the unverified brightness-difference display are alternatives. The browser does not calculate numeric differences, registration corrections, feature boundaries or event attribution; the difference PNG is a precomputed native ArcGIS export.
 
 | Layer | Date and source | Encoding | Evidence limit |
 |---|---|---|---|
 | Before | 16 August 2026, M1-SRC-002, Sentinel-1D ASF HyP3 RTC | VV gamma0 dB; shared -30 to 0 grayscale | Partial display; registration unverified |
 | After | 28 August 2026, M1-SRC-005, Sentinel-1D ASF HyP3 RTC | Same | Same |
+| Difference | 28 minus 16 August, same exact two sources | Signed dB; fixed -6 to +6 blue/neutral/orange | Unverified sensor difference; no detection or attribution |
 | Distance/coordinates | Native map-frame PNG world files, EPSG:32645 | Projected meters; grid north up | Not positional accuracy or independently validated control |
 | Context | No external basemap or thematic layer | Existing imagery only | Blank areas are exclusions, not unchanged terrain |
 
@@ -52,11 +55,11 @@ The source-area and upper-corridor common-valid VV/VH coverage remain 54.6721% a
 - Export the existing accepted map frames with their unchanged colorizer, camera and source TIFF identities. Use native PNG world files for pixel-center-to-outer-edge placement, unchanged. Export resolution changes presentation sampling, not the source grid or scientific criteria.
 - Use Leaflet's planar CRS machinery with coordinates explicitly supplied as northing/easting in meters. Do not put UTM values into Web Mercator or relabel them as latitude/longitude. There is no WGS84 reprojection, basemap request, geolocation, account or network data source.
 - Vendor pinned Leaflet 1.9.4 JS/CSS and its BSD 2-Clause license. This is a static browser dependency, not a software installation, and does not relicense project code or imagery.
-- Keep two raster overlays in map space; date labels, divider, warning, controls and source credits remain screen-stable. No WebGL, animation pipeline, particle effects or derived change marks.
+- Keep three raster overlays in map space; date/sign labels, divider, warning, controls and source credits remain screen-stable. No WebGL, animation pipeline, particles or thresholded feature marks.
 - Keep the swipe value, mode and finite projected camera coordinates in the URL hash. No cookies, analytics, account state or persistent private data. Invalid hashes fall back to the overview.
 - Desktop and mobile portrait share the same comparison. Provide keyboard slider/zoom/reset controls, touch drag/pan/pinch, visible dates and one always-present unverified-experiment label. Technical limitations remain available in expandable notes. Blink is opt-in and slow; reduced-motion mode uses a manual date toggle.
 - Missing Leaflet or imagery must show an explicit failure plus the static qualified panel. The native ArcGIS package/PDF remain the export fallback.
-- Cap the two PNG assets at 32 MiB combined; use one map and no remote tiles. Enlarging a render cannot add source detail or accuracy. The decoded image footprint is recorded in the local export receipt.
+- Keep the three PNG assets under 32 MiB combined; use one map and no remote tiles. Enlarging a render cannot add source detail or accuracy. The decoded image footprint is recorded in the export evidence. A missing difference render disables only that option and preserves the two original date views.
 
 ## QA plan
 

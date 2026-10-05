@@ -8,7 +8,7 @@ The accepted experiment scope permits presentation work without making scientifi
 
 ## What the panel contains
 
-For closer inspection, the [Leaflet swipe viewer](viewer/index.html) presents higher-resolution renders in one synchronized projected viewport, with a draggable boundary and optional blinking. [Usage and method limits](GIS_SWIPE_VIEWER.md) explain local opening, native world-file placement and verification. It does not compute a difference or correct registration; the native ArcGIS package remains the editable GIS/export deliverable.
+For closer inspection, the [Leaflet swipe viewer](viewer/index.html) presents higher-resolution renders in one synchronized projected viewport, with a draggable boundary and optional blinking. It now also offers a separately calculated [unverified brightness-difference layer](GIS_BRIGHTNESS_DIFFERENCE.md), using the two exact existing dB TIFFs. Registration is not corrected. [Usage and method limits](GIS_SWIPE_VIEWER.md) explain local opening and native world-file placement; the new local ArcGIS handoff remains editable and exportable.
 
 | Item | Before | After |
 |---|---|---|
