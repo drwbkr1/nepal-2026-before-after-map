@@ -1,0 +1,430 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Offline catalog of existing unverified experiment and selected retained history",
+  "crs": "EPSG:32645",
+  "SourceIdentity": [
+    {
+      "Source_ID": "M1-SRC-002",
+      "Role": "before",
+      "Product_ID": "S1D_IW_GRDH_1SDV_20260816T122141_20260816T122206_004151_007980_C3AB.SAFE",
+      "Acquisition_Start_UTC": "2026-08-16T12:21:41.058298Z",
+      "Acquisition_End_UTC": "2026-08-16T12:22:06.056880Z",
+      "Orbit_JSON": "{\"operational_mode\": \"IW\", \"orbit_direction\": \"ASCENDING\", \"relative_orbit_number\": 85, \"tile_id\": null}",
+      "RTC_Archive_SHA256": "82ca5a9e7c77dd1e28c15eb64f93e5a408ec53b81b5df3fda64bf47c286dc6d3",
+      "Displayed_Raster": "before_common_valid_vv_db.tif",
+      "Displayed_Raster_SHA256": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3",
+      "Full_Area_Disposition": "defer",
+      "Scientific_Admission": "not admitted"
+    },
+    {
+      "Source_ID": "M1-SRC-005",
+      "Role": "after",
+      "Product_ID": "S1D_IW_GRDH_1SDV_20260828T122141_20260828T122206_004326_007FA4_01B4.SAFE",
+      "Acquisition_Start_UTC": "2026-08-28T12:21:41.762029Z",
+      "Acquisition_End_UTC": "2026-08-28T12:22:06.760553Z",
+      "Orbit_JSON": "{\"operational_mode\": \"IW\", \"orbit_direction\": \"ASCENDING\", \"relative_orbit_number\": 85, \"tile_id\": null}",
+      "RTC_Archive_SHA256": "068e796f790763d82b86b0349451c5e507c29f826001961281f48c8403e6e175",
+      "Displayed_Raster": "after_common_valid_vv_db.tif",
+      "Displayed_Raster_SHA256": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+      "Full_Area_Disposition": "defer",
+      "Scientific_Admission": "not admitted"
+    }
+  ],
+  "EvidenceHistory": [
+    {
+      "Evidence_Key": "manifest",
+      "Record_ID": "NEPAL-M1-CANDIDATE-SOURCE-MANIFEST-001",
+      "Record_Ref": "records/source-manifest.json",
+      "SHA256": "6c67a1a6cb3411bd9ccab5f837e2c060757ddc5f1317f171bc5f62f9b1a22eef",
+      "Exact_Status": "candidate_for_owner_review",
+      "Scope": "historical candidate identity; not current custody"
+    },
+    {
+      "Evidence_Key": "readme",
+      "Record_ID": "NEPAL-M2-ASF-HYP3-RTC-README-FIRST-TERMINAL-RECONCILIATION-001",
+      "Record_Ref": "records/readiness/m2-asf-hyp3-rtc-readme-first-terminal-reconciliation-001.json",
+      "SHA256": "3030bc69e34553ccbf44cb646eef469c335e3160089b4e594fcad28fc48d3c3e",
+      "Exact_Status": "defer_readme_source_text_review_no_pixel_release",
+      "Scope": "retained deferred provenance predicate"
+    },
+    {
+      "Evidence_Key": "provenance",
+      "Record_ID": "NEPAL-M2-ASF-HYP3-RTC-COMPOSITE-PROVENANCE-001-TERMINAL-RECONCILIATION",
+      "Record_Ref": "records/readiness/m2-asf-hyp3-rtc-composite-provenance-001-terminal-reconciliation.json",
+      "SHA256": "4bf95057e6e2734a503e569c4a3888b8285c21255a1201ac33ac5a271653cad2",
+      "Exact_Status": "pass_composite_provenance_for_local_qa_only",
+      "Scope": "later composite provenance; no pixel fitness"
+    },
+    {
+      "Evidence_Key": "before_qa",
+      "Record_ID": "NEPAL-M2-ASF-HYP3-RTC-PRODUCT-PIXEL-001-TERMINAL-RECONCILIATION",
+      "Record_Ref": "records/readiness/m2-asf-hyp3-rtc-product-pixel-001-terminal-reconciliation.json",
+      "SHA256": "2305f6ce504e550b57aa207c3eb1004f2d4c014715745776d60c004e184afecd",
+      "Exact_Status": "stop_source_event_aoi_pixel_qa_no_next_date",
+      "Scope": "before-source full-area fitness"
+    },
+    {
+      "Evidence_Key": "after_archive",
+      "Record_ID": "NEPAL-M2-ASF-HYP3-RTC-ACQUIRE-AFTER-PARTIAL-001-TERMINAL-RECONCILIATION",
+      "Record_Ref": "records/readiness/m2-asf-hyp3-rtc-acquire-after-partial-001-terminal-reconciliation.json",
+      "SHA256": "3c058ed083c5eb4dbb1c485ff09b6e5e277e4987cf5cb1cb24754e4853a39db4",
+      "Exact_Status": "exact_after_archive_promoted_integrity_only",
+      "Scope": "after-archive integrity only"
+    },
+    {
+      "Evidence_Key": "after_metadata",
+      "Record_ID": "NEPAL-M2-ASF-HYP3-RTC-AFTER-METADATA-001-TERMINAL-RECONCILIATION",
+      "Record_Ref": "records/readiness/m2-asf-hyp3-rtc-after-metadata-001-terminal-reconciliation.json",
+      "SHA256": "efdce4b8d569d23854f3d979ee52e33447f97544ffbf3f2f9241cdcbb06e74f7",
+      "Exact_Status": "exact_eight_metadata_members_captured_non_git_for_review_only",
+      "Scope": "after-product metadata capture"
+    },
+    {
+      "Evidence_Key": "after_qa",
+      "Record_ID": "NEPAL-M2-ASF-HYP3-RTC-AFTER-PIXEL-001-TERMINAL-RECONCILIATION",
+      "Record_Ref": "records/readiness/m2-asf-hyp3-rtc-after-pixel-001-terminal-reconciliation.json",
+      "SHA256": "d0f8cb359ae519a98709145bc9625503a5388d337d83f7494e68a24535f2bc21",
+      "Exact_Status": "defer_after_full_area_qa_partial_pair_candidate_only",
+      "Scope": "after-source full-area fitness"
+    },
+    {
+      "Evidence_Key": "pair",
+      "Record_ID": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PAIR-STAGE-001-TERMINAL-RECONCILIATION",
+      "Record_Ref": "records/readiness/m2-asf-hyp3-rtc-partial-pair-stage-001-terminal-reconciliation.json",
+      "SHA256": "925c7d0496e69d3fae985050cf0bf5ea2abf4f4ec12bef90363fd542a87f31d9",
+      "Exact_Status": "pass_common_valid_for_local_partial_visual_only",
+      "Scope": "same-cell partial visual screen and raster lineage"
+    },
+    {
+      "Evidence_Key": "panel",
+      "Record_ID": "NEPAL-M2-ASF-HYP3-RTC-PARTIAL-PANEL-001-TERMINAL-RECONCILIATION",
+      "Record_Ref": "records/readiness/m2-asf-hyp3-rtc-partial-panel-001-terminal-reconciliation.json",
+      "SHA256": "561a9c0cea0dfd708d8b5feef14b6950be4e85b7063288ca3c4f5e9683552f56",
+      "Exact_Status": "pass_local_partial_panel_verified_visual_only",
+      "Scope": "original local visual; not scientific admission"
+    },
+    {
+      "Evidence_Key": "landsat",
+      "Record_ID": "NEPAL-M2-LANDSAT9-VISUAL-ROUTE-COMPLETION-001-TERMINAL-RECONCILIATION",
+      "Record_Ref": "records/readiness/m2-landsat9-visual-route-completion-001-terminal-reconciliation.json",
+      "SHA256": "df69ca75ce96aae5faffb7402c55698a4af772e54502250bd106f8adfc33cc0b",
+      "Exact_Status": "terminal_measured_inconclusive_no_aoi_qualified_no_landsat_panel",
+      "Scope": "retained optical inconclusive result"
+    },
+    {
+      "Evidence_Key": "alternate_optical",
+      "Record_ID": "m2-optical-alternate-source-route-001-terminal-reconciliation",
+      "Record_Ref": "records/readiness/m2-optical-alternate-source-route-001-terminal-reconciliation.json",
+      "SHA256": "7ebea4deeee686a6e3652d6e546add5783fe25286ff0bd16ae7b506a13d2a26a",
+      "Exact_Status": "inconclusive_no_optical_visual_panel",
+      "Scope": "retained alternate optical inconclusive result"
+    },
+    {
+      "Evidence_Key": "native_radar",
+      "Record_ID": "NEPAL-M2-RADAR-ESRI-SEQUENCE-RECOVERY-005-TERMINAL-RECONCILIATION",
+      "Record_Ref": "records/processing/m2-radar-esri-sequence-recovery-005-terminal-reconciliation.json",
+      "SHA256": "9c2b7588584616bbf66cab857ea755052304d033c992d6643e24581228c41521",
+      "Exact_Status": "block_esri_sequence_recovery_005_source_001_geometric_terrain_correction_gamma_no_retry",
+      "Scope": "retained native radar processing block"
+    },
+    {
+      "Evidence_Key": "rights",
+      "Record_ID": "NEPAL-GIS-DEMONSTRATION-001-EXISTING-VV-RIGHTS",
+      "Record_Ref": "records/readiness/gis-demonstration-001-existing-vv-rights.json",
+      "SHA256": "c175a8c0b36cd9545c54ebdc1a67cea952a78f222c430b524c3e38a0fda6476f",
+      "Exact_Status": "pass_credited_existing_VV_demonstration_only",
+      "Scope": "credited existing VV demonstration use"
+    },
+    {
+      "Evidence_Key": "initial_demo",
+      "Record_ID": "NEPAL-GIS-DEMONSTRATION-001-RESULT",
+      "Record_Ref": "records/readiness/gis-demonstration-001-result.json",
+      "SHA256": "4d4019804c115198187d08109462a506f5873859fa2516237731f592de17a7e8",
+      "Exact_Status": "pass_local_ZIP_demonstration_with_retained_PPKX_failures",
+      "Scope": "initial demonstration and four retained PPKX failures"
+    },
+    {
+      "Evidence_Key": "brightness",
+      "Record_ID": "GIS-DEMONSTRATION-001-BRIGHTNESS-DIFFERENCE-RESULT",
+      "Record_Ref": "records/readiness/gis-demonstration-001-brightness-difference-result.json",
+      "SHA256": "29b744d8efcc3afd83e2f5c6a15e0278be29559cf8cca37c8feed7868ee6ea17",
+      "Exact_Status": "passed_unverified_experiment_mechanics",
+      "Scope": "unverified numeric calculation and retained mechanical failures"
+    },
+    {
+      "Evidence_Key": "atlas",
+      "Record_ID": "GIS-DEMONSTRATION-001-FIVE-MAP-ATLAS-RESULT",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6",
+      "Exact_Status": "available_unverified_gis_atlas",
+      "Scope": "five-map handoff and retained engineering failures"
+    }
+  ],
+  "ArtifactLineage": [
+    {
+      "Child": "before_common_valid_vv_db.tif",
+      "Parent": "M1-SRC-002",
+      "Evidence_Key": "pair",
+      "Child_SHA256": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3",
+      "Parent_SHA256": "",
+      "Relation": "derived from",
+      "Record_Ref": "records/readiness/m2-asf-hyp3-rtc-partial-pair-stage-001-terminal-reconciliation.json",
+      "Record_SHA256": "925c7d0496e69d3fae985050cf0bf5ea2abf4f4ec12bef90363fd542a87f31d9"
+    },
+    {
+      "Child": "after_common_valid_vv_db.tif",
+      "Parent": "M1-SRC-005",
+      "Evidence_Key": "pair",
+      "Child_SHA256": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+      "Parent_SHA256": "",
+      "Relation": "derived from",
+      "Record_Ref": "records/readiness/m2-asf-hyp3-rtc-partial-pair-stage-001-terminal-reconciliation.json",
+      "Record_SHA256": "925c7d0496e69d3fae985050cf0bf5ea2abf4f4ec12bef90363fd542a87f31d9"
+    },
+    {
+      "Child": "delta_vv_db.tif",
+      "Parent": "before_common_valid_vv_db.tif",
+      "Evidence_Key": "brightness",
+      "Child_SHA256": "ffb9b8e8f2e8a64bd0b57a777dabf5497794e4037f2f6bbef8cff68505f2d4ad",
+      "Parent_SHA256": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3",
+      "Relation": "derived from",
+      "Record_Ref": "records/readiness/gis-demonstration-001-brightness-difference-result.json",
+      "Record_SHA256": "29b744d8efcc3afd83e2f5c6a15e0278be29559cf8cca37c8feed7868ee6ea17"
+    },
+    {
+      "Child": "delta_vv_db.tif",
+      "Parent": "after_common_valid_vv_db.tif",
+      "Evidence_Key": "brightness",
+      "Child_SHA256": "ffb9b8e8f2e8a64bd0b57a777dabf5497794e4037f2f6bbef8cff68505f2d4ad",
+      "Parent_SHA256": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+      "Relation": "derived from",
+      "Record_Ref": "records/readiness/gis-demonstration-001-brightness-difference-result.json",
+      "Record_SHA256": "29b744d8efcc3afd83e2f5c6a15e0278be29559cf8cca37c8feed7868ee6ea17"
+    },
+    {
+      "Child": "excluded_cells.tif",
+      "Parent": "before_common_valid_vv_db.tif",
+      "Evidence_Key": "brightness",
+      "Child_SHA256": "cb9b777f138971218b36b7e62633df706347fa3c746c3457a0718a5db5efebbd",
+      "Parent_SHA256": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3",
+      "Relation": "derived from",
+      "Record_Ref": "records/readiness/gis-demonstration-001-brightness-difference-result.json",
+      "Record_SHA256": "29b744d8efcc3afd83e2f5c6a15e0278be29559cf8cca37c8feed7868ee6ea17"
+    },
+    {
+      "Child": "excluded_cells.tif",
+      "Parent": "after_common_valid_vv_db.tif",
+      "Evidence_Key": "brightness",
+      "Child_SHA256": "cb9b777f138971218b36b7e62633df706347fa3c746c3457a0718a5db5efebbd",
+      "Parent_SHA256": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+      "Relation": "derived from",
+      "Record_Ref": "records/readiness/gis-demonstration-001-brightness-difference-result.json",
+      "Record_SHA256": "29b744d8efcc3afd83e2f5c6a15e0278be29559cf8cca37c8feed7868ee6ea17"
+    },
+    {
+      "Child": "layout:regional_overview",
+      "Parent": "after_common_valid_vv_db.tif",
+      "Evidence_Key": "atlas",
+      "Child_SHA256": "",
+      "Parent_SHA256": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+      "Relation": "display uses",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "Record_SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6"
+    },
+    {
+      "Child": "Nepal_Unverified_Atlas.ppkx",
+      "Parent": "layout:regional_overview",
+      "Evidence_Key": "atlas",
+      "Child_SHA256": "6f8ff248d33b5c1bbefd68451d3fff74cc387b1ec0a464cf5fc2dd3f3ad3537a",
+      "Parent_SHA256": "",
+      "Relation": "contains logical layout",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "Record_SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6"
+    },
+    {
+      "Child": "layout:source_area_comparison",
+      "Parent": "before_common_valid_vv_db.tif",
+      "Evidence_Key": "atlas",
+      "Child_SHA256": "",
+      "Parent_SHA256": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3",
+      "Relation": "display uses",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "Record_SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6"
+    },
+    {
+      "Child": "layout:source_area_comparison",
+      "Parent": "after_common_valid_vv_db.tif",
+      "Evidence_Key": "atlas",
+      "Child_SHA256": "",
+      "Parent_SHA256": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+      "Relation": "display uses",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "Record_SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6"
+    },
+    {
+      "Child": "Nepal_Unverified_Atlas.ppkx",
+      "Parent": "layout:source_area_comparison",
+      "Evidence_Key": "atlas",
+      "Child_SHA256": "6f8ff248d33b5c1bbefd68451d3fff74cc387b1ec0a464cf5fc2dd3f3ad3537a",
+      "Parent_SHA256": "",
+      "Relation": "contains logical layout",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "Record_SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6"
+    },
+    {
+      "Child": "layout:upper_corridor_comparison",
+      "Parent": "before_common_valid_vv_db.tif",
+      "Evidence_Key": "atlas",
+      "Child_SHA256": "",
+      "Parent_SHA256": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3",
+      "Relation": "display uses",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "Record_SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6"
+    },
+    {
+      "Child": "layout:upper_corridor_comparison",
+      "Parent": "after_common_valid_vv_db.tif",
+      "Evidence_Key": "atlas",
+      "Child_SHA256": "",
+      "Parent_SHA256": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+      "Relation": "display uses",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "Record_SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6"
+    },
+    {
+      "Child": "Nepal_Unverified_Atlas.ppkx",
+      "Parent": "layout:upper_corridor_comparison",
+      "Evidence_Key": "atlas",
+      "Child_SHA256": "6f8ff248d33b5c1bbefd68451d3fff74cc387b1ec0a464cf5fc2dd3f3ad3537a",
+      "Parent_SHA256": "",
+      "Relation": "contains logical layout",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "Record_SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6"
+    },
+    {
+      "Child": "layout:evidence_map",
+      "Parent": "delta_vv_db.tif",
+      "Evidence_Key": "atlas",
+      "Child_SHA256": "",
+      "Parent_SHA256": "ffb9b8e8f2e8a64bd0b57a777dabf5497794e4037f2f6bbef8cff68505f2d4ad",
+      "Relation": "display uses",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "Record_SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6"
+    },
+    {
+      "Child": "Nepal_Unverified_Atlas.ppkx",
+      "Parent": "layout:evidence_map",
+      "Evidence_Key": "atlas",
+      "Child_SHA256": "6f8ff248d33b5c1bbefd68451d3fff74cc387b1ec0a464cf5fc2dd3f3ad3537a",
+      "Parent_SHA256": "",
+      "Relation": "contains logical layout",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "Record_SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6"
+    },
+    {
+      "Child": "layout:limitations_map",
+      "Parent": "excluded_cells.tif",
+      "Evidence_Key": "atlas",
+      "Child_SHA256": "",
+      "Parent_SHA256": "cb9b777f138971218b36b7e62633df706347fa3c746c3457a0718a5db5efebbd",
+      "Relation": "display uses",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "Record_SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6"
+    },
+    {
+      "Child": "Nepal_Unverified_Atlas.ppkx",
+      "Parent": "layout:limitations_map",
+      "Evidence_Key": "atlas",
+      "Child_SHA256": "6f8ff248d33b5c1bbefd68451d3fff74cc387b1ec0a464cf5fc2dd3f3ad3537a",
+      "Parent_SHA256": "",
+      "Relation": "contains logical layout",
+      "Record_Ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+      "Record_SHA256": "df6dbfc0b64e529087bbcbd2d94b42c53271674b3f51b6568146b385c236e2e6"
+    }
+  ],
+  "CoverageHistory": [
+    {
+      "Source_or_Pair": "M1-SRC-002",
+      "AOI_ID": "AOI-SOURCE",
+      "Fraction_of_Full_AOI": 0.55135,
+      "Exact_Disposition": "defer",
+      "Evidence_Key": "before_qa",
+      "Measurement": "individual-source usable VV/VH area"
+    },
+    {
+      "Source_or_Pair": "M1-SRC-002",
+      "AOI_ID": "AOI-UPPER-CORRIDOR",
+      "Fraction_of_Full_AOI": 0.760829,
+      "Exact_Disposition": "defer",
+      "Evidence_Key": "before_qa",
+      "Measurement": "individual-source usable VV/VH area"
+    },
+    {
+      "Source_or_Pair": "M1-SRC-005",
+      "AOI_ID": "AOI-SOURCE",
+      "Fraction_of_Full_AOI": 0.551376,
+      "Exact_Disposition": "defer",
+      "Evidence_Key": "after_qa",
+      "Measurement": "individual-source usable VV/VH area"
+    },
+    {
+      "Source_or_Pair": "M1-SRC-002 + M1-SRC-005",
+      "AOI_ID": "AOI-SOURCE",
+      "Fraction_of_Full_AOI": 0.546721,
+      "Exact_Disposition": "pass_common_valid_for_local_partial_visual_only",
+      "Evidence_Key": "pair",
+      "Measurement": "same-cell common valid VV/VH area; display uses VV only"
+    },
+    {
+      "Source_or_Pair": "M1-SRC-005",
+      "AOI_ID": "AOI-UPPER-CORRIDOR",
+      "Fraction_of_Full_AOI": 0.760875,
+      "Exact_Disposition": "defer",
+      "Evidence_Key": "after_qa",
+      "Measurement": "individual-source usable VV/VH area"
+    },
+    {
+      "Source_or_Pair": "M1-SRC-002 + M1-SRC-005",
+      "AOI_ID": "AOI-UPPER-CORRIDOR",
+      "Fraction_of_Full_AOI": 0.757928,
+      "Exact_Disposition": "pass_common_valid_for_local_partial_visual_only",
+      "Evidence_Key": "pair",
+      "Measurement": "same-cell common valid VV/VH area; display uses VV only"
+    }
+  ],
+  "ClaimRegister": [
+    {
+      "Claim_ID": "EXP-OBS-001",
+      "Kind": "sensor measurement",
+      "Statement": "delta_vv_db = after_vv_db - before_vv_db",
+      "Review_State": "unverified registration; no admitted landscape-change feature",
+      "Evidence_Key": "brightness"
+    },
+    {
+      "Claim_ID": "EXP-INTERP-001",
+      "Kind": "interpretation boundary",
+      "Statement": "No geomorphic interpretation performed",
+      "Review_State": "not assessed",
+      "Evidence_Key": "atlas"
+    },
+    {
+      "Claim_ID": "EXP-ATTRIB-001",
+      "Kind": "attribution boundary",
+      "Statement": "No causal event attribution performed",
+      "Review_State": "not assessed",
+      "Evidence_Key": "atlas"
+    }
+  ],
+  "scientific_admission": false,
+  "artifact_hashes": {
+    "before_common_valid_vv_db.tif": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3",
+    "after_common_valid_vv_db.tif": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+    "delta_vv_db.tif": "ffb9b8e8f2e8a64bd0b57a777dabf5497794e4037f2f6bbef8cff68505f2d4ad",
+    "excluded_cells.tif": "cb9b777f138971218b36b7e62633df706347fa3c746c3457a0718a5db5efebbd",
+    "Nepal_Unverified_Atlas.ppkx": "6f8ff248d33b5c1bbefd68451d3fff74cc387b1ec0a464cf5fc2dd3f3ad3537a"
+  },
+  "logical_entity_hashes": "blank for source IDs and logical layouts; hashes identify files only",
+  "history_is_curated_not_exhaustive": true,
+  "original_scientific_contracts_and_statuses_unchanged": true,
+  "public_record_snapshot_commit": "ea2b48166102742a2fb339186aa2d68031738795"
+}

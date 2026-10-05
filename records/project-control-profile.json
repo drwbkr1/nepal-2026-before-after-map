@@ -840,6 +840,11 @@
     "atlas_public_commit": "e12079492a78ad01828bbb9a99114d3f8d6d59f4",
     "atlas_CI_run_id": 37381002332,
     "atlas_CI_status": "completed_success_for_exact_implementation_commit",
-    "atlas_post_ci_ref": "records/readiness/gis-demonstration-001-atlas-post-ci.json"
+    "atlas_post_ci_ref": "records/readiness/gis-demonstration-001-atlas-post-ci.json",
+    "evidence_catalog_guide_ref": "docs/GIS_EVIDENCE_CATALOG.md",
+    "evidence_catalog_ref": "records/readiness/gis-demonstration-001-evidence-catalog.json",
+    "evidence_catalog_result_ref": "records/readiness/gis-demonstration-001-evidence-catalog-result.json",
+    "latest_handoff_scope": "Same unverified atlas maps and PPKX plus offline source identities, selected history, lineage, coverage and claim boundaries",
+    "latest_handoff_bundle_sha256": "247fe982f834d30dd612a5a25bad0d424c96ff265879da455a14cd228f8af0ab"
   }
 }

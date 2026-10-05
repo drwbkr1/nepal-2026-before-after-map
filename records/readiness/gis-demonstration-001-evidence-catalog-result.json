@@ -1,0 +1,141 @@
+{
+  "record_id": "GIS-DEMONSTRATION-001-OFFLINE-EVIDENCE-CATALOG-RESULT",
+  "date": "2026-10-05",
+  "status": "available_offline_metadata_catalog",
+  "bundle": {
+    "archive_bytes": 133184875,
+    "archive_sha256": "247fe982f834d30dd612a5a25bad0d424c96ff265879da455a14cd228f8af0ab",
+    "file_count": 111,
+    "crc_pass": true,
+    "all_file_hashes_match": true,
+    "status": "passed_offline_evidence_bundle",
+    "gpkg_added_table_counts": {
+      "SourceIdentity": 2,
+      "EvidenceHistory": 16,
+      "ArtifactLineage": 18,
+      "CoverageHistory": 6,
+      "ClaimRegister": 3
+    },
+    "exact_record_snapshots": 16,
+    "original_bundle_unchanged": true,
+    "PPKX_unchanged": true,
+    "unchanged_existing_file_hashes": 85,
+    "raster_values_unchanged": true,
+    "scientific_admission": false,
+    "goal_complete": false
+  },
+  "catalog_ref": "records/readiness/gis-demonstration-001-evidence-catalog.json",
+  "gpkg_sha256": "ed6158c7dff8b66ef928cd44784278389bf85772239522c908bba17c7e519562",
+  "arcgis_reopen": {
+    "status": "pass_arcgis_metadata_table_reopen",
+    "tables": {
+      "SourceIdentity": {
+        "rows": 2,
+        "fields": [
+          "fid",
+          "Source_ID",
+          "Role",
+          "Product_ID",
+          "Acquisition_Start_UTC",
+          "Acquisition_End_UTC",
+          "Orbit_JSON",
+          "RTC_Archive_SHA256",
+          "Displayed_Raster",
+          "Displayed_Raster_SHA256",
+          "Full_Area_Disposition",
+          "Scientific_Admission"
+        ]
+      },
+      "EvidenceHistory": {
+        "rows": 16,
+        "fields": [
+          "fid",
+          "Evidence_Key",
+          "Record_ID",
+          "Record_Ref",
+          "SHA256",
+          "Exact_Status",
+          "Scope"
+        ]
+      },
+      "ArtifactLineage": {
+        "rows": 18,
+        "fields": [
+          "fid",
+          "Child",
+          "Parent",
+          "Evidence_Key",
+          "Child_SHA256",
+          "Parent_SHA256",
+          "Relation",
+          "Record_Ref",
+          "Record_SHA256"
+        ]
+      },
+      "CoverageHistory": {
+        "rows": 6,
+        "fields": [
+          "fid",
+          "Source_or_Pair",
+          "AOI_ID",
+          "Fraction_of_Full_AOI",
+          "Exact_Disposition",
+          "Evidence_Key",
+          "Measurement"
+        ]
+      },
+      "ClaimRegister": {
+        "rows": 3,
+        "fields": [
+          "fid",
+          "Claim_ID",
+          "Kind",
+          "Statement",
+          "Review_State",
+          "Evidence_Key"
+        ]
+      }
+    },
+    "original_rows_and_geometry_unchanged": true,
+    "no_pixel_decode_or_analysis": true
+  },
+  "unchanged_existing_artifact_files": 85,
+  "original_PPKX_sha256": "6f8ff248d33b5c1bbefd68451d3fff74cc387b1ec0a464cf5fc2dd3f3ad3537a",
+  "focused_tests": {
+    "portable": {
+      "run": 11,
+      "pass": 9,
+      "intentional_gdal_skips": 2
+    },
+    "installed_runtime": {
+      "run": 11,
+      "pass": 11
+    }
+  },
+  "retained_synthetic_failure": "First generated GeoPackage cleanup failed with WinError 32 due to unclosed SQLite read connections. Corrected explicit connection closure; no real attempt had started.",
+  "new_pixel_decode_or_processing": false,
+  "new_source_or_method_adoption": false,
+  "original_scientific_contracts_changed": false,
+  "scientific_admission": false,
+  "interpretation_or_attribution_added": false,
+  "original_scientific_goal_complete": false,
+  "privacy": "Only previously public tracked records included; private correspondence and account data excluded",
+  "bundle_catalog_sha256": "ab4500e240096aa03c01f2f7678c0d9428e8a998cd4e3023ddac468f75178b09",
+  "public_catalog_sha256": "42ef76854a526c7329f1718c968e9a432cb9059341bc26361342e7a56bb7cba2",
+  "public_record_byte_identity": {
+    "status": "passed_committed_public_record_byte_identity",
+    "exact_snapshots": 16,
+    "public_record_commit": "ea2b48166102742a2fb339186aa2d68031738795"
+  },
+  "retained_prior_bundle": {
+    "bundle": "evidence-bundle-002",
+    "disposition": "superseded for public-record byte binding; original engineering receipt and bundle unchanged",
+    "observation": "Two working-tree JSON files had CRLF bytes rather than committed LF; JSON values equal. Fresh bundle uses committed bytes pinned to the public source commit."
+  },
+  "full_local_suite": {
+    "tests_run": 1279,
+    "status": "pass",
+    "intentional_skips": 10,
+    "scope": "Full current working-tree suite, including retained local disposable studies; distinct from tracked public CI"
+  }
+}

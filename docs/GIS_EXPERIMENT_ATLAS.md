@@ -20,7 +20,7 @@ Each layout includes dates, CRS, a legend explanation, linked kilometer scale ba
 
 ## Open and export
 
-The owner-local handoff is `Nepal_Unverified_Atlas.zip`. Extract the entire bundle to a writable folder and open **`Nepal_Unverified_Atlas.ppkx`** in ArcGIS Pro. Let Pro unpack the project to a writable location; do not extract under Program Files.
+The latest owner-local handoff is `Nepal_Unverified_Atlas_Evidence.zip`, described in the [offline evidence catalog guide](GIS_EVIDENCE_CATALOG.md). The original `Nepal_Unverified_Atlas.zip` remains preserved. Extract the entire bundle to a writable folder and open **`Nepal_Unverified_Atlas.ppkx`** in ArcGIS Pro. Let Pro unpack the project to a writable location; do not extract under Program Files.
 
 In the Catalog pane, expand **Layouts**, open a layout, and use **Share → Export Layout**. The project contains five principal maps and two supporting dated maps. Existing PDF/PNG exports are in the bundle's `exports` folder.
 
