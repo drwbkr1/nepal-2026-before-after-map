@@ -1,0 +1,99 @@
+{
+  "DEM_distributed": false,
+  "PPKX_render_parity_pass": false,
+  "arcgis_version": "3.7.1",
+  "at_utc": "2026-10-05T18:17:17.540136+00:00",
+  "clean_machine_or_clean_profile_tested": false,
+  "code_sha256": {
+    "scripts/arcgis_demo_roundtrip.py": "dc0e023e55851a2f091fc8c73f5080056e3f5271f5ef129db3877e5978aff7e0",
+    "scripts/stage_gis_demonstration_001.py": "d0a5c9d0269b55d90d1d7fdbb112c7c3cea09886de3a485e415442f17025b209",
+    "tests/test_stage_gis_demonstration_001.py": "4a24b3885b3b1a32b257212d8805c0507c837159f6ff7dddecf1e1efae171f76"
+  },
+  "cross_version_tested": false,
+  "dates": [
+    "2026-08-16",
+    "2026-08-28"
+  ],
+  "display_range_db": [
+    -30,
+    0
+  ],
+  "goal_complete": false,
+  "layout_count": 1,
+  "map_count": 2,
+  "mapped_change_or_event_attribution": false,
+  "original_M5_M6_complete": false,
+  "original_sources_modified": false,
+  "private_correspondence_or_owner_context_published": false,
+  "public_code_preview_publication": "pending",
+  "public_preview": {
+    "bytes": 802355,
+    "dimensions": [
+      1560,
+      900
+    ],
+    "ref": "docs/assets/gis-demonstration-001.png",
+    "sha256": "bf0b21fa4b62ca59f59bd0ca73c46bc589ac3dbbca6ca303fa457544334feb09",
+    "visible_partial_warning_dates_projection_and_credits": true,
+    "visual_inspection_pass": true
+  },
+  "record_id": "NEPAL-GIS-DEMONSTRATION-001-RESULT",
+  "residual_registration_verified": false,
+  "retained_failed_PPKX_attempts": [
+    {
+      "attempt": "roundtrip-001",
+      "failure": "extracted default GDB outside the package; staging inventory changed",
+      "receipt_sha256": "4994ca6afe76b00343412ea75bf48ca5774b00eb77cd1c6f7146f25642841b8a"
+    },
+    {
+      "attempt": "roundtrip-002",
+      "failure": "standalone Table adapter lacked Layer supports method",
+      "receipt_sha256": "93a8f443284543f6818e9467c81fc3059d490d290ec167c8b3b9ab0d8ac0b608"
+    },
+    {
+      "attempt": "roundtrip-003",
+      "failure": "structure and data preserved but rendered export differs",
+      "receipt_sha256": "c7a4404f9446fcbe8c835aed92b16e223a7b4bd0896916b955581d72252baa3c"
+    },
+    {
+      "attempt": "roundtrip-004",
+      "failure": "fixed display settings and full cells preserved but rendered export differs",
+      "receipt_sha256": "0cd6ddbc5b4162435710270288c0e4de6726e6c4b0ccff650155af810b44c71e"
+    }
+  ],
+  "schema_version": "1.0",
+  "scientific_admission": false,
+  "source_AOI_common_valid_fraction": 0.546721,
+  "source_ids": [
+    "M1-SRC-002",
+    "M1-SRC-005"
+  ],
+  "source_manifest_rows": 2,
+  "source_raster_hashes": {
+    "after_common_valid_vv_db.tif": "90e0c1c00a60b3fcd19ee07e4d610f036c44ca0b29d230ce3266676abfc0a7b7",
+    "before_common_valid_vv_db.tif": "ada055a8a819998ef554d28ec15ae9dd842a92514c8a6e5bcb255a262034c4a3"
+  },
+  "status": "pass_local_ZIP_demonstration_with_retained_PPKX_failures",
+  "tests": {
+    "installed_ArcGIS_runtime_focused_tests_passed": 8,
+    "portable_focused_tests_passed": 8,
+    "real_ArcGIS_staging_and_ZIP_reopen": "pass"
+  },
+  "upper_corridor_AOI_common_valid_fraction": 0.757928,
+  "validated_handoff": {
+    "CRC_and_extracted_hashes_pass": true,
+    "bytes": 43547880,
+    "copied_folder_fresh_process_reopen": true,
+    "extracted_ZIP_fresh_process_reopen": true,
+    "filename": "Nepal_GIS_Demonstration_001.zip",
+    "format": "ZIP retaining original display GeoTIFFs",
+    "georeference_full_cell_and_source_table_equal": true,
+    "manifest_files": 65,
+    "operational_sources_and_project_defaults_inside_folder": true,
+    "public_ZIP_distribution": false,
+    "rendered_pixels_equal": true,
+    "same_machine_only": true,
+    "sha256": "55b483b03358635757e857f7ee8e7d94bc496cb7103dc0346fd0792fdd6a7098"
+  },
+  "wkid": 32645
+}

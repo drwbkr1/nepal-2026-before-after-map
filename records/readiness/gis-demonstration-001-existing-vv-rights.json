@@ -1,0 +1,55 @@
+{
+  "DOIs": [
+    "10.5281/zenodo.3962581",
+    "10.5281/zenodo.3962936"
+  ],
+  "HyP3_plus_CC0_inferred_for_Basic": false,
+  "at_utc": "2026-10-05T17:53:59.080167+00:00",
+  "authority": "owner-approved demonstration scope, 5 October 2026; private conversation not reproduced",
+  "copernicus_DEM_display_or_redistribution": false,
+  "criteria": {
+    "access": "pass: exact existing local products; no token, new request or paid access",
+    "authority": "pass: provider-generated product XML/README plus official ASF and Copernicus notices",
+    "fitness": "pass only for labeled partial imagery display and package mechanics; not for registration/change science",
+    "identity": "pass: exact product metadata, source IDs, display-raster hashes and repaired-project hash verified",
+    "integrity": "pass: two display rasters and repaired APRX match accepted hashes; captured metadata identities verified",
+    "privacy_security": "pass for imagery and sanitized methods only; private emails, account details and private context excluded",
+    "provenance": "pass: preserved acquisition, metadata, masking and panel receipts remain original evidence",
+    "rights": "pass for stated credited imagery use: both exact VV metadata files permit use with credit; underlying Sentinel notice expressly includes public communication and distribution"
+  },
+  "current_primary_public_guidance": [
+    {
+      "checked_at_utc": "2026-10-05T17:53:59.080167+00:00",
+      "finding": "Product acknowledgement and relevant DOIs belong in presentations and publications.",
+      "url": "https://hyp3-docs.asf.alaska.edu/usage_guidelines/"
+    },
+    {
+      "checked_at_utc": "2026-10-05T17:53:59.080167+00:00",
+      "finding": "Sentinel reuse includes public communication, adaptation and distribution with source/modification notice; no warranty of fitness.",
+      "url": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice"
+    }
+  ],
+  "image_credit": "ASF DAAC HyP3 2026. Contains modified Copernicus Sentinel data 2026, processed by ESA.",
+  "new_scope_review_not_rewriting_old_approval": true,
+  "permitted_use": "Existing masked VV gamma0 dB display rasters in a local demonstrator package, with publicly published credited, explicitly unregistered PNG/PDF previews and methods. No source archives, DEM, or other raster family.",
+  "prior_local_only_review_preserved": true,
+  "private_account_agreement_obtained_or_changed": false,
+  "product_VV_metadata_sha256": {
+    "M1-SRC-002": "5f9d679fabf01267457589b8fdc5fad17d55a259e38bd033cc2f8114eb0a5dd5",
+    "M1-SRC-005": "7982d507a38f5e92532183eba8d80d586ba38c223c5a0dbb171d2c038f9d65f4"
+  },
+  "record_id": "NEPAL-GIS-DEMONSTRATION-001-EXISTING-VV-RIGHTS",
+  "schema_version": "1.0",
+  "scientific_admission": false,
+  "source_rights_records": [
+    {
+      "ref": "records/readiness/m2-asf-hyp3-rtc-partial-pair-rights-review-001.json",
+      "sha256": "409dfbd12deee028206fc86be75b2825b30a0e1e05a2f2ac43e3d73778f34574"
+    }
+  ],
+  "sources": [
+    "M1-SRC-002",
+    "M1-SRC-005"
+  ],
+  "status": "pass_credited_existing_VV_demonstration_only"
+}
