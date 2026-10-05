@@ -168,13 +168,16 @@ def compare(before, after):
             'layout_pixels_equal': before['layouts'] == after['layouts']}
 
 
-def run(project, root, output):
+def run(project, root, output, sharing_internal='EXTERNAL'):
+    if sharing_internal not in {'EXTERNAL', 'INTERNAL'}:
+        raise ValueError('Unsupported package sharing mode')
     reserve(project, root, output)
     original = inventory(root)
     write_new(output / 'initial-source-inventory.json', original)
     receipt = {'status': 'failed', 'scope': 'same-machine fresh-process local staging round trip',
                'project': str(project), 'source_root': str(root),
-               'clean_machine_tested': False, 'scientific_validity_tested': False}
+               'clean_machine_tested': False, 'scientific_validity_tested': False,
+               'sharing_internal': sharing_internal}
     try:
         os.environ.setdefault('GDAL_PAM_ENABLED', 'NO')
         import arcpy
@@ -198,7 +201,7 @@ def run(project, root, output):
         package = output / 'delivery.ppkx'
         with arcpy.EnvManager(overwriteOutput=False, workspace=str(output), scratchWorkspace=str(output)):
             arcpy.management.PackageProject(
-                in_project=str(project), output_file=str(package), sharing_internal='EXTERNAL',
+                in_project=str(project), output_file=str(package), sharing_internal=sharing_internal,
                 package_as_template='PROJECT_PACKAGE', summary='Local delivery verification',
                 tags='delivery verification', version='CURRENT', include_toolboxes='NO_TOOLBOXES',
                 include_history_items='NO_HISTORY_ITEMS', read_only='READ_WRITE')
@@ -241,13 +244,15 @@ def main():
     parser.add_argument('--project', type=Path, required=True)
     parser.add_argument('--source-root', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--sharing', choices=['EXTERNAL', 'INTERNAL'], default='EXTERNAL',
+                        help='Packaging mode; both modes still reject remote or out-of-root sources')
     args = parser.parse_args()
     # Check raw paths before resolve so linked ancestors cannot disappear.
     for value in (args.project, args.source_root, args.output):
         reject_links(value)
     project, root, output = (p.resolve() for p in (args.project, args.source_root, args.output))
     if args.mode == 'run':
-        return run(project, root, output)
+        return run(project, root, output, args.sharing)
     reserve(project, root, output)
     report = snapshot(project, root, output / 'exports')
     write_new(output / 'snapshot.json', report)

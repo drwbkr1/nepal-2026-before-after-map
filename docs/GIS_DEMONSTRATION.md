@@ -17,7 +17,7 @@ This is an independent, unofficial GIS demonstration. It shows existing satellit
 
 The displayed rasters were already generated under the earlier local visual route. Demonstration staging copies their bytes unchanged. It does not recalibrate, filter, warp, register, threshold or compute a difference between them. Posting is not a claim of 10-m positional accuracy.
 
-The new demonstration uses the same fixed grayscale display range, **-30 to 0 dB**, for both dates, with no gamma stretch. This replaces the original panel's automatic percentile display to avoid histogram-dependent rendering when ArcGIS consolidates the TIFFs into a geodatabase. It changes presentation only; source raster values and scientific criteria remain unchanged. A shared display scale does not establish radiometric normalization or registration.
+The new demonstration uses the same fixed grayscale display range, **-30 to 0 dB**, for both dates, with no gamma stretch. This replaces the original panel's automatic percentile display with a shared presentation scale. It changes presentation only; source raster values and scientific criteria remain unchanged. A shared display scale does not establish radiometric normalization or registration.
 
 The common valid VV/VH area is **54.6721% of the source-area AOI** and **75.7928% of the upper-corridor AOI**. The panel displays VV only. Blank areas represent exclusions for layover, shadow or NoData; they do not demonstrate an unchanged surface. The fractions use the original full-AOI denominators, and both full-area QA dispositions remain `defer` under the original 80% rule. Residual registration is unverified. Brightness differences can reflect radar geometry, moisture, scattering, speckle or alignment rather than event effects.
 
@@ -29,11 +29,19 @@ The repository contains the staging and package-test code, rights review, qualif
 
 ### Verified result on 5 October 2026
 
-The working handoff is a **ZIP retaining the original display GeoTIFFs**, not a PPKX. Its CRC and 65 manifest-file hashes pass, and copies at two new folder locations reopen with matching map structure, full-cell digests and rendered exports. Home folder, default geodatabase, toolbox and operational sources resolve inside the extracted folder. The owner-local ZIP is 43,547,880 bytes, SHA-256 `55b483b03358635757e857f7ee8e7d94bc496cb7103dc0346fd0792fdd6a7098`.
+The initial working handoff was a **ZIP retaining the original display GeoTIFFs**. Its CRC and 65 manifest-file hashes pass, and copies at two new folder locations reopen with matching map structure, full-cell digests and rendered exports. Home folder, default geodatabase, toolbox and operational sources resolve inside the extracted folder. The owner-local ZIP is 43,547,880 bytes, SHA-256 `55b483b03358635757e857f7ee8e7d94bc496cb7103dc0346fd0792fdd6a7098`.
 
-Four PPKX failures remain retained. The first exposed an omitted empty default geodatabase; the second exposed a standalone-table adapter error. After those corrections, both later candidates preserved the geometry, cell values and source table but failed exact rendered-export parity. Adding a common display scale did not resolve that mismatch. The PPKXs are candidates, not the verified delivery. No scientific source was reacquired or reprocessed to make this demonstration.
+Four PPKX failures remain retained. The first exposed an omitted empty default geodatabase; the second exposed a standalone-table adapter error. After those corrections, both later candidates preserved the geometry, cell values and source table but failed exact rendered-export parity. Adding a common display scale did not resolve that mismatch. Those four PPKXs remain failed candidates. No scientific source was reacquired or reprocessed to make this demonstration.
 
 See the [sanitized result](../records/readiness/gis-demonstration-001-result.json). Public CI verifies repository controls and software tests, not private GIS data. The local demonstration proof is the separate ArcGIS runtime record.
+
+### Later PPKX result on 5 October 2026
+
+A fresh fifth test used `PackageProject` with `sharing_internal='INTERNAL'`. For these strictly local inputs, it included the two original compressed GeoTIFFs byte-for-byte instead of converting them to geodatabase rasters. Both a first extraction and a second extraction at a different location passed fresh-process reopen, full-cell/georeference/source-table equality and exact rendered-layout equality. Project defaults and operational sources resolve inside each extracted folder. The preview is unchanged.
+
+The owner-local PPKX is **41,797,549 bytes**, SHA-256 `044af3651f7505cfb02fdb7800afda0be7be19da873debea4bd055e393be4435`. It is now a verified **same-machine demonstration package**; the original ZIP also remains valid. Neither test establishes clean-profile, clean-machine or cross-version portability, real registration or scientific acceptance. The historical result records are not rewritten.
+
+Internal packaging can leave network resources referenced, as described in the [official Package Project documentation](https://doc.esri.com/en/arcgis-pro/latest/tool-reference/data-management/package-project.html). This verifier rejects network, service and out-of-root operational sources before packaging and after extraction. The passing result must not be generalized to projects with such sources. See the [additive PPKX result](../records/readiness/gis-demonstration-001-ppkx-preserved-format-result.json).
 
 ## Reproduce with your local verified inputs
 
@@ -46,10 +54,12 @@ ArcGIS Pro 3.7.1 was used. No cloud basemap, account, new download or installati
 
 & $ArcGISPython scripts/arcgis_demo_roundtrip.py run `
   --project "$NewStagingFolder/Nepal_GIS_Demonstration.aprx" `
-  --source-root $NewStagingFolder --output $NewRoundtripFolder
+  --source-root $NewStagingFolder --output $NewRoundtripFolder --sharing INTERNAL
 ```
 
 Use new output folders. Preserve failed receipts; do not overwrite an existing attempt. Inspect the exported layout visually before sharing it. The staging script gives the project local writable defaults and includes two provenance rows in `SourceManifest`. The round-trip verifier rejects broken, remote or out-of-tree operational sources, checks the packaged structure and rendered pixels, and records file-identity changes.
+
+`--sharing EXTERNAL` remains the script default, preserving the earlier call behavior. Use the explicit `INTERNAL` option only for the strictly local demonstration described here; both modes enforce the same source-boundary checks.
 
 The verifier also compares full-cell digests, NoData-normalized array shapes, projected extents and presentation settings for each existing display raster before and after packaging. This is within-source packaging validation, not a before/after change calculation.
 

@@ -1,0 +1,76 @@
+{
+  "DEM_distributed": false,
+  "arcgis_version": "3.7.1",
+  "at_utc": "2026-10-05T18:36:59.317235+00:00",
+  "authority": "Existing owner-approved GIS demonstration, routine packaging remediation and sanitized methods publication.",
+  "clean_machine_or_clean_profile_tested": false,
+  "code_sha256": {
+    "scripts/arcgis_demo_roundtrip.py": "53fbd64bbac1fde2f8473957aa84c3a62c475807057f44169e95324132894100",
+    "tests/test_stage_gis_demonstration_001.py": "677e329a127af77bece4b495251ce58c8a33d0058d1dc580db89629c09d908f0"
+  },
+  "cross_version_tested": false,
+  "exit_condition_delta": "A native PPKX now preserves the two original display GeoTIFFs and passes fresh-process reopen and exact rendering at two extraction locations.",
+  "goal_complete": false,
+  "input_result": {
+    "mutated": false,
+    "ref": "records/readiness/gis-demonstration-001-result.json",
+    "sha256": "4d4019804c115198187d08109462a506f5873859fa2516237731f592de17a7e8"
+  },
+  "interpretation_boundary": "Within-source packaging equality is not a cross-date scientific comparison. This demonstrates packaging behavior for these exact local inputs, not the historical radar-processing root cause.",
+  "mapped_change_or_event_attribution": false,
+  "original_M5_M6_complete": false,
+  "package": {
+    "bytes": 41797549,
+    "filename": "delivery.ppkx",
+    "public_package_uploaded": false,
+    "sha256": "044af3651f7505cfb02fdb7800afda0be7be19da873debea4bd055e393be4435",
+    "sharing_internal": "INTERNAL"
+  },
+  "private_correspondence_or_owner_context_published": false,
+  "processing_or_source_values_changed": false,
+  "record_id": "NEPAL-GIS-DEMONSTRATION-001-PPKX-PRESERVED-FORMAT-RESULT",
+  "registration_verified": false,
+  "retained_failure_count": 4,
+  "retained_failure_receipt_sha256": {
+    "roundtrip-001": "4994ca6afe76b00343412ea75bf48ca5774b00eb77cd1c6f7146f25642841b8a",
+    "roundtrip-002": "93a8f443284543f6818e9467c81fc3059d490d290ec167c8b3b9ab0d8ac0b608",
+    "roundtrip-003": "c7a4404f9446fcbe8c835aed92b16e223a7b4bd0896916b955581d72252baa3c",
+    "roundtrip-004": "0cd6ddbc5b4162435710270288c0e4de6726e6c4b0ccff650155af810b44c71e"
+  },
+  "runtime_evidence_sha256": {
+    "first_after": "3319850dfbb766c636d61fada143f5d24feaa3ebf4a6c7c53410c3a30aaa6b1d",
+    "first_before": "3319850dfbb766c636d61fada143f5d24feaa3ebf4a6c7c53410c3a30aaa6b1d",
+    "first_roundtrip_receipt": "c8c3346dbb3a103b5f8a186549d201786b7259cb0d1107b955d7ec44ffd78a78",
+    "second_extraction_receipt": "43d57c2beb670c58e29597c98b95f875e49188e2af1219cb22ddab78911671c6",
+    "second_snapshot": "3319850dfbb766c636d61fada143f5d24feaa3ebf4a6c7c53410c3a30aaa6b1d",
+    "stage_receipt": "8770955102efd6ff28f42167201fad99e2e32cfd82c827575d441cdb06c6c7ff"
+  },
+  "schema_version": "1.0",
+  "scientific_admission": false,
+  "source_ids": [
+    "M1-SRC-002",
+    "M1-SRC-005"
+  ],
+  "status": "pass_same_machine_PPKX_preserved_GeoTIFF_demonstration",
+  "tests": {
+    "installed_ArcGIS_focused_passed": 9,
+    "portable_focused_passed": 9
+  },
+  "validation": {
+    "data_item_count": 3,
+    "extracted_original_TIFF_bytes_equal": true,
+    "fresh_process_reopen": true,
+    "full_cell_and_georeference_equal": true,
+    "layout_count": 1,
+    "map_count": 2,
+    "operational_sources_and_defaults_inside_extraction": true,
+    "original_inputs_and_staging_stable_files_unchanged": true,
+    "public_preview_pixel_identical": true,
+    "rendered_pixels_equal": true,
+    "rendered_layout_visually_inspected": true,
+    "source_table_equal": true,
+    "source_table_rows": 2,
+    "two_extraction_locations": true
+  },
+  "wkid": 32645
+}

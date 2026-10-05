@@ -7,7 +7,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from stage_gis_demonstration_001 import digest, preflight
-from arcgis_demo_roundtrip import compare, has_data_source
+from arcgis_demo_roundtrip import compare, has_data_source, run
 
 
 class StagePreflight(unittest.TestCase):
@@ -52,6 +52,14 @@ class StagePreflight(unittest.TestCase):
 
 
 class RoundTripComparison(unittest.TestCase):
+    def test_invalid_sharing_mode_stops_before_output_reservation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            output = root / 'output'
+            with self.assertRaisesRegex(ValueError, 'sharing mode'):
+                run(root / 'fixture.aprx', root / 'input', output, 'UNSUPPORTED')
+            self.assertFalse(output.exists())
+
     def test_standalone_table_without_layer_supports_is_accepted(self):
         self.assertTrue(has_data_source(SimpleNamespace(dataSource="local-table")))
 
