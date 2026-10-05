@@ -792,5 +792,24 @@
     "local_next_brief_validation_ref": "records/readiness/m2-optical-alternate-source-route-001-local-next-brief-validation-001.json",
     "post_ci_ref": "records/readiness/m2-optical-alternate-source-route-001-post-ci-reconciliation.json",
     "post_ci_sha256": "9a9d60d2a8b3c9b1d3144204e3c8fb4e1eb58847c28a6611b1d2ffb461130a04"
+  },
+  "current_checkpoint_scope": "Preserved native radar-processing terminal checkpoint. Later optical and presentation routes are separate active_* pointers; this field does not describe their current outcome or create authority.",
+  "active_gis_demonstration": {
+    "checkpoint_id": "GIS-DEMONSTRATION-001-SWIPE-PUBLIC-CI-PENDING",
+    "authority_scope": "Accepted owner demonstration scope: existing verified outputs, reversible presentation and packaging, sanitized public code/docs and rights-cleared credited previews. No registration or scientific change release.",
+    "guide_ref": "docs/GIS_DEMONSTRATION.md",
+    "viewer_guide_ref": "docs/GIS_SWIPE_VIEWER.md",
+    "viewer_ref": "docs/viewer/index.html",
+    "native_package_result_ref": "records/readiness/gis-demonstration-001-ppkx-preserved-format-result.json",
+    "cartography_result_ref": "records/readiness/gis-demonstration-001-cartography-result.json",
+    "swipe_result_ref": "records/readiness/gis-demonstration-001-swipe-viewer-result.json",
+    "viewer_public_commit": "60f3e84ddf836d43e7e2e514735331533757fe07",
+    "viewer_CI_run_id": 37368462707,
+    "viewer_CI_status": "queued_at_last_verification",
+    "next_action": "Reconcile exact viewer CI; incorporate routine presentation feedback. The original scientific goal remains incomplete, with registration, change evidence and attribution unverified.",
+    "registration_verified": false,
+    "scientific_admission": false,
+    "goal_complete": false,
+    "original_M5_M6_complete": false
   }
 }

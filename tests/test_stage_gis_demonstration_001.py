@@ -1,4 +1,6 @@
-"""Path and integrity coverage for staging; no ArcPy or imagery fixtures."""
+"""Staging and public display-bundle integrity; no ArcPy or raw imagery access."""
+import json
+import struct
 import sys
 import tempfile
 import unittest
@@ -115,6 +117,52 @@ class CartographicValidation(unittest.TestCase):
                                 elementWidth=2, elementHeight=3)
         with self.assertRaisesRegex(ValueError, 'Duplicate'):
             camera_signature([frame, frame])
+
+
+class PublishedViewerIntegrity(unittest.TestCase):
+    root = Path(__file__).resolve().parents[1] / 'docs' / 'viewer'
+
+    def test_display_files_and_native_world_grid_match_viewer_metadata(self):
+        source = json.loads((self.root / 'renders' / 'SOURCE.json').read_text(encoding='utf-8'))
+        script = (self.root / 'data.js').read_text(encoding='utf-8').strip()
+        data = json.loads(script.removeprefix('window.NEPAL_VIEWER = Object.freeze(').removesuffix(');'))
+        for render in source['renders']:
+            with self.subTest(date=render['date']):
+                png = self.root / 'renders' / render['file']
+                world = self.root / 'renders' / render['world_file']
+                self.assertEqual(digest(png), render['sha256'])
+                self.assertEqual(digest(world), render['world_file_sha256'])
+                self.assertEqual(png.stat().st_size, render['bytes'])
+                with png.open('rb') as stream:
+                    header = stream.read(24)
+                self.assertEqual(header[:8], b'\x89PNG\r\n\x1a\n')
+                dimensions = list(struct.unpack('>II', header[16:24]))
+                self.assertEqual(dimensions, render['size'])
+                values = [float(v) for v in world.read_text(encoding='utf-8').splitlines()]
+                self.assertEqual(world_bounds(values, *dimensions), data['bounds'])
+                scene = data[render['key']]
+                self.assertEqual(scene['source_id'], render['source_id'])
+                self.assertEqual(scene['date'], render['date'])
+                self.assertEqual(scene['sha256'], render['sha256'])
+                self.assertEqual(scene['size'], dimensions)
+                self.assertEqual(self.root / scene['file'], png)
+
+    def test_vendored_distribution_preserves_pinned_download_bytes(self):
+        vendor = self.root / 'vendor' / 'leaflet'
+        source = json.loads((vendor / 'SOURCE.json').read_text(encoding='utf-8'))
+        for asset in source['assets']:
+            with self.subTest(file=asset['file']):
+                path = vendor / asset['file']
+                self.assertEqual(digest(path), asset['sha256'])
+                self.assertEqual(path.stat().st_size, asset['bytes'])
+
+    def test_fallback_is_the_published_qualified_cartographic_preview(self):
+        repo = self.root.parents[1]
+        record = json.loads((repo / 'records' / 'readiness' /
+                             'gis-demonstration-001-cartography-result.json').read_text(encoding='utf-8'))
+        expected = record['public_preview']['sha256']
+        self.assertEqual(digest(self.root / 'fallback-panel.png'), expected)
+        self.assertEqual(digest(repo / record['public_preview']['ref']), expected)
 
 
 if __name__ == "__main__":

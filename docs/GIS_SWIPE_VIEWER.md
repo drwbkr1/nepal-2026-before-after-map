@@ -52,7 +52,7 @@ The first export candidate stopped on a development assertion that native world-
 
 ## Verified result
 
-The portable and installed-runtime focused suites each pass 16 tests. Browser checks pass actual image loading, both date-only modes, keyboard swipe increment and 0/100% endpoints, divider dragging, opt-in blink/stop, zoom, pan, overview and closer-view controls, URL-state restoration, and a 390-by-844 responsive layout with no horizontal overflow. Both image elements keep identical positions and dimensions after panning.
+The portable and installed-runtime focused suites each pass 19 tests: the original 16 plus three public-bundle checks for native PNG/PGW identity and bounds, pinned third-party bytes, and the qualified fallback preview. Those checks guard the published files across Git checkout line-ending behavior; they do not establish scientific registration. Browser checks pass actual image loading, both date-only modes, keyboard swipe increment and 0/100% endpoints, divider dragging, opt-in blink/stop, zoom, pan, overview and closer-view controls, URL-state restoration, and a 390-by-844 responsive layout with no horizontal overflow. Both image elements keep identical positions and dimensions after panning.
 
 A disposable missing-metadata fixture shows the explicit static fallback. A boundary-mocked reduced-motion fixture switches dates manually with the same renderer. These fixtures are local test inputs, not part of the shipped viewer. Actual phone touch/pinch hardware and an OS reduced-motion preference change were not exercised. The scientific limits and source credit remain visible in the main and fallback pages. See the [sanitized result](../records/readiness/gis-demonstration-001-swipe-viewer-result.json).
 
