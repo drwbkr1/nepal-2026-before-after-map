@@ -1,0 +1,5 @@
+# Preserve native placement metadata and pinned third-party distribution bytes.
+renders/*.pgw -text -eol -diff whitespace=cr-at-eol
+vendor/leaflet/leaflet.js -text -eol -diff whitespace=cr-at-eol
+vendor/leaflet/leaflet.css -text -eol -diff whitespace=cr-at-eol
+vendor/leaflet/LICENSE -text -eol whitespace=cr-at-eol

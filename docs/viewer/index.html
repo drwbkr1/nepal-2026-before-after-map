@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="An unofficial, projected Sentinel-1D imagery swipe demonstration. Registration is unverified; no validated change is shown.">
+  <title>Nepal imagery | Swipe between dates</title>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="viewer.css">
+  <script defer src="vendor/leaflet/leaflet.js"></script>
+  <script defer src="data.js"></script>
+  <script defer src="viewer.js"></script>
+</head>
+<body data-ready="false">
+<main>
+  <header>
+    <p class="eyebrow">UNOFFICIAL GIS DEMONSTRATION · EPSG:32645</p>
+    <h1>One place. Two dates.</h1>
+    <p class="subtitle">Nepal · Sentinel-1D radar · 16 and 28 August 2026</p>
+  </header>
+  <aside class="notice" aria-label="Evidence limits">
+    <strong>Registration is unverified.</strong> Inspect brightness differences, not validated landscape change. Partial imagery; blank areas are exclusions. No event attribution.
+  </aside>
+  <section class="comparison" aria-label="Interactive imagery comparison">
+    <div class="toolbar" role="group" aria-label="Display mode">
+      <div class="modes">
+        <button id="mode-swipe" data-mode="swipe" aria-pressed="true" disabled>Swipe</button>
+        <button id="mode-before" data-mode="before" aria-pressed="false" disabled>16 Aug only</button>
+        <button id="mode-after" data-mode="after" aria-pressed="false" disabled>28 Aug only</button>
+        <button id="blink" aria-pressed="false" disabled>Blink dates</button>
+      </div>
+      <div class="modes"><button id="closer" disabled>Closer view</button><button id="fit" disabled>Overview</button></div>
+    </div>
+    <div class="map-wrap" id="map-wrap">
+      <div id="map" role="region" aria-label="Projected imagery; drag to pan, use zoom buttons or pinch to zoom"></div>
+      <div class="date-badge before-badge" id="before-label">BEFORE · 16 AUG 2026</div>
+      <div class="date-badge after-badge" id="after-label">AFTER · 28 AUG 2026</div>
+      <div class="divider" id="divider" aria-hidden="true">
+        <span class="drag-handle" id="drag-handle" title="Drag to compare"><span>↔</span></span>
+      </div>
+      <div class="scene-status" id="scene-status">Swipe: before on the left, after on the right</div>
+    </div>
+    <div class="slider-row">
+      <label for="split">Swipe boundary</label>
+      <input id="split" type="range" min="0" max="100" step="1" value="50" aria-describedby="slider-help" disabled>
+      <output id="split-value" for="split">50%</output>
+    </div>
+    <p class="help" id="slider-help">Drag the divider or use this slider. Arrow keys adjust it. Zoom in and blink dates to inspect one location.</p>
+    <div class="map-facts">
+      <div class="legend" aria-label="Shared display range from minus 30 to zero decibels"><span>VV gamma0 (dB)</span><span class="ramp"></span><span>−30 → 0</span></div>
+      <span>Grid north up · projected meters</span>
+      <span id="coordinates">EPSG:32645 · coordinates in meters</span>
+    </div>
+    <p id="ready-status" class="status" role="status">Loading two local scene renders…</p>
+    <div id="fallback" hidden>
+      <p>The interactive view is unavailable. The static qualified panel remains available below.</p>
+      <img src="fallback-panel.png" alt="Qualified partial before and after radar panel, with credits and unverified-registration warning">
+    </div>
+    <noscript><p>JavaScript is required for swiping. <a href="fallback-panel.png">Open the qualified static panel.</a></p></noscript>
+  </section>
+  <section class="notes" aria-label="Sources and limitations">
+    <p><strong>What you are seeing:</strong> ASF HyP3 RTC VV gamma0, the same −30 to 0 dB grayscale on both dates. No filters, computed difference or alignment correction. M1-SRC-002 / M1-SRC-005.</p>
+    <p>Common valid VV/VH area: <strong>54.6721%</strong> of the source-area AOI; <strong>75.7928%</strong> of the upper corridor. VV only is displayed. Both full-area QA dispositions remain <strong>defer</strong>. Blank areas exclude layover, shadow or NoData.</p>
+    <p>Source posting is 10 m, not a statement of accuracy. Zooming enlarges an existing render; it does not add detail. Scale and coordinates describe projected distance, not validated registration. Brightness differences may reflect geometry, moisture, scattering, speckle or misalignment.</p>
+    <p><a href="https://github.com/drwbkr1/nepal-2026-before-after-map/blob/main/docs/GIS_SWIPE_VIEWER.md">Viewer method and verification</a> · <a href="https://github.com/drwbkr1/nepal-2026-before-after-map/blob/main/docs/GIS_DEMONSTRATION.md">ArcGIS deliverables and evidence limits</a> · <a href="vendor/leaflet/LICENSE">Leaflet license</a></p>
+  </section>
+  <footer>
+    <p>ASF DAAC HyP3 2026. Contains modified Copernicus Sentinel data 2026, processed by ESA.</p>
+    <p>HyP3: <a href="https://doi.org/10.5281/zenodo.3962581">10.5281/zenodo.3962581</a> · GAMMA: <a href="https://doi.org/10.5281/zenodo.3962936">10.5281/zenodo.3962936</a>. Independent demonstration; no agency endorsement. No account, basemap, analytics or remote imagery requests.</p>
+  </footer>
+</main>
+</body>
+</html>

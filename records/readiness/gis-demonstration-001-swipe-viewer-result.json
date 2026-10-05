@@ -1,0 +1,196 @@
+{
+  "DEM_distributed": false,
+  "at_utc": "2026-10-05T20:12:22.292003+00:00",
+  "authority": "Existing owner-approved unofficial GIS demonstration and reversible presentation/public-code scope.",
+  "browser_qa": {
+    "browser_screenshot_saved_to_disk": false,
+    "method": "Actual Codex in-app browser interactions and rendered screenshots inspected; this is not a DOM-only correctness claim.",
+    "not_exercised": [
+      "actual touch/pinch hardware",
+      "OS reduced-motion preference change",
+      "direct file protocol opening",
+      "clean-machine or cross-browser validation"
+    ],
+    "passed": [
+      "both 3540x2880 images load with exact source IDs",
+      "swipe clipping at 0, 50, 67 and 100 percent",
+      "keyboard arrow and Home/End endpoints",
+      "native divider pointer drag",
+      "both date-only modes",
+      "opt-in 800 ms blink and stop",
+      "shared zoom and pan, identical image positions after pan",
+      "overview and closer view",
+      "URL-state restoration without changing document path",
+      "390x844 layout without horizontal overflow",
+      "missing-metadata static fallback on disposable fixture",
+      "manual date switching on boundary-mocked reduced-motion fixture"
+    ],
+    "reduced_motion_test_scope": "Only the matchMedia boundary was mocked in a disposable HTML fixture; the shipped renderer was unchanged.",
+    "registration_verified": false,
+    "screenshots_visually_inspected": true,
+    "test_fixtures_published": false
+  },
+  "code_sha256_git_LF": {
+    "docs/viewer/data.js": "d9bac34482860ad1d6e45cd2b07e7237a7140d434f8abe912fe0d57f37974008",
+    "docs/viewer/index.html": "79ece8354c3f094212cbe35b45a3f514d80de8945223cb2ada7f6670c1623cdd",
+    "docs/viewer/viewer.css": "a68157684e4f799a1fe5e7f9ff0eda9ad7673973ef94157dfd636fa5d8828c47",
+    "docs/viewer/viewer.js": "bc4ca3e8c958fc7b97c70b7c70cee92213edc947c81cf4211765caaad2454435",
+    "scripts/export_gis_swipe_renders_001.py": "f7d7b74533edc1bee9418e4570fb8b33e1070ba205b37d5e12ad1ae4e8c977bf",
+    "tests/test_stage_gis_demonstration_001.py": "227b315284e98dc4fe7ff32048ff7fab8f4d2ece797bb63cc375afd075cec928"
+  },
+  "combined_PNG_bytes": 12124225,
+  "common_valid_VV_VH_coverage": {
+    "VV_only_displayed": true,
+    "full_area_QA": "defer",
+    "source_area": 0.546721,
+    "upper_corridor": 0.757928
+  },
+  "coordinate_order": "Leaflet planar [northing,easting] in projected meters; no latitude/longitude or Web Mercator interpretation.",
+  "credit": "ASF DAAC HyP3 2026. Contains modified Copernicus Sentinel data 2026, processed by ESA.",
+  "decoded_RGBA_bytes": 81561600,
+  "dependency": {
+    "license": "BSD-2-Clause",
+    "name": "Leaflet",
+    "provenance_ref": "docs/viewer/vendor/leaflet/SOURCE.json",
+    "version": "1.9.4"
+  },
+  "display_range_db": [
+    -30,
+    0
+  ],
+  "guide_ref": "docs/GIS_SWIPE_VIEWER.md",
+  "local_HTTP_runtime_verified": true,
+  "mapped_change_or_attribution": false,
+  "native_export": {
+    "arcgis_version": "3.7.1",
+    "camera_unchanged": true,
+    "project_saved": false,
+    "receipt_sha256": "fc8a3afebff0e4013eae7dd331d2679ae32cf32062efca8d58f2ebad527a324e",
+    "source_project_sha256": "de4e50f2db7a3c0f308a9f11d122131756c85e0dd3a45954b466133374566af0",
+    "source_tree_unchanged": true,
+    "source_values_unchanged": true
+  },
+  "new_source_acquisition": false,
+  "original_M5_M6_complete": false,
+  "original_goal_complete": false,
+  "private_browser_QA_receipt_sha256": "2dc48eebff3b8350e3e13d966d9b78dc8cd6d90dbce389093466f698c475d2e3",
+  "private_correspondence_or_owner_context_published": false,
+  "provider_processing_DOIs": [
+    "10.5281/zenodo.3962581",
+    "10.5281/zenodo.3962936"
+  ],
+  "public_website_deployed": false,
+  "record_id": "NEPAL-GIS-DEMONSTRATION-001-SWIPE-VIEWER-RESULT",
+  "registration_verified": false,
+  "render_pixel_size_m": 11.722523445191,
+  "renders": [
+    {
+      "bounds_easting_northing": [
+        325165.27224028925,
+        3108005.4275006475,
+        366663.00523626537,
+        3141766.295022798
+      ],
+      "bytes": 6064960,
+      "date": "2026-08-16",
+      "file": "before.png",
+      "frame_camera_extent": [
+        325171.175,
+        3107999.6,
+        366668.825,
+        3141760.4
+      ],
+      "key": "before",
+      "native_world_extent_minus_camera_extent_m": [
+        -5.902759710734244,
+        5.8275006473995745,
+        -5.819763734645676,
+        5.8950227978639305
+      ],
+      "placement": "Native PNG world-file outer edges, unchanged; not a registration correction",
+      "sha256": "04450b6809e9c4e27efdaf4d27522b65607f6968dc5831b3c92ebce8f8e7b6cd",
+      "size": [
+        3540,
+        2880
+      ],
+      "source_id": "M1-SRC-002",
+      "world_coefficients": [
+        11.722523445191,
+        0.0,
+        0.0,
+        -11.722523445191037,
+        325171.1335020118,
+        3141760.433761075
+      ],
+      "world_file": "before.pgw",
+      "world_file_sha256": "0537eba3fb643ee6d9d9135a4ffcb7b3b393dc9c3993e484de74f1fad0a99348"
+    },
+    {
+      "bounds_easting_northing": [
+        325165.27224028925,
+        3108005.4275006475,
+        366663.00523626537,
+        3141766.295022798
+      ],
+      "bytes": 6059265,
+      "date": "2026-08-28",
+      "file": "after.png",
+      "frame_camera_extent": [
+        325171.175,
+        3107999.6,
+        366668.825,
+        3141760.4
+      ],
+      "key": "after",
+      "native_world_extent_minus_camera_extent_m": [
+        -5.902759710734244,
+        5.8275006473995745,
+        -5.819763734645676,
+        5.8950227978639305
+      ],
+      "placement": "Native PNG world-file outer edges, unchanged; not a registration correction",
+      "sha256": "af4b053d9e15d4474b35cd54114bd70f652c44e929727b8bf03f1b44dd5ee27e",
+      "size": [
+        3540,
+        2880
+      ],
+      "source_id": "M1-SRC-005",
+      "world_coefficients": [
+        11.722523445191,
+        0.0,
+        0.0,
+        -11.722523445191037,
+        325171.1335020118,
+        3141760.433761075
+      ],
+      "world_file": "after.pgw",
+      "world_file_sha256": "0537eba3fb643ee6d9d9135a4ffcb7b3b393dc9c3993e484de74f1fad0a99348"
+    }
+  ],
+  "retained_failed_export": {
+    "accepted_for_viewer": false,
+    "issue": "Development assertion compared native world-file outer edges with camera extent. Fresh candidate uses unmodified native placement and records extent deltas separately. No fitted correction or scientific registration change.",
+    "receipt_sha256": "8bbe24a6a9cfd9653b35e18333ed6c487619c682ffb3f445a11a784af2c58c51"
+  },
+  "schema_version": "1.0",
+  "scientific_admission": false,
+  "scientific_limits": "Radar brightness comparison only. Registration unverified; blank areas are exclusions. No computed change, feature boundary, attribution or accuracy claim.",
+  "scientific_predicates_changed": false,
+  "source_dates": [
+    "2026-08-16",
+    "2026-08-28"
+  ],
+  "source_ids": [
+    "M1-SRC-002",
+    "M1-SRC-005"
+  ],
+  "source_posting_m": 10,
+  "status": "pass_local_projected_visual_comparison",
+  "tests": {
+    "installed_runtime_focused_passed": 16,
+    "javascript_syntax_check_passed": true,
+    "portable_focused_passed": 16
+  },
+  "viewer_ref": "docs/viewer/index.html",
+  "wkid": 32645
+}

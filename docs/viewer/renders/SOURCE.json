@@ -1,0 +1,96 @@
+{
+  "use": "Qualified display-only imagery; no validated change, registration or attribution.",
+  "wkid": 32645,
+  "credits": "ASF DAAC HyP3 2026. Contains modified Copernicus Sentinel data 2026, processed by ESA.",
+  "provider_processing_DOIs": [
+    "10.5281/zenodo.3962581",
+    "10.5281/zenodo.3962936"
+  ],
+  "export_receipt_sha256": "fc8a3afebff0e4013eae7dd331d2679ae32cf32062efca8d58f2ebad527a324e",
+  "native_camera_extent_difference_retained": true,
+  "placement": "Unmodified native PNG world files; no fit or correction",
+  "renders": [
+    {
+      "key": "before",
+      "source_id": "M1-SRC-002",
+      "date": "2026-08-16",
+      "file": "before.png",
+      "bytes": 6064960,
+      "sha256": "04450b6809e9c4e27efdaf4d27522b65607f6968dc5831b3c92ebce8f8e7b6cd",
+      "size": [
+        3540,
+        2880
+      ],
+      "world_file": "before.pgw",
+      "world_file_sha256": "0537eba3fb643ee6d9d9135a4ffcb7b3b393dc9c3993e484de74f1fad0a99348",
+      "world_coefficients": [
+        11.722523445191,
+        0.0,
+        0.0,
+        -11.722523445191037,
+        325171.1335020118,
+        3141760.433761075
+      ],
+      "bounds_easting_northing": [
+        325165.27224028925,
+        3108005.4275006475,
+        366663.00523626537,
+        3141766.295022798
+      ],
+      "frame_camera_extent": [
+        325171.175,
+        3107999.6,
+        366668.825,
+        3141760.4
+      ],
+      "native_world_extent_minus_camera_extent_m": [
+        -5.902759710734244,
+        5.8275006473995745,
+        -5.819763734645676,
+        5.8950227978639305
+      ],
+      "placement": "Native PNG world-file outer edges, unchanged; not a registration correction"
+    },
+    {
+      "key": "after",
+      "source_id": "M1-SRC-005",
+      "date": "2026-08-28",
+      "file": "after.png",
+      "bytes": 6059265,
+      "sha256": "af4b053d9e15d4474b35cd54114bd70f652c44e929727b8bf03f1b44dd5ee27e",
+      "size": [
+        3540,
+        2880
+      ],
+      "world_file": "after.pgw",
+      "world_file_sha256": "0537eba3fb643ee6d9d9135a4ffcb7b3b393dc9c3993e484de74f1fad0a99348",
+      "world_coefficients": [
+        11.722523445191,
+        0.0,
+        0.0,
+        -11.722523445191037,
+        325171.1335020118,
+        3141760.433761075
+      ],
+      "bounds_easting_northing": [
+        325165.27224028925,
+        3108005.4275006475,
+        366663.00523626537,
+        3141766.295022798
+      ],
+      "frame_camera_extent": [
+        325171.175,
+        3107999.6,
+        366668.825,
+        3141760.4
+      ],
+      "native_world_extent_minus_camera_extent_m": [
+        -5.902759710734244,
+        5.8275006473995745,
+        -5.819763734645676,
+        5.8950227978639305
+      ],
+      "placement": "Native PNG world-file outer edges, unchanged; not a registration correction"
+    }
+  ]
+}

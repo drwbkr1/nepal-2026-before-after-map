@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from stage_gis_demonstration_001 import digest, preflight
 from arcgis_demo_roundtrip import compare, has_data_source, run
 from refine_gis_demonstration_layout_001 import camera_signature, require_same_view
+from export_gis_swipe_renders_001 import world_bounds
 
 
 class StagePreflight(unittest.TestCase):
@@ -88,6 +89,21 @@ class RoundTripComparison(unittest.TestCase):
 
 
 class CartographicValidation(unittest.TestCase):
+    def test_world_file_centers_become_projected_outer_edges(self):
+        self.assertEqual(world_bounds([10, 0, 0, -10, 105, 195], 3, 2), [100, 180, 130, 200])
+
+    def test_rotated_world_file_is_not_silently_relocated(self):
+        with self.assertRaisesRegex(ValueError, 'north-up'):
+            world_bounds([10, 1, 0, -10, 105, 195], 3, 2)
+
+    def test_nonfinite_world_file_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, 'Invalid'):
+            world_bounds([10, 0, 0, -10, float('nan'), 195], 3, 2)
+
+    def test_empty_render_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, 'Invalid'):
+            world_bounds([10, 0, 0, -10, 105, 195], 0, 2)
+
     def test_scale_change_is_not_hidden_as_presentation_only(self):
         with self.assertRaisesRegex(ValueError, 'viewport'):
             require_same_view({'before': {'scale': 1000}}, {'before': {'scale': 2000}})

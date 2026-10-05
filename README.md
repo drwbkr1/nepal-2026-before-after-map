@@ -4,6 +4,8 @@ An independent GIS project using satellite imagery around the 26 August 2026 Nep
 
 ## Available demonstration — 5 October 2026
 
+**Interactive inspection:** the [local Leaflet swipe viewer](docs/viewer/index.html) uses higher-resolution renders with synchronized zoom/pan, a draggable boundary, date-only modes and optional blinking. Run it through the local-server instructions; GitHub's file view does not execute HTML. See [viewer instructions](docs/GIS_SWIPE_VIEWER.md). This remains a visual comparison with unverified registration, not a change detector.
+
 ![Unregistered partial Sentinel-1D imagery demonstration with native cartographic cues](docs/assets/gis-demonstration-cartography-001.png)
 
 The panel displays **16 and 28 August 2026 Sentinel-1D ASF HyP3 RTC VV gamma0 imagery**, in **WGS 84 / UTM zone 45N (EPSG:32645)**. It uses a shared -30 to 0 dB display scale. Blank areas are exclusions, not evidence of no landscape change.

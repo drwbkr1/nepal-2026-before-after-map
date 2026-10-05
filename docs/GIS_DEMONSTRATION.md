@@ -6,6 +6,8 @@ This is an independent, unofficial GIS demonstration. It shows existing satellit
 
 ## What the panel contains
 
+For closer inspection, the [Leaflet swipe viewer](viewer/index.html) presents higher-resolution renders in one synchronized projected viewport, with a draggable boundary and optional blinking. [Usage and method limits](GIS_SWIPE_VIEWER.md) explain local opening, native world-file placement and verification. It does not compute a difference or correct registration; the native ArcGIS package remains the editable GIS/export deliverable.
+
 | Item | Before | After |
 |---|---|---|
 | Acquisition | 16 August 2026 | 28 August 2026 |
