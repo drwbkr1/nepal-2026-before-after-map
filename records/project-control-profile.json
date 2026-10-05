@@ -806,9 +806,9 @@
     "display_bundle_result_ref": "records/readiness/gis-demonstration-001-display-bundle-result.json",
     "display_bundle_available": true,
     "display_bundle_scope": "Two unchanged full-extent PNG display layers, native PGW placement, EPSG:32645 sidecars, dates and credits; not quantitative data or current-view export.",
-    "viewer_public_commit": "60f3e84ddf836d43e7e2e514735331533757fe07",
-    "viewer_CI_run_id": 37368462707,
-    "viewer_CI_status": "terminal_hosted_runner_not_acquired_no_test_steps",
+    "viewer_public_commit": "d843e0ddc9aa36295cc0e0b2739676e7f7c479ed",
+    "viewer_CI_run_id": 37377617383,
+    "viewer_CI_status": "completed_success_for_exact_implementation_commit",
     "routing_CI_run_id": 37369573281,
     "routing_CI_status": "terminal_hosted_runner_not_acquired_no_test_steps",
     "presentation_label": "Unverified GIS experiment. Radar brightness only; no event attribution.",
@@ -825,6 +825,12 @@
     "brightness_difference_guide_ref": "docs/GIS_BRIGHTNESS_DIFFERENCE.md",
     "brightness_difference_result_ref": "records/readiness/gis-demonstration-001-brightness-difference-result.json",
     "brightness_difference_available": true,
-    "brightness_difference_formula": "after_vv_db - before_vv_db"
+    "brightness_difference_formula": "after_vv_db - before_vv_db",
+    "original_swipe_publication": {
+      "commit": "60f3e84ddf836d43e7e2e514735331533757fe07",
+      "CI_run_id": 37368462707,
+      "CI_status": "terminal_hosted_runner_not_acquired_no_test_steps"
+    },
+    "viewer_public_commit_scope": "Brightness-difference implementation and assets; later evidence-only commits do not change it"
   }
 }

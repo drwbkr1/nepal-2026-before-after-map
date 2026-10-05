@@ -209,5 +209,17 @@
   ],
   "numeric_files_and_packages_outside_git": true,
   "public_CI_role": "diagnostic_not_release_gate",
-  "credits": "ASF DAAC HyP3 2026. Contains modified Copernicus Sentinel data 2026, processed by ESA."
+  "credits": "ASF DAAC HyP3 2026. Contains modified Copernicus Sentinel data 2026, processed by ESA.",
+  "publication": {
+    "implementation_commit": "d843e0ddc9aa36295cc0e0b2739676e7f7c479ed",
+    "remote_default_branch_verified": true,
+    "public_CI": {
+      "run_id": 37377617383,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "d843e0ddc9aa36295cc0e0b2739676e7f7c479ed",
+      "role": "diagnostic_not_scientific_validation",
+      "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/37377617383"
+    }
+  }
 }
