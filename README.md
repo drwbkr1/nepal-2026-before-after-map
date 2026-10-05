@@ -4,16 +4,17 @@ An independent GIS project using satellite imagery around the 26 August 2026 Nep
 
 ## Available demonstration — 5 October 2026
 
-![Unregistered partial Sentinel-1D imagery demonstration](docs/assets/gis-demonstration-001.png)
+![Unregistered partial Sentinel-1D imagery demonstration with native cartographic cues](docs/assets/gis-demonstration-cartography-001.png)
 
 The panel displays **16 and 28 August 2026 Sentinel-1D ASF HyP3 RTC VV gamma0 imagery**, in **WGS 84 / UTM zone 45N (EPSG:32645)**. It uses a shared -30 to 0 dB display scale. Blank areas are exclusions, not evidence of no landscape change.
 
 - An owner-local APRX, two display GeoTIFFs, source-manifest table, PNG/PDF exports and ZIP handoff have passed same-machine copied-folder and extracted-ZIP reopen/export tests.
 - The original display rasters are unchanged, and the ZIP exports match the working layout exactly.
 - A fifth PPKX test, using internal packaging with strictly local inputs, preserved the original GeoTIFF bytes and passed fresh-process reopen/render checks at two extraction locations. Four earlier PPKX failures remain retained evidence.
+- The latest fresh-copy layout adds linked true-north arrows, kilometer scale bars and a shared native legend. Its PPKX passes the same checks at two extraction locations; map viewports and imagery are unchanged. A failed cartographic preview remains retained.
 - Registration is unverified; source-area and upper-corridor common-valid coverage remain **54.6721%** and **75.7928%**. Both full-area QA dispositions remain `defer`.
 
-Read the [demonstration guide](docs/GIS_DEMONSTRATION.md), [initial ZIP result](records/readiness/gis-demonstration-001-result.json) and [later PPKX result](records/readiness/gis-demonstration-001-ppkx-preserved-format-result.json). Large GIS files stay outside Git. Source archives, DEM rasters, credentials and private correspondence are not distributed here.
+Read the [demonstration guide](docs/GIS_DEMONSTRATION.md), [initial ZIP result](records/readiness/gis-demonstration-001-result.json), [preserved-format PPKX result](records/readiness/gis-demonstration-001-ppkx-preserved-format-result.json) and [cartographic result](records/readiness/gis-demonstration-001-cartography-result.json). Large GIS files stay outside Git. Source archives, DEM rasters, credentials and private correspondence are not distributed here.
 
 Image credit: **ASF DAAC HyP3 2026. Contains modified Copernicus Sentinel data 2026, processed by ESA.** HyP3 processing environment: [10.5281/zenodo.3962581](https://doi.org/10.5281/zenodo.3962581); GAMMA plugin: [10.5281/zenodo.3962936](https://doi.org/10.5281/zenodo.3962936). The demonstration guide records the intended-use rights review. Public visibility does not relicense third-party material or imply agency endorsement.
 

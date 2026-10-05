@@ -1,0 +1,140 @@
+{
+  "DEM_distributed": false,
+  "PDF_export": {
+    "bytes": 1007779,
+    "page_count": 1,
+    "page_size_points": [
+      936,
+      612
+    ],
+    "public_PDF_uploaded": false,
+    "sha256": "2c2acf5d5b634c75984ae2d9b3ecee40cc15c511e8db571530e912c6743d9010"
+  },
+  "arcgis_version": "3.7.1",
+  "at_utc": "2026-10-05T19:27:25.609050+00:00",
+  "authority": "Existing owner-approved GIS demonstration, routine reversible presentation repairs and sanitized publication.",
+  "clean_machine_or_clean_profile_tested": false,
+  "code_sha256": {
+    "scripts/arcgis_demo_roundtrip.py": "fc048aec79eb32f92545e975a9f1068e1e17c8b1343268f2bf30107d77fc8cdf",
+    "scripts/refine_gis_demonstration_layout_001.py": "c0a814ef6636578d190034c60a118aabe7535edbb87d3e10bc79d7bc5293e84a",
+    "tests/test_stage_gis_demonstration_001.py": "2aa59584111b9275f161422f76bf41a2815e7d1183461da0dc8d1ce9d7b7c1cf"
+  },
+  "cross_version_tested": false,
+  "exit_condition_delta": "Native map-linked navigation cues and a shared VV legend survive PPKX extraction and fresh-process reopen at two locations; original imagery panels and viewports are unchanged.",
+  "goal_complete": false,
+  "input_result": {
+    "mutated": false,
+    "ref": "records/readiness/gis-demonstration-001-ppkx-preserved-format-result.json",
+    "sha256": "226ee4ced2366dc3734ce0d3eca87da2ba1bde6ef59ca457ecc80e304c0550b0"
+  },
+  "interpretation_boundary": "Within-source packaging and presentation equality is not cross-date scientific comparison or proof of a historical radar-processing root cause.",
+  "mapped_change_or_event_attribution": false,
+  "new_source_acquisition": false,
+  "original_M5_M6_complete": false,
+  "package": {
+    "bytes": 41799678,
+    "filename": "delivery.ppkx",
+    "public_package_uploaded": false,
+    "sha256": "f23dcb0e3cf6710eb32b38e0e87076e60e4f975f4699b8a594ea24d53188d63c",
+    "sharing_internal": "INTERNAL"
+  },
+  "presentation": {
+    "display_range_db": [
+      -30,
+      0
+    ],
+    "legend_scope": "Same display range for both dates; displayed pixels only.",
+    "map_linked_kilometer_scale_bars": 2,
+    "map_linked_true_north_arrows": 2,
+    "native_shared_VV_legend": 1,
+    "page_inches": [
+      13,
+      8.5
+    ],
+    "scale_scope": "Projected distance; not positional accuracy.",
+    "scientific_limitations_and_credits_visible": true,
+    "visible_scale_labels_km": [
+      0,
+      2.5,
+      5,
+      10
+    ]
+  },
+  "private_correspondence_or_owner_context_published": false,
+  "processing_or_source_values_changed": false,
+  "public_preview": {
+    "RGB_pixel_sha256": "d9f92550e3d7b1d4612cf277606984da2dd985fbe1790b994f08c75fbf3cb1d6",
+    "bytes": 820469,
+    "earlier_preview_retained_unchanged": true,
+    "ref": "docs/assets/gis-demonstration-cartography-001.png",
+    "sha256": "5787827db942b773baf25e4d38a1de670e31880165eb4ad3583ab5d262e029e3",
+    "size": [
+      1560,
+      1020
+    ]
+  },
+  "record_id": "NEPAL-GIS-DEMONSTRATION-001-CARTOGRAPHY-RESULT",
+  "registration_verified": false,
+  "retained_presentation_failures": [
+    {
+      "accepted_for_handoff": false,
+      "issue": "Native unit and legend metadata did not serialize as intended; visible labels were invalid. Corrected on fresh copies.",
+      "kind": "failed_native_cartographic_preview",
+      "prototype_code_hash_captured": false,
+      "receipt_sha256": "201a9fa6cd62c03085162923a4216fcf6f792724a56f68932010b48de2d33209"
+    },
+    {
+      "extraction_invoked": false,
+      "kind": "timestamp_generation_failure_before_relocation_extraction",
+      "receipt_sha256": "3a332abc17afe55e7057a40927e82760cc8ca1dad5d4702627cdef29669be213",
+      "recovered_in_fresh_output": true
+    },
+    {
+      "PDF_modified": false,
+      "existing_native_executable_render_passed": true,
+      "kind": "bundled_PDF_renderer_wrapper_failure",
+      "receipt_sha256": "a6808bcf40cea086ac57022cafb4d99bf78d9870c4e90eeb88d39c8c4c88529e"
+    }
+  ],
+  "runtime_evidence_sha256": {
+    "cartography-003/cartography-receipt.json": "e1837a976fa07e25deb0063cd2ed8e004ede23df9592fb44ffd4e62895fbff81",
+    "cartography-pdf-review-001/pdf-review-receipt.json": "a6808bcf40cea086ac57022cafb4d99bf78d9870c4e90eeb88d39c8c4c88529e",
+    "ppkx-cartography-relocation-002/relocation-receipt.json": "1c7a3d5949960a6e3c479bb14799b91f148328442cb9020dac88600afcfcaff5",
+    "ppkx-cartography-relocation-002/reopen/snapshot.json": "2f5c2f46af413e5a7951947c9d8cc0aee13dc9008712721c15c9fff4285188e7",
+    "roundtrip-007-cartography/after/snapshot.json": "2f5c2f46af413e5a7951947c9d8cc0aee13dc9008712721c15c9fff4285188e7",
+    "roundtrip-007-cartography/receipt.json": "eea4581f6e4fb3f8404703c7553da657a4f02e8410ab13548f44cc0089d5ca16",
+    "roundtrip-007-cartography/visual-review-passed.json": "54a7495b1911b5f1cb2c97e06e097736af2b527674c1fa7f95129234452f8c27"
+  },
+  "schema_version": "1.0",
+  "scientific_admission": false,
+  "scientific_predicates_changed": false,
+  "source_ids": [
+    "M1-SRC-002",
+    "M1-SRC-005"
+  ],
+  "status": "pass_same_machine_native_cartography_demonstration",
+  "tests": {
+    "installed_ArcGIS_focused_passed": 12,
+    "portable_focused_passed": 12
+  },
+  "validation": {
+    "PDF_independently_rendered_and_visually_reviewed": true,
+    "PDF_to_PNG_pixel_equality_claimed": false,
+    "PNG_rendered_pixels_equal": true,
+    "PNG_visually_reviewed": true,
+    "both_imagery_regions_pixel_identical_to_original_preview": true,
+    "data_item_count": 3,
+    "fresh_process_reopen_at_two_extraction_locations": true,
+    "full_cell_and_georeference_equal": true,
+    "layout_count": 1,
+    "map_count": 2,
+    "map_viewports_unchanged": true,
+    "native_cartographic_metadata_equal": true,
+    "operational_sources_and_defaults_inside_extraction": true,
+    "original_TIFF_bytes_equal": true,
+    "original_input_and_staged_stable_files_unchanged": true,
+    "source_table_equal": true,
+    "source_table_rows": 2
+  },
+  "wkid": 32645
+}

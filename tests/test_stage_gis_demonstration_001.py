@@ -8,6 +8,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from stage_gis_demonstration_001 import digest, preflight
 from arcgis_demo_roundtrip import compare, has_data_source, run
+from refine_gis_demonstration_layout_001 import camera_signature, require_same_view
 
 
 class StagePreflight(unittest.TestCase):
@@ -77,6 +78,27 @@ class RoundTripComparison(unittest.TestCase):
         before = {"maps": [], "layouts": [{"pixels": "before"}]}
         after = {"maps": [], "layouts": [{"pixels": "after"}]}
         self.assertFalse(compare(before, after)["layout_pixels_equal"])
+
+    def test_changed_layout_metadata_is_distinct_from_pixel_change(self):
+        before = {'maps': [], 'layouts': [{'pixels': 'same', 'frame': 'before'}]}
+        after = {'maps': [], 'layouts': [{'pixels': 'same', 'frame': 'wrong frame'}]}
+        result = compare(before, after)
+        self.assertTrue(result['layout_pixels_equal'])
+        self.assertFalse(result['layout_metadata_equal'])
+
+
+class CartographicValidation(unittest.TestCase):
+    def test_scale_change_is_not_hidden_as_presentation_only(self):
+        with self.assertRaisesRegex(ValueError, 'viewport'):
+            require_same_view({'before': {'scale': 1000}}, {'before': {'scale': 2000}})
+
+    def test_duplicate_frame_maps_are_rejected(self):
+        extent = SimpleNamespace(XMin=1, YMin=2, XMax=3, YMax=4)
+        camera = SimpleNamespace(scale=1000, heading=0, X=2, Y=3, getExtent=lambda: extent)
+        frame = SimpleNamespace(map=SimpleNamespace(name='same map'), camera=camera,
+                                elementWidth=2, elementHeight=3)
+        with self.assertRaisesRegex(ValueError, 'Duplicate'):
+            camera_signature([frame, frame])
 
 
 if __name__ == "__main__":

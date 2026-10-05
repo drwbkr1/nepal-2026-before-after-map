@@ -2,7 +2,7 @@
 
 This is an independent, unofficial GIS demonstration. It shows existing satellite imagery and an ArcGIS workflow; it does **not** identify validated landscape change or attribute a feature to the 26 August 2026 event. It is not an operational hazard map.
 
-![Partial imagery demonstration with unverified registration](assets/gis-demonstration-001.png)
+![Partial imagery demonstration with unverified registration and native cartographic cues](assets/gis-demonstration-cartography-001.png)
 
 ## What the panel contains
 
@@ -43,6 +43,14 @@ The owner-local PPKX is **41,797,549 bytes**, SHA-256 `044af3651f7505cfb02fdb780
 
 Internal packaging can leave network resources referenced, as described in the [official Package Project documentation](https://doc.esri.com/en/arcgis-pro/latest/tool-reference/data-management/package-project.html). This verifier rejects network, service and out-of-root operational sources before packaging and after extraction. The passing result must not be generalized to projects with such sources. See the [additive PPKX result](../records/readiness/gis-demonstration-001-ppkx-preserved-format-result.json).
 
+### Cartographic result on 5 October 2026
+
+A separate fresh copy adds two native, map-linked true-north arrows, two kilometer scale bars, and a native shared VV legend. The bars show 0, 2.5, 5 and 10 km; they express projected distance, not positional accuracy. The legend labels match the existing fixed -30 to 0 dB display range. Both frame extents, scales and rendered imagery regions are unchanged. The page is now 13 by 8.5 inches; dates, coverage limitations and credits remain visible.
+
+The first cartographic preview failed visual review because its native unit/legend settings did not serialize as intended. It remains a failed, retained preview. Corrected previews pass visual review. A timestamp-generation failure before a separate relocation extraction is also retained; no extraction ran in that failed reservation. These presentation corrections do not change pixels, masks, scientific predicates or prior evidence outcomes.
+
+The latest owner-local PPKX is **41,799,678 bytes**, SHA-256 `f23dcb0e3cf6710eb32b38e0e87076e60e4f975f4699b8a594ea24d53188d63c`. It preserves both exact original display TIFFs. At two extraction locations, fresh-process tests pass full-cell/georeference/source-table equality, native cartographic metadata equality and exact rendered-layout equality. This is still a same-machine result, not independent-environment or scientific acceptance. The earlier preview and result records remain unchanged. See the [additive cartographic result](../records/readiness/gis-demonstration-001-cartography-result.json).
+
 ## Reproduce with your local verified inputs
 
 ArcGIS Pro 3.7.1 was used. No cloud basemap, account, new download or installation is needed for these steps. The staging script checks the exact accepted hashes before it writes a new directory. Inputs must be the previously verified local panel rasters and repaired project, not substitute scenes.
@@ -56,6 +64,24 @@ ArcGIS Pro 3.7.1 was used. No cloud basemap, account, new download or installati
   --project "$NewStagingFolder/Nepal_GIS_Demonstration.aprx" `
   --source-root $NewStagingFolder --output $NewRoundtripFolder --sharing INTERNAL
 ```
+
+To add the native cartographic cues, refine a fresh staged copy before packaging:
+
+```powershell
+$StagedProject = Join-Path $NewStagingFolder 'Nepal_GIS_Demonstration.aprx'
+$StagedHash = (Get-FileHash -LiteralPath $StagedProject -Algorithm SHA256).Hash.ToLowerInvariant()
+
+& $ArcGISPython scripts/refine_gis_demonstration_layout_001.py `
+  --project $StagedProject --source-root $NewStagingFolder `
+  --output $NewCartographyFolder --project-sha256 $StagedHash
+
+& $ArcGISPython scripts/arcgis_demo_roundtrip.py run `
+  --project "$NewCartographyFolder/Nepal_GIS_Demonstration.aprx" `
+  --source-root $NewCartographyFolder --output $NewCartographyRoundtripFolder `
+  --sharing INTERNAL
+```
+
+The refinement checks the two exact TIFF identities and rejects changed viewports or overflowing text/legend elements. It copies the project into a disjoint directory, changes only layout and legend presentation metadata, and leaves the source tree unchanged. The verifier separately compares layout metadata and rendered pixels so one cannot conceal a mismatch in the other.
 
 Use new output folders. Preserve failed receipts; do not overwrite an existing attempt. Inspect the exported layout visually before sharing it. The staging script gives the project local writable defaults and includes two provenance rows in `SourceManifest`. The round-trip verifier rejects broken, remote or out-of-tree operational sources, checks the packaged structure and rendered pixels, and records file-identity changes.
 

@@ -79,6 +79,34 @@ def has_data_source(item):
     return bool(supports('DATASOURCE')) if supports else hasattr(item, 'dataSource')
 
 
+def layout_metadata(layout):
+    frames = []
+    for frame in layout.listElements('MAPFRAME_ELEMENT'):
+        extent = frame.camera.getExtent()
+        frames.append({'name': frame.name, 'map': frame.map.name,
+            'scale': frame.camera.scale, 'heading': frame.camera.heading,
+            'extent': [extent.XMin, extent.YMin, extent.XMax, extent.YMax],
+            'position': [frame.elementPositionX, frame.elementPositionY],
+            'size': [frame.elementWidth, frame.elementHeight]})
+    surrounds = []
+    for item in layout.listElements():
+        if item.type not in {'MAPSURROUND_ELEMENT', 'LEGEND_ELEMENT'}:
+            continue
+        definition = item.getDefinition('V3')
+        info = {'name': item.name, 'type': item.type, 'cim_type': type(definition).__name__,
+            'frame': item.mapFrame.name, 'map': item.mapFrame.map.name,
+            'position': [item.elementPositionX, item.elementPositionY],
+            'size': [item.elementWidth, item.elementHeight], 'visible': item.visible}
+        for key in ['northType', 'calibrationAngle', 'units', 'unitLabel', 'division',
+                    'divisions', 'divisionsBeforeZero', 'fittingStrategy', 'title', 'showTitle']:
+            if hasattr(definition, key):
+                info[key] = getattr(definition, key)
+        surrounds.append(info)
+    return {'page_units': layout.pageUnits, 'page_size': [layout.pageWidth, layout.pageHeight],
+            'frame_viewports': sorted(frames, key=lambda x: x['name']),
+            'cartographic_elements': sorted(surrounds, key=lambda x: x['name'])}
+
+
 def snapshot(project_path, root, exports):
     import arcpy
     arcpy.SetLogHistory(False)
@@ -155,7 +183,8 @@ def snapshot(project_path, root, exports):
         layout.exportToPDF(str(pdf), resolution=120)
         if not pdf.is_file() or pdf.stat().st_size == 0:
             raise ValueError('Missing PDF export')
-        renders.append({'name': layout.name, 'png': png.name, 'pdf': pdf.name, 'pixels': pixel_digest(png)})
+        renders.append({'name': layout.name, 'png': png.name, 'pdf': pdf.name,
+                        'pixels': pixel_digest(png), **layout_metadata(layout)})
     result = {'maps': maps, 'layouts': renders, 'item_count': item_count}
     del project
     gc.collect()
@@ -165,7 +194,10 @@ def snapshot(project_path, root, exports):
 
 def compare(before, after):
     return {'structure_equal': before['maps'] == after['maps'],
-            'layout_pixels_equal': before['layouts'] == after['layouts']}
+            'layout_metadata_equal': [{k: v for k, v in x.items() if k != 'pixels'} for x in before['layouts']]
+                == [{k: v for k, v in x.items() if k != 'pixels'} for x in after['layouts']],
+            'layout_pixels_equal': [x['pixels'] for x in before['layouts']]
+                == [x['pixels'] for x in after['layouts']]}
 
 
 def run(project, root, output, sharing_internal='EXTERNAL'):
