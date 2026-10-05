@@ -836,6 +836,10 @@
     "atlas_result_ref": "records/readiness/gis-demonstration-001-atlas-result.json",
     "atlas_package_sha256": "6f8ff248d33b5c1bbefd68451d3fff74cc387b1ec0a464cf5fc2dd3f3ad3537a",
     "atlas_bundle_sha256": "8dfc7add1d00231a36000fbff208402ff6b6db6443dbcc492efad8f7ce38b89a",
-    "atlas_layout_count": 5
+    "atlas_layout_count": 5,
+    "atlas_public_commit": "e12079492a78ad01828bbb9a99114d3f8d6d59f4",
+    "atlas_CI_run_id": 37381002332,
+    "atlas_CI_status": "completed_success_for_exact_implementation_commit",
+    "atlas_post_ci_ref": "records/readiness/gis-demonstration-001-atlas-post-ci.json"
   }
 }

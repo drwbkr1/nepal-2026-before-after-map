@@ -1,0 +1,23 @@
+{
+  "record_id": "GIS-DEMONSTRATION-001-ATLAS-POST-CI",
+  "date": "2026-10-05",
+  "implementation_commit": "e12079492a78ad01828bbb9a99114d3f8d6d59f4",
+  "public_CI": {
+    "run_id": 37381002332,
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "e12079492a78ad01828bbb9a99114d3f8d6d59f4",
+    "required_files": 1474,
+    "tests": 1232,
+    "intentional_skips": 20,
+    "url": "https://github.com/drwbkr1/nepal-2026-before-after-map/actions/runs/37381002332"
+  },
+  "result_ref": "records/readiness/gis-demonstration-001-atlas-result.json",
+  "presentation_available": true,
+  "CI_role": "Engineering diagnostic, not scientific verification or presentation-release gate",
+  "numeric_GIS_bundle_public": false,
+  "registration_verified": false,
+  "original_M4_M5_M6_complete": false,
+  "goal_complete": false,
+  "retained_generic_failed_receipt": "roundtrip-001 strict field-order result remains failed; separate exact named-field/geometry verification passes"
+}
