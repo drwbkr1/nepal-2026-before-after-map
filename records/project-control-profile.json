@@ -849,6 +849,10 @@
     "evidence_catalog_public_commit": "1fe2c3bcf0eca62cfd5c1e4c69ccb4f5fddd577e",
     "evidence_catalog_CI_run_id": 37383688576,
     "evidence_catalog_CI_status": "completed_success_for_exact_implementation_commit",
-    "evidence_catalog_post_ci_ref": "records/readiness/gis-demonstration-001-evidence-catalog-post-ci.json"
+    "evidence_catalog_post_ci_ref": "records/readiness/gis-demonstration-001-evidence-catalog-post-ci.json",
+    "atlas_replay_guide_ref": "docs/GIS_ATLAS_REPLAY.md",
+    "atlas_replay_result_ref": "records/readiness/gis-demonstration-001-atlas-replay-result.json",
+    "atlas_replay_input_capsule_sha256": "e922acd6baee241c86f5b9040a5822a92590e25f62c8814e4bd4325de8223d12",
+    "atlas_replay_status": "same_machine_clean_code_relocated_input_pass; retained historical full-suite error; no scientific admission"
   }
 }

@@ -71,6 +71,8 @@ Use the exact existing brightness-difference project and four TIFFs described in
 
 Use new output directories and retain earlier results. The complete ZIP includes a README and per-file SHA-256 manifest; its extraction is checked against the bundle's file identities. This packaging is for the existing unverified experiment, not a scientific M6 acceptance run.
 
+For a complete PowerShell recipe using a clean published-code checkout and the sealed owner-local input capsule, see [Replay the existing atlas](GIS_ATLAS_REPLAY.md). That same-machine replay reproduced all five map images exactly with relocated inputs and preserved raster bytes. The original viewing bundle remains unchanged.
+
 ## Credits
 
 **ASF DAAC HyP3 2026. Contains modified Copernicus Sentinel data 2026, processed by ESA.** HyP3: [doi:10.5281/zenodo.3962581](https://doi.org/10.5281/zenodo.3962581). GAMMA: [doi:10.5281/zenodo.3962936](https://doi.org/10.5281/zenodo.3962936). Independent demonstration; no endorsement. The unchanged-source rights review is recorded in [the demonstration guide](GIS_DEMONSTRATION.md).

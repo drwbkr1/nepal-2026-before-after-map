@@ -1,0 +1,107 @@
+{
+  "record_id": "GIS-DEMONSTRATION-001-CLEAN-CODE-RELOCATED-INPUT-REPLAY-RESULT",
+  "date": "2026-10-06",
+  "status": "pass_same_machine_atlas_replay",
+  "tested_public_code_commit": "6865f939c45c91a232404ad4c3b0a221ee0388b4",
+  "clean_checkout_complete_before_final_build": true,
+  "source_input_capsule": {
+    "archive_bytes": 63991718,
+    "archive_sha256": "e922acd6baee241c86f5b9040a5822a92590e25f62c8814e4bd4325de8223d12",
+    "file_count": 67,
+    "crc_pass": true,
+    "all_file_hashes_match": true,
+    "same_source_input_files": 65,
+    "no_new_source_or_scientific_claim": true
+  },
+  "input_project_sha256": "f9629911a0041980f25164d1514de20a4f18459da68a5694da11ca5110a68b39",
+  "original_and_capsule_input_files_unchanged": 65,
+  "map_rebuild": {
+    "status": "passed_unverified_atlas_build",
+    "arcgis_version": "3.7.1",
+    "maps": 7,
+    "principal_layouts": [
+      "regional_overview",
+      "source_area_comparison",
+      "upper_corridor_comparison",
+      "evidence_map",
+      "limitations_map"
+    ],
+    "all_five_rendered_maps_pixel_identical_to_original_atlas": true,
+    "checks": {
+      "principal_maps": true,
+      "map_count": true,
+      "layout_count": true,
+      "layer_files": true,
+      "gpkg_counts": true,
+      "view_extents": true,
+      "all_five_map_pixels_equal": true,
+      "StudyAreas_rows_exact": true,
+      "DisplayedSources_rows_exact": true,
+      "ExperimentMethod_rows_exact": true,
+      "all_65_capsule_input_files_unchanged": true,
+      "original_65_input_files_unchanged": true
+    },
+    "study_geometry_and_named_metadata_rows_exact": true,
+    "new_raster_calculation": false
+  },
+  "package_comparison": {
+    "status": "passed_atlas_package_semantic_verification",
+    "retained_strict_receipt_status": "failed",
+    "checks": {
+      "structure_equal": true,
+      "layout_metadata_equal": true,
+      "layout_pixels_equal": true,
+      "study_geometry_and_named_attributes_equal": true,
+      "study_crs_equal": true,
+      "packaged_tiffs_exact": true
+    },
+    "package_sha256": "c8d7d5b57195097f5dddd3410d13a90cc76b362a9f653d011d3a8bf53f3980b4"
+  },
+  "replay_bundle": {
+    "archive_bytes": 133115481,
+    "archive_sha256": "15de38a697ba10fa82544ece6a5078d30379a099ee586b63b8c913f8be994806",
+    "file_count": 88,
+    "crc_pass": true,
+    "all_file_hashes_match": true,
+    "status": "passed_bundle_integrity",
+    "arcgis_package_test": "same_machine_fresh_process_pass",
+    "clean_machine_tested": false,
+    "scientific_validity_tested": false
+  },
+  "focused_tests": {
+    "portable": {
+      "run": 11,
+      "pass": 9,
+      "intentional_GDAL_skips": 2
+    },
+    "installed_ArcGIS_runtime": {
+      "run": 11,
+      "pass": 11
+    }
+  },
+  "full_clean_checkout_suite": {
+    "run": 1237,
+    "errors": 1,
+    "intentional_skips": 8,
+    "status": "failed_historical_private_root_metadata_test",
+    "retained_failing_test": "test_contract_is_exact_and_loads_repo_metadata_without_pixels (test_m2_radar_pixel_orbit_application_001)",
+    "cause": "Contract external root exists on this machine; production loader requires a corresponding sibling of this clone, which is absent. Production root guard and historical test unchanged.",
+    "all_repository_portability_claimed": false
+  },
+  "retained_setup_observations": [
+    "Checkout inspected before local clone finished: unable to read tree; existing clone handle polled, no restart.",
+    "Initial full checkout missed one historical review file because of Windows path length. Exact committed file restored using repository-local Git long-path support; controls passed.",
+    "First atlas build was started while that missing historical checkout file was being corrected. It is retained. The final second build started from the complete validated checkout and extracted sealed capsule.",
+    "Both strict package receipts retain a failed field-order comparison. Separate unchanged atlas verifier passes exact fields/types, geometry, CRS, raster bytes, source boundaries, layout metadata and rendered pixels."
+  ],
+  "existing_delivery_bundle_unchanged": true,
+  "existing_delivery_bundle_sha256": "247fe982f834d30dd612a5a25bad0d424c96ff265879da455a14cd228f8af0ab",
+  "scientific_admission": false,
+  "clean_machine_tested": false,
+  "independent_user_tested": false,
+  "cross_version_tested": false,
+  "new_data_credentials_or_installation": false,
+  "new_interpretation_or_attribution": false,
+  "original_scientific_contracts_and_history_unchanged": true,
+  "original_goal_complete": false
+}
