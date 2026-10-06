@@ -1,12 +1,12 @@
 # Offline evidence catalog
 
-The [five-map atlas](GIS_EXPERIMENT_ATLAS.md) now has an owner-local evidence bundle: **`Nepal_Unverified_Atlas_Evidence.zip`**. It contains the same maps, raster values, layer files and ArcGIS project package, plus a catalog you can inspect without opening GitHub.
+The [five-map atlas](GIS_EXPERIMENT_ATLAS.md) has an owner-local evidence bundle. The latest **`Nepal_Unverified_Atlas_Complete.zip`** adds a standalone APRX and local toolbox to the preserved **`Nepal_Unverified_Atlas_Evidence.zip`**. It contains the same maps, raster values, layer files, project package and catalog you can inspect without opening GitHub.
 
 The catalog traces each dated raster, the existing difference and exclusion rasters, and the five principal layouts to their source identities and original records. It preserves selected unsuccessful routes alongside the usable experiment outputs. It does not add a new landscape-change feature or event interpretation.
 
 ## Inspect in ArcGIS
 
-Extract the whole ZIP to a writable folder and open `Nepal_Unverified_Atlas.ppkx` as before. For the catalog, connect to the bundle's **`ExperimentMetadata.gpkg`** or add its attribute tables. CSV versions are in `evidence`; the same data is in `evidence/catalog.json`.
+Extract the whole ZIP to a writable folder and open `Nepal_Unverified_Atlas.aprx` directly, or open the unchanged `Nepal_Unverified_Atlas.ppkx` as before. For the catalog, connect to the bundle's **`ExperimentMetadata.gpkg`** or add its attribute tables. CSV versions are in `evidence`; the same data is in `evidence/catalog.json`.
 
 | New attribute table | Contents |
 |---|---|

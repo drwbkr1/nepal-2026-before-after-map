@@ -1,0 +1,82 @@
+{
+  "record_id": "GIS-DEMONSTRATION-001-STANDALONE-ATLAS-DELIVERY-RESULT",
+  "date": "2026-10-06",
+  "status": "available_standalone_APRX_and_unchanged_PPKX",
+  "source_project_sha256": "d92af6a2423c9b792a165451c26e7bfc01a5ba15b15a70cd54aa0fac12e95caa",
+  "source_evidence_bundle_sha256": "247fe982f834d30dd612a5a25bad0d424c96ff265879da455a14cd228f8af0ab",
+  "standalone_project_sha256": "884014c859cb99822ba19364bff96504419c16312e5d55a11e1245f4f66c4891",
+  "bundle": {
+    "archive_bytes": 133260327,
+    "archive_sha256": "9a9c62bab0bb474c058ce6dbd994e3cc640ec6a45ef454c0c76eaf4c82a750c2",
+    "file_count": 114,
+    "crc_pass": true,
+    "all_file_hashes_match": true
+  },
+  "additional_files": [
+    "Nepal_Unverified_Atlas.aprx",
+    "Experiment.pyt",
+    "Experiment.pyt.xml"
+  ],
+  "unchanged_existing_artifact_files": 109,
+  "native_checks": {
+    "initial_direct_open_pass": true,
+    "sealed_ZIP_relocated_direct_open_pass": true,
+    "writable_local_home_geodatabase_toolbox": true,
+    "all_operational_sources_inside_extracted_bundle": true,
+    "map_count": 7,
+    "layout_count": 5,
+    "checks": {
+      "regional_overview": {
+        "rendered_pixels_equal": true,
+        "PDF_export_present": true
+      },
+      "source_area_comparison": {
+        "rendered_pixels_equal": true,
+        "PDF_export_present": true
+      },
+      "upper_corridor_comparison": {
+        "rendered_pixels_equal": true,
+        "PDF_export_present": true
+      },
+      "evidence_map": {
+        "rendered_pixels_equal": true,
+        "PDF_export_present": true
+      },
+      "limitations_map": {
+        "rendered_pixels_equal": true,
+        "PDF_export_present": true
+      }
+    },
+    "arcgis_version": "3.7.1",
+    "extracted_file_inventory_unchanged_after_reopen": true
+  },
+  "inputs_unchanged": true,
+  "PPKX_unchanged": true,
+  "evidence_catalog_unchanged": true,
+  "raster_values_unchanged": true,
+  "new_data_acquisition": false,
+  "registration_verified": false,
+  "scientific_admission": false,
+  "interpretation_or_attribution_added": false,
+  "clean_machine_or_clean_profile_tested": false,
+  "original_M6_scientific_delivery_complete": false,
+  "original_goal_complete": false,
+  "focused_tests": {
+    "portable": {
+      "run": 13,
+      "pass": 11,
+      "intentional_GDAL_skips": 2
+    },
+    "installed_ArcGIS_runtime": {
+      "run": 13,
+      "pass": 13
+    }
+  },
+  "claimed_scope": "Same-machine standalone experiment delivery; current observation, interpretation and attribution scientific requirements remain unresolved",
+  "full_local_working_tree_suite": {
+    "run": 1281,
+    "status": "pass",
+    "intentional_skips": 10,
+    "scope": "Current canonical working tree; distinct from the prior retained relocated-clone full-suite error"
+  }
+}

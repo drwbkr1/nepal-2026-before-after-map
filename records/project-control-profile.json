@@ -844,8 +844,8 @@
     "evidence_catalog_guide_ref": "docs/GIS_EVIDENCE_CATALOG.md",
     "evidence_catalog_ref": "records/readiness/gis-demonstration-001-evidence-catalog.json",
     "evidence_catalog_result_ref": "records/readiness/gis-demonstration-001-evidence-catalog-result.json",
-    "latest_handoff_scope": "Same unverified atlas maps and PPKX plus offline source identities, selected history, lineage, coverage and claim boundaries",
-    "latest_handoff_bundle_sha256": "247fe982f834d30dd612a5a25bad0d424c96ff265879da455a14cd228f8af0ab",
+    "latest_handoff_scope": "Same unverified five-map atlas, unchanged PPKX and offline catalog, plus directly openable standalone APRX and writable local toolbox",
+    "latest_handoff_bundle_sha256": "9a9c62bab0bb474c058ce6dbd994e3cc640ec6a45ef454c0c76eaf4c82a750c2",
     "evidence_catalog_public_commit": "1fe2c3bcf0eca62cfd5c1e4c69ccb4f5fddd577e",
     "evidence_catalog_CI_run_id": 37383688576,
     "evidence_catalog_CI_status": "completed_success_for_exact_implementation_commit",
@@ -853,6 +853,8 @@
     "atlas_replay_guide_ref": "docs/GIS_ATLAS_REPLAY.md",
     "atlas_replay_result_ref": "records/readiness/gis-demonstration-001-atlas-replay-result.json",
     "atlas_replay_input_capsule_sha256": "e922acd6baee241c86f5b9040a5822a92590e25f62c8814e4bd4325de8223d12",
-    "atlas_replay_status": "same_machine_clean_code_relocated_input_pass; retained historical full-suite error; no scientific admission"
+    "atlas_replay_status": "same_machine_clean_code_relocated_input_pass; retained historical full-suite error; no scientific admission",
+    "standalone_atlas_result_ref": "records/readiness/gis-demonstration-001-standalone-atlas-result.json",
+    "standalone_atlas_APRX_sha256": "884014c859cb99822ba19364bff96504419c16312e5d55a11e1245f4f66c4891"
   }
 }

@@ -13,6 +13,7 @@ from arcgis_demo_roundtrip import inventory
 from unittest.mock import patch
 import hashlib
 from gis_experiment_atlas_001 import RASTERS
+from gis_standalone_atlas_delivery_001 import compare_original_files, extract_validated_bundle
 import copy
 
 
@@ -187,6 +188,43 @@ class EvidenceCatalog(unittest.TestCase):
             ds = ogr.Open(str(path), 0)
             self.assertEqual(ds.GetLayerCount(), 8)
             ds = None
+
+
+class StandaloneAtlasBundle(unittest.TestCase):
+    def test_hash_bound_extraction_checks_manifest_and_no_replace(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            content = root / "fixture"
+            content.mkdir()
+            (content / "fixture.txt").write_text("generated metadata only", encoding="utf-8")
+            manifest = {"files": inventory(content)}
+            (content / "artifact-manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+            result = seal_zip(content, root / "fixture.zip", root / "zip-proof")
+            expected = inventory(content)
+            self.assertEqual(extract_validated_bundle(root / "fixture.zip", root / "opened", result["archive_sha256"]), expected)
+            with self.assertRaises(ValueError):
+                extract_validated_bundle(root / "fixture.zip", root / "opened", result["archive_sha256"])
+            with self.assertRaises(ValueError):
+                extract_validated_bundle(root / "fixture.zip", root / "wrong-hash", "0" * 64)
+            self.assertFalse((root / "wrong-hash").exists())
+            manifest["files"]["fixture.txt"]["sha256"] = "0" * 64
+            (content / "artifact-manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+            result = seal_zip(content, root / "bad-manifest.zip", root / "bad-manifest-proof")
+            with self.assertRaises(ValueError):
+                extract_validated_bundle(root / "bad-manifest.zip", root / "bad-manifest-opened", result["archive_sha256"])
+
+    def test_original_exports_catalog_and_rasters_cannot_change(self):
+        baseline = {name: {"bytes": 1, "sha256": "a"*64} for name in (
+            "README.md", "artifact-manifest.json", "imagery/fixture.tif", "exports/fixture.png", "evidence/catalog.json")}
+        current = copy.deepcopy(baseline)
+        current["README.md"] = {"bytes": 2, "sha256": "b"*64}
+        current["Nepal_Unverified_Atlas.aprx"] = {"bytes": 2, "sha256": "c"*64}
+        self.assertEqual(compare_original_files(baseline, current), 3)
+        for name in ("imagery/fixture.tif", "exports/fixture.png", "evidence/catalog.json"):
+            changed = copy.deepcopy(current)
+            changed[name]["sha256"] = "d"*64
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                compare_original_files(baseline, changed)
 
 
 if __name__ == "__main__":

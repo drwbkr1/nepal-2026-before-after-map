@@ -20,7 +20,9 @@ Each layout includes dates, CRS, a legend explanation, linked kilometer scale ba
 
 ## Open and export
 
-The latest owner-local handoff is `Nepal_Unverified_Atlas_Evidence.zip`, described in the [offline evidence catalog guide](GIS_EVIDENCE_CATALOG.md). The original `Nepal_Unverified_Atlas.zip` remains preserved. Extract the entire bundle to a writable folder and open **`Nepal_Unverified_Atlas.ppkx`** in ArcGIS Pro. Let Pro unpack the project to a writable location; do not extract under Program Files.
+The latest owner-local handoff is **`Nepal_Unverified_Atlas_Complete.zip`**. Extract the entire bundle to a writable folder and open **`Nepal_Unverified_Atlas.aprx`** directly, or open the unchanged **`Nepal_Unverified_Atlas.ppkx`** and let Pro unpack it. Do not extract under Program Files.
+
+The standalone APRX includes local writable home, geodatabase and toolbox defaults. A fresh ZIP extraction was opened in a separate ArcGIS Python process, with every operational source confined to that extraction; all five maps exported with identical rendered pixels. The PPKX, four TIFFs, existing PNG/PDF exports and [offline catalog](GIS_EVIDENCE_CATALOG.md) are unchanged. Keep all files together. Earlier ZIPs remain preserved. See the [standalone delivery result](../records/readiness/gis-demonstration-001-standalone-atlas-result.json).
 
 In the Catalog pane, expand **Layouts**, open a layout, and use **Share → Export Layout**. The project contains five principal maps and two supporting dated maps. Existing PDF/PNG exports are in the bundle's `exports` folder.
 
@@ -72,6 +74,21 @@ Use the exact existing brightness-difference project and four TIFFs described in
 Use new output directories and retain earlier results. The complete ZIP includes a README and per-file SHA-256 manifest; its extraction is checked against the bundle's file identities. This packaging is for the existing unverified experiment, not a scientific M6 acceptance run.
 
 For a complete PowerShell recipe using a clean published-code checkout and the sealed owner-local input capsule, see [Replay the existing atlas](GIS_ATLAS_REPLAY.md). That same-machine replay reproduced all five map images exactly with relocated inputs and preserved raster bytes. The original viewing bundle remains unchanged.
+
+To reproduce the standalone extension from its two exact preserved local inputs:
+
+```powershell
+& $ArcGISPython scripts/gis_standalone_atlas_delivery_001.py deliver `
+  --bundle $ExistingEvidenceBundleZIP --project $ExactOriginalAtlasAPRX `
+  --output $NewStandaloneBundleFolder
+
+& $ArcGISPython scripts/gis_standalone_atlas_delivery_001.py inspect `
+  --project "$NewStandaloneBundleFolder/extracted/Nepal_Unverified_Atlas.aprx" `
+  --source-root "$NewStandaloneBundleFolder/extracted" `
+  --output $NewDirectOpenCheckFolder
+```
+
+The builder requires evidence ZIP SHA-256 `247fe982f834d30dd612a5a25bad0d424c96ff265879da455a14cd228f8af0ab` and original atlas APRX SHA-256 `d92af6a2423c9b792a165451c26e7bfc01a5ba15b15a70cd54aa0fac12e95caa`, with its exact adjacent `Experiment.pyt` and XML. It writes a new disjoint directory, adds the standalone project and local toolbox, preserves all 109 other existing artifact files, and retains a terminal receipt. The second command checks direct open after sealed-ZIP relocation. This does not change the scientific schema, source selection, masks, arithmetic or prior results.
 
 ## Credits
 
